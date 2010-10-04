@@ -1,0 +1,50 @@
+﻿<Window x:Class="SharpVectors.Squiggle.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+    Title="Squiggle" Height="480" Width="640" 
+        DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop" AllowDrop="True"
+        FocusManager.FocusedElement="{Binding ElementName=canvasScroller}">
+    <Window.Resources> 
+        <!-- UI commands. -->
+        <RoutedUICommand x:Key="Commands.ZoomOut" />
+        <RoutedUICommand x:Key="Commands.ZoomIn" />
+    </Window.Resources>
+
+    <Window.InputBindings> 
+        <!-- Bind keys to commands. -->
+        <KeyBinding Key="Minus" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Key="Plus" Command="{StaticResource Commands.ZoomIn}"/>
+    </Window.InputBindings>
+
+    <Window.CommandBindings>  
+        <!-- Bind commands to event handlers. -->
+        <CommandBinding Command="{StaticResource Commands.ZoomOut}" 
+            Executed="OnZoomOut"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomIn}" 
+            Executed="OnZoomIn"/>
+    </Window.CommandBindings>
+    
+    <DockPanel Name="mainFrame">        
+
+        <!-- Wrap the ZoomAndPanControl in a ScrollViewer.
+        When the scaled content that is displayed in ZoomAndPanControl is larger than the viewport onto the content
+        ScrollViewer's scrollbars can be used to manipulate the offset of the viewport. -->
+        <ScrollViewer x:Name="canvasScroller" CanContentScroll="True" Padding="4"
+            VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+
+            <!-- This is the control that handles zooming and panning. -->
+            <svg:ZoomPanControl x:Name="zoomPanControl" Background="LightGray"
+                MouseDown="OnZoomPanMouseDown" MouseUp="OnZoomPanMouseUp"
+                MouseMove="OnZoomPanMouseMove" MouseWheel="OnZoomPanMouseWheel">
+
+                <!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                Width and Height determine the size of the content. -->
+                <svg:SvgDrawingCanvas x:Name="svgViewer" Background="White"/>
+                
+            </svg:ZoomPanControl>
+
+        </ScrollViewer>
+
+    </DockPanel>
+</Window>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SharpVectors.Renderers.Texts.WpfTextRenderer" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQQEIAAIDBAoQIIEAADIAAIARAABAIAASKoJAQAAQg=</HashCode>
+      <FileName>Texts\WpfTextRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfHorzTextRenderer" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Texts\WpfHorzTextRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfPathTextRenderer" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAACAAAAAAAAAAAAAAAAABAAAAAgCAAAAAAAA=</HashCode>
+      <FileName>Texts\WpfPathTextRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfVertTextRenderer" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAAAEAAAAAAAAAAAAAAAAAIACAAAAAAAA=</HashCode>
+      <FileName>Texts\WpfVertTextRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfTextOnPathBase" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgCAADAAAAAAAkAAAAAAAAAwAAAAAAAIAAoAAAAAECA=</HashCode>
+      <FileName>Texts\WpfTextOnPathBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfTextOnPathDrawing" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACBABAAAUAAAAAEAAAAQgAAABAEAAAAABIABAQAAAA=</HashCode>
+      <FileName>Texts\WpfTextOnPathDrawing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfTextPlacement" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAKAwAAIAAAAAAAAQQAAAACABAAAAAAA=</HashCode>
+      <FileName>Texts\WpfTextPlacement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfTextRun" Collapsed="true">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CABIAAAAAAAIAAAAAAAAAAkAAAAAAAQIACAACAAAIAA=</HashCode>
+      <FileName>Texts\WpfTextRun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SharpVectors.Renderers.Texts.WpfTextPosition" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAQAAIAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Texts\WpfTextPosition.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SharpVectors.Renderers.Texts.WpfTextStringFormat" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Texts\WpfTextStringFormat.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="SharpVectors.Renderers.Texts.WpfTextAnchor" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAA=</HashCode>
+      <FileName>Texts\WpfTextAnchor.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

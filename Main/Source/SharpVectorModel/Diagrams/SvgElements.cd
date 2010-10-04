@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SharpVectors.Dom.Svg.SvgElement" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACQASAAAAYAQAAAAIAAAAAAAAAEAAAABAECAACAAg=</HashCode>
+      <FileName>Dom\Svg\Basic types\SvgElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.917" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgStyleableElement" Collapsed="true">
+    <Position X="2.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIACABiAAAAAAAUAAQEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dom\Svg\Document Structure\SvgStyleableElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.142" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgMetadataElement" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dom\Svg\Metadata\SvgMetadataElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgScriptElement" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAYAAAAAAAAABAAQAAAAAAAAA=</HashCode>
+      <FileName>Dom\Svg\Scripting\SvgScriptElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgMaskElement" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAABCAAgAQwQAAgQEBAQAAAAAAAEABgAAAAYAQ=</HashCode>
+      <FileName>Dom\Svg\Clipping Masking and Compositing\SvgMaskElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgDescElement" Collapsed="true">
+    <Position X="0.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dom\Svg\Document Structure\SvgDescElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.942" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgSymbolElement" Collapsed="true">
+    <Position X="4.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAgAAAAAABAAAQAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Dom\Svg\Document Structure\SvgSymbolElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.058" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgTitleElement" Collapsed="true">
+    <Position X="0.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dom\Svg\Document Structure\SvgTitleElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.917" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgTransformableElement" Collapsed="true">
+    <Position X="2.5" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAANAAAYAAEAEAAAAIIAAAAAAACA=</HashCode>
+      <FileName>Dom\Svg\Document Structure\SvgTransformableElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.142" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgFilterElement" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAAAwAABAAAAAAAAAAAYEAAAAAAAABEAAAAIAAAYAA=</HashCode>
+      <FileName>Dom\Svg\Filters\SvgFilterElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.95" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgGradientElement" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ADABAAAAAAgAAAAIABEAYAAAAAAAAABAABAAEAAAABA=</HashCode>
+      <FileName>Dom\Svg\Gradients and Patterns\SvgGradientElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPatternElement" Collapsed="true">
+    <Position X="4.75" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACIAAAAABgAAgAQERAIkZEBAQAAAAIBAABDgAAAAYAQ=</HashCode>
+      <FileName>Dom\Svg\Gradients and Patterns\SvgPatternElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.05" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgStopElement" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Dom\Svg\Gradients and Patterns\SvgStopElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.917" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgMarkerElement" Collapsed="true">
+    <Position X="4.75" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAwAAAkAAQAYQBAAAQAEAAEAAAAYRAQAAAAFAQAA=</HashCode>
+      <FileName>Dom\Svg\Paint\SvgMarkerElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.083" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgLinearGradientElement" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAADAAAAA4ABAACAARAAAAAAAAA=</HashCode>
+      <FileName>Dom\Svg\Gradients and Patterns\SvgLinearGradientElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.158" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgRadialGradientElement" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACQAAAAAAAAQAIAAEACAAAAAAAAAAAAABABAAAAkQA=</HashCode>
+      <FileName>Dom\Svg\Gradients and Patterns\SvgRadialGradientElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.3" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

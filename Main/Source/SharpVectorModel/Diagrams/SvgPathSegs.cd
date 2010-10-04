@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSeg" Collapsed="true">
+    <Position X="5.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAgAAAAAAEAAAQAAAEkAQBCAACAAAAAQAEIAKAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSeg.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.908" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegArc" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEIAAAAAAAAAAABEAAAAQACgAAQAIEBsAIBAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegArc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegClosePath" Collapsed="true">
+    <Position X="2.25" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAAAIAIAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegClosePath.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurveto" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAABAAAAAAIAAAIAJAIAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurveto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLineto" Collapsed="true">
+    <Position X="5.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAABAAAAAAIAAAAAIAIAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegLineto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegMoveto" Collapsed="true">
+    <Position X="8.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAABoAIAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegMoveTo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegArcAbs" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegArcAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegArcRel" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegArcRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLinetoAbs" Collapsed="true">
+    <Position X="7.25" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAABgAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegLinetoAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.203" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLinetoHorizontalAbs" Collapsed="true">
+    <Position X="2" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAABAAAAAQAA=</HashCode>
+      <FileName>Paths\SvgPathSegLinetoHorizontalAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLinetoHorizontalRel" Collapsed="true">
+    <Position X="8" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAABAAAAAQAA=</HashCode>
+      <FileName>Paths\SvgPathSegLinetoHorizontalRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLinetoRel" Collapsed="true">
+    <Position X="2.75" Y="11.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAABgAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegLinetoRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.025" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLinetoVerticalAbs" Collapsed="true">
+    <Position X="2.5" Y="10.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAAAgAAAAIAA=</HashCode>
+      <FileName>Paths\SvgPathSegLinetoVerticalAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.292" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegLinetoVerticalRel" Collapsed="true">
+    <Position X="7.5" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAAAgAAAAIAA=</HashCode>
+      <FileName>Paths\SvgPathSegLinetoVerticalRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.241" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegMovetoAbs" Collapsed="true">
+    <Position X="6.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegMovetoAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegMovetoRel" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegMovetoRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoCubic" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAAIABAAAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurveToCubic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadratic" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAAIABAAAAAAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoQuadratic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticAbs" Collapsed="true">
+    <Position X="7" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAEAAAAAICBAACAAYBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoQuadraticAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticRel" Collapsed="true">
+    <Position X="10.25" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAEAAAAAICBAACAAYBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoQuadraticRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothAbs" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAIBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoQuadraticSmoothAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothRel" Collapsed="true">
+    <Position X="10" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAIBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoQuadraticSmoothRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoCubicAbs" Collapsed="true">
+    <Position X="0.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAHAAAAA4CBAACAAYBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoCubicAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoCubicRel" Collapsed="true">
+    <Position X="3.75" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAHAAAAA4CBAACAAYBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoCubicRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoCubicSmoothAbs" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAHAAAAAwCAAAAAAIBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoCubicSmoothAbs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathSegCurvetoCubicSmoothRel" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAHAAAAAwCAAAAAAIBhAAAAYAA=</HashCode>
+      <FileName>Paths\SvgPathSegCurvetoCubicSmoothRel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
