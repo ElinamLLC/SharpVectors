@@ -148,7 +148,7 @@ namespace WpfW3cSvgTestSuite
                 _drawingPage.XamlDrawingDir = _drawingDir;
             }
 
-            string currentDir = IoPath.GetFullPath("FullTestSuite"); 
+            string currentDir = IoPath.GetFullPath(@"..\..\FullTestSuite"); 
 
             if (Directory.Exists(currentDir))
             {

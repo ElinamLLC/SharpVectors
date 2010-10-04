@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tests>
+    <category label="Animations">
+        <test source="animate-elem-02-t.svg" title="animate-elem-02-t" state="failure" comment="SVG animation is currently not supported." description="Test 'additive' and 'accumulate' attributes." />
+        <test source="animate-elem-03-t.svg" title="animate-elem-03-t" state="failure" comment="SVG animation is currently not supported." description="Test inheritance of animated properties." />
+        <test source="animate-elem-04-t.svg" title="animate-elem-04-t" state="failure" comment="SVG animation is currently not supported." description="Test different ways of defining a motion path." />
+        <test source="animate-elem-05-t.svg" title="animate-elem-05-t" state="failure" comment="SVG animation is currently not supported." description="Test different ways of defining a motion path." />
+        <test source="animate-elem-06-t.svg" title="animate-elem-06-t" state="failure" comment="SVG animation is currently not supported." description="Test different ways of defining a motion path." />
+        <test source="animate-elem-07-t.svg" title="animate-elem-07-t" state="failure" comment="SVG animation is currently not supported." description="Test different ways of defining a motion path." />
+        <test source="animate-elem-08-t.svg" title="animate-elem-08-t" state="failure" comment="SVG animation is currently not supported." description="Test rotate='auto' and rotate='auto-reverse'" />
+        <test source="animate-elem-09-t.svg" title="animate-elem-09-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-10-t.svg" title="animate-elem-10-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-11-t.svg" title="animate-elem-11-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-12-t.svg" title="animate-elem-12-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-13-t.svg" title="animate-elem-13-t" state="failure" comment="SVG animation is currently not supported." description="Test 'from', 'by', 'to' and 'values'" />
+        <test source="animate-elem-14-t.svg" title="animate-elem-14-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-15-t.svg" title="animate-elem-15-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-17-t.svg" title="animate-elem-17-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-19-t.svg" title="animate-elem-19-t" state="failure" comment="SVG animation is currently not supported." description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-20-t.svg" title="animate-elem-20-t" state="failure" comment="SVG animation is currently not supported." description="See if animation, tiggered by links, works." />
+        <test source="animate-elem-21-t.svg" title="animate-elem-21-t" state="failure" comment="SVG animation is currently not supported." description="See if animation, tiggered by links, works." />
+        <test source="animate-elem-22-b.svg" title="animate-elem-22-b" state="failure" comment="SVG animation is currently not supported." description="Test which verifies that the basic facilities of declarative animation are working." />
+        <test source="animate-elem-23-t.svg" title="animate-elem-23-t" state="failure" comment="SVG animation is currently not supported." description="Test which verifies that the basic facilities of declarative animation are working." />
+        <test source="animate-elem-24-t.svg" title="animate-elem-24-t" state="failure" comment="SVG animation is currently not supported." description="Test which verifies that the basic facilities of declarative animation are working." />
+        <test source="animate-elem-25-t.svg" title="animate-elem-25-t" state="failure" comment="SVG animation is currently not supported." description="Test animation options for specifying the target attribute/property." />
+        <test source="animate-elem-26-t.svg" title="animate-elem-26-t" state="failure" comment="SVG animation is currently not supported." description="Test animation options for specifying the target attribute/property." />
+        <test source="animate-elem-27-t.svg" title="animate-elem-27-t" state="failure" comment="SVG animation is currently not supported." description="Test animation options for specifying the target element." />
+        <test source="animate-elem-28-t.svg" title="animate-elem-28-t" state="failure" comment="SVG animation is currently not supported." description="Test inheritance of animated properties." />
+        <test source="animate-elem-29-b.svg" title="animate-elem-29-b" state="failure" comment="SVG animation is currently not supported." description="See if animation, tiggered by links, works." />
+        <test source="animate-elem-30-t.svg" title="animate-elem-30-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-31-t.svg" title="animate-elem-31-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-32-t.svg" title="animate-elem-32-t" state="failure" comment="SVG animation is currently not supported." description="Test that viewer supports the animation to and from the degenerate cases of the basic shapes." />
+        <test source="animate-elem-33-t.svg" title="animate-elem-33-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-34-t.svg" title="animate-elem-34-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-36-t.svg" title="animate-elem-36-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-37-t.svg" title="animate-elem-37-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-39-t.svg" title="animate-elem-39-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-40-t.svg" title="animate-elem-40-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-41-t.svg" title="animate-elem-41-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-44-t.svg" title="animate-elem-44-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-46-t.svg" title="animate-elem-46-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-52-t.svg" title="animate-elem-52-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-60-t.svg" title="animate-elem-60-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-61-t.svg" title="animate-elem-61-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-62-t.svg" title="animate-elem-62-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-63-t.svg" title="animate-elem-63-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-64-t.svg" title="animate-elem-64-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-65-t.svg" title="animate-elem-65-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-66-t.svg" title="animate-elem-66-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-67-t.svg" title="animate-elem-67-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-68-t.svg" title="animate-elem-68-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-69-t.svg" title="animate-elem-69-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-70-t.svg" title="animate-elem-70-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-77-t.svg" title="animate-elem-77-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-78-t.svg" title="animate-elem-78-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-80-t.svg" title="animate-elem-80-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-81-t.svg" title="animate-elem-81-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-82-t.svg" title="animate-elem-82-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-83-t.svg" title="animate-elem-83-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-84-t.svg" title="animate-elem-84-t" state="failure" comment="SVG animation is currently not supported." description="" />
+        <test source="animate-elem-85-t.svg" title="animate-elem-85-t" state="failure" comment="SVG animation is currently not supported." description="" />
+    </category>
+    <category label="Colors">
+        <test source="color-prof-01-f.svg" title="color-prof-01-f" state="partial" comment="The effect is different." description="Basic test of ICC profile with an image." />
+        <test source="color-prop-01-b.svg" title="color-prop-01-b" state="success" comment="" description="Test that viewer has the basic capability to process the color property" />
+        <test source="color-prop-02-f.svg" title="color-prop-02-f" state="success" comment="" description="Test that viewer has the basic capability to render X11colors, using any of the equivalent forms." />
+        <test source="color-prop-03-t.svg" title="color-prop-03-t" state="success" comment="" description="Test that viewer has the basic capability to render colors, specified as CSS attributes, using any of the equivalent forms." />
+    </category>
+    <category label="Coordinates">
+        <test source="coords-coord-01-t.svg" title="coords-coord-01-t" state="success" comment="" description="" />
+        <test source="coords-coord-02-t.svg" title="coords-coord-02-t" state="success" comment="" description="" />
+        <test source="coords-trans-01-b.svg" title="coords-trans-01-b" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-02-t.svg" title="coords-trans-02-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-03-t.svg" title="coords-trans-03-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-04-t.svg" title="coords-trans-04-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-05-t.svg" title="coords-trans-05-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-06-t.svg" title="coords-trans-06-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-units-01-b.svg" title="coords-units-01-b" state="partial" comment="" description="This test validates the processing rules for converting coordinates and length defined in fractions of the current object's bounding box to user space coordinates and length. Note that this test assumes that linear and radial gradients, as well as patterns are implemented." />
+        <test source="coords-units-02-b.svg" title="coords-units-02-b" state="success" comment="" description="This test validates the processing rules for converting coordinates and length in CSS units to user space coordinate values." />
+        <test source="coords-units-03-b.svg" title="coords-units-03-b" state="success" comment="" description="Validates simple initial viewport size and basic units handling." />
+        <test source="coords-viewattr-01-b.svg" title="coords-viewattr-01-b" state="partial" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
+        <test source="coords-viewattr-02-b.svg" title="coords-viewattr-02-b" state="partial" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
+        <test source="coords-viewattr-03-b.svg" title="coords-viewattr-03-b" state="success" comment="" description="Tests the viewBox attribute on SVG elements" />
+    </category>
+    <category label="Filters">
+        <test source="filters-blend-01-b.svg" title="filters-blend-01-b" state="failure" comment="" description="Examples of feBlend operations" />
+        <test source="filters-color-01-b.svg" title="filters-color-01-b" state="failure" comment="" description="Test which verifies the basic facilities of feColorMatrix." />
+        <test source="filters-composite-02-b.svg" title="filters-composite-02-b" state="failure" comment="" description="Test which verifies the basic facilities of feComposite." />
+        <test source="filters-comptran-01-b.svg" title="filters-comptran-01-b" state="failure" comment="" description="Test which verifies the basic facilities of feComponentTransfer." />
+        <test source="filters-conv-01-f.svg" title="filters-conv-01-f" state="failure" comment="" description="Test which verifies the basic facilities of feConvolveMatrix." />
+        <test source="filters-diffuse-01-f.svg" title="filters-diffuse-01-f" state="failure" comment="" description="Validates operation of the feDiffuseLighting filter" />
+        <test source="filters-displace-01-f.svg" title="filters-displace-01-f" state="failure" comment="" description="Test which verifies the basic facilities of feDisplacementMap." />
+        <test source="filters-example-01-b.svg" title="filters-example-01-b" state="failure" comment="" description="Overall filter effects test case. Extracted from example filters00 in the March 3, 2000 spec." />
+        <test source="filters-felem-01-b.svg" title="filters-felem-01-b" state="failure" comment="" description="Test which verifies null filters and filter regions." />
+        <test source="filters-gauss-01-b.svg" title="filters-gauss-01-b" state="failure" comment="" description="Blur an image" />
+        <test source="filters-image-01-b.svg" title="filters-image-01-b" state="failure" comment="" description="Basic test of feImage filter support." />
+        <test source="filters-light-01-f.svg" title="filters-light-01-f" state="failure" comment="" description="Validates operation of the various SVG lights" />
+        <test source="filters-morph-01-f.svg" title="filters-morph-01-f" state="failure" comment="" description="Test which verifies the basic facilities of feMorphology." />
+        <test source="filters-offset-01-b.svg" title="filters-offset-01-b" state="failure" comment="" description="Test which verifies the basic facilities of feFlood, feMerge, and feOffset." />
+        <test source="filters-specular-01-f.svg" title="filters-specular-01-f" state="failure" comment="" description="Validates operation of the feSpecularLighting filter" />
+        <test source="filters-tile-01-b.svg" title="filters-tile-01-b" state="failure" comment="" description="Test that the viewer can handle the feTile filter." />
+        <test source="filters-turb-01-f.svg" title="filters-turb-01-f" state="failure" comment="" description="Test which verifies the basic facilities of feTurbulence." />
+    </category>
+    <category label="Fonts">
+        <test source="fonts-desc-02-t.svg" title="fonts-desc-02-t" state="failure" comment="" description="" />
+        <test source="fonts-elem-01-t.svg" title="fonts-elem-01-t" state="partial" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-02-t.svg" title="fonts-elem-02-t" state="failure" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-03-b.svg" title="fonts-elem-03-b" state="partial" comment="" description="Basic test of external embedded fontswith font-face-src" />
+        <test source="fonts-elem-04-b.svg" title="fonts-elem-04-b" state="partial" comment="" description="Basic test of external embedded fontswith font-face-src" />
+        <test source="fonts-elem-05-t.svg" title="fonts-elem-01-t" state="failure" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-06-t.svg" title="fonts-elem-01-t" state="failure" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-07-b.svg" title="fonts-elem-05-b" state="partial" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="partial" comment="" description="" />
+        <test source="fonts-glyph-03-t.svg" title="fonts-glyph-03-t" state="failure" comment="" description="" />
+        <test source="fonts-glyph-04-t.svg" title="fonts-glyph-04-t" state="failure" comment="" description="" />
+        <test source="fonts-kern-01-t.svg" title="fonts-kern-01-t" state="failure" comment="" description="" />
+    </category>
+    <category label="Interactivities">
+        <test source="interact-cursor-01-f.svg" title="interact-cursor-01-f" state="failure" comment="" description="Test that viewer has the basic capability to handle the cursorproperty and cursor element" />
+        <test source="interact-dom-01-b.svg" title="interact-dom-01-b" state="failure" comment="" description="Checks if DOM/ECMA Script binding is supported. Checks that the DOM API supports event listener registration/unregistration." />
+        <test source="interact-events-01-b.svg" title="interact-events-01-b" state="failure" comment="" description="Test 'onload' event attribute." />
+        <test source="interact-order-01-b.svg" title="interact-order-01-b" state="failure" comment="" description="Test event bubbling of event attributes." />
+        <test source="interact-order-02-b.svg" title="interact-order-02-b" state="failure" comment="" description="Test event bubbling of event attributes." />
+        <test source="interact-order-03-b.svg" title="interact-order-03-b" state="failure" comment="" description="Test event bubbling of event attributes." />
+        <test source="interact-zoom-01-t.svg" title="interact-zoom-01-t" state="failure" comment="" description="" />
+    </category>
+    <category label="Linking">
+        <test source="linking-a-01-b.svg" title="linking-a-01-b" state="failure" comment="" description="Basic in-bound link object addressing formats." />
+        <test source="linking-a-02-b.svg" title="linking-a-02-b" state="failure" comment="" description="Basic in-bound link object addressing formats." />
+        <test source="linking-a-03-b.svg" title="linking-a-03-b" state="failure" comment="" description="Basic in-bound link object addressing formats." />
+        <test source="linking-a-04-t.svg" title="linking-a-04-t" state="failure" comment="" description="Verify basic out-bound links and the 'a' element." />
+        <test source="linking-a-05-t.svg" title="linking-a-05-t" state="failure" comment="" description="Verify transform attributes in the 'a' element." />
+        <test source="linking-a-07-t.svg" title="linking-a-07-t" state="failure" comment="" description="Verifyuse of xlink attributes on the 'a' element." />
+        <test source="linking-uri-01-b.svg" title="linking-uri-01-b" state="failure" comment="" description="Link test of the 'view' element and its attributes, 1 of 2, internal." />
+        <test source="linking-uri-02-b.svg" title="linking-uri-02-b" state="failure" comment="" description="Link test of the 'view' element and its attributes, 2 of 2, external." />
+        <test source="linking-uri-03-t.svg" title="linking-uri-03-t" state="failure" comment="" description="Verify xlink attributes on the 'a' element." />
+    </category>
+    <category label="Masking">
+        <test source="masking-intro-01-f.svg" title="masking-mask-04-f" state="partial" comment="Only opacity masking is supported. Alpha composition will require a effect, but only BitmapEffect can be used for this, a WPF limitation." description="Tests the impact of strokes within clipPath and mask" />
+        <test source="masking-mask-01-b.svg" title="masking-mask-01-b" state="partial" comment="SVG Font is not supported yet." description="Test to see if the masking features using the mask element and&#x9;&#x9;mask property are available." />
+        <test source="masking-opacity-01-b.svg" title="masking-opacity-01-b" state="success" comment="" description="Test to see the effect of applying an opacity property to a group." />
+        <test source="masking-path-01-b.svg" title="masking-path-01-b" state="success" comment="" description="" />
+        <test source="masking-path-02-b.svg" title="masking-path-02-b" state="success" comment="" description="Test to see if clipPathUnits attribute is handled properly on a clipPath element. Only tests the userSpaceOnUse and objectBoundingBox items of the clipPathUnits. userSpace has been tested by the previous test as it is the default." />
+        <test source="masking-path-03-b.svg" title="masking-path-03-b" state="success" comment="" description="Test 'overflow'/'clip' on outermost and inner 'svg' elements." />
+        <test source="masking-path-04-b.svg" title="masking-path-04-b" state="success" comment="" description="Check that user-specified (non-default) clipPaths work." />
+        <test source="masking-path-05-f.svg" title="masking-path-05-f" state="success" comment="" description="Test to see if clip-rule property has been implemented properly." />
+    </category>
+    <category label="Others">
+        <test source="extend-namespace-01-f.svg" title="extend-namespace-01-f" state="failure" comment="Scripting is not supported yet." description="Test the use of multiple namespaces." />
+        <test source="metadata-example-01-b.svg" title="metadata-example-01-b" state="success" comment="" description="Verify that the viewer is not perturbed by the presence of metadata." />
+        <test source="types-basicDOM-01-b.svg" title="types-basicDOM-01-b" state="partial" comment="" description="" />
+    </category>
+    <category label="Paint Servers">
+        <test source="pservers-grad-01-b.svg" title="pservers-grad-01-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on linear, radial gradients and patterns." />
+        <test source="pservers-grad-02-b.svg" title="pservers-grad-02-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on linear, radial gradients and patterns." />
+        <test source="pservers-grad-03-b.svg" title="pservers-grad-03-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on patterns." />
+        <test source="pservers-grad-04-b.svg" title="pservers-grad-04-b" state="partial" comment="The linear gradient support is not complete." description="Test that checks the capability of the stop element in linear and radial gradients." />
+        <test source="pservers-grad-05-b.svg" title="pservers-grad-05-b" state="partial" comment="The linear gradient support is not complete." description="Test that checks the capability of the stop opacity in linear and radial gradients." />
+        <test source="pservers-grad-06-b.svg" title="pservers-grad-06-b" state="success" comment="" description="Test that the viewer can handle the gradientTransform and the patternTransform attribute on gradients and patterns respectively." />
+        <test source="pservers-grad-07-b.svg" title="pservers-grad-07-b" state="success" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects &#x9;. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following&#x9;properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-08-b.svg" title="pservers-grad-08-b" state="partial" comment="The SVG Font is not supported." description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-09-b.svg" title="pservers-grad-09-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on linear gradients." />
+        <test source="pservers-grad-10-b.svg" title="pservers-grad-10-b" state="success" comment="" description="Test that the viewer can handle the spreadMethod attribute on linear gradients." />
+        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="partial" comment="The linear gradient support is not complete, and the SVG Font is not supported." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-12-b.svg" title="pservers-grad-12-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on radial gradients." />
+        <test source="pservers-grad-13-b.svg" title="pservers-grad-15-b" state="success" comment="" description="Tests the radial gradient focal point" />
+        <test source="pservers-grad-14-b.svg" title="pservers-grad-16-b" state="success" comment="" description="Tests the spreadMethod attributes for gradients" />
+        <test source="pservers-grad-15-b.svg" title="pservers-grad-15-b" state="success" comment="" description="" />
+        <test source="pservers-grad-16-b.svg" title="pservers-grad-16-b" state="partial" comment="" description="" />
+        <test source="pservers-grad-17-b.svg" title="pservers-grad-17-b" state="partial" comment="" description="" />
+        <test source="pservers-grad-18-b.svg" title="pservers-grad-18-b" state="partial" comment="The linear gradient support is not complete." description="" />
+        <test source="pservers-grad-19-b.svg" title="pservers-grad-19-b" state="partial" comment="The linear gradient support is not complete." description="" />
+        <test source="pservers-pattern-01-b.svg" title="pservers-pattern-01-b" state="success" comment="" description="Test that the viewer has basic capability to handle patterns on fills and stroke of objects and text." />
+    </category>
+    <category label="Painting Fill">
+        <test source="painting-fill-01-t.svg" title="painting-fill-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;fill,fill-rule,fill-opacity properites&gt;" />
+        <test source="painting-fill-02-t.svg" title="painting-fill-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;fill,fill-rule,fill-opacity properites&gt;" />
+        <test source="painting-fill-03-t.svg" title="painting-fill-03-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;fill,fill-rule,fill-opacity properites&gt;" />
+        <test source="painting-fill-04-t.svg" title="painting-fill-04-t" state="success" comment="" description="Test inheritance of painting properties." />
+        <test source="painting-fill-05-b.svg" title="painting-fill-05-b" state="success" comment="" description="" />
+    </category>
+    <category label="Painting Marker">
+        <test source="painting-marker-01-f.svg" title="painting-marker-01-f" state="failure" comment="" description="Checks if viewer can handle marker elements on paths" />
+        <test source="painting-marker-02-f.svg" title="painting-marker-02-f" state="failure" comment="" description="Examines rendering model for markers" />
+        <test source="painting-marker-03-f.svg" title="painting-marker-03-f" state="failure" comment="" description="Tests the 'marker' shorthand property and the three marker presentation attributes" />
+    </category>
+    <category label="Painting Rendering">
+        <test source="painting-render-01-b.svg" title="painting-render-01-b" state="success" comment="" description="Test color interpolation property." />
+    </category>
+    <category label="Painting Stroke">
+        <test source="painting-stroke-01-t.svg" title="painting-stroke-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;stroke properites&gt;" />
+        <test source="painting-stroke-02-t.svg" title="painting-stroke-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;stroke properites&gt;" />
+        <test source="painting-stroke-03-t.svg" title="painting-stroke-03-t" state="partial" comment="WPF support for miter limit is different. The current solution is hacked and requires more testing." description="Test that viewer has the basic capability to handle the &lt;stroke properties&gt;" />
+        <test source="painting-stroke-04-t.svg" title="painting-stroke-04-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;stroke,stroke-opacity properites&gt;" />
+        <test source="painting-stroke-07-t.svg" title="painting-stroke-07-t" state="partial" comment="WPF support for miter limit is different. The current solution is hacked and requires more testing." description="" />
+    </category>
+    <category label="Paths">
+        <test source="paths-data-01-t.svg" title="paths-data-01-t" state="success" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the cubic Bezier curveto, both regular and shorthand/smooth forms - C, c, S, s (along with Mm and Zz)." />
+        <test source="paths-data-02-t.svg" title="paths-data-02-t" state="success" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the quadratic Bezier curveto commands, both regular and shorthand/smooth forms - Q, q, T, t (along with Mm and Zz)." />
+        <test source="paths-data-03-f.svg" title="paths-data-03-f" state="success" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the elliptical Arc curveto commands - A, a (along with Mm and Zz)." />
+        <test source="paths-data-04-t.svg" title="paths-data-04-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;path&gt; element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-05-t.svg" title="paths-data-05-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;path&gt; element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-06-t.svg" title="paths-data-06-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;path&gt; element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-07-t.svg" title="paths-data-07-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;path&gt; element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-08-t.svg" title="paths-data-08-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;path&gt; element and data (d) attribute in combination with the moveto and closepath commands - M and Z." />
+        <test source="paths-data-09-t.svg" title="paths-data-09-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;path&gt; element and data (d) attribute in combination with the moveto and closepath commands - m and z." />
+        <test source="paths-data-10-t.svg" title="paths-data-10-t" state="success" comment="" description="Test that viewer correctly handles the stroking of open and closed &lt;path&gt; elements" />
+        <test source="paths-data-12-t.svg" title="paths-data-12-t" state="success" comment="" description="" />
+        <test source="paths-data-13-t.svg" title="paths-data-13-t" state="success" comment="" description="" />
+        <test source="paths-data-14-t.svg" title="paths-data-14-t" state="success" comment="" description="" />
+        <test source="paths-data-15-t.svg" title="paths-data-15-t" state="success" comment="" description="" />
+    </category>
+    <category label="Rendering Elements">
+        <test source="render-elems-01-t.svg" title="render-elems-01-t" state="success" comment="" description="This test validates that shapes can be both filled." />
+        <test source="render-elems-02-t.svg" title="render-elems-02-t" state="success" comment="" description="This test validates that shapes can be both stroked." />
+        <test source="render-elems-03-t.svg" title="render-elems-03-t" state="success" comment="" description="This test validates that shapes can be both filled and stroked." />
+        <test source="render-elems-06-t.svg" title="render-elems-06-t" state="partial" comment="The SVG Font is not supported." description="This test validates that text can be both filled." />
+        <test source="render-elems-07-t.svg" title="render-elems-07-t" state="partial" comment="The SVG Font is not supported." description="This test validates that text can be both stroked." />
+        <test source="render-elems-08-t.svg" title="render-elems-08-t" state="partial" comment="The SVG Font is not supported." description="This test validates that text can be both filled and stroked." />
+    </category>
+    <category label="Rendering Groups">
+        <test source="render-groups-01-b.svg" title="render-groups-01-b" state="partial" comment="The SVG Font is not supported." description="This test validates the rendering order of graphic elements and the concept of grouping." />
+        <test source="render-groups-03-t.svg" title="render-groups-03-t" state="partial" comment="The SVG Font is not supported." description="This test validates the rendering order of graphic elements." />
+    </category>
+    <category label="Scripting">
+        <test source="script-handle-01-b.svg" title="script-handle-01-b" state="failure" comment="Scripting is not supported yet." description="This test validates scripting support by using a simple mouse event &#x9;&#x9;handler and manipulating the DOM with the ECMA binding DOM API." />
+        <test source="script-handle-02-b.svg" title="script-handle-02-b" state="failure" comment="Scripting is not supported yet." description="This test validates basic support for the mouse events defined in SVG." />
+        <test source="script-handle-03-b.svg" title="script-handle-03-b" state="failure" comment="Scripting is not supported yet." description="This test validates basic support for the mouse events defined in SVG." />
+        <test source="script-handle-04-b.svg" title="script-handle-04-b" state="failure" comment="Scripting is not supported yet." description="This test validates basic support for the mouse events defined in SVG." />
+    </category>
+    <category label="Shapes">
+        <test source="shapes-circle-01-t.svg" title="shapes-circle-01-t" state="success" comment="" description="Test ability to handle the 'circle' basic shapes element." />
+        <test source="shapes-circle-02-t.svg" title="shapes-circle-02-t" state="success" comment="" description="" />
+        <test source="shapes-ellipse-01-t.svg" title="shapes-ellipse-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;ellipse&gt; element." />
+        <test source="shapes-ellipse-02-t.svg" title="shapes-ellipse-02-t" state="success" comment="" description="" />
+        <test source="shapes-intro-01-t.svg" title="shapes-intro-01-t" state="success" comment="" description="Test that viewer supports the degenerate cases of the basic shapes." />
+        <test source="shapes-line-01-t.svg" title="shapes-line-01-t" state="success" comment="" description="Test ability to handle the 'line' basic-shapes element." />
+        <test source="shapes-polygon-01-t.svg" title="shapes-polygon-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'polygon' element." />
+        <test source="shapes-polyline-01-t.svg" title="shapes-polyline-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'polyline' element." />
+        <test source="shapes-rect-01-t.svg" title="shapes-rect-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;rect&gt; element." />
+        <test source="shapes-rect-02-t.svg" title="shapes-rect-02-t" state="success" comment="" description="" />
+    </category>
+    <category label="Structures">
+        <test source="struct-cond-01-t.svg" title="struct-cond-01-t" state="success" comment="" description="Test to determine if a simple switch element can be probably evaluated." />
+        <test source="struct-cond-02-t.svg" title="struct-cond-02-t" state="success" comment="" description="Test that viewer has the basic capability to switch on user langauge" />
+        <test source="struct-cond-03-t.svg" title="struct-cond-03-t" state="success" comment="" description="Tests proper handling of &lt;switch&gt; elementwith requiredFeature attribute." />
+        <test source="struct-defs-01-t.svg" title="struct-defs-01-t" state="success" comment="" description="Test to determine if the defs element is used as a container correctly" />
+        <test source="struct-dom-01-b.svg" title="struct-dom-01-b" state="failure" comment="Script is not supported." description="Checks if SVG DOM ECMA Script binding is supported" />
+        <test source="struct-dom-02-b.svg" title="struct-dom-02-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM/ECMA Script binding is supported. Checks support for the hasFeature method on the DOMImplementation." />
+        <test source="struct-dom-03-b.svg" title="struct-dom-03-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM/ECMA Script binding is supported. Checks support for the hasFeature method on the DOMImplementation." />
+        <test source="struct-dom-04-b.svg" title="struct-dom-04-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM/ECMA Script binding is supported. Checks support for the hasFeature method on the DOMImplementation." />
+        <test source="struct-dom-05-b.svg" title="struct-dom-05-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM/ECMA Script binding is supported. Checks support for the hasFeature method on the DOMImplementation." />
+        <test source="struct-dom-06-b.svg" title="struct-dom-06-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM ECMA Script binding is supported" />
+        <test source="struct-frag-01-t.svg" title="struct-frag-01-t" state="success" comment="" description="" />
+        <test source="struct-frag-02-t.svg" title="struct-frag-02-t" state="partial" comment="" description="" />
+        <test source="struct-frag-03-t.svg" title="struct-frag-03-t" state="success" comment="" description="" />
+        <test source="struct-frag-04-t.svg" title="struct-frag-04-t" state="success" comment="" description="" />
+        <test source="struct-frag-05-t.svg" title="struct-frag-05-t" state="unknown" comment="" description="" />
+        <test source="struct-frag-06-t.svg" title="struct-frag-06-t" state="success" comment="" description="" />
+        <test source="struct-group-01-t.svg" title="struct-group-01-t" state="success" comment="" description="Test that the g element functions correctly as a container." />
+        <test source="struct-group-02-b.svg" title="struct-group-02-b" state="success" comment="" description="Test that svg elements nested inside of each other will render correctly" />
+        <test source="struct-group-03-t.svg" title="struct-group-03-t" state="success" comment="" description="" />
+        <test source="struct-image-01-t.svg" title="struct-image-01-t" state="success" comment="" description="Test that the jpg and png image formats are understood." />
+        <test source="struct-image-02-b.svg" title="struct-image-02-b" state="success" comment="" description="The purpose of this test so it test all the structure elements referenced in chapter 6 in one test file" />
+        <test source="struct-image-03-t.svg" title="struct-image-03-t" state="success" comment="" description="Test gamma correction of PNG images based on gAMA chunk. Derived from original HTML test by Dave Martindale." />
+        <test source="struct-image-04-t.svg" title="struct-image-04-t" state="success" comment="" description="Test that jpg and png image formats are understood when inlined with the data: URI scheme." />
+        <test source="struct-image-05-b.svg" title="struct-image-05-b" state="success" comment="" description="Test that the svg image format is understood." />
+        <test source="struct-image-06-t.svg" title="struct-image-06-t" state="success" comment="" description="Tests proper handling of preserveAspectRatioattributes on the &lt;image&gt; element" />
+        <test source="struct-image-07-t.svg" title="struct-image-07-t" state="success" comment="" description="Tests proper handling of preserveAspectRatioattributes on the &lt;image&gt; element" />
+        <test source="struct-image-08-t.svg" title="struct-image-08-t" state="success" comment="" description="" />
+        <test source="struct-image-09-t.svg" title="struct-image-09-t" state="success" comment="" description="" />
+        <test source="struct-image-10-t.svg" title="struct-image-10-t" state="success" comment="" description="" />
+        <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="failure" comment="" description="Test the creation of symbol elements and the instantiation by the use element" />
+        <test source="struct-use-01-t.svg" title="struct-use-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font sizes" />
+        <test source="struct-use-03-t.svg" title="struct-use-03-t" state="success" comment="" description="Tests proper handling of x/y/width/height attributes on the &lt;use&gt; element" />
+        <test source="struct-use-05-b.svg" title="struct-use-05-b" state="partial" comment="The Linear Gradient support is not complete." description="Tests external references and computed inherited values" />
+    </category>
+    <category label="Styling">
+        <test source="styling-css-01-b.svg" title="styling-css-01-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
+        <test source="styling-css-02-b.svg" title="styling-css-02-b" state="success" comment="" description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
+        <test source="styling-css-03-b.svg" title="styling-css-03-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
+        <test source="styling-css-04-f.svg" title="styling-css-04-f" state="failure" comment="Review the use of default values." description="Tests CSS2 selectors" />
+        <test source="styling-css-05-b.svg" title="styling-css-05-b" state="success" comment="" description="" />
+        <test source="styling-css-06-b.svg" title="styling-css-06-b" state="failure" comment="" description="" />
+        <test source="styling-inherit-01-b.svg" title="styling-inherit-01-b" state="success" comment="" description="Verify property inheritance" />
+        <test source="styling-pres-01-t.svg" title="styling-pres-01-t" state="failure" comment="Review the use of invalid and default values." description="Check !important in presentation attribute is an error" />
+    </category>
+    <category label="Text">
+        <test source="text-align-01-b.svg" title="text-align-01-b" state="success" comment="" description="Test 'text-anchor' property (horizontal)." />
+        <test source="text-align-02-b.svg" title="text-align-02-b" state="success" comment="" description="Test the 'baseline-shift' property (horizontal)." />
+        <test source="text-align-03-b.svg" title="text-align-03-b" state="success" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
+        <test source="text-align-04-b.svg" title="text-align-04-b" state="success" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
+        <test source="text-align-05-b.svg" title="text-align-05-b" state="partial" comment="The middle and end text alignments are not supported." description="Test 'text-anchor' property (vertical)" />
+        <test source="text-align-06-b.svg" title="text-align-06-b" state="partial" comment="The vertical spacing is still not accurate or complete." description="Test 'baseline-shift' property (vertical)" />
+        <test source="text-align-08-b.svg" title="text-align-08-b" state="failure" comment="" description="" />
+        <test source="text-altglyph-01-b.svg" title="text-altglyph-01-b" state="failure" comment="" description="Test 'altGlyph' facilities and many-to-many chars to glyphs." />
+        <test source="text-deco-01-b.svg" title="text-deco-01-b" state="partial" comment="" description="Test 'text-decoration'." />
+        <test source="text-fonts-01-t.svg" title="text-fonts-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font families" />
+        <test source="text-fonts-02-t.svg" title="text-fonts-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font weights" />
+        <test source="text-fonts-03-t.svg" title="text-fonts-03-t" state="success" comment="" description="Testing font-family attribute" />
+        <test source="text-intro-01-t.svg" title="text-intro-01-t" state="success" comment="" description="Test left-to-right aspect of internationalized text." />
+        <test source="text-intro-02-b.svg" title="text-intro-02-b" state="partial" comment="" description="Test various aspects of internationalized text, including left-to-right and right-to-left text, and the following properties:'direction' and 'unicode-bidi'." />
+        <test source="text-intro-03-b.svg" title="text-intro-03-b" state="partial" comment="The base alignment of the Latin text in a mix text is not correctly computed - HACKED." description="Test top-to-bottom internationalized text and the following properties: 'writing-mode', 'glyph-orientation-vertical', 'glyph-orientation-horizontal'." />
+        <test source="text-intro-04-t.svg" title="text-intro-04-t" state="success" comment="" description="Test basic of internationalized text." />
+        <test source="text-intro-05-t.svg" title="text-intro-05-t" state="success" comment="The Arabic font required to display the exact text is currently not installed on my computer." description="" />
+        <test source="text-path-01-b.svg" title="text-path-01-b" state="success" comment="" description="Test viewer capability to handle the basics of 'textPath'." />
+        <test source="text-spacing-01-b.svg" title="text-spacing-01-b" state="success" comment="" description="Test properties 'letter-spacing' and 'word-spacing'" />
+        <test source="text-text-01-b.svg" title="text-text-01-b" state="partial" comment="Requires a little bit more work." description="Basic test of 'textLength' and 'lengthAdjust' attributes." />
+        <test source="text-text-03-b.svg" title="text-text-03-b" state="success" comment="" description="Test for basic capability to handle 'text' elements and text properties." />
+        <test source="text-text-04-t.svg" title="text-fontSize-01-t" state="partial" comment="The SVG Font is not supported." description="Test that viewer has the basic capability to handle different font sizes" />
+        <test source="text-text-05-t.svg" title="text-fontSize-01-t" state="partial" comment="The SVG Font is not supported." description="" />
+        <test source="text-text-06-t.svg" title="text-text-06-t" state="partial" comment="The SVG Font is not supported." description="" />
+        <test source="text-text-07-t.svg" title="text-text-07-t" state="partial" comment="" description="Tests multiple x, y, rotate, with various combinations" />
+        <test source="text-text-08-b.svg" title="text-text-08-b" state="success" comment="" description="Test for opacity properties of 'text' elements." />
+        <test source="text-tref-01-b.svg" title="text-tref-01-b" state="success" comment="" description="Test 'tref' element with an external referenced string." />
+        <test source="text-tselect-01-b.svg" title="text-tselect-01-b" state="success" comment="" description="Test single line and multiline text selection." />
+        <test source="text-tselect-02-f.svg" title="text-tselect-02-f" state="partial" comment="Test selection and scripting are not supported." description="" />
+        <test source="text-tspan-01-b.svg" title="text-tspan-01-b" state="success" comment="" description="Test viewer capability to handle the basics of 'tspan'." />
+        <test source="text-ws-01-t.svg" title="text-ws-01-t" state="success" comment="" description="Test that viewer correctly handle whitespace and the &quot;space&quot; attribute." />
+        <test source="text-ws-02-t.svg" title="text-ws-02-t" state="success" comment="" description="Test that viewer correctly handle whitespace and the &quot;space&quot; attribute." />
+    </category>
+</tests>
