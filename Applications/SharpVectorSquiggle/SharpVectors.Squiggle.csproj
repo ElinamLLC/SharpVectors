@@ -39,6 +39,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpVectors.Converters, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Converters.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Core, Version=0.3.1.37825, Culture=neutral, PublicKeyToken=a8855419d33ac940, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Css, Version=0.3.1.37827, Culture=neutral, PublicKeyToken=a8855419d33ac940, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Css.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Dom, Version=0.3.1.37826, Culture=neutral, PublicKeyToken=a8855419d33ac940, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Model, Version=0.3.1.37828, Culture=neutral, PublicKeyToken=2236cfc76b505845, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Rendering.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Rendering.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d16e717f0a981fb9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Main\Output\SharpVectors.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -97,43 +125,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharpVectorConverters\SharpVectors.Converters.csproj">
-      <Project>{E8056611-E49C-4BC3-A682-A629D5CEC11C}</Project>
-      <Name>SharpVectors.Converters</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
-      <Name>SharpVectors.Core</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
-      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
-      <Name>SharpVectors.Css</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
-      <Name>SharpVectors.Dom</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
-      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
-      <Name>SharpVectors.Model</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj">
-      <Project>{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}</Project>
-      <Name>SharpVectors.Rendering.Wpf</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorRuntime\SharpVectors.Runtime.csproj">
-      <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
-      <Name>SharpVectors.Runtime</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
