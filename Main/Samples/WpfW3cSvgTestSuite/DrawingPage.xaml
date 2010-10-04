@@ -1,0 +1,32 @@
+﻿<Page x:Class="WpfW3cSvgTestSuite.DrawingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+    Title="DrawingPage">
+    <Grid Name="rightGrid"> 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+       <!--<svg:SvgScrollViewer x:Name="svgDrawing" Grid.Row="0" AllowDrop="True"/>-->
+        <ScrollViewer Grid.Row="0">   
+            <Canvas Background="White">   
+                <Viewbox Name="viewBox" StretchDirection="Both">                    
+                    <svg:SvgDrawingCanvas x:Name="svgDrawing" HorizontalAlignment="Left"/>
+                </Viewbox>
+            </Canvas>
+        </ScrollViewer>
+        <!--<ScrollViewer>                    
+            <Canvas Background="White">
+                <Image Name="svgDrawing"/>
+            </Canvas>
+        </ScrollViewer>-->
+        <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Gray" Background="LightGray"/>
+        <ScrollViewer Grid.Row="2">
+            <Canvas Background="White">
+                <Image Name="pngResult"/>
+            </Canvas>
+        </ScrollViewer>
+    </Grid>
+</Page>

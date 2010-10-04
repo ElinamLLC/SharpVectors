@@ -1,0 +1,188 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Css", "SharpVectorCss\SharpVectors.Css.csproj", "{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Dom", "SharpVectorDom\SharpVectors.Dom.csproj", "{FE34CBC0-D23C-4A95-BA64-83A031814010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Model", "SharpVectorModel\SharpVectors.Model.csproj", "{5D336F48-3FB9-4382-B4B9-06974C764007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Gdi", "SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj", "{0AD99D97-24ED-484D-9430-9905811F8A4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core", "SharpVectorCore\SharpVectors.Core.csproj", "{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A1967865-8F3B-4976-A7EC-8F91EAE4C964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Wpf", "SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestSvgSample", "..\Samples\WpfTestSvgSample\WpfTestSvgSample.csproj", "{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfW3cSvgTestSuite", "..\Samples\WpfW3cSvgTestSuite\WpfW3cSvgTestSuite.csproj", "{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfConverters", "..\Samples\WpfConverters\WpfConverters.csproj", "{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters", "SharpVectorConverters\SharpVectors.Converters.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime", "SharpVectorRuntime\SharpVectors.Runtime.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Squiggle", "SharpVectorSquiggle\SharpVectors.Squiggle.csproj", "{950268C7-328C-4921-A554-B806DD966869}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgControl", "..\Samples\GdiTestSvgControl\GdiTestSvgControl.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgViewer", "..\Samples\GdiTestSvgViewer\GdiTestSvgViewer.csproj", "{AABE71B6-057B-423C-822A-E9CD2129D2F9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 15
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS13
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Samples\\GdiTestSvgControl\\GdiTestSvgControl.csproj
+		SccProjectTopLevelParentUniqueName1 = SharpVectorsReloaded.sln
+		SccProjectName1 = ../Samples/GdiTestSvgControl
+		SccLocalPath1 = ..\\Samples\\GdiTestSvgControl
+		SccProjectUniqueName2 = ..\\Samples\\GdiTestSvgViewer\\GdiTestSvgViewer.csproj
+		SccProjectTopLevelParentUniqueName2 = SharpVectorsReloaded.sln
+		SccProjectName2 = ../Samples/GdiTestSvgViewer
+		SccLocalPath2 = ..\\Samples\\GdiTestSvgViewer
+		SccProjectUniqueName3 = ..\\Samples\\WpfConverters\\WpfConverters.csproj
+		SccProjectTopLevelParentUniqueName3 = SharpVectorsReloaded.sln
+		SccProjectName3 = ../Samples/WpfConverters
+		SccLocalPath3 = ..\\Samples\\WpfConverters
+		SccProjectUniqueName4 = ..\\Samples\\WpfTestSvgSample\\WpfTestSvgSample.csproj
+		SccProjectTopLevelParentUniqueName4 = SharpVectorsReloaded.sln
+		SccProjectName4 = ../Samples/WpfTestSvgSample
+		SccLocalPath4 = ..\\Samples\\WpfTestSvgSample
+		SccProjectUniqueName5 = ..\\Samples\\WpfW3cSvgTestSuite\\WpfW3cSvgTestSuite.csproj
+		SccProjectTopLevelParentUniqueName5 = SharpVectorsReloaded.sln
+		SccProjectName5 = ../Samples/WpfW3cSvgTestSuite
+		SccLocalPath5 = ..\\Samples\\WpfW3cSvgTestSuite
+		SccProjectUniqueName6 = SharpVectorConverters\\SharpVectors.Converters.csproj
+		SccProjectName6 = SharpVectorConverters
+		SccLocalPath6 = SharpVectorConverters
+		SccProjectUniqueName7 = SharpVectorCore\\SharpVectors.Core.csproj
+		SccProjectName7 = SharpVectorCore
+		SccLocalPath7 = SharpVectorCore
+		SccProjectUniqueName8 = SharpVectorCss\\SharpVectors.Css.csproj
+		SccProjectName8 = SharpVectorCss
+		SccLocalPath8 = SharpVectorCss
+		SccProjectUniqueName9 = SharpVectorDom\\SharpVectors.Dom.csproj
+		SccProjectName9 = SharpVectorDom
+		SccLocalPath9 = SharpVectorDom
+		SccProjectUniqueName10 = SharpVectorModel\\SharpVectors.Model.csproj
+		SccProjectName10 = SharpVectorModel
+		SccLocalPath10 = SharpVectorModel
+		SccProjectUniqueName11 = SharpVectorRenderingGdi\\SharpVectors.Rendering.Gdi.csproj
+		SccProjectName11 = SharpVectorRenderingGdi
+		SccLocalPath11 = SharpVectorRenderingGdi
+		SccProjectUniqueName12 = SharpVectorRenderingWpf\\SharpVectors.Rendering.Wpf.csproj
+		SccProjectName12 = SharpVectorRenderingWpf
+		SccLocalPath12 = SharpVectorRenderingWpf
+		SccProjectUniqueName13 = SharpVectorRuntime\\SharpVectors.Runtime.csproj
+		SccProjectName13 = SharpVectorRuntime
+		SccLocalPath13 = SharpVectorRuntime
+		SccProjectUniqueName14 = SharpVectorSquiggle\\SharpVectors.Squiggle.csproj
+		SccProjectName14 = SharpVectorSquiggle
+		SccLocalPath14 = SharpVectorSquiggle
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Documentation|Any CPU = Documentation|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE34CBC0-D23C-4A95-BA64-83A031814010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE34CBC0-D23C-4A95-BA64-83A031814010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE34CBC0-D23C-4A95-BA64-83A031814010}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{FE34CBC0-D23C-4A95-BA64-83A031814010}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{FE34CBC0-D23C-4A95-BA64-83A031814010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE34CBC0-D23C-4A95-BA64-83A031814010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D336F48-3FB9-4382-B4B9-06974C764007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D336F48-3FB9-4382-B4B9-06974C764007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D336F48-3FB9-4382-B4B9-06974C764007}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{5D336F48-3FB9-4382-B4B9-06974C764007}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{5D336F48-3FB9-4382-B4B9-06974C764007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D336F48-3FB9-4382-B4B9-06974C764007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD99D97-24ED-484D-9430-9905811F8A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD99D97-24ED-484D-9430-9905811F8A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD99D97-24ED-484D-9430-9905811F8A4F}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{0AD99D97-24ED-484D-9430-9905811F8A4F}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{0AD99D97-24ED-484D-9430-9905811F8A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD99D97-24ED-484D-9430-9905811F8A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8056611-E49C-4BC3-A682-A629D5CEC11C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8056611-E49C-4BC3-A682-A629D5CEC11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8056611-E49C-4BC3-A682-A629D5CEC11C}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8056611-E49C-4BC3-A682-A629D5CEC11C}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{E8056611-E49C-4BC3-A682-A629D5CEC11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8056611-E49C-4BC3-A682-A629D5CEC11C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD52982-A1C2-4A14-9D69-D64719357216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD52982-A1C2-4A14-9D69-D64719357216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD52982-A1C2-4A14-9D69-D64719357216}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD52982-A1C2-4A14-9D69-D64719357216}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{2CD52982-A1C2-4A14-9D69-D64719357216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD52982-A1C2-4A14-9D69-D64719357216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{CCFEF6F0-D931-419A-8833-1C3464232ACB} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{AABE71B6-057B-423C-822A-E9CD2129D2F9} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+	EndGlobalSection
+EndGlobal

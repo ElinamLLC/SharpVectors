@@ -1,0 +1,8 @@
+﻿<Window x:Class="WpfTestSvgSample.PrintPreviewWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Print Preview" Height="439" Width="652" WindowStartupLocation="CenterOwner">
+    <DockPanel>
+        <DocumentViewer Name="docViewer"/>
+    </DockPanel>
+</Window>

@@ -1,0 +1,74 @@
+﻿<Window x:Class="WpfTestSvgSample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svg="clr-namespace:WpfTestSvgSample;assembly="
+    Title="WPF Test Application"  Height="589" Width="719" WindowStartupLocation="CenterScreen"
+         DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop" AllowDrop="True">
+    <DockPanel LastChildFill="True" Margin="3">
+        <!-- Top Panel: Directory Source -->
+        <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Margin="0, 3, 0, 3">
+            <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                <TextBlock Name="lblSvgPath" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" FontWeight="Bold">SVG Source Directory:</TextBlock>
+                <Button Name="btnSvgPath" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="3" Content="Browse..." Click="OnBrowseForSvgPath"/>
+                <TextBox Name="txtSvgPath" HorizontalAlignment="Stretch" Margin="3" TextChanged="OnSvgPathTextChanged" />
+            </DockPanel>
+        </Border>
+        <!-- Bottom Panel: Selected File -->
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8" DockPanel.Dock="Bottom" Margin="0, 3, 0, 3">
+            <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                <TextBlock Name="txtSvgFileLabel" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" FontWeight="Bold">Selected SVG File:</TextBlock>
+                <Button Name="btnSvgFile" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3" Content="Select..." Click="OnBrowseForSvgFile"/>
+                <TextBox Name="txtSvgFile" HorizontalAlignment="Stretch" Margin="3" TextAlignment="Left" TextWrapping="NoWrap" IsReadOnly="True"/>                
+            </DockPanel>
+        </Border>
+        <!-- Main Content -->
+        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8">
+            <Grid Name="mainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="24"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Expander Name="leftExpander" Grid.Row="0" Grid.Column="0" IsExpanded="True" ExpandDirection="Left">
+                    <Expander.Header>
+                        <TextBlock Text="Directory Contents" FontSize="14">                
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90" />
+                        </TextBlock.LayoutTransform>
+                        </TextBlock>
+                    </Expander.Header>
+                    <TreeView Name="treeView" Margin="3" HorizontalAlignment="Stretch" IsTextSearchEnabled="True" TreeViewItem.Collapsed="OnTreeViewItemCollapsed" TreeViewItem.Expanded="OnTreeViewItemExpanded" TreeViewItem.Selected="OnTreeViewItemSelected" TreeViewItem.Unselected="OnTreeViewItemUnselected" />
+                </Expander>
+                <GridSplitter Name="leftSplitter" Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="LightGray"
+                          HorizontalAlignment="Center" Width="6" VerticalAlignment="Stretch"/>
+                <TabControl Name="contentsTab"  Margin="6" Grid.Row="0" Grid.Column="2">
+                    <TabItem Name="tabDrawing" Header="Drawing" GotFocus="OnTabItemGotFocus">
+                        <Frame Name="frameDrawing" Source="DrawingPage.xaml"/>
+                    </TabItem>
+                    <TabItem Name="tabXamlOutput" GotFocus="OnTabItemGotFocus">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Name="fillXamlOutput" Margin="3, 3, 6, 3" Checked="OnFillXamlOutputChecked"/>
+                                <TextBlock Text="Xaml Output File"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <TabItem.Content>                            
+                            <Frame Name="frameXamlOutput" Source="XamlPage.xaml"/>
+                        </TabItem.Content>
+                    </TabItem>
+                    <TabItem Name="tabSvgInput" GotFocus="OnTabItemGotFocus">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Name="fillSvgInput" Margin="3, 3, 6, 3" Checked="OnFillSvgInputChecked"/>
+                                <TextBlock Text="Svg Input File"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Frame Name="frameSvgInput" Source="SvgPage.xaml"/>
+                        </TabItem.Content>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Border>
+    </DockPanel>
+</Window>

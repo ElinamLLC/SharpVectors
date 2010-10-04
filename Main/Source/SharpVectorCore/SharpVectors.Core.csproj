@@ -1,0 +1,840 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SharpVectors.Core</AssemblyName>
+    <AssemblyOriginatorKeyFile>Properties\SVGSharp.key</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SharpVectors.Dom</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>true</SignAssembly>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Documentation|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\Output\SharpVectors.Core.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Svg\BasicTypes\SvgTextPathMethod.cs" />
+    <Compile Include="Svg\BasicTypes\SvgTextPathSpacing.cs" />
+    <Compile Include="Svg\DocumentStructure\ISvgColorProfileElement.cs" />
+    <Compile Include="Svg\DocumentStructure\ISvgColorProfileRule.cs" />
+    <Compile Include="Svg\SvgTransformF.cs" />
+    <Compile Include="Svg\SvgPointF.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\CssPrimitiveType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\CssRuleType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\CssValueType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssCounter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssCharsetRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssFontFaceRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssImportRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssMediaRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssPageRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssPrimitiveValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssRuleList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssStyleDeclaration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssStyleRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssStyleSheet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssUnknownRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssValueList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\IDocumentCss.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\IDomImplementationCss.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\IElementCssInlineStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssColor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Css\ICssView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\AttrChangeType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\DomEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\EventException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\EventPhase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\ICustomEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IDocumentEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IEventException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IEventTarget.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IKeyboardEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IMouseEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IMutationEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IMutationNameEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\ITextEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\IUiEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Events\KeyLocationCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ICDataSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ICharacterData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IComment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDocumentFragment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDocumentType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDomConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDomImplementation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IEntityReference.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="INode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="INodeList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IProcessingInstruction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IXmlElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IXmlNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\SvgRectF.cs" />
+    <Compile Include="Svg\SvgSizeF.cs" />
+    <Compile Include="Stylesheets\IDocumentStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stylesheets\ILinkStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stylesheets\IMediaList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stylesheets\IStyleSheet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stylesheets\IStyleSheetList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAngle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedAngle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedBoolean.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedEnumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedInteger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedLength.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedLengthList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedNumberList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgAnimatedString.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgColor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgCursorElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgExternalResourcesRequired.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgFitToViewBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgIccColor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgLangSpace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgLength.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgLengthList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgLocatable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgNumberList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgStringList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgStylable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgTransformable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgUriReference.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgViewElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgViewSpec.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\ISvgZoomAndPan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgAngleType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgColorType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterBlendMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterChannelSelector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterColorMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterComponentTransferType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterCompositeOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterEdgeMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterStitchOption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgFilterTurbulenceType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgLengthType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgMeetOrSlice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgMorphologyOperator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgPreserveAspectRatioType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgRenderingHint.cs" />
+    <Compile Include="Svg\BasicTypes\SvgUnitType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\BasicTypes\SvgZoomAndPanType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgAnimatedPoints.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgCircleElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgEllipseElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgLineElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgPolygonElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgPolylineElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Shapes\ISvgRectElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\ClippingMaskingCompositing\ISharpMarkerHost.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\ClippingMaskingCompositing\ISvgClipPathElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\ClippingMaskingCompositing\ISvgMaskElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgAnimatedPreserveAspectRatio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgAnimatedTransformList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgPoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgPointList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgPreserveAspectRatio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgTransform.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Coordinates\ISvgTransformList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgDefsElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgDescElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgElementInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgElementInstanceList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgGElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgImageElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgSvgElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgSwitchElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgSymbolElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgTitleElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\DocumentStructure\ISvgUseElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgComponentTransferFunctionElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEBlendElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEColorMatrixElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEComponentTransferElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFECompositeElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEConvolveMatrixElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEDiffuseLightingElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEDisplacementMapElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEDistantLightElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEFloodElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEFuncAElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEFuncBElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEFuncGElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEFuncRElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEGaussianBlurElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEImageElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEMergeElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEMergeNodeElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEMorphologyElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEOffsetElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFEPointLightElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFESpecularLightingElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFESpotLightElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFETileElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFETurbulenceElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFilterElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Filters\ISvgFilterPrimitiveStandardAttributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Fills\ISvgGradientElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Fills\ISvgLinearGradientElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Fills\ISvgPatternElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Fills\ISvgRadialGradientElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Fills\ISvgStopElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\ISvgRenderer.cs" />
+    <Compile Include="Svg\ISvgWindow.cs" />
+    <Compile Include="Svg\Metadata\ISvgMetadataElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Painting\ISvgMarkerElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Painting\ISvgPaint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Painting\SvgMarkerOrient.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Painting\SvgMarkerUnit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Painting\SvgPaintType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgAnimatedPathData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSeg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegArcAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegArcRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegClosePath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoCubicAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoCubicRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoCubicSmoothAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoCubicSmoothRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoQuadraticAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoQuadraticRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoQuadraticSmoothAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegCurvetoQuadraticSmoothRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegLinetoAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegLinetoHorizontalAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegLinetoHorizontalRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegLinetoRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegLinetoVerticalAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegLinetoVerticalRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegMovetoAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\ISvgPathSegMovetoRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Paths\SvgPathSegType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Scripting\ISvgScriptElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Text\ISvgTextContentElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Text\ISvgTextElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Text\ISvgTextPathElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Text\ISvgTextPositioningElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Text\ISvgTRefElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\Text\ISvgTSpanElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Svg\SvgTransformOrder.cs" />
+    <Compile Include="Utils\Casting.cs" />
+    <Compile Include="Utils\Dom\DomException.cs" />
+    <Compile Include="Utils\Dom\DomExceptionType.cs" />
+    <Compile Include="Utils\Net\CacheInfo.cs" />
+    <Compile Include="Utils\Net\DataWebRequest.cs" />
+    <Compile Include="Utils\Net\DataWebResponse.cs" />
+    <Compile Include="Utils\Net\ExtendedHttpWebRequest.cs" />
+    <Compile Include="Utils\Net\ExtendedHttpWebResponse.cs" />
+    <Compile Include="Utils\Net\ICacheManager.cs" />
+    <Compile Include="Utils\Net\NoCacheManager.cs" />
+    <Compile Include="Utils\Polynomials\Polynomial.cs" />
+    <Compile Include="Utils\Polynomials\SqrtPolynomial.cs" />
+    <Compile Include="Utils\Text\StringUtil.cs" />
+    <Compile Include="Utils\Xml\DynamicXmlNamespaceManager.cs" />
+    <Compile Include="Utils\Xml\DynamicXmlUrlResolver.cs" />
+    <Compile Include="Utils\Xml\LocalDtdXmlUrlResolver.cs" />
+    <Compile Include="Views\IAbstractView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\IDocumentView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SVGSharp.key" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

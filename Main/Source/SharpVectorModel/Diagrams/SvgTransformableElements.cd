@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SharpVectors.Dom.Svg.SvgTransformableElement" Collapsed="true">
+    <Position X="2.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAFAAAQAAEAEAAAAIIAAAAAAACA=</HashCode>
+      <FileName>DocumentStructure\SvgTransformableElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.225" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgClipPathElement" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAQgAAAgIAAAAAhQABAQAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>ClippingMaskingCompositing\SvgClipPathElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgDefsElement" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAQAAAAgAAAAAAhQABAQAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DocumentStructure\SvgDefsElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgGElement" Collapsed="true">
+    <Position X="4.5" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAAAAAAhQABAQAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DocumentStructure\SvgGElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.283" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgImageElement" Collapsed="true">
+    <Position X="1" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAABgEBgARAQAEgYEBAQAAAAABAABBgAAAAZAQ=</HashCode>
+      <FileName>DocumentStructure\SvgImageElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.983" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgSvgElement" Collapsed="true">
+    <Position X="0.5" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AKgD0AkCBoBkoowAVIErQFDgQUAIIgABQgRgoAMCYAQ=</HashCode>
+      <FileName>DocumentStructure\SvgSvgElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.125" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgSwitchElement" Collapsed="true">
+    <Position X="5.25" Y="9" Width="1.75" />
+    <InheritanceLine Type="SharpVectors.Dom.Svg.SvgTransformableElement" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="5.691" />
+        <Point X="3.75" Y="8.7" />
+        <Point X="6.25" Y="8.7" />
+        <Point X="6.25" Y="9" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAAAAAAhQABAQAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DocumentStructure\SvgSwitchElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.133" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgUseElement" Collapsed="true">
+    <Position X="1" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ADAEAEAQBAAAgAQAQAEgYEBCwAAAAABAIBBgAABAYAQ=</HashCode>
+      <FileName>DocumentStructure\SvgUseElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.05" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPathElement" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QCAQUoGEEFAAgAAEAIFhIQFEQggABAABBAEAQgABNIw=</HashCode>
+      <FileName>Paths\SvgPathElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.05" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgCircleElement" Collapsed="true">
+    <Position X="4.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACCAAAAEAAAAwAAAAEEhQABAQAAAAAAAAAABAAAAgQQ=</HashCode>
+      <FileName>Shapes\SvgCircleElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.058" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgEllipseElement" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACGAAAAFACAAwAAgAEEhQABAQAAAAAAAAAAAAAAAgAQ=</HashCode>
+      <FileName>Shapes\SvgEllipseElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgLineElement" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAIAEAAAAgAAAAAEjYABAQ4ABAACAAQAAAAAAIAQ=</HashCode>
+      <FileName>Shapes\SvgLineElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPolyElement" Collapsed="true">
+    <Position X="2.75" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAICEAAAAgAAAAAEhYABAQAAAAAAAAAAAACAAIAQ=</HashCode>
+      <FileName>Shapes\SvgPolyElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.067" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgRectElement" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAFBCAAgAQgQAEhQEBAQAAAAAAAAABgAAAAYAQ=</HashCode>
+      <FileName>Shapes\SvgRectElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgTextContentElement" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAFCAAAoCAAAAEhQABAQAAAAABAAAAARAAEgAQ=</HashCode>
+      <FileName>Text\SvgTextContentElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.175" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPolygonElement" Collapsed="true">
+    <Position X="1" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\SvgPolygonElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.075" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgPolylineElement" Collapsed="true">
+    <Position X="4.5" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\SvgPolylineElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgTextPositioningElement" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Text\SvgTextPositioningElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

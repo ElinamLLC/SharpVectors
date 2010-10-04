@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SharpVectors.Renderers.Wpf.WpfRenderingBase" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEUAAAAAAgAAQAAAAAIAAAAAhAAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfRenderingBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfRendering" Collapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAACACFIKAECIiQwAAgAQQCQAAAAEAIAggBQAQQBAA=</HashCode>
+      <FileName>Wpf\WpfRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfGroupRendering" Collapsed="true">
+    <Position X="1.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfGroupRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfImageRendering" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAgEQAAAAAAAAQAAAAAACAAAABAAAAECAAA=</HashCode>
+      <FileName>Wpf\WpfImageRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfMarkerRendering" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAEAAAAAAAAAQAAAAQAIEAAABAAAQAAAAA=</HashCode>
+      <FileName>Wpf\WpfMarkerRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfPathRendering" Collapsed="true">
+    <Position X="4" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAQAAAAAAAAIAABCAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfPathRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfSwitchRendering" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfSwitchRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfTextRendering" Collapsed="true">
+    <Position X="2.5" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIBIMAAAAKAUBAIAEAAThQIAgQCAAAIAAxECIAAAAgA=</HashCode>
+      <FileName>Wpf\WpfTextRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfUseRendering" Collapsed="true">
+    <Position X="4.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfUseRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfFill" Collapsed="true">
+    <Position X="2.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfGradientFill" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAEAAIAAAAAAAAEAAAQgAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfGradientFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfPatternFill" Collapsed="true">
+    <Position X="4.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAABIAAAAAAAAAAAQAAABAAAAAAAhAAIAAAA=</HashCode>
+      <FileName>Wpf\WpfPatternFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfSvgRendering" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfSvgRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Wpf.WpfARendering" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAABAAUAAQAAAAAAQAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Wpf\WpfARendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

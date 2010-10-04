@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharpVectors.Renderers</RootNamespace>
+    <AssemblyName>SharpVectors.Rendering.Wpf</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Output\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Documentation|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>..\..\Output\SharpVectors.Rendering.Wpf.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Texts\WpfHorzTextRenderer.cs" />
+    <Compile Include="Texts\WpfPathTextRenderer.cs" />
+    <Compile Include="Texts\WpfTextAnchor.cs" />
+    <Compile Include="Texts\WpfTextOnPathBase.cs" />
+    <Compile Include="Texts\WpfTextOnPathDrawing.cs" />
+    <Compile Include="Texts\WpfTextPlacement.cs" />
+    <Compile Include="Texts\WpfTextPosition.cs" />
+    <Compile Include="Texts\WpfTextRenderer.cs" />
+    <Compile Include="Texts\WpfTextRun.cs" />
+    <Compile Include="Texts\WpfTextStringFormat.cs" />
+    <Compile Include="Texts\WpfVertTextRenderer.cs" />
+    <Compile Include="Utils\WpfApplicationContext.cs" />
+    <Compile Include="Utils\WpfCacheManager.cs" />
+    <Compile Include="Utils\WpfSvgWindow.cs" />
+    <Compile Include="Utils\WpfConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Utils\SvgConverter.cs" />
+    <Compile Include="Wpf\WpfARendering.cs" />
+    <Compile Include="Wpf\WpfDrawingContext.cs" />
+    <Compile Include="Wpf\WpfEmbeddedImageVisitor.cs" />
+    <Compile Include="Wpf\WpfFontFamilyInfo.cs" />
+    <Compile Include="Wpf\WpfFontFamilyVisitor.cs" />
+    <Compile Include="Wpf\WpfGroupRendering.cs" />
+    <Compile Include="Wpf\WpfLinkVisitor.cs" />
+    <Compile Include="Wpf\WpfSvgPaint.cs" />
+    <Compile Include="Wpf\WpfSvgColor.cs" />
+    <Compile Include="Wpf\WpfDrawingRenderer.cs" />
+    <Compile Include="Wpf\WpfSvgRendering.cs" />
+    <Compile Include="Wpf\WpfFill.cs" />
+    <Compile Include="Wpf\WpfGradientFill.cs" />
+    <Compile Include="Wpf\WpfImageRendering.cs" />
+    <Compile Include="Wpf\WpfMarkerRendering.cs" />
+    <Compile Include="Wpf\WpfPathRendering.cs" />
+    <Compile Include="Wpf\WpfPatternFill.cs" />
+    <Compile Include="Wpf\WpfRendering.cs" />
+    <Compile Include="Wpf\WpfRenderingBase.cs" />
+    <Compile Include="Wpf\WpfRenderingHelper.cs" />
+    <Compile Include="Wpf\WpfSwitchRendering.cs" />
+    <Compile Include="Wpf\WpfTextRendering.cs" />
+    <Compile Include="Wpf\WpfUseRendering.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Diagrams\Rendering.cd" />
+    <None Include="Diagrams\Texts.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
+      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
+      <Name>SharpVectors.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
+      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
+      <Name>SharpVectors.Css</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
+      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
+      <Name>SharpVectors.Dom</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
+      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
+      <Name>SharpVectors.Model</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorRuntime\SharpVectors.Runtime.csproj">
+      <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
+      <Name>SharpVectors.Runtime</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

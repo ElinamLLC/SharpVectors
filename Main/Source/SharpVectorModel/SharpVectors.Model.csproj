@@ -1,0 +1,660 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D336F48-3FB9-4382-B4B9-06974C764007}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SharpVectors.Model</AssemblyName>
+    <AssemblyOriginatorKeyFile>SharpVectors.Model.snk</AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SharpVectors.Dom</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>true</SignAssembly>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;TEST</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Documentation|AnyCPU' ">
+    <OutputPath>..\..\Output\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\Output\SharpVectors.Model.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
+      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
+      <Name>SharpVectors.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
+      <Name>SharpVectors.Css</Name>
+      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
+      <Name>SharpVectors.Dom</Name>
+      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DocumentStructure\SvgAElement.cs" />
+    <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
+    <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
+    <Compile Include="Events\SvgResolveUriEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAngle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedAngle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedBoolean.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedEnumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedLength.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedLengthList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedNumberList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedPreserveAspectRatio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedString.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgAnimatedTransformList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgColor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgExternalResourcesRequired.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgFitToViewBox.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgLength.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgLengthList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgNumberList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgPoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgPointList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgPreserveAspectRatio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgStringList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgTransform.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgTransformList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgUriReference.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgViewSpec.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BasicTypes\SvgZoomAndPan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClippingMaskingCompositing\SvgClipPathElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClippingMaskingCompositing\SvgMaskElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgDefsElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgDescElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgElementInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgElementInstanceList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgGElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgImageElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgStyleableElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgSvgElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgSwitchElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgSymbolElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgTitleElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgTransformableElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgUseElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filters\SvgFilterElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fills\SvgGradientElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fills\SvgLinearGradientElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fills\SvgPatternElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fills\SvgRadialGradientElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fills\SvgStopElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Metadata\SvgMetadataElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paint\SvgMarkerElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paint\SvgPaint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSeg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegArc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegArcAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegArcRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegClosePath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurveto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurveToCubic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoCubicAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoCubicRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoCubicSmoothAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoCubicSmoothRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoQuadratic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoQuadraticAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoQuadraticRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoQuadraticSmoothAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegCurvetoQuadraticSmoothRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLineto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLinetoAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLinetoHorizontalAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLinetoHorizontalRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLinetoRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLinetoVerticalAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegLinetoVerticalRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegMoveTo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegMovetoAbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Paths\SvgPathSegMovetoRel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\Root.cs" />
+    <Compile Include="Scripting\SvgScriptElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgCircleElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgEllipseElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgLineElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgPolyElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgPolygonElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgPolylineElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shapes\SvgRectElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SvgException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SvgExternalResourcesRequiredException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Text\SvgTextContentElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Text\SvgTextElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Text\SvgTextPathElement.cs" />
+    <Compile Include="Text\SvgTextPositioningElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Text\SvgTRefElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Text\SvgTSpanElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DocumentStructure\SvgElementFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagrams\SvgElements.cd" />
+    <None Include="Diagrams\SvgPathSegs.cd" />
+    <None Include="Diagrams\SvgTextContentElements.cd" />
+    <None Include="Diagrams\SvgTransformableElements.cd" />
+    <None Include="SharpVectors.Model.snk" />
+    <EmbeddedResource Include="Resources\www.w3.org\TR.xhtml1.DTD\xhtml1-strict.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\TR.xhtml1.DTD\xhtml-special.ent" />
+    <EmbeddedResource Include="Resources\www.w3.org\TR.xhtml1.DTD\xhtml-lat1.ent" />
+    <EmbeddedResource Include="Resources\www.w3.org\TR.2003.REC-SVG11-20030114.DTD.svg11.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\TR.2001.REC-SVG-20010904.DTD.svg10.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-flat.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-flat.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic.dtd" />
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic-flat.dtd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-animation.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-animevents-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-clip.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-color.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-filter.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-font.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-graphics-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-paint-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-structure.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-text.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-clip.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-color.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-conditional.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-container-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-core-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-cursor.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-datatypes.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-docevents-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-extensibility.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-extresources-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-filter.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-font.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-framework.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-gradient.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-graphevents-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-graphics-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-hyperlink.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-image.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-marker.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-mask.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-opacity-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-paint-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-pattern.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-profile.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-qname.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-script.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-shape.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-structure.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-style.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-text.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-view.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-viewport-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-xlink-attrib.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-attribs.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic-attribs.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic-model.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-model.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-attribs.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-model.mod" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

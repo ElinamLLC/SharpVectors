@@ -1,0 +1,96 @@
+﻿<Page x:Class="WpfTestSvgSample.DrawingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+    xmlns:local="clr-namespace:WpfTestSvgSample;assembly="    
+    Title="DrawingPage" Background="White"
+    FocusManager.FocusedElement="{Binding ElementName=canvasScroller}">
+    <Page.Resources>
+        <!-- UI commands. -->
+        <RoutedUICommand x:Key="Commands.ZoomOut" />
+        <RoutedUICommand x:Key="Commands.ZoomIn" />
+        <RoutedUICommand x:Key="Commands.Fill" />
+
+        <!-- This converts from a scale value to a percentage value.
+        It is used to convert the value of 'ContentScale' to the percentage zoom level that is displayed in the UI. -->
+        <local:ScaleToPercentConverter x:Key="scaleToPercentConverter"/>
+    </Page.Resources>
+
+    <Page.InputBindings>
+        <!-- Bind keys to commands. -->
+        <KeyBinding Key="Minus" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Key="Plus" Command="{StaticResource Commands.ZoomIn}"/>
+    </Page.InputBindings>
+
+    <Page.CommandBindings>
+        <!-- Bind commands to event handlers. -->
+        <CommandBinding Command="{StaticResource Commands.ZoomOut}" 
+            Executed="OnZoomOut"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomIn}" 
+            Executed="OnZoomIn"/>
+        <CommandBinding Command="{StaticResource Commands.Fill}" 
+            Executed="OnZoomFit"/>
+    </Page.CommandBindings>  
+
+    <DockPanel LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top" Height="32">
+            <ToolBar.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                            <Setter Property="Opacity" Value="0.30" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Resources>
+            <Button Click="OnZoomIn" Height="24" Width="24" ToolTip="Zoom In">
+                <Image Source="Images/ZoomIn.png" Height="16"/>
+            </Button>    
+            <Button Click="OnResetZoom" Height="24" Width="24" ToolTip="Reset Zoom">
+                <Image Source="Images/ZoomReset.png" Height="16"/>
+            </Button>    
+            <Button Click="OnZoomOut" Height="24" Width="24" ToolTip="Zoom Out">
+                <Image Source="Images/ZoomOut.png" Height="16"/>
+            </Button>    
+            <Separator/>
+
+            <!-- This is the label that shows what the current zoom level
+            is while zooming in and out. -->
+            <TextBlock MinWidth="24" VerticalAlignment="Center"
+                HorizontalAlignment="Right" TextAlignment="Right"
+                Text="{Binding ElementName=zoomPanControl, Path=ContentScale, Converter={StaticResource scaleToPercentConverter}}"/>
+            <TextBlock VerticalAlignment="Center" Text="%"/>
+
+            <!-- Slider to change the current zoom level. -->
+            <Slider Name="zoomSlider" Width="250" Padding="0" Minimum="10" LargeChange="20" 
+                TickFrequency="10" Maximum="500" SmallChange="10" TickPlacement="TopLeft"
+                Value="{Binding ElementName=zoomPanControl, Path=ContentScale, Converter={StaticResource scaleToPercentConverter}}"/>
+            <!-- The fill button.  Causes the content to be scaled so that it fits in the viewport.-->
+            <Button Height="24" Width="24" Click="OnZoomFitClick" Content="Fit"/>
+
+            <Separator/>
+            <ToggleButton Name="tbbPanning" Click="OnPanClick" Height="24" Width="24" ToolTip="Toggle Panning">
+                <Image Source="Images/Panning.png" Height="16"/>
+            </ToggleButton>
+        </ToolBar>
+
+        <!-- Wrap the ZoomAndPanControl in a ScrollViewer.
+        When the scaled content that is displayed in ZoomAndPanControl is larger than the viewport onto the content
+        ScrollViewer's scrollbars can be used to manipulate the offset of the viewport. -->
+        <ScrollViewer x:Name="canvasScroller" CanContentScroll="True" Padding="4"
+            VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AllowDrop="True">
+
+            <!-- This is the control that handles zooming and panning. -->
+            <svg:ZoomPanControl x:Name="zoomPanControl" Background="LightGray"
+                MouseDown="OnZoomPanMouseDown" MouseUp="OnZoomPanMouseUp"
+                MouseMove="OnZoomPanMouseMove" MouseWheel="OnZoomPanMouseWheel">
+
+                <!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                Width and Height determine the size of the content. -->
+                <svg:SvgDrawingCanvas x:Name="svgViewer" Background="White"/>
+
+            </svg:ZoomPanControl>
+
+        </ScrollViewer>
+    </DockPanel>
+</Page>

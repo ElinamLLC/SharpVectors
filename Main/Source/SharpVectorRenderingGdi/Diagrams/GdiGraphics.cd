@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SharpVectors.Renderers.Gdi.GdiRendering" Collapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAACBAAgCgEAAAAAAAAAQQCAAAAAEAIAIgAICQgAAA=</HashCode>
+      <FileName>Gdi\GdiRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiElementRendering" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Gdi\GdiElementRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiMarkerRendering" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAJAAAAAAAAA=</HashCode>
+      <FileName>Gdi\GdiMarkerRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiFill" Collapsed="true">
+    <Position X="2.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Gdi\GdiFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiGradientFill" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAADAAAAAAAAAAAIAAAAQAAAHAAAYgAAAAAAA=</HashCode>
+      <FileName>Gdi\GdiGradientFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiPatternFill" Collapsed="true">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAABIAAAAAAAAAAAQAAABAAAAAAAhAAIAAAA=</HashCode>
+      <FileName>Gdi\GdiPatternFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiPathRendering" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAABAgAAAAAAA=</HashCode>
+      <FileName>Gdi\GdiPathRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiRenderingBase" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAUAAAAAAgAAQAIAAAACAAAAhAAAAAAAAA=</HashCode>
+      <FileName>Gdi\GdiRenderingBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiImageRendering" Collapsed="true">
+    <Position X="4.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAACAAAABAAAAACAAA=</HashCode>
+      <FileName>Gdi\GdiImageRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiTextRendering" Collapsed="true">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgBAYAAAIAAAAAQAIAAAARAAiEBIgAARAAAA=</HashCode>
+      <FileName>Gdi\GdiTextRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
