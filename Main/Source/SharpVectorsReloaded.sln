@@ -24,15 +24,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime", "SharpVectorRuntime\SharpVectors.Runtime.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Squiggle", "SharpVectorSquiggle\SharpVectors.Squiggle.csproj", "{950268C7-328C-4921-A554-B806DD966869}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgControl", "..\Samples\GdiTestSvgControl\GdiTestSvgControl.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgViewer", "..\Samples\GdiTestSvgViewer\GdiTestSvgViewer.csproj", "{AABE71B6-057B-423C-822A-E9CD2129D2F9}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS13
 		SccLocalPath0 = .
@@ -80,9 +78,6 @@ Global
 		SccProjectUniqueName13 = SharpVectorRuntime\\SharpVectors.Runtime.csproj
 		SccProjectName13 = SharpVectorRuntime
 		SccLocalPath13 = SharpVectorRuntime
-		SccProjectUniqueName14 = SharpVectorSquiggle\\SharpVectors.Squiggle.csproj
-		SccProjectName14 = SharpVectorSquiggle
-		SccLocalPath14 = SharpVectorSquiggle
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,12 +151,6 @@ Global
 		{2CD52982-A1C2-4A14-9D69-D64719357216}.Documentation|Any CPU.Build.0 = Debug|Any CPU
 		{2CD52982-A1C2-4A14-9D69-D64719357216}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD52982-A1C2-4A14-9D69-D64719357216}.Release|Any CPU.Build.0 = Release|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Documentation|Any CPU.Build.0 = Debug|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
