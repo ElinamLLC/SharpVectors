@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Xml;
 using System.Text;
+using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
@@ -282,6 +283,8 @@ namespace SharpVectors.Converters
                 }
             }
 
+            WpfDrawingSettings settings = context.Settings;
+
             GeometryCollection geomColl = new GeometryCollection();
 
             foreach (XmlNode node in targetNode.ChildNodes)
@@ -315,7 +318,8 @@ namespace SharpVectors.Converters
                             SvgStyleableElement element = useChild as SvgStyleableElement;
                             if (element != null && element.RenderingHint == SvgRenderingHint.Shape)
                             {
-                                Geometry childPath = WpfRendering.CreateGeometry(element, context.OptimizePath);
+                                Geometry childPath = WpfRendering.CreateGeometry(element, 
+                                    settings.OptimizePath);
 
                                 if (childPath != null)
                                 {
@@ -357,7 +361,8 @@ namespace SharpVectors.Converters
                     SvgStyleableElement element = node as SvgStyleableElement;
                     if (element != null && element.RenderingHint == SvgRenderingHint.Shape)
                     {
-                        Geometry childPath = WpfRendering.CreateGeometry(element, context.OptimizePath);
+                        Geometry childPath = WpfRendering.CreateGeometry(element, 
+                            settings.OptimizePath);
 
                         if (childPath != null)
                         {

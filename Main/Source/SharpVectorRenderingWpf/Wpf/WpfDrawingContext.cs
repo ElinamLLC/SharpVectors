@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using System.Globalization;
+using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -13,26 +13,17 @@ namespace SharpVectors.Renderers.Wpf
         #region Private Fields
 
         private bool              _renderingClip;
-        private bool              _textAsGeometry;
-        private bool              _includeRuntime;
-        private bool              _optimizePath;
         private bool              _isFragment;
 
         private object            _tag;
-        private string            _defaultFontName;
-        private CultureInfo       _culture;
-        private CultureInfo       _englishCulture;
         private DrawingGroup      _rootDrawing;
         private DrawingGroup      _linkDrawing;
+
+        private WpfDrawingSettings _settings;
 
         private WpfLinkVisitor          _linkVisitor;
         private WpfFontFamilyVisitor    _fontFamilyVisitor;
         private WpfEmbeddedImageVisitor _imageVisitor;
-
-        private static FontFamily _defaultFontFamily;
-        private static FontFamily _genericSerif;
-        private static FontFamily _genericSansSerif;
-        private static FontFamily _genericMonospace;
 
         private Stack<DrawingGroup> _drawStack;
 
@@ -44,17 +35,21 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingContext(bool isFragment)
         {
-            _textAsGeometry  = false;
-            _optimizePath    = true;
-            _includeRuntime  = true;
-            _isFragment      = isFragment;
+            _isFragment    = isFragment; 
+            _drawStack     = new Stack<DrawingGroup>();
+            _registeredIds = new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase);
 
-            _defaultFontName = "Arial";
-            _englishCulture  = CultureInfo.GetCultureInfo("en-us");
-            _culture         = CultureInfo.GetCultureInfo("ja-JP");
-            _drawStack       = new Stack<DrawingGroup>();
+            _settings      = new WpfDrawingSettings();
+        }
 
-            _registeredIds   = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
+            : this(isFragment)
+        {   
+            if (settings != null)
+            {
+                _settings = settings;
+            }
         }
 
         #endregion
@@ -79,18 +74,6 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public bool OptimizePath
-        {
-            get 
-            { 
-                return _optimizePath; 
-            }
-            set 
-            { 
-                _optimizePath = value; 
-            }
-        }
-
         public bool RenderingClipRegion
         {
             get
@@ -100,74 +83,6 @@ namespace SharpVectors.Renderers.Wpf
             set
             {
                 _renderingClip = value;
-            }
-        }
-
-        public bool TextAsGeometry
-        {
-            get
-            {
-                return _textAsGeometry;
-            }
-            set
-            {
-                _textAsGeometry = value;
-            }
-        }
-
-        public bool IncludeRuntime
-        {
-            get
-            {
-                return _includeRuntime;
-            }
-            set
-            {
-                _includeRuntime = value;
-            }
-        }
-
-        public string DefaultFontName
-        {
-            get
-            {
-                return _defaultFontName;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    value = value.Trim();
-                }
-
-                if (!String.IsNullOrEmpty(value))
-                {
-                    _defaultFontName   = value;
-                    _defaultFontFamily = new FontFamily(value);
-                }
-            }
-        }
-
-        public CultureInfo CultureInfo
-        {
-            get
-            {
-                return _culture;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _culture = value;
-                }
-            }
-        }
-
-        public CultureInfo EnglishCultureInfo
-        {
-            get
-            {
-                return _englishCulture;
             }
         }
 
@@ -194,81 +109,6 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public static FontFamily DefaultFontFamily
-        {
-            get
-            {
-                if (_defaultFontFamily == null)
-                {
-                    _defaultFontFamily = new FontFamily("Arial");
-                }
-
-                return _defaultFontFamily;
-            }
-        }
-
-        public static FontFamily GenericSerif
-        {
-            get
-            {
-                if (_genericSerif == null)
-                {
-                    _genericSerif = new FontFamily("Times New Roman");
-                }
-
-                return _genericSerif;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _genericSerif = value;
-                }
-            }
-        }
-
-        public static FontFamily GenericSansSerif
-        {
-            get
-            {
-                if (_genericSansSerif == null)
-                {
-                    // Possibilities: Tahoma, Arial, Verdana, Trebuchet, MS Sans Serif, Helvetica
-                    _genericSansSerif = new FontFamily("Tahoma");
-                }
-
-                return _genericSansSerif;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _genericSansSerif = value;
-                }
-            }
-        }
-
-        public static FontFamily GenericMonospace
-        {
-            get
-            {
-                if (_genericMonospace == null)
-                {
-                    // Possibilities: Courier New, MS Gothic
-                    _genericMonospace = new FontFamily("MS Gothic");
-                }
-
-                return _genericMonospace;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _genericMonospace = value;
-                }
-            }
-        }
-
         public bool IsFragment
         {
             get
@@ -286,6 +126,21 @@ namespace SharpVectors.Renderers.Wpf
             set 
             { 
                 _tag = value; 
+            }
+        }
+
+        public WpfDrawingSettings Settings
+        {
+            get
+            {
+                return _settings;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _settings = value;
+                }
             }
         }
 
@@ -322,6 +177,58 @@ namespace SharpVectors.Renderers.Wpf
             set
             {
                 _fontFamilyVisitor = value;
+            }
+        }
+
+        #endregion
+
+        #region Internal Properties
+
+        internal bool OptimizePath
+        {
+            get
+            {
+                return _settings.OptimizePath;
+            }
+        }
+
+        internal bool TextAsGeometry
+        {
+            get
+            {
+                return _settings.TextAsGeometry;
+            }
+        }
+
+        internal bool IncludeRuntime
+        {
+            get
+            {
+                return _settings.IncludeRuntime;
+            }
+        }
+
+        internal CultureInfo CultureInfo
+        {
+            get
+            {
+                return _settings.CultureInfo;
+            }
+        }
+
+        internal CultureInfo EnglishCultureInfo
+        {
+            get
+            {
+                return _settings.NeutralCultureInfo;
+            }
+        }
+
+        internal string DefaultFontName
+        {
+            get
+            {
+                return _settings.DefaultFontName;
             }
         }
 

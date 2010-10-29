@@ -5,13 +5,13 @@ using System.Text;
 using System.Collections.Generic;
 using System.Security.AccessControl;
 
-namespace SharpVectors.Converters
+namespace SharpVectors.Converters.Utils
 {
     /// <summary>
     /// Copies a file or a directory and its contents to a new location. 
     /// </summary>
     [Serializable]
-    public sealed class DirectoryCopier
+    internal sealed class DirectoryCopier
     {
         #region Private Fields
 
@@ -44,6 +44,15 @@ namespace SharpVectors.Converters
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the directory copying is
+        /// recursive, that is includes the sub-directories.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if the sub-directories are
+        /// included in the directory copy; otherwise, it is <see langword="false"/>.
+        /// The default is <see langword="true"/>.
+        /// </value>
         public bool Recursive
         {
             get
@@ -57,6 +66,13 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether an existing file is overwritten.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if existing file is overwritten;
+        /// otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
+        /// </value>
         public bool Overwrite
         {
             get
@@ -70,6 +86,15 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the security settings of the
+        /// copied file is retained.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if the security settings of the
+        /// file is also copied; otherwise, it is <see langword="false"/>. The
+        /// default is <see langword="false"/>.
+        /// </value>
         public bool IncludeSecurity
         {
             get
@@ -83,6 +108,15 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the copy operation includes
+        /// hidden directories and files.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if hidden directories and files
+        /// are included in the copy operation; otherwise, it is 
+        /// <see langword="false"/>. The default is <see langword="false"/>.
+        /// </value>
         public bool IncludeHidden
         {
             get

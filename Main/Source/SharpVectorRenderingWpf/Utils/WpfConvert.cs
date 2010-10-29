@@ -9,7 +9,7 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Utils
 {
-    public static class WpfConverter
+    public static class WpfConvert
     {
         /// <summary>
         /// A GDI Color representation of the RgbColor

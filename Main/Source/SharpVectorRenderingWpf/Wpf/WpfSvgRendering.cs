@@ -105,7 +105,7 @@ namespace SharpVectors.Renderers.Wpf
                         ISvgRect viewRect = animRect.AnimVal;
                         if (viewRect != null)
                         {
-                            Rect wpfViewRect = WpfConverter.ToRect(viewRect);
+                            Rect wpfViewRect = WpfConvert.ToRect(viewRect);
                             if (!wpfViewRect.IsEmpty && wpfViewRect.Width > 0 && wpfViewRect.Height > 0)
                             {
                                 elmRect = wpfViewRect;

@@ -70,7 +70,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (spreadMethod != SvgSpreadMethod.None)
                 {
-                    brush.SpreadMethod = WpfConverter.ToSpreadMethod(spreadMethod);
+                    brush.SpreadMethod = WpfConvert.ToSpreadMethod(spreadMethod);
                 }
             }
             if (res.GradientUnits != null)
@@ -164,7 +164,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (spreadMethod != SvgSpreadMethod.None)
                 {
-                    brush.SpreadMethod = WpfConverter.ToSpreadMethod(spreadMethod);
+                    brush.SpreadMethod = WpfConvert.ToSpreadMethod(spreadMethod);
                 }
             }
             if (res.GradientUnits != null)

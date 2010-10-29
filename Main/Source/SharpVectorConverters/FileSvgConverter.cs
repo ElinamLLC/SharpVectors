@@ -2,23 +2,12 @@
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-
-using Microsoft.VisualBasic;
 
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Markup;
 
-using SharpVectors.Net;
-using SharpVectors.Xml;
-using SharpVectors.Dom;
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Events;
-
 using SharpVectors.Runtime;
 using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
@@ -26,12 +15,18 @@ using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Converters
 {
-    public sealed class FileSvgConverter
+    /// <summary>
+    /// <para>
+    /// This converts an SVG file to the corresponding XAML file, which can 
+    /// be viewed in WPF application. 
+    /// </para>
+    /// <para>
+    /// The root object in the converted file is <see cref="DrawingGroup"/>.
+    /// </para>
+    /// </summary>
+    public sealed class FileSvgConverter : SvgConverter
     {
         #region Private Fields
-
-        private bool _saveXaml;
-        private bool _saveZaml;
 
         private bool _writerErrorOccurred;
         private bool _fallbackOnWriterError;
@@ -42,53 +37,61 @@ namespace SharpVectors.Converters
         private WpfSvgWindow       _wpfWindow;
         private WpfDrawingRenderer _wpfRenderer;
 
-        private XmlReaderSettings  _settings;
-
         #endregion
 
         #region Constructors and Destructor
 
-        public FileSvgConverter()
+        /// <overloads>
+        /// Initializes a new instance of the <see cref="FileSvgConverter"/> class.
+        /// </overloads>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSvgConverter"/> class
+        /// with the specified drawing or rendering settings.
+        /// </summary>
+        /// <param name="settings">
+        /// This specifies the settings used by the rendering or drawing engine.
+        /// If this is <see langword="null"/>, the default settings is used.
+        /// </param>
+        public FileSvgConverter(WpfDrawingSettings settings)
+            : this(true, false, settings)
         {
-            _wpfRenderer = new WpfDrawingRenderer(); 
-            _wpfWindow   = new WpfSvgWindow(640, 480, _wpfRenderer);
         }
 
-        public FileSvgConverter(bool saveXaml, bool saveZaml)
-            : this()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSvgConverter"/> class
+        /// with the specified drawing or rendering settings and the saving options.
+        /// </summary>
+        /// <param name="saveXaml">
+        /// This specifies whether to save result object tree in XAML file.
+        /// </param>
+        /// <param name="saveZaml">
+        /// This specifies whether to save result object tree in ZAML file. The
+        /// ZAML is simply a G-Zip compressed XAML format, similar to the SVGZ.
+        /// </param>
+        /// <param name="settings">
+        /// This specifies the settings used by the rendering or drawing engine.
+        /// If this is <see langword="null"/>, the default settings is used.
+        /// </param>
+        public FileSvgConverter(bool saveXaml, bool saveZaml,
+            WpfDrawingSettings settings)
+            : base(saveXaml, saveZaml, settings)
         {
-            _saveXaml   = saveXaml;
-            _saveZaml   = saveZaml;
+            _wpfRenderer = new WpfDrawingRenderer(this.DrawingSettings);
+            _wpfWindow   = new WpfSvgWindow(640, 480, _wpfRenderer);
         }
 
         #endregion
 
         #region Public Properties
 
-        public bool SaveXaml
-        {
-            get
-            {
-                return _saveXaml;
-            }
-            set
-            {
-                _saveXaml = value;
-            }
-        }
-
-        public bool SaveZaml
-        {
-            get
-            {
-                return _saveZaml;
-            }
-            set
-            {
-                _saveZaml = value;
-            }
-        }
-
+        /// <summary>
+        /// Gets a value indicating whether a writer error occurred when
+        /// using the custom XAML writer.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if an error occurred when using
+        /// the custom XAML writer; otherwise, it is <see langword="false"/>.
+        /// </value>
         public bool WriterErrorOccurred
         {
             get
@@ -97,6 +100,18 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to fall back and use
+        /// the .NET Framework XAML writer when an error occurred in using the
+        /// custom writer.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if the converter falls back to using
+        /// the system XAML writer when an error occurred in using the custom
+        /// writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+        /// an exception, which occurred in using the custom writer will be
+        /// thrown. The default is <see langword="false"/>. 
+        /// </value>
         public bool FallbackOnWriterError
         {
             get
@@ -109,35 +124,80 @@ namespace SharpVectors.Converters
             }
         }
 
-        public XmlReaderSettings CustomSettings
-        {
-            get
-            {
-                return _settings;
-            }
-            set
-            {
-                _settings = value;
-
-                if (_wpfWindow != null)
-                {
-                    _wpfWindow.CustomSettings = value;
-                }
-            }
-        }
-
         #endregion
 
         #region Public Methods
 
+        /// <overloads>
+        /// This performs the conversion of the specified SVG file, and saves
+        /// the output to an XAML file.
+        /// </overloads>
+        /// <summary>
+        /// This performs the conversion of the specified SVG file, and saves
+        /// the output to an XAML file with the same file name.
+        /// </summary>
+        /// <param name="svgFileName">
+        /// The full path of the SVG source file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="svgFileName"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="svgFileName"/> is empty.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgFileName"/> does not exists.
+        /// </exception>
+        public bool Convert(string svgFileName)
+        {
+            return this.Convert(svgFileName, String.Empty);
+        }
+
+        /// <summary>
+        /// This performs the conversion of the specified SVG file, and saves
+        /// the output to the specified XAML file.
+        /// </summary>
+        /// <param name="svgFileName">
+        /// The full path of the SVG source file.
+        /// </param>
+        /// <param name="xamlFileName">
+        /// The output XAML file. This is optional. If not specified, an XAML
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="svgFileName"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="svgFileName"/> is empty.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgFileName"/> does not exists.
+        /// </exception>
         public bool Convert(string svgFileName, string xamlFileName)
         {
-            if (!_saveXaml && !_saveZaml)
+            if (svgFileName == null)
             {
-                return false;
+                throw new ArgumentNullException("svgFileName",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (svgFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The SVG source file cannot be empty.", "svgFileName");
+            }
+            if (!File.Exists(svgFileName))
+            {
+                throw new ArgumentException(
+                    "The SVG source file must exists.", "svgFileName");
             }
 
-            if (String.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
+            if (!this.SaveXaml && !this.SaveZaml)
             {
                 return false;
             }
@@ -156,7 +216,9 @@ namespace SharpVectors.Converters
 
         #endregion
 
-        #region Load Method
+        #region Private Methods
+
+        #region ProcessFile Method
 
         private bool ProcessFile(string fileName, string xamlFileName)
         {
@@ -195,50 +257,100 @@ namespace SharpVectors.Converters
             {
                 string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
-                fileNameWithoutExt = Strings.StrConv(fileNameWithoutExt, VbStrConv.Narrow, 0x0011);
                 string workingDir  = Path.GetDirectoryName(fileName);
-                xamlFileName       = Path.Combine(workingDir, fileNameWithoutExt + ".xaml");
+                xamlFileName       = Path.Combine(workingDir, 
+                    fileNameWithoutExt + ".xaml");
             }
-            try
+            else
             {
-                XmlXamlWriter xamlWriter = new XmlXamlWriter();
+                string fileExt = Path.GetExtension(xamlFileName);
+                if (String.IsNullOrEmpty(fileExt))
+                {
+                    xamlFileName += ".xaml";
+                }
+                else if (!String.Equals(fileExt, ".xaml", 
+                    StringComparison.OrdinalIgnoreCase))
+                {
+                    xamlFileName = Path.ChangeExtension(xamlFileName, ".xaml");
+                }
+            }
 
+            if (File.Exists(xamlFileName))
+            {
+                File.SetAttributes(xamlFileName, FileAttributes.Normal);
+                File.Delete(xamlFileName);
+            }
+
+            if (this.UseFrameXamlWriter)
+            {
+                XmlWriterSettings writerSettings = new XmlWriterSettings();
+                writerSettings.Indent = true;
+                writerSettings.OmitXmlDeclaration = true;
+                writerSettings.Encoding = Encoding.UTF8;
                 using (FileStream xamlFile = File.Create(xamlFileName))
                 {
-                    xamlWriter.Save(drawing, xamlFile);
+                    using (XmlWriter writer = XmlWriter.Create(
+                        xamlFile, writerSettings))
+                    {
+                        System.Windows.Markup.XamlWriter.Save(
+                            drawing, writer);
+                    }
                 }
             }
-            catch
+            else
             {
-                _writerErrorOccurred = true;
-
-                if (_fallbackOnWriterError)
+                try
                 {
-                    if (File.Exists(xamlFileName))
-                    {
-                        File.Move(xamlFileName, xamlFileName + ".bak");
-                    }
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
+                        this.DrawingSettings);
 
-                    XmlWriterSettings writerSettings  = new XmlWriterSettings();
-                    writerSettings.Indent             = true;
-                    writerSettings.OmitXmlDeclaration = true;
-                    writerSettings.Encoding           = Encoding.UTF8;
                     using (FileStream xamlFile = File.Create(xamlFileName))
                     {
-                        using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
-                        {
-                            System.Windows.Markup.XamlWriter.Save(drawing, writer);
-                        }
-                    }                
+                        xamlWriter.Save(drawing, xamlFile);
+                    }
                 }
-                else
+                catch
                 {
-                    throw;
+                    _writerErrorOccurred = true;
+
+                    if (_fallbackOnWriterError)
+                    {
+                        if (File.Exists(xamlFileName))
+                        {
+                            File.Move(xamlFileName, xamlFileName + ".bak");
+                        }
+
+                        XmlWriterSettings writerSettings = new XmlWriterSettings();
+                        writerSettings.Indent = true;
+                        writerSettings.OmitXmlDeclaration = true;
+                        writerSettings.Encoding = Encoding.UTF8;
+                        using (FileStream xamlFile = File.Create(xamlFileName))
+                        {
+                            using (XmlWriter writer = XmlWriter.Create(
+                                xamlFile, writerSettings))
+                            {
+                                System.Windows.Markup.XamlWriter.Save(
+                                    drawing, writer);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
 
-            if (_saveZaml)
-            {   
+            if (this.SaveZaml)
+            {
+                string zamlFileName = Path.ChangeExtension(xamlFileName, ".zaml");
+
+                if (File.Exists(zamlFileName))
+                {
+                    File.SetAttributes(zamlFileName, FileAttributes.Normal);
+                    File.Delete(zamlFileName);
+                }
+
                 FileStream zamlSourceFile = new FileStream(xamlFileName, FileMode.Open, 
                     FileAccess.Read, FileShare.Read);
                 byte[] buffer = new byte[zamlSourceFile.Length];
@@ -251,7 +363,7 @@ namespace SharpVectors.Converters
                 }
                 zamlSourceFile.Close();
 
-                FileStream zamlDestFile = File.Create(Path.ChangeExtension(xamlFileName, ".zaml"));
+                FileStream zamlDestFile = File.Create(zamlFileName);
 
                 GZipStream zipStream = new GZipStream(zamlDestFile, CompressionMode.Compress, true);
                 zipStream.Write(buffer, 0, buffer.Length);
@@ -261,13 +373,15 @@ namespace SharpVectors.Converters
                 zamlDestFile.Close();
             }
 
-            if (!_saveXaml && File.Exists(xamlFileName))
+            if (!this.SaveXaml && File.Exists(xamlFileName))
             {
                 File.Delete(xamlFileName);
             }
 
             return true;
         }
+
+        #endregion
 
         #endregion
     }
