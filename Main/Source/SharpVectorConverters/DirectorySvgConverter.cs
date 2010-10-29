@@ -1,18 +1,22 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Collections.Generic;
 using System.Security.AccessControl;
 
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Markup;
+
+using SharpVectors.Renderers.Wpf;
+using SharpVectors.Converters.Utils;
 
 namespace SharpVectors.Converters
 {
-    public sealed class DirectorySvgConverter
+    /// <summary>
+    /// This converts a directory (and optionally the sub-directories) of SVG 
+    /// files to XAML files in a specified directory, maintaining the original 
+    /// directory structure.
+    /// </summary>
+    public sealed class DirectorySvgConverter : SvgConverter
     {
         #region Private Fields
 
@@ -22,8 +26,8 @@ namespace SharpVectors.Converters
         private bool _includeHidden;
         private bool _includeSecurity;
 
-        private bool _saveXaml;
-        private bool _saveZaml;
+        private bool _writerErrorOccurred;
+        private bool _fallbackOnWriterError;
 
         private string _errorFile;
 
@@ -34,10 +38,17 @@ namespace SharpVectors.Converters
 
         #region Constructors and Destructor
 
-        public DirectorySvgConverter()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WpfDrawingSettings"/> 
+        /// class with the specified drawing or rendering settings.
+        /// </summary>
+        /// <param name="settings">
+        /// This specifies the settings used by the rendering or drawing engine.
+        /// If this is <see langword="null"/>, the default settings is used.
+        /// </param>
+        public DirectorySvgConverter(WpfDrawingSettings settings)
+            : base(settings)
         {
-            _saveXaml    = true;
-            _saveZaml    = true;
             _isOverwrite = true;
             _isRecursive = true;
         }
@@ -46,6 +57,15 @@ namespace SharpVectors.Converters
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the directory copying is
+        /// recursive, that is includes the sub-directories.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if the sub-directories are
+        /// included in the directory copy; otherwise, it is <see langword="false"/>.
+        /// The default is <see langword="true"/>.
+        /// </value>
         public bool Recursive
         {
             get
@@ -59,6 +79,13 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether an existing file is overwritten.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if existing file is overwritten;
+        /// otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
+        /// </value>
         public bool Overwrite
         {
             get
@@ -72,6 +99,15 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the security settings of the
+        /// copied file is retained.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if the security settings of the
+        /// file is also copied; otherwise, it is <see langword="false"/>. The
+        /// default is <see langword="false"/>.
+        /// </value>
         public bool IncludeSecurity
         {
             get
@@ -85,6 +121,15 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the copy operation includes
+        /// hidden directories and files.
+        /// </summary>
+        /// <value>
+        /// This property is <see langword="true"/> if hidden directories and files
+        /// are included in the copy operation; otherwise, it is 
+        /// <see langword="false"/>. The default is <see langword="false"/>.
+        /// </value>
         public bool IncludeHidden
         {
             get
@@ -98,57 +143,93 @@ namespace SharpVectors.Converters
             }
         }
 
-        public bool SaveXaml
+        /// <summary>
+        /// Gets a value indicating whether a writer error occurred when
+        /// using the custom XAML writer.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if an error occurred when using
+        /// the custom XAML writer; otherwise, it is <see langword="false"/>.
+        /// </value>
+        public bool WriterErrorOccurred
         {
             get
             {
-                return _saveXaml;
-            }
-            set
-            {
-                _saveXaml = value;
+                return _writerErrorOccurred;
             }
         }
 
-        public bool SaveZaml
+        /// <summary>
+        /// Gets or sets a value indicating whether to fall back and use
+        /// the .NET Framework XAML writer when an error occurred in using the
+        /// custom writer.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if the converter falls back to using
+        /// the system XAML writer when an error occurred in using the custom
+        /// writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+        /// an exception, which occurred in using the custom writer will be
+        /// thrown. The default is <see langword="false"/>. 
+        /// </value>
+        public bool FallbackOnWriterError
         {
             get
             {
-                return _saveZaml;
+                return _fallbackOnWriterError;
             }
             set
             {
-                _saveZaml = value;
+                _fallbackOnWriterError = value;
             }
         }
 
-        public string ErrorFile
-        {
-            get { return _errorFile; }
-            set { _errorFile = value; }
-        }
-
+        /// <summary>
+        /// Gets the source directory of the SVG files to be converted.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DirectoryInfo"/> specifying the source directory of
+        /// the SVG files.
+        /// </value>
         public DirectoryInfo SourceDir
         {
             get 
             { 
                 return _sourceDir; 
             }
-            set 
-            {
-                _sourceDir = value; 
-            }
         }
 
+        /// <summary>
+        /// Gets the destination directory of the converted XAML files.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DirectoryInfo"/> specifying the destination directory of
+        /// the converted XAML files.
+        /// </value>
         public DirectoryInfo DestinationDir
         {
             get 
             { 
                 return _destinationDir; 
             }
-            set 
-            {
-                _destinationDir = value; 
+        }
+
+        /// <summary>
+        /// Gets the full path of the last SVG file not successfully converted.
+        /// </summary>
+        /// <value>
+        /// A string containing the full path of the last SVG file not 
+        /// successfully converted to the XAML
+        /// </value>
+        /// <remarks>
+        /// Whenever an error occurred in the conversion of a file, the 
+        /// conversion process will stop. Use this property to retrieve the full
+        /// path of the SVG file causing the error.
+        /// </remarks>
+        public string ErrorFile
+        {
+            get 
+            { 
+                return _errorFile; 
             }
         }
 
@@ -156,9 +237,52 @@ namespace SharpVectors.Converters
 
         #region Public Methods
 
+        /// <summary>
+        /// Convert the SVG files in the specified source directory, saving the
+        /// results in the specified destination directory.
+        /// </summary>
+        /// <param name="sourceInfo">
+        /// A <see cref="DirectoryInfo"/> specifying the source directory of
+        /// the SVG files.
+        /// </param>
+        /// <param name="destInfo">
+        /// A <see cref="DirectoryInfo"/> specifying the source directory of
+        /// the SVG files.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// <para>
+        /// If the <paramref name="sourceInfo"/> is <see langword="null"/>.
+        /// </para>
+        /// <para>
+        /// -or-
+        /// </para>
+        /// <para>
+        /// If the <paramref name="destInfo"/> is <see langword="null"/>.
+        /// </para>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the directory specified by <paramref name="sourceInfo"/> does not
+        /// exists.
+        /// </exception>
         public void Convert(DirectoryInfo sourceInfo, DirectoryInfo destInfo)
         {
-            _convertedCount    = 0;
+            if (sourceInfo == null)
+            {
+                throw new ArgumentNullException("sourceInfo", 
+                    "The source directory cannot be null (or Nothing).");
+            }
+            if (destInfo == null)
+            {
+                throw new ArgumentNullException("destInfo",
+                    "The destination directory cannot be null (or Nothing).");
+            }
+            if (!sourceInfo.Exists)
+            {
+                throw new ArgumentException(
+                    "The source directory must exists.", "sourceInfo");
+            }
+
+            _convertedCount = 0;
             _sourceDir      = sourceInfo;
             _destinationDir = destInfo;
             DirectorySecurity dirSecurity = null;
@@ -240,7 +364,9 @@ namespace SharpVectors.Converters
         {
             _errorFile = null;
 
-            FileSvgConverter fileReader = new FileSvgConverter(_saveXaml, _saveZaml);
+            FileSvgConverter fileConverter = new FileSvgConverter(this.SaveXaml,
+                this.SaveZaml, this.DrawingSettings);
+            fileConverter.FallbackOnWriterError = _fallbackOnWriterError;
 
             string targetDirName = target.ToString();
             string xamlFilePath;
@@ -267,7 +393,7 @@ namespace SharpVectors.Converters
                         xamlFilePath = Path.Combine(targetDirName, 
                             Path.GetFileNameWithoutExtension(svgFileName) + ".xaml");
 
-                        fileReader.Convert(svgFileName, xamlFilePath);
+                        fileConverter.Convert(svgFileName, xamlFilePath);
 
                         File.SetAttributes(xamlFilePath, fileAttr);
                         // if required to set the security or access control
@@ -277,6 +403,11 @@ namespace SharpVectors.Converters
                         }
 
                         _convertedCount++;
+
+                        if (fileConverter.WriterErrorOccurred)
+                        {
+                            _writerErrorOccurred = true;
+                        }
                     }
                     catch
                     {

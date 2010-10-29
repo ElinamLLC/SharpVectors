@@ -9,7 +9,7 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Utils
 {
-    public static class SvgConverter
+    public static class SvgConvert
     {
         public static SvgPointF ToPoint(Point pt)
         {

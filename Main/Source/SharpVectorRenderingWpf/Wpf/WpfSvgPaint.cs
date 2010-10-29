@@ -356,7 +356,7 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            Color? solidColor = WpfConverter.ToColor(fill.RgbColor);
+            Color? solidColor = WpfConvert.ToColor(fill.RgbColor);
             if (solidColor == null)
             {
                 return null;

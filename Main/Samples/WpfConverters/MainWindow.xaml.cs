@@ -82,7 +82,7 @@ namespace SharpVectors.Converters
 
             DirectoryInfo destInfo = new DirectoryInfo(destDir);
 
-            DirectorySvgConverter converter = new DirectorySvgConverter();
+            DirectorySvgConverter converter = new DirectorySvgConverter(null);
 
             try
             {

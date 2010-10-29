@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Collections.Generic;
+
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Collections.Generic;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;

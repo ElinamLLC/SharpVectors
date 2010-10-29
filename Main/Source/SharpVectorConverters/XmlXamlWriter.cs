@@ -12,6 +12,11 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Markup.Primitives;
 
+using SharpVectors.Runtime;
+using SharpVectors.Renderers;
+using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils; 
+
 namespace SharpVectors.Converters
 {
 	public sealed class XmlXamlWriter
@@ -25,6 +30,7 @@ namespace SharpVectors.Converters
         private string _windowsPath;
 
         private NamespaceCache _namespaceCache;
+        private WpfDrawingSettings _wpfSettings;
 
         private Dictionary<Type, string> _contentProperties;
 		private Dictionary<string, NamespaceMap> _dicNamespaceMap;
@@ -44,6 +50,12 @@ namespace SharpVectors.Converters
             _windowsDir   = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
 
             _windowsDir   = _windowsDir.Replace(@"\", "/");
+        }
+
+        public XmlXamlWriter(WpfDrawingSettings settings)
+            : this()
+        {
+            _wpfSettings = settings;
         }
 
         #endregion
@@ -445,7 +457,8 @@ namespace SharpVectors.Converters
 						}
 						else
 						{
-                            if (markupProperty.Name == "FontUri")
+                            if (markupProperty.Name == "FontUri" &&
+                                (_wpfSettings != null && _wpfSettings.IncludeRuntime))
                             {
                                 string fontUri = temp.ToLower();
                                 fontUri = fontUri.Replace(_windowsDir, _windowsPath);

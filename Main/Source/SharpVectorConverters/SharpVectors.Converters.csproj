@@ -37,15 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
@@ -55,9 +48,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectoryCopier.cs" />
-    <Compile Include="DirectoryUtils.cs" />
+    <Compile Include="ImageEncoderType.cs" />
+    <Compile Include="Utils\DirectoryCopier.cs" />
+    <Compile Include="Utils\DirectoryUtils.cs" />
     <Compile Include="FileSvgConverter.cs" />
+    <Compile Include="ImageSvgConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -76,11 +71,17 @@
     <Compile Include="FileSvgReader.cs" />
     <Compile Include="FontFamilyVisitor.cs" />
     <Compile Include="LinkVisitor.cs" />
+    <Compile Include="SvgCanvas.cs" />
+    <Compile Include="SvgConverter.cs" />
+    <Compile Include="SvgImageExtension.cs" />
+    <Compile Include="SvgViewbox.cs" />
     <Compile Include="XmlXamlWriter.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Drawings\Converters.cd" />
+    <None Include="Drawings\Others.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

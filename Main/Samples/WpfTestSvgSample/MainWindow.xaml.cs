@@ -140,8 +140,7 @@ namespace WpfTestSvgSample
                 _drawingPage.XamlDrawingDir = _drawingDir;
             }
 
-            this.txtSvgPath.Text = IoPath.GetFullPath(
-                @".\Samples");
+            this.txtSvgPath.Text = IoPath.GetFullPath(@".\Samples");
         }
 
         private void OnWindowUnloaded(object sender, RoutedEventArgs e)
@@ -207,6 +206,74 @@ namespace WpfTestSvgSample
             this.CloseFile();
         }
 
+        private void OnFillSvgInputChecked(object sender, RoutedEventArgs e)
+        {
+            if (_svgPage == null)
+            {
+                return;
+            }
+
+            try
+            {
+                this.Cursor      = Cursors.Wait;
+                this.ForceCursor = true;
+
+                if (File.Exists(_svgFilePath) &&
+                    (fillSvgInput.IsChecked != null && fillSvgInput.IsChecked.Value))
+                {
+                    _svgPage.LoadDocument(_svgFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+                this.ForceCursor = false;
+            }
+        }
+
+        private void OnFillXamlOutputChecked(object sender, RoutedEventArgs e)
+        {
+            if (_xamlPage == null || String.IsNullOrEmpty(_xamlFilePath))
+            {
+                return;
+            }
+
+            try
+            {
+                this.Cursor      = Cursors.Wait;
+                this.ForceCursor = true;
+
+                if (!File.Exists(_xamlFilePath) && _drawingPage != null)
+                {
+                    if (!_drawingPage.SaveDocument(_xamlFilePath))
+                    {
+                        return;
+                    }
+                }
+
+                if (File.Exists(_xamlFilePath) &&
+                    (fillXamlOutput.IsChecked != null && fillXamlOutput.IsChecked.Value))
+                {
+                    _xamlPage.LoadDocument(_xamlFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+                this.ForceCursor = false;
+            }  
+        }
+
         private void OnTabItemGotFocus(object sender, RoutedEventArgs e)
         {
             if (sender == tabDrawing)
@@ -231,6 +298,8 @@ namespace WpfTestSvgSample
                 }
             }
         }
+
+        #region TreeView Event Handlers
 
         private void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
         {
@@ -328,6 +397,8 @@ namespace WpfTestSvgSample
 
             e.Handled = true;
         }
+
+        #endregion
 
         #region Drag/Drop Methods
 
@@ -488,7 +559,10 @@ namespace WpfTestSvgSample
             if (_fileWatcher != null)
             {
                 _fileWatcher.EnableRaisingEvents = false;
-            }     
+            }
+
+            bool generateXaml = (fillXamlOutput.IsChecked != null && 
+                fillXamlOutput.IsChecked.Value);
 
             if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
                 String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
@@ -504,9 +578,15 @@ namespace WpfTestSvgSample
                     _svgPage.LoadDocument(fileName);
                 }
 
+                if (_drawingPage == null)
+                {
+                    return;
+                }
+                _drawingPage.SaveXaml = generateXaml;
+
                 try
                 {
-                    if (_drawingPage != null && _drawingPage.LoadDocument(fileName))
+                    if (_drawingPage.LoadDocument(fileName))
                     {
                         this.Title = _titleBase + " - " + IoPath.GetFileName(fileName);
 
@@ -588,7 +668,7 @@ namespace WpfTestSvgSample
 
                 try
                 {
-                    if (_drawingPage != null && _drawingPage.LoadDocument(fileName))
+                    if (_drawingPage.LoadDocument(fileName))
                     {
                         this.Title = _titleBase + " - " + IoPath.GetFileName(fileName);
 
@@ -819,34 +899,6 @@ namespace WpfTestSvgSample
         }
 
         #endregion
-
-        private void OnFillSvgInputChecked(object sender, RoutedEventArgs e)
-        {
-            if (_svgPage == null)
-            {
-                return;
-            }
-
-            if (File.Exists(_svgFilePath) &&
-                (fillSvgInput.IsChecked != null && fillSvgInput.IsChecked.Value))
-            {
-                _svgPage.LoadDocument(_svgFilePath);
-            }
-        }
-
-        private void OnFillXamlOutputChecked(object sender, RoutedEventArgs e)
-        {
-            if (_xamlPage == null)
-            {
-                return;
-            }
-
-            if (File.Exists(_xamlFilePath) &&
-                (fillXamlOutput.IsChecked != null && fillXamlOutput.IsChecked.Value))
-            {
-                _xamlPage.LoadDocument(_xamlFilePath);
-            }
-        }
 
         #endregion
     }

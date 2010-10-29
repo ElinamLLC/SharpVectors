@@ -719,15 +719,15 @@ namespace SharpVectors.Renderers.Texts
 
                     if (String.Equals(fontName, "serif", StringComparison.OrdinalIgnoreCase))
                     {
-                        family = WpfDrawingContext.GenericSerif;
+                        family = WpfDrawingSettings.GenericSerif;
                     }
                     else if (String.Equals(fontName, "sans-serif", StringComparison.OrdinalIgnoreCase))
                     {
-                        family = WpfDrawingContext.GenericSansSerif;
+                        family = WpfDrawingSettings.GenericSansSerif;
                     }
                     else if (String.Equals(fontName, "monospace", StringComparison.OrdinalIgnoreCase))
                     {
-                        family = WpfDrawingContext.GenericMonospace;
+                        family = WpfDrawingSettings.GenericMonospace;
                     }
                     else
                     {
@@ -742,8 +742,8 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            // no known font-family was found => default to arial
-            return WpfDrawingContext.DefaultFontFamily;
+            // no known font-family was found => default to Arial
+            return WpfDrawingSettings.DefaultFontFamily;
         }
 
         protected WpfTextStringFormat GetTextStringFormat(SvgTextContentElement element)

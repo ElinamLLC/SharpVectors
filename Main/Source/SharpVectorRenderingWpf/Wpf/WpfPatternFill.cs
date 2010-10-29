@@ -112,8 +112,10 @@ namespace SharpVectors.Renderers.Wpf
             WpfDrawingRenderer renderer = new WpfDrawingRenderer();
             renderer.Window = _patternElement.OwnerDocument.Window as SvgWindow;
 
-            WpfDrawingContext patternContext = new WpfDrawingContext(true);
-            patternContext.TextAsGeometry = true;
+            WpfDrawingSettings settings = context.Settings.Clone();
+            settings.TextAsGeometry = true;
+            WpfDrawingContext patternContext = new WpfDrawingContext(true,
+                settings);
 
             patternContext.Initialize(null, context.FontFamilyVisitor, null);
 

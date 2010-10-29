@@ -26,7 +26,7 @@ namespace SharpVectors.Runtime
     /// <summary>
     /// This is the main drawing canvas for the wiring diagrams.
     /// </summary>
-    public sealed class SvgDrawingCanvas : Canvas
+    public class SvgDrawingCanvas : Canvas
     {
         #region Private Fields
 

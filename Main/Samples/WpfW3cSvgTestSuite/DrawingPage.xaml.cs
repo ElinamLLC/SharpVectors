@@ -45,6 +45,7 @@ namespace WpfW3cSvgTestSuite
         private DirectoryInfo _directoryInfo;
 
         private FileSvgReader _fileReader;
+        private WpfDrawingSettings _wpfSettings;
 
         #endregion
 
@@ -54,7 +55,9 @@ namespace WpfW3cSvgTestSuite
         {
             InitializeComponent();
 
-            _fileReader          = new FileSvgReader();
+            _wpfSettings         = new WpfDrawingSettings();
+
+            _fileReader          = new FileSvgReader(_wpfSettings);
             _fileReader.SaveXaml = false;
             _fileReader.SaveZaml = false;
 

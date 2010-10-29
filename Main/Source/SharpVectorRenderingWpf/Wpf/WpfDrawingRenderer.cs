@@ -14,7 +14,8 @@ using SharpVectors.Dom.Events;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public sealed class WpfDrawingRenderer : DependencyObject, ISvgRenderer, IDisposable
+    public sealed class WpfDrawingRenderer : DependencyObject, 
+        ISvgRenderer, IDisposable
     {
         #region Private Fields
 
@@ -24,6 +25,7 @@ namespace SharpVectors.Renderers.Wpf
         private ISvgWindow              _svgWindow;
 
         private WpfDrawingContext       _renderingContext;
+        private WpfDrawingSettings      _renderingSettings;
 
         private WpfRenderingHelper      _svgRenderer;
  
@@ -38,6 +40,12 @@ namespace SharpVectors.Renderers.Wpf
         public WpfDrawingRenderer()
         {
             _svgRenderer = new WpfRenderingHelper(this);
+        }
+
+        public WpfDrawingRenderer(WpfDrawingSettings settings)
+        {
+            _svgRenderer       = new WpfRenderingHelper(this);
+            _renderingSettings = settings;
         }
 
         ~WpfDrawingRenderer()
@@ -145,7 +153,8 @@ namespace SharpVectors.Renderers.Wpf
             //if (onRender != null)
             //    OnRender(updatedRect);
 
-            _renderingContext = new WpfDrawingContext(true);
+            _renderingContext = new WpfDrawingContext(true,
+                _renderingSettings);
 
             _renderingContext.Initialize(null, _fontFamilyVisitor, _imageVisitor);
 
@@ -181,7 +190,8 @@ namespace SharpVectors.Renderers.Wpf
 
             if (context == null)
             {
-                _renderingContext = new WpfDrawingContext(true);
+                _renderingContext = new WpfDrawingContext(true,
+                    _renderingSettings);
 
                 _renderingContext.Initialize(null, _fontFamilyVisitor, _imageVisitor);
             }
@@ -209,7 +219,8 @@ namespace SharpVectors.Renderers.Wpf
             //RendererBeforeRender();
 
             //_renderingContext = new WpfDrawingContext(new DrawingGroup());
-            _renderingContext = new WpfDrawingContext(false);
+            _renderingContext = new WpfDrawingContext(false,
+                _renderingSettings);
 
             _renderingContext.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
 
@@ -245,7 +256,8 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (context == null)
             {
-                _renderingContext = new WpfDrawingContext(true);
+                _renderingContext = new WpfDrawingContext(true,
+                    _renderingSettings);
 
                 _renderingContext.Initialize(null, _fontFamilyVisitor, _imageVisitor);
             }

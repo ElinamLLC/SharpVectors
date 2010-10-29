@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 using System.Runtime.ConstrainedExecution;
 using ComTypes = System.Runtime.InteropServices.ComTypes;
 
-namespace SharpVectors.Converters
+namespace SharpVectors.Converters.Utils
 {
-    public static class DirectoryUtils
+    internal static class DirectoryUtils
     {
         private sealed class SafeFindHandle : SafeHandleZeroOrMinusOneIsInvalid
         {

@@ -9,6 +9,7 @@ using System.Windows.Controls;
 
 using SharpVectors.Runtime;
 using SharpVectors.Renderers;
+using SharpVectors.Renderers.Wpf;
 using SharpVectors.Converters;
 
 namespace WpfTestSvgSample
@@ -20,10 +21,13 @@ namespace WpfTestSvgSample
     {
         #region Private Fields
 
+        private bool _saveXaml;
+
         private string _drawingDir;
         private DirectoryInfo _directoryInfo;
 
         private FileSvgReader _fileReader;
+        private WpfDrawingSettings _wpfSettings;
 
         private DirectoryInfo _workingDir;
 
@@ -55,8 +59,12 @@ namespace WpfTestSvgSample
         {
             InitializeComponent();
 
-            _fileReader          = new FileSvgReader();
-            _fileReader.SaveXaml = true;
+            _saveXaml            = true;
+            _wpfSettings         = new WpfDrawingSettings();
+            _wpfSettings.CultureInfo = _wpfSettings.NeutralCultureInfo;
+
+            _fileReader          = new FileSvgReader(_wpfSettings);
+            _fileReader.SaveXaml = _saveXaml;
             _fileReader.SaveZaml = false;
 
             mouseHandlingMode = MouseHandlingMode.None;
@@ -95,6 +103,18 @@ namespace WpfTestSvgSample
             }
         }
 
+        public bool SaveXaml
+        {
+            get
+            {
+                return _saveXaml;
+            }
+            set
+            {
+                _saveXaml = value;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -125,7 +145,7 @@ namespace WpfTestSvgSample
             {
                 if (_fileReader != null)
                 {
-                    _fileReader.SaveXaml = true;
+                    _fileReader.SaveXaml = _saveXaml;
                     _fileReader.SaveZaml = false;
 
                     DrawingGroup drawing = _fileReader.Read(svgFilePath, workingDir);
@@ -173,6 +193,21 @@ namespace WpfTestSvgSample
             {
                 svgViewer.UnloadDiagrams();
             }
+        }
+
+        public bool SaveDocument(string fileName)
+        {
+            if (String.IsNullOrEmpty(fileName))
+            {
+                return false;
+            }
+
+            if (_fileReader == null || _fileReader.Drawing == null)
+            {
+                return false;
+            }
+
+            return _fileReader.Save(fileName, true, false);
         }
 
         public void PageSelected(bool isSelected)

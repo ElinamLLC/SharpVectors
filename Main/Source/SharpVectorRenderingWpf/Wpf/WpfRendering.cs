@@ -301,7 +301,7 @@ namespace SharpVectors.Renderers.Wpf
                             {
                                 ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
-                                clipRect = WpfConverter.ToRect(viewPort);
+                                clipRect = WpfConvert.ToRect(viewPort);
                                 ICssRect clipShape = (CssRect)clip.GetRectValue();
                                 if (clipShape.Top.PrimitiveType != CssPrimitiveType.Ident)
                                     clipRect.Y += clipShape.Top.GetFloatValue(CssPrimitiveType.Number);
@@ -319,7 +319,7 @@ namespace SharpVectors.Renderers.Wpf
                             {
                                 ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
-                                clipRect = WpfConverter.ToRect(viewPort);
+                                clipRect = WpfConvert.ToRect(viewPort);
                             }
                             else if (_svgElement is ISvgMarkerElement ||
                               _svgElement is ISvgSymbolElement ||
@@ -448,8 +448,10 @@ namespace SharpVectors.Renderers.Wpf
                     WpfDrawingRenderer renderer = new WpfDrawingRenderer();
                     renderer.Window = _svgElement.OwnerDocument.Window as SvgWindow;
 
-                    WpfDrawingContext maskContext = new WpfDrawingContext(true);
-                    maskContext.TextAsGeometry = true;
+                    WpfDrawingSettings settings = context.Settings.Clone();
+                    settings.TextAsGeometry = true;
+                    WpfDrawingContext maskContext = new WpfDrawingContext(true,
+                        settings);
 
                     maskContext.Initialize(null, context.FontFamilyVisitor, null);
 
@@ -834,8 +836,10 @@ namespace SharpVectors.Renderers.Wpf
             WpfDrawingRenderer renderer = new WpfDrawingRenderer();
             renderer.Window = _svgElement.OwnerDocument.Window as SvgWindow;
 
-            WpfDrawingContext clipContext = new WpfDrawingContext(true);
-            clipContext.TextAsGeometry      = true;
+            WpfDrawingSettings settings = context.Settings.Clone();
+            settings.TextAsGeometry = true;
+            WpfDrawingContext clipContext = new WpfDrawingContext(true,
+                settings);
             clipContext.RenderingClipRegion = true;
 
             clipContext.Initialize(null, context.FontFamilyVisitor, null);
