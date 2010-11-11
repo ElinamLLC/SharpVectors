@@ -214,6 +214,180 @@ namespace SharpVectors.Converters
             return this.ProcessFile(svgFileName, xamlFileName);
         }
 
+        /// <summary>
+        /// This performs the conversion of the specified SVG source, and saves
+        /// the output to the specified XAML file.
+        /// </summary>
+        /// <param name="svgStream">
+        /// A stream providing access to the SVG source data.
+        /// </param>
+        /// <param name="xamlFileName">
+        /// The output XAML file. This is optional. If not specified, an XAML
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="xamlFileName"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgStream"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="xamlFileName"/> is empty.
+        /// </exception>
+        public bool Convert(Stream svgStream, string xamlFileName)
+        {
+            if (svgStream == null)
+            {
+                throw new ArgumentNullException("svgStream",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (xamlFileName == null)
+            {
+                throw new ArgumentNullException("xamlFileName",
+                    "The XAML destination file path cannot be null (or Nothing).");
+            }
+            if (xamlFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The XAML destination file path cannot be empty.", "xamlFileName");
+            }
+
+            if (!this.SaveXaml && !this.SaveZaml)
+            {
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(xamlFileName))
+            {
+                string workingDir = Path.GetDirectoryName(xamlFileName);
+                if (!Directory.Exists(workingDir))
+                {
+                    Directory.CreateDirectory(workingDir);
+                }
+            }
+
+            return this.ProcessFile(svgStream, xamlFileName);
+        }
+
+        /// <summary>
+        /// This performs the conversion of the specified SVG source, and saves
+        /// the output to the specified XAML file.
+        /// </summary>
+        /// <param name="svgTextReader">
+        /// A text reader providing access to the SVG source data.
+        /// </param>
+        /// <param name="xamlFileName">
+        /// The output XAML file. This is optional. If not specified, an XAML
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="xamlFileName"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="xamlFileName"/> is empty.
+        /// </exception>
+        public bool Convert(TextReader svgTextReader, string xamlFileName)
+        {
+            if (svgTextReader == null)
+            {
+                throw new ArgumentNullException("svgTextReader",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (xamlFileName == null)
+            {
+                throw new ArgumentNullException("xamlFileName",
+                    "The XAML destination file path cannot be null (or Nothing).");
+            }
+            if (xamlFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The XAML destination file path cannot be empty.", "xamlFileName");
+            }
+
+            if (!this.SaveXaml && !this.SaveZaml)
+            {
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(xamlFileName))
+            {
+                string workingDir = Path.GetDirectoryName(xamlFileName);
+                if (!Directory.Exists(workingDir))
+                {
+                    Directory.CreateDirectory(workingDir);
+                }
+            }
+
+            return this.ProcessFile(svgTextReader, xamlFileName);
+        }
+
+        /// <summary>
+        /// This performs the conversion of the specified SVG source, and saves
+        /// the output to the specified XAML file.
+        /// </summary>
+        /// <param name="svgXmlReader">
+        /// An XML reader providing access to the SVG source data.
+        /// </param>
+        /// <param name="xamlFileName">
+        /// The output XAML file. This is optional. If not specified, an XAML
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="xamlFileName"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="xamlFileName"/> is empty.
+        /// </exception>
+        public bool Convert(XmlReader svgXmlReader, string xamlFileName)
+        {
+            if (svgXmlReader == null)
+            {
+                throw new ArgumentNullException("svgXmlReader",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (xamlFileName == null)
+            {
+                throw new ArgumentNullException("xamlFileName",
+                    "The XAML destination file path cannot be null (or Nothing).");
+            }
+            if (xamlFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The XAML destination file path cannot be empty.", "xamlFileName");
+            }
+
+            if (!this.SaveXaml && !this.SaveZaml)
+            {
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(xamlFileName))
+            {
+                string workingDir = Path.GetDirectoryName(xamlFileName);
+                if (!Directory.Exists(workingDir))
+                {
+                    Directory.CreateDirectory(workingDir);
+                }
+            }
+
+            return this.ProcessFile(svgXmlReader, xamlFileName);
+        }
+
         #endregion
 
         #region Private Methods
@@ -226,7 +400,7 @@ namespace SharpVectors.Converters
             _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
             _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
 
-            _wpfWindow.Source = fileName;
+            _wpfWindow.LoadDocument(fileName);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -239,6 +413,81 @@ namespace SharpVectors.Converters
             }
 
             SaveFile(renderedDrawing, fileName, xamlFileName);
+
+            renderedDrawing = null;
+
+            return true;
+        }
+
+        private bool ProcessFile(Stream svgStream, string xamlFileName)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgStream);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (renderedDrawing == null)
+            {
+                return false;
+            }
+
+            SaveFile(renderedDrawing, xamlFileName, xamlFileName);
+
+            renderedDrawing = null;
+
+            return true;
+        }
+
+        private bool ProcessFile(TextReader svgTextReader, string xamlFileName)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgTextReader);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (renderedDrawing == null)
+            {
+                return false;
+            }
+
+            SaveFile(renderedDrawing, xamlFileName, xamlFileName);
+
+            renderedDrawing = null;
+
+            return true;
+        }
+
+        private bool ProcessFile(XmlReader svgXmlReader, string xamlFileName)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgXmlReader);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (renderedDrawing == null)
+            {
+                return false;
+            }
+
+            SaveFile(renderedDrawing, xamlFileName, xamlFileName);
 
             renderedDrawing = null;
 

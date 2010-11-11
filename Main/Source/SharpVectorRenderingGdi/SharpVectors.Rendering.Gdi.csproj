@@ -11,7 +11,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>SharpVectors.Rendering.Gdi</AssemblyName>
-    <AssemblyOriginatorKeyFile>Properties\SVGSharp.key</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SharpVectors.Rendering.Gdi.snk</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -238,7 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\GdiGraphics.cd" />
-    <None Include="Properties\SVGSharp.key" />
+    <None Include="SharpVectors.Rendering.Gdi.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\SvgPictureBox.resx">

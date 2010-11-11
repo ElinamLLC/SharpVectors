@@ -159,10 +159,10 @@ namespace SharpVectors.Converters
         #region Public Methods
 
         /// <overloads>
-        /// Reads in the specified SVG file and converting it to WPF drawing.
+        /// Reads in the specified SVG file and converts it to WPF drawing.
         /// </overloads>
         /// <summary>
-        /// Reads in the specified SVG file and converting it to WPF drawing.
+        /// Reads in the specified SVG file and converts it to WPF drawing.
         /// </summary>
         /// <param name="svgFileName">
         /// The full path of the SVG source file.
@@ -205,6 +205,102 @@ namespace SharpVectors.Converters
             }
 
             return this.LoadFile(svgFileName);
+        }
+
+        /// <summary>
+        /// Reads in the specified SVG file and converts it to WPF drawing.
+        /// </summary>
+        /// <param name="svgUri">
+        /// A <see cref="System.Uri"/> specifying the path to the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns the <see cref="DrawingGroup"/> representing the SVG file,
+        /// if successful; otherwise, it returns <see langword="null"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="svgUri"/> is <see langword="null"/>.
+        /// </exception>
+        public DrawingGroup Read(Uri svgUri)
+        {
+            if (svgUri == null)
+            {
+                throw new ArgumentNullException("svgUri",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+
+            return this.LoadFile(svgUri);
+        }
+
+        /// <summary>
+        /// Reads in the specified SVG file stream and converts it to WPF drawing.
+        /// </summary>
+        /// <param name="svgStream">The source SVG file stream.</param>
+        /// <returns>
+        /// This returns the <see cref="DrawingGroup"/> representing the SVG file,
+        /// if successful; otherwise, it returns <see langword="null"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="svgStream"/> is <see langword="null"/>.
+        /// </exception>
+        public DrawingGroup Read(Stream svgStream)
+        {
+            if (svgStream == null)
+            {
+                throw new ArgumentNullException("svgStream",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+
+            return this.LoadFile(svgStream);
+        }
+
+        /// <summary>
+        /// Reads in the specified source from the SVG file reader and converts 
+        /// it to WPF drawing.
+        /// </summary>
+        /// <param name="svgTextReader">
+        /// A text reader providing access to the SVG file data.
+        /// </param>
+        /// <returns>
+        /// This returns the <see cref="DrawingGroup"/> representing the SVG file,
+        /// if successful; otherwise, it returns <see langword="null"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+        /// </exception>
+        public DrawingGroup Read(TextReader svgTextReader)
+        {
+            if (svgTextReader == null)
+            {
+                throw new ArgumentNullException("svgTextReader",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+
+            return this.LoadFile(svgTextReader);
+        }
+
+        /// <summary>
+        /// Reads in the specified source SVG file reader and converts it to 
+        /// WPF drawing.
+        /// </summary>
+        /// <param name="svgXmlReader">
+        /// An XML reader providing access to the SVG file data.
+        /// </param>
+        /// <returns>
+        /// This returns the <see cref="DrawingGroup"/> representing the SVG file,
+        /// if successful; otherwise, it returns <see langword="null"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+        /// </exception>
+        public DrawingGroup Read(XmlReader svgXmlReader)
+        {
+            if (svgXmlReader == null)
+            {
+                throw new ArgumentNullException("svgTextReader",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+
+            return this.LoadFile(svgXmlReader);
         }
 
         /// <summary>
@@ -316,7 +412,7 @@ namespace SharpVectors.Converters
             _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
             _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
 
-            _wpfWindow.Source = fileName;
+            _wpfWindow.LoadDocument(fileName);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -329,6 +425,90 @@ namespace SharpVectors.Converters
             }
 
             SaveFile(fileName);
+
+            return _drawing;
+        }
+
+        private DrawingGroup LoadFile(Stream stream)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(stream);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
+            {
+                return null;
+            }
+
+            return _drawing;
+        }
+
+        private DrawingGroup LoadFile(Uri svgUri)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgUri);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
+            {
+                return null;
+            }
+
+            return _drawing;
+        }
+
+        private DrawingGroup LoadFile(TextReader textReader)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(textReader);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
+            {
+                return null;
+            }
+
+            return _drawing;
+        }
+
+        private DrawingGroup LoadFile(XmlReader xmlReader)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(xmlReader);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
+            {
+                return null;
+            }
 
             return _drawing;
         }

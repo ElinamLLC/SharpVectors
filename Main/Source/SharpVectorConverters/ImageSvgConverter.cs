@@ -72,11 +72,11 @@ namespace SharpVectors.Converters
         /// with the specified drawing or rendering settings and the saving options.
         /// </summary>
         /// <param name="saveXaml">
-        /// This specifies whether to save result object tree in XAML file.
+        /// This specifies whether to save result object tree in image file.
         /// </param>
         /// <param name="saveZaml">
         /// This specifies whether to save result object tree in ZAML file. The
-        /// ZAML is simply a G-Zip compressed XAML format, similar to the SVGZ.
+        /// ZAML is simply a G-Zip compressed image format, similar to the SVGZ.
         /// </param>
         /// <param name="settings">
         /// This specifies the settings used by the rendering or drawing engine.
@@ -98,11 +98,11 @@ namespace SharpVectors.Converters
 
         /// <summary>
         /// Gets a value indicating whether a writer error occurred when
-        /// using the custom XAML writer.
+        /// using the custom image writer.
         /// </summary>
         /// <value>
         /// This is <see langword="true"/> if an error occurred when using
-        /// the custom XAML writer; otherwise, it is <see langword="false"/>.
+        /// the custom image writer; otherwise, it is <see langword="false"/>.
         /// </value>
         public bool WriterErrorOccurred
         {
@@ -114,12 +114,12 @@ namespace SharpVectors.Converters
 
         /// <summary>
         /// Gets or sets a value indicating whether to fall back and use
-        /// the .NET Framework XAML writer when an error occurred in using the
+        /// the .NET Framework image writer when an error occurred in using the
         /// custom writer.
         /// </summary>
         /// <value>
         /// This is <see langword="true"/> if the converter falls back to using
-        /// the system XAML writer when an error occurred in using the custom
+        /// the system image writer when an error occurred in using the custom
         /// writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
         /// an exception, which occurred in using the custom writer will be
         /// thrown. The default is <see langword="false"/>. 
@@ -272,6 +272,180 @@ namespace SharpVectors.Converters
             return this.ProcessFile(svgFileName, imageFileName);
         }
 
+        /// <summary>
+        /// This performs the conversion of the specified SVG source, and saves
+        /// the output to the specified image file.
+        /// </summary>
+        /// <param name="svgStream">
+        /// A stream providing access to the SVG source data.
+        /// </param>
+        /// <param name="imageFileName">
+        /// The output image file. This is optional. If not specified, an image
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="imageFileName"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgStream"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="imageFileName"/> is empty.
+        /// </exception>
+        public bool Convert(Stream svgStream, string imageFileName)
+        {
+            if (svgStream == null)
+            {
+                throw new ArgumentNullException("svgStream",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (imageFileName == null)
+            {
+                throw new ArgumentNullException("imageFileName",
+                    "The image destination file path cannot be null (or Nothing).");
+            }
+            if (imageFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The image destination file path cannot be empty.", "imageFileName");
+            }
+
+            if (!this.SaveXaml && !this.SaveZaml)
+            {
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(imageFileName))
+            {
+                string workingDir = Path.GetDirectoryName(imageFileName);
+                if (!Directory.Exists(workingDir))
+                {
+                    Directory.CreateDirectory(workingDir);
+                }
+            }
+
+            return this.ProcessFile(svgStream, imageFileName);
+        }
+
+        /// <summary>
+        /// This performs the conversion of the specified SVG source, and saves
+        /// the output to the specified image file.
+        /// </summary>
+        /// <param name="svgTextReader">
+        /// A text reader providing access to the SVG source data.
+        /// </param>
+        /// <param name="imageFileName">
+        /// The output image file. This is optional. If not specified, an image
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="imageFileName"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="imageFileName"/> is empty.
+        /// </exception>
+        public bool Convert(TextReader svgTextReader, string imageFileName)
+        {
+            if (svgTextReader == null)
+            {
+                throw new ArgumentNullException("svgTextReader",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (imageFileName == null)
+            {
+                throw new ArgumentNullException("imageFileName",
+                    "The image destination file path cannot be null (or Nothing).");
+            }
+            if (imageFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The image destination file path cannot be empty.", "imageFileName");
+            }
+
+            if (!this.SaveXaml && !this.SaveZaml)
+            {
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(imageFileName))
+            {
+                string workingDir = Path.GetDirectoryName(imageFileName);
+                if (!Directory.Exists(workingDir))
+                {
+                    Directory.CreateDirectory(workingDir);
+                }
+            }
+
+            return this.ProcessFile(svgTextReader, imageFileName);
+        }
+
+        /// <summary>
+        /// This performs the conversion of the specified SVG source, and saves
+        /// the output to the specified image file.
+        /// </summary>
+        /// <param name="svgXmlReader">
+        /// An XML reader providing access to the SVG source data.
+        /// </param>
+        /// <param name="imageFileName">
+        /// The output image file. This is optional. If not specified, an image
+        /// file is created in the same directory as the SVG file.
+        /// </param>
+        /// <returns>
+        /// This returns <see langword="true"/> if the conversion is successful;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="imageFileName"/> is <see langword="null"/>.
+        /// <para>-or-</para>
+        /// If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// If the <paramref name="imageFileName"/> is empty.
+        /// </exception>
+        public bool Convert(XmlReader svgXmlReader, string imageFileName)
+        {
+            if (svgXmlReader == null)
+            {
+                throw new ArgumentNullException("svgXmlReader",
+                    "The SVG source file cannot be null (or Nothing).");
+            }
+            if (imageFileName == null)
+            {
+                throw new ArgumentNullException("imageFileName",
+                    "The image destination file path cannot be null (or Nothing).");
+            }
+            if (imageFileName.Length == 0)
+            {
+                throw new ArgumentException(
+                    "The image destination file path cannot be empty.", "imageFileName");
+            }
+
+            if (!this.SaveXaml && !this.SaveZaml)
+            {
+                return false;
+            }
+
+            if (!String.IsNullOrEmpty(imageFileName))
+            {
+                string workingDir = Path.GetDirectoryName(imageFileName);
+                if (!Directory.Exists(workingDir))
+                {
+                    Directory.CreateDirectory(workingDir);
+                }
+            }
+
+            return this.ProcessFile(svgXmlReader, imageFileName);
+        }
+
         #endregion
 
         #region Private Methods
@@ -284,7 +458,7 @@ namespace SharpVectors.Converters
             _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
             _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
 
-            _wpfWindow.Source = fileName;
+            _wpfWindow.LoadDocument(fileName);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -299,10 +473,106 @@ namespace SharpVectors.Converters
             // Save to the image file...
             SaveImageFile(renderedDrawing, fileName, imageFileName);
 
-            // Save to XAML and/or ZAML file if required...
+            // Save to image and/or ZAML file if required...
             if (this.SaveXaml || this.SaveZaml)
             {
                 SaveXamlFile(renderedDrawing, fileName, imageFileName);
+            }   
+
+            renderedDrawing = null;
+
+            return true;
+        }
+ 
+        private bool ProcessFile(Stream svgStream, string imageFileName)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgStream);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (renderedDrawing == null)
+            {
+                return false;
+            }
+
+            // Save to the image file...
+            SaveImageFile(renderedDrawing, imageFileName, imageFileName);
+
+            // Save to image and/or ZAML file if required...
+            if (this.SaveXaml || this.SaveZaml)
+            {
+                SaveXamlFile(renderedDrawing, imageFileName, imageFileName);
+            }   
+
+            renderedDrawing = null;
+
+            return true;
+        }
+
+        private bool ProcessFile(TextReader svgTextReader, string imageFileName)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgTextReader);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (renderedDrawing == null)
+            {
+                return false;
+            }
+
+            // Save to the image file...
+            SaveImageFile(renderedDrawing, imageFileName, imageFileName);
+
+            // Save to image and/or ZAML file if required...
+            if (this.SaveXaml || this.SaveZaml)
+            {
+                SaveXamlFile(renderedDrawing, imageFileName, imageFileName);
+            }   
+
+            renderedDrawing = null;
+
+            return true;
+        }
+
+        private bool ProcessFile(XmlReader svgXmlReader, string imageFileName)
+        {
+            _wpfRenderer.LinkVisitor       = new LinkVisitor();
+            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
+            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+
+            _wpfWindow.LoadDocument(svgXmlReader);
+
+            _wpfRenderer.InvalidRect = SvgRectF.Empty;
+
+            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+
+            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (renderedDrawing == null)
+            {
+                return false;
+            }
+
+            // Save to the image file...
+            SaveImageFile(renderedDrawing, imageFileName, imageFileName);
+
+            // Save to image and/or ZAML file if required...
+            if (this.SaveXaml || this.SaveZaml)
+            {
+                SaveXamlFile(renderedDrawing, imageFileName, imageFileName);
             }   
 
             renderedDrawing = null;
@@ -488,7 +758,7 @@ namespace SharpVectors.Converters
 
         #endregion
 
-        #region SaveXamlFile Method
+        #region SaveXamlFile Method 
 
         private bool SaveXamlFile(Drawing drawing, string fileName, string imageFileName)
         {
@@ -497,11 +767,11 @@ namespace SharpVectors.Converters
             string xamlFileName = null;
             if (String.IsNullOrEmpty(imageFileName))
             {
-                string fileNameWithoutExt = 
+                string fileNameWithoutExt =
                     Path.GetFileNameWithoutExtension(fileName);
 
-                string workingDir  = Path.GetDirectoryName(fileName);
-                xamlFileName       = Path.Combine(workingDir, 
+                string workingDir = Path.GetDirectoryName(fileName);
+                xamlFileName = Path.Combine(workingDir,
                     fileNameWithoutExt + ".xaml");
             }
             else
@@ -594,7 +864,7 @@ namespace SharpVectors.Converters
                     File.Delete(zamlFileName);
                 }
 
-                FileStream zamlSourceFile = new FileStream(xamlFileName, FileMode.Open, 
+                FileStream zamlSourceFile = new FileStream(xamlFileName, FileMode.Open,
                     FileAccess.Read, FileShare.Read);
                 byte[] buffer = new byte[zamlSourceFile.Length];
                 // Read the file to ensure it is readable.
