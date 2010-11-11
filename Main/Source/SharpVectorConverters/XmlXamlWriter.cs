@@ -15,11 +15,19 @@ using System.Windows.Markup.Primitives;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Renderers.Utils; 
+using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Converters
 {
-	public sealed class XmlXamlWriter
+    /// <summary>
+    /// This is a customized XAML writer, which provides Extensible Application 
+    /// Markup Language (XAML) serialization of provided runtime objects into XAML.
+    /// </summary>
+    /// <remarks>
+    /// This is designed to be used by the SVG to XAML converters, and may not be
+    /// useful in general applications.
+    /// </remarks>
+    public sealed class XmlXamlWriter
     {
         #region Private Fields
 
@@ -33,28 +41,43 @@ namespace SharpVectors.Converters
         private WpfDrawingSettings _wpfSettings;
 
         private Dictionary<Type, string> _contentProperties;
-		private Dictionary<string, NamespaceMap> _dicNamespaceMap;
+        private Dictionary<string, NamespaceMap> _dicNamespaceMap;
 
         #endregion
 
         #region Constructors and Destructor
 
+        /// <overloads>
+        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class.
+        /// </overloads>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class
+        /// with the default settings.
+        /// </summary>
         public XmlXamlWriter()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class
+        /// with the specified settings.
+        /// </summary>
+        /// <param name="settings">
+        /// An instance of <see cref="WpfDrawingSettings"/> specifying the
+        /// rendering options.
+        /// </param>
+        public XmlXamlWriter(WpfDrawingSettings settings)
         {
             _nullType          = typeof(NullExtension);
             _namespaceCache    = new NamespaceCache();
             _dicNamespaceMap   = new Dictionary<string, NamespaceMap>(StringComparer.OrdinalIgnoreCase);
             _contentProperties = new Dictionary<Type, string>();
 
-            _windowsPath  = "%WINDIR%";
-            _windowsDir   = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
+            _windowsPath = "%WINDIR%";
+            _windowsDir  = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
 
-            _windowsDir   = _windowsDir.Replace(@"\", "/");
-        }
-
-        public XmlXamlWriter(WpfDrawingSettings settings)
-            : this()
-        {
+            _windowsDir  = _windowsDir.Replace(@"\", "/");
             _wpfSettings = settings;
         }
 
@@ -62,15 +85,24 @@ namespace SharpVectors.Converters
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to include a null markup
+        /// extension in the output XAML.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if the null markup extension is
+        /// included in the output XAML; otherwise, it is <see langword="false"/>.
+        /// The default is <see langword="false"/>.
+        /// </value>
         public bool IncludeNullExtension
         {
-            get 
-            { 
-                return _nullExtension; 
+            get
+            {
+                return _nullExtension;
             }
-            set 
-            { 
-                _nullExtension = value; 
+            set
+            {
+                _nullExtension = value;
             }
         }
 
@@ -79,11 +111,11 @@ namespace SharpVectors.Converters
         #region Public Methods
 
         public static string Convert(object obj)
-		{
+        {
             XmlXamlWriter writer = new XmlXamlWriter();
 
             return writer.Save(obj);
-		}
+        }
 
         // Summary:
         // Returns a Extensible Application Markup Language (XAML) string that serializes
@@ -128,11 +160,11 @@ namespace SharpVectors.Converters
             ResolveXmlNamespaces(obj);
 
             XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent             = true;
+            settings.Indent = true;
             settings.OmitXmlDeclaration = true;
 
-            StringBuilder builder      = new StringBuilder();
-            StringWriter writer        = new StringWriter(builder);
+            StringBuilder builder = new StringBuilder();
+            StringWriter writer = new StringWriter(builder);
             using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings))
             {
                 WriteObject(null, obj, xmlWriter, true);
@@ -239,8 +271,8 @@ namespace SharpVectors.Converters
 
             ResolveXmlNamespaces(obj);
 
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.Indent             = true;
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
             settings.OmitXmlDeclaration = true;
 
             using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings))
@@ -303,18 +335,18 @@ namespace SharpVectors.Converters
         #region Private Methods
 
         private void WriteObject(object key, object obj, XmlWriter writer, bool isRoot)
-		{
-			List<MarkupProperty> propertyElements = new List<MarkupProperty>();
-			MarkupProperty contentProperty = null;
-			string contentPropertyName = null;
-			MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
-			Type objectType = markupObj.ObjectType;
+        {
+            List<MarkupProperty> propertyElements = new List<MarkupProperty>();
+            MarkupProperty contentProperty = null;
+            string contentPropertyName = null;
+            MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
+            Type objectType = markupObj.ObjectType;
 
-            string ns     = _namespaceCache.GetNamespaceUriFor(objectType);
+            string ns = _namespaceCache.GetNamespaceUriFor(objectType);
             string prefix = _namespaceCache.GetDefaultPrefixFor(ns);
 
             if (isRoot)
-			{
+            {
                 if (String.IsNullOrEmpty(prefix))
                 {
                     if (String.IsNullOrEmpty(ns))
@@ -336,12 +368,12 @@ namespace SharpVectors.Converters
                 writer.WriteAttributeString("xmlns", "x",
                     NamespaceCache.XmlnsNamespace, NamespaceCache.XamlNamespace);
 
-				foreach (NamespaceMap map in _dicNamespaceMap.Values)
-				{
+                foreach (NamespaceMap map in _dicNamespaceMap.Values)
+                {
                     if (!String.IsNullOrEmpty(map.Prefix) && !String.Equals(map.Prefix, "x"))
                         writer.WriteAttributeString("xmlns", map.Prefix, NamespaceCache.XmlnsNamespace, map.XmlNamespace);
-				}
-			}
+                }
+            }
             else
             {
                 //TODO: Fix - the best way to handle this case...
@@ -392,9 +424,9 @@ namespace SharpVectors.Converters
                 }
             }
 
-			if (key != null)
-			{
-				string keyString = key.ToString();
+            if (key != null)
+            {
+                string keyString = key.ToString();
                 if (keyString.Length > 0)
                 {
                     writer.WriteAttributeString("x", "Key", NamespaceCache.XamlNamespace, keyString);
@@ -405,58 +437,58 @@ namespace SharpVectors.Converters
                     throw new NotImplementedException(
                         "Sample XamlWriter cannot yet handle keys that aren't strings");
                 }
-			}
+            }
 
-			//Look for CPA info in our cache that keeps contentProperty names per Type
-			//If it doesn't have an entry, go get the info and store it.
-			if (!_contentProperties.ContainsKey(objectType))
-			{
-				string lookedUpContentProperty = String.Empty;
-				foreach (Attribute attr in markupObj.Attributes)
-				{
-					ContentPropertyAttribute cpa = attr as ContentPropertyAttribute;
-					if (cpa != null)
-					{
-						lookedUpContentProperty = cpa.Name;
-						//Once content property is found, come out of the loop.
-						break;
-					}
-				}
+            //Look for CPA info in our cache that keeps contentProperty names per Type
+            //If it doesn't have an entry, go get the info and store it.
+            if (!_contentProperties.ContainsKey(objectType))
+            {
+                string lookedUpContentProperty = String.Empty;
+                foreach (Attribute attr in markupObj.Attributes)
+                {
+                    ContentPropertyAttribute cpa = attr as ContentPropertyAttribute;
+                    if (cpa != null)
+                    {
+                        lookedUpContentProperty = cpa.Name;
+                        //Once content property is found, come out of the loop.
+                        break;
+                    }
+                }
 
-				_contentProperties.Add(objectType, lookedUpContentProperty);
-			}
+                _contentProperties.Add(objectType, lookedUpContentProperty);
+            }
 
-			contentPropertyName  = _contentProperties[objectType];
-			string contentString = String.Empty;
+            contentPropertyName = _contentProperties[objectType];
+            string contentString = String.Empty;
 
-			foreach (MarkupProperty markupProperty in markupObj.Properties)
-			{
-				if (markupProperty.Name != contentPropertyName)
-				{
-					if (markupProperty.IsValueAsString)
-					{
-						contentString = markupProperty.Value as string;
-					}
-					else if (!markupProperty.IsComposite)
-					{
-						string temp = markupProperty.StringValue;
+            foreach (MarkupProperty markupProperty in markupObj.Properties)
+            {
+                if (markupProperty.Name != contentPropertyName)
+                {
+                    if (markupProperty.IsValueAsString)
+                    {
+                        contentString = markupProperty.Value as string;
+                    }
+                    else if (!markupProperty.IsComposite)
+                    {
+                        string temp = markupProperty.StringValue;
 
-						if (markupProperty.IsAttached)
-						{
-                            string ns1     = _namespaceCache.GetNamespaceUriFor(markupProperty.DependencyProperty.OwnerType);
+                        if (markupProperty.IsAttached)
+                        {
+                            string ns1 = _namespaceCache.GetNamespaceUriFor(markupProperty.DependencyProperty.OwnerType);
                             string prefix1 = _namespaceCache.GetDefaultPrefixFor(ns1);
 
                             if (String.IsNullOrEmpty(prefix1))
-							{
-								writer.WriteAttributeString(markupProperty.Name, temp);
-							}
-							else
-							{
+                            {
+                                writer.WriteAttributeString(markupProperty.Name, temp);
+                            }
+                            else
+                            {
                                 writer.WriteAttributeString(markupProperty.Name, ns1, temp);
-							}
-						}
-						else
-						{
+                            }
+                        }
+                        else
+                        {
                             if (markupProperty.Name == "FontUri" &&
                                 (_wpfSettings != null && _wpfSettings.IncludeRuntime))
                             {
@@ -477,31 +509,31 @@ namespace SharpVectors.Converters
                             {
                                 writer.WriteAttributeString(markupProperty.Name, temp);
                             }
-						}
-					}
-					else if (markupProperty.Value.GetType() == _nullType)
-					{
+                        }
+                    }
+                    else if (markupProperty.Value.GetType() == _nullType)
+                    {
                         if (_nullExtension)
                         {
                             writer.WriteAttributeString(markupProperty.Name, "{x:Null}");
                         }
-					}
-					else
-					{
-						propertyElements.Add(markupProperty);
-					}
-				}
-				else
-				{
-					contentProperty = markupProperty;
-				}
-			}
+                    }
+                    else
+                    {
+                        propertyElements.Add(markupProperty);
+                    }
+                }
+                else
+                {
+                    contentProperty = markupProperty;
+                }
+            }
 
-			if (contentProperty != null || propertyElements.Count > 0 || contentString != String.Empty)
-			{
-				foreach (MarkupProperty markupProp in propertyElements)
-				{
-                    string ns2     = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
+            if (contentProperty != null || propertyElements.Count > 0 || contentString != String.Empty)
+            {
+                foreach (MarkupProperty markupProp in propertyElements)
+                {
+                    string ns2 = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
                     string prefix2 = null;
                     if (!String.IsNullOrEmpty(ns2))
                     {
@@ -509,76 +541,76 @@ namespace SharpVectors.Converters
                     }
 
                     string propElementName = markupObj.ObjectType.Name + "." + markupProp.Name;
-					if (String.IsNullOrEmpty(prefix2))
-					{
-						writer.WriteStartElement(propElementName);
-					}
-					else
-					{
+                    if (String.IsNullOrEmpty(prefix2))
+                    {
+                        writer.WriteStartElement(propElementName);
+                    }
+                    else
+                    {
                         writer.WriteStartElement(prefix2, propElementName, ns2);
-					}
+                    }
 
-					WriteChildren(writer, markupProp);
-					writer.WriteEndElement();
-				}
+                    WriteChildren(writer, markupProp);
+                    writer.WriteEndElement();
+                }
 
-				if (contentString != String.Empty)
-				{
-					writer.WriteValue(contentString);
-				}
-				else if (contentProperty != null)
-				{
-					if (contentProperty.Value is string)
-					{
-						writer.WriteValue(contentProperty.StringValue);
-					}
-					else
-					{
-						WriteChildren(writer, contentProperty);
-					}
-				}
-			}
-			writer.WriteEndElement();
-		}
+                if (contentString != String.Empty)
+                {
+                    writer.WriteValue(contentString);
+                }
+                else if (contentProperty != null)
+                {
+                    if (contentProperty.Value is string)
+                    {
+                        writer.WriteValue(contentProperty.StringValue);
+                    }
+                    else
+                    {
+                        WriteChildren(writer, contentProperty);
+                    }
+                }
+            }
+            writer.WriteEndElement();
+        }
 
-		private void WriteChildren(XmlWriter writer, MarkupProperty markupProp)
-		{
-			if (!markupProp.IsComposite)
-			{
-				WriteObject(null, markupProp.Value, writer, false);
-			}
-			else
-			{
-				IList collection       = markupProp.Value as IList;
-				IDictionary dictionary = markupProp.Value as IDictionary;
-				if (collection != null)
-				{
-					foreach (object obj in collection)
-					{
-						WriteObject(null, obj, writer, false);
-					}
-				}
-				else if (dictionary != null)
-				{
-					foreach (object key in dictionary.Keys)
-					{
-						WriteObject(key, dictionary[key], writer, false);
-					}
-				}
-				else
-				{
-					WriteObject(null, markupProp.Value, writer, false);
-				}
-			}
-		}
+        private void WriteChildren(XmlWriter writer, MarkupProperty markupProp)
+        {
+            if (!markupProp.IsComposite)
+            {
+                WriteObject(null, markupProp.Value, writer, false);
+            }
+            else
+            {
+                IList collection = markupProp.Value as IList;
+                IDictionary dictionary = markupProp.Value as IDictionary;
+                if (collection != null)
+                {
+                    foreach (object obj in collection)
+                    {
+                        WriteObject(null, obj, writer, false);
+                    }
+                }
+                else if (dictionary != null)
+                {
+                    foreach (object key in dictionary.Keys)
+                    {
+                        WriteObject(key, dictionary[key], writer, false);
+                    }
+                }
+                else
+                {
+                    WriteObject(null, markupProp.Value, writer, false);
+                }
+            }
+        }
 
-		private void ResolveXmlNamespaces(object obj)
-		{
-			List<MarkupProperty> propertyElements = new List<MarkupProperty>();
-			MarkupProperty contentProperty = null;
-			string contentPropertyName = null;
-			MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
-			Type objectType = markupObj.ObjectType;
+        private void ResolveXmlNamespaces(object obj)
+        {
+            List<MarkupProperty> propertyElements = new List<MarkupProperty>();
+            MarkupProperty contentProperty = null;
+            string contentPropertyName = null;
+            MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
+            Type objectType = markupObj.ObjectType;
 
             string ns = _namespaceCache.GetNamespaceUriFor(objectType);
             if (!String.IsNullOrEmpty(ns))
@@ -587,44 +619,44 @@ namespace SharpVectors.Converters
                 _dicNamespaceMap[ns] = new NamespaceMap(prefix, ns);
             }
 
-			//Look for CPA info in our cache that keeps contentProperty names per Type
-			//If it doesn't have an entry, go get the info and store it.
-			if (!_contentProperties.ContainsKey(objectType))
-			{
-				string lookedUpContentProperty = String.Empty;
+            //Look for CPA info in our cache that keeps contentProperty names per Type
+            //If it doesn't have an entry, go get the info and store it.
+            if (!_contentProperties.ContainsKey(objectType))
+            {
+                string lookedUpContentProperty = String.Empty;
 
-				foreach (Attribute attr in markupObj.Attributes)
-				{
-					ContentPropertyAttribute cpa = attr as ContentPropertyAttribute;
-					if (cpa != null)
-					{
-						lookedUpContentProperty = cpa.Name;
-						//Once content property is found, come out of the loop.
-						break;
-					}
-				}
+                foreach (Attribute attr in markupObj.Attributes)
+                {
+                    ContentPropertyAttribute cpa = attr as ContentPropertyAttribute;
+                    if (cpa != null)
+                    {
+                        lookedUpContentProperty = cpa.Name;
+                        //Once content property is found, come out of the loop.
+                        break;
+                    }
+                }
 
-				_contentProperties.Add(objectType, lookedUpContentProperty);
-			}
+                _contentProperties.Add(objectType, lookedUpContentProperty);
+            }
 
-			contentPropertyName = _contentProperties[objectType];
+            contentPropertyName = _contentProperties[objectType];
 
-			string contentString = String.Empty;
+            string contentString = String.Empty;
 
-			foreach (MarkupProperty markupProperty in markupObj.Properties)
-			{
-				if (markupProperty.Name != contentPropertyName)
-				{
-					if (markupProperty.IsValueAsString)
-					{
-						contentString = markupProperty.Value as string;
-					}
-					else if (!markupProperty.IsComposite)
-					{
-						//Bug Fix DX-0120123
+            foreach (MarkupProperty markupProperty in markupObj.Properties)
+            {
+                if (markupProperty.Name != contentPropertyName)
+                {
+                    if (markupProperty.IsValueAsString)
+                    {
+                        contentString = markupProperty.Value as string;
+                    }
+                    else if (!markupProperty.IsComposite)
+                    {
+                        //Bug Fix DX-0120123
                         if (markupProperty.DependencyProperty != null)
                         {
-                            string ns1     = _namespaceCache.GetNamespaceUriFor(
+                            string ns1 = _namespaceCache.GetNamespaceUriFor(
                                 markupProperty.DependencyProperty.OwnerType);
                             string prefix1 = _namespaceCache.GetDefaultPrefixFor(ns1);
 
@@ -633,73 +665,73 @@ namespace SharpVectors.Converters
                                 _dicNamespaceMap[ns1] = new NamespaceMap(prefix1, ns1);
                             }
                         }
-					}
-					else if (markupProperty.Value.GetType() == _nullType)
-					{
-					}
-					else
-					{
-						propertyElements.Add(markupProperty);
-					}
-				}
-				else
-				{
-					contentProperty = markupProperty;
-				}
-			}
+                    }
+                    else if (markupProperty.Value.GetType() == _nullType)
+                    {
+                    }
+                    else
+                    {
+                        propertyElements.Add(markupProperty);
+                    }
+                }
+                else
+                {
+                    contentProperty = markupProperty;
+                }
+            }
 
-			if (contentProperty != null || propertyElements.Count > 0 || contentString != String.Empty)
-			{
-				foreach (MarkupProperty markupProp in propertyElements)
-				{
+            if (contentProperty != null || propertyElements.Count > 0 || contentString != String.Empty)
+            {
+                foreach (MarkupProperty markupProp in propertyElements)
+                {
                     string ns2 = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
                     if (!String.IsNullOrEmpty(ns2))
                     {
-                        string prefix2        = _namespaceCache.GetDefaultPrefixFor(ns2);
+                        string prefix2 = _namespaceCache.GetDefaultPrefixFor(ns2);
                         _dicNamespaceMap[ns2] = new NamespaceMap(prefix2, ns2);
                     }
-					ResolveChildXmlNamespaces(markupProp);
-				}
+                    ResolveChildXmlNamespaces(markupProp);
+                }
 
-				if (contentProperty != null)
-				{
-					if (!(contentProperty.Value is String))
-					{
-						ResolveChildXmlNamespaces(contentProperty);
-					}
-				}
-			}
-		}
+                if (contentProperty != null)
+                {
+                    if (!(contentProperty.Value is String))
+                    {
+                        ResolveChildXmlNamespaces(contentProperty);
+                    }
+                }
+            }
+        }
 
-		private void ResolveChildXmlNamespaces(MarkupProperty markupProp)
-		{
-			if (!markupProp.IsComposite)
-			{
-				ResolveXmlNamespaces(markupProp);
-			}
-			else
-			{
-				IList collection = markupProp.Value as IList;
-				IDictionary dictionary = markupProp.Value as IDictionary;
-				if (collection != null)
-				{
-					foreach (object obj in collection)
-					{
-						ResolveXmlNamespaces(obj);
-					}
-				}
-				else if (dictionary != null)
-				{
-					foreach (object key in dictionary.Keys)
-					{
-						ResolveXmlNamespaces(dictionary[key]);
-					}
-				}
-				else
-				{
-					ResolveXmlNamespaces(markupProp.Value);
-				}
-			}
+        private void ResolveChildXmlNamespaces(MarkupProperty markupProp)
+        {
+            if (!markupProp.IsComposite)
+            {
+                ResolveXmlNamespaces(markupProp);
+            }
+            else
+            {
+                IList collection = markupProp.Value as IList;
+                IDictionary dictionary = markupProp.Value as IDictionary;
+                if (collection != null)
+                {
+                    foreach (object obj in collection)
+                    {
+                        ResolveXmlNamespaces(obj);
+                    }
+                }
+                else if (dictionary != null)
+                {
+                    foreach (object key in dictionary.Keys)
+                    {
+                        ResolveXmlNamespaces(dictionary[key]);
+                    }
+                }
+                else
+                {
+                    ResolveXmlNamespaces(markupProp.Value);
+                }
+            }
         }
 
         #endregion
@@ -708,12 +740,12 @@ namespace SharpVectors.Converters
 
         private sealed class NamespaceCache
         {
-            public const string XamlNamespace    = "http://schemas.microsoft.com/winfx/2006/xaml";
-            public const string XmlNamespace     = "http://www.w3.org/XML/1998/namespace";
+            public const string XamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml";
+            public const string XmlNamespace = "http://www.w3.org/XML/1998/namespace";
             public const string DefaultNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
-            public const string XmlnsNamespace   = "http://www.w3.org/2000/xmlns/";
+            public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
 
-            public const string ClrNamespace     = "clr-namespace:";
+            public const string ClrNamespace = "clr-namespace:";
 
             private bool _isFrameworkRoot;
             private Dictionary<string, string> _defaultPrefixes;
@@ -721,19 +753,19 @@ namespace SharpVectors.Converters
 
             public NamespaceCache()
             {
-                _defaultPrefixes  = new Dictionary<string, string>();
+                _defaultPrefixes = new Dictionary<string, string>();
                 _xmlnsDefinitions = new Dictionary<Assembly, Dictionary<string, string>>();
             }
 
             public bool IsFrameworkRoot
             {
-                get 
-                { 
-                    return _isFrameworkRoot; 
+                get
+                {
+                    return _isFrameworkRoot;
                 }
-                set 
-                { 
-                    _isFrameworkRoot = value; 
+                set
+                {
+                    _isFrameworkRoot = value;
                 }
             }
 
@@ -750,7 +782,7 @@ namespace SharpVectors.Converters
                 {
                     return uriPrefix;
                 }
-                string assNamespace = uri.Substring(ClrNamespace.Length, uri.IndexOf(";", 
+                string assNamespace = uri.Substring(ClrNamespace.Length, uri.IndexOf(";",
                     StringComparison.OrdinalIgnoreCase) - ClrNamespace.Length);
                 if (!String.IsNullOrEmpty(assNamespace))
                 {
@@ -777,7 +809,7 @@ namespace SharpVectors.Converters
                 string typeNamespace = String.Empty;
                 if (type.Namespace == null)
                 {
-                    return String.Format(CultureInfo.InvariantCulture, "clr-namespace:;assembly={0}", 
+                    return String.Format(CultureInfo.InvariantCulture, "clr-namespace:;assembly={0}",
                         new object[] { type.Assembly.GetName().Name });
                 }
                 if (!GetMappingsFor(type.Assembly).TryGetValue(type.Namespace, out typeNamespace))
@@ -832,12 +864,12 @@ namespace SharpVectors.Converters
                         string prefix1 = null;
                         string prefix2 = null;
                         string prefix3 = null;
-                        if (dictionary.TryGetValue(attribute.ClrNamespace, out prefix1) && 
+                        if (dictionary.TryGetValue(attribute.ClrNamespace, out prefix1) &&
                             _defaultPrefixes.TryGetValue(prefix1, out prefix2))
                         {
                             _defaultPrefixes.TryGetValue(attribute.XmlNamespace, out prefix3);
                         }
-                        if (((prefix1 == null) || (prefix2 == null)) || 
+                        if (((prefix1 == null) || (prefix2 == null)) ||
                             ((prefix3 != null) && (prefix2.Length > prefix3.Length)))
                         {
                             dictionary[attribute.ClrNamespace] = attribute.XmlNamespace;
@@ -862,18 +894,18 @@ namespace SharpVectors.Converters
         #region NamespaceMap Class
 
         private sealed class NamespaceMap
-	    {
+        {
             private string _prefix;
             private string _xmlNamespace;
 
-		    public NamespaceMap(string prefix, string xmlNamespace)
-		    {
-			    _prefix       = prefix;
-			    _xmlNamespace = xmlNamespace;
+            public NamespaceMap(string prefix, string xmlNamespace)
+            {
+                _prefix = prefix;
+                _xmlNamespace = xmlNamespace;
             }
 
-            public string Prefix 
-            { 
+            public string Prefix
+            {
                 get
                 {
                     return _prefix;
@@ -884,8 +916,8 @@ namespace SharpVectors.Converters
                 }
             }
 
-            public string XmlNamespace 
-            { 
+            public string XmlNamespace
+            {
                 get
                 {
                     return _xmlNamespace;

@@ -11,7 +11,7 @@
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>SharpVectors.Dom</AssemblyName>
-    <AssemblyOriginatorKeyFile>Properties\SVGSharp.key</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SharpVectors.Dom.snk</AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
@@ -246,7 +246,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\SVGSharp.key" />
+    <None Include="SharpVectors.Dom.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">

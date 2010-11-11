@@ -213,7 +213,8 @@ namespace SharpVectors.Runtime
             }
         }
 
-        public void LoadDiagrams(DrawingGroup whole, DrawingGroup links, DrawingGroup main)
+        public void LoadDiagrams(DrawingGroup whole, 
+            DrawingGroup links, DrawingGroup main)
         {
             if (whole == null)
             {

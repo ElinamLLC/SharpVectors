@@ -7,7 +7,7 @@ using System.IO.Compression;
 
 namespace SharpVectors.Net
 {
-	public class ExtendedHttpWebRequestCreator : System.Net.IWebRequestCreate
+	public class ExtendedHttpWebRequestCreator : IWebRequestCreate
 	{
 		public ExtendedHttpWebRequestCreator(){}
 		public WebRequest Create(Uri uri){return new ExtendedHttpWebRequest(uri);}

@@ -2,9 +2,11 @@
 using System.IO;
 using System.Xml;
 using System.Text;
+using System.Reflection;
+using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
 
 using SharpVectors.Xml;
 using SharpVectors.Dom.Svg;
@@ -83,16 +85,9 @@ namespace SharpVectors.Renderers.Utils
             set
             {
                 Uri uri = new Uri(new Uri(
-                    System.Reflection.Assembly.GetExecutingAssembly().Location), value);
+                    Assembly.GetExecutingAssembly().Location), value);
 
-                SvgDocument document = new SvgDocument(this);
-                if (_settings != null)
-                {
-                    document.CustomSettings = _settings;
-                }
-                document.Load(uri.AbsoluteUri);
-
-                this.Document = document;
+                this.LoadDocument(uri);
             }
         }
 
@@ -102,6 +97,88 @@ namespace SharpVectors.Renderers.Utils
             {
                 return WpfApplicationContext.ExecutableDirectory;
             }
+        }
+
+        public void LoadDocument(Uri documentUri)
+        {
+            if (documentUri == null || !documentUri.IsAbsoluteUri)
+            {
+                return;
+            }
+
+            SvgDocument document = new SvgDocument(this);
+            if (_settings != null)
+            {
+                document.CustomSettings = _settings;
+            }
+            document.Load(documentUri.AbsoluteUri);
+
+            this.Document = document;
+        }
+
+        public void LoadDocument(string documentSource)
+        {
+            if (String.IsNullOrEmpty(documentSource))
+            {
+                return;
+            }
+
+            Uri uri = new Uri(new Uri(
+                Assembly.GetExecutingAssembly().Location),
+                documentSource);
+
+            this.LoadDocument(uri);
+        }
+
+        public void LoadDocument(Stream documentStream)
+        {
+            if (documentStream == null)
+            {
+                return;
+            }
+
+            SvgDocument document = new SvgDocument(this);
+            if (_settings != null)
+            {
+                document.CustomSettings = _settings;
+            }
+            document.Load(documentStream);
+
+            this.Document = document;
+        }
+
+        public void LoadDocument(TextReader textReader)
+        {
+            if (textReader == null)
+            {
+                return;
+            }
+
+            SvgDocument document = new SvgDocument(this);
+            if (_settings != null)
+            {
+                document.CustomSettings = _settings;
+            }
+            document.Load(textReader);
+
+            this.Document = document;
+        }
+
+        public void LoadDocument(XmlReader xmlReader)
+        {
+            if (xmlReader == null)
+            {
+                return;
+            }
+
+            SvgDocument document = new SvgDocument(this);
+            if (_settings != null)
+            {
+                document.CustomSettings = _settings;
+            }
+            document.Load(xmlReader);
+
+            this.Document = document;
         }
 
         public override void Alert(string message)
