@@ -1,0 +1,60 @@
+﻿<Window x:Class="SvgImageSample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="SvgImage Sample" Height="346" Width="409" Background="White">
+    <Window.Resources>
+        <ResourceDictionary> 
+            <sys:String x:Key="WebFile">
+                http://upload.wikimedia.org/wikipedia/commons/c/c7/SVG.svg
+            </sys:String>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <TabControl SelectedIndex="0" OverridesDefaultStyle="False">
+            <TabItem>
+                <TabItem.Header>By Local File</TabItem.Header>
+                <TabItem.Content>  
+                    <!-- 1. Load local SVG file, using the constructor -->
+                    <Image Source="{svgc:SvgImage ../Test1.svg}"/>        
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>By Web File</TabItem.Header>
+                <TabItem.Content>    
+                    <!-- 2. Load Web SVG file, using the constructor. -->
+                    <Image Source="{svgc:SvgImage {StaticResource WebFile}}"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>By Local/Resource File</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 3. Load local, using the constructor and a property. -->
+                    <Image Source="{svgc:SvgImage Test2.svg, TextAsGeometry=True}"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>By Sub-Folder File</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 4. Load local, using constructor - not recommended syntax -->
+                    <Image Source="{svgc:SvgImage \\SubFolder\\Test3.svg}"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>By Local/Resource File</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 5. Load resource, using the constructor. -->
+                    <Image Source="{svgc:SvgImage /Resources/Test.svg}"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>By Properties</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 6. Load resource, using property. -->
+                    <Image Source="{svgc:SvgImage Source=/Resources/Test.svg}"/>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

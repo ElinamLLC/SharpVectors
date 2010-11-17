@@ -1,0 +1,8 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Svg Reader Test Sample" Height="460" Width="620" WindowStartupLocation="CenterScreen" Name="Window1">
+    <DockPanel LastChildFill="True">
+        <Image Name="svgImage" Stretch="Uniform"/>
+    </DockPanel>
+</Window>
