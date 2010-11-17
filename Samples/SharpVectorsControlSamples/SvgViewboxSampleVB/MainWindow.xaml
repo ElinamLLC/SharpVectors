@@ -1,0 +1,46 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    Title="SvgViewbox Sample" Height="346" Width="430" Background="White">
+    <DockPanel>
+        <TabControl SelectedIndex="0" OverridesDefaultStyle="False">
+            <TabItem>
+                <TabItem.Header>Web File</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 1. Load Web SVG file -->
+                    <svgc:SvgViewbox Source=
+                     "http://croczilla.com/bits_and_pieces/svg/samples/tiger/tiger.svg"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Local File 1</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 2. Load local SVG file -->
+                    <svgc:SvgViewbox Source="../Test1.svg"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Local File 2</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 3. Load local SVG file -->
+                    <svgc:SvgViewbox Source="Test2.svg" TextAsGeometry="True"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Sub-Folder File</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 4. Load local sub-folder SVG file  -->
+                    <svgc:SvgViewbox Source="\SubFolder\Test3.svg"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Resource File</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 5. Load Resource SVG file -->
+                    <svgc:SvgViewbox Source="/Resources/Test.svg" Stretch="Uniform"/>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
