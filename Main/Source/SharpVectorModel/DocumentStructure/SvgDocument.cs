@@ -480,50 +480,50 @@ namespace SharpVectors.Dom.Svg
         /// <returns></returns>
         private object OnXmlResolverGettingEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
+            string fullPath = absoluteUri.ToString();
+            if (!String.IsNullOrEmpty(fullPath))
+            {
+                fullPath = fullPath.Replace('\\', '/');
+
+                if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Basic//EN", StringComparison.OrdinalIgnoreCase) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Basic/EN", StringComparison.OrdinalIgnoreCase))
+                {
+                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-basic.dtd");
+                    if (resourceUri != null)
+                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                }                            
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1//EN", StringComparison.OrdinalIgnoreCase) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1/EN", StringComparison.OrdinalIgnoreCase))
+                {
+                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11.dtd");
+                    if (resourceUri != null)
+                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                }
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Full//EN", StringComparison.OrdinalIgnoreCase) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Full/EN", StringComparison.OrdinalIgnoreCase))
+                {
+                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11.dtd");
+                    if (resourceUri != null)
+                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                }
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.0//EN", StringComparison.OrdinalIgnoreCase) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.0/EN", StringComparison.OrdinalIgnoreCase))
+                {
+                    string resourceUri = GetEntityUri("www.w3.org.TR.2001.REC-SVG-20010904.DTD.svg10.dtd");
+                    if (resourceUri != null)
+                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                }
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Tiny//EN", StringComparison.OrdinalIgnoreCase) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Tiny/EN", StringComparison.OrdinalIgnoreCase))
+                {
+                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-tiny.dtd");
+                    if (resourceUri != null)
+                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                }
+            }                    
+
             if (absoluteUri.IsFile)
             {
-                string fullPath = absoluteUri.ToString();
-                if (!String.IsNullOrEmpty(fullPath))
-                {
-                    fullPath = fullPath.Replace('\\', '/');
-
-                    if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Basic//EN", StringComparison.OrdinalIgnoreCase) ||
-                        fullPath.EndsWith("-/W3C/DTD SVG 1.1 Basic/EN", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-basic.dtd");
-                        if (resourceUri != null)
-                            return GetEntityFromUri(resourceUri, ofObjectToReturn);
-                    }                            
-                    else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1//EN", StringComparison.OrdinalIgnoreCase) ||
-                        fullPath.EndsWith("-/W3C/DTD SVG 1.1/EN", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11.dtd");
-                        if (resourceUri != null)
-                            return GetEntityFromUri(resourceUri, ofObjectToReturn);
-                    }
-                    else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Full//EN", StringComparison.OrdinalIgnoreCase) ||
-                        fullPath.EndsWith("-/W3C/DTD SVG 1.1 Full/EN", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11.dtd");
-                        if (resourceUri != null)
-                            return GetEntityFromUri(resourceUri, ofObjectToReturn);
-                    }
-                    else if (fullPath.EndsWith("-//W3C//DTD SVG 1.0//EN", StringComparison.OrdinalIgnoreCase) ||
-                        fullPath.EndsWith("-/W3C/DTD SVG 1.0/EN", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string resourceUri = GetEntityUri("www.w3.org.TR.2001.REC-SVG-20010904.DTD.svg10.dtd");
-                        if (resourceUri != null)
-                            return GetEntityFromUri(resourceUri, ofObjectToReturn);
-                    }
-                    else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Tiny//EN", StringComparison.OrdinalIgnoreCase) ||
-                        fullPath.EndsWith("-/W3C/DTD SVG 1.1 Tiny/EN", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-tiny.dtd");
-                        if (resourceUri != null)
-                            return GetEntityFromUri(resourceUri, ofObjectToReturn);
-                    }
-                }                    
-
                 return null;
             }
 
@@ -536,7 +536,7 @@ namespace SharpVectors.Dom.Svg
         }
 
         /// <summary>
-        /// Gettings the URI direct.
+        /// Gets the URI direct.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="ofObjectToReturn">The of object to return.</param>

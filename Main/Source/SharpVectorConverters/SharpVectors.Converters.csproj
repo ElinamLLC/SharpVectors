@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImageEncoderType.cs" />
+    <Compile Include="StreamSvgConverter.cs" />
     <Compile Include="Utils\DirectoryCopier.cs" />
     <Compile Include="Utils\DirectoryUtils.cs" />
     <Compile Include="FileSvgConverter.cs" />

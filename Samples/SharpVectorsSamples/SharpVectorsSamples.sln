@@ -17,7 +17,47 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSvgReaderSample", "File
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FileSvgReaderSampleVB", "FileSvgReaderSampleVB\FileSvgReaderSampleVB.vbproj", "{E9055EAA-F500-4B4F-9241-61ADB234D98E}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "StreamSvgConverterSampleVB", "StreamSvgConverterSampleVB\StreamSvgConverterSampleVB.vbproj", "{5BD8A2AD-3779-4B3F-B245-E81430720C44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamSvgConverterSample", "StreamSvgConverterSample\StreamSvgConverterSample.csproj", "{E098CA8F-AF40-44E4-8523-579CA45CAB5F}"
+EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS13
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = FileSvgConverterSample\\FileSvgConverterSample.csproj
+		SccProjectName1 = FileSvgConverterSample
+		SccLocalPath1 = FileSvgConverterSample
+		SccProjectUniqueName2 = DirectorySvgConverterSample\\DirectorySvgConverterSample.csproj
+		SccProjectName2 = DirectorySvgConverterSample
+		SccLocalPath2 = DirectorySvgConverterSample
+		SccProjectUniqueName3 = DirectorySvgConverterSampleVB\\DirectorySvgConverterSampleVB.vbproj
+		SccProjectName3 = DirectorySvgConverterSampleVB
+		SccLocalPath3 = DirectorySvgConverterSampleVB
+		SccProjectUniqueName4 = FileSvgConverterSampleVB\\FileSvgConverterSampleVB.vbproj
+		SccProjectName4 = FileSvgConverterSampleVB
+		SccLocalPath4 = FileSvgConverterSampleVB
+		SccProjectUniqueName5 = ImageSvgConverterSample\\ImageSvgConverterSample.csproj
+		SccProjectName5 = ImageSvgConverterSample
+		SccLocalPath5 = ImageSvgConverterSample
+		SccProjectUniqueName6 = ImageSvgConverterSampleVB\\ImageSvgConverterSampleVB.vbproj
+		SccProjectName6 = ImageSvgConverterSampleVB
+		SccLocalPath6 = ImageSvgConverterSampleVB
+		SccProjectUniqueName7 = FileSvgReaderSample\\FileSvgReaderSample.csproj
+		SccProjectName7 = FileSvgReaderSample
+		SccLocalPath7 = FileSvgReaderSample
+		SccProjectUniqueName8 = FileSvgReaderSampleVB\\FileSvgReaderSampleVB.vbproj
+		SccProjectName8 = FileSvgReaderSampleVB
+		SccLocalPath8 = FileSvgReaderSampleVB
+		SccProjectUniqueName9 = StreamSvgConverterSampleVB\\StreamSvgConverterSampleVB.vbproj
+		SccProjectName9 = StreamSvgConverterSampleVB
+		SccLocalPath9 = StreamSvgConverterSampleVB
+		SccProjectUniqueName10 = StreamSvgConverterSample\\StreamSvgConverterSample.csproj
+		SccProjectName10 = StreamSvgConverterSample
+		SccLocalPath10 = StreamSvgConverterSample
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -55,6 +95,14 @@ Global
 		{E9055EAA-F500-4B4F-9241-61ADB234D98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9055EAA-F500-4B4F-9241-61ADB234D98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9055EAA-F500-4B4F-9241-61ADB234D98E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD8A2AD-3779-4B3F-B245-E81430720C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD8A2AD-3779-4B3F-B245-E81430720C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD8A2AD-3779-4B3F-B245-E81430720C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD8A2AD-3779-4B3F-B245-E81430720C44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E098CA8F-AF40-44E4-8523-579CA45CAB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E098CA8F-AF40-44E4-8523-579CA45CAB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E098CA8F-AF40-44E4-8523-579CA45CAB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E098CA8F-AF40-44E4-8523-579CA45CAB5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

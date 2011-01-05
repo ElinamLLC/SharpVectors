@@ -19,7 +19,17 @@ Class MainWindow
 
         If (drawing IsNot Nothing) Then
             svgImage.Source = New DrawingImage(drawing)
+
+            Dim textWriter As StringWriter = New StringWriter()
+
+            If converter.Save(textWriter) Then
+                svgBox.Text = textWriter.ToString()
+            End If
+
+            textWriter.Close()
+
         End If
+
     End Sub
 
 End Class
