@@ -402,6 +402,38 @@ namespace SharpVectors.Converters
             return savedResult;
         }
 
+        public bool Save(TextWriter textWriter)
+        {
+            if (textWriter == null)
+            {
+                throw new ArgumentNullException("textWriter",
+                    "The text writer parameter is required and cannot be null (or Nothing).");
+            }  
+            if (_drawing == null)
+            {
+                throw new InvalidOperationException(
+                    "There is no converted drawing for the saving operation.");
+            }
+
+            return this.SaveFile(textWriter);
+        }
+
+        public bool Save(Stream stream)
+        {
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream",
+                    "The stream parameter is required and cannot be null (or Nothing).");
+            }  
+            if (_drawing == null)
+            {
+                throw new InvalidOperationException(
+                    "There is no converted drawing for the saving operation.");
+            }
+
+            return this.SaveFile(stream);
+        }
+
         #endregion
 
         #region Load Method
@@ -516,6 +548,112 @@ namespace SharpVectors.Converters
         #endregion
 
         #region SaveFile Method
+
+        private bool SaveFile(Stream stream)
+        {
+            _writerErrorOccurred = false;
+
+            if (this.UseFrameXamlWriter)
+            {
+                XmlWriterSettings writerSettings = new XmlWriterSettings();
+                writerSettings.Indent = true;
+                writerSettings.OmitXmlDeclaration = true;
+                writerSettings.Encoding = Encoding.UTF8;
+                using (XmlWriter writer = XmlWriter.Create(
+                    stream, writerSettings))
+                {
+                    System.Windows.Markup.XamlWriter.Save(
+                        _drawing, writer);
+                }
+            }
+            else
+            {
+                try
+                {
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
+                        this.DrawingSettings);
+
+                    xamlWriter.Save(_drawing, stream);
+                }
+                catch
+                {
+                    _writerErrorOccurred = true;
+
+                    if (_fallbackOnWriterError)
+                    {
+                        XmlWriterSettings writerSettings = new XmlWriterSettings();
+                        writerSettings.Indent = true;
+                        writerSettings.OmitXmlDeclaration = true;
+                        writerSettings.Encoding = Encoding.UTF8;
+                        using (XmlWriter writer = XmlWriter.Create(
+                            stream, writerSettings))
+                        {
+                            System.Windows.Markup.XamlWriter.Save(
+                                _drawing, writer);
+                        }
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private bool SaveFile(TextWriter textWriter)
+        {
+            _writerErrorOccurred = false;
+
+            if (this.UseFrameXamlWriter)
+            {
+                XmlWriterSettings writerSettings = new XmlWriterSettings();
+                writerSettings.Indent = true;
+                writerSettings.OmitXmlDeclaration = true;
+                writerSettings.Encoding = Encoding.UTF8;
+                using (XmlWriter writer = XmlWriter.Create(
+                    textWriter, writerSettings))
+                {
+                    System.Windows.Markup.XamlWriter.Save(
+                        _drawing, writer);
+                }
+            }
+            else
+            {
+                try
+                {
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
+                        this.DrawingSettings);
+
+                    xamlWriter.Save(_drawing, textWriter);
+                }
+                catch
+                {
+                    _writerErrorOccurred = true;
+
+                    if (_fallbackOnWriterError)
+                    {
+                        XmlWriterSettings writerSettings = new XmlWriterSettings();
+                        writerSettings.Indent = true;
+                        writerSettings.OmitXmlDeclaration = true;
+                        writerSettings.Encoding = Encoding.UTF8;
+                        using (XmlWriter writer = XmlWriter.Create(
+                            textWriter, writerSettings))
+                        {
+                            System.Windows.Markup.XamlWriter.Save(
+                                _drawing, writer);
+                        }
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return true;
+        }
 
         private bool SaveFile(string fileName)
         {

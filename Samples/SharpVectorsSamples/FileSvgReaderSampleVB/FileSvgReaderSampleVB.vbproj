@@ -13,6 +13,10 @@
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
     <OptionInfer>On</OptionInfer>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,6 +104,7 @@
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.IO" />
     <Import Include="System.Windows" />
     <Import Include="System.Windows.Controls" />
     <Import Include="System.Windows.Media" />

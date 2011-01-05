@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 using System.Windows;
 using System.Windows.Media;
@@ -37,6 +38,15 @@ namespace FileSvgReaderSample
             if (drawing != null)
             {
                 svgImage.Source = new DrawingImage(drawing);
+
+                using (StringWriter textWriter = new StringWriter())
+                {
+                    if (converter.Save(textWriter))
+                    {
+                        svgBox.Text = textWriter.ToString();
+                    }
+                }
+
             }
         }
     }

@@ -1,8 +1,15 @@
 ﻿<Window x:Class="FileSvgReaderSample.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="SvgReader Test Sample" Height="460" Width="620" WindowStartupLocation="CenterScreen" SizeToContent="Manual" Loaded="OnWindowLoaded">
+    Title="Svg Reader Test Sample - C#" Height="460" Width="620" WindowStartupLocation="CenterScreen" SizeToContent="Manual" Loaded="OnWindowLoaded">
     <DockPanel LastChildFill="True">
-        <Image Name="svgImage" Stretch="Uniform"/>
+        <TabControl>
+            <TabItem Header="Drawing">                
+                <Image Name="svgImage" Stretch="Uniform"/>
+            </TabItem>
+            <TabItem Header="XAML">
+                <TextBox Name="svgBox" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
