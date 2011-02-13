@@ -154,8 +154,8 @@
         <test source="pservers-grad-01-b.svg" title="pservers-grad-01-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on linear, radial gradients and patterns." />
         <test source="pservers-grad-02-b.svg" title="pservers-grad-02-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on linear, radial gradients and patterns." />
         <test source="pservers-grad-03-b.svg" title="pservers-grad-03-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on patterns." />
-        <test source="pservers-grad-04-b.svg" title="pservers-grad-04-b" state="partial" comment="The linear gradient support is not complete." description="Test that checks the capability of the stop element in linear and radial gradients." />
-        <test source="pservers-grad-05-b.svg" title="pservers-grad-05-b" state="partial" comment="The linear gradient support is not complete." description="Test that checks the capability of the stop opacity in linear and radial gradients." />
+        <test source="pservers-grad-04-b.svg" title="pservers-grad-04-b" state="success" comment="" description="Test that checks the capability of the stop element in linear and radial gradients." />
+        <test source="pservers-grad-05-b.svg" title="pservers-grad-05-b" state="success" comment="" description="Test that checks the capability of the stop opacity in linear and radial gradients." />
         <test source="pservers-grad-06-b.svg" title="pservers-grad-06-b" state="success" comment="" description="Test that the viewer can handle the gradientTransform and the patternTransform attribute on gradients and patterns respectively." />
         <test source="pservers-grad-07-b.svg" title="pservers-grad-07-b" state="success" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects &#x9;. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following&#x9;properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-08-b.svg" title="pservers-grad-08-b" state="partial" comment="The SVG Font is not supported." description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
@@ -168,8 +168,8 @@
         <test source="pservers-grad-15-b.svg" title="pservers-grad-15-b" state="success" comment="" description="" />
         <test source="pservers-grad-16-b.svg" title="pservers-grad-16-b" state="partial" comment="" description="" />
         <test source="pservers-grad-17-b.svg" title="pservers-grad-17-b" state="partial" comment="" description="" />
-        <test source="pservers-grad-18-b.svg" title="pservers-grad-18-b" state="partial" comment="The linear gradient support is not complete." description="" />
-        <test source="pservers-grad-19-b.svg" title="pservers-grad-19-b" state="partial" comment="The linear gradient support is not complete." description="" />
+        <test source="pservers-grad-18-b.svg" title="pservers-grad-18-b" state="success" comment="" description="" />
+        <test source="pservers-grad-19-b.svg" title="pservers-grad-19-b" state="partial" comment="The animateColor element is not supported." description="" />
         <test source="pservers-pattern-01-b.svg" title="pservers-pattern-01-b" state="success" comment="" description="Test that the viewer has basic capability to handle patterns on fills and stroke of objects and text." />
     </category>
     <category label="Painting Fill">
@@ -273,7 +273,7 @@
         <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="failure" comment="" description="Test the creation of symbol elements and the instantiation by the use element" />
         <test source="struct-use-01-t.svg" title="struct-use-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font sizes" />
         <test source="struct-use-03-t.svg" title="struct-use-03-t" state="success" comment="" description="Tests proper handling of x/y/width/height attributes on the &lt;use&gt; element" />
-        <test source="struct-use-05-b.svg" title="struct-use-05-b" state="partial" comment="The Linear Gradient support is not complete." description="Tests external references and computed inherited values" />
+        <test source="struct-use-05-b.svg" title="struct-use-05-b" state="success" comment="" description="Tests external references and computed inherited values" />
     </category>
     <category label="Styling">
         <test source="styling-css-01-b.svg" title="styling-css-01-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />

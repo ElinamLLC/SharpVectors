@@ -7,21 +7,21 @@ namespace SharpVectors.Dom.Svg
 	/// display markers.
 	/// </summary>
 	/// <remarks>
-	/// <p>
+	/// <para>
 	/// A marker is a symbol which is attached to one or more vertices of
 	/// some Svg elements.  In order for a marker to be drawn correctly,
 	/// its orientation and position needs to be known.
-	/// See <a href="http://www.w3.org/TR/SVG/painting.html"
-	/// >SVG 1.0 Masking - Establishing A New Clipping Path</a>
-	/// </p>
-	/// <p>
+    /// See <see href="http://www.w3.org/TR/SVG/painting.html"
+    /// >SVG 1.0 Masking - Establishing A New Clipping Path</see>
+	/// </para>
+	/// <para>
 	/// This interface provides the information required to calculate the
 	/// orientation and position for each marker of an Svg element.
-	/// </p>
-	/// <p>
+	/// </para>
+	/// <para>
 	/// To give an Svg element the capability to draw markers, let the Svg
 	/// element implement this interface.
-	/// </p>
+	/// </para>
 	/// </remarks>
 	public interface ISharpMarkerHost
 	{

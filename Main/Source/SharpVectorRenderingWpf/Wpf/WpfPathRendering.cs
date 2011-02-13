@@ -78,7 +78,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 string fileValue = styleElm.GetAttribute("fill");
 
-                Brush brush = fillPaint.GetBrush();
+                Brush brush = fillPaint.GetBrush(geometry);
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
                 Pen pen = strokePaint.GetPen();
@@ -95,6 +95,13 @@ namespace SharpVectors.Renderers.Wpf
                             if (brushTransform == null || brushTransform == Transform.Identity)
                             {
                                 brush.Transform = transform;
+                            }
+                            else
+                            {
+                                TransformGroup groupTransform = new TransformGroup();
+                                groupTransform.Children.Add(brushTransform);
+                                groupTransform.Children.Add(transform);
+                                brush.Transform = groupTransform;
                             }
                         }
                     }

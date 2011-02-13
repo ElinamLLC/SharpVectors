@@ -99,7 +99,7 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        public bool IsInherited(string propertyName)
+        public bool IsInheritable(string propertyName)
         {
             if (_properties.ContainsKey(propertyName))
             {
@@ -111,9 +111,9 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        public void Add(string propertyName, bool isInherited, string initialValue)
+        public void Add(string propertyName, bool isInheritable, string initialValue)
         {
-            _properties.Add(propertyName, new CssProperty(isInherited, initialValue));
+            _properties.Add(propertyName, new CssProperty(isInheritable, initialValue));
         }
 
         #endregion
@@ -166,8 +166,8 @@ namespace SharpVectors.Dom.Css
             Add("overflow", false, "visible");
             Add("pointer-events", true, "visiblePainted");
             Add("shape-rendering", true, "auto");
-            Add("stop-color", false, "black");
-            Add("stop-opacity", false, "1");
+            Add("stop-color", true, "black");
+            Add("stop-opacity", true, "1");
             Add("stroke", true, "none");
             Add("stroke-dasharray", true, "none");
             Add("stroke-dashoffset", true, "0");

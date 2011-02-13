@@ -47,15 +47,30 @@ namespace SharpVectors.Renderers.Wpf
 
         public Brush GetBrush()
         {
-            return GetBrush("fill", true);
+            return GetBrush(null, "fill", true);
         }
 
         public Brush GetBrush(bool setOpacity)
         {
-            return GetBrush("fill", setOpacity);
+            return GetBrush(null, "fill", setOpacity);
+        }
+
+        public Brush GetBrush(Geometry geometry)
+        {
+            return GetBrush(geometry, "fill", true);
+        }
+
+        public Brush GetBrush(Geometry geometry, bool setOpacity)
+        {
+            return GetBrush(geometry, "fill", setOpacity);
         }
 
         public Pen GetPen()
+        {
+            return this.GetPen(null);
+        }
+
+        public Pen GetPen(Geometry geometry)
         {
             double strokeWidth = GetStrokeWidth();
             if (strokeWidth == 0) 
@@ -75,10 +90,11 @@ namespace SharpVectors.Renderers.Wpf
                 stroke = this;
             }
 
-            Pen pen = new Pen(stroke.GetBrush("stroke", true), strokeWidth);
+            Pen pen = new Pen(stroke.GetBrush(geometry, "stroke", true), 
+                strokeWidth);
 
-            pen.StartLineCap = pen.EndLineCap = GetLineCap();
-            pen.LineJoin     = GetLineJoin();
+            pen.StartLineCap  = pen.EndLineCap = GetLineCap();
+            pen.LineJoin      = GetLineJoin();
             double miterLimit = GetMiterLimit(strokeWidth);
             if (miterLimit > 0)
             {
@@ -301,7 +317,8 @@ namespace SharpVectors.Renderers.Wpf
             return WpfFill.CreateFill(_element.OwnerDocument, absoluteUri);
         }
 
-        private Brush GetBrush(string propPrefix, bool setOpacity)
+        private Brush GetBrush(Geometry geometry, string propPrefix, 
+            bool setOpacity)
         {
             SvgPaint fill;
             if (PaintType == SvgPaintType.None)
@@ -325,7 +342,15 @@ namespace SharpVectors.Renderers.Wpf
                 _paintFill = GetPaintFill(fill.Uri);
                 if (_paintFill != null)
                 {
-                    Brush brush = _paintFill.GetBrush(_context);
+                    Brush brush = null;
+                    if (geometry != null)
+                    {
+                        brush = _paintFill.GetBrush(geometry.Bounds, _context);
+                    }
+                    else
+                    {
+                        brush = _paintFill.GetBrush(Rect.Empty, _context);
+                    }
 
                     if (brush != null)
                     {

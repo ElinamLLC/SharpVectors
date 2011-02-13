@@ -98,12 +98,12 @@ namespace SharpVectors.Dom.Svg
 			SetColor(SvgColorType.RgbColor, rgbColor, String.Empty);
 		}
 		
-		public void SetRgbColorIccColor (string rgbColor, string iccColor )
+		public void SetRgbColorIccColor(string rgbColor, string iccColor )
 		{
 			SetColor(SvgColorType.RgbColorIccColor, rgbColor, iccColor);
 		}
 
-		public void SetColor (SvgColorType colorType, string rgbColor, string iccColor )
+		public void SetColor(SvgColorType colorType, string rgbColor, string iccColor )
 		{
 			_colorType = colorType;
 			if (rgbColor != null && rgbColor.Length > 0)

@@ -81,7 +81,7 @@ namespace SharpVectors.Dom.Svg
         /// corresponds to this 'svg' element.
         /// </summary>
         /// <remarks>
-        /// <p>
+        /// <para>
         /// When the user agent is
         /// actually rendering the content, then the position and size values
         /// represent the actual values when rendering. The position and size
@@ -96,10 +96,10 @@ namespace SharpVectors.Dom.Svg
         /// specification.) If the parent element does not have a coordinate
         /// system, then the user agent should provide reasonable default
         /// values for this attribute.
-        /// </p>
-        /// <p>
+        /// </para>
+        /// <para>
         /// The object itself and its contents are both readonly.
-        /// </p>
+        /// </para>
         /// </remarks>
         ISvgRect Viewport
         {
@@ -156,8 +156,8 @@ namespace SharpVectors.Dom.Svg
         /// "standard" view (i.e., based on attributes on the 'svg' element
         /// such as fitBoxToViewport) or to a "custom" view (i.e., a
         /// hyperlink into a particular 'view' or other element - see
-        /// <a href="http://www.w3.org/TR/SVG/linking.html#LinksIntoSVG"
-        /// >Linking into SVG content: URI fragments and SVG views</a>). If
+        /// <see href="http://www.w3.org/TR/SVG/linking.html#LinksIntoSVG"
+        /// >Linking into SVG content: URI fragments and SVG views</see>). If
         /// the initial view is the "standard" view, then this attribute is
         /// false. If the initial view is a "custom" view, then this
         /// attribute is true.
@@ -246,9 +246,9 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// This attribute indicates the current scale factor relative to
         /// the initial view to take into account user magnification and
-        /// panning operations, as described under <a
+        /// panning operations, as described under <see
         /// href="http://www.w3.org/TR/SVG/interact.html#ZoomAndPanAttribute"
-        /// >Magnification and panning</a>.
+        /// >Magnification and panning</see>.
         /// </summary>
         /// <remarks>
         /// DOM attributes currentScale and currentTranslate are

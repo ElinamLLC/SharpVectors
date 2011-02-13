@@ -32,7 +32,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Methods
 
-        public override Brush GetBrush(WpfDrawingContext context)
+        public override Brush GetBrush(Rect elementBounds, WpfDrawingContext context)
         {
             Rect bounds = new Rect(0, 0, 1, 1);
             Drawing image = GetImage(context);

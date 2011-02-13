@@ -100,10 +100,10 @@ namespace SharpVectors.Dom.Css
 			if (collectedStyles.ContainsKey(propertyName))
 			{
 				CssCollectedProperty scp = collectedStyles[propertyName];
-				if(scp.CssValue.CssValueType == CssValueType.Inherit)
+				if (scp.CssValue.CssValueType == CssValueType.Inherit)
 				{
 					// get style from parent chain
-					return getParentStyle(propertyName);
+                    return getParentStyle(propertyName);
 				}
 				else
 				{
@@ -114,7 +114,8 @@ namespace SharpVectors.Dom.Css
 			{
 				// should this property inherit?
 				CssXmlDocument doc = (CssXmlDocument)_element.OwnerDocument;
-				if(doc.CssPropertyProfile.IsInherited(propertyName))
+
+				if (doc.CssPropertyProfile.IsInheritable(propertyName))
 				{
 					ICssValue parValue = getParentStyle(propertyName);
 					if(parValue != null)
@@ -124,7 +125,7 @@ namespace SharpVectors.Dom.Css
 				}
 
 				string initValue = doc.CssPropertyProfile.GetInitialValue(propertyName);
-				if(initValue == null)
+				if (initValue == null)
 				{
 					return null;
 				}
