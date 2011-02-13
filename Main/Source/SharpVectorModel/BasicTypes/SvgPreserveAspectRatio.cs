@@ -19,6 +19,7 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Constructors
+
         public SvgPreserveAspectRatio(string attr, SvgElement ownerElement)
         {
             this.ownerElement = ownerElement;
@@ -62,7 +63,6 @@ namespace SharpVectors.Dom.Svg
             }
             else
             {
-                //TODO--PAUL: align = SvgPreserveAspectRatioType.XMidYMid;
                 _alignment = SvgPreserveAspectRatioType.XMidYMid;
             }
 

@@ -12,8 +12,7 @@ namespace SharpVectors.Dom.Svg
 	}
 
 	public abstract class SvgGradientElement : SvgStyleableElement, ISvgGradientElement
-    {
-
+    {  
         private ISvgAnimatedEnumeration gradientUnits;
         private ISvgAnimatedEnumeration spreadMethod;
         private ISvgAnimatedTransformList gradientTransform;

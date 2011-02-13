@@ -32,7 +32,7 @@ namespace SharpVectors.Net
 		#endregion
 
 		#region Constructors
-		internal ExtendedHttpWebRequest(Uri uri)
+		public ExtendedHttpWebRequest(Uri uri)
 		{
 			requestUri = uri;
 		}

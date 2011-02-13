@@ -66,8 +66,8 @@ namespace SharpVectors.Renderers.Gdi
 
             Pen pen = new Pen(stroke.GetBrush(gp, "stroke"), strokeWidth);
 
-            pen.StartCap = pen.EndCap = GetLineCap();
-            pen.LineJoin = GetLineJoin();
+            pen.StartCap   = pen.EndCap = GetLineCap();
+            pen.LineJoin   = GetLineJoin();
             pen.MiterLimit = GetMiterLimit();
 
             float[] fDashArray = GetDashArray(strokeWidth);

@@ -7,6 +7,8 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Net;
+
+using SharpVectors.Net;
 using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Stylesheets
@@ -168,7 +170,8 @@ namespace SharpVectors.Dom.Stylesheets
 
 		internal void LoadSheet()
 		{
-			WebRequest request = (WebRequest)WebRequest.Create(AbsoluteHref);
+			//WebRequest request = (WebRequest)WebRequest.Create(AbsoluteHref);
+            WebRequest request = new ExtendedHttpWebRequest(AbsoluteHref);
 			TriedDownload = true;
 			try
 			{

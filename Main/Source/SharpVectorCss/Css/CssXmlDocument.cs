@@ -7,6 +7,7 @@ using System.Net;
 using System.Xml;
 using System.Collections.Generic;
 
+using SharpVectors.Net;
 using SharpVectors.Xml;
 using SharpVectors.Dom.Stylesheets;
 
@@ -40,7 +41,7 @@ namespace SharpVectors.Dom.Css
         {
             setupNodeChangeListeners();
 
-            SharpVectors.Net.ExtendedHttpWebRequest.Register();
+            //SharpVectors.Net.ExtendedHttpWebRequest.Register();
             SharpVectors.Net.DataWebRequest.Register();
         }
 
@@ -53,7 +54,7 @@ namespace SharpVectors.Dom.Css
         {
             setupNodeChangeListeners();
 
-            SharpVectors.Net.ExtendedHttpWebRequest.Register();
+            //SharpVectors.Net.ExtendedHttpWebRequest.Register();
             SharpVectors.Net.DataWebRequest.Register();
         }
 
@@ -206,7 +207,8 @@ namespace SharpVectors.Dom.Css
 
         public WebResponse GetResource(Uri absoluteUri)
         {
-            WebRequest request = WebRequest.Create(absoluteUri);
+            //WebRequest request = WebRequest.Create(absoluteUri);
+            WebRequest request = new ExtendedHttpWebRequest(absoluteUri);
             WebResponse response = request.GetResponse();
 
             return response;

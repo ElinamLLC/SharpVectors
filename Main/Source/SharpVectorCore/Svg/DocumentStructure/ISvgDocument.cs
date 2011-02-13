@@ -7,18 +7,18 @@ namespace SharpVectors.Dom.Svg
 	/// The root object in the document object hierarchy of an Svg document.
 	/// </summary>
 	/// <remarks>
-	/// <p>
+	/// <para>
 	/// When an 'svg'  element is embedded inline as a component of a
 	/// document from another namespace, such as when an 'svg' element is
 	/// embedded inline within an XHTML document
-	/// [<a href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</a>],
+    /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>],
 	/// then an
 	/// <see cref="ISvgDocument">ISvgDocument</see> object will not exist;
 	/// instead, the root object in the
 	/// document object hierarchy will be a Document object of a different
 	/// type, such as an HTMLDocument object.
-	/// </p>
-	/// <p>
+	/// </para>
+	/// <para>
 	/// However, an <see cref="ISvgDocument">ISvgDocument</see> object will
 	/// indeed exist when the root
 	/// element of the XML document hierarchy is an 'svg' element, such as
@@ -26,8 +26,8 @@ namespace SharpVectors.Dom.Svg
 	/// "image/svg+xml"). In this case, the
 	/// <see cref="ISvgDocument">ISvgDocument</see> object will be the
 	/// root object of the document object model hierarchy.
-	/// </p>
-	/// <p>
+	/// </para>
+	/// <para>
 	/// In the case where an SVG document is embedded by reference, such as
 	/// when an XHTML document has an 'object' element whose href attribute
 	/// references an SVG document (i.e., a document whose MIME type is
@@ -37,15 +37,15 @@ namespace SharpVectors.Dom.Svg
 	/// second DOM hierarchy will be for the referenced SVG document. In this
 	/// second DOM hierarchy, the root object of the document object model
 	/// hierarchy is an <see cref="ISvgDocument">ISvgDocument</see> object.
-	/// </p>
-	/// <p>
+	/// </para>
+	/// <para>
 	/// The <see cref="ISvgDocument">ISvgDocument</see> interface contains a
 	/// similar list of attributes and
 	/// methods to the HTMLDocument interface described in the
-	/// <a href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html">Document
-	/// Object Model (HTML) Level 1</a> chapter of the
-	/// [<a href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</a>] specification.
-	/// </p>
+    /// <see href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html">Document
+    /// Object Model (HTML) Level 1</see> chapter of the
+    /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</see>] specification.
+	/// </para>
 	/// </remarks>
 	public interface ISvgDocument : IDocument
 	{

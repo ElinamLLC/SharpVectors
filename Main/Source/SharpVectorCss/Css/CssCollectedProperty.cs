@@ -7,10 +7,12 @@ namespace SharpVectors.Dom.Css
 	/// <summary>
 	/// Used internally to store collected properties.
 	/// </summary>
-	public class CssCollectedProperty
-	{
-		#region Constructors
-		internal CssCollectedProperty(string name, int specificity, CssValue cssValue, CssStyleSheetType origin, string priority)
+	public sealed class CssCollectedProperty
+    {
+        #region Constructors
+
+        public CssCollectedProperty(string name, int specificity, 
+            CssValue cssValue, CssStyleSheetType origin, string priority)
 		{
 			Name = name;
 			Specificity = specificity;
@@ -18,9 +20,11 @@ namespace SharpVectors.Dom.Css
 			CssValue = cssValue;
 			Priority = priority;
 		}
+
 		#endregion
 
 		#region Public properties
+
 		/// <summary>
 		/// The name of the property
 		/// </summary>
@@ -41,9 +45,11 @@ namespace SharpVectors.Dom.Css
 		/// The priority of the property, e.g. "important"
 		/// </summary>
 		public string Priority;
+
 		#endregion
 
 		#region Internal methods
+
 		internal bool IsBetterThen(CssCollectedProperty existing)
 		{
 			bool yes = false;
@@ -114,6 +120,7 @@ namespace SharpVectors.Dom.Css
 
 			return yes;
 		}
+
 		#endregion
 	}
 

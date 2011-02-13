@@ -712,7 +712,7 @@ namespace SharpVectors.Renderers.Wpf
 
             Transform translateMatrix = null;
             Transform scaleMatrix     = null;
-            //if (translateX > 0 && translateY > 0)
+            if (translateX != 0 || translateY != 0)
             {
                 translateMatrix = new TranslateTransform(translateX, translateY);
             }
