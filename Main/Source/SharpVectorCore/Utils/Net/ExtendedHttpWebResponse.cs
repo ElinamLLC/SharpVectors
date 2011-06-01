@@ -4,7 +4,8 @@ using System.IO;
 
 namespace SharpVectors.Net
 {
-	public class ExtendedHttpWebResponse : WebResponse
+    [Serializable]
+    public sealed class ExtendedHttpWebResponse : WebResponse
 	{
 		private WebResponse response;
 		private Uri responseUri;

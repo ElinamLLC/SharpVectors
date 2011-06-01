@@ -1,0 +1,132 @@
+﻿<Page x:Class="SharpVectors.Converters.FileConverterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:SharpVectors.Converters"
+    Title="Files Converter Page" Height="518" Width="475" VerticalAlignment="Stretch" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="12">
+    <Page.Resources>
+        <Style x:Key="GroupBoxHeader" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="6 3 6 3" />
+            <Setter Property="Background" Value="DodgerBlue"/>
+            <Setter Property="TextBlock.Foreground" Value="White" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+    </Page.Resources>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Bottom" Margin="3 6 3 6" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="btnConvert" Content="Convert" Margin="3" 
+                    Padding="12 3 12 3" Click="OnConvertClick"/>
+        </StackPanel>
+        <GroupBox DockPanel.Dock="Bottom" Padding="3 6 6 3" Margin="6">
+            <GroupBox.Header>
+                <Border Style="{StaticResource GroupBoxHeader}">
+                    <TextBlock Text="Status"/>
+                </Border>
+            </GroupBox.Header>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Name="statusTitle" Padding="3" Text="Not Ready" FontWeight="Bold" 
+                           TextAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Name="statusText" Padding="3" TextAlignment="Center" TextWrapping="Wrap" 
+                           HorizontalAlignment="Stretch">
+                    Select an input SVG file for conversion.
+                </TextBlock>    
+            </StackPanel>
+        </GroupBox>
+        <Grid VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <TextBlock Text="File Conversion" Foreground="DodgerBlue" Padding="6" Margin="4" FontSize="32" FontWeight="Bold">               
+                    <TextBlock.BitmapEffect>
+                        <OuterGlowBitmapEffect GlowSize="4.0" GlowColor="DeepSkyBlue" Opacity="0.5"/>
+                    </TextBlock.BitmapEffect>
+                </TextBlock>
+                <local:CircularProgressBar x:Name="progressBar" DockPanel.Dock="Right" Height="32" StartupDelay="0" Foreground="DodgerBlue"/>
+            </DockPanel>
+            <TextBlock Grid.Row="1" Padding="6" TextWrapping="Wrap">            
+                <Run>
+                    This provides the conversion of Scalable Vector Graphics (SVG) files to 
+                    images and/or XAML (WPF only).
+                </Run>
+            </TextBlock>
+            <TextBlock Grid.Row="3" Text="Source File" FontWeight="Bold"/>
+            <DockPanel Grid.Row="4" LastChildFill="True" Margin="16 3 6 3">
+                <Button Name="btnSourceFile" DockPanel.Dock="Right" Content="Browse..." Click="OnSourceFileClick"/>
+                <AdornerDecorator>                    
+                    <TextBox Name="txtSourceFile" Padding="3" TextChanged="OnSourceOutputTextChanged" 
+                             Drop="OnSourceFileDrop" PreviewDragEnter="OnSourceFilePreviewDragEnter"
+                             PreviewDragOver="OnSourceFilePreviewDragOver">
+                        <local:WatermarkService.Watermark>
+                            <TextBlock Text="Type, browse to select or drag/drop an SVG file"/>
+                        </local:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+            </DockPanel>
+            <TextBlock Grid.Row="5" Text="Output Directory" FontWeight="Bold"/>
+            <DockPanel Grid.Row="6" LastChildFill="True" Margin="16 3 6 3">
+                <Button Name="btnOutputDir" DockPanel.Dock="Right" Content="Browse..." Click="OnOutputDirClick"/>
+                <AdornerDecorator>                    
+                    <TextBox Name="txtOutputDir" Padding="3" TextChanged="OnSourceOutputTextChanged">
+                        <local:WatermarkService.Watermark>
+                            <TextBlock Text="Type or browse to select the output directory"/>
+                        </local:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+            </DockPanel>
+            <TextBlock Grid.Row="7" Padding="16 3 16 3" TextWrapping="Wrap">            
+                <Bold>NOTE:</Bold>
+                <LineBreak/>
+                <InlineUIContainer>
+                    <Ellipse Width="12" Height="12">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFC8C8C8" Offset="0"/>
+                                <GradientStop Color="DodgerBlue" Offset="0.991"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </InlineUIContainer>                
+                <Run>
+                    If the output directory is not specified, the converted file
+                    will be saved in the same directory as the source file.
+                </Run>
+                <LineBreak/>
+                <InlineUIContainer>
+                    <Ellipse Width="12" Height="12">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFC8C8C8" Offset="0"/>
+                                <GradientStop Color="DodgerBlue" Offset="0.991"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </InlineUIContainer>                
+                <Run>If the source directory is</Run> <Bold>read-only</Bold> <Run>media or a</Run> <Bold>web file</Bold><Run>,</Run> <Run>the output directory is required.</Run>
+                <LineBreak/>
+                <InlineUIContainer>
+                    <Ellipse Width="12" Height="12">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFC8C8C8" Offset="0"/>
+                                <GradientStop Color="DodgerBlue" Offset="0.991"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </InlineUIContainer>                
+                <Run>
+                    If a file name is included, it will be treated as part of the directory.
+                </Run>
+            </TextBlock>
+        </Grid>
+    </DockPanel>
+</Page>

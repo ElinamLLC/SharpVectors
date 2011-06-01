@@ -1,16 +1,49 @@
 ﻿<Window x:Class="SharpVectors.Converters.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Main Window" Height="134" Width="618" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="12"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Button Name="btnStart" Grid.Row="0" VerticalAlignment="Top" Margin="6" Click="OnStartConversion">Start Conversion</Button>
-        <TextBlock Name="txtLabel" Text="Status:" HorizontalAlignment="Left" Margin="6" Grid.Row="2"/>
-        <TextBlock Name="txtMessage" HorizontalAlignment="Left" Margin="6" Grid.Row="3"/>
-    </Grid>
+    xmlns:local="clr-namespace:SharpVectors.Converters"
+    Title="SVG-WPF Converter" Height="640" Width="640" 
+    WindowStartupLocation="CenterScreen" Icon="/SharpVectors;component/Images/SharpVectors.ico">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="VerticalTab.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <Border Background="#FFE9ECEF" BorderBrush="LightGray" BorderThickness="1"
+                SnapsToDevicePixels="True" DockPanel.Dock="Bottom" Padding="3">
+            <DockPanel>                
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <local:CircularProgressBar x:Name="filesProgressBar" Margin="3 0 3 0" Height="24" StartupDelay="0" Foreground="DodgerBlue"/>
+                    <local:CircularProgressBar x:Name="filesListProgressBar" Margin="3 0 3 0" Height="24" StartupDelay="0" Foreground="DarkKhaki"/>
+                    <local:CircularProgressBar x:Name="dirsProgressBar" Margin="3 0 3 0" Height="24" StartupDelay="0" Foreground="SeaGreen"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Close" VerticalAlignment="Center" Padding="16 3 16 3" Click="OnClickClosed"/>            
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <TabControl Name="tabSteps" Template="{StaticResource VerticalTabControl}">
+            <local:VerticalTabItem Header="Start Page" FocusVisualStyle="{x:Null}">
+                <Frame Name="startupFrame" NavigationUIVisibility="Visible" Source="StartPage.xaml"/>
+            </local:VerticalTabItem>
+            <local:VerticalTabItem Header="Files" FocusVisualStyle="{x:Null}">
+                <Frame Name="filesFrame" NavigationUIVisibility="Visible"/>
+            </local:VerticalTabItem>
+            <local:VerticalTabItem Header="Files List" FocusVisualStyle="{x:Null}">
+                <Frame Name="filesListFrame" NavigationUIVisibility="Visible"/>
+            </local:VerticalTabItem>
+            <local:VerticalTabItem Header="Directories" FocusVisualStyle="{x:Null}">
+                <Frame Name="directoriesFrame" NavigationUIVisibility="Visible"/>
+            </local:VerticalTabItem>
+            <local:VerticalTabItem Header="Options" FocusVisualStyle="{x:Null}">
+                <Frame Name="optionsFrame" NavigationUIVisibility="Hidden"/>
+            </local:VerticalTabItem>
+            <local:VerticalTabItem Header="Help" FocusVisualStyle="{x:Null}">
+                <Frame Name="helpFrame" NavigationUIVisibility="Hidden" Source="HelpPage.xaml"/>
+            </local:VerticalTabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

@@ -14,7 +14,7 @@ using ComTypes = System.Runtime.InteropServices.ComTypes;
 
 namespace SharpVectors.Converters.Utils
 {
-    internal static class DirectoryUtils
+    public static class DirectoryUtils
     {
         private sealed class SafeFindHandle : SafeHandleZeroOrMinusOneIsInvalid
         {

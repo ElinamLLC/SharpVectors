@@ -122,7 +122,6 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -780,6 +779,8 @@
     <Compile Include="Utils\Casting.cs" />
     <Compile Include="Utils\Dom\DomException.cs" />
     <Compile Include="Utils\Dom\DomExceptionType.cs" />
+    <Compile Include="Utils\HttpEncoder.cs" />
+    <Compile Include="Utils\HttpUtility.cs" />
     <Compile Include="Utils\Net\CacheInfo.cs" />
     <Compile Include="Utils\Net\DataWebRequest.cs" />
     <Compile Include="Utils\Net\DataWebResponse.cs" />

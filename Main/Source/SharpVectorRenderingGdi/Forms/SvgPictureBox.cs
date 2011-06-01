@@ -445,6 +445,60 @@ namespace SharpVectors.Renderers.Forms
             InvalidateAndRender();
         }
 
+        private void DocumentZoomer(float Zint)
+        {
+
+            //String LocalScale = "";
+            //if (myXml.LastChild.Attributes["transform"] != null)
+            //{
+
+            //    LocalScale = myXml.LastChild.Attributes["transform"].Value;
+
+            //}
+
+            //else
+            //{
+
+            //    XmlAttribute scaxml = myXml.CreateAttribute("transform");
+
+            //    scaxml.Value = "scale(1.0)";
+
+            //    myXml.LastChild.Attributes.Append(scaxml);
+
+            //    LocalScale = "scale(1.0)";
+
+            //}
+
+            //string parsIt = LocalScale.Replace("scale(", "").Replace(")", "");
+
+            //string[] parts = parsIt.Split(',');
+
+            //float[] ops = new float[parts.Length];
+
+            //for (int i = 0; i < parts.Length; i++)
+            //{
+
+
+            //    ops[i] = float.Parse(parts[i]) + Zint;
+
+
+            //    if (ops[i] > 0)
+
+            //        LocalScale = ops[i].ToString() + ",";
+
+
+            //}
+
+            //LocalScale = LocalScale.Substring(0, LocalScale.Length - 1);
+
+            //LocalScale = "scale(" + LocalScale + ")";
+
+            //myXml.LastChild.Attributes["transform"].Value = LocalScale;
+
+            //SVGPicture.LoadXml(myXml.OuterXml);
+
+        }
+
         #endregion
 
         #region Scripting Methods and Properties

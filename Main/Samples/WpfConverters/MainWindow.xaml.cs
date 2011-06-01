@@ -1,127 +1,257 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.Generic;
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using System.Windows.Controls;
 
 namespace SharpVectors.Converters
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IObserver
     {
-        private const string StartedConversion   = "Started SVG to XAML/ZAML Conversion.";
-        private const string CompletedConversion = "Completed SVG to XAML/ZAML Conversion Successfully.";
+        #region Private Fields
 
-        private BackgroundWorker _worker;
-        private delegate void ProcessConversionHandler(TextBlock textBlock);
+        private int _startTabIndex;
+        private int _operationCount;
+        private bool _displayHelp;
+        private ConverterOptions _options;
+
+        private OptionsPage _optionsPage;
+        private FileConverterPage _filesPage;
+        private FileListConverterPage _filesListPage;
+        private DirectoryConverterPage _directoriesPage;
+
+        #endregion
+
+        #region Constructors and Destructor
 
         public MainWindow()
         {
             InitializeComponent();
 
-            this.Loaded += new RoutedEventHandler(OnWindowLoaded);
-            _worker = new BackgroundWorker();
+            this.MinWidth  = 640;
+            this.MinHeight = 700;
 
-            _worker.DoWork += new DoWorkEventHandler(OnWorkerDoWork);
-            _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnWorkerCompleted);
-            _worker.ProgressChanged += new ProgressChangedEventHandler(OnWorkerProgressChanged);            
-        }
+            this.Width     = 640;
+            this.Height    = 700;
 
-        private void OnWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-        }
+            _startTabIndex = 0;
 
-        private void OnWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            btnStart.IsEnabled = true;
-
-            if (e.Result != null)
+            _options = new ConverterOptions();
+            MainApplication theApp = (MainApplication)Application.Current;
+            Debug.Assert(theApp != null);
+            if (theApp != null)
             {
-                string resultText = e.Result.ToString();
-                if (String.Equals(resultText, CompletedConversion, StringComparison.OrdinalIgnoreCase))
+                ConverterCommandLines commandLines = theApp.CommandLines;
+                if (commandLines != null)
                 {
-                    txtMessage.Text = resultText;
-                    txtMessage.Background = Brushes.LightBlue;
+                    if (commandLines.IsEmpty)
+                    {
+                        IList<string> sources = commandLines.Arguments;
+                        _displayHelp = commandLines.ShowHelp || 
+                            (sources != null && sources.Count != 0);
+                    }
+                    else
+                    {
+                        _options.Update(commandLines);
+                    }
                 }
                 else
                 {
-                    txtMessage.Text = resultText;
-                    txtMessage.Background = Brushes.LightPink;
+                    _displayHelp = true;
+                }
+
+                if (!_displayHelp)
+                {
+                    string sourceFile = commandLines.SourceFile;
+                    if (!String.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
+                    {
+                        _startTabIndex = 1;
+                    }
+                    else
+                    {
+                        string sourceDir = commandLines.SourceDir;
+                        if (!String.IsNullOrEmpty(sourceDir) && Directory.Exists(sourceDir))
+                        {
+                            _startTabIndex = 3;
+                        }
+                        else
+                        {
+                            IList<string> sourceFiles = commandLines.SourceFiles;
+                            if (sourceFiles != null && sourceFiles.Count != 0)
+                            {
+                                _startTabIndex = 2;
+                            }
+                        }  
+                    }
+
                 }
             }
-            else
+
+            _filesPage = new FileConverterPage();
+            _filesPage.Options     = _options;
+            _filesPage.ParentFrame = filesFrame;
+            _filesPage.Subscribe(this);
+
+            filesFrame.Content = _filesPage;
+
+            _filesListPage = new FileListConverterPage();
+            _filesListPage.Options     = _options;
+            _filesListPage.ParentFrame = filesListFrame;
+            _filesListPage.Subscribe(this);
+
+            filesListFrame.Content = _filesListPage;
+
+            _directoriesPage = new DirectoryConverterPage();
+            _directoriesPage.Options     = _options;
+            _directoriesPage.ParentFrame = directoriesFrame;
+            _directoriesPage.Subscribe(this);
+
+            directoriesFrame.Content = _directoriesPage;
+
+            _optionsPage = new OptionsPage();
+            _optionsPage.Options = _options;
+
+            optionsFrame.Content = _optionsPage;
+
+            this.Loaded   += new RoutedEventHandler(OnWindowLoaded);
+            this.Unloaded += new RoutedEventHandler(OnWindowUnloaded);
+
+            this.Closing += new CancelEventHandler(OnWindowClosing);
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public bool DisplayHelp
+        {
+            get
             {
-                txtMessage.Text = CompletedConversion;                
+                return _displayHelp;
+            }
+            set
+            {
+                _displayHelp = value;
             }
         }
 
-        private void OnWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = (BackgroundWorker)sender;
+        #endregion
 
-            string sourceDir =
-                @"";
-
-            DirectoryInfo sourceInfo = new DirectoryInfo(sourceDir);
-
-            string destDir =
-                @"";
-
-            DirectoryInfo destInfo = new DirectoryInfo(destDir);
-
-            DirectorySvgConverter converter = new DirectorySvgConverter(null);
-
-            try
-            {
-                converter.SaveXaml = false;
-
-                converter.Convert(sourceInfo, destInfo);
-
-                e.Result = CompletedConversion;
-            }
-            catch (Exception ex)
-            {
-                //textBlock.Text = ex.Message;
-                //textBlock.Text = converter.ErrorFile;
-
-                e.Result = converter.ErrorFile;
-
-                MessageBox.Show(ex.ToString());
-            }                                  
-        }
-
-        private void OnStartConversion(object sender, RoutedEventArgs e)
-        {
-            txtMessage.Text       = StartedConversion;
-            txtMessage.Background = Brushes.LightBlue;
-
-            //ProcessConversionHandler handler =
-            //    new ProcessConversionHandler(ProcessConversion);
-            //this.Dispatcher.BeginInvoke(handler, DispatcherPriority.Background, txtMessage);
-            _worker.RunWorkerAsync();
-
-            btnStart.IsEnabled = false;
-        }
+        #region Private Event Handlers
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
+            if (_displayHelp)
+            {
+                TabItem helpItem = (TabItem)tabSteps.Items[5];
+                helpItem.IsSelected = true;
+                _displayHelp = false;
+            }
+            else
+            {
+                TabItem helpItem = (TabItem)tabSteps.Items[_startTabIndex];
+                helpItem.IsSelected = true;
+            }
+
+            tabSteps.Focus();
         }
 
-        private static void ProcessConversion(TextBlock textBlock)
+        private void OnWindowUnloaded(object sender, RoutedEventArgs e)
         {
         }
+
+        private void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (_operationCount > 0)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    builder.AppendLine("Conversion process is running on the background.");
+                    builder.AppendLine("Do you want to stop the conversion process and close this application?");
+                    MessageBoxResult boxResult = MessageBox.Show(builder.ToString(), this.Title, 
+                        MessageBoxButton.YesNo, MessageBoxImage.Warning, 
+                        MessageBoxResult.No);
+
+                    if (boxResult == MessageBoxResult.No)
+                    {
+                        e.Cancel = false;
+                        return;
+                    }
+
+                    if (_filesPage != null)
+                    {
+                        _filesPage.Cancel();
+                    }
+                    if (_filesListPage != null)
+                    {
+                        _filesListPage.Cancel();
+                    }
+                    if (_directoriesPage != null)
+                    {
+                        _directoriesPage.Cancel();
+                    }
+                }
+            }
+            catch
+            {                	
+            }
+        }
+
+        private void OnClickClosed(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+
+        #region IObserver Members
+
+        public void OnStarted(IObservable sender)
+        {
+            _operationCount++;
+
+            if (sender == _filesPage)
+            {
+                filesProgressBar.Visibility = Visibility.Visible;
+            }
+            else if (sender == _filesListPage)
+            {
+                filesListProgressBar.Visibility = Visibility.Visible;
+            }
+            else if (sender == _directoriesPage)
+            {
+                dirsProgressBar.Visibility = Visibility.Visible;
+            }
+        }
+
+        public void OnCompleted(IObservable sender, bool isSuccessful)
+        {
+            _operationCount--;
+            Debug.Assert(_operationCount >= 0);
+
+            if (sender == _filesPage)
+            {
+                filesProgressBar.Visibility = Visibility.Hidden;
+            }
+            else if (sender == _filesListPage)
+            {
+                filesListProgressBar.Visibility = Visibility.Hidden;
+            }
+            else if (sender == _directoriesPage)
+            {
+                dirsProgressBar.Visibility = Visibility.Hidden;
+            }
+        }
+
+        #endregion
     }
 }

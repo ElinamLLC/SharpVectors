@@ -43,14 +43,14 @@ namespace SharpVectors.Dom.Svg
                 }
                 else
                 {
-                    SvgMatrix matrix = (SvgMatrix)GetItem(0).Matrix;
+                    ISvgMatrix matrix = GetItem(0).Matrix;
 
                     for (uint i = 1; i < NumberOfItems; i++)
                     {
-                        matrix = (SvgMatrix)matrix.Multiply(GetItem(i).Matrix);
+                        matrix = matrix.Multiply(GetItem(i).Matrix);
                     }
 
-                    return matrix;
+                    return (SvgMatrix)matrix;
                 }
             }
         }

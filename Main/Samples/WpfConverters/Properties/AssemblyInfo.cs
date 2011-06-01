@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SvgConverters")]
+[assembly: AssemblyTitle("SharpVectors")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SvgConverters")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyProduct("SharpVectors")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2011 SharpVectors Reloaded.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

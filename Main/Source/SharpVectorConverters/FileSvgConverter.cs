@@ -31,6 +31,14 @@ namespace SharpVectors.Converters
         private bool _writerErrorOccurred;
         private bool _fallbackOnWriterError;
 
+        private string _xamlFile;
+        private string _zamlFile;
+
+        /// <summary>
+        /// This is the last drawing generated.
+        /// </summary>
+        private DrawingGroup _drawing;
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -124,6 +132,50 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets the last created drawing.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DrawingGroup"/> specifying the last converted drawing.
+        /// </value>
+        public DrawingGroup Drawing
+        {
+            get
+            {
+                return _drawing;
+            }
+        }
+
+        /// <summary>
+        /// Gets the output XAML file path if generated.
+        /// </summary>
+        /// <value>
+        /// A string containing the full path to the XAML if generated; otherwise,
+        /// it is <see langword="null"/>.
+        /// </value>
+        public string XamlFile
+        {
+            get
+            {
+                return _xamlFile;
+            }
+        }
+
+        /// <summary>
+        /// Gets the output ZAML file path if generated.
+        /// </summary>
+        /// <value>
+        /// A string containing the full path to the ZAML if generated; otherwise,
+        /// it is <see langword="null"/>.
+        /// </value>
+        public string ZamlFile
+        {
+            get
+            {
+                return _zamlFile;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -197,6 +249,9 @@ namespace SharpVectors.Converters
                     "The SVG source file must exists.", "svgFileName");
             }
 
+            _xamlFile = null;
+            _zamlFile = null;
+
             if (!this.SaveXaml && !this.SaveZaml)
             {
                 return false;
@@ -254,6 +309,9 @@ namespace SharpVectors.Converters
                 throw new ArgumentException(
                     "The XAML destination file path cannot be empty.", "xamlFileName");
             }
+
+            _xamlFile = null;
+            _zamlFile = null;
 
             if (!this.SaveXaml && !this.SaveZaml)
             {
@@ -313,6 +371,9 @@ namespace SharpVectors.Converters
                     "The XAML destination file path cannot be empty.", "xamlFileName");
             }
 
+            _xamlFile = null;
+            _zamlFile = null;
+
             if (!this.SaveXaml && !this.SaveZaml)
             {
                 return false;
@@ -371,6 +432,9 @@ namespace SharpVectors.Converters
                     "The XAML destination file path cannot be empty.", "xamlFileName");
             }
 
+            _xamlFile = null;
+            _zamlFile = null;
+
             if (!this.SaveXaml && !this.SaveZaml)
             {
                 return false;
@@ -406,15 +470,13 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
-            SaveFile(renderedDrawing, fileName, xamlFileName);
-
-            renderedDrawing = null;
+            SaveFile(_drawing, fileName, xamlFileName);
 
             return true;
         }
@@ -431,15 +493,13 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
-            SaveFile(renderedDrawing, xamlFileName, xamlFileName);
-
-            renderedDrawing = null;
+            SaveFile(_drawing, xamlFileName, xamlFileName);
 
             return true;
         }
@@ -456,15 +516,13 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
-            SaveFile(renderedDrawing, xamlFileName, xamlFileName);
-
-            renderedDrawing = null;
+            SaveFile(_drawing, xamlFileName, xamlFileName);
 
             return true;
         }
@@ -481,15 +539,13 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
-            SaveFile(renderedDrawing, xamlFileName, xamlFileName);
-
-            renderedDrawing = null;
+            SaveFile(_drawing, xamlFileName, xamlFileName);
 
             return true;
         }
@@ -620,11 +676,15 @@ namespace SharpVectors.Converters
                 zipStream.Close();
 
                 zamlDestFile.Close();
+
+                _zamlFile = zamlFileName;
             }
+            _xamlFile = xamlFileName;
 
             if (!this.SaveXaml && File.Exists(xamlFileName))
             {
                 File.Delete(xamlFileName);
+                _xamlFile = null;
             }
 
             return true;

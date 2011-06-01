@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharpVectors.Converters</RootNamespace>
-    <AssemblyName>WpfConverters</AssemblyName>
+    <AssemblyName>SharpVectors</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -18,6 +18,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <StartupObject>SharpVectors.Converters.MainStartup</StartupObject>
+    <ApplicationIcon>Images\SharpVectors.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,33 +39,93 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="ConverterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainApplication.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
+    <EmbeddedResource Include="ConverterHelp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Page Include="CircularProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DirectoryConverterOutput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DirectoryConverterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileConverterOutput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileConverterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileListConverterOutput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileListConverterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HelpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+    <Page Include="OptionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerticalTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="MainApplication.xaml.cs">
+      <DependentUpon>MainApplication.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -72,6 +134,66 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConsoleConverter.cs" />
+    <Compile Include="ConsoleDirectoryConverter.cs" />
+    <Compile Include="ConsoleFileConverter.cs" />
+    <Compile Include="ConsoleFilesConverter.cs" />
+    <Compile Include="ConsoleApplication.cs" />
+    <Compile Include="ConsoleProgress.cs" />
+    <Compile Include="ConsoleWorker.cs" />
+    <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="ConsoleWriterVerbosity.cs" />
+    <Compile Include="ConverterCommandLines.cs" />
+    <Compile Include="ConverterOptions.cs" />
+    <Compile Include="ConverterUIOption.cs" />
+    <Compile Include="ConverterWindow.xaml.cs">
+      <DependentUpon>ConverterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConverterWindowsAPI.cs" />
+    <Compile Include="DirectoryConverterOutput.xaml.cs">
+      <DependentUpon>DirectoryConverterOutput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryConverterPage.xaml.cs">
+      <DependentUpon>DirectoryConverterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FileConverterOutput.xaml.cs">
+      <DependentUpon>FileConverterOutput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FileConverterPage.xaml.cs">
+      <DependentUpon>FileConverterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FileListConverterOutput.xaml.cs">
+      <DependentUpon>FileListConverterOutput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FileListConverterPage.xaml.cs">
+      <DependentUpon>FileListConverterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IObservable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Microsoft\Windows\Controls\ButtonBaseBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\ControlBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\ListBoxItemBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\ProgressBarBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\TextBoxBaseBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\ToggleButtonBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\TypeHandlerFactory.cs" />
+    <Compile Include="Microsoft\Windows\Controls\VisualStateBehavior.cs" />
+    <Compile Include="Microsoft\Windows\Controls\VisualStateBehaviorFactory.cs" />
+    <Compile Include="MouseHandlingMode.cs" />
+    <Compile Include="ConverterOptionsParser.cs" />
+    <Compile Include="OptionsPage.xaml.cs">
+      <DependentUpon>OptionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -85,6 +207,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MainStartup.cs" />
+    <Compile Include="StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="System\Windows\TemplateVisualStateAttribute.cs" />
+    <Compile Include="System\Windows\VisualState.cs" />
+    <Compile Include="System\Windows\VisualStateChangedEventArgs.cs" />
+    <Compile Include="System\Windows\VisualStateGroup.cs" />
+    <Compile Include="System\Windows\VisualStateManager.cs" />
+    <Compile Include="System\Windows\VisualTransition.cs" />
+    <Compile Include="VerticalTabItem.cs" />
+    <Compile Include="WatermarkAdorner.cs" />
+    <Compile Include="WatermarkService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -129,6 +264,10 @@
       <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
       <Name>SharpVectors.Runtime</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SharpVectors.ico" />
+    <Resource Include="Images\SharpVectors.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

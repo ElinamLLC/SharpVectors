@@ -1,0 +1,362 @@
+<FlowDocument TextAlignment="Left" PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="24">SVG-WPF Converter Help</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1" />
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="18">Introduction</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1">The SVG-WPF converter is a graphic converter program written in .NET 3.5 for converting SVG files to the corresponding WPF formats.</Paragraph>
+    <Paragraph LineHeight="1" />
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="18">Converting File</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1">You can convert a single SVG file to the corresponding WPF file.</Paragraph>
+    <Paragraph LineHeight="1" />
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="18">Converting Files</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1">You can convert a list of SVG files to the corresponding WPF files.</Paragraph>
+    <Paragraph LineHeight="1" />
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="18">Converting Directories</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1">You can convert SVG files in a directory including its sub-directories to the corresponding WPF files. The directory structure is maintained</Paragraph>
+    <Paragraph LineHeight="1" />
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="18">Conversion Options</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1">You control the conversion process and the output formats using the options provided.</Paragraph>
+    <Paragraph LineHeight="1" />
+    <Paragraph LineHeight="1">
+        <Run FontWeight="Bold" FontSize="18">Command-Line Options</Run>
+    </Paragraph>
+    <Paragraph LineHeight="1">The executable program that handles the conversion is SharpVectors.exe.</Paragraph>
+    <Paragraph LineHeight="1">The following are the current command-line options available. These command-line options are not case-sensitive.</Paragraph>
+    <Table BorderBrush="#FFF5F5F5">
+        <TableRowGroup>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold" FontSize="14">Option</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold" FontSize="14">Type</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold" FontSize="14">Parameters</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold" FontSize="14">Meaning</Run>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+        
+        <TableRowGroup>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-s, --source</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Value (Srings)</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>SVG file, file lists or a directory</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies the source or the input SVG file or files. You can specify</Paragraph>
+                    <List MarkerStyle="Disc">
+                        <ListItem>
+                            <Paragraph>A single SVG file</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>A number of SVG files</Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>A directory of SVG files.</Paragraph>
+                        </ListItem>
+                    </List>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-o, --output</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Value (String)</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Directory</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies the output directory of the converted files.</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-r, --recursive</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>For conversion of files in a directory, this specifies whether the search for SVG files in the directory is recursive or includes the sub-directories.</Paragraph>
+                    <Paragraph>The default value is
+                        <Run FontWeight="Bold">false</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-t, --runtime</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph xml:space="preserve">This specifies whether to include links to the SharpVectors runtime library. </Paragraph>
+                    <Paragraph>The default value is
+                        <Run FontWeight="Bold">false</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-e, --onError</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>For multiple files and directory conversion, this specifies whether to continue with the conversion when an error occurs in the conversion of a file.</Paragraph>
+                    <Paragraph>The default value is
+                        <Run FontWeight="Bold">true</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-g, --textGeometry</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies whether to convert texts to path geometry.</Paragraph>
+                    <Paragraph>NOTE: This must be set to true, if you are not linking to the SharpVectors runtime library; otherwise, font locations on the end-user machine may not be correctly resolved.</Paragraph>
+                    <Paragraph>The default value is
+                        <Run FontWeight="Bold">true</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-c, --customXamlWriter</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies whether to use the customized XAML writer, which is optimized for this conversion.</Paragraph>
+                    <Paragraph>The default value is
+                        <Run FontWeight="Bold">true</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-x, --xaml</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies whether to generate the uncompressed XAML output format.</Paragraph>
+                    <Paragraph>The default is
+                        <Run FontWeight="Bold">true</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-z, --zaml</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies whether to generate the compressed XAML output format.</Paragraph>
+                    <Paragraph>The default is
+                        <Run FontWeight="Bold">false</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-i, --image</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Value (String Enumeration)</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Possible values are</Paragraph>
+                    <List MarkerStyle="Disc">
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">png</Run> , for PNG format
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">gif</Run> , for GIF format
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">jpeg</Run> , for JPEG format
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">bmp</Run> , for Windows Bitmap format
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">tiff</Run> , for TIFF format
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph xml:space="preserve"><Run FontWeight="Bold">wdp</Run>, for Window Media Photo format. </Paragraph>
+                        </ListItem>
+                    </List>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies whether to generate images and the format of the image.</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-u, --ui</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Value (String Enumeration)</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Possible values are</Paragraph>
+                    <List MarkerStyle="Disc">
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">none</Run> , will run in a quiet mode - console without any message.
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">console</Run> , will run in console mode - the default if the program is started from the command prompt.
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph>
+                                <Run FontWeight="Bold">windows</Run> , will run the program with full Windows GUI mode - the default when the application icon is double-clicked.
+                            </Paragraph>
+                        </ListItem>
+                    </List>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies the user-interface option; none, console or windows.
+                        <LineBreak /> The default depends on how the program is started.
+                    </Paragraph>
+                    <Paragraph>If started from the command prompt and this option is not explicitly stated, the program will run in the console mode.</Paragraph>
+                    <Paragraph>If started by double-clicking, the program will run in full windows mode.</Paragraph>
+                    <Paragraph>If started by dragging an dropping SVG files on the program icon, the program will run with minimum windows to show the progress of the conversion.</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-h, -?, --help</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Switch</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph xml:space="preserve"> </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>This specifies whether to display this help for windows mode or command-line usage help in console mode.</Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>
+                        <Run FontWeight="Bold">-b, --beep</Run>
+                    </Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>Boolean</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>+ or -</Paragraph>
+                </TableCell>
+                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
+                    <Paragraph>For a console mode, this specifies whether to beep at the end of the conversion process.</Paragraph>
+                    <Paragraph>The default value is
+                        <Run FontWeight="Bold">false</Run> .
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+    <Paragraph LineHeight="1" />
+</FlowDocument>

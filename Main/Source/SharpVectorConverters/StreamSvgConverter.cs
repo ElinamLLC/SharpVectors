@@ -37,6 +37,11 @@ namespace SharpVectors.Converters
         private bool _writerErrorOccurred;
         private bool _fallbackOnWriterError;
 
+        /// <summary>
+        /// This is the last drawing generated.
+        /// </summary>
+        private DrawingGroup _drawing;
+
         private ImageEncoderType _encoderType;
         private BitmapEncoder    _bitampEncoder;
 
@@ -181,6 +186,20 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets the last created drawing.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DrawingGroup"/> specifying the last converted drawing.
+        /// </value>
+        public DrawingGroup Drawing
+        {
+            get
+            {
+                return _drawing;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -274,11 +293,6 @@ namespace SharpVectors.Converters
                     "The image destination file path cannot be null (or Nothing).");
             }
 
-            if (!this.SaveXaml && !this.SaveZaml)
-            {
-                return false;
-            }
-
             return this.ProcessFile(svgStream, imageStream);
         }
 
@@ -316,11 +330,6 @@ namespace SharpVectors.Converters
             {
                 throw new ArgumentNullException("imageStream",
                     "The image destination file path cannot be null (or Nothing).");
-            }
-
-            if (!this.SaveXaml && !this.SaveZaml)
-            {
-                return false;
             }
 
             return this.ProcessFile(svgTextReader, imageStream);
@@ -362,11 +371,6 @@ namespace SharpVectors.Converters
                     "The image destination file path cannot be null (or Nothing).");
             }
 
-            if (!this.SaveXaml && !this.SaveZaml)
-            {
-                return false;
-            }
-
             return this.ProcessFile(svgXmlReader, imageStream);
         }
 
@@ -388,22 +392,20 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
             // Save to the image file...
-            SaveImageFile(renderedDrawing, imageStream);
+            SaveImageFile(_drawing, imageStream);
 
             // Save to image and/or ZAML file if required...
             if (this.SaveXaml || this.SaveZaml)
             {
-                SaveXamlFile(renderedDrawing, fileName, null);
+                SaveXamlFile(_drawing, fileName, null);
             }   
-
-            renderedDrawing = null;
 
             return true;
         }
@@ -420,16 +422,14 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
             // Save to the image file...
-            SaveImageFile(renderedDrawing, imageStream);
-
-            renderedDrawing = null;
+            SaveImageFile(_drawing, imageStream);
 
             return true;
         }
@@ -446,16 +446,14 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
             // Save to the image file...
-            SaveImageFile(renderedDrawing, imageStream);
-
-            renderedDrawing = null;
+            SaveImageFile(_drawing, imageStream);
 
             return true;
         }
@@ -472,16 +470,14 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            DrawingGroup renderedDrawing = _wpfRenderer.Drawing as DrawingGroup;
-            if (renderedDrawing == null)
+            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            if (_drawing == null)
             {
                 return false;
             }
 
             // Save to the image file...
-            SaveImageFile(renderedDrawing, imageStream);
-
-            renderedDrawing = null;
+            SaveImageFile(_drawing, imageStream);
 
             return true;
         }

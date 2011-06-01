@@ -1,0 +1,12 @@
+﻿<Page x:Class="SharpVectors.Converters.DirectoryConverterOutput"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Directory Converter Output">
+    <DockPanel LastChildFill="True">
+        <Button Name="btnCancel" IsEnabled="False" DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center" Padding="12 3 12 3"  
+                Content="Cancel" Click="OnCancelClick"/>
+        <TextBox Name="txtOutput" Margin="0 6 3 6"  IsReadOnly="True" AcceptsReturn="True" 
+                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+    </DockPanel>
+</Page>

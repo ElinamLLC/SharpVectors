@@ -1,19 +1,19 @@
 using System;
 using System.Diagnostics;
 using System.Net;
-using System.Xml;
 using System.IO;
 using System.IO.Compression;
 
 namespace SharpVectors.Net
 {
-	public class ExtendedHttpWebRequestCreator : IWebRequestCreate
+    public sealed class ExtendedHttpWebRequestCreator : IWebRequestCreate
 	{
 		public ExtendedHttpWebRequestCreator(){}
 		public WebRequest Create(Uri uri){return new ExtendedHttpWebRequest(uri);}
 	}
 
-	public class ExtendedHttpWebRequest : WebRequest
+    [Serializable]
+    public sealed class ExtendedHttpWebRequest : WebRequest
 	{
 		#region CacheManager
 		private static ICacheManager cacheManager = new NoCacheManager();
@@ -152,7 +152,7 @@ namespace SharpVectors.Net
                     respStream = new DeflateStream(respStream, CompressionMode.Decompress);
 				}
 			}
-			else if(requestUri.ToString().EndsWith(".svgz"))
+            else if (requestUri.ToString().EndsWith(".svgz", StringComparison.OrdinalIgnoreCase))
 			{
 				// TODO: this is an ugly hack for .svgz files. Fix later!
                 respStream = new GZipStream(respStream, CompressionMode.Decompress);
@@ -161,7 +161,8 @@ namespace SharpVectors.Net
 			Stream stream = new MemoryStream();
 			int count = 0;
 			byte[] buffer = new byte[4096];
-			while((count = respStream.Read(buffer, 0, 4096)) > 0) stream.Write(buffer, 0, count);
+			while((count = respStream.Read(buffer, 0, 4096)) > 0) 
+                stream.Write(buffer, 0, count);
 
 			stream.Position = 0;
 			
@@ -174,12 +175,17 @@ namespace SharpVectors.Net
 		{
 			CacheInfo cacheInfo = CacheManager.GetCacheInfo(RequestUri);
 
-			WebRequest request = getRequest(cacheInfo);
+			WebRequest request   = getRequest(cacheInfo);
 			WebResponse response = getResponse(request, cacheInfo);
+
+            if (response == null)
+            {
+                return null;
+            }
 
 			Stream stream = processResponseStream(response);
 
-			if(response is HttpWebResponse)
+			if (response is HttpWebResponse)
 			{
 				CacheInfo respCacheInfo = processResponse(response);
 

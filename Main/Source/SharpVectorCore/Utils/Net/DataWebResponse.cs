@@ -1,7 +1,6 @@
 using System;
 using System.Net;
 using System.IO;
-using System.Web;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -11,8 +10,13 @@ namespace SharpVectors.Net
 	/// Summary description for DataWebResponse.
 	/// </summary>
 	/// <remarks>According to http://www.ietf.org/rfc/rfc2397.txt</remarks>
-	public class DataWebResponse : WebResponse
+	[Serializable]
+    public sealed class DataWebResponse : WebResponse
 	{
+        private Encoding contentEncoding = Encoding.ASCII;
+        private string contentType;
+        private Uri responseUri;
+
 		private byte[] decodedData;
 
 		private static Regex re = new Regex(@"^data:(?<mediatype>.*?),(?<data>.*)$", RegexOptions.Singleline);
@@ -35,10 +39,9 @@ namespace SharpVectors.Net
 			{
 				contentType = match.Groups["mediatype"].Value;
 
-				string data = match.Groups["data"].Value;
-			
+				string data = match.Groups["data"].Value; 			
 
-				if(contentType.Length == 0)
+				if (contentType.Length == 0)
 				{
 					contentType = "text/plain;charset=US-ASCII";
 				}
@@ -54,7 +57,7 @@ namespace SharpVectors.Net
 					}
 				}
 
-				if(contentType.EndsWith(";base64"))
+                if (contentType.EndsWith(";base64", StringComparison.OrdinalIgnoreCase))
 				{
 					contentType = contentType.Remove(contentType.Length - 7, 7);
 					decodedData = Convert.FromBase64String(data);
@@ -91,7 +94,6 @@ namespace SharpVectors.Net
 			}
 		}
 
-		private Encoding contentEncoding = Encoding.ASCII;
 		public Encoding ContentEncoding
 		{
 			get
@@ -100,7 +102,6 @@ namespace SharpVectors.Net
 			}
 		}
 
-		private string contentType;
 		public override string ContentType
 		{
 			get
@@ -109,7 +110,6 @@ namespace SharpVectors.Net
 			}
 		}
 
-		private Uri responseUri;
 		public override Uri ResponseUri
 		{
 			get

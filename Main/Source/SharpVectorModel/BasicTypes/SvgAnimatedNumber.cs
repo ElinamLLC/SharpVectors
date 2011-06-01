@@ -20,7 +20,7 @@ namespace SharpVectors.Dom.Svg
 
         public SvgAnimatedNumber(string str)
         {
-            baseVal = Double.Parse(str);
+            baseVal = SvgNumber.ParseNumber(str);
             animVal = baseVal;
         }
 

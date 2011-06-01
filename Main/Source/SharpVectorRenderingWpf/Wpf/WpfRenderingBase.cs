@@ -85,7 +85,7 @@ namespace SharpVectors.Renderers.Wpf
             }
             if (elementId.Contains("&#x"))
             {
-                elementId = System.Web.HttpUtility.HtmlDecode(elementId);
+                elementId = HttpUtility.HtmlDecode(elementId);
             }
             if (elementId.Contains("レイヤー"))
             {
@@ -130,7 +130,7 @@ namespace SharpVectors.Renderers.Wpf
             }
             if (elementId.Contains("&#x"))
             {
-                elementId = System.Web.HttpUtility.HtmlDecode(elementId);
+                elementId = HttpUtility.HtmlDecode(elementId);
             }
             if (elementId.Contains("レイヤー"))
             {

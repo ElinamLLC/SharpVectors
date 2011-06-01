@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
-using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Collections;
@@ -37,6 +36,8 @@ namespace SharpVectors.Converters
         private string _windowsDir;
         private string _windowsPath;
 
+        private CultureInfo _culture;
+
         private NamespaceCache _namespaceCache;
         private WpfDrawingSettings _wpfSettings;
 
@@ -69,8 +70,10 @@ namespace SharpVectors.Converters
         /// </param>
         public XmlXamlWriter(WpfDrawingSettings settings)
         {
+            _culture           = CultureInfo.InvariantCulture;
+
             _nullType          = typeof(NullExtension);
-            _namespaceCache    = new NamespaceCache();
+            _namespaceCache    = new NamespaceCache(_culture);
             _dicNamespaceMap   = new Dictionary<string, NamespaceMap>(StringComparer.OrdinalIgnoreCase);
             _contentProperties = new Dictionary<Type, string>();
 
@@ -383,7 +386,10 @@ namespace SharpVectors.Converters
 
                     if (writeState == WriteState.Element)
                     {
-                        writer.WriteAttributeString("Figures", markupObj.Instance.ToString());
+                        //writer.WriteAttributeString("Figures", 
+                        //    markupObj.Instance.ToString());
+                        writer.WriteAttributeString("Figures", 
+                            System.Convert.ToString(markupObj.Instance, _culture));
                     }
                     else
                     {
@@ -395,7 +401,9 @@ namespace SharpVectors.Converters
                         {
                             writer.WriteStartElement("PathGeometry.Figures", ns);
                         }
-                        writer.WriteString(markupObj.Instance.ToString());
+                        //writer.WriteString(markupObj.Instance.ToString());
+                        writer.WriteString(System.Convert.ToString(
+                            markupObj.Instance, _culture));
                         writer.WriteEndElement();
                     }
                     return;
@@ -750,9 +758,12 @@ namespace SharpVectors.Converters
             private bool _isFrameworkRoot;
             private Dictionary<string, string> _defaultPrefixes;
             private Dictionary<Assembly, Dictionary<string, string>> _xmlnsDefinitions;
+            private CultureInfo _culture;
 
-            public NamespaceCache()
+            public NamespaceCache(CultureInfo culture)
             {
+                _culture = culture;
+
                 _defaultPrefixes = new Dictionary<string, string>();
                 _xmlnsDefinitions = new Dictionary<Assembly, Dictionary<string, string>>();
             }
@@ -809,14 +820,14 @@ namespace SharpVectors.Converters
                 string typeNamespace = String.Empty;
                 if (type.Namespace == null)
                 {
-                    return String.Format(CultureInfo.InvariantCulture, "clr-namespace:;assembly={0}",
+                    return String.Format(_culture, "clr-namespace:;assembly={0}",
                         new object[] { type.Assembly.GetName().Name });
                 }
                 if (!GetMappingsFor(type.Assembly).TryGetValue(type.Namespace, out typeNamespace))
                 {
                     if (!String.Equals(type.Namespace, "System.Windows.Markup.Primitives"))
                     {
-                        typeNamespace = String.Format(CultureInfo.InvariantCulture,
+                        typeNamespace = String.Format(_culture,
                             "clr-namespace:{0};assembly={1}", new object[] { type.Namespace, 
                                 type.Assembly.GetName().Name });
                     }
