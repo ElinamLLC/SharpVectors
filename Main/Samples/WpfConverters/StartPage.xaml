@@ -1,0 +1,102 @@
+﻿<Page x:Class="SharpVectors.Converters.StartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Start Page" Height="518" Width="475" VerticalAlignment="Stretch" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="12">
+    <Page.Resources>
+        <Style x:Key="GroupBoxHeader" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="6 3 6 3" />
+            <Setter Property="Background" Value="DarkBlue"/>
+            <Setter Property="TextBlock.Foreground" Value="White" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+    </Page.Resources>
+    <DockPanel LastChildFill="True">        
+        <GroupBox DockPanel.Dock="Bottom" Padding="3" Margin="6">
+            <GroupBox.Header>
+                <Border Style="{StaticResource GroupBoxHeader}">
+                    <TextBlock Text="About: SharpVectors Reloaded"/>
+                </Border>
+            </GroupBox.Header>
+            <StackPanel Orientation="Vertical">
+                <TextBlock TextWrapping="Wrap">
+                    <Run>
+                        This program is based on the SharpVectors Reloaded library,
+                        an open source .NET library for SVG licensed under the New BSD License.
+                    </Run>
+                </TextBlock>
+                <TextBlock Margin="3 16 3 3"  TextAlignment="Right" ToolTip="http://sharpvectors.codeplex.com">
+                    <Hyperlink NavigateUri="http://sharpvectors.codeplex.com">
+                        SharpVectors Reloaded Project
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Grid VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal"> 
+                <Image Source="Images/SharpVectors.png" Width="32" Height="32"/>
+                <TextBlock Text="SVG-WPF Converter" Padding="6" Margin="4" FontSize="32" FontWeight="Bold">               
+                        <TextBlock.BitmapEffect>
+                            <OuterGlowBitmapEffect GlowSize="4.0" GlowColor="DarkBlue" Opacity="0.5"/>
+                        </TextBlock.BitmapEffect>
+                </TextBlock>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Padding="6" TextWrapping="Wrap">            
+                <Run>
+                    This program converts Scalable Vector Graphics (SVG) files to 
+                    images and XAML (WPF only).
+                </Run>
+                <LineBreak/>
+                <Run>
+                    It can convert a single file or multiple files in a directory.
+                </Run> 
+                <LineBreak/>
+                <Bold>NOTE:&#160;</Bold>
+                <Run>
+                    Currently, Silverlight is not supported. This program converts to only low-level WPF objects such as 
+                    Drawing and Geometry, which are not supported by Silverlight.
+                </Run>
+            </TextBlock>
+            <GroupBox Grid.Row="3" Padding="3" Margin="6">
+                <GroupBox.Header>
+                    <Border Style="{StaticResource GroupBoxHeader}">
+                        <TextBlock Text="Quick Help"/>
+                    </Border>    
+                </GroupBox.Header>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Files Page" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Margin="32 3 3 3" TextWrapping="Wrap">
+                        <Run>Use this to convert an SVG file (local or web).</Run>
+                    </TextBlock>
+                    <TextBlock Text="Files List Page" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Margin="32 3 3 3" TextWrapping="Wrap">
+                        <Run>Use this to convert a list of SVG files (local only).</Run>
+                    </TextBlock>
+                    <TextBlock Text="Directories Page" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Margin="32 3 3 3" TextWrapping="Wrap">
+                        <Run>Use this to convert the SVG files in a directory (and optional its sub-directories).</Run>
+                    </TextBlock>
+                    <TextBlock Text="Options Page" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Margin="32 3 3 3" TextWrapping="Wrap">
+                        <Run>
+                            Provides the general conversion options available to this program.
+                            Additional options are available on the files and directories pages.
+                        </Run>
+                    </TextBlock>
+                    <TextBlock Text="Help Page" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Margin="32 3 3 3" TextWrapping="Wrap">
+                        <Run>Provides detailed help on how to use this program.</Run>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+</Page>

@@ -74,6 +74,18 @@ namespace SharpVectors.Dom.Svg
                 {
                     try
                     {
+                        string absoluteUri = svgURIReference.AbsoluteUri;
+                        if (!String.IsNullOrEmpty(absoluteUri))
+                        {
+                            Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
+                            if (svgUri.IsFile)
+                            {   
+                                return absoluteUri.EndsWith(".svg", 
+                                    StringComparison.OrdinalIgnoreCase) || 
+                                    absoluteUri.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase);
+                            }
+                        }
+
                         WebResponse resource = svgURIReference.ReferencedResource;
                         if (resource == null)
                         {
@@ -84,7 +96,8 @@ namespace SharpVectors.Dom.Svg
                         // this "fix" tests the file extension for .svg and .svgz
                         string name = resource.ResponseUri.ToString().ToLower(CultureInfo.InvariantCulture);
                         return (resource.ContentType.StartsWith("image/svg+xml") ||
-                            name.EndsWith(".svg") || name.EndsWith(".svgz"));
+                            name.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
+                            name.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase));
                     }
                     catch (WebException)
                     {
@@ -104,7 +117,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (IsSvgImage)
+                if (this.IsSvgImage)
                 {
                     SvgWindow parentWindow = (SvgWindow)OwnerDocument.Window;
 
@@ -118,8 +131,17 @@ namespace SharpVectors.Dom.Svg
 
                         string absoluteUri = svgURIReference.AbsoluteUri;
 
-                        Stream resStream = svgURIReference.ReferencedResource.GetResponseStream();
-                        doc.Load(absoluteUri, resStream);
+                        Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
+                        if (svgUri.IsFile)
+                        {
+                            Stream resStream = File.OpenRead(svgUri.LocalPath);
+                            doc.Load(absoluteUri, resStream);
+                        }
+                        else
+                        {
+                            Stream resStream = svgURIReference.ReferencedResource.GetResponseStream();
+                            doc.Load(absoluteUri, resStream);
+                        }
 
                         return wnd;
                     }

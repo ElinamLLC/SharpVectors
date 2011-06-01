@@ -1,8 +1,9 @@
-﻿<Application x:Class="SharpVectors.Converters.App"
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"/>
+<!--<Application x:Class="SharpVectors.Converters.MainApplication"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>
-</Application>
+</Application>-->

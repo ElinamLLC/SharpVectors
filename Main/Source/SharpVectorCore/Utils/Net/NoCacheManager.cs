@@ -1,11 +1,9 @@
 using System;
-using System.Xml;
 using System.IO;
-using System.Net;
 
 namespace SharpVectors.Net
 {
-	public class NoCacheManager : ICacheManager
+	public sealed class NoCacheManager : ICacheManager
 	{
 		public NoCacheManager()
 		{

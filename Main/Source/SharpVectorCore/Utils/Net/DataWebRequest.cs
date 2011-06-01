@@ -3,11 +3,14 @@ using System.Net;
 
 namespace SharpVectors.Net
 {
-	public class DataWebRequest : WebRequest, IWebRequestCreate
+    [Serializable]
+    public sealed class DataWebRequest : WebRequest, IWebRequestCreate
 	{
+        private Uri requestUri;
+
 		public static bool Register()
 		{
-      return WebRequest.RegisterPrefix("data", new DataWebRequest());
+            return WebRequest.RegisterPrefix("data", new DataWebRequest());
 		}
 
 		public new WebRequest Create(Uri uri)
@@ -25,7 +28,6 @@ namespace SharpVectors.Net
 			requestUri = uri;
 		}
 
-		private Uri requestUri;
 		public override Uri RequestUri
 		{
 			get
