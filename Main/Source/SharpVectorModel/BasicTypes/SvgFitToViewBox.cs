@@ -5,7 +5,7 @@ using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Svg
 {
-	public class SvgFitToViewBox
+    public class SvgFitToViewBox : ISvgFitToViewBox
 	{
         private ISvgAnimatedRect viewBox;
         private ISvgAnimatedPreserveAspectRatio preserveAspectRatio;

@@ -1,362 +1,1457 @@
-<FlowDocument TextAlignment="Left" PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="24">SVG-WPF Converter Help</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1" />
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="18">Introduction</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1">The SVG-WPF converter is a graphic converter program written in .NET 3.5 for converting SVG files to the corresponding WPF formats.</Paragraph>
-    <Paragraph LineHeight="1" />
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="18">Converting File</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1">You can convert a single SVG file to the corresponding WPF file.</Paragraph>
-    <Paragraph LineHeight="1" />
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="18">Converting Files</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1">You can convert a list of SVG files to the corresponding WPF files.</Paragraph>
-    <Paragraph LineHeight="1" />
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="18">Converting Directories</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1">You can convert SVG files in a directory including its sub-directories to the corresponding WPF files. The directory structure is maintained</Paragraph>
-    <Paragraph LineHeight="1" />
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="18">Conversion Options</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1">You control the conversion process and the output formats using the options provided.</Paragraph>
-    <Paragraph LineHeight="1" />
-    <Paragraph LineHeight="1">
-        <Run FontWeight="Bold" FontSize="18">Command-Line Options</Run>
-    </Paragraph>
-    <Paragraph LineHeight="1">The executable program that handles the conversion is SharpVectors.exe.</Paragraph>
-    <Paragraph LineHeight="1">The following are the current command-line options available. These command-line options are not case-sensitive.</Paragraph>
-    <Table BorderBrush="#FFF5F5F5">
-        <TableRowGroup>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold" FontSize="14">Option</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold" FontSize="14">Type</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold" FontSize="14">Parameters</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold" FontSize="14">Meaning</Run>
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-        </TableRowGroup>
+<FlowDocument 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    PageWidth="500pt" ColumnWidth="500pt" IsOptimalParagraphEnabled="True" 
+    IsHyphenationEnabled="True" FontFamily="Trebuchet MS, Tahoma, Verdana" 
+    LineHeight="1" TextAlignment="Left" PagePadding="5,0,5,0" 
+    AllowDrop="False" NumberSubstitution.CultureSource="User">
+    <FlowDocument.Resources>
+        <Style TargetType="{x:Type Paragraph}">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </FlowDocument.Resources>
+    
+    <!-- Title Section -->
+    <Section Name="Title">        
+        <Paragraph Foreground="RoyalBlue" FontSize="28" KeepTogether="True">
+            <Bold>SharpVectors Help</Bold>
+        </Paragraph>
+    </Section>
+    
+    <!-- Introduction Section -->
+    <Section Name="Introduction">        
+        <Paragraph>
+            <LineBreak/>
+            The <Bold>SharpVectors</Bold>, SVG-WPF converter, is a graphic 
+            converter program written in .NET 3.5 for converting SVG files 
+            to the corresponding WPF formats.
+        </Paragraph>
         
-        <TableRowGroup>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-s, --source</Run>
+        <!--
+        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <InlineUIContainer BaselineAlignment="Center">
+                                <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                            </InlineUIContainer> <Bold>Note</Bold>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Alert Content</Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        
+        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <InlineUIContainer BaselineAlignment="Center">
+                                <Image Margin="3" Width="16" Height="16" Source="/Images/SmallWarning.png"/>
+                            </InlineUIContainer> <Bold>Caution</Bold>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Alert Content</Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        -->
+        
+    </Section>
+    
+    <!-- Outline Section -->
+    <Section Name="Outline">
+        <Paragraph/>
+        <Paragraph>This document contains the following sections:</Paragraph>
+        <Section Margin="32 12 32 12">            
+            <List MarkerStyle="Circle" MarkerOffset="6" Margin="12">
+                <ListItem>
+                    <Paragraph KeepTogether="True">
+                        <Hyperlink NavigateUri="#ConversionUsage">Conversion Usage</Hyperlink>
                     </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Value (Srings)</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>SVG file, file lists or a directory</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies the source or the input SVG file or files. You can specify</Paragraph>
-                    <List MarkerStyle="Disc">
+                    <List MarkerStyle="Square" MarkerOffset="6" Margin="12">
                         <ListItem>
-                            <Paragraph>A single SVG file</Paragraph>
-                        </ListItem>
-                        <ListItem>
-                            <Paragraph>A number of SVG files</Paragraph>
-                        </ListItem>
-                        <ListItem>
-                            <Paragraph>A directory of SVG files.</Paragraph>
-                        </ListItem>
-                    </List>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-o, --output</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Value (String)</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Directory</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies the output directory of the converted files.</Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-r, --recursive</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>For conversion of files in a directory, this specifies whether the search for SVG files in the directory is recursive or includes the sub-directories.</Paragraph>
-                    <Paragraph>The default value is
-                        <Run FontWeight="Bold">false</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-t, --runtime</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph xml:space="preserve">This specifies whether to include links to the SharpVectors runtime library. </Paragraph>
-                    <Paragraph>The default value is
-                        <Run FontWeight="Bold">false</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-e, --onError</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>For multiple files and directory conversion, this specifies whether to continue with the conversion when an error occurs in the conversion of a file.</Paragraph>
-                    <Paragraph>The default value is
-                        <Run FontWeight="Bold">true</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-g, --textGeometry</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies whether to convert texts to path geometry.</Paragraph>
-                    <Paragraph>NOTE: This must be set to true, if you are not linking to the SharpVectors runtime library; otherwise, font locations on the end-user machine may not be correctly resolved.</Paragraph>
-                    <Paragraph>The default value is
-                        <Run FontWeight="Bold">true</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-c, --customXamlWriter</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies whether to use the customized XAML writer, which is optimized for this conversion.</Paragraph>
-                    <Paragraph>The default value is
-                        <Run FontWeight="Bold">true</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-x, --xaml</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies whether to generate the uncompressed XAML output format.</Paragraph>
-                    <Paragraph>The default is
-                        <Run FontWeight="Bold">true</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-z, --zaml</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies whether to generate the compressed XAML output format.</Paragraph>
-                    <Paragraph>The default is
-                        <Run FontWeight="Bold">false</Run> .
-                    </Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-i, --image</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Value (String Enumeration)</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Possible values are</Paragraph>
-                    <List MarkerStyle="Disc">
-                        <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">png</Run> , for PNG format
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#WindowsMode">Windows Mode</Hyperlink>
                             </Paragraph>
                         </ListItem>
                         <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">gif</Run> , for GIF format
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#FileDragDropMode">File Drag and Drop Mode</Hyperlink>
                             </Paragraph>
                         </ListItem>
                         <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">jpeg</Run> , for JPEG format
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#ConsoleMode">Console Mode</Hyperlink>
                             </Paragraph>
                         </ListItem>
                         <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">bmp</Run> , for Windows Bitmap format
-                            </Paragraph>
-                        </ListItem>
-                        <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">tiff</Run> , for TIFF format
-                            </Paragraph>
-                        </ListItem>
-                        <ListItem>
-                            <Paragraph xml:space="preserve"><Run FontWeight="Bold">wdp</Run>, for Window Media Photo format. </Paragraph>
-                        </ListItem>
-                    </List>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies whether to generate images and the format of the image.</Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-u, --ui</Run>
-                    </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Value (String Enumeration)</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Possible values are</Paragraph>
-                    <List MarkerStyle="Disc">
-                        <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">none</Run> , will run in a quiet mode - console without any message.
-                            </Paragraph>
-                        </ListItem>
-                        <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">console</Run> , will run in console mode - the default if the program is started from the command prompt.
-                            </Paragraph>
-                        </ListItem>
-                        <ListItem>
-                            <Paragraph>
-                                <Run FontWeight="Bold">windows</Run> , will run the program with full Windows GUI mode - the default when the application icon is double-clicked.
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#ScriptMode">Script Mode</Hyperlink>
                             </Paragraph>
                         </ListItem>
                     </List>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies the user-interface option; none, console or windows.
-                        <LineBreak /> The default depends on how the program is started.
+                </ListItem>
+                <ListItem>
+                    <Paragraph KeepTogether="True">
+                        <Hyperlink NavigateUri="#ConversionTypes">Conversion Types</Hyperlink>
                     </Paragraph>
-                    <Paragraph>If started from the command prompt and this option is not explicitly stated, the program will run in the console mode.</Paragraph>
-                    <Paragraph>If started by double-clicking, the program will run in full windows mode.</Paragraph>
-                    <Paragraph>If started by dragging an dropping SVG files on the program icon, the program will run with minimum windows to show the progress of the conversion.</Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-h, -?, --help</Run>
+                    <List MarkerStyle="Square" MarkerOffset="6" Margin="12">
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#FileConversion">Converting File</Hyperlink>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#FilesConversion">Converting Files</Hyperlink>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#DirectoryConversion">Converting Directories</Hyperlink>
+                            </Paragraph>
+                        </ListItem>
+                    </List>
+                </ListItem>
+                <ListItem>
+                    <Paragraph KeepTogether="True">
+                        <Hyperlink NavigateUri="#ConversionOptions">Conversion Options</Hyperlink>
                     </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Switch</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph xml:space="preserve"> </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>This specifies whether to display this help for windows mode or command-line usage help in console mode.</Paragraph>
-                </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>
-                        <Run FontWeight="Bold">-b, --beep</Run>
+                    <List MarkerStyle="Square" MarkerOffset="6" Margin="12">
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#TextAsGeometry">Text As Path Geometry</Hyperlink>
+                            </Paragraph>
+                        </ListItem>          
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#IncludeRuntime">Include Runtime Library</Hyperlink>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#GenerateXAML">Generate WPF XAML</Hyperlink>
+                            </Paragraph>
+                        </ListItem>
+                        <ListItem>
+                            <Paragraph KeepTogether="True">
+                                <Hyperlink NavigateUri="#GenerateImage">Generate Raster Image</Hyperlink>
+                            </Paragraph>
+                        </ListItem>
+                    </List>
+                </ListItem>
+                <ListItem>
+                    <Paragraph KeepTogether="True">
+                        <Hyperlink NavigateUri="#CommandLines">Command-Line Options</Hyperlink>
                     </Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>Boolean</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>+ or -</Paragraph>
-                </TableCell>
-                <TableCell BorderThickness="1,1,1,1" BorderBrush="#FFD3D3D3">
-                    <Paragraph>For a console mode, this specifies whether to beep at the end of the conversion process.</Paragraph>
-                    <Paragraph>The default value is
-                        <Run FontWeight="Bold">false</Run> .
+                </ListItem>
+                <ListItem>
+                    <Paragraph KeepTogether="True">
+                        <Hyperlink NavigateUri="#Credits">Credits</Hyperlink>
                     </Paragraph>
-                </TableCell>
-            </TableRow>
-        </TableRowGroup>
-    </Table>
-    <Paragraph LineHeight="1" />
+                </ListItem>
+            </List>
+        </Section>
+        <!--<Paragraph TextAlignment="Left">
+            <Hyperlink NavigateUri="#Title">
+                <Bold>Top</Bold>
+            </Hyperlink>
+            <LineBreak/>
+        </Paragraph>-->
+        <Paragraph/>
+    </Section>
+    
+    <!-- Conversion Usage Section -->
+    <Section Name="ConversionUsage" BreakPageBefore="True">
+        <Paragraph Foreground="RoyalBlue" FontSize="24" KeepTogether="True">
+            <Bold>Conversion Usage</Bold>
+        </Paragraph>    
+        <Paragraph>
+            The <Bold>SharpVectors</Bold> application is a normal Windows 
+            application, providing a full command-line support to enable several
+            modes of uses.
+        </Paragraph>
+        <Paragraph>
+            We discuss these modes below.
+        </Paragraph>
+        <List MarkerStyle="UpperRoman" MarkerOffset="6" Margin="6">
+            <ListItem Name="WindowsMode">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Windows Mode</Bold>
+                </Paragraph>
+                <Paragraph>
+                    This is normal or standard mode, which displays this application
+                    window and allows you to convert SVG files.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    If you <Bold>double-click</Bold> the application icon
+                    or shortcut as is common to any Windows application or
+                    from a command window prompt, if you start it with the 
+                    <Bold>--ui=windows</Bold> option, the application will run
+                    in the full windows mode.
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    It will normally start with the <Bold>Start Page</Bold>, 
+                    unless it is started with the command <Bold>--help</Bold>.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    See the <Hyperlink NavigateUri="#ConversionTypes">conversion types</Hyperlink> 
+                    section for the various conversion available.
+                </Paragraph>
+            </ListItem>
+            <ListItem Name="FileDragDropMode">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>File Drag and Drop (Minimal Window) Mode</Bold>
+                </Paragraph>
+                <Paragraph>
+                    When you drag and drop SVG files from the Windows Explorer
+                    to the converter application icon, the application will launch
+                    in a minimal windows mode and perform the conversion from the
+                    the SVG to the XAML files.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    The minimal window is shown below:
+                </Paragraph>
+                <BlockUIContainer Margin="12">
+                    <Image Width="600" Stretch="Uniform" Source="/Images/MinimalWindow.png"/>
+                </BlockUIContainer>
+                <Paragraph>
+                    The <Bold>Cancel</Bold> button will be active during the
+                    conversion process, use this to cancel the conversion.
+                </Paragraph>
+                <Paragraph>
+                    When the conversion is completed, the <Bold>Cancel</Bold>
+                    button will be disabled, click the <Bold>Close</Bold> button
+                    to close this window.
+                    <LineBreak/>
+                </Paragraph>
+                <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                    <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    <InlineUIContainer BaselineAlignment="Center">
+                                        <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                                    </InlineUIContainer>
+                                    <Bold>Note</Bold>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    There is no command-line option for this conversion
+                                    mode.
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Paragraph>
+                    <LineBreak/>
+                    This uses the default settings; there is no link to the runtime,
+                    texts are converted to geometric path, etc.
+                    <LineBreak/>
+                </Paragraph>
+                <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                    <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    <InlineUIContainer BaselineAlignment="Center">
+                                        <Image Margin="3" Width="16" Height="16" Source="/Images/SmallWarning.png"/>
+                                    </InlineUIContainer>
+                                    <Bold>Caution</Bold>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    If the file dropped onto the application icon is not
+                                    an SVG file or the files include a file that is
+                                    not SVG file, the full windows application will be
+                                    displayed with this help page.
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </ListItem>
+            <ListItem Name="ConsoleMode">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Console Mode</Bold>
+                </Paragraph>
+                <Paragraph>
+                    You can run this application solely in console mode, if
+                    you start it from a command window or launch it from
+                    a script with the <Bold>--ui=console</Bold> option.
+                </Paragraph>
+                <Paragraph>
+                    In the command window, the default is console mode.
+                </Paragraph>
+                <BlockUIContainer Margin="12">
+                    <Image Width="600" Stretch="Uniform" Source="/Images/ConsoleConversion.png"/>
+                </BlockUIContainer>
+            </ListItem>
+            <ListItem Name="ScriptMode">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Script Mode</Bold>
+                </Paragraph>
+                <Paragraph>
+                    You can run this application from a script. You may use
+                    the <Bold>--ui=console</Bold> or <Bold>--ui=quiet</Bold>
+                    command options.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    See the <Hyperlink NavigateUri="#ConversionOptions">conversion options</Hyperlink>
+                    section for available commands.
+                </Paragraph>
+            </ListItem>
+        </List>
+        <Paragraph TextAlignment="Left">
+            <Hyperlink NavigateUri="#Title">
+                <Bold>Top</Bold>
+            </Hyperlink>
+            <LineBreak/>
+        </Paragraph>
+    </Section>
+    
+    <!-- Conversion Types Section -->
+    <Section Name="ConversionTypes" BreakPageBefore="True">
+        <Paragraph Foreground="RoyalBlue" FontSize="24" KeepTogether="True">
+            <Bold>Conversion Types</Bold>
+        </Paragraph>
+        <Paragraph>
+            This converter provides a number of conversion types to cover various
+            uses; single file, multiple files and directory of SVG files.
+        </Paragraph>
+        <Paragraph>
+            <LineBreak/>
+            Each conversion page provides enough information and feedback
+            on input and state to help you avoid errors.
+            <LineBreak/>
+            After providing the required conversion sources, the 
+            <Bold>Convert</Bold> button on each page will be enabled. Click on
+            the <Bold>Convert</Bold> button to start the conversion process.
+            <LineBreak/>
+        </Paragraph>
+        <Paragraph>
+            A progress bar is displayed in both the conversion page and the
+            bottom pane while the conversion is running in the background.
+            <LineBreak/>
+        </Paragraph>
+        <Paragraph>
+            Each conversion page will direct you to an output page during the
+            conversion process.
+            <LineBreak/>
+        </Paragraph>
+        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <InlineUIContainer BaselineAlignment="Center">
+                                <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                            </InlineUIContainer>
+                            <Bold>Note</Bold>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            The processing of each conversion type runs in a
+                            background thread allowing you to run several types
+                            at the same type.
+                            <LineBreak/>
+                            A progress bar is displayed at the bottom pane, in
+                            the color of the conversion type.
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        <Paragraph>
+            <LineBreak/>
+            The following are the available conversion types, each on its own
+            page.
+        </Paragraph>
+        <List MarkerStyle="UpperRoman" MarkerOffset="6" Margin="6">
+            <ListItem Name="FileConversion">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Converting File</Bold>
+                </Paragraph>
+                <Paragraph>
+                    You can convert a single SVG file to the corresponding 
+                    WPF file.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    Click the <Bold>Files</Bold> label on the left pane 
+                    to access the single file conversion page.
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    The output page contains three or four types, depending on
+                    the output formats, allowing you to view the results of the
+                    conversions.
+                </Paragraph>
+            </ListItem>
+            <ListItem Name="FilesConversion">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Converting Files</Bold>
+                </Paragraph>
+                <Paragraph>
+                    You can convert a list of SVG files to the corresponding 
+                    WPF files.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    Click the <Bold>Files List</Bold> label on the left pane 
+                    to access the multiple files conversion page.
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    Unlike the directory conversion, where all SVG files in the
+                    directory and optionally its sub-directories are converted,
+                    this allows you to convert selected files in multiple directories.
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    The output files will all be saved to the output directory
+                    if specified or each file will be saved to its own directory.
+                </Paragraph>
+            </ListItem>
+            <ListItem Name="DirectoryConversion">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Converting Directories</Bold>
+                </Paragraph>
+                <Paragraph>
+                    You can convert SVG files in a directory including its 
+                    sub-directories, if required, to the corresponding WPF files. 
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    Click the <Bold>Directories</Bold> label on the left pane 
+                    to access the directory conversion page.
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    The directory structure is maintained to avoid any name
+                    crash, with the specified directory, if any, as the root
+                    directory of the output.
+                </Paragraph>
+            </ListItem>
+        </List>
+        <Paragraph TextAlignment="Left">
+            <Hyperlink NavigateUri="#Title">
+                <Bold>Top</Bold>
+            </Hyperlink>
+            <LineBreak/>
+        </Paragraph>
+    </Section>
+    
+    <!-- Conversion Options Section -->
+    <Section Name="ConversionOptions" BreakPageBefore="True">        
+        <Paragraph Foreground="RoyalBlue" FontSize="24">
+            <Bold>Conversion Options</Bold>
+        </Paragraph>
+        <Paragraph>
+            These are the general conversion options that apply to all 
+            conversion types. Specific options are available on the page of
+            each conversion type, where applicable.
+        </Paragraph>
+        <Paragraph>
+            <LineBreak/>
+            Click the <Bold>Options</Bold> label on the left pane to access
+            the various conversion options available for all the 
+            <Hyperlink NavigateUri="#ConversionTypes">conversion types</Hyperlink>.
+            <LineBreak/>
+        </Paragraph>
+        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <InlineUIContainer BaselineAlignment="Center">
+                                <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                            </InlineUIContainer>
+                            <Bold>Note</Bold>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            Not all conversion options available in the library
+                            are exposed by this application.
+                            <LineBreak/>
+                            You may use the library directly if you need more
+                            control over the conversion process.
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        <Paragraph>
+            <LineBreak/>
+            The following are the available options:
+        </Paragraph>
+        <List MarkerStyle="UpperRoman" MarkerOffset="6" Margin="6">
+            <ListItem Name="TextAsGeometry">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Convert Text as Path geometry</Bold>
+                </Paragraph>
+                <Paragraph>
+                    Text elements can be rendered as: 
+                </Paragraph>
+                <List MarkerStyle="Disc" MarkerOffset="6" Margin="6">
+                    <ListItem>
+                        <Paragraph>                            
+                            Strings with the necessary typeface information; 
+                            such as the location of the typeface, its size 
+                            and styles
+                        </Paragraph>
+                        <Paragraph>
+                            In this case:
+                        </Paragraph>
+                        <List MarkerStyle="LowerLatin" MarkerOffset="6" Margin="6">
+                            <ListItem>
+                                <Paragraph>
+                                    The text content can be modified after the
+                                    conversion.
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    The path of the typeface must be resolved at
+                                    runtime, in the user machine. Since the installed
+                                    Windows directory may not be the same, you can
+                                    use the runtime options provided by the
+                                    <Italic>SharpVectors library</Italic> to resolve this.
+                                </Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>                    
+                    <ListItem>
+                        <Paragraph>
+                            Geometric paths using the typeface information.
+                        </Paragraph>
+                        <Paragraph>
+                            In this case:
+                        </Paragraph>
+                        <List MarkerStyle="LowerLatin" MarkerOffset="6" Margin="6">
+                            <ListItem>
+                                <Paragraph>
+                                    This cannot be modified after output, at least
+                                    not as texts.
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph> 
+                                    It does not require runtime for the path of
+                                    the typeface.
+                                </Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                </List>
+                <Paragraph>
+                    Use this option to control how the text elements are rendered
+                    to the XAML.
+                    <LineBreak/>
+                </Paragraph>
+                <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                    <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    <InlineUIContainer BaselineAlignment="Center">
+                                        <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                                    </InlineUIContainer>
+                                    <Bold>Note</Bold>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    This option does not affect conversion to raster
+                                    images such as <Italic>PNG</Italic> and
+                                    <Italic>JPEG</Italic>.
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </ListItem>
+            <ListItem Name="IncludeRuntime">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Include Support for SharpVectors Runtime library</Bold>
+                </Paragraph>
+                <Paragraph>
+                    The features provided by the <Italic>SharpVectors Runtime Library</Italic> 
+                    include
+                </Paragraph>
+                <List MarkerStyle="Disc" MarkerOffset="6" Margin="6">
+                    <ListItem>
+                        <Paragraph>
+                            Resolving locations of typefaces at runtime on the
+                            end-user machine, as explained above.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            Embedded images, which is not supported by the WPF.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph> 
+                            Hyperlink information and processing.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            SVG element type information after conversion.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph> 
+                            Controls and viewers for viewing the output files.
+                        </Paragraph>
+                    </ListItem>
+                </List>
+                <Paragraph>  
+                    Use this option to control whether to include the runtime
+                    library support.
+                    <LineBreak/>
+                </Paragraph>
+                <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                    <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    <InlineUIContainer BaselineAlignment="Center">
+                                        <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                                    </InlineUIContainer>
+                                    <Bold>Note</Bold>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    This option does not affect conversion to raster
+                                    images such as <Italic>PNG</Italic> and
+                                    <Italic>JPEG</Italic> .
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </ListItem>
+            <ListItem Name="GenerateXAML">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Generate WPF XAML</Bold>
+                </Paragraph>
+                <Paragraph>
+                    Use this to control whether to generate the vector XAML
+                    format.
+                </Paragraph>
+                <List MarkerStyle="Square" MarkerOffset="6" Margin="6">
+                    <ListItem>
+                        <Paragraph Foreground="RoyalBlue" FontSize="16">
+                            <Bold>Uncompressed XAML file format (*.xaml)</Bold>
+                        </Paragraph>
+                        <Paragraph>
+                            This is the normal WPF XAML file format and can be
+                            directly used in WPF applications.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph Foreground="RoyalBlue" FontSize="16">
+                            <Bold>Compressed XAML file format (*.zaml)</Bold>
+                        </Paragraph>
+                        <Paragraph>
+                            The compressed XAML is similar to the compressed
+                            SVG (the SVGZ) and uses the G-Zip compression to
+                            significantly reduce the size of the output file.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph Foreground="RoyalBlue" FontSize="16">
+                            <Bold>Use customized XAML format writer</Bold>
+                        </Paragraph>
+                        <Paragraph>
+                            The <Italic>SharpVectors</Italic> converter provides
+                            a customized version of the XAML writer, which is
+                            optimized for the SVG-WPF conversion.
+                            <LineBreak/>
+                            The output generated by this writer is more compact
+                            and eliminates most default properties.
+                        </Paragraph>
+                        <Paragraph>
+                            Like most such implementations, it might not work in
+                            all cases, so use this option to enable its use.
+                            <LineBreak/>
+                        </Paragraph>
+                        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                                <TableRow>
+                                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                        <Paragraph>
+                                            <InlineUIContainer BaselineAlignment="Center">
+                                                <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                                            </InlineUIContainer>
+                                            <Bold>Note</Bold>
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                            <TableRowGroup>
+                                <TableRow>
+                                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                        <Paragraph>
+                                            The converter will automatically use
+                                            the .NET Framework XamlWriter, if an
+                                            exception occurs in the writing process.
+                                        </Paragraph>
+                                    </TableCell>
+                                </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                    </ListItem>
+                </List>
+            </ListItem>
+            <ListItem Name="GenerateImage">
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Generate Raster Image</Bold>
+                </Paragraph>
+                <Paragraph>
+                    Use this to control whether to generate the raster image
+                    format.
+                    <LineBreak/>
+                    When enabled, you can select the image format.
+                    <LineBreak/>
+                </Paragraph>
+                <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                    <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    <InlineUIContainer BaselineAlignment="Center">
+                                        <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                                    </InlineUIContainer>
+                                    <Bold>Note</Bold>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    Currently, you cannot generate multiple image
+                                    formats in a single output.
+                                    <LineBreak/>
+                                    Use the library directly, if you need more
+                                    control over the conversion process.
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </ListItem>
+        </List>
+        <Paragraph TextAlignment="Left">
+            <Hyperlink NavigateUri="#Title">
+                <Bold>Top</Bold>
+            </Hyperlink>
+            <LineBreak/>
+        </Paragraph>
+    </Section>
+    
+    <!-- Command-line Options Section -->
+    <Section Name="CommandLines" BreakPageBefore="True">        
+        <Paragraph Foreground="RoyalBlue" FontSize="24" KeepTogether="True">
+            <Bold>Command-Line Options</Bold>
+        </Paragraph>
+        <Paragraph>
+            The executable program that handles the conversion is
+            <Bold>SharpVectors.exe</Bold>.
+            <LineBreak/>
+        </Paragraph>
+        <Paragraph Foreground="RoyalBlue" FontSize="18" KeepTogether="True">
+            <Bold>Command-Line Forms</Bold>
+        </Paragraph>
+        <Paragraph>
+            All command options are provided in two forms:
+        </Paragraph>
+        <List MarkerStyle="UpperRoman" MarkerOffset="6" Margin="6">
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Short Form</Bold>
+                </Paragraph>
+                <Paragraph>
+                    This is a single character representing the command and 
+                    must start with single hyphen <Bold>-</Bold>. 
+                </Paragraph>
+                <Paragraph>
+                    Examples are <Bold>-s</Bold> and <Bold>-o</Bold>.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Long Form</Bold>
+                </Paragraph>
+                <Paragraph>
+                    This is the full name of the command and must start with 
+                    double hyphens <Bold>--</Bold>.
+                </Paragraph>
+                <Paragraph>
+                    Examples are <Bold>--source</Bold> and <Bold>--output</Bold>.
+                </Paragraph>
+            </ListItem>
+        </List>
+        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <InlineUIContainer BaselineAlignment="Center">
+                                <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                            </InlineUIContainer>
+                            <Bold>Note</Bold>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            For file and directory paths, especially those containing
+                            spaces, use double quotes to specific them.
+                        </Paragraph>
+                        <Paragraph>
+                            For example, we could write input SVG source file as
+                        </Paragraph>
+                        <Paragraph>
+                            <LineBreak/>
+                            <Run FontWeight="Bold" Foreground="DeepSkyBlue">                                
+                            <![CDATA[
+                            >>SharpVectors.exe -s="X:\Test Sources\Test.svg" --output "Y:\Test Outputs\"
+                            ]]>
+                            </Run>
+                            <LineBreak/>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        
+        <Paragraph/>
+        <Paragraph Foreground="RoyalBlue" FontSize="18" KeepTogether="True">
+            <Bold>Command-Line Names</Bold>
+        </Paragraph>
+        <Paragraph>
+            This application supports three types of command-line names
+        </Paragraph>
+        <List MarkerStyle="UpperRoman" MarkerOffset="6" Margin="6">
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Value Names</Bold>
+                </Paragraph>
+                <Paragraph>
+                    Value names are matched when the argument consists of a 
+                    flag, followed by an option name, followed by a 
+                    <Bold>=</Bold> or <Bold>:</Bold>, followed by an (optional) string.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    Examples: <Bold>--image=png</Bold>, <Bold>--image:png</Bold> and 
+                    <Bold>/image=png</Bold> all provide a value for the <Bold>image</Bold> option.
+                    <LineBreak/>
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Boolean Names</Bold>
+                </Paragraph>
+                <Paragraph>
+                    Boolean names are matched when the argument consists of a flag, 
+                    followed by an option name, followed by <Bold>+</Bold> or <Bold>-</Bold>. 
+                    <LineBreak/>
+                    If a <Bold>+</Bold> follows the name, the option is enabled; 
+                    otherwise the option is disabled.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    Examples: <Bold>--runtime+</Bold> and <Bold>--runtime-</Bold> 
+                    enable and disble the <Bold>runtime</Bold> option.
+                    <LineBreak/>
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Switch Names</Bold>
+                </Paragraph>
+                <Paragraph>
+                    Switch names are matched when the argument consists 
+                    solely of a flag followed by an option name.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    Examples: <Bold>-h</Bold>, <Bold>--help</Bold> and 
+                    <Bold>/help</Bold> all provide a value for the <Bold>help</Bold> option.
+                    <LineBreak/>
+                </Paragraph>
+            </ListItem>
+        </List>
+        <Paragraph>The following are the current command-line options available. These command-line options are not case-sensitive.</Paragraph>
+        <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0">
+            <Table.Columns>
+                <TableColumn Width="140pt"/>
+                <TableColumn Width="80pt"/>
+                <TableColumn Width="120pt"/>
+                <TableColumn Width="140pt"/>
+            </Table.Columns>
+            <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <Run>Option</Run>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <Run>Type</Run>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <Run>Parameters</Run>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>
+                            <Run>Meaning</Run>
+                        </Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+            
+            <TableRowGroup>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-s, --source</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Value (Srings)</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>SVG file, file list or a directory</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies the source or the input SVG file or files. You can specify</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Single SVG file</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Multiple SVG files</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Directory of SVG files.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-o, --output</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Value (String)</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Directory</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies the output directory of the converted files.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-r, --recursive</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>For conversion of files in a directory, this specifies whether the search for SVG files in the directory is recursive or includes the sub-directories.</Paragraph>
+                        <Paragraph>The default is <Bold>false</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-t, --runtime</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph xml:space="preserve">This specifies whether to include links to the SharpVectors runtime library. </Paragraph>
+                        <Paragraph>The default is <Bold>false</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-e, --onError</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>For multiple files and directory conversion, this specifies whether to continue with the conversion when an error occurs in the conversion of a file.</Paragraph>
+                        <Paragraph>The default is <Bold>true</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-g, --textGeometry</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies whether to convert texts to path geometry.</Paragraph>
+                        <Paragraph>NOTE: This must be set to true, if you are not linking to the SharpVectors runtime library; otherwise, font locations on the end-user machine may not be correctly resolved.</Paragraph>
+                        <Paragraph>The default is <Bold>true</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-c, --customXamlWriter</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies whether to use the customized XAML writer, which is optimized for this conversion.</Paragraph>
+                        <Paragraph>The default is <Bold>true</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-x, --xaml</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies whether to generate the uncompressed XAML output format.</Paragraph>
+                        <Paragraph>The default is <Bold>true</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-z, --zaml</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies whether to generate the compressed XAML output format.</Paragraph>
+                        <Paragraph>The default is <Bold>false</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-i, --image</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Value (String Enumeration)</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Possible values are</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>png</Bold>, for PNG format
+                                </Paragraph>                                
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>gif</Bold>, for GIF format
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>jpeg</Bold>, for JPEG format
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>bmp</Bold>, for Windows Bitmap format
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>tiff</Bold>, for TIFF format
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>wdp</Bold>, for Window Media Photo format.
+                                </Paragraph>
+                            </ListItem>
+                        </List>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies whether to generate images and the format of the image.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-u, --ui</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Value (String Enumeration)</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Possible values are</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>none</Bold>, will run in a quiet mode - console without any message.
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>console</Bold>, will run in console mode - the default if the program is started from the command prompt.
+                                </Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>
+                                    <Bold>windows</Bold>, will run the program with full Windows GUI mode - the default when the application icon is double-clicked.
+                                </Paragraph>
+                            </ListItem>
+                        </List>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies the user-interface option; none, console or windows.
+                            <LineBreak /> The default depends on how the program is started.
+                        </Paragraph>
+                        <Paragraph>If started from the command prompt and this option is not explicitly stated, the program will run in the console mode.</Paragraph>
+                        <Paragraph>If started by double-clicking, the program will run in full windows mode.</Paragraph>
+                        <Paragraph>If started by dragging an dropping SVG files on the program icon, the program will run with minimum windows to show the progress of the conversion.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-h, -?, --help</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Switch</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph xml:space="preserve"> </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>This specifies whether to display this help for windows mode or command-line usage help in console mode.</Paragraph>
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph KeepTogether="True">
+                            <Bold>-b, --beep</Bold>
+                        </Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>Boolean</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>+ or -</Paragraph>
+                    </TableCell>
+                    <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                        <Paragraph>For a console mode, this specifies whether to beep at the end of the conversion process.</Paragraph>
+                        <Paragraph>The default is <Bold>false</Bold>.</Paragraph>
+                    </TableCell>
+                </TableRow>
+            </TableRowGroup>
+        </Table>
+        <Paragraph/>
+        <Paragraph Foreground="RoyalBlue" FontSize="18" KeepTogether="True">
+            <Bold>Command-Line Examples</Bold>
+        </Paragraph>
+        <List MarkerStyle="UpperRoman" MarkerOffset="6" Margin="6">
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Example: Converting single file</Bold>
+                </Paragraph>
+                <Paragraph>
+                    The following will convert the file to both <Italic>XAML</Italic>,
+                    the default, and <Italic>PNG</Italic> image.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -s "X:\Test Sources\Test.svg" -o "Y:\Test Outputs\" -i:png
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Example: Converting multiple files</Bold>
+                </Paragraph>
+                <Paragraph>
+                    The following will convert the listed files to only <Italic>JPEG</Italic> 
+                    images, by turning off the <Italic>XAML</Italic> output.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -s "X:\Sources\Test1.svg" "X:\Sources\Test2.svg" -z- -i=jpeg
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Example: Converting directory of files</Bold>
+                </Paragraph>
+                <Paragraph>
+                    The following will convert the SVG files in the specified directory 
+                    and its sub-directories to <Italic>XAML</Italic> files:
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -s "X:\Test Sources\" --recursive+
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="16">
+                    <Bold>Example: Displaying help</Bold>
+                </Paragraph>
+                <Paragraph>
+                    In the <Bold>console mode</Bold> or command window, 
+                    you can show the command usage with the following:
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -h
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -?
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe --help
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>                    
+                    In the <Bold>script mode</Bold>, you can use the following
+                    to display the help:
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    <Run>For the command usage in console window.</Run>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -h -u=console
+                            ]]>
+                    </Run>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run>For this help in full windows mode. Even in the
+                    command window, this will display this help.</Run>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" Foreground="DeepSkyBlue">
+                        <![CDATA[
+                            >>SharpVectors.exe -h -u=windows
+                            ]]>
+                    </Run>
+                </Paragraph>
+                <Table BorderBrush="RoyalBlue" BorderThickness="1" CellSpacing="0" Margin="16 8 16 8">
+                    <TableRowGroup Background="RoyalBlue" Foreground="White" FontWeight="Bold" FontSize="16">
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    <InlineUIContainer BaselineAlignment="Center">
+                                        <Image Margin="3" Width="16" Height="16" Source="/Images/SmallInformation.png"/>
+                                    </InlineUIContainer>
+                                    <Bold>Note</Bold>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell BorderThickness="1" BorderBrush="RoyalBlue">
+                                <Paragraph>
+                                    If the command-line is invalid or the information
+                                    provided is not sufficient for the conversion process,
+                                    the command usage is displayed.
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </ListItem>
+        </List>
+        <Paragraph TextAlignment="Left">
+            <Hyperlink NavigateUri="#Title">
+                <Bold>Top</Bold>
+            </Hyperlink>
+            <LineBreak/>
+        </Paragraph>
+    </Section>
+
+    <!-- Credit Section -->
+    <Section Name="Credits" BreakPageBefore="True">
+        <Paragraph Foreground="RoyalBlue" FontSize="24" KeepTogether="True">
+            <Bold>Credits</Bold>
+        </Paragraph>
+        <List MarkerStyle="UpperRoman">
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Open Source Community</Bold>
+                </Paragraph>
+                <Paragraph>
+                    We wish to acknowledge the works of the various open 
+                    source developers, which made this application possible.
+                    <LineBreak/>
+                </Paragraph>
+                <Paragraph>
+                    We also acknowledge the many bug fixes and reports, feature
+                    suggestions and feedback received from the community, which
+                    helped shape this application.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Mono.Options</Bold>
+                </Paragraph>
+                <Paragraph>
+                    This application uses the <Italic>Mono.Options</Italic>
+                    for the command-line parsing.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph Foreground="RoyalBlue" FontSize="18">
+                    <Bold>Avalon Editor</Bold>
+                </Paragraph>
+                <Paragraph>
+                    This application uses the <Italic>ICSharpCode.AvalonEdit</Italic> 
+                    editor library for viewing the converted XAML files.
+                </Paragraph>
+            </ListItem>
+        </List>
+        <Paragraph TextAlignment="Left">
+            <Hyperlink NavigateUri="#Title">
+                <Bold>Top</Bold>
+            </Hyperlink>
+            <LineBreak/>
+        </Paragraph>
+    </Section>
+
 </FlowDocument>

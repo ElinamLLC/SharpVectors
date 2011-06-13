@@ -23,7 +23,7 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap">
                     <Run>
-                        This program is based on the SharpVectors Reloaded library,
+                        This program is part of the SharpVectors Reloaded library,
                         an open source .NET library for SVG licensed under the New BSD License.
                     </Run>
                 </TextBlock>
@@ -58,6 +58,7 @@
                 <Run>
                     It can convert a single file or multiple files in a directory.
                 </Run> 
+                <LineBreak/>
                 <LineBreak/>
                 <Bold>NOTE:&#160;</Bold>
                 <Run>

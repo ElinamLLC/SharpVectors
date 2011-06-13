@@ -8,7 +8,7 @@ namespace SharpVectors.Converters
         #region Private Fields
 
         private bool   _isQuiet;
-        private bool   _isStarted;
+        private volatile bool _isStarted;
         private Thread _thread;
         private ConsoleWriter _writer;
 

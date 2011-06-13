@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
 
+using SharpVectors.Converters.Properties;
+
 namespace SharpVectors.Converters
 {
     /// <summary>
@@ -39,7 +41,7 @@ namespace SharpVectors.Converters
             this.MinWidth  = 640;
             this.MinHeight = 700;
 
-            this.Width     = 640;
+            this.Width     = 720;
             this.Height    = 700;
 
             _startTabIndex = 0;
@@ -148,7 +150,7 @@ namespace SharpVectors.Converters
         #region Private Event Handlers
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
-        {
+        {               
             if (_displayHelp)
             {
                 TabItem helpItem = (TabItem)tabSteps.Items[5];
@@ -170,6 +172,15 @@ namespace SharpVectors.Converters
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
+            try
+            {
+                Settings.Default.Save();
+            }
+            catch
+            {
+            	
+            }
+
             try
             {
                 if (_operationCount > 0)

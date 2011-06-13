@@ -3,6 +3,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SharpVectors.Runtime
@@ -79,6 +80,83 @@ namespace SharpVectors.Runtime
         }
 
         #endregion Properties
+
+        /// <summary>
+        /// In the designer Data is not set. To prevent exceptions when displaying in the Designer, add a dummy bitmap.
+        /// </summary>
+        private void EnsureStream()
+        {
+            if (_stream == null)
+            {
+                BitmapSource dummyBitmap = BitmapSource.Create(1, 1, 96.0, 96.0,
+                    PixelFormats.Pbgra32, null, new byte[] { 0, 0, 0, 0 }, 4);
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(dummyBitmap));
+                MemoryStream stream = new MemoryStream();
+                encoder.Save(stream);
+                Data = new EmbeddedBitmapData(stream);
+            }
+        }
+
+        public override double DpiX
+        {
+            get
+            {
+                EnsureStream();
+                return base.DpiX;
+            }
+        }
+
+        public override double DpiY
+        {
+            get
+            {
+                EnsureStream();
+                return base.DpiY;
+            }
+        }
+
+        public override System.Windows.Media.PixelFormat Format
+        {
+            get
+            {
+                EnsureStream();
+                return base.Format;
+            }
+        }
+
+        public override BitmapPalette Palette
+        {
+            get
+            {
+                EnsureStream();
+                return base.Palette;
+            }
+        }
+
+        public override int PixelWidth
+        {
+            get
+            {
+                EnsureStream();
+                return base.PixelWidth;
+            }
+        }
+
+        public override int PixelHeight
+        {
+            get
+            {
+                EnsureStream();
+                return base.PixelHeight;
+            }
+        }
+
+        public override void CopyPixels(Int32Rect sourceRect, IntPtr buffer, int bufferSize, int stride)
+        {
+            EnsureStream();
+            base.CopyPixels(sourceRect, buffer, bufferSize, stride);
+        }
 
         #region Protected Methods
 

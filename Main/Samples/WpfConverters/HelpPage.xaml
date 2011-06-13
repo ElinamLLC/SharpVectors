@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Help Page" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="Verdana" FontSize="10">
     <DockPanel LastChildFill="True"> 
-        <FlowDocumentReader Name="helpViewer" ViewingMode="Scroll" IsTwoPageViewEnabled="False" IsPageViewEnabled="False"/>
+        <!--<FlowDocumentScrollViewer Name="helpViewer" IsToolBarVisible="True" HorizontalScrollBarVisibility="Visible"/>-->
+        <FlowDocumentReader Name="helpViewer" Zoom="1" ViewingMode="Scroll" IsTwoPageViewEnabled="False" IsPageViewEnabled="False"/>
     </DockPanel>
 </Page>
