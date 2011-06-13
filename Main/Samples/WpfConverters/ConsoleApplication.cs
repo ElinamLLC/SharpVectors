@@ -409,12 +409,12 @@ namespace SharpVectors.Converters
             if (isSuccessful)
             {
                 this.AppendLines("Conversion: Successful",
-                    "The conversion of the specified file is completed successfully.", false);
+                    "The conversion is completed successfully.", false);
             }
             else
             {
                 this.AppendLines("Conversion: Failed",
-                    "The conversion of the specified file failed, see the output for further information.", true);
+                    "The conversion failed, see the output for further information.", true);
             }
 
             _isConversionError = isSuccessful ? false : true;

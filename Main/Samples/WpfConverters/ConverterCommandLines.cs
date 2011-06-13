@@ -302,11 +302,11 @@ namespace SharpVectors.Converters
                     this.EndOptionsUsage(writer);
 
                     _usage = writer.ToString();
-                }                   
+                }
 
+                List<string> listExtra  = parser.Parse(_args);
                 List<string> sourceArgs = new List<string>(sourceSet.Keys);
 
-                List<string> listExtra = parser.Parse(_args);
                 if (listExtra != null && listExtra.Count != 0)
                 {
                     sourceArgs.AddRange(listExtra);

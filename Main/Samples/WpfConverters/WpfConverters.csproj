@@ -180,6 +180,7 @@
     <Compile Include="IObserver.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MainWindowSettings.cs" />
     <Compile Include="Microsoft\Windows\Controls\ButtonBaseBehavior.cs" />
     <Compile Include="Microsoft\Windows\Controls\ControlBehavior.cs" />
     <Compile Include="Microsoft\Windows\Controls\ListBoxItemBehavior.cs" />
@@ -224,6 +225,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -268,6 +270,23 @@
   <ItemGroup>
     <Resource Include="Images\SharpVectors.ico" />
     <Resource Include="Images\SharpVectors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SmallError.png" />
+    <Resource Include="Images\SmallInformation.png" />
+    <Resource Include="Images\SmallQuestion.png" />
+    <Resource Include="Images\SmallSecurity.png" />
+    <Resource Include="Images\SmallSecurityError.png" />
+    <Resource Include="Images\SmallSecurityQuestion.png" />
+    <Resource Include="Images\SmallSecuritySucess.png" />
+    <Resource Include="Images\SmallSecurityWarning.png" />
+    <Resource Include="Images\SmallWarning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MinimalWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ConsoleConversion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
