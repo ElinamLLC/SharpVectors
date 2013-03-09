@@ -1,5 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A1967865-8F3B-4976-A7EC-8F91EAE4C964}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Css", "SharpVectorCss\SharpVectors.Css.csproj", "{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Dom", "SharpVectorDom\SharpVectors.Dom.csproj", "{FE34CBC0-D23C-4A95-BA64-83A031814010}"
@@ -9,8 +11,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Gdi", "SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj", "{0AD99D97-24ED-484D-9430-9905811F8A4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core", "SharpVectorCore\SharpVectors.Core.csproj", "{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A1967865-8F3B-4976-A7EC-8F91EAE4C964}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Wpf", "SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
 EndProject
@@ -32,7 +32,7 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS13
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs13
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = ..\\Samples\\GdiTestSvgControl\\GdiTestSvgControl.csproj
 		SccProjectTopLevelParentUniqueName1 = SharpVectorsReloaded.sln

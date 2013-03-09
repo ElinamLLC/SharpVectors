@@ -254,7 +254,7 @@ namespace SharpVectors.Dom.Svg
 
             XmlReaderSettings settings = new XmlReaderSettings();
 
-            settings.ProhibitDtd                  = false;
+            settings.DtdProcessing                = DtdProcessing.Parse;
 
             settings.IgnoreComments               = _ignoreComments;
             settings.IgnoreWhitespace             = _ignoreWhitespace;

@@ -17,7 +17,7 @@ using System.Security.Permissions;
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AllowPartiallyTrustedCallers] 
+//[assembly: AllowPartiallyTrustedCallers] 
 
 //
 // Version information for an assembly consists of the following four values:
