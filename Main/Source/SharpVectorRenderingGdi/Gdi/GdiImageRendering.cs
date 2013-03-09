@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Net;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -34,7 +35,7 @@ namespace SharpVectors.Renderers.Gdi
         public override void Render(GdiGraphicsRenderer renderer)
 		{
             GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
-			SvgImageElement iElement = (SvgImageElement) element;
+			SvgImageElement iElement = (SvgImageElement)element;
 
 			ImageAttributes imageAttributes = new ImageAttributes();
 
@@ -50,15 +51,18 @@ namespace SharpVectors.Renderers.Gdi
 				myColorMatrix.Matrix44 = 1.00f; // w
 
 				imageAttributes.SetColorMatrix(myColorMatrix,
-                    ColorMatrixFlag.Default,ColorAdjustType.Bitmap);
+                    ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 			}
 
             float width  = (float)iElement.Width.AnimVal.Value;
 			float height = (float)iElement.Height.AnimVal.Value;
 
-            Rectangle destRect = new Rectangle(Convert.ToInt32(iElement.X.AnimVal.Value),
-                Convert.ToInt32(iElement.Y.AnimVal.Value), 
-                Convert.ToInt32(width), Convert.ToInt32(height));
+            //Rectangle destRect = new Rectangle(Convert.ToInt32(iElement.X.AnimVal.Value),
+            //    Convert.ToInt32(iElement.Y.AnimVal.Value), 
+            //    Convert.ToInt32(width), Convert.ToInt32(height));
+            RectangleF destRect = new RectangleF((float)iElement.X.AnimVal.Value,
+                (float)iElement.Y.AnimVal.Value, (float)iElement.Width.AnimVal.Value,
+                (float)iElement.Height.AnimVal.Value);
 
 			Image image = null;
 			if (iElement.IsSvgImage)
@@ -76,8 +80,19 @@ namespace SharpVectors.Renderers.Gdi
 
 			if (image != null)
 			{
-				graphics.DrawImage(this, image, destRect, 0f, 0f,
-                    image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
+                //graphics.DrawImage(this, image, destRect, 0f, 0f,
+                //    image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
+
+                // code extracted from FitToViewbox
+                SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)iElement.PreserveAspectRatio.AnimVal ?? new SvgPreserveAspectRatio("none", iElement);
+
+                double[] translateAndScale =
+                    spar.FitToViewBox(new SvgRect(0, 0, image.Width, image.Height),
+                                      new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
+                graphics.TranslateTransform((float)translateAndScale[0], (float)translateAndScale[1]);
+                graphics.ScaleTransform((float)translateAndScale[2], (float)translateAndScale[3]);
+                graphics.DrawImage(this, image, new Rectangle(0, 0, image.Width, image.Height), 0f, 0f,
+                     image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
 
                 image.Dispose();
                 image = null;
@@ -99,6 +114,13 @@ namespace SharpVectors.Renderers.Gdi
         #endregion
 
         #region Private Methods
+ 
+	    private static Rectangle ToRectangle(RectangleF rect)
+	    {
+	        return new Rectangle((int) Math.Round(rect.Left), 
+                (int) Math.Round(rect.Top), (int) Math.Round(rect.Width), 
+                (int) Math.Round(rect.Height));
+	    }
 
         private SvgWindow GetSvgWindow()
 		{
@@ -129,7 +151,18 @@ namespace SharpVectors.Renderers.Gdi
                         return Bitmap.FromFile(imageUri.LocalPath);
                     }
 
-                    Stream stream = svgUri.ReferencedResource.GetResponseStream();
+                    WebResponse resource = svgUri.ReferencedResource;
+                    if (resource == null)
+                    {
+                        return null;
+                    }
+
+                    Stream stream = resource.GetResponseStream();
+                    if (stream == null)
+                    {
+                        return null;
+                    }
+ 
                     return Bitmap.FromStream(stream);
                 }
                 else

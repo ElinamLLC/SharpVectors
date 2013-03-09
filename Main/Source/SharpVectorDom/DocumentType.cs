@@ -8,10 +8,7 @@ namespace SharpVectors.Dom
 	/// <summary>
 	/// Summary description for DocumentType.
 	/// </summary>
-	public class DocumentType
-		: XmlDocumentType
-		, INode
-		, IEventTargetSupport
+	public class DocumentType : XmlDocumentType, INode, IEventTargetSupport
 	{
 		#region Private Fields
 		
@@ -21,12 +18,8 @@ namespace SharpVectors.Dom
 		
 		#region Constructors
 		
-		public DocumentType(
-			string name,
-			string publicId,
-			string systemId,
-			string internalSubset,
-			Document document)
+		public DocumentType(string name, string publicId, string systemId,
+            string internalSubset, Document document)
 			: base(name, publicId, systemId, internalSubset, document)
 		{
 			eventTarget = new EventTarget(this);

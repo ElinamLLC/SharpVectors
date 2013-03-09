@@ -121,23 +121,38 @@ namespace SharpVectors.Renderers.Gdi
                 return;
             }
 
-            //_rendererMap[svgElement] = renderingNode;
-            _rendererMap.Push(renderingNode);
-            renderingNode.BeforeRender(_renderer);
-
-            renderingNode.Render(_renderer);
-
-            if (!renderingNode.IsRecursive && svgElement.HasChildNodes)
+            bool shouldRender = true;
+            SvgStyleableElement stylable = svgElement as SvgStyleableElement;
+            if (stylable != null)
             {
-                RenderChildren(svgElement);
+                string sVisibility = stylable.GetPropertyValue("visibility");
+                string sDisplay = stylable.GetPropertyValue("display");
+                if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+                {
+                    shouldRender = false;
+                }
             }
 
-            //renderingNode = _rendererMap[svgElement];
-            renderingNode = _rendererMap.Pop();
-            Debug.Assert(renderingNode.Element == svgElement);
-            renderingNode.AfterRender(_renderer);
+            if (shouldRender) 
+            {   
+                //_rendererMap[svgElement] = renderingNode;
+                _rendererMap.Push(renderingNode);
+                renderingNode.BeforeRender(_renderer);
 
-            //_rendererMap.Remove(svgElement);
+                renderingNode.Render(_renderer);
+
+                if (!renderingNode.IsRecursive && svgElement.HasChildNodes)
+                {
+                    RenderChildren(svgElement);
+                }
+
+                //renderingNode = _rendererMap[svgElement];
+                renderingNode = _rendererMap.Pop();
+                Debug.Assert(renderingNode.Element == svgElement);
+                renderingNode.AfterRender(_renderer);
+
+                //_rendererMap.Remove(svgElement);
+            }
 
             renderingNode.Dispose();
             renderingNode = null;

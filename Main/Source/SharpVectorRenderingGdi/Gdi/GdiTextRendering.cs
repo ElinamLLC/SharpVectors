@@ -117,6 +117,17 @@ namespace SharpVectors.Renderers.Gdi
             XmlNodeType nodeType = XmlNodeType.None;
             foreach (XmlNode child in element.ChildNodes)
             {
+                SvgStyleableElement stylable = child as SvgStyleableElement;
+                if (stylable != null)
+                {
+                    sVisibility = stylable.GetPropertyValue("visibility");
+                    sDisplay = stylable.GetPropertyValue("display");
+                    if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+                    {
+                        continue;
+                    }
+                }
+
                 nodeType = child.NodeType;
                 if (nodeType == XmlNodeType.Text)
                 {

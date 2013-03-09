@@ -85,9 +85,17 @@
                 MouseDown="OnZoomPanMouseDown" MouseUp="OnZoomPanMouseUp"
                 MouseMove="OnZoomPanMouseMove" MouseWheel="OnZoomPanMouseWheel">
 
-                <!-- This Canvas is the content that is displayed by the ZoomPanControl.
-                Width and Height determine the size of the content. -->
-                <svg:SvgDrawingCanvas x:Name="svgViewer" Background="White"/>
+                <Canvas Name="LayerContainer" Width="{Binding ElementName=svgViewer, Path=ActualWidth}"
+                         Height="{Binding ElementName=svgViewer, Path=ActualHeight}">
+                    <!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                    Width and Height determine the size of the content. -->
+                    <svg:SvgDrawingCanvas x:Name="svgViewer" Background="White"/>
+                
+                    <Canvas Name="UserLayer" Width="{Binding ElementName=svgViewer, Path=ActualWidth}"
+                             Height="{Binding ElementName=svgViewer, Path=ActualHeight}">                    
+                        <Button Background="Red" Content="TestButton" Width="75" Height="29"/>
+                    </Canvas>                    
+                </Canvas>
 
             </svg:ZoomPanControl>
 

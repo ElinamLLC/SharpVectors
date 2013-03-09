@@ -672,7 +672,7 @@ namespace SharpVectors.Converters
             double dpiY     = 96;
 
             // The Visual to use as the source of the RenderTargetBitmap.
-            DrawingVisualEx drawingVisual = new DrawingVisualEx();
+            DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
             drawingContext.DrawDrawing(drawing);
             drawingContext.Close();
@@ -949,29 +949,6 @@ namespace SharpVectors.Converters
         }
 
         #endregion
-
-        #endregion
-
-        #region DrawingVisualEx Class
-
-        public sealed class DrawingVisualEx : DrawingVisual
-        {
-            public DrawingVisualEx()
-            {   
-            }
-
-            public Effect Effect
-            {
-                get
-                {
-                    return this.VisualEffect;
-                }
-                set
-                {
-                    this.VisualEffect = value;
-                }
-            }
-        }
 
         #endregion
     }

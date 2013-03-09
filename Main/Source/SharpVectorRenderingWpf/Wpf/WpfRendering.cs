@@ -453,7 +453,9 @@ namespace SharpVectors.Renderers.Wpf
                     WpfDrawingContext maskContext = new WpfDrawingContext(true,
                         settings);
 
-                    maskContext.Initialize(null, context.FontFamilyVisitor, null);
+                    //maskContext.Initialize(null, context.FontFamilyVisitor, null);
+                    maskContext.Initialize(context.LinkVisitor,
+                        context.FontFamilyVisitor, context.ImageVisitor);
 
                     renderer.RenderMask(maskElement, maskContext);
                     Drawing image = renderer.Drawing;
@@ -497,11 +499,10 @@ namespace SharpVectors.Renderers.Wpf
                     ////maskBrush.AlignmentX = AlignmentX.Center;
                     ////maskBrush.AlignmentY = AlignmentY.Center;
 
-                    this.Masking = maskBrush;
+                    this.Masking      = maskBrush;
 
                     _maskUnits        = (SvgUnitType)maskElement.MaskUnits.AnimVal;
                     _maskContentUnits = (SvgUnitType)maskElement.MaskContentUnits.AnimVal;
-
                 }
             }
         }
