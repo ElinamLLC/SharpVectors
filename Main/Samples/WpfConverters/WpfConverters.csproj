@@ -24,7 +24,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -234,15 +234,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainWindowSettings.cs" />
-    <Compile Include="Microsoft\Windows\Controls\ButtonBaseBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\ControlBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\ListBoxItemBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\ProgressBarBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\TextBoxBaseBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\ToggleButtonBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\TypeHandlerFactory.cs" />
-    <Compile Include="Microsoft\Windows\Controls\VisualStateBehavior.cs" />
-    <Compile Include="Microsoft\Windows\Controls\VisualStateBehaviorFactory.cs" />
     <Compile Include="MouseHandlingMode.cs" />
     <Compile Include="ConverterOptionsParser.cs" />
     <Compile Include="OptionsPage.xaml.cs">
@@ -265,13 +256,6 @@
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="System\Windows\TemplateVisualStateAttribute.cs" />
-    <Compile Include="System\Windows\VisualState.cs" />
-    <Compile Include="System\Windows\VisualStateChangedEventArgs.cs" />
-    <Compile Include="System\Windows\VisualStateGroup.cs" />
-    <Compile Include="System\Windows\VisualStateManager.cs" />
-    <Compile Include="System\Windows\VisualTransition.cs" />
-    <Compile Include="VerticalTabItem.cs" />
     <Compile Include="WatermarkAdorner.cs" />
     <Compile Include="WatermarkService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

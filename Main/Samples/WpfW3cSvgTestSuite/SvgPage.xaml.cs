@@ -21,7 +21,7 @@ using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.CodeCompletion;
-using ICSharpCode.AvalonEdit.Searching;
+using ICSharpCode.AvalonEdit.Search;
 
 using Microsoft.Win32;
 
@@ -34,10 +34,10 @@ namespace WpfW3cSvgTestSuite
     {
         private string currentFileName;
 
-        private TextEditorSearchTarget _searchText;
-
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
+
+        private SearchInputHandler _searchHandler;
 
         public SvgPage()
         {
@@ -60,7 +60,8 @@ namespace WpfW3cSvgTestSuite
             _foldingManager  = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
-            _searchText = new TextEditorSearchTarget(textEditor);
+            _searchHandler = new SearchInputHandler(textEditor.TextArea);
+            textEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(_searchHandler);
         }
 
         public void LoadDocument(string documentFileName)
@@ -171,12 +172,8 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            SearchOptions.FindPattern = searchText;
-            SearchManager.Initialize(_searchText);
-
-            SearchManager.FindNext();
-
-            SearchManager.Uninitialize();
+            _searchHandler.SearchPattern = searchText;
+            _searchHandler.FindNext();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)

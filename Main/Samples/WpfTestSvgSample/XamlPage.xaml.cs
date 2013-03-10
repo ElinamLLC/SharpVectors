@@ -20,7 +20,7 @@ using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.CodeCompletion;
-using ICSharpCode.AvalonEdit.Searching;
+using ICSharpCode.AvalonEdit.Search;
 
 using Microsoft.Win32;
 
@@ -35,10 +35,10 @@ namespace WpfTestSvgSample
 
         private string currentFileName;
 
-        private TextEditorSearchTarget _searchText;
-
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
+
+        private SearchInputHandler _searchHandler;
 
         #endregion
 
@@ -64,12 +64,13 @@ namespace WpfTestSvgSample
             _foldingManager  = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
-            _searchText = new TextEditorSearchTarget(textEditor);
-
             textEditor.CommandBindings.Add(new CommandBinding(
                 ApplicationCommands.Print, OnPrint, OnCanExecuteTextEditorCommand));
             textEditor.CommandBindings.Add(new CommandBinding(
                 ApplicationCommands.PrintPreview, OnPrintPreview, OnCanExecuteTextEditorCommand));
+
+            _searchHandler = new SearchInputHandler(textEditor.TextArea);
+            textEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(_searchHandler);
         }
 
         #endregion
@@ -198,12 +199,8 @@ namespace WpfTestSvgSample
                 return;
             }
 
-            SearchOptions.FindPattern = searchText;
-            SearchManager.Initialize(_searchText);
-
-            SearchManager.FindNext();
-
-            SearchManager.Uninitialize();
+            _searchHandler.SearchPattern = searchText;
+            _searchHandler.FindNext();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)

@@ -34,7 +34,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -130,9 +130,6 @@
     </Reference>
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
-    </Reference>
-    <Reference Include="System.Drawing.Design">
-      <Name>System.Drawing.Design</Name>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
