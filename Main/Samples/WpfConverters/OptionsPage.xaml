@@ -24,9 +24,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Conversion Options" Grid.Row="0" Padding="3" Margin="4" FontSize="32" FontWeight="Bold">               
-                <TextBlock.BitmapEffect>
-                    <OuterGlowBitmapEffect GlowSize="4.0" GlowColor="DarkBlue" Opacity="0.5"/>
-                </TextBlock.BitmapEffect>
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="8.0" Color="DarkBlue" Opacity="0.5"/>
+            </TextBlock.Effect>
         </TextBlock>
         <TextBlock Grid.Row="1" Padding="3" TextWrapping="Wrap">            
             <Run>

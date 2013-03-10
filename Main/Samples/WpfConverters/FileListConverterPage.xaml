@@ -48,9 +48,9 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0">
                 <TextBlock Text="File List Conversion" Foreground="DarkKhaki" Padding="6" Margin="4" FontSize="32" FontWeight="Bold">               
-                    <TextBlock.BitmapEffect>
-                        <OuterGlowBitmapEffect GlowSize="4.0" GlowColor="Khaki" Opacity="0.7"/>
-                    </TextBlock.BitmapEffect>
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="8.0" Color="Khaki" Opacity="0.7"/>
+                    </TextBlock.Effect>
                 </TextBlock>
                 <local:CircularProgressBar x:Name="progressBar" DockPanel.Dock="Right" Height="32" StartupDelay="0" Foreground="DarkKhaki"/>
             </DockPanel>

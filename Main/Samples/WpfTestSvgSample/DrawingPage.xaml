@@ -93,7 +93,6 @@
                 
                     <Canvas Name="UserLayer" Width="{Binding ElementName=svgViewer, Path=ActualWidth}"
                              Height="{Binding ElementName=svgViewer, Path=ActualHeight}">                    
-                        <Button Background="Red" Content="TestButton" Width="75" Height="29"/>
                     </Canvas>                    
                 </Canvas>
 

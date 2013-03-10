@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSvgConverterSample", "FileSvgConverterSample\FileSvgConverterSample.csproj", "{16A053A5-4926-485B-979D-AC4DD5CC109A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectorySvgConverterSample", "DirectorySvgConverterSample\DirectorySvgConverterSample.csproj", "{25AA961C-5D23-4C9B-8A8C-D8B2E93BDB4F}"
@@ -25,7 +25,7 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS13
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs13
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = FileSvgConverterSample\\FileSvgConverterSample.csproj
 		SccProjectName1 = FileSvgConverterSample

@@ -44,9 +44,9 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal"> 
                 <Image Source="Images/SharpVectors.png" Width="32" Height="32"/>
                 <TextBlock Text="SVG-WPF Converter" Padding="6" Margin="4" FontSize="32" FontWeight="Bold">               
-                        <TextBlock.BitmapEffect>
-                            <OuterGlowBitmapEffect GlowSize="4.0" GlowColor="DarkBlue" Opacity="0.5"/>
-                        </TextBlock.BitmapEffect>
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="8.0" Color="DarkBlue" Opacity="0.5"/>
+                    </TextBlock.Effect>
                 </TextBlock>
             </StackPanel>
             <TextBlock Grid.Row="1" Padding="6" TextWrapping="Wrap">            

@@ -27,24 +27,24 @@
             </DockPanel>
         </Border>
         <TabControl Name="tabSteps" Template="{StaticResource VerticalTabControl}">
-            <local:VerticalTabItem Header="Start Page" FocusVisualStyle="{x:Null}">
+            <TabItem Header="Start Page" FocusVisualStyle="{x:Null}">
                 <Frame Name="startupFrame" NavigationUIVisibility="Visible" Source="StartPage.xaml"/>
-            </local:VerticalTabItem>
-            <local:VerticalTabItem Header="Files" FocusVisualStyle="{x:Null}">
+            </TabItem>
+            <TabItem Header="Files" FocusVisualStyle="{x:Null}">
                 <Frame Name="filesFrame" NavigationUIVisibility="Visible"/>
-            </local:VerticalTabItem>
-            <local:VerticalTabItem Header="Files List" FocusVisualStyle="{x:Null}">
+            </TabItem>
+            <TabItem Header="Files List" FocusVisualStyle="{x:Null}">
                 <Frame Name="filesListFrame" NavigationUIVisibility="Visible"/>
-            </local:VerticalTabItem>
-            <local:VerticalTabItem Header="Directories" FocusVisualStyle="{x:Null}">
+            </TabItem>
+            <TabItem Header="Directories" FocusVisualStyle="{x:Null}">
                 <Frame Name="directoriesFrame" NavigationUIVisibility="Visible"/>
-            </local:VerticalTabItem>
-            <local:VerticalTabItem Header="Options" FocusVisualStyle="{x:Null}">
+            </TabItem>
+            <TabItem Header="Options" FocusVisualStyle="{x:Null}">
                 <Frame Name="optionsFrame" NavigationUIVisibility="Hidden"/>
-            </local:VerticalTabItem>
-            <local:VerticalTabItem Header="Help" FocusVisualStyle="{x:Null}">
+            </TabItem>
+            <TabItem Header="Help" FocusVisualStyle="{x:Null}">
                 <Frame Name="helpFrame" NavigationUIVisibility="Hidden" Source="HelpPage.xaml"/>
-            </local:VerticalTabItem>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
