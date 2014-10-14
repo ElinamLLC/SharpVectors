@@ -12,6 +12,8 @@ namespace SharpVectors.Runtime
     {
         #region Private Fields
 
+        private string _mimeType;
+
         private BitmapImage  _bitmap;
         private MemoryStream _stream;
 
@@ -22,6 +24,7 @@ namespace SharpVectors.Runtime
         public EmbeddedBitmapSource()
             : base()
         {
+            _mimeType = "image/png";
             //
             // Set the _useVirtuals private fields of BitmapSource to true. otherwise you will not be able to call BitmapSource methods.
             FieldInfo field = typeof(BitmapSource).GetField("_useVirtuals", 
@@ -79,25 +82,6 @@ namespace SharpVectors.Runtime
             }
         }
 
-        #endregion Properties
-
-        /// <summary>
-        /// In the designer Data is not set. To prevent exceptions when displaying in the Designer, add a dummy bitmap.
-        /// </summary>
-        private void EnsureStream()
-        {
-            if (_stream == null)
-            {
-                BitmapSource dummyBitmap = BitmapSource.Create(1, 1, 96.0, 96.0,
-                    PixelFormats.Pbgra32, null, new byte[] { 0, 0, 0, 0 }, 4);
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(dummyBitmap));
-                MemoryStream stream = new MemoryStream();
-                encoder.Save(stream);
-                Data = new EmbeddedBitmapData(stream);
-            }
-        }
-
         public override double DpiX
         {
             get
@@ -152,11 +136,33 @@ namespace SharpVectors.Runtime
             }
         }
 
-        public override void CopyPixels(Int32Rect sourceRect, IntPtr buffer, int bufferSize, int stride)
+        public string MimeType 
+        {
+            get 
+            {
+                return _mimeType;
+            }
+            set
+            {
+                if (value != null && value.Length != 0) 
+                { 
+                    _mimeType = value;
+                }
+            }
+        }
+
+        #endregion Properties
+
+        #region Public Methods
+
+        public override void CopyPixels(Int32Rect sourceRect, IntPtr buffer, 
+            int bufferSize, int stride)
         {
             EnsureStream();
             base.CopyPixels(sourceRect, buffer, bufferSize, stride);
         }
+
+        #endregion
 
         #region Protected Methods
 
@@ -253,6 +259,23 @@ namespace SharpVectors.Runtime
 
             this.InitWicInfo(_bitmap);
             this.EndInit();
+        }
+
+        /// <summary>
+        /// In the designer Data is not set. To prevent exceptions when displaying in the Designer, add a dummy bitmap.
+        /// </summary>
+        private void EnsureStream()
+        {
+            if (_stream == null)
+            {
+                BitmapSource dummyBitmap = BitmapSource.Create(1, 1, 96.0, 96.0,
+                    PixelFormats.Pbgra32, null, new byte[] { 0, 0, 0, 0 }, 4);
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(dummyBitmap));
+                MemoryStream stream = new MemoryStream();
+                encoder.Save(stream);
+                this.Data = new EmbeddedBitmapData(stream);
+            }
         }
 
         #endregion Methods
