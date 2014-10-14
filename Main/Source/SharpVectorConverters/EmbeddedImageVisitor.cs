@@ -28,8 +28,7 @@ namespace SharpVectors.Converters
             int nSemiColon = sURI.IndexOf(";");
             int nComma     = sURI.IndexOf(",");
 
-            string sMimeType  = sURI.Substring(nColon + 1, 
-                nSemiColon - nColon - 1);
+            string sMimeType  = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
 
             string sContent   = sURI.Substring(nComma + 1);
             byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),

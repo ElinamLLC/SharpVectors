@@ -43,7 +43,7 @@ namespace SharpVectors.Converters
         private DrawingGroup _drawing;
 
         private ImageEncoderType _encoderType;
-        private BitmapEncoder    _bitampEncoder;
+        private BitmapEncoder    _bitmapEncoder;
 
         /// <summary> 
         /// Required designer variable.
@@ -178,11 +178,11 @@ namespace SharpVectors.Converters
         {
             get
             {
-                return _bitampEncoder;
+                return _bitmapEncoder;
             }
             set
             {
-                _bitampEncoder = value;
+                _bitmapEncoder = value;
             }
         }
 
@@ -488,7 +488,7 @@ namespace SharpVectors.Converters
 
         private bool SaveImageFile(Drawing drawing, Stream imageStream)
         {
-            BitmapEncoder bitampEncoder = this.GetBitmapEncoder(
+            BitmapEncoder bitmapEncoder = this.GetBitmapEncoder(
                 this.GetImageFileExtention());
 
             // The image parameters...
@@ -510,20 +510,20 @@ namespace SharpVectors.Converters
             targetBitmap.Render(drawingVisual);
 
             // Encoding the RenderBitmapTarget as an image file.
-            bitampEncoder.Frames.Add(BitmapFrame.Create(targetBitmap));
-            bitampEncoder.Save(imageStream);
+            bitmapEncoder.Frames.Add(BitmapFrame.Create(targetBitmap));
+            bitmapEncoder.Save(imageStream);
 
             return true;
         }
 
         private BitmapEncoder GetBitmapEncoder(string fileExtension)
         {
-            BitmapEncoder bitampEncoder = null;
+            BitmapEncoder bitmapEncoder = null;
 
-            if (_bitampEncoder != null && _bitampEncoder.CodecInfo != null)
+            if (_bitmapEncoder != null && _bitmapEncoder.CodecInfo != null)
             {
                 string mimeType = String.Empty;
-                BitmapCodecInfo codecInfo = _bitampEncoder.CodecInfo;
+                BitmapCodecInfo codecInfo = _bitmapEncoder.CodecInfo;
                 string mimeTypes      = codecInfo.MimeTypes;
                 string fileExtensions = codecInfo.FileExtensions;
                 switch (_encoderType)
@@ -552,7 +552,7 @@ namespace SharpVectors.Converters
                     fileExtensions.IndexOf(fileExtension,
                     StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    bitampEncoder = _bitampEncoder;
+                    bitmapEncoder = _bitmapEncoder;
                 }    
                 else if (!String.IsNullOrEmpty(mimeTypes) &&
                     !String.IsNullOrEmpty(mimeType))
@@ -563,50 +563,50 @@ namespace SharpVectors.Converters
                         if (mimeTypes.IndexOf(arrayMimeTypes[i], 
                             StringComparison.OrdinalIgnoreCase) >= 0)
                         {   
-                            bitampEncoder = _bitampEncoder;
+                            bitmapEncoder = _bitmapEncoder;
                             break;
                         }
                     }
                 }
             }
 
-            if (bitampEncoder == null)
+            if (bitmapEncoder == null)
             {   
                 switch (_encoderType)
                 {
                     case ImageEncoderType.BmpBitmap:
-                        bitampEncoder = new BmpBitmapEncoder();
+                        bitmapEncoder = new BmpBitmapEncoder();
                         break;
                     case ImageEncoderType.GifBitmap:
-                        bitampEncoder = new GifBitmapEncoder();
+                        bitmapEncoder = new GifBitmapEncoder();
                         break;
                     case ImageEncoderType.JpegBitmap:
                         JpegBitmapEncoder jpgEncoder = new JpegBitmapEncoder();
                         // Set the default/user options...
-                        bitampEncoder = jpgEncoder;
+                        bitmapEncoder = jpgEncoder;
                         break;
                     case ImageEncoderType.PngBitmap:
                         PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
                         // Set the default/user options...
-                        bitampEncoder = pngEncoder;
+                        bitmapEncoder = pngEncoder;
                         break;
                     case ImageEncoderType.TiffBitmap:
-                        bitampEncoder = new TiffBitmapEncoder();
+                        bitmapEncoder = new TiffBitmapEncoder();
                         break;
                     case ImageEncoderType.WmpBitmap:
                         WmpBitmapEncoder wmpEncoder = new WmpBitmapEncoder();
                         // Set the default/user options...
-                        bitampEncoder = wmpEncoder;
+                        bitmapEncoder = wmpEncoder;
                         break;
                 }
             }  
 
-            if (bitampEncoder == null)
+            if (bitmapEncoder == null)
             {
-                bitampEncoder = new PngBitmapEncoder();
+                bitmapEncoder = new PngBitmapEncoder();
             }
 
-            return bitampEncoder;
+            return bitmapEncoder;
         }
 
         private string GetImageFileExtention()

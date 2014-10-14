@@ -11,6 +11,8 @@ namespace SharpVectors.Dom.Svg
 
         #region Private Fields
 
+        private bool _isDefaultAlign;
+
         private SvgElement ownerElement;
 
         private SvgMeetOrSlice _meetOrSlice;
@@ -58,12 +60,14 @@ namespace SharpVectors.Dom.Svg
                         break;
                     default:
                         _alignment = SvgPreserveAspectRatioType.XMidYMid;
+                        _isDefaultAlign = true;
                         break;
                 }
             }
             else
             {
                 _alignment = SvgPreserveAspectRatioType.XMidYMid;
+                _isDefaultAlign = true;
             }
 
             if (match.Groups["meet"].Success)
@@ -89,6 +93,18 @@ namespace SharpVectors.Dom.Svg
                 _meetOrSlice = SvgMeetOrSlice.Meet;
             }
         }
+        #endregion
+
+        #region Public Properties
+
+        public bool IsDefaultAlign
+        {
+            get
+            {
+                return _isDefaultAlign;
+            }
+        }
+
         #endregion
 
         #region Public Methods

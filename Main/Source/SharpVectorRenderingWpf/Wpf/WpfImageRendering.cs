@@ -129,8 +129,15 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         if (imageWidth <= viewWidth && imageHeight <= viewHeight)
                         {
-                            destRect = this.GetBounds(destRect,
-                                new Size(imageWidth, imageHeight), aspectRatioType);
+                            if (this.Transform == null)
+                            {
+                                destRect = this.GetBounds(destRect,
+                                    new Size(imageWidth, imageHeight), aspectRatioType);
+                            }
+                            else
+                            {
+                                destRect = new Rect(0, 0, viewWidth, viewHeight);
+                            }
                         }
                         else
                         {
@@ -322,7 +329,9 @@ namespace SharpVectors.Renderers.Wpf
                         BitmapImage imageSource = new BitmapImage();
 
                         imageSource.BeginInit();
-                        imageSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                        imageSource.CreateOptions = BitmapCreateOptions.IgnoreImageCache 
+                            | BitmapCreateOptions.PreservePixelFormat;
                         imageSource.UriSource     = imageUri;
                         imageSource.EndInit();
 
@@ -337,8 +346,10 @@ namespace SharpVectors.Renderers.Wpf
 
                     BitmapImage imageSource = new BitmapImage();
                     imageSource.BeginInit();
-                    imageSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                    imageSource.StreamSource  = stream;
+                    imageSource.CacheOption   = BitmapCacheOption.OnLoad;
+                    imageSource.CreateOptions = BitmapCreateOptions.IgnoreImageCache
+                        | BitmapCreateOptions.PreservePixelFormat;
+                    imageSource.StreamSource = stream;
                     imageSource.EndInit();
 
                     return imageSource;
