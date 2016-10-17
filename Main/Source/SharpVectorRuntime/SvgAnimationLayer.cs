@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Text;
-using System.Globalization;
 using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 

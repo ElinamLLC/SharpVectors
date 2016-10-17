@@ -2,9 +2,6 @@
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.Generic;
 
 using IoPath = System.IO.Path;
@@ -13,8 +10,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Markup;
-//using System.Windows.Media.Effects;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;

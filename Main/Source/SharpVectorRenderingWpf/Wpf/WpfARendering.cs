@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;

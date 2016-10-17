@@ -5,11 +5,6 @@
 // <date>This code is based on the article dated: 29 Jun 2010</date>
 // </copyright>
 
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
@@ -21,12 +16,11 @@ namespace SharpVectors.Runtime
     /// the IScrollInfo interface properties and functions.
     /// 
     /// IScrollInfo is implemented to allow ZoomPanControl to be wrapped (in XAML)
-    /// in a ScrollViewer.  IScrollInfo allows the ScrollViewer and ZoomPanControl to 
+    /// in a ScrollViewer. IScrollInfo allows the ScrollViewer and ZoomPanControl to 
     /// communicate important information such as the horizontal and vertical scrollbar offsets.
     /// 
     /// There is a good series of articles showing how to implement IScrollInfo starting here:
-    ///     http://blogs.msdn.com/bencon/archive/2006/01/05/509991.aspx
-    ///     
+    ///     http://blogs.msdn.com/bencon/archive/2006/01/05/509991.aspx     
     /// </summary>
     public partial class ZoomPanControl
     {

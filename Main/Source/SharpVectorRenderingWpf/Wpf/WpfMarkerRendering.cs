@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using System.Collections.Generic;
 
-using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
@@ -32,8 +27,8 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfMarkerRendering(SvgElement element)
             : base(element)
-		{
-		}
+        {
+        }
 
         #endregion
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Xml;
 using System.Reflection;
 using System.Globalization;
 using System.ComponentModel;
@@ -9,7 +8,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Markup;
-using System.Windows.Controls;
 using System.Windows.Resources;
 
 using SharpVectors.Runtime;

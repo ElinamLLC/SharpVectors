@@ -1,17 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
-using System.Text;
 using System.Reflection;
-using System.Collections.Generic;
 
 using System.Windows;
-using System.Windows.Media;
 
-using SharpVectors.Xml;
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Events;
-using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Renderers.Utils
 {

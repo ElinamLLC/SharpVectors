@@ -208,12 +208,12 @@ namespace SharpVectors.Dom.Svg
         #region Support collections
 
         private string[] supportedFeatures = new string[]
-			{
-				"org.w3c.svg.static",
-				"http://www.w3.org/TR/Svg11/feature#Shape",
-				"http://www.w3.org/TR/Svg11/feature#BasicText",
-				"http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
-			};
+            {
+                "org.w3c.svg.static",
+                "http://www.w3.org/TR/Svg11/feature#Shape",
+                "http://www.w3.org/TR/Svg11/feature#BasicText",
+                "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
+            };
 
         private string[] supportedExtensions = new string[] { };
 
@@ -280,15 +280,15 @@ namespace SharpVectors.Dom.Svg
         //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd", @"dtd\svg11-tiny.dtd");
         //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd", @"dtd\svg11-basic.dtd");
         //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd", @"dtd\svg11.dtd");
-			
+            
         //          if (reader != null && reader is XmlValidatingReader)
         //          {
         //              XmlValidatingReader valReader = (XmlValidatingReader)reader;
-				
+                
         //              valReader.ValidationType = ValidationType.None;
         //              valReader.XmlResolver = localDtdXmlUrlResolver;
         //          }
-			
+            
         //          this.XmlResolver = localDtdXmlUrlResolver;*/
 
         //    //LocalDtdXmlUrlResolver localDtdXmlUrlResolver = new LocalDtdXmlUrlResolver();

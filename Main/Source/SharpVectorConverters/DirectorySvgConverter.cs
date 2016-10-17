@@ -3,9 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Security.AccessControl;
 
-using System.Windows;
-using System.Windows.Media;
-
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Converters.Utils;
 
@@ -366,6 +363,7 @@ namespace SharpVectors.Converters
 
             FileSvgConverter fileConverter = new FileSvgConverter(this.SaveXaml,
                 this.SaveZaml, this.DrawingSettings);
+            fileConverter.Background = this.Background;
             fileConverter.FallbackOnWriterError = _fallbackOnWriterError;
 
             string targetDirName = target.ToString();

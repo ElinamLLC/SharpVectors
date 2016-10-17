@@ -6,12 +6,9 @@ using System.Text;
 
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Renderers.Utils; 
 
@@ -951,6 +948,10 @@ namespace SharpVectors.Converters
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
+            if (this.Background != null)
+            {
+                drawingContext.DrawRectangle(this.Background, null, _drawing.Bounds);
+            }
             drawingContext.DrawDrawing(_drawing);
             drawingContext.Close();
 
@@ -1032,6 +1033,27 @@ namespace SharpVectors.Converters
             }
 
             return ".png";
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// This releases the unmanaged resources used by the <see cref="SvgConverter"/> 
+        /// and optionally releases the managed resources. 
+        /// </summary>
+        /// <param name="disposing">
+        /// This is <see langword="true"/> if managed resources should be 
+        /// disposed; otherwise, <see langword="false"/>.
+        /// </param>
+        protected override void Dispose(bool disposing)
+        {
+            _drawing     = null;
+            _wpfWindow   = null;
+            _wpfRenderer = null;
+
+            base.Dispose(disposing);
         }
 
         #endregion

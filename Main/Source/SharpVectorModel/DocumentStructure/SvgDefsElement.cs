@@ -2,9 +2,9 @@ using System;
 
 namespace SharpVectors.Dom.Svg
 {
-	/// <summary>
-	/// The SvgDefsElement interface corresponds to the 'defs' element. 
-	/// </summary>
+    /// <summary>
+    /// The SvgDefsElement interface corresponds to the 'defs' element. 
+    /// </summary>
     public sealed class SvgDefsElement : SvgTransformableElement, ISvgDefsElement
     {
         #region Private Fields
@@ -18,12 +18,12 @@ namespace SharpVectors.Dom.Svg
 
         public SvgDefsElement(string prefix, string localname, string ns, SvgDocument doc) 
             : base(prefix, localname, ns, doc) 
-		{
-			svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-			svgTests = new SvgTests(this);
-		}
+        {
+            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
+            svgTests = new SvgTests(this);
+        }
 
-		#endregion
+        #endregion
 
         #region ISvgElement Members
 
@@ -59,40 +59,40 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-		#region ISvgExternalResourcesRequired Members
+        #region ISvgExternalResourcesRequired Members
 
-		public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return svgExternalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
-
-		#endregion
-
-		#region ISvgTests Members
-
-		public ISvgStringList RequiredFeatures
-		{
-			get { return svgTests.RequiredFeatures; }
-		}
-
-		public ISvgStringList RequiredExtensions
-		{
-			get { return svgTests.RequiredExtensions; }
-		}
-
-		public ISvgStringList SystemLanguage
-		{
-			get { return svgTests.SystemLanguage; }
-		}
-
-		public bool HasExtension(string extension)
-		{
-			return svgTests.HasExtension(extension);
-		}
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get
+            {
+                return svgExternalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
 
         #endregion
-	}
+
+        #region ISvgTests Members
+
+        public ISvgStringList RequiredFeatures
+        {
+            get { return svgTests.RequiredFeatures; }
+        }
+
+        public ISvgStringList RequiredExtensions
+        {
+            get { return svgTests.RequiredExtensions; }
+        }
+
+        public ISvgStringList SystemLanguage
+        {
+            get { return svgTests.SystemLanguage; }
+        }
+
+        public bool HasExtension(string extension)
+        {
+            return svgTests.HasExtension(extension);
+        }
+
+        #endregion
+    }
 }

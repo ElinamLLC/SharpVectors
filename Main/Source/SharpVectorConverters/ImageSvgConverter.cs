@@ -6,12 +6,9 @@ using System.Text;
 
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Renderers.Utils; 
 
@@ -668,12 +665,16 @@ namespace SharpVectors.Converters
             Rect drawingBounds = drawing.Bounds;
             int pixelWidth  = (int)drawingBounds.Width;
             int pixelHeight = (int)drawingBounds.Height;
-	        double dpiX     = 96;
+            double dpiX     = 96;
             double dpiY     = 96;
 
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
+            if (this.Background != null)
+            {
+                drawingContext.DrawRectangle(this.Background, null, drawing.Bounds);
+            }
             drawingContext.DrawDrawing(drawing);
             drawingContext.Close();
 

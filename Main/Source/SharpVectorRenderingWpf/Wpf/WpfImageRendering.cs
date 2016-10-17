@@ -1,8 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Collections.Generic;
 
@@ -10,7 +7,6 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-using SharpVectors.Net;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
@@ -27,8 +23,8 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfImageRendering(SvgElement element) 
             : base(element)
-		{
-		}
+        {
+        }
 
         #endregion
 

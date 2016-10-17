@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
-
 using SharpVectors.Runtime;
 
 namespace SharpVectors.Renderers.Wpf
@@ -19,8 +14,8 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfPathRendering(SvgElement element)
             : base(element)
-		{
-		}
+        {
+        }
 
         #endregion
 

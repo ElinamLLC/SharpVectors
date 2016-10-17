@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
-using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Media;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
-
 using SharpVectors.Renderers.Texts;
-
 using SharpVectors.Runtime;
 
 namespace SharpVectors.Renderers.Wpf
@@ -51,7 +45,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfTextRendering(SvgElement element)
             : base(element)
-		{
+        {
             _textElement = element as SvgTextElement;
             if (_textElement == null)
             {

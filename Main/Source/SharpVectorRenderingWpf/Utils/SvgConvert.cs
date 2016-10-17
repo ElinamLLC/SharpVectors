@@ -1,10 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Windows;
-using System.Windows.Media;
-using System.Collections.Generic;
+﻿using System.Windows;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Utils
