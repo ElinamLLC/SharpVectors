@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Media;

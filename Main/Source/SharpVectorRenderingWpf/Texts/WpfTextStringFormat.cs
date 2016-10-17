@@ -1,10 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
-using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows;
 
 namespace SharpVectors.Renderers.Texts
 {

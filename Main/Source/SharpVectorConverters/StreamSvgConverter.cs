@@ -9,8 +9,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Renderers.Utils; 
 
@@ -492,17 +490,26 @@ namespace SharpVectors.Converters
                 this.GetImageFileExtention());
 
             // The image parameters...
-            Rect drawingBounds = drawing.Bounds;
-            int pixelWidth  = (int)drawingBounds.Width;
-            int pixelHeight = (int)drawingBounds.Height;
-	        double dpiX     = 96;
+            //Rect drawingBounds = drawing.Bounds;
+            //int pixelWidth  = (int)drawingBounds.Width;
+            //int pixelHeight = (int)drawingBounds.Height;
+            double dpiX     = 96;
             double dpiY     = 96;
 
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
+            if (this.Background != null)
+            {
+                drawingContext.DrawRectangle(this.Background, null, drawing.Bounds);
+            }
             drawingContext.DrawDrawing(drawing);
             drawingContext.Close();
+
+            /// get bound of the visual
+            Rect drawingBounds = VisualTreeHelper.GetDescendantBounds(drawingVisual);
+            int pixelWidth = (int)drawingBounds.Width;
+            int pixelHeight = (int)drawingBounds.Height;
 
             // The BitmapSource that is rendered with a Visual.
             RenderTargetBitmap targetBitmap = new RenderTargetBitmap(

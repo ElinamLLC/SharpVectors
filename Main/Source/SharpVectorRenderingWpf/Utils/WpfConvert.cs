@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using System.Collections.Generic;
 
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;

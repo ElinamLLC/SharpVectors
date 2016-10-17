@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Windows;
-
-namespace SharpVectors.Runtime
+﻿namespace SharpVectors.Runtime
 {
     public enum SvgObjectType
     {

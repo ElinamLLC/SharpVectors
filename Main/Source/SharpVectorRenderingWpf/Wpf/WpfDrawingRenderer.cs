@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Markup;
-using System.Collections.Generic; 
 
-using SharpVectors.Xml;
-using SharpVectors.Dom;
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Events;
 
 namespace SharpVectors.Renderers.Wpf
 {

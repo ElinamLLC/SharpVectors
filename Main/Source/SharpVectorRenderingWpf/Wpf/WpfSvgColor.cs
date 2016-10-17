@@ -6,17 +6,17 @@ using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Wpf
 {
-	public sealed class WpfSvgColor : SvgColor
-	{
+    public sealed class WpfSvgColor : SvgColor
+    {
         private string _propertyName;
-		private SvgStyleableElement _element;
+        private SvgStyleableElement _element;
 
-		public WpfSvgColor(SvgStyleableElement elm, string propertyName) 
+        public WpfSvgColor(SvgStyleableElement elm, string propertyName) 
             : base(elm.GetComputedStyle("").GetPropertyValue(propertyName))
-		{
-			_element      = elm;
-			_propertyName = propertyName;
-		}
+        {
+            _element      = elm;
+            _propertyName = propertyName;
+        }
 
         public Color Color
         {
@@ -79,7 +79,7 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         public double Opacity
-		{
+        {
             get
             {
                 string propName;
@@ -110,6 +110,6 @@ namespace SharpVectors.Renderers.Wpf
 
                 return alpha;
             }
-		}
-	}
+        }
+    }
 }

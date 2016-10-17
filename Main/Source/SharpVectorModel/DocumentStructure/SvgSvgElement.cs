@@ -6,8 +6,13 @@ using System.Collections.Generic;
 namespace SharpVectors.Dom.Svg
 {
     /// <summary>
-    /// A key interface definition is the SVGSVGElement interface, which is the interface that corresponds to the 'svg' element. This interface contains various miscellaneous commonly-used utility methods, such as matrix operations and the ability to control the time of redraw on visual rendering devices.
-    /// SVGSVGElement extends ViewCSS and DocumentCSS to provide access to the computed values of properties and the override style sheet as described in DOM2. 
+    /// A key interface definition is the SVGSVGElement interface, which is the 
+    /// interface that corresponds to the 'svg' element. This interface contains 
+    /// various miscellaneous commonly-used utility methods, such as matrix 
+    /// operations and the ability to control the time of redraw on visual 
+    /// rendering devices.
+    /// SVGSVGElement extends ViewCSS and DocumentCSS to provide access to the 
+    /// computed values of properties and the override style sheet as described in DOM2. 
     /// </summary>
     public sealed class SvgSvgElement : SvgTransformableElement, ISvgSvgElement
     {

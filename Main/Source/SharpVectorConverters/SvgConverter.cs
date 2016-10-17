@@ -19,6 +19,8 @@ namespace SharpVectors.Converters
         private bool _saveZaml;
         private bool _useFrameXamlWriter;
 
+        private SolidColorBrush _background;
+
         private WpfDrawingSettings _wpfSettings;
 
         #endregion
@@ -162,6 +164,25 @@ namespace SharpVectors.Converters
             set
             {
                 _useFrameXamlWriter = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a brush that describes the background of a image.
+        /// </summary>
+        /// <value>
+        /// The brush that is used to fill the background of the control. 
+        /// The default is <see langword="null"/> or transparent.
+        /// </value>
+        public SolidColorBrush Background
+        {
+            get
+            {
+                return _background;
+            }
+            set
+            {
+                _background = value;
             }
         }
 

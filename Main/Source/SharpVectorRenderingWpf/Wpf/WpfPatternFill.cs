@@ -1,14 +1,9 @@
-﻿using System;
-using System.Xml;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Xml;
 
 using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -24,8 +19,8 @@ namespace SharpVectors.Renderers.Wpf
         #region Constructors and Destructor
 
         public WpfPatternFill(SvgPatternElement patternElement)
-		{
-			_patternElement = patternElement;
+        {
+            _patternElement = patternElement;
         }
 
         #endregion
