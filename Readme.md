@@ -33,7 +33,7 @@ The library includes a number of sample application for both WPF and GDI+. Here 
 ### WPF Test Application
 This is an application for browsing directory (recursively) of SVG files.
 
-![](Docs/Home_ WpfTestSvgSample.png)
+![](Docs/Home_WpfTestSvgSample.png)
 
 ### WPF W3C Test Suite
 This is an application for viewing the W3C Test Suite compliant results. It has two panes: top and bottom. The top pane is the generated WPF output, the bottom pane is the W3C expected output image.
