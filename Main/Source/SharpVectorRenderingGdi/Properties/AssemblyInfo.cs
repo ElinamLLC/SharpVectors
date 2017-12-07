@@ -61,5 +61,3 @@ using System.Security.Permissions;
 [assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("..\\..\\..\\SVGSharp.key")]
 [assembly: AssemblyKeyName("")]
-
-[assembly: AllowPartiallyTrustedCallers]
