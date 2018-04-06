@@ -173,6 +173,14 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void Render(WpfDrawingRenderer renderer)
         {
+            //Temp workaround to preserve original svg size
+	        if (_drawGroup.ClipGeometry != null)
+	        {
+		        using (var ctx = _drawGroup.Open())
+		        {
+			        ctx.DrawRectangle(null, new Pen(Brushes.Transparent,1), _drawGroup.ClipGeometry.Bounds);
+		        }
+	        }
             base.Render(renderer);
         }
 
