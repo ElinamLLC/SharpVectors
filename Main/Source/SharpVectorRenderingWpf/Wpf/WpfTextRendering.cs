@@ -262,7 +262,7 @@ namespace SharpVectors.Renderers.Wpf
             {   
                 XmlNode child = _svgElement.ChildNodes[0];
                 nodeType = child.NodeType;
-                if (nodeType == XmlNodeType.Text)
+                if (nodeType == XmlNodeType.Text || nodeType == XmlNodeType.CDATA)
                 {
                     if (isVertical)
                     {
