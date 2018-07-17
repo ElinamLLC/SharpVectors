@@ -4,8 +4,8 @@ SVG is a markup language for describing two-dimensional graphics applications an
 
 The SVG#-Reloaded project aims to provide libraries and tools to parse, convert and view the SVG on Windows, especially on the Windows Presentation Foundation platform.
 
-### Developer's Guide ([>Link](Quick-Start))
-This section provides [Quick Start](Quick-Start) documentations to help you get started.
+### Developer's Guide ([>Link](Quick%20Start.md))
+This section provides [Quick Start](Quick%20Start.md) documentations to help you get started.
 
 ### Credits
 The SVG# Reloaded uses source codes from other open source projects without which this might not be possible. We wish to acknowledge and thank the authors of these great projects:

@@ -20,7 +20,7 @@ In general, the following features are implemented:
 * A simple and basic SVG viewer (an advanced viewer is planned).
 * Interaction with the conversion process (by a visitor pattern) to allow for custom hyper-link implementations, font substitutions etc.
 **NOTE**: Only Geometry/Drawing level elements are exported, which will not work with Silverlight. 
-See the [Documentation](Documentation) section for more information on the features.
+See the [Documentation](Docs/Documentation.md) section for more information on the features.
 
 ## Converter Application
 There is a converter application. It converts a single SVG file, multiple SVG files and directory of SVG files to XAML.
