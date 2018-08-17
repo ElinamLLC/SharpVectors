@@ -1,0 +1,6 @@
+## Ignore extracted test-suite files
+
+images/
+png/
+svg/
+
