@@ -902,7 +902,7 @@ namespace SharpVectors.Converters
 
             string outputExt = GetImageFileExtention(encoderType);
             string outputFileName = null;
-            if (String.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrEmpty(imageFileName))
             {
                 string fileNameWithoutExt =
                     Path.GetFileNameWithoutExtension(fileName);
@@ -914,11 +914,11 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (String.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrEmpty(fileExt))
                 {
                     outputFileName = imageFileName + outputExt;
                 }
-                else if (!String.Equals(fileExt, outputExt,
+                else if (!string.Equals(fileExt, outputExt,
                     StringComparison.OrdinalIgnoreCase))
                 {
                     outputFileName = Path.ChangeExtension(imageFileName, outputExt);

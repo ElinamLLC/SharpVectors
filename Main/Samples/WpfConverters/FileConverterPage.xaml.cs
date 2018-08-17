@@ -125,7 +125,7 @@ namespace SharpVectors.Converters
                     txtSourceFile.Focus();
 
                     string sourceFile = _commandLines.SourceFile;
-                    if (!String.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
+                    if (!string.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
                     {
                         txtSourceFile.Text = sourceFile;
                     }
@@ -197,7 +197,7 @@ namespace SharpVectors.Converters
             dlg.ShowNewFolderButton = true;
             dlg.Description         = "Select the output directory for the converted file.";
             string sourceFile       = txtSourceFile.Text.Trim();
-            if (!String.IsNullOrEmpty(sourceFile) &&
+            if (!string.IsNullOrEmpty(sourceFile) &&
                 File.Exists(sourceFile))
             {
                 dlg.SelectedPath = Path.GetDirectoryName(sourceFile);
@@ -270,12 +270,12 @@ namespace SharpVectors.Converters
                 string sourceFile = txtSourceFile.Text.Trim();
                 string outputDir  = txtOutputDir.Text.Trim();
                 bool isReadOnlyOutputDir = false;
-                if (!String.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrEmpty(outputDir))
                 {
                     try
                     {
                         string rootDir = Path.GetPathRoot(outputDir);
-                        if (!String.IsNullOrEmpty(rootDir))
+                        if (!string.IsNullOrEmpty(rootDir))
                         {
                             DriveInfo drive = new DriveInfo(rootDir);
                             if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -289,7 +289,7 @@ namespace SharpVectors.Converters
                     {                        	
                     }
                 }
-                if (String.IsNullOrEmpty(sourceFile))
+                if (string.IsNullOrEmpty(sourceFile))
                 {
                     this.UpdateStatus("Conversion: Not Ready",
                         "Select an input SVG file for conversion.", false);
@@ -297,9 +297,9 @@ namespace SharpVectors.Converters
                 else if (File.Exists(sourceFile))
                 {
                     string fileExt = Path.GetExtension(sourceFile);
-                    if (String.IsNullOrEmpty(fileExt) ||
-                        (!String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) &&
-                        !String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase)))
+                    if (string.IsNullOrEmpty(fileExt) ||
+                        (!string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) &&
+                        !string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase)))
                     {
                         this.UpdateStatus("Error: Source File",
                             "The specified file is not a valid SVG file or the file extension is invalid.", 
@@ -316,7 +316,7 @@ namespace SharpVectors.Converters
                         try
                         {
                             string rootDir = Path.GetPathRoot(outputDir);
-                            if (!String.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrEmpty(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -329,7 +329,7 @@ namespace SharpVectors.Converters
                         catch
                         {
                         }
-                        if (isReadOnlySource && String.IsNullOrEmpty(outputDir))
+                        if (isReadOnlySource && string.IsNullOrEmpty(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the read-only source directory, an output directory is required and must be specified.", true);
@@ -348,10 +348,10 @@ namespace SharpVectors.Converters
                     // First, we try check for web source file...
                     Uri webUri;
                     if (Uri.TryCreate(sourceFile, UriKind.Absolute, out webUri)
-                        && (String.Equals(webUri.Scheme, Uri.UriSchemeHttp, StringComparison.Ordinal)
-                        || String.Equals(webUri.Scheme, Uri.UriSchemeHttps, StringComparison.Ordinal)))
+                        && (string.Equals(webUri.Scheme, Uri.UriSchemeHttp, StringComparison.Ordinal)
+                        || string.Equals(webUri.Scheme, Uri.UriSchemeHttps, StringComparison.Ordinal)))
                     {
-                        if (String.IsNullOrEmpty(outputDir))
+                        if (string.IsNullOrEmpty(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the web source file, an output directory is required and must be specified.", true);
@@ -387,7 +387,7 @@ namespace SharpVectors.Converters
 
         private void UpdateStatus(string title, string text, bool isError)
         {
-            if (String.IsNullOrEmpty(title) || String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text))
             {
                 return;
             }

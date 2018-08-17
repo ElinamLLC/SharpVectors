@@ -273,7 +273,7 @@ namespace SharpVectors.Converters
             dlg.ShowNewFolderButton = true;
             dlg.Description = "Select the output directory for the converted files.";
             string sourceFile = _listItems.LastDirectory;
-            if (!String.IsNullOrEmpty(sourceFile) &&
+            if (!string.IsNullOrEmpty(sourceFile) &&
                 File.Exists(sourceFile))
             {
                 dlg.SelectedPath = Path.GetDirectoryName(sourceFile);
@@ -350,12 +350,12 @@ namespace SharpVectors.Converters
             {
                 string outputDir = txtOutputDir.Text.Trim();
                 bool isReadOnlyOutputDir = _listItems.HasReadOnlyMedia;
-                if (!String.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrEmpty(outputDir))
                 {
                     try
                     {
                         string rootDir = Path.GetPathRoot(outputDir);
-                        if (!String.IsNullOrEmpty(rootDir))
+                        if (!string.IsNullOrEmpty(rootDir))
                         {
                             DriveInfo drive = new DriveInfo(rootDir);
                             if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -388,7 +388,7 @@ namespace SharpVectors.Converters
                         try
                         {
                             string rootDir = Path.GetPathRoot(outputDir);
-                            if (!String.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrEmpty(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -401,7 +401,7 @@ namespace SharpVectors.Converters
                         catch
                         {
                         }
-                        if (isReadOnlySource && String.IsNullOrEmpty(outputDir))
+                        if (isReadOnlySource && string.IsNullOrEmpty(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the read-only source directory, an output directory is required and must be specified.", true);
@@ -426,7 +426,7 @@ namespace SharpVectors.Converters
 
         private void UpdateStatus(string title, string text, bool isError)
         {
-            if (String.IsNullOrEmpty(title) || String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text))
             {
                 return;
             }
@@ -556,7 +556,7 @@ namespace SharpVectors.Converters
                         for (int i = 0; i < _listItems.Count; i++)
                         {
                             string rootDir = Path.GetPathRoot(_listItems[i]);
-                            if (!String.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrEmpty(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -582,17 +582,17 @@ namespace SharpVectors.Converters
 
             public void Add(string filePath)
             {
-                if (String.IsNullOrEmpty(filePath))
+                if (string.IsNullOrEmpty(filePath))
                 {
                     return;
                 }
                 string fileExt = Path.GetExtension(filePath);
-                if (String.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrEmpty(fileExt))
                 {
                     return;
                 }
-                if (String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
-                    ||String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
+                    ||string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
                     ListBoxItem listItem = new ListBoxItem();
                     listItem.Content = filePath;

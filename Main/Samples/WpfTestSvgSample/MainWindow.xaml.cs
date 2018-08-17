@@ -149,7 +149,7 @@ namespace WpfTestSvgSample
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (_canDeleteXaml && !String.IsNullOrEmpty(_xamlFilePath) && File.Exists(_xamlFilePath))
+            if (_canDeleteXaml && !string.IsNullOrEmpty(_xamlFilePath) && File.Exists(_xamlFilePath))
             {
                 File.Delete(_xamlFilePath);
             }
@@ -162,7 +162,7 @@ namespace WpfTestSvgSample
             dlg.Description = "Select the location of the SVG Files";
 
             string curDir = txtSvgPath.Text;
-            if (!String.IsNullOrEmpty(curDir) && Directory.Exists(curDir))
+            if (!string.IsNullOrEmpty(curDir) && Directory.Exists(curDir))
             {
                 dlg.SelectedPath = curDir;
             }
@@ -196,7 +196,7 @@ namespace WpfTestSvgSample
             {
                 selectePath = selectePath.Trim();
             }
-            if (String.IsNullOrEmpty(selectePath) || !Directory.Exists(selectePath))
+            if (string.IsNullOrEmpty(selectePath) || !Directory.Exists(selectePath))
             {
                 return;
             }
@@ -238,7 +238,7 @@ namespace WpfTestSvgSample
 
         private void OnFillXamlOutputChecked(object sender, RoutedEventArgs e)
         {
-            if (_xamlPage == null || String.IsNullOrEmpty(_xamlFilePath))
+            if (_xamlPage == null || string.IsNullOrEmpty(_xamlFilePath))
             {
                 return;
             }
@@ -310,7 +310,7 @@ namespace WpfTestSvgSample
             }
 
             string svgFilePath = selItem.Tag as string;
-            if (String.IsNullOrEmpty(svgFilePath) || !File.Exists(svgFilePath))
+            if (string.IsNullOrEmpty(svgFilePath) || !File.Exists(svgFilePath))
             {
                 return;
             }
@@ -434,10 +434,10 @@ namespace WpfTestSvgSample
                 fileName  = fileNames[0];
             }
 
-            if (!String.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrEmpty(fileName))
             {
             }
-            if (String.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
             {
                 return;
             }
@@ -551,7 +551,7 @@ namespace WpfTestSvgSample
         private void LoadFile(string fileName)
         {
             string fileExt = IoPath.GetExtension(fileName);
-            if (String.IsNullOrEmpty(fileExt))
+            if (string.IsNullOrEmpty(fileExt))
             {
                 return;
             }
@@ -564,8 +564,8 @@ namespace WpfTestSvgSample
             bool generateXaml = (fillXamlOutput.IsChecked != null && 
                 fillXamlOutput.IsChecked.Value);
 
-            if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
             {
                 txtSvgFile.Text = fileName;
                 txtSvgFileLabel.Text = "Selected SVG File:";
@@ -590,7 +590,7 @@ namespace WpfTestSvgSample
                     {
                         this.Title = _titleBase + " - " + IoPath.GetFileName(fileName);
 
-                        if (_xamlPage != null && !String.IsNullOrEmpty(_drawingDir))
+                        if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
                         {
                             string xamlFilePath = IoPath.Combine(_drawingDir,
                                 IoPath.GetFileNameWithoutExtension(fileName) + ".xaml");
@@ -634,7 +634,7 @@ namespace WpfTestSvgSample
                 catch
                 {
                     // Try loading the XAML, if generated but the rendering failed...
-                    if (_xamlPage != null && !String.IsNullOrEmpty(_drawingDir))
+                    if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
                     {
                         string xamlFilePath = IoPath.Combine(_drawingDir,
                             IoPath.GetFileNameWithoutExtension(fileName) + ".xaml");
@@ -654,8 +654,8 @@ namespace WpfTestSvgSample
                     throw;
                 }
             }
-            else if (String.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
             {
                 txtSvgFile.Text = fileName;
                 txtSvgFileLabel.Text = "Selected XAML File:";
@@ -713,7 +713,7 @@ namespace WpfTestSvgSample
                     _drawingPage.UnloadDocument();
                 }
 
-                if (_canDeleteXaml && !String.IsNullOrEmpty(_xamlFilePath) && File.Exists(_xamlFilePath))
+                if (_canDeleteXaml && !string.IsNullOrEmpty(_xamlFilePath) && File.Exists(_xamlFilePath))
                 {
                     File.Delete(_xamlFilePath);
                 }
@@ -731,12 +731,12 @@ namespace WpfTestSvgSample
 
         private void FillTreeView(string sourceDir)
         {
-            if (String.IsNullOrEmpty(sourceDir) || !Directory.Exists(sourceDir))
+            if (string.IsNullOrEmpty(sourceDir) || !Directory.Exists(sourceDir))
             {
                 return;
             }
 
-            string[] svgFiles = Directory.GetFiles(sourceDir, "*.svg", SearchOption.TopDirectoryOnly);
+            string[] svgFiles = Directory.GetFiles(sourceDir, "*.svg*", SearchOption.TopDirectoryOnly);
 
             treeView.BeginInit();
             treeView.Items.Clear();
@@ -836,7 +836,7 @@ namespace WpfTestSvgSample
                 }
             }
 
-            if (String.IsNullOrEmpty(sourceDir) || !Directory.Exists(sourceDir))
+            if (string.IsNullOrEmpty(sourceDir) || !Directory.Exists(sourceDir))
             {
                 return;
             }

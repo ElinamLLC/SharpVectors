@@ -157,7 +157,7 @@ namespace SharpVectors.Runtime
 
         public void LoadDiagrams(string fileName)
         {
-            if (String.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
             {
                 return;
             }
@@ -172,14 +172,14 @@ namespace SharpVectors.Runtime
             {
                 object xamlObject = null;
 
-                if (String.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase))
                 {
                     using (XmlReader xmlReader = XmlReader.Create(new StreamReader(fileName)))
                     {
                         xamlObject = XamlReader.Load(xmlReader);
                     }
                 }
-                else if (String.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
                 {
                     using (FileStream fileStream = File.OpenRead(fileName))
                     {
@@ -272,13 +272,13 @@ namespace SharpVectors.Runtime
                 Drawing drawing = drawings[i];
                 //string drawingName = drawing.GetValue(FrameworkElement.NameProperty) as string;
                 string drawingName = SvgLink.GetKey(drawing);
-                if (!String.IsNullOrEmpty(drawingName) &&
-                    String.Equals(drawingName, SvgObject.DrawLayer))
+                if (!string.IsNullOrEmpty(drawingName) &&
+                    string.Equals(drawingName, SvgObject.DrawLayer))
                 {
                     drawIndex = i;
                 }
-                else if (!String.IsNullOrEmpty(drawingName) &&
-                    String.Equals(drawingName, SvgObject.LinksLayer))
+                else if (!string.IsNullOrEmpty(drawingName) &&
+                    string.Equals(drawingName, SvgObject.LinksLayer))
                 {
                     linkIndex = i;
                 }
@@ -442,7 +442,7 @@ namespace SharpVectors.Runtime
             //if (e.ChangedButton == MouseButton.Left)
             //{
             //    string brushName = brush.GetValue(FrameworkElement.NameProperty) as string;
-            //    if (!String.IsNullOrEmpty(brushName))
+            //    if (!string.IsNullOrEmpty(brushName))
             //    {
             //        SvgLinkAction linkAction = SvgLink.GetLinkAction(visual);
             //        if (linkAction == SvgLinkAction.LinkHtml ||
@@ -548,7 +548,7 @@ namespace SharpVectors.Runtime
                 //    tooltipText = SvgObject.GetTitle(drawing);
                 //}
 
-                if (_tooltip != null && !String.IsNullOrEmpty(tooltipText))
+                if (_tooltip != null && !string.IsNullOrEmpty(tooltipText))
                 {
                     _tooltip.PlacementRectangle = rectBounds;
 

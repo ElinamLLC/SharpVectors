@@ -190,7 +190,7 @@ namespace SharpVectors.Dom.Svg
             {
                 // Now, if the ns is empty, we try creating with the default namespace for cases
                 // where the node is imported from an external SVG document...
-                if (String.IsNullOrEmpty(ns))
+                if (string.IsNullOrEmpty(ns))
                 {
                     result = SvgElementFactory.Create(prefix, localName, SvgNamespace, this);
                     if (result != null)
@@ -337,10 +337,10 @@ namespace SharpVectors.Dom.Svg
         {
             // Provide a support for the .svgz files...
             UriBuilder fileUrl = new UriBuilder(url);
-            if (String.Equals(fileUrl.Scheme, "file"))
+            if (string.Equals(fileUrl.Scheme, "file"))
             {
                 string fileExt = Path.GetExtension(url);
-                if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
                     using (FileStream fileStream = File.OpenRead(fileUrl.Uri.LocalPath))
                     {
@@ -481,7 +481,7 @@ namespace SharpVectors.Dom.Svg
         private object OnXmlResolverGettingEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             string fullPath = absoluteUri.ToString();
-            if (!String.IsNullOrEmpty(fullPath))
+            if (!string.IsNullOrEmpty(fullPath))
             {
                 fullPath = fullPath.Replace('\\', '/');
 
@@ -612,7 +612,7 @@ namespace SharpVectors.Dom.Svg
                 ResolveNamespace(this, e);
                 uri = e.Uri;
             }
-            if (String.IsNullOrEmpty(uri))
+            if (string.IsNullOrEmpty(uri))
             {
                 // some defaults added here
                 switch (prefix)
@@ -680,7 +680,7 @@ namespace SharpVectors.Dom.Svg
         {
             //return new XmlTextReader(uri, stream);
             XmlReaderSettings xmlReaderSettings = GetXmlReaderSettings();
-            if (String.IsNullOrEmpty(uri))
+            if (string.IsNullOrEmpty(uri))
             {
                 return XmlReader.Create(stream, xmlReaderSettings, uri);
             }

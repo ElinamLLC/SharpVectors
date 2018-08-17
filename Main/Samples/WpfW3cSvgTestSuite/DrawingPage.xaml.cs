@@ -78,7 +78,7 @@ namespace WpfW3cSvgTestSuite
             { 
                 _drawingDir = value; 
 
-                if (!String.IsNullOrEmpty(_drawingDir))
+                if (!string.IsNullOrEmpty(_drawingDir))
                 {
                     _directoryInfo = new DirectoryInfo(_drawingDir);
 

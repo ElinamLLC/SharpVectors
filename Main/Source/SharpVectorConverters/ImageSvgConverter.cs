@@ -306,12 +306,12 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (String.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
+            if (string.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
             {
                 return false;
             }
 
-            if (!String.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrEmpty(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -367,7 +367,7 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (!String.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrEmpty(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -423,7 +423,7 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (!String.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrEmpty(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -479,7 +479,7 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (!String.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrEmpty(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -626,7 +626,7 @@ namespace SharpVectors.Converters
         {
             string outputExt = this.GetImageFileExtention();
             string outputFileName = null;
-            if (String.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrEmpty(imageFileName))
             {
                 string fileNameWithoutExt = 
                     Path.GetFileNameWithoutExtension(fileName);
@@ -638,11 +638,11 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (String.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrEmpty(fileExt))
                 {
                     outputFileName = imageFileName + outputExt;
                 }
-                else if (!String.Equals(fileExt, outputExt,
+                else if (!string.Equals(fileExt, outputExt,
                     StringComparison.OrdinalIgnoreCase))
                 {
                     outputFileName = Path.ChangeExtension(imageFileName, outputExt);
@@ -725,14 +725,14 @@ namespace SharpVectors.Converters
                         break;
                 }
 
-                if (!String.IsNullOrEmpty(fileExtensions) &&
+                if (!string.IsNullOrEmpty(fileExtensions) &&
                     fileExtensions.IndexOf(fileExtension,
                     StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     bitampEncoder = _bitampEncoder;
                 }    
-                else if (!String.IsNullOrEmpty(mimeTypes) &&
-                    !String.IsNullOrEmpty(mimeType))
+                else if (!string.IsNullOrEmpty(mimeTypes) &&
+                    !string.IsNullOrEmpty(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)
@@ -816,7 +816,7 @@ namespace SharpVectors.Converters
             _writerErrorOccurred = false;
 
             string xamlFileName = null;
-            if (String.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrEmpty(imageFileName))
             {
                 string fileNameWithoutExt =
                     Path.GetFileNameWithoutExtension(fileName);
@@ -828,11 +828,11 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (String.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrEmpty(fileExt))
                 {
                     xamlFileName = imageFileName + ".xaml";
                 }
-                else if (!String.Equals(fileExt, ".xaml",
+                else if (!string.Equals(fileExt, ".xaml",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     xamlFileName = Path.ChangeExtension(imageFileName, ".xaml");

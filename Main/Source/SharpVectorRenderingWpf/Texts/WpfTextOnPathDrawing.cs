@@ -74,7 +74,7 @@ namespace SharpVectors.Renderers.Texts
 
         public void AddTextPath(string text, Point origin)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
             {
                 return;
             }

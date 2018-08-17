@@ -60,7 +60,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string elementName = svgElement.LocalName;
 
-            if (String.Equals(elementName, "use"))
+            if (string.Equals(elementName, "use"))
             {
                 RenderUseElement(svgElement);
             }
@@ -79,7 +79,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string elementName = svgElement.LocalName;
 
-            if (String.Equals(elementName, "switch"))
+            if (string.Equals(elementName, "switch"))
             {
                 RenderSwitchChildren(svgElement);
             }
@@ -98,7 +98,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string elementName = svgElement.LocalName;
 
-            if (String.Equals(elementName, "switch"))
+            if (string.Equals(elementName, "switch"))
             {
                 RenderSwitchChildren(svgElement);
             }
@@ -115,9 +115,9 @@ namespace SharpVectors.Renderers.Wpf
         private void RenderElement(ISvgElement svgElement)
         {
             bool isNotRenderable = !svgElement.IsRenderable;
-            //bool isNotRenderable = !svgElement.IsRenderable || String.Equals(svgElement.LocalName, "a");
+            //bool isNotRenderable = !svgElement.IsRenderable || string.Equals(svgElement.LocalName, "a");
 
-            if (String.Equals(svgElement.LocalName, "a"))
+            if (string.Equals(svgElement.LocalName, "a"))
             {   
             }
             if (isNotRenderable)
@@ -296,7 +296,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 foreach (string req in element.SystemLanguage)
                 {
-                    if (String.Equals(req, _currentLang, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(req, _currentLang, StringComparison.OrdinalIgnoreCase))
                     {
                         systemLanguage = true;
                     }

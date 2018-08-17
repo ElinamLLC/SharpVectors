@@ -341,7 +341,7 @@ namespace SharpVectors.Converters
             try
             {
                 string scheme = svgSource.Scheme;
-                if (String.IsNullOrEmpty(scheme))
+                if (string.IsNullOrEmpty(scheme))
                 {
                     return null;
                 }
@@ -385,8 +385,8 @@ namespace SharpVectors.Converters
                         if (svgStream != null)
                         {
                             string fileExt = Path.GetExtension(svgSource.ToString());
-                            bool isCompressed = !String.IsNullOrEmpty(fileExt) &&
-                                String.Equals(fileExt, ".svgz",
+                            bool isCompressed = !string.IsNullOrEmpty(fileExt) &&
+                                string.Equals(fileExt, ".svgz",
                                 StringComparison.OrdinalIgnoreCase);
 
                             if (isCompressed)

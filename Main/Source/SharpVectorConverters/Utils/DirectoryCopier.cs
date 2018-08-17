@@ -169,7 +169,7 @@ namespace SharpVectors.Converters.Utils
                 throw new ArgumentException("targetDir");
             }
             
-            if (String.Equals(sourceDir, targetDir, 
+            if (string.Equals(sourceDir, targetDir, 
                 StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new InvalidOperationException();

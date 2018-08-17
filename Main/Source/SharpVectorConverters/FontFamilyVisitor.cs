@@ -20,7 +20,7 @@ namespace SharpVectors.Converters
         public override WpfFontFamilyInfo Visit(string fontName, WpfFontFamilyInfo familyInfo, 
             WpfDrawingContext context)
         {
-            if (String.IsNullOrEmpty(fontName))
+            if (string.IsNullOrEmpty(fontName))
             {
                 return null;
             }
@@ -28,31 +28,31 @@ namespace SharpVectors.Converters
             if (fontName.StartsWith("Arial", StringComparison.OrdinalIgnoreCase) &&
                 fontName.Length > 5)
             {
-                if (String.Equals(fontName, "ArialMT",
+                if (string.Equals(fontName, "ArialMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Arial-BoldMT",
+                else if (string.Equals(fontName, "Arial-BoldMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Arial-ItalicMT",
+                else if (string.Equals(fontName, "Arial-ItalicMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         FontStyles.Italic, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Arial-BoldItalicMT",
+                else if (string.Equals(fontName, "Arial-BoldItalicMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
                         FontStyles.Italic, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Arial Unicode MS",
+                else if (string.Equals(fontName, "Arial Unicode MS",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return null;
@@ -63,24 +63,24 @@ namespace SharpVectors.Converters
             }
             else if (fontName.StartsWith("Helvetica", StringComparison.OrdinalIgnoreCase))
             {
-                if (String.Equals(fontName, "Helvetica", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fontName, "Helvetica", StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Helvetica-Bold",
+                else if (string.Equals(fontName, "Helvetica-Bold",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Helvetica-Oblique",
+                else if (string.Equals(fontName, "Helvetica-Oblique",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         FontStyles.Italic, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "Helvetica-BoldOblique",
+                else if (string.Equals(fontName, "Helvetica-BoldOblique",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
@@ -92,24 +92,24 @@ namespace SharpVectors.Converters
             }
             else if (fontName.StartsWith("TimesNewRomanPS", StringComparison.OrdinalIgnoreCase))
             {
-                if (String.Equals(fontName, "TimesNewRomanPSMT", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fontName, "TimesNewRomanPSMT", StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "TimesNewRomanPS-BoldMT",
+                else if (string.Equals(fontName, "TimesNewRomanPS-BoldMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "TimesNewRomanPS-ItalicMT",
+                else if (string.Equals(fontName, "TimesNewRomanPS-ItalicMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         FontStyles.Italic, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "TimesNewRomanPS-BoldItalicMT",
+                else if (string.Equals(fontName, "TimesNewRomanPS-BoldItalicMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
@@ -121,24 +121,24 @@ namespace SharpVectors.Converters
             }
             else if (fontName.StartsWith("CourierNewPS", StringComparison.OrdinalIgnoreCase))
             {
-                if (String.Equals(fontName, "CourierNewPSMT", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fontName, "CourierNewPSMT", StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "CourierNewPS-BoldMT",
+                else if (string.Equals(fontName, "CourierNewPS-BoldMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,
                         familyInfo.Style, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "CourierNewPS-ItalicMT",
+                else if (string.Equals(fontName, "CourierNewPS-ItalicMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, familyInfo.Weight,
                         FontStyles.Italic, familyInfo.Stretch);
                 }
-                else if (String.Equals(fontName, "CourierNewPS-BoldItalicMT",
+                else if (string.Equals(fontName, "CourierNewPS-BoldItalicMT",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     return new WpfFontFamilyInfo(_arialFamily, FontWeights.Bold,

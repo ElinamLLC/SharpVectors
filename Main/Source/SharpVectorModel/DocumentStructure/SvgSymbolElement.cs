@@ -36,7 +36,7 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 XmlNode parentNode = this.ParentNode;
-                if (parentNode != null && String.Equals(parentNode.LocalName, "use"))
+                if (parentNode != null && string.Equals(parentNode.LocalName, "use"))
                 {
                     return true;
                 }

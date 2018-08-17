@@ -29,7 +29,7 @@ namespace SharpVectors.Converters
             ConverterWindowsAPI.GetWindowThreadProcessId(ptr, out processId);
             Process process = Process.GetProcessById(processId);
 
-            startedInConsole = (process != null && String.Equals(
+            startedInConsole = (process != null && string.Equals(
                 process.ProcessName, "cmd", StringComparison.OrdinalIgnoreCase));
 
             // 2. Parse the command-line options to determine the requested task...
@@ -53,7 +53,7 @@ namespace SharpVectors.Converters
                     else
                     {
                         string sourceFile = commandLines.SourceFile;
-                        if (!String.IsNullOrEmpty(sourceFile) && 
+                        if (!string.IsNullOrEmpty(sourceFile) && 
                             File.Exists(sourceFile))
                         {
                             sourceCount = 1;

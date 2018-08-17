@@ -279,7 +279,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Input Directory: " + _sourceDir);
 
                 Debug.Assert(_sourceDir != null && _sourceDir.Length != 0);
-                if (String.IsNullOrEmpty(_outputDir))
+                if (string.IsNullOrEmpty(_outputDir))
                 {
                     _outputDir = String.Copy(_sourceDir);
                 }
@@ -391,8 +391,8 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                bool isSuccessful = !String.IsNullOrEmpty(resultText) && 
-                    String.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
+                bool isSuccessful = !string.IsNullOrEmpty(resultText) && 
+                    string.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
 
                 if (_errorFiles == null || _errorFiles.Count == 0)
                 {
@@ -403,12 +403,12 @@ namespace SharpVectors.Converters
                     builder.AppendLine("Total number of files successful converted: " + _convertedCount);
                     builder.AppendLine("Total number of files failed: " + _errorFiles.Count);
                 }
-                if (!String.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrEmpty(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
 
-                if (!String.IsNullOrEmpty(_outputDir))
+                if (!string.IsNullOrEmpty(_outputDir))
                 {
                     builder.AppendLine("Output Directory: " + _outputDir);
                 }
@@ -584,8 +584,8 @@ namespace SharpVectors.Converters
                 }
 
                 string fileExt = Path.GetExtension(svgFileName);
-                if (String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) ||
-                    String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {
@@ -626,7 +626,7 @@ namespace SharpVectors.Converters
                         if (_options.SaveXaml)
                         {
                             string xamlFile = _fileReader.XamlFile;
-                            if (!String.IsNullOrEmpty(xamlFile) &&
+                            if (!string.IsNullOrEmpty(xamlFile) &&
                                 File.Exists(xamlFile))
                             {
                                 File.SetAttributes(xamlFile, fileAttr);
@@ -641,7 +641,7 @@ namespace SharpVectors.Converters
                         if (_options.SaveZaml)
                         {
                             string zamlFile = _fileReader.ZamlFile;
-                            if (!String.IsNullOrEmpty(zamlFile) &&
+                            if (!string.IsNullOrEmpty(zamlFile) &&
                                 File.Exists(zamlFile))
                             {
                                 File.SetAttributes(zamlFile, fileAttr);
@@ -659,7 +659,7 @@ namespace SharpVectors.Converters
                             _fileReader.SaveImage(svgFileName, target,
                                 _options.EncoderType);
                             string imageFile = _fileReader.ImageFile;
-                            if (!String.IsNullOrEmpty(imageFile) &&
+                            if (!string.IsNullOrEmpty(imageFile) &&
                                 File.Exists(imageFile))
                             {
                                 File.SetAttributes(imageFile, fileAttr);

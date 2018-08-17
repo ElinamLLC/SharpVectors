@@ -79,13 +79,13 @@ namespace WpfTestSvgSample
 
         public void LoadDocument(string documentFileName)
         {
-            if (textEditor == null || String.IsNullOrEmpty(documentFileName))
+            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
             {
                 return;
             }
 
             string fileExt = Path.GetExtension(documentFileName);
-            if (String.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
             {
                 using (FileStream fileStream = File.OpenRead(documentFileName))
                 {
@@ -194,7 +194,7 @@ namespace WpfTestSvgSample
         {
             string searchText = searchTextBox.Text;
 
-            if (String.IsNullOrEmpty(searchText))
+            if (string.IsNullOrEmpty(searchText))
             {
                 return;
             }

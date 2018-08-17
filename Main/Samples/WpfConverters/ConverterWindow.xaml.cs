@@ -77,7 +77,7 @@ namespace SharpVectors.Converters
             if (sourceFiles == null || sourceFiles.Count == 0)
             {
                 string sourceFile = commandLines.SourceFile;
-                if (String.IsNullOrEmpty(sourceFile) || 
+                if (string.IsNullOrEmpty(sourceFile) || 
                     !File.Exists(sourceFile))
                 {
                     return;

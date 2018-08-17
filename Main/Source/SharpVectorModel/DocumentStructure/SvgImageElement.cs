@@ -75,7 +75,7 @@ namespace SharpVectors.Dom.Svg
                     try
                     {
                         string absoluteUri = svgURIReference.AbsoluteUri;
-                        if (!String.IsNullOrEmpty(absoluteUri))
+                        if (!string.IsNullOrEmpty(absoluteUri))
                         {
                             Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
                             if (svgUri.IsFile)
@@ -231,7 +231,7 @@ namespace SharpVectors.Dom.Svg
             {
                 string colorProfile = this.GetAttribute("color-profile");
 
-                if (String.IsNullOrEmpty(colorProfile))
+                if (string.IsNullOrEmpty(colorProfile))
                 {
                     return null;
                 }
@@ -246,7 +246,7 @@ namespace SharpVectors.Dom.Svg
                         for (int i = 0; i < elemList.Count; i++)
                         {
                             XmlElement elementNode = elemList[i] as XmlElement;
-                            if (elementNode != null && String.Equals(colorProfile, 
+                            if (elementNode != null && string.Equals(colorProfile, 
                                 elementNode.GetAttribute("id")))
                             {
                                 profileElement = elementNode;

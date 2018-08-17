@@ -125,7 +125,7 @@ namespace SharpVectors.Converters
                     txtSourceDir.Focus();
 
                     string sourceDir = _commandLines.SourceDir;
-                    if (!String.IsNullOrEmpty(sourceDir) && Directory.Exists(sourceDir))
+                    if (!string.IsNullOrEmpty(sourceDir) && Directory.Exists(sourceDir))
                     {
                         txtSourceDir.Text = sourceDir;
                     }
@@ -154,7 +154,7 @@ namespace SharpVectors.Converters
             dlg.ShowNewFolderButton = true;
             dlg.Description = "Select the source directory of the SVG files.";
             string sourceDir = txtSourceDir.Text.Trim();
-            if (!String.IsNullOrEmpty(sourceDir) &&
+            if (!string.IsNullOrEmpty(sourceDir) &&
                 Directory.Exists(sourceDir))
             {
                 dlg.SelectedPath = sourceDir;
@@ -180,7 +180,7 @@ namespace SharpVectors.Converters
             dlg.ShowNewFolderButton = true;
             dlg.Description         = "Select the output directory for the converted file.";
             string sourceDir = txtSourceDir.Text.Trim();
-            if (!String.IsNullOrEmpty(sourceDir) &&
+            if (!string.IsNullOrEmpty(sourceDir) &&
                 Directory.Exists(sourceDir))
             {
                 dlg.SelectedPath = sourceDir;
@@ -261,12 +261,12 @@ namespace SharpVectors.Converters
                 string sourceDir = txtSourceDir.Text.Trim();
                 string outputDir = txtOutputDir.Text.Trim();
                 bool isReadOnlyOutputDir = false;
-                if (!String.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrEmpty(outputDir))
                 {
                     try
                     {
                         string rootDir = Path.GetPathRoot(outputDir);
-                        if (!String.IsNullOrEmpty(rootDir))
+                        if (!string.IsNullOrEmpty(rootDir))
                         {
                             DriveInfo drive = new DriveInfo(rootDir);
                             if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -280,7 +280,7 @@ namespace SharpVectors.Converters
                     {
                     }
                 }
-                if (String.IsNullOrEmpty(sourceDir))
+                if (string.IsNullOrEmpty(sourceDir))
                 {
                     this.UpdateStatus("Conversion: Not Ready",
                         "Select an input directory of SVG files for conversion.", false);
@@ -298,7 +298,7 @@ namespace SharpVectors.Converters
                         try
                         {
                             string rootDir = Path.GetPathRoot(outputDir);
-                            if (!String.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrEmpty(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -311,7 +311,7 @@ namespace SharpVectors.Converters
                         catch
                         {
                         }
-                        if (isReadOnlySource && String.IsNullOrEmpty(outputDir))
+                        if (isReadOnlySource && string.IsNullOrEmpty(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the read-only source directory, an output directory is required and must be specified.", true);
@@ -342,7 +342,7 @@ namespace SharpVectors.Converters
 
         private void UpdateStatus(string title, string text, bool isError)
         {
-            if (String.IsNullOrEmpty(title) || String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text))
             {
                 return;
             }

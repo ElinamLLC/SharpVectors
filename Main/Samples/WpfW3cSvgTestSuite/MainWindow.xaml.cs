@@ -162,7 +162,7 @@ namespace WpfW3cSvgTestSuite
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (!_isTreeModified || String.IsNullOrEmpty(_testFileName) ||
+            if (!_isTreeModified || string.IsNullOrEmpty(_testFileName) ||
                 !File.Exists(_testFileName))
             {
                 return;
@@ -229,7 +229,7 @@ namespace WpfW3cSvgTestSuite
             {
                 selectePath = selectePath.Trim();
             }
-            if (String.IsNullOrEmpty(selectePath) || !Directory.Exists(selectePath))
+            if (string.IsNullOrEmpty(selectePath) || !Directory.Exists(selectePath))
             {
                 return;
             }
@@ -392,7 +392,7 @@ namespace WpfW3cSvgTestSuite
                     _drawingPage.LoadDocument(svgFilePath, pngFilePath);
                 }
 
-                if (_xamlPage != null && !String.IsNullOrEmpty(_drawingDir))
+                if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
                 {
                     string xamlFilePath = IoPath.Combine(_drawingDir,
                         IoPath.ChangeExtension(testItem.FileName, ".xaml"));
@@ -637,7 +637,7 @@ namespace WpfW3cSvgTestSuite
 
         private void InitializePath(string suitePath)
         {   
-            if (String.IsNullOrEmpty(suitePath) || !Directory.Exists(suitePath))
+            if (string.IsNullOrEmpty(suitePath) || !Directory.Exists(suitePath))
             {
                 return;
             }
@@ -667,7 +667,7 @@ namespace WpfW3cSvgTestSuite
             _isSuiteAvailable = true;
 
             string fileName = IoPath.GetFullPath(SvgTestSuite);
-            if (!String.IsNullOrEmpty(fileName) && File.Exists(fileName))
+            if (!string.IsNullOrEmpty(fileName) && File.Exists(fileName))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreWhitespace = false;
@@ -693,11 +693,11 @@ namespace WpfW3cSvgTestSuite
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element &&
-                    String.Equals(reader.Name, "category", StringComparison.OrdinalIgnoreCase))
+                    string.Equals(reader.Name, "category", StringComparison.OrdinalIgnoreCase))
                 {
                     // <category label="Animations">
                     string category = reader.GetAttribute("label");
-                    if (!String.IsNullOrEmpty(category))
+                    if (!string.IsNullOrEmpty(category))
                     {
                         TextBlock headerText = new TextBlock();
                         headerText.Text   = category;
@@ -749,7 +749,7 @@ namespace WpfW3cSvgTestSuite
             {
                 if (reader.NodeType == XmlNodeType.Element)
                 {
-                    if (String.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
                     {
                         TestInfo testInfo = new TestInfo(reader);
                         if (!testInfo.IsEmpty)
@@ -785,7 +785,7 @@ namespace WpfW3cSvgTestSuite
                 }
                 else if (reader.NodeType == XmlNodeType.EndElement)
                 {   
-                    if (String.Equals(reader.Name, "category", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(reader.Name, "category", StringComparison.OrdinalIgnoreCase))
                     {
                         break;
                     }
@@ -907,7 +907,7 @@ namespace WpfW3cSvgTestSuite
             {
                 get
                 {
-                    return (String.IsNullOrEmpty(_fileName));
+                    return (string.IsNullOrEmpty(_fileName));
                 }
             }
 
@@ -993,17 +993,17 @@ namespace WpfW3cSvgTestSuite
                 {
                     return;
                 }
-                if (!String.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
                 {
                     return;
                 }
 
                 // <test source="*.svg" title="" state="partial" comment="" description="" />
                 string source = reader.GetAttribute("source");
-                if (!String.IsNullOrEmpty(source))
+                if (!string.IsNullOrEmpty(source))
                 {
                     string title = reader.GetAttribute("title");
-                    if (String.IsNullOrEmpty(title))
+                    if (string.IsNullOrEmpty(title))
                     {
                         title = source.Replace(".svg", String.Empty);
                     }
@@ -1048,13 +1048,13 @@ namespace WpfW3cSvgTestSuite
                 _title = title;
                 _comment = comment;
                 _description = description.Trim();
-                if (!String.IsNullOrEmpty(_description))
+                if (!string.IsNullOrEmpty(_description))
                 {
                     _description = _description.Replace("\n", " ");
                     _description = _description.Replace("  ", String.Empty);
                 }
 
-                if (!String.IsNullOrEmpty(state))
+                if (!string.IsNullOrEmpty(state))
                 {
                     if (state.Equals("unknown", StringComparison.OrdinalIgnoreCase))
                     {

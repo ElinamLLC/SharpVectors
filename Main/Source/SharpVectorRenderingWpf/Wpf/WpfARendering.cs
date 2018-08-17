@@ -52,8 +52,8 @@ namespace SharpVectors.Renderers.Wpf
                 if (gElement != null)
                 {
                     string elementId = gElement.GetAttribute("id");
-                    if (!String.IsNullOrEmpty(elementId) &&
-                        String.Equals(elementId, "IndicateLayer", StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrEmpty(elementId) &&
+                        string.Equals(elementId, "IndicateLayer", StringComparison.OrdinalIgnoreCase))
                     {
                         WpfDrawingContext context = renderer.Context;
 
@@ -103,7 +103,7 @@ namespace SharpVectors.Renderers.Wpf
                 _drawGroup = new DrawingGroup();
 
                 string elementId = this.GetElementName();
-                if (!String.IsNullOrEmpty(elementId) && !context.IsRegisteredId(elementId))
+                if (!string.IsNullOrEmpty(elementId) && !context.IsRegisteredId(elementId))
                 {
                     _drawGroup.SetValue(FrameworkElement.NameProperty, elementId);
 
@@ -189,7 +189,7 @@ namespace SharpVectors.Renderers.Wpf
                     if (titleElement != null)
                     {
                         string titleValue = titleElement.InnerText;
-                        if (!String.IsNullOrEmpty(titleValue))
+                        if (!string.IsNullOrEmpty(titleValue))
                         {
                             SvgObject.SetTitle(_drawGroup, titleValue);
                         }

@@ -44,7 +44,7 @@ namespace TestSvgControl
                 fileName = fileNames[0];
             }
 
-            if (!String.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrEmpty(fileName))
             {
                 this.OpenSvgFile(fileName);
             }
@@ -65,17 +65,17 @@ namespace TestSvgControl
 
         private void OpenSvgFile(string fileName)
         {
-            if (String.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
             {
                 return;
             }
             string fileExt = Path.GetExtension(fileName);
-            if (String.IsNullOrEmpty(fileExt))
+            if (string.IsNullOrEmpty(fileExt))
             {
                 return;
             }
-            if (!String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) &&
-                !String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
             {
                 return;
             }

@@ -211,7 +211,7 @@ namespace SharpVectors.Renderers.Wpf
                     value = value.Trim();
                 }
 
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     _defaultFontName   = value;
                     _defaultFontFamily = new FontFamily(value);

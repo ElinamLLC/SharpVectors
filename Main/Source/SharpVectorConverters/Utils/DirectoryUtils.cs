@@ -99,7 +99,7 @@ namespace SharpVectors.Converters.Utils
 
         public static void DeleteDirectory(string directoryPath, bool recursive)
         {
-            if (String.IsNullOrEmpty(directoryPath))
+            if (string.IsNullOrEmpty(directoryPath))
             {
                 return;
             }

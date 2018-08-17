@@ -45,7 +45,7 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
             // We do not directly render the contents of the clip-path, unless specifically requested...
-            if (String.Equals(_svgElement.ParentNode.LocalName, "clipPath") &&
+            if (string.Equals(_svgElement.ParentNode.LocalName, "clipPath") &&
                 !context.RenderingClipRegion)
             {
                 return;
@@ -55,7 +55,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string sVisibility = styleElm.GetPropertyValue("visibility");
             string sDisplay    = styleElm.GetPropertyValue("display");
-            if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
             {
                 return;
             }
@@ -108,7 +108,7 @@ namespace SharpVectors.Renderers.Wpf
                     GeometryDrawing drawing = new GeometryDrawing(brush, pen, geometry);
 
                     string elementId = this.GetElementName();
-                    if (!String.IsNullOrEmpty(elementId) && !context.IsRegisteredId(elementId))
+                    if (!string.IsNullOrEmpty(elementId) && !context.IsRegisteredId(elementId))
                     {
                         drawing.SetValue(FrameworkElement.NameProperty, elementId);
 

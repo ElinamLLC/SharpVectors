@@ -86,22 +86,22 @@ namespace WpfTestSvgSample
 
         public void LoadDocument(string documentFileName)
         {   
-            if (textEditor == null || String.IsNullOrEmpty(documentFileName))
+            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
             {
                 return;
             }
 
-            if (!String.IsNullOrEmpty(_currentFileName) && File.Exists(_currentFileName))
+            if (!string.IsNullOrEmpty(_currentFileName) && File.Exists(_currentFileName))
             {
                 // Prevent reloading the same file, just in case we are editing...
-                if (String.Equals(documentFileName, _currentFileName, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(documentFileName, _currentFileName, StringComparison.OrdinalIgnoreCase))
                 {
                     return;
                 }
             }
 
             string fileExt = Path.GetExtension(documentFileName);
-            if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
             {
                 using (FileStream fileStream = File.OpenRead(documentFileName))
                 {
@@ -205,11 +205,11 @@ namespace WpfTestSvgSample
             }
 
             string fileExt = Path.GetExtension(_currentFileName);
-            if (String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
             {
                 textEditor.Save(_currentFileName);
             }
-            else if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
             {
                 using (FileStream svgzDestFile = File.Create(_currentFileName))
                 {
@@ -226,7 +226,7 @@ namespace WpfTestSvgSample
         {
             string searchText = searchTextBox.Text;
 
-            if (String.IsNullOrEmpty(searchText))
+            if (string.IsNullOrEmpty(searchText))
             {
                 return;
             }

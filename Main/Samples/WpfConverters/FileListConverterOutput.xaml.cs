@@ -185,7 +185,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Converting files, please wait...");
 
                 Debug.Assert(_sourceFiles != null && _sourceFiles.Count != 0);
-                if (!String.IsNullOrEmpty(_outputDir))
+                if (!string.IsNullOrEmpty(_outputDir))
                 {
                     _outputInfoDir = new DirectoryInfo(_outputDir);
                     if (!_outputInfoDir.Exists)
@@ -306,8 +306,8 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                bool isSuccessful = !String.IsNullOrEmpty(resultText) &&
-                    String.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
+                bool isSuccessful = !string.IsNullOrEmpty(resultText) &&
+                    string.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
 
                 if (_errorFiles == null || _errorFiles.Count == 0)
                 {
@@ -318,12 +318,12 @@ namespace SharpVectors.Converters
                     builder.AppendLine("Total number of files successful converted: " + _convertedCount);
                     builder.AppendLine("Total number of files failed: " + _errorFiles.Count);
                 }
-                if (!String.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrEmpty(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
 
-                if (!String.IsNullOrEmpty(_outputDir))
+                if (!string.IsNullOrEmpty(_outputDir))
                 {
                     builder.AppendLine("Output Directory: " + _outputDir);
                 }
@@ -417,8 +417,8 @@ namespace SharpVectors.Converters
                 }
 
                 string fileExt = Path.GetExtension(svgFileName);
-                if (String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) ||
-                    String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {

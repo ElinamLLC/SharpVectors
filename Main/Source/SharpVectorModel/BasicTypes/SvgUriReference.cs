@@ -64,7 +64,7 @@ namespace SharpVectors.Dom.Svg
                             {
                                 Uri sourceUri = null;
                                 string xmlBaseUrl = this.GetBaseUrl();
-                                if (!String.IsNullOrEmpty(xmlBaseUrl))
+                                if (!string.IsNullOrEmpty(xmlBaseUrl))
                                 {
                                     sourceUri = new Uri(new Uri(ownerElement.BaseURI), 
                                         Path.Combine(xmlBaseUrl, Href.AnimVal));
@@ -116,7 +116,7 @@ namespace SharpVectors.Dom.Svg
                 if (ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
                 {
                     string absoluteUri = this.AbsoluteUri;
-                    if (!String.IsNullOrEmpty(absoluteUri))
+                    if (!string.IsNullOrEmpty(absoluteUri))
                     {
                         WebResponse referencedResource = ownerElement.OwnerDocument.GetResource(
                             new Uri(absoluteUri));

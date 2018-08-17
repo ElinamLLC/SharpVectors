@@ -247,7 +247,7 @@ namespace SharpVectors.Converters
                     "The SVG source file must exists.", "svgFileName");
             }
 
-            if (String.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
+            if (string.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
             {
                 return false;
             }
@@ -555,14 +555,14 @@ namespace SharpVectors.Converters
                         break;
                 }
 
-                if (!String.IsNullOrEmpty(fileExtensions) &&
+                if (!string.IsNullOrEmpty(fileExtensions) &&
                     fileExtensions.IndexOf(fileExtension,
                     StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     bitmapEncoder = _bitmapEncoder;
                 }    
-                else if (!String.IsNullOrEmpty(mimeTypes) &&
-                    !String.IsNullOrEmpty(mimeType))
+                else if (!string.IsNullOrEmpty(mimeTypes) &&
+                    !string.IsNullOrEmpty(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)
@@ -646,7 +646,7 @@ namespace SharpVectors.Converters
             _writerErrorOccurred = false;
 
             string xamlFileName = null;
-            if (String.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrEmpty(imageFileName))
             {
                 string fileNameWithoutExt =
                     Path.GetFileNameWithoutExtension(fileName);
@@ -658,11 +658,11 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (String.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrEmpty(fileExt))
                 {
                     xamlFileName = imageFileName + ".xaml";
                 }
-                else if (!String.Equals(fileExt, ".xaml",
+                else if (!string.Equals(fileExt, ".xaml",
                     StringComparison.OrdinalIgnoreCase))
                 {
                     xamlFileName = Path.ChangeExtension(imageFileName, ".xaml");

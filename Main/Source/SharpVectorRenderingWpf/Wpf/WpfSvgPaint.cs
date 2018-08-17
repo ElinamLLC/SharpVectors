@@ -201,10 +201,10 @@ namespace SharpVectors.Renderers.Wpf
         {
             // Use this to prevent the default value of "4" being used...
             string miterLimitAttr = _element.GetAttribute("stroke-miterlimit");
-            if (String.IsNullOrEmpty(miterLimitAttr))
+            if (string.IsNullOrEmpty(miterLimitAttr))
             {
                 string strokeLinecap = _element.GetAttribute("stroke-linecap"); 
-                if (String.Equals(strokeLinecap, "round", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(strokeLinecap, "round", StringComparison.OrdinalIgnoreCase))
                 {
                     return 1.0d;
                 }              
@@ -212,7 +212,7 @@ namespace SharpVectors.Renderers.Wpf
             }                 
 
             string miterLimitStr = _element.GetPropertyValue("stroke-miterlimit");
-            if (String.IsNullOrEmpty(miterLimitStr) || (float)(strokeWidth) <= 0)
+            if (string.IsNullOrEmpty(miterLimitStr) || (float)(strokeWidth) <= 0)
             {
                 return -1.0d;
             }
@@ -241,7 +241,7 @@ namespace SharpVectors.Renderers.Wpf
         private DoubleCollection GetDashArray(double strokeWidth)
         {
             string dashArrayText = _element.GetPropertyValue("stroke-dasharray");
-            if (String.IsNullOrEmpty(dashArrayText))
+            if (string.IsNullOrEmpty(dashArrayText))
             {
                 return null;
             }
@@ -299,10 +299,10 @@ namespace SharpVectors.Renderers.Wpf
                     string propertyValue =
                         styleElm.GetComputedStyle("").GetPropertyValue(_propertyName);
 
-                    if (!String.IsNullOrEmpty(propertyValue))
+                    if (!string.IsNullOrEmpty(propertyValue))
                     {
                         WpfSvgPaint importFill = new WpfSvgPaint(_context, styleElm, _propertyName);
-                        if (String.Equals(uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))
                         {
                             WpfFill fill = WpfFill.CreateFill(_element.ImportDocument, absoluteUri);
                             if (fill != null)

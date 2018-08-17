@@ -374,8 +374,8 @@ namespace SharpVectors.Converters
             foreach (string svgFileName in fileIterator)
             {
                 string fileExt = Path.GetExtension(svgFileName);
-                if (String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) || 
-                    String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) || 
+                    string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {

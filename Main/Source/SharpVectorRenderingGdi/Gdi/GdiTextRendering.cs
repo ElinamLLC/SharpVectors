@@ -75,7 +75,7 @@ namespace SharpVectors.Renderers.Gdi
 
             string sVisibility = textElement.GetPropertyValue("visibility");
             string sDisplay    = textElement.GetPropertyValue("display");
-            if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
             {
                 return;
             }
@@ -122,7 +122,7 @@ namespace SharpVectors.Renderers.Gdi
                 {
                     sVisibility = stylable.GetPropertyValue("visibility");
                     sDisplay = stylable.GetPropertyValue("display");
-                    if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+                    if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
                     {
                         continue;
                     }
@@ -138,11 +138,11 @@ namespace SharpVectors.Renderers.Gdi
                 else if (nodeType == XmlNodeType.Element)
                 {
                     string nodeName = child.Name;
-                    if (String.Equals(nodeName, "tref"))
+                    if (string.Equals(nodeName, "tref"))
                     {
                         AddTRefElementPath((SvgTRefElement)child, ref ctp);
                     }
-                    else if (String.Equals(nodeName, "tspan"))
+                    else if (string.Equals(nodeName, "tspan"))
                     {
                         AddTSpanElementPath((SvgTSpanElement)child, ref ctp);
                     }

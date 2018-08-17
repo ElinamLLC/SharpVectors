@@ -80,11 +80,11 @@ namespace SharpVectors.Renderers.Texts
                 else if (nodeType == XmlNodeType.Element)
                 {
                     string nodeName = child.Name;
-                    if (String.Equals(nodeName, "tref"))
+                    if (string.Equals(nodeName, "tref"))
                     {
                         RenderTRefPath((SvgTRefElement)child, pathDrawing, ref ctp);
                     }
-                    else if (String.Equals(nodeName, "tspan"))
+                    else if (string.Equals(nodeName, "tspan"))
                     {
                         RenderTSpanPath((SvgTSpanElement)child, pathDrawing, ref ctp);
                     }
@@ -175,7 +175,7 @@ namespace SharpVectors.Renderers.Texts
         private void RenderTextPath(SvgTextContentElement element, WpfTextOnPathDrawing pathDrawing,
             string text, Point origin, double rotate, WpfTextPlacement placement)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
             {
                 return;
             }
@@ -192,7 +192,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!String.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);

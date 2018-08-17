@@ -68,9 +68,9 @@ namespace SharpVectors.Converters
                     return true;
                 }
 
-                return (String.IsNullOrEmpty(_sourceFile) &&
+                return (string.IsNullOrEmpty(_sourceFile) &&
                     (_sourceFiles == null || _sourceFiles.Count == 0) &&
-                    String.IsNullOrEmpty(_sourceDir));
+                    string.IsNullOrEmpty(_sourceDir));
             }
         }
 
@@ -328,7 +328,7 @@ namespace SharpVectors.Converters
                         {
                             // It is a file, but must be SVG to be useful...
                             string fileExt = Path.GetExtension(sourcePath);
-                            if (!String.IsNullOrEmpty(fileExt) &&
+                            if (!string.IsNullOrEmpty(fileExt) &&
                                 (fileExt.Equals(".svg", StringComparison.OrdinalIgnoreCase) ||
                                 fileExt.Equals(".svgz", StringComparison.OrdinalIgnoreCase)))
                             {
@@ -397,91 +397,91 @@ namespace SharpVectors.Converters
         {
             options.Add("s|source=", "Specifies the input source files or directory.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     sourceSet[value] = true;
                 }
             });
             options.Add("o|output=", "Specifies the output directory.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     this.OutputDir = value;
                 }
             });
             options.Add("r|recursive", "Specifies whether a directory conversion is recursive.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _isRecursive = String.Equals(value, "+", StringComparison.Ordinal);
+                    _isRecursive = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("t|runtime", "Specifies whether to include runtime library support.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _includeRuntime = String.Equals(value, "+", StringComparison.Ordinal);
+                    _includeRuntime = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("e|onError", "Specifies whether to continue conversion when an error occurs in a file.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _continueOnError = String.Equals(value, "+", StringComparison.Ordinal);
+                    _continueOnError = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("g|textGeometry", "Specifies whether to render texts as path geometry.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _textAsGeometry = String.Equals(value, "+", StringComparison.Ordinal);
+                    _textAsGeometry = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("c|customXamlWriter", "Specifies whether to use the customized XAML Writer.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _customXamlWriter = String.Equals(value, "+", StringComparison.Ordinal);
+                    _customXamlWriter = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("x|xaml", "Specifies whether to save in uncompressed XAML format.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _saveXaml = String.Equals(value, "+", StringComparison.Ordinal);
+                    _saveXaml = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("z|zaml", "Specifies whether to save in compressed XAML format.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _saveZaml = String.Equals(value, "+", StringComparison.Ordinal);
+                    _saveZaml = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
             options.Add("i|image=", "Specifies whether to save image and image formats: png, jpeg, tiff, gif, bmp, wdp", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     this.Image = value;
                 }
             });
             options.Add("u|ui=", "Specifies the user-interface option: none, console or window.", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     switch (value.ToLower())
                     {
@@ -504,15 +504,15 @@ namespace SharpVectors.Converters
             });
             options.Add("h|?|help", "Specifies whether to display usage and command-line help.", delegate(string value)
             {
-                _showHelp = !String.IsNullOrEmpty(value);
+                _showHelp = !string.IsNullOrEmpty(value);
             });
             options.Add("b|beep", "Specifies whether to beep on completion (console only).", delegate(string value)
             {
-                if (!String.IsNullOrEmpty(value) &&
-                    (String.Equals(value, "+", StringComparison.Ordinal)
-                        || String.Equals(value, "-", StringComparison.Ordinal)))
+                if (!string.IsNullOrEmpty(value) &&
+                    (string.Equals(value, "+", StringComparison.Ordinal)
+                        || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
-                    _beepEnd = String.Equals(value, "+", StringComparison.Ordinal);
+                    _beepEnd = string.Equals(value, "+", StringComparison.Ordinal);
                 }
             });
         }
@@ -539,7 +539,7 @@ namespace SharpVectors.Converters
 
         private static bool IsValidImage(string image)
         {
-            if (String.IsNullOrEmpty(image))
+            if (string.IsNullOrEmpty(image))
             {
                 return false;
             }

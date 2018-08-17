@@ -471,7 +471,7 @@ namespace SharpVectors.Renderers.Texts
         protected FontWeight GetTextFontWeight(SvgTextContentElement element)
         {
             string fontWeight = element.GetPropertyValue("font-weight");
-            if (String.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrEmpty(fontWeight))
             {
                 return FontWeights.Normal;
             }
@@ -504,26 +504,26 @@ namespace SharpVectors.Renderers.Texts
                     return FontWeights.UltraBlack;
             }
 
-            if (String.Equals(fontWeight, "bolder", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fontWeight, "bolder", StringComparison.OrdinalIgnoreCase))
             {
                 SvgTransformableElement parentElement = element.ParentNode as SvgTransformableElement;
                 if (parentElement != null)
                 {
                     fontWeight = parentElement.GetPropertyValue("font-weight");
-                    if (!String.IsNullOrEmpty(fontWeight))
+                    if (!string.IsNullOrEmpty(fontWeight))
                     {
                         return this.GetBolderFontWeight(fontWeight);
                     }
                 }
                 return FontWeights.ExtraBold;
             }
-            if (String.Equals(fontWeight, "lighter", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fontWeight, "lighter", StringComparison.OrdinalIgnoreCase))
             {
                 SvgTransformableElement parentElement = element.ParentNode as SvgTransformableElement;
                 if (parentElement != null)
                 {
                     fontWeight = parentElement.GetPropertyValue("font-weight");
-                    if (!String.IsNullOrEmpty(fontWeight))
+                    if (!string.IsNullOrEmpty(fontWeight))
                     {
                         return this.GetLighterFontWeight(fontWeight);
                     }
@@ -536,7 +536,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected FontWeight GetBolderFontWeight(string fontWeight)
         {
-            if (String.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrEmpty(fontWeight))
             {
                 return FontWeights.Normal;
             }
@@ -574,7 +574,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected FontWeight GetLighterFontWeight(string fontWeight)
         {
-            if (String.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrEmpty(fontWeight))
             {
                 return FontWeights.Normal;
             }
@@ -618,7 +618,7 @@ namespace SharpVectors.Renderers.Texts
         protected FontStyle GetTextFontStyle(SvgTextContentElement element)
         {
             string fontStyle = element.GetPropertyValue("font-style");
-            if (String.IsNullOrEmpty(fontStyle))
+            if (string.IsNullOrEmpty(fontStyle))
             {
                 return FontStyles.Normal;
             }
@@ -642,7 +642,7 @@ namespace SharpVectors.Renderers.Texts
         protected FontStretch GetTextFontStretch(SvgTextContentElement element)
         {
             string fontStretch = element.GetPropertyValue("font-stretch");
-            if (String.IsNullOrEmpty(fontStretch))
+            if (string.IsNullOrEmpty(fontStretch))
             {
                 return FontStretches.Normal;
             }
@@ -710,15 +710,15 @@ namespace SharpVectors.Renderers.Texts
                 {
                     string fontName = fn.Trim(new char[] { ' ', '\'', '"' });
 
-                    if (String.Equals(fontName, "serif", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(fontName, "serif", StringComparison.OrdinalIgnoreCase))
                     {
                         family = WpfDrawingSettings.GenericSerif;
                     }
-                    else if (String.Equals(fontName, "sans-serif", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(fontName, "sans-serif", StringComparison.OrdinalIgnoreCase))
                     {
                         family = WpfDrawingSettings.GenericSansSerif;
                     }
-                    else if (String.Equals(fontName, "monospace", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(fontName, "monospace", StringComparison.OrdinalIgnoreCase))
                     {
                         family = WpfDrawingSettings.GenericMonospace;
                     }

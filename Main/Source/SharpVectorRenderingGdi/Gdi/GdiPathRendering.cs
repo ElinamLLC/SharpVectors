@@ -50,7 +50,7 @@ namespace SharpVectors.Renderers.Gdi
 
 			string sVisibility = styleElm.GetPropertyValue("visibility");
 			string sDisplay    = styleElm.GetPropertyValue("display");
-            if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
             {
                 return;
             }

@@ -84,7 +84,7 @@ namespace SharpVectors.Converters
             Debug.Assert(writer != null);
 
             Debug.Assert(_sourceFile != null && _sourceFile.Length != 0);
-            if (String.IsNullOrEmpty(_sourceFile) || !File.Exists(_sourceFile))
+            if (string.IsNullOrEmpty(_sourceFile) || !File.Exists(_sourceFile))
             {
                 return false;
             }
@@ -98,7 +98,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Input File: " + _sourceFile);
 
                 string _outputDir = this.OutputDir;
-                if (String.IsNullOrEmpty(_outputDir))
+                if (string.IsNullOrEmpty(_outputDir))
                 {
                     _outputDir = Path.GetDirectoryName(_sourceFile);
                 }
@@ -178,7 +178,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                if (!String.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrEmpty(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
@@ -197,7 +197,7 @@ namespace SharpVectors.Converters
                     builder.AppendLine(_imageFile);
                 }
 
-                isSuccessful = String.Equals(resultText, "Successful",
+                isSuccessful = string.Equals(resultText, "Successful",
                         StringComparison.OrdinalIgnoreCase);
             }
 

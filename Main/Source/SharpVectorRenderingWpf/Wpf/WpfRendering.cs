@@ -160,7 +160,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             string localName = element.LocalName;
-            if (String.IsNullOrEmpty(localName))
+            if (string.IsNullOrEmpty(localName))
             {
                 return new WpfRendering((SvgElement)element);
             }
@@ -243,7 +243,7 @@ namespace SharpVectors.Renderers.Wpf
             foreach (XmlNode node in _svgElement.ChildNodes)
             {
                 if (node.NodeType == XmlNodeType.Element &&
-                    String.Equals(node.LocalName, "title", StringComparison.OrdinalIgnoreCase))
+                    string.Equals(node.LocalName, "title", StringComparison.OrdinalIgnoreCase))
                 {
                     titleElement = node as SvgTitleElement;
                     break;
@@ -755,7 +755,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 // Handle a case where the clip element has "use" element as a child...
-                if (String.Equals(node.LocalName, "use"))
+                if (string.Equals(node.LocalName, "use"))
                 {
                     SvgUseElement useElement = (SvgUseElement)node;
 
@@ -1020,15 +1020,15 @@ namespace SharpVectors.Renderers.Wpf
             PathGeometry geometry = new PathGeometry();
 
             string pathScript = element.PathScript;
-            if (String.IsNullOrEmpty(pathScript))
+            if (string.IsNullOrEmpty(pathScript))
             {
                 return geometry;
             }
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!String.IsNullOrEmpty(clipRule) &&
-                String.Equals(clipRule, "evenodd") || String.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrEmpty(clipRule) &&
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
             }
@@ -1054,8 +1054,8 @@ namespace SharpVectors.Renderers.Wpf
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!String.IsNullOrEmpty(clipRule) &&
-                String.Equals(clipRule, "evenodd") || String.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrEmpty(clipRule) &&
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
             }
@@ -1217,8 +1217,8 @@ namespace SharpVectors.Renderers.Wpf
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!String.IsNullOrEmpty(clipRule) &&
-                String.Equals(clipRule, "evenodd") || String.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrEmpty(clipRule) &&
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
             }
@@ -1267,8 +1267,8 @@ namespace SharpVectors.Renderers.Wpf
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!String.IsNullOrEmpty(clipRule) &&
-                String.Equals(clipRule, "evenodd") || String.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrEmpty(clipRule) &&
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
             }

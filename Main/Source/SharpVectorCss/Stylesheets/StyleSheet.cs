@@ -41,7 +41,7 @@ namespace SharpVectors.Dom.Stylesheets
             _Href  = String.Empty;
             _Type  = String.Empty;
 
-            if (String.IsNullOrEmpty(media))
+            if (string.IsNullOrEmpty(media))
             {
                 _Media = new MediaList();
             }
@@ -236,7 +236,8 @@ namespace SharpVectors.Dom.Stylesheets
                 Uri u = null;
                 if (ownerNode != null)
                 {
-                    if (ownerNode.BaseURI != null)
+                    // Fixed logic for cases in which document base uri is unknown
+                    if (!string.IsNullOrEmpty(ownerNode.BaseURI))
                     {
                         u = new Uri(new Uri(ownerNode.BaseURI), Href);
                     }

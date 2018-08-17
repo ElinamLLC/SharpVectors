@@ -402,7 +402,7 @@ namespace SharpVectors.Renderers.Wpf
                 _linkDrawing = new DrawingGroup();
 
                 string groupId = _linkVisitor.AggregatedLayerName;
-                if (!String.IsNullOrEmpty(groupId))
+                if (!string.IsNullOrEmpty(groupId))
                 {
                     _linkDrawing.SetValue(FrameworkElement.NameProperty, groupId);
                 }  
@@ -432,7 +432,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public bool IsRegisteredId(string elementId)
         {
-            if (String.IsNullOrEmpty(elementId))
+            if (string.IsNullOrEmpty(elementId))
             {
                 return false;
             }
@@ -447,7 +447,7 @@ namespace SharpVectors.Renderers.Wpf
         
         public void RegisterId(string elementId)
         {
-            if (String.IsNullOrEmpty(elementId))
+            if (string.IsNullOrEmpty(elementId))
             {
                 return;
             }
@@ -460,7 +460,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public void UnRegisterId(string elementId)
         {
-            if (String.IsNullOrEmpty(elementId))
+            if (string.IsNullOrEmpty(elementId))
             {
                 return;
             }

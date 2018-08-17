@@ -192,7 +192,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Converting: " + _sourceFile);
 
                 Debug.Assert(_sourceFile != null && _sourceFile.Length != 0);
-                if (String.IsNullOrEmpty(_outputDir))
+                if (string.IsNullOrEmpty(_outputDir))
                 {
                     _outputDir = Path.GetDirectoryName(_sourceFile);
                 }
@@ -246,28 +246,28 @@ namespace SharpVectors.Converters
                     break;
                 case 2:
                     TabItem selectItem = (TabItem)tabControl.Items[2];
-                    if (String.Equals(selectItem.Name, "xamlTabItem",
+                    if (string.Equals(selectItem.Name, "xamlTabItem",
                         StringComparison.OrdinalIgnoreCase))
                     {
-                        if (!String.IsNullOrEmpty(_xamlFile) && File.Exists(_xamlFile))
+                        if (!string.IsNullOrEmpty(_xamlFile) && File.Exists(_xamlFile))
                         {
-                            if (String.IsNullOrEmpty(_documentFile))
+                            if (string.IsNullOrEmpty(_documentFile))
                             {
                                 this.LoadDocument(_xamlFile);
                             }
                         }
-                        else if (!String.IsNullOrEmpty(_zamlFile) && File.Exists(_zamlFile))
+                        else if (!string.IsNullOrEmpty(_zamlFile) && File.Exists(_zamlFile))
                         {
-                            if (String.IsNullOrEmpty(_documentFile))
+                            if (string.IsNullOrEmpty(_documentFile))
                             {
                                 this.LoadDocument(_zamlFile);
                             }
                         }
                     }
-                    else if (String.Equals(selectItem.Name, "imageTabItem",
+                    else if (string.Equals(selectItem.Name, "imageTabItem",
                         StringComparison.OrdinalIgnoreCase))
                     {
-                        if (!String.IsNullOrEmpty(_imageFile) && File.Exists(_imageFile))
+                        if (!string.IsNullOrEmpty(_imageFile) && File.Exists(_imageFile))
                         {
                             if (_bitmapImage == null)
                             {
@@ -279,7 +279,7 @@ namespace SharpVectors.Converters
                     }
                     break;
                 case 3:
-                    if (!String.IsNullOrEmpty(_imageFile) && File.Exists(_imageFile))
+                    if (!string.IsNullOrEmpty(_imageFile) && File.Exists(_imageFile))
                     {
                         if (_bitmapImage == null)
                         {
@@ -360,7 +360,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {   
                 string resultText = e.Result.ToString();
-                if (!String.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrEmpty(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
@@ -381,7 +381,7 @@ namespace SharpVectors.Converters
 
                 if (_observer != null)
                 {
-                    _observer.OnCompleted(this, String.Equals(resultText, "Successful", 
+                    _observer.OnCompleted(this, string.Equals(resultText, "Successful", 
                         StringComparison.OrdinalIgnoreCase));
                 }
            }
@@ -674,13 +674,13 @@ namespace SharpVectors.Converters
 
         private void LoadDocument(string documentFileName)
         {
-            if (textEditor == null || String.IsNullOrEmpty(documentFileName))
+            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
             {
                 return;
             }
 
             string fileExt = Path.GetExtension(documentFileName);
-            if (String.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
             {
                 using (FileStream fileStream = File.OpenRead(documentFileName))
                 {

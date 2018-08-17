@@ -29,7 +29,7 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderSingleLineText(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
                 return;
 
             double emSize         = GetComputedFontSize(element);
@@ -44,7 +44,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!String.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
@@ -82,8 +82,8 @@ namespace SharpVectors.Renderers.Texts
             bool hasWordSpacing  = false;
             string wordSpaceText = element.GetAttribute("word-spacing");
             double wordSpacing   = 0;
-            if (!String.IsNullOrEmpty(wordSpaceText) &&
-                Double.TryParse(wordSpaceText, out wordSpacing) && (float)wordSpacing != 0)
+            if (!string.IsNullOrEmpty(wordSpaceText) &&
+                double.TryParse(wordSpaceText, out wordSpacing) && (float)wordSpacing != 0)
             {
                 hasWordSpacing = true;
             }
@@ -91,8 +91,8 @@ namespace SharpVectors.Renderers.Texts
             bool hasLetterSpacing = false;
             string letterSpaceText = element.GetAttribute("letter-spacing");
             double letterSpacing = 0;
-            if (!String.IsNullOrEmpty(letterSpaceText) && 
-                Double.TryParse(letterSpaceText, out letterSpacing) && (float)letterSpacing != 0)
+            if (!string.IsNullOrEmpty(letterSpaceText) && 
+                double.TryParse(letterSpaceText, out letterSpacing) && (float)letterSpacing != 0)
             {
                 hasLetterSpacing = true;
             }
@@ -290,7 +290,7 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderTextRun(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
                 return;
 
             double emSize         = GetComputedFontSize(element);
@@ -305,7 +305,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!String.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
@@ -353,8 +353,8 @@ namespace SharpVectors.Renderers.Texts
             bool hasWordSpacing  = false;
             string wordSpaceText = element.GetAttribute("word-spacing");
             double wordSpacing = 0;
-            if (!String.IsNullOrEmpty(wordSpaceText) &&
-                Double.TryParse(wordSpaceText, out wordSpacing) && (float)wordSpacing != 0)
+            if (!string.IsNullOrEmpty(wordSpaceText) &&
+                double.TryParse(wordSpaceText, out wordSpacing) && (float)wordSpacing != 0)
             {
                 hasWordSpacing = true;
             }
@@ -362,8 +362,8 @@ namespace SharpVectors.Renderers.Texts
             bool hasLetterSpacing = false;
             string letterSpaceText = element.GetAttribute("letter-spacing");
             double letterSpacing = 0;
-            if (!String.IsNullOrEmpty(letterSpaceText) &&
-                Double.TryParse(letterSpaceText, out letterSpacing) && (float)letterSpacing != 0)
+            if (!string.IsNullOrEmpty(letterSpaceText) &&
+                double.TryParse(letterSpaceText, out letterSpacing) && (float)letterSpacing != 0)
             {
                 hasLetterSpacing = true;
             }

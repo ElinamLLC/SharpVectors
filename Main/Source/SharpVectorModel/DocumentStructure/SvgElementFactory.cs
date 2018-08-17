@@ -11,7 +11,7 @@ namespace SharpVectors.Dom.Svg
         {
             // This factory assumes the requested element is defined in the 
             // http://www.w3.org/2000/svg namespace.
-            if (String.IsNullOrEmpty(ns) || !String.Equals(ns, 
+            if (string.IsNullOrEmpty(ns) || !string.Equals(ns, 
                 SvgDocument.SvgNamespace, StringComparison.OrdinalIgnoreCase))
             {
                 return null;

@@ -32,25 +32,25 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderSingleLineText(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
                 return;
 
             int vertOrientation    = -1;
             int horzOrientation    = -1;
             string orientationText = element.GetPropertyValue("glyph-orientation-vertical");
-            if (!String.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrEmpty(orientationText))
             {
                 double orientationValue = 0;
-                if (Double.TryParse(orientationText, out orientationValue))
+                if (double.TryParse(orientationText, out orientationValue))
                 {
                     vertOrientation = (int)orientationValue;
                 }
             }
             orientationText = element.GetPropertyValue("glyph-orientation-horizontal");
-            if (!String.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrEmpty(orientationText))
             {
                 double orientationValue = 0;
-                if (Double.TryParse(orientationText, out orientationValue))
+                if (double.TryParse(orientationText, out orientationValue))
                 {
                     horzOrientation = (int)orientationValue;
                 }
@@ -206,26 +206,26 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderTextRun(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
                 return;
 
             int vertOrientation = -1;
             int horzOrientation = -1;
 
             string orientationText = element.GetPropertyValue("glyph-orientation-vertical");
-            if (!String.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrEmpty(orientationText))
             {
                 double orientationValue = 0;
-                if (Double.TryParse(orientationText, out orientationValue))
+                if (double.TryParse(orientationText, out orientationValue))
                 {
                     vertOrientation = (int)orientationValue;
                 }
             }
             orientationText = element.GetPropertyValue("glyph-orientation-horizontal");
-            if (!String.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrEmpty(orientationText))
             {
                 double orientationValue = 0;
-                if (Double.TryParse(orientationText, out orientationValue))
+                if (double.TryParse(orientationText, out orientationValue))
                 {
                     horzOrientation = (int)orientationValue;
                 }
@@ -403,7 +403,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!String.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
@@ -439,7 +439,7 @@ namespace SharpVectors.Renderers.Texts
             TextAlignment alignment = stringFormat.Alignment;
 
             string letterSpacing = element.GetAttribute("letter-spacing");
-            if (String.IsNullOrEmpty(letterSpacing))
+            if (string.IsNullOrEmpty(letterSpacing))
             {   
                 FormattedText formattedText = new FormattedText(text, 
                     textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo,
@@ -577,7 +577,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!String.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
@@ -613,7 +613,7 @@ namespace SharpVectors.Renderers.Texts
             TextAlignment alignment = stringFormat.Alignment;
 
             string letterSpacing = element.GetAttribute("letter-spacing");
-            if (String.IsNullOrEmpty(letterSpacing))
+            if (string.IsNullOrEmpty(letterSpacing))
             {   
                 FormattedText formattedText = new FormattedText(text,
                     textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo,

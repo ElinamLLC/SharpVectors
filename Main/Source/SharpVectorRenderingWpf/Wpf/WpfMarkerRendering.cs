@@ -45,7 +45,7 @@ namespace SharpVectors.Renderers.Wpf
             _drawGroup = new DrawingGroup();
 
             //string elementId = this.GetElementName();
-            //if (!String.IsNullOrEmpty(elementId))
+            //if (!string.IsNullOrEmpty(elementId))
             //{
             //    _drawGroup.SetValue(FrameworkElement.NameProperty, elementId);
             //}

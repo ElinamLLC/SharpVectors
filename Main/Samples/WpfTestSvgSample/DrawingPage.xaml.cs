@@ -91,7 +91,7 @@ namespace WpfTestSvgSample
             { 
                 _drawingDir = value; 
 
-                if (!String.IsNullOrEmpty(_drawingDir))
+                if (!string.IsNullOrEmpty(_drawingDir))
                 {
                     _directoryInfo = new DirectoryInfo(_drawingDir);
 
@@ -121,7 +121,7 @@ namespace WpfTestSvgSample
 
         public bool LoadDocument(string svgFilePath)
         {
-            if (String.IsNullOrEmpty(svgFilePath) || !File.Exists(svgFilePath))
+            if (string.IsNullOrEmpty(svgFilePath) || !File.Exists(svgFilePath))
             {
                 return false;
             }
@@ -140,8 +140,8 @@ namespace WpfTestSvgSample
 
             string fileExt = Path.GetExtension(svgFilePath);
 
-            if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
             {
                 if (_fileReader != null)
                 {
@@ -172,8 +172,8 @@ namespace WpfTestSvgSample
                     }
                 }
             }
-            else if (String.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
             {
                 svgViewer.LoadDiagrams(svgFilePath);
 
@@ -197,7 +197,7 @@ namespace WpfTestSvgSample
 
         public bool SaveDocument(string fileName)
         {
-            if (String.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(fileName))
             {
                 return false;
             }

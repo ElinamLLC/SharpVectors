@@ -67,7 +67,7 @@ namespace SharpVectors.Runtime
 
         public void Start(string targetName, object scopedElement)
         {
-            if (String.IsNullOrEmpty(targetName))
+            if (string.IsNullOrEmpty(targetName))
             {
                 return;
             }
@@ -90,7 +90,7 @@ namespace SharpVectors.Runtime
         {
             _storyboard.Stop(this);
 
-            if (!String.IsNullOrEmpty(_targetName))
+            if (!string.IsNullOrEmpty(_targetName))
             {
                 this.UnregisterName(_targetName);
             }

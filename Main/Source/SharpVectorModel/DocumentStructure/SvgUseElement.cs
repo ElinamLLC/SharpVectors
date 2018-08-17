@@ -229,13 +229,13 @@ namespace SharpVectors.Dom.Svg
             }
 
             // if (refEl is SvgSymbolElement)
-            if (String.Equals(refEl.Name, "symbol", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(refEl.Name, "symbol", StringComparison.OrdinalIgnoreCase))
             {
                 refEl.SetAttribute("width", (HasAttribute("width")) ? GetAttribute("width") : "100%");
                 refEl.SetAttribute("height", (HasAttribute("height")) ? GetAttribute("height") : "100%");
             }
             // if (refEl is SvgSymbolElement)
-            if (String.Equals(refEl.Name, "symbol", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(refEl.Name, "symbol", StringComparison.OrdinalIgnoreCase))
             {
                 saveWidth  = refEl.GetAttribute("width");
                 saveHeight = refEl.GetAttribute("height");

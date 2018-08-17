@@ -66,7 +66,7 @@ namespace SharpVectors.Renderers.Gdi
             
             string elementName = svgElement.LocalName;
 
-            if (String.Equals(elementName, "use"))
+            if (string.Equals(elementName, "use"))
             {
                 RenderUseElement(svgElement);
             }
@@ -85,7 +85,7 @@ namespace SharpVectors.Renderers.Gdi
 
             string elementName = svgElement.LocalName;
 
-            if (String.Equals(elementName, "switch"))
+            if (string.Equals(elementName, "switch"))
             {
                 RenderSwitchChildren(svgElement);
             }
@@ -101,7 +101,7 @@ namespace SharpVectors.Renderers.Gdi
 
         private void RenderElement(ISvgElement svgElement)
         {
-            bool isNotRenderable = !svgElement.IsRenderable || String.Equals(svgElement.LocalName, "a");
+            bool isNotRenderable = !svgElement.IsRenderable || string.Equals(svgElement.LocalName, "a");
 
             if (isNotRenderable)
             {
@@ -127,7 +127,7 @@ namespace SharpVectors.Renderers.Gdi
             {
                 string sVisibility = stylable.GetPropertyValue("visibility");
                 string sDisplay = stylable.GetPropertyValue("display");
-                if (String.Equals(sVisibility, "hidden") || String.Equals(sDisplay, "none"))
+                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
                 {
                     shouldRender = false;
                 }
@@ -266,7 +266,7 @@ namespace SharpVectors.Renderers.Gdi
 
                 foreach (string req in element.SystemLanguage)
                 {
-                    if (String.Equals(req, _currentLang, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(req, _currentLang, StringComparison.OrdinalIgnoreCase))
                     {
                         systemLanguage = true;
                     }

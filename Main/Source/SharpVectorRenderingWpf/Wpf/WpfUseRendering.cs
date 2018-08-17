@@ -54,7 +54,7 @@ namespace SharpVectors.Renderers.Wpf
                         // Try handling the cases of "symbol" and "svg" sources within the "use"...
                         XmlNode childNode = _svgElement.FirstChild;
                         string childName  = childNode.Name;
-                        if (String.Equals(childName, "symbol", StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(childName, "symbol", StringComparison.OrdinalIgnoreCase))
                         {
                             SvgSymbolElement symbolElement = (SvgSymbolElement)childNode;
 
@@ -87,7 +87,7 @@ namespace SharpVectors.Renderers.Wpf
                         // Try handling the cases of "symbol" and "svg" sources within the "use"...
                         XmlNode childNode = _svgElement.FirstChild;
                         string childName = childNode.Name;
-                        if (String.Equals(childName, "symbol", StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(childName, "symbol", StringComparison.OrdinalIgnoreCase))
                         {
                             SvgSymbolElement symbolElement = (SvgSymbolElement)childNode;
 

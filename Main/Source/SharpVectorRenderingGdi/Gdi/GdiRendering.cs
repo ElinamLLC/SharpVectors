@@ -116,7 +116,7 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             string localName = element.LocalName;
-            if (String.IsNullOrEmpty(localName))
+            if (string.IsNullOrEmpty(localName))
             {
                 return new GdiRendering((SvgElement)element);
             }
@@ -444,7 +444,7 @@ namespace SharpVectors.Renderers.Gdi
                 }
 
                 // Handle a case where the clip element has "use" element as a child...
-                if (String.Equals(node.LocalName, "use"))
+                if (string.Equals(node.LocalName, "use"))
                 {
                     SvgUseElement useElement = (SvgUseElement)node;
 

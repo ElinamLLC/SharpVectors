@@ -75,7 +75,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 elementId = elementId.Trim();
             }
-            if (String.IsNullOrEmpty(elementId))
+            if (string.IsNullOrEmpty(elementId))
             {
                 return String.Empty;
             }
@@ -120,7 +120,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 elementId = elementId.Trim();
             }
-            if (String.IsNullOrEmpty(elementId))
+            if (string.IsNullOrEmpty(elementId))
             {
                 return String.Empty;
             }
