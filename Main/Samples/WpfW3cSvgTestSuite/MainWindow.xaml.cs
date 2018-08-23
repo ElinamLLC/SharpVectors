@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Text;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -11,12 +10,25 @@ using IoPath = System.IO.Path;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using SharpVectors.Net;
+using SharpVectors.Xml;
+using SharpVectors.Dom;
+using SharpVectors.Dom.Css;
+using SharpVectors.Dom.Svg;
+using SharpVectors.Dom.Events;
+
+using SharpVectors.Converters;
+using SharpVectors.Renderers;
+using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils;
+
+using SharpVectors.Runtime;
 
 using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
 
@@ -29,8 +41,18 @@ namespace WpfW3cSvgTestSuite
     {
         #region Private Fields
 
-        private const string SvgTestSuite = "SvgTestSuite.xml";
+        private const int LeftPane         = 320;
+        private const int LeftBottomPane   = 220;
 
+        private const string TestSuiteDir = "";
+        private const string SvgSubDir    = "";
+        private const string PngSubDir    = "";
+
+        private const string AppTitle       = "Svg Test Suite";
+        private const string AppErrorTitle  = "Svg Test Suite - Error";
+        private const string SvgTestSuite   = "SvgTestSuite.xml";
+        private const string SvgTestResults = "SvgTestResults.xml";
+  
         private bool   _isTreeModified;
 
         private bool   _isTreeChangedPending;
@@ -43,16 +65,28 @@ namespace WpfW3cSvgTestSuite
         private string _svgPath;
         private string _pngPath;
 
-        private string _testFileName;
+        private string _testFilePath;
+        private string _testResultsPath;
 
         private string _drawingDir;
 
         private SvgPage     _svgPage;
         private XamlPage    _xamlPage;
         private DrawingPage _drawingPage;
+        private BrowserPage _browserPage;
+        private AboutPage _aboutPage;
         
         private BitmapImage _folderClose;
         private BitmapImage _folderOpen;
+
+        private DirectoryInfo _directoryInfo;
+
+        private FileSvgReader _fileReader;
+        private WpfDrawingSettings _wpfSettings;
+
+        private DrawingGroup _currentDrawing;
+
+        private IList<SvgTestResult> _testResults;
 
         #endregion
 
@@ -62,16 +96,16 @@ namespace WpfW3cSvgTestSuite
         {
             InitializeComponent();
 
-            leftExpander.Expanded    += new RoutedEventHandler(OnLeftExpanderExpanded);
-            leftExpander.Collapsed   += new RoutedEventHandler(OnLeftExpanderCollapsed);
-            leftSplitter.MouseMove   += new MouseEventHandler(OnLeftSplitterMove);  
+            leftExpander.Expanded    += OnLeftExpanderExpanded;
+            leftExpander.Collapsed   += OnLeftExpanderCollapsed;
+            leftSplitter.MouseMove   += OnLeftSplitterMove;  
 
-            bottomExpander.Expanded  += new RoutedEventHandler(OnBottomExpanderExpanded);
-            bottomExpander.Collapsed += new RoutedEventHandler(OnBottomExpanderCollapsed);
-            bottomSplitter.MouseMove += new MouseEventHandler(OnBottomSplitterMove);
+            bottomExpander.Expanded  += OnBottomExpanderExpanded;
+            bottomExpander.Collapsed += OnBottomExpanderCollapsed;
+            bottomSplitter.MouseMove += OnBottomSplitterMove;
 
-            this.Loaded  += new RoutedEventHandler(OnWindowLoaded);
-            this.Closing += new CancelEventHandler(OnWindowClosing);
+            this.Loaded  += OnWindowLoaded;
+            this.Closing += OnWindowClosing;
 
             _drawingDir = IoPath.Combine(IoPath.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location), "XamlDrawings");
@@ -80,6 +114,14 @@ namespace WpfW3cSvgTestSuite
             {
                 Directory.CreateDirectory(_drawingDir);
             }
+
+            _directoryInfo = new DirectoryInfo(_drawingDir);
+
+            _wpfSettings         = new WpfDrawingSettings();
+
+            _fileReader          = new FileSvgReader(_wpfSettings);
+            _fileReader.SaveXaml = false;
+            _fileReader.SaveZaml = false;
 
             try
             {
@@ -114,8 +156,8 @@ namespace WpfW3cSvgTestSuite
             double width  = SystemParameters.PrimaryScreenWidth;
             double height = SystemParameters.PrimaryScreenHeight;
 
-            this.Width  = Math.Min(1600, width) * 0.85;
-            this.Height = height * 0.90;
+            this.Width  = Math.Min(1200, width) * 0.90;
+            this.Height = Math.Min(1080, height) * 0.90;
 
             this.Left = (width  - this.Width) / 2.0;
             this.Top  = (height - this.Height) / 2.0;
@@ -123,7 +165,7 @@ namespace WpfW3cSvgTestSuite
             this.WindowStartupLocation = WindowStartupLocation.Manual;
 
             ColumnDefinition colExpander = mainGrid.ColumnDefinitions[0];
-            colExpander.Width = new GridLength(280, GridUnitType.Pixel); 
+            colExpander.Width = new GridLength(LeftPane, GridUnitType.Pixel); 
 
             RowDefinition rowExpander = bottomGrid.RowDefinitions[2];
             rowExpander.Height = new GridLength(24, GridUnitType.Pixel);
@@ -142,13 +184,23 @@ namespace WpfW3cSvgTestSuite
             _svgPage     = frameSvgInput.Content   as SvgPage;
             _xamlPage    = frameXamlOutput.Content as XamlPage;
             _drawingPage = frameDrawing.Content    as DrawingPage;
+            _browserPage = frameBrowser.Content    as BrowserPage;
+            _aboutPage   = frameAbout.Content      as AboutPage;
 
-            if (_drawingPage != null)
+            //if (_drawingPage != null)
+            //{
+            //    _drawingPage.XamlDrawingDir = _drawingDir;
+            //}
+
+            if (_fileReader != null)
             {
-                _drawingPage.XamlDrawingDir = _drawingDir;
+                _fileReader.SaveXaml = Directory.Exists(_drawingDir);
             }
 
-            string currentDir = IoPath.GetFullPath(@"..\..\FullTestSuite"); 
+            frameAbout.Navigating += OnFrameAboutNavigating;
+            frameAbout.Navigated += OnFrameAboutNavigated;
+
+            string currentDir = IoPath.GetFullPath(@"..\..\FullTestSuite");
 
             if (Directory.Exists(currentDir))
             {
@@ -162,51 +214,98 @@ namespace WpfW3cSvgTestSuite
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (!_isTreeModified || string.IsNullOrEmpty(_testFileName) ||
-                !File.Exists(_testFileName))
+            if (!_isTreeModified || string.IsNullOrEmpty(_testFilePath) ||
+                !File.Exists(_testFilePath))
             {
                 return;
             }
 
-            string backupFile = IoPath.ChangeExtension(_testFileName, ".bak");
+            string backupFile = IoPath.ChangeExtension(_testFilePath, ".bak");
             try
             {
                 if (File.Exists(backupFile))
                 {
                     File.Delete(backupFile);
                 }
-                File.Move(_testFileName, backupFile);
+                File.Move(_testFilePath, backupFile);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Svg Test Suite - Error",
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return;
             }
-
             try
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent      = true;
+                settings.Indent = true;
                 settings.IndentChars = "    ";
-                settings.Encoding    = Encoding.UTF8;
+                settings.Encoding = Encoding.UTF8;
 
-                using (XmlWriter writer = XmlWriter.Create(_testFileName, settings))
+                using (XmlWriter writer = XmlWriter.Create(_testFilePath, settings))
                 {
                     this.SaveTreeView(writer);
                 }
             }
             catch (Exception ex)
             {
-                if (File.Exists(backupFile))    
+                if (File.Exists(backupFile))
                 {
-                    File.Move(backupFile, _testFileName);
+                    File.Move(backupFile, _testFilePath);
                 }
 
-                MessageBox.Show(ex.ToString(), "Svg Test Suite - Error",
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
-            }             
+            }
+
+            if (!string.IsNullOrWhiteSpace(_testResultsPath))
+            {
+                if (!string.IsNullOrWhiteSpace(_testResultsPath))
+                {
+                    if (File.Exists(_testResultsPath))
+                    {
+                        backupFile = IoPath.ChangeExtension(_testResultsPath, ".bak");
+                        try
+                        {
+                            if (File.Exists(backupFile))
+                            {
+                                File.Delete(backupFile);
+                            }
+                            File.Move(_testResultsPath, backupFile);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), AppErrorTitle,
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
+
+                    try
+                    {
+                        XmlWriterSettings settings = new XmlWriterSettings();
+                        settings.Indent = true;
+                        settings.IndentChars = "    ";
+                        settings.Encoding = Encoding.UTF8;
+
+                        using (XmlWriter writer = XmlWriter.Create(_testResultsPath, settings))
+                        {
+                            this.SaveTestResults(writer);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                        {
+                            File.Move(backupFile, _testResultsPath);
+                        }
+
+                        MessageBox.Show(ex.ToString(), AppErrorTitle,
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void OnBrowseForSvgSuitePath(object sender, RoutedEventArgs e)
@@ -220,6 +319,19 @@ namespace WpfW3cSvgTestSuite
             {
                 txtSvgSuitePath.Text = dlg.SelectedPath;
             }   
+        }
+
+        private void OnShowSvgTestResults(object sender, RoutedEventArgs e)
+        {
+            // Instantiate the dialog box
+            var dlg = new SvgTestResultsWindow
+            {
+                Owner = this,
+                Results = _testResults
+            };
+
+            // Open the dialog box modally 
+            dlg.ShowDialog();
         }
 
         private void OnSvgSuitePathTextChanged(object sender, TextChangedEventArgs e)
@@ -260,10 +372,10 @@ namespace WpfW3cSvgTestSuite
             if (!isEnabled)
             {
                 stateComboBox.SelectedIndex = -1;
-                testComment.Text            = String.Empty;
+                testComment.Text            = string.Empty;
 
-                testFilePath.Text           = String.Empty;
-                testDescrition.Text         = String.Empty;
+                testFilePath.Text           = string.Empty;
+                testDescrition.Text         = string.Empty;
 
                 if (_svgPage != null)
                 {
@@ -293,7 +405,7 @@ namespace WpfW3cSvgTestSuite
 
         private void OnApplyTestState(TreeViewItem treeItem)
         {   
-            TestInfo testInfo = treeItem.Tag as TestInfo;
+            SvgTestInfo testInfo = treeItem.Tag as SvgTestInfo;
             if (testInfo == null)
             {
                 return;
@@ -310,7 +422,7 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            testInfo.State   = (TestState)selIndex;
+            testInfo.State   = (SvgTestState)selIndex;
             testInfo.Comment = testComment.Text;
 
             Ellipse bullet = header.Bullet as Ellipse;
@@ -331,6 +443,8 @@ namespace WpfW3cSvgTestSuite
 
         private void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
         {
+            _currentDrawing = null;
+
             TreeViewItem selItem = treeView.SelectedItem as TreeViewItem;
             if (selItem == null || selItem.Tag == null)
             {
@@ -338,7 +452,7 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            TestInfo testItem = selItem.Tag as TestInfo;
+            SvgTestInfo testItem = selItem.Tag as SvgTestInfo;
             if (testItem == null)
             {
                 EnableTestPanel(false);
@@ -371,7 +485,7 @@ namespace WpfW3cSvgTestSuite
             {
                 if (_svgPage != null)
                 {
-                    _svgPage.LoadDocument(svgFilePath);
+                    _svgPage.LoadDocument(svgFilePath, testItem, null);
                 }
             }
             catch (Exception ex)
@@ -379,7 +493,7 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 this.Cursor = Cursors.Arrow;
 
-                MessageBox.Show(ex.ToString(), "Svg Test Suite - Error",
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return;
@@ -387,9 +501,15 @@ namespace WpfW3cSvgTestSuite
 
             try
             {
+                DrawingGroup drawing = _fileReader.Read(svgFilePath, _directoryInfo);
+                if (drawing == null)
+                {
+                    return;
+                }
+
                 if (_drawingPage != null)
                 {
-                    _drawingPage.LoadDocument(svgFilePath, pngFilePath);
+                    _drawingPage.LoadDocument(pngFilePath, testItem, drawing);
                 }
 
                 if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
@@ -399,11 +519,35 @@ namespace WpfW3cSvgTestSuite
 
                     if (File.Exists(xamlFilePath))
                     {
-                        _xamlPage.LoadDocument(xamlFilePath);
+                        _xamlPage.LoadDocument(xamlFilePath, testItem, null);
 
                         // Delete the file after loading it...
                         File.Delete(xamlFilePath);
                     }
+                }
+
+                if (frameAbout != null)
+                {
+                    if (frameAbout.CanGoBack)
+                    {
+                        frameAbout.GoBack();
+                        var entry = frameAbout.RemoveBackEntry();
+                        while (entry != null)
+                        {
+                            entry = frameAbout.RemoveBackEntry();
+                        }
+                    }
+                    frameAbout.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+                }
+
+                if (_aboutPage != null)
+                {
+                    _aboutPage.LoadDocument(svgFilePath, testItem, null);
+                }
+
+                if (_browserPage != null)
+                {
+                    _browserPage.LoadDocument(svgFilePath, testItem, drawing);
                 }
 
                 testFilePath.Text = svgFilePath;
@@ -416,19 +560,39 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 testApply.IsEnabled   = false;
                 EnableTestPanel(true);
+
+                _currentDrawing = drawing;
             }
             catch (Exception ex)
             {
+                _currentDrawing = null;
+
                 //EnableTestPanel(false);
                 _isTreeChangedPending = false;
 
-                MessageBox.Show(ex.ToString(), "Svg Test Suite - Error",
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 this.Cursor = Cursors.Arrow;
             }  
+        }
+
+        private void OnFrameAboutNavigated(object sender, NavigationEventArgs e)
+        {
+            if (frameAbout.CanGoBack || frameAbout.CanGoForward)
+            {
+                frameAbout.NavigationUIVisibility = NavigationUIVisibility.Automatic;
+            } 
+            else
+            {
+                frameAbout.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+            }
+        }
+
+        private void OnFrameAboutNavigating(object sender, NavigatingCancelEventArgs e)
+        {
         }
 
         private void OnTreeViewItemUnselected(object sender, RoutedEventArgs e)
@@ -444,7 +608,7 @@ namespace WpfW3cSvgTestSuite
 
                 if (treeItem != null && treeItem.Tag != null)
                 {
-                    TestInfo testInfo = treeItem.Tag as TestInfo;
+                    SvgTestInfo testInfo = treeItem.Tag as SvgTestInfo;
                     if (testInfo != null)
                     {
                         MessageBoxResult boxResult = MessageBox.Show(
@@ -568,7 +732,7 @@ namespace WpfW3cSvgTestSuite
             e.Handled = true;
 
             ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
-            rowExpander.Width = new GridLength(280, GridUnitType.Pixel);
+            rowExpander.Width = new GridLength(LeftPane, GridUnitType.Pixel);
         }
 
         private void OnLeftSplitterMove(object sender, MouseEventArgs e)
@@ -617,7 +781,7 @@ namespace WpfW3cSvgTestSuite
             }                            
 
             RowDefinition rowExpander = bottomGrid.RowDefinitions[2];
-            rowExpander.Height = new GridLength(200, GridUnitType.Pixel);
+            rowExpander.Height = new GridLength(LeftBottomPane, GridUnitType.Pixel);
         }
 
         private void OnBottomSplitterMove(object sender, MouseEventArgs e)
@@ -642,12 +806,6 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            //string indexFilePath = IoPath.Combine(suitePath, "index.html");
-            //if (!File.Exists(indexFilePath))
-            //{
-            //    return;
-            //}
-
             string svgPath = IoPath.Combine(suitePath, "svg");
             if (!Directory.Exists(svgPath))
             {
@@ -666,27 +824,96 @@ namespace WpfW3cSvgTestSuite
             _suitePath        = suitePath;
             _isSuiteAvailable = true;
 
-            string fileName = IoPath.GetFullPath(SvgTestSuite);
-            if (!string.IsNullOrEmpty(fileName) && File.Exists(fileName))
+            _testResults = new List<SvgTestResult>();
+
+            _testResultsPath = IoPath.GetFullPath(SvgTestResults);
+            if (!string.IsNullOrEmpty(_testResultsPath) && File.Exists(_testResultsPath))
+            {
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreWhitespace = false;
+                settings.IgnoreComments = true;
+                settings.IgnoreProcessingInstructions = true;
+
+                using (XmlReader reader = XmlReader.Create(_testResultsPath, settings))
+                {
+                    LoadTestResults(reader);
+                }
+            }
+
+            string fullFilePath = IoPath.GetFullPath(SvgTestSuite);
+            if (!string.IsNullOrEmpty(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreWhitespace = false;
                 settings.IgnoreComments   = true;
                 settings.IgnoreProcessingInstructions = true;
 
-                using (XmlReader reader = XmlReader.Create(fileName, settings))
+                using (XmlReader reader = XmlReader.Create(fullFilePath, settings))
                 {
                     LoadTreeView(reader);
                 }
 
                 leftExpander.IsExpanded = true;
 
-                _testFileName = fileName;
+                _testFilePath = fullFilePath;
+
+                btnSvgTestResults.IsEnabled = true;
             }   
+        }
+
+        private void LoadTestResults(XmlReader reader)
+        {
+            if (_testResults == null || _testResults.Count != 0)
+            {
+                _testResults = new List<SvgTestResult>();
+            }
+
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Element &&
+                    string.Equals(reader.Name, "result", StringComparison.OrdinalIgnoreCase))
+                {
+                    SvgTestResult testResult = new SvgTestResult(reader);
+                    if (testResult.IsValid)
+                    {
+                        _testResults.Add(testResult);
+                    }
+                }
+            }
+        }
+
+        private void SaveTestResults(XmlWriter writer)
+        {
+            if (writer == null)
+            {
+                return;
+            }
+
+            if (_testResults == null || _testResults.Count == 0)
+            {
+                return;
+            }
+
+            writer.WriteStartDocument();
+            writer.WriteStartElement("results");
+
+            for (int i = 0; i < _testResults.Count; i++)
+            {
+                SvgTestResult testResult = _testResults[i];
+                if (testResult != null && testResult.IsValid)
+                {
+                    testResult.WriteXml(writer);
+                }
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
         }
 
         private void LoadTreeView(XmlReader reader)
         {
+            SvgTestResult testResult = new SvgTestResult();
+
             treeView.BeginInit();
             treeView.Items.Clear();
 
@@ -699,6 +926,8 @@ namespace WpfW3cSvgTestSuite
                     string category = reader.GetAttribute("label");
                     if (!string.IsNullOrEmpty(category))
                     {
+                        SvgTestCategory testCategory = new SvgTestCategory(category);
+
                         TextBlock headerText = new TextBlock();
                         headerText.Text   = category;
                         headerText.Margin = new Thickness(3, 0, 0, 0);
@@ -706,7 +935,7 @@ namespace WpfW3cSvgTestSuite
                         BulletDecorator decorator = new BulletDecorator();
                         if (_folderClose != null)
                         {
-                            Image image = new Image();
+                            Image image  = new Image();
                             image.Source = _folderClose;
 
                             decorator.Bullet = image;
@@ -733,7 +962,109 @@ namespace WpfW3cSvgTestSuite
 
                         treeView.Items.Add(categoryItem);
 
-                        LoadTreeViewCategory(reader, categoryItem);
+                        LoadTreeViewCategory(reader, categoryItem, testCategory);
+
+                        if (testCategory.IsValid)
+                        {
+                            testResult.Categories.Add(testCategory);
+                        }
+                    }
+                }
+            }
+
+            if (_testResults == null)
+            {
+                _testResults = new List<SvgTestResult>();
+            }
+
+            bool saveResults = false;
+            if (testResult.IsValid)
+            {
+                if (_testResults.Count == 0)
+                {
+                    _testResults.Add(testResult);
+
+                    saveResults = true;
+                }
+                else
+                {
+                    int foundAt = -1;
+                    for (int i = 0; i < _testResults.Count; i++)
+                    {
+                        SvgTestResult nextResult = _testResults[i];
+                        if (nextResult != null && nextResult.IsValid)
+                        {
+                            if (string.Equals(nextResult.Version, testResult.Version))
+                            {
+                                foundAt = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (foundAt >= 0)
+                    {
+                        SvgTestResult nextResult = _testResults[foundAt];
+
+                        if (!SvgTestResult.AreEqual(nextResult, testResult))
+                        {
+                            _testResults[foundAt] = testResult;
+                            saveResults = true;
+                        }
+                    }
+                    else
+                    {
+                        _testResults.Add(testResult);
+
+                        saveResults = true;
+                    }
+                }
+            }
+            if (saveResults)
+            {
+                if (!string.IsNullOrWhiteSpace(_testResultsPath))
+                {
+                    string backupFile = null;
+                    if (File.Exists(_testResultsPath))
+                    {
+                        backupFile = IoPath.ChangeExtension(_testResultsPath, ".bak");
+                        try
+                        {
+                            if (File.Exists(backupFile))
+                            {
+                                File.Delete(backupFile);
+                            }
+                            File.Move(_testResultsPath, backupFile);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), AppErrorTitle,
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
+
+                    try
+                    {
+                        XmlWriterSettings settings = new XmlWriterSettings();
+                        settings.Indent = true;
+                        settings.IndentChars = "    ";
+                        settings.Encoding = Encoding.UTF8;
+
+                        using (XmlWriter writer = XmlWriter.Create(_testResultsPath, settings))
+                        {
+                            this.SaveTestResults(writer);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                        {
+                            File.Move(backupFile, _testResultsPath);
+                        }
+
+                        MessageBox.Show(ex.ToString(), AppErrorTitle,
+                            MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
@@ -741,8 +1072,10 @@ namespace WpfW3cSvgTestSuite
             treeView.EndInit();
         }
 
-        private void LoadTreeViewCategory(XmlReader reader, TreeViewItem categoryItem)
+        private void LoadTreeViewCategory(XmlReader reader, TreeViewItem categoryItem, SvgTestCategory testCategory)
         {
+            int total = 0, unknowns = 0, failures = 0, successes = 0, partials = 0;
+
             int itemCount = 0;
 
             while (reader.Read())
@@ -751,11 +1084,11 @@ namespace WpfW3cSvgTestSuite
                 {
                     if (string.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
                     {
-                        TestInfo testInfo = new TestInfo(reader);
+                        SvgTestInfo testInfo = new SvgTestInfo(reader);
                         if (!testInfo.IsEmpty)
                         {
                             TextBlock headerText = new TextBlock();
-                            headerText.Text   = String.Format("({0:D3}) - {1}", itemCount, testInfo.Title);
+                            headerText.Text   = string.Format("({0:D3}) - {1}", itemCount, testInfo.Title);
                             headerText.Margin = new Thickness(3, 0, 0, 0);
 
                             Ellipse bullet         = new Ellipse();
@@ -780,6 +1113,25 @@ namespace WpfW3cSvgTestSuite
                             categoryItem.Items.Add(treeItem);
 
                             itemCount++;
+
+                            total++;
+                            SvgTestState testState = testInfo.State;
+
+                            switch (testState)
+                            {
+                                case SvgTestState.Unknown:
+                                    unknowns++;
+                                    break;
+                                case SvgTestState.Failure:
+                                    failures++;
+                                    break;
+                                case SvgTestState.Success:
+                                    successes++;
+                                    break;
+                                case SvgTestState.Partial:
+                                    partials++;
+                                    break;
+                            }
                         }
                     }
                 }
@@ -791,6 +1143,8 @@ namespace WpfW3cSvgTestSuite
                     }
                 }
             }
+
+            testCategory.SetValues(total, unknowns, failures, successes, partials);
         }
 
         private void SaveTreeView(XmlWriter writer)
@@ -805,6 +1159,8 @@ namespace WpfW3cSvgTestSuite
             {
                 return;
             }
+
+            SvgTestResult testResult = new SvgTestResult();
 
             writer.WriteStartDocument();
             writer.WriteStartElement("tests");
@@ -824,258 +1180,109 @@ namespace WpfW3cSvgTestSuite
                     {
                         continue;
                     }
-                    writer.WriteStartElement("category");
 
-                    writer.WriteAttributeString("label", headerText.Text);
+                    SvgTestCategory testCategory = new SvgTestCategory(headerText.Text);
 
-                    ItemCollection treeItems = categoryItem.Items;
-                    for (int j = 0; j < treeItems.Count; j++)
+                    this.SaveTreeViewCategory(writer, categoryItem, testCategory);
+
+                    if (testCategory.IsValid)
                     {
-                        TreeViewItem treeItem = treeItems[j] as TreeViewItem;
-                        if (treeItem != null)
-                        {
-                            TestInfo testInfo = treeItem.Tag as TestInfo;
-                            if (testInfo != null)
-                            {
-                                testInfo.WriteXml(writer);
-                            }
-                        }
+                        testResult.Categories.Add(testCategory);
                     }
-
-                    writer.WriteEndElement();
                 }
             }
 
             writer.WriteEndElement();
             writer.WriteEndDocument();
+
+            if (_testResults == null)
+            {
+                _testResults = new List<SvgTestResult>();
+            }
+
+            if (testResult.IsValid)
+            {
+                if (_testResults.Count == 0)
+                {
+                    _testResults.Add(testResult);
+                }
+            }
+            else
+            {
+                int foundAt = -1;
+                for (int i = 0; i < _testResults.Count; i++)
+                {
+                    SvgTestResult nextResult = _testResults[i];
+                    if (nextResult != null && nextResult.IsValid)
+                    {
+                        if (string.Equals(nextResult.Version, testResult.Version))
+                        {
+                            foundAt = i;
+                            break;
+                        }
+                    }
+                }
+
+                if (foundAt >= 0)
+                {
+                    SvgTestResult nextResult = _testResults[foundAt];
+
+                    if (!SvgTestResult.AreEqual(nextResult, testResult))
+                    {
+                        _testResults[foundAt] = testResult;
+                    }
+                }
+                else
+                {
+                    _testResults.Add(testResult);
+                }
+            }
         }
 
-        #endregion
-
-        #region TestInfo Class
-
-        private enum TestState
+        private void SaveTreeViewCategory(XmlWriter writer, TreeViewItem categoryItem, SvgTestCategory testCategory)
         {
-            Unknown = 0,
-            Failure = 1,
-            Success = 2,
-            Partial = 3
-        }
+            int total = 0, unknowns = 0, failures = 0, successes = 0, partials = 0;
 
-        [Serializable]
-        private sealed class TestInfo : IXmlSerializable
-        {
-            #region Private Fields
+            writer.WriteStartElement("category");
 
-            private string _fileName;
-            private string _title;
-            private string _comment;
-            private string _description;
-            private TestState _state;
+            writer.WriteAttributeString("label", testCategory.Label);
 
-            #endregion
-
-            #region Constructors and Destructor
-
-            public TestInfo()
+            ItemCollection treeItems = categoryItem.Items;
+            for (int j = 0; j < treeItems.Count; j++)
             {
-                _title       = String.Empty;
-                _fileName    = String.Empty;
-                _description = String.Empty;
-                _comment     = String.Empty;
-                _state       = TestState.Unknown;
-            }
-
-            public TestInfo(XmlReader reader)
-                : this()
-            {
-                this.ReadXml(reader);
-            }
-
-            public TestInfo(string fileName, string title, string state, 
-                string comment, string description)
-                : this()
-            {
-                this.Initialize(fileName, title, state, comment, description);
-            }
-
-            #endregion
-
-            #region Public Fields
-
-            public bool IsEmpty
-            {
-                get
+                TreeViewItem treeItem = treeItems[j] as TreeViewItem;
+                if (treeItem != null)
                 {
-                    return (string.IsNullOrEmpty(_fileName));
-                }
-            }
-
-            public TestState State
-            {
-                get { return _state; }
-                set { _state = value; }
-            }
-
-            public Brush StateBrush
-            {
-                get
-                {
-                    switch (_state)
+                    SvgTestInfo testInfo = treeItem.Tag as SvgTestInfo;
+                    if (testInfo != null)
                     {
-                        case TestState.Unknown:
-                            return Brushes.LightGray;
-                        case TestState.Failure:
-                            return Brushes.Red;
-                        case TestState.Success:
-                            return Brushes.Green;
-                        case TestState.Partial:
-                            return Brushes.Yellow;
-                    }
+                        testInfo.WriteXml(writer);
 
-                    return Brushes.LightGray;
-                }
-            }
+                        total++;
+                        SvgTestState testState = testInfo.State;
 
-            public string Comment
-            {
-                get { return _comment; }
-                set { _comment = value; }
-            }
-
-            public string FileName
-            {
-                get { return _fileName; }
-                set { _fileName = value; }
-            }
-
-            public string Title
-            {
-                get { return _title; }
-                set 
-                {
-                    if (value == null)
-                    {
-                        value = String.Empty;
-                    }
-                    _title = value; 
-                }
-            }
-
-            public string Description
-            {
-                get 
-                { 
-                    return _description; 
-                }
-                set 
-                {
-                    if (value == null)
-                    {
-                        value = String.Empty;
-                    }
-                    _description = value; 
-                }
-            }
-
-            #endregion
-
-            #region IXmlSerializable Members
-
-            public System.Xml.Schema.XmlSchema GetSchema()
-            {
-                return null;
-            }
-
-            public void ReadXml(XmlReader reader)
-            {
-                if (reader == null || reader.NodeType != XmlNodeType.Element)
-                {
-                    return;
-                }
-                if (!string.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
-                {
-                    return;
-                }
-
-                // <test source="*.svg" title="" state="partial" comment="" description="" />
-                string source = reader.GetAttribute("source");
-                if (!string.IsNullOrEmpty(source))
-                {
-                    string title = reader.GetAttribute("title");
-                    if (string.IsNullOrEmpty(title))
-                    {
-                        title = source.Replace(".svg", String.Empty);
-                    }
-                    string state = reader.GetAttribute("state");
-                    string comment = reader.GetAttribute("comment");
-                    string description = reader.GetAttribute("description");
-
-                    this.Initialize(source, title, state, comment, description);
-                }
-            }
-
-            public void WriteXml(XmlWriter writer)
-            {
-                if (writer == null)
-                {
-                    return;
-                }
-
-                // <test source="*.svg" title="" state="partial" comment="" description="" />
-                writer.WriteStartElement("test");
-                writer.WriteAttributeString("source", _fileName);
-                writer.WriteAttributeString("title", _title);
-                writer.WriteAttributeString("state", _state.ToString().ToLowerInvariant());
-                writer.WriteAttributeString("comment", _comment);
-                writer.WriteAttributeString("description", _description);
-                writer.WriteEndElement();
-            }
-
-            #endregion
-
-            #region Private Methods
-
-            private void Initialize(string fileName, string title, string state, 
-                string comment, string description)
-            {
-                if (description == null)
-                {
-                    description = String.Empty;
-                }
-
-                _fileName = fileName;
-                _title = title;
-                _comment = comment;
-                _description = description.Trim();
-                if (!string.IsNullOrEmpty(_description))
-                {
-                    _description = _description.Replace("\n", " ");
-                    _description = _description.Replace("  ", String.Empty);
-                }
-
-                if (!string.IsNullOrEmpty(state))
-                {
-                    if (state.Equals("unknown", StringComparison.OrdinalIgnoreCase))
-                    {
-                        _state = TestState.Unknown;
-                    }
-                    else if (state.Equals("failure", StringComparison.OrdinalIgnoreCase))
-                    {
-                        _state = TestState.Failure;
-                    }
-                    else if (state.Equals("success", StringComparison.OrdinalIgnoreCase))
-                    {
-                        _state = TestState.Success;
-                    }
-                    else if (state.Equals("partial", StringComparison.OrdinalIgnoreCase))
-                    {
-                        _state = TestState.Partial;
+                        switch (testState)
+                        {
+                            case SvgTestState.Unknown:
+                                unknowns++;
+                                break;
+                            case SvgTestState.Failure:
+                                failures++;
+                                break;
+                            case SvgTestState.Success:
+                                successes++;
+                                break;
+                            case SvgTestState.Partial:
+                                partials++;
+                                break;
+                        }
                     }
                 }
             }
 
-            #endregion
+            writer.WriteEndElement();
+
+            testCategory.SetValues(total, unknowns, failures, successes, partials);
         }
 
         #endregion

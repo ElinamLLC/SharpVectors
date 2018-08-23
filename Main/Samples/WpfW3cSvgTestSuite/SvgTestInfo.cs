@@ -1,0 +1,223 @@
+﻿using System;
+using System.Xml;
+using System.Windows.Media;
+using System.Xml.Serialization;
+
+namespace WpfW3cSvgTestSuite
+{
+    [Serializable]
+    public sealed class SvgTestInfo : IXmlSerializable
+    {
+        #region Private Fields
+
+        private string _fileName;
+        private string _title;
+        private string _comment;
+        private string _description;
+        private SvgTestState _state;
+
+        #endregion
+
+        #region Constructors and Destructor
+
+        public SvgTestInfo()
+        {
+            _title       = string.Empty;
+            _fileName    = string.Empty;
+            _description = string.Empty;
+            _comment     = string.Empty;
+            _state       = SvgTestState.Unknown;
+        }
+
+        public SvgTestInfo(XmlReader reader)
+            : this()
+        {
+            this.ReadXml(reader);
+        }
+
+        public SvgTestInfo(string fileName, string title, string state, 
+            string comment, string description)
+            : this()
+        {
+            this.Initialize(fileName, title, state, comment, description);
+        }
+
+        #endregion
+
+        #region Public Fields
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return (string.IsNullOrEmpty(_fileName));
+            }
+        }
+
+        public SvgTestState State
+        {
+            get { return _state; }
+            set { _state = value; }
+        }
+
+        public Brush StateBrush
+        {
+            get
+            {
+                switch (_state)
+                {
+                    case SvgTestState.Unknown:
+                        return Brushes.LightGray;
+                    case SvgTestState.Failure:
+                        return Brushes.Red;
+                    case SvgTestState.Success:
+                        return Brushes.Green;
+                    case SvgTestState.Partial:
+                        return Brushes.Yellow;
+                }
+
+                return Brushes.LightGray;
+            }
+        }
+
+        public string Comment
+        {
+            get { return _comment; }
+            set { _comment = value; }
+        }
+
+        public string FileName
+        {
+            get { return _fileName; }
+            set { _fileName = value; }
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set 
+            {
+                if (value == null)
+                {
+                    value = string.Empty;
+                }
+                _title = value; 
+            }
+        }
+
+        public string Description
+        {
+            get 
+            { 
+                return _description; 
+            }
+            set 
+            {
+                if (value == null)
+                {
+                    value = string.Empty;
+                }
+                _description = value; 
+            }
+        }
+
+        #endregion
+
+        #region IXmlSerializable Members
+
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            if (reader == null || reader.NodeType != XmlNodeType.Element)
+            {
+                return;
+            }
+            if (!string.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            // <test source="*.svg" title="" state="partial" comment="" description="" />
+            string source = reader.GetAttribute("source");
+            if (!string.IsNullOrEmpty(source))
+            {
+                string title = reader.GetAttribute("title");
+                if (string.IsNullOrEmpty(title))
+                {
+                    title = source.Replace(".svg", string.Empty);
+                }
+                string state = reader.GetAttribute("state");
+                string comment = reader.GetAttribute("comment");
+                string description = reader.GetAttribute("description");
+
+                this.Initialize(source, title, state, comment, description);
+            }
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            if (writer == null)
+            {
+                return;
+            }
+
+            // <test source="*.svg" title="" state="partial" comment="" description="" />
+            writer.WriteStartElement("test");
+            writer.WriteAttributeString("source", _fileName);
+            writer.WriteAttributeString("title", _title);
+            writer.WriteAttributeString("state", _state.ToString().ToLowerInvariant());
+            writer.WriteAttributeString("comment", _comment);
+            writer.WriteAttributeString("description", _description);
+            writer.WriteEndElement();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void Initialize(string fileName, string title, string state, 
+            string comment, string description)
+        {
+            if (description == null)
+            {
+                description = String.Empty;
+            }
+
+            _fileName = fileName;
+            _title = title;
+            _comment = comment;
+            _description = description.Trim();
+            if (!string.IsNullOrEmpty(_description))
+            {
+                _description = _description.Replace("\n", " ");
+                _description = _description.Replace("  ", String.Empty);
+            }
+
+            if (!string.IsNullOrEmpty(state))
+            {
+                if (state.Equals("unknown", StringComparison.OrdinalIgnoreCase))
+                {
+                    _state = SvgTestState.Unknown;
+                }
+                else if (state.Equals("failure", StringComparison.OrdinalIgnoreCase))
+                {
+                    _state = SvgTestState.Failure;
+                }
+                else if (state.Equals("success", StringComparison.OrdinalIgnoreCase))
+                {
+                    _state = SvgTestState.Success;
+                }
+                else if (state.Equals("partial", StringComparison.OrdinalIgnoreCase))
+                {
+                    _state = SvgTestState.Partial;
+                }
+            }
+        }
+
+        #endregion
+    }
+}

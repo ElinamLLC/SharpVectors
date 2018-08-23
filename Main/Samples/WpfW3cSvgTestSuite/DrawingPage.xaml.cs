@@ -10,13 +10,8 @@ using IoPath = System.IO.Path;
 
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-//using System.Windows.Shapes;
 
 using SharpVectors.Net;
 using SharpVectors.Xml;
@@ -37,15 +32,21 @@ namespace WpfW3cSvgTestSuite
     /// <summary>
     /// Interaction logic for DrawingPage.xaml
     /// </summary>
-    public partial class DrawingPage : Page
+    public partial class DrawingPage : Page, ITestPage
     {
         #region Private Fields
 
-        private string _drawingDir;
-        private DirectoryInfo _directoryInfo;
+        private const int ImageWidth  = 480;
+        private const int ImageHeight = 360;
 
-        private FileSvgReader _fileReader;
-        private WpfDrawingSettings _wpfSettings;
+        private int _viewBoxWidth;
+        private int _viewBoxHeight;
+
+        //private string _drawingDir;
+        //private DirectoryInfo _directoryInfo;
+
+        //private FileSvgReader _fileReader;
+        //private WpfDrawingSettings _wpfSettings;
 
         #endregion
 
@@ -55,48 +56,66 @@ namespace WpfW3cSvgTestSuite
         {
             InitializeComponent();
 
-            _wpfSettings         = new WpfDrawingSettings();
+            _viewBoxWidth        = 0;
+            _viewBoxHeight       = 0;
+            //_wpfSettings         = new WpfDrawingSettings();
 
-            _fileReader          = new FileSvgReader(_wpfSettings);
-            _fileReader.SaveXaml = false;
-            _fileReader.SaveZaml = false;
+            //_fileReader          = new FileSvgReader(_wpfSettings);
+            //_fileReader.SaveXaml = false;
+            //_fileReader.SaveZaml = false;
 
-            this.Loaded += new RoutedEventHandler(OnPageLoaded);
-        }
-
-        #endregion      
-
-        #region Public Properties
-
-        public string XamlDrawingDir
-        {
-            get 
-            { 
-                return _drawingDir; 
-            }
-            set 
-            { 
-                _drawingDir = value; 
-
-                if (!string.IsNullOrEmpty(_drawingDir))
-                {
-                    _directoryInfo = new DirectoryInfo(_drawingDir);
-
-                    if (_fileReader != null)
-                    {
-                        _fileReader.SaveXaml = Directory.Exists(_drawingDir);
-                    }
-                }
-            }
+            this.Loaded      += OnPageLoaded;
+            this.SizeChanged += OnPageSizeChanged;
         }
 
         #endregion
 
+        //#region Public Properties
+
+        //public string XamlDrawingDir
+        //{
+        //    get 
+        //    { 
+        //        return _drawingDir; 
+        //    }
+        //    set 
+        //    { 
+        //        _drawingDir = value; 
+
+        //        if (!string.IsNullOrEmpty(_drawingDir))
+        //        {
+        //            _directoryInfo = new DirectoryInfo(_drawingDir);
+
+        //            if (_fileReader != null)
+        //            {
+        //                _fileReader.SaveXaml = Directory.Exists(_drawingDir);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //#endregion
+
         #region Public Methods
 
-        public void LoadDocument(string svgFilePath, string pngFilePath)
+        public bool LoadDocument(string pngFilePath, SvgTestInfo testInfo, object extraInfo)
         {
             this.UnloadDocument();
+
+            if (extraInfo == null)
+            {
+                return false;
+            }
+            //string pngFilePath = extraInfo.ToString();
+            if (string.IsNullOrWhiteSpace(pngFilePath))
+            {
+                return false;
+            }
+            DrawingGroup drawing = extraInfo as DrawingGroup;
+            if (drawing == null)
+            {
+                return false;
+            }
 
             BitmapImage bitmap = null;
             try
@@ -111,7 +130,9 @@ namespace WpfW3cSvgTestSuite
 
             try
             {
-                DrawingGroup drawing = _fileReader.Read(svgFilePath, _directoryInfo);
+                //DrawingGroup drawing = _fileReader.Read(svgFilePath, _directoryInfo);
+
+                Rect drawingBounds = drawing.Bounds;
 
                 //if (bitmap != null)
                 //{
@@ -119,19 +140,32 @@ namespace WpfW3cSvgTestSuite
                 //        new Rect(0, 0, bitmap.Width, bitmap.Height));
                 //}
 
-                //svgDrawing.Source = new DrawingImage(drawing);
+                if (_viewBoxWidth == 0 || _viewBoxHeight == 0)
+                {
+                    _viewBoxWidth  = (int)svgDrawing.ActualHeight;
+                    _viewBoxHeight = (int)svgDrawing.ActualHeight;
+                }
 
-                svgDrawing.UnloadDiagrams();
+                svgDrawing.Width = double.NaN;
+                svgDrawing.Height = double.NaN;
+                svgDrawing.RenderSize = new Size(_viewBoxWidth, _viewBoxHeight);
 
-                svgDrawing.RenderDiagrams(drawing);
+                svgDrawing.Source = new DrawingImage(drawing);
 
-                if (bitmap != null)
+//                svgDrawing.UnloadDiagrams();
+//                viewBox.Width = double.NaN;
+//                viewBox.Height = double.NaN;
+//                viewBox.RenderSize = new Size(_viewBoxWidth, _viewBoxHeight);
+
+//                svgDrawing.RenderDiagrams(drawing);
+
+                if (bitmap != null && ((int)drawingBounds.Width < ImageWidth || (int)drawingBounds.Height < ImageHeight))
                 {
                     //SvgDrawingCanvas drawCanvas = svgDrawing.DrawingCanvas;
-                    viewBox.Width = bitmap.Width;
-                    viewBox.Height = bitmap.Height;
-                    //svgDrawing.Width = bitmap.Width;
-                    //svgDrawing.Height = bitmap.Height;
+//                    viewBox.Width  = bitmap.Width;
+//                    viewBox.Height = bitmap.Height;
+                    svgDrawing.Width = bitmap.Width;
+                    svgDrawing.Height = bitmap.Height;
 
                     //SvgZoomableCanvas zoomableCanvas = svgDrawing.ZoomableCanvas;
                     ////zoomableCanvas.Width = bitmap.Width;
@@ -142,19 +176,21 @@ namespace WpfW3cSvgTestSuite
             }
             catch
             {
-                //svgDrawing.Source = null;
-                svgDrawing.UnloadDiagrams();
+                svgDrawing.Source = null;
+//                svgDrawing.UnloadDiagrams();
 
                 throw;
             }
+
+            return true;
         }
 
         public void UnloadDocument()
         {
             if (svgDrawing != null)
             {
-                //svgDrawing.Source = null;
-                svgDrawing.UnloadDiagrams();
+                svgDrawing.Source = null;
+//                svgDrawing.UnloadDiagrams();
             }
             if (pngResult != null)
             {
@@ -178,7 +214,13 @@ namespace WpfW3cSvgTestSuite
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
             RowDefinition rowTab = rightGrid.RowDefinitions[2];
-            rowTab.Height = new GridLength(this.ActualHeight / 2, GridUnitType.Pixel);
+            rowTab.Height = new GridLength((this.ActualHeight - 8) / 2, GridUnitType.Pixel);
+        }
+
+        private void OnPageSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            RowDefinition rowTab = rightGrid.RowDefinitions[2];
+            rowTab.Height = new GridLength((this.ActualHeight - 8) / 2, GridUnitType.Pixel);
         }
 
         #endregion

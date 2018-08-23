@@ -1,0 +1,43 @@
+﻿<Page x:Class="WpfW3cSvgTestSuite.BrowserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+      xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
+      Title="BrowserPage">
+    <Grid Name="rightGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <!--<svg:SvgScrollViewer x:Name="svgDrawing" Grid.Row="0" AllowDrop="True"/>-->
+        <DockPanel LastChildFill="True" Grid.Row="0">
+            <TextBlock DockPanel.Dock="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Converted View</TextBlock>
+            <ScrollViewer>
+                <Canvas Background="White">
+                    <Viewbox Name="viewBox" StretchDirection="Both" Margin="6, 6, 6, 6">
+                        <svg:SvgDrawingCanvas x:Name="svgDrawing" HorizontalAlignment="Left"/>
+                    </Viewbox>
+                </Canvas>
+            </ScrollViewer>
+        </DockPanel>
+        <!--<ScrollViewer>                    
+            <Canvas Background="White">
+                <Image Name="svgDrawing"/>
+            </Canvas>
+        </ScrollViewer>-->
+        <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Center" BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
+        <DockPanel LastChildFill="True" Grid.Row="2">
+            <TextBlock DockPanel.Dock="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Expected View - Browser</TextBlock>
+            <WebBrowser Name="webBrowserBox"></WebBrowser>
+            <!--<ScrollViewer>
+                <Canvas Background="White">
+                    <Image Name="pngResult" Margin="6, 6, 6, 6"/>
+                </Canvas>
+            </ScrollViewer>-->
+        </DockPanel>
+    </Grid>
+</Page>

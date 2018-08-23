@@ -31,7 +31,7 @@ namespace WpfW3cSvgTestSuite
     /// <summary>
     /// Interaction logic for XamlPage.xaml
     /// </summary>
-    public partial class XamlPage : Page
+    public partial class XamlPage : Page, ITestPage
     {
         private string currentFileName;
 
@@ -64,22 +64,21 @@ namespace WpfW3cSvgTestSuite
             textEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(_searchHandler);
         }
 
-        public void LoadDocument(string documentFileName)
+        public bool LoadDocument(string documentFilePath, SvgTestInfo testInfo, object extraInfo = null)
         {
-            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
-            {
-                return;
-            }
-
             this.UnloadDocument();
 
-            string fileExt = Path.GetExtension(documentFileName);
+            if (textEditor == null || string.IsNullOrEmpty(documentFilePath))
+            {
+                return false;
+            }
+
+            string fileExt = Path.GetExtension(documentFilePath);
             if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
             {
-                using (FileStream fileStream = File.OpenRead(documentFileName))
+                using (FileStream fileStream = File.OpenRead(documentFilePath))
                 {
-                    using (GZipStream zipStream =
-                        new GZipStream(fileStream, CompressionMode.Decompress))
+                    using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
                     {
                         // Text Editor does not work with this stream, so we read the data to memory stream...
                         MemoryStream memoryStream = new MemoryStream();
@@ -114,7 +113,7 @@ namespace WpfW3cSvgTestSuite
             }
             else
             {
-                textEditor.Load(documentFileName);
+                textEditor.Load(documentFilePath);
             }
 
             if (_foldingManager == null || _foldingStrategy == null)
@@ -124,13 +123,15 @@ namespace WpfW3cSvgTestSuite
             }
 
             _foldingStrategy.UpdateFoldings(_foldingManager, textEditor.Document);
+
+            return true;
         }
 
         public void UnloadDocument()
         {
             if (textEditor != null)
             {
-                textEditor.Document.Text = String.Empty;
+                textEditor.Document.Text = string.Empty;
             }
         }
 
@@ -190,45 +191,6 @@ namespace WpfW3cSvgTestSuite
 
         private void OnHighlightingSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (textEditor.SyntaxHighlighting == null)
-            //{
-            //    _foldingStrategy = null;
-            //}
-            //else
-            //{
-            //    switch (textEditor.SyntaxHighlighting.Name)
-            //    {
-            //        case "XML":
-            //            _foldingStrategy = new XmlFoldingStrategy();
-            //            textEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
-            //            break;
-            //        case "C#":
-            //        case "C++":
-            //        case "PHP":
-            //        case "Java":
-            //            textEditor.TextArea.IndentationStrategy = new CSharpIndentationStrategy(textEditor.Options);
-            //            _foldingStrategy = new BraceFoldingStrategy();
-            //            break;
-            //        default:
-            //            textEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
-            //            _foldingStrategy = null;
-            //            break;
-            //    }
-            //}
-            //if (_foldingStrategy != null)
-            //{
-            //    if (_foldingManager == null)
-            //        _foldingManager = FoldingManager.Install(textEditor.TextArea);
-            //    _foldingStrategy.UpdateFoldings(_foldingManager, textEditor.Document);
-            //}
-            //else
-            //{
-            //    if (_foldingManager != null)
-            //    {
-            //        FoldingManager.Uninstall(_foldingManager);
-            //        _foldingManager = null;
-            //    }
-            //}
         }
     }
 }

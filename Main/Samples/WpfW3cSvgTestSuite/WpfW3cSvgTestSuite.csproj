@@ -25,7 +25,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -66,6 +67,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -103,6 +105,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrowserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DrawingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,16 +131,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SvgTestResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XamlPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BrowserPage.xaml.cs">
+      <DependentUpon>BrowserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlConverter\HtmlCssParser.cs" />
+    <Compile Include="HtmlConverter\HtmlFromXamlConverter.cs" />
+    <Compile Include="HtmlConverter\HtmlLexicalAnalyzer.cs" />
+    <Compile Include="HtmlConverter\HtmlParser.cs" />
+    <Compile Include="HtmlConverter\HtmlSchema.cs" />
+    <Compile Include="HtmlConverter\HtmlTokenType.cs" />
+    <Compile Include="HtmlConverter\HtmlToXamlConverter.cs" />
+    <Compile Include="ITestPage.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -140,6 +168,7 @@
     <Compile Include="DrawingPage.xaml.cs">
       <DependentUpon>DrawingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -156,6 +185,14 @@
     <Compile Include="SvgPage.xaml.cs">
       <DependentUpon>SvgPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SvgTestCase.cs" />
+    <Compile Include="SvgTestCategory.cs" />
+    <Compile Include="SvgTestInfo.cs" />
+    <Compile Include="SvgTestResult.cs" />
+    <Compile Include="SvgTestResultsWindow.xaml.cs">
+      <DependentUpon>SvgTestResultsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SvgTestState.cs" />
     <Compile Include="XamlPage.xaml.cs">
       <DependentUpon>XamlPage.xaml</DependentUpon>
     </Compile>
@@ -269,6 +306,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

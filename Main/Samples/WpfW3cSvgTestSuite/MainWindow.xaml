@@ -1,19 +1,24 @@
 ﻿<Window x:Class="WpfW3cSvgTestSuite.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
+    local:MainWindowSettings.Save="True"
     Title="W3C SVG 1.1 Full Test Suite" Height="589" Width="719">
     <DockPanel LastChildFill="True" Margin="3">
         <!-- Top directory source panel -->
-        <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Margin="0, 3, 0, 3">
+        <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
             <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
                 <TextBlock Name="lblSvgSuitePath" FontWeight="Bold" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3">W3C Svg Suite Path:</TextBlock>
-                <Button Name="btnSvgSuitePath" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="3" Content="Browse..." Click="OnBrowseForSvgSuitePath"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Button Name="btnSvgSuitePath" HorizontalAlignment="Right" Margin="3" Content="Browse..." Click="OnBrowseForSvgSuitePath"/>
+                    <Button Name="btnSvgTestResults" HorizontalAlignment="Right" Margin="3" Content="Test Results" Click="OnShowSvgTestResults" IsEnabled="False"/>
+                </StackPanel>
                 <TextBox Name="txtSvgSuitePath" HorizontalAlignment="Stretch" Margin="3" TextChanged="OnSvgSuitePathTextChanged" />
             </DockPanel>            
         </Border>
         
         <!-- Bottom status panel -->
-        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8" DockPanel.Dock="Bottom" Margin="0, 3, 0, 3">
+        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" DockPanel.Dock="Bottom" Margin="0, 3, 0, 3" Visibility="Collapsed">
             <StackPanel Orientation="Vertical">   
                 <DockPanel Margin="3" LastChildFill="True">                    
                     <TextBlock Name="testDescritionLabel" DockPanel.Dock="Left" Text="Test Description: " FontSize="12" FontWeight="Bold" TextAlignment="Left" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
@@ -27,7 +32,7 @@
         </Border>
         
         <!-- The main content panel -->
-        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8">
+        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
             <Grid Name="mainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="24"/>
@@ -43,7 +48,7 @@
                         </TextBlock>
                     </Expander.Header>
                     <!-- The Left Pane contents -->
-                    <Border BorderBrush="Gray" Margin="3" Padding="0" BorderThickness="1">
+                    <Border BorderBrush="Gray" Margin="6" Padding="0" BorderThickness="1">
                         <DockPanel>                        
                             <Grid Name="bottomGrid">
                                 <Grid.RowDefinitions>
@@ -51,8 +56,11 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto" MinHeight="24"/>
                                 </Grid.RowDefinitions>
-                                <TreeView Name="treeView" Grid.Row="0" HorizontalAlignment="Stretch" IsTextSearchEnabled="True" TreeViewItem.Collapsed="OnTreeViewItemCollapsed" TreeViewItem.Expanded="OnTreeViewItemExpanded" TreeViewItem.Selected="OnTreeViewItemSelected" TreeViewItem.Unselected="OnTreeViewItemUnselected" />
-                                <GridSplitter Name="bottomSplitter" Margin="0, 3, 0, 0" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Gray" Background="LightGray"/>
+                                <TreeView Name="treeView" Grid.Row="0" BorderThickness="0" HorizontalAlignment="Stretch" IsTextSearchEnabled="True" 
+                                          TreeViewItem.Collapsed="OnTreeViewItemCollapsed" TreeViewItem.Expanded="OnTreeViewItemExpanded" 
+                                          TreeViewItem.Selected="OnTreeViewItemSelected" TreeViewItem.Unselected="OnTreeViewItemUnselected" />
+                                <GridSplitter Name="bottomSplitter" Margin="0, 3, 0, 0" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" 
+                                              VerticalAlignment="Center" BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
                                 
                                 <!-- The Left-Bottom Expander/Contents -->
                                 <Expander Name="bottomExpander" Grid.Row="2" IsExpanded="True" ExpandDirection="Down">
@@ -96,17 +104,23 @@
                         </DockPanel>
                     </Border>
                 </Expander>
-                <GridSplitter Name="leftSplitter" Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="LightGray"
+                <GridSplitter Name="leftSplitter" Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="Gray"
                           HorizontalAlignment="Center" Width="6" VerticalAlignment="Stretch"/>
                 <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
                     <TabItem Name="tabDrawing" Header="Drawing">
                         <Frame Name="frameDrawing" Source="DrawingPage.xaml"/>
+                    </TabItem>
+                    <TabItem Name="tabBrowser" Header="Browser">
+                        <Frame Name="frameBrowser" Source="BrowserPage.xaml"/>
                     </TabItem>
                     <TabItem Name="tabXamlOutput" Header="Xaml Output">
                         <Frame Name="frameXamlOutput" Source="XamlPage.xaml"/>
                     </TabItem>
                     <TabItem Name="tabSvgInput" Header="Svg Input">  
                         <Frame Name="frameSvgInput" Source="SvgPage.xaml"/>
+                    </TabItem>
+                    <TabItem Name="tabAbout" Header="About Test">
+                        <Frame Name="frameAbout" Source="AboutPage.xaml"/>
                     </TabItem>
                 </TabControl>            
             </Grid>
