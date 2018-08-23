@@ -350,9 +350,9 @@ namespace SharpVectors.Converters
 
             if (isRoot)
             {
-                if (string.IsNullOrEmpty(prefix))
+                if (string.IsNullOrWhiteSpace(prefix))
                 {
-                    if (string.IsNullOrEmpty(ns))
+                    if (string.IsNullOrWhiteSpace(ns))
                     {
                         writer.WriteStartElement(markupObj.ObjectType.Name, NamespaceCache.DefaultNamespace);
                         writer.WriteAttributeString("xmlns",
@@ -373,7 +373,7 @@ namespace SharpVectors.Converters
 
                 foreach (NamespaceMap map in _dicNamespaceMap.Values)
                 {
-                    if (!string.IsNullOrEmpty(map.Prefix) && !string.Equals(map.Prefix, "x"))
+                    if (!string.IsNullOrWhiteSpace(map.Prefix) && !string.Equals(map.Prefix, "x"))
                         writer.WriteAttributeString("xmlns", map.Prefix, NamespaceCache.XmlnsNamespace, map.XmlNamespace);
                 }
             }
@@ -393,7 +393,7 @@ namespace SharpVectors.Converters
                     }
                     else
                     {
-                        if (string.IsNullOrEmpty(prefix))
+                        if (string.IsNullOrWhiteSpace(prefix))
                         {
                             writer.WriteStartElement("PathGeometry.Figures");
                         }
@@ -410,7 +410,7 @@ namespace SharpVectors.Converters
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(prefix))
+                    if (string.IsNullOrWhiteSpace(prefix))
                     {
                         writer.WriteStartElement(markupObj.ObjectType.Name);
                     }
@@ -426,7 +426,7 @@ namespace SharpVectors.Converters
             if (dep != null)
             {
                 string nameValue = dep.GetValue(FrameworkElement.NameProperty) as string;
-                if (!string.IsNullOrEmpty(nameValue) && !(dep is FrameworkElement))
+                if (!string.IsNullOrWhiteSpace(nameValue) && !(dep is FrameworkElement))
                 {
                     writer.WriteAttributeString("x", "Name", NamespaceCache.XamlNamespace, nameValue);
                 }
@@ -486,7 +486,7 @@ namespace SharpVectors.Converters
                             string ns1 = _namespaceCache.GetNamespaceUriFor(markupProperty.DependencyProperty.OwnerType);
                             string prefix1 = _namespaceCache.GetDefaultPrefixFor(ns1);
 
-                            if (string.IsNullOrEmpty(prefix1))
+                            if (string.IsNullOrWhiteSpace(prefix1))
                             {
                                 writer.WriteAttributeString(markupProperty.Name, temp);
                             }
@@ -543,13 +543,13 @@ namespace SharpVectors.Converters
                 {
                     string ns2 = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
                     string prefix2 = null;
-                    if (!string.IsNullOrEmpty(ns2))
+                    if (!string.IsNullOrWhiteSpace(ns2))
                     {
                         prefix2 = _namespaceCache.GetDefaultPrefixFor(ns2);
                     }
 
                     string propElementName = markupObj.ObjectType.Name + "." + markupProp.Name;
-                    if (string.IsNullOrEmpty(prefix2))
+                    if (string.IsNullOrWhiteSpace(prefix2))
                     {
                         writer.WriteStartElement(propElementName);
                     }
@@ -621,7 +621,7 @@ namespace SharpVectors.Converters
             Type objectType = markupObj.ObjectType;
 
             string ns = _namespaceCache.GetNamespaceUriFor(objectType);
-            if (!string.IsNullOrEmpty(ns))
+            if (!string.IsNullOrWhiteSpace(ns))
             {
                 string prefix = _namespaceCache.GetDefaultPrefixFor(ns);
                 _dicNamespaceMap[ns] = new NamespaceMap(prefix, ns);
@@ -668,7 +668,7 @@ namespace SharpVectors.Converters
                                 markupProperty.DependencyProperty.OwnerType);
                             string prefix1 = _namespaceCache.GetDefaultPrefixFor(ns1);
 
-                            if (!string.IsNullOrEmpty(prefix1))
+                            if (!string.IsNullOrWhiteSpace(prefix1))
                             {
                                 _dicNamespaceMap[ns1] = new NamespaceMap(prefix1, ns1);
                             }
@@ -693,7 +693,7 @@ namespace SharpVectors.Converters
                 foreach (MarkupProperty markupProp in propertyElements)
                 {
                     string ns2 = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
-                    if (!string.IsNullOrEmpty(ns2))
+                    if (!string.IsNullOrWhiteSpace(ns2))
                     {
                         string prefix2 = _namespaceCache.GetDefaultPrefixFor(ns2);
                         _dicNamespaceMap[ns2] = new NamespaceMap(prefix2, ns2);
@@ -795,7 +795,7 @@ namespace SharpVectors.Converters
                 }
                 string assNamespace = uri.Substring(ClrNamespace.Length, uri.IndexOf(";",
                     StringComparison.OrdinalIgnoreCase) - ClrNamespace.Length);
-                if (!string.IsNullOrEmpty(assNamespace))
+                if (!string.IsNullOrWhiteSpace(assNamespace))
                 {
                     StringBuilder builder = new StringBuilder();
                     for (int i = 0; i < assNamespace.Length; i++)

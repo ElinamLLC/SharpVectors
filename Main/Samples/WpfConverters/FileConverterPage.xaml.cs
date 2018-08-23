@@ -124,7 +124,7 @@ namespace SharpVectors.Converters
                     txtSourceFile.Focus();
 
                     string sourceFile = _commandLines.SourceFile;
-                    if (!string.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
+                    if (!string.IsNullOrWhiteSpace(sourceFile) && File.Exists(sourceFile))
                     {
                         txtSourceFile.Text = sourceFile;
                     }
@@ -196,7 +196,7 @@ namespace SharpVectors.Converters
             dlg.ShowNewFolderButton = true;
             dlg.Description         = "Select the output directory for the converted file.";
             string sourceFile       = txtSourceFile.Text.Trim();
-            if (!string.IsNullOrEmpty(sourceFile) &&
+            if (!string.IsNullOrWhiteSpace(sourceFile) &&
                 File.Exists(sourceFile))
             {
                 dlg.SelectedPath = Path.GetDirectoryName(sourceFile);
@@ -269,12 +269,12 @@ namespace SharpVectors.Converters
                 string sourceFile = txtSourceFile.Text.Trim();
                 string outputDir  = txtOutputDir.Text.Trim();
                 bool isReadOnlyOutputDir = false;
-                if (!string.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrWhiteSpace(outputDir))
                 {
                     try
                     {
                         string rootDir = Path.GetPathRoot(outputDir);
-                        if (!string.IsNullOrEmpty(rootDir))
+                        if (!string.IsNullOrWhiteSpace(rootDir))
                         {
                             DriveInfo drive = new DriveInfo(rootDir);
                             if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -288,7 +288,7 @@ namespace SharpVectors.Converters
                     {                        	
                     }
                 }
-                if (string.IsNullOrEmpty(sourceFile))
+                if (string.IsNullOrWhiteSpace(sourceFile))
                 {
                     this.UpdateStatus("Conversion: Not Ready",
                         "Select an input SVG file for conversion.", false);
@@ -296,7 +296,7 @@ namespace SharpVectors.Converters
                 else if (File.Exists(sourceFile))
                 {
                     string fileExt = Path.GetExtension(sourceFile);
-                    if (string.IsNullOrEmpty(fileExt) ||
+                    if (string.IsNullOrWhiteSpace(fileExt) ||
                         (!string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) &&
                         !string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase)))
                     {
@@ -315,7 +315,7 @@ namespace SharpVectors.Converters
                         try
                         {
                             string rootDir = Path.GetPathRoot(outputDir);
-                            if (!string.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrWhiteSpace(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -328,7 +328,7 @@ namespace SharpVectors.Converters
                         catch
                         {
                         }
-                        if (isReadOnlySource && string.IsNullOrEmpty(outputDir))
+                        if (isReadOnlySource && string.IsNullOrWhiteSpace(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the read-only source directory, an output directory is required and must be specified.", true);
@@ -350,7 +350,7 @@ namespace SharpVectors.Converters
                         && (string.Equals(webUri.Scheme, Uri.UriSchemeHttp, StringComparison.Ordinal)
                         || string.Equals(webUri.Scheme, Uri.UriSchemeHttps, StringComparison.Ordinal)))
                     {
-                        if (string.IsNullOrEmpty(outputDir))
+                        if (string.IsNullOrWhiteSpace(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the web source file, an output directory is required and must be specified.", true);
@@ -386,7 +386,7 @@ namespace SharpVectors.Converters
 
         private void UpdateStatus(string title, string text, bool isError)
         {
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(text))
             {
                 return;
             }

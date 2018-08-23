@@ -70,7 +70,7 @@ namespace WpfTestSvgSample
                     _xpsDocPackage = null;
                 }
 
-                if (!string.IsNullOrEmpty(_fileName))
+                if (!string.IsNullOrWhiteSpace(_fileName))
                 {
                     PackageStore.RemovePackage(new Uri(_fileName));
                 }
@@ -118,7 +118,7 @@ namespace WpfTestSvgSample
                     _xpsDocPackage = null;
                 }
 
-                if (!string.IsNullOrEmpty(_fileName))
+                if (!string.IsNullOrWhiteSpace(_fileName))
                 {
                     PackageStore.RemovePackage(new Uri(_fileName));
                 }
@@ -146,7 +146,7 @@ namespace WpfTestSvgSample
                     _xpsDocPackage = null;
                 }
 
-                if (!string.IsNullOrEmpty(_fileName))
+                if (!string.IsNullOrWhiteSpace(_fileName))
                 {
                     PackageStore.RemovePackage(new Uri(_fileName));
                 }

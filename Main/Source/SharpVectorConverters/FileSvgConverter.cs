@@ -254,7 +254,7 @@ namespace SharpVectors.Converters
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(xamlFileName))
+            if (!string.IsNullOrWhiteSpace(xamlFileName))
             {
                 string workingDir = Path.GetDirectoryName(xamlFileName);
                 if (!Directory.Exists(workingDir))
@@ -315,7 +315,7 @@ namespace SharpVectors.Converters
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(xamlFileName))
+            if (!string.IsNullOrWhiteSpace(xamlFileName))
             {
                 string workingDir = Path.GetDirectoryName(xamlFileName);
                 if (!Directory.Exists(workingDir))
@@ -376,7 +376,7 @@ namespace SharpVectors.Converters
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(xamlFileName))
+            if (!string.IsNullOrWhiteSpace(xamlFileName))
             {
                 string workingDir = Path.GetDirectoryName(xamlFileName);
                 if (!Directory.Exists(workingDir))
@@ -437,7 +437,7 @@ namespace SharpVectors.Converters
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(xamlFileName))
+            if (!string.IsNullOrWhiteSpace(xamlFileName))
             {
                 string workingDir = Path.GetDirectoryName(xamlFileName);
                 if (!Directory.Exists(workingDir))
@@ -555,7 +555,7 @@ namespace SharpVectors.Converters
         {
             _writerErrorOccurred = false;
 
-            if (string.IsNullOrEmpty(xamlFileName))
+            if (string.IsNullOrWhiteSpace(xamlFileName))
             {
                 string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
@@ -566,7 +566,7 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(xamlFileName);
-                if (string.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrWhiteSpace(fileExt))
                 {
                     xamlFileName += ".xaml";
                 }

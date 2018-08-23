@@ -68,7 +68,7 @@ namespace WpfW3cSvgTestSuite
         {
             this.UnloadDocument();
 
-            if (textEditor == null || string.IsNullOrEmpty(documentFilePath))
+            if (textEditor == null || string.IsNullOrWhiteSpace(documentFilePath))
             {
                 return false;
             }
@@ -169,7 +169,7 @@ namespace WpfW3cSvgTestSuite
         {
             string searchText = searchTextBox.Text;
 
-            if (string.IsNullOrEmpty(searchText))
+            if (string.IsNullOrWhiteSpace(searchText))
             {
                 return;
             }

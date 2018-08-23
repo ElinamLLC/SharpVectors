@@ -190,7 +190,7 @@ namespace SharpVectors.Dom.Svg
             {
                 // Now, if the ns is empty, we try creating with the default namespace for cases
                 // where the node is imported from an external SVG document...
-                if (string.IsNullOrEmpty(ns))
+                if (string.IsNullOrWhiteSpace(ns))
                 {
                     result = SvgElementFactory.Create(prefix, localName, SvgNamespace, this);
                     if (result != null)
@@ -481,7 +481,7 @@ namespace SharpVectors.Dom.Svg
         private object OnXmlResolverGettingEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             string fullPath = absoluteUri.ToString();
-            if (!string.IsNullOrEmpty(fullPath))
+            if (!string.IsNullOrWhiteSpace(fullPath))
             {
                 fullPath = fullPath.Replace('\\', '/');
 
@@ -612,7 +612,7 @@ namespace SharpVectors.Dom.Svg
                 ResolveNamespace(this, e);
                 uri = e.Uri;
             }
-            if (string.IsNullOrEmpty(uri))
+            if (string.IsNullOrWhiteSpace(uri))
             {
                 // some defaults added here
                 switch (prefix)
@@ -680,7 +680,7 @@ namespace SharpVectors.Dom.Svg
         {
             //return new XmlTextReader(uri, stream);
             XmlReaderSettings xmlReaderSettings = GetXmlReaderSettings();
-            if (string.IsNullOrEmpty(uri))
+            if (string.IsNullOrWhiteSpace(uri))
             {
                 return XmlReader.Create(stream, xmlReaderSettings, uri);
             }

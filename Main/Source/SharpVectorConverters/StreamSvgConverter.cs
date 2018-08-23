@@ -247,7 +247,7 @@ namespace SharpVectors.Converters
                     "The SVG source file must exists.", "svgFileName");
             }
 
-            if (string.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
+            if (string.IsNullOrWhiteSpace(svgFileName) || !File.Exists(svgFileName))
             {
                 return false;
             }
@@ -555,14 +555,14 @@ namespace SharpVectors.Converters
                         break;
                 }
 
-                if (!string.IsNullOrEmpty(fileExtensions) &&
+                if (!string.IsNullOrWhiteSpace(fileExtensions) &&
                     fileExtensions.IndexOf(fileExtension,
                     StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     bitmapEncoder = _bitmapEncoder;
                 }    
-                else if (!string.IsNullOrEmpty(mimeTypes) &&
-                    !string.IsNullOrEmpty(mimeType))
+                else if (!string.IsNullOrWhiteSpace(mimeTypes) &&
+                    !string.IsNullOrWhiteSpace(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)
@@ -646,7 +646,7 @@ namespace SharpVectors.Converters
             _writerErrorOccurred = false;
 
             string xamlFileName = null;
-            if (string.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrWhiteSpace(imageFileName))
             {
                 string fileNameWithoutExt =
                     Path.GetFileNameWithoutExtension(fileName);
@@ -658,7 +658,7 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (string.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrWhiteSpace(fileExt))
                 {
                     xamlFileName = imageFileName + ".xaml";
                 }

@@ -149,7 +149,7 @@ namespace WpfTestSvgSample
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (_canDeleteXaml && !string.IsNullOrEmpty(_xamlFilePath) && File.Exists(_xamlFilePath))
+            if (_canDeleteXaml && !string.IsNullOrWhiteSpace(_xamlFilePath) && File.Exists(_xamlFilePath))
             {
                 File.Delete(_xamlFilePath);
             }
@@ -162,7 +162,7 @@ namespace WpfTestSvgSample
             dlg.Description = "Select the location of the SVG Files";
 
             string curDir = txtSvgPath.Text;
-            if (!string.IsNullOrEmpty(curDir) && Directory.Exists(curDir))
+            if (!string.IsNullOrWhiteSpace(curDir) && Directory.Exists(curDir))
             {
                 dlg.SelectedPath = curDir;
             }
@@ -196,7 +196,7 @@ namespace WpfTestSvgSample
             {
                 selectePath = selectePath.Trim();
             }
-            if (string.IsNullOrEmpty(selectePath) || !Directory.Exists(selectePath))
+            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
             {
                 return;
             }
@@ -238,7 +238,7 @@ namespace WpfTestSvgSample
 
         private void OnFillXamlOutputChecked(object sender, RoutedEventArgs e)
         {
-            if (_xamlPage == null || string.IsNullOrEmpty(_xamlFilePath))
+            if (_xamlPage == null || string.IsNullOrWhiteSpace(_xamlFilePath))
             {
                 return;
             }
@@ -310,7 +310,7 @@ namespace WpfTestSvgSample
             }
 
             string svgFilePath = selItem.Tag as string;
-            if (string.IsNullOrEmpty(svgFilePath) || !File.Exists(svgFilePath))
+            if (string.IsNullOrWhiteSpace(svgFilePath) || !File.Exists(svgFilePath))
             {
                 return;
             }
@@ -434,10 +434,10 @@ namespace WpfTestSvgSample
                 fileName  = fileNames[0];
             }
 
-            if (!string.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrWhiteSpace(fileName))
             {
             }
-            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            if (string.IsNullOrWhiteSpace(fileName) || !File.Exists(fileName))
             {
                 return;
             }
@@ -551,7 +551,7 @@ namespace WpfTestSvgSample
         private void LoadFile(string fileName)
         {
             string fileExt = IoPath.GetExtension(fileName);
-            if (string.IsNullOrEmpty(fileExt))
+            if (string.IsNullOrWhiteSpace(fileExt))
             {
                 return;
             }
@@ -590,7 +590,7 @@ namespace WpfTestSvgSample
                     {
                         this.Title = _titleBase + " - " + IoPath.GetFileName(fileName);
 
-                        if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
+                        if (_xamlPage != null && !string.IsNullOrWhiteSpace(_drawingDir))
                         {
                             string xamlFilePath = IoPath.Combine(_drawingDir,
                                 IoPath.GetFileNameWithoutExtension(fileName) + ".xaml");
@@ -634,7 +634,7 @@ namespace WpfTestSvgSample
                 catch
                 {
                     // Try loading the XAML, if generated but the rendering failed...
-                    if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
+                    if (_xamlPage != null && !string.IsNullOrWhiteSpace(_drawingDir))
                     {
                         string xamlFilePath = IoPath.Combine(_drawingDir,
                             IoPath.GetFileNameWithoutExtension(fileName) + ".xaml");
@@ -713,7 +713,7 @@ namespace WpfTestSvgSample
                     _drawingPage.UnloadDocument();
                 }
 
-                if (_canDeleteXaml && !string.IsNullOrEmpty(_xamlFilePath) && File.Exists(_xamlFilePath))
+                if (_canDeleteXaml && !string.IsNullOrWhiteSpace(_xamlFilePath) && File.Exists(_xamlFilePath))
                 {
                     File.Delete(_xamlFilePath);
                 }
@@ -731,7 +731,7 @@ namespace WpfTestSvgSample
 
         private void FillTreeView(string sourceDir)
         {
-            if (string.IsNullOrEmpty(sourceDir) || !Directory.Exists(sourceDir))
+            if (string.IsNullOrWhiteSpace(sourceDir) || !Directory.Exists(sourceDir))
             {
                 return;
             }
@@ -836,7 +836,7 @@ namespace WpfTestSvgSample
                 }
             }
 
-            if (string.IsNullOrEmpty(sourceDir) || !Directory.Exists(sourceDir))
+            if (string.IsNullOrWhiteSpace(sourceDir) || !Directory.Exists(sourceDir))
             {
                 return;
             }

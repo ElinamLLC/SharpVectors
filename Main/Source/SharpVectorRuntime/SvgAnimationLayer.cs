@@ -145,7 +145,7 @@ namespace SharpVectors.Runtime
                 if (layerGroup != null)
                 {
                     string elementId = SvgObject.GetId(layerGroup);
-                    if (!string.IsNullOrEmpty(elementId) &&
+                    if (!string.IsNullOrWhiteSpace(elementId) &&
                         string.Equals(elementId, "IndicateLayer", StringComparison.OrdinalIgnoreCase))
                     {
                         this.LoadLayerDiagrams(layerGroup);
@@ -167,7 +167,7 @@ namespace SharpVectors.Runtime
                 {
                     string groupName = SvgLink.GetKey(childGroup);
                     //string groupName = childGroup.GetValue(FrameworkElement.NameProperty) as string;
-                    if (string.IsNullOrEmpty(groupName))
+                    if (string.IsNullOrWhiteSpace(groupName))
                     {
                         if (childGroup.Children != null && childGroup.Children.Count == 1)
                         {
@@ -324,7 +324,7 @@ namespace SharpVectors.Runtime
                 string tooltipText          = itemName;
                 SvgLinkAction linkAction = SvgLink.GetAction(hitVisual);
                 if (linkAction == SvgLinkAction.LinkTooltip && 
-                    _tooltip != null && !string.IsNullOrEmpty(tooltipText))
+                    _tooltip != null && !string.IsNullOrWhiteSpace(tooltipText))
                 {
                     Rect rectBounds = hitVisual.Bounds;
 
@@ -433,7 +433,7 @@ namespace SharpVectors.Runtime
             if (e.ChangedButton == MouseButton.Left)
             {
                 string brushName = brush.GetValue(FrameworkElement.NameProperty) as string;
-                if (!string.IsNullOrEmpty(brushName))
+                if (!string.IsNullOrWhiteSpace(brushName))
                 {
                     SvgLinkAction linkAction = SvgLink.GetAction(visual);
                     if (linkAction == SvgLinkAction.LinkHtml ||
@@ -610,12 +610,12 @@ namespace SharpVectors.Runtime
                 if (TryCast(drawing, out drawGroup))
                 {
                     string groupName = SvgLink.GetKey(drawGroup);
-                    if (string.IsNullOrEmpty(groupName))
+                    if (string.IsNullOrWhiteSpace(groupName))
                     {
                         groupName = SvgObject.GetId(drawGroup);
                     }
                     //string groupName = childGroup.GetValue(FrameworkElement.NameProperty) as string;
-                    if (string.IsNullOrEmpty(groupName))
+                    if (string.IsNullOrWhiteSpace(groupName))
                     {
                         LoadLayerGroup(drawGroup);
                     }
@@ -665,12 +665,12 @@ namespace SharpVectors.Runtime
                 if (TryCast(drawing, out drawGroup))
                 {
                     string groupName = SvgLink.GetKey(drawGroup);
-                    if (string.IsNullOrEmpty(groupName))
+                    if (string.IsNullOrWhiteSpace(groupName))
                     {
                         groupName = SvgObject.GetId(drawGroup);
                     }
                     //string groupName = childGroup.GetValue(FrameworkElement.NameProperty) as string;
-                    if (string.IsNullOrEmpty(groupName))
+                    if (string.IsNullOrWhiteSpace(groupName))
                     {
                         LoadLayerGroup(drawGroup);
                     }

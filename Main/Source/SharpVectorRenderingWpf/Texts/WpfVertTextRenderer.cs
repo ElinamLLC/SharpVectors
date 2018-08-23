@@ -32,13 +32,13 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderSingleLineText(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(text))
                 return;
 
             int vertOrientation    = -1;
             int horzOrientation    = -1;
             string orientationText = element.GetPropertyValue("glyph-orientation-vertical");
-            if (!string.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrWhiteSpace(orientationText))
             {
                 double orientationValue = 0;
                 if (double.TryParse(orientationText, out orientationValue))
@@ -47,7 +47,7 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
             orientationText = element.GetPropertyValue("glyph-orientation-horizontal");
-            if (!string.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrWhiteSpace(orientationText))
             {
                 double orientationValue = 0;
                 if (double.TryParse(orientationText, out orientationValue))
@@ -206,14 +206,14 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderTextRun(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(text))
                 return;
 
             int vertOrientation = -1;
             int horzOrientation = -1;
 
             string orientationText = element.GetPropertyValue("glyph-orientation-vertical");
-            if (!string.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrWhiteSpace(orientationText))
             {
                 double orientationValue = 0;
                 if (double.TryParse(orientationText, out orientationValue))
@@ -222,7 +222,7 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
             orientationText = element.GetPropertyValue("glyph-orientation-horizontal");
-            if (!string.IsNullOrEmpty(orientationText))
+            if (!string.IsNullOrWhiteSpace(orientationText))
             {
                 double orientationValue = 0;
                 if (double.TryParse(orientationText, out orientationValue))
@@ -403,7 +403,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
@@ -439,7 +439,7 @@ namespace SharpVectors.Renderers.Texts
             TextAlignment alignment = stringFormat.Alignment;
 
             string letterSpacing = element.GetAttribute("letter-spacing");
-            if (string.IsNullOrEmpty(letterSpacing))
+            if (string.IsNullOrWhiteSpace(letterSpacing))
             {   
                 FormattedText formattedText = new FormattedText(text, 
                     textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo,
@@ -577,7 +577,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
@@ -613,7 +613,7 @@ namespace SharpVectors.Renderers.Texts
             TextAlignment alignment = stringFormat.Alignment;
 
             string letterSpacing = element.GetAttribute("letter-spacing");
-            if (string.IsNullOrEmpty(letterSpacing))
+            if (string.IsNullOrWhiteSpace(letterSpacing))
             {   
                 FormattedText formattedText = new FormattedText(text,
                     textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo,

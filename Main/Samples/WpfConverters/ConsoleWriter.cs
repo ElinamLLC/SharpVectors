@@ -102,7 +102,7 @@ namespace SharpVectors.Converters
 
         public void WriteInfoLine(string text)
         {   
-            if (_isQuiet || string.IsNullOrEmpty(text))
+            if (_isQuiet || string.IsNullOrWhiteSpace(text))
             {
                 return;
             }
@@ -115,7 +115,7 @@ namespace SharpVectors.Converters
 
         public void WriteWarnLine(string text)
         {
-            if (_isQuiet || string.IsNullOrEmpty(text))
+            if (_isQuiet || string.IsNullOrWhiteSpace(text))
             {
                 return;
             }
@@ -128,7 +128,7 @@ namespace SharpVectors.Converters
 
         public void WriteErrorLine(string text)
         {
-            if (_isQuiet || string.IsNullOrEmpty(text))
+            if (_isQuiet || string.IsNullOrWhiteSpace(text))
             {
                 return;
             }

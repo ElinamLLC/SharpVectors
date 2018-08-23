@@ -214,7 +214,7 @@ namespace WpfW3cSvgTestSuite
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (!_isTreeModified || string.IsNullOrEmpty(_testFilePath) ||
+            if (!_isTreeModified || string.IsNullOrWhiteSpace(_testFilePath) ||
                 !File.Exists(_testFilePath))
             {
                 return;
@@ -341,7 +341,7 @@ namespace WpfW3cSvgTestSuite
             {
                 selectePath = selectePath.Trim();
             }
-            if (string.IsNullOrEmpty(selectePath) || !Directory.Exists(selectePath))
+            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
             {
                 return;
             }
@@ -512,7 +512,7 @@ namespace WpfW3cSvgTestSuite
                     _drawingPage.LoadDocument(pngFilePath, testItem, drawing);
                 }
 
-                if (_xamlPage != null && !string.IsNullOrEmpty(_drawingDir))
+                if (_xamlPage != null && !string.IsNullOrWhiteSpace(_drawingDir))
                 {
                     string xamlFilePath = IoPath.Combine(_drawingDir,
                         IoPath.ChangeExtension(testItem.FileName, ".xaml"));
@@ -801,7 +801,7 @@ namespace WpfW3cSvgTestSuite
 
         private void InitializePath(string suitePath)
         {   
-            if (string.IsNullOrEmpty(suitePath) || !Directory.Exists(suitePath))
+            if (string.IsNullOrWhiteSpace(suitePath) || !Directory.Exists(suitePath))
             {
                 return;
             }
@@ -827,7 +827,7 @@ namespace WpfW3cSvgTestSuite
             _testResults = new List<SvgTestResult>();
 
             _testResultsPath = IoPath.GetFullPath(SvgTestResults);
-            if (!string.IsNullOrEmpty(_testResultsPath) && File.Exists(_testResultsPath))
+            if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreWhitespace = false;
@@ -841,7 +841,7 @@ namespace WpfW3cSvgTestSuite
             }
 
             string fullFilePath = IoPath.GetFullPath(SvgTestSuite);
-            if (!string.IsNullOrEmpty(fullFilePath) && File.Exists(fullFilePath))
+            if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreWhitespace = false;
@@ -924,7 +924,7 @@ namespace WpfW3cSvgTestSuite
                 {
                     // <category label="Animations">
                     string category = reader.GetAttribute("label");
-                    if (!string.IsNullOrEmpty(category))
+                    if (!string.IsNullOrWhiteSpace(category))
                     {
                         SvgTestCategory testCategory = new SvgTestCategory(category);
 

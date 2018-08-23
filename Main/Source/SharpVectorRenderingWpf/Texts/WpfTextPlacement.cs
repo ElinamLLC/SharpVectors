@@ -97,7 +97,7 @@ namespace SharpVectors.Renderers.Texts
 
         public void UpdatePositions(string targetText)
         {
-            //if (string.IsNullOrEmpty(targetText) || (_positions == null || _positions.Count == 0))
+            //if (string.IsNullOrWhiteSpace(targetText) || (_positions == null || _positions.Count == 0))
             //{
             //    return;
             //}

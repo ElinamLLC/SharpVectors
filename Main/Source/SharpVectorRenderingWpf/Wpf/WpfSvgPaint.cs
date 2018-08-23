@@ -201,7 +201,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             // Use this to prevent the default value of "4" being used...
             string miterLimitAttr = _element.GetAttribute("stroke-miterlimit");
-            if (string.IsNullOrEmpty(miterLimitAttr))
+            if (string.IsNullOrWhiteSpace(miterLimitAttr))
             {
                 string strokeLinecap = _element.GetAttribute("stroke-linecap"); 
                 if (string.Equals(strokeLinecap, "round", StringComparison.OrdinalIgnoreCase))
@@ -212,7 +212,7 @@ namespace SharpVectors.Renderers.Wpf
             }                 
 
             string miterLimitStr = _element.GetPropertyValue("stroke-miterlimit");
-            if (string.IsNullOrEmpty(miterLimitStr) || (float)(strokeWidth) <= 0)
+            if (string.IsNullOrWhiteSpace(miterLimitStr) || (float)(strokeWidth) <= 0)
             {
                 return -1.0d;
             }
@@ -241,7 +241,7 @@ namespace SharpVectors.Renderers.Wpf
         private DoubleCollection GetDashArray(double strokeWidth)
         {
             string dashArrayText = _element.GetPropertyValue("stroke-dasharray");
-            if (string.IsNullOrEmpty(dashArrayText))
+            if (string.IsNullOrWhiteSpace(dashArrayText))
             {
                 return null;
             }
@@ -299,7 +299,7 @@ namespace SharpVectors.Renderers.Wpf
                     string propertyValue =
                         styleElm.GetComputedStyle("").GetPropertyValue(_propertyName);
 
-                    if (!string.IsNullOrEmpty(propertyValue))
+                    if (!string.IsNullOrWhiteSpace(propertyValue))
                     {
                         WpfSvgPaint importFill = new WpfSvgPaint(_context, styleElm, _propertyName);
                         if (string.Equals(uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))

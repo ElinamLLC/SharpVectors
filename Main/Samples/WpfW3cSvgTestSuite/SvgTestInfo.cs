@@ -50,7 +50,7 @@ namespace WpfW3cSvgTestSuite
         {
             get
             {
-                return (string.IsNullOrEmpty(_fileName));
+                return (string.IsNullOrWhiteSpace(_fileName));
             }
         }
 
@@ -143,10 +143,10 @@ namespace WpfW3cSvgTestSuite
 
             // <test source="*.svg" title="" state="partial" comment="" description="" />
             string source = reader.GetAttribute("source");
-            if (!string.IsNullOrEmpty(source))
+            if (!string.IsNullOrWhiteSpace(source))
             {
                 string title = reader.GetAttribute("title");
-                if (string.IsNullOrEmpty(title))
+                if (string.IsNullOrWhiteSpace(title))
                 {
                     title = source.Replace(".svg", string.Empty);
                 }
@@ -191,13 +191,13 @@ namespace WpfW3cSvgTestSuite
             _title = title;
             _comment = comment;
             _description = description.Trim();
-            if (!string.IsNullOrEmpty(_description))
+            if (!string.IsNullOrWhiteSpace(_description))
             {
                 _description = _description.Replace("\n", " ");
                 _description = _description.Replace("  ", String.Empty);
             }
 
-            if (!string.IsNullOrEmpty(state))
+            if (!string.IsNullOrWhiteSpace(state))
             {
                 if (state.Equals("unknown", StringComparison.OrdinalIgnoreCase))
                 {

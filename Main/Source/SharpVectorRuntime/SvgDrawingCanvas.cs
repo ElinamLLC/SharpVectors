@@ -157,7 +157,7 @@ namespace SharpVectors.Runtime
 
         public void LoadDiagrams(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName))
+            if (string.IsNullOrWhiteSpace(fileName) || !File.Exists(fileName))
             {
                 return;
             }
@@ -272,12 +272,12 @@ namespace SharpVectors.Runtime
                 Drawing drawing = drawings[i];
                 //string drawingName = drawing.GetValue(FrameworkElement.NameProperty) as string;
                 string drawingName = SvgLink.GetKey(drawing);
-                if (!string.IsNullOrEmpty(drawingName) &&
+                if (!string.IsNullOrWhiteSpace(drawingName) &&
                     string.Equals(drawingName, SvgObject.DrawLayer))
                 {
                     drawIndex = i;
                 }
-                else if (!string.IsNullOrEmpty(drawingName) &&
+                else if (!string.IsNullOrWhiteSpace(drawingName) &&
                     string.Equals(drawingName, SvgObject.LinksLayer))
                 {
                     linkIndex = i;
@@ -442,7 +442,7 @@ namespace SharpVectors.Runtime
             //if (e.ChangedButton == MouseButton.Left)
             //{
             //    string brushName = brush.GetValue(FrameworkElement.NameProperty) as string;
-            //    if (!string.IsNullOrEmpty(brushName))
+            //    if (!string.IsNullOrWhiteSpace(brushName))
             //    {
             //        SvgLinkAction linkAction = SvgLink.GetLinkAction(visual);
             //        if (linkAction == SvgLinkAction.LinkHtml ||
@@ -548,7 +548,7 @@ namespace SharpVectors.Runtime
                 //    tooltipText = SvgObject.GetTitle(drawing);
                 //}
 
-                if (_tooltip != null && !string.IsNullOrEmpty(tooltipText))
+                if (_tooltip != null && !string.IsNullOrWhiteSpace(tooltipText))
                 {
                     _tooltip.PlacementRectangle = rectBounds;
 

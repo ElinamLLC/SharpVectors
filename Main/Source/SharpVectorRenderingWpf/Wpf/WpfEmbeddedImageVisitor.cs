@@ -5,7 +5,7 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public abstract class WpfEmbeddedImageVisitor : DependencyObject
+    public abstract class WpfEmbeddedImageVisitor : WpfVisitor
     {
         protected WpfEmbeddedImageVisitor()
         {   

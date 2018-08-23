@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Svg;
 
@@ -13,6 +14,8 @@ namespace SharpVectors.Renderers.Wpf
         #region Private Fields
 
         protected SvgElement _svgElement;
+
+        protected WpfDrawingContext _context;
 
         #endregion
 
@@ -60,7 +63,15 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         // define empty handlers by default
-        public virtual void BeforeRender(WpfDrawingRenderer renderer) { }
+        public virtual void BeforeRender(WpfDrawingRenderer renderer)
+        {
+            if (renderer == null)
+            {
+                return;
+            }
+            _context = renderer.Context;
+        }
+
         public virtual void Render(WpfDrawingRenderer renderer) { }
         public virtual void AfterRender(WpfDrawingRenderer renderer) { }
 
@@ -68,98 +79,83 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (_svgElement == null)
             {
-                return String.Empty;
+                return string.Empty;
+            }
+            if (_context != null && _context.IDVisitor != null)
+            {
+                return _context.IDVisitor.Visit(_svgElement, _context);
             }
             string elementId = _svgElement.Id;
-            if (elementId != null)
+            if (string.IsNullOrWhiteSpace(elementId))
             {
-                elementId = elementId.Trim();
+                return string.Empty;
             }
-            if (string.IsNullOrEmpty(elementId))
+            elementId = elementId.Trim();
+            if (IsValidIdentifier(elementId))
             {
-                return String.Empty;
-            }
-            if (elementId.Contains("&#x"))
-            {
-                elementId = HttpUtility.HtmlDecode(elementId);
-            }
-            if (elementId.Contains("レイヤー"))
-            {
-                elementId = elementId.Replace("レイヤー", "Layer");
-            }
-            else if (elementId.Equals("台紙"))
-            {
-                elementId = "Mount";
-            }
-            else if (elementId.Equals("キャプション"))
-            {
-                elementId = "Caption";
-            }
-            int numberId = 0;
-            if (Int32.TryParse(elementId, out numberId))
-            {
-                return String.Empty;
+                return elementId;
             }
 
-            elementId = elementId.Replace(':', '_');
-            elementId = elementId.Replace(' ', '_');
-            elementId = elementId.Replace('.', '_');
-            elementId = elementId.Replace('-', '_');
-
-            return elementId;
+            return Regex.Replace(elementId, @"[^[0-9a-zA-Z]]*", "_");
         }
 
-        public static string GetElementName(SvgElement element)
+        public static string GetElementName(SvgElement element, WpfDrawingContext context = null)
         {
             if (element == null)
             {
-                return String.Empty;
+                return string.Empty;
+            }
+            if (context != null && context.IDVisitor != null)
+            {
+                return context.IDVisitor.Visit(element, context);
             }
             string elementId = element.Id;
-            if (elementId != null)
+            if (string.IsNullOrWhiteSpace(elementId))
             {
-                elementId = elementId.Trim();
+                return string.Empty;
             }
-            if (string.IsNullOrEmpty(elementId))
+            elementId = elementId.Trim();
+            if (IsValidIdentifier(elementId))
             {
-                return String.Empty;
+                return elementId;
             }
-            if (elementId.Contains("&#x"))
-            {
-                elementId = HttpUtility.HtmlDecode(elementId);
-            }
-            if (elementId.Contains("レイヤー"))
-            {
-                elementId = elementId.Replace("レイヤー", "Layer");
-            }
-            else if (elementId.Equals("イラスト"))
-            {
-                elementId = "Illustration";
-            }
-            else if (elementId.Equals("台紙"))
-            {
-                elementId = "Mount";
-            }
-            else if (elementId.Equals("キャプション"))
-            {
-                elementId = "Caption";
-            }
-            else if (elementId.Equals("細線"))
-            {
-                elementId = "ThinLine";
-            }
-            int numberId = 0;
-            if (Int32.TryParse(elementId, out numberId))
-            {
-                return String.Empty;
-            }
-      
-            elementId = elementId.Replace(':', '_');
-            elementId = elementId.Replace(' ', '_');
-            elementId = elementId.Replace('.', '_');
-            elementId = elementId.Replace('-', '_');
 
-            return elementId;
+            return Regex.Replace(elementId, @"[^[0-9a-zA-Z]]*", "_");
+        }
+
+        public static bool IsValidIdentifier(string identifier)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+            {
+                return false;
+            }
+
+            if (!IsIdentifierStart(identifier[0]))
+            {
+                return false;
+            }
+
+            for (int i = 1; i < identifier.Length; i++)
+            {
+                if (!IsIdentifierPart(identifier[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        public static bool IsIdentifierStart(char c)
+        {
+            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_' || char.IsLetter(c);
+        }
+
+        public static bool IsIdentifierPart(char c)
+        {
+            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+                || c == '_' || (c >= '0' && c <= '9') || char.IsLetter(c);
         }
 
         #endregion

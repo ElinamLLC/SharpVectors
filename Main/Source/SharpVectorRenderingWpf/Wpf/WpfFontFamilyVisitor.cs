@@ -2,7 +2,7 @@
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public abstract class WpfFontFamilyVisitor : DependencyObject
+    public abstract class WpfFontFamilyVisitor : WpfVisitor
     {
         protected WpfFontFamilyVisitor()
         {   

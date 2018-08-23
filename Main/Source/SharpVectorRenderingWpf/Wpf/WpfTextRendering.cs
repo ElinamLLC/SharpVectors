@@ -33,7 +33,6 @@ namespace SharpVectors.Renderers.Wpf
 
         private DrawingGroup      _drawGroup;
         private DrawingContext    _drawContext;
-        private WpfDrawingContext _context;
 
         private WpfHorzTextRenderer _horzRenderer;
         private WpfVertTextRenderer _vertRenderer;
@@ -143,7 +142,7 @@ namespace SharpVectors.Renderers.Wpf
             _drawGroup = new DrawingGroup();
 
             string elementId = this.GetElementName();
-            if (!string.IsNullOrEmpty(elementId) && !context.IsRegisteredId(elementId))
+            if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
             {
                 _drawGroup.SetValue(FrameworkElement.NameProperty, elementId);
 
@@ -252,7 +251,7 @@ namespace SharpVectors.Renderers.Wpf
 
             bool isVertical    = false;
             string writingMode = _textElement.GetPropertyValue("writing-mode");
-            if (!string.IsNullOrEmpty(writingMode) &&
+            if (!string.IsNullOrWhiteSpace(writingMode) &&
                 string.Equals(writingMode, "tb", StringComparison.OrdinalIgnoreCase))
             {
                 isVertical = true;
@@ -535,7 +534,7 @@ namespace SharpVectors.Renderers.Wpf
                     if (titleElement != null)
                     {
                         string titleValue = titleElement.InnerText;
-                        if (!string.IsNullOrEmpty(titleValue))
+                        if (!string.IsNullOrWhiteSpace(titleValue))
                         {
                             SvgObject.SetTitle(_drawGroup, titleValue);
                         }
@@ -615,7 +614,7 @@ namespace SharpVectors.Renderers.Wpf
         private void RenderSingleLineTextH(SvgTextContentElement element, ref Point ctp, 
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text) || _horzRenderer == null)
+            if (string.IsNullOrWhiteSpace(text) || _horzRenderer == null)
                 return;
 
             string targetText = text.Trim();
@@ -629,7 +628,7 @@ namespace SharpVectors.Renderers.Wpf
         private void RenderTextRunH(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text) || _horzRenderer == null)
+            if (string.IsNullOrWhiteSpace(text) || _horzRenderer == null)
                 return;
 
             if (placement != null)
@@ -646,7 +645,7 @@ namespace SharpVectors.Renderers.Wpf
         private void RenderSingleLineTextV(SvgTextContentElement element, ref Point ctp, 
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text) || _vertRenderer == null)
+            if (string.IsNullOrWhiteSpace(text) || _vertRenderer == null)
                 return;
 
             string targetText = text.Trim();
@@ -660,7 +659,7 @@ namespace SharpVectors.Renderers.Wpf
         private void RenderTextRunV(SvgTextContentElement element, ref Point ctp, 
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text) || _vertRenderer == null)
+            if (string.IsNullOrWhiteSpace(text) || _vertRenderer == null)
                 return;
 
             if (placement != null)

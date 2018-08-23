@@ -279,7 +279,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Input Directory: " + _sourceDir);
 
                 Debug.Assert(_sourceDir != null && _sourceDir.Length != 0);
-                if (string.IsNullOrEmpty(_outputDir))
+                if (string.IsNullOrWhiteSpace(_outputDir))
                 {
                     _outputDir = String.Copy(_sourceDir);
                 }
@@ -391,7 +391,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                bool isSuccessful = !string.IsNullOrEmpty(resultText) && 
+                bool isSuccessful = !string.IsNullOrWhiteSpace(resultText) && 
                     string.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
 
                 if (_errorFiles == null || _errorFiles.Count == 0)
@@ -403,12 +403,12 @@ namespace SharpVectors.Converters
                     builder.AppendLine("Total number of files successful converted: " + _convertedCount);
                     builder.AppendLine("Total number of files failed: " + _errorFiles.Count);
                 }
-                if (!string.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrWhiteSpace(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
 
-                if (!string.IsNullOrEmpty(_outputDir))
+                if (!string.IsNullOrWhiteSpace(_outputDir))
                 {
                     builder.AppendLine("Output Directory: " + _outputDir);
                 }
@@ -626,7 +626,7 @@ namespace SharpVectors.Converters
                         if (_options.SaveXaml)
                         {
                             string xamlFile = _fileReader.XamlFile;
-                            if (!string.IsNullOrEmpty(xamlFile) &&
+                            if (!string.IsNullOrWhiteSpace(xamlFile) &&
                                 File.Exists(xamlFile))
                             {
                                 File.SetAttributes(xamlFile, fileAttr);
@@ -641,7 +641,7 @@ namespace SharpVectors.Converters
                         if (_options.SaveZaml)
                         {
                             string zamlFile = _fileReader.ZamlFile;
-                            if (!string.IsNullOrEmpty(zamlFile) &&
+                            if (!string.IsNullOrWhiteSpace(zamlFile) &&
                                 File.Exists(zamlFile))
                             {
                                 File.SetAttributes(zamlFile, fileAttr);
@@ -659,7 +659,7 @@ namespace SharpVectors.Converters
                             _fileReader.SaveImage(svgFileName, target,
                                 _options.EncoderType);
                             string imageFile = _fileReader.ImageFile;
-                            if (!string.IsNullOrEmpty(imageFile) &&
+                            if (!string.IsNullOrWhiteSpace(imageFile) &&
                                 File.Exists(imageFile))
                             {
                                 File.SetAttributes(imageFile, fileAttr);

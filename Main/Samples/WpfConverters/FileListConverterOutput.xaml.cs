@@ -185,7 +185,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Converting files, please wait...");
 
                 Debug.Assert(_sourceFiles != null && _sourceFiles.Count != 0);
-                if (!string.IsNullOrEmpty(_outputDir))
+                if (!string.IsNullOrWhiteSpace(_outputDir))
                 {
                     _outputInfoDir = new DirectoryInfo(_outputDir);
                     if (!_outputInfoDir.Exists)
@@ -306,7 +306,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                bool isSuccessful = !string.IsNullOrEmpty(resultText) &&
+                bool isSuccessful = !string.IsNullOrWhiteSpace(resultText) &&
                     string.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
 
                 if (_errorFiles == null || _errorFiles.Count == 0)
@@ -318,12 +318,12 @@ namespace SharpVectors.Converters
                     builder.AppendLine("Total number of files successful converted: " + _convertedCount);
                     builder.AppendLine("Total number of files failed: " + _errorFiles.Count);
                 }
-                if (!string.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrWhiteSpace(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
 
-                if (!string.IsNullOrEmpty(_outputDir))
+                if (!string.IsNullOrWhiteSpace(_outputDir))
                 {
                     builder.AppendLine("Output Directory: " + _outputDir);
                 }

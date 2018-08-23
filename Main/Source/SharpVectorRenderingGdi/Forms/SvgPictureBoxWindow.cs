@@ -109,7 +109,7 @@ namespace SharpVectors.Renderers.Forms
 
         public override void Alert(string message)
         {
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrWhiteSpace(message))
             {
                 return;
             }

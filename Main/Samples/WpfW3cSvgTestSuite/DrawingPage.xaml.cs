@@ -82,7 +82,7 @@ namespace WpfW3cSvgTestSuite
         //    { 
         //        _drawingDir = value; 
 
-        //        if (!string.IsNullOrEmpty(_drawingDir))
+        //        if (!string.IsNullOrWhiteSpace(_drawingDir))
         //        {
         //            _directoryInfo = new DirectoryInfo(_drawingDir);
 

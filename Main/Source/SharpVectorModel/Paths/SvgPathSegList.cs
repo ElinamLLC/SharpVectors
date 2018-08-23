@@ -30,7 +30,7 @@ namespace SharpVectors.Dom.Svg
 
             _pathScript = d;
             
-            if (!string.IsNullOrEmpty(d))
+            if (!string.IsNullOrWhiteSpace(d))
             {
                 ParseString(d);
             }

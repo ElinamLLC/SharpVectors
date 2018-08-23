@@ -112,7 +112,7 @@ namespace SharpVectors.Renderers.Utils
 
         public void LoadDocument(string documentSource)
         {
-            if (string.IsNullOrEmpty(documentSource))
+            if (string.IsNullOrWhiteSpace(documentSource))
             {
                 return;
             }
@@ -177,7 +177,7 @@ namespace SharpVectors.Renderers.Utils
 
         public override void Alert(string message)
         {
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrWhiteSpace(message))
             {
                 return;
             }

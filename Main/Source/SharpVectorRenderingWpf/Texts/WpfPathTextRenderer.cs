@@ -175,7 +175,7 @@ namespace SharpVectors.Renderers.Texts
         private void RenderTextPath(SvgTextContentElement element, WpfTextOnPathDrawing pathDrawing,
             string text, Point origin, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(text))
             {
                 return;
             }
@@ -192,7 +192,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Fix the use of Postscript fonts...
             WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
-            if (!string.IsNullOrEmpty(_actualFontName) && fontFamilyVisitor != null)
+            if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);

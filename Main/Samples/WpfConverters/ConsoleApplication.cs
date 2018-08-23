@@ -130,7 +130,7 @@ namespace SharpVectors.Converters
              	if (_writer != null)
                 {
                     string message = ex.Message;
-                    if (string.IsNullOrEmpty(message))
+                    if (string.IsNullOrWhiteSpace(message))
                     {
                         _writer.WriteErrorLine(ex.ToString());
                     }
@@ -186,7 +186,7 @@ namespace SharpVectors.Converters
                 if (_consoleSuccess)
                 {
                     string usageText = _commandLines.Usage;
-                    if (!string.IsNullOrEmpty(usageText))
+                    if (!string.IsNullOrWhiteSpace(usageText))
                     {
                         _writer.WriteLine(usageText);
                     }
@@ -199,7 +199,7 @@ namespace SharpVectors.Converters
              	if (_writer != null)
                 {
                     string message = ex.Message;
-                    if (string.IsNullOrEmpty(message))
+                    if (string.IsNullOrWhiteSpace(message))
                     {
                         _writer.WriteErrorLine(ex.ToString());
                     }
@@ -237,7 +237,7 @@ namespace SharpVectors.Converters
             string outputDir  = _commandLines.OutputDir;
 
             string sourceFile = _commandLines.SourceFile;
-            if (!string.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
+            if (!string.IsNullOrWhiteSpace(sourceFile) && File.Exists(sourceFile))
             {
                 ConsoleFileConverter fileConverter = 
                     new ConsoleFileConverter(sourceFile);
@@ -251,7 +251,7 @@ namespace SharpVectors.Converters
             }
 
             string sourceDir = _commandLines.SourceDir;
-            if (!string.IsNullOrEmpty(sourceDir) && Directory.Exists(sourceDir))
+            if (!string.IsNullOrWhiteSpace(sourceDir) && Directory.Exists(sourceDir))
             {
                 ConsoleDirectoryConverter dirConverter = 
                     new ConsoleDirectoryConverter(sourceDir);

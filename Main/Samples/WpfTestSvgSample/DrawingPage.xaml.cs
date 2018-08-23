@@ -91,7 +91,7 @@ namespace WpfTestSvgSample
             { 
                 _drawingDir = value; 
 
-                if (!string.IsNullOrEmpty(_drawingDir))
+                if (!string.IsNullOrWhiteSpace(_drawingDir))
                 {
                     _directoryInfo = new DirectoryInfo(_drawingDir);
 
@@ -121,7 +121,7 @@ namespace WpfTestSvgSample
 
         public bool LoadDocument(string svgFilePath)
         {
-            if (string.IsNullOrEmpty(svgFilePath) || !File.Exists(svgFilePath))
+            if (string.IsNullOrWhiteSpace(svgFilePath) || !File.Exists(svgFilePath))
             {
                 return false;
             }
@@ -197,7 +197,7 @@ namespace WpfTestSvgSample
 
         public bool SaveDocument(string fileName)
         {
-            if (string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrWhiteSpace(fileName))
             {
                 return false;
             }

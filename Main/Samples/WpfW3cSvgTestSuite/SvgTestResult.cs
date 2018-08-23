@@ -180,7 +180,7 @@ namespace WpfW3cSvgTestSuite
             // </result>
             string version = reader.GetAttribute("version");
             string date = reader.GetAttribute("date");
-            if (!string.IsNullOrEmpty(version) && !string.IsNullOrEmpty(date))
+            if (!string.IsNullOrWhiteSpace(version) && !string.IsNullOrWhiteSpace(date))
             {
                 _version = version;
                 _date    = XmlConvert.ToDateTime(date, XmlDateTimeSerializationMode.RoundtripKind);

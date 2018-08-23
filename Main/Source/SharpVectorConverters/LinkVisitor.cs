@@ -66,7 +66,7 @@ namespace SharpVectors.Converters
 
         public override bool Exists(string linkId)
         {
-            if (string.IsNullOrEmpty(linkId))
+            if (string.IsNullOrWhiteSpace(linkId))
             {
                 return false;
             }
@@ -101,7 +101,7 @@ namespace SharpVectors.Converters
 
             //string linkId = element.GetAttribute("id");
             string linkId = GetElementName(element);
-            if (string.IsNullOrEmpty(linkId))
+            if (string.IsNullOrWhiteSpace(linkId))
             {
                 return;
             }
@@ -114,10 +114,10 @@ namespace SharpVectors.Converters
             }
 
             string linkAction = element.GetAttribute("onclick");
-            if (string.IsNullOrEmpty(linkAction))
+            if (string.IsNullOrWhiteSpace(linkAction))
             {
                 linkAction = element.GetAttribute("onmouseover");
-                if (!string.IsNullOrEmpty(linkAction) && 
+                if (!string.IsNullOrWhiteSpace(linkAction) && 
                     linkAction.StartsWith("parent.svgMouseOverName", StringComparison.OrdinalIgnoreCase))
                 {
                     SvgLink.SetAction(group, SvgLinkAction.LinkTooltip);
@@ -143,7 +143,7 @@ namespace SharpVectors.Converters
                 }
             }
 
-            if (!string.IsNullOrEmpty(linkAction))
+            if (!string.IsNullOrWhiteSpace(linkAction))
             {   
                 if (linkAction.IndexOf("'Top'") > 0)
                 {
@@ -204,7 +204,7 @@ namespace SharpVectors.Converters
             {
                 elementId = elementId.Trim();
             }
-            if (string.IsNullOrEmpty(elementId))
+            if (string.IsNullOrWhiteSpace(elementId))
             {
                 return String.Empty;
             }
@@ -223,32 +223,32 @@ namespace SharpVectors.Converters
         private void AddExtraLinkInformation(DrawingGroup group, SvgElement element)
         {
             string linkColor = element.GetAttribute("color");
-            if (!string.IsNullOrEmpty(linkColor))
+            if (!string.IsNullOrWhiteSpace(linkColor))
             {
                 SvgLink.SetColor(group, linkColor);
             }
             string linkPartsId = element.GetAttribute("partsid");
-            if (!string.IsNullOrEmpty(linkPartsId))
+            if (!string.IsNullOrWhiteSpace(linkPartsId))
             {
                 SvgLink.SetPartsId(group, linkPartsId);
             }
             string linkType = element.GetAttribute("type");
-            if (!string.IsNullOrEmpty(linkType))
+            if (!string.IsNullOrWhiteSpace(linkType))
             {
                 SvgLink.SetPartsId(group, linkType);
             }
             string linkNumber = element.GetAttribute("num");
-            if (!string.IsNullOrEmpty(linkNumber))
+            if (!string.IsNullOrWhiteSpace(linkNumber))
             {
                 SvgLink.SetPartsId(group, linkNumber);
             }
             string linkPin = element.GetAttribute("pin");
-            if (!string.IsNullOrEmpty(linkPin))
+            if (!string.IsNullOrWhiteSpace(linkPin))
             {
                 SvgLink.SetPartsId(group, linkPin);
             }
             string linkLineId = element.GetAttribute("lineid");
-            if (!string.IsNullOrEmpty(linkLineId))
+            if (!string.IsNullOrWhiteSpace(linkLineId))
             {
                 SvgLink.SetPartsId(group, linkLineId);
             }
@@ -264,7 +264,7 @@ namespace SharpVectors.Converters
             }
 
             string aggregatedFill = aElement.GetAttribute("fill");
-            bool isFillFound = !string.IsNullOrEmpty(aggregatedFill);
+            bool isFillFound = !string.IsNullOrWhiteSpace(aggregatedFill);
 
             SvgStyleableElement paintElement = null;
             if (isFillFound)
@@ -326,7 +326,7 @@ namespace SharpVectors.Converters
                                     if (isFillFound)
                                     {
                                         string elementFill = element.GetAttribute("fill");
-                                        if (!string.IsNullOrEmpty(elementFill) &&
+                                        if (!string.IsNullOrWhiteSpace(elementFill) &&
                                             !string.Equals(elementFill, aggregatedFill, StringComparison.OrdinalIgnoreCase))
                                         {
                                             return;
@@ -335,7 +335,7 @@ namespace SharpVectors.Converters
                                     else
                                     {
                                         aggregatedFill = element.GetAttribute("fill");
-                                        isFillFound = !string.IsNullOrEmpty(aggregatedFill);
+                                        isFillFound = !string.IsNullOrWhiteSpace(aggregatedFill);
                                         if (isFillFound)
                                         {
                                             paintElement = element;
@@ -369,7 +369,7 @@ namespace SharpVectors.Converters
                             if (isFillFound)
                             {
                                 string elementFill = element.GetAttribute("fill");
-                                if (!string.IsNullOrEmpty(elementFill) &&
+                                if (!string.IsNullOrWhiteSpace(elementFill) &&
                                     !string.Equals(elementFill, aggregatedFill, StringComparison.OrdinalIgnoreCase))
                                 {
                                     return;
@@ -378,7 +378,7 @@ namespace SharpVectors.Converters
                             else
                             {
                                 aggregatedFill = element.GetAttribute("fill");
-                                isFillFound = !string.IsNullOrEmpty(aggregatedFill);
+                                isFillFound = !string.IsNullOrWhiteSpace(aggregatedFill);
                                 if (isFillFound)
                                 {
                                     paintElement = element;

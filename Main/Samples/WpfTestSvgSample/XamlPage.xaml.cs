@@ -79,7 +79,7 @@ namespace WpfTestSvgSample
 
         public void LoadDocument(string documentFileName)
         {
-            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
+            if (textEditor == null || string.IsNullOrWhiteSpace(documentFileName))
             {
                 return;
             }
@@ -194,7 +194,7 @@ namespace WpfTestSvgSample
         {
             string searchText = searchTextBox.Text;
 
-            if (string.IsNullOrEmpty(searchText))
+            if (string.IsNullOrWhiteSpace(searchText))
             {
                 return;
             }

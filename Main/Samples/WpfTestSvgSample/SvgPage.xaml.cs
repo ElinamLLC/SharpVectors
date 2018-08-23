@@ -86,12 +86,12 @@ namespace WpfTestSvgSample
 
         public void LoadDocument(string documentFileName)
         {   
-            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
+            if (textEditor == null || string.IsNullOrWhiteSpace(documentFileName))
             {
                 return;
             }
 
-            if (!string.IsNullOrEmpty(_currentFileName) && File.Exists(_currentFileName))
+            if (!string.IsNullOrWhiteSpace(_currentFileName) && File.Exists(_currentFileName))
             {
                 // Prevent reloading the same file, just in case we are editing...
                 if (string.Equals(documentFileName, _currentFileName, StringComparison.OrdinalIgnoreCase))
@@ -226,7 +226,7 @@ namespace WpfTestSvgSample
         {
             string searchText = searchTextBox.Text;
 
-            if (string.IsNullOrEmpty(searchText))
+            if (string.IsNullOrWhiteSpace(searchText))
             {
                 return;
             }

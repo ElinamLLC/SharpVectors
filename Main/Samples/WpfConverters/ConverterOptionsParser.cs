@@ -168,7 +168,7 @@ namespace Mono.Options
 
 		private static IEnumerable<string> CreateWrappedLinesIterator (string self, IEnumerable<int> widths)
 		{
-			if (string.IsNullOrEmpty (self)) {
+			if (string.IsNullOrWhiteSpace (self)) {
 				yield return string.Empty;
 				yield break;
 			}
@@ -621,7 +621,7 @@ namespace Mono.Options
 
 		public override bool GetArguments (string value, out IEnumerable<string> replacement)
 		{
-			if (string.IsNullOrEmpty (value) || !value.StartsWith ("@")) {
+			if (string.IsNullOrWhiteSpace (value) || !value.StartsWith ("@")) {
 				replacement = null;
 				return false;
 			}

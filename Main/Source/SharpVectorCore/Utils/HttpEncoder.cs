@@ -117,12 +117,12 @@ namespace SharpVectors
 #endif
 		void HeaderNameValueEncode (string headerName, string headerValue, out string encodedHeaderName, out string encodedHeaderValue)
 		{
-			if (string.IsNullOrEmpty (headerName))
+			if (string.IsNullOrWhiteSpace (headerName))
 				encodedHeaderName = headerName;
 			else
 				encodedHeaderName = EncodeHeaderString (headerName);
 
-			if (string.IsNullOrEmpty (headerValue))
+			if (string.IsNullOrWhiteSpace (headerValue))
 				encodedHeaderValue = headerValue;
 			else
 				encodedHeaderValue = EncodeHeaderString (headerValue);
@@ -160,7 +160,7 @@ namespace SharpVectors
 			if (output == null)
 				throw new ArgumentNullException ("output");
 
-			if (string.IsNullOrEmpty (value))
+			if (string.IsNullOrWhiteSpace (value))
 				return;
 
 			output.Write (HtmlAttributeEncode (value));
@@ -214,7 +214,7 @@ namespace SharpVectors
 #endif
 		string UrlPathEncode (string value)
 		{
-			if (string.IsNullOrEmpty (value))
+			if (string.IsNullOrWhiteSpace (value))
 				return value;
 
 			MemoryStream result = new MemoryStream ();
@@ -321,7 +321,7 @@ namespace SharpVectors
 		internal static string HtmlAttributeEncode (string s) 
 		{
 #if NET_4_0
-			if (string.IsNullOrEmpty (s))
+			if (string.IsNullOrWhiteSpace (s))
 				return String.Empty;
 #else
 			if (s == null) 

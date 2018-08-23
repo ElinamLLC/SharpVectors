@@ -44,7 +44,7 @@ namespace WpfW3cSvgTestSuite
         {
             this.UnloadDocument();
 
-            if (string.IsNullOrEmpty(documentFilePath))
+            if (string.IsNullOrWhiteSpace(documentFilePath))
             {
                 return false;
             }

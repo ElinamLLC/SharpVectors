@@ -160,7 +160,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             string localName = element.LocalName;
-            if (string.IsNullOrEmpty(localName))
+            if (string.IsNullOrWhiteSpace(localName))
             {
                 return new WpfRendering((SvgElement)element);
             }
@@ -1020,14 +1020,14 @@ namespace SharpVectors.Renderers.Wpf
             PathGeometry geometry = new PathGeometry();
 
             string pathScript = element.PathScript;
-            if (string.IsNullOrEmpty(pathScript))
+            if (string.IsNullOrWhiteSpace(pathScript))
             {
                 return geometry;
             }
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!string.IsNullOrEmpty(clipRule) &&
+            if (!string.IsNullOrWhiteSpace(clipRule) &&
                 string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
@@ -1054,7 +1054,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!string.IsNullOrEmpty(clipRule) &&
+            if (!string.IsNullOrWhiteSpace(clipRule) &&
                 string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
@@ -1217,7 +1217,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!string.IsNullOrEmpty(clipRule) &&
+            if (!string.IsNullOrWhiteSpace(clipRule) &&
                 string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;
@@ -1267,7 +1267,7 @@ namespace SharpVectors.Renderers.Wpf
 
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!string.IsNullOrEmpty(clipRule) &&
+            if (!string.IsNullOrWhiteSpace(clipRule) &&
                 string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRule = clipRule;

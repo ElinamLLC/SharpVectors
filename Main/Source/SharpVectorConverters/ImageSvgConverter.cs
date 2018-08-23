@@ -306,12 +306,12 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (string.IsNullOrEmpty(svgFileName) || !File.Exists(svgFileName))
+            if (string.IsNullOrWhiteSpace(svgFileName) || !File.Exists(svgFileName))
             {
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrWhiteSpace(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -367,7 +367,7 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (!string.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrWhiteSpace(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -423,7 +423,7 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (!string.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrWhiteSpace(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -479,7 +479,7 @@ namespace SharpVectors.Converters
             _xamlFile = null;
             _zamlFile = null;
 
-            if (!string.IsNullOrEmpty(imageFileName))
+            if (!string.IsNullOrWhiteSpace(imageFileName))
             {
                 string workingDir = Path.GetDirectoryName(imageFileName);
                 if (!Directory.Exists(workingDir))
@@ -626,7 +626,7 @@ namespace SharpVectors.Converters
         {
             string outputExt = this.GetImageFileExtention();
             string outputFileName = null;
-            if (string.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrWhiteSpace(imageFileName))
             {
                 string fileNameWithoutExt = 
                     Path.GetFileNameWithoutExtension(fileName);
@@ -638,7 +638,7 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (string.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrWhiteSpace(fileExt))
                 {
                     outputFileName = imageFileName + outputExt;
                 }
@@ -725,14 +725,14 @@ namespace SharpVectors.Converters
                         break;
                 }
 
-                if (!string.IsNullOrEmpty(fileExtensions) &&
+                if (!string.IsNullOrWhiteSpace(fileExtensions) &&
                     fileExtensions.IndexOf(fileExtension,
                     StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     bitampEncoder = _bitampEncoder;
                 }    
-                else if (!string.IsNullOrEmpty(mimeTypes) &&
-                    !string.IsNullOrEmpty(mimeType))
+                else if (!string.IsNullOrWhiteSpace(mimeTypes) &&
+                    !string.IsNullOrWhiteSpace(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)
@@ -816,7 +816,7 @@ namespace SharpVectors.Converters
             _writerErrorOccurred = false;
 
             string xamlFileName = null;
-            if (string.IsNullOrEmpty(imageFileName))
+            if (string.IsNullOrWhiteSpace(imageFileName))
             {
                 string fileNameWithoutExt =
                     Path.GetFileNameWithoutExtension(fileName);
@@ -828,7 +828,7 @@ namespace SharpVectors.Converters
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
-                if (string.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrWhiteSpace(fileExt))
                 {
                     xamlFileName = imageFileName + ".xaml";
                 }

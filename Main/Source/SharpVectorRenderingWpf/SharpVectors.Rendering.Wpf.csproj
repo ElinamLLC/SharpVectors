@@ -121,6 +121,7 @@
     <Compile Include="Wpf\WpfFontFamilyInfo.cs" />
     <Compile Include="Wpf\WpfFontFamilyVisitor.cs" />
     <Compile Include="Wpf\WpfGroupRendering.cs" />
+    <Compile Include="Wpf\WpfIDVisitor.cs" />
     <Compile Include="Wpf\WpfLinkVisitor.cs" />
     <Compile Include="Wpf\WpfSvgPaint.cs" />
     <Compile Include="Wpf\WpfSvgColor.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Wpf\WpfSwitchRendering.cs" />
     <Compile Include="Wpf\WpfTextRendering.cs" />
     <Compile Include="Wpf\WpfUseRendering.cs" />
+    <Compile Include="Wpf\WpfVisitor.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

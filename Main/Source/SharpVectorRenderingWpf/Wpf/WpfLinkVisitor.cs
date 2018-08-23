@@ -5,7 +5,7 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public abstract class WpfLinkVisitor : DependencyObject
+    public abstract class WpfLinkVisitor : WpfVisitor
     {
         protected WpfLinkVisitor()
         {   

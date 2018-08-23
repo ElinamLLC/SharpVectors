@@ -20,7 +20,7 @@ namespace SharpVectors.Converters
         public override WpfFontFamilyInfo Visit(string fontName, WpfFontFamilyInfo familyInfo, 
             WpfDrawingContext context)
         {
-            if (string.IsNullOrEmpty(fontName))
+            if (string.IsNullOrWhiteSpace(fontName))
             {
                 return null;
             }

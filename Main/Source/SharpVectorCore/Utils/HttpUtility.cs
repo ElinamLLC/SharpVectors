@@ -469,7 +469,7 @@ namespace SharpVectors
 #endif
 			}
 				
-			if (!string.IsNullOrEmpty (s)) {
+			if (!string.IsNullOrWhiteSpace (s)) {
 #if NET_4_0
 				HttpEncoder.Current.HtmlDecode (s, output);
 #else
@@ -508,7 +508,7 @@ namespace SharpVectors
 #endif
 			}
 				
-			if (!string.IsNullOrEmpty (s)) {
+			if (!string.IsNullOrWhiteSpace (s)) {
 #if NET_4_0
 				HttpEncoder.Current.HtmlEncode (s, output);
 #else
@@ -536,7 +536,7 @@ namespace SharpVectors
 
 		public static string JavaScriptStringEncode (string value, bool addDoubleQuotes)
 		{
-			if (string.IsNullOrEmpty (value))
+			if (string.IsNullOrWhiteSpace (value))
 				return addDoubleQuotes ? "\"\"" : String.Empty;
 
 			int len = value.Length;

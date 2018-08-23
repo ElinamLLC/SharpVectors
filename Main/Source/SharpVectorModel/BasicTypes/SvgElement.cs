@@ -173,7 +173,7 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 string s = GetAttribute("xml:space");
-                if (string.IsNullOrEmpty(s))
+                if (string.IsNullOrWhiteSpace(s))
                 {
                     SvgElement par = this.ParentNode as SvgElement;
                     if (par != null)
@@ -199,7 +199,7 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 string s = this.GetAttribute("xml:lang");
-                if (string.IsNullOrEmpty(s))
+                if (string.IsNullOrWhiteSpace(s))
                 {
                     SvgElement par = this.ParentNode as SvgElement;
                     if (par != null)

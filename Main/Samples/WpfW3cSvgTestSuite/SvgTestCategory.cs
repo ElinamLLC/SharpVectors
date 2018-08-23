@@ -204,7 +204,7 @@ namespace WpfW3cSvgTestSuite
 
             // <category label="" total="0" unknowns="0" failures="0" successes="0" partials="0"/>
             string label = reader.GetAttribute("label");
-            if (!string.IsNullOrEmpty(label))
+            if (!string.IsNullOrWhiteSpace(label))
             {
                 _label = label;
 

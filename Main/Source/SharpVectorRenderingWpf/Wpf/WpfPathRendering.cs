@@ -108,7 +108,7 @@ namespace SharpVectors.Renderers.Wpf
                     GeometryDrawing drawing = new GeometryDrawing(brush, pen, geometry);
 
                     string elementId = this.GetElementName();
-                    if (!string.IsNullOrEmpty(elementId) && !context.IsRegisteredId(elementId))
+                    if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
                     {
                         drawing.SetValue(FrameworkElement.NameProperty, elementId);
 

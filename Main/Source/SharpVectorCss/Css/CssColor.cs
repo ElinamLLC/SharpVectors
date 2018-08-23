@@ -74,8 +74,8 @@ namespace SharpVectors.Dom.Css
 						string green = parts[1].Trim();
 						string blue  = parts[2].Trim();
 
-                        if (string.IsNullOrEmpty(red) || string.IsNullOrEmpty(green) ||
-                            string.IsNullOrEmpty(blue))
+                        if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
+                            string.IsNullOrWhiteSpace(blue))
                         {
                             SetPrimitiveValues(0, 0, 0);
                         }

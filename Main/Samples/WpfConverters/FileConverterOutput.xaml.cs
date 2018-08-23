@@ -192,7 +192,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Converting: " + _sourceFile);
 
                 Debug.Assert(_sourceFile != null && _sourceFile.Length != 0);
-                if (string.IsNullOrEmpty(_outputDir))
+                if (string.IsNullOrWhiteSpace(_outputDir))
                 {
                     _outputDir = Path.GetDirectoryName(_sourceFile);
                 }
@@ -249,16 +249,16 @@ namespace SharpVectors.Converters
                     if (string.Equals(selectItem.Name, "xamlTabItem",
                         StringComparison.OrdinalIgnoreCase))
                     {
-                        if (!string.IsNullOrEmpty(_xamlFile) && File.Exists(_xamlFile))
+                        if (!string.IsNullOrWhiteSpace(_xamlFile) && File.Exists(_xamlFile))
                         {
-                            if (string.IsNullOrEmpty(_documentFile))
+                            if (string.IsNullOrWhiteSpace(_documentFile))
                             {
                                 this.LoadDocument(_xamlFile);
                             }
                         }
-                        else if (!string.IsNullOrEmpty(_zamlFile) && File.Exists(_zamlFile))
+                        else if (!string.IsNullOrWhiteSpace(_zamlFile) && File.Exists(_zamlFile))
                         {
-                            if (string.IsNullOrEmpty(_documentFile))
+                            if (string.IsNullOrWhiteSpace(_documentFile))
                             {
                                 this.LoadDocument(_zamlFile);
                             }
@@ -267,7 +267,7 @@ namespace SharpVectors.Converters
                     else if (string.Equals(selectItem.Name, "imageTabItem",
                         StringComparison.OrdinalIgnoreCase))
                     {
-                        if (!string.IsNullOrEmpty(_imageFile) && File.Exists(_imageFile))
+                        if (!string.IsNullOrWhiteSpace(_imageFile) && File.Exists(_imageFile))
                         {
                             if (_bitmapImage == null)
                             {
@@ -279,7 +279,7 @@ namespace SharpVectors.Converters
                     }
                     break;
                 case 3:
-                    if (!string.IsNullOrEmpty(_imageFile) && File.Exists(_imageFile))
+                    if (!string.IsNullOrWhiteSpace(_imageFile) && File.Exists(_imageFile))
                     {
                         if (_bitmapImage == null)
                         {
@@ -360,7 +360,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {   
                 string resultText = e.Result.ToString();
-                if (!string.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrWhiteSpace(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
@@ -674,7 +674,7 @@ namespace SharpVectors.Converters
 
         private void LoadDocument(string documentFileName)
         {
-            if (textEditor == null || string.IsNullOrEmpty(documentFileName))
+            if (textEditor == null || string.IsNullOrWhiteSpace(documentFileName))
             {
                 return;
             }

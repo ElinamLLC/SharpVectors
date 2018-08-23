@@ -312,7 +312,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 SvgUriReference svgUri = element.UriReference;
                 string absoluteUri = svgUri.AbsoluteUri;
-                if (string.IsNullOrEmpty(absoluteUri))
+                if (string.IsNullOrWhiteSpace(absoluteUri))
                 {
                     return null; // most likely, the image does not exist...
                 }

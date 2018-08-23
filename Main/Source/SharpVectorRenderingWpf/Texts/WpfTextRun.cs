@@ -43,7 +43,7 @@ namespace SharpVectors.Renderers.Texts
         {
             get
             {
-                return string.IsNullOrEmpty(_text);
+                return string.IsNullOrWhiteSpace(_text);
             }
         }
 
@@ -117,7 +117,7 @@ namespace SharpVectors.Renderers.Texts
         public static IList<WpfTextRun> BreakWords(string text, int vertOrientation,
             int horzOrientation)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(text))
             {
                 return null;
             }

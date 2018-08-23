@@ -51,7 +51,7 @@ namespace SharpVectors.Dom.Svg
 				if (viewBox == null)
 				{
 					string attr = ownerElement.GetAttribute("viewBox").Trim();
-					if (string.IsNullOrEmpty(attr))
+					if (string.IsNullOrWhiteSpace(attr))
 					{
 						double x      = 0;
 						double y      = 0;

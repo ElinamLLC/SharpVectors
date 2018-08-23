@@ -116,7 +116,7 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             string localName = element.LocalName;
-            if (string.IsNullOrEmpty(localName))
+            if (string.IsNullOrWhiteSpace(localName))
             {
                 return new GdiRendering((SvgElement)element);
             }

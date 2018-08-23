@@ -63,7 +63,7 @@ namespace SharpVectors.Dom.Svg
         {
             Clear();
 
-            if (!string.IsNullOrEmpty(listString))
+            if (!string.IsNullOrWhiteSpace(listString))
             {
                 Match match = _regExtract.Match(listString);
                 while (match.Success)

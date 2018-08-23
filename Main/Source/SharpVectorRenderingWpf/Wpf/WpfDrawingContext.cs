@@ -24,6 +24,7 @@ namespace SharpVectors.Renderers.Wpf
         private WpfLinkVisitor          _linkVisitor;
         private WpfFontFamilyVisitor    _fontFamilyVisitor;
         private WpfEmbeddedImageVisitor _imageVisitor;
+        private WpfIDVisitor _idVisitor;
 
         private Stack<DrawingGroup> _drawStack;
 
@@ -177,6 +178,18 @@ namespace SharpVectors.Renderers.Wpf
             set
             {
                 _fontFamilyVisitor = value;
+            }
+        }
+
+        public WpfIDVisitor IDVisitor
+        {
+            get
+            {
+                return _idVisitor;
+            }
+            set
+            {
+                _idVisitor = value;
             }
         }
 
@@ -402,7 +415,7 @@ namespace SharpVectors.Renderers.Wpf
                 _linkDrawing = new DrawingGroup();
 
                 string groupId = _linkVisitor.AggregatedLayerName;
-                if (!string.IsNullOrEmpty(groupId))
+                if (!string.IsNullOrWhiteSpace(groupId))
                 {
                     _linkDrawing.SetValue(FrameworkElement.NameProperty, groupId);
                 }  
@@ -432,7 +445,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public bool IsRegisteredId(string elementId)
         {
-            if (string.IsNullOrEmpty(elementId))
+            if (string.IsNullOrWhiteSpace(elementId))
             {
                 return false;
             }
@@ -447,7 +460,7 @@ namespace SharpVectors.Renderers.Wpf
         
         public void RegisterId(string elementId)
         {
-            if (string.IsNullOrEmpty(elementId))
+            if (string.IsNullOrWhiteSpace(elementId))
             {
                 return;
             }
@@ -460,7 +473,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public void UnRegisterId(string elementId)
         {
-            if (string.IsNullOrEmpty(elementId))
+            if (string.IsNullOrWhiteSpace(elementId))
             {
                 return;
             }

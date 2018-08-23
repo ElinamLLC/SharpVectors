@@ -166,7 +166,7 @@ namespace SharpVectors.Converters
                 {
                     return false;
                 }
-                if (!string.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrWhiteSpace(outputDir))
                 {
                     _outputInfoDir = new DirectoryInfo(outputDir);
                     if (!_outputInfoDir.Exists)
@@ -254,7 +254,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                bool isSuccessful = !string.IsNullOrEmpty(resultText) &&
+                bool isSuccessful = !string.IsNullOrWhiteSpace(resultText) &&
                     string.Equals(resultText, "Successful", StringComparison.OrdinalIgnoreCase);
 
                 if (_errorFiles == null || _errorFiles.Count == 0)
@@ -266,13 +266,13 @@ namespace SharpVectors.Converters
                     builder.AppendLine("Total number of files successful converted: " + _convertedCount);
                     builder.AppendLine("Total number of files failed: " + _errorFiles.Count);
                 }
-                if (!string.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrWhiteSpace(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }
 
                 string outputDir = this.OutputDir;
-                if (!string.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrWhiteSpace(outputDir))
                 {
                     builder.AppendLine("Output Directory: " + outputDir);
                 }

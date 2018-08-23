@@ -68,9 +68,9 @@ namespace SharpVectors.Converters
                     return true;
                 }
 
-                return (string.IsNullOrEmpty(_sourceFile) &&
+                return (string.IsNullOrWhiteSpace(_sourceFile) &&
                     (_sourceFiles == null || _sourceFiles.Count == 0) &&
-                    string.IsNullOrEmpty(_sourceDir));
+                    string.IsNullOrWhiteSpace(_sourceDir));
             }
         }
 
@@ -328,7 +328,7 @@ namespace SharpVectors.Converters
                         {
                             // It is a file, but must be SVG to be useful...
                             string fileExt = Path.GetExtension(sourcePath);
-                            if (!string.IsNullOrEmpty(fileExt) &&
+                            if (!string.IsNullOrWhiteSpace(fileExt) &&
                                 (fileExt.Equals(".svg", StringComparison.OrdinalIgnoreCase) ||
                                 fileExt.Equals(".svgz", StringComparison.OrdinalIgnoreCase)))
                             {
@@ -397,21 +397,21 @@ namespace SharpVectors.Converters
         {
             options.Add("s|source=", "Specifies the input source files or directory.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
                     sourceSet[value] = true;
                 }
             });
             options.Add("o|output=", "Specifies the output directory.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
                     this.OutputDir = value;
                 }
             });
             options.Add("r|recursive", "Specifies whether a directory conversion is recursive.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -420,7 +420,7 @@ namespace SharpVectors.Converters
             });
             options.Add("t|runtime", "Specifies whether to include runtime library support.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -429,7 +429,7 @@ namespace SharpVectors.Converters
             });
             options.Add("e|onError", "Specifies whether to continue conversion when an error occurs in a file.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -438,7 +438,7 @@ namespace SharpVectors.Converters
             });
             options.Add("g|textGeometry", "Specifies whether to render texts as path geometry.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -447,7 +447,7 @@ namespace SharpVectors.Converters
             });
             options.Add("c|customXamlWriter", "Specifies whether to use the customized XAML Writer.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -456,7 +456,7 @@ namespace SharpVectors.Converters
             });
             options.Add("x|xaml", "Specifies whether to save in uncompressed XAML format.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -465,7 +465,7 @@ namespace SharpVectors.Converters
             });
             options.Add("z|zaml", "Specifies whether to save in compressed XAML format.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -474,14 +474,14 @@ namespace SharpVectors.Converters
             });
             options.Add("i|image=", "Specifies whether to save image and image formats: png, jpeg, tiff, gif, bmp, wdp", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
                     this.Image = value;
                 }
             });
             options.Add("u|ui=", "Specifies the user-interface option: none, console or window.", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
                     switch (value.ToLower())
                     {
@@ -504,11 +504,11 @@ namespace SharpVectors.Converters
             });
             options.Add("h|?|help", "Specifies whether to display usage and command-line help.", delegate(string value)
             {
-                _showHelp = !string.IsNullOrEmpty(value);
+                _showHelp = !string.IsNullOrWhiteSpace(value);
             });
             options.Add("b|beep", "Specifies whether to beep on completion (console only).", delegate(string value)
             {
-                if (!string.IsNullOrEmpty(value) &&
+                if (!string.IsNullOrWhiteSpace(value) &&
                     (string.Equals(value, "+", StringComparison.Ordinal)
                         || string.Equals(value, "-", StringComparison.Ordinal)))
                 {
@@ -539,7 +539,7 @@ namespace SharpVectors.Converters
 
         private static bool IsValidImage(string image)
         {
-            if (string.IsNullOrEmpty(image))
+            if (string.IsNullOrWhiteSpace(image))
             {
                 return false;
             }

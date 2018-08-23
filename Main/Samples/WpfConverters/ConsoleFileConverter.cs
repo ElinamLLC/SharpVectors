@@ -84,7 +84,7 @@ namespace SharpVectors.Converters
             Debug.Assert(writer != null);
 
             Debug.Assert(_sourceFile != null && _sourceFile.Length != 0);
-            if (string.IsNullOrEmpty(_sourceFile) || !File.Exists(_sourceFile))
+            if (string.IsNullOrWhiteSpace(_sourceFile) || !File.Exists(_sourceFile))
             {
                 return false;
             }
@@ -98,7 +98,7 @@ namespace SharpVectors.Converters
                 this.AppendLine("Input File: " + _sourceFile);
 
                 string _outputDir = this.OutputDir;
-                if (string.IsNullOrEmpty(_outputDir))
+                if (string.IsNullOrWhiteSpace(_outputDir))
                 {
                     _outputDir = Path.GetDirectoryName(_sourceFile);
                 }
@@ -178,7 +178,7 @@ namespace SharpVectors.Converters
             else if (e.Result != null)
             {
                 string resultText = e.Result.ToString();
-                if (!string.IsNullOrEmpty(resultText))
+                if (!string.IsNullOrWhiteSpace(resultText))
                 {
                     builder.AppendLine("Result: " + resultText);
                 }

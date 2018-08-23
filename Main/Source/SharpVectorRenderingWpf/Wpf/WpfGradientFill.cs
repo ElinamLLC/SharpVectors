@@ -184,7 +184,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             string colorInterpolation = res.GetPropertyValue("color-interpolation");
-            if (!string.IsNullOrEmpty(colorInterpolation))
+            if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
                 if (colorInterpolation == "linearRGB")
                 {
@@ -249,7 +249,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             string colorInterpolation = res.GetPropertyValue("color-interpolation");
-            if (!string.IsNullOrEmpty(colorInterpolation))
+            if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
                 if (colorInterpolation == "linearRGB")
                 {
@@ -287,7 +287,7 @@ namespace SharpVectors.Renderers.Wpf
                 string prop = stop.GetAttribute("stop-color");
                 string style = stop.GetAttribute("style");
                 Color color = Colors.Transparent; // no auto-inherited...
-                if (!string.IsNullOrEmpty(prop) || !string.IsNullOrEmpty(style))
+                if (!string.IsNullOrWhiteSpace(prop) || !string.IsNullOrWhiteSpace(style))
                 {
                     WpfSvgColor svgColor = new WpfSvgColor(stop, "stop-color");
                     color = svgColor.Color;

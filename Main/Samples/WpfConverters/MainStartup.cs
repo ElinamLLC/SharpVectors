@@ -53,7 +53,7 @@ namespace SharpVectors.Converters
                     else
                     {
                         string sourceFile = commandLines.SourceFile;
-                        if (!string.IsNullOrEmpty(sourceFile) && 
+                        if (!string.IsNullOrWhiteSpace(sourceFile) && 
                             File.Exists(sourceFile))
                         {
                             sourceCount = 1;

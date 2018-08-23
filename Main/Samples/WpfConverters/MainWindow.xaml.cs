@@ -73,14 +73,14 @@ namespace SharpVectors.Converters
                 if (!_displayHelp)
                 {
                     string sourceFile = commandLines.SourceFile;
-                    if (!string.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
+                    if (!string.IsNullOrWhiteSpace(sourceFile) && File.Exists(sourceFile))
                     {
                         _startTabIndex = 1;
                     }
                     else
                     {
                         string sourceDir = commandLines.SourceDir;
-                        if (!string.IsNullOrEmpty(sourceDir) && Directory.Exists(sourceDir))
+                        if (!string.IsNullOrWhiteSpace(sourceDir) && Directory.Exists(sourceDir))
                         {
                             _startTabIndex = 3;
                         }

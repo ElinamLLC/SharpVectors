@@ -273,7 +273,7 @@ namespace SharpVectors.Converters
             dlg.ShowNewFolderButton = true;
             dlg.Description = "Select the output directory for the converted files.";
             string sourceFile = _listItems.LastDirectory;
-            if (!string.IsNullOrEmpty(sourceFile) &&
+            if (!string.IsNullOrWhiteSpace(sourceFile) &&
                 File.Exists(sourceFile))
             {
                 dlg.SelectedPath = Path.GetDirectoryName(sourceFile);
@@ -350,12 +350,12 @@ namespace SharpVectors.Converters
             {
                 string outputDir = txtOutputDir.Text.Trim();
                 bool isReadOnlyOutputDir = _listItems.HasReadOnlyMedia;
-                if (!string.IsNullOrEmpty(outputDir))
+                if (!string.IsNullOrWhiteSpace(outputDir))
                 {
                     try
                     {
                         string rootDir = Path.GetPathRoot(outputDir);
-                        if (!string.IsNullOrEmpty(rootDir))
+                        if (!string.IsNullOrWhiteSpace(rootDir))
                         {
                             DriveInfo drive = new DriveInfo(rootDir);
                             if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -388,7 +388,7 @@ namespace SharpVectors.Converters
                         try
                         {
                             string rootDir = Path.GetPathRoot(outputDir);
-                            if (!string.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrWhiteSpace(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -401,7 +401,7 @@ namespace SharpVectors.Converters
                         catch
                         {
                         }
-                        if (isReadOnlySource && string.IsNullOrEmpty(outputDir))
+                        if (isReadOnlySource && string.IsNullOrWhiteSpace(outputDir))
                         {
                             this.UpdateStatus("Required: Output Directory",
                                 "For the read-only source directory, an output directory is required and must be specified.", true);
@@ -426,7 +426,7 @@ namespace SharpVectors.Converters
 
         private void UpdateStatus(string title, string text, bool isError)
         {
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(text))
             {
                 return;
             }
@@ -556,7 +556,7 @@ namespace SharpVectors.Converters
                         for (int i = 0; i < _listItems.Count; i++)
                         {
                             string rootDir = Path.GetPathRoot(_listItems[i]);
-                            if (!string.IsNullOrEmpty(rootDir))
+                            if (!string.IsNullOrWhiteSpace(rootDir))
                             {
                                 DriveInfo drive = new DriveInfo(rootDir);
                                 if (!drive.IsReady || drive.DriveType == DriveType.CDRom
@@ -582,12 +582,12 @@ namespace SharpVectors.Converters
 
             public void Add(string filePath)
             {
-                if (string.IsNullOrEmpty(filePath))
+                if (string.IsNullOrWhiteSpace(filePath))
                 {
                     return;
                 }
                 string fileExt = Path.GetExtension(filePath);
-                if (string.IsNullOrEmpty(fileExt))
+                if (string.IsNullOrWhiteSpace(fileExt))
                 {
                     return;
                 }

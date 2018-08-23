@@ -471,7 +471,7 @@ namespace SharpVectors.Renderers.Texts
         protected FontWeight GetTextFontWeight(SvgTextContentElement element)
         {
             string fontWeight = element.GetPropertyValue("font-weight");
-            if (string.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrWhiteSpace(fontWeight))
             {
                 return FontWeights.Normal;
             }
@@ -510,7 +510,7 @@ namespace SharpVectors.Renderers.Texts
                 if (parentElement != null)
                 {
                     fontWeight = parentElement.GetPropertyValue("font-weight");
-                    if (!string.IsNullOrEmpty(fontWeight))
+                    if (!string.IsNullOrWhiteSpace(fontWeight))
                     {
                         return this.GetBolderFontWeight(fontWeight);
                     }
@@ -523,7 +523,7 @@ namespace SharpVectors.Renderers.Texts
                 if (parentElement != null)
                 {
                     fontWeight = parentElement.GetPropertyValue("font-weight");
-                    if (!string.IsNullOrEmpty(fontWeight))
+                    if (!string.IsNullOrWhiteSpace(fontWeight))
                     {
                         return this.GetLighterFontWeight(fontWeight);
                     }
@@ -536,7 +536,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected FontWeight GetBolderFontWeight(string fontWeight)
         {
-            if (string.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrWhiteSpace(fontWeight))
             {
                 return FontWeights.Normal;
             }
@@ -574,7 +574,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected FontWeight GetLighterFontWeight(string fontWeight)
         {
-            if (string.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrWhiteSpace(fontWeight))
             {
                 return FontWeights.Normal;
             }
@@ -618,7 +618,7 @@ namespace SharpVectors.Renderers.Texts
         protected FontStyle GetTextFontStyle(SvgTextContentElement element)
         {
             string fontStyle = element.GetPropertyValue("font-style");
-            if (string.IsNullOrEmpty(fontStyle))
+            if (string.IsNullOrWhiteSpace(fontStyle))
             {
                 return FontStyles.Normal;
             }
@@ -642,7 +642,7 @@ namespace SharpVectors.Renderers.Texts
         protected FontStretch GetTextFontStretch(SvgTextContentElement element)
         {
             string fontStretch = element.GetPropertyValue("font-stretch");
-            if (string.IsNullOrEmpty(fontStretch))
+            if (string.IsNullOrWhiteSpace(fontStretch))
             {
                 return FontStretches.Normal;
             }
