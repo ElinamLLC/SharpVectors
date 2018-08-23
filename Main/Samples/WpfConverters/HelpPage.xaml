@@ -4,6 +4,6 @@
     Title="Help Page" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="Verdana" FontSize="10">
     <DockPanel LastChildFill="True"> 
         <!--<FlowDocumentScrollViewer Name="helpViewer" IsToolBarVisible="True" HorizontalScrollBarVisibility="Visible"/>-->
-        <FlowDocumentReader Name="helpViewer" Zoom="1" ViewingMode="Scroll" IsTwoPageViewEnabled="False" IsPageViewEnabled="False"/>
+        <FlowDocumentReader Name="helpViewer" Zoom="1" ViewingMode="Scroll" IsTwoPageViewEnabled="False"/>
     </DockPanel>
 </Page>

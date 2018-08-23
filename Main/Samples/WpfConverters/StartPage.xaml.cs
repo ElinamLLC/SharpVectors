@@ -27,7 +27,7 @@ namespace SharpVectors.Converters
             this.Width  = Double.NaN;
             this.Height = Double.NaN;
 
-            this.Loaded += new RoutedEventHandler(OnStartPageLoaded);
+            this.Loaded += OnStartPageLoaded;
         }
 
         private void OnStartPageLoaded(object sender, RoutedEventArgs e)

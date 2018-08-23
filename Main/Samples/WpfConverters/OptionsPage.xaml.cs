@@ -22,7 +22,7 @@ namespace SharpVectors.Converters
             this.Width  = Double.NaN;
             this.Height = Double.NaN;
 
-            this.Loaded += new RoutedEventHandler(OnOptionsPageLoaded);
+            this.Loaded += OnOptionsPageLoaded;
         }
 
         public ConverterOptions Options

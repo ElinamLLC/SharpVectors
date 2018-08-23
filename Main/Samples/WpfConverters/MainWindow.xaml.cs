@@ -123,10 +123,10 @@ namespace SharpVectors.Converters
 
             optionsFrame.Content = _optionsPage;
 
-            this.Loaded   += new RoutedEventHandler(OnWindowLoaded);
-            this.Unloaded += new RoutedEventHandler(OnWindowUnloaded);
+            this.Loaded   += OnWindowLoaded;
+            this.Unloaded += OnWindowUnloaded;
 
-            this.Closing += new CancelEventHandler(OnWindowClosing);
+            this.Closing  += OnWindowClosing;
         }
 
         #endregion

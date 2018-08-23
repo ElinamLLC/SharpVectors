@@ -52,7 +52,7 @@ namespace SharpVectors.Converters
             this.Width  = Double.NaN;
             this.Height = Double.NaN;
 
-            this.Loaded += new RoutedEventHandler(OnPageLoaded);
+            this.Loaded += OnPageLoaded;
 
             if (_titleBkDefault == null &&
                 (statusTitle != null && statusTitle.IsInitialized))
@@ -74,10 +74,9 @@ namespace SharpVectors.Converters
             set
             {
                 _options = value;
-
                 if (_options != null)
                 {
-                    _options.PropertyChanged += new PropertyChangedEventHandler(OnOptionsPropertyChanged);
+                    _options.PropertyChanged += OnOptionsPropertyChanged;
                 }
             }
         }

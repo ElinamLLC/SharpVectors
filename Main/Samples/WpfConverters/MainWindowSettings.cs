@@ -3,10 +3,8 @@
 //
 
 using System;
-using System.Text;
 using System.Configuration;
 using System.ComponentModel;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using System.Windows;

@@ -23,7 +23,7 @@
         <Paragraph>
             <LineBreak/>
             The <Bold>SharpVectors</Bold>, SVG-WPF converter, is a graphic 
-            converter program written in .NET 3.5 for converting SVG files 
+            converter program written in .NET 4.0 for converting SVG files 
             to the corresponding WPF formats.
         </Paragraph>
         
