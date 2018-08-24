@@ -18,7 +18,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Methods
 
-        public abstract Brush GetBrush(Rect elementBounds, WpfDrawingContext context);
+        public abstract Brush GetBrush(Rect elementBounds, WpfDrawingContext context, Transform viewTransform);
 
         public static WpfFill CreateFill(SvgDocument document, string absoluteUri)
         {

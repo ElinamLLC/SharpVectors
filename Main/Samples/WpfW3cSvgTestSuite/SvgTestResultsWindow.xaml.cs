@@ -328,7 +328,7 @@ namespace WpfW3cSvgTestSuite
 
                     if (i == 0)
                     {
-                        resultRow.Cells.Add(CreateCell(total, true, lastBottom));
+                        resultRow.Cells.Add(CreateCell(total, false, lastBottom));
                     }
 
                     bool lastRight = (i == (resultCount - 1));

@@ -76,7 +76,7 @@ namespace SharpVectors.Renderers.Wpf
                 Brush brush = fillPaint.GetBrush(geometry);
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
-                Pen pen = strokePaint.GetPen();
+                Pen pen = strokePaint.GetPen(geometry);
 
                 if (brush != null || pen != null)
                 {
@@ -97,6 +97,21 @@ namespace SharpVectors.Renderers.Wpf
                                 groupTransform.Children.Add(brushTransform);
                                 groupTransform.Children.Add(transform);
                                 brush.Transform = groupTransform;
+                            }
+                        }
+                        if (pen != null && pen.Brush != null)
+                        {
+                            Transform brushTransform = pen.Brush.Transform;
+                            if (brushTransform == null || brushTransform == Transform.Identity)
+                            {
+                                pen.Brush.Transform = transform;
+                            }
+                            else
+                            {
+                                TransformGroup groupTransform = new TransformGroup();
+                                groupTransform.Children.Add(brushTransform);
+                                groupTransform.Children.Add(transform);
+                                pen.Brush.Transform = groupTransform;
                             }
                         }
                     }

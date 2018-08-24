@@ -317,8 +317,7 @@ namespace SharpVectors.Renderers.Wpf
             return WpfFill.CreateFill(_element.OwnerDocument, absoluteUri);
         }
 
-        private Brush GetBrush(Geometry geometry, string propPrefix, 
-            bool setOpacity)
+        private Brush GetBrush(Geometry geometry, string propPrefix, bool setOpacity)
         {
             SvgPaint fill;
             if (PaintType == SvgPaintType.None)
@@ -345,11 +344,11 @@ namespace SharpVectors.Renderers.Wpf
                     Brush brush = null;
                     if (geometry != null)
                     {
-                        brush = _paintFill.GetBrush(geometry.Bounds, _context);
+                        brush = _paintFill.GetBrush(geometry.Bounds, _context, geometry.Transform);
                     }
                     else
                     {
-                        brush = _paintFill.GetBrush(Rect.Empty, _context);
+                        brush = _paintFill.GetBrush(Rect.Empty, _context, null);
                     }
 
                     if (brush != null)

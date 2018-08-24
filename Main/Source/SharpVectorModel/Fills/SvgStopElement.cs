@@ -17,14 +17,35 @@ namespace SharpVectors.Dom.Svg
 			get
 			{
 				string attr = GetAttribute("offset").Trim();
-				if (attr.EndsWith("%"))
+				if (attr.EndsWith("%", StringComparison.OrdinalIgnoreCase))
 				{
 					attr = attr.TrimEnd(new char[1]{'%'});
-				}
-				else
+                    double tmp = SvgNumber.ParseNumber(attr);
+
+                    if (tmp > 100)
+                    {
+                        attr = "100";
+                    }
+                    else if (tmp < 0)
+                    {
+                        attr = "0";
+                    }
+                }
+                else
 				{
 					double tmp = SvgNumber.ParseNumber(attr) * 100;
-					attr = tmp.ToString(SvgNumber.Format);
+                    if (tmp > 100)
+                    {
+                        attr = "100";
+                    }
+                    else if (tmp < 0)
+                    {
+                        attr = "0";
+                    } 
+                    else
+                    {
+					    attr = tmp.ToString(SvgNumber.Format);
+                    }
 				}
 
 				return new SvgAnimatedNumber(attr);

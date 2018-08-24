@@ -114,6 +114,8 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
+            base.BeforeRender(renderer);
+
             _maskUnits        = SvgUnitType.UserSpaceOnUse;
             _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
@@ -128,9 +130,11 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void AfterRender(WpfDrawingRenderer renderer)
         {
-            _clipGeometry    = null;
-            _transformMatrix = null;
-            _maskBrush       = null;
+            base.AfterRender(renderer);
+
+            _clipGeometry     = null;
+            _transformMatrix  = null;
+            _maskBrush        = null;
 
             _maskUnits        = SvgUnitType.UserSpaceOnUse;
             _clipPathUnits    = SvgUnitType.UserSpaceOnUse;

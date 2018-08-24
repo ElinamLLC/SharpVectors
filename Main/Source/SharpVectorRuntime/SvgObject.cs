@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace SharpVectors.Runtime
 {
-    public sealed class SvgObject : DependencyObject
+    public static class SvgObject
     {
         #region Public Fields
 
@@ -23,14 +23,6 @@ namespace SharpVectors.Runtime
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.RegisterAttached("Title", typeof(String), typeof(SvgObject),
             new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
-
-        #endregion
-
-        #region Constructors and Destructor
-
-        public SvgObject()
-        {
-        }
 
         #endregion
 
@@ -66,6 +58,24 @@ namespace SharpVectors.Runtime
             return (string)element.GetValue(TitleProperty);
         }
 
+        public static bool IsValid(double value)
+        {
+            if (double.IsNaN(value) || double.IsInfinity(value))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool IsValid(float value)
+        {
+            if (float.IsNaN(value) || float.IsInfinity(value))
+            {
+                return false;
+            }
+            return true;
+        }
+             
         #endregion
     }
 }

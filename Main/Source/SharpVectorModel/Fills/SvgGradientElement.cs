@@ -34,25 +34,23 @@ namespace SharpVectors.Dom.Svg
 				{
 					return ReferencedElement.GradientUnits;
 				}
-				else
-				{
-					if(gradientUnits == null)
-					{
-						SvgUnitType gradUnit;
-						switch(GetAttribute("gradientUnits"))
-						{
-							case "userSpaceOnUse":
-								gradUnit = SvgUnitType.UserSpaceOnUse;
-								break;
-							default:
-								gradUnit = SvgUnitType.ObjectBoundingBox;
-								break;
-						}
 
-						gradientUnits = new SvgAnimatedEnumeration((ushort)gradUnit);
+				if (gradientUnits == null)
+				{
+					SvgUnitType gradUnit;
+					switch(GetAttribute("gradientUnits"))
+					{
+						case "userSpaceOnUse":
+							gradUnit = SvgUnitType.UserSpaceOnUse;
+							break;
+						default:
+							gradUnit = SvgUnitType.ObjectBoundingBox;
+							break;
 					}
-					return gradientUnits;
+
+					gradientUnits = new SvgAnimatedEnumeration((ushort)gradUnit);
 				}
+				return gradientUnits;
 			}
 		}
 
@@ -64,15 +62,12 @@ namespace SharpVectors.Dom.Svg
 				{
 					return ReferencedElement.GradientTransform;
 				}
-				else
+				if (gradientTransform == null)
 				{
-					if (gradientTransform == null)
-					{
-						gradientTransform = new SvgAnimatedTransformList(GetAttribute("gradientTransform"));
-					}
-
-					return gradientTransform;
+					gradientTransform = new SvgAnimatedTransformList(GetAttribute("gradientTransform"));
 				}
+
+				return gradientTransform;
 			}
 		}
 
@@ -101,7 +96,7 @@ namespace SharpVectors.Dom.Svg
 								spreadMeth = SvgSpreadMethod.Repeat;
 								break;
 							default:
-								spreadMeth = SvgSpreadMethod.None;
+								spreadMeth = SvgSpreadMethod.Pad;
 								break;
 						}
 

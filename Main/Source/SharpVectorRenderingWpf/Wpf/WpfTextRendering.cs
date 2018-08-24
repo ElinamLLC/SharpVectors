@@ -104,7 +104,9 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void BeforeRender(WpfDrawingRenderer renderer)
         {
-            _isTextPath   = false;
+            base.BeforeRender(renderer);
+
+            _isTextPath = false;
             _isGroupAdded = false;
             _textWidth    = 0;
             _isMeasuring  = false;
@@ -224,7 +226,7 @@ namespace SharpVectors.Renderers.Wpf
             if (sBaselineShift.Length > 0)
             {
                 double textFontSize = WpfTextRenderer.GetComputedFontSize(_textElement);
-                if (sBaselineShift.EndsWith("%"))
+                if (sBaselineShift.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100 * textFontSize;
@@ -291,8 +293,7 @@ namespace SharpVectors.Renderers.Wpf
                     }
                     else if (string.Equals(nodeName, "textPath"))
                     {
-                        RenderTextPath(_textElement, (SvgTextPathElement)child, ref ctp,
-                            rotate, placement);
+                        RenderTextPath((SvgTextPathElement)child, ref ctp, rotate, placement);
                     }
                 }
                 else if (nodeType == XmlNodeType.Whitespace)
@@ -365,8 +366,7 @@ namespace SharpVectors.Renderers.Wpf
                             }
                             else if (string.Equals(nodeName, "textPath"))
                             {
-                                RenderTextPath(_textElement, (SvgTextPathElement)child, ref ctp,
-                                    rotate, placement);
+                                RenderTextPath((SvgTextPathElement)child, ref ctp, rotate, placement);
                             }
                         }
                         else if (nodeType == XmlNodeType.Whitespace)
@@ -436,8 +436,7 @@ namespace SharpVectors.Renderers.Wpf
                         }
                         else if (string.Equals(nodeName, "textPath"))
                         {
-                            RenderTextPath(_textElement, (SvgTextPathElement)child, ref ctp,
-                                rotate, placement);
+                            RenderTextPath((SvgTextPathElement)child, ref ctp, rotate, placement);
                             
                             textRendered = false;
                         }
@@ -673,15 +672,15 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Text Path Methods
 
-        private void RenderTextPath(SvgTextElement element, SvgTextPathElement textPath, 
-            ref Point ctp, double rotate, WpfTextPlacement placement)
+        private void RenderTextPath(SvgTextPathElement textPath, ref Point ctp, 
+            double rotate, WpfTextPlacement placement)
         {
             if (_pathRenderer == null)
             {
                 return;
             }
 
-            _pathRenderer.RenderSingleLineText(textPath, ref ctp, String.Empty, rotate, placement);
+            _pathRenderer.RenderSingleLineText(textPath, ref ctp, string.Empty, rotate, placement);
         }
 
         #endregion
@@ -744,7 +743,7 @@ namespace SharpVectors.Renderers.Wpf
             if (sBaselineShift.Length > 0)
             {
                 double textFontSize = WpfTextRenderer.GetComputedFontSize(_textElement);
-                if (sBaselineShift.EndsWith("%"))
+                if (sBaselineShift.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100f * textFontSize;
