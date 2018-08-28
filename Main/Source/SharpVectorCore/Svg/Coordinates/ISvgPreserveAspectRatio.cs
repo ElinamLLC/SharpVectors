@@ -1,10 +1,8 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
-	/// The SvgPreserveAspectRatio interface corresponds to the preserveAspectRatio attribute, which is available for some of Svg's elements. 
+	/// The SvgPreserveAspectRatio interface corresponds to the preserveAspectRatio attribute, 
+    /// which is available for some of Svg's elements. 
 	/// </summary>
 	public interface ISvgPreserveAspectRatio
 	{

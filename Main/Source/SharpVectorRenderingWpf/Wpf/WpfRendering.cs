@@ -273,9 +273,9 @@ namespace SharpVectors.Renderers.Wpf
                 _svgElement is ISvgSymbolElement || _svgElement is ISvgPatternElement)
             {
                 // check overflow property
-                CssValue overflow = _svgElement.GetComputedCssValue("overflow", String.Empty) as CssValue;
+                CssValue overflow = _svgElement.GetComputedCssValue("overflow", string.Empty) as CssValue;
                 // TODO: clip can have "rect(10 10 auto 10)"
-                CssPrimitiveValue clip = _svgElement.GetComputedCssValue("clip", String.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clip = _svgElement.GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
 
                 string sOverflow = null;
 
@@ -352,7 +352,7 @@ namespace SharpVectors.Renderers.Wpf
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment || hint == SvgRenderingHint.Image)
             {
-                CssPrimitiveValue clipPath = _svgElement.GetComputedCssValue("clip-path", String.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
                 if (clipPath != null && clipPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
@@ -434,7 +434,7 @@ namespace SharpVectors.Renderers.Wpf
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
 
             CssPrimitiveValue maskPath = _svgElement.GetComputedCssValue(
-                "mask", String.Empty) as CssPrimitiveValue;
+                "mask", string.Empty) as CssPrimitiveValue;
 
             if (maskPath != null && maskPath.PrimitiveType == CssPrimitiveType.Uri)
             {
@@ -555,7 +555,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             //Graphics graphics = gr.Graphics;
 
-            //string colorRendering = _svgElement.GetComputedStringValue("color-rendering", String.Empty);
+            //string colorRendering = _svgElement.GetComputedStringValue("color-rendering", string.Empty);
             //switch (colorRendering)
             //{
             //    case "optimizeSpeed":
@@ -576,7 +576,7 @@ namespace SharpVectors.Renderers.Wpf
             //    // Unfortunately the text rendering hints are not applied because the
             //    // text path is recorded and painted to the Graphics object as a path
             //    // not as text.
-            //    string textRendering = _svgElement.GetComputedStringValue("text-rendering", String.Empty);
+            //    string textRendering = _svgElement.GetComputedStringValue("text-rendering", string.Empty);
             //    switch (textRendering)
             //    {
             //        case "optimizeSpeed":
@@ -600,7 +600,7 @@ namespace SharpVectors.Renderers.Wpf
             //}
             //else
             //{
-            //    string shapeRendering = _svgElement.GetComputedStringValue("shape-rendering", String.Empty);
+            //    string shapeRendering = _svgElement.GetComputedStringValue("shape-rendering", string.Empty);
             //    switch (shapeRendering)
             //    {
             //        case "optimizeSpeed":
@@ -1301,7 +1301,7 @@ namespace SharpVectors.Renderers.Wpf
             }
             else
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 

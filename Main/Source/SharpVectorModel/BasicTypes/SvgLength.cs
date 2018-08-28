@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Xml;
 using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Css;
@@ -10,26 +8,36 @@ namespace SharpVectors.Dom.Svg
     /// <summary>
     /// Defines the direction of a SvgLength
     /// </summary>
-    public enum SvgLengthDirection { Vertical, Horizontal, Viewport }
+    public enum SvgLengthDirection
+    {
+        Vertical,
+        Horizontal,
+        Viewport
+    }
 
     /// <summary>
     /// Defines the origin type of the SvgLength value
     /// </summary>
-    public enum SvgLengthSource { Css, Xml, String }
+    public enum SvgLengthSource
+    {
+        Css,
+        Xml,
+        String
+    }
 
     public sealed class SvgLength : ISvgLength
     {
         #region Private Fields
 
-        private static Regex reUnit = new Regex(CssValue.LengthUnitPattern + "$");
+        private static Regex ReUnit = new Regex(CssValue.LengthUnitPattern + "$");
 
-        private string defaultValue;
-        private string propertyName;
+        private string _defaultValue;
+        private string _propertyName;
 
-        private SvgLengthSource source;
-        private SvgElement ownerElement;
-        private SvgLengthDirection direction;
-        private CssAbsPrimitiveLengthValue cssLength;
+        private SvgLengthSource _source;
+        private SvgElement _ownerElement;
+        private SvgLengthDirection _direction;
+        private CssAbsPrimitiveLengthValue _cssLength;
 
         #endregion
 
@@ -38,36 +46,34 @@ namespace SharpVectors.Dom.Svg
         public SvgLength(SvgElement ownerElement, string propertyName, SvgLengthSource source,
             SvgLengthDirection direction, string defaultValue)
         {
-            this.ownerElement = ownerElement;
-            this.propertyName = propertyName;
-            this.direction = direction;
-            this.defaultValue = defaultValue;
-            this.source = source;
+            _ownerElement = ownerElement;
+            _propertyName = propertyName;
+            _direction    = direction;
+            _defaultValue = defaultValue;
+            _source       = source;
 
-            if (this.source == SvgLengthSource.Xml || this.source == SvgLengthSource.Css)
+            if (_source == SvgLengthSource.Xml || _source == SvgLengthSource.Css)
             {
                 GetCssXmlValue();
             }
         }
 
-        public SvgLength(SvgElement ownerElement, string propertyName, SvgLengthDirection direction,
-            string baseVal)
-            : this(ownerElement, propertyName, direction, baseVal, String.Empty)
+        public SvgLength(SvgElement ownerElement, string propertyName, SvgLengthDirection direction, string baseVal)
+            : this(ownerElement, propertyName, direction, baseVal, string.Empty)
         {
         }
 
         public SvgLength(SvgElement ownerElement, string propertyName, SvgLengthDirection direction,
             string baseVal, string defaultValue)
-            : this(ownerElement, propertyName,
-                SvgLengthSource.String, direction, defaultValue)
+            : this(ownerElement, propertyName, SvgLengthSource.String, direction, defaultValue)
         {
             if (baseVal == null || baseVal.Length == 0)
             {
                 baseVal = defaultValue;
             }
 
-            baseVal = SvgNumber.ScientificToDec(baseVal);
-            cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false),
+            baseVal    = SvgNumber.ScientificToDec(baseVal);
+            _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false),
                 propertyName, ownerElement);
         }
 
@@ -80,18 +86,20 @@ namespace SharpVectors.Dom.Svg
         /// <param name="direction">Direction of the length, used for percentages</param>
         public SvgLength(string propertyName, string baseVal, SvgElement ownerElement, SvgLengthDirection direction)
         {
-            this.ownerElement = ownerElement;
-            this.direction = direction;
+            _ownerElement = ownerElement;
+            _direction = direction;
 
             baseVal = SvgNumber.ScientificToDec(baseVal);
 
-            this.cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), propertyName, ownerElement);
+            _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), 
+                propertyName, ownerElement);
         }
 
-        public SvgLength(string propertyName, string baseVal, string defaultValue, SvgElement ownerElement, SvgLengthDirection direction)
+        public SvgLength(string propertyName, string baseVal, string defaultValue, 
+            SvgElement ownerElement, SvgLengthDirection direction)
         {
-            this.ownerElement = ownerElement;
-            this.direction = direction;
+            _ownerElement = ownerElement;
+            _direction = direction;
 
             if (baseVal == null || baseVal.Length == 0)
             {
@@ -100,13 +108,14 @@ namespace SharpVectors.Dom.Svg
 
             baseVal = SvgNumber.ScientificToDec(baseVal);
 
-            this.cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), propertyName, ownerElement);
+            _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), 
+                propertyName, ownerElement);
         }
 
         public SvgLength(string propertyName, SvgStyleableElement ownerElement, SvgLengthDirection direction, string defaultValue)
         {
-            this.ownerElement = ownerElement;
-            this.direction = direction;
+            _ownerElement = ownerElement;
+            _direction    = direction;
 
             string baseVal = ownerElement.GetPropertyValue(propertyName);
             if (baseVal == null || baseVal == "")
@@ -116,7 +125,7 @@ namespace SharpVectors.Dom.Svg
 
             baseVal = SvgNumber.ScientificToDec(baseVal);
 
-            this.cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), propertyName, ownerElement);
+            _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), propertyName, ownerElement);
         }
 
         #endregion
@@ -127,7 +136,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return propertyName;
+                return _propertyName;
             }
         }
 
@@ -138,14 +147,16 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return (SvgLengthType)cssLength.PrimitiveType;
+                return (SvgLengthType)_cssLength.PrimitiveType;
             }
         }
 
         /// <summary>
-        /// The value as an floating point value, in user units. Setting this attribute will cause valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting. 
+        /// The value as an floating point value, in user units. Setting this attribute will cause 
+        /// valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting. 
         /// </summary>
-        /// <exception cref="DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        /// <exception cref="DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+        /// the value of a readonly attribute.</exception>
         public double Value
         {
             get
@@ -162,11 +173,11 @@ namespace SharpVectors.Dom.Svg
                     case SvgLengthType.Pc:
                     case SvgLengthType.Ems:
                     case SvgLengthType.Exs:
-                        ret = cssLength.GetFloatValue(CssPrimitiveType.Px);
+                        ret = _cssLength.GetFloatValue(CssPrimitiveType.Px);
                         break;
                     case SvgLengthType.Percentage:
-                        double valueInSpecifiedUnits = cssLength.GetFloatValue(CssPrimitiveType.Percentage);
-                        if (ownerElement is SvgGradientElement)
+                        double valueInSpecifiedUnits = _cssLength.GetFloatValue(CssPrimitiveType.Percentage);
+                        if (_ownerElement is SvgGradientElement)
                         {
                             ret = valueInSpecifiedUnits / 100F;
                         }
@@ -174,23 +185,23 @@ namespace SharpVectors.Dom.Svg
                         {
                             double w = 0;
                             double h = 0;
-                            if (ownerElement.ViewportElement != null)
+                            if (_ownerElement.ViewportElement != null)
                             {
-                                ISvgFitToViewBox ftv = (ISvgFitToViewBox)ownerElement.ViewportElement;
+                                ISvgFitToViewBox ftv = (ISvgFitToViewBox)_ownerElement.ViewportElement;
                                 w = ftv.ViewBox.AnimVal.Width;
                                 h = ftv.ViewBox.AnimVal.Height;
                             }
                             else
                             {
-                                w = ownerElement.OwnerDocument.Window.InnerWidth;
-                                h = ownerElement.OwnerDocument.Window.InnerHeight;
+                                w = _ownerElement.OwnerDocument.Window.InnerWidth;
+                                h = _ownerElement.OwnerDocument.Window.InnerHeight;
                             }
 
-                            if (direction == SvgLengthDirection.Horizontal)
+                            if (_direction == SvgLengthDirection.Horizontal)
                             {
                                 ret = valueInSpecifiedUnits * w / 100;
                             }
-                            else if (direction == SvgLengthDirection.Vertical)
+                            else if (_direction == SvgLengthDirection.Vertical)
                             {
                                 ret = valueInSpecifiedUnits * h / 100;
                             }
@@ -211,41 +222,45 @@ namespace SharpVectors.Dom.Svg
             }
             set
             {
-                CssPrimitiveType oldType = cssLength.PrimitiveType;
-                cssLength.SetFloatValue(CssPrimitiveType.Px, value);
+                CssPrimitiveType oldType = _cssLength.PrimitiveType;
+                _cssLength.SetFloatValue(CssPrimitiveType.Px, value);
                 ConvertToSpecifiedUnits((SvgLengthType)oldType);
             }
         }
 
         /// <summary>
-        /// The value as an floating point value, in the units expressed by unitType. Setting this attribute will cause value and valueAsString to be updated automatically to reflect this setting.
+        /// The value as an floating point value, in the units expressed by unitType. Setting this 
+        /// attribute will cause value and valueAsString to be updated automatically to reflect this setting.
         /// </summary>
-        /// <exception cref="DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        /// <exception cref="DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+        /// the value of a readonly attribute.</exception>
         public double ValueInSpecifiedUnits
         {
             get
             {
-                return cssLength.GetFloatValue(cssLength.PrimitiveType);
+                return _cssLength.GetFloatValue(_cssLength.PrimitiveType);
             }
             set
             {
-                cssLength.SetFloatValue(cssLength.PrimitiveType, value);
+                _cssLength.SetFloatValue(_cssLength.PrimitiveType, value);
             }
         }
 
         /// <summary>
-        /// The value as a string value, in the units expressed by unitType. Setting this attribute will cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
+        /// The value as a string value, in the units expressed by unitType. Setting this attribute will 
+        /// cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
         /// </summary>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+        /// value of a readonly attribute.</exception>
         public string ValueAsString
         {
             get
             {
-                return cssLength.CssText;
+                return _cssLength.CssText;
             }
             set
             {
-                cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(value, false), "", ownerElement);
+                _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(value, false), "", _ownerElement);
             }
         }
 
@@ -254,23 +269,28 @@ namespace SharpVectors.Dom.Svg
         #region Public Methods
 
         /// <summary>
-        /// Reset the value as a number with an associated unitType, thereby replacing the values for all of the attributes on the object.
+        /// Reset the value as a number with an associated unitType, thereby replacing the values for 
+        /// all of the attributes on the object.
         /// </summary>
         /// <param name="unitType">The unitType for the value (e.g., MM). </param>
         /// <param name="valueInSpecifiedUnits">The new value</param>
         public void NewValueSpecifiedUnits(SvgLengthType unitType, double valueInSpecifiedUnits)
         {
-            cssLength.SetFloatValue((CssPrimitiveType)unitType, valueInSpecifiedUnits);
+            _cssLength.SetFloatValue((CssPrimitiveType)unitType, valueInSpecifiedUnits);
         }
 
         /// <summary>
-        /// Preserve the same underlying stored value, but reset the stored unit identifier to the given unitType. Object attributes unitType, valueAsSpecified and valueAsString might be modified as a result of this method. For example, if the original value were "0.5cm" and the method was invoked to convert to millimeters, then the unitType would be changed to MM, valueAsSpecified would be changed to the numeric value 5 and valueAsString would be changed to "5mm". 
+        /// Preserve the same underlying stored value, but reset the stored unit identifier to the given unitType. 
+        /// Object attributes unitType, valueAsSpecified and valueAsString might be modified as a result of this 
+        /// method. For example, if the original value were "0.5cm" and the method was invoked to convert to 
+        /// millimeters, then the unitType would be changed to MM, valueAsSpecified would be changed to the 
+        /// numeric value 5 and valueAsString would be changed to "5mm". 
         /// </summary>
         /// <param name="unitType">The unitType to switch to (e.g., MM).</param>
         public void ConvertToSpecifiedUnits(SvgLengthType unitType)
         {
-            double newValue = cssLength.GetFloatValue((CssPrimitiveType)unitType);
-            cssLength.SetFloatValue((CssPrimitiveType)unitType, newValue);
+            double newValue = _cssLength.GetFloatValue((CssPrimitiveType)unitType);
+            _cssLength.SetFloatValue((CssPrimitiveType)unitType, newValue);
         }
 
         #endregion
@@ -279,14 +299,14 @@ namespace SharpVectors.Dom.Svg
 
         private void GetCssXmlValue()
         {
-            if (source == SvgLengthSource.Css)
+            if (_source == SvgLengthSource.Css)
             {
-                ICssStyleDeclaration csd = this.ownerElement.GetComputedStyle(String.Empty);
-                CssPrimitiveLengthValue cssValue = csd.GetPropertyCssValue(propertyName) as CssPrimitiveLengthValue;
+                ICssStyleDeclaration csd = _ownerElement.GetComputedStyle(string.Empty);
+                CssPrimitiveLengthValue cssValue = csd.GetPropertyCssValue(_propertyName) as CssPrimitiveLengthValue;
 
                 if (cssValue != null)
                 {
-                    cssLength = new CssAbsPrimitiveLengthValue(cssValue, propertyName, ownerElement);
+                    _cssLength = new CssAbsPrimitiveLengthValue(cssValue, _propertyName, _ownerElement);
                 }
                 else
                 {
@@ -295,15 +315,15 @@ namespace SharpVectors.Dom.Svg
             }
             else
             {
-                string baseVal = ownerElement.GetAttribute(propertyName);
+                string baseVal = _ownerElement.GetAttribute(_propertyName);
 
                 if (baseVal == null || baseVal.Length == 0)
                 {
-                    baseVal = defaultValue;
+                    baseVal = _defaultValue;
                 }
                 baseVal   = SvgNumber.ScientificToDec(baseVal);
-                cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), 
-                    propertyName, ownerElement);
+                _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(baseVal, false), 
+                    _propertyName, _ownerElement);
             }
         }
 

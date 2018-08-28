@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
@@ -40,6 +38,5 @@ namespace SharpVectors.Dom.Events
 	/// about the
 	/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event">event</see>.
 	/// </paramref>
-	public delegate void EventListener(
-		IEvent e);
+	public delegate void EventListener(IEvent e);
 }

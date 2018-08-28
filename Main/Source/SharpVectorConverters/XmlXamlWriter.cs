@@ -11,10 +11,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Markup.Primitives;
 
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Converters
 {
@@ -144,7 +141,7 @@ namespace SharpVectors.Converters
         {
             if (obj == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             if (_contentProperties == null)
@@ -451,7 +448,7 @@ namespace SharpVectors.Converters
             //If it doesn't have an entry, go get the info and store it.
             if (!_contentProperties.ContainsKey(objectType))
             {
-                string lookedUpContentProperty = String.Empty;
+                string lookedUpContentProperty = string.Empty;
                 foreach (Attribute attr in markupObj.Attributes)
                 {
                     ContentPropertyAttribute cpa = attr as ContentPropertyAttribute;
@@ -467,7 +464,7 @@ namespace SharpVectors.Converters
             }
 
             contentPropertyName = _contentProperties[objectType];
-            string contentString = String.Empty;
+            string contentString = string.Empty;
 
             foreach (MarkupProperty markupProperty in markupObj.Properties)
             {
@@ -537,7 +534,7 @@ namespace SharpVectors.Converters
                 }
             }
 
-            if (contentProperty != null || propertyElements.Count > 0 || contentString != String.Empty)
+            if (contentProperty != null || propertyElements.Count > 0 || contentString != string.Empty)
             {
                 foreach (MarkupProperty markupProp in propertyElements)
                 {
@@ -562,7 +559,7 @@ namespace SharpVectors.Converters
                     writer.WriteEndElement();
                 }
 
-                if (contentString != String.Empty)
+                if (contentString != string.Empty)
                 {
                     writer.WriteValue(contentString);
                 }
@@ -631,7 +628,7 @@ namespace SharpVectors.Converters
             //If it doesn't have an entry, go get the info and store it.
             if (!_contentProperties.ContainsKey(objectType))
             {
-                string lookedUpContentProperty = String.Empty;
+                string lookedUpContentProperty = string.Empty;
 
                 foreach (Attribute attr in markupObj.Attributes)
                 {
@@ -649,7 +646,7 @@ namespace SharpVectors.Converters
 
             contentPropertyName = _contentProperties[objectType];
 
-            string contentString = String.Empty;
+            string contentString = string.Empty;
 
             foreach (MarkupProperty markupProperty in markupObj.Properties)
             {
@@ -688,7 +685,7 @@ namespace SharpVectors.Converters
                 }
             }
 
-            if (contentProperty != null || propertyElements.Count > 0 || contentString != String.Empty)
+            if (contentProperty != null || propertyElements.Count > 0 || contentString != string.Empty)
             {
                 foreach (MarkupProperty markupProp in propertyElements)
                 {
@@ -817,7 +814,7 @@ namespace SharpVectors.Converters
 
             public string GetNamespaceUriFor(Type type)
             {
-                string typeNamespace = String.Empty;
+                string typeNamespace = string.Empty;
                 if (type.Namespace == null)
                 {
                     return String.Format(_culture, "clr-namespace:;assembly={0}",
@@ -844,7 +841,7 @@ namespace SharpVectors.Converters
                     return names[0];
                 }
 
-                return String.Empty;
+                return string.Empty;
             }
 
             private Dictionary<string, string> GetMappingsFor(Assembly assembly)
@@ -862,7 +859,7 @@ namespace SharpVectors.Converters
                 //TODO--PAUL: For now just cheat...
                 if (_isFrameworkRoot)
                 {
-                    _defaultPrefixes[DefaultNamespace] = String.Empty;
+                    _defaultPrefixes[DefaultNamespace] = string.Empty;
                 }
 
                 dictionary = new Dictionary<string, string>();

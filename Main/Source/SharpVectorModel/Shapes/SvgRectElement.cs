@@ -1,10 +1,5 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 using System;
 using System.Xml;
-
-using SharpVectors.Dom.Events;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -15,15 +10,15 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private ISvgAnimatedLength x;
-        private ISvgAnimatedLength y;
-        private ISvgAnimatedLength rx;
-        private ISvgAnimatedLength ry;
-        private ISvgAnimatedLength width;
-        private ISvgAnimatedLength height;
+        private ISvgAnimatedLength _x;
+        private ISvgAnimatedLength _y;
+        private ISvgAnimatedLength _rx;
+        private ISvgAnimatedLength _ry;
+        private ISvgAnimatedLength _width;
+        private ISvgAnimatedLength _height;
 
-        private SvgTests svgTests;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgTests _svgTests;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
@@ -32,8 +27,8 @@ namespace SharpVectors.Dom.Svg
         public SvgRectElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            svgTests = new SvgTests(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests                  = new SvgTests(this);
         }
 
         #endregion
@@ -51,27 +46,27 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "x":
-                        x = null;
+                        _x = null;
                         Invalidate();
                         return;
                     case "y":
-                        y = null;
+                        _y = null;
                         Invalidate();
                         return;
                     case "width":
-                        width = null;
+                        _width = null;
                         Invalidate();
                         return;
                     case "height":
-                        height = null;
+                        _height = null;
                         Invalidate();
                         return;
                     case "rx":
-                        rx = null;
+                        _rx = null;
                         Invalidate();
                         return;
                     case "ry":
-                        ry = null;
+                        _ry = null;
                         Invalidate();
                         return;
                     // Color.attrib, Paint.attrib 
@@ -102,7 +97,6 @@ namespace SharpVectors.Dom.Svg
                         break;
                     case "onclick":
                         break;
-
                 }
 
                 base.HandleAttributeChange(attribute);
@@ -122,8 +116,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Shape;
             }
         }
@@ -134,9 +127,8 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -146,77 +138,67 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Width
         {
-            get
-            {
-                if (width == null)
+            get {
+                if (_width == null)
                 {
-                    width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, "100");
+                    _width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, "100");
                 }
-                return width;
+                return _width;
             }
         }
 
         public ISvgAnimatedLength Height
         {
-            get
-            {
-                if (height == null)
+            get {
+                if (_height == null)
                 {
-                    height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, "100");
+                    _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, "100");
                 }
-                return height;
+                return _height;
             }
-
         }
 
         public ISvgAnimatedLength X
         {
-            get
-            {
-                if (x == null)
+            get {
+                if (_x == null)
                 {
-                    x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
                 }
-                return x;
+                return _x;
             }
-
         }
 
         public ISvgAnimatedLength Y
         {
-            get
-            {
-                if (y == null)
+            get {
+                if (_y == null)
                 {
-                    y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
                 }
-                return y;
+                return _y;
             }
-
         }
 
         public ISvgAnimatedLength Rx
         {
-            get
-            {
-                if (rx == null)
+            get {
+                if (_rx == null)
                 {
-                    rx = new SvgAnimatedLength(this, "rx", SvgLengthDirection.Horizontal, "0");
+                    _rx = new SvgAnimatedLength(this, "rx", SvgLengthDirection.Horizontal, "0");
                 }
-                return rx;
+                return _rx;
             }
-
         }
 
         public ISvgAnimatedLength Ry
         {
-            get
-            {
-                if (ry == null)
+            get {
+                if (_ry == null)
                 {
-                    ry = new SvgAnimatedLength(this, "ry", SvgLengthDirection.Vertical, "0");
+                    _ry = new SvgAnimatedLength(this, "ry", SvgLengthDirection.Vertical, "0");
                 }
-                return ry;
+                return _ry;
             }
         }
 
@@ -226,22 +208,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion

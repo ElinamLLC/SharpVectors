@@ -14,7 +14,7 @@ namespace SharpVectors.Runtime
 
         public static readonly DependencyProperty IdProperty =
             DependencyProperty.RegisterAttached("Id", typeof(string), typeof(SvgObject),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached("Type", typeof(SvgObjectType), typeof(SvgObject),
@@ -22,7 +22,7 @@ namespace SharpVectors.Runtime
 
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.RegisterAttached("Title", typeof(String), typeof(SvgObject),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         #endregion
 

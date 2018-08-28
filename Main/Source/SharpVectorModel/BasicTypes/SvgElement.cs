@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>75</completed>
-
 using System;
 using System.Xml;
 
@@ -208,7 +204,7 @@ namespace SharpVectors.Dom.Svg
                     }
                     else
                     {
-                        s = String.Empty;
+                        s = string.Empty;
                     }
                 }
 
@@ -227,7 +223,7 @@ namespace SharpVectors.Dom.Svg
         public string ResolveUri(string uri)
         {
             uri = uri.Trim();
-            if (uri.StartsWith("#"))
+            if (uri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 return uri;
             }
@@ -246,11 +242,10 @@ namespace SharpVectors.Dom.Svg
         }
 
         /// <summary>
-        /// Whenever an SvgElementInstance is created for an SvgElement this
-        /// property is set. The value of this property is used by the renderer 
-        /// to dispatch events. SvgElements that are &lt;use&gt;d exist in a 
-        /// conceptual "instance tree" and the target of events for those elements
-        /// is the conceptual instance node represented by the SvgElementInstance.
+        /// Whenever an SvgElementInstance is created for an SvgElement this property is set. The value of 
+        /// this property is used by the renderer to dispatch events. SvgElements that are &lt;use&gt;d exist in a 
+        /// conceptual "instance tree" and the target of events for those elements is the conceptual instance 
+        /// node represented by the SvgElementInstance.
         /// <see cref="http://www.w3.org/TR/SVG/struct.html#UseElement"/>
         /// <see cref="http://www.w3.org/TR/SVG/struct.html#InterfaceSVGElementInstance"/>
         /// </summary>

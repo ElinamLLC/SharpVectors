@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SharpVectors.Converters
+﻿namespace SharpVectors.Converters
 {
     /// <summary>
     /// <para>

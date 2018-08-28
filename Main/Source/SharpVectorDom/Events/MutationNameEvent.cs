@@ -9,8 +9,8 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		private string prevNamespaceUri;
-		private string prevNodeName;
+		private string _prevNamespaceUri;
+		private string _prevNodeName;
 		
 		#endregion
 		
@@ -20,7 +20,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return prevNamespaceUri;
+				return _prevNamespaceUri;
 			}
 		}
 		
@@ -28,41 +28,27 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return prevNodeName;
+				return _prevNodeName;
 			}
 		}
 		
-		public void InitMutationNameEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			INode relatedNode,
-			string prevNamespaceUri,
-			string prevNodeName)
+		public void InitMutationNameEvent(string eventType, bool bubbles, bool cancelable,
+			INode relatedNode, string prevNamespaceUri, string prevNodeName)
 		{
-			InitMutationEvent(
-				eventType, bubbles, cancelable,
-				relatedNode, "", "", "", AttrChangeType.None);
+			InitMutationEvent(eventType, bubbles, cancelable, relatedNode, "", "", "", AttrChangeType.None);
 			
-			this.prevNamespaceUri = prevNamespaceUri;
-			this.prevNodeName = prevNodeName;
+			_prevNamespaceUri = prevNamespaceUri;
+			_prevNodeName     = prevNodeName;
 		}
 		
-		public void InitMutationNameEventNs(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			INode relatedNode,
-			string prevNamespaceUri,
-			string prevNodeName)
+		public void InitMutationNameEventNs(string namespaceUri, string eventType, bool bubbles, 
+			bool cancelable, INode relatedNode, string prevNamespaceUri, string prevNodeName)
 		{
-			InitMutationEventNs(
-				namespaceUri, eventType, bubbles, cancelable,
+			InitMutationEventNs(namespaceUri, eventType, bubbles, cancelable,
 				relatedNode, "", "", "", AttrChangeType.None);
 			
-			this.prevNamespaceUri = prevNamespaceUri;
-			this.prevNodeName = prevNodeName;
+			_prevNamespaceUri = prevNamespaceUri;
+			_prevNodeName     = prevNodeName;
 		}
 		
 		#endregion

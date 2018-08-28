@@ -1,13 +1,12 @@
-/// <developer>niklas@protocol7.com</developer>
-/// <completed>100</completed>
-/// 
 using System;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The Rect interface is used to represent any rect value. This interface reflects the values in the underlying style property. Hence, modifications made to the CSSPrimitiveValue objects modify the style property.
+	/// The Rect interface is used to represent any rect value. This interface reflects the values in 
+    /// the underlying style property. Hence, modifications made to the CSSPrimitiveValue objects modify 
+    /// the style property.
 	/// </summary>
 	public sealed class CssRect : ICssRect
 	{
@@ -16,6 +15,10 @@ namespace SharpVectors.Dom.Css
         private static Regex delim = new Regex(@"\s+,?\s*|,\s*", RegexOptions.Compiled);
 
         private bool readOnly;
+		private CssPrimitiveValue _left;
+		private CssPrimitiveValue _bottom;
+		private CssPrimitiveValue _right;
+		private CssPrimitiveValue _top;
         
         #endregion
 
@@ -32,7 +35,7 @@ namespace SharpVectors.Dom.Css
 
             if (rectString == null)
             {
-                rectString = String.Empty;
+                rectString = string.Empty;
             }
 
             // remove leading and trailing whitespace
@@ -63,7 +66,6 @@ namespace SharpVectors.Dom.Css
 
 		#region IRect Members
 
-		private CssPrimitiveValue _left;
 		/// <summary>
 		/// This attribute is used for the left of the rect.
 		/// </summary>
@@ -75,7 +77,6 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		private CssPrimitiveValue _bottom;
 		/// <summary>
 		/// This attribute is used for the bottom of the rect.
 		/// </summary>
@@ -87,7 +88,6 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		private CssPrimitiveValue _right;
 		/// <summary>
 		/// This attribute is used for the right of the rect.
 		/// </summary>
@@ -99,7 +99,6 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		private CssPrimitiveValue _top;
 		/// <summary>
 		/// This attribute is used for the top of the rect.
 		/// </summary>

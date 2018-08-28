@@ -37,7 +37,7 @@ namespace SharpVectors.Xml
         /// <summary>
         /// Gets the namespace URI for the specified prefix.
         /// </summary>
-        /// <param name="prefix">The prefix whose namespace URI you want to resolve. To match the default namespace, pass String.Empty.</param>
+        /// <param name="prefix">The prefix whose namespace URI you want to resolve. To match the default namespace, pass string.Empty.</param>
         /// <returns>
         /// Returns the namespace URI for <paramref name="prefix"/> or null if there is no mapped namespace. The returned string is atomized.
         /// For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable"/>.

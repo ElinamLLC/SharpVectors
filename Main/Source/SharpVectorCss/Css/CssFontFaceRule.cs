@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>80</completed>
-
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,10 +5,17 @@ using System.Text.RegularExpressions;
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSFontFaceRule interface represents a @font-face rule in a CSS style sheet. The @font-face rule is used to hold a set of font descriptions.
+	/// The CSSFontFaceRule interface represents a @font-face rule in a CSS style sheet. 
+    /// The @font-face rule is used to hold a set of font descriptions.
 	/// </summary>
 	public class CssFontFaceRule : CssRule, ICssFontFaceRule
 	{
+		#region Private Fields
+
+		private CssStyleDeclaration _style;
+
+		#endregion
+
 		#region Static members
 
 		private static Regex regex = new Regex(@"^@font-face");
@@ -23,26 +27,24 @@ namespace SharpVectors.Dom.Css
             IList<string> replacedStrings, CssStyleSheetType origin)
 		{
 			Match match = regex.Match(css);
-			if(match.Success)
+			if (match.Success)
 			{
-				CssFontFaceRule rule = new CssFontFaceRule(match, parent, readOnly, 
-                    replacedStrings, origin);
+				CssFontFaceRule rule = new CssFontFaceRule(match, parent, readOnly, replacedStrings, origin);
 				css = css.Substring(match.Length);
 
-				rule.style = new CssStyleDeclaration(ref css, rule, true, origin);
+				rule._style = new CssStyleDeclaration(ref css, rule, true, origin);
 
 				return rule;
 			}
-			else
-			{
-				// didn't match => do nothing
-				return null;
-			}
+
+			// didn't match => do nothing
+			return null;
 		}
 
 		#endregion
 
 		#region Constructors
+
 		/// <summary>
 		/// The constructor for CssFontFaceRule
 		/// </summary>
@@ -55,13 +57,13 @@ namespace SharpVectors.Dom.Css
             IList<string> replacedStrings, CssStyleSheetType origin)
             : base(parent, true, replacedStrings, origin)
 		{
-			// always read-only
-			
+			// always read-only			
 		}
+
 		#endregion
 
 		#region Implementation of ICssFontFaceRule
-		private CssStyleDeclaration style;
+
 		/// <summary>
 		/// The declaration-block of this rule.
 		/// </summary>
@@ -69,14 +71,17 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				return style;
+				return _style;
 			}
 		}
+
 		#endregion
 
 		#region Implementation of ICssRule
+
 		/// <summary>
-		/// The type of the rule. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+		/// The type of the rule. The expectation is that binding-specific casting methods can be used to cast 
+        /// down from an instance of the CSSRule interface to the specific derived interface implied by the type.
 		/// </summary>
 		public override CssRuleType Type
 		{
@@ -85,6 +90,7 @@ namespace SharpVectors.Dom.Css
 				return CssRuleType.FontFaceRule;
 			}
 		}
+
 		#endregion
 	}
 }

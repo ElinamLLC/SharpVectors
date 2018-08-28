@@ -11,8 +11,8 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		private IAbstractView view;
-		private long detail;
+		private long _detail;
+		private IAbstractView _view;
 		
 		#endregion
 		
@@ -22,23 +22,13 @@ namespace SharpVectors.Dom.Events
 		{
 		}
 		
-		public UiEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail)
+		public UiEvent(string eventType, bool bubbles, bool cancelable, IAbstractView view, long detail)
 		{
 			InitUiEvent(eventType, bubbles, cancelable, view, detail);
 		}
 		
-		public UiEvent(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail)
+		public UiEvent(string namespaceUri, string eventType, bool bubbles,
+			bool cancelable, IAbstractView view, long detail)
 		{
 			InitUiEventNs(namespaceUri, eventType, bubbles, cancelable, view, detail);
 		}
@@ -51,7 +41,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return view;
+				return _view;
 			}
 		}
 		
@@ -59,35 +49,26 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return detail;
+				return _detail;
 			}
 		}
 		
-		public void InitUiEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail)
+		public void InitUiEvent(string eventType, bool bubbles, bool cancelable,
+			IAbstractView view, long detail)
 		{
 			InitEvent(eventType, bubbles, cancelable);
 			
-			this.view = view;
-			this.detail = detail;
+			_view   = view;
+			_detail = detail;
 		}
 		
-		public void InitUiEventNs(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail)
+		public void InitUiEventNs(string namespaceUri, string eventType, bool bubbles,
+			bool cancelable, IAbstractView view, long detail)
 		{
 			InitEventNs(namespaceUri, eventType, bubbles, cancelable);
 			
-			this.view = view;
-			this.detail = detail;
+			_view   = view;
+			_detail = detail;
 		}
 		
 		#endregion

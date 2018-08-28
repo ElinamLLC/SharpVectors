@@ -1,8 +1,4 @@
-// <developer>kevin@kevlindev.com</developer>
-// <completed>0</completed>
-
 using System;
-using System.Drawing;
 
 using SharpVectors.Dom.Svg;
 

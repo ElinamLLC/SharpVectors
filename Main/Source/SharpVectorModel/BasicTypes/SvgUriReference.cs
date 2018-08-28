@@ -2,7 +2,6 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Net;
-using SharpVectors.Net;
 using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Svg
@@ -11,9 +10,9 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private string absoluteUri;
-        private SvgElement ownerElement;
-        private ISvgAnimatedString href;
+        private string _absoluteUri;
+        private SvgElement _ownerElement;
+        private ISvgAnimatedString _href;
 
         #endregion
 
@@ -21,8 +20,8 @@ namespace SharpVectors.Dom.Svg
 
         public SvgUriReference(SvgElement ownerElement)
         {
-            this.ownerElement = ownerElement;
-            this.ownerElement.attributeChangeHandler += new NodeChangeHandler(AttributeChange);
+            _ownerElement = ownerElement;
+            _ownerElement.attributeChangeHandler += OnAttributeChange;
         }
 
         #endregion
@@ -39,25 +38,25 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (absoluteUri == null)
+                if (_absoluteUri == null)
                 {
-                    if (ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                    if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
                     {
                         string href = Href.AnimVal.Trim();
 
-                        if (href.StartsWith("#"))
+                        if (href.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                         {
                             return href;
                         }
                         else
                         {
-                            string baseUri = ownerElement.BaseURI;
+                            string baseUri = _ownerElement.BaseURI;
                             if (baseUri.Length == 0)
                             {
                                 Uri sourceUri = new Uri(Href.AnimVal, UriKind.RelativeOrAbsolute);
                                 if (sourceUri.IsAbsoluteUri)
                                 {
-                                    absoluteUri = sourceUri.ToString(); 
+                                    _absoluteUri = sourceUri.ToString(); 
                                 }
                             }
                             else
@@ -66,20 +65,20 @@ namespace SharpVectors.Dom.Svg
                                 string xmlBaseUrl = this.GetBaseUrl();
                                 if (!string.IsNullOrWhiteSpace(xmlBaseUrl))
                                 {
-                                    sourceUri = new Uri(new Uri(ownerElement.BaseURI), 
+                                    sourceUri = new Uri(new Uri(_ownerElement.BaseURI), 
                                         Path.Combine(xmlBaseUrl, Href.AnimVal));
                                 }
                                 else
                                 {
-                                    sourceUri = new Uri(new Uri(ownerElement.BaseURI), Href.AnimVal);
+                                    sourceUri = new Uri(new Uri(_ownerElement.BaseURI), Href.AnimVal);
                                 }
 
-                                absoluteUri = sourceUri.ToString();
+                                _absoluteUri = sourceUri.ToString();
                             }
                         }
                     }
                 }
-                return absoluteUri;
+                return _absoluteUri;
             }
         }
 
@@ -87,12 +86,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
                 {
-                    XmlNode referencedNode = ownerElement.OwnerDocument.GetNodeByUri(AbsoluteUri);
+                    XmlNode referencedNode = _ownerElement.OwnerDocument.GetNodeByUri(AbsoluteUri);
 
-                    ISvgExternalResourcesRequired extReqElm =
-                        ownerElement as ISvgExternalResourcesRequired;
+                    ISvgExternalResourcesRequired extReqElm = _ownerElement as ISvgExternalResourcesRequired;
 
                     if (referencedNode == null && extReqElm != null)
                     {
@@ -113,16 +111,16 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
                 {
                     string absoluteUri = this.AbsoluteUri;
                     if (!string.IsNullOrWhiteSpace(absoluteUri))
                     {
-                        WebResponse referencedResource = ownerElement.OwnerDocument.GetResource(
+                        WebResponse referencedResource = _ownerElement.OwnerDocument.GetResource(
                             new Uri(absoluteUri));
 
                         ISvgExternalResourcesRequired extReqElm =
-                            ownerElement as ISvgExternalResourcesRequired;
+                            _ownerElement as ISvgExternalResourcesRequired;
 
                         if (referencedResource == null && extReqElm != null)
                         {
@@ -144,23 +142,15 @@ namespace SharpVectors.Dom.Svg
 
         #region Update handling
 
-        private void AttributeChange(Object src, XmlNodeChangedEventArgs args)
+        private void OnAttributeChange(object src, XmlNodeChangedEventArgs args)
         {
             XmlAttribute attribute = src as XmlAttribute;
 
             if (attribute.NamespaceURI == SvgDocument.XLinkNamespace &&
                 attribute.LocalName == "href")
             {
-                href = null;
-                absoluteUri = null;
-            }
-        }
-
-        private void ReferencedNodeChange(Object src, XmlNodeChangedEventArgs args)
-        {
-            if (NodeChanged != null)
-            {
-                NodeChanged(src, args);
+                _href = null;
+                _absoluteUri = null;
             }
         }
 
@@ -172,12 +162,12 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (href == null)
+                if (_href == null)
                 {
-                    href = new SvgAnimatedString(ownerElement.GetAttribute("href", 
+                    _href = new SvgAnimatedString(_ownerElement.GetAttribute("href", 
                         SvgDocument.XLinkNamespace));
                 }
-                return href;
+                return _href;
             }
         }
 
@@ -187,11 +177,11 @@ namespace SharpVectors.Dom.Svg
 
         private string GetBaseUrl()
         {
-            if (ownerElement.HasAttribute("xml:base"))
+            if (_ownerElement.HasAttribute("xml:base"))
             {
-                return ownerElement.GetAttribute("xml:base"); 
+                return _ownerElement.GetAttribute("xml:base"); 
             }
-            XmlElement parentNode = ownerElement.ParentNode as XmlElement;
+            XmlElement parentNode = _ownerElement.ParentNode as XmlElement;
             if (parentNode != null && parentNode.HasAttribute("xml:base"))
             {
                 return parentNode.GetAttribute("xml:base"); 

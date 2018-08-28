@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Text;
 using System.Drawing;
-using System.Collections.Generic;
 
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
@@ -10,7 +8,6 @@ namespace SharpVectors.Renderers
 {
     public static class GdiConverter
     {
-
         /// <summary>
         /// A GDI Color representation of the RgbColor
         /// </summary>
@@ -25,15 +22,15 @@ namespace SharpVectors.Renderers
             double dGreen = color.Green.GetFloatValue(CssPrimitiveType.Number);
             double dBlue  = color.Blue.GetFloatValue(CssPrimitiveType.Number);
 
-            if (Double.IsNaN(dRed) || Double.IsInfinity(dRed))
+            if (double.IsNaN(dRed) || double.IsInfinity(dRed))
             {
                 return Color.Empty;
             }
-            if (Double.IsNaN(dGreen) || Double.IsInfinity(dGreen))
+            if (double.IsNaN(dGreen) || double.IsInfinity(dGreen))
             {
                 return Color.Empty;
             }
-            if (Double.IsNaN(dBlue) || Double.IsInfinity(dBlue))
+            if (double.IsNaN(dBlue) || double.IsInfinity(dBlue))
             {
                 return Color.Empty;
             }
@@ -55,7 +52,6 @@ namespace SharpVectors.Renderers
 
             return new RectangleF(x, y, width, height);
         }
-
 
         /// <summary>
         /// This converts the specified <see cref="RectangleF"/> structure to a 
@@ -80,6 +76,5 @@ namespace SharpVectors.Renderers
 
             return new RectangleF((float)rect.X, (float)rect.Y, (float)rect.Width, (float)rect.Height);
         }
-
     }
 }

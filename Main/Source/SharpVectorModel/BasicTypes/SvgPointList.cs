@@ -1,11 +1,4 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
-using System.Collections;
-using System.Text.RegularExpressions;
-using System.Text;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -27,6 +20,8 @@ namespace SharpVectors.Dom.Svg
         }
 
         #endregion
+
+        #region Public Methods
 
         public void FromString(string listString)
         {
@@ -80,8 +75,8 @@ namespace SharpVectors.Dom.Svg
                                 else
                                 {
                                     // must be the y, use temp as x and append the item
-                                    AppendItem(new SvgPoint((double)SvgNumber.ParseNumber(listString.Substring(tempSNum, (tempENum - tempSNum) + 1)),
-                                      (double)SvgNumber.ParseNumber(listString.Substring(sNum, (eNum - sNum) + 1))));
+                                    AppendItem(new SvgPoint(SvgNumber.ParseNumber(listString.Substring(tempSNum, (tempENum - tempSNum) + 1)),
+                                      SvgNumber.ParseNumber(listString.Substring(sNum, (eNum - sNum) + 1))));
                                     tempSNum = -1;
                                     tempENum = -1;
                                 }
@@ -109,8 +104,8 @@ namespace SharpVectors.Dom.Svg
                         // The end of the number is the previous char
                         eNum = p - 1;
                         // must be the y, use temp as x and append the item
-                        AppendItem(new SvgPoint((double)SvgNumber.ParseNumber(listString.Substring(tempSNum, (tempENum - tempSNum) + 1)),
-                          (double)SvgNumber.ParseNumber(listString.Substring(sNum, (eNum - sNum) + 1))));
+                        AppendItem(new SvgPoint(SvgNumber.ParseNumber(listString.Substring(tempSNum, (tempENum - tempSNum) + 1)),
+                          SvgNumber.ParseNumber(listString.Substring(sNum, (eNum - sNum) + 1))));
                     }
                     else if (tempSNum != -1)
                     {
@@ -119,5 +114,7 @@ namespace SharpVectors.Dom.Svg
                 }
             }
         }
+
+        #endregion
     }
 }

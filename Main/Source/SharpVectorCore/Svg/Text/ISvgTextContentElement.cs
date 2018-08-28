@@ -1,12 +1,10 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>10</completed>
-
 using SharpVectors.Dom.Events;
 
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
-	/// The SvgTextContentElement interface is inherited by various text-related interfaces, such as SvgTextElement, SvgTSpanElement, SvgTRefElement, SvgAltGlyphElement and SvgTextPathElement. 
+	/// The SvgTextContentElement interface is inherited by various text-related interfaces, such as 
+    /// SvgTextElement, SvgTSpanElement, SvgTRefElement, SvgAltGlyphElement and SvgTextPathElement. 
 	/// </summary>
 	public interface ISvgTextContentElement	: ISvgElement, ISvgTests, ISvgLangSpace,
 				ISvgExternalResourcesRequired, ISvgStylable, IEventTarget

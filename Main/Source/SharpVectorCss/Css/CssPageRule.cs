@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>80</completed>
-
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,18 +5,20 @@ using System.Text.RegularExpressions;
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSPageRule interface represents a @page rule within a CSS style sheet. The @page rule is used to specify the dimensions, orientation, margins, etc. of a page box for paged media.
+	/// The CSSPageRule interface represents a @page rule within a CSS style sheet. The @page rule is 
+    /// used to specify the dimensions, orientation, margins, etc. of a page box for paged media.
 	/// </summary>
     public sealed class CssPageRule : CssRule, ICssPageRule
 	{
 		#region Static members
+
 		private static Regex regex = new Regex(@"^@font-face");
 
         internal static CssRule Parse(ref string css, object parent, bool readOnly, 
             IList<string> replacedStrings, CssStyleSheetType origin)
 		{
 			Match match = regex.Match(css);
-			if(match.Success)
+			if (match.Success)
 			{
 				CssPageRule rule = new CssPageRule(match, parent, readOnly, replacedStrings, origin);
 				css = css.Substring(match.Length);
@@ -28,13 +27,19 @@ namespace SharpVectors.Dom.Css
 
 				return rule;
 			}
-			else
-			{
-				// didn't match => do nothing
-				return null;
-			}
+
+			// didn't match => do nothing
+			return null;
 		}
+
 		#endregion
+
+        #region Private Fields
+
+        private string selectorText;
+        private CssStyleDeclaration style;
+
+        #endregion
 
 		#region Constructors
 
@@ -53,17 +58,16 @@ namespace SharpVectors.Dom.Css
 			// TODO: selectorText = DeReplaceStrings(match.Groups["pageselector"].Value.Trim());
 		}
 
-		#endregion
+        #endregion
 
-		#region Implementation of ICssPageRule
+        #region Implementation of ICssPageRule
 
-		private string selectorText;
-		/// <summary>
-		/// The parsable textual representation of the page selector for the rule.
-		/// </summary>
-		/// <exception cref="DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-		/// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.</exception>
-		public string SelectorText
+        /// <summary>
+        /// The parsable textual representation of the page selector for the rule.
+        /// </summary>
+        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.</exception>
+        public string SelectorText
 		{
 			get
 			{
@@ -79,7 +83,6 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		private CssStyleDeclaration style;
 		/// <summary>
 		/// The declaration-block of this rule.
 		/// </summary>
@@ -94,6 +97,7 @@ namespace SharpVectors.Dom.Css
 		#endregion
 
 		#region Implementation of ICssRule
+
 		/// <summary>
 		/// The type of the rule. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
 		/// </summary>
@@ -104,6 +108,7 @@ namespace SharpVectors.Dom.Css
 				return CssRuleType.PageRule;
 			}
 		}
+
 		#endregion
 	}
 }

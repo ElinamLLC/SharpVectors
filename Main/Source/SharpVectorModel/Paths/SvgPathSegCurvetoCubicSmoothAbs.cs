@@ -5,64 +5,68 @@ namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgPathSegCurvetoCubicSmoothAbs : SvgPathSegCurvetoCubic, ISvgPathSegCurvetoCubicSmoothAbs
     {
-        #region constructors
-        
+        #region Private Fields
+
+        private double _x;
+        private double _y;
+        private double _x2;
+        private double _y2;
+
+        #endregion
+
+        #region Constructors
+
         internal SvgPathSegCurvetoCubicSmoothAbs(double x, double y, double x2, double y2)
             : base(SvgPathSegType.CurveToCubicSmoothAbs)
         {
-            this.x = x;
-            this.y = y;
-            this.x2 = x2;
-            this.y2 = y2;
+            _x  = x;
+            _y  = y;
+            _x2 = x2;
+            _y2 = y2;
         }
 
         #endregion
 
         #region ISvgPathSegCurvetoCubicSmoothAbs Members
 
-        private double x;
         public double X
         {
-            get { return x; }
-            set { x = value; }
+            get { return _x; }
+            set { _x = value; }
         }
 
-        private double y;
         public double Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return _y; }
+            set { _y = value; }
         }
 
-        private double x2;
         public double X2
         {
-            get { return x2; }
-            set { x2 = value; }
+            get { return _x2; }
+            set { _x2 = value; }
         }
 
-        private double y2;
         public double Y2
         {
-            get { return y2; }
-            set { y2 = value; }
+            get { return _y2; }
+            set { _y2 = value; }
         }
+
         #endregion
 
         #region Public Methods
 
         public override SvgPointF AbsXY
         {
-            get
-            {
-                return new SvgPointF(x, y);
+            get {
+                return new SvgPointF(_x, _y);
             }
         }
 
         public override SvgPointF CubicX1Y1
         {
-            get
-            {
+            get {
                 SvgPathSeg prevSeg = PreviousSeg;
                 if (prevSeg == null || !(prevSeg is SvgPathSegCurvetoCubic))
                 {
@@ -80,16 +84,14 @@ namespace SharpVectors.Dom.Svg
 
         public override SvgPointF CubicX2Y2
         {
-            get
-            {
-                return new SvgPointF(x2, y2);
+            get {
+                return new SvgPointF(_x2, _y2);
             }
         }
 
         public override string PathText
         {
-            get
-            {
+            get {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(PathSegTypeAsLetter);
                 sb.Append(X2);

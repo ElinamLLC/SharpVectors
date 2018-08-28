@@ -4,12 +4,9 @@
 // This is required because I know of no way to hook into the key stages of
 // XML document creation in order to throw events at the right times during
 // the load process.
-// <developer>niklas@protocol7.com</developer>
-// <completed>60</completed>
 
 using System;
 using System.Xml;
-using System.Xml.Schema;
 using System.IO;
 using System.IO.Compression;
 using System.Collections.Generic;
@@ -101,8 +98,8 @@ namespace SharpVectors.Dom.Svg
         public SvgDocument(SvgWindow window)
             : this()
         {
-            this._window = window;
-            this._window.Document = this;
+            _window = window;
+            _window.Document = this;
 
             // set up CSS properties
             AddStyleElement(SvgDocument.SvgNamespace, "style");
@@ -162,7 +159,7 @@ namespace SharpVectors.Dom.Svg
                 {
                     // Setup namespace manager and add default namespaces
                     namespaceManager = new XmlNamespaceManager(this.NameTable);
-                    namespaceManager.AddNamespace(String.Empty, SvgDocument.SvgNamespace);
+                    namespaceManager.AddNamespace(string.Empty, SvgDocument.SvgNamespace);
                     namespaceManager.AddNamespace("svg", SvgDocument.SvgNamespace);
                     namespaceManager.AddNamespace("xlink", SvgDocument.XLinkNamespace);
                 }
@@ -182,21 +179,19 @@ namespace SharpVectors.Dom.Svg
             {
                 return result;
             }
-            else if (ns == SvgNamespace)
+
+            if (ns == SvgNamespace)
             {
                 return new SvgElement(prefix, localName, ns, this);
             }
-            else
+            // Now, if the ns is empty, we try creating with the default namespace for cases
+            // where the node is imported from an external SVG document...
+            if (string.IsNullOrWhiteSpace(ns))
             {
-                // Now, if the ns is empty, we try creating with the default namespace for cases
-                // where the node is imported from an external SVG document...
-                if (string.IsNullOrWhiteSpace(ns))
-                {
-                    result = SvgElementFactory.Create(prefix, localName, SvgNamespace, this);
-                    if (result != null)
-                    {       
-                        return result;
-                    }
+                result = SvgElementFactory.Create(prefix, localName, SvgNamespace, this);
+                if (result != null)
+                {       
+                    return result;
                 }
             }
 
@@ -207,15 +202,14 @@ namespace SharpVectors.Dom.Svg
 
         #region Support collections
 
-        private string[] supportedFeatures = new string[]
-            {
-                "org.w3c.svg.static",
-                "http://www.w3.org/TR/Svg11/feature#Shape",
-                "http://www.w3.org/TR/Svg11/feature#BasicText",
-                "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
-            };
+        private string[] supportedFeatures = {
+            "org.w3c.svg.static",
+            "http://www.w3.org/TR/Svg11/feature#Shape",
+            "http://www.w3.org/TR/Svg11/feature#BasicText",
+            "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
+        };
 
-        private string[] supportedExtensions = new string[] { };
+        private string[] supportedExtensions = { };
 
         public override bool Supports(string feature, string version)
         {
@@ -416,7 +410,7 @@ namespace SharpVectors.Dom.Svg
 
             //PrepareXmlResolver(settings);
             //using (XmlReader reader = XmlReader.Create(stream, settings))
-            using (XmlReader reader = CreateValidatingXmlReader(String.Empty, stream))
+            using (XmlReader reader = CreateValidatingXmlReader(string.Empty, stream))
             {
                 this.Load(reader);
             }
@@ -457,7 +451,7 @@ namespace SharpVectors.Dom.Svg
                     string[] names = _rootType.Assembly.GetManifestResourceNames();
                     foreach (string name in names)
                     {
-                        if (name.StartsWith(_rootType.Namespace))
+                        if (name.StartsWith(_rootType.Namespace, StringComparison.OrdinalIgnoreCase))
                         {
                             string namePart = name.Substring(_rootType.Namespace.Length + 1); // the +1 is for the "."
                             _entitiesUris[namePart] = name;
@@ -710,7 +704,7 @@ namespace SharpVectors.Dom.Svg
         public XmlNode GetNodeByUri(string absoluteUrl)
         {
             absoluteUrl = absoluteUrl.Trim();
-            if (absoluteUrl.StartsWith("#"))
+            if (absoluteUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 return GetElementById(absoluteUrl.Substring(1));
             }
@@ -804,7 +798,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -816,7 +810,7 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 if (Url.Length == 0 ||
-                    Url.StartsWith(Uri.UriSchemeFile))
+                    Url.StartsWith(Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
                 {
                     return null;
                 }

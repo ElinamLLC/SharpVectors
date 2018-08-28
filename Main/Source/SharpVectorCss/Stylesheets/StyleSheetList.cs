@@ -45,7 +45,7 @@ namespace SharpVectors.Dom.Stylesheets
 			}
 
 			XmlNodeList styleNodes;
-			foreach(string[] name in document.styleElements)
+			foreach(string[] name in document._styleElements)
 			{
 				styleNodes = document.SelectNodes(
 					"//*[local-name()='" + name[1] + "' and namespace-uri()='" + name[0] + "'][@type='text/css']");

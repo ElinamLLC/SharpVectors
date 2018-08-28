@@ -1,7 +1,3 @@
-// <developer>kevin@kevlindev.com</developer>
-// <completed>0</completed>
-
-using System;
 using System.Xml;
 
 namespace SharpVectors.Dom.Svg
@@ -13,7 +9,7 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     /// <remarks>
     /// The <see cref="ISvgRenderer">ISvgRenderer</see> is used to render
-    /// a <see cref="SvgElement">SvgElement</see> object onto a bitmap.
+    /// a <see cref="ISvgElement">ISvgElement</see> object onto a bitmap.
     /// During the rendering process, it will also generate
     /// <see cref="RenderingNode">RenderingNode</see> objects for each
     /// <see cref="XmlElement">XmlElement</see> object in the DOM tree to
@@ -31,7 +27,7 @@ namespace SharpVectors.Dom.Svg
         }
 
         /// <summary>
-        /// Renders an <see cref="SvgElement">SvgElement</see> object onto a
+        /// Renders an <see cref="ISvgElement">SvgElement</see> object onto a
         /// bitmap and returns that bitmap.
         /// </summary>
         /// <param name="node">
@@ -43,7 +39,7 @@ namespace SharpVectors.Dom.Svg
         void Render(ISvgElement node);
 
         /// <summary>
-        /// Renders an <see cref="SvgDocument">SvgDocument</see> object onto
+        /// Renders an <see cref="ISvgDocument">SvgDocument</see> object onto
         /// a bitmap and returns that bitmap.
         /// </summary>
         /// <param name="node">

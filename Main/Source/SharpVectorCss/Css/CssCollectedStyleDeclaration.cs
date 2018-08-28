@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Xml;
 using System.Collections.Generic;
 
@@ -9,18 +10,25 @@ namespace SharpVectors.Dom.Css
 	/// </summary>
 	public class CssCollectedStyleDeclaration : CssStyleDeclaration
 	{
-		#region Contructors
-		public CssCollectedStyleDeclaration(XmlElement elm)
-		{
-			_element = elm;
-		}
-		#endregion
-
 		#region Private fields
 		
         private XmlElement _element;
-		private Dictionary<string, CssCollectedProperty> collectedStyles =
-            new Dictionary<string, CssCollectedProperty>();
+		private IDictionary<string, CssCollectedProperty> _collectedStyles;
+
+		#endregion
+
+        #region Contructors
+
+        private CssCollectedStyleDeclaration()
+		{
+            _collectedStyles = new Dictionary<string, CssCollectedProperty>();
+        }
+
+        public CssCollectedStyleDeclaration(XmlElement elm)
+            : this()
+		{
+			_element = elm;
+		}
 
 		#endregion
 
@@ -30,16 +38,16 @@ namespace SharpVectors.Dom.Css
 		{
 			CssCollectedProperty newProp = new CssCollectedProperty(name, specificity, cssValue, origin, priority);
 		
-			if (!collectedStyles.ContainsKey(name))
+			if (!_collectedStyles.ContainsKey(name))
 			{
-				collectedStyles[name] = newProp;
+				_collectedStyles[name] = newProp;
 			}
 			else
 			{
-				CssCollectedProperty existingProp = collectedStyles[name];
+				CssCollectedProperty existingProp = _collectedStyles[name];
 				if (newProp.IsBetterThen(existingProp))
 				{
-					collectedStyles[name] = newProp;
+					_collectedStyles[name] = newProp;
 				}
 			}
 		}
@@ -51,15 +59,12 @@ namespace SharpVectors.Dom.Css
 		/// <returns>The origin type</returns>
 		public CssStyleSheetType GetPropertyOrigin(string propertyName)
 		{
-			if (collectedStyles.ContainsKey(propertyName))
+			if (_collectedStyles.ContainsKey(propertyName))
 			{
-				CssCollectedProperty scp = collectedStyles[propertyName];
+				CssCollectedProperty scp = _collectedStyles[propertyName];
 				return scp.Origin;
 			}
-			else
-			{
-				return CssStyleSheetType.Unknown;
-			}
+			return CssStyleSheetType.Unknown;
 		}
 
 		/// <summary>
@@ -69,71 +74,57 @@ namespace SharpVectors.Dom.Css
 		/// <returns>A string representing the priority (e.g. "important") if one exists. The empty string if none exists.</returns>
 		public override string GetPropertyPriority(string propertyName)
 		{
-			return (collectedStyles.ContainsKey(propertyName)) ? 
-                collectedStyles[propertyName].Priority : String.Empty;
+			return (_collectedStyles.ContainsKey(propertyName)) ? 
+                _collectedStyles[propertyName].Priority : string.Empty;
 		}
 
 		private ICssValue getParentStyle(string propertyName)
 		{
 			CssXmlDocument doc = _element.OwnerDocument as CssXmlDocument;
 			XmlElement parentNode = _element.ParentNode as XmlElement;
-			if(doc != null && parentNode != null)
+			if (doc != null && parentNode != null)
 			{
-				ICssStyleDeclaration parentCsd = doc.GetComputedStyle(parentNode, String.Empty);
-				if(parentCsd == null)
+				ICssStyleDeclaration parentCsd = doc.GetComputedStyle(parentNode, string.Empty);
+				if (parentCsd == null)
 				{
 					return null;
 				}
-				else
-				{
-					return parentCsd.GetPropertyCssValue(propertyName);
-				}
+				return parentCsd.GetPropertyCssValue(propertyName);
 			}
-			else
-			{
-				return null;
-			}
+			return null;
 		}
 
 		public override ICssValue GetPropertyCssValue(string propertyName)
 		{
-			if (collectedStyles.ContainsKey(propertyName))
+			if (_collectedStyles.ContainsKey(propertyName))
 			{
-				CssCollectedProperty scp = collectedStyles[propertyName];
+				CssCollectedProperty scp = _collectedStyles[propertyName];
 				if (scp.CssValue.CssValueType == CssValueType.Inherit)
 				{
 					// get style from parent chain
                     return getParentStyle(propertyName);
 				}
-				else
-				{
-					return scp.CssValue.GetAbsoluteValue(propertyName, _element);
-				}
+				return scp.CssValue.GetAbsoluteValue(propertyName, _element);
 			}
-			else
+
+			// should this property inherit?
+			CssXmlDocument doc = (CssXmlDocument)_element.OwnerDocument;
+
+			if (doc.CssPropertyProfile.IsInheritable(propertyName))
 			{
-				// should this property inherit?
-				CssXmlDocument doc = (CssXmlDocument)_element.OwnerDocument;
-
-				if (doc.CssPropertyProfile.IsInheritable(propertyName))
+				ICssValue parValue = getParentStyle(propertyName);
+				if (parValue != null)
 				{
-					ICssValue parValue = getParentStyle(propertyName);
-					if(parValue != null)
-					{
-						return parValue;
-					}
-				}
-
-				string initValue = doc.CssPropertyProfile.GetInitialValue(propertyName);
-				if (initValue == null)
-				{
-					return null;
-				}
-				else
-				{
-					return CssValue.GetCssValue(initValue, false).GetAbsoluteValue(propertyName, _element);
+					return parValue;
 				}
 			}
+
+			string initValue = doc.CssPropertyProfile.GetInitialValue(propertyName);
+			if (initValue == null)
+			{
+				return null;
+			}
+			return CssValue.GetCssValue(initValue, false).GetAbsoluteValue(propertyName, _element);
 		}
 
 
@@ -145,14 +136,11 @@ namespace SharpVectors.Dom.Css
 		public override string GetPropertyValue(string propertyName)
 		{
 			CssValue value = (CssValue)GetPropertyCssValue(propertyName);
-			if(value != null)
+			if (value != null)
 			{
 				return value.CssText;
 			}
-			else
-			{
-				return String.Empty;
-			}
+			return string.Empty;
 		}
 
 
@@ -163,7 +151,7 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				return (ulong)collectedStyles.Count;
+				return (ulong)_collectedStyles.Count;
 			}
 		}
 
@@ -177,15 +165,15 @@ namespace SharpVectors.Dom.Css
 			get
 			{
 				ulong len = Length;
-				System.Text.StringBuilder sb = new System.Text.StringBuilder();
-				for(ulong i = 0; i<len; i++)
+				StringBuilder sb = new StringBuilder();
+				for (ulong i = 0; i < len; i++)
 				{
 					string propName = this[i];
 					sb.Append(propName);
 					sb.Append(":");
 					sb.Append(GetPropertyValue(propName));
 					string prio = GetPropertyPriority(propName);
-					if(prio.Length > 0)
+					if (prio.Length > 0)
 					{
 						sb.Append(" !" + prio);
 					}
@@ -209,26 +197,23 @@ namespace SharpVectors.Dom.Css
 			get
 			{
 				if (index >= this.Length) 
-                    return String.Empty;
-				else
-				{
-                    int ind = (int)index;//Dictionary<string, CssCollectedProperty>
-                    IEnumerator<KeyValuePair<string, CssCollectedProperty>> iterator = 
-                        collectedStyles.GetEnumerator();
+                    return string.Empty;
+
+                var iterator = _collectedStyles.GetEnumerator();
+                iterator.MoveNext();
+
+                KeyValuePair<string, CssCollectedProperty> enu = iterator.Current;
+
+                for (ulong i = 0; i < index; i++)
+                {
                     iterator.MoveNext();
+                    enu = iterator.Current;
+                }
 
-                    KeyValuePair<string, CssCollectedProperty> enu = iterator.Current;
-
-                    for (int i = 0; i < (int)ind; i++)
-                    {
-                        iterator.MoveNext();
-                        enu = iterator.Current;
-                    }
-
-					return enu.Key;
-				}
+				return enu.Key;
 			}
 		}
+
 		#endregion
 	}
 }

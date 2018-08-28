@@ -11,8 +11,8 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		private IAbstractView view;
-		private string data;
+		private string _data;
+		private IAbstractView _view;
 		
 		#endregion
 		
@@ -22,23 +22,14 @@ namespace SharpVectors.Dom.Events
 		{
 		}
 		
-		public TextEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string data)
+		public TextEvent(string eventType, bool bubbles, bool cancelable, 
+            IAbstractView view, string data)
 		{
 			InitTextEvent(eventType, bubbles, cancelable, view, data);
 		}
 		
-		public TextEvent(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string data)
+		public TextEvent(string namespaceUri, string eventType, bool bubbles,
+			bool cancelable, IAbstractView view, string data)
 		{
 			InitTextEventNs(namespaceUri, eventType, bubbles, cancelable, view, data);
 		}
@@ -51,35 +42,26 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return data;
+				return _data;
 			}
 		}
 		
-		public void InitTextEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string data)
+		public void InitTextEvent(string eventType, bool bubbles, bool cancelable, 
+            IAbstractView view, string data)
 		{
 			InitEvent(eventType, bubbles, cancelable);
 			
-			this.view = view;
-			this.data = data;
+			_view = view;
+			_data = data;
 		}
 		
-		public void InitTextEventNs(
-			string namespaceUri,
-			string type,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string data)
+		public void InitTextEventNs(string namespaceUri, string type, bool bubbles,
+			bool cancelable, IAbstractView view, string data)
 		{
-			InitEventNs(namespaceUri, eventType, bubbles, cancelable);
+			InitEventNs(namespaceUri, _eventType, bubbles, cancelable);
 			
-			this.view = view;
-			this.data = data;
+			_view = view;
+			_data = data;
 		}
 		
 		#endregion

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SharpVectors.Dom.Svg
+﻿namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// Indicates the method by which text should be rendered along the path.

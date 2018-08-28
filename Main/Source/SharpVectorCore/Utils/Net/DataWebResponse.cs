@@ -45,9 +45,9 @@ namespace SharpVectors.Net
 				{
 					contentType = "text/plain;charset=US-ASCII";
 				}
-				else if (contentType.StartsWith(";"))
+				else if (contentType.StartsWith(";", StringComparison.OrdinalIgnoreCase))
 				{
-					if (contentType.IndexOf(";charset=") > 0)
+					if (contentType.IndexOf(";charset=", StringComparison.OrdinalIgnoreCase) > 0)
 					{
 						contentType = "text/plain" + contentType;
 					}
@@ -71,7 +71,7 @@ namespace SharpVectors.Net
 						{
 							contentEncoding = Encoding.GetEncoding(charsetMatch.Groups["charset"].Value);
 						}
-						catch(NotSupportedException)
+						catch (NotSupportedException)
 						{
 							contentEncoding = Encoding.ASCII;
 						}

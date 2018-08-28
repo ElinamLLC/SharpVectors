@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
@@ -70,13 +68,8 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the previous <see cref="NodeName">NodeName</see> of the
 		/// related Node.
 		/// </param>
-		void InitMutationNameEvent(
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			INode relatedNodeArg,
-			string prevNamespaceUri,
-			string prevNodeName);
+		void InitMutationNameEvent(string typeArg, bool canBubbleArg, bool cancelableArg,
+			INode relatedNodeArg, string prevNamespaceUri, string prevNodeName);
 		
 		/// <summary>
 		/// The
@@ -118,13 +111,7 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the previous <see cref="INode.NodeName">NodeName</see>
 		/// of the related Node.
 		/// </param>
-		void InitMutationNameEventNs(
-			string namespaceUri,
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			INode relatedNodeArg,
-			string prevNamespaceUri,
-			string prevNodeName);
+		void InitMutationNameEventNs(string namespaceUri, string typeArg, bool canBubbleArg,
+			bool cancelableArg, INode relatedNodeArg, string prevNamespaceUri, string prevNodeName);
 	}
 }

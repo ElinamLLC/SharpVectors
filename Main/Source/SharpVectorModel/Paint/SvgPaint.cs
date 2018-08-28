@@ -18,7 +18,7 @@ namespace SharpVectors.Dom.Svg
         public SvgPaint(string str)
             : base()
         {
-            _uri = String.Empty;
+            _uri = string.Empty;
             ParsePaint(str);
         }
 
@@ -151,7 +151,7 @@ namespace SharpVectors.Dom.Svg
                         cssText = "url(" + _uri + ") " + base.CssText;
                         break;
                     default:
-                        cssText = String.Empty;
+                        cssText = string.Empty;
                         break;
                 }
                 return cssText;

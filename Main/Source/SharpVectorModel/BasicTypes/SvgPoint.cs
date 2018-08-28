@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Svg
@@ -16,10 +12,10 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
     public sealed class SvgPoint : ISvgPoint
 	{
-		#region Fields
+		#region Private Fields
 
-		private double x;
-		private double y;
+		private double _x;
+		private double _y;
 		
         #endregion
 		
@@ -27,8 +23,8 @@ namespace SharpVectors.Dom.Svg
 
 		public SvgPoint(double x, double y)
 		{
-			this.x = x;
-			this.y = y;
+			_x = x;
+			_y = y;
 		}
 
 		#endregion
@@ -37,20 +33,19 @@ namespace SharpVectors.Dom.Svg
 
         public double X
 		{
-			get { return x; }
-			set { x = value; }
+			get { return _x; }
+			set { _x = value; }
 		}
 
         public double Y
 		{
-			get { return y; }
-			set { y = value; }
+			get { return _y; }
+			set { _y = value; }
 		}
 
 		public ISvgPoint MatrixTransform(ISvgMatrix matrix)
 		{
-			return new SvgPoint(matrix.A*x + matrix.C*y + matrix.E,
-                matrix.B*x + matrix.D*y + matrix.F);
+			return new SvgPoint(matrix.A*_x + matrix.C*_y + matrix.E, matrix.B*_x + matrix.D*_y + matrix.F);
 		}
 
 		#endregion
@@ -58,58 +53,37 @@ namespace SharpVectors.Dom.Svg
         #region Additional operators
 
         public SvgPoint lerp(SvgPoint that, double percent)         {
-            return new SvgPoint(
-                this.x + (that.x - this.x)*percent,
-                this.y + (that.y - this.y)*percent
-            );
+            return new SvgPoint(_x + (that._x - _x)*percent, _y + (that._y - _y)*percent);
         }
 
         public static SvgPoint operator+(SvgPoint a, SvgPoint b)
         {
-            return new SvgPoint(
-                a.x + b.x,
-                a.y + b.y
-            );
+            return new SvgPoint(a._x + b._x, a._y + b._y);
         }
 
         public static SvgPoint operator-(SvgPoint a, SvgPoint b)
         {
-            return new SvgPoint(
-                a.x - b.x,
-                a.y - b.y
-            );
+            return new SvgPoint(a._x - b._x, a._y - b._y);
         }
 
         public static SvgPoint operator*(SvgPoint a, double scalar)
         {
-            return new SvgPoint(
-                a.x * scalar,
-                a.y * scalar
-            );
+            return new SvgPoint(a._x * scalar, a._y * scalar);
         }
 
         public static SvgPoint operator*(double scalar, SvgPoint a)
         {
-            return new SvgPoint(
-                scalar * a.x,
-                scalar * a.y
-            );
+            return new SvgPoint(scalar * a._x, scalar * a._y);
         }
         
         public static SvgPoint operator/(SvgPoint a, double scalar)
         {
-            return new SvgPoint(
-                a.x / scalar,
-                a.y / scalar
-                );
+            return new SvgPoint(a._x / scalar, a._y / scalar);
         }
 
         public static SvgPoint operator/(double scalar, SvgPoint a)
         {
-            return new SvgPoint(
-                scalar / a.x,
-                scalar / a.y
-                );
+            return new SvgPoint(scalar / a._x, scalar / a._y);
         }
 
         #endregion

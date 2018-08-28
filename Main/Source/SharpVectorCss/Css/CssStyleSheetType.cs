@@ -1,12 +1,8 @@
-using System;
-
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
 	/// The different types of CssStyleSheets
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>100</completed>
 	public enum CssStyleSheetType {
 		/// <summary>
 		/// The stylesheet is a user agent stylesheet

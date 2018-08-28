@@ -1,6 +1,3 @@
-using System;
-using System.Xml;
-
 namespace SharpVectors.Dom
 {
 	public interface IDocument : INode

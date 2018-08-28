@@ -1,5 +1,3 @@
-using System;
-
 using SharpVectors.Dom.Views;
 
 namespace SharpVectors.Dom.Events
@@ -16,8 +14,7 @@ namespace SharpVectors.Dom.Events
 	/// <see cref="IDocumentEvent.CreateEvent">IDocumentEvent.CreateEvent</see>
 	/// method.
 	/// </remarks>
-	public interface ITextEvent
-		: IUiEvent
+	public interface ITextEvent : IUiEvent
 	{
 		/// <summary>
 		/// <see cref="Data">Data</see> holds the value of the characters
@@ -65,12 +62,8 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="ITextEvent">TextEvent</see>'s data
 		/// attribute.
 		/// </param>
-		void InitTextEvent(
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			string dataArg);
+		void InitTextEvent(string typeArg, bool canBubbleArg, bool cancelableArg,
+			IAbstractView viewArg, string dataArg);
 		
 		/// <summary>
 		/// The <see cref="InitTextEventNs">InitTextEventNs</see> method is
@@ -109,12 +102,7 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="ITextEvent">ITextEvent</see>'s data
 		/// attribute
 		/// </param>
-		void InitTextEventNs(
-			string namespaceUri,
-			string type,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			string dataArg);
+		void InitTextEventNs(string namespaceUri, string type, bool canBubbleArg,
+			bool cancelableArg, IAbstractView viewArg, string dataArg);
 	}
 }

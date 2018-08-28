@@ -1,10 +1,6 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>80</completed>
-
 using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Xml;
+using System.Collections.Generic;
 using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Css
@@ -16,6 +12,7 @@ namespace SharpVectors.Dom.Css
     public sealed class CssRuleList : ICssRuleList
 	{
 		#region Static members
+
 		/* can take two kind of structures:
 		 * rule{}
 		 * rule{}
@@ -29,7 +26,7 @@ namespace SharpVectors.Dom.Css
 		{
 			bool withBrackets = false;
 			css = css.Trim();
-			if(css.StartsWith("{"))
+			if(css.StartsWith("{", StringComparison.OrdinalIgnoreCase))
 			{
 				withBrackets = true;
 				css = css.Substring(1);
@@ -38,29 +35,29 @@ namespace SharpVectors.Dom.Css
 			while(true)
 			{
 				css = css.Trim();
-				if(css.Length == 0)
+				if (css.Length == 0)
 				{
-					if(withBrackets)
+					if (withBrackets)
 					{
 						throw new DomException(DomExceptionType.SyntaxErr, "Style block missing ending bracket");
 					}
 					break;
 				}
-				else if(css.StartsWith("}"))
+				else if (css.StartsWith("}", StringComparison.OrdinalIgnoreCase))
 				{
 					// end of block;
 					css = css.Substring(1);
 					break;
 				}
-				else if(css.StartsWith("@"))
+				else if (css.StartsWith("@", StringComparison.OrdinalIgnoreCase))
 				{
-					#region Parse at-rules
+					// Parse at-rules
 					// @-rule
 					CssRule rule;
 
 					// creates and parses a CssMediaRule or return null
 					rule = CssMediaRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
-					if(rule == null)
+					if (rule == null)
 					{
 						// create ImportRule
                         rule = CssImportRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
@@ -70,15 +67,15 @@ namespace SharpVectors.Dom.Css
 							// create CharSetRule
 							rule = CssCharsetRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
 
-							if(rule == null)
+							if (rule == null)
 							{
                                 rule = CssFontFaceRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
 
-								if(rule == null)
+								if (rule == null)
 								{
                                     rule = CssPageRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
 
-									if(rule == null)
+									if (rule == null)
 									{
                                         rule = CssUnknownRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
 									}
@@ -87,13 +84,12 @@ namespace SharpVectors.Dom.Css
 						}
 					}
 					InsertRule(rule);
-					#endregion
 				}
 				else
 				{
 					// must be a selector or error
 					CssRule rule = CssStyleRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
-					if(rule != null)
+					if (rule != null)
 					{
 						InsertRule(rule);
 					}
@@ -101,12 +97,12 @@ namespace SharpVectors.Dom.Css
 					{
                         // this is an unknown rule format, possibly a new kind of selector. Try to find the end of it to skip it
 
-						int startBracket = css.IndexOf("{");
-						int endBracket = css.IndexOf("}");
-						int endSemiColon = css.IndexOf(";");
+						int startBracket = css.IndexOf("{", StringComparison.OrdinalIgnoreCase);
+						int endBracket = css.IndexOf("}", StringComparison.OrdinalIgnoreCase);
+						int endSemiColon = css.IndexOf(";", StringComparison.OrdinalIgnoreCase);
 						int endRule;
 
-						if(endSemiColon > 0 && endSemiColon < startBracket)
+						if (endSemiColon > 0 && endSemiColon < startBracket)
 						{
 							endRule = endSemiColon;
 						}
@@ -116,7 +112,7 @@ namespace SharpVectors.Dom.Css
 						}
 
 
-						if(endRule > -1)
+						if (endRule > -1)
 						{
 							css = css.Substring(endRule+1);
 						}
@@ -125,8 +121,6 @@ namespace SharpVectors.Dom.Css
 							throw new DomException(DomExceptionType.SyntaxErr, "Can not parse the CSS file");
 						}
 					}
-
-				//}
 				}  
 			}
 		}

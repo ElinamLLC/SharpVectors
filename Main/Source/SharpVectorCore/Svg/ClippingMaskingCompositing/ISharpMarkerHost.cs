@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
@@ -11,8 +9,8 @@ namespace SharpVectors.Dom.Svg
 	/// A marker is a symbol which is attached to one or more vertices of
 	/// some Svg elements.  In order for a marker to be drawn correctly,
 	/// its orientation and position needs to be known.
-    /// See <see href="http://www.w3.org/TR/SVG/painting.html"
-    /// >SVG 1.0 Masking - Establishing A New Clipping Path</see>
+    /// See <see href="http://www.w3.org/TR/SVG/painting.html">SVG 1.0 Masking - Establishing 
+    /// A New Clipping Path</see>
 	/// </para>
 	/// <para>
 	/// This interface provides the information required to calculate the

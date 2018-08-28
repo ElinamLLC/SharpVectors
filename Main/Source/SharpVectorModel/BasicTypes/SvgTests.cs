@@ -1,24 +1,20 @@
-// <developer>kevin@kevlindev.com</developer>
-
 using System;
 using System.Xml;
 using System.Collections.Generic;
 
-using SharpVectors.Dom.Css;
-
 namespace SharpVectors.Dom.Svg
 {
-    /// <summary>    /// A class to encapsulate all SvgTest functionality.  Used by SVG elements as a helper class    /// </summary>
+    /// <summary>    /// A class to encapsulate all SvgTest functionality. Used by SVG elements as a helper class    /// </summary>
     public sealed class SvgTests : ISvgTests
 	{
 		#region Private fields
 
         private readonly static SvgReadOnlyStringList ReadOnlyStringList = new SvgReadOnlyStringList();
 		
-        private SvgElement     ownerElement;
-        private ISvgStringList requiredFeatures;
-        private ISvgStringList requiredExtensions;
-        private ISvgStringList systemLanguage;
+        private SvgElement     _ownerElement;
+        private ISvgStringList _requiredFeatures;
+        private ISvgStringList _requiredExtensions;
+        private ISvgStringList _systemLanguage;
 
 		#endregion
 
@@ -26,8 +22,8 @@ namespace SharpVectors.Dom.Svg
 
         public SvgTests(SvgElement ownerElement)
         {
-            this.ownerElement = ownerElement;
-            this.ownerElement.attributeChangeHandler += new NodeChangeHandler(AttributeChange);
+            _ownerElement = ownerElement;
+            _ownerElement.attributeChangeHandler += OnAttributeChange;
         }
 
         #endregion
@@ -38,18 +34,18 @@ namespace SharpVectors.Dom.Svg
         {
             get 
 			{ 
-				if(requiredFeatures == null)
+				if (_requiredFeatures == null)
 				{
-                    if (ownerElement.HasAttribute("requiredFeatures"))
+                    if (_ownerElement.HasAttribute("requiredFeatures"))
                     {
-                        requiredFeatures = new SvgStringList(ownerElement.GetAttribute("requiredFeatures"));
+                        _requiredFeatures = new SvgStringList(_ownerElement.GetAttribute("requiredFeatures"));
                     }
                     else
                     {
-                        requiredFeatures = ReadOnlyStringList;
+                        _requiredFeatures = ReadOnlyStringList;
                     }
 				}
-				return requiredFeatures; 
+				return _requiredFeatures; 
 			}
         }
 
@@ -58,19 +54,19 @@ namespace SharpVectors.Dom.Svg
         {
 			get 
 			{ 
-				if (requiredExtensions == null)
+				if (_requiredExtensions == null)
 				{
-                    if (ownerElement.HasAttribute("requiredExtensions"))
+                    if (_ownerElement.HasAttribute("requiredExtensions"))
                     {
-                        requiredExtensions = new SvgStringList(ownerElement.GetAttribute("requiredExtensions"));
+                        _requiredExtensions = new SvgStringList(_ownerElement.GetAttribute("requiredExtensions"));
                     }
                     else
                     {
-                        requiredExtensions = ReadOnlyStringList;
+                        _requiredExtensions = ReadOnlyStringList;
                     }
 				}
 
-				return requiredExtensions; 
+				return _requiredExtensions; 
 			}
         }
 
@@ -78,19 +74,19 @@ namespace SharpVectors.Dom.Svg
         {
 			get 
 			{ 
-				if(systemLanguage == null)
+				if (_systemLanguage == null)
 				{
-                    if (ownerElement.HasAttribute("systemLanguage"))
+                    if (_ownerElement.HasAttribute("systemLanguage"))
                     {
-                        systemLanguage = new SvgStringList(ownerElement.GetAttribute("systemLanguage"));
+                        _systemLanguage = new SvgStringList(_ownerElement.GetAttribute("systemLanguage"));
                     }
                     else
                     {
-                        systemLanguage = ReadOnlyStringList;
+                        _systemLanguage = ReadOnlyStringList;
                     }
 				}
 
-				return systemLanguage; 
+				return _systemLanguage; 
 			}
         }
 
@@ -100,7 +96,7 @@ namespace SharpVectors.Dom.Svg
 
 			for (uint i = 0; i < RequiredExtensions.NumberOfItems; i++)
             {
-                if (this.RequiredExtensions.GetItem(i) == extension)
+                if (string.Equals(RequiredExtensions.GetItem(i), extension))
                 {
                     result = true;
                     break;
@@ -114,22 +110,22 @@ namespace SharpVectors.Dom.Svg
 
 		#region Private Methods
 
-		private void AttributeChange(Object src, XmlNodeChangedEventArgs args)
+		private void OnAttributeChange(Object src, XmlNodeChangedEventArgs args)
 		{
 			XmlAttribute attribute = src as XmlAttribute;
 
-			if(attribute.NamespaceURI.Length == 0)
+			if (attribute.NamespaceURI.Length == 0)
 			{
-				switch(attribute.LocalName)
+				switch (attribute.LocalName)
 				{
 					case "requiredFeatures":
-						requiredFeatures = null;
+						_requiredFeatures = null;
 						break;
 					case "requiredExtensions":
-						requiredExtensions = null;
+						_requiredExtensions = null;
 						break;
 					case "systemLanguage":
-						systemLanguage = null;
+						_systemLanguage = null;
 						break;
 				}
 			}
@@ -193,7 +189,7 @@ namespace SharpVectors.Dom.Svg
 
             #region IEnumerable<string> Members
 
-            public System.Collections.Generic.IEnumerator<string> GetEnumerator()
+            public IEnumerator<string> GetEnumerator()
             {
                 return new List<string>().GetEnumerator();
             }

@@ -3,21 +3,22 @@ using System.Globalization;
 
 namespace SharpVectors.Dom.Css
 {
-    public sealed class CssNumber
+    public static class CssNumber
 	{
-		private static NumberFormatInfo format;
+		private static NumberFormatInfo _format;
 
 		public static NumberFormatInfo Format
 		{
 			get
 			{
-				if (format == null)
+				if (_format == null)
 				{
-					format = new NumberFormatInfo();
-					format.NumberDecimalSeparator = ".";
+					_format = new NumberFormatInfo();
+
+					_format.NumberDecimalSeparator = ".";
 				}
 
-				return format;
+				return _format;
 			}
 		}
 	}

@@ -3,199 +3,192 @@ using System.Xml;
 
 namespace SharpVectors.Dom.Svg
 {
-	public enum SvgSpreadMethod
+    public enum SvgSpreadMethod
     {
-		Pad     = 0, 
-		Reflect = 1, 
-		Repeat  = 2,
+        Pad     = 0,
+        Reflect = 1,
+        Repeat  = 2,
         None    = 3,
-	}
+    }
 
-	public abstract class SvgGradientElement : SvgStyleableElement, ISvgGradientElement
-    {  
-        private ISvgAnimatedEnumeration gradientUnits;
-        private ISvgAnimatedEnumeration spreadMethod;
-        private ISvgAnimatedTransformList gradientTransform;
+    public abstract class SvgGradientElement : SvgStyleableElement, ISvgGradientElement
+    {
+        #region Private Fields
 
-		protected SvgGradientElement(string prefix, string localname, string ns, SvgDocument doc)
-			: base(prefix, localname, ns, doc)
-		{
-			svgURIReference              = new SvgUriReference(this);
-			svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-		}
+        private ISvgAnimatedEnumeration _gradientUnits;
+        private ISvgAnimatedEnumeration _spreadMethod;
+        private ISvgAnimatedTransformList _gradientTransform;
 
-		#region ISvgGradientElement Members
+        private SvgUriReference _uriReference;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
-		public ISvgAnimatedEnumeration GradientUnits
-		{
-			get
-			{
-				if (!HasAttribute("gradientUnits") && ReferencedElement != null)
-				{
-					return ReferencedElement.GradientUnits;
-				}
+        #endregion
 
-				if (gradientUnits == null)
-				{
-					SvgUnitType gradUnit;
-					switch(GetAttribute("gradientUnits"))
-					{
-						case "userSpaceOnUse":
-							gradUnit = SvgUnitType.UserSpaceOnUse;
-							break;
-						default:
-							gradUnit = SvgUnitType.ObjectBoundingBox;
-							break;
-					}
+        #region Constructors and Destructor
 
-					gradientUnits = new SvgAnimatedEnumeration((ushort)gradUnit);
-				}
-				return gradientUnits;
-			}
-		}
+        protected SvgGradientElement(string prefix, string localname, string ns, SvgDocument doc)
+            : base(prefix, localname, ns, doc)
+        {
+            _uriReference = new SvgUriReference(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+        }
 
-		public ISvgAnimatedTransformList GradientTransform
-		{
-			get
-			{
-				if (!HasAttribute("gradientTransform") && ReferencedElement != null)
-				{
-					return ReferencedElement.GradientTransform;
-				}
-				if (gradientTransform == null)
-				{
-					gradientTransform = new SvgAnimatedTransformList(GetAttribute("gradientTransform"));
-				}
+        #endregion
 
-				return gradientTransform;
-			}
-		}
+        #region ISvgGradientElement Members
 
-		public ISvgAnimatedEnumeration SpreadMethod
-		{
-			get
-			{
-				if (!HasAttribute("spreadMethod") && ReferencedElement != null)
-				{
-					return ReferencedElement.SpreadMethod;
-				}
-				else
-				{
-					if (spreadMethod == null)
-					{
-						SvgSpreadMethod spreadMeth;
-						switch (GetAttribute("spreadMethod"))
-						{
-                            case "pad":
-                                spreadMeth = SvgSpreadMethod.Pad;
-                                break;
-							case "reflect":
-								spreadMeth = SvgSpreadMethod.Reflect;
-								break;
-							case "repeat":
-								spreadMeth = SvgSpreadMethod.Repeat;
-								break;
-							default:
-								spreadMeth = SvgSpreadMethod.Pad;
-								break;
-						}
+        public ISvgAnimatedEnumeration GradientUnits
+        {
+            get {
+                if (!HasAttribute("gradientUnits") && ReferencedElement != null)
+                {
+                    return ReferencedElement.GradientUnits;
+                }
 
-						spreadMethod = new SvgAnimatedEnumeration((ushort)spreadMeth);
-					}
+                if (_gradientUnits == null)
+                {
+                    SvgUnitType gradUnit;
+                    switch (GetAttribute("gradientUnits"))
+                    {
+                        case "userSpaceOnUse":
+                            gradUnit = SvgUnitType.UserSpaceOnUse;
+                            break;
+                        default:
+                            gradUnit = SvgUnitType.ObjectBoundingBox;
+                            break;
+                    }
 
-					return spreadMethod;
-				}
-			}
-		}
+                    _gradientUnits = new SvgAnimatedEnumeration((ushort)gradUnit);
+                }
+                return _gradientUnits;
+            }
+        }
 
-		#endregion
+        public ISvgAnimatedTransformList GradientTransform
+        {
+            get {
+                if (!HasAttribute("gradientTransform") && ReferencedElement != null)
+                {
+                    return ReferencedElement.GradientTransform;
+                }
+                if (_gradientTransform == null)
+                {
+                    _gradientTransform = new SvgAnimatedTransformList(GetAttribute("gradientTransform"));
+                }
 
-		#region ISvgURIReference Members
+                return _gradientTransform;
+            }
+        }
 
-		private SvgUriReference svgURIReference;
-		public ISvgAnimatedString Href
-		{
-			get
-			{
-				return svgURIReference.Href;
-			}
-		}
+        public ISvgAnimatedEnumeration SpreadMethod
+        {
+            get {
+                if (!HasAttribute("spreadMethod") && ReferencedElement != null)
+                {
+                    return ReferencedElement.SpreadMethod;
+                }
+                if (_spreadMethod == null)
+                {
+                    SvgSpreadMethod spreadMeth;
+                    switch (GetAttribute("spreadMethod"))
+                    {
+                        case "pad":
+                            spreadMeth = SvgSpreadMethod.Pad;
+                            break;
+                        case "reflect":
+                            spreadMeth = SvgSpreadMethod.Reflect;
+                            break;
+                        case "repeat":
+                            spreadMeth = SvgSpreadMethod.Repeat;
+                            break;
+                        default:
+                            spreadMeth = SvgSpreadMethod.Pad;
+                            break;
+                    }
 
-		public SvgGradientElement ReferencedElement
-		{
-			get
-			{
-				return svgURIReference.ReferencedNode as SvgGradientElement;
-			}
-		}
+                    _spreadMethod = new SvgAnimatedEnumeration((ushort)spreadMeth);
+                }
 
-		#endregion
+                return _spreadMethod;
+            }
+        }
 
-		#region ISvgExternalResourcesRequired Members
+        #endregion
 
-		private SvgExternalResourcesRequired svgExternalResourcesRequired;
-		public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return svgExternalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
+        #region ISvgURIReference Members
 
-		#endregion
+        public ISvgAnimatedString Href
+        {
+            get {
+                return _uriReference.Href;
+            }
+        }
 
-		#region Public Properties
+        public SvgGradientElement ReferencedElement
+        {
+            get {
+                return _uriReference.ReferencedNode as SvgGradientElement;
+            }
+        }
 
-		public XmlNodeList Stops
-		{
-			get
-			{
-				XmlNodeList stops = SelectNodes("svg:stop", OwnerDocument.NamespaceManager);
-				if(stops.Count > 0)
-				{
-					return stops;
-				}
-				else
-				{
-					// check any eventually referenced gradient
-					if(ReferencedElement == null)
-					{
-						// return an empty list
-						return stops;
-					}
-					else
-					{
-						return ReferencedElement.Stops;
-					}
-				}
-			}
-		}
+        #endregion
 
-		#endregion
+        #region ISvgExternalResourcesRequired Members
 
-		#region Update handling
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
 
-		public override void HandleAttributeChange(XmlAttribute attribute)
-		{
-			if (attribute.NamespaceURI.Length == 0)
-			{
-				switch (attribute.LocalName)
-				{
-					case "gradientUnits":
-						gradientUnits = null;
-						break;
-					case "gradientTransform":
-						gradientTransform = null;
-						break;
-					case "spreadMethod":
-						spreadMethod = null;
-						break;
-				}
-			}
+        #endregion
+
+        #region Public Properties
+
+        public XmlNodeList Stops
+        {
+            get {
+                XmlNodeList stops = SelectNodes("svg:stop", OwnerDocument.NamespaceManager);
+                if (stops.Count > 0)
+                {
+                    return stops;
+                }
+                // check any eventually referenced gradient
+                if (ReferencedElement == null)
+                {
+                    // return an empty list
+                    return stops;
+                }
+                return ReferencedElement.Stops;
+            }
+        }
+
+        #endregion
+
+        #region Update handling
+
+        public override void HandleAttributeChange(XmlAttribute attribute)
+        {
+            if (attribute.NamespaceURI.Length == 0)
+            {
+                switch (attribute.LocalName)
+                {
+                    case "gradientUnits":
+                        _gradientUnits = null;
+                        break;
+                    case "gradientTransform":
+                        _gradientTransform = null;
+                        break;
+                    case "spreadMethod":
+                        _spreadMethod = null;
+                        break;
+                }
+            }
 
             base.HandleAttributeChange(attribute);
-		}
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

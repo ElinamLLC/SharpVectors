@@ -1,4 +1,3 @@
-using System;
 using SharpVectors.Dom.Views;
 
 namespace SharpVectors.Dom.Events
@@ -14,8 +13,7 @@ namespace SharpVectors.Dom.Events
 	/// <see cref="IDocumentEvent.CreateEvent">IDocumentEvent.CreateEvent</see>
 	/// method.
 	/// </remarks>
-	public interface IUiEvent
-		: IEvent
+	public interface IUiEvent : IEvent
 	{
 		/// <summary>
 		/// The <see cref="View">View</see> attribute identifies the
@@ -71,12 +69,7 @@ namespace SharpVectors.Dom.Events
 		/// <param name="detailArg">
 		/// Specifies the <see cref="IEvent">IEvent</see>'s detail.
 		/// </param>
-		void InitUiEvent(
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg, 
-			IAbstractView viewArg,
-			long detailArg);
+		void InitUiEvent(string typeArg, bool canBubbleArg, bool cancelableArg, IAbstractView viewArg, long detailArg);
 		
 		/// <summary>
 		/// The <see cref="InitUiEventNs">InitUiEventNs</see> method is used
@@ -114,12 +107,7 @@ namespace SharpVectors.Dom.Events
 		/// <param name="detailArg">
 		/// Specifies the <see cref="IEvent">IEvent</see>'s detail.
 		/// </param>
-		void InitUiEventNs(
-			string namespaceURI,
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			long detailArg);
+		void InitUiEventNs(string namespaceURI, string typeArg, bool canBubbleArg,
+			bool cancelableArg, IAbstractView viewArg, long detailArg);
 	}
 }

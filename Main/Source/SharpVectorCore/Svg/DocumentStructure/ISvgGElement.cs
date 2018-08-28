@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>99</completed>
-
 using SharpVectors.Dom.Events;
 
 namespace SharpVectors.Dom.Svg

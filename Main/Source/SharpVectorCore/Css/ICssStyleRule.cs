@@ -1,13 +1,9 @@
-using System;
-
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
 	/// The CSSStyleRule interface represents a single rule set 
 	/// in a CSS style sheet. 
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>90</completed>	
 	public interface ICssStyleRule : ICssRule
 	{
 		/// <summary>

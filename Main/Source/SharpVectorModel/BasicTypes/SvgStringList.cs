@@ -1,12 +1,5 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com.com</developer>
-// <completed>100</completed>
-
 using System;
-using System.Text;
 using System.Text.RegularExpressions;
-
-using SharpVectors.Dom;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -25,10 +18,13 @@ namespace SharpVectors.Dom.Svg
         {
             this.FromString(listString);
         }
+
         #endregion
 
-		public void FromString(string listString)
-		{
+        #region Public Methods
+
+        public void FromString(string listString)
+        {
             // remove existing list items
             Clear();
 
@@ -53,9 +49,11 @@ namespace SharpVectors.Dom.Svg
                 }
                 else
                 {
-                    AppendItem(String.Empty);
+                    AppendItem(string.Empty);
                 }
             }
-		}
-	}
+        }
+
+        #endregion
+    }
 }

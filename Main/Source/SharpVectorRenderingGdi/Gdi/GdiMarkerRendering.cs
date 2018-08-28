@@ -1,13 +1,15 @@
 using System;
-using System.Xml;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
 {
-	public enum SvgMarkerPosition{Start, Mid, End}
+	public enum SvgMarkerPosition
+    {
+        Start,
+        Mid,
+        End
+    }
 
     public sealed class GdiMarkerRendering : GdiRendering
 	{

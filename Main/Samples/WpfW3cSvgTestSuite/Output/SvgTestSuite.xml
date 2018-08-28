@@ -61,12 +61,12 @@
         <test source="animate-elem-85-t.svg" title="animate-elem-85-t" state="failure" comment="SVG animation is currently not supported." description="" />
     </category>
     <category label="Colors">
-        <test source="color-prof-01-f.svg" title="color-prof-01-f" state="partial" comment="The effect is different." description="Basic test of ICC profile with an image." />
+        <test source="color-prof-01-f.svg" title="color-prof-01-f" state="partial" comment="The effect is different. All browsers produce the same results as the converted image, but Apache's Batik and Inkspace give the same result as the expected." description="Basic test of ICC profile with an image." />
         <test source="color-prop-01-b.svg" title="color-prop-01-b" state="success" comment="" description="Test that viewer has the basic capability to process the color property" />
         <test source="color-prop-02-f.svg" title="color-prop-02-f" state="success" comment="" description="Test that viewer has the basic capability to render X11colors, using any of the equivalent forms." />
         <test source="color-prop-03-t.svg" title="color-prop-03-t" state="success" comment="" description="Test that viewer has the basic capability to render colors, specified as CSS attributes, using any of the equivalent forms." />
     </category>
-    <category label="Coordinates">
+    <category label="Coordinates and Transforms">
         <test source="coords-coord-01-t.svg" title="coords-coord-01-t" state="success" comment="" description="" />
         <test source="coords-coord-02-t.svg" title="coords-coord-02-t" state="success" comment="" description="" />
         <test source="coords-trans-01-b.svg" title="coords-trans-01-b" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
@@ -82,7 +82,7 @@
         <test source="coords-viewattr-02-b.svg" title="coords-viewattr-02-b" state="partial" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
         <test source="coords-viewattr-03-b.svg" title="coords-viewattr-03-b" state="success" comment="" description="Tests the viewBox attribute on SVG elements" />
     </category>
-    <category label="Filters">
+    <category label="Filter Effects">
         <test source="filters-blend-01-b.svg" title="filters-blend-01-b" state="failure" comment="" description="Examples of feBlend operations" />
         <test source="filters-color-01-b.svg" title="filters-color-01-b" state="failure" comment="" description="Test which verifies the basic facilities of feColorMatrix." />
         <test source="filters-composite-02-b.svg" title="filters-composite-02-b" state="failure" comment="" description="Test which verifies the basic facilities of feComposite." />
@@ -145,11 +145,6 @@
         <test source="masking-path-04-b.svg" title="masking-path-04-b" state="success" comment="" description="Check that user-specified (non-default) clipPaths work." />
         <test source="masking-path-05-f.svg" title="masking-path-05-f" state="success" comment="" description="Test to see if clip-rule property has been implemented properly." />
     </category>
-    <category label="Others">
-        <test source="extend-namespace-01-f.svg" title="extend-namespace-01-f" state="failure" comment="Scripting is not supported yet." description="Test the use of multiple namespaces." />
-        <test source="metadata-example-01-b.svg" title="metadata-example-01-b" state="success" comment="" description="Verify that the viewer is not perturbed by the presence of metadata." />
-        <test source="types-basicDOM-01-b.svg" title="types-basicDOM-01-b" state="partial" comment="" description="" />
-    </category>
     <category label="Paint Servers">
         <test source="pservers-grad-01-b.svg" title="pservers-grad-01-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on linear, radial gradients and patterns." />
         <test source="pservers-grad-02-b.svg" title="pservers-grad-02-b" state="success" comment="" description="Test that the viewer can handle the xlink:href attribute on linear, radial gradients and patterns." />
@@ -190,9 +185,9 @@
     <category label="Painting Stroke">
         <test source="painting-stroke-01-t.svg" title="painting-stroke-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;stroke properites&gt;" />
         <test source="painting-stroke-02-t.svg" title="painting-stroke-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;stroke properites&gt;" />
-        <test source="painting-stroke-03-t.svg" title="painting-stroke-03-t" state="partial" comment="WPF support for miter limit is different. The current solution is hacked and requires more testing." description="Test that viewer has the basic capability to handle the &lt;stroke properties&gt;" />
+        <test source="painting-stroke-03-t.svg" title="painting-stroke-03-t" state="success" comment="NOTE: WPF support for miter limit is different. The current solution is hacked and requires more testing." description="Test that viewer has the basic capability to handle the &lt;stroke properties&gt;" />
         <test source="painting-stroke-04-t.svg" title="painting-stroke-04-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;stroke,stroke-opacity properites&gt;" />
-        <test source="painting-stroke-07-t.svg" title="painting-stroke-07-t" state="partial" comment="WPF support for miter limit is different. The current solution is hacked and requires more testing." description="" />
+        <test source="painting-stroke-07-t.svg" title="painting-stroke-07-t" state="success" comment="NOTE: WPF support for miter limit is different. The current solution is hacked and requires more testing." description="" />
     </category>
     <category label="Paths">
         <test source="paths-data-01-t.svg" title="paths-data-01-t" state="success" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the cubic Bezier curveto, both regular and shorthand/smooth forms - C, c, S, s (along with Mm and Zz)." />
@@ -318,5 +313,10 @@
         <test source="text-tspan-01-b.svg" title="text-tspan-01-b" state="success" comment="" description="Test viewer capability to handle the basics of 'tspan'." />
         <test source="text-ws-01-t.svg" title="text-ws-01-t" state="success" comment="" description="Test that viewer correctly handle whitespace and the &quot;space&quot; attribute." />
         <test source="text-ws-02-t.svg" title="text-ws-02-t" state="success" comment="" description="Test that viewer correctly handle whitespace and the &quot;space&quot; attribute." />
+    </category>
+    <category label="Metadata and Others">
+        <test source="extend-namespace-01-f.svg" title="extend-namespace-01-f" state="failure" comment="Scripting is not supported yet." description="Test the use of multiple namespaces." />
+        <test source="metadata-example-01-b.svg" title="metadata-example-01-b" state="success" comment="" description="Verify that the viewer is not perturbed by the presence of metadata." />
+        <test source="types-basicDOM-01-b.svg" title="types-basicDOM-01-b" state="partial" comment="" description="" />
     </category>
 </tests>

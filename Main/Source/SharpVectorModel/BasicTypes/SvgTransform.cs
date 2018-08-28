@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-
 using System;
 using System.Text.RegularExpressions;
 
@@ -28,9 +25,9 @@ namespace SharpVectors.Dom.Svg
 
         #region Private Fields
 
-        private short type;
-        private double angle;
-        private ISvgMatrix matrix;
+        private short _type;
+        private double _angle;
+        private ISvgMatrix _matrix;
 
         #endregion
 
@@ -42,13 +39,13 @@ namespace SharpVectors.Dom.Svg
 
         public SvgTransform(ISvgMatrix matrix)
         {
-            this.type = (short) SvgTransformType.Matrix;
-            this.matrix = matrix;
+            _type   = (short) SvgTransformType.Matrix;
+            _matrix = matrix;
         }
 
 		public SvgTransform(string str)
 		{
-			int start = str.IndexOf("(");
+			int start = str.IndexOf("(", StringComparison.OrdinalIgnoreCase);
 			string type = str.Substring(0, start);
 			string valuesList = (str.Substring(start+1, str.Length - start - 2)).Trim(); //JR added trim
 			Regex re = new Regex("[\\s\\,]+"); 
@@ -59,7 +56,6 @@ namespace SharpVectors.Dom.Svg
 
 			for (int i = 0; i<len; i++)
 			{
-				//values.SetValue(SvgNumber.ParseToFloat(valuesStr[i]), i);
                 values[i] = SvgNumber.ParseNumber(valuesStr[i]);
 			}
 
@@ -118,17 +114,10 @@ namespace SharpVectors.Dom.Svg
                     if(len != 6)
                         throw new ApplicationException("Wrong number of arguments in matrix transform");
                     SetMatrix(
-                        new SvgMatrix(
-                        values[0],
-                        values[1],
-                        values[2],
-                        values[3],
-                        values[4],
-                        values[5]
-                        ));
+                        new SvgMatrix(values[0], values[1], values[2], values[3], values[4], values[5]));
                     break;
                 default:
-                    this.type = (short) SvgTransformType.Unknown;
+                    this._type = (short) SvgTransformType.Unknown;
                     break;
             }
 		}
@@ -139,63 +128,63 @@ namespace SharpVectors.Dom.Svg
 
 		public short Type
 		{
-			get { return type; }
+			get { return _type; }
 		}
 
 		public ISvgMatrix Matrix
 		{
-			get { return matrix; }
+			get { return _matrix; }
 		}
 
         public double Angle
 		{
-            get { return angle; }
+            get { return _angle; }
 		}
 
 		public void SetMatrix(ISvgMatrix matrix)
 		{
-			type = (short) SvgTransform.SvgTransformType.Matrix;
-			this.matrix = matrix;
+			_type   = (short)SvgTransformType.Matrix;
+			_matrix = matrix;
 		}
 
         public void SetTranslate(double tx, double ty)
 		{
-			type = (short) SvgTransform.SvgTransformType.Translate;
-			matrix = new SvgMatrix().Translate(tx, ty);
+			_type   = (short)SvgTransformType.Translate;
+			_matrix = new SvgMatrix().Translate(tx, ty);
 		}
 
         public void SetScale(double sx, double sy)
 		{
-			type = (short) SvgTransform.SvgTransformType.Scale;
-			matrix = new SvgMatrix().ScaleNonUniform(sx, sy);
+			_type   = (short)SvgTransformType.Scale;
+			_matrix = new SvgMatrix().ScaleNonUniform(sx, sy);
 		}
 
         public void SetRotate(double angle)
 		{
-			type = (short) SvgTransform.SvgTransformType.Rotate;
-			this.angle = angle;
-			matrix = new SvgMatrix().Rotate(angle);
+			_type   = (short)SvgTransformType.Rotate;
+			_angle  = angle;
+			_matrix = new SvgMatrix().Rotate(angle);
 		}
 
         public void SetRotate(double angle, double cx, double cy)
 		{
-			type = (short) SvgTransform.SvgTransformType.Rotate;
-			this.angle = angle;
-			matrix = new SvgMatrix().Translate(cx, cy).Rotate(angle).Translate(-cx,-cy);
+			_type   = (short)SvgTransformType.Rotate;
+			_angle  = angle;
+			_matrix = new SvgMatrix().Translate(cx, cy).Rotate(angle).Translate(-cx,-cy);
 		}
 
         public void SetSkewX(double angle)
 		{
-			type = (short) SvgTransform.SvgTransformType.SkewX;
-			this.angle = angle;
-			matrix = new SvgMatrix().SkewX(angle);
+			_type   = (short)SvgTransformType.SkewX;
+			_angle  = angle;
+			_matrix = new SvgMatrix().SkewX(angle);
 		}
 
         public void SetSkewY(double angle)
 		{
-			type = (short) SvgTransform.SvgTransformType.SkewY;
-			this.angle = angle;
-			matrix = new SvgMatrix().SkewY(angle);
+			_type   = (short)SvgTransformType.SkewY;
+			_angle  = angle;
+			_matrix = new SvgMatrix().SkewY(angle);
 		}
 
         #endregion

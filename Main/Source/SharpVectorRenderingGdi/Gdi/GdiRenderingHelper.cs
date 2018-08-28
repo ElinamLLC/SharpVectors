@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Xml;
-using System.Text;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -227,7 +223,7 @@ namespace SharpVectors.Renderers.Gdi
             {
                 foreach (string req in element.RequiredFeatures)
                 {
-                    if (!ownerDocument.Supports(req, String.Empty))
+                    if (!ownerDocument.Supports(req, string.Empty))
                     {
                         requiredFeatures = false;
                         break;
@@ -244,7 +240,7 @@ namespace SharpVectors.Renderers.Gdi
             {
                 foreach (string req in element.RequiredExtensions)
                 {
-                    if (!ownerDocument.Supports(req, String.Empty))
+                    if (!ownerDocument.Supports(req, string.Empty))
                     {
                         requiredExtensions = false;
                         break;

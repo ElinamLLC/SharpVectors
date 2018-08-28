@@ -10,10 +10,16 @@ namespace SharpVectors.Dom.Css
 
     public class CssXmlElement : Element, IElementCssInlineStyle
     {
+        #region Private Fields
+
+        private ICssStyleDeclaration style;
+        protected ICssStyleDeclaration cachedCSD;
+
+        #endregion
+
         #region Constructors
 
-        public CssXmlElement(string prefix, string localname, string ns,
-            CssXmlDocument doc)
+        public CssXmlElement(string prefix, string localname, string ns, CssXmlDocument doc)
             : base(prefix, localname, ns, doc)
         {
         }
@@ -22,15 +28,14 @@ namespace SharpVectors.Dom.Css
 
         #region Style attribute
 
-        private ICssStyleDeclaration style;
-
         public ICssStyleDeclaration Style
         {
             get
             {
                 if (style == null)
                 {
-                    style = new CssStyleDeclaration(GetAttribute("style", String.Empty), null, false, CssStyleSheetType.Inline);
+                    style = new CssStyleDeclaration(GetAttribute("style", string.Empty), 
+                        null, false, CssStyleSheetType.Inline);
                 }
                 return style;
             }
@@ -39,8 +44,6 @@ namespace SharpVectors.Dom.Css
         #endregion
 
         #region GetComputedStyle
-
-        protected ICssStyleDeclaration cachedCSD;
 
         public virtual ICssStyleDeclaration GetComputedStyle(string pseudoElt)
         {

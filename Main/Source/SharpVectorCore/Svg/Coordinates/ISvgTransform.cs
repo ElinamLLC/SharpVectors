@@ -1,11 +1,9 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
-	/// SvgTransform is the interface for one of the component transformations within a SvgTransformList; thus, a SvgTransform object corresponds to a single component (e.g., "scale(..)" or "matrix(...)") within a transform attribute specification. 
+	/// SvgTransform is the interface for one of the component transformations within a SvgTransformList; 
+    /// thus, a SvgTransform object corresponds to a single component (e.g., "scale(..)" or "matrix(...)") 
+    /// within a transform attribute specification. 
 	/// </summary>
 	public interface ISvgTransform
 	{

@@ -1,14 +1,8 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
-using System;
-
 namespace SharpVectors.Dom.Stylesheets
 {
 	/// <summary>
-	/// The MediaList interface provides the abstraction of an 
-	/// ordered collection of media, without defining or constraining
-	/// how this collection is implemented. An empty list is the same
+	/// The MediaList interface provides the abstraction of an ordered collection of media, without 
+    /// defining or constraining how this collection is implemented. An empty list is the same
 	/// as a list that contains the medium "all". 
 	/// </summary>
 	public interface IMediaList

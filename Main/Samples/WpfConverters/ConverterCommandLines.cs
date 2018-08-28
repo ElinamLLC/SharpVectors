@@ -224,7 +224,7 @@ namespace SharpVectors.Converters
                 }
                 else
                 {
-                    _image = String.Empty;
+                    _image = string.Empty;
                 }
             }
         }

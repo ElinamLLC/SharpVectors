@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
@@ -27,12 +25,10 @@ namespace SharpVectors.Dom.Events
 	/// </para>
 	/// <para>
 	/// Note: If this interface is supported by the event object,
-	/// <see cref="IEvent.IsCustom">IEvent.IsCustom</see> must return
-	/// <c>true</c>.
+	/// <see cref="IEvent.IsCustom">IEvent.IsCustom</see> must return <c>true</c>.
 	/// </para>
 	/// </remarks>
-	public interface ICustomEvent
-		: IEvent
+	public interface ICustomEvent : IEvent
 	{
 		#region Properties
 		

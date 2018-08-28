@@ -20,8 +20,7 @@ namespace SharpVectors.Converters
         {
         }
 
-        public override BitmapSource Visit(SvgImageElement element, 
-            WpfDrawingContext context)
+        public override BitmapSource Visit(SvgImageElement element, WpfDrawingContext context)
         {
             string sURI    = element.Href.AnimVal;
             int nColon     = sURI.IndexOf(":");

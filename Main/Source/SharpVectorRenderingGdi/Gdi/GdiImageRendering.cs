@@ -3,9 +3,7 @@ using System.IO;
 using System.Net;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
 
-using SharpVectors.Net;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi

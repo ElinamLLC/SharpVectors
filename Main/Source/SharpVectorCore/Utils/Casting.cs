@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SharpVectors
+﻿namespace SharpVectors
 {
     public static class TryCast
     {

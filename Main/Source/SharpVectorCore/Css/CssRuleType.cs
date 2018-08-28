@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
@@ -7,8 +5,6 @@ namespace SharpVectors.Dom.Css
 	///     Values.  This is an extension of the CSS spec.  The spec
 	///     contains only a list of contstant in the CssRule Interface. 
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>100</completed>
 	public enum CssRuleType
 	{
 		/// <summary>

@@ -1,7 +1,4 @@
 using System;
-using System.Xml;
-
-using SharpVectors.Dom.Events;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -10,17 +7,21 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public sealed class SvgGElement : SvgTransformableElement, ISvgGElement
     {
-        private SvgTests svgTests;
+        #region Private Fields
 
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
-        
+        private SvgTests _svgTests;
+
+        private SvgExternalResourcesRequired _externalResourcesRequired;
+
+        #endregion
+
         #region Constructors
 
         internal SvgGElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            svgTests = new SvgTests(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests = new SvgTests(this);
         }
 
         #endregion
@@ -50,7 +51,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -60,22 +61,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion

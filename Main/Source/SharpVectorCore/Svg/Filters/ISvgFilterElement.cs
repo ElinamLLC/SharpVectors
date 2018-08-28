@@ -1,17 +1,9 @@
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
 	/// </summary>
-	/// <developer>don@donxml.com</developer>
-	/// <completed>100</completed>
-	public interface ISvgFilterElement :
-		ISvgElement,
-		ISvgUriReference,
-		ISvgLangSpace,
-		ISvgExternalResourcesRequired,
-		ISvgStylable
+	public interface ISvgFilterElement : ISvgElement, ISvgUriReference, ISvgLangSpace,
+		ISvgExternalResourcesRequired, ISvgStylable
 	{
 		ISvgAnimatedEnumeration FilterUnits{get;}
 		ISvgAnimatedEnumeration PrimitiveUnits{get;}

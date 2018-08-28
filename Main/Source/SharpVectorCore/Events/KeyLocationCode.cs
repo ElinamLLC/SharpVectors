@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <remarks>
@@ -9,8 +7,7 @@ namespace SharpVectors.Dom.Events
 	/// values above the value of this constant as being equivalent to
 	/// <see cref="KeyLocationCode.Unknown">Unknown</see>.
 	/// </remarks>
-	public enum KeyLocationCode
-		: ulong
+	public enum KeyLocationCode : ulong
 	{
 		/// <summary>
 		/// The key activation is not distinguished as the left or right

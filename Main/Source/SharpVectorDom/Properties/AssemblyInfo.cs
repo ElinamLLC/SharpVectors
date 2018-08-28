@@ -1,8 +1,5 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Security.Permissions;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -11,11 +8,15 @@ using System.Security.Permissions;
 //
 [assembly: AssemblyTitle("SVG 1.1 DOM Implementation")]
 [assembly: AssemblyDescription("DOM L1, L2, L3 Implementation")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SharpVectorGraphics")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+#endif
+[assembly: AssemblyCompany("Elinam LLC, Japan")]
+[assembly: AssemblyProduct("SharpVectors.Dom")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2018 Elinam LLC")]
+[assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 //[assembly: AllowPartiallyTrustedCallers] 
 
@@ -29,10 +30,9 @@ using System.Security.Permissions;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyInformationalVersion("1.1.0.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

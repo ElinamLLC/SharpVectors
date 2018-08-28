@@ -78,7 +78,7 @@ namespace SharpVectors.Runtime
             _tooltip.VerticalOffset     = 20;
 
             _tooltipText        = new TextBlock();
-            _tooltipText.Text   = String.Empty;
+            _tooltipText.Text   = string.Empty;
             _tooltipText.Margin = new Thickness(6, 0, 0, 0);
 
             //Create BulletDecorator and set it as the tooltip content.

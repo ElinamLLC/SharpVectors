@@ -1,19 +1,12 @@
 using System;
 using System.IO;
-using System.Xml;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
-using System.Collections.Generic;
 
-using SharpVectors.Net;
-using SharpVectors.Xml;
-using SharpVectors.Dom;
 using SharpVectors.Dom.Css;
-using SharpVectors.Dom.Events;
 using SharpVectors.Dom.Svg;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Gdi;
 
 namespace SharpVectors.Renderers.Forms

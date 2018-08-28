@@ -2,10 +2,8 @@
 using System.Xml;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Text;
 using System.Text.RegularExpressions;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -31,8 +29,7 @@ namespace SharpVectors.Renderers.Gdi
 
         public override bool IsRecursive
         {
-            get
-            {
+            get {
                 return true;
             }
         }
@@ -74,7 +71,7 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             string sVisibility = textElement.GetPropertyValue("visibility");
-            string sDisplay    = textElement.GetPropertyValue("display");
+            string sDisplay = textElement.GetPropertyValue("display");
             if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
             {
                 return;
@@ -83,7 +80,7 @@ namespace SharpVectors.Renderers.Gdi
             Clip(_graphics);
 
             PointF ctp = new PointF(0, 0); // current text position
-            
+
             ctp = GetCurrentTextPosition(textElement, ctp);
             string sBaselineShift = textElement.GetPropertyValue("baseline-shift").Trim();
             double shiftBy = 0;
@@ -176,7 +173,7 @@ namespace SharpVectors.Renderers.Gdi
         {
             Regex tabNewline = new Regex(@"[\n\f\t]");
             if (element.XmlSpace != "preserve")
-                val = val.Replace("\n", String.Empty);
+                val = val.Replace("\n", string.Empty);
             val = tabNewline.Replace(val, " ");
 
             if (element.XmlSpace == "preserve")
@@ -195,17 +192,17 @@ namespace SharpVectors.Renderers.Gdi
             if (text.Length == 0)
                 return;
 
-            float emSize      = GetComputedFontSize(element);
+            float emSize = GetComputedFontSize(element);
             FontFamily family = GetGDIFontFamily(element, emSize);
-            int style         = GetGDIFontStyle(element);
-            StringFormat sf   = GetGDIStringFormat(element);
+            int style = GetGDIFontStyle(element);
+            StringFormat sf = GetGDIStringFormat(element);
 
             GraphicsPath textGeometry = new GraphicsPath();
 
             float xCorrection = 0;
-            if (sf.Alignment == StringAlignment.Near) 
+            if (sf.Alignment == StringAlignment.Near)
                 xCorrection = emSize * 1 / 6;
-            else if (sf.Alignment == StringAlignment.Far) 
+            else if (sf.Alignment == StringAlignment.Far)
                 xCorrection = -emSize * 1 / 6;
 
             float yCorrection = (float)(family.GetCellAscent(FontStyle.Regular)) / (float)(family.GetEmHeight(FontStyle.Regular)) * emSize;
@@ -217,9 +214,9 @@ namespace SharpVectors.Renderers.Gdi
             if (!textGeometry.GetBounds().IsEmpty)
             {
                 float bboxWidth = textGeometry.GetBounds().Width;
-                if (sf.Alignment == StringAlignment.Center) 
+                if (sf.Alignment == StringAlignment.Center)
                     bboxWidth /= 2;
-                else if (sf.Alignment == StringAlignment.Far) 
+                else if (sf.Alignment == StringAlignment.Far)
                     bboxWidth = 0;
 
                 ctp.X += bboxWidth + emSize / 4;
@@ -283,7 +280,7 @@ namespace SharpVectors.Renderers.Gdi
             }
             else
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -308,7 +305,7 @@ namespace SharpVectors.Renderers.Gdi
                 float textFontSize = GetComputedFontSize(textElement);
                 if (sBaselineShift.EndsWith("%"))
                 {
-                    shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0, 
+                    shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100 * textFontSize;
                 }
                 else if (sBaselineShift == "sub")
@@ -389,7 +386,7 @@ namespace SharpVectors.Renderers.Gdi
 
         private FontFamily GetGDIFontFamily(SvgTextContentElement element, float fontSize)
         {
-            string fontFamily  = element.GetPropertyValue("font-family");
+            string fontFamily = element.GetPropertyValue("font-family");
             string[] fontNames = fontNames = fontFamily.Split(new char[1] { ',' });
 
             FontFamily family;
@@ -400,13 +397,13 @@ namespace SharpVectors.Renderers.Gdi
                 {
                     string fontName = fn.Trim(new char[] { ' ', '\'', '"' });
 
-                    if (fontName == "serif") 
+                    if (fontName == "serif")
                         family = FontFamily.GenericSerif;
-                    else if (fontName == "sans-serif") 
+                    else if (fontName == "sans-serif")
                         family = FontFamily.GenericSansSerif;
-                    else if (fontName == "monospace") 
+                    else if (fontName == "monospace")
                         family = FontFamily.GenericMonospace;
-                    else 
+                    else
                         family = new FontFamily(fontName);		// Font(,fontSize).FontFamily;	
 
                     return family;
@@ -434,18 +431,18 @@ namespace SharpVectors.Renderers.Gdi
             if (doAlign)
             {
                 string anchor = element.GetPropertyValue("text-anchor");
-                if (anchor == "middle") 
+                if (anchor == "middle")
                     sf.Alignment = StringAlignment.Center;
-                if (anchor == "end") 
+                if (anchor == "end")
                     sf.Alignment = StringAlignment.Far;
             }
 
             string dir = element.GetPropertyValue("direction");
             if (dir == "rtl")
             {
-                if (sf.Alignment == StringAlignment.Far) 
+                if (sf.Alignment == StringAlignment.Far)
                     sf.Alignment = StringAlignment.Near;
-                else if (sf.Alignment == StringAlignment.Near) 
+                else if (sf.Alignment == StringAlignment.Near)
                     sf.Alignment = StringAlignment.Far;
                 sf.FormatFlags = StringFormatFlags.DirectionRightToLeft;
             }
@@ -472,7 +469,7 @@ namespace SharpVectors.Renderers.Gdi
             else if (new Regex(@"^\d").IsMatch(str))
             {
                 // svg length
-                fontSize = (float)new SvgLength(element, "font-size", 
+                fontSize = (float)new SvgLength(element, "font-size",
                     SvgLengthDirection.Viewport, str, "10px").Value;
             }
             else if (str == "larger")

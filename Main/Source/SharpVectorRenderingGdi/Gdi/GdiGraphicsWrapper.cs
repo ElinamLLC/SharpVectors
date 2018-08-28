@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;

@@ -1,12 +1,9 @@
 using System;
-using System.IO;
 using System.Xml;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Gdi
 {

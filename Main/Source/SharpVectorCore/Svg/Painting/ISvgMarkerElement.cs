@@ -1,8 +1,7 @@
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
-	public interface ISvgMarkerElement : ISvgElement, ISvgLangSpace, ISvgExternalResourcesRequired, ISvgStylable, ISvgFitToViewBox
+	public interface ISvgMarkerElement : ISvgElement, ISvgLangSpace, ISvgExternalResourcesRequired, 
+        ISvgStylable, ISvgFitToViewBox
 	{
 		ISvgAnimatedLength RefX{get;}
 		ISvgAnimatedLength RefY{get;}

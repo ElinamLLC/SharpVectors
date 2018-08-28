@@ -36,7 +36,7 @@ namespace SharpVectors.Dom.Css
 						float parSize;
 						if(_parentElement != null)
 						{
-							CssStyleDeclaration csd = (CssStyleDeclaration)_ownerDocument.GetComputedStyle(_parentElement, String.Empty);
+							CssStyleDeclaration csd = (CssStyleDeclaration)_ownerDocument.GetComputedStyle(_parentElement, string.Empty);
 							CssPrimitiveValue cssPrimValue = csd.GetPropertyCssValue("font-size") as CssPrimitiveValue;
 
 							// no default font-size set => use 10px
@@ -119,7 +119,7 @@ namespace SharpVectors.Dom.Css
 			}
 			else
 			{
-				CssStyleDeclaration csd = (CssStyleDeclaration)_ownerDocument.GetComputedStyle(elmToUse, String.Empty);
+				CssStyleDeclaration csd = (CssStyleDeclaration)_ownerDocument.GetComputedStyle(elmToUse, string.Empty);
 				cssPrimValue = csd.GetPropertyCssValue("font-size") as CssPrimitiveValue;
 
 				// no default font-size set => use 10px

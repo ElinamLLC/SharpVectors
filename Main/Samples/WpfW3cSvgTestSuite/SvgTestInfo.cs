@@ -184,7 +184,7 @@ namespace WpfW3cSvgTestSuite
         {
             if (description == null)
             {
-                description = String.Empty;
+                description = string.Empty;
             }
 
             _fileName = fileName;
@@ -194,7 +194,7 @@ namespace WpfW3cSvgTestSuite
             if (!string.IsNullOrWhiteSpace(_description))
             {
                 _description = _description.Replace("\n", " ");
-                _description = _description.Replace("  ", String.Empty);
+                _description = _description.Replace("  ", string.Empty);
             }
 
             if (!string.IsNullOrWhiteSpace(state))

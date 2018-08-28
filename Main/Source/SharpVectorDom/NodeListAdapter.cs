@@ -6,33 +6,30 @@ namespace SharpVectors.Dom
 	/// <summary>
 	/// Summary description for NodeListAdapter.
 	/// </summary>
-	public class NodeListAdapter
-		: INodeList
+	public class NodeListAdapter : INodeList
 	{
 		#region Private Fields
 		
-		XmlNodeList nodeList;
+		private XmlNodeList _nodeList;
 		
 		#endregion
 		
 		#region Constructors
 		
-		public NodeListAdapter(
-			XmlNodeList nodeList)
+		public NodeListAdapter(XmlNodeList nodeList)
 		{
-			this.nodeList = nodeList;
+			_nodeList = nodeList;
 		}
 		
 		#endregion
 		
 		#region INodeList interface
 		
-		public INode this[
-			ulong index]
+		public INode this[ulong index]
 		{
 			get
 			{
-				return (INode)nodeList[(int)index];
+				return (INode)_nodeList[(int)index];
 			}
 		}
 		
@@ -40,7 +37,7 @@ namespace SharpVectors.Dom
 		{
 			get
 			{
-				return (ulong)nodeList.Count;
+				return (ulong)_nodeList.Count;
 			}
 		}
 		

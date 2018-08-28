@@ -542,7 +542,7 @@ namespace SharpVectors.Converters
                             _listItems[_listItems.Count - 1]);
                     }
 
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
 

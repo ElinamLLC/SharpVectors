@@ -30,25 +30,24 @@ namespace SharpVectors.Xml
                 // ignore the known DTDs
                 return Stream.Null;
             }
-            else if (absoluteUri == null)
+
+            if (absoluteUri == null)
             {
                 // ignore null URIs
                 return Stream.Null;
             }
-            else
-            {
-                return base.GetEntity(absoluteUri, role, ofObjectToReturn);
-            }
+
+            return base.GetEntity(absoluteUri, role, ofObjectToReturn);
         }
 
         public override Uri ResolveUri(Uri baseUri, string relativeUri)
         {
-            if (relativeUri.StartsWith("#"))
+            if (relativeUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                 return null;
-            else if (relativeUri.IndexOf("-//") > -1)
+            if (relativeUri.IndexOf("-//", StringComparison.OrdinalIgnoreCase) > -1)
                 return null;
-            else
-                return base.ResolveUri(baseUri, relativeUri);
+
+            return base.ResolveUri(baseUri, relativeUri);
         }
     }
 }

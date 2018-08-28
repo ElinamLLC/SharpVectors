@@ -10,15 +10,15 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private ISvgAnimatedLength x;
-        private ISvgAnimatedLength y;
-        private ISvgAnimatedLength width;
-        private ISvgAnimatedLength height;
+        private ISvgAnimatedLength _x;
+        private ISvgAnimatedLength _y;
+        private ISvgAnimatedLength _width;
+        private ISvgAnimatedLength _height;
 
-        private SvgTests svgTests;
-        private SvgUriReference svgURIReference;
-        private SvgFitToViewBox svgFitToViewBox;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgTests _svgTests;
+        private SvgUriReference _uriReference;
+        private SvgFitToViewBox _fitToViewBox;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
@@ -27,10 +27,10 @@ namespace SharpVectors.Dom.Svg
         public SvgImageElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            svgTests = new SvgTests(this);
-            svgURIReference = new SvgUriReference(this);
-            svgFitToViewBox = new SvgFitToViewBox(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests                  = new SvgTests(this);
+            _uriReference              = new SvgUriReference(this);
+            _fitToViewBox              = new SvgFitToViewBox(this);
         }
 
         #endregion
@@ -70,23 +70,22 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (!Href.AnimVal.StartsWith("data:"))
+                if (!Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {
-                        string absoluteUri = svgURIReference.AbsoluteUri;
+                        string absoluteUri = _uriReference.AbsoluteUri;
                         if (!string.IsNullOrWhiteSpace(absoluteUri))
                         {
                             Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
                             if (svgUri.IsFile)
                             {   
-                                return absoluteUri.EndsWith(".svg", 
-                                    StringComparison.OrdinalIgnoreCase) || 
+                                return absoluteUri.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) || 
                                     absoluteUri.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase);
                             }
                         }
 
-                        WebResponse resource = svgURIReference.ReferencedResource;
+                        WebResponse resource = _uriReference.ReferencedResource;
                         if (resource == null)
                         {
                             return false;
@@ -95,7 +94,7 @@ namespace SharpVectors.Dom.Svg
                         // local files are returning as binary/octet-stream
                         // this "fix" tests the file extension for .svg and .svgz
                         string name = resource.ResponseUri.ToString().ToLower(CultureInfo.InvariantCulture);
-                        return (resource.ContentType.StartsWith("image/svg+xml") ||
+                        return (resource.ContentType.StartsWith("image/svg+xml", StringComparison.OrdinalIgnoreCase) ||
                             name.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
                             name.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase));
                     }
@@ -129,7 +128,7 @@ namespace SharpVectors.Dom.Svg
                         SvgDocument doc = new SvgDocument(wnd);
                         wnd.Document = doc;
 
-                        string absoluteUri = svgURIReference.AbsoluteUri;
+                        string absoluteUri = _uriReference.AbsoluteUri;
 
                         Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
                         if (svgUri.IsFile)
@@ -139,7 +138,7 @@ namespace SharpVectors.Dom.Svg
                         }
                         else
                         {
-                            Stream resStream = svgURIReference.ReferencedResource.GetResponseStream();
+                            Stream resStream = _uriReference.ReferencedResource.GetResponseStream();
                             doc.Load(absoluteUri, resStream);
                         }
 
@@ -178,11 +177,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (width == null)
+                if (_width == null)
                 {
-                    width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, "0");
+                    _width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, "0");
                 }
-                return width;
+                return _width;
             }
         }
 
@@ -190,11 +189,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (height == null)
+                if (_height == null)
                 {
-                    height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, "0");
+                    _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, "0");
                 }
-                return height;
+                return _height;
             }
 
         }
@@ -203,11 +202,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (x == null)
+                if (_x == null)
                 {
-                    x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
                 }
-                return x;
+                return _x;
             }
 
         }
@@ -216,11 +215,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (y == null)
+                if (_y == null)
                 {
-                    y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
                 }
-                return y;
+                return _y;
             }
 
         }
@@ -268,7 +267,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgURIReference.Href;
+                return _uriReference.Href;
             }
         }
 
@@ -276,7 +275,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgURIReference;
+                return _uriReference;
             }
         }
 
@@ -284,7 +283,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgURIReference.ReferencedNode as XmlElement;
+                return _uriReference.ReferencedNode as XmlElement;
             }
         }
 
@@ -296,7 +295,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgFitToViewBox.PreserveAspectRatio;
+                return _fitToViewBox.PreserveAspectRatio;
             }
         }
 
@@ -320,6 +319,7 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Update handling
+
         public override void HandleAttributeChange(XmlAttribute attribute)
         {
             if (attribute.NamespaceURI.Length == 0)
@@ -329,22 +329,23 @@ namespace SharpVectors.Dom.Svg
                 {
                     // Additional attributes
                     case "x":
-                        x = null;
+                        _x = null;
                         return;
                     case "y":
-                        y = null;
+                        _y = null;
                         return;
                     case "width":
-                        width = null;
+                        _width = null;
                         return;
                     case "height":
-                        height = null;
+                        _height = null;
                         return;
                 }
 
                 base.HandleAttributeChange(attribute);
             }
         }
+
         #endregion
 
         #region ISvgExternalResourcesRequired Members
@@ -353,7 +354,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -363,22 +364,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion

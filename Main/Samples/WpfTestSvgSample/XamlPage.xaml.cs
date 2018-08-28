@@ -141,7 +141,7 @@ namespace WpfTestSvgSample
         {
             if (textEditor != null)
             {
-                textEditor.Document.Text = String.Empty;
+                textEditor.Document.Text = string.Empty;
             }
         }
 

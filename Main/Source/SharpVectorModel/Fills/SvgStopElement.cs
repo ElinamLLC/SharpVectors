@@ -2,24 +2,23 @@ using System;
 
 namespace SharpVectors.Dom.Svg
 {
-	/// <summary>
-	/// Summary description for SvgStopElement.
-	/// </summary>
+    /// <summary>
+    /// Summary description for SvgStopElement.
+    /// </summary>
     public sealed class SvgStopElement : SvgStyleableElement, ISvgStopElement
-	{
-		public SvgStopElement(string prefix, string localname, string ns, SvgDocument doc)
-			: base(prefix, localname, ns, doc)
-		{
-		}
+    {
+        public SvgStopElement(string prefix, string localname, string ns, SvgDocument doc)
+            : base(prefix, localname, ns, doc)
+        {
+        }
 
-		public ISvgAnimatedNumber Offset
-		{
-			get
-			{
-				string attr = GetAttribute("offset").Trim();
-				if (attr.EndsWith("%", StringComparison.OrdinalIgnoreCase))
-				{
-					attr = attr.TrimEnd(new char[1]{'%'});
+        public ISvgAnimatedNumber Offset
+        {
+            get {
+                string attr = GetAttribute("offset").Trim();
+                if (attr.EndsWith("%", StringComparison.OrdinalIgnoreCase))
+                {
+                    attr = attr.TrimEnd(new char[1] { '%' });
                     double tmp = SvgNumber.ParseNumber(attr);
 
                     if (tmp > 100)
@@ -32,8 +31,8 @@ namespace SharpVectors.Dom.Svg
                     }
                 }
                 else
-				{
-					double tmp = SvgNumber.ParseNumber(attr) * 100;
+                {
+                    double tmp = SvgNumber.ParseNumber(attr) * 100;
                     if (tmp > 100)
                     {
                         attr = "100";
@@ -41,15 +40,15 @@ namespace SharpVectors.Dom.Svg
                     else if (tmp < 0)
                     {
                         attr = "0";
-                    } 
+                    }
                     else
                     {
-					    attr = tmp.ToString(SvgNumber.Format);
+                        attr = tmp.ToString(SvgNumber.Format);
                     }
-				}
+                }
 
-				return new SvgAnimatedNumber(attr);
-			}
-		}
-	}
+                return new SvgAnimatedNumber(attr);
+            }
+        }
+    }
 }

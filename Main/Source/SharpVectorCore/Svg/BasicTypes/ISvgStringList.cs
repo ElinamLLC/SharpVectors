@@ -1,8 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
-using System;
 using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Svg

@@ -1,15 +1,10 @@
-using System;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
-	/// The <see cref="IDocumentEvent">IDocumentEvent</see> interface provides
-	/// a mechanism by which the user can create an
-	/// <see cref="IEvent">IEvent</see> object of a type supported by the
-	/// implementation. It is expected that the
-	/// <see cref="IDocumentEvent">IDocumentEvent</see> interface will be
-	/// implemented on the same object which implements the
-	/// <see cref="IDocument">IDocument</see> interface in an implementation
+	/// The <see cref="IDocumentEvent">IDocumentEvent</see> interface provides a mechanism by which the user 
+    /// can create an <see cref="IEvent">IEvent</see> object of a type supported by the implementation. 
+    /// It is expected that the <see cref="IDocumentEvent">IDocumentEvent</see> interface will be implemented 
+    /// on the same object which implements the <see cref="IDocument">IDocument</see> interface in an implementation
 	/// which supports the <see cref="IEvent">IEvent</see> model.
 	/// </summary>
 	public interface IDocumentEvent

@@ -20,37 +20,37 @@ namespace SharpVectors.Runtime
 
         public static readonly DependencyProperty ColorProperty = 
             DependencyProperty.RegisterAttached("Color", typeof(String), typeof(SvgLink), 
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty PartsIdProperty =
             DependencyProperty.RegisterAttached("PartsId", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.RegisterAttached("Type", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty NumberProperty =
             DependencyProperty.RegisterAttached("Number", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty PinProperty =
             DependencyProperty.RegisterAttached("Pin", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty LineIdProperty =
             DependencyProperty.RegisterAttached("LineId", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
         
         //----------------------------------------------------------------------------------------------------
 
         public static readonly DependencyProperty KeyProperty =
             DependencyProperty.RegisterAttached("Key", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty LocationProperty =
             DependencyProperty.RegisterAttached("Location", typeof(String), typeof(SvgLink),
-            new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty ActionProperty =
             DependencyProperty.RegisterAttached("Action", typeof(SvgLinkAction), typeof(SvgLink),

@@ -1,6 +1,3 @@
-// <developer></developer>
-// <completed>0</completed>
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SharpVectors.Dom.Svg
+﻿namespace SharpVectors.Dom.Svg
 {
     public enum SvgRenderingHint
     {

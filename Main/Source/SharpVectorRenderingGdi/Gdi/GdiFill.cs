@@ -3,7 +3,6 @@ using System.Xml;
 using System.Drawing;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Gdi
 {

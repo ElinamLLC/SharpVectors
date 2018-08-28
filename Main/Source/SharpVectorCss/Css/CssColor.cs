@@ -1,11 +1,5 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>50</completed>
-
 using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Diagnostics;
 
 namespace SharpVectors.Dom.Css
 {
@@ -14,16 +8,14 @@ namespace SharpVectors.Dom.Css
 	/// </summary>
     /// <remarks>
     /// <para>
-    /// This interface reflects the values in the underlying style property. 
-    /// Hence, modifications made to the CSSPrimitiveValue objects modify the style property.
-	///	A specified RGB color is not clipped (even if the number is outside the 
-    ///	range 0-255 or 0%-100%). 
+    /// This interface reflects the values in the underlying style property. Hence, modifications made to the 
+    /// CSSPrimitiveValue objects modify the style property. A specified RGB color is not clipped 
+    /// (even if the number is outside the range 0-255 or 0%-100%). 
     /// </para>
     /// <para>
     ///	A computed RGB color is clipped depending on the device.
-	/// Even if a style sheet can only contain an integer for a color value, the internal 
-    /// storage of this integer is a float, and this can be used as a float in the specified 
-    /// or the computed style.  
+	/// Even if a style sheet can only contain an integer for a color value, the internal storage of this 
+    /// integer is a float, and this can be used as a float in the specified or the computed style.  
     /// </para>
     /// <para>
 	/// A color percentage value can always be converted to a number and vice versa.
@@ -44,7 +36,9 @@ namespace SharpVectors.Dom.Css
         /// <summary>
 		/// Constructs a RgbColor based on the GDI color
 		/// </summary>
-		/// <param name="color"></param>
+		/// <param name="red"></param>
+		/// <param name="green"></param>
+		/// <param name="blue"></param>
         public CssColor(int red, int green, int blue)
 		{
 			SetPrimitiveValues(red, green, blue);
@@ -57,7 +51,7 @@ namespace SharpVectors.Dom.Css
 		public CssColor(string str)
 		{
 			str = str.Trim();
-			if (str.StartsWith("rgb("))
+			if (str.StartsWith("rgb(", StringComparison.OrdinalIgnoreCase))
 			{
 				str = str.Substring(4, str.Length -5);
 				string[] parts = str.Split(',');
@@ -66,28 +60,26 @@ namespace SharpVectors.Dom.Css
 				{
 					throw new DomException(DomExceptionType.SyntaxErr);
 				}
-				else
-				{
-					try
-					{
-						string red   = parts[0].Trim();						
-						string green = parts[1].Trim();
-						string blue  = parts[2].Trim();
 
-                        if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
-                            string.IsNullOrWhiteSpace(blue))
-                        {
-                            SetPrimitiveValues(0, 0, 0);
-                        }
-                        else
-                        {
-                            SetPrimitiveValues(red, green, blue);
-                        }
-					}
-					catch
-					{
-						throw new DomException(DomExceptionType.SyntaxErr, "rgb() color in the wrong format: " + str);
-					}
+                try
+				{
+					string red   = parts[0].Trim();						
+					string green = parts[1].Trim();
+					string blue  = parts[2].Trim();
+
+                    if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
+                        string.IsNullOrWhiteSpace(blue))
+                    {
+                        SetPrimitiveValues(0, 0, 0);
+                    }
+                    else
+                    {
+                        SetPrimitiveValues(red, green, blue);
+                    }
+				}
+				catch
+				{
+					throw new DomException(DomExceptionType.SyntaxErr, "rgb() color in the wrong format: " + str);
 				}
 			}
 			else
@@ -128,31 +120,6 @@ namespace SharpVectors.Dom.Css
         }
 
 		#endregion
-
-        #region Private Methods
-
-        private void SetPrimitiveValues(Color color)
-        {
-            _red   = new CssPrimitiveColorValue(color.R, false);
-            _green = new CssPrimitiveColorValue(color.G, false);
-            _blue  = new CssPrimitiveColorValue(color.B, false);
-        }
-
-        private void SetPrimitiveValues(int red, int green, int blue)
-        {
-            _red   = new CssPrimitiveColorValue(red, false);
-            _green = new CssPrimitiveColorValue(green, false);
-            _blue  = new CssPrimitiveColorValue(blue, false);
-        }
-
-        private void SetPrimitiveValues(string red, string green, string blue)
-        {
-            _red   = new CssPrimitiveColorValue(red, false);
-            _green = new CssPrimitiveColorValue(green, false);
-            _blue  = new CssPrimitiveColorValue(blue, false);
-        }
-
-        #endregion
 		
 		#region IRgbColor Members
 
@@ -190,5 +157,30 @@ namespace SharpVectors.Dom.Css
 		}
 
 		#endregion
+
+        #region Private Methods
+
+        private void SetPrimitiveValues(Color color)
+        {
+            _red   = new CssPrimitiveColorValue(color.R, false);
+            _green = new CssPrimitiveColorValue(color.G, false);
+            _blue  = new CssPrimitiveColorValue(color.B, false);
+        }
+
+        private void SetPrimitiveValues(int red, int green, int blue)
+        {
+            _red   = new CssPrimitiveColorValue(red, false);
+            _green = new CssPrimitiveColorValue(green, false);
+            _blue  = new CssPrimitiveColorValue(blue, false);
+        }
+
+        private void SetPrimitiveValues(string red, string green, string blue)
+        {
+            _red   = new CssPrimitiveColorValue(red, false);
+            _green = new CssPrimitiveColorValue(green, false);
+            _blue  = new CssPrimitiveColorValue(blue, false);
+        }
+
+        #endregion
 	}
 }

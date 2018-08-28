@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Svg
@@ -12,32 +8,35 @@ namespace SharpVectors.Dom.Svg
     public sealed class SvgAnimatedRect : ISvgAnimatedRect
 	{
 		#region Private Fields
-		private SvgRect baseVal;
-		private SvgRect animVal;
-		#endregion
+
+		private SvgRect _baseVal;
+		private SvgRect _animVal;
+		
+        #endregion
 
 		#region Constructors
 
 		public SvgAnimatedRect(string str)
 		{
-			baseVal = new SvgRect(str);
-			animVal = baseVal;
+			_baseVal = new SvgRect(str);
+			_animVal = _baseVal;
 		}
 
 		public SvgAnimatedRect(SvgRect rect)
 		{
-			baseVal = rect;
-			animVal = baseVal;
+			_baseVal = rect;
+			_animVal = _baseVal;
 		}
 
 		#endregion
 
         #region ISvgAnimatedRect Interface
+
 		public ISvgRect BaseVal
 		{
 			get
 			{
-				return baseVal;
+				return _baseVal;
 			}
 		}
 		
@@ -45,9 +44,10 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return animVal;
+				return _animVal;
 			}
 		}
+
 		#endregion
 	}
 }

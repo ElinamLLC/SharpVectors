@@ -1,9 +1,8 @@
-using System;
-
 namespace SharpVectors.Dom.Views
 {
 	/// <summary>
-	/// The DocumentView interface is implemented by Document objects in DOM implementations supporting DOM Views. It provides an attribute to retrieve the default view of a document.
+	/// The DocumentView interface is implemented by Document objects in DOM implementations supporting 
+    /// DOM Views. It provides an attribute to retrieve the default view of a document.
 	/// </summary>
 	public interface IDocumentView
 	{

@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 using System;
 
 using SharpVectors.Dom.Css;
@@ -22,7 +19,7 @@ namespace SharpVectors.Dom.Svg
 		#region Constructors and Destructor
 		
         protected SvgColor() 
-            : base(CssValueType.PrimitiveValue, String.Empty, false)
+            : base(CssValueType.PrimitiveValue, string.Empty, false)
 		{
 		}
 
@@ -53,7 +50,7 @@ namespace SharpVectors.Dom.Svg
                         ret = "currentColor";
                         break;
                     default:
-                        ret = String.Empty;
+                        ret = string.Empty;
                         break;
                 }
                 return ret;
@@ -95,7 +92,7 @@ namespace SharpVectors.Dom.Svg
 
 		public void SetRgbColor(string rgbColor)
 		{
-			SetColor(SvgColorType.RgbColor, rgbColor, String.Empty);
+			SetColor(SvgColorType.RgbColor, rgbColor, string.Empty);
 		}
 		
 		public void SetRgbColorIccColor(string rgbColor, string iccColor )
@@ -137,9 +134,9 @@ namespace SharpVectors.Dom.Svg
             {
                 SetColor(SvgColorType.CurrentColor, null, null);
             }
-            else if (str.IndexOf("icc-color(") > -1)
+            else if (str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase) > -1)
             {
-                int iccStart  = str.IndexOf("icc-color(");
+                int iccStart  = str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase);
                 string strRgb = str.Substring(0, iccStart).Trim();
                 string strIcc = str.Substring(iccStart);
 
@@ -147,7 +144,7 @@ namespace SharpVectors.Dom.Svg
             }
             else
             {
-                SetColor(SvgColorType.RgbColor, str, String.Empty);
+                SetColor(SvgColorType.RgbColor, str, string.Empty);
             }
         }
 

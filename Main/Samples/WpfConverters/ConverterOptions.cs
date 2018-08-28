@@ -33,7 +33,7 @@ namespace SharpVectors.Converters
             _saveXaml         = true;
             _saveZaml         = false;
             _customXamlWriter = true;
-            _errorMessage     = String.Empty;
+            _errorMessage     = string.Empty;
             _encoderType      = ImageEncoderType.PngBitmap;
         }
 
@@ -63,7 +63,7 @@ namespace SharpVectors.Converters
         {
             get
             {
-                _errorMessage = String.Empty;
+                _errorMessage = string.Empty;
 
                 if (!_generateImage && !_generalWpf)
                 {

@@ -9,16 +9,16 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		internal bool stopped = false;
-		internal IEventTarget eventTarget = null;
-		internal IEventTarget currentTarget = null;
-		internal EventPhase eventPhase = EventPhase.AtTarget;
+		internal bool _stopped;
+		internal IEventTarget _eventTarget;
+		internal IEventTarget _currentTarget;
+		internal EventPhase _eventPhase;
 		
-		private bool bubbles;
-		private DateTime timeStamp = DateTime.Now;
-		private bool cancelable;
-		private string namespaceUri;
-		protected string eventType;
+		private bool _bubbles;
+		private DateTime _timeStamp;
+		private bool _cancelable;
+		private string _namespaceUri;
+		protected string _eventType;
 		
 		#endregion
 		
@@ -26,23 +26,20 @@ namespace SharpVectors.Dom.Events
 		
 		public Event()
 		{
-		}
+            _eventPhase = EventPhase.AtTarget;
+            _timeStamp  = DateTime.Now;
+        }
 		
-		public Event(
-			string eventType,
-			bool bubbles,
-			bool cancelable)
+		public Event(string eventType, bool bubbles, bool cancelable)
+            : this()
 		{
 			InitEvent(eventType, bubbles, cancelable);
 		}
 		
-		public Event(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable)
-		{
-			InitEventNs(namespaceUri, eventType, bubbles, cancelable);
+		public Event(string namespaceUri, string eventType, bool bubbles, bool cancelable)
+            : this()
+        {
+            InitEventNs(namespaceUri, eventType, bubbles, cancelable);
 		}
 		
 		#endregion
@@ -55,7 +52,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return eventType;
+				return _eventType;
 			}
 		}
 		
@@ -63,7 +60,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return eventTarget;
+				return _eventTarget;
 			}
 		}
 		
@@ -71,7 +68,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return currentTarget;
+				return _currentTarget;
 			}
 		}
 		
@@ -79,7 +76,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return eventPhase;
+				return _eventPhase;
 			}
 		}
 		
@@ -87,7 +84,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return bubbles;
+				return _bubbles;
 			}
 		}
 		
@@ -95,7 +92,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return cancelable;
+				return _cancelable;
 			}
 		}
 		
@@ -103,7 +100,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return timeStamp;
+				return _timeStamp;
 			}
 		}
 		
@@ -115,7 +112,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return namespaceUri;
+				return _namespaceUri;
 			}
 		}
 		
@@ -153,31 +150,24 @@ namespace SharpVectors.Dom.Events
 			throw new NotImplementedException();
 		}
 		
-		public void InitEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable)
+		public void InitEvent(string eventType, bool bubbles, bool cancelable)
 		{
-			this.namespaceUri = null;
-			this.eventType = eventType;
-			this.bubbles = bubbles;
-			this.cancelable = cancelable;
+			_namespaceUri = null;
+			_eventType    = eventType;
+			_bubbles      = bubbles;
+			_cancelable   = cancelable;
 		}
 		
 		#endregion
 		
 		#region DOM Level 3 Experimental
 		
-		public void InitEventNs(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable)
+		public void InitEventNs(string namespaceUri, string eventType, bool bubbles, bool cancelable)
 		{
-			this.namespaceUri = namespaceUri == "" ? null : namespaceUri;
-			this.eventType = eventType;
-			this.bubbles = bubbles;
-			this.cancelable = cancelable;
+			_namespaceUri = namespaceUri == "" ? null : namespaceUri;
+			_eventType    = eventType;
+			_bubbles      = bubbles;
+			_cancelable   = cancelable;
 		}
 		
 		public void StopImmediatePropagation()

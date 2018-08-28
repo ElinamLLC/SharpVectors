@@ -8,21 +8,19 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
     public sealed class SvgTRefElement : SvgTextPositioningElement, ISvgTRefElement
 	{
-        private SvgUriReference svgURIReference;
+        private SvgUriReference _uriReference;
 
         public SvgTRefElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc) 
 		{
-			svgURIReference = new SvgUriReference(this);
+			_uriReference = new SvgUriReference(this);
 		}
-
-		#region ISvgURIReference Members
 
 		public ISvgAnimatedString Href
 		{
 			get
 			{
-				return svgURIReference.Href;
+				return _uriReference.Href;
 			}
 		}
 
@@ -30,10 +28,8 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return svgURIReference.ReferencedNode as XmlElement;
+				return _uriReference.ReferencedNode as XmlElement;
 			}
 		}
-
-		#endregion
 	}
 }

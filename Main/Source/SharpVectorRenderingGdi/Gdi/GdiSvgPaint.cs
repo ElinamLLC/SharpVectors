@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Gdi
 {
@@ -30,8 +29,7 @@ namespace SharpVectors.Renderers.Gdi
 
         public GdiFill PaintFill
         {
-            get
-            {
+            get {
                 return _paintFill;
             }
         }
@@ -66,8 +64,8 @@ namespace SharpVectors.Renderers.Gdi
 
             Pen pen = new Pen(stroke.GetBrush(gp, "stroke"), strokeWidth);
 
-            pen.StartCap   = pen.EndCap = GetLineCap();
-            pen.LineJoin   = GetLineJoin();
+            pen.StartCap = pen.EndCap = GetLineCap();
+            pen.LineJoin = GetLineJoin();
             pen.MiterLimit = GetMiterLimit();
 
             float[] fDashArray = GetDashArray(strokeWidth);
@@ -231,8 +229,8 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             SvgPaintType paintType = painter.PaintType;
-            if (paintType == SvgPaintType.Uri     || paintType == SvgPaintType.UriCurrentColor ||
-                paintType == SvgPaintType.UriNone || paintType == SvgPaintType.UriRgbColor     ||
+            if (paintType == SvgPaintType.Uri || paintType == SvgPaintType.UriCurrentColor ||
+                paintType == SvgPaintType.UriNone || paintType == SvgPaintType.UriRgbColor ||
                 paintType == SvgPaintType.UriRgbColorIccColor)
             {
                 _paintFill = GetPaintFill(painter.Uri);
@@ -296,7 +294,7 @@ namespace SharpVectors.Renderers.Gdi
             {
                 return null;
             }
-                                                           
+
             SolidBrush brush = new SolidBrush(GdiConverter.ToColor(painter.RgbColor));
             int opacity = GetOpacity(propPrefix);
             brush.Color = Color.FromArgb(opacity, brush.Color);

@@ -259,7 +259,7 @@ namespace SharpVectors.Converters
         /// </exception>
         public bool Convert(string svgFileName)
         {
-            return this.Convert(svgFileName, String.Empty);
+            return this.Convert(svgFileName, string.Empty);
         }
 
         /// <summary>
@@ -699,7 +699,7 @@ namespace SharpVectors.Converters
 
             if (_bitampEncoder != null && _bitampEncoder.CodecInfo != null)
             {
-                string mimeType = String.Empty;
+                string mimeType = string.Empty;
                 BitmapCodecInfo codecInfo = _bitampEncoder.CodecInfo;
                 string mimeTypes      = codecInfo.MimeTypes;
                 string fileExtensions = codecInfo.FileExtensions;

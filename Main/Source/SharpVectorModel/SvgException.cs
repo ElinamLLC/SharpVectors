@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -12,30 +13,34 @@ namespace SharpVectors.Dom.Svg
 	[Serializable]
 	public class SvgException : DomException
 	{
-		public SvgException(SvgExceptionType errorCode):this(errorCode, String.Empty, null)
-		{
-			
+		private SvgExceptionType _code;
+
+		public SvgException(SvgExceptionType errorCode)
+            : this(errorCode, string.Empty, null)
+		{			
 		}
 
-		public SvgException(SvgExceptionType errorCode, string message):this(errorCode, message, null)
-		{
-		}
-
-		public SvgException(SvgExceptionType errorCode, string message, Exception innerException):base(message, innerException)
-		{
-			code = errorCode;
-		}
-
-		protected SvgException ( System.Runtime.Serialization.SerializationInfo info , System.Runtime.Serialization.StreamingContext context ) : base(info, context)
+		public SvgException(SvgExceptionType errorCode, string message)
+            : this(errorCode, message, null)
 		{
 		}
 
-		private SvgExceptionType code;
+		public SvgException(SvgExceptionType errorCode, string message, Exception innerException)
+            : base(message, innerException)
+		{
+			_code = errorCode;
+		}
+
+		protected SvgException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+		{
+		}
+
 		public new SvgExceptionType Code
 		{
 			get
 			{
-				return code;
+				return _code;
 			}
 		}
 	}

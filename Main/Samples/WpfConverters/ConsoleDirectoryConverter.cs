@@ -254,7 +254,7 @@ namespace SharpVectors.Converters
 
             try
             {
-                this.AppendLine(String.Empty);
+                this.AppendLine(string.Empty);
                 this.AppendLine("Converting files, please wait...");
                 this.AppendLine("Input Directory: " + _sourceDir);
 

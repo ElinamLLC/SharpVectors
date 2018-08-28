@@ -197,7 +197,7 @@ namespace SharpVectors.Converters
         {
             if (element == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
             string elementId = element.Id;
             if (elementId != null)
@@ -206,10 +206,10 @@ namespace SharpVectors.Converters
             }
             if (string.IsNullOrWhiteSpace(elementId))
             {
-                return String.Empty;
+                return string.Empty;
             }
             elementId = elementId.Replace(':', '_');
-            elementId = elementId.Replace(" ", String.Empty);
+            elementId = elementId.Replace(" ", string.Empty);
             elementId = elementId.Replace('.', '_');
             elementId = elementId.Replace('-', '_');
 

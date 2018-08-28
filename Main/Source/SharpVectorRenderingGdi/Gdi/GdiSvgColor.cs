@@ -6,22 +6,21 @@ using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Gdi
 {
-	public sealed class GdiSvgColor : SvgColor
-	{
+    public sealed class GdiSvgColor : SvgColor
+    {
         private string _propertyName;
-		private SvgStyleableElement _element;
+        private SvgStyleableElement _element;
 
-		public GdiSvgColor(SvgStyleableElement elm, string propertyName) 
+        public GdiSvgColor(SvgStyleableElement elm, string propertyName)
             : base(elm.GetComputedStyle("").GetPropertyValue(propertyName))
-		{
-			_element      = elm;
-			_propertyName = propertyName;
-		}
+        {
+            _element      = elm;
+            _propertyName = propertyName;
+        }
 
         public Color Color
         {
-            get
-            {
+            get {
                 SvgColor colorToUse;
                 if (ColorType == SvgColorType.CurrentColor)
                 {
@@ -38,18 +37,17 @@ namespace SharpVectors.Renderers.Gdi
                 }
 
                 ICssColor rgbColor = colorToUse.RgbColor;
-                int red   = Convert.ToInt32(rgbColor.Red.GetFloatValue(CssPrimitiveType.Number));
+                int red = Convert.ToInt32(rgbColor.Red.GetFloatValue(CssPrimitiveType.Number));
                 int green = Convert.ToInt32(rgbColor.Green.GetFloatValue(CssPrimitiveType.Number));
-                int blue  = Convert.ToInt32(rgbColor.Blue.GetFloatValue(CssPrimitiveType.Number));
+                int blue = Convert.ToInt32(rgbColor.Blue.GetFloatValue(CssPrimitiveType.Number));
 
                 return Color.FromArgb(this.Opacity, red, green, blue);
             }
         }
 
-		public int Opacity
-		{
-            get
-            {
+        public int Opacity
+        {
+            get {
                 string propName;
                 if (_propertyName.Equals("stop-color"))
                 {
@@ -76,6 +74,6 @@ namespace SharpVectors.Renderers.Gdi
 
                 return Convert.ToInt32(alpha);
             }
-		}
-	}
+        }
+    }
 }

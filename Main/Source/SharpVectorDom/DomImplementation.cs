@@ -6,8 +6,7 @@ namespace SharpVectors.Dom
 	/// <summary>
 	/// Summary description for DomImplementation.
 	/// </summary>
-	public class DomImplementation
-		: XmlImplementation
+	public class DomImplementation : XmlImplementation
 	{
 		#region Constructors
 		

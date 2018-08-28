@@ -11,17 +11,17 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		private long screenX;
-		private long screeny;
-		private long clientX;
-		private long clientY;
-		private bool crtlKey;
-		private bool shiftKey;
-		private bool altKey;
-		private bool metaKey;
-		private ushort button;
-		private IEventTarget relatedTarget;
-		private bool altGraphKey;
+		private long _screenX;
+		private long _screeny;
+		private long _clientX;
+		private long _clientY;
+		private bool _crtlKey;
+		private bool _shiftKey;
+		private bool _altKey;
+		private bool _metaKey;
+		private ushort _button;
+		private bool _altGraphKey;
+		private IEventTarget _relatedTarget;
 		
 		#endregion
 		
@@ -31,79 +31,29 @@ namespace SharpVectors.Dom.Events
 		{
 		}
 		
-		public MouseEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail,
-			long screenX,
-			long screenY,
-			long clientX,
-			long clientY,
-			bool ctrlKey,
-			bool altKey,
-			bool shiftKey,
-			bool metaKey,
-			ushort button,
-			IEventTarget relatedTarget)
+		public MouseEvent(string eventType, bool bubbles, bool cancelable, IAbstractView view,
+			long detail, long screenX, long screenY, long clientX, long clientY, bool ctrlKey,
+			bool altKey, bool shiftKey, bool metaKey, ushort button, IEventTarget relatedTarget)
 		{
-			InitMouseEvent(
-				eventType, bubbles, cancelable, view, detail,
-				screenX, screenY, clientX, clientY,
-				ctrlKey, altKey, shiftKey, metaKey, button,
-				relatedTarget);
+			InitMouseEvent(eventType, bubbles, cancelable, view, detail, screenX, screenY,
+                clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget);
 		}
 		
-		public MouseEvent(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail,
-			long screenX,
-			long screenY,
-			long clientX,
-			long clientY,
-			bool ctrlKey,
-			bool altKey,
-			bool shiftKey,
-			bool metaKey,
-			ushort button,
-			IEventTarget relatedTarget,
-			bool altGraphKey)
+		public MouseEvent(string namespaceUri, string eventType, bool bubbles, bool cancelable,
+			IAbstractView view, long detail, long screenX, long screenY, long clientX, long clientY,
+			bool ctrlKey, bool altKey, bool shiftKey, bool metaKey, ushort button, 
+            IEventTarget relatedTarget, bool altGraphKey)
 		{
-			InitMouseEventNs(
-				namespaceUri, eventType, bubbles, cancelable, view, detail,
-				screenX, screenY, clientX, clientY,
-				ctrlKey, altKey, shiftKey, metaKey, button,
-				relatedTarget, altGraphKey);
+			InitMouseEventNs(namespaceUri, eventType, bubbles, cancelable, view, detail, screenX, screenY, 
+                clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget, altGraphKey);
 		}
 		
-		public MouseEvent(
-			EventType eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail,
-			long screenX,
-			long screenY,
-			long clientX,
-			long clientY,
-			bool ctrlKey,
-			bool altKey,
-			bool shiftKey,
-			bool metaKey,
-			ushort button,
-			IEventTarget relatedTarget,
-			bool altGraphKey)
+		public MouseEvent(EventType eventType, bool bubbles, bool cancelable, IAbstractView view,
+			long detail, long screenX, long screenY, long clientX, long clientY, bool ctrlKey, bool altKey,
+			bool shiftKey, bool metaKey, ushort button, IEventTarget relatedTarget, bool altGraphKey)
 		{
-			InitMouseEventNs(
-				eventType.NamespaceUri, eventType.Name,
-				bubbles, cancelable, view, detail,
-				screenX, screenY, clientX, clientY,
-				ctrlKey, altKey, shiftKey, metaKey, button,
+			InitMouseEventNs(eventType.NamespaceUri, eventType.Name, bubbles, cancelable, view, detail,
+				screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button,
 				relatedTarget, altGraphKey);
 		}
 		
@@ -111,13 +61,11 @@ namespace SharpVectors.Dom.Events
 		
 		#region IMouseEvent interface
 		
-		#region Public Properties
-		
 		public long ScreenX
 		{
 			get
 			{
-				return screenX;
+				return _screenX;
 			}
 		}
 		
@@ -125,7 +73,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return screeny;
+				return _screeny;
 			}
 		}
 		
@@ -133,7 +81,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return clientX;
+				return _clientX;
 			}
 		}
 		
@@ -141,7 +89,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return clientY;
+				return _clientY;
 			}
 		}
 		
@@ -149,7 +97,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return crtlKey;
+				return _crtlKey;
 			}
 		}
 		
@@ -157,7 +105,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return shiftKey;
+				return _shiftKey;
 			}
 		}
 		
@@ -165,7 +113,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return altKey;
+				return _altKey;
 			}
 		}
 		
@@ -173,7 +121,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return metaKey;
+				return _metaKey;
 			}
 		}
 		
@@ -181,7 +129,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return button;
+				return _button;
 			}
 		}
 		
@@ -189,7 +137,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return relatedTarget;
+				return _relatedTarget;
 			}
 		}
 		
@@ -197,81 +145,46 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return altGraphKey;
+				return _altGraphKey;
 			}
 		}
 		
-		#endregion
-		
-		#region Public Methods
-		
-		public void InitMouseEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail,
-			long screenX,
-			long screenY,
-			long clientX,
-			long clientY,
-			bool ctrlKey,
-			bool altKey,
-			bool shiftKey,
-			bool metaKey,
-			ushort button,
-			IEventTarget relatedTarget)
+		public void InitMouseEvent(string eventType, bool bubbles, bool cancelable, IAbstractView view, 
+            long detail, long screenX, long screenY, long clientX, long clientY, bool ctrlKey, 
+            bool altKey, bool shiftKey, bool metaKey, ushort button, IEventTarget relatedTarget)
 		{
 			InitUiEvent(eventType, bubbles, cancelable, view, detail);
 			
-			this.screenX  = screenX;
-			this.screeny  = screenY;
-			this.clientX  = clientX;
-			this.clientY  = clientY;
-			this.crtlKey  = ctrlKey;
-			this.shiftKey = shiftKey;
-			this.altKey   = altKey;
-			this.metaKey  = metaKey;
-			this.button   = button;
-			this.relatedTarget = relatedTarget;
-			//this.altGraphKey   = altGraphKey;
+			_screenX       = screenX;
+			_screeny       = screenY;
+			_clientX       = clientX;
+			_clientY       = clientY;
+			_crtlKey       = ctrlKey;
+			_shiftKey      = shiftKey;
+			_altKey        = altKey;
+			_metaKey       = metaKey;
+			_button        = button;
+			_relatedTarget = relatedTarget;
 		}
 		
-		public void InitMouseEventNs(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			long detail,
-			long screenX,
-			long screenY,
-			long clientX,
-			long clientY,
-			bool ctrlKey,
-			bool altKey,
-			bool shiftKey,
-			bool metaKey,
-			ushort button,
-			IEventTarget relatedTarget,
-			bool altGraphKey)
+		public void InitMouseEventNs(string namespaceUri, string eventType, bool bubbles, bool cancelable,
+			IAbstractView view, long detail, long screenX, long screenY, long clientX, long clientY, bool ctrlKey, 
+            bool altKey, bool shiftKey, bool metaKey, ushort button, IEventTarget relatedTarget, bool altGraphKey)
 		{
 			InitUiEventNs(namespaceUri, eventType, bubbles, cancelable, view, detail);
 			
-			this.screenX = screenX;
-			this.screeny = screenY;
-			this.clientX = clientX;
-			this.clientY = clientY;
-			this.crtlKey = ctrlKey;
-			this.shiftKey = shiftKey;
-			this.altKey = altKey;
-			this.metaKey = metaKey;
-			this.button = button;
-			this.relatedTarget = relatedTarget;
-			this.altGraphKey = altGraphKey;
+			_screenX       = screenX;
+			_screeny       = screenY;
+			_clientX       = clientX;
+			_clientY       = clientY;
+			_crtlKey       = ctrlKey;
+			_shiftKey      = shiftKey;
+			_altKey        = altKey;
+			_metaKey       = metaKey;
+			_button        = button;
+			_relatedTarget = relatedTarget;
+			_altGraphKey   = altGraphKey;
 		}
-		
-		#endregion
 		
 		#endregion
 	}

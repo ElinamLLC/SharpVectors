@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Xml;
 
-using SharpVectors.Dom.Events;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Dom.Events
@@ -15,10 +13,10 @@ namespace SharpVectors.Dom.Events
     {
         #region Private Fields
 
-        private IEventTargetSupport eventTarget;
+        private IEventTargetSupport _eventTarget;
 
-        private EventListenerMap captureMap;
-        private EventListenerMap bubbleMap;
+        private EventListenerMap _captureMap;
+        private EventListenerMap _bubbleMap;
         private ArrayList _ancestors;
 
         #endregion
@@ -27,10 +25,10 @@ namespace SharpVectors.Dom.Events
 
         public EventTarget(IEventTargetSupport eventTarget)
         {
-            this.eventTarget = eventTarget;
-            this.captureMap  = new EventListenerMap();
-            this.bubbleMap   = new EventListenerMap();
-            this._ancestors   = new ArrayList();
+            _eventTarget = eventTarget;
+            _captureMap  = new EventListenerMap();
+            _bubbleMap   = new EventListenerMap();
+            _ancestors   = new ArrayList();
         }
 
         #endregion
@@ -46,11 +44,11 @@ namespace SharpVectors.Dom.Events
         {
             if (useCapture)
             {
-                captureMap.AddEventListener(null, type, null, listener);
+                _captureMap.AddEventListener(null, type, null, listener);
             }
             else
             {
-                bubbleMap.AddEventListener(null, type, null, listener);
+                _bubbleMap.AddEventListener(null, type, null, listener);
             }
         }
 
@@ -59,11 +57,11 @@ namespace SharpVectors.Dom.Events
         {
             if (useCapture)
             {
-                captureMap.RemoveEventListener(null, type, listener);
+                _captureMap.RemoveEventListener(null, type, listener);
             }
             else
             {
-                bubbleMap.RemoveEventListener(null, type, listener);
+                _bubbleMap.RemoveEventListener(null, type, listener);
             }
         }
 
@@ -80,10 +78,10 @@ namespace SharpVectors.Dom.Events
                 XmlNode currNode = null;
                 ISvgElementInstance currInstance = null;
 
-                if (this.eventTarget is ISvgElementInstance)
-                    currInstance = (ISvgElementInstance)this.eventTarget;
+                if (_eventTarget is ISvgElementInstance)
+                    currInstance = (ISvgElementInstance)_eventTarget;
                 else
-                    currNode = (XmlNode)this.eventTarget;
+                    currNode = (XmlNode)_eventTarget;
 
                 // We can't use an XPath ancestor axe because we must account for 
                 // conceptual nodes
@@ -109,15 +107,15 @@ namespace SharpVectors.Dom.Events
                 }
 
                 Event realEvent = (Event)eventInfo;
-                realEvent.eventTarget = this.eventTarget;
+                realEvent._eventTarget = _eventTarget;
 
-                if (!realEvent.stopped)
+                if (!realEvent._stopped)
                 {
-                    realEvent.eventPhase = EventPhase.CapturingPhase;
+                    realEvent._eventPhase = EventPhase.CapturingPhase;
 
                     for (int i = _ancestors.Count - 1; i >= 0; i--)
                     {
-                        if (realEvent.stopped)
+                        if (realEvent._stopped)
                         {
                             break;
                         }
@@ -126,7 +124,7 @@ namespace SharpVectors.Dom.Events
 
                         if (ancestor != null)
                         {
-                            realEvent.currentTarget = ancestor;
+                            realEvent._currentTarget = ancestor;
 
                             if (ancestor is IEventTargetSupport)
                             {
@@ -136,20 +134,20 @@ namespace SharpVectors.Dom.Events
                     }
                 }
 
-                if (!realEvent.stopped)
+                if (!realEvent._stopped)
                 {
-                    realEvent.eventPhase = EventPhase.AtTarget;
-                    realEvent.currentTarget = this.eventTarget;
-                    this.eventTarget.FireEvent(realEvent);
+                    realEvent._eventPhase = EventPhase.AtTarget;
+                    realEvent._currentTarget = _eventTarget;
+                    _eventTarget.FireEvent(realEvent);
                 }
 
-                if (!realEvent.stopped)
+                if (!realEvent._stopped)
                 {
-                    realEvent.eventPhase = EventPhase.BubblingPhase;
+                    realEvent._eventPhase = EventPhase.BubblingPhase;
 
                     for (int i = 0; i < _ancestors.Count; i++)
                     {
-                        if (realEvent.stopped)
+                        if (realEvent._stopped)
                         {
                             break;
                         }
@@ -158,13 +156,13 @@ namespace SharpVectors.Dom.Events
 
                         if (ancestor != null)
                         {
-                            realEvent.currentTarget = ancestor;
+                            realEvent._currentTarget = ancestor;
                             ((IEventTargetSupport)ancestor).FireEvent(realEvent);
                         }
                     }
                 }
 
-                return realEvent.stopped;
+                return realEvent._stopped;
             }
             catch (InvalidCastException)
             {
@@ -181,11 +179,11 @@ namespace SharpVectors.Dom.Events
         {
             if (useCapture)
             {
-                captureMap.AddEventListener(namespaceUri, type, evtGroup, listener);
+                _captureMap.AddEventListener(namespaceUri, type, evtGroup, listener);
             }
             else
             {
-                bubbleMap.AddEventListener(namespaceUri, type, evtGroup, listener);
+                _bubbleMap.AddEventListener(namespaceUri, type, evtGroup, listener);
             }
         }
 
@@ -194,17 +192,17 @@ namespace SharpVectors.Dom.Events
         {
             if (useCapture)
             {
-                captureMap.RemoveEventListener(namespaceUri, type, listener);
+                _captureMap.RemoveEventListener(namespaceUri, type, listener);
             }
             else
             {
-                bubbleMap.RemoveEventListener(namespaceUri, type, listener);
+                _bubbleMap.RemoveEventListener(namespaceUri, type, listener);
             }
         }
 
         public bool WillTriggerNs(string namespaceUri, string type)
         {
-            XmlNode node = (XmlNode)this.eventTarget;
+            XmlNode node = (XmlNode)this._eventTarget;
             XmlNodeList ancestors = node.SelectNodes("ancestor::node()");
 
             for (int i = 0; i < ancestors.Count; i++)
@@ -222,8 +220,8 @@ namespace SharpVectors.Dom.Events
 
         public bool HasEventListenerNs(string namespaceUri, string eventType)
         {
-            return captureMap.HasEventListenerNs(namespaceUri, eventType) ||
-                bubbleMap.HasEventListenerNs(namespaceUri, eventType);
+            return _captureMap.HasEventListenerNs(namespaceUri, eventType) ||
+                _bubbleMap.HasEventListenerNs(namespaceUri, eventType);
         }
 
         #endregion
@@ -238,14 +236,14 @@ namespace SharpVectors.Dom.Events
             {
                 case EventPhase.AtTarget:
                 case EventPhase.BubblingPhase:
-                    bubbleMap.Lock();
-                    bubbleMap.FireEvent(eventInfo);
-                    bubbleMap.Unlock();
+                    _bubbleMap.Lock();
+                    _bubbleMap.FireEvent(eventInfo);
+                    _bubbleMap.Unlock();
                     break;
                 case EventPhase.CapturingPhase:
-                    captureMap.Lock();
-                    captureMap.FireEvent(eventInfo);
-                    captureMap.Unlock();
+                    _captureMap.Lock();
+                    _captureMap.FireEvent(eventInfo);
+                    _captureMap.Unlock();
                     break;
             }
         }

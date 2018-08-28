@@ -202,7 +202,7 @@ namespace SharpVectors
 			if (bytes == null)
 				return null;
 			if (count == 0)
-				return String.Empty;
+				return string.Empty;
 
 			if (bytes == null)
 				throw new ArgumentNullException ("bytes");
@@ -325,8 +325,8 @@ namespace SharpVectors
 			if (s == null)
 				return null;
 
-			if (s == String.Empty)
-				return String.Empty;
+			if (s == string.Empty)
+				return string.Empty;
 
 			bool needEncode = false;
 			int len = s.Length;
@@ -356,7 +356,7 @@ namespace SharpVectors
 				return null;
 
 			if (bytes.Length == 0)
-				return String.Empty;
+				return string.Empty;
 
 			return Encoding.ASCII.GetString (UrlEncodeToBytes (bytes, 0, bytes.Length));
 		}
@@ -367,7 +367,7 @@ namespace SharpVectors
 				return null;
 
 			if (bytes.Length == 0)
-				return String.Empty;
+				return string.Empty;
 
 			return Encoding.ASCII.GetString (UrlEncodeToBytes (bytes, offset, count));
 		}
@@ -537,7 +537,7 @@ namespace SharpVectors
 		public static string JavaScriptStringEncode (string value, bool addDoubleQuotes)
 		{
 			if (string.IsNullOrWhiteSpace (value))
-				return addDoubleQuotes ? "\"\"" : String.Empty;
+				return addDoubleQuotes ? "\"\"" : string.Empty;
 
 			int len = value.Length;
 			bool needEncode = false;

@@ -199,7 +199,7 @@ namespace SharpVectors.Converters
                 {
                     this.AppendLine(_sourceFiles[i]);
                 }
-                this.AppendLine(String.Empty);
+                this.AppendLine(string.Empty);
 
                 _worker.RunWorkerAsync();
 

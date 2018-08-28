@@ -1,8 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>0</completed>
- 
-using System;
-
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>

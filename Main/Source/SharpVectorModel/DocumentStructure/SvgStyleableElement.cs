@@ -38,7 +38,7 @@ namespace SharpVectors.Dom.Svg
             {
                 if (className == null)
                 {
-                    className = new SvgAnimatedString(GetAttribute("class", String.Empty));
+                    className = new SvgAnimatedString(GetAttribute("class", string.Empty));
                 }
                 return className;
             }
@@ -52,7 +52,7 @@ namespace SharpVectors.Dom.Svg
             if (!presentationAttributes.ContainsKey(name))
             {
                 ICssValue result;
-                string attValue = GetAttribute(name, String.Empty).Trim();
+                string attValue = GetAttribute(name, string.Empty).Trim();
                 if (attValue != null && attValue.Length > 0)
                 {
                     if (isImportant.IsMatch(attValue))
@@ -80,15 +80,15 @@ namespace SharpVectors.Dom.Svg
         #region GetValues
         public string GetPropertyValue(string name)
         {
-            return GetComputedStyle(String.Empty).GetPropertyValue(name);
+            return GetComputedStyle(string.Empty).GetPropertyValue(name);
         }
 
         public string GetPropertyValue(string name1, string name2)
         {
-            string cssString = GetComputedStyle(String.Empty).GetPropertyValue(name1);
+            string cssString = GetComputedStyle(string.Empty).GetPropertyValue(name1);
             if (cssString == null)
             {
-                cssString = GetComputedStyle(String.Empty).GetPropertyValue(name2);
+                cssString = GetComputedStyle(string.Empty).GetPropertyValue(name2);
             }
 
             return cssString;
@@ -108,7 +108,7 @@ namespace SharpVectors.Dom.Svg
                     if (cssValue != null)
                     {
                         csd.CollectProperty(cssPropName, 0, cssValue,
-                            CssStyleSheetType.NonCssPresentationalHints, String.Empty);
+                            CssStyleSheetType.NonCssPresentationalHints, string.Empty);
                     }
                 }
 

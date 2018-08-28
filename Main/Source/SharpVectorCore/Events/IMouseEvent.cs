@@ -1,4 +1,3 @@
-using System;
 using SharpVectors.Dom.Views;
 
 namespace SharpVectors.Dom.Events
@@ -20,8 +19,7 @@ namespace SharpVectors.Dom.Events
 	/// used with the DocumentEvent.createEvent method.
 	/// </para>
 	/// </remarks>
-	public interface IMouseEvent
-		: IUiEvent
+	public interface IMouseEvent : IUiEvent
 	{
 		/// <summary>
 		/// The horizontal coordinate at which the event occurred relative
@@ -212,22 +210,9 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="IEvent">IEvent</see>'s related
 		/// <see cref="IEventTarget">IEventTarget</see>.
 		/// </param>
-		void InitMouseEvent(
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			long detailArg,
-			long screenXArg,
-			long screenYArg,
-			long clientXArg,
-			long clientYArg,
-			bool ctrlKeyArg,
-			bool altKeyArg,
-			bool shiftKeyArg,
-			bool metaKeyArg,
-			ushort buttonArg,
-			IEventTarget relatedTargetArg);
+		void InitMouseEvent(string typeArg, bool canBubbleArg, bool cancelableArg, IAbstractView viewArg,
+			long detailArg, long screenXArg, long screenYArg, long clientXArg, long clientYArg,	bool ctrlKeyArg, 
+            bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, ushort buttonArg, IEventTarget relatedTargetArg);
 		
 		/// <summary>
 		/// The <see cref="InitMouseEventNs">InitMouseEventNs</see> method
@@ -309,23 +294,9 @@ namespace SharpVectors.Dom.Events
 		/// Specifies whether or not alt graph key was depressed during the
 		/// <see cref="IEvent">IEvent</see>.
 		/// </param>
-		void InitMouseEventNs(
-			string namespaceUri,
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			long detailArg,
-			long screenXArg,
-			long screenYArg,
-			long clientXArg,
-			long clientYArg,
-			bool ctrlKeyArg,
-			bool altKeyArg,
-			bool shiftKeyArg,
-			bool metaKeyArg,
-			ushort buttonArg,
-			IEventTarget relatedTargetArg,
-			bool altGraphKeyArg);
+		void InitMouseEventNs(string namespaceUri, string typeArg, bool canBubbleArg, bool cancelableArg,
+			IAbstractView viewArg, long detailArg, long screenXArg, long screenYArg, long clientXArg,
+			long clientYArg, bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg,
+			ushort buttonArg, IEventTarget relatedTargetArg, bool altGraphKeyArg);
 	}
 }

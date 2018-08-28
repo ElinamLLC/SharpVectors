@@ -7,12 +7,13 @@ using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Css
 {
-	#region Public enums
 	internal enum XPathSelectorStatus
 	{
-		Start, Parsed, Compiled, Error
+		Start,
+        Parsed,
+        Compiled,
+        Error
 	}
-	#endregion
 
 	public sealed class CssXPathSelector
 	{
@@ -32,8 +33,8 @@ namespace SharpVectors.Dom.Css
         #region Private Fields
 
         private int _specificity;
-        private string sXpath;
-        private XPathExpression xpath;
+        private string _sXpath;
+        private XPathExpression _xpath;
         private IDictionary<string, string> _nsTable;
 
         #endregion
@@ -66,7 +67,7 @@ namespace SharpVectors.Dom.Css
 				{
 					GetXPath(null);
 				}
-                return sXpath;
+                return _sXpath;
 			}
 		}
 
@@ -80,8 +81,8 @@ namespace SharpVectors.Dom.Css
 				}
 				if (Status != XPathSelectorStatus.Error) 
                     return _specificity;
-				else 
-                    return 0;
+
+                return 0;
 			}
 		}
 
@@ -96,7 +97,7 @@ namespace SharpVectors.Dom.Css
 
 		private string NsToXPath(Match match)
 		{
-			string r = String.Empty;
+			string r = string.Empty;
 			Group g = match.Groups["ns"];
 
 			if (g != null && g.Success)
@@ -122,21 +123,22 @@ namespace SharpVectors.Dom.Css
 					r += "[false]";
 				}
 			}
-			else if (_nsTable.ContainsKey(String.Empty))
+			else if (_nsTable.ContainsKey(string.Empty))
 			{
-				//if no default namespace has been specified, this is equivalent to *|E. Otherwise it is equivalent to ns|E where ns is the default namespace.
+                // if no default namespace has been specified, this is equivalent to *|E. 
+                // Otherwise it is equivalent to ns|E where ns is the default namespace.
 
-				r += "[namespace-uri()='" + _nsTable[String.Empty] + "']";
+				r += "[namespace-uri()='" + _nsTable[string.Empty] + "']";
 			}
 			return r;
 		}
 
 		private string TypeToXPath(Match match)
 		{
-			string r = String.Empty;
+			string r = string.Empty;
 			Group g = match.Groups["type"];
 			string s = g.Value;
-			if(!g.Success || s=="*") r = String.Empty;
+			if(!g.Success || s=="*") r = string.Empty;
 			else
 			{
 				r = "[local-name()='" + s + "']";
@@ -148,7 +150,7 @@ namespace SharpVectors.Dom.Css
 
 		private string ClassToXPath(Match match)
 		{
-			string r = String.Empty;
+			string r = string.Empty;
 			Group g = match.Groups["class"];
 
 			foreach(Capture c in g.Captures)
@@ -161,7 +163,7 @@ namespace SharpVectors.Dom.Css
 
 		private string IdToXPath(Match match)
 		{
-			string r = String.Empty;
+			string r = string.Empty;
 			Group g = match.Groups["id"];
 			if(g.Success)
 			{
@@ -175,8 +177,8 @@ namespace SharpVectors.Dom.Css
 		private string GetAttributeMatch(string attSelector)
 		{
 			string fullAttName = attSelector.Trim();
-			int pipePos = fullAttName.IndexOf("|");
-			string attMatch = String.Empty;
+			int pipePos = fullAttName.IndexOf("|", StringComparison.OrdinalIgnoreCase);
+			string attMatch = string.Empty;
 
 			if(pipePos == -1 || pipePos == 0)
 			{
@@ -184,7 +186,7 @@ namespace SharpVectors.Dom.Css
 				string attName = fullAttName.Substring(pipePos+1);
 				attMatch = "@" + attName;
 			}
-			else if(fullAttName.StartsWith("*|"))
+			else if(fullAttName.StartsWith("*|", StringComparison.OrdinalIgnoreCase))
 			{
 				// *|att => in any namespace (undeclared or declared)
 				attMatch = "@*[local-name()='" + fullAttName.Substring(2) + "']";
@@ -209,7 +211,7 @@ namespace SharpVectors.Dom.Css
 
 		private string PredicatesToXPath(Match match)
 		{
-			string r = String.Empty;
+			string r = string.Empty;
 			Group g = match.Groups["attributecheck"];
 			
 			foreach(Capture c in g.Captures)
@@ -226,9 +228,9 @@ namespace SharpVectors.Dom.Css
 			{
 				Match valueCheckMatch = reAttributeValueCheck.Match(c.Value);
 				
-				string attName = valueCheckMatch.Groups["attname"].Value;
+				string attName  = valueCheckMatch.Groups["attname"].Value;
 				string attMatch = GetAttributeMatch(attName);
-				string eq = valueCheckMatch.Groups["eqtype"].Value;	// ~,^,$,*,|,nothing
+				string eq       = valueCheckMatch.Groups["eqtype"].Value;	// ~,^,$,*,|,nothing
 				string attValue = valueCheckMatch.Groups["attvalue"].Value;
 
 				switch(eq)
@@ -276,32 +278,32 @@ namespace SharpVectors.Dom.Css
 			int specificityA = 0;
 			int specificityB = 1;
 			int specificityC = 0;
-			string r = String.Empty;
+			string r = string.Empty;
 			Group g = match.Groups["pseudoclass"];
 
-			foreach(Capture c in g.Captures)
+			Regex reLang = new Regex(@"^lang\(([A-Za-z\-]+)\)$");
+			Regex reContains = new Regex("^contains\\((\"|\')?(?<stringvalue>.*?)(\"|\')?\\)$");
+
+			string s = @"^(?<type>(nth-child)|(nth-last-child)|(nth-of-type)|(nth-last-of-type))\(\s*";
+			s += @"(?<exp>(odd)|(even)|(((?<a>[\+-]?\d*)n)?(?<b>[\+-]?\d+)?))";
+			s += @"\s*\)$";
+			Regex reNth = new Regex(s);
+
+			foreach (Capture c in g.Captures)
 			{
-				Regex reLang = new Regex(@"^lang\(([A-Za-z\-]+)\)$");
-				Regex reContains = new Regex("^contains\\((\"|\')?(?<stringvalue>.*?)(\"|\')?\\)$");
-
-				string s = @"^(?<type>(nth-child)|(nth-last-child)|(nth-of-type)|(nth-last-of-type))\(\s*";
-				s += @"(?<exp>(odd)|(even)|(((?<a>[\+-]?\d*)n)?(?<b>[\+-]?\d+)?))";
-				s += @"\s*\)$";
-				Regex reNth = new Regex(s);
-
 				string p = c.Value.Substring(1);
 
-				if(p == "root")
+				if (p == "root")
 				{
 					r += "[not(parent::*)]";
 				}
-				else if(p.StartsWith("not"))
+				else if (p.StartsWith("not", StringComparison.OrdinalIgnoreCase))
 				{
 					string expr = p.Substring(4, p.Length-5);
 					CssXPathSelector sel = new CssXPathSelector(expr, _nsTable);
 
 					string xpath = sel.XPath;
-					if(xpath != null && xpath.Length>3)
+					if (xpath != null && xpath.Length>3)
 					{
 						// remove *[ and ending ]
 						xpath = xpath.Substring(2, xpath.Length-3);
@@ -321,44 +323,44 @@ namespace SharpVectors.Dom.Css
 						specificityC = specificity;
 					}
 				}
-				else if(p == "first-child")
+				else if (p == "first-child")
 				{
 					r += "[count(preceding-sibling::*)=0]";
 				}
-				else if(p == "last-child")
+				else if (p == "last-child")
 				{
 					r += "[count(following-sibling::*)=0]";
 				}
-				else if(p == "only-child")
+				else if (p == "only-child")
 				{
 					r += "[count(../*)=1]";
 				}
-				else if(p == "only-of-type")
+				else if (p == "only-of-type")
 				{
 					r += "[false]";
 				}
-				else if(p == "empty")
+				else if (p == "empty")
 				{
 					r += "[not(child::*) and not(text())]";
 				}
-				else if(p == "target")
+				else if (p == "target")
 				{
 					r += "[false]";
 				}
-				else if(p == "first-of-type")
+				else if (p == "first-of-type")
 				{
 					r += "[false]";
 					//r += "[.=(../*[local-name='roffe'][position()=1])]";
 				}
-				else if(reLang.IsMatch(p))
+				else if (reLang.IsMatch(p))
 				{
 					r += "[lang('" + reLang.Match(p).Groups[1].Value + "')]";
 				}
-				else if(reContains.IsMatch(p))
+				else if (reContains.IsMatch(p))
 				{
 					r += "[contains(string(.),'" + reContains.Match(p).Groups["stringvalue"].Value + "')]";
 				}
-				else if(reNth.IsMatch(p))
+				else if (reNth.IsMatch(p))
 				{
 					Match m = reNth.Match(p);
 					string type = m.Groups["type"].Value;
@@ -381,19 +383,22 @@ namespace SharpVectors.Dom.Css
 
 						if(v.Length == 0) a = 1;
 						else if(v.Equals("-")) a = -1;
-						else a = Int32.Parse(v);
+						else a = int.Parse(v);
 
-						if(m.Groups["b"].Success) b = Int32.Parse(m.Groups["b"].Value);
+						if (m.Groups["b"].Success) b = int.Parse(m.Groups["b"].Value);
 					}
 
 
-					if(type.Equals("nth-child") || type.Equals("nth-last-child"))
+					if (type.Equals("nth-child", StringComparison.OrdinalIgnoreCase) 
+                        || type.Equals("nth-last-child", StringComparison.OrdinalIgnoreCase))
 					{
 						string axis;
-						if(type.Equals("nth-child")) axis = "preceding-sibling";
-						else axis = "following-sibling";
+						if (type.Equals("nth-child", StringComparison.OrdinalIgnoreCase))
+                            axis = "preceding-sibling";
+						else
+                            axis = "following-sibling";
 
-						if(a == 0)
+						if (a == 0)
 						{
 							r += "[count(" + axis + "::*)+1=" + b + "]";
 						}
@@ -411,21 +416,21 @@ namespace SharpVectors.Dom.Css
 		private void SeperatorToXPath(Match match, StringBuilder xpath, string cur)
 		{
 			Group g = match.Groups["seperator"];
-			if(g.Success)
+			if (g.Success)
 			{
 				string s = g.Value.Trim();
-				if(s.Length == 0) cur += "//*";
-				else if(s == ">") cur += "/*";
-				else if(s == "+" || s == "~")
+				if (s.Length == 0) cur += "//*";
+				else if (s == ">") cur += "/*";
+				else if (s == "+" || s == "~")
 				{
 					xpath.Append("[preceding-sibling::*");
-					if(s == "+")
+					if (s == "+")
 					{
 						xpath.Append("[position()=1]");
 					}
 					xpath.Append(cur);
 					xpath.Append("]");
-					cur = String.Empty;
+					cur = string.Empty;
 				}
 			}
 			xpath.Append(cur);
@@ -445,7 +450,7 @@ namespace SharpVectors.Dom.Css
 			{
 				if(match.Success && match.Value.Length > 0)
 				{
-					string x = String.Empty;
+					string x = string.Empty;
 					x += NsToXPath(match);
 					x += TypeToXPath(match);
 					x += ClassToXPath(match);
@@ -459,7 +464,7 @@ namespace SharpVectors.Dom.Css
 				match = match.NextMatch();
 			}
 			if(nav != null) Status = XPathSelectorStatus.Parsed;
-			sXpath = xpath.ToString();
+			_sXpath = xpath.ToString();
 		}
 
 		private XmlNamespaceManager GetNSManager()
@@ -488,8 +493,8 @@ namespace SharpVectors.Dom.Css
 			}
 			if(Status == XPathSelectorStatus.Parsed)
 			{
-				xpath = nav.Compile(sXpath);
-				xpath.SetContext(GetNSManager());
+				_xpath = nav.Compile(_sXpath);
+				_xpath.SetContext(GetNSManager());
 				
 				Status = XPathSelectorStatus.Compiled;
 			}
@@ -505,7 +510,7 @@ namespace SharpVectors.Dom.Css
 			{
 				try
 				{
-					return nav.Matches(xpath);
+					return nav.Matches(_xpath);
 				}
 				catch
 				{

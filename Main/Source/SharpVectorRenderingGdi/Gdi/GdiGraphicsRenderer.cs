@@ -1,16 +1,10 @@
 using System;
-using System.IO;
-using System.Net;
 using System.Xml;
-using System.Reflection;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-using SharpVectors.Xml;
-using SharpVectors.Dom;
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Dom.Events;
 
@@ -35,8 +29,7 @@ namespace SharpVectors.Renderers.Gdi
         /// The 'hit color' is an integer identifier that identifies the
         /// graphics node that drew it.  When 'hit colors' are drawn onto
         /// a bitmap (ie. <see cref="idMapRaster">idMapRaster</see> the 'hit color'
-        /// of each pixel with the help of <see cref="graphicsNodes"
-        /// >graphicsNodes</see> can identify for a given x, y coordinate the
+        /// of each pixel with the help of <see cref="graphicsNodes">graphicsNodes</see> can identify for a given x, y coordinate the
         /// relevant graphics node a mouse event should be dispatched to.
         /// </remarks>
         private Dictionary<Color, SvgElement> graphicsNodes = new Dictionary<Color, SvgElement>();

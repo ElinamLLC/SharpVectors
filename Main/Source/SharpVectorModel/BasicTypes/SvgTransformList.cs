@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Svg
@@ -13,8 +12,7 @@ namespace SharpVectors.Dom.Svg
 
         //Regex re = new Regex("([A-Za-z]+)\\s*\\(([\\-0-9\\.\\,\\seE]+)\\)");
 			
-        private static Regex _regExtract = new Regex(
-            "([A-Za-z]+)\\s*\\(([\\-0-9\\.eE\\,\\s]+)\\)", RegexOptions.Compiled);
+        private static Regex _regExtract = new Regex("([A-Za-z]+)\\s*\\(([\\-0-9\\.eE\\,\\s]+)\\)", RegexOptions.Compiled);
 
         #endregion
 
@@ -41,17 +39,14 @@ namespace SharpVectors.Dom.Svg
                 {
                     return SvgMatrix.Identity;
                 }
-                else
+                ISvgMatrix matrix = GetItem(0).Matrix;
+
+                for (uint i = 1; i < NumberOfItems; i++)
                 {
-                    ISvgMatrix matrix = GetItem(0).Matrix;
-
-                    for (uint i = 1; i < NumberOfItems; i++)
-                    {
-                        matrix = matrix.Multiply(GetItem(i).Matrix);
-                    }
-
-                    return (SvgMatrix)matrix;
+                    matrix = matrix.Multiply(GetItem(i).Matrix);
                 }
+
+                return (SvgMatrix)matrix;
             }
         }
 
@@ -91,6 +86,7 @@ namespace SharpVectors.Dom.Svg
 
             return result;
         }
+
 		#endregion
     }
 }

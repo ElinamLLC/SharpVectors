@@ -12,7 +12,7 @@ namespace SharpVectors.Dom
     {
         #region Private Fields
         
-        private EventTarget eventTarget;
+        private EventTarget _eventTarget;
         
         #endregion
         
@@ -21,72 +21,55 @@ namespace SharpVectors.Dom
         public Element(string prefix, string localName, string namespaceUri,
             Document document) : base(prefix, localName, namespaceUri, document)
         {
-            eventTarget = new EventTarget(this);
+            _eventTarget = new EventTarget(this);
         }
         
         #endregion
         
         #region IEventTarget interface
         
-        #region Methods
-        
         #region DOM Level 2
         
-        void IEventTarget.AddEventListener(string type, EventListener listener,
-            bool useCapture)
+        void IEventTarget.AddEventListener(string type, EventListener listener, bool useCapture)
         {
-            eventTarget.AddEventListener(type, listener, useCapture);
+            _eventTarget.AddEventListener(type, listener, useCapture);
         }
         
-        void IEventTarget.RemoveEventListener(string type, EventListener listener,
-            bool useCapture)
+        void IEventTarget.RemoveEventListener(string type, EventListener listener, bool useCapture)
         {
-            eventTarget.RemoveEventListener(type, listener, useCapture);
+            _eventTarget.RemoveEventListener(type, listener, useCapture);
         }
 
         bool IEventTarget.DispatchEvent(IEvent evt)
         {
-            return eventTarget.DispatchEvent(evt);
+            return _eventTarget.DispatchEvent(evt);
         }
         
         #endregion
         
         #region DOM Level 3 Experimental
         
-        void IEventTarget.AddEventListenerNs(
-            string namespaceUri,
-            string type,
-            EventListener listener,
-            bool useCapture,
-            object eventGroup)
+        void IEventTarget.AddEventListenerNs(string namespaceUri, string type, EventListener listener,
+            bool useCapture, object eventGroup)
         {
-            eventTarget.AddEventListenerNs(namespaceUri, type, listener, useCapture, eventGroup);
+            _eventTarget.AddEventListenerNs(namespaceUri, type, listener, useCapture, eventGroup);
         }
         
-        void IEventTarget.RemoveEventListenerNs(
-            string namespaceUri,
-            string type,
-            EventListener listener,
-            bool useCapture)
+        void IEventTarget.RemoveEventListenerNs(string namespaceUri, string type, 
+            EventListener listener, bool useCapture)
         {
-            eventTarget.RemoveEventListenerNs(namespaceUri, type, listener, useCapture);
+            _eventTarget.RemoveEventListenerNs(namespaceUri, type, listener, useCapture);
         }
         
-        bool IEventTarget.WillTriggerNs(
-            string namespaceUri,
-            string type)
+        bool IEventTarget.WillTriggerNs(string namespaceUri, string type)
         {
-            return eventTarget.WillTriggerNs(namespaceUri, type);
+            return _eventTarget.WillTriggerNs(namespaceUri, type);
         }
         
-        bool IEventTarget.HasEventListenerNs(
-            string namespaceUri,
-            string type)
+        bool IEventTarget.HasEventListenerNs(string namespaceUri, string type)
         {
-            return eventTarget.HasEventListenerNs(namespaceUri, type);
+            return _eventTarget.HasEventListenerNs(namespaceUri, type);
         }
-        
-        #endregion
         
         #endregion
         
@@ -96,7 +79,7 @@ namespace SharpVectors.Dom
         
         void IEventTargetSupport.FireEvent(IEvent evt)
         {
-            eventTarget.FireEvent(evt);
+            _eventTarget.FireEvent(evt);
         }
         
         #endregion

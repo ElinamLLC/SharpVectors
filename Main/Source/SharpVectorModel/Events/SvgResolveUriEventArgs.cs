@@ -14,7 +14,8 @@ namespace SharpVectors.Dom.Svg
         }
 
         public SvgResolveUriEventArgs(string uri)
-        {   
+        {
+            _uri = uri;
         }
 
         /// <summary>

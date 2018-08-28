@@ -74,7 +74,7 @@ namespace SharpVectors.Renderers.Utils
             get
             {
                 SvgDocument document = (SvgDocument)this.Document;
-                return (document != null) ? document.Url : String.Empty;
+                return (document != null) ? document.Url : string.Empty;
             }
             set
             {

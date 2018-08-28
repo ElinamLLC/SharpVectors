@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>80</completed>
-
 using System;
 using System.Text;
 using System.Collections.Generic;
@@ -9,10 +6,25 @@ using System.Text.RegularExpressions;
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSStyleDeclaration interface represents a single CSS declaration block. This interface may be used to determine the style properties currently set in a block or to set style properties explicitly within the block.
-	///	While an implementation may not recognize all CSS properties within a CSS declaration block, it is expected to provide access to all specified properties in the style sheet through the CSSStyleDeclaration interface. Furthermore, implementations that support a specific level of CSS should correctly handle CSS shorthand properties for that level. For a further discussion of shorthand properties, see the CSS2Properties interface.
-	/// This interface is also used to provide a read-only access to the computed values of an element. See also the ViewCSS interface.
+    /// <para>
+	/// The CSSStyleDeclaration interface represents a single CSS declaration block. This interface may 
+    /// be used to determine the style properties currently set in a block or to set style properties 
+    /// explicitly within the block.
+    /// </para>
+    /// <para>
+	///	While an implementation may not recognize all CSS properties within a CSS declaration block, it is 
+    ///	expected to provide access to all specified properties in the style sheet through the 
+    ///	CSSStyleDeclaration interface. Furthermore, implementations that support a specific level of CSS 
+    ///	should correctly handle CSS shorthand properties for that level. For a further discussion of 
+    ///	shorthand properties, see the CSS2Properties interface.
+    /// </para>
+    /// <para>
+	/// This interface is also used to provide a read-only access to the computed values of an element. 
+    /// See also the ViewCSS interface.
+    /// </para>
+    /// <para>
 	/// Note: The CSS Object Model doesn't provide an access to the specified or actual values of the CSS cascade
+    /// </para>
 	/// </summary>
 	public class CssStyleDeclaration : ICssStyleDeclaration
 	{
@@ -27,20 +39,23 @@ namespace SharpVectors.Dom.Css
 
         private bool _readOnly;
         private CssStyleSheetType _origin;
-        private Dictionary<string, CssStyleBlock> styles = new Dictionary<string, CssStyleBlock>();
+        private IDictionary<string, CssStyleBlock> _styles;
+		private ICssRule _parentRule;
 
         #endregion
 
 		#region Constructors
+
 		/// <summary>
 		/// The constructor used internally when collecting styles for a specified element
 		/// </summary>
 		internal CssStyleDeclaration()
 		{
-			_origin = CssStyleSheetType.Collector;
-			_readOnly = true;
+			_origin     = CssStyleSheetType.Collector;
+			_readOnly   = true;
 			_parentRule = null;
-		}
+            _styles     = new Dictionary<string, CssStyleBlock>();
+        }
 
 		/// <summary>
 		/// The constructor for CssStyleDeclaration
@@ -50,22 +65,25 @@ namespace SharpVectors.Dom.Css
 		/// <param name="readOnly">True if this instance is readonly</param>
 		/// <param name="origin">The type of CssStyleSheet</param>
 		public CssStyleDeclaration(ref string css, CssRule parentRule, bool readOnly, CssStyleSheetType origin)
+            : this()
 		{
-			_origin = origin;
-			_readOnly = readOnly;
+			_origin     = origin;
+			_readOnly   = readOnly;
 			_parentRule = parentRule;
 
 			css = parseString(css);
 		}
 
 		public CssStyleDeclaration(string css, CssRule parentRule, bool readOnly, CssStyleSheetType origin)
-		{
-			_origin = origin;
-			_readOnly = readOnly;
+            : this()
+        {
+            _origin     = origin;
+			_readOnly   = readOnly;
 			_parentRule = parentRule;
 
 			parseString(css);
 		}
+
 		#endregion
 
         #region Public Properties
@@ -95,7 +113,7 @@ namespace SharpVectors.Dom.Css
 		/// </summary>
 		internal void GetStylesForElement(CssCollectedStyleDeclaration csd, int specificity)
 		{
-            foreach (KeyValuePair<string, CssStyleBlock> de in styles)
+            foreach (KeyValuePair<string, CssStyleBlock> de in _styles)
 			{
 				CssStyleBlock scs = de.Value;
 				csd.CollectProperty(scs.Name, specificity,
@@ -112,7 +130,7 @@ namespace SharpVectors.Dom.Css
             bool startedWithABracket = false;
 
             cssText = cssText.Trim();
-            if (cssText.StartsWith("{"))
+            if (cssText.StartsWith("{", StringComparison.OrdinalIgnoreCase))
             {
                 cssText = cssText.Substring(1).Trim();
                 startedWithABracket = true;
@@ -121,7 +139,7 @@ namespace SharpVectors.Dom.Css
             Match match = styleRegex.Match(cssText);
             while (match.Success)
             {
-                string name = match.Groups["name"].Value;
+                string name  = match.Groups["name"].Value;
                 string value = match.Groups["value"].Value;
                 if (_parentRule != null)
                 {
@@ -132,13 +150,13 @@ namespace SharpVectors.Dom.Css
                 CssStyleBlock style = new CssStyleBlock(name, value, prio, _origin);
 
                 bool addStyle = false;
-                if (styles.ContainsKey(name))
+                if (_styles.ContainsKey(name))
                 {
-                    string existingPrio = ((CssStyleBlock)styles[name]).Priority;
+                    string existingPrio = ((CssStyleBlock)_styles[name]).Priority;
 
                     if (existingPrio != "important" || prio == "important")
                     {
-                        styles.Remove(name);
+                        _styles.Remove(name);
                         addStyle = true;
                     }
                 }
@@ -150,7 +168,7 @@ namespace SharpVectors.Dom.Css
 
                 if (addStyle)
                 {
-                    styles.Add(name, style);
+                    _styles.Add(name, style);
                 }
 
                 cssText = cssText.Substring(match.Length).Trim();
@@ -158,7 +176,7 @@ namespace SharpVectors.Dom.Css
             }
 
             cssText = cssText.Trim();
-            if (cssText.StartsWith("}"))
+            if (cssText.StartsWith("}", StringComparison.OrdinalIgnoreCase))
             {
                 cssText = cssText.Substring(1);
             }
@@ -186,7 +204,7 @@ namespace SharpVectors.Dom.Css
             if (_readOnly) 
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
 
-			styles[propertyName] = new CssStyleBlock(propertyName, value, priority, _origin);
+			_styles[propertyName] = new CssStyleBlock(propertyName, value, priority, _origin);
 		}
 
 		/// <summary>
@@ -196,7 +214,7 @@ namespace SharpVectors.Dom.Css
 		/// <returns>A string representing the priority (e.g. "important") if one exists. The empty string if none exists.</returns>
 		public virtual string GetPropertyPriority(string propertyName)
 		{
-			return (styles.ContainsKey(propertyName)) ? styles[propertyName].Priority : String.Empty;
+			return (_styles.ContainsKey(propertyName)) ? _styles[propertyName].Priority : string.Empty;
 		}
 
 		/// <summary>
@@ -210,14 +228,14 @@ namespace SharpVectors.Dom.Css
 			if (_readOnly) 
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
 
-			if (styles.ContainsKey(propertyName))
+			if (_styles.ContainsKey(propertyName))
 			{
-				CssStyleBlock s = styles[propertyName];
-				styles.Remove(propertyName);
+				CssStyleBlock s = _styles[propertyName];
+				_styles.Remove(propertyName);
 				return s.Value;
 			}
 			
-            return String.Empty;
+            return string.Empty;
 		}
 
 		
@@ -229,19 +247,16 @@ namespace SharpVectors.Dom.Css
 		/// <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns null if the property has not been set.</returns>
 		public virtual ICssValue GetPropertyCssValue(string propertyName)
 		{
-			if (styles.ContainsKey(propertyName))
+			if (_styles.ContainsKey(propertyName))
 			{
-				CssStyleBlock scs = styles[propertyName];
+				CssStyleBlock scs = _styles[propertyName];
 				if (scs.CssValue == null)
 				{
 					scs.CssValue = CssValue.GetCssValue(scs.Value, ReadOnly);
 				}
 				return scs.CssValue;
 			}
-			else
-			{
-				return null;
-			}
+			return null;
 		}
 
 		/// <summary>
@@ -251,11 +266,10 @@ namespace SharpVectors.Dom.Css
 		/// <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
 		public virtual string GetPropertyValue(string propertyName)
 		{
-			return (styles.ContainsKey(propertyName)) ? styles[propertyName].Value : String.Empty;
+			return (_styles.ContainsKey(propertyName)) ? _styles[propertyName].Value : string.Empty;
 		}
 
 		
-		private ICssRule _parentRule;
 		/// <summary>
 		/// The CSS rule that contains this declaration block or null if this CSSStyleDeclaration is not attached to a CSSRule.
 		/// </summary>
@@ -274,7 +288,7 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				return (ulong)styles.Count;
+				return (ulong)_styles.Count;
 			}
 		}
 
@@ -289,9 +303,9 @@ namespace SharpVectors.Dom.Css
 			{
                 StringBuilder builder = new StringBuilder();
 
-				//string ret = String.Empty;
+				//string ret = string.Empty;
 				
-				IEnumerator<KeyValuePair<string, CssStyleBlock>> enu = styles.GetEnumerator();
+				IEnumerator<KeyValuePair<string, CssStyleBlock>> enu = _styles.GetEnumerator();
 				while (enu.MoveNext())
 				{
 					CssStyleBlock style = enu.Current.Value;
@@ -316,23 +330,23 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				if(index>=Length) return String.Empty;
-				else
-				{
-					int ind = (int)index;
-                    IEnumerator<KeyValuePair<string, CssStyleBlock>> iterator = styles.GetEnumerator();
-                    iterator.MoveNext();
-                    KeyValuePair<string, CssStyleBlock> enu = iterator.Current;
-                    for (int i = 0; i < ind; i++)
-                    {
-                        iterator.MoveNext();
-                        enu = iterator.Current;
-                    }
+				if (index>=Length)
+                    return string.Empty;
 
-					return (string)enu.Key;
-				}
+                int ind = (int)index;
+                IEnumerator<KeyValuePair<string, CssStyleBlock>> iterator = _styles.GetEnumerator();
+                iterator.MoveNext();
+                KeyValuePair<string, CssStyleBlock> enu = iterator.Current;
+                for (int i = 0; i < ind; i++)
+                {
+                    iterator.MoveNext();
+                    enu = iterator.Current;
+                }
+
+				return enu.Key;
 			}
 		}
+
 		#endregion
 	}
 }

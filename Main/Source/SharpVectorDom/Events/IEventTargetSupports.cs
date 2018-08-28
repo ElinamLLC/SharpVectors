@@ -1,7 +1,5 @@
 using System;
 
-using SharpVectors.Dom.Events;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
@@ -9,11 +7,6 @@ namespace SharpVectors.Dom.Events
 	/// </summary>
 	public interface IEventTargetSupport : IEventTarget
 	{
-		#region NON-DOM
-		
-		void FireEvent(
-			IEvent evt);
-		
-		#endregion
+		void FireEvent(IEvent evt);
 	}
 }

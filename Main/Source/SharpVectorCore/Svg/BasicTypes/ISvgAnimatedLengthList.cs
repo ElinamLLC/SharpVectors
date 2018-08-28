@@ -4,10 +4,6 @@ namespace SharpVectors.Dom.Svg
 	/// Used for attributes of type SvgLengthList which can be 
 	/// animated.
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <developer>kevin@kevlindev.com</developer>
-	/// <completed>100</completed>
-
 	public interface ISvgAnimatedLengthList
 	{
 		/// <summary>

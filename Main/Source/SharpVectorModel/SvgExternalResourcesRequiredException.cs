@@ -11,8 +11,7 @@ namespace SharpVectors.Dom.Svg
         {
 		}
 
-		protected SvgExternalResourcesRequiredException(
-            SerializationInfo info, StreamingContext context ) 
+		protected SvgExternalResourcesRequiredException(SerializationInfo info, StreamingContext context ) 
             : base(info, context)
 		{
 		}

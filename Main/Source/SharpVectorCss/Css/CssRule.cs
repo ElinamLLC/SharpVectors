@@ -9,10 +9,26 @@ namespace SharpVectors.Dom.Css
 {
 	public abstract class CssRule : ICssRule
 	{
+		#region Private and protected fields
+
+		/// <summary>
+		/// The origin stylesheet type of this rule
+		/// </summary>
+		protected CssStyleSheetType origin;
+		private IList<string> replacedStrings;
+		/// <summary>
+		/// Specifies the read/write state of the instance
+		/// </summary>
+		protected bool readOnly;
+
+		private CssStyleSheet _ParentStyleSheet;
+		private CssRule _ParentRule;
+
+		#endregion
+
 		#region Constructors
 
-		protected CssRule(object parent, bool readOnly, 
-            IList<string> replacedStrings, CssStyleSheetType origin)
+		protected CssRule(object parent, bool readOnly, IList<string> replacedStrings, CssStyleSheetType origin)
 		{
 			if(parent is CssRule)
 			{
@@ -33,20 +49,8 @@ namespace SharpVectors.Dom.Css
 
 		#endregion
 
-		#region Private and protected fields
-		/// <summary>
-		/// The origin stylesheet type of this rule
-		/// </summary>
-		protected CssStyleSheetType origin;
-		private IList<string> replacedStrings;
-		/// <summary>
-		/// Specifies the read/write state of the instance
-		/// </summary>
-		protected bool readOnly;
-
-		#endregion
-
 		#region Private and internal methods
+
 		private string StringReplaceEvaluator(Match match)
 		{
             int i = Convert.ToInt32(match.Groups["number"].Value);
@@ -76,26 +80,24 @@ namespace SharpVectors.Dom.Css
 		#endregion
 
 		#region Public methods
+
 		/// <summary>
 		/// Finds the owner node of this rule
 		/// </summary>
 		/// <returns>The owner XmlNode</returns>
 		public XmlNode ResolveOwnerNode()
 		{
-			if(ParentRule != null)
+			if (ParentRule != null)
 			{
 				return ((CssRule)ParentRule).ResolveOwnerNode();
 			}
-			else
-			{
-				return ((StyleSheet)ParentStyleSheet).ResolveOwnerNode();
-			}
+			return ((StyleSheet)ParentStyleSheet).ResolveOwnerNode();
 		}
 
 		#endregion
 		
 		#region Implementation of ICssRule
-		private CssStyleSheet _ParentStyleSheet = null;
+
 		/// <summary>
 		/// The style sheet that contains this rule
 		/// </summary>
@@ -107,7 +109,6 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		private CssRule _ParentRule = null;
 		/// <summary>
 		/// If this rule is contained inside another rule (e.g. a style rule inside an @media block), this is the containing rule. If this rule is not nested inside any other rules, this returns null
 		/// </summary>
@@ -142,6 +143,7 @@ namespace SharpVectors.Dom.Css
                 throw new NotImplementedException("CssText");
 			}
 		}
+
 		#endregion
 	}
 }

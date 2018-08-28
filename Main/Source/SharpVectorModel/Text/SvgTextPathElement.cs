@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Xml;
-using System.Text;
-using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -12,7 +10,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private SvgUriReference svgURIReference;
+        private SvgUriReference _uriReference;
 
         #endregion
 
@@ -21,7 +19,7 @@ namespace SharpVectors.Dom.Svg
         public SvgTextPathElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgURIReference = new SvgUriReference(this);
+            _uriReference = new SvgUriReference(this);
         }
 
         #endregion
@@ -30,37 +28,31 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength StartOffset
         {
-            get 
-            {
-                return new SvgAnimatedLength(this, "startOffset", 
-                    SvgLengthDirection.Horizontal, "0%"); 
+            get {
+                return new SvgAnimatedLength(this, "startOffset", SvgLengthDirection.Horizontal, "0%");
             }
         }
 
         public ISvgAnimatedEnumeration Method
         {
-            get
-            {
+            get {
                 SvgTextPathMethod pathMethod = SvgTextPathMethod.Align;
                 if (this.GetAttribute("method") == "stretch")
                 {
                     pathMethod = SvgTextPathMethod.Stretch;
                 }
-
                 return new SvgAnimatedEnumeration((ushort)pathMethod);
             }
         }
 
         public ISvgAnimatedEnumeration Spacing
         {
-            get
-            {
+            get {
                 SvgTextPathSpacing pathSpacing = SvgTextPathSpacing.Exact;
                 if (this.GetAttribute("spacing") == "auto")
                 {
                     pathSpacing = SvgTextPathSpacing.Auto;
-                }     
-
+                }
                 return new SvgAnimatedEnumeration((ushort)pathSpacing);
             }
         }
@@ -71,17 +63,15 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedString Href
         {
-            get
-            {
-                return svgURIReference.Href;
+            get {
+                return _uriReference.Href;
             }
         }
 
         public XmlElement ReferencedElement
         {
-            get
-            {
-                return svgURIReference.ReferencedNode as XmlElement;
+            get {
+                return _uriReference.ReferencedNode as XmlElement;
             }
         }
 

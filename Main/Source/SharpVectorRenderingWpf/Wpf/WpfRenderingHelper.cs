@@ -257,7 +257,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 foreach (string req in element.RequiredFeatures)
                 {
-                    if (!ownerDocument.Supports(req, String.Empty))
+                    if (!ownerDocument.Supports(req, string.Empty))
                     {
                         requiredFeatures = false;
                         break;
@@ -274,7 +274,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 foreach (string req in element.RequiredExtensions)
                 {
-                    if (!ownerDocument.Supports(req, String.Empty))
+                    if (!ownerDocument.Supports(req, string.Empty))
                     {
                         requiredExtensions = false;
                         break;

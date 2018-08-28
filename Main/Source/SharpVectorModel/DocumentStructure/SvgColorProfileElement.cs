@@ -27,7 +27,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 

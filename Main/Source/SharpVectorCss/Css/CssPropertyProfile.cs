@@ -5,9 +5,9 @@ namespace SharpVectors.Dom.Css
 {
     internal sealed class CssProperty
     {
-        internal bool     IsInherited;
-        internal string   InitialValue;
-        internal CssValue InitialCssValue;
+        public bool     IsInherited;
+        public string   InitialValue;
+        public CssValue InitialCssValue;
 
         internal CssProperty(bool isInherited, string initialValue)
         {
@@ -23,7 +23,7 @@ namespace SharpVectors.Dom.Css
 
         private static CssPropertyProfile _svgProfile;
 
-        private Dictionary<string, CssProperty> _properties;
+        private IDictionary<string, CssProperty> _properties;
 
         #endregion
 
@@ -56,7 +56,6 @@ namespace SharpVectors.Dom.Css
 
                     _svgProfile.InitializeDefaults();
                 }
-
                 return _svgProfile;
             }
         }
@@ -76,10 +75,7 @@ namespace SharpVectors.Dom.Css
             {
                 return _properties[propertyName].InitialValue;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public CssValue GetInitialCssValue(string propertyName)
@@ -93,10 +89,7 @@ namespace SharpVectors.Dom.Css
                 }
                 return cssProp.InitialCssValue;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public bool IsInheritable(string propertyName)
@@ -105,10 +98,7 @@ namespace SharpVectors.Dom.Css
             {
                 return _properties[propertyName].IsInherited;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public void Add(string propertyName, bool isInheritable, string initialValue)
@@ -122,13 +112,13 @@ namespace SharpVectors.Dom.Css
 
         private void InitializeDefaults()
         {
-            Add("alignment-baseline", false, String.Empty);
+            Add("alignment-baseline", false, string.Empty);
             Add("baseline-shift", false, "baseline");
             Add("clip", false, "auto");
             Add("clip-path", false, "none");
             Add("clip-rule", true, "nonzero");
             Add("color", true, "black");
-            Add("color-interpolation", true, String.Empty);
+            Add("color-interpolation", true, string.Empty);
             Add("color-interpolation-filters", true, "linearRGB");
             Add("color-profile", true, "auto");
             Add("color-rendering", true, "auto");
@@ -143,7 +133,7 @@ namespace SharpVectors.Dom.Css
             Add("filter", false, "none");
             Add("flood-color", false, "black");
             Add("flood-opacity", false, "1");
-            Add("font", true, String.Empty);
+            Add("font", true, string.Empty);
             Add("font-family", true, "Arial");
             Add("font-size", true, "medium");
             Add("font-size-adjust", true, "none");

@@ -1,9 +1,11 @@
 using System;
-using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Svg
 {
-    // TODO:  This class does not yet support custom views
+    /// <summary>
+    /// 
+    /// TODO:  This class does not yet support custom views
+    /// </summary>
     public sealed class SvgViewSpec : SvgFitToViewBox, ISvgViewSpec
     {
         #region Constructors and Destructor
@@ -38,7 +40,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return ownerElement.GetAttribute("preserveAspectRatio");
+                return _ownerElement.GetAttribute("preserveAspectRatio");
             }
         }
 
@@ -46,7 +48,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return ownerElement.GetAttribute("viewBox");
+                return _ownerElement.GetAttribute("viewBox");
             }
         }
 
@@ -70,13 +72,13 @@ namespace SharpVectors.Dom.Svg
 
         #region ISvgZoomAndPan Members
 
-        public SharpVectors.Dom.Svg.SvgZoomAndPanType ZoomAndPan
+        public SvgZoomAndPanType ZoomAndPan
         {
             get
             {
-                if (ownerElement != null && ownerElement.HasAttribute("zoomAndPan"))
+                if (_ownerElement != null && _ownerElement.HasAttribute("zoomAndPan"))
                 {
-                    switch (ownerElement.GetAttribute("zoomAndPan").Trim())
+                    switch (_ownerElement.GetAttribute("zoomAndPan").Trim())
                     {
                         case "magnify": return SvgZoomAndPanType.Magnify;
                         case "disable": return SvgZoomAndPanType.Disable;

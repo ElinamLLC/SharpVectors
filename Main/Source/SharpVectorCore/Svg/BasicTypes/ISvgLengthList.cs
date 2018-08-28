@@ -3,8 +3,6 @@ namespace SharpVectors.Dom.Svg
 	/// <summary>
 	/// This interface defines a list of SvgLength objects. 
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>20</completed>
 	public interface ISvgLengthList
 	{
 		uint NumberOfItems{get;}

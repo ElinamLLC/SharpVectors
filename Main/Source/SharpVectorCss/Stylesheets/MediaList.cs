@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>75</completed>
-
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -13,47 +10,40 @@ namespace SharpVectors.Dom.Stylesheets
 	/// </summary>
 	public sealed class MediaList : IMediaList
 	{
+		#region Private fields
+
 		private static Regex splitter = new Regex(@"\s*,\s*");
 
+		private bool _containsAll;	//speeds up matching if the list contains "all"
+        private IList<string> _medias;
+
+		#endregion
+
 		#region Constructors
-		public MediaList() : this(String.Empty)
+
+		public MediaList() 
+            : this(string.Empty)
 		{
 		}
 
 		public MediaList(string val)
 		{
-			_parseString(val);
-		}
-		#endregion
+            _medias = new List<string>();
 
-		private void _parseString(string mediaText)
-		{
-			mediaText = mediaText.Trim();
-			if(mediaText.Length > 0)
-			{
-				string[] ms = splitter.Split(mediaText);
-				foreach(string m in ms)
-				{
-					AppendMedium(m);
-				}
-			}
+            _parseString(val);
 		}
+        #endregion
 
-		private void _clear()
-		{
-			medias.Clear();
-		}
-
-		#region Public methods
-		/// <summary>
-		/// Compares this MediaList with another and see if the second fits this
-		/// </summary>
-		/// <param name="inMedia">The MediaList to compare</param>
-		/// <returns>True if this list fits the specified</returns>
-		public bool Matches(MediaList inMedia)
+        #region Public methods
+        /// <summary>
+        /// Compares this MediaList with another and see if the second fits this
+        /// </summary>
+        /// <param name="inMedia">The MediaList to compare</param>
+        /// <returns>True if this list fits the specified</returns>
+        public bool Matches(MediaList inMedia)
 		{
 			if(inMedia.Length == 0) return false;
-			else if(Length == 0 || containsAll)
+			else if(Length == 0 || _containsAll)
 			{
 				// is empty or this list contains "all"
 				return true;
@@ -62,7 +52,7 @@ namespace SharpVectors.Dom.Stylesheets
 			{
 				for(ulong i = 0; i<inMedia.Length; i++)
 				{
-					if (medias.Contains(inMedia[i])) 
+					if (_medias.Contains(inMedia[i])) 
                         return true;
 				}
 			}
@@ -71,12 +61,30 @@ namespace SharpVectors.Dom.Stylesheets
 
 		#endregion
 
-		#region Private fields
-		private bool containsAll = false;	//speeds up matching if the list contains "all"
-        private List<string> medias = new List<string>();
-		#endregion
+        #region Private Methods
+
+        private void _parseString(string mediaText)
+        {
+            mediaText = mediaText.Trim();
+            if (mediaText.Length > 0)
+            {
+                string[] ms = splitter.Split(mediaText);
+                foreach (string m in ms)
+                {
+                    AppendMedium(m);
+                }
+            }
+        }
+
+        private void _clear()
+        {
+            _medias.Clear();
+        }
+
+        #endregion
 
 		#region Implementation of IMediaList
+
 		/// <summary>
 		/// Adds the medium newMedium to the end of the list. If the newMedium is already used, it is first removed.
 		/// </summary>
@@ -87,10 +95,10 @@ namespace SharpVectors.Dom.Stylesheets
 		{
 			if (newMedium.Length > 0)
 			{
-				medias.Remove(newMedium);
-				medias.Add(newMedium);
+				_medias.Remove(newMedium);
+				_medias.Add(newMedium);
 				if (newMedium.Equals("all")) 
-                    containsAll = true;
+                    _containsAll = true;
 			}
 		}
 
@@ -102,8 +110,8 @@ namespace SharpVectors.Dom.Stylesheets
 		/// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.</exception>
 		public void DeleteMedium(string oldMedium)
 		{
-			if(oldMedium == "all") containsAll = false;
-			medias.Remove(oldMedium);
+			if(oldMedium == "all") _containsAll = false;
+			_medias.Remove(oldMedium);
 		}
 
 		/// <summary>
@@ -113,7 +121,7 @@ namespace SharpVectors.Dom.Stylesheets
 		{
 			get
 			{
-				return (ulong)medias.Count;
+				return (ulong)_medias.Count;
 			}
 		}
 
@@ -126,8 +134,8 @@ namespace SharpVectors.Dom.Stylesheets
 		{
 			get
 			{
-				string result = String.Empty;
-				foreach(string media in medias)
+				string result = string.Empty;
+				foreach(string media in _medias)
 				{
 					result += media + ",";
 				}
@@ -151,7 +159,7 @@ namespace SharpVectors.Dom.Stylesheets
 		{
 			get
 			{
-				return (index < Length) ? medias[(int)index] : null;
+				return (index < Length) ? _medias[(int)index] : null;
 			}
 		}
 

@@ -770,7 +770,7 @@ namespace WpfTestSvgSample
             decorator.Child  = headerText;
 
             TreeViewItem categoryItem = new TreeViewItem();
-            categoryItem.Tag        = String.Empty;
+            categoryItem.Tag        = string.Empty;
             categoryItem.Header     = decorator;
             categoryItem.Margin     = new Thickness(0);
             categoryItem.Padding    = new Thickness(3);
@@ -878,7 +878,7 @@ namespace WpfTestSvgSample
                         decorator.Child = headerText;
 
                         TreeViewItem categoryItem = new TreeViewItem();
-                        categoryItem.Tag        = String.Empty;
+                        categoryItem.Tag        = string.Empty;
                         categoryItem.Header     = decorator;
                         categoryItem.Margin     = new Thickness(0);
                         categoryItem.Padding    = new Thickness(3);

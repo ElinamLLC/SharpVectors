@@ -128,7 +128,7 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				string ret = String.Empty;
+				string ret = string.Empty;
 				foreach(CssXPathSelector sel in XPathSelectors)
 				{
 					ret += sel.CssSelector + ",";

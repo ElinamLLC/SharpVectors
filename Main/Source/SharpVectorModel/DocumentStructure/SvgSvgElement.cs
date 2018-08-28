@@ -6,33 +6,52 @@ using System.Collections.Generic;
 namespace SharpVectors.Dom.Svg
 {
     /// <summary>
-    /// A key interface definition is the SVGSVGElement interface, which is the 
-    /// interface that corresponds to the 'svg' element. This interface contains 
-    /// various miscellaneous commonly-used utility methods, such as matrix 
-    /// operations and the ability to control the time of redraw on visual 
-    /// rendering devices.
+    /// <para>
+    /// A key interface definition is the SVGSVGElement interface, which is the interface that corresponds 
+    /// to the 'svg' element. This interface contains various miscellaneous commonly-used utility methods, 
+    /// such as matrix operations and the ability to control the time of redraw on visual rendering devices.
+    /// </para>
+    /// <para>
     /// SVGSVGElement extends ViewCSS and DocumentCSS to provide access to the 
     /// computed values of properties and the override style sheet as described in DOM2. 
+    /// </para>
     /// </summary>
     public sealed class SvgSvgElement : SvgTransformableElement, ISvgSvgElement
     {
         #region Private Fields
 
-        private SvgTests svgTests;
-        private ISvgAnimatedLength x;
-        private ISvgAnimatedLength height;
+        private SvgTests _svgTests;
+        private ISvgAnimatedLength _x;
+        private ISvgAnimatedLength _y;
+        private ISvgAnimatedLength _width;
+        private ISvgAnimatedLength _height;
+
+        private ISvgRect _viewport;
+        private ISvgViewSpec _currentView;
+        private float _currentScale;
+
+        private ISvgMatrix _cachedViewBoxTransform;
+
+        private ISvgPoint _currentTranslate;
+
+        private List<Timer> _redrawTimers;
+        private SvgFitToViewBox _svgFitToViewBox;
+        private SvgExternalResourcesRequired _svgExternalResourcesRequired;
 
         #endregion
 
         #region Constructors
 
-        internal SvgSvgElement(string prefix, string localname, string ns, SvgDocument doc)
+        public SvgSvgElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            svgFitToViewBox = new SvgFitToViewBox(this);
-            svgTests = new SvgTests(this);
-            currentTranslate = new SvgPoint(0, 0);
+            _currentScale                 = 1;
+            _redrawTimers                 = new List<Timer>();
+
+            _svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgFitToViewBox              = new SvgFitToViewBox(this);
+            _svgTests                     = new SvgTests(this);
+            _currentTranslate             = new SvgPoint(0, 0);
         }
 
         #endregion
@@ -54,20 +73,17 @@ namespace SharpVectors.Dom.Svg
         public void Resize()
         {
             // TODO: Invalidate! Fire SVGResize
-            x = null;
-            y = null;
-            width = null;
-            height = null;
-            currentView = null;
-            cachedViewBoxTransform = null;
-            viewport = null;
-            svgFitToViewBox = null;
-            svgFitToViewBox = new SvgFitToViewBox(this);
-            if (this == OwnerDocument.RootElement)
-            {
-                // TODO
-            }
-            else
+            _x                      = null;
+            _y                      = null;
+            _width                  = null;
+            _height                 = null;
+            _currentView            = null;
+            _cachedViewBoxTransform = null;
+            _viewport               = null;
+            _svgFitToViewBox        = null;
+            _svgFitToViewBox        = new SvgFitToViewBox(this);
+
+            if (this != OwnerDocument.RootElement)
             {
                 (OwnerDocument.RootElement as SvgSvgElement).Resize();
             }
@@ -104,6 +120,7 @@ namespace SharpVectors.Dom.Svg
             }
             set
             {
+                CurrentView.ZoomAndPan = value;
             }
         }
 
@@ -118,15 +135,14 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (x == null)
+                if (_x == null)
                 {
-                    x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0px");
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0px");
                 }
-                return x;
+                return _x;
             }
         }
 
-        private ISvgAnimatedLength y;
         /// <summary>
         /// Corresponds to attribute y on the given 'svg' element.
         /// </summary>
@@ -134,31 +150,27 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (y == null)
+                if (_y == null)
                 {
-                    y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0px");
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0px");
                 }
-                return y;
+                return _y;
             }
         }  
 
-        private string widthAsString
+        private string WidthAsString
         {
             get
             {
-                SvgWindow ownerWindow = (SvgWindow)((SvgDocument)OwnerDocument).Window;
+                SvgWindow ownerWindow = (SvgWindow)(this.OwnerDocument).Window;
                 if (ownerWindow.ParentWindow == null)
                 {
                     return GetAttribute("width").Trim();
                 }
-                else
-                {
-                    return String.Empty;
-                }
+                return string.Empty;
             }
         }
 
-        private ISvgAnimatedLength width;
         /// <summary>
         /// Corresponds to attribute width on the given 'svg' element.
         /// </summary>
@@ -166,15 +178,15 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (width == null)
+                if (_width == null)
                 {
-                    width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, widthAsString, "100%");
+                    _width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, WidthAsString, "100%");
                 }
-                return width;
+                return _width;
             }
         }     
 
-        private string heightAsString
+        private string HeightAsString
         {
             get
             {
@@ -183,10 +195,7 @@ namespace SharpVectors.Dom.Svg
                 {
                     return GetAttribute("height").Trim();
                 }
-                else
-                {
-                    return "";
-                }
+                return string.Empty;
             }
         }
 
@@ -197,11 +206,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (height == null)
+                if (_height == null)
                 {
-                    height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, heightAsString, "100%");
+                    _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, HeightAsString, "100%");
                 }
-                return height;
+                return _height;
             }
         }
 
@@ -246,22 +255,24 @@ namespace SharpVectors.Dom.Svg
 
             if (inValue.Length > 0)
             {
-                if (inValue.EndsWith("%"))
+                if (inValue.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     double perc = SvgNumber.ParseNumber(inValue.Substring(0, inValue.Length - 1)) / 100;
                     ret = calcParentVP * perc;
                 }
                 else
                 {
-                    ret = new SvgLength(this, propertyName, dir, inValue, String.Empty).Value;
+                    ret = new SvgLength(this, propertyName, dir, inValue, string.Empty).Value;
                 }
             }
-            else ret = defaultValue;
+            else
+            {
+                ret = defaultValue;
+            }
 
             return ret;
         }
 
-        private ISvgRect viewport;
         /// <summary>
         /// The position and size of the viewport (implicit or explicit) that corresponds to this 'svg' element. When the user agent is actually rendering the content, then the position and size values represent the actual values when rendering. The position and size values are unitless values in the coordinate system of the parent element. If no parent element exists (i.e., 'svg' element represents the root of the document tree), if this SVG document is embedded as part of another document (e.g., via the HTML 'object' element), then the position and size are unitless values in the coordinate system of the parent document. (If the parent uses CSS or XSL layout, then unitless values represent pixel units for the current CSS or XSL viewport, as described in the CSS2 specification.) If the parent element does not have a coordinate system, then the user agent should provide reasonable default values for this attribute.
         /// The object itself and its contents are both readonly.
@@ -270,7 +281,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (viewport == null)
+                if (_viewport == null)
                 {
                     double calcParentVPWidth = (ViewportElement == null) ?
                       OwnerDocument.Window.InnerWidth : ((ISvgFitToViewBox)ViewportElement).ViewBox.AnimVal.Width;
@@ -278,14 +289,14 @@ namespace SharpVectors.Dom.Svg
                     double calcParentVPHeight = (ViewportElement == null) ?
                       OwnerDocument.Window.InnerHeight : ((ISvgFitToViewBox)ViewportElement).ViewBox.AnimVal.Height;
 
-                    double x = getViewportProp("x", GetAttribute("x"), calcParentVPWidth, 0, SvgLengthDirection.Horizontal);
-                    double y = getViewportProp("y", GetAttribute("y"), calcParentVPHeight, 0, SvgLengthDirection.Vertical);
-                    double width = getViewportProp("width", widthAsString, calcParentVPWidth, OwnerDocument.Window.InnerWidth, SvgLengthDirection.Horizontal);
-                    double height = getViewportProp("height", heightAsString, calcParentVPHeight, OwnerDocument.Window.InnerHeight, SvgLengthDirection.Vertical);
+                    double x      = getViewportProp("x", GetAttribute("x"), calcParentVPWidth, 0, SvgLengthDirection.Horizontal);
+                    double y      = getViewportProp("y", GetAttribute("y"), calcParentVPHeight, 0, SvgLengthDirection.Vertical);
+                    double width  = getViewportProp("width", WidthAsString, calcParentVPWidth, OwnerDocument.Window.InnerWidth, SvgLengthDirection.Horizontal);
+                    double height = getViewportProp("height", HeightAsString, calcParentVPHeight, OwnerDocument.Window.InnerHeight, SvgLengthDirection.Vertical);
 
-                    viewport = new SvgRect(x, y, width, height);
+                    _viewport = new SvgRect(x, y, width, height);
                 }
-                return viewport;
+                return _viewport;
             }
         }
 
@@ -387,19 +398,17 @@ namespace SharpVectors.Dom.Svg
         ///  o the values for viewBox, preserveAspectRatio, zoomAndPan, transform and viewTarget within currentView will correspond to the values from the SVG view specification fragment identifier
         /// The object itself and its contents are both readonly. 
         /// </summary>
-        private ISvgViewSpec currentView = null;
         public ISvgViewSpec CurrentView
         {
             get
             {
-                if (currentView == null)
-                    currentView = new SvgViewSpec(this) as ISvgViewSpec;
+                if (_currentView == null)
+                    _currentView = new SvgViewSpec(this) as ISvgViewSpec;
                 // For now, we only return the "standard" view.
-                return currentView;
+                return _currentView;
             }
         }
 
-        private float currentScale = 1;
         /// <summary>
         /// This attribute indicates the current scale factor relative to the initial view to take into account user magnification and panning operations, as described under Magnification and panning. DOM attributes currentScale and currentTranslate are equivalent to the 2x3 matrix [a b c d e f] = [currentScale 0 0 currentScale currentTranslate.x currentTranslate.y]. If "magnification" is enabled (i.e., zoomAndPan="magnify"), then the effect is as if an extra transformation were placed at the outermost level on the SVG document fragment (i.e., outside the outermost 'svg' element).
         /// </summary>
@@ -409,32 +418,31 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 if (this == OwnerDocument.RootElement)
-                    return currentScale;
-                else
-                    return OwnerDocument.RootElement.CurrentScale;
+                    return _currentScale;
+                return OwnerDocument.RootElement.CurrentScale;
             }
             set
             {
                 if (this == OwnerDocument.RootElement)
                 {
                     // TODO: Invalidate! Fire OnZoom
-                    currentView = null;
-                    currentScale = value;
-                    cachedViewBoxTransform = null;
-                    viewport = null;
-                    width = null;
-                    height = null;
-                    x = null;
-                    y = null;
-                    svgFitToViewBox = new SvgFitToViewBox(this);
+                    _currentView            = null;
+                    _currentScale           = value;
+                    _cachedViewBoxTransform = null;
+                    _viewport               = null;
+                    _width                  = null;
+                    _height                 = null;
+                    _x                      = null;
+                    _y                      = null;
+                    _svgFitToViewBox        = new SvgFitToViewBox(this);
                 }
                 else
-                    OwnerDocument.RootElement.CurrentScale = value;
+                {
+                    this.OwnerDocument.RootElement.CurrentScale = value;
+                }
             }
         }
 
-
-        private ISvgMatrix cachedViewBoxTransform = null;
         /// <summary>
         /// This function is super useful, calculates out the transformation matrix 
         /// (i.e., scale and translate) of the viewport to user space.
@@ -447,11 +455,11 @@ namespace SharpVectors.Dom.Svg
             //   x,y,width,height,viewBox,preserveAspectRatio changes
             get
             {
-                if (cachedViewBoxTransform == null)
+                if (_cachedViewBoxTransform == null)
                 {
                     ISvgMatrix matrix = CreateSvgMatrix();
 
-                    SvgDocument doc = (SvgDocument)OwnerDocument;
+                    SvgDocument doc = this.OwnerDocument;
                     double x = 0;
                     double y = 0;
                     double w = 0;
@@ -544,19 +552,17 @@ namespace SharpVectors.Dom.Svg
                     // Handle currentSranslate and currentScale
                     if (this == OwnerDocument.RootElement)
                     {
-                        matrix = matrix.Translate(this.currentTranslate.X, this.currentTranslate.Y);
-                        matrix = matrix.Scale(this.currentScale);
+                        matrix = matrix.Translate(_currentTranslate.X, _currentTranslate.Y);
+                        matrix = matrix.Scale(_currentScale);
                     }
 
                     // Set the cache
-                    cachedViewBoxTransform = matrix;
+                    _cachedViewBoxTransform = matrix;
                 }
-                return cachedViewBoxTransform;
+                return _cachedViewBoxTransform;
             }
         }
 
-
-        private ISvgPoint currentTranslate;
         /// <summary>
         /// The corresponding translation factor that takes into account user "magnification".
         /// </summary>
@@ -566,18 +572,15 @@ namespace SharpVectors.Dom.Svg
             {
                 if (this == OwnerDocument.RootElement)
                 {
-                    if (currentTranslate == null)
+                    if (_currentTranslate == null)
                     {
-                        currentTranslate = CreateSvgPoint();
+                        _currentTranslate = CreateSvgPoint();
                     }
-                    return currentTranslate;
+                    return _currentTranslate;
                 }
-                else
-                    return OwnerDocument.RootElement.CurrentTranslate;
+                return OwnerDocument.RootElement.CurrentTranslate;
             }
         }
-
-        private List<Timer> redrawTimers = new List<Timer>();
 
         public void RedrawTimerElapsed(object source, ElapsedEventArgs args)
         {
@@ -598,7 +601,7 @@ namespace SharpVectors.Dom.Svg
         /// suspendRedraw calls can be used at once and that each such method call is treated
         /// independently of the other suspendRedraw method calls.
         /// </summary>
-        /// <param name="max_wait_milliseconds">The amount of time in milliseconds to hold off 
+        /// <param name="maxWaitMilliseconds">The amount of time in milliseconds to hold off 
         /// before redrawing the device. Values greater than 60 seconds will be truncated 
         /// down to 60 seconds.</param>
         /// <returns>A number which acts as a unique identifier for the given suspendRedraw() call. This value must be passed as the parameter to the corresponding unsuspendRedraw() method call.</returns>
@@ -608,21 +611,21 @@ namespace SharpVectors.Dom.Svg
                 maxWaitMilliseconds = 60000;
             Timer t = new Timer(maxWaitMilliseconds);
             t.AutoReset = false;
-            t.Elapsed += new ElapsedEventHandler(this.RedrawTimerElapsed);
+            t.Elapsed += this.RedrawTimerElapsed;
             t.Enabled = true;
-            redrawTimers.Add(t);
+            _redrawTimers.Add(t);
             return t.GetHashCode();
         }
 
         /// <summary>
         /// Cancels a specified suspendRedraw() by providing a unique suspend_handle_id.
         /// </summary>
-        /// <param name="suspend_handle_id">A number which acts as a unique identifier for the desired suspendRedraw() call. The number supplied must be a value returned from a previous call to suspendRedraw()</param>
+        /// <param name="suspendHandleId">A number which acts as a unique identifier for the desired suspendRedraw() call. The number supplied must be a value returned from a previous call to suspendRedraw()</param>
         /// <exception cref="DomException">This method will raise a DOMException with value NOT_FOUND_ERR if an invalid value (i.e., no such suspend_handle_id is active) for suspend_handle_id is provided.</exception>
         public void UnsuspendRedraw(int suspendHandleId)
         {
             Timer timer = null;
-            foreach (Timer t in redrawTimers)
+            foreach (Timer t in _redrawTimers)
             {
                 if (t.GetHashCode() == suspendHandleId)
                 {
@@ -634,7 +637,7 @@ namespace SharpVectors.Dom.Svg
                 throw new DomException(DomExceptionType.NotFoundErr, "Invalid handle submitted to unsuspendRedraw");
 
             timer.Enabled = false;
-            redrawTimers.Remove(timer);
+            _redrawTimers.Remove(timer);
             if (OwnerDocument.Window.Renderer.InvalidRect != SvgRectF.Empty)
                 OwnerDocument.Window.Renderer.Render((ISvgDocument)OwnerDocument);
 
@@ -648,13 +651,13 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public void UnsuspendRedrawAll()
         {
-            foreach (Timer t in redrawTimers)
+            foreach (Timer t in _redrawTimers)
             {
                 t.Enabled = false;
             }
-            redrawTimers.Clear();
-            if (OwnerDocument.Window.Renderer.InvalidRect != SvgRectF.Empty)
-                OwnerDocument.Window.Renderer.Render((ISvgDocument)OwnerDocument);
+            _redrawTimers.Clear();
+            if (this.OwnerDocument.Window.Renderer.InvalidRect != SvgRectF.Empty)
+                this.OwnerDocument.Window.Renderer.Render(this.OwnerDocument);
         }
 
         /// <summary>
@@ -663,8 +666,8 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public void ForceRedraw()
         {
-            OwnerDocument.Window.Renderer.InvalidRect = SvgRectF.Empty;
-            OwnerDocument.Window.Renderer.Render((ISvgDocument)OwnerDocument);
+            this.OwnerDocument.Window.Renderer.InvalidRect = SvgRectF.Empty;
+            this.OwnerDocument.Window.Renderer.Render(this.OwnerDocument);
         }
 
         /// <summary>
@@ -696,7 +699,6 @@ namespace SharpVectors.Dom.Svg
         {
             throw new NotImplementedException();
         }
-
 
         /// <summary>
         /// The current time in seconds relative to the start time for the current SVG document 
@@ -881,12 +883,12 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region ISvgFitToViewBox Members
-        private SvgFitToViewBox svgFitToViewBox;
+
         public ISvgAnimatedRect ViewBox
         {
             get
             {
-                return svgFitToViewBox.ViewBox;
+                return _svgFitToViewBox.ViewBox;
             }
         }
 
@@ -894,19 +896,19 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgFitToViewBox.PreserveAspectRatio;
+                return _svgFitToViewBox.PreserveAspectRatio;
             }
         }
+
         #endregion
 
         #region ISvgExternalResourcesRequired Members
 
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
             get
             {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+                return _svgExternalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -916,22 +918,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion

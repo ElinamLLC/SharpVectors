@@ -1,9 +1,5 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>80</completed>
-
 using System;
 using System.Xml;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Css
@@ -14,6 +10,7 @@ namespace SharpVectors.Dom.Css
 	public class CssValue : ICssValue
 	{
 		#region Static members
+
 		private static string numberPattern = @"[\-\+]?[0-9]*\.?[0-9]+";
 		public static string LengthUnitPattern = "(?<lengthUnit>in|cm|mm|px|em|ex|pc|pt|%)?";
 		public static string AngleUnitPattern = "(?<angleUnit>deg|rad|grad)?";
@@ -38,36 +35,40 @@ namespace SharpVectors.Dom.Css
 		/// <param name="cssText">The text to parse for a CSS value</param>
 		/// <param name="readOnly">Specifies if this instance is read-only</param>
 		/// <returns>The correct type of CSS value</returns>
-		static public CssValue GetCssValue(string cssText, bool readOnly)
+		public static CssValue GetCssValue(string cssText, bool readOnly)
 		{
 			if (cssText == "inherit")
 			{
 				// inherit
 				return new CssValue(CssValueType.Inherit, cssText, readOnly);
 			}
-			else
+			Match match = reCssPrimitiveValue.Match(cssText);
+			if (match.Success)
 			{
-				Match match = reCssPrimitiveValue.Match(cssText);
-				if(match.Success)
-				{
-					// single primitive value
-					return CssPrimitiveValue.Create(match, readOnly);
-				}
-				
-				match = reCssValueList.Match(cssText);
-				if(match.Success)
-				{
-					// list of primitive values
-					throw new NotImplementedException("Value lists not implemented");
-				}
-				else
-				{
-					// custom value
-					return new CssValue(CssValueType.Custom, cssText, readOnly);
-				}
+				// single primitive value
+				return CssPrimitiveValue.Create(match, readOnly);
 			}
+				
+			match = reCssValueList.Match(cssText);
+			if(match.Success)
+			{
+				// list of primitive values
+				throw new NotImplementedException("Value lists not implemented");
+			}
+			// custom value
+			return new CssValue(CssValueType.Custom, cssText, readOnly);
 		}
+
 		#endregion
+
+        #region Private Fields
+
+        private bool _readOnly;
+
+        private string _cssText;
+        protected CssValueType _cssValueType;
+
+        #endregion
 
 		#region Constructors
 		/// <summary>
@@ -93,33 +94,34 @@ namespace SharpVectors.Dom.Css
 		#endregion
 
 		#region Public methods
+
 		public virtual CssValue GetAbsoluteValue(string propertyName, XmlElement elm)
 		{
 			return new CssAbsValue(this, propertyName, elm);
 		}
-		#endregion
 
-		private bool _readOnly;
-		public virtual bool ReadOnly
-		{
-			get
-			{
-				return _readOnly;
-			}
-		}
+        #endregion
 
-		#region ICssValue Members
+        #region Public Properties
 
-		private string _cssText;
-        protected CssValueType _cssValueType;
+        public virtual bool ReadOnly
+        {
+            get {
+                return _readOnly;
+            }
+        }
 
-		/// <summary>
-		/// A string representation of the current value.
-		/// </summary>
-		/// <exception cref="DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error (according to the attached property) or is unparsable.</exception>
-		/// <exception cref="DomException">INVALID_MODIFICATION_ERR: Raised if the specified CSS string value represents a different type of values than the values allowed by the CSS property</exception>
-		/// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this value is readonly.</exception>
-		public virtual string CssText
+        #endregion
+
+        #region ICssValue Members
+
+        /// <summary>
+        /// A string representation of the current value.
+        /// </summary>
+        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error (according to the attached property) or is unparsable.</exception>
+        /// <exception cref="DomException">INVALID_MODIFICATION_ERR: Raised if the specified CSS string value represents a different type of values than the values allowed by the CSS property</exception>
+        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this value is readonly.</exception>
+        public virtual string CssText
 		{
 			get
 			{
@@ -127,14 +129,11 @@ namespace SharpVectors.Dom.Css
 			}
 			set
 			{
-				if(ReadOnly)
+				if (ReadOnly)
 				{
 					throw new DomException(DomExceptionType.InvalidModificationErr, "The CssValue is read-only");
 				}
-				else
-				{
-					_cssText = value;
-				}
+				_cssText = value;
 			}
 		}
 

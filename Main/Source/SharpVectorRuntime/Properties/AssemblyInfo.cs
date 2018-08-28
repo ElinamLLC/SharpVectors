@@ -1,7 +1,4 @@
-﻿using System;
-using System.Resources;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 using System.Windows;
@@ -12,11 +9,15 @@ using System.Windows.Markup;
 // associated with an assembly.
 [assembly: AssemblyTitle("SharpVectors.Runtime")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+#endif
+[assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Runtime")]
-[assembly: AssemblyCopyright("Licensed BSD. Portions: Zooming and Panning Control by Ashley Davis")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2018 Elinam LLC, Zooming and Panning Control by Ashley Davis")]
+[assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -54,9 +55,9 @@ using System.Windows.Markup;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyInformationalVersion("1.1.0.0")]
 
 [assembly: XmlnsPrefix("http://sharpvectors.codeplex.com/runtime/", "svg")]
 [assembly: XmlnsDefinition("http://sharpvectors.codeplex.com/runtime/", "SharpVectors.Runtime")]

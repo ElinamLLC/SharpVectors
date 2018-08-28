@@ -325,7 +325,7 @@ namespace SharpVectors.Converters
         {   
             try
             {
-                this.AppendLine(String.Empty);
+                this.AppendLine(string.Empty);
                 this.AppendLine("Press the Enter key to continue...");
 
                 if (_commandLines.BeepOnEnd)

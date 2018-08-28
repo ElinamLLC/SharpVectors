@@ -529,7 +529,7 @@ namespace SharpVectors.Converters
 
             if (_bitmapEncoder != null && _bitmapEncoder.CodecInfo != null)
             {
-                string mimeType = String.Empty;
+                string mimeType = string.Empty;
                 BitmapCodecInfo codecInfo = _bitmapEncoder.CodecInfo;
                 string mimeTypes      = codecInfo.MimeTypes;
                 string fileExtensions = codecInfo.FileExtensions;

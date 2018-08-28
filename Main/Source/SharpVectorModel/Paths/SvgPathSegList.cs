@@ -10,12 +10,12 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private string _pathScript;
-        private bool readOnly;
-        private List<ISvgPathSeg> segments = new List<ISvgPathSeg>();
-
         private static Regex rePathCmd = new Regex(@"(?=[A-DF-Za-df-z])");
         private static Regex coordSplit = new Regex(@"(\s*,\s*)|(\s+)|((?<=[0-9])(?=-))", RegexOptions.ExplicitCapture);
+
+        private string _pathScript;
+        private bool _readOnly;
+        private List<ISvgPathSeg> _segments;
 
         #endregion
 
@@ -23,19 +23,21 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPathSegList(string d, bool readOnly)
         {
+            _segments = new List<ISvgPathSeg>();
+
             if (d == null)
             {
-                d = String.Empty;
+                d = string.Empty;
             }
 
             _pathScript = d;
-            
+
             if (!string.IsNullOrWhiteSpace(d))
             {
                 ParseString(d);
             }
 
-            this.readOnly = readOnly;
+            _readOnly = readOnly;
         }
 
         #endregion
@@ -44,8 +46,7 @@ namespace SharpVectors.Dom.Svg
 
         public string PathScript
         {
-            get
-            {
+            get {
                 return _pathScript;
             }
         }
@@ -64,7 +65,7 @@ namespace SharpVectors.Dom.Svg
                 string segment = s.Trim();
                 if (segment.Length > 0)
                 {
-                    char cmd = (char)segment.ToCharArray(0, 1)[0];
+                    char cmd = segment.ToCharArray(0, 1)[0];
                     double[] coords = getCoords(segment);
                     int length = coords.Length;
                     switch (cmd)
@@ -245,8 +246,8 @@ namespace SharpVectors.Dom.Svg
                                         coords[i],
                                         coords[i + 1],
                                         coords[i + 2],
-                                        (coords[i + 3] != 0),
-                                        (coords[i + 4] != 0));
+                                        (!coords[i + 3].Equals(0)),
+                                        (!coords[i + 4].Equals(0)));
                                 }
                                 else
                                 {
@@ -256,8 +257,8 @@ namespace SharpVectors.Dom.Svg
                                         coords[i],
                                         coords[i + 1],
                                         coords[i + 2],
-                                        (coords[i + 3] != 0),
-                                        (coords[i + 4] != 0));
+                                        (!coords[i + 3].Equals(0)),
+                                        (!coords[i + 4].Equals(0)));
                                 }
                                 AppendItem(seg);
                             }
@@ -273,7 +274,7 @@ namespace SharpVectors.Dom.Svg
                         #region Unknown path command
                         default:
                             throw new ApplicationException(String.Format("Unknown path command - ({0})", cmd));
-                        #endregion
+                            #endregion
                     }
                 }
             }
@@ -309,17 +310,17 @@ namespace SharpVectors.Dom.Svg
             }
             else
             {
-                throw new SvgException(SvgExceptionType.SvgWrongTypeErr, 
+                throw new SvgException(SvgExceptionType.SvgWrongTypeErr,
                     "Can only add SvgPathSeg subclasses to ISvgPathSegList");
             }
         }
 
         private void changeIndexes(int startAt, int diff)
         {
-            int count = segments.Count;
+            int count = _segments.Count;
             for (int i = startAt; i < count; i++)
             {
-                SvgPathSeg seg = segments[i] as SvgPathSeg;
+                SvgPathSeg seg = _segments[i] as SvgPathSeg;
                 if (seg != null)
                 {
                     seg.SetIndexWithDiff(diff);
@@ -332,22 +333,18 @@ namespace SharpVectors.Dom.Svg
 
         public int NumberOfItems
         {
-            get
-            {
-                return segments.Count;
+            get {
+                return _segments.Count;
             }
         }
 
         public void Clear()
         {
-            if (readOnly)
+            if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            else
-            {
-                segments.Clear();
-            }
+            _segments.Clear();
         }
 
         public ISvgPathSeg Initialize(ISvgPathSeg newItem)
@@ -364,81 +361,67 @@ namespace SharpVectors.Dom.Svg
                 throw new DomException(DomExceptionType.IndexSizeErr);
             }
 
-            return segments[index];
+            return _segments[index];
         }
         public ISvgPathSeg this[int index]
         {
-            get
-            {
+            get {
                 return GetItem(index);
             }
-            set
-            {
+            set {
                 ReplaceItem(value, index);
             }
         }
 
         public ISvgPathSeg InsertItemBefore(ISvgPathSeg newItem, int index)
         {
-            if (readOnly)
+            if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            else
-            {
-                segments.Insert(index, newItem);
-                setListAndIndex(newItem as SvgPathSeg, index);
-                changeIndexes(index + 1, 1);
+            _segments.Insert(index, newItem);
+            setListAndIndex(newItem as SvgPathSeg, index);
+            changeIndexes(index + 1, 1);
 
-                return newItem;
-            }
+            return newItem;
         }
 
         public ISvgPathSeg ReplaceItem(ISvgPathSeg newItem, int index)
         {
-            if (readOnly)
+            if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            else
-            {
-                ISvgPathSeg replacedItem = GetItem(index);
-                segments[index] = newItem;
-                setListAndIndex(newItem as SvgPathSeg, index);
+            ISvgPathSeg replacedItem = GetItem(index);
+            _segments[index] = newItem;
+            setListAndIndex(newItem as SvgPathSeg, index);
 
-                return replacedItem;
-            }
+            return replacedItem;
         }
 
         public ISvgPathSeg RemoveItem(int index)
         {
-            if (readOnly)
+            if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            else
-            {
-                ISvgPathSeg result = GetItem(index);
-                segments.RemoveAt(index);
-                changeIndexes(index, -1);
+            ISvgPathSeg result = GetItem(index);
+            _segments.RemoveAt(index);
+            changeIndexes(index, -1);
 
-                return result;
-            }
+            return result;
         }
 
         public ISvgPathSeg AppendItem(ISvgPathSeg newItem)
         {
-            if (readOnly)
+            if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            else
-            {
-                segments.Add(newItem);
-                setListAndIndex(newItem as SvgPathSeg, segments.Count - 1);
+            _segments.Add(newItem);
+            setListAndIndex(newItem as SvgPathSeg, _segments.Count - 1);
 
-                return newItem;
-            }
+            return newItem;
         }
 
         #endregion
@@ -447,10 +430,9 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPointF[] Points
         {
-            get
-            {
+            get {
                 List<SvgPointF> ret = new List<SvgPointF>();
-                foreach (SvgPathSeg seg in segments)
+                foreach (SvgPathSeg seg in _segments)
                 {
                     ret.Add(seg.AbsXY);
                 }
@@ -461,36 +443,30 @@ namespace SharpVectors.Dom.Svg
 
         internal SvgPathSeg GetPreviousSegment(SvgPathSeg seg)
         {
-            int index = segments.IndexOf(seg);
+            int index = _segments.IndexOf(seg);
             if (index == -1)
             {
                 throw new Exception("Path segment not part of this list");
             }
-            else if (index == 0)
+            if (index == 0)
             {
                 return null;
             }
-            else
-            {
-                return (SvgPathSeg)GetItem(index - 1);
-            }
+            return (SvgPathSeg)GetItem(index - 1);
         }
 
         internal SvgPathSeg GetNextSegment(SvgPathSeg seg)
         {
-            int index = segments.IndexOf(seg);
+            int index = _segments.IndexOf(seg);
             if (index == -1)
             {
                 throw new Exception("Path segment not part of this list");
             }
-            else if (index == segments.Count - 1)
+            if (index == _segments.Count - 1)
             {
                 return null;
             }
-            else
-            {
-                return (SvgPathSeg)this[index + 1];
-            }
+            return (SvgPathSeg)this[index + 1];
         }
 
         public double GetStartAngle(int index)
@@ -505,10 +481,9 @@ namespace SharpVectors.Dom.Svg
 
         public string PathText
         {
-            get
-            {
+            get {
                 StringBuilder sb = new StringBuilder();
-                foreach (SvgPathSeg seg in segments)
+                foreach (SvgPathSeg seg in _segments)
                 {
                     sb.Append(seg.PathText);
                 }
@@ -519,7 +494,7 @@ namespace SharpVectors.Dom.Svg
         internal double GetTotalLength()
         {
             double result = 0;
-            foreach (SvgPathSeg segment in segments)
+            foreach (SvgPathSeg segment in _segments)
             {
                 result += segment.Length;
             }
@@ -529,7 +504,7 @@ namespace SharpVectors.Dom.Svg
         internal int GetPathSegAtLength(double distance)
         {
             double result = 0;
-            foreach (SvgPathSeg segment in segments)
+            foreach (SvgPathSeg segment in _segments)
             {
                 result += segment.Length;
                 if (result > distance)

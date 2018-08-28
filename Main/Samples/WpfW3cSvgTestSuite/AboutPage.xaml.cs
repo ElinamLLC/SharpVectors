@@ -44,7 +44,7 @@ namespace WpfW3cSvgTestSuite
         {
             this.UnloadDocument();
 
-            if (string.IsNullOrWhiteSpace(documentFilePath))
+            if (string.IsNullOrWhiteSpace(documentFilePath) || testInfo == null)
             {
                 return false;
             }
@@ -121,8 +121,10 @@ namespace WpfW3cSvgTestSuite
 
         private bool LoadFile(Stream stream, SvgTestInfo testInfo)
         {
+            Regex rgx = new Regex("\\s+");
+
             testTitle.Text      = testInfo.Title;
-            testDescrition.Text = testInfo.Description;
+            testDescrition.Text = rgx.Replace(testInfo.Description, " ").Trim();
             testFilePath.Text   = _svgFilePath;
 
             XmlReaderSettings settings = new XmlReaderSettings();
@@ -136,8 +138,6 @@ namespace WpfW3cSvgTestSuite
                 if (reader.ReadToFollowing("SVGTestCase"))
                 {
                     _testCase = new SvgTestCase();
-
-                    Regex rgx = new Regex("\\s+");
 
                     while (reader.Read())
                     {

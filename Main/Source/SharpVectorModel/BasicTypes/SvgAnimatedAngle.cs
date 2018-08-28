@@ -4,20 +4,22 @@ namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgAnimatedAngle : ISvgAnimatedAngle
 	{
-        #region Fields
-        private ISvgAngle baseVal;
-        private ISvgAngle animVal;
+        #region Private Fields
+
+        private ISvgAngle _baseVal;
+        private ISvgAngle _animVal;
+        
         #endregion
 
         #region Constructor
 		public SvgAnimatedAngle(string s, string defaultValue)
 		{
-			animVal = baseVal = new SvgAngle(s, defaultValue, false);
+			_animVal = _baseVal = new SvgAngle(s, defaultValue, false);
 		}
 
 		public SvgAnimatedAngle(ISvgAngle angle)
 		{
-			animVal = baseVal = angle;
+			_animVal = _baseVal = angle;
 		}
         #endregion
 
@@ -26,7 +28,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return baseVal;
+				return _baseVal;
 			}
 		}
 		
@@ -34,7 +36,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return animVal;
+				return _animVal;
 			}
 		}
 		#endregion

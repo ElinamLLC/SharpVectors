@@ -1,41 +1,39 @@
 using System;
 using System.Xml;
 
-using SharpVectors.Dom.Css;
-
 namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgExternalResourcesRequired
 	{
+		private SvgElement _ownerElement;
+		private ISvgAnimatedBoolean _externalResourcesRequired;
+
 		public SvgExternalResourcesRequired(SvgElement ownerElement)
 		{
-			this.ownerElement = ownerElement;
-
-			this.ownerElement.attributeChangeHandler += new NodeChangeHandler(AttributeChange);
+			_ownerElement = ownerElement;
+			_ownerElement.attributeChangeHandler += OnAttributeChange;
 		}
-		private SvgElement ownerElement;
 
-
-		private void AttributeChange(Object src, XmlNodeChangedEventArgs args)
+		private void OnAttributeChange(Object src, XmlNodeChangedEventArgs args)
 		{
 			XmlAttribute attribute = src as XmlAttribute;
 
-			if(attribute.LocalName == "externalResourcesRequired")
+			if (attribute.LocalName == "externalResourcesRequired")
 			{
-				externalResourcesRequired = null;
+				_externalResourcesRequired = null;
 			}
 		}
 
-		private ISvgAnimatedBoolean externalResourcesRequired;
 		public ISvgAnimatedBoolean ExternalResourcesRequired
 		{
 			get
 			{
-				if(externalResourcesRequired == null)
+				if (_externalResourcesRequired == null)
 				{
-					externalResourcesRequired = new SvgAnimatedBoolean(ownerElement.GetAttribute("externalResourcesRequired"), false);
+					_externalResourcesRequired = new SvgAnimatedBoolean(
+                        _ownerElement.GetAttribute("externalResourcesRequired"), false);
 				}
-				return externalResourcesRequired;
+				return _externalResourcesRequired;
 			}
 		}
 	

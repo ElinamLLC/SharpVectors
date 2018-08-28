@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -9,24 +5,23 @@ using System.Text.RegularExpressions;
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
-	/// Rectangles are defined as consisting of a (x,y) coordinate pair 
-	/// identifying a minimum X value, a minimum Y value, and a width 
-	/// and height, which are usually constrained to be non-negative. 
+	/// Rectangles are defined as consisting of a (x,y) coordinate pair identifying a minimum X value, 
+    /// a minimum Y value, and a width and height, which are usually constrained to be non-negative. 
 	/// </summary>
     public sealed class SvgRect : ISvgRect
 	{
         #region Static Fields
 
-        public static readonly SvgRect Empty = new SvgRect(0,0,0,0);
+        public static readonly SvgRect Empty = new SvgRect(0, 0, 0, 0);
         
         #endregion
 
         #region Private Fields
 
-        private double x;
-        private double y;
-        private double width;
-        private double height;
+        private double _x;
+        private double _y;
+        private double _width;
+        private double _height;
 		
         #endregion
 
@@ -34,10 +29,10 @@ namespace SharpVectors.Dom.Svg
 
         public SvgRect(double x, double y, double width, double height)
         {
-            this.x      = x;
-            this.y      = y;
-            this.width  = width;
-            this.height = height;
+            _x      = x;
+            _y      = y;
+            _width  = width;
+            _height = height;
         }
 
 		public SvgRect(string str)
@@ -46,17 +41,17 @@ namespace SharpVectors.Dom.Svg
 			string[] tokens = replacedStr.Split(new char[]{','});
 			if (tokens.Length == 2)
 			{
-				this.x      = 0;
-				this.y      = 0;
-				this.width  = SvgNumber.ParseNumber(tokens[0]);
-				this.height = SvgNumber.ParseNumber(tokens[1]);
+				_x      = 0;
+				_y      = 0;
+				_width  = SvgNumber.ParseNumber(tokens[0]);
+				_height = SvgNumber.ParseNumber(tokens[1]);
 			}
             else if (tokens.Length == 4)
             {
-                this.x      = SvgNumber.ParseNumber(tokens[0]);
-                this.y      = SvgNumber.ParseNumber(tokens[1]);
-                this.width  = SvgNumber.ParseNumber(tokens[2]);
-                this.height = SvgNumber.ParseNumber(tokens[3]);
+                _x      = SvgNumber.ParseNumber(tokens[0]);
+                _y      = SvgNumber.ParseNumber(tokens[1]);
+                _width  = SvgNumber.ParseNumber(tokens[2]);
+                _height = SvgNumber.ParseNumber(tokens[3]);
             }
 			else
 			{
@@ -73,7 +68,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return (width <= 0 || height <= 0);
+				return (_width <= 0 || _height <= 0);
 			}
 		}
 
@@ -83,10 +78,10 @@ namespace SharpVectors.Dom.Svg
 
         public override string ToString()
 		{
-            return ("{X=" + this.X.ToString(CultureInfo.CurrentCulture) 
-                + ",Y=" + this.Y.ToString(CultureInfo.CurrentCulture) 
-                + ",Width=" + this.Width.ToString(CultureInfo.CurrentCulture) 
-                + ",Height=" + this.Height.ToString(CultureInfo.CurrentCulture) + "}");
+            CultureInfo culture = CultureInfo.CurrentCulture;
+
+            return ("{X=" + _x.ToString(culture) + ",Y=" + _y.ToString(culture) 
+                + ",Width=" + _width.ToString(culture) + ",Height=" + _height.ToString(culture) + "}");
         }
 
         #endregion
@@ -97,11 +92,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return x;
+				return _x;
 			}
 			set
 			{
-				x = value;
+				_x = value;
 			}
 		}
 
@@ -109,11 +104,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return y;
+				return _y;
 			}
 			set
 			{
-				y = value;
+				_y = value;
 			}
 		}
 
@@ -121,11 +116,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return width;
+				return _width;
 			}
 			set
 			{
-				width = value;
+				_width = value;
 			}
 		}
 
@@ -133,11 +128,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return height;
+				return _height;
 			}
 			set
 			{
-				height = value;
+				_height = value;
 			}
 		}
 

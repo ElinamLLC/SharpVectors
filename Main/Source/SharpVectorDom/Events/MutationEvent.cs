@@ -9,11 +9,11 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		private INode relatedNode;
-		private string prevValue;
-		private string newValue;
-		private string attrName;
-		private AttrChangeType attrChange;
+		private INode _relatedNode;
+		private string _prevValue;
+		private string _newValue;
+		private string _attrName;
+		private AttrChangeType _attrChange;
 		
 		#endregion
 		
@@ -31,7 +31,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return relatedNode;
+				return _relatedNode;
 			}
 		}
 		
@@ -39,7 +39,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return prevValue;
+				return _prevValue;
 			}
 		}
 		
@@ -47,7 +47,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return newValue;
+				return _newValue;
 			}
 		}
 		
@@ -55,7 +55,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return attrName;
+				return _attrName;
 			}
 		}
 		
@@ -63,47 +63,32 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return attrChange;
+				return _attrChange;
 			}
 		}
 		
-		public void InitMutationEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			INode relatedNode,
-			string prevValue,
-			string newValue,
-			string attrName,
-			AttrChangeType attrChange)
+		public void InitMutationEvent(string eventType, bool bubbles, bool cancelable, INode relatedNode,
+			string prevValue, string newValue, string attrName, AttrChangeType attrChange)
 		{
 			InitEvent(eventType, bubbles, cancelable);
 			
-			this.relatedNode = relatedNode;
-			this.prevValue = prevValue;
-			this.newValue = newValue;
-			this.attrName = attrName;
-			this.attrChange = attrChange;
+			_relatedNode = relatedNode;
+			_prevValue   = prevValue;
+			_newValue    = newValue;
+			_attrName    = attrName;
+			_attrChange  = attrChange;
 		}
 		
-		public void InitMutationEventNs(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			INode relatedNode,
-			string prevValue,
-			string newValue,
-			string attrName,
-			AttrChangeType attrChange)
+		public void InitMutationEventNs(string namespaceUri, string eventType, bool bubbles, bool cancelable,
+			INode relatedNode, string prevValue, string newValue, string attrName, AttrChangeType attrChange)
 		{
 			InitEventNs(namespaceUri, eventType, bubbles, cancelable);
 			
-			this.relatedNode = relatedNode;
-			this.prevValue = prevValue;
-			this.newValue = newValue;
-			this.attrName = attrName;
-			this.attrChange = attrChange;
+			_relatedNode = relatedNode;
+			_prevValue   = prevValue;
+			_newValue    = newValue;
+			_attrName    = attrName;
+			_attrChange  = attrChange;
 		}
 		
 		#endregion

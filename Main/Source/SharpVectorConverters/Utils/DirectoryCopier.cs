@@ -1,8 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
-using System.Text;
-using System.Collections.Generic;
 using System.Security.AccessControl;
 
 namespace SharpVectors.Converters.Utils
@@ -59,7 +56,6 @@ namespace SharpVectors.Converters.Utils
             {
                 return _isRecursive;
             }
-
             set
             {
                 _isRecursive = value;
@@ -79,7 +75,6 @@ namespace SharpVectors.Converters.Utils
             {
                 return _isOverwrite;
             }
-
             set
             {
                 _isOverwrite = value;
@@ -101,7 +96,6 @@ namespace SharpVectors.Converters.Utils
             {
                 return _includeSecurity;
             }
-
             set
             {
                 _includeSecurity = value;
@@ -123,7 +117,6 @@ namespace SharpVectors.Converters.Utils
             {
                 return _includeHidden;
             }
-
             set
             {
                 _includeHidden = value;

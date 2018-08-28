@@ -2,7 +2,7 @@ using System;
 
 namespace SharpVectors.Dom.Svg
 {
-	public abstract class SvgPathSeg : ISvgPathSeg
+    public abstract class SvgPathSeg : ISvgPathSeg
     {
         #region Private Fields
 
@@ -15,11 +15,11 @@ namespace SharpVectors.Dom.Svg
         #region Constructors
 
         protected SvgPathSeg(SvgPathSegType type)
-		{
-			this._type = type;
-		}
+        {
+            _type = type;
+        }
 
-		#endregion
+        #endregion
 
         #region Public Properties
 
@@ -30,32 +30,28 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPathSeg PreviousSeg
         {
-            get
-            {
+            get {
                 return _list.GetPreviousSegment(this);
             }
         }
 
         public SvgPathSeg NextSeg
         {
-            get
-            {
+            get {
                 return _list.GetNextSegment(this);
             }
         }
 
         public int Index
         {
-            get
-            {
+            get {
                 return _index;
             }
         }
 
         public virtual double Length
         {
-            get
-            {
+            get {
                 return 0;
             }
         }
@@ -65,18 +61,18 @@ namespace SharpVectors.Dom.Svg
         #region Internal Methods
 
         internal void SetList(SvgPathSegList list)
-		{
-            this._list = list;
-		}
+        {
+            _list = list;
+        }
 
-		internal void SetIndex(int index)
-		{
-			this._index = index;
-		}
+        internal void SetIndex(int index)
+        {
+            _index = index;
+        }
 
-		internal void SetIndexWithDiff(int diff)
-		{
-			this._index += diff;
+        internal void SetIndexWithDiff(int diff)
+        {
+            _index += diff;
         }
 
         #endregion
@@ -84,63 +80,61 @@ namespace SharpVectors.Dom.Svg
         #region ISvgPathSeg Members
 
         public SvgPathSegType PathSegType
-		{
-			get 
-            {
+        {
+            get {
                 return _type;
             }
-		}
+        }
 
-		public string PathSegTypeAsLetter	
-		{
-			get
-			{
-				switch(_type)
-				{
-					case SvgPathSegType.ArcAbs:
-						return "A";
-					case SvgPathSegType.ArcRel:
-						return "a";
-					case SvgPathSegType.ClosePath:
-						return "z";
-					case SvgPathSegType.CurveToCubicAbs:
-						return "C";
-					case SvgPathSegType.CurveToCubicRel:
-						return "c";
-					case SvgPathSegType.CurveToCubicSmoothAbs:
-						return "S";
-					case SvgPathSegType.CurveToCubicSmoothRel:
-						return "s";
-					case SvgPathSegType.CurveToQuadraticAbs:
-						return "Q";
-					case SvgPathSegType.CurveToQuadraticRel:
-						return "q";
-					case SvgPathSegType.CurveToQuadraticSmoothAbs:
-						return "T";
-					case SvgPathSegType.CurveToQuadraticSmoothRel:
-						return "t";
-					case SvgPathSegType.LineToAbs:
-						return "L";
-					case SvgPathSegType.LineToHorizontalAbs:
-						return "H";
-					case SvgPathSegType.LineToHorizontalRel:
-						return "h";
-					case SvgPathSegType.LineToRel:
-						return "l";
-					case SvgPathSegType.LineToVerticalAbs:
-						return "V";
-					case SvgPathSegType.LineToVerticalRel:
-						return "v";
-					case SvgPathSegType.MoveToAbs:
-						return "M";
-					case SvgPathSegType.MoveToRel:
-						return "m";
-					default:
-						return String.Empty;
-				}
-			}
-		}
+        public string PathSegTypeAsLetter
+        {
+            get {
+                switch (_type)
+                {
+                    case SvgPathSegType.ArcAbs:
+                        return "A";
+                    case SvgPathSegType.ArcRel:
+                        return "a";
+                    case SvgPathSegType.ClosePath:
+                        return "z";
+                    case SvgPathSegType.CurveToCubicAbs:
+                        return "C";
+                    case SvgPathSegType.CurveToCubicRel:
+                        return "c";
+                    case SvgPathSegType.CurveToCubicSmoothAbs:
+                        return "S";
+                    case SvgPathSegType.CurveToCubicSmoothRel:
+                        return "s";
+                    case SvgPathSegType.CurveToQuadraticAbs:
+                        return "Q";
+                    case SvgPathSegType.CurveToQuadraticRel:
+                        return "q";
+                    case SvgPathSegType.CurveToQuadraticSmoothAbs:
+                        return "T";
+                    case SvgPathSegType.CurveToQuadraticSmoothRel:
+                        return "t";
+                    case SvgPathSegType.LineToAbs:
+                        return "L";
+                    case SvgPathSegType.LineToHorizontalAbs:
+                        return "H";
+                    case SvgPathSegType.LineToHorizontalRel:
+                        return "h";
+                    case SvgPathSegType.LineToRel:
+                        return "l";
+                    case SvgPathSegType.LineToVerticalAbs:
+                        return "V";
+                    case SvgPathSegType.LineToVerticalRel:
+                        return "v";
+                    case SvgPathSegType.MoveToAbs:
+                        return "M";
+                    case SvgPathSegType.MoveToRel:
+                        return "m";
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

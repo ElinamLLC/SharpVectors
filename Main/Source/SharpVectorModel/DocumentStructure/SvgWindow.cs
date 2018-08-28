@@ -10,12 +10,12 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private fields
 
-        private long innerWidth;
-        private long innerHeight;
-        private SvgDocument document;
-        private SvgWindow parentWindow;
+        private long _innerWidth;
+        private long _innerHeight;
+        private SvgDocument _document;
+        private SvgWindow _parentWindow;
 
-        private ISvgRenderer renderer;
+        private ISvgRenderer _renderer;
 
         #endregion
 
@@ -23,20 +23,20 @@ namespace SharpVectors.Dom.Svg
 
         protected SvgWindow(long innerWidth, long innerHeight, ISvgRenderer renderer)
         {
-            this.renderer = renderer;
-            if (this.renderer != null)
+            _renderer = renderer;
+            if (_renderer != null)
             {
-                this.renderer.Window = this;
+                _renderer.Window = this;
             }
 
-            this.innerWidth  = innerWidth;
-            this.innerHeight = innerHeight;
+            _innerWidth  = innerWidth;
+            _innerHeight = innerHeight;
         }
 
         protected SvgWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)
             : this(innerWidth, innerHeight, parentWindow.Renderer)
         {
-            this.parentWindow = parentWindow;
+            _parentWindow = parentWindow;
         }
 
         #endregion
@@ -47,14 +47,14 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return parentWindow;
+                return _parentWindow;
             }
         }
         
         public ISvgRenderer Renderer
         {
-            get { return renderer; }
-            set { renderer = value; }
+            get { return _renderer; }
+            set { _renderer = value; }
         }
 
         public abstract DirectoryInfo WorkingDir
@@ -67,11 +67,12 @@ namespace SharpVectors.Dom.Svg
         #region Public Methods
 
         /// <summary>
-        /// Create and assign an empty SvgDocument to this window.  This is needed only in situations where the library user needs to create an SVG DOM tree outside of the usual LoadSvgDocument mechanism.
+        /// Create and assign an empty SvgDocument to this window.  This is needed only in situations where 
+        /// the library user needs to create an SVG DOM tree outside of the usual LoadSvgDocument mechanism.
         /// </summary>
         public SvgDocument CreateEmptySvgDocument()
         {
-            return document = new SvgDocument(this);
+            return _document = new SvgDocument(this);
         }
 
         #endregion
@@ -82,11 +83,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return innerWidth;
+                return _innerWidth;
             }
             set
             {
-                this.innerWidth = value;
+                _innerWidth = value;
             }
         }
 
@@ -94,11 +95,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return innerHeight;
+                return _innerHeight;
             }
             set
             {
-                this.innerHeight = value;
+                _innerHeight = value;
             }
         }
 
@@ -126,11 +127,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return document;
+                return _document;
             }
             set
             {
-                document = (SvgDocument)value;
+                _document = (SvgDocument)value;
             }
         }
 
@@ -147,12 +148,12 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// This is expected to be called by the host
         /// </summary>
-        /// <param name="width">The new width of the control</param>
-        /// <param name="height">The new height of the control</param>
+        /// <param name="innerWidth">The new width of the control</param>
+        /// <param name="innerHeight">The new height of the control</param>
         public virtual void Resize(int innerWidth, int innerHeight)
         {
-            this.innerWidth  = innerWidth;
-            this.innerHeight = innerHeight;
+            _innerWidth  = innerWidth;
+            _innerHeight = innerHeight;
 
             if (Document != null && Document.RootElement != null)
                 (Document.RootElement as SvgSvgElement).Resize();

@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -29,7 +28,7 @@ namespace SharpVectors.Dom.Svg
 
         public SvgNumber(string str)
         {
-            _value = SvgNumber.ParseNumber(str);
+            _value = ParseNumber(str);
         }
 
         #endregion
@@ -55,7 +54,7 @@ namespace SharpVectors.Dom.Svg
 				sc = sc.Trim();
 				// remove the unit
 				Match match = reUnit.Match(sc);
-				return SvgNumber.ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
+				return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
 			}
 			else
 			{
@@ -67,7 +66,7 @@ namespace SharpVectors.Dom.Svg
 		{
             try
             {
-                return Double.Parse(str, SvgNumber.Format);
+                return double.Parse(str, SvgNumber.Format);
             }
             catch (Exception e)
             {
@@ -140,7 +139,8 @@ namespace SharpVectors.Dom.Svg
 
             double diff = (a1 - a2);
 
-			while(diff<0) diff += 360;
+			while(diff<0)
+                diff += 360;
 			diff %= 360;
             
 			return diff;
@@ -158,9 +158,27 @@ namespace SharpVectors.Dom.Svg
 			return bisect;
 		}
 
-		#endregion
+        public static bool IsValid(double value)
+        {
+            if (double.IsNaN(value) || double.IsInfinity(value))
+            {
+                return false;
+            }
+            return true;
+        }
 
-		#region ISvgNumber Nembers
+        public static bool IsValid(float value)
+        {
+            if (float.IsNaN(value) || float.IsInfinity(value))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region ISvgNumber Nembers
 
         public double Value
 		{
@@ -170,7 +188,7 @@ namespace SharpVectors.Dom.Svg
 			}
 			set
 			{
-				this._value = value;
+				_value = value;
 			}
 		}
 

@@ -1,12 +1,8 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>0</completed>
-
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
-	/// For each 'use' element, the Svg DOM maintains a shadow tree (the "instance tree") of objects of type SvgElementInstance
+	/// For each 'use' element, the Svg DOM maintains a shadow tree (the "instance tree") of 
+    /// objects of type SvgElementInstance
 	/// </summary>
 	public interface ISvgElementInstance 
 	{

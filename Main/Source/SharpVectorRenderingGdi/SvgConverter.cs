@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Drawing;
-using System.Collections.Generic;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers

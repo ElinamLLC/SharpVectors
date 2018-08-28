@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Svg
@@ -12,30 +8,33 @@ namespace SharpVectors.Dom.Svg
     public sealed class SvgAnimatedNumber : ISvgAnimatedNumber
     {
 		#region Private Fields
-        private double baseVal;
-        private double animVal;
-		#endregion
+
+        private double _baseVal;
+        private double _animVal;
+		
+        #endregion
 
 		#region Constructors
 
         public SvgAnimatedNumber(string str)
         {
-            baseVal = SvgNumber.ParseNumber(str);
-            animVal = baseVal;
+            _baseVal = SvgNumber.ParseNumber(str);
+            _animVal = _baseVal;
         }
 
 		#endregion
 
         #region ISvgAnimatedNumber Interface
+
         public double BaseVal
         {
             get
             {
-                return baseVal;
+                return _baseVal;
             }
             set
             {
-                baseVal = value;
+                _baseVal = value;
             }
         }
 
@@ -43,9 +42,10 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return animVal;
+                return _animVal;
             }
         }
+
 		#endregion
     }
 }

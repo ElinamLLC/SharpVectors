@@ -6,7 +6,9 @@ namespace SharpVectors.Dom.Svg
     public sealed class SvgPreserveAspectRatio : ISvgPreserveAspectRatio
     {
         #region Static members
+
         private static Regex parCheck = new Regex("^(?<align>[A-Za-z]+)\\s*(?<meet>[A-Za-z]*)$");
+        
         #endregion
 
         #region Private Fields
@@ -122,7 +124,7 @@ namespace SharpVectors.Dom.Svg
             double scaleX = 1;
             double scaleY = 1;
 
-            if (!viewBox.IsEmpty)
+            if (!viewBox.IsEmpty && !rectToFit.IsEmpty)
             {
                 // calculate scale values for non-uniform scaling
                 scaleX = rectToFit.Width / viewBox.Width;
@@ -175,11 +177,25 @@ namespace SharpVectors.Dom.Svg
                 }
             }
 
-            return new double[]{
-                translateX,
-                translateY,
-                scaleX,
-                scaleY };
+            if (!SvgNumber.IsValid(translateX))
+            {
+                translateX = 0;
+            }
+            if (!SvgNumber.IsValid(translateY))
+            {
+                translateY = 0;
+            }
+
+            if (!SvgNumber.IsValid(scaleX))
+            {
+                scaleX = 1;
+            }
+            if (!SvgNumber.IsValid(scaleY))
+            {
+                scaleY = 1;
+            }
+
+            return new double[] { translateX, translateY, scaleX, scaleY };
         }
 
         #endregion

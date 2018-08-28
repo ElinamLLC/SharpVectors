@@ -174,7 +174,7 @@ namespace SharpVectors.Renderers.Texts
         public static string TrimText(SvgTextContentElement element, string val)
         {
             if (element.XmlSpace != "preserve")
-                val = val.Replace("\n", String.Empty);
+                val = val.Replace("\n", string.Empty);
             val = _tabNewline.Replace(val, " ");
 
             if (element.XmlSpace == "preserve" || element.XmlSpace == "default")
@@ -201,7 +201,7 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 

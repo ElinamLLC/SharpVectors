@@ -93,7 +93,7 @@ namespace SharpVectors.Converters
 
             try
             {
-                this.AppendLine(String.Empty);
+                this.AppendLine(string.Empty);
                 this.AppendLine("Converting file, please wait...");
                 this.AppendLine("Input File: " + _sourceFile);
 

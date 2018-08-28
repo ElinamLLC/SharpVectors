@@ -157,7 +157,7 @@ namespace SharpVectors.Converters
 
             try
             {
-                this.AppendLine(String.Empty);
+                this.AppendLine(string.Empty);
                 this.AppendLine("Converting files, please wait...");
 
                 string outputDir = this.OutputDir;
@@ -180,7 +180,7 @@ namespace SharpVectors.Converters
                 {
                     this.AppendLine(_sourceFiles[i]);
                 }
-                this.AppendLine(String.Empty);
+                this.AppendLine(string.Empty);
 
                 _worker.RunWorkerAsync();
 

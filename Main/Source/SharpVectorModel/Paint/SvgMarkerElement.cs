@@ -3,13 +3,31 @@ using System;
 namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgMarkerElement : SvgStyleableElement, ISvgMarkerElement
-	{
-		public SvgMarkerElement(string prefix, string localname, string ns, SvgDocument doc) 
-            : base(prefix, localname, ns, doc) 
-		{
-			svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-			svgFitToViewBox = new SvgFitToViewBox(this);
-		}
+    {
+        #region Private Fields
+
+        private ISvgAnimatedLength _refY;
+        private ISvgAnimatedLength _refX;
+        private ISvgAnimatedEnumeration _markerUnits;
+        private ISvgAnimatedLength _markerWidth;
+        private ISvgAnimatedLength _markerHeight;
+        private ISvgAnimatedEnumeration _orientType;
+        private ISvgAnimatedAngle _orientAngle;
+        private SvgFitToViewBox _fitToViewBox;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
+
+        #endregion
+
+        #region Constructors and Destructor
+
+        public SvgMarkerElement(string prefix, string localname, string ns, SvgDocument doc)
+            : base(prefix, localname, ns, doc)
+        {
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _fitToViewBox = new SvgFitToViewBox(this);
+        }
+
+        #endregion
 
         #region ISvgElement Members
 
@@ -22,8 +40,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override bool IsRenderable
         {
-            get
-            {
+            get {
                 return false;
             }
         }
@@ -37,206 +54,187 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Containment;
             }
         }
 
         #endregion
 
-		#region ISvgMarkerElement Members
+        #region ISvgMarkerElement Members
 
-		/// <summary>
-		///  Sets the value of attribute orient to 'auto'.
-		/// </summary>
-		public void SetOrientToAuto()
-		{
-			orientType = null;
-			SetAttribute("orient", "auto");
-		}
+        /// <summary>
+        ///  Sets the value of attribute orient to 'auto'.
+        /// </summary>
+        public void SetOrientToAuto()
+        {
+            _orientType = null;
+            SetAttribute("orient", "auto");
+        }
 
-		/// <summary>
-		///  Sets the value of attribute orient to the given angle.
-		/// </summary>
-		/// <param name="angle"> The angle value to use for attribute orient.</param>
-		public void SetOrientToAngle(ISvgAngle angle)
-		{
-			orientType = null;
-			SetAttribute("orient", angle.ValueAsString);
-			orientAngle = new SvgAnimatedAngle(angle);
-		}
+        /// <summary>
+        ///  Sets the value of attribute orient to the given angle.
+        /// </summary>
+        /// <param name="angle"> The angle value to use for attribute orient.</param>
+        public void SetOrientToAngle(ISvgAngle angle)
+        {
+            _orientType = null;
+            SetAttribute("orient", angle.ValueAsString);
+            _orientAngle = new SvgAnimatedAngle(angle);
+        }
 
-		private ISvgAnimatedLength refX;
-		/// <summary>
-		/// Corresponds to attribute refX on the given 'marker' element.
-		/// </summary>
-		public ISvgAnimatedLength RefX
-		{
-			get
-			{
-				if(refX == null)
-				{
-					refX = new SvgAnimatedLength(this, "refX", SvgLengthDirection.Horizontal, "0");
-				}
-				return refX;
-			}
-		}
+        /// <summary>
+        /// Corresponds to attribute refX on the given 'marker' element.
+        /// </summary>
+        public ISvgAnimatedLength RefX
+        {
+            get {
+                if (_refX == null)
+                {
+                    _refX = new SvgAnimatedLength(this, "refX", SvgLengthDirection.Horizontal, "0");
+                }
+                return _refX;
+            }
+        }
 
-		private ISvgAnimatedLength refY;
-		/// <summary>
-		/// Corresponds to attribute refY on the given 'marker' element.
-		/// </summary>
-		public ISvgAnimatedLength RefY
-		{
-			get
-			{
-				if(refY == null)
-				{
-					refY = new SvgAnimatedLength(this, "refY", SvgLengthDirection.Vertical, "0");
-				}
-				return refY;
-			}
-		}
+        /// <summary>
+        /// Corresponds to attribute refY on the given 'marker' element.
+        /// </summary>
+        public ISvgAnimatedLength RefY
+        {
+            get {
+                if (_refY == null)
+                {
+                    _refY = new SvgAnimatedLength(this, "refY", SvgLengthDirection.Vertical, "0");
+                }
+                return _refY;
+            }
+        }
 
-		private ISvgAnimatedEnumeration markerUnits;
-		/// <summary>
-		/// Corresponds to attribute markerUnits on the given 'marker' element.
-		/// </summary>
-		public ISvgAnimatedEnumeration MarkerUnits
-		{
-			get
-			{
-				if(markerUnits == null)
-				{
-					SvgMarkerUnit type = SvgMarkerUnit.Unknown;
-					switch(GetAttribute("markerUnits"))
-					{
-						case "userSpaceOnUse":
-							type = SvgMarkerUnit.UserSpaceOnUse;
-							break;
-						case "":
-						case "strokeWidth":
-							type = SvgMarkerUnit.StrokeWidth;
-							break;
-					}
-					markerUnits = new SvgAnimatedEnumeration((ushort)type);
-				}
-				return markerUnits;
-			}
-		}
+        /// <summary>
+        /// Corresponds to attribute markerUnits on the given 'marker' element.
+        /// </summary>
+        public ISvgAnimatedEnumeration MarkerUnits
+        {
+            get {
+                if (_markerUnits == null)
+                {
+                    SvgMarkerUnit type = SvgMarkerUnit.Unknown;
+                    switch (GetAttribute("markerUnits"))
+                    {
+                        case "userSpaceOnUse":
+                            type = SvgMarkerUnit.UserSpaceOnUse;
+                            break;
+                        case "":
+                        case "strokeWidth":
+                            type = SvgMarkerUnit.StrokeWidth;
+                            break;
+                    }
+                    _markerUnits = new SvgAnimatedEnumeration((ushort)type);
+                }
+                return _markerUnits;
+            }
+        }
 
-		private ISvgAnimatedLength markerWidth;
-		/// <summary>
-		/// Corresponds to attribute markerWidth on the given 'marker' element
-		/// </summary>
-		public ISvgAnimatedLength MarkerWidth
-		{
-			get
-			{
-				if(markerWidth == null)
-				{
-					markerWidth = new SvgAnimatedLength(this, "markerWidth", SvgLengthDirection.Horizontal, "3");
-				}
-				return markerWidth;
-			}
-		}
+        /// <summary>
+        /// Corresponds to attribute markerWidth on the given 'marker' element
+        /// </summary>
+        public ISvgAnimatedLength MarkerWidth
+        {
+            get {
+                if (_markerWidth == null)
+                {
+                    _markerWidth = new SvgAnimatedLength(this, "markerWidth", SvgLengthDirection.Horizontal, "3");
+                }
+                return _markerWidth;
+            }
+        }
 
-		private ISvgAnimatedLength markerHeight;
-		/// <summary>
-		/// Corresponds to attribute markerHeight on the given 'marker' element.
-		/// </summary>
-		public ISvgAnimatedLength MarkerHeight
-		{
-			get
-			{
-				if(markerHeight == null)
-				{
-					markerHeight = new SvgAnimatedLength(this, "markerHeight", SvgLengthDirection.Vertical, "3");
-				}
-				return markerHeight;
-			}
-		}
+        /// <summary>
+        /// Corresponds to attribute markerHeight on the given 'marker' element.
+        /// </summary>
+        public ISvgAnimatedLength MarkerHeight
+        {
+            get {
+                if (_markerHeight == null)
+                {
+                    _markerHeight = new SvgAnimatedLength(this, "markerHeight", SvgLengthDirection.Vertical, "3");
+                }
+                return _markerHeight;
+            }
+        }
 
-		private ISvgAnimatedEnumeration orientType;
-		/// <summary>
-		/// Corresponds to attribute orient on the given 'marker' element. One of the Marker Orientation Types defined above.
-		/// </summary>
-		public ISvgAnimatedEnumeration OrientType
-		{
-			get
-			{
-				if(orientType == null)
-				{
-					if(GetAttribute("orient") == "auto")
-					{
-						orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Auto);
-					}
-					else
-					{
-						orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Angle);
-					}
-				}
-				return orientType;
-			}
-		}
+        /// <summary>
+        /// Corresponds to attribute orient on the given 'marker' element. One of the Marker Orientation Types defined above.
+        /// </summary>
+        public ISvgAnimatedEnumeration OrientType
+        {
+            get {
+                if (_orientType == null)
+                {
+                    if (GetAttribute("orient") == "auto")
+                    {
+                        _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Auto);
+                    }
+                    else
+                    {
+                        _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Angle);
+                    }
+                }
+                return _orientType;
+            }
+        }
 
-		public ISvgAnimatedAngle orientAngle;
-		/// <summary>
-		/// Corresponds to attribute orient on the given 'marker' element. If markerUnits is SVG_MARKER_ORIENT_ANGLE, the angle value for attribute orient; otherwise, it will be set to zero.
-		/// </summary>
-		public ISvgAnimatedAngle OrientAngle
-		{
-			get
-			{
-				if(orientAngle == null)
-				{
-					if(OrientType.AnimVal.Equals(SvgMarkerOrient.Angle))
-					{
-						orientAngle = new SvgAnimatedAngle(GetAttribute("orient"), "0");
-					}
-					else
-					{
-						orientAngle = new SvgAnimatedAngle("0", "0");
-					}
-				}
-				return orientAngle;
-			}
-		}
-		#endregion
+        /// <summary>
+        /// Corresponds to attribute orient on the given 'marker' element. If markerUnits is SVG_MARKER_ORIENT_ANGLE, the angle value for attribute orient; otherwise, it will be set to zero.
+        /// </summary>
+        public ISvgAnimatedAngle OrientAngle
+        {
+            get {
+                if (_orientAngle == null)
+                {
+                    if (OrientType.AnimVal.Equals(SvgMarkerOrient.Angle))
+                    {
+                        _orientAngle = new SvgAnimatedAngle(GetAttribute("orient"), "0");
+                    }
+                    else
+                    {
+                        _orientAngle = new SvgAnimatedAngle("0", "0");
+                    }
+                }
+                return _orientAngle;
+            }
+        }
 
-		#region ISvgFitToViewBox Members
+        #endregion
 
-		private SvgFitToViewBox svgFitToViewBox;
-		public ISvgAnimatedRect ViewBox
-		{
-			get
-			{
-				return svgFitToViewBox.ViewBox;
-			}
-		}
+        #region ISvgFitToViewBox Members
 
-		public ISvgAnimatedPreserveAspectRatio PreserveAspectRatio
-		{
-			get
-			{
-				return svgFitToViewBox.PreserveAspectRatio;
-			}
-		}
+        public ISvgAnimatedRect ViewBox
+        {
+            get {
+                return _fitToViewBox.ViewBox;
+            }
+        }
 
-		#endregion
+        public ISvgAnimatedPreserveAspectRatio PreserveAspectRatio
+        {
+            get {
+                return _fitToViewBox.PreserveAspectRatio;
+            }
+        }
 
-		#region ISvgExternalResourcesRequired Members
+        #endregion
 
-		private SvgExternalResourcesRequired svgExternalResourcesRequired;
-		public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return svgExternalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
+        #region ISvgExternalResourcesRequired Members
 
-		#endregion
-	}
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
+
+        #endregion
+    }
 }

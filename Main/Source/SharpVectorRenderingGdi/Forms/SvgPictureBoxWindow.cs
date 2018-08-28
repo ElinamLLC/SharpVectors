@@ -1,14 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
-using SharpVectors.Xml;
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Events;
-using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Renderers.Forms
 {
@@ -49,25 +43,21 @@ namespace SharpVectors.Renderers.Forms
 
         public override long InnerWidth
         {
-            get
-            {
+            get {
                 if (_svgPictureBox != null)
                 {
                     return _svgPictureBox.Width;
                 }
-
                 return base.InnerWidth;
             }
-            set
-            {
+            set {
                 base.InnerWidth = value;
             }
         }
 
         public override long InnerHeight
         {
-            get
-            {
+            get {
                 if (_svgPictureBox != null)
                 {
                     return _svgPictureBox.Height;
@@ -75,21 +65,18 @@ namespace SharpVectors.Renderers.Forms
 
                 return base.InnerHeight;
             }
-            set
-            {
+            set {
                 base.InnerHeight = value;
             }
         }
 
         public override string Source
         {
-            get
-            {
+            get {
                 SvgDocument document = (SvgDocument)this.Document;
-                return (document != null) ? document.Url : String.Empty;
+                return (document != null) ? document.Url : string.Empty;
             }
-            set
-            {
+            set {
                 Uri uri = new Uri(new Uri(Application.ExecutablePath), value);
 
                 SvgDocument document = new SvgDocument(this);
@@ -101,8 +88,7 @@ namespace SharpVectors.Renderers.Forms
 
         public override DirectoryInfo WorkingDir
         {
-            get
-            {
+            get {
                 return SvgApplicationContext.ExecutableDirectory;
             }
         }

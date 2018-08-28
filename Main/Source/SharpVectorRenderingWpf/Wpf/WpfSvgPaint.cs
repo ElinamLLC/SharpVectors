@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Css;
 using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Renderers.Wpf
@@ -73,7 +72,7 @@ namespace SharpVectors.Renderers.Wpf
         public Pen GetPen(Geometry geometry)
         {
             double strokeWidth = GetStrokeWidth();
-            if (strokeWidth == 0) 
+            if (strokeWidth.Equals(0.0d)) 
                 return null;
 
             WpfSvgPaint stroke;
@@ -110,7 +109,7 @@ namespace SharpVectors.Renderers.Wpf
                 //Do not draw if dash array had a zero value in it
                 for (int i = 0; i < dashArray.Count; i++)
                 {
-                    if (dashArray[i] == 0)
+                    if (dashArray[i].Equals(0.0d))
                     {
                         isValidDashes = false;
                     }
@@ -189,7 +188,8 @@ namespace SharpVectors.Renderers.Wpf
         private double GetStrokeWidth()
         {
             string strokeWidth = _element.GetPropertyValue("stroke-width");
-            if (strokeWidth.Length == 0) strokeWidth = "1px";
+            if (strokeWidth.Length == 0)
+                strokeWidth = "1px";
 
             SvgLength strokeWidthLength = new SvgLength(_element, "stroke-width", 
                 SvgLengthDirection.Viewport, strokeWidth);
@@ -218,9 +218,11 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             double miterLimit = SvgNumber.ParseNumber(miterLimitStr);
-            if (miterLimit < 1) 
+            if (miterLimit < 1)
+            {
                 throw new SvgException(SvgExceptionType.SvgInvalidValueErr, 
                     "stroke-miterlimit can not be less then 1");
+            }
 
             //if (miterLimit < 1.0d)
             //{
@@ -232,10 +234,8 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return miterLimit;
             }
-            else
-            {
-                return 1.0d;
-            }
+
+            return 1.0d;
         }
 
         private DoubleCollection GetDashArray(double strokeWidth)
@@ -324,7 +324,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return null;
             }
-            else if (PaintType == SvgPaintType.CurrentColor)
+            if (PaintType == SvgPaintType.CurrentColor)
             {
                 fill = new WpfSvgPaint(_context, _element, "color");
             }
@@ -364,7 +364,7 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         return null;
                     }
-                    else if (PaintType == SvgPaintType.UriCurrentColor)
+                    if (PaintType == SvgPaintType.UriCurrentColor)
                     {
                         fill = new WpfSvgPaint(_context, _element, "color");
                     }

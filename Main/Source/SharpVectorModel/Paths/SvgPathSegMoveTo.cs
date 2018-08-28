@@ -8,11 +8,14 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public abstract class SvgPathSegMoveto : SvgPathSeg
     {
+        protected double _x;
+        protected double _y;
+
         protected SvgPathSegMoveto(SvgPathSegType type, double x, double y)
             : base(type)
         {
-            this.x = x;
-            this.y = y;
+            _x = x;
+            _y = y;
         }
 
         public abstract override SvgPointF AbsXY { get; }
@@ -39,26 +42,24 @@ namespace SharpVectors.Dom.Svg
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(PathSegTypeAsLetter);
-                sb.Append(x);
+                sb.Append(_x);
                 sb.Append(",");
-                sb.Append(y);
+                sb.Append(_y);
 
                 return sb.ToString();
             }
         }
 
-        protected double x;
         public double X
         {
-            get { return x; }
-            set { x = value; }
+            get { return _x; }
+            set { _x = value; }
         }
 
-        protected double y;
         public double Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return _y; }
+            set { _y = value; }
         }
     }
 }

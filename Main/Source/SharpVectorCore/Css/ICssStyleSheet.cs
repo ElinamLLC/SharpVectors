@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
@@ -7,8 +5,6 @@ namespace SharpVectors.Dom.Css
 	/// represent a CSS style sheet i.e., a style sheet whose 
 	/// content type is "text/css". 
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>70</completed>	
 	public interface ICssStyleSheet : Stylesheets.IStyleSheet
 	{
 		/// <summary>
@@ -34,7 +30,7 @@ namespace SharpVectors.Dom.Css
 		/// <summary>
 		/// The list of all CSS rules contained within the style sheet. This includes both rule sets and at-rules.
 		/// </summary>
-		SharpVectors.Dom.Css.ICssRuleList CssRules
+		ICssRuleList CssRules
 		{
 			get;
 			set;
@@ -43,7 +39,7 @@ namespace SharpVectors.Dom.Css
 		/// <summary>
 		/// If this style sheet comes from an @import rule, the ownerRule attribute will contain the CSSImportRule. In that case, the ownerNode attribute in the StyleSheet interface will be null. If the style sheet comes from an element or a processing instruction, the ownerRule attribute will be null and the ownerNode attribute will contain the Node.
 		/// </summary>
-		SharpVectors.Dom.Css.ICssRule OwnerRule
+		ICssRule OwnerRule
 		{
 			get;
 		}

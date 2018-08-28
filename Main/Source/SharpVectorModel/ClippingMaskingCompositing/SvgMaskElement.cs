@@ -6,16 +6,16 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private ISvgAnimatedLength x;
-        private ISvgAnimatedLength y;
-        private ISvgAnimatedLength width;
-        private ISvgAnimatedLength height;
+        private ISvgAnimatedLength _x;
+        private ISvgAnimatedLength _y;
+        private ISvgAnimatedLength _width;
+        private ISvgAnimatedLength _height;
 
-        private ISvgAnimatedEnumeration maskUnits;
-        private ISvgAnimatedEnumeration maskContentUnits;
+        private ISvgAnimatedEnumeration _maskUnits;
+        private ISvgAnimatedEnumeration _maskContentUnits;
 
-        private SvgTests svgTests;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgTests _svgTests;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
@@ -24,8 +24,8 @@ namespace SharpVectors.Dom.Svg
         public SvgMaskElement(string prefix, string localname, string ns, SvgDocument doc)
 			: base(prefix, localname, ns, doc)
 		{
-			svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-			svgTests = new SvgTests(this);
+			_externalResourcesRequired = new SvgExternalResourcesRequired(this);
+			_svgTests = new SvgTests(this);
 		}
 
 		#endregion
@@ -70,14 +70,15 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{ 
-				if(maskUnits == null)
+				if (_maskUnits == null)
 				{
 					SvgUnitType mask = SvgUnitType.ObjectBoundingBox;
-					if(GetAttribute("maskUnits") == "userSpaceOnUse") 
+					if (GetAttribute("maskUnits") == "userSpaceOnUse") 
 						mask = SvgUnitType.UserSpaceOnUse;
-					maskUnits = new SvgAnimatedEnumeration((ushort)mask);
+
+					_maskUnits = new SvgAnimatedEnumeration((ushort)mask);
 				}
-				return maskUnits;
+				return _maskUnits;
 			}
 		}
 
@@ -85,14 +86,14 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				if(maskContentUnits == null)
+				if(_maskContentUnits == null)
 				{
 					SvgUnitType maskContent = SvgUnitType.UserSpaceOnUse;
-					if(GetAttribute("maskContentUnits") == "objectBoundingBox") 
+					if (GetAttribute("maskContentUnits") == "objectBoundingBox") 
 						maskContent = SvgUnitType.ObjectBoundingBox;
-					maskContentUnits = new SvgAnimatedEnumeration((ushort)maskContent);
+					_maskContentUnits = new SvgAnimatedEnumeration((ushort)maskContent);
 				}
-				return maskContentUnits;
+				return _maskContentUnits;
 			}
 		}
 
@@ -100,11 +101,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				if(x == null)
+				if (_x == null)
 				{
-					x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "-10%");
+					_x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "-10%");
 				}
-				return x;
+				return _x;
 			}
 		}
 
@@ -112,11 +113,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				if(y == null)
+				if(_y == null)
 				{
-					y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "-10%");
+					_y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "-10%");
 				}
-				return y;
+				return _y;
 			}
 		}
 
@@ -124,11 +125,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				if(width == null)
+				if (_width == null)
 				{
-					width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Viewport, "120%");
+					_width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Viewport, "120%");
 				}
-				return width;
+				return _width;
 			}
 		}
 
@@ -136,11 +137,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				if(height == null)
+				if (_height == null)
 				{
-					height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Viewport, "120%");
+					_height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Viewport, "120%");
 				}
-				return height;
+				return _height;
 			}
 		}
 
@@ -152,7 +153,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return svgExternalResourcesRequired.ExternalResourcesRequired;
+				return _externalResourcesRequired.ExternalResourcesRequired;
 			}
 		}
 
@@ -162,22 +163,22 @@ namespace SharpVectors.Dom.Svg
 
 		public ISvgStringList RequiredFeatures
 		{
-			get { return svgTests.RequiredFeatures; }
+			get { return _svgTests.RequiredFeatures; }
 		}
 
 		public ISvgStringList RequiredExtensions
 		{
-			get { return svgTests.RequiredExtensions; }
+			get { return _svgTests.RequiredExtensions; }
 		}
 
 		public ISvgStringList SystemLanguage
 		{
-			get { return svgTests.SystemLanguage; }
+			get { return _svgTests.SystemLanguage; }
 		}
 
 		public bool HasExtension(string extension)
 		{
-			return svgTests.HasExtension(extension);
+			return _svgTests.HasExtension(extension);
 		}
 
         #endregion

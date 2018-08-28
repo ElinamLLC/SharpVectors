@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Css
@@ -32,11 +29,11 @@ namespace SharpVectors.Dom.Css
 			Specificity = specificity;
 		}
 
-		#endregion
+        #endregion
 
-		#region Public properties
+        #region Public properties
 
-		internal string CssText
+        public string CssText
 		{
 			get
 			{
@@ -49,26 +46,26 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		/// <summary>
-		/// The type of the owner stylesheet
-		/// </summary>
-		internal CssStyleSheetType Origin;
-		/// <summary>
-		/// The property name
-		/// </summary>
-		internal string Name;
-		/// <summary>
-		/// The value of the style
-		/// </summary>
-		internal string Value;
-		/// <summary>
-		/// The prioroty of the style, e.g. "important"
-		/// </summary>
-		internal string Priority;
-		/// <summary>
-		/// The calculated specificity of the owner selector
-		/// </summary>
-		internal int Specificity = -1;
+        /// <summary>
+        /// The type of the owner stylesheet
+        /// </summary>
+        public CssStyleSheetType Origin;
+        /// <summary>
+        /// The property name
+        /// </summary>
+        public string Name;
+        /// <summary>
+        /// The value of the style
+        /// </summary>
+        public string Value;
+        /// <summary>
+        /// The prioroty of the style, e.g. "important"
+        /// </summary>
+        public string Priority;
+        /// <summary>
+        /// The calculated specificity of the owner selector
+        /// </summary>
+        public int Specificity = -1;
 
 		public CssValue CssValue;
 

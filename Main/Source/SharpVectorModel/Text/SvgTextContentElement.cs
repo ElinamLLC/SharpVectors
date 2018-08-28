@@ -17,8 +17,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private SvgTests svgTests;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgTests _svgTests;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
@@ -27,8 +27,8 @@ namespace SharpVectors.Dom.Svg
         protected SvgTextContentElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgTests = new SvgTests(this);
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests                  = new SvgTests(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
         }
 
         #endregion
@@ -44,8 +44,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Text;
             }
         }
@@ -56,36 +55,37 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
         #endregion
 
         #region ISvgTests Members
-        
+
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion
+
+        #region ISvgTextContentElement Members
 
         public ISvgAnimatedLength TextLength
         {
@@ -99,11 +99,10 @@ namespace SharpVectors.Dom.Svg
 
         protected SvgTextElement OwnerTextElement
         {
-            get
-            {
+            get {
                 XmlNode node = this;
                 while (node != null)
-                {                     
+                {
                     SvgTextElement text = node as SvgTextElement;
                     if (text != null)
                     {
@@ -116,6 +115,8 @@ namespace SharpVectors.Dom.Svg
                 return null;
             }
         }
+
+        #endregion
 
         #region Update handling
 
@@ -211,18 +212,12 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Private Methods
-
-        #endregion
-
         #region Public Methods
 
         public long GetNumberOfChars()
         {
             return this.InnerText.Length;
         }
-
-        #region UnImplemented Methods
 
         public float GetComputedTextLength()
         {
@@ -263,8 +258,6 @@ namespace SharpVectors.Dom.Svg
         {
             throw new NotImplementedException();
         }
-
-        #endregion
 
         #endregion
     }

@@ -7,7 +7,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private SvgElementInstance[] items;
+        private SvgElementInstance[] _items;
         
         #endregion
 
@@ -18,14 +18,14 @@ namespace SharpVectors.Dom.Svg
             if (parent.CorrespondingElement == null)
             {
                 // Handle non SVGElement cases
-                items = new SvgElementInstance[0];
+                _items = new SvgElementInstance[0];
             }
             else if (parent.CorrespondingElement is ISvgUseElement)
             {
                 // Handle recursive SVGUseElement cases
-                items    = new SvgElementInstance[1];
+                _items    = new SvgElementInstance[1];
                 ISvgUseElement iUseElement = (ISvgUseElement)parent.CorrespondingElement;
-                items[0] = (SvgElementInstance)iUseElement.InstanceRoot;
+                _items[0] = (SvgElementInstance)iUseElement.InstanceRoot;
                 return;
             }
             else
@@ -33,11 +33,11 @@ namespace SharpVectors.Dom.Svg
                 XmlNodeList xmlChildNodes = parent.CorrespondingElement.ChildNodes;
                 for (int i = 0; i < xmlChildNodes.Count; i++)
                 {
-                    items[i] = new SvgElementInstance(xmlChildNodes[i], useElement, parent);
+                    _items[i] = new SvgElementInstance(xmlChildNodes[i], useElement, parent);
                     if (i > 0)
                     {
-                        items[i].SetPreviousSibling(items[i - 1]);
-                        items[i - 1].SetNextSibling(items[i]);
+                        _items[i].SetPreviousSibling(_items[i - 1]);
+                        _items[i - 1].SetNextSibling(_items[i]);
                     }
                 }
             }
@@ -51,7 +51,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return (ulong)items.GetLength(0);
+                return (ulong)_items.GetLength(0);
             }
         }
 
@@ -59,9 +59,9 @@ namespace SharpVectors.Dom.Svg
         {
             if (index < Length)
             {
-                return (ISvgElementInstance)items.GetValue((int)index);
+                return (ISvgElementInstance)_items.GetValue((int)index);
             }
-            else return null;
+            return null;
         }
 
         #endregion

@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Svg
@@ -12,29 +8,32 @@ namespace SharpVectors.Dom.Svg
     public sealed class SvgAnimatedEnumeration : ISvgAnimatedEnumeration
 	{
 		#region Private Fields
-		private ushort baseVal;
-		private ushort animVal;
-		#endregion
+
+		private ushort _baseVal;
+		private ushort _animVal;
+		
+        #endregion
 
 		#region Constructor
 
 		public SvgAnimatedEnumeration(ushort val)
 		{
-			baseVal = animVal = val;
+			_baseVal = _animVal = val;
 		}
 
 		#endregion
 
         #region ISvgAnimatedEnumeration Interface
+
 		public ushort BaseVal
 		{
 			get
 			{
-				return baseVal;
+				return _baseVal;
 			}
 			set
 			{
-				baseVal = value;
+				_baseVal = value;
 			}
 		}
 
@@ -42,9 +41,10 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return animVal;
+				return _animVal;
 			}
 		}
+
 		#endregion
 	}
 }

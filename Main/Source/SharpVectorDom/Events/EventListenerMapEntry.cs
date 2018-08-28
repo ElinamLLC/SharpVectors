@@ -1,7 +1,5 @@
 using System;
 
-using SharpVectors.Dom.Events;
-
 namespace SharpVectors.Dom.Events
 {
     /// <summary>
@@ -9,11 +7,11 @@ namespace SharpVectors.Dom.Events
     /// </summary>
     public class EventListenerMapEntry
     {
-        public bool Locked;
-        public string NamespaceUri;
-        public string Type;
-        public object Group;
-        public EventListener Listener;
+        private bool _locked;
+        private string _namespaceUri;
+        private string _type;
+        private object _group;
+        private EventListener _listener;
 
         public EventListenerMapEntry()
         {   
@@ -22,11 +20,61 @@ namespace SharpVectors.Dom.Events
         public EventListenerMapEntry(string namespaceUri, string type, object group,
             EventListener listener, bool locked)
         {
-            NamespaceUri = namespaceUri;
-            Type = type;
-            Group = group;
-            Listener = listener;
-            Locked = locked;
+            _namespaceUri = namespaceUri;
+            _type         = type;
+            _group        = group;
+            _listener     = listener;
+            _locked       = locked;
+        }
+
+        public bool Locked
+        {
+            get {
+                return _locked;
+            }
+            set {
+                _locked = value;
+            }
+        }
+
+        public string NamespaceUri
+        {
+            get {
+                return _namespaceUri;
+            }
+            set {
+                _namespaceUri = value;
+            }
+        }
+
+        public string Type
+        {
+            get {
+                return _type;
+            }
+            set {
+                _type = value;
+            }
+        }
+
+        public object Group
+        {
+            get {
+                return _group;
+            }
+            set {
+                _group = value;
+            }
+        }
+
+        public EventListener Listener
+        {
+            get {
+                return _listener;
+            }
+            set {
+                _listener = value;
+            }
         }
     }
 }

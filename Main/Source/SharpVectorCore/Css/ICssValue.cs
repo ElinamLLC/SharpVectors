@@ -1,10 +1,8 @@
-using System;
-
 namespace SharpVectors.Dom.Css
 {
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>100</completed>
-	public interface ICssValue
+    /// <summary>
+    /// </summary>
+    public interface ICssValue
 	{
 		/// <summary>
 		/// A string representation of the current value.
@@ -21,7 +19,7 @@ namespace SharpVectors.Dom.Css
 		/// <summary>
 		/// A code defining the type of the value as defined above
 		/// </summary>
-		SharpVectors.Dom.Css.CssValueType CssValueType
+		CssValueType CssValueType
 		{
 			get;
 		}

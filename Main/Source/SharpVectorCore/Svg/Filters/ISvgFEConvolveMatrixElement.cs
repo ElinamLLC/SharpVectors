@@ -1,14 +1,8 @@
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
 	/// </summary>
-	/// <developer>don@donxml.com</developer>
-	/// <completed>100</completed>
-	public interface ISvgFEConvolveMatrixElement:
-		ISvgElement,
-		ISvgFilterPrimitiveStandardAttributes 
+	public interface ISvgFEConvolveMatrixElement : ISvgElement, ISvgFilterPrimitiveStandardAttributes 
 	{
 		ISvgAnimatedInteger OrderX{get;}
 		ISvgAnimatedInteger OrderY{get;}

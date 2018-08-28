@@ -8,37 +8,42 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public sealed class SvgPathSegCurvetoQuadraticSmoothAbs : SvgPathSegCurvetoQuadratic, ISvgPathSegCurvetoQuadraticSmoothAbs
     {
-        #region constructors
+        #region Private Fields
+
+        private double _x;
+        private double _y;
+
+        #endregion
+
+        #region Constructors
 
         public SvgPathSegCurvetoQuadraticSmoothAbs(double x, double y)
             : base(SvgPathSegType.CurveToQuadraticSmoothAbs)
         {
-            this.x = x;
-            this.y = y;
+            _x = x;
+            _y = y;
         }
 
         #endregion
 
         #region SvgPathSegCurvetoQuadraticSmoothAbs Members
 
-        private double x;
         /// <summary>
         /// The absolute X coordinate for the end point of this path segment. 
         /// </summary>
         public double X
         {
-            get { return x; }
-            set { x = value; }
+            get { return _x; }
+            set { _x = value; }
         }
 
-        private double y;
         /// <summary>
         /// The absolute Y coordinate for the end point of this path segment. 
         /// </summary>
         public double Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return _y; }
+            set { _y = value; }
         }
 
         #endregion
@@ -47,35 +52,29 @@ namespace SharpVectors.Dom.Svg
 
         public override SvgPointF QuadraticX1Y1
         {
-            get
-            {
+            get {
                 SvgPathSeg prevSeg = PreviousSeg;
                 if (prevSeg == null || !(prevSeg is SvgPathSegCurvetoQuadratic))
                 {
                     return prevSeg.AbsXY;
                 }
-                else
-                {
-                    SvgPointF prevXY = prevSeg.AbsXY;
-                    SvgPointF prevX1Y1 = ((SvgPathSegCurvetoQuadratic)prevSeg).QuadraticX1Y1;
+                SvgPointF prevXY = prevSeg.AbsXY;
+                SvgPointF prevX1Y1 = ((SvgPathSegCurvetoQuadratic)prevSeg).QuadraticX1Y1;
 
-                    return new SvgPointF(2 * prevXY.X - prevX1Y1.X, 2 * prevXY.Y - prevX1Y1.Y);
-                }
+                return new SvgPointF(2 * prevXY.X - prevX1Y1.X, 2 * prevXY.Y - prevX1Y1.Y);
             }
         }
 
         public override SvgPointF AbsXY
         {
-            get
-            {
+            get {
                 return new SvgPointF(X, Y);
             }
         }
 
         public override SvgPointF CubicX1Y1
         {
-            get
-            {
+            get {
                 SvgPointF prevPoint = PreviousSeg.AbsXY;
                 SvgPointF x1y1 = QuadraticX1Y1;
 
@@ -88,8 +87,7 @@ namespace SharpVectors.Dom.Svg
 
         public override SvgPointF CubicX2Y2
         {
-            get
-            {
+            get {
                 SvgPointF x1y1 = QuadraticX1Y1;
                 double x2 = x1y1.X + (X - x1y1.X) / 3;
                 double y2 = x1y1.Y + (Y - x1y1.Y) / 3;
@@ -100,8 +98,7 @@ namespace SharpVectors.Dom.Svg
 
         public override string PathText
         {
-            get
-            {
+            get {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(PathSegTypeAsLetter);
                 sb.Append(X);

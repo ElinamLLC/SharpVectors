@@ -7,9 +7,9 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private ISvgPointList points;
-        private SvgTests svgTests;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private ISvgPointList _points;
+        private SvgTests _svgTests;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
@@ -18,8 +18,8 @@ namespace SharpVectors.Dom.Svg
         protected SvgPolyElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            svgTests = new SvgTests(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests                  = new SvgTests(this);
         }
 
         #endregion
@@ -28,21 +28,19 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgPointList AnimatedPoints
         {
-            get
-            {
+            get {
                 return Points;
             }
         }
 
         public ISvgPointList Points
         {
-            get
-            {
-                if (points == null)
+            get {
+                if (_points == null)
                 {
-                    points = new SvgPointList(GetAttribute("points"));
+                    _points = new SvgPointList(GetAttribute("points"));
                 }
-                return points;
+                return _points;
             }
         }
 
@@ -51,7 +49,7 @@ namespace SharpVectors.Dom.Svg
         #region Public Methods
 
         public void Invalidate()
-        {   
+        {
         }
 
         public override void HandleAttributeChange(XmlAttribute attribute)
@@ -61,7 +59,7 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "points":
-                        points = null;
+                        _points = null;
                         Invalidate();
                         return;
                     case "marker-start":
@@ -111,8 +109,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Shape;
             }
         }
@@ -123,9 +120,8 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -135,8 +131,7 @@ namespace SharpVectors.Dom.Svg
 
         public virtual SvgPointF[] MarkerPositions
         {
-            get
-            {
+            get {
                 // moved this code from SvgPointList.  This should eventually migrate into
                 // the GDI+ renderer
                 SvgPointF[] points = new SvgPointF[Points.NumberOfItems];
@@ -188,22 +183,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion

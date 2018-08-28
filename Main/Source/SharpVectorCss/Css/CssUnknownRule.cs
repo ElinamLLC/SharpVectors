@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -50,8 +47,10 @@ namespace SharpVectors.Dom.Css
 		#endregion
 
 		#region Implementation of ICssRule
+
 		/// <summary>
-		/// The type of the rule. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+		/// The type of the rule. The expectation is that binding-specific casting methods can be used to cast 
+        /// down from an instance of the CSSRule interface to the specific derived interface implied by the type.
 		/// </summary>
 		public override CssRuleType Type
 		{
@@ -60,6 +59,7 @@ namespace SharpVectors.Dom.Css
 				return CssRuleType.UnknownRule;
 			}
 		}
+
 		#endregion
 	}
 }

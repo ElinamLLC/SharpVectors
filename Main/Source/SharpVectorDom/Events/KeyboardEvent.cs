@@ -11,13 +11,13 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Private Fields
 		
-		private string keyIdentifier;
-		private KeyLocationCode keyLocation;
-		private bool ctrlKey;
-		private bool shiftKey;
-		private bool altKey;
-		private bool metaKey;
-		private bool altGraphKey;
+		private bool _ctrlKey;
+		private bool _shiftKey;
+		private bool _altKey;
+		private bool _metaKey;
+		private bool _altGraphKey;
+		private string _keyIdentifier;
+		private KeyLocationCode _keyLocation;
 		
 		#endregion
 		
@@ -27,56 +27,31 @@ namespace SharpVectors.Dom.Events
 		{
 		}
 		
-		public KeyboardEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string keyIdentifier,
-			KeyLocationCode keyLocation,
-			bool ctrlKey,
-			bool shiftKey,
-			bool altKey,
-			bool metaKey,
-			bool altGraphKey)
+		public KeyboardEvent(string eventType, bool bubbles, bool cancelable, IAbstractView view,
+			string keyIdentifier, KeyLocationCode keyLocation, bool ctrlKey, bool shiftKey,
+			bool altKey, bool metaKey, bool altGraphKey)
 		{
-			InitKeyboardEvent(
-				eventType, bubbles, cancelable, view,
-				keyIdentifier, keyLocation,
+			InitKeyboardEvent(eventType, bubbles, cancelable, view, keyIdentifier, keyLocation,
 				ctrlKey, shiftKey, altKey, metaKey, altGraphKey);
 		}
 		
-		public KeyboardEvent(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string keyIdentifier,
-			KeyLocationCode keyLocation,
-			bool ctrlKey,
-			bool shiftKey,
-			bool altKey,
-			bool metaKey,
-			bool altGraphKey)
+		public KeyboardEvent(string namespaceUri, string eventType, bool bubbles, bool cancelable,
+			IAbstractView view, string keyIdentifier, KeyLocationCode keyLocation, bool ctrlKey,
+			bool shiftKey, bool altKey, bool metaKey, bool altGraphKey)
 		{
-			InitKeyboardEventNs(
-				namespaceUri, eventType, bubbles, cancelable, view,
-				keyIdentifier, keyLocation,
-				ctrlKey, shiftKey, altKey, metaKey, altGraphKey);
+			InitKeyboardEventNs(namespaceUri, eventType, bubbles, cancelable, view,
+				keyIdentifier, keyLocation, ctrlKey, shiftKey, altKey, metaKey, altGraphKey);
 		}
 		
 		#endregion
 		
 		#region IKeyboardEvent interface
 		
-		#region Public Properties
-		
 		public string KeyIdentifier
 		{
 			get
 			{
-				return keyIdentifier;
+				return _keyIdentifier;
 			}
 		}
 		
@@ -84,7 +59,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return keyLocation;
+				return _keyLocation;
 			}
 		}
 		
@@ -92,7 +67,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return ctrlKey;
+				return _ctrlKey;
 			}
 		}
 		
@@ -100,7 +75,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return shiftKey;
+				return _shiftKey;
 			}
 		}
 		
@@ -108,7 +83,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return altKey;
+				return _altKey;
 			}
 		}
 		
@@ -116,7 +91,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return metaKey;
+				return _metaKey;
 			}
 		}
 		
@@ -124,64 +99,39 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return altGraphKey;
+				return _altGraphKey;
 			}
 		}
 		
-		#endregion
-		
-		#region Public Methods
-		
-		public void InitKeyboardEvent(
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string keyIdentifier,
-			KeyLocationCode keyLocation,
-			bool ctrlKey,
-			bool shiftKey,
-			bool altKey,
-			bool metaKey,
-			bool altGraphKey)
+		public void InitKeyboardEvent(string eventType, bool bubbles, bool cancelable, 
+            IAbstractView view, string keyIdentifier, KeyLocationCode keyLocation, 
+            bool ctrlKey, bool shiftKey, bool altKey, bool metaKey, bool altGraphKey)
 		{
 			InitUiEvent(eventType, bubbles, cancelable, view, 0);
 			
-			this.keyIdentifier = keyIdentifier;
-			this.keyLocation = keyLocation;
-			this.ctrlKey = ctrlKey;
-			this.shiftKey = shiftKey;
-			this.altKey = altKey;
-			this.metaKey = metaKey;
-			this.altGraphKey = altGraphKey;
+			_keyIdentifier = keyIdentifier;
+			_keyLocation   = keyLocation;
+			_ctrlKey       = ctrlKey;
+			_shiftKey      = shiftKey;
+			_altKey        = altKey;
+			_metaKey       = metaKey;
+			_altGraphKey   = altGraphKey;
 		}
 		
-		public void InitKeyboardEventNs(
-			string namespaceUri,
-			string eventType,
-			bool bubbles,
-			bool cancelable,
-			IAbstractView view,
-			string keyIdentifier,
-			KeyLocationCode keyLocation,
-			bool ctrlKey,
-			bool shiftKey,
-			bool altKey,
-			bool metaKey,
-			bool altGraphKey)
+		public void InitKeyboardEventNs(string namespaceUri, string eventType, bool bubbles,
+			bool cancelable, IAbstractView view, string keyIdentifier, KeyLocationCode keyLocation,
+			bool ctrlKey, bool shiftKey, bool altKey, bool metaKey, bool altGraphKey)
 		{
 			InitUiEventNs(namespaceUri, eventType, bubbles, cancelable, view, 0);
 			
-			this.keyIdentifier = keyIdentifier;
-			this.keyLocation = keyLocation;
-			this.ctrlKey = ctrlKey;
-			this.shiftKey = shiftKey;
-			this.altKey = altKey;
-			this.metaKey = metaKey;
-			this.altGraphKey = altGraphKey;
+			_keyIdentifier = keyIdentifier;
+			_keyLocation   = keyLocation;
+			_ctrlKey       = ctrlKey;
+			_shiftKey      = shiftKey;
+			_altKey        = altKey;
+			_metaKey       = metaKey;
+			_altGraphKey   = altGraphKey;
 		}
-		
-		#endregion
 		
 		#endregion
 	}

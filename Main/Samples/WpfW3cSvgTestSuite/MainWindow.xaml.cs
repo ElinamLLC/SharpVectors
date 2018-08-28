@@ -16,19 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using SharpVectors.Net;
-using SharpVectors.Xml;
-using SharpVectors.Dom;
-using SharpVectors.Dom.Css;
-using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Events;
-
 using SharpVectors.Converters;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Renderers.Utils;
-
-using SharpVectors.Runtime;
 
 using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
 
@@ -41,7 +30,7 @@ namespace WpfW3cSvgTestSuite
     {
         #region Private Fields
 
-        private const int LeftPane         = 320;
+        private const int LeftPane         = 325;
         private const int LeftBottomPane   = 220;
 
         private const string TestSuiteDir = "";
@@ -186,11 +175,6 @@ namespace WpfW3cSvgTestSuite
             _drawingPage = frameDrawing.Content    as DrawingPage;
             _browserPage = frameBrowser.Content    as BrowserPage;
             _aboutPage   = frameAbout.Content      as AboutPage;
-
-            //if (_drawingPage != null)
-            //{
-            //    _drawingPage.XamlDrawingDir = _drawingDir;
-            //}
 
             if (_fileReader != null)
             {
@@ -346,10 +330,6 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            //if (!File.Exists(IoPath.Combine(selectePath, "index.html")))
-            //{
-            //    return;
-            //}
             if (!Directory.Exists(IoPath.Combine(selectePath, "svg")))
             {
                 return;
@@ -358,10 +338,6 @@ namespace WpfW3cSvgTestSuite
             {
                 return;
             }
-            //if (!Directory.Exists(IoPath.Combine(selectePath, "svggen")))
-            //{
-            //    return;
-            //}
 
             this.InitializePath(selectePath);
         }
@@ -372,10 +348,10 @@ namespace WpfW3cSvgTestSuite
             if (!isEnabled)
             {
                 stateComboBox.SelectedIndex = -1;
-                testComment.Text            = string.Empty;
+                testComment.Text    = string.Empty;
 
-                testFilePath.Text           = string.Empty;
-                testDescrition.Text         = string.Empty;
+                testFilePath.Text   = string.Empty;
+                testDescrition.Text = string.Empty;
 
                 if (_svgPage != null)
                 {
@@ -388,6 +364,14 @@ namespace WpfW3cSvgTestSuite
                 if (_drawingPage != null)
                 {
                     _drawingPage.UnloadDocument();
+                }
+                if (_browserPage != null)
+                {
+                    _browserPage.UnloadDocument();
+                }
+                if (_aboutPage != null)
+                {
+                    _aboutPage.UnloadDocument();
                 }
             }
         }

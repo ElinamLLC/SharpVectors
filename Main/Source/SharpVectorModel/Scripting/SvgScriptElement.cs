@@ -1,6 +1,4 @@
 using System;
-using System.Text;
-using System.Xml;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -9,39 +7,40 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public sealed class SvgScriptElement : SvgElement, ISvgScriptElement
     {
-        private SvgUriReference svgURIReference;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        #region Private Fields
+
+        private SvgUriReference _uriReference;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
+
+        #endregion
 
         #region Constructors
 
-        public SvgScriptElement(string prefix, string localname, string ns, SvgDocument doc) 
+        public SvgScriptElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgURIReference = new SvgUriReference(this);
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _uriReference              = new SvgUriReference(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
         }
 
         #endregion
 
+        #region ISvgURIReference Members
+
         public string Type
         {
-            get 
-            { 
-                return GetAttribute("type"); 
+            get {
+                return GetAttribute("type");
             }
-            set 
-            { 
-                SetAttribute("type", value); 
+            set {
+                SetAttribute("type", value);
             }
         }
 
-        #region ISvgURIReference Members
-
         public ISvgAnimatedString Href
         {
-            get
-            {
-                return svgURIReference.Href;
+            get {
+                return _uriReference.Href;
             }
         }
 
@@ -51,9 +50,8 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 

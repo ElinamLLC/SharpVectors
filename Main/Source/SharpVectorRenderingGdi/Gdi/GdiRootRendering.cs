@@ -1,8 +1,5 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Svg;
 

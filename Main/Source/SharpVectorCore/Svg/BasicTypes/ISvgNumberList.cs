@@ -3,9 +3,6 @@ namespace SharpVectors.Dom.Svg
 	/// <summary>
 	/// This interface defines a list of SvgNumber objects. 
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <developer>kevin@kevlindev.com</developer>
-	/// <completed>100</completed>
 	public interface ISvgNumberList
 	{
 		uint NumberOfItems{get;}

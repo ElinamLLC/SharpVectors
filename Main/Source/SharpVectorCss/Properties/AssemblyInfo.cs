@@ -1,6 +1,5 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -9,12 +8,16 @@ using System.Runtime.CompilerServices;
 //
 [assembly: AssemblyTitle("SVG 1.1 CSS Implementation")]
 [assembly: AssemblyDescription("CSS 2.1 DOM and CSS 3 selectors")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SharpVectorGraphics")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]		
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+[assembly: AssemblyConfiguration("Release")]
+#endif
+[assembly: AssemblyCompany("Elinam LLC, Japan")]
+[assembly: AssemblyProduct("SharpVectors.Css")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2018 Elinam LLC")]
+[assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
+[assembly: AssemblyCulture("")]
 
 
 //
@@ -27,10 +30,9 @@ using System.Runtime.CompilerServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyInformationalVersion("1.1.0.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

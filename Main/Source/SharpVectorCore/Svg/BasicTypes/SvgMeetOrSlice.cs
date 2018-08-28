@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	// Meet-or-slice Types

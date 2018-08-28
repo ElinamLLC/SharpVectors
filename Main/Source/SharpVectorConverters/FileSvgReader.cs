@@ -511,7 +511,7 @@ namespace SharpVectors.Converters
         {
             if (imageFileDir == null)
             {
-                return this.SaveImageFile(fileName, String.Empty, encoderType);
+                return this.SaveImageFile(fileName, string.Empty, encoderType);
             }
             else
             {   
@@ -536,7 +536,7 @@ namespace SharpVectors.Converters
             ImageEncoderType encoderType)
         {
             return this.SaveImageFile(fileName, 
-                imageFileName == null ? String.Empty : imageFileName.FullName,
+                imageFileName == null ? string.Empty : imageFileName.FullName,
                 encoderType);
         }
 

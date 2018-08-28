@@ -22,7 +22,7 @@ namespace SharpVectors.Renderers.Texts
         {
             _vertOrientation = -1;
             _horzOrientation = -1;
-            _text            = String.Empty;
+            _text            = string.Empty;
             _isLatinGlyph    = true;
         }
 

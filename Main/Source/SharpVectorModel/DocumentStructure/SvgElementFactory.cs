@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Xml;
-using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Svg
 {
     public static class SvgElementFactory
     {                    
-        public static XmlElement Create(string prefix, string localName, 
-            string ns, SvgDocument doc)
+        public static XmlElement Create(string prefix, string localName, string ns, SvgDocument doc)
         {
             // This factory assumes the requested element is defined in the 
             // http://www.w3.org/2000/svg namespace.

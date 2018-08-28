@@ -28,13 +28,13 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private bool  largeArcFlag;
-        private bool  sweepFlag;
-        private double x;
-        private double y;
-        private double r1;
-        private double r2;
-        private double angle;
+        private bool _largeArcFlag;
+        private bool _sweepFlag;
+        private double _x;
+        private double _y;
+        private double _r1;
+        private double _r2;
+        private double _angle;
 
         #endregion
 
@@ -44,13 +44,13 @@ namespace SharpVectors.Dom.Svg
             double angle, bool largeArcFlag, bool sweepFlag)
             : base(type)
         {
-            this.x            = x;
-            this.y            = y;
-            this.r1           = r1;
-            this.r2           = r2;
-            this.angle        = angle;
-            this.largeArcFlag = largeArcFlag;
-            this.sweepFlag    = sweepFlag;
+            _x            = x;
+            _y            = y;
+            _r1           = r1;
+            _r2           = r2;
+            _angle        = angle;
+            _largeArcFlag = largeArcFlag;
+            _sweepFlag    = sweepFlag;
         }
 
         #endregion
@@ -59,52 +59,51 @@ namespace SharpVectors.Dom.Svg
 
         public double X
         {
-            get { return x; }
-            set { x = value; }
+            get { return _x; }
+            set { _x = value; }
         }
 
         public double Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return _y; }
+            set { _y = value; }
         }
 
         public double R1
         {
-            get { return r1; }
-            set { r1 = value; }
+            get { return _r1; }
+            set { _r1 = value; }
         }
 
         public double R2
         {
-            get { return r2; }
-            set { r2 = value; }
+            get { return _r2; }
+            set { _r2 = value; }
         }
 
         public double Angle
         {
-            get { return angle; }
-            set { angle = value; }
+            get { return _angle; }
+            set { _angle = value; }
         }
 
         public bool LargeArcFlag
         {
-            get { return largeArcFlag; }
-            set { largeArcFlag = value; }
+            get { return _largeArcFlag; }
+            set { _largeArcFlag = value; }
         }
 
         public bool SweepFlag
         {
-            get { return sweepFlag; }
-            set { sweepFlag = value; }
+            get { return _sweepFlag; }
+            set { _sweepFlag = value; }
         }
 
         public abstract override SvgPointF AbsXY { get; }
 
         public override double StartAngle
         {
-            get
-            {
+            get {
                 double a = GetAngle(false);
                 a += 270;
                 a += 360;
@@ -115,8 +114,7 @@ namespace SharpVectors.Dom.Svg
 
         public override double EndAngle
         {
-            get
-            {
+            get {
                 double a = GetAngle(true);
                 a += 90;
                 a += 360;
@@ -128,8 +126,7 @@ namespace SharpVectors.Dom.Svg
 
         public override string PathText
         {
-            get
-            {
+            get {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(PathSegTypeAsLetter);
                 sb.Append(R1);
@@ -195,8 +192,8 @@ namespace SharpVectors.Dom.Svg
             //
             double x1 = (cosAngle * dx2 + sinAngle * dy2);
             double y1 = (-sinAngle * dx2 + cosAngle * dy2);
-            // Ensure radii are large enough
 
+            // Ensure radii are large enough
             double rx = Math.Abs(R1);
             double ry = Math.Abs(R2);
 
@@ -255,11 +252,11 @@ namespace SharpVectors.Dom.Svg
             double angleExtent = sign * Math.Acos(p / n);
             angleExtent = angleExtent * 180 / Math.PI;
 
-            if (!sweepFlag && angleExtent > 0)
+            if (!_sweepFlag && angleExtent > 0)
             {
                 angleExtent -= 360f;
             }
-            else if (sweepFlag && angleExtent < 0)
+            else if (_sweepFlag && angleExtent < 0)
             {
                 angleExtent += 360f;
             }

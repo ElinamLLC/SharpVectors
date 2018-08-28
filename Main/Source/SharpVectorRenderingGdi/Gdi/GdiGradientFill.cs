@@ -408,18 +408,18 @@ namespace SharpVectors.Renderers.Gdi
             //			SvgTransformList svgTList = (SvgTransformList)transElm.transform.AnimVal;
             //			brush.Transform = svgTList.matrix.matrix;
 
-            if (res.GetPropertyValue("color-interpolation") == "linearRGB")
-            {
-                //GdipSetPathGradientGammaCorrection(brush, true);
-            }
-            else
-            {
-                //GdipSetPathGradientGammaCorrection(brush, false);
-            }
+            //if (res.GetPropertyValue("color-interpolation") == "linearRGB")
+            //{
+            //    //GdipSetPathGradientGammaCorrection(brush, true);
+            //}
+            //else
+            //{
+            //    //GdipSetPathGradientGammaCorrection(brush, false);
+            //}
 
-            /*
-                   * How to do brush.GammaCorrection = true on a PathGradientBrush? / nikgus
-                   * */
+            ///*
+            //       * How to do brush.GammaCorrection = true on a PathGradientBrush? / nikgus
+            //       * */
 
             return brush;
         }

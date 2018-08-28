@@ -72,8 +72,8 @@ namespace SharpVectors.Dom.Events
 		
 		#region Private Fields
 		
-		private string namespaceUri;
-		private string eventType;
+		private string _namespaceUri;
+		private string _eventType;
 		
 		#endregion
 		
@@ -81,8 +81,8 @@ namespace SharpVectors.Dom.Events
 		
 		private EventType(string namespaceUri, string eventType)
 		{
-			this.namespaceUri = namespaceUri;
-			this.eventType    = eventType;
+			_namespaceUri = namespaceUri;
+			_eventType    = eventType;
 		}
 		
 		#endregion
@@ -93,7 +93,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return eventType;
+				return _eventType;
 			}
 		}
 		
@@ -101,7 +101,7 @@ namespace SharpVectors.Dom.Events
 		{
 			get
 			{
-				return namespaceUri;
+				return _namespaceUri;
 			}
 		}
 		

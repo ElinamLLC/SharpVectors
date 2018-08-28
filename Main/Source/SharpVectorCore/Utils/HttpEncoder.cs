@@ -254,7 +254,7 @@ namespace SharpVectors
 				return null;
 
 			if (s.Length == 0)
-				return String.Empty;
+				return string.Empty;
 			
 			bool needEncode = false;
 			for (int i = 0; i < s.Length; i++) {
@@ -322,13 +322,13 @@ namespace SharpVectors
 		{
 #if NET_4_0
 			if (string.IsNullOrWhiteSpace (s))
-				return String.Empty;
+				return string.Empty;
 #else
 			if (s == null) 
 				return null;
 			
 			if (s.Length == 0)
-				return String.Empty;
+				return string.Empty;
 #endif			
 			bool needEncode = false;
 			for (int i = 0; i < s.Length; i++) {
@@ -378,7 +378,7 @@ namespace SharpVectors
 				return null;
 
 			if (s.Length == 0)
-				return String.Empty;
+				return string.Empty;
 			
 			if (s.IndexOf ('&') == -1)
 				return s;

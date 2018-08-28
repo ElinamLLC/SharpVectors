@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Printing;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 
@@ -20,9 +14,14 @@ namespace WpfW3cSvgTestSuite
     /// </summary>
     public partial class SvgTestResultsWindow : Window
     {
-        private IList<string> _categoryLabels;
+        #region Private Fields
 
+        private IList<string> _categoryLabels;
         private IList<SvgTestResult> _testResults;
+
+        #endregion
+
+        #region Constructors and Destructor
 
         public SvgTestResultsWindow()
         {
@@ -30,6 +29,10 @@ namespace WpfW3cSvgTestSuite
 
             this.Loaded += OnWindowLoaded;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public IList<SvgTestResult> Results
         {
@@ -40,6 +43,10 @@ namespace WpfW3cSvgTestSuite
                 _testResults = value;
             }
         }
+
+        #endregion
+
+        #region Protected Methods
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -64,6 +71,10 @@ namespace WpfW3cSvgTestSuite
             HideMinimizeAndMaximizeButtons(this);
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             var pageSize = new PageMediaSize(PageMediaSizeName.ISOA4);
@@ -80,12 +91,20 @@ namespace WpfW3cSvgTestSuite
         {
             if (_testResults == null || _testResults.Count == 0)
             {
+                testDetailsDoc.Blocks.Clear();
+
                 return;
             }
 
-            _categoryLabels = new List<string>();
+            Section noteSection = new Section();
+            noteSection.Blocks.Add(CreateAlert("Note: Test Suite",
+                "These tests are based on SVG 1.1 First Edition Test Suite: 13 December 2006 (Full)."));
 
-            testDetailsDoc.Blocks.Clear();
+            this.CreateHorzLine(noteSection, false);
+
+            testDetailsDoc.Blocks.Add(noteSection);
+
+            _categoryLabels = new List<string>();
 
             int resultCount = _testResults.Count;
             for (int i = 0; i < resultCount; i++)
@@ -110,10 +129,11 @@ namespace WpfW3cSvgTestSuite
                 }
 
                 Section titleSection = new Section();
+                string headingText = string.Format("{0}. Test Results: SharpVectors Version {1}", (i + 1), testResult.Version);
                 Paragraph titlePara = new Paragraph();
                 titlePara.FontWeight = FontWeights.Bold;
                 titlePara.FontSize = 18;
-                titlePara.Inlines.Add(new Run("Test Results: SharpVectors Version = " + testResult.Version));
+                titlePara.Inlines.Add(new Run(headingText));
                 titleSection.Blocks.Add(titlePara);
 
                 Paragraph datePara = new Paragraph();
@@ -157,13 +177,14 @@ namespace WpfW3cSvgTestSuite
 
                 summarySection.Blocks.Add(summaryTable);
 
+                summarySection.Blocks.Add(CreateAlert("Note: Percentage",
+                    "The percentage calculations do not include partial succcess cases."));
                 this.CreateHorzLine(summarySection, true);
 
                 testDetailsDoc.Blocks.Add(summarySection);
             }
 
             Section endSection = new Section();
-            endSection.Blocks.Add(CreateAlert("Note: Test Suite", "These tests are based on SVG 1.1 First Edition Test Suite: 13 December 2006"));
             Paragraph endPara = new Paragraph();
             endPara.Inlines.Add(new LineBreak());
             endSection.Blocks.Add(endPara);
@@ -178,7 +199,8 @@ namespace WpfW3cSvgTestSuite
 
             int factor = thicker ? 2 : 1;
 
-            var horzLine = new Line {
+            var horzLine = new Line
+            {
                 X1 = 0,
                 Y1 = 0,
                 X2 = 1000,
@@ -201,18 +223,18 @@ namespace WpfW3cSvgTestSuite
             resultTable.Margin = new Thickness(16, 0, 16, 16);
 
             TableColumn categoryCol = new TableColumn();
-            TableColumn failureCol  = new TableColumn();
-            TableColumn successCol  = new TableColumn();
-            TableColumn partialCol  = new TableColumn();
-            TableColumn unknownCol  = new TableColumn();
-            TableColumn totalCol    = new TableColumn();
+            TableColumn failureCol = new TableColumn();
+            TableColumn successCol = new TableColumn();
+            TableColumn partialCol = new TableColumn();
+            TableColumn unknownCol = new TableColumn();
+            TableColumn totalCol = new TableColumn();
 
             categoryCol.Width = new GridLength(2, GridUnitType.Star);
-            failureCol.Width  = new GridLength(1, GridUnitType.Star);
-            successCol.Width  = new GridLength(1, GridUnitType.Star);
-            partialCol.Width  = new GridLength(1, GridUnitType.Star);
-            unknownCol.Width  = new GridLength(1, GridUnitType.Star);
-            totalCol.Width    = new GridLength(1, GridUnitType.Star);
+            failureCol.Width = new GridLength(1, GridUnitType.Star);
+            successCol.Width = new GridLength(1, GridUnitType.Star);
+            partialCol.Width = new GridLength(1, GridUnitType.Star);
+            unknownCol.Width = new GridLength(1, GridUnitType.Star);
+            totalCol.Width = new GridLength(1, GridUnitType.Star);
 
             resultTable.Columns.Add(categoryCol);
             resultTable.Columns.Add(failureCol);
@@ -266,25 +288,25 @@ namespace WpfW3cSvgTestSuite
         {
             int resultCount = _testResults.Count;
 
-            Table resultTable = new Table();
-            resultTable.CellSpacing = 0;
-            resultTable.BorderBrush = Brushes.Gray;
-            resultTable.BorderThickness = new Thickness(1);
-            resultTable.Margin = new Thickness(16, 0, 16, 16);
+            Table summaryTable = new Table();
+            summaryTable.CellSpacing = 0;
+            summaryTable.BorderBrush = Brushes.Gray;
+            summaryTable.BorderThickness = new Thickness(1);
+            summaryTable.Margin = new Thickness(16, 0, 16, 16);
 
             TableColumn categoryCol = new TableColumn();
             categoryCol.Width = new GridLength(2, GridUnitType.Star);
-            resultTable.Columns.Add(categoryCol);
+            summaryTable.Columns.Add(categoryCol);
 
             TableColumn totalCol = new TableColumn();
             totalCol.Width = new GridLength(1, GridUnitType.Star);
-            resultTable.Columns.Add(totalCol);
+            summaryTable.Columns.Add(totalCol);
 
             for (int i = 0; i < resultCount; i++)
             {
-                TableColumn successCol  = new TableColumn();
-                successCol.Width  = new GridLength(1, GridUnitType.Star);
-                resultTable.Columns.Add(successCol);
+                TableColumn successCol = new TableColumn();
+                successCol.Width = new GridLength(1, GridUnitType.Star);
+                summaryTable.Columns.Add(successCol);
             }
 
             TableRowGroup headerGroup = new TableRowGroup();
@@ -297,11 +319,14 @@ namespace WpfW3cSvgTestSuite
             for (int i = 0; i < resultCount; i++)
             {
                 SvgTestResult testResult = _testResults[i];
-                headerRow.Cells.Add(CreateHeaderCell(testResult.Version + " (%)", (i == (resultCount - 1)), false));
+                headerRow.Cells.Add(CreateHeaderCell(testResult.Version + " (%)",
+                    (i == (resultCount - 1)), false));
             }
 
             headerGroup.Rows.Add(headerRow);
-            resultTable.RowGroups.Add(headerGroup);
+            summaryTable.RowGroups.Add(headerGroup);
+
+            double[] percentValues = new double[resultCount];
 
             for (int k = 0; k < _categoryLabels.Count; k++)
             {
@@ -333,16 +358,39 @@ namespace WpfW3cSvgTestSuite
 
                     bool lastRight = (i == (resultCount - 1));
 
-                    float percentage = testCategory.Successes * 100.0f / total;
+                    double percentValue = Math.Round(testCategory.Successes * 100.0d / total, 2);
 
-                    resultRow.Cells.Add(CreateCell(percentage.ToString("00.00"), lastRight, lastBottom, false, false));
+                    percentValues[i] = percentValue;
+
+                    resultRow.Cells.Add(CreateCell(percentValue.ToString("00.00"),
+                        lastRight, lastBottom, false, false));
+                }
+
+                // TODO: Improve this, currently only good for two results...
+                if (resultCount > 1 && IsBetterResult(percentValues, resultCount - 1))
+                {
+                    int cellCount = resultRow.Cells.Count;
+
+                    resultRow.Cells[cellCount - 1].Background = Brushes.LightSkyBlue;
                 }
 
                 resultGroup.Rows.Add(resultRow);
-                resultTable.RowGroups.Add(resultGroup);
+                summaryTable.RowGroups.Add(resultGroup);
             }
 
-            return resultTable;
+            return summaryTable;
+        }
+
+        private static bool IsBetterResult(double[] percentValue, int index)
+        {
+            if (index <= 0 || percentValue == null || percentValue.Length == 0 || index >= percentValue.Length)
+            {
+                return false;
+            }
+            double percentPrev = percentValue[index - 1];
+            double percentNext = percentValue[index];
+
+            return (percentNext - percentPrev) > double.Epsilon;
         }
 
         private Table CreateAlert(string title, string message)
@@ -400,7 +448,7 @@ namespace WpfW3cSvgTestSuite
             return tableCell;
         }
 
-        private TableCell CreateCell(string text, int colSpan, int rowSpan, 
+        private TableCell CreateCell(string text, int colSpan, int rowSpan,
             bool lastRight, bool lastBottom, bool filled, bool boldText, int fontSize = 0)
         {
             TableCell tableCell = new TableCell();
@@ -409,7 +457,7 @@ namespace WpfW3cSvgTestSuite
                 tableCell.Background = Brushes.DimGray;
             }
             tableCell.BorderBrush = Brushes.DimGray;
-            tableCell.BorderThickness = new Thickness(0, 0, lastRight? 0 : 1, lastBottom? 0 : 1);
+            tableCell.BorderThickness = new Thickness(0, 0, lastRight ? 0 : 1, lastBottom ? 0 : 1);
 
             if (colSpan > 0)
             {
@@ -437,7 +485,8 @@ namespace WpfW3cSvgTestSuite
             return tableCell;
         }
 
-        private TableCell CreateCell(string text, bool lastRight, bool lastBottom, bool boldText = false, bool filled = true)
+        private TableCell CreateCell(string text, bool lastRight, bool lastBottom,
+            bool boldText = false, bool filled = true)
         {
             TableCell tableCell = new TableCell();
             if (filled)
@@ -445,7 +494,7 @@ namespace WpfW3cSvgTestSuite
                 tableCell.Background = Brushes.LightGray;
             }
             tableCell.BorderBrush = Brushes.Gray;
-            tableCell.BorderThickness = new Thickness(0, 0, lastRight? 0 : 1, lastBottom? 0 : 1);
+            tableCell.BorderThickness = new Thickness(0, 0, lastRight ? 0 : 1, lastBottom ? 0 : 1);
 
             Paragraph cellPara = new Paragraph();
             cellPara.KeepTogether = true;
@@ -477,6 +526,8 @@ namespace WpfW3cSvgTestSuite
 
             return tableCell;
         }
+
+        #endregion
 
         #region InteropServices
 

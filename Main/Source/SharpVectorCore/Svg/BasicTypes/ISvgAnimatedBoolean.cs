@@ -3,8 +3,6 @@ namespace SharpVectors.Dom.Svg
 	/// <summary>
 	/// Used for attributes of type boolean which can be animated.
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>100</completed>
 	public interface ISvgAnimatedBoolean
 	{
 		/// <summary>

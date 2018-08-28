@@ -1,13 +1,8 @@
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
 	/// Used for attributes of type DOMString which can be animated.
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <developer>kevin@kevlindev.com</developer>
-	/// <completed>100</completed>
 	public interface ISvgAnimatedString
 	{
 		/// <summary>

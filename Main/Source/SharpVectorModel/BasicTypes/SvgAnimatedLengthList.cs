@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Svg
@@ -11,25 +7,30 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
     public sealed class SvgAnimatedLengthList : ISvgAnimatedLengthList
 	{
-		#region Fields
-		private SvgLengthList baseVal;
-		private SvgLengthList animVal;
-		#endregion
+		#region Private Fields
+
+		private SvgLengthList _baseVal;
+		private SvgLengthList _animVal;
+		
+        #endregion
 
 		#region Constructors
+
 		public SvgAnimatedLengthList(string propertyName, string str, SvgElement ownerElement, SvgLengthDirection direction)
 		{
-			baseVal = new SvgLengthList(propertyName, str, ownerElement, direction);
-			animVal = baseVal;
+			_baseVal = new SvgLengthList(propertyName, str, ownerElement, direction);
+			_animVal = _baseVal;
 		}
+
 		#endregion
 
         #region ISvgAnimatedLengthList Interface
+
 		public ISvgLengthList BaseVal
 		{
 			get
 			{
-				return baseVal;
+				return _baseVal;
 			}
 		}
 
@@ -37,9 +38,10 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return animVal;
+				return _animVal;
 			}
 		}
+
 		#endregion
 	}
 }

@@ -37,9 +37,9 @@ namespace SharpVectors.Dom.Stylesheets
 
         protected StyleSheet(string media)
 		{
-            _Title = String.Empty;
-            _Href  = String.Empty;
-            _Type  = String.Empty;
+            _Title = string.Empty;
+            _Href  = string.Empty;
+            _Type  = string.Empty;
 
             if (string.IsNullOrWhiteSpace(media))
             {
@@ -52,7 +52,7 @@ namespace SharpVectors.Dom.Stylesheets
 		}
 
         public StyleSheet(XmlProcessingInstruction pi)
-            : this(String.Empty)
+            : this(string.Empty)
 		{
 			Regex re = new Regex(@"(?<name>[a-z]+)=[""'](?<value>[^""']*)[""']");
             Match match = re.Match(pi.Data);
@@ -84,7 +84,7 @@ namespace SharpVectors.Dom.Stylesheets
 		}
 
         public StyleSheet(XmlElement styleElement)
-            : this(String.Empty)
+            : this(string.Empty)
 		{
 			if (styleElement.HasAttribute("href")) 
                 _Href = styleElement.Attributes["href"].Value;
@@ -128,7 +128,7 @@ namespace SharpVectors.Dom.Stylesheets
 						LoadSheet();
 					}
 					if(SucceededDownload) return sheetContent;
-					else return String.Empty;
+					else return string.Empty;
 				}
 			}
 
@@ -185,7 +185,7 @@ namespace SharpVectors.Dom.Stylesheets
 			catch
 			{
 				SucceededDownload = false;
-				sheetContent = String.Empty;
+				sheetContent = string.Empty;
 			}
 
 		}

@@ -2,6 +2,7 @@ using System;
 
 namespace SharpVectors.Net
 {
+    [Serializable]
     public sealed class CacheInfo
 	{
         private DateTime expires;

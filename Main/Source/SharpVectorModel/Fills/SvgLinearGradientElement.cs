@@ -1,121 +1,108 @@
 using System;
-using System.Xml;
-
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Svg
 {
-	public sealed class SvgLinearGradientElement : SvgGradientElement, ISvgLinearGradientElement
-	{
-        private ISvgAnimatedLength x1;
-        private ISvgAnimatedLength y1;
-        private ISvgAnimatedLength x2;
-        private ISvgAnimatedLength y2;
+    public sealed class SvgLinearGradientElement : SvgGradientElement, ISvgLinearGradientElement
+    {
+        #region Private Fields
 
-		public SvgLinearGradientElement(string prefix, string localname, string ns, SvgDocument doc)
-			: base(prefix, localname, ns, doc)
-		{
-		}
+        private ISvgAnimatedLength _x1;
+        private ISvgAnimatedLength _y1;
+        private ISvgAnimatedLength _x2;
+        private ISvgAnimatedLength _y2;
 
-		#region ISvgLinearGradientElement Members
+        #endregion
 
-		public ISvgAnimatedLength X1
-		{
-			get
-			{
-				if (!HasAttribute("x1") && ReferencedElement != null)
-				{
-					return ReferencedElement.X1;
-				}
-				else
-				{
-					if (x1 == null)
-					{
-						x1 = new SvgAnimatedLength(this, "x1", SvgLengthDirection.Horizontal, "0%");
-					}
+        #region Constructors and Destructor
 
-					return x1;
-				}
-			}
-		}
+        public SvgLinearGradientElement(string prefix, string localname, string ns, SvgDocument doc)
+            : base(prefix, localname, ns, doc)
+        {
+        }
 
-		public ISvgAnimatedLength Y1
-		{
-			get
-			{
-				if (!HasAttribute("y1") && ReferencedElement != null)
-				{
-					return ReferencedElement.Y1;
-				}
-				else
-				{
+        #endregion
 
-					if (y1 == null)
-					{
-						y1 = new SvgAnimatedLength(this, "y1", SvgLengthDirection.Vertical, "0%");
-					}
+        #region ISvgLinearGradientElement Members
 
-					return y1;
-				}
-			}
-		}
+        public ISvgAnimatedLength X1
+        {
+            get {
+                if (!HasAttribute("x1") && ReferencedElement != null)
+                {
+                    return ReferencedElement.X1;
+                }
+                if (_x1 == null)
+                {
+                    _x1 = new SvgAnimatedLength(this, "x1", SvgLengthDirection.Horizontal, "0%");
+                }
 
-		public ISvgAnimatedLength X2
-		{
-			get
-			{
-				if (!HasAttribute("x2") && ReferencedElement != null)
-				{
-					return ReferencedElement.X2;
-				}
-				else
-				{
+                return _x1;
+            }
+        }
 
-					if (x2 == null)
-					{
-						x2 = new SvgAnimatedLength(this, "x2", SvgLengthDirection.Horizontal, "100%");
-					}
+        public ISvgAnimatedLength Y1
+        {
+            get {
+                if (!HasAttribute("y1") && ReferencedElement != null)
+                {
+                    return ReferencedElement.Y1;
+                }
+                if (_y1 == null)
+                {
+                    _y1 = new SvgAnimatedLength(this, "y1", SvgLengthDirection.Vertical, "0%");
+                }
 
-					return x2;
-				}
-			}
-		}
+                return _y1;
+            }
+        }
 
-		public ISvgAnimatedLength Y2
-		{
-			get
-			{
-				if (!HasAttribute("y2") && ReferencedElement != null)
-				{
-					return ReferencedElement.Y2;
-				}
-				else
-				{   
-					if (y2 == null)
-					{
-						y2 = new SvgAnimatedLength(this, "y2", SvgLengthDirection.Vertical, "0%");
-					}
+        public ISvgAnimatedLength X2
+        {
+            get {
+                if (!HasAttribute("x2") && ReferencedElement != null)
+                {
+                    return ReferencedElement.X2;
+                }
+                if (_x2 == null)
+                {
+                    _x2 = new SvgAnimatedLength(this, "x2", SvgLengthDirection.Horizontal, "100%");
+                }
 
-					return y2;
-				}
-			}
-		}
-		#endregion
+                return _x2;
+            }
+        }
 
-		#region ISvgURIReference Members
+        public ISvgAnimatedLength Y2
+        {
+            get {
+                if (!HasAttribute("y2") && ReferencedElement != null)
+                {
+                    return ReferencedElement.Y2;
+                }
+                if (_y2 == null)
+                {
+                    _y2 = new SvgAnimatedLength(this, "y2", SvgLengthDirection.Vertical, "0%");
+                }
 
-		public new SvgLinearGradientElement ReferencedElement
-		{
-			get
-			{
-				return base.ReferencedElement as SvgLinearGradientElement;
-			}
-		}
+                return _y2;
+            }
+        }
+        #endregion
 
-		#endregion
+        #region ISvgURIReference Members
 
-		#region Update handling
-		/*public override void OnAttributeChange(XmlNodeChangedAction action, XmlAttribute attribute)
+        public new SvgLinearGradientElement ReferencedElement
+        {
+            get {
+                return base.ReferencedElement as SvgLinearGradientElement;
+            }
+        }
+
+        #endregion
+
+        #region Update handling
+
+        /*public override void OnAttributeChange(XmlNodeChangedAction action, XmlAttribute attribute)
 		{
 			base.OnAttributeChange(action, attribute);
 
@@ -138,6 +125,7 @@ namespace SharpVectors.Dom.Svg
 				}
 			}
 		}*/
-		#endregion
-	}
+
+        #endregion
+    }
 }

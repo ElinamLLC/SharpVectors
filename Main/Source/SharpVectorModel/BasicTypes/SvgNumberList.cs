@@ -1,12 +1,5 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
-using System.Text;
 using System.Text.RegularExpressions;
-
-using SharpVectors.Dom;
 
 namespace SharpVectors.Dom.Svg
 {

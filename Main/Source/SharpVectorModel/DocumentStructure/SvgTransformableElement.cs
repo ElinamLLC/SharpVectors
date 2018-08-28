@@ -1,12 +1,16 @@
 using System;
 using System.Xml;
 
-using SharpVectors.Dom.Css;
-
 namespace SharpVectors.Dom.Svg
 {
     public class SvgTransformableElement : SvgStyleableElement, ISvgTransformable
     {
+        #region Private Fields
+
+        private ISvgAnimatedTransformList _transform;
+
+        #endregion
+
         #region Constructors and Destructor
 
         public SvgTransformableElement(string prefix, string localname, string ns, SvgDocument doc)
@@ -18,16 +22,15 @@ namespace SharpVectors.Dom.Svg
 
         #region ISvgTransformable Members
 
-        private ISvgAnimatedTransformList transform;
         public ISvgAnimatedTransformList Transform
         {
             get
             {
-                if (transform == null)
+                if (_transform == null)
                 {
-                    transform = new SvgAnimatedTransformList(GetAttribute("transform"));
+                    _transform = new SvgAnimatedTransformList(GetAttribute("transform"));
                 }
-                return transform;
+                return _transform;
             }
         }
 
@@ -53,8 +56,9 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 ISvgDocument doc = OwnerDocument;
-                if (doc.RootElement == this) return null;
-                else return doc.RootElement;
+                if (doc.RootElement == this)
+                    return null;
+                return doc.RootElement;
             }
         }
 
@@ -190,8 +194,6 @@ namespace SharpVectors.Dom.Svg
 
         #region Public Methods
 
-        #region Update handling
-
         public override void CssInvalidate()
         {
             base.CssInvalidate();
@@ -219,7 +221,7 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "transform":
-                        transform = null;
+                        _transform = null;
                         //renderingNode = null;
                         return;
                 }
@@ -227,8 +229,6 @@ namespace SharpVectors.Dom.Svg
                 base.HandleAttributeChange(attribute);
             }
         }
-
-        #endregion
 
         #endregion
     }

@@ -1,38 +1,27 @@
-using System;
-
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
-	/// The <see cref="IMutationEvent">IMutationEvent</see> interface
-	/// provides specific contextual information associated with
-	/// Mutation events.
+	/// The <see cref="IMutationEvent">IMutationEvent</see> interface provides specific contextual 
+    /// information associated with Mutation events.
 	/// </summary>
 	/// <remarks>
-	/// Note: To create an instance of the
-	/// <see cref="IMutationEvent">IMutationEvent</see> interface, use the
-	/// feature string <c>"MutationEvent"</c> as the value of the input
-	/// parameter used with the
-	/// <see cref="IDocumentEvent.CreateEvent">IDocumentEvent.CreateEvent</see>
-	/// method.
+	/// Note: To create an instance of the <see cref="IMutationEvent">IMutationEvent</see> interface, use the
+	/// feature string <c>"MutationEvent"</c> as the value of the input parameter used with the
+	/// <see cref="IDocumentEvent.CreateEvent">IDocumentEvent.CreateEvent</see> method.
 	/// </remarks>
-	public interface IMutationEvent
-		: IEvent
+	public interface IMutationEvent : IEvent
 	{
 		/// <summary>
-		/// <see cref="RelatedNode">RelatedNode</see> is used to identify a
-		/// secondary node related to a mutation event.
+		/// <see cref="RelatedNode">RelatedNode</see> is used to identify a secondary node related to a 
+        /// mutation event.
 		/// </summary>
 		/// <remarks>
-		/// For example, if a
-		/// mutation event is dispatched to a node indicating that its parent
-		/// has changed, the <see cref="RelatedNode">RelatedNode</see> is the
-		/// changed parent. If an event is instead dispatched to a subtree
-		/// indicating a node was changed within it, the 
-		/// <see cref="RelatedNode">RelatedNode</see> is the changed node. In
-		/// the case of the
-		/// <see cref="AttrChangeType.Modification">AttrChangeType.Modification</see>
-		/// event it indicates the <see cref="IAttr">IAttr</see> node which
-		/// was modified, added, or removed.
+		/// For example, if a mutation event is dispatched to a node indicating that its parent
+		/// has changed, the <see cref="RelatedNode">RelatedNode</see> is the changed parent. If an event 
+        /// is instead dispatched to a subtree indicating a node was changed within it, the 
+		/// <see cref="RelatedNode">RelatedNode</see> is the changed node. In the case of the
+		/// <see cref="AttrChangeType.Modification">AttrChangeType.Modification</see> event it indicates the 
+        /// attribute node which was modified, added, or removed.
 		/// </remarks>
 		INode RelatedNode
 		{
@@ -41,7 +30,7 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// <see cref="PrevValue">PrevValue</see> indicates the previous value
-		/// of the <see cref="IAttr">IAttr</see> node in
+		/// of the attribute node in
 		/// <see cref="AttrChangeType.Modification">AttrChangeType.Modification</see>
 		/// events, and of the <see cref="ICharacterData">ICharacterData</see>
 		/// node in DOMCharacterDataModified events.
@@ -53,7 +42,7 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// <see cref="NewValue">NewValue</see> indicates the new value of the
-		/// <see cref="IAttr">IAttr</see> node in DOMAttrModified events, and
+		/// attribute node in DOMAttrModified events, and
 		/// of the <see cref="ICharacterData">ICharacterData</see> node in
 		/// DOMCharacterDataModified events.
 		/// </summary>
@@ -64,7 +53,7 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// <see cref="AttrName">AttrName</see> indicates the name of the
-		/// changed <see cref="IAttr">Attr</see> node in a
+		/// changed attribute node in a
 		/// <see cref="AttrChangeType.Modification">AttrChangeType.Modification</see>
 		/// event.
 		/// </summary>
@@ -133,15 +122,8 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="IEvent">IEvent</see>'s
 		/// <see cref="AttrChange">AttrChange</see> attribute.
 		/// </param>
-		void InitMutationEvent(
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			INode relatedNodeArg,
-			string prevValueArg,
-			string newValueArg,
-			string attrNameArg,
-			AttrChangeType attrChangeArg);
+		void InitMutationEvent(string typeArg, bool canBubbleArg, bool cancelableArg, INode relatedNodeArg,
+			string prevValueArg, string newValueArg, string attrNameArg, AttrChangeType attrChangeArg);
 		
 		/// <summary>
 		/// The <see cref="InitMutationEventNs">InitMutationEventNs</see>
@@ -197,15 +179,7 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="IEvent">IEvent</see>'s
 		/// <see cref="AttrChange">AttrChange</see> attribute.
 		/// </param>
-		void InitMutationEventNs(
-			string namespaceUri,
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			INode relatedNodeArg,
-			string prevValueArg,
-			string newValueArg,
-			string attrNameArg,
-			AttrChangeType attrChangeArg);
+		void InitMutationEventNs(string namespaceUri, string typeArg, bool canBubbleArg, bool cancelableArg,
+			INode relatedNodeArg, string prevValueArg, string newValueArg, string attrNameArg, AttrChangeType attrChangeArg);
 	}
 }

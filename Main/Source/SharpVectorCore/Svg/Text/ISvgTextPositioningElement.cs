@@ -1,10 +1,8 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
-	/// The SvgTextPositioningElement interface is inherited by text-related interfaces: SvgTextElement, SvgTSpanElement, SvgTRefElement and SvgAltGlyphElement. 
+	/// The SvgTextPositioningElement interface is inherited by text-related interfaces: SvgTextElement, 
+    /// SvgTSpanElement, SvgTRefElement and SvgAltGlyphElement. 
 	/// </summary>
 	public interface ISvgTextPositioningElement	: ISvgTextContentElement
 	{                                       

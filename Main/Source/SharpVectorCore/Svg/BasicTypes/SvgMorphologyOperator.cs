@@ -1,8 +1,3 @@
-// <developer>don@donxml.com</developer>
-// <completed>100</completed>
- 	
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
@@ -12,6 +7,6 @@ namespace SharpVectors.Dom.Svg
 	{
 		Unknown = 0,
 		Erode   = 1,
-		Dilate = 2
+		Dilate  = 2
 	}
 }

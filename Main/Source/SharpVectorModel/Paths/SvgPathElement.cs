@@ -8,9 +8,9 @@ namespace SharpVectors.Dom.Svg
         #region Private Fields
 
         private ISvgAnimatedNumber _pathLength;
-        private SvgTests svgTests;
+        private SvgTests _svgTests;
 
-        private ISvgPathSegList pathSegList;
+        private ISvgPathSegList _pathSegList;
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace SharpVectors.Dom.Svg
         public SvgPathElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgTests = new SvgTests(this);
+            _svgTests = new SvgTests(this);
         }
 
         #endregion
@@ -28,8 +28,7 @@ namespace SharpVectors.Dom.Svg
 
         public string PathScript
         {
-            get
-            {
+            get {
                 return this.GetAttribute("d");
             }
         }
@@ -49,7 +48,7 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "d":
-                        pathSegList = null;
+                        _pathSegList = null;
                         Invalidate();
                         return;
                     case "pathLength":
@@ -89,6 +88,7 @@ namespace SharpVectors.Dom.Svg
                 base.HandleAttributeChange(attribute);
             }
         }
+
         #endregion
 
         #region ISvgElement Members
@@ -102,8 +102,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Shape;
             }
         }
@@ -114,8 +113,7 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPointF[] MarkerPositions
         {
-            get
-            {
+            get {
                 return ((SvgPathSegList)PathSegList).Points;
             }
         }
@@ -136,21 +134,19 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
+            get {
                 throw new NotImplementedException();
             }
         }
 
         public ISvgPathSegList PathSegList
         {
-            get
-            {
-                if (pathSegList == null)
+            get {
+                if (_pathSegList == null)
                 {
-                    pathSegList = new SvgPathSegList(this.GetAttribute("d"), false);
+                    _pathSegList = new SvgPathSegList(this.GetAttribute("d"), false);
                 }
-                return pathSegList;
+                return _pathSegList;
             }
         }
 
@@ -171,8 +167,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedNumber PathLength
         {
-            get
-            {
+            get {
                 if (_pathLength == null)
                 {
                     _pathLength = new SvgAnimatedNumber(GetAttribute("pathLength"));
@@ -248,19 +243,19 @@ namespace SharpVectors.Dom.Svg
             double x, double y, double x1, double y1)
         {
             return new SvgPathSegCurvetoQuadraticRel(x, y, x1, y1);
-        }                                                       
+        }
 
         public ISvgPathSegArcAbs CreateSvgPathSegArcAbs(double x, double y,
             double r1, double r2, double angle, bool largeArcFlag, bool sweepFlag)
         {
             return new SvgPathSegArcAbs(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
-        }                                                       
+        }
 
-        public ISvgPathSegArcRel CreateSvgPathSegArcRel(double x, double y, 
+        public ISvgPathSegArcRel CreateSvgPathSegArcRel(double x, double y,
             double r1, double r2, double angle, bool largeArcFlag, bool sweepFlag)
         {
             return new SvgPathSegArcRel(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
-        }                                                       
+        }
 
         public ISvgPathSegLinetoHorizontalAbs CreateSvgPathSegLinetoHorizontalAbs(double x)
         {
@@ -305,31 +300,31 @@ namespace SharpVectors.Dom.Svg
         {
             return new SvgPathSegCurvetoQuadraticSmoothRel(x, y);
         }
-        
+
         #endregion
 
         #endregion
 
         #region ISvgTests Members
-        
+
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion

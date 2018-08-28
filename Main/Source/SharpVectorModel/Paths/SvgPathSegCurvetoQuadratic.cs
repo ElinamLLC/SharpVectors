@@ -6,7 +6,8 @@ namespace SharpVectors.Dom.Svg
 {
 	public abstract class SvgPathSegCurvetoQuadratic : SvgPathSegCurveto
 	{
-		protected SvgPathSegCurvetoQuadratic(SvgPathSegType type) : base(type)
+		protected SvgPathSegCurvetoQuadratic(SvgPathSegType type) 
+            : base(type)
 		{
 		}
 
@@ -33,8 +34,7 @@ namespace SharpVectors.Dom.Svg
             // dx = dx/dt
             // dy = dy/dt
             // sqrt poly = sqrt( (dx*dx) + (dy*dy) )
-            return new SqrtPolynomial(
-                c1x*c1x + c1y*c1y, 4.0*(c1x*c2x + c1y*c2y), 4.0*(c2x*c2x + c2y*c2y));
+            return new SqrtPolynomial(c1x*c1x + c1y*c1y, 4.0*(c1x*c2x + c1y*c2y), 4.0*(c2x*c2x + c2y*c2y));
         }
 	}
 }

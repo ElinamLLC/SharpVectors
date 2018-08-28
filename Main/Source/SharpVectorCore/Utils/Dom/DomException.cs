@@ -1,39 +1,50 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace SharpVectors.Dom
 {
 	[Serializable]
 	public class DomException : Exception
 	{
-		/*public DomException() : this(DomExceptionType.SVGSHARP_UNDEFINED_ERROR, "Unknown error")
-		{
-		}*/
+		private DomExceptionType _exceptionCode;
 
-		protected DomException(string msg, Exception innerException) : base(msg, innerException)
+		private DomException()
+		{
+		}
+
+		protected DomException(string msg, Exception innerException) 
+            : base(msg, innerException)
 		{
 		}
 		
-		public DomException(DomExceptionType code) : this(code, String.Empty)
+		public DomException(DomExceptionType code) 
+            : this(code, string.Empty)
 		{
 		}
 		
-		public DomException(DomExceptionType code, string msg) : this(code, msg, null)
+		public DomException(DomExceptionType code, string msg) 
+            : this(code, msg, null)
 		{
 		}
 
-		public DomException(DomExceptionType code, string msg, Exception innerException) : base(msg, innerException)
+		public DomException(DomExceptionType code, string msg, Exception innerException) 
+            : base(msg, innerException)
 		{
-			this.code = code;
+			_exceptionCode = code;
 		}
 
-		protected DomException ( System.Runtime.Serialization.SerializationInfo info , System.Runtime.Serialization.StreamingContext context ) : base(info, context)
+		protected DomException (SerializationInfo info, StreamingContext context ) : base(info, context)
 		{
 		}
 
-		private DomExceptionType code;
 		public DomExceptionType Code
 		{
-			get{return code;}
+			get {
+                return _exceptionCode;
+            }
+            protected set {
+                _exceptionCode = value;
+            }
 		}
 	}
 }

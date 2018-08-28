@@ -7,17 +7,18 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private SvgFitToViewBox svgFitToViewBox;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgFitToViewBox _fitToViewBox;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
         #region Constructors and Destructor
 
-        internal SvgSymbolElement(string prefix, string localname, string ns, SvgDocument doc) : base(prefix, localname, ns, doc) 
+        public SvgSymbolElement(string prefix, string localname, string ns, SvgDocument doc) 
+            : base(prefix, localname, ns, doc) 
 		{
-			svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-			svgFitToViewBox = new SvgFitToViewBox(this);
+			_externalResourcesRequired = new SvgExternalResourcesRequired(this);
+			_fitToViewBox              = new SvgFitToViewBox(this);
 		}
 
 		#endregion
@@ -36,7 +37,8 @@ namespace SharpVectors.Dom.Svg
             get
             {
                 XmlNode parentNode = this.ParentNode;
-                if (parentNode != null && string.Equals(parentNode.LocalName, "use"))
+                if (parentNode != null && string.Equals(parentNode.LocalName, 
+                    "use", StringComparison.Ordinal))
                 {
                     return true;
                 }
@@ -68,7 +70,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return svgExternalResourcesRequired.ExternalResourcesRequired;
+				return _externalResourcesRequired.ExternalResourcesRequired;
 			}
 		}
 
@@ -80,7 +82,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return svgFitToViewBox.ViewBox;
+				return _fitToViewBox.ViewBox;
 			}
 		}
 
@@ -88,7 +90,7 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return svgFitToViewBox.PreserveAspectRatio;
+				return _fitToViewBox.PreserveAspectRatio;
 			}
 		}
 

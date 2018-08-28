@@ -7,13 +7,9 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
     public sealed class SvgTitleElement : SvgStyleableElement, ISvgTitleElement
 	{
-		#region Constructors
-
 		public SvgTitleElement(string prefix, string localname, string ns, SvgDocument doc) 
             : base(prefix, localname, ns, doc) 
 		{
 		}
-
-		#endregion
 	}
 }

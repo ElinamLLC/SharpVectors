@@ -1,9 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>60</completed>
-
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>

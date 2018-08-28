@@ -1,6 +1,4 @@
 using System;
-using System.Xml;
-using System.Collections;
 
 namespace SharpVectors.Dom.Css
 {
@@ -9,51 +7,111 @@ namespace SharpVectors.Dom.Css
 	/// </summary>
 	public sealed class CssCollectedProperty
     {
+        #region Private Fields
+
+        /// <summary>
+        /// The name of the property
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        /// The calculated specificity
+        /// </summary>
+        private int _specificity;
+
+        /// <summary>
+        /// The origin of the collected property.
+        /// </summary>
+        private CssStyleSheetType _origin;
+
+        /// <summary>
+        /// The value of the property
+        /// </summary>
+        private CssValue _cssValue;
+
+        /// <summary>
+        /// The priority of the property, e.g. "important"
+        /// </summary>
+        private string _priority;
+
+        #endregion
+
         #region Constructors
 
         public CssCollectedProperty(string name, int specificity, 
             CssValue cssValue, CssStyleSheetType origin, string priority)
 		{
-			Name = name;
-			Specificity = specificity;
-			Origin = origin;
-			CssValue = cssValue;
-			Priority = priority;
+			_name        = name;
+			_specificity = specificity;
+			_origin      = origin;
+			_cssValue    = cssValue;
+			_priority    = priority;
 		}
 
-		#endregion
+        #endregion
 
-		#region Public properties
+        #region Public properties
 
-		/// <summary>
-		/// The name of the property
-		/// </summary>
-		public string Name;
-		/// <summary>
-		/// The calculated specificity
-		/// </summary>
-		public int Specificity;
-		/// <summary>
-		/// The origin of the collected property.
-		/// </summary>
-		public CssStyleSheetType Origin;
-		/// <summary>
-		/// The value of the property
-		/// </summary>
-        public CssValue CssValue;
-		/// <summary>
-		/// The priority of the property, e.g. "important"
-		/// </summary>
-		public string Priority;
+        public string Name
+        {
+            get {
+                return _name;
+            }
+            set {
+                this._name = value;
+            }
+        }
 
-		#endregion
+        public int Specificity
+        {
+            get {
+                return _specificity;
+            }
+            set {
+                this._specificity = value;
+            }
+        }
 
-		#region Internal methods
+        public CssStyleSheetType Origin
+        {
+            get {
+                return _origin;
+            }
+            set {
+                this._origin = value;
+            }
+        }
 
-		internal bool IsBetterThen(CssCollectedProperty existing)
+        public CssValue CssValue
+        {
+            get {
+                return _cssValue;
+            }
+            set {
+                this._cssValue = value;
+            }
+        }
+
+        public string Priority
+        {
+            get {
+                return _priority;
+            }
+            set {
+                this._priority = value;
+            }
+        }
+
+        #endregion
+
+        #region Internal methods
+
+        internal bool IsBetterThen(CssCollectedProperty existing)
 		{
 			bool yes = false;
-			#region sorting according to the rules at http://www.w3.org/TR/CSS21/cascade.html#cascading-order
+			
+            // Sorting according to the rules at http://www.w3.org/TR/CSS21/cascade.html#cascading-order
+
 			bool gotHigherSpecificity = (Specificity>=existing.Specificity);
 			
 			switch(existing.Origin)
@@ -66,62 +124,54 @@ namespace SharpVectors.Dom.Css
 					break;
 				case CssStyleSheetType.Inline:
 					yes = (Origin != CssStyleSheetType.UserAgent && 
-						Origin != CssStyleSheetType.NonCssPresentationalHints);
+                        Origin != CssStyleSheetType.NonCssPresentationalHints);
 					break;
 				case CssStyleSheetType.Author:
-					if(Origin == CssStyleSheetType.Author && 
-						Priority == existing.Priority &&
+					if (Origin == CssStyleSheetType.Author && Priority == existing.Priority &&
 						gotHigherSpecificity)
 					{
 						// author rules of the same priority
 						yes = true;
 					}
-					else if(Origin == CssStyleSheetType.Inline)
+					else if (Origin == CssStyleSheetType.Inline)
 					{
 						// inline rules override author rules
 						yes = true;
 					}
-					else if(Origin == CssStyleSheetType.User && Priority == "important")
+					else if (Origin == CssStyleSheetType.User && Priority == "important")
 					{
 						// !important user rules overrides author rules
 						yes = true;
 					}
-					else if(Origin == CssStyleSheetType.Author && 
-						existing.Priority != "important" &&
-						Priority == "important"
-						)
+					else if(Origin == CssStyleSheetType.Author && existing.Priority != "important" &&
+						Priority == "important")
 					{
 						// !important author rules override non-!important author rules
 						yes = true;
 					}
 					break;
 				case CssStyleSheetType.User:
-					if(Origin == CssStyleSheetType.User && 
-						existing.Priority == Priority && 
-						gotHigherSpecificity)
+					if (Origin == CssStyleSheetType.User && existing.Priority == Priority && gotHigherSpecificity)
 					{
 						yes = true;
 					}
-					else if((Origin == CssStyleSheetType.Author || Origin == CssStyleSheetType.Inline) &&
+					else if ((Origin == CssStyleSheetType.Author || Origin == CssStyleSheetType.Inline) &&
 						existing.Priority != "important")
 					{
 						// author rules overrides not !important user rules
 						yes = true;
 					}
-					else if(Origin == CssStyleSheetType.User && 
-						Priority == "important")
+					else if (Origin == CssStyleSheetType.User && Priority == "important")
 					{
 						// !important user rules override non-!important user rules
 						yes = true;
 					}
 					break;
 			}
-			#endregion
 
 			return yes;
 		}
 
 		#endregion
 	}
-
 }

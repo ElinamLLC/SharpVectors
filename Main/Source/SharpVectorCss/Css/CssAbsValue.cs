@@ -12,9 +12,9 @@ namespace SharpVectors.Dom.Css
 		public CssAbsValue(CssValue cssValue, string propertyName, XmlElement element) 
             : base()
 		{
-			_cssValue = cssValue;
+			_cssValue     = cssValue ?? throw new ArgumentNullException(nameof(cssValue));
 			_propertyName = propertyName;
-			_element = element;
+			_element      = element ?? throw new ArgumentNullException(nameof(element));
 		}
 
 		public override string CssText

@@ -1,8 +1,3 @@
-// <developer>don@donxml.com</developer>
-// <completed>100</completed>
-
-using System;
-
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>

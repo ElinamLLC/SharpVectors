@@ -1,15 +1,10 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>	
-
-using System;
 using System.Xml;
 
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// This interface represents a CSS view. The getComputedStyle 
-	/// method provides a read only access to the computed values of 
-	/// an element. 
+	/// This interface represents a CSS view. The getComputedStyle method provides a read only access 
+    /// to the computed values of an element. 
 	/// </summary>
 	public interface ICssView
 	{

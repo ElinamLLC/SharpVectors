@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>kevin@kevlindev.com</developer>
-// <completed>100</completed>
-
 using System;
 
 namespace SharpVectors.Dom.Svg
@@ -12,39 +8,44 @@ namespace SharpVectors.Dom.Svg
     public sealed class SvgAnimatedBoolean : ISvgAnimatedBoolean
 	{
 		#region Private Fields
-		private bool baseVal;
-		private bool animVal;
-		#endregion
+
+		private bool _baseVal;
+		private bool _animVal;
+		
+        #endregion
 
 		#region Constructor
+
 		public SvgAnimatedBoolean(string str, bool defaultValue)
 		{
             switch (str)
             {
                 case "true":
-                    baseVal = true;
+                    _baseVal = true;
                     break;
                 case "false":
-                    baseVal = false;
+                    _baseVal = false;
                     break;
                 default:
-                    baseVal = defaultValue;
+                    _baseVal = defaultValue;
                     break;
             }
-            animVal = baseVal;
+            _animVal = _baseVal;
 		}
+
 		#endregion
 
         #region ISvgAnimatedBoolean Interface
+
 		public bool BaseVal
 		{
 			get
 			{
-				return baseVal;
+				return _baseVal;
 			}
 			set
 			{
-				baseVal = value;
+				_baseVal = value;
 			}
 		}
 
@@ -52,9 +53,10 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
-				return animVal;
+				return _animVal;
 			}
 		}
+
 		#endregion
 	}
 }

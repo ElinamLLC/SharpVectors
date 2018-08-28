@@ -738,7 +738,7 @@ namespace SharpVectors.Converters
         {
             if (textEditor != null)
             {
-                textEditor.Document.Text = String.Empty;
+                textEditor.Document.Text = string.Empty;
             }
 
             _documentFile = null;

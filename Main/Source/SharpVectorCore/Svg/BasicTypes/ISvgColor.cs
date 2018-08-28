@@ -1,9 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
-using System;
-
 using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Svg

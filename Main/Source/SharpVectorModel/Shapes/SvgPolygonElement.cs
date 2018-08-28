@@ -1,8 +1,4 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>90</completed>
-
 using System;
-using System.Xml;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -23,12 +19,11 @@ namespace SharpVectors.Dom.Svg
 
         public override SvgPointF[] MarkerPositions
         {
-            get
-            {
+            get {
                 SvgPointF[] p1 = base.MarkerPositions;
                 SvgPointF[] p2 = new SvgPointF[p1.Length + 1];
                 Array.Copy(p1, 0, p2, 0, p1.Length);
-                p2[p2.Length-1] = p1[0];
+                p2[p2.Length - 1] = p1[0];
 
                 return p2;
             }

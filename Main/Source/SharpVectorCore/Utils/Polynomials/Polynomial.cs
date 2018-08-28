@@ -5,8 +5,6 @@ namespace SharpVectors.Polynomials
 	/// <summary>
 	/// Summary description for Polynomial.
 	/// </summary>
-    /// <developer>kevin@kevlindev.com</developer>
-    /// <completed>100</completed>
 	public class Polynomial
 	{
         #region fields

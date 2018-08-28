@@ -19,7 +19,7 @@ namespace SharpVectors.Dom.Css
 
 		protected override void OnSetCssText(string cssText)
 		{
-			if (cssText.EndsWith("%"))
+			if (cssText.EndsWith("%", StringComparison.OrdinalIgnoreCase))
 			{
 				cssText = cssText.Remove(cssText.Length-1, 1);
 				SetPrimitiveType(CssPrimitiveType.Percentage);
@@ -34,32 +34,35 @@ namespace SharpVectors.Dom.Css
 
 		public override double GetFloatValue(CssPrimitiveType unitType)
 		{
-			double ret = Double.NaN;
-			switch(unitType)
+			double ret = double.NaN;
+			switch (unitType)
 			{
 				case CssPrimitiveType.Number:
-					if(PrimitiveType == CssPrimitiveType.Number) ret = floatValue;
-					else if(PrimitiveType == CssPrimitiveType.Percentage)
+					if (PrimitiveType == CssPrimitiveType.Number)
+                    {
+                        ret = floatValue;
+                    }
+                    else if(PrimitiveType == CssPrimitiveType.Percentage)
 					{
                         ret = floatValue / 100 * 255D;
 					}
 					break;
 				case CssPrimitiveType.Percentage:
-					if(PrimitiveType == CssPrimitiveType.Percentage) ret = floatValue;
-					else if(PrimitiveType == CssPrimitiveType.Number)
+					if (PrimitiveType == CssPrimitiveType.Percentage)
+                    {
+                        ret = floatValue;
+                    }
+                    else if (PrimitiveType == CssPrimitiveType.Number)
 					{
 						ret = floatValue * 255D;
 					}
 					break;
 			}
-			if(Double.IsNaN(ret))
+			if (double.IsNaN(ret))
 			{
 				throw new DomException(DomExceptionType.InvalidAccessErr);
 			}
-			else
-			{
-				return ret;
-			}
+            return ret;
 		}
 
 		public override string CssText

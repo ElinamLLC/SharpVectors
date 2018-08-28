@@ -5,25 +5,24 @@ namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgPathSegLinetoVerticalAbs : SvgPathSegLineto, ISvgPathSegLinetoVerticalAbs
     {
-        private double y;
+        private double _y;
 
-        internal SvgPathSegLinetoVerticalAbs(double y)
+        public SvgPathSegLinetoVerticalAbs(double y)
             : base(SvgPathSegType.LineToVerticalAbs)
         {
-            this.y = y;
+            _y = y;
         }
 
         public double Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return _y; }
+            set { _y = value; }
         }
 
         public override SvgPointF AbsXY
         {
-            get
-            {
-                SvgPathSeg prevSeg = PreviousSeg;
+            get {
+                SvgPathSeg prevSeg = this.PreviousSeg;
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
                 else prevPoint = prevSeg.AbsXY;
@@ -33,8 +32,7 @@ namespace SharpVectors.Dom.Svg
 
         public override string PathText
         {
-            get
-            {
+            get {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(PathSegTypeAsLetter);
                 sb.Append(Y);

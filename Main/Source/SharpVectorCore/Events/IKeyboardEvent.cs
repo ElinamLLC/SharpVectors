@@ -1,5 +1,3 @@
-using System;
-
 using SharpVectors.Dom.Views;
 
 namespace SharpVectors.Dom.Events
@@ -32,8 +30,7 @@ namespace SharpVectors.Dom.Events
 	/// method.
 	/// </para>
 	/// </remarks>
-	public interface IKeyboardEvent
-		: IUiEvent
+	public interface IKeyboardEvent : IUiEvent
 	{
 		/// <summary>
 		/// Holds the identifier of the key.
@@ -170,18 +167,9 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="IKeyboardEvent">IKeyboardEvent</see>'s
 		/// <see cref="AltGraphKey">AltGraphKey</see> attribute.
 		/// </param>
-		void InitKeyboardEvent(
-			string typeArg,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			string keyIdentifierArg,
-			KeyLocationCode keyLocationArg,
-			bool ctrlKeyArg,
-			bool shiftKeyArg,
-			bool altKeyArg,
-			bool metaKeyArg,
-			bool altGraphKeyArg);
+		void InitKeyboardEvent(string typeArg, bool canBubbleArg, bool cancelableArg, IAbstractView viewArg,
+			string keyIdentifierArg, KeyLocationCode keyLocationArg, bool ctrlKeyArg, bool shiftKeyArg,
+			bool altKeyArg, bool metaKeyArg, bool altGraphKeyArg);
 		
 		/// <summary>
 		/// The <see cref="InitKeyboardEventNs">InitKeyboardEventNs</see>
@@ -248,18 +236,8 @@ namespace SharpVectors.Dom.Events
 		/// Specifies the <see cref="IKeyboardEvent">IKeyboardEvent</see>'s
 		/// <see cref="AltGraphKey">AltGraphKey</see> attribute.
 		/// </param>
-		void InitKeyboardEventNs(
-			string namespaceUri,
-			string type,
-			bool canBubbleArg,
-			bool cancelableArg,
-			IAbstractView viewArg,
-			string keyIdentifierArg,
-			KeyLocationCode keyLocationArg,
-			bool ctrlKeyArg,
-			bool shiftKeyArg,
-			bool altKeyArg,
-			bool metaKeyArg,
-			bool altGraphKeyArg);
+		void InitKeyboardEventNs(string namespaceUri, string type, bool canBubbleArg, bool cancelableArg,
+			IAbstractView viewArg, string keyIdentifierArg, KeyLocationCode keyLocationArg, bool ctrlKeyArg,
+			bool shiftKeyArg, bool altKeyArg, bool metaKeyArg, bool altGraphKeyArg);
 	}
 }

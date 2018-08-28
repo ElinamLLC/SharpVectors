@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Text
 {
 	public class StringUtil

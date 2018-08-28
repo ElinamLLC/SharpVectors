@@ -8,70 +8,77 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public sealed class SvgPathSegCurvetoCubicRel : SvgPathSegCurvetoCubic, ISvgPathSegCurvetoCubicRel
     {
-        #region constructors
+        #region Private Fields
+
+        private double _x;
+        private double _y;
+        private double _x1;
+        private double _y1;
+        private double _x2;
+        private double _y2;
+
+        #endregion
+
+        #region Constructors
+
         internal SvgPathSegCurvetoCubicRel(double x, double y, double x1, double y1, double x2, double y2)
             : base(SvgPathSegType.CurveToCubicRel)
         {
-            this.x = x;
-            this.y = y;
-            this.x1 = x1;
-            this.y1 = y1;
-            this.x2 = x2;
-            this.y2 = y2;
+            _x  = x;
+            _y  = y;
+            _x1 = x1;
+            _y1 = y1;
+            _x2 = x2;
+            _y2 = y2;
         }
+
         #endregion
 
         #region ISvgPathSegCurvetoCubicRel Members
 
-        private double x;
         public double X
         {
-            get { return x; }
-            set { x = value; }
+            get { return _x; }
+            set { _x = value; }
         }
 
-        private double y;
         public double Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return _y; }
+            set { _y = value; }
         }
 
-        private double x1;
         public double X1
         {
-            get { return x1; }
-            set { x1 = value; }
+            get { return _x1; }
+            set { _x1 = value; }
         }
 
-        private double y1;
         public double Y1
         {
-            get { return y1; }
-            set { y1 = value; }
+            get { return _y1; }
+            set { _y1 = value; }
         }
 
-        private double x2;
         public double X2
         {
-            get { return x2; }
-            set { x2 = value; }
+            get { return _x2; }
+            set { _x2 = value; }
         }
 
-        private double y2;
         public double Y2
         {
-            get { return y2; }
-            set { y2 = value; }
+            get { return _y2; }
+            set { _y2 = value; }
         }
+
         #endregion
 
         #region Public Methods
 
         public override SvgPointF AbsXY
         {
-            get
-            {
+            get {
                 SvgPathSeg prevSeg = PreviousSeg;
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
@@ -83,8 +90,7 @@ namespace SharpVectors.Dom.Svg
 
         public override SvgPointF CubicX1Y1
         {
-            get
-            {
+            get {
                 SvgPathSeg prevSeg = PreviousSeg;
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
@@ -96,8 +102,7 @@ namespace SharpVectors.Dom.Svg
 
         public override SvgPointF CubicX2Y2
         {
-            get
-            {
+            get {
                 SvgPathSeg prevSeg = PreviousSeg;
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
@@ -109,8 +114,7 @@ namespace SharpVectors.Dom.Svg
 
         public override string PathText
         {
-            get
-            {
+            get {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(PathSegTypeAsLetter);
                 sb.Append(X1);

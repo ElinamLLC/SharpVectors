@@ -1,7 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>0</completed>	
-
-using System;
 using System.Xml;
 
 namespace SharpVectors.Dom.Css
@@ -12,7 +8,8 @@ namespace SharpVectors.Dom.Css
 	public interface IDocumentCss : Stylesheets.IDocumentStyle
 	{
 		/// <summary>
-		/// This method is used to retrieve the override style declaration for a specified element and a specified pseudo-element.
+		/// This method is used to retrieve the override style declaration for a specified element 
+        /// and a specified pseudo-element.
 		/// </summary>
 		ICssStyleDeclaration GetOverrideStyle(XmlElement elt, string pseudoElt);
 	}

@@ -9,12 +9,11 @@ namespace SharpVectors.Dom.Css
         private XmlElement        _element;
         private CssPrimitiveValue _cssValue;
 
-		public CssAbsPrimitiveValue(CssPrimitiveValue cssValue, string propertyName, 
-            XmlElement element)
+		public CssAbsPrimitiveValue(CssPrimitiveValue cssValue, string propertyName, XmlElement element)
 		{
-			_cssValue     = cssValue;
+			_cssValue     = cssValue ?? throw new ArgumentNullException(nameof(cssValue));
 			_propertyName = propertyName;
-			_element      = element;
+			_element      = element ?? throw new ArgumentNullException(nameof(element));
 		}
 
 		public override string CssText
@@ -32,10 +31,10 @@ namespace SharpVectors.Dom.Css
 
 		public override string GetStringValue()
 		{
-			switch(PrimitiveType)
+			switch (PrimitiveType)
 			{
 				case CssPrimitiveType.Attr:
-					return _element.GetAttribute(_cssValue.GetStringValue(), String.Empty);
+					return _element.GetAttribute(_cssValue.GetStringValue(), string.Empty);
 				default:
 					return _cssValue.GetStringValue();
 			}

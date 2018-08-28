@@ -1,29 +1,40 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>80</completed>
-
 using System;
 using System.Xml;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+
 using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSStyleSheet interface is a concrete interface used to represent a CSS style sheet i.e., a style sheet whose content type is "text/css".
+	/// The CSSStyleSheet interface is a concrete interface used to represent a CSS style sheet i.e., 
+    /// a style sheet whose content type is "text/css".
 	/// </summary>
 	public class CssStyleSheet : StyleSheet, ICssStyleSheet
 	{
+		#region Private fields
+
+		private readonly CssStyleSheetType _origin;
+        private List<string> _alReplacedStrings = new List<string>();
+		//private string[] ReplacedStrings;
+
+		private CssRuleList _cssRules;
+		private CssRule _ownerRule;
+		
+        #endregion
+
 		#region Constructors
+
 		/// <summary>
 		/// Constructor for CssStyleSheet
 		/// </summary>
 		/// <param name="pi">The XML processing instruction that references the stylesheet</param>
 		/// <param name="origin">The type of stylesheet</param>
-		internal CssStyleSheet(XmlProcessingInstruction pi, CssStyleSheetType origin) : base(pi)
+		internal CssStyleSheet(XmlProcessingInstruction pi, CssStyleSheetType origin) 
+            : base(pi)
 		{
-			Origin = origin;
+			_origin = origin;
 		}
 
 		/// <summary>
@@ -31,9 +42,10 @@ namespace SharpVectors.Dom.Css
 		/// </summary>
 		/// <param name="styleElement">The XML style element that references the stylesheet</param>
 		/// <param name="origin">The type of stylesheet</param>
-		internal CssStyleSheet(XmlElement styleElement, CssStyleSheetType origin) : base(styleElement)
+		internal CssStyleSheet(XmlElement styleElement, CssStyleSheetType origin) 
+            : base(styleElement)
 		{
-			Origin = origin;
+			_origin = origin;
 		}
 
 		/// <summary>
@@ -49,12 +61,14 @@ namespace SharpVectors.Dom.Css
             CssRule ownerRule, CssStyleSheetType origin) 
             : base(ownerNode, href, "text/css", title, media)
 		{
-			Origin = origin;
-			this.ownerRule = ownerRule;
+			_origin    = origin;
+			_ownerRule = ownerRule;
 		}
+
 		#endregion
 
 		#region Public methods
+
 		/// <summary>
 		/// Used to find matching style rules in the cascading order
 		/// </summary>
@@ -62,22 +76,24 @@ namespace SharpVectors.Dom.Css
 		/// <param name="pseudoElt">The pseudo-element to find styles for</param>
 		/// <param name="ml">The medialist that the document is using</param>
 		/// <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
-		protected internal override void GetStylesForElement(XmlElement elt, string pseudoElt, MediaList ml, CssCollectedStyleDeclaration csd)
+		protected internal override void GetStylesForElement(XmlElement elt, string pseudoElt, 
+            MediaList ml, CssCollectedStyleDeclaration csd)
 		{
-			if(((MediaList)Media).Matches(ml))
+			if (((MediaList)Media).Matches(ml))
 			{
 				((CssRuleList)CssRules).GetStylesForElement(elt, pseudoElt, ml, csd);
 			}
 		}
+
 		#endregion
 
 		#region Private methods
 
 		private string StringReplaceEvaluator(Match match)
 		{
-			alReplacedStrings.Add(match.Value);
+			_alReplacedStrings.Add(match.Value);
 
-			return "\"<<<" + (alReplacedStrings.Count - 1) + ">>>\"";
+			return "\"<<<" + (_alReplacedStrings.Count - 1) + ">>>\"";
 		}
 
 		private string PreProcessContent()
@@ -86,7 +102,7 @@ namespace SharpVectors.Dom.Css
 			{
 				// "escape" strings, eg: "foo" => "<<<number>>>"			
 				Regex re = new Regex(@"(""(.|\n)*?[^\\]"")|('(.|\n)*?[^\\]')");
-                alReplacedStrings.Clear();
+                _alReplacedStrings.Clear();
 				string s = re.Replace(SheetContent, new MatchEvaluator(StringReplaceEvaluator));
 			
 				//ReplacedStrings = alReplacedStrings.ToArray();
@@ -94,24 +110,16 @@ namespace SharpVectors.Dom.Css
 
 				// remove comments
 				Regex reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");
-				s = reComment.Replace(s, String.Empty);
+				s = reComment.Replace(s, string.Empty);
 				return s;
 			}
-			else
-			{
-				return "";
-			}
+			return string.Empty;
 		}
 
 		#endregion
 
-		#region Private fields
-		private readonly CssStyleSheetType Origin;
-        private List<string> alReplacedStrings = new List<string>();
-		//private string[] ReplacedStrings;
-		#endregion
-
 		#region Implementation of ICssStyleSheet
+
 		/// <summary>
 		/// Used to delete a rule from the style sheet.
 		/// </summary>
@@ -139,7 +147,6 @@ namespace SharpVectors.Dom.Css
 			//return ((CssRuleList)CssRules).InsertRule(rule, index);
 		}
 
-		private CssRuleList cssRules = null;
 		/// <summary>
 		/// The list of all CSS rules contained within the style sheet. This includes both rule sets and at-rules.
 		/// </summary>
@@ -147,13 +154,13 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				if (cssRules == null)
+				if (_cssRules == null)
 				{
 					string css = PreProcessContent();
-                    cssRules = new CssRuleList(ref css, this, alReplacedStrings, Origin);
+                    _cssRules = new CssRuleList(ref css, this, _alReplacedStrings, _origin);
 				}
 
-				return cssRules;
+				return _cssRules;
 			}
 			set
 			{
@@ -161,7 +168,6 @@ namespace SharpVectors.Dom.Css
 			}
 		}
 
-		private CssRule ownerRule;
 		/// <summary>
 		/// If this style sheet comes from an @import rule, the ownerRule attribute will contain the CSSImportRule. In that case, the ownerNode attribute in the StyleSheet interface will be null. If the style sheet comes from an element or a processing instruction, the ownerRule attribute will be null and the ownerNode attribute will contain the Node.
 		/// </summary>
@@ -169,9 +175,10 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				return ownerRule;
+				return _ownerRule;
 			}
 		}
+
 		#endregion
 	}
 }

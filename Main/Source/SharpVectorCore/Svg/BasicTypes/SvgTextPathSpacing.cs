@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SharpVectors.Dom.Svg
+﻿namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// Indicates how the user agent should determine the spacing between glyphs 

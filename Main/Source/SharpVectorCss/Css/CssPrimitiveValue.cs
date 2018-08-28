@@ -1,9 +1,5 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 using System;
 using System.Xml;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Css
@@ -13,11 +9,10 @@ namespace SharpVectors.Dom.Css
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This interface may be used to determine the value of a specific style 
-    /// property currently set in a block or to set a specific style property 
-    /// explicitly within the block. An instance of this interface might be 
-    /// obtained from the getPropertyCSSValue method of the CSSStyleDeclaration 
-    /// interface. A CSSPrimitiveValue object only occurs in a context of a CSS property.
+    /// This interface may be used to determine the value of a specific style property currently set in a block 
+    /// or to set a specific style property explicitly within the block. An instance of this interface might be 
+    /// obtained from the getPropertyCSSValue method of the CSSStyleDeclaration interface. A CSSPrimitiveValue 
+    /// object only occurs in a context of a CSS property.
     /// </para>
     /// <para>
     /// Conversions are allowed between absolute values (from millimeters to centimeters, 
@@ -35,9 +30,9 @@ namespace SharpVectors.Dom.Css
 
         private CssPrimitiveType _primitiveType;
 
-        protected double floatValue;
         private string stringValue;
         private   CssRect rectValue;
+        protected double floatValue;
         protected CssColor colorValue;
 
         #endregion
@@ -75,7 +70,7 @@ namespace SharpVectors.Dom.Css
             }
             else if (match.Groups["freqTimeNumber"].Success)
             {
-                floatValue = Single.Parse(match.Groups["numberValue2"].Value, CssNumber.Format);
+                floatValue = float.Parse(match.Groups["numberValue2"].Value, CssNumber.Format);
 
                 switch (match.Groups["unit2"].Value)
                 {
@@ -123,7 +118,7 @@ namespace SharpVectors.Dom.Css
             : base(CssValueType.PrimitiveValue, cssText, readOnly)
         {
             _primitiveType = CssPrimitiveType.Unknown;
-            floatValue     = Double.NaN;
+            floatValue     = double.NaN;
         }
 
         /// <summary>
@@ -134,7 +129,7 @@ namespace SharpVectors.Dom.Css
         {
             _primitiveType = CssPrimitiveType.Unknown;
             _cssValueType  = CssValueType.PrimitiveValue;
-            floatValue     = Double.NaN;
+            floatValue     = double.NaN;
         }
 
         #endregion
@@ -180,7 +175,7 @@ namespace SharpVectors.Dom.Css
                     case CssPrimitiveType.KHz:
                         return "khz";
                     default:
-                        return String.Empty;
+                        return string.Empty;
                 }
             }
         }
@@ -193,10 +188,7 @@ namespace SharpVectors.Dom.Css
                 {
                     return "\"" + GetStringValue() + "\"";
                 }
-                else
-                {
-                    return base.CssText;
-                }
+                return base.CssText;
             }
             set
             {
@@ -205,10 +197,7 @@ namespace SharpVectors.Dom.Css
                     throw new DomException(DomExceptionType.InvalidModificationErr,
                         "CssPrimitiveValue is read-only");
                 }
-                else
-                {
-                    OnSetCssText(value);
-                }
+                OnSetCssText(value);
             }
         }
 
@@ -222,22 +211,19 @@ namespace SharpVectors.Dom.Css
             {
                 return new CssPrimitiveLengthValue(match.Groups["lengthNumber"].Value, match.Groups["lengthUnit"].Value, readOnly);
             }
-            else if (match.Groups["angle"].Success)
+            if (match.Groups["angle"].Success)
             {
                 return new CssPrimitiveAngleValue(match.Groups["angleNumber"].Value, match.Groups["angleUnit"].Value, readOnly);
             }
-            else if (match.Groups["funcname"].Success && match.Groups["funcname"].Value == "rgb")
+            if (match.Groups["funcname"].Success && match.Groups["funcname"].Value == "rgb")
             {
                 return new CssPrimitiveRgbValue(match.Groups["func"].Value, readOnly);
             }
-            else if (match.Groups["colorIdent"].Success && CssPrimitiveRgbValue.IsColorName(match.Groups["colorIdent"].Value))
+            if (match.Groups["colorIdent"].Success && CssPrimitiveRgbValue.IsColorName(match.Groups["colorIdent"].Value))
             {
                 return new CssPrimitiveRgbValue(match.Groups["colorIdent"].Value, readOnly);
             }
-            else
-            {
-                return new CssPrimitiveValue(match, readOnly);
-            }
+            return new CssPrimitiveValue(match, readOnly);
         }
 
         public override CssValue GetAbsoluteValue(string propertyName, XmlElement elm)
@@ -246,10 +232,7 @@ namespace SharpVectors.Dom.Css
             {
                 return new CssAbsPrimitiveLengthValue(this, propertyName, elm);
             }
-            else
-            {
-                return new CssAbsPrimitiveValue(this, propertyName, elm);
-            }
+            return new CssAbsPrimitiveValue(this, propertyName, elm);
         }
 
         #endregion

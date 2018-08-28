@@ -198,9 +198,9 @@ namespace SharpVectors.Renderers.Gdi
                 element is ISvgSymbolElement || element is ISvgPatternElement)
             {
                 // check overflow property
-                CssValue overflow = ((SvgElement)element).GetComputedCssValue("overflow", String.Empty) as CssValue;
+                CssValue overflow = ((SvgElement)element).GetComputedCssValue("overflow", string.Empty) as CssValue;
                 // TODO: clip can have "rect(10 10 auto 10)"
-                CssPrimitiveValue clip = ((SvgElement)element).GetComputedCssValue("clip", String.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clip = ((SvgElement)element).GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
 
                 string sOverflow = null;
 
@@ -270,7 +270,7 @@ namespace SharpVectors.Renderers.Gdi
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment)
             {
-                CssPrimitiveValue clipPath = ((SvgElement)element).GetComputedCssValue("clip-path", String.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clipPath = ((SvgElement)element).GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
                 if (clipPath != null && clipPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
@@ -331,7 +331,7 @@ namespace SharpVectors.Renderers.Gdi
         {
             Graphics graphics = gr.Graphics;
 
-            string colorRendering = ((SvgElement)element).GetComputedStringValue("color-rendering", String.Empty);
+            string colorRendering = ((SvgElement)element).GetComputedStringValue("color-rendering", string.Empty);
             switch (colorRendering)
             {
                 case "optimizeSpeed":
@@ -352,7 +352,7 @@ namespace SharpVectors.Renderers.Gdi
                 // Unfortunately the text rendering hints are not applied because the
                 // text path is recorded and painted to the Graphics object as a path
                 // not as text.
-                string textRendering = ((SvgElement)element).GetComputedStringValue("text-rendering", String.Empty);
+                string textRendering = ((SvgElement)element).GetComputedStringValue("text-rendering", string.Empty);
                 switch (textRendering)
                 {
                     case "optimizeSpeed":
@@ -376,7 +376,7 @@ namespace SharpVectors.Renderers.Gdi
             }
             else
             {
-                string shapeRendering = ((SvgElement)element).GetComputedStringValue("shape-rendering", String.Empty);
+                string shapeRendering = ((SvgElement)element).GetComputedStringValue("shape-rendering", string.Empty);
                 switch (shapeRendering)
                 {
                     case "optimizeSpeed":
@@ -825,7 +825,7 @@ namespace SharpVectors.Renderers.Gdi
             }
             else
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 

@@ -1,6 +1,3 @@
-// <developer>niklas@protocol7.com</developer>
-// <completed>100</completed>
-
 using System;
 using System.Xml;
 
@@ -13,13 +10,13 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private ISvgAnimatedLength x1;
-        private ISvgAnimatedLength y1;
-        private ISvgAnimatedLength x2;
-        private ISvgAnimatedLength y2;
+        private ISvgAnimatedLength _x1;
+        private ISvgAnimatedLength _y1;
+        private ISvgAnimatedLength _x2;
+        private ISvgAnimatedLength _y2;
 
-        private SvgTests svgTests;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgTests _svgTests;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         #endregion
 
@@ -28,8 +25,8 @@ namespace SharpVectors.Dom.Svg
         public SvgLineElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgTests = new SvgTests(this);
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests                  = new SvgTests(this);
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
         }
 
         #endregion
@@ -47,19 +44,19 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "x1":
-                        x1 = null;
+                        _x1 = null;
                         Invalidate();
                         return;
                     case "y1":
-                        y1 = null;
+                        _y1 = null;
                         Invalidate();
                         return;
                     case "x2":
-                        x2 = null;
+                        _x2 = null;
                         Invalidate();
                         return;
                     case "y2":
-                        y2 = null;
+                        _y2 = null;
                         Invalidate();
                         return;
                     case "marker-start":
@@ -110,8 +107,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Shape;
             }
         }
@@ -122,62 +118,56 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength X1
         {
-            get
-            {
-                if (x1 == null)
+            get {
+                if (_x1 == null)
                 {
-                    x1 = new SvgAnimatedLength(this, "x1", SvgLengthDirection.Horizontal, "0");
+                    _x1 = new SvgAnimatedLength(this, "x1", SvgLengthDirection.Horizontal, "0");
                 }
-                return x1;
+                return _x1;
             }
         }
 
         public ISvgAnimatedLength Y1
         {
-            get
-            {
-                if (y1 == null)
+            get {
+                if (_y1 == null)
                 {
-                    y1 = new SvgAnimatedLength(this, "y1", SvgLengthDirection.Vertical, "0");
+                    _y1 = new SvgAnimatedLength(this, "y1", SvgLengthDirection.Vertical, "0");
                 }
-                return y1;
+                return _y1;
             }
-
         }
 
         public ISvgAnimatedLength X2
         {
-            get
-            {
-                if (x2 == null)
+            get {
+                if (_x2 == null)
                 {
-                    x2 = new SvgAnimatedLength(this, "x2", SvgLengthDirection.Horizontal, "0");
+                    _x2 = new SvgAnimatedLength(this, "x2", SvgLengthDirection.Horizontal, "0");
                 }
-                return x2;
+                return _x2;
             }
         }
 
         public ISvgAnimatedLength Y2
         {
-            get
-            {
-                if (y2 == null)
+            get {
+                if (_y2 == null)
                 {
-                    y2 = new SvgAnimatedLength(this, "y2", SvgLengthDirection.Vertical, "0");
+                    _y2 = new SvgAnimatedLength(this, "y2", SvgLengthDirection.Vertical, "0");
                 }
-                return y2;
+                return _y2;
             }
         }
 
         #endregion
 
         #region ISvgExternalResourcesRequired Members
-        
+
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -187,22 +177,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion
@@ -211,12 +201,11 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPointF[] MarkerPositions
         {
-            get
-            {
-                return new SvgPointF[] 
-                { 
-                    new SvgPointF(X1.AnimVal.Value, Y1.AnimVal.Value), 
-                    new SvgPointF(X2.AnimVal.Value, Y2.AnimVal.Value) 
+            get {
+                return new SvgPointF[]
+                {
+                    new SvgPointF(X1.AnimVal.Value, Y1.AnimVal.Value),
+                    new SvgPointF(X2.AnimVal.Value, Y2.AnimVal.Value)
                 };
             }
         }

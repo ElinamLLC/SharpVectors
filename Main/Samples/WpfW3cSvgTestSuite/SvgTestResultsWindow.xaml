@@ -9,7 +9,7 @@
         ResizeMode="CanResizeWithGrip"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner" 
-        Height="450" Width="800" MinHeight="450" MinWidth="800">
+        Height="450" Width="900" MinHeight="450" MinWidth="900">
     <DockPanel LastChildFill="True">
         <Label x:Name="testTitleLabel" DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left">Svg Test Results</Label>
         <Border BorderBrush="LightGray" BorderThickness="1" Margin="40, 6, 10, 10">
@@ -24,6 +24,20 @@
                         </Style>
                     </FlowDocument.Resources>
                     <Section x:Name="Introdution">
+                        <Paragraph FontSize="18" KeepTogether="True">
+                            <Bold>Introduction</Bold>
+                        </Paragraph>
+                        <Paragraph>
+                            The document attempts to present a summary of the test results of SharpVectors library,
+                            and the comparison of the results of released versions to track the progress of the development.
+                        </Paragraph>
+                        <Paragraph>
+                            These results are not based on pixel comparisons of the generated images and the expected PNG images
+                            provided with the Test Suite, but are manual or human-eye comparisons. 
+                            This is mainly due to the fact that the rendered image quality vary and the Test Suite 
+                            fonts are mostly not available on testing enviroments.
+                            <LineBreak/>
+                        </Paragraph>
                     </Section>
                 </FlowDocument>
             </FlowDocumentReader>

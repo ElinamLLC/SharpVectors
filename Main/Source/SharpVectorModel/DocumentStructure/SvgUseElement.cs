@@ -2,28 +2,26 @@ using System;
 using System.Xml;
 using System.Globalization;
 
-using SharpVectors.Dom.Css;
-
 namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgUseElement : SvgTransformableElement, ISvgUseElement
     {
         #region Private Fields
 
-        private ISvgAnimatedLength x;
-        private ISvgAnimatedLength y;
-        private ISvgAnimatedLength width;
-        private ISvgAnimatedLength height;
-        private ISvgElementInstance instanceRoot;
+        private ISvgAnimatedLength _x;
+        private ISvgAnimatedLength _y;
+        private ISvgAnimatedLength _width;
+        private ISvgAnimatedLength _height;
+        private ISvgElementInstance _instanceRoot;
 
-        private SvgTests svgTests;
-        private SvgUriReference svgURIReference;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgTests _svgTests;
+        private SvgUriReference _uriReference;
+        private SvgExternalResourcesRequired _externalResourcesRequired;
 
         // For rendering support...
-        private string saveTransform;
-        private string saveWidth;
-        private string saveHeight;
+        private string _saveTransform;
+        private string _saveWidth;
+        private string _saveHeight;
 
         #endregion
 
@@ -32,10 +30,11 @@ namespace SharpVectors.Dom.Svg
         public SvgUseElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgURIReference = new SvgUriReference(this);
-            svgURIReference.NodeChanged += new NodeChangeHandler(ReferencedNodeChange);
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            svgTests = new SvgTests(this);
+            _uriReference              = new SvgUriReference(this);
+            _uriReference.NodeChanged += OnReferencedNodeChange;
+
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests                  = new SvgTests(this);
         }
 
         #endregion
@@ -46,11 +45,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (x == null)
+                if (_x == null)
                 {
-                    x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
                 }
-                return x;
+                return _x;
             }
         }
 
@@ -58,11 +57,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (y == null)
+                if (_y == null)
                 {
-                    y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
                 }
-                return y;
+                return _y;
             }
         }
 
@@ -70,12 +69,12 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (width == null)
+                if (_width == null)
                 {
-                    width = new SvgAnimatedLength(this, "width", 
-                        SvgLengthDirection.Horizontal, String.Empty);
+                    _width = new SvgAnimatedLength(this, "width", 
+                        SvgLengthDirection.Horizontal, string.Empty);
                 }
-                return width;
+                return _width;
             }
         }
 
@@ -83,12 +82,12 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (height == null)
+                if (_height == null)
                 {
-                    height = new SvgAnimatedLength(this, "height", 
-                        SvgLengthDirection.Vertical, String.Empty);
+                    _height = new SvgAnimatedLength(this, "height", 
+                        SvgLengthDirection.Vertical, string.Empty);
                 }
-                return height;
+                return _height;
             }
         }
 
@@ -96,11 +95,11 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (instanceRoot == null)
+                if (_instanceRoot == null)
                 {
-                    instanceRoot = new SvgElementInstance(ReferencedElement, this, null);
+                    _instanceRoot = new SvgElementInstance(ReferencedElement, this, null);
                 }
-                return instanceRoot;
+                return _instanceRoot;
             }
         }
 
@@ -120,7 +119,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgURIReference.Href;
+                return _uriReference.Href;
             }
         }
 
@@ -128,7 +127,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgURIReference.ReferencedNode as XmlElement;
+                return _uriReference.ReferencedNode as XmlElement;
             }
         }
 
@@ -140,7 +139,7 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+                return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
 
@@ -150,22 +149,22 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgStringList RequiredFeatures
         {
-            get { return svgTests.RequiredFeatures; }
+            get { return _svgTests.RequiredFeatures; }
         }
 
         public ISvgStringList RequiredExtensions
         {
-            get { return svgTests.RequiredExtensions; }
+            get { return _svgTests.RequiredExtensions; }
         }
 
         public ISvgStringList SystemLanguage
         {
-            get { return svgTests.SystemLanguage; }
+            get { return _svgTests.SystemLanguage; }
         }
 
         public bool HasExtension(string extension)
         {
-            return svgTests.HasExtension(extension);
+            return _svgTests.HasExtension(extension);
         }
 
         #endregion
@@ -179,16 +178,16 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "x":
-                        x = null;
+                        _x = null;
                         return;
                     case "y":
-                        y = null;
+                        _y = null;
                         return;
                     case "width":
-                        width = null;
+                        _width = null;
                         return;
                     case "height":
-                        height = null;
+                        _height = null;
                         return;
                 }
             }
@@ -197,7 +196,7 @@ namespace SharpVectors.Dom.Svg
                 switch (attribute.LocalName)
                 {
                     case "href":
-                        instanceRoot = null;
+                        _instanceRoot = null;
                         break;
                 }
             }
@@ -205,7 +204,7 @@ namespace SharpVectors.Dom.Svg
             base.HandleAttributeChange(attribute);
         }
 
-        public void ReferencedNodeChange(Object src, XmlNodeChangedEventArgs args)
+        public void OnReferencedNodeChange(object src, XmlNodeChangedEventArgs args)
         {
             //TODO - This is getting called too often!
             //instanceRoot = null;
@@ -218,27 +217,28 @@ namespace SharpVectors.Dom.Svg
         public void CopyToReferencedElement(XmlElement refEl)
         {
             // X and Y become a translate portion of any transform, width and height may get passed on
-            if (X.AnimVal.Value != 0 || Y.AnimVal.Value != 0)
+            if (!X.AnimVal.Value.Equals(0) || !Y.AnimVal.Value.Equals(0))
             {
-                saveTransform = this.GetAttribute("transform");
+                _saveTransform = this.GetAttribute("transform");
                 //this.SetAttribute("transform", saveTransform + " translate(" 
                 //    + X.AnimVal.Value + "," + Y.AnimVal.Value + ")");
-                string transform = String.Format(CultureInfo.InvariantCulture, 
-                    "{0} translate({1},{2})", saveTransform, X.AnimVal.Value, Y.AnimVal.Value);
+                string transform = string.Format(CultureInfo.InvariantCulture, 
+                    "{0} translate({1},{2})", _saveTransform, X.AnimVal.Value, Y.AnimVal.Value);
+
                 this.SetAttribute("transform", transform);
             }
 
             // if (refEl is SvgSymbolElement)
-            if (string.Equals(refEl.Name, "symbol", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(refEl.Name, "symbol", StringComparison.Ordinal))
             {
                 refEl.SetAttribute("width", (HasAttribute("width")) ? GetAttribute("width") : "100%");
                 refEl.SetAttribute("height", (HasAttribute("height")) ? GetAttribute("height") : "100%");
             }
             // if (refEl is SvgSymbolElement)
-            if (string.Equals(refEl.Name, "symbol", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(refEl.Name, "symbol", StringComparison.Ordinal))
             {
-                saveWidth  = refEl.GetAttribute("width");
-                saveHeight = refEl.GetAttribute("height");
+                _saveWidth  = refEl.GetAttribute("width");
+                _saveHeight = refEl.GetAttribute("height");
                 if (HasAttribute("width"))
                     refEl.SetAttribute("width", GetAttribute("width"));
                 if (HasAttribute("height"))
@@ -248,12 +248,12 @@ namespace SharpVectors.Dom.Svg
 
         public void RestoreReferencedElement(XmlElement refEl)
         {
-            if (saveTransform != null)
-                this.SetAttribute("transform", saveTransform);
-            if (saveWidth != null)
+            if (_saveTransform != null)
+                this.SetAttribute("transform", _saveTransform);
+            if (_saveWidth != null)
             {
-                refEl.SetAttribute("width", saveWidth);
-                refEl.SetAttribute("height", saveHeight);
+                refEl.SetAttribute("width", _saveWidth);
+                refEl.SetAttribute("height", _saveHeight);
             }
         }
 

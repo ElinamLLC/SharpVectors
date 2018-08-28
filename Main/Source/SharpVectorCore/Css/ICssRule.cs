@@ -1,5 +1,3 @@
-using System;
-
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
@@ -10,24 +8,22 @@ namespace SharpVectors.Dom.Css
 	/// by the parser. Unrecognized rules are represented using the 
 	/// CSSUnknownRule interface. 
 	/// </summary>
-	/// <developer>niklas@protocol7.com</developer>
-	/// <completed>80</completed>	
 	public interface ICssRule
 	{
 		/// <summary>
 		/// The type of the rule, as defined above. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
 		/// </summary>
-		SharpVectors.Dom.Css.ICssStyleSheet ParentStyleSheet{get;}
+		ICssStyleSheet ParentStyleSheet{get;}
 
 		/// <summary>
 		/// The style sheet that contains this rule.
 		/// </summary>
-		SharpVectors.Dom.Css.ICssRule ParentRule{get;}
+		ICssRule ParentRule{get;}
 	
 		/// <summary>
 		/// If this rule is contained inside another rule (e.g. a style rule inside an @media block), this is the containing rule. If this rule is not nested inside any other rules, this returns null
 		/// </summary>
-		SharpVectors.Dom.Css.CssRuleType Type{get;}
+		CssRuleType Type{get;}
 	
 		/// <summary>
 		/// The parsable textual representation of the rule. This reflects the current state of the rule and not its initial value
