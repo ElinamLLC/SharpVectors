@@ -10,21 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharpVectors.Squiggle</RootNamespace>
     <AssemblyName>SharpVectors.Squiggle</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <StartupObject>
-    </StartupObject>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,44 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpVectors.Converters, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Converters.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Core, Version=0.3.1.37825, Culture=neutral, PublicKeyToken=a8855419d33ac940, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Css, Version=0.3.1.37827, Culture=neutral, PublicKeyToken=a8855419d33ac940, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Css.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Dom, Version=0.3.1.37826, Culture=neutral, PublicKeyToken=a8855419d33ac940, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Dom.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Model, Version=0.3.1.37828, Culture=neutral, PublicKeyToken=2236cfc76b505845, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Rendering.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Rendering.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Runtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d16e717f0a981fb9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Main\Output\SharpVectors.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
@@ -125,11 +81,42 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj">
+      <Project>{e8056611-e49c-4bc3-a682-a629d5cec11c}</Project>
+      <Name>SharpVectors.Converters.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj">
+      <Project>{d6bb65fc-240e-4241-b2ed-a7fb3f13e978}</Project>
+      <Name>SharpVectors.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj">
+      <Project>{351b0a6e-2f6b-497a-844b-dcb5a502fb0d}</Project>
+      <Name>SharpVectors.Css</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj">
+      <Project>{fe34cbc0-d23c-4a95-ba64-83a031814010}</Project>
+      <Name>SharpVectors.Dom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj">
+      <Project>{5d336f48-3fb9-4382-b4b9-06974c764007}</Project>
+      <Name>SharpVectors.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj">
+      <Project>{a2576ce0-e492-490f-97e9-c0e7abafaf27}</Project>
+      <Name>SharpVectors.Rendering.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj">
+      <Project>{2cd52982-a1c2-4a14-9d69-d64719357216}</Project>
+      <Name>SharpVectors.Runtime.Wpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

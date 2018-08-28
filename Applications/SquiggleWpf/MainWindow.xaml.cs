@@ -18,6 +18,7 @@ using Microsoft.Win32;
 
 using SharpVectors.Runtime;
 using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Squiggle
 {
@@ -58,6 +59,7 @@ namespace SharpVectors.Squiggle
         private MouseButton mouseButtonDown;
 
         private FileSvgReader _fileReader;
+        private WpfDrawingSettings _wpfSettings;
 
         #endregion
 
@@ -71,9 +73,12 @@ namespace SharpVectors.Squiggle
 
             this.Loaded  += new RoutedEventHandler(OnWindowLoaded);
             //this.Unloaded += new RoutedEventHandler(OnWindowUnloaded);
-            this.Closing += new CancelEventHandler(OnWindowClosing);  
+            this.Closing += new CancelEventHandler(OnWindowClosing);
 
-            _fileReader = new FileSvgReader();
+            _wpfSettings = new WpfDrawingSettings();
+            _wpfSettings.CultureInfo = _wpfSettings.NeutralCultureInfo;
+
+            _fileReader = new FileSvgReader(_wpfSettings);
             _fileReader.SaveXaml = false;
             _fileReader.SaveZaml = false;
         }

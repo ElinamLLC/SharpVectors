@@ -31,7 +31,7 @@ namespace SharpVectors.Dom.Svg
             : base(prefix, localname, ns, doc)
         {
             _uriReference              = new SvgUriReference(this);
-            _uriReference.NodeChanged += OnReferencedNodeChange;
+//            _uriReference.NodeChanged += OnReferencedNodeChange;
 
             _externalResourcesRequired = new SvgExternalResourcesRequired(this);
             _svgTests                  = new SvgTests(this);

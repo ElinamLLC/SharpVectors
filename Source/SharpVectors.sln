@@ -14,9 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core", "SharpV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Wpf", "SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters", "SharpVectorConverters\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters", "SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime", "SharpVectorRuntime\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime", "SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,50 +10,71 @@ using System.Windows.Media;
 using System.Windows.Markup;
 using System.Windows.Resources;
 
-using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This is a <see cref="Canvas"/> control for viewing SVG file in WPF
-    /// applications.
+    /// This implements a markup extension that enables the creation
+    /// of <see cref="DrawingImage"/> from SVG files.
     /// </summary>
     /// <remarks>
-    /// It extends the drawing canvas, <see cref="SvgDrawingCanvas"/>, instead of
-    /// generic <see cref="Canvas"/> control, therefore any interactivity support 
-    /// implemented in the drawing canvas will be available in the 
-    /// <see cref="Canvas"/>.
+    /// The SVG source file can be:
+    /// <list type="bullet">
+    /// <item>
+    /// <description>From the web</description>
+    /// </item>
+    /// <item>
+    /// <description>From the local computer (relative or absolute paths)</description>
+    /// </item>
+    /// <item>
+    /// <description>From the resources.</description>
+    /// </item>
+    /// </list>
+    /// <para>
+    /// The rendering settings are provided as properties for customizations.
+    /// </para>
     /// </remarks>
-    public class SvgCanvas : SvgDrawingCanvas, IUriContext
+    [MarkupExtensionReturnType(typeof(DrawingImage))]
+    public sealed class SvgImageExtension : MarkupExtension
     {
         #region Private Fields
 
-        private bool _isAutoSized;
-        private bool _autoSize;
         private bool _textAsGeometry;
         private bool _includeRuntime;
         private bool _optimizePath;
 
-        private DrawingGroup _svgDrawing;
+        private string _svgPath;
 
         private CultureInfo _culture;
-
-        private Uri _baseUri;
-        private Uri _sourceUri;
 
         #endregion
 
         #region Constructors and Destructor
 
+        /// <overloads>
+        /// Initializes a new instance of the <see cref="SvgImageExtension"/> class.
+        /// </overloads>
         /// <summary>
-        /// Initializes a new instance of the <see cref="SvgCanvas"/> class.
+        /// Initializes a new instance of the <see cref="SvgImageExtension"/> 
+        /// class with the default parameters.
         /// </summary>
-        public SvgCanvas()
+        public SvgImageExtension()
         {
             _textAsGeometry = false;
             _includeRuntime = true;
             _optimizePath   = true;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgImageExtension"/> 
+        /// class with the specified SVG file path.
+        /// </summary>
+        /// <param name="svgSource"></param>
+        public SvgImageExtension(string svgPath)
+            : this()
+        {
+            _svgPath = svgPath;
         }
 
         #endregion
@@ -61,57 +82,21 @@ namespace SharpVectors.Converters
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the path to the SVG file to load into this 
-        /// <see cref="Canvas"/>.
+        /// Gets or sets the SVG source file.
         /// </summary>
         /// <value>
-        /// A <see cref="System.Uri"/> specifying the path to the SVG source file.
-        /// The file can be located on a computer, network or assembly resources.
-        /// Settings this to <see langword="null"/> will close any opened diagram.
+        /// A string specifying the path of the SVG source file.
+        /// The default is <see langword="null"/>.
         /// </value>
-        public Uri Source
+        public string Source
         {
             get
             {
-                return _sourceUri;
+                return _svgPath;
             }
             set
             {
-                _sourceUri = value;
-
-                if (_sourceUri == null)
-                {
-                    this.OnUnloadDiagram();
-                }
-                else
-                {
-                    this.OnSettingsChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to automatically resize this
-        /// <see cref="Canvas"/> based on the size of the loaded drawing.
-        /// </summary>
-        /// <value>
-        /// This is <see langword="true"/> if this <see cref="Canvas"/> is
-        /// automatically resized based on the size of the loaded drawing;
-        /// otherwise, it is <see langword="false"/>. The default is 
-        /// <see langword="false"/>, and the user-defined size or the parent assigned
-        /// layout size is used.
-        /// </value>
-        public bool AutoSize
-        {
-            get
-            {
-                return _autoSize;
-            }
-            set
-            {
-                _autoSize = value;
-
-                this.OnAutoSizeChanged();
+                _svgPath = value;
             }
         }
 
@@ -133,8 +118,6 @@ namespace SharpVectors.Converters
             set
             {
                 _optimizePath = value;
-
-                this.OnSettingsChanged();
             }
         }
 
@@ -156,8 +139,6 @@ namespace SharpVectors.Converters
             set
             {
                 _textAsGeometry = value;
-
-                this.OnSettingsChanged();
             }
         }
 
@@ -184,8 +165,6 @@ namespace SharpVectors.Converters
             set
             {
                 _includeRuntime = value;
-
-                this.OnSettingsChanged();
             }
         }
 
@@ -217,8 +196,6 @@ namespace SharpVectors.Converters
                 if (value != null)
                 {
                     _culture = value;
-
-                    this.OnSettingsChanged();
                 }
             }
         }
@@ -227,94 +204,25 @@ namespace SharpVectors.Converters
 
         #region Public Methods
 
-        #endregion
-
-        #region Protected Methods
-
-        /// <summary>
-        /// Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.
-        /// </summary>
-        /// <param name="e">Event data for the event.</param>
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            if (_sourceUri != null)
-            {
-                if (_svgDrawing == null)
-                {
-                    DrawingGroup drawing = this.CreateDrawing();
-                    if (drawing != null)
-                    {
-                        this.OnLoadDrawing(drawing);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// This handles changes in the rendering settings of this control.
-        /// </summary>
-        protected virtual void OnSettingsChanged()
-        {   
-            if (!this.IsInitialized || _sourceUri == null)
-            {
-                return;
-            }
-
-            DrawingGroup drawing = this.CreateDrawing();
-            if (drawing != null)
-            {
-                this.OnLoadDrawing(drawing);
-            }
-        }
-
-        /// <summary>
-        /// This handles changes in the automatic resizing property of this control.
-        /// </summary>
-        protected virtual void OnAutoSizeChanged()
-        {   
-            if (_autoSize)
-            {
-                if (this.IsInitialized && _svgDrawing != null)
-                {
-                    Rect rectDrawing = _svgDrawing.Bounds;
-                    if (!rectDrawing.IsEmpty)
-                    {
-                        this.Width   = rectDrawing.Width;
-                        this.Height  = rectDrawing.Height;
-
-                        _isAutoSized = true;
-                    }
-                }
-            }
-            else
-            {
-                if (_isAutoSized)
-                {
-                    this.Width  = Double.NaN;
-                    this.Height = Double.NaN;
-                }
-            }
-        }
-
         /// <summary>
         /// Performs the conversion of a valid SVG source file to the 
-        /// <see cref="DrawingGroup"/>.
+        /// <see cref="DrawingImage"/> that is set as the value of the target 
+        /// property for this markup extension.
         /// </summary>
+        /// <param name="serviceProvider">
+        /// Object that can provide services for the markup extension.
+        /// </param>
         /// <returns>
-        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it
+        /// This returns <see cref="DrawingImage"/> if successful; otherwise, it
         /// returns <see langword="null"/>.
         /// </returns>
-        protected virtual DrawingGroup CreateDrawing()
+        public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            Uri svgSource = this.GetAbsoluteUri();
-
-            DrawingGroup drawing = null;
+            Uri svgSource = this.GetUri(serviceProvider);
 
             if (svgSource == null)
             {
-                return drawing;
+                return null;
             }
 
             try
@@ -338,12 +246,17 @@ namespace SharpVectors.Converters
                 {
                     case "file":
                     //case "ftp":
-                    //case "https":
+                    case "https":
                     case "http":
-                        using (FileSvgReader reader =
+                        using (FileSvgReader reader = 
                             new FileSvgReader(settings))
                         {
-                            drawing = reader.Read(svgSource);
+                            DrawingGroup drawGroup = reader.Read(svgSource);
+
+                            if (drawGroup != null)
+                            {
+                                return new DrawingImage(drawGroup);
+                            }
                         }
                         break;
                     case "pack":
@@ -358,14 +271,14 @@ namespace SharpVectors.Converters
                             svgStreamInfo = Application.GetResourceStream(svgSource);
                         }
 
-                        Stream svgStream = (svgStreamInfo != null) ?
+                        Stream svgStream = (svgStreamInfo != null) ? 
                             svgStreamInfo.Stream : null;
 
                         if (svgStream != null)
                         {
                             string fileExt = Path.GetExtension(svgSource.ToString());
                             bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
-                                string.Equals(fileExt, ".svgz",
+                                string.Equals(fileExt, ".svgz", 
                                 StringComparison.OrdinalIgnoreCase);
 
                             if (isCompressed)
@@ -378,19 +291,31 @@ namespace SharpVectors.Converters
                                         using (FileSvgReader reader =
                                             new FileSvgReader(settings))
                                         {
-                                            drawing = reader.Read(zipStream);
+                                            DrawingGroup drawGroup = reader.Read(
+                                                zipStream);
+
+                                            if (drawGroup != null)
+                                            {
+                                                return new DrawingImage(drawGroup);
+                                            }
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                using (svgStream)
+                                using (svgStreamInfo.Stream)
                                 {
                                     using (FileSvgReader reader =
                                         new FileSvgReader(settings))
                                     {
-                                        drawing = reader.Read(svgStream);
+                                        DrawingGroup drawGroup = reader.Read(
+                                            svgStreamInfo.Stream);
+
+                                        if (drawGroup != null)
+                                        {
+                                            return new DrawingImage(drawGroup);
+                                        }
                                     }
                                 }
                             }
@@ -404,114 +329,82 @@ namespace SharpVectors.Converters
                 if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
                     LicenseManager.UsageMode == LicenseUsageMode.Designtime)
                 {
-                    return drawing;
+                    return null;
                 }
 
                 throw;
             }
 
-            return drawing;
+            return null;
         }
 
         #endregion
 
         #region Private Methods
 
-        private void OnLoadDrawing(DrawingGroup drawing)
-        {   
-            if (drawing == null)
-            {
-                return;
-            }
-
-            this.OnUnloadDiagram();
-
-            this.RenderDiagrams(drawing);
-
-            _svgDrawing = drawing;
-
-            this.OnAutoSizeChanged();
-        }
-
-        private void OnUnloadDiagram()
+        /// <summary>
+        /// Converts the SVG source file to <see cref="Uri"/>
+        /// </summary>
+        /// <param name="serviceProvider">
+        /// Object that can provide services for the markup extension.
+        /// </param>
+        /// <returns>
+        /// Returns the valid <see cref="Uri"/> of the SVG source path if
+        /// successful; otherwise, it returns <see langword="null"/>.
+        /// </returns>
+        private Uri GetUri(IServiceProvider serviceProvider)
         {
-            this.UnloadDiagrams();
-
-            if (_isAutoSized)
-            {
-                this.Width  = Double.NaN;
-                this.Height = Double.NaN;
-            }
-        }
-
-        private Uri GetAbsoluteUri()
-        {
-            if (_sourceUri == null)
+            if (string.IsNullOrWhiteSpace(_svgPath))
             {
                 return null;
             }
-            Uri svgSource = _sourceUri;
 
-            if (svgSource.IsAbsoluteUri)
+            Uri svgSource;
+            if (Uri.TryCreate(_svgPath, UriKind.RelativeOrAbsolute, out svgSource))
             {
-                return svgSource;
-            }
-            else
-            {
-                // Try getting a local file in the same directory....
-                string svgPath = svgSource.ToString();
-                if (svgPath[0] == '\\' || svgPath[0] == '/')
+                if (svgSource.IsAbsoluteUri)
                 {
-                    svgPath = svgPath.Substring(1);
-                }
-                svgPath = svgPath.Replace('/', '\\');
-
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                string localFile = Path.Combine(Path.GetDirectoryName(
-                    assembly.Location), svgPath);
-
-                if (File.Exists(localFile))
-                {
-                    return new Uri(localFile);
-                }
-
-                // Try getting it as resource file...
-                if (_baseUri != null)
-                {
-                    return new Uri(_baseUri, svgSource);
+                    return svgSource;
                 }
                 else
                 {
-                    string asmName = assembly.GetName().Name;
-                    string uriString = String.Format(
-                        "pack://application:,,,/{0};component/{1}",
-                        asmName, svgPath);
+                    // Try getting a local file in the same directory....
+                    string svgPath = _svgPath;
+                    if (_svgPath[0] == '\\' || _svgPath[0] == '/')
+                    {
+                        svgPath = _svgPath.Substring(1);
+                    }
+                    svgPath = svgPath.Replace('/', '\\');
 
-                    return new Uri(uriString);
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    string localFile  = Path.Combine(Path.GetDirectoryName(
+                        assembly.Location), svgPath);
+
+                    if (File.Exists(localFile))
+                    {
+                        return new Uri(localFile);
+                    }
+
+                    // Try getting it as resource file...
+                    IUriContext uriContext = serviceProvider.GetService(
+                        typeof(IUriContext)) as IUriContext;
+                    if (uriContext != null && uriContext.BaseUri != null)
+                    {
+                        return new Uri(uriContext.BaseUri, svgSource);
+                    }
+                    else
+                    {   
+                        string asmName   = assembly.GetName().Name;
+                        string uriString = String.Format(
+                            "pack://application:,,,/{0};component/{1}",
+                            asmName, _svgPath);
+
+                        return new Uri(uriString);
+                    }
                 }
             }
-        }
 
-        #endregion
-
-        #region IUriContext Members
-
-        /// <summary>
-        /// Gets or sets the base URI of the current application context.
-        /// </summary>
-        /// <value>
-        /// The base URI of the application context.
-        /// </value>
-        public Uri BaseUri
-        {
-            get
-            {
-                return _baseUri;
-            }
-            set
-            {
-                _baseUri = value;
-            }
+            return null;
         }
 
         #endregion

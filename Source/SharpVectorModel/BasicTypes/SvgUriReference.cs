@@ -26,12 +26,6 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Public Events
-
-        public event NodeChangeHandler NodeChanged;
-
-        #endregion
-
         #region Public Properties
 
         public string AbsoluteUri

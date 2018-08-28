@@ -20,9 +20,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestSvgSample", "Samples
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfW3cSvgTestSuite", "Samples\WpfW3cSvgTestSuite\WpfW3cSvgTestSuite.csproj", "{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters.Wpf", "Source\SharpVectorConverters\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters.Wpf", "Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime.Wpf", "Source\SharpVectorRuntime\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime.Wpf", "Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgControl", "Samples\GdiTestSvgControl\GdiTestSvgControl.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
 EndProject
@@ -30,11 +30,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgViewer", "Samples
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tutorial Samples", "Tutorial Samples", "{B3DC784F-DBC1-48A7-8B32-4BFBC6949839}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converters.Wpf", "Applications\ConvertersWpf\Converters.Wpf.csproj", "{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf Control Samples", "Wpf Control Samples", "{7DC353C8-746B-47C7-9C8E-AF2F2DBD8242}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf Converter Samples", "Wpf Converter Samples", "{C8E98281-19B0-414B-9974-8C6EDCC80FC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squiggle.Wpf", "Applications\SquiggleWpf\Squiggle.Wpf.csproj", "{950268C7-328C-4921-A554-B806DD966869}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +113,18 @@ Global
 		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
 		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AABE71B6-057B-423C-822A-E9CD2129D2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,8 +134,8 @@ Global
 		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{AABE71B6-057B-423C-822A-E9CD2129D2F9} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
-		{7DC353C8-746B-47C7-9C8E-AF2F2DBD8242} = {B3DC784F-DBC1-48A7-8B32-4BFBC6949839}
-		{C8E98281-19B0-414B-9974-8C6EDCC80FC5} = {B3DC784F-DBC1-48A7-8B32-4BFBC6949839}
+		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A} = {B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}
+		{950268C7-328C-4921-A554-B806DD966869} = {B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

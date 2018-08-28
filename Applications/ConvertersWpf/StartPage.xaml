@@ -27,9 +27,9 @@
                         an open source .NET library for SVG licensed under the New BSD License.
                     </Run>
                 </TextBlock>
-                <TextBlock Margin="3 16 3 3"  TextAlignment="Right" ToolTip="http://sharpvectors.codeplex.com">
-                    <Hyperlink NavigateUri="http://sharpvectors.codeplex.com">
-                        SharpVectors Reloaded Project
+                <TextBlock Margin="3 16 3 3"  TextAlignment="Right" ToolTip="https://github.com/ElinamLLC/SharpVectors">
+                    <Hyperlink NavigateUri="https://github.com/ElinamLLC/SharpVectors">
+                        GitHub: SharpVectors Reloaded Project
                     </Hyperlink>
                 </TextBlock>
             </StackPanel>

@@ -16,14 +16,11 @@ namespace DirectorySvgConverterSample
             settings.TextAsGeometry = false;
 
             // 2. Specify the source and destination directories
-            DirectoryInfo svgDir = new DirectoryInfo(
-                Path.GetFullPath("Samples"));
-            DirectoryInfo xamlDir = new DirectoryInfo(
-                Path.GetFullPath("SamplesXaml"));
+            DirectoryInfo svgDir = new DirectoryInfo(Path.GetFullPath("Samples"));
+            DirectoryInfo xamlDir = new DirectoryInfo(Path.GetFullPath("SamplesXaml"));
 
             // 3. Create a directory converter
-            DirectorySvgConverter converter = 
-                new DirectorySvgConverter(settings);
+            DirectorySvgConverter converter = new DirectorySvgConverter(settings);
             // 4. Perform the conversion to XAML
             converter.Convert(svgDir, xamlDir);
         }

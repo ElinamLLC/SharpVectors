@@ -358,10 +358,9 @@ namespace SharpVectors.Converters
                 {
                     case "file":
                     //case "ftp":
-                    //case "https":
+                    case "https":
                     case "http":
-                        using (FileSvgReader reader =
-                            new FileSvgReader(settings))
+                        using (FileSvgReader reader = new FileSvgReader(settings))
                         {
                             drawing = reader.Read(svgSource);
                         }

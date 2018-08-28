@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    Title="SvgImage Sample" Height="346" Width="409" Background="White">
+    Title="SvgImage Sample" Height="480" Width="640" Background="White">
     <Window.Resources>
         <ResourceDictionary> 
             <sys:String x:Key="WebFile">
-                http://upload.wikimedia.org/wikipedia/commons/c/c7/SVG.svg
+                https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/tommek_Car.svg
             </sys:String>
         </ResourceDictionary>
     </Window.Resources>

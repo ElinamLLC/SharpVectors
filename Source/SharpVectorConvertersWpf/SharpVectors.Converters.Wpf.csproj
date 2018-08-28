@@ -5,42 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2CD52982-A1C2-4A14-9D69-D64719357216}</ProjectGuid>
+    <ProjectGuid>{E8056611-E49C-4BC3-A682-A629D5CEC11C}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharpVectors.Runtime</RootNamespace>
-    <AssemblyName>SharpVectors.Runtime</AssemblyName>
+    <RootNamespace>SharpVectors.Converters</RootNamespace>
+    <AssemblyName>SharpVectors.Converters.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SharpVectors.Runtime.snk</AssemblyOriginatorKeyFile>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <AssemblyOriginatorKeyFile>SharpVectors.Converters.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,10 +38,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core"/>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
@@ -74,9 +48,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmbeddedBitmapData.cs" />
-    <Compile Include="EmbeddedBitmapDataConverter.cs" />
-    <Compile Include="EmbeddedBitmapSource.cs" />
+    <Compile Include="ImageEncoderType.cs" />
+    <Compile Include="StreamSvgConverter.cs" />
+    <Compile Include="Utils\DirectoryCopier.cs" />
+    <Compile Include="Utils\DirectoryUtils.cs" />
+    <Compile Include="FileSvgConverter.cs" />
+    <Compile Include="ImageSvgConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -90,53 +67,61 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SvgAnimationLayer.cs" />
-    <Compile Include="SvgAnimator.cs" />
-    <Compile Include="SvgDrawingCanvas.cs" />
-    <Compile Include="SvgObjectType.cs" />
-    <Compile Include="SvgFontUriExtension.cs" />
-    <Compile Include="SvgImage.cs" />
-    <Compile Include="SvgLink.cs" />
-    <Compile Include="SvgObject.cs" />
-    <Compile Include="Utils\Casting.cs" />
-    <Compile Include="ZoomPanAnimationHelper.cs" />
-    <Compile Include="ZoomPanControl.cs" />
-    <Compile Include="ZoomPanControl.IScrollInfo.cs" />
+    <Compile Include="DirectorySvgConverter.cs" />
+    <Compile Include="EmbeddedImageVisitor.cs" />
+    <Compile Include="FileSvgReader.cs" />
+    <Compile Include="FontFamilyVisitor.cs" />
+    <Compile Include="LinkVisitor.cs" />
+    <Compile Include="SvgCanvas.cs" />
+    <Compile Include="SvgConverter.cs" />
+    <Compile Include="SvgImageExtension.cs" />
+    <Compile Include="SvgViewbox.cs" />
+    <Compile Include="XmlXamlWriter.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Drawings\Controls.cd" />
+    <None Include="Drawings\Converters.cd" />
+    <None Include="Drawings\Others.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SharpVectors.Runtime.snk" />
+    <None Include="SharpVectors.Converters.snk" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
+      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
+      <Name>SharpVectors.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
+      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
+      <Name>SharpVectors.Css</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
+      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
+      <Name>SharpVectors.Dom</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
+      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
+      <Name>SharpVectors.Model</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj">
+      <Project>{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}</Project>
+      <Name>SharpVectors.Rendering.Wpf</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj">
+      <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
+      <Name>SharpVectors.Runtime.Wpf</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

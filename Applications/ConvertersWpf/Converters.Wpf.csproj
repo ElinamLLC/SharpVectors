@@ -62,9 +62,8 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.AvalonEdit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ICSharpCode.AvalonEdit.dll</HintPath>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\..\Libraries\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -271,9 +270,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\SharpVectorConverters\SharpVectors.Converters.csproj">
-      <Project>{E8056611-E49C-4BC3-A682-A629D5CEC11C}</Project>
-      <Name>SharpVectors.Converters</Name>
+    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj">
+      <Project>{e8056611-e49c-4bc3-a682-a629d5cec11c}</Project>
+      <Name>SharpVectors.Converters.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj">
       <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
@@ -300,9 +299,9 @@
       <Name>SharpVectors.Rendering.Wpf</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorRuntime\SharpVectors.Runtime.csproj">
-      <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
-      <Name>SharpVectors.Runtime</Name>
+    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj">
+      <Project>{2cd52982-a1c2-4a14-9d69-d64719357216}</Project>
+      <Name>SharpVectors.Runtime.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
