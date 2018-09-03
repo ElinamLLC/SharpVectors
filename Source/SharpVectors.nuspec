@@ -1,25 +1,45 @@
 <?xml version="1.0"?>
-<package>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata minClientVersion="2.5">
     <id>SharpVectors.Reloaded</id>
     <version>$version$</version>
-    <title>SharpVectors Reloaded</title>
-    <authors>Paul Selormey</authors>
-    <owners>Paul Selormey</owners>
+    <title>SharpVectors</title>
+    <authors>Elinam LLC (Japan)</authors>
+    <owners>SharpVectors Team</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A library for handling SVG files.</description>
-	<projectUrl>https://github.com/ElinamLLC/SharpVectors</projectUrl>
-    <copyright>Copyright (c) Paul Selormey 2016</copyright>
-    <tags>svg .net managed</tags>
+    <description>A library for parsing, converting and viewing SVG files in WPF and WinForms applications.</description>
+    <licenseUrl>https://github.com/ElinamLLC/SharpVectors/blob/master/License.md</licenseUrl>
+    <projectUrl>https://github.com/ElinamLLC/SharpVectors</projectUrl>
+    <iconUrl>https://github.com/ElinamLLC/SharpVectors/blob/master/Images/SharpVectors.png?raw=true</iconUrl>
+    <copyright>Copyright (c) 2010 - 2018 Elinam LLC</copyright>
+    <releaseNotes>
+		* Moved from the .NET Client Profile to the full .NET Framework.
+		* Cleanup the .NET framework dependencies.
+		* Changed the converter assembly name; SharpVectors.Converters.dll to SharpVectors.Converters.Wpf.dll
+		* Changed the converter assembly name; SharpVectors.Runtime.dll to SharpVectors.Runtime.Wpf.dll
+		* Resolved various reported parsing and number handling issues. 
+		* Resolved various reported rendering issues, especially opacity and gradient fills. 
+		* Added marker support.
+	</releaseNotes>
+    <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
   </metadata>
   <files>
     <file src="..\Output\SharpVectors.Converters.Wpf.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Core.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Css.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Dom.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Model.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
-	<file src="..\Output\SharpVectors.Runtime.Wpf.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Core.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Css.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Dom.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Model.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Runtime.Wpf.dll" target="lib\net40"/>
+
+    <file src="..\Output\SharpVectors.Converters.Wpf.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Core.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Css.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Dom.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Model.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Rendering.Gdi.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Rendering.Wpf.xml" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Runtime.Wpf.xml" target="lib\net40"/>
   </files>
 </package>
