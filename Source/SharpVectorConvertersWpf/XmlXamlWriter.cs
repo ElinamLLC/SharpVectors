@@ -505,7 +505,7 @@ namespace SharpVectors.Converters
                                 builder.Append("svg");
                                 builder.Append(":");
                                 builder.Append("SvgFontUri ");
-                                builder.Append(fontUri);
+                                builder.Append(fontUri.Replace('\\', '/'));
                                 builder.Append("}");
 
                                 writer.WriteAttributeString(markupProperty.Name, builder.ToString());

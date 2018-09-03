@@ -178,7 +178,7 @@ namespace WpfW3cSvgTestSuite
                 summarySection.Blocks.Add(summaryTable);
 
                 summarySection.Blocks.Add(CreateAlert("Note: Percentage",
-                    "The percentage calculations do not include partial succcess cases."));
+                    "The percentage calculations do not include partial success cases."));
                 this.CreateHorzLine(summarySection, true);
 
                 testDetailsDoc.Blocks.Add(summarySection);
@@ -326,7 +326,8 @@ namespace WpfW3cSvgTestSuite
             headerGroup.Rows.Add(headerRow);
             summaryTable.RowGroups.Add(headerGroup);
 
-            double[] percentValues = new double[resultCount];
+            int[] successValues = new int[resultCount];
+            int totalValue = 0;
 
             for (int k = 0; k < _categoryLabels.Count; k++)
             {
@@ -356,22 +357,38 @@ namespace WpfW3cSvgTestSuite
                         resultRow.Cells.Add(CreateCell(total, false, lastBottom));
                     }
 
+                    successValues[i] = testCategory.Successes;
+                    totalValue       = total;
                     bool lastRight = (i == (resultCount - 1));
 
                     double percentValue = Math.Round(testCategory.Successes * 100.0d / total, 2);
-
-                    percentValues[i] = percentValue;
 
                     resultRow.Cells.Add(CreateCell(percentValue.ToString("00.00"),
                         lastRight, lastBottom, false, false));
                 }
 
-                // TODO: Improve this, currently only good for two results...
-                if (resultCount > 1 && IsBetterResult(percentValues, resultCount - 1))
+                int cellCount = resultRow.Cells.Count;
+                if (IsAllZero(successValues))
                 {
-                    int cellCount = resultRow.Cells.Count;
-
-                    resultRow.Cells[cellCount - 1].Background = Brushes.LightSkyBlue;
+                    for (int i = 1; i < cellCount; i++)
+                    {
+                        resultRow.Cells[i].Background = Brushes.PaleVioletRed;
+                    }
+                }
+                else if (IsAllDone(successValues, totalValue))
+                {
+                    for (int i = 1; i < cellCount; i++)
+                    {
+                        resultRow.Cells[i].Background = Brushes.Silver;
+                    }
+                }
+                else
+                {
+                    // TODO: Improve this, currently only good for two results...
+                    if (resultCount > 1 && IsBetterResult(successValues, resultCount - 1))
+                    {
+                        resultRow.Cells[cellCount - 1].Background = Brushes.LightSkyBlue;
+                    }
                 }
 
                 resultGroup.Rows.Add(resultRow);
@@ -381,16 +398,48 @@ namespace WpfW3cSvgTestSuite
             return summaryTable;
         }
 
-        private static bool IsBetterResult(double[] percentValue, int index)
+        private static bool IsAllZero(int[] successValues)
         {
-            if (index <= 0 || percentValue == null || percentValue.Length == 0 || index >= percentValue.Length)
+            if (successValues == null || successValues.Length == 0)
+            {
+                return true;
+            }
+            foreach (int successValue in successValues)
+            {
+                if (successValue != 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static bool IsAllDone(int[] successValues, int totalValue)
+        {
+            if (successValues == null || successValues.Length == 0)
             {
                 return false;
             }
-            double percentPrev = percentValue[index - 1];
-            double percentNext = percentValue[index];
+            foreach (int successValue in successValues)
+            {
+                if (successValue != totalValue)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-            return (percentNext - percentPrev) > double.Epsilon;
+        private static bool IsBetterResult(int[] successValues, int index)
+        {
+            if (index <= 0 || successValues == null || successValues.Length == 0 || index >= successValues.Length)
+            {
+                return false;
+            }
+            int successPrev = successValues[index - 1];
+            int successNext = successValues[index];
+
+            return successNext > successPrev;
         }
 
         private Table CreateAlert(string title, string message)

@@ -314,6 +314,10 @@ namespace SharpVectors.Renderers.Wpf
             for (int i = 0; i < itemCount; i++)
             {
                 SvgStopElement stop = (SvgStopElement)stops.Item(i);
+                if (stop == null || stop.Offset == null)
+                {
+                    continue;
+                }
                 string prop = stop.GetAttribute("stop-color");
                 string style = stop.GetAttribute("style");
                 Color color = Colors.Transparent; // no auto-inherited...
@@ -375,14 +379,11 @@ namespace SharpVectors.Renderers.Wpf
             Transform translateMatrix = null;
             Transform scaleMatrix = null;
 
-            if (SvgObject.IsValid(translateX) && SvgObject.IsValid(translateY) 
-                && (!translateX.Equals(0) || !translateY.Equals(0)))
+            if (!translateX.Equals(0) || !translateY.Equals(0))
             {
                 translateMatrix = new TranslateTransform(translateX, translateY);
             }
-
-            if (SvgObject.IsValid(scaleX) && SvgObject.IsValid(scaleY)
-                && (!scaleX.Equals(1.0f) || !scaleY.Equals(1.0f)))
+            if (!scaleX.Equals(1.0f) || !scaleY.Equals(1.0f))
             {
                 scaleMatrix = new ScaleTransform(scaleX, scaleY);
             }
@@ -479,6 +480,23 @@ namespace SharpVectors.Renderers.Wpf
                     translateX = -viewBox.X * scaleX;
                     translateY = -viewBox.Y * scaleY;
                 }
+            }
+
+            if (!SvgNumber.IsValid(translateX))
+            {
+                translateX = 0;
+            }
+            if (!SvgNumber.IsValid(translateY))
+            {
+                translateY = 0;
+            }
+            if (!SvgNumber.IsValid(scaleX))
+            {
+                scaleX = 1;
+            }
+            if (!SvgNumber.IsValid(scaleY))
+            {
+                scaleY = 1;
             }
 
             return new double[]{ translateX, translateY, scaleX, scaleY };

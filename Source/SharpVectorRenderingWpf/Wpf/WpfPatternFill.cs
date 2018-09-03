@@ -82,7 +82,7 @@ namespace SharpVectors.Renderers.Wpf
             svgElm.SetAttribute("width",  _patternElement.GetAttribute("width"));
             svgElm.SetAttribute("height", _patternElement.GetAttribute("height"));
 
-            if (_patternElement.PatternContentUnits.AnimVal.Equals(SvgUnitType.ObjectBoundingBox))
+            if (_patternElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
             {
                 svgElm.SetAttribute("viewBox", "0 0 1 1");
             }
@@ -109,14 +109,13 @@ namespace SharpVectors.Renderers.Wpf
 
             WpfDrawingSettings settings = context.Settings.Clone();
             settings.TextAsGeometry = true;
-            WpfDrawingContext patternContext = new WpfDrawingContext(true,
-                settings);
+            WpfDrawingContext patternContext = new WpfDrawingContext(true, settings);
 
             patternContext.Initialize(null, context.FontFamilyVisitor, null);
 
             SvgSvgElement elm = MoveIntoSvgElement();
 
-            renderer.Render((SvgElement)elm, patternContext);
+            renderer.Render(elm, patternContext);
             Drawing img = renderer.Drawing;
 
             MoveOutOfSvgElement(elm);
@@ -126,28 +125,25 @@ namespace SharpVectors.Renderers.Wpf
 
         private double CalcPatternUnit(SvgLength length, SvgLengthDirection dir, Rect bounds)
         {
-            if (_patternElement.PatternUnits.AnimVal.Equals(SvgUnitType.UserSpaceOnUse))
+            if (_patternElement.PatternUnits.AnimVal.Equals((ushort)SvgUnitType.UserSpaceOnUse))
             {
                 return length.Value;
             }
+            double calcValue = length.ValueInSpecifiedUnits;
+            if (dir == SvgLengthDirection.Horizontal)
+            {
+                calcValue *= bounds.Width;
+            }
             else
             {
-                double calcValue = length.ValueInSpecifiedUnits;
-                if (dir == SvgLengthDirection.Horizontal)
-                {
-                    calcValue *= bounds.Width;
-                }
-                else
-                {
-                    calcValue *= bounds.Height;
-                }
-                if (length.UnitType == SvgLengthType.Percentage)
-                {
-                    calcValue /= 100F;
-                }
-
-                return calcValue;
+                calcValue *= bounds.Height;
             }
+            if (length.UnitType == SvgLengthType.Percentage)
+            {
+                calcValue /= 100F;
+            }
+
+            return calcValue;
         }
 
         private Rect GetDestRect(Rect bounds)
@@ -169,8 +165,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private MatrixTransform GetTransformMatrix(Rect bounds)
         {
-            SvgMatrix svgMatrix = 
-                ((SvgTransformList)_patternElement.PatternTransform.AnimVal).TotalMatrix;
+            SvgMatrix svgMatrix = ((SvgTransformList)_patternElement.PatternTransform.AnimVal).TotalMatrix;
 
             MatrixTransform transformMatrix = new MatrixTransform(svgMatrix.A, svgMatrix.B, svgMatrix.C,
                 svgMatrix.D, svgMatrix.E, svgMatrix.F);

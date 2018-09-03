@@ -1,7 +1,5 @@
 using System;
 
-using SharpVectors.Dom.Css;
-
 namespace SharpVectors.Dom.Svg
 {
     public class SvgPaint : SvgColor, ISvgPaint
@@ -36,10 +34,10 @@ namespace SharpVectors.Dom.Svg
 
             str = str.Trim();
 
-            if (str.StartsWith("url("))
+            if (str.StartsWith("url(", StringComparison.OrdinalIgnoreCase))
             {
                 hasUri = true;
-                int endUri = str.IndexOf(")");
+                int endUri = str.IndexOf(")", StringComparison.OrdinalIgnoreCase);
                 _uri = str.Substring(4, endUri - 4);
                 str = str.Substring(endUri + 1).Trim();
             }
@@ -49,7 +47,7 @@ namespace SharpVectors.Dom.Svg
                 base.ParseColor(str);
                 hasCurrentColor = true;
             }
-            else if (str.Equals("none"))
+            else if (str.Equals("none") || str.Equals("transparent") || str.Equals("null"))
             {
                 hasNone = true;
             }

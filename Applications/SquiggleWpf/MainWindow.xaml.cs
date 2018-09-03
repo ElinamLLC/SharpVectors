@@ -367,7 +367,7 @@ namespace SharpVectors.Squiggle
         private void LoadFile(string fileName)
         {
             string fileExt = Path.GetExtension(fileName);
-            if (String.IsNullOrEmpty(fileExt))
+            if (string.IsNullOrEmpty(fileExt))
             {
                 return;
             }
@@ -377,8 +377,8 @@ namespace SharpVectors.Squiggle
                 _fileWatcher.EnableRaisingEvents = false;
             }
 
-            if (String.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
             {
                 try
                 {

@@ -2,12 +2,9 @@ using System;
 using System.Xml;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Renderers.Gdi
 {
@@ -72,7 +69,7 @@ namespace SharpVectors.Renderers.Gdi
             float fEffectiveRadiusX = fRadius;
             float fEffectiveRadiusY = fRadius;
 
-            if (res.GradientUnits.AnimVal.Equals(SvgUnitType.ObjectBoundingBox))
+            if (res.GradientUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
             {
                 fEffectiveCX = bounds.Left + fCenterX * (bounds.Width);
                 fEffectiveCY = bounds.Top + fCenterY * (bounds.Height);
@@ -364,7 +361,7 @@ namespace SharpVectors.Renderers.Gdi
             float fEffectiveRadiusX = fRadius;
             float fEffectiveRadiusY = fRadius;
 
-            if (res.GradientUnits.AnimVal.Equals(SvgUnitType.ObjectBoundingBox))
+            if (res.GradientUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
             {
                 fEffectiveCX = bounds.Left + fCenterX * (bounds.Width);
                 fEffectiveCY = bounds.Top + fCenterY * (bounds.Height);

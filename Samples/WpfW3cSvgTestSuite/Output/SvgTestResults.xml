@@ -24,7 +24,7 @@
         <category label="Text" total="32" unknowns="0" failures="2" successes="19" partials="11" />
         <category label="Metadata and Others" total="3" unknowns="0" failures="1" successes="1" partials="1" />
     </result>
-    <result version="1.1.0.0" date="2018-08-25T08:47:36.4404038+09:00">
+    <result version="1.1.0.0" date="2018-09-03T15:03:28.5575808+09:00">
         <category label="Animations" total="58" unknowns="0" failures="58" successes="0" partials="0" />
         <category label="Colors" total="4" unknowns="0" failures="0" successes="3" partials="1" />
         <category label="Coordinates and Transforms" total="14" unknowns="0" failures="0" successes="11" partials="3" />
@@ -35,7 +35,7 @@
         <category label="Masking" total="8" unknowns="0" failures="0" successes="6" partials="2" />
         <category label="Paint Servers" total="20" unknowns="0" failures="0" successes="16" partials="4" />
         <category label="Painting Fill" total="5" unknowns="0" failures="0" successes="5" partials="0" />
-        <category label="Painting Marker" total="3" unknowns="0" failures="3" successes="0" partials="0" />
+        <category label="Painting Marker" total="3" unknowns="0" failures="0" successes="2" partials="1" />
         <category label="Painting Rendering" total="1" unknowns="0" failures="0" successes="1" partials="0" />
         <category label="Painting Stroke" total="5" unknowns="0" failures="0" successes="5" partials="0" />
         <category label="Paths" total="14" unknowns="0" failures="0" successes="14" partials="0" />
@@ -43,7 +43,7 @@
         <category label="Rendering Groups" total="2" unknowns="0" failures="0" successes="0" partials="2" />
         <category label="Scripting" total="4" unknowns="0" failures="4" successes="0" partials="0" />
         <category label="Shapes" total="10" unknowns="0" failures="0" successes="10" partials="0" />
-        <category label="Structures" total="33" unknowns="1" failures="8" successes="23" partials="1" />
+        <category label="Structures" total="33" unknowns="1" failures="7" successes="24" partials="1" />
         <category label="Styling" total="8" unknowns="0" failures="3" successes="3" partials="2" />
         <category label="Text" total="32" unknowns="0" failures="2" successes="19" partials="11" />
         <category label="Metadata and Others" total="3" unknowns="0" failures="1" successes="1" partials="1" />

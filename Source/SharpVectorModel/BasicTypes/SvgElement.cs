@@ -12,9 +12,9 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private bool                _isImported;
-        private SvgElement          _importNode;
-        private SvgDocument         _importDocument;
+        private bool _isImported;
+        private SvgElement _importNode;
+        private SvgDocument _importDocument;
         private ISvgElementInstance _elementInstance;
 
         #endregion
@@ -32,37 +32,31 @@ namespace SharpVectors.Dom.Svg
 
         public bool Imported
         {
-            get 
-            { 
-                return _isImported; 
+            get {
+                return _isImported;
             }
-            set 
-            { 
-                _isImported = value; 
+            set {
+                _isImported = value;
             }
         }
 
         public SvgElement ImportNode
         {
-            get 
-            { 
-                return _importNode; 
+            get {
+                return _importNode;
             }
-            set 
-            { 
-                _importNode = value; 
+            set {
+                _importNode = value;
             }
         }
 
         public SvgDocument ImportDocument
         {
-            get 
-            { 
-                return _importDocument; 
+            get {
+                return _importDocument;
             }
-            set 
-            { 
-                _importDocument = value; 
+            set {
+                _importDocument = value;
             }
         }
 
@@ -72,48 +66,40 @@ namespace SharpVectors.Dom.Svg
 
         public new SvgDocument OwnerDocument
         {
-            get
-            {
+            get {
                 return base.OwnerDocument as SvgDocument;
             }
         }
 
         public string Id
         {
-            get
-            {
+            get {
                 return GetAttribute("id");
             }
-            set
-            {
+            set {
                 SetAttribute("id", value);
             }
         }
 
         public ISvgSvgElement OwnerSvgElement
         {
-            get
-            {
+            get {
                 if (this.Equals(OwnerDocument.DocumentElement))
                 {
                     return null;
                 }
-                else
+                XmlNode parent = ParentNode;
+                while (parent != null && !(parent is SvgSvgElement))
                 {
-                    XmlNode parent = ParentNode;
-                    while (parent != null && !(parent is SvgSvgElement))
-                    {
-                        parent = parent.ParentNode;
-                    }
-                    return parent as SvgSvgElement;
+                    parent = parent.ParentNode;
                 }
+                return parent as SvgSvgElement;
             }
         }
 
         public ISvgElement ViewportElement
         {
-            get
-            {
+            get {
                 if (this.Equals(OwnerDocument.DocumentElement))
                 {
                     return null;
@@ -140,8 +126,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public virtual bool IsRenderable
         {
-            get
-            {
+            get {
                 return true;
             }
         }
@@ -154,8 +139,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public virtual SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.None;
             }
         }
@@ -166,8 +150,7 @@ namespace SharpVectors.Dom.Svg
 
         public string XmlSpace
         {
-            get
-            {
+            get {
                 string s = GetAttribute("xml:space");
                 if (string.IsNullOrWhiteSpace(s))
                 {
@@ -184,16 +167,14 @@ namespace SharpVectors.Dom.Svg
 
                 return s;
             }
-            set
-            {
+            set {
                 SetAttribute("xml:space", value);
             }
         }
 
         public string XmlLang
         {
-            get
-            {
+            get {
                 string s = this.GetAttribute("xml:lang");
                 if (string.IsNullOrWhiteSpace(s))
                 {
@@ -210,8 +191,7 @@ namespace SharpVectors.Dom.Svg
 
                 return s;
             }
-            set
-            {
+            set {
                 this.SetAttribute("xml:lang", value);
             }
         }
@@ -227,18 +207,12 @@ namespace SharpVectors.Dom.Svg
             {
                 return uri;
             }
-            else
+            string baseUri = BaseURI;
+            if (baseUri.Length == 0)
             {
-                string baseUri = BaseURI;
-                if (baseUri.Length == 0)
-                {
-                    return uri;
-                }
-                else
-                {
-                    return new Uri(new Uri(baseUri), uri).AbsoluteUri;
-                }
+                return uri;
             }
+            return new Uri(new Uri(baseUri), uri).AbsoluteUri;
         }
 
         /// <summary>
@@ -251,12 +225,10 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public ISvgElementInstance ElementInstance
         {
-            get
-            {
+            get {
                 return _elementInstance;
             }
-            set
-            {
+            set {
                 _elementInstance = value;
             }
         }

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
     local:MainWindowSettings.Save="True"
-    Title="W3C SVG 1.1 Full Test Suite" Height="589" Width="719">
+    Title="W3C SVG 1.1 Full Test Suite" Height="640" Width="860">
     <DockPanel LastChildFill="True" Margin="3">
         <!-- Top directory source panel -->
         <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
@@ -41,7 +41,7 @@
                 </Grid.ColumnDefinitions>
                 <Expander Name="leftExpander" Grid.Row="0" Grid.Column="0" IsExpanded="True" ExpandDirection="Left">
                     <Expander.Header>
-                        <TextBlock Text="W3C SVG Test Suite" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" FontSize="14">                
+                        <TextBlock Text="W3C SVG Test Suite" TextWrapping="NoWrap" Foreground="#99000000" FontFamily="Verdana" FontWeight="Bold" TextTrimming="CharacterEllipsis" FontSize="14pt">                
                         <TextBlock.LayoutTransform>
                             <RotateTransform Angle="90" />
                         </TextBlock.LayoutTransform>
@@ -54,7 +54,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="250*"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto" MinHeight="24"/>
+                                    <RowDefinition Height="Auto" MinHeight="28"/>
                                 </Grid.RowDefinitions>
                                 <TreeView Name="treeView" Grid.Row="0" BorderThickness="0" HorizontalAlignment="Stretch" IsTextSearchEnabled="True" 
                                           TreeViewItem.Collapsed="OnTreeViewItemCollapsed" TreeViewItem.Expanded="OnTreeViewItemExpanded" 
@@ -65,7 +65,7 @@
                                 <!-- The Left-Bottom Expander/Contents -->
                                 <Expander Name="bottomExpander" Grid.Row="2" IsExpanded="True" ExpandDirection="Down">
                                     <Expander.Header>
-                                        <TextBlock Text="Selected Test State" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" FontSize="14"/>              
+                                        <TextBlock Text="Selected Test State" TextWrapping="NoWrap" Foreground="#99000000" FontFamily="Verdana" FontWeight="Bold" TextTrimming="CharacterEllipsis" FontSize="14pt"/>              
                                     </Expander.Header>
                                     <StackPanel Name="testInfoPanel" Orientation="Vertical" Margin="3">                                        
                                         <TextBlock Text="Test State:"/>

@@ -70,7 +70,7 @@ namespace SharpVectors.Renderers.Gdi
 
 				gr.TranslateTransform(point.X, point.Y);
 
-				if (markerElm.OrientType.AnimVal.Equals(SvgMarkerOrient.Angle))
+				if (markerElm.OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
 				{
 					gr.RotateTransform((float)markerElm.OrientAngle.AnimVal.Value);
 				}
@@ -94,7 +94,7 @@ namespace SharpVectors.Renderers.Gdi
 					gr.RotateTransform((float)angle);
 				}
 
-				if (markerElm.MarkerUnits.AnimVal.Equals(SvgMarkerUnit.StrokeWidth))
+				if (markerElm.MarkerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
 				{
 					SvgLength strokeWidthLength = new SvgLength(refElement, 
                         "stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, "1");
@@ -102,8 +102,7 @@ namespace SharpVectors.Renderers.Gdi
 					gr.ScaleTransform(strokeWidth, strokeWidth);
 				}
 
-				SvgPreserveAspectRatio spar = 
-                    (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
+				SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
                 double[] translateAndScale = spar.FitToViewBox((SvgRect)markerElm.ViewBox.AnimVal,
 					new SvgRect(0, 0, markerElm.MarkerWidth.AnimVal.Value,
 						markerElm.MarkerHeight.AnimVal.Value));

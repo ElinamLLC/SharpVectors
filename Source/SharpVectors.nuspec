@@ -13,13 +13,13 @@
     <tags>svg .net managed</tags>
   </metadata>
   <files>
-    <file src="..\output\SharpVectors.Converters.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Core.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Css.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Dom.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Model.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
-	<file src="..\output\SharpVectors.Runtime.dll" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Converters.Wpf.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Core.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Css.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Dom.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Model.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
+	<file src="..\Output\SharpVectors.Runtime.Wpf.dll" target="lib\net40"/>
   </files>
 </package>

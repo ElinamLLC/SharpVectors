@@ -13,8 +13,9 @@ namespace SharpVectors.Renderers.Wpf
         #region Private Fields
 
         private string _currentLang;
+        private string _currentLangName;
         private WpfDrawingRenderer _renderer;
-        private Dictionary<ISvgElement, WpfRenderingBase> _rendererMap;
+        private IDictionary<ISvgElement, WpfRenderingBase> _rendererMap;
 
         #endregion
 
@@ -22,9 +23,12 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfRenderingHelper(WpfDrawingRenderer renderer)
         {
-            _currentLang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-            _renderer    = renderer;
-            _rendererMap = new Dictionary<ISvgElement, WpfRenderingBase>();
+            var cultureInfo = CultureInfo.CurrentCulture;
+
+            _currentLang     = cultureInfo.TwoLetterISOLanguageName;
+            _currentLangName = cultureInfo.Name;
+            _renderer        = renderer;
+            _rendererMap     = new Dictionary<ISvgElement, WpfRenderingBase>();
         }
 
         #endregion
@@ -171,8 +175,7 @@ namespace SharpVectors.Renderers.Wpf
             // able to insert this node, so we first import it...
             if (useElement.OwnerDocument != refEl.OwnerDocument)
             {
-                XmlElement importedNode = 
-                    useElement.OwnerDocument.ImportNode(refEl, true) as XmlElement;
+                XmlElement importedNode = useElement.OwnerDocument.ImportNode(refEl, true) as XmlElement;
 
                 if (importedNode != null)
                 {
@@ -296,7 +299,8 @@ namespace SharpVectors.Renderers.Wpf
 
                 foreach (string req in element.SystemLanguage)
                 {
-                    if (string.Equals(req, _currentLang, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(req, _currentLang, StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(req, _currentLangName, StringComparison.OrdinalIgnoreCase))
                     {
                         systemLanguage = true;
                     }

@@ -185,7 +185,6 @@ namespace SharpVectors.Dom.Svg
             {
                 translateY = 0;
             }
-
             if (!SvgNumber.IsValid(scaleX))
             {
                 scaleX = 1;

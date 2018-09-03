@@ -2,7 +2,6 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 using SharpVectors.Dom.Css;
 
@@ -14,24 +13,29 @@ namespace SharpVectors.Dom.Svg
     public abstract class SvgStyleableElement : SvgElement, ISvgStylable
     {
         #region Private static fields
+
         private static Regex isImportant = new Regex(@"!\s*important$");
+        
         #endregion
 
         #region Private Fields
 
+        private ISvgAnimatedString className;
+        private Dictionary<string, ICssValue> presentationAttributes = new Dictionary<string, ICssValue>();
+
         #endregion
 
         #region Constructors
-        internal SvgStyleableElement(string prefix, string localname, string ns, SvgDocument doc)
+
+        protected SvgStyleableElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
         }
+
         #endregion
 
         #region ISvgStylable Members
 
-        #region ClassName
-        private ISvgAnimatedString className;
         public ISvgAnimatedString ClassName
         {
             get
@@ -43,10 +47,7 @@ namespace SharpVectors.Dom.Svg
                 return className;
             }
         }
-        #endregion
 
-        #region PresentationAttributes
-        private Dictionary<string, ICssValue> presentationAttributes = new Dictionary<string, ICssValue>();
         public ICssValue GetPresentationAttribute(string name)
         {
             if (!presentationAttributes.ContainsKey(name))
@@ -74,10 +75,11 @@ namespace SharpVectors.Dom.Svg
 
             return presentationAttributes[name];
         }
-        #endregion
+        
         #endregion
 
         #region GetValues
+
         public string GetPropertyValue(string name)
         {
             return GetComputedStyle(string.Empty).GetPropertyValue(name);
@@ -100,7 +102,9 @@ namespace SharpVectors.Dom.Svg
             {
                 CssCollectedStyleDeclaration csd = (CssCollectedStyleDeclaration)base.GetComputedStyle(pseudoElt);
 
-                IEnumerator<string> cssPropNames = OwnerDocument.CssPropertyProfile.GetAllPropertyNames().GetEnumerator();
+                var propNames = this.OwnerDocument.CssPropertyProfile.GetAllPropertyNames();
+
+                IEnumerator<string> cssPropNames = propNames.GetEnumerator();
                 while (cssPropNames.MoveNext())
                 {
                     string cssPropName = cssPropNames.Current;
@@ -120,6 +124,7 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Update handling
+
         public override void HandleAttributeChange(XmlAttribute attribute)
         {
             if (attribute.NamespaceURI.Length == 0)
@@ -140,6 +145,7 @@ namespace SharpVectors.Dom.Svg
             }
             base.HandleAttributeChange(attribute);
         }
+
         #endregion
     }
 }

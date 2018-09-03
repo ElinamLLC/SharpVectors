@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Svg
@@ -8,26 +9,13 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
     public sealed class SvgTransform : ISvgTransform
     {
-        #region Enum SvgTransformType
-
-        enum SvgTransformType : short
-        {
-            Unknown,
-            Matrix,
-            Translate,
-            Scale,
-            Rotate,
-            SkewX,
-            SkewY
-        }
-
-        #endregion
-
         #region Private Fields
 
-        private short _type;
         private double _angle;
         private ISvgMatrix _matrix;
+        private SvgTransformType _type;
+
+        private double[] _values;
 
         #endregion
 
@@ -39,7 +27,7 @@ namespace SharpVectors.Dom.Svg
 
         public SvgTransform(ISvgMatrix matrix)
         {
-            _type   = (short) SvgTransformType.Matrix;
+            _type   = SvgTransformType.Matrix;
             _matrix = matrix;
         }
 
@@ -50,16 +38,34 @@ namespace SharpVectors.Dom.Svg
 			string valuesList = (str.Substring(start+1, str.Length - start - 2)).Trim(); //JR added trim
 			Regex re = new Regex("[\\s\\,]+"); 
 			valuesList = re.Replace(valuesList, ",");
+
 			string[] valuesStr = valuesList.Split(new char[]{','});
 			int len = valuesStr.GetLength(0);
             double[] values = new double[len];
 
-			for (int i = 0; i<len; i++)
-			{
-                values[i] = SvgNumber.ParseNumber(valuesStr[i]);
-			}
+            try
+            {
+                for (int i = 0; i < len; i++)
+                {
+                    values[i] = SvgNumber.ParseNumber(valuesStr[i]);
+                }
+            }
+            catch
+            {
+                List<double> valueList = new List<double>();
+                foreach (Match m in SvgNumber.DoubleRegex.Matches(str))
+                {
+                    if (!string.IsNullOrEmpty(m.Value))
+                        valueList.Add(SvgNumber.ParseToFloat(m.Value));
+                }
 
-            switch (type)
+                values = valueList.ToArray();
+                len = values.Length;
+            }
+
+            _values = values;
+
+            switch (type.Trim())
             {
                 case "translate":
                     switch (len)
@@ -111,13 +117,12 @@ namespace SharpVectors.Dom.Svg
                     SetSkewY(values[0]);
                     break;
                 case "matrix":
-                    if(len != 6)
+                    if (len != 6)
                         throw new ApplicationException("Wrong number of arguments in matrix transform");
-                    SetMatrix(
-                        new SvgMatrix(values[0], values[1], values[2], values[3], values[4], values[5]));
+                    SetMatrix(new SvgMatrix(values[0], values[1], values[2], values[3], values[4], values[5]));
                     break;
                 default:
-                    this._type = (short) SvgTransformType.Unknown;
+                    _type = SvgTransformType.Unknown;
                     break;
             }
 		}
@@ -128,6 +133,11 @@ namespace SharpVectors.Dom.Svg
 
 		public short Type
 		{
+			get { return (short)_type; }
+		}
+
+		public SvgTransformType TransformType
+        {
 			get { return _type; }
 		}
 
@@ -141,48 +151,53 @@ namespace SharpVectors.Dom.Svg
             get { return _angle; }
 		}
 
+        public double[] InputValues
+        {
+            get { return _values; }
+		}
+
 		public void SetMatrix(ISvgMatrix matrix)
 		{
-			_type   = (short)SvgTransformType.Matrix;
+			_type   = SvgTransformType.Matrix;
 			_matrix = matrix;
 		}
 
         public void SetTranslate(double tx, double ty)
 		{
-			_type   = (short)SvgTransformType.Translate;
+			_type   = SvgTransformType.Translate;
 			_matrix = new SvgMatrix().Translate(tx, ty);
 		}
 
         public void SetScale(double sx, double sy)
 		{
-			_type   = (short)SvgTransformType.Scale;
+			_type   = SvgTransformType.Scale;
 			_matrix = new SvgMatrix().ScaleNonUniform(sx, sy);
 		}
 
         public void SetRotate(double angle)
 		{
-			_type   = (short)SvgTransformType.Rotate;
+			_type   = SvgTransformType.Rotate;
 			_angle  = angle;
 			_matrix = new SvgMatrix().Rotate(angle);
 		}
 
         public void SetRotate(double angle, double cx, double cy)
 		{
-			_type   = (short)SvgTransformType.Rotate;
+			_type   = SvgTransformType.Rotate;
 			_angle  = angle;
 			_matrix = new SvgMatrix().Translate(cx, cy).Rotate(angle).Translate(-cx,-cy);
 		}
 
         public void SetSkewX(double angle)
 		{
-			_type   = (short)SvgTransformType.SkewX;
+			_type   = SvgTransformType.SkewX;
 			_angle  = angle;
 			_matrix = new SvgMatrix().SkewX(angle);
 		}
 
         public void SetSkewY(double angle)
 		{
-			_type   = (short)SvgTransformType.SkewY;
+			_type   = SvgTransformType.SkewY;
 			_angle  = angle;
 			_matrix = new SvgMatrix().SkewY(angle);
 		}

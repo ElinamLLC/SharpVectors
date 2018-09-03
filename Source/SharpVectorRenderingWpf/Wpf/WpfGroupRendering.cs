@@ -79,6 +79,10 @@ namespace SharpVectors.Renderers.Wpf
 
                 SvgGElement element = (SvgGElement)_svgElement;
                 string opacity = element.GetAttribute("opacity");
+                if (string.IsNullOrWhiteSpace(opacity))
+                {
+                    opacity = element.GetPropertyValue("opacity");
+                }
                 if (opacity != null && opacity.Length > 0)
                 {
                     opacityValue = (float)SvgNumber.ParseNumber(opacity);
@@ -89,6 +93,13 @@ namespace SharpVectors.Renderers.Wpf
                 if (opacityValue >= 0)
                 {
                     _drawGroup.Opacity = opacityValue;
+                }
+
+                string sVisibility = element.GetPropertyValue("visibility");
+                string sDisplay = element.GetPropertyValue("display");
+                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                {
+                    _drawGroup.Opacity = 0;
                 }
             }
 

@@ -175,9 +175,9 @@
         <test source="painting-fill-05-b.svg" title="painting-fill-05-b" state="success" comment="" description="" />
     </category>
     <category label="Painting Marker">
-        <test source="painting-marker-01-f.svg" title="painting-marker-01-f" state="failure" comment="" description="Checks if viewer can handle marker elements on paths" />
-        <test source="painting-marker-02-f.svg" title="painting-marker-02-f" state="failure" comment="" description="Examines rendering model for markers" />
-        <test source="painting-marker-03-f.svg" title="painting-marker-03-f" state="failure" comment="" description="Tests the 'marker' shorthand property and the three marker presentation attributes" />
+        <test source="painting-marker-01-f.svg" title="painting-marker-01-f" state="success" comment="" description="Checks if viewer can handle marker elements on paths" />
+        <test source="painting-marker-02-f.svg" title="painting-marker-02-f" state="partial" comment="Stroke properties not fully supported." description="Examines rendering model for markers" />
+        <test source="painting-marker-03-f.svg" title="painting-marker-03-f" state="success" comment="" description="Tests the 'marker' shorthand property and the three marker presentation attributes" />
     </category>
     <category label="Painting Rendering">
         <test source="painting-render-01-b.svg" title="painting-render-01-b" state="success" comment="" description="Test color interpolation property." />
@@ -237,7 +237,7 @@
     </category>
     <category label="Structures">
         <test source="struct-cond-01-t.svg" title="struct-cond-01-t" state="success" comment="" description="Test to determine if a simple switch element can be probably evaluated." />
-        <test source="struct-cond-02-t.svg" title="struct-cond-02-t" state="failure" comment="systemLanguage not supported" description="Test that viewer has the basic capability to switch on user langauge" />
+        <test source="struct-cond-02-t.svg" title="struct-cond-02-t" state="success" comment="The systemLanguage property depends on the culture settings of the OS and might not be the same for the expected image, which is English." description="Test that viewer has the basic capability to switch on user langauge" />
         <test source="struct-cond-03-t.svg" title="struct-cond-03-t" state="success" comment="" description="Tests proper handling of &lt;switch&gt; elementwith requiredFeature attribute." />
         <test source="struct-defs-01-t.svg" title="struct-defs-01-t" state="success" comment="" description="Test to determine if the defs element is used as a container correctly" />
         <test source="struct-dom-01-b.svg" title="struct-dom-01-b" state="failure" comment="Script is not supported." description="Checks if SVG DOM ECMA Script binding is supported" />

@@ -66,7 +66,7 @@ namespace SharpVectors.Renderers.Gdi
 			svgElm.SetAttribute("width", _patternElement.GetAttribute("width"));
 			svgElm.SetAttribute("height", _patternElement.GetAttribute("height"));
 
-			if (_patternElement.PatternContentUnits.AnimVal.Equals(SvgUnitType.ObjectBoundingBox))
+			if (_patternElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
 			{
 				svgElm.SetAttribute("viewBox", "0 0 1 1");
 			}
@@ -104,7 +104,7 @@ namespace SharpVectors.Renderers.Gdi
 
 		private float CalcPatternUnit(SvgLength length, SvgLengthDirection dir, RectangleF bounds)
 		{
-			if (_patternElement.PatternUnits.AnimVal.Equals(SvgUnitType.UserSpaceOnUse))
+			if (_patternElement.PatternUnits.AnimVal.Equals((ushort)SvgUnitType.UserSpaceOnUse))
 			{
                 return (float)length.Value;
 			}

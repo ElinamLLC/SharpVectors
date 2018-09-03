@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using System.Windows;
@@ -17,15 +18,17 @@ namespace SharpVectors.Renderers.Wpf
 
         private static Regex _reUrl = new Regex(@"^url\((?<uri>.+)\)$", RegexOptions.Compiled);
 
-        private Geometry     _clipGeometry;
-        private Transform    _transformMatrix;
-        private Brush        _maskBrush;
+        private Geometry _clipGeometry;
+        private Transform _transformMatrix;
+        private Brush _maskBrush;
 
-        private SvgUnitType  _clipPathUnits;
+        private SvgUnitType _clipPathUnits;
 
         private SvgUnitType _maskUnits;
 
         private SvgUnitType _maskContentUnits;
+
+        private bool _combineTransforms;
 
         #endregion
 
@@ -34,9 +37,10 @@ namespace SharpVectors.Renderers.Wpf
         public WpfRendering(SvgElement element)
             : base(element)
         {
-            _maskUnits        = SvgUnitType.UserSpaceOnUse;
-            _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
-            _maskContentUnits = SvgUnitType.UserSpaceOnUse;
+            _maskUnits         = SvgUnitType.UserSpaceOnUse;
+            _clipPathUnits     = SvgUnitType.UserSpaceOnUse;
+            _maskContentUnits  = SvgUnitType.UserSpaceOnUse;
+            _combineTransforms = true;
         }
 
         #endregion
@@ -45,61 +49,62 @@ namespace SharpVectors.Renderers.Wpf
 
         public Transform Transform
         {
-            get
-            {
+            get {
                 return _transformMatrix;
             }
-            set
-            {
+            set {
                 _transformMatrix = value;
             }
         }
 
         public Geometry ClipGeometry
         {
-            get
-            {
+            get {
                 return _clipGeometry;
             }
-            set
-            {
+            set {
                 _clipGeometry = value;
             }
         }
 
         public SvgUnitType ClipUnits
         {
-            get
-            {
+            get {
                 return _clipPathUnits;
             }
         }
 
         public Brush Masking
         {
-            get
-            {
+            get {
                 return _maskBrush;
             }
-            set
-            {
+            set {
                 _maskBrush = value;
             }
         }
 
         public SvgUnitType MaskUnits
         {
-            get
-            {
+            get {
                 return _maskUnits;
             }
         }
 
         public SvgUnitType MaskContentUnits
         {
-            get
-            {
+            get {
                 return _maskContentUnits;
+            }
+        }
+
+        public bool CombineTransforms
+        {
+            get {
+                return _combineTransforms;
+            }
+            set {
+                _combineTransforms = value;
             }
         }
 
@@ -116,8 +121,8 @@ namespace SharpVectors.Renderers.Wpf
 
             base.BeforeRender(renderer);
 
-            _maskUnits        = SvgUnitType.UserSpaceOnUse;
-            _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
+            _maskUnits = SvgUnitType.UserSpaceOnUse;
+            _clipPathUnits = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
 
             WpfDrawingContext context = renderer.Context;
@@ -132,12 +137,12 @@ namespace SharpVectors.Renderers.Wpf
         {
             base.AfterRender(renderer);
 
-            _clipGeometry     = null;
-            _transformMatrix  = null;
-            _maskBrush        = null;
+            _clipGeometry = null;
+            _transformMatrix = null;
+            _maskBrush = null;
 
-            _maskUnits        = SvgUnitType.UserSpaceOnUse;
-            _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
+            _maskUnits = SvgUnitType.UserSpaceOnUse;
+            _clipPathUnits = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
         }
 
@@ -206,7 +211,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </returns>
         public static WpfRendering CreateByUri(SvgDocument document, string baseUri, string url)
         {
-            if (url.StartsWith("#"))
+            if (url.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 // do nothing
             }
@@ -370,12 +375,12 @@ namespace SharpVectors.Renderers.Wpf
                         Geometry gpClip = geomColl[0];
                         int geomCount = geomColl.Count;
                         if (geomCount > 1)
-                        {  
+                        {
                             //GeometryGroup clipGroup = new GeometryGroup();
                             //clipGroup.Children.Add(gpClip);
                             for (int k = 1; k < geomCount; k++)
                             {
-                                gpClip = CombinedGeometry.Combine(gpClip, geomColl[k],
+                                gpClip = Geometry.Combine(gpClip, geomColl[k],
                                     GeometryCombineMode.Union, null);
                                 //clipGroup.Children.Add(geomColl[k]);
                             }
@@ -430,7 +435,7 @@ namespace SharpVectors.Renderers.Wpf
 
         protected void SetMask(WpfDrawingContext context)
         {
-            _maskUnits        = SvgUnitType.UserSpaceOnUse;  
+            _maskUnits = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
 
             CssPrimitiveValue maskPath = _svgElement.GetComputedCssValue(
@@ -440,7 +445,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 string absoluteUri = _svgElement.ResolveUri(maskPath.GetStringValue());
 
-                SvgMaskElement maskElement = 
+                SvgMaskElement maskElement =
                     _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgMaskElement;
 
                 if (maskElement != null)
@@ -460,7 +465,7 @@ namespace SharpVectors.Renderers.Wpf
                     renderer.RenderMask(maskElement, maskContext);
                     Drawing image = renderer.Drawing;
 
-                    Rect bounds   = new Rect(0, 0, 1, 1);
+                    Rect bounds = new Rect(0, 0, 1, 1);
                     //Rect destRect = GetMaskDestRect(maskElement, bounds);
 
                     //destRect = bounds;
@@ -499,39 +504,36 @@ namespace SharpVectors.Renderers.Wpf
                     ////maskBrush.AlignmentX = AlignmentX.Center;
                     ////maskBrush.AlignmentY = AlignmentY.Center;
 
-                    this.Masking      = maskBrush;
+                    this.Masking = maskBrush;
 
-                    _maskUnits        = (SvgUnitType)maskElement.MaskUnits.AnimVal;
+                    _maskUnits = (SvgUnitType)maskElement.MaskUnits.AnimVal;
                     _maskContentUnits = (SvgUnitType)maskElement.MaskContentUnits.AnimVal;
                 }
             }
         }
 
-        private static double CalcPatternUnit(SvgMaskElement maskElement, SvgLength length, 
+        private static double CalcPatternUnit(SvgMaskElement maskElement, SvgLength length,
             SvgLengthDirection dir, Rect bounds)
         {
-            if (maskElement.MaskUnits.AnimVal.Equals(SvgUnitType.UserSpaceOnUse))
+            if (maskElement.MaskUnits.AnimVal.Equals((ushort)SvgUnitType.UserSpaceOnUse))
             {
                 return length.Value;
             }
+            double calcValue = length.ValueInSpecifiedUnits;
+            if (dir == SvgLengthDirection.Horizontal)
+            {
+                calcValue *= bounds.Width;
+            }
             else
             {
-                double calcValue = length.ValueInSpecifiedUnits;
-                if (dir == SvgLengthDirection.Horizontal)
-                {
-                    calcValue *= bounds.Width;
-                }
-                else
-                {
-                    calcValue *= bounds.Height;
-                }
-                if (length.UnitType == SvgLengthType.Percentage)
-                {
-                    calcValue /= 100F;
-                }
-
-                return calcValue;
+                calcValue *= bounds.Height;
             }
+            if (length.UnitType == SvgLengthType.Percentage)
+            {
+                calcValue /= 100F;
+            }
+
+            return calcValue;
         }
 
         private static Rect GetMaskDestRect(SvgMaskElement maskElement, Rect bounds)
@@ -627,8 +629,93 @@ namespace SharpVectors.Renderers.Wpf
             ISvgTransformable transElm = _svgElement as ISvgTransformable;
             if (transElm != null)
             {
-                SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
-                SvgMatrix svgMatrix = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
+                SvgTransformList transformList = (SvgTransformList)transElm.Transform.AnimVal;
+                if (transformList.NumberOfItems > 1 && _combineTransforms == false)
+                {
+                    TransformGroup transformGroup = new TransformGroup();
+                    List<Transform> transforms = new List<Transform>();
+
+                    for (uint i = 0; i < transformList.NumberOfItems; i++)
+                    {
+                        ISvgTransform transform = transformList.GetItem(i);
+                        double[] values = transform.InputValues;
+                        switch (transform.TransformType)
+                        {
+                            case SvgTransformType.Translate:
+                                if (values.Length == 1)
+                                {
+                                    // SetTranslate(values[0], 0);
+                                    //transformGroup.Children.Add(new TranslateTransform(values[0], 0));
+                                    transforms.Add(new TranslateTransform(values[0], 0));
+                                }
+                                else if (values.Length == 2)
+                                {
+                                    // SetTranslate(values[0], values[1]);                        
+                                    //transformGroup.Children.Add(new TranslateTransform(values[0], values[1]));
+                                    transforms.Add(new TranslateTransform(values[0], values[1]));
+                                }
+                                break;
+                            case SvgTransformType.Rotate:
+                                if (values.Length == 1)
+                                {
+                                    // SetRotate(values[0]);
+                                    //transformGroup.Children.Add(new RotateTransform(values[0]));
+                                    transforms.Add(new RotateTransform(values[0]));
+                                }
+                                else if (values.Length == 3)
+                                {
+                                    // SetRotate(values[0], values[1], values[2]);
+                                    //transformGroup.Children.Add(new RotateTransform(values[0], values[1], values[2]));
+                                    transforms.Add(new RotateTransform(values[0], values[1], values[2]));
+                                }
+                                break;
+                            case SvgTransformType.Scale:
+                                if (values.Length == 1)
+                                {
+                                    //SetScale(values[0], values[0]);
+                                    transformGroup.Children.Add(new ScaleTransform(values[0], values[0]));
+                                }
+                                else if (values.Length == 2)
+                                {
+                                    //SetScale(values[0], values[1]);
+                                    //transformGroup.Children.Add(new ScaleTransform(values[0], values[1]));
+                                    transforms.Add(new ScaleTransform(values[0], values[1]));
+                                }
+                                break;
+                            case SvgTransformType.SkewX:
+                                if (values.Length == 1)
+                                {
+                                    //SetSkewX(values[0]);
+                                    //transformGroup.Children.Add(new SkewTransform(values[0], 0));
+                                    transforms.Add(new SkewTransform(values[0], 0));
+                                }
+                                break;
+                            case SvgTransformType.SkewY:
+                                if (values.Length == 1)
+                                {
+                                    //SetSkewY(values[0]);                        
+                                    //transformGroup.Children.Add(new SkewTransform(0, values[0]));
+                                    transforms.Add(new SkewTransform(0, values[0]));
+                                }
+                                break;
+                            case SvgTransformType.Matrix:
+                                if (values.Length == 6)
+                                {
+                                    //SetMatrix(new SvgMatrix(values[0], values[1], values[2], values[3], values[4], values[5]));
+                                    //transformGroup.Children.Add(new MatrixTransform(values[0], values[1], values[2], values[3], values[4], values[5]));
+                                    transforms.Add(new MatrixTransform(values[0], values[1], values[2], values[3], values[4], values[5]));
+                                }
+                                break;
+                        }
+                    }
+
+                    transforms.Reverse();
+                    transformGroup.Children = new TransformCollection(transforms);
+                    _transformMatrix = transformGroup;
+                    //_transformMatrix = new MatrixTransform(transformGroup.Value);
+                    return;
+                }
+                SvgMatrix svgMatrix = transformList.TotalMatrix;
 
                 if (svgMatrix.IsIdentity)
                 {
@@ -655,16 +742,16 @@ namespace SharpVectors.Renderers.Wpf
 
             double translateX = transformArray[0];
             double translateY = transformArray[1];
-            double scaleX     = transformArray[2];
-            double scaleY     = transformArray[3];
+            double scaleX = transformArray[2];
+            double scaleY = transformArray[3];
 
             Transform translateMatrix = null;
-            Transform scaleMatrix     = null;
-            //if (translateX >= 0 && translateY >= 0)
+            Transform scaleMatrix = null;
+            if (!translateX.Equals(0.0) || !translateY.Equals(0.0))
             {
                 translateMatrix = new TranslateTransform(translateX, translateY);
             }
-            if ((float)scaleX != 1.0f && (float)scaleY != 1.0f)
+            if (!scaleX.Equals(1.0) || !scaleY.Equals(1.0))
             {
                 scaleMatrix = new ScaleTransform(scaleX, scaleY);
             }
@@ -673,6 +760,20 @@ namespace SharpVectors.Renderers.Wpf
             {
                 // Create a TransformGroup to contain the transforms
                 // and add the transforms to it.
+                if (translateMatrix.Value.IsIdentity && scaleMatrix.Value.IsIdentity)
+                {
+                    return;
+                }
+                if (translateMatrix.Value.IsIdentity)
+                {
+                    this.Transform = scaleMatrix;
+                    return;
+                }
+                if (scaleMatrix.Value.IsIdentity)
+                {
+                    this.Transform = translateMatrix;
+                    return;
+                }
                 TransformGroup transformGroup = new TransformGroup();
                 transformGroup.Children.Add(scaleMatrix);
                 transformGroup.Children.Add(translateMatrix);
@@ -708,16 +809,16 @@ namespace SharpVectors.Renderers.Wpf
 
             double translateX = transformArray[0];
             double translateY = transformArray[1];
-            double scaleX     = transformArray[2];
-            double scaleY     = transformArray[3];
+            double scaleX = transformArray[2];
+            double scaleY = transformArray[3];
 
             Transform translateMatrix = null;
-            Transform scaleMatrix     = null;
-            //if (translateX != 0 || translateY != 0)
+            Transform scaleMatrix = null;
+            if (!translateX.Equals(0.0) || !translateY.Equals(0.0))
             {
                 translateMatrix = new TranslateTransform(translateX, translateY);
             }
-            if ((float)scaleX != 1.0f && (float)scaleY != 1.0f)
+            if (!scaleX.Equals(1.0) || !scaleY.Equals(1.0))
             {
                 scaleMatrix = new ScaleTransform(scaleX, scaleY);
             }
@@ -726,6 +827,20 @@ namespace SharpVectors.Renderers.Wpf
             {
                 // Create a TransformGroup to contain the transforms
                 // and add the transforms to it.
+                if (translateMatrix.Value.IsIdentity && scaleMatrix.Value.IsIdentity)
+                {
+                    return;
+                }
+                if (translateMatrix.Value.IsIdentity)
+                {
+                    this.Transform = scaleMatrix;
+                    return;
+                }
+                if (scaleMatrix.Value.IsIdentity)
+                {
+                    this.Transform = translateMatrix;
+                    return;
+                }
                 TransformGroup transformGroup = new TransformGroup();
                 transformGroup.Children.Add(scaleMatrix);
                 transformGroup.Children.Add(translateMatrix);
@@ -981,9 +1096,9 @@ namespace SharpVectors.Renderers.Wpf
 
         public static Geometry CreateGeometry(SvgRectElement element)
         {
-            double dx     = Math.Round(element.X.AnimVal.Value, 4);
-            double dy     = Math.Round(element.Y.AnimVal.Value, 4);
-            double width  = Math.Round(element.Width.AnimVal.Value, 4);
+            double dx = Math.Round(element.X.AnimVal.Value, 4);
+            double dy = Math.Round(element.Y.AnimVal.Value, 4);
+            double width = Math.Round(element.Width.AnimVal.Value, 4);
             double height = Math.Round(element.Height.AnimVal.Value, 4);
             double rx = Math.Round(element.Rx.AnimVal.Value, 4);
             double ry = Math.Round(element.Ry.AnimVal.Value, 4);
@@ -1010,7 +1125,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public static Geometry CreateGeometry(SvgLineElement element)
         {
-            return new LineGeometry(new Point(Math.Round(element.X1.AnimVal.Value, 4), 
+            return new LineGeometry(new Point(Math.Round(element.X1.AnimVal.Value, 4),
                 Math.Round(element.Y1.AnimVal.Value, 4)),
                 new Point(Math.Round(element.X2.AnimVal.Value, 4), Math.Round(element.Y2.AnimVal.Value, 4)));
         }
@@ -1018,7 +1133,7 @@ namespace SharpVectors.Renderers.Wpf
         #endregion
 
         #region SvgPathElement Geometry
-        
+
         public static Geometry CreateGeometryEx(SvgPathElement element)
         {
             PathGeometry geometry = new PathGeometry();
@@ -1071,11 +1186,11 @@ namespace SharpVectors.Renderers.Wpf
             SvgPointF initPoint = new SvgPointF(0, 0);
             SvgPointF lastPoint = new SvgPointF(0, 0);
 
-            ISvgPathSeg segment           = null;
-            SvgPathSegMoveto pathMoveTo   = null;
-            SvgPathSegLineto pathLineTo   = null;
+            ISvgPathSeg segment = null;
+            SvgPathSegMoveto pathMoveTo = null;
+            SvgPathSegLineto pathLineTo = null;
             SvgPathSegCurveto pathCurveTo = null;
-            SvgPathSegArc pathArc         = null;
+            SvgPathSegArc pathArc = null;
 
             ISvgPathSegList segments = element.PathSegList;
             int nElems = segments.NumberOfItems;
@@ -1110,7 +1225,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else if (DynamicCast.Cast(segment, out pathCurveTo))
                 {
-                    SvgPointF xy   = pathCurveTo.AbsXY;
+                    SvgPointF xy = pathCurveTo.AbsXY;
                     SvgPointF x1y1 = pathCurveTo.CubicX1Y1;
                     SvgPointF x2y2 = pathCurveTo.CubicX2Y2;
                     pathFigure.Segments.Add(new BezierSegment(new Point(x1y1.ValueX, x1y1.ValueY),
@@ -1132,7 +1247,7 @@ namespace SharpVectors.Renderers.Wpf
                         pathFigure.Segments.Add(new LineSegment(new Point(p.ValueX, p.ValueY), true));
                     }
                     else
-                    {                       
+                    {
                         CalculatedArcValues calcValues = pathArc.GetCalculatedArcValues();
 
                         pathFigure.Segments.Add(new ArcSegment(new Point(p.ValueX, p.ValueY),
@@ -1175,7 +1290,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             double _cx = Math.Round(element.Cx.AnimVal.Value, 4);
             double _cy = Math.Round(element.Cy.AnimVal.Value, 4);
-            double _r  = Math.Round(element.R.AnimVal.Value, 4);
+            double _r = Math.Round(element.R.AnimVal.Value, 4);
 
             if (_r <= 0)
             {
@@ -1262,8 +1377,8 @@ namespace SharpVectors.Renderers.Wpf
 
             PathFigure polylineFigure = new PathFigure();
             polylineFigure.StartPoint = points[0];
-            polylineFigure.IsClosed   = true;
-            polylineFigure.IsFilled   = true;
+            polylineFigure.IsClosed = true;
+            polylineFigure.IsFilled = true;
 
             polylineFigure.Segments.Add(polyline);
 
@@ -1299,22 +1414,34 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return match.Groups["uri"].Value;
             }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
         }
 
         protected static void RenderMarkers(WpfDrawingRenderer renderer,
             SvgStyleableElement styleElm, WpfDrawingContext gr)
         {
             // OPTIMIZE
-
             if (styleElm is ISharpMarkerHost)
             {
                 string markerStartUrl  = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-start", "marker"));
                 string markerMiddleUrl = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-mid", "marker"));
                 string markerEndUrl    = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-end", "marker"));
+                string markerAll       = ExtractMarkerUrl(styleElm.GetPropertyValue("marker", "marker"));
+                if (!string.IsNullOrWhiteSpace(markerAll))
+                {
+                    if (string.IsNullOrWhiteSpace(markerStartUrl))
+                    {
+                        markerStartUrl = markerAll;
+                    }
+                    if (string.IsNullOrWhiteSpace(markerMiddleUrl))
+                    {
+                        markerMiddleUrl = markerAll;
+                    }
+                    if (string.IsNullOrWhiteSpace(markerEndUrl))
+                    {
+                        markerEndUrl = markerAll;
+                    }
+                }
 
                 if (markerStartUrl.Length > 0)
                 {

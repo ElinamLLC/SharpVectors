@@ -16,6 +16,7 @@ namespace SharpVectors.Dom.Svg
         private static Regex reNumber = new Regex("^" + numberPattern + "$");
 
         private static Regex reUnit = new Regex("[a-z]+$");
+        public static Regex DoubleRegex = new Regex(@"(\+|-)?((\.[0-9]+)|([0-9]+(\.[0-9]*)?))([eE](\+|-)?[0-9]+)?", RegexOptions.Compiled);
 
         #endregion
 
@@ -64,16 +65,24 @@ namespace SharpVectors.Dom.Svg
 
 		public static double ParseNumber(string str)
 		{
-            try
-            {
-                return double.Parse(str, SvgNumber.Format);
-            }
-            catch (Exception e)
-            {
-                throw new DomException(DomExceptionType.SyntaxErr,
-                    "Input string was not in a correct format: " + str, e);
-            }
-		}
+            str = DoubleRegex.Match(str).Value;
+            return double.Parse(str, SvgNumber.Format);
+            //try
+            //{
+            //    return double.Parse(str, SvgNumber.Format);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw new DomException(DomExceptionType.SyntaxErr,
+            //        "Input string was not in a correct format: " + str, e);
+            //}
+        }
+
+        public static double ParseToFloat(string str)
+        {
+            str = DoubleRegex.Match(str).Value;
+            return double.Parse(str, SvgNumber.Format);
+        }
 
         //public static double ParseNumber(string str)
         //{

@@ -17,11 +17,11 @@ namespace SharpVectors.Dom.Svg
 
         #region Constructors
 
-        internal SvgGElement(string prefix, string localname, string ns, SvgDocument doc)
+        public SvgGElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
             _externalResourcesRequired = new SvgExternalResourcesRequired(this);
-            _svgTests = new SvgTests(this);
+            _svgTests                  = new SvgTests(this);
         }
 
         #endregion

@@ -101,7 +101,7 @@ namespace SharpVectors.Renderers.Wpf
             //TODO--PAUL: Set the DecodePixelWidth/DecodePixelHeight?
 
             // Freeze the DrawingImage for performance benefits. 
-            imageSource.Freeze();
+            //imageSource.Freeze();
 
             DrawingGroup drawGroup = null;
 
@@ -127,8 +127,8 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             if (this.Transform == null)
                             {
-                                destRect = this.GetBounds(destRect,
-                                    new Size(imageWidth, imageHeight), aspectRatioType);
+                                if (!aspectRatio.IsDefaultAlign) // Cacxa
+                                    destRect = this.GetBounds(destRect, new Size(imageWidth, imageHeight), aspectRatioType);
                             }
                             else
                             {
@@ -177,6 +177,10 @@ namespace SharpVectors.Renderers.Wpf
             float opacityValue = -1;
 
             string opacity = imageElement.GetAttribute("opacity");
+            if (string.IsNullOrWhiteSpace(opacity))
+            {
+                opacity = imageElement.GetPropertyValue("opacity");
+            }
             if (opacity != null && opacity.Length > 0)
             {
                 opacityValue = (float)SvgNumber.ParseNumber(opacity);
@@ -234,6 +238,13 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     drawGroup.Children.Add(drawing);
                 }
+
+                string sVisibility = imageElement.GetPropertyValue("visibility");
+                string sDisplay = imageElement.GetPropertyValue("display");
+                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                {
+                    drawGroup.Opacity = 0;
+                }
             }
         }
 
@@ -264,19 +275,20 @@ namespace SharpVectors.Renderers.Wpf
 
         private ImageSource GetBitmapSource(SvgImageElement element, WpfDrawingContext context)
         {
-            BitmapSource bitmapSource = this.GetBitmap(element, context);
-            if (bitmapSource == null)
+            ImageSource imageSource = this.GetBitmap(element, context);
+            if (imageSource == null)
             {
-                return bitmapSource;
+                return imageSource;
             }
 
             SvgColorProfileElement colorProfile = (SvgColorProfileElement)element.ColorProfile;
-            if (colorProfile == null)
+            if (colorProfile == null || !(imageSource is BitmapSource))
             {
-                return bitmapSource;
+                return imageSource;
             }
             else
             {
+                BitmapSource bitmapSource = (BitmapSource)imageSource;
                 BitmapFrame bitmapSourceFrame   = BitmapFrame.Create(bitmapSource);
                 ColorContext sourceColorContext = null;
                 IList<ColorContext> colorContexts = bitmapSourceFrame.ColorContexts;
@@ -301,14 +313,14 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        private BitmapSource GetBitmap(SvgImageElement element, WpfDrawingContext context)
+        private ImageSource GetBitmap(SvgImageElement element, WpfDrawingContext context)
         {
             if (element.IsSvgImage)
             {
                 return null;
             }
 
-            if (!element.Href.AnimVal.StartsWith("data:"))
+            if (!element.Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
             {
                 SvgUriReference svgUri = element.UriReference;
                 string absoluteUri = svgUri.AbsoluteUri;
@@ -356,7 +368,7 @@ namespace SharpVectors.Renderers.Wpf
                 WpfEmbeddedImageVisitor imageVisitor = context.ImageVisitor;
                 if (imageVisitor != null)
                 {
-                    BitmapSource visitorSource = imageVisitor.Visit(element, context);
+                    ImageSource visitorSource = imageVisitor.Visit(element, context);
                     if (visitorSource != null)
                     {
                         return visitorSource;
@@ -364,9 +376,9 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 string sURI    = element.Href.AnimVal;
-                int nColon     = sURI.IndexOf(":");
-                int nSemiColon = sURI.IndexOf(";");
-                int nComma     = sURI.IndexOf(",");
+                int nColon     = sURI.IndexOf(":", StringComparison.OrdinalIgnoreCase);
+                int nSemiColon = sURI.IndexOf(";", StringComparison.OrdinalIgnoreCase);
+                int nComma     = sURI.IndexOf(",", StringComparison.OrdinalIgnoreCase);
 
                 string sMimeType = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
 
@@ -458,13 +470,22 @@ namespace SharpVectors.Renderers.Wpf
             double scaleX = transformArray[2];
             double scaleY = transformArray[3];
 
+            // Cacxa
+            if (this.Transform != null)
+            {
+                if (!scaleX.Equals(1.0) && !this.Transform.Value.OffsetX.Equals(0.0))
+                    translateX = translateX + this.Transform.Value.OffsetX * (1 - scaleX);
+                if (!scaleY.Equals(1.0) && !this.Transform.Value.OffsetY.Equals(0.0))
+                    translateY = translateY + this.Transform.Value.OffsetY * (1 - scaleY);
+            }
+
             Transform translateMatrix = null;
             Transform scaleMatrix = null;
-            if ((float)translateX >= 0 && (float)translateY >= 0)
+            if (!translateX.Equals(0.0) || !translateY.Equals(0.0))
             {
                 translateMatrix = new TranslateTransform(translateX, translateY);
             }
-            if ((float)scaleX != 1.0f && (float)scaleY != 1.0)
+            if (!scaleX.Equals(1.0) || !scaleY.Equals(1.0))
             {
                 scaleMatrix = new ScaleTransform(scaleX, scaleY);
             }
@@ -473,19 +494,34 @@ namespace SharpVectors.Renderers.Wpf
             {
                 // Create a TransformGroup to contain the transforms
                 // and add the transforms to it.
+                if (translateMatrix.Value.IsIdentity && scaleMatrix.Value.IsIdentity)
+                {
+                    return null;
+                }
+                if (translateMatrix.Value.IsIdentity)
+                {
+                    return scaleMatrix;
+                }
+                if (scaleMatrix.Value.IsIdentity)
+                {
+                    return translateMatrix;
+                }
+
                 TransformGroup transformGroup = new TransformGroup();
                 transformGroup.Children.Add(scaleMatrix);
                 transformGroup.Children.Add(translateMatrix);
 
                 return transformGroup;
             }
-            else if (translateMatrix != null)
+
+            if (translateMatrix != null)
             {
-                return translateMatrix;
+                return translateMatrix.Value.IsIdentity ? null : translateMatrix;
             }
-            else if (scaleMatrix != null)
+
+            if (scaleMatrix != null)
             {
-                return scaleMatrix;
+                return scaleMatrix.Value.IsIdentity ? null : scaleMatrix;
             }
 
             return null;

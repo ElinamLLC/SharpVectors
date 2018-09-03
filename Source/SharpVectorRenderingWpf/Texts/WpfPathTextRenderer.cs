@@ -137,7 +137,7 @@ namespace SharpVectors.Renderers.Texts
                     element.OwnerDocument.NamespaceManager);
 
                 double textFontSize = GetComputedFontSize(textElement);
-                if (sBaselineShift.EndsWith("%"))
+                if (sBaselineShift.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100f * textFontSize;

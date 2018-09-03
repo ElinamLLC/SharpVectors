@@ -125,13 +125,6 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            string sVisibility = _textElement.GetPropertyValue("visibility");
-            string sDisplay    = _textElement.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
-            {
-                return;
-            }
-
             _context = renderer.Context;
 
             SetQuality(context);
@@ -142,6 +135,13 @@ namespace SharpVectors.Renderers.Wpf
             SetMask(_context);
 
             _drawGroup = new DrawingGroup();
+
+            string sVisibility = _textElement.GetPropertyValue("visibility");
+            string sDisplay    = _textElement.GetPropertyValue("display");
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            {
+                _drawGroup.Opacity = 0;
+            }
 
             string elementId = this.GetElementName();
             if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))

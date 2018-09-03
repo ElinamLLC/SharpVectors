@@ -80,7 +80,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return null;
             }
-            else if (PaintType == SvgPaintType.CurrentColor)
+            if (PaintType == SvgPaintType.CurrentColor)
             {
                 stroke = new WpfSvgPaint(_context, _element, "color");
             }
@@ -89,8 +89,7 @@ namespace SharpVectors.Renderers.Wpf
                 stroke = this;
             }
 
-            Pen pen = new Pen(stroke.GetBrush(geometry, "stroke", true), 
-                strokeWidth);
+            Pen pen = new Pen(stroke.GetBrush(geometry, "stroke", true), strokeWidth);
 
             pen.StartLineCap  = pen.EndLineCap = GetLineCap();
             pen.LineJoin      = GetLineJoin();
@@ -125,7 +124,6 @@ namespace SharpVectors.Renderers.Wpf
                     pen.DashCap   = PenLineCap.Flat; 
                 }
             }
-
             return pen;
         }
 
@@ -157,7 +155,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private PenLineCap GetLineCap()
         {
-            switch (_element.GetPropertyValue("stroke-linecap"))
+            switch (_element.GetPropertyValue("stroke-linecap").Trim())
             {
                 case "round":
                     return PenLineCap.Round;
@@ -174,7 +172,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private PenLineJoin GetLineJoin()
         {
-            switch (_element.GetPropertyValue("stroke-linejoin"))
+            switch (_element.GetPropertyValue("stroke-linejoin").Trim())
             {
                 case "round":
                     return PenLineJoin.Round;
@@ -246,7 +244,8 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            if (dashArrayText == "none")
+            if (dashArrayText.Equals("none", StringComparison.OrdinalIgnoreCase)
+                || dashArrayText.Equals("null", StringComparison.OrdinalIgnoreCase))
             {
                 return null;
             }

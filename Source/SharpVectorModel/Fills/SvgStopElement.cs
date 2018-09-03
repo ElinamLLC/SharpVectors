@@ -16,6 +16,10 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 string attr = GetAttribute("offset").Trim();
+                if (string.IsNullOrWhiteSpace(attr))
+                {
+                    return null;
+                }
                 if (attr.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     attr = attr.TrimEnd(new char[1] { '%' });

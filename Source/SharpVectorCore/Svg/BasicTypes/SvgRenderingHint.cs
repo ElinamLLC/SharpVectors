@@ -9,6 +9,7 @@
         Clipping    = 4,
         Masking     = 5,
         Animation   = 6,
-        Containment = 7
+        Containment = 7,
+        Marker      = 8
     }
 }

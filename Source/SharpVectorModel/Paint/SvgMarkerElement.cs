@@ -50,12 +50,12 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         /// <value>
         /// An enumeration of the <see cref="SvgRenderingHint"/> specifying the rendering hint.
-        /// This will always return <see cref="SvgRenderingHint.Containment"/>
+        /// This will always return <see cref="SvgRenderingHint.Marker"/>
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
             get {
-                return SvgRenderingHint.Containment;
+                return SvgRenderingHint.Marker;
             }
         }
 
@@ -193,7 +193,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_orientAngle == null)
                 {
-                    if (OrientType.AnimVal.Equals(SvgMarkerOrient.Angle))
+                    if (OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
                     {
                         _orientAngle = new SvgAnimatedAngle(GetAttribute("orient"), "0");
                     }
