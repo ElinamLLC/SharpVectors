@@ -7,7 +7,7 @@ The [Scalable Vector Graphics (SVG)](http://en.wikipedia.org/wiki/Scalable_Vecto
 For .NET application developers, there is currently no library complete enough to handle SVG files. Even the commercial tools are either not available or not complete enough to handle most uses of the SVG in Windows Presentation Foundation (WPF) applications.
 The project does not aim to provide a complete implementation of the SVG file format, but will support the features required in an average graphics application.
 
-The SVG specifications is available [here](www.w3.org/Graphics/SVG/).
+The SVG specification is available [here](https://www.w3.org/TR/SVG11/) or the [PDF](https://www.w3.org/TR/SVG11/REC-SVG11-20110816.pdf) format.
 
 This project is based on the [SharpVectorGraphics (aka SVG#)](http://sourceforge.net/projects/svgdomcsharp/) library. Besides bug fixes and improved feature support, we updated it to .NET 2/.NET 3.5 platform, removing the dependencies on the depreciated script engine libraries and the zip library, SharpZipLib.
 
@@ -21,6 +21,15 @@ In general, the following features are implemented:
 * Interaction with the conversion process (by a visitor pattern) to allow for custom hyper-link implementations, font substitutions etc.
 **NOTE**: Only Geometry/Drawing level elements are exported, which will not work with Silverlight. 
 See the [Documentation](Docs/Documentation.md) section for more information on the features.
+
+## Installation
+The SharpVectors a .NET 4.0 or up library and applications. The library can be used in WPF and Windows Forms applications.
+
+### For the Library
+Install the latest released version from NuGet, the [Version 1.1.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
+
+### For the Applications
+Download the latest released version from GitHub Releases Page, the [Version 1.1.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
 
 ## Converter Application
 There is a converter application. It converts a single SVG file, multiple SVG files and directory of SVG files to XAML.
