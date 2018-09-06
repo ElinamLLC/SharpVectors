@@ -1,16 +1,17 @@
 ## 1 Getting Started
 The SVG# Reloaded library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.
 
-	* [Usage: Converters](Usage.md#Converters)
-	* [Usage: Type Converters](Usage.md#TypeConverters)
-	* [Usage: Controls and Viewers](Usage.md#Controls)
-	* [Codes: Illustrative Samples](Usage.md#Codes)
+* [Usage: Converters](Usage.md#Converters)
+* [Usage: Type Converters](Usage.md#TypeConverters)
+* [Usage: Controls and Viewers](Usage.md#Controls)
+* [Codes: Illustrative Samples](Usage.md#Codes)
 
-### 1.1 {#Converters}Conversions
+<a name="Converters"/>
+### 1.1 Conversions
 The SVG to WPF conversion is the main use of this SVG# Reloaded library currently. The other uses will be improved with time.
 The following is a diagram showing all the available converters.
 
-![](Usage_Converters.png)
+![](../Images/Usage_Converters.png)
 
 * **FileSvgConverter**: This converts the SVG file to the corresponding XAML file, which can be viewed in WPF application. The root object in the converted file is [DrawingGroup](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.drawinggroup).
 * **FileSvgReader**: This converts the SVG file to [DrawingGroup](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.drawinggroup) and can optionally save the result to a file as XAML. 
@@ -19,7 +20,7 @@ The following is a diagram showing all the available converters.
 * **DirectorySvgConverter**: This converts a directory (and optionally the sub-directories) of SVG files to XAML files in a specified directory, maintaining the original directory structure.
 Now, the base class SvgConverter defines the following common properties:
 
-![](Usage_SvgConverter.png)
+![](../Images/Usage_SvgConverter.png)
 
 * **DrawingSettings**: This is defined by a class, WpfDrawingSettings. See **Section 1.1.1** below for details.
 * **SaveXaml**: Determines whether to save conversion output to XAML format.
@@ -29,7 +30,7 @@ Now, the base class SvgConverter defines the following common properties:
 #### 1.1.1 Drawing/Rendering Options
 A class **WpfDrawingSettings** in the SharpVectors.Rendering.Wpf assembly provides the currently available drawing/rendering options for the conversion. The class is shown below:
 
-![](Usage_DrawingSettings.png)
+![](../Images/Usage_DrawingSettings.png)
 
 All the properties of this class are well documented. The most important properties are
 * **CultureInfo**: This is the culture information used for the text rendering, and it is passed to the [FormattedText](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.formattedtext) class. The default is the English culture.
@@ -127,14 +128,14 @@ End Module
 
 **5.** Compile and run the program. An XAML file, **Test.xaml**, will be generated in the working directory. The output will look like this when viewed (this is the illustrative sample for FileSvgReader):
 
-![](Usage_ConvertedOutput.png)
+![](../Images/Usage_ConvertedOutput.png)
 
-
-### 1.2 {#TypeConverters}WPF Extensions and Type Converters
+<a name="TypeConverters"/>
+### 1.2 WPF Extensions and Type Converters
 These are WPF markup extensions or type converters for handling the SVG files in WPF applications.
 Currently, the SVG# Reloaded provides one markup extension, **SvgImageExtension**, which converts an SVG source file to a [DrawingImage](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.drawingimage).
 
-![](Usage_SvgImageExtension.png)
+![](../Images/Usage_SvgImageExtension.png)
 
 * As shown in the diagram above, all the rendering settings are available on this markup extension as properties.
 * The main property here is the **SvgImageExtension.Source**, which is the path to the SVG file, and the file itself can be located in the following:
@@ -143,7 +144,7 @@ Currently, the SVG# Reloaded provides one markup extension, **SvgImageExtension*
 	* **Resources**: The path is the [Microsoft Pack URI](https://docs.microsoft.com/en-us/dotnet/framework/wpf/app-development/pack-uris-in-wpf) of the SVG resource file.
 For the illustration, we will create a simple WPF Application shown below, each image displayed is an SVG file in the WPF [Image Control](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.image):
 
-![](Usage_SvgImageSample.png)
+![](../Images/Usage_SvgImageSample.png)
 
 **1.** Create a .NET 3.5 WPF Application in C# or VB.NET, we will name it **SvgImageSample** and rename the main Window, **MainWindow**.
 **2.** As above, add the following SVG# Reloaded assemblies
@@ -224,8 +225,8 @@ For the illustration, we will create a simple WPF Application shown below, each 
 
 **4.** Compile and run the program. 
 
-
-### 1.3 {#Controls}Controls and Viewers
+<a name="Controls"/>
+### 1.3 Controls and Viewers
 These are WPF controls for directly viewing the SVG files or sources in the WPF applications.
 
 #### 1.3.1 Viewbox Control - SvgViewbox
@@ -238,7 +239,7 @@ The **SvgViewbox** control is a WPF [Viewbox](https://docs.microsoft.com/en-us/d
 
 For the illustration, we will create the following WPF sample application:
 
-![](Usage_SvgViewboxSample.png)
+![](../Images/Usage_SvgViewboxSample.png)
 
 **1.** Create a WPF application project, named **SvgViewboxSample**, similar to the steps in **Section 1.2**.
 **2.** Modify the XAML of the main window to the following
@@ -302,7 +303,7 @@ The **SvgCanvas** control is a WPF [Canvas](https://docs.microsoft.com/en-us/dot
 
 For the illustration, we will create the following WPF sample application:
 
-![](Usage_SvgCanvasSample.png)
+![](../Images/Usage_SvgCanvasSample.png)
 
 **1.** Create a WPF application project, named **SvgCanvasSample**, similar to the steps in **Section 1.2**.
 **2.** Modify the XAML of the main window to the following
@@ -376,7 +377,7 @@ For the illustration, we will create the following WPF sample application:
 ```
 **3.** Compile and run the program.
 
-
-### 1.4 {#Codes}Sample Codes
+<a name="Codes"/>
+### 1.4 Sample Codes
 Download the sample codes from the **TutorialSamples Folder** tab.
 
