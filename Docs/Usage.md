@@ -6,8 +6,8 @@ The SVG# Reloaded library provides three main uses of the SVG files in WPF appli
 * [Usage: Controls and Viewers](Usage.md#Controls)
 * [Codes: Illustrative Samples](Usage.md#Codes)
 
-<a name="Converters"/>
-### 1.1 Conversions
+
+### 1.1 [](#Converters)Conversions
 The SVG to WPF conversion is the main use of this SVG# Reloaded library currently. The other uses will be improved with time.
 The following is a diagram showing all the available converters.
 
@@ -27,6 +27,7 @@ Now, the base class SvgConverter defines the following common properties:
 * **SaveZaml**: Determines whether to save conversion output to ZAML format, which is a G-zip compression of the XAML format, and similar to the SVGZ (for SVG).
 * **UseFrameXamlWriter**: Determines whether the use the .NET Framework version of the XAML writer when saving the output to the XAML format. The default is **false**, and a customized XAML writer is used.
 
+
 #### 1.1.1 Drawing/Rendering Options
 A class **WpfDrawingSettings** in the SharpVectors.Rendering.Wpf assembly provides the currently available drawing/rendering options for the conversion. The class is shown below:
 
@@ -36,6 +37,7 @@ All the properties of this class are well documented. The most important propert
 * **CultureInfo**: This is the culture information used for the text rendering, and it is passed to the [FormattedText](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.formattedtext) class. The default is the English culture.
 * **IncludeRuntime**: This determines whether the application using the output of the conversion will link to the SharpVectors.Runtime.dll. The default is **true**, set this to **false** if you do not intend to use the runtime assembly.
 * **TextAsGeometry**: This determines whether the texts are rendered as path geometry. The default is **false**. The vertical text does not currently support this option. Set this to **true** if do not want to use the runtime assembly, so that font path will not be included in the output.
+
 
 #### 1.1.2 Illustrative Example
 We will create a simple console application for illustration, using the following sample SVG file (named, **Test.svg**):
@@ -56,12 +58,12 @@ xmlns="http://www.w3.org/2000/svg" version="1.1">
 </svg>
 ```
 
-**1.**  Create a console .NET 4.x framework application, name it **FileSvgConverterSample**
-**2.**  Add the following WPF framework assemblies
+1. Create a console .NET 4.x framework application, name it **FileSvgConverterSample**
+2. Add the following WPF framework assemblies
 	* WindowBase.dll
 	* PresentationCore.dll
 	* PresentationFramework.dll
-**3.** Add the following SVG# Reloaded assemblies
+3. Add the following SVG# Reloaded assemblies
 	* SharpVectors.Converters.Wpf.dll
 	* SharpVectors.Core.dll
 	* SharpVectors.Css.dll
@@ -69,7 +71,7 @@ xmlns="http://www.w3.org/2000/svg" version="1.1">
 	* SharpVectors.Model.dll
 	* SharpVectors.Rendering.Wpf.dll
 	* SharpVectors.Runtime.Wpf.dll
-**4.** Modify the generated code to the following:
+4. Modify the generated code to the following:
 
 **For C#**
 ```csharp
@@ -125,13 +127,11 @@ Module MainModule
 
 End Module
 ```
-
-**5.** Compile and run the program. An XAML file, **Test.xaml**, will be generated in the working directory. The output will look like this when viewed (this is the illustrative sample for FileSvgReader):
+5. Compile and run the program. An XAML file, **Test.xaml**, will be generated in the working directory. The output will look like this when viewed (this is the illustrative sample for FileSvgReader):
 
 ![](../Images/Usage_ConvertedOutput.png)
 
-<a name="TypeConverters"/>
-### 1.2 WPF Extensions and Type Converters
+### [](#TypeConverters)1.2 WPF Extensions and Type Converters
 These are WPF markup extensions or type converters for handling the SVG files in WPF applications.
 Currently, the SVG# Reloaded provides one markup extension, **SvgImageExtension**, which converts an SVG source file to a [DrawingImage](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.drawingimage).
 
@@ -146,8 +146,8 @@ For the illustration, we will create a simple WPF Application shown below, each 
 
 ![](../Images/Usage_SvgImageSample.png)
 
-**1.** Create a .NET 3.5 WPF Application in C# or VB.NET, we will name it **SvgImageSample** and rename the main Window, **MainWindow**.
-**2.** As above, add the following SVG# Reloaded assemblies
+1. Create a .NET 3.5 WPF Application in C# or VB.NET, we will name it **SvgImageSample** and rename the main Window, **MainWindow**.
+2. As above, add the following SVG# Reloaded assemblies
 	* SharpVectors.Converters.Wpf.dll
 	* SharpVectors.Core.dll
 	* SharpVectors.Css.dll
@@ -155,8 +155,7 @@ For the illustration, we will create a simple WPF Application shown below, each 
 	* SharpVectors.Model.dll
 	* SharpVectors.Rendering.Wpf.dll
 	* SharpVectors.Runtime.Wpf.dll
-**3.** Modify the generated XAML code to the following (the C# or VB.NET codes are not modified):
-
+3. Modify the generated XAML code to the following (the C# or VB.NET codes are not modified):
 ```xml
 <Window x:Class="SvgImageSample.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -220,19 +219,17 @@ For the illustration, we will create a simple WPF Application shown below, each 
     </DockPanel>
 </Window>
 ```
-
 **NOTE**: As shown above, the local relative path and resource path are similar, and in this case the local directory is searched at runtime, and if no such file is found, it is assumed to be in the resource.
+4. Compile and run the program. 
 
-**4.** Compile and run the program. 
 
-<a name="Controls"/>
-### 1.3 Controls and Viewers
+### [](#Controls)1.3 Controls and Viewers
 These are WPF controls for directly viewing the SVG files or sources in the WPF applications.
 
 #### 1.3.1 Viewbox Control - SvgViewbox
 The **SvgViewbox** control is a WPF [Viewbox](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.viewbox) derived control for viewing the SVG files in WPF applications, and allowing you to use all the Viewbox decorator properties. 
 
-![](Usage_SvgViewbox.png)
+![](../Images/Usage_SvgViewbox.png)
 
 * It wraps a drawing canvas instead of image, so will support interactivity when added to future release of the drawing canvas.
 * The main property is the **SvgViewbox.Source**, which is an [System.Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri) specifying the path to the SVG file.
@@ -241,8 +238,8 @@ For the illustration, we will create the following WPF sample application:
 
 ![](../Images/Usage_SvgViewboxSample.png)
 
-**1.** Create a WPF application project, named **SvgViewboxSample**, similar to the steps in **Section 1.2**.
-**2.** Modify the XAML of the main window to the following
+1. Create a WPF application project, named **SvgViewboxSample**, similar to the steps in **Section 1.2**.
+2. Modify the XAML of the main window to the following
 ```xml
 <Window x:Class="SvgViewboxSample.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -291,12 +288,12 @@ For the illustration, we will create the following WPF sample application:
     </DockPanel>
 </Window>
 ```
-**3.** Compile and run the program.
+3. Compile and run the program.
 
 #### 1.3.2 Canvas Control - SvgCanvas
 The **SvgCanvas** control is a WPF [Canvas](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) derived control for viewing the SVG files in WPF applications, and allowing you to use all the canvas properties. 
 
-![](Usage_SvgCanvas.png)
+![](../Images/Usage_SvgCanvas.png)
 
 * It derives from a drawing canvas instead of the generic canvas control, so will support interactivity when added to future release of the drawing canvas.
 * The main property is the **SvgCanvas.Source**, which is an [System.Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri) specifying the path to the SVG file.
@@ -305,8 +302,8 @@ For the illustration, we will create the following WPF sample application:
 
 ![](../Images/Usage_SvgCanvasSample.png)
 
-**1.** Create a WPF application project, named **SvgCanvasSample**, similar to the steps in **Section 1.2**.
-**2.** Modify the XAML of the main window to the following
+1. Create a WPF application project, named **SvgCanvasSample**, similar to the steps in **Section 1.2**.
+2. Modify the XAML of the main window to the following
 ```xml
 <Window x:Class="SvgCanvasSample.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -375,9 +372,8 @@ For the illustration, we will create the following WPF sample application:
     </DockPanel>
 </Window>
 ```
-**3.** Compile and run the program.
+3. Compile and run the program.
 
-<a name="Codes"/>
-### 1.4 Sample Codes
+### [](#Codes)1.4 Sample Codes
 Download the sample codes from the **TutorialSamples Folder** tab.
 
