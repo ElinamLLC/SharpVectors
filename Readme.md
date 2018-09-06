@@ -23,7 +23,7 @@ In general, the following features are implemented:
 See the [Documentation](Docs/Documentation.md) section for more information on the features.
 
 ## Installation
-The SharpVectors a .NET 4.0 or up library and applications. The library can be used in WPF and Windows Forms applications.
+The SharpVectors is a .NET 4.0 or up library and applications. The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
 Install the latest released version from NuGet, the [Version 1.1.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
