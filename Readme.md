@@ -7,9 +7,9 @@ The [Scalable Vector Graphics (SVG)](http://en.wikipedia.org/wiki/Scalable_Vecto
 For .NET application developers, there is currently no library complete enough to handle SVG files. Even the commercial tools are either not available or not complete enough to handle most uses of the SVG in Windows Presentation Foundation (WPF) applications.
 The project does not aim to provide a complete implementation of the SVG file format, but will support the features required in an average graphics application.
 
-The SVG specification is available [here](https://www.w3.org/TR/SVG11/) or the [PDF](https://www.w3.org/TR/SVG11/REC-SVG11-20110816.pdf) format.
+The SVG specification is available in [HTML](https://www.w3.org/TR/SVG11/) format or the [PDF](https://www.w3.org/TR/SVG11/REC-SVG11-20110816.pdf) format.
 
-This project is based on the [SharpVectorGraphics (aka SVG#)](http://sourceforge.net/projects/svgdomcsharp/) library. Besides bug fixes and improved feature support, we updated it to .NET 2/.NET 3.5 platform, removing the dependencies on the depreciated script engine libraries and the zip library, SharpZipLib.
+This project is based on the [SharpVectorGraphics (aka SVG#)](http://sourceforge.net/projects/svgdomcsharp/) library. Besides bug fixes and improved feature support, we updated it to .NET 3.5 initially and now to NET 4.x platform, removing the dependencies on the depreciated script engine libraries and the zip library, SharpZipLib.
 
 ## Features and Uses
 In general, the following features are implemented:
@@ -34,7 +34,7 @@ Download the latest released version from GitHub Releases Page, the [Version 1.1
 ## Converter Application
 There is a converter application. It converts a single SVG file, multiple SVG files and directory of SVG files to XAML.
 
-![](Docs/Home_SharpVectors.png)
+![](Images/Home_SharpVectors.png)
 
 ## Sample Applications
 The library includes a number of sample application for both WPF and GDI+. Here are some of them:
@@ -42,10 +42,10 @@ The library includes a number of sample application for both WPF and GDI+. Here 
 ### WPF Test Application
 This is an application for browsing directory (recursively) of SVG files.
 
-![](Docs/Home_WpfTestSvgSample.png)
+![](Images/Home_WpfTestSvgSample.png)
 
 ### WPF W3C Test Suite
 This is an application for viewing the W3C Test Suite compliant results. It has two panes: top and bottom. The top pane is the generated WPF output, the bottom pane is the W3C expected output image.
 By the test results, this is the most complete SVG reader for WPF.
 
-![](Docs/Home_WpfW3cSvgTestSuite.png)
+![](Images/Home_WpfW3cSvgTestSuite.png)
