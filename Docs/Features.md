@@ -4,7 +4,7 @@
 
 ### {anchor:Implementations} 2.2 Implementations
 SVG provides support for a rich graphics capability, and we have implemented a number of these features. Click on the following links to learn more on the status of each feature:
-* [Animations](Animations)
-* [Colors](Colors)
-* [Coordinates](Coordinates)
-* [Filters](Filters)
+* [Animations](Animations.md)
+* [Colors](Colors.md)
+* [Coordinates](Coordinates.md)
+* [Filters](Filters.md)
