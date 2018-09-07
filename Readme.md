@@ -19,6 +19,7 @@ In general, the following features are implemented:
 * An optimized XAML output.
 * A simple and basic SVG viewer (an advanced viewer is planned).
 * Interaction with the conversion process (by a visitor pattern) to allow for custom hyper-link implementations, font substitutions etc.
+
 **NOTE**: Only Geometry/Drawing level elements are exported, which will not work with Silverlight. 
 See the [Documentation](Docs/Documentation.md) section for more information on the features.
 
@@ -27,6 +28,9 @@ The SharpVectors is a .NET 4.0 or up library and applications. The library can b
 
 ### For the Library
 Install the latest released version from NuGet, the [Version 1.1.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
+
+## Documentation
+An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
 
 ### For the Applications
 Download the latest released version from GitHub Releases Page, the [Version 1.1.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
@@ -49,3 +53,6 @@ This is an application for viewing the W3C Test Suite compliant results. It has 
 By the test results, this is the most complete SVG reader for WPF.
 
 ![](Images/Home_WpfW3cSvgTestSuite.png)
+
+## Tutorial Samples
+A number of tutorial samples are available in the **TutorialSamples** folder.
