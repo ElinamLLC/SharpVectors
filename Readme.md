@@ -29,11 +29,11 @@ The SharpVectors is a .NET 4.0 or up library and applications. The library can b
 ### For the Library
 Install the latest released version from NuGet, the [Version 1.1.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
 
-## Documentation
-An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
-
 ### For the Applications
 Download the latest released version from GitHub Releases Page, the [Version 1.1.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
+
+## Documentation
+An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
 
 ## Converter Application
 There is a converter application. It converts a single SVG file, multiple SVG files and directory of SVG files to XAML.
@@ -55,4 +55,4 @@ By the test results, this is the most complete SVG reader for WPF.
 ![](Images/Home_WpfW3cSvgTestSuite.png)
 
 ## Tutorial Samples
-A number of tutorial samples are available in the **TutorialSamples** folder.
+A number of tutorial samples are available in the [TutorialSamples](https://github.com/ElinamLLC/SharpVectors/tree/master/TutorialSamples) folder.
