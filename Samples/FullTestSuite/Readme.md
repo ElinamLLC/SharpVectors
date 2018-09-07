@@ -10,5 +10,5 @@ You can download the strip down version of the test suite here
 2. The FullTestSuite.zip contains there folders
     * images
     * png
-    *svg
+    * svg
 
