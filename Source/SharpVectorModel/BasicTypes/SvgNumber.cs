@@ -63,6 +63,19 @@ namespace SharpVectors.Dom.Svg
 			}
 		}
 
+		public static double Parse(string str)
+		{
+            try
+            {
+                return double.Parse(str, SvgNumber.Format);
+            }
+            catch (Exception e)
+            {
+                throw new DomException(DomExceptionType.SyntaxErr,
+                    "Input string was not in a correct format: " + str, e);
+            }
+        }
+
 		public static double ParseNumber(string str)
 		{
             str = DoubleRegex.Match(str).Value;
@@ -78,7 +91,7 @@ namespace SharpVectors.Dom.Svg
             //}
         }
 
-        public static double ParseToFloat(string str)
+        public static double ParseDouble(string str)
         {
             str = DoubleRegex.Match(str).Value;
             return double.Parse(str, SvgNumber.Format);

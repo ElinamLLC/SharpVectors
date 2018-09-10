@@ -296,7 +296,8 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (sOverflow != null)
                 {
-                    // "If the 'overflow' property has a value other than hidden or scroll, the property has no effect (i.e., a clipping rectangle is not created)."
+                    // "If the 'overflow' property has a value other than hidden or scroll, 
+                    // the property has no effect (i.e., a clipping rectangle is not created)."
                     if (sOverflow == "hidden" || sOverflow == "scroll")
                     {
                         Rect clipRect = Rect.Empty;
@@ -438,77 +439,89 @@ namespace SharpVectors.Renderers.Wpf
             _maskUnits = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
 
-            CssPrimitiveValue maskPath = _svgElement.GetComputedCssValue(
-                "mask", string.Empty) as CssPrimitiveValue;
+            CssPrimitiveValue maskPath = _svgElement.GetComputedCssValue("mask", string.Empty) as CssPrimitiveValue;
+
+            SvgMaskElement maskElement = null;
 
             if (maskPath != null && maskPath.PrimitiveType == CssPrimitiveType.Uri)
             {
                 string absoluteUri = _svgElement.ResolveUri(maskPath.GetStringValue());
 
-                SvgMaskElement maskElement =
-                    _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgMaskElement;
+                maskElement = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgMaskElement;
+            }
+            else if (string.Equals(_svgElement.ParentNode.LocalName, "use"))
+            {
+                var parentElement = _svgElement.ParentNode as SvgElement;
 
-                if (maskElement != null)
+                maskPath = parentElement.GetComputedCssValue("mask", string.Empty) as CssPrimitiveValue;
+
+                if (maskPath != null && maskPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
-                    WpfDrawingRenderer renderer = new WpfDrawingRenderer();
-                    renderer.Window = _svgElement.OwnerDocument.Window as SvgWindow;
+                    string absoluteUri = _svgElement.ResolveUri(maskPath.GetStringValue());
 
-                    WpfDrawingSettings settings = context.Settings.Clone();
-                    settings.TextAsGeometry = true;
-                    WpfDrawingContext maskContext = new WpfDrawingContext(true,
-                        settings);
-
-                    //maskContext.Initialize(null, context.FontFamilyVisitor, null);
-                    maskContext.Initialize(context.LinkVisitor,
-                        context.FontFamilyVisitor, context.ImageVisitor);
-
-                    renderer.RenderMask(maskElement, maskContext);
-                    Drawing image = renderer.Drawing;
-
-                    Rect bounds = new Rect(0, 0, 1, 1);
-                    //Rect destRect = GetMaskDestRect(maskElement, bounds);
-
-                    //destRect = bounds;
-
-                    //DrawingImage drawImage = new DrawingImage(image);
-
-                    //DrawingVisual drawingVisual = new DrawingVisual();
-                    //DrawingContext drawingContext = drawingVisual.RenderOpen();
-                    //drawingContext.DrawDrawing(image);
-                    //drawingContext.Close();
-
-                    //RenderTargetBitmap drawImage = new RenderTargetBitmap((int)200,
-                    //    (int)200, 96, 96, PixelFormats.Pbgra32);
-                    //drawImage.Render(drawingVisual);
-
-                    //ImageBrush imageBrush = new ImageBrush(drawImage);
-                    //imageBrush.Viewbox = image.Bounds;
-                    //imageBrush.Viewport = image.Bounds;
-                    //imageBrush.ViewboxUnits = BrushMappingMode.Absolute;
-                    //imageBrush.ViewportUnits = BrushMappingMode.Absolute;
-                    //imageBrush.TileMode = TileMode.None;
-                    //imageBrush.Stretch = Stretch.None;
-
-                    //this.Masking = imageBrush;
-
-                    DrawingBrush maskBrush = new DrawingBrush(image);
-                    //tb.Viewbox = new Rect(0, 0, destRect.Width, destRect.Height);
-                    //tb.Viewport = new Rect(0, 0, destRect.Width, destRect.Height);
-                    maskBrush.Viewbox = image.Bounds;
-                    maskBrush.Viewport = image.Bounds;
-                    maskBrush.ViewboxUnits = BrushMappingMode.Absolute;
-                    maskBrush.ViewportUnits = BrushMappingMode.Absolute;
-                    maskBrush.TileMode = TileMode.None;
-                    maskBrush.Stretch = Stretch.Uniform;
-
-                    ////maskBrush.AlignmentX = AlignmentX.Center;
-                    ////maskBrush.AlignmentY = AlignmentY.Center;
-
-                    this.Masking = maskBrush;
-
-                    _maskUnits = (SvgUnitType)maskElement.MaskUnits.AnimVal;
-                    _maskContentUnits = (SvgUnitType)maskElement.MaskContentUnits.AnimVal;
+                    maskElement = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgMaskElement;
                 }
+            }
+
+            if (maskElement != null)
+            {
+                WpfDrawingRenderer renderer = new WpfDrawingRenderer();
+                renderer.Window = _svgElement.OwnerDocument.Window as SvgWindow;
+
+                WpfDrawingSettings settings = context.Settings.Clone();
+                settings.TextAsGeometry = true;
+                WpfDrawingContext maskContext = new WpfDrawingContext(true, settings);
+
+                //maskContext.Initialize(null, context.FontFamilyVisitor, null);
+                maskContext.Initialize(context.LinkVisitor,
+                    context.FontFamilyVisitor, context.ImageVisitor);
+
+                renderer.RenderMask(maskElement, maskContext);
+                Drawing image = renderer.Drawing;
+
+                Rect bounds = new Rect(0, 0, 1, 1);
+                //Rect destRect = GetMaskDestRect(maskElement, bounds);
+
+                //destRect = bounds;
+
+                //DrawingImage drawImage = new DrawingImage(image);
+
+                //DrawingVisual drawingVisual = new DrawingVisual();
+                //DrawingContext drawingContext = drawingVisual.RenderOpen();
+                //drawingContext.DrawDrawing(image);
+                //drawingContext.Close();
+
+                //RenderTargetBitmap drawImage = new RenderTargetBitmap((int)200,
+                //    (int)200, 96, 96, PixelFormats.Pbgra32);
+                //drawImage.Render(drawingVisual);
+
+                //ImageBrush imageBrush = new ImageBrush(drawImage);
+                //imageBrush.Viewbox = image.Bounds;
+                //imageBrush.Viewport = image.Bounds;
+                //imageBrush.ViewboxUnits = BrushMappingMode.Absolute;
+                //imageBrush.ViewportUnits = BrushMappingMode.Absolute;
+                //imageBrush.TileMode = TileMode.None;
+                //imageBrush.Stretch = Stretch.None;
+
+                //this.Masking = imageBrush;
+
+                DrawingBrush maskBrush = new DrawingBrush(image);
+                //tb.Viewbox = new Rect(0, 0, destRect.Width, destRect.Height);
+                //tb.Viewport = new Rect(0, 0, destRect.Width, destRect.Height);
+                maskBrush.Viewbox = image.Bounds;
+                maskBrush.Viewport = image.Bounds;
+                maskBrush.ViewboxUnits = BrushMappingMode.Absolute;
+                maskBrush.ViewportUnits = BrushMappingMode.Absolute;
+                maskBrush.TileMode = TileMode.None;
+                maskBrush.Stretch = Stretch.Uniform;
+
+                ////maskBrush.AlignmentX = AlignmentX.Center;
+                ////maskBrush.AlignmentY = AlignmentY.Center;
+
+                this.Masking = maskBrush;
+
+                _maskUnits        = (SvgUnitType)maskElement.MaskUnits.AnimVal;
+                _maskContentUnits = (SvgUnitType)maskElement.MaskContentUnits.AnimVal;
             }
         }
 

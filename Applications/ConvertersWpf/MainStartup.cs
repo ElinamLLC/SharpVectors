@@ -1,12 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Text;
-using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
-
-using System.Windows;
-using System.Windows.Threading;
 
 namespace SharpVectors.Converters
 {

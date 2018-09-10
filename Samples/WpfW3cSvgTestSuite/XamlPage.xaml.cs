@@ -38,8 +38,6 @@ namespace WpfW3cSvgTestSuite
         private FoldingManager     _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
 
-        private SearchInputHandler _searchHandler;
-
         public XamlPage()
         {
             InitializeComponent();
@@ -60,8 +58,7 @@ namespace WpfW3cSvgTestSuite
             _foldingManager  = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
-            _searchHandler = new SearchInputHandler(textEditor.TextArea);
-            textEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(_searchHandler);
+            SearchPanel.Install(textEditor);
         }
 
         public bool LoadDocument(string documentFilePath, SvgTestInfo testInfo, object extraInfo = null)
@@ -152,7 +149,7 @@ namespace WpfW3cSvgTestSuite
             if (currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.DefaultExt = ".txt";
+                dlg.DefaultExt = ".svg";
                 if (dlg.ShowDialog() ?? false)
                 {
                     currentFileName = dlg.FileName;
@@ -173,9 +170,6 @@ namespace WpfW3cSvgTestSuite
             {
                 return;
             }
-
-            _searchHandler.SearchPattern = searchText;
-            _searchHandler.FindNext();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)

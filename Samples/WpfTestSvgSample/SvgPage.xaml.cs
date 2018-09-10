@@ -44,8 +44,6 @@ namespace WpfTestSvgSample
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
 
-        private SearchInputHandler _searchHandler;
-
         #endregion
 
         #region Constructors and Destructor
@@ -76,8 +74,7 @@ namespace WpfTestSvgSample
             textEditor.CommandBindings.Add(new CommandBinding(
                 ApplicationCommands.PrintPreview, OnPrintPreview, OnCanExecuteTextEditorCommand));
 
-            _searchHandler = new SearchInputHandler(textEditor.TextArea);
-            textEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(_searchHandler);
+            SearchPanel.Install(textEditor);
         }
 
         #endregion
@@ -230,9 +227,6 @@ namespace WpfTestSvgSample
             {
                 return;
             }
-
-            _searchHandler.SearchPattern = searchText;
-            _searchHandler.FindNext();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)

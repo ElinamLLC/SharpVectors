@@ -47,7 +47,7 @@ namespace SharpVectors.Dom.Svg
             {
                 for (int i = 0; i < len; i++)
                 {
-                    values[i] = SvgNumber.ParseNumber(valuesStr[i]);
+                    values[i] = SvgNumber.Parse(valuesStr[i]);
                 }
             }
             catch
@@ -56,7 +56,7 @@ namespace SharpVectors.Dom.Svg
                 foreach (Match m in SvgNumber.DoubleRegex.Matches(str))
                 {
                     if (!string.IsNullOrEmpty(m.Value))
-                        valueList.Add(SvgNumber.ParseToFloat(m.Value));
+                        valueList.Add(SvgNumber.ParseDouble(m.Value));
                 }
 
                 values = valueList.ToArray();

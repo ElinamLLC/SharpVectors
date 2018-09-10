@@ -5,7 +5,7 @@ using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Css
 {
-    public delegate void NodeChangeHandler(Object src, XmlNodeChangedEventArgs args);
+    public delegate void NodeChangeHandler(object src, XmlNodeChangedEventArgs args);
     public delegate void CssChangeHandler();
 
     public class CssXmlElement : Element, IElementCssInlineStyle
@@ -120,7 +120,9 @@ namespace SharpVectors.Dom.Css
             foreach (XmlNode child in ChildNodes)
             {
                 if (child is CssXmlElement)
+                {
                     ((CssXmlElement)child).CssInvalidate();
+                }
             }
 
             // Kill the cache
@@ -208,7 +210,7 @@ namespace SharpVectors.Dom.Css
         /// will need to change. This is mainly useful when one of the child nodes parent is a 
         /// referenced node (for example in a &lt;use&gt; element.
         /// </summary>
-        public virtual void ChildNodeChange(Object src, XmlNodeChangedEventArgs args)
+        public virtual void ChildNodeChange(object src, XmlNodeChangedEventArgs args)
         {
             FireChildNodeChange(src, args, true);
         }
@@ -221,7 +223,7 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        protected void FireAttributeChange(Object src, XmlNodeChangedEventArgs args)
+        protected void FireAttributeChange(object src, XmlNodeChangedEventArgs args)
         {
             if (attributeChangeHandler != null)
             {
@@ -229,7 +231,7 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        protected void FireElementChange(Object src, XmlNodeChangedEventArgs args)
+        protected void FireElementChange(object src, XmlNodeChangedEventArgs args)
         {
             if (elementChangeHandler != null)
             {
@@ -237,7 +239,7 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        protected void FireParentNodeChange(Object src, XmlNodeChangedEventArgs args, bool fireEvent)
+        protected void FireParentNodeChange(object src, XmlNodeChangedEventArgs args, bool fireEvent)
         {
             if (fireEvent && parentNodeChangeHandler != null)
             {
@@ -257,7 +259,7 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        protected void FireChildNodeChange(Object src, XmlNodeChangedEventArgs args, bool fireEvent)
+        protected void FireChildNodeChange(object src, XmlNodeChangedEventArgs args, bool fireEvent)
         {
             if (fireEvent && childNodeChangeHandler != null)
             {

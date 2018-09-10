@@ -65,6 +65,8 @@ namespace SharpVectors.Renderers.Wpf
 
             Geometry geometry = CreateGeometry(_svgElement, context.OptimizePath);
 
+            string elementId = this.GetElementName();
+
             if (geometry != null && !geometry.IsEmpty())
             {
                 SetClip(context);
@@ -122,7 +124,6 @@ namespace SharpVectors.Renderers.Wpf
 
                     GeometryDrawing drawing = new GeometryDrawing(brush, pen, geometry);
 
-                    string elementId = this.GetElementName();
                     if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
                     {
                         drawing.SetValue(FrameworkElement.NameProperty, elementId);
@@ -167,10 +168,8 @@ namespace SharpVectors.Renderers.Wpf
                                 TransformGroup transformGroup = new TransformGroup();
 
                                 // Scale the clip region (at (0, 0)) and translate to the top-left corner of the target.
-                                transformGroup.Children.Add(
-                                    new ScaleTransform(drawingBounds.Width, drawingBounds.Height)); 
-                                transformGroup.Children.Add(
-                                    new TranslateTransform(drawingBounds.X, drawingBounds.Y));
+                                transformGroup.Children.Add(new ScaleTransform(drawingBounds.Width, drawingBounds.Height)); 
+                                transformGroup.Children.Add(new TranslateTransform(drawingBounds.X, drawingBounds.Y));
 
                                 clipGeom.Transform = transformGroup;
                             }
@@ -184,7 +183,10 @@ namespace SharpVectors.Renderers.Wpf
                         }
                         if (maskBrush != null)
                         {
+                            DrawingBrush drawingBrush = (DrawingBrush)maskBrush;
+
                             SvgUnitType maskUnits = this.MaskUnits;
+                            SvgUnitType maskContentUnits = this.MaskContentUnits;
                             if (maskUnits == SvgUnitType.ObjectBoundingBox)
                             {
                                 Rect drawingBounds = geometryBounds;
@@ -193,16 +195,7 @@ namespace SharpVectors.Renderers.Wpf
                                 {
                                     drawingBounds = transform.TransformBounds(drawingBounds);
                                 }
-
-                                TransformGroup transformGroup = new TransformGroup();
-
-                                // Scale the clip region (at (0, 0)) and translate to the top-left corner of the target.
-                                transformGroup.Children.Add(
-                                    new ScaleTransform(drawingBounds.Width, drawingBounds.Height));
-                                transformGroup.Children.Add(
-                                    new TranslateTransform(drawingBounds.X, drawingBounds.Y));
-
-                                DrawingGroup maskGroup = ((DrawingBrush)maskBrush).Drawing as DrawingGroup;
+                                DrawingGroup maskGroup = drawingBrush.Drawing as DrawingGroup;
                                 if (maskGroup != null)
                                 {
                                     DrawingCollection maskDrawings = maskGroup.Children;
@@ -224,20 +217,33 @@ namespace SharpVectors.Renderers.Wpf
                                     }
                                 }
 
-                                //if (transformGroup != null)
-                                //{
-                                //    drawingBounds = transformGroup.TransformBounds(drawingBounds);
-                                //}
+                                if (maskContentUnits == SvgUnitType.ObjectBoundingBox)
+                                {
+                                    TransformGroup transformGroup = new TransformGroup();
 
-                                //maskBrush.Viewbox = drawingBounds;
-                                //maskBrush.ViewboxUnits = BrushMappingMode.Absolute;
+                                    // Scale the clip region (at (0, 0)) and translate to the top-left corner of the target.
+                                    var scaleTransform = new ScaleTransform(drawingBounds.Width, drawingBounds.Height);
+                                    transformGroup.Children.Add(scaleTransform);
+                                    var translateTransform = new TranslateTransform(drawingBounds.X, drawingBounds.Y);
+                                    transformGroup.Children.Add(translateTransform);
 
-                                //maskBrush.Stretch = Stretch.Uniform;
+                                    Matrix matrix = new Matrix();
+                                    matrix.Scale(drawingBounds.Width, drawingBounds.Height);
+                                    matrix.Translate(drawingBounds.X, drawingBounds.Y);
 
-                                //maskBrush.Viewport = drawingBounds;
-                                //maskBrush.ViewportUnits = BrushMappingMode.Absolute;
+                                    //maskBrush.Transform = transformGroup; 
+                                    maskBrush.Transform = new MatrixTransform(matrix); 
+                                }
+                                else
+                                {
+                                    drawingBrush.Viewbox = drawingBounds;
+                                    drawingBrush.ViewboxUnits = BrushMappingMode.Absolute;
 
-                                maskBrush.Transform = transformGroup; 
+                                    drawingBrush.Stretch = Stretch.Uniform;
+
+                                    drawingBrush.Viewport = drawingBounds;
+                                    drawingBrush.ViewportUnits = BrushMappingMode.Absolute;
+                                }
                             }
                             else
                             {

@@ -274,11 +274,11 @@
         <test source="styling-css-01-b.svg" title="styling-css-01-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
         <test source="styling-css-02-b.svg" title="styling-css-02-b" state="success" comment="" description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
         <test source="styling-css-03-b.svg" title="styling-css-03-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
-        <test source="styling-css-04-f.svg" title="styling-css-04-f" state="failure" comment="Review the use of default values." description="Tests CSS2 selectors" />
+        <test source="styling-css-04-f.svg" title="styling-css-04-f" state="success" comment="By the revised test, SVG 1.1 Second Edition Test Suite, the dash lines in C3 and D3 should not be drawn." description="Tests CSS2 selectors" />
         <test source="styling-css-05-b.svg" title="styling-css-05-b" state="success" comment="" description="" />
         <test source="styling-css-06-b.svg" title="styling-css-06-b" state="failure" comment="" description="" />
         <test source="styling-inherit-01-b.svg" title="styling-inherit-01-b" state="success" comment="" description="Verify property inheritance" />
-        <test source="styling-pres-01-t.svg" title="styling-pres-01-t" state="failure" comment="Review the use of invalid and default values." description="Check !important in presentation attribute is an error" />
+        <test source="styling-pres-01-t.svg" title="styling-pres-01-t" state="success" comment="By the revised test, SVG 1.1 Second Edition Test Suite, the previous result of black rectangle is now valid and it is the same result in all browsers." description="Check !important in presentation attribute is an error" />
     </category>
     <category label="Text">
         <test source="text-align-01-b.svg" title="text-align-01-b" state="success" comment="" description="Test 'text-anchor' property (horizontal)." />

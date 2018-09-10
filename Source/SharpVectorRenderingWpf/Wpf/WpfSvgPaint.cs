@@ -247,24 +247,31 @@ namespace SharpVectors.Renderers.Wpf
             if (dashArrayText.Equals("none", StringComparison.OrdinalIgnoreCase)
                 || dashArrayText.Equals("null", StringComparison.OrdinalIgnoreCase))
             {
+                // NOTE: Rule changed in Second Edition of Test Suite 1.1
+                //string dashArrayAttr = _element.GetAttribute("stroke-dasharray");
+                //if (string.IsNullOrWhiteSpace(dashArrayAttr) ||
+                //    dashArrayAttr.Equals("none", StringComparison.OrdinalIgnoreCase)
+                //    || dashArrayAttr.Equals("null", StringComparison.OrdinalIgnoreCase))
+                //{
+                //    return null;
+                //}
+                //dashArrayText = dashArrayAttr;
+
                 return null;
             }
-            else
+
+            SvgNumberList list = new SvgNumberList(dashArrayText);
+
+            uint len = list.NumberOfItems;
+            DoubleCollection dashArray = new DoubleCollection((int)len);
+
+            for (uint i = 0; i < len; i++)
             {
-                SvgNumberList list = new SvgNumberList(dashArrayText);
-
-                uint len = list.NumberOfItems;
-                //float[] fDashArray = new float[len];
-                DoubleCollection dashArray = new DoubleCollection((int)len);
-
-                for (uint i = 0; i < len; i++)
-                {
-                    //divide by strokeWidth to take care of the difference between Svg and WPF
-                    dashArray.Add(list.GetItem(i).Value / strokeWidth);
-                }
-
-                return dashArray;
+                //divide by strokeWidth to take care of the difference between Svg and WPF
+                dashArray.Add(list.GetItem(i).Value / strokeWidth);
             }
+
+            return dashArray;
         }
 
         private double GetDashOffset(double strokeWidth)
@@ -295,8 +302,7 @@ namespace SharpVectors.Renderers.Wpf
                 SvgStyleableElement styleElm = _element.ImportNode as SvgStyleableElement;
                 if (styleElm != null)
                 {
-                    string propertyValue =
-                        styleElm.GetComputedStyle("").GetPropertyValue(_propertyName);
+                    string propertyValue = styleElm.GetComputedStyle("").GetPropertyValue(_propertyName);
 
                     if (!string.IsNullOrWhiteSpace(propertyValue))
                     {

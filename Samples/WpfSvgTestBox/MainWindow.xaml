@@ -7,7 +7,14 @@
         local:MainWindowSettings.Save="True"
         mc:Ignorable="d"
         Title="WPF SVG TestBox" Height="720" Width="860" WindowStartupLocation="CenterScreen">
-    <Grid>
-        
-    </Grid>
+    <DockPanel LastChildFill="True" Margin="3">
+        <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
+            <TabItem Name="tabSvgInput" Header="Svg Input">
+                <Frame Name="frameSvgInput" Source="SvgPage.xaml"/>
+            </TabItem>
+            <TabItem Name="tabXamlOutput" Header="Xaml Output">
+                <Frame Name="frameXamlOutput" Source="XamlPage.xaml"/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

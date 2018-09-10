@@ -329,6 +329,17 @@ namespace WpfW3cSvgTestSuite
             int[] successValues = new int[resultCount];
             int totalValue = 0;
 
+            // Start with color of newer vesions
+            Brush[] changedBrushes = {
+                Brushes.LightSeaGreen,  // Version 1.2
+                Brushes.LightSkyBlue,   // Version 1.1
+                Brushes.LightPink,
+                Brushes.LightSalmon,
+                Brushes.LightSteelBlue,
+                Brushes.LightSkyBlue,
+                Brushes.LightSkyBlue
+            };
+
             for (int k = 0; k < _categoryLabels.Count; k++)
             {
                 TableRowGroup resultGroup = new TableRowGroup();
@@ -384,10 +395,19 @@ namespace WpfW3cSvgTestSuite
                 }
                 else
                 {
-                    // TODO: Improve this, currently only good for two results...
-                    if (resultCount > 1 && IsBetterResult(successValues, resultCount - 1))
+                    if (resultCount > 1 )
                     {
-                        resultRow.Cells[cellCount - 1].Background = Brushes.LightSkyBlue;
+                        int i = 0;
+                        for (int j = (resultCount - 1); j >= 1; j--)
+                        {
+                            var selectedBrush = changedBrushes[i];
+
+                            i++;
+                            if (IsBetterResult(successValues, j))
+                            {
+                                resultRow.Cells[cellCount - i].Background = selectedBrush;
+                            }
+                        }
                     }
                 }
 
