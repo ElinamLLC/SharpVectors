@@ -414,6 +414,16 @@
     <Compile Include="SvgExternalResourcesRequiredException.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Text\SvgFontElement.cs" />
+    <Compile Include="Text\SvgFontFaceElement.cs" />
+    <Compile Include="Text\SvgFontFaceFormatElement.cs" />
+    <Compile Include="Text\SvgFontFaceNameElement.cs" />
+    <Compile Include="Text\SvgFontFaceSrcElement.cs" />
+    <Compile Include="Text\SvgFontFaceUriElement.cs" />
+    <Compile Include="Text\SvgGlyphElement.cs" />
+    <Compile Include="Text\SvgGlyphRefElement.cs" />
+    <Compile Include="Text\SvgHKernElement.cs" />
+    <Compile Include="Text\SvgMissingGlyphElement.cs" />
     <Compile Include="Text\SvgTextContentElement.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -431,6 +441,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DocumentStructure\SvgElementFactory.cs" />
+    <Compile Include="Text\SvgVKernElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\SvgElements.cd" />

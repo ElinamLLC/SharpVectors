@@ -176,7 +176,7 @@
     </category>
     <category label="Painting Marker">
         <test source="painting-marker-01-f.svg" title="painting-marker-01-f" state="success" comment="" description="Checks if viewer can handle marker elements on paths" />
-        <test source="painting-marker-02-f.svg" title="painting-marker-02-f" state="partial" comment="Stroke properties not fully supported." description="Examines rendering model for markers" />
+        <test source="painting-marker-02-f.svg" title="painting-marker-02-f" state="success" comment="Stroke properties now supported, may require more samples for testing." description="Examines rendering model for markers" />
         <test source="painting-marker-03-f.svg" title="painting-marker-03-f" state="success" comment="" description="Tests the 'marker' shorthand property and the three marker presentation attributes" />
     </category>
     <category label="Painting Rendering">

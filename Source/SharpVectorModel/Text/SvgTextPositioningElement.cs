@@ -10,8 +10,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Constructors and Destructor
 
-        public SvgTextPositioningElement(string prefix, string localname, string ns,
-            SvgDocument doc) : base(prefix, localname, ns, doc)
+        public SvgTextPositioningElement(string prefix, string localname, string ns, SvgDocument doc) 
+            : base(prefix, localname, ns, doc)
         {
         }
 

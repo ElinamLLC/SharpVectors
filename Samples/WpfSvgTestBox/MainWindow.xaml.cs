@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace WpfSvgTestBox
 {
@@ -20,10 +9,16 @@ namespace WpfSvgTestBox
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Private Fields
+
         private bool _isShown;
 
         private SvgPage _svgPage;
         private XamlPage _xamlPage;
+
+        #endregion
+
+        #region Constructors
 
         public MainWindow()
         {
@@ -32,6 +27,8 @@ namespace WpfSvgTestBox
             this.Loaded += OnWindowLoaded;
             this.Closing += OnWindowClosing;
         }
+
+        #endregion
 
         #region Protected Methods
 
@@ -55,8 +52,6 @@ namespace WpfSvgTestBox
             }
             _isShown = true;
 
-            Console.WriteLine("OnContentRendered");
-
             if (_svgPage != null)
             {
                 _svgPage.InitializeDocument();
@@ -64,6 +59,8 @@ namespace WpfSvgTestBox
         }
 
         #endregion
+
+        #region Private Methods
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
@@ -75,13 +72,12 @@ namespace WpfSvgTestBox
             {
                 _svgPage.XamlPage = _xamlPage;
             }
-
-            Console.WriteLine("OnWindowLoaded");
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
         }
 
+        #endregion
     }
 }

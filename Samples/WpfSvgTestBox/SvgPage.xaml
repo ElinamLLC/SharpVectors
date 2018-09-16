@@ -15,8 +15,10 @@
 
     <Page.InputBindings>
         <!-- Bind keys to commands. -->
-        <KeyBinding Key="Minus" Command="{StaticResource Commands.ZoomOut}"/>
-        <KeyBinding Key="Plus" Command="{StaticResource Commands.ZoomIn}"/>
+        <KeyBinding Modifiers="Control" Key="Minus" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Modifiers="Control" Key="Plus" Command="{StaticResource Commands.ZoomIn}"/>
+        <KeyBinding Modifiers="Control" Key="OemMinus" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Modifiers="Control" Key="OemPlus" Command="{StaticResource Commands.ZoomIn}"/>
     </Page.InputBindings>
 
     <Page.CommandBindings>
@@ -88,6 +90,13 @@
                 <TextBox Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
                 <Button Click="OnSearchTextClick">
                     <Image Source="Images/Find.png" Height="16"/>
+                </Button>
+                <Separator/>
+                <Button Name="formatInput" Click="OnFormatInputClick">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/Format.png" />
+                        <TextBlock Margin="3,0,0,0">Format</TextBlock>
+                    </StackPanel>
                 </Button>
                 <Separator/>
                 <Button Name="convertInput" Click="OnConvertInputClick">

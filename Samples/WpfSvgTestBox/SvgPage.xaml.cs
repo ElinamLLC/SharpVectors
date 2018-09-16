@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using System.Text;
+using System.Reflection;
 using System.IO.Compression;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,12 +29,14 @@ namespace WpfSvgTestBox
     /// </summary>
     public partial class SvgPage : Page
     {
-        private const string SvgFileName  = "TextBoxTestFile.svg";
-        private const string BackFileName = "TextBoxTestFile.bak";
-        private const string XamlFileName = "TextBoxTestFile.xaml";
+        #region Private Fields
 
-        private const string AppTitle       = "Svg Test Box";
-        private const string AppErrorTitle  = "Svg Test Box - Error";
+        private const string SvgFileName   = "TextBoxTestFile.svg";
+        private const string BackFileName  = "TextBoxTestFile.bak";
+        private const string XamlFileName  = "TextBoxTestFile.xaml";
+
+        private const string AppTitle      = "Svg Test Box";
+        private const string AppErrorTitle = "Svg Test Box - Error";
 
         private XamlPage _xamlPage;
 
@@ -72,13 +76,17 @@ namespace WpfSvgTestBox
         /// </summary>
         private MouseButton mouseButtonDown;
 
+        #endregion
+
+        #region Constructors and Destructor
+
         public SvgPage()
         {
             InitializeComponent();
 
-            string workingDir = IoPath.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string workingDir = IoPath.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            _svgFilePath  = IoPath.Combine(workingDir, SvgFileName);
+            _svgFilePath = IoPath.Combine(workingDir, SvgFileName);
             _xamlFilePath = IoPath.Combine(workingDir, XamlFileName);
             _backFilePath = IoPath.Combine(workingDir, BackFileName);
 
@@ -95,10 +103,10 @@ namespace WpfSvgTestBox
             if (options != null)
             {
                 //options.AllowScrollBelowDocument = true;
-                options.EnableHyperlinks           = true;
-                options.EnableEmailHyperlinks      = true;
-                options.EnableVirtualSpace         = false;
-                options.HighlightCurrentLine       = true;
+                options.EnableHyperlinks = true;
+                options.EnableEmailHyperlinks = true;
+                options.EnableVirtualSpace = false;
+                options.HighlightCurrentLine = true;
                 //options.ShowSpaces               = true;
                 //options.ShowTabs                 = true;
                 //options.ShowEndOfLine            = true;              
@@ -106,7 +114,7 @@ namespace WpfSvgTestBox
 
             textEditor.ShowLineNumbers = true;
 
-            _foldingManager  = FoldingManager.Install(textEditor.TextArea);
+            _foldingManager = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
             SearchPanel.Install(textEditor);
@@ -115,10 +123,14 @@ namespace WpfSvgTestBox
 
             this.SetValue(TextOptions.TextFormattingModeProperty, TextFormattingMode.Display);
 
-            this.Loaded      += OnPageLoaded;
+            this.Loaded += OnPageLoaded;
             this.SizeChanged += OnPageSizeChanged;
         }
-        
+
+        #endregion
+
+        #region Public Properties
+
         public XamlPage XamlPage
         {
             get {
@@ -128,6 +140,10 @@ namespace WpfSvgTestBox
                 _xamlPage = value;
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         public bool InitializeDocument()
         {
@@ -244,53 +260,9 @@ namespace WpfSvgTestBox
             }
         }
 
-        private void OnOpenFileClick(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.CheckFileExists = true;
-            dlg.Filter          = "SVG files (*.svg;*.svgz)|*.svg;*.svgz|All files (*.*)|*.*";
-            dlg.DefaultExt      = ".svg";
-            if (dlg.ShowDialog() ?? false)
-            {
-                currentFileName = dlg.FileName;
+        #endregion
 
-                if (!string.IsNullOrWhiteSpace(_svgFilePath))
-                {
-                    if (File.Exists(_svgFilePath))
-                    {
-                        File.Delete(_svgFilePath);
-                    }
-                }
-                if (!string.IsNullOrWhiteSpace(_backFilePath))
-                {
-                    if (File.Exists(_backFilePath))
-                    {
-                        File.Delete(_backFilePath);
-                    }
-                }
-
-                this.LoadDocument(currentFileName);
-            }
-        }
-
-        private void OnSaveFileClick(object sender, EventArgs e)
-        {
-            if (currentFileName == null)
-            {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Filter     = "SVG files (*.svg;*.svgz)|*.svg;*.svgz|All files (*.*)|*.*";
-                dlg.DefaultExt = ".svg";
-                if (dlg.ShowDialog() ?? false)
-                {
-                    currentFileName = dlg.FileName;
-                }
-                else
-                {
-                    return;
-                }
-            }
-            textEditor.Save(currentFileName);
-        }
+        #region Private Methods
 
         private void UpdateFoldings()
         {
@@ -403,7 +375,7 @@ namespace WpfSvgTestBox
             {
                 return;
             }
-            MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Information); 
+            MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ReportError(string message)
@@ -412,7 +384,7 @@ namespace WpfSvgTestBox
             {
                 return;
             }
-            MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error); 
+            MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void ReportError(Exception ex)
@@ -421,10 +393,111 @@ namespace WpfSvgTestBox
             {
                 return;
             }
-            MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error); 
+            MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        #endregion
+
         #region Private Event Handlers
+
+        private void OnOpenFileClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.CheckFileExists = true;
+            dlg.Filter          = "SVG files (*.svg;*.svgz)|*.svg;*.svgz|All files (*.*)|*.*";
+            dlg.DefaultExt      = ".svg";
+            if (dlg.ShowDialog() ?? false)
+            {
+                currentFileName = dlg.FileName;
+
+                if (!string.IsNullOrWhiteSpace(_svgFilePath))
+                {
+                    if (File.Exists(_svgFilePath))
+                    {
+                        File.Delete(_svgFilePath);
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(_backFilePath))
+                {
+                    if (File.Exists(_backFilePath))
+                    {
+                        File.Delete(_backFilePath);
+                    }
+                }
+
+                this.LoadDocument(currentFileName);
+            }
+        }
+
+        private void OnSaveFileClick(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter     = "SVG files (*.svg;*.svgz)|*.svg;*.svgz|All files (*.*)|*.*";
+            dlg.FileName   = currentFileName;
+            dlg.DefaultExt = ".svg";
+            if (dlg.ShowDialog() ?? false)
+            {
+                currentFileName = dlg.FileName;
+            }
+            else
+            {
+                return;
+            }
+            textEditor.Save(currentFileName);
+        }
+
+        //private void OnPasteText(object sender, DataObjectPastingEventArgs args)
+        //{
+        //    string clipboard = args.DataObject.GetData(typeof(string)) as string;
+        //}
+
+        private void OnFormatInputClick(object sender, RoutedEventArgs e)
+        {
+            if (textEditor == null)
+            {
+                return;
+            }
+            string inputText = textEditor.Document.Text;
+            if (string.IsNullOrWhiteSpace(inputText))
+            {
+                return;
+            }
+
+            MemoryStream mStream = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(mStream, Encoding.Unicode);
+            XmlDocument document = new XmlDocument();
+            document.XmlResolver = null;
+
+            try
+            {
+                // Load the XmlDocument with the XML.
+                document.LoadXml(inputText);
+
+                writer.Formatting = Formatting.Indented;
+
+                // Write the XML into a formatting XmlTextWriter
+                document.WriteContentTo(writer);
+                writer.Flush();
+                mStream.Flush();
+
+                // Have to rewind the MemoryStream in order to read
+                // its contents.
+                mStream.Position = 0;
+
+                // Read MemoryStream contents into a StreamReader.
+                StreamReader sReader = new StreamReader(mStream);
+
+                // Extract the text from the StreamReader.
+                textEditor.Document.Text = sReader.ReadToEnd();
+            }
+            catch (XmlException)
+            {
+                // Handle the exception
+            }
+
+            mStream.Close();
+            writer.Close();
+        }
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)
         {
@@ -462,8 +535,6 @@ namespace WpfSvgTestBox
             foldingUpdateTimer.Start();
 
             textEditor.Focus();
-
-            Console.WriteLine("OnPageLoaded - SVG");
         }
 
         private void OnPageSizeChanged(object sender, SizeChangedEventArgs e)

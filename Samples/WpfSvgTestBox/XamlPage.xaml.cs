@@ -1,28 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;  
 
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-//using System.Windows.Shapes;
 
 using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Utils;
-using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Folding;
-using ICSharpCode.AvalonEdit.Indentation;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Search;
+using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 using Microsoft.Win32;
 
@@ -33,10 +20,16 @@ namespace WpfSvgTestBox
     /// </summary>
     public partial class XamlPage : Page
     {
+        #region Private Fields
+
         private string currentFileName;
 
-        private FoldingManager     _foldingManager;
+        private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
+
+        #endregion
+
+        #region Constructors and Destructor
 
         public XamlPage()
         {
@@ -53,20 +46,24 @@ namespace WpfSvgTestBox
                 options.HighlightCurrentLine = true;
                 //options.ShowSpaces               = true;
                 //options.ShowTabs                 = true;
-                //options.ShowEndOfLine            = true;              
+                //options.ShowEndOfLine            = true;
             }
             textEditor.ShowLineNumbers = true;
 
             textEditor.IsReadOnly = true;
 
-            _foldingManager  = FoldingManager.Install(textEditor.TextArea);
+            _foldingManager = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
             SearchPanel.Install(textEditor);
 
-            this.Loaded      += OnPageLoaded;
+            this.Loaded += OnPageLoaded;
             this.SizeChanged += OnPageSizeChanged;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public bool LoadDocument(string documentFilePath)
         {
@@ -129,7 +126,7 @@ namespace WpfSvgTestBox
 
             if (_foldingManager == null || _foldingStrategy == null)
             {
-                _foldingManager  = FoldingManager.Install(textEditor.TextArea);
+                _foldingManager = FoldingManager.Install(textEditor.TextArea);
                 _foldingStrategy = new XmlFoldingStrategy();
             }
 
@@ -145,6 +142,10 @@ namespace WpfSvgTestBox
                 textEditor.Document.Text = string.Empty;
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void OnOpenFileClick(object sender, RoutedEventArgs e)
         {
@@ -203,11 +204,12 @@ namespace WpfSvgTestBox
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("OnPageLoaded - XAML");
         }
 
         private void OnPageSizeChanged(object sender, SizeChangedEventArgs e)
         {
         }
+
+        #endregion
     }
 }

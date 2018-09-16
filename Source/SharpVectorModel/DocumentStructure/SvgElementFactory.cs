@@ -79,6 +79,29 @@ namespace SharpVectors.Dom.Svg
                     return new SvgUseElement(prefix, localName, ns, doc);
                 case "color-profile":
                     return new SvgColorProfileElement(prefix, localName, ns, doc);
+
+                case "font":
+                    return new SvgFontElement(prefix, localName, ns, doc);
+                case "font-face":
+                    return new SvgFontFaceElement(prefix, localName, ns, doc);
+                case "font-face-format":
+                    return new SvgFontFaceFormatElement(prefix, localName, ns, doc);
+                case "font-face-name":
+                    return new SvgFontFaceNameElement(prefix, localName, ns, doc);
+                case "font-face-src":
+                    return new SvgFontFaceSrcElement(prefix, localName, ns, doc);
+                case "font-face-uri":
+                    return new SvgFontFaceUriElement(prefix, localName, ns, doc);
+                case "glyph":
+                    return new SvgGlyphElement(prefix, localName, ns, doc);
+                case "glyphRef":
+                    return new SvgGlyphRefElement(prefix, localName, ns, doc);
+                case "hkern":
+                    return new SvgHKernElement(prefix, localName, ns, doc);
+                case "missing-glyph":
+                    return new SvgMissingGlyphElement(prefix, localName, ns, doc);
+                case "vkern":
+                    return new SvgVKernElement(prefix, localName, ns, doc);
             }
 
             return null;

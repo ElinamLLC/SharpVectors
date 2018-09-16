@@ -23,16 +23,18 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void BeforeRender(WpfDrawingRenderer renderer)
         {
+            base.BeforeRender(renderer);
+
             if (renderer == null)
             {
                 return;
             }
 
-            WpfDrawingContext context = renderer.Context;
+            //WpfDrawingContext context = renderer.Context;
 
-            SetQuality(context);
-            SetTransform(context);
-            SetMask(context);
+            //SetQuality(context);
+            //SetTransform(context);
+            //SetMask(context);
         }
 
         public override void Render(WpfDrawingRenderer renderer)
@@ -44,8 +46,9 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return;
             }
+            var parentNode = _svgElement.ParentNode;
             // We do not directly render the contents of the clip-path, unless specifically requested...
-            if (string.Equals(_svgElement.ParentNode.LocalName, "clipPath") &&
+            if (string.Equals(parentNode.LocalName, "clipPath") &&
                 !context.RenderingClipRegion)
             {
                 return;
@@ -266,7 +269,11 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
-            RenderMarkers(renderer, styleElm, context);
+            // If this is not the child of a "marker", then try rendering a marker...
+            if (!string.Equals(parentNode.LocalName, "marker"))
+            {
+                RenderMarkers(renderer, styleElm, context);
+            }
         }
 
         //==========================================================================

@@ -149,6 +149,10 @@ namespace SharpVectors.Dom.Svg
         public double GetStartAngle(int index)
         {
             index--;
+            if (index < 0)
+            {
+                index = 1;
+            }
 
             SvgPointF[] positions = MarkerPositions;
 

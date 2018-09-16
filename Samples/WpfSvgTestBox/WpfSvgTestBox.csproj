@@ -195,5 +195,8 @@
   <ItemGroup>
     <Resource Include="WpfSvgTestBox.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Format.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

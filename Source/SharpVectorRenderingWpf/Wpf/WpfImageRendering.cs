@@ -60,19 +60,13 @@ namespace SharpVectors.Renderers.Wpf
                     DrawingGroup drawImage = imageGroup.Children[0] as DrawingGroup;
                     if (drawImage != null)
                     {
-                        if (drawImage.ClipGeometry != null)
-                        {
-                            drawImage.ClipGeometry = null;
-                        }
+                        drawImage.ClipGeometry = null;
 
                         imageSource = new DrawingImage(drawImage);
                     }
                     else
                     {
-                        if (imageGroup.ClipGeometry != null)
-                        {
-                            imageGroup.ClipGeometry = null;
-                        }
+                        imageGroup.ClipGeometry = null;
 
                         imageSource = new DrawingImage(imageGroup);
                     }

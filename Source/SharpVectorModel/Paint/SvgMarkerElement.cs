@@ -172,9 +172,14 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_orientType == null)
                 {
-                    if (GetAttribute("orient") == "auto")
+                    string orientAttr = GetAttribute("orient");
+                    if (orientAttr.Equals("auto"))
                     {
                         _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Auto);
+                    }
+                    else if (orientAttr.Equals("auto-start-reverse"))
+                    {
+                        _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.AutoStartReverse);
                     }
                     else
                     {
@@ -196,6 +201,10 @@ namespace SharpVectors.Dom.Svg
                     if (OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
                     {
                         _orientAngle = new SvgAnimatedAngle(GetAttribute("orient"), "0");
+                    }
+                    else if (OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.AutoStartReverse))
+                    {
+                        _orientAngle = new SvgAnimatedAngle("180", "0");
                     }
                     else
                     {

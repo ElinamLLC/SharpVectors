@@ -170,7 +170,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_pathLength == null)
                 {
-                    _pathLength = new SvgAnimatedNumber(GetAttribute("pathLength"));
+                    _pathLength = new SvgAnimatedNumber(this.GetAttribute("pathLength"));
                 }
                 return _pathLength;
             }
@@ -185,7 +185,6 @@ namespace SharpVectors.Dom.Svg
         {
             throw new NotImplementedException();
         }
-
 
         public int GetPathSegAtLength(double distance)
         {

@@ -284,7 +284,7 @@ namespace SharpVectors.Renderers.Gdi
 
                         RectangleF clipBounds = gpClip != null ? gpClip.GetBounds() : RectangleF.Empty;
 
-                        if (clipBounds.Width == 0 || clipBounds.Height == 0)
+                        if (clipBounds.Width.Equals(0) || clipBounds.Height.Equals(0))
                         {
                             return;
                         }
@@ -415,13 +415,12 @@ namespace SharpVectors.Renderers.Gdi
 
         protected void FitToViewbox(GdiGraphicsWrapper graphics, RectangleF elmRect)
         {
-            if (element is ISvgFitToViewBox)
+            ISvgFitToViewBox fitToVBElm = element as ISvgFitToViewBox;
+            if (fitToVBElm != null)
             {
-                ISvgFitToViewBox fitToVBElm = (ISvgFitToViewBox)element;
                 SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)fitToVBElm.PreserveAspectRatio.AnimVal;
 
-                double[] translateAndScale = spar.FitToViewBox(
-                  (SvgRect)fitToVBElm.ViewBox.AnimVal,
+                double[] translateAndScale = spar.FitToViewBox((SvgRect)fitToVBElm.ViewBox.AnimVal,
                   new SvgRect(elmRect.X, elmRect.Y, elmRect.Width, elmRect.Height));
                 graphics.TranslateTransform((float)translateAndScale[0], (float)translateAndScale[1]);
                 graphics.ScaleTransform((float)translateAndScale[2], (float)translateAndScale[3]);

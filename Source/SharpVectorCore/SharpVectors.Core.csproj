@@ -733,6 +733,16 @@
     <Compile Include="Svg\Scripting\ISvgScriptElement.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Svg\Text\ISvgFontElement.cs" />
+    <Compile Include="Svg\Text\ISvgFontFaceElement.cs" />
+    <Compile Include="Svg\Text\ISvgFontFaceFormatElement.cs" />
+    <Compile Include="Svg\Text\ISvgFontFaceNameElement.cs" />
+    <Compile Include="Svg\Text\ISvgFontFaceSrcElement.cs" />
+    <Compile Include="Svg\Text\ISvgFontFaceUriElement.cs" />
+    <Compile Include="Svg\Text\ISvgGlyphElement.cs" />
+    <Compile Include="Svg\Text\ISvgGlyphRefElement.cs" />
+    <Compile Include="Svg\Text\ISvgHKernElement.cs" />
+    <Compile Include="Svg\Text\ISvgMissingGlyphElement.cs" />
     <Compile Include="Svg\Text\ISvgTextContentElement.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -752,6 +762,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Svg\SvgTransformOrder.cs" />
+    <Compile Include="Svg\Text\ISvgVKernElement.cs" />
     <Compile Include="Utils\Casting.cs" />
     <Compile Include="Utils\Dom\DomException.cs" />
     <Compile Include="Utils\Dom\DomExceptionType.cs" />

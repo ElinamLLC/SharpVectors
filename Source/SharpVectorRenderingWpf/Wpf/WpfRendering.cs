@@ -755,8 +755,8 @@ namespace SharpVectors.Renderers.Wpf
 
             double translateX = transformArray[0];
             double translateY = transformArray[1];
-            double scaleX = transformArray[2];
-            double scaleY = transformArray[3];
+            double scaleX     = transformArray[2];
+            double scaleY     = transformArray[3];
 
             Transform translateMatrix = null;
             Transform scaleMatrix = null;
@@ -1440,7 +1440,12 @@ namespace SharpVectors.Renderers.Wpf
                 string markerMiddleUrl = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-mid", "marker"));
                 string markerEndUrl    = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-end", "marker"));
                 string markerAll       = ExtractMarkerUrl(styleElm.GetPropertyValue("marker", "marker"));
-                if (!string.IsNullOrWhiteSpace(markerAll))
+
+                //  The SVG specification defines three properties to reference markers: marker-start, 
+                // marker -mid, marker-end. It also provides a shorthand property,marker. Using the marker 
+                // property from a style sheet is equivalent to using all three (start, mid, end). 
+                // However, shorthand properties cannot be used as presentation attributes.
+                if (!string.IsNullOrWhiteSpace(markerAll) && !IsPresentationMarker(styleElm))
                 {
                     if (string.IsNullOrWhiteSpace(markerStartUrl))
                     {
@@ -1488,6 +1493,36 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
             }
+        }
+
+        protected static bool IsPresentationMarker(SvgStyleableElement styleElm)
+        {
+            if (!string.IsNullOrWhiteSpace(styleElm.GetAttribute("marker")))
+            {
+                return true;
+            }
+            SvgElement parentElm = styleElm.ParentNode as SvgElement;
+            if (parentElm == null)
+            {
+                return false;
+            }
+            switch (parentElm.LocalName)
+            {
+                case "g":
+                    if (!string.IsNullOrWhiteSpace(parentElm.GetAttribute("marker")))
+                    {
+                        return true;
+                    }
+                    break;
+                case "use":
+                    if (!string.IsNullOrWhiteSpace(parentElm.GetAttribute("marker")))
+                    {
+                        return true;
+                    }
+                    //TODO--PAUL
+                    break;
+            }
+            return false;
         }
 
         #endregion

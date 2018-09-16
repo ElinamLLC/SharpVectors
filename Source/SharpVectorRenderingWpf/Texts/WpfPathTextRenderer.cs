@@ -183,7 +183,7 @@ namespace SharpVectors.Renderers.Texts
             double emSize         = GetComputedFontSize(element);
             FontFamily fontFamily = GetTextFontFamily(element, emSize);
 
-            FontStyle fontStyle = GetTextFontStyle(element);
+            FontStyle fontStyle   = GetTextFontStyle(element);
             FontWeight fontWeight = GetTextFontWeight(element);
 
             FontStretch fontStretch = GetTextFontStretch(element);

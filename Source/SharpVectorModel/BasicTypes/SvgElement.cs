@@ -74,10 +74,10 @@ namespace SharpVectors.Dom.Svg
         public string Id
         {
             get {
-                return GetAttribute("id");
+                return this.GetAttribute("id");
             }
             set {
-                SetAttribute("id", value);
+                this.SetAttribute("id", value);
             }
         }
 
@@ -198,22 +198,7 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Other public methods
-
-        public string ResolveUri(string uri)
-        {
-            uri = uri.Trim();
-            if (uri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
-            {
-                return uri;
-            }
-            string baseUri = BaseURI;
-            if (baseUri.Length == 0)
-            {
-                return uri;
-            }
-            return new Uri(new Uri(baseUri), uri).AbsoluteUri;
-        }
+        #region Other Public Properties and Methods
 
         /// <summary>
         /// Whenever an SvgElementInstance is created for an SvgElement this property is set. The value of 
@@ -230,6 +215,105 @@ namespace SharpVectors.Dom.Svg
             }
             set {
                 _elementInstance = value;
+            }
+        }
+
+        public string ResolveUri(string uri)
+        {
+            uri = uri.Trim();
+            if (uri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+            {
+                return uri;
+            }
+            string baseUri = BaseURI;
+            if (baseUri.Length == 0)
+            {
+                return uri;
+            }
+            return new Uri(new Uri(baseUri), uri).AbsoluteUri;
+        }
+
+        public float GetAttribute(string name, float defValue)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                float value;
+                if (float.TryParse(this.GetAttribute(name), out value))
+                {
+                    return value;
+                }
+            }
+            return defValue;
+        }
+
+        public void SetAttribute(string name, float value)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                this.SetAttribute(name, value.ToString());
+            }
+        }
+
+        public int GetAttribute(string name, int defValue)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                int value;
+                if (int.TryParse(this.GetAttribute(name), out value))
+                {
+                    return value;
+                }
+            }
+            return defValue;
+        }
+
+        public void SetAttribute(string name, int value)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                this.SetAttribute(name, value.ToString());
+            }
+        }
+
+        public double GetAttribute(string name, double defValue)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                double value;
+                if (double.TryParse(this.GetAttribute(name), out value))
+                {
+                    return value;
+                }
+            }
+            return defValue;
+        }
+
+        public void SetAttribute(string name, double value)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                this.SetAttribute(name, value.ToString());
+            }
+        }
+
+        public long GetAttribute(string name, long defValue)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                long value;
+                if (long.TryParse(this.GetAttribute(name), out value))
+                {
+                    return value;
+                }
+            }
+            return defValue;
+        }
+
+        public void SetAttribute(string name, long value)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                this.SetAttribute(name, value.ToString());
             }
         }
 
