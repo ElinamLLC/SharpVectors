@@ -97,6 +97,7 @@
     <Compile Include="Wpf\WpfFontFamilyInfo.cs" />
     <Compile Include="Wpf\WpfFontFamilyVisitor.cs" />
     <Compile Include="Wpf\WpfGroupRendering.cs" />
+    <Compile Include="Wpf\WpfClassVisitor.cs" />
     <Compile Include="Wpf\WpfIDVisitor.cs" />
     <Compile Include="Wpf\WpfLinkVisitor.cs" />
     <Compile Include="Wpf\WpfSvgPaint.cs" />

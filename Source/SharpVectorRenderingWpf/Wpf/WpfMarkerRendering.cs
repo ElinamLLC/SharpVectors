@@ -78,6 +78,12 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
+            string elementClass = this.GetElementClass();
+            if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
+            {
+                SvgObject.SetClass(_drawGroup, elementClass);
+            }
+
             //Transform markerTransform = this.Transform;
             //if (markerTransform != null && !markerTransform.Value.IsIdentity)
             //{
