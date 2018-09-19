@@ -49,7 +49,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Properties
 
-        public Drawing Drawing
+        public DrawingGroup Drawing
         {
             get
             {
@@ -145,8 +145,7 @@ namespace SharpVectors.Renderers.Wpf
             //if (onRender != null)
             //    OnRender(updatedRect);
 
-            _renderingContext = new WpfDrawingContext(true,
-                _renderingSettings);
+            _renderingContext = new WpfDrawingContext(true, _renderingSettings);
 
             _renderingContext.Initialize(null, _fontFamilyVisitor, _imageVisitor);
 
@@ -182,8 +181,7 @@ namespace SharpVectors.Renderers.Wpf
 
             if (context == null)
             {
-                _renderingContext = new WpfDrawingContext(true,
-                    _renderingSettings);
+                _renderingContext = new WpfDrawingContext(true, _renderingSettings);
 
                 _renderingContext.Initialize(null, _fontFamilyVisitor, _imageVisitor);
             }
@@ -211,8 +209,7 @@ namespace SharpVectors.Renderers.Wpf
             //RendererBeforeRender();
 
             //_renderingContext = new WpfDrawingContext(new DrawingGroup());
-            _renderingContext = new WpfDrawingContext(false,
-                _renderingSettings);
+            _renderingContext = new WpfDrawingContext(false, _renderingSettings);
 
             _renderingContext.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
 
@@ -248,8 +245,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (context == null)
             {
-                _renderingContext = new WpfDrawingContext(true,
-                    _renderingSettings);
+                _renderingContext = new WpfDrawingContext(true, _renderingSettings);
 
                 _renderingContext.Initialize(null, _fontFamilyVisitor, _imageVisitor);
             }

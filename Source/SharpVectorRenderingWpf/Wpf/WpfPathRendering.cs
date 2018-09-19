@@ -79,6 +79,7 @@ namespace SharpVectors.Renderers.Wpf
                 string fileValue = styleElm.GetAttribute("fill");
 
                 Brush brush = fillPaint.GetBrush(geometry);
+                bool isFillTransmable = fillPaint.IsFillTransformable;
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
                 Pen pen = strokePaint.GetPen(geometry);
@@ -89,7 +90,7 @@ namespace SharpVectors.Renderers.Wpf
                     if (transform != null && !transform.Value.IsIdentity)
                     {
                         geometry.Transform = transform;
-                        if (brush != null)
+                        if (brush != null && isFillTransmable)
                         {
                             Transform brushTransform = brush.Transform;
                             if (brushTransform == null || brushTransform == Transform.Identity)

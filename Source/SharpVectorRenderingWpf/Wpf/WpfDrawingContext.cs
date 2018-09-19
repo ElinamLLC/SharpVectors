@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Globalization;
 using System.Collections.Generic;
 
@@ -12,17 +11,17 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
-        private bool              _renderingClip;
-        private bool              _isFragment;
+        private bool _renderingClip;
+        private bool _isFragment;
 
-        private object            _tag;
-        private DrawingGroup      _rootDrawing;
-        private DrawingGroup      _linkDrawing;
+        private object _tag;
+        private DrawingGroup _rootDrawing;
+        private DrawingGroup _linkDrawing;
 
         private WpfDrawingSettings _settings;
 
-        private WpfLinkVisitor          _linkVisitor;
-        private WpfFontFamilyVisitor    _fontFamilyVisitor;
+        private WpfLinkVisitor _linkVisitor;
+        private WpfFontFamilyVisitor _fontFamilyVisitor;
         private WpfEmbeddedImageVisitor _imageVisitor;
         private WpfIDVisitor _idVisitor;
 
@@ -36,17 +35,15 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingContext(bool isFragment)
         {
-            _isFragment    = isFragment; 
-            _drawStack     = new Stack<DrawingGroup>();
-            _registeredIds = new HashSet<string>(
-                StringComparer.OrdinalIgnoreCase);
-
-            _settings      = new WpfDrawingSettings();
+            _isFragment = isFragment;
+            _drawStack = new Stack<DrawingGroup>();
+            _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            _settings = new WpfDrawingSettings();
         }
 
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
             : this(isFragment)
-        {   
+        {
             if (settings != null)
             {
                 _settings = settings;
@@ -57,15 +54,15 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Properties
 
-        // Summary:
-        //     Gets the number of elements contained in the System.Collections.Generic.Stack<DrawingGroup>.
-        //
-        // Returns:
-        //     The number of elements contained in the System.Collections.Generic.Stack<DrawingGroup>.
-        public int Count 
+        /// <summary>
+        /// Gets the number of elements contained in the drawing stack.
+        /// </summary>
+        /// <value>
+        /// The number of elements contained in the drawing stack.
+        /// </value>
+        public int Count
         {
-            get
-            {
+            get {
                 if (_drawStack != null)
                 {
                     return _drawStack.Count;
@@ -77,24 +74,20 @@ namespace SharpVectors.Renderers.Wpf
 
         public bool RenderingClipRegion
         {
-            get
-            {
+            get {
                 return _renderingClip;
             }
-            set
-            {
+            set {
                 _renderingClip = value;
             }
         }
 
         public DrawingGroup Root
         {
-            get
-            {
+            get {
                 return _rootDrawing;
             }
-            internal set
-            {
+            internal set {
                 if (value != null)
                 {
                     _rootDrawing = value;
@@ -104,40 +97,34 @@ namespace SharpVectors.Renderers.Wpf
 
         public DrawingGroup Links
         {
-            get
-            {
+            get {
                 return _linkDrawing;
             }
         }
 
         public bool IsFragment
         {
-            get
-            {
+            get {
                 return _isFragment;
             }
         }
 
         public object Tag
         {
-            get 
-            { 
-                return _tag; 
+            get {
+                return _tag;
             }
-            set 
-            { 
-                _tag = value; 
+            set {
+                _tag = value;
             }
         }
 
         public WpfDrawingSettings Settings
         {
-            get
-            {
+            get {
                 return _settings;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _settings = value;
@@ -147,48 +134,40 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfLinkVisitor LinkVisitor
         {
-            get 
-            { 
-                return _linkVisitor; 
+            get {
+                return _linkVisitor;
             }
-            set 
-            { 
-                _linkVisitor = value; 
+            set {
+                _linkVisitor = value;
             }
         }
 
         public WpfEmbeddedImageVisitor ImageVisitor
         {
-            get
-            {
+            get {
                 return _imageVisitor;
             }
-            set
-            {
+            set {
                 _imageVisitor = value;
             }
         }
 
         public WpfFontFamilyVisitor FontFamilyVisitor
         {
-            get
-            {
+            get {
                 return _fontFamilyVisitor;
             }
-            set
-            {
+            set {
                 _fontFamilyVisitor = value;
             }
         }
 
         public WpfIDVisitor IDVisitor
         {
-            get
-            {
+            get {
                 return _idVisitor;
             }
-            set
-            {
+            set {
                 _idVisitor = value;
             }
         }
@@ -199,48 +178,42 @@ namespace SharpVectors.Renderers.Wpf
 
         internal bool OptimizePath
         {
-            get
-            {
+            get {
                 return _settings.OptimizePath;
             }
         }
 
         internal bool TextAsGeometry
         {
-            get
-            {
+            get {
                 return _settings.TextAsGeometry;
             }
         }
 
         internal bool IncludeRuntime
         {
-            get
-            {
+            get {
                 return _settings.IncludeRuntime;
             }
         }
 
         internal CultureInfo CultureInfo
         {
-            get
-            {
+            get {
                 return _settings.CultureInfo;
             }
         }
 
         internal CultureInfo EnglishCultureInfo
         {
-            get
-            {
+            get {
                 return _settings.NeutralCultureInfo;
             }
         }
 
         internal string DefaultFontName
         {
-            get
-            {
+            get {
                 return _settings.DefaultFontName;
             }
         }
@@ -249,8 +222,9 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Methods
 
-        // Summary:
-        //     Removes all objects from the System.Collections.Generic.Stack<DrawingGroup>.
+        /// <summary>
+        /// Removes all objects from the drawing stack.
+        /// </summary>
         public void Clear()
         {
             if (_drawStack != null)
@@ -259,18 +233,11 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        //
-        // Summary:
-        //     Determines whether an element is in the System.Collections.Generic.Stack<DrawingGroup>.
-        //
-        // Parameters:
-        //   item:
-        //     The object to locate in the System.Collections.Generic.Stack<DrawingGroup>. The value
-        //     can be null for reference types.
-        //
-        // Returns:
-        //     true if item is found in the System.Collections.Generic.Stack<DrawingGroup>; otherwise,
-        //     false.
+        /// <summary>
+        /// Determines whether an element is in the drawing stack.
+        /// </summary>
+        /// <param name="item">The object to locate in the drawing stack. The value can be null for reference types.</param>
+        /// <returns>true if item is found in the drawing stack; otherwise, false.</returns>
         public bool Contains(DrawingGroup item)
         {
             if (_drawStack != null)
@@ -283,13 +250,13 @@ namespace SharpVectors.Renderers.Wpf
 
         //
         // Summary:
-        //     Copies the System.Collections.Generic.Stack<DrawingGroup> to an existing one-dimensional
+        //     Copies the drawing stack to an existing one-dimensional
         //     System.Array, starting at the specified array index.
         //
         // Parameters:
         //   array:
         //     The one-dimensional System.Array that is the destination of the elements
-        //     copied from System.Collections.Generic.Stack<DrawingGroup>. The System.Array must have
+        //     copied from drawing stack. The System.Array must have
         //     zero-based indexing.
         //
         //   arrayIndex:
@@ -304,7 +271,7 @@ namespace SharpVectors.Renderers.Wpf
         //
         //   System.ArgumentException:
         //     arrayIndex is equal to or greater than the length of array.  -or- The number
-        //     of elements in the source System.Collections.Generic.Stack<DrawingGroup> is greater
+        //     of elements in the source drawing stack is greater
         //     than the available space from arrayIndex to the end of the destination array.
         public void CopyTo(DrawingGroup[] array, int arrayIndex)
         {
@@ -312,19 +279,19 @@ namespace SharpVectors.Renderers.Wpf
             {
                 _drawStack.CopyTo(array, arrayIndex);
             }
-        }                                            
+        }
 
         //
         // Summary:
-        //     Returns the object at the top of the System.Collections.Generic.Stack<DrawingGroup>
+        //     Returns the object at the top of the drawing stack
         //     without removing it.
         //
         // Returns:
-        //     The object at the top of the System.Collections.Generic.Stack<DrawingGroup>.
+        //     The object at the top of the drawing stack.
         //
         // Exceptions:
         //   System.InvalidOperationException:
-        //     The System.Collections.Generic.Stack<DrawingGroup> is empty.
+        //     The drawing stack is empty.
         public DrawingGroup Peek()
         {
             if (_drawStack != null)
@@ -337,14 +304,14 @@ namespace SharpVectors.Renderers.Wpf
 
         //
         // Summary:
-        //     Removes and returns the object at the top of the System.Collections.Generic.Stack<DrawingGroup>.
+        //     Removes and returns the object at the top of the drawing stack.
         //
         // Returns:
-        //     The object removed from the top of the System.Collections.Generic.Stack<DrawingGroup>.
+        //     The object removed from the top of the drawing stack.
         //
         // Exceptions:
         //   System.InvalidOperationException:
-        //     The System.Collections.Generic.Stack<DrawingGroup> is empty.
+        //     The drawing stack is empty.
         public DrawingGroup Pop()
         {
             if (_drawStack != null)
@@ -357,11 +324,11 @@ namespace SharpVectors.Renderers.Wpf
 
         //
         // Summary:
-        //     Inserts an object at the top of the System.Collections.Generic.Stack<DrawingGroup>.
+        //     Inserts an object at the top of the drawing stack.
         //
         // Parameters:
         //   item:
-        //     The object to push onto the System.Collections.Generic.Stack<DrawingGroup>. The value
+        //     The object to push onto the drawing stack. The value
         //     can be null for reference types.
         public void Push(DrawingGroup item)
         {
@@ -373,10 +340,10 @@ namespace SharpVectors.Renderers.Wpf
 
         //
         // Summary:
-        //     Copies the System.Collections.Generic.Stack<DrawingGroup> to a new array.
+        //     Copies the drawing stack to a new array.
         //
         // Returns:
-        //     A new array containing copies of the elements of the System.Collections.Generic.Stack<DrawingGroup>.
+        //     A new array containing copies of the elements of the drawing stack.
         public DrawingGroup[] ToArray()
         {
             if (_drawStack != null)
@@ -389,7 +356,7 @@ namespace SharpVectors.Renderers.Wpf
 
         //
         // Summary:
-        //     Sets the capacity to the actual number of elements in the System.Collections.Generic.Stack<DrawingGroup>,
+        //     Sets the capacity to the actual number of elements in the drawing stack,
         //     if that number is less than 90 percent of current capacity.
         public void TrimExcess()
         {
@@ -402,9 +369,9 @@ namespace SharpVectors.Renderers.Wpf
         public void Initialize(WpfLinkVisitor linkVisitor, WpfFontFamilyVisitor fontFamilyVisitor,
             WpfEmbeddedImageVisitor imageVisitor)
         {
-            _linkVisitor       = linkVisitor;
+            _linkVisitor = linkVisitor;
             _fontFamilyVisitor = fontFamilyVisitor;
-            _imageVisitor      = imageVisitor;
+            _imageVisitor = imageVisitor;
 
             _rootDrawing = new DrawingGroup();
 
@@ -418,14 +385,14 @@ namespace SharpVectors.Renderers.Wpf
                 if (!string.IsNullOrWhiteSpace(groupId))
                 {
                     _linkDrawing.SetValue(FrameworkElement.NameProperty, groupId);
-                }  
+                }
 
                 linkVisitor.Initialize(_linkDrawing, this);
             }
         }
 
         public void Uninitialize()
-        {   
+        {
         }
 
         public void BeginDrawing()
@@ -457,7 +424,7 @@ namespace SharpVectors.Renderers.Wpf
 
             return false;
         }
-        
+
         public void RegisterId(string elementId)
         {
             if (string.IsNullOrWhiteSpace(elementId))
@@ -468,7 +435,7 @@ namespace SharpVectors.Renderers.Wpf
             if (_registeredIds != null)
             {
                 _registeredIds.Add(elementId);
-            }  
+            }
         }
 
         public void UnRegisterId(string elementId)
@@ -490,10 +457,10 @@ namespace SharpVectors.Renderers.Wpf
 
         //
         // Summary:
-        //     Returns an enumerator for the System.Collections.Generic.Stack<DrawingGroup>.
+        //     Returns an enumerator for the drawing stack.
         //
         // Returns:
-        //     An System.Collections.Generic.Stack<DrawingGroup>.Enumerator for the System.Collections.Generic.Stack<DrawingGroup>.
+        //     An drawing stack.Enumerator for the drawing stack.
         public IEnumerator<DrawingGroup> GetEnumerator()
         {
             if (_drawStack != null)

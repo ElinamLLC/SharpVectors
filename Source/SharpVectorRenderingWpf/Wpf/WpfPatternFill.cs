@@ -11,6 +11,7 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _isUserSpace;
         private XmlElement oldParent;
         private SvgPatternElement _patternElement;
 
@@ -20,7 +21,26 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfPatternFill(SvgPatternElement patternElement)
         {
+            _isUserSpace    = false;
             _patternElement = patternElement;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public override bool IsUserSpace
+        {
+            get {
+                return _isUserSpace;
+            }
+        }
+
+        public override WpfFillType FillType
+        {
+            get {
+                return WpfFillType.Pattern;
+            }
         }
 
         #endregion
@@ -29,23 +49,41 @@ namespace SharpVectors.Renderers.Wpf
 
         public override Brush GetBrush(Rect elementBounds, WpfDrawingContext context, Transform viewTransform)
         {
-            Rect bounds = new Rect(0, 0, 1, 1);
+            bool isUserSpace = true;
+            Rect bounds = elementBounds;
+            if (_patternElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
+            {
+                bounds = new Rect(0, 0, 1, 1);
+                isUserSpace = false;
+            }
             Drawing image = GetImage(context);
             Rect destRect = GetDestRect(bounds);            
 
             DrawingBrush tb  = new DrawingBrush(image);
-            //tb.Viewbox = new Rect(0, 0, destRect.Width, destRect.Height);
-            //tb.Viewport = new Rect(0, 0, destRect.Width, destRect.Height);
             tb.Viewbox       = destRect;
             tb.Viewport      = destRect;
+            //tb.Viewbox = new Rect(0, 0, destRect.Width, destRect.Height);
+            //tb.Viewport = new Rect(0, 0, bounds.Width, bounds.Height);
             tb.ViewboxUnits  = BrushMappingMode.Absolute;
-            tb.ViewportUnits = BrushMappingMode.Absolute;
+            tb.ViewportUnits = isUserSpace ? BrushMappingMode.Absolute : BrushMappingMode.RelativeToBoundingBox;
             tb.TileMode      = TileMode.Tile;
+//            tb.Stretch       = isUserSpace ? Stretch.Fill : Stretch.Uniform;
 
-            MatrixTransform transform = GetTransformMatrix(image.Bounds);
-            if (transform != null && !transform.Matrix.IsIdentity)
+            if (isUserSpace)
             {
-                tb.Transform = transform;
+                MatrixTransform transform = GetTransformMatrix(image.Bounds, isUserSpace);
+                if (transform != null && !transform.Matrix.IsIdentity)
+                {
+                    tb.Transform = transform;
+                }
+            }
+            else
+            {
+                MatrixTransform transform = GetTransformMatrix(bounds, isUserSpace);
+                if (transform != null && !transform.Matrix.IsIdentity)
+                {
+                    tb.RelativeTransform = transform;
+                }
             }
 
             return tb;
@@ -84,7 +122,11 @@ namespace SharpVectors.Renderers.Wpf
 
             if (_patternElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
             {
-                svgElm.SetAttribute("viewBox", "0 0 1 1");
+//                svgElm.SetAttribute("viewBox", "0 0 1 1");
+            }
+            else
+            {
+                _isUserSpace = true;
             }
 
             _patternElement.AppendChild(svgElm);
@@ -116,17 +158,23 @@ namespace SharpVectors.Renderers.Wpf
             SvgSvgElement elm = MoveIntoSvgElement();
 
             renderer.Render(elm, patternContext);
-            Drawing img = renderer.Drawing;
+            DrawingGroup rootGroup = renderer.Drawing;
 
             MoveOutOfSvgElement(elm);
 
-            return img;
+            if (rootGroup.Children.Count == 1)
+            {
+                return rootGroup.Children[0];
+            }
+
+            return rootGroup;
         }
 
         private double CalcPatternUnit(SvgLength length, SvgLengthDirection dir, Rect bounds)
         {
             if (_patternElement.PatternUnits.AnimVal.Equals((ushort)SvgUnitType.UserSpaceOnUse))
             {
+                _isUserSpace = true;
                 return length.Value;
             }
             double calcValue = length.ValueInSpecifiedUnits;
@@ -163,19 +211,25 @@ namespace SharpVectors.Renderers.Wpf
             return result;
         }
 
-        private MatrixTransform GetTransformMatrix(Rect bounds)
+        private MatrixTransform GetTransformMatrix(Rect bounds, bool isUserSpace)
         {
             SvgMatrix svgMatrix = ((SvgTransformList)_patternElement.PatternTransform.AnimVal).TotalMatrix;
 
             MatrixTransform transformMatrix = new MatrixTransform(svgMatrix.A, svgMatrix.B, svgMatrix.C,
                 svgMatrix.D, svgMatrix.E, svgMatrix.F);
 
-            double translateX = CalcPatternUnit(_patternElement.X.AnimVal as SvgLength,
-                SvgLengthDirection.Horizontal, bounds);
-            double translateY = CalcPatternUnit(_patternElement.Y.AnimVal as SvgLength,
-                SvgLengthDirection.Vertical, bounds);
+            //Matrix transformMatrix = new Matrix(svgMatrix.A, svgMatrix.B, svgMatrix.C,
+            //    svgMatrix.D, svgMatrix.E, svgMatrix.F);
 
-            transformMatrix.Matrix.TranslatePrepend(translateX, translateY);
+            //double translateX = CalcPatternUnit(_patternElement.X.AnimVal as SvgLength,
+            //    SvgLengthDirection.Horizontal, bounds);
+            //double translateY = CalcPatternUnit(_patternElement.Y.AnimVal as SvgLength,
+            //    SvgLengthDirection.Vertical, bounds);
+
+            //transformMatrix.TranslatePrepend(translateX, translateY);
+            ////transformMatrix.Value.TranslatePrepend(translateX, translateY);
+
+            //return new MatrixTransform(transformMatrix);
 
             return transformMatrix;
         }

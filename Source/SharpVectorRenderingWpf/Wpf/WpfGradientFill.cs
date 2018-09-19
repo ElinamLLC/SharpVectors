@@ -5,7 +5,6 @@ using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Utils;
-using SharpVectors.Runtime;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -13,6 +12,7 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _isUserSpace;
         private SvgGradientElement _gradientElement;
 
         #endregion
@@ -21,7 +21,26 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfGradientFill(SvgGradientElement gradientElement)
         {
+            _isUserSpace     = false;
             _gradientElement = gradientElement;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public override bool IsUserSpace
+        {
+            get {
+                return _isUserSpace;
+            }
+        }
+
+        public override WpfFillType FillType
+        {
+            get {
+                return WpfFillType.Gradient;
+            }
         }
 
         #endregion
@@ -87,6 +106,8 @@ namespace SharpVectors.Renderers.Wpf
                 else if (mappingMode == SvgUnitType.UserSpaceOnUse)
                 {
                     brush.MappingMode = BrushMappingMode.Absolute;
+
+                    _isUserSpace = true;
 
                     //if (viewBoxTransform == null || viewBoxTransform.Value.IsIdentity)
                     //{
@@ -265,6 +286,8 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         brush.GradientOrigin = brush.Center;
                     }
+
+                    _isUserSpace = true;
                 }
             }
 
@@ -500,9 +523,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return new double[]{ translateX, translateY, scaleX, scaleY };
-        }
-
-        
+        }        
 
         #endregion
     }

@@ -231,18 +231,16 @@ namespace SharpVectors.Converters
         {
             if (svgFileName == null)
             {
-                throw new ArgumentNullException("svgFileName",
+                throw new ArgumentNullException(nameof(svgFileName),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (svgFileName.Length == 0)
             {
-                throw new ArgumentException(
-                    "The SVG source file cannot be empty.", "svgFileName");
+                throw new ArgumentException("The SVG source file cannot be empty.", nameof(svgFileName));
             }
             if (!File.Exists(svgFileName))
             {
-                throw new ArgumentException(
-                    "The SVG source file must exists.", "svgFileName");
+                throw new ArgumentException("The SVG source file must exists.", nameof(svgFileName));
             }
 
             if (_workingDir == null)
@@ -276,7 +274,7 @@ namespace SharpVectors.Converters
         {
             if (svgUri == null)
             {
-                throw new ArgumentNullException("svgUri",
+                throw new ArgumentNullException(nameof(svgUri),
                     "The SVG source file cannot be null (or Nothing).");
             }
 
@@ -302,7 +300,7 @@ namespace SharpVectors.Converters
         {
             if (svgStream == null)
             {
-                throw new ArgumentNullException("svgStream",
+                throw new ArgumentNullException(nameof(svgStream),
                     "The SVG source file cannot be null (or Nothing).");
             }
 
@@ -331,7 +329,7 @@ namespace SharpVectors.Converters
         {
             if (svgTextReader == null)
             {
-                throw new ArgumentNullException("svgTextReader",
+                throw new ArgumentNullException(nameof(svgTextReader),
                     "The SVG source file cannot be null (or Nothing).");
             }
 
@@ -478,7 +476,7 @@ namespace SharpVectors.Converters
         {
             if (textWriter == null)
             {
-                throw new ArgumentNullException("textWriter",
+                throw new ArgumentNullException(nameof(textWriter),
                     "The text writer parameter is required and cannot be null (or Nothing).");
             }  
             if (_drawing == null)
@@ -494,7 +492,7 @@ namespace SharpVectors.Converters
         {
             if (stream == null)
             {
-                throw new ArgumentNullException("stream",
+                throw new ArgumentNullException(nameof(stream),
                     "The stream parameter is required and cannot be null (or Nothing).");
             }  
             if (_drawing == null)
@@ -522,8 +520,7 @@ namespace SharpVectors.Converters
 
                 string outputExt = GetImageFileExtention(encoderType);
 
-                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(
-                    fileName);
+                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
                 string imageFileName = Path.Combine(imageFileDir.FullName,
                     fileNameWithoutExt + outputExt);
@@ -665,19 +662,16 @@ namespace SharpVectors.Converters
                 writerSettings.Indent = true;
                 writerSettings.OmitXmlDeclaration = true;
                 writerSettings.Encoding = Encoding.UTF8;
-                using (XmlWriter writer = XmlWriter.Create(
-                    stream, writerSettings))
+                using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
                 {
-                    System.Windows.Markup.XamlWriter.Save(
-                        _drawing, writer);
+                    System.Windows.Markup.XamlWriter.Save(_drawing, writer);
                 }
             }
             else
             {
                 try
                 {
-                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
-                        this.DrawingSettings);
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(this.DrawingSettings);
 
                     xamlWriter.Save(_drawing, stream);
                 }
@@ -691,11 +685,9 @@ namespace SharpVectors.Converters
                         writerSettings.Indent = true;
                         writerSettings.OmitXmlDeclaration = true;
                         writerSettings.Encoding = Encoding.UTF8;
-                        using (XmlWriter writer = XmlWriter.Create(
-                            stream, writerSettings))
+                        using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
                         {
-                            System.Windows.Markup.XamlWriter.Save(
-                                _drawing, writer);
+                            System.Windows.Markup.XamlWriter.Save(_drawing, writer);
                         }
                     }
                     else
@@ -718,19 +710,16 @@ namespace SharpVectors.Converters
                 writerSettings.Indent = true;
                 writerSettings.OmitXmlDeclaration = true;
                 writerSettings.Encoding = Encoding.UTF8;
-                using (XmlWriter writer = XmlWriter.Create(
-                    textWriter, writerSettings))
+                using (XmlWriter writer = XmlWriter.Create(textWriter, writerSettings))
                 {
-                    System.Windows.Markup.XamlWriter.Save(
-                        _drawing, writer);
+                    System.Windows.Markup.XamlWriter.Save(_drawing, writer);
                 }
             }
             else
             {
                 try
                 {
-                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
-                        this.DrawingSettings);
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(this.DrawingSettings);
 
                     xamlWriter.Save(_drawing, textWriter);
                 }
@@ -789,11 +778,9 @@ namespace SharpVectors.Converters
                 writerSettings.Encoding = Encoding.UTF8;
                 using (FileStream xamlFile = File.Create(xamlFileName))
                 {
-                    using (XmlWriter writer = XmlWriter.Create(
-                        xamlFile, writerSettings))
+                    using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
                     {
-                        System.Windows.Markup.XamlWriter.Save(
-                            _drawing, writer);
+                        System.Windows.Markup.XamlWriter.Save(_drawing, writer);
                     }
                 }
             }
@@ -801,8 +788,7 @@ namespace SharpVectors.Converters
             {
                 try
                 {
-                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
-                        this.DrawingSettings);
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(this.DrawingSettings);
 
                     using (FileStream xamlFile = File.Create(xamlFileName))
                     {
@@ -827,11 +813,9 @@ namespace SharpVectors.Converters
                         writerSettings.Encoding = Encoding.UTF8;
                         using (FileStream xamlFile = File.Create(xamlFileName))
                         {
-                            using (XmlWriter writer = XmlWriter.Create(
-                                xamlFile, writerSettings))
+                            using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
                             {
-                                System.Windows.Markup.XamlWriter.Save(
-                                    _drawing, writer);
+                                System.Windows.Markup.XamlWriter.Save(_drawing, writer);
                             }
                         }
                     }

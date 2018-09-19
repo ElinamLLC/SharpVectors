@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
-
+using System.Xml;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Utils;
 
@@ -37,6 +37,52 @@ namespace SharpVectors.Renderers.Wpf
             get
             {
                 return _paintFill;
+            }
+        }
+
+        public bool IsUserSpace
+        {
+            get {
+                if (_paintFill != null)
+                {
+                    return _paintFill.IsUserSpace;
+                }
+                return false;
+            }
+        }
+
+        public WpfFillType FillType
+        {
+            get {
+                if (_paintFill != null)
+                {
+                    return _paintFill.FillType;
+                }
+                return WpfFillType.None;
+            }
+        }
+
+        public bool IsFillTransformable
+        {
+            get {
+                if (_paintFill != null)
+                {
+                    if (_paintFill.FillType == WpfFillType.Gradient)
+                    {
+                        if (!_paintFill.IsUserSpace)
+                        {
+                            return false;
+                        }
+                    }
+                    if (_paintFill.FillType == WpfFillType.Pattern)
+                    {
+                        if (!_paintFill.IsUserSpace)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
         }
 
@@ -322,6 +368,52 @@ namespace SharpVectors.Renderers.Wpf
             return WpfFill.CreateFill(_element.OwnerDocument, absoluteUri);
         }
 
+        private WpfSvgPaint GetDeferredFill()
+        {
+            var nodeList = _element.OwnerDocument.SelectNodes("//*[@fill='currentColor']");
+            if (nodeList == null || nodeList.Count == 0)
+            {
+                return null;
+            }
+            // Try a shortcut...
+            SvgStyleableElement svgElement = _element.ParentNode as SvgStyleableElement;
+            if (svgElement != null && svgElement.HasAttribute("fill")
+                && string.Equals("currentColor", svgElement.GetAttribute("fill")))
+            {
+                string color = svgElement.GetAttribute("color");
+                if (!string.IsNullOrWhiteSpace(color))
+                {
+                    return new WpfSvgPaint(_context, svgElement, "color");
+                }
+            }
+
+            foreach (XmlNode nodeItem in nodeList)
+            {
+                svgElement = nodeItem as SvgStyleableElement;
+                if (svgElement == null)
+                {
+                    continue;
+                }
+
+                var childNodeList = svgElement.GetElementsByTagName(_element.LocalName);
+                if (childNodeList != null && childNodeList.Count != 0)
+                {
+                    foreach (var childNode in childNodeList)
+                    {
+                        if (childNode == _element)
+                        {
+                            string color = svgElement.GetAttribute("color");
+                            if (!string.IsNullOrWhiteSpace(color))
+                            {
+                                return new WpfSvgPaint(_context, svgElement, "color");
+                            }
+                       }
+                    }
+                }
+            }
+            return null;
+        }
+
         private Brush GetBrush(Geometry geometry, string propPrefix, bool setOpacity)
         {
             SvgPaint fill;
@@ -331,7 +423,16 @@ namespace SharpVectors.Renderers.Wpf
             }
             if (PaintType == SvgPaintType.CurrentColor)
             {
-                fill = new WpfSvgPaint(_context, _element, "color");
+                //TODO: Find a better way to support currentColor specified on parent element.
+                var deferredFill = this.GetDeferredFill();
+                if (deferredFill == null)
+                {
+                    fill = new WpfSvgPaint(_context, _element, "color");
+                }
+                else
+                {
+                    fill = deferredFill;
+                }
             }
             else
             {

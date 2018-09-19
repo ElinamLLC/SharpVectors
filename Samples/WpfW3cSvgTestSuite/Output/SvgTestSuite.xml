@@ -61,7 +61,7 @@
         <test source="animate-elem-85-t.svg" title="animate-elem-85-t" state="failure" comment="SVG animation is currently not supported." description="" />
     </category>
     <category label="Colors">
-        <test source="color-prof-01-f.svg" title="color-prof-01-f" state="partial" comment="The effect is different. All browsers produce the same results as the converted image, but Apache's Batik and Inkspace give the same result as the expected." description="Basic test of ICC profile with an image." />
+        <test source="color-prof-01-f.svg" title="color-prof-01-f" state="success" comment="The effect is different. All browsers produce the same results as the previous converted image, but Apache's Batik and Inkspace give the same result as the expected." description="Basic test of ICC profile with an image." />
         <test source="color-prop-01-b.svg" title="color-prop-01-b" state="success" comment="" description="Test that viewer has the basic capability to process the color property" />
         <test source="color-prop-02-f.svg" title="color-prop-02-f" state="success" comment="" description="Test that viewer has the basic capability to render X11colors, using any of the equivalent forms." />
         <test source="color-prop-03-t.svg" title="color-prop-03-t" state="success" comment="" description="Test that viewer has the basic capability to render colors, specified as CSS attributes, using any of the equivalent forms." />
@@ -75,11 +75,11 @@
         <test source="coords-trans-04-t.svg" title="coords-trans-04-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
         <test source="coords-trans-05-t.svg" title="coords-trans-05-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
         <test source="coords-trans-06-t.svg" title="coords-trans-06-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-units-01-b.svg" title="coords-units-01-b" state="partial" comment="" description="This test validates the processing rules for converting coordinates and length defined in fractions of the current object's bounding box to user space coordinates and length. Note that this test assumes that linear and radial gradients, as well as patterns are implemented." />
+        <test source="coords-units-01-b.svg" title="coords-units-01-b" state="success" comment="" description="This test validates the processing rules for converting coordinates and length defined in fractions of the current object's bounding box to user space coordinates and length. Note that this test assumes that linear and radial gradients, as well as patterns are implemented." />
         <test source="coords-units-02-b.svg" title="coords-units-02-b" state="success" comment="" description="This test validates the processing rules for converting coordinates and length in CSS units to user space coordinate values." />
         <test source="coords-units-03-b.svg" title="coords-units-03-b" state="success" comment="" description="Validates simple initial viewport size and basic units handling." />
-        <test source="coords-viewattr-01-b.svg" title="coords-viewattr-01-b" state="partial" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
-        <test source="coords-viewattr-02-b.svg" title="coords-viewattr-02-b" state="partial" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
+        <test source="coords-viewattr-01-b.svg" title="coords-viewattr-01-b" state="success" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
+        <test source="coords-viewattr-02-b.svg" title="coords-viewattr-02-b" state="success" comment="Slice is now supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
         <test source="coords-viewattr-03-b.svg" title="coords-viewattr-03-b" state="success" comment="" description="Tests the viewBox attribute on SVG elements" />
     </category>
     <category label="Filter Effects">
@@ -265,7 +265,7 @@
         <test source="struct-image-08-t.svg" title="struct-image-08-t" state="success" comment="" description="" />
         <test source="struct-image-09-t.svg" title="struct-image-09-t" state="success" comment="" description="" />
         <test source="struct-image-10-t.svg" title="struct-image-10-t" state="success" comment="" description="" />
-        <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="failure" comment="" description="Test the creation of symbol elements and the instantiation by the use element" />
+        <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="partial" comment="Image viewport not well supported." description="Test the creation of symbol elements and the instantiation by the use element" />
         <test source="struct-use-01-t.svg" title="struct-use-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font sizes" />
         <test source="struct-use-03-t.svg" title="struct-use-03-t" state="success" comment="" description="Tests proper handling of x/y/width/height attributes on the &lt;use&gt; element" />
         <test source="struct-use-05-b.svg" title="struct-use-05-b" state="success" comment="" description="Tests external references and computed inherited values" />

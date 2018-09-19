@@ -68,17 +68,16 @@ namespace SharpVectors.Renderers.Wpf
                 {                   	
                 }
             }
-
-            if (transform != null)
+            else if (transform != null)
             {
                 try
                 {
                     SvgUseElement useElement = (SvgUseElement)_svgElement;
 
                     // If none of the following attribute exists, an exception is thrown...
-                    double x = useElement.X.AnimVal.Value;
-                    double y = useElement.Y.AnimVal.Value;
-                    double width = useElement.Width.AnimVal.Value;
+                    double x      = useElement.X.AnimVal.Value;
+                    double y      = useElement.Y.AnimVal.Value;
+                    double width  = useElement.Width.AnimVal.Value;
                     double height = useElement.Height.AnimVal.Value;
                     if (width > 0 && height > 0)
                     {
@@ -95,16 +94,19 @@ namespace SharpVectors.Renderers.Wpf
                         }
                     }
 
-                    Transform symbolTransform = this.Transform;
-                    if (symbolTransform != null && !symbolTransform.Value.IsIdentity)
-                    {
-                        TransformGroup combinedTransform = new TransformGroup();
+                    transform = Combine(this.Transform, transform, true);
 
-                        combinedTransform.Children.Add(transform);
-                        combinedTransform.Children.Add(symbolTransform);
+                    //Transform symbolTransform = this.Transform;
+                    //if (symbolTransform != null && !symbolTransform.Value.IsIdentity 
+                    //    && symbolTransform != transform)
+                    //{
+                    //    TransformGroup combinedTransform = new TransformGroup();                        
 
-                        transform = combinedTransform;
-                    }
+                    //    combinedTransform.Children.Add(symbolTransform);
+                    //    combinedTransform.Children.Add(transform);
+
+                    //    transform = combinedTransform;
+                    //}
                 }
                 catch
                 {

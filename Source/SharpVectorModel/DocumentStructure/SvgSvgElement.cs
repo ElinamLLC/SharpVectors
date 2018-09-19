@@ -470,7 +470,20 @@ namespace SharpVectors.Dom.Svg
                     if (this != doc.RootElement)
                     {
                         // X and Y on the root <svg> have no meaning
-                        matrix = matrix.Translate(X.AnimVal.Value, Y.AnimVal.Value);
+                        ISvgLength xLength = X.AnimVal;
+                        ISvgLength yLength = Y.AnimVal;
+                        double xValue = xLength.Value;
+                        double yValue = yLength.Value;
+
+                        if (xLength.UnitType == SvgLengthType.Percentage)
+                        {
+                            xValue = xLength.ValueInSpecifiedUnits / 100.0;
+                        }
+                        if (yLength.UnitType == SvgLengthType.Percentage)
+                        {
+                            yValue = yLength.ValueInSpecifiedUnits / 100.0;
+                        }
+                        matrix = matrix.Translate(xValue, yValue);
                     }
 
                     // Apply the viewBox viewport
@@ -501,7 +514,6 @@ namespace SharpVectors.Dom.Svg
                     }
                     else
                     {
-
                         // uniform scaling
                         if (par.MeetOrSlice == SvgMeetOrSlice.Meet)
                             x_ratio = Math.Min(x_ratio, y_ratio);

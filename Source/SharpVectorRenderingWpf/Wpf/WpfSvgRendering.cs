@@ -15,6 +15,8 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _isRoot;
+        private bool _isRecursive;
         private DrawingGroup _drawGroup;
 
         #endregion
@@ -24,6 +26,25 @@ namespace SharpVectors.Renderers.Wpf
         public WpfSvgRendering(SvgElement element)
             : base(element)
         {
+            _isRoot      = false;
+            _isRecursive = false;
+
+            var svgRootElm = element as SvgSvgElement;
+            if (svgRootElm != null)
+            {
+                _isRoot = svgRootElm.IsOuterMost;
+            }
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public override bool IsRecursive
+        {
+            get {
+                return _isRecursive;
+            }
         }
 
         #endregion
@@ -84,33 +105,25 @@ namespace SharpVectors.Renderers.Wpf
 
             Rect elmRect  = new Rect(x, y, width, height);
 
-            //if (element.ParentNode is SvgElement)
-            //{
-            //    // TODO: should it be moved with x and y?
-            //}
-
             XmlNode parentNode = _svgElement.ParentNode;
 
-            //if (parentNode.NodeType == XmlNodeType.Document)
+            ISvgFitToViewBox fitToView = svgElm as ISvgFitToViewBox;
+            if (fitToView != null)
             {
-                ISvgFitToViewBox fitToView = svgElm as ISvgFitToViewBox;
-                if (fitToView != null)
+                ISvgAnimatedRect animRect = fitToView.ViewBox;
+                if (animRect != null)
                 {
-                    ISvgAnimatedRect animRect = fitToView.ViewBox;
-                    if (animRect != null)
+                    ISvgRect viewRect = animRect.AnimVal;
+                    if (viewRect != null)
                     {
-                        ISvgRect viewRect = animRect.AnimVal;
-                        if (viewRect != null)
+                        Rect wpfViewRect = WpfConvert.ToRect(viewRect);
+                        if (!wpfViewRect.IsEmpty && wpfViewRect.Width > 0 && wpfViewRect.Height > 0)
                         {
-                            Rect wpfViewRect = WpfConvert.ToRect(viewRect);
-                            if (!wpfViewRect.IsEmpty && wpfViewRect.Width > 0 && wpfViewRect.Height > 0)
-                            {
-                                elmRect = wpfViewRect;
-                            }
+                            elmRect = wpfViewRect;
                         }
                     }
-                } 
-            }
+                }
+            } 
 
             Transform transform = null;
             if (parentNode.NodeType != XmlNodeType.Document)
@@ -124,17 +137,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
-            //if (height > 0 && width > 0)
-            //{
-            //    ClipGeometry = new RectangleGeometry(elmRect);
-            //}
-            //Geometry clipGeom = this.ClipGeometry;
-            //if (clipGeom != null)
-            //{
-            //    _drawGroup.ClipGeometry = clipGeom;
-            //}
-
-            if (((float)elmRect.Width != 0 && (float)elmRect.Height != 0))
+            if (!elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
             {   
                 // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
                 // dealing with the root SVG element...
@@ -162,26 +165,24 @@ namespace SharpVectors.Renderers.Wpf
                         _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
                     }
                 }
-
-                //DrawingGroup animationGroup = context.Links;
-                //if (animationGroup != null)
-                //{
-                //    animationGroup.ClipGeometry = clipGeom;
-                //}
             }
         }
 
         public override void Render(WpfDrawingRenderer renderer)
         {
-            //Temp workaround to preserve original svg size
-	        if (_drawGroup.ClipGeometry != null)
-	        {
-		        using (var ctx = _drawGroup.Open())
-		        {
-			        ctx.DrawRectangle(null, new Pen(Brushes.Transparent,1), _drawGroup.ClipGeometry.Bounds);
-		        }
-	        }
             base.Render(renderer);
+
+            //TODO: Temp workaround to preserve original svg size
+	        if (_isRoot)
+	        {
+                if (_drawGroup != null && _drawGroup.ClipGeometry != null)
+                {
+                    using (var ctx = _drawGroup.Open())
+		            {
+			            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), _drawGroup.ClipGeometry.Bounds);
+		            }
+                }
+	        }
         }
 
         public override void AfterRender(WpfDrawingRenderer renderer)
@@ -200,6 +201,55 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             context.Pop();
+
+            if (_isRoot || context.IsFragment)
+            {
+                return;
+            }
+
+            DrawingGroup drawGroup = CreateOuterGroup();
+            if (drawGroup == null)
+            {
+                return;
+            }
+
+            currentGroup = context.Peek();
+            if (currentGroup == null || currentGroup.Children.Remove(_drawGroup) == false)
+            {
+                return;
+            }
+
+            drawGroup.Children.Add(_drawGroup);
+            currentGroup.Children.Add(drawGroup);
+        }
+
+        private DrawingGroup CreateOuterGroup()
+        {
+            DrawingGroup drawGroup = null;
+
+            SvgSvgElement svgElm = (SvgSvgElement)_svgElement;
+
+            ISvgAnimatedPreserveAspectRatio animatedAspectRatio = svgElm.PreserveAspectRatio;
+            if (animatedAspectRatio == null || animatedAspectRatio.AnimVal == null)
+            {
+                return drawGroup;
+            }
+
+            double x = svgElm.X.AnimVal.Value;
+            double y = svgElm.Y.AnimVal.Value;
+            double width = svgElm.Width.AnimVal.Value;
+            double height = svgElm.Height.AnimVal.Value;
+
+            Rect destRect = new Rect(x, y, width, height);
+            Rect clipRect = new Rect(x, y, width, height);
+
+            if (!clipRect.IsEmpty)
+            {
+                drawGroup = new DrawingGroup();
+                drawGroup.ClipGeometry = new RectangleGeometry(clipRect);
+            }
+
+            return drawGroup;
         }
 
         #endregion

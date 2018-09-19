@@ -6,12 +6,34 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
 {
+    public enum WpfFillType
+    {
+        None     = 0,
+        Solid    = 1,
+        Gradient = 2,
+        Pattern  = 3
+    }
+
     public abstract class WpfFill : DependencyObject
     {
         #region Constructors and Destructor
 
         protected WpfFill()
         {
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public abstract bool IsUserSpace
+        {
+            get;
+        }
+
+        public abstract WpfFillType FillType
+        {
+            get;
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Svg;
+using System.Windows.Media;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -156,6 +157,44 @@ namespace SharpVectors.Renderers.Wpf
         {
             return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
                 || c == '_' || (c >= '0' && c <= '9') || char.IsLetter(c);
+        }
+
+        public static Transform Combine(Transform first, Transform second, 
+            bool groupedFormat, bool checkEquality = true)
+        {
+            if (first == null && second == null)
+            {
+                return null;
+            }
+            if (first == null)
+            {
+                return second;
+            }
+            if (second == null)
+            {
+                return first;
+            }
+            if (first.Value.IsIdentity)
+            {
+                return second;
+            }
+            if (second.Value.IsIdentity)
+            {
+                return first;
+            }
+            if (checkEquality && Matrix.Equals(first.Value, second.Value))
+            {
+                return first;
+            }
+            if (groupedFormat)
+            {
+                TransformGroup transformGroup = new TransformGroup();
+                transformGroup.Children.Add(first);
+                transformGroup.Children.Add(second);
+
+                return transformGroup;
+            }
+            return new MatrixTransform(Matrix.Multiply(first.Value, second.Value));
         }
 
         #endregion

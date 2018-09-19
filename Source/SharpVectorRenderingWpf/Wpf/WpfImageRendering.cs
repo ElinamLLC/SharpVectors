@@ -2,6 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using System.Windows;
 using System.Windows.Media;
@@ -40,11 +41,13 @@ namespace SharpVectors.Renderers.Wpf
             WpfDrawingContext context    = renderer.Context;
             SvgImageElement imageElement = (SvgImageElement)_svgElement;
 
+            double x      = imageElement.X.AnimVal.Value;
+            double y      = imageElement.Y.AnimVal.Value;
             double width  = imageElement.Width.AnimVal.Value;
             double height = imageElement.Height.AnimVal.Value;
 
-            Rect destRect = new Rect(imageElement.X.AnimVal.Value, imageElement.Y.AnimVal.Value,
-                width, height);
+            Rect destRect = new Rect(x, y, width, height);
+            Rect clipRect = new Rect(x, y, width, height);
 
             ImageSource imageSource = null;
             if (imageElement.IsSvgImage)
@@ -57,12 +60,12 @@ namespace SharpVectors.Renderers.Wpf
                 if (imageGroup != null &&
                     (imageGroup.Children != null && imageGroup.Children.Count == 1))
                 {
-                    DrawingGroup drawImage = imageGroup.Children[0] as DrawingGroup;
-                    if (drawImage != null)
+                    DrawingGroup imageDrawing = imageGroup.Children[0] as DrawingGroup;
+                    if (imageDrawing != null)
                     {
-                        drawImage.ClipGeometry = null;
+                        imageDrawing.ClipGeometry = null;
 
-                        imageSource = new DrawingImage(drawImage);
+                        imageSource = new DrawingImage(imageDrawing);
                     }
                     else
                     {
@@ -134,9 +137,6 @@ namespace SharpVectors.Renderers.Wpf
                             Transform viewTransform = this.GetAspectRatioTransform(aspectRatio,
                               new SvgRect(0, 0, imageWidth, imageHeight),
                               new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
-                            //Transform scaleTransform = this.FitToViewbox(aspectRatio,
-                            //  new SvgRect(destRect.X, destRect.Y, imageWidth, imageHeight),
-                            //  new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
 
                             if (viewTransform != null)
                             {
@@ -161,7 +161,42 @@ namespace SharpVectors.Renderers.Wpf
                         }
                     }
                     else if (meetOrSlice == SvgMeetOrSlice.Slice)
-                    {   
+                    {
+                        var fScaleX = viewWidth / imageWidth;
+                        var fScaleY = viewHeight / imageHeight;
+                        Transform viewTransform = this.GetAspectRatioTransform(aspectRatio,
+                          new SvgRect(0, 0, imageWidth, imageHeight),
+                          new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
+
+                        DrawingGroup sliceGroup = new DrawingGroup();
+                        sliceGroup.ClipGeometry = new RectangleGeometry(clipRect);
+
+                        DrawingGroup lastGroup = context.Peek();
+                        Debug.Assert(lastGroup != null);
+
+                        if (lastGroup != null)
+                        {
+                            lastGroup.Children.Add(sliceGroup);
+                        }
+
+                        if (viewTransform != null)
+                        {
+                            drawGroup = new DrawingGroup();
+                            drawGroup.Transform = viewTransform;
+
+                            sliceGroup.Children.Add(drawGroup);
+
+                            destRect = this.GetBounds(destRect,
+                                new Size(imageWidth, imageHeight), aspectRatioType);
+
+                            // The origin is already handled by the view transform...
+                            destRect.X = 0;
+                            destRect.Y = 0;
+                        }
+                        else
+                        {
+                            drawGroup = sliceGroup;
+                        }
                     }
                 }
             }
@@ -185,17 +220,20 @@ namespace SharpVectors.Renderers.Wpf
             Geometry clipGeom   = this.ClipGeometry;
             Transform transform = this.Transform;
 
+            bool ownedGroup = true;
             if (drawGroup == null)
             {
-                drawGroup = context.Peek();
+                drawGroup  = context.Peek();
+                ownedGroup = false;
             }
+
             Debug.Assert(drawGroup != null);
             if (drawGroup != null)
             {
                 if (opacityValue >= 0 || (clipGeom != null && !clipGeom.IsEmpty()) ||
                     (transform != null && !transform.Value.IsIdentity))
                 {
-                    DrawingGroup clipGroup = new DrawingGroup();
+                    DrawingGroup clipGroup = ownedGroup ? drawGroup : new DrawingGroup();
                     if (opacityValue >= 0)
                     {
                         clipGroup.Opacity = opacityValue;
@@ -222,22 +260,39 @@ namespace SharpVectors.Renderers.Wpf
                     }
                     if (transform != null)
                     {
-                        clipGroup.Transform = transform;
+                        Transform curTransform = clipGroup.Transform;
+                        if (curTransform != null && curTransform.Value.IsIdentity == false)
+                        {
+                            TransformGroup transformGroup = new TransformGroup();
+                            transformGroup.Children.Add(curTransform);
+                            transformGroup.Children.Add(transform);
+                            clipGroup.Transform = transformGroup;
+                        }
+                        else
+                        {
+                            clipGroup.Transform = transform;
+                        }
                     }
 
                     clipGroup.Children.Add(drawing);
-                    drawGroup.Children.Add(clipGroup);
+                    if (!ownedGroup)
+                    {
+                        drawGroup.Children.Add(clipGroup);
+                    }
                 }
                 else
                 {
                     drawGroup.Children.Add(drawing);
                 }
 
-                string sVisibility = imageElement.GetPropertyValue("visibility");
-                string sDisplay = imageElement.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                if (ownedGroup)
                 {
-                    drawGroup.Opacity = 0;
+                    string sVisibility = imageElement.GetPropertyValue("visibility");
+                    string sDisplay = imageElement.GetPropertyValue("display");
+                    if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                    {
+                        drawGroup.Opacity = 0;
+                    }
                 }
             }
         }
@@ -280,31 +335,33 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return imageSource;
             }
-            else
+            BitmapSource bitmapSource = (BitmapSource)imageSource;
+            BitmapFrame inputFrame = BitmapFrame.Create(bitmapSource);
+
+            SvgUriReference svgUri = colorProfile.UriReference;
+            Uri profileUri = new Uri(svgUri.AbsoluteUri);
+
+            ColorContext colorContext = new ColorContext(new Uri(svgUri.AbsoluteUri));
+
+            var colorContexts = new ReadOnlyCollection<ColorContext>(new ColorContext[] { colorContext });
+
+            BitmapFrame outputFrame = BitmapFrame.Create(inputFrame, null, null, colorContexts);
+            var bitmapImage = new BitmapImage();
+            var bitmapEncoder = new PngBitmapEncoder();
+            bitmapEncoder.Frames.Add(outputFrame);
+
+            using (var stream = new MemoryStream())
             {
-                BitmapSource bitmapSource = (BitmapSource)imageSource;
-                BitmapFrame bitmapSourceFrame   = BitmapFrame.Create(bitmapSource);
-                ColorContext sourceColorContext = null;
-                IList<ColorContext> colorContexts = bitmapSourceFrame.ColorContexts;
-                if (colorContexts != null && colorContexts.Count != 0)
-                {
-                    sourceColorContext = colorContexts[0];
-                }
-                else
-                {
-                    sourceColorContext = new ColorContext(bitmapSource.Format);
-                    //sourceColorContext = new ColorContext(PixelFormats.Default);
-                }
+                bitmapEncoder.Save(stream);
+                stream.Seek(0, SeekOrigin.Begin);
 
-                SvgUriReference svgUri = colorProfile.UriReference;
-                Uri profileUri = new Uri(svgUri.AbsoluteUri);
-
-                ColorContext destColorContext = new ColorContext(profileUri);
-                ColorConvertedBitmap convertedBitmap = new ColorConvertedBitmap(bitmapSource,
-                    sourceColorContext, destColorContext, bitmapSource.Format);
-
-                return convertedBitmap;
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
             }
+
+            return bitmapImage;
         }
 
         private ImageSource GetBitmap(SvgImageElement element, WpfDrawingContext context)
@@ -397,58 +454,31 @@ namespace SharpVectors.Renderers.Wpf
             switch (alignment)
             {
                 case SvgPreserveAspectRatioType.XMinYMin:  //Top-Left
-                    {
-                        return new Rect(bounds.X, bounds.Y,
-                            textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.X, bounds.Y, textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMidYMin: //Top-Center
-                    {
-                        return new Rect(bounds.X +
-                            (bounds.Width - textSize.Width) / 2f,
-                            bounds.Y, textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.X + (bounds.Width - textSize.Width) / 2f,
+                        bounds.Y, textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMaxYMin: //Top-Right
-                    {
-                        return new Rect(bounds.Right - textSize.Width,
-                            bounds.Y, textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.Right - textSize.Width, bounds.Y, textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMinYMid: //Middle-Left
-                    {
-                        return new Rect(bounds.X, bounds.Y +
-                            (bounds.Height - textSize.Height) / 2f, textSize.Width,
-                            textSize.Height);
-                    }
+                    return new Rect(bounds.X, bounds.Y +
+                        (bounds.Height - textSize.Height) / 2f, textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMidYMid:  //Middle-Center
-                    {
-                        return new Rect(bounds.X + bounds.Width / 2f - textSize.Width / 2f,
-                            bounds.Y + bounds.Height / 2f - textSize.Height / 2f,
-                            textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.X + bounds.Width / 2f - textSize.Width / 2f,
+                        bounds.Y + bounds.Height / 2f - textSize.Height / 2f, textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMaxYMid: //Middle-Right
-                    {
-                        return new Rect(bounds.Right - textSize.Width,
-                            bounds.Y + bounds.Height / 2f - textSize.Height / 2f,
-                            textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.Right - textSize.Width,
+                        bounds.Y + bounds.Height / 2f - textSize.Height / 2f,
+                        textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMinYMax: //Bottom-Left
-                    {
-                        return new Rect(bounds.X,
-                            bounds.Bottom - textSize.Height,
-                            textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.X, bounds.Bottom - textSize.Height,
+                        textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMidYMax:  //Bottom-Center
-                    {
-                        return new Rect(bounds.X +
-                            (bounds.Width - textSize.Width) / 2f,
-                            bounds.Bottom - textSize.Height,
-                            textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.X + (bounds.Width - textSize.Width) / 2f,
+                        bounds.Bottom - textSize.Height, textSize.Width, textSize.Height);
                 case SvgPreserveAspectRatioType.XMaxYMax:  // Bottom-Right
-                    {
-                        return new Rect(bounds.Right - textSize.Width,
-                            bounds.Bottom - textSize.Height,
-                            textSize.Width, textSize.Height);
-                    }
+                    return new Rect(bounds.Right - textSize.Width,
+                        bounds.Bottom - textSize.Height, textSize.Width, textSize.Height);
             }
 
             return bounds;

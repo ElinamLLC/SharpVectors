@@ -121,8 +121,8 @@ namespace SharpVectors.Dom.Svg
 
             double translateX = 0;
             double translateY = 0;
-            double scaleX = 1;
-            double scaleY = 1;
+            double scaleX     = 1;
+            double scaleY     = 1;
 
             if (!viewBox.IsEmpty && !rectToFit.IsEmpty)
             {

@@ -386,13 +386,13 @@ namespace SharpVectors.Dom.Svg
         /// <see cref="TextReader">TextReader</see>.
         /// </summary>
         /// <param name="reader"></param>
-        public override void Load(TextReader reader)
+        public override void Load(TextReader txtReader)
         {
             //XmlReaderSettings settings = this.GetXmlReaderSettings();
 
             //PrepareXmlResolver(settings);
             //using (XmlReader xmlReader = XmlReader.Create(reader, settings))
-            using (XmlReader xmlReader = CreateValidatingXmlReader(reader))
+            using (XmlReader xmlReader = CreateValidatingXmlReader(txtReader))
             {
                 this.Load(xmlReader);
             }
@@ -401,16 +401,16 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Loads the XML document from the specified stream.
         /// </summary>
-        /// <param name="stream">
+        /// <param name="inStream">
         /// The stream containing the XML document to load.
         /// </param>
-        public override void Load(Stream stream)
+        public override void Load(Stream inStream)
         {
             //XmlReaderSettings settings = this.GetXmlReaderSettings();
 
             //PrepareXmlResolver(settings);
             //using (XmlReader reader = XmlReader.Create(stream, settings))
-            using (XmlReader reader = CreateValidatingXmlReader(string.Empty, stream))
+            using (XmlReader reader = CreateValidatingXmlReader(string.Empty, inStream))
             {
                 this.Load(reader);
             }

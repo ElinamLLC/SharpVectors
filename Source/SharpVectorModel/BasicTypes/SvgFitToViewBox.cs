@@ -34,17 +34,17 @@ namespace SharpVectors.Dom.Svg
                     string attr = _ownerElement.GetAttribute("viewBox").Trim();
                     if (string.IsNullOrWhiteSpace(attr))
                     {
-                        double x = 0;
-                        double y = 0;
-                        double width = 0;
+                        double x      = 0;
+                        double y      = 0;
+                        double width  = 0;
                         double height = 0;
                         if (_ownerElement is SvgSvgElement)
                         {
                             SvgSvgElement svgSvgElm = _ownerElement as SvgSvgElement;
 
-                            x = svgSvgElm.X.AnimVal.Value;
-                            y = svgSvgElm.Y.AnimVal.Value;
-                            width = svgSvgElm.Width.AnimVal.Value;
+                            x      = svgSvgElm.X.AnimVal.Value;
+                            y      = svgSvgElm.Y.AnimVal.Value;
+                            width  = svgSvgElm.Width.AnimVal.Value;
                             height = svgSvgElm.Height.AnimVal.Value;
                         }
                         _viewBox = new SvgAnimatedRect(new SvgRect(x, y, width, height));

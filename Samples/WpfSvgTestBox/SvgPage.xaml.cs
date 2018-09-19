@@ -233,7 +233,7 @@ namespace WpfSvgTestBox
 
             if (this.SaveDocument() && File.Exists(_svgFilePath))
             {
-                return this.ConvertDocument();
+                return this.ConvertDocument(documentFilePath);
             }
 
             return true;
@@ -286,7 +286,11 @@ namespace WpfSvgTestBox
 
                 textEditor.Save(_backFilePath);
 
-                var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = null };
+                var settings = new XmlReaderSettings
+                {
+                    DtdProcessing = DtdProcessing.Parse,
+                    XmlResolver = null
+                };
 
                 using (var textReader = new StreamReader(_backFilePath))
                 {
@@ -309,15 +313,19 @@ namespace WpfSvgTestBox
             }
         }
 
-        private bool ConvertDocument()
+        private bool ConvertDocument(string filePath = null)
         {
+            if (string.IsNullOrWhiteSpace(filePath) || File.Exists(filePath) == false)
+            {
+                filePath = _svgFilePath;
+            }
             try
             {
-                if (string.IsNullOrWhiteSpace(_svgFilePath) || File.Exists(_svgFilePath) == false)
+                if (string.IsNullOrWhiteSpace(filePath) || File.Exists(filePath) == false)
                 {
                     return false;
                 }
-                DrawingGroup drawing = _fileReader.Read(_svgFilePath, _directoryInfo);
+                DrawingGroup drawing = _fileReader.Read(filePath, _directoryInfo);
                 if (drawing == null)
                 {
                     return false;
@@ -331,6 +339,18 @@ namespace WpfSvgTestBox
 
                         // Delete the file after loading it...
                         File.Delete(_xamlFilePath);
+                    }
+                    else
+                    {
+                        string xamlFilePath = IoPath.Combine(_directoryInfo.FullName, 
+                            IoPath.GetFileNameWithoutExtension(filePath) + ".xaml");
+                        if (File.Exists(xamlFilePath))
+                        {
+                            _xamlPage.LoadDocument(xamlFilePath);
+
+                            // Delete the file after loading it...
+                            File.Delete(xamlFilePath);
+                        }
                     }
                 }
                 _currentDrawing = drawing;

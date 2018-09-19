@@ -121,8 +121,8 @@ namespace SharpVectors.Renderers.Wpf
 
             base.BeforeRender(renderer);
 
-            _maskUnits = SvgUnitType.UserSpaceOnUse;
-            _clipPathUnits = SvgUnitType.UserSpaceOnUse;
+            _maskUnits        = SvgUnitType.UserSpaceOnUse;
+            _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
 
             WpfDrawingContext context = renderer.Context;
@@ -137,12 +137,12 @@ namespace SharpVectors.Renderers.Wpf
         {
             base.AfterRender(renderer);
 
-            _clipGeometry = null;
-            _transformMatrix = null;
-            _maskBrush = null;
+            _clipGeometry     = null;
+            _transformMatrix  = null;
+            _maskBrush        = null;
 
-            _maskUnits = SvgUnitType.UserSpaceOnUse;
-            _clipPathUnits = SvgUnitType.UserSpaceOnUse;
+            _maskUnits        = SvgUnitType.UserSpaceOnUse;
+            _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
         }
 
@@ -157,42 +157,44 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
+            SvgElement svgElement = (SvgElement)element;
+
             SvgRenderingHint hint = element.RenderingHint;
             // For the shapes and text contents...
             if (hint == SvgRenderingHint.Shape)
             {
-                return new WpfPathRendering((SvgElement)element);
+                return new WpfPathRendering(svgElement);
             }
             if (hint == SvgRenderingHint.Text)
             {
-                return new WpfTextRendering((SvgElement)element);
+                return new WpfTextRendering(svgElement);
             }
 
             string localName = element.LocalName;
             if (string.IsNullOrWhiteSpace(localName))
             {
-                return new WpfRendering((SvgElement)element);
+                return new WpfRendering(svgElement);
             }
 
             switch (localName)
             {
                 case "svg":
-                    return new WpfSvgRendering((SvgElement)element);
+                    return new WpfSvgRendering(svgElement);
                 case "g":
-                    return new WpfGroupRendering((SvgElement)element);
+                    return new WpfGroupRendering(svgElement);
                 case "a":
-                    return new WpfARendering((SvgElement)element);
+                    return new WpfARendering(svgElement);
                 case "use":
-                    return new WpfUseRendering((SvgElement)element);
+                    return new WpfUseRendering(svgElement);
                 case "switch":
-                    return new WpfSwitchRendering((SvgElement)element);
+                    return new WpfSwitchRendering(svgElement);
                 case "image":
-                    return new WpfImageRendering((SvgElement)element);
+                    return new WpfImageRendering(svgElement);
                 case "marker":
-                    return new WpfMarkerRendering((SvgElement)element);
+                    return new WpfMarkerRendering(svgElement);
             }
 
-            return new WpfRendering((SvgElement)element);
+            return new WpfRendering(svgElement);
         }
 
         /// <summary>
@@ -817,13 +819,15 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)fitToView.PreserveAspectRatio.AnimVal;
 
-            double[] transformArray = spar.FitToViewBox((SvgRect)fitToView.ViewBox.AnimVal,
-              new SvgRect(elementBounds.X, elementBounds.Y, elementBounds.Width, elementBounds.Height));
+            SvgRect viewBox   = (SvgRect)fitToView.ViewBox.AnimVal;
+            SvgRect rectToFit = new SvgRect(elementBounds.X, elementBounds.Y, elementBounds.Width, elementBounds.Height);
+
+            double[] transformArray = spar.FitToViewBox(viewBox, rectToFit);
 
             double translateX = transformArray[0];
             double translateY = transformArray[1];
-            double scaleX = transformArray[2];
-            double scaleY = transformArray[3];
+            double scaleX     = transformArray[2];
+            double scaleY     = transformArray[3];
 
             Transform translateMatrix = null;
             Transform scaleMatrix = null;
@@ -868,6 +872,25 @@ namespace SharpVectors.Renderers.Wpf
             {
                 this.Transform = scaleMatrix;
             }
+        }
+
+        protected double CalcLengthUnit(SvgLength length, SvgLengthDirection dir, Rect bounds)
+        {            
+            double calcValue = length.ValueInSpecifiedUnits;
+            if (dir == SvgLengthDirection.Horizontal)
+            {
+                calcValue *= bounds.Width;
+            }
+            else
+            {
+                calcValue *= bounds.Height;
+            }
+            if (length.UnitType == SvgLengthType.Percentage)
+            {
+                calcValue /= 100F;
+            }
+
+            return calcValue;
         }
 
         #endregion
