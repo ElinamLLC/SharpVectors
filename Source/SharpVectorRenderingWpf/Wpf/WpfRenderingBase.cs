@@ -78,26 +78,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public string GetElementName()
         {
-            if (_svgElement == null)
-            {
-                return string.Empty;
-            }
-            if (_context != null && _context.IDVisitor != null)
-            {
-                return _context.IDVisitor.Visit(_svgElement, _context);
-            }
-            string elementId = _svgElement.Id;
-            if (string.IsNullOrWhiteSpace(elementId))
-            {
-                return string.Empty;
-            }
-            elementId = elementId.Trim();
-            if (IsValidIdentifier(elementId))
-            {
-                return elementId;
-            }
-
-            return Regex.Replace(elementId, @"[^[0-9a-zA-Z]]*", "_");
+            return GetElementName(_svgElement, _context);
         }
 
         public static string GetElementName(SvgElement element, WpfDrawingContext context = null)
@@ -122,6 +103,26 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return Regex.Replace(elementId, @"[^[0-9a-zA-Z]]*", "_");
+        }
+
+        public string GetElementClass()
+        {
+            return GetElementClassName(_svgElement, _context);
+        }
+
+        public static string GetElementClassName(SvgElement element, WpfDrawingContext context = null)
+        {
+            if (element == null)
+            {
+                return string.Empty;
+            }
+            if (context != null && context.ClassVisitor != null)
+            {
+                return context.ClassVisitor.Visit(element, context);
+            }
+
+            string className = (element as ISvgStylable)?.ClassName?.BaseVal?.Trim();
+            return string.IsNullOrWhiteSpace(className) ? string.Empty : className;
         }
 
         public static bool IsValidIdentifier(string identifier)

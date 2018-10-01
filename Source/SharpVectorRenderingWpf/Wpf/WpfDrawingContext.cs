@@ -24,6 +24,7 @@ namespace SharpVectors.Renderers.Wpf
         private WpfFontFamilyVisitor _fontFamilyVisitor;
         private WpfEmbeddedImageVisitor _imageVisitor;
         private WpfIDVisitor _idVisitor;
+        private WpfClassVisitor _classVisitor;
 
         private Stack<DrawingGroup> _drawStack;
 
@@ -169,6 +170,18 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _idVisitor = value;
+            }
+        }
+
+        public WpfClassVisitor ClassVisitor
+        {
+            get
+            {
+                return _classVisitor;
+            }
+            set
+            {
+                _classVisitor = value;
             }
         }
 

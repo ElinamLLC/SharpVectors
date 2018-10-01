@@ -69,6 +69,7 @@ namespace SharpVectors.Renderers.Wpf
             Geometry geometry = CreateGeometry(_svgElement, context.OptimizePath);
 
             string elementId = this.GetElementName();
+            string elementClass = this.GetElementClass();
 
             if (geometry != null && !geometry.IsEmpty())
             {
@@ -138,6 +139,11 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             SvgObject.SetId(drawing, elementId);
                         }
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
+                    {
+                        SvgObject.SetClass(drawing, elementClass);
                     }
 
                     Brush maskBrush = this.Masking;

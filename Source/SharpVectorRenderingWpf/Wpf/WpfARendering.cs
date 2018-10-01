@@ -119,6 +119,12 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
 
+                string elementClass = this.GetElementClass();
+                if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
+                {
+                    SvgObject.SetClass(_drawGroup, elementClass);
+                }
+
                 DrawingGroup currentGroup = context.Peek();
 
                 if (currentGroup == null)
