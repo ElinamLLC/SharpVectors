@@ -479,7 +479,7 @@ namespace SharpVectors.Renderers.Wpf
                     context.FontFamilyVisitor, context.ImageVisitor);
 
                 renderer.RenderMask(maskElement, maskContext);
-                Drawing image = renderer.Drawing;
+                DrawingGroup maskDrawing = renderer.Drawing;
 
                 Rect bounds = new Rect(0, 0, 1, 1);
                 //Rect destRect = GetMaskDestRect(maskElement, bounds);
@@ -507,11 +507,11 @@ namespace SharpVectors.Renderers.Wpf
 
                 //this.Masking = imageBrush;
 
-                DrawingBrush maskBrush = new DrawingBrush(image);
+                DrawingBrush maskBrush = new DrawingBrush(maskDrawing);
                 //tb.Viewbox = new Rect(0, 0, destRect.Width, destRect.Height);
                 //tb.Viewport = new Rect(0, 0, destRect.Width, destRect.Height);
-                maskBrush.Viewbox = image.Bounds;
-                maskBrush.Viewport = image.Bounds;
+                maskBrush.Viewbox = maskDrawing.Bounds;
+                maskBrush.Viewport = maskDrawing.Bounds;
                 maskBrush.ViewboxUnits = BrushMappingMode.Absolute;
                 maskBrush.ViewportUnits = BrushMappingMode.Absolute;
                 maskBrush.TileMode = TileMode.None;

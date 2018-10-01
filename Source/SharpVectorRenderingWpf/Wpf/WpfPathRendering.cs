@@ -231,10 +231,13 @@ namespace SharpVectors.Renderers.Wpf
                                     var translateTransform = new TranslateTransform(drawingBounds.X, drawingBounds.Y);
                                     transformGroup.Children.Add(translateTransform);
 
-                                    Matrix matrix = new Matrix();
-                                    matrix.Scale(drawingBounds.Width, drawingBounds.Height);
-                                    matrix.Translate(drawingBounds.X, drawingBounds.Y);
+                                    Matrix scaleMatrix = new Matrix();
+                                    Matrix translateMatrix = new Matrix();
 
+                                    scaleMatrix.Scale(drawingBounds.Width, drawingBounds.Height);
+                                    translateMatrix.Translate(drawingBounds.X, drawingBounds.Y);
+
+                                    Matrix matrix = Matrix.Multiply(scaleMatrix, translateMatrix);
                                     //maskBrush.Transform = transformGroup; 
                                     maskBrush.Transform = new MatrixTransform(matrix); 
                                 }
@@ -327,6 +330,11 @@ namespace SharpVectors.Renderers.Wpf
         //==========================================================================
         private static Color ConvertColor(Color color)
         {
+            if (color != Colors.Transparent)
+            {
+                return color;
+            }
+
             float max = Math.Max(Math.Max(color.ScR, color.ScG), color.ScB);
             float min = Math.Min(Math.Min(color.ScR, color.ScG), color.ScB);
 
