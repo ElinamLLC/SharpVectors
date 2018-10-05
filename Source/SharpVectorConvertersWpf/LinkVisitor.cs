@@ -183,7 +183,7 @@ namespace SharpVectors.Converters
                 WpfSvgPaint fillPaint = new WpfSvgPaint(context, _aggregatedFill, "fill");
                 Brush brush = fillPaint.GetBrush(false);
 
-                brush.SetValue(FrameworkElement.NameProperty, linkId + "_Brush");
+                SvgObject.SetName(brush, linkId + "_Brush");
 
                 GeometryDrawing drawing = new GeometryDrawing(brush, null, drawGeometry);
 
