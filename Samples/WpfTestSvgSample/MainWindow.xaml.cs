@@ -43,7 +43,7 @@ namespace WpfTestSvgSample
 
         private SvgPage _svgPage;
         private XamlPage _xamlPage;
-        private DrawingPage _drawingPage;
+        private IDrawingPage _drawingPage;
 
         private BitmapImage _folderClose;
         private BitmapImage _folderOpen;
@@ -133,7 +133,7 @@ namespace WpfTestSvgSample
             // Retrieve the display pages...
             _svgPage     = frameSvgInput.Content as SvgPage;
             _xamlPage    = frameXamlOutput.Content as XamlPage;
-            _drawingPage = frameDrawing.Content as DrawingPage;
+            _drawingPage = frameDrawing.Content as IDrawingPage;
 
             if (_drawingPage != null)
             {
