@@ -61,6 +61,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Shape\ShapeRenderingVisitor.cs" />
+    <Compile Include="Shape\UI\SvgShapeViewer.cs" />
+    <Compile Include="Shape\WpfHelper.cs" />
+    <Compile Include="Shape\WpfShapeRenderer.cs" />
     <Compile Include="Texts\WpfHorzTextRenderer.cs" />
     <Compile Include="Texts\WpfPathTextRenderer.cs" />
     <Compile Include="Texts\WpfTextAnchor.cs" />
