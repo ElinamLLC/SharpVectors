@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgGElement interface corresponds to the 'g' element. 
 	/// </summary>
 	public interface ISvgGElement : ISvgElement, ISvgTests, ISvgLangSpace,
-		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget
-	{
+		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, IElementVisitorTarget
+    {
 	}
 }

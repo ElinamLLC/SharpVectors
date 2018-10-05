@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
     /// The SvgPathElement interface corresponds to the 'path' element. 
     /// </summary>
     public interface ISvgPathElement : ISvgElement, ISvgTests, ISvgLangSpace,
-        ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, ISvgAnimatedPathData, IEventTarget
+        ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, ISvgAnimatedPathData, IEventTarget, IElementVisitorTarget
     {
         ISvgAnimatedNumber PathLength { get; }
         double GetTotalLength();

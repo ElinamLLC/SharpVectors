@@ -7,7 +7,7 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
 	public interface ISvgPolygonElement	: ISvgElement, ISvgTests, ISvgLangSpace,
 		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable,
-		ISvgAnimatedPoints, IEventTarget
+		ISvgAnimatedPoints, IEventTarget, IElementVisitorTarget
     {
 	}
 }

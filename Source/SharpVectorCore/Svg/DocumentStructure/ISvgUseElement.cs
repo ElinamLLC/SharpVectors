@@ -6,8 +6,8 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgUseElement interface corresponds to the 'use' element. 
 	/// </summary>
 	public interface ISvgUseElement : ISvgElement, ISvgUriReference, ISvgTests, ISvgStylable,
-		ISvgLangSpace, ISvgExternalResourcesRequired, ISvgTransformable, IEventTarget
-	{                                     
+		ISvgLangSpace, ISvgExternalResourcesRequired, ISvgTransformable, IEventTarget, IElementVisitorTarget
+    {                                     
 		ISvgAnimatedLength X { get; }
 		ISvgAnimatedLength Y { get; }
 		ISvgAnimatedLength Width { get; }

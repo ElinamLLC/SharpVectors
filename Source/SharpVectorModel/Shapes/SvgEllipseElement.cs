@@ -170,6 +170,15 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
+        #region Implementation of IElementVisitorTarget
+
+        public void Accept(IElementVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        #endregion
+
         #region ISvgTests Members
 
         public ISvgStringList RequiredFeatures

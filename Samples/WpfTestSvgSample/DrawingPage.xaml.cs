@@ -14,7 +14,7 @@ namespace WpfTestSvgSample
     /// <summary>
     /// Interaction logic for DrawingPage.xaml
     /// </summary>
-    public partial class DrawingPage : Page
+    public partial class DrawingPage : Page, IDrawingPage
     {
         #region Private Fields
 
