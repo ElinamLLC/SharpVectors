@@ -101,6 +101,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IElementVisitor.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathMethod.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathSpacing.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileElement.cs" />
