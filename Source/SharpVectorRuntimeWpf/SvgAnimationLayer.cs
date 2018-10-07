@@ -166,7 +166,7 @@ namespace SharpVectors.Runtime
                 if (childGroup != null)
                 {
                     string groupName = SvgLink.GetKey(childGroup);
-                    //string groupName = childGroup.GetValue(FrameworkElement.NameProperty) as string;
+                    //string groupName = SvgObject.GetName(childGroup);
                     if (string.IsNullOrWhiteSpace(groupName))
                     {
                         if (childGroup.Children != null && childGroup.Children.Count == 1)
@@ -253,7 +253,7 @@ namespace SharpVectors.Runtime
             {
                 if (_hitVisual != null)
                 {
-                    itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+                    itemName = SvgObject.GetName(_hitVisual);
                     if (itemName == null)
                     {
                         _hitVisual = null;
@@ -289,7 +289,7 @@ namespace SharpVectors.Runtime
 
                 if (_hitVisual != null)
                 {
-                    itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+                    itemName = SvgObject.GetName(_hitVisual);
                     if (itemName == null)
                     {
                         _hitVisual = null;
@@ -306,7 +306,7 @@ namespace SharpVectors.Runtime
                     _hitVisual = null;
                 }
 
-                itemName = hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+                itemName = SvgObject.GetName(hitVisual);
                 if (itemName == null)
                 {
                     return false;
@@ -375,7 +375,7 @@ namespace SharpVectors.Runtime
                 return true;
             }
 
-            string itemName = visual.GetValue(FrameworkElement.NameProperty) as string;
+            string itemName = SvgObject.GetName(visual);
             if (itemName == null)
             {
                 if (_tooltip != null)
@@ -408,7 +408,7 @@ namespace SharpVectors.Runtime
             }
             if (_selectedVisual != null)
             {
-                itemName = _selectedVisual.GetValue(FrameworkElement.NameProperty) as string;
+                itemName = SvgObject.GetName(_selectedVisual);
                 if (itemName == null)
                 {
                     return false;
@@ -432,7 +432,7 @@ namespace SharpVectors.Runtime
 
             if (e.ChangedButton == MouseButton.Left)
             {
-                string brushName = brush.GetValue(FrameworkElement.NameProperty) as string;
+                string brushName = SvgObject.GetName(brush);
                 if (!string.IsNullOrWhiteSpace(brushName))
                 {
                     SvgLinkAction linkAction = SvgLink.GetAction(visual);
@@ -464,7 +464,7 @@ namespace SharpVectors.Runtime
                 return false;
             }
 
-            string itemName = _hitVisual.GetValue(FrameworkElement.NameProperty) as string;
+            string itemName = SvgObject.GetName(_hitVisual);
             if (itemName == null)
             {
                 _hitVisual = null;
@@ -543,7 +543,7 @@ namespace SharpVectors.Runtime
                 textBrush = new SolidColorBrush(_colorLink);
             }
             string brushName = name + "_Brush";
-            textBrush.SetValue(FrameworkElement.NameProperty, brushName);
+            SvgObject.SetName(textBrush, brushName);
 
             DrawingCollection drawings = group.Children;
             int itemCount = drawings != null ? drawings.Count : 0;
@@ -614,7 +614,7 @@ namespace SharpVectors.Runtime
                     {
                         groupName = SvgObject.GetId(drawGroup);
                     }
-                    //string groupName = childGroup.GetValue(FrameworkElement.NameProperty) as string;
+                    //string groupName = SvgObject.GetName(childGroup);
                     if (string.IsNullOrWhiteSpace(groupName))
                     {
                         LoadLayerGroup(drawGroup);
@@ -669,7 +669,7 @@ namespace SharpVectors.Runtime
                     {
                         groupName = SvgObject.GetId(drawGroup);
                     }
-                    //string groupName = childGroup.GetValue(FrameworkElement.NameProperty) as string;
+                    //string groupName = SvgObject.GetName(childGroup);
                     if (string.IsNullOrWhiteSpace(groupName))
                     {
                         LoadLayerGroup(drawGroup);

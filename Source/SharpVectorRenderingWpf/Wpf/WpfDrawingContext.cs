@@ -397,7 +397,7 @@ namespace SharpVectors.Renderers.Wpf
                 string groupId = _linkVisitor.AggregatedLayerName;
                 if (!string.IsNullOrWhiteSpace(groupId))
                 {
-                    _linkDrawing.SetValue(FrameworkElement.NameProperty, groupId);
+                    Runtime.SvgObject.SetName(_linkDrawing, groupId);
                 }
 
                 linkVisitor.Initialize(_linkDrawing, this);

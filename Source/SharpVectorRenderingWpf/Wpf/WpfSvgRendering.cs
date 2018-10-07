@@ -73,7 +73,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 if (currentGroup == context.Root && !context.IsFragment)
                 {
-                    _drawGroup.SetValue(FrameworkElement.NameProperty, SvgObject.DrawLayer);
+                    SvgObject.SetName(_drawGroup, SvgObject.DrawLayer);
                     if (context.IncludeRuntime)
                     {
                         SvgLink.SetKey(_drawGroup, SvgObject.DrawLayer);
