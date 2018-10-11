@@ -74,11 +74,20 @@ namespace SharpVectors.Dom.Svg
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region ISvgFitToViewBox Members
+        #region Implementation of IElementVisitorTarget
 
-		public ISvgAnimatedRect ViewBox
+        public void Accept(IElementVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        #endregion
+
+        #region ISvgFitToViewBox Members
+
+        public ISvgAnimatedRect ViewBox
 		{
 			get
 			{

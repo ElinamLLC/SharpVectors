@@ -32,6 +32,25 @@ namespace SharpVectors.Runtime
 
         #region Public Methods
 
+        public static void SetName(DependencyObject element, string name)
+        {
+            if (!string.IsNullOrEmpty(name) && char.IsDigit(name[0]))
+            {
+                name = "_" + name;
+            }
+            element.SetValue(FrameworkElement.NameProperty, name);
+        }
+
+        public static string GetName(DependencyObject element)
+        {
+            string name = element.GetValue(FrameworkElement.NameProperty) as string;
+            if (!string.IsNullOrEmpty(name) && name.StartsWith("_"))
+            {
+                name = name.Remove(0, 1);
+            }
+            return name;
+        }
+
         public static void SetId(DependencyObject element, string value)
         {
             element.SetValue(IdProperty, value);

@@ -57,6 +57,28 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
+        #region Implementation of IElementVisitorTarget
+
+        public void Accept(IElementVisitor visitor)
+        {
+            visitor.Visit(this);
+
+            if (this.HasChildNodes)
+            {
+                visitor.BeginContainer(this);
+                foreach (var item in this.ChildNodes)
+                {
+                    if (item is IElementVisitorTarget evt)
+                    {
+                        evt.Accept(visitor);
+                    }
+                }
+                visitor.EndContainer(this);
+            }
+        }
+
+        #endregion
+
         #region Implementation of ISvgTests
 
         public ISvgStringList RequiredFeatures

@@ -11,5 +11,14 @@ namespace SharpVectors.Dom.Svg
             : base(prefix, localname, ns, doc) 
 		{
 		}
-	}
+
+        #region Implementation of IElementVisitorTarget
+
+        public void Accept(IElementVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
+        #endregion
+    }
 }

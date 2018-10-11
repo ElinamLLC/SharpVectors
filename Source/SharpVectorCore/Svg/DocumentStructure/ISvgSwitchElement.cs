@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgSwitchElement interface corresponds to the 'switch' element. 
 	/// </summary>
 	public interface ISvgSwitchElement : ISvgElement, ISvgTests, ISvgLangSpace,
-        ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget
-	{
+        ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, IElementVisitorTarget
+    {
 	}
 }

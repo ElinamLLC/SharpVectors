@@ -54,7 +54,7 @@ namespace SharpVectors.Runtime
 
             if (namedObject != null)
             {   
-                namedObject.SetValue(FrameworkElement.NameProperty, name);
+                SvgObject.SetName(namedObject, name);
             }
         }
 
