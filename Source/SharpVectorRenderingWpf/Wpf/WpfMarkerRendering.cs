@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 
-using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
 

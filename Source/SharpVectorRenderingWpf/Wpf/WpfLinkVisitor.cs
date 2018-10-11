@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using System;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
