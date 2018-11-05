@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Markup;
 using System.Windows.Resources;
 
+using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters
@@ -63,7 +64,7 @@ namespace SharpVectors.Converters
         {
             _textAsGeometry = false;
             _includeRuntime = true;
-            _optimizePath   = true;
+            _optimizePath = true;
         }
 
         /// <summary>
@@ -90,12 +91,10 @@ namespace SharpVectors.Converters
         /// </value>
         public string Source
         {
-            get
-            {
+            get {
                 return _svgPath;
             }
-            set
-            {
+            set {
                 _svgPath = value;
             }
         }
@@ -111,12 +110,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool OptimizePath
         {
-            get
-            {
+            get {
                 return _optimizePath;
             }
-            set
-            {
+            set {
                 _optimizePath = value;
             }
         }
@@ -132,12 +129,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool TextAsGeometry
         {
-            get
-            {
+            get {
                 return _textAsGeometry;
             }
-            set
-            {
+            set {
                 _textAsGeometry = value;
             }
         }
@@ -158,12 +153,10 @@ namespace SharpVectors.Converters
         /// </remarks>
         public bool IncludeRuntime
         {
-            get
-            {
+            get {
                 return _includeRuntime;
             }
-            set
-            {
+            set {
                 _includeRuntime = value;
             }
         }
@@ -187,12 +180,10 @@ namespace SharpVectors.Converters
         /// </remarks>
         public CultureInfo CultureInfo
         {
-            get
-            {
+            get {
                 return _culture;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _culture = value;
@@ -236,7 +227,7 @@ namespace SharpVectors.Converters
                 WpfDrawingSettings settings = new WpfDrawingSettings();
                 settings.IncludeRuntime = _includeRuntime;
                 settings.TextAsGeometry = _textAsGeometry;
-                settings.OptimizePath   = _optimizePath;
+                settings.OptimizePath = _optimizePath;
                 if (_culture != null)
                 {
                     settings.CultureInfo = _culture;
@@ -248,7 +239,7 @@ namespace SharpVectors.Converters
                     //case "ftp":
                     case "https":
                     case "http":
-                        using (FileSvgReader reader = 
+                        using (FileSvgReader reader =
                             new FileSvgReader(settings))
                         {
                             DrawingGroup drawGroup = reader.Read(svgSource);
@@ -271,14 +262,14 @@ namespace SharpVectors.Converters
                             svgStreamInfo = Application.GetResourceStream(svgSource);
                         }
 
-                        Stream svgStream = (svgStreamInfo != null) ? 
+                        Stream svgStream = (svgStreamInfo != null) ?
                             svgStreamInfo.Stream : null;
 
                         if (svgStream != null)
                         {
                             string fileExt = Path.GetExtension(svgSource.ToString());
                             bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
-                                string.Equals(fileExt, ".svgz", 
+                                string.Equals(fileExt, ".svgz",
                                 StringComparison.OrdinalIgnoreCase);
 
                             if (isCompressed)
@@ -306,11 +297,9 @@ namespace SharpVectors.Converters
                             {
                                 using (svgStreamInfo.Stream)
                                 {
-                                    using (FileSvgReader reader =
-                                        new FileSvgReader(settings))
+                                    using (FileSvgReader reader = new FileSvgReader(settings))
                                     {
-                                        DrawingGroup drawGroup = reader.Read(
-                                            svgStreamInfo.Stream);
+                                        DrawingGroup drawGroup = reader.Read(svgStreamInfo.Stream);
 
                                         if (drawGroup != null)
                                         {
@@ -321,6 +310,36 @@ namespace SharpVectors.Converters
                             }
                         }
                         break;
+                    case "data":
+                        var sourceData   = svgSource.OriginalString.Replace(" ", "");
+
+                        int nColon       = sourceData.IndexOf(":", StringComparison.OrdinalIgnoreCase);
+                        int nSemiColon   = sourceData.IndexOf(";", StringComparison.OrdinalIgnoreCase);
+                        int nComma       = sourceData.IndexOf(",", StringComparison.OrdinalIgnoreCase);
+
+                        string sMimeType = sourceData.Substring(nColon + 1, nSemiColon - nColon - 1);
+                        string sEncoding = sourceData.Substring(nSemiColon + 1, nComma - nSemiColon - 1);
+
+                        if (string.Equals(sMimeType.Trim(), "image/svg+xml", StringComparison.OrdinalIgnoreCase)
+                            && string.Equals(sEncoding.Trim(), "base64", StringComparison.OrdinalIgnoreCase))
+                        {
+                            string sContent = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
+                            byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
+                                0, sContent.Length);
+                            using (var stream = new MemoryStream(imageBytes))
+                            {
+                                using (var reader = new FileSvgReader(settings))
+                                {
+                                    DrawingGroup drawGroup = reader.Read(stream);
+                                    if (drawGroup != null)
+                                    {
+                                        return new DrawingImage(drawGroup);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+
                 }
 
             }
@@ -377,7 +396,7 @@ namespace SharpVectors.Converters
                     svgPath = svgPath.Replace('/', '\\');
 
                     Assembly assembly = Assembly.GetExecutingAssembly();
-                    string localFile  = Path.Combine(Path.GetDirectoryName(
+                    string localFile = Path.Combine(Path.GetDirectoryName(
                         assembly.Location), svgPath);
 
                     if (File.Exists(localFile))
@@ -393,8 +412,8 @@ namespace SharpVectors.Converters
                         return new Uri(uriContext.BaseUri, svgSource);
                     }
                     else
-                    {   
-                        string asmName   = assembly.GetName().Name;
+                    {
+                        string asmName = assembly.GetName().Name;
                         string uriString = String.Format(
                             "pack://application:,,,/{0};component/{1}",
                             asmName, _svgPath);

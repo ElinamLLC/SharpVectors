@@ -16,14 +16,14 @@ namespace SharpVectors.Converters
 
         public override ImageSource Visit(SvgImageElement element, WpfDrawingContext context)
         {
-            string sURI    = element.Href.AnimVal;
+            string sURI    = element.Href.AnimVal.Replace(" ", "");
             int nColon     = sURI.IndexOf(":", StringComparison.OrdinalIgnoreCase);
             int nSemiColon = sURI.IndexOf(";", StringComparison.OrdinalIgnoreCase);
             int nComma     = sURI.IndexOf(",", StringComparison.OrdinalIgnoreCase);
 
             string sMimeType  = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
 
-            string sContent   = sURI.Substring(nComma + 1);
+            string sContent   = SvgObject.RemoveWhitespace(sURI.Substring(nComma + 1));
             byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                 0, sContent.Length);
 

@@ -7,9 +7,6 @@ using System.Collections.Generic;
 
 namespace SharpVectors.Runtime
 {
-    //This class, if placed at the root of a XAML file which is loaded by XamlReader.Load()
-    //will end up having all named elements contained in its nameTable automatically...
-    //
     /// <summary>
     /// This class, if placed at the root of a XAML file which is loaded by XamlReader.Load()
     /// will end up having all named elements contained in its nameTable automatically.
