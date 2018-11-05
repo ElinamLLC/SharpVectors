@@ -13,9 +13,13 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _ensureViewboxSize;
         private bool _textAsGeometry;
         private bool _includeRuntime;
         private bool _optimizePath;
+
+        private long _pixelWidth;
+        private long _pixelHeight;
 
         private CultureInfo _culture;
         private CultureInfo _neutralCulture;
@@ -45,6 +49,9 @@ namespace SharpVectors.Renderers.Wpf
             _includeRuntime  = true;
             _neutralCulture  = CultureInfo.GetCultureInfo("en-us");
             _culture         = CultureInfo.GetCultureInfo("en-us");
+
+            _pixelWidth      = -1;
+            _pixelHeight     = -1;
         }
 
         /// <summary>
@@ -62,11 +69,65 @@ namespace SharpVectors.Renderers.Wpf
             _includeRuntime  = settings._includeRuntime;
             _neutralCulture  = settings._neutralCulture;
             _culture         = settings._culture;
+
+            _pixelWidth      = settings._pixelWidth;
+            _pixelHeight     = settings._pixelHeight;
         }
 
         #endregion
 
         #region Public Properties
+
+        public long PixelWidth
+        {
+            get {
+                return _pixelWidth;
+            }
+            set {
+                _pixelWidth = value;
+            }
+        }
+
+        public long PixelHeight
+        {
+            get {
+                return _pixelHeight;
+            }
+            set {
+                _pixelHeight = value;
+            }
+        }
+
+        public bool HasPixelSize
+        {
+            get {
+                return (_pixelWidth >= 0 && _pixelHeight >= 0);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value to indicate saving the original viewbox size when saving images.
+        /// </summary>
+        /// <value>For image outputs, this will force the original size to be saved.
+        /// <para>
+        /// The default value is <see langword="false"/>. However, the ImageSvgConverter converted
+        /// sets this to <see langword="true"/> by default.
+        /// </para>
+        /// </value>
+        /// <remarks>
+        /// Setting this to <see langword="true"/> will cause the rendering process to draw a transparent
+        /// box around the output, if a viewbox is defined. This will ensure that the original image
+        /// size is saved.
+        /// </remarks>
+        public bool EnsureViewboxSize
+        {
+            get {
+                return _ensureViewboxSize;
+            }
+            set {
+                _ensureViewboxSize = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the path geometry is 

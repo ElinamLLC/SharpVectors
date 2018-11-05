@@ -90,10 +90,23 @@ namespace SharpVectors.Converters
         public ImageSvgConverter(bool saveXaml, bool saveZaml,
             WpfDrawingSettings settings) : base(saveXaml, saveZaml, settings)
         {
-            _encoderType = ImageEncoderType.PngBitmap;
+            long pixelWidth  = 0;
+            long pixelHeight = 0;
 
+            if (settings != null)
+            {
+                settings.EnsureViewboxSize = true;
+
+                if (settings.HasPixelSize)
+                {
+                    pixelWidth  = settings.PixelWidth;
+                    pixelHeight = settings.PixelHeight;
+                }
+            }
+
+            _encoderType = ImageEncoderType.PngBitmap;
             _wpfRenderer = new WpfDrawingRenderer(this.DrawingSettings);
-            _wpfWindow   = new WpfSvgWindow(640, 480, _wpfRenderer);
+            _wpfWindow   = new WpfSvgWindow(pixelWidth, pixelHeight, _wpfRenderer);
         }
 
         #endregion

@@ -172,17 +172,46 @@ namespace SharpVectors.Renderers.Wpf
         {
             base.Render(renderer);
 
-            //TODO: Temp workaround to preserve original svg size
-	        if (_isRoot)
-	        {
+            if (_isRoot)
+            {
                 if (_drawGroup != null && _drawGroup.ClipGeometry != null)
                 {
-                    using (var ctx = _drawGroup.Open())
-		            {
-			            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), _drawGroup.ClipGeometry.Bounds);
-		            }
+                    Rect bounds = _drawGroup.ClipGeometry.Bounds;
+
+                    var settings = _context.Settings;
+
+                    // Temporal workaround to preserve original svg size
+                    if (settings != null && settings.EnsureViewboxSize)
+                    {
+                        using (var ctx = _drawGroup.Open())
+                        {
+                            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
+                        }
+                    }
+
+                    Point ptTopLeft = bounds.TopLeft;
+
+                    if (!Point.Equals(ptTopLeft, new Point(0, 0)))
+                    {
+                        TranslateTransform translate = new TranslateTransform(-ptTopLeft.X, -ptTopLeft.Y);
+
+                        Transform transform = _drawGroup.Transform;
+                        if (transform != null && !transform.Value.IsIdentity)
+                        {
+                            TransformGroup groupTransform = new TransformGroup();
+                            groupTransform.Children.Add(transform);
+                            groupTransform.Children.Add(translate);
+
+                            _drawGroup.Transform = groupTransform;
+                        }
+                        else
+                        {
+                            _drawGroup.Transform = translate;
+                        }
+                    }
+
                 }
-	        }
+            }
         }
 
         public override void AfterRender(WpfDrawingRenderer renderer)

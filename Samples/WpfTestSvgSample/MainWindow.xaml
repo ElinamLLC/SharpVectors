@@ -43,7 +43,7 @@
                           HorizontalAlignment="Center" Width="6" VerticalAlignment="Stretch"/>
                 <TabControl Name="contentsTab"  Margin="6" Grid.Row="0" Grid.Column="2">
                     <TabItem Name="tabDrawing" Header="Drawing" GotFocus="OnTabItemGotFocus">
-                        <Frame Name="frameDrawing" Source="ShapeDrawingPage.xaml"/>
+                        <Frame Name="frameDrawing" Source="DrawingPage.xaml"/>
                     </TabItem>
                     <TabItem Name="tabXamlOutput" GotFocus="OnTabItemGotFocus">
                         <TabItem.Header>

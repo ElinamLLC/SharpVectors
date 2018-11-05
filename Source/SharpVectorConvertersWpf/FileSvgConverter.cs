@@ -81,8 +81,17 @@ namespace SharpVectors.Converters
             WpfDrawingSettings settings)
             : base(saveXaml, saveZaml, settings)
         {
+            long pixelWidth  = 0;
+            long pixelHeight = 0;
+
+            if (settings != null && settings.HasPixelSize)
+            {
+                pixelWidth  = settings.PixelWidth;
+                pixelHeight = settings.PixelHeight;
+            }
+
             _wpfRenderer = new WpfDrawingRenderer(this.DrawingSettings);
-            _wpfWindow   = new WpfSvgWindow(640, 480, _wpfRenderer);
+            _wpfWindow   = new WpfSvgWindow(pixelWidth, pixelHeight, _wpfRenderer);
         }
 
         #endregion
