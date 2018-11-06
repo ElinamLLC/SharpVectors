@@ -39,7 +39,12 @@ namespace SharpVectors.Converters.Shapes
             if (this.Canvas == null)
                 this.Canvas = new Canvas();
             ShapeRenderingVisitor visitor = new ShapeRenderingVisitor(this);
+
+            visitor.BeginContainer();
+
             element.Accept(visitor);
+
+            visitor.EndContainer();
         }
     }
 }

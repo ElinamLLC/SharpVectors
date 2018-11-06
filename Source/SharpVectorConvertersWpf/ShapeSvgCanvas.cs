@@ -18,6 +18,9 @@ namespace SharpVectors.Converters
         public static readonly DependencyProperty ItemStyleProperty = DependencyProperty.Register("ItemStyle",
             typeof(Style), typeof(ShapeSvgCanvas), new PropertyMetadata(OnItemStylePropertyChanged));
 
+        private WpfSvgWindow _wpfWindow;
+        private WpfShapeRenderer _wpfRenderer;
+
         public ShapeSvgCanvas()
         {
             _wpfRenderer        = new WpfShapeRenderer();
@@ -27,8 +30,17 @@ namespace SharpVectors.Converters
             this.Bounds         = Rect.Empty;
         }
 
-        private WpfSvgWindow _wpfWindow;
-        private WpfShapeRenderer _wpfRenderer;
+        public Canvas Drawing
+        {
+            get {
+                if (this.Children.Count != 0)
+                {
+                    return this.Children[0] as Canvas;
+                }
+
+                return null;
+            }
+        }
 
         /// <summary>
         /// Gets or sets svg document source.
@@ -75,7 +87,12 @@ namespace SharpVectors.Converters
             }
 
             var rect = this.Bounds;
-            return new Size(rect.Width, rect.Height);
+            if (!rect.IsEmpty)
+            {
+                return new Size(rect.Width, rect.Height);
+            }
+
+            return baseSize;
         }
 
         private static void OnSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -88,23 +105,34 @@ namespace SharpVectors.Converters
             (sender as ShapeSvgCanvas)._wpfRenderer.ItemStyle = e.NewValue as Style;
         }
 
-        private void Load(string uri)
+        public bool RenderDiagrams(string sourceUri)
+        {
+            return this.Load(sourceUri);
+        }
+
+        private bool Load(string uri)
         {
             UnloadDiagrams();
 
             if (string.IsNullOrEmpty(uri))
-                return;
+            {
+                return false;
+            }
 
             try
             {
                 _wpfWindow.LoadDocument(uri);
                 _wpfRenderer.Render(_wpfWindow.Document);
                 this.Bounds = CalculateBounds(_wpfWindow);
+
+                return true;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 UnloadDiagrams();
+
+                return false;
             }
         }
 

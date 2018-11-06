@@ -14,6 +14,7 @@ namespace SharpVectors.Renderers.Wpf
         private bool _renderingClip;
         private bool _isFragment;
 
+        private Rect _quickBounds;
         private object _tag;
         private DrawingGroup _rootDrawing;
         private DrawingGroup _linkDrawing;
@@ -36,10 +37,11 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingContext(bool isFragment)
         {
-            _isFragment = isFragment;
-            _drawStack = new Stack<DrawingGroup>();
+            _quickBounds   = Rect.Empty;
+            _isFragment    = isFragment;
+            _drawStack     = new Stack<DrawingGroup>();
             _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            _settings = new WpfDrawingSettings();
+            _settings      = new WpfDrawingSettings();
         }
 
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
@@ -92,6 +94,8 @@ namespace SharpVectors.Renderers.Wpf
                 if (value != null)
                 {
                     _rootDrawing = value;
+
+                    _quickBounds.Union(_rootDrawing.Bounds);
                 }
             }
         }
@@ -185,6 +189,13 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public Rect Bounds
+        {
+            get {
+                return _quickBounds;
+            }
+        }
+
         #endregion
 
         #region Internal Properties
@@ -234,6 +245,11 @@ namespace SharpVectors.Renderers.Wpf
         #endregion
 
         #region Public Methods
+
+        public void UpdateBounds(Rect bounds)
+        {
+            _quickBounds.Union(bounds);
+        }
 
         /// <summary>
         /// Removes all objects from the drawing stack.

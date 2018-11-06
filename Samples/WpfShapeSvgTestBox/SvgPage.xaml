@@ -1,0 +1,149 @@
+﻿<Page x:Class="WpfShapeSvgTestBox.SvgPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:local="clr-namespace:WpfShapeSvgTestBox"
+    Title="SvgPage" Background="White"
+        DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop" AllowDrop="True"
+        FocusManager.FocusedElement="{Binding ElementName=canvasScroller}">
+    <Page.Resources>
+        <!-- UI commands. -->
+        <RoutedUICommand x:Key="Commands.ZoomOut" />
+        <RoutedUICommand x:Key="Commands.ZoomIn" />
+    </Page.Resources>
+
+    <Page.InputBindings>
+        <!-- Bind keys to commands. -->
+        <KeyBinding Modifiers="Control" Key="Minus" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Modifiers="Control" Key="Plus" Command="{StaticResource Commands.ZoomIn}"/>
+        <KeyBinding Modifiers="Control" Key="OemMinus" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Modifiers="Control" Key="OemPlus" Command="{StaticResource Commands.ZoomIn}"/>
+    </Page.InputBindings>
+
+    <Page.CommandBindings>
+        <!-- Bind commands to event handlers. -->
+        <CommandBinding Command="{StaticResource Commands.ZoomOut}" 
+            Executed="OnZoomOut"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomIn}" 
+            Executed="OnZoomIn"/>
+    </Page.CommandBindings>
+    <Grid Name="rightGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        
+        <DockPanel LastChildFill="True" Grid.Row="0">
+            <ToolBar DockPanel.Dock="Top" Height="32">
+                <ToolBar.Resources>
+                    <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                                <Setter Property="Opacity" Value="0.30" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToolBar.Resources>
+                <Button Click="OnOpenFileClick">
+                    <Image Source="Images/Open.png" Height="16"/>
+                </Button>
+                <Button Click="OnSaveFileClick">
+                    <Image Source="Images/Save.png" Height="16"/>
+                </Button>
+                <Separator/>
+                <Button Command="Cut">
+                    <Image Source="Images/Cut.png" Height="16"/>
+                </Button>
+                <Button Command="Copy">
+                    <Image Source="Images/Copy.png" Height="16"/>
+                </Button>
+                <Button Command="Paste">
+                    <Image Source="Images/Paste.png" Height="16"/>
+                </Button>
+                <Button Command="Delete">
+                    <Image Source="Images/Delete.png" Height="16"/>
+                </Button>
+                <Separator/>
+                <Button Command="Undo">
+                    <Image Source="Images/Undo.png" Height="16"/>
+                </Button>
+                <Button Command="Redo">
+                    <Image Source="Images/Redo.png" Height="16"/>
+                </Button>
+                <Separator/>
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}">
+                    <Image Source="Images/WordWrap.png" Height="16"/>
+                </CheckBox>
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}">
+                    <TextBlock Width="16" TextAlignment="Center">#</TextBlock>
+                </CheckBox>
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}">
+                    <TextBlock Width="16" TextAlignment="Center">¶</TextBlock>
+                </CheckBox>
+                <ComboBox Name="highlightingComboBox" Width="120"
+				    SelectedItem="{Binding SyntaxHighlighting, ElementName=textEditor}"
+				    ItemsSource="{Binding Source={x:Static avalonEdit:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
+				    SelectionChanged="OnHighlightingSelectionChanged"/>
+                <Separator/>
+                <TextBox Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
+                <Button Click="OnSearchTextClick">
+                    <Image Source="Images/Find.png" Height="16"/>
+                </Button>
+                <Separator/>
+                <Button Name="formatInput" Click="OnFormatInputClick">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/Format.png" />
+                        <TextBlock Margin="3,0,0,0">Format</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Name="convertInput" Click="OnConvertInputClick">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/Run.png" />
+                        <TextBlock Margin="3,0,0,0">Convert</TextBlock>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+
+            <avalonEdit:TextEditor Name="textEditor" FontFamily="Consolas" FontSize="12pt"/>
+        </DockPanel>
+
+        <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                      BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
+        <DockPanel Name="viewerFrame" LastChildFill="True" Grid.Row="2">
+            <ScrollViewer x:Name="canvasScroller" CanContentScroll="True" Padding="4"
+                VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+
+                <!-- This is the control that handles zooming and panning. -->
+                <svg:ZoomPanControl x:Name="zoomPanControl"
+                    MouseDown="OnZoomPanMouseDown" MouseUp="OnZoomPanMouseUp"
+                    MouseMove="OnZoomPanMouseMove" MouseWheel="OnZoomPanMouseWheel">
+                    <Control.Background>
+                        <DrawingBrush TileMode="Tile" Viewport="-10,-10,20,20" ViewportUnits="Absolute" Opacity="0.5">
+                            <DrawingBrush.Drawing>
+                                <GeometryDrawing>
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0,80,80"/>
+                                    </GeometryDrawing.Geometry>
+                                    <GeometryDrawing.Pen>
+                                        <Pen Brush="LightGray" Thickness="1"/>
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingBrush.Drawing>
+                        </DrawingBrush>
+                    </Control.Background>
+                    <!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                    Width and Height determine the size of the content. -->
+                    <!--<svg:SvgDrawingCanvas x:Name="svgDrawing" Background="Transparent">
+                    </svg:SvgDrawingCanvas>-->
+                    <svgc:ShapeSvgCanvas x:Name="svgDrawing" Background="Transparent"></svgc:ShapeSvgCanvas>
+
+                </svg:ZoomPanControl>
+
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</Page>

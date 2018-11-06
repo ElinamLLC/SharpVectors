@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squiggle.Wpf", "Application
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSvgTestBox", "Samples\WpfSvgTestBox\WpfSvgTestBox.csproj", "{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfShapeSvgTestBox", "Samples\WpfShapeSvgTestBox\WpfShapeSvgTestBox.csproj", "{E7F7DFAF-2473-4369-91D5-365A2251EE03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,12 @@ Global
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}.Documentation|Any CPU.Build.0 = Debug|Any CPU
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +153,7 @@ Global
 		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A} = {B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}
 		{950268C7-328C-4921-A554-B806DD966869} = {B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{E7F7DFAF-2473-4369-91D5-365A2251EE03} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

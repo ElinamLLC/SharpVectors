@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml;
+using System.Windows.Shapes;
 
 namespace SharpVectors.Converters.Shapes
 {
@@ -20,11 +21,31 @@ namespace SharpVectors.Converters.Shapes
             this.renderer = renderer;
         }
 
+        public void BeginContainer()
+        {
+            if (currentCanvas == null)
+            {
+                currentCanvas = this.renderer.Canvas;
+            }
+
+            var newCanvas = new Canvas();
+            currentCanvas.Children.Add(newCanvas);
+            currentCanvas = newCanvas;
+        }
+
+        public void EndContainer()
+        {
+            currentCanvas = currentCanvas?.Parent as Canvas;
+        }
+
         public void BeginContainer(ISvgElement element)
         {
             if (element is ISvgSvgElement)
             {
-                currentCanvas = this.renderer.Canvas;
+                if (currentCanvas == null)
+                {
+                    currentCanvas = this.renderer.Canvas;
+                }
             }
             else if (element is ISvgGElement)
             {
@@ -320,7 +341,7 @@ namespace SharpVectors.Converters.Shapes
         {
         }
 
-        private System.Windows.Shapes.Path WrapGeometry(Geometry geometry, ISvgElement element)
+        private Path WrapGeometry(Geometry geometry, ISvgElement element)
         {
             System.Windows.Shapes.Path path = new System.Windows.Shapes.Path();
             if (TryGetTransform(element as ISvgTransformable, out Transform transform))
@@ -329,7 +350,7 @@ namespace SharpVectors.Converters.Shapes
             return path;
         }
 
-        private void DisplayShape(System.Windows.Shapes.Path shape, ISvgElement element, bool applyStyle = true)
+        private void DisplayShape(Path shape, ISvgElement element, bool applyStyle = true)
         {
             if (currentCanvas == null)
                 return;
@@ -346,7 +367,7 @@ namespace SharpVectors.Converters.Shapes
             currentCanvas.Children.Add(shape);
         }
 
-        private Style CreateStyle(System.Windows.Shapes.Path shape, SvgStyleableElement element)
+        private Style CreateStyle(Path shape, SvgStyleableElement element)
         {
             if (element == null)
                 return null;
@@ -376,26 +397,26 @@ namespace SharpVectors.Converters.Shapes
 
             // Stroke
             if (TryGetBrush(element, "stroke", shapeBounds, shapeTransform, out Brush stroke))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeProperty, stroke));
+                style.Setters.Add(new Setter(Shape.StrokeProperty, stroke));
             if (TryGetStrokeWidth(element, out double strokeWidth))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeThicknessProperty, strokeWidth));
+                style.Setters.Add(new Setter(Shape.StrokeThicknessProperty, strokeWidth));
             if (TryGetMiterLimit(element, strokeWidth, out double miterLimit))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeMiterLimitProperty, miterLimit));
+                style.Setters.Add(new Setter(Shape.StrokeMiterLimitProperty, miterLimit));
             if (TryGetLineJoin(element, out PenLineJoin lineJoin))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeLineJoinProperty, lineJoin));
+                style.Setters.Add(new Setter(Shape.StrokeLineJoinProperty, lineJoin));
             if (TryGetLineCap(element, out PenLineCap lineCap))
             {
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeStartLineCapProperty, lineCap));
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeEndLineCapProperty, lineCap));
+                style.Setters.Add(new Setter(Shape.StrokeStartLineCapProperty, lineCap));
+                style.Setters.Add(new Setter(Shape.StrokeEndLineCapProperty, lineCap));
             }
             if (TryGetDashArray(element, strokeWidth, out DoubleCollection dashArray))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeDashArrayProperty, dashArray));
+                style.Setters.Add(new Setter(Shape.StrokeDashArrayProperty, dashArray));
             if (TryGetDashOffset(element, strokeWidth, out double dashOffset))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.StrokeDashOffsetProperty, dashOffset));
+                style.Setters.Add(new Setter(Shape.StrokeDashOffsetProperty, dashOffset));
 
             // Fill
             if (TryGetBrush(element, "fill", shapeBounds, shapeTransform, out Brush fill))
-                style.Setters.Add(new Setter(System.Windows.Shapes.Shape.FillProperty, fill));
+                style.Setters.Add(new Setter(Shape.FillProperty, fill));
 
             return style;
         }

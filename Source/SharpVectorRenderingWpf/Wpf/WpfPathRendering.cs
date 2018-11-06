@@ -73,6 +73,8 @@ namespace SharpVectors.Renderers.Wpf
 
             if (geometry != null && !geometry.IsEmpty())
             {
+                context.UpdateBounds(geometry.Bounds);
+
                 SetClip(context);
 
                 WpfSvgPaint fillPaint = new WpfSvgPaint(context, styleElm, "fill");

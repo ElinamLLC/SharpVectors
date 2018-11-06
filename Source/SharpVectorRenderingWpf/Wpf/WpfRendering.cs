@@ -286,7 +286,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 string sOverflow = null;
 
-                if (overflow != null || overflow.CssText == "")
+                if (overflow != null && !string.IsNullOrWhiteSpace(overflow.CssText))
                 {
                     sOverflow = overflow.CssText;
                 }
