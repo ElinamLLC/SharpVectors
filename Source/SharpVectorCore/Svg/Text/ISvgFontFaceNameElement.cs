@@ -5,6 +5,12 @@
     /// </summary>
     public interface ISvgFontFaceNameElement : ISvgElement
     {
+        // attribute name = "name" <string>
+        string FaceName
+        {
+            get;
+            set;
+        }
     }
 }
 

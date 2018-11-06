@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImageEncoderType.cs" />
+    <Compile Include="ShapeSvgCanvas.cs" />
+    <Compile Include="Shapes\ShapeRenderingVisitor.cs" />
+    <Compile Include="Shapes\WpfShapeHelper.cs" />
+    <Compile Include="Shapes\WpfShapeRenderer.cs" />
     <Compile Include="StreamSvgConverter.cs" />
     <Compile Include="Utils\DirectoryCopier.cs" />
     <Compile Include="Utils\DirectoryUtils.cs" />

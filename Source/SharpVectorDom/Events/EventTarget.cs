@@ -67,7 +67,7 @@ namespace SharpVectors.Dom.Events
 
         public bool DispatchEvent(IEvent eventInfo)
         {
-            if (eventInfo.Type == null || eventInfo.Type == "")
+            if (eventInfo == null || string.IsNullOrWhiteSpace(eventInfo.Type))
             {
                 throw new EventException(EventExceptionCode.UnspecifiedEventTypeErr);
             }
@@ -107,24 +107,24 @@ namespace SharpVectors.Dom.Events
                 }
 
                 Event realEvent = (Event)eventInfo;
-                realEvent._eventTarget = _eventTarget;
+                realEvent.EventTarget = _eventTarget;
 
-                if (!realEvent._stopped)
+                if (!realEvent.Stopped)
                 {
-                    realEvent._eventPhase = EventPhase.CapturingPhase;
+                    realEvent.EventPhase = EventPhase.CapturingPhase;
 
                     for (int i = _ancestors.Count - 1; i >= 0; i--)
                     {
-                        if (realEvent._stopped)
+                        if (realEvent.Stopped)
                         {
                             break;
                         }
 
-                        IEventTarget ancestor = _ancestors[i] as IEventTarget;
+                        var ancestor = _ancestors[i] as IEventTarget;
 
                         if (ancestor != null)
                         {
-                            realEvent._currentTarget = ancestor;
+                            realEvent.CurrentTarget = ancestor;
 
                             if (ancestor is IEventTargetSupport)
                             {
@@ -134,35 +134,35 @@ namespace SharpVectors.Dom.Events
                     }
                 }
 
-                if (!realEvent._stopped)
+                if (!realEvent.Stopped)
                 {
-                    realEvent._eventPhase = EventPhase.AtTarget;
-                    realEvent._currentTarget = _eventTarget;
+                    realEvent.EventPhase = EventPhase.AtTarget;
+                    realEvent.CurrentTarget = _eventTarget;
                     _eventTarget.FireEvent(realEvent);
                 }
 
-                if (!realEvent._stopped)
+                if (!realEvent.Stopped)
                 {
-                    realEvent._eventPhase = EventPhase.BubblingPhase;
+                    realEvent.EventPhase = EventPhase.BubblingPhase;
 
                     for (int i = 0; i < _ancestors.Count; i++)
                     {
-                        if (realEvent._stopped)
+                        if (realEvent.Stopped)
                         {
                             break;
                         }
 
-                        IEventTarget ancestor = _ancestors[i] as IEventTarget;
+                        var ancestor = _ancestors[i] as IEventTarget;
 
                         if (ancestor != null)
                         {
-                            realEvent._currentTarget = ancestor;
+                            realEvent.CurrentTarget = ancestor;
                             ((IEventTargetSupport)ancestor).FireEvent(realEvent);
                         }
                     }
                 }
 
-                return realEvent._stopped;
+                return realEvent.Stopped;
             }
             catch (InvalidCastException)
             {

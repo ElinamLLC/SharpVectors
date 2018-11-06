@@ -3,9 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
       xmlns:local="clr-namespace:WpfTestSvgSample"
-      xmlns:wpfShapeRendering="clr-namespace:SharpVectors.Renderers.Wpf.Shape;assembly=SharpVectors.Rendering.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShapeDrawingPage" Background="White"
@@ -94,7 +94,7 @@
                          Height="{Binding ElementName=svgViewer, Path=ActualHeight}">
                     <!-- This Canvas is the content that is displayed by the ZoomPanControl.
                     Width and Height determine the size of the content. -->
-                    <wpfShapeRendering:SvgShapeViewer x:Name="svgViewer" Background="White"/>
+                    <svgc:ShapeSvgCanvas x:Name="svgViewer" Background="White"/>
 
                     <Canvas Name="UserLayer" Width="{Binding ElementName=svgViewer, Path=ActualWidth}"
                              Height="{Binding ElementName=svgViewer, Path=ActualHeight}">

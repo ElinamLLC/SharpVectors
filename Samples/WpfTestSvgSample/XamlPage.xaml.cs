@@ -264,23 +264,25 @@ namespace WpfTestSvgSample
             IHighlighter highlighter =
                 textEditor.TextArea.GetService(typeof(IHighlighter)) as IHighlighter;
 
-            Paragraph p = new Paragraph();
-            foreach (DocumentLine line in document.Lines)
-            {
-                int lineNumber = line.LineNumber;
-                HighlightedInlineBuilder inlineBuilder = new HighlightedInlineBuilder(document.GetText(line));
-                if (highlighter != null)
-                {
-                    HighlightedLine highlightedLine = highlighter.HighlightLine(lineNumber);
-                    int lineStartOffset = line.Offset;
-                    foreach (HighlightedSection section in highlightedLine.Sections)
-                        inlineBuilder.SetHighlighting(section.Offset - lineStartOffset, section.Length, section.Color);
-                }
-                p.Inlines.AddRange(inlineBuilder.CreateRuns());
-                p.Inlines.Add(new LineBreak());
-            }
+            return DocumentPrinter.ConvertTextDocumentToBlock(document, highlighter);
 
-            return p;
+            //Paragraph p = new Paragraph();
+            //foreach (DocumentLine line in document.Lines)
+            //{
+            //    int lineNumber = line.LineNumber;
+            //    HighlightedInlineBuilder inlineBuilder = new HighlightedInlineBuilder(document.GetText(line));
+            //    if (highlighter != null)
+            //    {
+            //        HighlightedLine highlightedLine = highlighter.HighlightLine(lineNumber);
+            //        int lineStartOffset = line.Offset;
+            //        foreach (HighlightedSection section in highlightedLine.Sections)
+            //            inlineBuilder.SetHighlighting(section.Offset - lineStartOffset, section.Length, section.Color);
+            //    }
+            //    p.Inlines.AddRange(inlineBuilder.CreateRuns());
+            //    p.Inlines.Add(new LineBreak());
+            //}
+
+            //return p;
         }
 
         private FlowDocument CreateFlowDocumentForEditor()
@@ -295,7 +297,7 @@ namespace WpfTestSvgSample
         // the source is a control.
         private void OnCanExecuteTextEditorCommand(object sender, CanExecuteRoutedEventArgs e)
         {
-            TextEditor target = e.Source as TextEditor;
+            var target = e.Source as TextEditor;
 
             if (target != null)
             {

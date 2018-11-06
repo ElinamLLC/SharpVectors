@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SharpVectors.Renderers.Wpf.Shape
+namespace SharpVectors.Converters.Shapes
 {
     public class WpfShapeRenderer : ISvgRenderer
     {

@@ -5,9 +5,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
-namespace SharpVectors.Renderers.Wpf.Shape
+namespace SharpVectors.Converters.Shapes
 {
-    public static class WpfHelper
+    public static class WpfShapeHelper
     {
         private static readonly Regex _decimalNumber = new Regex(@"^\d");
         private static readonly string GenericSerifFontFamily = "Times New Roman";

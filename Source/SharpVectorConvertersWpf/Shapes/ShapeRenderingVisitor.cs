@@ -5,19 +5,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml;
-using static SharpVectors.Renderers.Wpf.Shape.WpfHelper;
 
-namespace SharpVectors.Renderers.Wpf.Shape
+namespace SharpVectors.Converters.Shapes
 {
+    using static SharpVectors.Converters.Shapes.WpfShapeHelper;
+
     public class ShapeRenderingVisitor : IElementVisitor
     {
+        private readonly WpfShapeRenderer renderer;
+        private Canvas currentCanvas;
+
         public ShapeRenderingVisitor(WpfShapeRenderer renderer)
         {
             this.renderer = renderer;
         }
-
-        private WpfShapeRenderer renderer;
-        private Canvas currentCanvas;
 
         public void BeginContainer(ISvgElement element)
         {
@@ -224,12 +225,11 @@ namespace SharpVectors.Renderers.Wpf.Shape
             // able to insert this node, so we first import it...
             if (useElement.OwnerDocument != refEl.OwnerDocument)
             {
-                XmlElement importedNode =
-                    useElement.OwnerDocument.ImportNode(refEl, true) as XmlElement;
+                var importedNode = useElement.OwnerDocument.ImportNode(refEl, true) as XmlElement;
 
                 if (importedNode != null)
                 {
-                    SvgElement importedSvgElement = importedNode as SvgElement;
+                    var importedSvgElement = importedNode as SvgElement;
                     if (importedSvgElement != null)
                     {
                         importedSvgElement.Imported = true;
@@ -354,7 +354,7 @@ namespace SharpVectors.Renderers.Wpf.Shape
             Style style = new Style();
             style.BasedOn = this.renderer.ItemStyle;
 
-            style.Setters.Add(new Setter(System.Windows.Shapes.Shape.SnapsToDevicePixelsProperty, true));
+            style.Setters.Add(new Setter(UIElement.SnapsToDevicePixelsProperty, true));
 
             Rect shapeBounds = Rect.Empty;
             Matrix shapeTransform = Matrix.Identity;

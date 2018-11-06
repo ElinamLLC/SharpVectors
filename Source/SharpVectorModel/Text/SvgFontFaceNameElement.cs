@@ -17,7 +17,7 @@
         #region ISvgFontFaceNameElement Properties
 
         // attribute name = "name" <string>
-        public string Name
+        public string FaceName
         {
             get { return this.GetAttribute("name"); }
             set { this.SetAttribute("name", value); }
