@@ -337,7 +337,7 @@ namespace SharpVectors.Renderers.Wpf
             for (int i = 0; i < itemCount; i++)
             {
                 SvgStopElement stop = (SvgStopElement)stops.Item(i);
-                if (stop == null || stop.Offset == null)
+                if (stop == null)
                 {
                     continue;
                 }
@@ -369,7 +369,7 @@ namespace SharpVectors.Renderers.Wpf
                     color = Color.FromArgb((byte)Convert.ToInt32(alpha), color.R, color.G, color.B);
                 }
 
-                double offset = stop.Offset.AnimVal;
+                double offset = (stop.Offset == null) ? 0 : stop.Offset.AnimVal;
 
                 offset /= 100;
                 offset = Math.Max(lastOffset, offset);

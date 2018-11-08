@@ -54,6 +54,7 @@
     <Compile Include="Shapes\WpfShapeHelper.cs" />
     <Compile Include="Shapes\WpfShapeRenderer.cs" />
     <Compile Include="StreamSvgConverter.cs" />
+    <Compile Include="SvgControl.cs" />
     <Compile Include="Utils\DirectoryCopier.cs" />
     <Compile Include="Utils\DirectoryUtils.cs" />
     <Compile Include="FileSvgConverter.cs" />
@@ -126,6 +127,12 @@
       <Name>SharpVectors.Runtime.Wpf</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

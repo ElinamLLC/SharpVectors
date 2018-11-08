@@ -10,6 +10,12 @@ namespace SharpVectors.Renderers.Wpf
 {
     public sealed class WpfPathRendering : WpfRendering
     {
+        #region Private Fields
+
+        private DrawingGroup _drawGroup;
+
+        #endregion
+
         #region Constructors and Destructor
 
         public WpfPathRendering(SvgElement element)
@@ -30,14 +36,290 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            //WpfDrawingContext context = renderer.Context;
+            WpfDrawingContext context = renderer.Context;
 
             //SetQuality(context);
             //SetTransform(context);
             //SetMask(context);
+
+            _drawGroup = new DrawingGroup();
+
+            SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
+
+            string sVisibility = styleElm.GetPropertyValue("visibility");
+            string sDisplay = styleElm.GetPropertyValue("display");
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            {
+                _drawGroup.Opacity = 0;
+            }
+
+            string elementId = this.GetElementName();
+            if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
+            {
+                SvgObject.SetName(_drawGroup, elementId);
+
+                context.RegisterId(elementId);
+
+                if (context.IncludeRuntime)
+                {
+                    SvgObject.SetId(_drawGroup, elementId);
+                }
+            }
+
+            string elementClass = this.GetElementClass();
+            if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
+            {
+                SvgObject.SetClass(_drawGroup, elementClass);
+            }
+
+            Transform pathTransform = this.Transform;
+            if (pathTransform != null && !pathTransform.Value.IsIdentity)
+            {
+                _drawGroup.Transform = pathTransform;
+            }
+            else
+            {
+                pathTransform = null; // render any identity transform useless...
+            }
+            Geometry pathClip = this.ClipGeometry;
+            if (pathClip != null && !pathClip.IsEmpty())
+            {
+                _drawGroup.ClipGeometry = pathClip;
+            }
+            else
+            {
+                pathClip = null; // render any empty geometry useless...
+            }
+            Brush pathMask = this.Masking;
+            if (pathMask != null)
+            {
+                _drawGroup.OpacityMask = pathMask;
+            }
+
+            if (pathTransform != null || pathClip != null || pathMask != null)
+            {
+                DrawingGroup curGroup = _context.Peek();
+                Debug.Assert(curGroup != null);
+                if (curGroup != null)
+                {
+                    curGroup.Children.Add(_drawGroup);
+                    context.Push(_drawGroup);
+                }
+            }
+            else
+            {
+                _drawGroup = null;
+            }
         }
 
         public override void Render(WpfDrawingRenderer renderer)
+        {
+            base.Render(renderer);
+
+            if (_drawGroup != null)
+            {
+                this.RenderGroup(renderer);
+            }
+            else
+            {
+                this.RenderPath(renderer);
+            }
+        }
+
+        private void RenderGroup(WpfDrawingRenderer renderer)
+        {
+            WpfDrawingContext context = renderer.Context;
+
+            SvgRenderingHint hint = _svgElement.RenderingHint;
+            if (hint != SvgRenderingHint.Shape || hint == SvgRenderingHint.Clipping)
+            {
+                return;
+            }
+            var parentNode = _svgElement.ParentNode;
+            // We do not directly render the contents of the clip-path, unless specifically requested...
+            if (string.Equals(parentNode.LocalName, "clipPath") &&
+                !context.RenderingClipRegion)
+            {
+                return;
+            }
+
+            SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
+
+            string sVisibility = styleElm.GetPropertyValue("visibility");
+            string sDisplay    = styleElm.GetPropertyValue("display");
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            {
+                return;
+            }
+
+            DrawingGroup drawGroup = context.Peek();
+            Debug.Assert(drawGroup != null);
+
+            Geometry geometry = CreateGeometry(_svgElement, context.OptimizePath);
+
+            if (geometry != null && !geometry.IsEmpty())
+            {
+                context.UpdateBounds(geometry.Bounds);
+
+//                SetClip(context);
+
+                WpfSvgPaint fillPaint = new WpfSvgPaint(context, styleElm, "fill");
+
+                string fileValue = styleElm.GetAttribute("fill");
+
+                Brush brush = fillPaint.GetBrush(geometry);
+                bool isFillTransmable = fillPaint.IsFillTransformable;
+
+                WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
+                Pen pen = strokePaint.GetPen(geometry);
+
+                if (brush != null || pen != null)
+                {
+                    Transform transform = this.Transform;
+
+                    GeometryDrawing drawing = new GeometryDrawing(brush, pen, geometry);
+
+                    Brush maskBrush = this.Masking;
+                    Geometry clipGeom = this.ClipGeometry;
+                    if (clipGeom != null || maskBrush != null)
+                    {
+                        //Geometry clipped = Geometry.Combine(geometry, clipGeom,
+                        //    GeometryCombineMode.Exclude, null);
+
+                        //if (clipped != null && !clipped.IsEmpty())
+                        //{
+                        //    geometry = clipped;
+                        //}
+                        DrawingGroup clipMaskGroup = new DrawingGroup();
+
+                        Rect geometryBounds = geometry.Bounds;
+
+                        if (clipGeom != null)
+                        {   
+                            clipMaskGroup.ClipGeometry = clipGeom;
+
+                            SvgUnitType clipUnits = this.ClipUnits;
+                            if (clipUnits == SvgUnitType.ObjectBoundingBox)
+                            {
+                                Rect drawingBounds = geometryBounds;
+
+                                if (transform != null)
+                                {
+                                    drawingBounds = transform.TransformBounds(drawingBounds);
+                                }
+
+                                TransformGroup transformGroup = new TransformGroup();
+
+                                // Scale the clip region (at (0, 0)) and translate to the top-left corner of the target.
+                                transformGroup.Children.Add(new ScaleTransform(drawingBounds.Width, drawingBounds.Height)); 
+                                transformGroup.Children.Add(new TranslateTransform(drawingBounds.X, drawingBounds.Y));
+
+                                clipGeom.Transform = transformGroup;
+                            }
+                            else
+                            {   
+                                if (transform != null)
+                                {    
+                                    clipGeom.Transform = transform;
+                                }
+                            }
+                        }
+                        if (maskBrush != null)
+                        {
+                            DrawingBrush drawingBrush = (DrawingBrush)maskBrush;
+
+                            SvgUnitType maskUnits = this.MaskUnits;
+                            SvgUnitType maskContentUnits = this.MaskContentUnits;
+                            if (maskUnits == SvgUnitType.ObjectBoundingBox)
+                            {
+                                Rect drawingBounds = geometryBounds;
+
+                                if (transform != null)
+                                {
+                                    drawingBounds = transform.TransformBounds(drawingBounds);
+                                }
+                                DrawingGroup maskGroup = drawingBrush.Drawing as DrawingGroup;
+                                if (maskGroup != null)
+                                {
+                                    DrawingCollection maskDrawings = maskGroup.Children;
+                                    for (int i = 0; i < maskDrawings.Count; i++)
+                                    {
+                                        Drawing maskDrawing = maskDrawings[i];
+                                        GeometryDrawing maskGeomDraw = maskDrawing as GeometryDrawing;
+                                        if (maskGeomDraw != null)
+                                        {
+                                            if (maskGeomDraw.Brush != null)
+                                            {
+                                                ConvertColors(maskGeomDraw.Brush);
+                                            }
+                                            if (maskGeomDraw.Pen != null)
+                                            {
+                                                ConvertColors(maskGeomDraw.Pen.Brush);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (maskContentUnits == SvgUnitType.ObjectBoundingBox)
+                                {
+                                    TransformGroup transformGroup = new TransformGroup();
+
+                                    // Scale the clip region (at (0, 0)) and translate to the top-left corner of the target.
+                                    var scaleTransform = new ScaleTransform(drawingBounds.Width, drawingBounds.Height);
+                                    transformGroup.Children.Add(scaleTransform);
+                                    var translateTransform = new TranslateTransform(drawingBounds.X, drawingBounds.Y);
+                                    transformGroup.Children.Add(translateTransform);
+
+                                    Matrix scaleMatrix = new Matrix();
+                                    Matrix translateMatrix = new Matrix();
+
+                                    scaleMatrix.Scale(drawingBounds.Width, drawingBounds.Height);
+                                    translateMatrix.Translate(drawingBounds.X, drawingBounds.Y);
+
+                                    Matrix matrix = Matrix.Multiply(scaleMatrix, translateMatrix);
+                                    //maskBrush.Transform = transformGroup; 
+                                    maskBrush.Transform = new MatrixTransform(matrix); 
+                                }
+                                else
+                                {
+                                    drawingBrush.Viewbox = drawingBounds;
+                                    drawingBrush.ViewboxUnits = BrushMappingMode.Absolute;
+
+                                    drawingBrush.Stretch = Stretch.Uniform;
+
+                                    drawingBrush.Viewport = drawingBounds;
+                                    drawingBrush.ViewportUnits = BrushMappingMode.Absolute;
+                                }
+                            }
+                            else
+                            {
+                                if (transform != null)
+                                {
+                                    maskBrush.Transform = transform;
+                                }
+                            }
+
+                            clipMaskGroup.OpacityMask = maskBrush;
+                        }
+
+                        clipMaskGroup.Children.Add(drawing);
+                        drawGroup.Children.Add(clipMaskGroup);
+                    }
+                    else
+                    {
+                        drawGroup.Children.Add(drawing);
+                    }  
+                }
+            }
+
+            // If this is not the child of a "marker", then try rendering a marker...
+            if (!string.Equals(parentNode.LocalName, "marker"))
+            {
+                RenderMarkers(renderer, styleElm, context);
+            }
+        }
+
+        private void RenderPath(WpfDrawingRenderer renderer)
         {
             WpfDrawingContext context = renderer.Context;
 
@@ -285,6 +567,17 @@ namespace SharpVectors.Renderers.Wpf
             if (!string.Equals(parentNode.LocalName, "marker"))
             {
                 RenderMarkers(renderer, styleElm, context);
+            }
+        }
+
+        public override void AfterRender(WpfDrawingRenderer renderer)
+        {
+            base.AfterRender(renderer);
+
+            WpfDrawingContext context = renderer.Context;
+            if (_drawGroup != null)
+            {
+                context.Pop();
             }
         }
 

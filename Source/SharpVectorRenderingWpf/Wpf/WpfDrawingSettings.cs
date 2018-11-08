@@ -9,21 +9,25 @@ namespace SharpVectors.Renderers.Wpf
     /// <summary>
     /// This provides the options for the drawing/rendering engine of the WPF.
     /// </summary>
+    [Serializable]
     public sealed class WpfDrawingSettings : DependencyObject, ICloneable
     {
         #region Private Fields
 
-        private bool _ensureViewboxSize;
         private bool _textAsGeometry;
         private bool _includeRuntime;
         private bool _optimizePath;
 
-        private long _pixelWidth;
-        private long _pixelHeight;
+        private int _pixelWidth;
+        private int _pixelHeight;
+        private bool _ensureViewboxPosition;
+        private bool _ensureViewboxSize;
 
+        // Formating properties
         private CultureInfo _culture;
         private CultureInfo _neutralCulture;
 
+        // Text rendering fonts properties
         private string            _defaultFontName;
         private static FontFamily _defaultFontFamily;
         private static FontFamily _genericSerif;
@@ -43,15 +47,18 @@ namespace SharpVectors.Renderers.Wpf
         /// </summary>
         public WpfDrawingSettings()
         {
-            _defaultFontName = "Arial Unicode MS";
-            _textAsGeometry  = false;
-            _optimizePath    = true;
-            _includeRuntime  = true;
-            _neutralCulture  = CultureInfo.GetCultureInfo("en-us");
-            _culture         = CultureInfo.GetCultureInfo("en-us");
+            _defaultFontName       = "Arial Unicode MS";
+            _textAsGeometry        = false;
+            _optimizePath          = true;
+            _includeRuntime        = true;
+            _neutralCulture        = CultureInfo.GetCultureInfo("en-us");
+            _culture               = CultureInfo.GetCultureInfo("en-us");
 
-            _pixelWidth      = -1;
-            _pixelHeight     = -1;
+            _pixelWidth            = -1;
+            _pixelHeight           = -1;
+
+            _ensureViewboxSize     = false;
+            _ensureViewboxPosition = true;
         }
 
         /// <summary>
@@ -63,22 +70,31 @@ namespace SharpVectors.Renderers.Wpf
         /// </param>
         public WpfDrawingSettings(WpfDrawingSettings settings)
         {
+            if (settings == null)
+            {
+                return;
+            }
+
             _defaultFontName = settings._defaultFontName;
             _textAsGeometry  = settings._textAsGeometry;
             _optimizePath    = settings._optimizePath;
             _includeRuntime  = settings._includeRuntime;
+
             _neutralCulture  = settings._neutralCulture;
             _culture         = settings._culture;
 
             _pixelWidth      = settings._pixelWidth;
             _pixelHeight     = settings._pixelHeight;
+
+            _ensureViewboxSize = settings._ensureViewboxSize;
+            _ensureViewboxPosition = settings._ensureViewboxPosition;
         }
 
         #endregion
 
         #region Public Properties
 
-        public long PixelWidth
+        public int PixelWidth
         {
             get {
                 return _pixelWidth;
@@ -88,7 +104,7 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public long PixelHeight
+        public int PixelHeight
         {
             get {
                 return _pixelHeight;
@@ -106,9 +122,10 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// Gets or sets a value to indicate saving the original viewbox size when saving images.
+        /// Gets or sets a value to indicate preserving the original viewbox size when saving images.
         /// </summary>
-        /// <value>For image outputs, this will force the original size to be saved.
+        /// <value>
+        /// For image outputs, this will force the original size to be saved.
         /// <para>
         /// The default value is <see langword="false"/>. However, the ImageSvgConverter converted
         /// sets this to <see langword="true"/> by default.
@@ -126,6 +143,29 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _ensureViewboxSize = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value to indicate applying a translate transform to the viewbox to ensure
+        /// it is visible when rendered.
+        /// </summary>
+        /// <value>
+        /// This determines whether a transformation is applied to the rendered drawing. For drawings
+        /// where the top-left position of the viewbox is off the screen, due to negative values, this
+        /// will ensure the drawing is visible.
+        /// <para>
+        /// The default value is <see langword="true"/>. Set this value to <see langword="false"/> if
+        /// you wish to apply your own transformations to the drawings.
+        /// </para>
+        /// </value>
+        public bool EnsureViewboxPosition
+        {
+            get {
+                return _ensureViewboxPosition;
+            }
+            set {
+                _ensureViewboxPosition = value;
             }
         }
 

@@ -171,6 +171,17 @@ namespace SharpVectors.Renderers.Wpf
         public override void Render(WpfDrawingRenderer renderer)
         {
             base.Render(renderer);
+
+            if (_context.Settings.EnsureViewboxSize)
+            {
+                if (_drawGroup.ClipGeometry != null && !_drawGroup.ClipGeometry.Bounds.IsEmpty)
+                {
+                    using (var ctx = _drawGroup.Open())
+                    {
+                        ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), _drawGroup.ClipGeometry.Bounds);
+                    }
+                }
+            }
         }
 
         public override void AfterRender(WpfDrawingRenderer renderer)
@@ -225,28 +236,20 @@ namespace SharpVectors.Renderers.Wpf
 
             Rect bounds = _context.Bounds;
 
+            bounds.Union(_drawGroup.Bounds);
+
             if (_drawGroup.ClipGeometry != null)
             {
                 bounds.Union(_drawGroup.ClipGeometry.Bounds);
             }
-            else
+
+            if (bounds.IsEmpty || _context.Settings == null)
             {
-                bounds.Union(_drawGroup.Bounds);
+                return;
             }
 
-            if (!bounds.IsEmpty)
+            if (_context.Settings.EnsureViewboxPosition)
             {
-                var settings = _context.Settings;
-
-                // Temporal workaround to preserve original svg size
-                if (settings != null && settings.EnsureViewboxSize)
-                {
-                    using (var ctx = _drawGroup.Open())
-                    {
-                        ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
-                    }
-                }
-
                 Point ptTopLeft = bounds.TopLeft;
 
                 if (!Point.Equals(ptTopLeft, new Point(0, 0)))
@@ -282,12 +285,11 @@ namespace SharpVectors.Renderers.Wpf
                 return drawGroup;
             }
 
-            double x = svgElm.X.AnimVal.Value;
-            double y = svgElm.Y.AnimVal.Value;
-            double width = svgElm.Width.AnimVal.Value;
+            double x      = svgElm.X.AnimVal.Value;
+            double y      = svgElm.Y.AnimVal.Value;
+            double width  = svgElm.Width.AnimVal.Value;
             double height = svgElm.Height.AnimVal.Value;
 
-            Rect destRect = new Rect(x, y, width, height);
             Rect clipRect = new Rect(x, y, width, height);
 
             if (!clipRect.IsEmpty)
