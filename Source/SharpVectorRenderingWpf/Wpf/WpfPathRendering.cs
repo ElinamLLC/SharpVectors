@@ -173,6 +173,13 @@ namespace SharpVectors.Renderers.Wpf
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
                 Pen pen = strokePaint.GetPen(geometry);
 
+                if (_paintContext != null)
+                {
+                    _paintContext.Fill   = fillPaint;
+                    _paintContext.Stroke = strokePaint;
+                    _paintContext.Tag    = geometry;
+                }
+
                 if (brush != null || pen != null)
                 {
                     Transform transform = this.Transform;
@@ -368,6 +375,13 @@ namespace SharpVectors.Renderers.Wpf
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
                 Pen pen = strokePaint.GetPen(geometry);
+
+                if (_paintContext != null)
+                {
+                    _paintContext.Fill   = fillPaint;
+                    _paintContext.Stroke = strokePaint;
+                    _paintContext.Tag    = geometry;
+                }
 
                 if (brush != null || pen != null)
                 {
@@ -621,8 +635,9 @@ namespace SharpVectors.Renderers.Wpf
                 //    ConvertColors((brush as DrawingBrush).Drawing);
                 //}
                 else
+                {
                     throw new NotSupportedException();
-
+                }
             }
 
             return alphaValue;
@@ -668,8 +683,9 @@ namespace SharpVectors.Renderers.Wpf
                 //    ConvertColors((brush as DrawingBrush).Drawing);
                 //}
                 else
+                {
                     throw new NotSupportedException();
-
+                }
             }
         }
 

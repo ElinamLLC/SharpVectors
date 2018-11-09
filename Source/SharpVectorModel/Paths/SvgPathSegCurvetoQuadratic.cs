@@ -17,7 +17,7 @@ namespace SharpVectors.Dom.Svg
 
 		public abstract SvgPointF QuadraticX1Y1{get;}
 
-        protected override SqrtPolynomial getArcLengthPolynomial() 
+        protected override SqrtPolynomial GetArcLengthPolynomial() 
         {
             double c2x, c2y, c1x, c1y;
             SvgPointF p1 = PreviousSeg.AbsXY;

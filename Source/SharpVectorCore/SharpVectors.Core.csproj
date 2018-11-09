@@ -106,6 +106,7 @@
     <Compile Include="Svg\BasicTypes\SvgTextPathSpacing.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileElement.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileRule.cs" />
+    <Compile Include="Svg\Painting\SvgMarker.cs" />
     <Compile Include="Svg\SvgTransformF.cs" />
     <Compile Include="Svg\SvgPointF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -11,6 +11,8 @@ namespace SharpVectors.Dom.Svg
 		UriCurrentColor, 
 		UriRgbColor, 
 		UriRgbColorIccColor, 
-		Uri
+		Uri,
+        ContextFill,
+        ContextStroke
 	}
 }

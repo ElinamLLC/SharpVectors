@@ -11,7 +11,7 @@ using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Renderers.Texts
 {
-    public abstract class WpfTextRenderer
+    public abstract class WpfTextRenderer : WpfRendererObject
     {
         #region Protected Fields
 
@@ -25,7 +25,6 @@ namespace SharpVectors.Renderers.Texts
         protected DrawingContext    _textContext;
         protected SvgTextElement    _textElement;
 
-        protected WpfDrawingContext _drawContext;
         protected WpfTextRendering  _textRendering;
 
         #endregion
@@ -53,11 +52,11 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Properties
 
-        public bool IsInitialized
+        public override bool IsInitialized
         {
             get
             {
-                return (_textContext != null && _drawContext != null);
+                return (_textContext != null && _context != null);
             }
         }
 
@@ -76,15 +75,6 @@ namespace SharpVectors.Renderers.Texts
                 return _textElement;
             }
         }
-
-        public WpfDrawingContext DrawContext
-        {
-            get
-            {
-                return _drawContext;
-            }
-        }
-
 
         #endregion
 
@@ -154,13 +144,13 @@ namespace SharpVectors.Renderers.Texts
             }
 
             _textContext = textContext;
-            _drawContext = drawContext;
+            _context     = drawContext;
         }
 
         public virtual void Uninitialize()
         {
             _textContext = null;
-            _drawContext = null;
+            _context     = null;
         }
 
         public abstract void RenderSingleLineText(SvgTextContentElement element,
@@ -429,14 +419,14 @@ namespace SharpVectors.Renderers.Texts
 
         protected Brush GetBrush()
         {
-            WpfSvgPaint paint = new WpfSvgPaint(_drawContext, _textElement, "fill");
+            WpfSvgPaint paint = new WpfSvgPaint(_context, _textElement, "fill");
 
             return paint.GetBrush();
         }
 
         protected Pen GetPen()
         {
-            WpfSvgPaint paint = new WpfSvgPaint(_drawContext, _textElement, "stroke");
+            WpfSvgPaint paint = new WpfSvgPaint(_context, _textElement, "stroke");
 
             return paint.GetPen();
         }
@@ -823,6 +813,15 @@ namespace SharpVectors.Renderers.Texts
         }
 
         #endregion
+
+        #endregion
+
+        #region IDisposable Members
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
 
         #endregion
     }

@@ -31,6 +31,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private HashSet<string> _registeredIds;
 
+        private Dictionary<Guid, WpfSvgPaintContext> _paintContexts;
+
         #endregion
 
         #region Constructors and Destructor
@@ -39,9 +41,10 @@ namespace SharpVectors.Renderers.Wpf
         {
             _quickBounds   = Rect.Empty;
             _isFragment    = isFragment;
+            _settings      = new WpfDrawingSettings();
             _drawStack     = new Stack<DrawingGroup>();
             _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            _settings      = new WpfDrawingSettings();
+            _paintContexts = new Dictionary<Guid, WpfSvgPaintContext>();
         }
 
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
@@ -477,6 +480,44 @@ namespace SharpVectors.Renderers.Wpf
             if (_registeredIds != null)
             {
                 _registeredIds.Remove(elementId);
+            }
+        }
+
+        public bool IsPaintContext(Guid guidId)
+        {
+            if (_paintContexts != null && _paintContexts.Count != 0)
+            {
+                return _paintContexts.ContainsKey(guidId);
+            }
+
+            return false;
+        }
+
+        public WpfSvgPaintContext GetPaintContext(Guid guidId)
+        {
+            if (_paintContexts != null && _paintContexts.Count != 0)
+            {
+                if(_paintContexts.ContainsKey(guidId))
+                {
+                    return _paintContexts[guidId];
+                }
+            }
+            return null;
+        }
+
+        public void RegisterPaintContext(WpfSvgPaintContext paintContext)
+        {
+            if (_paintContexts != null)
+            {
+                _paintContexts[paintContext.Id] = paintContext;
+            }
+        }
+
+        public void UnRegisterPaintContext(Guid guidId)
+        {
+            if (_paintContexts != null)
+            {
+                _paintContexts.Remove(guidId);
             }
         }
 

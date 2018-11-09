@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 {
     public abstract class SvgPathSegCurveto : SvgPathSeg
     {
-        #region constructors
+        #region Constructors
 
         protected SvgPathSegCurveto(SvgPathSegType type) 
             : base(type)
@@ -15,20 +15,16 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Abstract properties
+        #region Public Properties
 
         public abstract override SvgPointF AbsXY { get; }
         public abstract SvgPointF CubicX1Y1 { get; }
         public abstract SvgPointF CubicX2Y2 { get; }
 
-        #endregion
-
-        #region public properties
-
         public override double Length
         {
             get {
-                return this.getArcLengthPolynomial().Simpson(0, 1);
+                return this.GetArcLengthPolynomial().Simpson(0, 1);
             }
         }
 
@@ -50,7 +46,7 @@ namespace SharpVectors.Dom.Svg
         public override double EndAngle
         {
             get {
-                SvgPointF p1 = CubicX2Y2;
+                SvgPointF p1 = this.CubicX2Y2;
                 SvgPointF p2 = AbsXY;
 
                 double dx = p1.X - p2.X;
@@ -64,6 +60,10 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        protected abstract SqrtPolynomial getArcLengthPolynomial();
+        #region Protected Methods
+
+        protected abstract SqrtPolynomial GetArcLengthPolynomial();
+
+        #endregion
     }
 }

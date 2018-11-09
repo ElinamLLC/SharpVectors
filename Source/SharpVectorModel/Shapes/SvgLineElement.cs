@@ -229,6 +229,35 @@ namespace SharpVectors.Dom.Svg
             return 0;
         }
 
+        public ISvgMarker GetMarker(int index)
+        {
+            SvgPointF position = SvgPointF.Empty;
+            if (index == 0)
+            {
+                position = new SvgPointF(X1.AnimVal.Value, Y1.AnimVal.Value);
+            }
+            else if (index == 1)
+            {
+                position = new SvgPointF(X2.AnimVal.Value, Y2.AnimVal.Value);
+            }
+
+            return new SvgMarker(index, position);
+        }
+
+        public bool IsClosed
+        {
+            get {
+                return true;
+            }
+        }
+
+        public bool MayHaveCurves
+        {
+            get {
+                return false;
+            }
+        }
+
         #endregion
     }
 }

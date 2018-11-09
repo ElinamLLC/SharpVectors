@@ -11,6 +11,13 @@ namespace SharpVectors.Dom.Svg
 		{		
 		}
 
+        public override bool IsClosed
+        {
+            get {
+                return false;
+            }
+        }
+
         #region Implementation of IElementVisitorTarget
 
         public void Accept(IElementVisitor visitor)

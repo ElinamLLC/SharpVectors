@@ -100,9 +100,11 @@
     <Compile Include="Wpf\WpfClassVisitor.cs" />
     <Compile Include="Wpf\WpfIDVisitor.cs" />
     <Compile Include="Wpf\WpfLinkVisitor.cs" />
+    <Compile Include="Wpf\WpfRendererObject.cs" />
     <Compile Include="Wpf\WpfSvgPaint.cs" />
     <Compile Include="Wpf\WpfSvgColor.cs" />
     <Compile Include="Wpf\WpfDrawingRenderer.cs" />
+    <Compile Include="Wpf\WpfSvgPaintContext.cs" />
     <Compile Include="Wpf\WpfSvgRendering.cs" />
     <Compile Include="Wpf\WpfFill.cs" />
     <Compile Include="Wpf\WpfGradientFill.cs" />

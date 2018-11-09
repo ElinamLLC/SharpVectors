@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public abstract class WpfVisitor : DependencyObject
+    public abstract class WpfVisitor : WpfRendererObject
     {
         protected WpfVisitor()
         {

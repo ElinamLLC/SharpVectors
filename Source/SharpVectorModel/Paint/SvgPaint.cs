@@ -32,22 +32,35 @@ namespace SharpVectors.Dom.Svg
             bool hasNone = false;
             bool hasCurrentColor = false;
 
+            const StringComparison compareType = StringComparison.OrdinalIgnoreCase;
+
             str = str.Trim();
 
-            if (str.StartsWith("url(", StringComparison.OrdinalIgnoreCase))
+            if (str.StartsWith("url(", compareType))
             {
                 hasUri = true;
-                int endUri = str.IndexOf(")", StringComparison.OrdinalIgnoreCase);
+                int endUri = str.IndexOf(")", compareType);
                 _uri = str.Substring(4, endUri - 4);
                 str = str.Substring(endUri + 1).Trim();
             }
 
-            if (str.Equals("currentColor"))
+            if (str.Equals("currentColor", compareType))
             {
                 base.ParseColor(str);
                 hasCurrentColor = true;
             }
-            else if (str.Equals("none") || str.Equals("transparent") || str.Equals("null"))
+            else if (str.Equals("context-fill", compareType) || str.Equals("contextFill", compareType))
+            {
+                _paintType = SvgPaintType.ContextFill;
+                return;
+            }
+            else if (str.Equals("context-stroke", compareType) || str.Equals("contextStroke", compareType))
+            {
+                _paintType = SvgPaintType.ContextStroke;
+                return;
+            }
+            else if (str.Equals("none", compareType) 
+                || str.Equals("transparent", compareType) || str.Equals("null", compareType))
             {
                 hasNone = true;
             }

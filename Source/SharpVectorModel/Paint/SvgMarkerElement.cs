@@ -173,11 +173,15 @@ namespace SharpVectors.Dom.Svg
                 if (_orientType == null)
                 {
                     string orientAttr = GetAttribute("orient");
-                    if (orientAttr.Equals("auto"))
+                    if (orientAttr.Equals("auto", StringComparison.OrdinalIgnoreCase))
                     {
                         _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Auto);
                     }
-                    else if (orientAttr.Equals("auto-start-reverse"))
+                    else if (orientAttr.Equals("none", StringComparison.OrdinalIgnoreCase))
+                    {
+                        _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Unknown);
+                    }
+                    else if (orientAttr.Equals("auto-start-reverse", StringComparison.OrdinalIgnoreCase))
                     {
                         _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.AutoStartReverse);
                     }

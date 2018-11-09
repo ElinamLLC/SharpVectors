@@ -1,7 +1,7 @@
 using System;
 using System.Text;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -10,12 +10,12 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private static Regex rePathCmd = new Regex(@"(?=[A-DF-Za-df-z])");
-        private static Regex coordSplit = new Regex(@"(\s*,\s*)|(\s+)|((?<=[0-9])(?=-))", RegexOptions.ExplicitCapture);
+        private bool _isClosed;
+        private bool _mayHaveCurves;
 
         private string _pathScript;
         private bool _readOnly;
-        private List<ISvgPathSeg> _segments;
+        private IList<ISvgPathSeg> _segments;
 
         #endregion
 
@@ -30,14 +30,49 @@ namespace SharpVectors.Dom.Svg
                 d = string.Empty;
             }
 
-            _pathScript = d;
+            _isClosed      = false;
+            _mayHaveCurves = false;
+
+            _pathScript    = d;
+            _readOnly      = readOnly;
 
             if (!string.IsNullOrWhiteSpace(d))
             {
-                ParseString(d);
+                SvgPathSegParser parser = new SvgPathSegParser();
+                if (parser.Parse(this, d))
+                {
+                    _isClosed      = parser.IsClosed;
+                    _mayHaveCurves = parser.MayHaveCurves;
+                }
             }
+        }
 
-            _readOnly = readOnly;
+        public SvgPathSegList(ISvgPathSegList pathList)
+        {
+            _pathScript    = string.Empty;
+            _readOnly      = false;
+
+            _isClosed      = false;
+            _mayHaveCurves = false;
+
+            if (pathList == null)
+            {
+                _segments = new List<ISvgPathSeg>();
+            }
+            else
+            {
+                _segments = new List<ISvgPathSeg>(pathList);
+
+                var segList = pathList as SvgPathSegList;
+
+                if (segList != null)
+                {
+                    _pathScript    = segList.PathScript;
+                    _readOnly      = segList.IsReadOnly;
+                    _isClosed      = segList.IsClosed;
+                    _mayHaveCurves = segList.MayHaveCurves;
+                }
+            }
         }
 
         #endregion
@@ -51,282 +86,118 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public bool IsClosed
+        {
+            get {
+                return _isClosed;
+            }
+        }
+
+        public bool MayHaveCurves
+        {
+            get {
+                return _mayHaveCurves;
+            }
+        }
+
+        public SvgPointF[] Points
+        {
+            get {
+                List<SvgPointF> ret = new List<SvgPointF>();
+                foreach (SvgPathSeg seg in _segments)
+                {
+                    ret.Add(seg.AbsXY);
+                }
+
+                return ret.ToArray();
+            }
+        }
+
+        public string PathText
+        {
+            get {
+                return this.ToString();
+            }
+        }
+
         #endregion
 
-        #region Private Methods
+        #region Public members
 
-        private void ParseString(string d)
+        public SvgPathSeg GetPreviousSegment(SvgPathSeg seg)
         {
-            ISvgPathSeg seg;
-            string[] segs = rePathCmd.Split(d);
-
-            foreach (string s in segs)
+            int index = _segments.IndexOf(seg);
+            if (index == -1)
             {
-                string segment = s.Trim();
-                if (segment.Length > 0)
-                {
-                    char cmd = segment.ToCharArray(0, 1)[0];
-                    double[] coords = getCoords(segment);
-                    int length = coords.Length;
-                    switch (cmd)
-                    {
-                        #region moveto
-                        case 'M':
-                            for (int i = 0; i < length; i += 2)
-                            {
-                                if (i == 0)
-                                {
-                                    seg = new SvgPathSegMovetoAbs(coords[i], coords[i + 1]);
-                                }
-                                else
-                                {
-                                    seg = new SvgPathSegLinetoAbs(coords[i], coords[i + 1]);
-                                }
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'm':
-                            for (int i = 0; i < length; i += 2)
-                            {
-                                if (i == 0)
-                                {
-                                    seg = new SvgPathSegMovetoRel(coords[i], coords[i + 1]);
-                                }
-                                else
-                                {
-                                    seg = new SvgPathSegLinetoRel(coords[i], coords[i + 1]);
-                                }
-                                AppendItem(seg);
-                            }
-                            break;
-                        #endregion
-                        #region lineto
-                        case 'L':
-                            for (int i = 0; i < length; i += 2)
-                            {
-                                seg = new SvgPathSegLinetoAbs(coords[i], coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'l':
-                            for (int i = 0; i < length; i += 2)
-                            {
-                                seg = new SvgPathSegLinetoRel(coords[i], coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'H':
-                            for (int i = 0; i < length; i++)
-                            {
-                                seg = new SvgPathSegLinetoHorizontalAbs(coords[i]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'h':
-                            for (int i = 0; i < length; i++)
-                            {
-                                seg = new SvgPathSegLinetoHorizontalRel(coords[i]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'V':
-                            for (int i = 0; i < length; i++)
-                            {
-                                seg = new SvgPathSegLinetoVerticalAbs(coords[i]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'v':
-                            for (int i = 0; i < length; i++)
-                            {
-                                seg = new SvgPathSegLinetoVerticalRel(coords[i]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        #endregion
-                        #region beziers
-                        case 'C':
-                            for (int i = 0; i < length; i += 6)
-                            {
-                                seg = new SvgPathSegCurvetoCubicAbs(
-                                    coords[i + 4],
-                                    coords[i + 5],
-                                    coords[i],
-                                    coords[i + 1],
-                                    coords[i + 2],
-                                    coords[i + 3]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'c':
-                            for (int i = 0; i < length; i += 6)
-                            {
-                                seg = new SvgPathSegCurvetoCubicRel(
-                                    coords[i + 4],
-                                    coords[i + 5],
-                                    coords[i],
-                                    coords[i + 1],
-                                    coords[i + 2],
-                                    coords[i + 3]);
+                throw new Exception("Path segment not part of this list");
+            }
+            if (index == 0)
+            {
+                return null;
+            }
+            return (SvgPathSeg)GetItem(index - 1);
+        }
 
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'S':
-                            for (int i = 0; i < length; i += 4)
-                            {
-                                seg = new SvgPathSegCurvetoCubicSmoothAbs(
-                                    coords[i + 2],
-                                    coords[i + 3],
-                                    coords[i],
-                                    coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 's':
-                            for (int i = 0; i < length; i += 4)
-                            {
-                                seg = new SvgPathSegCurvetoCubicSmoothRel(
-                                    coords[i + 2],
-                                    coords[i + 3],
-                                    coords[i],
-                                    coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'Q':
-                            for (int i = 0; i < length; i += 4)
-                            {
-                                seg = new SvgPathSegCurvetoQuadraticAbs(
-                                    coords[i + 2],
-                                    coords[i + 3],
-                                    coords[i],
-                                    coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'q':
-                            for (int i = 0; i < length; i += 4)
-                            {
-                                seg = new SvgPathSegCurvetoQuadraticRel(
-                                    coords[i + 2],
-                                    coords[i + 3],
-                                    coords[i],
-                                    coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 'T':
-                            for (int i = 0; i < length; i += 2)
-                            {
-                                seg = new SvgPathSegCurvetoQuadraticSmoothAbs(
-                                    coords[i], coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        case 't':
-                            for (int i = 0; i < length; i += 2)
-                            {
-                                seg = new SvgPathSegCurvetoQuadraticSmoothRel(
-                                    coords[i], coords[i + 1]);
-                                AppendItem(seg);
-                            }
-                            break;
-                        #endregion
-                        #region arcs
-                        case 'A':
-                        case 'a':
-                            for (int i = 0; i < length; i += 7)
-                            {
-                                if (cmd == 'A')
-                                {
-                                    seg = new SvgPathSegArcAbs(
-                                        coords[i + 5],
-                                        coords[i + 6],
-                                        coords[i],
-                                        coords[i + 1],
-                                        coords[i + 2],
-                                        (!coords[i + 3].Equals(0)),
-                                        (!coords[i + 4].Equals(0)));
-                                }
-                                else
-                                {
-                                    seg = new SvgPathSegArcRel(
-                                        coords[i + 5],
-                                        coords[i + 6],
-                                        coords[i],
-                                        coords[i + 1],
-                                        coords[i + 2],
-                                        (!coords[i + 3].Equals(0)),
-                                        (!coords[i + 4].Equals(0)));
-                                }
-                                AppendItem(seg);
-                            }
-                            break;
-                        #endregion
-                        #region close
-                        case 'z':
-                        case 'Z':
-                            seg = new SvgPathSegClosePath();
-                            AppendItem(seg);
-                            break;
-                        #endregion
-                        #region Unknown path command
-                        default:
-                            throw new ApplicationException(String.Format("Unknown path command - ({0})", cmd));
-                            #endregion
-                    }
+        public SvgPathSeg GetNextSegment(SvgPathSeg seg)
+        {
+            int index = _segments.IndexOf(seg);
+            if (index == -1)
+            {
+                throw new Exception("Path segment not part of this list");
+            }
+            if (index == _segments.Count - 1)
+            {
+                return null;
+            }
+            return (SvgPathSeg)this[index + 1];
+        }
+
+        public double GetStartAngle(int index)
+        {
+            return this[index].StartAngle;
+        }
+
+        public double GetEndAngle(int index)
+        {
+            return this[index].EndAngle;
+        }
+
+        public double GetTotalLength()
+        {
+            double result = 0;
+            foreach (SvgPathSeg segment in _segments)
+            {
+                result += segment.Length;
+            }
+            return result;
+        }
+
+        public int GetPathSegAtLength(double distance)
+        {
+            double result = 0;
+            foreach (SvgPathSeg segment in _segments)
+            {
+                result += segment.Length;
+                if (result > distance)
+                {
+                    return segment.Index;
                 }
             }
+            // distance was to big, return last item index
+            // TODO: is this correct?
+            return NumberOfItems - 1;
         }
 
-        private double[] getCoords(String segment)
+        public override string ToString()
         {
-            double[] coords = new double[0];
-
-            segment = segment.Substring(1);
-            segment = segment.Trim();
-            segment = segment.Trim(new char[] { ',' });
-
-            if (segment.Length > 0)
+            StringBuilder sb = new StringBuilder();
+            foreach (SvgPathSeg seg in _segments)
             {
-                string[] sCoords = coordSplit.Split(segment);
-
-                coords = new double[sCoords.Length];
-                for (int i = 0; i < sCoords.Length; i++)
-                {
-                    coords[i] = SvgNumber.ParseNumber(sCoords[i]);
-                }
+                sb.Append(seg.PathText);
             }
-            return coords;
+            return sb.ToString();
         }
 
-        private void setListAndIndex(SvgPathSeg newItem, int index)
-        {
-            if (newItem != null)
-            {
-                newItem.SetList(this);
-                newItem.SetIndex(index);
-            }
-            else
-            {
-                throw new SvgException(SvgExceptionType.SvgWrongTypeErr,
-                    "Can only add SvgPathSeg subclasses to ISvgPathSegList");
-            }
-        }
-
-        private void changeIndexes(int startAt, int diff)
-        {
-            int count = _segments.Count;
-            for (int i = startAt; i < count; i++)
-            {
-                SvgPathSeg seg = _segments[i] as SvgPathSeg;
-                if (seg != null)
-                {
-                    seg.SetIndexWithDiff(diff);
-                }
-            }
-        }
         #endregion
 
         #region ISvgPathSegList Members
@@ -363,13 +234,14 @@ namespace SharpVectors.Dom.Svg
 
             return _segments[index];
         }
+
         public ISvgPathSeg this[int index]
         {
             get {
                 return GetItem(index);
             }
             set {
-                ReplaceItem(value, index);
+                this.ReplaceItem(value, index);
             }
         }
 
@@ -426,95 +298,96 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Public members
+        #region IList<ISvgPathSeg> Members
 
-        public SvgPointF[] Points
+        public int Count
         {
             get {
-                List<SvgPointF> ret = new List<SvgPointF>();
-                foreach (SvgPathSeg seg in _segments)
-                {
-                    ret.Add(seg.AbsXY);
-                }
-
-                return ret.ToArray();
+                return this._segments.Count;
             }
         }
 
-        internal SvgPathSeg GetPreviousSegment(SvgPathSeg seg)
-        {
-            int index = _segments.IndexOf(seg);
-            if (index == -1)
-            {
-                throw new Exception("Path segment not part of this list");
-            }
-            if (index == 0)
-            {
-                return null;
-            }
-            return (SvgPathSeg)GetItem(index - 1);
-        }
-
-        internal SvgPathSeg GetNextSegment(SvgPathSeg seg)
-        {
-            int index = _segments.IndexOf(seg);
-            if (index == -1)
-            {
-                throw new Exception("Path segment not part of this list");
-            }
-            if (index == _segments.Count - 1)
-            {
-                return null;
-            }
-            return (SvgPathSeg)this[index + 1];
-        }
-
-        public double GetStartAngle(int index)
-        {
-            return ((SvgPathSeg)this[index]).StartAngle;
-        }
-
-        public double GetEndAngle(int index)
-        {
-            return ((SvgPathSeg)this[index]).EndAngle;
-        }
-
-        public string PathText
+        public bool IsReadOnly
         {
             get {
-                StringBuilder sb = new StringBuilder();
-                foreach (SvgPathSeg seg in _segments)
-                {
-                    sb.Append(seg.PathText);
-                }
-                return sb.ToString();
+                return this._segments.IsReadOnly;
             }
         }
 
-        internal double GetTotalLength()
+        public void Add(ISvgPathSeg item)
         {
-            double result = 0;
-            foreach (SvgPathSeg segment in _segments)
-            {
-                result += segment.Length;
-            }
-            return result;
+            this.AppendItem(item);
         }
 
-        internal int GetPathSegAtLength(double distance)
+        public bool Contains(ISvgPathSeg item)
         {
-            double result = 0;
-            foreach (SvgPathSeg segment in _segments)
+            return this._segments.Contains(item);
+        }
+
+        public void CopyTo(ISvgPathSeg[] array, int arrayIndex)
+        {
+            this._segments.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<ISvgPathSeg> GetEnumerator()
+        {
+            return this._segments.GetEnumerator();
+        }
+
+        public int IndexOf(ISvgPathSeg item)
+        {
+            return this._segments.IndexOf(item);
+        }
+
+        public void Insert(int index, ISvgPathSeg item)
+        {
+            this.ReplaceItem(item, index);
+        }
+
+        public bool Remove(ISvgPathSeg item)
+        {
+            return this._segments.Remove(item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            this.RemoveItem(index);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this._segments.GetEnumerator();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void setListAndIndex(SvgPathSeg newItem, int index)
+        {
+            if (newItem != null)
             {
-                result += segment.Length;
-                if (result > distance)
+                newItem.SetList(this);
+                newItem.SetIndex(index);
+            }
+            else
+            {
+                throw new SvgException(SvgExceptionType.SvgWrongTypeErr,
+                    "Can only add SvgPathSeg subclasses to ISvgPathSegList");
+            }
+        }
+
+        private void changeIndexes(int startAt, int diff)
+        {
+            int count = _segments.Count;
+            for (int i = startAt; i < count; i++)
+            {
+                SvgPathSeg seg = _segments[i] as SvgPathSeg;
+                if (seg != null)
                 {
-                    return segment.Index;
+                    seg.SetIndexWithDiff(diff);
                 }
             }
-            // distance was to big, return last item index
-            // TODO: is this correct?
-            return NumberOfItems - 1;
         }
 
         #endregion

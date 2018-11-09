@@ -12,6 +12,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
+        private Guid _uniqueId;
+
         private bool _isImported;
         private SvgElement _importNode;
         private SvgDocument _importDocument;
@@ -24,11 +26,19 @@ namespace SharpVectors.Dom.Svg
         public SvgElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
+            _uniqueId = Guid.NewGuid();
         }
 
         #endregion
 
         #region Public Properties
+
+        public Guid UniqueId
+        {
+            get {
+                return _uniqueId;
+            }
+        }
 
         public bool Imported
         {

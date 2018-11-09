@@ -8,13 +8,21 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Rename: WpfDocumentRenderer
+    /// </remarks>
     public sealed class WpfRenderingHelper : DependencyObject
     {
         #region Private Fields
 
         private string _currentLang;
         private string _currentLangName;
+
         private WpfDrawingRenderer _renderer;
+
         private IDictionary<ISvgElement, WpfRenderingBase> _rendererMap;
 
         #endregion

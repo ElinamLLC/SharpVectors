@@ -55,7 +55,7 @@ namespace SharpVectors.Renderers.Texts
                 return;
             }
 
-            PathGeometry pathGeometry = WpfRendering.CreateGeometry(targetPath, true) as PathGeometry;
+            PathGeometry pathGeometry = CreateGeometry(targetPath, true) as PathGeometry;
             if (pathGeometry == null)
             {
                 return;
@@ -191,13 +191,13 @@ namespace SharpVectors.Renderers.Texts
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
             // Fix the use of Postscript fonts...
-            WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
+            WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
-                    currentFamily, _drawContext);
+                    currentFamily, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -207,10 +207,10 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            WpfSvgPaint fillPaint = new WpfSvgPaint(_drawContext, element, "fill");
+            WpfSvgPaint fillPaint = new WpfSvgPaint(_context, element, "fill");
             Brush textBrush = fillPaint.GetBrush();
 
-            WpfSvgPaint strokePaint = new WpfSvgPaint(_drawContext, element, "stroke");
+            WpfSvgPaint strokePaint = new WpfSvgPaint(_context, element, "stroke");
             Pen pen = strokePaint.GetPen();
 
             TextDecorationCollection textDecors = GetTextDecoration(element);

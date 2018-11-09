@@ -43,13 +43,13 @@ namespace SharpVectors.Renderers.Texts
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
             // Fix the use of Postscript fonts...
-            WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
+            WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily, _drawContext);
+                    currentFamily, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -59,10 +59,10 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            WpfSvgPaint fillPaint   = new WpfSvgPaint(_drawContext, element, "fill");
+            WpfSvgPaint fillPaint   = new WpfSvgPaint(_context, element, "fill");
             Brush textBrush = fillPaint.GetBrush();
 
-            WpfSvgPaint strokePaint = new WpfSvgPaint(_drawContext, element, "stroke");
+            WpfSvgPaint strokePaint = new WpfSvgPaint(_context, element, "stroke");
             Pen textPen = strokePaint.GetPen();
 
             if (textBrush == null && textPen == null)
@@ -113,7 +113,7 @@ namespace SharpVectors.Renderers.Texts
                 for (int i = 0; i < text.Length; i++)
                 {
                     FormattedText formattedText = new FormattedText(new string(text[i], 1), 
-                        _drawContext.CultureInfo, stringFormat.Direction, 
+                        _context.CultureInfo, stringFormat.Direction, 
                         new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
                         emSize, textBrush);
 
@@ -161,7 +161,7 @@ namespace SharpVectors.Renderers.Texts
 
                     Point textPoint = new Point(textStart.X, textStart.Y - yCorrection);
 
-                    if (textPen != null || _drawContext.TextAsGeometry)
+                    if (textPen != null || _context.TextAsGeometry)
                     {
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
@@ -220,7 +220,7 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {   
-                FormattedText formattedText = new FormattedText(text, _drawContext.CultureInfo,
+                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
                     stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
                     emSize, textBrush);
 
@@ -250,7 +250,7 @@ namespace SharpVectors.Renderers.Texts
                     _textContext.PushTransform(rotateAt);
                 }
 
-                if (textPen != null || _drawContext.TextAsGeometry)
+                if (textPen != null || _context.TextAsGeometry)
                 {
                     Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                     if (textGeometry != null && !textGeometry.IsEmpty())
@@ -304,13 +304,13 @@ namespace SharpVectors.Renderers.Texts
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
             // Fix the use of Postscript fonts...
-            WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
+            WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily,_drawContext);
+                    currentFamily,_context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -320,10 +320,10 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            WpfSvgPaint fillPaint = new WpfSvgPaint(_drawContext, element, "fill");
+            WpfSvgPaint fillPaint = new WpfSvgPaint(_context, element, "fill");
             Brush textBrush = fillPaint.GetBrush();
 
-            WpfSvgPaint strokePaint = new WpfSvgPaint(_drawContext, element, "stroke");
+            WpfSvgPaint strokePaint = new WpfSvgPaint(_context, element, "stroke");
             Pen textPen = strokePaint.GetPen();
 
             if (textBrush == null && textPen == null)
@@ -385,7 +385,7 @@ namespace SharpVectors.Renderers.Texts
                 for (int i = 0; i < text.Length; i++)
                 {
                     FormattedText formattedText = new FormattedText(new string(text[i], 1), 
-                        _drawContext.CultureInfo, stringFormat.Direction, 
+                        _context.CultureInfo, stringFormat.Direction, 
                         new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
                         emSize, textBrush);
 
@@ -439,7 +439,7 @@ namespace SharpVectors.Renderers.Texts
 
                     Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
-                    if (textPen != null || _drawContext.TextAsGeometry)
+                    if (textPen != null || _context.TextAsGeometry)
                     {
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
@@ -498,7 +498,7 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {   
-                FormattedText formattedText = new FormattedText(text, _drawContext.CultureInfo,
+                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
                     stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
                     emSize, textBrush);
 
@@ -539,7 +539,7 @@ namespace SharpVectors.Renderers.Texts
                     _textContext.PushTransform(rotateAt);
                 }
 
-                if (textPen != null || _drawContext.TextAsGeometry)
+                if (textPen != null || _context.TextAsGeometry)
                 {
                     Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                     if (textGeometry != null && !textGeometry.IsEmpty())

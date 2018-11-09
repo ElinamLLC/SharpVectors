@@ -23,6 +23,9 @@ namespace SharpVectors.Renderers.Wpf
         private Matrix _matrix;
         private DrawingGroup _drawGroup;
         private SvgMarkerElement _markerElement;
+        private SvgStyleableElement _hostElement;
+
+        private PathFigureCollection _pathFigures;
 
         #endregion
 
@@ -42,6 +45,11 @@ namespace SharpVectors.Renderers.Wpf
         public override void BeforeRender(WpfDrawingRenderer renderer)
         {
             base.BeforeRender(renderer);
+
+            if (_hostElement != null && _paintContext != null)
+            {
+                _paintContext.TargetId = _hostElement.UniqueId;
+            }
 
             _matrix = Matrix.Identity;
 
@@ -223,9 +231,44 @@ namespace SharpVectors.Renderers.Wpf
         public void RenderMarker(WpfDrawingRenderer renderer, WpfDrawingContext gr,
             SvgMarkerPosition markerPos, SvgStyleableElement refElement)
         {
+            _hostElement = refElement;
+            if (_hostElement != null)
+            {
+                var paintContext = gr.GetPaintContext(_hostElement.UniqueId);
+                if (paintContext != null)
+                {
+                    PathGeometry pathGeometry = paintContext.Tag as PathGeometry;
+
+                    if (pathGeometry != null)
+                    {
+                        _pathFigures = pathGeometry.Figures;
+                    }
+                }
+            }
+
             ISharpMarkerHost markerHostElm = (ISharpMarkerHost)refElement;
 
             SvgPointF[] vertexPositions = markerHostElm.MarkerPositions;
+            if (vertexPositions == null)
+            {
+                return;
+            }
+
+            bool mayHaveCurves = markerHostElm.MayHaveCurves;
+
+            //const float TestRadius = 4;
+            //Pen testPen = new Pen(Brushes.Red, 1);
+            //DrawingGroup currentGroup = gr.Peek();
+            //foreach (var pt in vertexPositions)
+            //{
+            //    EllipseGeometry geometry = new EllipseGeometry(new Point(pt.X, pt.Y),
+            //        TestRadius, TestRadius);
+
+            //    GeometryDrawing drawing = new GeometryDrawing(null, testPen, geometry);
+
+            //    currentGroup.Children.Add(drawing);
+            //}
+
             int start = 0;
             int len   = 0;
 
@@ -295,6 +338,11 @@ namespace SharpVectors.Renderers.Wpf
                                     angle = angleMarker;
                                 }
                             }
+                            if (mayHaveCurves)
+                            {
+                                angle = this.GetAngleAt(start, angle, markerPos, markerHostElm);
+                            }
+
                             // A value of 'auto-start-reverse' means the same as 'auto' except that for a 
                             // marker placed by 'marker-start', the orientation is 180° different from 
                             // the orientation as determined by 'auto'.
@@ -306,10 +354,15 @@ namespace SharpVectors.Renderers.Wpf
                         case SvgMarkerPosition.Mid:
                             //angle = (markerHostElm.GetEndAngle(i) + markerHostElm.GetStartAngle(i + 1)) / 2;
                             angle = SvgNumber.CalcAngleBisection(markerHostElm.GetEndAngle(i), markerHostElm.GetStartAngle(i + 1));
+                            if (mayHaveCurves)
+                            {
+                                angle = this.GetAngleAt(i, angle, markerPos, markerHostElm);
+                            }
+
                             break;
                         default:
                             angle = markerHostElm.GetEndAngle(i - 1);
-                            //angle = markerHostElm.GetEndAngle(i);
+                            //double angle2 = markerHostElm.GetEndAngle(i);
                             if (vertexPositions.Length >= 2)
                             {
                                 SvgPointF pMarkerPoint1 = vertexPositions[start - 1];
@@ -321,6 +374,10 @@ namespace SharpVectors.Renderers.Wpf
                                 {
                                     angle = angleMarker;
                                 }
+                            }
+                            if (mayHaveCurves)
+                            {
+                                angle = this.GetAngleAt(start - 1, angle, markerPos, markerHostElm);
                             }
                             break;
                     }
@@ -394,322 +451,102 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public void RenderMarker0(WpfDrawingRenderer renderer, WpfDrawingContext gr,
-            SvgMarkerPosition markerPos, SvgStyleableElement refElement)
+        private double GetAngleAt(int index, double angle, SvgMarkerPosition position, ISharpMarkerHost markerHost)
         {
-            //PathGeometry g;
-            //g.GetPointAtFractionLength(
-
-            ISharpMarkerHost markerHostElm = (ISharpMarkerHost)refElement;
-            SvgMarkerElement markerElm = (SvgMarkerElement)_svgElement;
-
-            SvgPointF[] vertexPositions = markerHostElm.MarkerPositions;
-            int start;
-            int len;
-
-            // Choose which part of the position array to use
-            switch (markerPos)
+            if (markerHost == null || _pathFigures == null || _pathFigures.Count == 0)
             {
-                case SvgMarkerPosition.Start:
-                    start = 0;
-                    len = 1;
-                    break;
-                case SvgMarkerPosition.Mid:
-                    start = 1;
-                    len = vertexPositions.Length - 2;
-                    break;
-                default:
-                    // == MarkerPosition.End
-                    start = vertexPositions.Length - 1;
-                    len = 1;
-                    break;
+                return angle;
             }
+            var marker = markerHost.GetMarker(index + 1);
+            //if (marker == null || marker.IsCurve == false)
+            //{
+            //    return angle;
+            //}
 
-            for (int i = start; i < start + len; i++)
+            PathGeometry pathFlattened = null;
+            if (_pathFigures.Count != 1)
             {
-                SvgPointF point = vertexPositions[i];
-
-                Matrix m = GetTransformMatrix(_svgElement);
-
-                //GraphicsContainer gc = gr.BeginContainer();
-
-                this.BeforeRender(renderer);
-
-                //gr.TranslateTransform(point.X, point.Y);
-
-                //PAUL:
-                //m.Translate(point.X, point.Y);
-
-                if (markerElm.OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
+                if (index < _pathFigures.Count)
                 {
-                    m.Rotate(markerElm.OrientAngle.AnimVal.Value);
-                    //gr.RotateTransform((double)markerElm.OrientAngle.AnimVal.Value);
+                    PathGeometry path = new PathGeometry(new PathFigure[] { _pathFigures[index] });
+                    pathFlattened = path.GetFlattenedPathGeometry();
+                }
+            }
+            else
+            {
+                PathFigure figureAt = _pathFigures[0];
+
+                if (figureAt.Segments.Count == 1)
+                {
+                    PathGeometry path = new PathGeometry(new PathFigure[] { figureAt });
+                    pathFlattened = path.GetFlattenedPathGeometry();
                 }
                 else
                 {
-                    double angle;
-
-                    switch (markerPos)
+                    if (marker.IsCurve == false)
                     {
-                        case SvgMarkerPosition.Start:
-                            angle = markerHostElm.GetStartAngle(i + 1);
-                            break;
-                        case SvgMarkerPosition.Mid:
-                            //angle = (markerHostElm.GetEndAngle(i) + markerHostElm.GetStartAngle(i + 1)) / 2;
-                            angle = SvgNumber.CalcAngleBisection(markerHostElm.GetEndAngle(i), markerHostElm.GetStartAngle(i + 1));
-                            break;
-                        default:
-                            angle = markerHostElm.GetEndAngle(i);
-                            break;
+                        return angle;
                     }
-                    //gr.RotateTransform(angle);
-                    m.Rotate(angle);
-                }
 
-                if (markerElm.MarkerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
-                {
-                    string propValue = refElement.GetPropertyValue("stroke-width");
-                    if (propValue.Length == 0)
-                        propValue = "1";
-
-                    SvgLength strokeWidthLength = new SvgLength("stroke-width", propValue, refElement, SvgLengthDirection.Viewport);
-                    double strokeWidth = strokeWidthLength.Value;
-                    //gr.ScaleTransform(strokeWidth, strokeWidth);
-                    m.Scale(strokeWidth, strokeWidth);
-                }
-
-                SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
-                double[] translateAndScale = spar.FitToViewBox(
-                    (SvgRect)markerElm.ViewBox.AnimVal, new SvgRect(0, 0,
-                        markerElm.MarkerWidth.AnimVal.Value, markerElm.MarkerHeight.AnimVal.Value));
-
-
-                //PAUL:
-                //m.Translate(-(double)markerElm.RefX.AnimVal.Value * translateAndScale[2], -(double)markerElm.RefY.AnimVal.Value * translateAndScale[3]);
-
-                //PAUL:
-                m.Scale(translateAndScale[2], translateAndScale[3]);
-                m.Translate(point.X, point.Y);
-
-                //Matrix oldTransform = TransformMatrix;
-                //TransformMatrix = m;
-                //try
-                //{
-                //newTransform.Append(m);
-                //TransformGroup tg = new TransformGroup();
-
-                //renderer.Canvas.re
-
-                //gr.TranslateTransform(
-                //    -(double)markerElm.RefX.AnimVal.Value * translateAndScale[2],
-                //    -(double)markerElm.RefY.AnimVal.Value * translateAndScale[3]
-                //    );
-
-                //gr.ScaleTransform(translateAndScale[2], translateAndScale[3]);
-
-                renderer.RenderChildren(markerElm);
-                //                markerElm.RenderChildren(renderer);
-                //}
-                //finally
-                //{
-                //    TransformMatrix = oldTransform;
-                //}
-                //    //gr.EndContainer(gc);
-
-                _matrix = m;
-                this.Render(renderer);
-
-                //gr.EndContainer(gc);
-
-                this.AfterRender(renderer);
-            }
-        }
-
-        public void RenderMarker2(WpfDrawingRenderer renderer, WpfDrawingContext gr,
-            SvgMarkerPosition markerPos, SvgStyleableElement refElement)
-        {
-            ISharpMarkerHost markerHostElm = (ISharpMarkerHost)refElement;
-            SvgMarkerElement markerElm = (SvgMarkerElement)_svgElement;
-
-            SvgPointF[] vertexPositions = markerHostElm.MarkerPositions;
-            int start;
-            int len;
-
-            // Choose which part of the position array to use
-            switch (markerPos)
-            {
-                case SvgMarkerPosition.Start:
-                    start = 0;
-                    len = 1;
-                    break;
-                case SvgMarkerPosition.Mid:
-                    start = 1;
-                    len = vertexPositions.Length - 2;
-                    break;
-                default:
-                    // == MarkerPosition.End
-                    start = vertexPositions.Length - 1;
-                    len = 1;
-                    break;
-            }
-
-            for (int i = start; i < start + len; i++)
-            {
-                SvgPointF point = vertexPositions[i];
-
-                //GdiGraphicsContainer gc = gr.BeginContainer();
-
-                this.BeforeRender(renderer);
-
-                //Matrix matrix = Matrix.Identity;
-
-                Matrix matrix = GetTransformMatrix(_svgElement);
-
-                if (markerElm.OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
-                {
-                    matrix.Rotate(markerElm.OrientAngle.AnimVal.Value);
-                }
-                else
-                {
-                    double angle = 0;
-
-                    switch (markerPos)
+                    if (index < figureAt.Segments.Count)
                     {
-                        case SvgMarkerPosition.Start:
-                            angle = markerHostElm.GetStartAngle(i + 1);
-                            break;
-                        case SvgMarkerPosition.Mid:
-                            //angle = (markerHostElm.GetEndAngle(i) + markerHostElm.GetStartAngle(i + 1)) / 2;
-                            angle = SvgNumber.CalcAngleBisection(markerHostElm.GetEndAngle(i), markerHostElm.GetStartAngle(i + 1));
-                            break;
-                        default:
-                            angle = markerHostElm.GetEndAngle(i);
-                            break;
+                        var pathSegment = figureAt.Segments[index];
+
+                        Point startPoint = new Point(0, 0);
+                        if (marker != null)
+                        {
+                            var pathSet = marker.Segment;
+
+                            if (pathSet != null && pathSet.Limits != null && pathSet.Limits.Length == 2)
+                            {
+                                SvgPointF point = pathSet.Limits[0];
+                                startPoint = new Point(point.ValueX, point.ValueY);
+                            }
+                        }
+
+                        //var markerPrevious = markerHost.GetMarker(index);
+                        //if (markerPrevious != null)
+                        //{
+                        //    var previousPathSet = markerPrevious.Segment;
+
+                        //    if (previousPathSet != null && previousPathSet.Limits != null 
+                        //        && previousPathSet.Limits.Length == 2)
+                        //    {
+
+                        //    }
+                        //}
+
+                        PathFigure targetFigure = new PathFigure(startPoint, new PathSegment[] { pathSegment }, false);
+                        PathGeometry path = new PathGeometry(new PathFigure[] { targetFigure });
+                        pathFlattened = path.GetFlattenedPathGeometry();
                     }
-                    matrix.Rotate(angle);
                 }
-
-                if (markerElm.MarkerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
-                {
-                    SvgLength strokeWidthLength = new SvgLength(refElement,
-                        "stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, "1");
-                    double strokeWidth = strokeWidthLength.Value;
-                    matrix.Scale(strokeWidth, strokeWidth);
-                }
-
-                SvgPreserveAspectRatio spar =
-                    (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
-                double[] translateAndScale = spar.FitToViewBox((SvgRect)markerElm.ViewBox.AnimVal,
-                    new SvgRect(0, 0, markerElm.MarkerWidth.AnimVal.Value,
-                        markerElm.MarkerHeight.AnimVal.Value));
-
-
-                matrix.Translate(-markerElm.RefX.AnimVal.Value * translateAndScale[2],
-                    -markerElm.RefY.AnimVal.Value * translateAndScale[3]);
-
-                matrix.Scale(translateAndScale[2], translateAndScale[3]);
-
-                matrix.Translate(point.X, point.Y);
-
-                _matrix = matrix;
-                this.Render(renderer);
-
-                //Clip(gr);
-
-                renderer.RenderChildren(markerElm);
-
-                //gr.EndContainer(gc);
-
-                this.AfterRender(renderer);
             }
-        }
 
-        public void RenderMarkerEx0(WpfDrawingRenderer renderer, WpfDrawingContext gr,
-            SvgMarkerPosition markerPos, SvgStyleableElement refElement)
-        {
-            //ISharpMarkerHost markerHostElm = (ISharpMarkerHost)refElement;
-            //SvgMarkerElement markerElm     = (SvgMarkerElement)element;
+            if (pathFlattened != null)
+            {
+                Point locationAt;
+                Point tagentAt;
 
-            //SvgPointF[] vertexPositions = markerHostElm.MarkerPositions;
-            //int start;
-            //int len;
+                double progress = 1;
+                switch (position)
+                {
+                    case SvgMarkerPosition.End:
+                        progress = 1;
+                        break;
+                    case SvgMarkerPosition.Start:
+                        progress = 0;
+                        break;
+                    case SvgMarkerPosition.Mid:
+                        progress = 0;
+                        break;
+                }
+                pathFlattened.GetPointAtFractionLength(progress, out locationAt, out tagentAt);
 
-            //// Choose which part of the position array to use
-            //switch (markerPos)
-            //{
-            //    case SvgMarkerPosition.Start:
-            //        start = 0;
-            //        len   = 1;
-            //        break;
-            //    case SvgMarkerPosition.Mid:
-            //        start = 1;
-            //        len   = vertexPositions.Length - 2;
-            //        break;
-            //    default:
-            //        // == MarkerPosition.End
-            //        start = vertexPositions.Length - 1;
-            //        len   = 1;
-            //        break;
-            //}
+                return Math.Atan2(tagentAt.Y, tagentAt.X) * 180 / Math.PI;
+            }
 
-            //for (int i = start; i < start + len; i++)
-            //{
-            //    SvgPointF point = vertexPositions[i];
-
-            //    GdiGraphicsContainer gc = gr.BeginContainer();
-
-            //    gr.TranslateTransform(point.X, point.Y);
-
-            //    if (markerElm.OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
-            //    {
-            //        gr.RotateTransform((float)markerElm.OrientAngle.AnimVal.Value);
-            //    }
-            //    else
-            //    {
-            //        float angle;
-
-            //        switch (markerPos)
-            //        {
-            //            case SvgMarkerPosition.Start:
-            //                angle = markerHostElm.GetStartAngle(i + 1);
-            //                break;
-            //            case SvgMarkerPosition.Mid:
-            //                //angle = (markerHostElm.GetEndAngle(i) + markerHostElm.GetStartAngle(i + 1)) / 2;
-            //                angle = SvgNumber.CalcAngleBisection(markerHostElm.GetEndAngle(i), markerHostElm.GetStartAngle(i + 1));
-            //                break;
-            //            default:
-            //                angle = markerHostElm.GetEndAngle(i);
-            //                break;
-            //        }
-            //        gr.RotateTransform(angle);
-            //    }
-
-            //    if (markerElm.MarkerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
-            //    {
-            //        SvgLength strokeWidthLength = new SvgLength(refElement,
-            //            "stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, "1");
-            //        float strokeWidth = (float)strokeWidthLength.Value;
-            //        gr.ScaleTransform(strokeWidth, strokeWidth);
-            //    }
-
-            //    SvgPreserveAspectRatio spar =
-            //        (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
-            //    float[] translateAndScale = spar.FitToViewBox((SvgRect)markerElm.ViewBox.AnimVal,
-            //        new SvgRect(0, 0, markerElm.MarkerWidth.AnimVal.Value,
-            //            markerElm.MarkerHeight.AnimVal.Value));
-
-
-            //    gr.TranslateTransform(-(float)markerElm.RefX.AnimVal.Value * translateAndScale[2],
-            //        -(float)markerElm.RefY.AnimVal.Value * translateAndScale[3]);
-
-            //    gr.ScaleTransform(translateAndScale[2], translateAndScale[3]);
-
-            //    Clip(gr);
-
-            //    renderer.RenderChildren(markerElm);
-
-            //    gr.EndContainer(gc);
-            //}
+            return angle;
         }
 
         #endregion

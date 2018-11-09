@@ -26,16 +26,28 @@ namespace SharpVectors.Dom.Svg
 		{
 			get;
 		}
-		
-		/// <summary>
-		/// Get the angle of the path segment entering the specified vertex.
-		/// </summary>
-		/// <param name="index">
-		/// Specifies the vertex to which the path segment is entering.
-		/// </param>
-		/// <returns>
-		/// The angle of the path segment entering the specified vertex in degrees.
-		/// </returns>
+
+        bool IsClosed
+        {
+            get;
+        }
+
+        bool MayHaveCurves
+        {
+            get;
+        }
+
+        ISvgMarker GetMarker(int index);
+
+        /// <summary>
+        /// Get the angle of the path segment entering the specified vertex.
+        /// </summary>
+        /// <param name="index">
+        /// Specifies the vertex to which the path segment is entering.
+        /// </param>
+        /// <returns>
+        /// The angle of the path segment entering the specified vertex in degrees.
+        /// </returns>
         double GetStartAngle(int index);
 		
 		/// <summary>

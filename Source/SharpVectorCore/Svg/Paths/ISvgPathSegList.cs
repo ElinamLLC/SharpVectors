@@ -1,12 +1,15 @@
+using System;
+using System.Collections.Generic;
+
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
 	/// This interface defines a list of SvgPathSeg objects. 
 	/// </summary>
-	public interface ISvgPathSegList
+	public interface ISvgPathSegList : IList<ISvgPathSeg>
 	{
 		int NumberOfItems { get; }
-		void Clear();
+
 		ISvgPathSeg Initialize(ISvgPathSeg newItem);
 		ISvgPathSeg GetItem(int index);
 		ISvgPathSeg InsertItemBefore(ISvgPathSeg newItem, int index);

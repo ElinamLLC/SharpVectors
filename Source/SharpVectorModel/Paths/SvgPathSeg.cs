@@ -10,6 +10,8 @@ namespace SharpVectors.Dom.Svg
         private SvgPathSegList _list;
         private SvgPathSegType _type;
 
+        private SvgPointF[] _limits;
+
         #endregion
 
         #region Constructors
@@ -27,6 +29,16 @@ namespace SharpVectors.Dom.Svg
         public abstract SvgPointF AbsXY { get; }
         public abstract double StartAngle { get; }
         public abstract double EndAngle { get; }
+
+        public SvgPointF[] Limits
+        {
+            get {
+                return _limits;
+            }
+            set {
+                _limits = value;
+            }
+        }
 
         public SvgPathSeg PreviousSeg
         {
@@ -132,6 +144,20 @@ namespace SharpVectors.Dom.Svg
                     default:
                         return string.Empty;
                 }
+            }
+        }
+
+        ISvgPathSeg ISvgPathSeg.PreviousSeg
+        {
+            get {
+                return this.PreviousSeg;
+            }
+        }
+
+        ISvgPathSeg ISvgPathSeg.NextSeg
+        {
+            get {
+                return this.NextSeg;
             }
         }
 

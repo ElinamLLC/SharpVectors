@@ -402,13 +402,13 @@ namespace SharpVectors.Renderers.Texts
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
             // Fix the use of Postscript fonts...
-            WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
+            WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily,_drawContext);
+                    currentFamily,_context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -418,10 +418,10 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            WpfSvgPaint fillPaint = new WpfSvgPaint(_drawContext, element, "fill");
+            WpfSvgPaint fillPaint = new WpfSvgPaint(_context, element, "fill");
             Brush textBrush = fillPaint.GetBrush();
 
-            WpfSvgPaint strokePaint = new WpfSvgPaint(_drawContext, element, "stroke");
+            WpfSvgPaint strokePaint = new WpfSvgPaint(_context, element, "stroke");
             Pen textPen = strokePaint.GetPen();
 
             if (textBrush == null && textPen == null)
@@ -442,7 +442,7 @@ namespace SharpVectors.Renderers.Texts
             if (string.IsNullOrWhiteSpace(letterSpacing))
             {   
                 FormattedText formattedText = new FormattedText(text, 
-                    textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo,
+                    textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
                     stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
                     emSize, textBrush);
 
@@ -505,7 +505,7 @@ namespace SharpVectors.Renderers.Texts
                 for (int i = 0; i < text.Length; i++)
                 {
                     FormattedText formattedText = new FormattedText(new string(text[i], 1),
-                        textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo, 
+                        textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
                         stringFormat.Direction, 
                         new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
                         emSize, textBrush);
@@ -576,13 +576,13 @@ namespace SharpVectors.Renderers.Texts
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
             // Fix the use of Postscript fonts...
-            WpfFontFamilyVisitor fontFamilyVisitor = _drawContext.FontFamilyVisitor;
+            WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
                 WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
                     fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily, _drawContext);
+                    currentFamily, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -592,10 +592,10 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            WpfSvgPaint fillPaint = new WpfSvgPaint(_drawContext, element, "fill");
+            WpfSvgPaint fillPaint = new WpfSvgPaint(_context, element, "fill");
             Brush textBrush       = fillPaint.GetBrush();
 
-            WpfSvgPaint strokePaint = new WpfSvgPaint(_drawContext, element, "stroke");
+            WpfSvgPaint strokePaint = new WpfSvgPaint(_context, element, "stroke");
             Pen textPen = strokePaint.GetPen();
 
             if (textBrush == null && textPen == null)
@@ -616,7 +616,7 @@ namespace SharpVectors.Renderers.Texts
             if (string.IsNullOrWhiteSpace(letterSpacing))
             {   
                 FormattedText formattedText = new FormattedText(text,
-                    textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo,
+                    textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
                     stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
                     emSize, textBrush);
 
@@ -667,7 +667,7 @@ namespace SharpVectors.Renderers.Texts
                 for (int i = 0; i < text.Length; i++)
                 {
                     FormattedText formattedText = new FormattedText(new string(text[i], 1),
-                        textRun.IsLatin ? _drawContext.EnglishCultureInfo : _drawContext.CultureInfo, 
+                        textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
                         stringFormat.Direction, 
                         new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
                         emSize, textBrush);

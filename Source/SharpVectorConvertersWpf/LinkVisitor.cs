@@ -318,8 +318,7 @@ namespace SharpVectors.Converters
                             var element = useChild as SvgStyleableElement;
                             if (element != null && element.RenderingHint == SvgRenderingHint.Shape)
                             {
-                                Geometry childPath = WpfRendering.CreateGeometry(element, 
-                                    settings.OptimizePath);
+                                Geometry childPath = CreateGeometry(element, settings.OptimizePath);
 
                                 if (childPath != null)
                                 {
@@ -361,8 +360,7 @@ namespace SharpVectors.Converters
                     var element = node as SvgStyleableElement;
                     if (element != null && element.RenderingHint == SvgRenderingHint.Shape)
                     {
-                        Geometry childPath = WpfRendering.CreateGeometry(element, 
-                            settings.OptimizePath);
+                        Geometry childPath = CreateGeometry(element, settings.OptimizePath);
 
                         if (childPath != null)
                         {
