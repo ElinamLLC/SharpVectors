@@ -15,6 +15,8 @@ namespace SharpVectors.Dom.Svg
         double EndAngle { get; }
         string PathText { get; }
 
+        bool IsCurve { get; }
+
         ISvgPathSeg PreviousSeg { get; }
         ISvgPathSeg NextSeg { get; }
 

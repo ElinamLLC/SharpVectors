@@ -4,13 +4,6 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
 {
-	public enum SvgMarkerPosition
-    {
-        Start,
-        Mid,
-        End
-    }
-
     public sealed class GdiMarkerRendering : GdiRendering
 	{
         #region Constructors and Destructor

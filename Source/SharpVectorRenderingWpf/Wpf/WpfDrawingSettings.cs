@@ -22,6 +22,7 @@ namespace SharpVectors.Renderers.Wpf
         private int _pixelHeight;
         private bool _ensureViewboxPosition;
         private bool _ensureViewboxSize;
+        private bool _ignoreRootViewbox;
 
         // Formating properties
         private CultureInfo _culture;
@@ -59,6 +60,7 @@ namespace SharpVectors.Renderers.Wpf
 
             _ensureViewboxSize     = false;
             _ensureViewboxPosition = true;
+            _ignoreRootViewbox     = false;
         }
 
         /// <summary>
@@ -75,19 +77,20 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            _defaultFontName = settings._defaultFontName;
-            _textAsGeometry  = settings._textAsGeometry;
-            _optimizePath    = settings._optimizePath;
-            _includeRuntime  = settings._includeRuntime;
+            _defaultFontName       = settings._defaultFontName;
+            _textAsGeometry        = settings._textAsGeometry;
+            _optimizePath          = settings._optimizePath;
+            _includeRuntime        = settings._includeRuntime;
 
-            _neutralCulture  = settings._neutralCulture;
-            _culture         = settings._culture;
+            _neutralCulture        = settings._neutralCulture;
+            _culture               = settings._culture;
 
-            _pixelWidth      = settings._pixelWidth;
-            _pixelHeight     = settings._pixelHeight;
+            _pixelWidth            = settings._pixelWidth;
+            _pixelHeight           = settings._pixelHeight;
 
-            _ensureViewboxSize = settings._ensureViewboxSize;
+            _ensureViewboxSize     = settings._ensureViewboxSize;
             _ensureViewboxPosition = settings._ensureViewboxPosition;
+            _ignoreRootViewbox     = settings._ignoreRootViewbox;
         }
 
         #endregion
@@ -118,6 +121,35 @@ namespace SharpVectors.Renderers.Wpf
         {
             get {
                 return (_pixelWidth >= 0 && _pixelHeight >= 0);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value to indicate turning of viewbox at the root of the drawing.
+        /// </summary>
+        /// <value>
+        /// For image outputs, this will force the original size to be saved.
+        /// <para>
+        /// The default value is <see langword="false"/>.
+        /// </para>
+        /// </value>
+        /// <remarks>
+        /// There are reported cases where are diagrams displayed in Inkscape program, but will not
+        /// show when converted. These are diagrams on the drawing canvas of Inkspace but outside 
+        /// the svg viewbox. 
+        /// <para>
+        /// When converted the drawings are also converted but not displayed due to
+        /// clipping. Setting this property to <see langword="true"/> will clear the clipping region
+        /// on conversion.
+        /// </para>
+        /// </remarks>
+        public bool IgnoreRootViewbox
+        {
+            get {
+                return _ignoreRootViewbox;
+            }
+            set {
+                _ignoreRootViewbox = value;
             }
         }
 

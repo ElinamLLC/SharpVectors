@@ -9,13 +9,6 @@ using SharpVectors.Runtime;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public enum SvgMarkerPosition 
-    { 
-        Start, 
-        Mid, 
-        End 
-    }
-
     public sealed class WpfMarkerRendering : WpfRendering
     {
         #region Private Fields
@@ -256,19 +249,6 @@ namespace SharpVectors.Renderers.Wpf
 
             bool mayHaveCurves = markerHostElm.MayHaveCurves;
 
-            //const float TestRadius = 4;
-            //Pen testPen = new Pen(Brushes.Red, 1);
-            //DrawingGroup currentGroup = gr.Peek();
-            //foreach (var pt in vertexPositions)
-            //{
-            //    EllipseGeometry geometry = new EllipseGeometry(new Point(pt.X, pt.Y),
-            //        TestRadius, TestRadius);
-
-            //    GeometryDrawing drawing = new GeometryDrawing(null, testPen, geometry);
-
-            //    currentGroup.Children.Add(drawing);
-            //}
-
             int start = 0;
             int len   = 0;
 
@@ -458,10 +438,6 @@ namespace SharpVectors.Renderers.Wpf
                 return angle;
             }
             var marker = markerHost.GetMarker(index + 1);
-            //if (marker == null || marker.IsCurve == false)
-            //{
-            //    return angle;
-            //}
 
             PathGeometry pathFlattened = null;
             if (_pathFigures.Count != 1)
@@ -503,18 +479,6 @@ namespace SharpVectors.Renderers.Wpf
                                 startPoint = new Point(point.ValueX, point.ValueY);
                             }
                         }
-
-                        //var markerPrevious = markerHost.GetMarker(index);
-                        //if (markerPrevious != null)
-                        //{
-                        //    var previousPathSet = markerPrevious.Segment;
-
-                        //    if (previousPathSet != null && previousPathSet.Limits != null 
-                        //        && previousPathSet.Limits.Length == 2)
-                        //    {
-
-                        //    }
-                        //}
 
                         PathFigure targetFigure = new PathFigure(startPoint, new PathSegment[] { pathSegment }, false);
                         PathGeometry path = new PathGeometry(new PathFigure[] { targetFigure });

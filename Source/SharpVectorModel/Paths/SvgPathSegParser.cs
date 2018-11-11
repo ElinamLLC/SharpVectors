@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Svg
 {
-    public class SvgPathSegParser
+    public sealed class SvgPathSegParser
     {
         private static readonly Regex RegexPathCmd    = new Regex(@"(?=[A-DF-Za-df-z])");
 

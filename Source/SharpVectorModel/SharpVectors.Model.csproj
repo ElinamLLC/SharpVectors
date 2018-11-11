@@ -119,6 +119,7 @@
     <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
     <Compile Include="Events\SvgResolveUriEventArgs.cs" />
+    <Compile Include="Paint\SvgMarkerPosition.cs" />
     <Compile Include="Paths\SvgPathSegParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

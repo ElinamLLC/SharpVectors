@@ -18,7 +18,7 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        #region Implementation of IElementVisitorTarget
+        #region IElementVisitorTarget Members
 
         public void Accept(IElementVisitor visitor)
         {

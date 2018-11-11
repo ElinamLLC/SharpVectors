@@ -70,53 +70,8 @@ namespace SharpVectors.Dom.Svg
                 {
                     return false;
                 }
-
-                switch (_segment.PathSegType)
-                {
-                    case SvgPathSegType.ArcAbs:
-                        return true;
-                    case SvgPathSegType.ArcRel:
-                        return true;
-                    case SvgPathSegType.ClosePath:
-                        return true;
-                    case SvgPathSegType.CurveToCubicAbs:
-                        return true;
-                    case SvgPathSegType.CurveToCubicRel:
-                        return true;
-                    case SvgPathSegType.CurveToCubicSmoothAbs:
-                        return true;
-                    case SvgPathSegType.CurveToCubicSmoothRel:
-                        return true;
-                    case SvgPathSegType.CurveToQuadraticAbs:
-                        return true;
-                    case SvgPathSegType.CurveToQuadraticRel:
-                        return true;
-                    case SvgPathSegType.CurveToQuadraticSmoothAbs:
-                        return true;
-                    case SvgPathSegType.CurveToQuadraticSmoothRel:
-                        return true;
-
-                    case SvgPathSegType.LineToAbs:
-                        return false;
-                    case SvgPathSegType.LineToHorizontalAbs:
-                        return false;
-                    case SvgPathSegType.LineToHorizontalRel:
-                        return false;
-                    case SvgPathSegType.LineToRel:
-                        return false;
-                    case SvgPathSegType.LineToVerticalAbs:
-                        return false;
-                    case SvgPathSegType.LineToVerticalRel:
-                        return false;
-                    case SvgPathSegType.MoveToAbs:
-                        return false;
-                    case SvgPathSegType.MoveToRel:
-                        return false;
-                    default:
-                        return false;
-                }
+                return _segment.IsCurve;
             }
         }
-
     }
 }

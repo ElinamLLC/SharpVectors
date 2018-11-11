@@ -13,7 +13,7 @@ namespace SharpVectors.Dom.Svg
         public override double StartAngle
         {
             get {
-                SvgPointF prevPoint = this.getPrevPoint();
+                SvgPointF prevPoint = this.GetPrevPoint();
                 SvgPointF curPoint  = this.AbsXY;
 
                 double dx = curPoint.X - prevPoint.X;
@@ -39,7 +39,7 @@ namespace SharpVectors.Dom.Svg
         public override double Length
         {
             get {
-                SvgPointF prevPoint = this.getPrevPoint();
+                SvgPointF prevPoint = this.GetPrevPoint();
                 SvgPointF thisPoint = this.AbsXY;
 
                 double dx = thisPoint.X - prevPoint.X;
@@ -49,7 +49,7 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        private SvgPointF getPrevPoint()
+        private SvgPointF GetPrevPoint()
         {
             SvgPathSeg prevSeg = this.PreviousSeg;
             SvgPointF prevPoint;

@@ -172,13 +172,23 @@ namespace SharpVectors.Renderers.Wpf
         {
             base.Render(renderer);
 
-            if (_context.Settings.EnsureViewboxSize)
+            var settings = _context.Settings;
+
+            if (_isRoot && _drawGroup.ClipGeometry != null)
             {
-                if (_drawGroup.ClipGeometry != null && !_drawGroup.ClipGeometry.Bounds.IsEmpty)
+                if (settings.IgnoreRootViewbox)
                 {
-                    using (var ctx = _drawGroup.Open())
+                    _drawGroup.ClipGeometry = null;
+                }
+                else if (settings.EnsureViewboxSize)
+                {
+                    var bounds = _drawGroup.ClipGeometry.Bounds;
+                    if (!bounds.IsEmpty)
                     {
-                        ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), _drawGroup.ClipGeometry.Bounds);
+                        using (var ctx = _drawGroup.Open())
+                        {
+                            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
+                        }
                     }
                 }
             }

@@ -17,15 +17,24 @@ namespace SharpVectors.Renderers.Wpf
         protected bool _isDisposed; // To detect redundant calls
         protected WpfDrawingContext _context;
 
+        // TODO-PAUL: Consider the possibility of providing this as option!
+        protected bool _flattenClosedPath; // Experiental options
+        protected double _flattenTolerance;
+        protected ToleranceType _flattenToleranceType;
+
         #endregion
 
         #region Constructors and Destructor
 
         protected WpfRendererObject()
         {
+            _flattenClosedPath    = false;
+            _flattenTolerance     = 0.0022;
+            _flattenToleranceType = ToleranceType.Relative;
         }
 
         protected WpfRendererObject(WpfDrawingContext context)
+            : this()
         {
             _context = context;
         }
@@ -316,6 +325,24 @@ namespace SharpVectors.Renderers.Wpf
             try
             {
                 geometry.Figures = PathFigureCollection.Parse(pathScript);
+
+                if (_flattenClosedPath && element.IsClosed && 
+                    geometry.MayHaveCurves() == element.MayHaveCurves)
+                {
+                    int closedCount = 0;
+                    foreach (var figure in geometry.Figures)
+                    {
+                        if (figure.IsClosed)
+                        {
+                            closedCount++;
+                        }
+                    }
+
+                    if (geometry.Figures.Count == closedCount)
+                    {
+                        return geometry.GetFlattenedPathGeometry(_flattenTolerance, _flattenToleranceType);
+                    }
+                }
 
                 return geometry;
             }

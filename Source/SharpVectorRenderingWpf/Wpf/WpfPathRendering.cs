@@ -364,7 +364,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 context.UpdateBounds(geometry.Bounds);
 
-                SetClip(context);
+//                SetClip(context);
 
                 WpfSvgPaint fillPaint = new WpfSvgPaint(context, styleElm, "fill");
 
