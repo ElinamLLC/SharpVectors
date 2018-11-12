@@ -317,6 +317,6 @@
     <category label="Metadata and Others">
         <test source="extend-namespace-01-f.svg" title="extend-namespace-01-f" state="failure" comment="Scripting is not supported yet." description="Test the use of multiple namespaces." />
         <test source="metadata-example-01-b.svg" title="metadata-example-01-b" state="success" comment="" description="Verify that the viewer is not perturbed by the presence of metadata." />
-        <test source="types-basicDOM-01-b.svg" title="types-basicDOM-01-b" state="partial" comment="" description="" />
+        <test source="types-basicDOM-01-b.svg" title="types-basicDOM-01-b" state="partial" comment="Scripting is not supported yet." description="" />
     </category>
 </tests>

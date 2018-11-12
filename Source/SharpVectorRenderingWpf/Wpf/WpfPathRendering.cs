@@ -46,32 +46,6 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
 
-            string sVisibility = styleElm.GetPropertyValue("visibility");
-            string sDisplay = styleElm.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
-            {
-                _drawGroup.Opacity = 0;
-            }
-
-            string elementId = this.GetElementName();
-            if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
-            {
-                SvgObject.SetName(_drawGroup, elementId);
-
-                context.RegisterId(elementId);
-
-                if (context.IncludeRuntime)
-                {
-                    SvgObject.SetId(_drawGroup, elementId);
-                }
-            }
-
-            string elementClass = this.GetElementClass();
-            if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
-            {
-                SvgObject.SetClass(_drawGroup, elementClass);
-            }
-
             Transform pathTransform = this.Transform;
             if (pathTransform != null && !pathTransform.Value.IsIdentity)
             {
@@ -109,6 +83,35 @@ namespace SharpVectors.Renderers.Wpf
             else
             {
                 _drawGroup = null;
+            }
+
+            if (_drawGroup != null)
+            {
+                string sVisibility = styleElm.GetPropertyValue("visibility");
+                string sDisplay = styleElm.GetPropertyValue("display");
+                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                {
+                    _drawGroup.Opacity = 0;
+                }
+
+                string elementClass = this.GetElementClass();
+                if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
+                {
+                    SvgObject.SetClass(_drawGroup, elementClass);
+                }
+
+                string elementId = this.GetElementName();
+                if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
+                {
+                    SvgObject.SetName(_drawGroup, elementId);
+
+                    context.RegisterId(elementId);
+
+                    if (context.IncludeRuntime)
+                    {
+                        SvgObject.SetId(_drawGroup, elementId);
+                    }
+                }
             }
         }
 
