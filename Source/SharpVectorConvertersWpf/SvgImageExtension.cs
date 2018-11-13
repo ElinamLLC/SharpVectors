@@ -351,7 +351,7 @@ namespace SharpVectors.Converters
                     return null;
                 }
 
-                throw;
+                //throw; #82
             }
 
             return null;

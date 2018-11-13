@@ -3,9 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    Title="SvgImage Sample" Height="480" Width="640" Background="White">
+    Title="SvgImage Sample" Height="497.405" Width="772.825" Background="White">
     <Window.Resources>
-        <ResourceDictionary> 
+        <ResourceDictionary>
             <sys:String x:Key="WebFile">
                 https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/tommek_Car.svg
             </sys:String>
@@ -15,14 +15,14 @@
         <TabControl SelectedIndex="0" OverridesDefaultStyle="False">
             <TabItem>
                 <TabItem.Header>By Local File</TabItem.Header>
-                <TabItem.Content>  
+                <TabItem.Content>
                     <!-- 1. Load local SVG file, using the constructor -->
-                    <Image Source="{svgc:SvgImage ../Test1.svg}"/>        
+                    <Image Source="{svgc:SvgImage ../Test1.svg}"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>By Web File</TabItem.Header>
-                <TabItem.Content>    
+                <TabItem.Content>
                     <!-- 2. Load Web SVG file, using the constructor. -->
                     <Image Source="{svgc:SvgImage {StaticResource WebFile}}"/>
                 </TabItem.Content>
