@@ -65,6 +65,8 @@
     <Compile Include="Shapes\WpfShapeRenderer.cs" />
     <Compile Include="StreamSvgConverter.cs" />
     <Compile Include="SvgControl.cs" />
+    <Compile Include="SvgImageBase.cs" />
+    <Compile Include="SvgImageConverterExtension.cs" />
     <Compile Include="Utils\DirectoryCopier.cs" />
     <Compile Include="Utils\DirectoryUtils.cs" />
     <Compile Include="FileSvgConverter.cs" />
