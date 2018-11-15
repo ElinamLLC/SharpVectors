@@ -4,6 +4,5 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
 	public interface ISvgFEFuncRElement : ISvgComponentTransferFunctionElement
 	{
-
 	}
 }

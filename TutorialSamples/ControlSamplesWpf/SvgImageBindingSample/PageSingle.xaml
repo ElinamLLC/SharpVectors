@@ -7,27 +7,29 @@
       xmlns:local="clr-namespace:SvgImageBindingSample"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageSingle">
+      d:DesignHeight="567.665" d:DesignWidth="918.958"
+      Title="PageSingle" x:Name="PageSingleTest">
     <Grid Name="rightGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="8"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="250"/>
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Grid.Row="0">
             <TextBox x:Name="inputBox" Height="24" Text="" TextAlignment="Left" DockPanel.Dock="Top" IsReadOnly="True"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <!-- Binding to Local file name: Relative Path -->
+                <Image Source="{Binding ElementName=PageSingleTest, Path=LocalFileName, Converter={svgc:SvgImageConverter}, Mode=OneWay}" Width="256" Height="256"/>
                 <!-- Binding to resource file -->
                 <Image Source="{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=/Resources/Hypocolius.svg, Mode=OneWay}" Width="256" Height="256"/>
-                <!-- Binding to TextBox content -->
+                <!-- Binding to TextBox content: Absolute or Relative -->
                 <Image Source="{Binding ElementName=inputBox, Path=Text, Converter={svgc:SvgImageConverter}, Mode=OneWay}" Width="256" Height="256"/>
             </StackPanel>
         </DockPanel>
 
         <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                       BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
-        <DockPanel Name="viewerFrame" LastChildFill="True" Grid.Row="2">
+        <DockPanel Name="viewerFrame" LastChildFill="True" Margin="0,344,0,0" Grid.RowSpan="3">
             <!-- Binding to Web resource file -->
             <Image Source="{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/compass.svg, Mode=OneWay}" Width="256" Height="256"/>
         </DockPanel>

@@ -160,7 +160,7 @@ namespace SharpVectors.Polynomials
 
             for (int j = 1; j <= MAX; j++)
             {
-                st = this.trapezoid(min, max, j);
+                st = this.Trapezoid(min, max, j);
                 s = (4.0 * st - ost) / 3.0;
                 if (Math.Abs(s - os) < TOLERANCE * Math.Abs(os)) break;
                 os = s;
@@ -188,7 +188,7 @@ namespace SharpVectors.Polynomials
             h[0] = 1.0;
             for (int j = 1; j <= MAX; j++)
             {
-                s[j - 1] = trapezoid(min, max, j);
+                s[j - 1] = Trapezoid(min, max, j);
                 if (j >= K)
                 {
                     result = Polynomial.Interpolate(h, s, K, j - K, 0.0);
@@ -212,7 +212,7 @@ namespace SharpVectors.Polynomials
         /// <param name="max"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        protected double trapezoid(double min, double max, int n)
+        protected double Trapezoid(double min, double max, int n)
         {
             double range = max - min;
 

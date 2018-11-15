@@ -13,12 +13,22 @@ namespace SvgImageBindingSample
     {
         private const string SvgFileName = "Asian_Openbill.svg";
 
+        public static readonly DependencyProperty LocalFileNameProperty =
+            DependencyProperty.Register("LocalFileName", typeof(string),
+            typeof(PageSingle), new PropertyMetadata(SvgFileName));
+
         public PageSingle()
         {
             InitializeComponent();
 
             this.Loaded      += OnPageLoaded;
             this.SizeChanged += OnPageSizeChanged;
+        }
+
+        public string LocalFileName
+        {
+            get { return (string)GetValue(LocalFileNameProperty); }
+            set { SetValue(LocalFileNameProperty, value); }
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)

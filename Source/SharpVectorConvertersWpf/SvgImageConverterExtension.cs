@@ -93,32 +93,30 @@ namespace SharpVectors.Converters
         {
             try
             {
+                Uri inputUri = null;
                 if (parameter != null)
                 {
-                    var svgSource = this.ResolveUri(parameter.ToString());
-                    if (svgSource == null)
-                    {
-                        return null;
-                    }
-
-                    return this.GetImage(svgSource);
+                    inputUri = this.ResolveUri(parameter.ToString());
                 }
-                else
+                else if (value != null)
                 {
-                    if (value == null)
-                    {
-                        return null;
-                    }
-
-                    var inputUri = _uriConverter.ConvertFrom(value) as Uri;
+                    inputUri = _uriConverter.ConvertFrom(value) as Uri;
                     if (inputUri == null)
                     {
-                        return null;
+                        inputUri = this.ResolveUri(value.ToString());
                     }
-                    var svgSource = inputUri.IsAbsoluteUri ? inputUri : new Uri(_baseUri, inputUri);
-
-                    return this.GetImage(svgSource);
+                    else if (!inputUri.IsAbsoluteUri)
+                    {
+                        inputUri = this.ResolveUri(value.ToString());
+                    }
                 }
+
+                if (inputUri == null)
+                {
+                    return null;
+                }
+                var svgSource = inputUri.IsAbsoluteUri ? inputUri : new Uri(_baseUri, inputUri);
+                return this.GetImage(svgSource);
             }
             catch
             {
