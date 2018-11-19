@@ -101,6 +101,15 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IElementTimeControl.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimateColorElement.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimateElement.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimateMotionElement.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimateMPathElement.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimateSetElement.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimateTransformElement.cs" />
+    <Compile Include="Svg\Animations\ISvgAnimationElement.cs" />
+    <Compile Include="Events\ITimeEvent.cs" />
     <Compile Include="IElementVisitor.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathMethod.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathSpacing.cs" />

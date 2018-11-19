@@ -115,6 +115,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\SvgAnimateColorElement.cs" />
+    <Compile Include="Animations\SvgAnimateBaseElement.cs" />
+    <Compile Include="Animations\SvgAnimateElement.cs" />
+    <Compile Include="Animations\SvgAnimateMotionElement.cs" />
+    <Compile Include="Animations\SvgAnimateMPathElement.cs" />
+    <Compile Include="Animations\SvgAnimateSetElement.cs" />
+    <Compile Include="Animations\SvgAnimateTransformElement.cs" />
+    <Compile Include="Animations\SvgAnimationElement.cs" />
     <Compile Include="DocumentStructure\SvgAElement.cs" />
     <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />

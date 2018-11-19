@@ -9,32 +9,37 @@ namespace SharpVectors.Dom.Css
         #region Protected Fields
 
         //protected const double Dpi = 96;
-        protected const double Dpi = 90; // The common default value for this is 90, not 96
+        protected const double Dpi     = 90; // The common default value for this is 90, not 96
         protected const double CmPerIn = 2.54;
 
         #endregion
 
         #region Constructors
-        public CssPrimitiveLengthValue(string number, string unit, bool readOnly) : base(number+unit, readOnly)
+
+        public CssPrimitiveLengthValue(string number, string unit, bool readOnly) 
+            : base(number+unit, readOnly)
 		{
 			_setType(unit);
 			SetFloatValue(number);
 		}
 
-		public CssPrimitiveLengthValue(string cssText, bool readOnly) : base(cssText, readOnly)
+		public CssPrimitiveLengthValue(string cssText, bool readOnly) 
+            : base(cssText, readOnly)
 		{
-			OnSetCssText(cssText);
+            _setCssText(cssText);
 		}
 
-		public CssPrimitiveLengthValue(double number, string unit, bool readOnly) : base(number+unit, readOnly)
+		public CssPrimitiveLengthValue(double number, string unit, bool readOnly) 
+            : base(number+unit, readOnly)
 		{
 			_setType(unit);
 			SetFloatValue(number);
 		}
 
-		protected CssPrimitiveLengthValue() : base()
+		protected CssPrimitiveLengthValue()
 		{
 		}
+
         #endregion
 
         #region Public Properties
@@ -58,7 +63,7 @@ namespace SharpVectors.Dom.Css
         public override double GetFloatValue(CssPrimitiveType unitType)
         {
             double ret = double.NaN;
-            switch (PrimitiveType)
+            switch (this.PrimitiveType)
             {
                 case CssPrimitiveType.Number:
                 case CssPrimitiveType.Px:
@@ -98,6 +103,15 @@ namespace SharpVectors.Dom.Css
 
         protected override void OnSetCssText(string cssText)
         {
+            _setCssText(cssText);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void _setCssText(string cssText)
+        {
             Regex re = new Regex(CssValue.LengthPattern);
             Match match = re.Match(cssText);
             if (match.Success)
@@ -110,10 +124,6 @@ namespace SharpVectors.Dom.Css
                 throw new DomException(DomExceptionType.SyntaxErr, "Unrecognized length format: " + cssText);
             }
         }
-
-        #endregion
-
-        #region Private Methods
 
         private void _setType(string unit)
         {

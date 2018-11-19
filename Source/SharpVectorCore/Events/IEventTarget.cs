@@ -71,10 +71,7 @@ namespace SharpVectors.Dom.Events
 		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-bubbling-phase">bubbling phases</see>.
 		/// If <c>false</c>, the event listener will only be triggered during the target and bubbling phases.
 		/// </param>
-		void AddEventListener(
-			string type,
-			EventListener listener,
-			bool useCapture);
+		void AddEventListener(string type, EventListener listener, bool useCapture);
 		
 		/// <summary>
 		/// This method allows the removal of event listeners from the default
@@ -103,10 +100,7 @@ namespace SharpVectors.Dom.Events
 		/// not affect the same event listener registered for the target and
 		/// bubbling phases, and vice versa.
 		/// </param>
-		void RemoveEventListener(
-			string type,
-			EventListener listener,
-			bool useCapture);
+		void RemoveEventListener(string type, EventListener listener, bool useCapture);
 		
 		/// <summary>
 		/// This method allows the dispatch of events into the
@@ -147,8 +141,7 @@ namespace SharpVectors.Dom.Events
 		/// interface CustomEvent.
 		/// </para>
 		/// </exception>
-		bool DispatchEvent(
-			IEvent evt);
+		bool DispatchEvent(IEvent evt);
 		
 		#endregion
 		
@@ -194,12 +187,8 @@ namespace SharpVectors.Dom.Events
 		/// <seealso href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/events.html#Events-propagation-and-groups">
 		/// Event propagation and event groups
 		/// </seealso>
-		void AddEventListenerNs(
-			string namespaceUri,
-			string type,
-			EventListener listener,
-			bool useCapture,
-			object evtGroup);
+		void AddEventListenerNs(string namespaceUri, string type, EventListener listener,
+			bool useCapture, object evtGroup);
 		
 		/// <summary>
 		/// This method allows the removal of event listeners from a specified
@@ -237,11 +226,7 @@ namespace SharpVectors.Dom.Events
 		/// does not affect the same event listener registered for the target
 		/// and bubbling phases, and vice versa.
 		/// </param>
-		void RemoveEventListenerNs(
-			string namespaceUri,
-			string type,
-			EventListener listener,
-			bool useCapture);
+		void RemoveEventListenerNs(string namespaceUri, string type, EventListener listener, bool useCapture);
 		
 		/// <summary>
 		/// This method allows the DOM application to know if an event
@@ -265,9 +250,7 @@ namespace SharpVectors.Dom.Events
 		/// <see cref="IEventTarget">IEventTarget</see> with the specified
 		/// event type, <c>false</c> otherwise.
 		/// </returns>
-		bool WillTriggerNs(
-			string namespaceUri,
-			string type);
+		bool WillTriggerNs(string namespaceUri, string type);
 		
 		/// <summary>
 		/// This method allows the DOM application to know if this
@@ -295,9 +278,7 @@ namespace SharpVectors.Dom.Events
 		/// event type, <c>false</c> otherwise.
 		/// </returns>
 		/// <seealso cref="WillTriggerNs">WillTriggerNs</seealso>
-		bool HasEventListenerNs(
-			string namespaceUri,
-			string type);
+		bool HasEventListenerNs(string namespaceUri, string type);
 		
 		#endregion
 		

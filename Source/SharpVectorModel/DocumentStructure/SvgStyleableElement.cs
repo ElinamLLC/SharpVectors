@@ -20,8 +20,8 @@ namespace SharpVectors.Dom.Svg
 
         #region Private Fields
 
-        private ISvgAnimatedString className;
-        private Dictionary<string, ICssValue> presentationAttributes = new Dictionary<string, ICssValue>();
+        private ISvgAnimatedString _className;
+        private Dictionary<string, ICssValue> _presentationAttributes = new Dictionary<string, ICssValue>();
 
         #endregion
 
@@ -40,17 +40,17 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (className == null)
+                if (_className == null)
                 {
-                    className = new SvgAnimatedString(GetAttribute("class", string.Empty));
+                    _className = new SvgAnimatedString(GetAttribute("class", string.Empty));
                 }
-                return className;
+                return _className;
             }
         }
 
         public ICssValue GetPresentationAttribute(string name)
         {
-            if (!presentationAttributes.ContainsKey(name))
+            if (!_presentationAttributes.ContainsKey(name))
             {
                 ICssValue result;
                 string attValue = GetAttribute(name, string.Empty).Trim();
@@ -69,11 +69,11 @@ namespace SharpVectors.Dom.Svg
                 {
                     result = null;
                 }
-                presentationAttributes[name] = result;
+                _presentationAttributes[name] = result;
 
             }
 
-            return presentationAttributes[name];
+            return _presentationAttributes[name];
         }
         
         #endregion
@@ -130,15 +130,15 @@ namespace SharpVectors.Dom.Svg
             if (attribute.NamespaceURI.Length == 0)
             {
                 string localName = attribute.LocalName;
-                if (presentationAttributes.ContainsKey(localName))
+                if (_presentationAttributes.ContainsKey(localName))
                 {
-                    presentationAttributes.Remove(localName);
+                    _presentationAttributes.Remove(localName);
                 }
 
                 switch (attribute.LocalName)
                 {
                     case "class":
-                        className = null;
+                        _className = null;
                         // class changes need to propagate to children and invalidate CSS
                         break;
                 }

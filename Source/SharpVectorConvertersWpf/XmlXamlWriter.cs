@@ -20,8 +20,22 @@ namespace SharpVectors.Converters
     /// Markup Language (XAML) serialization of provided runtime objects into XAML.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// This is designed to be used by the SVG to XAML converters, and may not be
     /// useful in general applications.
+    /// </para>
+    /// <para>
+    /// <see href="https://social.msdn.microsoft.com/Forums/vstudio/en-US/c9225e3d-298d-4012-b6c4-663973c426ed/xaml-serialization-replacement?forum=wpf"/>
+    /// </para>
+    /// <para>
+    /// <see href="https://social.msdn.microsoft.com/Forums/vstudio/en-us/aa271e51-5e56-4e5c-995c-c91804ea55d1/saving-and-loading-of-interface-in-xaml-format-seems-to-have-problems?forum=wpf"/>
+    /// </para>
+    /// <para>
+    /// <see href="https://social.msdn.microsoft.com/Forums/vstudio/en-US/08aebbf1-0a61-4305-83b2-a0a37bb24002/xamlwriter-markupobject-how-to-?forum=wpf"/>
+    /// </para>
+    /// <para>
+    /// <see href=""/>
+    /// </para>
     /// </remarks>
     public sealed class XmlXamlWriter
     {

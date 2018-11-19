@@ -8,7 +8,7 @@ namespace SharpVectors.Dom.Events
 		/// <summary>
 		/// No attribute was modified, added nor removed.
 		/// </summary>
-		None = 1,
+		None         = 1,
 		/// <summary>
 		/// The attribute was modified in place.
 		/// </summary>
@@ -16,10 +16,10 @@ namespace SharpVectors.Dom.Events
 		/// <summary>
 		/// The attribute was just added.
 		/// </summary>
-		Addition = 2,
+		Addition     = 2,
 		/// <summary>
 		/// The attribute was just removed.
 		/// </summary>
-		Removal = 3,
+		Removal      = 3
 	}
 }

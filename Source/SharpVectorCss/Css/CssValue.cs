@@ -4,18 +4,19 @@ using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Css
 {
-	/// <summary>
-	/// The CSSValue interface represents a simple or a complex value. A CSSValue object only occurs in a context of a CSS property
-	/// </summary>
-	public class CssValue : ICssValue
+    /// <summary>
+    /// This implements the <see cref="ICssValue"/> interface, which represents a simple or a complex value.
+    /// A <see cref="ICssValue"/> object only occurs in a context of a CSS property.
+    /// </summary>
+    public class CssValue : ICssValue
 	{
 		#region Static members
 
-		private static string numberPattern = @"[\-\+]?[0-9]*\.?[0-9]+";
+		private static string numberPattern    = @"[\-\+]?[0-9]*\.?[0-9]+";
 		public static string LengthUnitPattern = "(?<lengthUnit>in|cm|mm|px|em|ex|pc|pt|%)?";
-		public static string AngleUnitPattern = "(?<angleUnit>deg|rad|grad)?";
-		public static string LengthPattern = @"(?<lengthNumber>" + numberPattern + ")" + LengthUnitPattern;
-		public static string AnglePattern = @"(?<angleNumber>" + numberPattern + ")" + AngleUnitPattern;
+		public static string AngleUnitPattern  = "(?<angleUnit>deg|rad|grad)?";
+		public static string LengthPattern     = @"(?<lengthNumber>" + numberPattern + ")" + LengthUnitPattern;
+		public static string AnglePattern      = @"(?<angleNumber>" + numberPattern + ")" + AngleUnitPattern;
 
 		private static string cssPrimValuePattern = @"^(?<primitiveValue>" 
 			+ @"(?<func>(?<funcname>attr|url|counter|rect|rgb)\((?<funcvalue>[^\)]+)\))"
@@ -27,7 +28,7 @@ namespace SharpVectors.Dom.Css
 			+ @")";
 
 		private static Regex reCssPrimitiveValue = new Regex(cssPrimValuePattern + "$");
-		private static Regex reCssValueList = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
+		private static Regex reCssValueList      = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
 
 		/// <summary>
 		/// Detects what kind of value cssText contains and returns an instance of the correct CssValue class
@@ -50,7 +51,7 @@ namespace SharpVectors.Dom.Css
 			}
 				
 			match = reCssValueList.Match(cssText);
-			if(match.Success)
+			if (match.Success)
 			{
 				// list of primitive values
 				throw new NotImplementedException("Value lists not implemented");
