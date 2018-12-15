@@ -11,8 +11,9 @@ namespace SharpVectors.Dom.Svg
         #region Private Fields
 
         //Regex re = new Regex("([A-Za-z]+)\\s*\\(([\\-0-9\\.\\,\\seE]+)\\)");
-			
-        private static Regex _regExtract = new Regex("([A-Za-z]+)\\s*\\(([\\-0-9\\.eE\\,\\s]+)\\)", RegexOptions.Compiled);
+        //private static Regex _regExtract = new Regex("([A-Za-z]+)\\s*\\(([\\-0-9\\.eE\\,\\s]+)\\)", RegexOptions.Compiled);
+
+        private static Regex _regExtract = new Regex("([A-Za-z]+)\\s*\\(([\\-0-9\\.eE+-\\,\\s]+)\\)", RegexOptions.Compiled);
 
         #endregion
 
