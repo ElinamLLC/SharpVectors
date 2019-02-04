@@ -497,6 +497,10 @@ namespace SharpVectors.Converters
                             string ns1 = _namespaceCache.GetNamespaceUriFor(markupProperty.DependencyProperty.OwnerType);
                             string prefix1 = _namespaceCache.GetDefaultPrefixFor(ns1);
 
+                            if (temp.IndexOfAny("{}".ToCharArray()) >= 0)
+                            {
+                                temp = "{}" + temp;
+                            }
                             if (string.IsNullOrWhiteSpace(prefix1))
                             {
                                 writer.WriteAttributeString(markupProperty.Name, temp);
@@ -526,6 +530,10 @@ namespace SharpVectors.Converters
                             }
                             else
                             {
+                                if (temp.IndexOfAny("{}".ToCharArray()) >= 0)
+                                {
+                                    temp = "{}" + temp;
+                                }
                                 writer.WriteAttributeString(markupProperty.Name, temp);
                             }
                         }
