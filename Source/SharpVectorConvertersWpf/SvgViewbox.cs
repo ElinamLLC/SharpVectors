@@ -466,6 +466,8 @@ namespace SharpVectors.Converters
 
             _drawingCanvas.RenderDiagrams(drawing);
 
+            _drawingCanvas.ToolTip = this.ToolTip;
+
             _svgDrawing = drawing;
 
             this.OnAutoSizeChanged();
