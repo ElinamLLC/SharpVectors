@@ -117,6 +117,19 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
+        /// Gets the drawing from the SVG file conversion.
+        /// </summary>
+        /// <value>
+        /// An instance of the <see cref="DrawingGroup"/> specifying the converted drawings
+        /// which is rendered in the canvas and displayed in the this viewbox.
+        public DrawingGroup Drawings
+        {
+            get {
+                return _svgDrawing;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether to automatically resize this
         /// <see cref="Viewbox"/> based on the size of the loaded drawing.
         /// </summary>
@@ -462,14 +475,19 @@ namespace SharpVectors.Converters
                 return;
             }
 
+            // Clear the current drawing
             this.OnUnloadDiagram();
 
+            // Allow the contained canvas to render the object.
             _drawingCanvas.RenderDiagrams(drawing);
 
+            // Pass any tooltip object to the contained canvas
             _drawingCanvas.ToolTip = this.ToolTip;
 
+            // Keep an instance of the current drawing
             _svgDrawing = drawing;
 
+            // Finally, force a resize of the viewbox
             this.OnAutoSizeChanged();
         }
 

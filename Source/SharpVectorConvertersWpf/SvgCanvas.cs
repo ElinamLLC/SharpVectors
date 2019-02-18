@@ -220,6 +220,19 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets the drawing from the SVG file conversion.
+        /// </summary>
+        /// <value>
+        /// An instance of the <see cref="DrawingGroup"/> specifying the converted drawings
+        /// which is rendered in this canvas.
+        public DrawingGroup Drawings
+        {
+            get {
+                return _svgDrawing;
+            }
+        }
+
         #endregion
 
         #region Public Methods

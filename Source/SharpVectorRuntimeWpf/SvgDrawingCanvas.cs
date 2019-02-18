@@ -133,6 +133,20 @@ namespace SharpVectors.Runtime
             }
         }
 
+        public IList<Drawing> DrawObjects
+        {
+            get {
+                return _drawObjects;
+            }
+        }
+
+        public IList<Drawing> LinkObjects
+        {
+            get {
+                return _linkObjects;
+            }
+        }
+
         #endregion
 
         #region Protected Properties
