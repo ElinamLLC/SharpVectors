@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -10,13 +11,13 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private double _value;
-
         private static string numberPattern = @"(?<number>(\+|-)?\d*\.?\d+((e|E)(\+|-)?\d+)?)";
         private static Regex reNumber = new Regex("^" + numberPattern + "$");
 
         private static Regex reUnit = new Regex("[a-z]+$");
-        public static Regex DoubleRegex = new Regex(@"(\+|-)?((\.[0-9]+)|([0-9]+(\.[0-9]*)?))([eE](\+|-)?[0-9]+)?", RegexOptions.Compiled);
+        private static Regex DoubleRegex = new Regex(@"(\+|-)?((\.[0-9]+)|([0-9]+(\.[0-9]*)?))([eE](\+|-)?[0-9]+)?", RegexOptions.Compiled);
+
+        private double _value;
 
         #endregion
 
@@ -37,11 +38,10 @@ namespace SharpVectors.Dom.Svg
         #region Public Static Properties
 
         public static NumberFormatInfo Format
-		{
-			get
-			{
-				return CssNumber.Format;
-			}
+        {
+            get {
+                return CssNumber.Format;
+            }
         }
 
         #endregion
@@ -49,22 +49,24 @@ namespace SharpVectors.Dom.Svg
         #region Public Static Methods
 
         public static string ScientificToDec(string sc)
-		{
-			if (sc.IndexOfAny(new char[]{'e','E'})>-1)
-			{
-				sc = sc.Trim();
-				// remove the unit
-				Match match = reUnit.Match(sc);
-				return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
-			}
-			else
-			{
-				return sc;
-			}
-		}
+        {
+            if (sc.IndexOfAny(new char[] { 'e', 'E' }) > -1)
+            {
+                sc = sc.Trim();
+                // remove the unit
+                Match match = reUnit.Match(sc);
+                string value = sc.Substring(0, sc.Length - match.Length);
+                //return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
+                return decimal.Parse(value, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint).ToString(Format) + match.Value;
+            }
+            else
+            {
+                return sc;
+            }
+        }
 
-		public static double Parse(string str)
-		{
+        public static double Parse(string str)
+        {
             try
             {
                 return double.Parse(str, SvgNumber.Format);
@@ -76,19 +78,10 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-		public static double ParseNumber(string str)
-		{
+        public static double ParseNumber(string str)
+        {
             str = DoubleRegex.Match(str).Value;
             return double.Parse(str, SvgNumber.Format);
-            //try
-            //{
-            //    return double.Parse(str, SvgNumber.Format);
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new DomException(DomExceptionType.SyntaxErr,
-            //        "Input string was not in a correct format: " + str, e);
-            //}
         }
 
         public static double ParseDouble(string str)
@@ -97,88 +90,45 @@ namespace SharpVectors.Dom.Svg
             return double.Parse(str, SvgNumber.Format);
         }
 
-        //public static double ParseNumber(string str)
-        //{
-        //    double val;
-        //    int index = str.IndexOfAny(new Char[] { 'E', 'e' });
-        //    if (index > -1)
-        //    {
-        //        double number = SvgNumber.ParseNumber(str.Substring(0, index));
-        //        double power = SvgNumber.ParseNumber(str.Substring(index + 1));
-
-        //        val = Math.Pow(10, power) * number;
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            val = Double.Parse(str, SvgNumber.Format);
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            throw new DomException(DomExceptionType.SyntaxErr,
-        //                "Input string was not in a correct format: " + str, e);
-        //        }
-        //    }
-
-        //    return val;
-        //}
-
-        //public static float ParseNumber(string str)
-        //{
-        //    float val;
-        //    int index = str.IndexOfAny(new Char[]{'E','e'});
-        //    if (index>-1)
-        //    {
-        //        float number = SvgNumber.ParseNumber(str.Substring(0, index));
-        //        float power  = SvgNumber.ParseNumber(str.Substring(index+1));
-
-        //        val = (float) Math.Pow(10, power) * number;
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            val = Single.Parse(str, SvgNumber.Format);
-        //        }
-        //        catch(Exception e)
-        //        {
-        //            throw new DomException(DomExceptionType.SyntaxErr, 
-        //                "Input string was not in a correct format: " + str, e);
-        //        }
-        //    }
-
-        //    return val;
-        //}
+        public static double[] ParseDoubles(string str)
+        {
+            List<double> valueList = new List<double>();
+            foreach (Match m in DoubleRegex.Matches(str))
+            {
+                if (!string.IsNullOrEmpty(m.Value))
+                    valueList.Add(SvgNumber.ParseDouble(m.Value));
+            }
+            return valueList.ToArray();
+        }
 
         public static double CalcAngleDiff(double a1, double a2)
-		{
-			while(a1 < 0) a1 += 360;
-			a1 %= 360;
+        {
+            while (a1 < 0) a1 += 360;
+            a1 %= 360;
 
-			while(a2 < 0) a2 += 360;
-			a2 %= 360;
+            while (a2 < 0) a2 += 360;
+            a2 %= 360;
 
             double diff = (a1 - a2);
 
-			while(diff<0)
+            while (diff < 0)
                 diff += 360;
-			diff %= 360;
-            
-			return diff;
-		}
+            diff %= 360;
+
+            return diff;
+        }
 
         public static double CalcAngleBisection(double a1, double a2)
-		{
+        {
             double diff = CalcAngleDiff(a1, a2);
             double bisect = a1 - diff / 2F;
 
-			while (bisect < 0) 
+            while (bisect < 0)
                 bisect += 360;
 
-			bisect %= 360;
-			return bisect;
-		}
+            bisect %= 360;
+            return bisect;
+        }
 
         public static bool IsValid(double value)
         {
@@ -203,17 +153,15 @@ namespace SharpVectors.Dom.Svg
         #region ISvgNumber Nembers
 
         public double Value
-		{
-			get
-			{
-				return _value;
-			}
-			set
-			{
-				_value = value;
-			}
-		}
+        {
+            get {
+                return _value;
+            }
+            set {
+                _value = value;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }
