@@ -52,14 +52,7 @@ namespace SharpVectors.Dom.Svg
             }
             catch
             {
-                List<double> valueList = new List<double>();
-                foreach (Match m in SvgNumber.DoubleRegex.Matches(str))
-                {
-                    if (!string.IsNullOrEmpty(m.Value))
-                        valueList.Add(SvgNumber.ParseDouble(m.Value));
-                }
-
-                values = valueList.ToArray();
+                values = SvgNumber.ParseDoubles(str);
                 len = values.Length;
             }
 
