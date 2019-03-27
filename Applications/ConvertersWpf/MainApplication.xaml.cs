@@ -101,8 +101,7 @@ namespace SharpVectors.Converters
         public static void DoEvents()
         {
             DispatcherFrame frame = new DispatcherFrame(true);
-            Dispatcher.CurrentDispatcher.BeginInvoke(
-                DispatcherPriority.Background,
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
             (SendOrPostCallback)delegate(object arg)
             {
                 var f = arg as DispatcherFrame;

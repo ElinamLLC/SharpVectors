@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
 using System.Security.AccessControl;
 using System.Diagnostics;
@@ -11,10 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Converters.Utils;
 
@@ -74,9 +70,9 @@ namespace SharpVectors.Converters
             _worker.WorkerReportsProgress = true;
             _worker.WorkerSupportsCancellation = true;
 
-            _worker.DoWork += new DoWorkEventHandler(OnWorkerDoWork);
-            _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnWorkerCompleted);
-            _worker.ProgressChanged += new ProgressChangedEventHandler(OnWorkerProgressChanged);
+            _worker.DoWork             += OnWorkerDoWork;
+            _worker.RunWorkerCompleted += OnWorkerCompleted;
+            _worker.ProgressChanged    += OnWorkerProgressChanged;
 
             _isOverwrite     = true;
             _isRecursive     = true;

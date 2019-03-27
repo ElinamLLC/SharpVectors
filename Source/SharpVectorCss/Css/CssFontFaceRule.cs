@@ -29,7 +29,7 @@ namespace SharpVectors.Dom.Css
 			Match match = regex.Match(css);
 			if (match.Success)
 			{
-				CssFontFaceRule rule = new CssFontFaceRule(match, parent, readOnly, replacedStrings, origin);
+				CssFontFaceRule rule = new CssFontFaceRule(parent, readOnly, replacedStrings, origin);
 				css = css.Substring(match.Length);
 
 				rule._style = new CssStyleDeclaration(ref css, rule, true, origin);
@@ -48,16 +48,16 @@ namespace SharpVectors.Dom.Css
 		/// <summary>
 		/// The constructor for CssFontFaceRule
 		/// </summary>
-		/// <param name="match">The Regex match that found the charset rule</param>
 		/// <param name="parent">The parent rule or parent stylesheet</param>
 		/// <param name="readOnly">True if this instance is readonly</param>
 		/// <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
 		/// <param name="origin">The type of CssStyleSheet</param>
-		internal CssFontFaceRule(Match match, object parent, bool readOnly,
+		internal CssFontFaceRule(object parent, bool readOnly,
             IList<string> replacedStrings, CssStyleSheetType origin)
-            : base(parent, true, replacedStrings, origin)
+            : base(parent, readOnly, replacedStrings, origin)
 		{
-			// always read-only			
+            // always read-only
+            readOnly = true;
 		}
 
 		#endregion
@@ -74,6 +74,17 @@ namespace SharpVectors.Dom.Css
 				return _style;
 			}
 		}
+
+        public string FontUrl
+        {
+            get {
+                if (_style != null)
+                {
+                    return CssStyleDeclaration.GetValidUrlFromCSS(_style.CssText, "src");
+                }
+                return null;
+            }
+        }
 
 		#endregion
 

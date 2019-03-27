@@ -10,6 +10,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private fields
 
+        private bool _loadFonts;
+
         private long _innerWidth;
         private long _innerHeight;
         private SvgDocument _document;
@@ -31,6 +33,8 @@ namespace SharpVectors.Dom.Svg
 
             _innerWidth  = innerWidth;
             _innerHeight = innerHeight;
+
+            _loadFonts   = true;
         }
 
         protected SvgWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)
@@ -42,15 +46,14 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Public properties
-        
+
         public SvgWindow ParentWindow
         {
-            get
-            {
+            get {
                 return _parentWindow;
             }
         }
-        
+
         public ISvgRenderer Renderer
         {
             get { return _renderer; }
@@ -61,7 +64,17 @@ namespace SharpVectors.Dom.Svg
         {
             get;
         }
-        
+
+        #endregion
+
+        #region Public properties
+
+        internal bool LoadFonts
+        {
+            get { return _loadFonts; }
+            set { _loadFonts = value; }
+        }
+
         #endregion
 
         #region Public Methods
@@ -81,24 +94,20 @@ namespace SharpVectors.Dom.Svg
 
         public virtual long InnerWidth
         {
-            get
-            {
+            get {
                 return _innerWidth;
             }
-            set
-            {
+            set {
                 _innerWidth = value;
             }
         }
 
         public virtual long InnerHeight
         {
-            get
-            {
+            get {
                 return _innerHeight;
             }
-            set
-            {
+            set {
                 _innerHeight = value;
             }
         }
@@ -117,25 +126,27 @@ namespace SharpVectors.Dom.Svg
 
         public IStyleSheet DefaultStyleSheet
         {
-            get
-            {
+            get {
                 return null;
             }
         }
 
         public ISvgDocument Document
         {
-            get
-            {
+            get {
                 return _document;
             }
-            set
-            {
+            set {
                 _document = (SvgDocument)value;
             }
         }
 
         public abstract void Alert(string message);
+
+        public virtual SvgWindow CreateOwnedWindow()
+        {
+            return this.CreateOwnedWindow(_innerWidth, _innerHeight);
+        }
 
         public abstract SvgWindow CreateOwnedWindow(long innerWidth, long innerHeight);
 
@@ -152,7 +163,7 @@ namespace SharpVectors.Dom.Svg
         /// <param name="innerHeight">The new height of the control</param>
         public virtual void Resize(int innerWidth, int innerHeight)
         {
-            _innerWidth  = innerWidth;
+            _innerWidth = innerWidth;
             _innerHeight = innerHeight;
 
             if (Document != null && Document.RootElement != null)

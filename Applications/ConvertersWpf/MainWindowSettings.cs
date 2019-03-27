@@ -3,6 +3,7 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Configuration;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -18,12 +19,10 @@ namespace SharpVectors.Converters
     public sealed class MainWindowSettings
     {
         [DllImport("user32.dll")]
-        private static extern bool SetWindowPlacement(IntPtr hWnd, 
-            [In] ref WINDOWPLACEMENT lpwndpl);
+        private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WINDOWPLACEMENT lpwndpl);
 
         [DllImport("user32.dll")]
-        private static extern bool GetWindowPlacement(IntPtr hWnd, 
-            out WINDOWPLACEMENT lpwndpl);
+        private static extern bool GetWindowPlacement(IntPtr hWnd, out WINDOWPLACEMENT lpwndpl);
 
         // ReSharper disable InconsistentNaming
         private const int SW_SHOWNORMAL    = 1;
@@ -86,8 +85,9 @@ namespace SharpVectors.Converters
                 var hwnd = new WindowInteropHelper(_window).Handle;
                 SetWindowPlacement(hwnd, ref wp);
             }
-            catch
+            catch (Exception ex)
             {
+                Trace.Write(ex);
             }
         }
 

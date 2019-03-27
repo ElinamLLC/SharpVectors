@@ -16,7 +16,7 @@ namespace SharpVectors.Dom.Css
 		#region Private fields
 
 		private readonly CssStyleSheetType _origin;
-        private List<string> _alReplacedStrings = new List<string>();
+        private IList<string> _alReplacedStrings = new List<string>();
 		//private string[] ReplacedStrings;
 
 		private CssRuleList _cssRules;

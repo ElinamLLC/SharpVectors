@@ -8,8 +8,8 @@ namespace SharpVectors.Dom.Css
 	{
         #region Protected Fields
 
-        //protected const double Dpi = 96;
-        protected const double Dpi     = 90; // The common default value for this is 90, not 96
+        protected const double Dpi = 96;
+        //protected const double Dpi     = 90; // The common default value for this is 90, not 96
         protected const double CmPerIn = 2.54;
 
         #endregion

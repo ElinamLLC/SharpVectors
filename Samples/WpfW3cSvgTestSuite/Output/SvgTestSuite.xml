@@ -162,7 +162,7 @@
         <test source="pservers-grad-14-b.svg" title="pservers-grad-16-b" state="success" comment="" description="Tests the spreadMethod attributes for gradients" />
         <test source="pservers-grad-15-b.svg" title="pservers-grad-15-b" state="success" comment="" description="" />
         <test source="pservers-grad-16-b.svg" title="pservers-grad-16-b" state="success" comment="" description="" />
-        <test source="pservers-grad-17-b.svg" title="pservers-grad-17-b" state="partial" comment="" description="" />
+        <test source="pservers-grad-17-b.svg" title="pservers-grad-17-b" state="success" comment="By the revised test, SVG 1.1 Second Edition Test Suite, a fallback stroke is now required for invalid gradient and it is the same result in all browsers." description="" />
         <test source="pservers-grad-18-b.svg" title="pservers-grad-18-b" state="success" comment="" description="" />
         <test source="pservers-grad-19-b.svg" title="pservers-grad-19-b" state="partial" comment="The animateColor element is not supported." description="" />
         <test source="pservers-pattern-01-b.svg" title="pservers-pattern-01-b" state="success" comment="" description="Test that the viewer has basic capability to handle patterns on fills and stroke of objects and text." />

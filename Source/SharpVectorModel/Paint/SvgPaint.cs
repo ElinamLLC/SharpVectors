@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -9,15 +10,27 @@ namespace SharpVectors.Dom.Svg
         private string _uri;
         private SvgPaintType _paintType;
 
+        private SvgPaint _fallback;
+
         #endregion
 
         #region Constructors and Destructor
 
         public SvgPaint(string str)
-            : base()
         {
             _uri = string.Empty;
             ParsePaint(str);
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public SvgPaint Fallback
+        {
+            get {
+                return _fallback;
+            }
         }
 
         #endregion
@@ -36,15 +49,12 @@ namespace SharpVectors.Dom.Svg
 
             str = str.Trim();
 
-            if (str.StartsWith("url(", compareType))
+            if (string.IsNullOrWhiteSpace(str) || str.Equals("none", compareType) 
+                || str.Equals("transparent", compareType) || str.Equals("null", compareType))
             {
-                hasUri = true;
-                int endUri = str.IndexOf(")", compareType);
-                _uri = str.Substring(4, endUri - 4);
-                str = str.Substring(endUri + 1).Trim();
+                hasNone = true;
             }
-
-            if (str.Equals("currentColor", compareType))
+            else if (str.Equals("currentColor", compareType))
             {
                 base.ParseColor(str);
                 hasCurrentColor = true;
@@ -59,19 +69,121 @@ namespace SharpVectors.Dom.Svg
                 _paintType = SvgPaintType.ContextStroke;
                 return;
             }
-            else if (str.Equals("none", compareType) 
-                || str.Equals("transparent", compareType) || str.Equals("null", compareType))
+            else
             {
-                hasNone = true;
-            }
-            else if (str.Length > 0)
-            {
-                base.ParseColor(str);
-                hasRgb = true;
-                hasIcc = (base.ColorType == SvgColorType.RgbColorIccColor);
+                List<string> strList = new List<string>();
+
+                while (!string.IsNullOrWhiteSpace(str))
+                {
+                    if (str.StartsWith("url(", compareType))
+                    {
+                        var endUri = str.IndexOf(')', 4);
+                        strList.Add(str.Substring(0, endUri + 1));
+                        str = str.Substring(endUri + 1).Trim();
+                    }
+                    else if (str.StartsWith("rgb(", compareType))
+                    {
+                        var leftParen = str.IndexOf(')', 4);
+                        strList.Add(str.Substring(0, leftParen + 1));
+                        str = str.Substring(leftParen + 1).Trim();
+                    }
+                    else if (str.StartsWith("rgba(", compareType))
+                    {
+                        var leftParen = str.IndexOf(')', 5);
+                        strList.Add(str.Substring(0, leftParen + 1));
+                        str = str.Substring(leftParen + 1).Trim();
+                    }
+                    else if (str.StartsWith("hsl(", compareType))
+                    {
+                        var leftParen = str.IndexOf(')', 4);
+                        strList.Add(str.Substring(0, leftParen + 1));
+                        str = str.Substring(leftParen + 1).Trim();
+                    }
+                    else if (str.StartsWith("hsla(", compareType))
+                    {
+                        var leftParen = str.IndexOf(')', 5);
+                        strList.Add(str.Substring(0, leftParen + 1));
+                        str = str.Substring(leftParen + 1).Trim();
+                    }
+                    else if (str.StartsWith("#", compareType)) // Otherwise try and parse as colour
+                    {
+                        switch (CountHexDigits(str, 1))
+                        {
+                            // RGB syntax variations
+                            case 3:
+                                strList.Add(str.Substring(0, 4));
+                                str = str.Substring(4).Trim();
+                                break;
+                            case 6:
+                                strList.Add(str.Substring(0, 7));
+                                str = str.Substring(7).Trim();
+                                break;
+                            // RGB transparency variations
+                            case 4:
+                                strList.Add(str.Substring(0, 5));
+                                str = str.Substring(5).Trim();
+                                break;
+                            case 8:
+                                strList.Add(str.Substring(0, 9));
+                                str = str.Substring(9).Trim();
+                                break;
+                            default:
+                                strList.Add(str);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        strList.Add(str.Trim());
+                        break;
+                    }
+                }
+
+                if (strList.Count > 1)
+                {
+                    _fallback = new SvgPaint(strList[1]);
+
+                    this.ParsePaint(strList[0]);
+                    return;
+                }
+                else
+                {
+                    str = strList[0];
+
+                    if (str.StartsWith("url(", compareType))
+                    {
+                        hasUri = true;
+                        int endUri = str.IndexOf(")", compareType);
+                        _uri = str.Substring(4, endUri - 4);
+                        str = str.Substring(endUri + 1).Trim();
+                    }
+
+                    if (str.Length > 0)
+                    {
+                        base.ParseColor(str);
+                        hasRgb = true;
+                        hasIcc = (base.ColorType == SvgColorType.RgbColorIccColor);
+                    }
+                }
             }
 
             SetPaintType(hasUri, hasRgb, hasIcc, hasNone, hasCurrentColor);
+        }
+
+        // This routine is taken from SVG.net sources: https://svg.codeplex.com/
+        private static int CountHexDigits(string value, int start)
+        {
+            int i = (start < 0) ? 0 : start;
+            int count = 0;
+            while (i < value.Length &&
+                   ((value[i] >= '0' && value[i] <= '9') ||
+                    (value[i] >= 'a' && value[i] <= 'f') ||
+                    (value[i] >= 'A' && value[i] <= 'F')))
+            {
+                count++;
+                i++;
+            }
+            return count;
         }
 
         private void SetPaintType(bool hasUri, bool hasRgb, bool hasIcc, 

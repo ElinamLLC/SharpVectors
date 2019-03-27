@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+
 namespace SharpVectors.Dom.Stylesheets
 {
 	/// <summary>
 	/// The StyleSheetList interface provides the abstraction of an ordered collection of style sheets. 
 	/// </summary>
-	public interface IStyleSheetList
+	public interface IStyleSheetList : IList<IStyleSheet>
 	{
 		/// <summary>
 		/// The number of StyleSheets in the list. The range of valid child stylesheet indices is 0 to 

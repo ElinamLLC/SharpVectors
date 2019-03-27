@@ -1,4 +1,6 @@
-﻿namespace SharpVectors.Dom.Svg
+﻿using System;
+
+namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// The SvgFontElement interface corresponds to the 'font' element. 
@@ -19,6 +21,8 @@
         {
             _svgTests                  = new SvgTests(this);
             _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+
+            doc.RegisterFont(this);
         }
 
         #endregion
@@ -154,6 +158,7 @@
                 return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
+
         #endregion
 
         #region ISvgTests Members

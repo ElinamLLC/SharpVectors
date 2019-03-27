@@ -19,6 +19,7 @@ namespace SharpVectors.Dom.Css
         internal List<string[]> _styleElements;
         internal MediaList _currentMedia;
 
+        private bool _isLoaded;
         private bool _static;
         private StyleSheetList _styleSheets;
         private CssPropertyProfile _cssPropertyProfile;
@@ -34,13 +35,12 @@ namespace SharpVectors.Dom.Css
         /// Initializes a new instance of CssXmlDocument
         /// </summary>
         public CssXmlDocument()
-            : base()
         {
             _styleElements      = new List<string[]>();
             _currentMedia       = new MediaList("all");
             _cssPropertyProfile = new CssPropertyProfile();
 
-            setupNodeChangeListeners();
+            SetupNodeChangeListeners();
 
             DataWebRequest.Register();
         }
@@ -56,7 +56,7 @@ namespace SharpVectors.Dom.Css
             _currentMedia       = new MediaList("all");
             _cssPropertyProfile = new CssPropertyProfile();
 
-            setupNodeChangeListeners();
+            SetupNodeChangeListeners();
 
             DataWebRequest.Register();
         }
@@ -99,32 +99,27 @@ namespace SharpVectors.Dom.Css
 
         public MediaList Media
         {
-            get
-            {
+            get {
                 return _currentMedia;
             }
-            set
-            {
+            set {
                 _currentMedia = value;
             }
         }
 
         public CssPropertyProfile CssPropertyProfile
         {
-            get
-            {
+            get {
                 return _cssPropertyProfile;
             }
-            set
-            {
+            set {
                 _cssPropertyProfile = value;
             }
         }
 
         public string Url
         {
-            get
-            {
+            get {
                 return BaseURI;
             }
         }
@@ -134,13 +129,19 @@ namespace SharpVectors.Dom.Css
         /// </summary>
         public IStyleSheetList StyleSheets
         {
-            get
-            {
+            get {
                 if (_styleSheets == null)
                 {
                     _styleSheets = new StyleSheetList(this);
                 }
                 return _styleSheets;
+            }
+        }
+
+        public bool IsLoaded
+        {
+            get {
+                return _isLoaded;
             }
         }
 
@@ -160,7 +161,7 @@ namespace SharpVectors.Dom.Css
         public override void Load(string filename)
         {
             using (StaticSection.Use(this))
-            {   
+            {
                 // remove any hash (won't work for local files)
                 int hashStart = filename.IndexOf("#", StringComparison.OrdinalIgnoreCase);
                 if (hashStart > -1)
@@ -168,6 +169,9 @@ namespace SharpVectors.Dom.Css
                     filename = filename.Substring(0, hashStart);
                 }
                 base.Load(filename);
+
+                _isLoaded = true;
+                this.OnLoaded();
             }
         }
 
@@ -179,7 +183,10 @@ namespace SharpVectors.Dom.Css
                 // we use a stream here, only not to use SvgDocument.Load(XmlReader)
                 using (var xmlStream = new StringReader(xml))
                 {
-                    Load(xmlStream);
+                    base.Load(xmlStream);
+
+                    _isLoaded = true;
+                    this.OnLoaded();
                 }
             }
         }
@@ -190,6 +197,20 @@ namespace SharpVectors.Dom.Css
             using (StaticSection.Use(this))
             {
                 base.Load(reader);
+
+                _isLoaded = true;
+                this.OnLoaded();
+            }
+        }
+
+        public override void Load(Stream inStream)
+        {
+            using (StaticSection.Use(this))
+            {
+                base.Load(inStream);
+
+                _isLoaded = true;
+                this.OnLoaded();
             }
         }
 
@@ -209,7 +230,7 @@ namespace SharpVectors.Dom.Css
         /// <param name="href">The URI to the stylesheet</param>
         public void SetUserAgentStyleSheet(string href)
         {
-            _userAgentStyleSheet = new CssStyleSheet(null, href, string.Empty, string.Empty, 
+            _userAgentStyleSheet = new CssStyleSheet(null, href, string.Empty, string.Empty,
                 null, CssStyleSheetType.UserAgent);
         }
 
@@ -224,7 +245,6 @@ namespace SharpVectors.Dom.Css
 
         public void AddStyleSheet(string href)
         {
-
             _userStyleSheet = new CssStyleSheet(null, href, string.Empty, string.Empty, null, CssStyleSheetType.User);
         }
 
@@ -236,17 +256,23 @@ namespace SharpVectors.Dom.Css
             return response;
         }
 
+        protected virtual void OnLoaded()
+        {
+
+        }
+
         #endregion
 
         #region IDocumentCss Members
 
         /// <summary>
-        /// This method is used to retrieve the override style declaration for a specified element and a specified pseudo-element.
+        /// This method is used to retrieve the override style declaration for a specified element 
+        /// and a specified pseudo-element.
         /// </summary>
         /// <param name="elt">The element whose style is to be modified. This parameter cannot be null.</param>
         /// <param name="pseudoElt">The pseudo-element or null if none.</param>
         /// <returns>The override style declaration.</returns>
-        public ICssStyleDeclaration GetOverrideStyle(System.Xml.XmlElement elt, string pseudoElt)
+        public ICssStyleDeclaration GetOverrideStyle(XmlElement elt, string pseudoElt)
         {
             throw new NotImplementedException("CssXmlDocument.GetOverrideStyle()");
         }
@@ -258,10 +284,14 @@ namespace SharpVectors.Dom.Css
         /// <summary>
         /// This method is used to get the computed style as it is defined in [CSS2].
         /// </summary>
-        /// <param name="elt">The element whose style is to be computed. This parameter cannot be null.</param>
+        /// <param name="elt">
+        /// The element whose style is to be computed. This parameter cannot be null.
+        /// </param>
         /// <param name="pseudoElt">The pseudo-element or null if none.</param>
-        /// <returns>The computed style. The CSSStyleDeclaration is read-only and contains only absolute values.</returns>
-        public ICssStyleDeclaration GetComputedStyle(System.Xml.XmlElement elt, string pseudoElt)
+        /// <returns>
+        /// The computed style. The CSSStyleDeclaration is read-only and contains only absolute values.
+        /// </returns>
+        public ICssStyleDeclaration GetComputedStyle(XmlElement elt, string pseudoElt)
         {
             if (elt == null) throw new NullReferenceException();
 
@@ -275,23 +305,14 @@ namespace SharpVectors.Dom.Css
 
         #region Update handling
 
-        private void setupNodeChangeListeners()
-        {
-            XmlNodeChangedEventHandler handler = new XmlNodeChangedEventHandler(NodeChangedEvent);
-
-            NodeChanged += handler;
-            NodeInserted += handler;
-            //NodeRemoving += handler;
-            NodeRemoved += handler;
-        }
-
-        public void NodeChangedEvent(Object src, XmlNodeChangedEventArgs args)
+        public void NodeChangedEvent(object src, XmlNodeChangedEventArgs args)
         {
             if (!Static)
             {
-                #region Attribute updates
+                // Attribute updates
                 // xmlns:xml is auto-inserted whenever a selectNode is performed, we don't want those events
-                if (args.Node is XmlText && args.NewParent is XmlAttribute && args.NewParent.Name != "xmlns:xml")
+                if (args.Node is XmlText && args.NewParent is XmlAttribute 
+                    && args.NewParent.Name != "xmlns:xml")
                 {
                     XmlAttribute attr = args.NewParent as XmlAttribute;
                     CssXmlElement elm = attr.OwnerElement as CssXmlElement;
@@ -309,9 +330,8 @@ namespace SharpVectors.Dom.Css
                     CssXmlElement newElm = args.NewParent as CssXmlElement;
                     if (newElm != null) newElm.AttributeChange(args.Node, args);
                 }
-                #endregion
 
-                #region OnElementChange
+                // OnElementChange
                 if (args.Node is XmlText && args.NewParent is XmlElement)
                 {
                     CssXmlElement element = (CssXmlElement)args.NewParent;
@@ -326,17 +346,24 @@ namespace SharpVectors.Dom.Css
                         CssXmlElement newParent = (CssXmlElement)args.NewParent;
                         newParent.ElementChange(src, args);
                     }
-
-                    if (args.Action == XmlNodeChangedAction.Remove)
+                    else if (args.Action == XmlNodeChangedAction.Remove)
                     {
                         // Removing a child XML node may affect the sibling offsets (for example in tspan)
                         CssXmlElement oldParent = (CssXmlElement)args.OldParent;
                         oldParent.ElementChange(src, args);
                     }
                 }
-                #endregion
-
             }
+        }
+
+        private void SetupNodeChangeListeners()
+        {
+            XmlNodeChangedEventHandler handler = new XmlNodeChangedEventHandler(NodeChangedEvent);
+
+            NodeChanged  += handler;
+            NodeInserted += handler;
+            //NodeRemoving += handler;
+            NodeRemoved  += handler;
         }
 
         #endregion

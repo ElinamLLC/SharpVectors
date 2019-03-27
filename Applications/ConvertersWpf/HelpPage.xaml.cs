@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
 using System.Windows.Markup;
 
 using SharpVectors.Converters.Properties;
@@ -28,16 +27,14 @@ namespace SharpVectors.Converters
             this.Width  = Double.NaN;
             this.Height = Double.NaN;
 
-            this.Loaded      += new RoutedEventHandler(OnHelpPageLoaded);
-            this.Unloaded    += new RoutedEventHandler(OnHelpPageUnloaded);
-            this.SizeChanged += new SizeChangedEventHandler(OnHelpPageSizeChanged);
+            this.Loaded      += OnHelpPageLoaded;
+            this.Unloaded    += OnHelpPageUnloaded;
+            this.SizeChanged += OnHelpPageSizeChanged;
 
             DependencyPropertyDescriptor zoomProperty = 
-                DependencyPropertyDescriptor.FromProperty(
-                FlowDocumentReader.ZoomProperty, typeof(FlowDocumentReader));
+                DependencyPropertyDescriptor.FromProperty(FlowDocumentReader.ZoomProperty, typeof(FlowDocumentReader));
 
-            zoomProperty.AddValueChanged(this.helpViewer, 
-                new EventHandler(OnZoomChanged));
+            zoomProperty.AddValueChanged(this.helpViewer, new EventHandler(OnZoomChanged));
         }
 
         private void OnHelpPageLoaded(object sender, RoutedEventArgs e)

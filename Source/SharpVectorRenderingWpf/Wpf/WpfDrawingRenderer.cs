@@ -61,14 +61,6 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public WpfDrawingContext Context
-        {
-            get
-            {
-                return _context;
-            }
-        }
-
         public WpfLinkVisitor LinkVisitor
         {
             get

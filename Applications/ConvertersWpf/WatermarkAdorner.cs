@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -9,7 +10,7 @@ namespace SharpVectors.Converters
     /// <summary>
     /// Adorner for the watermark
     /// </summary>
-    internal class WatermarkAdorner : Adorner
+    internal sealed class WatermarkAdorner : Adorner
     {
         #region Private Fields
 

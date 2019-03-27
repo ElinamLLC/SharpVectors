@@ -12,6 +12,7 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _isLineSegment;
         private DrawingGroup _drawGroup;
 
         #endregion
@@ -45,6 +46,12 @@ namespace SharpVectors.Renderers.Wpf
             _drawGroup = new DrawingGroup();
 
             SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
+            _isLineSegment = false;
+            if (string.Equals(_svgElement.LocalName, "line", StringComparison.Ordinal))
+            {
+                _isLineSegment = true;
+            }
+
 
             Transform pathTransform = this.Transform;
             if (pathTransform != null && !pathTransform.Value.IsIdentity)
@@ -176,6 +183,52 @@ namespace SharpVectors.Renderers.Wpf
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
                 Pen pen = strokePaint.GetPen(geometry);
 
+                // By the SVG Specifications:
+                // Keyword 'objectBoundingBox' should not be used when the geometry of the applicable 
+                // element has no width or no height, such as the case of a horizontal or vertical line, 
+                // even when the line has actual thickness when viewed due to having a non-zero stroke 
+                // width since stroke width is ignored for bounding box calculations. When the geometry
+                // of the applicable element has no width or height and 'objectBoundingBox' is specified, 
+                // then the given effect (e.g., a gradient) will be ignored.
+                if (pen != null && _isLineSegment && strokePaint.FillType == WpfFillType.Gradient)
+                {
+                    LineGeometry lineGeometry = geometry as LineGeometry;
+                    WpfGradientFill gradientFill = (WpfGradientFill)strokePaint.PaintServer;
+                    if (gradientFill.IsUserSpace == false && lineGeometry != null)
+                    {
+                        bool invalidGrad = SvgObject.IsEqual(lineGeometry.EndPoint.X, lineGeometry.StartPoint.X)
+                            || SvgObject.IsEqual(lineGeometry.EndPoint.Y, lineGeometry.StartPoint.Y);
+                        if (invalidGrad)
+                        {
+                            // Brush is not likely inherited, we need to support fallback too
+                            WpfSvgPaint fallbackPaint = strokePaint.WpfFallback;
+                            if (fallbackPaint != null)
+                            {
+                                pen.Brush = fallbackPaint.GetBrush(geometry);
+                            }
+                            else
+                            {
+                                var scopePaint = strokePaint.GetScopeStroke();
+                                if (scopePaint != null)
+                                {
+                                    if (scopePaint != strokePaint)
+                                    {
+                                        pen.Brush = scopePaint.GetBrush(geometry);
+                                    }
+                                    else
+                                    {
+                                        pen.Brush = null;
+                                    }
+                                }
+                                else
+                                {
+                                    pen.Brush = null;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 if (_paintContext != null)
                 {
                     _paintContext.Fill   = fillPaint;
@@ -231,6 +284,17 @@ namespace SharpVectors.Renderers.Wpf
                                 if (transform != null)
                                 {    
                                     clipGeom.Transform = transform;
+
+                                    // For element transform, we prefer applying the transform to the
+                                    // element instead of the group, if the clipping region is also transformed.
+                                    if (drawGroup == _drawGroup && drawGroup.Transform == transform)
+                                    {
+                                        if (IsNullOrIdentity(geometry.Transform))
+                                        {
+                                            geometry.Transform = transform;
+                                            drawGroup.Transform = null;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -378,6 +442,52 @@ namespace SharpVectors.Renderers.Wpf
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
                 Pen pen = strokePaint.GetPen(geometry);
+
+                // By the SVG Specifications:
+                // Keyword 'objectBoundingBox' should not be used when the geometry of the applicable 
+                // element has no width or no height, such as the case of a horizontal or vertical line, 
+                // even when the line has actual thickness when viewed due to having a non-zero stroke 
+                // width since stroke width is ignored for bounding box calculations. When the geometry
+                // of the applicable element has no width or height and 'objectBoundingBox' is specified, 
+                // then the given effect (e.g., a gradient) will be ignored.
+                if (pen != null && _isLineSegment && strokePaint.FillType == WpfFillType.Gradient)
+                {
+                    LineGeometry lineGeometry = geometry as LineGeometry;
+                    WpfGradientFill gradientFill = (WpfGradientFill)strokePaint.PaintServer;
+                    if (gradientFill.IsUserSpace == false && lineGeometry != null)
+                    {
+                        bool invalidGrad = SvgObject.IsEqual(lineGeometry.EndPoint.X, lineGeometry.StartPoint.X)
+                            || SvgObject.IsEqual(lineGeometry.EndPoint.Y, lineGeometry.StartPoint.Y);
+                        if (invalidGrad)
+                        {
+                            // Brush is not likely inherited, we need to support fallback too
+                            WpfSvgPaint fallbackPaint = strokePaint.WpfFallback;
+                            if (fallbackPaint != null)
+                            {
+                                pen.Brush = fallbackPaint.GetBrush(geometry);
+                            }
+                            else
+                            {
+                                var scopePaint = strokePaint.GetScopeStroke();
+                                if (scopePaint != null)
+                                {
+                                    if (scopePaint != strokePaint)
+                                    {
+                                        pen.Brush = scopePaint.GetBrush(geometry);
+                                    }
+                                    else
+                                    {
+                                        pen.Brush = null;
+                                    }
+                                }
+                                else
+                                {
+                                    pen.Brush = null;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 if (_paintContext != null)
                 {

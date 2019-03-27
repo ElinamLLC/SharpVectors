@@ -75,6 +75,11 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Methods
 
+        public static bool IsNullOrIdentity(Transform transform)
+        {
+            return (transform == null || transform.Value.IsIdentity);
+        }
+
         public static string GetElementName(SvgElement element, WpfDrawingContext context = null)
         {
             if (element == null)

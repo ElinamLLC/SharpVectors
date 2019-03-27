@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
 	/// The CSSRuleList interface provides the abstraction of an 
 	/// ordered collection of CSS rules. 
 	/// </summary>
-	public interface ICssRuleList
+	public interface ICssRuleList : IList<ICssRule>
 	{
 		/// <summary>
 		/// The number of CSSRules in the list. The range of valid child rule indices is 0 to length-1 inclusive.
@@ -23,5 +25,7 @@ namespace SharpVectors.Dom.Css
 		{
 			get;
 		}
+
+        bool HasFontRule { get; }
 	}
 }

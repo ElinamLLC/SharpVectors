@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
+using SharpVectors.Runtime;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -35,13 +36,13 @@ namespace SharpVectors.Renderers.Wpf
             Geometry clipGeom   = this.ClipGeometry;
             Transform transform = this.Transform;
 
+            SvgUseElement useElement = (SvgUseElement)_svgElement;
+
             if (transform == null && 
                 (_svgElement.FirstChild != null && _svgElement.FirstChild == _svgElement.LastChild))
             {
                 try
                 {
-                    SvgUseElement useElement = (SvgUseElement)_svgElement;
-
                     // If none of the following attribute exists, an exception is thrown...
                     double x      = useElement.X.AnimVal.Value;
                     double y      = useElement.Y.AnimVal.Value;
@@ -72,8 +73,6 @@ namespace SharpVectors.Renderers.Wpf
             {
                 try
                 {
-                    SvgUseElement useElement = (SvgUseElement)_svgElement;
-
                     // If none of the following attribute exists, an exception is thrown...
                     double x      = useElement.X.AnimVal.Value;
                     double y      = useElement.Y.AnimVal.Value;
@@ -95,25 +94,30 @@ namespace SharpVectors.Renderers.Wpf
                     }
 
                     transform = Combine(this.Transform, transform, true);
-
-                    //Transform symbolTransform = this.Transform;
-                    //if (symbolTransform != null && !symbolTransform.Value.IsIdentity 
-                    //    && symbolTransform != transform)
-                    //{
-                    //    TransformGroup combinedTransform = new TransformGroup();                        
-
-                    //    combinedTransform.Children.Add(symbolTransform);
-                    //    combinedTransform.Children.Add(transform);
-
-                    //    transform = combinedTransform;
-                    //}
                 }
                 catch
                 {
                 }
             }
 
-            if (clipGeom != null || transform != null)
+            string elementId = this.GetElementName();
+
+            float opacityValue = -1;
+
+            string opacity = useElement.GetAttribute("opacity");
+            if (string.IsNullOrWhiteSpace(opacity))
+            {
+                opacity = useElement.GetPropertyValue("opacity");
+            }
+            if (opacity != null && opacity.Length > 0)
+            {
+                opacityValue = (float)SvgNumber.ParseNumber(opacity);
+                opacityValue = Math.Min(opacityValue, 1);
+                opacityValue = Math.Max(opacityValue, 0);
+            }
+
+            if (clipGeom != null || transform != null || opacityValue >= 0 ||
+                (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId)))
             {
                 _drawGroup = new DrawingGroup();
 
@@ -135,6 +139,23 @@ namespace SharpVectors.Renderers.Wpf
                 if (transform != null)
                 {
                     _drawGroup.Transform = transform;
+                }
+
+                if (opacityValue >= 0)
+                {
+                    _drawGroup.Opacity = opacityValue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
+                {
+                    SvgObject.SetName(_drawGroup, elementId);
+
+                    context.RegisterId(elementId);
+
+                    if (context.IncludeRuntime)
+                    {
+                        SvgObject.SetId(_drawGroup, elementId);
+                    }
                 }
             }
         }

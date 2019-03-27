@@ -1,19 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
-using System.Security.AccessControl;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.Generic;
 
-using System.Windows;
 using System.Windows.Media;
 
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Converters.Utils;
 
 namespace SharpVectors.Converters
 {

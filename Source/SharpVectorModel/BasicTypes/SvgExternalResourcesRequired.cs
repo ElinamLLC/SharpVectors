@@ -14,11 +14,12 @@ namespace SharpVectors.Dom.Svg
 			_ownerElement.attributeChangeHandler += OnAttributeChange;
 		}
 
-		private void OnAttributeChange(Object src, XmlNodeChangedEventArgs args)
+		private void OnAttributeChange(object src, XmlNodeChangedEventArgs args)
 		{
 			XmlAttribute attribute = src as XmlAttribute;
 
-			if (attribute.LocalName == "externalResourcesRequired")
+			if (attribute != null && string.Equals(attribute.LocalName, 
+                "externalResourcesRequired", StringComparison.OrdinalIgnoreCase))
 			{
 				_externalResourcesRequired = null;
 			}

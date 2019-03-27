@@ -130,7 +130,7 @@ namespace SharpVectors.Renderers.Wpf
 
             // If the group is empty, we simply remove it...
             if (_drawGroup.Children.Count == 0 && _drawGroup.ClipGeometry == null &&
-                _drawGroup.Transform == null)
+                _drawGroup.Transform == null && _drawGroup.Opacity.Equals(1.0))
             {
                 currentGroup = context.Peek();
                 if (currentGroup != null)

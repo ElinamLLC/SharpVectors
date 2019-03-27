@@ -4,15 +4,8 @@ using System.Text;
 using System.Diagnostics;
 using System.ComponentModel;
 
-using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls;
-using System.Windows.Threading;
 
-using SharpVectors.Runtime;
-using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters

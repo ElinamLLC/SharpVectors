@@ -135,7 +135,7 @@ namespace SharpVectors.Converters
 
         #region Protected Methods
 
-        protected DrawingImage GetImage(Uri svgSource)
+        protected virtual DrawingGroup GetDrawing(Uri svgSource)
         {
             string scheme = svgSource.Scheme;
             if (string.IsNullOrWhiteSpace(scheme))
@@ -164,7 +164,7 @@ namespace SharpVectors.Converters
 
                         if (drawGroup != null)
                         {
-                            return new DrawingImage(drawGroup);
+                            return drawGroup;
                         }
                     }
                     break;
@@ -199,7 +199,7 @@ namespace SharpVectors.Converters
 
                                         if (drawGroup != null)
                                         {
-                                            return new DrawingImage(drawGroup);
+                                            return drawGroup;
                                         }
                                     }
                                 }
@@ -215,7 +215,7 @@ namespace SharpVectors.Converters
 
                                     if (drawGroup != null)
                                     {
-                                        return new DrawingImage(drawGroup);
+                                        return drawGroup;
                                     }
                                 }
                             }
@@ -245,7 +245,7 @@ namespace SharpVectors.Converters
                                 DrawingGroup drawGroup = reader.Read(stream);
                                 if (drawGroup != null)
                                 {
-                                    return new DrawingImage(drawGroup);
+                                    return drawGroup;
                                 }
                             }
                         }
@@ -253,6 +253,16 @@ namespace SharpVectors.Converters
                     break;
             }
 
+            return null;
+        }
+
+        protected virtual DrawingImage GetImage(Uri svgSource)
+        {
+            DrawingGroup drawGroup = this.GetDrawing(svgSource);
+            if (drawGroup != null)
+            {
+                return new DrawingImage(drawGroup);
+            }
             return null;
         }
 

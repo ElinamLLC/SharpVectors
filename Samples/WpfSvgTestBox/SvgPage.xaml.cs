@@ -141,6 +141,19 @@ namespace WpfSvgTestBox
             }
         }
 
+        public WpfDrawingSettings ConversionSettings
+        {
+            get {
+                return _wpfSettings;
+            }
+            set {
+                if (value != null)
+                {
+                    _wpfSettings = value;
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods

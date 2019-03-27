@@ -28,6 +28,11 @@ namespace SharpVectors.Renderers.Wpf
             _context      = context;
         }
 
+        private WpfSvgPaint(string str)
+            : base(str)
+        {
+        }
+
         #endregion
 
         #region Public Properties
@@ -86,6 +91,23 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public WpfSvgPaint WpfFallback
+        {
+            get {
+                if (this.Fallback != null)
+                {
+                    WpfSvgPaint fallbackPaint = new WpfSvgPaint(this.Fallback.CssText);
+                    fallbackPaint._propertyName = this._propertyName;
+                    fallbackPaint._element = this._element;
+                    fallbackPaint._context = this._context;
+
+                    return fallbackPaint;
+                }
+
+                return null;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -113,6 +135,16 @@ namespace SharpVectors.Renderers.Wpf
         public Pen GetPen()
         {
             return this.GetPen(null);
+        }
+
+        public WpfSvgPaint GetScopeStroke()
+        {
+            WpfSvgPaintContext paintContext = this.GetStrokeContext();
+            if (paintContext != null)
+            {
+                return paintContext.Stroke;
+            }
+            return null;
         }
 
         private WpfSvgPaintContext GetFillContext()

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Reflection;
+using System.Collections.Generic;
 
 using System.Windows;
 
@@ -35,51 +36,42 @@ namespace SharpVectors.Renderers.Utils
 
         public XmlReaderSettings CustomSettings
         {
-            get
-            {
+            get {
                 return _settings;
             }
-            set
-            {
+            set {
                 _settings = value;
             }
         }
 
         public override long InnerWidth
         {
-            get
-            {
+            get {
                 return base.InnerWidth;
             }
-            set
-            {
+            set {
                 base.InnerWidth = value;
             }
         }
 
         public override long InnerHeight
         {
-            get
-            {
+            get {
                 return base.InnerHeight;
             }
-            set
-            {
+            set {
                 base.InnerHeight = value;
             }
         }
 
         public override string Source
         {
-            get
-            {
+            get {
                 SvgDocument document = (SvgDocument)this.Document;
                 return (document != null) ? document.Url : string.Empty;
             }
-            set
-            {
-                Uri uri = new Uri(new Uri(
-                    Assembly.GetExecutingAssembly().Location), value);
+            set {
+                Uri uri = new Uri(new Uri(Assembly.GetExecutingAssembly().Location), value);
 
                 this.LoadDocument(uri);
             }
@@ -87,8 +79,7 @@ namespace SharpVectors.Renderers.Utils
 
         public override DirectoryInfo WorkingDir
         {
-            get
-            {
+            get {
                 return WpfApplicationContext.ExecutableDirectory;
             }
         }
@@ -117,9 +108,7 @@ namespace SharpVectors.Renderers.Utils
                 return;
             }
 
-            Uri uri = new Uri(new Uri(
-                Assembly.GetExecutingAssembly().Location),
-                documentSource);
+            Uri uri = new Uri(new Uri(Assembly.GetExecutingAssembly().Location), documentSource);
 
             this.LoadDocument(uri);
         }

@@ -79,7 +79,7 @@ namespace SharpVectors.Dom.Css
 				 * TODO: SYNTAX_ERR: Raised if the specified encoding value has a syntax error and 
                  * is unparsable.
 				 * */
-				if (readOnly) 
+				if (_isReadOnly) 
                     throw new DomException(DomExceptionType.NoModificationAllowedErr);
 
 				_encoding = value;

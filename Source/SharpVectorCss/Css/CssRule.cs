@@ -14,15 +14,15 @@ namespace SharpVectors.Dom.Css
 		/// <summary>
 		/// The origin stylesheet type of this rule
 		/// </summary>
-		protected CssStyleSheetType origin;
-		private IList<string> replacedStrings;
+		protected CssStyleSheetType _origin;
+		private IList<string> _replacedStrings;
 		/// <summary>
 		/// Specifies the read/write state of the instance
 		/// </summary>
-		protected bool readOnly;
+		protected bool _isReadOnly;
 
-		private CssStyleSheet _ParentStyleSheet;
-		private CssRule _ParentRule;
+		private CssStyleSheet _parentStyleSheet;
+		private CssRule _parentRule;
 
 		#endregion
 
@@ -32,19 +32,19 @@ namespace SharpVectors.Dom.Css
 		{
 			if(parent is CssRule)
 			{
-				_ParentRule = (CssRule)parent;
+				_parentRule = (CssRule)parent;
 			}
 			else if(parent is CssStyleSheet)
 			{
-				_ParentStyleSheet = (CssStyleSheet)parent;
+				_parentStyleSheet = (CssStyleSheet)parent;
 			}
 			else
 			{
 				throw new Exception("The CssRule constructor can only take a CssRule or CssStyleSheet as it's second argument " + parent.GetType());
 			}
-			this.origin = origin;
-            this.replacedStrings = replacedStrings;
-            this.readOnly = readOnly;
+			this._origin = origin;
+            this._replacedStrings = replacedStrings;
+            this._isReadOnly = readOnly;
 		}
 
 		#endregion
@@ -54,7 +54,7 @@ namespace SharpVectors.Dom.Css
 		private string StringReplaceEvaluator(Match match)
 		{
             int i = Convert.ToInt32(match.Groups["number"].Value);
-            string r = replacedStrings[i];
+            string r = _replacedStrings[i];
 			if(!match.Groups["quote"].Success) r = r.Trim(new char[2]{'\'', '"'});
 			return r;
 		}
@@ -105,7 +105,7 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				return _ParentStyleSheet;
+				return _parentStyleSheet;
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace SharpVectors.Dom.Css
 		{
 			get
 			{
-				return _ParentRule;
+				return _parentRule;
 			}
 		}
 

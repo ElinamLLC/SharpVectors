@@ -76,7 +76,7 @@ namespace SharpVectors.Converters
                 itemsControls.Add(i.ItemContainerGenerator, i);
 
                 // for ItemsSource property  
-                DependencyPropertyDescriptor prop = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, i.GetType());
+                var prop = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, i.GetType());
                 prop.AddValueChanged(i, ItemsSourceChanged);
             }
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Net;
@@ -172,7 +173,7 @@ namespace SharpVectors.Dom.Stylesheets
                 WebResponse response = (WebResponse)request.GetResponse();
 
                 SucceededDownload = true;
-                System.IO.StreamReader str = new StreamReader(response.GetResponseStream(), System.Text.Encoding.Default, true);
+                StreamReader str = new StreamReader(response.GetResponseStream(), Encoding.Default, true);
                 sheetContent = str.ReadToEnd();
                 str.Close();
             }

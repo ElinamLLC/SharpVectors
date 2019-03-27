@@ -76,7 +76,7 @@ namespace SharpVectors.Dom.Css
 			set
 			{
 				/*    SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.*/
-				if (readOnly) 
+				if (_isReadOnly) 
                     throw new DomException(DomExceptionType.NoModificationAllowedErr);
 
 				selectorText = value;

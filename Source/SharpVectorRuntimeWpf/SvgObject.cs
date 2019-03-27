@@ -44,7 +44,7 @@ namespace SharpVectors.Runtime
         public static string GetName(DependencyObject element)
         {
             string name = element.GetValue(FrameworkElement.NameProperty) as string;
-            if (!string.IsNullOrEmpty(name) && name.StartsWith("_"))
+            if (!string.IsNullOrEmpty(name) && name.StartsWith("_", StringComparison.Ordinal))
             {
                 name = name.Remove(0, 1);
             }
@@ -107,6 +107,11 @@ namespace SharpVectors.Runtime
                 return false;
             }
             return true;
+        }
+
+        public static bool IsEqual(double value1, double value2)
+        {
+            return value1.Equals(value2);
         }
 
         public static string RemoveWhitespace(string str)

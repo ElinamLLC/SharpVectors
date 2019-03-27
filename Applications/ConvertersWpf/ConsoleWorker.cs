@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.Remoting.Messaging;
 
@@ -111,7 +110,6 @@ namespace SharpVectors.Converters
         /// <summary>
         /// Runs the worker async.
         /// </summary>
-        /// <param name="abortIfBusy">if set to <c>true</c> [abort if busy].</param>
         /// <param name="argument">The argument.</param>
         public bool RunWorkerAsync(object argument)
         {
@@ -169,8 +167,7 @@ namespace SharpVectors.Converters
         /// <param name="percentProgress">The percent progress.</param>
         public void ReportProgress(int percentProgress)
         {
-            this.OnProgressChanged(new ProgressChangedEventArgs(
-                percentProgress, null));
+            this.OnProgressChanged(new ProgressChangedEventArgs(percentProgress, null));
         }
 
         /// <summary>
@@ -180,8 +177,7 @@ namespace SharpVectors.Converters
         /// <param name="userState">State of the user.</param>
         public void ReportProgress(int percentProgress, object userState)
         {
-            this.OnProgressChanged(new ProgressChangedEventArgs(
-                percentProgress, userState));
+            this.OnProgressChanged(new ProgressChangedEventArgs(percentProgress, userState));
         }
 
         #endregion
@@ -227,15 +223,13 @@ namespace SharpVectors.Converters
 
             try
             {
-                DoWorkEventHandler doWorkDelegate =
-                    (DoWorkEventHandler)((AsyncResult)ar).AsyncDelegate;
+                var doWorkDelegate = (DoWorkEventHandler)((AsyncResult)ar).AsyncDelegate;
 
                 doWorkDelegate.EndInvoke(ar);
 
                 if (this.RunWorkerCompleted != null)
                 {
-                    this.RunWorkerCompleted(this,
-                        new RunWorkerCompletedEventArgs(args.Result,
+                    this.RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(args.Result,
                             null, args.Cancel));
                 }
             }
@@ -243,8 +237,7 @@ namespace SharpVectors.Converters
             {
                 if (this.RunWorkerCompleted != null)
                 {
-                    this.RunWorkerCompleted(this,
-                        new RunWorkerCompletedEventArgs(args.Result,
+                    this.RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(args.Result,
                             ex, args.Cancel));
                 }               	
             }

@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using SharpVectors.Xml;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Resources;
+using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -62,18 +63,18 @@ namespace SharpVectors.Dom.Svg
     /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</see>] specification.
     /// </para>
     /// </remarks>
+    /// 
     public class SvgDocument : CssXmlDocument, ISvgDocument
     {
         #region Public Static Fields
 
         public const string SvgNamespace   = "http://www.w3.org/2000/svg";
-
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
 
         #endregion
 
         #region Private Fields
-        
+
         private bool _ignoreComments;
         private bool _ignoreProcessingInstructions;
         private bool _ignoreWhitespace;
@@ -81,6 +82,8 @@ namespace SharpVectors.Dom.Svg
         private SvgWindow _window;
 
         private XmlReaderSettings _settings;
+
+        private IList<SvgFontElement> _svgFonts;
 
         #endregion
 
@@ -92,7 +95,7 @@ namespace SharpVectors.Dom.Svg
             _ignoreWhitespace             = false;
             _ignoreProcessingInstructions = false;
 
-            this.PreserveWhitespace = true;
+            this.PreserveWhitespace       = true;
         }
 
         public SvgDocument(SvgWindow window)
@@ -102,8 +105,8 @@ namespace SharpVectors.Dom.Svg
             _window.Document = this;
 
             // set up CSS properties
-            AddStyleElement(SvgDocument.SvgNamespace, "style");
-            CssPropertyProfile = CssPropertyProfile.SvgProfile;
+            this.AddStyleElement(SvgDocument.SvgNamespace, "style");
+            this.CssPropertyProfile = CssPropertyProfile.SvgProfile;
         }
 
         #endregion
@@ -114,6 +117,7 @@ namespace SharpVectors.Dom.Svg
         /// Namespace resolution event delegate.
         /// </summary>
         public delegate void ResolveNamespaceDelegate(object sender, SvgResolveNamespaceEventArgs e);
+
         /// <summary>
         /// URI resolution event delegate
         /// </summary>
@@ -135,13 +139,11 @@ namespace SharpVectors.Dom.Svg
 
         public XmlReaderSettings CustomSettings
         {
-            get 
-            { 
-                return _settings; 
+            get {
+                return _settings;
             }
-            set 
-            { 
-                _settings = value; 
+            set {
+                _settings = value;
             }
         }
 
@@ -153,8 +155,7 @@ namespace SharpVectors.Dom.Svg
 
         public XmlNamespaceManager NamespaceManager
         {
-            get
-            {
+            get {
                 if (namespaceManager == null)
                 {
                     // Setup namespace manager and add default namespaces
@@ -190,7 +191,7 @@ namespace SharpVectors.Dom.Svg
             {
                 result = SvgElementFactory.Create(prefix, localName, SvgNamespace, this);
                 if (result != null)
-                {       
+                {
                     return result;
                 }
             }
@@ -243,12 +244,12 @@ namespace SharpVectors.Dom.Svg
                 return _settings;
             }
             DynamicXmlUrlResolver xmlResolver = new DynamicXmlUrlResolver();
-            xmlResolver.Resolving     += OnXmlResolverResolving;
+            xmlResolver.Resolving += OnXmlResolverResolving;
             xmlResolver.GettingEntity += OnXmlResolverGettingEntity;
 
             XmlReaderSettings settings = new XmlReaderSettings();
 
-            settings.DtdProcessing                = DtdProcessing.Parse;
+            settings.DtdProcessing = DtdProcessing.Parse;
 
             settings.IgnoreComments               = _ignoreComments;
             settings.IgnoreWhitespace             = _ignoreWhitespace;
@@ -274,15 +275,15 @@ namespace SharpVectors.Dom.Svg
         //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd", @"dtd\svg11-tiny.dtd");
         //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd", @"dtd\svg11-basic.dtd");
         //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd", @"dtd\svg11.dtd");
-            
+
         //          if (reader != null && reader is XmlValidatingReader)
         //          {
         //              XmlValidatingReader valReader = (XmlValidatingReader)reader;
-                
+
         //              valReader.ValidationType = ValidationType.None;
         //              valReader.XmlResolver = localDtdXmlUrlResolver;
         //          }
-            
+
         //          this.XmlResolver = localDtdXmlUrlResolver;*/
 
         //    //LocalDtdXmlUrlResolver localDtdXmlUrlResolver = new LocalDtdXmlUrlResolver();
@@ -338,8 +339,7 @@ namespace SharpVectors.Dom.Svg
                 {
                     using (FileStream fileStream = File.OpenRead(fileUrl.Uri.LocalPath))
                     {
-                        using (GZipStream zipStream = 
-                            new GZipStream(fileStream, CompressionMode.Decompress))
+                        using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
                         {
                             this.Load(zipStream);
                         }
@@ -377,7 +377,7 @@ namespace SharpVectors.Dom.Svg
             //using (XmlReader reader = XmlReader.Create(stream, settings, baseUrl))
             using (XmlReader reader = CreateValidatingXmlReader(baseUrl, stream))
             {
-                this.Load(reader);                                    
+                this.Load(reader);
             }
         }
 
@@ -385,7 +385,7 @@ namespace SharpVectors.Dom.Svg
         /// Loads the XML document from the specified
         /// <see cref="TextReader">TextReader</see>.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="txtReader"></param>
         public override void Load(TextReader txtReader)
         {
             //XmlReaderSettings settings = this.GetXmlReaderSettings();
@@ -469,10 +469,9 @@ namespace SharpVectors.Dom.Svg
         /// Handles DynamicXmlUrlResolver GettingEntity event.
         /// </summary>
         /// <param name="absoluteUri">The absolute URI.</param>
-        /// <param name="role">The role.</param>
         /// <param name="ofObjectToReturn">The of object to return.</param>
         /// <returns></returns>
-        private object OnXmlResolverGettingEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
+        private object OnXmlResolverGettingEntity(Uri absoluteUri, string cc, Type ofObjectToReturn)
         {
             string fullPath = absoluteUri.ToString();
             if (!string.IsNullOrWhiteSpace(fullPath))
@@ -485,7 +484,7 @@ namespace SharpVectors.Dom.Svg
                     string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-basic.dtd");
                     if (resourceUri != null)
                         return GetEntityFromUri(resourceUri, ofObjectToReturn);
-                }                            
+                }
                 else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1//EN", StringComparison.OrdinalIgnoreCase) ||
                     fullPath.EndsWith("-/W3C/DTD SVG 1.1/EN", StringComparison.OrdinalIgnoreCase))
                 {
@@ -514,7 +513,7 @@ namespace SharpVectors.Dom.Svg
                     if (resourceUri != null)
                         return GetEntityFromUri(resourceUri, ofObjectToReturn);
                 }
-            }                    
+            }
 
             if (absoluteUri.IsFile)
             {
@@ -586,7 +585,7 @@ namespace SharpVectors.Dom.Svg
         {
             DynamicXmlNamespaceManager xmlNamespaceManager = new DynamicXmlNamespaceManager(new NameTable());
             xmlNamespaceManager.Resolve += OnResolveXmlNamespaceManager;
-            XmlParserContext xmlParserContext = new XmlParserContext(null, 
+            XmlParserContext xmlParserContext = new XmlParserContext(null,
                 xmlNamespaceManager, null, XmlSpace.None);
 
             return xmlParserContext;
@@ -648,7 +647,7 @@ namespace SharpVectors.Dom.Svg
         private XmlReader CreateValidatingXmlReader(string uri)
         {
             XmlReaderSettings xmlReaderSettings = GetXmlReaderSettings();
-            XmlParserContext xmlParserContext   = GetXmlParserContext();
+            XmlParserContext xmlParserContext = GetXmlParserContext();
             return XmlReader.Create(uri, xmlReaderSettings, xmlParserContext);
         }
 
@@ -660,7 +659,7 @@ namespace SharpVectors.Dom.Svg
         private XmlReader CreateValidatingXmlReader(TextReader textReader)
         {
             XmlReaderSettings xmlReaderSettings = GetXmlReaderSettings();
-            XmlParserContext xmlParserContext   = GetXmlParserContext();
+            XmlParserContext xmlParserContext = GetXmlParserContext();
             return XmlReader.Create(textReader, xmlReaderSettings, xmlParserContext);
         }
 
@@ -718,7 +717,7 @@ namespace SharpVectors.Dom.Svg
                 if (fragment.Length == 0)
                 {
                     // no fragment => return entire document
-                    if (docUri.AbsolutePath == absoluteUri.AbsolutePath)
+                    if (docUri != null && docUri.AbsolutePath == absoluteUri.AbsolutePath)
                     {
                         return this;
                     }
@@ -733,12 +732,12 @@ namespace SharpVectors.Dom.Svg
                         //PrepareXmlResolver(settings);
 
                         using (XmlReader reader = XmlReader.Create(
-                            GetResource(absoluteUri).GetResponseStream(), settings, 
+                            GetResource(absoluteUri).GetResponseStream(), settings,
                             absoluteUri.AbsolutePath))
                         {
                             doc.Load(reader);
                         }
-                        
+
                         return doc;
                     }
                 }
@@ -754,11 +753,21 @@ namespace SharpVectors.Dom.Svg
 
         public Uri ResolveUri(string uri)
         {
-            DirectoryInfo workingDir = this._window.WorkingDir;
-
-            string baseUri = BaseURI;
-            if (baseUri.Length == 0)
+            if (string.IsNullOrWhiteSpace(uri))
             {
+                return null;
+            }
+            Uri sourceUri = new Uri(uri, UriKind.RelativeOrAbsolute);
+            if (sourceUri.IsAbsoluteUri)
+            {
+                return sourceUri;
+            }
+
+            string baseUri = this.BaseURI;
+            if (baseUri == null || baseUri.Length == 0)
+            {
+                DirectoryInfo workingDir = _window.WorkingDir;
+
                 baseUri = "file:///" + workingDir.FullName.Replace('\\', '/');
             }
 
@@ -774,8 +783,7 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public string Title
         {
-            get
-            {
+            get {
                 string result = "";
 
                 XmlNode node = SelectSingleNode("/svg:svg/svg:title[text()!='']", NamespaceManager);
@@ -796,8 +804,7 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public string Referrer
         {
-            get
-            {
+            get {
                 return string.Empty;
             }
         }
@@ -807,17 +814,13 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public string Domain
         {
-            get
-            {
+            get {
                 if (Url.Length == 0 ||
                     Url.StartsWith(Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
                 {
                     return null;
                 }
-                else
-                {
-                    return new Uri(Url).Host;
-                }
+                return new Uri(Url).Host;
             }
         }
 
@@ -826,39 +829,35 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         public ISvgSvgElement RootElement
         {
-            get
-            {
+            get {
                 return DocumentElement as ISvgSvgElement;
             }
         }
 
-        internal Dictionary<string, XmlElement> collectedIds;
+        private IDictionary<string, XmlElement> _collectedIds;
 
         public override XmlElement GetElementById(string elementId)
         {
             // TODO: handle element and attribute updates globally to watch for id changes.
-            if (collectedIds == null)
+            if (_collectedIds == null)
             {
-                collectedIds = new Dictionary<string, XmlElement>();
+                _collectedIds = new Dictionary<string, XmlElement>(StringComparer.Ordinal);
                 // TODO: handle xml:id, handle duplicate ids?
                 XmlNodeList ids = this.SelectNodes("//*/@id");
                 foreach (XmlAttribute node in ids)
                 {
-                    try
+                    string valueKey = node.Value;
+                    if (!_collectedIds.ContainsKey(valueKey))
                     {
-                        collectedIds.Add(node.Value, node.OwnerElement);
-                    }
-                    catch
-                    {
-                        // Duplicate ID... what to do?
+                        _collectedIds.Add(node.Value, node.OwnerElement);
                     }
                 }
             }
 
             // Find the item
-            if (collectedIds.ContainsKey(elementId))
+            if (_collectedIds.ContainsKey(elementId))
             {
-                return collectedIds[elementId];
+                return _collectedIds[elementId];
             }
 
             return null;
@@ -866,25 +865,219 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region ISvgDocument Members from SVG 1.2
+        #region Other Public Properties and Methods
 
+        //ISvgDocument Members from SVG 1.2
+        /// <summary>
+        /// 
+        /// </summary>
         public ISvgWindow Window
         {
-            get
-            {
+            get {
                 return _window;
             }
         }
 
-        #endregion
-
-        #region Other public properties
+        public IList<SvgFontElement> SvgFonts
+        {
+            get {
+                if (_svgFonts == null)
+                {
+                    _svgFonts = new List<SvgFontElement>();
+                }
+                return _svgFonts;
+            }
+            private set {
+                if (value != null)
+                {
+                    _svgFonts = value;
+                }
+            }
+        }
 
         public new SvgDocument OwnerDocument
         {
-            get
-            {
+            get {
                 return base.OwnerDocument as SvgDocument;
+            }
+        }
+
+        public void RegisterFont(SvgFontElement svgFont)
+        {
+            if (svgFont == null)
+            {
+                return;
+            }
+            if (_svgFonts == null)
+            {
+                _svgFonts = new List<SvgFontElement>();
+            }
+            _svgFonts.Add(svgFont);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected virtual IList<string> GetFontUrls()
+        {
+            List<string> fontUrls = new List<string>();
+            if (this.IsLoaded == false)
+            {
+                return fontUrls;
+            }
+
+            XmlNodeList xmlList = this.SelectNodes(".//svg:font-face-uri", this.NamespaceManager);
+            if (xmlList != null && xmlList.Count != 0)
+            {
+                foreach (XmlElement xmlNode in xmlList)
+                {
+                    string fontUrl = xmlNode.GetAttribute("href", SvgDocument.XLinkNamespace);
+                    if (!string.IsNullOrWhiteSpace(fontUrl))
+                    {
+                        fontUrls.Add(fontUrl);
+                    }
+                }
+            }
+
+            IStyleSheetList styleSheets = this.StyleSheets;
+            if (styleSheets != null && styleSheets.Count != 0)
+            {
+                foreach (var styleSheet in styleSheets)
+                {
+                    var cssSheet = styleSheet as CssStyleSheet;
+                    if (cssSheet == null)
+                    {
+                        continue;
+                    }
+
+                    GetFontUrl(cssSheet, fontUrls);
+                }
+            }
+
+            GetFontUrl(this.UserAgentStyleSheet, fontUrls);
+            GetFontUrl(this.UserStyleSheet, fontUrls);
+
+            return fontUrls;
+        }
+
+        private static void GetFontUrl(CssStyleSheet cssSheet, IList<string> fontUrls)
+        {
+            if (cssSheet == null || fontUrls == null)
+            {
+                return;
+            }
+
+            var ruleList = cssSheet.CssRules;
+            if (ruleList == null || ruleList.Length == 0 || !ruleList.HasFontRule)
+            {
+                return;
+            }
+
+            foreach (var rule in ruleList)
+            {
+                if (rule.Type == CssRuleType.FontFaceRule)
+                {
+                    var fontRule = (CssFontFaceRule)rule;
+                    string fontUrl = fontRule.FontUrl;
+                    if (!string.IsNullOrWhiteSpace(fontUrl))
+                    {
+                        fontUrl = fontUrl.Trim();
+                        if (!fontUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                        {
+                            fontUrls.Add(fontUrl);
+                        }
+                    }
+                }
+            }
+        }
+
+        protected override void OnLoaded()
+        {
+            base.OnLoaded();
+
+            if (_window == null || _window.LoadFonts == false)
+            {
+                return;
+            }
+
+            IList<string> fontUrls = this.GetFontUrls();
+
+            if (fontUrls == null || fontUrls.Count == 0)
+            {
+                return;
+            }
+
+            SvgWindow ownedWindow = _window.CreateOwnedWindow();
+            ownedWindow.LoadFonts = false;
+
+            for (int i = 0; i < fontUrls.Count; i++)
+            {
+                var fontUrl = fontUrls[i];
+                try
+                {
+                    // remove any hash (won't work for local files)
+                    int hashStart = fontUrl.IndexOf("#", StringComparison.OrdinalIgnoreCase);
+                    if (hashStart > -1)
+                    {
+                        fontUrl = fontUrl.Substring(0, hashStart);
+                    }
+
+                    Uri fileUrl = this.ResolveUri(fontUrl);
+
+                    if (fileUrl == null || fileUrl.IsAbsoluteUri == false)
+                    {
+                        continue;
+                    }
+                    string scheme = fileUrl.Scheme;
+                    if (string.Equals(scheme, "file", StringComparison.OrdinalIgnoreCase))
+                    {
+                        this.LoadLocalFont(fileUrl.LocalPath, ownedWindow);
+                    }
+                    else
+                    {
+                        //TODO
+                    }
+                }
+                catch (Exception)
+                {
+                    //Ignore the exception
+                }
+            }
+        }
+
+        private void LoadLocalFont(string fontPath, SvgWindow ownedWindow)
+        {
+            if (string.IsNullOrWhiteSpace(fontPath) || !File.Exists(fontPath))
+            {
+                return;
+            }
+
+            string fileExt = Path.GetExtension(fontPath);
+            if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+            {
+                SvgDocument document = new SvgDocument(ownedWindow);
+
+                document.Load(fontPath);
+                var svgFonts = document.SvgFonts;
+
+                if (svgFonts != null && svgFonts.Count != 0)
+                {
+                    foreach (var svgFont in svgFonts)
+                    {
+                        var fontNode = this.ImportNode(svgFont, true);
+                        this.DocumentElement.AppendChild(fontNode);
+
+//                        this.SvgFonts.Add(svgFont);
+                    }
+                }
+
+                document = null;
+            }
+            else if (string.Equals(fileExt, ".ttf", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(fileExt, ".otf", StringComparison.OrdinalIgnoreCase))
+            {
             }
         }
 
