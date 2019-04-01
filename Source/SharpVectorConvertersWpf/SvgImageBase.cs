@@ -2,7 +2,6 @@
 using System.IO;
 using System.Globalization;
 using System.IO.Compression;
-using System.Reflection;
 
 using System.Windows;
 using System.Windows.Markup;
@@ -146,7 +145,7 @@ namespace SharpVectors.Converters
             WpfDrawingSettings settings = new WpfDrawingSettings();
             settings.IncludeRuntime = _includeRuntime;
             settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath = _optimizePath;
+            settings.OptimizePath   = _optimizePath;
             if (_culture != null)
             {
                 settings.CultureInfo = _culture;

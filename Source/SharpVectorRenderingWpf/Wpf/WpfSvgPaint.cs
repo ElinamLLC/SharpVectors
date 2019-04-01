@@ -1,7 +1,8 @@
 using System;
+using System.Xml;
 using System.Windows;
 using System.Windows.Media;
-using System.Xml;
+
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Utils;
 

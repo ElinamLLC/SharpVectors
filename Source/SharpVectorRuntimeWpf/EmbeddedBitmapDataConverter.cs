@@ -9,7 +9,7 @@ namespace SharpVectors.Runtime
         #region Constructors and Destructor
 
         public EmbeddedBitmapDataConverter()
-        {   
+        {
         }
 
         #endregion
@@ -18,17 +18,16 @@ namespace SharpVectors.Runtime
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof( string );
-
+            return sourceType == typeof(string);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if( destinationType == typeof( string ) )
+            if (destinationType == typeof(string))
             {
                 return true;
             }
-            return base.CanConvertTo( context, destinationType );
+            return base.CanConvertTo(context, destinationType);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
@@ -41,17 +40,17 @@ namespace SharpVectors.Runtime
 
         public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
         {
-            if( destinationType == typeof(string))
+            if (destinationType == typeof(string))
             {
                 EmbeddedBitmapData bitmapInfo = (EmbeddedBitmapData)value;
                 MemoryStream memoryStream = bitmapInfo.Stream;
 
                 return Convert.ToBase64String(memoryStream.ToArray());
-           }
+            }
 
-            return base.ConvertTo( context, culture, value, destinationType );
+            return base.ConvertTo(context, culture, value, destinationType);
         }
-        
+
         #endregion Methods
     }
 }

@@ -22,26 +22,24 @@ namespace SharpVectors.Runtime
         #region Constructors and Destructor
 
         public EmbeddedBitmapSource()
-            : base()
         {
             _mimeType = "image/png";
-            //
-            // Set the _useVirtuals private fields of BitmapSource to true. otherwise you will not be able to call BitmapSource methods.
+
+            // Set the _useVirtuals private fields of BitmapSource to true. 
+            // otherwise you will not be able to call BitmapSource methods.
             FieldInfo field = typeof(BitmapSource).GetField("_useVirtuals", 
                 BindingFlags.NonPublic | BindingFlags.Instance);
+
             field.SetValue(this, true);
         }
-
-        // ------------------------------------------------------------------
 
         public EmbeddedBitmapSource(MemoryStream stream)
             : this()
         {
             if (stream == null)
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
 
             _stream = stream;
-            //
             // Associated this class with source.
             this.BeginInit();
 

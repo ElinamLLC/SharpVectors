@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Xml;
-using System.Text;
 using System.Collections.Generic;
 
-using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;

@@ -1,6 +1,7 @@
-﻿using SharpVectors.Dom.Svg;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+
+using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Converters.Shapes
 {

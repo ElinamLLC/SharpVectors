@@ -1,24 +1,27 @@
-﻿using SharpVectors.Dom.Css;
-using SharpVectors.Dom.Svg;
-using System;
+﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
+
+using SharpVectors.Dom.Css;
+using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Converters.Shapes
 {
     public static class WpfShapeHelper
     {
         private static readonly Regex _decimalNumber = new Regex(@"^\d");
-        private static readonly string GenericSerifFontFamily = "Times New Roman";
+
+        private static readonly string GenericSerifFontFamily     = "Times New Roman";
         private static readonly string GenericSansSerifFontFamily = "Tahoma";
         private static readonly string GenericMonospaceFontFamily = "MS Gothic";
-        private static readonly string DefaultFontFamily = "Arial Unicode MS";
+        private static readonly string DefaultFontFamily          = "Arial Unicode MS";
 
         public static bool TryGetStrokeWidth(SvgStyleableElement element, out double strokeWidth)
         {
             string propValue = element.GetPropertyValue("stroke-width");
-            if (string.IsNullOrEmpty(propValue))
+            if (string.IsNullOrWhiteSpace(propValue))
             {
                 strokeWidth = 1d;
                 return false;
@@ -32,10 +35,10 @@ namespace SharpVectors.Converters.Shapes
         public static bool TryGetMiterLimit(SvgStyleableElement element, double strokeWidth, out double miterLimit)
         {
             string miterLimitAttr = element.GetAttribute("stroke-miterlimit");
-            if (String.IsNullOrEmpty(miterLimitAttr))
+            if (string.IsNullOrWhiteSpace(miterLimitAttr))
             {
                 string strokeLinecap = element.GetAttribute("stroke-linecap");
-                if (String.Equals(strokeLinecap, "round", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(strokeLinecap, "round", StringComparison.OrdinalIgnoreCase))
                 {
                     miterLimit = 1.0d;
                     return true;
@@ -45,7 +48,7 @@ namespace SharpVectors.Converters.Shapes
             }
 
             string miterLimitStr = element.GetPropertyValue("stroke-miterlimit");
-            if (String.IsNullOrEmpty(miterLimitStr) || strokeWidth <= 0)
+            if (string.IsNullOrWhiteSpace(miterLimitStr) || strokeWidth <= 0)
             {
                 miterLimit = -1.0d;
                 return false;
@@ -67,8 +70,8 @@ namespace SharpVectors.Converters.Shapes
         {
             string fillRuleStr = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!String.IsNullOrEmpty(clipRule) &&
-                String.Equals(clipRule, "evenodd") || String.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrWhiteSpace(clipRule) &&
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
             {
                 fillRuleStr = clipRule;
             }
@@ -147,7 +150,7 @@ namespace SharpVectors.Converters.Shapes
         {
             dashArray = null;
             string dashArrayText = element.GetPropertyValue("stroke-dasharray");
-            if (String.IsNullOrEmpty(dashArrayText))
+            if (string.IsNullOrWhiteSpace(dashArrayText))
             {
                 return false;
             }
@@ -197,7 +200,7 @@ namespace SharpVectors.Converters.Shapes
                 brush = null;
                 return false;
             }
-            else if (paint.PaintType == SvgPaintType.CurrentColor)
+            if (paint.PaintType == SvgPaintType.CurrentColor)
             {
                 svgBrush = new SvgPaint(element.GetComputedStyle("").GetPropertyValue("color"));
             }
@@ -224,10 +227,10 @@ namespace SharpVectors.Converters.Shapes
                     {
                         string propertyValue = styleElm.GetComputedStyle("").GetPropertyValue(property);
 
-                        if (!String.IsNullOrEmpty(propertyValue))
+                        if (!string.IsNullOrWhiteSpace(propertyValue))
                         {
                             SvgPaint importFill = new SvgPaint(styleElm.GetComputedStyle("").GetPropertyValue(property));
-                            if (String.Equals(svgBrush.Uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))
+                            if (string.Equals(svgBrush.Uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))
                             {
                                 fillNode = element.ImportDocument.GetNodeByUri(absoluteUri) as SvgStyleableElement;
                             }
@@ -322,7 +325,7 @@ namespace SharpVectors.Converters.Shapes
             }
 
             string colorInterpolation = gradient.GetPropertyValue("color-interpolation");
-            if (!String.IsNullOrEmpty(colorInterpolation))
+            if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
                 if (colorInterpolation == "linearRGB")
                 {
@@ -344,9 +347,9 @@ namespace SharpVectors.Converters.Shapes
 
             double centerX = gradient.Cx.AnimVal.Value;
             double centerY = gradient.Cy.AnimVal.Value;
-            double focusX = gradient.Fx.AnimVal.Value;
-            double focusY = gradient.Fy.AnimVal.Value;
-            double radius = gradient.R.AnimVal.Value;
+            double focusX  = gradient.Fx.AnimVal.Value;
+            double focusY  = gradient.Fy.AnimVal.Value;
+            double radius  = gradient.R.AnimVal.Value;
 
             GradientStopCollection gradientStops = ToGradientStops(gradient.Stops);
 
@@ -393,7 +396,7 @@ namespace SharpVectors.Converters.Shapes
             }
 
             string colorInterpolation = gradient.GetPropertyValue("color-interpolation");
-            if (!String.IsNullOrEmpty(colorInterpolation))
+            if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
                 if (colorInterpolation == "linearRGB")
                 {
@@ -422,10 +425,10 @@ namespace SharpVectors.Converters.Shapes
             for (int i = 0; i < itemCount; i++)
             {
                 SvgStopElement stop = (SvgStopElement)stops.Item(i);
-                string prop = stop.GetAttribute("stop-color");
+                string prop  = stop.GetAttribute("stop-color");
                 string style = stop.GetAttribute("style");
                 Color color = Colors.Transparent; // no auto-inherited...
-                if (!String.IsNullOrEmpty(prop) || !String.IsNullOrEmpty(style))
+                if (!string.IsNullOrWhiteSpace(prop) || !string.IsNullOrWhiteSpace(style))
                 {
                     SvgColor svgColor = new SvgColor(stop.GetComputedStyle("").GetPropertyValue("stop-color"));
                     if (svgColor.ColorType == SvgColorType.CurrentColor)
@@ -448,7 +451,7 @@ namespace SharpVectors.Converters.Shapes
                 {
                     opacity = stop.GetPropertyValue("stop-opacity");
                 }
-                if (!String.IsNullOrEmpty(opacity))
+                if (!string.IsNullOrWhiteSpace(opacity))
                     alpha *= SvgNumber.ParseNumber(opacity);
 
                 alpha = Math.Min(alpha, 255);
@@ -481,9 +484,9 @@ namespace SharpVectors.Converters.Shapes
             double dGreen = color.Green.GetFloatValue(CssPrimitiveType.Number);
             double dBlue = color.Blue.GetFloatValue(CssPrimitiveType.Number);
 
-            if (Double.IsNaN(dRed) || Double.IsInfinity(dRed) ||
-                Double.IsNaN(dGreen) || Double.IsInfinity(dGreen) ||
-                Double.IsNaN(dBlue) || Double.IsInfinity(dBlue))
+            if (double.IsNaN(dRed) || double.IsInfinity(dRed) ||
+                double.IsNaN(dGreen) || double.IsInfinity(dGreen) ||
+                double.IsNaN(dBlue) || double.IsInfinity(dBlue))
                 return false;
 
             wpfColor = Color.FromRgb(Convert.ToByte(dRed), Convert.ToByte(dGreen), Convert.ToByte(dBlue));
@@ -519,7 +522,7 @@ namespace SharpVectors.Converters.Shapes
             if (element == null)
                 return false;
 
-            ISvgTransformList svgTList = (ISvgTransformList)element.Transform.AnimVal;
+            ISvgTransformList svgTList = element.Transform.AnimVal;
             ISvgMatrix svgMatrix = ((SvgTransformList)element.Transform.AnimVal).TotalMatrix;
             ISvgElement nVE = element.NearestViewportElement;
             if (nVE != null)
@@ -603,7 +606,7 @@ namespace SharpVectors.Converters.Shapes
         {
             string str = element.GetPropertyValue("font-size");
             double fontSize = 12;
-            if (str.EndsWith("%"))
+            if (str.EndsWith("%", StringComparison.Ordinal))
             {
                 // percentage of inherited value
             }
@@ -632,7 +635,7 @@ namespace SharpVectors.Converters.Shapes
         {
             string str = element.GetPropertyValue("line-height");
             double lineHeight = 13;
-            if (str.EndsWith("%"))
+            if (str.EndsWith("%", StringComparison.Ordinal))
             {
                 // percentage of inherited value
             }
@@ -657,24 +660,25 @@ namespace SharpVectors.Converters.Shapes
                 {
                     string fontName = fn.Trim(new char[] { ' ', '\'', '"' });
 
-                    if (String.Equals(fontName, "serif", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(fontName, "serif", StringComparison.OrdinalIgnoreCase))
                     {
                         fontName = GenericSerifFontFamily;
                     }
-                    else if (String.Equals(fontName, "sans-serif", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(fontName, "sans-serif", StringComparison.OrdinalIgnoreCase))
                     {
                         fontName = GenericSansSerifFontFamily;
                     }
-                    else if (String.Equals(fontName, "monospace", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(fontName, "monospace", StringComparison.OrdinalIgnoreCase))
                     {
                         fontName = GenericMonospaceFontFamily;
                     }
 
-                    if (!string.IsNullOrEmpty(fontName))
+                    if (!string.IsNullOrWhiteSpace(fontName))
                         return new FontFamily(fontName);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Trace.WriteLine(ex);
                 }
             }
 
@@ -685,7 +689,7 @@ namespace SharpVectors.Converters.Shapes
         private static FontStyle GetTextFontStyle(SvgTextContentElement element)
         {
             string fontStyle = element.GetPropertyValue("font-style");
-            if (String.IsNullOrEmpty(fontStyle))
+            if (string.IsNullOrWhiteSpace(fontStyle))
             {
                 return FontStyles.Normal;
             }
@@ -709,7 +713,7 @@ namespace SharpVectors.Converters.Shapes
         private static FontStretch GetTextFontStretch(SvgTextContentElement element)
         {
             string fontStretch = element.GetPropertyValue("font-stretch");
-            if (String.IsNullOrEmpty(fontStretch))
+            if (string.IsNullOrWhiteSpace(fontStretch))
             {
                 return FontStretches.Normal;
             }
@@ -761,7 +765,7 @@ namespace SharpVectors.Converters.Shapes
         private static FontWeight GetTextFontWeight(SvgTextContentElement element)
         {
             string fontWeight = element.GetPropertyValue("font-weight");
-            if (String.IsNullOrEmpty(fontWeight))
+            if (string.IsNullOrWhiteSpace(fontWeight))
             {
                 return FontWeights.Normal;
             }

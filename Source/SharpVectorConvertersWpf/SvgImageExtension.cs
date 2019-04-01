@@ -155,42 +155,34 @@ namespace SharpVectors.Converters
                 {
                     return svgSource;
                 }
-                else
+                // Try getting a local file in the same directory....
+                string svgPath = _svgPath;
+                if (_svgPath[0] == '\\' || _svgPath[0] == '/')
                 {
-                    // Try getting a local file in the same directory....
-                    string svgPath = _svgPath;
-                    if (_svgPath[0] == '\\' || _svgPath[0] == '/')
-                    {
-                        svgPath = _svgPath.Substring(1);
-                    }
-                    svgPath = svgPath.Replace('/', '\\');
-
-                    Assembly assembly = Assembly.GetExecutingAssembly();
-                    string localFile = Path.Combine(Path.GetDirectoryName(
-                        assembly.Location), svgPath);
-
-                    if (File.Exists(localFile))
-                    {
-                        return new Uri(localFile);
-                    }
-
-                    // Try getting it as resource file...
-                    IUriContext uriContext = serviceProvider.GetService(
-                        typeof(IUriContext)) as IUriContext;
-                    if (uriContext != null && uriContext.BaseUri != null)
-                    {
-                        return new Uri(uriContext.BaseUri, svgSource);
-                    }
-                    else
-                    {
-                        string asmName = assembly.GetName().Name;
-                        string uriString = String.Format(
-                            "pack://application:,,,/{0};component/{1}",
-                            asmName, _svgPath);
-
-                        return new Uri(uriString);
-                    }
+                    svgPath = _svgPath.Substring(1);
                 }
+                svgPath = svgPath.Replace('/', '\\');
+
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string localFile = Path.Combine(Path.GetDirectoryName(
+                    assembly.Location), svgPath);
+
+                if (File.Exists(localFile))
+                {
+                    return new Uri(localFile);
+                }
+
+                // Try getting it as resource file...
+                IUriContext uriContext = serviceProvider.GetService(typeof(IUriContext)) as IUriContext;
+                if (uriContext != null && uriContext.BaseUri != null)
+                {
+                    return new Uri(uriContext.BaseUri, svgSource);
+                }
+                string asmName = assembly.GetName().Name;
+                string uriString = string.Format("pack://application:,,,/{0};component/{1}",
+                    asmName, _svgPath);
+
+                return new Uri(uriString);
             }
 
             return null;

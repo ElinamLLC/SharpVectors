@@ -1,8 +1,8 @@
-﻿using SharpVectors.Renderers.Utils;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 
+using SharpVectors.Renderers.Utils;
 using SharpVectors.Converters.Shapes;
 
 namespace SharpVectors.Converters

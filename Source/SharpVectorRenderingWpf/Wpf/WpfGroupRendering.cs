@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 
-using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg; 

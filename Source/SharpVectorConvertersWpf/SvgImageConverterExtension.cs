@@ -164,37 +164,34 @@ namespace SharpVectors.Converters
                 {
                     return svgSource;
                 }
-                else
+                // Try getting a local file in the same directory....
+                string svgPath = inputParameter;
+                if (inputParameter[0] == '\\' || inputParameter[0] == '/')
                 {
-                    // Try getting a local file in the same directory....
-                    string svgPath = inputParameter;
-                    if (inputParameter[0] == '\\' || inputParameter[0] == '/')
-                    {
-                        svgPath = inputParameter.Substring(1);
-                    }
-                    svgPath = svgPath.Replace('/', '\\');
-
-                    Assembly assembly = Assembly.GetExecutingAssembly();
-                    string localFile = Path.Combine(Path.GetDirectoryName(
-                        assembly.Location), svgPath);
-
-                    if (File.Exists(localFile))
-                    {
-                        return new Uri(localFile);
-                    }
-
-                    // Try getting it as resource file...
-                    var inputUri = _uriConverter.ConvertFrom(inputParameter) as Uri;
-                    if (inputUri != null)
-                    {
-                        return inputUri.IsAbsoluteUri ? inputUri : new Uri(_baseUri, inputUri);
-                    }
-                    string asmName = assembly.GetName().Name;
-                    string uriString = string.Format("pack://application:,,,/{0};component/{1}",
-                        asmName, inputParameter);
-
-                    return new Uri(uriString);
+                    svgPath = inputParameter.Substring(1);
                 }
+                svgPath = svgPath.Replace('/', '\\');
+
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string localFile = Path.Combine(Path.GetDirectoryName(
+                    assembly.Location), svgPath);
+
+                if (File.Exists(localFile))
+                {
+                    return new Uri(localFile);
+                }
+
+                // Try getting it as resource file...
+                var inputUri = _uriConverter.ConvertFrom(inputParameter) as Uri;
+                if (inputUri != null)
+                {
+                    return inputUri.IsAbsoluteUri ? inputUri : new Uri(_baseUri, inputUri);
+                }
+                string asmName = assembly.GetName().Name;
+                string uriString = string.Format("pack://application:,,,/{0};component/{1}",
+                    asmName, inputParameter);
+
+                return new Uri(uriString);
             }
 
             return null;

@@ -4,8 +4,6 @@ using System.IO.Compression;
 using System.Xml;
 using System.Collections.Generic;
 
-using IoPath = System.IO.Path;
-
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -13,6 +11,8 @@ using System.Windows.Markup;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+
+using IoPath = System.IO.Path;
 
 using SharpVectors.Runtime.Utils;
 

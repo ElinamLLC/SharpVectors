@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using System;
 
 namespace SharpVectors.Renderers.Wpf
 {

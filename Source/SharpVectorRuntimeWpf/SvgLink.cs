@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-
 using System.Windows;
 
 namespace SharpVectors.Runtime
@@ -41,8 +38,6 @@ namespace SharpVectors.Runtime
         public static readonly DependencyProperty LineIdProperty =
             DependencyProperty.RegisterAttached("LineId", typeof(String), typeof(SvgLink),
             new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
-        
-        //----------------------------------------------------------------------------------------------------
 
         public static readonly DependencyProperty KeyProperty =
             DependencyProperty.RegisterAttached("Key", typeof(String), typeof(SvgLink),
@@ -119,8 +114,6 @@ namespace SharpVectors.Runtime
         {
             return (string)element.GetValue(LineIdProperty);
         }
-
-        //----------------------------------------------------------------------------------------------------
 
         public static void SetKey(DependencyObject element, string value)
         {

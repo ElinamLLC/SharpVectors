@@ -1,11 +1,12 @@
-﻿using SharpVectors.Dom;
-using SharpVectors.Dom.Svg;
-using System;
+﻿using System;
+using System.Xml;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml;
 using System.Windows.Shapes;
+
+using SharpVectors.Dom;
+using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Converters.Shapes
 {
