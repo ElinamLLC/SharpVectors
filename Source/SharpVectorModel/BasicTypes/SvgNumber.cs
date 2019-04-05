@@ -56,13 +56,17 @@ namespace SharpVectors.Dom.Svg
                 // remove the unit
                 Match match = reUnit.Match(sc);
                 string value = sc.Substring(0, sc.Length - match.Length);
-                //return ParseNumber(sc.Substring(0, sc.Length - match.Length)).ToString(Format) + match.Value;
-                return decimal.Parse(value, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint).ToString(Format) + match.Value;
+
+                var numberValue = decimal.Parse(value,
+                    NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
+
+                // <number> values in conforming SVG Tiny 1.2 content must have no more 
+                // than 4 decimal digits in the fractional part of their decimal expansion
+                var roundedValue = decimal.Round(numberValue, 4, MidpointRounding.AwayFromZero);
+
+                return roundedValue.ToString(Format) + match.Value;
             }
-            else
-            {
-                return sc;
-            }
+            return sc;
         }
 
         public static double Parse(string str)

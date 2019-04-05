@@ -1,6 +1,6 @@
 namespace SharpVectors.Text
 {
-	public class StringUtil
+	public static class StringUtil
 	{
 		public static bool IsInArray(string[] arrayToLookIn, string strToFind)
 		{

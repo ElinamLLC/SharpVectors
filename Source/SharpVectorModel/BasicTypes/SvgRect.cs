@@ -78,7 +78,7 @@ namespace SharpVectors.Dom.Svg
 
         public override string ToString()
 		{
-            CultureInfo culture = CultureInfo.CurrentCulture;
+            CultureInfo culture = CultureInfo.InvariantCulture;
 
             return ("{X=" + _x.ToString(culture) + ",Y=" + _y.ToString(culture) 
                 + ",Width=" + _width.ToString(culture) + ",Height=" + _height.ToString(culture) + "}");

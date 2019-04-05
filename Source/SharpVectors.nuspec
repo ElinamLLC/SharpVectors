@@ -13,25 +13,36 @@
     <iconUrl>https://github.com/ElinamLLC/SharpVectors/blob/master/Images/SharpVectors.png?raw=true</iconUrl>
     <copyright>Copyright (c) 2010 - 2018 Elinam LLC</copyright>
     <releaseNotes>
-		Release 1.2.0
-			* Improvements in marker support, including marker in curves.
-			* Improvements in color, color-profile, coordinates, transforms and aspect ratios. 
-			* Support for slice alignment.
-			* Support for SVG element visitor interfaces.
-	        * Removed the default size of 640x480 in WPF rendering.
-	        * Issue #53. Binding support in controls.
-	        * Issue #79. Fixed clipping bug.
-	        * Issue #64. WPF path rendering improvements, gradient stop fix.
+        Release 1.3.0
+            * Support for fallback paint server.
+            * Issue #81: Mouse Click on DOM Element. 
+            * Issue #82: Please add Databinding. Added new image source with binding support.
+            * Issue #83: Show no Image when Path is not pointing to an existing file.
+            * Issue #84: Transfrom parsing with floating numbers (submitted by @grayed).
+            * Issue #87: SvgViewbox doesn't show ToolTip.
+            * Issue #88: Make SvgDrawingCanvas Drawings public.
+            * Issue #95: Wrong rect displaying.
+            * Issue #96: Problem with SVG logo. Rework of the use element WPF rendering.
 
-		Release 1.1.0
-			* Moved from the .NET Client Profile to the full .NET Framework.
-			* Cleanup the .NET framework dependencies.
-			* Changed the converter assembly name; SharpVectors.Converters.dll to SharpVectors.Converters.Wpf.dll
-			* Changed the converter assembly name; SharpVectors.Runtime.dll to SharpVectors.Runtime.Wpf.dll
-			* Resolved various reported parsing and number handling issues. 
-			* Resolved various reported rendering issues, especially opacity and gradient fills. 
-			* Added marker support.
-	</releaseNotes>
+        Release 1.2.0
+            * Improvements in marker support, including marker in curves.
+            * Improvements in color, color-profile, coordinates, transforms and aspect ratios. 
+            * Support for slice alignment.
+            * Support for SVG element visitor interfaces.
+            * Removed the default size of 640x480 in WPF rendering.
+            * Issue #53. Binding support in controls.
+            * Issue #79. Fixed clipping bug.
+            * Issue #64. WPF path rendering improvements, gradient stop fix.
+
+        Release 1.1.0
+            * Moved from the .NET Client Profile to the full .NET Framework.
+            * Cleanup the .NET framework dependencies.
+            * Changed the converter assembly name; SharpVectors.Converters.dll to SharpVectors.Converters.Wpf.dll
+            * Changed the converter assembly name; SharpVectors.Runtime.dll to SharpVectors.Runtime.Wpf.dll
+            * Resolved various reported parsing and number handling issues. 
+            * Resolved various reported rendering issues, especially opacity and gradient fills. 
+            * Added marker support.
+    </releaseNotes>
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
   </metadata>
   <files>

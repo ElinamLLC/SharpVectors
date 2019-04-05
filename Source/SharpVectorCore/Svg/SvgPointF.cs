@@ -285,7 +285,7 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
+            return string.Format(CultureInfo.InvariantCulture,
                 "{{X={0}, Y={1}}", _x, _y);
         }
 

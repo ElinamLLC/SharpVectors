@@ -276,7 +276,7 @@ namespace SharpVectors.Dom.Svg
         /// <returns>A string that represents this <see cref="SvgSizeF"/>.</returns>
         public override string ToString()
         {
-            CultureInfo culture = CultureInfo.CurrentCulture;
+            CultureInfo culture = CultureInfo.InvariantCulture;
 
             return ("{Width=" + _width.ToString(culture)
                 + ", Height=" + _height.ToString(culture) + "}");
