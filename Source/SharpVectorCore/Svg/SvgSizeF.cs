@@ -29,7 +29,7 @@ namespace SharpVectors.Dom.Svg
         /// <param name="height">The height component of the new <see cref="SvgSizeF"/>. </param>
         public SvgSizeF(float width, float height)
         {
-            _width  = width;
+            _width = width;
             _height = height;
         }
 
@@ -37,7 +37,7 @@ namespace SharpVectors.Dom.Svg
         /// <param name="size">The <see cref="SvgSizeF"/> from which to create the new <see cref="SvgSizeF"/>. </param>
         public SvgSizeF(SvgSizeF size)
         {
-            _width  = size._width;
+            _width = size._width;
             _height = size._height;
         }
 
@@ -45,7 +45,7 @@ namespace SharpVectors.Dom.Svg
         /// <param name="pt">The <see cref="SvgPointF"/> from which to initialize this <see cref="SvgSizeF"/>. </param>
         public SvgSizeF(SvgPointF pt)
         {
-            _width  = pt.X;
+            _width = pt.X;
             _height = pt.Y;
         }
 
@@ -108,9 +108,9 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public static bool operator ==(SvgSizeF sz1, SvgSizeF sz2)
         {
-            if (sz1.Width == sz2.Width)
+            if (sz1.Width.Equals(sz2.Width))
             {
-                return (sz1.Height == sz2.Height);
+                return sz1.Height.Equals(sz2.Height);
             }
 
             return false;
@@ -169,13 +169,11 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public bool IsEmpty
         {
-            get
-            {
-                if (_width == 0.0)
+            get {
+                if (_width.Equals(0.0))
                 {
-                    return (_height == 0.0);
+                    return _height.Equals(0.0);
                 }
-
                 return false;
             }
         }
@@ -188,13 +186,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Width
         {
-            get
-            {
+            get {
                 return _width;
             }
-
-            set
-            {
+            set {
                 _width = value;
             }
         }
@@ -207,13 +202,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Height
         {
-            get
-            {
+            get {
                 return _height;
             }
-
-            set
-            {
+            set {
                 _height = value;
             }
         }
@@ -238,7 +230,6 @@ namespace SharpVectors.Dom.Svg
             {
                 return Equals((SvgSizeF)obj);
             }
-
             return false;
         }
 
@@ -248,13 +239,12 @@ namespace SharpVectors.Dom.Svg
         /// </summary>
         /// <param name="other">The <see cref="SvgSizeF"/> to test. </param>
         /// <returns>
-        /// This returns <see langword="true"/> if the specified <see cref="SvgSizeF"/> and has the same width and height as this <see cref="SvgSizeF"/>; 
-        /// otherwise, <see langword="false"/>.
+        /// This returns <see langword="true"/> if the specified <see cref="SvgSizeF"/> and has 
+        /// the same width and height as this <see cref="SvgSizeF"/>; otherwise, <see langword="false"/>.
         /// </returns>
         public bool Equals(SvgSizeF other)
         {
-            return ((other.Width.Equals(_width)) && 
-                (other.Height.Equals(_height)));
+            return ((other.Width.Equals(_width)) && (other.Height.Equals(_height)));
         }
 
         /// <summary>
@@ -266,7 +256,8 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public override int GetHashCode()
         {
-            return (_width.GetHashCode() ^ _height.GetHashCode());
+            double[] values = this.GetHashValues();
+            return values[0].GetHashCode() ^ values[0].GetHashCode();
         }
 
         /// <summary>
@@ -321,6 +312,15 @@ namespace SharpVectors.Dom.Svg
         public static SvgSizeF Subtract(SvgSizeF sz1, SvgSizeF sz2)
         {
             return new SvgSizeF(sz1.Width - sz2.Width, sz1.Height - sz2.Height);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private double[] GetHashValues()
+        {
+            return new double[] { _width, _height };
         }
 
         #endregion

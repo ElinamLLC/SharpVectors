@@ -257,11 +257,10 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public bool Equals(SvgPointF other)
         {
-            if ((other.X == this.X) && (other.Y == this.Y))
+            if (other.X.Equals(this.X) && other.Y.Equals(this.Y))
             {
                 return other.GetType().Equals(base.GetType());
             }
-
             return false;
         }
 
@@ -274,7 +273,7 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public override int GetHashCode()
         {
-            return (_x.GetHashCode() ^ _y.GetHashCode());
+            return X.GetHashCode() ^ Y.GetHashCode();
         }
 
         /// <summary>

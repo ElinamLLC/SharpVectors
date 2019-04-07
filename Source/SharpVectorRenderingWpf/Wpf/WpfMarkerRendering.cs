@@ -489,9 +489,6 @@ namespace SharpVectors.Renderers.Wpf
 
             if (pathFlattened != null)
             {
-                Point locationAt;
-                Point tagentAt;
-
                 double progress = 1;
                 switch (position)
                 {
@@ -505,6 +502,9 @@ namespace SharpVectors.Renderers.Wpf
                         progress = 0;
                         break;
                 }
+                Point locationAt;
+                Point tagentAt;
+
                 pathFlattened.GetPointAtFractionLength(progress, out locationAt, out tagentAt);
 
                 return Math.Atan2(tagentAt.Y, tagentAt.X) * 180 / Math.PI;

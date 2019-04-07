@@ -9,8 +9,8 @@ namespace SharpVectors.Polynomials
     {
         #region Private Fields
 
-        private double[] coefficients;
-        private double s;
+        private double[] _coefficients;
+        private double _s;
 
         #endregion
 
@@ -18,12 +18,12 @@ namespace SharpVectors.Polynomials
 
         public int Degree
         {
-            get { return this.coefficients.Length - 1; }
+            get { return this._coefficients.Length - 1; }
         }
 
         public double this[int index]
         {
-            get { return this.coefficients[index]; }
+            get { return this._coefficients[index]; }
         }
 
         #endregion
@@ -47,21 +47,21 @@ namespace SharpVectors.Polynomials
 
             if (end > 0)
             {
-                this.coefficients = new double[coefficients.Length - (coefficients.Length - end)];
+                this._coefficients = new double[coefficients.Length - (coefficients.Length - end)];
                 for (int i = 0; i < end; i++)
                 {
-                    this.coefficients[i] = coefficients[i];
+                    this._coefficients[i] = coefficients[i];
                 }
             }
             else
             {
-                this.coefficients = new double[0];
+                this._coefficients = new double[0];
             }
         }
 
         public Polynomial(Polynomial that)
         {
-            this.coefficients = that.coefficients;
+            this._coefficients = that._coefficients;
         }
 
         #endregion
@@ -135,9 +135,9 @@ namespace SharpVectors.Polynomials
         {
             double result = 0.0;
 
-            for (int i = this.coefficients.Length - 1; i >= 0; i--)
+            for (int i = _coefficients.Length - 1; i >= 0; i--)
             {
-                result = result * t + this.coefficients[i];
+                result = result * t + _coefficients[i];
             }
 
             return result;
@@ -218,7 +218,7 @@ namespace SharpVectors.Polynomials
 
             if (n == 1)
             {
-                this.s = 0.5 * range * (this.Evaluate(min) + this.Evaluate(max));
+                this._s = 0.5 * range * (this.Evaluate(min) + this.Evaluate(max));
             }
             else
             {
@@ -232,10 +232,10 @@ namespace SharpVectors.Polynomials
                     sum += this.Evaluate(x);
                     x += delta;
                 }
-                this.s = 0.5 * (this.s + range * sum / it);
+                this._s = 0.5 * (this._s + range * sum / it);
             }
 
-            return this.s;
+            return this._s;
         }
         #endregion
     }

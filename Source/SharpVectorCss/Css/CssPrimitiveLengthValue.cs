@@ -72,13 +72,30 @@ namespace SharpVectors.Dom.Css
                 case CssPrimitiveType.In:
                 case CssPrimitiveType.Pt:
                 case CssPrimitiveType.Pc:
-                    if (unitType == CssPrimitiveType.Px) ret = _getPxLength();
-                    else if (unitType == CssPrimitiveType.Number) ret = _getPxLength();
-                    else if (unitType == CssPrimitiveType.In) ret = _getInLength();
-                    else if (unitType == CssPrimitiveType.Cm) ret = _getInLength() * CmPerIn;
-                    else if (unitType == CssPrimitiveType.Mm) ret = _getInLength() * CmPerIn * 10;
-                    else if (unitType == CssPrimitiveType.Pt) ret = _getInLength() * 72;
-                    else if (unitType == CssPrimitiveType.Pc) ret = _getInLength() * 6;
+                    switch (unitType)
+                    {
+                        case CssPrimitiveType.Px:
+                            ret = _getPxLength();
+                            break;
+                        case CssPrimitiveType.Number:
+                            ret = _getPxLength();
+                            break;
+                        case CssPrimitiveType.In:
+                            ret = _getInLength();
+                            break;
+                        case CssPrimitiveType.Cm:
+                            ret = _getInLength() * CmPerIn;
+                            break;
+                        case CssPrimitiveType.Mm:
+                            ret = _getInLength() * CmPerIn * 10;
+                            break;
+                        case CssPrimitiveType.Pt:
+                            ret = _getInLength() * 72;
+                            break;
+                        case CssPrimitiveType.Pc:
+                            ret = _getInLength() * 6;
+                            break;
+                    }
                     break;
                 case CssPrimitiveType.Percentage:
                     if (unitType == CssPrimitiveType.Percentage) ret = floatValue;

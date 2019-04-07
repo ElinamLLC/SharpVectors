@@ -412,7 +412,7 @@ namespace SharpVectors.Converters.Shapes
             }
             if (TryGetDashArray(element, strokeWidth, out DoubleCollection dashArray))
                 style.Setters.Add(new Setter(Shape.StrokeDashArrayProperty, dashArray));
-            if (TryGetDashOffset(element, strokeWidth, out double dashOffset))
+            if (TryGetDashOffset(element, out double dashOffset))
                 style.Setters.Add(new Setter(Shape.StrokeDashOffsetProperty, dashOffset));
 
             // Fill

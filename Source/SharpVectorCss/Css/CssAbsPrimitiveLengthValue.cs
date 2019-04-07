@@ -181,6 +181,7 @@ namespace SharpVectors.Dom.Css
         #endregion
 
         #region Overrides of CssPrimitiveLengthValue
+
         public override double GetFloatValue(CssPrimitiveType unitType)
         {
             double ret;
@@ -190,10 +191,7 @@ namespace SharpVectors.Dom.Css
                 {
                     return floatValue;
                 }
-                else
-                {
-                    throw new NotImplementedException("Can't get absolute values from percentages");
-                }
+                throw new NotImplementedException("Can't get absolute values from percentages");
             }
             else
             {
@@ -227,6 +225,7 @@ namespace SharpVectors.Dom.Css
             }
             return ret;
         }
+
         #endregion
     }
 }

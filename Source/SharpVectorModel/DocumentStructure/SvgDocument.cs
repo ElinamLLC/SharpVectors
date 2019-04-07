@@ -9,6 +9,7 @@ using System;
 using System.Xml;
 using System.IO;
 using System.IO.Compression;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -68,6 +69,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Public Static Fields
 
+        public static readonly int DotsPerInch = 96;
+
         public const string SvgNamespace   = "http://www.w3.org/2000/svg";
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
 
@@ -75,15 +78,17 @@ namespace SharpVectors.Dom.Svg
 
         #region Private Fields
 
-        private bool _ignoreComments;
-        private bool _ignoreProcessingInstructions;
-        private bool _ignoreWhitespace;
+        private readonly bool _ignoreComments;
+        private readonly bool _ignoreProcessingInstructions;
+        private readonly bool _ignoreWhitespace;
 
         private SvgWindow _window;
 
         private XmlReaderSettings _settings;
 
         private IList<SvgFontElement> _svgFonts;
+
+        private double _dpi;
 
         #endregion
 
@@ -94,6 +99,8 @@ namespace SharpVectors.Dom.Svg
             _ignoreComments               = false;
             _ignoreWhitespace             = false;
             _ignoreProcessingInstructions = false;
+
+            _dpi                          = DotsPerInch;
 
             this.PreserveWhitespace       = true;
         }
@@ -144,6 +151,20 @@ namespace SharpVectors.Dom.Svg
             }
             set {
                 _settings = value;
+            }
+        }
+
+        /// <summary>
+        /// Get or sets the dots per inch at which the objects should be rendered.
+        /// </summary>
+        /// <value>The current dots per inch value.</value>
+        public double Dpi
+        {
+            get {
+                return _dpi;
+            }
+            set {
+                _dpi = value;
             }
         }
 
@@ -203,14 +224,14 @@ namespace SharpVectors.Dom.Svg
 
         #region Support collections
 
-        private string[] supportedFeatures = {
+        private readonly string[] supportedFeatures = {
             "org.w3c.svg.static",
             "http://www.w3.org/TR/Svg11/feature#Shape",
             "http://www.w3.org/TR/Svg11/feature#BasicText",
             "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
         };
 
-        private string[] supportedExtensions = { };
+        private readonly string[] supportedExtensions = { };
 
         public override bool Supports(string feature, string version)
         {
@@ -325,16 +346,16 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Loads the XML document from the specified URL.
         /// </summary>
-        /// <param name="url">
+        /// <param name="filename">
         /// URL for the file containing the XML document to load.
         /// </param>
-        public override void Load(string url)
+        public override void Load(string filename)
         {
             // Provide a support for the .svgz files...
-            UriBuilder fileUrl = new UriBuilder(url);
+            UriBuilder fileUrl = new UriBuilder(filename);
             if (string.Equals(fileUrl.Scheme, "file"))
             {
-                string fileExt = Path.GetExtension(url);
+                string fileExt = Path.GetExtension(filename);
                 if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
                     using (FileStream fileStream = File.OpenRead(fileUrl.Uri.LocalPath))
@@ -353,7 +374,7 @@ namespace SharpVectors.Dom.Svg
 
             //PrepareXmlResolver(settings);
             //using (XmlReader reader = XmlReader.Create(url, settings))
-            using (XmlReader reader = CreateValidatingXmlReader(url))
+            using (XmlReader reader = CreateValidatingXmlReader(filename))
             {
                 this.Load(reader);
             }
@@ -764,7 +785,7 @@ namespace SharpVectors.Dom.Svg
             }
 
             string baseUri = this.BaseURI;
-            if (baseUri == null || baseUri.Length == 0)
+            if (string.IsNullOrWhiteSpace(baseUri))
             {
                 DirectoryInfo workingDir = _window.WorkingDir;
 
@@ -1039,8 +1060,9 @@ namespace SharpVectors.Dom.Svg
                         //TODO
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Trace.TraceError(ex.ToString());
                     //Ignore the exception
                 }
             }

@@ -34,8 +34,8 @@ namespace SharpVectors.Dom.Svg
             m12 = 0.0f;
             m21 = 0.0f;
             m22 = 1.0f;
-            dx  = 0.0f;
-            dy  = 0.0f;
+            dx = 0.0f;
+            dy = 0.0f;
         }
 
         /// <summary>
@@ -68,16 +68,16 @@ namespace SharpVectors.Dom.Svg
         {
             if (plgpts == null)
             {
-                throw new ArgumentNullException("plgpts");
+                throw new ArgumentNullException(nameof(plgpts));
             }
             if (plgpts.Length != 3)
             {
-                throw new ArgumentException("plgpts");
+                throw new ArgumentException(nameof(plgpts));
             }
 
-            if ((rect.Width == 0) || (rect.Height == 0))
+            if (rect.Width.Equals(0) || rect.Height.Equals(0))
             {
-                throw new ArgumentOutOfRangeException("rect");
+                throw new ArgumentOutOfRangeException(nameof(rect));
             }
 
             MapRectToRect(rect, plgpts);
@@ -101,19 +101,19 @@ namespace SharpVectors.Dom.Svg
         {
             if (elements == null)
             {
-                throw new ArgumentNullException("elements");
+                throw new ArgumentNullException(nameof(elements));
             }
             if (elements.Length != 6)
             {
-                throw new ArgumentException("elements");
+                throw new ArgumentException(nameof(elements));
             }
 
             this.m11 = elements[0];
             this.m12 = elements[1];
             this.m21 = elements[2];
             this.m22 = elements[3];
-            this.dx  = elements[4];
-            this.dy  = elements[5];
+            this.dx = elements[4];
+            this.dy = elements[5];
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace SharpVectors.Dom.Svg
         {
             if (source == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
             }
 
             this.m11 = source.m11;
@@ -190,9 +190,8 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float[] Elements
         {
-            get
-            {
-				return new float[] {m11, m12, m21, m22, dx, dy};
+            get {
+                return new float[] { m11, m12, m21, m22, dx, dy };
             }
         }
 
@@ -206,11 +205,9 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public bool IsIdentity
         {
-            get
-            {
-                return (m11 == 1.0f && m12 == 0.0f &&
-                        m21 == 0.0f && m22 == 1.0f &&
-                        dx == 0.0f && dy == 0.0f);
+            get {
+                return (m11.Equals(1.0f) && m12.Equals(0.0f) && m21.Equals(0.0f) 
+                    && m22.Equals(1.0f) && dx.Equals(0.0f) && dy.Equals(0.0f));
             }
         }
 
@@ -224,9 +221,9 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public bool IsInvertible
         {
-            get
-            {
-                return ((m11 * m22 - m21 * m11) != 0.0f);
+            get {
+                var determinant = m11 * m22 - m21 * m11;
+                return !determinant.Equals(0.0f);
             }
         }
 
@@ -239,8 +236,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float OffsetX
         {
-            get
-            {
+            get {
                 return dx;
             }
         }
@@ -254,8 +250,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float OffsetY
         {
-            get
-            {
+            get {
                 return dy;
             }
         }
@@ -274,14 +269,14 @@ namespace SharpVectors.Dom.Svg
         /// <see cref="SvgTransformF"/> identical to this 
         /// <see cref="SvgTransformF"/>; otherwise, <see langword="false"/>.
         /// </returns>
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
             SvgTransformF other = (obj as SvgTransformF);
             if (other != null)
             {
-                return (other.m11 == m11 && other.m12 == m12 &&
-                        other.m21 == m21 && other.m22 == m22 &&
-                        other.dx  == dx  && other.dy  == dy);
+                return (other.m11.Equals(m11) && other.m12.Equals(m12) &&
+                        other.m21.Equals(m21) && other.m22.Equals(m22) &&
+                        other.dx.Equals(dx) && other.dy.Equals(dy));
             }
 
             return false;
@@ -293,7 +288,7 @@ namespace SharpVectors.Dom.Svg
         /// <returns>The hash code for this <see cref="SvgTransformF"/>.</returns>
         public override int GetHashCode()
         {
-            return (int)(m11 + m12 + m21 + m22 + dx + dy);
+            return (int)this.SumValues;
         }
 
         /// <summary>
@@ -302,7 +297,7 @@ namespace SharpVectors.Dom.Svg
         public void Invert()
         {
             float determinant = this.m11 * this.m22 - this.m21 * this.m11;
-            if (determinant != 0.0f)
+            if (!determinant.Equals(0.0f))
             {
                 float nm11 = this.m22 / determinant;
                 float nm12 = -(this.m12 / determinant);
@@ -338,9 +333,9 @@ namespace SharpVectors.Dom.Svg
         {
             if (matrix == null)
             {
-                throw new ArgumentNullException("matrix");
+                throw new ArgumentNullException(nameof(matrix));
             }
-            Multiply((SvgTransformF)matrix, this);
+            Multiply(matrix, this);
         }
 
         /// <summary>
@@ -352,34 +347,34 @@ namespace SharpVectors.Dom.Svg
         /// is to be multiplied.
         /// </param>
         /// <param name="order">
-        /// The <see cref="TransformOrder"/> that represents the order of the 
+        /// The <see cref="SvgTransformOrder"/> that represents the order of the 
         /// multiplication.
         /// </param>
         public void Multiply(SvgTransformF matrix, SvgTransformOrder order)
         {
             if (matrix == null)
             {
-                throw new ArgumentNullException("matrix");
+                throw new ArgumentNullException(nameof(matrix));
             }
             if (order == SvgTransformOrder.Prepend)
             {
-                Multiply((SvgTransformF)matrix, this);
+                Multiply(matrix, this);
             }
             else
             {
-                Multiply(this, (SvgTransformF)matrix);
+                Multiply(this, matrix);
             }
         }
 
-        /// <summary>
-        /// Multiplies this <see cref="SvgTransformF"/> by the specified 
-        /// <see cref="SvgTransformF"/> by prepending the specified 
-        /// <see cref="SvgTransformF"/>.
-        /// </summary>
-        /// <param name="matrix">
-        /// The <see cref="SvgTransformF"/> by which this <see cref="SvgTransformF"/> 
-        /// is to be multiplied.
-        /// </param>
+        // <summary>
+        // Multiplies this <see cref="SvgTransformF"/> by the specified 
+        // <see cref="SvgTransformF"/> by prepending the specified 
+        // <see cref="SvgTransformF"/>.
+        // </summary>
+        // <param name="matrix">
+        // The <see cref="SvgTransformF"/> by which this <see cref="SvgTransformF"/> 
+        // is to be multiplied.
+        // </param>
         //public void Multiply(SvgTransformF matrix)
         //{
         //    if (matrix == null)
@@ -389,18 +384,18 @@ namespace SharpVectors.Dom.Svg
         //    Multiply(matrix, this);
         //}
 
-        /// <summary>
-        /// Multiplies this <see cref="SvgTransformF"/> by the matrix specified in 
-        /// the matrix parameter, and in the order specified in the order parameter.
-        /// </summary>
-        /// <param name="matrix">
-        /// The <see cref="SvgTransformF"/> by which this <see cref="SvgTransformF"/> 
-        /// is to be multiplied.
-        /// </param>
-        /// <param name="order">
-        /// The <see cref="TransformOrder"/> that represents the order of the 
-        /// multiplication.
-        /// </param>
+        // <summary>
+        // Multiplies this <see cref="SvgTransformF"/> by the matrix specified in 
+        // the matrix parameter, and in the order specified in the order parameter.
+        // </summary>
+        // <param name="matrix">
+        // The <see cref="SvgTransformF"/> by which this <see cref="SvgTransformF"/> 
+        // is to be multiplied.
+        // </param>
+        // <param name="order">
+        // The <see cref="TransformOrder"/> that represents the order of the 
+        // multiplication.
+        // </param>
         //public void Multiply(SvgTransformF matrix, TransformOrder order)
         //{
         //    if (matrix == null)
@@ -427,8 +422,8 @@ namespace SharpVectors.Dom.Svg
             m12 = 0.0f;
             m21 = 0.0f;
             m22 = 0.1f;
-            dx  = 0.0f;
-            dy  = 0.0f;
+            dx = 0.0f;
+            dy = 0.0f;
         }
 
         /// <overloads>
@@ -444,19 +439,19 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public void Rotate(float angle)
         {
-			double radians = (angle * (Math.PI / 180.0));
-			float cos = (float)(Math.Cos(radians));
-			float sin = (float)(Math.Sin(radians));
+            double radians = (angle * (Math.PI / 180.0));
+            float cos = (float)(Math.Cos(radians));
+            float sin = (float)(Math.Sin(radians));
 
-			float nm11 = cos * this.m11 + sin * this.m21;
-			float nm12 = cos * this.m12 + sin * this.m22;
-			float nm21 = cos * this.m21 - sin * this.m11;
-			float nm22 = cos * this.m22 - sin * this.m12;
+            float nm11 = cos * this.m11 + sin * this.m21;
+            float nm12 = cos * this.m12 + sin * this.m22;
+            float nm21 = cos * this.m21 - sin * this.m11;
+            float nm22 = cos * this.m22 - sin * this.m12;
 
-			this.m11 = nm11;
-			this.m12 = nm12;
-			this.m21 = nm21;
-			this.m22 = nm22;
+            this.m11 = nm11;
+            this.m12 = nm12;
+            this.m21 = nm21;
+            this.m22 = nm22;
         }
 
         /// <summary>
@@ -468,44 +463,44 @@ namespace SharpVectors.Dom.Svg
         /// The angle (extent) of the rotation, in degrees.
         /// </param>
         /// <param name="order">
-        /// A <see cref="TransformOrder"/> that specifies the order (append or 
+        /// A <see cref="SvgTransformOrder"/> that specifies the order (append or 
         /// prepend) in which the rotation is applied to this 
         /// <see cref="SvgTransformF"/>.
         /// </param>
         public void Rotate(float angle, SvgTransformOrder order)
         {
-			double radians = (angle * (Math.PI / 180.0));
-			float cos = (float)(Math.Cos(radians));
-			float sin = (float)(Math.Sin(radians));
+            double radians = (angle * (Math.PI / 180.0));
+            float cos = (float)(Math.Cos(radians));
+            float sin = (float)(Math.Sin(radians));
 
-			if (order == SvgTransformOrder.Prepend)
-			{
-				float nm11 = cos * this.m11 + sin * this.m21;
-				float nm12 = cos * this.m12 + sin * this.m22;
-				float nm21 = cos * this.m21 - sin * this.m11;
-				float nm22 = cos * this.m22 - sin * this.m12;
+            if (order == SvgTransformOrder.Prepend)
+            {
+                float nm11 = cos * this.m11 + sin * this.m21;
+                float nm12 = cos * this.m12 + sin * this.m22;
+                float nm21 = cos * this.m21 - sin * this.m11;
+                float nm22 = cos * this.m22 - sin * this.m12;
 
-				this.m11 = nm11;
-				this.m12 = nm12;
-				this.m21 = nm21;
-				this.m22 = nm22;
-			}
-			else
-			{
-				float nm11 = this.m11 * cos - this.m12 * sin;
-				float nm12 = this.m11 * sin + this.m12 * cos;
-				float nm21 = this.m21 * cos - this.m22 * sin;
-				float nm22 = this.m21 * sin + this.m22 * cos;
-				float ndx  = this.dx  * cos - this.dy  * sin;
-				float ndy  = this.dx  * sin + this.dy  * cos;
+                this.m11 = nm11;
+                this.m12 = nm12;
+                this.m21 = nm21;
+                this.m22 = nm22;
+            }
+            else
+            {
+                float nm11 = this.m11 * cos - this.m12 * sin;
+                float nm12 = this.m11 * sin + this.m12 * cos;
+                float nm21 = this.m21 * cos - this.m22 * sin;
+                float nm22 = this.m21 * sin + this.m22 * cos;
+                float ndx = this.dx * cos - this.dy * sin;
+                float ndy = this.dx * sin + this.dy * cos;
 
-				this.m11 = nm11;
-				this.m12 = nm12;
-				this.m21 = nm21;
-				this.m22 = nm22;
-				this.dx  = ndx;
-				this.dy  = ndy;
-			}
+                this.m11 = nm11;
+                this.m12 = nm12;
+                this.m21 = nm21;
+                this.m22 = nm22;
+                this.dx = ndx;
+                this.dy = ndy;
+            }
         }
 
         /// <overloads>
@@ -540,7 +535,7 @@ namespace SharpVectors.Dom.Svg
         /// A <see cref="SvgPointF"/> that represents the center of the rotation.
         /// </param>
         /// <param name="order">
-        /// A <see cref="TransformOrder"/> that specifies the order (append or 
+        /// A <see cref="SvgTransformOrder"/> that specifies the order (append or 
         /// prepend) in which the rotation is applied.
         /// </param>
         public void RotateAt(float angle, SvgPointF point, SvgTransformOrder order)
@@ -596,7 +591,7 @@ namespace SharpVectors.Dom.Svg
         /// y-axis direction.
         /// </param>
         /// <param name="order">
-        /// A <see cref="TransformOrder"/> that specifies the order (append or 
+        /// A <see cref="SvgTransformOrder"/> that specifies the order (append or 
         /// prepend) in which the scale vector is applied to this 
         /// <see cref="SvgTransformF"/>.
         /// </param>
@@ -658,7 +653,7 @@ namespace SharpVectors.Dom.Svg
         /// The vertical shear factor.
         /// </param>
         /// <param name="order">
-        /// A <see cref="TransformOrder"/> that specifies the order (append or 
+        /// A <see cref="SvgTransformOrder"/> that specifies the order (append or 
         /// prepend) in which the shear is applied.
         /// </param>
         public void Shear(float shearX, float shearY, SvgTransformOrder order)
@@ -688,8 +683,8 @@ namespace SharpVectors.Dom.Svg
                 this.m12 = nm12;
                 this.m21 = nm21;
                 this.m22 = nm22;
-                this.dx  = ndx;
-                this.dy  = ndy;
+                this.dx = ndx;
+                this.dy = ndy;
             }
         }
 
@@ -724,7 +719,7 @@ namespace SharpVectors.Dom.Svg
         /// The <c>y</c> value by which to translate this <see cref="SvgTransformF"/>.
         /// </param>
         /// <param name="order">
-        /// A <see cref="TransformOrder"/> that specifies the order (append or 
+        /// A <see cref="SvgTransformOrder"/> that specifies the order (append or 
         /// prepend) in which the translation is applied to this <see cref="SvgTransformF"/>.
         /// </param>
         public void Translate(float offsetX, float offsetY, SvgTransformOrder order)
@@ -766,12 +761,12 @@ namespace SharpVectors.Dom.Svg
         public void ReverseTransform(float x, float y, out float ox, out float oy)
         {
             float determinant = this.m11 * this.m22 - this.m21 * this.m11;
-            if (determinant != 0.0f)
+            if (!determinant.Equals(0.0f))
             {
-                float nm11 =   this.m22 / determinant;
+                float nm11 = this.m22 / determinant;
                 float nm12 = -(this.m12 / determinant);
                 float nm21 = -(this.m21 / determinant);
-                float nm22 =   this.m11 / determinant;
+                float nm22 = this.m11 / determinant;
 
                 ox = x * nm11 + y * nm21;
                 oy = x * nm12 + y * nm22;
@@ -795,15 +790,15 @@ namespace SharpVectors.Dom.Svg
         {
             if (pts == null)
             {
-                throw new ArgumentNullException("pts");
+                throw new ArgumentNullException(nameof(pts));
             }
 
             int nLength = pts.Length;
 
             for (int i = nLength - 1; i >= 0; --i)
             {
-                float x  = pts[i].X;
-                float y  = pts[i].Y;
+                float x = pts[i].X;
+                float y = pts[i].Y;
                 pts[i].ValueX = x * m11 + y * m21 + dx;
                 pts[i].ValueY = x * m12 + y * m22 + dy;
             }
@@ -821,15 +816,15 @@ namespace SharpVectors.Dom.Svg
         {
             if (pts == null)
             {
-                throw new ArgumentNullException("pts");
+                throw new ArgumentNullException(nameof(pts));
             }
 
             int nLength = pts.Length;
 
             for (int i = nLength - 1; i >= 0; --i)
             {
-                float x  = pts[i].X;
-                float y  = pts[i].Y;
+                float x = pts[i].X;
+                float y = pts[i].Y;
                 pts[i].ValueX = x * m11 + y * m21;
                 pts[i].ValueY = x * m12 + y * m22;
             }
@@ -837,7 +832,14 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Private Methods
+        #region Private Properties and Methods
+
+        private double SumValues
+        {
+            get {
+                return (m11 + m12 + m21 + m22 + dx + dy);
+            }
+        }
 
         private void Multiply(SvgTransformF a, SvgTransformF b)
         {
@@ -845,15 +847,15 @@ namespace SharpVectors.Dom.Svg
             float nm12 = a.m11 * b.m12 + a.m12 * b.m22;
             float nm21 = a.m21 * b.m11 + a.m22 * b.m21;
             float nm22 = a.m21 * b.m12 + a.m22 * b.m22;
-            float ndx  = a.dx  * b.m11 + a.dy  * b.m21 + b.dx;
-            float ndy  = a.dx  * b.m12 + a.dy  * b.m22 + b.dy;
+            float ndx = a.dx * b.m11 + a.dy * b.m21 + b.dx;
+            float ndy = a.dx * b.m12 + a.dy * b.m22 + b.dy;
 
             this.m11 = nm11;
             this.m12 = nm12;
             this.m21 = nm21;
             this.m22 = nm22;
-            this.dx  = ndx;
-            this.dy  = ndy;
+            this.dx = ndx;
+            this.dy = ndy;
         }
 
         private void MapRectToRect(SvgRectF rect, SvgPointF[] plgpts)

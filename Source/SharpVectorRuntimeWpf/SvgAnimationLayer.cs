@@ -451,7 +451,7 @@ namespace SharpVectors.Runtime
             return true;
         }
 
-        public bool HandleMouseLeave(MouseEventArgs e)
+        public bool HandleMouseLeave()
         {
             if (_tooltip != null)
             {
@@ -572,10 +572,6 @@ namespace SharpVectors.Runtime
         }
 
         private void AddGeometryDrawing(GeometryDrawing drawing)
-        {               
-        }
-
-        private void AddGeometryDrawing(GeometryDrawing drawing, string name)
         {               
         }
 

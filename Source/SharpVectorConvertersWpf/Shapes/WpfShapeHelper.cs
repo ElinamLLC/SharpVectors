@@ -176,7 +176,7 @@ namespace SharpVectors.Converters.Shapes
             }
         }
 
-        public static bool TryGetDashOffset(SvgStyleableElement element, double strokeWidth, out double offset)
+        public static bool TryGetDashOffset(SvgStyleableElement element, out double offset)
         {
             string dashOffset = element.GetPropertyValue("stroke-dashoffset");
             if (dashOffset.Length > 0)

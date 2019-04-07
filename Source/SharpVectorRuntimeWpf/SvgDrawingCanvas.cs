@@ -595,7 +595,7 @@ namespace SharpVectors.Runtime
         {
             base.OnMouseLeave(e);
 
-            if (_animationCanvas != null && _animationCanvas.HandleMouseLeave(e))
+            if (_animationCanvas != null && _animationCanvas.HandleMouseLeave())
             {
                 return;
             }

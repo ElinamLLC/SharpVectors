@@ -11,8 +11,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private static string numberPattern = @"(?<number>(\+|-)?\d*\.?\d+((e|E)(\+|-)?\d+)?)";
-        private static Regex reNumber = new Regex("^" + numberPattern + "$");
+        private static readonly string numberPattern = @"(?<number>(\+|-)?\d*\.?\d+((e|E)(\+|-)?\d+)?)";
+        private static readonly Regex reNumber = new Regex("^" + numberPattern + "$");
 
         private static Regex reUnit = new Regex("[a-z]+$");
         private static Regex DoubleRegex = new Regex(@"(\+|-)?((\.[0-9]+)|([0-9]+(\.[0-9]*)?))([eE](\+|-)?[0-9]+)?", RegexOptions.Compiled);

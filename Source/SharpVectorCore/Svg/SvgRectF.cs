@@ -17,7 +17,7 @@ namespace SharpVectors.Dom.Svg
         /// with its members uninitialized.
         /// </summary>
         public static readonly SvgRectF Empty = new SvgRectF();
-                    
+
         private float _x;
         private float _y;
         private float _width;
@@ -41,9 +41,9 @@ namespace SharpVectors.Dom.Svg
         /// <param name="height">The height of the rectangle. </param>
         public SvgRectF(float x, float y, float width, float height)
         {
-            _x      = x;
-            _y      = y;
-            _width  = width;
+            _x = x;
+            _y = y;
+            _width = width;
             _height = height;
         }
 
@@ -61,9 +61,9 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public SvgRectF(SvgPointF location, SvgSizeF size)
         {
-            _x      = location.X;
-            _y      = location.Y;
-            _width  = size.Width;
+            _x = location.X;
+            _y = location.Y;
+            _width = size.Width;
             _height = size.Height;
         }
 
@@ -86,7 +86,7 @@ namespace SharpVectors.Dom.Svg
         /// <returns>
         /// The new <see cref="SvgRectF"/> that this method creates.
         /// </returns>
-        public static SvgRectF Create(float left, float top, 
+        public static SvgRectF Create(float left, float top,
             float right, float bottom)
         {
             return new SvgRectF(left, top, right - left, bottom - top);
@@ -106,12 +106,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public SvgPointF Location
         {
-            get
-            {
+            get {
                 return new SvgPointF(_x, _y);
             }
-            set
-            {
+            set {
                 _x = value.X;
                 _y = value.Y;
             }
@@ -126,13 +124,11 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public SvgSizeF Size
         {
-            get
-            {
+            get {
                 return new SvgSizeF(_width, _height);
             }
-            set
-            {
-                _width  = value.Width;
+            set {
+                _width = value.Width;
                 _height = value.Height;
             }
         }
@@ -147,12 +143,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float X
         {
-            get
-            {
+            get {
                 return _x;
             }
-            set
-            {
+            set {
                 _x = value;
             }
         }
@@ -167,12 +161,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Y
         {
-            get
-            {
+            get {
                 return _y;
             }
-            set
-            {
+            set {
                 _y = value;
             }
         }
@@ -185,12 +177,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Width
         {
-            get
-            {
+            get {
                 return _width;
             }
-            set
-            {
+            set {
                 _width = value;
             }
         }
@@ -203,12 +193,10 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Height
         {
-            get
-            {
+            get {
                 return _height;
             }
-            set
-            {
+            set {
                 _height = value;
             }
         }
@@ -223,8 +211,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Left
         {
-            get
-            {
+            get {
                 return _x;
             }
         }
@@ -239,8 +226,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Top
         {
-            get
-            {
+            get {
                 return _y;
             }
         }
@@ -257,8 +243,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Right
         {
-            get
-            {
+            get {
                 return (_x + _width);
             }
         }
@@ -275,8 +260,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public float Bottom
         {
-            get
-            {
+            get {
                 return (_y + _height);
             }
         }
@@ -293,8 +277,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public bool IsEmpty
         {
-            get
-            {
+            get {
                 if (_width > 0f)
                 {
                     return (_height <= 0f);
@@ -348,11 +331,10 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public bool Equals(SvgRectF other)
         {
-            if (((other.X == _x) && (other.Y == _y)) && (other.Width == _width))
+            if (other.X.Equals(_x) && other.Y.Equals(_y) && other.Width.Equals(_width))
             {
-                return (other.Height == _height);
+                return other.Height.Equals(_height);
             }
-
             return false;
         }
 
@@ -408,7 +390,7 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public bool Contains(SvgRectF rect)
         {
-            if (((_x <= rect.X) && ((rect.X + rect.Width) <= 
+            if (((_x <= rect.X) && ((rect.X + rect.Width) <=
                 (_x + _width))) && (_y <= rect.Y))
             {
                 return ((rect.Y + rect.Height) <= (_y + _height));
@@ -424,8 +406,9 @@ namespace SharpVectors.Dom.Svg
         /// <returns>The hash code for this <see cref="SvgRectF"/>.</returns>
         public override int GetHashCode()
         {
-            return (_x.GetHashCode() ^ _y.GetHashCode() ^
-                _width.GetHashCode() ^ _height.GetHashCode());
+            double[] values = this.GetHashValues();
+            return (values[0].GetHashCode() ^ values[1].GetHashCode() ^
+                values[2].GetHashCode() ^ values[3].GetHashCode());
         }
 
         /// <overloads>
@@ -492,7 +475,7 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public bool Intersects(SvgRectF rect)
         {
-            if (((rect.X < (_x + _width)) && (_x < (rect.X + rect.Width))) && 
+            if (((rect.X < (_x + _width)) && (_x < (rect.X + rect.Width))) &&
                 (rect.Y < (_y + _height)))
             {
                 return (_y < (rect.Y + rect.Height));
@@ -540,7 +523,7 @@ namespace SharpVectors.Dom.Svg
             CultureInfo culture = CultureInfo.InvariantCulture;
 
             return ("{X=" + _x.ToString(culture) + ",Y=" + _y.ToString(culture)
-                + ",Width=" + _width.ToString(culture) 
+                + ",Width=" + _width.ToString(culture)
                 + ",Height=" + _height.ToString(culture) + "}");
         }
 
@@ -569,10 +552,10 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public static bool operator ==(SvgRectF left, SvgRectF right)
         {
-            if (((left.X == right.X) && (left.Y == right.Y)) && 
-                (left.Width == right.Width))
+            if ((left.X.Equals(right.X) && left.Y.Equals(right.Y)) &&
+                left.Width.Equals(right.Width))
             {
-                return (left.Height == right.Height);
+                return left.Height.Equals(right.Height);
             }
 
             return false;
@@ -641,9 +624,9 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public static SvgRectF Intersection(SvgRectF a, SvgRectF b)
         {
-            float dLeft   = Math.Max(a.X, b.X);
-            float dRight  = Math.Min(a.X + a.Width, b.X + b.Width);
-            float dTop    = Math.Max(a.Y, b.Y);
+            float dLeft = Math.Max(a.X, b.X);
+            float dRight = Math.Min(a.X + a.Width, b.X + b.Width);
+            float dTop = Math.Max(a.Y, b.Y);
             float dBottom = Math.Min(a.Y + a.Height, b.Y + b.Height);
             if ((dRight >= dLeft) && (dBottom >= dTop))
             {
@@ -666,12 +649,21 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public static SvgRectF Union(SvgRectF a, SvgRectF b)
         {
-            float dLeft   = Math.Min(a.X, b.X);
-            float dRight  = Math.Max(a.X + a.Width, b.X + b.Width);
-            float dTop    = Math.Min(a.Y, b.Y);
+            float dLeft = Math.Min(a.X, b.X);
+            float dRight = Math.Max(a.X + a.Width, b.X + b.Width);
+            float dTop = Math.Min(a.Y, b.Y);
             float dBottom = Math.Max(a.Y + a.Height, b.Y + b.Height);
 
             return new SvgRectF(dLeft, dTop, dRight - dLeft, dBottom - dTop);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private double[] GetHashValues()
+        {
+            return new double[] { _x, _y, _width, _height };
         }
 
         #endregion

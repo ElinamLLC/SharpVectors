@@ -8,8 +8,8 @@ namespace SharpVectors.Renderers.Wpf
 {
     public sealed class WpfSvgColor : SvgColor
     {
-        private string _propertyName;
-        private SvgStyleableElement _element;
+        private readonly string _propertyName;
+        private readonly SvgStyleableElement _element;
 
         public WpfSvgColor(SvgStyleableElement elm, string propertyName) 
             : base(elm.GetComputedStyle("").GetPropertyValue(propertyName))
@@ -100,7 +100,7 @@ namespace SharpVectors.Renderers.Wpf
                 string opacity;
 
                 opacity = _element.GetPropertyValue(propName);
-                if (opacity != null && opacity.Length > 0)
+                if (!string.IsNullOrWhiteSpace(opacity))
                 {
                     alpha = SvgNumber.ParseNumber(opacity);
                 }

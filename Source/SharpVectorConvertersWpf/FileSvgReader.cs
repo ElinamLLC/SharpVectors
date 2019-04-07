@@ -366,7 +366,7 @@ namespace SharpVectors.Converters
         {
             if (svgXmlReader == null)
             {
-                throw new ArgumentNullException("svgTextReader",
+                throw new ArgumentNullException(nameof(svgXmlReader),
                     "The SVG source file cannot be null (or Nothing).");
             }
 
@@ -927,8 +927,7 @@ namespace SharpVectors.Converters
                 Directory.CreateDirectory(outputFileDir);
             }
 
-            BitmapEncoder bitampEncoder = GetBitmapEncoder(outputExt,
-                encoderType);
+            BitmapEncoder bitampEncoder = GetBitmapEncoder(encoderType);
 
             // The image parameters...
             Rect drawingBounds = _drawing.Bounds;
@@ -964,8 +963,7 @@ namespace SharpVectors.Converters
             return true;
         }
 
-        private static BitmapEncoder GetBitmapEncoder(string fileExtension,
-            ImageEncoderType encoderType)
+        private static BitmapEncoder GetBitmapEncoder(ImageEncoderType encoderType)
         {
             BitmapEncoder bitampEncoder = null;
 
