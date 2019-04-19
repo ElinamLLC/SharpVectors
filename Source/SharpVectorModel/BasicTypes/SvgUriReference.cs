@@ -2,7 +2,6 @@ using System;
 using System.Xml;
 using System.IO;
 using System.Net;
-using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -34,7 +33,10 @@ namespace SharpVectors.Dom.Svg
             {
                 if (_absoluteUri == null)
                 {
-                    if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                    // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                    // We are supporting both options
+                    if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace) ||
+                        _ownerElement.HasAttribute("href"))
                     {
                         string href = Href.AnimVal.Trim();
 
@@ -80,7 +82,10 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                // We are supporting both options
+                if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace)
+                    || _ownerElement.HasAttribute("href"))
                 {
                     XmlNode referencedNode = _ownerElement.OwnerDocument.GetNodeByUri(AbsoluteUri);
 
@@ -105,7 +110,10 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
-                if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                // We are supporting both options
+                if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace)
+                    || _ownerElement.HasAttribute("href"))
                 {
                     string absoluteUri = this.AbsoluteUri;
                     if (!string.IsNullOrWhiteSpace(absoluteUri))
@@ -140,8 +148,15 @@ namespace SharpVectors.Dom.Svg
         {
             XmlAttribute attribute = src as XmlAttribute;
 
+            // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+            // We are supporting both options
             if (attribute.NamespaceURI == SvgDocument.XLinkNamespace &&
-                attribute.LocalName == "href")
+                string.Equals(attribute.LocalName, "href", StringComparison.Ordinal))
+            {
+                _href = null;
+                _absoluteUri = null;
+            }
+            else if (string.Equals(attribute.LocalName, "href", StringComparison.Ordinal))
             {
                 _href = null;
                 _absoluteUri = null;
@@ -158,8 +173,17 @@ namespace SharpVectors.Dom.Svg
             {
                 if (_href == null)
                 {
-                    _href = new SvgAnimatedString(_ownerElement.GetAttribute("href", 
-                        SvgDocument.XLinkNamespace));
+                    // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                    // We are supporting both options
+                    if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace))
+                    {
+                        _href = new SvgAnimatedString(_ownerElement.GetAttribute("href", 
+                            SvgDocument.XLinkNamespace));
+                    }
+                    else if (_ownerElement.HasAttribute("href"))
+                    {
+                        _href = new SvgAnimatedString(_ownerElement.GetAttribute("href"));
+                    }
                 }
                 return _href;
             }
