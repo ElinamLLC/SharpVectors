@@ -73,6 +73,41 @@ namespace SharpVectors.Dom.Svg
 
         public const string SvgNamespace   = "http://www.w3.org/2000/svg";
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
+        /// <summary>
+        /// Namespace URI to map to the xml prefix
+        /// </summary>
+        public const string XmlIdUrl = "http://www.w3.org/XML/1998/namespace";
+
+        #endregion
+
+        #region Private Static Fields
+
+        // Resource handling
+
+        /// <summary>
+        /// Entities URIs corrections are cached here.
+        /// Currently consists in mapping '_' to '' (nothing)
+        /// </summary>
+        private static IDictionary<string, string> _entitiesUris;
+
+        /// <summary>
+        /// Semaphore to access _entitiesUris
+        /// </summary>
+        private static readonly object _entitiesUrisLock = new object();
+
+        /// <summary>
+        /// Root where resources are embedded
+        /// </summary>
+        private static readonly Type _rootType = typeof(Root);
+
+        private readonly string[] _supportedFeatures = {
+            "org.w3c.svg.static",
+            "http://www.w3.org/TR/Svg11/feature#Shape",
+            "http://www.w3.org/TR/Svg11/feature#BasicText",
+            "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
+        };
+
+        private readonly string[] _supportedExtensions = { };
 
         #endregion
 
@@ -90,9 +125,13 @@ namespace SharpVectors.Dom.Svg
 
         private double _dpi;
 
+        private XmlNamespaceManager _namespaceManager;
+
+        private IDictionary<string, XmlElement> _collectedIds;
+
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructor
 
         private SvgDocument()
         {
@@ -168,25 +207,20 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        #endregion
-
-        #region NamespaceManager
-
-        private XmlNamespaceManager namespaceManager;
-
         public XmlNamespaceManager NamespaceManager
         {
             get {
-                if (namespaceManager == null)
+                if (_namespaceManager == null)
                 {
                     // Setup namespace manager and add default namespaces
-                    namespaceManager = new XmlNamespaceManager(this.NameTable);
-                    namespaceManager.AddNamespace(string.Empty, SvgDocument.SvgNamespace);
-                    namespaceManager.AddNamespace("svg", SvgDocument.SvgNamespace);
-                    namespaceManager.AddNamespace("xlink", SvgDocument.XLinkNamespace);
+                    _namespaceManager = new XmlNamespaceManager(this.NameTable);
+                    _namespaceManager.AddNamespace(string.Empty, SvgDocument.SvgNamespace);
+                    _namespaceManager.AddNamespace("svg", SvgDocument.SvgNamespace);
+                    _namespaceManager.AddNamespace("xlink", SvgDocument.XLinkNamespace);
+                    _namespaceManager.AddNamespace("xml", SvgDocument.XmlIdUrl);
                 }
 
-                return namespaceManager;
+                return _namespaceManager;
             }
         }
 
@@ -224,18 +258,9 @@ namespace SharpVectors.Dom.Svg
 
         #region Support collections
 
-        private readonly string[] supportedFeatures = {
-            "org.w3c.svg.static",
-            "http://www.w3.org/TR/Svg11/feature#Shape",
-            "http://www.w3.org/TR/Svg11/feature#BasicText",
-            "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
-        };
-
-        private readonly string[] supportedExtensions = { };
-
         public override bool Supports(string feature, string version)
         {
-            foreach (string supportedFeature in supportedFeatures)
+            foreach (string supportedFeature in _supportedFeatures)
             {
                 if (supportedFeature == feature)
                 {
@@ -243,7 +268,7 @@ namespace SharpVectors.Dom.Svg
                 }
             }
 
-            foreach (string supportedExtension in supportedExtensions)
+            foreach (string supportedExtension in _supportedExtensions)
             {
                 if (supportedExtension == feature)
                 {
@@ -440,22 +465,6 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Resource handling
-
-        /// <summary>
-        /// Entities URIs corrections are cached here.
-        /// Currently consists in mapping '_' to '' (nothing)
-        /// </summary>
-        private static IDictionary<string, string> _entitiesUris;
-
-        /// <summary>
-        /// Semaphore to access _entitiesUris
-        /// </summary>
-        private static readonly object _entitiesUrisLock = new object();
-
-        /// <summary>
-        /// Root where resources are embedded
-        /// </summary>
-        private static readonly Type _rootType = typeof(Root);
 
         /// <summary>
         /// Given a transformed resource name, find a possible existing resource.
@@ -733,6 +742,21 @@ namespace SharpVectors.Dom.Svg
                 Uri docUri = ResolveUri("");
                 Uri absoluteUri = new Uri(absoluteUrl);
 
+                if (absoluteUri.IsFile)
+                {
+                    string localFile = absoluteUri.LocalPath;
+                    if (File.Exists(localFile) == false)
+                    {
+                        Trace.TraceError("Locally referenced file not found: " + localFile);
+                        return null;
+                    }
+                }
+
+                if (string.Equals(absoluteUri.Scheme, "data", StringComparison.OrdinalIgnoreCase))
+                {
+                    return null;
+                }
+
                 string fragment = absoluteUri.Fragment;
 
                 if (fragment.Length == 0)
@@ -742,25 +766,23 @@ namespace SharpVectors.Dom.Svg
                     {
                         return this;
                     }
-                    else
+
+                    SvgDocument doc = new SvgDocument((SvgWindow)Window);
+
+                    XmlReaderSettings settings = this.GetXmlReaderSettings();
+
+                    settings.CloseInput = true;
+
+                    //PrepareXmlResolver(settings);
+
+                    using (XmlReader reader = XmlReader.Create(
+                        GetResource(absoluteUri).GetResponseStream(), settings,
+                        absoluteUri.AbsolutePath))
                     {
-                        SvgDocument doc = new SvgDocument((SvgWindow)Window);
-
-                        XmlReaderSettings settings = this.GetXmlReaderSettings();
-
-                        settings.CloseInput = true;
-
-                        //PrepareXmlResolver(settings);
-
-                        using (XmlReader reader = XmlReader.Create(
-                            GetResource(absoluteUri).GetResponseStream(), settings,
-                            absoluteUri.AbsolutePath))
-                        {
-                            doc.Load(reader);
-                        }
-
-                        return doc;
+                        doc.Load(reader);
                     }
+
+                    return doc;
                 }
                 else
                 {
@@ -855,8 +877,6 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        private IDictionary<string, XmlElement> _collectedIds;
-
         public override XmlElement GetElementById(string elementId)
         {
             // TODO: handle element and attribute updates globally to watch for id changes.
@@ -865,6 +885,17 @@ namespace SharpVectors.Dom.Svg
                 _collectedIds = new Dictionary<string, XmlElement>(StringComparer.Ordinal);
                 // TODO: handle xml:id, handle duplicate ids?
                 XmlNodeList ids = this.SelectNodes("//*/@id");
+                foreach (XmlAttribute node in ids)
+                {
+                    string valueKey = node.Value;
+                    if (!_collectedIds.ContainsKey(valueKey))
+                    {
+                        _collectedIds.Add(node.Value, node.OwnerElement);
+                    }
+                }
+
+                // get the nodes that have xml:ids which mach the given id
+                ids = this.SelectNodes("//*/@xml:id", _namespaceManager);
                 foreach (XmlAttribute node in ids)
                 {
                     string valueKey = node.Value;
@@ -953,10 +984,21 @@ namespace SharpVectors.Dom.Svg
             {
                 foreach (XmlElement xmlNode in xmlList)
                 {
-                    string fontUrl = xmlNode.GetAttribute("href", SvgDocument.XLinkNamespace);
-                    if (!string.IsNullOrWhiteSpace(fontUrl))
+                    if (xmlNode.HasAttribute("href", SvgDocument.XLinkNamespace))
                     {
-                        fontUrls.Add(fontUrl);
+                        string fontUrl = xmlNode.GetAttribute("href", SvgDocument.XLinkNamespace);
+                        if (!string.IsNullOrWhiteSpace(fontUrl))
+                        {
+                            fontUrls.Add(fontUrl);
+                        }
+                    }
+                    else if (xmlNode.HasAttribute("href"))
+                    {
+                        string fontUrl = xmlNode.GetAttribute("href");
+                        if (!string.IsNullOrWhiteSpace(fontUrl))
+                        {
+                            fontUrls.Add(fontUrl);
+                        }
                     }
                 }
             }
