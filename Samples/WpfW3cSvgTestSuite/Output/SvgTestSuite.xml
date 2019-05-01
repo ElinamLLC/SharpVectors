@@ -265,7 +265,7 @@
         <test source="struct-image-08-t.svg" title="struct-image-08-t" state="success" comment="" description="" />
         <test source="struct-image-09-t.svg" title="struct-image-09-t" state="success" comment="" description="" />
         <test source="struct-image-10-t.svg" title="struct-image-10-t" state="success" comment="" description="" />
-        <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="partial" comment="Image viewport not well supported." description="Test the creation of symbol elements and the instantiation by the use element" />
+        <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="success" comment="" description="Test the creation of symbol elements and the instantiation by the use element" />
         <test source="struct-use-01-t.svg" title="struct-use-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font sizes" />
         <test source="struct-use-03-t.svg" title="struct-use-03-t" state="success" comment="" description="Tests proper handling of x/y/width/height attributes on the &lt;use&gt; element" />
         <test source="struct-use-05-b.svg" title="struct-use-05-b" state="success" comment="" description="Tests external references and computed inherited values" />

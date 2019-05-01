@@ -732,6 +732,11 @@ namespace SharpVectors.Dom.Svg
 
         public XmlNode GetNodeByUri(string absoluteUrl)
         {
+            if (string.IsNullOrWhiteSpace(absoluteUrl))
+            {
+                return null;
+            }
+
             absoluteUrl = absoluteUrl.Trim();
             if (absoluteUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
@@ -747,13 +752,21 @@ namespace SharpVectors.Dom.Svg
                     string localFile = absoluteUri.LocalPath;
                     if (File.Exists(localFile) == false)
                     {
-                        Trace.TraceError("Locally referenced file not found: " + localFile);
+                        Trace.TraceError("GetNodeByUri: Locally referenced file not found: " + localFile);
+                        return null;
+                    }
+                    string fileExt = Path.GetExtension(localFile);
+                    if (!string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Trace.TraceError("GetNodeByUri: Locally referenced file not valid: " + localFile);
                         return null;
                     }
                 }
 
                 if (string.Equals(absoluteUri.Scheme, "data", StringComparison.OrdinalIgnoreCase))
                 {
+                    Trace.TraceError("GetNodeByUri: The Uri Scheme is 'data' is not a valid XmlDode " + absoluteUri);
                     return null;
                 }
 
@@ -822,14 +835,15 @@ namespace SharpVectors.Dom.Svg
         #region ISvgDocument Members
 
         /// <summary>
-        /// The title of the document which is the text content of the first child title element of the 'svg' root element.
+        /// The title of the document which is the text content of the first child title 
+        /// element of the 'svg' root element.
         /// </summary>
         public string Title
         {
             get {
                 string result = "";
 
-                XmlNode node = SelectSingleNode("/svg:svg/svg:title[text()!='']", NamespaceManager);
+                XmlNode node = SelectSingleNode("/svg:svg/svg:title[text()!='']", this.NamespaceManager);
 
                 if (node != null)
                 {
@@ -843,7 +857,9 @@ namespace SharpVectors.Dom.Svg
         }
 
         /// <summary>
-        /// Returns the URI of the page that linked to this page. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, via a bookmark).
+        /// Returns the URI of the page that linked to this page. The value is an empty 
+        /// string if the user navigated to the page directly (not through a link, but, 
+        /// for example, via a bookmark).
         /// </summary>
         public string Referrer
         {
@@ -853,7 +869,8 @@ namespace SharpVectors.Dom.Svg
         }
 
         /// <summary>
-        /// The domain name of the server that served the document, or a null string if the server cannot be identified by a domain name.
+        /// The domain name of the server that served the document, or a null string if the 
+        /// server cannot be identified by a domain name.
         /// </summary>
         public string Domain
         {
@@ -883,7 +900,7 @@ namespace SharpVectors.Dom.Svg
             if (_collectedIds == null)
             {
                 _collectedIds = new Dictionary<string, XmlElement>(StringComparer.Ordinal);
-                // TODO: handle xml:id, handle duplicate ids?
+
                 XmlNodeList ids = this.SelectNodes("//*/@id");
                 foreach (XmlAttribute node in ids)
                 {
@@ -894,11 +911,15 @@ namespace SharpVectors.Dom.Svg
                     }
                 }
 
-                // get the nodes that have xml:ids which mach the given id
-                ids = this.SelectNodes("//*/@xml:id", _namespaceManager);
+                // Get the nodes that have xml:ids which mach the given id
+                ids = this.SelectNodes("//*/@xml:id", this.NamespaceManager);
                 foreach (XmlAttribute node in ids)
                 {
                     string valueKey = node.Value;
+                    if (string.Equals(valueKey, "svg-root"))
+                    {
+                        continue;
+                    }
                     if (!_collectedIds.ContainsKey(valueKey))
                     {
                         _collectedIds.Add(node.Value, node.OwnerElement);

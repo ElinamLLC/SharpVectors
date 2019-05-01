@@ -21,7 +21,7 @@ namespace SharpVectors.Dom.Svg
         #region Private Fields
 
         private ISvgAnimatedString _className;
-        private Dictionary<string, ICssValue> _presentationAttributes = new Dictionary<string, ICssValue>();
+        private IDictionary<string, ICssValue> _presentationAttributes;
 
         #endregion
 
@@ -30,6 +30,7 @@ namespace SharpVectors.Dom.Svg
         protected SvgStyleableElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
+            _presentationAttributes = new Dictionary<string, ICssValue>();
         }
 
         #endregion
@@ -54,7 +55,7 @@ namespace SharpVectors.Dom.Svg
             {
                 ICssValue result;
                 string attValue = GetAttribute(name, string.Empty).Trim();
-                if (attValue != null && attValue.Length > 0)
+                if (!string.IsNullOrWhiteSpace(attValue))
                 {
                     if (isImportant.IsMatch(attValue))
                     {
@@ -98,11 +99,17 @@ namespace SharpVectors.Dom.Svg
 
         public override ICssStyleDeclaration GetComputedStyle(string pseudoElt)
         {
-            if (cachedCSD == null)
+            SvgDocument ownerDoc = this.OwnerDocument;
+            if (_isImported && _importDocument != null && _importNode != null)
+            {
+                ownerDoc = (SvgDocument)_importDocument;
+            }
+
+            if (_cachedCSD == null)
             {
                 CssCollectedStyleDeclaration csd = (CssCollectedStyleDeclaration)base.GetComputedStyle(pseudoElt);
 
-                var propNames = this.OwnerDocument.CssPropertyProfile.GetAllPropertyNames();
+                var propNames = ownerDoc.CssPropertyProfile.GetAllPropertyNames();
 
                 IEnumerator<string> cssPropNames = propNames.GetEnumerator();
                 while (cssPropNames.MoveNext())
@@ -116,9 +123,9 @@ namespace SharpVectors.Dom.Svg
                     }
                 }
 
-                cachedCSD = csd;
+                _cachedCSD = csd;
             }
-            return cachedCSD;
+            return _cachedCSD;
         }
 
         #endregion

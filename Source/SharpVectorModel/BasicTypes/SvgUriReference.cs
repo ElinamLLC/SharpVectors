@@ -82,12 +82,19 @@ namespace SharpVectors.Dom.Svg
         {
             get
             {
+                string absoluteUri = this.AbsoluteUri;
+                if (string.IsNullOrWhiteSpace(absoluteUri))
+                {
+                    return null;
+                }
+
+
                 // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
                 // We are supporting both options
                 if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace)
                     || _ownerElement.HasAttribute("href"))
                 {
-                    XmlNode referencedNode = _ownerElement.OwnerDocument.GetNodeByUri(AbsoluteUri);
+                    XmlNode referencedNode = _ownerElement.OwnerDocument.GetNodeByUri(absoluteUri);
 
                     ISvgExternalResourcesRequired extReqElm = _ownerElement as ISvgExternalResourcesRequired;
 

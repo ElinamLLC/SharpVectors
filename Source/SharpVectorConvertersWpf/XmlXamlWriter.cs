@@ -81,7 +81,8 @@ namespace SharpVectors.Converters
         /// </param>
         public XmlXamlWriter(WpfDrawingSettings settings)
         {
-            _culture           = CultureInfo.InvariantCulture;
+            _culture           = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+            _culture.NumberFormat.NumberDecimalDigits = 4;
 
             _nullType          = typeof(NullExtension);
             _namespaceCache    = new NamespaceCache(_culture);

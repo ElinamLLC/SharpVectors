@@ -242,41 +242,50 @@ namespace SharpVectors.Dom.Svg
             if (!X.AnimVal.Value.Equals(0) || !Y.AnimVal.Value.Equals(0))
             {
                 _saveTransform = this.GetAttribute("transform");
-                //this.SetAttribute("transform", saveTransform + " translate(" 
-                //    + X.AnimVal.Value + "," + Y.AnimVal.Value + ")");
-                string transform = string.Format(CultureInfo.InvariantCulture, 
-                    "{0} translate({1},{2})", _saveTransform, X.AnimVal.Value, Y.AnimVal.Value);
+                if (string.IsNullOrWhiteSpace(_saveTransform))
+                {
+                    string transform = string.Format(CultureInfo.InvariantCulture,
+                        "translate({0},{1})", X.AnimVal.Value, Y.AnimVal.Value);
 
-                this.SetAttribute("transform", transform);
+                    this.SetAttribute("transform", transform);
+                }
+                else
+                {
+                    string transform = string.Format(CultureInfo.InvariantCulture,
+                        "{0} translate({1},{2})", _saveTransform, X.AnimVal.Value, Y.AnimVal.Value);
+
+                    this.SetAttribute("transform", transform);
+                }
             }
 
             // if (refEl is SvgSymbolElement)
             if (string.Equals(refEl.Name, "symbol", StringComparison.Ordinal))
             {
+                _saveWidth = refEl.GetAttribute("width");
+                _saveHeight = refEl.GetAttribute("height");
+
                 refEl.SetAttribute("width", (HasAttribute("width")) ? GetAttribute("width") : "100%");
                 refEl.SetAttribute("height", (HasAttribute("height")) ? GetAttribute("height") : "100%");
-            }
-            // if (refEl is SvgSymbolElement)
-            if (string.Equals(refEl.Name, "symbol", StringComparison.Ordinal))
-            {
-                _saveWidth  = refEl.GetAttribute("width");
-                _saveHeight = refEl.GetAttribute("height");
-                if (HasAttribute("width"))
-                    refEl.SetAttribute("width", GetAttribute("width"));
-                if (HasAttribute("height"))
-                    refEl.SetAttribute("height", GetAttribute("height"));
+
+                SvgSymbolElement symbolElement = (SvgSymbolElement)refEl;
+                symbolElement.Width  = null;
+                symbolElement.Height = null;
             }
         }
 
         public void RestoreReferencedElement(XmlElement refEl)
         {
-            if (_saveTransform != null)
+            if (!string.IsNullOrWhiteSpace(_saveTransform))
                 this.SetAttribute("transform", _saveTransform);
-            if (_saveWidth != null)
+            if (_saveWidth != null && _saveHeight != null)
             {
                 refEl.SetAttribute("width", _saveWidth);
                 refEl.SetAttribute("height", _saveHeight);
             }
+
+            _saveTransform = null;
+            _saveWidth     = null;
+            _saveHeight    = null;
         }
 
         #endregion

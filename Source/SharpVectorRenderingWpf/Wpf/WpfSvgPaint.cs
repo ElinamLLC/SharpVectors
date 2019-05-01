@@ -447,18 +447,15 @@ namespace SharpVectors.Renderers.Wpf
                     SvgLengthDirection.Viewport, dashOffset);
                 return dashOffsetLength.Value;
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
 
         private WpfFill GetPaintFill(string uri)
         {
             string absoluteUri = _element.ResolveUri(uri);
 
-            if (_element.Imported && _element.ImportDocument != null && 
-                _element.ImportNode != null)
+            if (_element.Imported && _element.ImportDocument != null && _element.ImportNode != null)
             {
                 // We need to determine whether the provided URI refers to element in the
                 // original document or in the current document...

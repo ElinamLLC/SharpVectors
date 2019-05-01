@@ -14,9 +14,6 @@ namespace SharpVectors.Dom.Svg
 
         private Guid _uniqueId;
 
-        private bool _isImported;
-        private SvgElement _importNode;
-        private SvgDocument _importDocument;
         private ISvgElementInstance _elementInstance;
 
         #endregion
@@ -40,20 +37,10 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public bool Imported
-        {
-            get {
-                return _isImported;
-            }
-            set {
-                _isImported = value;
-            }
-        }
-
         public SvgElement ImportNode
         {
             get {
-                return _importNode;
+                return (SvgElement)_importNode;
             }
             set {
                 _importNode = value;
@@ -63,7 +50,7 @@ namespace SharpVectors.Dom.Svg
         public SvgDocument ImportDocument
         {
             get {
-                return _importDocument;
+                return (SvgDocument)_importDocument;
             }
             set {
                 _importDocument = value;

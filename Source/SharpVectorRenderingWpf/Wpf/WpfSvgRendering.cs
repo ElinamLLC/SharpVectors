@@ -137,7 +137,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
-            if (!elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
+            if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
             {   
                 // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
                 // dealing with the root SVG element...

@@ -7,6 +7,11 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
+        private ISvgAnimatedLength _x;
+        private ISvgAnimatedLength _y;
+        private ISvgAnimatedLength _width;
+        private ISvgAnimatedLength _height;
+
         private SvgFitToViewBox _fitToViewBox;
         private SvgExternalResourcesRequired _externalResourcesRequired;
 
@@ -21,9 +26,97 @@ namespace SharpVectors.Dom.Svg
 			_fitToViewBox              = new SvgFitToViewBox(this);
 		}
 
-		#endregion
+        #endregion
 
         #region ISvgElement Members
+
+        /// <summary>
+        /// Corresponds to attribute x on the given 'svg' element.
+        /// </summary>
+        public ISvgAnimatedLength X
+        {
+            get {
+                if (_x == null)
+                {
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0px");
+                }
+                return _x;
+            }
+        }
+
+        /// <summary>
+        /// Corresponds to attribute y on the given 'svg' element.
+        /// </summary>
+        public ISvgAnimatedLength Y
+        {
+            get {
+                if (_y == null)
+                {
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0px");
+                }
+                return _y;
+            }
+        }
+
+        private string WidthAsString
+        {
+            get {
+                SvgWindow ownerWindow = (SvgWindow)this.OwnerDocument.Window;
+                if (ownerWindow.ParentWindow == null)
+                {
+                    return GetAttribute("width").Trim();
+                }
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Corresponds to attribute width on the given 'svg' element.
+        /// </summary>
+        public ISvgAnimatedLength Width
+        {
+            get {
+                if (_width == null)
+                {
+                    _width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, WidthAsString, "100%");
+                }
+                return _width;
+            }
+            // Making it possible to reset this cached value internally...
+            internal set {
+                _width = value;
+            }
+        }
+
+        private string HeightAsString
+        {
+            get {
+                SvgWindow ownerWindow = (SvgWindow)this.OwnerDocument.Window;
+                if (ownerWindow.ParentWindow == null)
+                {
+                    return GetAttribute("height").Trim();
+                }
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Corresponds to attribute height on the given 'svg' element.
+        /// </summary>
+        public ISvgAnimatedLength Height
+        {
+            get {
+                if (_height == null)
+                {
+                    _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, HeightAsString, "100%");
+                }
+                return _height;
+            }
+            // Making it possible to reset this cached value internally...
+            internal set {
+                _height = value;
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether this SVG element is renderable.

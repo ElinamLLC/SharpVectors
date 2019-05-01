@@ -186,6 +186,8 @@ namespace SharpVectors.Renderers.Wpf
                     return new WpfARendering(svgElement);
                 case "use":
                     return new WpfUseRendering(svgElement);
+                case "symbol":
+                    return new WpfSymbolRendering(svgElement);
                 case "switch":
                     return new WpfSwitchRendering(svgElement);
                 case "image":
@@ -198,7 +200,7 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// Generates a new <see cref="RenderingNode">RenderingNode</see> that
+        /// Generates a new <see cref="WpfRendering">RenderingNode</see> that
         /// corresponds to the given Uri.
         /// </summary>
         /// <param name="baseUri">
@@ -208,7 +210,7 @@ namespace SharpVectors.Renderers.Wpf
         /// The url.
         /// </param>
         /// <returns>
-        /// The generated <see cref="RenderingNode">RenderingNode</see> that
+        /// The generated <see cref="WpfRendering">RenderingNode</see> that
         /// corresponds to the given Uri.
         /// </returns>
         public static WpfRendering CreateByUri(SvgDocument document, string baseUri, string url)
@@ -737,8 +739,9 @@ namespace SharpVectors.Renderers.Wpf
                     return;
                 }
 
-                _transformMatrix = new MatrixTransform(svgMatrix.A, svgMatrix.B, svgMatrix.C,
-                  svgMatrix.D, svgMatrix.E, svgMatrix.F);
+                _transformMatrix = new MatrixTransform(Math.Round(svgMatrix.A, 4), Math.Round(svgMatrix.B, 4),
+                    Math.Round(svgMatrix.C, 4), Math.Round(svgMatrix.D, 4), 
+                    Math.Round(svgMatrix.E, 4), Math.Round(svgMatrix.F, 4));
             }
         }
 
@@ -755,10 +758,10 @@ namespace SharpVectors.Renderers.Wpf
             double[] transformArray = spar.FitToViewBox((SvgRect)fitToView.ViewBox.AnimVal,
               new SvgRect(elementBounds.X, elementBounds.Y, elementBounds.Width, elementBounds.Height));
 
-            double translateX = transformArray[0];
-            double translateY = transformArray[1];
-            double scaleX     = transformArray[2];
-            double scaleY     = transformArray[3];
+            double translateX = Math.Round(transformArray[0], 4);
+            double translateY = Math.Round(transformArray[1], 4);
+            double scaleX     = Math.Round(transformArray[2], 4);
+            double scaleY     = Math.Round(transformArray[3], 4);
 
             Transform translateMatrix = null;
             Transform scaleMatrix = null;
@@ -824,10 +827,10 @@ namespace SharpVectors.Renderers.Wpf
 
             double[] transformArray = spar.FitToViewBox(viewBox, rectToFit);
 
-            double translateX = transformArray[0];
-            double translateY = transformArray[1];
-            double scaleX     = transformArray[2];
-            double scaleY     = transformArray[3];
+            double translateX = Math.Round(transformArray[0], 4);
+            double translateY = Math.Round(transformArray[1], 4);
+            double scaleX     = Math.Round(transformArray[2], 4);
+            double scaleY     = Math.Round(transformArray[3], 4);
 
             Transform translateMatrix = null;
             Transform scaleMatrix = null;

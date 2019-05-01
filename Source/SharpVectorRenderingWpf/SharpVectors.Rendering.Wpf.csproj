@@ -105,6 +105,7 @@
     <Compile Include="Wpf\WpfSvgColor.cs" />
     <Compile Include="Wpf\WpfDrawingRenderer.cs" />
     <Compile Include="Wpf\WpfSvgPaintContext.cs" />
+    <Compile Include="Wpf\WpfSymbolRendering.cs" />
     <Compile Include="Wpf\WpfSvgRendering.cs" />
     <Compile Include="Wpf\WpfFill.cs" />
     <Compile Include="Wpf\WpfGradientFill.cs" />
