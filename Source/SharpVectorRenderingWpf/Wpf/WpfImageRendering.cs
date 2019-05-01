@@ -124,7 +124,36 @@ namespace SharpVectors.Renderers.Wpf
                             if (this.Transform == null)
                             {
                                 if (!aspectRatio.IsDefaultAlign) // Cacxa
+                                {
                                     destRect = this.GetBounds(destRect, new Size(imageWidth, imageHeight), aspectRatioType);
+                                }
+                                else
+                                {
+                                    Transform viewTransform = this.GetAspectRatioTransform(aspectRatio,
+                                      new SvgRect(0, 0, imageWidth, imageHeight),
+                                      new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
+
+                                    if (viewTransform != null)
+                                    {
+                                        drawGroup = new DrawingGroup();
+                                        drawGroup.Transform = viewTransform;
+
+                                        DrawingGroup lastGroup = context.Peek();
+                                        Debug.Assert(lastGroup != null);
+
+                                        if (lastGroup != null)
+                                        {
+                                            lastGroup.Children.Add(drawGroup);
+                                        }
+
+                                        destRect = this.GetBounds(destRect,
+                                            new Size(imageWidth, imageHeight), aspectRatioType);
+
+                                        // The origin is already handled by the view transform...
+                                        destRect.X = 0;
+                                        destRect.Y = 0;
+                                    }
+                                }
                             }
                             else
                             {
@@ -488,10 +517,10 @@ namespace SharpVectors.Renderers.Wpf
         {
             double[] transformArray = spar.FitToViewBox(sourceBounds, elementBounds);
 
-            double translateX = transformArray[0];
-            double translateY = transformArray[1];
-            double scaleX = transformArray[2];
-            double scaleY = transformArray[3];
+            double translateX = Math.Round(transformArray[0], 4);
+            double translateY = Math.Round(transformArray[1], 4);
+            double scaleX     = Math.Round(transformArray[2], 4);
+            double scaleY     = Math.Round(transformArray[3], 4);
 
             // Cacxa
             if (this.Transform != null)
