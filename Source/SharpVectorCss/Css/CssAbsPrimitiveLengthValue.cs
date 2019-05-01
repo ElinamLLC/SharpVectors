@@ -5,7 +5,7 @@ namespace SharpVectors.Dom.Css
 {
     public class CssAbsPrimitiveLengthValue : CssPrimitiveLengthValue
     {
-        #region Private members
+        #region Private Fields
 
         private string _propertyName;
         private XmlElement _element;

@@ -10,7 +10,7 @@ namespace SharpVectors.Dom.Css
 	/// </summary>
 	public class CssCollectedStyleDeclaration : CssStyleDeclaration
 	{
-		#region Private fields
+		#region Private Fields
 		
         private XmlElement _element;
 		private IDictionary<string, CssCollectedProperty> _collectedStyles;
@@ -32,7 +32,7 @@ namespace SharpVectors.Dom.Css
 
 		#endregion
 
-		#region Public methods
+		#region Public Methods
 
 		public void CollectProperty(string name, int specificity, CssValue cssValue, CssStyleSheetType origin, string priority)
 		{

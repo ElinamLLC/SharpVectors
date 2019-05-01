@@ -30,7 +30,7 @@ namespace SharpVectors.Dom.Css
 	{
 		#region Static Members
 
-		private static Regex styleRegex = new Regex(
+		private static Regex _styleRegex = new Regex(
             @"^(?<name>[A-Za-z\-0-9]+)\s*:(?<value>[^;\}!]+)(!\s?(?<priority>important))?;?");
 		
         #endregion
@@ -71,7 +71,7 @@ namespace SharpVectors.Dom.Css
 			_readOnly   = readOnly;
 			_parentRule = parentRule;
 
-			css = parseString(css);
+			css = ParseString(css);
 		}
 
 		public CssStyleDeclaration(string css, CssRule parentRule, bool readOnly, CssStyleSheetType origin)
@@ -81,7 +81,7 @@ namespace SharpVectors.Dom.Css
 			_readOnly   = readOnly;
 			_parentRule = parentRule;
 
-			parseString(css);
+			ParseString(css);
 		}
 
 		#endregion
@@ -228,7 +228,7 @@ namespace SharpVectors.Dom.Css
 
         #region Private Methods
 
-        private string parseString(string cssText)
+        private string ParseString(string cssText)
         {
             bool startedWithABracket = false;
 
@@ -239,7 +239,7 @@ namespace SharpVectors.Dom.Css
                 startedWithABracket = true;
             }
 
-            Match match = styleRegex.Match(cssText);
+            Match match = _styleRegex.Match(cssText);
             while (match.Success)
             {
                 string name  = match.Groups["name"].Value;
@@ -255,7 +255,7 @@ namespace SharpVectors.Dom.Css
                 bool addStyle = false;
                 if (_styles.ContainsKey(name))
                 {
-                    string existingPrio = ((CssStyleBlock)_styles[name]).Priority;
+                    string existingPrio = _styles[name].Priority;
 
                     if (existingPrio != "important" || prio == "important")
                     {
@@ -275,7 +275,7 @@ namespace SharpVectors.Dom.Css
                 }
 
                 cssText = cssText.Substring(match.Length).Trim();
-                match = styleRegex.Match(cssText);
+                match = _styleRegex.Match(cssText);
             }
 
             cssText = cssText.Trim();

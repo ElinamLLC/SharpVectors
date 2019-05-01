@@ -30,36 +30,6 @@ namespace SharpVectors.Dom.Css
         private static Regex reCssPrimitiveValue = new Regex(cssPrimValuePattern + "$");
         private static Regex reCssValueList      = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
 
-        /// <summary>
-        /// Detects what kind of value cssText contains and returns an instance of the correct CssValue class
-        /// </summary>
-        /// <param name="cssText">The text to parse for a CSS value</param>
-        /// <param name="readOnly">Specifies if this instance is read-only</param>
-        /// <returns>The correct type of CSS value</returns>
-        public static CssValue GetCssValue(string cssText, bool readOnly)
-        {
-            if (cssText == "inherit")
-            {
-                // inherit
-                return new CssValue(CssValueType.Inherit, cssText, readOnly);
-            }
-            Match match = reCssPrimitiveValue.Match(cssText);
-            if (match.Success)
-            {
-                // single primitive value
-                return CssPrimitiveValue.Create(match, readOnly);
-            }
-
-            match = reCssValueList.Match(cssText);
-            if (match.Success)
-            {
-                // list of primitive values
-                throw new NotImplementedException("Value lists not implemented");
-            }
-            // custom value
-            return new CssValue(CssValueType.Custom, cssText, readOnly);
-        }
-
         #endregion
 
         #region Private Fields
@@ -96,11 +66,45 @@ namespace SharpVectors.Dom.Css
 
         #endregion
 
-        #region Public methods
+        #region Public Methods
 
         public virtual CssValue GetAbsoluteValue(string propertyName, XmlElement elm)
         {
             return new CssAbsValue(this, propertyName, elm);
+        }
+
+        #endregion
+
+        #region Static Methods
+
+        /// <summary>
+        /// Detects what kind of value cssText contains and returns an instance of the correct CssValue class
+        /// </summary>
+        /// <param name="cssText">The text to parse for a CSS value</param>
+        /// <param name="readOnly">Specifies if this instance is read-only</param>
+        /// <returns>The correct type of CSS value</returns>
+        public static CssValue GetCssValue(string cssText, bool readOnly)
+        {
+            if (cssText == "inherit")
+            {
+                // inherit
+                return new CssValue(CssValueType.Inherit, cssText, readOnly);
+            }
+            Match match = reCssPrimitiveValue.Match(cssText);
+            if (match.Success)
+            {
+                // single primitive value
+                return CssPrimitiveValue.Create(match, readOnly);
+            }
+
+            match = reCssValueList.Match(cssText);
+            if (match.Success)
+            {
+                // list of primitive values
+                throw new NotImplementedException("Value lists not implemented");
+            }
+            // custom value
+            return new CssValue(CssValueType.Custom, cssText, readOnly);
         }
 
         #endregion

@@ -1,9 +1,9 @@
 using System;
+using System.IO;
+using System.Net;
 using System.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.IO;
-using System.Net;
 
 using SharpVectors.Net;
 using SharpVectors.Dom.Css;
@@ -20,16 +20,16 @@ namespace SharpVectors.Dom.Stylesheets
     {
         #region Private Fields
 
-        private bool TriedDownload;
-        private bool SucceededDownload;
-        private MediaList _Media;
-        private string _Title;
-        private string _Href;
-        private IStyleSheet _ParentStyleSheet;
-        private XmlNode ownerNode;
-        private bool _Disabled;
-        private string _Type;
-        private string sheetContent;
+        private bool _triedDownload;
+        private bool _succeededDownload;
+        private MediaList _media;
+        private string _title;
+        private string _href;
+        private IStyleSheet _parentStyleSheet;
+        private XmlNode _ownerNode;
+        private bool _disabled;
+        private string _type;
+        private string _sheetContent;
 
         #endregion
 
@@ -37,17 +37,17 @@ namespace SharpVectors.Dom.Stylesheets
 
         protected StyleSheet(string media)
         {
-            _Title = string.Empty;
-            _Href = string.Empty;
-            _Type = string.Empty;
+            _title = string.Empty;
+            _href  = string.Empty;
+            _type  = string.Empty;
 
             if (string.IsNullOrWhiteSpace(media))
             {
-                _Media = new MediaList();
+                _media = new MediaList();
             }
             else
             {
-                _Media = new MediaList(media);
+                _media = new MediaList(media);
             }
         }
 
@@ -60,73 +60,72 @@ namespace SharpVectors.Dom.Stylesheets
             while (match.Success)
             {
                 string name = match.Groups["name"].Value;
-                string val = match.Groups["value"].Value;
+                string val  = match.Groups["value"].Value;
 
                 switch (name)
                 {
                     case "href":
-                        _Href = val;
+                        _href = val;
                         break;
                     case "type":
-                        _Type = val;
+                        _type = val;
                         break;
                     case "title":
-                        _Title = val;
+                        _title = val;
                         break;
                     case "media":
-                        _Media = new MediaList(val);
+                        _media = new MediaList(val);
                         break;
                 }
                 match = match.NextMatch();
             }
 
-            ownerNode = pi;
+            _ownerNode = pi;
         }
 
         public StyleSheet(XmlElement styleElement)
             : this(string.Empty)
         {
             if (styleElement.HasAttribute("href"))
-                _Href = styleElement.Attributes["href"].Value;
+                _href = styleElement.Attributes["href"].Value;
             if (styleElement.HasAttribute("type"))
-                _Type = styleElement.Attributes["type"].Value;
+                _type = styleElement.Attributes["type"].Value;
             if (styleElement.HasAttribute("title"))
-                _Title = styleElement.Attributes["title"].Value;
+                _title = styleElement.Attributes["title"].Value;
             if (styleElement.HasAttribute("media"))
-                _Media = new MediaList(styleElement.Attributes["media"].Value);
+                _media = new MediaList(styleElement.Attributes["media"].Value);
 
-            ownerNode = styleElement;
+            _ownerNode = styleElement;
         }
 
         public StyleSheet(XmlNode ownerNode, string href, string type, string title, string media)
             : this(media)
         {
-            this.ownerNode = ownerNode;
-
-            _Href = href;
-            _Type = type;
-            _Title = title;
+            _ownerNode = ownerNode;
+            _href      = href;
+            _type      = type;
+            _title     = title;
         }
 
         #endregion
 
-        #region Protected Properties
+        #region Public Properties
 
-        internal string SheetContent
+        public string SheetContent
         {
             get {
-                if (OwnerNode is XmlElement)
+                if (this.OwnerNode is XmlElement)
                 {
-                    return OwnerNode.InnerText;
+                    return this.OwnerNode.InnerText;
                 }
 
                 // a PI
-                if (!TriedDownload)
+                if (!_triedDownload)
                 {
                     LoadSheet();
                 }
-                if (SucceededDownload)
-                    return sheetContent;
+                if (_succeededDownload)
+                    return _sheetContent;
                 return string.Empty;
             }
 
@@ -134,7 +133,7 @@ namespace SharpVectors.Dom.Stylesheets
 
         #endregion
 
-        #region Internal methods
+        #region Internal Methods
 
         /// <summary>
         /// Used to find matching style rules in the cascading order
@@ -150,14 +149,10 @@ namespace SharpVectors.Dom.Stylesheets
 
         internal XmlNode ResolveOwnerNode()
         {
-            if (OwnerNode != null)
-                return OwnerNode;
-            return ((StyleSheet)ParentStyleSheet).ResolveOwnerNode();
+            if (this.OwnerNode != null)
+                return this.OwnerNode;
+            return ((StyleSheet)this.ParentStyleSheet).ResolveOwnerNode();
         }
-
-        #endregion
-
-        #region Public Methods
 
         #endregion
 
@@ -167,20 +162,20 @@ namespace SharpVectors.Dom.Stylesheets
         {
             //WebRequest request = (WebRequest)WebRequest.Create(AbsoluteHref);
             WebRequest request = new ExtendedHttpWebRequest(AbsoluteHref);
-            TriedDownload = true;
+            _triedDownload = true;
             try
             {
-                WebResponse response = (WebResponse)request.GetResponse();
+                WebResponse response = request.GetResponse();
 
-                SucceededDownload = true;
+                _succeededDownload = true;
                 StreamReader str = new StreamReader(response.GetResponseStream(), Encoding.Default, true);
-                sheetContent = str.ReadToEnd();
+                _sheetContent = str.ReadToEnd();
                 str.Close();
             }
             catch
             {
-                SucceededDownload = false;
-                sheetContent = string.Empty;
+                _succeededDownload = false;
+                _sheetContent = string.Empty;
             }
 
         }
@@ -190,32 +185,41 @@ namespace SharpVectors.Dom.Stylesheets
         #region IStyleSheet Members
 
         /// <summary>
-        /// The intended destination media for style information. The media is often specified in the ownerNode. If no media has been specified, the MediaList will be empty. See the media attribute definition for the LINK element in HTML 4.0, and the media pseudo-attribute for the XML style sheet processing instruction . Modifying the media list may cause a change to the attribute disabled.
+        /// The intended destination media for style information. The media is often specified in the 
+        /// ownerNode. If no media has been specified, the MediaList will be empty. See the media 
+        /// attribute definition for the LINK element in HTML 4.0, and the media pseudo-attribute 
+        /// for the XML style sheet processing instruction . Modifying the media list may cause a 
+        /// change to the attribute disabled.
         /// </summary>
         public IMediaList Media
         {
             get {
-                return _Media;
+                return _media;
             }
         }
 
         /// <summary>
-        /// The advisory title. The title is often specified in the ownerNode. See the title attribute definition for the LINK element in HTML 4.0, and the title pseudo-attribute for the XML style sheet processing instruction.
+        /// The advisory title. The title is often specified in the ownerNode. See the title 
+        /// attribute definition for the LINK element in HTML 4.0, and the title pseudo-attribute 
+        /// for the XML style sheet processing instruction.
         /// </summary>
         public string Title
         {
             get {
-                return _Title;
+                return _title;
             }
         }
 
         /// <summary>
-        /// If the style sheet is a linked style sheet, the value of its attribute is its location. For inline style sheets, the value of this attribute is null. See the href attribute definition for the LINK element in HTML 4.0, and the href pseudo-attribute for the XML style sheet processing instruction.
+        /// If the style sheet is a linked style sheet, the value of its attribute is its location. 
+        /// For inline style sheets, the value of this attribute is null. See the href attribute 
+        /// definition for the LINK element in HTML 4.0, and the href pseudo-attribute for the 
+        /// XML style sheet processing instruction.
         /// </summary>
         public string Href
         {
             get {
-                return _Href;
+                return _href;
             }
         }
         /// <summary>
@@ -225,12 +229,12 @@ namespace SharpVectors.Dom.Stylesheets
         {
             get {
                 Uri u = null;
-                if (ownerNode != null)
+                if (_ownerNode != null)
                 {
                     // Fixed logic for cases in which document base uri is unknown
-                    if (!string.IsNullOrWhiteSpace(ownerNode.BaseURI))
+                    if (!string.IsNullOrWhiteSpace(_ownerNode.BaseURI))
                     {
-                        u = new Uri(new Uri(ownerNode.BaseURI), Href);
+                        u = new Uri(new Uri(_ownerNode.BaseURI), Href);
                     }
                     //else
                     //{                           
@@ -248,48 +252,61 @@ namespace SharpVectors.Dom.Stylesheets
         }
 
         /// <summary>
-        /// For style sheet languages that support the concept of style sheet inclusion, this attribute represents the including style sheet, if one exists. If the style sheet is a top-level style sheet, or the style sheet language does not support inclusion, the value of this attribute is null.
+        /// For style sheet languages that support the concept of style sheet inclusion, this 
+        /// attribute represents the including style sheet, if one exists. If the style sheet 
+        /// is a top-level style sheet, or the style sheet language does not support inclusion, 
+        /// the value of this attribute is null.
         /// </summary>
         public IStyleSheet ParentStyleSheet
         {
             get {
-                return _ParentStyleSheet;
+                return _parentStyleSheet;
             }
             set {
-                _ParentStyleSheet = value;
+                _parentStyleSheet = value;
             }
         }
 
         /// <summary>
-        /// The node that associates this style sheet with the document. For HTML, this may be the corresponding LINK or STYLE element. For XML, it may be the linking processing instruction. For style sheets that are included by other style sheets, the value of this attribute is null.
+        /// The node that associates this style sheet with the document. For HTML, this may be 
+        /// the corresponding LINK or STYLE element. For XML, it may be the linking processing 
+        /// instruction. For style sheets that are included by other style sheets, the value 
+        /// of this attribute is null.
         /// </summary>
         public XmlNode OwnerNode
         {
             get {
-                return ownerNode;
+                return _ownerNode;
             }
         }
 
         /// <summary>
-        /// false if the style sheet is applied to the document. true if it is not. Modifying this attribute may cause a new resolution of style for the document. A stylesheet only applies if both an appropriate medium definition is present and the disabled attribute is false. So, if the media doesn't apply to the current user agent, the disabled attribute is ignored.
+        /// false if the style sheet is applied to the document. true if it is not. Modifying 
+        /// this attribute may cause a new resolution of style for the document. A stylesheet 
+        /// only applies if both an appropriate medium definition is present and the disabled 
+        /// attribute is false. So, if the media doesn't apply to the current user agent, 
+        /// the disabled attribute is ignored.
         /// </summary>
         public bool Disabled
         {
             get {
-                return _Disabled;
+                return _disabled;
             }
             set {
-                _Disabled = value;
+                _disabled = value;
             }
         }
 
         /// <summary>
-        /// This specifies the style sheet language for this style sheet. The style sheet language is specified as a content type (e.g. "text/css"). The content type is often specified in the ownerNode. Also see the type attribute definition for the LINK element in HTML 4.0, and the type pseudo-attribute for the XML style sheet processing instruction.
+        /// This specifies the style sheet language for this style sheet. The style sheet language 
+        /// is specified as a content type (e.g. "text/css"). The content type is often specified 
+        /// in the ownerNode. Also see the type attribute definition for the LINK element in HTML 4.0, 
+        /// and the type pseudo-attribute for the XML style sheet processing instruction.
         /// </summary>
         public string Type
         {
             get {
-                return _Type;
+                return _type;
             }
         }
 

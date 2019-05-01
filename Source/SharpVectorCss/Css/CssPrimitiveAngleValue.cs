@@ -10,7 +10,7 @@ namespace SharpVectors.Dom.Css
 		public CssPrimitiveAngleValue(string number, string unit, bool readOnly) 
             : base(number+unit, readOnly)
 		{
-			_setType(unit);
+			SetUnitType(unit);
 			SetFloatValue(number);
 		}
 
@@ -23,7 +23,7 @@ namespace SharpVectors.Dom.Css
 		public CssPrimitiveAngleValue(double number, string unit, bool readOnly) 
             : base(number+unit, readOnly)
 		{
-			_setType(unit);
+			SetUnitType(unit);
 			SetFloatValue(number);
 		}
 
@@ -49,13 +49,13 @@ namespace SharpVectors.Dom.Css
             {
                 case CssPrimitiveType.Number:
                 case CssPrimitiveType.Deg:
-                    ret = _getDegAngle();
+                    ret = GetDegAngle();
                     break;
                 case CssPrimitiveType.Rad:
-                    ret = _getDegAngle() * Math.PI / 180;
+                    ret = GetDegAngle() * Math.PI / 180;
                     break;
                 case CssPrimitiveType.Grad:
-                    ret = _getDegAngle() * 100 / 90;
+                    ret = GetDegAngle() * 100 / 90;
                     break;
             }
 
@@ -76,7 +76,7 @@ namespace SharpVectors.Dom.Css
             Match match = re.Match(cssText);
             if (match.Success)
             {
-                _setType(match.Groups["angleUnit"].Value);
+                SetUnitType(match.Groups["angleUnit"].Value);
                 SetFloatValue(match.Groups["angleNumber"].Value);
             }
             else
@@ -89,7 +89,7 @@ namespace SharpVectors.Dom.Css
 
         #region Private Methods
 
-        private void _setType(string unit)
+        private void SetUnitType(string unit)
         {
             switch (unit)
             {
@@ -111,7 +111,7 @@ namespace SharpVectors.Dom.Css
         }
 
         // only for absolute values
-        private double _getDegAngle()
+        private double GetDegAngle()
         {
             double ret;
             switch (PrimitiveType)

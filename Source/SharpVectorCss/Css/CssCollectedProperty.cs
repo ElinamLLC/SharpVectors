@@ -50,7 +50,7 @@ namespace SharpVectors.Dom.Css
 
         #endregion
 
-        #region Public properties
+        #region Public Properties
 
         public string Name
         {
@@ -58,7 +58,7 @@ namespace SharpVectors.Dom.Css
                 return _name;
             }
             set {
-                this._name = value;
+                _name = value;
             }
         }
 
@@ -68,7 +68,7 @@ namespace SharpVectors.Dom.Css
                 return _specificity;
             }
             set {
-                this._specificity = value;
+                _specificity = value;
             }
         }
 
@@ -78,7 +78,7 @@ namespace SharpVectors.Dom.Css
                 return _origin;
             }
             set {
-                this._origin = value;
+                _origin = value;
             }
         }
 
@@ -88,7 +88,7 @@ namespace SharpVectors.Dom.Css
                 return _cssValue;
             }
             set {
-                this._cssValue = value;
+                _cssValue = value;
             }
         }
 
@@ -98,7 +98,7 @@ namespace SharpVectors.Dom.Css
                 return _priority;
             }
             set {
-                this._priority = value;
+                _priority = value;
             }
         }
 

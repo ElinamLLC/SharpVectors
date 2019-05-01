@@ -12,7 +12,7 @@ namespace SharpVectors.Dom.Css
 	{
         #region Private Fields
 
-        private static Regex delim = new Regex(@"\s+,?\s*|,\s*", RegexOptions.Compiled);
+        private static Regex _delim = new Regex(@"\s+,?\s*|,\s*", RegexOptions.Compiled);
 
         private bool readOnly;
 		private CssPrimitiveValue _left;
@@ -47,7 +47,7 @@ namespace SharpVectors.Dom.Css
                 string[] parts = rectString.Split(' ');
                 if (parts.Length != 4)
                 {
-                    parts = delim.Split(rectString);
+                    parts = _delim.Split(rectString);
                 }
 			    if (parts.Length == 4)
 			    {

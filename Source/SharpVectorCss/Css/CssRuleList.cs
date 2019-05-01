@@ -2,6 +2,7 @@ using System;
 using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
+
 using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Css
@@ -18,18 +19,26 @@ namespace SharpVectors.Dom.Css
         private object _parent;
         private readonly bool _isReadOnly;
         private bool _hasFontRule;
-        private IList<CssRule> _cssRules = new List<CssRule>();
+        private IList<CssRule> _cssRules;
 
         #endregion
 
-        #region Constructor
+        #region Constructor and Destructors
+
+        private CssRuleList()
+        {
+            _cssRules = new List<CssRule>();
+        }
 
         /// <summary>
         /// Constructor for CssRuleList
         /// </summary>
         /// <param name="parent">The parent rule or parent stylesheet</param>
         /// <param name="cssText">The CSS text containing the rules that will be in this list</param>
-        /// <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+        /// <param name="replacedStrings">
+        /// An array of strings that have been replaced in the string used for matching. 
+        /// These needs to be put back use the DereplaceStrings method.
+        /// </param>
         /// <param name="origin">The type of CssStyleSheet</param>
         internal CssRuleList(ref string cssText, object parent, IList<string> replacedStrings, 
             CssStyleSheetType origin) : this(ref cssText, parent, replacedStrings, false, origin)
@@ -42,10 +51,13 @@ namespace SharpVectors.Dom.Css
         /// <param name="parent">The parent rule or parent stylesheet</param>
         /// <param name="cssText">The CSS text containing the rules that will be in this list</param>
         /// <param name="readOnly">True if this instance is readonly</param>
-        /// <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+        /// <param name="replacedStrings">
+        /// An array of strings that have been replaced in the string used for matching. 
+        /// These needs to be put back use the DereplaceStrings method.
+        /// </param>
         /// <param name="origin">The type of CssStyleSheet</param>
         public CssRuleList(ref string cssText, object parent, IList<string> replacedStrings, 
-            bool readOnly, CssStyleSheetType origin)
+            bool readOnly, CssStyleSheetType origin) : this()
         {
             _origin     = origin;
             _isReadOnly = readOnly;
@@ -55,7 +67,8 @@ namespace SharpVectors.Dom.Css
             }
             else
             {
-                throw new Exception("The CssRuleList constructor can only take a CssRule or CssStyleSheet as it's first argument " + parent.GetType());
+                throw new Exception("The CssRuleList constructor can only take a CssRule or CssStyleSheet as it's first argument " 
+                    + parent.GetType());
             }
 
             Parse(ref cssText, parent, readOnly, replacedStrings, origin);
@@ -64,7 +77,7 @@ namespace SharpVectors.Dom.Css
 
         #endregion
 
-        #region Public methods
+        #region Public Methods
 
         /// <summary>
         /// Used to find matching style rules in the cascading order
@@ -86,7 +99,8 @@ namespace SharpVectors.Dom.Css
         internal ulong InsertRule(CssRule rule, ulong index)
         {
             /* TODO:
-			 * HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index e.g. if an @import rule is inserted after a standard rule set or other at-rule.
+			 * HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index 
+             * e.g. if an @import rule is inserted after a standard rule set or other at-rule.
 			 * SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable
 			*/
 
@@ -132,7 +146,7 @@ namespace SharpVectors.Dom.Css
         #region Implementation of ICssRuleList
 
         /// <summary>
-        /// The number of CSSRules in the list. The range of valid child rule indices is 0 to length-1 inclusive
+        /// The number of CSSRules in the list. The range of valid child rule indices is 0 to length-1 inclusive.
         /// </summary>
         public ulong Length
         {
@@ -142,7 +156,9 @@ namespace SharpVectors.Dom.Css
         }
 
         /// <summary>
-        ///     Used to retrieve a CSS rule by ordinal index. The order in this collection represents the order of the rules in the CSS style sheet. If index is greater than or equal to the number of rules in the list, this returns null
+        /// Used to retrieve a CSS rule by ordinal index. The order in this collection represents 
+        /// the order of the rules in the CSS style sheet. If index is greater than or equal to 
+        /// the number of rules in the list, this returns null.
         /// </summary>
         public ICssRule this[ulong index]
         {
@@ -308,7 +324,7 @@ namespace SharpVectors.Dom.Css
                         // this is an unknown rule format, possibly a new kind of selector. Try to find the end of it to skip it
 
                         int startBracket = css.IndexOf("{", StringComparison.OrdinalIgnoreCase);
-                        int endBracket = css.IndexOf("}", StringComparison.OrdinalIgnoreCase);
+                        int endBracket   = css.IndexOf("}", StringComparison.OrdinalIgnoreCase);
                         int endSemiColon = css.IndexOf(";", StringComparison.OrdinalIgnoreCase);
                         int endRule;
 

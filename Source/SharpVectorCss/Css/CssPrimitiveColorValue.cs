@@ -17,6 +17,14 @@ namespace SharpVectors.Dom.Css
             OnSetCssText(cssText);
         }
 
+        public override string CssText
+        {
+            get {
+                double dbl = GetFloatValue(CssPrimitiveType.Number);
+                return Convert.ToInt32(dbl).ToString();
+            }
+        }
+
         protected override void OnSetCssText(string cssText)
         {
             if (cssText.EndsWith("%", StringComparison.OrdinalIgnoreCase))
@@ -63,14 +71,6 @@ namespace SharpVectors.Dom.Css
                 throw new DomException(DomExceptionType.InvalidAccessErr);
             }
             return ret;
-        }
-
-        public override string CssText
-        {
-            get {
-                double dbl = GetFloatValue(CssPrimitiveType.Number);
-                return Convert.ToInt32(dbl).ToString();
-            }
         }
     }
 }

@@ -3,7 +3,8 @@ namespace SharpVectors.Dom.Css
 	/// <summary>
 	/// The different types of CssStyleSheets
 	/// </summary>
-	public enum CssStyleSheetType {
+	public enum CssStyleSheetType
+    {
 		/// <summary>
 		/// The stylesheet is a user agent stylesheet
 		/// </summary>
@@ -29,5 +30,5 @@ namespace SharpVectors.Dom.Css
 		/// Used internally for unknown properties
 		/// </summary>
 		Unknown
-	};
+	}
 }

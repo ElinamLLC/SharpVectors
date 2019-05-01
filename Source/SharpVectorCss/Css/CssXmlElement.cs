@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Stylesheets;
 
@@ -12,8 +13,15 @@ namespace SharpVectors.Dom.Css
     {
         #region Private Fields
 
-        private ICssStyleDeclaration style;
-        protected ICssStyleDeclaration cachedCSD;
+        private static readonly Regex _reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");
+
+        protected bool _isImported;
+        protected CssXmlElement _importNode;
+        protected CssXmlDocument _importDocument;
+
+        protected ICssStyleDeclaration _cachedCSD;
+
+        private ICssStyleDeclaration _style;
 
         #endregion
 
@@ -28,16 +36,32 @@ namespace SharpVectors.Dom.Css
 
         #region Style attribute
 
+        public bool Imported
+        {
+            get {
+                return _isImported;
+            }
+            set {
+                _isImported = value;
+            }
+        }
+
         public ICssStyleDeclaration Style
         {
-            get
-            {
-                if (style == null)
+            get {
+                if (_style == null)
                 {
-                    style = new CssStyleDeclaration(GetAttribute("style", string.Empty), 
-                        null, false, CssStyleSheetType.Inline);
+                    string styleValue = GetAttribute("style", string.Empty);
+
+                    if (!string.IsNullOrWhiteSpace(styleValue))
+                    {
+                        // remove comments
+                        styleValue = _reComment.Replace(styleValue, string.Empty).Trim();
+                    }
+
+                    _style = new CssStyleDeclaration(styleValue, null, false, CssStyleSheetType.Inline);
                 }
-                return style;
+                return _style;
             }
         }
 
@@ -47,27 +71,34 @@ namespace SharpVectors.Dom.Css
 
         public virtual ICssStyleDeclaration GetComputedStyle(string pseudoElt)
         {
-            if (cachedCSD == null)
+            CssXmlDocument ownerDoc = this.OwnerDocument;
+
+            if (_isImported && _importDocument != null && _importNode != null)
+            {
+                ownerDoc = _importDocument;
+            }
+
+            if (_cachedCSD == null)
             {
                 CssCollectedStyleDeclaration csd = new CssCollectedStyleDeclaration(this);
-                MediaList currentMedia = OwnerDocument.Media;
+                MediaList currentMedia = ownerDoc.Media;
 
-                if (OwnerDocument.UserAgentStyleSheet != null)
+                if (ownerDoc.UserAgentStyleSheet != null)
                 {
-                    OwnerDocument.UserAgentStyleSheet.GetStylesForElement(this, pseudoElt, currentMedia, csd);
+                    ownerDoc.UserAgentStyleSheet.GetStylesForElement(this, pseudoElt, currentMedia, csd);
                 }
-                ((StyleSheetList)OwnerDocument.StyleSheets).GetStylesForElement(this, pseudoElt, csd);
+                ((StyleSheetList)ownerDoc.StyleSheets).GetStylesForElement(this, pseudoElt, csd);
 
                 ((CssStyleDeclaration)Style).GetStylesForElement(csd, 0);
 
-                if (OwnerDocument.UserStyleSheet != null)
+                if (ownerDoc.UserStyleSheet != null)
                 {
-                    OwnerDocument.UserStyleSheet.GetStylesForElement(this, pseudoElt, currentMedia, csd);
+                    ownerDoc.UserStyleSheet.GetStylesForElement(this, pseudoElt, currentMedia, csd);
                 }
 
-                cachedCSD = csd;
+                _cachedCSD = csd;
             }
-            return cachedCSD;
+            return _cachedCSD;
         }
 
         public virtual string GetComputedStringValue(string propertyName, string pseudoElt)
@@ -90,8 +121,7 @@ namespace SharpVectors.Dom.Css
 
         public new CssXmlDocument OwnerDocument
         {
-            get
-            {
+            get {
                 return (CssXmlDocument)base.OwnerDocument;
             }
         }
@@ -126,7 +156,7 @@ namespace SharpVectors.Dom.Css
             }
 
             // Kill the cache
-            cachedCSD = null;
+            _cachedCSD = null;
 
             // Notify
             FireCssChange();
@@ -199,7 +229,7 @@ namespace SharpVectors.Dom.Css
                 switch (attribute.LocalName)
                 {
                     case "style":
-                        style = null;
+                        _style = null;
                         break;
                 }
             }
