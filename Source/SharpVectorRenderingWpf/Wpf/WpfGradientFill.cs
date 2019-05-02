@@ -360,8 +360,10 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         opacity = stop.GetPropertyValue("stop-opacity");
                     }
-                    if (opacity != null && opacity.Length > 0)
+                    if (!string.IsNullOrWhiteSpace(opacity))
+                    {
                         alpha *= SvgNumber.ParseNumber(opacity);
+                    }
 
                     alpha = Math.Min(alpha, 255);
                     alpha = Math.Max(alpha, 0);

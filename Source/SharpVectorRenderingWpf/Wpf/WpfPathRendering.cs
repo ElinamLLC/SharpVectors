@@ -12,6 +12,7 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _setBrushOpacity;
         private bool _isLineSegment;
         private DrawingGroup _drawGroup;
 
@@ -37,6 +38,8 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
+            _setBrushOpacity = true;
+
             WpfDrawingContext context = renderer.Context;
 
             //SetQuality(context);
@@ -52,6 +55,29 @@ namespace SharpVectors.Renderers.Wpf
                 _isLineSegment = true;
             }
 
+            float opacityValue = -1;
+
+            bool isStyleOpacity = false;
+
+            string opacity = styleElm.GetAttribute("opacity");
+            if (string.IsNullOrWhiteSpace(opacity))
+            {
+                opacity = styleElm.GetPropertyValue("opacity");
+                if (!string.IsNullOrWhiteSpace(opacity))
+                {
+                    isStyleOpacity = true;
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(opacity))
+            {
+                opacityValue = (float)SvgNumber.ParseNumber(opacity);
+                opacityValue = Math.Min(opacityValue, 1);
+                opacityValue = Math.Max(opacityValue, 0);
+                if (isStyleOpacity && (opacityValue >= 0 && opacityValue < 1))
+                {
+                    _setBrushOpacity = false;
+                }
+            }
 
             Transform pathTransform = this.Transform;
             if (pathTransform != null && !pathTransform.Value.IsIdentity)
@@ -77,8 +103,13 @@ namespace SharpVectors.Renderers.Wpf
                 _drawGroup.OpacityMask = pathMask;
             }
 
-            if (pathTransform != null || pathClip != null || pathMask != null)
+            if (pathTransform != null || pathClip != null || pathMask != null || (opacityValue >= 0 && opacityValue < 1))
             {
+                if ((opacityValue >= 0 && opacityValue < 1))
+                {
+                    _drawGroup.Opacity = opacityValue;
+                }
+
                 DrawingGroup curGroup = _context.Peek();
                 Debug.Assert(curGroup != null);
                 if (curGroup != null)
@@ -91,6 +122,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 _drawGroup = null;
             }
+
 
             if (_drawGroup != null)
             {
@@ -177,11 +209,11 @@ namespace SharpVectors.Renderers.Wpf
 
                 string fileValue = styleElm.GetAttribute("fill");
 
-                Brush brush = fillPaint.GetBrush(geometry);
+                Brush brush = fillPaint.GetBrush(geometry, _setBrushOpacity);
                 bool isFillTransmable = fillPaint.IsFillTransformable;
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
-                Pen pen = strokePaint.GetPen(geometry);
+                Pen pen = strokePaint.GetPen(geometry, _setBrushOpacity);
 
                 // By the SVG Specifications:
                 // Keyword 'objectBoundingBox' should not be used when the geometry of the applicable 
@@ -204,7 +236,7 @@ namespace SharpVectors.Renderers.Wpf
                             WpfSvgPaint fallbackPaint = strokePaint.WpfFallback;
                             if (fallbackPaint != null)
                             {
-                                pen.Brush = fallbackPaint.GetBrush(geometry);
+                                pen.Brush = fallbackPaint.GetBrush(geometry, _setBrushOpacity);
                             }
                             else
                             {
@@ -213,7 +245,7 @@ namespace SharpVectors.Renderers.Wpf
                                 {
                                     if (scopePaint != strokePaint)
                                     {
-                                        pen.Brush = scopePaint.GetBrush(geometry);
+                                        pen.Brush = scopePaint.GetBrush(geometry, _setBrushOpacity);
                                     }
                                     else
                                     {
@@ -437,11 +469,11 @@ namespace SharpVectors.Renderers.Wpf
 
                 string fileValue = styleElm.GetAttribute("fill");
 
-                Brush brush = fillPaint.GetBrush(geometry);
+                Brush brush = fillPaint.GetBrush(geometry, _setBrushOpacity);
                 bool isFillTransmable = fillPaint.IsFillTransformable;
 
                 WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
-                Pen pen = strokePaint.GetPen(geometry);
+                Pen pen = strokePaint.GetPen(geometry, _setBrushOpacity);
 
                 // By the SVG Specifications:
                 // Keyword 'objectBoundingBox' should not be used when the geometry of the applicable 
@@ -464,7 +496,7 @@ namespace SharpVectors.Renderers.Wpf
                             WpfSvgPaint fallbackPaint = strokePaint.WpfFallback;
                             if (fallbackPaint != null)
                             {
-                                pen.Brush = fallbackPaint.GetBrush(geometry);
+                                pen.Brush = fallbackPaint.GetBrush(geometry, _setBrushOpacity);
                             }
                             else
                             {
@@ -473,7 +505,7 @@ namespace SharpVectors.Renderers.Wpf
                                 {
                                     if (scopePaint != strokePaint)
                                     {
-                                        pen.Brush = scopePaint.GetBrush(geometry);
+                                        pen.Brush = scopePaint.GetBrush(geometry, _setBrushOpacity);
                                     }
                                     else
                                     {

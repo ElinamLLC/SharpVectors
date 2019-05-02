@@ -238,7 +238,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 opacity = imageElement.GetPropertyValue("opacity");
             }
-            if (opacity != null && opacity.Length > 0)
+            if (!string.IsNullOrWhiteSpace(opacity))
             {
                 opacityValue = (float)SvgNumber.ParseNumber(opacity);
                 opacityValue = Math.Min(opacityValue, 1);
@@ -258,11 +258,11 @@ namespace SharpVectors.Renderers.Wpf
             Debug.Assert(drawGroup != null);
             if (drawGroup != null)
             {
-                if (opacityValue >= 0 || (clipGeom != null && !clipGeom.IsEmpty()) ||
+                if ((opacityValue >= 0 && opacityValue < 1) || (clipGeom != null && !clipGeom.IsEmpty()) ||
                     (transform != null && !transform.Value.IsIdentity))
                 {
                     DrawingGroup clipGroup = ownedGroup ? drawGroup : new DrawingGroup();
-                    if (opacityValue >= 0)
+                    if (opacityValue >= 0 && opacityValue < 1)
                     {
                         clipGroup.Opacity = opacityValue;
                     }

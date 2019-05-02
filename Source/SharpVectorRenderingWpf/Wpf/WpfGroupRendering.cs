@@ -88,14 +88,14 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     opacity = element.GetPropertyValue("opacity");
                 }
-                if (opacity != null && opacity.Length > 0)
+                if (!string.IsNullOrWhiteSpace(opacity))
                 {
                     opacityValue = (float)SvgNumber.ParseNumber(opacity);
                     opacityValue = Math.Min(opacityValue, 1);
                     opacityValue = Math.Max(opacityValue, 0);
                 }
 
-                if (opacityValue >= 0)
+                if (opacityValue >= 0 && opacityValue < 1)
                 {
                     _drawGroup.Opacity = opacityValue;
                 }

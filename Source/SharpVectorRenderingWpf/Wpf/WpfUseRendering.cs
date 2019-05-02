@@ -45,7 +45,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 opacity = useElement.GetPropertyValue("opacity");
             }
-            if (opacity != null && opacity.Length > 0)
+            if (!string.IsNullOrWhiteSpace(opacity))
             {
                 opacityValue = (float)SvgNumber.ParseNumber(opacity);
                 opacityValue = Math.Min(opacityValue, 1);
@@ -64,7 +64,7 @@ namespace SharpVectors.Renderers.Wpf
             currentGroup.Children.Add(_drawGroup);
             context.Push(_drawGroup);
 
-            if (clipGeom != null || transform != null || opacityValue >= 0 ||
+            if (clipGeom != null || transform != null || (opacityValue >= 0 && opacityValue < 1) ||
                 (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId)))
             {
                 if (clipGeom != null)
@@ -77,7 +77,7 @@ namespace SharpVectors.Renderers.Wpf
                     _drawGroup.Transform = transform;
                 }
 
-                if (opacityValue >= 0)
+                if (opacityValue >= 0 && opacityValue < 1)
                 {
                     _drawGroup.Opacity = opacityValue;
                 }

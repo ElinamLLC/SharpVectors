@@ -133,9 +133,95 @@ namespace SharpVectors.Renderers.Wpf
             return GetBrush(geometry, "fill", setOpacity);
         }
 
-        public Pen GetPen()
+        public Pen GetPen(bool setOpacity = true)
         {
-            return this.GetPen(null);
+            return this.GetPen(null, setOpacity);
+        }
+
+        public Pen GetPen(Geometry geometry, bool setOpacity = true)
+        {
+            double strokeWidth = GetStrokeWidth();
+            if (strokeWidth.Equals(0.0d)) 
+                return null;
+
+            WpfSvgPaintContext paintContext = null;
+
+            SvgPaintType paintType = this.PaintType;
+
+            WpfSvgPaint stroke;
+            if (paintType == SvgPaintType.None)
+            {
+                return null;
+            }
+            if (paintType == SvgPaintType.CurrentColor)
+            {
+                stroke = new WpfSvgPaint(_context, _element, "color");
+            }
+            else if (paintType == SvgPaintType.ContextFill)
+            {
+                paintContext = GetFillContext();
+                if (paintContext != null)
+                {
+                    stroke = paintContext.Fill;
+                }
+                else
+                {
+                    stroke = this;
+                }
+            }
+            else if (paintType == SvgPaintType.ContextStroke)
+            {
+                paintContext = GetStrokeContext();
+                if (paintContext != null)
+                {
+                    stroke = paintContext.Stroke;
+                }
+                else
+                {
+                    stroke = this;
+                }
+            }
+            else
+            {
+                stroke = this;
+            }
+
+            Pen pen = new Pen(stroke.GetBrush(geometry, "stroke", setOpacity), strokeWidth);
+
+            pen.StartLineCap  = pen.EndLineCap = GetLineCap();
+            pen.LineJoin      = GetLineJoin();
+            double miterLimit = GetMiterLimit(strokeWidth);
+            if (miterLimit > 0)
+            {
+                pen.MiterLimit = miterLimit;
+            }
+
+            //pen.MiterLimit = 1.0f;
+
+            DoubleCollection dashArray = GetDashArray(strokeWidth);
+            if (dashArray != null && dashArray.Count != 0)
+            {
+                bool isValidDashes = true;
+                //Do not draw if dash array had a zero value in it
+                for (int i = 0; i < dashArray.Count; i++)
+                {
+                    if (dashArray[i].Equals(0.0d))
+                    {
+                        isValidDashes = false;
+                    }
+                }
+
+                if (isValidDashes)
+                {   
+                    DashStyle dashStyle = new DashStyle(dashArray, GetDashOffset(strokeWidth));
+
+                    pen.DashStyle = dashStyle;
+                    // This is the one that works well for the XAML, the default is not Flat as
+                    // stated in the documentations...
+                    pen.DashCap   = PenLineCap.Flat; 
+                }
+            }
+            return pen;
         }
 
         public WpfSvgPaint GetScopeStroke()
@@ -147,6 +233,10 @@ namespace SharpVectors.Renderers.Wpf
             }
             return null;
         }
+
+        #endregion
+
+        #region Private Methods
 
         private WpfSvgPaintContext GetFillContext()
         {
@@ -204,108 +294,18 @@ namespace SharpVectors.Renderers.Wpf
             return paintContext;
         }
 
-        public Pen GetPen(Geometry geometry)
-        {
-            double strokeWidth = GetStrokeWidth();
-            if (strokeWidth.Equals(0.0d)) 
-                return null;
-
-            WpfSvgPaintContext paintContext = null;
-
-            SvgPaintType paintType = this.PaintType;
-
-            WpfSvgPaint stroke;
-            if (paintType == SvgPaintType.None)
-            {
-                return null;
-            }
-            if (paintType == SvgPaintType.CurrentColor)
-            {
-                stroke = new WpfSvgPaint(_context, _element, "color");
-            }
-            else if (paintType == SvgPaintType.ContextFill)
-            {
-                paintContext = GetFillContext();
-                if (paintContext != null)
-                {
-                    stroke = paintContext.Fill;
-                }
-                else
-                {
-                    stroke = this;
-                }
-            }
-            else if (paintType == SvgPaintType.ContextStroke)
-            {
-                paintContext = GetStrokeContext();
-                if (paintContext != null)
-                {
-                    stroke = paintContext.Stroke;
-                }
-                else
-                {
-                    stroke = this;
-                }
-            }
-            else
-            {
-                stroke = this;
-            }
-
-            Pen pen = new Pen(stroke.GetBrush(geometry, "stroke", true), strokeWidth);
-
-            pen.StartLineCap  = pen.EndLineCap = GetLineCap();
-            pen.LineJoin      = GetLineJoin();
-            double miterLimit = GetMiterLimit(strokeWidth);
-            if (miterLimit > 0)
-            {
-                pen.MiterLimit = miterLimit;
-            }
-
-            //pen.MiterLimit = 1.0f;
-
-            DoubleCollection dashArray = GetDashArray(strokeWidth);
-            if (dashArray != null && dashArray.Count != 0)
-            {
-                bool isValidDashes = true;
-                //Do not draw if dash array had a zero value in it
-                for (int i = 0; i < dashArray.Count; i++)
-                {
-                    if (dashArray[i].Equals(0.0d))
-                    {
-                        isValidDashes = false;
-                    }
-                }
-
-                if (isValidDashes)
-                {   
-                    DashStyle dashStyle = new DashStyle(dashArray, GetDashOffset(strokeWidth));
-
-                    pen.DashStyle = dashStyle;
-                    // This is the one that works well for the XAML, the default is not Flat as
-                    // stated in the documentations...
-                    pen.DashCap   = PenLineCap.Flat; 
-                }
-            }
-            return pen;
-        }
-
-        #endregion
-
-        #region Private Methods
-
         private double GetOpacity(string fillOrStroke)
         {
             double opacityValue = 1;
 
             string opacity = _element.GetPropertyValue(fillOrStroke + "-opacity");
-            if (opacity != null && opacity.Length > 0)
+            if (!string.IsNullOrWhiteSpace(opacity))
             {
                 opacityValue *= SvgNumber.ParseNumber(opacity);
             }
 
             opacity = _element.GetPropertyValue("opacity");
-            if (opacity != null && opacity.Length > 0)
+            if (!string.IsNullOrWhiteSpace(opacity))
             {
                 opacityValue *= SvgNumber.ParseNumber(opacity);
             }
