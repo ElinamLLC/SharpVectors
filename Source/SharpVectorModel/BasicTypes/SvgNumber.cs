@@ -58,7 +58,8 @@ namespace SharpVectors.Dom.Svg
                 string value = sc.Substring(0, sc.Length - match.Length);
 
                 var numberValue = decimal.Parse(value,
-                    NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
+                    NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, 
+                    CultureInfo.InvariantCulture);
 
                 // <number> values in conforming SVG Tiny 1.2 content must have no more 
                 // than 4 decimal digits in the fractional part of their decimal expansion
