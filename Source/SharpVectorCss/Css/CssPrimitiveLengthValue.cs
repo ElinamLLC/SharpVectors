@@ -98,13 +98,13 @@ namespace SharpVectors.Dom.Css
                     }
                     break;
                 case CssPrimitiveType.Percentage:
-                    if (unitType == CssPrimitiveType.Percentage) ret = floatValue;
+                    if (unitType == CssPrimitiveType.Percentage) ret = _floatValue;
                     break;
                 case CssPrimitiveType.Ems:
-                    if (unitType == CssPrimitiveType.Ems) ret = floatValue;
+                    if (unitType == CssPrimitiveType.Ems) ret = _floatValue;
                     break;
                 case CssPrimitiveType.Exs:
-                    if (unitType == CssPrimitiveType.Exs) ret = floatValue;
+                    if (unitType == CssPrimitiveType.Exs) ret = _floatValue;
                     break;
             }
             if (double.IsNaN(ret))
@@ -187,17 +187,17 @@ namespace SharpVectors.Dom.Css
             switch (PrimitiveType)
             {
                 case CssPrimitiveType.In:
-                    return floatValue * Dpi;
+                    return _floatValue * Dpi;
                 case CssPrimitiveType.Cm:
-                    return floatValue / CmPerIn * Dpi;
+                    return _floatValue / CmPerIn * Dpi;
                 case CssPrimitiveType.Mm:
-                    return floatValue / 10 / CmPerIn * Dpi;
+                    return _floatValue / 10 / CmPerIn * Dpi;
                 case CssPrimitiveType.Pt:
-                    return floatValue / 72 * Dpi;
+                    return _floatValue / 72 * Dpi;
                 case CssPrimitiveType.Pc:
-                    return floatValue / 6 * Dpi;
+                    return _floatValue / 6 * Dpi;
                 default:
-                    return floatValue;
+                    return _floatValue;
             }
         }
 

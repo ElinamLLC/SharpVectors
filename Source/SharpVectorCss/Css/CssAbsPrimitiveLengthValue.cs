@@ -155,21 +155,21 @@ namespace SharpVectors.Dom.Css
             switch (PrimitiveType)
             {
                 case CssPrimitiveType.In:
-                    return floatValue * Dpi;
+                    return _floatValue * Dpi;
                 case CssPrimitiveType.Cm:
-                    return floatValue / CmPerIn * Dpi;
+                    return _floatValue / CmPerIn * Dpi;
                 case CssPrimitiveType.Mm:
-                    return floatValue / 10 / CmPerIn * Dpi;
+                    return _floatValue / 10 / CmPerIn * Dpi;
                 case CssPrimitiveType.Pt:
-                    return floatValue / 72 * Dpi;
+                    return _floatValue / 72 * Dpi;
                 case CssPrimitiveType.Pc:
-                    return floatValue / 6 * Dpi;
+                    return _floatValue / 6 * Dpi;
                 case CssPrimitiveType.Ems:
-                    return floatValue * GetFontSize();
+                    return _floatValue * GetFontSize();
                 case CssPrimitiveType.Exs:
-                    return floatValue * GetFontSize() * 0.5F;
+                    return _floatValue * GetFontSize() * 0.5F;
                 default:
-                    return floatValue;
+                    return _floatValue;
             }
         }
 
@@ -189,7 +189,7 @@ namespace SharpVectors.Dom.Css
             {
                 if (unitType == CssPrimitiveType.Percentage)
                 {
-                    return floatValue;
+                    return _floatValue;
                 }
                 throw new NotImplementedException("Can't get absolute values from percentages");
             }

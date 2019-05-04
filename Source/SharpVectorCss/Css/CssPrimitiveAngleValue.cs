@@ -102,7 +102,9 @@ namespace SharpVectors.Dom.Css
                 case "rad":
                     SetPrimitiveType(CssPrimitiveType.Rad);
                     break;
+                case "g":
                 case "grad":
+                case "gon":
                     SetPrimitiveType(CssPrimitiveType.Grad);
                     break;
                 default:
@@ -117,13 +119,13 @@ namespace SharpVectors.Dom.Css
             switch (PrimitiveType)
             {
                 case CssPrimitiveType.Rad:
-                    ret = floatValue * 180 / Math.PI;
+                    ret = _floatValue * 180 / Math.PI;
                     break;
                 case CssPrimitiveType.Grad:
-                    ret = floatValue * 90 / 100;
+                    ret = _floatValue * 90 / 100;
                     break;
                 default:
-                    ret = floatValue;
+                    ret = _floatValue;
                     break;
             }
             ret %= 360;

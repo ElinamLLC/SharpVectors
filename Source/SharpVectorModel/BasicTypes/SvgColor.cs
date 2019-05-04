@@ -4,39 +4,38 @@ using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Svg
 {
-	/// <summary>
-	/// Summary description for SvgColor.
-	/// </summary>
-	public class SvgColor : CssValue, ISvgColor
-	{
-		#region Private Level Fields 
+    /// <summary>
+    /// Summary description for SvgColor.
+    /// </summary>
+    public class SvgColor : CssValue, ISvgColor
+    {
+        #region Private Level Fields 
 
-		protected CssColor   _rgbColor;
+        protected CssColor _rgbColor;
         private SvgColorType _colorType;
-		
+
         #endregion
 
-		#region Constructors and Destructor
-		
-        protected SvgColor() 
+        #region Constructors and Destructor
+
+        protected SvgColor()
             : base(CssValueType.PrimitiveValue, string.Empty, false)
-		{
-		}
+        {
+        }
 
-		public SvgColor(string str) 
+        public SvgColor(string str)
             : base(CssValueType.PrimitiveValue, str, false)
-		{
-			ParseColor(str);
-		}
+        {
+            ParseColor(str);
+        }
 
-		#endregion
+        #endregion
 
         #region Public Properties
 
         public override string CssText
         {
-            get
-            {
+            get {
                 string ret;
                 switch (ColorType)
                 {
@@ -55,8 +54,7 @@ namespace SharpVectors.Dom.Svg
                 }
                 return ret;
             }
-            set
-            {
+            set {
                 base.CssText = value;
                 ParseColor(value);
             }
@@ -64,66 +62,68 @@ namespace SharpVectors.Dom.Svg
 
         public SvgColorType ColorType
         {
-            get
-            {
+            get {
                 return _colorType;
             }
         }
 
         public ICssColor RgbColor
         {
-            get
-            {
+            get {
                 return _rgbColor;
             }
         }
 
         public ISvgIccColor IccColor
         {
-            get
-            {
+            get {
                 throw new NotImplementedException();
             }
         }
 
         #endregion
 
-		#region Public Methods
+        #region Public Methods
 
-		public void SetRgbColor(string rgbColor)
-		{
-			SetColor(SvgColorType.RgbColor, rgbColor, string.Empty);
-		}
-		
-		public void SetRgbColorIccColor(string rgbColor, string iccColor )
-		{
-			SetColor(SvgColorType.RgbColorIccColor, rgbColor, iccColor);
-		}
+        public void SetRgbColor(string rgbColor)
+        {
+            SetColor(SvgColorType.RgbColor, rgbColor, string.Empty);
+        }
 
-		public void SetColor(SvgColorType colorType, string rgbColor, string iccColor)
-		{
-			_colorType = colorType;
-			if (!string.IsNullOrWhiteSpace(rgbColor))
-			{
-				try
-				{
-					_rgbColor = new CssColor(rgbColor);
-				}
-				catch (DomException domExc)
-				{
-					throw new SvgException(SvgExceptionType.SvgInvalidValueErr, 
+        public void SetRgbColorIccColor(string rgbColor, string iccColor)
+        {
+            SetColor(SvgColorType.RgbColorIccColor, rgbColor, iccColor);
+        }
+
+        public void SetColor(SvgColorType colorType, string rgbColor, string iccColor)
+        {
+            _colorType = colorType;
+            if (!string.IsNullOrWhiteSpace(rgbColor))
+            {
+                try
+                {
+                    _rgbColor = new CssColor(rgbColor);
+
+                    if (_rgbColor.IsSystemColor)
+                    {
+                        _colorType = SvgColorType.SystemColor;
+                    }
+                }
+                catch (DomException domExc)
+                {
+                    throw new SvgException(SvgExceptionType.SvgInvalidValueErr,
                         "Invalid color value: " + rgbColor, domExc);
-				}
-			}
-			else
-			{
-				_rgbColor = new CssColor("black");
-			}
+                }
+            }
+            else
+            {
+                _rgbColor = new CssColor("black");
+            }
 
-			//TODO--PAUL: deal with ICC colors
-		}
+            //TODO--PAUL: deal with ICC colors
+        }
 
-		#endregion
+        #endregion
 
         #region Protected Methods
 
@@ -136,7 +136,7 @@ namespace SharpVectors.Dom.Svg
             }
             else if (str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase) > -1)
             {
-                int iccStart  = str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase);
+                int iccStart = str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase);
                 string strRgb = str.Substring(0, iccStart).Trim();
                 string strIcc = str.Substring(iccStart);
 

@@ -48,21 +48,21 @@ namespace SharpVectors.Dom.Css
                 case CssPrimitiveType.Number:
                     if (PrimitiveType == CssPrimitiveType.Number)
                     {
-                        ret = floatValue;
+                        ret = _floatValue;
                     }
                     else if (PrimitiveType == CssPrimitiveType.Percentage)
                     {
-                        ret = floatValue / 100 * 255D;
+                        ret = _floatValue / 100 * 255D;
                     }
                     break;
                 case CssPrimitiveType.Percentage:
                     if (PrimitiveType == CssPrimitiveType.Percentage)
                     {
-                        ret = floatValue;
+                        ret = _floatValue;
                     }
                     else if (PrimitiveType == CssPrimitiveType.Number)
                     {
-                        ret = floatValue * 255D;
+                        ret = _floatValue * 255D;
                     }
                     break;
             }
