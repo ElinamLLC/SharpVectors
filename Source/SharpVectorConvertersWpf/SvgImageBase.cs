@@ -171,9 +171,9 @@ namespace SharpVectors.Converters
         protected virtual DrawingGroup GetDrawing(Uri svgSource)
         {
             string scheme = null;
-            // A little hack to display preview in design mode
+            // A little hack to display preview in design mode: The design mode Uri is not absolute.
             bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
-            if (designTime)
+            if (designTime && svgSource.IsAbsoluteUri == false)
             {
                 scheme = "pack";
             }
