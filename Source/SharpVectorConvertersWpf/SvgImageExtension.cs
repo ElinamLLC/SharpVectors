@@ -11,7 +11,7 @@ namespace SharpVectors.Converters
 {
     /// <summary>
     /// This implements a markup extension that enables the creation
-    /// of <see cref="DrawingImage"/> from SVG files.
+    /// of <see cref="DrawingImage"/> from SVG sources.
     /// </summary>
     /// <remarks>
     /// The SVG source file can be:
@@ -179,8 +179,24 @@ namespace SharpVectors.Converters
                     return new Uri(uriContext.BaseUri, svgSource);
                 }
                 string asmName = assembly.GetName().Name;
+
+                svgPath = _svgPath;
+                if (_svgPath.StartsWith("/", StringComparison.OrdinalIgnoreCase))
+                {
+                    svgPath = svgPath.TrimStart('/');
+                }
+
+                // A little hack to display preview in design mode
+                bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
+                if (designTime && !string.IsNullOrWhiteSpace(_appName))
+                {
+                    string uriDesign = string.Format("/{0};component/{1}", _appName, svgPath);
+
+                    return new Uri(uriDesign, UriKind.Relative);
+                }
+
                 string uriString = string.Format("pack://application:,,,/{0};component/{1}",
-                    asmName, _svgPath);
+                    asmName, svgPath);
 
                 return new Uri(uriString);
             }

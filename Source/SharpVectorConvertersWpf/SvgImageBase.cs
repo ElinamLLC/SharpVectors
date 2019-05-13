@@ -2,6 +2,7 @@
 using System.IO;
 using System.Globalization;
 using System.IO.Compression;
+using System.ComponentModel;
 
 using System.Windows;
 using System.Windows.Markup;
@@ -13,20 +14,29 @@ using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters
 {
+    /// <summary>
+    /// This is an <see langword="abstract"/> implementation of a markup extension that enables the creation
+    /// of <see cref="DrawingImage"/> from SVG sources.
+    /// </summary>
     [MarkupExtensionReturnType(typeof(DrawingImage))]
     public abstract class SvgImageBase : MarkupExtension
     {
-        #region Private Fields
+        #region Protected Fields
 
         protected bool _textAsGeometry;
         protected bool _includeRuntime;
         protected bool _optimizePath;
+        protected string _appName;
         protected CultureInfo _culture;
 
         #endregion
 
         #region Constructors and Destructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgImageBase"/> 
+        /// class with the default parameters.
+        /// </summary>
         protected SvgImageBase()
         {
             _textAsGeometry = false;
@@ -36,7 +46,7 @@ namespace SharpVectors.Converters
 
         #endregion
 
-        #region Public Properties
+        #region Public Properties        
 
         /// <summary>
         /// Gets or sets a value indicating whether the path geometry is 
@@ -130,13 +140,47 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets the project or application name of the target assembly.
+        /// </summary>
+        /// <value>
+        /// A string specifying the application project name.
+        /// </value>
+        /// <remarks>
+        /// This is optional and is only used to resolve the resource Uri at the design time.
+        /// </remarks>
+        public string AppName
+        {
+            get {
+                return _appName;
+            }
+            set {
+                _appName = value;
+            }
+        }
+
         #endregion
 
         #region Protected Methods
 
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingGroup"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingGroup"/> of the converted SVG resource.</returns>
         protected virtual DrawingGroup GetDrawing(Uri svgSource)
         {
-            string scheme = svgSource.Scheme;
+            string scheme = null;
+            // A little hack to display preview in design mode
+            bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
+            if (designTime)
+            {
+                scheme = "pack";
+            }
+            else
+            {
+                scheme = svgSource.Scheme;
+            }
             if (string.IsNullOrWhiteSpace(scheme))
             {
                 return null;
@@ -206,11 +250,11 @@ namespace SharpVectors.Converters
                         }
                         else
                         {
-                            using (svgStreamInfo.Stream)
+                            using (svgStream)
                             {
                                 using (FileSvgReader reader = new FileSvgReader(settings))
                                 {
-                                    DrawingGroup drawGroup = reader.Read(svgStreamInfo.Stream);
+                                    DrawingGroup drawGroup = reader.Read(svgStream);
 
                                     if (drawGroup != null)
                                     {
@@ -255,6 +299,15 @@ namespace SharpVectors.Converters
             return null;
         }
 
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingImage"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingImage"/> of the converted SVG resource.</returns>
+        /// <remarks>
+        /// This uses the <see cref="GetDrawing(Uri)"/> method to convert the SVG resource to <see cref="DrawingGroup"/>,
+        /// which is then wrapped in <see cref="DrawingImage"/>.
+        /// </remarks>
         protected virtual DrawingImage GetImage(Uri svgSource)
         {
             DrawingGroup drawGroup = this.GetDrawing(svgSource);
