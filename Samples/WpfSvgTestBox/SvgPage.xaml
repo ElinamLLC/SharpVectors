@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:local="clr-namespace:WpfSvgTestBox"
     Title="SvgPage" Background="White"
         DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop" AllowDrop="True"
@@ -36,7 +37,7 @@
         </Grid.RowDefinitions>
         
         <DockPanel LastChildFill="True" Grid.Row="0">
-            <ToolBar DockPanel.Dock="Top" Height="32">
+            <ToolBar DockPanel.Dock="Top" Height="36">
                 <ToolBar.Resources>
                     <Style TargetType="{x:Type Image}">
                         <Style.Triggers>
@@ -46,41 +47,41 @@
                         </Style.Triggers>
                     </Style>
                 </ToolBar.Resources>
-                <Button Click="OnOpenFileClick">
-                    <Image Source="Images/Open.png" Height="16"/>
+                <Button Click="OnOpenFileClick" ToolTip="Open Svg File">
+                    <Image Source="{svgc:SvgImage Source=/Images/Open.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </Button>
-                <Button Click="OnSaveFileClick">
-                    <Image Source="Images/Save.png" Height="16"/>
-                </Button>
-                <Separator/>
-                <Button Command="Cut">
-                    <Image Source="Images/Cut.png" Height="16"/>
-                </Button>
-                <Button Command="Copy">
-                    <Image Source="Images/Copy.png" Height="16"/>
-                </Button>
-                <Button Command="Paste">
-                    <Image Source="Images/Paste.png" Height="16"/>
-                </Button>
-                <Button Command="Delete">
-                    <Image Source="Images/Delete.png" Height="16"/>
+                <Button Click="OnSaveFileClick" ToolTip="Save Svg File">
+                    <Image Source="{svgc:SvgImage Source=/Images/Save.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </Button>
                 <Separator/>
-                <Button Command="Undo">
-                    <Image Source="Images/Undo.png" Height="16"/>
+                <Button Command="Cut" ToolTip="Cut To Clipboard">
+                    <Image Source="{svgc:SvgImage Source=/Images/Cut.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </Button>
-                <Button Command="Redo">
-                    <Image Source="Images/Redo.png" Height="16"/>
+                <Button Command="Copy" ToolTip="Copy To Clipboard">
+                    <Image Source="{svgc:SvgImage Source=/Images/Copy.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
+                </Button>
+                <Button Command="Paste" ToolTip="Paste From Clipboard">
+                    <Image Source="{svgc:SvgImage Source=/Images/Paste.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
+                </Button>
+                <Button Command="Delete" ToolTip="Delete Selection">
+                    <Image Source="{svgc:SvgImage Source=/Images/Delete.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </Button>
                 <Separator/>
-                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}">
-                    <Image Source="Images/WordWrap.png" Height="16"/>
+                <Button Command="Undo" ToolTip="Undo">
+                    <Image Source="{svgc:SvgImage Source=/Images/Undo.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
+                </Button>
+                <Button Command="Redo" ToolTip="Redo">
+                    <Image Source="{svgc:SvgImage Source=/Images/Redo.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
+                </Button>
+                <Separator/>
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
+                    <Image Source="{svgc:SvgImage Source=/Images/WordWrap.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </CheckBox>
-                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}">
-                    <TextBlock Width="16" TextAlignment="Center">#</TextBlock>
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}" ToolTip="Show Line Numbers">
+                    <Image Source="{svgc:SvgImage Source=/Images/Number.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </CheckBox>
-                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}">
-                    <TextBlock Width="16" TextAlignment="Center">¶</TextBlock>
+                <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}" ToolTip="Show End Of Line">
+                    <Image Source="{svgc:SvgImage Source=/Images/Space.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </CheckBox>
                 <ComboBox Name="highlightingComboBox" Width="120"
 				    SelectedItem="{Binding SyntaxHighlighting, ElementName=textEditor}"
@@ -88,21 +89,21 @@
 				    SelectionChanged="OnHighlightingSelectionChanged"/>
                 <Separator/>
                 <TextBox Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
-                <Button Click="OnSearchTextClick">
-                    <Image Source="Images/Find.png" Height="16"/>
+                <Button Click="OnSearchTextClick" ToolTip="Search">
+                    <Image Source="{svgc:SvgImage Source=/Images/Find.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </Button>
                 <Separator/>
-                <Button Name="formatInput" Click="OnFormatInputClick">
+                <Button Name="formatInput" Click="OnFormatInputClick" ToolTip="Format Document">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Format.png" />
-                        <TextBlock Margin="3,0,0,0">Format</TextBlock>
+                        <Image Source="{svgc:SvgImage Source=/Images/Format.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
+                        <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Format</TextBlock>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="convertInput" Click="OnConvertInputClick">
+                <Button Name="convertInput" Click="OnConvertInputClick" ToolTip="Convert Document">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="Images/Run.png" />
-                        <TextBlock Margin="3,0,0,0">Convert</TextBlock>
+                        <Image Source="{svgc:SvgImage Source=/Images/Run.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
+                        <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Convert</TextBlock>
                     </StackPanel>
                 </Button>
             </ToolBar>

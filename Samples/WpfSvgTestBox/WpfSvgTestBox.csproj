@@ -62,13 +62,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DebugPage.xaml.cs">
+      <DependentUpon>DebugPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MouseHandlingMode.cs" />
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SvgPage.xaml.cs">
       <DependentUpon>SvgPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TraceDocument.xaml.cs">
+      <DependentUpon>TraceDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraceTextSource.cs" />
     <Compile Include="XamlPage.xaml.cs">
       <DependentUpon>XamlPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="DebugPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,7 +95,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SvgPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TraceDocument.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -145,61 +167,35 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Copy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Cut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Find.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\FolderClose.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\FolderOpen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Panning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Paste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Redo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\WordWrap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ZoomIn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ZoomOut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Run.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="WpfSvgTestBox.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Format.png" />
+    <Resource Include="Images\SvgLogo.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\Output.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Debug.svg" />
+    <Resource Include="Images\Settings.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Copy.svg" />
+    <Resource Include="Images\Cut.svg" />
+    <Resource Include="Images\Delete.svg" />
+    <Resource Include="Images\Find.svg" />
+    <Resource Include="Images\Format.svg" />
+    <Resource Include="Images\Open.svg" />
+    <Resource Include="Images\Paste.svg" />
+    <Resource Include="Images\Redo.svg" />
+    <Resource Include="Images\Run.svg" />
+    <Resource Include="Images\Save.svg" />
+    <Resource Include="Images\Undo.svg" />
+    <Resource Include="Images\WordWrap.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Number.svg" />
+    <Resource Include="Images\Space.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

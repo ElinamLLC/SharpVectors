@@ -15,6 +15,8 @@ namespace WpfSvgTestBox
 
         private SvgPage _svgPage;
         private XamlPage _xamlPage;
+        private DebugPage _debugPage;
+        private SettingsPage _settingsPage;
 
         #endregion
 
@@ -65,17 +67,33 @@ namespace WpfSvgTestBox
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             // Retrieve the display pages...
-            _svgPage  = frameSvgInput.Content as SvgPage;
-            _xamlPage = frameXamlOutput.Content as XamlPage;
+            _svgPage      = frameSvgInput.Content as SvgPage;
+            _xamlPage     = frameXamlOutput.Content as XamlPage;
+            _debugPage    = frameDebugging.Content as DebugPage;
+            _settingsPage = frameSettings.Content as SettingsPage;
 
-            if (_svgPage != null)
+            if (_svgPage != null && _xamlPage != null)
             {
                 _svgPage.XamlPage = _xamlPage;
+            }
+
+            if (_svgPage != null && _settingsPage != null)
+            {
+                _settingsPage.SvgPage = _svgPage;
+            }
+
+            if (_debugPage != null)
+            {
+                _debugPage.Startup();
             }
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
+            if (_debugPage != null)
+            {
+                _debugPage.Startup();
+            }
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml;
 using System.Text;
 using System.Reflection;
+using System.Diagnostics;
 using System.IO.Compression;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,6 +57,8 @@ namespace WpfSvgTestBox
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
 
+        private readonly SearchPanel _searchPanel;
+
         /// <summary>
         /// Specifies the current state of the mouse handling logic.
         /// </summary>
@@ -75,6 +78,8 @@ namespace WpfSvgTestBox
         /// Records which mouse button clicked during mouse dragging.
         /// </summary>
         private MouseButton mouseButtonDown;
+
+        private int _renderCount;
 
         #endregion
 
@@ -117,7 +122,7 @@ namespace WpfSvgTestBox
             _foldingManager = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
-            SearchPanel.Install(textEditor);
+            _searchPanel = SearchPanel.Install(textEditor);
 
             textEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
 
@@ -150,6 +155,11 @@ namespace WpfSvgTestBox
                 if (value != null)
                 {
                     _wpfSettings = value;
+
+                    // Recreated the conveter
+                    _fileReader = new FileSvgReader(_wpfSettings);
+                    _fileReader.SaveXaml = true;
+                    _fileReader.SaveZaml = false;
                 }
             }
         }
@@ -344,6 +354,13 @@ namespace WpfSvgTestBox
                     return false;
                 }
 
+                if (_renderCount != 0)
+                {
+                    Trace.WriteLine(string.Empty);
+                }
+
+                Trace.TraceInformation("ConvertDocument: Started");
+
                 if (_xamlPage != null && !string.IsNullOrWhiteSpace(_xamlFilePath))
                 {
                     if (File.Exists(_xamlFilePath))
@@ -389,6 +406,10 @@ namespace WpfSvgTestBox
                 }
                 zoomPanControl.AnimatedZoomTo(bounds);
 
+                Trace.TraceInformation("ConvertDocument: Completed");
+
+                _renderCount++;
+
                 return true;
             }
             catch (Exception ex)
@@ -408,6 +429,9 @@ namespace WpfSvgTestBox
             {
                 return;
             }
+
+            Trace.TraceInformation(message);
+
             MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -417,6 +441,9 @@ namespace WpfSvgTestBox
             {
                 return;
             }
+
+            Trace.TraceError(message);
+
             MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -426,6 +453,9 @@ namespace WpfSvgTestBox
             {
                 return;
             }
+
+            Trace.TraceError(ex.ToString());
+
             MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -534,12 +564,20 @@ namespace WpfSvgTestBox
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)
         {
-            string searchText = searchTextBox.Text;
-
-            if (string.IsNullOrWhiteSpace(searchText))
+            if (_searchPanel == null)
             {
                 return;
             }
+
+            string searchText = searchTextBox.Text;
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                _searchPanel.SearchPattern = searchText;
+            }
+
+            _searchPanel.Open();
+            _searchPanel.Reactivate();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)

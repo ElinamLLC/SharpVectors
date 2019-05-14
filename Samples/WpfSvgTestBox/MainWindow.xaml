@@ -4,16 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSvgTestBox"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         local:MainWindowSettings.Save="True"
         mc:Ignorable="d"
         Title="WPF SVG TestBox" Height="720" Width="860" WindowStartupLocation="CenterScreen">
     <DockPanel LastChildFill="True" Margin="3">
         <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
-            <TabItem Name="tabSvgInput" Header="Svg Input">
+            <TabItem Name="tabSvgInput">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogo.svg}" />
+                        <TextBlock Text="Svg Input" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Frame Name="frameSvgInput" Source="SvgPage.xaml"/>
             </TabItem>
-            <TabItem Name="tabXamlOutput" Header="Xaml Output">
+            <TabItem Name="tabXamlOutput">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Output.svg}" />
+                        <TextBlock Text="Xaml Output" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Frame Name="frameXamlOutput" Source="XamlPage.xaml"/>
+            </TabItem>
+            <TabItem Name="tabSettings">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg}" />
+                        <TextBlock Text="Settings" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame Name="frameSettings" Source="SettingsPage.xaml"/>
+            </TabItem>
+            <TabItem Name="tabDebugging">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg}" />
+                        <TextBlock Text="Debugging" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame Name="frameDebugging" Source="DebugPage.xaml"/>
             </TabItem>
         </TabControl>
     </DockPanel>
