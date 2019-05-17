@@ -38,6 +38,8 @@ namespace WpfW3cSvgTestSuite
         private FoldingManager     _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
 
+        private readonly SearchPanel _searchPanel;
+
         public XamlPage()
         {
             InitializeComponent();
@@ -58,7 +60,7 @@ namespace WpfW3cSvgTestSuite
             _foldingManager  = FoldingManager.Install(textEditor.TextArea);
             _foldingStrategy = new XmlFoldingStrategy();
 
-            SearchPanel.Install(textEditor);
+            _searchPanel = SearchPanel.Install(textEditor);
         }
 
         public bool LoadDocument(string documentFilePath, SvgTestInfo testInfo, object extraInfo = null)
@@ -164,12 +166,20 @@ namespace WpfW3cSvgTestSuite
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)
         {
-            string searchText = searchTextBox.Text;
-
-            if (string.IsNullOrWhiteSpace(searchText))
+            if (_searchPanel == null)
             {
                 return;
             }
+
+            string searchText = searchTextBox.Text;
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                _searchPanel.SearchPattern = searchText;
+            }
+
+            _searchPanel.Open();
+            _searchPanel.Reactivate();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)

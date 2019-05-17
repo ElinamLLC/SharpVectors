@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DebugPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DrawingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SvgPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +102,10 @@
     <Page Include="SvgTestResultsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TraceDocument.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="XamlPage.xaml">
       <SubType>Designer</SubType>
@@ -110,6 +122,9 @@
     </Compile>
     <Compile Include="BrowserPage.xaml.cs">
       <DependentUpon>BrowserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DebugPage.xaml.cs">
+      <DependentUpon>DebugPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="HtmlConverter\HtmlCssParser.cs" />
     <Compile Include="HtmlConverter\HtmlFromXamlConverter.cs" />
@@ -142,6 +157,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SvgPage.xaml.cs">
       <DependentUpon>SvgPage.xaml</DependentUpon>
     </Compile>
@@ -153,6 +171,10 @@
       <DependentUpon>SvgTestResultsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SvgTestState.cs" />
+    <Compile Include="TraceDocument.xaml.cs">
+      <DependentUpon>TraceDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraceTextSource.cs" />
     <Compile Include="XamlPage.xaml.cs">
       <DependentUpon>XamlPage.xaml</DependentUpon>
     </Compile>
@@ -198,49 +220,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Copy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Cut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Find.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Panning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Paste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Redo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\WordWrap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ZoomIn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ZoomOut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\FolderClose.png" />
-    <Resource Include="Images\FolderOpen.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\PanTool.cur" />
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +228,69 @@
   <ItemGroup>
     <Resource Include="App.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\FolderClose.svg" />
+    <Resource Include="Images\FolderOpen.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Copy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cut.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Debug.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Delete.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Find.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Format.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Number.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Output.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paste.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Redo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Run.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Save.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Settings.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Space.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SvgLogo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Undo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WordWrap.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Test.svg" />
+    <Resource Include="Images\TestRunner.svg" />
+    <Resource Include="Images\Web.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

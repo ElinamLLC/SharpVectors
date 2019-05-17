@@ -96,7 +96,7 @@
         <category label="Text" total="32" unknowns="0" failures="2" successes="19" partials="11" />
         <category label="Metadata and Others" total="3" unknowns="0" failures="1" successes="1" partials="1" />
     </result>
-    <result version="1.4.0.0" date="2019-05-01T20:07:56.3601239+09:00">
+    <result version="1.4.0.0" date="2019-05-09T21:50:15.7551994+09:00">
         <category label="Animations" total="58" unknowns="0" failures="58" successes="0" partials="0" />
         <category label="Colors" total="4" unknowns="0" failures="0" successes="4" partials="0" />
         <category label="Coordinates and Transforms" total="14" unknowns="0" failures="0" successes="14" partials="0" />
@@ -116,7 +116,7 @@
         <category label="Scripting" total="4" unknowns="0" failures="4" successes="0" partials="0" />
         <category label="Shapes" total="10" unknowns="0" failures="0" successes="10" partials="0" />
         <category label="Structures" total="33" unknowns="1" failures="6" successes="25" partials="1" />
-        <category label="Styling" total="8" unknowns="0" failures="1" successes="5" partials="2" />
+        <category label="Styling" total="8" unknowns="0" failures="1" successes="7" partials="0" />
         <category label="Text" total="32" unknowns="0" failures="2" successes="19" partials="11" />
         <category label="Metadata and Others" total="3" unknowns="0" failures="1" successes="1" partials="1" />
     </result>

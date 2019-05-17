@@ -1,9 +1,10 @@
 ﻿<Window x:Class="WpfW3cSvgTestSuite.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
     local:MainWindowSettings.Save="True"
-    Title="W3C SVG 1.1 Full Test Suite" Height="640" Width="860">
+    Title="W3C SVG 1.1 Full Test Suite" Height="640" Width="1080">
     <DockPanel LastChildFill="True" Margin="3">
         <!-- Top directory source panel -->
         <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
@@ -107,20 +108,68 @@
                 <GridSplitter Name="leftSplitter" Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="Gray"
                           HorizontalAlignment="Center" Width="6" VerticalAlignment="Stretch"/>
                 <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
-                    <TabItem Name="tabDrawing" Header="Drawing">
+                    <TabItem Name="tabDrawing">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/TestRunner.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <TextBlock Text="Drawing" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
                         <Frame Name="frameDrawing" Source="DrawingPage.xaml"/>
                     </TabItem>
-                    <TabItem Name="tabBrowser" Header="Browser">
+                    <TabItem Name="tabBrowser" Visibility="Collapsed">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Web.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <TextBlock Text="Browser" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
                         <Frame Name="frameBrowser" Source="BrowserPage.xaml"/>
                     </TabItem>
-                    <TabItem Name="tabXamlOutput" Header="Xaml Output">
+                    <TabItem Name="tabXamlOutput">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Output.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <TextBlock Text="Xaml Output" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
                         <Frame Name="frameXamlOutput" Source="XamlPage.xaml"/>
                     </TabItem>
-                    <TabItem Name="tabSvgInput" Header="Svg Input">  
+                    <TabItem Name="tabSvgInput">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogo.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <TextBlock Text="Svg Input" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
                         <Frame Name="frameSvgInput" Source="SvgPage.xaml"/>
                     </TabItem>
-                    <TabItem Name="tabAbout" Header="About Test">
+                    <TabItem Name="tabAbout">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Test.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <TextBlock Text="About Test" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
                         <Frame Name="frameAbout" Source="AboutPage.xaml"/>
+                    </TabItem>
+                    <TabItem Name="tabSettings">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg, AppName=WpfSvgTestBox}" />
+                                <TextBlock Text="Settings" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Name="frameSettings" Source="SettingsPage.xaml"/>
+                    </TabItem>
+                    <TabItem Name="tabDebugging">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfSvgTestBox}" />
+                                <TextBlock Text="Debugging" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Name="frameDebugging" Source="DebugPage.xaml"/>
                     </TabItem>
                 </TabControl>            
             </Grid>

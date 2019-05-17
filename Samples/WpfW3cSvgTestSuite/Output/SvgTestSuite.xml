@@ -271,9 +271,9 @@
         <test source="struct-use-05-b.svg" title="struct-use-05-b" state="success" comment="" description="Tests external references and computed inherited values" />
     </category>
     <category label="Styling">
-        <test source="styling-css-01-b.svg" title="styling-css-01-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
+        <test source="styling-css-01-b.svg" title="styling-css-01-b" state="success" comment="Text whitespace handling is now improved, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
         <test source="styling-css-02-b.svg" title="styling-css-02-b" state="success" comment="" description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
-        <test source="styling-css-03-b.svg" title="styling-css-03-b" state="partial" comment="Text whitespace handling is not complete, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
+        <test source="styling-css-03-b.svg" title="styling-css-03-b" state="success" comment="Text whitespace handling is now improved, not really part of this test, but must be considered too." description="Test that viewer handles combinations of the simple CSS2 selectors: ancestor, child, sibling." />
         <test source="styling-css-04-f.svg" title="styling-css-04-f" state="success" comment="By the revised test, SVG 1.1 Second Edition Test Suite, the dash lines in C3 and D3 should not be drawn." description="Tests CSS2 selectors" />
         <test source="styling-css-05-b.svg" title="styling-css-05-b" state="success" comment="" description="" />
         <test source="styling-css-06-b.svg" title="styling-css-06-b" state="failure" comment="" description="" />

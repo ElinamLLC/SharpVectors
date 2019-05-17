@@ -3,23 +3,24 @@ using System.IO;
 using System.Xml;
 using System.Text;
 using System.ComponentModel;
+using System.IO.Compression;
 using System.Collections.Generic;
 
 using IoPath = System.IO.Path;
+
+using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
 
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Resources;
 
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
-
-using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
 
 namespace WpfW3cSvgTestSuite
 {
@@ -64,9 +65,11 @@ namespace WpfW3cSvgTestSuite
         private DrawingPage _drawingPage;
         private BrowserPage _browserPage;
         private AboutPage _aboutPage;
-        
-        private BitmapImage _folderClose;
-        private BitmapImage _folderOpen;
+        private DebugPage _debugPage;
+        private SettingsPage _settingsPage;
+
+        private ImageSource _folderClose;
+        private ImageSource _folderOpen;
 
         private DirectoryInfo _directoryInfo;
 
@@ -114,15 +117,22 @@ namespace WpfW3cSvgTestSuite
 
             try
             {
-                _folderClose = new BitmapImage();
-                _folderClose.BeginInit();
-                _folderClose.UriSource = new Uri("Images/FolderClose.png", UriKind.Relative);
-                _folderClose.EndInit();
+                //                _folderClose = new BitmapImage();
+                //var folderClose = new BitmapImage();
+                //folderClose.BeginInit();
+                //folderClose.UriSource = new Uri("Images/FolderClose.png", UriKind.Relative);
+                //folderClose.EndInit();
+                //_folderClose = folderClose;
 
-                _folderOpen = new BitmapImage();
-                _folderOpen.BeginInit();
-                _folderOpen.UriSource = new Uri("Images/FolderOpen.png", UriKind.Relative);
-                _folderOpen.EndInit();
+                _folderClose = this.GetImage(new Uri("Images/FolderClose.svg", UriKind.Relative));
+
+                //var folderOpen = new BitmapImage();
+                //folderOpen.BeginInit();
+                //folderOpen.UriSource = new Uri("Images/FolderOpen.png", UriKind.Relative);
+                //folderOpen.EndInit();
+                //_folderOpen = folderOpen;
+
+                _folderOpen = this.GetImage(new Uri("Images/FolderOpen.svg", UriKind.Relative));
             }
             catch (Exception ex)
             {
@@ -131,6 +141,38 @@ namespace WpfW3cSvgTestSuite
 
                 MessageBox.Show(ex.ToString(), "Svg Test Suite - Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public XamlPage XamlPage
+        {
+            get {
+                return _xamlPage;
+            }
+            set {
+                _xamlPage = value;
+            }
+        }
+
+        public WpfDrawingSettings ConversionSettings
+        {
+            get {
+                return _wpfSettings;
+            }
+            set {
+                if (value != null)
+                {
+                    _wpfSettings = value;
+
+                    // Recreated the conveter
+                    _fileReader = new FileSvgReader(_wpfSettings);
+                    _fileReader.SaveXaml = true;
+                    _fileReader.SaveZaml = false;
+                }
             }
         }
 
@@ -170,11 +212,23 @@ namespace WpfW3cSvgTestSuite
             bottomExpander.IsExpanded = false;
 
             // Retrieve the display pages...
-            _svgPage     = frameSvgInput.Content   as SvgPage;
-            _xamlPage    = frameXamlOutput.Content as XamlPage;
-            _drawingPage = frameDrawing.Content    as DrawingPage;
-            _browserPage = frameBrowser.Content    as BrowserPage;
-            _aboutPage   = frameAbout.Content      as AboutPage;
+            _svgPage      = frameSvgInput.Content   as SvgPage;
+            _xamlPage     = frameXamlOutput.Content as XamlPage;
+            _drawingPage  = frameDrawing.Content    as DrawingPage;
+            _browserPage  = frameBrowser.Content    as BrowserPage;
+            _aboutPage    = frameAbout.Content      as AboutPage;
+            _debugPage    = frameDebugging.Content as DebugPage;
+            _settingsPage = frameSettings.Content as SettingsPage;
+
+            if (_svgPage != null && _settingsPage != null)
+            {
+                _settingsPage.MainWindow = this;
+            }
+
+            if (_debugPage != null)
+            {
+                _debugPage.Startup();
+            }
 
             if (_fileReader != null)
             {
@@ -289,6 +343,11 @@ namespace WpfW3cSvgTestSuite
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+            }
+
+            if (_debugPage != null)
+            {
+                _debugPage.Startup();
             }
         }
 
@@ -782,6 +841,93 @@ namespace WpfW3cSvgTestSuite
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingGroup"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingGroup"/> of the converted SVG resource.</returns>
+        private DrawingGroup GetDrawing(Uri svgSource)
+        {
+            WpfDrawingSettings settings = new WpfDrawingSettings();
+            settings.IncludeRuntime = false;
+            settings.TextAsGeometry = true;
+            settings.OptimizePath = true;
+
+            StreamResourceInfo svgStreamInfo = null;
+            if (svgSource.ToString().IndexOf("siteoforigin", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                svgStreamInfo = Application.GetRemoteStream(svgSource);
+            }
+            else
+            {
+                svgStreamInfo = Application.GetResourceStream(svgSource);
+            }
+
+            Stream svgStream = (svgStreamInfo != null) ? svgStreamInfo.Stream : null;
+
+            if (svgStream != null)
+            {
+                string fileExt = IoPath.GetExtension(svgSource.ToString());
+                bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
+                    string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase);
+
+                if (isCompressed)
+                {
+                    using (svgStream)
+                    {
+                        using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                        {
+                            using (FileSvgReader reader = new FileSvgReader(settings))
+                            {
+                                DrawingGroup drawGroup = reader.Read(zipStream);
+
+                                if (drawGroup != null)
+                                {
+                                    return drawGroup;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    using (svgStream)
+                    {
+                        using (FileSvgReader reader = new FileSvgReader(settings))
+                        {
+                            DrawingGroup drawGroup = reader.Read(svgStream);
+
+                            if (drawGroup != null)
+                            {
+                                return drawGroup;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingImage"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingImage"/> of the converted SVG resource.</returns>
+        /// <remarks>
+        /// This uses the <see cref="GetDrawing(Uri)"/> method to convert the SVG resource to <see cref="DrawingGroup"/>,
+        /// which is then wrapped in <see cref="DrawingImage"/>.
+        /// </remarks>
+        private DrawingImage GetImage(Uri svgSource)
+        {
+            DrawingGroup drawGroup = this.GetDrawing(svgSource);
+            if (drawGroup != null)
+            {
+                return new DrawingImage(drawGroup);
+            }
+            return null;
+        }
 
         private void InitializePath(string suitePath)
         {   

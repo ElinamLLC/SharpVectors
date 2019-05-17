@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 using SharpVectors.Renderers.Wpf;
 
-namespace WpfSvgTestBox
+namespace WpfW3cSvgTestSuite
 {
     /// <summary>
     /// Interaction logic for SettingsPage.xaml
@@ -14,7 +14,7 @@ namespace WpfSvgTestBox
         private bool _isInitialising;
         private bool _isModified;
 
-        private SvgPage _svgPage;
+        private MainWindow _mainWindow;
 
         private WpfDrawingSettings _wpfSettings;
 
@@ -26,31 +26,31 @@ namespace WpfSvgTestBox
             this.Unloaded += OnPageUnloaded;
         }
 
-        public SvgPage SvgPage
+        public MainWindow MainWindow
         {
             get {
-                return _svgPage;
+                return _mainWindow;
             }
             set {
-                _svgPage = value;
+                _mainWindow = value;
             }
         }
 
         private void OnPageUnloaded(object sender, RoutedEventArgs e)
         {
-            if (_isModified && _svgPage != null && _wpfSettings != null)
+            if (_isModified && _mainWindow != null && _wpfSettings != null)
             {
-                _svgPage.ConversionSettings = _wpfSettings;
+                _mainWindow.ConversionSettings = _wpfSettings;
             }
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            if (_svgPage == null)
+            if (_mainWindow == null)
             {
                 return;
             }
-            var wpfSettings = _svgPage.ConversionSettings;
+            var wpfSettings = _mainWindow.ConversionSettings;
             if (wpfSettings != null)
             {
                 _wpfSettings = wpfSettings.Clone();
@@ -76,7 +76,7 @@ namespace WpfSvgTestBox
 
         private void OnSettingsChanged(object sender, RoutedEventArgs e)
         {
-            if (_svgPage == null || _wpfSettings == null)
+            if (_mainWindow == null || _wpfSettings == null)
             {
                 return;
             }

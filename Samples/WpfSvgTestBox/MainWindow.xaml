@@ -13,7 +13,7 @@
             <TabItem Name="tabSvgInput">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogo.svg}" />
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogo.svg, AppName=WpfSvgTestBox}" />
                         <TextBlock Text="Svg Input" Margin="3" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -22,7 +22,7 @@
             <TabItem Name="tabXamlOutput">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Output.svg}" />
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Output.svg, AppName=WpfSvgTestBox}" />
                         <TextBlock Text="Xaml Output" Margin="3" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -31,7 +31,7 @@
             <TabItem Name="tabSettings">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg}" />
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg, AppName=WpfSvgTestBox}" />
                         <TextBlock Text="Settings" Margin="3" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -40,7 +40,7 @@
             <TabItem Name="tabDebugging">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg}" />
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfSvgTestBox}" />
                         <TextBlock Text="Debugging" Margin="3" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>

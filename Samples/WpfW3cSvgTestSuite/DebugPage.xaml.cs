@@ -2,7 +2,7 @@
 
 using System.Windows.Controls;
 
-namespace WpfSvgTestBox
+namespace WpfW3cSvgTestSuite
 {
     /// <summary>
     /// Interaction logic for DebugPage.xaml
