@@ -3,6 +3,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SharpVectors.Converters">
 
+    <Style TargetType="{x:Type local:SvgCanvas}">
+        <Setter Property="MessageFontFamily">
+            <Setter.Value>
+                <DynamicResource ResourceKey="{x:Static SystemFonts.MessageFontFamilyKey}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="MessageOpacity" Value="1"/>
+        <Setter Property="MessageFontSize" Value="48"/>
+        <Setter Property="MessageBackground" Value="PapayaWhip"/>
+        <Setter Property="MessageFillBrush" Value="Gold"/>
+        <Setter Property="MessageStrokeBrush" Value="Maroon"/>
+        <Setter Property="MessageText" Value="Loading..."/>
+    </Style>
+
+    <Style TargetType="{x:Type local:SvgViewbox}">
+        <Setter Property="MessageFontFamily">
+            <Setter.Value>
+                <DynamicResource ResourceKey="{x:Static SystemFonts.MessageFontFamilyKey}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="MessageOpacity" Value="1"/>
+        <Setter Property="MessageFontSize" Value="48"/>
+        <Setter Property="MessageBackground" Value="PapayaWhip"/>
+        <Setter Property="MessageFillBrush" Value="Gold"/>
+        <Setter Property="MessageStrokeBrush" Value="Maroon"/>
+        <Setter Property="MessageText" Value="Loading..."/>
+    </Style>
 
     <Style TargetType="{x:Type local:SvgControl}">
         <Setter Property="Template">
@@ -16,4 +43,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
 </ResourceDictionary>

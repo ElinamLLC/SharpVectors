@@ -25,6 +25,8 @@ namespace SharpVectors.Runtime
     {
         #region Private Fields
 
+        private static readonly Action EmptyDelegate = delegate { };
+
         private bool _drawForInteractivity;
 
         private Rect _bounds;
@@ -222,8 +224,7 @@ namespace SharpVectors.Runtime
             }
         }
 
-        public void LoadDiagrams(DrawingGroup whole, 
-            DrawingGroup links, DrawingGroup main)
+        public void LoadDiagrams(DrawingGroup whole, DrawingGroup links, DrawingGroup main)
         {
             if (whole == null)
             {
@@ -256,6 +257,8 @@ namespace SharpVectors.Runtime
 
             this.InvalidateMeasure();
             this.InvalidateVisual();
+
+            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
         }
 
         #region RenderDiagrams Methods
