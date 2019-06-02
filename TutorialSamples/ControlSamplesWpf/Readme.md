@@ -8,8 +8,7 @@ These samples are simple, independent and do not require third-party libraries o
 All the samples reference the assemblies in the **SharpVectors\Output** folder.
 
 
-
-## SvgCanvasSample and SvgCanvasSampleVB
+### SvgCanvasSample and SvgCanvasSampleVB
 
 These are samples demonstrating the **SvgCanvas** implementation provided by the SharpVectors.
 
@@ -35,8 +34,7 @@ The various tabs demonstrate different ways to set and render SVG sources
 * **LoadAsync (Method)**: Demonstrate using the LoadAsync asynchronous method to access and render SVG sources using both URI and stream sources. This uses the async/await keywords supported in .NET 4.5 or later.
 
 
-
-## SvgImageBindingSample and SvgImageBindingSampleVB
+### SvgImageBindingSample and SvgImageBindingSampleVB
 
 These samples demonstrate how to use the **SvgImageConverter** markup extension, which is similar to the **SvgImage** markup extension (discussed below) but implements [IValueConverter](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.ivalueconverter) interface to support data bindings.
 
@@ -53,7 +51,6 @@ The various tabs demonstrate different ways to set and render SVG sources. It ha
   The SVG icons are provided in the output directory as Zip file, which is automatically unzipped and enumerated to create the data source.
 
 
-
 ### SvgImageSample and SvgImageSampleVB
 
 These samples demonstrate how to use the **SvgImage** markup extension.
@@ -64,7 +61,6 @@ The various tabs demonstrate different ways to set and render SVG sources.
 
 * **Toolbar Icons**: The toolbar images are created from SVG sources stored as resource files. This is suitable  for [High DPI Desktop Application Development](https://docs.microsoft.com/en-us/windows/desktop/hidpi/high-dpi-desktop-application-development-on-windows). The toolbar itself is not used in the sample, only for demonstration of the icons.
 * **TabControl Page Images**: Demonstrate various means to set local, web and resource files.
-
 
 
 ### SvgViewboxSample and SvgViewboxSampleVB
