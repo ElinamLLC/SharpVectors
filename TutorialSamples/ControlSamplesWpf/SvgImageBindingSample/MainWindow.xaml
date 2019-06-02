@@ -3,70 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         xmlns:local="clr-namespace:SvgImageBindingSample"
         mc:Ignorable="d"
-        Title="MainWindow - SvgImageBinding" Height="720" Width="920" Background="#FF0C0C0C" WindowStartupLocation="CenterScreen">
+        Title="SharpVectors: SvgImageBinding Sample (SvgImageConverter Demo) - C#" Height="720" Width="930" 
+        Background="#444444" WindowStartupLocation="CenterScreen" Icon="SvgImageBindingSample.ico">
     <DockPanel LastChildFill="True" Margin="4">
-        <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
+        <TabControl TabStripPlacement="Left" FontSize="14" Margin="6" Grid.Row="0" Grid.Column="2" Background="#444444">
             <TabControl.Resources>
-                <ControlTemplate x:Key="TabItemTemplate" TargetType="{x:Type TabItem}">
-                    <Border Cursor="Hand" x:Name="tab" Background="White" BorderThickness="1,1,1,0" BorderBrush="Black" Padding="5">
-                        <Grid>
-                            <ContentPresenter   x:Name="contentPresenter" ContentSource="Header"
-                                TextBlock.Foreground="Black"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Left"/>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="tab" Property="Background" Value="Gray"/>
-                            <Setter TargetName="tab" Property="BorderBrush" Value="#383838"/>
-                            <Setter TargetName="tab" Property="BorderThickness" Value="1,1,1,0"/>
-                        </Trigger>
-                        <!--<MultiTrigger>
-                        <MultiTrigger.Conditions>
-                            <Condition Property="IsSelected" Value="False" />
-                            <Condition Property="IsMouseOver" Value="True"/>
-                        </MultiTrigger.Conditions>
-                        <MultiTrigger.Setters>
-                            <Setter TargetName="tab" Property="BorderBrush" Value="White"/>
-                            <Setter TargetName="tab" Property="BorderThickness" Value="1,1,1,0"/>
-                        </MultiTrigger.Setters>
-                    </MultiTrigger>-->
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-
-                <Style TargetType="{x:Type TabControl}">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="BorderBrush" Value="Black"/>
+                <Style TargetType="TabItem">
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type TabControl}">
-                                <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TabPanel x:Name="HeaderPanel" IsItemsHost="true" Margin="2,2,2,0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
-                                    <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                                        <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    </Border>
-                                </Grid>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="#444444" CornerRadius="8,0,0,0" Margin="2,2">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,4"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="DeepSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#808080" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
-                <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="Template" Value="{StaticResource TabItemTemplate}" />
-                </Style>
-
             </TabControl.Resources>
-            <TabItem Name="tabSingle" Header="Binding Demo" Background="Blue">
+            <TabItem Name="tabSingle" Background="#444444">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <Image Source="{Binding Converter={svgc:SvgImageConverter AppName=SvgImageBindingSample}, ConverterParameter=/Resources/Binding.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <TextBlock Text="Binding Demo" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Frame Name="frameSingle" Source="PageSingle.xaml"/>
             </TabItem>
 
-            <TabItem Name="tabMultiple" Header="Icon Viewer">
+            <TabItem Name="tabMultiple" Background="#444444">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <Image Source="{Binding Converter={svgc:SvgImageConverter AppName=SvgImageBindingSample}, ConverterParameter=/Resources/ListView.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <TextBlock Text="Icon Viewer" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Frame Name="frameMultiple" Source="PageMultiple.xaml"/>
             </TabItem>
         </TabControl>

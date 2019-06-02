@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SvgImageSample.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SharpVectors.Converters.Wpf">
       <HintPath>..\..\..\Output\SharpVectors.Converters.Wpf.dll</HintPath>
@@ -126,6 +129,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Test.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Copy.svg" />
+    <Resource Include="Resources\Cut.svg" />
+    <Resource Include="Resources\Debug.svg" />
+    <Resource Include="Resources\Delete.svg" />
+    <Resource Include="Resources\Find.svg" />
+    <Resource Include="Resources\Format.svg" />
+    <Resource Include="Resources\Number.svg" />
+    <Resource Include="Resources\Open.svg" />
+    <Resource Include="Resources\Paste.svg" />
+    <Resource Include="Resources\Redo.svg" />
+    <Resource Include="Resources\Run.svg" />
+    <Resource Include="Resources\Save.svg" />
+    <Resource Include="Resources\Space.svg" />
+    <Resource Include="Resources\Undo.svg" />
+    <Resource Include="Resources\WordWrap.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SvgImageSample.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

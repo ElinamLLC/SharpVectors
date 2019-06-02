@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,9 +33,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SvgImageBindingSample.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SharpVectors.Converters.Wpf">
@@ -134,6 +139,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Hypocolius.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Binding.svg" />
+    <Resource Include="Resources\ListView.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SvgImageBindingSample.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

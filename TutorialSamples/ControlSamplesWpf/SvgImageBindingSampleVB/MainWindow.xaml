@@ -1,0 +1,59 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:local="clr-namespace:SvgImageBindingSampleVB"
+        mc:Ignorable="d"
+        Title="SharpVectors: SvgImageBinding Sample (SvgImageConverter Demo) - VB" Height="720" Width="930" 
+        Background="#444444" WindowStartupLocation="CenterScreen" Icon="SvgImageBindingSample.ico">
+    <DockPanel LastChildFill="True" Margin="4">
+        <TabControl TabStripPlacement="Left" FontSize="14" Margin="6" Grid.Row="0" Grid.Column="2" Background="#444444">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="#444444" CornerRadius="8,0,0,0" Margin="2,2">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,4"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="DeepSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#808080" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Name="tabSingle" Background="#444444">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <Image Source="{Binding Converter={svgc:SvgImageConverter AppName=SvgImageBindingSampleVB}, ConverterParameter=/Resources/Binding.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <TextBlock Text="Binding Demo" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame Name="frameSingle" Source="PageSingle.xaml"/>
+            </TabItem>
+
+            <TabItem Name="tabMultiple" Background="#444444">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <Image Source="{Binding Converter={svgc:SvgImageConverter AppName=SvgImageBindingSampleVB}, ConverterParameter=/Resources/ListView.svg, Mode=OneWay}" Width="24" Height="24"/>
+                        <TextBlock Text="Icon Viewer" Margin="6,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame Name="frameMultiple" Source="PageMultiple.xaml"/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

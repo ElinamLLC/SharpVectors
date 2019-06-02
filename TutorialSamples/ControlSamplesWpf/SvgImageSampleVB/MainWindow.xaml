@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    Title="SvgImage Sample" Height="480" Width="640" Background="White">
+    Title="SharpVectors: SvgImage Sample - VB" Height="720" Width="960" 
+        Background="White" WindowStartupLocation="CenterScreen" Icon="SvgImageSample.ico">
     <Window.Resources>
         <ResourceDictionary>
             <sys:String x:Key="WebFile">
@@ -11,47 +12,140 @@
             </sys:String>
         </ResourceDictionary>
     </Window.Resources>
-    <DockPanel>
-        <TabControl SelectedIndex="0" OverridesDefaultStyle="False">
-            <TabItem>
+    <DockPanel Margin="3" LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top" Height="36">
+            <ToolBar.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                            <Setter Property="Opacity" Value="0.30" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Resources>
+            <Button ToolTip="Open Svg File">
+                <Image Source="{svgc:SvgImage Source=/Resources/Open.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Button ToolTip="Save Svg File">
+                <Image Source="{svgc:SvgImage Source=/Resources/Save.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <Button Command="Cut" ToolTip="Cut To Clipboard">
+                <Image Source="{svgc:SvgImage Source=/Resources/Cut.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Copy" ToolTip="Copy To Clipboard">
+                <Image Source="{svgc:SvgImage Source=/Resources/Copy.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Paste" ToolTip="Paste From Clipboard">
+                <Image Source="{svgc:SvgImage Source=/Resources/Paste.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Delete" ToolTip="Delete Selection">
+                <Image Source="{svgc:SvgImage Source=/Resources/Delete.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <Button Command="Undo" ToolTip="Undo">
+                <Image Source="{svgc:SvgImage Source=/Resources/Undo.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Redo" ToolTip="Redo">
+                <Image Source="{svgc:SvgImage Source=/Resources/Redo.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
+                <Image Source="{svgc:SvgImage Source=/Resources/WordWrap.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}" ToolTip="Show Line Numbers">
+                <Image Source="{svgc:SvgImage Source=/Resources/Number.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}" ToolTip="Show End Of Line">
+                <Image Source="{svgc:SvgImage Source=/Resources/Space.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </CheckBox>
+            <ComboBox Name="highlightingComboBox" Width="120"/>
+            <Separator/>
+            <TextBox Name="searchTextBox" Width="200"/>
+            <Button ToolTip="Search">
+                <Image Source="{svgc:SvgImage Source=/Resources/Find.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <Button Name="formatInput" ToolTip="Format Document">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{svgc:SvgImage Source=/Resources/Format.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+                    <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Format</TextBlock>
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Name="convertInput" ToolTip="Convert Document">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{svgc:SvgImage Source=/Resources/Run.svg, AppName=SvgImageSampleVB}" Height="24" Width="24"/>
+                    <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Convert</TextBlock>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+
+        <TabControl TabStripPlacement="Left" SelectedIndex="0" OverridesDefaultStyle="False" Margin="0 10 0 0" FontSize="14">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="8,0,0,0" Margin="2,2">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,4"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="DeepSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Background="White">
                 <TabItem.Header>By Local File</TabItem.Header>
                 <TabItem.Content>
-                    <!-- 1.  -->
+                    <!-- 1. Load local SVG file, using the constructor -->
                     <Image Source="{svgc:SvgImage ../Test1.svg}"/>
                 </TabItem.Content>
             </TabItem>
-            <TabItem>
+            <TabItem Background="White">
                 <TabItem.Header>By Web File</TabItem.Header>
                 <TabItem.Content>
-                    <!-- 2.  -->
-                    <Image Source="{svgc:SvgImage {StaticResource WebFile}}"/>
+                    <!-- 2. Load Web SVG file, using the constructor. -->
+                    <Image Source="{svgc:SvgImage Source={StaticResource WebFile}}"/>
                 </TabItem.Content>
             </TabItem>
-            <TabItem>
+            <TabItem Background="White">
                 <TabItem.Header>By Local/Resource File</TabItem.Header>
                 <TabItem.Content>
-                    <!-- 3.  -->
+                    <!-- 3. Load local, using the constructor and a property. -->
                     <Image Source="{svgc:SvgImage Test2.svg, TextAsGeometry=True}"/>
                 </TabItem.Content>
             </TabItem>
-            <TabItem>
+            <TabItem Background="White">
                 <TabItem.Header>By Sub-Folder File</TabItem.Header>
                 <TabItem.Content>
-                    <!-- 4.  -->
+                    <!-- 4. Load local, using constructor - not recommended syntax -->
                     <Image Source="{svgc:SvgImage \\SubFolder\\Test3.svg}"/>
                 </TabItem.Content>
             </TabItem>
-            <TabItem>
+            <TabItem Background="White">
                 <TabItem.Header>By Local/Resource File</TabItem.Header>
                 <TabItem.Content>
-                    <!-- 5.  -->
+                    <!-- 5. Load resource, using the constructor. -->
                     <Image Source="{svgc:SvgImage /Resources/Test.svg}"/>
                 </TabItem.Content>
             </TabItem>
-            <TabItem>
+            <TabItem Background="White">
                 <TabItem.Header>By Properties</TabItem.Header>
                 <TabItem.Content>
-                    <!-- 6.  -->
+                    <!-- 6. Load resource, using property. -->
                     <Image Source="{svgc:SvgImage Source=/Resources/Test.svg}"/>
                 </TabItem.Content>
             </TabItem>

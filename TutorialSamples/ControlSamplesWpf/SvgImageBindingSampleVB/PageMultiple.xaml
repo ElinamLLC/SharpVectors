@@ -1,0 +1,58 @@
+﻿<Page x:Class="PageMultiple"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SvgImageBindingSampleVB"
+      xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageMultiple">
+    <DockPanel LastChildFill="True">
+        <ListView x:Name="IconView" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF0C0C0C" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border Background="White"
+                                            CornerRadius="8"
+                                            BorderThickness="6"
+                                            x:Name="IconBorder"
+                                            Margin="8,4,8,4" >
+                                    <ContentPresenter />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="IconBorder" Property="BitmapEffect">
+                                            <Setter.Value>
+                                                <OuterGlowBitmapEffect GlowSize="10" GlowColor="DeepSkyBlue"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="IconBorder" Property="BorderBrush" Value="DeepSkyBlue"/>
+                                        <Setter TargetName="IconBorder" Property="BorderThickness" Value="6"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                    <!--<UniformGrid HorizontalAlignment="Stretch"/>-->
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="8,8,8,8" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Image Source="{Binding Path=ImageUri, Converter={svgc:SvgImageConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="96" Height="96" />
+                        <TextBlock Text="{Binding ImageTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </DockPanel>
+</Page>

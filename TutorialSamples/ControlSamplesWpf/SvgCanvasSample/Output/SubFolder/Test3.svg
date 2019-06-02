@@ -1,14 +1,125 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="6cm" height="5cm" viewBox="0 0 600 500"
-xmlns="http://www.w3.org/2000/svg" version="1.1">
-    <!-- Outline the drawing area with a blue line -->
-    <rect x="1" y="1" width="598" height="498" 
-          fill="none" stroke="blue"/>
-    <circle cx="300" cy="225" r="100" fill="red"/>
-    <text x="300" y="480" font-family="Verdana" 
-          font-size="35" text-anchor="middle">
-        Sample Text 3
-    </text>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 512 700" xmlns="http://www.w3.org/2000/svg"
+     font-family="Arial, 'DejaVu Sans', sans-serif" >
+
+  <title>Copper electroplating principle</title>
+
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:cc="http://creativecommons.org/ns#">
+      <cc:Work rdf:about="">
+        <dc:title>Copper electroplating principle</dc:title>
+        <cc:attributionName rdf:resource="https://commons.wikimedia.org/wiki/User:DrTorstenHenning"/>
+        <cc:attributionName rdf:resource="https://commons.wikimedia.org/wiki/User:Perhelion"/>
+        <cc:attributionURL rdf:resource="https://commons.wikimedia.org/wiki/File%3ACopper_electroplating_principle_(multilingual).svg"/>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:publisher rdf:resource="http://commons.wikimedia.org" />
+        <cc:license rdf:resource="https://creativecommons.org/publicdomain/zero/1.0/" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  
+  <defs>
+    <marker id="a" overflow="visible" orient="auto">
+      <path transform="scale(-.6)" d="m8.7 4-10.9-4 10.9-4c-1.8 2.4-1.7 5.6 0 8z" stroke-linejoin="round" stroke-width=".6"/>
+    </marker>
+    <linearGradient id="b" x1="305" x2="294" y1="191" y2="960" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0dd" stop-opacity=".5" offset="0"/>
+      <stop stop-opacity="0" offset="1"/>
+    </linearGradient>
+  </defs>
+
+  <path d="m67 212h67.3v333h-67.3z" fill="#999">
+    <title>metal electrode</title>
+  </path>
+
+  <path d="m336 212v165c2.7-.4 5.4-.7 8-1v161h51.3v-163h8v-162z" fill="#d50">
+    <title>copper electrode</title>
+  </path>
+  
+  <path d="m24.1 344v263c0 49.3 39.7 89.1 89 89.1h248c49.3 0 89.1-39.7 89.1-89.1v-263z" fill="none" stroke="#000" stroke-linecap="square" stroke-linejoin="round" stroke-opacity=".3" stroke-width="7.1"/>
+  <path d="m276 383c-64.8 3-73.6 1-150-1.3-65.4-2-44.1-4.4-102-1.2v226c0 49.3 39.7 89.1 89 89.1h248c49.3 0 89.1-39.7 89.1-89.1v-226c-21.9-4.02-45-8.12-66-7.8-34 .646-61.6 8.1-108 10.3z" fill="url(#b)"/>
+  <path d="m60 379h-1.3c0 55.5 0 111 .1 167 3.1 9 14.5 7.9 22.1 7.2 18.8-.3 37.9 1.7 56.4-1.2 8.6-7.1 3.3-19.2 4.8-28.7-.1-46.9 0-93.8 0-141-2.6-.1-5.4-.2-8-.3v163h-67.3v-166c-2.1 0-4.2-.1-6.7 0z" fill="#d50"/>
+  <path d="m253 38.8h11.1v100h-11.1zm-19 27.8h10.6v44.5h-10.6z"/>
+  
+  <g fill="none" stroke="#000">
+    <path d="m263 89.5h104v122m-131-122h-135v122" stroke-width="5"/>
+    <g stroke-width="3.5">
+      <path d="m84 108v52" marker-end="url(#a)"/>
+      <path d="m384 169v-52" marker-end="url(#a)"/>
+      <path d="m205 532h-49.3" marker-end="url(#a)"/>
+    </g>
+  </g>
+  
+  <g font-size="48">
+    
+    <text x="369.2" y="289.5" text-anchor="middle">Cu</text>
+    
+    <text x="100.6" y="289.5" text-anchor="middle">Me</text>
+    
+    <text x="208.5" y="567.9">Cu<tspan baseline-shift="super" font-size="32">2+</tspan></text>
+    
+    <text x="249.39999" y="652.7">SO<tspan baseline-shift="sub" font-size="32">4</tspan><tspan dx="-16" baseline-shift="super" font-size="32">2−</tspan></text>
+    
+    <g font-size="36">
+      <text text-anchor="middle">
+        <tspan x="237" y="30">−</tspan>
+        <tspan x="263" y="30">+</tspan>
+      </text>
+
+      <text x="148.8" y="417.2">Cu</text>
+
+      <text x="55" y="106">e<tspan baseline-shift="super" font-size="24">−</tspan></text>
+      <text x="382" y="106">e<tspan baseline-shift="super" font-size="24">−</tspan></text>
+
+      <switch class="Q181232" transform="translate(379,206)">
+        <text systemLanguage="ar">مصعد</text>
+        <text systemLanguage="ca">ànode</text>
+        <text systemLanguage="cs">Anoda</text>
+        <text systemLanguage="da">Anode</text>
+        <text systemLanguage="de">Anode</text>
+        <text systemLanguage="en">Anode</text>
+        <text systemLanguage="es">Ánodo</text>
+        <text systemLanguage="et">Anood</text>
+        <text systemLanguage="eu">Anodoa</text>
+        <text systemLanguage="fr">anode</text>
+        <text systemLanguage="hi">धनाग्र</text>
+        <text systemLanguage="it">Anodo</text>
+        <text systemLanguage="nl">Anode</text>
+        <text systemLanguage="pl">anoda</text>
+        <text systemLanguage="ro">Anod</text>
+        <text systemLanguage="ru, mn">Анод</text>
+        <text systemLanguage="sv">Anod</text>
+        <text systemLanguage="uk">Анод</text>
+        <text systemLanguage="vi">Dương cực</text>
+        <text>Anode</text>
+      </switch>
+
+      <switch class="Q175233" transform="translate(111,206)">
+        <text systemLanguage="ar">مهبط</text>
+        <text systemLanguage="ca">càtode</text>
+        <text systemLanguage="cs">katoda</text>
+        <text systemLanguage="da">Katode</text>
+        <text systemLanguage="de">Kathode</text>
+        <text systemLanguage="en">Cathode</text>
+        <text systemLanguage="es">Cátodo</text>
+        <text systemLanguage="et">Katood</text>
+        <text systemLanguage="eu">Katodoa</text>
+        <text systemLanguage="fr">Cathode</text>
+        <text systemLanguage="hi">कैथोड</text>
+        <text systemLanguage="it">Catodo</text>
+        <text systemLanguage="nl">Kathode</text>
+        <text systemLanguage="pl">katoda</text>
+        <text systemLanguage="ro">Catod</text>
+        <text systemLanguage="ru, mn">Катод</text>
+        <text systemLanguage="sv">Katod</text>
+        <text systemLanguage="uk">Катод</text>
+        <text systemLanguage="vi">Ca-tốt</text>
+        <text>Cathode</text>
+      </switch>
+     
+    </g>
+  </g>
 </svg>

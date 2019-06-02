@@ -9,7 +9,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageMultiple">
     <DockPanel LastChildFill="True">
-        <ListView x:Name="IconView" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#FF0C0C0C" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView x:Name="IconView" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                  Background="#FF0C0C0C" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Center">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Template">
@@ -26,10 +27,10 @@
                                     <Trigger Property="IsSelected" Value="true">
                                         <Setter TargetName="IconBorder" Property="BitmapEffect">
                                             <Setter.Value>
-                                                <OuterGlowBitmapEffect GlowSize="10" GlowColor="Crimson"/>
+                                                <OuterGlowBitmapEffect GlowSize="10" GlowColor="DeepSkyBlue"/>
                                             </Setter.Value>
                                         </Setter>
-                                        <Setter TargetName="IconBorder" Property="BorderBrush" Value="Crimson"/>
+                                        <Setter TargetName="IconBorder" Property="BorderBrush" Value="DeepSkyBlue"/>
                                         <Setter TargetName="IconBorder" Property="BorderThickness" Value="6"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
@@ -53,6 +54,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </DockPanel>
 </Page>

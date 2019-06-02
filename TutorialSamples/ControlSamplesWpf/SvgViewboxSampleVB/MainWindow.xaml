@@ -2,43 +2,160 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-    Title="SvgViewbox Sample" Height="480" Width="640" Background="White">
-    <DockPanel>
-        <TabControl SelectedIndex="0" OverridesDefaultStyle="False">
+    Title="SharpVectors: SvgViewbox Sample - VB"  Height="720" Width="960" 
+        Background="White" Icon="SvgViewboxSample.ico" WindowStartupLocation="CenterScreen">
+    <DockPanel Margin="3">
+        <TabControl SelectedIndex="0" OverridesDefaultStyle="False" FontSize="14" TabStripPlacement="Left">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="8,0,0,0" Margin="2,2">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,4"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="DeepSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
             <TabItem>
-                <TabItem.Header>Web File</TabItem.Header>
+                <TabItem.Header>Web File (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 1. Load Web SVG file -->
-                    <svgc:SvgViewbox Source=
-                     "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/tiger.svg"/>
+                    <svgc:SvgViewbox Source="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/rg1024_green_grapes.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
-                <TabItem.Header>Local File 1</TabItem.Header>
+                <TabItem.Header>Local File 1 (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 2. Load local SVG file -->
                     <svgc:SvgViewbox Source="../Test1.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
-                <TabItem.Header>Local File 2</TabItem.Header>
+                <TabItem.Header>Local File 2 (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 3. Load local SVG file -->
-                    <svgc:SvgViewbox Source="Test2.svg" TextAsGeometry="True"/>
+                    <svgc:SvgViewbox Source="Test2.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
-                <TabItem.Header>Sub-Folder File</TabItem.Header>
+                <TabItem.Header>Sub-Folder File (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 4. Load local sub-folder SVG file  -->
                     <svgc:SvgViewbox Source="\SubFolder\Test3.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
-                <TabItem.Header>Resource File</TabItem.Header>
+                <TabItem.Header>Resource File (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 5. Load Resource SVG file -->
                     <svgc:SvgViewbox Source="/Resources/Test.svg" Stretch="Uniform"/>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>Web File (Stream)</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 6. Load Web SVG file (Stream) -->
+                    <svgc:SvgViewbox x:Name="webSvgViewbox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Resource File (Stream)</TabItem.Header>
+                <TabItem.Content>
+                    <!-- 7. Load Resource SVG file (Stream) -->
+                    <svgc:SvgViewbox x:Name="resourceSvgViewbox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>Load (Method)</TabItem.Header>
+                <TabItem.Content>
+                    <DockPanel LastChildFill="True">
+                        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <GroupBox Header="Svg File Source" Margin="3 3 32 3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton x:Name="rbResource" Checked="OnLoadMethodChanged" Margin="24 3 3 3" IsChecked="True">Resource File</RadioButton>
+                                        <RadioButton x:Name="rbWeb" Checked="OnLoadMethodChanged" Margin="24 3 24 3">Web File</RadioButton>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="Svg Loading Method" Margin="32 3 3 3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton x:Name="rbUri" Checked="OnLoadMethodChanged" Margin="24 3 3 3" IsChecked="True">By Uri</RadioButton>
+                                        <RadioButton x:Name="rbStream" Checked="OnLoadMethodChanged" Margin="24 3 24 3">By Stream</RadioButton>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <GroupBox Header="Method Calling Options">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="chkUseCopyStream" HorizontalAlignment="Center" Margin="32 3 32 3" IsChecked="True" Click="OnLoadMethodChanged">Use Copy Stream</CheckBox>
+                                        <CheckBox x:Name="chkUseAsync" HorizontalAlignment="Center" Margin="32 3 32 3" Click="OnLoadMethodChanged">Use Asynchronous</CheckBox>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- 8. Load (Method) -->
+                        <svgc:SvgViewbox x:Name="loadSvgViewbox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>LoadAsync (Method)</TabItem.Header>
+                <TabItem.Content>
+                    <DockPanel LastChildFill="True">
+                        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <GroupBox Header="Svg File Source" Margin="3 3 32 3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton x:Name="rbResourceAsync" Checked="OnLoadAsyncMethodChanged" Margin="24 3 3 3" IsChecked="True">Resource File</RadioButton>
+                                        <RadioButton x:Name="rbWebAsync" Checked="OnLoadAsyncMethodChanged" Margin="24 3 24 3">Web File</RadioButton>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="Svg Loading Method" Margin="32 3 3 3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton x:Name="rbUriAsync" Checked="OnLoadAsyncMethodChanged" Margin="24 3 3 3" IsChecked="True">By Uri</RadioButton>
+                                        <RadioButton x:Name="rbStreamAsync" Checked="OnLoadAsyncMethodChanged" Margin="24 3 24 3">By Stream</RadioButton>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <GroupBox Header="Method Calling Options">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox x:Name="chkUseCopyStreamAsync" HorizontalAlignment="Center" Margin="32 3 32 3" IsChecked="True" Click="OnLoadAsyncMethodChanged">Use Copy Stream</CheckBox>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- 9. LoadAsync (Method) -->
+                        <svgc:SvgViewbox x:Name="loadSvgViewboxAsync" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <!-- Create custom style for the message text -->
+                            <svgc:SvgViewbox.Style>
+                                <Style TargetType="{x:Type svgc:SvgViewbox}">
+                                    <Setter Property="MessageFontFamily" Value="Comic Sans MS Bold"/>
+                                    <Setter Property="MessageOpacity" Value="0.8"/>
+                                    <Setter Property="MessageFontSize" Value="36"/>
+                                    <Setter Property="MessageBackground" Value="{x:Null}"/>
+                                    <Setter Property="MessageFillBrush" Value="{x:Null}"/>
+                                    <Setter Property="MessageStrokeBrush" Value="DarkGray"/>
+                                </Style>
+                            </svgc:SvgViewbox.Style>
+                        </svgc:SvgViewbox>
+                    </DockPanel>
                 </TabItem.Content>
             </TabItem>
         </TabControl>

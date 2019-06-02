@@ -3,12 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       xmlns:local="clr-namespace:SvgImageBindingSample"
+      xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
-      d:DesignHeight="567.665" d:DesignWidth="918.958"
-      Title="PageSingle" x:Name="PageSingleTest">
+      d:DesignHeight="580" d:DesignWidth="920" Title="PageSingle" x:Name="PageSingleTest" Background="#444444">
     <Grid Name="rightGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,7 +15,7 @@
             <RowDefinition Height="250"/>
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Grid.Row="0">
-            <TextBox x:Name="inputBox" Height="24" Text="" TextAlignment="Left" DockPanel.Dock="Top" IsReadOnly="True"/>
+            <TextBox x:Name="inputBox" TextWrapping="Wrap" Text="" TextAlignment="Left" DockPanel.Dock="Top" IsReadOnly="True" Background="#808080"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <!-- Binding to Local file name: Relative Path -->
                 <Image Source="{Binding ElementName=PageSingleTest, Path=LocalFileName, Converter={svgc:SvgImageConverter}, Mode=OneWay}" Width="256" Height="256"/>
@@ -29,7 +28,7 @@
 
         <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                       BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
-        <DockPanel Name="viewerFrame" LastChildFill="True" Margin="0,344,0,0" Grid.RowSpan="3">
+        <DockPanel Name="viewerFrame" LastChildFill="True" Margin="0,3,0,0" Grid.Row="2">
             <!-- Binding to Web resource file -->
             <Image Source="{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/compass.svg, Mode=OneWay}" Width="256" Height="256"/>
         </DockPanel>
