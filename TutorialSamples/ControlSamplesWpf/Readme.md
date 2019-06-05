@@ -44,9 +44,9 @@ The various tabs demonstrate different ways to set and render SVG sources. It ha
 
 * **TabControl Items Icons**: The images in the [TabControl](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.tabcontrol) items are SVG images sources in the resources of the assembly. SvgImage markup extension could also be used here.
 * **Binding Demo Page**: Demonstrates various binding sources:
-      * From a dependent property defined on the code-behind of the page.
-      * From a resource file in the same assembly.
-      * From a content of a [TextBox](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox) control on the same page.
+  * From a dependent property defined on the code-behind of the page.
+  * From a resource file in the same assembly.
+  * From a content of a [TextBox](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox) control on the same page.
 * **Icon Viewer Page**: The uses [ListView](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.listview) control to demonstrate the binding from a [DataContext](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.datacontext) dependency property set in the code-behind of the pages.
   The SVG icons are provided in the output directory as Zip file, which is automatically unzipped and enumerated to create the data source.
 
