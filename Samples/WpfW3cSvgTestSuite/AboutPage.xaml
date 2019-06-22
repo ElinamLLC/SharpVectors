@@ -14,7 +14,11 @@
             <TextBlock x:Name="testDescrition" Margin="40, 0, 0, 6" TextAlignment="Left" TextTrimming="None" TextWrapping="Wrap"></TextBlock>
 
             <Label x:Name="testFilePathLabel" FontWeight="Bold">Test File Path</Label>
-            <TextBox x:Name="testFilePath" Margin="40, 0, 0, 6" TextAlignment="Left" HorizontalAlignment="Stretch" IsReadOnly="True" TextWrapping="NoWrap"/>
+            <DockPanel LastChildFill="true" Margin="3 3 3 6">
+                <Button x:Name="btnFilePath" DockPanel.Dock="Right" Click="OnLocateFile" Style="{StaticResource MetroButton}" 
+                        IsEnabled="False">Locate...</Button>
+                <TextBox x:Name="testFilePath" Margin="40, 0, 0, 0" TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" TextWrapping="NoWrap"/>
+            </DockPanel>
 
             <Label x:Name="testDetailsLabel" FontWeight="Bold" DockPanel.Dock="Top">Test Details</Label>
         </StackPanel>

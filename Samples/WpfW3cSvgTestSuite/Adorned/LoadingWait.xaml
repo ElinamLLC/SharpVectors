@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="WpfW3cSvgTestSuite.LoadingWait"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    IsVisibleChanged="HandleVisibleChanged"
+    >
+    <UserControl.Background>
+        <SolidColorBrush Color="Black" Opacity=".20" />
+    </UserControl.Background>
+    <UserControl.Resources>
+        <SolidColorBrush Color="CornflowerBlue" x:Key="CirclesColor" />
+        <!--<SolidColorBrush Color="Black" x:Key="BackgroundColor" Opacity=".20" />-->
+    </UserControl.Resources>
+    
+        <Viewbox Width="100" Height="100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <Grid x:Name="LayoutRoot" 
+                Background="Transparent"
+                ToolTip="Searching...."
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <Canvas RenderTransformOrigin="0.5,0.5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Width="120"
+                    Height="120" Loaded="HandleLoaded"
+                    Unloaded="HandleUnloaded"  >
+                <Ellipse x:Name="C0" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="1.0"/>
+                <Ellipse x:Name="C1" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.9"/>
+                <Ellipse x:Name="C2" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.8"/>
+                <Ellipse x:Name="C3" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.7"/>
+                <Ellipse x:Name="C4" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.6"/>
+                <Ellipse x:Name="C5" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.5"/>
+                <Ellipse x:Name="C6" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.4"/>
+                <Ellipse x:Name="C7" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.3"/>
+                <Ellipse x:Name="C8" Width="20" Height="20"
+                         Canvas.Left="0"
+                         Canvas.Top="0" Stretch="Fill"
+                         Fill="{StaticResource CirclesColor}" Opacity="0.2"/>
+                <Canvas.RenderTransform>
+                    <RotateTransform x:Name="SpinnerRotate"
+                         Angle="0" />
+                </Canvas.RenderTransform>
+            </Canvas>
+        </Grid>
+    </Viewbox>
+</UserControl>

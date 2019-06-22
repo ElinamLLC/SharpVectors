@@ -7,69 +7,116 @@
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="800" Background="White"
       Title="SettingsPage">
-
-    <DockPanel LastChildFill="True" Margin="20 10 20 10">
-        <StackPanel Visibility="Collapsed" DockPanel.Dock="Bottom" Margin="1 6 1 1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <Button x:Name="buttonApply" Width="150" Margin="6" Padding="3">Apply</Button>
-        </StackPanel>
-        <GroupBox Header="Conversion Settings" HorizontalAlignment="Stretch" FontSize="14">
-            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="20 6 6 3">
-                <CheckBox Name="chkTextAsGeometry" Click="OnSettingsChanged">
-                    <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
-                </CheckBox>
-                <TextBlock Padding="32 3 3 3">
-                    All SVG text elements will be converted to paths.
-                </TextBlock>
-                <CheckBox Name="chkIncludeRuntime" Click="OnSettingsChanged">
-                    <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>
-                </CheckBox>
-                <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
-                    <Run>                    
-                        Select this if you want to link to the SharpVectors Runtime library.
-                    </Run>
-                    <LineBreak/>
-                    <Bold>NOTE:&#160;</Bold>
-                    <Run>      
-                        If this option is not selected, then select the option to render
-                        text as geometric paths; otherwise, font locations may not be resolved
-                        properly on the end-user system.
-                    </Run>
-                </TextBlock>
-
-                <CheckBox Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
-                    <TextBlock Text="Ignore SVG Root Viewbox" FontWeight="Bold"/>
-                </CheckBox>
-                <TextBlock Padding="32 3 3 3">
-                    Indicates turning off viewbox at the root of the drawing.
-                </TextBlock>
-                <CheckBox Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
-                    <TextBlock Text="Ensure Viewbox Size" FontWeight="Bold"/>
-                </CheckBox>
-                <TextBlock Padding="32 3 3 3">
-                    Indicate preserving the original viewbox size when saving images.
-                </TextBlock>
-                <CheckBox Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
-                    <TextBlock Text="Ensure Viewbox Position" FontWeight="Bold"/>
-                </CheckBox>
-                <TextBlock Padding="32 3 3 20">
-                    Indicate applying a translate transform to the viewbox to ensure it is visible when rendered.
-                </TextBlock>
-
-                <GroupBox Header="Pixel Size" Visibility="Collapsed">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal">
-                            <Label>Width</Label>
-                            <TextBox x:Name="pixelWidth" Width="100"></TextBox>                            
+    <Page.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="Margin" Value="5,1,5,5"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold" FontSize="18"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <DockPanel LastChildFill="True" Margin="10 10 10 10">
+            <GroupBox Header="General Settings" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                <StackPanel Orientation="Vertical" Margin="15 6 6 3">
+                    <CheckBox Name="chkHidePathsRoot" Click="OnGeneralSettingsChanged">
+                        <TextBlock Text="Hide Path Roots" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                        Security feature, which is only useful in screenshot to be posted on the web.
+                    </TextBlock>
+                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                        <TextBlock Name="lblSvgSuitePathWeb" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                   Margin="3">Web W3C Svg Suite Path:</TextBlock>
+                        <TextBox Name="txtSvgSuitePathWeb" HorizontalAlignment="Stretch" Margin="30 3 3 3" IsReadOnly="True"/>
+                    </DockPanel>
+                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                        <TextBlock Name="lblSvgSuitePath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                   Margin="3">Local W3C Svg Suite Path:</TextBlock>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <Button Name="btnPathBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                    Click="OnBrowseForSvgSuitePath" Style="{StaticResource MetroButton}"/>
+                            <Button Name="btnPathLocate" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                    Click="OnOpenSvgSuitePath" Style="{StaticResource MetroButton}" IsEnabled="False"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">                            
-                            <Label Width="150" HorizontalContentAlignment="Right">Height</Label>
-                            <TextBox x:Name="pixelHeight" Width="100"></TextBox>                            
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
+                        <TextBox Name="txtSvgSuitePath" HorizontalAlignment="Stretch" Margin="30 3 3 3" TextChanged="OnSvgSuitePathTextChanged" />
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Conversion Settings" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Margin="15 6 6 3">
+                    <CheckBox Name="chkTextAsGeometry" Click="OnSettingsChanged">
+                        <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                        <Run>All SVG text elements will be converted to paths.</Run>                    
+                        <LineBreak/>
+                        <Bold>NOTE:&#160;</Bold>
+                        <Run>      
+                            Depending on the styling (eg. text with both stroke and fill), the text may still be converted to paths.
+                            Also, text on paths are converted to path geometries.
+                        </Run>
+                    </TextBlock>
+                    <CheckBox Name="chkIncludeRuntime" Click="OnSettingsChanged">
+                        <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                        <Run>Select this if you want to link to the SharpVectors Runtime library.</Run>
+                        <LineBreak/>
+                        <Bold>NOTE:&#160;</Bold>
+                        <Run>      
+                            If this option is not selected, then select the option to render
+                            text as geometric paths; otherwise, font locations may not be resolved
+                            properly on the end-user system.
+                        </Run>
+                    </TextBlock>
 
-            </StackPanel>
+                    <CheckBox Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
+                        <TextBlock Text="Ignore SVG Root Viewbox" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 3">
+                        Indicates turning off viewbox at the root of the drawing.
+                    </TextBlock>
+                    <CheckBox Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
+                        <TextBlock Text="Ensure Viewbox Size" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 3">
+                        Indicate preserving the original viewbox size when saving images.
+                    </TextBlock>
+                    <CheckBox Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
+                        <TextBlock Text="Ensure Viewbox Position" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 20">
+                        Indicate applying a translate transform to the viewbox to ensure it is visible when rendered.
+                    </TextBlock>
+
+                    <GroupBox Header="Pixel Size" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <Label>Width</Label>
+                                <TextBox x:Name="pixelWidth" Width="100"></TextBox>                            
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">                            
+                                <Label Width="150" HorizontalContentAlignment="Right">Height</Label>
+                                <TextBox x:Name="pixelHeight" Width="100"></TextBox>                            
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
             
-        </GroupBox>
-    </DockPanel>
+            </GroupBox>
+        </DockPanel>
+
+        <TextBlock Padding="32 10 32 10" TextWrapping="Wrap" FontSize="14">
+            <Bold>NOTE:&#160;</Bold>
+            <Run>      
+                Changes are automatically applied if you switch to any other tab.
+            </Run>
+        </TextBlock>
+    </StackPanel>
 </Page>

@@ -4,20 +4,8 @@
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
     local:MainWindowSettings.Save="True"
-    Title="W3C SVG 1.1 Full Test Suite" Height="640" Width="1080">
+    Title="W3C SVG 1.1 Full Test Suite - Full SVG Specifications" Height="640" Width="1080">
     <DockPanel LastChildFill="True" Margin="3">
-        <!-- Top directory source panel -->
-        <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
-            <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
-                <TextBlock Name="lblSvgSuitePath" FontWeight="Bold" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3">W3C Svg Suite Path:</TextBlock>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                    <Button Name="btnSvgSuitePath" HorizontalAlignment="Right" Margin="3" Content="Browse..." Click="OnBrowseForSvgSuitePath"/>
-                    <Button Name="btnSvgTestResults" HorizontalAlignment="Right" Margin="3" Content="Test Results" Click="OnShowSvgTestResults" IsEnabled="False"/>
-                </StackPanel>
-                <TextBox Name="txtSvgSuitePath" HorizontalAlignment="Stretch" Margin="3" TextChanged="OnSvgSuitePathTextChanged" />
-            </DockPanel>            
-        </Border>
-        
         <!-- Bottom status panel -->
         <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" DockPanel.Dock="Bottom" Margin="0, 3, 0, 3" Visibility="Collapsed">
             <StackPanel Orientation="Vertical">   
@@ -33,7 +21,7 @@
         </Border>
         
         <!-- The main content panel -->
-        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
+        <Border BorderBrush="Transparent" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
             <Grid Name="mainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="24"/>
@@ -98,7 +86,8 @@
                                         </ComboBox>
                                         <TextBlock Text="Test Comment:"/>
                                         <TextBox Name="testComment" TextWrapping="Wrap" Margin="32, 0, 0, 6" AcceptsReturn="False" AcceptsTab="False" Height="72" SpellCheck.IsEnabled="True" TextChanged="OnCommentTextChanged"/>
-                                        <Button Name="testApply" Content="Apply" Padding="3" HorizontalAlignment="Right" Click="OnApplyTestState"/>
+                                        <Button Name="testApply" Content="Apply" HorizontalAlignment="Right" 
+                                                Click="OnApplyTestState" Style="{StaticResource MetroButton}"/>
                                     </StackPanel>
                                 </Expander>
                             </Grid>
@@ -108,6 +97,31 @@
                 <GridSplitter Name="leftSplitter" Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="Gray"
                           HorizontalAlignment="Center" Width="6" VerticalAlignment="Stretch"/>
                 <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabItem">
+                                        <Border Name="Border" BorderThickness="1,2,1,0" BorderBrush="DarkGray" CornerRadius="8,0,0,0" Margin="2,2">
+                                            <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="4,4"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
                     <TabItem Name="tabDrawing">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
@@ -138,7 +152,7 @@
                     <TabItem Name="tabSvgInput">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogo.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfW3cSvgTestSuite}" />
                                 <TextBlock Text="Svg Input" Margin="3" VerticalAlignment="Center" />
                             </StackPanel>
                         </TabItem.Header>
@@ -153,10 +167,19 @@
                         </TabItem.Header>
                         <Frame Name="frameAbout" Source="AboutPage.xaml"/>
                     </TabItem>
+                    <TabItem Name="tabResults">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/TestResultDetail.svg, AppName=WpfW3cSvgTestSuite}" />
+                                <TextBlock Text="Test Results" Margin="3" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Name="frameResults" Source="SvgTestResultsPage.xaml"/>
+                    </TabItem>
                     <TabItem Name="tabSettings">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg, AppName=WpfSvgTestBox}" />
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg, AppName=WpfW3cSvgTestSuite}" />
                                 <TextBlock Text="Settings" Margin="3" VerticalAlignment="Center" />
                             </StackPanel>
                         </TabItem.Header>
@@ -165,7 +188,7 @@
                     <TabItem Name="tabDebugging">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfSvgTestBox}" />
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfW3cSvgTestSuite}" />
                                 <TextBlock Text="Debugging" Margin="3" VerticalAlignment="Center" />
                             </StackPanel>
                         </TabItem.Header>

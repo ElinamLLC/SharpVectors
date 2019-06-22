@@ -13,7 +13,7 @@
             <TabItem Name="tabSvgInput">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogo.svg, AppName=WpfSvgTestBox}" />
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfSvgTestBox}" />
                         <TextBlock Text="Svg Input" Margin="3" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>

@@ -97,6 +97,8 @@ namespace WpfW3cSvgTestSuite
                 }
             }
 
+            btnFilePath.IsEnabled = isLoaded;
+
             return isLoaded;
         }
 
@@ -109,6 +111,8 @@ namespace WpfW3cSvgTestSuite
             testFilePath.Text   = "";
 
             _testCase           = null;
+
+            btnFilePath.IsEnabled = false;
 
             testDetailsDoc.Blocks.Clear();
 
@@ -126,6 +130,8 @@ namespace WpfW3cSvgTestSuite
             testTitle.Text      = testInfo.Title;
             testDescrition.Text = rgx.Replace(testInfo.Description, " ").Trim();
             testFilePath.Text   = _svgFilePath;
+
+            btnFilePath.IsEnabled = true;
 
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.IgnoreWhitespace             = false;
@@ -203,6 +209,17 @@ namespace WpfW3cSvgTestSuite
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void OnLocateFile(object sender, RoutedEventArgs e)
+        {
+            var filePath = testFilePath.Text;
+            if (string.IsNullOrWhiteSpace(filePath) || File.Exists(filePath) == false)
+            {
+                return;
+            }
+
+            System.Diagnostics.Process.Start("explorer.exe", @"/select, " + filePath);
         }
     }
 }

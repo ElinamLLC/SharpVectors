@@ -285,7 +285,7 @@
         <test source="text-align-02-b.svg" title="text-align-02-b" state="success" comment="" description="Test the 'baseline-shift' property (horizontal)." />
         <test source="text-align-03-b.svg" title="text-align-03-b" state="success" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
         <test source="text-align-04-b.svg" title="text-align-04-b" state="success" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
-        <test source="text-align-05-b.svg" title="text-align-05-b" state="partial" comment="The middle and end text alignments are not supported." description="Test 'text-anchor' property (vertical)" />
+        <test source="text-align-05-b.svg" title="text-align-05-b" state="success" comment="The middle and end text alignments are now supported." description="Test 'text-anchor' property (vertical)" />
         <test source="text-align-06-b.svg" title="text-align-06-b" state="partial" comment="The vertical spacing is still not accurate or complete." description="Test 'baseline-shift' property (vertical)" />
         <test source="text-align-08-b.svg" title="text-align-08-b" state="failure" comment="" description="" />
         <test source="text-altglyph-01-b.svg" title="text-altglyph-01-b" state="failure" comment="" description="Test 'altGlyph' facilities and many-to-many chars to glyphs." />

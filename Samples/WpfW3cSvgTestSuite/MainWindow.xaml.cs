@@ -6,10 +6,6 @@ using System.ComponentModel;
 using System.IO.Compression;
 using System.Collections.Generic;
 
-using IoPath = System.IO.Path;
-
-using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -21,6 +17,8 @@ using System.Windows.Resources;
 
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
+
+using IoPath = System.IO.Path;
 
 namespace WpfW3cSvgTestSuite
 {
@@ -38,12 +36,15 @@ namespace WpfW3cSvgTestSuite
         private const string SvgSubDir    = "";
         private const string PngSubDir    = "";
 
-        private const string AppTitle       = "Svg Test Suite";
-        private const string AppErrorTitle  = "Svg Test Suite - Error";
-        private const string SvgTestSuite   = "SvgTestSuite.xml";
-        private const string SvgTestResults = "SvgTestResults.xml";
+        private const string AppTitle        = "Svg Test Suite";
+        private const string AppErrorTitle   = "Svg Test Suite - Error";
+        private const string SvgTestSuite    = "SvgTestSuite.xml";
+        private const string SvgTestResults  = "SvgTestResults.xml";
+        private const string SvgTestSettings = "SvgTestSettings.xml";
   
         private bool   _isTreeModified;
+        private bool _isShown;
+        private bool _isTestAvailable;
 
         private bool   _isTreeChangedPending;
 
@@ -57,6 +58,7 @@ namespace WpfW3cSvgTestSuite
 
         private string _testFilePath;
         private string _testResultsPath;
+        private string _testSettingsPath;
 
         private string _drawingDir;
 
@@ -67,6 +69,7 @@ namespace WpfW3cSvgTestSuite
         private AboutPage _aboutPage;
         private DebugPage _debugPage;
         private SettingsPage _settingsPage;
+        private SvgTestResultsPage _resultsPage;
 
         private ImageSource _folderClose;
         private ImageSource _folderOpen;
@@ -75,6 +78,8 @@ namespace WpfW3cSvgTestSuite
 
         private FileSvgReader _fileReader;
         private WpfDrawingSettings _wpfSettings;
+
+        private OptionSettings _optionSettings;
 
         private DrawingGroup _currentDrawing;
 
@@ -115,23 +120,11 @@ namespace WpfW3cSvgTestSuite
             _fileReader.SaveXaml = false;
             _fileReader.SaveZaml = false;
 
+            _optionSettings = new OptionSettings(_wpfSettings, null);
+
             try
             {
-                //                _folderClose = new BitmapImage();
-                //var folderClose = new BitmapImage();
-                //folderClose.BeginInit();
-                //folderClose.UriSource = new Uri("Images/FolderClose.png", UriKind.Relative);
-                //folderClose.EndInit();
-                //_folderClose = folderClose;
-
                 _folderClose = this.GetImage(new Uri("Images/FolderClose.svg", UriKind.Relative));
-
-                //var folderOpen = new BitmapImage();
-                //folderOpen.BeginInit();
-                //folderOpen.UriSource = new Uri("Images/FolderOpen.png", UriKind.Relative);
-                //folderOpen.EndInit();
-                //_folderOpen = folderOpen;
-
                 _folderOpen = this.GetImage(new Uri("Images/FolderOpen.svg", UriKind.Relative));
             }
             catch (Exception ex)
@@ -153,12 +146,48 @@ namespace WpfW3cSvgTestSuite
             get {
                 return _xamlPage;
             }
-            set {
+            private set {
                 _xamlPage = value;
             }
         }
 
-        public WpfDrawingSettings ConversionSettings
+        public IList<SvgTestResult> TestResults
+        {
+            get {
+                return _testResults;
+            }
+        }
+
+        public OptionSettings OptionSettings
+        {
+            get {
+                return _optionSettings;
+            }
+            set {
+                if (value != null)
+                {
+                    _optionSettings = value;
+                    this.ConversionSettings = value.ConversionSettings;
+
+                    if (_optionSettings.IsLocalSuitePathChanged(_suitePath))
+                    {
+                        if (OptionSettings.IsTestSuiteAvailable(_optionSettings.LocalSuitePath))
+                        {
+                            this.InitializePath(_optionSettings.LocalSuitePath);
+                        }
+                    }
+                    else if (_isTestAvailable == false)
+                    {
+                        if (OptionSettings.IsTestSuiteAvailable(_optionSettings.LocalSuitePath))
+                        {
+                            this.InitializePath(_optionSettings.LocalSuitePath);
+                        }
+                    }
+                }
+            }
+        }
+
+        private WpfDrawingSettings ConversionSettings
         {
             get {
                 return _wpfSettings;
@@ -202,6 +231,43 @@ namespace WpfW3cSvgTestSuite
             rowExpander.Height = new GridLength(24, GridUnitType.Pixel);
         }
 
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            if (_isShown)
+                return;
+
+            _isShown = true;
+
+            if (!_isTestAvailable)
+            {
+                PromptDialog dlg = new PromptDialog();
+                dlg.Owner = this;
+                dlg.OptionSettings = _optionSettings;
+
+                var dialogResult = dlg.ShowDialog();
+
+                if (dialogResult != null && dialogResult.Value)
+                {
+                    if (_optionSettings.IsLocalSuitePathChanged(_suitePath))
+                    {
+                        if (OptionSettings.IsTestSuiteAvailable(_optionSettings.LocalSuitePath))
+                        {
+                            this.InitializePath(_optionSettings.LocalSuitePath);
+                        }
+                    }
+                    else if (_isTestAvailable == false)
+                    {
+                        if (OptionSettings.IsTestSuiteAvailable(_optionSettings.LocalSuitePath))
+                        {
+                            this.InitializePath(_optionSettings.LocalSuitePath);
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Private Event Handler Methods
@@ -217,12 +283,17 @@ namespace WpfW3cSvgTestSuite
             _drawingPage  = frameDrawing.Content    as DrawingPage;
             _browserPage  = frameBrowser.Content    as BrowserPage;
             _aboutPage    = frameAbout.Content      as AboutPage;
-            _debugPage    = frameDebugging.Content as DebugPage;
-            _settingsPage = frameSettings.Content as SettingsPage;
+            _debugPage    = frameDebugging.Content  as DebugPage;
+            _settingsPage = frameSettings.Content   as SettingsPage;
+            _resultsPage  = frameResults.Content    as SvgTestResultsPage;
 
             if (_svgPage != null && _settingsPage != null)
             {
                 _settingsPage.MainWindow = this;
+            }
+            if (_resultsPage != null)
+            {
+                _resultsPage.MainWindow = this;
             }
 
             if (_debugPage != null)
@@ -236,29 +307,82 @@ namespace WpfW3cSvgTestSuite
             }
 
             frameAbout.Navigating += OnFrameAboutNavigating;
-            frameAbout.Navigated += OnFrameAboutNavigated;
-
-            string currentDir = IoPath.GetFullPath(@"..\..\FullTestSuite");
-
-            if (Directory.Exists(currentDir))
-            {
-                this.txtSvgSuitePath.Text = currentDir;
-            }
+            frameAbout.Navigated  += OnFrameAboutNavigated;
 
             _isTreeChangedPending   = false;
             testApply.IsEnabled     = false;
             testInfoPanel.IsEnabled = false;
+
+            string selectedPath     = _optionSettings.LocalSuitePath;
+
+            _testSettingsPath = IoPath.GetFullPath(SvgTestSettings);
+            if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
+            {
+                _optionSettings.Load(_testSettingsPath);
+
+                selectedPath = _optionSettings.LocalSuitePath;
+            }
+
+            if (string.IsNullOrWhiteSpace(selectedPath))
+            {
+                selectedPath = IoPath.GetFullPath(@"..\..\FullTestSuite");
+            }
+
+            if (OptionSettings.IsTestSuiteAvailable(selectedPath))
+            {
+                _isTestAvailable = true;
+                this.InitializePath(selectedPath);
+            }
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
+            string backupFile = null;
+            if (File.Exists(_testSettingsPath))
+            {
+                backupFile = IoPath.ChangeExtension(_testSettingsPath, ".bak");
+                try
+                {
+                    if (File.Exists(backupFile))
+                    {
+                        File.Delete(backupFile);
+                    }
+                    File.Move(_testSettingsPath, backupFile);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), AppErrorTitle,
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    return;
+                }
+            }
+            try
+            {
+                _optionSettings.Save(_testSettingsPath);
+            }
+            catch (Exception ex)
+            {
+                if (File.Exists(backupFile))
+                {
+                    File.Move(backupFile, _testSettingsPath);
+                }
+
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+            {
+                File.Delete(backupFile);
+            }
+
             if (!_isTreeModified || string.IsNullOrWhiteSpace(_testFilePath) ||
                 !File.Exists(_testFilePath))
             {
                 return;
             }
 
-            string backupFile = IoPath.ChangeExtension(_testFilePath, ".bak");
+            backupFile = IoPath.ChangeExtension(_testFilePath, ".bak");
             try
             {
                 if (File.Exists(backupFile))
@@ -277,9 +401,9 @@ namespace WpfW3cSvgTestSuite
             try
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
+                settings.Indent      = true;
                 settings.IndentChars = "    ";
-                settings.Encoding = Encoding.UTF8;
+                settings.Encoding    = Encoding.UTF8;
 
                 using (XmlWriter writer = XmlWriter.Create(_testFilePath, settings))
                 {
@@ -295,6 +419,10 @@ namespace WpfW3cSvgTestSuite
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+            {
+                File.Delete(backupFile);
             }
 
             if (!string.IsNullOrWhiteSpace(_testResultsPath))
@@ -323,9 +451,9 @@ namespace WpfW3cSvgTestSuite
                     try
                     {
                         XmlWriterSettings settings = new XmlWriterSettings();
-                        settings.Indent = true;
+                        settings.Indent      = true;
                         settings.IndentChars = "    ";
-                        settings.Encoding = Encoding.UTF8;
+                        settings.Encoding    = Encoding.UTF8;
 
                         using (XmlWriter writer = XmlWriter.Create(_testResultsPath, settings))
                         {
@@ -342,6 +470,11 @@ namespace WpfW3cSvgTestSuite
                         MessageBox.Show(ex.ToString(), AppErrorTitle,
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+
+                    if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                    {
+                        File.Delete(backupFile);
+                    }
                 }
             }
 
@@ -351,58 +484,50 @@ namespace WpfW3cSvgTestSuite
             }
         }
 
-        private void OnBrowseForSvgSuitePath(object sender, RoutedEventArgs e)
-        {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-            dlg.ShowNewFolderButton = false;
-            dlg.Description         = "Select the location of the W3C SVG 1.1 Full Test Suite";
-            dlg.RootFolder          = Environment.SpecialFolder.MyComputer;
+        //private void OnBrowseForSvgSuitePath(object sender, RoutedEventArgs e)
+        //{
+        //    FolderBrowserDialog dlg = new FolderBrowserDialog();
+        //    dlg.ShowNewFolderButton = false;
+        //    dlg.Description = "Select the location of the W3C SVG 1.1 Full Test Suite";
+        //    dlg.RootFolder = Environment.SpecialFolder.MyComputer;
 
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                txtSvgSuitePath.Text = dlg.SelectedPath;
-            }   
-        }
+        //    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        txtSvgSuitePath.Text = dlg.SelectedPath;
+        //    }
+        //}
 
-        private void OnShowSvgTestResults(object sender, RoutedEventArgs e)
-        {
-            // Instantiate the dialog box
-            var dlg = new SvgTestResultsWindow
-            {
-                Owner = this,
-                Results = _testResults
-            };
+        //private void OnSvgSuitePathTextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    string selectePath = txtSvgSuitePath.Text;
+        //    if (selectePath != null)
+        //    {
+        //        selectePath = selectePath.Trim();
+        //    }
+        //    if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
+        //    {
+        //        return;
+        //    }
 
-            // Open the dialog box modally 
-            dlg.ShowDialog();
-        }
+        //    if (!Directory.Exists(IoPath.Combine(selectePath, "svg")))
+        //    {
+        //        return;
+        //    }
+        //    if (!Directory.Exists(IoPath.Combine(selectePath, "png")))
+        //    {
+        //        return;
+        //    }
 
-        private void OnSvgSuitePathTextChanged(object sender, TextChangedEventArgs e)
-        {
-            string selectePath = txtSvgSuitePath.Text;
-            if (selectePath != null)
-            {
-                selectePath = selectePath.Trim();
-            }
-            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
-            {
-                return;
-            }
-
-            if (!Directory.Exists(IoPath.Combine(selectePath, "svg")))
-            {
-                return;
-            }
-            if (!Directory.Exists(IoPath.Combine(selectePath, "png")))
-            {
-                return;
-            }
-
-            this.InitializePath(selectePath);
-        }
+        //    this.InitializePath(selectePath);
+        //}
 
         private void EnableTestPanel(bool isEnabled)
         {
+            if (_optionSettings != null && isEnabled == false)
+            {
+                _optionSettings.SelectedValuePath = "";
+            }
+
             testInfoPanel.IsEnabled = isEnabled;
             if (!isEnabled)
             {
@@ -605,6 +730,11 @@ namespace WpfW3cSvgTestSuite
                 EnableTestPanel(true);
 
                 _currentDrawing = drawing;
+
+                if (_optionSettings != null)
+                {
+                    _optionSettings.SelectedValuePath = testItem.Path;
+                }
             }
             catch (Exception ex)
             {
@@ -622,24 +752,12 @@ namespace WpfW3cSvgTestSuite
             }  
         }
 
-        private void OnFrameAboutNavigated(object sender, NavigationEventArgs e)
-        {
-            if (frameAbout.CanGoBack || frameAbout.CanGoForward)
-            {
-                frameAbout.NavigationUIVisibility = NavigationUIVisibility.Automatic;
-            } 
-            else
-            {
-                frameAbout.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            }
-        }
-
-        private void OnFrameAboutNavigating(object sender, NavigatingCancelEventArgs e)
-        {
-        }
-
         private void OnTreeViewItemUnselected(object sender, RoutedEventArgs e)
         {
+            if (_optionSettings != null)
+            {
+                _optionSettings.SelectedValuePath = "";
+            }
             // Prompt for any un-applied modifications to avoid lost.
             if (_isTreeChangedPending)
             {
@@ -729,13 +847,29 @@ namespace WpfW3cSvgTestSuite
         private void OnStateSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _isTreeChangedPending = true;
-            testApply.IsEnabled = true;
+            testApply.IsEnabled   = true;
         }
 
         private void OnCommentTextChanged(object sender, TextChangedEventArgs e)
         {
             _isTreeChangedPending = true;
-            testApply.IsEnabled = true;
+            testApply.IsEnabled   = true;
+        }
+
+        private void OnFrameAboutNavigated(object sender, NavigationEventArgs e)
+        {
+            if (frameAbout.CanGoBack || frameAbout.CanGoForward)
+            {
+                frameAbout.NavigationUIVisibility = NavigationUIVisibility.Automatic;
+            } 
+            else
+            {
+                frameAbout.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+            }
+        }
+
+        private void OnFrameAboutNavigating(object sender, NavigatingCancelEventArgs e)
+        {
         }
 
         #endregion
@@ -852,7 +986,7 @@ namespace WpfW3cSvgTestSuite
             WpfDrawingSettings settings = new WpfDrawingSettings();
             settings.IncludeRuntime = false;
             settings.TextAsGeometry = true;
-            settings.OptimizePath = true;
+            settings.OptimizePath   = true;
 
             StreamResourceInfo svgStreamInfo = null;
             if (svgSource.ToString().IndexOf("siteoforigin", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -960,8 +1094,8 @@ namespace WpfW3cSvgTestSuite
             if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
-                settings.IgnoreWhitespace = false;
-                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace             = false;
+                settings.IgnoreComments               = true;
                 settings.IgnoreProcessingInstructions = true;
 
                 using (XmlReader reader = XmlReader.Create(_testResultsPath, settings))
@@ -974,8 +1108,8 @@ namespace WpfW3cSvgTestSuite
             if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
-                settings.IgnoreWhitespace = false;
-                settings.IgnoreComments   = true;
+                settings.IgnoreWhitespace             = false;
+                settings.IgnoreComments               = true;
                 settings.IgnoreProcessingInstructions = true;
 
                 using (XmlReader reader = XmlReader.Create(fullFilePath, settings))
@@ -986,8 +1120,6 @@ namespace WpfW3cSvgTestSuite
                 leftExpander.IsExpanded = true;
 
                 _testFilePath = fullFilePath;
-
-                btnSvgTestResults.IsEnabled = true;
             }   
         }
 
@@ -1047,6 +1179,20 @@ namespace WpfW3cSvgTestSuite
             treeView.BeginInit();
             treeView.Items.Clear();
 
+            string selectedCategory = "";
+            string selectedTest     = "";
+            if (_optionSettings != null &&
+                !string.IsNullOrWhiteSpace(_optionSettings.SelectedValuePath))
+            {
+                var selectedPaths = _optionSettings.SelectedValuePath.Split('/');
+                if (selectedPaths != null && selectedPaths.Length == 2)
+                {
+                    selectedCategory = selectedPaths[0];
+                    selectedTest     = selectedPaths[1];
+                }
+            }
+            TreeViewItem selectedCategoryItem = null;
+
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element &&
@@ -1073,10 +1219,10 @@ namespace WpfW3cSvgTestSuite
                         else
                         {
                             Ellipse bullet = new Ellipse();
-                            bullet.Height = 16;
-                            bullet.Width  = 16;
-                            bullet.Fill   = Brushes.Goldenrod;
-                            bullet.Stroke = Brushes.DarkGray;
+                            bullet.Height          = 16;
+                            bullet.Width           = 16;
+                            bullet.Fill            = Brushes.Goldenrod;
+                            bullet.Stroke          = Brushes.DarkGray;
                             bullet.StrokeThickness = 1;
 
                             decorator.Bullet = bullet;
@@ -1092,11 +1238,19 @@ namespace WpfW3cSvgTestSuite
 
                         treeView.Items.Add(categoryItem);
 
-                        LoadTreeViewCategory(reader, categoryItem, testCategory);
+                        bool categorySelected = false;
+                        if (!string.IsNullOrWhiteSpace(selectedCategory)
+                            && selectedCategory.Equals(category, StringComparison.OrdinalIgnoreCase))
+                        {
+                            selectedCategoryItem = categoryItem;
+                            categorySelected     = true;
+                        }
+                        LoadTreeViewCategory(reader, categoryItem, testCategory, categorySelected, selectedTest);
 
                         if (testCategory.IsValid)
                         {
                             testResult.Categories.Add(testCategory);
+
                         }
                     }
                 }
@@ -1177,9 +1331,9 @@ namespace WpfW3cSvgTestSuite
                     try
                     {
                         XmlWriterSettings settings = new XmlWriterSettings();
-                        settings.Indent = true;
+                        settings.Indent      = true;
                         settings.IndentChars = "    ";
-                        settings.Encoding = Encoding.UTF8;
+                        settings.Encoding    = Encoding.UTF8;
 
                         using (XmlWriter writer = XmlWriter.Create(_testResultsPath, settings))
                         {
@@ -1199,24 +1353,34 @@ namespace WpfW3cSvgTestSuite
                 }
             }
 
+            if (selectedCategoryItem != null)
+            {
+                selectedCategoryItem.IsExpanded = true;
+            }
+
             treeView.EndInit();
         }
 
-        private void LoadTreeViewCategory(XmlReader reader, TreeViewItem categoryItem, SvgTestCategory testCategory)
+        private void LoadTreeViewCategory(XmlReader reader, TreeViewItem categoryItem, 
+            SvgTestCategory testCategory, bool categorySelected, string selectedTest)
         {
             int total = 0, unknowns = 0, failures = 0, successes = 0, partials = 0;
 
             int itemCount = 0;
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element)
                 {
-                    if (string.Equals(reader.Name, "test", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(reader.Name, "test", comparer))
                     {
                         SvgTestInfo testInfo = new SvgTestInfo(reader);
                         if (!testInfo.IsEmpty)
                         {
+                            testInfo.Category = testCategory.Label;
+
                             TextBlock headerText = new TextBlock();
                             headerText.Text   = string.Format("({0:D3}) - {1}", itemCount, testInfo.Title);
                             headerText.Margin = new Thickness(3, 0, 0, 0);
@@ -1241,6 +1405,12 @@ namespace WpfW3cSvgTestSuite
                             treeItem.Tag        = testInfo;                            
 
                             categoryItem.Items.Add(treeItem);
+
+                            if (categorySelected && 
+                                string.Equals(testInfo.Title, selectedTest, comparer))
+                            {
+                                treeItem.IsSelected = true;
+                            }
 
                             itemCount++;
 
@@ -1267,7 +1437,7 @@ namespace WpfW3cSvgTestSuite
                 }
                 else if (reader.NodeType == XmlNodeType.EndElement)
                 {   
-                    if (string.Equals(reader.Name, "category", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(reader.Name, "category", comparer))
                     {
                         break;
                     }

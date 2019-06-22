@@ -1,31 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.IO.Compression;
-using System.Xml;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
-using IoPath = System.IO.Path;
+using System.Diagnostics;
 
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
-using SharpVectors.Net;
-using SharpVectors.Xml;
-using SharpVectors.Dom;
-using SharpVectors.Dom.Css;
-using SharpVectors.Dom.Svg;
-using SharpVectors.Dom.Events;
-
-using SharpVectors.Converters;
-using SharpVectors.Renderers;
-using SharpVectors.Renderers.Wpf;
-using SharpVectors.Renderers.Utils;
-
-using SharpVectors.Runtime;
 
 namespace WpfW3cSvgTestSuite
 {
@@ -70,31 +49,9 @@ namespace WpfW3cSvgTestSuite
 
         #endregion
 
-        //#region Public Properties
+        #region Public Properties
 
-        //public string XamlDrawingDir
-        //{
-        //    get 
-        //    { 
-        //        return _drawingDir; 
-        //    }
-        //    set 
-        //    { 
-        //        _drawingDir = value; 
-
-        //        if (!string.IsNullOrWhiteSpace(_drawingDir))
-        //        {
-        //            _directoryInfo = new DirectoryInfo(_drawingDir);
-
-        //            if (_fileReader != null)
-        //            {
-        //                _fileReader.SaveXaml = Directory.Exists(_drawingDir);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //#endregion
+        #endregion
 
         #region Public Methods
 
@@ -106,7 +63,7 @@ namespace WpfW3cSvgTestSuite
             {
                 return false;
             }
-            //string pngFilePath = extraInfo.ToString();
+
             if (string.IsNullOrWhiteSpace(pngFilePath))
             {
                 return false;
@@ -122,10 +79,13 @@ namespace WpfW3cSvgTestSuite
             {
                 bitmap = new BitmapImage(new Uri(pngFilePath));
                 pngResult.Source = bitmap;
+
+                pngCanvas.Width = bitmap.Width + 10;
+                pngCanvas.Height = bitmap.Height + 10;
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                Trace.TraceError(ex.ToString());
             }
 
             try
@@ -173,13 +133,15 @@ namespace WpfW3cSvgTestSuite
 
                     //zoomableCanvas.FitWindow(new Size(bitmap.Width, bitmap.Height));
                 }
+
+                svgCanvas.Width = bitmap.Width + 10;
+                svgCanvas.Height = bitmap.Height + 10;
             }
-            catch
+            catch (Exception ex)
             {
                 svgDrawing.Source = null;
 //                svgDrawing.UnloadDiagrams();
-
-                throw;
+                Trace.TraceError(ex.ToString());
             }
 
             return true;

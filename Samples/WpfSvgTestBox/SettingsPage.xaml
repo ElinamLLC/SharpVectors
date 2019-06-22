@@ -7,7 +7,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="800" Background="White"
       Title="SettingsPage">
-
+    <Page.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="Margin" Value="5,1,5,5"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold" FontSize="18"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <DockPanel LastChildFill="True" Margin="20 10 20 10">
         <StackPanel Visibility="Collapsed" DockPanel.Dock="Bottom" Margin="1 6 1 1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <Button x:Name="buttonApply" Width="150" Margin="6" Padding="3">Apply</Button>
@@ -17,8 +29,14 @@
                 <CheckBox Name="chkTextAsGeometry" Click="OnSettingsChanged">
                     <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
                 </CheckBox>
-                <TextBlock Padding="32 3 3 3">
-                    All SVG text elements will be converted to paths.
+                <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                    <Run>All SVG text elements will be converted to paths.</Run>                    
+                    <LineBreak/>
+                    <Bold>NOTE:&#160;</Bold>
+                    <Run>      
+                        Depending on the styling (eg. text with both stroke and fill), the text may still be converted to paths.
+                        Also, text on paths are converted to path geometries.
+                    </Run>
                 </TextBlock>
                 <CheckBox Name="chkIncludeRuntime" Click="OnSettingsChanged">
                     <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>

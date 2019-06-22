@@ -197,5 +197,8 @@
     <Resource Include="Images\Number.svg" />
     <Resource Include="Images\Space.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SvgLogoBasic.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

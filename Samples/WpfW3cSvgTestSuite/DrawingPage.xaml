@@ -12,10 +12,12 @@
         </Grid.RowDefinitions>
        <!--<svg:SvgScrollViewer x:Name="svgDrawing" Grid.Row="0" AllowDrop="True"/>-->
         <DockPanel LastChildFill="True" Grid.Row="0">
-            <TextBlock DockPanel.Dock="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Converted Image</TextBlock>
-            <Canvas Background="White">
-                <Image Name="svgDrawing" Margin="6, 6, 6, 6"/>
-            </Canvas>
+            <TextBlock DockPanel.Dock="Top" Height="24" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Converted Image</TextBlock>
+            <ScrollViewer IsDeferredScrollingEnabled="True">
+                <Canvas x:Name="svgCanvas" Background="White">
+                    <Image Name="svgDrawing" Margin="6, 6, 6, 6"/>
+                </Canvas>
+            </ScrollViewer>
             <!--<ScrollViewer Grid.Row="1">   
                 <Canvas Background="White">
                     <Viewbox Name="viewBox" StretchDirection="Both" Margin="6, 6, 6, 6">                    
@@ -27,10 +29,12 @@
         <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                       BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
         <DockPanel LastChildFill="True" Grid.Row="2">
-            <TextBlock DockPanel.Dock="Top" Height="28" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Expected Image</TextBlock>
-            <Canvas Background="White">
-                <Image Name="pngResult" Margin="6, 6, 6, 6"/>
-            </Canvas>
+            <TextBlock DockPanel.Dock="Top" Height="24" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Expected Image</TextBlock>
+            <ScrollViewer IsDeferredScrollingEnabled="True">
+                <Canvas x:Name="pngCanvas" Background="White">
+                    <Image Name="pngResult" Margin="6, 6, 6, 6"/>
+                </Canvas>                
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Page>

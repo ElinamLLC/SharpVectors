@@ -67,29 +67,6 @@ namespace Viewer
 
         #region Entry Point
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main(
-            string[] cmdLineArgs)
-        {
-            Trace.WriteLine("Starting application", "DEBUG");
-
-            Form svgViewerForm;
-
-            if (cmdLineArgs.Length > 0)
-            {
-                Trace.WriteLine("Getting initial file from command line: " + cmdLineArgs[0], "DEBUG");
-                svgViewerForm = new SvgViewerForm(cmdLineArgs[0]);
-            }
-            else
-            {
-                svgViewerForm = new SvgViewerForm();
-            }
-
-            Application.Run(svgViewerForm);
-        }
 
         #endregion
 
@@ -487,8 +464,7 @@ namespace Viewer
         {
             miTestShowRefImage.Checked = !miTestShowRefImage.Checked;
 
-            if (svgUrlCombo.Text.StartsWith(
-                "http://www.w3.org/Graphics/SVG/Test/20021112/svggen/"))
+            if (svgUrlCombo.Text.StartsWith("http://www.w3.org/Graphics/SVG/Test/20021112/svggen/"))
             {
                 this.pbRefImage.Visible = miTestShowRefImage.Checked;
             }

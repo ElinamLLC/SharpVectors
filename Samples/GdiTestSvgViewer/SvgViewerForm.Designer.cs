@@ -34,11 +34,12 @@
             this.miHelpAbout = new System.Windows.Forms.MenuItem();
             this.svgUrlCombo = new System.Windows.Forms.ComboBox();
             this.pbRefImage = new System.Windows.Forms.PictureBox();
-            this.svgPictureBox = new SharpVectors.Renderers.Forms.SvgPictureBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.labelSvg = new System.Windows.Forms.Label();
             this.labelPng = new System.Windows.Forms.Label();
+            this.svgPictureBox = new SharpVectors.Renderers.Forms.SvgPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbRefImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -46,9 +47,9 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(422, 9);
+            this.btnGo.Location = new System.Drawing.Point(352, 7);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(58, 28);
+            this.btnGo.Size = new System.Drawing.Size(48, 23);
             this.btnGo.TabIndex = 0;
             this.btnGo.Text = "&Go";
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
@@ -67,14 +68,15 @@
             this.toolBar1.Location = new System.Drawing.Point(0, 0);
             this.toolBar1.Name = "toolBar1";
             this.toolBar1.ShowToolTips = true;
-            this.toolBar1.Size = new System.Drawing.Size(913, 43);
+            this.toolBar1.Size = new System.Drawing.Size(1133, 43);
             this.toolBar1.TabIndex = 22;
+            this.toolBar1.Visible = false;
             // 
             // statusBar
             // 
-            this.statusBar.Location = new System.Drawing.Point(0, 651);
+            this.statusBar.Location = new System.Drawing.Point(0, 650);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(913, 26);
+            this.statusBar.Size = new System.Drawing.Size(1133, 21);
             this.statusBar.TabIndex = 23;
             this.statusBar.Text = "Welcome";
             // 
@@ -181,38 +183,28 @@
             // 
             // svgUrlCombo
             // 
-            this.svgUrlCombo.ItemHeight = 16;
+            this.svgUrlCombo.ItemHeight = 12;
             this.svgUrlCombo.Items.AddRange(new object[] {
             "http://www.w3.org/Graphics/SVG/Test/20011026/rendering-orderGr-BE-01.svg",
             "http://www.croczilla.com/svg/butterfly.xml",
             "http://www.croczilla.com/svg/tiger.xml",
             "http://www.croczilla.com/svg/skew01.xml",
             "http://www.protocol7.com/svg.net/people.svg"});
-            this.svgUrlCombo.Location = new System.Drawing.Point(10, 9);
+            this.svgUrlCombo.Location = new System.Drawing.Point(8, 7);
             this.svgUrlCombo.Name = "svgUrlCombo";
-            this.svgUrlCombo.Size = new System.Drawing.Size(403, 24);
+            this.svgUrlCombo.Size = new System.Drawing.Size(336, 20);
             this.svgUrlCombo.TabIndex = 5;
             // 
             // pbRefImage
             // 
             this.pbRefImage.BackColor = System.Drawing.SystemColors.Window;
             this.pbRefImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbRefImage.Location = new System.Drawing.Point(0, 28);
+            this.pbRefImage.Location = new System.Drawing.Point(0, 22);
             this.pbRefImage.Name = "pbRefImage";
-            this.pbRefImage.Size = new System.Drawing.Size(442, 580);
+            this.pbRefImage.Size = new System.Drawing.Size(586, 585);
             this.pbRefImage.TabIndex = 26;
             this.pbRefImage.TabStop = false;
             this.pbRefImage.Visible = false;
-            // 
-            // svgPictureBox
-            // 
-            this.svgPictureBox.BackColor = System.Drawing.SystemColors.Window;
-            this.svgPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.svgPictureBox.Location = new System.Drawing.Point(0, 28);
-            this.svgPictureBox.Name = "svgPictureBox";
-            this.svgPictureBox.Size = new System.Drawing.Size(467, 580);
-            this.svgPictureBox.Surface = null;
-            this.svgPictureBox.TabIndex = 25;
             // 
             // splitContainer
             // 
@@ -222,15 +214,17 @@
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.Window;
             this.splitContainer.Panel1.Controls.Add(this.svgPictureBox);
             this.splitContainer.Panel1.Controls.Add(this.labelSvg);
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.splitContainer.Panel2.Controls.Add(this.pbRefImage);
             this.splitContainer.Panel2.Controls.Add(this.labelPng);
-            this.splitContainer.Size = new System.Drawing.Size(913, 608);
-            this.splitContainer.SplitterDistance = 467;
+            this.splitContainer.Size = new System.Drawing.Size(1133, 607);
+            this.splitContainer.SplitterDistance = 543;
             this.splitContainer.TabIndex = 27;
             // 
             // labelSvg
@@ -240,7 +234,7 @@
             this.labelSvg.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelSvg.Location = new System.Drawing.Point(0, 0);
             this.labelSvg.Name = "labelSvg";
-            this.labelSvg.Size = new System.Drawing.Size(467, 28);
+            this.labelSvg.Size = new System.Drawing.Size(543, 22);
             this.labelSvg.TabIndex = 26;
             this.labelSvg.Text = "SVG Rendered";
             // 
@@ -251,14 +245,24 @@
             this.labelPng.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelPng.Location = new System.Drawing.Point(0, 0);
             this.labelPng.Name = "labelPng";
-            this.labelPng.Size = new System.Drawing.Size(442, 28);
+            this.labelPng.Size = new System.Drawing.Size(586, 22);
             this.labelPng.TabIndex = 27;
             this.labelPng.Text = "Png Rendered";
             // 
+            // svgPictureBox
+            // 
+            this.svgPictureBox.BackColor = System.Drawing.SystemColors.Window;
+            this.svgPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.svgPictureBox.Location = new System.Drawing.Point(0, 22);
+            this.svgPictureBox.Name = "svgPictureBox";
+            this.svgPictureBox.Size = new System.Drawing.Size(543, 585);
+            this.svgPictureBox.Surface = null;
+            this.svgPictureBox.TabIndex = 25;
+            // 
             // SvgViewerForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
-            this.ClientSize = new System.Drawing.Size(913, 677);
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 12);
+            this.ClientSize = new System.Drawing.Size(1133, 671);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.svgUrlCombo);
             this.Controls.Add(this.statusBar);
@@ -272,6 +276,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbRefImage)).EndInit();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

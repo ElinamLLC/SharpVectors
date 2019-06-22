@@ -10,6 +10,7 @@ namespace WpfW3cSvgTestSuite
     {
         #region Private Fields
 
+        private string _category;
         private string _fileName;
         private string _title;
         private string _comment;
@@ -22,11 +23,11 @@ namespace WpfW3cSvgTestSuite
 
         public SvgTestInfo()
         {
-            _title       = string.Empty;
-            _fileName    = string.Empty;
+            _title = string.Empty;
+            _fileName = string.Empty;
             _description = string.Empty;
-            _comment     = string.Empty;
-            _state       = SvgTestState.Unknown;
+            _comment = string.Empty;
+            _state = SvgTestState.Unknown;
         }
 
         public SvgTestInfo(XmlReader reader)
@@ -35,7 +36,7 @@ namespace WpfW3cSvgTestSuite
             this.ReadXml(reader);
         }
 
-        public SvgTestInfo(string fileName, string title, string state, 
+        public SvgTestInfo(string fileName, string title, string state,
             string comment, string description)
             : this()
         {
@@ -48,9 +49,15 @@ namespace WpfW3cSvgTestSuite
 
         public bool IsEmpty
         {
-            get
-            {
+            get {
                 return (string.IsNullOrWhiteSpace(_fileName));
+            }
+        }
+
+        public string Path
+        {
+            get {
+                return string.Format("{0}/{1}", _category, _title);
             }
         }
 
@@ -62,8 +69,7 @@ namespace WpfW3cSvgTestSuite
 
         public Brush StateBrush
         {
-            get
-            {
+            get {
                 switch (_state)
                 {
                     case SvgTestState.Unknown:
@@ -78,6 +84,12 @@ namespace WpfW3cSvgTestSuite
 
                 return Brushes.LightGray;
             }
+        }
+
+        public string Category
+        {
+            get { return _category; }
+            set { _category = value; }
         }
 
         public string Comment
@@ -95,29 +107,26 @@ namespace WpfW3cSvgTestSuite
         public string Title
         {
             get { return _title; }
-            set 
-            {
+            set {
                 if (value == null)
                 {
                     value = string.Empty;
                 }
-                _title = value; 
+                _title = value;
             }
         }
 
         public string Description
         {
-            get 
-            { 
-                return _description; 
+            get {
+                return _description;
             }
-            set 
-            {
+            set {
                 if (value == null)
                 {
                     value = string.Empty;
                 }
-                _description = value; 
+                _description = value;
             }
         }
 
@@ -179,7 +188,7 @@ namespace WpfW3cSvgTestSuite
 
         #region Private Methods
 
-        private void Initialize(string fileName, string title, string state, 
+        private void Initialize(string fileName, string title, string state,
             string comment, string description)
         {
             if (description == null)

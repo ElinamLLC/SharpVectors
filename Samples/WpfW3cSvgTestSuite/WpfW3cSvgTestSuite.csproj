@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WpfW3cSvgTestSuite</RootNamespace>
     <AssemblyName>WpfW3cSvgTestSuite</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <ApplicationIcon>App.ico</ApplicationIcon>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -44,9 +47,13 @@
       <HintPath>..\..\Libraries\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Adorned\LoadingWait.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="BrowserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="PromptDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,7 +114,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SvgTestResultsWindow.xaml">
+    <Page Include="SvgTestResultsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +130,12 @@
     </Page>
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Adorned\AdornedControl.cs" />
+    <Compile Include="Adorned\AdornerPlacement.cs" />
+    <Compile Include="Adorned\FrameworkElementAdorner.cs" />
+    <Compile Include="Adorned\LoadingWait.xaml.cs">
+      <DependentUpon>LoadingWait.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -144,6 +165,10 @@
       <DependentUpon>DrawingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindowSettings.cs" />
+    <Compile Include="OptionSettings.cs" />
+    <Compile Include="PromptDialog.xaml.cs">
+      <DependentUpon>PromptDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -167,8 +192,8 @@
     <Compile Include="SvgTestCategory.cs" />
     <Compile Include="SvgTestInfo.cs" />
     <Compile Include="SvgTestResult.cs" />
-    <Compile Include="SvgTestResultsWindow.xaml.cs">
-      <DependentUpon>SvgTestResultsWindow.xaml</DependentUpon>
+    <Compile Include="SvgTestResultsPage.xaml.cs">
+      <DependentUpon>SvgTestResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SvgTestState.cs" />
     <Compile Include="TraceDocument.xaml.cs">
@@ -291,6 +316,13 @@
     <Resource Include="Images\TestRunner.svg" />
     <Resource Include="Images\Web.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TestResultDetail.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SvgLogoBasic.svg" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
