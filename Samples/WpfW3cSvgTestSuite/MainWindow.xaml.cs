@@ -274,8 +274,8 @@ namespace WpfW3cSvgTestSuite
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-            leftExpander.IsExpanded   = false;
             bottomExpander.IsExpanded = false;
+            leftExpander.IsExpanded   = false;
 
             // Retrieve the display pages...
             _svgPage      = frameSvgInput.Content   as SvgPage;
@@ -890,8 +890,8 @@ namespace WpfW3cSvgTestSuite
 
             e.Handled = true;
 
-            ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
-            rowExpander.Width = new GridLength(24, GridUnitType.Pixel);
+            ColumnDefinition columnDef = mainGrid.ColumnDefinitions[0];
+            columnDef.Width = new GridLength(24, GridUnitType.Pixel);
         }
 
         private void OnLeftExpanderExpanded(object sender, RoutedEventArgs e)
@@ -908,17 +908,17 @@ namespace WpfW3cSvgTestSuite
 
             e.Handled = true;
 
-            ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
-            rowExpander.Width = new GridLength(LeftPane, GridUnitType.Pixel);
+            ColumnDefinition columnDef = mainGrid.ColumnDefinitions[0];
+            columnDef.Width = new GridLength(LeftPane, GridUnitType.Pixel);
         }
 
         private void OnLeftSplitterMove(object sender, MouseEventArgs e)
         {
             _leftSplitterChanging = true;
 
-            ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
+            ColumnDefinition columnDef = mainGrid.ColumnDefinitions[0];
 
-            leftExpander.IsExpanded = rowExpander.ActualWidth > 24;
+            leftExpander.IsExpanded = columnDef.ActualWidth > 30;
 
             _leftSplitterChanging = false;
 
@@ -941,8 +941,8 @@ namespace WpfW3cSvgTestSuite
                 return;
             }                            
 
-            RowDefinition rowExpander = bottomGrid.RowDefinitions[2];
-            rowExpander.Height = new GridLength(24, GridUnitType.Pixel);
+            RowDefinition rowDef = bottomGrid.RowDefinitions[2];
+            rowDef.Height = new GridLength(24, GridUnitType.Pixel);
         }
 
         private void OnBottomExpanderExpanded(object sender, RoutedEventArgs e)
@@ -957,17 +957,17 @@ namespace WpfW3cSvgTestSuite
                 return;
             }                            
 
-            RowDefinition rowExpander = bottomGrid.RowDefinitions[2];
-            rowExpander.Height = new GridLength(LeftBottomPane, GridUnitType.Pixel);
+            RowDefinition rowDef = bottomGrid.RowDefinitions[2];
+            rowDef.Height = new GridLength(LeftBottomPane, GridUnitType.Pixel);
         }
 
         private void OnBottomSplitterMove(object sender, MouseEventArgs e)
         {
             _isBottomSplitterChanging = true;
 
-            RowDefinition rowExpander = bottomGrid.RowDefinitions[2];
+            RowDefinition rowDef = bottomGrid.RowDefinitions[2];
 
-            bottomExpander.IsExpanded = rowExpander.ActualHeight > 24;
+            bottomExpander.IsExpanded = rowDef.ActualHeight > 30;
 
             _isBottomSplitterChanging = false;
         }
