@@ -80,7 +80,7 @@ namespace WpfW3cSvgTestSuite
                 bitmap = new BitmapImage(new Uri(pngFilePath));
                 pngResult.Source = bitmap;
 
-                pngCanvas.Width = bitmap.Width + 10;
+                pngCanvas.Width  = bitmap.Width + 10;
                 pngCanvas.Height = bitmap.Height + 10;
             }
             catch (Exception ex)
@@ -106,11 +106,11 @@ namespace WpfW3cSvgTestSuite
                     _viewBoxHeight = (int)svgDrawing.ActualHeight;
                 }
 
-                svgDrawing.Width = double.NaN;
-                svgDrawing.Height = double.NaN;
+                svgDrawing.Width      = double.NaN;
+                svgDrawing.Height     = double.NaN;
                 svgDrawing.RenderSize = new Size(_viewBoxWidth, _viewBoxHeight);
 
-                svgDrawing.Source = new DrawingImage(drawing);
+                svgDrawing.Source     = new DrawingImage(drawing);
 
 //                svgDrawing.UnloadDiagrams();
 //                viewBox.Width = double.NaN;
@@ -124,7 +124,7 @@ namespace WpfW3cSvgTestSuite
                     //SvgDrawingCanvas drawCanvas = svgDrawing.DrawingCanvas;
 //                    viewBox.Width  = bitmap.Width;
 //                    viewBox.Height = bitmap.Height;
-                    svgDrawing.Width = bitmap.Width;
+                    svgDrawing.Width  = bitmap.Width;
                     svgDrawing.Height = bitmap.Height;
 
                     //SvgZoomableCanvas zoomableCanvas = svgDrawing.ZoomableCanvas;
@@ -134,7 +134,7 @@ namespace WpfW3cSvgTestSuite
                     //zoomableCanvas.FitWindow(new Size(bitmap.Width, bitmap.Height));
                 }
 
-                svgCanvas.Width = bitmap.Width + 10;
+                svgCanvas.Width  = bitmap.Width + 10;
                 svgCanvas.Height = bitmap.Height + 10;
             }
             catch (Exception ex)

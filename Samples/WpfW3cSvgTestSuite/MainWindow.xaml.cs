@@ -32,25 +32,21 @@ namespace WpfW3cSvgTestSuite
         private const int LeftPane         = 325;
         private const int LeftBottomPane   = 220;
 
-        private const string TestSuiteDir = "";
-        private const string SvgSubDir    = "";
-        private const string PngSubDir    = "";
-
         private const string AppTitle        = "Svg Test Suite";
         private const string AppErrorTitle   = "Svg Test Suite - Error";
         private const string SvgTestSuite    = "SvgTestSuite.xml";
         private const string SvgTestResults  = "SvgTestResults.xml";
         private const string SvgTestSettings = "SvgTestSettings.xml";
   
-        private bool   _isTreeModified;
+        private bool _isTreeModified;
         private bool _isShown;
         private bool _isTestAvailable;
 
-        private bool   _isTreeChangedPending;
+        private bool  _isTreeChangedPending;
 
-        private bool   _isSuiteAvailable;
-        private bool   _leftSplitterChanging;
-        private bool   _isBottomSplitterChanging;
+        private bool _isSuiteAvailable;
+        private bool _leftSplitterChanging;
+        private bool  _isBottomSplitterChanging;
 
         private string _suitePath;
         private string _svgPath;
@@ -125,7 +121,7 @@ namespace WpfW3cSvgTestSuite
             try
             {
                 _folderClose = this.GetImage(new Uri("Images/FolderClose.svg", UriKind.Relative));
-                _folderOpen = this.GetImage(new Uri("Images/FolderOpen.svg", UriKind.Relative));
+                _folderOpen  = this.GetImage(new Uri("Images/FolderOpen.svg", UriKind.Relative));
             }
             catch (Exception ex)
             {
@@ -483,43 +479,6 @@ namespace WpfW3cSvgTestSuite
                 _debugPage.Startup();
             }
         }
-
-        //private void OnBrowseForSvgSuitePath(object sender, RoutedEventArgs e)
-        //{
-        //    FolderBrowserDialog dlg = new FolderBrowserDialog();
-        //    dlg.ShowNewFolderButton = false;
-        //    dlg.Description = "Select the location of the W3C SVG 1.1 Full Test Suite";
-        //    dlg.RootFolder = Environment.SpecialFolder.MyComputer;
-
-        //    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //    {
-        //        txtSvgSuitePath.Text = dlg.SelectedPath;
-        //    }
-        //}
-
-        //private void OnSvgSuitePathTextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    string selectePath = txtSvgSuitePath.Text;
-        //    if (selectePath != null)
-        //    {
-        //        selectePath = selectePath.Trim();
-        //    }
-        //    if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
-        //    {
-        //        return;
-        //    }
-
-        //    if (!Directory.Exists(IoPath.Combine(selectePath, "svg")))
-        //    {
-        //        return;
-        //    }
-        //    if (!Directory.Exists(IoPath.Combine(selectePath, "png")))
-        //    {
-        //        return;
-        //    }
-
-        //    this.InitializePath(selectePath);
-        //}
 
         private void EnableTestPanel(bool isEnabled)
         {
@@ -1232,7 +1191,7 @@ namespace WpfW3cSvgTestSuite
 
                         TreeViewItem categoryItem = new TreeViewItem();
                         categoryItem.Header     = decorator;
-                        categoryItem.Margin     = new Thickness(0, 3, 0, 3);
+                        categoryItem.Margin     = new Thickness(0, 2, 0, 2);
                         categoryItem.FontSize   = 14;
                         categoryItem.FontWeight = FontWeights.Bold;
 
@@ -1322,6 +1281,10 @@ namespace WpfW3cSvgTestSuite
                         }
                         catch (Exception ex)
                         {
+                            if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                            {
+                                File.Delete(backupFile);
+                            }
                             MessageBox.Show(ex.ToString(), AppErrorTitle,
                                 MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
@@ -1349,6 +1312,10 @@ namespace WpfW3cSvgTestSuite
 
                         MessageBox.Show(ex.ToString(), AppErrorTitle,
                             MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                    {
+                        File.Delete(backupFile);
                     }
                 }
             }
@@ -1399,7 +1366,7 @@ namespace WpfW3cSvgTestSuite
 
                             TreeViewItem treeItem = new TreeViewItem();
                             treeItem.Header     = decorator;
-                            treeItem.Padding    = new Thickness(3);
+                            treeItem.Padding    = new Thickness(2);
                             treeItem.FontSize   = 12;
                             treeItem.FontWeight = FontWeights.Normal;
                             treeItem.Tag        = testInfo;                            

@@ -32,12 +32,12 @@
                     </TextBlock>
                     <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
                         <TextBlock Name="lblSvgSuitePathWeb" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                                   Margin="3">Web W3C Svg Suite Path:</TextBlock>
+                                   Margin="3">Web W3C SVG Suite Path:</TextBlock>
                         <TextBox Name="txtSvgSuitePathWeb" HorizontalAlignment="Stretch" Margin="30 3 3 3" IsReadOnly="True"/>
                     </DockPanel>
                     <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
                         <TextBlock Name="lblSvgSuitePath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                                   Margin="3">Local W3C Svg Suite Path:</TextBlock>
+                                   Margin="3">Local W3C SVG Suite Path:</TextBlock>
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
                             <Button Name="btnPathBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
                                     Click="OnBrowseForSvgSuitePath" Style="{StaticResource MetroButton}"/>

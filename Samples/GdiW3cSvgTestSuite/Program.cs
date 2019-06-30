@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GdiW3cSvgTestSuite
@@ -14,9 +11,28 @@ namespace GdiW3cSvgTestSuite
         [STAThread]
         static void Main()
         {
+            Application.Idle += OnApplicationIdle;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+        }
+
+        private static void OnApplicationIdle(object sender, EventArgs e)
+        {
+            var openForms = Application.OpenForms;
+            if (openForms != null && openForms.Count != 0)
+            {
+                foreach (var openForm in openForms)
+                {
+                    var mainForm = openForm as MainForm;
+                    if (mainForm != null)
+                    {
+                        mainForm.IdleUpdate();
+                        break;
+                    }
+                }
+            }
         }
     }
 }

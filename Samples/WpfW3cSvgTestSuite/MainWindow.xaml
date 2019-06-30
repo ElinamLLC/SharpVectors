@@ -58,7 +58,7 @@
                                     </Expander.Header>
                                     <StackPanel Name="testInfoPanel" Orientation="Vertical" Margin="3">                                        
                                         <TextBlock Text="Test State:"/>
-                                        <ComboBox Name="stateComboBox" Margin="32, 0, 0, 6" SelectionChanged="OnStateSelectionChanged">
+                                        <ComboBox Name="stateComboBox" Margin="32, 0, 0, 6" SelectionChanged="OnStateSelectionChanged" HorizontalAlignment="Stretch" Style="{StaticResource ComboBoxFlatStyle}">
                                             <ComboBoxItem Tag="unknown">
                                                 <StackPanel Orientation="Horizontal">
                                                     <Ellipse Width="16" Height="16" Fill="LightGray" Stroke="DarkGray" StrokeThickness="2"/>
@@ -85,7 +85,8 @@
                                             </ComboBoxItem>
                                         </ComboBox>
                                         <TextBlock Text="Test Comment:"/>
-                                        <TextBox Name="testComment" TextWrapping="Wrap" Margin="32, 0, 0, 6" AcceptsReturn="False" AcceptsTab="False" Height="72" SpellCheck.IsEnabled="True" TextChanged="OnCommentTextChanged"/>
+                                        <TextBox Name="testComment" TextWrapping="Wrap" Margin="32, 0, 0, 6" AcceptsReturn="False" 
+                                                 AcceptsTab="False" Height="72" SpellCheck.IsEnabled="True" TextChanged="OnCommentTextChanged"/>
                                         <Button Name="testApply" Content="Apply" HorizontalAlignment="Right" 
                                                 Click="OnApplyTestState" Style="{StaticResource MetroButton}"/>
                                     </StackPanel>

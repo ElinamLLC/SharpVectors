@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Xml;
-using System.Reflection;
-using System.Xml.Serialization;
 using System.Xml.Schema;
-using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace WpfW3cSvgTestSuite
 {
@@ -153,7 +153,7 @@ namespace WpfW3cSvgTestSuite
 
         #region IXmlSerializable Members
 
-        public System.Xml.Schema.XmlSchema GetSchema()
+        public XmlSchema GetSchema()
         {
             return null;
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
         mc:Ignorable="d"
-        Title="W3C SVG Test Suite" Height="349" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False" Icon="App.ico">
+        Title="W3C SVG Test Suite" Height="350" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False" Icon="App.ico">
     <local:AdornedControl x:Name="LoadingAdorner">
         <local:AdornedControl.AdornerContent>
             <local:LoadingWait></local:LoadingWait>
@@ -13,13 +13,13 @@
         <StackPanel Orientation="Vertical" Margin="15 6 6 3">
             <TextBlock TextWrapping="Wrap" FontSize="14" Margin="3 3 3 20">
             <Run>
-                The W3C Test Suite is not found in the specified local directory. Click the Download button to download
+                The W3C SVG Test Suite is not found in the specified local directory. Click the Download button to download
                 it or Browse... button to select the local directory where the tests are stored.
             </Run>
             </TextBlock>
             <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
                 <TextBlock Name="lblSvgSuitePathWeb" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                               Margin="3">Web W3C Svg Suite Path:</TextBlock>
+                               Margin="3">Web W3C SVG Suite Path:</TextBlock>
                 <TextBox Name="txtSvgSuitePathWeb" HorizontalAlignment="Stretch" Margin="20 3 3 3" IsReadOnly="True"/>
             </DockPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 20">
@@ -27,7 +27,7 @@
             </StackPanel>
             <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
                 <TextBlock Name="lblSvgSuitePath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                               Margin="3">Local W3C Svg Suite Path:</TextBlock>
+                               Margin="3">Local W3C SVG Suite Path:</TextBlock>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
                     <Button Name="btnPathBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
                                 Click="OnBrowseForSvgSuitePath" Style="{StaticResource MetroButton}"/>

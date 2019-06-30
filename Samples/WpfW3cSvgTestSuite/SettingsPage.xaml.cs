@@ -14,6 +14,8 @@ namespace WpfW3cSvgTestSuite
     /// </summary>
     public partial class SettingsPage : Page
     {
+        #region Private Fields
+
         private bool _isInitialising;
         private bool _isGeneralModified;
         private bool _isConversionModified;
@@ -23,6 +25,10 @@ namespace WpfW3cSvgTestSuite
         private OptionSettings _optionSettings;
         private WpfDrawingSettings _wpfSettings;
 
+        #endregion
+
+        #region Constructors and Destructor
+
         public SettingsPage()
         {
             InitializeComponent();
@@ -30,6 +36,10 @@ namespace WpfW3cSvgTestSuite
             this.Loaded   += OnPageLoaded;
             this.Unloaded += OnPageUnloaded;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public MainWindow MainWindow
         {
@@ -41,36 +51,9 @@ namespace WpfW3cSvgTestSuite
             }
         }
 
-        private string GetPath(string inputPath)
-        {
-            if (string.IsNullOrWhiteSpace(inputPath))
-            {
-                return inputPath;
-            }
-            if (_optionSettings.HidePathsRoot)
-            {
-                Uri fullPath = new Uri(inputPath, UriKind.Absolute);
+        #endregion
 
-                // Make relative path to the SharpVectors folder...
-                int indexOf = inputPath.IndexOf("SharpVectors", StringComparison.OrdinalIgnoreCase);
-                if (indexOf > 0)
-                {
-                    Uri relRoot = new Uri(inputPath.Substring(0, indexOf), UriKind.Absolute);
-
-                    string relPath = relRoot.MakeRelativeUri(fullPath).ToString();
-                    relPath = relPath.Replace('/', '\\');
-
-                    relPath = Uri.UnescapeDataString(relPath);
-                    if (!relPath.StartsWith("..\\", StringComparison.OrdinalIgnoreCase))
-                    {
-                        relPath = "..\\" + relPath;
-                    }
-
-                    return relPath;
-                }
-            }
-            return inputPath;
-        }
+        #region Private Methods
 
         private void OnPageUnloaded(object sender, RoutedEventArgs e)
         {
@@ -86,7 +69,6 @@ namespace WpfW3cSvgTestSuite
                     _mainWindow.OptionSettings = _optionSettings;
                 }
             }
-
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
@@ -109,8 +91,8 @@ namespace WpfW3cSvgTestSuite
 
             _isInitialising = true;
 
-            txtSvgSuitePath.Text    = this.GetPath(_optionSettings.LocalSuitePath);
-            txtSvgSuitePathWeb.Text = _optionSettings.WebSuitePath;
+            txtSvgSuitePath.Text       = _optionSettings.GetPath(_optionSettings.LocalSuitePath);
+            txtSvgSuitePathWeb.Text    = _optionSettings.WebSuitePath;
 
             txtSvgSuitePath.IsReadOnly = _optionSettings.HidePathsRoot;
 
@@ -191,7 +173,7 @@ namespace WpfW3cSvgTestSuite
                     txtSvgSuitePath.IsReadOnly = false;
                 }
 
-                txtSvgSuitePath.Text = this.GetPath(_optionSettings.LocalSuitePath);
+                txtSvgSuitePath.Text = _optionSettings.GetPath(_optionSettings.LocalSuitePath);
             }
 
             _isInitialising = false;
@@ -246,5 +228,6 @@ namespace WpfW3cSvgTestSuite
             }
         }
 
+        #endregion
     }
 }

@@ -1,0 +1,542 @@
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Drawing;
+using System.Diagnostics;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Windows.Forms;
+
+namespace GdiW3cSvgTestSuite
+{
+    [Serializable]
+    public sealed class OptionSettings : ICloneable
+    {
+        #region Private Fields
+
+        private const string ParentSymbol = "..\\";
+        private const string SharpVectors = "SharpVectors";
+
+        private const string FullTestSuite 
+            = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/FullTestSuite.zip";
+
+        [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool IsDirectoryEmpty([MarshalAs(UnmanagedType.LPStr)]string directory);
+
+        private static readonly XmlSerializerNamespaces EmptyXmlSerializerNamespace = new XmlSerializerNamespaces(
+            new XmlQualifiedName[] { new XmlQualifiedName("") });
+
+        private bool _hidePathsRoot;
+        private string _webSuitePath;
+        private string _localSuitePath;
+
+        private string _selectedValuePath;
+
+        private WindowPosition _winPosition;
+
+        #endregion
+
+        #region Constructors and Destructor
+
+        public OptionSettings()
+        {
+            string currentDir = Path.GetFullPath(@"..\..\FullTestSuite");
+            if (!Directory.Exists(currentDir))
+            {
+                Directory.CreateDirectory(currentDir);
+            }
+            _localSuitePath = currentDir;
+            _webSuitePath = FullTestSuite;
+        }
+
+        public OptionSettings(string testPath)
+        {
+            _localSuitePath = testPath;
+
+            if (string.IsNullOrWhiteSpace(testPath))
+            {
+                string currentDir = Path.GetFullPath(@"..\..\FullTestSuite");
+                _localSuitePath = currentDir;
+            }
+            _webSuitePath = FullTestSuite;
+            if (!Directory.Exists(_localSuitePath))
+            {
+                Directory.CreateDirectory(_localSuitePath);
+            }
+        }
+
+        public OptionSettings(OptionSettings source)
+        {
+            _hidePathsRoot  = source._hidePathsRoot;
+            _webSuitePath   = source._webSuitePath;
+            _localSuitePath = source._localSuitePath;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public bool HidePathsRoot
+        {
+            get {
+                return _hidePathsRoot;
+            }
+            set {
+                _hidePathsRoot = value;
+            }
+        }
+
+        public string WebSuitePath
+        {
+            get {
+                return _webSuitePath;
+            }
+            set {
+                _webSuitePath = value;
+            }
+        }
+
+        public string LocalSuitePath
+        {
+            get {
+                return _localSuitePath;
+            }
+            set {
+                _localSuitePath = value;
+            }
+        }
+
+        public string SelectedValuePath
+        {
+            get {
+                return _selectedValuePath;
+            }
+            set {
+                _selectedValuePath = value;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public string GetPath(string inputPath)
+        {
+            if (string.IsNullOrWhiteSpace(inputPath))
+            {
+                return inputPath;
+            }
+            if (_hidePathsRoot)
+            {
+                Uri fullPath = new Uri(inputPath, UriKind.Absolute);
+
+                // Make relative path to the SharpVectors folder...
+                int indexOf = inputPath.IndexOf(SharpVectors, StringComparison.OrdinalIgnoreCase);
+                if (indexOf > 0)
+                {
+                    Uri relRoot = new Uri(inputPath.Substring(0, indexOf), UriKind.Absolute);
+
+                    string relPath = relRoot.MakeRelativeUri(fullPath).ToString();
+                    relPath = relPath.Replace('/', '\\');
+
+                    relPath = Uri.UnescapeDataString(relPath);
+                    if (!relPath.StartsWith(ParentSymbol, StringComparison.OrdinalIgnoreCase))
+                    {
+                        relPath = ParentSymbol + relPath;
+                    }
+
+                    return relPath;
+                }
+            }
+            return inputPath;
+        }
+
+        public void Load(string settingsPath, Form mainForm)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(settingsPath) || File.Exists(settingsPath) == false)
+                {
+                    return;
+                }
+
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreWhitespace             = false;
+                settings.IgnoreComments               = true;
+                settings.IgnoreProcessingInstructions = true;
+
+                using (XmlReader reader = XmlReader.Create(settingsPath, settings))
+                {
+                    this.Load(reader, mainForm);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
+        }
+
+        public void Save(string settingsPath, Form mainForm)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(settingsPath))
+                {
+                    return;
+                }
+
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent      = true;
+                settings.IndentChars = "    ";
+                settings.Encoding    = Encoding.UTF8;
+
+                using (XmlWriter writer = XmlWriter.Create(settingsPath, settings))
+                {
+                    this.Save(writer, mainForm);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
+        }
+
+        public bool IsLocalSuitePathChanged(string currentSuitePath)
+        {
+            if (string.IsNullOrWhiteSpace(currentSuitePath) ||
+                string.IsNullOrWhiteSpace(_localSuitePath))
+            {
+                return true;
+            }
+            string currentPath = string.Copy(currentSuitePath);
+            if (!currentSuitePath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
+            {
+                currentPath = currentSuitePath + "\\";
+            }
+
+            string suitePath = string.Copy(_localSuitePath);
+            if (!_localSuitePath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
+            {
+                suitePath = _localSuitePath + "\\";
+            }
+
+            return !(string.Equals(currentPath, suitePath, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public static bool IsTestSuiteAvailable(string testPath)
+        {
+            if (string.IsNullOrWhiteSpace(testPath) || Directory.Exists(testPath) == false)
+            {
+                return false;
+            }
+            string svgDir = Path.Combine(testPath, "svg");
+            if (!Directory.Exists(svgDir) || IsDirectoryEmpty(svgDir) == true)
+            {
+                return false;
+            }
+            string pngDir = Path.Combine(testPath, "png");
+            if (!Directory.Exists(pngDir) || IsDirectoryEmpty(pngDir) == true)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void Load(XmlReader reader, Form mainForm)
+        {
+            var comparer = StringComparison.OrdinalIgnoreCase;
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (string.Equals(reader.Name, "option", comparer))
+                    {
+                        string optionName = reader.GetAttribute("name");
+                        string optionType = reader.GetAttribute("type");
+                        if (string.Equals(optionType, "String", comparer))
+                        {
+                            string optionValue = reader.ReadElementContentAsString();
+
+                            switch (optionName)
+                            {
+                                case "WebSuitePath":
+                                    _webSuitePath = optionValue;
+                                    break;
+                                case "LocalSuitePath":
+                                    if (optionValue.StartsWith(ParentSymbol, comparer))
+                                    {
+                                        var inputPath = string.Copy(_localSuitePath);
+                                        int indexOf = inputPath.IndexOf(SharpVectors, comparer);
+
+                                        if (indexOf > 0)
+                                        {
+                                            var basePath    = inputPath.Substring(0, indexOf);
+                                            _localSuitePath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
+                                        }
+                                        else
+                                        {
+                                            _localSuitePath = optionValue;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        _localSuitePath = optionValue;
+                                    }
+                                    break;
+                                case "SelectedValuePath":
+                                    _selectedValuePath = optionValue;
+                                    break;
+                            }
+                        }
+                        else if (string.Equals(optionType, "Boolean", comparer))
+                        {
+                            bool optionValue = reader.ReadElementContentAsBoolean();
+                            switch (optionName)
+                            {
+                                case "HidePathsRoot":
+                                    _hidePathsRoot = optionValue;
+                                    break;
+                            }
+                        }
+                    }
+                    else if (string.Equals(reader.Name, "placements", StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (reader.IsEmptyElement == false)
+                        {
+                            if (reader.ReadToFollowing("WindowPosition"))
+                            {
+                                var xs = new XmlSerializer(typeof(WindowPosition));
+                                _winPosition = xs.Deserialize(reader) as WindowPosition;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (mainForm != null && _winPosition != null)
+            {
+                try
+                {
+                    switch (_winPosition.WindowState)
+                    {
+                        case FormWindowState.Maximized:
+                            mainForm.Location      = _winPosition.MaximisedPoint;
+                            mainForm.StartPosition = FormStartPosition.Manual;
+                            break;
+                        case FormWindowState.Normal:
+                            if (_winPosition.IsIdenticalScreen())
+                            {
+                                mainForm.Location = _winPosition.Location;
+                                mainForm.Size = _winPosition.Size;
+                                mainForm.StartPosition = FormStartPosition.Manual;
+                            }
+                            break;
+                        case FormWindowState.Minimized:
+                            _winPosition.WindowState = FormWindowState.Normal;
+                            break;
+                        default:
+                            break;
+                    }
+                    mainForm.WindowState = _winPosition.WindowState;
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceError(ex.ToString());
+                }
+            }
+        }
+
+        private void Save(XmlWriter writer, Form mainForm)
+        {
+            writer.WriteStartDocument();
+            writer.WriteStartElement("options");
+
+            this.SaveOption(writer, "HidePathsRoot", _hidePathsRoot);
+            this.SaveOption(writer, "WebSuitePath", _webSuitePath);
+            this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
+            this.SaveOption(writer, "SelectedValuePath", _selectedValuePath);
+
+            try
+            {
+                _winPosition = new WindowPosition();
+                if (mainForm != null)
+                {
+                    _winPosition.Location    = mainForm.Location;
+                    _winPosition.Size        = mainForm.Size;
+                    _winPosition.WindowState = mainForm.WindowState;
+                    foreach (Screen screen in Screen.AllScreens)
+                    {
+                        _winPosition.WorkingAreas.Add(screen.WorkingArea);
+                    }
+                }
+
+                this.SaveWindowPosition(writer);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+        }
+
+        private void SaveOption(XmlWriter writer, string name, string value)
+        {
+            if (value == null)
+            {
+                value = string.Empty;
+            }
+
+            writer.WriteStartElement("option");
+            writer.WriteAttributeString("name", name);
+            writer.WriteAttributeString("type", "String");
+            writer.WriteString(value);
+            writer.WriteEndElement();
+        }
+        private void SaveOption(XmlWriter writer, string name, bool value)
+        {
+            writer.WriteStartElement("option");
+            writer.WriteAttributeString("name", name);
+            writer.WriteAttributeString("type", "Boolean");
+            writer.WriteString(value ? "true" : "false");
+            writer.WriteEndElement();
+        }
+
+        private void SaveWindowPosition(XmlWriter writer)
+        {
+            writer.WriteStartElement("placements");
+            if (_winPosition != null)
+            {
+                var xs = new XmlSerializer(typeof(WindowPosition));
+                xs.Serialize(writer, _winPosition, EmptyXmlSerializerNamespace);
+            }
+            writer.WriteEndElement();
+        }
+
+        #endregion
+
+        #region  ICloneable Members
+
+        public OptionSettings Clone()
+        {
+            OptionSettings optSettings = new OptionSettings(this);
+
+            if (_webSuitePath != null)
+            {
+                optSettings._webSuitePath = string.Copy(_webSuitePath);
+            }
+            if (_localSuitePath != null)
+            {
+                optSettings._localSuitePath = string.Copy(_localSuitePath);
+            }
+
+            return optSettings;
+        }
+
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
+
+        #endregion
+
+        #region Private WindowPosition
+
+        public sealed class WindowPosition : ICloneable
+        {
+            private Size _winSize;
+            private Point _winLocation;
+            private Point _maximizedPoint;
+            private FormWindowState _winState;
+            private List<Rectangle> _workingAreas;
+
+            public WindowPosition()
+            {
+                _workingAreas = new List<Rectangle>();
+            }
+
+            public WindowPosition(WindowPosition source)
+                : this()
+            {
+                if (source != null)
+                {
+                    _winSize        = source._winSize;
+                    _winLocation    = source._winLocation;
+                    _maximizedPoint = source._maximizedPoint;
+                    _winState       = source._winState;
+                    _workingAreas   = source._workingAreas;
+                }
+            }
+
+            public Point Location
+            {
+                get { return _winLocation; }
+                set { _winLocation = value; }
+            }
+
+            public Size Size
+            {
+                get { return _winSize; }
+                set { _winSize = value; }
+            }
+
+            public FormWindowState WindowState
+            {
+                get { return _winState; }
+                set { _winState = value; }
+            }
+
+            public Point MaximisedPoint
+            {
+                get { return _maximizedPoint; }
+                set { _maximizedPoint = value; }
+            }
+
+            public List<Rectangle> WorkingAreas
+            {
+                get { return _workingAreas; }
+                set { _workingAreas = value; }
+            }
+
+            public bool IsIdenticalScreen()
+            {
+                if (_workingAreas == null || _workingAreas.Count != Screen.AllScreens.Length)
+                {
+                    return false;
+                }
+                for (int i = 0; i < _workingAreas.Count; i++)
+                {
+                    if (_workingAreas[i] == Screen.AllScreens[i].WorkingArea)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            public WindowPosition Clone()
+            {
+                WindowPosition cloned = new WindowPosition(this);
+
+                return cloned;
+            }
+
+            object ICloneable.Clone()
+            {
+                return this.Clone();
+            }
+        }
+
+        #endregion
+    }
+}

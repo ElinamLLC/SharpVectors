@@ -37,8 +37,25 @@ namespace WpfW3cSvgTestSuite
             this.Loaded += OnPageLoaded;
         }
 
-        public string SvgFilePath { get => _svgFilePath; set => _svgFilePath = value; }
-        public SvgTestCase TestCase { get => _testCase; set => _testCase = value; }
+        public string SvgFilePath
+        {
+            get {
+                return _svgFilePath;
+            }
+            set {
+                _svgFilePath = value;
+            }
+        }
+
+        public SvgTestCase TestCase
+        {
+            get {
+                return _testCase;
+            }
+            set {
+                _testCase = value;
+            }
+        }
 
         public bool LoadDocument(string documentFilePath, SvgTestInfo testInfo, object extraInfo = null)
         {

@@ -72,7 +72,7 @@ namespace WpfW3cSvgTestSuite
 
             if (_mainWindow != null)
             {
-                this.Results = _mainWindow.TestResults;
+                _testResults = _mainWindow.TestResults;
             }
 
             this.CreateDocument();
@@ -489,7 +489,7 @@ namespace WpfW3cSvgTestSuite
         {
             if (string.IsNullOrWhiteSpace(title))
             {
-                title = "Note";
+                title = "NOTE";
             }
             if (string.IsNullOrWhiteSpace(message))
             {

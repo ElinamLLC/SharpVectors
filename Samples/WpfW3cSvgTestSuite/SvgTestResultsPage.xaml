@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Svg Test Results" Background="White">
     <DockPanel LastChildFill="True">
-        <Label x:Name="testTitleLabel" DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left">Svg Test Results</Label>
+        <Label x:Name="testTitleLabel" DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left">SVG Test Results</Label>
         <Border BorderBrush="LightGray" BorderThickness="1" Margin="10, 6, 10, 10">
             <FlowDocumentReader x:Name="flowDocViewer" Zoom="100" ViewingMode="Scroll" IsTwoPageViewEnabled="False">
                 <FlowDocument x:Name="testDetailsDoc" IsOptimalParagraphEnabled="True" 

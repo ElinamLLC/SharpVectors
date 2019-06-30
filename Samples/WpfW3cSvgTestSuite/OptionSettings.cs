@@ -13,6 +13,9 @@ namespace WpfW3cSvgTestSuite
     {
         #region Private Fields
 
+        private const string ParentSymbol = "..\\";
+        private const string SharpVectors = "SharpVectors";
+
         private const string FullTestSuite 
             = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/FullTestSuite.zip";
 
@@ -134,6 +137,37 @@ namespace WpfW3cSvgTestSuite
 
         #region Public Methods
 
+        public string GetPath(string inputPath)
+        {
+            if (string.IsNullOrWhiteSpace(inputPath))
+            {
+                return inputPath;
+            }
+            if (_hidePathsRoot)
+            {
+                Uri fullPath = new Uri(inputPath, UriKind.Absolute);
+
+                // Make relative path to the SharpVectors folder...
+                int indexOf = inputPath.IndexOf(SharpVectors, StringComparison.OrdinalIgnoreCase);
+                if (indexOf > 0)
+                {
+                    Uri relRoot = new Uri(inputPath.Substring(0, indexOf), UriKind.Absolute);
+
+                    string relPath = relRoot.MakeRelativeUri(fullPath).ToString();
+                    relPath = relPath.Replace('/', '\\');
+
+                    relPath = Uri.UnescapeDataString(relPath);
+                    if (!relPath.StartsWith(ParentSymbol, StringComparison.OrdinalIgnoreCase))
+                    {
+                        relPath = ParentSymbol + relPath;
+                    }
+
+                    return relPath;
+                }
+            }
+            return inputPath;
+        }
+
         public void Load(string settingsPath)
         {
             if (string.IsNullOrWhiteSpace(settingsPath) ||
@@ -219,14 +253,15 @@ namespace WpfW3cSvgTestSuite
 
         private void Load(XmlReader reader)
         {
+            var comparer = StringComparison.OrdinalIgnoreCase;
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element &&
-                    string.Equals(reader.Name, "option", StringComparison.OrdinalIgnoreCase))
+                    string.Equals(reader.Name, "option", comparer))
                 {
                     string optionName = reader.GetAttribute("name");
                     string optionType = reader.GetAttribute("type");
-                    if (string.Equals(optionType, "String", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(optionType, "String", comparer))
                     {
                         string optionValue = reader.ReadElementContentAsString();
 
@@ -236,14 +271,32 @@ namespace WpfW3cSvgTestSuite
                                 _webSuitePath = optionValue;
                                 break;
                             case "LocalSuitePath":
-                                _localSuitePath = optionValue;
+                                if (optionValue.StartsWith(ParentSymbol, comparer))
+                                {
+                                    var inputPath = string.Copy(_localSuitePath);
+                                    int indexOf = inputPath.IndexOf(SharpVectors, comparer);
+
+                                    if (indexOf > 0)
+                                    {
+                                        var basePath = inputPath.Substring(0, indexOf);
+                                        _localSuitePath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
+                                    }
+                                    else
+                                    {
+                                        _localSuitePath = optionValue;
+                                    }
+                                }
+                                else
+                                {
+                                    _localSuitePath = optionValue;
+                                }
                                 break;
                             case "SelectedValuePath":
                                 _selectedValuePath = optionValue;
                                 break;
                         }
                     }
-                    else if (string.Equals(optionType, "Boolean", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(optionType, "Boolean", comparer))
                     {
                         bool optionValue = reader.ReadElementContentAsBoolean();
                         switch (optionName)
@@ -282,7 +335,7 @@ namespace WpfW3cSvgTestSuite
 
             this.SaveOption(writer, "HidePathsRoot", _hidePathsRoot);
             this.SaveOption(writer, "WebSuitePath", _webSuitePath);
-            this.SaveOption(writer, "LocalSuitePath", _localSuitePath);
+            this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
             this.SaveOption(writer, "SelectedValuePath", _selectedValuePath);
 
             if (_wpfSettings != null)
