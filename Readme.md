@@ -50,9 +50,15 @@ This is an application for browsing directory (recursively) of SVG files.
 
 ### WPF W3C Test Suite
 This is an application for viewing the W3C Test Suite compliant results. It has two panes: top and bottom. The top pane is the generated WPF output, the bottom pane is the W3C expected output image.
-By the test results, this is the most complete SVG reader for WPF.
+By the test results, this is the most complete SVG reader for WPF!
 
 ![](Images/Home_WpfW3cSvgTestSuite.png)
+
+
+### GDI+ W3C Test Suite
+This is an application for viewing the W3C Test Suite compliant results. It has two panes: top and bottom. The top pane is the generated GDI+ output, the bottom pane is the W3C expected output image.
+
+![](Images/GdiW3cSvgTestSuite.png)
 
 ## Tutorial Samples
 A number of tutorial samples are available in the [TutorialSamples](https://github.com/ElinamLLC/SharpVectors/tree/master/TutorialSamples) folder.
