@@ -258,7 +258,7 @@ namespace SharpVectors.Runtime
             this.InvalidateMeasure();
             this.InvalidateVisual();
 
-            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
+            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
         }
 
         #region RenderDiagrams Methods
