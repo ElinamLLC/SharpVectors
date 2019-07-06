@@ -81,6 +81,15 @@ namespace SharpVectors.Converters
             }
             set {
                 _svgPath = value;
+
+                if (string.IsNullOrWhiteSpace(_appName))
+                {
+                    if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
+                        LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    {
+                        this.GetAppName();
+                    }
+                }
             }
         }
 
@@ -104,13 +113,21 @@ namespace SharpVectors.Converters
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(_appName))
+                {
+                    if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
+                        LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    {
+                        this.GetAppName();
+                    }
+                }
+
                 Uri svgSource = this.ResolveUri(serviceProvider);
 
                 if (svgSource == null)
                 {
                     return null;
                 }
-
                 return this.GetImage(svgSource);
             }
             catch
@@ -163,13 +180,15 @@ namespace SharpVectors.Converters
                 }
                 svgPath = svgPath.Replace('/', '\\');
 
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                string localFile = Path.Combine(Path.GetDirectoryName(
-                    assembly.Location), svgPath);
-
-                if (File.Exists(localFile))
+                var assembly = this.GetExecutingAssembly();
+                if (assembly != null)
                 {
-                    return new Uri(localFile);
+                    string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+
+                    if (File.Exists(localFile))
+                    {
+                        return new Uri(localFile);
+                    }
                 }
 
                 // Try getting it as resource file...
@@ -178,7 +197,13 @@ namespace SharpVectors.Converters
                 {
                     return new Uri(uriContext.BaseUri, svgSource);
                 }
-                string asmName = assembly.GetName().Name;
+                string asmName = _appName;
+                // It should not be the SharpVectors.Converters.Wpf.dll, which contains this extension...
+                if (assembly != null && !string.Equals("SharpVectors.Converters.Wpf",
+                    assembly.GetName().Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    asmName = assembly.GetName().Name;
+                }
 
                 svgPath = _svgPath;
                 if (_svgPath.StartsWith("/", StringComparison.OrdinalIgnoreCase))

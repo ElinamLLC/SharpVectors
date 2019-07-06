@@ -38,7 +38,7 @@ namespace SharpVectors.Converters
         #region Private Fields
 
         private Uri _baseUri;
-        private UriTypeConverter _uriConverter;
+        private readonly UriTypeConverter _uriConverter;
 
         #endregion
 
@@ -93,6 +93,15 @@ namespace SharpVectors.Converters
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(_appName))
+                {
+                    if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
+                        LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    {
+                        this.GetAppName();
+                    }
+                }
+
                 Uri inputUri = null;
                 if (parameter != null)
                 {
@@ -172,22 +181,40 @@ namespace SharpVectors.Converters
                 }
                 svgPath = svgPath.Replace('/', '\\');
 
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                string localFile = Path.Combine(Path.GetDirectoryName(
-                    assembly.Location), svgPath);
-
-                if (File.Exists(localFile))
+                var assembly = this.GetExecutingAssembly();
+                if (assembly != null)
                 {
-                    return new Uri(localFile);
+                    string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+
+                    if (File.Exists(localFile))
+                    {
+                        return new Uri(localFile);
+                    }
                 }
 
                 // Try getting it as resource file...
                 var inputUri = _uriConverter.ConvertFrom(inputParameter) as Uri;
                 if (inputUri != null)
                 {
-                    return inputUri.IsAbsoluteUri ? inputUri : new Uri(_baseUri, inputUri);
+                    if (inputUri.IsAbsoluteUri)
+                    {
+                        return inputUri;
+                    }
+                    if (_baseUri != null)
+                    {
+                        var validUri = new Uri(_baseUri, inputUri);
+
+                        return validUri;
+                    }
                 }
-                string asmName = assembly.GetName().Name;
+
+                string asmName = _appName;
+                // It should not be the SharpVectors.Converters.Wpf.dll, which contains this extension...
+                if (assembly != null && !string.Equals("SharpVectors.Converters.Wpf",
+                    assembly.GetName().Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    asmName = assembly.GetName().Name;
+                }
 
                 svgPath = inputParameter;
                 if (inputParameter.StartsWith("/", StringComparison.OrdinalIgnoreCase))
@@ -199,9 +226,13 @@ namespace SharpVectors.Converters
                 bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
                 if (designTime && !string.IsNullOrWhiteSpace(_appName))
                 {
-                    string uriDesign = string.Format("/{0};component/{1}", _appName, svgPath);
+                    //string uriDesign = string.Format("/{0};component/{1}", _appName, svgPath);
+                    //return new Uri(uriDesign, UriKind.Relative);
 
-                    return new Uri(uriDesign, UriKind.Relative);
+                    // The relative path is not working with the Converter...
+                    string uriDesign = string.Format("pack://application:,,,/{0};component/{1}",
+                        _appName, svgPath);
+                    return new Uri(uriDesign);
                 }
 
                 string uriString = string.Format("pack://application:,,,/{0};component/{1}",

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO.Compression;
 using System.ComponentModel;
@@ -42,6 +45,8 @@ namespace SharpVectors.Converters
             _textAsGeometry = false;
             _includeRuntime = true;
             _optimizePath   = true;
+
+            this.GetAppName();
         }
 
         #endregion
@@ -155,7 +160,14 @@ namespace SharpVectors.Converters
                 return _appName;
             }
             set {
-                _appName = value;
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    this.GetAppName();
+                }
+                else
+                {
+                    _appName = value;
+                }
             }
         }
 
@@ -316,6 +328,88 @@ namespace SharpVectors.Converters
                 return new DrawingImage(drawGroup);
             }
             return null;
+        }
+
+        protected void GetAppName()
+        {
+            Assembly asm = this.GetEntryAssembly();
+
+            if (asm != null)
+            {
+                _appName = asm.GetName().Name;
+            }
+        }
+
+        protected Assembly GetEntryAssembly()
+        {
+            string XDesProc = "XDesProc"; // WPF designer process
+            var comparer    = StringComparison.OrdinalIgnoreCase;
+
+            Assembly asm = null;
+            try
+            {
+                // Should work at runtime...
+                asm = Assembly.GetEntryAssembly(); //...but mostly loading the design-time process: XDesProc.exe
+                if (asm != null)
+                {
+                    var appName = asm.GetName().Name;
+                    if (string.Equals(appName, XDesProc, comparer))
+                    {
+                        asm = null;
+                    }
+                }
+                // Design time
+                if (asm == null)
+                {
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                          select assembly
+                          ).FirstOrDefault();
+
+                    if (asm == null)
+                    {
+                        asm = Application.ResourceAssembly;
+                        var appName = asm.GetName().Name;
+                        if (string.Equals(appName, XDesProc, comparer))
+                        {
+                            asm = null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (asm == null)
+                {
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                          select assembly
+                          ).FirstOrDefault();
+                }
+
+                Trace.TraceError(ex.ToString());
+            }
+            return asm;
+        }
+
+        protected Assembly GetExecutingAssembly()
+        {
+            Assembly asm = null;
+            try
+            {
+                asm = Assembly.GetExecutingAssembly();
+            }
+            catch
+            {
+                asm = Assembly.GetEntryAssembly();
+            }
+            return asm;
         }
 
         #endregion
