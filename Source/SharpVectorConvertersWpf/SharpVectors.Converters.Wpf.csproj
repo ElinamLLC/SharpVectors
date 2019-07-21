@@ -60,6 +60,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbeddedImageSerializerVisitor.cs" />
     <Compile Include="ImageEncoderType.cs" />
     <Compile Include="ShapeSvgCanvas.cs" />
     <Compile Include="Shapes\ShapeRenderingVisitor.cs" />

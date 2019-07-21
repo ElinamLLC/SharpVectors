@@ -11,8 +11,8 @@ namespace SharpVectors.Renderers.Gdi
     {
         #region Private Fields
 
-        protected SvgElement element;
-        protected SvgRectF screenRegion;
+        protected SvgElement _svgElement;
+        protected SvgRectF _screenRegion;
 
         #endregion
 
@@ -20,8 +20,8 @@ namespace SharpVectors.Renderers.Gdi
 
         protected GdiRenderingBase(SvgElement element)
         {
-            this.element      = element;
-            this.screenRegion = SvgRectF.Empty;
+            _svgElement   = element;
+            _screenRegion = SvgRectF.Empty;
         }
 
         ~GdiRenderingBase()
@@ -35,13 +35,13 @@ namespace SharpVectors.Renderers.Gdi
 
         public SvgElement Element
         {
-            get { return element; }
+            get { return _svgElement; }
         }
 
         public SvgRectF ScreenRegion
         {
-            get { return screenRegion; }
-            set { screenRegion = value; }
+            get { return _screenRegion; }
+            set { _screenRegion = value; }
         }
 
         public virtual bool IsRecursive
@@ -61,11 +61,11 @@ namespace SharpVectors.Renderers.Gdi
             // We make this assumption so that the first pass is still fast
             // That way we don't have to calculate the screen regions
             // Before a full rendering
-            if (screenRegion == SvgRectF.Empty)
+            if (_screenRegion == SvgRectF.Empty)
                 return true;
             if (renderer.InvalidRect == SvgRectF.Empty)
                 return true;
-            if (renderer.InvalidRect.Intersects(screenRegion))
+            if (renderer.InvalidRect.Intersects(_screenRegion))
                 // TODO: Eventually add a full path check here?
                 return true;
 

@@ -534,7 +534,7 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgPaintType paintType = this.PaintType;
 
-            SvgPaint fill;
+            WpfSvgPaint fill;
             if (paintType == SvgPaintType.None)
             {
                 return null;
@@ -606,20 +606,18 @@ namespace SharpVectors.Renderers.Wpf
 
                     return brush;
                 }
+
+                if (paintType == SvgPaintType.UriNone || paintType == SvgPaintType.Uri)
+                {
+                    return null;
+                }
+                if (paintType == SvgPaintType.UriCurrentColor)
+                {
+                    fill = new WpfSvgPaint(_context, _element, "color");
+                }
                 else
                 {
-                    if (paintType == SvgPaintType.UriNone || paintType == SvgPaintType.Uri)
-                    {
-                        return null;
-                    }
-                    if (paintType == SvgPaintType.UriCurrentColor)
-                    {
-                        fill = new WpfSvgPaint(_context, _element, "color");
-                    }
-                    else
-                    {
-                        fill = this;
-                    }
+                    fill = this;
                 }
             }
 
@@ -635,8 +633,6 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             SolidColorBrush solidBrush = new SolidColorBrush(solidColor.Value);
-            //int opacity = GetOpacity(propPrefix);
-            //solidBrush.Color = Color.FromArgb(opacity, brush.Color);
             if (setOpacity)
             {
                 solidBrush.Opacity = GetOpacity(propPrefix);

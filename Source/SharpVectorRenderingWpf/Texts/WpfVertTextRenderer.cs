@@ -56,7 +56,7 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            Point startPoint      = ctp;
+            Point startPoint = ctp;
             IList<WpfTextRun> textRunList = WpfTextRun.BreakWords(text, 
                 vertOrientation, horzOrientation);
 
@@ -115,7 +115,7 @@ namespace SharpVectors.Renderers.Texts
                                     {
                                         GlyphRun glyphRun = glyphDrawing.GlyphRun;
 
-                                        IList<UInt16> glyphIndices = glyphRun.GlyphIndices;
+                                        IList<ushort> glyphIndices = glyphRun.GlyphIndices;
                                         IDictionary<ushort, double> allGlyphWeights = glyphRun.GlyphTypeface.AdvanceWidths;
                                         double lastAdvanceWeight =
                                             allGlyphWeights[glyphIndices[glyphIndices.Count - 1]] * glyphRun.FontRenderingEmSize;
@@ -292,7 +292,7 @@ namespace SharpVectors.Renderers.Texts
                                     {
                                         GlyphRun glyphRun = glyphDrawing.GlyphRun;
 
-                                        IList<UInt16> glyphIndices = glyphRun.GlyphIndices;
+                                        IList<ushort> glyphIndices = glyphRun.GlyphIndices;
                                         IDictionary<ushort, double> allGlyphWeights = glyphRun.GlyphTypeface.AdvanceWidths;
                                         double lastAdvanceWeight =
                                             allGlyphWeights[glyphIndices[glyphIndices.Count - 1]] * glyphRun.FontRenderingEmSize;
@@ -316,7 +316,7 @@ namespace SharpVectors.Renderers.Texts
                                 {
                                     GlyphRun glyphRun = glyphDrawing.GlyphRun;
 
-                                    IList<UInt16> glyphIndices = glyphRun.GlyphIndices;
+                                    IList<ushort> glyphIndices = glyphRun.GlyphIndices;
                                     IDictionary<ushort, double> allGlyphWeights = glyphRun.GlyphTypeface.AdvanceWidths;
                                     double lastAdvanceWeight =
                                         allGlyphWeights[glyphIndices[glyphIndices.Count - 1]] * glyphRun.FontRenderingEmSize;
@@ -384,20 +384,44 @@ namespace SharpVectors.Renderers.Texts
 
         #region DrawSingleLineText Method
 
+        private Size MeasureString(string text, double fontSize, Typeface typeFace)
+        {
+            var verticalText = this.GetVerticalText(text);
+
+            FormattedText formattedText = new FormattedText(verticalText, System.Globalization.CultureInfo.CurrentCulture,
+                 FlowDirection.LeftToRight, typeFace, fontSize, Brushes.Black);
+
+            //formattedText.LineHeight = this.CharSpacing;
+
+            return new Size(formattedText.Width, formattedText.Height);
+        }
+
+        private string GetVerticalText(string text)
+        {
+            string result = string.Empty;
+
+            for (int i = 0; i < text.Length - 1; i++)
+            {
+                result += new string(text[i], 1) + "\n";
+            }
+
+            return result;
+        }
+
         private void DrawSingleLineText(SvgTextContentElement element, ref Point ctp,
             WpfTextRun textRun, double rotate, WpfTextPlacement placement)
         {
             if (textRun == null || textRun.IsEmpty)
                 return;
 
-            string text           = textRun.Text;
-            double emSize         = GetComputedFontSize(element);
-            FontFamily fontFamily = GetTextFontFamily(element, emSize);
+            string text        = textRun.Text;
+            double emSize      = GetComputedFontSize(element);
+            var fontFamilyInfo = GetTextFontFamilyInfo(element);
 
-            FontStyle fontStyle   = GetTextFontStyle(element);
-            FontWeight fontWeight = GetTextFontWeight(element);
-
-            FontStretch fontStretch = GetTextFontStretch(element);
+            FontFamily fontFamily   = fontFamilyInfo.Family;
+            FontStyle fontStyle     = fontFamilyInfo.Style;
+            FontWeight fontWeight   = fontFamilyInfo.Weight;
+            FontStretch fontStretch = fontFamilyInfo.Stretch;
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
@@ -405,10 +429,10 @@ namespace SharpVectors.Renderers.Texts
             WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
-                WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
-                    fontStyle, fontStretch);
-                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily,_context);
+                //WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
+                //    fontStyle, fontStretch);
+                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
+                    fontFamilyInfo, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -428,7 +452,7 @@ namespace SharpVectors.Renderers.Texts
             {
                 return;
             }
-            else if (textBrush == null)
+            if (textBrush == null)
             {
                 // If here, then the pen is not null, and so the fill cannot be null.
                 // We set this to transparent for stroke only text path...
@@ -438,13 +462,14 @@ namespace SharpVectors.Renderers.Texts
             TextDecorationCollection textDecors = GetTextDecoration(element);
             TextAlignment alignment = stringFormat.Alignment;
 
+            var typeface = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
+
             string letterSpacing = element.GetAttribute("letter-spacing");
             if (string.IsNullOrWhiteSpace(letterSpacing))
-            {   
+            {
                 FormattedText formattedText = new FormattedText(text, 
                     textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
-                    stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
-                    emSize, textBrush);
+                    stringFormat.Direction, typeface, emSize, textBrush);
 
                 if (this.IsMeasuring)
                 {
@@ -452,7 +477,8 @@ namespace SharpVectors.Renderers.Texts
                     return;
                 }
 
-                formattedText.TextAlignment = stringFormat.Alignment;
+//                formattedText.TextAlignment = stringFormat.Alignment;
+                formattedText.TextAlignment = TextAlignment.Left;
                 formattedText.Trimming      = stringFormat.Trimming;
 
                 if (textDecors != null && textDecors.Count != 0)
@@ -476,13 +502,39 @@ namespace SharpVectors.Renderers.Texts
 
                 Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
-                RotateTransform rotateAt = new RotateTransform(90, ctp.X, ctp.Y);
-                _textContext.PushTransform(rotateAt);
+                var textSize = this.MeasureString(text, emSize, typeface);
 
-                _textContext.DrawText(formattedText, textPoint); 
-
-                //float bboxWidth = (float)formattedText.Width;
+                //float bboxWidth1 = (float)formattedText.Width;
                 double bboxWidth = formattedText.WidthIncludingTrailingWhitespace;
+
+                TranslateTransform translateAt = null;
+
+                RotateTransform rotateAt = new RotateTransform(90, ctp.X, ctp.Y);
+
+                if (alignment == TextAlignment.Center)
+                {
+//                    translateAt = new TranslateTransform(0, -(textSize.Height - textSize.Width/2) / 2);
+                    translateAt = new TranslateTransform(0, -(textSize.Height - yCorrection/2) / 2);
+                }
+                else if (alignment == TextAlignment.Right)
+                {
+//                    translateAt = new TranslateTransform(0, -(textSize.Height + textSize.Width / 2));
+                    translateAt = new TranslateTransform(0, -(textSize.Height + yCorrection / 2));
+                }
+                if (translateAt != null)
+                {
+                    TransformGroup group = new TransformGroup();
+                    group.Children.Add(rotateAt);
+                    group.Children.Add(translateAt);
+                    _textContext.PushTransform(group);
+                }
+                else
+                {
+                    _textContext.PushTransform(rotateAt);
+                }
+
+                _textContext.DrawText(formattedText, textPoint);
+
                 if (alignment == TextAlignment.Center)
                     bboxWidth /= 2f;
                 else if (alignment == TextAlignment.Right)
@@ -491,6 +543,10 @@ namespace SharpVectors.Renderers.Texts
                 //ctp.X += bboxWidth + emSize / 4;
                 ctp.X += bboxWidth;
 
+                //if (translateAt != null)
+                //{
+                //    _textContext.Pop();
+                //}
                 if (rotateAt != null)
                 {
                     _textContext.Pop();
@@ -506,9 +562,7 @@ namespace SharpVectors.Renderers.Texts
                 {
                     FormattedText formattedText = new FormattedText(new string(text[i], 1),
                         textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
-                        stringFormat.Direction, 
-                        new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
-                        emSize, textBrush);
+                        stringFormat.Direction, typeface, emSize, textBrush);
 
                     if (this.IsMeasuring)
                     {
@@ -566,12 +620,12 @@ namespace SharpVectors.Renderers.Texts
 
             string text           = textRun.Text; 
             double emSize         = GetComputedFontSize(element);
-            FontFamily fontFamily = GetTextFontFamily(element, emSize);
+            var fontFamilyInfo = GetTextFontFamilyInfo(element);
 
-            FontStyle fontStyle   = GetTextFontStyle(element);
-            FontWeight fontWeight = GetTextFontWeight(element);
-
-            FontStretch fontStretch = GetTextFontStretch(element);
+            FontFamily fontFamily   = fontFamilyInfo.Family;
+            FontStyle fontStyle     = fontFamilyInfo.Style;
+            FontWeight fontWeight   = fontFamilyInfo.Weight;
+            FontStretch fontStretch = fontFamilyInfo.Stretch;
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
@@ -579,10 +633,10 @@ namespace SharpVectors.Renderers.Texts
             WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
-                WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
-                    fontStyle, fontStretch);
-                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily, _context);
+                //WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
+                //    fontStyle, fontStretch);
+                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
+                    fontFamilyInfo, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -733,7 +787,7 @@ namespace SharpVectors.Renderers.Texts
 
             double totalHeight = 0;
 
-            IList<UInt16> glyphIndices = glyphRun.GlyphIndices;
+            IList<ushort> glyphIndices = glyphRun.GlyphIndices;
             int advancedCount = glyphIndices.Count;
             //{
             //    double textHeight = glyphRun.ComputeInkBoundingBox().Height + glyphRun.ComputeAlignmentBox().Height;

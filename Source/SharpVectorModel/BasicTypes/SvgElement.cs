@@ -148,21 +148,25 @@ namespace SharpVectors.Dom.Svg
         public string XmlSpace
         {
             get {
-                string s = GetAttribute("xml:space");
-                if (string.IsNullOrWhiteSpace(s))
+                string space = GetAttribute("xml:space");
+                if (string.IsNullOrWhiteSpace(space))
+                {
+                    space = GetAttribute("xml:space");
+                }
+                if (string.IsNullOrWhiteSpace(space))
                 {
                     SvgElement par = this.ParentNode as SvgElement;
                     if (par != null)
                     {
-                        s = par.XmlSpace;
+                        space = par.XmlSpace;
                     }
                     else
                     {
-                        s = "default";
+                        space = "default";
                     }
                 }
 
-                return s;
+                return space;
             }
             set {
                 SetAttribute("xml:space", value);
@@ -202,8 +206,8 @@ namespace SharpVectors.Dom.Svg
         /// this property is used by the renderer to dispatch events. SvgElements that are &lt;use&gt;d exist in a 
         /// conceptual "instance tree" and the target of events for those elements is the conceptual instance 
         /// node represented by the SvgElementInstance.
-        /// <see cref="http://www.w3.org/TR/SVG/struct.html#UseElement"/>
-        /// <see cref="http://www.w3.org/TR/SVG/struct.html#InterfaceSVGElementInstance"/>
+        /// <see cref="https://www.w3.org/TR/SVG/struct.html#UseElement"/>
+        /// <see cref="https://www.w3.org/TR/SVG/struct.html#InterfaceSVGElementInstance"/>
         /// </summary>
         public ISvgElementInstance ElementInstance
         {

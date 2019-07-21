@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Xml;
+using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -9,6 +11,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
+        private string _fontFamily;
         private SvgTests _svgTests;
         private SvgExternalResourcesRequired _externalResourcesRequired;
 
@@ -24,6 +27,113 @@ namespace SharpVectors.Dom.Svg
 
             doc.RegisterFont(this);
         }
+
+        #endregion
+
+        #region Public Properties
+
+        public string FontFamily
+        {
+            get {
+                if (string.IsNullOrWhiteSpace(_fontFamily))
+                {
+                    var fontFace = this.FontFace;
+                    if (fontFace != null)
+                    {
+                        _fontFamily = fontFace.FontFamily;
+                    }
+                }
+                return _fontFamily;
+            }
+        }
+
+        public SvgFontFaceElement FontFace
+        {
+            get {
+                SvgFontFaceElement fontFace = null;
+                if (this.HasChildNodes)
+                {
+                    foreach (XmlNode child in this.ChildNodes)
+                    {
+                        if (child.NodeType == XmlNodeType.Element && 
+                            string.Equals(child.LocalName, "font-face", StringComparison.OrdinalIgnoreCase))
+                        {
+                            fontFace = (SvgFontFaceElement)child;
+                            break;
+                        }
+                    }
+                }
+                if (fontFace != null && string.IsNullOrWhiteSpace(_fontFamily))
+                {
+                    _fontFamily = fontFace.FontFamily;
+                }
+                return fontFace;
+            }
+        } 
+
+        public SvgMissingGlyphElement MissingGlyph
+        {
+            get {
+                if (this.HasChildNodes)
+                {
+                    foreach (XmlNode child in this.ChildNodes)
+                    {
+                        if (child.NodeType == XmlNodeType.Element && 
+                            string.Equals(child.LocalName, "missing-glyph", StringComparison.OrdinalIgnoreCase))
+                        {
+                            return (SvgMissingGlyphElement)child;
+                        }
+                    }
+                }
+                return null;
+            }
+        } 
+
+        public IList<SvgGlyphElement> Glyphs
+        {
+            get {
+
+                List<SvgGlyphElement> glyphList = new List<SvgGlyphElement>();
+
+                if (this.HasChildNodes)
+                {
+                    foreach (XmlNode child in this.ChildNodes)
+                    {
+                        if (child.NodeType == XmlNodeType.Element && 
+                            string.Equals(child.LocalName, "glyph", StringComparison.OrdinalIgnoreCase))
+                        {
+                            glyphList.Add((SvgGlyphElement)child);
+                        }
+                    }
+                }
+                return glyphList;
+            }
+        } 
+
+        public IList<SvgKernElement> Kerning
+        {
+            get {
+
+                List<SvgKernElement> kernList = new List<SvgKernElement>();
+
+                if (this.HasChildNodes)
+                {
+                    foreach (XmlNode child in this.ChildNodes)
+                    {
+                        if (child.NodeType == XmlNodeType.Element)
+                        {
+                            //TODO: Look into the possibility of having both kerning on the same font
+                            if (string.Equals(child.LocalName, "hkern", StringComparison.OrdinalIgnoreCase)
+                                || string.Equals(child.LocalName, "vkern", StringComparison.OrdinalIgnoreCase))
+                            {
+                                kernList.Add((SvgKernElement)child);
+                            }
+                        }
+                    }
+                }
+                return kernList;
+            }
+        } 
 
         #endregion
 

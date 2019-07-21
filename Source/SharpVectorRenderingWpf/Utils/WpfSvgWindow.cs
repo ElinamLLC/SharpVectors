@@ -2,11 +2,12 @@
 using System.IO;
 using System.Xml;
 using System.Reflection;
-using System.Collections.Generic;
 
 using System.Windows;
 
+using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
+using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Renderers.Utils
 {
@@ -73,7 +74,7 @@ namespace SharpVectors.Renderers.Utils
             set {
                 Uri uri = new Uri(new Uri(Assembly.GetExecutingAssembly().Location), value);
 
-                this.LoadDocument(uri);
+                this.LoadDocument(uri, null);
             }
         }
 
@@ -84,7 +85,7 @@ namespace SharpVectors.Renderers.Utils
             }
         }
 
-        public void LoadDocument(Uri documentUri)
+        public void LoadDocument(Uri documentUri, WpfDrawingSettings drawingSettings)
         {
             if (documentUri == null || !documentUri.IsAbsoluteUri)
             {
@@ -99,9 +100,11 @@ namespace SharpVectors.Renderers.Utils
             document.Load(documentUri.AbsoluteUri);
 
             this.Document = document;
+
+            this.SetupStyleSheets(drawingSettings);
         }
 
-        public void LoadDocument(string documentSource)
+        public void LoadDocument(string documentSource, WpfDrawingSettings drawingSettings)
         {
             if (string.IsNullOrWhiteSpace(documentSource))
             {
@@ -110,10 +113,10 @@ namespace SharpVectors.Renderers.Utils
 
             Uri uri = new Uri(new Uri(Assembly.GetExecutingAssembly().Location), documentSource);
 
-            this.LoadDocument(uri);
+            this.LoadDocument(uri, drawingSettings);
         }
 
-        public void LoadDocument(Stream documentStream)
+        public void LoadDocument(Stream documentStream, WpfDrawingSettings drawingSettings)
         {
             if (documentStream == null)
             {
@@ -128,9 +131,11 @@ namespace SharpVectors.Renderers.Utils
             document.Load(documentStream);
 
             this.Document = document;
+
+            this.SetupStyleSheets(drawingSettings);
         }
 
-        public void LoadDocument(TextReader textReader)
+        public void LoadDocument(TextReader textReader, WpfDrawingSettings drawingSettings)
         {
             if (textReader == null)
             {
@@ -145,9 +150,11 @@ namespace SharpVectors.Renderers.Utils
             document.Load(textReader);
 
             this.Document = document;
+
+            this.SetupStyleSheets(drawingSettings);
         }
 
-        public void LoadDocument(XmlReader xmlReader)
+        public void LoadDocument(XmlReader xmlReader, WpfDrawingSettings drawingSettings)
         {
             if (xmlReader == null)
             {
@@ -162,6 +169,8 @@ namespace SharpVectors.Renderers.Utils
             document.Load(xmlReader);
 
             this.Document = document;
+
+            this.SetupStyleSheets(drawingSettings);
         }
 
         public override void Alert(string message)
@@ -177,6 +186,32 @@ namespace SharpVectors.Renderers.Utils
         public override SvgWindow CreateOwnedWindow(long innerWidth, long innerHeight)
         {
             return new WpfSvgWindow(this, innerWidth, innerHeight);
+        }
+
+        public virtual void SetupStyleSheets(WpfDrawingSettings drawingSettings)
+        {
+            if (drawingSettings == null)
+            {
+                return;
+            }
+
+            CssXmlDocument cssDocument = this.Document as CssXmlDocument;
+            if (cssDocument == null)
+            {
+                return;
+            }
+
+            string userCssFilePath = drawingSettings.UserCssFilePath;
+            if (!string.IsNullOrWhiteSpace(userCssFilePath) && File.Exists(userCssFilePath))
+            {
+                cssDocument.SetUserStyleSheet(userCssFilePath);
+            }
+
+            string userAgentCssFilePath = drawingSettings.UserAgentCssFilePath;
+            if (!string.IsNullOrWhiteSpace(userAgentCssFilePath) && File.Exists(userAgentCssFilePath))
+            {
+                cssDocument.SetUserAgentStyleSheet(userAgentCssFilePath);
+            }
         }
 
         #endregion

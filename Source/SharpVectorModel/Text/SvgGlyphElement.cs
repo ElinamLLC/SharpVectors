@@ -3,7 +3,7 @@
     /// <summary>
     /// The SvgGlyphElement interface corresponds to the 'glyph' element. 
     /// </summary>
-    public sealed class SvgGlyphElement : SvgStyleableElement, ISvgGlyphElement
+    public class SvgGlyphElement : SvgStyleableElement, ISvgGlyphElement
     {
         #region Private Fields
 

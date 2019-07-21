@@ -1,14 +1,14 @@
 ﻿using System;
-using System.IO;
-using System.IO.Compression;
 using System.Xml;
 using System.Text;
+using System.IO;
+using System.IO.Compression;
 
 using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Renderers.Utils; 
+using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Converters
 {
@@ -35,12 +35,6 @@ namespace SharpVectors.Converters
         /// This is the last drawing generated.
         /// </summary>
         private DrawingGroup _drawing;
-
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private WpfSvgWindow       _wpfWindow;
-        private WpfDrawingRenderer _wpfRenderer;
 
         #endregion
 
@@ -108,8 +102,7 @@ namespace SharpVectors.Converters
         /// </value>
         public bool WriterErrorOccurred
         {
-            get
-            {
+            get {
                 return _writerErrorOccurred;
             }
         }
@@ -128,12 +121,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool FallbackOnWriterError
         {
-            get
-            {
+            get {
                 return _fallbackOnWriterError;
             }
-            set
-            {
+            set {
                 _fallbackOnWriterError = value;
             }
         }
@@ -146,8 +137,7 @@ namespace SharpVectors.Converters
         /// </value>
         public DrawingGroup Drawing
         {
-            get
-            {
+            get {
                 return _drawing;
             }
         }
@@ -161,8 +151,7 @@ namespace SharpVectors.Converters
         /// </value>
         public string XamlFile
         {
-            get
-            {
+            get {
                 return _xamlFile;
             }
         }
@@ -176,8 +165,7 @@ namespace SharpVectors.Converters
         /// </value>
         public string ZamlFile
         {
-            get
-            {
+            get {
                 return _zamlFile;
             }
         }
@@ -241,18 +229,16 @@ namespace SharpVectors.Converters
         {
             if (svgFileName == null)
             {
-                throw new ArgumentNullException("svgFileName",
+                throw new ArgumentNullException(nameof(svgFileName),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (svgFileName.Length == 0)
             {
-                throw new ArgumentException(
-                    "The SVG source file cannot be empty.", "svgFileName");
+                throw new ArgumentException("The SVG source file cannot be empty.", nameof(svgFileName));
             }
             if (!File.Exists(svgFileName))
             {
-                throw new ArgumentException(
-                    "The SVG source file must exists.", "svgFileName");
+                throw new ArgumentException("The SVG source file must exists.", nameof(svgFileName));
             }
 
             _xamlFile = null;
@@ -302,18 +288,17 @@ namespace SharpVectors.Converters
         {
             if (svgStream == null)
             {
-                throw new ArgumentNullException("svgStream",
+                throw new ArgumentNullException(nameof(svgStream),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (xamlFileName == null)
             {
-                throw new ArgumentNullException("xamlFileName",
+                throw new ArgumentNullException(nameof(xamlFileName),
                     "The XAML destination file path cannot be null (or Nothing).");
             }
             if (xamlFileName.Length == 0)
             {
-                throw new ArgumentException(
-                    "The XAML destination file path cannot be empty.", "xamlFileName");
+                throw new ArgumentException("The XAML destination file path cannot be empty.", nameof(xamlFileName));
             }
 
             _xamlFile = null;
@@ -363,18 +348,17 @@ namespace SharpVectors.Converters
         {
             if (svgTextReader == null)
             {
-                throw new ArgumentNullException("svgTextReader",
+                throw new ArgumentNullException(nameof(svgTextReader),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (xamlFileName == null)
             {
-                throw new ArgumentNullException("xamlFileName",
+                throw new ArgumentNullException(nameof(xamlFileName),
                     "The XAML destination file path cannot be null (or Nothing).");
             }
             if (xamlFileName.Length == 0)
             {
-                throw new ArgumentException(
-                    "The XAML destination file path cannot be empty.", "xamlFileName");
+                throw new ArgumentException("The XAML destination file path cannot be empty.", nameof(xamlFileName));
             }
 
             _xamlFile = null;
@@ -424,18 +408,17 @@ namespace SharpVectors.Converters
         {
             if (svgXmlReader == null)
             {
-                throw new ArgumentNullException("svgXmlReader",
+                throw new ArgumentNullException(nameof(svgXmlReader),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (xamlFileName == null)
             {
-                throw new ArgumentNullException("xamlFileName",
+                throw new ArgumentNullException(nameof(xamlFileName),
                     "The XAML destination file path cannot be null (or Nothing).");
             }
             if (xamlFileName.Length == 0)
             {
-                throw new ArgumentException(
-                    "The XAML destination file path cannot be empty.", "xamlFileName");
+                throw new ArgumentException("The XAML destination file path cannot be empty.", nameof(xamlFileName));
             }
 
             _xamlFile = null;
@@ -466,11 +449,9 @@ namespace SharpVectors.Converters
 
         private bool ProcessFile(string fileName, string xamlFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(fileName);
+            _wpfWindow.LoadDocument(fileName, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -484,16 +465,16 @@ namespace SharpVectors.Converters
 
             SaveFile(_drawing, fileName, xamlFileName);
 
+            this.EndProcessing();
+
             return true;
         }
 
         private bool ProcessFile(Stream svgStream, string xamlFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(svgStream);
+            _wpfWindow.LoadDocument(svgStream, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -506,17 +487,17 @@ namespace SharpVectors.Converters
             }
 
             SaveFile(_drawing, xamlFileName, xamlFileName);
+
+            this.EndProcessing();
 
             return true;
         }
 
         private bool ProcessFile(TextReader svgTextReader, string xamlFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(svgTextReader);
+            _wpfWindow.LoadDocument(svgTextReader, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -529,17 +510,17 @@ namespace SharpVectors.Converters
             }
 
             SaveFile(_drawing, xamlFileName, xamlFileName);
+
+            this.EndProcessing();
 
             return true;
         }
 
         private bool ProcessFile(XmlReader svgXmlReader, string xamlFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(svgXmlReader);
+            _wpfWindow.LoadDocument(svgXmlReader, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -552,6 +533,8 @@ namespace SharpVectors.Converters
             }
 
             SaveFile(_drawing, xamlFileName, xamlFileName);
+
+            this.EndProcessing();
 
             return true;
         }
@@ -568,21 +551,19 @@ namespace SharpVectors.Converters
             {
                 string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
-                string workingDir  = Path.GetDirectoryName(fileName);
-                xamlFileName       = Path.Combine(workingDir, 
-                    fileNameWithoutExt + ".xaml");
+                string workingDir = Path.GetDirectoryName(fileName);
+                xamlFileName = Path.Combine(workingDir, fileNameWithoutExt + XamlExt);
             }
             else
             {
                 string fileExt = Path.GetExtension(xamlFileName);
                 if (string.IsNullOrWhiteSpace(fileExt))
                 {
-                    xamlFileName += ".xaml";
+                    xamlFileName += XamlExt;
                 }
-                else if (!string.Equals(fileExt, ".xaml", 
-                    StringComparison.OrdinalIgnoreCase))
+                else if (!string.Equals(fileExt, XamlExt, StringComparison.OrdinalIgnoreCase))
                 {
-                    xamlFileName = Path.ChangeExtension(xamlFileName, ".xaml");
+                    xamlFileName = Path.ChangeExtension(xamlFileName, XamlExt);
                 }
             }
 
@@ -598,13 +579,12 @@ namespace SharpVectors.Converters
                 writerSettings.Indent = true;
                 writerSettings.OmitXmlDeclaration = true;
                 writerSettings.Encoding = Encoding.UTF8;
+
                 using (FileStream xamlFile = File.Create(xamlFileName))
                 {
-                    using (XmlWriter writer = XmlWriter.Create(
-                        xamlFile, writerSettings))
+                    using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
                     {
-                        System.Windows.Markup.XamlWriter.Save(
-                            drawing, writer);
+                        System.Windows.Markup.XamlWriter.Save(drawing, writer);
                     }
                 }
             }
@@ -612,8 +592,7 @@ namespace SharpVectors.Converters
             {
                 try
                 {
-                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
-                        this.DrawingSettings);
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(this.DrawingSettings);
 
                     using (FileStream xamlFile = File.Create(xamlFileName))
                     {
@@ -628,20 +607,19 @@ namespace SharpVectors.Converters
                     {
                         if (File.Exists(xamlFileName))
                         {
-                            File.Move(xamlFileName, xamlFileName + ".bak");
+                            File.Move(xamlFileName, xamlFileName + BackupExt);
                         }
 
                         XmlWriterSettings writerSettings = new XmlWriterSettings();
                         writerSettings.Indent = true;
                         writerSettings.OmitXmlDeclaration = true;
                         writerSettings.Encoding = Encoding.UTF8;
+
                         using (FileStream xamlFile = File.Create(xamlFileName))
                         {
-                            using (XmlWriter writer = XmlWriter.Create(
-                                xamlFile, writerSettings))
+                            using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
                             {
-                                System.Windows.Markup.XamlWriter.Save(
-                                    drawing, writer);
+                                System.Windows.Markup.XamlWriter.Save(drawing, writer);
                             }
                         }
                     }
@@ -654,7 +632,7 @@ namespace SharpVectors.Converters
 
             if (this.SaveZaml)
             {
-                string zamlFileName = Path.ChangeExtension(xamlFileName, ".zaml");
+                string zamlFileName = Path.ChangeExtension(xamlFileName, CompressedXamlExt);
 
                 if (File.Exists(zamlFileName))
                 {
@@ -662,7 +640,7 @@ namespace SharpVectors.Converters
                     File.Delete(zamlFileName);
                 }
 
-                FileStream zamlSourceFile = new FileStream(xamlFileName, FileMode.Open, 
+                FileStream zamlSourceFile = new FileStream(xamlFileName, FileMode.Open,
                     FileAccess.Read, FileShare.Read);
                 byte[] buffer = new byte[zamlSourceFile.Length];
                 // Read the file to ensure it is readable.

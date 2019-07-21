@@ -23,17 +23,26 @@ namespace SharpVectors.Renderers.Utils
             double dGreen = color.Green.GetFloatValue(CssPrimitiveType.Number);
             double dBlue  = color.Blue.GetFloatValue(CssPrimitiveType.Number);
 
-            if (Double.IsNaN(dRed) || Double.IsInfinity(dRed))
+            if (double.IsNaN(dRed) || double.IsInfinity(dRed))
             {
                 return null;
             }
-            if (Double.IsNaN(dGreen) || Double.IsInfinity(dGreen))
+            if (double.IsNaN(dGreen) || double.IsInfinity(dGreen))
             {
                 return null;
             }
-            if (Double.IsNaN(dBlue) || Double.IsInfinity(dBlue))
+            if (double.IsNaN(dBlue) || double.IsInfinity(dBlue))
             {
                 return null;
+            }
+            if (color.HasAlpha)
+            {
+                double dAlpha = color.Alpha.GetFloatValue(CssPrimitiveType.Number);
+                if (!double.IsNaN(dAlpha) && !double.IsInfinity(dAlpha))
+                {
+                    return Color.FromArgb(Convert.ToByte(dAlpha), Convert.ToByte(dRed), 
+                        Convert.ToByte(dGreen), Convert.ToByte(dBlue));
+                }
             }
 
             return Color.FromRgb(Convert.ToByte(dRed), Convert.ToByte(dGreen), Convert.ToByte(dBlue));

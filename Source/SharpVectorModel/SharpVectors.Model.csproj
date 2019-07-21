@@ -433,6 +433,7 @@
     <Compile Include="Text\SvgGlyphElement.cs" />
     <Compile Include="Text\SvgGlyphRefElement.cs" />
     <Compile Include="Text\SvgHKernElement.cs" />
+    <Compile Include="Text\SvgKernElement.cs" />
     <Compile Include="Text\SvgMissingGlyphElement.cs" />
     <Compile Include="Text\SvgTextContentElement.cs">
       <SubType>Code</SubType>

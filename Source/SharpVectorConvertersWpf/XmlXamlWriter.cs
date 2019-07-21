@@ -7,6 +7,8 @@ using System.Collections;
 using System.Globalization;
 using System.Collections.Generic;
 
+using StringConvert = System.Convert;
+
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Markup.Primitives;
@@ -81,18 +83,18 @@ namespace SharpVectors.Converters
         /// </param>
         public XmlXamlWriter(WpfDrawingSettings settings)
         {
-            _culture           = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+            _culture = (CultureInfo)CultureInfo.InvariantCulture.Clone();
             _culture.NumberFormat.NumberDecimalDigits = 4;
 
-            _nullType          = typeof(NullExtension);
-            _namespaceCache    = new NamespaceCache(_culture);
-            _dicNamespaceMap   = new Dictionary<string, NamespaceMap>(StringComparer.OrdinalIgnoreCase);
+            _nullType = typeof(NullExtension);
+            _namespaceCache = new NamespaceCache(_culture);
+            _dicNamespaceMap = new Dictionary<string, NamespaceMap>(StringComparer.OrdinalIgnoreCase);
             _contentProperties = new Dictionary<Type, string>();
 
             _windowsPath = "%WINDIR%";
-            _windowsDir  = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
+            _windowsDir = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
 
-            _windowsDir  = _windowsDir.Replace(@"\", "/");
+            _windowsDir = _windowsDir.Replace(@"\", "/");
             _wpfSettings = settings;
         }
 
@@ -111,12 +113,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeNullExtension
         {
-            get
-            {
+            get {
                 return _nullExtension;
             }
-            set
-            {
+            set {
                 _nullExtension = value;
             }
         }
@@ -400,8 +400,7 @@ namespace SharpVectors.Converters
                     {
                         //writer.WriteAttributeString("Figures", 
                         //    markupObj.Instance.ToString());
-                        writer.WriteAttributeString("Figures", 
-                            System.Convert.ToString(markupObj.Instance, _culture));
+                        writer.WriteAttributeString("Figures", StringConvert.ToString(markupObj.Instance, _culture));
                     }
                     else
                     {
@@ -414,8 +413,7 @@ namespace SharpVectors.Converters
                             writer.WriteStartElement("PathGeometry.Figures", ns);
                         }
                         //writer.WriteString(markupObj.Instance.ToString());
-                        writer.WriteString(System.Convert.ToString(
-                            markupObj.Instance, _culture));
+                        writer.WriteString(StringConvert.ToString(markupObj.Instance, _culture));
                         writer.WriteEndElement();
                     }
                     return;
@@ -488,6 +486,13 @@ namespace SharpVectors.Converters
                     if (markupProperty.IsValueAsString)
                     {
                         contentString = markupProperty.Value as string;
+                    }
+                    else if (markupProperty.Value == null)
+                    {
+                        if (_nullExtension)
+                        {
+                            writer.WriteAttributeString(markupProperty.Name, "{x:Null}");
+                        }
                     }
                     else if (!markupProperty.IsComposite)
                     {
@@ -723,7 +728,7 @@ namespace SharpVectors.Converters
 
                 if (contentProperty != null)
                 {
-                    if (!(contentProperty.Value is String))
+                    if (!(contentProperty.Value is string))
                     {
                         ResolveChildXmlNamespaces(contentProperty);
                     }
@@ -768,12 +773,12 @@ namespace SharpVectors.Converters
 
         private sealed class NamespaceCache
         {
-            public const string XamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml";
-            public const string XmlNamespace = "http://www.w3.org/XML/1998/namespace";
+            public const string XamlNamespace    = "http://schemas.microsoft.com/winfx/2006/xaml";
+            public const string XmlNamespace     = "http://www.w3.org/XML/1998/namespace";
             public const string DefaultNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
-            public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
+            public const string XmlnsNamespace   = "http://www.w3.org/2000/xmlns/";
 
-            public const string ClrNamespace = "clr-namespace:";
+            public const string ClrNamespace     = "clr-namespace:";
 
             private bool _isFrameworkRoot;
             private Dictionary<string, string> _defaultPrefixes;
@@ -784,18 +789,16 @@ namespace SharpVectors.Converters
             {
                 _culture = culture;
 
-                _defaultPrefixes = new Dictionary<string, string>();
+                _defaultPrefixes  = new Dictionary<string, string>();
                 _xmlnsDefinitions = new Dictionary<Assembly, Dictionary<string, string>>();
             }
 
             public bool IsFrameworkRoot
             {
-                get
-                {
+                get {
                     return _isFrameworkRoot;
                 }
-                set
-                {
+                set {
                     _isFrameworkRoot = value;
                 }
             }
@@ -840,15 +843,15 @@ namespace SharpVectors.Converters
                 string typeNamespace = string.Empty;
                 if (type.Namespace == null)
                 {
-                    return String.Format(_culture, "clr-namespace:;assembly={0}",
+                    return string.Format(_culture, "clr-namespace:;assembly={0}",
                         new object[] { type.Assembly.GetName().Name });
                 }
                 if (!GetMappingsFor(type.Assembly).TryGetValue(type.Namespace, out typeNamespace))
                 {
                     if (!string.Equals(type.Namespace, "System.Windows.Markup.Primitives"))
                     {
-                        typeNamespace = String.Format(_culture,
-                            "clr-namespace:{0};assembly={1}", new object[] { type.Namespace, 
+                        typeNamespace = string.Format(_culture,
+                            "clr-namespace:{0};assembly={1}", new object[] { type.Namespace,
                                 type.Assembly.GetName().Name });
                     }
                 }
@@ -859,12 +862,7 @@ namespace SharpVectors.Converters
             public static string GetAssemblyNameFromType(Type type)
             {
                 string[] names = type.Assembly.FullName.Split(',');
-                if (names.Length > 0)
-                {
-                    return names[0];
-                }
-
-                return string.Empty;
+                return names.Length > 0 ? names[0] : string.Empty;
             }
 
             private Dictionary<string, string> GetMappingsFor(Assembly assembly)
@@ -937,24 +935,20 @@ namespace SharpVectors.Converters
 
             public string Prefix
             {
-                get
-                {
+                get {
                     return _prefix;
                 }
-                set
-                {
+                set {
                     _prefix = value;
                 }
             }
 
             public string XmlNamespace
             {
-                get
-                {
+                get {
                     return _xmlNamespace;
                 }
-                set
-                {
+                set {
                     _xmlNamespace = value;
                 }
             }

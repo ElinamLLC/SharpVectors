@@ -11,17 +11,27 @@ namespace SharpVectors.Renderers.Wpf
         private readonly string _propertyName;
         private readonly SvgStyleableElement _element;
 
-        public WpfSvgColor(SvgStyleableElement elm, string propertyName) 
+        public WpfSvgColor(SvgStyleableElement elm, string propertyName)
             : base(elm.GetComputedStyle("").GetPropertyValue(propertyName))
         {
             _element      = elm;
             _propertyName = propertyName;
         }
 
+        public string Name
+        {
+            get {
+                if (_rgbColor != null)
+                {
+                    return _rgbColor.Name;
+                }
+                return null;
+            }
+        }
+
         public Color Color
         {
-            get
-            {
+            get {
                 SvgColor colorToUse;
                 if (ColorType == SvgColorType.CurrentColor)
                 {
@@ -42,20 +52,25 @@ namespace SharpVectors.Renderers.Wpf
                 int green = Convert.ToInt32(rgbColor.Green.GetFloatValue(CssPrimitiveType.Number));
                 int blue  = Convert.ToInt32(rgbColor.Blue.GetFloatValue(CssPrimitiveType.Number));
 
+                if (rgbColor.HasAlpha)
+                {
+                    int alpha = Convert.ToInt32(rgbColor.Alpha.GetFloatValue(CssPrimitiveType.Number));
+                    return Color.FromArgb((byte)alpha, (byte)red, (byte)green, (byte)blue);
+                }
+
                 return Color.FromArgb((byte)this.Alpha, (byte)red, (byte)green, (byte)blue);
             }
         }
 
         public int Alpha
-        {   
-            get
-            {
+        {
+            get {
                 string propName;
-                if (_propertyName.Equals("stop-color"))
+                if (_propertyName.Equals("stop-color", StringComparison.OrdinalIgnoreCase))
                 {
                     propName = "stop-opacity";
                 }
-                else if (_propertyName.Equals("flood-color"))
+                else if (_propertyName.Equals("flood-color", StringComparison.OrdinalIgnoreCase))
                 {
                     propName = "flood-opacity";
                 }
@@ -65,11 +80,12 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 double alpha = 255;
-                string opacity;
 
-                opacity = _element.GetPropertyValue(propName);
-                if (opacity.Length > 0)
-                    alpha *= SvgNumber.ParseNumber(opacity);
+                string alphaText = _element.GetPropertyValue(propName);
+                if (!string.IsNullOrWhiteSpace(alphaText))
+                {
+                    alpha *= SvgNumber.ParseNumber(alphaText);
+                }
 
                 alpha = Math.Min(alpha, 255);
                 alpha = Math.Max(alpha, 0);
@@ -80,14 +96,13 @@ namespace SharpVectors.Renderers.Wpf
 
         public double Opacity
         {
-            get
-            {
+            get {
                 string propName;
-                if (_propertyName.Equals("stop-color"))
+                if (_propertyName.Equals("stop-color", StringComparison.OrdinalIgnoreCase))
                 {
                     propName = "stop-opacity";
                 }
-                else if (_propertyName.Equals("flood-color"))
+                else if (_propertyName.Equals("flood-color", StringComparison.OrdinalIgnoreCase))
                 {
                     propName = "flood-opacity";
                 }
@@ -97,9 +112,8 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 double alpha = 1.0f;
-                string opacity;
 
-                opacity = _element.GetPropertyValue(propName);
+                string opacity = _element.GetPropertyValue(propName);
                 if (!string.IsNullOrWhiteSpace(opacity))
                 {
                     alpha = SvgNumber.ParseNumber(opacity);

@@ -114,7 +114,10 @@ namespace SharpVectors.Dom.Stylesheets
         public string SheetContent
         {
             get {
-                if (this.OwnerNode is XmlElement)
+                // yavor87 committed on Sep 19, 2016: Creative-Safety-Supply/sharpvectors
+                //TODO: Fixed stackoverlfow exception in cases when @import css stylesheet statement is used
+                //if (this.OwnerNode is XmlElement)
+                if (this.OwnerNode is XmlElement && string.IsNullOrEmpty(_href))
                 {
                     return this.OwnerNode.InnerText;
                 }

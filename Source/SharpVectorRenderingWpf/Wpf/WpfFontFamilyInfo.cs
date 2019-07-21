@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
+
+using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -8,25 +11,90 @@ namespace SharpVectors.Renderers.Wpf
         public readonly static WpfFontFamilyInfo Empty = new WpfFontFamilyInfo(null,
             FontWeights.Normal, FontStyles.Normal, FontStretches.Normal);
 
-        private FontFamily  _family;
-        private FontWeight  _weight;
-        private FontStyle   _style;
+        private string _fontName;
+        private SvgFontElement _fontElement;
+
+        private FontFamily _family;
+        private FontWeight _weight;
+        private FontStyle _style;
         private FontStretch _stretch;
 
-        public WpfFontFamilyInfo(FontFamily family, FontWeight weight, 
+        private WpfFontFamilyType _familyType;
+
+        public WpfFontFamilyInfo(FontFamily family, FontWeight weight,
             FontStyle style, FontStretch stretch)
         {
-            _family  = family;
-            _weight  = weight;
-            _style   = style;
-            _stretch = stretch;
+            _familyType = WpfFontFamilyType.System;
+            _family     = family;
+            _weight     = weight;
+            _style      = style;
+            _stretch    = stretch;
+        }
+
+        public WpfFontFamilyInfo(WpfFontFamilyType familyType, FontFamily family, FontWeight weight,
+            FontStyle style, FontStretch stretch)
+        {
+            _familyType = familyType;
+            _family     = family;
+            _weight     = weight;
+            _style      = style;
+            _stretch    = stretch;
+        }
+
+        public WpfFontFamilyInfo(WpfFontFamilyType familyType, string fontName, 
+            FontFamily family, FontWeight weight, FontStyle style, FontStretch stretch)
+        {
+            _fontName   = fontName;
+            _familyType = familyType;
+            _family     = family;
+            _weight     = weight;
+            _style      = style;
+            _stretch    = stretch;
+        }
+
+        public WpfFontFamilyInfo(string fontName, SvgFontElement fontElement, 
+            FontWeight weight, FontStyle style, FontStretch stretch)
+        {
+            _fontName    = fontName;
+            _fontElement = fontElement;
+            _familyType  = WpfFontFamilyType.Svg;
+            _family      = null;
+            _weight      = weight;
+            _style       = style;
+            _stretch     = stretch;
         }
 
         public bool IsEmpty
         {
-            get
-            {
-                return (_family == null);
+            get { return (_family == null); }
+        }
+
+        public WpfFontFamilyType WpfFontFamilyType
+        {
+            get {
+                return _familyType;
+            }
+        }
+
+        public string Name
+        {
+            get {
+                if (!string.IsNullOrWhiteSpace(_fontName))
+                {
+                    return _fontName;
+                }
+                if (_family != null)
+                {
+                    return _family.Source;
+                }
+                return "";
+            }
+        }
+
+        public SvgFontElement FontElement
+        {
+            get {
+                return _fontElement;
             }
         }
 
@@ -49,5 +117,6 @@ namespace SharpVectors.Renderers.Wpf
         {
             get { return _stretch; }
         }
+
     }
 }

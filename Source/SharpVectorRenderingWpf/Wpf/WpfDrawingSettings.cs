@@ -9,7 +9,6 @@ namespace SharpVectors.Renderers.Wpf
     /// <summary>
     /// This provides the options for the drawing/rendering engine of the WPF.
     /// </summary>
-    [Serializable]
     public sealed class WpfDrawingSettings : DependencyObject, ICloneable
     {
         #region Private Fields
@@ -24,16 +23,21 @@ namespace SharpVectors.Renderers.Wpf
         private bool _ensureViewboxSize;
         private bool _ignoreRootViewbox;
 
+        private string _userCssFilePath;
+        private string _userAgentCssFilePath;
+
         // Formating properties
         private CultureInfo _culture;
         private CultureInfo _neutralCulture;
 
         // Text rendering fonts properties
-        private string            _defaultFontName;
+        private string _defaultFontName;
         private static FontFamily _defaultFontFamily;
         private static FontFamily _genericSerif;
         private static FontFamily _genericSansSerif;
         private static FontFamily _genericMonospace;
+
+        private WpfVisitors _wpfVisitors;
 
         #endregion
 
@@ -61,6 +65,7 @@ namespace SharpVectors.Renderers.Wpf
             _ensureViewboxSize     = false;
             _ensureViewboxPosition = true;
             _ignoreRootViewbox     = false;
+            _wpfVisitors           = new WpfVisitors();
         }
 
         /// <summary>
@@ -91,6 +96,10 @@ namespace SharpVectors.Renderers.Wpf
             _ensureViewboxSize     = settings._ensureViewboxSize;
             _ensureViewboxPosition = settings._ensureViewboxPosition;
             _ignoreRootViewbox     = settings._ignoreRootViewbox;
+            _wpfVisitors           = settings._wpfVisitors;
+
+            _userCssFilePath       = settings._userCssFilePath;
+            _userAgentCssFilePath  = settings._userAgentCssFilePath;
         }
 
         #endregion
@@ -120,12 +129,32 @@ namespace SharpVectors.Renderers.Wpf
         public bool HasPixelSize
         {
             get {
-                return (_pixelWidth >= 0 && _pixelHeight >= 0);
+                return (_pixelWidth > 0 && _pixelHeight > 0);
+            }
+        }
+
+        public string UserCssFilePath
+        {
+            get {
+                return _userCssFilePath;
+            }
+            set {
+                _userCssFilePath = value;
+            }
+        }
+
+        public string UserAgentCssFilePath
+        {
+            get {
+                return _userAgentCssFilePath;
+            }
+            set {
+                _userAgentCssFilePath = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value to indicate turning of viewbox at the root of the drawing.
+        /// Gets or sets a value to indicate turning off viewbox at the root of the drawing.
         /// </summary>
         /// <value>
         /// For image outputs, this will force the original size to be saved.
@@ -212,12 +241,10 @@ namespace SharpVectors.Renderers.Wpf
         /// </value>
         public bool OptimizePath
         {
-            get
-            {
+            get {
                 return _optimizePath;
             }
-            set
-            {
+            set {
                 _optimizePath = value;
             }
         }
@@ -233,12 +260,10 @@ namespace SharpVectors.Renderers.Wpf
         /// </value>
         public bool TextAsGeometry
         {
-            get
-            {
+            get {
                 return _textAsGeometry;
             }
-            set
-            {
+            set {
                 _textAsGeometry = value;
             }
         }
@@ -259,12 +284,10 @@ namespace SharpVectors.Renderers.Wpf
         /// </remarks>
         public bool IncludeRuntime
         {
-            get
-            {
+            get {
                 return _includeRuntime;
             }
-            set
-            {
+            set {
                 _includeRuntime = value;
             }
         }
@@ -288,12 +311,10 @@ namespace SharpVectors.Renderers.Wpf
         /// </remarks>
         public CultureInfo CultureInfo
         {
-            get
-            {
+            get {
                 return _culture;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _culture = value;
@@ -316,8 +337,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </remarks>
         public CultureInfo NeutralCultureInfo
         {
-            get
-            {
+            get {
                 return _neutralCulture;
             }
         }
@@ -333,12 +353,10 @@ namespace SharpVectors.Renderers.Wpf
         /// </value>
         public string DefaultFontName
         {
-            get
-            {
+            get {
                 return _defaultFontName;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     value = value.Trim();
@@ -346,9 +364,20 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    _defaultFontName   = value;
+                    _defaultFontName = value;
                     _defaultFontFamily = new FontFamily(value);
                 }
+            }
+        }
+
+        public WpfVisitors Visitors
+        {
+            get {
+                if (_wpfVisitors == null)
+                {
+                    _wpfVisitors = new WpfVisitors();
+                }
+                return _wpfVisitors;
             }
         }
 
@@ -362,8 +391,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </value>
         public static FontFamily DefaultFontFamily
         {
-            get
-            {
+            get {
                 if (_defaultFontFamily == null)
                 {
                     _defaultFontFamily = new FontFamily("Arial Unicode MS");
@@ -371,8 +399,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 return _defaultFontFamily;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _defaultFontFamily = value;
@@ -389,8 +416,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </value>
         public static FontFamily GenericSerif
         {
-            get
-            {
+            get {
                 if (_genericSerif == null)
                 {
                     _genericSerif = new FontFamily("Times New Roman");
@@ -398,8 +424,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 return _genericSerif;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _genericSerif = value;
@@ -420,8 +445,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </remarks>
         public static FontFamily GenericSansSerif
         {
-            get
-            {
+            get {
                 if (_genericSansSerif == null)
                 {
                     // Possibilities: Tahoma, Arial, Verdana, Trebuchet, MS Sans Serif, Helvetica
@@ -430,8 +454,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 return _genericSansSerif;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _genericSansSerif = value;
@@ -448,8 +471,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </value>
         public static FontFamily GenericMonospace
         {
-            get
-            {
+            get {
                 if (_genericMonospace == null)
                 {
                     // Possibilities: Courier New, MS Gothic
@@ -458,8 +480,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 return _genericMonospace;
             }
-            set
-            {
+            set {
                 if (value != null)
                 {
                     _genericMonospace = value;
@@ -488,9 +509,30 @@ namespace SharpVectors.Renderers.Wpf
         /// </remarks>
         public WpfDrawingSettings Clone()
         {
-            WpfDrawingSettings settings = new WpfDrawingSettings(this);
+            WpfDrawingSettings clonedSettings = new WpfDrawingSettings(this);
 
-            return settings;
+            if (!string.IsNullOrWhiteSpace(_defaultFontName))
+            {
+                clonedSettings._defaultFontName = string.Copy(_defaultFontName);
+            }
+            if (!string.IsNullOrWhiteSpace(_userCssFilePath))
+            {
+                clonedSettings._userCssFilePath = string.Copy(_userCssFilePath);
+            }
+            if (!string.IsNullOrWhiteSpace(_userAgentCssFilePath))
+            {
+                clonedSettings._userAgentCssFilePath = string.Copy(_userAgentCssFilePath);
+            }
+            if (_culture != null)
+            {
+                clonedSettings._culture = (CultureInfo)_culture.Clone();
+            }
+            if (_neutralCulture != null)
+            {
+                clonedSettings._neutralCulture = (CultureInfo)_neutralCulture.Clone();
+            }
+
+            return clonedSettings;
         }
 
         /// <summary>

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using SharpVectors.Dom.Svg;
+using SharpVectors.Runtime;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -15,6 +16,7 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _idAssigned;
         private WpfDrawingRenderer _embeddedRenderer;
 
         #endregion
@@ -33,6 +35,13 @@ namespace SharpVectors.Renderers.Wpf
         public override void BeforeRender(WpfDrawingRenderer renderer)
         {
             base.BeforeRender(renderer);
+
+            string imageId = _svgElement.Id;
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                _svgElement.Id = "img" + Guid.NewGuid().ToString("N");
+                _idAssigned = true;
+            }
         }
 
         public override void Render(WpfDrawingRenderer renderer)
@@ -313,6 +322,7 @@ namespace SharpVectors.Renderers.Wpf
                     drawGroup.Children.Add(drawing);
                 }
 
+                string elementId = this.GetElementName();
                 if (ownedGroup)
                 {
                     string sVisibility = imageElement.GetPropertyValue("visibility");
@@ -320,6 +330,32 @@ namespace SharpVectors.Renderers.Wpf
                     if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
                     {
                         drawGroup.Opacity = 0;
+                    }
+
+                    if (!_idAssigned && !string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
+                    {
+                        SvgObject.SetName(drawGroup, elementId);
+
+                        context.RegisterId(elementId);
+
+                        if (context.IncludeRuntime)
+                        {
+                            SvgObject.SetId(drawGroup, elementId);
+                        }
+                    }
+                }
+                else if (!_idAssigned)
+                {
+                    if (!_idAssigned && !string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
+                    {
+                        SvgObject.SetName(imageSource, elementId);
+
+                        context.RegisterId(elementId);
+
+                        if (context.IncludeRuntime)
+                        {
+                            SvgObject.SetId(imageSource, elementId);
+                        }
                     }
                 }
             }
@@ -389,6 +425,8 @@ namespace SharpVectors.Renderers.Wpf
                 bitmapImage.EndInit();
             }
 
+//            bitmapImage.Freeze();
+
             return bitmapImage;
         }
 
@@ -422,6 +460,8 @@ namespace SharpVectors.Renderers.Wpf
                         imageSource.UriSource     = imageUri;
                         imageSource.EndInit();
 
+//                        imageSource.Freeze();
+
                         return imageSource;
                     }
 
@@ -438,6 +478,8 @@ namespace SharpVectors.Renderers.Wpf
                         | BitmapCreateOptions.PreservePixelFormat;
                     imageSource.StreamSource = stream;
                     imageSource.EndInit();
+
+//                    imageSource.Freeze();
 
                     return imageSource;
                 }
@@ -470,6 +512,8 @@ namespace SharpVectors.Renderers.Wpf
                 imageSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
                 imageSource.StreamSource  = new MemoryStream(bResult);
                 imageSource.EndInit();
+
+//                imageSource.Freeze();
 
                 return imageSource;
             }

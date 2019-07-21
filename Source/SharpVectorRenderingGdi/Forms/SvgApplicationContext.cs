@@ -5,7 +5,7 @@ using System.Security.Permissions;
 
 namespace SharpVectors.Renderers.Forms
 {
-    public class SvgApplicationContext
+    public static class SvgApplicationContext
     {
         public static DirectoryInfo ExecutableDirectory
         {

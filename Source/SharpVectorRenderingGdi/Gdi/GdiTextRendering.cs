@@ -41,7 +41,7 @@ namespace SharpVectors.Renderers.Gdi
         public override void BeforeRender(GdiGraphicsRenderer renderer)
         {
             if (_uniqueColor.IsEmpty)
-                _uniqueColor = renderer.GetNextColor(element);
+                _uniqueColor = renderer.GetNextColor(_svgElement);
 
             GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
 
@@ -54,17 +54,17 @@ namespace SharpVectors.Renderers.Gdi
         {
             _graphics = renderer.GraphicsWrapper;
 
-            SvgRenderingHint hint = element.RenderingHint;
+            SvgRenderingHint hint = _svgElement.RenderingHint;
             if (hint == SvgRenderingHint.Clipping)
             {
                 return;
             }
-            if (element.ParentNode is SvgClipPathElement)
+            if (_svgElement.ParentNode is SvgClipPathElement)
             {
                 return;
             }
 
-            SvgTextElement textElement = element as SvgTextElement;
+            SvgTextElement textElement = _svgElement as SvgTextElement;
             if (textElement == null)
             {
                 return;
@@ -112,7 +112,7 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             XmlNodeType nodeType = XmlNodeType.None;
-            foreach (XmlNode child in element.ChildNodes)
+            foreach (XmlNode child in _svgElement.ChildNodes)
             {
                 SvgStyleableElement stylable = child as SvgStyleableElement;
                 if (stylable != null)
@@ -157,13 +157,13 @@ namespace SharpVectors.Renderers.Gdi
 
         private Brush GetBrush(GraphicsPath gp)
         {
-            GdiSvgPaint paint = new GdiSvgPaint(element as SvgStyleableElement, "fill");
+            GdiSvgPaint paint = new GdiSvgPaint(_svgElement as SvgStyleableElement, "fill");
             return paint.GetBrush(gp);
         }
 
         private Pen GetPen(GraphicsPath gp)
         {
-            GdiSvgPaint paint = new GdiSvgPaint(element as SvgStyleableElement, "stroke");
+            GdiSvgPaint paint = new GdiSvgPaint(_svgElement as SvgStyleableElement, "stroke");
             return paint.GetPen(gp);
         }
 
@@ -462,7 +462,7 @@ namespace SharpVectors.Renderers.Gdi
         {
             string str = element.GetPropertyValue("font-size");
             float fontSize = 12;
-            if (str.EndsWith("%"))
+            if (str.EndsWith("%", StringComparison.Ordinal))
             {
                 // percentage of inherited value
             }

@@ -15,20 +15,20 @@ namespace SharpVectors.Renderers.Forms
     {
         #region Private Fields
 
-        private static readonly string UserAgentCssFileName = "useragent.css";
-        private static readonly string UserCssFileName = "user.css";
+        private const string UserCssFileName      = "user.css";
+        private const string UserAgentCssFileName = "useragent.css";
 
         private GdiGraphicsRenderer renderer;
 
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.Container components = null;
-        private SvgPictureBoxWindow window;
-        private bool loaded = false;
+        private System.ComponentModel.Container components;
+        private SvgPictureBoxWindow _window;
+        private bool _isLoaded;
 
         //private Thread renderThread;
-        private Graphics surface;
+        private Graphics _surface;
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace SharpVectors.Renderers.Forms
 
             renderer = new GdiGraphicsRenderer();
             renderer.OnRender = new RenderEvent(this.OnRender);
-            window = new SvgPictureBoxWindow(this, renderer);
+            _window = new SvgPictureBoxWindow(this, renderer);
         }
 
         /// <summary> 
@@ -75,25 +75,25 @@ namespace SharpVectors.Renderers.Forms
 
         public void OnRender(SvgRectF updatedRect)
         {
-            if (surface != null)
+            if (_surface != null)
             {
                 if (updatedRect == SvgRectF.Empty)
-                    Draw(surface);
+                    Draw(_surface);
                 else
-                    Draw(surface, GdiConverter.ToRectangle(updatedRect));
+                    Draw(_surface, GdiConverter.ToRectangle(updatedRect));
             }
             else
             {
-                surface = CreateGraphics();
+                _surface = CreateGraphics();
 
-                UpdateGraphics(surface);
+                UpdateGraphics(_surface);
 
                 if (updatedRect == SvgRectF.Empty)
-                    Draw(surface);
+                    Draw(_surface);
                 else
-                    Draw(surface, GdiConverter.ToRectangle(updatedRect));
-                surface.Dispose();
-                surface = null;
+                    Draw(_surface, GdiConverter.ToRectangle(updatedRect));
+                _surface.Dispose();
+                _surface = null;
             }
 
             // Collect the rendering regions for later updates
@@ -111,8 +111,8 @@ namespace SharpVectors.Renderers.Forms
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            
-            if (lastX == e.X && lastY == e.Y) 
+
+            if (lastX == e.X && lastY == e.Y)
                 return;
             lastX = e.X;
             lastY = e.Y;
@@ -144,12 +144,10 @@ namespace SharpVectors.Renderers.Forms
         [Description("The URL of the document currently being display in this SvgPictureBox")]
         public string SourceURL
         {
-            get
-            {
-                return window.Source;
+            get {
+                return _window.Source;
             }
-            set
-            {
+            set {
                 Load(value);
             }
         }
@@ -162,16 +160,15 @@ namespace SharpVectors.Renderers.Forms
         [Description("The Window Interface connected to the SvgPictureBox")]
         public ISvgWindow Window
         {
-            get
-            {
-                return window;
+            get {
+                return _window;
             }
         }
 
         public Graphics Surface
         {
-            get { return surface; }
-            set { surface = value; }
+            get { return _surface; }
+            set { _surface = value; }
         }
 
         public RectangleF InvalidRect
@@ -195,7 +192,7 @@ namespace SharpVectors.Renderers.Forms
                 if (value != null && value.Length > 0)
                 {
                     // Load the source
-                    window.Source = value;
+                    _window.Source = value;
                     // Initialize the style sheets
                     SetupStyleSheets();
                     // Execute all script elements
@@ -205,17 +202,17 @@ namespace SharpVectors.Renderers.Forms
                     //JR
                     if (this.AutoSize)
                     {
-                        ISvgSvgElement svgEl = window.Document.RootElement;
+                        ISvgSvgElement svgEl = _window.Document.RootElement;
                         this.Width = (int)svgEl.Width.BaseVal.Value;
                         this.Height = (int)svgEl.Height.BaseVal.Value;
                     }
                     renderer.InvalidRect = SvgRectF.Empty;
                     Render();
-                    loaded = true;
+                    _isLoaded = true;
                 }
             }
             catch (Exception e)
-            {   
+            {
                 StringBuilder builder = new StringBuilder();
                 builder.AppendLine("An error occurred while loading the document.\n");
                 builder.AppendLine();
@@ -237,19 +234,19 @@ namespace SharpVectors.Renderers.Forms
                 {
                     if (xml != null && xml.Length > 0)
                     {
-                        SvgDocument doc = window.CreateEmptySvgDocument();
+                        SvgDocument doc = _window.CreateEmptySvgDocument();
                         doc.LoadXml(xml);
-                        window.Document = doc;
+                        _window.Document = doc;
                         SetupStyleSheets();
                         //JR
                         if (this.AutoSize)
                         {
-                            ISvgRect r = window.Document.RootElement.GetBBox();
+                            ISvgRect r = _window.Document.RootElement.GetBBox();
                             this.Width = (int)r.Width;
                             this.Height = (int)r.Height;
                         }
                         Render();
-                        loaded = true;
+                        _isLoaded = true;
                     }
                 }
             }
@@ -261,7 +258,7 @@ namespace SharpVectors.Renderers.Forms
 
         public void Render()
         {
-            if (this.window != null)
+            if (this._window != null)
             {
                 InvalidateAndRender();
             }
@@ -269,7 +266,7 @@ namespace SharpVectors.Renderers.Forms
 
         public void Update(RectangleF rect)
         {
-            if (this.window != null)
+            if (this._window != null)
             {
                 InvalidateAndUpdate(rect);
             }
@@ -286,11 +283,13 @@ namespace SharpVectors.Renderers.Forms
         }
 
         /// <summary>
-        /// Create an empty SvgDocument and GdiRenderer for this control.  The empty SvgDocument is returned.  This method is needed only in situations where the library user needs to create an SVG DOM tree outside of the usual window Src setting mechanism.
+        /// Create an empty SvgDocument and GdiRenderer for this control.  
+        /// The empty SvgDocument is returned.  This method is needed only in situations 
+        /// where the library user needs to create an SVG DOM tree outside of the usual window Src setting mechanism.
         /// </summary>
         public SvgDocument CreateEmptySvgDocument()
         {
-            SvgDocument svgDocument = window.CreateEmptySvgDocument();
+            SvgDocument svgDocument = _window.CreateEmptySvgDocument();
             SetupStyleSheets();
 
             return svgDocument;
@@ -300,13 +299,13 @@ namespace SharpVectors.Renderers.Forms
         {
             if (!this.DesignMode)
             {
-                if (window != null)
+                if (_window != null)
                 {
                     GdiGraphicsWrapper gw = GdiGraphicsWrapper.FromHdc(hdc, true);
-                    GdiGraphicsRenderer r = ((GdiGraphicsRenderer)window.Renderer);
+                    GdiGraphicsRenderer r = ((GdiGraphicsRenderer)_window.Renderer);
                     gw.Clear(r.BackColor);
                     r.GraphicsWrapper = gw;
-                    window.Renderer.Render((SvgDocument)window.Document);
+                    _window.Renderer.Render((SvgDocument)_window.Document);
                     r.GraphicsWrapper = null;
                     gw.Dispose();
                 }
@@ -317,9 +316,9 @@ namespace SharpVectors.Renderers.Forms
         {
             if (!this.DesignMode)
             {
-                if (window != null)
+                if (_window != null)
                 {
-                    Bitmap rasterImage = ((GdiGraphicsRenderer)window.Renderer).RasterImage;
+                    Bitmap rasterImage = ((GdiGraphicsRenderer)_window.Renderer).RasterImage;
 
                     if (rasterImage != null)
                     {
@@ -333,9 +332,9 @@ namespace SharpVectors.Renderers.Forms
         {
             if (!this.DesignMode)
             {
-                if (window != null)
+                if (_window != null)
                 {
-                    Bitmap rasterImage = ((GdiGraphicsRenderer)window.Renderer).RasterImage;
+                    Bitmap rasterImage = ((GdiGraphicsRenderer)_window.Renderer).RasterImage;
 
                     if (rasterImage != null)
                     {
@@ -349,9 +348,9 @@ namespace SharpVectors.Renderers.Forms
         {
             if (!this.DesignMode)
             {
-                if (window != null)
+                if (_window != null)
                 {
-                    Bitmap rasterImage = ((GdiGraphicsRenderer)window.Renderer).RasterImage;
+                    Bitmap rasterImage = ((GdiGraphicsRenderer)_window.Renderer).RasterImage;
 
                     if (rasterImage != null)
                     {
@@ -367,9 +366,9 @@ namespace SharpVectors.Renderers.Forms
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (surface != null)
+            if (_surface != null)
             {
-                Draw(surface);
+                Draw(_surface);
             }
             else
             {
@@ -384,13 +383,13 @@ namespace SharpVectors.Renderers.Forms
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (loaded)
+            if (_isLoaded)
             {
                 // Worry about clearing the graphics nodes map...
                 //System.GC.Collect();
                 //System.Threading.Thread.Sleep(1);
 
-                (window as SvgWindow).Resize(this.Width, this.Height);
+                (_window as SvgWindow).Resize(this.Width, this.Height);
                 InvalidateAndRender();
             }
         }
@@ -400,7 +399,7 @@ namespace SharpVectors.Renderers.Forms
         /// </summary>
         protected virtual void SetupStyleSheets()
         {
-            CssXmlDocument cssDocument = (CssXmlDocument)window.Document;
+            CssXmlDocument cssDocument = (CssXmlDocument)_window.Document;
             string appRootPath         = SvgApplicationContext.ExecutableDirectory.FullName;
             FileInfo userAgentCssPath  = new FileInfo(appRootPath + "\\" + UserAgentCssFileName);
             FileInfo userCssPath       = new FileInfo(appRootPath + "\\" + UserCssFileName);
@@ -424,7 +423,7 @@ namespace SharpVectors.Renderers.Forms
         {
             try
             {
-                renderer.Render(window.Document as SvgDocument);
+                renderer.Render(_window.Document as SvgDocument);
             }
             catch (Exception e)
             {
@@ -496,212 +495,212 @@ namespace SharpVectors.Renderers.Forms
 
         #region Scripting Methods and Properties
 
-//        private TypeDictionary scriptEngineByMimeType;
-//        private Dictionary<string, ScriptEngine> scriptEngines = new Dictionary<string, ScriptEngine>();
+        //        private TypeDictionary scriptEngineByMimeType;
+        //        private Dictionary<string, ScriptEngine> scriptEngines = new Dictionary<string, ScriptEngine>();
 
-//        public void SetMimeTypeEngineType(string mimeType, Type engineType)
-//        {
-//            scriptEngineByMimeType[mimeType] = engineType;
-//        }
+        //        public void SetMimeTypeEngineType(string mimeType, Type engineType)
+        //        {
+        //            scriptEngineByMimeType[mimeType] = engineType;
+        //        }
 
-//        public ScriptEngine GetScriptEngineByMimeType(string mimeType)
-//        {
-//            ScriptEngine engine = null;
+        //        public ScriptEngine GetScriptEngineByMimeType(string mimeType)
+        //        {
+        //            ScriptEngine engine = null;
 
-//            if (mimeType == "")
-//                mimeType = ((ISvgWindow)window).Document.RootElement.GetAttribute("contentScriptType");
+        //            if (mimeType == "")
+        //                mimeType = ((ISvgWindow)window).Document.RootElement.GetAttribute("contentScriptType");
 
-//            if (mimeType == "" || mimeType == "text/ecmascript" || mimeType == "text/javascript" || mimeType == "application/javascript")
-//                mimeType = "application/ecmascript";
+        //            if (mimeType == "" || mimeType == "text/ecmascript" || mimeType == "text/javascript" || mimeType == "application/javascript")
+        //                mimeType = "application/ecmascript";
 
-//            if (!scriptEngines.ContainsKey(mimeType))
-//            {
-//                object[] args = new object[] { (window as ISvgWindow) };
-//                engine = (ScriptEngine)scriptEngineByMimeType.CreateInstance(mimeType, args);
-//                scriptEngines.Add(mimeType, engine);
-//                engine.Initialise();
-//            }
+        //            if (!scriptEngines.ContainsKey(mimeType))
+        //            {
+        //                object[] args = new object[] { (window as ISvgWindow) };
+        //                engine = (ScriptEngine)scriptEngineByMimeType.CreateInstance(mimeType, args);
+        //                scriptEngines.Add(mimeType, engine);
+        //                engine.Initialise();
+        //            }
 
-//            if (engine == null)
-//                engine = scriptEngines[mimeType];
+        //            if (engine == null)
+        //                engine = scriptEngines[mimeType];
 
-//            return engine;
-//        }
+        //            return engine;
+        //        }
 
 
-//        /// <summary>
-//        /// Clears the existing script engine list from any previously running instances
-//        /// </summary>
-//        private void UnloadEngines()
-//        {
-//            // Dispose of all running engines from previous document instances
-//            foreach (string mimeType in scriptEngines.Keys)
-//            {
-//                ScriptEngine engine = scriptEngines[mimeType];
-//                engine.Close();
-//                engine = null;
-//            }
-//            // Clear the list
-//            scriptEngines.Clear();
-//            ClosureEventMonitor.Clear();
-//            ScriptTimerMonitor.Reset();
-//        }
+        //        /// <summary>
+        //        /// Clears the existing script engine list from any previously running instances
+        //        /// </summary>
+        //        private void UnloadEngines()
+        //        {
+        //            // Dispose of all running engines from previous document instances
+        //            foreach (string mimeType in scriptEngines.Keys)
+        //            {
+        //                ScriptEngine engine = scriptEngines[mimeType];
+        //                engine.Close();
+        //                engine = null;
+        //            }
+        //            // Clear the list
+        //            scriptEngines.Clear();
+        //            ClosureEventMonitor.Clear();
+        //            ScriptTimerMonitor.Reset();
+        //        }
 
-//        /// <summary>
-//        /// Add event listeners for on* events within the document
-//        /// </summary>
-//        private void InitializeEvents()
-//        {
-//            SvgDocument document = (SvgDocument)window.Document;
-//            document.NamespaceManager.AddNamespace("svg", "http://www.w3.org/2000/svg");
+        //        /// <summary>
+        //        /// Add event listeners for on* events within the document
+        //        /// </summary>
+        //        private void InitializeEvents()
+        //        {
+        //            SvgDocument document = (SvgDocument)window.Document;
+        //            document.NamespaceManager.AddNamespace("svg", "http://www.w3.org/2000/svg");
 
-//            XmlNodeList nodes = document.SelectNodes(@"//*[namespace-uri()='http://www.w3.org/2000/svg']
-//                                                   [local-name()='svg' or
-//                                                    local-name()='g' or
-//                                                    local-name()='defs' or
-//                                                    local-name()='symbol' or
-//                                                    local-name()='use' or
-//                                                    local-name()='switch' or
-//                                                    local-name()='image' or
-//                                                    local-name()='path' or
-//                                                    local-name()='rect' or
-//                                                    local-name()='circle' or
-//                                                    local-name()='ellipse' or
-//                                                    local-name()='line' or
-//                                                    local-name()='polyline' or
-//                                                    local-name()='polygon' or
-//                                                    local-name()='text' or
-//                                                    local-name()='tref' or
-//                                                    local-name()='tspan' or
-//                                                    local-name()='textPath' or
-//                                                    local-name()='altGlyph' or
-//                                                    local-name()='a' or
-//                                                    local-name()='foreignObject']
-//                                                /@*[name()='onfocusin' or
-//                                                    name()='onfocusout' or
-//                                                    name()='onactivate' or
-//                                                    name()='onclick' or
-//                                                    name()='onmousedown' or
-//                                                    name()='onmouseup' or
-//                                                    name()='onmouseover' or
-//                                                    name()='onmousemove' or
-//                                                    name()='onmouseout' or
-//                                                    name()='onload']", document.NamespaceManager);
+        //            XmlNodeList nodes = document.SelectNodes(@"//*[namespace-uri()='http://www.w3.org/2000/svg']
+        //                                                   [local-name()='svg' or
+        //                                                    local-name()='g' or
+        //                                                    local-name()='defs' or
+        //                                                    local-name()='symbol' or
+        //                                                    local-name()='use' or
+        //                                                    local-name()='switch' or
+        //                                                    local-name()='image' or
+        //                                                    local-name()='path' or
+        //                                                    local-name()='rect' or
+        //                                                    local-name()='circle' or
+        //                                                    local-name()='ellipse' or
+        //                                                    local-name()='line' or
+        //                                                    local-name()='polyline' or
+        //                                                    local-name()='polygon' or
+        //                                                    local-name()='text' or
+        //                                                    local-name()='tref' or
+        //                                                    local-name()='tspan' or
+        //                                                    local-name()='textPath' or
+        //                                                    local-name()='altGlyph' or
+        //                                                    local-name()='a' or
+        //                                                    local-name()='foreignObject']
+        //                                                /@*[name()='onfocusin' or
+        //                                                    name()='onfocusout' or
+        //                                                    name()='onactivate' or
+        //                                                    name()='onclick' or
+        //                                                    name()='onmousedown' or
+        //                                                    name()='onmouseup' or
+        //                                                    name()='onmouseover' or
+        //                                                    name()='onmousemove' or
+        //                                                    name()='onmouseout' or
+        //                                                    name()='onload']", document.NamespaceManager);
 
-//            foreach (XmlNode node in nodes)
-//            {
-//                IAttribute att = (IAttribute)node;
-//                IEventTarget targ = (IEventTarget)att.OwnerElement;
-//                ScriptEventMonitor mon = new ScriptEventMonitor((VsaScriptEngine)GetScriptEngineByMimeType(""), att, window);
-//                string eventName = null;
-//                switch (att.Name)
-//                {
-//                    case "onfocusin":
-//                        eventName = "focusin";
-//                        break;
-//                    case "onfocusout":
-//                        eventName = "focusout";
-//                        break;
-//                    case "onactivate":
-//                        eventName = "activate";
-//                        break;
-//                    case "onclick":
-//                        eventName = "click";
-//                        break;
-//                    case "onmousedown":
-//                        eventName = "mousedown";
-//                        break;
-//                    case "onmouseup":
-//                        eventName = "mouseup";
-//                        break;
-//                    case "onmouseover":
-//                        eventName = "mouseover";
-//                        break;
-//                    case "onmousemove":
-//                        eventName = "mousemove";
-//                        break;
-//                    case "onmouseout":
-//                        eventName = "mouseout";
-//                        break;
-//                    case "onload":
-//                        eventName = "SVGLoad";
-//                        break;
-//                }
-//                targ.AddEventListener(eventName, new EventListener(mon.EventHandler), false);
-//            }
-//        }
+        //            foreach (XmlNode node in nodes)
+        //            {
+        //                IAttribute att = (IAttribute)node;
+        //                IEventTarget targ = (IEventTarget)att.OwnerElement;
+        //                ScriptEventMonitor mon = new ScriptEventMonitor((VsaScriptEngine)GetScriptEngineByMimeType(""), att, window);
+        //                string eventName = null;
+        //                switch (att.Name)
+        //                {
+        //                    case "onfocusin":
+        //                        eventName = "focusin";
+        //                        break;
+        //                    case "onfocusout":
+        //                        eventName = "focusout";
+        //                        break;
+        //                    case "onactivate":
+        //                        eventName = "activate";
+        //                        break;
+        //                    case "onclick":
+        //                        eventName = "click";
+        //                        break;
+        //                    case "onmousedown":
+        //                        eventName = "mousedown";
+        //                        break;
+        //                    case "onmouseup":
+        //                        eventName = "mouseup";
+        //                        break;
+        //                    case "onmouseover":
+        //                        eventName = "mouseover";
+        //                        break;
+        //                    case "onmousemove":
+        //                        eventName = "mousemove";
+        //                        break;
+        //                    case "onmouseout":
+        //                        eventName = "mouseout";
+        //                        break;
+        //                    case "onload":
+        //                        eventName = "SVGLoad";
+        //                        break;
+        //                }
+        //                targ.AddEventListener(eventName, new EventListener(mon.EventHandler), false);
+        //            }
+        //        }
 
-//        /// <summary>
-//        /// Collect the text in all script elements, build engine and execute. 
-//        /// </summary>
-//        private void ExecuteScripts()
-//        {
-//            Dictionary<string, StringBuilder> codeByMimeType = new Dictionary<string, StringBuilder>();
-//            StringBuilder codeBuilder;
-//            SvgDocument document = (SvgDocument)window.Document;
+        //        /// <summary>
+        //        /// Collect the text in all script elements, build engine and execute. 
+        //        /// </summary>
+        //        private void ExecuteScripts()
+        //        {
+        //            Dictionary<string, StringBuilder> codeByMimeType = new Dictionary<string, StringBuilder>();
+        //            StringBuilder codeBuilder;
+        //            SvgDocument document = (SvgDocument)window.Document;
 
-//            XmlNodeList scripts = document.GetElementsByTagName("script", SvgDocument.SvgNamespace);
-//            StringBuilder code = new StringBuilder();
+        //            XmlNodeList scripts = document.GetElementsByTagName("script", SvgDocument.SvgNamespace);
+        //            StringBuilder code = new StringBuilder();
 
-//            foreach (XmlElement script in scripts)
-//            {
-//                string type = script.GetAttribute("type");
+        //            foreach (XmlElement script in scripts)
+        //            {
+        //                string type = script.GetAttribute("type");
 
-//                if (GetScriptEngineByMimeType(type) != null)
-//                {
-//                    // make sure we have a StringBuilder for this MIME type
-//                    if (!codeByMimeType.ContainsKey(type))
-//                        codeByMimeType[type] = new StringBuilder();
+        //                if (GetScriptEngineByMimeType(type) != null)
+        //                {
+        //                    // make sure we have a StringBuilder for this MIME type
+        //                    if (!codeByMimeType.ContainsKey(type))
+        //                        codeByMimeType[type] = new StringBuilder();
 
-//                    // grab this MIME type's codeBuilder
-//                    codeBuilder = codeByMimeType[type];
+        //                    // grab this MIME type's codeBuilder
+        //                    codeBuilder = codeByMimeType[type];
 
-//                    if (script.HasChildNodes)
-//                    {
-//                        // process each child that is text node or a CDATA section
-//                        foreach (XmlNode node in script.ChildNodes)
-//                        {
-//                            if (node.NodeType == XmlNodeType.CDATA || node.NodeType == XmlNodeType.Text)
-//                            {
-//                                codeBuilder.Append(node.Value);
-//                            }
-//                        }
-//                    }
+        //                    if (script.HasChildNodes)
+        //                    {
+        //                        // process each child that is text node or a CDATA section
+        //                        foreach (XmlNode node in script.ChildNodes)
+        //                        {
+        //                            if (node.NodeType == XmlNodeType.CDATA || node.NodeType == XmlNodeType.Text)
+        //                            {
+        //                                codeBuilder.Append(node.Value);
+        //                            }
+        //                        }
+        //                    }
 
-//                    if (script.HasAttribute("href", "http://www.w3.org/1999/xlink"))
-//                    {
-//                        string href = script.GetAttribute("href", "http://www.w3.org/1999/xlink");
-//                        Uri baseUri = new Uri(((XmlDocument)((ISvgWindow)window).Document).BaseURI);
-//                        Uri hUri = new Uri(baseUri, href);
-//                        ExtendedHttpWebRequestCreator creator = new ExtendedHttpWebRequestCreator();
-//                        ExtendedHttpWebRequest request = (ExtendedHttpWebRequest)creator.Create(hUri);
-//                        ExtendedHttpWebResponse response = (ExtendedHttpWebResponse)request.GetResponse();
-//                        Stream rs = response.GetResponseStream();
-//                        StreamReader sr = new StreamReader(rs);
-//                        codeBuilder.Append(sr.ReadToEnd());
-//                        rs.Close();
-//                    }
-//                }
-//            }
+        //                    if (script.HasAttribute("href", "http://www.w3.org/1999/xlink"))
+        //                    {
+        //                        string href = script.GetAttribute("href", "http://www.w3.org/1999/xlink");
+        //                        Uri baseUri = new Uri(((XmlDocument)((ISvgWindow)window).Document).BaseURI);
+        //                        Uri hUri = new Uri(baseUri, href);
+        //                        ExtendedHttpWebRequestCreator creator = new ExtendedHttpWebRequestCreator();
+        //                        ExtendedHttpWebRequest request = (ExtendedHttpWebRequest)creator.Create(hUri);
+        //                        ExtendedHttpWebResponse response = (ExtendedHttpWebResponse)request.GetResponse();
+        //                        Stream rs = response.GetResponseStream();
+        //                        StreamReader sr = new StreamReader(rs);
+        //                        codeBuilder.Append(sr.ReadToEnd());
+        //                        rs.Close();
+        //                    }
+        //                }
+        //            }
 
-//            // execute code for all script engines
-//            //foreach (string mimeType in codeByMimeType.Keys)
-//            foreach (KeyValuePair<string, StringBuilder> pair in codeByMimeType)
-//            {
-//                string mimeType = pair.Key;
-//                //codeBuilder = codeByMimeType[mimeType];
-//                codeBuilder = pair.Value;
+        //            // execute code for all script engines
+        //            //foreach (string mimeType in codeByMimeType.Keys)
+        //            foreach (KeyValuePair<string, StringBuilder> pair in codeByMimeType)
+        //            {
+        //                string mimeType = pair.Key;
+        //                //codeBuilder = codeByMimeType[mimeType];
+        //                codeBuilder = pair.Value;
 
-//                if (codeBuilder.Length > 0)
-//                {
-//                    ScriptEngine engine = GetScriptEngineByMimeType(mimeType);
-//                    engine.Execute(codeBuilder.ToString());
-//                }
-//            }
+        //                if (codeBuilder.Length > 0)
+        //                {
+        //                    ScriptEngine engine = GetScriptEngineByMimeType(mimeType);
+        //                    engine.Execute(codeBuilder.ToString());
+        //                }
+        //            }
 
-//            // load the root element
-//            ((ISvgWindow)window).Document.RootElement.DispatchEvent(new Event("SVGLoad", false, true));
-//        }
+        //            // load the root element
+        //            ((ISvgWindow)window).Document.RootElement.DispatchEvent(new Event("SVGLoad", false, true));
+        //        }
 
         #endregion
     }

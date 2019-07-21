@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Xml;
-using System.Text.RegularExpressions;
+using System.Linq;
+using System.Diagnostics;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using System.Windows;
 using System.Windows.Media;
@@ -17,15 +19,16 @@ namespace SharpVectors.Renderers.Texts
 
         protected const string Whitespace = " ";
 
-        protected readonly static Regex _tabNewline = new Regex(@"[\n\f\t]");
-        protected readonly static Regex _decimalNumber = new Regex(@"^\d");
+        protected readonly static Regex _tabNewline     = new Regex(@"[\n\f\t]", RegexOptions.Compiled);
+        protected readonly static Regex _decimalNumber  = new Regex(@"^\d", RegexOptions.Compiled);
+        protected static readonly Regex _multipleSpaces = new Regex(@" {2,}", RegexOptions.Compiled);
 
         protected string _actualFontName;
 
-        protected DrawingContext    _textContext;
-        protected SvgTextElement    _textElement;
+        protected DrawingContext _textContext;
+        protected SvgTextElement _textElement;
 
-        protected WpfTextRendering  _textRendering;
+        protected WpfTextRendering _textRendering;
 
         #endregion
 
@@ -35,12 +38,12 @@ namespace SharpVectors.Renderers.Texts
         {
             if (textElement == null)
             {
-                throw new ArgumentNullException("textElement",
+                throw new ArgumentNullException(nameof(textElement),
                     "The SVG text element is required, and cannot be null (or Nothing).");
             }
             if (textRendering == null)
             {
-                throw new ArgumentNullException("textRendering",
+                throw new ArgumentNullException(nameof(textRendering),
                     "The text rendering object is required, and cannot be null (or Nothing).");
             }
 
@@ -54,24 +57,21 @@ namespace SharpVectors.Renderers.Texts
 
         public override bool IsInitialized
         {
-            get
-            {
+            get {
                 return (_textContext != null && _context != null);
             }
         }
 
         public DrawingContext TextContext
         {
-            get
-            {
+            get {
                 return _textContext;
             }
         }
 
         public SvgTextElement TextElement
         {
-            get
-            {
+            get {
                 return _textElement;
             }
         }
@@ -82,8 +82,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected bool IsMeasuring
         {
-            get
-            {
+            get {
                 if (_textRendering != null)
                 {
                     return _textRendering.IsMeasuring;
@@ -95,8 +94,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected bool IsTextPath
         {
-            get
-            {
+            get {
                 if (_textRendering != null)
                 {
                     return _textRendering.IsTextPath;
@@ -104,8 +102,7 @@ namespace SharpVectors.Renderers.Texts
 
                 return false;
             }
-            set
-            {
+            set {
                 if (_textRendering != null)
                 {
                     _textRendering.IsTextPath = value;
@@ -115,8 +112,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected double TextWidth
         {
-            get
-            {
+            get {
                 if (_textRendering != null)
                 {
                     return _textRendering.TextWidth;
@@ -134,12 +130,12 @@ namespace SharpVectors.Renderers.Texts
         {
             if (textContext == null)
             {
-                throw new ArgumentNullException("textContext", 
+                throw new ArgumentNullException(nameof(textContext),
                     "The text context is required, and cannot be null (or Nothing).");
             }
             if (drawContext == null)
             {
-                throw new ArgumentNullException("drawContext",
+                throw new ArgumentNullException(nameof(drawContext),
                     "The drawing context is required, and cannot be null (or Nothing).");
             }
 
@@ -154,10 +150,10 @@ namespace SharpVectors.Renderers.Texts
         }
 
         public abstract void RenderSingleLineText(SvgTextContentElement element,
-            ref Point startPos, string text, double rotate, WpfTextPlacement placement);
+            ref Point ctp, string text, double rotate, WpfTextPlacement placement);
 
         public abstract void RenderTextRun(SvgTextContentElement element,
-            ref Point startPos, string text, double rotate, WpfTextPlacement placement);
+            ref Point ctp, string text, double rotate, WpfTextPlacement placement);
 
         #region TRef/TSpan Methods
 
@@ -167,18 +163,25 @@ namespace SharpVectors.Renderers.Texts
                 val = val.Replace("\n", string.Empty);
             val = _tabNewline.Replace(val, " ");
 
-            if (element.XmlSpace == "preserve" || element.XmlSpace == "default")
+            //if (element.XmlSpace == "preserve" || element.XmlSpace == "default")
+            if (element.XmlSpace == "preserve")
             {
                 return val;
             }
-            else
+            if (element.XmlSpace == "default")
             {
-                return val.Trim();
+                return _multipleSpaces.Replace(val, " ");
+                //return val;
             }
+            return val.Trim();
         }
 
-        public static string GetText(SvgTextContentElement element, XmlNode child)
+        public static string GetText(SvgTextContentElement element, XmlNode child, XmlNode spaceNode = null)
         {
+            if (spaceNode != null)
+            {
+                return TrimText(element, child.Value + spaceNode.Value);
+            }
             return TrimText(element, child.Value);
         }
 
@@ -189,212 +192,29 @@ namespace SharpVectors.Renderers.Texts
             {
                 return TrimText(element, refElement.InnerText);
             }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
         }
 
         #endregion
 
         #region TextPosition/Size Methods
 
-        public static WpfTextPlacement GetCurrentTextPosition(SvgTextPositioningElement posElement, Point p)
-        {
-            ISvgLengthList xValues  = posElement.X.AnimVal;
-            ISvgLengthList yValues  = posElement.Y.AnimVal;
-            ISvgLengthList dxValues = posElement.Dx.AnimVal;
-            ISvgLengthList dyValues = posElement.Dy.AnimVal;
-            ISvgNumberList rValues  = posElement.Rotate.AnimVal;
-
-            bool requiresGlyphPositioning = false;
-            bool isXYGlyphPositioning     = false;
-            bool isDxyGlyphPositioning    = false;
-            bool isRotateGlyphPositioning = false;
-
-            double xValue  = p.X;
-            double yValue  = p.Y;
-            double rValue  = 0;
-            double dxValue = 0;
-            double dyValue = 0;
-
-            WpfTextPlacement textPlacement = null;
-
-            if (xValues.NumberOfItems > 0)
-            {
-                if (xValues.NumberOfItems > 1)
-                {
-                    isXYGlyphPositioning     = true;
-                    requiresGlyphPositioning = true;
-                }
-
-                xValue = xValues.GetItem(0).Value;
-                p.X = xValue;
-            }
-            if (yValues.NumberOfItems > 0)
-            {
-                if (yValues.NumberOfItems > 1)
-                {
-                    isXYGlyphPositioning     = true;
-                    requiresGlyphPositioning = true;
-                }
-
-                yValue = yValues.GetItem(0).Value;
-                p.Y = yValue;
-            }
-            if (dxValues.NumberOfItems > 0)
-            {
-                if (dxValues.NumberOfItems > 1)
-                {
-                    isDxyGlyphPositioning    = true;
-                    requiresGlyphPositioning = true;
-                }
-
-                dxValue = dxValues.GetItem(0).Value;
-                p.X += dxValue;
-            }
-            if (dyValues.NumberOfItems > 0)
-            {
-                if (dyValues.NumberOfItems > 1)
-                {
-                    isDxyGlyphPositioning    = true;
-                    requiresGlyphPositioning = true;
-                }
-
-                dyValue = dyValues.GetItem(0).Value;
-                p.Y += dyValue;
-            }
-            if (rValues.NumberOfItems > 0)
-            {
-                if (rValues.NumberOfItems > 1)
-                {
-                    isRotateGlyphPositioning = true;
-                    requiresGlyphPositioning = true;
-                }
-
-                rValue = rValues.GetItem(0).Value;
-            }
-
-            if (requiresGlyphPositioning)
-            {
-                uint xCount  = xValues.NumberOfItems;
-                uint yCount  = yValues.NumberOfItems;
-                uint dxCount = dxValues.NumberOfItems;
-                uint dyCount = dyValues.NumberOfItems;
-                uint rCount  = rValues.NumberOfItems;
-
-                List<WpfTextPosition> textPositions = null;
-
-                bool isRotateOnly = false;
-
-                if (isXYGlyphPositioning)
-                {
-                    uint itemCount = Math.Max(Math.Max(xCount, yCount), Math.Max(dxCount, dyCount));
-                    itemCount      = Math.Max(itemCount, rCount);
-                    textPositions  = new List<WpfTextPosition>((int)itemCount);
-
-                    double xLast = 0;
-                    double yLast = 0;
-
-                    for (uint i = 0; i < itemCount; i++)
-                    {
-                        double xNext  = i < xCount  ? xValues.GetItem(i).Value  : xValue;
-                        double yNext  = i < yCount  ? yValues.GetItem(i).Value  : yValue;
-                        double rNext  = i < rCount  ? rValues.GetItem(i).Value  : rValue;
-                        double dxNext = i < dxCount ? dxValues.GetItem(i).Value : dxValue;
-                        double dyNext = i < dyCount ? dyValues.GetItem(i).Value : dyValue;
-
-                        if (i < xCount)
-                        {
-                            xLast = xNext;
-                        }
-                        else
-                        {
-                            xNext = xLast;
-                        }
-                        if (i < yCount)
-                        {
-                            yLast = yNext;
-                        }
-                        else
-                        {
-                            yNext = yLast;
-                        }
-
-                        WpfTextPosition textPosition = new WpfTextPosition(
-                            new Point(xNext + dxNext, yNext + dyNext), rNext);
-
-                        textPositions.Add(textPosition);
-                    }                     
-                }
-                else if (isDxyGlyphPositioning)
-                {   
-                }
-                else if (isRotateGlyphPositioning)
-                {
-                    isRotateOnly   = true;
-                    uint itemCount = Math.Max(Math.Max(xCount, yCount), Math.Max(dxCount, dyCount));
-                    itemCount      = Math.Max(itemCount, rCount);
-                    textPositions  = new List<WpfTextPosition>((int)itemCount);
-
-                    for (uint i = 0; i < itemCount; i++)
-                    {
-                        double rNext  = i < rCount  ? rValues.GetItem(i).Value  : rValue;
-
-                        WpfTextPosition textPosition = new WpfTextPosition(p, rNext);
-
-                        textPositions.Add(textPosition);
-                    }                     
-                }
-
-                if (textPositions != null && textPositions.Count != 0)
-                {
-                    textPlacement = new WpfTextPlacement(p, rValue, textPositions, isRotateOnly);
-                }
-                else
-                {
-                    textPlacement = new WpfTextPlacement(p, rValue);
-                }
-            }
-            else
-            {
-                textPlacement = new WpfTextPlacement(p, rValue);
-            }
-
-            return textPlacement;
-        }
-
         public static double GetComputedFontSize(SvgTextContentElement element)
         {
             string str = element.GetPropertyValue("font-size");
             double fontSize = 12;
-            if (str.EndsWith("%"))
-            {
-                // percentage of inherited value
-            }
-            else if (_decimalNumber.IsMatch(str))
+            if (_decimalNumber.IsMatch(str))
             {
                 // svg length
                 fontSize = new SvgLength(element, "font-size",
                     SvgLengthDirection.Viewport, str, "10px").Value;
-            }
-            else if (str == "larger")
-            {
-            }
-            else if (str == "smaller")
-            {
-
-            }
-            else
-            {
-                // check for absolute value
             }
 
             return fontSize;
         }
 
         #endregion
-   
+
         #endregion
 
         #region Protected Methods
@@ -403,7 +223,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected void SetTextWidth(double textWidth)
         {
-            if (_textRendering != null && textWidth != 0)
+            if (_textRendering != null && !textWidth.Equals(0))
             {
                 _textRendering.SetTextWidth(textWidth);
             }
@@ -411,7 +231,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected void AddTextWidth(double textWidth)
         {
-            if (_textRendering != null && textWidth != 0)
+            if (_textRendering != null && !textWidth.Equals(0))
             {
                 _textRendering.AddTextWidth(textWidth);
             }
@@ -613,15 +433,17 @@ namespace SharpVectors.Renderers.Texts
                 return FontStyles.Normal;
             }
 
-            if (fontStyle == "normal")
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
+            if (string.Equals(fontStyle, "normal", comparer))
             {
                 return FontStyles.Normal;
             }
-            if (fontStyle == "italic")
+            if (string.Equals(fontStyle, "italic", comparer))
             {
                 return FontStyles.Italic;
             }
-            if (fontStyle == "oblique")
+            if (string.Equals(fontStyle, "oblique", comparer))
             {
                 return FontStyles.Oblique;
             }
@@ -668,16 +490,22 @@ namespace SharpVectors.Renderers.Texts
 
         protected TextDecorationCollection GetTextDecoration(SvgTextContentElement element)
         {
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             string textDeco = element.GetPropertyValue("text-decoration");
-            if (textDeco == "line-through")
+            if (string.IsNullOrWhiteSpace(textDeco))
+            {
+                return null;
+            }
+            if (string.Equals(textDeco, "line-through", comparer))
             {
                 return TextDecorations.Strikethrough;
             }
-            if (textDeco == "underline")
+            if (string.Equals(textDeco, "underline", comparer))
             {
                 return TextDecorations.Underline;
             }
-            if (textDeco == "overline")
+            if (string.Equals(textDeco, "overline", comparer))
             {
                 return TextDecorations.OverLine;
             }
@@ -685,14 +513,136 @@ namespace SharpVectors.Renderers.Texts
             return null;
         }
 
-        protected FontFamily GetTextFontFamily(SvgTextContentElement element, double fontSize)
+        protected WpfFontFamilyInfo GetTextFontFamilyInfo(SvgTextContentElement element)
         {
             _actualFontName = null;
 
-            string fontFamily = element.GetPropertyValue("font-family");
+            string fontFamily  = element.GetPropertyValue("font-family");
             string[] fontNames = fontNames = fontFamily.Split(new char[1] { ',' });
 
+            FontStyle fontStyle     = GetTextFontStyle(element);
+            FontWeight fontWeight   = GetTextFontWeight(element);
+            FontStretch fontStretch = GetTextFontStretch(element);
+
+            var comparer   = StringComparison.OrdinalIgnoreCase;
+
+            var docElement = element.OwnerDocument;
+
+            ISet<string> svgFontFamilies = docElement.SvgFontFamilies;
+            IList<string> svgFontNames   = null;
+            if (svgFontFamilies != null && svgFontFamilies.Count != 0)
+            {
+                svgFontNames = new List<string>();
+            }
+            var systemFontFamilies = Fonts.SystemFontFamilies;
+
+            FontFamily family = null;
+
+            WpfFontFamilyType familyType = WpfFontFamilyType.None;
+
+            foreach (string fn in fontNames)
+            {
+                try
+                {
+                    string fontName = fn.Trim(new char[] { ' ', '\'', '"' });
+                    if ((svgFontFamilies != null && svgFontFamilies.Count != 0) && svgFontFamilies.Contains(fontName))
+                    {
+                        svgFontNames.Add(fontName);
+                        continue;
+                    }
+
+                    if (string.Equals(fontName, "serif", comparer))
+                    {
+                        family     = WpfDrawingSettings.GenericSerif;
+                        familyType = WpfFontFamilyType.Generic;
+                    }
+                    else if (string.Equals(fontName, "sans-serif", comparer))
+                    {
+                        family     = WpfDrawingSettings.GenericSansSerif;
+                        familyType = WpfFontFamilyType.Generic;
+                    }
+                    else if (string.Equals(fontName, "monospace", comparer))
+                    {
+                        family     = WpfDrawingSettings.GenericMonospace;
+                        familyType = WpfFontFamilyType.Generic;
+                    }
+                    else
+                    {
+                        var funcFamily = new Func<FontFamily, bool>(ff => string.Equals(ff.Source, fontName, comparer));
+                        family = systemFontFamilies.FirstOrDefault(funcFamily);
+                        if (family != null)
+                        {                            
+                            _actualFontName = fontName;
+                            familyType      = WpfFontFamilyType.System;
+                        }
+                    }
+
+                    if (family != null)
+                    {
+                        return new WpfFontFamilyInfo(familyType, _actualFontName, family, 
+                            fontWeight, fontStyle, fontStretch);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceError(ex.ToString());
+                }
+            }
+
+            //// If set, use the SVG-Font...NOT READY YET
+            //if (svgFontNames != null && svgFontNames.Count != 0)
+            //{
+            //    IList<SvgFontElement> svgFonts = docElement.GetFonts(svgFontNames);
+            //    if (svgFonts != null && svgFonts.Count != 0)
+            //    {
+            //        // For a single match...
+            //        if (svgFonts.Count == 1)
+            //        {
+            //            return new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
+            //                fontWeight, fontStyle, fontStretch);
+            //        }
+
+            //        // For multiple matches, we will test the variants...
+            //        string fontVariant = element.GetPropertyValue("font-variant");
+            //        if (string.IsNullOrWhiteSpace(fontVariant))
+            //        {
+            //            // Not found, return the first match...
+            //            return new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
+            //                fontWeight, fontStyle, fontStretch);
+            //        }
+
+            //        foreach (var svgFont in svgFonts)
+            //        {
+            //            var fontFace = svgFont.FontFace;
+            //            if (fontFace == null)
+            //            {
+            //                continue;
+            //            }
+            //            if (fontVariant.Equals(fontFace.FontVariant, comparer))
+            //            {
+            //                return new WpfFontFamilyInfo(svgFont.FontFamily, svgFont,
+            //                    fontWeight, fontStyle, fontStretch);
+            //            }
+            //        }
+            //    }
+            //}
+
+            // No known font-family was found => default to "Arial Unicode MS"
+            return new WpfFontFamilyInfo(familyType, _actualFontName, 
+                WpfDrawingSettings.DefaultFontFamily, fontWeight, fontStyle, fontStretch);
+        }
+
+        protected FontFamily GetTextFontFamily(SvgTextContentElement element)
+        {
+            _actualFontName = null;
+
+            string fontFamily  = element.GetPropertyValue("font-family");
+            string[] fontNames = fontNames = fontFamily.Split(new char[1] { ',' });
+
+            var systemFontFamilies = Fonts.SystemFontFamilies;
             FontFamily family;
+
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             foreach (string fn in fontNames)
             {
@@ -700,32 +650,39 @@ namespace SharpVectors.Renderers.Texts
                 {
                     string fontName = fn.Trim(new char[] { ' ', '\'', '"' });
 
-                    if (string.Equals(fontName, "serif", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(fontName, "serif", comparer))
                     {
                         family = WpfDrawingSettings.GenericSerif;
                     }
-                    else if (string.Equals(fontName, "sans-serif", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(fontName, "sans-serif", comparer))
                     {
                         family = WpfDrawingSettings.GenericSansSerif;
                     }
-                    else if (string.Equals(fontName, "monospace", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(fontName, "monospace", comparer))
                     {
                         family = WpfDrawingSettings.GenericMonospace;
                     }
                     else
                     {
-                        family = new FontFamily(fontName);
-                        _actualFontName = fontName;
+                        var funcFamily = new Func<FontFamily, bool>(ff => string.Equals(ff.Source, fontName, comparer));
+                        family = systemFontFamilies.FirstOrDefault(funcFamily);
+                        if (family != null)
+                        {
+                            _actualFontName = fontName;
+                        }
                     }
-
-                    return family;
+                    if (family != null)
+                    {
+                        return family;
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Trace.TraceError(ex.ToString());
                 }
             }
 
-            // no known font-family was found => default to Arial
+            // No known font-family was found => default to "Arial Unicode MS"
             return WpfDrawingSettings.DefaultFontFamily;
         }
 
@@ -741,8 +698,10 @@ namespace SharpVectors.Renderers.Texts
                     doAlign = false;
             }
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             string dir = element.GetPropertyValue("direction");
-            bool isRightToLeft = (dir == "rtl");
+            bool isRightToLeft = string.Equals(dir, "rtl", comparer);
             sf.Direction = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
             if (doAlign)
@@ -751,18 +710,18 @@ namespace SharpVectors.Renderers.Texts
 
                 if (isRightToLeft)
                 {
-                    if (anchor == "middle")
+                    if (string.Equals(anchor, "middle", comparer))
                         sf.Anchor = WpfTextAnchor.Middle;
-                    else if (anchor == "end")
+                    else if (string.Equals(anchor, "end", comparer))
                         sf.Anchor = WpfTextAnchor.Start;
                     else
                         sf.Anchor = WpfTextAnchor.End;
                 }
                 else
                 {
-                    if (anchor == "middle")
+                    if (string.Equals(anchor, "middle", comparer))
                         sf.Anchor = WpfTextAnchor.Middle;
-                    else if (anchor == "end")
+                    else if (string.Equals(anchor, "end", comparer))
                         sf.Anchor = WpfTextAnchor.End;
                 }
             }
@@ -774,18 +733,18 @@ namespace SharpVectors.Renderers.Texts
                     string anchor = textElement.GetPropertyValue("text-anchor");
                     if (isRightToLeft)
                     {
-                        if (anchor == "middle")
+                        if (string.Equals(anchor, "middle", comparer))
                             sf.Anchor = WpfTextAnchor.Middle;
-                        else if (anchor == "end")
+                        else if (string.Equals(anchor, "end", comparer))
                             sf.Anchor = WpfTextAnchor.Start;
                         else
                             sf.Anchor = WpfTextAnchor.End;
                     }
                     else
                     {
-                        if (anchor == "middle")
+                        if (string.Equals(anchor, "middle", comparer))
                             sf.Anchor = WpfTextAnchor.Middle;
-                        else if (anchor == "end")
+                        else if (string.Equals(anchor, "end", comparer))
                             sf.Anchor = WpfTextAnchor.End;
                     }
                 }

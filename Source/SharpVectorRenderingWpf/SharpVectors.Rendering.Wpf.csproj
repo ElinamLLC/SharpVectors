@@ -63,7 +63,10 @@
   <ItemGroup>
     <Compile Include="Texts\WpfHorzTextRenderer.cs" />
     <Compile Include="Texts\WpfPathTextRenderer.cs" />
+    <Compile Include="Texts\WpfSvgTextBuilder.cs" />
     <Compile Include="Texts\WpfTextAnchor.cs" />
+    <Compile Include="Texts\WpfTextBuilder.cs" />
+    <Compile Include="Texts\WpfTextContext.cs" />
     <Compile Include="Texts\WpfTextOnPathBase.cs" />
     <Compile Include="Texts\WpfTextOnPathDrawing.cs" />
     <Compile Include="Texts\WpfTextPlacement.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Wpf\WpfDrawingSettings.cs" />
     <Compile Include="Wpf\WpfEmbeddedImageVisitor.cs" />
     <Compile Include="Wpf\WpfFontFamilyInfo.cs" />
+    <Compile Include="Wpf\WpfFontFamilyType.cs" />
     <Compile Include="Wpf\WpfFontFamilyVisitor.cs" />
     <Compile Include="Wpf\WpfGroupRendering.cs" />
     <Compile Include="Wpf\WpfClassVisitor.cs" />

@@ -31,7 +31,7 @@ namespace SharpVectors.Renderers.Gdi
             SvgMarkerPosition markerPos, SvgStyleableElement refElement)
 		{
 			ISharpMarkerHost markerHostElm = (ISharpMarkerHost)refElement;
-			SvgMarkerElement markerElm     = (SvgMarkerElement) element;
+			SvgMarkerElement markerElm     = (SvgMarkerElement) _svgElement;
 
             SvgPointF[] vertexPositions = markerHostElm.MarkerPositions;
 			int start;

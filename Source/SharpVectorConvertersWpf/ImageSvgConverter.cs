@@ -1,8 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.IO.Compression;
 using System.Xml;
 using System.Text;
+using System.IO;
+using System.IO.Compression;
 
 using System.Windows;
 using System.Windows.Media;
@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Renderers.Utils; 
+using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Converters
 {
@@ -44,13 +44,7 @@ namespace SharpVectors.Converters
         private DrawingGroup _drawing;
 
         private ImageEncoderType _encoderType;
-        private BitmapEncoder    _bitampEncoder;
-
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private WpfSvgWindow _wpfWindow;
-        private WpfDrawingRenderer _wpfRenderer;
+        private BitmapEncoder _bitampEncoder;
 
         #endregion
 
@@ -123,8 +117,7 @@ namespace SharpVectors.Converters
         /// </value>
         public bool WriterErrorOccurred
         {
-            get
-            {
+            get {
                 return _writerErrorOccurred;
             }
         }
@@ -143,12 +136,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool FallbackOnWriterError
         {
-            get
-            {
+            get {
                 return _fallbackOnWriterError;
             }
-            set
-            {
+            set {
                 _fallbackOnWriterError = value;
             }
         }
@@ -163,12 +154,10 @@ namespace SharpVectors.Converters
         /// </value>
         public ImageEncoderType EncoderType
         {
-            get
-            {
+            get {
                 return _encoderType;
             }
-            set
-            {
+            set {
                 _encoderType = value;
             }
         }
@@ -189,12 +178,10 @@ namespace SharpVectors.Converters
         /// </remarks>
         public BitmapEncoder Encoder
         {
-            get
-            {
+            get {
                 return _bitampEncoder;
             }
-            set
-            {
+            set {
                 _bitampEncoder = value;
             }
         }
@@ -207,8 +194,7 @@ namespace SharpVectors.Converters
         /// </value>
         public DrawingGroup Drawing
         {
-            get
-            {
+            get {
                 return _drawing;
             }
         }
@@ -222,8 +208,7 @@ namespace SharpVectors.Converters
         /// </value>
         public string XamlFile
         {
-            get
-            {
+            get {
                 return _xamlFile;
             }
         }
@@ -237,8 +222,7 @@ namespace SharpVectors.Converters
         /// </value>
         public string ZamlFile
         {
-            get
-            {
+            get {
                 return _zamlFile;
             }
         }
@@ -302,27 +286,22 @@ namespace SharpVectors.Converters
         {
             if (svgFileName == null)
             {
-                throw new ArgumentNullException("svgFileName",
+                throw new ArgumentNullException(nameof(svgFileName),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (svgFileName.Length == 0)
             {
                 throw new ArgumentException(
-                    "The SVG source file cannot be empty.", "svgFileName");
+                    "The SVG source file cannot be empty.", nameof(svgFileName));
             }
             if (!File.Exists(svgFileName))
             {
                 throw new ArgumentException(
-                    "The SVG source file must exists.", "svgFileName");
+                    "The SVG source file must exists.", nameof(svgFileName));
             }
 
             _xamlFile = null;
             _zamlFile = null;
-
-            if (string.IsNullOrWhiteSpace(svgFileName) || !File.Exists(svgFileName))
-            {
-                return false;
-            }
 
             if (!string.IsNullOrWhiteSpace(imageFileName))
             {
@@ -363,18 +342,18 @@ namespace SharpVectors.Converters
         {
             if (svgStream == null)
             {
-                throw new ArgumentNullException("svgStream",
+                throw new ArgumentNullException(nameof(svgStream),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (imageFileName == null)
             {
-                throw new ArgumentNullException("imageFileName",
+                throw new ArgumentNullException(nameof(imageFileName),
                     "The image destination file path cannot be null (or Nothing).");
             }
             if (imageFileName.Length == 0)
             {
                 throw new ArgumentException(
-                    "The image destination file path cannot be empty.", "imageFileName");
+                    "The image destination file path cannot be empty.", nameof(imageFileName));
             }
 
             _xamlFile = null;
@@ -419,19 +398,20 @@ namespace SharpVectors.Converters
         {
             if (svgTextReader == null)
             {
-                throw new ArgumentNullException("svgTextReader",
+                throw new ArgumentNullException(nameof(svgTextReader),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (imageFileName == null)
             {
-                throw new ArgumentNullException("imageFileName",
+                throw new ArgumentNullException(nameof(imageFileName),
                     "The image destination file path cannot be null (or Nothing).");
             }
             if (imageFileName.Length == 0)
             {
                 throw new ArgumentException(
-                    "The image destination file path cannot be empty.", "imageFileName");
+                    "The image destination file path cannot be empty.", nameof(imageFileName));
             }
+
 
             _xamlFile = null;
             _zamlFile = null;
@@ -475,19 +455,20 @@ namespace SharpVectors.Converters
         {
             if (svgXmlReader == null)
             {
-                throw new ArgumentNullException("svgXmlReader",
+                throw new ArgumentNullException(nameof(svgXmlReader),
                     "The SVG source file cannot be null (or Nothing).");
             }
             if (imageFileName == null)
             {
-                throw new ArgumentNullException("imageFileName",
+                throw new ArgumentNullException(nameof(imageFileName),
                     "The image destination file path cannot be null (or Nothing).");
             }
             if (imageFileName.Length == 0)
             {
                 throw new ArgumentException(
-                    "The image destination file path cannot be empty.", "imageFileName");
+                    "The image destination file path cannot be empty.", nameof(imageFileName));
             }
+
 
             _xamlFile = null;
             _zamlFile = null;
@@ -512,11 +493,9 @@ namespace SharpVectors.Converters
 
         private bool ProcessFile(string fileName, string imageFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(fileName);
+            _wpfWindow.LoadDocument(fileName, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -525,6 +504,8 @@ namespace SharpVectors.Converters
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
             {
+                this.EndProcessing();
+
                 return false;
             }
 
@@ -535,18 +516,18 @@ namespace SharpVectors.Converters
             if (this.SaveXaml || this.SaveZaml)
             {
                 SaveXamlFile(_drawing, fileName, imageFileName);
-            }   
+            }
+
+            this.EndProcessing();
 
             return true;
         }
- 
+
         private bool ProcessFile(Stream svgStream, string imageFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(svgStream);
+            _wpfWindow.LoadDocument(svgStream, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -555,6 +536,8 @@ namespace SharpVectors.Converters
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
             {
+                this.EndProcessing();
+
                 return false;
             }
 
@@ -565,18 +548,18 @@ namespace SharpVectors.Converters
             if (this.SaveXaml || this.SaveZaml)
             {
                 SaveXamlFile(_drawing, imageFileName, imageFileName);
-            }   
+            }
+
+            this.EndProcessing();
 
             return true;
         }
 
         private bool ProcessFile(TextReader svgTextReader, string imageFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(svgTextReader);
+            _wpfWindow.LoadDocument(svgTextReader, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -585,6 +568,8 @@ namespace SharpVectors.Converters
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
             {
+                this.EndProcessing();
+
                 return false;
             }
 
@@ -595,18 +580,18 @@ namespace SharpVectors.Converters
             if (this.SaveXaml || this.SaveZaml)
             {
                 SaveXamlFile(_drawing, imageFileName, imageFileName);
-            }   
+            }
+
+            this.EndProcessing();
 
             return true;
         }
 
         private bool ProcessFile(XmlReader svgXmlReader, string imageFileName)
         {
-            _wpfRenderer.LinkVisitor       = new LinkVisitor();
-            _wpfRenderer.ImageVisitor      = new EmbeddedImageVisitor();
-            _wpfRenderer.FontFamilyVisitor = new FontFamilyVisitor();
+            this.BeginProcessing();
 
-            _wpfWindow.LoadDocument(svgXmlReader);
+            _wpfWindow.LoadDocument(svgXmlReader, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
@@ -615,6 +600,8 @@ namespace SharpVectors.Converters
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
             {
+                this.EndProcessing();
+
                 return false;
             }
 
@@ -625,7 +612,9 @@ namespace SharpVectors.Converters
             if (this.SaveXaml || this.SaveZaml)
             {
                 SaveXamlFile(_drawing, imageFileName, imageFileName);
-            }   
+            }
+
+            this.EndProcessing();
 
             return true;
         }
@@ -634,19 +623,16 @@ namespace SharpVectors.Converters
 
         #region SaveImageFile Method
 
-        private bool SaveImageFile(Drawing drawing, string fileName, 
-            string imageFileName)
+        private bool SaveImageFile(Drawing drawing, string fileName, string imageFileName)
         {
-            string outputExt = this.GetImageFileExtention();
+            string outputExt      = this.GetImageFileExtention();
             string outputFileName = null;
             if (string.IsNullOrWhiteSpace(imageFileName))
             {
-                string fileNameWithoutExt = 
-                    Path.GetFileNameWithoutExtension(fileName);
+                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
                 string workingDir = Path.GetDirectoryName(fileName);
-                outputFileName    = Path.Combine(workingDir,
-                    fileNameWithoutExt + outputExt);
+                outputFileName = Path.Combine(workingDir, fileNameWithoutExt + outputExt);
             }
             else
             {
@@ -655,8 +641,7 @@ namespace SharpVectors.Converters
                 {
                     outputFileName = imageFileName + outputExt;
                 }
-                else if (!string.Equals(fileExt, outputExt,
-                    StringComparison.OrdinalIgnoreCase))
+                else if (!string.Equals(fileExt, outputExt, StringComparison.OrdinalIgnoreCase))
                 {
                     outputFileName = Path.ChangeExtension(imageFileName, outputExt);
                 }
@@ -672,14 +657,14 @@ namespace SharpVectors.Converters
                 Directory.CreateDirectory(outputFileDir);
             }
 
-            BitmapEncoder bitampEncoder = this.GetBitmapEncoder(outputExt);
+            BitmapEncoder bitmapEncoder = this.GetBitmapEncoder(outputExt);
 
             // The image parameters...
             Rect drawingBounds = drawing.Bounds;
-            int pixelWidth  = (int)drawingBounds.Width;
-            int pixelHeight = (int)drawingBounds.Height;
-            double dpiX     = 96;
-            double dpiY     = 96;
+            int pixelWidth     = (int)drawingBounds.Width;
+            int pixelHeight    = (int)drawingBounds.Height;
+            double dpiX        = 96;
+            double dpiY        = 96;
 
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
@@ -692,15 +677,14 @@ namespace SharpVectors.Converters
             drawingContext.Close();
 
             // The BitmapSource that is rendered with a Visual.
-            RenderTargetBitmap targetBitmap = new RenderTargetBitmap(
-                pixelWidth, pixelHeight, dpiX, dpiY, PixelFormats.Pbgra32);
+            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, dpiX, dpiY, PixelFormats.Pbgra32);
             targetBitmap.Render(drawingVisual);
 
             // Encoding the RenderBitmapTarget as an image file.
-            bitampEncoder.Frames.Add(BitmapFrame.Create(targetBitmap));
+            bitmapEncoder.Frames.Add(BitmapFrame.Create(targetBitmap));
             using (FileStream stream = File.Create(outputFileName))
             {
-                bitampEncoder.Save(stream);
+                bitmapEncoder.Save(stream);
             }
 
             return true;
@@ -708,14 +692,14 @@ namespace SharpVectors.Converters
 
         private BitmapEncoder GetBitmapEncoder(string fileExtension)
         {
-            BitmapEncoder bitampEncoder = null;
+            BitmapEncoder bitmapEncoder = null;
 
             if (_bitampEncoder != null && _bitampEncoder.CodecInfo != null)
             {
-                string mimeType = string.Empty;
+                string mimeType           = string.Empty;
                 BitmapCodecInfo codecInfo = _bitampEncoder.CodecInfo;
-                string mimeTypes      = codecInfo.MimeTypes;
-                string fileExtensions = codecInfo.FileExtensions;
+                string mimeTypes          = codecInfo.MimeTypes;
+                string fileExtensions     = codecInfo.FileExtensions;
                 switch (_encoderType)
                 {
                     case ImageEncoderType.BmpBitmap:
@@ -739,85 +723,36 @@ namespace SharpVectors.Converters
                 }
 
                 if (!string.IsNullOrWhiteSpace(fileExtensions) &&
-                    fileExtensions.IndexOf(fileExtension,
-                    StringComparison.OrdinalIgnoreCase) >= 0)
+                    fileExtensions.IndexOf(fileExtension, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    bitampEncoder = _bitampEncoder;
-                }    
+                    bitmapEncoder = _bitampEncoder;
+                }
                 else if (!string.IsNullOrWhiteSpace(mimeTypes) &&
                     !string.IsNullOrWhiteSpace(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)
                     {
-                        if (mimeTypes.IndexOf(arrayMimeTypes[i], 
-                            StringComparison.OrdinalIgnoreCase) >= 0)
-                        {   
-                            bitampEncoder = _bitampEncoder;
+                        if (mimeTypes.IndexOf(arrayMimeTypes[i], StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            bitmapEncoder = _bitampEncoder;
                             break;
                         }
                     }
                 }
             }
 
-            if (bitampEncoder == null)
-            {   
-                switch (_encoderType)
-                {
-                    case ImageEncoderType.BmpBitmap:
-                        bitampEncoder = new BmpBitmapEncoder();
-                        break;
-                    case ImageEncoderType.GifBitmap:
-                        bitampEncoder = new GifBitmapEncoder();
-                        break;
-                    case ImageEncoderType.JpegBitmap:
-                        JpegBitmapEncoder jpgEncoder = new JpegBitmapEncoder();
-                        // Set the default/user options...
-                        bitampEncoder = jpgEncoder;
-                        break;
-                    case ImageEncoderType.PngBitmap:
-                        PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
-                        // Set the default/user options...
-                        bitampEncoder = pngEncoder;
-                        break;
-                    case ImageEncoderType.TiffBitmap:
-                        bitampEncoder = new TiffBitmapEncoder();
-                        break;
-                    case ImageEncoderType.WmpBitmap:
-                        WmpBitmapEncoder wmpEncoder = new WmpBitmapEncoder();
-                        // Set the default/user options...
-                        bitampEncoder = wmpEncoder;
-                        break;
-                }
-            }  
-
-            if (bitampEncoder == null)
+            if (bitmapEncoder == null)
             {
-                bitampEncoder = new PngBitmapEncoder();
+                bitmapEncoder = GetBitmapEncoder(_encoderType);
             }
 
-            return bitampEncoder;
+            return bitmapEncoder;
         }
 
         private string GetImageFileExtention()
         {
-            switch (_encoderType)
-            {
-                case ImageEncoderType.BmpBitmap:
-                    return ".bmp";
-                case ImageEncoderType.GifBitmap:
-                    return ".gif";
-                case ImageEncoderType.JpegBitmap:
-                    return ".jpg";
-                case ImageEncoderType.PngBitmap:
-                    return ".png";
-                case ImageEncoderType.TiffBitmap:
-                    return ".tif";
-                case ImageEncoderType.WmpBitmap:
-                    return ".wdp";
-            }
-
-            return ".png";
+            return GetImageFileExtention(_encoderType);
         }
 
         #endregion
@@ -831,24 +766,21 @@ namespace SharpVectors.Converters
             string xamlFileName = null;
             if (string.IsNullOrWhiteSpace(imageFileName))
             {
-                string fileNameWithoutExt =
-                    Path.GetFileNameWithoutExtension(fileName);
+                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
                 string workingDir = Path.GetDirectoryName(fileName);
-                xamlFileName = Path.Combine(workingDir,
-                    fileNameWithoutExt + ".xaml");
+                xamlFileName = Path.Combine(workingDir, fileNameWithoutExt + XamlExt);
             }
             else
             {
                 string fileExt = Path.GetExtension(imageFileName);
                 if (string.IsNullOrWhiteSpace(fileExt))
                 {
-                    xamlFileName = imageFileName + ".xaml";
+                    xamlFileName = imageFileName + XamlExt;
                 }
-                else if (!string.Equals(fileExt, ".xaml",
-                    StringComparison.OrdinalIgnoreCase))
+                else if (!string.Equals(fileExt, XamlExt, StringComparison.OrdinalIgnoreCase))
                 {
-                    xamlFileName = Path.ChangeExtension(imageFileName, ".xaml");
+                    xamlFileName = Path.ChangeExtension(imageFileName, XamlExt);
                 }
             }
 
@@ -861,16 +793,15 @@ namespace SharpVectors.Converters
             if (this.UseFrameXamlWriter)
             {
                 XmlWriterSettings writerSettings = new XmlWriterSettings();
-                writerSettings.Indent = true;
+                writerSettings.Indent             = true;
+                writerSettings.Encoding           = Encoding.UTF8;
                 writerSettings.OmitXmlDeclaration = true;
-                writerSettings.Encoding = Encoding.UTF8;
+
                 using (FileStream xamlFile = File.Create(xamlFileName))
                 {
-                    using (XmlWriter writer = XmlWriter.Create(
-                        xamlFile, writerSettings))
+                    using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
                     {
-                        System.Windows.Markup.XamlWriter.Save(
-                            drawing, writer);
+                        System.Windows.Markup.XamlWriter.Save(drawing, writer);
                     }
                 }
             }
@@ -878,8 +809,7 @@ namespace SharpVectors.Converters
             {
                 try
                 {
-                    XmlXamlWriter xamlWriter = new XmlXamlWriter(
-                        this.DrawingSettings);
+                    XmlXamlWriter xamlWriter = new XmlXamlWriter(this.DrawingSettings);
 
                     using (FileStream xamlFile = File.Create(xamlFileName))
                     {
@@ -894,20 +824,19 @@ namespace SharpVectors.Converters
                     {
                         if (File.Exists(xamlFileName))
                         {
-                            File.Move(xamlFileName, xamlFileName + ".bak");
+                            File.Move(xamlFileName, xamlFileName + BackupExt);
                         }
 
                         XmlWriterSettings writerSettings = new XmlWriterSettings();
-                        writerSettings.Indent = true;
+                        writerSettings.Indent             = true;
+                        writerSettings.Encoding           = Encoding.UTF8;
                         writerSettings.OmitXmlDeclaration = true;
-                        writerSettings.Encoding = Encoding.UTF8;
+
                         using (FileStream xamlFile = File.Create(xamlFileName))
                         {
-                            using (XmlWriter writer = XmlWriter.Create(
-                                xamlFile, writerSettings))
+                            using (XmlWriter writer = XmlWriter.Create(xamlFile, writerSettings))
                             {
-                                System.Windows.Markup.XamlWriter.Save(
-                                    drawing, writer);
+                                System.Windows.Markup.XamlWriter.Save(drawing, writer);
                             }
                         }
                     }
@@ -920,7 +849,7 @@ namespace SharpVectors.Converters
 
             if (this.SaveZaml)
             {
-                string zamlFileName = Path.ChangeExtension(xamlFileName, ".zaml");
+                string zamlFileName = Path.ChangeExtension(xamlFileName, CompressedXamlExt);
 
                 if (File.Exists(zamlFileName))
                 {

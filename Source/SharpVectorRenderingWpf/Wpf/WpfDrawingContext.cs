@@ -38,21 +38,51 @@ namespace SharpVectors.Renderers.Wpf
         #region Constructors and Destructor
 
         public WpfDrawingContext(bool isFragment)
+            : this(isFragment, new WpfDrawingSettings())
         {
-            _quickBounds   = Rect.Empty;
-            _isFragment    = isFragment;
-            _settings      = new WpfDrawingSettings();
-            _drawStack     = new Stack<DrawingGroup>();
-            _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            _paintContexts = new Dictionary<Guid, WpfSvgPaintContext>();
         }
 
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
-            : this(isFragment)
         {
-            if (settings != null)
+            if (settings == null)
             {
-                _settings = settings;
+                settings = new WpfDrawingSettings();                
+            }
+            _quickBounds   = Rect.Empty;
+            _isFragment    = isFragment;
+            _settings      = settings;
+            _drawStack     = new Stack<DrawingGroup>();
+            _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            _paintContexts = new Dictionary<Guid, WpfSvgPaintContext>();
+
+            var visitors = settings.Visitors;
+            if (visitors != null)
+            {
+                WpfLinkVisitor linkVisitor = visitors.LinkVisitor;
+                if (linkVisitor != null)
+                {
+                    _linkVisitor = linkVisitor;
+                }
+                WpfFontFamilyVisitor fontFamilyVisitor = visitors.FontFamilyVisitor;
+                if (fontFamilyVisitor != null)
+                {
+                    _fontFamilyVisitor = fontFamilyVisitor;
+                }
+                WpfEmbeddedImageVisitor imageVisitor = visitors.ImageVisitor;
+                if (imageVisitor != null)
+                {
+                    _imageVisitor = imageVisitor;
+                }
+                WpfIDVisitor idVisitor = visitors.IDVisitor;
+                if (idVisitor != null)
+                {
+                    _idVisitor = idVisitor;
+                }
+                WpfClassVisitor classVisitor = visitors.ClassVisitor;
+                if (classVisitor != null)
+                {
+                    _classVisitor = classVisitor;
+                }
             }
         }
 
@@ -182,12 +212,10 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfClassVisitor ClassVisitor
         {
-            get
-            {
+            get {
                 return _classVisitor;
             }
-            set
-            {
+            set {
                 _classVisitor = value;
             }
         }
@@ -401,14 +429,45 @@ namespace SharpVectors.Renderers.Wpf
         public void Initialize(WpfLinkVisitor linkVisitor, WpfFontFamilyVisitor fontFamilyVisitor,
             WpfEmbeddedImageVisitor imageVisitor)
         {
-            _linkVisitor = linkVisitor;
-            _fontFamilyVisitor = fontFamilyVisitor;
-            _imageVisitor = imageVisitor;
+            //TODO: Depreciate this operation as we have more visitors...
+            if (linkVisitor != null)
+            {
+                _linkVisitor = linkVisitor;
+            }
+            if (fontFamilyVisitor != null)
+            {
+                _fontFamilyVisitor = fontFamilyVisitor;
+            }
+            if (imageVisitor != null)
+            {
+                _imageVisitor = imageVisitor;
+            }
 
             _rootDrawing = new DrawingGroup();
 
             this.Push(_rootDrawing);
 
+
+            if (_idVisitor != null && !_idVisitor.IsInitialized)
+            {
+                _idVisitor.Initialize(this);
+            }
+            if (_linkVisitor != null && !_linkVisitor.IsInitialized)
+            {
+                _linkVisitor.Initialize(this);
+            }
+            if (_classVisitor != null && !_classVisitor.IsInitialized)
+            {
+                _classVisitor.Initialize(this);
+            }
+            if (_fontFamilyVisitor != null && !_fontFamilyVisitor.IsInitialized)
+            {
+                _fontFamilyVisitor.Initialize(this);
+            }
+            if (_imageVisitor != null && !_imageVisitor.IsInitialized)
+            {
+                _imageVisitor.Initialize(this);
+            }
             if (_linkVisitor != null && _linkVisitor.Aggregates)
             {
                 _linkDrawing = new DrawingGroup();
@@ -419,12 +478,32 @@ namespace SharpVectors.Renderers.Wpf
                     Runtime.SvgObject.SetName(_linkDrawing, groupId);
                 }
 
-                linkVisitor.Initialize(_linkDrawing, this);
+                _linkVisitor.Initialize(_linkDrawing, this);
             }
         }
 
         public void Uninitialize()
         {
+            if (_idVisitor != null)
+            {
+                _idVisitor.Uninitialize();
+            }
+            if (_linkVisitor != null)
+            {
+                _linkVisitor.Uninitialize();
+            }
+            if (_classVisitor != null)
+            {
+                _classVisitor.Uninitialize();
+            }
+            if (_fontFamilyVisitor != null)
+            {
+                _fontFamilyVisitor.Uninitialize();
+            }
+            if (_imageVisitor != null)
+            {
+                _imageVisitor.Uninitialize();
+            }
         }
 
         public void BeginDrawing()
@@ -440,6 +519,7 @@ namespace SharpVectors.Renderers.Wpf
                     _rootDrawing.Children.Add(_linkDrawing);
                 }
             }
+
         }
 
         public bool IsRegisteredId(string elementId)
@@ -497,7 +577,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (_paintContexts != null && _paintContexts.Count != 0)
             {
-                if(_paintContexts.ContainsKey(guidId))
+                if (_paintContexts.ContainsKey(guidId))
                 {
                     return _paintContexts[guidId];
                 }

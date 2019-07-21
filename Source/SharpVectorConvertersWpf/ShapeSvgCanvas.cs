@@ -121,7 +121,7 @@ namespace SharpVectors.Converters
 
             try
             {
-                _wpfWindow.LoadDocument(uri);
+                _wpfWindow.LoadDocument(uri, null);
                 _wpfRenderer.Render(_wpfWindow.Document);
                 this.Bounds = CalculateBounds(_wpfWindow);
 

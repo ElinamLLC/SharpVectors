@@ -285,13 +285,13 @@ namespace SharpVectors.Renderers.Wpf
                         //{
                         //    geometry = clipped;
                         //}
-                        DrawingGroup clipMaskGroup = new DrawingGroup();
+                        //DrawingGroup clipMaskGroup = new DrawingGroup();
 
                         Rect geometryBounds = geometry.Bounds;
 
                         if (clipGeom != null)
                         {   
-                            clipMaskGroup.ClipGeometry = clipGeom;
+                            //clipMaskGroup.ClipGeometry = clipGeom;
 
                             SvgUnitType clipUnits = this.ClipUnits;
                             if (clipUnits == SvgUnitType.ObjectBoundingBox)
@@ -405,11 +405,12 @@ namespace SharpVectors.Renderers.Wpf
                                 }
                             }
 
-                            clipMaskGroup.OpacityMask = maskBrush;
+                            //clipMaskGroup.OpacityMask = maskBrush;
                         }
 
-                        clipMaskGroup.Children.Add(drawing);
-                        drawGroup.Children.Add(clipMaskGroup);
+                        //clipMaskGroup.Children.Add(drawing);
+                        //drawGroup.Children.Add(clipMaskGroup);
+                        drawGroup.Children.Add(drawing);
                     }
                     else
                     {

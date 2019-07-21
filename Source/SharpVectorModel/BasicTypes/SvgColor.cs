@@ -130,13 +130,13 @@ namespace SharpVectors.Dom.Svg
         protected void ParseColor(string str)
         {
             str = str.Trim();
-            if (str.Equals("currentColor"))
+            if (str.Equals("currentColor", StringComparison.OrdinalIgnoreCase))
             {
                 SetColor(SvgColorType.CurrentColor, null, null);
             }
             else if (str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase) > -1)
             {
-                int iccStart = str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase);
+                int iccStart  = str.IndexOf("icc-color(", StringComparison.OrdinalIgnoreCase);
                 string strRgb = str.Substring(0, iccStart).Trim();
                 string strIcc = str.Substring(iccStart);
 

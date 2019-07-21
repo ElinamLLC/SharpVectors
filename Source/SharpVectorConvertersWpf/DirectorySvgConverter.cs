@@ -17,7 +17,7 @@ namespace SharpVectors.Converters
     {
         #region Private Fields
 
-        private int  _convertedCount;
+        private int _convertedCount;
         private bool _isOverwrite;
         private bool _isRecursive;
         private bool _includeHidden;
@@ -65,13 +65,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool Recursive
         {
-            get
-            {
+            get {
                 return _isRecursive;
             }
-
-            set
-            {
+            set {
                 _isRecursive = value;
             }
         }
@@ -85,13 +82,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool Overwrite
         {
-            get
-            {
+            get {
                 return _isOverwrite;
             }
-
-            set
-            {
+            set {
                 _isOverwrite = value;
             }
         }
@@ -107,13 +101,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeSecurity
         {
-            get
-            {
+            get {
                 return _includeSecurity;
             }
-
-            set
-            {
+            set {
                 _includeSecurity = value;
             }
         }
@@ -129,13 +120,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeHidden
         {
-            get
-            {
+            get {
                 return _includeHidden;
             }
-
-            set
-            {
+            set {
                 _includeHidden = value;
             }
         }
@@ -150,8 +138,7 @@ namespace SharpVectors.Converters
         /// </value>
         public bool WriterErrorOccurred
         {
-            get
-            {
+            get {
                 return _writerErrorOccurred;
             }
         }
@@ -170,12 +157,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool FallbackOnWriterError
         {
-            get
-            {
+            get {
                 return _fallbackOnWriterError;
             }
-            set
-            {
+            set {
                 _fallbackOnWriterError = value;
             }
         }
@@ -189,9 +174,8 @@ namespace SharpVectors.Converters
         /// </value>
         public DirectoryInfo SourceDir
         {
-            get 
-            { 
-                return _sourceDir; 
+            get {
+                return _sourceDir;
             }
         }
 
@@ -204,9 +188,8 @@ namespace SharpVectors.Converters
         /// </value>
         public DirectoryInfo DestinationDir
         {
-            get 
-            { 
-                return _destinationDir; 
+            get {
+                return _destinationDir;
             }
         }
 
@@ -224,9 +207,8 @@ namespace SharpVectors.Converters
         /// </remarks>
         public string ErrorFile
         {
-            get 
-            { 
-                return _errorFile; 
+            get {
+                return _errorFile;
             }
         }
 
@@ -265,18 +247,17 @@ namespace SharpVectors.Converters
         {
             if (sourceInfo == null)
             {
-                throw new ArgumentNullException("sourceInfo", 
+                throw new ArgumentNullException(nameof(sourceInfo),
                     "The source directory cannot be null (or Nothing).");
             }
             if (destInfo == null)
             {
-                throw new ArgumentNullException("destInfo",
+                throw new ArgumentNullException(nameof(destInfo),
                     "The destination directory cannot be null (or Nothing).");
             }
             if (!sourceInfo.Exists)
             {
-                throw new ArgumentException(
-                    "The source directory must exists.", "sourceInfo");
+                throw new ArgumentException("The source directory must exists.", nameof(sourceInfo));
             }
 
             _convertedCount = 0;
@@ -332,7 +313,7 @@ namespace SharpVectors.Converters
             for (int i = 0; i < dirCount; i++)
             {
                 DirectoryInfo sourceInfo = arrSourceInfo[i];
-                FileAttributes fileAttr  = sourceInfo.Attributes;
+                FileAttributes fileAttr = sourceInfo.Attributes;
                 if (!_includeHidden)
                 {
                     if ((fileAttr & FileAttributes.Hidden) == FileAttributes.Hidden)
@@ -370,12 +351,12 @@ namespace SharpVectors.Converters
             string xamlFilePath;
 
             IEnumerable<string> fileIterator = DirectoryUtils.FindFiles(
-              source, "*.*", SearchOption.TopDirectoryOnly);
+              source, "*.svg*", SearchOption.TopDirectoryOnly);
             foreach (string svgFileName in fileIterator)
             {
                 string fileExt = Path.GetExtension(svgFileName);
-                if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) || 
-                    string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, SvgExt, StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExt, CompressedSvgExt, StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {
@@ -388,8 +369,8 @@ namespace SharpVectors.Converters
                             }
                         }
 
-                        xamlFilePath = Path.Combine(targetDirName, 
-                            Path.GetFileNameWithoutExtension(svgFileName) + ".xaml");
+                        xamlFilePath = Path.Combine(targetDirName,
+                            Path.GetFileNameWithoutExtension(svgFileName) + XamlExt);
 
                         fileConverter.Convert(svgFileName, xamlFilePath);
 

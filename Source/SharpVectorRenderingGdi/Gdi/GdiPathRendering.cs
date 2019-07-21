@@ -35,17 +35,17 @@ namespace SharpVectors.Renderers.Gdi
         {
             GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
 
-            SvgRenderingHint hint = element.RenderingHint;
+            SvgRenderingHint hint = _svgElement.RenderingHint;
             if (hint != SvgRenderingHint.Shape || hint == SvgRenderingHint.Clipping)
             {
                 return;
             }
-            if (element.ParentNode is SvgClipPathElement)
+            if (_svgElement.ParentNode is SvgClipPathElement)
             {
                 return;
             }
 
-            SvgStyleableElement styleElm = (SvgStyleableElement)element;
+            SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
 
 			string sVisibility = styleElm.GetPropertyValue("visibility");
 			string sDisplay    = styleElm.GetPropertyValue("display");
@@ -54,7 +54,7 @@ namespace SharpVectors.Renderers.Gdi
                 return;
             }
 
-            GraphicsPath gp = CreatePath(element);
+            GraphicsPath gp = CreatePath(_svgElement);
 
 			if (gp != null)
 			{
@@ -121,13 +121,13 @@ namespace SharpVectors.Renderers.Gdi
 
         private Brush GetBrush(GraphicsPath gp)
         {
-            GdiSvgPaint paint = new GdiSvgPaint(element as SvgStyleableElement, "fill");
+            GdiSvgPaint paint = new GdiSvgPaint(_svgElement as SvgStyleableElement, "fill");
             return paint.GetBrush(gp);
         }
 
         private Pen GetPen(GraphicsPath gp)
         {
-            GdiSvgPaint paint = new GdiSvgPaint(element as SvgStyleableElement, "stroke");
+            GdiSvgPaint paint = new GdiSvgPaint(_svgElement as SvgStyleableElement, "stroke");
             return paint.GetPen(gp);
         }
 		

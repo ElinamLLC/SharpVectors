@@ -25,7 +25,7 @@ namespace SharpVectors.Renderers.Gdi
 		{
             GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
 
-			SvgSvgElement svgElm = (SvgSvgElement) element;
+			SvgSvgElement svgElm = (SvgSvgElement) _svgElement;
 
 			float x      = (float)svgElm.X.AnimVal.Value;
 			float y      = (float)svgElm.Y.AnimVal.Value;

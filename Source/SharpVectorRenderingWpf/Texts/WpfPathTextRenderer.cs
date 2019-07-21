@@ -105,7 +105,7 @@ namespace SharpVectors.Renderers.Texts
         private void RenderTRefPath(SvgTRefElement element, WpfTextOnPathDrawing pathDrawing,
             ref Point ctp)
         {
-            WpfTextPlacement placement = GetCurrentTextPosition(element, ctp);
+            WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
             ctp           = placement.Location;
             double rotate = placement.Rotation;
             if (!placement.HasPositions)
@@ -120,7 +120,7 @@ namespace SharpVectors.Renderers.Texts
         private void RenderTSpanPath(SvgTSpanElement element, WpfTextOnPathDrawing pathDrawing,
             ref Point ctp)
         {
-            WpfTextPlacement placement = GetCurrentTextPosition(element, ctp);
+            WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
             ctp           = placement.Location;
             double rotate = placement.Rotation;
             if (!placement.HasPositions)
@@ -181,12 +181,12 @@ namespace SharpVectors.Renderers.Texts
             }
 
             double emSize         = GetComputedFontSize(element);
-            FontFamily fontFamily = GetTextFontFamily(element, emSize);
+            var fontFamilyInfo = GetTextFontFamilyInfo(element);
 
-            FontStyle fontStyle   = GetTextFontStyle(element);
-            FontWeight fontWeight = GetTextFontWeight(element);
-
-            FontStretch fontStretch = GetTextFontStretch(element);
+            FontFamily fontFamily   = fontFamilyInfo.Family;
+            FontStyle fontStyle     = fontFamilyInfo.Style;
+            FontWeight fontWeight   = fontFamilyInfo.Weight;
+            FontStretch fontStretch = fontFamilyInfo.Stretch;
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
@@ -194,10 +194,10 @@ namespace SharpVectors.Renderers.Texts
             WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
-                WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
-                    fontStyle, fontStretch);
+                //WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
+                //    fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
-                    currentFamily, _context);
+                    fontFamilyInfo, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;

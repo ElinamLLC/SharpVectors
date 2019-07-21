@@ -33,7 +33,7 @@ namespace SharpVectors.Renderers.Gdi
         public override void Render(GdiGraphicsRenderer renderer)
 		{
             GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
-			SvgImageElement iElement = (SvgImageElement)element;
+			SvgImageElement iElement = (SvgImageElement)_svgElement;
 
 			ImageAttributes imageAttributes = new ImageAttributes();
 

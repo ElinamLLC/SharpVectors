@@ -7,19 +7,31 @@ namespace SharpVectors.Dom.Css
 	/// </summary>
 	public interface ICssColor
 	{
+        string Name { get; }
+
+		/// <summary>
+		/// This attribute is used for the alpha value of the RGBA color
+		/// </summary>
+		ICssPrimitiveValue Alpha { get; }
+
 		/// <summary>
 		/// This attribute is used for the red value of the RGB color
 		/// </summary>
-		ICssPrimitiveValue Red {get;}
+		ICssPrimitiveValue Red { get; }
 
 		/// <summary>
 		/// This attribute is used for the green value of the RGB color.
 		/// </summary>
-		ICssPrimitiveValue Green {get;}
+		ICssPrimitiveValue Green { get; }
 
 		/// <summary>
 		/// This attribute is used for the blue value of the RGB color
 		/// </summary>
-		ICssPrimitiveValue Blue {get;}
+		ICssPrimitiveValue Blue { get; }
+
+        /// <summary>
+        /// Gets a value which indicates whether the color value has alpha value or not.
+        /// </summary>
+        bool HasAlpha { get; }
 	}
 }

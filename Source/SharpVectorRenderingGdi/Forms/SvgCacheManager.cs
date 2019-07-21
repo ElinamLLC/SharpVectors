@@ -1,14 +1,14 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Xml;
+using System.Diagnostics;
 
 using SharpVectors.Net;
 
 namespace SharpVectors.Renderers.Forms
 {
-    public class SvgCacheManager : ICacheManager
+    public sealed class SvgCacheManager : ICacheManager
     {
         private string _cacheDir;
         private string _cacheDocPath;
@@ -22,7 +22,7 @@ namespace SharpVectors.Renderers.Forms
             _cacheDir     = Path.Combine(SvgApplicationContext.ExecutableDirectory.FullName, "cache/");
             _cacheDocPath = Path.Combine(_cacheDir, "cache.xml");
 
-            loadDoc();
+            LoadDoc();
         }
 
         public SvgCacheManager(string cacheDir)
@@ -31,7 +31,7 @@ namespace SharpVectors.Renderers.Forms
             _cacheDir     = Path.Combine(SvgApplicationContext.ExecutableDirectory.FullName, cacheDir);
             _cacheDocPath = Path.Combine(_cacheDir, "cache.xml");
 
-            loadDoc();
+            LoadDoc();
         }
 
         public long Size
@@ -52,23 +52,30 @@ namespace SharpVectors.Renderers.Forms
         {
             DirectoryInfo di = new DirectoryInfo(_cacheDir);
             FileInfo[] files = di.GetFiles();
-            foreach (FileInfo file in files)
+
+            if (files != null && files.Length != 0)
             {
-                try
+                foreach (FileInfo file in files)
                 {
-                    file.Delete();
+                    try
+                    {
+                        file.Delete();
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.TraceError(ex.ToString());
+                    }
                 }
-                catch { }
             }
 
             _cacheDoc = new XmlDocument();
 
-            loadDoc();
+            LoadDoc();
         }
 
         public CacheInfo GetCacheInfo(Uri uri)
         {
-            XmlElement cacheElm = getCacheElm(uri);
+            XmlElement cacheElm = GetCacheElm(uri);
 
             DateTime expires = DateTime.MinValue;
             if (cacheElm.HasAttribute("expires"))
@@ -82,7 +89,7 @@ namespace SharpVectors.Renderers.Forms
                 lastModified = DateTime.Parse(cacheElm.GetAttribute("last-modified"));
             }
 
-            Uri cachedUri = getLocalPathUri(cacheElm);
+            Uri cachedUri = GetLocalPathUri(cacheElm);
 
             return new CacheInfo(expires, cacheElm.GetAttribute("etag"), lastModified, 
                 cachedUri, cacheElm.GetAttribute("content-type"));
@@ -90,7 +97,7 @@ namespace SharpVectors.Renderers.Forms
 
         public void SetCacheInfo(Uri uri, CacheInfo cacheInfo, Stream stream)
         {
-            XmlElement cacheElm = getCacheElm(uri);
+            XmlElement cacheElm = GetCacheElm(uri);
 
             if (cacheInfo != null)
             {
@@ -153,10 +160,10 @@ namespace SharpVectors.Renderers.Forms
                 fs.Flush();
                 fs.Close();
             }
-            saveDoc();
+            SaveDoc();
         }
 
-        private void loadDoc()
+        private void LoadDoc()
         {
             if (File.Exists(_cacheDocPath))
             {
@@ -169,12 +176,12 @@ namespace SharpVectors.Renderers.Forms
             }
         }
 
-        private void saveDoc()
+        private void SaveDoc()
         {
             _cacheDoc.Save(_cacheDocPath);
         }
 
-        private XmlElement getCacheElm(Uri uri)
+        private XmlElement GetCacheElm(Uri uri)
         {
             if (uri == _lastUri && _lastCacheElm != null)
             {
@@ -198,7 +205,7 @@ namespace SharpVectors.Renderers.Forms
             return _lastCacheElm;
         }
 
-        private Uri getLocalPathUri(XmlElement cacheElm)
+        private Uri GetLocalPathUri(XmlElement cacheElm)
         {
             if (cacheElm.HasAttribute("local-path"))
             {

@@ -64,7 +64,6 @@ namespace SharpVectors.Dom.Svg
     /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</see>] specification.
     /// </para>
     /// </remarks>
-    /// 
     public class SvgDocument : CssXmlDocument, ISvgDocument
     {
         #region Public Static Fields
@@ -122,6 +121,7 @@ namespace SharpVectors.Dom.Svg
         private XmlReaderSettings _settings;
 
         private IList<SvgFontElement> _svgFonts;
+        private ISet<string> _svgFontFamilies;
 
         private double _dpi;
 
@@ -236,7 +236,7 @@ namespace SharpVectors.Dom.Svg
                 return result;
             }
 
-            if (ns == SvgNamespace)
+            if (string.Equals(ns, SvgNamespace, StringComparison.OrdinalIgnoreCase))
             {
                 return new SvgElement(prefix, localName, ns, this);
             }
@@ -960,11 +960,23 @@ namespace SharpVectors.Dom.Svg
                 }
                 return _svgFonts;
             }
-            private set {
-                if (value != null)
+        }
+
+        public ISet<string> SvgFontFamilies
+        {
+            get {
+
+                if (_svgFontFamilies == null && (_svgFonts != null && _svgFonts.Count != 0))
                 {
-                    _svgFonts = value;
+                    _svgFontFamilies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var svgFont in _svgFonts)
+                    {
+                        var fontFace = svgFont.FontFace;
+
+                        _svgFontFamilies.Add(fontFace.FontFamily);
+                    }
                 }
+                return _svgFontFamilies;
             }
         }
 
@@ -986,6 +998,50 @@ namespace SharpVectors.Dom.Svg
                 _svgFonts = new List<SvgFontElement>();
             }
             _svgFonts.Add(svgFont);
+        }
+
+        public IList<SvgFontElement> GetFonts(string fontFamily)
+        {
+            List<SvgFontElement> fontList = new List<SvgFontElement>();
+            if (string.IsNullOrWhiteSpace(fontFamily) || (_svgFonts == null || _svgFonts.Count == 0))
+            {
+                return fontList;
+            }
+            foreach (var svgFont in _svgFonts)
+            {
+                if (string.Equals(svgFont.FontFamily, fontFamily, StringComparison.OrdinalIgnoreCase))
+                {
+                    fontList.Add(svgFont);
+                }
+            }
+
+            return fontList;
+        }
+        public IList<SvgFontElement> GetFonts(IList<string> fontFamilies)
+        {
+            if (fontFamilies != null && fontFamilies.Count == 1)
+            {
+                return this.GetFonts(fontFamilies[0]);
+            }
+            List<SvgFontElement> fontList = new List<SvgFontElement>();
+            if ((fontFamilies == null || fontFamilies.Count == 0) ||
+                (_svgFonts == null || _svgFonts.Count == 0))
+            {
+                return fontList;
+            }
+            foreach (var svgFont in _svgFonts)
+            {
+                foreach (var fontFamily in fontFamilies)
+                {
+                    if (string.Equals(svgFont.FontFamily, fontFamily, StringComparison.OrdinalIgnoreCase))
+                    {
+                        fontList.Add(svgFont);
+                        break;
+                    }
+                }
+            }
+
+            return fontList;
         }
 
         #endregion

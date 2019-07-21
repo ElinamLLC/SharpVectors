@@ -32,13 +32,13 @@ namespace SharpVectors.Renderers.Texts
             if (string.IsNullOrWhiteSpace(text))
                 return;
 
-            double emSize         = GetComputedFontSize(element);
-            FontFamily fontFamily = GetTextFontFamily(element, emSize);
+            double emSize      = GetComputedFontSize(element);
+            var fontFamilyInfo = GetTextFontFamilyInfo(element);
 
-            FontStyle fontStyle   = GetTextFontStyle(element);
-            FontWeight fontWeight = GetTextFontWeight(element);
-
-            FontStretch fontStretch = GetTextFontStretch(element);
+            FontFamily fontFamily   = fontFamilyInfo.Family;
+            FontStyle fontStyle     = fontFamilyInfo.Style;
+            FontWeight fontWeight   = fontFamilyInfo.Weight;
+            FontStretch fontStretch = fontFamilyInfo.Stretch;
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
@@ -46,10 +46,10 @@ namespace SharpVectors.Renderers.Texts
             WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
-                WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
-                    fontStyle, fontStretch);
-                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily, _context);
+                //WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
+                //    fontStyle, fontStretch);
+                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
+                    fontFamilyInfo, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -69,7 +69,7 @@ namespace SharpVectors.Renderers.Texts
             {
                 return;
             }
-            else if (textBrush == null)
+            if (textBrush == null)
             {
                 // If here, then the pen is not null, and so the fill cannot be null.
                 // We set this to transparent for stroke only text path...
@@ -83,7 +83,7 @@ namespace SharpVectors.Renderers.Texts
             string wordSpaceText = element.GetAttribute("word-spacing");
             double wordSpacing   = 0;
             if (!string.IsNullOrWhiteSpace(wordSpaceText) &&
-                double.TryParse(wordSpaceText, out wordSpacing) && (float)wordSpacing != 0)
+                double.TryParse(wordSpaceText, out wordSpacing) && !wordSpacing.Equals(0))
             {
                 hasWordSpacing = true;
             }
@@ -92,7 +92,7 @@ namespace SharpVectors.Renderers.Texts
             string letterSpaceText = element.GetAttribute("letter-spacing");
             double letterSpacing = 0;
             if (!string.IsNullOrWhiteSpace(letterSpaceText) && 
-                double.TryParse(letterSpaceText, out letterSpacing) && (float)letterSpacing != 0)
+                double.TryParse(letterSpaceText, out letterSpacing) && !letterSpacing.Equals(0))
             {
                 hasLetterSpacing = true;
             }
@@ -103,19 +103,20 @@ namespace SharpVectors.Renderers.Texts
             int textPosCount = 0;
             if ((placement != null && placement.HasPositions))
             {
-                textPositions = placement.Positions;
-                textPosCount = textPositions.Count;
+                textPositions   = placement.Positions;
+                textPosCount    = textPositions.Count;
                 isRotatePosOnly = placement.IsRotateOnly;
             }
 
+            var typeFace = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
+
             if (hasLetterSpacing || hasWordSpacing || textPositions != null)
-            {   
+            {
                 for (int i = 0; i < text.Length; i++)
                 {
-                    FormattedText formattedText = new FormattedText(new string(text[i], 1), 
-                        _context.CultureInfo, stringFormat.Direction, 
-                        new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
-                        emSize, textBrush);
+                    var nextText = new string(text[i], 1);
+                    FormattedText formattedText = new FormattedText(nextText, 
+                        _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
 
                     formattedText.TextAlignment = stringFormat.Alignment;
                     formattedText.Trimming      = stringFormat.Trimming;
@@ -153,7 +154,7 @@ namespace SharpVectors.Renderers.Texts
                     Point textStart = ctp;
 
                     RotateTransform rotateAt = null;
-                    if (rotateAngle != 0)
+                    if (!rotateAngle.Equals(0))
                     {
                         rotateAt = new RotateTransform(rotateAngle, textStart.X, textStart.Y);
                         _textContext.PushTransform(rotateAt);
@@ -166,8 +167,7 @@ namespace SharpVectors.Renderers.Texts
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
                         {
-                            _textContext.DrawGeometry(textBrush, textPen, 
-                                ExtractTextPathGeometry(textGeometry));
+                            _textContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
 
                             this.IsTextPath = true;
                         }
@@ -193,7 +193,7 @@ namespace SharpVectors.Renderers.Texts
                     {
                         ctp.X += bboxWidth + letterSpacing;
                     }
-                    if (hasWordSpacing && Char.IsWhiteSpace(text[i]))
+                    if (hasWordSpacing && char.IsWhiteSpace(text[i]))
                     {
                         if (hasLetterSpacing)
                         {
@@ -221,8 +221,7 @@ namespace SharpVectors.Renderers.Texts
             else
             {   
                 FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-                    stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
-                    emSize, textBrush);
+                    stringFormat.Direction, typeFace, emSize, textBrush);
 
                 formattedText.TextAlignment = stringFormat.Alignment;
                 formattedText.Trimming      = stringFormat.Trimming;
@@ -244,7 +243,7 @@ namespace SharpVectors.Renderers.Texts
                 Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
                 RotateTransform rotateAt = null;
-                if (rotateAngle != 0)
+                if (!rotateAngle.Equals(0))
                 {
                     rotateAt = new RotateTransform(rotateAngle, ctp.X, ctp.Y);
                     _textContext.PushTransform(rotateAt);
@@ -293,13 +292,13 @@ namespace SharpVectors.Renderers.Texts
             if (string.IsNullOrWhiteSpace(text))
                 return;
 
-            double emSize         = GetComputedFontSize(element);
-            FontFamily fontFamily = GetTextFontFamily(element, emSize);
+            double emSize      = GetComputedFontSize(element);
+            var fontFamilyInfo = GetTextFontFamilyInfo(element);
 
-            FontStyle fontStyle   = GetTextFontStyle(element);
-            FontWeight fontWeight = GetTextFontWeight(element);
-
-            FontStretch fontStretch = GetTextFontStretch(element);
+            FontFamily fontFamily   = fontFamilyInfo.Family;
+            FontStyle fontStyle     = fontFamilyInfo.Style;
+            FontWeight fontWeight   = fontFamilyInfo.Weight;
+            FontStretch fontStretch = fontFamilyInfo.Stretch;
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
@@ -307,10 +306,10 @@ namespace SharpVectors.Renderers.Texts
             WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
-                WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
-                    fontStyle, fontStretch);
-                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName, 
-                    currentFamily,_context);
+                //WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
+                //    fontStyle, fontStretch);
+                WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
+                    fontFamilyInfo, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
                 {
                     fontFamily  = familyInfo.Family;
@@ -352,18 +351,18 @@ namespace SharpVectors.Renderers.Texts
 
             bool hasWordSpacing  = false;
             string wordSpaceText = element.GetAttribute("word-spacing");
-            double wordSpacing = 0;
+            double wordSpacing   = 0;
             if (!string.IsNullOrWhiteSpace(wordSpaceText) &&
-                double.TryParse(wordSpaceText, out wordSpacing) && (float)wordSpacing != 0)
+                double.TryParse(wordSpaceText, out wordSpacing) && !wordSpacing.Equals(0))
             {
                 hasWordSpacing = true;
             }
 
-            bool hasLetterSpacing = false;
+            bool hasLetterSpacing  = false;
             string letterSpaceText = element.GetAttribute("letter-spacing");
-            double letterSpacing = 0;
+            double letterSpacing   = 0;
             if (!string.IsNullOrWhiteSpace(letterSpaceText) &&
-                double.TryParse(letterSpaceText, out letterSpacing) && (float)letterSpacing != 0)
+                double.TryParse(letterSpaceText, out letterSpacing) && !letterSpacing.Equals(0))
             {
                 hasLetterSpacing = true;
             }
@@ -379,15 +378,51 @@ namespace SharpVectors.Renderers.Texts
                 isRotatePosOnly = placement.IsRotateOnly;
             }
 
+            var typeFace = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
+
+            if (textPositions != null && textPositions.Count != 0)
+            {
+                if (textPositions.Count == text.Trim().Length) //TODO: Best way to handle this...
+                {
+                    text = text.Trim();
+                }
+            }
+
             if (hasLetterSpacing || hasWordSpacing || textPositions != null)
             {
                 double spacing = Convert.ToDouble(letterSpacing);
+
+                int startSpaces = 0;
                 for (int i = 0; i < text.Length; i++)
                 {
-                    FormattedText formattedText = new FormattedText(new string(text[i], 1), 
-                        _context.CultureInfo, stringFormat.Direction, 
-                        new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
-                        emSize, textBrush);
+                    if (char.IsWhiteSpace(text[i]))
+                    {
+                        startSpaces++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                int j = 0;
+
+                string inputText = string.Empty;
+                for (int i = 0; i < text.Length; i++)
+                {
+                    // Avoid rendering only spaces at the start of text run...
+                    if (i == 0 && startSpaces != 0)
+                    {
+                        inputText = text.Substring(0, startSpaces + 1);
+                        i += startSpaces;
+                    }
+                    else
+                    {
+                        inputText = new string(text[i], 1);
+                    }
+
+                    FormattedText formattedText = new FormattedText(inputText,  _context.CultureInfo, 
+                        stringFormat.Direction, typeFace, emSize, textBrush);
 
                     if (this.IsMeasuring)
                     {
@@ -404,9 +439,9 @@ namespace SharpVectors.Renderers.Texts
                     }
 
                     WpfTextPosition? textPosition = null;
-                    if (textPositions != null && i < textPosCount)
+                    if (textPositions != null && j < textPosCount)
                     {
-                        textPosition = textPositions[i];
+                        textPosition = textPositions[j];
                     }
 
                     //float xCorrection = 0;
@@ -431,7 +466,7 @@ namespace SharpVectors.Renderers.Texts
                     Point textStart = ctp;
 
                     RotateTransform rotateAt = null;
-                    if (rotateAngle != 0)
+                    if (!rotateAngle.Equals(0))
                     {
                         rotateAt = new RotateTransform(rotateAngle, textStart.X, textStart.Y);
                         _textContext.PushTransform(rotateAt);
@@ -471,7 +506,7 @@ namespace SharpVectors.Renderers.Texts
                     {
                         ctp.X += bboxWidth + letterSpacing;
                     }
-                    if (hasWordSpacing && Char.IsWhiteSpace(text[i]))
+                    if (hasWordSpacing && char.IsWhiteSpace(text[i]))
                     {
                         if (hasLetterSpacing)
                         {
@@ -494,13 +529,13 @@ namespace SharpVectors.Renderers.Texts
                     {
                         _textContext.Pop();
                     }
+                    j++;
                 }
             }
             else
             {   
                 FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-                    stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
-                    emSize, textBrush);
+                    stringFormat.Direction, typeFace,  emSize, textBrush);
 
                 if (this.IsMeasuring)
                 {
@@ -533,7 +568,7 @@ namespace SharpVectors.Renderers.Texts
                 Point textPoint    = new Point(ctp.X, ctp.Y - yCorrection);
 
                 RotateTransform rotateAt = null;
-                if (rotateAngle != 0)
+                if (!rotateAngle.Equals(0))
                 {
                     rotateAt = new RotateTransform(rotateAngle, ctp.X, ctp.Y);
                     _textContext.PushTransform(rotateAt);

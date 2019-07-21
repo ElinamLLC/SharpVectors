@@ -63,7 +63,7 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             if (_uniqueColor.IsEmpty)
-                _uniqueColor = renderer.GetNextColor(element);
+                _uniqueColor = renderer.GetNextColor(_svgElement);
 
             GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
             if (graphics == null)
@@ -182,25 +182,25 @@ namespace SharpVectors.Renderers.Gdi
 
         protected void Clip(GdiGraphicsWrapper gr)
         {
-            if (element == null)
+            if (_svgElement == null)
             {
                 return;
             }
 
-            SvgRenderingHint hint = element.RenderingHint;
+            SvgRenderingHint hint = _svgElement.RenderingHint;
 
             // todo: should we correct the clipping to adjust to the off-one-pixel drawing?
             gr.TranslateClip(1, 1);
 
             #region Clip with clip
             // see http://www.w3.org/TR/SVG/masking.html#OverflowAndClipProperties 
-            if (element is ISvgSvgElement    || element is ISvgMarkerElement ||
-                element is ISvgSymbolElement || element is ISvgPatternElement)
+            if (_svgElement is ISvgSvgElement    || _svgElement is ISvgMarkerElement ||
+                _svgElement is ISvgSymbolElement || _svgElement is ISvgPatternElement)
             {
                 // check overflow property
-                CssValue overflow = ((SvgElement)element).GetComputedCssValue("overflow", string.Empty) as CssValue;
+                CssValue overflow = ((SvgElement)_svgElement).GetComputedCssValue("overflow", string.Empty) as CssValue;
                 // TODO: clip can have "rect(10 10 auto 10)"
-                CssPrimitiveValue clip = ((SvgElement)element).GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clip = ((SvgElement)_svgElement).GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
 
                 string sOverflow = null;
 
@@ -222,9 +222,9 @@ namespace SharpVectors.Renderers.Gdi
                         RectangleF clipRect = RectangleF.Empty;
                         if (clip != null && clip.PrimitiveType == CssPrimitiveType.Rect)
                         {
-                            if (element is ISvgSvgElement)
+                            if (_svgElement is ISvgSvgElement)
                             {
-                                ISvgSvgElement svgElement = (ISvgSvgElement)element;
+                                ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
                                 clipRect = GdiConverter.ToRectangle(viewPort);
                                 ICssRect clipShape = (CssRect)clip.GetRectValue();
@@ -240,15 +240,15 @@ namespace SharpVectors.Renderers.Gdi
                         }
                         else if (clip == null || (clip.PrimitiveType == CssPrimitiveType.Ident && clip.GetStringValue() == "auto"))
                         {
-                            if (element is ISvgSvgElement)
+                            if (_svgElement is ISvgSvgElement)
                             {
-                                ISvgSvgElement svgElement = (ISvgSvgElement)element;
+                                ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
                                 clipRect = GdiConverter.ToRectangle(viewPort);
                             }
-                            else if (element is ISvgMarkerElement ||
-                              element is ISvgSymbolElement ||
-                              element is ISvgPatternElement)
+                            else if (_svgElement is ISvgMarkerElement ||
+                              _svgElement is ISvgSymbolElement ||
+                              _svgElement is ISvgPatternElement)
                             {
                                 // TODO: what to do here?
                             }
@@ -270,13 +270,13 @@ namespace SharpVectors.Renderers.Gdi
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment)
             {
-                CssPrimitiveValue clipPath = ((SvgElement)element).GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clipPath = ((SvgElement)_svgElement).GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
                 if (clipPath != null && clipPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
-                    string absoluteUri = ((SvgElement)element).ResolveUri(clipPath.GetStringValue());
+                    string absoluteUri = ((SvgElement)_svgElement).ResolveUri(clipPath.GetStringValue());
 
-                    SvgClipPathElement eClipPath = element.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
+                    SvgClipPathElement eClipPath = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
 
                     if (eClipPath != null)
                     {
@@ -293,7 +293,7 @@ namespace SharpVectors.Renderers.Gdi
 
                         if (pathUnits == SvgUnitType.ObjectBoundingBox)
                         {
-                            SvgTransformableElement transElement = element as SvgTransformableElement;
+                            SvgTransformableElement transElement = _svgElement as SvgTransformableElement;
 
                             if (transElement != null)
                             {
@@ -311,7 +311,7 @@ namespace SharpVectors.Renderers.Gdi
                             else
                             {
                                 throw new NotImplementedException("clip-path with SvgUnitType.ObjectBoundingBox "
-                                  + "not supported for this type of element: " + element.GetType());
+                                  + "not supported for this type of element: " + _svgElement.GetType());
                             }
                         }
                         else
@@ -331,7 +331,7 @@ namespace SharpVectors.Renderers.Gdi
         {
             Graphics graphics = gr.Graphics;
 
-            string colorRendering = ((SvgElement)element).GetComputedStringValue("color-rendering", string.Empty);
+            string colorRendering = ((SvgElement)_svgElement).GetComputedStringValue("color-rendering", string.Empty);
             switch (colorRendering)
             {
                 case "optimizeSpeed":
@@ -347,12 +347,12 @@ namespace SharpVectors.Renderers.Gdi
                     break;
             }
 
-            if (element is SvgTextContentElement)
+            if (_svgElement is SvgTextContentElement)
             {
                 // Unfortunately the text rendering hints are not applied because the
                 // text path is recorded and painted to the Graphics object as a path
                 // not as text.
-                string textRendering = ((SvgElement)element).GetComputedStringValue("text-rendering", string.Empty);
+                string textRendering = ((SvgElement)_svgElement).GetComputedStringValue("text-rendering", string.Empty);
                 switch (textRendering)
                 {
                     case "optimizeSpeed":
@@ -376,7 +376,7 @@ namespace SharpVectors.Renderers.Gdi
             }
             else
             {
-                string shapeRendering = ((SvgElement)element).GetComputedStringValue("shape-rendering", string.Empty);
+                string shapeRendering = ((SvgElement)_svgElement).GetComputedStringValue("shape-rendering", string.Empty);
                 switch (shapeRendering)
                 {
                     case "optimizeSpeed":
@@ -398,11 +398,11 @@ namespace SharpVectors.Renderers.Gdi
 
         protected void Transform(GdiGraphicsWrapper gr)
         {
-            if (element is ISvgTransformable)
+            if (_svgElement is ISvgTransformable)
             {
                 if (_transformMatrix == null)
                 {
-                    ISvgTransformable transElm = (ISvgTransformable)element;
+                    ISvgTransformable transElm = (ISvgTransformable)_svgElement;
                     SvgTransformList svgTList  = (SvgTransformList)transElm.Transform.AnimVal;
                     SvgMatrix svgMatrix = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
 
@@ -415,7 +415,7 @@ namespace SharpVectors.Renderers.Gdi
 
         protected void FitToViewbox(GdiGraphicsWrapper graphics, RectangleF elmRect)
         {
-            ISvgFitToViewBox fitToVBElm = element as ISvgFitToViewBox;
+            ISvgFitToViewBox fitToVBElm = _svgElement as ISvgFitToViewBox;
             if (fitToVBElm != null)
             {
                 SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)fitToVBElm.PreserveAspectRatio.AnimVal;

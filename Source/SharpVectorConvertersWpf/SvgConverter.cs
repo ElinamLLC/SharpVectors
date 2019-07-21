@@ -2,26 +2,46 @@
 
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
+using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This is the <see langword="abstract"/> base class for all 
-    /// SVG to WPF converters.
+    /// This is the <see langword="abstract"/> base class for all SVG to WPF converters.
     /// </summary>
     public abstract class SvgConverter : DependencyObject, IDisposable
     {
+        #region Public Constant Fields
+
+        public const string SvgExt            = ".svg";
+        public const string CompressedSvgExt  = ".svgz";
+
+        public const string XamlExt           = ".xaml";
+        public const string CompressedXamlExt = ".zaml";
+
+        public const string BackupExt         = ".bak";
+
+        #endregion
+
         #region Private Fields
 
         private bool _saveXaml;
         private bool _saveZaml;
         private bool _useFrameXamlWriter;
 
-        private SolidColorBrush _background;
+        protected SolidColorBrush _background;
 
-        private WpfDrawingSettings _wpfSettings;
+        protected WpfDrawingSettings _wpfSettings;
+
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        protected WpfSvgWindow _wpfWindow;
+        protected WpfDrawingRenderer _wpfRenderer;
 
         #endregion
 
@@ -36,7 +56,7 @@ namespace SharpVectors.Converters
         /// </summary>
         protected SvgConverter()
             : this(null)
-        {   
+        {
         }
 
         /// <summary>
@@ -74,11 +94,11 @@ namespace SharpVectors.Converters
         /// This specifies the settings used by the rendering or drawing engine.
         /// If this is <see langword="null"/>, the default settings is used.
         /// </param>
-        protected SvgConverter(bool saveXaml, bool saveZaml, 
-            WpfDrawingSettings settings) : this(settings)
+        protected SvgConverter(bool saveXaml, bool saveZaml, WpfDrawingSettings settings)
+            : this(settings)
         {
-            _saveXaml    = saveXaml;
-            _saveZaml    = SaveZaml;
+            _saveXaml = saveXaml;
+            _saveZaml = saveZaml;
         }
 
         /// <summary>
@@ -106,12 +126,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool SaveXaml
         {
-            get
-            {
+            get {
                 return _saveXaml;
             }
-            set
-            {
+            set {
                 _saveXaml = value;
             }
         }
@@ -131,12 +149,10 @@ namespace SharpVectors.Converters
         /// </remarks>
         public bool SaveZaml
         {
-            get
-            {
+            get {
                 return _saveZaml;
             }
-            set
-            {
+            set {
                 _saveZaml = value;
             }
         }
@@ -157,12 +173,10 @@ namespace SharpVectors.Converters
         /// </remarks>
         public bool UseFrameXamlWriter
         {
-            get
-            {
+            get {
                 return _useFrameXamlWriter;
             }
-            set
-            {
+            set {
                 _useFrameXamlWriter = value;
             }
         }
@@ -176,12 +190,10 @@ namespace SharpVectors.Converters
         /// </value>
         public SolidColorBrush Background
         {
-            get
-            {
+            get {
                 return _background;
             }
-            set
-            {
+            set {
                 _background = value;
             }
         }
@@ -195,10 +207,143 @@ namespace SharpVectors.Converters
         /// </value>
         public WpfDrawingSettings DrawingSettings
         {
-            get
-            {
+            get {
                 return _wpfSettings;
             }
+        }
+
+        public WpfSvgWindow SvgWindow
+        {
+            get {
+                return _wpfWindow;
+            }
+        }
+
+        public SvgDocument SvgDocument
+        {
+            get {
+                if (_wpfWindow != null)
+                {
+                    return _wpfWindow.Document as SvgDocument;
+                }
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected virtual void BeginProcessing()
+        {
+            if (_wpfSettings == null)
+            {
+                return;
+            }
+
+            var visitors = _wpfSettings.Visitors;
+            WpfLinkVisitor linkVisitor = visitors.LinkVisitor;
+            if (linkVisitor == null)
+            {
+                linkVisitor = new LinkVisitor();
+                visitors.LinkVisitor = linkVisitor;
+            }
+            WpfFontFamilyVisitor fontFamilyVisitor = visitors.FontFamilyVisitor;
+            if (fontFamilyVisitor == null)
+            {
+                fontFamilyVisitor = new FontFamilyVisitor();
+                visitors.FontFamilyVisitor = fontFamilyVisitor;
+            }
+            WpfEmbeddedImageVisitor imageVisitor = visitors.ImageVisitor;
+            if (imageVisitor == null)
+            {
+                imageVisitor = new EmbeddedImageVisitor();
+                visitors.ImageVisitor = imageVisitor;
+            }
+            WpfIDVisitor idVisitor = visitors.IDVisitor;
+            if (idVisitor != null)
+            {
+                visitors.IDVisitor = idVisitor;
+            }
+            WpfClassVisitor classVisitor = visitors.ClassVisitor;
+            if (classVisitor != null)
+            {
+                visitors.ClassVisitor = classVisitor;
+            }
+
+            if (_wpfRenderer != null)
+            {
+                _wpfRenderer.LinkVisitor       = linkVisitor;
+                _wpfRenderer.ImageVisitor      = imageVisitor;
+                _wpfRenderer.FontFamilyVisitor = fontFamilyVisitor;
+            }
+        }
+
+        protected virtual void EndProcessing()
+        {
+            //TODO: Currently, experimental
+            GC.Collect();
+        }
+
+        protected static BitmapEncoder GetBitmapEncoder(ImageEncoderType encoderType)
+        {
+            BitmapEncoder bitmapEncoder = null;
+
+            switch (encoderType)
+            {
+                case ImageEncoderType.BmpBitmap:
+                    bitmapEncoder = new BmpBitmapEncoder();
+                    break;
+                case ImageEncoderType.GifBitmap:
+                    bitmapEncoder = new GifBitmapEncoder();
+                    break;
+                case ImageEncoderType.JpegBitmap:
+                    JpegBitmapEncoder jpgEncoder = new JpegBitmapEncoder();
+                    // Set the default/user options...
+                    bitmapEncoder = jpgEncoder;
+                    break;
+                case ImageEncoderType.PngBitmap:
+                    PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
+                    // Set the default/user options...
+                    bitmapEncoder = pngEncoder;
+                    break;
+                case ImageEncoderType.TiffBitmap:
+                    bitmapEncoder = new TiffBitmapEncoder();
+                    break;
+                case ImageEncoderType.WmpBitmap:
+                    WmpBitmapEncoder wmpEncoder = new WmpBitmapEncoder();
+                    // Set the default/user options...
+                    bitmapEncoder = wmpEncoder;
+                    break;
+            }
+
+            if (bitmapEncoder == null)
+            {
+                bitmapEncoder = new PngBitmapEncoder();
+            }
+
+            return bitmapEncoder;
+        }
+
+        protected static string GetImageFileExtention(ImageEncoderType encoderType)
+        {
+            switch (encoderType)
+            {
+                case ImageEncoderType.BmpBitmap:
+                    return ".bmp";
+                case ImageEncoderType.GifBitmap:
+                    return ".gif";
+                case ImageEncoderType.JpegBitmap:
+                    return ".jpg";
+                case ImageEncoderType.PngBitmap:
+                    return ".png";
+                case ImageEncoderType.TiffBitmap:
+                    return ".tif";
+                case ImageEncoderType.WmpBitmap:
+                    return ".wdp";
+            }
+
+            return ".png";
         }
 
         #endregion

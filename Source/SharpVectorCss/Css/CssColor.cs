@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Globalization;
 using System.Collections.Generic;
 
@@ -273,7 +274,23 @@ namespace SharpVectors.Dom.Css
             get {
                 if (string.IsNullOrWhiteSpace(_name))
                 {
-                    return string.Format("");
+                    if (_red != null && _green != null && _blue != null)
+                    {
+                        int red   = Convert.ToInt32(_red.GetFloatValue(CssPrimitiveType.Number));
+                        int green = Convert.ToInt32(_green.GetFloatValue(CssPrimitiveType.Number));
+                        int blue  = Convert.ToInt32(_blue.GetFloatValue(CssPrimitiveType.Number));
+                        int alpha = 255;
+                        if (_alpha != null)
+                        {
+                            alpha = Convert.ToInt32(_alpha.GetFloatValue(CssPrimitiveType.Number));
+                        }
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendFormat("#{0:X2}", alpha);
+                        sb.AppendFormat("{0:X2}", red);
+                        sb.AppendFormat("{0:X2}", green);
+                        sb.AppendFormat("{0:X2}", blue);
+                        _name = sb.ToString();
+                    }
                 }
                 return _name;
             }

@@ -3,15 +3,15 @@
   <Class Name="SharpVectors.Renderers.Gdi.GdiRendering" Collapsed="true">
     <Position X="2.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAACBAAgCgEAAAAAAAAAQQCAAAAAEAIAIgAICQgAAA=</HashCode>
+      <HashCode>gAAACBAEgCgEAAAAAAAAAQQCAAAAAEAIAIgAICQgAAA=</HashCode>
       <FileName>Gdi\GdiRendering.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpVectors.Renderers.Gdi.GdiElementRendering" Collapsed="true">
+  <Class Name="SharpVectors.Renderers.Gdi.GdiRootRendering" Collapsed="true">
     <Position X="0.5" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
-      <FileName>Gdi\GdiElementRendering.cs</FileName>
+      <FileName>Gdi\GdiRootRendering.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Gdi.GdiMarkerRendering" Collapsed="true">
@@ -31,7 +31,7 @@
   <Class Name="SharpVectors.Renderers.Gdi.GdiGradientFill" Collapsed="true">
     <Position X="0.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAADAAAAAAAAAAAIAAAAQAAAHAAAYgAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAADAAAAAAAAAAAIAAAAQAAAGAAAYgAAAAAAA=</HashCode>
       <FileName>Gdi\GdiGradientFill.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -50,9 +50,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Gdi.GdiRenderingBase" Collapsed="true">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+    <Position X="2.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAACAUAAAAAAgAAQAIAAAACAAAAhAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAACEUAAAAAAgAAQAAAAAAAAAAAhIAAAAAAAA=</HashCode>
       <FileName>Gdi\GdiRenderingBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -60,7 +60,7 @@
   <Class Name="SharpVectors.Renderers.Gdi.GdiImageRendering" Collapsed="true">
     <Position X="4.75" Y="3" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAACAAAABAAAAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAACAAgABAAAAACAAA=</HashCode>
       <FileName>Gdi\GdiImageRendering.cs</FileName>
     </TypeIdentifier>
   </Class>
