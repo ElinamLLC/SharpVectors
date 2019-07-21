@@ -6,20 +6,6 @@
     local:MainWindowSettings.Save="True"
     Title="W3C SVG 1.1 Full Test Suite - Full SVG Specifications" Height="640" Width="1080">
     <DockPanel LastChildFill="True" Margin="3">
-        <!-- Bottom status panel -->
-        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" DockPanel.Dock="Bottom" Margin="0, 3, 0, 3" Visibility="Collapsed">
-            <StackPanel Orientation="Vertical">   
-                <DockPanel Margin="3" LastChildFill="True">                    
-                    <TextBlock Name="testDescritionLabel" DockPanel.Dock="Left" Text="Test Description: " FontSize="12" FontWeight="Bold" TextAlignment="Left" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
-                    <TextBlock Name="testDescrition" FontSize="12" TextAlignment="Left" TextTrimming="None" TextWrapping="Wrap"/>
-                </DockPanel>
-                 <DockPanel Margin="3" LastChildFill="True">                    
-                    <TextBlock Name="testFilePathLabel" DockPanel.Dock="Left" Text="Test File Path: " FontSize="12" FontWeight="Bold" TextAlignment="Left" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
-                    <TextBox Name="testFilePath" FontSize="12" Margin="18, 0, 0, 6" TextAlignment="Left" HorizontalAlignment="Stretch" IsReadOnly="True" TextWrapping="NoWrap"/>
-                </DockPanel>
-           </StackPanel>
-        </Border>
-        
         <!-- The main content panel -->
         <Border BorderBrush="Transparent" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
             <Grid Name="mainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -103,18 +89,19 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="TabItem">
-                                        <Border Name="Border" BorderThickness="1,2,1,0" BorderBrush="DarkGray" CornerRadius="8,0,0,0" Margin="2,2">
-                                            <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="4,4"/>
+                                        <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Silver" CornerRadius="0,0,0,0" Margin="2,2">
+                                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                ContentSource="Header" Margin="4,4"/>
                                         </Border>
                                         <ControlTemplate.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="LightGray" />
-                                            </Trigger>
                                             <Trigger Property="IsSelected" Value="False">
+                                                <Setter TargetName="Border" Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="LightGray" Opacity="0.8"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
                                                 <Setter TargetName="Border" Property="Background" Value="White" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
@@ -127,7 +114,7 @@
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/TestRunner.svg, AppName=WpfW3cSvgTestSuite}" />
-                                <TextBlock Text="Test" Margin="3" VerticalAlignment="Center" />
+                                <TextBlock Text="Test" Margin="3" VerticalAlignment="Center" MinWidth="60" />
                             </StackPanel>
                         </TabItem.Header>
                         <Frame Name="frameDrawing" Source="DrawingPage.xaml"/>

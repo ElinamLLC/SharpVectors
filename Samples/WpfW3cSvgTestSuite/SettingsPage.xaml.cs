@@ -197,7 +197,7 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            System.Diagnostics.Process.Start("explorer.exe", @"/select, " + filePath);
+            OptionSettings.OpenFolderAndSelectItem(filePath, null);
         }
 
         private void OnSvgSuitePathTextChanged(object sender, TextChangedEventArgs e)

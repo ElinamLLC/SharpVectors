@@ -2,25 +2,20 @@
 using System.IO;
 using System.IO.Packaging;
 using System.IO.Compression;
-using System.Collections.Generic;
 
-using System.Printing;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Utils;
+using ICSharpCode.AvalonEdit.Search;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
-using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.CodeCompletion;
-using ICSharpCode.AvalonEdit.Search;
 
 using Microsoft.Win32;
 
@@ -33,10 +28,14 @@ namespace WpfTestSvgSample
     {
         #region Private Fields
 
-        private string currentFileName;
+        private string _currentFileName;
+
+        private MainWindow _mainWindow;
 
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
+
+        private readonly SearchPanel _searchPanel;
 
         #endregion
 
@@ -51,11 +50,13 @@ namespace WpfTestSvgSample
             if (options != null)
             {
                 //options.AllowScrollBelowDocument = true;
-                options.EnableHyperlinks = true;
-                options.EnableEmailHyperlinks = true;
-                //options.ShowSpaces = true;
-                //options.ShowTabs = true;
-                //options.ShowEndOfLine = true;              
+                options.EnableHyperlinks           = true;
+                options.EnableEmailHyperlinks      = true;
+                options.EnableVirtualSpace         = false;
+                options.HighlightCurrentLine       = true;
+                //options.ShowSpaces               = true;
+                //options.ShowTabs                 = true;
+                //options.ShowEndOfLine            = true;              
             }
             textEditor.ShowLineNumbers = true;
 
@@ -67,7 +68,21 @@ namespace WpfTestSvgSample
             textEditor.CommandBindings.Add(new CommandBinding(
                 ApplicationCommands.PrintPreview, OnPrintPreview, OnCanExecuteTextEditorCommand));
 
-            SearchPanel.Install(textEditor);
+            _searchPanel = SearchPanel.Install(textEditor);
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public MainWindow MainWindow
+        {
+            get {
+                return _mainWindow;
+            }
+            set {
+                _mainWindow = value;
+            }
         }
 
         #endregion
@@ -86,8 +101,7 @@ namespace WpfTestSvgSample
             {
                 using (FileStream fileStream = File.OpenRead(documentFileName))
                 {
-                    using (GZipStream zipStream =
-                        new GZipStream(fileStream, CompressionMode.Decompress))
+                    using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
                     {
                         // Text Editor does not work with this stream, so we read the data to memory stream...
                         MemoryStream memoryStream = new MemoryStream();
@@ -146,7 +160,7 @@ namespace WpfTestSvgSample
         {
             if (isSelected)
             {
-                if (!textEditor.TextArea.IsKeyboardFocusWithin)
+                if (textEditor.TextArea.IsKeyboardFocusWithin)
                 {
                     Keyboard.Focus(textEditor.TextArea);
                 }
@@ -163,38 +177,64 @@ namespace WpfTestSvgSample
             dlg.CheckFileExists = true;
             if (dlg.ShowDialog() ?? false)
             {
-                currentFileName = dlg.FileName;
-                textEditor.Load(currentFileName);
-                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(currentFileName));
+                _currentFileName = dlg.FileName;
+                textEditor.Load(_currentFileName);
+                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(
+                    Path.GetExtension(_currentFileName));
             }
         }
 
         private void OnSaveFileClick(object sender, EventArgs e)
         {
-            if (currentFileName == null)
+            if (_currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.DefaultExt = ".txt";
+                dlg.Filter = "SVG Files|*.xaml;*.zaml";
+                dlg.DefaultExt = ".xaml";
                 if (dlg.ShowDialog() ?? false)
                 {
-                    currentFileName = dlg.FileName;
+                    _currentFileName = dlg.FileName;
                 }
                 else
                 {
                     return;
                 }
             }
-            textEditor.Save(currentFileName);
+
+            string fileExt = Path.GetExtension(_currentFileName);
+            if (string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase))
+            {
+                textEditor.Save(_currentFileName);
+            }
+            else if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+            {
+                using (FileStream svgzDestFile = File.Create(_currentFileName))
+                {
+                    using (GZipStream zipStream = new GZipStream(svgzDestFile,
+                        CompressionMode.Compress, true))
+                    {
+                        textEditor.Save(zipStream);
+                    }
+                }
+            }
         }
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)
         {
-            string searchText = searchTextBox.Text;
-
-            if (string.IsNullOrWhiteSpace(searchText))
+            if (_searchPanel == null)
             {
                 return;
             }
+
+            string searchText = searchTextBox.Text;
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                _searchPanel.SearchPattern = searchText;
+            }
+
+            _searchPanel.Open();
+            _searchPanel.Reactivate();
         }
 
         private void OnSearchTextBoxKeyUp(object sender, KeyEventArgs e)
@@ -213,45 +253,6 @@ namespace WpfTestSvgSample
 
         private void OnHighlightingSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (textEditor.SyntaxHighlighting == null)
-            //{
-            //    _foldingStrategy = null;
-            //}
-            //else
-            //{
-            //    switch (textEditor.SyntaxHighlighting.Name)
-            //    {
-            //        case "XML":
-            //            _foldingStrategy = new XmlFoldingStrategy();
-            //            textEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
-            //            break;
-            //        case "C#":
-            //        case "C++":
-            //        case "PHP":
-            //        case "Java":
-            //            textEditor.TextArea.IndentationStrategy = new CSharpIndentationStrategy(textEditor.Options);
-            //            _foldingStrategy = new BraceFoldingStrategy();
-            //            break;
-            //        default:
-            //            textEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
-            //            _foldingStrategy = null;
-            //            break;
-            //    }
-            //}
-            //if (_foldingStrategy != null)
-            //{
-            //    if (_foldingManager == null)
-            //        _foldingManager = FoldingManager.Install(textEditor.TextArea);
-            //    _foldingStrategy.UpdateFoldings(_foldingManager, textEditor.Document);
-            //}
-            //else
-            //{
-            //    if (_foldingManager != null)
-            //    {
-            //        FoldingManager.Uninstall(_foldingManager);
-            //        _foldingManager = null;
-            //    }
-            //}
         }
 
         #endregion

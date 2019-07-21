@@ -1,11 +1,14 @@
 ﻿<Page x:Class="WpfSvgTestBox.SvgPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:local="clr-namespace:WpfSvgTestBox"
-    Title="SvgPage" Background="White"
+    mc:Ignorable="d" 
+    Title="SvgPage" Background="White" d:DesignHeight="450" d:DesignWidth="800"
         DragEnter="OnDragEnter" DragLeave="OnDragLeave" Drop="OnDragDrop" AllowDrop="True"
         FocusManager.FocusedElement="{Binding ElementName=canvasScroller}">
     <Page.Resources>
@@ -24,16 +27,14 @@
 
     <Page.CommandBindings>
         <!-- Bind commands to event handlers. -->
-        <CommandBinding Command="{StaticResource Commands.ZoomOut}" 
-            Executed="OnZoomOut"/>
-        <CommandBinding Command="{StaticResource Commands.ZoomIn}" 
-            Executed="OnZoomIn"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomOut}" Executed="OnZoomOut"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomIn}" Executed="OnZoomIn"/>
     </Page.CommandBindings>
-    <Grid Name="rightGrid">
+    <Grid x:Name="rightGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="8"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="220"/>
         </Grid.RowDefinitions>
         
         <DockPanel LastChildFill="True" Grid.Row="0">
@@ -83,24 +84,24 @@
                 <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}" ToolTip="Show End Of Line">
                     <Image Source="{svgc:SvgImage Source=/Images/Space.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </CheckBox>
-                <ComboBox Name="highlightingComboBox" Width="120"
+                <ComboBox x:Name="highlightingComboBox" Width="120"
 				    SelectedItem="{Binding SyntaxHighlighting, ElementName=textEditor}"
 				    ItemsSource="{Binding Source={x:Static avalonEdit:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
 				    SelectionChanged="OnHighlightingSelectionChanged"/>
                 <Separator/>
-                <TextBox Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
+                <TextBox x:Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
                 <Button Click="OnSearchTextClick" ToolTip="Search">
                     <Image Source="{svgc:SvgImage Source=/Images/Find.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                 </Button>
                 <Separator/>
-                <Button Name="formatInput" Click="OnFormatInputClick" ToolTip="Format Document">
+                <Button x:Name="formatInput" Click="OnFormatInputClick" ToolTip="Format Document">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{svgc:SvgImage Source=/Images/Format.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                         <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Format</TextBlock>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="convertInput" Click="OnConvertInputClick" ToolTip="Convert Document">
+                <Button x:Name="convertInput" Click="OnConvertInputClick" ToolTip="Convert Document">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{svgc:SvgImage Source=/Images/Run.svg, AppName=WpfSvgTestBox}" Height="24" Width="24"/>
                         <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Convert</TextBlock>
@@ -108,14 +109,14 @@
                 </Button>
             </ToolBar>
 
-            <avalonEdit:TextEditor Name="textEditor" FontFamily="Consolas" FontSize="12pt"/>
+            <avalonEdit:TextEditor x:Name="textEditor" FontFamily="Consolas" FontSize="12pt"/>
         </DockPanel>
 
-        <GridSplitter Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                      BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
-        <DockPanel Name="viewerFrame" LastChildFill="True" Grid.Row="2">
+        <local:GridExpander x:Name="rightSplitter" Grid.Row="1" Height="14" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                      BorderThickness="1" BorderBrush="LightGray" Background="LightGray"/>
+        <DockPanel x:Name="viewerFrame" LastChildFill="True" Grid.Row="2">
             <ScrollViewer x:Name="canvasScroller" CanContentScroll="True" Padding="4"
-                VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
                 <!-- This is the control that handles zooming and panning. -->
                 <svg:ZoomPanControl x:Name="zoomPanControl"

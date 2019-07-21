@@ -65,6 +65,7 @@
     <Compile Include="DebugPage.xaml.cs">
       <DependentUpon>DebugPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridExpander.cs" />
     <Compile Include="MouseHandlingMode.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>

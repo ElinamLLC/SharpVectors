@@ -15,11 +15,19 @@ namespace WpfW3cSvgTestSuite
 
         public TraceDocument()
         {
-            AutoAttach = false;
+            AutoAttach = true;
+            AutoDetach = false;
             InitializeComponent();
+
+            if (_listener == null)
+            {
+                _listener = new TraceTextSource(this);
+                Trace.Listeners.Add(_listener);
+            }
         }
 
         public bool AutoAttach { get; set; }
+        public bool AutoDetach { get; set; }
 
         public void Event(string msg, TraceEventType eventType)
         {
@@ -98,7 +106,7 @@ namespace WpfW3cSvgTestSuite
 
         private void Document_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (AutoAttach && _listener != null)
+            if (AutoDetach && _listener != null)
             {
                 Trace.Listeners.Remove(_listener);
                 _listener.Dispose();

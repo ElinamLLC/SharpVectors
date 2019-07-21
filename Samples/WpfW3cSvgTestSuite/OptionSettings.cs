@@ -2,6 +2,8 @@
 using System.IO;
 using System.Xml;
 using System.Text;
+using System.Linq;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using SharpVectors.Renderers.Wpf;
@@ -9,8 +11,26 @@ using SharpVectors.Renderers.Wpf;
 namespace WpfW3cSvgTestSuite
 {
     [Serializable]
-    public sealed class OptionSettings : ICloneable
+    public sealed class OptionSettings : INotifyPropertyChanged, ICloneable
     {
+        #region Private Interop Methods
+
+        [DllImport("shell32.dll", SetLastError = true)]
+        private static extern int SHOpenFolderAndSelectItems(IntPtr pidlFolder,
+            uint cidl, [In, MarshalAs(UnmanagedType.LPArray)] IntPtr[] apidl, uint dwFlags);
+
+        [DllImport("shell32.dll", SetLastError = true)]
+        private static extern void SHParseDisplayName([MarshalAs(UnmanagedType.LPWStr)] string name,
+            IntPtr bindingContext, [Out] out IntPtr pidl, uint sfgaoIn, [Out] out uint psfgaoOut);
+
+        #endregion
+
+        #region Public Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
         #region Private Fields
 
         private const string ParentSymbol = "..\\";
@@ -70,6 +90,10 @@ namespace WpfW3cSvgTestSuite
 
         public OptionSettings(OptionSettings source)
         {
+            if (source == null)
+            {
+                return;
+            }
             _hidePathsRoot  = source._hidePathsRoot;
             _webSuitePath   = source._webSuitePath;
             _localSuitePath = source._localSuitePath;
@@ -247,13 +271,104 @@ namespace WpfW3cSvgTestSuite
             return true;
         }
 
+        public static void OpenFolderAndSelectItem(string folderPath, string file)
+        {
+            if (string.IsNullOrEmpty(folderPath) || Directory.Exists(folderPath) == false)
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                var selectedIsFile = false;
+                var selectedName = string.Empty;
+                var dirInfo = new DirectoryInfo(folderPath);
+
+                var firstFileName = dirInfo.EnumerateFiles()
+                    .Select(f => f.Name)
+                    .FirstOrDefault(name => !string.Equals(name, "Thumbs.db", StringComparison.OrdinalIgnoreCase));
+                if (!string.IsNullOrWhiteSpace(firstFileName))
+                {
+                    selectedIsFile = true;
+                    selectedName = firstFileName;
+                }
+                else
+                {
+                    if (!IsDirectoryEmpty(dirInfo.FullName))
+                    {
+                        var firstDirName = dirInfo.EnumerateDirectories()
+                            .Select(f => f.Name)
+                            .FirstOrDefault();
+                        if (!string.IsNullOrWhiteSpace(firstDirName))
+                        {
+                            selectedIsFile = false;
+                            selectedName = firstDirName;
+                        }
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(selectedName))
+                {
+                    if (selectedIsFile)
+                    {
+                        file = selectedName;
+                    }
+                    else
+                    {
+                        folderPath = Path.Combine(folderPath, selectedName);
+                    }
+                }
+            }
+
+            IntPtr nativeFolder;
+            uint psfgaoOut;
+            SHParseDisplayName(folderPath, IntPtr.Zero, out nativeFolder, 0, out psfgaoOut);
+
+            if (nativeFolder == IntPtr.Zero)
+            {
+                // Log error, can't find folder
+                return;
+            }
+
+            IntPtr nativeFile = IntPtr.Zero;
+            if (!string.IsNullOrWhiteSpace(file))
+            {
+                SHParseDisplayName(Path.Combine(folderPath, file),
+                    IntPtr.Zero, out nativeFile, 0, out psfgaoOut);
+            }
+
+            IntPtr[] fileArray;
+            if (nativeFile == IntPtr.Zero)
+            {
+                // Open the folder without the file selected if we can't find the file
+                fileArray = new IntPtr[0];
+            }
+            else
+            {
+                fileArray = new IntPtr[] { nativeFile };
+            }
+
+            SHOpenFolderAndSelectItems(nativeFolder, (uint)fileArray.Length, fileArray, 0);
+
+            Marshal.FreeCoTaskMem(nativeFolder);
+            if (nativeFile != IntPtr.Zero)
+            {
+                Marshal.FreeCoTaskMem(nativeFile);
+            }
+        }
+
         #endregion
 
         #region Private Methods
 
+        private void RaisePropertyChanged(string propertyName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private void Load(XmlReader reader)
         {
             var comparer = StringComparison.OrdinalIgnoreCase;
+
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element &&

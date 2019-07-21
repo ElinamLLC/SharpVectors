@@ -153,7 +153,7 @@ namespace GdiW3cSvgTestSuite
                 return;
             }
 
-            System.Diagnostics.Process.Start("explorer.exe", @"/select, " + filePath);
+            OptionSettings.OpenFolderAndSelectItem(filePath, null);
         }
 
         private void OnCancelClicked(object sender, EventArgs e)

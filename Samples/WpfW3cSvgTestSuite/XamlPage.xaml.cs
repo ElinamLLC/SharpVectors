@@ -1,28 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;  
 
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-//using System.Windows.Shapes;
 
 using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Utils;
-using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Folding;
-using ICSharpCode.AvalonEdit.Indentation;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Search;
+using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 using Microsoft.Win32;
 
@@ -33,7 +20,7 @@ namespace WpfW3cSvgTestSuite
     /// </summary>
     public partial class XamlPage : Page, ITestPage
     {
-        private string currentFileName;
+        private string _currentFileName;
 
         private FoldingManager     _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
@@ -49,11 +36,13 @@ namespace WpfW3cSvgTestSuite
             if (options != null)
             {
                 //options.AllowScrollBelowDocument = true;
-                options.EnableHyperlinks = true;
-                options.EnableEmailHyperlinks = true;
-                //options.ShowSpaces = true;
-                //options.ShowTabs = true;
-                //options.ShowEndOfLine = true;              
+                options.EnableHyperlinks           = true;
+                options.EnableEmailHyperlinks      = true;
+                options.EnableVirtualSpace         = false;
+                options.HighlightCurrentLine       = true;
+                //options.ShowSpaces               = true;
+                //options.ShowTabs                 = true;
+                //options.ShowEndOfLine            = true;              
             }
             textEditor.ShowLineNumbers = true;
 
@@ -140,28 +129,29 @@ namespace WpfW3cSvgTestSuite
             dlg.CheckFileExists = true;
             if (dlg.ShowDialog() ?? false)
             {
-                currentFileName = dlg.FileName;
-                textEditor.Load(currentFileName);
-                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(currentFileName));
+                _currentFileName = dlg.FileName;
+                textEditor.Load(_currentFileName);
+                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(
+                    Path.GetExtension(_currentFileName));
             }
         }
 
         private void OnSaveFileClick(object sender, EventArgs e)
         {
-            if (currentFileName == null)
+            if (_currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.DefaultExt = ".svg";
                 if (dlg.ShowDialog() ?? false)
                 {
-                    currentFileName = dlg.FileName;
+                    _currentFileName = dlg.FileName;
                 }
                 else
                 {
                     return;
                 }
             }
-            textEditor.Save(currentFileName);
+            textEditor.Save(_currentFileName);
         }
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)

@@ -19,7 +19,7 @@ namespace WpfW3cSvgTestSuite
     /// </summary>
     public partial class SvgPage : Page, ITestPage
     {
-        private string currentFileName;
+        private string _currentFileName;
 
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
@@ -125,28 +125,46 @@ namespace WpfW3cSvgTestSuite
             dlg.CheckFileExists = true;
             if (dlg.ShowDialog() ?? false)
             {
-                currentFileName = dlg.FileName;
-                textEditor.Load(currentFileName);
-                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(currentFileName));
+                _currentFileName = dlg.FileName;
+                textEditor.Load(_currentFileName);
+                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(
+                    Path.GetExtension(_currentFileName));
             }
         }
 
         private void OnSaveFileClick(object sender, EventArgs e)
         {
-            if (currentFileName == null)
+            if (_currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.DefaultExt = ".txt";
+                dlg.Filter = "SVG Files|*.svg;*.svgz";
+                dlg.DefaultExt = ".svg";
                 if (dlg.ShowDialog() ?? false)
                 {
-                    currentFileName = dlg.FileName;
+                    _currentFileName = dlg.FileName;
                 }
                 else
                 {
                     return;
                 }
             }
-            textEditor.Save(currentFileName);
+
+            string fileExt = Path.GetExtension(_currentFileName);
+            if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
+            {
+                textEditor.Save(_currentFileName);
+            }
+            else if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+            {
+                using (FileStream svgzDestFile = File.Create(_currentFileName))
+                {
+                    using (GZipStream zipStream = new GZipStream(svgzDestFile,
+                        CompressionMode.Compress, true))
+                    {
+                        textEditor.Save(zipStream);
+                    }
+                }
+            }
         }
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)

@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfSvgTestBox"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="800" Background="White"
-      Title="SettingsPage">
+      d:DesignHeight="650" d:DesignWidth="800" Background="White" Title="SettingsPage">
     <Page.Resources>
         <Style TargetType="GroupBox">
             <Setter Property="BorderBrush" Value="DarkGray"/>
@@ -26,7 +25,7 @@
         </StackPanel>
         <GroupBox Header="Conversion Settings" HorizontalAlignment="Stretch" FontSize="14">
             <StackPanel Orientation="Vertical" Grid.Row="2" Margin="20 6 6 3">
-                <CheckBox Name="chkTextAsGeometry" Click="OnSettingsChanged">
+                <CheckBox x:Name="chkTextAsGeometry" Click="OnSettingsChanged">
                     <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
                 </CheckBox>
                 <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
@@ -38,7 +37,7 @@
                         Also, text on paths are converted to path geometries.
                     </Run>
                 </TextBlock>
-                <CheckBox Name="chkIncludeRuntime" Click="OnSettingsChanged">
+                <CheckBox x:Name="chkIncludeRuntime" Click="OnSettingsChanged">
                     <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>
                 </CheckBox>
                 <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
@@ -54,19 +53,19 @@
                     </Run>
                 </TextBlock>
 
-                <CheckBox Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
+                <CheckBox x:Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
                     <TextBlock Text="Ignore SVG Root Viewbox" FontWeight="Bold"/>
                 </CheckBox>
                 <TextBlock Padding="32 3 3 3">
                     Indicates turning off viewbox at the root of the drawing.
                 </TextBlock>
-                <CheckBox Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
+                <CheckBox x:Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
                     <TextBlock Text="Ensure Viewbox Size" FontWeight="Bold"/>
                 </CheckBox>
                 <TextBlock Padding="32 3 3 3">
                     Indicate preserving the original viewbox size when saving images.
                 </TextBlock>
-                <CheckBox Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
+                <CheckBox x:Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
                     <TextBlock Text="Ensure Viewbox Position" FontWeight="Bold"/>
                 </CheckBox>
                 <TextBlock Padding="32 3 3 20">
@@ -85,9 +84,7 @@
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
-
-            </StackPanel>
-            
+            </StackPanel>            
         </GroupBox>
     </DockPanel>
 </Page>

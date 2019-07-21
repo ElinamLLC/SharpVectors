@@ -83,7 +83,7 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
-            System.Diagnostics.Process.Start("explorer.exe", @"/select, " + filePath);
+            OptionSettings.OpenFolderAndSelectItem(filePath, null);
         }
 
         private async void OnDownloadClicked(object sender, RoutedEventArgs e)

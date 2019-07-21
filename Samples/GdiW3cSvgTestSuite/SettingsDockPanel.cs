@@ -161,7 +161,7 @@ namespace GdiW3cSvgTestSuite
                 return;
             }
 
-            Process.Start("explorer.exe", @"/select, " + filePath);
+            OptionSettings.OpenFolderAndSelectItem(filePath, null);
         }
 
         private void OnSvgSuitePathTextChanged(object sender, EventArgs e)

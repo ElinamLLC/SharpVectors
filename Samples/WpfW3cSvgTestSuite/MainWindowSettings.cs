@@ -3,6 +3,7 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Configuration;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -18,12 +19,10 @@ namespace WpfW3cSvgTestSuite
     public sealed class MainWindowSettings
     {
         [DllImport("user32.dll")]
-        private static extern bool SetWindowPlacement(IntPtr hWnd,
-            [In] ref WINDOWPLACEMENT lpwndpl);
+        private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WINDOWPLACEMENT lpwndpl);
 
         [DllImport("user32.dll")]
-        private static extern bool GetWindowPlacement(IntPtr hWnd,
-            out WINDOWPLACEMENT lpwndpl);
+        private static extern bool GetWindowPlacement(IntPtr hWnd, out WINDOWPLACEMENT lpwndpl);
 
         // ReSharper disable InconsistentNaming
         private const int SW_SHOWNORMAL = 1;
@@ -86,8 +85,9 @@ namespace WpfW3cSvgTestSuite
                 var hwnd = new WindowInteropHelper(_window).Handle;
                 SetWindowPlacement(hwnd, ref wp);
             }
-            catch
+            catch (Exception ex)
             {
+                Trace.TraceError(ex.ToString());
             }
         }
 
@@ -198,10 +198,7 @@ namespace WpfW3cSvgTestSuite
 
         public override int GetHashCode()
         {
-            return _bottom.GetHashCode() ^
-                   _left.GetHashCode() ^
-                   _right.GetHashCode() ^
-                   _top.GetHashCode();
+            return this.Bottom.GetHashCode() ^ this.Left.GetHashCode() ^ this.Right.GetHashCode() ^ this.Top.GetHashCode();
         }
 
         public static bool operator ==(RECT a, RECT b)
@@ -279,7 +276,7 @@ namespace WpfW3cSvgTestSuite
         }
         public override int GetHashCode()
         {
-            return _x.GetHashCode() ^ _y.GetHashCode();
+            return this.X.GetHashCode() ^ this.Y.GetHashCode();
         }
 
         public static bool operator ==(POINT a, POINT b)

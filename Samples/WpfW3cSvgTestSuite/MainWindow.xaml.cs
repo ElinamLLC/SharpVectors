@@ -29,11 +29,11 @@ namespace WpfW3cSvgTestSuite
     {
         #region Private Fields
 
-        private const int LeftPane         = 325;
+        private const int LeftPane         = 330;
         private const int LeftBottomPane   = 220;
 
-        private const string AppTitle        = "Svg Test Suite";
-        private const string AppErrorTitle   = "Svg Test Suite - Error";
+        private const string AppTitle        = "SVG Test Suite";
+        private const string AppErrorTitle   = "SVG Test Suite - Error";
         private const string SvgTestSuite    = "SvgTestSuite.xml";
         private const string SvgTestResults  = "SvgTestResults.xml";
         private const string SvgTestSettings = "SvgTestSettings.xml";
@@ -476,7 +476,7 @@ namespace WpfW3cSvgTestSuite
 
             if (_debugPage != null)
             {
-                _debugPage.Startup();
+                _debugPage.Shutdown();
             }
         }
 
@@ -492,9 +492,6 @@ namespace WpfW3cSvgTestSuite
             {
                 stateComboBox.SelectedIndex = -1;
                 testComment.Text    = string.Empty;
-
-                testFilePath.Text   = string.Empty;
-                testDescrition.Text = string.Empty;
 
                 if (_svgPage != null)
                 {
@@ -676,10 +673,6 @@ namespace WpfW3cSvgTestSuite
                 {
                     _browserPage.LoadDocument(svgFilePath, testItem, drawing);
                 }
-
-                testFilePath.Text = svgFilePath;
-
-                testDescrition.Text = testItem.Description;
 
                 stateComboBox.SelectedIndex = (int)testItem.State;
                 testComment.Text            = testItem.Comment;

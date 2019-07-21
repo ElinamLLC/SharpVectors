@@ -27,7 +27,8 @@ namespace WpfW3cSvgTestSuite
             base.Fail(message);
         }
 
-        public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+        public override void TraceEvent(TraceEventCache eventCache, string source, 
+            TraceEventType eventType, int id, string message)
         {
             _eventType = eventType;
             base.TraceEvent(eventCache, source, eventType, id, message);

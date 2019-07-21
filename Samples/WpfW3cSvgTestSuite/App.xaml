@@ -3,8 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="ScrollBarTrackThumb"
-        TargetType="{x:Type Thumb}">
+
+        <!-- Scrollbar Style -->
+        <Style x:Key="ScrollBarTrackThumb" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
@@ -16,7 +17,11 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="Tag" Value="Horizontal">
                                 <Setter TargetName="CornerScrollBarRectangle" Property="Width" Value="Auto" />
-                                <Setter TargetName="CornerScrollBarRectangle" Property="Height" Value="8" />
+                                <Setter TargetName="CornerScrollBarRectangle" Property="Height" Value="12" />
+                            </Trigger>
+                            <Trigger Property="Tag" Value="Vertical">
+                                <Setter TargetName="CornerScrollBarRectangle" Property="Width" Value="12" />
+                                <Setter TargetName="CornerScrollBarRectangle" Property="Height" Value="Auto" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -26,12 +31,12 @@
         <Style TargetType="{x:Type ScrollBar}">
             <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
             <Setter Property="Foreground" Value="DarkGray" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Width" Value="9" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="18" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ScrollBar}">
-                        <Grid x:Name="GridRoot" Width="9" Background="{TemplateBinding Background}">
+                        <Grid x:Name="GridRoot" Width="18" Background="{TemplateBinding Background}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.00001*" />
                             </Grid.RowDefinitions>
@@ -70,10 +75,15 @@
                                     </Setter.Value>
                                 </Setter>
                                 <Setter Property="Width" Value="Auto" />
-                                <Setter Property="Height" Value="9" />
+                                <Setter Property="Height" Value="12" />
                                 <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
                                 <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
                                 <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter Property="Width" Value="12" />
+                                <Setter Property="Height" Value="auto" />
+                                <Setter TargetName="Thumb" Property="Tag" Value="Vertical" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

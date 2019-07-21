@@ -1,21 +1,25 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
+using System.IO.Compression;
+using System.Diagnostics;
 using System.ComponentModel;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using System.Windows.Resources;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 using Microsoft.Win32;
 
-using IoPath = System.IO.Path;  
-using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+using IoPath = System.IO.Path;
+using FolderBrowserDialog = ShellFileDialogs.FolderBrowserDialog;
 
 namespace WpfTestSvgSample
 {
@@ -26,15 +30,28 @@ namespace WpfTestSvgSample
     {
         #region Private Fields
 
+        private const int LeftPane       = 350;
+        private const int LeftBottomPane = 300;
+
+        private const string AppTitle        = "SharpVectors: WPF SVG Application";
+        private const string AppErrorTitle   = "SharpVectors: WPF SVG Application - Error";
+        private const string SvgTestSettings = "SvgTestSettings.xml";
+
+        private const string SvgFilePattern  = "*.svg*";
+
         private delegate void FileChangedToUIThread(FileSystemEventArgs e);
 
-        private string _titleBase;
-
         private bool _leftSplitterChanging;
+        private bool _isBottomSplitterChanging;
 
         private string _drawingDir;
 
-        private bool   _canDeleteXaml;
+        private bool _isShown;
+        private bool _canDeleteXaml;
+        private bool _isRecursiveSearch;
+
+        private string _sourceDir;
+        private string _testSettingsPath;
 
         private string _svgFilePath;
         private string _xamlFilePath;
@@ -43,11 +60,15 @@ namespace WpfTestSvgSample
 
         private SvgPage _svgPage;
         private XamlPage _xamlPage;
-        private IDrawingPage _drawingPage;
+        private DrawingPage _drawingPage;
+        private DebugPage _debugPage;
+        private SettingsPage _settingsPage;
 
-        private BitmapImage _folderClose;
-        private BitmapImage _folderOpen;
-        private BitmapImage _fileThumbnail;
+        private ImageSource _folderClose;
+        private ImageSource _folderOpen;
+        private ImageSource _fileThumbnail;
+
+        private OptionSettings _optionSettings;
 
         #endregion
 
@@ -57,48 +78,126 @@ namespace WpfTestSvgSample
         {
             InitializeComponent();
 
-            _titleBase = this.Title;
+            leftExpander.Expanded  += OnLeftExpanderExpanded;
+            leftExpander.Collapsed += OnLeftExpanderCollapsed;
+            leftSplitter.MouseMove += OnLeftSplitterMove;
 
-            leftExpander.Expanded  += new RoutedEventHandler(OnLeftExpanderExpanded);
-            leftExpander.Collapsed += new RoutedEventHandler(OnLeftExpanderCollapsed);
-            leftSplitter.MouseMove += new MouseEventHandler(OnLeftSplitterMove);
+            bottomExpander.Expanded  += OnBottomExpanderExpanded;
+            bottomExpander.Collapsed += OnBottomExpanderCollapsed;
+            bottomSplitter.MouseMove += OnBottomSplitterMove;
 
-            this.Loaded   += new RoutedEventHandler(OnWindowLoaded);
-            //this.Unloaded += new RoutedEventHandler(OnWindowUnloaded);
-            this.Closing  += new CancelEventHandler(OnWindowClosing);
+            this.Loaded   += OnWindowLoaded;
+            this.Unloaded += OnWindowUnloaded;
+            this.Closing  += OnWindowClosing;
 
             _drawingDir = IoPath.Combine(IoPath.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), "XamlDrawings");
+                System.Reflection.Assembly.GetExecutingAssembly().Location), DrawingPage.TemporalDirName);
 
             if (!Directory.Exists(_drawingDir))
             {
                 Directory.CreateDirectory(_drawingDir);
             }
 
+            _optionSettings = new OptionSettings();
+            _testSettingsPath = IoPath.GetFullPath(SvgTestSettings);
+            if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
+            {
+                _optionSettings.Load(_testSettingsPath);
+                // Override any saved local directory, default to sample files.
+                _optionSettings.CurrentSvgPath = _optionSettings.DefaultSvgPath;
+            }
+
+            _optionSettings.PropertyChanged += OnSettingsPropertyChanged;
+
             try
             {
-                _folderClose = new BitmapImage();
-                _folderClose.BeginInit();
-                _folderClose.UriSource = new Uri("Images/FolderClose.png", UriKind.Relative);
-                _folderClose.EndInit();
-
-                _folderOpen = new BitmapImage();
-                _folderOpen.BeginInit();
-                _folderOpen.UriSource = new Uri("Images/FolderOpen.png", UriKind.Relative);
-                _folderOpen.EndInit();
-
-                _fileThumbnail = new BitmapImage();
-                _fileThumbnail.BeginInit();
-                _fileThumbnail.UriSource = new Uri("Images/Thumbnail.png", UriKind.Relative);
-                _fileThumbnail.EndInit();
+                _folderClose   = this.GetImage(new Uri("Images/FolderClose.svg", UriKind.Relative));
+                _folderOpen    = this.GetImage(new Uri("Images/FolderOpen.svg", UriKind.Relative));
+                _fileThumbnail = this.GetImage(new Uri("Images/SvgLogoBasic.svg", UriKind.Relative));
             }
             catch (Exception ex)
             {
                 _folderClose = null;
-                _folderOpen  = null;
+                _folderOpen = null;
 
-                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public OptionSettings OptionSettings
+        {
+            get {
+                return _optionSettings;
+            }
+            set {
+                if (value != null)
+                {
+                    _optionSettings = value;
+                    if (_drawingPage != null)
+                    {
+                        _drawingPage.ConversionSettings = value.ConversionSettings;
+                    }
+
+                    if (_optionSettings.IsCurrentSvgPathChanged(_sourceDir))
+                    {
+                        this.FillTreeView(_optionSettings.CurrentSvgPath);
+                    }
+                    else if (_isRecursiveSearch != _optionSettings.RecursiveSearch)
+                    {
+                        this.FillTreeView(_optionSettings.CurrentSvgPath);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public async Task BrowseForFile()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Title       = "Select An SVG File";
+            dlg.DefaultExt  = "*.svg";
+            dlg.Filter      = "All SVG Files (*.svg,*.svgz)|*.svg;*.svgz"
+                                + "|Svg Uncompressed Files (*.svg)|*.svg"
+                                + "|SVG Compressed Files (*.svgz)|*.svgz";
+
+            bool? isSelected = dlg.ShowDialog();
+
+            if (isSelected != null && isSelected.Value)
+            {
+                await this.LoadFile(dlg.FileName);
+
+                TreeViewItem selItem = treeView.SelectedItem as TreeViewItem;
+                if (selItem == null || selItem.Tag == null)
+                {
+                    return;
+                }
+                selItem.IsSelected = false;
+            }
+        }
+
+        public void BrowseForFolder()
+        {
+            string selectedPath = null;
+            string curDir = _optionSettings.CurrentSvgPath;
+            if (!string.IsNullOrWhiteSpace(curDir) && Directory.Exists(curDir))
+            {
+                selectedPath = curDir;
+            }
+            string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
+                "Select the location of the W3C SVG 1.1 Full Test Suite", selectedPath);
+            if (selectedDirectory != null)
+            {
+                this.InitializedPath(selectedDirectory);
+
+                _optionSettings.CurrentSvgPath = selectedDirectory;
             }
         }
 
@@ -110,16 +209,32 @@ namespace WpfTestSvgSample
         {
             base.OnInitialized(e);
 
-            double width  = SystemParameters.PrimaryScreenWidth;
+            double width = SystemParameters.PrimaryScreenWidth;
             double height = SystemParameters.PrimaryScreenHeight;
 
-            this.Width  = Math.Min(1600, width) * 0.85;
+            this.Width = Math.Min(1600, width) * 0.85;
             this.Height = height * 0.85;
 
-            this.Left = (width  - this.Width) / 2.0;
-            this.Top  = (height - this.Height) / 2.0;
+            this.Left = (width - this.Width) / 2.0;
+            this.Top = (height - this.Height) / 2.0;
 
             this.WindowStartupLocation = WindowStartupLocation.Manual;
+
+            ColumnDefinition colExpander = mainGrid.ColumnDefinitions[0];
+            colExpander.Width = new GridLength(LeftPane, GridUnitType.Pixel);
+
+            RowDefinition rowExpander = bottomGrid.RowDefinitions[2];
+            rowExpander.Height = new GridLength(24, GridUnitType.Pixel);
+        }
+
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            if (_isShown)
+                return;
+
+            _isShown = true;
         }
 
         #endregion
@@ -128,19 +243,59 @@ namespace WpfTestSvgSample
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-            leftExpander.IsExpanded = false;
+            bottomExpander.IsExpanded = false;
+            leftExpander.IsExpanded   = false;
 
             // Retrieve the display pages...
-            _svgPage     = frameSvgInput.Content as SvgPage;
-            _xamlPage    = frameXamlOutput.Content as XamlPage;
-            _drawingPage = frameDrawing.Content as IDrawingPage;
+            _svgPage      = frameSvgInput.Content as SvgPage;
+            _xamlPage     = frameXamlOutput.Content as XamlPage;
+            _drawingPage  = frameDrawing.Content as DrawingPage;
+            _debugPage    = frameDebugging.Content as DebugPage;
+            _settingsPage = frameSettings.Content as SettingsPage;
 
+            if (_svgPage != null)
+            {
+                _svgPage.MainWindow = this;
+            }
+            if (_xamlPage != null)
+            {
+                _xamlPage.MainWindow = this;
+            }
             if (_drawingPage != null)
             {
-                _drawingPage.XamlDrawingDir = _drawingDir;
+                _drawingPage.WorkingDrawingDir = _drawingDir;
+                _drawingPage.MainWindow = this;
+            }
+            if (_debugPage != null)
+            {
+                _debugPage.MainWindow = this;
+                _debugPage.Startup();
+            }
+            if (_settingsPage != null)
+            {
+                _settingsPage.MainWindow = this;
             }
 
-            this.txtSvgPath.Text = IoPath.GetFullPath(@".\Samples");
+            if (_fileWatcher == null)
+            {
+                // Create a new FileSystemWatcher and set its properties.
+                _fileWatcher = new FileSystemWatcher();
+                // Watch for changes in LastAccess and LastWrite times
+                _fileWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite;
+
+                _fileWatcher.IncludeSubdirectories = false;
+
+                // Add event handlers.
+                _fileWatcher.Changed += OnFileChanged;
+                _fileWatcher.Created += OnFileChanged;
+                _fileWatcher.Deleted += OnFileChanged;
+                _fileWatcher.Renamed += OnFileRenamed;
+            }
+
+            tabSvgInput.Visibility   = _optionSettings.ShowInputFile ? Visibility.Visible : Visibility.Collapsed;
+            tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
+
+            this.InitializedPath(_optionSettings.CurrentSvgPath);
         }
 
         private void OnWindowUnloaded(object sender, RoutedEventArgs e)
@@ -149,129 +304,199 @@ namespace WpfTestSvgSample
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (_canDeleteXaml && !string.IsNullOrWhiteSpace(_xamlFilePath) && File.Exists(_xamlFilePath))
+            string backupFile = null;
+            if (File.Exists(_testSettingsPath))
             {
-                File.Delete(_xamlFilePath);
+                backupFile = IoPath.ChangeExtension(_testSettingsPath, SvgConverter.BackupExt);
+                try
+                {
+                    if (File.Exists(backupFile))
+                    {
+                        File.Delete(backupFile);
+                    }
+                    File.Move(_testSettingsPath, backupFile);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    return;
+                }
+            }
+            try
+            {
+                _optionSettings.Save(_testSettingsPath);
+            }
+            catch (Exception ex)
+            {
+                if (File.Exists(backupFile))
+                {
+                    File.Move(backupFile, _testSettingsPath);
+                }
+
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+            {
+                File.Delete(backupFile);
+            }
+
+            try
+            {
+                if (_canDeleteXaml && !string.IsNullOrWhiteSpace(_xamlFilePath) && File.Exists(_xamlFilePath))
+                {
+                    File.Delete(_xamlFilePath);
+                }
+                if (!string.IsNullOrWhiteSpace(_drawingDir) && Directory.Exists(_drawingDir))
+                {
+                    string[] imageFiles = Directory.GetFiles(_drawingDir, "*.png");
+                    if (imageFiles != null && imageFiles.Length != 0)
+                    {
+                        foreach (var imageFile in imageFiles)
+                        {
+                            File.Delete(imageFile);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
+
+            if (_debugPage != null)
+            {
+                _debugPage.Shutdown();
             }
         }
 
         private void OnBrowseForSvgPath(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-            dlg.ShowNewFolderButton = false;
-            dlg.Description = "Select the location of the SVG Files";
-
-            string curDir = txtSvgPath.Text;
-            if (!string.IsNullOrWhiteSpace(curDir) && Directory.Exists(curDir))
-            {
-                dlg.SelectedPath = curDir;
-            }
-            dlg.RootFolder = Environment.SpecialFolder.MyComputer;
-
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                txtSvgPath.Text = dlg.SelectedPath;
-            }
+            this.BrowseForFolder();
         }
 
-        private void OnBrowseForSvgFile(object sender, RoutedEventArgs e)
+        private async void OnBrowseForSvgFile(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = false;
-            dlg.Filter      = "SVG Files|*.svg;*.svgz"; ;
-            dlg.FilterIndex = 1;
-
-            bool? isSelected = dlg.ShowDialog();
-
-            if (isSelected != null && isSelected.Value)
-            {
-                this.LoadFile(dlg.FileName);
-            }
+            await this.BrowseForFile();
         }
 
-        private void OnSvgPathTextChanged(object sender, TextChangedEventArgs e)
+        private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            string selectePath = txtSvgPath.Text;
-            if (selectePath != null)
-            {
-                selectePath = selectePath.Trim();
-            }
-            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
+            if (!this.IsLoaded)
             {
                 return;
             }
 
-            this.FillTreeView(selectePath);
+            var changedProp = e.PropertyName;
+            if (string.IsNullOrWhiteSpace(changedProp))
+            {
+                return;
+            }
 
-            this.CloseFile();
+            if (string.Equals(changedProp, "ShowInputFile", StringComparison.OrdinalIgnoreCase))
+            {
+                this.OnFillSvgInputChecked();
+            }
+            else if (string.Equals(changedProp, "ShowOutputFile", StringComparison.OrdinalIgnoreCase))
+            {
+                this.OnFillXamlOutputChecked();
+            }
         }
 
-        private void OnFillSvgInputChecked(object sender, RoutedEventArgs e)
+        private void OnFillSvgInputChecked()
         {
             if (_svgPage == null)
             {
+                tabSvgInput.Visibility = _optionSettings.ShowInputFile ? Visibility.Visible : Visibility.Collapsed;
                 return;
             }
 
+            Cursor saveCursor = this.Cursor;
+
             try
             {
-                this.Cursor      = Cursors.Wait;
-                this.ForceCursor = true;
-
-                if (File.Exists(_svgFilePath) &&
-                    (fillSvgInput.IsChecked != null && fillSvgInput.IsChecked.Value))
+                if (_optionSettings.ShowInputFile)
                 {
-                    _svgPage.LoadDocument(_svgFilePath);
+                    this.Cursor      = Cursors.Wait;
+                    this.ForceCursor = true;
+
+                    if (File.Exists(_svgFilePath))
+                    {
+                        _svgPage.LoadDocument(_svgFilePath);
+                    }
+                    else
+                    {
+                        _svgPage.UnloadDocument();
+                    }
+                }
+                else
+                {
+                    _svgPage.UnloadDocument();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                this.Cursor = Cursors.Arrow;
+                this.Cursor      = saveCursor;
                 this.ForceCursor = false;
+
+                tabSvgInput.Visibility = _optionSettings.ShowInputFile ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
-        private void OnFillXamlOutputChecked(object sender, RoutedEventArgs e)
+        private void OnFillXamlOutputChecked()
         {
             if (_xamlPage == null || string.IsNullOrWhiteSpace(_xamlFilePath))
             {
+                tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
                 return;
             }
 
+            Cursor saveCursor = this.Cursor;
+
             try
             {
-                this.Cursor      = Cursors.Wait;
-                this.ForceCursor = true;
-
-                if (!File.Exists(_xamlFilePath) && _drawingPage != null)
+                if (_optionSettings.ShowOutputFile)
                 {
-                    if (!_drawingPage.SaveDocument(_xamlFilePath))
+                    this.Cursor      = Cursors.Wait;
+                    this.ForceCursor = true;
+
+                    if (!File.Exists(_xamlFilePath))
                     {
-                        return;
+                        if (!_drawingPage.SaveDocument(_xamlFilePath))
+                        {
+                            return;
+                        }
+                    }
+
+                    if (File.Exists(_xamlFilePath))
+                    {
+                        _xamlPage.LoadDocument(_xamlFilePath);
+                    }
+                    else
+                    {
+                        _xamlPage.UnloadDocument();
                     }
                 }
-
-                if (File.Exists(_xamlFilePath) &&
-                    (fillXamlOutput.IsChecked != null && fillXamlOutput.IsChecked.Value))
+                else
                 {
-                    _xamlPage.LoadDocument(_xamlFilePath);
+                    _xamlPage.UnloadDocument();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                this.Cursor = Cursors.Arrow;
+                this.Cursor      = saveCursor;
                 this.ForceCursor = false;
-            }  
+
+                tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         private void OnTabItemGotFocus(object sender, RoutedEventArgs e)
@@ -297,11 +522,31 @@ namespace WpfTestSvgSample
                     _svgPage.PageSelected(true);
                 }
             }
+            else if (sender == tabSettings)
+            {
+                if (_settingsPage != null)
+                {
+                    _settingsPage.PageSelected(true);
+                }
+            }
+            else if (sender == tabDebugging)
+            {
+                if (_debugPage != null)
+                {
+                    _debugPage.PageSelected(true);
+                }
+            }
         }
+
+        #endregion
 
         #region TreeView Event Handlers
 
-        private void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
+        private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+        }
+
+        private async void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
         {
             TreeViewItem selItem = treeView.SelectedItem as TreeViewItem;
             if (selItem == null || selItem.Tag == null)
@@ -319,22 +564,31 @@ namespace WpfTestSvgSample
 
             this.CloseFile();
 
+            treeView.IsEnabled = false;
+
             try
             {
                 this.Cursor = Cursors.Wait;
                 this.ForceCursor = true;
 
-                this.LoadFile(svgFilePath);
+                if (_fileWatcher != null)
+                {
+                    _fileWatcher.EnableRaisingEvents = false;
+                }
+
+                await this.LoadFile(svgFilePath);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 this.Cursor = Cursors.Arrow;
                 this.ForceCursor = false;
+
+                treeView.IsEnabled = true;
+                treeView.Focus();
             }
         }
 
@@ -420,7 +674,7 @@ namespace WpfTestSvgSample
 
         }
 
-        private void OnDragDrop(object sender, DragEventArgs de)
+        private async void OnDragDrop(object sender, DragEventArgs de)
         {
             string fileName = "";
             if (de.Data.GetDataPresent(DataFormats.Text))
@@ -431,7 +685,7 @@ namespace WpfTestSvgSample
             {
                 string[] fileNames;
                 fileNames = (string[])de.Data.GetData(DataFormats.FileDrop);
-                fileName  = fileNames[0];
+                fileName = fileNames[0];
             }
 
             if (!string.IsNullOrWhiteSpace(fileName))
@@ -446,19 +700,23 @@ namespace WpfTestSvgSample
 
             try
             {
-                this.Cursor      = Cursors.Wait;
+                this.Cursor = Cursors.Wait;
                 this.ForceCursor = true;
 
-                this.LoadFile(fileName);
+                if (_fileWatcher != null)
+                {
+                    _fileWatcher.EnableRaisingEvents = false;
+                }
+
+                await this.LoadFile(fileName);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Wpf-Svg Test Sample",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                this.Cursor      = Cursors.Arrow;
+                this.Cursor = Cursors.Arrow;
                 this.ForceCursor = false;
             }
         }
@@ -469,43 +727,106 @@ namespace WpfTestSvgSample
 
         private void OnLeftExpanderCollapsed(object sender, RoutedEventArgs e)
         {
-            if (_leftSplitterChanging)
+            if (_leftSplitterChanging || _isBottomSplitterChanging)
+            {
+                return;
+            }
+            // Prevent WPF silly event routing...
+            if (e.Source != leftExpander)
             {
                 return;
             }
 
-            ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
-            rowExpander.Width = new GridLength(24, GridUnitType.Pixel);
+            e.Handled = true;
+
+            ColumnDefinition columnDef = mainGrid.ColumnDefinitions[0];
+            columnDef.Width = new GridLength(24, GridUnitType.Pixel);
         }
 
         private void OnLeftExpanderExpanded(object sender, RoutedEventArgs e)
         {
-            if (_leftSplitterChanging)
+            if (_leftSplitterChanging || _isBottomSplitterChanging)
+            {
+                return;
+            }
+            // Prevent WPF silly event routing...
+            if (e.Source != leftExpander)
             {
                 return;
             }
 
-            ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
-            rowExpander.Width = new GridLength(280, GridUnitType.Pixel);
+            e.Handled = true;
+
+            ColumnDefinition columnDef = mainGrid.ColumnDefinitions[0];
+            columnDef.Width = new GridLength(LeftPane, GridUnitType.Pixel);
         }
 
         private void OnLeftSplitterMove(object sender, MouseEventArgs e)
         {
             _leftSplitterChanging = true;
 
-            ColumnDefinition rowExpander = mainGrid.ColumnDefinitions[0];
+            ColumnDefinition columnDef = mainGrid.ColumnDefinitions[0];
 
-            leftExpander.IsExpanded = rowExpander.ActualWidth > 24;
+            leftExpander.IsExpanded = columnDef.ActualWidth > 30;
 
             _leftSplitterChanging = false;
+
+            e.Handled = true;
+        }
+
+        #endregion
+
+        #region BottomExpander/Splitter Event Handlers
+
+        private void OnBottomExpanderCollapsed(object sender, RoutedEventArgs e)
+        {
+            if (_isBottomSplitterChanging)
+            {
+                return;
+            }
+            // Prevent WPF silly event routing...
+            if (e.Source != bottomExpander)
+            {
+                return;
+            }
+
+            RowDefinition rowDef = bottomGrid.RowDefinitions[2];
+            rowDef.Height = new GridLength(24, GridUnitType.Pixel);
+        }
+
+        private void OnBottomExpanderExpanded(object sender, RoutedEventArgs e)
+        {
+            if (_isBottomSplitterChanging)
+            {
+                return;
+            }
+            // Prevent WPF silly event routing...
+            if (e.Source != bottomExpander)
+            {
+                return;
+            }
+
+            RowDefinition rowDef = bottomGrid.RowDefinitions[2];
+            rowDef.Height = new GridLength(LeftBottomPane, GridUnitType.Pixel);
+        }
+
+        private void OnBottomSplitterMove(object sender, MouseEventArgs e)
+        {
+            _isBottomSplitterChanging = true;
+
+            RowDefinition rowDef = bottomGrid.RowDefinitions[2];
+
+            bottomExpander.IsExpanded = rowDef.ActualHeight > 30;
+
+            _isBottomSplitterChanging = false;
         }
 
         #endregion
 
         #region FileSystemWatcher Event Handlers
 
-        private void OnFileChangedToUIThread(FileSystemEventArgs e)
-        {   
+        private async void OnFileChangedToUIThread(FileSystemEventArgs e)
+        {
             // Stop watching.
             _fileWatcher.EnableRaisingEvents = false;
 
@@ -514,7 +835,12 @@ namespace WpfTestSvgSample
                 this.Cursor = Cursors.Wait;
                 this.ForceCursor = true;
 
-                this.LoadFile(e.FullPath);
+                if (_fileWatcher != null)
+                {
+                    _fileWatcher.EnableRaisingEvents = false;
+                }
+
+                await this.LoadFile(e.FullPath);
             }
             catch (Exception ex)
             {
@@ -544,11 +870,113 @@ namespace WpfTestSvgSample
 
         #endregion
 
-        #endregion
-
         #region Private Methods
 
-        private void LoadFile(string fileName)
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingGroup"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingGroup"/> of the converted SVG resource.</returns>
+        private DrawingGroup GetDrawing(Uri svgSource)
+        {
+            WpfDrawingSettings settings = new WpfDrawingSettings();
+            settings.IncludeRuntime = false;
+            settings.TextAsGeometry = true;
+            settings.OptimizePath   = true;
+
+            StreamResourceInfo svgStreamInfo = null;
+            if (svgSource.ToString().IndexOf("siteoforigin", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                svgStreamInfo = Application.GetRemoteStream(svgSource);
+            }
+            else
+            {
+                svgStreamInfo = Application.GetResourceStream(svgSource);
+            }
+
+            Stream svgStream = (svgStreamInfo != null) ? svgStreamInfo.Stream : null;
+
+            if (svgStream != null)
+            {
+                string fileExt = IoPath.GetExtension(svgSource.ToString());
+                bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) && string.Equals(
+                    fileExt, SvgConverter.CompressedSvgExt, StringComparison.OrdinalIgnoreCase);
+
+                if (isCompressed)
+                {
+                    using (svgStream)
+                    {
+                        using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                        {
+                            using (FileSvgReader reader = new FileSvgReader(settings))
+                            {
+                                DrawingGroup drawGroup = reader.Read(zipStream);
+
+                                if (drawGroup != null)
+                                {
+                                    return drawGroup;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    using (svgStream)
+                    {
+                        using (FileSvgReader reader = new FileSvgReader(settings))
+                        {
+                            DrawingGroup drawGroup = reader.Read(svgStream);
+
+                            if (drawGroup != null)
+                            {
+                                return drawGroup;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// This converts the SVG resource specified by the Uri to <see cref="DrawingImage"/>.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the source of the SVG resource.</param>
+        /// <returns>A <see cref="DrawingImage"/> of the converted SVG resource.</returns>
+        /// <remarks>
+        /// This uses the <see cref="GetDrawing(Uri)"/> method to convert the SVG resource to <see cref="DrawingGroup"/>,
+        /// which is then wrapped in <see cref="DrawingImage"/>.
+        /// </remarks>
+        private DrawingImage GetImage(Uri svgSource)
+        {
+            DrawingGroup drawGroup = this.GetDrawing(svgSource);
+            if (drawGroup != null)
+            {
+                return new DrawingImage(drawGroup);
+            }
+            return null;
+        }
+
+        private void InitializedPath(string selectePath)
+        {
+            if (selectePath != null)
+            {
+                selectePath = selectePath.Trim();
+            }
+            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
+            {
+                this.CloseFile();
+                return;
+            }
+
+            this.FillTreeView(selectePath);
+
+            this.CloseFile();
+        }
+
+        private async Task LoadFile(string fileName)
         {
             string fileExt = IoPath.GetExtension(fileName);
             if (string.IsNullOrWhiteSpace(fileExt))
@@ -556,24 +984,14 @@ namespace WpfTestSvgSample
                 return;
             }
 
-            if (_fileWatcher != null)
+            bool generateXaml = _optionSettings.ShowOutputFile;
+
+            if (string.Equals(fileExt, SvgConverter.SvgExt, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileExt, SvgConverter.CompressedSvgExt, StringComparison.OrdinalIgnoreCase))
             {
-                _fileWatcher.EnableRaisingEvents = false;
-            }
-
-            bool generateXaml = (fillXamlOutput.IsChecked != null && 
-                fillXamlOutput.IsChecked.Value);
-
-            if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
-            {
-                txtSvgFile.Text = fileName;
-                txtSvgFileLabel.Text = "Selected SVG File:";
-
                 _svgFilePath = fileName;
 
-                if (_svgPage != null && 
-                    (fillSvgInput.IsChecked != null && fillSvgInput.IsChecked.Value))
+                if (_svgPage != null && _optionSettings.ShowInputFile)
                 {
                     _svgPage.LoadDocument(fileName);
                 }
@@ -586,42 +1004,22 @@ namespace WpfTestSvgSample
 
                 try
                 {
-                    if (_drawingPage.LoadDocument(fileName))
+                    if (await _drawingPage.LoadDocumentAsync(fileName))
                     {
-                        this.Title = _titleBase + " - " + IoPath.GetFileName(fileName);
+                        this.Title = AppTitle + " - " + IoPath.GetFileName(fileName);
 
                         if (_xamlPage != null && !string.IsNullOrWhiteSpace(_drawingDir))
                         {
                             string xamlFilePath = IoPath.Combine(_drawingDir,
-                                IoPath.GetFileNameWithoutExtension(fileName) + ".xaml");
+                                IoPath.GetFileNameWithoutExtension(fileName) + SvgConverter.XamlExt);
 
-                            _xamlFilePath  = xamlFilePath;
+                            _xamlFilePath = xamlFilePath;
                             _canDeleteXaml = true;
 
-                            if (File.Exists(xamlFilePath) &&
-                                (fillXamlOutput.IsChecked != null && fillXamlOutput.IsChecked.Value))
+                            if (File.Exists(xamlFilePath) && _optionSettings.ShowOutputFile)
                             {
                                 _xamlPage.LoadDocument(xamlFilePath);
-
-                                // Delete the file after loading it...
-                                File.Delete(xamlFilePath);
                             }
-                        }
-
-                        if (_fileWatcher == null)
-                        {
-                            // Create a new FileSystemWatcher and set its properties.
-                            _fileWatcher = new FileSystemWatcher();
-                            // Watch for changes in LastAccess and LastWrite times
-                            _fileWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite;
-
-                            _fileWatcher.IncludeSubdirectories = false;
-
-                            // Add event handlers.
-                            _fileWatcher.Changed += new FileSystemEventHandler(OnFileChanged);
-                            _fileWatcher.Created += new FileSystemEventHandler(OnFileChanged);
-                            _fileWatcher.Deleted += new FileSystemEventHandler(OnFileChanged);
-                            _fileWatcher.Renamed += new RenamedEventHandler(OnFileRenamed);
                         }
 
                         _fileWatcher.Path = IoPath.GetDirectoryName(fileName);
@@ -637,60 +1035,16 @@ namespace WpfTestSvgSample
                     if (_xamlPage != null && !string.IsNullOrWhiteSpace(_drawingDir))
                     {
                         string xamlFilePath = IoPath.Combine(_drawingDir,
-                            IoPath.GetFileNameWithoutExtension(fileName) + ".xaml");
+                            IoPath.GetFileNameWithoutExtension(fileName) + SvgConverter.XamlExt);
 
                         _xamlFilePath  = xamlFilePath;
                         _canDeleteXaml = true;
 
-                        if (File.Exists(xamlFilePath) &&
-                            (fillXamlOutput.IsChecked != null && fillXamlOutput.IsChecked.Value))
+                        if (File.Exists(xamlFilePath) && _optionSettings.ShowOutputFile)
                         {
                             _xamlPage.LoadDocument(xamlFilePath);
-
-                            // Delete the file after loading it...
-                            File.Delete(xamlFilePath);
                         }
                     }
-                    throw;
-                }
-            }
-            else if (string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
-            {
-                txtSvgFile.Text = fileName;
-                txtSvgFileLabel.Text = "Selected XAML File:";
-
-                if (_svgPage != null)
-                {
-                    _svgPage.UnloadDocument();
-                    _svgFilePath = null;
-                }
-
-                try
-                {
-                    if (_drawingPage.LoadDocument(fileName))
-                    {
-                        this.Title = _titleBase + " - " + IoPath.GetFileName(fileName);
-
-                        _xamlFilePath  = fileName;
-                        _canDeleteXaml = false;
-
-                        if (_xamlPage != null)
-                        {
-                            _xamlPage.LoadDocument(fileName);
-                        }
-                    }
-                }
-                catch
-                {     
-                    if (_xamlPage != null)
-                    {
-                        _xamlFilePath  = fileName;
-                        _canDeleteXaml = false;
-
-                        _xamlPage.LoadDocument(fileName);
-                    }
-
                     throw;
                 }
             }
@@ -717,13 +1071,25 @@ namespace WpfTestSvgSample
                 {
                     File.Delete(_xamlFilePath);
                 }
+                if (!string.IsNullOrWhiteSpace(_drawingDir) && Directory.Exists(_drawingDir))
+                {
+                    string[] imageFiles = Directory.GetFiles(_drawingDir, "*.png");
+                    if (imageFiles != null && imageFiles.Length != 0)
+                    {
+                        foreach (var imageFile in imageFiles)
+                        {
+                            File.Delete(imageFile);
+                        }
+                    }
+                }
 
                 _svgFilePath   = null;
                 _xamlFilePath  = null;
                 _canDeleteXaml = false;
             }
-            catch
+            catch (Exception ex)
             {
+                Trace.TraceError(ex.ToString());
             }
         }
 
@@ -731,12 +1097,20 @@ namespace WpfTestSvgSample
 
         private void FillTreeView(string sourceDir)
         {
+            if (!string.IsNullOrWhiteSpace(_sourceDir) && Directory.Exists(_sourceDir))
+            {
+                this.CloseFile();
+            }
+            _sourceDir = string.Empty;
             if (string.IsNullOrWhiteSpace(sourceDir) || !Directory.Exists(sourceDir))
             {
                 return;
             }
 
-            string[] svgFiles = Directory.GetFiles(sourceDir, "*.svg*", SearchOption.TopDirectoryOnly);
+            _sourceDir = string.Copy(sourceDir);
+            _isRecursiveSearch = _optionSettings.RecursiveSearch;
+
+            string[] svgFiles = Directory.GetFiles(sourceDir, SvgFilePattern, SearchOption.TopDirectoryOnly);
 
             treeView.BeginInit();
             treeView.Items.Clear();
@@ -744,7 +1118,7 @@ namespace WpfTestSvgSample
             DirectoryInfo directoryInfo = new DirectoryInfo(sourceDir);
 
             TextBlock headerText = new TextBlock();
-            headerText.Text = directoryInfo.Name;
+            headerText.Text   = directoryInfo.Name;
             headerText.Margin = new Thickness(3, 0, 0, 0);
 
             BulletDecorator decorator = new BulletDecorator();
@@ -758,16 +1132,16 @@ namespace WpfTestSvgSample
             else
             {
                 Ellipse bullet = new Ellipse();
-                bullet.Height = 16;
-                bullet.Width = 16;
-                bullet.Fill = Brushes.Goldenrod;
-                bullet.Stroke = Brushes.DarkGray;
+                bullet.Height          = 16;
+                bullet.Width           = 16;
+                bullet.Fill            = Brushes.Goldenrod;
+                bullet.Stroke          = Brushes.DarkGray;
                 bullet.StrokeThickness = 1;
 
                 decorator.Bullet = bullet;
             }
             decorator.Margin = new Thickness(0, 0, 10, 0);
-            decorator.Child  = headerText;
+            decorator.Child = headerText;
 
             TreeViewItem categoryItem = new TreeViewItem();
             categoryItem.Tag        = string.Empty;
@@ -785,11 +1159,12 @@ namespace WpfTestSvgSample
 
             treeView.EndInit();
 
-            leftExpander.IsExpanded = true;
+            leftExpander.IsExpanded   = true;
+            bottomExpander.IsExpanded = true;
         }
 
         private void FillTreeView(string sourceDir, string[] svgFiles, TreeViewItem treeItem)
-        {     
+        {
             if (svgFiles != null && svgFiles.Length != 0)
             {
                 for (int i = 0; i < svgFiles.Length; i++)
@@ -797,26 +1172,26 @@ namespace WpfTestSvgSample
                     string svgFile = svgFiles[i];
 
                     TextBlock itemText = new TextBlock();
-                    itemText.Text   = String.Format("({0:D3}) - {1}", i, IoPath.GetFileName(svgFile));
+                    itemText.Text   = string.Format("({0:D3}) - {1}", i, IoPath.GetFileName(svgFile));
                     itemText.Margin = new Thickness(3, 0, 0, 0);
 
                     BulletDecorator fileItem = new BulletDecorator();
                     if (_fileThumbnail != null)
                     {
-                        Image image = new Image();
-                        image.Source  = _fileThumbnail;
-                        image.Height  = 16;
-                        image.Width   = 16;
+                        Image image  = new Image();
+                        image.Source = _fileThumbnail;
+                        image.Height = 16;
+                        image.Width  = 16;
 
                         fileItem.Bullet = image;
                     }
                     else
                     {
                         Ellipse bullet = new Ellipse();
-                        bullet.Height = 16;
-                        bullet.Width  = 16;
-                        bullet.Fill   = Brushes.Goldenrod;
-                        bullet.Stroke = Brushes.DarkGray;
+                        bullet.Height          = 16;
+                        bullet.Width           = 16;
+                        bullet.Fill            = Brushes.Goldenrod;
+                        bullet.Stroke          = Brushes.DarkGray;
                         bullet.StrokeThickness = 1;
 
                         fileItem.Bullet = bullet;
@@ -841,24 +1216,29 @@ namespace WpfTestSvgSample
                 return;
             }
 
+            if (_optionSettings.RecursiveSearch == false)
+            {
+                return;
+            }
+
             string[] directories = Directory.GetDirectories(sourceDir);
             if (directories != null && directories.Length != 0)
             {
                 for (int i = 0; i < directories.Length; i++)
                 {
                     string directory = directories[i];
-                    svgFiles = Directory.GetFiles(directory, "*.svg", SearchOption.TopDirectoryOnly);
+                    svgFiles = Directory.GetFiles(directory, SvgFilePattern, SearchOption.TopDirectoryOnly);
                     {
                         DirectoryInfo directoryInfo = new DirectoryInfo(directory);
 
                         TextBlock headerText = new TextBlock();
-                        headerText.Text = directoryInfo.Name;
+                        headerText.Text   = directoryInfo.Name;
                         headerText.Margin = new Thickness(3, 0, 0, 0);
 
                         BulletDecorator decorator = new BulletDecorator();
                         if (_folderClose != null)
                         {
-                            Image image = new Image();
+                            Image image  = new Image();
                             image.Source = _folderClose;
 
                             decorator.Bullet = image;
@@ -866,10 +1246,10 @@ namespace WpfTestSvgSample
                         else
                         {
                             Ellipse bullet = new Ellipse();
-                            bullet.Height = 16;
-                            bullet.Width = 16;
-                            bullet.Fill = Brushes.Goldenrod;
-                            bullet.Stroke = Brushes.DarkGray;
+                            bullet.Height          = 16;
+                            bullet.Width           = 16;
+                            bullet.Fill            = Brushes.Goldenrod;
+                            bullet.Stroke          = Brushes.DarkGray;
                             bullet.StrokeThickness = 1;
 
                             decorator.Bullet = bullet;
