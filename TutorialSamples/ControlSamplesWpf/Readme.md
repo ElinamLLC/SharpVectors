@@ -88,4 +88,18 @@ The various tabs demonstrate different ways to set and render SVG sources
 - **Load (Method)**: Demonstrate using the Load method to access and render SVG sources using both URI and stream sources. Optional asynchronous access is also demonstrated, a form suitable for .NET 4.0.
 - **LoadAsync (Method)**: Demonstrate using the LoadAsync asynchronous method to access and render SVG sources using both URI and stream sources. This uses the async/await keywords supported in .NET 4.5 or later.
 
+### ZoomPanControlSample and ZoomPanControlSampleVB
 
+These are samples demonstrating the **ZoomPanControl** and **SvgDrawingCanvas** controls implementation provided by the SharpVectors.
+
+![](../../Images/ZoomPanControlSample.png)
+
+The following are some of the features demonstrated by the samples:
+
+- Adding Scrolling and Zooming features to **SvgDrawingCanvas**.
+- How to use the **ZoomPanControl** in your applications. 
+- How to create simple navigation undo/redo for the ZoomPanControl.
+- How to create Overview or Thumbnail view of the ZoomPanControl.
+- How to simulate infinite zooming using the ZoomPanControl.
+- How to synchronize Toolbar buttons state, slider positions and states with the ZoomPanControl.
+- How to create responsive application (using Task - async/await supported in .NET 4. 5 or later) with the SVG converters and SvgDrawingCanvas. In this case, MemoryStream is used for the inter-thread exchange of the drawing. If not animation is supported or required, the drawing can simply be frozen and passed between the background and UI threads.
