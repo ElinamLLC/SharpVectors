@@ -1,0 +1,14 @@
+﻿<Window x:Class="ZoomPanControlSample.ZoomPanOverviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZoomPanControlSample"
+        mc:Ignorable="d"
+        Title="Zoom-Pan Overview" Height="300" Width="300" Icon="App.ico" ShowInTaskbar="False" WindowStyle="ToolWindow">
+    <StackPanel x:Name="testInfoPanel" Orientation="Vertical" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border Name="Border" BorderThickness="1,1,1,1" BorderBrush="Silver" CornerRadius="0,0,0,0" Margin="2,2">
+            <local:ZoomPanOverview x:Name="zoomOverview" Background="#aacccccc" Width="260" Height="250"/>
+        </Border>
+    </StackPanel>
+</Window>

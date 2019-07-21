@@ -1,0 +1,127 @@
+﻿<Page x:Class="ZoomPanControlSample.InfiniteZoomPanPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+      xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      xmlns:local="clr-namespace:ZoomPanControlSample"
+      mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+      Title="InfiniteZoomPanPage" Background="White" FocusManager.FocusedElement="{Binding ElementName=zoomPanControl}">
+    <Page.Resources>
+        <!-- UI commands. -->
+        <RoutedUICommand x:Key="Commands.ZoomOut" />
+        <RoutedUICommand x:Key="Commands.ZoomIn" />
+        <RoutedUICommand x:Key="Commands.Fill" />
+        <RoutedUICommand x:Key="Commands.ZoomReset" />
+        <RoutedUICommand x:Key="Commands.UndoZoom" />
+        <RoutedUICommand x:Key="Commands.RedoZoom" />
+        <RoutedUICommand x:Key="Commands.Panning" />
+        
+        <!-- This converts from a scale value to a percentage value.
+        It is used to convert the value of 'ContentScale' to the percentage zoom level that is displayed in the UI. -->
+        <local:ZoomPanScaleConverter x:Key="scaleToPercent"/>
+    </Page.Resources>
+
+    <Page.InputBindings>
+        <!-- Bind keys to commands. -->
+        <KeyBinding Key="Subtract" Modifiers="Control" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Key="OemMinus" Modifiers="Control" Command="{StaticResource Commands.ZoomOut}"/>
+        <KeyBinding Key="Add" Modifiers="Control" Command="{StaticResource Commands.ZoomIn}"/>
+        <KeyBinding Key="OemPlus" Modifiers="Control" Command="{StaticResource Commands.ZoomIn}"/>
+        <KeyBinding Key="Z" Modifiers="Control" Command="{StaticResource Commands.UndoZoom}"/>
+        <KeyBinding Key="Y" Modifiers="Control" Command="{StaticResource Commands.RedoZoom}"/>
+    </Page.InputBindings>
+
+    <Page.CommandBindings>
+        <!-- Bind commands to event handlers. -->
+        <CommandBinding Command="{StaticResource Commands.ZoomOut}" Executed="OnZoomOut" CanExecute="OnCanZoomOut"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomIn}" Executed="OnZoomIn" CanExecute="OnCanZoomIn"/>
+        <CommandBinding Command="{StaticResource Commands.Fill}" Executed="OnZoomFit" CanExecute="OnCanZoomFit"/>
+        <CommandBinding Command="{StaticResource Commands.ZoomReset}" Executed="OnZoomReset" CanExecute="OnCanZoomReset"/>
+        <CommandBinding Command="{StaticResource Commands.UndoZoom}" Executed="OnUndoZoom" CanExecute="OnCanUndoZoom"/>
+        <CommandBinding Command="{StaticResource Commands.RedoZoom}" Executed="OnRedoZoom" CanExecute="OnCanRedoZoom"/>
+        <CommandBinding Command="{StaticResource Commands.Panning}" Executed="OnPanMode" CanExecute="OnCanPanMode"/>
+    </Page.CommandBindings>
+
+    <DockPanel LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top" Height="36">
+            <ToolBar.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                            <Setter Property="Opacity" Value="0.30" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Resources>
+            <Button Click="OnOpenFileClick" ToolTip="Open SVG File">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{svgc:SvgImage Source=/Images/Open.svg, AppName=ZoomPanControlSample}" Height="24" Width="24"/>
+                    <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Select File</TextBlock>
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <Button Command="{StaticResource Commands.UndoZoom}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Undo">
+                <Image Source="{svgc:SvgImage Source=/Images/Undo.svg, AppName=ZoomPanControlSample}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="{StaticResource Commands.RedoZoom}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Undo">
+                <Image Source="{svgc:SvgImage Source=/Images/Redo.svg, AppName=ZoomPanControlSample}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="{StaticResource Commands.ZoomIn}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Zoom In">
+                <Image Source="{svgc:SvgImage Source=/Images/ZoomIn.svg, AppName=ZoomPanControlSample}" Height="24" Width="24" />
+            </Button>
+            <Button Command="{StaticResource Commands.ZoomReset}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Reset Zoom">
+                <Image Source="{svgc:SvgImage Source=/Images/ZoomReset.svg, AppName=ZoomPanControlSample}" Height="24" Width="24" />
+            </Button>
+            <Button Command="{StaticResource Commands.ZoomOut}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Zoom Out">
+                <Image Source="{svgc:SvgImage Source=/Images/ZoomOut.svg, AppName=ZoomPanControlSample}" Height="24" Width="24" />
+            </Button>
+            <Separator/>
+
+            <!--This is the label that shows what the current zoom level is while zooming in and out.-->
+            <TextBlock MinWidth ="24" VerticalAlignment="Center"
+                HorizontalAlignment="Right" TextAlignment="Right"
+                Text="{Binding ElementName=zoomPanControl, Path=ContentScale, Converter={StaticResource scaleToPercent}}"/>
+            <TextBlock VerticalAlignment="Center" Text="%"/>
+            <!--Minimum="10" Maximum="500"-->
+
+            <!--Slider to change the current zoom level.-->
+            <Slider x:Name="zoomSlider" Width="250" Padding="0" LargeChange="20" SmallChange="0.1" TickFrequency="20" TickPlacement="TopLeft" 
+                Maximum="{Binding ElementName=zoomPanControl, Path=MaxContentScale, Converter={StaticResource scaleToPercent}}"
+                Minimum="{Binding ElementName=zoomPanControl, Path=MinContentScale, Converter={StaticResource scaleToPercent}}"
+                Value="{Binding ElementName=zoomPanControl, Path=ContentScale, Converter={StaticResource scaleToPercent}}"/>
+            <!--The fill button.  Causes the content to be scaled so that it fits in the viewport.-->
+            <Button Command="{StaticResource Commands.Fill}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Zoom to Fit the view">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{svgc:SvgImage Source=/Images/ZoomToFit.svg, AppName=ZoomPanControlSample}" Height="24" Width="24" />
+                    <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Fit</TextBlock>
+                </StackPanel>
+            </Button>
+            <Separator/>
+            <ToggleButton x:Name="tbbPanning" IsChecked="true" Command="{StaticResource Commands.Panning}" CommandTarget="{Binding ElementName=zoomPanControl}" ToolTip="Toggle Panning">
+                <Image Source="{svgc:SvgImage Source=/Images/Panning.svg, AppName=ZoomPanControlSample}" Height="24" Width="24" />
+            </ToggleButton>
+        </ToolBar>
+
+        <!-- This is the control that handles zooming and panning. -->
+        <svg:ZoomPanControl x:Name="zoomPanControl" HorizontalAlignment="Center" VerticalAlignment="Center"
+            MouseDown="OnZoomPanMouseDown" MouseUp="OnZoomPanMouseUp" MouseDoubleClick="OnZoomPanMouseDoubleClick"
+            MouseMove="OnZoomPanMouseMove" MouseWheel="OnZoomPanMouseWheel" Background="LightGray">
+            <Grid x:Name="theGrid">
+                <!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                Width and Height determine the size of the content. -->
+                <svg:SvgDrawingCanvas x:Name="svgViewer" Background="White"/>
+
+                <!--
+				This Canvas and Border are used as a very simple way to render a drag rectangle that the user
+				uses to specify an area to zoom in on.
+				-->
+                <Canvas x:Name="dragZoomCanvas" Visibility="Collapsed">
+                    <Border x:Name="dragZoomBorder" BorderBrush="Black" BorderThickness="1" Background="Silver" 
+                            CornerRadius="1" Opacity="0" />
+                </Canvas>
+            </Grid>
+        </svg:ZoomPanControl>
+    </DockPanel>
+</Page>

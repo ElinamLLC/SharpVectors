@@ -1,0 +1,75 @@
+﻿<FlowDocument x:Name="helpText" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    PageWidth="700" ColumnWidth="700" IsOptimalParagraphEnabled="True" ColumnGap="0"
+    IsHyphenationEnabled="True" FontFamily="Trebuchet MS, Tahoma, Verdana" 
+    TextAlignment="Left" PagePadding="5,0,5,0" Background="White"
+    AllowDrop="False" NumberSubstitution.CultureSource="User">
+    <FlowDocument.Resources>
+        <Style TargetType="{x:Type Paragraph}">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </FlowDocument.Resources>
+     <Section>
+       <Paragraph FontSize="16" KeepTogether="True">
+            <Bold>Mouse and Keyboard Controls</Bold>
+        </Paragraph>
+        <Section Margin="32 12 32 12">
+            <List>
+                <ListItem>
+                    <Paragraph>Control + Plus key = zoom in</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Control + Minus key = zoom out</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Left-drag = panning</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Left-drag = drag the rectangles</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Shift + left-drag = drag out a rectangle to zoom to</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Control + Z = jump back to previous zoom level (Undo)</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Control + Y = jump back to next zoom level (Redo)</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Shift + left-click = zoom in</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Shift + right-click = zoom out</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Double-left-click = center on the clicked location</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Mouse wheel forward = zoom in</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Mouse wheel backward = zoom out</Paragraph>
+                </ListItem>
+            </List>
+        </Section>
+    </Section>
+    
+    <Section>
+        <Paragraph FontSize="16" KeepTogether="True">
+            <LineBreak/>
+            <Bold>Overview Window</Bold>
+        </Paragraph>
+        <Section Margin="32 12 32 12">
+            <List>
+                <ListItem>
+                    <Paragraph>Left-drag = drag the overview mode rectangle about (can also drag the rectangles).</Paragraph>
+                </ListItem>
+                <ListItem>
+                    <Paragraph>Double-left-click = snap the overview mode rectangle to a particular point.</Paragraph>
+                </ListItem>
+            </List>
+        </Section>
+    </Section>
+</FlowDocument>
