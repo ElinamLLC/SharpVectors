@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SharpVectors.Runtime.Utils
 {
     internal static class TryCast
     {
         public static bool Cast<B, D>(B baseObject, out D derivedObject)
+            where B : class
             where D : class
         {
             if (baseObject == null)
@@ -23,6 +23,7 @@ namespace SharpVectors.Runtime.Utils
     internal static class DynamicCast
     {
         public static bool Cast<B, D>(B baseObject, out D derivedObject)
+            where B : class
             where D : class, B
         {
             if (baseObject == null)

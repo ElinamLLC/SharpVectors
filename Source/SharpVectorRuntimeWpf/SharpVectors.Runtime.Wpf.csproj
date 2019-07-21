@@ -78,9 +78,9 @@
     <Compile Include="SvgAnimationLayer.cs" />
     <Compile Include="SvgAnimator.cs" />
     <Compile Include="SvgDrawingCanvas.cs" />
+    <Compile Include="SvgImageNameScope.cs" />
     <Compile Include="SvgObjectType.cs" />
     <Compile Include="SvgFontUriExtension.cs" />
-    <Compile Include="SvgImage.cs" />
     <Compile Include="SvgLink.cs" />
     <Compile Include="SvgObject.cs" />
     <Compile Include="Utils\Casting.cs" />

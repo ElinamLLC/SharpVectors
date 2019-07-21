@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.ComponentModel;
 using System.Reflection;
+using System.ComponentModel;
+
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -98,7 +99,7 @@ namespace SharpVectors.Runtime
             }
         }
 
-        public override System.Windows.Media.PixelFormat Format
+        public override PixelFormat Format
         {
             get
             {

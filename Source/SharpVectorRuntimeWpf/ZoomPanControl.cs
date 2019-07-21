@@ -3,12 +3,13 @@
 // a CodeProject article at
 //    http://www.codeproject.com/KB/WPF/zoomandpancontrol.aspx
 // <date>This code is based on the article dated: 29 Jun 2010</date>
+// <date>Update to 21/03/2011</date>
 // </copyright>
 
 using System;
-using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
 namespace SharpVectors.Runtime
@@ -138,7 +139,7 @@ namespace SharpVectors.Runtime
 
         public static readonly DependencyProperty AnimationDurationProperty =
                 DependencyProperty.Register("AnimationDuration", typeof(double), typeof(ZoomPanControl),
-                                            new FrameworkPropertyMetadata(0.4  )); 
+                                            new FrameworkPropertyMetadata(0.4)); 
 
         public static readonly DependencyProperty ContentZoomFocusXProperty =
                 DependencyProperty.Register("ContentZoomFocusX", typeof(double), typeof(ZoomPanControl),
@@ -175,7 +176,7 @@ namespace SharpVectors.Runtime
         public ZoomPanControl()
         {
             unScaledExtent = new Size(0, 0);
-            viewport = new Size(0, 0);
+            viewport       = new Size(0, 0);
         }
 
         /// <summary>
@@ -215,12 +216,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentOffsetX
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentOffsetXProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentOffsetXProperty, value);
             }
         }
@@ -230,12 +229,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentOffsetY
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentOffsetYProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentOffsetYProperty, value);
             }
         }
@@ -245,12 +242,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentScale
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentScaleProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentScaleProperty, value);
             }
         }
@@ -260,12 +255,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double MinContentScale
         {
-            get
-            {
+            get {
                 return (double)GetValue(MinContentScaleProperty);
             }
-            set
-            {
+            set {
                 SetValue(MinContentScaleProperty, value);
             }
         }
@@ -275,12 +268,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double MaxContentScale
         {
-            get
-            {
+            get {
                 return (double)GetValue(MaxContentScaleProperty);
             }
-            set
-            {
+            set {
                 SetValue(MaxContentScaleProperty, value);
             }
         }
@@ -290,12 +281,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentZoomFocusX
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentZoomFocusXProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentZoomFocusXProperty, value);
             }
         }
@@ -305,12 +294,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentZoomFocusY
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentZoomFocusYProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentZoomFocusYProperty, value);
             }
         }
@@ -321,12 +308,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ViewportZoomFocusX
         {
-            get
-            {
+            get {
                 return (double)GetValue(ViewportZoomFocusXProperty);
             }
-            set
-            {
+            set {
                 SetValue(ViewportZoomFocusXProperty, value);
             }
         }
@@ -337,12 +322,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ViewportZoomFocusY
         {
-            get
-            {
+            get {
                 return (double)GetValue(ViewportZoomFocusYProperty);
             }
-            set
-            {
+            set {
                 SetValue(ViewportZoomFocusYProperty, value);
             }
         }
@@ -352,13 +335,11 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double AnimationDuration
         {
-            get
-            {
+            get {
                 return (double)GetValue(AnimationDurationProperty);
             }
-            set
-            {
-                SetValue(AnimationDurationProperty, value);                
+            set {
+                SetValue(AnimationDurationProperty, value);
             }
         }
 
@@ -367,12 +348,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentViewportWidth
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentViewportWidthProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentViewportWidthProperty, value);
             }
         }
@@ -382,12 +361,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ContentViewportHeight
         {
-            get
-            {
+            get {
                 return (double)GetValue(ContentViewportHeightProperty);
             }
-            set
-            {
+            set {
                 SetValue(ContentViewportHeightProperty, value);
             }
         }
@@ -398,13 +375,18 @@ namespace SharpVectors.Runtime
         /// </summary>
         public bool IsMouseWheelScrollingEnabled
         {
-            get
-            {
+            get {
                 return (bool)GetValue(IsMouseWheelScrollingEnabledProperty);
             }
-            set
-            {
+            set {
                 SetValue(IsMouseWheelScrollingEnabledProperty, value);
+            }
+        }
+
+        public FrameworkElement ContentElement
+        {
+            get {
+                return content;
             }
         }
 
@@ -435,8 +417,8 @@ namespace SharpVectors.Runtime
         /// </summary>
         public void AnimatedZoomTo(Rect contentRect)
         {
-            double scaleX = this.ContentViewportWidth / contentRect.Width;
-            double scaleY = this.ContentViewportHeight / contentRect.Height;
+            double scaleX   = this.ContentViewportWidth / contentRect.Width;
+            double scaleY   = this.ContentViewportHeight / contentRect.Height;
             double newScale = this.ContentScale * Math.Min(scaleX, scaleY);
 
             AnimatedZoomPointToViewportCenter(newScale, new Point(contentRect.X + (contentRect.Width / 2), contentRect.Y + (contentRect.Height / 2)), null);
@@ -447,11 +429,23 @@ namespace SharpVectors.Runtime
         /// </summary>
         public void ZoomTo(Rect contentRect)
         {
-            double scaleX = this.ContentViewportWidth / contentRect.Width;
-            double scaleY = this.ContentViewportHeight / contentRect.Height;
+            double scaleX   = this.ContentViewportWidth / contentRect.Width;
+            double scaleY   = this.ContentViewportHeight / contentRect.Height;
             double newScale = this.ContentScale * Math.Min(scaleX, scaleY);
 
             ZoomPointToViewportCenter(newScale, new Point(contentRect.X + (contentRect.Width / 2), contentRect.Y + (contentRect.Height / 2)));
+        }
+
+        /// <summary>
+        /// Instantly center the view on the specified point (in content coordinates).
+        /// </summary>
+        public void SnapContentOffsetTo(Point contentOffset)
+        {
+            ZoomPanAnimationHelper.CancelAnimation(this, ContentOffsetXProperty);
+            ZoomPanAnimationHelper.CancelAnimation(this, ContentOffsetYProperty);
+
+            this.ContentOffsetX = contentOffset.X;
+            this.ContentOffsetY = contentOffset.Y;
         }
 
         /// <summary>
@@ -491,8 +485,8 @@ namespace SharpVectors.Runtime
             ZoomPanAnimationHelper.CancelAnimation(this, ViewportZoomFocusXProperty);
             ZoomPanAnimationHelper.CancelAnimation(this, ViewportZoomFocusYProperty);
 
-            ContentZoomFocusX = contentZoomFocus.X;
-            ContentZoomFocusY = contentZoomFocus.Y;
+            ContentZoomFocusX  = contentZoomFocus.X;
+            ContentZoomFocusY  = contentZoomFocus.Y;
             ViewportZoomFocusX = (ContentZoomFocusX - ContentOffsetX) * ContentScale;
             ViewportZoomFocusY = (ContentZoomFocusY - ContentOffsetY) * ContentScale;
 
@@ -518,18 +512,18 @@ namespace SharpVectors.Runtime
         {
             newContentScale = Math.Min(Math.Max(newContentScale, MinContentScale), MaxContentScale);
 
-            double screenSpaceZoomOffsetX = (contentZoomFocus.X - ContentOffsetX) * ContentScale;
-            double screenSpaceZoomOffsetY = (contentZoomFocus.Y - ContentOffsetY) * ContentScale;
+            double screenSpaceZoomOffsetX  = (contentZoomFocus.X - ContentOffsetX) * ContentScale;
+            double screenSpaceZoomOffsetY  = (contentZoomFocus.Y - ContentOffsetY) * ContentScale;
             double contentSpaceZoomOffsetX = screenSpaceZoomOffsetX / newContentScale;
             double contentSpaceZoomOffsetY = screenSpaceZoomOffsetY / newContentScale;
-            double newContentOffsetX = contentZoomFocus.X - contentSpaceZoomOffsetX;
-            double newContentOffsetY = contentZoomFocus.Y - contentSpaceZoomOffsetY;
+            double newContentOffsetX       = contentZoomFocus.X - contentSpaceZoomOffsetX;
+            double newContentOffsetY       = contentZoomFocus.Y - contentSpaceZoomOffsetY;
 
             ZoomPanAnimationHelper.CancelAnimation(this, ContentScaleProperty);
             ZoomPanAnimationHelper.CancelAnimation(this, ContentOffsetXProperty);
             ZoomPanAnimationHelper.CancelAnimation(this, ContentOffsetYProperty);
 
-            this.ContentScale = newContentScale;
+            this.ContentScale   = newContentScale;
             this.ContentOffsetX = newContentOffsetX;
             this.ContentOffsetY = newContentOffsetY;
         }
@@ -621,7 +615,7 @@ namespace SharpVectors.Runtime
         protected override Size MeasureOverride(Size constraint)
         {
             Size infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
-            Size childSize = base.MeasureOverride(infiniteSize);
+            Size childSize    = base.MeasureOverride(infiniteSize);
 
             if (childSize != unScaledExtent)
             {
@@ -641,7 +635,7 @@ namespace SharpVectors.Runtime
             //
             UpdateViewportSize(constraint);
 
-            double width = constraint.Width;
+            double width  = constraint.Width;
             double height = constraint.Height;
 
             if (double.IsInfinity(width))
@@ -659,7 +653,10 @@ namespace SharpVectors.Runtime
                 //
                 height = childSize.Height;
             }
-            
+
+            UpdateTranslationX();
+            UpdateTranslationY();
+
             return new Size(width, height);
         }
 
@@ -707,8 +704,8 @@ namespace SharpVectors.Runtime
             ZoomPanAnimationHelper.CancelAnimation(this, ViewportZoomFocusXProperty);
             ZoomPanAnimationHelper.CancelAnimation(this, ViewportZoomFocusYProperty);
 
-            ContentZoomFocusX = contentZoomFocus.X;
-            ContentZoomFocusY = contentZoomFocus.Y;
+            ContentZoomFocusX  = contentZoomFocus.X;
+            ContentZoomFocusY  = contentZoomFocus.Y;
             ViewportZoomFocusX = (ContentZoomFocusX - ContentOffsetX) * ContentScale;
             ViewportZoomFocusY = (ContentZoomFocusY - ContentOffsetY) * ContentScale;
 
@@ -743,7 +740,7 @@ namespace SharpVectors.Runtime
             ZoomPanAnimationHelper.CancelAnimation(this, ContentOffsetXProperty);
             ZoomPanAnimationHelper.CancelAnimation(this, ContentOffsetYProperty);
 
-            this.ContentScale = newContentScale;
+            this.ContentScale   = newContentScale;
             this.ContentOffsetX = contentZoomFocus.X - (ContentViewportWidth / 2);
             this.ContentOffsetY = contentZoomFocus.Y - (ContentViewportHeight / 2);
         }
@@ -787,10 +784,10 @@ namespace SharpVectors.Runtime
                     //
                     double viewportOffsetX = c.ViewportZoomFocusX - (c.ViewportWidth / 2);
                     double viewportOffsetY = c.ViewportZoomFocusY - (c.ViewportHeight / 2);
-                    double contentOffsetX = viewportOffsetX / c.ContentScale;
-                    double contentOffsetY = viewportOffsetY / c.ContentScale;
-                    c.ContentOffsetX = (c.ContentZoomFocusX - (c.ContentViewportWidth / 2)) - contentOffsetX;
-                    c.ContentOffsetY = (c.ContentZoomFocusY - (c.ContentViewportHeight / 2)) - contentOffsetY;
+                    double contentOffsetX  = viewportOffsetX / c.ContentScale;
+                    double contentOffsetY  = viewportOffsetY / c.ContentScale;
+                    c.ContentOffsetX       = (c.ContentZoomFocusX - (c.ContentViewportWidth / 2)) - contentOffsetX;
+                    c.ContentOffsetY       = (c.ContentZoomFocusY - (c.ContentViewportHeight / 2)) - contentOffsetY;
                 }
                 finally
                 {
@@ -869,10 +866,11 @@ namespace SharpVectors.Runtime
         /// </summary>
         private static object ContentOffsetX_Coerce(DependencyObject d, object baseValue)
         {
-            ZoomPanControl c = (ZoomPanControl)d;
-            double value = (double)baseValue;
+            ZoomPanControl c  = (ZoomPanControl)d;
+            double value      = (double)baseValue;
             double minOffsetX = 0.0;
             double maxOffsetX = Math.Max(0.0, c.unScaledExtent.Width - c.constrainedContentViewportWidth);
+
             value = Math.Min(Math.Max(value, minOffsetX), maxOffsetX);
             return value;
         }
@@ -918,10 +916,11 @@ namespace SharpVectors.Runtime
         /// </summary>
         private static object ContentOffsetY_Coerce(DependencyObject d, object baseValue)
         {
-            ZoomPanControl c = (ZoomPanControl)d;
-            double value = (double)baseValue;
+            ZoomPanControl c  = (ZoomPanControl)d;
+            double value      = (double)baseValue;
             double minOffsetY = 0.0;
             double maxOffsetY = Math.Max(0.0, c.unScaledExtent.Height - c.constrainedContentViewportHeight);
+
             value = Math.Min(Math.Max(value, minOffsetY), maxOffsetY);
             return value;
         }

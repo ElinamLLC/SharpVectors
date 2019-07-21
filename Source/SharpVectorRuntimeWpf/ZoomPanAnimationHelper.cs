@@ -3,6 +3,7 @@
 // a CodeProject article at
 //    http://www.codeproject.com/KB/WPF/zoomandpancontrol.aspx
 // <date>This code is based on the article dated: 29 Jun 2010</date>
+// <date>Update to 21/03/2011</date>
 // </copyright>
 
 using System;
@@ -16,6 +17,53 @@ namespace SharpVectors.Runtime
     /// </summary>
     public static class ZoomPanAnimationHelper
     {
+        /// <summary>
+        /// Starts an animation to a particular value on the specified dependency property.
+        /// </summary>
+        public static void StartAnimation(UIElement animatableElement, DependencyProperty dependencyProperty,
+            double toValue, double animationDurationSeconds, bool useAnimations)
+        {
+            StartAnimation(animatableElement, dependencyProperty, toValue, animationDurationSeconds, null, useAnimations);
+        }
+
+        /// <summary>
+        /// Starts an animation to a particular value on the specified dependency property.
+        /// You can pass in an event handler to call when the animation has completed.
+        /// </summary>
+        public static void StartAnimation(UIElement animatableElement, DependencyProperty dependencyProperty,
+            double toValue, double animationDurationSeconds, EventHandler completedEvent, bool useAnimations)
+        {
+            if (useAnimations)
+            {
+                var fromValue = (double)animatableElement.GetValue(dependencyProperty);
+
+                var animation = new DoubleAnimation
+                {
+                    From = fromValue,
+                    To = toValue,
+                    Duration = TimeSpan.FromSeconds(animationDurationSeconds)
+                };
+
+                animation.Completed += delegate (object sender, EventArgs e)
+                {
+                    //
+                    // When the animation has completed bake final value of the animation
+                    // into the property.
+                    //
+                    animatableElement.SetValue(dependencyProperty, animatableElement.GetValue(dependencyProperty));
+                    CancelAnimation(animatableElement, dependencyProperty);
+                    completedEvent?.Invoke(sender, e);
+                };
+                animation.Freeze();
+                animatableElement.BeginAnimation(dependencyProperty, animation);
+            }
+            else
+            {
+                animatableElement.SetValue(dependencyProperty, toValue);
+                completedEvent?.Invoke(null, new EventArgs());
+            }
+        }
+
         /// <summary>
         /// Starts an animation to a particular value on the specified dependency property.
         /// </summary>

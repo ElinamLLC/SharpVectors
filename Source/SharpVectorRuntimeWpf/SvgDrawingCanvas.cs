@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Xml;
 using System.IO;
 using System.IO.Compression;
-using System.Xml;
 using System.Collections.Generic;
 
 using System.Windows;
@@ -207,9 +207,9 @@ namespace SharpVectors.Runtime
                     }
                 }
 
-                if (xamlObject is SvgImage)
+                if (xamlObject is SvgImageNameScope)
                 {
-                    SvgImage imageDrawing = (SvgImage)xamlObject;
+                    SvgImageNameScope imageDrawing = (SvgImageNameScope)xamlObject;
                     RenderDiagrams(imageDrawing);
                 }
                 else if (xamlObject is DrawingGroup)
@@ -256,14 +256,16 @@ namespace SharpVectors.Runtime
             this.ClearDrawings();
 
             this.InvalidateMeasure();
-            this.InvalidateVisual();
+//            this.InvalidateVisual();
+            this.UpdateLayout();
 
-            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
+//            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
+//            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
         }
 
         #region RenderDiagrams Methods
 
-        public void RenderDiagrams(SvgImage image)
+        public void RenderDiagrams(SvgImageNameScope image)
         {
             DrawingImage drawingImage = image.Source as DrawingImage;
             if (drawingImage == null)
@@ -318,6 +320,8 @@ namespace SharpVectors.Runtime
             {
                 _animationCanvas.LoadDiagrams(linkGroups, renderedGroup);
             }
+
+            _bounds = _wholeDrawing.Bounds;
 
             this.InvalidateMeasure();
             this.InvalidateVisual();

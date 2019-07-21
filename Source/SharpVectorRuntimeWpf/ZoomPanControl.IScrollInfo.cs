@@ -3,6 +3,7 @@
 // a CodeProject article at
 //    http://www.codeproject.com/KB/WPF/zoomandpancontrol.aspx
 // <date>This code is based on the article dated: 29 Jun 2010</date>
+// <date>Update to 21/03/2011</date>
 // </copyright>
 
 using System.Windows;
@@ -31,12 +32,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public bool CanVerticallyScroll
         {
-            get
-            {
+            get {
                 return canVerticallyScroll;
             }
-            set
-            {
+            set {
                 canVerticallyScroll = value;
             }
         }
@@ -46,12 +45,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public bool CanHorizontallyScroll
         {
-            get
-            {
+            get {
                 return canHorizontallyScroll;
             }
-            set
-            {
+            set {
                 canHorizontallyScroll = value;
             }
         }
@@ -61,8 +58,7 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ExtentWidth
         {
-            get
-            {
+            get {
                 return unScaledExtent.Width * ContentScale;
             }
         }
@@ -72,8 +68,7 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ExtentHeight
         {
-            get
-            {
+            get {
                 return unScaledExtent.Height * ContentScale;
             }
         }
@@ -83,8 +78,7 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ViewportWidth
         {
-            get
-            {
+            get {
                 return viewport.Width;
             }
         }
@@ -94,8 +88,7 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double ViewportHeight
         {
-            get
-            {
+            get {
                 return viewport.Height;
             }
         }
@@ -106,12 +99,10 @@ namespace SharpVectors.Runtime
         /// </summary>
         public ScrollViewer ScrollOwner
         {
-            get
-            {
+            get {
                 return scrollOwner;
             }
-            set
-            {
+            set {
                 scrollOwner = value;
             }
         }
@@ -121,8 +112,7 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double HorizontalOffset
         {
-            get
-            {
+            get {
                 return ContentOffsetX * ContentScale;
             }
         }
@@ -132,8 +122,7 @@ namespace SharpVectors.Runtime
         /// </summary>
         public double VerticalOffset
         {
-            get
-            {
+            get {
                 return ContentOffsetY * ContentScale;
             }
         }
@@ -306,10 +295,43 @@ namespace SharpVectors.Runtime
             if (content.IsAncestorOf(visual))
             {
                 Rect transformedRect = visual.TransformToAncestor(content).TransformBounds(rectangle);
-                if (!transformedRect.IntersectsWith(new Rect(ContentOffsetX, ContentOffsetY, ContentViewportWidth, ContentViewportHeight)))
+                Rect viewportRect    = new Rect(ContentOffsetX, ContentOffsetY, ContentViewportWidth, ContentViewportHeight);
+                if (!transformedRect.Contains(viewportRect))
                 {
-                    AnimatedSnapTo(new Point(transformedRect.X + (transformedRect.Width / 2), 
-                        transformedRect.Y + (transformedRect.Height / 2)));
+                    double horizOffset = 0;
+                    double vertOffset = 0;
+
+                    if (transformedRect.Left < viewportRect.Left)
+                    {
+                        //
+                        // Want to move viewport left.
+                        //
+                        horizOffset = transformedRect.Left - viewportRect.Left;
+                    }
+                    else if (transformedRect.Right > viewportRect.Right)
+                    {
+                        //
+                        // Want to move viewport right.
+                        //
+                        horizOffset = transformedRect.Right - viewportRect.Right;
+                    }
+
+                    if (transformedRect.Top < viewportRect.Top)
+                    {
+                        //
+                        // Want to move viewport up.
+                        //
+                        vertOffset = transformedRect.Top - viewportRect.Top;
+                    }
+                    else if (transformedRect.Bottom > viewportRect.Bottom)
+                    {
+                        //
+                        // Want to move viewport down.
+                        //
+                        vertOffset = transformedRect.Bottom - viewportRect.Bottom;
+                    }
+
+                    SnapContentOffsetTo(new Point(ContentOffsetX + horizOffset, ContentOffsetY + vertOffset));
                 }
             }
             return rectangle;
