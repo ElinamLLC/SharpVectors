@@ -48,16 +48,12 @@ namespace SharpVectors.Renderers.Gdi
 				myColorMatrix.Matrix33 = (float)opacity; // alpha
 				myColorMatrix.Matrix44 = 1.00f; // w
 
-				imageAttributes.SetColorMatrix(myColorMatrix,
-                    ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+				imageAttributes.SetColorMatrix(myColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 			}
 
             float width  = (float)iElement.Width.AnimVal.Value;
 			float height = (float)iElement.Height.AnimVal.Value;
 
-            //Rectangle destRect = new Rectangle(Convert.ToInt32(iElement.X.AnimVal.Value),
-            //    Convert.ToInt32(iElement.Y.AnimVal.Value), 
-            //    Convert.ToInt32(width), Convert.ToInt32(height));
             RectangleF destRect = new RectangleF((float)iElement.X.AnimVal.Value,
                 (float)iElement.Y.AnimVal.Value, (float)iElement.Width.AnimVal.Value,
                 (float)iElement.Height.AnimVal.Value);
@@ -78,14 +74,10 @@ namespace SharpVectors.Renderers.Gdi
 
 			if (image != null)
 			{
-                //graphics.DrawImage(this, image, destRect, 0f, 0f,
-                //    image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
-
                 // code extracted from FitToViewbox
-                SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)iElement.PreserveAspectRatio.AnimVal ?? new SvgPreserveAspectRatio("none", iElement);
+                var spar = (SvgPreserveAspectRatio)iElement.PreserveAspectRatio.AnimVal ?? new SvgPreserveAspectRatio("none", iElement);
 
-                double[] translateAndScale =
-                    spar.FitToViewBox(new SvgRect(0, 0, image.Width, image.Height),
+                double[] translateAndScale = spar.FitToViewBox(new SvgRect(0, 0, image.Width, image.Height),
                                       new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
                 graphics.TranslateTransform((float)translateAndScale[0], (float)translateAndScale[1]);
                 graphics.ScaleTransform((float)translateAndScale[2], (float)translateAndScale[3]);
@@ -115,9 +107,8 @@ namespace SharpVectors.Renderers.Gdi
  
 	    private static Rectangle ToRectangle(RectangleF rect)
 	    {
-	        return new Rectangle((int) Math.Round(rect.Left), 
-                (int) Math.Round(rect.Top), (int) Math.Round(rect.Width), 
-                (int) Math.Round(rect.Height));
+	        return new Rectangle((int)Math.Round(rect.Left), (int)Math.Round(rect.Top), 
+                (int)Math.Round(rect.Width), (int)Math.Round(rect.Height));
 	    }
 
         private SvgWindow GetSvgWindow()
@@ -138,15 +129,16 @@ namespace SharpVectors.Renderers.Gdi
 
         private Image GetBitmap(SvgImageElement element)
         {
+            var comparer = StringComparison.OrdinalIgnoreCase;
             if (!element.IsSvgImage)
             {
-                if (!element.Href.AnimVal.StartsWith("data:"))
+                if (!element.Href.AnimVal.StartsWith("data:", comparer))
                 {
                     SvgUriReference svgUri = element.UriReference;
                     Uri imageUri = new Uri(svgUri.AbsoluteUri);
                     if (imageUri.IsFile && File.Exists(imageUri.LocalPath))
                     {
-                        return Bitmap.FromFile(imageUri.LocalPath);
+                        return Image.FromFile(imageUri.LocalPath);
                     }
 
                     WebResponse resource = svgUri.ReferencedResource;
@@ -161,30 +153,24 @@ namespace SharpVectors.Renderers.Gdi
                         return null;
                     }
  
-                    return Bitmap.FromStream(stream);
+                    return Image.FromStream(stream);
                 }
-                else
-                {
-                    string sURI    = element.Href.AnimVal;
-                    int nColon     = sURI.IndexOf(":");
-                    int nSemiColon = sURI.IndexOf(";");
-                    int nComma     = sURI.IndexOf(",");
 
-                    string sMimeType = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
+                string sURI    = element.Href.AnimVal;
+                int nColon     = sURI.IndexOf(":", comparer);
+                int nSemiColon = sURI.IndexOf(";", comparer);
+                int nComma     = sURI.IndexOf(",", comparer);
 
-                    string sContent  = sURI.Substring(nComma + 1);
-                    byte[] bResult   = Convert.FromBase64CharArray(sContent.ToCharArray(), 
-                        0, sContent.Length);
+                string sMimeType = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
+                string sContent  = sURI.Substring(nComma + 1);
+                byte[] bResult   = Convert.FromBase64CharArray(sContent.ToCharArray(), 
+                    0, sContent.Length);
 
-                    MemoryStream ms = new MemoryStream(bResult);
+                MemoryStream ms = new MemoryStream(bResult);
 
-                    return Bitmap.FromStream(ms);
-                }
+                return Image.FromStream(ms);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         #endregion

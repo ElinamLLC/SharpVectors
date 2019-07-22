@@ -23,7 +23,12 @@ namespace SharpVectors.Dom.Svg
 
         #region Contructors and Destructor
 
+        private SvgWindow()
+        {
+        }
+
         protected SvgWindow(long innerWidth, long innerHeight, ISvgRenderer renderer)
+            : this()
         {
             _renderer = renderer;
             if (_renderer != null)
@@ -38,7 +43,7 @@ namespace SharpVectors.Dom.Svg
         }
 
         protected SvgWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)
-            : this(innerWidth, innerHeight, parentWindow.Renderer)
+            : this(innerWidth, innerHeight, parentWindow.CreateSvgRenderer())
         {
             _parentWindow = parentWindow;
         }
@@ -148,6 +153,11 @@ namespace SharpVectors.Dom.Svg
             return this.CreateOwnedWindow(_innerWidth, _innerHeight);
         }
 
+        public virtual ISvgRenderer CreateSvgRenderer()
+        {
+            return null;
+        }
+
         public abstract SvgWindow CreateOwnedWindow(long innerWidth, long innerHeight);
 
         public abstract string Source
@@ -163,7 +173,7 @@ namespace SharpVectors.Dom.Svg
         /// <param name="innerHeight">The new height of the control</param>
         public virtual void Resize(int innerWidth, int innerHeight)
         {
-            _innerWidth = innerWidth;
+            _innerWidth  = innerWidth;
             _innerHeight = innerHeight;
 
             if (Document != null && Document.RootElement != null)

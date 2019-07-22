@@ -2,6 +2,11 @@
 {
     partial class SvgPictureBox
     {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.Container components;
+
         #region Component Designer generated code
 
         /// <summary> 
@@ -10,6 +15,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+
             this.Name = "SvgPictureBox";
         }
 

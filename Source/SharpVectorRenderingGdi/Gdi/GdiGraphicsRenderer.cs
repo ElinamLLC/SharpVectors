@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,66 +21,67 @@ namespace SharpVectors.Renderers.Gdi
         /// <summary>
         /// A counter that tracks the next hit color.
         /// </summary>
-        private int counter;
+        private int _colorCounter;
 
         /// <summary>
         /// Maps a 'hit color' to a graphics node.
         /// </summary>
         /// <remarks>
-        /// The 'hit color' is an integer identifier that identifies the
-        /// graphics node that drew it.  When 'hit colors' are drawn onto
-        /// a bitmap (ie. <see cref="idMapRaster">idMapRaster</see> the 'hit color'
-        /// of each pixel with the help of <see cref="graphicsNodes">graphicsNodes</see> can identify for a given x, y coordinate the
-        /// relevant graphics node a mouse event should be dispatched to.
+        /// The 'hit color' is an integer identifier that identifies the graphics node that drew it.  
+        /// When 'hit colors' are drawn onto a bitmap (ie. <see cref="_idMapRaster">id-mapppe raster</see> 
+        /// the 'hit color' of each pixel with the help of <see cref="_colorMap">color map</see> 
+        /// can identify for a given x, y coordinate the relevant graphics node a mouse event should be dispatched to.
         /// </remarks>
-        private Dictionary<Color, SvgElement> graphicsNodes = new Dictionary<Color, SvgElement>();
+        private IDictionary<Color, SvgElement> _colorMap;
 
         /// <summary>
         /// The bitmap containing the rendered Svg image.
         /// </summary>
-        private Bitmap rasterImage;
+        private Bitmap _rasterImage;
 
         /// <summary>
         /// A secondary back-buffer used for invalidation repaints. The invalidRect will
         /// be bitblt to the rasterImage front buffer
         /// </summary>
-        private Bitmap invalidatedRasterImage;
+        private Bitmap _invalidatedRasterImage;
 
         /// <summary>
-        /// A bitmap image that consists of 'hit color' instead of visual
-        /// color.  A 'hit color' is an integer identifier that identifies
-        /// the graphics node that drew it.  A 'hit color' can therefore
-        /// identify the graphics node that corresponds an x-y coordinates.
+        /// A bitmap image that consists of 'hit color' instead of visual color.  A 'hit color' is an 
+        /// integer identifier that identifies the graphics node that drew it.  A 'hit color' can 
+        /// therefore identify the graphics node that corresponds an x-y coordinates.
         /// </summary>
-        private Bitmap idMapRaster;
+        private Bitmap _idMapRaster;
 
         /// <summary>
-        /// The renderer's <see cref="GraphicsWrapper">GraphicsWrapper</see>
-        /// object.
+        /// The renderer's graphics wrapper object.
         /// </summary>
-        private GdiGraphicsWrapper graphics;
+        private GdiGraphicsWrapper _graphics;
 
         /// <summary>
         /// The renderer's back color.
         /// </summary>
-        private Color backColor;
+        private Color _backColor;
 
         /// <summary>
         /// The renderer's <see cref="SvgWindow">SvgWindow</see> object.
         /// </summary>
-        private ISvgWindow window;
+        private ISvgWindow _svgWindow;
 
         /// <summary>
         /// 
         /// </summary>
-        private float currentDownX;
-        private float currentDownY;
-        private IEventTarget currentTarget;
-        private IEventTarget currentDownTarget;
+        private float _currentDownX;
+        private float _currentDownY;
+        private IEventTarget _currentTarget;
+        private IEventTarget _currentDownTarget;
 
         private GdiRenderingHelper _svgRenderer;
 
-        private SvgRectF invalidRect = SvgRectF.Empty;
+        private SvgRectF _invalidRect;
+
+        private RenderEvent _onRender;
+
+        private bool _isStatic;
 
         #endregion
 
@@ -88,12 +90,15 @@ namespace SharpVectors.Renderers.Gdi
         /// <summary>
         /// Initializes a new instance of the GdiRenderer class.
         /// </summary>
-        public GdiGraphicsRenderer()
+        public GdiGraphicsRenderer(bool isStatic = false)
         {
-            counter      = 0;
-            _svgRenderer = new GdiRenderingHelper(this);
+            _isStatic     = isStatic;
+            _invalidRect  = SvgRectF.Empty;
+            _colorCounter = 0;
+            _backColor    = Color.White;
+            _colorMap     = new Dictionary<Color, SvgElement>();
 
-            backColor = Color.White;
+            _svgRenderer  = new GdiRenderingHelper(this);
         }
 
         ~GdiGraphicsRenderer()
@@ -110,9 +115,8 @@ namespace SharpVectors.Renderers.Gdi
         /// </summary>
         public Bitmap RasterImage
         {
-            get
-            {
-                return rasterImage;
+            get {
+                return _rasterImage;
             }
         }
 
@@ -124,9 +128,8 @@ namespace SharpVectors.Renderers.Gdi
         /// </summary>
         public Bitmap IdMapRaster
         {
-            get
-            {
-                return idMapRaster;
+            get {
+                return _idMapRaster;
             }
         }
 
@@ -139,13 +142,11 @@ namespace SharpVectors.Renderers.Gdi
         /// </value>
         public ISvgWindow Window
         {
-            get
-            {
-                return window;
+            get {
+                return _svgWindow;
             }
-            set
-            {
-                window = value;
+            set {
+                _svgWindow = value;
             }
         }
 
@@ -157,13 +158,11 @@ namespace SharpVectors.Renderers.Gdi
         /// </value>
         public Color BackColor
         {
-            get
-            {
-                return backColor;
+            get {
+                return _backColor;
             }
-            set
-            {
-                backColor = value;
+            set {
+                _backColor = value;
             }
         }
 
@@ -177,13 +176,11 @@ namespace SharpVectors.Renderers.Gdi
         /// </value>
         public GdiGraphicsWrapper GraphicsWrapper
         {
-            get
-            {
-                return graphics;
+            get {
+                return _graphics;
             }
-            set
-            {
-                graphics = value;
+            set {
+                _graphics = value;
             }
         }
 
@@ -197,13 +194,11 @@ namespace SharpVectors.Renderers.Gdi
         /// </value>
         public Graphics Graphics
         {
-            get
-            {
-                return graphics.Graphics;
+            get {
+                return _graphics.Graphics;
             }
-            set
-            {
-                graphics.Graphics = value;
+            set {
+                _graphics.Graphics = value;
             }
         }
 
@@ -213,10 +208,10 @@ namespace SharpVectors.Renderers.Gdi
 
         public void InvalidateRect(SvgRectF rect)
         {
-            if (invalidRect == SvgRectF.Empty)
-                invalidRect = rect;
+            if (_invalidRect == SvgRectF.Empty)
+                _invalidRect = rect;
             else
-                invalidRect.Intersect(rect);
+                _invalidRect.Intersect(rect);
         }
 
         /// <summary>
@@ -232,22 +227,22 @@ namespace SharpVectors.Renderers.Gdi
         public void Render(ISvgElement node)
         {
             SvgRectF updatedRect;
-            if (invalidRect != SvgRectF.Empty)
-                updatedRect = new SvgRectF(invalidRect.X, invalidRect.Y, 
-                    invalidRect.Width, invalidRect.Height);
+            if (_invalidRect != SvgRectF.Empty)
+                updatedRect = new SvgRectF(_invalidRect.X, _invalidRect.Y,
+                    _invalidRect.Width, _invalidRect.Height);
             else
                 updatedRect = SvgRectF.Empty;
 
             RendererBeforeRender();
 
-            if (graphics != null && graphics.Graphics != null)
+            if (_graphics != null && _graphics.Graphics != null)
             {
                 _svgRenderer.Render(node);
             }
-            
+
             RendererAfterRender();
 
-            if (onRender != null)
+            if (_onRender != null)
                 OnRender(updatedRect);
         }
 
@@ -264,22 +259,22 @@ namespace SharpVectors.Renderers.Gdi
         public void Render(ISvgDocument node)
         {
             SvgRectF updatedRect;
-            if (invalidRect != SvgRectF.Empty)
-                updatedRect = new SvgRectF(invalidRect.X, invalidRect.Y,
-                    invalidRect.Width, invalidRect.Height);
+            if (_invalidRect != SvgRectF.Empty)
+                updatedRect = new SvgRectF(_invalidRect.X, _invalidRect.Y,
+                    _invalidRect.Width, _invalidRect.Height);
             else
                 updatedRect = SvgRectF.Empty;
 
             RendererBeforeRender();
 
-            if (graphics != null && graphics.Graphics != null)
+            if (_graphics != null && _graphics.Graphics != null)
             {
                 _svgRenderer.Render(node);
             }
 
             RendererAfterRender();
 
-            if (onRender != null)
+            if (_onRender != null)
                 OnRender(updatedRect);
         }
 
@@ -288,9 +283,36 @@ namespace SharpVectors.Renderers.Gdi
             _svgRenderer.RenderChildren(node);
         }
 
+        public void ClearAll()
+        {
+            if (_graphics != null)
+            {
+                _graphics.Dispose();
+                _graphics = null;
+            }
+            if (_rasterImage != null)
+            {
+                _rasterImage.Dispose();
+                _rasterImage = null;
+            }
+            if (_idMapRaster != null)
+            {
+                _idMapRaster.Dispose();
+                _idMapRaster = null;
+            }
+            if (_invalidatedRasterImage != null)
+            {
+                _invalidatedRasterImage.Dispose();
+                _invalidatedRasterImage = null;
+            }
+
+            this.ClearMap();
+        }
+
         public void ClearMap()
         {
-            graphicsNodes.Clear();
+            _colorMap = null;
+            _colorMap = new Dictionary<Color, SvgElement>();
         }
 
         /// <summary>
@@ -298,13 +320,11 @@ namespace SharpVectors.Renderers.Gdi
         /// </summary>   
         public SvgRectF InvalidRect
         {
-            get
-            {
-                return invalidRect;
+            get {
+                return _invalidRect;
             }
-            set
-            {
-                invalidRect = value;
+            set {
+                _invalidRect = value;
             }
         }
 
@@ -325,16 +345,13 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Event handlers
 
-        private RenderEvent onRender;
         public RenderEvent OnRender
         {
-            get
-            {
-                return onRender;
+            get {
+                return _onRender;
             }
-            set
-            {
-                onRender = value;
+            set {
+                _onRender = value;
             }
         }
 
@@ -350,132 +367,18 @@ namespace SharpVectors.Renderers.Gdi
         /// </param>
         public void OnMouseEvent(string type, MouseEventArgs e)
         {
-            if (idMapRaster != null)
+            if (_idMapRaster == null)
             {
-                try
-                {
-                    Color pixel = idMapRaster.GetPixel(e.X, e.Y);
-                    SvgElement grElement = GetElementFromColor(pixel);
-                    if (grElement != null)
-                    {
-                        IEventTarget target;
-                        if (grElement.ElementInstance != null)
-                            target = grElement.ElementInstance as IEventTarget;
-                        else
-                            target = grElement as IEventTarget;
+                return;
+            }
 
-                        if (target != null)
-                        {
-                            switch (type)
-                            {
-                                case "mousemove":
-                                    {
-                                        if (currentTarget == target)
-                                        {
-                                            target.DispatchEvent(new MouseEvent(
-                                                EventType.MouseMove, true, false,
-                                                null, // todo: put view here
-                                                0, // todo: put detail here
-                                                e.X, e.Y, e.X, e.Y,
-                                                false, false, false, false,
-                                                0, null, false));
-                                        }
-                                        else
-                                        {
-                                            if (currentTarget != null)
-                                            {
-                                                currentTarget.DispatchEvent(new MouseEvent(
-                                                    EventType.MouseOut, true, false,
-                                                    null, // todo: put view here
-                                                    0, // todo: put detail here
-                                                    e.X, e.Y, e.X, e.Y,
-                                                    false, false, false, false,
-                                                    0, null, false));
-                                            }
-
-                                            target.DispatchEvent(new MouseEvent(
-                                                EventType.MouseOver, true, false,
-                                                null, // todo: put view here
-                                                0, // todo: put detail here
-                                                e.X, e.Y, e.X, e.Y,
-                                                false, false, false, false,
-                                                0, null, false));
-                                        }
-                                        break;
-                                    }
-                                case "mousedown":
-                                    target.DispatchEvent(new MouseEvent(
-                                        EventType.MouseDown, true, false,
-                                        null, // todo: put view here
-                                        0, // todo: put detail here
-                                        e.X, e.Y, e.X, e.Y,
-                                        false, false, false, false,
-                                        0, null, false));
-                                    currentDownTarget = target;
-                                    currentDownX = e.X;
-                                    currentDownY = e.Y;
-                                    break;
-                                case "mouseup":
-                                    target.DispatchEvent(new MouseEvent(
-                                        EventType.MouseUp, true, false,
-                                        null, // todo: put view here
-                                        0, // todo: put detail here
-                                        e.X, e.Y, e.X, e.Y,
-                                        false, false, false, false,
-                                        0, null, false));
-                                    if (/*currentDownTarget == target &&*/ Math.Abs(currentDownX - e.X) < 5 && Math.Abs(currentDownY - e.Y) < 5)
-                                    {
-                                        target.DispatchEvent(new MouseEvent(
-                                          EventType.Click, true, false,
-                                          null, // todo: put view here
-                                          0, // todo: put detail here
-                                          e.X, e.Y, e.X, e.Y,
-                                          false, false, false, false,
-                                          0, null, false));
-                                    }
-                                    currentDownTarget = null;
-                                    currentDownX = 0;
-                                    currentDownY = 0;
-                                    break;
-                            }
-                            currentTarget = target;
-                        }
-                        else
-                        {
-
-                            // jr patch
-                            if (currentTarget != null && type == "mousemove")
-                            {
-                                currentTarget.DispatchEvent(new MouseEvent(
-                                  EventType.MouseOut, true, false,
-                                  null, // todo: put view here
-                                  0, // todo: put detail here
-                                  e.X, e.Y, e.X, e.Y,
-                                  false, false, false, false,
-                                  0, null, false));
-                            }
-                            currentTarget = null;
-                        }
-                    }
-                    else
-                    {
-                        // jr patch
-                        if (currentTarget != null && type == "mousemove")
-                        {
-                            currentTarget.DispatchEvent(new MouseEvent(
-                              EventType.MouseOut, true, false,
-                              null, // todo: put view here
-                              0, // todo: put detail here
-                              e.X, e.Y, e.X, e.Y,
-                              false, false, false, false,
-                              0, null, false));
-                        }
-                        currentTarget = null;
-                    }
-                }
-                catch
-                {
-                }
+            try
+            {
+                this.ProcessMouseEvents(type, e);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
             }
         }
 
@@ -486,12 +389,12 @@ namespace SharpVectors.Renderers.Gdi
         /// <summary>
         /// Allocate a hit color for the specified graphics node.
         /// </summary>
-        /// <param name="grNode">
-        /// The <see cref="GraphicsNode">GraphicsNode</see> object for which to
+        /// <param name="element">
+        /// The <see cref="SvgElement">SvgElement</see> object for which to
         /// allocate a new hit color.
         /// </param>
         /// <returns>
-        /// The hit color for the <see cref="GraphicsNode">GraphicsNode</see>
+        /// The hit color for the <see cref="SvgElement">SvgElement</see>
         /// object.
         /// </returns>
         internal Color GetNextColor(SvgElement element)
@@ -509,7 +412,7 @@ namespace SharpVectors.Renderers.Gdi
             // is used to adjust them into the range [0,255].
             // This algorithm has the feature that consecutive ids generate
             // visually distinct colors.
-            int id = counter++; // Zero should be the first color.
+            int id = _colorCounter++; // Zero should be the first color.
             int shuffleTerm = id & 7;
             int r = 0x7f & (id >> 17);
             int g = 0x7f & (id >> 10);
@@ -529,35 +432,35 @@ namespace SharpVectors.Renderers.Gdi
 
             Color color = Color.FromArgb(r, g, b);
 
-            graphicsNodes.Add(color, element);
+            _colorMap.Add(color, element);
 
             return color;
         }
 
-        internal void RemoveColor(Color color, SvgElement element)
+        internal void RemoveColor(Color color)
         {
             if (!color.IsEmpty)
             {
-                graphicsNodes[color] = null;
-                graphicsNodes.Remove(color);
+                _colorMap[color] = null;
+                _colorMap.Remove(color);
             }
         }
 
         /// <summary>
-        /// Gets the <see cref="GraphicsNode">GraphicsNode</see> object that
+        /// Gets the <see cref="SvgElement">SvgElement</see> object that
         /// corresponds to the given hit color.
         /// </summary>
         /// <param name="color">
         /// The hit color for which to get the corresponding
-        /// <see cref="GraphicsNode">GraphicsNode</see> object.
+        /// <see cref="SvgElement">SvgElement</see> object.
         /// </param>
         /// <remarks>
         /// Returns <c>null</c> if a corresponding
-        /// <see cref="GraphicsNode">GraphicsNode</see> object cannot be
+        /// <see cref="SvgElement">SvgElement</see> object cannot be
         /// found for the given hit color.
         /// </remarks>
         /// <returns>
-        /// The <see cref="GraphicsNode">GraphicsNode</see> object that
+        /// The <see cref="SvgElement">SvgElement</see> object that
         /// corresponds to the given hit color
         /// </returns>
         private SvgElement GetElementFromColor(Color color)
@@ -566,15 +469,11 @@ namespace SharpVectors.Renderers.Gdi
             {
                 return null;
             }
-            else
+            if (_colorMap.ContainsKey(color))
             {
-                if (graphicsNodes.ContainsKey(color))
-                {
-                    return graphicsNodes[color];
-                }
-
-                return null;
+                return _colorMap[color];
             }
+            return null;
         }
 
         /// <summary>
@@ -618,6 +517,10 @@ namespace SharpVectors.Renderers.Gdi
             if (hint == SvgRenderingHint.Shape || hint == SvgRenderingHint.Text)
             {
                 GraphicsPath gp = GdiRendering.CreatePath(element);
+                if (gp == null)
+                {
+                    return SvgRectF.Empty;
+                }
                 ISvgMatrix svgMatrix = element.GetScreenCTM();
 
                 Matrix matrix = new Matrix((float)svgMatrix.A, (float)svgMatrix.B, (float)svgMatrix.C,
@@ -677,6 +580,118 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Private Methods
 
+        private void ProcessMouseEvents(string type, MouseEventArgs e)
+        {
+            Color pixel = _idMapRaster.GetPixel(e.X, e.Y);
+            SvgElement svgElement = GetElementFromColor(pixel);
+
+            if (svgElement == null)
+            {
+                // jr patch
+                if (_currentTarget != null && type == "mousemove")
+                {
+                    _currentTarget.DispatchEvent(new MouseEvent(EventType.MouseOut, true, false,
+                        null, // todo: put view here
+                        0, // todo: put detail here
+                        e.X, e.Y, e.X, e.Y,
+                        false, false, false, false,
+                        0, null, false));
+                }
+                _currentTarget = null;
+                return;
+            }
+
+            IEventTarget target;
+            if (svgElement.ElementInstance != null)
+                target = svgElement.ElementInstance as IEventTarget;
+            else
+                target = svgElement as IEventTarget;
+
+            if (target == null)
+            {
+                // jr patch
+                if (_currentTarget != null && type == "mousemove")
+                {
+                    _currentTarget.DispatchEvent(new MouseEvent(EventType.MouseOut, true, false,
+                        null, // todo: put view here
+                        0, // todo: put detail here
+                        e.X, e.Y, e.X, e.Y,
+                        false, false, false, false,
+                        0, null, false));
+                }
+                _currentTarget = null;
+                return;
+            }
+
+            switch (type)
+            {
+                case "mousemove":
+                    {
+                        if (_currentTarget == target)
+                        {
+                            target.DispatchEvent(new MouseEvent(EventType.MouseMove, true, false,
+                                null, // todo: put view here
+                                0, // todo: put detail here
+                                e.X, e.Y, e.X, e.Y,
+                                false, false, false, false,
+                                0, null, false));
+                        }
+                        else
+                        {
+                            if (_currentTarget != null)
+                            {
+                                _currentTarget.DispatchEvent(new MouseEvent(EventType.MouseOut, true, false,
+                                    null, // todo: put view here
+                                    0, // todo: put detail here
+                                    e.X, e.Y, e.X, e.Y,
+                                    false, false, false, false,
+                                    0, null, false));
+                            }
+
+                            target.DispatchEvent(new MouseEvent(EventType.MouseOver, true, false,
+                                null, // todo: put view here
+                                0, // todo: put detail here
+                                e.X, e.Y, e.X, e.Y,
+                                false, false, false, false,
+                                0, null, false));
+                        }
+                        break;
+                    }
+                case "mousedown":
+                    target.DispatchEvent(new MouseEvent(EventType.MouseDown, true, false,
+                        null, // todo: put view here
+                        0, // todo: put detail here
+                        e.X, e.Y, e.X, e.Y,
+                        false, false, false, false,
+                        0, null, false));
+                    _currentDownTarget = target;
+                    _currentDownX = e.X;
+                    _currentDownY = e.Y;
+                    break;
+                case "mouseup":
+                    target.DispatchEvent(new MouseEvent(EventType.MouseUp, true, false,
+                        null, // todo: put view here
+                        0, // todo: put detail here
+                        e.X, e.Y, e.X, e.Y,
+                        false, false, false, false,
+                        0, null, false));
+                    if (Math.Abs(_currentDownX - e.X) < 5 && Math.Abs(_currentDownY - e.Y) < 5)
+                    {
+                        target.DispatchEvent(new MouseEvent(EventType.Click, true, false,
+                            null, // todo: put view here
+                            0, // todo: put detail here
+                            e.X, e.Y, e.X, e.Y,
+                            false, false, false, false,
+                            0, null, false));
+                    }
+                    _currentDownTarget = null;
+                    _currentDownX = 0;
+                    _currentDownY = 0;
+                    break;
+            }
+            _currentTarget = target;
+        }
+
         /// <summary>
         /// BeforeRender - Make sure we have a Graphics object to render to.
         /// If we don't have one, then create one to match the SvgWindow's
@@ -685,61 +700,61 @@ namespace SharpVectors.Renderers.Gdi
         private void RendererBeforeRender()
         {
             // Testing for null here allows "advanced" developers to create their own Graphics object for rendering
-            if (graphics == null)
+            if (_graphics == null)
             {
                 // Get the current SVGWindow's width and height
-                int innerWidth  = (int)window.InnerWidth;
-                int innerHeight = (int)window.InnerHeight;
+                int innerWidth  = (int)_svgWindow.InnerWidth;
+                int innerHeight = (int)_svgWindow.InnerHeight;
 
                 // Make sure we have an actual area to render to
                 if (innerWidth > 0 && innerHeight > 0)
                 {
                     // See if we already have a rasterImage that matches the current SVGWindow dimensions
-                    if (rasterImage == null || rasterImage.Width != innerWidth || rasterImage.Height != innerHeight)
+                    if (_rasterImage == null || _rasterImage.Width != innerWidth || _rasterImage.Height != innerHeight)
                     {
                         // Nope, so create one
-                        if (rasterImage != null)
+                        if (_rasterImage != null)
                         {
-                            rasterImage.Dispose();
-                            rasterImage = null;
+                            _rasterImage.Dispose();
+                            _rasterImage = null;
                         }
-                        rasterImage = new Bitmap(innerWidth, innerHeight);
+                        _rasterImage = new Bitmap(innerWidth, innerHeight);
                     }
 
                     // Maybe we are only repainting an invalidated section
-                    if (invalidRect != SvgRectF.Empty)
+                    if (_invalidRect != SvgRectF.Empty)
                     {
                         // TODO: Worry about pan...
-                        if (invalidRect.X < 0)
-                            invalidRect.X = 0;
-                        if (invalidRect.Y < 0)
-                            invalidRect.Y = 0;
-                        if (invalidRect.Right > innerWidth)
-                            invalidRect.Width = innerWidth - invalidRect.X;
-                        if (invalidRect.Bottom > innerHeight)
-                            invalidRect.Height = innerHeight - invalidRect.Y;
+                        if (_invalidRect.X < 0)
+                            _invalidRect.X = 0;
+                        if (_invalidRect.Y < 0)
+                            _invalidRect.Y = 0;
+                        if (_invalidRect.Right > innerWidth)
+                            _invalidRect.Width = innerWidth - _invalidRect.X;
+                        if (_invalidRect.Bottom > innerHeight)
+                            _invalidRect.Height = innerHeight - _invalidRect.Y;
 
-                        if (invalidatedRasterImage == null || invalidatedRasterImage.Width < invalidRect.Right ||
-                            invalidatedRasterImage.Height < invalidRect.Bottom)
+                        if (_invalidatedRasterImage == null || _invalidatedRasterImage.Width < _invalidRect.Right ||
+                            _invalidatedRasterImage.Height < _invalidRect.Bottom)
                         {
                             // Nope, so create one
-                            if (invalidatedRasterImage != null)
+                            if (_invalidatedRasterImage != null)
                             {
-                                invalidatedRasterImage.Dispose();
-                                invalidatedRasterImage = null;
+                                _invalidatedRasterImage.Dispose();
+                                _invalidatedRasterImage = null;
                             }
-                            invalidatedRasterImage = new Bitmap((int)invalidRect.Right, (int)invalidRect.Bottom);
+                            _invalidatedRasterImage = new Bitmap((int)_invalidRect.Right, (int)_invalidRect.Bottom);
                         }
                         // Make a GraphicsWrapper object from the regionRasterImage and clear it to the background color
-                        graphics = GdiGraphicsWrapper.FromImage(invalidatedRasterImage, false);
+                        _graphics = GdiGraphicsWrapper.FromImage(_invalidatedRasterImage, _isStatic);
 
-                        graphics.Clear(backColor);
+                        _graphics.Clear(_backColor);
                     }
                     else
                     {
                         // Make a GraphicsWrapper object from the rasterImage and clear it to the background color
-                        graphics = GdiGraphicsWrapper.FromImage(rasterImage, false);
-                        graphics.Clear(backColor);
+                        _graphics = GdiGraphicsWrapper.FromImage(_rasterImage, _isStatic);
+                        _graphics.Clear(_backColor);
                     }
                 }
             }
@@ -750,46 +765,46 @@ namespace SharpVectors.Renderers.Gdi
         /// </summary>
         private void RendererAfterRender()
         {
-            if (graphics != null)
+            if (_graphics != null)
             {
                 // Check if we only invalidated a rect
-                if (invalidRect != SvgRectF.Empty)
+                if (_invalidRect != SvgRectF.Empty)
                 {
                     // We actually drew everything on invalidatedRasterImage and now we
                     // need to copy that to rasterImage
-                    Graphics tempGraphics = Graphics.FromImage(rasterImage);
-                    tempGraphics.DrawImage(invalidatedRasterImage, invalidRect.X, invalidRect.Y,
-                      GdiConverter.ToRectangle(invalidRect), GraphicsUnit.Pixel);
+                    Graphics tempGraphics = Graphics.FromImage(_rasterImage);
+                    tempGraphics.DrawImage(_invalidatedRasterImage, _invalidRect.X, _invalidRect.Y,
+                      GdiConverter.ToRectangle(_invalidRect), GraphicsUnit.Pixel);
                     tempGraphics.Dispose();
                     tempGraphics = null;
 
                     // If we currently have an idMapRaster here, then we need to create
                     // a temporary graphics object to draw the invalidated portion from
                     // our main graphics window onto it.
-                    if (idMapRaster != null)
+                    if (_idMapRaster != null)
                     {
-                        tempGraphics = Graphics.FromImage(idMapRaster);
-                        tempGraphics.DrawImage(graphics.IdMapRaster, invalidRect.X, invalidRect.Y,
-                          GdiConverter.ToRectangle(invalidRect), GraphicsUnit.Pixel);
+                        tempGraphics = Graphics.FromImage(_idMapRaster);
+                        tempGraphics.DrawImage(_graphics.IdMapRaster, _invalidRect.X, _invalidRect.Y,
+                          GdiConverter.ToRectangle(_invalidRect), GraphicsUnit.Pixel);
                         tempGraphics.Dispose();
                         tempGraphics = null;
                     }
                     else
                     {
-                        idMapRaster = graphics.IdMapRaster;
+                        _idMapRaster = _graphics.IdMapRaster;
                     }
                     // We have updated the invalid region
-                    invalidRect = SvgRectF.Empty;
+                    _invalidRect = SvgRectF.Empty;
                 }
                 else
                 {
-                    if (idMapRaster != null && idMapRaster != graphics.IdMapRaster)
-                        idMapRaster.Dispose();
-                    idMapRaster = graphics.IdMapRaster;
+                    if (_idMapRaster != null && _idMapRaster != _graphics.IdMapRaster)
+                        _idMapRaster.Dispose();
+                    _idMapRaster = _graphics.IdMapRaster;
                 }
 
-                graphics.Dispose();
-                graphics = null;
+                _graphics.Dispose();
+                _graphics = null;
             }
         }
 
@@ -805,14 +820,26 @@ namespace SharpVectors.Renderers.Gdi
 
         private void Dispose(bool disposing)
         {
-            if (idMapRaster != null)
-                idMapRaster.Dispose();
-            if (invalidatedRasterImage != null)
-                invalidatedRasterImage.Dispose();
-            if (rasterImage != null)
-                rasterImage.Dispose();
-            if (graphics != null)
-                graphics.Dispose();
+            if (_idMapRaster != null)
+            {
+                _idMapRaster.Dispose();
+                _idMapRaster = null;
+            }
+            if (_invalidatedRasterImage != null)
+            {
+                _invalidatedRasterImage.Dispose();
+                _invalidatedRasterImage = null;
+            }
+            if (_rasterImage != null)
+            {
+                _rasterImage.Dispose();
+                _rasterImage = null;
+            }
+            if (_graphics != null)
+            {
+                _graphics.Dispose();
+                _graphics = null;
+            }
         }
 
         #endregion

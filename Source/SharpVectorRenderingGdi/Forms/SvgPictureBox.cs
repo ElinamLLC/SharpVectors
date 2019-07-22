@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.ComponentModel;
 
@@ -11,24 +12,37 @@ using SharpVectors.Renderers.Gdi;
 
 namespace SharpVectors.Renderers.Forms
 {
-    public partial class SvgPictureBox : Control
+    public partial class SvgPictureBox : Control, ISupportInitialize
     {
         #region Private Fields
+
+        private const string DefaultTitle        = "SharpVectors";
 
         private const string UserCssFileName      = "user.css";
         private const string UserAgentCssFileName = "useragent.css";
 
-        private GdiGraphicsRenderer renderer;
+        private const string ValidSVG             = "<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>";
 
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.Container components;
-        private SvgPictureBoxWindow _window;
-        private bool _isLoaded;
+        private int _lastPosX = -1;
+        private int _lastPosY = -1;
 
-        //private Thread renderThread;
-        private Graphics _surface;
+        private bool _isSvgLoaded;
+        private bool _isInitializing;
+
+        private string _svgSource;
+        private string _xmlSource;
+        private Uri _uriSource;
+        private MemoryStream _streamSource;
+
+        private SvgPictureBoxWindow _svgWindow;
+        private GdiGraphicsRenderer _svgRenderer;
+
+        private string _appTitle;
+        private event EventHandler<SvgAlertArgs> _svgAlerts;
+        private event EventHandler<SvgErrorArgs> _svgErrors;
+
+        private Size _savedSize;
+        private PictureBoxSizeMode _sizeMode = PictureBoxSizeMode.Normal;
 
         #endregion
 
@@ -38,16 +52,22 @@ namespace SharpVectors.Renderers.Forms
         {
             InitializeComponent();
 
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            _appTitle = DefaultTitle;
+            _sizeMode         = PictureBoxSizeMode.Zoom;
+            _savedSize        = this.Size;
+
+            SetStyle(ControlStyles.Opaque | ControlStyles.Selectable, false);
+//            SetStyle(ControlStyles.UserPaint, true);
+//            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
+//            SetStyle(ControlStyles.ResizeRedraw, true);
 
             //scriptEngineByMimeType = new TypeDictionary();
             //SetMimeTypeEngineType("application/ecmascript", typeof(JScriptEngine));
 
-            renderer = new GdiGraphicsRenderer();
-            renderer.OnRender = new RenderEvent(this.OnRender);
-            _window = new SvgPictureBoxWindow(this, renderer);
+            _svgRenderer = new GdiGraphicsRenderer();
+            _svgRenderer.OnRender = new RenderEvent(this.OnRender);
+            _svgWindow = new SvgPictureBoxWindow(this, _svgRenderer);
         }
 
         /// <summary> 
@@ -55,8 +75,6 @@ namespace SharpVectors.Renderers.Forms
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            renderer.Dispose();
-
             if (disposing)
             {
                 if (components != null)
@@ -66,6 +84,12 @@ namespace SharpVectors.Renderers.Forms
                 }
             }
 
+            if (_svgRenderer != null)
+            {
+                _svgRenderer.Dispose();
+                _svgRenderer = null;
+            }
+
             base.Dispose(disposing);
         }
 
@@ -73,28 +97,38 @@ namespace SharpVectors.Renderers.Forms
 
         #region Public Events
 
+        public event EventHandler<SvgAlertArgs> Alert
+        {
+            add { _svgAlerts += value; }
+            remove { _svgAlerts -= value; }
+        }
+
+        public event EventHandler<SvgErrorArgs> Error
+        {
+            add { _svgErrors += value; }
+            remove { _svgErrors -= value; }
+        }
+
         public void OnRender(SvgRectF updatedRect)
         {
-            if (_surface != null)
-            {
-                if (updatedRect == SvgRectF.Empty)
-                    Draw(_surface);
-                else
-                    Draw(_surface, GdiConverter.ToRectangle(updatedRect));
-            }
-            else
-            {
-                _surface = CreateGraphics();
+            //            using (var graphics = CreateGraphics())
+            //            {
+            //                this.UpdateGraphics(graphics);
 
-                UpdateGraphics(_surface);
+            //                if (updatedRect == SvgRectF.Empty)
+            //                {
+            ////TODO:                    this.Draw(graphics);
+            //                    this.DrawEx(graphics, this.ImageRectangle);
+            //                }
+            //                else
+            //                {
+            ////TODO:                    this.Draw(graphics, GdiConverter.ToRectangle(updatedRect));
+            //                    this.DrawEx(graphics, this.ImageRectangle);
+            //                }
+            //            }
 
-                if (updatedRect == SvgRectF.Empty)
-                    Draw(_surface);
-                else
-                    Draw(_surface, GdiConverter.ToRectangle(updatedRect));
-                _surface.Dispose();
-                _surface = null;
-            }
+            this.Invalidate(new Rectangle((int)updatedRect.X, (int)updatedRect.Y, 
+                (int)updatedRect.Width, (int)updatedRect.Height));
 
             // Collect the rendering regions for later updates
             //SvgDocument doc = (window.Document as SvgDocument);
@@ -102,34 +136,40 @@ namespace SharpVectors.Renderers.Forms
             //root.CacheRenderingRegion(renderer);
         }
 
-        private void UpdateGraphics(Graphics graphics)
-        {
-        }
-
-        private int lastX = -1;
-        private int lastY = -1;
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
 
-            if (lastX == e.X && lastY == e.Y)
+            if (_lastPosX == e.X && _lastPosY == e.Y)
                 return;
-            lastX = e.X;
-            lastY = e.Y;
 
-            renderer.OnMouseEvent("mousemove", e);
+            _lastPosX = e.X;
+            _lastPosY = e.Y;
+
+            if (_svgRenderer != null)
+            {
+                _svgRenderer.OnMouseEvent("mousemove", e);
+            }
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            renderer.OnMouseEvent("mousedown", e);
+
+            if (_svgRenderer != null)
+            {
+                _svgRenderer.OnMouseEvent("mousedown", e);
+            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            renderer.OnMouseEvent("mouseup", e);
+
+            if (_svgRenderer != null)
+            {
+                _svgRenderer.OnMouseEvent("mouseup", e);
+            }
         }
 
         #endregion
@@ -137,18 +177,131 @@ namespace SharpVectors.Renderers.Forms
         #region Public Properties
 
         /// <summary>
+        ///  Deriving classes can override this to configure a default size for their control.
+        ///  This is more efficient than setting the size in the control's constructor.
+        /// </summary>
+        protected override Size DefaultSize
+        {
+            get {
+                return new Size(200, 200);
+            }
+        }
+
+        protected override ImeMode DefaultImeMode
+        {
+            get {
+                return ImeMode.Disable;
+            }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Color ForeColor
+        {
+            get {
+                return base.ForeColor;
+            }
+            set {
+                base.ForeColor = value;
+            }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Font Font
+        {
+            get {
+                return base.Font;
+            }
+            set {
+                base.Font = value;
+            }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override RightToLeft RightToLeft
+        {
+            get {
+                return base.RightToLeft;
+            }
+            set {
+                base.RightToLeft = value;
+            }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Bindable(false)]
+        public override string Text
+        {
+            get {
+                return base.Text;
+            }
+            set {
+                base.Text = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating how the rendered image is displayed.
+        /// </summary>
+        [DefaultValue(PictureBoxSizeMode.Normal)]        
+        public PictureBoxSizeMode SizeMode
+        {
+            get {
+                return _sizeMode;
+            }
+            set {
+                if (_sizeMode != value)
+                {
+                    if (value == PictureBoxSizeMode.AutoSize)
+                    {
+                        this.AutoSize = true;
+                        SetStyle(ControlStyles.FixedHeight | ControlStyles.FixedWidth, true);
+                    }
+                    if (value != PictureBoxSizeMode.AutoSize)
+                    {
+                        this.AutoSize = false;
+                        SetStyle(ControlStyles.FixedHeight | ControlStyles.FixedWidth, false);
+                        _savedSize = this.Size;
+                    }
+                    _sizeMode = value;
+                    this.AdjustSize();
+                    this.Invalidate();
+                }
+            }
+        }
+        [DefaultValue(DefaultTitle)]
+        [Description("The title of the application, used in displaying error and alert messages.")]
+        public string AppTitle
+        {
+            get {
+                return _appTitle;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _appTitle = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Source URL for the Svg Content
         /// </summary>
         [Category("Data")]
         [DefaultValue("")]
-        [Description("The URL of the document currently being display in this SvgPictureBox")]
-        public string SourceURL
+        [Description("The path of the document currently being display in this SvgPictureBox")]
+        public string Source
         {
             get {
-                return _window.Source;
+                if (_svgWindow != null)
+                {
+                    return _svgWindow.Source;
+                }
+                return string.Empty;
             }
             set {
-                Load(value);
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this.Load(value);
+                }
             }
         }
 
@@ -156,123 +309,334 @@ namespace SharpVectors.Renderers.Forms
         /// Return current SvgWindow used by this control
         /// </summary>
         [Category("Data")]
-        [DefaultValue("")]
         [Description("The Window Interface connected to the SvgPictureBox")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public ISvgWindow Window
         {
             get {
-                return _window;
+                return _svgWindow;
             }
         }
 
-        public Graphics Surface
-        {
-            get { return _surface; }
-            set { _surface = value; }
-        }
-
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public RectangleF InvalidRect
         {
-            get { return GdiConverter.ToRectangle(renderer.InvalidRect); }
+            get {
+                if (_svgRenderer != null)
+                {
+                    return GdiConverter.ToRectangle(_svgRenderer.InvalidRect);
+                }
+                return RectangleF.Empty;
+            }
         }
 
         #endregion
 
         #region Public Methods
 
-        public void Load(string value)
+        public void Load(string svgSource)
+        {
+            this.Clear();
+
+            if (string.IsNullOrWhiteSpace(svgSource))
+            {
+                return;
+            }
+            Uri uriSource = this.ResolveUri(svgSource);
+            if (uriSource != null && uriSource.IsAbsoluteUri)
+            {
+                if (uriSource.IsFile)
+                {
+                    _svgSource = uriSource.LocalPath;
+                }
+                else
+                {
+                    _svgSource = uriSource.AbsoluteUri;
+                }
+            }
+
+            if (_isInitializing || this.IsHandleCreated == false || string.IsNullOrWhiteSpace(_svgSource))
+            {
+                return;
+            }
+
+            this.Load();
+        }
+
+        public void LoadXml(string xmlSource)
+        {
+            this.Clear();
+
+            if (!string.IsNullOrWhiteSpace(xmlSource))
+            {
+                xmlSource = xmlSource.Trim();
+                if (xmlSource.Length > ValidSVG.Length)
+                {
+                    _xmlSource = xmlSource;
+                }
+            }
+
+            if (_isInitializing || this.IsHandleCreated == false || string.IsNullOrWhiteSpace(_xmlSource))
+            {
+                return;
+            }
+
+            this.Load();
+        }
+
+        public void Load(Uri svgSource)
+        {
+            this.Clear();
+
+            if (svgSource == null)
+            {
+                return;
+            }
+            var uriSource = this.ResolveUri(svgSource);
+            if (uriSource != null && uriSource.IsAbsoluteUri)
+            {
+                _uriSource = uriSource;
+            }
+
+            if (_isInitializing || this.IsHandleCreated == false || _uriSource == null)
+            {
+                return;
+            }
+
+            this.Load();
+        }
+
+        public void Load(Stream streamSource)
+        {
+            this.Clear();
+
+            if (streamSource != null)
+            {
+                // On dispose, the stream is closed so copy it to the memory stream.
+                _streamSource = new MemoryStream();
+                streamSource.CopyTo(_streamSource);
+                // Move the position to the start of the stream
+                _streamSource.Seek(0, SeekOrigin.Begin);
+            }
+
+            if (_isInitializing || this.IsHandleCreated == false || _streamSource == null)
+            {
+                return;
+            }
+
+            this.Load();
+        }
+
+        /// <summary>
+        ///  Returns a string representation for this control.
+        /// </summary>
+        public override string ToString()
+        {
+            string source = _svgSource;
+            if (!string.IsNullOrWhiteSpace(_svgSource))
+            {
+                source = string.Empty;
+            }
+            StringBuilder builder = new StringBuilder(base.ToString());
+            builder.Append(", Source").Append(source);
+            builder.Append(", SizeMode: ").Append(_sizeMode.ToString("G"));
+
+            return builder.ToString();
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected virtual void Clear()
         {
             try
             {
-                // Worry about clearing the graphics nodes map...
-                renderer.ClearMap();
-                System.GC.Collect();
-                System.Threading.Thread.Sleep(1);
+                _isSvgLoaded = false;
 
-                if (value != null && value.Length > 0)
+                if (_streamSource != null)
+                {
+                    _streamSource.Dispose();
+                }
+                _svgSource   = string.Empty;
+                _xmlSource    = string.Empty;
+                _uriSource    = null;
+                _streamSource = null;
+
+                if (_svgRenderer == null)
+                {
+                    return;
+                }
+
+                _svgRenderer.ClearAll();
+
+                GC.Collect();
+                System.Threading.Thread.Sleep(1);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
+        }
+
+        protected virtual void Load()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_svgSource))
                 {
                     // Load the source
-                    _window.Source = value;
+                    _svgWindow.Source = _svgSource;
                     // Initialize the style sheets
                     SetupStyleSheets();
                     // Execute all script elements
                     //UnloadEngines();
                     //InitializeEvents();
                     //ExecuteScripts();
-                    //JR
-                    if (this.AutoSize)
+
+                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
+                    ISvgRect r = svgEl.GetBBox();
+                    if (r == null)
                     {
-                        ISvgSvgElement svgEl = _window.Document.RootElement;
-                        this.Width = (int)svgEl.Width.BaseVal.Value;
-                        this.Height = (int)svgEl.Height.BaseVal.Value;
+                        r = SvgRect.Empty;
                     }
-                    renderer.InvalidRect = SvgRectF.Empty;
-                    Render();
-                    _isLoaded = true;
+                    int winWidth  = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
+                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+
+                    _svgWindow.Resize(winWidth, winHeight);
+
+                    _svgRenderer.InvalidRect = SvgRectF.Empty;
+
+                    this.Render();
+                    _isSvgLoaded = true;
                 }
-            }
-            catch (Exception e)
-            {
-                StringBuilder builder = new StringBuilder();
-                builder.AppendLine("An error occurred while loading the document.\n");
-                builder.AppendLine();
-                builder.AppendLine(e.ToString());
-                MessageBox.Show(builder.ToString());
-            }
-        }
-
-        public void LoadXml(string xml)
-        {
-            try
-            {
-                // Worry about clearing the graphics nodes map...
-                renderer.ClearMap();
-                System.GC.Collect();
-                System.Threading.Thread.Sleep(1);
-
-                if (xml != null && xml.Length > 0)
+                else if (!string.IsNullOrWhiteSpace(_xmlSource) && _xmlSource.Length > ValidSVG.Length)
                 {
-                    if (xml != null && xml.Length > 0)
+                    SvgDocument doc = _svgWindow.CreateEmptySvgDocument();
+                    doc.LoadXml(_xmlSource);
+                    _svgWindow.Document = doc;
+
+                    SetupStyleSheets();
+
+                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
+                    ISvgRect r = svgEl.GetBBox();
+                    if (r == null)
                     {
-                        SvgDocument doc = _window.CreateEmptySvgDocument();
-                        doc.LoadXml(xml);
-                        _window.Document = doc;
-                        SetupStyleSheets();
-                        //JR
-                        if (this.AutoSize)
-                        {
-                            ISvgRect r = _window.Document.RootElement.GetBBox();
-                            this.Width = (int)r.Width;
-                            this.Height = (int)r.Height;
-                        }
-                        Render();
-                        _isLoaded = true;
+                        r = SvgRect.Empty;
                     }
+                    int winWidth  = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
+                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+
+                    _svgWindow.Resize(winWidth, winHeight);
+
+                    _svgRenderer.InvalidRect = SvgRectF.Empty;
+
+                    this.Render();
+                    _isSvgLoaded = true;
+                }
+                else if (_uriSource != null)
+                {
+                    // Load the source
+                    _svgWindow.Source = _uriSource.AbsoluteUri;
+                    // Initialize the style sheets
+                    SetupStyleSheets();
+                    // Execute all script elements
+                    //UnloadEngines();
+                    //InitializeEvents();
+                    //ExecuteScripts();
+
+                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
+                    ISvgRect r = svgEl.GetBBox();
+                    if (r == null)
+                    {
+                        r = SvgRect.Empty;
+                    }
+                    int winWidth = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
+                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+
+                    _svgWindow.Resize(winWidth, winHeight);
+
+                    _svgRenderer.InvalidRect = SvgRectF.Empty;
+
+                    this.Render();
+                    _isSvgLoaded = true;
+                }
+                else if (_streamSource != null)
+                {
+                    SvgDocument doc = _svgWindow.CreateEmptySvgDocument();
+                    doc.Load(_streamSource);
+                    _svgWindow.Document = doc;
+
+                    SetupStyleSheets();
+
+                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
+                    ISvgRect r = svgEl.GetBBox();
+                    if (r == null)
+                    {
+                        r = SvgRect.Empty;
+                    }
+                    int winWidth = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
+                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+
+                    _svgWindow.Resize(winWidth, winHeight);
+
+                    _svgRenderer.InvalidRect = SvgRectF.Empty;
+
+                    this.Render();
+                    _isSvgLoaded = true;
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show("An error occured while loading the document.\n" + e.Message);
+                if (this.DesignMode)
+                {
+                    return;
+                }
+                var errorArgs = new SvgErrorArgs("An error occurred while loading the document", ex);
+                _svgErrors?.Invoke(this, errorArgs);
+                if (!errorArgs.Handled)
+                {
+                    MessageBox.Show(errorArgs.Message + ": " + ex.Message,
+                        _appTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        public void Render()
+        protected virtual void Render()
         {
-            if (this._window != null)
+            if (_svgWindow != null)
             {
                 InvalidateAndRender();
             }
         }
 
-        public void Update(RectangleF rect)
+        protected virtual void Update(RectangleF rect)
         {
-            if (this._window != null)
+            if (_svgWindow != null)
             {
                 InvalidateAndUpdate(rect);
             }
         }
 
-        public void CacheRenderingRegions()
+        protected virtual void UpdateGraphics(Graphics graphics)
+        {
+        }
+
+        protected virtual void Draw(Graphics gr, Rectangle rect)
+        {
+            if (this.DesignMode || _svgWindow == null)
+            {
+                return;
+            }
+            Bitmap rasterImage = ((GdiGraphicsRenderer)_svgWindow.Renderer).RasterImage;
+
+            if (rasterImage != null)
+            {
+                gr.DrawImage(rasterImage, rect);
+            }
+        }
+
+        protected virtual void CacheRenderingRegions()
         {
             // Collect the rendering regions for later updates
 
@@ -287,111 +651,17 @@ namespace SharpVectors.Renderers.Forms
         /// The empty SvgDocument is returned.  This method is needed only in situations 
         /// where the library user needs to create an SVG DOM tree outside of the usual window Src setting mechanism.
         /// </summary>
-        public SvgDocument CreateEmptySvgDocument()
+        protected virtual SvgDocument CreateEmptySvgDocument()
         {
-            SvgDocument svgDocument = _window.CreateEmptySvgDocument();
+            if (_svgWindow == null)
+            {
+                return null;
+            }
+
+            SvgDocument svgDocument = _svgWindow.CreateEmptySvgDocument();
             SetupStyleSheets();
 
             return svgDocument;
-        }
-
-        public void DrawTo(IntPtr hdc)
-        {
-            if (!this.DesignMode)
-            {
-                if (_window != null)
-                {
-                    GdiGraphicsWrapper gw = GdiGraphicsWrapper.FromHdc(hdc, true);
-                    GdiGraphicsRenderer r = ((GdiGraphicsRenderer)_window.Renderer);
-                    gw.Clear(r.BackColor);
-                    r.GraphicsWrapper = gw;
-                    _window.Renderer.Render((SvgDocument)_window.Document);
-                    r.GraphicsWrapper = null;
-                    gw.Dispose();
-                }
-            }
-        }
-
-        public void Draw(Graphics gr)
-        {
-            if (!this.DesignMode)
-            {
-                if (_window != null)
-                {
-                    Bitmap rasterImage = ((GdiGraphicsRenderer)_window.Renderer).RasterImage;
-
-                    if (rasterImage != null)
-                    {
-                        gr.DrawImage(rasterImage, 0, 0, rasterImage.Width, rasterImage.Height);
-                    }
-                }
-            }
-        }
-
-        public void Draw(Graphics gr, int offsetX, int offsetY)
-        {
-            if (!this.DesignMode)
-            {
-                if (_window != null)
-                {
-                    Bitmap rasterImage = ((GdiGraphicsRenderer)_window.Renderer).RasterImage;
-
-                    if (rasterImage != null)
-                    {
-                        gr.DrawImage(rasterImage, offsetX, offsetY, rasterImage.Width, rasterImage.Height);
-                    }
-                }
-            }
-        }
-
-        public void Draw(Graphics gr, RectangleF rect)
-        {
-            if (!this.DesignMode)
-            {
-                if (_window != null)
-                {
-                    Bitmap rasterImage = ((GdiGraphicsRenderer)_window.Renderer).RasterImage;
-
-                    if (rasterImage != null)
-                    {
-                        gr.DrawImage(rasterImage, rect, rect, GraphicsUnit.Pixel);
-                    }
-                }
-            }
-        }
-
-        #endregion
-
-        #region Protected Methods
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            if (_surface != null)
-            {
-                Draw(_surface);
-            }
-            else
-            {
-                Graphics graphics = e.Graphics;
-
-                UpdateGraphics(graphics);
-
-                Draw(graphics);
-            }
-        }
-
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            if (_isLoaded)
-            {
-                // Worry about clearing the graphics nodes map...
-                //System.GC.Collect();
-                //System.Threading.Thread.Sleep(1);
-
-                (_window as SvgWindow).Resize(this.Width, this.Height);
-                InvalidateAndRender();
-            }
         }
 
         /// <summary>
@@ -399,20 +669,141 @@ namespace SharpVectors.Renderers.Forms
         /// </summary>
         protected virtual void SetupStyleSheets()
         {
-            CssXmlDocument cssDocument = (CssXmlDocument)_window.Document;
+            CssXmlDocument cssDocument = (CssXmlDocument)_svgWindow.Document;
             string appRootPath         = SvgApplicationContext.ExecutableDirectory.FullName;
-            FileInfo userAgentCssPath  = new FileInfo(appRootPath + "\\" + UserAgentCssFileName);
-            FileInfo userCssPath       = new FileInfo(appRootPath + "\\" + UserCssFileName);
+            FileInfo userAgentCssPath  = new FileInfo(Path.Combine(appRootPath, UserAgentCssFileName));
+            FileInfo userCssPath       = new FileInfo(Path.Combine(appRootPath, UserCssFileName));
 
             if (userAgentCssPath.Exists)
             {
-                cssDocument.SetUserAgentStyleSheet((new Uri("file:/" + userAgentCssPath.FullName)).AbsoluteUri);
+                cssDocument.SetUserAgentStyleSheet((new Uri(userAgentCssPath.FullName)).AbsoluteUri);
             }
 
             if (userCssPath.Exists)
             {
-                cssDocument.SetUserStyleSheet((new Uri("file:/" + userCssPath.FullName)).AbsoluteUri);
+                cssDocument.SetUserStyleSheet((new Uri(userCssPath.FullName)).AbsoluteUri);
             }
+        }
+
+        protected virtual Uri ResolveUri(string svgSource)
+        {
+            if (string.IsNullOrWhiteSpace(svgSource))
+            {
+                return null;
+            }
+            if (File.Exists(svgSource))
+            {
+                return new Uri(svgSource);
+            }
+            try
+            {
+                Uri uri = new Uri(svgSource);
+                if (uri.IsAbsoluteUri)
+                {
+                    return uri;
+                }
+
+                return this.ResolveUri(uri);
+            }
+            catch (UriFormatException)
+            {
+                // If relative, get the full path
+                string localFile = Path.GetFullPath(svgSource.Replace('/', '\\'));
+                if (File.Exists(localFile))
+                {
+                    return new Uri(localFile);
+                }
+
+                var svgPath = svgSource;
+                if (svgSource[0] == '\\' || svgSource[0] == '/')
+                {
+                    svgPath = svgSource.Substring(1);
+                }
+                svgPath = svgPath.Replace('/', '\\');
+
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+                if (File.Exists(localFile))
+                {
+                    return new Uri(localFile);
+                }
+            }
+            return null;
+        }
+
+        protected virtual Uri ResolveUri(Uri svgSource)
+        {
+            if (svgSource == null)
+            {
+                return null;
+            }
+
+            if (svgSource.IsAbsoluteUri)
+            {
+                return svgSource;
+            }
+
+            // Try getting a local file in the same directory....
+            string svgPath = svgSource.ToString();
+            if (svgPath[0] == '\\' || svgPath[0] == '/')
+            {
+                svgPath = svgPath.Substring(1);
+            }
+            svgPath = svgPath.Replace('/', '\\');
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+            if (File.Exists(localFile))
+            {
+                return new Uri(localFile);
+            }
+
+            // Try using the system full path method...
+            svgPath = svgSource.ToString();
+            svgPath = svgPath.Replace('/', '\\');
+
+            localFile = Path.GetFullPath(svgPath);
+            if (File.Exists(localFile))
+            {
+                return new Uri(localFile);
+            }
+
+            return null;
+        }
+
+        #endregion
+
+        #region Protected Override Methods
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+
+            UpdateGraphics(graphics);
+
+            var imageRect = this.ComputeImageRectangle();
+
+            this.Draw(graphics, imageRect);
+
+            // Will fire the Paint event
+            base.OnPaint(e);
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            if (_isSvgLoaded)
+            {
+                // Worry about clearing the graphics nodes map...
+                //System.GC.Collect();
+                //System.Threading.Thread.Sleep(1);
+
+//TODO:                (_svgWindow as SvgWindow).Resize(this.Width, this.Height);
+                InvalidateAndRender();
+            }
+
+            _savedSize = this.Size;
         }
 
         #endregion
@@ -423,19 +814,165 @@ namespace SharpVectors.Renderers.Forms
         {
             try
             {
-                renderer.Render(_window.Document as SvgDocument);
+                if (_svgRenderer != null)
+                {
+                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
+                    ISvgRect r = svgEl.GetBBox();
+                    if (r == null)
+                    {
+                        r = SvgRect.Empty;
+                    }
+                    int winWidth  = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
+                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+
+                    _svgWindow.Resize(winWidth, winHeight);
+
+                    _svgRenderer.Render(_svgWindow.Document as SvgDocument);
+                }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show("An exception occurred while rendering: " + e.Message);
+                if (this.DesignMode)
+                {
+                    return;
+                }
+                var errorArgs = new SvgErrorArgs("An exception occurred while rendering", ex);
+                _svgErrors?.Invoke(this, errorArgs);
+                if (!errorArgs.Handled)
+                {
+                    MessageBox.Show(errorArgs.Message + ": " + ex.Message, 
+                        _appTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void InvalidateAndUpdate(RectangleF rect)
         {
-            renderer.InvalidateRect(SvgConverter.ToRect(rect));
-            InvalidateAndRender();
+            if (_svgRenderer != null)
+            {
+                _svgRenderer.InvalidateRect(SvgConverter.ToRect(rect));
+                InvalidateAndRender();
+            }
         }
+
+        /// <summary>
+        /// If the <see cref="SvgPictureBox"/> has the <see cref="SizeMode"/> property set to 
+        /// <see cref="PictureBoxSizeMode.AutoSize"/>, adjust the size to hold the rendered image.
+        /// </summary>
+        private void AdjustSize()
+        {
+            if (_sizeMode == PictureBoxSizeMode.AutoSize)
+            {
+                this.Size = this.PreferredSize;
+            }
+            else
+            {
+                this.Size = _savedSize;
+            }
+        }
+
+        private Rectangle ImageRectangle
+        {
+            get {
+                return ComputeImageRectangle();
+            }
+        }
+
+        private Image RenderedImage
+        {
+            get {
+                if (_svgRenderer != null)
+                {
+                    return _svgRenderer.RasterImage;
+                }
+                if (_svgWindow != null)
+                {
+                    return ((GdiGraphicsRenderer)_svgWindow.Renderer).RasterImage;
+                }
+                return null;
+            }
+        }
+
+        private static Rectangle DeflateRect(Rectangle rect, Padding padding)
+        {
+            rect.X += padding.Left;
+            rect.Y += padding.Top;
+            rect.Width -= padding.Horizontal;
+            rect.Height -= padding.Vertical;
+            return rect;
+        }
+
+        private Rectangle ComputeImageRectangle()
+        {
+            Rectangle imageRect = DeflateRect(this.ClientRectangle, this.Padding);
+
+            var image = this.RenderedImage;
+
+            if (image != null)
+            {
+                switch (_sizeMode)
+                {
+                    // The image is placed in the upper-left corner of the SvgPictureBox. 
+                    // The image is clipped if it is larger than the SvgPictureBox it is contained in.
+                    case PictureBoxSizeMode.Normal:
+                    // The SvgPictureBox is sized equal to the size of the image that it contains.
+                    case PictureBoxSizeMode.AutoSize:
+                        imageRect.Size = image.Size;
+                        break;
+
+                    // The image within the SvgPictureBox is stretched or shrunk to fit the size of the SvgPictureBox.
+                    case PictureBoxSizeMode.StretchImage:
+                        break;
+
+                    // The image is displayed in the center if the SvgPictureBox is larger than the image. 
+                    // If the image is larger than the SvgPictureBox, the picture is placed in the center of 
+                    // the SvgPictureBox and the outside edges are clipped.
+                    case PictureBoxSizeMode.CenterImage:
+                        imageRect.X += (imageRect.Width - image.Width) / 2;
+                        imageRect.Y += (imageRect.Height - image.Height) / 2;
+                        imageRect.Size = image.Size;
+                        break;
+
+                    // The size of the image is increased or decreased maintaining the size ratio.
+                    case PictureBoxSizeMode.Zoom:
+                        Size imageSize = image.Size;
+                        Rectangle clientRect = this.ClientRectangle;
+                        float ratio = Math.Min((float)clientRect.Width / (float)imageSize.Width, 
+                            (float)clientRect.Height / (float)imageSize.Height);
+                        imageRect.Width  = (int)(imageSize.Width * ratio);
+                        imageRect.Height = (int)(imageSize.Height * ratio);
+                        imageRect.X = (clientRect.Width - imageRect.Width) / 2;
+                        imageRect.Y = (clientRect.Height - imageRect.Height) / 2;
+                        break;
+                    // Not expected!
+                    default:
+                        break;
+                }
+            }
+
+            return imageRect;
+        }
+        #endregion
+
+        #region Internal Methods
+
+        internal void HandleAlert(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
+            {
+                return;
+            }
+            var alertArgs = new SvgAlertArgs(message);
+            _svgAlerts?.Invoke(this, alertArgs);
+            if (!alertArgs.Handled)
+            {
+                MessageBox.Show(alertArgs.Message, _appTitle);
+            }
+        }
+
+        #endregion
+
+        #region Scripting Methods and Properties
 
         private void DocumentZoomer(float Zint)
         {
@@ -490,10 +1027,6 @@ namespace SharpVectors.Renderers.Forms
             //SVGPicture.LoadXml(myXml.OuterXml);
 
         }
-
-        #endregion
-
-        #region Scripting Methods and Properties
 
         //        private TypeDictionary scriptEngineByMimeType;
         //        private Dictionary<string, ScriptEngine> scriptEngines = new Dictionary<string, ScriptEngine>();
@@ -701,6 +1234,27 @@ namespace SharpVectors.Renderers.Forms
         //            // load the root element
         //            ((ISvgWindow)window).Document.RootElement.DispatchEvent(new Event("SVGLoad", false, true));
         //        }
+
+        #endregion
+
+        #region ISupportInitialize Members
+
+        public void BeginInit()
+        {
+            _isInitializing = true;
+        }
+
+        public void EndInit()
+        {
+            _isInitializing = false;
+
+            if (!_isSvgLoaded)
+            {
+                this.Load();
+            }
+
+            this.Invalidate();
+        }
 
         #endregion
     }

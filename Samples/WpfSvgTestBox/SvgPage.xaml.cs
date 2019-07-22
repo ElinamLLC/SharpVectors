@@ -467,8 +467,11 @@ namespace WpfSvgTestBox
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.CheckFileExists = true;
-            dlg.Filter          = "SVG files (*.svg;*.svgz)|*.svg;*.svgz|All files (*.*)|*.*";
-            dlg.DefaultExt      = ".svg";
+            dlg.Title = "Select An SVG File";
+            dlg.DefaultExt = "*.svg";
+            dlg.Filter = "All SVG Files (*.svg,*.svgz)|*.svg;*.svgz"
+                                + "|Svg Uncompressed Files (*.svg)|*.svg"
+                                + "|SVG Compressed Files (*.svgz)|*.svgz";
             if (dlg.ShowDialog() ?? false)
             {
                 currentFileName = dlg.FileName;
@@ -495,9 +498,12 @@ namespace WpfSvgTestBox
         private void OnSaveFileClick(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter     = "SVG files (*.svg;*.svgz)|*.svg;*.svgz|All files (*.*)|*.*";
+            dlg.Title = "Select An SVG File";
+            dlg.DefaultExt = "*.svg";
+            dlg.Filter = "All SVG Files (*.svg,*.svgz)|*.svg;*.svgz"
+                                + "|Svg Uncompressed Files (*.svg)|*.svg"
+                                + "|SVG Compressed Files (*.svgz)|*.svgz";
             dlg.FileName   = currentFileName;
-            dlg.DefaultExt = ".svg";
             if (dlg.ShowDialog() ?? false)
             {
                 currentFileName = dlg.FileName;

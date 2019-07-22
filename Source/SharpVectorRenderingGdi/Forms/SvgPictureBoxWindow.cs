@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 
 using SharpVectors.Dom.Svg;
+using SharpVectors.Renderers.Gdi;
 
 namespace SharpVectors.Renderers.Forms
 {
@@ -10,6 +11,7 @@ namespace SharpVectors.Renderers.Forms
     {
         #region Private fields
 
+        private bool _preferUserSize;
         private SvgPictureBox _svgPictureBox;
 
         #endregion
@@ -19,22 +21,27 @@ namespace SharpVectors.Renderers.Forms
         public SvgPictureBoxWindow(long innerWidth, long innerHeight, ISvgRenderer renderer)
             : base(innerWidth, innerHeight, renderer)
         {
+            _preferUserSize = true;
         }
 
         public SvgPictureBoxWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)
             : base(parentWindow, innerWidth, innerHeight)
         {
+            _preferUserSize = true;
         }
 
         public SvgPictureBoxWindow(SvgPictureBox control, ISvgRenderer renderer)
             : base(control.Width, control.Height, renderer)
         {
-            if (control == null)
-            {
-                throw new NullReferenceException("control cannot be null");
-            }
+            _preferUserSize = true;
+            _svgPictureBox = control ?? throw new ArgumentNullException(nameof(control), "control cannot be null");
+        }
 
-            _svgPictureBox = control;
+        private SvgPictureBoxWindow(SvgPictureBox control, SvgWindow parentWindow, long innerWidth, long innerHeight)
+            : base(parentWindow, innerWidth, innerHeight)
+        {
+            _preferUserSize = true;
+            _svgPictureBox = control ?? throw new ArgumentNullException(nameof(control), "control cannot be null");
         }
 
         #endregion
@@ -44,6 +51,10 @@ namespace SharpVectors.Renderers.Forms
         public override long InnerWidth
         {
             get {
+                if (_preferUserSize && base.InnerWidth != 0 && base.InnerHeight != 0)
+                {
+                    return base.InnerWidth;
+                }
                 if (_svgPictureBox != null)
                 {
                     return _svgPictureBox.Width;
@@ -58,6 +69,10 @@ namespace SharpVectors.Renderers.Forms
         public override long InnerHeight
         {
             get {
+                if (_preferUserSize && base.InnerWidth != 0 && base.InnerHeight != 0)
+                {
+                    return base.InnerHeight;
+                }
                 if (_svgPictureBox != null)
                 {
                     return _svgPictureBox.Height;
@@ -95,16 +110,25 @@ namespace SharpVectors.Renderers.Forms
 
         public override void Alert(string message)
         {
-            if (string.IsNullOrWhiteSpace(message))
+            if (string.IsNullOrWhiteSpace(message) || _svgPictureBox == null)
             {
                 return;
             }
 
-            MessageBox.Show(message);
+            _svgPictureBox.HandleAlert(message);
+        }
+
+        public override ISvgRenderer CreateSvgRenderer()
+        {
+            return new GdiGraphicsRenderer(true);
         }
 
         public override SvgWindow CreateOwnedWindow(long innerWidth, long innerHeight)
         {
+            if (innerWidth == 0 || innerHeight == 0)
+            {
+                return new SvgPictureBoxWindow(this, this.InnerWidth, this.InnerHeight);
+            }
             return new SvgPictureBoxWindow(this, innerWidth, innerHeight);
         }
 

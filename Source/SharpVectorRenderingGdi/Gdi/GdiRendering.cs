@@ -33,20 +33,17 @@ namespace SharpVectors.Renderers.Gdi
 
         public Color UniqueColor
         {
-            get
-            {
+            get {
                 return _uniqueColor;
             }
         }
 
         public Matrix TransformMatrix
         {
-            get
-            {
+            get {
                 return _transformMatrix;
             }
-            set
-            {
+            set {
                 _transformMatrix = value;
             }
         }
@@ -194,7 +191,7 @@ namespace SharpVectors.Renderers.Gdi
 
             #region Clip with clip
             // see http://www.w3.org/TR/SVG/masking.html#OverflowAndClipProperties 
-            if (_svgElement is ISvgSvgElement    || _svgElement is ISvgMarkerElement ||
+            if (_svgElement is ISvgSvgElement || _svgElement is ISvgMarkerElement ||
                 _svgElement is ISvgSymbolElement || _svgElement is ISvgPatternElement)
             {
                 // check overflow property
@@ -266,7 +263,7 @@ namespace SharpVectors.Renderers.Gdi
 
             // see: http://www.w3.org/TR/SVG/masking.html#EstablishingANewClippingPath
 
-            if (hint == SvgRenderingHint.Shape || hint == SvgRenderingHint.Text || 
+            if (hint == SvgRenderingHint.Shape || hint == SvgRenderingHint.Text ||
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment)
             {
@@ -403,7 +400,7 @@ namespace SharpVectors.Renderers.Gdi
                 if (_transformMatrix == null)
                 {
                     ISvgTransformable transElm = (ISvgTransformable)_svgElement;
-                    SvgTransformList svgTList  = (SvgTransformList)transElm.Transform.AnimVal;
+                    SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
                     SvgMatrix svgMatrix = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
 
                     _transformMatrix = new Matrix((float)svgMatrix.A, (float)svgMatrix.B, (float)svgMatrix.C,

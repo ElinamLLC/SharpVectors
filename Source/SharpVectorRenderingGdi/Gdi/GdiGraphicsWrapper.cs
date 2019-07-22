@@ -18,20 +18,21 @@ namespace SharpVectors.Renderers.Gdi
         private Graphics _graphics;
         private Graphics _idMapGraphics;
         private Bitmap _idMapImage;
-        
+
         #endregion
 
-        #region Constructors
+        #region Constructors and Destructor
 
         private GdiGraphicsWrapper(Image image, bool isStatic)
         {
-            this._isStatic = isStatic;
-            if (!IsStatic)
+            _isStatic = isStatic;
+
+            if (!_isStatic)
             {
-                _idMapImage = new Bitmap(image.Width, image.Height);
+                _idMapImage    = new Bitmap(image.Width, image.Height);
                 _idMapGraphics = Graphics.FromImage(_idMapImage);
-                _idMapGraphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-                _idMapGraphics.SmoothingMode = SmoothingMode.None;
+                _idMapGraphics.InterpolationMode  = InterpolationMode.NearestNeighbor;
+                _idMapGraphics.SmoothingMode      = SmoothingMode.None;
                 _idMapGraphics.CompositingQuality = CompositingQuality.Invalid;
             }
             _graphics = Graphics.FromImage(image);
@@ -39,41 +40,39 @@ namespace SharpVectors.Renderers.Gdi
 
         private GdiGraphicsWrapper(IntPtr hdc, bool isStatic)
         {
-            this._isStatic = isStatic;
-            if (!IsStatic)
+            _isStatic = isStatic;
+
+            if (!_isStatic)
             {
                 // This will get resized when the actual size is known
-                _idMapImage = new Bitmap(0, 0);
+                _idMapImage    = new Bitmap(0, 0);
                 _idMapGraphics = Graphics.FromImage(_idMapImage);
-                _idMapGraphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-                _idMapGraphics.SmoothingMode = SmoothingMode.None;
+                _idMapGraphics.InterpolationMode  = InterpolationMode.NearestNeighbor;
+                _idMapGraphics.SmoothingMode      = SmoothingMode.None;
                 _idMapGraphics.CompositingQuality = CompositingQuality.Invalid;
             }
             _graphics = Graphics.FromHdc(hdc);
         }
 
+        ~GdiGraphicsWrapper()
+        {
+            this.Dispose(false);
+        }
+
         #endregion
 
-        public static GdiGraphicsWrapper FromImage(Image image, bool isStatic)
-        {
-            return new GdiGraphicsWrapper(image, isStatic);
-        }
-
-        public static GdiGraphicsWrapper FromHdc(IntPtr hdc, bool isStatic)
-        {
-            return new GdiGraphicsWrapper(hdc, isStatic);
-        }
-
-        #region Properties
+        #region Public Properties
 
         public bool IsStatic
         {
             get { return _isStatic; }
-            set
-            {
+            set {
                 _isStatic = value;
-                _idMapGraphics.Dispose();
-                _idMapGraphics = null;
+                if (_idMapGraphics != null)
+                {
+                    _idMapGraphics.Dispose();
+                    _idMapGraphics = null;
+                }
             }
         }
 
@@ -95,34 +94,43 @@ namespace SharpVectors.Renderers.Gdi
 
         #endregion
 
-        #region Graphics members
+        #region Public Methods
+
+        public static GdiGraphicsWrapper FromImage(Image image, bool isStatic)
+        {
+            return new GdiGraphicsWrapper(image, isStatic);
+        }
+
+        public static GdiGraphicsWrapper FromHdc(IntPtr hdc, bool isStatic)
+        {
+            return new GdiGraphicsWrapper(hdc, isStatic);
+        }
+
+        #endregion
+
+        #region Public Graphics members
 
         public void Clear(Color color)
         {
             _graphics.Clear(color);
-            if (_idMapGraphics != null) _idMapGraphics.Clear(Color.Empty);
-        }
-
-        public void Dispose()
-        {
-            _graphics.Dispose();
-            if (_idMapGraphics != null) _idMapGraphics.Dispose();
+            if (_idMapGraphics != null)
+                _idMapGraphics.Clear(Color.Empty);
         }
 
         public GdiGraphicsContainer BeginContainer()
         {
             GdiGraphicsContainer container = new GdiGraphicsContainer();
-            if (_idMapGraphics != null) 
+            if (_idMapGraphics != null)
                 container.IdMap = _idMapGraphics.BeginContainer();
 
             container.Main = _graphics.BeginContainer();
-            
+
             return container;
         }
 
         public void EndContainer(GdiGraphicsContainer container)
         {
-            if (_idMapGraphics != null) 
+            if (_idMapGraphics != null)
                 _idMapGraphics.EndContainer(container.IdMap);
 
             _graphics.EndContainer(container.Main);
@@ -137,9 +145,10 @@ namespace SharpVectors.Renderers.Gdi
         public Matrix Transform
         {
             get { return _graphics.Transform; }
-            set
-            {
-                if (_idMapGraphics != null) _idMapGraphics.Transform = value;
+            set {
+                if (_idMapGraphics != null)
+                    _idMapGraphics.Transform = value;
+
                 _graphics.Transform = value;
             }
         }
@@ -218,32 +227,52 @@ namespace SharpVectors.Renderers.Gdi
             _graphics.RotateTransform(angle);
         }
 
-        public void DrawImage(GdiRendering grNode, Image image, Rectangle destRect, 
-            float srcX, float srcY, float srcWidth, float srcHeight, 
+        public void DrawImage(GdiRendering grNode, Image image, Rectangle destRect,
+            float srcX, float srcY, float srcWidth, float srcHeight,
             GraphicsUnit graphicsUnit, ImageAttributes imageAttributes)
         {
             if (_idMapGraphics != null)
             {
                 // This handles pointer-events for visibleFill visibleStroke and visible
-                /*Brush idBrush = new SolidBrush(grNode.UniqueColor);
-                GraphicsPath gp = new GraphicsPath();
-                gp.AddRectangle(destRect);
-                _idMapGraphics.FillPath(idBrush, gp);*/
                 Color unique = grNode.UniqueColor;
                 float r = (float)unique.R / 255;
                 float g = (float)unique.G / 255;
                 float b = (float)unique.B / 255;
-                ColorMatrix colorMatrix = new ColorMatrix(
-                  new float[][] { new float[] {0f, 0f, 0f, 0f, 0f},
-                          new float[] {0f, 0f, 0f, 0f, 0f},
-                          new float[] {0f, 0f, 0f, 0f, 0f},
-                          new float[] {0f, 0f, 0f, 1f, 0f},
-                          new float[] {r,  g,  b,  0f, 1f} });
+                ColorMatrix colorMatrix = new ColorMatrix(new float[][] {
+                    new float[] {0f, 0f, 0f, 0f, 0f},
+                    new float[] {0f, 0f, 0f, 0f, 0f},
+                    new float[] {0f, 0f, 0f, 0f, 0f},
+                    new float[] {0f, 0f, 0f, 1f, 0f},
+                    new float[] {r,  g,  b,  0f, 1f}
+                });
                 ImageAttributes ia = new ImageAttributes();
                 ia.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 _idMapGraphics.DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, graphicsUnit, ia);
             }
             _graphics.DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, graphicsUnit, imageAttributes);
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (_graphics != null)
+            {
+                _graphics.Dispose();
+            }
+            if (_idMapGraphics != null)
+            {
+                _idMapGraphics.Dispose();
+                _idMapGraphics = null;
+            }
         }
 
         #endregion
@@ -262,13 +291,13 @@ namespace SharpVectors.Renderers.Gdi
         internal GraphicsContainer Main;
 
         public GdiGraphicsContainer()
-        {   
+        {
         }
 
         public GdiGraphicsContainer(GraphicsContainer idmap, GraphicsContainer main)
         {
             this.IdMap = idmap;
-            this.Main  = main;
+            this.Main = main;
         }
     }
 }

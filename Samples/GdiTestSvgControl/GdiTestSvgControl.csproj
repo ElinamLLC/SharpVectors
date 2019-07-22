@@ -44,6 +44,12 @@
     <DocumentationFile>..\SharpVectorGraphics\Output\TestSvgControl.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TestSvgControl.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -53,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HitTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HitTestForm.Designer.cs">
+      <DependentUpon>HitTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +73,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuickHelpForm.Designer.cs">
+      <DependentUpon>QuickHelpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SvgSourceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SvgSourceForm.Designer.cs">
+      <DependentUpon>SvgSourceForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="HitTestForm.resx">
+      <DependentUpon>HitTestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +101,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QuickHelpForm.resx">
+      <DependentUpon>QuickHelpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SvgSourceForm.resx">
+      <DependentUpon>SvgSourceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -106,6 +139,9 @@
       <Project>{0AD99D97-24ED-484D-9430-9905811F8A4F}</Project>
       <Name>SharpVectors.Rendering.Gdi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

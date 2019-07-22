@@ -178,7 +178,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Gdi\GdiRenderingBase.cs" />
+    <Compile Include="SvgAlertArgs.cs" />
     <Compile Include="SvgConverter.cs" />
+    <Compile Include="SvgErrorArgs.cs" />
+    <Compile Include="SvgImageSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\GdiGraphics.cd" />

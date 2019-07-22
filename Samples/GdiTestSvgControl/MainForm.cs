@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
 
 using SharpVectors.Dom.Svg;
-using SharpVectors.Renderers.Gdi;
-using SharpVectors.Net;
 using SharpVectors.Dom.Events;
 
 namespace TestSvgControl
@@ -17,6 +11,7 @@ namespace TestSvgControl
     public partial class MainForm : Form
     {
         private string _titleBase;
+        private QuickHelpForm _quickHelpForm;
 
         public MainForm()
         {
@@ -63,6 +58,68 @@ namespace TestSvgControl
             }
         }
 
+        private static Uri TryGetUri(string svgSource)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(svgSource))
+                {
+                    return null;
+                }
+                return new Uri(svgSource);
+            }
+            catch (UriFormatException)
+            {
+                return null;
+            }
+        }
+
+        private void OpenSvgSource(string svgSource)
+        {
+            if (string.IsNullOrWhiteSpace(svgSource))
+            {
+                return;
+            }
+
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                svgPictureBox.Source = svgSource;
+
+                // JR Test event
+                ISvgDocument doc = svgPictureBox.Window.Document;    
+                if (doc != null)
+                {
+                    doc.RootElement.AddEventListener("click", new EventListener(OnSvgElementClicked), false);
+                }
+
+                if (File.Exists(svgSource))
+                {
+                    this.Text = _titleBase + " - " + Path.GetFileName(svgSource);
+                }
+                else
+                {
+                    var uriSource = TryGetUri(svgSource);
+                    if (uriSource != null)
+                    {
+                        this.Text = _titleBase + " - " + uriSource.AbsoluteUri;
+                    }
+                    else
+                    {
+                        this.Text = _titleBase + " - " + svgSource;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+
         private void OpenSvgFile(string fileName)
         {
             if (string.IsNullOrWhiteSpace(fileName) || !File.Exists(fileName))
@@ -83,15 +140,18 @@ namespace TestSvgControl
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                svgPictureBox.SourceURL = fileName;
+                svgPictureBox.Source = fileName;
 
                 // JR Test event
-                ISvgDocument doc = svgPictureBox.Window.Document;                
-                doc.RootElement.AddEventListener("click", new EventListener(OnSvgElementClicked), false);
+                ISvgDocument doc = svgPictureBox.Window.Document;
+                if (doc != null)
+                {
+                    doc.RootElement.AddEventListener("click", new EventListener(OnSvgElementClicked), false);
+                }
 
                 this.Text = _titleBase + " - " + Path.GetFileName(fileName);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -104,10 +164,115 @@ namespace TestSvgControl
         public void OnSvgElementClicked(IEvent e)
         {
             SvgElement el = ((SvgElement)e.Target);
-            
-            //MessageBox.Show(String.Format("Clicked - LocalName = {0}, ID = {1}", el.LocalName, el.Id));
 
-            MessageBox.Show(el.OuterXml);
+            HitTestForm _hitTestForm = new HitTestForm();
+
+            var title = string.Format("Clicked - LocalName = {0}, ID = {1}", el.LocalName, el.Id);
+            _hitTestForm.SetTexts(title, el.OuterXml);
+
+            _hitTestForm.ShowDialog(this);
+        }
+
+        private void OnFormLoad(object sender, EventArgs e)
+        {
+        }
+
+        private void OnFormShown(object sender, EventArgs e)
+        {
+            SvgSourceForm dlg = new SvgSourceForm();
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                this.OpenSvgSource(dlg.SvgSource);
+            }
+            dlg.Dispose();
+        }
+
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void OnSelectClicked(object sender, EventArgs e)
+        {
+            SvgSourceForm dlg = new SvgSourceForm();
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                this.OpenSvgSource(dlg.SvgSource);
+            }
+            dlg.Dispose();
+        }
+
+        private void OnExitClicked(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void OnSizeModeChanged(object sender, EventArgs e)
+        {
+            var selectedMenuItem = sender as ToolStripMenuItem;
+            if (selectedMenuItem == null)
+            {
+                return;
+            }
+            
+            PictureBoxSizeMode selectedMode = svgPictureBox.SizeMode;
+            if (selectedMenuItem.Checked == false)
+            {
+                selectedMode = PictureBoxSizeMode.Normal;
+                menuItemNormal.Checked = true;
+            }
+            else
+            {
+                var menuItems = new ToolStripMenuItem[] {
+                    menuItemNormal,
+                    menuItemStretchImage,
+                    menuItemAutoSize,
+                    menuItemCenterImage,
+                    menuItemZoom
+                };
+
+                var selectedIndex = -1;
+
+                for (int i = 0; i < menuItems.Length; i++)
+                {
+                    var menuItem = menuItems[i];
+                    if (menuItem != selectedMenuItem)
+                    {
+                        menuItem.Checked = false;
+                    }
+                    else
+                    {
+                        selectedIndex = i;
+                    }
+                }
+
+                if (selectedIndex != -1)
+                {
+                    selectedMode = (PictureBoxSizeMode)selectedIndex;
+                }
+            }
+
+            if (selectedMode != svgPictureBox.SizeMode)
+            {
+                svgPictureBox.SizeMode = selectedMode;
+            }
+
+        }
+
+        private void OnQuickHelpClick(object sender, EventArgs e)
+        {
+            if (_quickHelpForm == null || _quickHelpForm.IsDisposed)
+            {
+                _quickHelpForm = new QuickHelpForm();
+            }
+
+            _quickHelpForm.Owner = this;
+            _quickHelpForm.Show();
         }
     }
 }
