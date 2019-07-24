@@ -2,7 +2,6 @@ using System;
 using System.Xml;
 using System.Diagnostics;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -18,21 +17,8 @@ namespace SharpVectors.Renderers.Gdi
     {
         #region Private Fields
 
-        /// <summary>
-        /// A counter that tracks the next hit color.
-        /// </summary>
-        private int _colorCounter;
-
-        /// <summary>
-        /// Maps a 'hit color' to a graphics node.
-        /// </summary>
-        /// <remarks>
-        /// The 'hit color' is an integer identifier that identifies the graphics node that drew it.  
-        /// When 'hit colors' are drawn onto a bitmap (ie. <see cref="_idMapRaster">id-mapppe raster</see> 
-        /// the 'hit color' of each pixel with the help of <see cref="_colorMap">color map</see> 
-        /// can identify for a given x, y coordinate the relevant graphics node a mouse event should be dispatched to.
-        /// </remarks>
-        private IDictionary<Color, SvgElement> _colorMap;
+        private bool _isStatic;
+        private bool _disposeRaster;
 
         /// <summary>
         /// The bitmap containing the rendered Svg image.
@@ -40,22 +26,9 @@ namespace SharpVectors.Renderers.Gdi
         private Bitmap _rasterImage;
 
         /// <summary>
-        /// A secondary back-buffer used for invalidation repaints. The invalidRect will
-        /// be bitblt to the rasterImage front buffer
-        /// </summary>
-        private Bitmap _invalidatedRasterImage;
-
-        /// <summary>
-        /// A bitmap image that consists of 'hit color' instead of visual color.  A 'hit color' is an 
-        /// integer identifier that identifies the graphics node that drew it.  A 'hit color' can 
-        /// therefore identify the graphics node that corresponds an x-y coordinates.
-        /// </summary>
-        private Bitmap _idMapRaster;
-
-        /// <summary>
         /// The renderer's graphics wrapper object.
         /// </summary>
-        private GdiGraphicsWrapper _graphics;
+        private GdiGraphics _graphics;
 
         /// <summary>
         /// The renderer's back color.
@@ -65,7 +38,7 @@ namespace SharpVectors.Renderers.Gdi
         /// <summary>
         /// The renderer's <see cref="SvgWindow">SvgWindow</see> object.
         /// </summary>
-        private ISvgWindow _svgWindow;
+        private SvgWindow _svgWindow;
 
         /// <summary>
         /// 
@@ -75,30 +48,35 @@ namespace SharpVectors.Renderers.Gdi
         private IEventTarget _currentTarget;
         private IEventTarget _currentDownTarget;
 
-        private GdiRenderingHelper _svgRenderer;
-
         private SvgRectF _invalidRect;
 
         private RenderEvent _onRender;
 
-        private bool _isStatic;
+        private GdiHitTestHelper _hitTestHelper;
+
+        private GdiRenderingHelper _svgRenderer;
 
         #endregion
 
         #region Constructors and Destructor
 
+        public GdiGraphicsRenderer(int rasterWidth, int rasterHeight, bool disposeRaster = false)
+            : this(true, disposeRaster)
+        {
+            _svgWindow = new GdiSvgWindow(rasterWidth, rasterHeight, this);
+        }
+
         /// <summary>
         /// Initializes a new instance of the GdiRenderer class.
         /// </summary>
-        public GdiGraphicsRenderer(bool isStatic = false)
+        public GdiGraphicsRenderer(bool isStatic = false, bool disposeRaster = true)
         {
-            _isStatic     = isStatic;
-            _invalidRect  = SvgRectF.Empty;
-            _colorCounter = 0;
-            _backColor    = Color.White;
-            _colorMap     = new Dictionary<Color, SvgElement>();
-
-            _svgRenderer  = new GdiRenderingHelper(this);
+            _isStatic      = isStatic;
+            _disposeRaster = disposeRaster;
+            _invalidRect   = SvgRectF.Empty;
+            _backColor     = Color.White;
+            _hitTestHelper = GdiHitTestHelper.NoHit;
+            _svgRenderer   = new GdiRenderingHelper(this);
         }
 
         ~GdiGraphicsRenderer()
@@ -121,32 +99,28 @@ namespace SharpVectors.Renderers.Gdi
         }
 
         /// <summary>
-        /// Gets the image map of the rendered Svg document. This
-        /// is a picture of how the renderer will map the (x,y) positions
-        /// of mouse events to objects. You can display this raster
-        /// to help in debugging of hit testing.
-        /// </summary>
-        public Bitmap IdMapRaster
-        {
-            get {
-                return _idMapRaster;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the <see cref="Window">Window</see> of the
         /// renderer.
         /// </summary>
         /// <value>
         /// The <see cref="Window">Window</see> of the renderer.
         /// </value>
-        public ISvgWindow Window
+        public SvgWindow Window
         {
             get {
                 return _svgWindow;
             }
             set {
                 _svgWindow = value;
+            }
+        }
+        ISvgWindow ISvgRenderer.Window
+        {
+            get {
+                return _svgWindow;
+            }
+            set {
+                _svgWindow = value as SvgWindow;
             }
         }
 
@@ -167,14 +141,14 @@ namespace SharpVectors.Renderers.Gdi
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="GraphicsWrapper">GraphicsWrapper</see>
+        /// Gets or sets the <see cref="GdiGraphics">GdiGraphics</see>
         /// object associated with this renderer.
         /// </summary>
         /// <value>
-        /// The <see cref="GraphicsWrapper">GraphicsWrapper</see> object
+        /// The <see cref="GdiGraphics">GdiGraphics</see> object
         /// associated with this renderer.
         /// </value>
-        public GdiGraphicsWrapper GraphicsWrapper
+        public GdiGraphics GdiGraphics
         {
             get {
                 return _graphics;
@@ -185,20 +159,15 @@ namespace SharpVectors.Renderers.Gdi
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Graphics">Graphics</see> object
-        /// associated with this renderer.
-        /// </summary>
-        /// <value>
-        /// The <see cref="Graphics">Graphics</see> object associated
-        /// with this renderer.
-        /// </value>
-        public Graphics Graphics
+        /// The invalidated region
+        /// </summary>   
+        public SvgRectF InvalidRect
         {
             get {
-                return _graphics.Graphics;
+                return _invalidRect;
             }
             set {
-                _graphics.Graphics = value;
+                _invalidRect = value;
             }
         }
 
@@ -295,37 +264,12 @@ namespace SharpVectors.Renderers.Gdi
                 _rasterImage.Dispose();
                 _rasterImage = null;
             }
-            if (_idMapRaster != null)
+            if (_hitTestHelper != null)
             {
-                _idMapRaster.Dispose();
-                _idMapRaster = null;
+                _hitTestHelper.Dispose();
+                _hitTestHelper = null;
             }
-            if (_invalidatedRasterImage != null)
-            {
-                _invalidatedRasterImage.Dispose();
-                _invalidatedRasterImage = null;
-            }
-
-            this.ClearMap();
-        }
-
-        public void ClearMap()
-        {
-            _colorMap = null;
-            _colorMap = new Dictionary<Color, SvgElement>();
-        }
-
-        /// <summary>
-        /// The invalidated region
-        /// </summary>   
-        public SvgRectF InvalidRect
-        {
-            get {
-                return _invalidRect;
-            }
-            set {
-                _invalidRect = value;
-            }
+            _hitTestHelper = GdiHitTestHelper.NoHit;
         }
 
         public ISvgRect GetRenderedBounds(ISvgElement element, float margin)
@@ -367,7 +311,7 @@ namespace SharpVectors.Renderers.Gdi
         /// </param>
         public void OnMouseEvent(string type, MouseEventArgs e)
         {
-            if (_idMapRaster == null)
+            if (_hitTestHelper == null)
             {
                 return;
             }
@@ -386,129 +330,14 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Miscellaneous Methods
 
-        /// <summary>
-        /// Allocate a hit color for the specified graphics node.
-        /// </summary>
-        /// <param name="element">
-        /// The <see cref="SvgElement">SvgElement</see> object for which to
-        /// allocate a new hit color.
-        /// </param>
-        /// <returns>
-        /// The hit color for the <see cref="SvgElement">SvgElement</see>
-        /// object.
-        /// </returns>
-        internal Color GetNextColor(SvgElement element)
+        internal Color GetNextHitColor(SvgElement element)
         {
-            //	TODO: [newhoggy] It looks like there is a potential memory leak here.
-            //	We only ever add to the graphicsNodes map, never remove
-            //	from it, so it will grow every time this function is called.
-
-            // The counter is used to generate IDs in the range [0,2^24-1]
-            // The 24 bits of the counter are interpreted as follows:
-            // [red 7 bits | green 7 bits | blue 7 bits |shuffle term 3 bits]
-            // The shuffle term is used to define how the remaining high
-            // bit is set on each color. The colors are generated in the
-            // range [0,127] (7 bits) instead of [0,255]. Then the shuffle term
-            // is used to adjust them into the range [0,255].
-            // This algorithm has the feature that consecutive ids generate
-            // visually distinct colors.
-            int id = _colorCounter++; // Zero should be the first color.
-            int shuffleTerm = id & 7;
-            int r = 0x7f & (id >> 17);
-            int g = 0x7f & (id >> 10);
-            int b = 0x7f & (id >> 3);
-
-            switch (shuffleTerm)
+            if (_hitTestHelper != null)
             {
-                case 0: break;
-                case 1: b |= 0x80; break;
-                case 2: g |= 0x80; break;
-                case 3: g |= 0x80; b |= 0x80; break;
-                case 4: r |= 0x80; break;
-                case 5: r |= 0x80; b |= 0x80; break;
-                case 6: r |= 0x80; g |= 0x80; break;
-                case 7: r |= 0x80; g |= 0x80; b |= 0x80; break;
+                return _hitTestHelper.GetNextHitColor(element);
             }
 
-            Color color = Color.FromArgb(r, g, b);
-
-            _colorMap.Add(color, element);
-
-            return color;
-        }
-
-        internal void RemoveColor(Color color)
-        {
-            if (!color.IsEmpty)
-            {
-                _colorMap[color] = null;
-                _colorMap.Remove(color);
-            }
-        }
-
-        /// <summary>
-        /// Gets the <see cref="SvgElement">SvgElement</see> object that
-        /// corresponds to the given hit color.
-        /// </summary>
-        /// <param name="color">
-        /// The hit color for which to get the corresponding
-        /// <see cref="SvgElement">SvgElement</see> object.
-        /// </param>
-        /// <remarks>
-        /// Returns <c>null</c> if a corresponding
-        /// <see cref="SvgElement">SvgElement</see> object cannot be
-        /// found for the given hit color.
-        /// </remarks>
-        /// <returns>
-        /// The <see cref="SvgElement">SvgElement</see> object that
-        /// corresponds to the given hit color
-        /// </returns>
-        private SvgElement GetElementFromColor(Color color)
-        {
-            if (color.A == 0)
-            {
-                return null;
-            }
-            if (_colorMap.ContainsKey(color))
-            {
-                return _colorMap[color];
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// TODO: This method is not used.
-        /// </summary>
-        /// <param name="color">
-        /// </param>
-        /// <returns>
-        /// </returns>
-        private static int ColorToId(Color color)
-        {
-            int r = color.R;
-            int g = color.G;
-            int b = color.B;
-            int shuffleTerm = 0;
-
-            if (0 != (r & 0x80))
-            {
-                shuffleTerm |= 4;
-                r &= 0x7f;
-            }
-
-            if (0 != (g & 0x80))
-            {
-                shuffleTerm |= 2;
-                g &= 0x7f;
-            }
-
-            if (0 != (b & 0x80))
-            {
-                shuffleTerm |= 1;
-                b &= 0x7f;
-            }
-
-            return (r << 17) + (g << 10) + (b << 3) + shuffleTerm;
+            return Color.White;
         }
 
         private SvgRectF GetElementBounds(SvgTransformableElement element, float margin)
@@ -582,8 +411,20 @@ namespace SharpVectors.Renderers.Gdi
 
         private void ProcessMouseEvents(string type, MouseEventArgs e)
         {
-            Color pixel = _idMapRaster.GetPixel(e.X, e.Y);
-            SvgElement svgElement = GetElementFromColor(pixel);
+            //Color pixel = _idMapRaster.GetPixel(e.X, e.Y);
+            //SvgElement svgElement = GetElementFromColor(pixel);
+
+            SvgElement svgElement = null;
+            var hitTestResult = _hitTestHelper.HitTest(e.X, e.Y);
+            if (hitTestResult != null)
+            {
+                svgElement = hitTestResult.Element;
+            }
+
+            if (type == "mouseup")
+            {
+                type = type.Trim();
+            }
 
             if (svgElement == null)
             {
@@ -721,41 +562,12 @@ namespace SharpVectors.Renderers.Gdi
                         _rasterImage = new Bitmap(innerWidth, innerHeight);
                     }
 
-                    // Maybe we are only repainting an invalidated section
-                    if (_invalidRect != SvgRectF.Empty)
-                    {
-                        // TODO: Worry about pan...
-                        if (_invalidRect.X < 0)
-                            _invalidRect.X = 0;
-                        if (_invalidRect.Y < 0)
-                            _invalidRect.Y = 0;
-                        if (_invalidRect.Right > innerWidth)
-                            _invalidRect.Width = innerWidth - _invalidRect.X;
-                        if (_invalidRect.Bottom > innerHeight)
-                            _invalidRect.Height = innerHeight - _invalidRect.Y;
+                    // Make a GraphicsWrapper object from the rasterImage and clear it to the background color
+//                    _graphics = GdiGraphicsWrapper.FromImage(_rasterImage, _isStatic);
+                    _graphics = GdiGraphicsImpl.FromImage(_rasterImage, _isStatic);
+                    _graphics.Clear(_backColor);
 
-                        if (_invalidatedRasterImage == null || _invalidatedRasterImage.Width < _invalidRect.Right ||
-                            _invalidatedRasterImage.Height < _invalidRect.Bottom)
-                        {
-                            // Nope, so create one
-                            if (_invalidatedRasterImage != null)
-                            {
-                                _invalidatedRasterImage.Dispose();
-                                _invalidatedRasterImage = null;
-                            }
-                            _invalidatedRasterImage = new Bitmap((int)_invalidRect.Right, (int)_invalidRect.Bottom);
-                        }
-                        // Make a GraphicsWrapper object from the regionRasterImage and clear it to the background color
-                        _graphics = GdiGraphicsWrapper.FromImage(_invalidatedRasterImage, _isStatic);
-
-                        _graphics.Clear(_backColor);
-                    }
-                    else
-                    {
-                        // Make a GraphicsWrapper object from the rasterImage and clear it to the background color
-                        _graphics = GdiGraphicsWrapper.FromImage(_rasterImage, _isStatic);
-                        _graphics.Clear(_backColor);
-                    }
+                    _hitTestHelper = _graphics.HitTestHelper;
                 }
             }
         }
@@ -767,44 +579,23 @@ namespace SharpVectors.Renderers.Gdi
         {
             if (_graphics != null)
             {
-                // Check if we only invalidated a rect
-                if (_invalidRect != SvgRectF.Empty)
+                if (_hitTestHelper != null)
                 {
-                    // We actually drew everything on invalidatedRasterImage and now we
-                    // need to copy that to rasterImage
-                    Graphics tempGraphics = Graphics.FromImage(_rasterImage);
-                    tempGraphics.DrawImage(_invalidatedRasterImage, _invalidRect.X, _invalidRect.Y,
-                      GdiConverter.ToRectangle(_invalidRect), GraphicsUnit.Pixel);
-                    tempGraphics.Dispose();
-                    tempGraphics = null;
-
-                    // If we currently have an idMapRaster here, then we need to create
-                    // a temporary graphics object to draw the invalidated portion from
-                    // our main graphics window onto it.
-                    if (_idMapRaster != null)
+                    if (_hitTestHelper != _graphics.HitTestHelper)
                     {
-                        tempGraphics = Graphics.FromImage(_idMapRaster);
-                        tempGraphics.DrawImage(_graphics.IdMapRaster, _invalidRect.X, _invalidRect.Y,
-                          GdiConverter.ToRectangle(_invalidRect), GraphicsUnit.Pixel);
-                        tempGraphics.Dispose();
-                        tempGraphics = null;
+                        _hitTestHelper.Dispose();
+                        _hitTestHelper = _graphics.HitTestHelper;
                     }
-                    else
-                    {
-                        _idMapRaster = _graphics.IdMapRaster;
-                    }
-                    // We have updated the invalid region
-                    _invalidRect = SvgRectF.Empty;
-                }
-                else
-                {
-                    if (_idMapRaster != null && _idMapRaster != _graphics.IdMapRaster)
-                        _idMapRaster.Dispose();
-                    _idMapRaster = _graphics.IdMapRaster;
                 }
 
+                _graphics.HitTestHelper = GdiHitTestHelper.NoHit; // Prevent disposal actual height test
                 _graphics.Dispose();
                 _graphics = null;
+            }
+
+            if (_hitTestHelper == null)
+            {
+                _hitTestHelper = GdiHitTestHelper.NoHit;
             }
         }
 
@@ -820,26 +611,22 @@ namespace SharpVectors.Renderers.Gdi
 
         private void Dispose(bool disposing)
         {
-            if (_idMapRaster != null)
+            if (_hitTestHelper != null)
             {
-                _idMapRaster.Dispose();
-                _idMapRaster = null;
+                _hitTestHelper.Dispose();
             }
-            if (_invalidatedRasterImage != null)
-            {
-                _invalidatedRasterImage.Dispose();
-                _invalidatedRasterImage = null;
-            }
-            if (_rasterImage != null)
+            if (_disposeRaster && _rasterImage != null)
             {
                 _rasterImage.Dispose();
-                _rasterImage = null;
             }
             if (_graphics != null)
             {
                 _graphics.Dispose();
-                _graphics = null;
             }
+
+            _graphics      = null;
+            _rasterImage   = null;
+            _hitTestHelper = null;
         }
 
         #endregion

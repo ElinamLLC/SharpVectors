@@ -60,15 +60,16 @@ namespace SharpVectors.Renderers.Gdi
             }
 
             if (_uniqueColor.IsEmpty)
-                _uniqueColor = renderer.GetNextColor(_svgElement);
+                _uniqueColor = renderer.GetNextHitColor(_svgElement);
 
-            GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
+            var graphics = renderer.GdiGraphics;
             if (graphics == null)
             {
                 return;
             }
 
             _graphicsContainer = graphics.BeginContainer();
+
             SetQuality(graphics);
             Transform(graphics);
             Clip(graphics);
@@ -81,7 +82,7 @@ namespace SharpVectors.Renderers.Gdi
                 return;
             }
 
-            GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
+            var graphics = renderer.GdiGraphics;
             if (graphics == null)
             {
                 return;
@@ -132,7 +133,7 @@ namespace SharpVectors.Renderers.Gdi
         }
 
         /// <summary>
-        /// Generates a new <see cref="RenderingNode">RenderingNode</see> that
+        /// Generates a new <see cref="GdiRendering">GdiRendering</see> that
         /// corresponds to the given Uri.
         /// </summary>
         /// <param name="baseUri">
@@ -142,12 +143,12 @@ namespace SharpVectors.Renderers.Gdi
         /// The url.
         /// </param>
         /// <returns>
-        /// The generated <see cref="RenderingNode">RenderingNode</see> that
+        /// The generated <see cref="GdiRendering">GdiRendering</see> that
         /// corresponds to the given Uri.
         /// </returns>
         public static GdiRendering CreateByUri(SvgDocument document, string baseUri, string url)
         {
-            if (url.StartsWith("#"))
+            if (url.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 // do nothing
             }
@@ -177,7 +178,7 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Protected Methods
 
-        protected void Clip(GdiGraphicsWrapper gr)
+        protected void Clip(GdiGraphics gr)
         {
             if (_svgElement == null)
             {
@@ -324,7 +325,7 @@ namespace SharpVectors.Renderers.Gdi
             #endregion
         }
 
-        protected void SetQuality(GdiGraphicsWrapper gr)
+        protected void SetQuality(GdiGraphics gr)
         {
             Graphics graphics = gr.Graphics;
 
@@ -393,7 +394,7 @@ namespace SharpVectors.Renderers.Gdi
             }
         }
 
-        protected void Transform(GdiGraphicsWrapper gr)
+        protected void Transform(GdiGraphics gr)
         {
             if (_svgElement is ISvgTransformable)
             {
@@ -410,7 +411,7 @@ namespace SharpVectors.Renderers.Gdi
             }
         }
 
-        protected void FitToViewbox(GdiGraphicsWrapper graphics, RectangleF elmRect)
+        protected void FitToViewbox(GdiGraphics graphics, RectangleF elmRect)
         {
             ISvgFitToViewBox fitToVBElm = _svgElement as ISvgFitToViewBox;
             if (fitToVBElm != null)
@@ -826,7 +827,7 @@ namespace SharpVectors.Renderers.Gdi
         }
 
         protected static void PaintMarkers(GdiGraphicsRenderer renderer,
-            SvgStyleableElement styleElm, GdiGraphicsWrapper gr)
+            SvgStyleableElement styleElm, GdiGraphics gr)
         {
             // OPTIMIZE
 

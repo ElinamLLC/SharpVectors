@@ -12,7 +12,7 @@ namespace SharpVectors.Renderers.Gdi
     {
         #region Private Fields
 
-        private GdiGraphicsWrapper _graphics;
+        private GdiGraphics _graphics;
 
         #endregion
 
@@ -41,9 +41,9 @@ namespace SharpVectors.Renderers.Gdi
         public override void BeforeRender(GdiGraphicsRenderer renderer)
         {
             if (_uniqueColor.IsEmpty)
-                _uniqueColor = renderer.GetNextColor(_svgElement);
+                _uniqueColor = renderer.GetNextHitColor(_svgElement);
 
-            GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
+            var graphics = renderer.GdiGraphics;
 
             _graphicsContainer = graphics.BeginContainer();
             SetQuality(graphics);
@@ -52,7 +52,7 @@ namespace SharpVectors.Renderers.Gdi
 
         public override void Render(GdiGraphicsRenderer renderer)
         {
-            _graphics = renderer.GraphicsWrapper;
+            _graphics = renderer.GdiGraphics;
 
             SvgRenderingHint hint = _svgElement.RenderingHint;
             if (hint == SvgRenderingHint.Clipping)
@@ -88,7 +88,7 @@ namespace SharpVectors.Renderers.Gdi
             if (sBaselineShift.Length > 0)
             {
                 float textFontSize = GetComputedFontSize(textElement);
-                if (sBaselineShift.EndsWith("%"))
+                if (sBaselineShift.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100 * textFontSize;
@@ -303,7 +303,7 @@ namespace SharpVectors.Renderers.Gdi
                     element.OwnerDocument.NamespaceManager);
 
                 float textFontSize = GetComputedFontSize(textElement);
-                if (sBaselineShift.EndsWith("%"))
+                if (sBaselineShift.EndsWith("%", StringComparison.OrdinalIgnoreCase))
                 {
                     shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100 * textFontSize;

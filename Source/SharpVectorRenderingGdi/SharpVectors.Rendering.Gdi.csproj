@@ -136,6 +136,15 @@
     </Compile>
     <Compile Include="Forms\SvgPictureBoxWindow.cs" />
     <Compile Include="Forms\SvgCacheManager.cs" />
+    <Compile Include="Internal\GdiGraphicsListenerImpl.cs" />
+    <Compile Include="Internal\GdiHitTestHelperImpl.cs" />
+    <Compile Include="GdiSvgWindow.cs" />
+    <Compile Include="Gdi\GdiGraphics.cs" />
+    <Compile Include="Gdi\GdiGraphicsContainer.cs" />
+    <Compile Include="Internal\GdiGraphicsImpl.cs" />
+    <Compile Include="Gdi\GdiGraphicsListener.cs" />
+    <Compile Include="Gdi\GdiHitTestHelper.cs" />
+    <Compile Include="Gdi\GdiHitTestResult.cs" />
     <Compile Include="Gdi\GdiRenderingHelper.cs" />
     <Compile Include="Gdi\GdiTextRendering.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -150,7 +159,7 @@
     <Compile Include="Gdi\GdiPathRendering.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Gdi\GdiGraphicsWrapper.cs">
+    <Compile Include="Internal\GdiGraphicsWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Gdi\GdiSvgColor.cs">
@@ -192,6 +201,7 @@
       <DependentUpon>SvgPictureBox.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

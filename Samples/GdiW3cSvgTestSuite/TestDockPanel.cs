@@ -4,9 +4,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Gdi;
-using SharpVectors.Renderers.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -18,9 +16,6 @@ namespace GdiW3cSvgTestSuite
 
         private const string AppTitle        = "Svg Test Suite";
         private const string AppErrorTitle   = "Svg Test Suite - Error";
-
-        private SvgWindow _svgWindow;
-        private GdiGraphicsRenderer _svgRenderer;
 
         #endregion
 
@@ -37,8 +32,6 @@ namespace GdiW3cSvgTestSuite
 
             labelConverted.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.World, 0);
             labelExpected.Font  = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.World, 0);
-
-            _svgRenderer = new GdiGraphicsRenderer();
         }
 
         #endregion
@@ -85,21 +78,19 @@ namespace GdiW3cSvgTestSuite
 
             try
             {
-                _svgWindow = new SvgPictureBoxWindow(pngImage.Width, pngImage.Height, _svgRenderer);
-                _svgWindow.Source = documentFilePath;
-
-                var svgImage = new Bitmap(pngImage.Width, pngImage.Height);
-
-                using (var graWrapper = GdiGraphicsWrapper.FromImage(svgImage, true))
+                using (var svgRenderer = new GdiGraphicsRenderer(pngImage.Width, pngImage.Height))
                 {
-                    _svgRenderer.GraphicsWrapper = graWrapper;
-                    _svgRenderer.Render(_svgWindow.Document);
-                    _svgRenderer.GraphicsWrapper = null;
-                }
+                    var svgWindow = svgRenderer.Window;
 
-                viewerConverted.Image  = svgImage;
-                viewerConverted.Width  = svgImage.Width + 10;
-                viewerConverted.Height = svgImage.Height + 10;
+                    svgWindow.Source = documentFilePath;
+                    svgRenderer.Render(svgWindow.Document);
+
+                    var svgImage = svgRenderer.RasterImage;
+
+                    viewerConverted.Image  = svgImage;
+                    viewerConverted.Width  = svgImage.Width + 10;
+                    viewerConverted.Height = svgImage.Height + 10;
+                }
             }
             catch (Exception ex)
             {

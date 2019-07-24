@@ -22,9 +22,9 @@ namespace SharpVectors.Renderers.Gdi
         public override void BeforeRender(GdiGraphicsRenderer renderer)
         {
             if (_uniqueColor.IsEmpty)
-        		  _uniqueColor = renderer.GetNextColor(this.Element);
+        		  _uniqueColor = renderer.GetNextHitColor(this.Element);
 
-            GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
+            var graphics = renderer.GdiGraphics;
 
             _graphicsContainer = graphics.BeginContainer();
             SetQuality(graphics);
@@ -33,7 +33,7 @@ namespace SharpVectors.Renderers.Gdi
 
         public override void Render(GdiGraphicsRenderer renderer)
         {
-            GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
+            var graphics = renderer.GdiGraphics;
 
             SvgRenderingHint hint = _svgElement.RenderingHint;
             if (hint != SvgRenderingHint.Shape || hint == SvgRenderingHint.Clipping)

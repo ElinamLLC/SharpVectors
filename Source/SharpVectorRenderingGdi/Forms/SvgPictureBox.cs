@@ -16,7 +16,9 @@ namespace SharpVectors.Renderers.Forms
     {
         #region Private Fields
 
-        private const string DefaultTitle        = "SharpVectors";
+        private const double BitmapLimit          = 23169*23169d;
+
+        private const string DefaultTitle         = "SharpVectors";
 
         private const string UserCssFileName      = "user.css";
         private const string UserAgentCssFileName = "useragent.css";
@@ -53,17 +55,25 @@ namespace SharpVectors.Renderers.Forms
             InitializeComponent();
 
             _appTitle = DefaultTitle;
-            _sizeMode         = PictureBoxSizeMode.Zoom;
+            _sizeMode         = PictureBoxSizeMode.Normal;
             _savedSize        = this.Size;
 
             SetStyle(ControlStyles.Opaque | ControlStyles.Selectable, false);
-//            SetStyle(ControlStyles.UserPaint, true);
-//            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+//            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
 //            SetStyle(ControlStyles.ResizeRedraw, true);
 
             //scriptEngineByMimeType = new TypeDictionary();
             //SetMimeTypeEngineType("application/ecmascript", typeof(JScriptEngine));
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+
+            _savedSize = this.Size;
 
             _svgRenderer = new GdiGraphicsRenderer();
             _svgRenderer.OnRender = new RenderEvent(this.OnRender);
@@ -494,14 +504,21 @@ namespace SharpVectors.Renderers.Forms
                     //InitializeEvents();
                     //ExecuteScripts();
 
-                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
-                    ISvgRect r = svgEl.GetBBox();
-                    if (r == null)
+                    SvgSvgElement svgEl = (SvgSvgElement)_svgWindow.Document.RootElement;
+                    SvgSizeF r = svgEl.GetSize();
+
+                    int winWidth  = (int)svgEl.Width.BaseVal.Value;
+                    int winHeight = (int)svgEl.Height.BaseVal.Value;
+                    if (!r.Width.Equals(0.0) && !r.Height.Equals(0.0) && (r.Width * 4 * r.Height) < BitmapLimit)
                     {
-                        r = SvgRect.Empty;
+                        winWidth  = (int)r.Width;
+                        winHeight = (int)r.Height;
                     }
-                    int winWidth  = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
-                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+                    if ((winWidth * 4 * winHeight) >= BitmapLimit)
+                    {
+                        winWidth  = this.Width;
+                        winHeight = this.Height;
+                    }
 
                     _svgWindow.Resize(winWidth, winHeight);
 
@@ -518,15 +535,21 @@ namespace SharpVectors.Renderers.Forms
 
                     SetupStyleSheets();
 
-                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
-                    ISvgRect r = svgEl.GetBBox();
-                    if (r == null)
-                    {
-                        r = SvgRect.Empty;
-                    }
-                    int winWidth  = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
-                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+                    SvgSvgElement svgEl = (SvgSvgElement)_svgWindow.Document.RootElement;
+                    SvgSizeF r = svgEl.GetSize();
 
+                    int winWidth  = (int)svgEl.Width.BaseVal.Value;
+                    int winHeight = (int)svgEl.Height.BaseVal.Value;
+                    if (!r.Width.Equals(0.0) && !r.Height.Equals(0.0) && (r.Width * 4 * r.Height) < BitmapLimit)
+                    {
+                        winWidth  = (int)r.Width;
+                        winHeight = (int)r.Height;
+                    }
+                    if ((winWidth * 4 * winHeight) >= BitmapLimit)
+                    {
+                        winWidth  = this.Width;
+                        winHeight = this.Height;
+                    }
                     _svgWindow.Resize(winWidth, winHeight);
 
                     _svgRenderer.InvalidRect = SvgRectF.Empty;
@@ -545,14 +568,21 @@ namespace SharpVectors.Renderers.Forms
                     //InitializeEvents();
                     //ExecuteScripts();
 
-                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
-                    ISvgRect r = svgEl.GetBBox();
-                    if (r == null)
+                    SvgSvgElement svgEl = (SvgSvgElement)_svgWindow.Document.RootElement;
+                    SvgSizeF r = svgEl.GetSize();
+
+                    int winWidth  = (int)svgEl.Width.BaseVal.Value;
+                    int winHeight = (int)svgEl.Height.BaseVal.Value;
+                    if (!r.Width.Equals(0.0) && !r.Height.Equals(0.0) && (r.Width * 4 * r.Height) < BitmapLimit)
                     {
-                        r = SvgRect.Empty;
+                        winWidth  = (int)r.Width;
+                        winHeight = (int)r.Height;
                     }
-                    int winWidth = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
-                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+                    if ((winWidth * 4 * winHeight) >= BitmapLimit)
+                    {
+                        winWidth  = this.Width;
+                        winHeight = this.Height;
+                    }
 
                     _svgWindow.Resize(winWidth, winHeight);
 
@@ -569,14 +599,21 @@ namespace SharpVectors.Renderers.Forms
 
                     SetupStyleSheets();
 
-                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
-                    ISvgRect r = svgEl.GetBBox();
-                    if (r == null)
+                    SvgSvgElement svgEl = (SvgSvgElement)_svgWindow.Document.RootElement;
+                    SvgSizeF r = svgEl.GetSize();
+
+                    int winWidth  = (int)svgEl.Width.BaseVal.Value;
+                    int winHeight = (int)svgEl.Height.BaseVal.Value;
+                    if (!r.Width.Equals(0.0) && !r.Height.Equals(0.0) && (r.Width * 4 * r.Height) < BitmapLimit)
                     {
-                        r = SvgRect.Empty;
+                        winWidth  = (int)r.Width;
+                        winHeight = (int)r.Height;
                     }
-                    int winWidth = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
-                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+                    if ((winWidth * 4 * winHeight) >= BitmapLimit)
+                    {
+                        winWidth  = this.Width;
+                        winHeight = this.Height;
+                    }
 
                     _svgWindow.Resize(winWidth, winHeight);
 
@@ -588,6 +625,8 @@ namespace SharpVectors.Renderers.Forms
             }
             catch (Exception ex)
             {
+                Trace.TraceError(ex.ToString());
+
                 if (this.DesignMode)
                 {
                     return;
@@ -816,14 +855,23 @@ namespace SharpVectors.Renderers.Forms
             {
                 if (_svgRenderer != null)
                 {
-                    ISvgSvgElement svgEl = _svgWindow.Document.RootElement;
-                    ISvgRect r = svgEl.GetBBox();
-                    if (r == null)
+                    SvgSvgElement svgEl = (SvgSvgElement)_svgWindow.Document.RootElement;
+
+                    SvgSizeF r = svgEl.GetSize();
+
+                    int winWidth  = (int)svgEl.Width.BaseVal.Value;
+                    int winHeight = (int)svgEl.Height.BaseVal.Value;
+
+                    if (!r.Width.Equals(0.0) && !r.Height.Equals(0.0) && (r.Width* 4 * r.Height) < BitmapLimit)
                     {
-                        r = SvgRect.Empty;
+                        winWidth  = (int)r.Width;
+                        winHeight = (int)r.Height;
                     }
-                    int winWidth  = Math.Max((int)svgEl.Width.BaseVal.Value, (int)r.Width);
-                    int winHeight = Math.Max((int)svgEl.Height.BaseVal.Value, (int)r.Height);
+                    if ((winWidth * 4 * winHeight) >= BitmapLimit)
+                    {
+                        winWidth  = this.Width;
+                        winHeight = this.Height;
+                    }
 
                     _svgWindow.Resize(winWidth, winHeight);
 
@@ -832,10 +880,13 @@ namespace SharpVectors.Renderers.Forms
             }
             catch (Exception ex)
             {
+                Trace.TraceError(ex.ToString());
+
                 if (this.DesignMode)
                 {
                     return;
                 }
+
                 var errorArgs = new SvgErrorArgs("An exception occurred while rendering", ex);
                 _svgErrors?.Invoke(this, errorArgs);
                 if (!errorArgs.Handled)

@@ -58,7 +58,6 @@
             this.svgPictureBox.Name = "svgPictureBox";
             this.svgPictureBox.Padding = new System.Windows.Forms.Padding(3);
             this.svgPictureBox.Size = new System.Drawing.Size(1134, 623);
-            this.svgPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.svgPictureBox.TabIndex = 0;
             this.svgPictureBox.Text = "svgPictureBox1";
             // 
@@ -134,9 +133,11 @@
             // 
             // menuItemNormal
             // 
+            this.menuItemNormal.Checked = true;
             this.menuItemNormal.CheckOnClick = true;
+            this.menuItemNormal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuItemNormal.Name = "menuItemNormal";
-            this.menuItemNormal.Size = new System.Drawing.Size(161, 22);
+            this.menuItemNormal.Size = new System.Drawing.Size(180, 22);
             this.menuItemNormal.Tag = "Normal";
             this.menuItemNormal.Text = "Normal";
             this.menuItemNormal.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -145,7 +146,7 @@
             // 
             this.menuItemStretchImage.CheckOnClick = true;
             this.menuItemStretchImage.Name = "menuItemStretchImage";
-            this.menuItemStretchImage.Size = new System.Drawing.Size(161, 22);
+            this.menuItemStretchImage.Size = new System.Drawing.Size(180, 22);
             this.menuItemStretchImage.Tag = "StretchImage";
             this.menuItemStretchImage.Text = "Stretch Image";
             this.menuItemStretchImage.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -154,7 +155,7 @@
             // 
             this.menuItemAutoSize.CheckOnClick = true;
             this.menuItemAutoSize.Name = "menuItemAutoSize";
-            this.menuItemAutoSize.Size = new System.Drawing.Size(161, 22);
+            this.menuItemAutoSize.Size = new System.Drawing.Size(180, 22);
             this.menuItemAutoSize.Tag = "AutoSize";
             this.menuItemAutoSize.Text = "Auto Size";
             this.menuItemAutoSize.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -163,18 +164,16 @@
             // 
             this.menuItemCenterImage.CheckOnClick = true;
             this.menuItemCenterImage.Name = "menuItemCenterImage";
-            this.menuItemCenterImage.Size = new System.Drawing.Size(161, 22);
+            this.menuItemCenterImage.Size = new System.Drawing.Size(180, 22);
             this.menuItemCenterImage.Tag = "CenterImage";
             this.menuItemCenterImage.Text = "Center Image";
             this.menuItemCenterImage.Click += new System.EventHandler(this.OnSizeModeChanged);
             // 
             // menuItemZoom
             // 
-            this.menuItemZoom.Checked = true;
             this.menuItemZoom.CheckOnClick = true;
-            this.menuItemZoom.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuItemZoom.Name = "menuItemZoom";
-            this.menuItemZoom.Size = new System.Drawing.Size(161, 22);
+            this.menuItemZoom.Size = new System.Drawing.Size(180, 22);
             this.menuItemZoom.Tag = "Zoom";
             this.menuItemZoom.Text = "Zoom";
             this.menuItemZoom.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -190,7 +189,7 @@
             // menuItemQuickHelp
             // 
             this.menuItemQuickHelp.Name = "menuItemQuickHelp";
-            this.menuItemQuickHelp.Size = new System.Drawing.Size(180, 22);
+            this.menuItemQuickHelp.Size = new System.Drawing.Size(146, 22);
             this.menuItemQuickHelp.Text = "QuickHelp...";
             this.menuItemQuickHelp.Click += new System.EventHandler(this.OnQuickHelpClick);
             // 

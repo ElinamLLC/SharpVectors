@@ -23,7 +23,7 @@ namespace SharpVectors.Renderers.Gdi
 
         public override void Render(GdiGraphicsRenderer renderer)
 		{
-            GdiGraphicsWrapper graphics = renderer.GraphicsWrapper;
+            var graphics = renderer.GdiGraphics;
 
 			SvgSvgElement svgElm = (SvgSvgElement) _svgElement;
 

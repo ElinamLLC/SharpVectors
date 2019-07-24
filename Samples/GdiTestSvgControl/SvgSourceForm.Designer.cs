@@ -85,6 +85,7 @@
             this.linkWiki.TabIndex = 3;
             this.linkWiki.TabStop = true;
             this.linkWiki.Text = "https://commons.wikimedia.org/wiki/Category:Valid_SVG_created_with";
+            this.linkWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OnLinkClicked);
             // 
             // labelSource
             // 

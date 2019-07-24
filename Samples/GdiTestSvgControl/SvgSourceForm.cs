@@ -66,7 +66,7 @@ namespace TestSvgControl
                 new WikipediaSource("Valid SVG created with MATLAB",
                     "https://upload.wikimedia.org/wikipedia/commons/1/1c/Kruskal_diagram_of_Schwarzschild_chart.svg"),
                 new WikipediaSource("Valid SVG created with Matplotlib",
-                    "https://upload.wikimedia.org/wikipedia/commons/4/48/Estimated_gravitational-wave_strain_amplitude_from_GW150914.png"),
+                    "https://upload.wikimedia.org/wikipedia/commons/a/a8/Cartes_couleur_sinFoisSin_python_matplotlib.svg"),
                 new WikipediaSource("Valid SVG created with OpenOffice.org",
                     "https://upload.wikimedia.org/wikipedia/commons/0/02/DielessDrawing.svg"),
                 new WikipediaSource("Valid SVG created with Potrace",
@@ -195,6 +195,11 @@ namespace TestSvgControl
         private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        private void OnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://commons.wikimedia.org/wiki/Category:Valid_SVG_created_with");
         }
 
         private sealed class WikipediaSource

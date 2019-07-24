@@ -27,7 +27,7 @@ namespace SharpVectors.Renderers.Gdi
         {
         }
 
-		public void PaintMarker(GdiGraphicsRenderer renderer, GdiGraphicsWrapper gr, 
+		public void PaintMarker(GdiGraphicsRenderer renderer, GdiGraphics gr, 
             SvgMarkerPosition markerPos, SvgStyleableElement refElement)
 		{
 			ISharpMarkerHost markerHostElm = (ISharpMarkerHost)refElement;

@@ -72,20 +72,69 @@ namespace SharpVectors.Dom.Svg
         public void Resize()
         {
             // TODO: Invalidate! Fire SVGResize
-            _x = null;
-            _y = null;
-            _width = null;
-            _height = null;
-            _currentView = null;
+            _x                      = null;
+            _y                      = null;
+            _width                  = null;
+            _height                 = null;
+            _currentView            = null;
             _cachedViewBoxTransform = null;
-            _viewport = null;
-            _svgFitToViewBox = null;
-            _svgFitToViewBox = new SvgFitToViewBox(this);
+            _viewport               = null;
+            _svgFitToViewBox        = null;
+            _svgFitToViewBox        = new SvgFitToViewBox(this);
 
             if (this != OwnerDocument.RootElement)
             {
                 (OwnerDocument.RootElement as SvgSvgElement).Resize();
             }
+        }
+
+        public SvgSizeF GetSize()
+        {
+            var elemWidth  = this.Width;
+            var elemHeight = this.Height;
+
+            var isWidthInPerc  = elemWidth.BaseVal.UnitType == SvgLengthType.Percentage;
+            var isHeightInPerc = elemHeight.BaseVal.UnitType == SvgLengthType.Percentage;
+
+            SvgRectF bounds = new SvgRectF();
+            if (isWidthInPerc || isHeightInPerc)
+            {
+                var viewRect = this.ViewBox.BaseVal;
+
+                if (viewRect.Width > 0 && viewRect.Height > 0)
+                {
+                    bounds = new SvgRectF((float)viewRect.X, (float)viewRect.Y, 
+                        (float)viewRect.Width, (float)viewRect.Height);
+                }
+                else
+                {
+                    bounds = SvgRectF.Empty;//TODO: Recursively computer the bounds?;
+                }
+            }
+            if (bounds.Width.Equals(0.0) && bounds.Height.Equals(0.0))
+            {
+                return SvgSizeF.Empty;
+            }
+
+            double width, height;
+            if (isWidthInPerc)
+            {
+                width = (bounds.Width + bounds.X) * elemWidth.BaseVal.ValueInSpecifiedUnits * 0.01;
+            }
+            else
+            {
+                width = elemWidth.BaseVal.Value;
+            }
+            if (isHeightInPerc)
+            {
+                height = (bounds.Height + bounds.Y) * elemHeight.BaseVal.ValueInSpecifiedUnits * 0.01;
+            }
+            else
+            {
+                height = elemHeight.BaseVal.Value;
+            }
+
+            return new SvgSizeF((float)width, (float)height);
         }
 
         #endregion

@@ -148,13 +148,16 @@ namespace SharpVectors.Dom.Svg
 
         public double GetStartAngle(int index)
         {
+            SvgPointF[] positions = this.MarkerPositions;
             index--;
             if (index < 0)
             {
                 index = 1;
+                if (index + 1 >= positions.Length)
+                {
+                    index = 0;
+                }
             }
-
-            SvgPointF[] positions = this.MarkerPositions;
 
             if (index > positions.Length - 1)
             {

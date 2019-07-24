@@ -88,7 +88,7 @@ namespace TestSvgControl
 
                 // JR Test event
                 ISvgDocument doc = svgPictureBox.Window.Document;    
-                if (doc != null)
+                if (doc != null && doc.RootElement != null)
                 {
                     doc.RootElement.AddEventListener("click", new EventListener(OnSvgElementClicked), false);
                 }
@@ -144,7 +144,7 @@ namespace TestSvgControl
 
                 // JR Test event
                 ISvgDocument doc = svgPictureBox.Window.Document;
-                if (doc != null)
+                if (doc != null && doc.RootElement != null)
                 {
                     doc.RootElement.AddEventListener("click", new EventListener(OnSvgElementClicked), false);
                 }
