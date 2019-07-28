@@ -7,7 +7,7 @@
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         local:MainWindowSettings.Save="True"
         mc:Ignorable="d"
-        Title="WPF SVG TestBox" d:DesignHeight="720" d:DesignWidth="860" WindowStartupLocation="CenterScreen">
+        Title="SharpVectors: WPF SVG TestBox" d:DesignHeight="720" d:DesignWidth="860" WindowStartupLocation="CenterScreen">
     <DockPanel LastChildFill="True" Margin="3">
         <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
             <TabControl.Resources>

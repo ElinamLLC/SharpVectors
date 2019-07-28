@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SvgInputDockPanel));
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.textEditor = new ICSharpCode.TextEditor.TextEditorControl();
             this.toolBar = new System.Windows.Forms.ToolStrip();
             this.tbbFileNew = new System.Windows.Forms.ToolStripButton();
             this.tbbFileOpen = new System.Windows.Forms.ToolStripButton();
@@ -59,7 +59,6 @@
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditor)).BeginInit();
             this.toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,9 +67,8 @@
             // 
             // toolStripContainer.ContentPanel
             // 
-            this.toolStripContainer.ContentPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.toolStripContainer.ContentPanel.Controls.Add(this.textEditor);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(800, 424);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(800, 418);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
@@ -86,43 +84,16 @@
             // 
             // textEditor
             // 
-            this.textEditor.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.textEditor.AutoIndentCharsPatterns = "";
-            this.textEditor.AutoScrollMinSize = new System.Drawing.Size(29, 18);
-            this.textEditor.BackBrush = null;
-            this.textEditor.CharHeight = 18;
-            this.textEditor.CharWidth = 9;
-            this.textEditor.CommentPrefix = null;
-            this.textEditor.CurrentLineColor = System.Drawing.Color.MediumTurquoise;
-            this.textEditor.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textEditor.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.textEditor.AutoScroll = true;
+            this.textEditor.AutoScrollMinSize = new System.Drawing.Size(41, 30);
+            this.textEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.textEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditor.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEditor.IsReplaceMode = false;
-            this.textEditor.Language = FastColoredTextBoxNS.Language.XML;
-            this.textEditor.LeftBracket = '<';
-            this.textEditor.LeftBracket2 = '(';
+            this.textEditor.IsReadOnly = false;
             this.textEditor.Location = new System.Drawing.Point(0, 0);
+            this.textEditor.Margin = new System.Windows.Forms.Padding(6);
             this.textEditor.Name = "textEditor";
-            this.textEditor.Paddings = new System.Windows.Forms.Padding(0);
-            this.textEditor.RightBracket = '>';
-            this.textEditor.RightBracket2 = ')';
-            this.textEditor.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.textEditor.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textEditor.ServiceColors")));
-            this.textEditor.ShowFoldingLines = true;
-            this.textEditor.Size = new System.Drawing.Size(796, 420);
+            this.textEditor.Size = new System.Drawing.Size(800, 418);
             this.textEditor.TabIndex = 0;
-            this.textEditor.Zoom = 100;
             // 
             // toolBar
             // 
@@ -153,7 +124,8 @@
             this.tbbSearchReplace});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(800, 26);
+            this.toolBar.Padding = new System.Windows.Forms.Padding(0, 3, 1, 3);
+            this.toolBar.Size = new System.Drawing.Size(800, 32);
             this.toolBar.Stretch = true;
             this.toolBar.TabIndex = 0;
             // 
@@ -285,6 +257,7 @@
             this.tbbWordWrap.Name = "tbbWordWrap";
             this.tbbWordWrap.Size = new System.Drawing.Size(23, 23);
             this.tbbWordWrap.Text = "Toggle Word Wrap";
+            this.tbbWordWrap.Visible = false;
             this.tbbWordWrap.Click += new System.EventHandler(this.OnClickWordWrap);
             // 
             // tbbShowLineNumber
@@ -378,7 +351,6 @@
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditor)).EndInit();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
             this.ResumeLayout(false);
@@ -390,7 +362,7 @@
         private System.Windows.Forms.ToolStripContainer toolStripContainer;
         private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.ToolStripButton tbbFileNew;
-        private FastColoredTextBoxNS.FastColoredTextBox textEditor;
+        private ICSharpCode.TextEditor.TextEditorControl textEditor;
         private System.Windows.Forms.ToolStripButton tbbFileOpen;
         private System.Windows.Forms.ToolStripSeparator tbbSeparator1;
         private System.Windows.Forms.ToolStripButton tbbCut;

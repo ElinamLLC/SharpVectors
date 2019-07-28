@@ -35,6 +35,19 @@ namespace GdiW3cSvgTestSuite
             _theme          = theme;
         }
 
+        public virtual ThemeBase Theme
+        {
+            get {
+                return _theme;
+            }
+            set {
+                if (value != null)
+                {
+                    _theme = value;
+                }
+            }
+        }
+
         public virtual void IdleUpdate()
         {
         }

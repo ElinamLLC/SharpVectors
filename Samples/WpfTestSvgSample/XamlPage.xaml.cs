@@ -189,7 +189,8 @@ namespace WpfTestSvgSample
             if (_currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Filter = "SVG Files|*.xaml;*.zaml";
+                dlg.Title      = "Save As (.zaml is GZip compressed file used by SharpVectors)";
+                dlg.Filter     = "SVG Files|*.xaml;*.zaml";
                 dlg.DefaultExt = ".xaml";
                 if (dlg.ShowDialog() ?? false)
                 {
@@ -208,9 +209,9 @@ namespace WpfTestSvgSample
             }
             else if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
             {
-                using (FileStream svgzDestFile = File.Create(_currentFileName))
+                using (FileStream zamlDestFile = File.Create(_currentFileName))
                 {
-                    using (GZipStream zipStream = new GZipStream(svgzDestFile,
+                    using (GZipStream zipStream = new GZipStream(zamlDestFile,
                         CompressionMode.Compress, true))
                     {
                         textEditor.Save(zipStream);

@@ -202,6 +202,7 @@ namespace WpfTestSvgSample
             if (_currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Title      = "Save As";
                 dlg.Filter     = "SVG Files|*.svg;*.svgz";
                 dlg.DefaultExt = ".svg";
                 if (dlg.ShowDialog() ?? false)

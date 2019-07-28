@@ -41,8 +41,8 @@
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpVectors.FastColoredTextBox">
-      <HintPath>..\..\Libraries\SharpVectors.FastColoredTextBox.dll</HintPath>
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>..\..\Libraries\ICSharpCode.TextEditor.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.HtmlRenderer.WinForms">
       <HintPath>..\..\Libraries\SharpVectors.HtmlRenderer.WinForms.dll</HintPath>
@@ -125,6 +125,12 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OptionSettings.cs" />
+    <Compile Include="PopupMessage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PopupMessage.Designer.cs">
+      <DependentUpon>PopupMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Progress\ProgressIndicator.cs">
       <SubType>Component</SubType>
@@ -141,11 +147,30 @@
       <DependentUpon>PromptDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReplaceForm.Designer.cs">
+      <DependentUpon>ReplaceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResultsDockPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ResultsDockPanel.Designer.cs">
       <DependentUpon>ResultsDockPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchGlobals.cs" />
+    <Compile Include="SearchReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchReplaceForm.Designer.cs">
+      <DependentUpon>SearchReplaceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsDockPanel.cs">
       <SubType>Form</SubType>
@@ -195,6 +220,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PopupMessage.resx">
+      <DependentUpon>PopupMessage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Progress\ProgressIndicator.resx">
       <DependentUpon>ProgressIndicator.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,14 +239,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReplaceForm.resx">
+      <DependentUpon>ReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResultsDockPanel.resx">
       <DependentUpon>ResultsDockPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchReplaceForm.resx">
+      <DependentUpon>SearchReplaceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsDockPanel.resx">
       <DependentUpon>SettingsDockPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SvgInputDockPanel.resx">
       <DependentUpon>SvgInputDockPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TestDockPanel.resx">
       <DependentUpon>TestDockPanel.cs</DependentUpon>
@@ -247,6 +285,11 @@
     <Content Include="Images\Test.ico" />
     <Content Include="Images\TestResultDetail.ico" />
     <Content Include="Images\TestRunner.ico" />
+    <None Include="Resources\Run.png" />
+    <None Include="Resources\ReplaceAll.png" />
+    <None Include="Resources\Format.png" />
+    <None Include="Resources\FindPrevious.png" />
+    <None Include="Resources\FindNext.png" />
     <None Include="Resources\SaveAs.png" />
     <None Include="Resources\Replace.png" />
     <None Include="Resources\Space.png" />

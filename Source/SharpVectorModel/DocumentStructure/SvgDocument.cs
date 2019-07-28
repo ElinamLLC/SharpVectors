@@ -10,6 +10,7 @@ using System.Xml;
 using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -1148,43 +1149,46 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
-            SvgWindow ownedWindow = _window.CreateOwnedWindow();
-            ownedWindow.LoadFonts = false;
+            //TODO: Trying a background run...
+            Task.Factory.StartNew(() => {
+                SvgWindow ownedWindow = _window.CreateOwnedWindow();
+                ownedWindow.LoadFonts = false;
 
-            for (int i = 0; i < fontUrls.Count; i++)
-            {
-                var fontUrl = fontUrls[i];
-                try
+                for (int i = 0; i < fontUrls.Count; i++)
                 {
-                    // remove any hash (won't work for local files)
-                    int hashStart = fontUrl.IndexOf("#", StringComparison.OrdinalIgnoreCase);
-                    if (hashStart > -1)
+                    var fontUrl = fontUrls[i];
+                    try
                     {
-                        fontUrl = fontUrl.Substring(0, hashStart);
-                    }
+                        // remove any hash (won't work for local files)
+                        int hashStart = fontUrl.IndexOf("#", StringComparison.OrdinalIgnoreCase);
+                        if (hashStart > -1)
+                        {
+                            fontUrl = fontUrl.Substring(0, hashStart);
+                        }
 
-                    Uri fileUrl = this.ResolveUri(fontUrl);
+                        Uri fileUrl = this.ResolveUri(fontUrl);
 
-                    if (fileUrl == null || fileUrl.IsAbsoluteUri == false)
-                    {
-                        continue;
+                        if (fileUrl == null || fileUrl.IsAbsoluteUri == false)
+                        {
+                            continue;
+                        }
+                        string scheme = fileUrl.Scheme;
+                        if (string.Equals(scheme, "file", StringComparison.OrdinalIgnoreCase))
+                        {
+                            this.LoadLocalFont(fileUrl.LocalPath, ownedWindow);
+                        }
+                        else
+                        {
+                            //TODO
+                        }
                     }
-                    string scheme = fileUrl.Scheme;
-                    if (string.Equals(scheme, "file", StringComparison.OrdinalIgnoreCase))
+                    catch (Exception ex)
                     {
-                        this.LoadLocalFont(fileUrl.LocalPath, ownedWindow);
-                    }
-                    else
-                    {
-                        //TODO
+                        Trace.TraceError(ex.ToString());
+                        //Ignore the exception
                     }
                 }
-                catch (Exception ex)
-                {
-                    Trace.TraceError(ex.ToString());
-                    //Ignore the exception
-                }
-            }
+            });
         }
 
         private void LoadLocalFont(string fontPath, SvgWindow ownedWindow)

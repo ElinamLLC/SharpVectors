@@ -1,18 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using FastColoredTextBoxNS;
 using WeifenLuo.WinFormsUI.Docking;
+using ICSharpCode.TextEditor.Document;
 
 namespace GdiW3cSvgTestSuite
 {
@@ -20,20 +15,22 @@ namespace GdiW3cSvgTestSuite
     {
         #region Private Fields
 
+        private const string ValidSVG = "<svg xmlns=\"http://www.w3.org/2000/svg\"></svg>";
+
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
-
-        private bool _firstSearch = true;
-        private Place _startPlace;
-
-        private bool _isMatchCase = true;
-        private bool _isRegex = true;
-        private bool _isWholeWord = true;
-
-        private Style _invisibleCharsStyle = new InvisibleCharsRenderer(Pens.Gray);
 
         private VisualStudioToolStripExtender _vsToolStripExtender;
 
         private string _fullFilePath;
+
+        private bool _isDocumentChanged;
+        private string _currentFileName;
+
+        private SearchForm _searchPanel;
+        private ReplaceForm _replacePanel;
+
+        private bool _isMatchCase;
+        private bool _isMatchWholeWord;
 
         #endregion
 
@@ -48,17 +45,57 @@ namespace GdiW3cSvgTestSuite
 
             this.CloseButton   = false;
 
+            if (this.components == null)
+            {
+                this.components = new System.ComponentModel.Container();
+            }
+
             this._vsToolStripExtender = new VisualStudioToolStripExtender(this.components);
             _vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
 
-            textEditor.DelayedTextChangedInterval = 1000;
-            textEditor.DelayedEventsInterval = 500;
-            textEditor.TextChangedDelayed += OnTextChangedDelayed;
+            HighlightingManager.Manager.AddSyntaxModeFileProvider(new ResourceSyntaxModeProvider());
+
+            textEditor.ConvertTabsToSpaces = true;
+            textEditor.IsReadOnly          = false;
+            textEditor.LineViewerStyle     = LineViewerStyle.FullRow;
+            textEditor.ShowEOLMarkers      = false;
+            textEditor.ShowHRuler          = false;
+            textEditor.ShowSpaces          = false;
+            textEditor.ShowTabs            = false;
+            textEditor.TabIndex            = 0;
+            textEditor.Encoding            = Encoding.UTF8;
+            textEditor.ShowMatchingBracket = true;
+            textEditor.EnableFolding       = true;
+            textEditor.IsIconBarVisible    = true;
+//            textEditor.TextRenderingHint   = TextRenderingHint.ClearTypeGridFit;
+
+            textEditor.TextEditorProperties.Font = new Font("Consolas", 12);
+
+            textEditor.Document.HighlightingStrategy = HighlightingManager.Manager.FindHighlighter("XML");
+            textEditor.Document.FoldingManager.FoldingStrategy = new XmlFoldingStrategy();
+            textEditor.Document.FormattingStrategy = new XmlFormattingStrategy();
+            textEditor.Document.FoldingManager.UpdateFoldings(string.Empty, null);
+
+            textEditor.Document.DocumentChanged += OnDocumentChanged;
         }
 
         #endregion
 
         #region Public Properties
+
+        public override ThemeBase Theme
+        {
+            get {
+                return base.Theme;
+            }
+            set {
+                if (value != null && value != _theme)
+                {
+                    base.Theme = value;
+                    _vsToolStripExtender.SetStyle(toolBar, VisualStudioToolStripExtender.VsVersion.Vs2015, value);
+                }
+            }
+        }
 
         #endregion
 
@@ -71,26 +108,54 @@ namespace GdiW3cSvgTestSuite
                 return;
             }
 
-            tbbUndo.Enabled = textEditor.UndoEnabled;
-            tbbRedo.Enabled = textEditor.RedoEnabled;
+            var document = textEditor.Document;
 
-            var isTextSelected = (textEditor.Selection.IsEmpty == false);
+            tbbUndo.Enabled = textEditor.EnableUndo;
+            tbbRedo.Enabled = textEditor.EnableRedo;
 
-            tbbCut.Enabled    = isTextSelected && !textEditor.ReadOnly;
-            tbbCopy.Enabled   = isTextSelected && !textEditor.ReadOnly;
-            tbbDelete.Enabled = isTextSelected && !textEditor.ReadOnly;
+            var selectManager = textEditor.ActiveTextAreaControl.SelectionManager;
+            var isTextSelected = selectManager.HasSomethingSelected;
 
-            var fileExist = !string.IsNullOrWhiteSpace(_fullFilePath) && File.Exists(_fullFilePath);
+            tbbCut.Enabled = isTextSelected && !textEditor.IsReadOnly;
+            tbbCopy.Enabled = isTextSelected && !textEditor.IsReadOnly;
+            tbbDelete.Enabled = isTextSelected && !textEditor.IsReadOnly;
 
-            tbbSave.Enabled   = textEditor.IsChanged && textEditor.TextLength != 0 && fileExist;
-            tbbSaveAs.Enabled = textEditor.TextLength != 0;
+            var fileExist = !string.IsNullOrWhiteSpace(_currentFileName) && File.Exists(_currentFileName);
 
-            tbbWordWrap.Checked = (textEditor.WordWrap == true);
+            var validLen = ValidSVG.Length;
+
+            tbbSave.Enabled = _isDocumentChanged && document.TextLength > validLen && fileExist;
+            tbbSaveAs.Enabled = document.TextLength > validLen;
+            //tbbFormat.Enabled = document.TextLength > validLen;
+            //tbbConvert.Enabled = document.TextLength > validLen;
+
             tbbShowLineNumber.Checked = (textEditor.ShowLineNumbers == true);
 
-            tbbFind.Enabled = (textEditor.TextLength != 0);
-            tbbTextBoxFind.Enabled = (textEditor.TextLength != 0);
-            tbbSearchReplace.Enabled = !textEditor.ReadOnly && (textEditor.TextLength != 0);
+            tbbFind.Enabled = (document.TextLength != 0);
+            tbbTextBoxFind.Enabled = (document.TextLength != 0);
+            tbbSearchReplace.Enabled = !textEditor.IsReadOnly && (document.TextLength != 0);
+        }
+
+        public override void OnPageDeselected(EventArgs e)
+        {
+            base.OnPageDeselected(e);
+
+            if (_searchPanel != null && _searchPanel.IsDisposed == false)
+            {
+                _searchPanel.Close();
+                _searchPanel = null;
+            }
+
+            if (_replacePanel != null && _replacePanel.IsDisposed == false)
+            {
+                _replacePanel.Close();
+                _replacePanel = null;
+            }
+        }
+
+        public override void OnPageSelected(EventArgs e)
+        {
+            base.OnPageSelected(e);
         }
 
         #endregion
@@ -111,7 +176,11 @@ namespace GdiW3cSvgTestSuite
 
         public void UnloadDocument()
         {
-            textEditor.Clear();
+            if (textEditor != null)
+            {
+                textEditor.Text = string.Empty;
+            }
+            _currentFileName = null;
             _fullFilePath = null;
         }
 
@@ -149,7 +218,22 @@ namespace GdiW3cSvgTestSuite
 
         private void OnClickFileNew(object sender, EventArgs e)
         {
+            //if (textEditor.Document.TextLength != 0)
+            //{
+            //    var dlgResult = MessageBox.Show("This will clear the current text in the document. Do you want to continue?",
+            //        MainForm.AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+            //    if (dlgResult == DialogResult.Yes)
+            //    {
+            //        textEditor.Text = "";
+            //    }
+            //}
+
+            //_isDocumentChanged = false;
+            //textEditor.Document.UndoStack.ClearAll();
+
+            //textEditor.Document.HighlightingStrategy = HighlightingManager.Manager.FindHighlighter("XML");
+            //textEditor.Document.FoldingManager.FoldingStrategy = new XmlFoldingStrategy();
         }
 
         private void OnClickFileOpen(object sender, EventArgs e)
@@ -180,17 +264,27 @@ namespace GdiW3cSvgTestSuite
 
         private void OnClickCut(object sender, EventArgs e)
         {
-            if (textEditor != null && !textEditor.Selection.IsEmpty)
+            if (textEditor != null)
             {
-                textEditor.Cut();
+                var clipboardHander = textEditor.ActiveTextAreaControl.TextArea.ClipboardHandler;
+
+                if (clipboardHander.EnableCut)
+                {
+                    clipboardHander.Cut(null, null);
+                }
             }
         }
 
         private void OnClickCopy(object sender, EventArgs e)
         {
-            if (textEditor != null && !textEditor.Selection.IsEmpty)
+            if (textEditor != null)
             {
-                textEditor.Copy();
+                var clipboardHander = textEditor.ActiveTextAreaControl.TextArea.ClipboardHandler;
+
+                if (clipboardHander.EnableCopy)
+                {
+                    clipboardHander.Copy(null, null);
+                }
             }
         }
 
@@ -198,15 +292,25 @@ namespace GdiW3cSvgTestSuite
         {
             if (textEditor != null)
             {
-                textEditor.Paste();
+                var clipboardHander = textEditor.ActiveTextAreaControl.TextArea.ClipboardHandler;
+
+                if (clipboardHander.EnablePaste)
+                {
+                    clipboardHander.Paste(null, null);
+                }
             }
         }
 
         private void OnClickDelete(object sender, EventArgs e)
         {
-            if (textEditor != null && !textEditor.Selection.IsEmpty)
+            if (textEditor != null)
             {
-                textEditor.ClearSelected();
+                var clipboardHander = textEditor.ActiveTextAreaControl.TextArea.ClipboardHandler;
+
+                if (clipboardHander.EnableDelete)
+                {
+                    clipboardHander.Delete(null, null);
+                }
             }
         }
 
@@ -254,7 +358,7 @@ namespace GdiW3cSvgTestSuite
 
         private void OnClickUndo(object sender, EventArgs e)
         {
-            if (textEditor != null && textEditor.UndoEnabled)
+            if (textEditor != null && textEditor.EnableUndo)
             {
                 textEditor.Undo();
             }
@@ -262,7 +366,7 @@ namespace GdiW3cSvgTestSuite
 
         private void OnClickRedo(object sender, EventArgs e)
         {
-            if (textEditor != null && textEditor.RedoEnabled)
+            if (textEditor != null && textEditor.EnableRedo)
             {
                 textEditor.Redo();
             }
@@ -270,10 +374,6 @@ namespace GdiW3cSvgTestSuite
 
         private void OnClickWordWrap(object sender, EventArgs e)
         {
-            if (textEditor != null)
-            {
-                textEditor.WordWrap = !textEditor.WordWrap;
-            }
         }
 
         private void OnClickLineNumber(object sender, EventArgs e)
@@ -290,22 +390,76 @@ namespace GdiW3cSvgTestSuite
             {
                 tbbShowWhitespace.Checked = !tbbShowWhitespace.Checked;
 
-                HighlightInvisibleChars(textEditor.Range);
-                if (textEditor != null)
-                {
-                    textEditor.Invalidate();
-                }
+                textEditor.ShowEOLMarkers = tbbShowWhitespace.Checked;
+                textEditor.ShowSpaces = tbbShowWhitespace.Checked;
+                textEditor.ShowTabs = tbbShowWhitespace.Checked;
+
+                textEditor.Refresh();
             }
         }
 
         private void OnClickFind(object sender, EventArgs e)
         {
-            textEditor.ShowFindDialog(tbbTextBoxFind.Text);
+            if (_replacePanel != null && !_replacePanel.IsDisposed)
+            {
+                _replacePanel.Hide();
+            }
+
+            if (_searchPanel == null || _searchPanel.IsDisposed)
+            {
+                _searchPanel = new SearchForm();
+                _searchPanel.Owner = this;
+            }
+
+            var posRect = textEditor.RectangleToScreen(textEditor.ClientRectangle);
+            var winSize = _searchPanel.Size;
+
+            _searchPanel.Left = posRect.Right - winSize.Width - SearchGlobals.Offset * 4;
+            _searchPanel.Top = posRect.Top + SearchGlobals.Offset;
+
+
+            Action<string, bool, bool> searchListener = this.SearchTextChanged;
+
+            _searchPanel.SearchText = tbbTextBoxFind.Text;
+            _searchPanel.IsMatchCase = _isMatchCase;
+            _searchPanel.IsMatchWholeWord = _isMatchWholeWord;
+
+            _searchPanel.Show(_mainForm, textEditor, searchListener, false);
         }
 
         private void OnClickSearchReplace(object sender, EventArgs e)
         {
-            textEditor.ShowReplaceDialog(tbbTextBoxFind.Text);
+            if (_searchPanel != null && !_searchPanel.IsDisposed)
+            {
+                _searchPanel.Hide();
+            }
+
+            if (_replacePanel == null || _replacePanel.IsDisposed)
+            {
+                _replacePanel = new ReplaceForm();
+                _replacePanel.Owner = this;
+            }
+
+            var posRect = textEditor.RectangleToScreen(textEditor.ClientRectangle);
+            var winSize = _replacePanel.Size;
+
+            _replacePanel.Left = posRect.Right - winSize.Width - SearchGlobals.Offset * 4;
+            _replacePanel.Top = posRect.Top + SearchGlobals.Offset;
+
+            Action<string, bool, bool> searchListener = this.SearchTextChanged;
+
+            _replacePanel.SearchText = tbbTextBoxFind.Text;
+            _replacePanel.IsMatchCase = _isMatchCase;
+            _replacePanel.IsMatchWholeWord = _isMatchWholeWord;
+
+            _replacePanel.Show(_mainForm, textEditor, searchListener, true);
+        }
+
+        private void SearchTextChanged(string searchText, bool isMatchCase, bool isMatchWholeWord)
+        {
+            tbbTextBoxFind.Text = searchText;
+            _isMatchCase = isMatchCase;
+            _isMatchWholeWord = isMatchWholeWord;
         }
 
         private void OnKeyPressSearch(object sender, KeyPressEventArgs e)
@@ -318,15 +472,19 @@ namespace GdiW3cSvgTestSuite
             this.FindNext(tbbTextBoxFind.Text);
         }
 
-        private void OnTextChangedDelayed(object sender, TextChangedEventArgs e)
-        {
-            // Show invisible chars
-            HighlightInvisibleChars(e.ChangedRange);
-        }
-
         #endregion
 
         #region Private Methods
+
+        private void OnDocumentChanged(object sender, DocumentEventArgs e)
+        {
+            _isDocumentChanged = true;
+            textEditor.Document.FoldingManager.UpdateFoldings(string.Empty, null);
+
+            var textArea = textEditor.ActiveTextAreaControl.TextArea;
+
+            textArea.Refresh(textArea.FoldMargin);
+        }
 
         private void LoadFile(string documentFilePath)
         {
@@ -342,13 +500,13 @@ namespace GdiW3cSvgTestSuite
                 {
                     using (var zipStream = new GZipStream(stream, CompressionMode.Decompress))
                     {
-                        textEditor.OpenStream(zipStream);
+                        textEditor.LoadFile(documentFilePath, zipStream, false, true);
                     }
                 }
             }
             else
             {
-                textEditor.OpenFile(documentFilePath, Encoding.UTF8);
+                textEditor.LoadFile(documentFilePath);
             }
 
             _fullFilePath = string.Copy(documentFilePath);
@@ -366,13 +524,13 @@ namespace GdiW3cSvgTestSuite
                 {
                     using (var zipStream = new GZipStream(stream, CompressionMode.Decompress))
                     {
-                        textEditor.SaveToStream(zipStream);
+                        textEditor.SaveFile(zipStream);
                     }
                 }
             }
             else
             {
-                textEditor.SaveToFile(documentFilePath, Encoding.UTF8);
+                textEditor.SaveFile(documentFilePath);
             }
 
             if (!isSaveAs)
@@ -383,99 +541,7 @@ namespace GdiW3cSvgTestSuite
 
         private void FindNext(string pattern)
         {
-            try
-            {
-                RegexOptions opt = _isMatchCase ? RegexOptions.None : RegexOptions.IgnoreCase;
-                if (!_isRegex)
-                    pattern = Regex.Escape(pattern);
-                if (_isWholeWord)
-                    pattern = "\\b" + pattern + "\\b";
-                //
-                Range range = textEditor.Selection.Clone();
-                range.Normalize();
-                //
-                if (_firstSearch)
-                {
-                    _startPlace = range.Start;
-                    _firstSearch = false;
-                }
-                //
-                range.Start = range.End;
-                if (range.Start >= _startPlace)
-                    range.End = new Place(textEditor.GetLineLength(textEditor.LinesCount - 1), textEditor.LinesCount - 1);
-                else
-                    range.End = _startPlace;
-                //
-                foreach (var r in range.GetRangesByLines(pattern, opt))
-                {
-                    textEditor.Selection = r;
-                    textEditor.DoSelectionVisible();
-                    textEditor.Invalidate();
-                    return;
-                }
-                //
-                if (range.Start >= _startPlace && _startPlace > Place.Empty)
-                {
-                    textEditor.Selection.Start = new Place(0, 0);
-                    FindNext(pattern);
-                    return;
-                }
-                MessageBox.Show("Not found");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
-
-        private void HighlightInvisibleChars(Range range)
-        {
-            range.ClearStyle(_invisibleCharsStyle);
-
-            if (tbbShowWhitespace.Checked)
-            {
-                range.SetStyle(_invisibleCharsStyle, @".$|.\r\n|\s");
-            }
-        }
-
-        #endregion
-
-        #region Private Classes
-
-        public sealed class InvisibleCharsRenderer : Style
-        {
-            private Pen _pen;
-
-            public InvisibleCharsRenderer(Pen pen)
-            {
-                _pen = pen;
-            }
-
-            public override void Draw(Graphics gr, Point position, Range range)
-            {
-                var tb = range.tb;
-                using (Brush brush = new SolidBrush(_pen.Color))
-                    foreach (var place in range)
-                    {
-                        switch (tb[place].c)
-                        {
-                            case ' ':
-                                var point = tb.PlaceToPoint(place);
-                                point.Offset(tb.CharWidth / 2, tb.CharHeight / 2);
-                                gr.DrawLine(_pen, point.X, point.Y, point.X + 1, point.Y);
-                                break;
-                        }
-
-                        if (tb[place.iLine].Count - 1 == place.iChar)
-                        {
-                            var point = tb.PlaceToPoint(place);
-                            point.Offset(tb.CharWidth, 0);
-                            gr.DrawString("¶", tb.Font, brush, point);
-                        }
-                    }
-            }
-        }
-
 
         #endregion
     }

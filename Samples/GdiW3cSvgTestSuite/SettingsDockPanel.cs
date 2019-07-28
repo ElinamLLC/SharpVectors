@@ -143,6 +143,35 @@ namespace GdiW3cSvgTestSuite
             _isInitialising = false;
         }
 
+        private void OnSelectedThemeChanged(object sender, EventArgs e)
+        {
+            if (_mainForm == null || _optionSettings == null)
+            {
+                return;
+            }
+            if (_isInitialising)
+            {
+                return;
+            }
+
+            _isInitialising = true;
+
+            _isGeneralModified = true;
+
+            int selectedIndex = cmbTheme.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                _optionSettings.Theme = (DockingTheme)selectedIndex;
+            }
+            //TODO: Dynamic theme will require saving the windows, closing all and recreating...
+            //if (_mainForm != null)
+            //{
+            //    _mainForm.ApplyTheme(_optionSettings.Theme);
+            //}
+
+            _isInitialising = false;
+        }
+
         private void OnBrowseForSvgSuitePath(object sender, EventArgs e)
         {
             string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
@@ -204,6 +233,14 @@ namespace GdiW3cSvgTestSuite
             chkHidePathsRoot.Checked = _optionSettings.HidePathsRoot;
 
             _isConversionModified = false;
+
+            cmbTheme.Items.Clear();
+            for (int i = 0; i < 3; i++)
+            {
+                DockingTheme theme = (DockingTheme)i;
+                cmbTheme.Items.Add(theme.ToString().Replace("Theme", ""));
+            }
+            cmbTheme.SelectedIndex = (int)_optionSettings.Theme;
 
             _isInitialising = false;
         }

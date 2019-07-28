@@ -22,7 +22,7 @@ namespace WpfSvgTestBox
     {
         #region Private Fields
 
-        private string currentFileName;
+        private string _currentFileName;
 
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
@@ -155,28 +155,46 @@ namespace WpfSvgTestBox
             dlg.CheckFileExists = true;
             if (dlg.ShowDialog() ?? false)
             {
-                currentFileName = dlg.FileName;
-                textEditor.Load(currentFileName);
-                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(currentFileName));
+                _currentFileName = dlg.FileName;
+                textEditor.Load(_currentFileName);
+                textEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(Path.GetExtension(_currentFileName));
             }
         }
 
         private void OnSaveFileClick(object sender, EventArgs e)
         {
-            if (currentFileName == null)
+            if (_currentFileName == null)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.DefaultExt = ".txt";
+                dlg.Title      = "Save As (.zaml is GZip compressed file used by SharpVectors)";
+                dlg.Filter     = "XAML Files|*.xaml;*.zaml";
+                dlg.DefaultExt = ".xaml";
                 if (dlg.ShowDialog() ?? false)
                 {
-                    currentFileName = dlg.FileName;
+                    _currentFileName = dlg.FileName;
                 }
                 else
                 {
                     return;
                 }
             }
-            textEditor.Save(currentFileName);
+
+            string fileExt = Path.GetExtension(_currentFileName);
+            if (string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase))
+            {
+                textEditor.Save(_currentFileName);
+            }
+            else if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
+            {
+                using (FileStream zamlDestFile = File.Create(_currentFileName))
+                {
+                    using (GZipStream zipStream = new GZipStream(zamlDestFile,
+                        CompressionMode.Compress, true))
+                    {
+                        textEditor.Save(zipStream);
+                    }
+                }
+            }
         }
 
         private void OnSearchTextClick(object sender, RoutedEventArgs e)

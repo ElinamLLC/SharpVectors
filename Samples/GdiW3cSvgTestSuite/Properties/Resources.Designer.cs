@@ -133,6 +133,26 @@ namespace GdiW3cSvgTestSuite.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FindNext {
+            get {
+                object obj = ResourceManager.GetObject("FindNext", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FindPrevious {
+            get {
+                object obj = ResourceManager.GetObject("FindPrevious", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FolderClose {
             get {
                 object obj = ResourceManager.GetObject("FolderClose", resourceCulture);
@@ -146,6 +166,16 @@ namespace GdiW3cSvgTestSuite.Properties {
         internal static System.Drawing.Bitmap FolderOpen {
             get {
                 object obj = ResourceManager.GetObject("FolderOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Format {
+            get {
+                object obj = ResourceManager.GetObject("Format", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +276,26 @@ namespace GdiW3cSvgTestSuite.Properties {
         internal static System.Drawing.Bitmap Replace {
             get {
                 object obj = ResourceManager.GetObject("Replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ReplaceAll {
+            get {
+                object obj = ResourceManager.GetObject("ReplaceAll", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Run {
+            get {
+                object obj = ResourceManager.GetObject("Run", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

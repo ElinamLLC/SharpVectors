@@ -19,6 +19,7 @@ namespace GdiW3cSvgTestSuite
         public const string SvgTestSettings = "SvgTestSettings.xml";
 
         private DockPanel _dockPanel;
+        private DockingTheme _currentTheme;
         private VS2015LightTheme _vS2015LightTheme;
         private VS2015BlueTheme _vS2015BlueTheme;
         private VS2015DarkTheme _vS2015DarkTheme;
@@ -71,6 +72,8 @@ namespace GdiW3cSvgTestSuite
             {
                 _optionSettings.Load(_testSettingsPath, this);
             }
+
+            _currentTheme = DockingTheme.LightTheme;
 
             InitializePanels();
         }
@@ -144,6 +147,9 @@ namespace GdiW3cSvgTestSuite
                             _testViewPanel.InitializePath(_optionSettings.LocalSuitePath);
                         }
                     }
+
+                    //TODO: Dynamic theme will require saving the windows, closing all and recreating...
+                    //this.ApplyTheme(_optionSettings.Theme);
                 }
             }
         }
@@ -280,12 +286,67 @@ namespace GdiW3cSvgTestSuite
 
         #region Private Methods
 
+        private void ApplyTheme(DockingTheme theme)
+        {
+            if (_currentTheme != theme)
+            {
+                _currentTheme = theme;
+                var dockPanels = new DockPanelContent[]
+                {
+                    _testViewPanel,
+                    _debugPanel,
+                    _testPanel,
+                    _aboutTestPanel,
+                    _inputPanel,
+                    _settingsPanel,
+                    _resultsPanel
+                };
+
+                ThemeBase currentTheme = _vS2015LightTheme;
+                switch (_currentTheme)
+                {
+                    case DockingTheme.LightTheme:
+                        currentTheme = _vS2015LightTheme;
+                        break;
+                    case DockingTheme.BlueTheme:
+                        currentTheme = _vS2015BlueTheme;
+                        break;
+                    case DockingTheme.DarkTheme:
+                        currentTheme = _vS2015DarkTheme;
+                        break;
+                }
+
+                foreach (var dockPanel in dockPanels)
+                {
+                    dockPanel.Theme = currentTheme;
+                }
+
+                _dockPanel.Theme = currentTheme;
+            }
+        }
+
         private void InitializePanels()
         {
             _dockPanel        = new DockPanel();
             _vS2015LightTheme = new VS2015LightTheme();
             _vS2015BlueTheme  = new VS2015BlueTheme();
             _vS2015DarkTheme  = new VS2015DarkTheme();
+
+            _currentTheme     = _optionSettings.Theme;
+
+            ThemeBase currentTheme = _vS2015LightTheme;
+            switch (_currentTheme)
+            {
+                case DockingTheme.LightTheme:
+                    currentTheme = _vS2015LightTheme;
+                    break;
+                case DockingTheme.BlueTheme:
+                    currentTheme = _vS2015BlueTheme;
+                    break;
+                case DockingTheme.DarkTheme:
+                    currentTheme = _vS2015DarkTheme;
+                    break;
+            }
 
             _dockPanel.Dock                       = DockStyle.Fill;
             _dockPanel.DockBackColor              = Color.White;
@@ -301,7 +362,7 @@ namespace GdiW3cSvgTestSuite
             _dockPanel.ShowAutoHideContentOnHover = true;
             _dockPanel.Size                       = new Size(this.Width - 10, this.Height - 10);
             _dockPanel.TabIndex                   = 0;
-            _dockPanel.Theme                      = _vS2015LightTheme;
+            _dockPanel.Theme                      = currentTheme;
             _dockPanel.DocumentStyle              = DocumentStyle.DockingWindow;
             _dockPanel.ShowDocumentIcon           = true;
             _dockPanel.AllowEndUserDocking        = false;
@@ -310,6 +371,8 @@ namespace GdiW3cSvgTestSuite
             this.Controls.Add(_dockPanel);
 
             _vS2015LightTheme.Skin.DockPaneStripSkin.TextFont = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.World, 0);
+            _vS2015BlueTheme.Skin.DockPaneStripSkin.TextFont = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.World, 0);
+            _vS2015DarkTheme.Skin.DockPaneStripSkin.TextFont = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.World, 0);
 
             _testViewPanel = new TestViewDockPanel();
             _testViewPanel.Text = "W3C SVG Test Suite";
@@ -356,7 +419,7 @@ namespace GdiW3cSvgTestSuite
 
             foreach (var dockPanel in dockPanels)
             {
-                dockPanel.InitializePanel(this, _optionSettings, _vS2015LightTheme);
+                dockPanel.InitializePanel(this, _optionSettings, currentTheme);
             }
 
             _dockPanel.ActiveContentChanged  += OnDockPanelActiveContentChanged;

@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsDockPanel));
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
             this.panelGeneral = new System.Windows.Forms.Panel();
+            this.labelThemeNote = new System.Windows.Forms.Label();
+            this.cmbTheme = new System.Windows.Forms.ComboBox();
+            this.labelTheme = new System.Windows.Forms.Label();
             this.labelHide = new System.Windows.Forms.Label();
             this.chkHidePathsRoot = new System.Windows.Forms.CheckBox();
             this.labelLocal = new System.Windows.Forms.Label();
@@ -52,7 +55,7 @@
             this.groupBoxGeneral.Controls.Add(this.panelGeneral);
             this.groupBoxGeneral.Location = new System.Drawing.Point(12, 13);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(776, 230);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(776, 297);
             this.groupBoxGeneral.TabIndex = 0;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General Settings";
@@ -61,6 +64,9 @@
             // 
             this.panelGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelGeneral.Controls.Add(this.labelThemeNote);
+            this.panelGeneral.Controls.Add(this.cmbTheme);
+            this.panelGeneral.Controls.Add(this.labelTheme);
             this.panelGeneral.Controls.Add(this.labelHide);
             this.panelGeneral.Controls.Add(this.chkHidePathsRoot);
             this.panelGeneral.Controls.Add(this.labelLocal);
@@ -71,14 +77,43 @@
             this.panelGeneral.Controls.Add(this.btnPathLocate);
             this.panelGeneral.Location = new System.Drawing.Point(11, 25);
             this.panelGeneral.Name = "panelGeneral";
-            this.panelGeneral.Size = new System.Drawing.Size(759, 192);
+            this.panelGeneral.Size = new System.Drawing.Size(759, 252);
             this.panelGeneral.TabIndex = 0;
+            // 
+            // labelThemeNote
+            // 
+            this.labelThemeNote.AutoSize = true;
+            this.labelThemeNote.Location = new System.Drawing.Point(165, 47);
+            this.labelThemeNote.Name = "labelThemeNote";
+            this.labelThemeNote.Size = new System.Drawing.Size(354, 12);
+            this.labelThemeNote.TabIndex = 21;
+            this.labelThemeNote.Text = "The selected theme will be applied when you restart the application.";
+            this.labelThemeNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbTheme
+            // 
+            this.cmbTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTheme.FormattingEnabled = true;
+            this.cmbTheme.Location = new System.Drawing.Point(241, 16);
+            this.cmbTheme.Name = "cmbTheme";
+            this.cmbTheme.Size = new System.Drawing.Size(204, 20);
+            this.cmbTheme.TabIndex = 20;
+            this.cmbTheme.SelectedIndexChanged += new System.EventHandler(this.OnSelectedThemeChanged);
+            // 
+            // labelTheme
+            // 
+            this.labelTheme.AutoSize = true;
+            this.labelTheme.Location = new System.Drawing.Point(193, 21);
+            this.labelTheme.Name = "labelTheme";
+            this.labelTheme.Size = new System.Drawing.Size(39, 12);
+            this.labelTheme.TabIndex = 19;
+            this.labelTheme.Text = "Theme";
             // 
             // labelHide
             // 
             this.labelHide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelHide.Location = new System.Drawing.Point(36, 38);
+            this.labelHide.Location = new System.Drawing.Point(36, 96);
             this.labelHide.Name = "labelHide";
             this.labelHide.Size = new System.Drawing.Size(710, 23);
             this.labelHide.TabIndex = 18;
@@ -87,7 +122,7 @@
             // chkHidePathsRoot
             // 
             this.chkHidePathsRoot.AutoSize = true;
-            this.chkHidePathsRoot.Location = new System.Drawing.Point(12, 15);
+            this.chkHidePathsRoot.Location = new System.Drawing.Point(12, 73);
             this.chkHidePathsRoot.Name = "chkHidePathsRoot";
             this.chkHidePathsRoot.Size = new System.Drawing.Size(108, 16);
             this.chkHidePathsRoot.TabIndex = 17;
@@ -98,7 +133,7 @@
             // labelLocal
             // 
             this.labelLocal.AutoSize = true;
-            this.labelLocal.Location = new System.Drawing.Point(10, 123);
+            this.labelLocal.Location = new System.Drawing.Point(10, 181);
             this.labelLocal.Name = "labelLocal";
             this.labelLocal.Size = new System.Drawing.Size(145, 12);
             this.labelLocal.TabIndex = 13;
@@ -111,7 +146,7 @@
             this.btnPathBrowse.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnPathBrowse.FlatAppearance.BorderSize = 2;
             this.btnPathBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPathBrowse.Location = new System.Drawing.Point(588, 144);
+            this.btnPathBrowse.Location = new System.Drawing.Point(588, 202);
             this.btnPathBrowse.Name = "btnPathBrowse";
             this.btnPathBrowse.Size = new System.Drawing.Size(75, 32);
             this.btnPathBrowse.TabIndex = 15;
@@ -122,7 +157,7 @@
             // labelWeb
             // 
             this.labelWeb.AutoSize = true;
-            this.labelWeb.Location = new System.Drawing.Point(8, 67);
+            this.labelWeb.Location = new System.Drawing.Point(8, 125);
             this.labelWeb.Name = "labelWeb";
             this.labelWeb.Size = new System.Drawing.Size(139, 12);
             this.labelWeb.TabIndex = 11;
@@ -132,7 +167,7 @@
             // 
             this.txtSvgSuitePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSvgSuitePath.Location = new System.Drawing.Point(36, 148);
+            this.txtSvgSuitePath.Location = new System.Drawing.Point(36, 206);
             this.txtSvgSuitePath.Name = "txtSvgSuitePath";
             this.txtSvgSuitePath.Size = new System.Drawing.Size(546, 19);
             this.txtSvgSuitePath.TabIndex = 14;
@@ -143,7 +178,7 @@
             this.txtSvgSuitePathWeb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSvgSuitePathWeb.BackColor = System.Drawing.SystemColors.Window;
-            this.txtSvgSuitePathWeb.Location = new System.Drawing.Point(36, 90);
+            this.txtSvgSuitePathWeb.Location = new System.Drawing.Point(36, 148);
             this.txtSvgSuitePathWeb.Name = "txtSvgSuitePathWeb";
             this.txtSvgSuitePathWeb.ReadOnly = true;
             this.txtSvgSuitePathWeb.Size = new System.Drawing.Size(710, 19);
@@ -157,7 +192,7 @@
             this.btnPathLocate.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnPathLocate.FlatAppearance.BorderSize = 2;
             this.btnPathLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPathLocate.Location = new System.Drawing.Point(671, 144);
+            this.btnPathLocate.Location = new System.Drawing.Point(671, 202);
             this.btnPathLocate.Name = "btnPathLocate";
             this.btnPathLocate.Size = new System.Drawing.Size(75, 32);
             this.btnPathLocate.TabIndex = 16;
@@ -169,7 +204,7 @@
             // 
             this.groupBoxConversion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxConversion.Location = new System.Drawing.Point(12, 283);
+            this.groupBoxConversion.Location = new System.Drawing.Point(12, 344);
             this.groupBoxConversion.Name = "groupBoxConversion";
             this.groupBoxConversion.Size = new System.Drawing.Size(776, 140);
             this.groupBoxConversion.TabIndex = 1;
@@ -183,11 +218,12 @@
             this.htmlLabel.AutoSize = false;
             this.htmlLabel.BackColor = System.Drawing.SystemColors.Window;
             this.htmlLabel.BaseStylesheet = null;
-            this.htmlLabel.Location = new System.Drawing.Point(45, 430);
+            this.htmlLabel.Location = new System.Drawing.Point(45, 491);
             this.htmlLabel.Name = "htmlLabel";
             this.htmlLabel.Size = new System.Drawing.Size(709, 22);
             this.htmlLabel.TabIndex = 2;
             this.htmlLabel.Text = "<b>NOTE:</b> Changes are automatically applied if you switch to any other tab.";
+            this.htmlLabel.UseGdiPlusTextRendering = true;
             // 
             // SettingsDockPanel
             // 
@@ -226,5 +262,8 @@
         private System.Windows.Forms.GroupBox groupBoxConversion;
         private TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel htmlLabel;
         private System.Windows.Forms.Panel panelGeneral;
+        private System.Windows.Forms.ComboBox cmbTheme;
+        private System.Windows.Forms.Label labelTheme;
+        private System.Windows.Forms.Label labelThemeNote;
     }
 }

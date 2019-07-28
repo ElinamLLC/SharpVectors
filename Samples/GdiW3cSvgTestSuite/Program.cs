@@ -14,7 +14,7 @@ namespace GdiW3cSvgTestSuite
             Application.Idle += OnApplicationIdle;
 
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(true);
+            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
 

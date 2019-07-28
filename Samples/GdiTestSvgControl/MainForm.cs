@@ -2,6 +2,7 @@
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Dom.Events;
@@ -74,7 +75,7 @@ namespace TestSvgControl
             }
         }
 
-        private void OpenSvgSource(string svgSource)
+        private async Task OpenSvgSource(string svgSource)
         {
             if (string.IsNullOrWhiteSpace(svgSource))
             {
@@ -84,7 +85,7 @@ namespace TestSvgControl
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                svgPictureBox.Source = svgSource;
+                await svgPictureBox.LoadAsync(svgSource);
 
                 // JR Test event
                 ISvgDocument doc = svgPictureBox.Window.Document;    
@@ -140,7 +141,7 @@ namespace TestSvgControl
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                svgPictureBox.Source = fileName;
+                svgPictureBox.Load(fileName);
 
                 // JR Test event
                 ISvgDocument doc = svgPictureBox.Window.Document;
@@ -177,14 +178,15 @@ namespace TestSvgControl
         {
         }
 
-        private void OnFormShown(object sender, EventArgs e)
+        private async void OnFormShown(object sender, EventArgs e)
         {
-            SvgSourceForm dlg = new SvgSourceForm();
-            if (dlg.ShowDialog(this) == DialogResult.OK)
+            using (SvgSourceForm dlg = new SvgSourceForm())
             {
-                this.OpenSvgSource(dlg.SvgSource);
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    await this.OpenSvgSource(dlg.SvgSource);
+                }
             }
-            dlg.Dispose();
         }
 
         private void OnFormClosed(object sender, FormClosedEventArgs e)
@@ -197,14 +199,15 @@ namespace TestSvgControl
 
         }
 
-        private void OnSelectClicked(object sender, EventArgs e)
+        private async void OnSelectClicked(object sender, EventArgs e)
         {
-            SvgSourceForm dlg = new SvgSourceForm();
-            if (dlg.ShowDialog(this) == DialogResult.OK)
+            using (SvgSourceForm dlg = new SvgSourceForm())
             {
-                this.OpenSvgSource(dlg.SvgSource);
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    await this.OpenSvgSource(dlg.SvgSource);
+                }
             }
-            dlg.Dispose();
         }
 
         private void OnExitClicked(object sender, EventArgs e)

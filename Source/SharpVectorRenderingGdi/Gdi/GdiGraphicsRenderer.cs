@@ -351,6 +351,10 @@ namespace SharpVectors.Renderers.Gdi
                     return SvgRectF.Empty;
                 }
                 ISvgMatrix svgMatrix = element.GetScreenCTM();
+                if (svgMatrix == null)
+                {
+                    return SvgRectF.Empty;
+                }
 
                 Matrix matrix = new Matrix((float)svgMatrix.A, (float)svgMatrix.B, (float)svgMatrix.C,
                       (float)svgMatrix.D, (float)svgMatrix.E, (float)svgMatrix.F);

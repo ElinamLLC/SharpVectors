@@ -12,6 +12,13 @@ using System.Windows.Forms;
 
 namespace GdiW3cSvgTestSuite
 {
+    public enum DockingTheme
+    {
+        LightTheme = 0,
+        BlueTheme  = 1,
+        DarkTheme  = 2
+    }
+
     [Serializable]
     public sealed class OptionSettings : ICloneable
     {
@@ -50,6 +57,8 @@ namespace GdiW3cSvgTestSuite
 
         private WindowPosition _winPosition;
 
+        private DockingTheme _theme;
+
         #endregion
 
         #region Constructors and Destructor
@@ -62,7 +71,8 @@ namespace GdiW3cSvgTestSuite
                 Directory.CreateDirectory(currentDir);
             }
             _localSuitePath = currentDir;
-            _webSuitePath = FullTestSuite;
+            _webSuitePath   = FullTestSuite;
+            _theme          = DockingTheme.LightTheme;
         }
 
         public OptionSettings(string testPath)
@@ -79,6 +89,7 @@ namespace GdiW3cSvgTestSuite
             {
                 Directory.CreateDirectory(_localSuitePath);
             }
+            _theme          = DockingTheme.LightTheme;
         }
 
         public OptionSettings(OptionSettings source)
@@ -90,6 +101,8 @@ namespace GdiW3cSvgTestSuite
             _hidePathsRoot  = source._hidePathsRoot;
             _webSuitePath   = source._webSuitePath;
             _localSuitePath = source._localSuitePath;
+            _theme          = source._theme;
+            _winPosition    = source._winPosition;
         }
 
         #endregion
@@ -133,6 +146,16 @@ namespace GdiW3cSvgTestSuite
             }
             set {
                 _selectedValuePath = value;
+            }
+        }
+
+        public DockingTheme Theme
+        {
+            get {
+                return _theme;
+            }
+            set {
+                _theme = value;
             }
         }
 
@@ -408,6 +431,16 @@ namespace GdiW3cSvgTestSuite
                                     break;
                             }
                         }
+                        else if (string.Equals(optionType, "Other", comparer))
+                        {
+                            string optionValue = reader.ReadElementContentAsString();
+                            switch (optionName)
+                            {
+                                case "Theme":
+                                    _theme = (DockingTheme)Enum.Parse(typeof(DockingTheme), optionValue, true);
+                                    break;
+                            }
+                        }
                     }
                     else if (string.Equals(reader.Name, "placements", StringComparison.OrdinalIgnoreCase))
                     {
@@ -465,6 +498,7 @@ namespace GdiW3cSvgTestSuite
             this.SaveOption(writer, "WebSuitePath", _webSuitePath);
             this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
             this.SaveOption(writer, "SelectedValuePath", _selectedValuePath);
+            this.SaveOption(writer, "Theme", _theme);
 
             try
             {
@@ -513,6 +547,14 @@ namespace GdiW3cSvgTestSuite
             writer.WriteString(value ? "true" : "false");
             writer.WriteEndElement();
         }
+        private void SaveOption(XmlWriter writer, string name, DockingTheme theme)
+        {
+            writer.WriteStartElement("option");
+            writer.WriteAttributeString("name", name);
+            writer.WriteAttributeString("type", "Other");
+            writer.WriteString(theme.ToString());
+            writer.WriteEndElement();
+        }
 
         private void SaveWindowPosition(XmlWriter writer)
         {
@@ -540,6 +582,10 @@ namespace GdiW3cSvgTestSuite
             if (_localSuitePath != null)
             {
                 optSettings._localSuitePath = string.Copy(_localSuitePath);
+            }
+            if (_winPosition != null)
+            {
+                optSettings._winPosition = _winPosition.Clone();
             }
 
             return optSettings;

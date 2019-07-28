@@ -46,7 +46,7 @@ namespace WpfSvgTestBox
 
         private DrawingGroup _currentDrawing;
 
-        private string currentFileName;
+        private string _currentFileName;
 
         private DirectoryInfo _directoryInfo;
 
@@ -79,8 +79,6 @@ namespace WpfSvgTestBox
         /// </summary>
         private MouseButton mouseButtonDown;
 
-        private int _renderCount;
-
         #endregion
 
         #region Constructors and Destructor
@@ -91,7 +89,7 @@ namespace WpfSvgTestBox
 
             string workingDir = IoPath.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            _svgFilePath = IoPath.Combine(workingDir, SvgFileName);
+            _svgFilePath  = IoPath.Combine(workingDir, SvgFileName);
             _xamlFilePath = IoPath.Combine(workingDir, XamlFileName);
             _backFilePath = IoPath.Combine(workingDir, BackFileName);
 
@@ -354,13 +352,6 @@ namespace WpfSvgTestBox
                     return false;
                 }
 
-                if (_renderCount != 0)
-                {
-                    Trace.WriteLine(string.Empty);
-                }
-
-                Trace.TraceInformation("ConvertDocument: Started");
-
                 if (_xamlPage != null && !string.IsNullOrWhiteSpace(_xamlFilePath))
                 {
                     if (File.Exists(_xamlFilePath))
@@ -405,10 +396,6 @@ namespace WpfSvgTestBox
                     bounds = new Rect(0, 0, viewerFrame.ActualWidth, viewerFrame.ActualHeight);
                 }
                 zoomPanControl.AnimatedZoomTo(bounds);
-
-                Trace.TraceInformation("ConvertDocument: Completed");
-
-                _renderCount++;
 
                 return true;
             }
@@ -474,7 +461,7 @@ namespace WpfSvgTestBox
                                 + "|SVG Compressed Files (*.svgz)|*.svgz";
             if (dlg.ShowDialog() ?? false)
             {
-                currentFileName = dlg.FileName;
+                _currentFileName = dlg.FileName;
 
                 if (!string.IsNullOrWhiteSpace(_svgFilePath))
                 {
@@ -491,28 +478,44 @@ namespace WpfSvgTestBox
                     }
                 }
 
-                this.LoadDocument(currentFileName);
+                this.LoadDocument(_currentFileName);
             }
         }
 
         private void OnSaveFileClick(object sender, EventArgs e)
         {
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Select An SVG File";
-            dlg.DefaultExt = "*.svg";
-            dlg.Filter = "All SVG Files (*.svg,*.svgz)|*.svg;*.svgz"
-                                + "|Svg Uncompressed Files (*.svg)|*.svg"
-                                + "|SVG Compressed Files (*.svgz)|*.svgz";
-            dlg.FileName   = currentFileName;
-            if (dlg.ShowDialog() ?? false)
+            if (_currentFileName == null)
             {
-                currentFileName = dlg.FileName;
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.Title      = "Save As";
+                dlg.Filter     = "SVG Files|*.svg;*.svgz";
+                dlg.DefaultExt = ".svg";
+                if (dlg.ShowDialog() ?? false)
+                {
+                    _currentFileName = dlg.FileName;
+                }
+                else
+                {
+                    return;
+                }
             }
-            else
+
+            string fileExt = Path.GetExtension(_currentFileName);
+            if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase))
             {
-                return;
+                textEditor.Save(_currentFileName);
             }
-            textEditor.Save(currentFileName);
+            else if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+            {
+                using (FileStream svgzDestFile = File.Create(_currentFileName))
+                {
+                    using (GZipStream zipStream = new GZipStream(svgzDestFile, 
+                        CompressionMode.Compress, true))
+                    {
+                        textEditor.Save(zipStream);
+                    }
+                }
+            }               
         }
 
         //private void OnPasteText(object sender, DataObjectPastingEventArgs args)

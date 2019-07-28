@@ -117,25 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textEditor.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAGRTaGFycFZlY3RvcnMuRmFzdENvbG9yZWRUZXh0Qm94LCBWZXJz
-        aW9uPTIuMTYuMjYuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1mYjhhYTEyYjk5NGVm
-        NjFiDAMAAABRU3lzdGVtLkRyYXdpbmcsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQ
-        dWJsaWNLZXlUb2tlbj1iMDNmNWY3ZjExZDUwYTNhBQEAAAAiRmFzdENvbG9yZWRUZXh0Qm94TlMuU2Vy
-        dmljZUNvbG9ycwYAAAAoPENvbGxhcHNlTWFya2VyRm9yZUNvbG9yPmtfX0JhY2tpbmdGaWVsZCg8Q29s
-        bGFwc2VNYXJrZXJCYWNrQ29sb3I+a19fQmFja2luZ0ZpZWxkKjxDb2xsYXBzZU1hcmtlckJvcmRlckNv
-        bG9yPmtfX0JhY2tpbmdGaWVsZCY8RXhwYW5kTWFya2VyRm9yZUNvbG9yPmtfX0JhY2tpbmdGaWVsZCY8
-        RXhwYW5kTWFya2VyQmFja0NvbG9yPmtfX0JhY2tpbmdGaWVsZCg8RXhwYW5kTWFya2VyQm9yZGVyQ29s
-        b3I+a19fQmFja2luZ0ZpZWxkBAQEBAQEFFN5c3RlbS5EcmF3aW5nLkNvbG9yAwAAABRTeXN0ZW0uRHJh
-        d2luZy5Db2xvcgMAAAAUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAFFN5c3RlbS5EcmF3aW5nLkNvbG9y
-        AwAAABRTeXN0ZW0uRHJhd2luZy5Db2xvcgMAAAAUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAAgAAAAX8
-        ////FFN5c3RlbS5EcmF3aW5nLkNvbG9yBAAAAARuYW1lBXZhbHVlCmtub3duQ29sb3IFc3RhdGUBAAAA
-        CQcHAwAAAAoAAAAAAAAAAJYAAQAB+/////z///8KAAAAAAAAAACkAAEAAfr////8////CgAAAAAAAAAA
-        lgABAAH5/////P///woAAAAAAAAAAI0AAQAB+P////z///8KAAAAAAAAAACkAAEAAff////8////CgAA
-        AAAAAAAAlgABAAs=
-</value>
-  </data>
   <metadata name="toolBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
