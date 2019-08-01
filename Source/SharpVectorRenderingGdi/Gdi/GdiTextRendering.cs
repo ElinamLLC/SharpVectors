@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text.RegularExpressions;
@@ -408,8 +409,9 @@ namespace SharpVectors.Renderers.Gdi
 
                     return family;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Trace.TraceError(ex.ToString());
                 }
             }
 

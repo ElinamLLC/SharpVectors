@@ -186,8 +186,8 @@ namespace SharpVectors.Renderers.Texts
                 if (isXYGlyphPositioning)
                 {
                     uint itemCount = Math.Max(Math.Max(xCount, yCount), Math.Max(dxCount, dyCount));
-                    itemCount = Math.Max(itemCount, rCount);
-                    textPositions = new List<WpfTextPosition>((int)itemCount);
+                    itemCount      = Math.Max(itemCount, rCount);
+                    textPositions  = new List<WpfTextPosition>((int)itemCount);
 
                     double xLast = 0;
                     double yLast = 0;

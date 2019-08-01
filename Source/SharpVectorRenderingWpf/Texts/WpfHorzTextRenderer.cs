@@ -157,7 +157,7 @@ namespace SharpVectors.Renderers.Texts
                     if (!rotateAngle.Equals(0))
                     {
                         rotateAt = new RotateTransform(rotateAngle, textStart.X, textStart.Y);
-                        _textContext.PushTransform(rotateAt);
+                        _drawContext.PushTransform(rotateAt);
                     }
 
                     Point textPoint = new Point(textStart.X, textStart.Y - yCorrection);
@@ -167,18 +167,18 @@ namespace SharpVectors.Renderers.Texts
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
                         {
-                            _textContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+                            _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
 
                             this.IsTextPath = true;
                         }
                         else
                         {
-                            _textContext.DrawText(formattedText, textPoint);
+                            _drawContext.DrawText(formattedText, textPoint);
                         }
                     }
                     else
                     {
-                        _textContext.DrawText(formattedText, textPoint);
+                        _drawContext.DrawText(formattedText, textPoint);
                     }
 
                     //float bboxWidth = (float)formattedText.Width;
@@ -214,7 +214,7 @@ namespace SharpVectors.Renderers.Texts
 
                     if (rotateAt != null)
                     {
-                        _textContext.Pop();
+                        _drawContext.Pop();
                     }
                 }
             }
@@ -246,7 +246,7 @@ namespace SharpVectors.Renderers.Texts
                 if (!rotateAngle.Equals(0))
                 {
                     rotateAt = new RotateTransform(rotateAngle, ctp.X, ctp.Y);
-                    _textContext.PushTransform(rotateAt);
+                    _drawContext.PushTransform(rotateAt);
                 }
 
                 if (textPen != null || _context.TextAsGeometry)
@@ -254,19 +254,19 @@ namespace SharpVectors.Renderers.Texts
                     Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        _textContext.DrawGeometry(textBrush, textPen, 
+                        _drawContext.DrawGeometry(textBrush, textPen, 
                             ExtractTextPathGeometry(textGeometry));
 
                         this.IsTextPath = true;
                     }
                     else
                     {
-                        _textContext.DrawText(formattedText, textPoint);
+                        _drawContext.DrawText(formattedText, textPoint);
                     }
                 }
                 else
                 {
-                    _textContext.DrawText(formattedText, textPoint);
+                    _drawContext.DrawText(formattedText, textPoint);
                 }
 
                 //float bboxWidth = (float)formattedText.Width;
@@ -281,7 +281,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (rotateAt != null)
                 {
-                    _textContext.Pop();
+                    _drawContext.Pop();
                 }
             }
         }
@@ -426,7 +426,7 @@ namespace SharpVectors.Renderers.Texts
 
                     if (this.IsMeasuring)
                     {
-                        this.AddTextWidth(formattedText.WidthIncludingTrailingWhitespace); 
+                        this.AddTextWidth(ctp, formattedText.WidthIncludingTrailingWhitespace); 
                         continue;
                     }
 
@@ -469,7 +469,7 @@ namespace SharpVectors.Renderers.Texts
                     if (!rotateAngle.Equals(0))
                     {
                         rotateAt = new RotateTransform(rotateAngle, textStart.X, textStart.Y);
-                        _textContext.PushTransform(rotateAt);
+                        _drawContext.PushTransform(rotateAt);
                     }
 
                     Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
@@ -479,19 +479,19 @@ namespace SharpVectors.Renderers.Texts
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
                         {
-                            _textContext.DrawGeometry(textBrush, textPen,
+                            _drawContext.DrawGeometry(textBrush, textPen,
                                 ExtractTextPathGeometry(textGeometry));
 
                             this.IsTextPath = true;
                         }
                         else
                         {
-                            _textContext.DrawText(formattedText, textPoint);
+                            _drawContext.DrawText(formattedText, textPoint);
                         }
                     }
                     else
                     {
-                        _textContext.DrawText(formattedText, textPoint);
+                        _drawContext.DrawText(formattedText, textPoint);
                     }
 
                     //float bboxWidth = (float)formattedText.Width;
@@ -527,7 +527,7 @@ namespace SharpVectors.Renderers.Texts
 
                     if (rotateAt != null)
                     {
-                        _textContext.Pop();
+                        _drawContext.Pop();
                     }
                     j++;
                 }
@@ -539,13 +539,17 @@ namespace SharpVectors.Renderers.Texts
 
                 if (this.IsMeasuring)
                 {
-                    this.AddTextWidth(formattedText.WidthIncludingTrailingWhitespace);  
+                    this.AddTextWidth(ctp, formattedText.WidthIncludingTrailingWhitespace);  
                     return;
                 }
 
-                if (alignment == TextAlignment.Center && this.TextWidth > 0)
+                var textContext = this.TextContext;
+                if (textContext != null && textContext.IsPositionChanged(element) == false)
                 {
-                    alignment = TextAlignment.Left;
+                    if (alignment == TextAlignment.Center && this.TextWidth > 0)
+                    {
+                        alignment = TextAlignment.Left;
+                    }
                 }
 
                 formattedText.TextAlignment = alignment;
@@ -571,7 +575,7 @@ namespace SharpVectors.Renderers.Texts
                 if (!rotateAngle.Equals(0))
                 {
                     rotateAt = new RotateTransform(rotateAngle, ctp.X, ctp.Y);
-                    _textContext.PushTransform(rotateAt);
+                    _drawContext.PushTransform(rotateAt);
                 }
 
                 if (textPen != null || _context.TextAsGeometry)
@@ -579,19 +583,19 @@ namespace SharpVectors.Renderers.Texts
                     Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        _textContext.DrawGeometry(textBrush, textPen,
+                        _drawContext.DrawGeometry(textBrush, textPen,
                             ExtractTextPathGeometry(textGeometry));
 
                         this.IsTextPath = true;
                     }
                     else
                     {
-                        _textContext.DrawText(formattedText, textPoint);
+                        _drawContext.DrawText(formattedText, textPoint);
                     }
                 }
                 else
                 {
-                    _textContext.DrawText(formattedText, textPoint);
+                    _drawContext.DrawText(formattedText, textPoint);
                 }
 
                 //float bboxWidth = (float)formattedText.Width;
@@ -606,7 +610,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (rotateAt != null)
                 {
-                    _textContext.Pop();
+                    _drawContext.Pop();
                 }
             }
         }

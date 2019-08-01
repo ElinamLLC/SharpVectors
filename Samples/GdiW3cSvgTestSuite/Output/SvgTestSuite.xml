@@ -79,7 +79,7 @@
         <test source="coords-units-02-b.svg" title="coords-units-02-b" state="success" comment="" description="This test validates the processing rules for converting coordinates and length in CSS units to user space coordinate values." />
         <test source="coords-units-03-b.svg" title="coords-units-03-b" state="success" comment="" description="Validates simple initial viewport size and basic units handling." />
         <test source="coords-viewattr-01-b.svg" title="coords-viewattr-01-b" state="partial" comment="Slice is not yet supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
-        <test source="coords-viewattr-02-b.svg" title="coords-viewattr-02-b" state="partial" comment="Slice is not supported." description="Validates viewBox specification and the preserveAspectRatio attribute" />
+        <test source="coords-viewattr-02-b.svg" title="coords-viewattr-02-b" state="success" comment="" description="Validates viewBox specification and the preserveAspectRatio attribute" />
         <test source="coords-viewattr-03-b.svg" title="coords-viewattr-03-b" state="success" comment="" description="Tests the viewBox attribute on SVG elements" />
     </category>
     <category label="Filter Effects">
@@ -227,8 +227,8 @@
         <test source="shapes-circle-01-t.svg" title="shapes-circle-01-t" state="success" comment="" description="Test ability to handle the 'circle' basic shapes element." />
         <test source="shapes-circle-02-t.svg" title="shapes-circle-02-t" state="success" comment="" description="" />
         <test source="shapes-ellipse-01-t.svg" title="shapes-ellipse-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the &lt;ellipse&gt; element." />
-        <test source="shapes-ellipse-02-t.svg" title="shapes-ellipse-02-t" state="partial" comment="Unwanted lines drawn." description="" />
-        <test source="shapes-intro-01-t.svg" title="shapes-intro-01-t" state="partial" comment="Unwanted lines drawn." description="Test that viewer supports the degenerate cases of the basic shapes." />
+        <test source="shapes-ellipse-02-t.svg" title="shapes-ellipse-02-t" state="success" comment="" description="" />
+        <test source="shapes-intro-01-t.svg" title="shapes-intro-01-t" state="success" comment="" description="Test that viewer supports the degenerate cases of the basic shapes." />
         <test source="shapes-line-01-t.svg" title="shapes-line-01-t" state="success" comment="" description="Test ability to handle the 'line' basic-shapes element." />
         <test source="shapes-polygon-01-t.svg" title="shapes-polygon-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'polygon' element." />
         <test source="shapes-polyline-01-t.svg" title="shapes-polyline-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'polyline' element." />

@@ -67,6 +67,11 @@ namespace SharpVectors.Renderers
             return new RectangleF(rect.X, rect.Y, rect.Width, rect.Height);
         }
 
+        public static Rectangle Snap(this RectangleF rect)
+        {
+            return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
+        }
+
         public static RectangleF ToRectangle(SvgRect rect)
         {
             if (rect == null)

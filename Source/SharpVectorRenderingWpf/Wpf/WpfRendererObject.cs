@@ -213,10 +213,7 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         return CreateGeometryEx((SvgPathElement)element);
                     }
-                    else
-                    {
-                        return CreateGeometry((SvgPathElement)element);
-                    }
+                    return CreateGeometry((SvgPathElement)element);
                 case "circle":
                     return CreateGeometry((SvgCircleElement)element);
                 case "polyline":
@@ -242,16 +239,6 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            /*if (_cx <= 1 && _cy <= 1 && _rx <= 1 && _ry <= 1)
-            {
-                gp.AddEllipse(_cx-_rx, _cy-_ry, _rx*2, _ry*2);
-            }
-            else
-            {
-                gp.AddEllipse(_cx-_rx, _cy-_ry, _rx*2 - 1, _ry*2 - 1);
-            }*/
-            //gp.AddEllipse(_cx - _rx, _cy - _ry, _rx * 2, _ry * 2);
-
             EllipseGeometry geometry = new EllipseGeometry(new Point(_cx, _cy),
                 _rx, _ry);
 
@@ -264,12 +251,12 @@ namespace SharpVectors.Renderers.Wpf
 
         public Geometry CreateGeometry(SvgRectElement element)
         {
-            double dx = Math.Round(element.X.AnimVal.Value, 4);
-            double dy = Math.Round(element.Y.AnimVal.Value, 4);
-            double width = Math.Round(element.Width.AnimVal.Value, 4);
+            double dx     = Math.Round(element.X.AnimVal.Value, 4);
+            double dy     = Math.Round(element.Y.AnimVal.Value, 4);
+            double width  = Math.Round(element.Width.AnimVal.Value, 4);
             double height = Math.Round(element.Height.AnimVal.Value, 4);
-            double rx = Math.Round(element.Rx.AnimVal.Value, 4);
-            double ry = Math.Round(element.Ry.AnimVal.Value, 4);
+            double rx     = Math.Round(element.Rx.AnimVal.Value, 4);
+            double ry     = Math.Round(element.Ry.AnimVal.Value, 4);
 
             if (width <= 0 || height <= 0)
             {
@@ -594,18 +581,16 @@ namespace SharpVectors.Renderers.Wpf
 
         #region IDisposable Members
 
-        protected virtual void Dispose(bool disposing)
-        {
-            _isDisposed = true;
-        }
-
         // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             this.Dispose(true);
-
             GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            _isDisposed = true;
         }
 
         #endregion

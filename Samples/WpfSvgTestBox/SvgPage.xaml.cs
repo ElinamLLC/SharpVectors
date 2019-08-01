@@ -376,8 +376,6 @@ namespace WpfSvgTestBox
                 }
                 _currentDrawing = drawing;
 
-                Rect drawingBounds = drawing.Bounds;
-
                 svgDrawing.UnloadDiagrams();
 
                 svgDrawing.RenderDiagrams(drawing);

@@ -111,6 +111,13 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Public Abstract Methods
 
+        public void DrawImage(GdiRendering grNode, Image image, RectangleF destRect, 
+            RectangleF srcRect, GraphicsUnit graphicsUnit, ImageAttributes imageAttributes)
+        {
+            this.DrawImage(grNode, image, destRect.Snap(), 
+                srcRect.X, srcRect.Y, srcRect.Width, srcRect.Height, graphicsUnit, imageAttributes);
+        }
+
         public abstract GdiGraphicsContainer BeginContainer();
         public abstract void Clear(Color color);
         public abstract void DrawImage(GdiRendering grNode, Image image, Rectangle destRect, 

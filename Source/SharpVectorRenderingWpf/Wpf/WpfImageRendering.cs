@@ -400,7 +400,7 @@ namespace SharpVectors.Renderers.Wpf
                 return imageSource;
             }
             BitmapSource bitmapSource = (BitmapSource)imageSource;
-            BitmapFrame inputFrame = BitmapFrame.Create(bitmapSource);
+            BitmapFrame inputFrame    = BitmapFrame.Create(bitmapSource);
 
             SvgUriReference svgUri = colorProfile.UriReference;
             Uri profileUri = new Uri(svgUri.AbsoluteUri);
@@ -410,7 +410,7 @@ namespace SharpVectors.Renderers.Wpf
             var colorContexts = new ReadOnlyCollection<ColorContext>(new ColorContext[] { colorContext });
 
             BitmapFrame outputFrame = BitmapFrame.Create(inputFrame, null, null, colorContexts);
-            var bitmapImage = new BitmapImage();
+            var bitmapImage   = new BitmapImage();
             var bitmapEncoder = new PngBitmapEncoder();
             bitmapEncoder.Frames.Add(outputFrame);
 

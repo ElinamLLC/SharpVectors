@@ -20,6 +20,8 @@ namespace SharpVectors.Renderers.Gdi
         private bool _isStatic;
         private bool _disposeRaster;
 
+        private bool _ownsGraphics;
+
         /// <summary>
         /// The bitmap containing the rendered Svg image.
         /// </summary>
@@ -59,6 +61,23 @@ namespace SharpVectors.Renderers.Gdi
         #endregion
 
         #region Constructors and Destructor
+
+        public GdiGraphicsRenderer(GdiGraphics graphics)
+            : this(true, false)
+        {
+            _graphics     = graphics;
+            _ownsGraphics = (graphics == null);
+        }
+
+        public GdiGraphicsRenderer(GdiGraphics graphics, SvgWindow svgWindow)
+            : this(graphics)
+        {
+            _svgWindow = svgWindow;
+            if (_svgWindow != null)
+            {
+                _svgWindow.Renderer = this;
+            }
+        }
 
         public GdiGraphicsRenderer(int rasterWidth, int rasterHeight, bool disposeRaster = false)
             : this(true, disposeRaster)
@@ -254,7 +273,7 @@ namespace SharpVectors.Renderers.Gdi
 
         public void ClearAll()
         {
-            if (_graphics != null)
+            if (_ownsGraphics && _graphics != null)
             {
                 _graphics.Dispose();
                 _graphics = null;
@@ -415,9 +434,6 @@ namespace SharpVectors.Renderers.Gdi
 
         private void ProcessMouseEvents(string type, MouseEventArgs e)
         {
-            //Color pixel = _idMapRaster.GetPixel(e.X, e.Y);
-            //SvgElement svgElement = GetElementFromColor(pixel);
-
             SvgElement svgElement = null;
             var hitTestResult = _hitTestHelper.HitTest(e.X, e.Y);
             if (hitTestResult != null)
@@ -567,12 +583,13 @@ namespace SharpVectors.Renderers.Gdi
                     }
 
                     // Make a GraphicsWrapper object from the rasterImage and clear it to the background color
-//                    _graphics = GdiGraphicsWrapper.FromImage(_rasterImage, _isStatic);
                     _graphics = GdiGraphicsImpl.FromImage(_rasterImage, _isStatic);
                     _graphics.Clear(_backColor);
 
                     _hitTestHelper = _graphics.HitTestHelper;
                 }
+
+                _ownsGraphics = true;
             }
         }
 
@@ -581,20 +598,23 @@ namespace SharpVectors.Renderers.Gdi
         /// </summary>
         private void RendererAfterRender()
         {
-            if (_graphics != null)
+            if (_ownsGraphics)
             {
-                if (_hitTestHelper != null)
+                if (_graphics != null)
                 {
-                    if (_hitTestHelper != _graphics.HitTestHelper)
+                    if (_hitTestHelper != null)
                     {
-                        _hitTestHelper.Dispose();
-                        _hitTestHelper = _graphics.HitTestHelper;
+                        if (_hitTestHelper != _graphics.HitTestHelper)
+                        {
+                            _hitTestHelper.Dispose();
+                            _hitTestHelper = _graphics.HitTestHelper;
+                        }
                     }
-                }
 
-                _graphics.HitTestHelper = GdiHitTestHelper.NoHit; // Prevent disposal actual height test
-                _graphics.Dispose();
-                _graphics = null;
+                    _graphics.HitTestHelper = GdiHitTestHelper.NoHit; // Prevent disposal actual height test
+                    _graphics.Dispose();
+                    _graphics = null;
+                }
             }
 
             if (_hitTestHelper == null)
@@ -623,14 +643,19 @@ namespace SharpVectors.Renderers.Gdi
             {
                 _rasterImage.Dispose();
             }
-            if (_graphics != null)
+            if (_ownsGraphics)
             {
-                _graphics.Dispose();
+                if (_graphics != null)
+                {
+                    _graphics.Dispose();
+                }
             }
 
             _graphics      = null;
             _rasterImage   = null;
             _hitTestHelper = null;
+
+            _ownsGraphics = false;
         }
 
         #endregion

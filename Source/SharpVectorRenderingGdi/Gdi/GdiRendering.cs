@@ -77,17 +77,12 @@ namespace SharpVectors.Renderers.Gdi
 
         public override void AfterRender(GdiGraphicsRenderer renderer)
         {
-            if (renderer == null)
+            if (renderer == null || renderer.GdiGraphics == null)
             {
                 return;
             }
 
             var graphics = renderer.GdiGraphics;
-            if (graphics == null)
-            {
-                return;
-            }
-
             graphics.EndContainer(_graphicsContainer);
         }
 
@@ -333,15 +328,15 @@ namespace SharpVectors.Renderers.Gdi
             switch (colorRendering)
             {
                 case "optimizeSpeed":
-                    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
+                    graphics.CompositingQuality = CompositingQuality.HighSpeed;
                     break;
                 case "optimizeQuality":
-                    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
                     break;
                 default:
                     // "auto"
                     // todo: could use AssumeLinear for slightly better
-                    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.Default;
+                    graphics.CompositingQuality = CompositingQuality.Default;
                     break;
             }
 
@@ -350,25 +345,25 @@ namespace SharpVectors.Renderers.Gdi
                 // Unfortunately the text rendering hints are not applied because the
                 // text path is recorded and painted to the Graphics object as a path
                 // not as text.
-                string textRendering = ((SvgElement)_svgElement).GetComputedStringValue("text-rendering", string.Empty);
+                string textRendering = _svgElement.GetComputedStringValue("text-rendering", string.Empty);
                 switch (textRendering)
                 {
                     case "optimizeSpeed":
                         graphics.SmoothingMode = SmoothingMode.HighSpeed;
-                        //graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+                        graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
                         break;
                     case "optimizeLegibility":
                         graphics.SmoothingMode = SmoothingMode.HighQuality;
-                        //graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                        graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
                         break;
                     case "geometricPrecision":
                         graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        //graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                        graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
                         break;
                     default:
                         // "auto"
                         graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        //graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+                        graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
                         break;
                 }
             }
@@ -546,14 +541,11 @@ namespace SharpVectors.Renderers.Gdi
             float _rx = (float)element.Rx.AnimVal.Value;
             float _ry = (float)element.Ry.AnimVal.Value;
 
-            /*if (_cx <= 1 && _cy <= 1 && _rx <= 1 && _ry <= 1)
+            if (_rx <= 0 || _ry <= 0)
             {
-                gp.AddEllipse(_cx-_rx, _cy-_ry, _rx*2, _ry*2);
+                return null;
             }
-            else
-            {
-                gp.AddEllipse(_cx-_rx, _cy-_ry, _rx*2 - 1, _ry*2 - 1);
-            }*/
+
             gp.AddEllipse(_cx - _rx, _cy - _ry, _rx * 2, _ry * 2);
 
             return gp;
@@ -565,16 +557,31 @@ namespace SharpVectors.Renderers.Gdi
 
         public static GraphicsPath CreatePath(SvgRectElement element)
         {
+            float dx     = (float)Math.Round(element.X.AnimVal.Value, 4);
+            float dy     = (float)Math.Round(element.Y.AnimVal.Value, 4);
+            float width  = (float)Math.Round(element.Width.AnimVal.Value, 4);
+            float height = (float)Math.Round(element.Height.AnimVal.Value, 4);
+            float rx     = (float)Math.Round(element.Rx.AnimVal.Value, 4);
+            float ry     = (float)Math.Round(element.Ry.AnimVal.Value, 4);
+
+            if (width <= 0 || height <= 0)
+            {
+                return null;
+            }
+            if (rx <= 0 && ry > 0)
+            {
+                rx = ry;
+            }
+            else if (rx > 0 && ry <= 0)
+            {
+                ry = rx;
+            }
+
             GraphicsPath gp = new GraphicsPath();
 
-            RectangleF rect = new RectangleF((float)element.X.AnimVal.Value,
-                (float)element.Y.AnimVal.Value, (float)element.Width.AnimVal.Value,
-                (float)element.Height.AnimVal.Value);
+            RectangleF rect = new RectangleF(dx, dy, width, height);
 
-            float rx = (float)element.Rx.AnimVal.Value;
-            float ry = (float)element.Ry.AnimVal.Value;
-
-            if (rx == 0F && ry == 0F)
+            if (rx.Equals(0F) && ry.Equals(0F))
             {
                 gp.AddRectangle(rect);
             }
@@ -588,8 +595,8 @@ namespace SharpVectors.Renderers.Gdi
 
         public static void AddRoundedRect(GraphicsPath path, RectangleF rect, float rx, float ry)
         {
-            if (rx == 0F) rx = ry;
-            else if (ry == 0F) ry = rx;
+            if (rx.Equals(0F)) rx = ry;
+            else if (ry.Equals(0F)) ry = rx;
 
             rx = Math.Min(rect.Width / 2, rx);
             ry = Math.Min(rect.Height / 2, ry);

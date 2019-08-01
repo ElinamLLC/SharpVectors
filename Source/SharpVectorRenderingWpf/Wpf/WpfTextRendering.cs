@@ -353,6 +353,9 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     // Suspend the rendering...
                     _isMeasuring = true;
+                    Point savedPt = new Point(ctp.X, ctp.Y);
+
+                    _textContext.BeginMeasure(nodeCount);
 
                     for (int i = 0; i < nodeCount; i++)
                     {
@@ -421,6 +424,10 @@ namespace SharpVectors.Renderers.Wpf
                             }
                         }
                     }
+
+                    _textContext.EndMeasure();
+
+                    ctp = savedPt;
 
                     ctp.X -= (_textWidth / 2d);
 
@@ -744,6 +751,9 @@ namespace SharpVectors.Renderers.Wpf
         private void AddTRefElementRun(SvgTRefElement element, ref Point ctp,
             bool isVertical, bool isSingleLine)
         {
+            _textContext.PositioningElement = element;
+            _textContext.PositioningStart = new Point(ctp.X, ctp.Y);
+
             WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
             ctp = placement.Location;
             double rotate = placement.Rotation;
@@ -751,6 +761,8 @@ namespace SharpVectors.Renderers.Wpf
             {
                 placement = null; // render it useless
             }
+
+            _textContext.PositioningEnd = new Point(ctp.X, ctp.Y);
 
             if (isVertical)
             {
@@ -790,6 +802,9 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
+            _textContext.PositioningElement = element;
+            _textContext.PositioningStart = new Point(ctp.X, ctp.Y);
+
             WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
             ctp = placement.Location;
             double rotate = placement.Rotation;
@@ -797,6 +812,8 @@ namespace SharpVectors.Renderers.Wpf
             {
                 placement = null; // render it useless
             }
+
+            _textContext.PositioningEnd = new Point(ctp.X, ctp.Y);
 
             var comparer = StringComparison.OrdinalIgnoreCase;
 

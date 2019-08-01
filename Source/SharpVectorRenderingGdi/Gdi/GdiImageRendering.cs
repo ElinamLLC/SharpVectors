@@ -8,9 +8,9 @@ using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
 {
-	/// <summary>
-	/// Summary description for SvgImageGraphicsNode.
-	/// </summary>
+    /// <summary>
+    /// Summary description for GdiImageRendering.
+    /// </summary>
     public sealed class GdiImageRendering : GdiRendering
     {
         #region Private Fields
@@ -37,19 +37,32 @@ namespace SharpVectors.Renderers.Gdi
 
 			ImageAttributes imageAttributes = new ImageAttributes();
 
-			string sOpacity = iElement.GetPropertyValue("opacity");
-			if (sOpacity != null && sOpacity.Length > 0)
-			{
-				double opacity = SvgNumber.ParseNumber(sOpacity);
-				ColorMatrix myColorMatrix = new ColorMatrix();
-				myColorMatrix.Matrix00 = 1.00f; // Red
-				myColorMatrix.Matrix11 = 1.00f; // Green
-				myColorMatrix.Matrix22 = 1.00f; // Blue
-				myColorMatrix.Matrix33 = (float)opacity; // alpha
-				myColorMatrix.Matrix44 = 1.00f; // w
+            float opacityValue = -1;
 
-				imageAttributes.SetColorMatrix(myColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-			}
+            string opacity = iElement.GetAttribute("opacity");
+
+            if (string.IsNullOrWhiteSpace(opacity))
+            {
+                opacity = iElement.GetPropertyValue("opacity");
+            }
+            if (!string.IsNullOrWhiteSpace(opacity))
+            {
+                opacityValue = (float)SvgNumber.ParseNumber(opacity);
+                opacityValue = Math.Min(opacityValue, 1);
+                opacityValue = Math.Max(opacityValue, 0);
+            }
+
+            if (opacityValue >= 0 && opacityValue < 1)
+            {
+				ColorMatrix colorMatrix = new ColorMatrix();
+				colorMatrix.Matrix00 = 1.00f; // Red
+				colorMatrix.Matrix11 = 1.00f; // Green
+				colorMatrix.Matrix22 = 1.00f; // Blue
+				colorMatrix.Matrix33 = opacityValue; // alpha
+				colorMatrix.Matrix44 = 1.00f; // w
+
+				imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            }
 
             float width  = (float)iElement.Width.AnimVal.Value;
 			float height = (float)iElement.Height.AnimVal.Value;
@@ -58,38 +71,141 @@ namespace SharpVectors.Renderers.Gdi
                 (float)iElement.Y.AnimVal.Value, (float)iElement.Width.AnimVal.Value,
                 (float)iElement.Height.AnimVal.Value);
 
-			Image image = null;
-			if (iElement.IsSvgImage)
-			{
-				SvgWindow wnd = GetSvgWindow();
-                _embeddedRenderer.BackColor = Color.Empty;
-                _embeddedRenderer.Render(wnd.Document);
+            RectangleF srcRect;
+            RectangleF clipRect = destRect;
 
-                image = _embeddedRenderer.RasterImage;
-			}
-			else
+            var container = graphics.BeginContainer();
+            graphics.SetClip(new Region(clipRect), System.Drawing.Drawing2D.CombineMode.Intersect);
+
+            Image image = null;
+            SvgWindow svgWnd = null;
+
+            if (iElement.IsSvgImage)
+			{
+				svgWnd = GetSvgWindow(graphics);
+                if (width > 0 && height > 0)
+                {
+                    srcRect = new RectangleF(0, 0, width, height);
+                }
+                else
+                {
+                    SvgSvgElement svgEl = (SvgSvgElement)svgWnd.Document.RootElement;
+
+                    SvgSizeF size = svgEl.GetSize();
+
+                    srcRect = new RectangleF(new PointF(0, 0), new SizeF(size.Width, size.Height));
+                }
+            }
+            else
 			{
 				image = GetBitmap(iElement);
-			}
+                srcRect = new RectangleF(0, 0, image.Width, image.Height);
+            }
 
-			if (image != null)
-			{
-                // code extracted from FitToViewbox
-                var spar = (SvgPreserveAspectRatio)iElement.PreserveAspectRatio.AnimVal ?? new SvgPreserveAspectRatio("none", iElement);
+            ISvgAnimatedPreserveAspectRatio animatedAspectRatio = iElement.PreserveAspectRatio;
+            if (animatedAspectRatio != null && animatedAspectRatio.AnimVal != null)
+            {
+                SvgPreserveAspectRatio aspectRatio = animatedAspectRatio.AnimVal as SvgPreserveAspectRatio;
+                SvgPreserveAspectRatioType aspectRatioType =
+                    (aspectRatio != null) ? aspectRatio.Align : SvgPreserveAspectRatioType.Unknown;
 
-                double[] translateAndScale = spar.FitToViewBox(new SvgRect(0, 0, image.Width, image.Height),
-                                      new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
-                graphics.TranslateTransform((float)translateAndScale[0], (float)translateAndScale[1]);
-                graphics.ScaleTransform((float)translateAndScale[2], (float)translateAndScale[3]);
-                graphics.DrawImage(this, image, new Rectangle(0, 0, image.Width, image.Height), 0f, 0f,
-                     image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
+                if (aspectRatioType != SvgPreserveAspectRatioType.None)
+                {
+                    var fScaleX = destRect.Width / srcRect.Width;
+                    var fScaleY = destRect.Height / srcRect.Height;
+                    var xOffset = 0.0f;
+                    var yOffset = 0.0f;
 
-                image.Dispose();
-                image = null;
+                    SvgMeetOrSlice meetOrSlice = aspectRatio.MeetOrSlice;
+                    if (meetOrSlice == SvgMeetOrSlice.Slice)
+                    {
+                        fScaleX = Math.Max(fScaleX, fScaleY);
+                        fScaleY = Math.Max(fScaleX, fScaleY);
+                    }
+                    else
+                    {
+                        fScaleX = Math.Min(fScaleX, fScaleY);
+                        fScaleY = Math.Min(fScaleX, fScaleY);
+                    }
+
+                    switch (aspectRatioType)
+                    {
+                        case SvgPreserveAspectRatioType.XMinYMin:
+                            break;
+                        case SvgPreserveAspectRatioType.XMidYMin:
+                            xOffset = (destRect.Width - srcRect.Width * fScaleX) / 2;
+                            break;
+                        case SvgPreserveAspectRatioType.XMaxYMin:
+                            xOffset = (destRect.Width - srcRect.Width * fScaleX);
+                            break;
+                        case SvgPreserveAspectRatioType.XMinYMid:
+                            yOffset = (destRect.Height - srcRect.Height * fScaleY) / 2;
+                            break;
+                        case SvgPreserveAspectRatioType.XMidYMid:
+                            xOffset = (destRect.Width - srcRect.Width * fScaleX) / 2;
+                            yOffset = (destRect.Height - srcRect.Height * fScaleY) / 2;
+                            break;
+                        case SvgPreserveAspectRatioType.XMaxYMid:
+                            xOffset = (destRect.Width - srcRect.Width * fScaleX);
+                            yOffset = (destRect.Height - srcRect.Height * fScaleY) / 2;
+                            break;
+                        case SvgPreserveAspectRatioType.XMinYMax:
+                            yOffset = (destRect.Height - srcRect.Height * fScaleY);
+                            break;
+                        case SvgPreserveAspectRatioType.XMidYMax:
+                            xOffset = (destRect.Width - srcRect.Width * fScaleX) / 2;
+                            yOffset = (destRect.Height - srcRect.Height * fScaleY);
+                            break;
+                        case SvgPreserveAspectRatioType.XMaxYMax:
+                            xOffset = (destRect.Width - srcRect.Width * fScaleX);
+                            yOffset = (destRect.Height - srcRect.Height * fScaleY);
+                            break;
+                    }
+
+                    destRect = new RectangleF(destRect.X + xOffset, destRect.Y + yOffset,
+                                                srcRect.Width * fScaleX, srcRect.Height * fScaleY);
+                }
+                if (image != null)
+			    {
+                    SvgColorProfileElement colorProfile = (SvgColorProfileElement)iElement.ColorProfile;
+                    if (colorProfile != null)
+                    {
+                        SvgUriReference svgUri = colorProfile.UriReference;
+                        Uri profileUri = new Uri(svgUri.AbsoluteUri);
+
+                        imageAttributes.SetOutputChannelColorProfile(profileUri.LocalPath, ColorAdjustType.Default);
+                    }
+
+                    graphics.DrawImage(this, image, destRect, srcRect, GraphicsUnit.Pixel, imageAttributes);
+
+                    image.Dispose();
+                    image = null;
+                }
+                else if (iElement.IsSvgImage && svgWnd != null)
+                {
+                    svgWnd.Resize((int)srcRect.Width, (int)srcRect.Height);
+
+                    var currOffset = new PointF(graphics.Transform.OffsetX, graphics.Transform.OffsetY);
+                    if (!currOffset.IsEmpty)
+                    {
+                        graphics.TranslateTransform(-currOffset.X, -currOffset.Y);
+                    }
+                    graphics.ScaleTransform(destRect.Width / srcRect.Width, destRect.Height / srcRect.Height);
+                    if (!currOffset.IsEmpty)
+                    {
+                        graphics.TranslateTransform(currOffset.X + destRect.X, currOffset.Y + destRect.Y);
+                    }
+
+                    _embeddedRenderer.Render(svgWnd.Document);
+                }
+
+                graphics.ResetClip();
+                graphics.EndContainer(container);
 			}
 
             if (_embeddedRenderer != null)
             {
+                _embeddedRenderer.GdiGraphics = null;
                 _embeddedRenderer.Dispose();
                 _embeddedRenderer = null;
             }
@@ -111,20 +227,22 @@ namespace SharpVectors.Renderers.Gdi
                 (int)Math.Round(rect.Width), (int)Math.Round(rect.Height));
 	    }
 
-        private SvgWindow GetSvgWindow()
+        private SvgWindow GetSvgWindow(GdiGraphics graphics)
 		{
-            if (_embeddedRenderer == null)
-            {
-                _embeddedRenderer = new GdiGraphicsRenderer();
-            }
-
 			SvgImageElement iElm = this.Element as SvgImageElement;
 			SvgWindow wnd = iElm.SvgWindow;
-            wnd.Renderer  = _embeddedRenderer;
 
-            _embeddedRenderer.Window = wnd;
+            if (_embeddedRenderer == null)
+            {
+                _embeddedRenderer = new GdiGraphicsRenderer(graphics, wnd);
+            }
+            else
+            {
+                wnd.Renderer = _embeddedRenderer;
+                _embeddedRenderer.Window = wnd;
+            }
 
-			return wnd;
+            return wnd;
 		}
 
         private Image GetBitmap(SvgImageElement element)
@@ -138,7 +256,7 @@ namespace SharpVectors.Renderers.Gdi
                     Uri imageUri = new Uri(svgUri.AbsoluteUri);
                     if (imageUri.IsFile && File.Exists(imageUri.LocalPath))
                     {
-                        return Image.FromFile(imageUri.LocalPath);
+                        return Image.FromFile(imageUri.LocalPath, element.ColorProfile != null);
                     }
 
                     WebResponse resource = svgUri.ReferencedResource;
@@ -153,7 +271,7 @@ namespace SharpVectors.Renderers.Gdi
                         return null;
                     }
  
-                    return Image.FromStream(stream);
+                    return Image.FromStream(stream, element.ColorProfile != null);
                 }
 
                 string sURI    = element.Href.AnimVal;
@@ -168,7 +286,7 @@ namespace SharpVectors.Renderers.Gdi
 
                 MemoryStream ms = new MemoryStream(bResult);
 
-                return Image.FromStream(ms);
+                return Image.FromStream(ms, element.ColorProfile != null);
             }
             return null;
         }

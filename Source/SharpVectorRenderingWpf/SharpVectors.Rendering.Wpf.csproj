@@ -77,6 +77,7 @@
     <Compile Include="Texts\WpfVertTextRenderer.cs" />
     <Compile Include="Utils\WpfApplicationContext.cs" />
     <Compile Include="Utils\WpfCacheManager.cs" />
+    <Compile Include="Utils\WpfResources.cs" />
     <Compile Include="Utils\WpfSvgWindow.cs" />
     <Compile Include="Utils\WpfConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

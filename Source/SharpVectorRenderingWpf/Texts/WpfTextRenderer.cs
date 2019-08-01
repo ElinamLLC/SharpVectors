@@ -25,7 +25,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected string _actualFontName;
 
-        protected DrawingContext _textContext;
+        protected DrawingContext _drawContext;
         protected SvgTextElement _textElement;
 
         protected WpfTextRendering _textRendering;
@@ -58,14 +58,14 @@ namespace SharpVectors.Renderers.Texts
         public override bool IsInitialized
         {
             get {
-                return (_textContext != null && _context != null);
+                return (_drawContext != null && _context != null);
             }
         }
 
-        public DrawingContext TextContext
+        public DrawingContext DrawContext
         {
             get {
-                return _textContext;
+                return _drawContext;
             }
         }
 
@@ -122,6 +122,17 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        protected WpfTextContext TextContext
+        {
+            get {
+                if (_textRendering != null)
+                {
+                    return _textRendering.TextContext;
+                }
+                return null;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -139,13 +150,13 @@ namespace SharpVectors.Renderers.Texts
                     "The drawing context is required, and cannot be null (or Nothing).");
             }
 
-            _textContext = textContext;
+            _drawContext = textContext;
             _context     = drawContext;
         }
 
         public virtual void Uninitialize()
         {
-            _textContext = null;
+            _drawContext = null;
             _context     = null;
         }
 
@@ -229,10 +240,15 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        protected void AddTextWidth(double textWidth)
+        protected void AddTextWidth(Point location, double textWidth)
         {
             if (_textRendering != null && !textWidth.Equals(0))
             {
+                var textContext = _textRendering.TextContext;
+                if (textContext != null)
+                {
+                    textContext.AddTextSize(location, textWidth);
+                }
                 _textRendering.AddTextWidth(textWidth);
             }
         }

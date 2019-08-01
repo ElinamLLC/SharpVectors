@@ -96,7 +96,7 @@ namespace SharpVectors.Renderers.Texts
             ISvgAnimatedLength pathOffset  = textPath.StartOffset;
             SvgTextPathMethod pathMethod   = (SvgTextPathMethod)textPath.Method.BaseVal;
             SvgTextPathSpacing pathSpacing = (SvgTextPathSpacing)textPath.Spacing.BaseVal;
-            pathDrawing.DrawTextPath(_textContext, pathGeometry, pathOffset,
+            pathDrawing.DrawTextPath(_drawContext, pathGeometry, pathOffset,
                 stringFormat.Alignment, pathMethod, pathSpacing);
 
             pathDrawing.EndTextPath();

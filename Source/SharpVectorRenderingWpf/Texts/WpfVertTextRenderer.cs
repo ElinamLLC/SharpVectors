@@ -72,15 +72,15 @@ namespace SharpVectors.Renderers.Texts
                 DrawingGroup verticalGroup = new DrawingGroup();
 
                 DrawingContext verticalContext = verticalGroup.Open();
-                DrawingContext currentContext  = _textContext;
+                DrawingContext currentContext  = _drawContext;
 
-                _textContext = verticalContext;
+                _drawContext = verticalContext;
 
                 this.DrawSingleLineText(element, ref ctp, textRun, rotate, placement);
 
                 verticalContext.Close();
 
-                _textContext = currentContext;
+                _drawContext = currentContext;
 
                 if (verticalGroup.Children.Count == 1)
                 {
@@ -187,7 +187,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (!this.IsMeasuring)
                 {
-                    _textContext.DrawDrawing(verticalGroup);
+                    _drawContext.DrawDrawing(verticalGroup);
                 }
 
                 if (tr < textRunList.Count)
@@ -252,15 +252,15 @@ namespace SharpVectors.Renderers.Texts
                 DrawingGroup verticalGroup = new DrawingGroup();
 
                 DrawingContext verticalContext = verticalGroup.Open();
-                DrawingContext currentContext  = _textContext;
+                DrawingContext currentContext  = _drawContext;
 
-                _textContext = verticalContext;
+                _drawContext = verticalContext;
 
                 this.DrawTextRun(element, ref ctp, textRun, rotate, placement);
 
                 verticalContext.Close();
 
-                _textContext = currentContext;
+                _drawContext = currentContext;
 
                 if (verticalGroup.Children.Count == 1)
                 {
@@ -364,7 +364,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (!this.IsMeasuring)
                 {
-                    _textContext.DrawDrawing(verticalGroup);
+                    _drawContext.DrawDrawing(verticalGroup);
                 }
 
                 if (tr < textRunList.Count)
@@ -429,8 +429,6 @@ namespace SharpVectors.Renderers.Texts
             WpfFontFamilyVisitor fontFamilyVisitor = _context.FontFamilyVisitor;
             if (!string.IsNullOrWhiteSpace(_actualFontName) && fontFamilyVisitor != null)
             {
-                //WpfFontFamilyInfo currentFamily = new WpfFontFamilyInfo(fontFamily, fontWeight,
-                //    fontStyle, fontStretch);
                 WpfFontFamilyInfo familyInfo = fontFamilyVisitor.Visit(_actualFontName,
                     fontFamilyInfo, _context);
                 if (familyInfo != null && !familyInfo.IsEmpty)
@@ -473,7 +471,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (this.IsMeasuring)
                 {
-                    this.AddTextWidth(formattedText.WidthIncludingTrailingWhitespace);
+                    this.AddTextWidth(ctp, formattedText.WidthIncludingTrailingWhitespace);
                     return;
                 }
 
@@ -526,14 +524,14 @@ namespace SharpVectors.Renderers.Texts
                     TransformGroup group = new TransformGroup();
                     group.Children.Add(rotateAt);
                     group.Children.Add(translateAt);
-                    _textContext.PushTransform(group);
+                    _drawContext.PushTransform(group);
                 }
                 else
                 {
-                    _textContext.PushTransform(rotateAt);
+                    _drawContext.PushTransform(rotateAt);
                 }
 
-                _textContext.DrawText(formattedText, textPoint);
+                _drawContext.DrawText(formattedText, textPoint);
 
                 if (alignment == TextAlignment.Center)
                     bboxWidth /= 2f;
@@ -549,13 +547,13 @@ namespace SharpVectors.Renderers.Texts
                 //}
                 if (rotateAt != null)
                 {
-                    _textContext.Pop();
+                    _drawContext.Pop();
                 }
             }
             else
             {
                 RotateTransform rotateAt = new RotateTransform(90, ctp.X, ctp.Y);
-                _textContext.PushTransform(rotateAt);
+                _drawContext.PushTransform(rotateAt);
 
                 double spacing = Convert.ToDouble(letterSpacing);
                 for (int i = 0; i < text.Length; i++)
@@ -566,7 +564,7 @@ namespace SharpVectors.Renderers.Texts
 
                     if (this.IsMeasuring)
                     {
-                        this.AddTextWidth(formattedText.WidthIncludingTrailingWhitespace);
+                        this.AddTextWidth(ctp, formattedText.WidthIncludingTrailingWhitespace);
                         continue;
                     }
 
@@ -588,7 +586,7 @@ namespace SharpVectors.Renderers.Texts
 
                     Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
-                    _textContext.DrawText(formattedText, textPoint);
+                    _drawContext.DrawText(formattedText, textPoint);
 
                     //float bboxWidth = (float)formattedText.Width;
                     double bboxWidth = formattedText.WidthIncludingTrailingWhitespace;
@@ -603,7 +601,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (rotateAt != null)
                 {
-                    _textContext.Pop();
+                    _drawContext.Pop();
                 }
             }
         }
@@ -693,9 +691,9 @@ namespace SharpVectors.Renderers.Texts
                 Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
                 RotateTransform rotateAt = new RotateTransform(90, ctp.X, ctp.Y);
-                _textContext.PushTransform(rotateAt);
+                _drawContext.PushTransform(rotateAt);
 
-                _textContext.DrawText(formattedText, textPoint);
+                _drawContext.DrawText(formattedText, textPoint);
 
                 //float bboxWidth = (float)formattedText.Width;
                 double bboxWidth = formattedText.WidthIncludingTrailingWhitespace;
@@ -709,13 +707,13 @@ namespace SharpVectors.Renderers.Texts
 
                 if (rotateAt != null)
                 {
-                    _textContext.Pop();
+                    _drawContext.Pop();
                 }
             }
             else
             {
                 RotateTransform rotateAt = new RotateTransform(90, ctp.X, ctp.Y);
-                _textContext.PushTransform(rotateAt);
+                _drawContext.PushTransform(rotateAt);
 
                 float spacing = Convert.ToSingle(letterSpacing);
                 for (int i = 0; i < text.Length; i++)
@@ -744,7 +742,7 @@ namespace SharpVectors.Renderers.Texts
 
                     Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
-                    _textContext.DrawText(formattedText, textPoint);
+                    _drawContext.DrawText(formattedText, textPoint);
 
                     //float bboxWidth = (float)formattedText.Width;
                     double bboxWidth = formattedText.WidthIncludingTrailingWhitespace;
@@ -759,7 +757,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (rotateAt != null)
                 {
-                    _textContext.Pop();
+                    _drawContext.Pop();
                 }
             }
         }
