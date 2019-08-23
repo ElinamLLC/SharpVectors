@@ -244,23 +244,30 @@ namespace SharpVectors.Converters.Shapes
 
                 if (fillNode != null)
                 {
-                    switch (fillNode)
+                    SvgLinearGradientElement linearGradient;
+                    SvgRadialGradientElement radialGradient;
+                    SvgPatternElement pattern;
+                    if (TryCast.Cast(fillNode, out linearGradient))
                     {
-                        case SvgLinearGradientElement linearGradient:
-                            brush = ConstructBrush(linearGradient, bounds, transform);
-                            return true;
-                        case SvgRadialGradientElement radialGradient:
-                            brush = ConstructBrush(radialGradient, bounds, transform);
-                            return true;
-                        case SvgPatternElement pattern:
-                            brush = ConstructBrush(pattern, bounds, transform);
-                            return true;
+                        brush = ConstructBrush(linearGradient, bounds, transform);
+                        return true;
+                    }
+                    if (TryCast.Cast(fillNode, out radialGradient))
+                    {
+                        brush = ConstructBrush(radialGradient, bounds, transform);
+                        return true;
+                    }
+                    if (TryCast.Cast(fillNode, out pattern))
+                    {
+                        brush = ConstructBrush(pattern, bounds, transform);
+                        return true;
                     }
                 }
             }
 
+            Color solidColor;
             if (svgBrush == null || svgBrush.RgbColor == null ||
-                !TryConvertColor(svgBrush.RgbColor, out Color solidColor))
+                !TryConvertColor(svgBrush.RgbColor, out solidColor))
             {
                 brush = null;
                 return false;
@@ -292,7 +299,8 @@ namespace SharpVectors.Converters.Shapes
             if (gradient.SpreadMethod != null)
             {
                 spreadMethod = (SvgSpreadMethod)gradient.SpreadMethod.AnimVal;
-                if (TryGetSpreadMethod(spreadMethod, out GradientSpreadMethod sm))
+                GradientSpreadMethod sm;
+                if (TryGetSpreadMethod(spreadMethod, out sm))
                 {
                     brush.SpreadMethod = sm;
                 }
@@ -363,7 +371,8 @@ namespace SharpVectors.Converters.Shapes
             if (gradient.SpreadMethod != null)
             {
                 SvgSpreadMethod spreadMethod = (SvgSpreadMethod)gradient.SpreadMethod.AnimVal;
-                if (TryGetSpreadMethod(spreadMethod, out GradientSpreadMethod sm))
+                GradientSpreadMethod sm;
+                if (TryGetSpreadMethod(spreadMethod, out sm))
                 {
                     brush.SpreadMethod = sm;
                 }
@@ -564,7 +573,8 @@ namespace SharpVectors.Converters.Shapes
                 LineHeight = GetComputedLineHeight(textContentElement)
             };
 
-            if (textContentElement is SvgTextPositioningElement tpe)
+            SvgTextPositioningElement tpe = textContentElement as SvgTextPositioningElement;
+            if (tpe != null)
             {
                 position = GetCurrentTextPosition(tpe, position);
             }

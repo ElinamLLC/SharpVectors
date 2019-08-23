@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Xml;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace SharpVectors.Dom.Svg
@@ -133,6 +134,11 @@ namespace SharpVectors.Dom.Svg
                         Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
                         if (svgUri.IsFile)
                         {
+                            if (!File.Exists(svgUri.LocalPath))
+                            {
+                                Trace.TraceError("Image file does not exist; " + svgUri.LocalPath);
+                                return null;
+                            }
                             Stream resStream = File.OpenRead(svgUri.LocalPath);
                             doc.Load(absoluteUri, resStream);
                         }

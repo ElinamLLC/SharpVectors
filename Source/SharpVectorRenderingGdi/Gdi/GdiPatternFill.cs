@@ -1,6 +1,7 @@
 using System;
 using System.Xml;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
 using SharpVectors.Dom.Svg;
@@ -25,16 +26,57 @@ namespace SharpVectors.Renderers.Gdi
 
         #endregion
 
+        #region Public Properties
+
+        public override bool IsUserSpace
+        {
+            get {
+                return false;
+            }
+        }
+
+        public override GdiFillType FillType
+        {
+            get {
+                return GdiFillType.Pattern;
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
-        public override Brush GetBrush(RectangleF bounds)
+        public override Brush GetBrush(RectangleF bounds, float opacity = 1)
         {
             Image image = GetImage(bounds);
+            if (image == null)
+            {
+                return new SolidBrush(Color.Black);
+            }
+
             RectangleF destRect = GetDestRect(bounds);
 
-            TextureBrush tb = new TextureBrush(image, destRect);
-            tb.Transform = GetTransformMatrix(bounds);
-            return tb;
+            ImageAttributes imageAttr = null;
+            if (opacity >= 0 && opacity < 1)
+            {
+                imageAttr = new ImageAttributes();
+                ColorMatrix colorMatrix = new ColorMatrix();
+                colorMatrix.Matrix00 = 1.00f;   // Red
+                colorMatrix.Matrix11 = 1.00f;   // Green
+                colorMatrix.Matrix22 = 1.00f;   // Blue
+                colorMatrix.Matrix33 = opacity; // alpha
+                colorMatrix.Matrix44 = 1.00f;   // w
+
+                imageAttr.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                TextureBrush brush = new TextureBrush(image, destRect, imageAttr);
+                brush.Transform = GetTransformMatrix(bounds);
+                return brush;
+            }
+
+            TextureBrush textureBrush = new TextureBrush(image, destRect);
+            textureBrush.Transform = GetTransformMatrix(bounds);
+            return textureBrush;
         }
 
         #endregion
@@ -52,7 +94,7 @@ namespace SharpVectors.Renderers.Gdi
 				oldParent = children[0].ParentNode as XmlElement;
 			}
 
-			for (int i = 0; i<children.Count; i++)
+			for (int i = 0; i < children.Count; i++)
 			{
 				svgElm.AppendChild(children[i]);
 			}
@@ -88,12 +130,47 @@ namespace SharpVectors.Renderers.Gdi
 
 		private Image GetImage(RectangleF bounds)
 		{
-            GdiGraphicsRenderer renderer = new GdiGraphicsRenderer();
-			renderer.Window = _patternElement.OwnerDocument.Window as SvgWindow;
+            // For single image pattern...
+            if (_patternElement.ChildNodes.Count == 1)
+            {
+                var imageElement = _patternElement.ChildNodes[0] as SvgImageElement;
+                if (imageElement != null)
+                {
+                    var image = GdiImageRendering.GetBitmap(imageElement);
+                    if (image != null)
+                    {
+                        return image;
+                    }
+                }
+            }
+
+            GdiGraphicsRenderer renderer = new GdiGraphicsRenderer(true, false);
+            var svgWindow = _patternElement.OwnerDocument.Window as SvgWindow;
+            var ownedWindow = svgWindow.CreateOwnedWindow();
+			renderer.Window = ownedWindow;
 
 			SvgSvgElement elm = MoveIntoSvgElement();
 
-			renderer.Render(elm as SvgElement);
+            int winWidth  = (int)elm.Width.BaseVal.Value;
+            int winHeight = (int)elm.Height.BaseVal.Value;
+            if (winWidth == 0 || winHeight == 0)
+            {
+                var size = elm.GetSize();
+                if (size.Width.Equals(0) || size.Height.Equals(0))
+                {
+                    winWidth  = (int)bounds.Width;
+                    winHeight = (int)bounds.Height;
+                }
+                else
+                {
+                    winWidth  = (int)size.Width;
+                    winHeight = (int)size.Height;
+                }
+            }
+
+            ownedWindow.Resize(winWidth, winHeight);
+
+            renderer.Render(elm as SvgElement);
             Image img = renderer.RasterImage;
 
 			MoveOutOfSvgElement(elm);
@@ -101,31 +178,27 @@ namespace SharpVectors.Renderers.Gdi
 			return img;
 		}
 
-
 		private float CalcPatternUnit(SvgLength length, SvgLengthDirection dir, RectangleF bounds)
 		{
 			if (_patternElement.PatternUnits.AnimVal.Equals((ushort)SvgUnitType.UserSpaceOnUse))
 			{
                 return (float)length.Value;
 			}
+            float calcValue = (float)length.ValueInSpecifiedUnits;
+			if (dir == SvgLengthDirection.Horizontal)
+			{
+				calcValue *= bounds.Width;
+			}
 			else
 			{
-                float calcValue = (float)length.ValueInSpecifiedUnits;
-				if (dir == SvgLengthDirection.Horizontal)
-				{
-					calcValue *= bounds.Width;
-				}
-				else
-				{
-					calcValue *= bounds.Height;
-				}
-				if (length.UnitType == SvgLengthType.Percentage)
-				{
-					calcValue /= 100F;
-				}
-
-				return calcValue;
+				calcValue *= bounds.Height;
 			}
+			if (length.UnitType == SvgLengthType.Percentage)
+			{
+				calcValue /= 100F;
+			}
+
+			return calcValue;
 		}
 
 		private RectangleF GetDestRect(RectangleF bounds)

@@ -33,15 +33,25 @@ namespace SharpVectors.Renderers.Forms
         public SvgPictureBoxWindow(SvgPictureBox control, ISvgRenderer renderer)
             : base(control.Width, control.Height, renderer)
         {
+            if (_svgPictureBox == null)
+            {
+                throw new ArgumentNullException(nameof(control), "control cannot be null");
+            }
+
             _preferUserSize = true;
-            _svgPictureBox = control ?? throw new ArgumentNullException(nameof(control), "control cannot be null");
+            _svgPictureBox  = control;
         }
 
         private SvgPictureBoxWindow(SvgPictureBox control, SvgWindow parentWindow, long innerWidth, long innerHeight)
             : base(parentWindow, innerWidth, innerHeight)
         {
+            if (_svgPictureBox == null)
+            {
+                throw new ArgumentNullException(nameof(control), "control cannot be null");
+            }
+
             _preferUserSize = true;
-            _svgPictureBox = control ?? throw new ArgumentNullException(nameof(control), "control cannot be null");
+            _svgPictureBox  = control;
         }
 
         #endregion

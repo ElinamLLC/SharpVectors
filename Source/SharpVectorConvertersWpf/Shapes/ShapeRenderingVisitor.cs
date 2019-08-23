@@ -109,12 +109,14 @@ namespace SharpVectors.Converters.Shapes
 
         public void Visit(ISvgPathElement element)
         {
-            if (!(element is SvgPathElement pe) || String.IsNullOrEmpty(pe.PathScript))
+            SvgPathElement pe = element as SvgPathElement;
+            if (pe == null || string.IsNullOrEmpty(pe.PathScript))
                 return;
 
             var geometry = new PathGeometry();
 
-            if (TryGetFillRule(pe, out FillRule fillRule))
+            FillRule fillRule;
+            if (TryGetFillRule(pe, out fillRule))
                 geometry.FillRule = fillRule;
 
             try
@@ -134,7 +136,8 @@ namespace SharpVectors.Converters.Shapes
         {
             ISvgPointList list = element.AnimatedPoints;
             ulong nElems = list.NumberOfItems;
-            if (nElems == 0 || !(element is SvgPolygonElement pe))
+            SvgPolygonElement pe = element as SvgPolygonElement;
+            if (nElems == 0 || pe == null)
             {
                 return;
             }
@@ -159,7 +162,8 @@ namespace SharpVectors.Converters.Shapes
 
             PathGeometry geometry = new PathGeometry();
 
-            if (TryGetFillRule(pe, out FillRule fillRule))
+            FillRule fillRule;
+            if (TryGetFillRule(pe, out fillRule))
                 geometry.FillRule = fillRule;
 
             geometry.Figures.Add(polylineFigure);
@@ -171,7 +175,8 @@ namespace SharpVectors.Converters.Shapes
         {
             ISvgPointList list = element.AnimatedPoints;
             ulong nElems = list.NumberOfItems;
-            if (nElems == 0 || !(element is SvgPolylineElement pe))
+            SvgPolylineElement pe = element as SvgPolylineElement;
+            if (nElems == 0 || pe == null)
             {
                 return;
             }
@@ -195,7 +200,8 @@ namespace SharpVectors.Converters.Shapes
 
             PathGeometry geometry = new PathGeometry();
 
-            if (TryGetFillRule(pe, out FillRule fillRule))
+            FillRule fillRule;
+            if (TryGetFillRule(pe, out fillRule))
                 geometry.FillRule = fillRule;
 
             geometry.Figures.Add(polylineFigure);
@@ -274,8 +280,11 @@ namespace SharpVectors.Converters.Shapes
 
             // Now, render the use element...
             var refElement = useElement?.FirstChild;
-            if (refElement is IElementVisitorTarget evt)
+            IElementVisitorTarget evt = refElement as IElementVisitorTarget;
+            if (evt != null)
+            {
                 evt.Accept(this);
+            }
 
             useElement.RemoveChild(refEl);
             useElement.RestoreReferencedElement(refEl);
@@ -313,23 +322,26 @@ namespace SharpVectors.Converters.Shapes
             foreach (var child in element.ChildNodes)
             {
                 Geometry geometry;
-                System.Windows.Shapes.Path shape;
+                Path shape;
                 spanSize = new Size(0, 0);
-                switch (child)
+                SvgTSpanElement tspan;
+                Dom.Text simpleText;
+                if (TryCast.Cast(child, out tspan))
                 {
-                    case SvgTSpanElement tspan:
-                        geometry = ConstructTextGeometry(tspan, tspan.InnerText, position, out spanSize);
-                        shape = WrapGeometry(geometry, tspan);
-                        shape.IsHitTestVisible = false;
-                        DisplayShape(shape, tspan);
-                        break;
-                    case Dom.Text simpleText:
-                        geometry = ConstructTextGeometry(element as SvgTextElement, simpleText.InnerText, position, out spanSize);
-                        shape = WrapGeometry(geometry, element);
-                        shape.IsHitTestVisible = false;
-                        DisplayShape(shape, element);
-                        break;
+                    geometry = ConstructTextGeometry(tspan, tspan.InnerText, position, out spanSize);
+                    shape = WrapGeometry(geometry, tspan);
+                    shape.IsHitTestVisible = false;
+                    DisplayShape(shape, tspan);
                 }
+                else if (TryCast.Cast(child, out simpleText))
+                {
+                    geometry = ConstructTextGeometry(element as SvgTextElement, 
+                        simpleText.InnerText, position, out spanSize);
+                    shape = WrapGeometry(geometry, element);
+                    shape.IsHitTestVisible = false;
+                    DisplayShape(shape, element);
+                }
+
                 position.Offset(spanSize.Width, 0);
             }
         }
@@ -344,8 +356,9 @@ namespace SharpVectors.Converters.Shapes
 
         private Path WrapGeometry(Geometry geometry, ISvgElement element)
         {
-            System.Windows.Shapes.Path path = new System.Windows.Shapes.Path();
-            if (TryGetTransform(element as ISvgTransformable, out Transform transform))
+            Path path = new Path();
+            Transform transform;
+            if (TryGetTransform(element as ISvgTransformable, out transform))
                 geometry.Transform = transform;
             path.Data = geometry;
             return path;
@@ -397,26 +410,40 @@ namespace SharpVectors.Converters.Shapes
             }
 
             // Stroke
-            if (TryGetBrush(element, "stroke", shapeBounds, shapeTransform, out Brush stroke))
+            Brush stroke;
+            if (TryGetBrush(element, "stroke", shapeBounds, shapeTransform, out stroke))
                 style.Setters.Add(new Setter(Shape.StrokeProperty, stroke));
-            if (TryGetStrokeWidth(element, out double strokeWidth))
+
+            double strokeWidth;
+            if (TryGetStrokeWidth(element, out strokeWidth))
                 style.Setters.Add(new Setter(Shape.StrokeThicknessProperty, strokeWidth));
-            if (TryGetMiterLimit(element, strokeWidth, out double miterLimit))
+
+            double miterLimit;
+            if (TryGetMiterLimit(element, strokeWidth, out miterLimit))
                 style.Setters.Add(new Setter(Shape.StrokeMiterLimitProperty, miterLimit));
-            if (TryGetLineJoin(element, out PenLineJoin lineJoin))
+
+            PenLineJoin lineJoin;
+            if (TryGetLineJoin(element, out lineJoin))
                 style.Setters.Add(new Setter(Shape.StrokeLineJoinProperty, lineJoin));
-            if (TryGetLineCap(element, out PenLineCap lineCap))
+
+            PenLineCap lineCap;
+            if (TryGetLineCap(element, out lineCap))
             {
                 style.Setters.Add(new Setter(Shape.StrokeStartLineCapProperty, lineCap));
                 style.Setters.Add(new Setter(Shape.StrokeEndLineCapProperty, lineCap));
             }
-            if (TryGetDashArray(element, strokeWidth, out DoubleCollection dashArray))
+
+            DoubleCollection dashArray;
+            if (TryGetDashArray(element, strokeWidth, out dashArray))
                 style.Setters.Add(new Setter(Shape.StrokeDashArrayProperty, dashArray));
-            if (TryGetDashOffset(element, out double dashOffset))
+
+            double dashOffset;
+            if (TryGetDashOffset(element, out dashOffset))
                 style.Setters.Add(new Setter(Shape.StrokeDashOffsetProperty, dashOffset));
 
             // Fill
-            if (TryGetBrush(element, "fill", shapeBounds, shapeTransform, out Brush fill))
+            Brush fill;
+            if (TryGetBrush(element, "fill", shapeBounds, shapeTransform, out fill))
                 style.Setters.Add(new Setter(Shape.FillProperty, fill));
 
             return style;

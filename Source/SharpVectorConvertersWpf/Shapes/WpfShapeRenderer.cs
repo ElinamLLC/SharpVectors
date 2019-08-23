@@ -16,7 +16,8 @@ namespace SharpVectors.Converters.Shapes
 
         public ISvgRect GetRenderedBounds(ISvgElement element, float margin)
         {
-            return (element is ISvgSvgElement svgElement) ? svgElement.ViewBox.AnimVal : SvgRect.Empty;
+            ISvgSvgElement svgElement = element as ISvgSvgElement;
+            return (svgElement != null) ? svgElement.ViewBox.AnimVal : SvgRect.Empty;
         }
 
         public void InvalidateRect(SvgRectF rect)
@@ -24,7 +25,8 @@ namespace SharpVectors.Converters.Shapes
 
         public void Render(ISvgElement node)
         {
-            if (node is Dom.IElementVisitorTarget evt)
+            Dom.IElementVisitorTarget evt = node as Dom.IElementVisitorTarget;
+            if (evt != null)
             {
                 RenderElement(evt);
             }

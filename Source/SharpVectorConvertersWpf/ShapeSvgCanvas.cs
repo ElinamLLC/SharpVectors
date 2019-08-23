@@ -47,8 +47,8 @@ namespace SharpVectors.Converters
         /// </summary>
         public string Source
         {
-            get => (string)GetValue(SourceProperty);
-            set => SetValue(SourceProperty, value);
+            get { return (string)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace SharpVectors.Converters
         /// </remarks>
         public Style ItemStyle
         {
-            get => (Style)GetValue(ItemStyleProperty);
-            set => SetValue(ItemStyleProperty, value);
+            get { return (Style)GetValue(ItemStyleProperty); }
+            set { SetValue(ItemStyleProperty, value); }
         }
 
         /// <summary>

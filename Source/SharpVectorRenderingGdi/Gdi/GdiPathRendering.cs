@@ -73,9 +73,9 @@ namespace SharpVectors.Renderers.Gdi
 			{
 				if (brush is PathGradientBrush) 
 				{
-					GdiGradientFill gps = fillPaint.PaintFill as GdiGradientFill;
+					var gps = fillPaint.PaintFill as GdiRadialGradientFill;
 						
-					graphics.SetClip(gps.GetRadialGradientRegion(gp.GetBounds()), CombineMode.Exclude);
+					graphics.SetClip(gps.GetRadialRegion(gp.GetBounds()), CombineMode.Exclude);
 
 					SolidBrush tempBrush = new SolidBrush(((PathGradientBrush)brush).InterpolationColors.Colors[0]);
 					graphics.FillPath(this, tempBrush,gp);
@@ -92,10 +92,10 @@ namespace SharpVectors.Renderers.Gdi
 			{
 				if (pen.Brush is PathGradientBrush) 
 				{
-					GdiGradientFill gps = strokePaint.PaintFill as GdiGradientFill;
+					var gps = strokePaint.PaintFill as GdiRadialGradientFill;
 					GdiGraphicsContainer container = graphics.BeginContainer();
 
-					graphics.SetClip(gps.GetRadialGradientRegion(gp.GetBounds()), CombineMode.Exclude);
+					graphics.SetClip(gps.GetRadialRegion(gp.GetBounds()), CombineMode.Exclude);
 
 					SolidBrush tempBrush = new SolidBrush(((PathGradientBrush)pen.Brush).InterpolationColors.Colors[0]);
 					Pen tempPen = new Pen(tempBrush, pen.Width);

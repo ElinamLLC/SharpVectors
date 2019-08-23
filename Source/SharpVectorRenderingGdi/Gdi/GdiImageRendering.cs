@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -74,7 +75,7 @@ namespace SharpVectors.Renderers.Gdi
             RectangleF srcRect;
             RectangleF clipRect = destRect;
 
-            var container = graphics.BeginContainer();
+//            var container = graphics.BeginContainer();
             graphics.SetClip(new Region(clipRect), System.Drawing.Drawing2D.CombineMode.Intersect);
 
             Image image = null;
@@ -99,6 +100,10 @@ namespace SharpVectors.Renderers.Gdi
             else
 			{
 				image = GetBitmap(iElement);
+                if (image == null)
+                {
+                    return;
+                }
                 srcRect = new RectangleF(0, 0, image.Width, image.Height);
             }
 
@@ -109,7 +114,8 @@ namespace SharpVectors.Renderers.Gdi
                 SvgPreserveAspectRatioType aspectRatioType =
                     (aspectRatio != null) ? aspectRatio.Align : SvgPreserveAspectRatioType.Unknown;
 
-                if (aspectRatioType != SvgPreserveAspectRatioType.None)
+                if (aspectRatio != null && aspectRatioType != SvgPreserveAspectRatioType.None &&
+                    aspectRatioType != SvgPreserveAspectRatioType.Unknown)
                 {
                     var fScaleX = destRect.Width / srcRect.Width;
                     var fScaleY = destRect.Height / srcRect.Height;
@@ -200,7 +206,7 @@ namespace SharpVectors.Renderers.Gdi
                 }
 
                 graphics.ResetClip();
-                graphics.EndContainer(container);
+//                graphics.EndContainer(container);
 			}
 
             if (_embeddedRenderer != null)
@@ -245,7 +251,7 @@ namespace SharpVectors.Renderers.Gdi
             return wnd;
 		}
 
-        private Image GetBitmap(SvgImageElement element)
+        public static Image GetBitmap(SvgImageElement element)
         {
             var comparer = StringComparison.OrdinalIgnoreCase;
             if (!element.IsSvgImage)
@@ -274,18 +280,55 @@ namespace SharpVectors.Renderers.Gdi
                     return Image.FromStream(stream, element.ColorProfile != null);
                 }
 
-                string sURI    = element.Href.AnimVal;
+                string sURI    = element.Href.AnimVal.Replace(" ", "").Trim();
+                sURI = sURI.Replace(@"\n", "");
                 int nColon     = sURI.IndexOf(":", comparer);
                 int nSemiColon = sURI.IndexOf(";", comparer);
                 int nComma     = sURI.IndexOf(",", comparer);
 
                 string sMimeType = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
                 string sContent  = sURI.Substring(nComma + 1);
+                
+                sContent = sContent.Replace('-', '+').Replace('_', '/');
+                sContent = sContent.PadRight(4 * ((sContent.Length + 3) / 4), '=');
                 byte[] bResult   = Convert.FromBase64CharArray(sContent.ToCharArray(), 
                     0, sContent.Length);
 
-                MemoryStream ms = new MemoryStream(bResult);
+                if (sMimeType.Equals("image/svg+xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    var svgData     = Convert.FromBase64String(Convert.ToBase64String(bResult));
+                    var svgFragment = Encoding.ASCII.GetString(svgData);
 
+                    GdiGraphicsRenderer renderer = new GdiGraphicsRenderer(true, false);
+
+                    var currentWindow = element.OwnerDocument.Window as SvgWindow;
+                    var svgWindow = currentWindow.CreateOwnedWindow();
+                    renderer.Window = svgWindow;
+
+                    SvgDocument doc = svgWindow.CreateEmptySvgDocument();
+                    doc.LoadXml(svgFragment);
+                    svgWindow.Document = doc;
+
+                    SvgSvgElement elm = (SvgSvgElement)doc.RootElement;
+
+                    int winWidth = (int)elm.Width.BaseVal.Value;
+                    int winHeight = (int)elm.Height.BaseVal.Value;
+                    if (winWidth == 0 || winHeight == 0)
+                    {
+                        var size = elm.GetSize();
+                        winWidth = (int)size.Width;
+                        winHeight = (int)size.Height;
+                    }
+
+                    svgWindow.Resize(winWidth, winHeight);
+
+                    renderer.Render(elm as SvgElement);
+                    Image img = renderer.RasterImage;
+
+                    return img;
+                }
+
+                MemoryStream ms = new MemoryStream(bResult);
                 return Image.FromStream(ms, element.ColorProfile != null);
             }
             return null;

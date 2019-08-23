@@ -74,6 +74,7 @@ namespace SharpVectors.Dom.Svg
 
             if (match.Groups["meet"].Success)
             {
+                _isDefaultAlign = false;
                 switch (match.Groups["meet"].Value)
                 {
                     case "slice":

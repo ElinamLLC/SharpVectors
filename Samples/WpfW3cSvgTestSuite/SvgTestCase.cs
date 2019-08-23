@@ -26,8 +26,26 @@ namespace WpfW3cSvgTestSuite
             get { return _revision; }
             set { _revision = value; }
         }
-        public string Name { get => _name; set => _name = value; }
-        public IList<string> Paragraphs { get => _paragraphs; set => _paragraphs = value; }
+
+        public string Name
+        {
+            get {
+                return _name;
+            }
+            set {
+                this._name = value;
+            }
+        }
+
+        public IList<string> Paragraphs
+        {
+            get {
+                return _paragraphs;
+            }
+            set {
+                this._paragraphs = value;
+            }
+        }
 
         public XmlSchema GetSchema()
         {

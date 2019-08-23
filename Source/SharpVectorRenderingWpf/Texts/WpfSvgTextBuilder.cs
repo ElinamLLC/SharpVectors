@@ -179,10 +179,14 @@ namespace SharpVectors.Renderers.Texts
 
             for (int i = 0; i < text.Length; i++)
             {
-                if (!_glyphs.TryGetValue(text.Substring(i, 1), out SvgGlyphElement glyph))
+                SvgGlyphElement glyph;
+                if (!_glyphs.TryGetValue(text.Substring(i, 1), out glyph))
+                {
                     glyph = _missingGlyph;
+                }
+                SvgKernElement kern;
                 if (prevGlyph != null && _kerning.TryGetValue(prevGlyph.GlyphName + "|" + glyph.GlyphName, 
-                    out SvgKernElement kern))
+                    out kern))
                 {
                     xPos -= kern.Kerning * _emScale;
                 }

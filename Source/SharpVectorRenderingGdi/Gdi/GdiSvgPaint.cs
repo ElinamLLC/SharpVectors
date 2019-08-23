@@ -46,7 +46,8 @@ namespace SharpVectors.Renderers.Gdi
         public Pen GetPen(GraphicsPath gp)
         {
             float strokeWidth = GetStrokeWidth();
-            if (strokeWidth == 0) return null;
+            if (strokeWidth.Equals(0))
+                return null;
 
             GdiSvgPaint stroke;
             if (PaintType == SvgPaintType.None)
@@ -75,7 +76,7 @@ namespace SharpVectors.Renderers.Gdi
 
                 for (int i = 0; i < fDashArray.Length; i++)
                 {
-                    if (fDashArray[i] == 0)
+                    if (fDashArray[i].Equals(0))
                         return null;
                 }
 
@@ -106,6 +107,28 @@ namespace SharpVectors.Renderers.Gdi
             alpha = Math.Max(alpha, 0);
 
             return Convert.ToInt32(alpha);
+        }
+
+        private float GetOpacityValue(string fillOrStroke)
+        {
+            double opacityValue = 1;
+
+            string opacity = _element.GetPropertyValue(fillOrStroke + "-opacity");
+            if (!string.IsNullOrWhiteSpace(opacity))
+            {
+                opacityValue *= SvgNumber.ParseNumber(opacity);
+            }
+
+            opacity = _element.GetPropertyValue("opacity");
+            if (!string.IsNullOrWhiteSpace(opacity))
+            {
+                opacityValue *= SvgNumber.ParseNumber(opacity);
+            }
+
+            opacityValue = Math.Min(opacityValue, 1);
+            opacityValue = Math.Max(opacityValue, 0);
+
+            return (float)opacityValue;
         }
 
         private LineCap GetLineCap()
@@ -149,7 +172,8 @@ namespace SharpVectors.Renderers.Gdi
             if (miterLimitStr.Length == 0) miterLimitStr = "4";
 
             float miterLimit = (float)SvgNumber.ParseNumber(miterLimitStr);
-            if (miterLimit < 1) throw new SvgException(SvgExceptionType.SvgInvalidValueErr, "stroke-miterlimit can not be less then 1");
+            if (miterLimit < 1)
+                throw new SvgException(SvgExceptionType.SvgInvalidValueErr, "stroke-miterlimit can not be less then 1");
 
             return miterLimit;
         }
@@ -236,40 +260,49 @@ namespace SharpVectors.Renderers.Gdi
                 _paintFill = GetPaintFill(painter.Uri);
                 if (_paintFill != null)
                 {
-                    Brush br = _paintFill.GetBrush(gp.GetBounds());
+                    Brush br = _paintFill.GetBrush(gp.GetBounds(), this.GetOpacityValue(propPrefix));
 
-                    LinearGradientBrush lgb = br as LinearGradientBrush;
-                    if (lgb != null)
+                    if (_paintFill.FillType == GdiFillType.Pattern)
                     {
-                        int opacityl = GetOpacity(propPrefix);
-                        for (int i = 0; i < lgb.InterpolationColors.Colors.Length; i++)
-                        {
-                            lgb.InterpolationColors.Colors[i] =
-                                Color.FromArgb(opacityl, lgb.InterpolationColors.Colors[i]);
-                        }
-                        for (int i = 0; i < lgb.LinearColors.Length; i++)
-                        {
-                            lgb.LinearColors[i] = Color.FromArgb(opacityl, lgb.LinearColors[i]);
-                        }
-
                         return br;
                     }
-
-                    PathGradientBrush pgb = br as PathGradientBrush;
-                    if (pgb != null)
+                    if (_paintFill.FillType == GdiFillType.LinearGradient)
                     {
-                        int opacityl = GetOpacity(propPrefix);
-                        for (int i = 0; i < pgb.InterpolationColors.Colors.Length; i++)
+                        LinearGradientBrush lgb = br as LinearGradientBrush;
+                        if (lgb != null)
                         {
-                            pgb.InterpolationColors.Colors[i] =
-                                Color.FromArgb(opacityl, pgb.InterpolationColors.Colors[i]);
-                        }
-                        for (int i = 0; i < pgb.SurroundColors.Length; i++)
-                        {
-                            pgb.SurroundColors[i] = Color.FromArgb(opacityl, pgb.SurroundColors[i]);
-                        }
+                            int opacityl = GetOpacity(propPrefix);
+                            for (int i = 0; i < lgb.InterpolationColors.Colors.Length; i++)
+                            {
+                                lgb.InterpolationColors.Colors[i] =
+                                    Color.FromArgb(opacityl, lgb.InterpolationColors.Colors[i]);
+                            }
+                            for (int i = 0; i < lgb.LinearColors.Length; i++)
+                            {
+                                lgb.LinearColors[i] = Color.FromArgb(opacityl, lgb.LinearColors[i]);
+                            }
 
-                        return br;
+                            return br;
+                        }
+                    }
+                    if (_paintFill.FillType == GdiFillType.RadialGradient)
+                    {
+                        PathGradientBrush pgb = br as PathGradientBrush;
+                        if (pgb != null)
+                        {
+                            int opacityl = GetOpacity(propPrefix);
+                            for (int i = 0; i < pgb.InterpolationColors.Colors.Length; i++)
+                            {
+                                pgb.InterpolationColors.Colors[i] =
+                                    Color.FromArgb(opacityl, pgb.InterpolationColors.Colors[i]);
+                            }
+                            for (int i = 0; i < pgb.SurroundColors.Length; i++)
+                            {
+                                pgb.SurroundColors[i] = Color.FromArgb(opacityl, pgb.SurroundColors[i]);
+                            }
+
+                            return br;
+                        }
                     }
                 }
                 else

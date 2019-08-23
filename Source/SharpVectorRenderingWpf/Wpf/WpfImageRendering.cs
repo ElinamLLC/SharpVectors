@@ -61,6 +61,10 @@ namespace SharpVectors.Renderers.Wpf
             if (imageElement.IsSvgImage)
             {
                 SvgWindow wnd = GetSvgWindow();
+                if (wnd == null)
+                {
+                    return;
+                }
                 //_embeddedRenderer.BackColor = Color.Empty;  
                 _embeddedRenderer.Render(wnd.Document);
 
@@ -171,29 +175,32 @@ namespace SharpVectors.Renderers.Wpf
                         }
                         else
                         {
-                            Transform viewTransform = this.GetAspectRatioTransform(aspectRatio,
-                              new SvgRect(0, 0, imageWidth, imageHeight),
-                              new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
-
-                            if (viewTransform != null)
+                            if (this.Transform == null)
                             {
-                                drawGroup = new DrawingGroup();
-                                drawGroup.Transform = viewTransform;
+                                Transform viewTransform = this.GetAspectRatioTransform(aspectRatio,
+                                  new SvgRect(0, 0, imageWidth, imageHeight),
+                                  new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
 
-                                DrawingGroup lastGroup = context.Peek();
-                                Debug.Assert(lastGroup != null);
-
-                                if (lastGroup != null)
+                                if (viewTransform != null)
                                 {
-                                    lastGroup.Children.Add(drawGroup);
+                                    drawGroup = new DrawingGroup();
+                                    drawGroup.Transform = viewTransform;
+
+                                    DrawingGroup lastGroup = context.Peek();
+                                    Debug.Assert(lastGroup != null);
+
+                                    if (lastGroup != null)
+                                    {
+                                        lastGroup.Children.Add(drawGroup);
+                                    }
+
+                                    destRect = this.GetBounds(destRect,
+                                        new Size(imageWidth, imageHeight), aspectRatioType);
+
+                                    // The origin is already handled by the view transform...
+                                    destRect.X = 0;
+                                    destRect.Y = 0;
                                 }
-
-                                destRect = this.GetBounds(destRect,
-                                    new Size(imageWidth, imageHeight), aspectRatioType);
-
-                                // The origin is already handled by the view transform...
-                                destRect.X = 0;
-                                destRect.Y = 0;
                             }
                         }
                     }
@@ -379,6 +386,10 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgImageElement iElm = (SvgImageElement)this.Element;
             SvgWindow wnd = iElm.SvgWindow;
+            if (wnd == null)
+            {
+                return null;
+            }
             wnd.Renderer  = _embeddedRenderer;
 
             _embeddedRenderer.Window = wnd;
@@ -496,7 +507,7 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
 
-                string sURI    = element.Href.AnimVal;
+                string sURI     = element.Href.AnimVal.Replace(" ", "");
                 int nColon     = sURI.IndexOf(":", StringComparison.OrdinalIgnoreCase);
                 int nSemiColon = sURI.IndexOf(";", StringComparison.OrdinalIgnoreCase);
                 int nComma     = sURI.IndexOf(",", StringComparison.OrdinalIgnoreCase);

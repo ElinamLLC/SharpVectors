@@ -68,7 +68,8 @@ namespace SharpVectors.Dom.Svg
                 visitor.BeginContainer(this);
                 foreach (var item in this.ChildNodes)
                 {
-                    if (item is IElementVisitorTarget evt)
+                    IElementVisitorTarget evt = item as IElementVisitorTarget;
+                    if (evt != null)
                     {
                         evt.Accept(visitor);
                     }

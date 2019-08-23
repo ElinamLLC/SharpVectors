@@ -11,9 +11,17 @@ namespace SharpVectors.Dom.Css
 
         public CssAbsPrimitiveValue(CssPrimitiveValue cssValue, string propertyName, XmlElement element)
         {
-            _cssValue = cssValue ?? throw new ArgumentNullException(nameof(cssValue));
+            if (cssValue == null)
+            {
+                throw new ArgumentNullException(nameof(cssValue));
+            }
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
+            _cssValue     = cssValue;
             _propertyName = propertyName;
-            _element = element ?? throw new ArgumentNullException(nameof(element));
+            _element      = element;
         }
 
         public override string CssText

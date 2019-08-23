@@ -39,10 +39,10 @@ namespace SharpVectors.Dom.Svg
 
         private void ParsePaint(string str)
         {
-            bool hasUri = false;
-            bool hasRgb = false;
-            bool hasIcc = false;
-            bool hasNone = false;
+            bool hasUri          = false;
+            bool hasRgb          = false;
+            bool hasIcc          = false;
+            bool hasNone         = false;
             bool hasCurrentColor = false;
 
             const StringComparison compareType = StringComparison.OrdinalIgnoreCase;
