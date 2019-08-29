@@ -34,8 +34,8 @@ namespace WpfW3cSvgTestSuite
 
         private const string AppTitle        = "SVG Test Suite";
         private const string AppErrorTitle   = "SVG Test Suite - Error";
-        private const string SvgTestSuite    = "SvgTestSuite.xml";
-        private const string SvgTestResults  = "SvgTestResults.xml";
+        private const string SvgTestSuite    = "SvgTestSuite10.xml";
+        private const string SvgTestResults  = "SvgTestResults10.xml";
         private const string SvgTestSettings = "SvgTestSettings.xml";
   
         private bool _isTreeModified;
@@ -317,11 +317,6 @@ namespace WpfW3cSvgTestSuite
                 _optionSettings.Load(_testSettingsPath);
 
                 selectedPath = _optionSettings.LocalSuitePath;
-            }
-
-            if (string.IsNullOrWhiteSpace(selectedPath))
-            {
-                selectedPath = IoPath.GetFullPath(@"..\..\FullTestSuite");
             }
 
             if (OptionSettings.IsTestSuiteAvailable(selectedPath))

@@ -14,8 +14,8 @@ namespace GdiW3cSvgTestSuite
     {
         #region Private Fields
 
-        private const string SvgTestSuite   = "SvgTestSuite.xml";
-        private const string SvgTestResults = "SvgTestResults.xml";
+        private const string SvgTestSuite   = "SvgTestSuite10.xml";
+        private const string SvgTestResults = "SvgTestResults10.xml";
 
         private bool _isTreeModified;
         private bool _isTreeChangedPending;

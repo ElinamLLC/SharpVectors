@@ -16,8 +16,8 @@ namespace WpfW3cSvgTestSuite
 
         public SvgTestCase()
         {
-            _revision   = "";
-            _name       = "";
+            _revision   = string.Empty;
+            _name       = string.Empty;
             _paragraphs = new List<string>();
         }
 
@@ -33,7 +33,7 @@ namespace WpfW3cSvgTestSuite
                 return _name;
             }
             set {
-                this._name = value;
+                _name = value;
             }
         }
 
@@ -43,7 +43,7 @@ namespace WpfW3cSvgTestSuite
                 return _paragraphs;
             }
             set {
-                this._paragraphs = value;
+                _paragraphs = value;
             }
         }
 
@@ -62,7 +62,6 @@ namespace WpfW3cSvgTestSuite
             {
                 return;
             }
-
         }
 
         public void WriteXml(XmlWriter writer)
@@ -71,7 +70,6 @@ namespace WpfW3cSvgTestSuite
             {
                 return;
             }
-
         }
     }
 }

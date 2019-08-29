@@ -65,7 +65,7 @@ namespace WpfW3cSvgTestSuite
                 return _label;
             }
             set {
-                this._label = value;
+                _label = value;
             }
         }
 
@@ -75,7 +75,7 @@ namespace WpfW3cSvgTestSuite
                 return _total;
             }
             set {
-                this._total = value;
+                _total = value;
             }
         }
 
@@ -85,7 +85,7 @@ namespace WpfW3cSvgTestSuite
                 return _unknowns;
             }
             set {
-                this._unknowns = value;
+                _unknowns = value;
             }
         }
 
@@ -95,7 +95,7 @@ namespace WpfW3cSvgTestSuite
                 return _failures;
             }
             set {
-                this._failures = value;
+                _failures = value;
             }
         }
 
@@ -105,7 +105,7 @@ namespace WpfW3cSvgTestSuite
                 return _successes;
             }
             set {
-                this._successes = value;
+                _successes = value;
             }
         }
 
@@ -115,7 +115,7 @@ namespace WpfW3cSvgTestSuite
                 return _partials;
             }
             set {
-                this._partials = value;
+                _partials = value;
             }
         }
 
@@ -138,27 +138,27 @@ namespace WpfW3cSvgTestSuite
             {
                 return false;
             }
-            if (!string.Equals(this._label, other._label))
+            if (!string.Equals(_label, other._label))
             {
                 return false;
             }
-            if (this._total != other._total)
+            if (_total != other._total)
             {
                 return false;
             }
-            if (this._unknowns != other._unknowns)
+            if (_unknowns != other._unknowns)
             {
                 return false;
             }
-            if (this._failures != other._failures)
+            if (_failures != other._failures)
             {
                 return false;
             }
-            if (this._successes != other._successes)
+            if (_successes != other._successes)
             {
                 return false;
             }
-            if (this._partials != other._partials)
+            if (_partials != other._partials)
             {
                 return false;
             }

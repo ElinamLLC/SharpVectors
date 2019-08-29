@@ -671,7 +671,8 @@ namespace SharpVectors.Renderers.Texts
             }
             if (textPen != null)
             {
-                textPen.LineJoin = PenLineJoin.Round; // Better for text rendering
+                textPen.LineJoin   = PenLineJoin.Miter; // Better for text rendering
+                textPen.MiterLimit = 1;
             }
 
             TextDecorationCollection textDecors = GetTextDecoration(element);
@@ -889,7 +890,8 @@ namespace SharpVectors.Renderers.Texts
             }
             if (textPen != null)
             {
-                textPen.LineJoin = PenLineJoin.Round; // Better for text rendering
+                textPen.LineJoin = PenLineJoin.Miter; // Better for text rendering
+                textPen.MiterLimit = 1;
             }
 
             TextDecorationCollection textDecors = GetTextDecoration(element);

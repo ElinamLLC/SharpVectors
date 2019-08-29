@@ -22,6 +22,15 @@ namespace GdiW3cSvgTestSuite
     [Serializable]
     public sealed class OptionSettings : ICloneable
     {
+        #region Public Fields
+
+        private const string TestsSvg   = @"..\..\FullTestSuite";
+        private const string TestsSvg10 = @"..\..\W3cSvgTestSuites\Svg10";
+        private const string TestsSvg11 = @"..\..\W3cSvgTestSuites\Svg11";
+        private const string TestsSvg12 = @"..\..\W3cSvgTestSuites\Svg12";
+
+        #endregion
+
         #region Private Interop Methods
 
         [DllImport("shell32.dll", SetLastError = true)]
@@ -65,7 +74,7 @@ namespace GdiW3cSvgTestSuite
 
         public OptionSettings()
         {
-            string currentDir = Path.GetFullPath(@"..\..\FullTestSuite");
+            string currentDir = Path.GetFullPath(TestsSvg10);
             if (!Directory.Exists(currentDir))
             {
                 Directory.CreateDirectory(currentDir);
@@ -81,7 +90,7 @@ namespace GdiW3cSvgTestSuite
 
             if (string.IsNullOrWhiteSpace(testPath))
             {
-                string currentDir = Path.GetFullPath(@"..\..\FullTestSuite");
+                string currentDir = Path.GetFullPath(TestsSvg10);
                 _localSuitePath = currentDir;
             }
             _webSuitePath = FullTestSuite;
@@ -414,6 +423,13 @@ namespace GdiW3cSvgTestSuite
                                     else
                                     {
                                         _localSuitePath = optionValue;
+                                    }
+
+                                    // Ignore old test suite directory, if found
+                                    if (string.IsNullOrWhiteSpace(_localSuitePath) || 
+                                        !this.IsLocalSuitePathChanged(Path.GetFullPath(TestsSvg)))
+                                    {
+                                        _localSuitePath = Path.GetFullPath(TestsSvg10);
                                     }
                                     break;
                                 case "SelectedValuePath":

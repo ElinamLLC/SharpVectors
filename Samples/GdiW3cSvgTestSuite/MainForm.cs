@@ -185,11 +185,6 @@ namespace GdiW3cSvgTestSuite
         {
             string selectedPath = _optionSettings.LocalSuitePath;
 
-            if (string.IsNullOrWhiteSpace(selectedPath))
-            {
-                selectedPath = Path.GetFullPath(@"..\..\FullTestSuite");
-            }
-
             if (OptionSettings.IsTestSuiteAvailable(selectedPath))
             {
                 _isTestAvailable = true;

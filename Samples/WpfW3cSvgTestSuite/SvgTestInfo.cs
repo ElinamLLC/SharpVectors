@@ -23,11 +23,11 @@ namespace WpfW3cSvgTestSuite
 
         public SvgTestInfo()
         {
-            _title = string.Empty;
-            _fileName = string.Empty;
+            _title       = string.Empty;
+            _fileName    = string.Empty;
             _description = string.Empty;
-            _comment = string.Empty;
-            _state = SvgTestState.Unknown;
+            _comment     = string.Empty;
+            _state       = SvgTestState.Unknown;
         }
 
         public SvgTestInfo(XmlReader reader)
@@ -196,9 +196,9 @@ namespace WpfW3cSvgTestSuite
                 description = string.Empty;
             }
 
-            _fileName = fileName;
-            _title = title;
-            _comment = comment;
+            _fileName    = fileName;
+            _title       = title;
+            _comment     = comment;
             _description = description.Trim();
             if (!string.IsNullOrWhiteSpace(_description))
             {
