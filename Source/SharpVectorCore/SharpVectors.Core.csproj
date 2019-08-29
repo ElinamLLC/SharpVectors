@@ -744,6 +744,9 @@
     <Compile Include="Svg\Scripting\ISvgScriptElement.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Svg\Text\ISvgAltGlyphDefElement.cs" />
+    <Compile Include="Svg\Text\ISvgAltGlyphElement.cs" />
+    <Compile Include="Svg\Text\ISvgAltGlyphItemElement.cs" />
     <Compile Include="Svg\Text\ISvgFontElement.cs" />
     <Compile Include="Svg\Text\ISvgFontFaceElement.cs" />
     <Compile Include="Svg\Text\ISvgFontFaceFormatElement.cs" />

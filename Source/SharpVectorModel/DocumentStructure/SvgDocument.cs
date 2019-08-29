@@ -129,6 +129,7 @@ namespace SharpVectors.Dom.Svg
         private XmlNamespaceManager _namespaceManager;
 
         private IDictionary<string, XmlElement> _collectedIds;
+        private IDictionary<string, string> _styledFontIds;
 
         #endregion
 
@@ -143,6 +144,8 @@ namespace SharpVectors.Dom.Svg
             _dpi                          = DotsPerInch;
 
             this.PreserveWhitespace       = true;
+
+            _styledFontIds                = new Dictionary<string, string>(StringComparer.Ordinal);
         }
 
         public SvgDocument(SvgWindow window)
@@ -972,9 +975,7 @@ namespace SharpVectors.Dom.Svg
                     _svgFontFamilies = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                     foreach (var svgFont in _svgFonts)
                     {
-                        var fontFace = svgFont.FontFace;
-
-                        _svgFontFamilies.Add(fontFace.FontFamily);
+                        _svgFontFamilies.Add(svgFont.FontFamily);
                     }
                 }
                 return _svgFontFamilies;
@@ -1045,6 +1046,13 @@ namespace SharpVectors.Dom.Svg
             return fontList;
         }
 
+        public IDictionary<string, string> StyledFontIds
+        {
+            get {
+                return _styledFontIds;
+            }
+        }
+
         #endregion
 
         #region Protected Methods
@@ -1092,17 +1100,17 @@ namespace SharpVectors.Dom.Svg
                         continue;
                     }
 
-                    GetFontUrl(cssSheet, fontUrls);
+                    GetFontUrl(cssSheet, fontUrls, _styledFontIds);
                 }
             }
 
-            GetFontUrl(this.UserAgentStyleSheet, fontUrls);
-            GetFontUrl(this.UserStyleSheet, fontUrls);
+            GetFontUrl(this.UserAgentStyleSheet, fontUrls, _styledFontIds);
+            GetFontUrl(this.UserStyleSheet, fontUrls, _styledFontIds);
 
             return fontUrls;
         }
 
-        private static void GetFontUrl(CssStyleSheet cssSheet, IList<string> fontUrls)
+        private static void GetFontUrl(CssStyleSheet cssSheet, IList<string> fontUrls, IDictionary<string, string> styledFontIds)
         {
             if (cssSheet == null || fontUrls == null)
             {
@@ -1127,6 +1135,14 @@ namespace SharpVectors.Dom.Svg
                         if (!fontUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                         {
                             fontUrls.Add(fontUrl);
+                        }
+                        else if (styledFontIds != null)
+                        {
+                            string fontFamily = fontRule.FontFamily;
+                            if (!string.IsNullOrWhiteSpace(fontFamily))
+                            {
+                                styledFontIds[fontFamily] = fontUrl.TrimStart('#').Trim('\'');
+                            }
                         }
                     }
                 }

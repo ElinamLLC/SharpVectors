@@ -13,6 +13,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private string _fontName;
         private SvgFontElement _fontElement;
+        private string _fontVariant;
 
         private FontFamily _family;
         private FontWeight _weight;
@@ -91,6 +92,16 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public string Variant
+        {
+            get {
+                return _fontVariant;
+            }
+            set {
+                _fontVariant = value;
+            }
+        }
+
         public SvgFontElement FontElement
         {
             get {
@@ -117,6 +128,5 @@ namespace SharpVectors.Renderers.Wpf
         {
             get { return _stretch; }
         }
-
     }
 }

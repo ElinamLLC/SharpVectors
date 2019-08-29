@@ -41,6 +41,12 @@ namespace SharpVectors.Dom.Svg
                     if (fontFace != null)
                     {
                         _fontFamily = fontFace.FontFamily;
+
+                        // Support cases where font IDs are used instead of font family name...
+                        if (string.IsNullOrWhiteSpace(_fontFamily))
+                        {
+                            _fontFamily = this.Id;
+                        }
                     }
                 }
                 return _fontFamily;
@@ -251,6 +257,11 @@ namespace SharpVectors.Dom.Svg
                 var fontFace = this["font-face"] as SvgFontFaceElement;
                 if (fontFace != null)
                 {
+                    if (!fontFace.HasAttribute("ascent"))
+                    {
+                        return 0;
+                    }
+
                     return fontFace.Ascent;
                 }
                 return 0;

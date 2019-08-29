@@ -2,6 +2,8 @@
 using System.Xml;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
+using System.Globalization;
 using System.Collections.Generic;
 
 using System.Windows;
@@ -27,6 +29,8 @@ namespace SharpVectors.Renderers.Texts
 
         private SvgTextElement _textElement;
         private WpfTextRendering _textRendering;
+
+        private CultureInfo _culture;
 
         private IDictionary<double, double> _sizeMap;
 
@@ -115,6 +119,13 @@ namespace SharpVectors.Renderers.Texts
             }
             set {
                 _positioningElement = value;
+            }
+        }
+
+        public CultureInfo Culture
+        {
+            get {
+                return _culture;
             }
         }
 
@@ -223,6 +234,19 @@ namespace SharpVectors.Renderers.Texts
             //        }
             //     }
             //}
+
+            try
+            {
+                string xmlLang = _textElement.XmlLang;
+                if (!string.IsNullOrWhiteSpace(xmlLang))
+                {
+                    _culture = CultureInfo.GetCultureInfo(xmlLang);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
         }
 
         public static TextDecoration Squiggly(Color color, TextDecorationLocation location = TextDecorationLocation.Underline)

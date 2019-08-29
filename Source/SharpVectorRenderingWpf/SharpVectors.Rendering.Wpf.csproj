@@ -61,6 +61,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Texts\WpfGlyphTextBuilder.cs" />
     <Compile Include="Texts\WpfHorzTextRenderer.cs" />
     <Compile Include="Texts\WpfPathTextRenderer.cs" />
     <Compile Include="Texts\WpfSvgTextBuilder.cs" />

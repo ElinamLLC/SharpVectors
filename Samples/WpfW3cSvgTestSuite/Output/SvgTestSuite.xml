@@ -102,18 +102,18 @@
         <test source="filters-turb-01-f.svg" title="filters-turb-01-f" state="failure" comment="" description="Test which verifies the basic facilities of feTurbulence." />
     </category>
     <category label="Fonts">
-        <test source="fonts-desc-02-t.svg" title="fonts-desc-02-t" state="failure" comment="" description="" />
-        <test source="fonts-elem-01-t.svg" title="fonts-elem-01-t" state="partial" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-elem-02-t.svg" title="fonts-elem-02-t" state="failure" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-elem-03-b.svg" title="fonts-elem-03-b" state="partial" comment="" description="Basic test of external embedded fontswith font-face-src" />
-        <test source="fonts-elem-04-b.svg" title="fonts-elem-04-b" state="partial" comment="" description="Basic test of external embedded fontswith font-face-src" />
-        <test source="fonts-elem-05-t.svg" title="fonts-elem-01-t" state="failure" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-elem-06-t.svg" title="fonts-elem-01-t" state="failure" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-elem-07-b.svg" title="fonts-elem-05-b" state="partial" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="partial" comment="" description="" />
-        <test source="fonts-glyph-03-t.svg" title="fonts-glyph-03-t" state="failure" comment="" description="" />
-        <test source="fonts-glyph-04-t.svg" title="fonts-glyph-04-t" state="failure" comment="" description="" />
-        <test source="fonts-kern-01-t.svg" title="fonts-kern-01-t" state="failure" comment="" description="" />
+        <test source="fonts-desc-02-t.svg" title="fonts-desc-02-t" state="partial" comment="Must implement small-cap fallback." description="" />
+        <test source="fonts-elem-01-t.svg" title="fonts-elem-01-t" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-02-t.svg" title="fonts-elem-02-t" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-03-b.svg" title="fonts-elem-03-b" state="success" comment="" description="Basic test of external embedded fontswith font-face-src" />
+        <test source="fonts-elem-04-b.svg" title="fonts-elem-04-b" state="success" comment="" description="Basic test of external embedded fontswith font-face-src" />
+        <test source="fonts-elem-05-t.svg" title="fonts-elem-01-t" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-06-t.svg" title="fonts-elem-01-t" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-07-b.svg" title="fonts-elem-05-b" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="success" comment="Arabic forms support" description="" />
+        <test source="fonts-glyph-03-t.svg" title="fonts-glyph-03-t" state="success" comment="" description="" />
+        <test source="fonts-glyph-04-t.svg" title="fonts-glyph-04-t" state="success" comment="Glyph rendering not done in the order definition of the font elements." description="" />
+        <test source="fonts-kern-01-t.svg" title="fonts-kern-01-t" state="success" comment="" description="" />
     </category>
     <category label="Interactivities">
         <test source="interact-cursor-01-f.svg" title="interact-cursor-01-f" state="failure" comment="" description="Test that viewer has the basic capability to handle the cursorproperty and cursor element" />
@@ -137,7 +137,7 @@
     </category>
     <category label="Masking">
         <test source="masking-intro-01-f.svg" title="masking-mask-04-f" state="partial" comment="Only opacity masking is supported. Alpha composition will require a effect, but only BitmapEffect can be used for this, a WPF limitation." description="Tests the impact of strokes within clipPath and mask" />
-        <test source="masking-mask-01-b.svg" title="masking-mask-01-b" state="partial" comment="SVG Font is not supported yet." description="Test to see if the masking features using the mask element and&#x9;&#x9;mask property are available." />
+        <test source="masking-mask-01-b.svg" title="masking-mask-01-b" state="success" comment="Basic SVG Font is now supported." description="Test to see if the masking features using the mask element and&#x9;&#x9;mask property are available." />
         <test source="masking-opacity-01-b.svg" title="masking-opacity-01-b" state="success" comment="" description="Test to see the effect of applying an opacity property to a group." />
         <test source="masking-path-01-b.svg" title="masking-path-01-b" state="success" comment="" description="" />
         <test source="masking-path-02-b.svg" title="masking-path-02-b" state="success" comment="" description="Test to see if clipPathUnits attribute is handled properly on a clipPath element. Only tests the userSpaceOnUse and objectBoundingBox items of the clipPathUnits. userSpace has been tested by the previous test as it is the default." />
@@ -153,10 +153,10 @@
         <test source="pservers-grad-05-b.svg" title="pservers-grad-05-b" state="success" comment="" description="Test that checks the capability of the stop opacity in linear and radial gradients." />
         <test source="pservers-grad-06-b.svg" title="pservers-grad-06-b" state="success" comment="" description="Test that the viewer can handle the gradientTransform and the patternTransform attribute on gradients and patterns respectively." />
         <test source="pservers-grad-07-b.svg" title="pservers-grad-07-b" state="success" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects &#x9;. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following&#x9;properties : stop-color, fill:url(# ), stroke(url# )" />
-        <test source="pservers-grad-08-b.svg" title="pservers-grad-08-b" state="partial" comment="The SVG Font is not supported." description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-08-b.svg" title="pservers-grad-08-b" state="success" comment="Basic SVG Font is now supported." description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-09-b.svg" title="pservers-grad-09-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on linear gradients." />
         <test source="pservers-grad-10-b.svg" title="pservers-grad-10-b" state="success" comment="" description="Test that the viewer can handle the spreadMethod attribute on linear gradients." />
-        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="partial" comment="The linear gradient support is not complete, and the SVG Font is not supported." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="partial" comment="The linear gradient support is not complete, but the SVG Font is now supported." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-12-b.svg" title="pservers-grad-12-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on radial gradients." />
         <test source="pservers-grad-13-b.svg" title="pservers-grad-15-b" state="success" comment="" description="Tests the radial gradient focal point" />
         <test source="pservers-grad-14-b.svg" title="pservers-grad-16-b" state="success" comment="" description="Tests the spreadMethod attributes for gradients" />
@@ -209,13 +209,13 @@
         <test source="render-elems-01-t.svg" title="render-elems-01-t" state="success" comment="" description="This test validates that shapes can be both filled." />
         <test source="render-elems-02-t.svg" title="render-elems-02-t" state="success" comment="" description="This test validates that shapes can be both stroked." />
         <test source="render-elems-03-t.svg" title="render-elems-03-t" state="success" comment="" description="This test validates that shapes can be both filled and stroked." />
-        <test source="render-elems-06-t.svg" title="render-elems-06-t" state="partial" comment="The SVG Font is not supported." description="This test validates that text can be both filled." />
-        <test source="render-elems-07-t.svg" title="render-elems-07-t" state="partial" comment="The SVG Font is not supported." description="This test validates that text can be both stroked." />
-        <test source="render-elems-08-t.svg" title="render-elems-08-t" state="partial" comment="The SVG Font is not supported." description="This test validates that text can be both filled and stroked." />
+        <test source="render-elems-06-t.svg" title="render-elems-06-t" state="success" comment="Basic SVG Font is now supported." description="This test validates that text can be both filled." />
+        <test source="render-elems-07-t.svg" title="render-elems-07-t" state="success" comment="Basic SVG Font is now supported." description="This test validates that text can be both stroked." />
+        <test source="render-elems-08-t.svg" title="render-elems-08-t" state="success" comment="Basic SVG Font is now supported." description="This test validates that text can be both filled and stroked." />
     </category>
     <category label="Rendering Groups">
-        <test source="render-groups-01-b.svg" title="render-groups-01-b" state="partial" comment="The SVG Font is not supported." description="This test validates the rendering order of graphic elements and the concept of grouping." />
-        <test source="render-groups-03-t.svg" title="render-groups-03-t" state="partial" comment="The SVG Font is not supported." description="This test validates the rendering order of graphic elements." />
+        <test source="render-groups-01-b.svg" title="render-groups-01-b" state="success" comment="Basic SVG Font is now supported." description="This test validates the rendering order of graphic elements and the concept of grouping." />
+        <test source="render-groups-03-t.svg" title="render-groups-03-t" state="success" comment="Basic SVG Font is now supported." description="This test validates the rendering order of graphic elements." />
     </category>
     <category label="Scripting">
         <test source="script-handle-01-b.svg" title="script-handle-01-b" state="failure" comment="Scripting is not supported yet." description="This test validates scripting support by using a simple mouse event &#x9;&#x9;handler and manipulating the DOM with the ECMA binding DOM API." />
@@ -287,8 +287,8 @@
         <test source="text-align-04-b.svg" title="text-align-04-b" state="success" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
         <test source="text-align-05-b.svg" title="text-align-05-b" state="success" comment="The middle and end text alignments are now supported." description="Test 'text-anchor' property (vertical)" />
         <test source="text-align-06-b.svg" title="text-align-06-b" state="partial" comment="The vertical spacing is still not accurate or complete." description="Test 'baseline-shift' property (vertical)" />
-        <test source="text-align-08-b.svg" title="text-align-08-b" state="failure" comment="" description="" />
-        <test source="text-altglyph-01-b.svg" title="text-altglyph-01-b" state="failure" comment="" description="Test 'altGlyph' facilities and many-to-many chars to glyphs." />
+        <test source="text-align-08-b.svg" title="text-align-08-b" state="partial" comment="" description="" />
+        <test source="text-altglyph-01-b.svg" title="text-altglyph-01-b" state="success" comment="On single character glyph are supported." description="Test 'altGlyph' facilities and many-to-many chars to glyphs." />
         <test source="text-deco-01-b.svg" title="text-deco-01-b" state="partial" comment="" description="Test 'text-decoration'." />
         <test source="text-fonts-01-t.svg" title="text-fonts-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font families" />
         <test source="text-fonts-02-t.svg" title="text-fonts-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font weights" />

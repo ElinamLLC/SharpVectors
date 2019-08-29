@@ -315,6 +315,10 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         RenderTextPath((SvgTextPathElement)child, ref ctp, rotate, placement);
                     }
+                    else if (string.Equals(nodeName, "altGlyph", comparer))
+                    {
+                        AddAltGlyphElementRun((SvgAltGlyphElement)child, ref ctp, isVertical, true);
+                    }
                 }
                 else if (nodeType == XmlNodeType.Whitespace)
                 {
@@ -407,6 +411,10 @@ namespace SharpVectors.Renderers.Wpf
                             {
                                 RenderTextPath((SvgTextPathElement)child, ref ctp, rotate, placement);
                             }
+                            else if (string.Equals(nodeName, "altGlyph", comparer))
+                            {
+                                AddAltGlyphElementRun((SvgAltGlyphElement)child, ref ctp, isVertical, false);
+                            }
                         }
                         else if (nodeType == XmlNodeType.Whitespace)
                         {
@@ -495,6 +503,10 @@ namespace SharpVectors.Renderers.Wpf
 
                             textRendered = false;
                         }
+                        else if (string.Equals(nodeName, "altGlyph", comparer))
+                        {
+                            AddAltGlyphElementRun((SvgAltGlyphElement)child, ref ctp, isVertical, false);
+                        }
                     }
                     else if (nodeType == XmlNodeType.Whitespace)
                     {
@@ -518,6 +530,16 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
             }
+        }
+
+        public void SetTextWidth(double textWidth)
+        {
+            _textWidth = textWidth;
+        }
+
+        public void AddTextWidth(double textWidth)
+        {
+            _textWidth += textWidth;
         }
 
         #endregion
@@ -647,16 +669,6 @@ namespace SharpVectors.Renderers.Wpf
 
         #endregion
 
-        public void SetTextWidth(double textWidth)
-        {
-            _textWidth = textWidth;
-        }
-
-        public void AddTextWidth(double textWidth)
-        {
-            _textWidth += textWidth;
-        }
-
         #endregion
 
         #region Private Methods
@@ -748,6 +760,46 @@ namespace SharpVectors.Renderers.Wpf
 
         #region TRef/TSpan Methods
 
+        private void AddAltGlyphElementRun(SvgAltGlyphElement element, ref Point ctp,
+            bool isVertical, bool isSingleLine)
+        {
+            _textContext.PositioningElement = element;
+            _textContext.PositioningStart = new Point(ctp.X, ctp.Y);
+
+            WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
+            ctp = placement.Location;
+            double rotate = placement.Rotation;
+            if (!placement.HasPositions)
+            {
+                placement = null; // render it useless
+            }
+
+            _textContext.PositioningEnd = new Point(ctp.X, ctp.Y);
+
+            if (isVertical)
+            {
+                if (isSingleLine)
+                {
+                    this.RenderSingleLineTextV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                }
+                else
+                {
+                    this.RenderTextRunV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                }
+            }
+            else
+            {
+                if (isSingleLine)
+                {
+                    this.RenderSingleLineTextH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                }
+                else
+                {
+                    this.RenderTextRunH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                }
+            }
+        }
+
         private void AddTRefElementRun(SvgTRefElement element, ref Point ctp,
             bool isVertical, bool isSingleLine)
         {
@@ -768,26 +820,22 @@ namespace SharpVectors.Renderers.Wpf
             {
                 if (isSingleLine)
                 {
-                    this.RenderSingleLineTextV(element, ref ctp,
-                        WpfTextRenderer.GetTRefText(element), rotate, placement);
+                    this.RenderSingleLineTextV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
                 else
                 {
-                    this.RenderTextRunV(element, ref ctp,
-                        WpfTextRenderer.GetTRefText(element), rotate, placement);
+                    this.RenderTextRunV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
             }
             else
             {
                 if (isSingleLine)
                 {
-                    this.RenderSingleLineTextH(element, ref ctp,
-                        WpfTextRenderer.GetTRefText(element), rotate, placement);
+                    this.RenderSingleLineTextH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
                 else
                 {
-                    this.RenderTextRunH(element, ref ctp,
-                        WpfTextRenderer.GetTRefText(element), rotate, placement);
+                    this.RenderTextRunH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
             }
         }
@@ -803,7 +851,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             _textContext.PositioningElement = element;
-            _textContext.PositioningStart = new Point(ctp.X, ctp.Y);
+            _textContext.PositioningStart   = new Point(ctp.X, ctp.Y);
 
             WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
             ctp = placement.Location;

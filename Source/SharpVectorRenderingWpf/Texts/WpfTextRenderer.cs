@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Linq;
 using System.Diagnostics;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -122,6 +123,21 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        protected CultureInfo TextCulture
+        {
+            get {
+                if (_textRendering != null)
+                {
+                    var textContext = _textRendering.TextContext;
+                    if (textContext != null)
+                    {
+                        return textContext.Culture;
+                    }
+                }
+                return null;
+            }
+        }
+
         protected WpfTextContext TextContext
         {
             get {
@@ -196,12 +212,22 @@ namespace SharpVectors.Renderers.Texts
             return TrimText(element, child.Value);
         }
 
-        public static string GetTRefText(SvgTRefElement element)
+        public static string GetText(SvgTRefElement element)
         {
             XmlElement refElement = element.ReferencedElement;
             if (refElement != null)
             {
                 return TrimText(element, refElement.InnerText);
+            }
+            return string.Empty;
+        }
+
+        public static string GetText(SvgAltGlyphElement element)
+        {
+            XmlElement refElement = element.ReferencedElement;
+            if (refElement != null)
+            {
+                return TrimText(element, element.InnerText);
             }
             return string.Empty;
         }
@@ -545,6 +571,8 @@ namespace SharpVectors.Renderers.Texts
             var docElement = element.OwnerDocument;
 
             ISet<string> svgFontFamilies = docElement.SvgFontFamilies;
+            IDictionary<string, string> styledFontIds = docElement.StyledFontIds;
+
             IList<string> svgFontNames   = null;
             if (svgFontFamilies != null && svgFontFamilies.Count != 0)
             {
@@ -561,10 +589,22 @@ namespace SharpVectors.Renderers.Texts
                 try
                 {
                     string fontName = fn.Trim(new char[] { ' ', '\'', '"' });
-                    if ((svgFontFamilies != null && svgFontFamilies.Count != 0) && svgFontFamilies.Contains(fontName))
+                    if (svgFontFamilies != null && svgFontFamilies.Count != 0)
                     {
-                        svgFontNames.Add(fontName);
-                        continue;
+                        if (svgFontFamilies.Contains(fontName))
+                        {
+                            svgFontNames.Add(fontName);
+                            continue;
+                        }
+                        else if (styledFontIds.ContainsKey(fontName))
+                        {
+                            string mappedFontName = styledFontIds[fontName];
+                            if (svgFontFamilies.Contains(mappedFontName))
+                            {
+                                svgFontNames.Add(mappedFontName);
+                                continue;
+                            }
+                        }
                     }
 
                     if (string.Equals(fontName, "serif", comparer))
@@ -582,14 +622,49 @@ namespace SharpVectors.Renderers.Texts
                         family     = WpfDrawingSettings.GenericMonospace;
                         familyType = WpfFontFamilyType.Generic;
                     }
+                    else if (styledFontIds.ContainsKey(fontName))
+                    {
+                        string mappedFontName = styledFontIds[fontName];
+                        var funcFamily = new Func<FontFamily, bool>(ff => string.Equals(ff.Source, mappedFontName, comparer));
+                        family = systemFontFamilies.FirstOrDefault(funcFamily);
+                        if (family != null)
+                        {
+                            _actualFontName = mappedFontName;
+                            familyType = WpfFontFamilyType.System;
+                        }
+                    }
                     else
                     {
+                        string normalizedFontName;
                         var funcFamily = new Func<FontFamily, bool>(ff => string.Equals(ff.Source, fontName, comparer));
                         family = systemFontFamilies.FirstOrDefault(funcFamily);
                         if (family != null)
                         {                            
                             _actualFontName = fontName;
                             familyType      = WpfFontFamilyType.System;
+                        }
+                        else if (fontName.IndexOf('-') > 0)
+                        {
+                            normalizedFontName = fontName.Replace("-", " ");
+                            funcFamily = new Func<FontFamily, bool>(ff => string.Equals(ff.Source,
+                                normalizedFontName, comparer));
+                            family = systemFontFamilies.FirstOrDefault(funcFamily);
+                            if (family != null)
+                            {
+                                _actualFontName = normalizedFontName;
+                                familyType = WpfFontFamilyType.System;
+                            }
+                        }
+                        else if (SplitByCaps(fontName, out normalizedFontName))
+                        {
+                            funcFamily = new Func<FontFamily, bool>(ff => string.Equals(ff.Source,
+                               normalizedFontName, comparer));
+                            family = systemFontFamilies.FirstOrDefault(funcFamily);
+                            if (family != null)
+                            {
+                                _actualFontName = normalizedFontName;
+                                familyType = WpfFontFamilyType.System;
+                            }
                         }
                     }
 
@@ -605,43 +680,62 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            //// If set, use the SVG-Font...NOT READY YET
-            //if (svgFontNames != null && svgFontNames.Count != 0)
-            //{
-            //    IList<SvgFontElement> svgFonts = docElement.GetFonts(svgFontNames);
-            //    if (svgFonts != null && svgFonts.Count != 0)
-            //    {
-            //        // For a single match...
-            //        if (svgFonts.Count == 1)
-            //        {
-            //            return new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
-            //                fontWeight, fontStyle, fontStretch);
-            //        }
+            // If set, use the SVG-Font...
+            if (svgFontNames != null && svgFontNames.Count != 0)
+            {
+                IList<SvgFontElement> svgFonts = docElement.GetFonts(svgFontNames);
+                if (svgFonts != null && svgFonts.Count != 0)
+                {
+                    string fontVariant = element.GetPropertyValue("font-variant");
 
-            //        // For multiple matches, we will test the variants...
-            //        string fontVariant = element.GetPropertyValue("font-variant");
-            //        if (string.IsNullOrWhiteSpace(fontVariant))
-            //        {
-            //            // Not found, return the first match...
-            //            return new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
-            //                fontWeight, fontStyle, fontStretch);
-            //        }
+                    // For a single match...
+                    if (svgFonts.Count == 1)
+                    {
+                        var fontFamilyInfo = new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
+                            fontWeight, fontStyle, fontStretch);
 
-            //        foreach (var svgFont in svgFonts)
-            //        {
-            //            var fontFace = svgFont.FontFace;
-            //            if (fontFace == null)
-            //            {
-            //                continue;
-            //            }
-            //            if (fontVariant.Equals(fontFace.FontVariant, comparer))
-            //            {
-            //                return new WpfFontFamilyInfo(svgFont.FontFamily, svgFont,
-            //                    fontWeight, fontStyle, fontStretch);
-            //            }
-            //        }
-            //    }
-            //}
+                        fontFamilyInfo.Variant = fontVariant;
+                        return fontFamilyInfo;
+                    }
+
+                    // For multiple matches, we will test the variants...
+                    if (string.IsNullOrWhiteSpace(fontVariant))
+                    {
+                        // Not found, return the first match...
+                        var fontFamilyInfo = new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
+                            fontWeight, fontStyle, fontStretch);
+
+                        fontFamilyInfo.Variant = fontVariant;
+                        return fontFamilyInfo;
+                    }
+
+                    foreach (var svgFont in svgFonts)
+                    {
+                        var fontFace = svgFont.FontFace;
+                        if (fontFace == null)
+                        {
+                            continue;
+                        }
+                        if (fontVariant.Equals(fontFace.FontVariant, comparer))
+                        {
+                            var fontFamilyInfo = new WpfFontFamilyInfo(svgFont.FontFamily, svgFont,
+                                fontWeight, fontStyle, fontStretch);
+
+                            fontFamilyInfo.Variant = fontVariant;
+                            return fontFamilyInfo;
+                        }
+                    }
+
+                    // If the variant is not found, return the first match...
+                    {
+                        var fontFamilyInfo = new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
+                            fontWeight, fontStyle, fontStretch);
+
+                        fontFamilyInfo.Variant = fontVariant;
+                        return fontFamilyInfo;
+                    }
+                }
+            }
 
             // No known font-family was found => default to "Arial Unicode MS"
             return new WpfFontFamilyInfo(familyType, _actualFontName, 
@@ -785,6 +879,24 @@ namespace SharpVectors.Renderers.Texts
             //sf.FormatFlags = sf.FormatFlags | StringFormatFlags.MeasureTrailingSpaces;
 
             return sf;
+        }
+
+        private static bool SplitByCaps(string input, out string output)
+        {
+            output = input;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            var regEx = new Regex(@"
+                (?<=[A-Z])(?=[A-Z][a-z]) |
+                 (?<=[^A-Z])(?=[A-Z]) |
+                 (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
+
+            output = regEx.Replace(input, " ");
+
+            return output.Length > input.Length;
         }
 
         #endregion

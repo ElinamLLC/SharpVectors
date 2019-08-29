@@ -103,6 +103,12 @@ namespace SharpVectors.Dom.Svg
                     return new SvgMissingGlyphElement(prefix, localName, ns, doc);
                 case "vkern":
                     return new SvgVKernElement(prefix, localName, ns, doc);
+                case "altGlyph":
+                    return new SvgAltGlyphElement(prefix, localName, ns, doc);
+                case "altGlyphDef":
+                    return new SvgAltGlyphDefElement(prefix, localName, ns, doc);
+                case "altGlyphItem":
+                    return new SvgAltGlyphItemElement(prefix, localName, ns, doc);
 
                 // Animation Support
                 case "animate":

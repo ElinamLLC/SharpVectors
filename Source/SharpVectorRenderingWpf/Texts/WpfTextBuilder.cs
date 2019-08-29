@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
+using System.Globalization;
+using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Renderers.Texts
@@ -20,7 +22,9 @@ namespace SharpVectors.Renderers.Texts
         protected readonly double _dpiX;
         protected readonly double _dpiY;
 
-        protected WpfTextBuilder(double fontSize)
+        protected CultureInfo _culture;
+
+        protected WpfTextBuilder(CultureInfo culture, double fontSize)
         {
             var sysParam = typeof(SystemParameters);
 
@@ -30,20 +34,57 @@ namespace SharpVectors.Renderers.Texts
             _dpiX     = (int)dpiXProperty.GetValue(null, null);
             _dpiY     = (int)dpiYProperty.GetValue(null, null);
             _fontSize = fontSize;
+            _culture  = culture;
         }
 
-        protected WpfTextBuilder(string fontName, double fontSize, Uri fontUri = null)
-            : this(fontSize)
+        protected WpfTextBuilder(CultureInfo culture, string fontName, double fontSize, Uri fontUri = null)
+            : this(culture, fontSize)
         {
             _fontName = fontName;
             _fontUri = fontUri;
         }
 
+        public static WpfTextBuilder Create(string familyInfo, CultureInfo culture, double fontSize)
+        {
+            if (string.IsNullOrWhiteSpace(familyInfo))
+            {
+                return new WpfGlyphTextBuilder(culture, fontSize);
+            }
+
+            WpfGlyphTextBuilder textBuilder = new WpfGlyphTextBuilder(culture, familyInfo, fontSize);
+
+            return textBuilder;
+        }
+
+        public static WpfTextBuilder Create(WpfFontFamilyInfo familyInfo, CultureInfo culture, double fontSize)
+        {
+            if (familyInfo == null)
+            {
+                return new WpfGlyphTextBuilder(culture, fontSize);
+            }
+            if (familyInfo.WpfFontFamilyType == WpfFontFamilyType.Svg)
+            {
+                WpfSvgTextBuilder textBuilder = new WpfSvgTextBuilder(familyInfo.FontElement, 
+                    culture, familyInfo.Name, fontSize);
+                textBuilder.FontVariant = familyInfo.Variant;
+
+                return textBuilder;
+            }
+
+            return new WpfGlyphTextBuilder(familyInfo, culture, fontSize);
+        }
+
+        public CultureInfo Culture
+        {
+            get {
+                return _culture;
+            }
+        }
+
         public abstract WpfFontFamilyType FontFamilyType
         {
             get;
-        }
-         
+        }        
 
         public string FontName
         {
@@ -118,15 +159,66 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        public abstract double Ascent
+        public abstract double Ascent { get; }
+
+        public abstract double Alphabetic { get; }
+
+        public abstract double Width { get; }
+
+        /// <summary>
+        /// Gets the distance from the top of the first line to the baseline of the first
+        /// line of a System.Windows.Media.FormattedText object.
+        /// </summary>
+        /// <value>
+        /// The distance from the top of the first line to the baseline of the first line,
+        /// provided in device-independent units (1/96th inch per unit).
+        /// </value>
+        public double Baseline
         {
-            get;
+            get {
+                return this.Ascent;
+            }
         }
 
-        public abstract IList<Rect> MeasureChars(string text, bool canBeWhitespace = true);
+        /// <summary>
+        /// Gets or sets the System.Windows.FlowDirection of a System.Windows.Media.FormattedText object.
+        /// </summary>
+        /// <value>
+        /// The System.Windows.FlowDirection of the formatted text.
+        /// </value>
+        public FlowDirection FlowDirection { get; set; }
 
-        public abstract Size MeasureText(string text, bool canBeWhitespace = true);
+        /// <summary>
+        /// Gets or sets the alignment of text within a System.Windows.Media.FormattedText object.
+        /// </summary>
+        /// <value>
+        /// One of the System.Windows.TextAlignment values that specifies the alignment of
+        /// text within a System.Windows.Media.FormattedText object.
+        /// </value>
+        public TextAlignment TextAlignment { get; set; }
 
-        public abstract PathGeometry Build(string text, double x, double y);
+        /// <summary>
+        /// Gets or sets the means by which the omission of text is indicated.
+        /// </summary>
+        /// <value>
+        /// One of the System.Windows.TextTrimming values that specifies how the omission
+        /// of text is indicated. The default is System.Windows.TextTrimming.WordEllipsis.
+        /// </value>
+        public TextTrimming Trimming { get; set; }
+
+        /// <summary>
+        /// Sets the System.Windows.TextDecorationCollection for the entire set of characters
+        /// in the System.Windows.Media.FormattedText object.
+        /// </summary>
+        /// <param name="textDecorations">The System.Windows.TextDecorationCollection to apply to the text.</param>
+        public void SetTextDecorations(TextDecorationCollection textDecorations)
+        {
+        }
+
+        public abstract IList<Rect> MeasureChars(SvgTextContentElement element, string text, bool canBeWhitespace = true);
+
+        public abstract Size MeasureText(SvgTextContentElement element, string text, bool canBeWhitespace = true);
+
+        public abstract PathGeometry Build(SvgTextContentElement element, string text, double x, double y);
     }
 }

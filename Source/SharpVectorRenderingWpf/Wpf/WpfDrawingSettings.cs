@@ -385,8 +385,8 @@ namespace SharpVectors.Renderers.Wpf
         /// Gets or sets the globally available default font family.
         /// </summary>
         /// <value>
-        /// An instance of the <see cref="FontFamily"/> specifying the globally
-        /// available font family. The default is a <c>Arial Unicode MS</c> font
+        /// An instance of the <see cref="FontFamily"/> specifying the globally available font family. 
+        /// The default is <c>Arial</c> font (since <c>Arial Unicode MS</c> is no longer shipped by MS).
         /// family.
         /// </value>
         public static FontFamily DefaultFontFamily
@@ -394,7 +394,8 @@ namespace SharpVectors.Renderers.Wpf
             get {
                 if (_defaultFontFamily == null)
                 {
-                    _defaultFontFamily = new FontFamily("Arial Unicode MS");
+                    //_defaultFontFamily = new FontFamily("Arial Unicode MS");
+                    _defaultFontFamily = new FontFamily("Arial");
                 }
 
                 return _defaultFontFamily;

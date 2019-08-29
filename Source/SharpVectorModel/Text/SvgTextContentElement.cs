@@ -203,7 +203,7 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public override void ElementChange(Object src, XmlNodeChangedEventArgs args)
+        public override void ElementChange(object src, XmlNodeChangedEventArgs args)
         {
             Invalidate();
 

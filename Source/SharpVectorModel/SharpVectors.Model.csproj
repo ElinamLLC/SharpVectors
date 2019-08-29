@@ -427,6 +427,9 @@
     <Compile Include="SvgExternalResourcesRequiredException.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Text\SvgAltGlyphDefElement.cs" />
+    <Compile Include="Text\SvgAltGlyphElement.cs" />
+    <Compile Include="Text\SvgAltGlyphItemElement.cs" />
     <Compile Include="Text\SvgFontElement.cs" />
     <Compile Include="Text\SvgFontFaceElement.cs" />
     <Compile Include="Text\SvgFontFaceFormatElement.cs" />

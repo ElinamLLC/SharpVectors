@@ -113,7 +113,7 @@ namespace SharpVectors.Renderers.Texts
                 placement = null; // Render it useless.
             }
 
-            this.RenderTextPath(element, pathDrawing, GetTRefText(element),
+            this.RenderTextPath(element, pathDrawing, GetText(element),
                 new Point(ctp.X, ctp.Y), rotate, placement);
         }
 

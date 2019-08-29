@@ -22,7 +22,7 @@ namespace SharpVectors.Dom.Css
         /// </summary>
         private string _value;
         /// <summary>
-        /// The prioroty of the style, e.g. "important"
+        /// The priority of the style, e.g. "important"
         /// </summary>
         private string _priority;
         /// <summary>

@@ -15,7 +15,7 @@ namespace SharpVectors.Dom.Svg
         #region Private static fields
 
         private static Regex isImportant = new Regex(@"!\s*important$");
-        
+
         #endregion
 
         #region Private Fields
@@ -30,7 +30,7 @@ namespace SharpVectors.Dom.Svg
         protected SvgStyleableElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            _presentationAttributes = new Dictionary<string, ICssValue>();
+            _presentationAttributes = new Dictionary<string, ICssValue>(StringComparer.Ordinal);
         }
 
         #endregion
@@ -39,8 +39,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedString ClassName
         {
-            get
-            {
+            get {
                 if (_className == null)
                 {
                     _className = new SvgAnimatedString(GetAttribute("class", string.Empty));
@@ -76,7 +75,7 @@ namespace SharpVectors.Dom.Svg
 
             return _presentationAttributes[name];
         }
-        
+
         #endregion
 
         #region GetValues

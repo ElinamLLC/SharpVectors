@@ -120,6 +120,27 @@
             set { this.SetAttribute("vert-origin-y", value); }
         }
 
+        // attribute name = "arabic-form" <string>: "initial | medial | terminal | isolated"
+        public string ArabicForm
+        {
+            get { return this.GetAttribute("arabic-form"); }
+            set { this.SetAttribute("arabic-form", value); }
+        }
+
+        // attribute name = "lang" <string>: "%LanguageCodes;"
+        public string Lang
+        {
+            get { return this.GetAttribute("lang"); }
+            set { this.SetAttribute("lang", value); }
+        }
+
+        // attribute name = "orientation" <string>: "h | v"
+        public string Orientation
+        {
+            get { return this.GetAttribute("orientation"); }
+            set { this.SetAttribute("orientation", value); }
+        }
+
         #endregion
     }
 }

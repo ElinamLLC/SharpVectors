@@ -184,7 +184,6 @@ namespace SharpVectors.Dom.Css
 
         public override double GetFloatValue(CssPrimitiveType unitType)
         {
-            double ret;
             if (PrimitiveType == CssPrimitiveType.Percentage)
             {
                 if (unitType == CssPrimitiveType.Percentage)
@@ -193,35 +192,34 @@ namespace SharpVectors.Dom.Css
                 }
                 throw new NotImplementedException("Can't get absolute values from percentages");
             }
-            else
+
+            double ret;
+            switch (unitType)
             {
-                switch (unitType)
-                {
-                    case CssPrimitiveType.Cm:
-                        ret = GetInLength() * CmPerIn;
-                        break;
-                    case CssPrimitiveType.Mm:
-                        ret = GetInLength() * CmPerIn * 10;
-                        break;
-                    case CssPrimitiveType.In:
-                        ret = GetInLength();
-                        break;
-                    case CssPrimitiveType.Pc:
-                        ret = GetInLength() * 6;
-                        break;
-                    case CssPrimitiveType.Pt:
-                        ret = GetInLength() * 72;
-                        break;
-                    case CssPrimitiveType.Ems:
-                        ret = GetPxLength() / GetFontSize();
-                        break;
-                    case CssPrimitiveType.Exs:
-                        ret = GetPxLength() / (GetFontSize() * 0.5);
-                        break;
-                    default:
-                        ret = GetPxLength();
-                        break;
-                }
+                case CssPrimitiveType.Cm:
+                    ret = GetInLength() * CmPerIn;
+                    break;
+                case CssPrimitiveType.Mm:
+                    ret = GetInLength() * CmPerIn * 10;
+                    break;
+                case CssPrimitiveType.In:
+                    ret = GetInLength();
+                    break;
+                case CssPrimitiveType.Pc:
+                    ret = GetInLength() * 6;
+                    break;
+                case CssPrimitiveType.Pt:
+                    ret = GetInLength() * 72;
+                    break;
+                case CssPrimitiveType.Ems:
+                    ret = GetPxLength() / GetFontSize();
+                    break;
+                case CssPrimitiveType.Exs:
+                    ret = GetPxLength() / (GetFontSize() * 0.5);
+                    break;
+                default:
+                    ret = GetPxLength();
+                    break;
             }
             return ret;
         }
