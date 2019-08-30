@@ -557,12 +557,12 @@ namespace SharpVectors.Renderers.Gdi
 
         public static GraphicsPath CreatePath(SvgRectElement element)
         {
-            float dx     = (float)Math.Round(element.X.AnimVal.Value, 4);
-            float dy     = (float)Math.Round(element.Y.AnimVal.Value, 4);
-            float width  = (float)Math.Round(element.Width.AnimVal.Value, 4);
+            float dx = (float)Math.Round(element.X.AnimVal.Value, 4);
+            float dy = (float)Math.Round(element.Y.AnimVal.Value, 4);
+            float width = (float)Math.Round(element.Width.AnimVal.Value, 4);
             float height = (float)Math.Round(element.Height.AnimVal.Value, 4);
-            float rx     = (float)Math.Round(element.Rx.AnimVal.Value, 4);
-            float ry     = (float)Math.Round(element.Ry.AnimVal.Value, 4);
+            float rx = (float)Math.Round(element.Rx.AnimVal.Value, 4);
+            float ry = (float)Math.Round(element.Ry.AnimVal.Value, 4);
 
             if (width <= 0 || height <= 0)
             {
@@ -643,93 +643,95 @@ namespace SharpVectors.Renderers.Gdi
             SvgPointF initPoint = new SvgPointF(0, 0);
             SvgPointF lastPoint = new SvgPointF(0, 0);
 
-            ISvgPathSeg segment = null;
-            SvgPathSegMoveto pathMoveTo = null;
-            SvgPathSegLineto pathLineTo = null;
-            SvgPathSegCurveto pathCurveTo = null;
-            SvgPathSegArc pathArc = null;
+            SvgPointF ptXY = new SvgPointF(0, 0);
 
-            ISvgPathSegList segments = element.PathSegList;
+            SvgPathSeg segment            = null;
+            SvgPathSegMoveto pathMoveTo   = null;
+            SvgPathSegLineto pathLineTo   = null;
+            SvgPathSegCurveto pathCurveTo = null;
+            SvgPathSegArc pathArc         = null;
+
+            SvgPathSegList segments = element.PathSegList;
             int nElems = segments.NumberOfItems;
 
             for (int i = 0; i < nElems; i++)
             {
                 segment = segments.GetItem(i);
-
-                if (DynamicCast.Cast(segment, out pathMoveTo))
+                switch (segment.PathType)
                 {
-                    //SvgPathSegMoveto seg = (SvgPathSegMoveto)segment;
-                    gp.StartFigure();
-                    lastPoint = initPoint = pathMoveTo.AbsXY;
-                }
-                else if (DynamicCast.Cast(segment, out pathLineTo))
-                {
-                    //SvgPathSegLineto seg = (SvgPathSegLineto)segment;
-                    SvgPointF p = pathLineTo.AbsXY;
-                    gp.AddLine(lastPoint.X, lastPoint.Y, p.X, p.Y);
+                    case SvgPathType.MoveTo: //if (DynamicCast.Cast(segment, out pathMoveTo))
+                        pathMoveTo = (SvgPathSegMoveto)segment;
+                        gp.StartFigure();
+                        lastPoint = initPoint = pathMoveTo.AbsXY;
+                        break;
+                    case SvgPathType.LineTo: //else if (DynamicCast.Cast(segment, out pathLineTo))
+                        pathLineTo = (SvgPathSegLineto)segment;
+                        ptXY = pathLineTo.AbsXY;
+                        gp.AddLine(lastPoint.X, lastPoint.Y, ptXY.X, ptXY.Y);
 
-                    lastPoint = p;
-                }
-                else if (DynamicCast.Cast(segment, out pathCurveTo))
-                {
-                    // SvgPathSegCurveto seg = (SvgPathSegCurveto)segment;
-                    SvgPointF xy = pathCurveTo.AbsXY;
-                    SvgPointF x1y1 = pathCurveTo.CubicX1Y1;
-                    SvgPointF x2y2 = pathCurveTo.CubicX2Y2;
-                    gp.AddBezier(lastPoint.X, lastPoint.Y, x1y1.X, x1y1.Y, x2y2.X, x2y2.Y, xy.X, xy.Y);
+                        lastPoint = ptXY;
+                        break;
+                    case SvgPathType.CurveTo: //else if (DynamicCast.Cast(segment, out pathCurveTo))
+                        pathCurveTo = (SvgPathSegCurveto)segment;
 
-                    lastPoint = xy;
-                }
-                else if (DynamicCast.Cast(segment, out pathArc))
-                {
-                    //SvgPathSegArc seg = (SvgPathSegArc)segment;
-                    SvgPointF p = pathArc.AbsXY;
-                    if (lastPoint.Equals(p))
-                    {
-                        // If the endpoints (x, y) and (x0, y0) are identical, then this
-                        // is equivalent to omitting the elliptical arc segment entirely.
-                    }
-                    else if (pathArc.R1 == 0 || pathArc.R2 == 0)
-                    {
-                        // Ensure radii are valid
-                        gp.AddLine(lastPoint.X, lastPoint.Y, p.X, p.Y);
-                    }
-                    else
-                    {
-                        CalculatedArcValues calcValues = pathArc.GetCalculatedArcValues();
+                        SvgPointF xy = pathCurveTo.AbsXY;
+                        SvgPointF x1y1 = pathCurveTo.CubicX1Y1;
+                        SvgPointF x2y2 = pathCurveTo.CubicX2Y2;
+                        gp.AddBezier(lastPoint.X, lastPoint.Y, x1y1.X, x1y1.Y, x2y2.X, x2y2.Y, xy.X, xy.Y);
 
-                        GraphicsPath gp2 = new GraphicsPath();
-                        gp2.StartFigure();
-                        gp2.AddArc((float)(calcValues.Cx - calcValues.CorrRx),
-                            (float)(calcValues.Cy - calcValues.CorrRy),
-                            (float)calcValues.CorrRx * 2, (float)calcValues.CorrRy * 2,
-                            (float)calcValues.AngleStart, (float)calcValues.AngleExtent);
+                        lastPoint = xy;
+                        break;
+                    case SvgPathType.ArcTo: //else if (DynamicCast.Cast(segment, out pathArc))
+                        pathArc = (SvgPathSegArc)segment;
+                        ptXY = pathArc.AbsXY;
+                        if (lastPoint.Equals(ptXY))
+                        {
+                            // If the endpoints (x, y) and (x0, y0) are identical, then this
+                            // is equivalent to omitting the elliptical arc segment entirely.
+                        }
+                        else if (pathArc.R1.Equals(0) || pathArc.R2.Equals(0))
+                        {
+                            // Ensure radii are valid
+                            gp.AddLine(lastPoint.X, lastPoint.Y, ptXY.X, ptXY.Y);
+                        }
+                        else
+                        {
+                            CalculatedArcValues calcValues = pathArc.GetCalculatedArcValues();
 
-                        Matrix matrix = new Matrix();
-                        matrix.Translate(-(float)calcValues.Cx, -(float)calcValues.Cy);
-                        gp2.Transform(matrix);
+                            GraphicsPath subPath = new GraphicsPath();
+                            subPath.StartFigure();
+                            subPath.AddArc((float)(calcValues.Cx - calcValues.CorrRx),
+                                (float)(calcValues.Cy - calcValues.CorrRy),
+                                (float)calcValues.CorrRx * 2, (float)calcValues.CorrRy * 2,
+                                (float)calcValues.AngleStart, (float)calcValues.AngleExtent);
 
-                        matrix = new Matrix();
-                        matrix.Rotate((float)pathArc.Angle);
-                        gp2.Transform(matrix);
+                            Matrix matrix = new Matrix();
+                            matrix.Translate(-(float)calcValues.Cx, -(float)calcValues.Cy);
+                            subPath.Transform(matrix);
 
-                        matrix = new Matrix();
-                        matrix.Translate((float)calcValues.Cx, (float)calcValues.Cy);
-                        gp2.Transform(matrix);
+                            matrix = new Matrix();
+                            matrix.Rotate((float)pathArc.Angle);
+                            subPath.Transform(matrix);
 
-                        gp.AddPath(gp2, true);
-                    }
+                            matrix = new Matrix();
+                            matrix.Translate((float)calcValues.Cx, (float)calcValues.Cy);
+                            subPath.Transform(matrix);
 
-                    lastPoint = p;
-                }
-                else if (segment is SvgPathSegClosePath)
-                {
-                    gp.CloseFigure();
-                    lastPoint = initPoint;
+                            gp.AddPath(subPath, true);
+                        }
+
+                        lastPoint = ptXY;
+                        break;
+                    case SvgPathType.Close://else if (segment is SvgPathSegClosePath)
+                        gp.CloseFigure();
+
+                        lastPoint = initPoint;
+                        break;
                 }
             }
 
             string fillRule = element.GetPropertyValue("fill-rule");
+
             if (fillRule == "evenodd")
                 gp.FillMode = FillMode.Alternate;
             else

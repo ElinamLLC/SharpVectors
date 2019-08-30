@@ -174,7 +174,14 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public ISvgPathSegList PathSegList
+        ISvgPathSegList ISvgAnimatedPathData.PathSegList
+        {
+            get {
+                return this.SegmentList();
+            }
+        }
+
+        public SvgPathSegList PathSegList
         {
             get {
                 return this.SegmentList();
@@ -188,7 +195,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgPathSegList AnimatedPathSegList
         {
-            get { return PathSegList; }
+            get { return this.PathSegList; }
         }
 
         public ISvgPathSegList AnimatedNormalizedPathSegList

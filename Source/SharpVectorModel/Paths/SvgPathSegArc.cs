@@ -57,6 +57,13 @@ namespace SharpVectors.Dom.Svg
 
         #region Public Properties
 
+        public override SvgPathType PathType
+        {
+            get {
+                return SvgPathType.ArcTo;
+            }
+        }
+
         public double X
         {
             get { return _x; }

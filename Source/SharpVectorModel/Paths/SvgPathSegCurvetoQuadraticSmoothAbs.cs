@@ -54,12 +54,21 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 SvgPathSeg prevSeg = PreviousSeg;
-                if (prevSeg == null || !(prevSeg is SvgPathSegCurvetoQuadratic))
+                //if (prevSeg == null || !(prevSeg is SvgPathSegCurvetoQuadratic))
+                //{
+                //    return prevSeg.AbsXY;
+                //}
+                if (prevSeg == null)
+                {
+                    return new SvgPointF(0, 0);
+                }
+                var curveToQuad = prevSeg as SvgPathSegCurvetoQuadratic;
+                if (curveToQuad == null)
                 {
                     return prevSeg.AbsXY;
                 }
                 SvgPointF prevXY = prevSeg.AbsXY;
-                SvgPointF prevX1Y1 = ((SvgPathSegCurvetoQuadratic)prevSeg).QuadraticX1Y1;
+                SvgPointF prevX1Y1 = curveToQuad.QuadraticX1Y1;
 
                 return new SvgPointF(2 * prevXY.X - prevX1Y1.X, 2 * prevXY.Y - prevX1Y1.Y);
             }

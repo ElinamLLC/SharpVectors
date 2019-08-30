@@ -21,7 +21,7 @@ namespace SharpVectors.Dom.Svg
 
         #region Constructors
 
-        internal SvgPathSegCurvetoCubicRel(double x, double y, double x1, double y1, double x2, double y2)
+        public SvgPathSegCurvetoCubicRel(double x, double y, double x1, double y1, double x2, double y2)
             : base(SvgPathSegType.CurveToCubicRel)
         {
             _x  = x;

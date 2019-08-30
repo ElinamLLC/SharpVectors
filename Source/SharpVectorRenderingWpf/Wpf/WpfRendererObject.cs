@@ -25,8 +25,8 @@ namespace SharpVectors.Renderers.Wpf
 
         protected WpfRendererObject()
         {
-            _flattenClosedPath    = false;
-            _flattenTolerance     = 0.0022;
+            _flattenClosedPath = false;
+            _flattenTolerance = 0.0022;
             _flattenToleranceType = ToleranceType.Relative;
         }
 
@@ -251,12 +251,12 @@ namespace SharpVectors.Renderers.Wpf
 
         public Geometry CreateGeometry(SvgRectElement element)
         {
-            double dx     = Math.Round(element.X.AnimVal.Value, 4);
-            double dy     = Math.Round(element.Y.AnimVal.Value, 4);
-            double width  = Math.Round(element.Width.AnimVal.Value, 4);
+            double dx = Math.Round(element.X.AnimVal.Value, 4);
+            double dy = Math.Round(element.Y.AnimVal.Value, 4);
+            double width = Math.Round(element.Width.AnimVal.Value, 4);
             double height = Math.Round(element.Height.AnimVal.Value, 4);
-            double rx     = Math.Round(element.Rx.AnimVal.Value, 4);
-            double ry     = Math.Round(element.Ry.AnimVal.Value, 4);
+            double rx = Math.Round(element.Rx.AnimVal.Value, 4);
+            double ry = Math.Round(element.Ry.AnimVal.Value, 4);
 
             if (width <= 0 || height <= 0)
             {
@@ -315,7 +315,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 geometry.Figures = PathFigureCollection.Parse(pathScript);
 
-                if (_flattenClosedPath && element.IsClosed && 
+                if (_flattenClosedPath && element.IsClosed &&
                     geometry.MayHaveCurves() == element.MayHaveCurves)
                 {
                     int closedCount = 0;
@@ -359,14 +359,15 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgPointF initPoint = new SvgPointF(0, 0);
             SvgPointF lastPoint = new SvgPointF(0, 0);
+            SvgPointF ptXY = new SvgPointF(0, 0);
 
-            ISvgPathSeg segment           = null;
+            SvgPathSeg segment            = null;
             SvgPathSegMoveto pathMoveTo   = null;
             SvgPathSegLineto pathLineTo   = null;
             SvgPathSegCurveto pathCurveTo = null;
             SvgPathSegArc pathArc         = null;
 
-            ISvgPathSegList segments = element.PathSegList;
+            SvgPathSegList segments = element.PathSegList;
             int nElems = segments.NumberOfItems;
 
             PathFigure pathFigure = null;
@@ -375,74 +376,81 @@ namespace SharpVectors.Renderers.Wpf
             {
                 segment = segments.GetItem(i);
 
-                if (DynamicCast.Cast(segment, out pathMoveTo))
+                switch (segment.PathType)
                 {
-                    if (pathFigure != null)
-                    {
-                        pathFigure.IsClosed = false;
-                        pathFigure.IsFilled = true;
-                        geometry.Figures.Add(pathFigure);
-                        pathFigure = null;
-                    }
+                    case SvgPathType.MoveTo: //if (DynamicCast.Cast(segment, out pathMoveTo))
+                        pathMoveTo = (SvgPathSegMoveto)segment;
+                        if (pathFigure != null)
+                        {
+                            pathFigure.IsClosed = false;
+                            pathFigure.IsFilled = true;
+                            geometry.Figures.Add(pathFigure);
+                            pathFigure = null;
+                        }
 
-                    lastPoint = initPoint = pathMoveTo.AbsXY;
+                        lastPoint = initPoint = pathMoveTo.AbsXY;
 
-                    pathFigure = new PathFigure();
-                    pathFigure.StartPoint = new Point(initPoint.ValueX, initPoint.ValueY);
-                }
-                else if (DynamicCast.Cast(segment, out pathLineTo))
-                {
-                    SvgPointF p = pathLineTo.AbsXY;
-                    pathFigure.Segments.Add(new LineSegment(new Point(p.ValueX, p.ValueY), true));
+                        pathFigure = new PathFigure();
+                        pathFigure.StartPoint = new Point(initPoint.ValueX, initPoint.ValueY);
+                        break;
 
-                    lastPoint = p;
-                }
-                else if (DynamicCast.Cast(segment, out pathCurveTo))
-                {
-                    SvgPointF xy   = pathCurveTo.AbsXY;
-                    SvgPointF x1y1 = pathCurveTo.CubicX1Y1;
-                    SvgPointF x2y2 = pathCurveTo.CubicX2Y2;
-                    pathFigure.Segments.Add(new BezierSegment(new Point(x1y1.ValueX, x1y1.ValueY),
-                        new Point(x2y2.ValueX, x2y2.ValueY), new Point(xy.ValueX, xy.ValueY), true));
+                    case SvgPathType.LineTo: //else if (DynamicCast.Cast(segment, out pathLineTo))
+                        pathLineTo = (SvgPathSegLineto)segment;
+                        ptXY = pathLineTo.AbsXY;
+                        pathFigure.Segments.Add(new LineSegment(new Point(ptXY.ValueX, ptXY.ValueY), true));
 
-                    lastPoint = xy;
-                }
-                else if (DynamicCast.Cast(segment, out pathArc))
-                {
-                    SvgPointF p = pathArc.AbsXY;
-                    if (lastPoint.Equals(p))
-                    {
-                        // If the endpoints (x, y) and (x0, y0) are identical, then this
-                        // is equivalent to omitting the elliptical arc segment entirely.
-                    }
-                    else if (pathArc.R1.Equals(0) || pathArc.R2.Equals(0))
-                    {
-                        // Ensure radii are valid
-                        pathFigure.Segments.Add(new LineSegment(new Point(p.ValueX, p.ValueY), true));
-                    }
-                    else
-                    {
-                        CalculatedArcValues calcValues = pathArc.GetCalculatedArcValues();
+                        lastPoint = ptXY;
+                        break;
 
-                        pathFigure.Segments.Add(new ArcSegment(new Point(p.ValueX, p.ValueY),
-                            new Size(pathArc.R1, pathArc.R2), pathArc.Angle, pathArc.LargeArcFlag,
-                            pathArc.SweepFlag ? SweepDirection.Clockwise : SweepDirection.Counterclockwise,
-                            true));
-                    }
+                    case SvgPathType.CurveTo: //else if (DynamicCast.Cast(segment, out pathCurveTo))
+                        pathCurveTo = (SvgPathSegCurveto)segment;
 
-                    lastPoint = p;
-                }
-                else if (segment is SvgPathSegClosePath)
-                {
-                    if (pathFigure != null)
-                    {
-                        pathFigure.IsClosed = true;
-                        pathFigure.IsFilled = true;
-                        geometry.Figures.Add(pathFigure);
-                        pathFigure = null;
-                    }
+                        SvgPointF xy = pathCurveTo.AbsXY;
+                        SvgPointF x1y1 = pathCurveTo.CubicX1Y1;
+                        SvgPointF x2y2 = pathCurveTo.CubicX2Y2;
+                        pathFigure.Segments.Add(new BezierSegment(new Point(x1y1.ValueX, x1y1.ValueY),
+                            new Point(x2y2.ValueX, x2y2.ValueY), new Point(xy.ValueX, xy.ValueY), true));
 
-                    lastPoint = initPoint;
+                        lastPoint = xy;
+                        break;
+
+                    case SvgPathType.ArcTo: //else if (DynamicCast.Cast(segment, out pathArc))
+                        pathArc = (SvgPathSegArc)segment;
+                        ptXY = pathArc.AbsXY;
+                        if (lastPoint.Equals(ptXY))
+                        {
+                            // If the endpoints (x, y) and (x0, y0) are identical, then this
+                            // is equivalent to omitting the elliptical arc segment entirely.
+                        }
+                        else if (pathArc.R1.Equals(0) || pathArc.R2.Equals(0))
+                        {
+                            // Ensure radii are valid
+                            pathFigure.Segments.Add(new LineSegment(new Point(ptXY.ValueX, ptXY.ValueY), true));
+                        }
+                        else
+                        {
+                            CalculatedArcValues calcValues = pathArc.GetCalculatedArcValues();
+
+                            pathFigure.Segments.Add(new ArcSegment(new Point(ptXY.ValueX, ptXY.ValueY),
+                                new Size(pathArc.R1, pathArc.R2), pathArc.Angle, pathArc.LargeArcFlag,
+                                pathArc.SweepFlag ? SweepDirection.Clockwise : SweepDirection.Counterclockwise,
+                                true));
+                        }
+
+                        lastPoint = ptXY;
+                        break;
+
+                    case SvgPathType.Close://else if (segment is SvgPathSegClosePath)
+                        if (pathFigure != null)
+                        {
+                            pathFigure.IsClosed = true;
+                            pathFigure.IsFilled = true;
+                            geometry.Figures.Add(pathFigure);
+                            pathFigure = null;
+                        }
+
+                        lastPoint = initPoint;
+                        break;
                 }
             }
 

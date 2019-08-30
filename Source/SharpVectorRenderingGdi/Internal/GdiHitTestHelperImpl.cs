@@ -45,20 +45,6 @@ namespace SharpVectors.Renderers.Gdi
             _idMapRaster = new Bitmap(imageWidth, imageHeight, format);
         }
 
-        /// <summary>
-        /// Returns the topmost object of a hit test by specifying a Point.
-        /// </summary>
-        /// <param name="pointX">The X-value of the point to hit test against.</param>
-        /// <param name="pointY">The Y-value of the point to hit test against.</param>
-        /// <returns>The hit test result of the renderer, returned as a <see cref="GdiHitTestResult"/> type.</returns>
-        public override GdiHitTestResult HitTest(int pointX, int pointY)
-        {
-            Color pixel = _idMapRaster.GetPixel(pointX, pointY);
-            SvgElement svgElement = GetElementFromColor(pixel);
-
-            return new GdiHitTestResult(pointX, pointY, svgElement);
-        }
-
         #endregion
 
         #region Public Properties
@@ -79,6 +65,25 @@ namespace SharpVectors.Renderers.Gdi
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// Returns the topmost object of a hit test by specifying a Point.
+        /// </summary>
+        /// <param name="pointX">The X-value of the point to hit test against.</param>
+        /// <param name="pointY">The Y-value of the point to hit test against.</param>
+        /// <returns>The hit test result of the renderer, returned as a <see cref="GdiHitTestResult"/> type.</returns>
+        public override GdiHitTestResult HitTest(int pointX, int pointY)
+        {
+            if (_idMapRaster == null || _idMapRaster.Width <= pointX || _idMapRaster.Height <= pointY)
+            {
+                return GdiHitTestResult.Empty;
+            }
+
+            Color pixel = _idMapRaster.GetPixel(pointX, pointY);
+            SvgElement svgElement = GetElementFromColor(pixel);
+
+            return new GdiHitTestResult(pointX, pointY, svgElement);
+        }
 
         public void ClearMap()
         {

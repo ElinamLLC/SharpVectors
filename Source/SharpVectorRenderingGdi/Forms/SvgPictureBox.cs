@@ -854,15 +854,18 @@ namespace SharpVectors.Renderers.Forms
         {
             base.OnMouseMove(e);
 
-            if (_lastPosX == e.X && _lastPosY == e.Y)
-                return;
-
-            _lastPosX = e.X;
-            _lastPosY = e.Y;
-
-            if (_svgRenderer != null)
+            if (_isSvgLoaded)
             {
-                _svgRenderer.OnMouseEvent("mousemove", e);
+                if (_lastPosX == e.X && _lastPosY == e.Y)
+                    return;
+
+                _lastPosX = e.X;
+                _lastPosY = e.Y;
+
+                if (_svgRenderer != null)
+                {
+                    _svgRenderer.OnMouseEvent("mousemove", e);
+                }
             }
         }
 
@@ -870,9 +873,12 @@ namespace SharpVectors.Renderers.Forms
         {
             base.OnMouseDown(e);
 
-            if (_svgRenderer != null)
+            if (_isSvgLoaded)
             {
-                _svgRenderer.OnMouseEvent("mousedown", e);
+                if (_svgRenderer != null)
+                {
+                    _svgRenderer.OnMouseEvent("mousedown", e);
+                }
             }
         }
 
@@ -880,9 +886,12 @@ namespace SharpVectors.Renderers.Forms
         {
             base.OnMouseUp(e);
 
-            if (_svgRenderer != null)
+            if (_isSvgLoaded)
             {
-                _svgRenderer.OnMouseEvent("mouseup", e);
+                if (_svgRenderer != null)
+                {
+                    _svgRenderer.OnMouseEvent("mouseup", e);
+                }
             }
         }
 

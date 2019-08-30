@@ -15,7 +15,7 @@ namespace SharpVectors.Dom.Svg
 
         private string _pathScript;
         private bool _readOnly;
-        private IList<ISvgPathSeg> _segments;
+        private IList<SvgPathSeg> _segments;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPathSegList(string d, bool readOnly)
         {
-            _segments = new List<ISvgPathSeg>();
+            _segments = new List<SvgPathSeg>();
 
             if (d == null)
             {
@@ -57,11 +57,15 @@ namespace SharpVectors.Dom.Svg
 
             if (pathList == null)
             {
-                _segments = new List<ISvgPathSeg>();
+                _segments = new List<SvgPathSeg>();
             }
             else
             {
-                _segments = new List<ISvgPathSeg>(pathList);
+                _segments = new List<SvgPathSeg>(pathList.NumberOfItems);
+                for (int i = 0; i < pathList.NumberOfItems; i++)
+                {
+                    _segments.Add((SvgPathSeg)pathList.GetItem(i));
+                }
 
                 var segList = pathList as SvgPathSegList;
 
@@ -126,7 +130,8 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPathSeg GetPreviousSegment(SvgPathSeg seg)
         {
-            int index = _segments.IndexOf(seg);
+            //            int index = _segments.IndexOf(seg);
+            int index = seg.Index;
             if (index == -1)
             {
                 throw new Exception("Path segment not part of this list");
@@ -135,12 +140,13 @@ namespace SharpVectors.Dom.Svg
             {
                 return null;
             }
-            return (SvgPathSeg)GetItem(index - 1);
+            return GetItem(index - 1);
         }
 
         public SvgPathSeg GetNextSegment(SvgPathSeg seg)
         {
-            int index = _segments.IndexOf(seg);
+            //            int index = _segments.IndexOf(seg);
+            int index = seg.Index;
             if (index == -1)
             {
                 throw new Exception("Path segment not part of this list");
@@ -149,7 +155,7 @@ namespace SharpVectors.Dom.Svg
             {
                 return null;
             }
-            return (SvgPathSeg)this[index + 1];
+            return this[index + 1];
         }
 
         public double GetStartAngle(int index)
@@ -218,14 +224,14 @@ namespace SharpVectors.Dom.Svg
             _segments.Clear();
         }
 
-        public ISvgPathSeg Initialize(ISvgPathSeg newItem)
+        public SvgPathSeg Initialize(SvgPathSeg newItem)
         {
             Clear();
 
             return AppendItem(newItem);
         }
 
-        public ISvgPathSeg GetItem(int index)
+        public SvgPathSeg GetItem(int index)
         {
             if (index < 0 || index >= NumberOfItems)
             {
@@ -235,63 +241,63 @@ namespace SharpVectors.Dom.Svg
             return _segments[index];
         }
 
-        public ISvgPathSeg this[int index]
+        public SvgPathSeg this[int index]
         {
             get {
-                return GetItem(index);
+                return this.GetItem(index);
             }
             set {
                 this.ReplaceItem(value, index);
             }
         }
 
-        public ISvgPathSeg InsertItemBefore(ISvgPathSeg newItem, int index)
+        public SvgPathSeg InsertItemBefore(SvgPathSeg newItem, int index)
         {
             if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
             _segments.Insert(index, newItem);
-            setListAndIndex(newItem as SvgPathSeg, index);
-            changeIndexes(index + 1, 1);
+            SetListAndIndex(newItem, index);
+            ChangeIndexes(index + 1, 1);
 
             return newItem;
         }
 
-        public ISvgPathSeg ReplaceItem(ISvgPathSeg newItem, int index)
+        public ISvgPathSeg ReplaceItem(SvgPathSeg newItem, int index)
         {
             if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            ISvgPathSeg replacedItem = GetItem(index);
+            SvgPathSeg replacedItem = this.GetItem(index);
             _segments[index] = newItem;
-            setListAndIndex(newItem as SvgPathSeg, index);
+            SetListAndIndex(newItem, index);
 
             return replacedItem;
         }
 
-        public ISvgPathSeg RemoveItem(int index)
+        public SvgPathSeg RemoveItem(int index)
         {
             if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
-            ISvgPathSeg result = GetItem(index);
+            SvgPathSeg result = GetItem(index);
             _segments.RemoveAt(index);
-            changeIndexes(index, -1);
+            ChangeIndexes(index, -1);
 
             return result;
         }
 
-        public ISvgPathSeg AppendItem(ISvgPathSeg newItem)
+        public SvgPathSeg AppendItem(SvgPathSeg newItem)
         {
             if (_readOnly)
             {
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
             }
             _segments.Add(newItem);
-            setListAndIndex(newItem as SvgPathSeg, _segments.Count - 1);
+            SetListAndIndex(newItem, _segments.Count - 1);
 
             return newItem;
         }
@@ -314,37 +320,37 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public void Add(ISvgPathSeg item)
+        public void Add(SvgPathSeg item)
         {
             this.AppendItem(item);
         }
 
-        public bool Contains(ISvgPathSeg item)
+        public bool Contains(SvgPathSeg item)
         {
             return this._segments.Contains(item);
         }
 
-        public void CopyTo(ISvgPathSeg[] array, int arrayIndex)
+        public void CopyTo(SvgPathSeg[] array, int arrayIndex)
         {
             this._segments.CopyTo(array, arrayIndex);
         }
 
-        public IEnumerator<ISvgPathSeg> GetEnumerator()
+        public IEnumerator<SvgPathSeg> GetEnumerator()
         {
             return this._segments.GetEnumerator();
         }
 
-        public int IndexOf(ISvgPathSeg item)
+        public int IndexOf(SvgPathSeg item)
         {
             return this._segments.IndexOf(item);
         }
 
-        public void Insert(int index, ISvgPathSeg item)
+        public void Insert(int index, SvgPathSeg item)
         {
             this.ReplaceItem(item, index);
         }
 
-        public bool Remove(ISvgPathSeg item)
+        public bool Remove(SvgPathSeg item)
         {
             return this._segments.Remove(item);
         }
@@ -361,28 +367,108 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
+        #region ISvgPathSegList Members
+
+        ISvgPathSeg IList<ISvgPathSeg>.this[int index]
+        {
+            get {
+                return _segments[index];
+            }
+            set {
+                _segments[index] = (SvgPathSeg)value;
+            }
+        }
+
+        ISvgPathSeg ISvgPathSegList.Initialize(ISvgPathSeg newItem)
+        {
+            return this.Initialize((SvgPathSeg)newItem);
+        }
+
+        ISvgPathSeg ISvgPathSegList.GetItem(int index)
+        {
+            return _segments[index];
+        }
+
+        ISvgPathSeg ISvgPathSegList.InsertItemBefore(ISvgPathSeg newItem, int index)
+        {
+            return this.InsertItemBefore((SvgPathSeg)newItem, index);
+        }
+
+        ISvgPathSeg ISvgPathSegList.RemoveItem(int index)
+        {
+            return this.RemoveItem(index);
+        }
+
+        ISvgPathSeg ISvgPathSegList.ReplaceItem(ISvgPathSeg newItem, int index)
+        {
+            return this.ReplaceItem((SvgPathSeg)newItem, index);
+        }
+
+        ISvgPathSeg ISvgPathSegList.AppendItem(ISvgPathSeg newItem)
+        {
+            return this.AppendItem((SvgPathSeg)newItem);
+        }
+
+        int IList<ISvgPathSeg>.IndexOf(ISvgPathSeg item)
+        {
+            return this.IndexOf((SvgPathSeg)item);
+        }
+
+        void IList<ISvgPathSeg>.Insert(int index, ISvgPathSeg item)
+        {
+            this.Insert(index, (SvgPathSeg)item);
+        }
+
+        void ICollection<ISvgPathSeg>.Add(ISvgPathSeg item)
+        {
+            this.Add((SvgPathSeg)item);
+        }
+
+        bool ICollection<ISvgPathSeg>.Contains(ISvgPathSeg item)
+        {
+            return this.Contains((SvgPathSeg)item);
+        }
+
+        void ICollection<ISvgPathSeg>.CopyTo(ISvgPathSeg[] array, int arrayIndex)
+        {
+            this.CopyTo((SvgPathSeg[])array, arrayIndex);
+        }
+
+        bool ICollection<ISvgPathSeg>.Remove(ISvgPathSeg item)
+        {
+            return this.Remove((SvgPathSeg)item);
+        }
+
+        IEnumerator<ISvgPathSeg> IEnumerable<ISvgPathSeg>.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        #endregion
+
         #region Private Methods
 
-        private void setListAndIndex(SvgPathSeg newItem, int index)
+        private void SetListAndIndex(SvgPathSeg newItem, int index)
         {
-            if (newItem != null)
-            {
-                newItem.SetList(this);
-                newItem.SetIndex(index);
-            }
-            else
+            if (newItem == null)
             {
                 throw new SvgException(SvgExceptionType.SvgWrongTypeErr,
                     "Can only add SvgPathSeg subclasses to ISvgPathSegList");
             }
+
+            newItem._list = this;
+            newItem._index = index;
+
+            //newItem.SetList(this);
+            //newItem.SetIndex(index);
         }
 
-        private void changeIndexes(int startAt, int diff)
+        private void ChangeIndexes(int startAt, int diff)
         {
             int count = _segments.Count;
             for (int i = startAt; i < count; i++)
             {
-                SvgPathSeg seg = _segments[i] as SvgPathSeg;
+                SvgPathSeg seg = _segments[i];
                 if (seg != null)
                 {
                     seg.SetIndexWithDiff(diff);

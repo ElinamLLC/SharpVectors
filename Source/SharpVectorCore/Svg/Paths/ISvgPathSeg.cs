@@ -7,6 +7,7 @@ namespace SharpVectors.Dom.Svg
     public interface ISvgPathSeg
     {
         SvgPathSegType PathSegType { get; }
+        SvgPathType PathType { get; }
         string PathSegTypeAsLetter { get; }
 
         // Extensions

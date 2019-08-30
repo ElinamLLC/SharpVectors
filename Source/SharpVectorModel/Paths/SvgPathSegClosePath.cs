@@ -7,8 +7,15 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public sealed class SvgPathSegClosePath : SvgPathSeg, ISvgPathSegClosePath
     {
-        internal SvgPathSegClosePath() : base(SvgPathSegType.ClosePath)
+        public SvgPathSegClosePath() : base(SvgPathSegType.ClosePath)
         {
+        }
+
+        public override SvgPathType PathType
+        {
+            get {
+                return SvgPathType.Close;
+            }
         }
 
         public override SvgPointF AbsXY

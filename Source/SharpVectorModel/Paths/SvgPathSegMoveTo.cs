@@ -18,35 +18,26 @@ namespace SharpVectors.Dom.Svg
             _y = y;
         }
 
+        public override SvgPathType PathType
+        {
+            get {
+                return SvgPathType.MoveTo;
+            }
+        }
+
         public abstract override SvgPointF AbsXY { get; }
 
         public override double StartAngle
         {
-            get
-            {
+            get {
                 return 0;
             }
         }
 
         public override double EndAngle
         {
-            get
-            {
+            get {
                 return 0;
-            }
-        }
-
-        public override string PathText
-        {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(PathSegTypeAsLetter);
-                sb.Append(_x);
-                sb.Append(",");
-                sb.Append(_y);
-
-                return sb.ToString();
             }
         }
 
@@ -60,6 +51,19 @@ namespace SharpVectors.Dom.Svg
         {
             get { return _y; }
             set { _y = value; }
+        }
+
+        public override string PathText
+        {
+            get {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(PathSegTypeAsLetter);
+                sb.Append(_x);
+                sb.Append(",");
+                sb.Append(_y);
+
+                return sb.ToString();
+            }
         }
     }
 }

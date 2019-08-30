@@ -7,8 +7,6 @@ namespace SharpVectors.Dom.Svg
     {
         private static readonly Regex RegexPathCmd    = new Regex(@"(?=[A-DF-Za-df-z])");
 
-        //private static readonly Regex RegexCoordSplit = new Regex(@"(\s*,\s*)|(\s+)|((?<=[0-9])(?=-))", RegexOptions.ExplicitCapture);
-
         private bool _isClosed;
         private bool _mayHaveCurves;
 
@@ -32,7 +30,7 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public bool Parse(ISvgPathSegList pathList, string pathSegs)
+        public bool Parse(SvgPathSegList pathList, string pathSegs)
         {
             if (pathList == null || string.IsNullOrWhiteSpace(pathSegs))
             {
@@ -44,7 +42,7 @@ namespace SharpVectors.Dom.Svg
 
             int closedPath = 0;
 
-            ISvgPathSeg seg;
+            SvgPathSeg seg;
             string[] paths = RegexPathCmd.Split(pathSegs);
 
             SvgPointF startPoint = new SvgPointF(0, 0);
@@ -56,8 +54,6 @@ namespace SharpVectors.Dom.Svg
                 {
                     continue;
                 }
-//                    char cmd = segment.ToCharArray(0, 1)[0];
-//                    double[] coords = ParseCoords(segment);
                 char cmd = segment[0];
                 double[] coords = SvgNumber.ParseDoubles(segment.Substring(1));
 
@@ -396,26 +392,5 @@ namespace SharpVectors.Dom.Svg
 
             return true;
         }
-
-        //private static double[] ParseCoords(string segment)
-        //{
-        //    double[] coords = new double[0];
-
-        //    segment = segment.Substring(1);
-        //    segment = segment.Trim();
-        //    segment = segment.Trim(new char[] { ',' });
-
-        //    if (segment.Length > 0)
-        //    {
-        //        string[] sCoords = RegexCoordSplit.Split(segment);
-
-        //        coords = new double[sCoords.Length];
-        //        for (int i = 0; i < sCoords.Length; i++)
-        //        {
-        //            coords[i] = SvgNumber.ParseNumber(sCoords[i]);
-        //        }
-        //    }
-        //    return coords;
-        //}
     }
 }

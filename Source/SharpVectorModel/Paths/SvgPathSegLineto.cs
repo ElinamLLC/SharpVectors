@@ -8,6 +8,13 @@ namespace SharpVectors.Dom.Svg
         {
         }
 
+        public override SvgPathType PathType
+        {
+            get {
+                return SvgPathType.LineTo;
+            }
+        }
+
         public abstract override SvgPointF AbsXY { get; }
 
         public override double StartAngle

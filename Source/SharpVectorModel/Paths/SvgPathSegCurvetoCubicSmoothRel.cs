@@ -75,17 +75,28 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 SvgPathSeg prevSeg = PreviousSeg;
-                if (prevSeg == null || !(prevSeg is SvgPathSegCurvetoCubic))
+                //if (prevSeg == null || !(prevSeg is SvgPathSegCurvetoCubic))
+                //{
+                //    return prevSeg.AbsXY;
+                //}
+                if (prevSeg == null)
+                {
+                    return new SvgPointF(0, 0);
+                }
+                if (prevSeg.PathType != SvgPathType.CurveTo)
                 {
                     return prevSeg.AbsXY;
                 }
-                else
+                var curveToCubic = prevSeg as SvgPathSegCurvetoCubic;
+                if (curveToCubic == null)
                 {
-                    SvgPointF prevXY = prevSeg.AbsXY;
-                    SvgPointF prevX2Y2 = ((SvgPathSegCurvetoCubic)prevSeg).CubicX2Y2;
-
-                    return new SvgPointF(2 * prevXY.X - prevX2Y2.X, 2 * prevXY.Y - prevX2Y2.Y);
+                    return prevSeg.AbsXY;
                 }
+
+                SvgPointF prevXY = prevSeg.AbsXY;
+                SvgPointF prevX2Y2 = curveToCubic.CubicX2Y2;
+
+                return new SvgPointF(2 * prevXY.X - prevX2Y2.X, 2 * prevXY.Y - prevX2Y2.Y);
             }
         }
 

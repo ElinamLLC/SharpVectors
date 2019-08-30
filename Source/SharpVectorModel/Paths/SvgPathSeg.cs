@@ -6,8 +6,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private int _index;
-        private SvgPathSegList _list;
+        internal int _index;
+        internal SvgPathSegList _list;
         private SvgPathSegType _type;
 
         private SvgPointF[] _limits;
@@ -24,6 +24,13 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Public Properties
+
+        public virtual SvgPathType PathType
+        {
+            get {
+                return SvgPathType.None;
+            }
+        }
 
         public abstract string PathText { get; }
         public abstract SvgPointF AbsXY { get; }

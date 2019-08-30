@@ -17,6 +17,13 @@ namespace SharpVectors.Dom.Svg
 
         #region Public Properties
 
+        public override SvgPathType PathType
+        {
+            get {
+                return SvgPathType.CurveTo;
+            }
+        }
+
         public abstract override SvgPointF AbsXY { get; }
         public abstract SvgPointF CubicX1Y1 { get; }
         public abstract SvgPointF CubicX2Y2 { get; }

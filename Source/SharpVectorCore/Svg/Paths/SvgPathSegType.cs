@@ -23,4 +23,14 @@ namespace SharpVectors.Dom.Svg
 		CurveToQuadraticSmoothAbs = 18,
 		CurveToQuadraticSmoothRel = 19,
 	}
+
+    public enum SvgPathType
+    {
+        None,
+        MoveTo,
+        LineTo,
+        CurveTo,
+        ArcTo,
+        Close
+    }
 }
