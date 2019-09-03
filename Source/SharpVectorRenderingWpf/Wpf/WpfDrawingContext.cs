@@ -11,6 +11,8 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private const string RegisteredIdKey = "_registeredIds";
+
         private bool _renderingClip;
         private bool _isFragment;
 
@@ -52,8 +54,14 @@ namespace SharpVectors.Renderers.Wpf
             _isFragment    = isFragment;
             _settings      = settings;
             _drawStack     = new Stack<DrawingGroup>();
-            _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             _paintContexts = new Dictionary<Guid, WpfSvgPaintContext>();
+
+            _registeredIds = settings[RegisteredIdKey] as HashSet<string>;
+            if (_registeredIds == null)
+            {
+                _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                settings[RegisteredIdKey] = _registeredIds;
+            }
 
             var visitors = settings.Visitors;
             if (visitors != null)
@@ -242,6 +250,9 @@ namespace SharpVectors.Renderers.Wpf
         {
             get {
                 return _settings.TextAsGeometry;
+            }
+            set {
+                _settings.TextAsGeometry = value;
             }
         }
 
@@ -519,7 +530,6 @@ namespace SharpVectors.Renderers.Wpf
                     _rootDrawing.Children.Add(_linkDrawing);
                 }
             }
-
         }
 
         public bool IsRegisteredId(string elementId)

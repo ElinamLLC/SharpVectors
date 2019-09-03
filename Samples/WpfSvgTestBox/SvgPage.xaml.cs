@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Xml;
 using System.Text;
 using System.Reflection;
 using System.Diagnostics;
-using System.IO.Compression;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -534,7 +535,7 @@ namespace WpfSvgTestBox
             }
 
             MemoryStream mStream = new MemoryStream();
-            XmlTextWriter writer = new XmlTextWriter(mStream, Encoding.Unicode);
+            XmlTextWriter writer = new XmlTextWriter(mStream, Encoding.UTF8);
             XmlDocument document = new XmlDocument();
             document.XmlResolver = null;
 

@@ -276,11 +276,17 @@ namespace SharpVectors.Converters
                 _wpfRenderer.LinkVisitor       = linkVisitor;
                 _wpfRenderer.ImageVisitor      = imageVisitor;
                 _wpfRenderer.FontFamilyVisitor = fontFamilyVisitor;
+
+                _wpfRenderer.BeginRender();
             }
         }
 
         protected virtual void EndProcessing()
         {
+            if (_wpfRenderer != null)
+            {
+                _wpfRenderer.EndRender();
+            }
             //TODO: Currently, experimental
             GC.Collect();
         }

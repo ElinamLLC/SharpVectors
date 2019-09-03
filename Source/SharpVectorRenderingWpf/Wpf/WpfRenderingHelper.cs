@@ -26,6 +26,7 @@ namespace SharpVectors.Renderers.Wpf
         private IDictionary<ISvgElement, WpfRenderingBase> _rendererMap;
 
         // A simple way to prevent use element circular references.
+        private ISet<string> _useIdElements;
         private ISet<int> _useElements;
 
         #endregion
@@ -41,6 +42,7 @@ namespace SharpVectors.Renderers.Wpf
             _renderer        = renderer;
             _rendererMap     = new Dictionary<ISvgElement, WpfRenderingBase>();
             _useElements     = new HashSet<int>();
+            _useIdElements   = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
        }
 
         #endregion
@@ -128,42 +130,87 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Private Methods
 
-        private bool BeginUseElement(SvgUseElement element)
+        private bool BeginUseElement(SvgUseElement element, out int hashCode)
         {
-            int hashCode = element.OuterXml.GetHashCode();
-            if (_useElements.Contains(hashCode))
+            hashCode = -1;
+
+            string useId = element.Id;
+            var refElement = element.ReferencedElement;
+            if (refElement == null)
             {
                 return false;
             }
+            string refId = refElement.GetAttribute("id");
+            if (!string.IsNullOrWhiteSpace(refId))
+            {
+                if (_useIdElements.Contains(refId))
+                {
+                    return false;
+                }
+                _useIdElements.Add(refId);
+            }
 
-            _useElements.Add(hashCode);
+            if (string.IsNullOrWhiteSpace(useId))
+            {
+                hashCode = element.OuterXml.GetHashCode();
+                if (_useElements.Contains(hashCode))
+                {
+                    return false;
+                }
+
+                _useElements.Add(hashCode);
+            }
+            else
+            {
+                if (_useIdElements.Contains(useId))
+                {
+                    return false;
+                }
+                _useIdElements.Add(useId);
+            }
 
             return true;
         } 
 
-        private bool BeginUseElement(int hashCode)
+        //private bool BeginUseElement(int hashCode)
+        //{
+        //    if (_useElements.Contains(hashCode))
+        //    {
+        //        return false;
+        //    }
+
+        //    _useElements.Add(hashCode);
+
+        //    return true;
+        //} 
+
+        private bool EndUseElement(SvgUseElement element, int hashCode)
         {
-            if (_useElements.Contains(hashCode))
+            bool isRemoved = _useElements.Remove(hashCode);
+            string useId = element.Id;
+            var refElement = element.ReferencedElement;
+            if (refElement == null)
             {
                 return false;
             }
+            string refId = refElement.GetAttribute("id");
+            if (!string.IsNullOrWhiteSpace(refId))
+            {
+                _useIdElements.Remove(refId);
+            }
+            if (string.IsNullOrWhiteSpace(useId))
+            {
+                //int hashCode = element.OuterXml.GetHashCode();
 
-            _useElements.Add(hashCode);
+                return isRemoved;
+            }
+            return _useIdElements.Remove(useId);
+        }
 
-            return true;
-        } 
-
-        private bool EndUseElement(SvgUseElement element)
-        {
-            int hashCode = element.OuterXml.GetHashCode();
-
-            return _useElements.Remove(hashCode);
-        } 
-
-        private bool EndUseElement(int hashCode)
-        {
-            return _useElements.Remove(hashCode);
-        } 
+        //private bool EndUseElement(int hashCode)
+        //{
+        //    return _useElements.Remove(hashCode);
+        //} 
 
         private void RenderElement(ISvgElement svgElement)
         {
@@ -213,9 +260,9 @@ namespace SharpVectors.Renderers.Wpf
         {
             SvgUseElement useElement = (SvgUseElement)svgElement;
 
-            int hashCode = useElement.OuterXml.GetHashCode();
+            int hashCode = 0; // useElement.OuterXml.GetHashCode();
 
-            if (!this.BeginUseElement(hashCode))
+            if (!this.BeginUseElement(useElement, out hashCode))
             {
                 return;
             }
@@ -225,7 +272,7 @@ namespace SharpVectors.Renderers.Wpf
             XmlElement refEl = useElement.ReferencedElement;
             if (refEl == null)
             {
-                this.EndUseElement(hashCode);
+                this.EndUseElement(useElement, hashCode);
                 return;
             }
 
@@ -266,7 +313,7 @@ namespace SharpVectors.Renderers.Wpf
             useElement.RemoveChild(refEl);
             useElement.RestoreReferencedElement(refEl);
 
-            this.EndUseElement(hashCode);
+            this.EndUseElement(useElement, hashCode);
         }
 
         private void RenderElementChildren(ISvgElement svgElement)

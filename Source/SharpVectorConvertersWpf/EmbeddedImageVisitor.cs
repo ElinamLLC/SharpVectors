@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Collections.Generic;
 using System.Windows.Media;
 
@@ -69,26 +70,44 @@ namespace SharpVectors.Converters
                 return null;
             }
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             string sURI    = element.Href.AnimVal.Replace(" ", "");
-            int nColon     = sURI.IndexOf(":", StringComparison.OrdinalIgnoreCase);
-            int nSemiColon = sURI.IndexOf(";", StringComparison.OrdinalIgnoreCase);
-            int nComma     = sURI.IndexOf(",", StringComparison.OrdinalIgnoreCase);
+            int nColon     = sURI.IndexOf(":", comparer);
+            int nSemiColon = sURI.IndexOf(";", comparer);
+            int nComma     = sURI.IndexOf(",", comparer);
 
             string sMimeType  = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
 
             string sContent   = SvgObject.RemoveWhitespace(sURI.Substring(nComma + 1));
             byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                 0, sContent.Length);
+            bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
 
-            switch (sMimeType.Trim())
+            if (string.Equals(sMimeType, "image/svg+xml", comparer))
             {
-                case "image/svg+xml":
+                if (isGZiped)
+                {
                     using (var stream = new MemoryStream(imageBytes))
-                    using (var reader = new FileSvgReader(context.Settings))
-                        return new DrawingImage(reader.Read(stream));
-                default:
-                    return new EmbeddedBitmapSource(new MemoryStream(imageBytes));
+                    {
+                        using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                        {
+                            using (var reader = new FileSvgReader(context.Settings))
+                                return new DrawingImage(reader.Read(zipStream));
+                        }
+                    }
+                }
+                else
+                {
+                    using (var stream = new MemoryStream(imageBytes))
+                    {
+                        using (var reader = new FileSvgReader(context.Settings))
+                            return new DrawingImage(reader.Read(stream));
+                    }
+                }
             }
+
+            return new EmbeddedBitmapSource(new MemoryStream(imageBytes));
         }
     }
 }

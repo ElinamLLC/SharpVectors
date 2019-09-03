@@ -24,10 +24,7 @@ namespace GdiW3cSvgTestSuite
     {
         #region Public Fields
 
-        private const string TestsSvg   = @"..\..\FullTestSuite";
-        private const string TestsSvg10 = @"..\..\W3cSvgTestSuites\Svg10";
-        private const string TestsSvg11 = @"..\..\W3cSvgTestSuites\Svg11";
-        private const string TestsSvg12 = @"..\..\W3cSvgTestSuites\Svg12";
+        public const string SettingsFileName = "SvgTestSettings.xml";
 
         #endregion
 
@@ -64,6 +61,8 @@ namespace GdiW3cSvgTestSuite
 
         private string _selectedValuePath;
 
+        private IList<SvgTestSuite> _testSuites;
+
         private WindowPosition _winPosition;
 
         private DockingTheme _theme;
@@ -73,32 +72,31 @@ namespace GdiW3cSvgTestSuite
         #region Constructors and Destructor
 
         public OptionSettings()
+            : this(string.Empty)
         {
-            string currentDir = Path.GetFullPath(TestsSvg10);
-            if (!Directory.Exists(currentDir))
-            {
-                Directory.CreateDirectory(currentDir);
-            }
-            _localSuitePath = currentDir;
-            _webSuitePath   = FullTestSuite;
-            _theme          = DockingTheme.LightTheme;
         }
 
         public OptionSettings(string testPath)
         {
             _localSuitePath = testPath;
+            _testSuites     = SvgTestSuite.Create();
 
-            if (string.IsNullOrWhiteSpace(testPath))
+            // For the start the default is selected
+            var selectedSuite = SvgTestSuite.GetDefault(_testSuites);
+            if (selectedSuite != null)
             {
-                string currentDir = Path.GetFullPath(TestsSvg10);
-                _localSuitePath = currentDir;
+                if (string.IsNullOrWhiteSpace(testPath))
+                {
+                    _localSuitePath = selectedSuite.LocalSuitePath;
+                }
+                _webSuitePath = selectedSuite.WebSuitePath;
             }
-            _webSuitePath = FullTestSuite;
+
             if (!Directory.Exists(_localSuitePath))
             {
                 Directory.CreateDirectory(_localSuitePath);
             }
-            _theme          = DockingTheme.LightTheme;
+            _theme = DockingTheme.LightTheme;
         }
 
         public OptionSettings(OptionSettings source)
@@ -112,6 +110,7 @@ namespace GdiW3cSvgTestSuite
             _localSuitePath = source._localSuitePath;
             _theme          = source._theme;
             _winPosition    = source._winPosition;
+            _testSuites     = source._testSuites;
         }
 
         #endregion
@@ -155,6 +154,24 @@ namespace GdiW3cSvgTestSuite
             }
             set {
                 _selectedValuePath = value;
+            }
+        }
+
+        public SvgTestSuite SelectedTestSuite
+        {
+            get {
+                if (_testSuites != null && _testSuites.Count != 0)
+                {
+                    return SvgTestSuite.GetSelected(_testSuites);
+                }
+                return null;
+            }
+        }
+
+        public IList<SvgTestSuite> TestSuites
+        {
+            get {
+                return _testSuites;
             }
         }
 
@@ -387,6 +404,9 @@ namespace GdiW3cSvgTestSuite
         private void Load(XmlReader reader, Form mainForm)
         {
             var comparer = StringComparison.OrdinalIgnoreCase;
+
+            List<SvgTestSuite> testSuites = new List<SvgTestSuite>(SvgTestSuite.TestSuiteCount);
+
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element)
@@ -401,37 +421,37 @@ namespace GdiW3cSvgTestSuite
 
                             switch (optionName)
                             {
-                                case "WebSuitePath":
-                                    _webSuitePath = optionValue;
-                                    break;
-                                case "LocalSuitePath":
-                                    if (optionValue.StartsWith(ParentSymbol, comparer))
-                                    {
-                                        var inputPath = string.Copy(_localSuitePath);
-                                        int indexOf = inputPath.IndexOf(SharpVectors, comparer);
+                                //case "WebSuitePath":
+                                //    _webSuitePath = optionValue;
+                                //    break;
+                                //case "LocalSuitePath":
+                                //    if (optionValue.StartsWith(ParentSymbol, comparer))
+                                //    {
+                                //        var inputPath = string.Copy(_localSuitePath);
+                                //        int indexOf = inputPath.IndexOf(SharpVectors, comparer);
 
-                                        if (indexOf > 0)
-                                        {
-                                            var basePath    = inputPath.Substring(0, indexOf);
-                                            _localSuitePath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
-                                        }
-                                        else
-                                        {
-                                            _localSuitePath = optionValue;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        _localSuitePath = optionValue;
-                                    }
+                                //        if (indexOf > 0)
+                                //        {
+                                //            var basePath    = inputPath.Substring(0, indexOf);
+                                //            _localSuitePath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
+                                //        }
+                                //        else
+                                //        {
+                                //            _localSuitePath = optionValue;
+                                //        }
+                                //    }
+                                //    else
+                                //    {
+                                //        _localSuitePath = optionValue;
+                                //    }
 
-                                    // Ignore old test suite directory, if found
-                                    if (string.IsNullOrWhiteSpace(_localSuitePath) || 
-                                        !this.IsLocalSuitePathChanged(Path.GetFullPath(TestsSvg)))
-                                    {
-                                        _localSuitePath = Path.GetFullPath(TestsSvg10);
-                                    }
-                                    break;
+                                //    // Ignore old test suite directory, if found
+                                //    if (string.IsNullOrWhiteSpace(_localSuitePath) || 
+                                //        !this.IsLocalSuitePathChanged(Path.GetFullPath(TestsSvg)))
+                                //    {
+                                //        _localSuitePath = Path.GetFullPath(TestsSvg10);
+                                //    }
+                                //    break;
                                 case "SelectedValuePath":
                                     _selectedValuePath = optionValue;
                                     break;
@@ -458,7 +478,18 @@ namespace GdiW3cSvgTestSuite
                             }
                         }
                     }
-                    else if (string.Equals(reader.Name, "placements", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(reader.Name, "testSuite", comparer))
+                    {
+                        if (!reader.IsEmptyElement)
+                        {
+                            SvgTestSuite testSuite = new SvgTestSuite(reader);
+                            if (testSuite.IsValid())
+                            {
+                                testSuites.Add(testSuite);
+                            }
+                        }
+                    }
+                    else if (string.Equals(reader.Name, "placements", comparer))
                     {
                         if (reader.IsEmptyElement == false)
                         {
@@ -469,6 +500,18 @@ namespace GdiW3cSvgTestSuite
                             }
                         }
                     }
+                }
+            }
+
+            if (testSuites.Count == SvgTestSuite.TestSuiteCount)
+            {
+                var selectedSuite = SvgTestSuite.GetSelected(testSuites);
+                if (selectedSuite != null)
+                {
+                    _localSuitePath = selectedSuite.LocalSuitePath;
+                    _webSuitePath = selectedSuite.WebSuitePath;
+
+                    _testSuites = testSuites;
                 }
             }
 
@@ -511,10 +554,29 @@ namespace GdiW3cSvgTestSuite
             writer.WriteStartElement("options");
 
             this.SaveOption(writer, "HidePathsRoot", _hidePathsRoot);
-            this.SaveOption(writer, "WebSuitePath", _webSuitePath);
-            this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
+            //this.SaveOption(writer, "WebSuitePath", _webSuitePath);
+            //this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
             this.SaveOption(writer, "SelectedValuePath", _selectedValuePath);
             this.SaveOption(writer, "Theme", _theme);
+
+            if (_testSuites != null && _testSuites.Count != 0)
+            {
+                var selectedSuite = SvgTestSuite.GetSelected(_testSuites);
+                if (selectedSuite != null)
+                {
+                    selectedSuite.LocalSuitePath = _localSuitePath;
+                    selectedSuite.WebSuitePath = _webSuitePath;
+                }
+
+                writer.WriteStartElement("testSuites");
+
+                foreach (var testSuite in _testSuites)
+                {
+                    testSuite.WriteXml(writer);
+                }
+
+                writer.WriteEndElement();
+            }
 
             try
             {
@@ -589,22 +651,32 @@ namespace GdiW3cSvgTestSuite
 
         public OptionSettings Clone()
         {
-            OptionSettings optSettings = new OptionSettings(this);
+            OptionSettings clonedSettings = new OptionSettings(this);
 
             if (_webSuitePath != null)
             {
-                optSettings._webSuitePath = string.Copy(_webSuitePath);
+                clonedSettings._webSuitePath = string.Copy(_webSuitePath);
             }
             if (_localSuitePath != null)
             {
-                optSettings._localSuitePath = string.Copy(_localSuitePath);
+                clonedSettings._localSuitePath = string.Copy(_localSuitePath);
             }
             if (_winPosition != null)
             {
-                optSettings._winPosition = _winPosition.Clone();
+                clonedSettings._winPosition = _winPosition.Clone();
+            }
+            if (_testSuites != null)
+            {
+                int itemCount = _testSuites.Count;
+                List<SvgTestSuite> clonedTestSuites = new List<SvgTestSuite>(itemCount);
+                for (int i = 0; i < itemCount; i++)
+                {
+                    clonedTestSuites.Add(_testSuites[i].Clone());
+                }
+                clonedSettings._testSuites = clonedTestSuites;
             }
 
-            return optSettings;
+            return clonedSettings;
         }
 
         object ICloneable.Clone()

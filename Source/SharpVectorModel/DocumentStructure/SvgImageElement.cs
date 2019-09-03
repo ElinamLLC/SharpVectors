@@ -19,7 +19,7 @@ namespace SharpVectors.Dom.Svg
         private SvgTests _svgTests;
         private SvgUriReference _uriReference;
         private SvgFitToViewBox _fitToViewBox;
-        private SvgExternalResourcesRequired _externalResourcesRequired;
+        private SvgExternalResourcesRequired _resourcesRequired;
 
         #endregion
 
@@ -28,10 +28,10 @@ namespace SharpVectors.Dom.Svg
         public SvgImageElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
-            _svgTests                  = new SvgTests(this);
-            _uriReference              = new SvgUriReference(this);
-            _fitToViewBox              = new SvgFitToViewBox(this);
+            _resourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests          = new SvgTests(this);
+            _uriReference      = new SvgUriReference(this);
+            _fitToViewBox      = new SvgFitToViewBox(this);
         }
 
         #endregion
@@ -69,54 +69,69 @@ namespace SharpVectors.Dom.Svg
 
         public bool IsSvgImage
         {
-            get
-            {
-                if (!Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+            get {
+                if (Href == null || Href.AnimVal == null)
                 {
-                    try
-                    {
-                        string absoluteUri = _uriReference.AbsoluteUri;
-                        if (!string.IsNullOrWhiteSpace(absoluteUri))
-                        {
-                            Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
-                            if (svgUri.IsFile)
-                            {   
-                                return absoluteUri.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) || 
-                                    absoluteUri.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase);
-                            }
-                        }
-
-                        WebResponse resource = _uriReference.ReferencedResource;
-                        if (resource == null)
-                        {
-                            return false;
-                        }
-
-                        // local files are returning as binary/octet-stream
-                        // this "fix" tests the file extension for .svg and .svgz
-                        string name = resource.ResponseUri.ToString().ToLower(CultureInfo.InvariantCulture);
-                        return (resource.ContentType.StartsWith("image/svg+xml", StringComparison.OrdinalIgnoreCase) ||
-                            name.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
-                            name.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase));
-                    }
-                    catch (WebException)
-                    {
-                        return false;
-                    }
-                    catch (IOException)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
 
-                return false;
+                if (Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+
+                try
+                {
+                    string absoluteUri = _uriReference.AbsoluteUri;
+                    if (string.IsNullOrWhiteSpace(absoluteUri))
+                    {
+                        return false;
+                    }
+
+                    if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // image elements can't reference elements in an svg file
+                        Trace.WriteLine("Image elements cannot reference elements in an svg file. Uri: " + absoluteUri);
+                        return false;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(absoluteUri))
+                    {
+                        Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
+                        if (svgUri.IsFile)
+                        {
+                            return absoluteUri.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
+                                absoluteUri.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase);
+                        }
+                    }
+
+                    WebResponse resource = _uriReference.ReferencedResource;
+                    if (resource == null)
+                    {
+                        return false;
+                    }
+
+                    // local files are returning as binary/octet-stream
+                    // this "fix" tests the file extension for .svg and .svgz
+                    string name = resource.ResponseUri.ToString().ToLower(CultureInfo.InvariantCulture);
+                    return (resource.ContentType.StartsWith("image/svg+xml", StringComparison.OrdinalIgnoreCase) ||
+                        name.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
+                        name.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase));
+                }
+                catch (WebException)
+                {
+                    return false;
+                }
+                catch (IOException)
+                {
+                    return false;
+                }
             }
         }
 
         public SvgWindow SvgWindow
         {
-            get
-            {
+            get {
                 if (this.IsSvgImage)
                 {
                     SvgWindow parentWindow = (SvgWindow)OwnerDocument.Window;
@@ -156,6 +171,31 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public bool IsRootReferenced(string baseUri)
+        {
+            if (string.IsNullOrWhiteSpace(baseUri) || _uriReference == null)
+            {
+                return false;
+            }
+            try
+            {
+                string absoluteUri = _uriReference.AbsoluteUri;
+                if (string.IsNullOrWhiteSpace(absoluteUri))
+                {
+                    return false;
+                }
+
+                var uriRoot = new Uri(baseUri, UriKind.Absolute);
+                Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
+
+                return svgUri.Equals(uriRoot);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region ISvgElement Members
@@ -169,8 +209,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Image;
             }
         }
@@ -181,8 +220,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Width
         {
-            get
-            {
+            get {
                 if (_width == null)
                 {
                     _width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Horizontal, "0");
@@ -193,8 +231,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Height
         {
-            get
-            {
+            get {
                 if (_height == null)
                 {
                     _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, "0");
@@ -206,8 +243,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength X
         {
-            get
-            {
+            get {
                 if (_x == null)
                 {
                     _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
@@ -219,8 +255,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Y
         {
-            get
-            {
+            get {
                 if (_y == null)
                 {
                     _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
@@ -232,8 +267,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgColorProfileElement ColorProfile
         {
-            get
-            {
+            get {
                 string colorProfile = this.GetAttribute("color-profile");
 
                 if (string.IsNullOrWhiteSpace(colorProfile))
@@ -247,16 +281,16 @@ namespace SharpVectors.Dom.Svg
                     XmlElement root = this.OwnerDocument.DocumentElement;
                     XmlNodeList elemList = root.GetElementsByTagName("color-profile");
                     if (elemList != null && elemList.Count != 0)
-                    {  
+                    {
                         for (int i = 0; i < elemList.Count; i++)
                         {
                             XmlElement elementNode = elemList[i] as XmlElement;
-                            if (elementNode != null && string.Equals(colorProfile, 
+                            if (elementNode != null && string.Equals(colorProfile,
                                 elementNode.GetAttribute("id")))
                             {
                                 profileElement = elementNode;
                                 break;
-                            }                                     
+                            }
                         }
                     }
                 }
@@ -271,24 +305,21 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedString Href
         {
-            get
-            {
+            get {
                 return _uriReference.Href;
             }
         }
 
         public SvgUriReference UriReference
         {
-            get
-            {
+            get {
                 return _uriReference;
             }
         }
 
         public XmlElement ReferencedElement
         {
-            get
-            {
+            get {
                 return _uriReference.ReferencedNode as XmlElement;
             }
         }
@@ -299,8 +330,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedPreserveAspectRatio PreserveAspectRatio
         {
-            get
-            {
+            get {
                 return _fitToViewBox.PreserveAspectRatio;
             }
         }
@@ -367,9 +397,8 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
-                return _externalResourcesRequired.ExternalResourcesRequired;
+            get {
+                return _resourcesRequired.ExternalResourcesRequired;
             }
         }
 

@@ -1120,11 +1120,28 @@ namespace SharpVectors.Converters
                         string sContent   = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
                         byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                             0, sContent.Length);
-                        using (var stream = new MemoryStream(imageBytes))
+                        bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
+                        if (isGZiped)
                         {
-                            using (var reader = new FileSvgReader(settings))
+                            using (var stream = new MemoryStream(imageBytes))
                             {
-                                drawing = reader.Read(stream);
+                                using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                                {
+                                    using (var reader = new FileSvgReader(settings))
+                                    {
+                                        drawing = reader.Read(zipStream);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (var stream = new MemoryStream(imageBytes))
+                            {
+                                using (var reader = new FileSvgReader(settings))
+                                {
+                                    drawing = reader.Read(stream);
+                                }
                             }
                         }
                     }

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<results>
+    <result version="1.4.0.0" date="2019-09-01T06:35:36.1938032+09:00">
+        <category label="Animations" total="81" unknowns="81" failures="0" successes="0" partials="0" />
+        <category label="Coordinates and Transforms" total="17" unknowns="17" failures="0" successes="0" partials="0" />
+        <category label="Fonts" total="13" unknowns="13" failures="0" successes="0" partials="0" />
+        <category label="Interactivities" total="27" unknowns="27" failures="0" successes="0" partials="0" />
+        <category label="Linking" total="14" unknowns="14" failures="0" successes="0" partials="0" />
+        <category label="Painting" total="50" unknowns="50" failures="0" successes="0" partials="0" />
+        <category label="Paths" total="13" unknowns="13" failures="0" successes="0" partials="0" />
+        <category label="Rendering" total="8" unknowns="8" failures="0" successes="0" partials="0" />
+        <category label="Scripting" total="13" unknowns="13" failures="0" successes="0" partials="0" />
+        <category label="Shapes" total="16" unknowns="16" failures="0" successes="0" partials="0" />
+        <category label="Structures" total="54" unknowns="54" failures="0" successes="0" partials="0" />
+        <category label="Styling" total="4" unknowns="4" failures="0" successes="0" partials="0" />
+        <category label="Text" total="39" unknowns="39" failures="0" successes="0" partials="0" />
+        <category label="Filter Effects" total="9" unknowns="9" failures="0" successes="0" partials="0" />
+        <category label="Media" total="57" unknowns="57" failures="0" successes="0" partials="0" />
+        <category label="SVG Micro DOM (uDOM)" total="77" unknowns="77" failures="0" successes="0" partials="0" />
+        <category label="Metadata and Others" total="4" unknowns="4" failures="0" successes="0" partials="0" />
+    </result>
+</results>

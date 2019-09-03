@@ -60,6 +60,11 @@ namespace SharpVectors.Renderers.Wpf
             ImageSource imageSource = null;
             if (imageElement.IsSvgImage)
             {
+                if (imageElement.IsRootReferenced(imageElement.OwnerDocument.BaseURI))
+                {
+                    return;
+                }
+
                 SvgWindow wnd = GetSvgWindow();
                 if (wnd == null)
                 {
@@ -448,6 +453,11 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
+            if (element.Href == null)
+            {
+                return null;
+            }
+
             if (!element.Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
             {
                 SvgUriReference svgUri = element.UriReference;
@@ -455,6 +465,11 @@ namespace SharpVectors.Renderers.Wpf
                 if (string.IsNullOrWhiteSpace(absoluteUri))
                 {
                     return null; // most likely, the image does not exist...
+                }
+                if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                {                    
+                    Trace.WriteLine("Uri: " + absoluteUri); // image elements can't reference elements in an svg file
+                    return null;
                 }
 
                 Uri imageUri = new Uri(svgUri.AbsoluteUri);
@@ -507,7 +522,7 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
 
-                string sURI     = element.Href.AnimVal.Replace(" ", "");
+                string sURI    = element.Href.AnimVal.Replace(" ", "");
                 int nColon     = sURI.IndexOf(":", StringComparison.OrdinalIgnoreCase);
                 int nSemiColon = sURI.IndexOf(";", StringComparison.OrdinalIgnoreCase);
                 int nComma     = sURI.IndexOf(",", StringComparison.OrdinalIgnoreCase);

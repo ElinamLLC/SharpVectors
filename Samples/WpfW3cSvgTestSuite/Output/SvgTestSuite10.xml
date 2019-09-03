@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<tests>
+<tests version="1.0" description="SVG 1.1 First Edition Test Suite: 13 December 2006">
     <category label="Animations">
         <test source="animate-elem-02-t.svg" title="animate-elem-02-t" state="failure" comment="SVG animation is currently not supported." description="Test 'additive' and 'accumulate' attributes." />
         <test source="animate-elem-03-t.svg" title="animate-elem-03-t" state="failure" comment="SVG animation is currently not supported." description="Test inheritance of animated properties." />
@@ -156,7 +156,7 @@
         <test source="pservers-grad-08-b.svg" title="pservers-grad-08-b" state="success" comment="Basic SVG Font is now supported." description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-09-b.svg" title="pservers-grad-09-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on linear gradients." />
         <test source="pservers-grad-10-b.svg" title="pservers-grad-10-b" state="success" comment="" description="Test that the viewer can handle the spreadMethod attribute on linear gradients." />
-        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="partial" comment="The linear gradient support is not complete, but the SVG Font is now supported." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="partial" comment="Gradient on text works best, when text is renderered as geometry." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-12-b.svg" title="pservers-grad-12-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on radial gradients." />
         <test source="pservers-grad-13-b.svg" title="pservers-grad-15-b" state="success" comment="" description="Tests the radial gradient focal point" />
         <test source="pservers-grad-14-b.svg" title="pservers-grad-16-b" state="success" comment="" description="Tests the spreadMethod attributes for gradients" />

@@ -263,11 +263,11 @@ namespace SharpVectors.Renderers.Gdi
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment)
             {
-                CssPrimitiveValue clipPath = ((SvgElement)_svgElement).GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
                 if (clipPath != null && clipPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
-                    string absoluteUri = ((SvgElement)_svgElement).ResolveUri(clipPath.GetStringValue());
+                    string absoluteUri = _svgElement.ResolveUri(clipPath.GetStringValue());
 
                     SvgClipPathElement eClipPath = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
 
@@ -324,7 +324,7 @@ namespace SharpVectors.Renderers.Gdi
         {
             Graphics graphics = gr.Graphics;
 
-            string colorRendering = ((SvgElement)_svgElement).GetComputedStringValue("color-rendering", string.Empty);
+            string colorRendering = _svgElement.GetComputedStringValue("color-rendering", string.Empty);
             switch (colorRendering)
             {
                 case "optimizeSpeed":
@@ -369,7 +369,7 @@ namespace SharpVectors.Renderers.Gdi
             }
             else
             {
-                string shapeRendering = ((SvgElement)_svgElement).GetComputedStringValue("shape-rendering", string.Empty);
+                string shapeRendering = _svgElement.GetComputedStringValue("shape-rendering", string.Empty);
                 switch (shapeRendering)
                 {
                     case "optimizeSpeed":
@@ -829,10 +829,7 @@ namespace SharpVectors.Renderers.Gdi
             {
                 return match.Groups["uri"].Value;
             }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
         }
 
         protected static void PaintMarkers(GdiGraphicsRenderer renderer,
@@ -842,9 +839,9 @@ namespace SharpVectors.Renderers.Gdi
 
             if (styleElm is ISharpMarkerHost)
             {
-                string markerStartUrl = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-start", "marker"));
+                string markerStartUrl  = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-start", "marker"));
                 string markerMiddleUrl = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-mid", "marker"));
-                string markerEndUrl = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-end", "marker"));
+                string markerEndUrl    = ExtractMarkerUrl(styleElm.GetPropertyValue("marker-end", "marker"));
 
                 if (markerStartUrl.Length > 0)
                 {

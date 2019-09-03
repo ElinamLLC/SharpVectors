@@ -35,11 +35,12 @@ namespace GdiW3cSvgTestSuite
             groupBoxGeneral.Font    = new Font(PanelDefaultFont, 18F, FontStyle.Bold, GraphicsUnit.World);
             groupBoxConversion.Font = new Font(PanelDefaultFont, 18F, FontStyle.Bold, GraphicsUnit.World);
 
-            panelGeneral.Font     = new Font(PanelDefaultFont, 14F, FontStyle.Regular, GraphicsUnit.World);
+            panelGeneral.Font       = new Font(PanelDefaultFont, 14F, FontStyle.Regular, GraphicsUnit.World);
 
-            chkHidePathsRoot.Font = new Font(chkHidePathsRoot.Font, FontStyle.Bold);
-            labelWeb.Font         = new Font(labelWeb.Font, FontStyle.Bold);
-            labelLocal.Font       = new Font(labelLocal.Font, FontStyle.Bold);
+            chkHidePathsRoot.Font   = new Font(chkHidePathsRoot.Font, FontStyle.Bold);
+            labelWeb.Font           = new Font(labelWeb.Font, FontStyle.Bold);
+            labelLocal.Font         = new Font(labelLocal.Font, FontStyle.Bold);
+            lblTestSuitesTitle.Font = new Font(lblTestSuitesTitle.Font, FontStyle.Bold);
         }
 
         #endregion
@@ -216,6 +217,53 @@ namespace GdiW3cSvgTestSuite
             }
         }
 
+        private void OnTestSuitesSelectionChanged(object sender, EventArgs e)
+        {
+            if (_mainForm == null || _isInitialising || _optionSettings == null)
+            {
+                return;
+            }
+
+            var selectedItem = cboTestSuites.SelectedItem as ComboBoxItem;
+            if (selectedItem == null || selectedItem.Tag == null)
+            {
+                return;
+            }
+            var testSuite = selectedItem.Tag as SvgTestSuite;
+            if (testSuite == null)
+            {
+                return;
+            }
+            string localSuitePath = testSuite.LocalSuitePath;
+            if (OptionSettings.IsTestSuiteAvailable(localSuitePath) == false)
+            {
+                PromptDialog dlg = new PromptDialog();
+                dlg.Owner = _mainForm;
+                dlg.OptionSettings = _optionSettings;
+
+                var dialogResult = dlg.ShowDialog();
+
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            _isInitialising = true;
+
+            txtSvgSuitePath.Text    = _optionSettings.GetPath(testSuite.LocalSuitePath);
+            txtSvgSuitePathWeb.Text = testSuite.WebSuitePath;
+
+            _optionSettings.LocalSuitePath = testSuite.LocalSuitePath;
+            _optionSettings.WebSuitePath = testSuite.WebSuitePath;
+
+            testSuite.SetSelected(_optionSettings.TestSuites);
+
+            _isGeneralModified = true;
+
+            _isInitialising = false;
+        }
+
         private void InitializeData()
         {
             if (_mainForm == null || _mainForm.OptionSettings == null)
@@ -231,6 +279,31 @@ namespace GdiW3cSvgTestSuite
 
             txtSvgSuitePath.ReadOnly = _optionSettings.HidePathsRoot;
             chkHidePathsRoot.Checked = _optionSettings.HidePathsRoot;
+
+            var testSuites = _optionSettings.TestSuites;
+            if (testSuites != null && testSuites.Count != 0)
+            {
+                cboTestSuites.Items.Clear();
+
+                int selectedIndex = 0;
+
+                for (int i = 0; i < testSuites.Count; i++)
+                {
+                    var testSuite = testSuites[i];
+                    ComboBoxItem comboxItem = new ComboBoxItem();
+                    comboxItem.Value = testSuite.Description;
+                    comboxItem.Tag   = testSuite;
+
+                    cboTestSuites.Items.Add(comboxItem);
+
+                    if (testSuite.IsSelected)
+                    {
+                        selectedIndex = i;
+                    }
+                }
+
+                cboTestSuites.SelectedIndex = selectedIndex;
+            }
 
             _isConversionModified = false;
 

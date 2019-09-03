@@ -299,14 +299,19 @@ namespace SharpVectors.Dom.Css
         public string CssText
         {
             get {
+                if (!string.IsNullOrWhiteSpace(_name))
+                {
+                    if (_red == null || _green == null || _blue == null)
+                    {
+                        return _name;
+                    }
+                }
                 if (_alpha != null)
                 {
-                    return "rgba(" + ((CssPrimitiveValue)Red).CssText + ","
-                        + ((CssPrimitiveValue)Green).CssText + "," + ((CssPrimitiveValue)Blue).CssText + "," 
-                        + ((CssPrimitiveValue)Alpha).CssText + ")";
+                    return "rgba(" + _red.CssText + "," + _green.CssText + "," + _blue.CssText + "," 
+                        + _alpha.CssText + ")";
                 }
-                return "rgb(" + ((CssPrimitiveValue)Red).CssText + ","
-                    + ((CssPrimitiveValue)Green).CssText + "," + ((CssPrimitiveValue)Blue).CssText + ")";
+                return "rgb(" + _red.CssText + "," + _green.CssText + "," + _blue.CssText + ")";
             }
         }
 

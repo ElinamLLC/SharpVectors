@@ -189,6 +189,7 @@
     <Compile Include="SvgTestInfo.cs" />
     <Compile Include="SvgTestResult.cs" />
     <Compile Include="SvgTestState.cs" />
+    <Compile Include="SvgTestSuite.cs" />
     <Compile Include="TestDockPanel.cs">
       <SubType>Form</SubType>
     </Compile>

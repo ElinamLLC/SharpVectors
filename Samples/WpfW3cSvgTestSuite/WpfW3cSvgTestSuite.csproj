@@ -196,6 +196,7 @@
       <DependentUpon>SvgTestResultsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SvgTestState.cs" />
+    <Compile Include="SvgTestSuite.cs" />
     <Compile Include="TraceDocument.xaml.cs">
       <DependentUpon>TraceDocument.xaml</DependentUpon>
     </Compile>

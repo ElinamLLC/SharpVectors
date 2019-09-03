@@ -18,6 +18,43 @@ namespace SharpVectors.Renderers.Utils
             {
                 return null;
             }
+            if (color.IsSystemColor)
+            {
+                string colorName = color.Name;
+
+                switch (colorName.ToLowerInvariant())
+                {
+                    case "activeborder": return SystemColors.ActiveBorderColor;
+                    case "activecaption": return SystemColors.ActiveCaptionColor;
+                    case "appworkspace": return SystemColors.AppWorkspaceColor;
+                    case "background": return SystemColors.DesktopColor;
+                    case "buttonface": return SystemColors.ControlColor;
+                    case "buttonhighlight": return SystemColors.ControlLightLightColor;
+                    case "buttonshadow": return SystemColors.ControlDarkColor;
+                    case "buttontext": return SystemColors.ControlTextColor;
+                    case "captiontext": return SystemColors.ActiveCaptionTextColor;
+                    case "graytext": return SystemColors.GrayTextColor;
+                    case "highlight": return SystemColors.HighlightColor;
+                    case "highlighttext": return SystemColors.HighlightTextColor;
+                    case "inactiveborder": return SystemColors.InactiveBorderColor;
+                    case "inactivecaption": return SystemColors.InactiveCaptionColor;
+                    case "inactivecaptiontext": return SystemColors.InactiveCaptionTextColor;
+                    case "infobackground": return SystemColors.InfoColor;
+                    case "infotext": return SystemColors.InfoTextColor;
+                    case "menu": return SystemColors.MenuColor;
+                    case "menutext": return SystemColors.MenuTextColor;
+                    case "scrollbar": return SystemColors.ScrollBarColor;
+                    case "threeddarkshadow": return SystemColors.ControlDarkDarkColor;
+                    case "threedface": return SystemColors.ControlColor;
+                    case "threedhighlight": return SystemColors.ControlLightColor;
+                    case "threedlightshadow": return SystemColors.ControlLightLightColor;
+                    case "window": return SystemColors.WindowColor;
+                    case "windowframe": return SystemColors.WindowFrameColor;
+                    case "windowtext": return SystemColors.WindowTextColor;
+                }
+
+                return (Color)ColorConverter.ConvertFromString(colorName);
+            }
 
             double dRed   = color.Red.GetFloatValue(CssPrimitiveType.Number);
             double dGreen = color.Green.GetFloatValue(CssPrimitiveType.Number);

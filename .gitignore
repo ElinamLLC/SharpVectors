@@ -252,3 +252,8 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Test Suites
+Samples/W3cSvgTestSuites/Svg10
+Samples/W3cSvgTestSuites/Svg11
+Samples/W3cSvgTestSuites/Svg12

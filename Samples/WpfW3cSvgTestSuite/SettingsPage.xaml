@@ -31,6 +31,15 @@
                         Security feature, which is only useful in screenshot to be posted on the web.
                     </TextBlock>
                     <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                        <TextBlock Name="lblTestSuitesTitle" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                   Margin="3">W3C SVG Suite Version:</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Name="lblTestSuitesSelect" Margin="3">Selected Suite:</TextBlock>
+                            <ComboBox Name="cboTestSuites" Margin="12, 0, 0, 6" Width="500" SelectionChanged="OnTestSuitesSelectionChanged" 
+                                HorizontalAlignment="Stretch" Style="{StaticResource ComboBoxFlatStyle}"/>
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
                         <TextBlock Name="lblSvgSuitePathWeb" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
                                    Margin="3">Web W3C SVG Suite Path:</TextBlock>
                         <TextBox Name="txtSvgSuitePathWeb" HorizontalAlignment="Stretch" Margin="30 3 3 3" IsReadOnly="True"/>

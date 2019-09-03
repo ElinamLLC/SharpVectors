@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
 
 using System.Windows;
@@ -54,6 +55,44 @@ namespace WpfW3cSvgTestSuite
         #endregion
 
         #region Public Methods
+
+        public bool LoadDocument(string pngFilePath)
+        {
+            if (string.IsNullOrWhiteSpace(pngFilePath) || !File.Exists(pngFilePath))
+            {
+                return false;
+            }
+            BitmapSource bitmap = null;
+            try
+            {
+                bitmap = new BitmapImage(new Uri(pngFilePath));
+                if (bitmap.DpiY < 96) // Some of the images were not created in right DPI
+                {
+                    double dpi = 96;
+                    int width  = bitmap.PixelWidth;
+                    int height = bitmap.PixelHeight;
+
+                    int stride       = width * 4; // 4 bytes per pixel
+                    byte[] pixelData = new byte[stride * height];
+                    bitmap.CopyPixels(pixelData, stride, 0);
+
+                    bitmap = BitmapSource.Create(width, height, dpi, dpi, PixelFormats.Bgra32, null, pixelData, stride);
+                }
+
+                pngResult.Source = bitmap;
+
+                pngCanvas.Width  = bitmap.Width + 10;
+                pngCanvas.Height = bitmap.Height + 10;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+
+                return false;
+            }
+        }
 
         public bool LoadDocument(string pngFilePath, SvgTestInfo testInfo, object extraInfo)
         {

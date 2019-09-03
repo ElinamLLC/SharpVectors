@@ -7,8 +7,10 @@ namespace SharpVectors.Runtime
     {
         #region Public Fields
 
-        public const string LinksLayer = "AnimationLayer";
-        public const string DrawLayer  = "DrawingLayer";
+        public const string GZipSignature = "H4sI";
+
+        public const string LinksLayer    = "AnimationLayer";
+        public const string DrawLayer     = "DrawingLayer";
 
         public static readonly DependencyProperty IdProperty =
             DependencyProperty.RegisterAttached("Id", typeof(string), typeof(SvgObject),

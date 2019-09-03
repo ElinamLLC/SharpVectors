@@ -11,12 +11,30 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPointList()
         {
-
         }
 
         public SvgPointList(string listString)
         {
-            this.FromString(listString);
+            try
+            {
+                this.FromString(listString);
+            }
+            catch (SvgException)
+            {
+                // remove existing list items
+                Clear();
+
+                var coords = SvgNumber.ParseDoubles(listString);
+                if (coords != null && coords.Length != 0)
+                {
+                    for (int i = 0; i < coords.Length; i += 2)
+                    {
+                        if ((i + 1) >= coords.Length)
+                            break;
+                        this.AppendItem(new SvgPoint(coords[i], coords[i + 1]));
+                    }
+                }
+            }
         }
 
         #endregion
@@ -32,6 +50,7 @@ namespace SharpVectors.Dom.Svg
             {
                 return;
             }
+
             int len = listString.Length; // temp
 
             int p = 0; // pos
@@ -75,7 +94,7 @@ namespace SharpVectors.Dom.Svg
                         else
                         {
                             // must be the y, use temp as x and append the item
-                            AppendItem(new SvgPoint(SvgNumber.ParseNumber(listString.Substring(tempSNum, (tempENum - tempSNum) + 1)),
+                            this.AppendItem(new SvgPoint(SvgNumber.ParseNumber(listString.Substring(tempSNum, (tempENum - tempSNum) + 1)),
                                 SvgNumber.ParseNumber(listString.Substring(sNum, (eNum - sNum) + 1))));
                             tempSNum = -1;
                             tempENum = -1;

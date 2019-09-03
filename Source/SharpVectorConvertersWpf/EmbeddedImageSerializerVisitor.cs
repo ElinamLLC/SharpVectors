@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Reflection;
 using System.Diagnostics;
 using System.Collections.Generic;
+
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -170,12 +172,29 @@ namespace SharpVectors.Converters
             string sContent = SvgObject.RemoveWhitespace(sURI.Substring(nComma + 1));
             byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                 0, sContent.Length);
+            bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
 
             if (string.Equals(sMimeType, "image/svg+xml", comparer))
             {
-                using (var stream = new MemoryStream(imageBytes))
-                using (var reader = new FileSvgReader(context.Settings))
-                    return new DrawingImage(reader.Read(stream));
+                if (isGZiped)
+                {
+                    using (var stream = new MemoryStream(imageBytes))
+                    {
+                        using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                        {
+                            using (var reader = new FileSvgReader(context.Settings))
+                                return new DrawingImage(reader.Read(zipStream));
+                        }
+                    }
+                }
+                else
+                {
+                    using (var stream = new MemoryStream(imageBytes))
+                    {
+                        using (var reader = new FileSvgReader(context.Settings))
+                            return new DrawingImage(reader.Read(stream));
+                    }
+                }
             }
 
             BitmapImage imageSource = new BitmapImage();

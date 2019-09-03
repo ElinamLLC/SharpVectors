@@ -293,14 +293,35 @@ namespace SharpVectors.Converters
                         string sContent = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
                         byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                             0, sContent.Length);
-                        using (var stream = new MemoryStream(imageBytes))
+                        bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
+                        if (isGZiped)
                         {
-                            using (var reader = new FileSvgReader(settings))
+                            using (var stream = new MemoryStream(imageBytes))
                             {
-                                DrawingGroup drawGroup = reader.Read(stream);
-                                if (drawGroup != null)
+                                using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                                 {
-                                    return drawGroup;
+                                    using (var reader = new FileSvgReader(settings))
+                                    {
+                                        DrawingGroup drawGroup = reader.Read(zipStream);
+                                        if (drawGroup != null)
+                                        {
+                                            return drawGroup;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (var stream = new MemoryStream(imageBytes))
+                            {
+                                using (var reader = new FileSvgReader(settings))
+                                {
+                                    DrawingGroup drawGroup = reader.Read(stream);
+                                    if (drawGroup != null)
+                                    {
+                                        return drawGroup;
+                                    }
                                 }
                             }
                         }

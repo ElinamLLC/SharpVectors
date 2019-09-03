@@ -7,6 +7,9 @@ namespace SharpVectors.Dom.Css
 	/// </summary>
 	public interface ICssColor
 	{
+        /// <summary>
+        /// Gets the name of the color, if available.
+        /// </summary>
         string Name { get; }
 
 		/// <summary>
@@ -33,5 +36,10 @@ namespace SharpVectors.Dom.Css
         /// Gets a value which indicates whether the color value has alpha value or not.
         /// </summary>
         bool HasAlpha { get; }
+
+        /// <summary>
+        /// Gets a value which indicates whether the color is system-defined color.
+        /// </summary>
+        bool IsSystemColor { get; }
 	}
 }

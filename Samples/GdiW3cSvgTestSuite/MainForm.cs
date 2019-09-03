@@ -16,7 +16,7 @@ namespace GdiW3cSvgTestSuite
 
         public const string AppTitle        = "Svg Test Suite";
         public const string AppErrorTitle   = "Svg Test Suite - Error";
-        public const string SvgTestSettings = "SvgTestSettings.xml";
+//        public const string SvgTestSettings = "SvgTestSettings.xml";
 
         private DockPanel _dockPanel;
         private DockingTheme _currentTheme;
@@ -67,7 +67,7 @@ namespace GdiW3cSvgTestSuite
             this.Height = (int)(Math.Min(1080, height) * 0.90);
             
             _optionSettings = new OptionSettings();
-            _testSettingsPath = Path.GetFullPath(SvgTestSettings);
+            _testSettingsPath = Path.GetFullPath(OptionSettings.SettingsFileName);
             if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
             {
                 _optionSettings.Load(_testSettingsPath, this);
@@ -346,7 +346,7 @@ namespace GdiW3cSvgTestSuite
             _dockPanel.Dock                       = DockStyle.Fill;
             _dockPanel.DockBackColor              = Color.White;
             _dockPanel.DockBottomPortion          = 300D;
-            _dockPanel.DockLeftPortion            = 300D;
+            _dockPanel.DockLeftPortion            = 350D;
             _dockPanel.DockRightPortion           = 300D;
             _dockPanel.DockTopPortion             = 150D;
             _dockPanel.Font                       = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.World, 0);
@@ -397,9 +397,9 @@ namespace GdiW3cSvgTestSuite
             _resultsPanel.Text = "Test Results";
             _resultsPanel.Show(_testPanel.Pane, null);
 
-            _testViewPanel.Pages.Add(_testPanel);
             _testViewPanel.Pages.Add(_aboutTestPanel);
             _testViewPanel.Pages.Add(_inputPanel);
+            _testViewPanel.Pages.Add(_testPanel);
 
             var dockPanels = new DockPanelContent[]
             {

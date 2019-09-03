@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Text;
+using System.Diagnostics;
 using System.ComponentModel;
 using System.IO.Compression;
 using System.Collections.Generic;
@@ -32,11 +33,8 @@ namespace WpfW3cSvgTestSuite
         private const int LeftPane         = 330;
         private const int LeftBottomPane   = 220;
 
-        private const string AppTitle        = "SVG Test Suite";
-        private const string AppErrorTitle   = "SVG Test Suite - Error";
-        private const string SvgTestSuite    = "SvgTestSuite10.xml";
-        private const string SvgTestResults  = "SvgTestResults10.xml";
-        private const string SvgTestSettings = "SvgTestSettings.xml";
+        private const string AppTitle      = "SVG Test Suite";
+        private const string AppErrorTitle = "SVG Test Suite - Error";
   
         private bool _isTreeModified;
         private bool _isShown;
@@ -311,7 +309,7 @@ namespace WpfW3cSvgTestSuite
 
             string selectedPath     = _optionSettings.LocalSuitePath;
 
-            _testSettingsPath = IoPath.GetFullPath(SvgTestSettings);
+            _testSettingsPath = IoPath.GetFullPath(OptionSettings.SettingsFileName);
             if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
             {
                 _optionSettings.Load(_testSettingsPath);
@@ -342,6 +340,10 @@ namespace WpfW3cSvgTestSuite
                 }
                 catch (Exception ex)
                 {
+                    Trace.WriteLine("");
+                    Trace.TraceError(ex.ToString());
+                    Trace.WriteLine("");
+
                     MessageBox.Show(ex.ToString(), AppErrorTitle,
                         MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -591,7 +593,7 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
             string pngFilePath = IoPath.Combine(_suitePath,
-                "png\\full-" + IoPath.ChangeExtension(testItem.FileName, ".png"));
+                "png\\" + IoPath.ChangeExtension(testItem.FileName, ".png"));
             if (!File.Exists(pngFilePath))
             {
                 EnableTestPanel(false);
@@ -602,6 +604,11 @@ namespace WpfW3cSvgTestSuite
 
             try
             {
+                if (_aboutPage != null)
+                {
+                    _aboutPage.LoadDocument(svgFilePath, testItem, null);
+                }
+
                 if (_svgPage != null)
                 {
                     _svgPage.LoadDocument(svgFilePath, testItem, null);
@@ -612,6 +619,42 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 this.Cursor = Cursors.Arrow;
 
+                Trace.WriteLine("");
+                Trace.TraceError(ex.ToString());
+                Trace.WriteLine("");
+
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return;
+            }
+
+            DrawingGroup drawing = null;
+
+            try
+            {
+                drawing = _fileReader.Read(svgFilePath, _directoryInfo);
+                if (drawing == null)
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                _currentDrawing = null;
+                if (_drawingPage != null)
+                {
+                    _drawingPage.UnloadDocument();
+                    _drawingPage.LoadDocument(pngFilePath);
+                }
+
+                _isTreeChangedPending = false;
+                this.Cursor = Cursors.Arrow;
+
+                Trace.WriteLine("");
+                Trace.TraceError(ex.ToString());
+                Trace.WriteLine("");
+
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -620,12 +663,6 @@ namespace WpfW3cSvgTestSuite
 
             try
             {
-                DrawingGroup drawing = _fileReader.Read(svgFilePath, _directoryInfo);
-                if (drawing == null)
-                {
-                    return;
-                }
-
                 if (_drawingPage != null)
                 {
                     _drawingPage.LoadDocument(pngFilePath, testItem, drawing);
@@ -659,11 +696,6 @@ namespace WpfW3cSvgTestSuite
                     frameAbout.NavigationUIVisibility = NavigationUIVisibility.Hidden;
                 }
 
-                if (_aboutPage != null)
-                {
-                    _aboutPage.LoadDocument(svgFilePath, testItem, null);
-                }
-
                 if (_browserPage != null)
                 {
                     _browserPage.LoadDocument(svgFilePath, testItem, drawing);
@@ -686,9 +718,17 @@ namespace WpfW3cSvgTestSuite
             catch (Exception ex)
             {
                 _currentDrawing = null;
+                if (_drawingPage != null)
+                {
+                    _drawingPage.UnloadDocument();
+                }
 
                 //EnableTestPanel(false);
                 _isTreeChangedPending = false;
+
+                Trace.WriteLine("");
+                Trace.TraceError(ex.ToString());
+                Trace.WriteLine("");
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -1029,6 +1069,12 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
+            var selectedSuite = _optionSettings.SelectedTestSuite;
+            if (selectedSuite == null)
+            {
+                return;
+            }
+
             _svgPath          = svgPath;
             _pngPath          = pngPath;
 
@@ -1037,7 +1083,7 @@ namespace WpfW3cSvgTestSuite
 
             _testResults = new List<SvgTestResult>();
 
-            _testResultsPath = IoPath.GetFullPath(SvgTestResults);
+            _testResultsPath = IoPath.GetFullPath(selectedSuite.ResultFileName);
             if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -1051,7 +1097,7 @@ namespace WpfW3cSvgTestSuite
                 }
             }
 
-            string fullFilePath = IoPath.GetFullPath(SvgTestSuite);
+            string fullFilePath = IoPath.GetFullPath(selectedSuite.TestFileName);
             if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -1419,6 +1465,13 @@ namespace WpfW3cSvgTestSuite
 
             writer.WriteStartDocument();
             writer.WriteStartElement("tests");
+
+            var selectedSuite = _optionSettings.SelectedTestSuite;
+            if (selectedSuite != null)
+            {
+                writer.WriteAttributeString("version", selectedSuite.Version);
+                writer.WriteAttributeString("description", selectedSuite.Description);
+            }
 
             for (int i = 0; i < treeNodes.Count; i++)
             {

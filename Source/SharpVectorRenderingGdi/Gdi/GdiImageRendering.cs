@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Text;
 using System.Drawing;
@@ -296,9 +297,6 @@ namespace SharpVectors.Renderers.Gdi
 
                 if (sMimeType.Equals("image/svg+xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    var svgData     = Convert.FromBase64String(Convert.ToBase64String(bResult));
-                    var svgFragment = Encoding.ASCII.GetString(svgData);
-
                     GdiGraphicsRenderer renderer = new GdiGraphicsRenderer(true, false);
 
                     var currentWindow = element.OwnerDocument.Window as SvgWindow;
@@ -306,7 +304,26 @@ namespace SharpVectors.Renderers.Gdi
                     renderer.Window = svgWindow;
 
                     SvgDocument doc = svgWindow.CreateEmptySvgDocument();
-                    doc.LoadXml(svgFragment);
+                    bool isGZiped = sContent.StartsWith(GdiObject.GZipSignature, StringComparison.Ordinal);
+                    if (isGZiped)
+                    {
+                        byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
+                            0, sContent.Length);
+                        using (var stream = new MemoryStream(imageBytes))
+                        {
+                            using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                            {
+                                doc.Load(zipStream);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var svgData     = Convert.FromBase64String(Convert.ToBase64String(bResult));
+                        var svgFragment = Encoding.ASCII.GetString(svgData);
+
+                        doc.LoadXml(svgFragment);
+                    }
                     svgWindow.Document = doc;
 
                     SvgSvgElement elm = (SvgSvgElement)doc.RootElement;

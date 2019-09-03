@@ -15,48 +15,54 @@ namespace GdiW3cSvgTestSuite
     [Serializable]
     public class ComboBoxItem
     {
+        private object _tag;
         private object _value;
         private Image _image;
-
 
         /// <summary>
         /// ComobBox Item.
         /// </summary>
         public object Value
         {
-            get
-            {
+            get {
                 return _value;
             }
-            set
-            {
+            set {
                 _value = value;
             }
         }
 
+        /// <summary>
+        /// ComobBox Tag.
+        /// </summary>
+        public object Tag
+        {
+            get {
+                return _tag;
+            }
+            set {
+                _tag = value;
+            }
+        }
 
         /// <summary>
         /// Item image.
         /// </summary>
         public Image Image
         {
-            get
-            {
+            get {
                 return _image;
             }
-            set
-            {
+            set {
                 _image = value;
             }
         }
 
-
         public ComboBoxItem()
         {
-            _value = String.Empty;
-            _image  = new Bitmap(1,1);
+            _value = string.Empty;
+            _image = new Bitmap(1, 1);
         }
-
 
         /// <summary>
         /// Constructor item without image.
@@ -66,10 +72,8 @@ namespace GdiW3cSvgTestSuite
         {
             _value = value;
             _image = new Bitmap(1, 1);
-            
         }
 
-       
         /// <summary>
         ///  Constructor item with image.
         /// </summary>
@@ -80,7 +84,6 @@ namespace GdiW3cSvgTestSuite
             _value = value;
             _image = image;
         }
-
 
         public override string ToString()
         {

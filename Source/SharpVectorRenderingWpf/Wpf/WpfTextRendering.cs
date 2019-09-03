@@ -688,7 +688,20 @@ namespace SharpVectors.Renderers.Wpf
             {
                 placement.UpdatePositions(targetText);
             }
+
+            // Force conversion to path geometry for text with surrogate pair, XmlXamlWriter cannot handle the output
+            bool isGeometryMode = _context.TextAsGeometry;
+            for (int i = 0; i < targetText.Length - 1; i++)
+            {
+                if (char.IsSurrogatePair(targetText[i], targetText[i + 1]))
+                {
+                    _context.TextAsGeometry = true;
+                    break;
+                }
+            }
             _horzRenderer.RenderSingleLineText(element, ref ctp, targetText, rotate, placement);
+
+            _context.TextAsGeometry = isGeometryMode;
         }
 
         private void RenderTextRunH(SvgTextContentElement element, ref Point ctp,
@@ -703,7 +716,20 @@ namespace SharpVectors.Renderers.Wpf
             {
                 placement.UpdatePositions(text);
             }
+
+            // Force conversion to path geometry for text with surrogate pair, XmlXamlWriter cannot handle the output
+            bool isGeometryMode = _context.TextAsGeometry;
+            for (int i = 0; i < text.Length - 1; i++)
+            {
+                if (char.IsSurrogatePair(text[i], text[i + 1]))
+                {
+                    _context.TextAsGeometry = true;
+                    break;
+                }
+            }
             _horzRenderer.RenderTextRun(element, ref ctp, text, rotate, placement);
+
+            _context.TextAsGeometry = isGeometryMode;
         }
 
         #endregion

@@ -22,6 +22,12 @@ namespace GdiSvgTestBox
     [Serializable]
     public sealed class OptionSettings : ICloneable
     {
+        #region Public Fields
+
+        public const string SettingsFileName = "SvgTestSettings.xml";
+
+        #endregion
+
         #region Private Interop Methods
 
         [DllImport("shell32.dll", SetLastError = true)]
@@ -40,7 +46,7 @@ namespace GdiSvgTestBox
         private const string SharpVectors = "SharpVectors";
 
         private const string FullTestSuite 
-            = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/FullTestSuite.zip";
+            = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/Svg10.zip";
 
         [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -442,7 +448,7 @@ namespace GdiSvgTestBox
                             }
                         }
                     }
-                    else if (string.Equals(reader.Name, "placements", StringComparison.OrdinalIgnoreCase))
+                    else if (string.Equals(reader.Name, "placements", comparer))
                     {
                         if (reader.IsEmptyElement == false)
                         {

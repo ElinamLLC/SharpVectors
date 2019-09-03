@@ -4,6 +4,7 @@ using System.Xml;
 using System.Text;
 using System.Linq;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using SharpVectors.Renderers.Wpf;
@@ -15,10 +16,7 @@ namespace WpfW3cSvgTestSuite
     {
         #region Public Fields
 
-        private const string TestsSvg   = @"..\..\FullTestSuite";
-        private const string TestsSvg10 = @"..\..\W3cSvgTestSuites\Svg10";
-        private const string TestsSvg11 = @"..\..\W3cSvgTestSuites\Svg11";
-        private const string TestsSvg12 = @"..\..\W3cSvgTestSuites\Svg12";
+        public const string SettingsFileName = "SvgTestSettings.xml";
 
         #endregion
 
@@ -45,9 +43,6 @@ namespace WpfW3cSvgTestSuite
         private const string ParentSymbol = "..\\";
         private const string SharpVectors = "SharpVectors";
 
-        private const string FullTestSuite 
-            = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/FullTestSuite.zip";
-
         [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool IsDirectoryEmpty([MarshalAs(UnmanagedType.LPStr)]string directory);
@@ -58,6 +53,8 @@ namespace WpfW3cSvgTestSuite
 
         private string _selectedValuePath;
 
+        private IList<SvgTestSuite> _testSuites;
+
         private WpfDrawingSettings _wpfSettings;
 
         #endregion
@@ -65,32 +62,32 @@ namespace WpfW3cSvgTestSuite
         #region Constructors and Destructor
 
         public OptionSettings()
+            : this(new WpfDrawingSettings(), string.Empty)
         {
-            _wpfSettings = new WpfDrawingSettings();
-            string currentDir = Path.GetFullPath(TestsSvg10);
-            if (!Directory.Exists(currentDir))
-            {
-                Directory.CreateDirectory(currentDir);
-            }
-            _localSuitePath = currentDir;
-            _webSuitePath = FullTestSuite;
         }
 
         public OptionSettings(WpfDrawingSettings wpfSettings, string testPath)
         {
             _wpfSettings    = wpfSettings;
             _localSuitePath = testPath;
+            _testSuites     = SvgTestSuite.Create();
 
             if (wpfSettings == null)
             {
                 _wpfSettings = new WpfDrawingSettings();
             }
-            if (string.IsNullOrWhiteSpace(testPath))
+
+            // For the start the default is selected
+            var selectedSuite = SvgTestSuite.GetDefault(_testSuites);
+            if (selectedSuite != null)
             {
-                string currentDir = Path.GetFullPath(TestsSvg10);
-                _localSuitePath = currentDir;
+                if (string.IsNullOrWhiteSpace(testPath))
+                {
+                    _localSuitePath = selectedSuite.LocalSuitePath;
+                }
+                _webSuitePath   = selectedSuite.WebSuitePath;
             }
-            _webSuitePath = FullTestSuite;
+
             if (!Directory.Exists(_localSuitePath))
             {
                 Directory.CreateDirectory(_localSuitePath);
@@ -107,6 +104,7 @@ namespace WpfW3cSvgTestSuite
             _webSuitePath   = source._webSuitePath;
             _localSuitePath = source._localSuitePath;
             _wpfSettings    = source._wpfSettings;
+            _testSuites     = source._testSuites;
         }
 
         #endregion
@@ -163,6 +161,24 @@ namespace WpfW3cSvgTestSuite
                 {
                     _wpfSettings = value;
                 }
+            }
+        }
+
+        public SvgTestSuite SelectedTestSuite
+        {
+            get {
+                if (_testSuites != null && _testSuites.Count != 0)
+                {
+                    return SvgTestSuite.GetSelected(_testSuites);
+                }
+                return null;
+            }
+        }
+
+        public IList<SvgTestSuite> TestSuites
+        {
+            get {
+                return _testSuites;
             }
         }
 
@@ -378,83 +394,78 @@ namespace WpfW3cSvgTestSuite
         {
             var comparer = StringComparison.OrdinalIgnoreCase;
 
+            List<SvgTestSuite> testSuites = new List<SvgTestSuite>(SvgTestSuite.TestSuiteCount);
+
             while (reader.Read())
             {
-                if (reader.NodeType == XmlNodeType.Element &&
-                    string.Equals(reader.Name, "option", comparer))
+                if (reader.NodeType == XmlNodeType.Element)
                 {
-                    string optionName = reader.GetAttribute("name");
-                    string optionType = reader.GetAttribute("type");
-                    if (string.Equals(optionType, "String", comparer))
+                    if (string.Equals(reader.Name, "option", comparer))
                     {
-                        string optionValue = reader.ReadElementContentAsString();
-
-                        switch (optionName)
+                        string optionName = reader.GetAttribute("name");
+                        string optionType = reader.GetAttribute("type");
+                        if (string.Equals(optionType, "String", comparer))
                         {
-                            case "WebSuitePath":
-                                _webSuitePath = optionValue;
-                                break;
-                            case "LocalSuitePath":
-                                if (optionValue.StartsWith(ParentSymbol, comparer))
-                                {
-                                    var inputPath = string.Copy(_localSuitePath);
-                                    int indexOf = inputPath.IndexOf(SharpVectors, comparer);
+                            string optionValue = reader.ReadElementContentAsString();
 
-                                    if (indexOf > 0)
-                                    {
-                                        var basePath = inputPath.Substring(0, indexOf);
-                                        _localSuitePath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
-                                    }
-                                    else
-                                    {
-                                        _localSuitePath = optionValue;
-                                    }
-                                }
-                                else
-                                {
-                                    _localSuitePath = optionValue;
-                                }
+                            switch (optionName)
+                            {
+                                case "SelectedValuePath":
+                                    _selectedValuePath = optionValue;
+                                    break;
+                            }
+                        }
+                        else if (string.Equals(optionType, "Boolean", comparer))
+                        {
+                            bool optionValue = reader.ReadElementContentAsBoolean();
+                            switch (optionName)
+                            {
+                                case "HidePathsRoot":
+                                    _hidePathsRoot = optionValue;
+                                    break;
 
-                                // Ignore old test suite directory, if found
-                                if (string.IsNullOrWhiteSpace(_localSuitePath) ||
-                                    !this.IsLocalSuitePathChanged(Path.GetFullPath(TestsSvg)))
-                                {
-                                    _localSuitePath = Path.GetFullPath(TestsSvg10);
-                                }
-                                break;
-                            case "SelectedValuePath":
-                                _selectedValuePath = optionValue;
-                                break;
+                                case "TextAsGeometry":
+                                    _wpfSettings.TextAsGeometry = optionValue;
+                                    break;
+                                case "IncludeRuntime":
+                                    _wpfSettings.IncludeRuntime = optionValue;
+                                    break;
+
+                                case "IgnoreRootViewbox":
+                                    _wpfSettings.IgnoreRootViewbox = optionValue;
+                                    break;
+                                case "EnsureViewboxSize":
+                                    _wpfSettings.EnsureViewboxSize = optionValue;
+                                    break;
+                                case "EnsureViewboxPosition":
+                                    _wpfSettings.EnsureViewboxPosition = optionValue;
+                                    break;
+                            }
                         }
                     }
-                    else if (string.Equals(optionType, "Boolean", comparer))
+                    else if (string.Equals(reader.Name, "testSuite", comparer))
                     {
-                        bool optionValue = reader.ReadElementContentAsBoolean();
-                        switch (optionName)
+                        if (!reader.IsEmptyElement)
                         {
-                            case "HidePathsRoot":
-                                _hidePathsRoot = optionValue;
-                                break;
-
-                            case "TextAsGeometry":
-                                _wpfSettings.TextAsGeometry = optionValue;
-                                break;
-                            case "IncludeRuntime":
-                                _wpfSettings.IncludeRuntime = optionValue;
-                                break;
-
-                            case "IgnoreRootViewbox":
-                                _wpfSettings.IgnoreRootViewbox = optionValue;
-                                break;
-                            case "EnsureViewboxSize":
-                                _wpfSettings.EnsureViewboxSize = optionValue;
-                                break;
-                            case "EnsureViewboxPosition":
-                                _wpfSettings.EnsureViewboxPosition = optionValue;
-                                break;
+                            SvgTestSuite testSuite = new SvgTestSuite(reader);
+                            if (testSuite.IsValid())
+                            {
+                                testSuites.Add(testSuite);
+                            }
                         }
                     }
+                }
+            }
 
+            if (testSuites.Count == SvgTestSuite.TestSuiteCount) 
+            {
+                var selectedSuite = SvgTestSuite.GetSelected(testSuites);
+                if (selectedSuite != null)
+                {
+                    _localSuitePath = selectedSuite.LocalSuitePath;
+                    _webSuitePath   = selectedSuite.WebSuitePath;
+
+                    _testSuites = testSuites;
                 }
             }
         }
@@ -465,8 +476,8 @@ namespace WpfW3cSvgTestSuite
             writer.WriteStartElement("options");
 
             this.SaveOption(writer, "HidePathsRoot", _hidePathsRoot);
-            this.SaveOption(writer, "WebSuitePath", _webSuitePath);
-            this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
+            //this.SaveOption(writer, "WebSuitePath", _webSuitePath);
+            //this.SaveOption(writer, "LocalSuitePath", this.GetPath(_localSuitePath));
             this.SaveOption(writer, "SelectedValuePath", _selectedValuePath);
 
             if (_wpfSettings != null)
@@ -477,6 +488,25 @@ namespace WpfW3cSvgTestSuite
                 this.SaveOption(writer, "IgnoreRootViewbox", _wpfSettings.IgnoreRootViewbox);
                 this.SaveOption(writer, "EnsureViewboxSize", _wpfSettings.EnsureViewboxSize);
                 this.SaveOption(writer, "EnsureViewboxPosition", _wpfSettings.EnsureViewboxPosition);
+            }
+
+            if (_testSuites != null && _testSuites.Count != 0)
+            {
+                var selectedSuite = SvgTestSuite.GetSelected(_testSuites);
+                if (selectedSuite != null)
+                {
+                    selectedSuite.LocalSuitePath = _localSuitePath;
+                    selectedSuite.WebSuitePath = _webSuitePath;
+                }
+
+                writer.WriteStartElement("testSuites");
+
+                foreach (var testSuite in _testSuites)
+                {
+                    testSuite.WriteXml(writer);
+                }
+
+                writer.WriteEndElement();
             }
 
             writer.WriteEndElement();
@@ -511,22 +541,32 @@ namespace WpfW3cSvgTestSuite
 
         public OptionSettings Clone()
         {
-            OptionSettings optSettings = new OptionSettings(this);
+            OptionSettings clonedSettings = new OptionSettings(this);
 
             if (_wpfSettings != null)
             {
-                optSettings._wpfSettings = _wpfSettings.Clone();
+                clonedSettings._wpfSettings = _wpfSettings.Clone();
             }
             if (_webSuitePath != null)
             {
-                optSettings._webSuitePath = string.Copy(_webSuitePath);
+                clonedSettings._webSuitePath = string.Copy(_webSuitePath);
             }
             if (_localSuitePath != null)
             {
-                optSettings._localSuitePath = string.Copy(_localSuitePath);
+                clonedSettings._localSuitePath = string.Copy(_localSuitePath);
+            }
+            if (_testSuites != null)
+            {
+                int itemCount = _testSuites.Count;
+                List<SvgTestSuite> clonedTestSuites = new List<SvgTestSuite>(itemCount);
+                for (int i = 0; i < itemCount; i++)
+                {
+                    clonedTestSuites.Add(_testSuites[i].Clone());
+                }
+                clonedSettings._testSuites = clonedTestSuites;
             }
 
-            return optSettings;
+            return clonedSettings;
         }
 
         object ICloneable.Clone()

@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="Forms\SvgPictureBoxWindow.cs" />
     <Compile Include="Forms\SvgCacheManager.cs" />
+    <Compile Include="GdiObject.cs" />
     <Compile Include="Gdi\GdiGradientStop.cs" />
     <Compile Include="Gdi\GdiLinearGradientFill.cs" />
     <Compile Include="Gdi\GdiRadialGradientFill.cs" />

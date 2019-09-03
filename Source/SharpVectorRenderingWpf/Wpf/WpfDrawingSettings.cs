@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Media;
@@ -39,6 +40,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private WpfVisitors _wpfVisitors;
 
+        private IDictionary<string, object> _properties;
+
         #endregion
 
         #region Constructor and Destructor
@@ -66,6 +69,7 @@ namespace SharpVectors.Renderers.Wpf
             _ensureViewboxPosition = true;
             _ignoreRootViewbox     = false;
             _wpfVisitors           = new WpfVisitors();
+            _properties            = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -100,11 +104,45 @@ namespace SharpVectors.Renderers.Wpf
 
             _userCssFilePath       = settings._userCssFilePath;
             _userAgentCssFilePath  = settings._userAgentCssFilePath;
+
+            _properties            = settings._properties;
         }
 
         #endregion
 
         #region Public Properties
+
+        public object this[string name]
+        {
+            get {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    return null;
+                }
+                if (_properties == null || _properties.Count == 0 || !_properties.ContainsKey(name))
+                {
+                    return null;
+                }
+                return _properties[name];
+            }
+            set {
+                if (string.IsNullOrWhiteSpace(name) || _properties == null || _properties.Count == 0)
+                {
+                    return;
+                }
+                if (value == null)
+                {
+                    if (_properties.ContainsKey(name))
+                    {
+                        _properties.Remove(name);
+                    }
+                }
+                else
+                {
+                    _properties[name] = value;
+                }
+            }
+        }
 
         public int PixelWidth
         {

@@ -154,7 +154,7 @@ namespace WpfW3cSvgTestSuite
             settings.IgnoreWhitespace             = false;
             settings.IgnoreComments               = true;
             settings.IgnoreProcessingInstructions = true;
-            settings.DtdProcessing                = DtdProcessing.Ignore;
+            settings.DtdProcessing                = DtdProcessing.Parse;
 
             using (XmlReader reader = XmlReader.Create(stream, settings))
             {

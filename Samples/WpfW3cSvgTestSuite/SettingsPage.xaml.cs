@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
+
 using System.Windows;
 using System.Windows.Controls;
 
@@ -105,6 +107,31 @@ namespace WpfW3cSvgTestSuite
             chkEnsureViewboxSize.IsChecked     = _wpfSettings.EnsureViewboxSize;
             chkEnsureViewboxPosition.IsChecked = _wpfSettings.EnsureViewboxPosition;
 
+            var testSuites = _optionSettings.TestSuites;
+            if (testSuites != null && testSuites.Count != 0)
+            {
+                cboTestSuites.Items.Clear();
+
+                int selectedIndex = 0;
+
+                for (int i = 0; i < testSuites.Count; i++)
+                {
+                    var testSuite = testSuites[i];
+                    ComboBoxItem comboxItem = new ComboBoxItem();
+                    comboxItem.Content = testSuite.Description;
+                    comboxItem.Tag = testSuite;
+
+                    cboTestSuites.Items.Add(comboxItem);
+
+                    if (testSuite.IsSelected)
+                    {
+                        selectedIndex = i;
+                    }
+                }
+
+                cboTestSuites.SelectedIndex = selectedIndex;
+            }
+
             _isConversionModified = false;
 
             _isInitialising = false;
@@ -175,6 +202,53 @@ namespace WpfW3cSvgTestSuite
 
                 txtSvgSuitePath.Text = _optionSettings.GetPath(_optionSettings.LocalSuitePath);
             }
+
+            _isInitialising = false;
+        }
+
+        private void OnTestSuitesSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!this.IsLoaded || _isInitialising || _optionSettings == null)
+            {
+                return;
+            }
+
+            var selectedItem = cboTestSuites.SelectedItem as ComboBoxItem;
+            if (selectedItem == null || selectedItem.Tag == null)
+            {
+                return;
+            }
+            var testSuite = selectedItem.Tag as SvgTestSuite;
+            if (testSuite == null)
+            {
+                return;
+            }
+            string localSuitePath = testSuite.LocalSuitePath;
+            if (OptionSettings.IsTestSuiteAvailable(localSuitePath) == false)
+            {
+                PromptDialog dlg = new PromptDialog();
+                dlg.Owner = _mainWindow;
+                dlg.OptionSettings = _optionSettings;
+
+                var dialogResult = dlg.ShowDialog();
+
+                if (dialogResult == null || dialogResult.Value == false)
+                {
+                    return;
+                }
+            }
+
+            _isInitialising = true;
+
+            txtSvgSuitePath.Text    = _optionSettings.GetPath(testSuite.LocalSuitePath);
+            txtSvgSuitePathWeb.Text = testSuite.WebSuitePath;
+
+            _optionSettings.LocalSuitePath = testSuite.LocalSuitePath;
+            _optionSettings.WebSuitePath   = testSuite.WebSuitePath;
+
+            testSuite.SetSelected(_optionSettings.TestSuites);
+
+            _isGeneralModified = true;
 
             _isInitialising = false;
         }

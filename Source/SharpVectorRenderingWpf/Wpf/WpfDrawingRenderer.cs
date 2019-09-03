@@ -18,14 +18,14 @@ namespace SharpVectors.Renderers.Wpf
         /// <summary>
         /// The renderer's <see cref="SvgWindow">SvgWindow</see> object.
         /// </summary>
-        private ISvgWindow              _svgWindow;
+        private ISvgWindow _svgWindow;
 
-        private WpfDrawingSettings      _settings;
+        private WpfDrawingSettings _settings;
 
-        private WpfRenderingHelper      _svgRenderer;
- 
-        private WpfLinkVisitor          _linkVisitor;
-        private WpfFontFamilyVisitor    _fontFamilyVisitor;
+        private WpfRenderingHelper _svgRenderer;
+
+        private WpfLinkVisitor _linkVisitor;
+        private WpfFontFamilyVisitor _fontFamilyVisitor;
         private WpfEmbeddedImageVisitor _imageVisitor;
 
         #endregion
@@ -40,7 +40,7 @@ namespace SharpVectors.Renderers.Wpf
         public WpfDrawingRenderer(WpfDrawingSettings settings)
         {
             _svgRenderer = new WpfRenderingHelper(this);
-            _settings   = settings;
+            _settings = settings;
         }
 
         #endregion
@@ -49,8 +49,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public DrawingGroup Drawing
         {
-            get
-            {
+            get {
                 if (_context == null)
                 {
                     return null;
@@ -62,36 +61,30 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfLinkVisitor LinkVisitor
         {
-            get
-            {
+            get {
                 return _linkVisitor;
             }
-            set
-            {
+            set {
                 _linkVisitor = value;
             }
         }
 
         public WpfEmbeddedImageVisitor ImageVisitor
         {
-            get
-            {
+            get {
                 return _imageVisitor;
             }
-            set
-            {
+            set {
                 _imageVisitor = value;
             }
         }
 
         public WpfFontFamilyVisitor FontFamilyVisitor
         {
-            get
-            {
+            get {
                 return _fontFamilyVisitor;
             }
-            set
-            {
+            set {
                 _fontFamilyVisitor = value;
             }
         }
@@ -102,14 +95,25 @@ namespace SharpVectors.Renderers.Wpf
 
         public ISvgWindow Window
         {
-            get
-            {
+            get {
                 return _svgWindow;
             }
-            set
-            {
+            set {
                 _svgWindow = value;
             }
+        }
+
+        public void BeginRender()
+        {
+            if (_svgRenderer == null)
+            {
+                _svgRenderer = new WpfRenderingHelper(this);
+            }
+        }
+
+        public void EndRender()
+        {
+            _svgRenderer = null;
         }
 
         public void Render(ISvgElement node)
@@ -134,6 +138,11 @@ namespace SharpVectors.Renderers.Wpf
 
             //if (onRender != null)
             //    OnRender(updatedRect);
+
+            if (_svgRenderer == null)
+            {
+                _svgRenderer = new WpfRenderingHelper(this);
+            }
 
             _context = new WpfDrawingContext(true, _settings);
 
@@ -169,6 +178,11 @@ namespace SharpVectors.Renderers.Wpf
             //if (onRender != null)
             //    OnRender(updatedRect);
 
+            if (_svgRenderer == null)
+            {
+                _svgRenderer = new WpfRenderingHelper(this);
+            }
+
             if (context == null)
             {
                 _context = new WpfDrawingContext(true, _settings);
@@ -199,6 +213,11 @@ namespace SharpVectors.Renderers.Wpf
             //RendererBeforeRender();
 
             //_renderingContext = new WpfDrawingContext(new DrawingGroup());
+            if (_svgRenderer == null)
+            {
+                _svgRenderer = new WpfRenderingHelper(this);
+            }
+
             _context = new WpfDrawingContext(false, _settings);
 
             _context.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
@@ -217,12 +236,10 @@ namespace SharpVectors.Renderers.Wpf
 
         public SvgRectF InvalidRect
         {
-            get
-            {
+            get {
                 return SvgRectF.Empty;
             }
-            set
-            {
+            set {
             }
         }
 
@@ -257,12 +274,10 @@ namespace SharpVectors.Renderers.Wpf
 
         public RenderEvent OnRender
         {
-            get
-            {
+            get {
                 return null;
             }
-            set
-            {
+            set {
             }
         }
 

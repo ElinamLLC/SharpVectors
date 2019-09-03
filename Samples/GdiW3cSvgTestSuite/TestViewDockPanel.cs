@@ -14,9 +14,6 @@ namespace GdiW3cSvgTestSuite
     {
         #region Private Fields
 
-        private const string SvgTestSuite   = "SvgTestSuite10.xml";
-        private const string SvgTestResults = "SvgTestResults10.xml";
-
         private bool _isTreeModified;
         private bool _isTreeChangedPending;
 
@@ -103,7 +100,7 @@ namespace GdiW3cSvgTestSuite
 
         #endregion
 
-        #region Public Properties
+        #region Public Methods
 
         public void InitializePath(string suitePath)
         {
@@ -124,6 +121,12 @@ namespace GdiW3cSvgTestSuite
                 return;
             }
 
+            var selectedSuite = _optionSettings.SelectedTestSuite;
+            if (selectedSuite == null)
+            {
+                return;
+            }
+
             _svgPath = svgPath;
             _pngPath = pngPath;
 
@@ -132,7 +135,7 @@ namespace GdiW3cSvgTestSuite
 
             _testResults = new List<SvgTestResult>();
 
-            _testResultsPath = Path.GetFullPath(SvgTestResults);
+            _testResultsPath = Path.GetFullPath(selectedSuite.ResultFileName);
             if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -146,7 +149,7 @@ namespace GdiW3cSvgTestSuite
                 }
             }
 
-            string fullFilePath = Path.GetFullPath(SvgTestSuite);
+            string fullFilePath = Path.GetFullPath(selectedSuite.TestFileName);
             if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -351,7 +354,7 @@ namespace GdiW3cSvgTestSuite
                 return;
             }
             string pngFilePath = Path.Combine(_suitePath,
-                "png\\full-" + Path.ChangeExtension(testItem.FileName, ".png"));
+                "png\\" + Path.ChangeExtension(testItem.FileName, ".png"));
             if (!File.Exists(pngFilePath))
             {
                 EnableTestPanel(false);
@@ -843,6 +846,13 @@ namespace GdiW3cSvgTestSuite
 
             writer.WriteStartDocument();
             writer.WriteStartElement("tests");
+
+            var selectedSuite = _optionSettings.SelectedTestSuite;
+            if (selectedSuite != null)
+            {
+                writer.WriteAttributeString("version", selectedSuite.Version);
+                writer.WriteAttributeString("description", selectedSuite.Description);
+            }
 
             for (int i = 0; i < treeNodes.Count; i++)
             {

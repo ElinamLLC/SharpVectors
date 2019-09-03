@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<results>
+    <result version="1.4.0.0" date="2019-09-01T06:27:19.4503911+09:00">
+        <category label="Animations" total="78" unknowns="78" failures="0" successes="0" partials="0" />
+        <category label="Colors" total="6" unknowns="6" failures="0" successes="0" partials="0" />
+        <category label="Coordinates and Transforms" total="32" unknowns="32" failures="0" successes="0" partials="0" />
+        <category label="Filter Effects" total="43" unknowns="43" failures="0" successes="0" partials="0" />
+        <category label="Fonts" total="17" unknowns="17" failures="0" successes="0" partials="0" />
+        <category label="Interactivities" total="24" unknowns="24" failures="0" successes="0" partials="0" />
+        <category label="Linking" total="12" unknowns="12" failures="0" successes="0" partials="0" />
+        <category label="Masking" total="19" unknowns="19" failures="0" successes="0" partials="0" />
+        <category label="Paint Servers" total="33" unknowns="33" failures="0" successes="0" partials="0" />
+        <category label="Painting" total="31" unknowns="31" failures="0" successes="0" partials="0" />
+        <category label="Paths" total="21" unknowns="21" failures="0" successes="0" partials="0" />
+        <category label="Rendering" total="8" unknowns="8" failures="0" successes="0" partials="0" />
+        <category label="Scripting" total="6" unknowns="6" failures="0" successes="0" partials="0" />
+        <category label="Shapes" total="22" unknowns="22" failures="0" successes="0" partials="0" />
+        <category label="Structures" total="72" unknowns="72" failures="0" successes="0" partials="0" />
+        <category label="Styling" total="18" unknowns="18" failures="0" successes="0" partials="0" />
+        <category label="Text" total="62" unknowns="62" failures="0" successes="0" partials="0" />
+        <category label="Data Types" total="15" unknowns="15" failures="0" successes="0" partials="0" />
+        <category label="Metadata and Others" total="7" unknowns="7" failures="0" successes="0" partials="0" />
+    </result>
+</results>
