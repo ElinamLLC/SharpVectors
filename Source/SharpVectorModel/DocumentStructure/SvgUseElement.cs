@@ -30,11 +30,11 @@ namespace SharpVectors.Dom.Svg
         public SvgUseElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            _uriReference              = new SvgUriReference(this);
-//            _uriReference.NodeChanged += OnReferencedNodeChange;
+            _uriReference = new SvgUriReference(this);
+            //            _uriReference.NodeChanged += OnReferencedNodeChange;
 
             _externalResourcesRequired = new SvgExternalResourcesRequired(this);
-            _svgTests                  = new SvgTests(this);
+            _svgTests = new SvgTests(this);
         }
 
         #endregion
@@ -43,8 +43,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength X
         {
-            get
-            {
+            get {
                 if (_x == null)
                 {
                     _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
@@ -55,8 +54,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Y
         {
-            get
-            {
+            get {
                 if (_y == null)
                 {
                     _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
@@ -67,11 +65,10 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Width
         {
-            get
-            {
+            get {
                 if (_width == null)
                 {
-                    _width = new SvgAnimatedLength(this, "width", 
+                    _width = new SvgAnimatedLength(this, "width",
                         SvgLengthDirection.Horizontal, string.Empty);
                 }
                 return _width;
@@ -80,11 +77,10 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedLength Height
         {
-            get
-            {
+            get {
                 if (_height == null)
                 {
-                    _height = new SvgAnimatedLength(this, "height", 
+                    _height = new SvgAnimatedLength(this, "height",
                         SvgLengthDirection.Vertical, string.Empty);
                 }
                 return _height;
@@ -93,8 +89,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgElementInstance InstanceRoot
         {
-            get
-            {
+            get {
                 if (_instanceRoot == null)
                 {
                     _instanceRoot = new SvgElementInstance(ReferencedElement, this, null);
@@ -105,8 +100,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgElementInstance AnimatedInstanceRoot
         {
-            get
-            {
+            get {
                 return InstanceRoot;
             }
         }
@@ -117,16 +111,14 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedString Href
         {
-            get
-            {
+            get {
                 return _uriReference.Href;
             }
         }
 
         public XmlElement ReferencedElement
         {
-            get
-            {
+            get {
                 return _uriReference.ReferencedNode as XmlElement;
             }
         }
@@ -137,8 +129,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
+            get {
                 return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }
@@ -156,7 +147,7 @@ namespace SharpVectors.Dom.Svg
                 visitor.BeginContainer(this);
                 foreach (var item in this.ChildNodes)
                 {
-                    IElementVisitorTarget evt = item as IElementVisitorTarget;
+                    var evt = item as IElementVisitorTarget;
                     if (evt != null)
                     {
                         evt.Accept(visitor);

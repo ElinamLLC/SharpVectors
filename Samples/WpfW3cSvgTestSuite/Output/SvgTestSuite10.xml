@@ -156,7 +156,7 @@
         <test source="pservers-grad-08-b.svg" title="pservers-grad-08-b" state="success" comment="Basic SVG Font is now supported." description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;linearGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-09-b.svg" title="pservers-grad-09-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on linear gradients." />
         <test source="pservers-grad-10-b.svg" title="pservers-grad-10-b" state="success" comment="" description="Test that the viewer can handle the spreadMethod attribute on linear gradients." />
-        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="partial" comment="Gradient on text works best, when text is renderered as geometry." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="pservers-grad-11-b.svg" title="pservers-grad-11-b" state="success" comment="Gradient on text works best, when text is renderered as geometry." description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : &lt;radialGradient&gt;, &lt;stop&gt; and the following properties : stop-color, fill:url(# ), stroke(url# )" />
         <test source="pservers-grad-12-b.svg" title="pservers-grad-12-b" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on radial gradients." />
         <test source="pservers-grad-13-b.svg" title="pservers-grad-15-b" state="success" comment="" description="Tests the radial gradient focal point" />
         <test source="pservers-grad-14-b.svg" title="pservers-grad-16-b" state="success" comment="" description="Tests the spreadMethod attributes for gradients" />
@@ -247,7 +247,7 @@
         <test source="struct-dom-05-b.svg" title="struct-dom-05-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM/ECMA Script binding is supported. Checks support for the hasFeature method on the DOMImplementation." />
         <test source="struct-dom-06-b.svg" title="struct-dom-06-b" state="failure" comment="Scripting is not supported yet." description="Checks if DOM ECMA Script binding is supported" />
         <test source="struct-frag-01-t.svg" title="struct-frag-01-t" state="success" comment="" description="" />
-        <test source="struct-frag-02-t.svg" title="struct-frag-02-t" state="partial" comment="" description="" />
+        <test source="struct-frag-02-t.svg" title="struct-frag-02-t" state="success" comment="" description="" />
         <test source="struct-frag-03-t.svg" title="struct-frag-03-t" state="success" comment="" description="" />
         <test source="struct-frag-04-t.svg" title="struct-frag-04-t" state="success" comment="" description="" />
         <test source="struct-frag-05-t.svg" title="struct-frag-05-t" state="unknown" comment="" description="" />

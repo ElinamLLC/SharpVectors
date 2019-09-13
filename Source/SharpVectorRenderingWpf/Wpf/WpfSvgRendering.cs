@@ -108,8 +108,10 @@ namespace SharpVectors.Renderers.Wpf
             XmlNode parentNode = _svgElement.ParentNode;
 
             ISvgFitToViewBox fitToView = svgElm as ISvgFitToViewBox;
-            if (fitToView != null)
+            ISvgAnimatedPreserveAspectRatio preserveAspectRatio = null;
+            if (fitToView != null && fitToView.PreserveAspectRatio != null)
             {
+                preserveAspectRatio = fitToView.PreserveAspectRatio;
                 ISvgAnimatedRect animRect = fitToView.ViewBox;
                 if (animRect != null)
                 {
@@ -126,7 +128,9 @@ namespace SharpVectors.Renderers.Wpf
             } 
 
             Transform transform = null;
-            if (parentNode.NodeType != XmlNodeType.Document)
+            var aspectRatio     = (preserveAspectRatio != null) ? preserveAspectRatio.AnimVal : null;
+            if (parentNode.NodeType != XmlNodeType.Document || 
+                (aspectRatio != null && aspectRatio.Align == SvgPreserveAspectRatioType.None))
             {
                 FitToViewbox(context, elmRect);
 

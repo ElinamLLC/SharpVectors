@@ -98,8 +98,8 @@ namespace WpfW3cSvgTestSuite
             }
 
             Section noteSection = new Section();
-            noteSection.Blocks.Add(CreateAlert("Note: Test Suite",
-                "These tests are based on SVG 1.1 First Edition Test Suite: 13 December 2006 (Full)."));
+            //noteSection.Blocks.Add(CreateAlert("Note: Test Suite",
+            //    "These tests are based on SVG 1.1 First Edition Test Suite: 13 December 2006 (Full)."));
 
             this.CreateHorzLine(noteSection, false);
 

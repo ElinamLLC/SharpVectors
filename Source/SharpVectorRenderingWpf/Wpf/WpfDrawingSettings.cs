@@ -55,7 +55,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </summary>
         public WpfDrawingSettings()
         {
-            _defaultFontName       = "Arial Unicode MS";
+            _defaultFontName       = "Arial";
             _textAsGeometry        = false;
             _optimizePath          = true;
             _includeRuntime        = true;

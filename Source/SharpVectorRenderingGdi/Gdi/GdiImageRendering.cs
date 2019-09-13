@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 using SharpVectors.Dom.Svg;
 
@@ -32,8 +33,15 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Public Methods
 
+        public override void BeforeRender(GdiGraphicsRenderer renderer)
+        {
+            base.BeforeRender(renderer);
+        }
+
         public override void Render(GdiGraphicsRenderer renderer)
 		{
+            base.Render(renderer);
+
             var graphics = renderer.GdiGraphics;
 			SvgImageElement iElement = (SvgImageElement)_svgElement;
 
@@ -77,7 +85,7 @@ namespace SharpVectors.Renderers.Gdi
             RectangleF clipRect = destRect;
 
 //            var container = graphics.BeginContainer();
-            graphics.SetClip(new Region(clipRect), System.Drawing.Drawing2D.CombineMode.Intersect);
+            graphics.SetClip(new Region(clipRect), CombineMode.Intersect);
 
             Image image = null;
             SvgWindow svgWnd = null;

@@ -36,7 +36,7 @@ namespace SharpVectors.Dom.Svg
 
         private List<Timer> _redrawTimers;
         private SvgFitToViewBox _svgFitToViewBox;
-        private SvgExternalResourcesRequired _svgExternalResourcesRequired;
+        private SvgExternalResourcesRequired _svgResRequired;
 
         #endregion
 
@@ -45,12 +45,12 @@ namespace SharpVectors.Dom.Svg
         public SvgSvgElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            _currentScale = 1;
-            _redrawTimers = new List<Timer>();
+            _currentScale     = 1;
+            _redrawTimers     = new List<Timer>();
 
-            _svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
-            _svgFitToViewBox = new SvgFitToViewBox(this);
-            _svgTests = new SvgTests(this);
+            _svgResRequired   = new SvgExternalResourcesRequired(this);
+            _svgFitToViewBox  = new SvgFitToViewBox(this);
+            _svgTests         = new SvgTests(this);
             _currentTranslate = new SvgPoint(0, 0);
         }
 
@@ -135,6 +135,58 @@ namespace SharpVectors.Dom.Svg
             }
 
             return new SvgSizeF((float)width, (float)height);
+        }
+
+        public SvgRectF GetBounds()
+        {
+            var elemWidth  = this.Width;
+            var elemHeight = this.Height;
+
+            var isWidthInPerc  = elemWidth.BaseVal.UnitType == SvgLengthType.Percentage;
+            var isHeightInPerc = elemHeight.BaseVal.UnitType == SvgLengthType.Percentage;
+
+            SvgRectF bounds = new SvgRectF();
+            if (isWidthInPerc || isHeightInPerc)
+            {
+                var viewRect = this.ViewBox.BaseVal;
+
+                if (viewRect.Width > 0 && viewRect.Height > 0)
+                {
+                    bounds = new SvgRectF((float)viewRect.X, (float)viewRect.Y, 
+                        (float)viewRect.Width, (float)viewRect.Height);
+                }
+                else
+                {
+                    bounds = SvgRectF.Empty;//TODO: Recursively computer the bounds?;
+                }
+            }
+            if (bounds.Width.Equals(0.0) && bounds.Height.Equals(0.0))
+            {
+                return SvgRectF.Empty;
+            }
+
+            double width, height;
+            if (isWidthInPerc)
+            {
+                width = (bounds.Width + bounds.X) * elemWidth.BaseVal.ValueInSpecifiedUnits * 0.01;
+            }
+            else
+            {
+                width = elemWidth.BaseVal.Value;
+            }
+            if (isHeightInPerc)
+            {
+                height = (bounds.Height + bounds.Y) * elemHeight.BaseVal.ValueInSpecifiedUnits * 0.01;
+            }
+            else
+            {
+                height = elemHeight.BaseVal.Value;
+            }
+
+            bounds.Width  = (float)width;
+            bounds.Height = (float)height;
+
+            return bounds;
         }
 
         #endregion
@@ -957,7 +1009,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
             get {
-                return _svgExternalResourcesRequired.ExternalResourcesRequired;
+                return _svgResRequired.ExternalResourcesRequired;
             }
         }
 

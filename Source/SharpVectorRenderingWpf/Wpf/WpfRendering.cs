@@ -331,8 +331,7 @@ namespace SharpVectors.Renderers.Wpf
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
                                 clipRect = WpfConvert.ToRect(viewPort);
                             }
-                            else if (_svgElement is ISvgMarkerElement ||
-                              _svgElement is ISvgSymbolElement ||
+                            else if (_svgElement is ISvgMarkerElement || _svgElement is ISvgSymbolElement ||
                               _svgElement is ISvgPatternElement)
                             {
                                 // TODO: what to do here?
@@ -477,8 +476,7 @@ namespace SharpVectors.Renderers.Wpf
                 WpfDrawingContext maskContext = new WpfDrawingContext(true, settings);
 
                 //maskContext.Initialize(null, context.FontFamilyVisitor, null);
-                maskContext.Initialize(context.LinkVisitor,
-                    context.FontFamilyVisitor, context.ImageVisitor);
+                maskContext.Initialize(context.LinkVisitor, context.FontFamilyVisitor, context.ImageVisitor);
 
                 renderer.RenderMask(maskElement, maskContext);
                 DrawingGroup maskDrawing = renderer.Drawing;

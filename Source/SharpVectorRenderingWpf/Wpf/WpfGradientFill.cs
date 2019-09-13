@@ -70,16 +70,16 @@ namespace SharpVectors.Renderers.Wpf
 
         private Brush GetLinearGradientBrush(SvgLinearGradientElement res, Transform viewBoxTransform = null)
         {
-            double x1 = res.X1.AnimVal.Value;
-            double x2 = res.X2.AnimVal.Value;
-            double y1 = res.Y1.AnimVal.Value;
-            double y2 = res.Y2.AnimVal.Value;
-
             GradientStopCollection gradientStops = GetGradientStops(res.Stops);
             if (gradientStops == null || gradientStops.Count == 0)
             {
                 return null;
             }
+
+            double x1 = res.X1.AnimVal.Value;
+            double x2 = res.X2.AnimVal.Value;
+            double y1 = res.Y1.AnimVal.Value;
+            double y2 = res.Y2.AnimVal.Value;
 
             LinearGradientBrush brush = new LinearGradientBrush(gradientStops,
                 new Point(x1, y1), new Point(x2, y2));
@@ -123,7 +123,7 @@ namespace SharpVectors.Renderers.Wpf
             string colorInterpolation = res.GetPropertyValue("color-interpolation");
             if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
-                if (colorInterpolation == "linearRGB")
+                if (string.Equals(colorInterpolation, "linearRGB", StringComparison.OrdinalIgnoreCase))
                 {
                     brush.ColorInterpolationMode = ColorInterpolationMode.ScRgbLinearInterpolation;
                 }
@@ -300,7 +300,7 @@ namespace SharpVectors.Renderers.Wpf
             string colorInterpolation = res.GetPropertyValue("color-interpolation");
             if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
-                if (colorInterpolation == "linearRGB")
+                if (string.Equals(colorInterpolation, "linearRGB", StringComparison.OrdinalIgnoreCase))
                 {
                     brush.ColorInterpolationMode = ColorInterpolationMode.SRgbLinearInterpolation;
                 }
@@ -341,9 +341,9 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     continue;
                 }
-                string prop = stop.GetAttribute("stop-color");
+                string prop  = stop.GetAttribute("stop-color");
                 string style = stop.GetAttribute("style");
-                Color color = Colors.Transparent; // no auto-inherited...
+                Color color  = Colors.Transparent; // no auto-inherited...
                 if (!string.IsNullOrWhiteSpace(prop) || !string.IsNullOrWhiteSpace(style))
                 {
                     WpfSvgColor svgColor = new WpfSvgColor(stop, "stop-color");

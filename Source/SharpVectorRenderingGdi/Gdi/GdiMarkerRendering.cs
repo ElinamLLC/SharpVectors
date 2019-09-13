@@ -106,7 +106,7 @@ namespace SharpVectors.Renderers.Gdi
 
 				gr.ScaleTransform((float)translateAndScale[2], (float)translateAndScale[3]);
 
-				Clip(gr);
+				SetClip(gr);
                              
                 renderer.RenderChildren(markerElm);
 

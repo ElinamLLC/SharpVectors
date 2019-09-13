@@ -26,7 +26,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public override void RenderSingleLineText(SvgTextContentElement element, ref Point ctp,
+        public override void RenderText(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -37,10 +37,10 @@ namespace SharpVectors.Renderers.Texts
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
-            if (fontFamilyInfo.WpfFontFamilyType == WpfFontFamilyType.Svg)
+            if (fontFamilyInfo.FontFamilyType == WpfFontFamilyType.Svg)
             {
                 WpfTextTuple textInfo = new WpfTextTuple(fontFamilyInfo, emSize, stringFormat, element);
-                this.RenderSingleLineText(textInfo, ref ctp, text, rotate, placement);
+                this.RenderText(textInfo, ref ctp, text, rotate, placement);
                 return;
             }
 
@@ -74,15 +74,22 @@ namespace SharpVectors.Renderers.Texts
             {
                 return;
             }
+            bool isForcedPathMode = false; 
             if (textBrush == null)
             {
                 // If here, then the pen is not null, and so the fill cannot be null.
                 // We set this to transparent for stroke only text path...
                 textBrush = Brushes.Transparent;
             }
+            else
+            {
+                // WPF gradient fill does not work well on text, use geometry to render it
+                isForcedPathMode = (fillPaint.FillType == WpfFillType.Gradient);
+            }
             if (textPen != null)
             {
                 textPen.LineJoin = PenLineJoin.Round; // Better for text rendering
+                isForcedPathMode = true;
             }
 
             TextDecorationCollection textDecors = GetTextDecoration(element);
@@ -171,7 +178,7 @@ namespace SharpVectors.Renderers.Texts
 
                     Point textPoint = new Point(textStart.X, textStart.Y - yCorrection);
 
-                    if (textPen != null || _context.TextAsGeometry)
+                    if (_context.TextAsGeometry || isForcedPathMode)
                     {
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
@@ -258,7 +265,7 @@ namespace SharpVectors.Renderers.Texts
                     _drawContext.PushTransform(rotateAt);
                 }
 
-                if (textPen != null || _context.TextAsGeometry)
+                if (_context.TextAsGeometry || isForcedPathMode)
                 {
                     Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                     if (textGeometry != null && !textGeometry.IsEmpty())
@@ -306,7 +313,7 @@ namespace SharpVectors.Renderers.Texts
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
-            if (fontFamilyInfo.WpfFontFamilyType == WpfFontFamilyType.Svg)
+            if (fontFamilyInfo.FontFamilyType == WpfFontFamilyType.Svg)
             {
                 WpfTextTuple textInfo = new WpfTextTuple(fontFamilyInfo, emSize, stringFormat, element);
                 this.RenderTextRun(textInfo, ref ctp, text, rotate, placement);
@@ -343,15 +350,22 @@ namespace SharpVectors.Renderers.Texts
             {
                 return;
             }
+            bool isForcedPathMode = false;
             if (textBrush == null)
             {
                 // If here, then the pen is not null, and so the fill cannot be null.
                 // We set this to transparent for stroke only text path...
                 textBrush = Brushes.Transparent;
             }
+            else
+            {
+                // WPF gradient fill does not work well on text, use geometry to render it
+                isForcedPathMode = (fillPaint.FillType == WpfFillType.Gradient);
+            }
             if (textPen != null)
             {
                 textPen.LineJoin = PenLineJoin.Round; // Better for text rendering
+                isForcedPathMode = true;
             }
 
             TextDecorationCollection textDecors = GetTextDecoration(element);
@@ -492,7 +506,7 @@ namespace SharpVectors.Renderers.Texts
 
                     Point textPoint = new Point(ctp.X, ctp.Y - yCorrection);
 
-                    if (textPen != null || _context.TextAsGeometry)
+                    if (isForcedPathMode || _context.TextAsGeometry)
                     {
                         Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                         if (textGeometry != null && !textGeometry.IsEmpty())
@@ -596,7 +610,7 @@ namespace SharpVectors.Renderers.Texts
                     _drawContext.PushTransform(rotateAt);
                 }
 
-                if (textPen != null || _context.TextAsGeometry)
+                if (isForcedPathMode || _context.TextAsGeometry)
                 {
                     Geometry textGeometry = formattedText.BuildGeometry(textPoint);
                     if (textGeometry != null && !textGeometry.IsEmpty())
@@ -637,8 +651,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Private Methods
 
-        private void RenderSingleLineText(WpfTextTuple textInfo, 
-            ref Point ctp, string text, double rotate, WpfTextPlacement placement)
+        private void RenderText(WpfTextTuple textInfo, ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
             if (string.IsNullOrWhiteSpace(text))
                 return;

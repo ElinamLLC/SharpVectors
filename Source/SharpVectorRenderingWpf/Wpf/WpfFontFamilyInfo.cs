@@ -12,12 +12,12 @@ namespace SharpVectors.Renderers.Wpf
             FontWeights.Normal, FontStyles.Normal, FontStretches.Normal);
 
         private string _fontName;
-        private SvgFontElement _fontElement;
         private string _fontVariant;
+        private SvgFontElement _fontElement;
 
+        private FontStyle _style;
         private FontFamily _family;
         private FontWeight _weight;
-        private FontStyle _style;
         private FontStretch _stretch;
 
         private WpfFontFamilyType _familyType;
@@ -70,7 +70,7 @@ namespace SharpVectors.Renderers.Wpf
             get { return (_family == null); }
         }
 
-        public WpfFontFamilyType WpfFontFamilyType
+        public WpfFontFamilyType FontFamilyType
         {
             get {
                 return _familyType;
@@ -111,7 +111,12 @@ namespace SharpVectors.Renderers.Wpf
 
         public FontFamily Family
         {
-            get { return _family; }
+            get {
+                return _family;
+            }
+            internal set {
+                _family = value;
+            }
         }
 
         public FontWeight Weight

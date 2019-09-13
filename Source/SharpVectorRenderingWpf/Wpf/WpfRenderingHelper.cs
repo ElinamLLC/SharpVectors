@@ -135,21 +135,6 @@ namespace SharpVectors.Renderers.Wpf
             hashCode = -1;
 
             string useId = element.Id;
-            var refElement = element.ReferencedElement;
-            if (refElement == null)
-            {
-                return false;
-            }
-            string refId = refElement.GetAttribute("id");
-            if (!string.IsNullOrWhiteSpace(refId))
-            {
-                if (_useIdElements.Contains(refId))
-                {
-                    return false;
-                }
-                _useIdElements.Add(refId);
-            }
-
             if (string.IsNullOrWhiteSpace(useId))
             {
                 hashCode = element.OuterXml.GetHashCode();
@@ -172,32 +157,10 @@ namespace SharpVectors.Renderers.Wpf
             return true;
         } 
 
-        //private bool BeginUseElement(int hashCode)
-        //{
-        //    if (_useElements.Contains(hashCode))
-        //    {
-        //        return false;
-        //    }
-
-        //    _useElements.Add(hashCode);
-
-        //    return true;
-        //} 
-
         private bool EndUseElement(SvgUseElement element, int hashCode)
         {
             bool isRemoved = _useElements.Remove(hashCode);
             string useId = element.Id;
-            var refElement = element.ReferencedElement;
-            if (refElement == null)
-            {
-                return false;
-            }
-            string refId = refElement.GetAttribute("id");
-            if (!string.IsNullOrWhiteSpace(refId))
-            {
-                _useIdElements.Remove(refId);
-            }
             if (string.IsNullOrWhiteSpace(useId))
             {
                 //int hashCode = element.OuterXml.GetHashCode();
@@ -206,11 +169,6 @@ namespace SharpVectors.Renderers.Wpf
             }
             return _useIdElements.Remove(useId);
         }
-
-        //private bool EndUseElement(int hashCode)
-        //{
-        //    return _useElements.Remove(hashCode);
-        //} 
 
         private void RenderElement(ISvgElement svgElement)
         {

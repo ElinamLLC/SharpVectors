@@ -14,19 +14,17 @@ namespace WpfW3cSvgTestSuite
     /// </summary>
     public partial class DrawingPage : Page, ITestPage
     {
-        #region Private Fields
+        #region Public Fields
 
-        private const int ImageWidth  = 480;
-        private const int ImageHeight = 360;
+        public const int ImageWidth  = 480;
+        public const int ImageHeight = 360;
+
+        #endregion
+
+        #region Private Fields
 
         private int _viewBoxWidth;
         private int _viewBoxHeight;
-
-        //private string _drawingDir;
-        //private DirectoryInfo _directoryInfo;
-
-        //private FileSvgReader _fileReader;
-        //private WpfDrawingSettings _wpfSettings;
 
         #endregion
 

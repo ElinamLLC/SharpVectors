@@ -71,8 +71,8 @@ namespace SharpVectors.Renderers.Gdi
             _graphicsContainer = graphics.BeginContainer();
 
             SetQuality(graphics);
-            Transform(graphics);
-            Clip(graphics);
+            SetTransform(graphics);
+            SetClip(graphics);
         }
 
         public override void AfterRender(GdiGraphicsRenderer renderer)
@@ -173,7 +173,7 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Protected Methods
 
-        protected void Clip(GdiGraphics gr)
+        protected void SetClip(GdiGraphics graphics)
         {
             if (_svgElement == null)
             {
@@ -183,7 +183,7 @@ namespace SharpVectors.Renderers.Gdi
             SvgRenderingHint hint = _svgElement.RenderingHint;
 
             // todo: should we correct the clipping to adjust to the off-one-pixel drawing?
-            gr.TranslateClip(1, 1);
+            graphics.TranslateClip(1, 1);
 
             #region Clip with clip
             // see http://www.w3.org/TR/SVG/masking.html#OverflowAndClipProperties 
@@ -191,9 +191,9 @@ namespace SharpVectors.Renderers.Gdi
                 _svgElement is ISvgSymbolElement || _svgElement is ISvgPatternElement)
             {
                 // check overflow property
-                CssValue overflow = ((SvgElement)_svgElement).GetComputedCssValue("overflow", string.Empty) as CssValue;
+                CssValue overflow = _svgElement.GetComputedCssValue("overflow", string.Empty) as CssValue;
                 // TODO: clip can have "rect(10 10 auto 10)"
-                CssPrimitiveValue clip = ((SvgElement)_svgElement).GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
+                CssPrimitiveValue clip = _svgElement.GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
 
                 string sOverflow = null;
 
@@ -239,8 +239,7 @@ namespace SharpVectors.Renderers.Gdi
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
                                 clipRect = GdiConverter.ToRectangle(viewPort);
                             }
-                            else if (_svgElement is ISvgMarkerElement ||
-                              _svgElement is ISvgSymbolElement ||
+                            else if (_svgElement is ISvgMarkerElement || _svgElement is ISvgSymbolElement ||
                               _svgElement is ISvgPatternElement)
                             {
                                 // TODO: what to do here?
@@ -248,7 +247,7 @@ namespace SharpVectors.Renderers.Gdi
                         }
                         if (clipRect != RectangleF.Empty)
                         {
-                            gr.SetClip(clipRect);
+                            graphics.SetClip(clipRect);
                         }
                     }
                 }
@@ -261,7 +260,7 @@ namespace SharpVectors.Renderers.Gdi
 
             if (hint == SvgRenderingHint.Shape || hint == SvgRenderingHint.Text ||
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
-                hint == SvgRenderingHint.Containment)
+                hint == SvgRenderingHint.Containment || hint == SvgRenderingHint.Image)
             {
                 CssPrimitiveValue clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
@@ -273,7 +272,7 @@ namespace SharpVectors.Renderers.Gdi
 
                     if (eClipPath != null)
                     {
-                        GraphicsPath gpClip = CreateClippingRegion(eClipPath);
+                        GraphicsPath gpClip = CreateClippingRegion(graphics, eClipPath);
 
                         RectangleF clipBounds = gpClip != null ? gpClip.GetBounds() : RectangleF.Empty;
 
@@ -296,10 +295,10 @@ namespace SharpVectors.Renderers.Gdi
                                 Matrix matrix = new Matrix();
                                 matrix.Scale((float)bbox.Width, (float)bbox.Height);
                                 gpClip.Transform(matrix);
-                                gr.SetClip(gpClip);
+                                graphics.SetClip(gpClip);
 
                                 // offset clip
-                                gr.TranslateClip((float)bbox.X, (float)bbox.Y);
+                                graphics.TranslateClip((float)bbox.X, (float)bbox.Y);
                             }
                             else
                             {
@@ -309,7 +308,7 @@ namespace SharpVectors.Renderers.Gdi
                         }
                         else
                         {
-                            gr.SetClip(gpClip);
+                            graphics.SetClip(gpClip);
                         }
 
                         gpClip.Dispose();
@@ -389,15 +388,15 @@ namespace SharpVectors.Renderers.Gdi
             }
         }
 
-        protected void Transform(GdiGraphics gr)
+        protected void SetTransform(GdiGraphics gr)
         {
             if (_svgElement is ISvgTransformable)
             {
                 if (_transformMatrix == null)
                 {
                     ISvgTransformable transElm = (ISvgTransformable)_svgElement;
-                    SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
-                    SvgMatrix svgMatrix = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
+                    SvgTransformList svgTList  = (SvgTransformList)transElm.Transform.AnimVal;
+                    SvgMatrix svgMatrix        = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
 
                     _transformMatrix = new Matrix((float)svgMatrix.A, (float)svgMatrix.B, (float)svgMatrix.C,
                       (float)svgMatrix.D, (float)svgMatrix.E, (float)svgMatrix.F);
@@ -424,7 +423,7 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Private Methods
 
-        private GraphicsPath CreateClippingRegion(SvgClipPathElement clipPath)
+        private GraphicsPath CreateClippingRegion(GdiGraphics graphics, SvgClipPathElement clipPath)
         {
             GraphicsPath path = new GraphicsPath();
 
@@ -480,16 +479,39 @@ namespace SharpVectors.Renderers.Gdi
                 else
                 {
                     SvgStyleableElement element = node as SvgStyleableElement;
-                    if (element != null && element.RenderingHint == SvgRenderingHint.Shape)
+                    if (element != null)
                     {
-                        GraphicsPath childPath = CreatePath(element);
-
-                        if (childPath != null)
+                        if (element.RenderingHint == SvgRenderingHint.Shape)
                         {
-                            string clipRule = element.GetPropertyValue("clip-rule");
-                            path.FillMode = (clipRule == "evenodd") ? FillMode.Alternate : FillMode.Winding;
+                            GraphicsPath childPath = CreatePath(element);
 
-                            path.AddPath(childPath, true);
+                            if (childPath != null)
+                            {
+                                string clipRule = element.GetPropertyValue("clip-rule");
+                                path.FillMode = (clipRule == "evenodd") ? FillMode.Alternate : FillMode.Winding;
+
+                                path.AddPath(childPath, true);
+                            }
+                        }
+                        else if (element.RenderingHint == SvgRenderingHint.Text)
+                        {
+                            GdiTextRendering textRendering = new GdiTextRendering(element);
+                            textRendering.TextMode = GdiTextMode.Outlining;
+
+                            GdiGraphicsRenderer renderer = new GdiGraphicsRenderer(graphics);
+
+                            textRendering.BeforeRender(renderer);
+                            textRendering.Render(renderer);
+                            textRendering.AfterRender(renderer);
+
+                            GraphicsPath childPath = textRendering.Path;
+                            if (childPath != null)
+                            {
+                                string clipRule = element.GetPropertyValue("clip-rule");
+                                path.FillMode = (clipRule == "evenodd") ? FillMode.Alternate : FillMode.Winding;
+
+                                path.AddPath(childPath, true);
+                            }
                         }
                     }
                 }
@@ -509,26 +531,32 @@ namespace SharpVectors.Renderers.Gdi
                 return null;
             }
 
-            string localName = element.LocalName;
-            switch (localName)
+            try
             {
-                case "ellipse":
-                    return CreatePath((SvgEllipseElement)element);
-                case "rect":
-                    return CreatePath((SvgRectElement)element);
-                case "line":
-                    return CreatePath((SvgLineElement)element);
-                case "path":
-                    return CreatePath((SvgPathElement)element);
-                case "circle":
-                    return CreatePath((SvgCircleElement)element);
-                case "polyline":
-                    return CreatePath((SvgPolylineElement)element);
-                case "polygon":
-                    return CreatePath((SvgPolygonElement)element);
+                string localName = element.LocalName;
+                switch (localName)
+                {
+                    case "ellipse":
+                        return CreatePath((SvgEllipseElement)element);
+                    case "rect":
+                        return CreatePath((SvgRectElement)element);
+                    case "line":
+                        return CreatePath((SvgLineElement)element);
+                    case "path":
+                        return CreatePath((SvgPathElement)element);
+                    case "circle":
+                        return CreatePath((SvgCircleElement)element);
+                    case "polyline":
+                        return CreatePath((SvgPolylineElement)element);
+                    case "polygon":
+                        return CreatePath((SvgPolygonElement)element);
+                }
+                return null;
             }
-
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #region SvgEllipseElement Path

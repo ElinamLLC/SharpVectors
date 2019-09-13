@@ -7,6 +7,7 @@
     {
         #region Private Fields
 
+        private object _tag;
         private SvgPathSegList _pathSegList;
 
         #endregion
@@ -16,6 +17,20 @@
         public SvgGlyphElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public object Tag
+        {
+            get {
+                return _tag;
+            }
+            set {
+                _tag = value;
+            }
         }
 
         #endregion

@@ -38,12 +38,28 @@ namespace SharpVectors.Dom.Svg
 
             if (!string.IsNullOrWhiteSpace(d))
             {
-                SvgPathSegParser parser = new SvgPathSegParser();
-                if (parser.Parse(this, d))
+                SvgPathSegHandler hardler = new SvgPathSegHandler(this);
+                SvgPathParser parser = new SvgPathParser(hardler);
+
+                if (parser.Parse(d))
                 {
-                    _isClosed      = parser.IsClosed;
-                    _mayHaveCurves = parser.MayHaveCurves;
+                    _isClosed      = hardler.IsClosed;
+                    _mayHaveCurves = hardler.MayHaveCurves;
                 }
+                else if (_segments.Count != 0)
+                {
+                    _segments = new List<SvgPathSeg>();
+                }
+                //SvgPathSegParser parser = new SvgPathSegParser();
+                //if (parser.Parse(this, d))
+                //{
+                //    _isClosed      = parser.IsClosed;
+                //    _mayHaveCurves = parser.MayHaveCurves;
+                //}
+                //else if (_segments.Count != 0)
+                //{
+                //    _segments = new List<SvgPathSeg>();
+                //}
             }
         }
 

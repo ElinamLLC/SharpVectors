@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Xml;
-using System.Text.RegularExpressions;
+using System.Threading;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 using System.Windows;
 using System.Windows.Media;
@@ -269,6 +270,14 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
+            // For for fonts loading in the background...
+            var svgDoc = _svgElement.OwnerDocument;
+            if (svgDoc.IsFontsLoaded == false)
+            {
+                //TODO: Use of SpinUntil is known to CPU heavy, but will work for now...
+                SpinWait.SpinUntil(() => svgDoc.IsFontsLoaded == true);
+            }
+
             XmlNodeType nodeType = XmlNodeType.None;
 
             bool isVertical = false;
@@ -288,14 +297,14 @@ namespace SharpVectors.Renderers.Wpf
                     if (isVertical)
                     {
                         ctp.X -= shiftBy;
-                        RenderSingleLineTextV(_textElement, ref ctp,
+                        RenderVertText(_textElement, ref ctp,
                             WpfTextRenderer.GetText(_textElement, child), rotate, placement);
                         ctp.X += shiftBy;
                     }
                     else
                     {
                         ctp.Y -= shiftBy;
-                        RenderSingleLineTextH(_textElement, ref ctp,
+                        RenderHorzText(_textElement, ref ctp,
                             WpfTextRenderer.GetText(_textElement, child), rotate, placement);
                         ctp.Y += shiftBy;
                     }
@@ -325,14 +334,14 @@ namespace SharpVectors.Renderers.Wpf
                     if (isVertical)
                     {
                         ctp.X -= shiftBy;
-                        RenderSingleLineTextV(_textElement, ref ctp,
+                        RenderVertText(_textElement, ref ctp,
                             WpfTextRenderer.GetText(_textElement, child), rotate, placement);
                         ctp.X += shiftBy;
                     }
                     else
                     {
                         ctp.Y -= shiftBy;
-                        RenderSingleLineTextH(_textElement, ref ctp,
+                        RenderHorzText(_textElement, ref ctp,
                             WpfTextRenderer.GetText(_textElement, child), rotate, placement);
                         ctp.Y += shiftBy;
                     }
@@ -365,20 +374,29 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         XmlNode child = nodeList[i];
                         nodeType = child.NodeType;
+                        //if (i == 0 && nodeType == XmlNodeType.Whitespace)
+                        //{
+                        //    continue;
+                        //}
                         if (nodeType == XmlNodeType.Text)
                         {
+                            var nodeText = WpfTextRenderer.GetText(_textElement, child);
+                            if (i == (nodeCount - 1))
+                            {
+                                // No need to render the last white space...
+                                nodeText = nodeText.TrimEnd();
+                            }
+
                             if (isVertical)
                             {
                                 ctp.X -= shiftBy;
-                                RenderTextRunV(_textElement, ref ctp,
-                                    WpfTextRenderer.GetText(_textElement, child), rotate, placement);
+                                RenderVertTextRun(_textElement, ref ctp, nodeText, rotate, placement);
                                 ctp.X += shiftBy;
                             }
                             else
                             {
                                 ctp.Y -= shiftBy;
-                                RenderTextRunH(_textElement, ref ctp,
-                                    WpfTextRenderer.GetText(_textElement, child), rotate, placement);
+                                RenderHorzTextRun(_textElement, ref ctp, nodeText, rotate, placement);
                                 ctp.Y += shiftBy;
                             }
                         }
@@ -421,13 +439,13 @@ namespace SharpVectors.Renderers.Wpf
                             if (isVertical)
                             {
                                 ctp.X -= shiftBy;
-                                RenderTextRunV(_textElement, ref ctp, Whitespace, rotate, placement, true);
+                                RenderVertTextRun(_textElement, ref ctp, Whitespace, rotate, placement, true);
                                 ctp.X += shiftBy;
                             }
                             else
                             {
                                 ctp.Y -= shiftBy;
-                                RenderTextRunH(_textElement, ref ctp, Whitespace, rotate, placement, true);
+                                RenderHorzTextRun(_textElement, ref ctp, Whitespace, rotate, placement, true);
                                 ctp.Y += shiftBy;
                             }
                         }
@@ -445,24 +463,34 @@ namespace SharpVectors.Renderers.Wpf
 
                 bool textRendered = false;
 
-                for (int i = 0; i < nodeList.Count; i++)
+                for (int i = 0; i < nodeCount; i++)
                 {
                     XmlNode child = nodeList[i];
                     nodeType = child.NodeType;
+                    //if (i == 0 && nodeType == XmlNodeType.Whitespace)
+                    //{
+                    //    continue;
+                    //}
+
                     if (nodeType == XmlNodeType.Text)
                     {
+                        var nodeText = WpfTextRenderer.GetText(_textElement, child);
+                        if (i == (nodeCount - 1)) 
+                        {
+                            // No need to render the last white space...
+                            nodeText = nodeText.TrimEnd();
+                        }
+
                         if (isVertical)
                         {
                             ctp.X -= shiftBy;
-                            RenderTextRunV(_textElement, ref ctp,
-                                WpfTextRenderer.GetText(_textElement, child), rotate, placement);
+                            RenderVertTextRun(_textElement, ref ctp, nodeText, rotate, placement);
                             ctp.X += shiftBy;
                         }
                         else
                         {
                             ctp.Y -= shiftBy;
-                            RenderTextRunH(_textElement, ref ctp,
-                                WpfTextRenderer.GetText(_textElement, child), rotate, placement);
+                            RenderHorzTextRun(_textElement, ref ctp, nodeText, rotate, placement);
                             ctp.Y += shiftBy;
                         }
 
@@ -515,13 +543,13 @@ namespace SharpVectors.Renderers.Wpf
                             if (isVertical)
                             {
                                 ctp.X -= shiftBy;
-                                RenderTextRunV(_textElement, ref ctp, Whitespace, rotate, placement, true);
+                                RenderVertTextRun(_textElement, ref ctp, Whitespace, rotate, placement, true);
                                 ctp.X += shiftBy;
                             }
                             else
                             {
                                 ctp.Y -= shiftBy;
-                                RenderTextRunH(_textElement, ref ctp, Whitespace, rotate, placement, true);
+                                RenderHorzTextRun(_textElement, ref ctp, Whitespace, rotate, placement, true);
                                 ctp.Y += shiftBy;
                             }
 
@@ -675,7 +703,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Horizontal Render Methods
 
-        private void RenderSingleLineTextH(SvgTextContentElement element, ref Point ctp,
+        private void RenderHorzText(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement, bool isWhitespace = false)
         {
             if (_horzRenderer == null)
@@ -699,12 +727,12 @@ namespace SharpVectors.Renderers.Wpf
                     break;
                 }
             }
-            _horzRenderer.RenderSingleLineText(element, ref ctp, targetText, rotate, placement);
+            _horzRenderer.RenderText(element, ref ctp, targetText, rotate, placement);
 
             _context.TextAsGeometry = isGeometryMode;
         }
 
-        private void RenderTextRunH(SvgTextContentElement element, ref Point ctp,
+        private void RenderHorzTextRun(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement, bool isWhitespace = false)
         {
             if (_horzRenderer == null)
@@ -736,7 +764,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Vertical Render Methods
 
-        private void RenderSingleLineTextV(SvgTextContentElement element, ref Point ctp,
+        private void RenderVertText(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement, bool isWhitespace = false)
         {
             if (_vertRenderer == null)
@@ -749,10 +777,10 @@ namespace SharpVectors.Renderers.Wpf
             {
                 placement.UpdatePositions(targetText);
             }
-            _vertRenderer.RenderSingleLineText(element, ref ctp, targetText, rotate, placement);
+            _vertRenderer.RenderText(element, ref ctp, targetText, rotate, placement);
         }
 
-        private void RenderTextRunV(SvgTextContentElement element, ref Point ctp,
+        private void RenderVertTextRun(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement, bool isWhitespace = false)
         {
             if (_vertRenderer == null)
@@ -779,7 +807,7 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            _pathRenderer.RenderSingleLineText(textPath, ref ctp, string.Empty, rotate, placement);
+            _pathRenderer.RenderText(textPath, ref ctp, string.Empty, rotate, placement);
         }
 
         #endregion
@@ -806,22 +834,22 @@ namespace SharpVectors.Renderers.Wpf
             {
                 if (isSingleLine)
                 {
-                    this.RenderSingleLineTextV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderVertText(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
                 else
                 {
-                    this.RenderTextRunV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderVertTextRun(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
             }
             else
             {
                 if (isSingleLine)
                 {
-                    this.RenderSingleLineTextH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderHorzText(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
                 else
                 {
-                    this.RenderTextRunH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderHorzTextRun(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
             }
         }
@@ -846,22 +874,22 @@ namespace SharpVectors.Renderers.Wpf
             {
                 if (isSingleLine)
                 {
-                    this.RenderSingleLineTextV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderVertText(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
                 else
                 {
-                    this.RenderTextRunV(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderVertTextRun(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
             }
             else
             {
                 if (isSingleLine)
                 {
-                    this.RenderSingleLineTextH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderHorzText(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
                 else
                 {
-                    this.RenderTextRunH(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
+                    this.RenderHorzTextRun(element, ref ctp, WpfTextRenderer.GetText(element), rotate, placement);
                 }
             }
         }
@@ -932,12 +960,12 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             if (i == (nodeCount - 1) && spaceNode != null)
                             {
-                                RenderSingleLineTextV(element, ref ctp,
+                                RenderVertText(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
                             }
                             else
                             {
-                                RenderSingleLineTextV(element, ref ctp,
+                                RenderVertText(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child), rotate, placement);
                             }
                         }
@@ -945,12 +973,12 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             if (i == (nodeCount - 1) && spaceNode != null)
                             {
-                                RenderTextRunV(element, ref ctp,
+                                RenderVertTextRun(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
                             }
                             else
                             {
-                                RenderTextRunV(element, ref ctp,
+                                RenderVertTextRun(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child), rotate, placement);
                             }
                         }
@@ -963,12 +991,12 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             if (i == (nodeCount - 1) && spaceNode != null)
                             {
-                                RenderSingleLineTextH(element, ref ctp,
+                                RenderHorzText(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
                             }
                             else
                             {
-                                RenderSingleLineTextH(element, ref ctp,
+                                RenderHorzText(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child), rotate, placement);
                             }
                         }
@@ -976,12 +1004,12 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             if (i == (nodeCount - 1) && spaceNode != null)
                             {
-                                RenderTextRunH(element, ref ctp,
+                                RenderHorzTextRun(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
                             }
                             else
                             {
-                                RenderTextRunH(element, ref ctp,
+                                RenderHorzTextRun(element, ref ctp,
                                     WpfTextRenderer.GetText(element, child), rotate, placement);
                             }
                         }

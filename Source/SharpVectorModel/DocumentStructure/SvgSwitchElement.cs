@@ -2,9 +2,9 @@ using System;
 
 namespace SharpVectors.Dom.Svg
 {
-	/// <summary>
-	/// The SvgSwitchElement interface corresponds to the 'switch' element. 
-	/// </summary>
+    /// <summary>
+    /// The SvgSwitchElement interface corresponds to the 'switch' element. 
+    /// </summary>
     public sealed class SvgSwitchElement : SvgTransformableElement, ISvgSwitchElement
     {
         #region Private Fields
@@ -16,14 +16,14 @@ namespace SharpVectors.Dom.Svg
 
         #region Constructors and Destructor
 
-        public SvgSwitchElement(string prefix, string localname, string ns, SvgDocument doc) 
-            : base(prefix, localname, ns, doc) 
-		{
-			_externalResourcesRequired = new SvgExternalResourcesRequired(this);
-			_svgTests                  = new SvgTests(this);
-		}
+        public SvgSwitchElement(string prefix, string localname, string ns, SvgDocument doc)
+            : base(prefix, localname, ns, doc)
+        {
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests = new SvgTests(this);
+        }
 
-		#endregion
+        #endregion
 
         #region ISvgElement Members
 
@@ -36,23 +36,21 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Containment;
             }
         }
 
         #endregion
 
-		#region ISvgExternalResourcesRequired Members
+        #region ISvgExternalResourcesRequired Members
 
-		public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return _externalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
 
         #endregion
 
@@ -82,25 +80,25 @@ namespace SharpVectors.Dom.Svg
         #region ISvgTests Members
 
         public ISvgStringList RequiredFeatures
-		{
-			get { return _svgTests.RequiredFeatures; }
-		}
+        {
+            get { return _svgTests.RequiredFeatures; }
+        }
 
-		public ISvgStringList RequiredExtensions
-		{
-			get { return _svgTests.RequiredExtensions; }
-		}
+        public ISvgStringList RequiredExtensions
+        {
+            get { return _svgTests.RequiredExtensions; }
+        }
 
-		public ISvgStringList SystemLanguage
-		{
-			get { return _svgTests.SystemLanguage; }
-		}
+        public ISvgStringList SystemLanguage
+        {
+            get { return _svgTests.SystemLanguage; }
+        }
 
-		public bool HasExtension(string extension)
-		{
-			return _svgTests.HasExtension(extension);
-		}
+        public bool HasExtension(string extension)
+        {
+            return _svgTests.HasExtension(extension);
+        }
 
         #endregion
-	}
+    }
 }

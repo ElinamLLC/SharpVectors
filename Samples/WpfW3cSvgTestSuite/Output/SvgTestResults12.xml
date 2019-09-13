@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <results>
-    <result version="1.4.0.0" date="2019-09-01T06:35:36.1938032+09:00">
+    <result version="1.0.0.0" date="2019-09-01T06:35:36.1938032+09:00">
         <category label="Animations" total="81" unknowns="81" failures="0" successes="0" partials="0" />
         <category label="Coordinates and Transforms" total="17" unknowns="17" failures="0" successes="0" partials="0" />
         <category label="Fonts" total="13" unknowns="13" failures="0" successes="0" partials="0" />

@@ -26,7 +26,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public override void RenderSingleLineText(SvgTextContentElement element,
+        public override void RenderText(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
             this.RenderTextPath((SvgTextPathElement)element, ref ctp, rotate, placement);
@@ -180,7 +180,7 @@ namespace SharpVectors.Renderers.Texts
                 return;
             }
 
-            double emSize         = GetComputedFontSize(element);
+            double emSize      = GetComputedFontSize(element);
             var fontFamilyInfo = GetTextFontFamilyInfo(element);
 
             FontFamily fontFamily   = fontFamilyInfo.Family;

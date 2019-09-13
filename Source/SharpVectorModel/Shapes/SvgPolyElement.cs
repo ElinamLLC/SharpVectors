@@ -29,7 +29,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgPointList AnimatedPoints
         {
             get {
-                return Points;
+                return this.Points;
             }
         }
 

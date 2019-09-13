@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Svg
@@ -32,18 +33,32 @@ namespace SharpVectors.Dom.Svg
 
         public bool Parse(SvgPathSegList pathList, string pathSegs)
         {
-            if (pathList == null || string.IsNullOrWhiteSpace(pathSegs))
+            try
             {
+                if (pathList == null || string.IsNullOrWhiteSpace(pathSegs))
+                {
+                    return false;
+                }
+
+                _isClosed = false;
+                _mayHaveCurves = false;
+
+                string[] paths = RegexPathCmd.Split(pathSegs);
+
+                return this.Parse(pathList, paths);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
                 return false;
             }
+        }
 
-            _isClosed      = false;
-            _mayHaveCurves = false;
-
+        private bool Parse(SvgPathSegList pathList, string[] paths)
+        {
             int closedPath = 0;
 
             SvgPathSeg seg;
-            string[] paths = RegexPathCmd.Split(pathSegs);
 
             SvgPointF startPoint = new SvgPointF(0, 0);
 
@@ -64,6 +79,10 @@ namespace SharpVectors.Dom.Svg
                     case 'M':
                         for (int i = 0; i < length; i += 2)
                         {
+                            if (length < 2)
+                            {
+                                return false;
+                            }
                             if (i == 0)
                             {
                                 seg = new SvgPathSegMovetoAbs(coords[i], coords[i + 1]);
@@ -87,6 +106,10 @@ namespace SharpVectors.Dom.Svg
                     case 'm':
                         for (int i = 0; i < length; i += 2)
                         {
+                            if (length < 2)
+                            {
+                                return false;
+                            }
                             if (i == 0)
                             {
                                 seg = new SvgPathSegMovetoRel(coords[i], coords[i + 1]);

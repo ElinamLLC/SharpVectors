@@ -42,8 +42,13 @@ namespace SharpVectors.Dom.Svg
                         {
                             SvgSvgElement svgSvgElm = _ownerElement as SvgSvgElement;
 
-                            x      = svgSvgElm.X.AnimVal.Value;
-                            y      = svgSvgElm.Y.AnimVal.Value;
+                            // Because x / y are ignored on the root svg element, the x/ y origin should have 
+                            // no effect on the drawing.
+                            if (!svgSvgElm.IsOuterMost)
+                            {
+                                x  = svgSvgElm.X.AnimVal.Value;
+                                y  = svgSvgElm.Y.AnimVal.Value;
+                            }
                             width  = svgSvgElm.Width.AnimVal.Value;
                             height = svgSvgElm.Height.AnimVal.Value;
                         }

@@ -7,8 +7,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private ISvgAnimatedNumber _pathLength;
         private SvgTests _svgTests;
+        private ISvgAnimatedNumber _pathLength;
 
         private SvgPathSegList _pathSegList;
 

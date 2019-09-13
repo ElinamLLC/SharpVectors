@@ -55,6 +55,23 @@ namespace SharpVectors.Renderers.Gdi
 
         private LinearGradientBrush GetBrush(SvgLinearGradientElement res, RectangleF bounds)
         {
+            //LinearGradientBrush brush = new LinearGradientBrush(new RectangleF(fEffectiveLeft - 1,
+            //    fEffectiveTop - 1, fEffectiveWidth + 2, fEffectiveHeight + 2),
+            //    Color.White, Color.White, mode);
+
+            XmlNodeList stops = res.Stops;
+
+            ColorBlend cb = new ColorBlend();
+
+            //List<Color> adjcolors = new List<Color>();
+            //List<float> adjpositions = new List<float>();
+            //GetColorsAndPositions(stops, adjpositions, adjcolors);
+            var gradientStops = this.GetGradientStops(stops);
+            if (gradientStops == null || gradientStops.Count == 0)
+            {
+                return null;
+            }
+
             float fLeft   = (float)res.X1.AnimVal.Value;
             float fRight  = (float)res.X2.AnimVal.Value;
             float fTop    = (float)res.Y1.AnimVal.Value;
@@ -114,19 +131,6 @@ namespace SharpVectors.Renderers.Gdi
 
             if (fEffectiveHeight <= 0)
                 fEffectiveHeight = bounds.Height;
-
-            //LinearGradientBrush brush = new LinearGradientBrush(new RectangleF(fEffectiveLeft - 1,
-            //    fEffectiveTop - 1, fEffectiveWidth + 2, fEffectiveHeight + 2),
-            //    Color.White, Color.White, mode);
-
-            XmlNodeList stops = res.Stops;
-
-            ColorBlend cb = new ColorBlend();
-
-            //List<Color> adjcolors = new List<Color>();
-            //List<float> adjpositions = new List<float>();
-            //GetColorsAndPositions(stops, adjpositions, adjcolors);
-            var gradientStops = this.GetGradientStops(stops);
 
             int stopCount = gradientStops.Count;
             var colors    = new Color[stopCount];

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+
 using System.Windows;
 using System.Windows.Media;
-using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Svg;
 
@@ -199,27 +201,35 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            string localName = element.LocalName;
-            switch (localName)
+            try
             {
-                case "ellipse":
-                    return CreateGeometry((SvgEllipseElement)element);
-                case "rect":
-                    return CreateGeometry((SvgRectElement)element);
-                case "line":
-                    return CreateGeometry((SvgLineElement)element);
-                case "path":
-                    if (optimizePath)
-                    {
-                        return CreateGeometryEx((SvgPathElement)element);
-                    }
-                    return CreateGeometry((SvgPathElement)element);
-                case "circle":
-                    return CreateGeometry((SvgCircleElement)element);
-                case "polyline":
-                    return CreateGeometry((SvgPolylineElement)element);
-                case "polygon":
-                    return CreateGeometry((SvgPolygonElement)element);
+                string localName = element.LocalName;
+                switch (localName)
+                {
+                    case "ellipse":
+                        return CreateGeometry((SvgEllipseElement)element);
+                    case "rect":
+                        return CreateGeometry((SvgRectElement)element);
+                    case "line":
+                        return CreateGeometry((SvgLineElement)element);
+                    case "path":
+                        if (optimizePath)
+                        {
+                            return CreateGeometryEx((SvgPathElement)element);
+                        }
+                        return CreateGeometry((SvgPathElement)element);
+                    case "circle":
+                        return CreateGeometry((SvgCircleElement)element);
+                    case "polyline":
+                        return CreateGeometry((SvgPolylineElement)element);
+                    case "polygon":
+                        return CreateGeometry((SvgPolygonElement)element);
+                }
+
+            }
+            catch (Exception)
+            {
+                return null;
             }
 
             return null;
@@ -335,9 +345,11 @@ namespace SharpVectors.Renderers.Wpf
 
                 return geometry;
             }
-            catch
+            catch (FormatException ex)
             {
-                return CreateGeometry(element);
+                Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
+                return null;
+                //return CreateGeometry(element);
             }
         }
 

@@ -3,45 +3,44 @@ using System.Runtime.Serialization;
 
 namespace SharpVectors.Dom.Svg
 {
-	public enum SvgExceptionType
-	{
-		SvgWrongTypeErr, 
-		SvgInvalidValueErr, 
-		SvgMatrixNotInvertable
-	}
+    public enum SvgExceptionType
+    {
+        SvgWrongTypeErr,
+        SvgInvalidValueErr,
+        SvgMatrixNotInvertable
+    }
 
-	[Serializable]
-	public class SvgException : DomException
-	{
-		private SvgExceptionType _code;
+    [Serializable]
+    public class SvgException : DomException
+    {
+        private SvgExceptionType _code;
 
-		public SvgException(SvgExceptionType errorCode)
+        public SvgException(SvgExceptionType errorCode)
             : this(errorCode, string.Empty, null)
-		{			
-		}
+        {
+        }
 
-		public SvgException(SvgExceptionType errorCode, string message)
+        public SvgException(SvgExceptionType errorCode, string message)
             : this(errorCode, message, null)
-		{
-		}
+        {
+        }
 
-		public SvgException(SvgExceptionType errorCode, string message, Exception innerException)
+        public SvgException(SvgExceptionType errorCode, string message, Exception innerException)
             : base(message, innerException)
-		{
-			_code = errorCode;
-		}
+        {
+            _code = errorCode;
+        }
 
-		protected SvgException(SerializationInfo info, StreamingContext context) 
+        protected SvgException(SerializationInfo info, StreamingContext context)
             : base(info, context)
-		{
-		}
+        {
+        }
 
-		public new SvgExceptionType Code
-		{
-			get
-			{
-				return _code;
-			}
-		}
-	}
+        public new SvgExceptionType Code
+        {
+            get {
+                return _code;
+            }
+        }
+    }
 }

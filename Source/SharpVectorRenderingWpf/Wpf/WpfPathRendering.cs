@@ -78,6 +78,21 @@ namespace SharpVectors.Renderers.Wpf
                     _setBrushOpacity = false;
                 }
             }
+            string eVisibility = _svgElement.GetAttribute("visibility");
+            string eDisplay    = _svgElement.GetAttribute("display");
+            if (string.Equals(eVisibility, "hidden") || string.Equals(eDisplay, "none"))
+            {
+                opacityValue = 0;
+            }
+            else
+            {
+                string sVisibility = styleElm.GetPropertyValue("visibility");
+                string sDisplay = styleElm.GetPropertyValue("display");
+                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                {
+                    opacityValue = 0;
+                }
+            }
 
             Transform pathTransform = this.Transform;
             if (pathTransform != null && !pathTransform.Value.IsIdentity)
@@ -123,16 +138,8 @@ namespace SharpVectors.Renderers.Wpf
                 _drawGroup = null;
             }
 
-
             if (_drawGroup != null)
             {
-                string sVisibility = styleElm.GetPropertyValue("visibility");
-                string sDisplay = styleElm.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
-                {
-                    _drawGroup.Opacity = 0;
-                }
-
                 string elementClass = this.GetElementClass();
                 if (!string.IsNullOrWhiteSpace(elementClass) && context.IncludeRuntime)
                 {
@@ -187,12 +194,12 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
 
-            string sVisibility = styleElm.GetPropertyValue("visibility");
-            string sDisplay    = styleElm.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
-            {
-                return;
-            }
+            //string sVisibility = styleElm.GetPropertyValue("visibility");
+            //string sDisplay    = styleElm.GetPropertyValue("display");
+            //if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            //{
+            //    return;
+            //}
 
             DrawingGroup drawGroup = context.Peek();
             Debug.Assert(drawGroup != null);
@@ -445,12 +452,12 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
 
-            string sVisibility = styleElm.GetPropertyValue("visibility");
-            string sDisplay    = styleElm.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
-            {
-                return;
-            }
+            //string sVisibility = styleElm.GetPropertyValue("visibility");
+            //string sDisplay    = styleElm.GetPropertyValue("display");
+            //if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            //{
+            //    return;
+            //}
 
             DrawingGroup drawGroup = context.Peek();
             Debug.Assert(drawGroup != null);

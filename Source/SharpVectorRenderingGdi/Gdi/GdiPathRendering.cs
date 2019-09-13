@@ -29,7 +29,7 @@ namespace SharpVectors.Renderers.Gdi
             _graphicsContainer = graphics.BeginContainer();
 
             SetQuality(graphics);
-            Transform(graphics);
+            SetTransform(graphics);
         }
 
         public override void Render(GdiGraphicsRenderer renderer)
@@ -61,7 +61,7 @@ namespace SharpVectors.Renderers.Gdi
                 return;
 			}
 
-			Clip(graphics);
+			SetClip(graphics);
 
 			GdiSvgPaint fillPaint = new GdiSvgPaint(styleElm, "fill");
 			Brush brush = fillPaint.GetBrush(gp);

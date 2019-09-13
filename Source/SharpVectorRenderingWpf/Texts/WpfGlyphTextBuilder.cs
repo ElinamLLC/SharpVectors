@@ -44,6 +44,8 @@ namespace SharpVectors.Renderers.Texts
 
         #endregion Private Fields
 
+        #region Constructors and Destructor
+
         public WpfGlyphTextBuilder(CultureInfo culture, double fontSize)
             : this(culture, DefaultFontFamily, fontSize)
         {
@@ -71,12 +73,127 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        #endregion
+
         #region Public Properties
 
         public override WpfFontFamilyType FontFamilyType
         {
             get {
                 return WpfFontFamilyType.OpenType;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that determines whether to simulate a bold weight for the glyphs represented by the typeface.
+        /// </summary>
+        /// <value>true if bold simulation is used for glyphs; otherwise, false.</value>
+        public override bool IsBoldSimulated
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.IsBoldSimulated;
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that determines whether to simulate an italic style for the glyphs represented by the typeface.
+        /// </summary>
+        /// <value>true if italic simulation is used for glyphs; otherwise, false.</value>
+        public override bool IsObliqueSimulated
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.IsObliqueSimulated;
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the distance from the baseline to the strikethrough for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the strikethrough position, measured from the baseline and expressed 
+        /// as a fraction of the font em size.</value>
+        public override double StrikethroughPosition
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.StrikethroughPosition;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the strikethrough relative to the font em size.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the strikethrough thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        public override double StrikethroughThickness
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.StrikethroughThickness;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the distance of the underline from the baseline for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the underline position, measured from the baseline 
+        /// and expressed as a fraction of the font em size.</value>
+        public override double UnderlinePosition
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.UnderlinePosition;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the underline relative to the font em size for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the underline thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        public override double UnderlineThickness
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.UnderlineThickness;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 
+        /// The distance excludes ascenders.
+        /// </summary>
+        /// <value>
+        /// A <see cref="double"/> that indicates the distance from the baseline to the top of an
+        /// English lowercase letter (excluding ascenders), expressed as a fraction of the font em size.
+        /// </value>
+        public override double XHeight
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.XHeight;
+                }
+                return 0;
             }
         }
 
@@ -141,6 +258,8 @@ namespace SharpVectors.Renderers.Texts
 
         #endregion
 
+        #region Public Methods
+
         public override PathGeometry Build(SvgTextContentElement element, string text, double x, double y)
         {
             ComputeMeasurement(text, x, y);
@@ -204,6 +323,8 @@ namespace SharpVectors.Renderers.Texts
 
             return new Size(Math.Max(0, designRect.Right), Math.Max(0, designRect.Bottom));
         }
+
+        #endregion
 
         #region Private Methods
 

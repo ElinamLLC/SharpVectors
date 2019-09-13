@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<tests>
+<tests version="1.0" description="SVG 1.1 First Edition Test Suite: 13 December 2006">
     <category label="Animations">
         <test source="animate-elem-02-t.svg" title="animate-elem-02-t" state="failure" comment="SVG animation is currently not supported." description="Test 'additive' and 'accumulate' attributes." />
         <test source="animate-elem-03-t.svg" title="animate-elem-03-t" state="failure" comment="SVG animation is currently not supported." description="Test inheritance of animated properties." />
@@ -142,7 +142,7 @@
         <test source="masking-path-01-b.svg" title="masking-path-01-b" state="success" comment="" description="" />
         <test source="masking-path-02-b.svg" title="masking-path-02-b" state="success" comment="" description="Test to see if clipPathUnits attribute is handled properly on a clipPath element. Only tests the userSpaceOnUse and objectBoundingBox items of the clipPathUnits. userSpace has been tested by the previous test as it is the default." />
         <test source="masking-path-03-b.svg" title="masking-path-03-b" state="partial" comment="Inner clip not correct." description="Test 'overflow'/'clip' on outermost and inner 'svg' elements." />
-        <test source="masking-path-04-b.svg" title="masking-path-04-b" state="failure" comment="" description="Check that user-specified (non-default) clipPaths work." />
+        <test source="masking-path-04-b.svg" title="masking-path-04-b" state="success" comment="" description="Check that user-specified (non-default) clipPaths work." />
         <test source="masking-path-05-f.svg" title="masking-path-05-f" state="success" comment="" description="Test to see if clip-rule property has been implemented properly." />
     </category>
     <category label="Paint Servers">
@@ -161,7 +161,7 @@
         <test source="pservers-grad-13-b.svg" title="pservers-grad-15-b" state="success" comment="" description="Tests the radial gradient focal point" />
         <test source="pservers-grad-14-b.svg" title="pservers-grad-16-b" state="partial" comment="" description="Tests the spreadMethod attributes for gradients" />
         <test source="pservers-grad-15-b.svg" title="pservers-grad-15-b" state="success" comment="" description="" />
-        <test source="pservers-grad-16-b.svg" title="pservers-grad-16-b" state="partial" comment="" description="" />
+        <test source="pservers-grad-16-b.svg" title="pservers-grad-16-b" state="success" comment="" description="" />
         <test source="pservers-grad-17-b.svg" title="pservers-grad-17-b" state="partial" comment="By the revised test, SVG 1.1 Second Edition Test Suite, a fallback stroke is now required for invalid gradient and it is the same result in all browsers." description="" />
         <test source="pservers-grad-18-b.svg" title="pservers-grad-18-b" state="success" comment="" description="" />
         <test source="pservers-grad-19-b.svg" title="pservers-grad-19-b" state="partial" comment="The animateColor element is not supported." description="" />

@@ -117,6 +117,7 @@ namespace SharpVectors.Dom.Svg
         private readonly bool _ignoreProcessingInstructions;
         private readonly bool _ignoreWhitespace;
 
+        private bool _isFontsLoaded;
         private SvgWindow _window;
 
         private XmlReaderSettings _settings;
@@ -137,6 +138,7 @@ namespace SharpVectors.Dom.Svg
 
         private SvgDocument()
         {
+            _isFontsLoaded                = true;
             _ignoreComments               = false;
             _ignoreWhitespace             = false;
             _ignoreProcessingInstructions = false;
@@ -186,6 +188,13 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Public Properties
+
+        public bool IsFontsLoaded
+        {
+            get {
+                return _isFontsLoaded;
+            }
+        }
 
         public XmlReaderSettings CustomSettings
         {
@@ -1165,6 +1174,8 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
+            _isFontsLoaded = false;
+
             //TODO: Trying a background run...
             Task.Factory.StartNew(() => {
                 SvgWindow ownedWindow = _window.CreateOwnedWindow();
@@ -1204,6 +1215,8 @@ namespace SharpVectors.Dom.Svg
                         //Ignore the exception
                     }
                 }
+
+                _isFontsLoaded = true;
             });
         }
 

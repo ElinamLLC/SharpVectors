@@ -29,7 +29,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region RenderSingleLineText Method
 
-        public override void RenderSingleLineText(SvgTextContentElement element,
+        public override void RenderText(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
             if (string.IsNullOrWhiteSpace(text))

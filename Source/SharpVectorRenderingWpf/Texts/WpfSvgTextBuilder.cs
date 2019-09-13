@@ -19,8 +19,9 @@ namespace SharpVectors.Renderers.Texts
     {
         #region Private Fields
 
-        private const string Whitespace     = "space"; // Some SVG fonts use 'space' for the whitespace (" ").
+        private const string Whitespace     = "space";      // Some SVG fonts use 'space' for the whitespace (" ").
         private const string SmallCaps      = "small-caps";
+        private const string AltGlyph       = "altGlyph";
 
         // Known typeface that support small-caps. Just leave it here! 
         private const string SmallCapsFont1 = "Palatino Linotype";
@@ -28,10 +29,12 @@ namespace SharpVectors.Renderers.Texts
         private const string SmallCapsFont3 = "Copperplate Gothic";
         private const string SmallCapsFont4 = "Felix Titling";
         private const string SmallCapsFont5 = "Pescadero";           // Used by Microsoft for demo, but commercial
-
-        private const string SmallCapsFont  = SmallCapsFont3;  // Selected font
+        private const string SmallCapsFont  = SmallCapsFont3;        // Selected font (TODO: Test availability)
 
         private double _textWidth;
+
+        private int _unicodeRangeStart;
+        private int _unicodeRangeEnd;
 
         private string _fontVariant;
         private readonly SvgFontElement _font;
@@ -76,6 +79,13 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Properties
 
+        public bool HasUnicodeRange
+        {
+            get {
+                return (_unicodeRangeStart != -1 && _unicodeRangeStart != _unicodeRangeEnd);
+            }
+        }
+
         public string FontVariant
         {
             get {
@@ -90,6 +100,111 @@ namespace SharpVectors.Renderers.Texts
         {
             get {
                 return WpfFontFamilyType.Svg;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that determines whether to simulate a bold weight for the glyphs represented by the typeface.
+        /// </summary>
+        /// <value>true if bold simulation is used for glyphs; otherwise, false.</value>
+        public override bool IsBoldSimulated
+        {
+            get {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that determines whether to simulate an italic style for the glyphs represented by the typeface.
+        /// </summary>
+        /// <value>true if italic simulation is used for glyphs; otherwise, false.</value>
+        public override bool IsObliqueSimulated
+        {
+            get {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the distance from the baseline to the strikethrough for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the strikethrough position, measured from the baseline and expressed 
+        /// as a fraction of the font em size.</value>
+        public override double StrikethroughPosition
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.StrikethroughPosition;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the strikethrough relative to the font em size.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the strikethrough thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        public override double StrikethroughThickness
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.StrikethroughThickness;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the distance of the underline from the baseline for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the underline position, measured from the baseline 
+        /// and expressed as a fraction of the font em size.</value>
+        public override double UnderlinePosition
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.UnderlinePosition;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the underline relative to the font em size for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the underline thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        public override double UnderlineThickness
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.UnderlineThickness;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 
+        /// The distance excludes ascenders.
+        /// </summary>
+        /// <value>
+        /// A <see cref="double"/> that indicates the distance from the baseline to the top of an
+        /// English lowercase letter (excluding ascenders), expressed as a fraction of the font em size.
+        /// </value>
+        public override double XHeight
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.XHeight;
+                }
+                return 0;
             }
         }
 
@@ -199,6 +314,8 @@ namespace SharpVectors.Renderers.Texts
 
         #region Private Methods
 
+        #region Building
+
         private PathGeometry Build(SvgTextContentElement element, string text, IList<Rect> textBounds, bool measureSpaces)
         {
             if (string.IsNullOrEmpty(text))
@@ -216,7 +333,7 @@ namespace SharpVectors.Renderers.Texts
             var baseline = this.Baseline + this.Alphabetic; //TODO: Better calculation here!
             var xmlLang  = this.XmlLanguage; // Current language based on the lang/xml:lang of the text tag
 
-            bool isAltGlyph = string.Equals(element.LocalName, "altGlyph", StringComparison.OrdinalIgnoreCase);
+            bool isAltGlyph = string.Equals(element.LocalName, AltGlyph, StringComparison.OrdinalIgnoreCase);
             SvgAltGlyphElement altGlyph = isAltGlyph ? (SvgAltGlyphElement)element : null;
 
             int itemCount = _textIterator.Count;
@@ -247,7 +364,7 @@ namespace SharpVectors.Renderers.Texts
                     {
                         if (!_latinGlyphMaps.TryGet(inputText, xmlLang, out glyph))
                         {
-                            if (string.IsNullOrWhiteSpace(xmlLang))
+                            if (string.IsNullOrWhiteSpace(xmlLang) && this.WithinUnicodeRange(inputText))
                             {
                                 glyph = _missingGlyph;
                             }
@@ -299,14 +416,14 @@ namespace SharpVectors.Renderers.Texts
                     {
                         if (_smallCapFallBack == null)
                         {
-                            WpfFontFamilyInfo familyInfo = new WpfFontFamilyInfo(new FontFamily(SmallCapsFont), FontWeights.SemiBold,
-                                FontStyles.Normal, FontStretches.Normal);
+                            WpfFontFamilyInfo familyInfo = new WpfFontFamilyInfo(new FontFamily(SmallCapsFont), 
+                                FontWeights.SemiBold, FontStyles.Normal, FontStretches.Normal);
                             _smallCapFallBack = Create(familyInfo, this.Culture, this.FontSize);
                         }
 
                         selectedFallBack = _smallCapFallBack;
-                        inputText   = inputText.ToUpper();
-                        isSmallCaps = true;
+                        inputText        = inputText.ToUpper();
+                        isSmallCaps      = true;
                     }
                     else
                     {
@@ -361,8 +478,14 @@ namespace SharpVectors.Renderers.Texts
                 {
                     xPos -= _kerningTable.GetValue(prevGlyph, glyph, _emScale);
                 }
-                PathGeometry glyphPath = new PathGeometry();
-                glyphPath.Figures = PathFigureCollection.Parse(glyph.D);
+                PathGeometry glyphPath = glyph.Tag as PathGeometry;
+                if (glyphPath == null)
+                {
+                    glyphPath = new PathGeometry();
+                    glyphPath.Figures = PathFigureCollection.Parse(glyph.D);
+
+                    glyph.Tag = glyphPath; // Cache the original path geometry, it is not altered...
+                }
 
                 var groupTransform = new TransformGroup();
                 groupTransform.Children.Add(new ScaleTransform(_emScale, -1 * _emScale));
@@ -396,8 +519,45 @@ namespace SharpVectors.Renderers.Texts
             return textPath;
         }
 
+        private bool WithinUnicodeRange(string inputText)
+        {
+            if (_unicodeRangeStart != -1 && _unicodeRangeStart != _unicodeRangeEnd)
+            {
+                if (inputText.Length == 0)
+                {
+                    int unicode = inputText[0];
+                    return (unicode >= _unicodeRangeStart && unicode <= _unicodeRangeEnd);
+                }
+            }
+            return true;
+        }
+
+        private bool IsVariantMatched()
+        {
+            if (string.IsNullOrWhiteSpace(_fontVariant) || _font.FontFace == null)
+            {
+                return true;
+            }
+            var faceVariant = _font.FontFace.FontVariant;
+
+            bool isSmallCaps = string.Equals(faceVariant, SmallCaps, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(_fontVariant, SmallCaps, StringComparison.OrdinalIgnoreCase);
+            if (!isSmallCaps)
+            {
+                return true;
+            }
+            return string.Equals(faceVariant, _fontVariant, StringComparison.OrdinalIgnoreCase);
+        }
+
+        #endregion
+
+        #region Initialization
+
         private bool Initialize()
         {
+            _unicodeRangeStart = -1;
+            _unicodeRangeEnd   = -1;
+
             if (_font == null)
             {
                 return false;
@@ -420,6 +580,37 @@ namespace SharpVectors.Renderers.Texts
             if (_emScale <= 0.0d)
             {
                 _emScale = _fontSize / _fontFaceElement.UnitsPerEm;
+            }
+
+            var unicodeRange = _fontFaceElement.UnicodeRange;
+            if (!string.IsNullOrWhiteSpace(unicodeRange))
+            {
+                unicodeRange = unicodeRange.Substring(2).Replace(" ", ""); // move pass the U+
+                int hyphenIndex = unicodeRange.IndexOf('-');
+
+                string startValue = string.Empty;
+                string endValue = string.Empty;
+                if (hyphenIndex > 0)
+                {
+                    startValue = unicodeRange.Substring(0, hyphenIndex);
+                    endValue = unicodeRange.Substring(hyphenIndex + 1);
+                }
+                else if (unicodeRange.EndsWith("?", StringComparison.Ordinal))
+                {
+                    startValue = unicodeRange.Replace('?', '0');
+                    endValue = unicodeRange.Replace('?', 'F');
+                }
+
+                try
+                {
+                    _unicodeRangeStart = Convert.ToInt32(startValue, 16);
+                    _unicodeRangeEnd = Convert.ToInt32(endValue, 16);
+                }
+                catch (Exception)
+                {
+                    _unicodeRangeStart = -1;
+                    _unicodeRangeEnd   = -1;
+                }
             }
 
             _textIterator = new SvgAttributedTextIterator();
@@ -457,6 +648,7 @@ namespace SharpVectors.Renderers.Texts
                                 if (string.Equals(glyphName, Whitespace, StringComparison.OrdinalIgnoreCase))
                                 {
                                     neutralGlyphs.Add(" ", glyph);
+                                    neutralGlyphs.Add("\u00A0", glyph);
                                 }
                             }
                             else
@@ -476,23 +668,6 @@ namespace SharpVectors.Renderers.Texts
             return (_fontFaceElement != null && _missingGlyph != null && _latinGlyphMaps != null && _kerningTable != null);
         }
 
-        private bool IsVariantMatched()
-        {
-            if (string.IsNullOrWhiteSpace(_fontVariant))
-            {
-                return true;
-            }
-            var faceVariant = _font.FontFace.FontVariant;
-
-            bool isSmallCaps = string.Equals(faceVariant, SmallCaps, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(_fontVariant, SmallCaps, StringComparison.OrdinalIgnoreCase);
-            if (!isSmallCaps)
-            {
-                return true;
-            }
-            return string.Equals(faceVariant, _fontVariant, StringComparison.OrdinalIgnoreCase);
-        }
-
         private static string GetGlyphName(SvgGlyphElement glyph)
         {
             if (!string.IsNullOrWhiteSpace(glyph.Unicode))
@@ -509,6 +684,8 @@ namespace SharpVectors.Renderers.Texts
             }
             return string.Empty;
         }
+
+        #endregion
 
         #endregion
 
@@ -579,7 +756,6 @@ namespace SharpVectors.Renderers.Texts
                         isFound = true;
                     }
                 }
-
                 return isFound;
             }
 
@@ -1025,13 +1201,29 @@ namespace SharpVectors.Renderers.Texts
                             {
                                 for (int i = 0; i < glyphList1.Length; i++)
                                 {
-                                    _kerningMap.Add(glyphList1[i] + Separator + glyphList2[i], kern.Kerning);
+                                    var key = glyphList1[i] + Separator + glyphList2[i];
+                                    if (_kerningMap.ContainsKey(key))
+                                    {
+                                        _kerningMap[key] = kern.Kerning;
+                                    }
+                                    else
+                                    {
+                                        _kerningMap.Add(key, kern.Kerning);
+                                    }
                                 }
                             }
                         }
                         else
                         {
-                            _kerningMap.Add(glyph1 + Separator + glyph2, kern.Kerning);
+                            var key = glyph1 + Separator + glyph2;
+                            if (_kerningMap.ContainsKey(key))
+                            {
+                                _kerningMap[key] = kern.Kerning;
+                            }
+                            else
+                            {
+                                _kerningMap.Add(key, kern.Kerning);
+                            }
                         }
                         isFound = true;
                     }
@@ -1077,13 +1269,29 @@ namespace SharpVectors.Renderers.Texts
                                 {
                                     for (int i = 0; i < glyphList1.Length; i++)
                                     {
-                                        _kerningMap.Add(glyphList1[i] + Separator + glyphList2[i], kern.Kerning);
+                                        var key = glyphList1[i] + Separator + glyphList2[i];
+                                        if (_kerningMap.ContainsKey(key))
+                                        {
+                                            _kerningMap[key] = kern.Kerning;
+                                        }
+                                        else
+                                        {
+                                            _kerningMap.Add(key, kern.Kerning);
+                                        }
                                     }
                                 }
                             }
                             else
                             {
-                                _kerningMap.Add(unicode1 + Separator + unicode2, kern.Kerning);
+                                var key = unicode1 + Separator + unicode2;
+                                if (_kerningMap.ContainsKey(key))
+                                {
+                                    _kerningMap[key] = kern.Kerning;
+                                }
+                                else
+                                {
+                                    _kerningMap.Add(key, kern.Kerning);
+                                }
                             }
                             isFound = true;
                         }
@@ -1102,7 +1310,15 @@ namespace SharpVectors.Renderers.Texts
                             {
                                 if (string.Equals(glyph.GlyphName, glyph2))
                                 {
-                                    _kerningMap.Add(unicode1 + Separator + glyph.Unicode, kern.Kerning);
+                                    var key = unicode1 + Separator + glyph.Unicode;
+                                    if (_kerningMap.ContainsKey(key))
+                                    {
+                                        _kerningMap[key] = kern.Kerning;
+                                    }
+                                    else
+                                    {
+                                        _kerningMap.Add(key, kern.Kerning);
+                                    }
                                     break;
                                 }
                             }
@@ -1113,7 +1329,15 @@ namespace SharpVectors.Renderers.Texts
                             {
                                 if (string.Equals(glyph.GlyphName, glyph1))
                                 {
-                                    _kerningMap.Add(glyph.Unicode + Separator + unicode2, kern.Kerning);
+                                    var key = glyph.Unicode + Separator + unicode2;
+                                    if (_kerningMap.ContainsKey(key))
+                                    {
+                                        _kerningMap[key] = kern.Kerning;
+                                    }
+                                    else
+                                    {
+                                        _kerningMap.Add(key, kern.Kerning);
+                                    }
                                     break;
                                 }
                             }
@@ -1354,7 +1578,7 @@ namespace SharpVectors.Renderers.Texts
                 {
                     char prevChar = currentChar;
                     currentChar = _inputText[currentIndex];
-                    while (ArabicCharTransparent(currentChar) && (currentIndex < endIndex))
+                    while (IsArabicCharTransparent(currentChar) && (currentIndex < endIndex))
                     {
                         currentIndex++;
                         currentChar = _inputText[currentIndex];
@@ -1370,7 +1594,7 @@ namespace SharpVectors.Renderers.Texts
                     {
                         // if not at the start
                         // if prev char right AND current char left
-                        if (ArabicCharShapesRight(prevChar) && ArabicCharShapesLeft(currentChar))
+                        if (IsArabicCharShapesRight(prevChar) && IsArabicCharShapesLeft(currentChar))
                         {
                             // Increment the form of the previous char
                             prevForm = ArabicForms.GetNextForm(prevForm);
@@ -1379,7 +1603,7 @@ namespace SharpVectors.Renderers.Texts
                             // and set the form of the current char to INITIAL
                             currentForm = ArabicForms.Initial;
                         }
-                        else if (ArabicCharShaped(currentChar))
+                        else if (IsArabicCharShaped(currentChar))
                         {
                             // set the form of the current char to ISOLATE
                             currentForm = ArabicForms.Isolated;
@@ -1387,7 +1611,7 @@ namespace SharpVectors.Renderers.Texts
 
                         // if this is the first arabic char and its shaped, set to ISOLATE
                     }
-                    else if (ArabicCharShaped(currentChar))
+                    else if (IsArabicCharShaped(currentChar))
                     {
                         // set the form of the current char to ISOLATE
                         currentForm = ArabicForms.Isolated;
@@ -1414,7 +1638,7 @@ namespace SharpVectors.Renderers.Texts
             /// </summary>
             /// <param name="c"> The character to test. </param>
             /// <returns> True if the character is transparent, false otherwise. </returns>
-            public static bool ArabicCharTransparent(char c)
+            public static bool IsArabicCharTransparent(char c)
             {
                 int charVal = c;
                 if ((charVal < 0x064B) || (charVal > 0x06ED))
@@ -1437,7 +1661,7 @@ namespace SharpVectors.Renderers.Texts
             /// </summary>
             /// <param name="c"> The character to test. </param>
             /// <returns> True if the character shapes to the right, false otherwise. </returns>
-            private static bool ArabicCharShapesRight(char c)
+            private static bool IsArabicCharShapesRight(char c)
             {
                 int charVal = c;
                 if ((charVal >= 0x0622 && charVal <= 0x0625)
@@ -1454,7 +1678,7 @@ namespace SharpVectors.Renderers.Texts
                  || (charVal == 0x06CF)
                  || (charVal >= 0x06D2 && charVal <= 0x06D3)
                  // check for duel shaping too
-                 || ArabicCharShapesDuel(c))
+                 || IsArabicCharShapesDuel(c))
                 {
                     return true;
                 }
@@ -1466,10 +1690,9 @@ namespace SharpVectors.Renderers.Texts
             /// </summary>
             /// <param name="c"> The character to test. </param>
             /// <returns> True if the character is duel shaping, false otherwise. </returns>
-            private static bool ArabicCharShapesDuel(char c)
+            private static bool IsArabicCharShapesDuel(char c)
             {
                 int charVal = c;
-
                 if ((charVal == 0x0626)
                  || (charVal == 0x0628)
                  || (charVal >= 0x062A && charVal <= 0x062E)
@@ -1495,9 +1718,9 @@ namespace SharpVectors.Renderers.Texts
             /// </summary>
             /// <param name="c"> The character to test. </param>
             /// <returns> True if the character shapes to the left, false otherwise. </returns>
-            private static bool ArabicCharShapesLeft(char c)
+            private static bool IsArabicCharShapesLeft(char c)
             {
-                return ArabicCharShapesDuel(c);
+                return IsArabicCharShapesDuel(c);
             }
 
             /// <summary>
@@ -1505,9 +1728,9 @@ namespace SharpVectors.Renderers.Texts
             /// </summary>
             /// <param name="c"> The character to test. </param>
             /// <returns> True if the character is shaped, false otherwise. </returns>
-            private static bool ArabicCharShaped(char c)
+            private static bool IsArabicCharShaped(char c)
             {
-                return ArabicCharShapesRight(c);
+                return IsArabicCharShapesRight(c);
             }
         }
 

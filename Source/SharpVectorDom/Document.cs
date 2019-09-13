@@ -23,12 +23,12 @@ namespace SharpVectors.Dom
         {
             _eventTarget = new EventTarget(this);
 
-            NodeChanged   += WhenNodeChanged;
-            NodeChanging  += WhenNodeChanging;
-            NodeInserted  += WhenNodeInserted;
+            NodeChanged += WhenNodeChanged;
+            NodeChanging += WhenNodeChanging;
+            NodeInserted += WhenNodeInserted;
             NodeInserting += WhenNodeInserting;
-            NodeRemoved   += WhenNodeRemoved;
-            NodeRemoving  += WhenNodeRemoving;
+            NodeRemoved += WhenNodeRemoved;
+            NodeRemoving += WhenNodeRemoving;
         }
 
         protected internal Document(DomImplementation domImplementation)
@@ -54,12 +54,10 @@ namespace SharpVectors.Dom
         /// </summary>
         public bool MutationEvents
         {
-            get
-            {
+            get {
                 return _mutationEvents;
             }
-            set
-            {
+            set {
                 _mutationEvents = value;
             }
         }
@@ -89,7 +87,7 @@ namespace SharpVectors.Dom
         private void WhenNodeInserted(object sender, XmlNodeChangedEventArgs e)
         {
             INode newParent = e.NewParent as INode;
-            INode node      = e.Node as INode;
+            INode node = e.Node as INode;
 
             if (newParent != null && node != null)
             {
@@ -120,7 +118,7 @@ namespace SharpVectors.Dom
         private void WhenNodeRemoving(object sender, XmlNodeChangedEventArgs e)
         {
             INode oldParent = e.OldParent as INode;
-            INode node      = e.NewParent as INode;
+            INode node = e.NewParent as INode;
 
             if (oldParent != null && node != null)
             {
@@ -383,9 +381,9 @@ namespace SharpVectors.Dom
 
         #region XmlDocument interface
 
-        public override XmlAttribute CreateAttribute(string prefix, string localName, string namespaceUri)
+        public override XmlAttribute CreateAttribute(string prefix, string localName, string namespaceURI)
         {
-            return new Attribute(prefix, localName, namespaceUri, this);
+            return new Attribute(prefix, localName, namespaceURI, this);
         }
 
         public override XmlCDataSection CreateCDataSection(string data)
@@ -409,9 +407,9 @@ namespace SharpVectors.Dom
             return new DocumentType(name, publicId, systemId, internalSubset, this);
         }
 
-        public override XmlElement CreateElement(string prefix, string localName, string namespaceUri)
+        public override XmlElement CreateElement(string prefix, string localName, string namespaceURI)
         {
-            return new Element(prefix, localName, namespaceUri, this);
+            return new Element(prefix, localName, namespaceURI, this);
         }
 
         public override XmlEntityReference CreateEntityReference(string name)
@@ -499,24 +497,21 @@ namespace SharpVectors.Dom
 
         IDocumentType IDocument.Doctype
         {
-            get
-            {
+            get {
                 return (IDocumentType)DocumentType;
             }
         }
 
         IDomImplementation IDocument.Implementation
         {
-            get
-            {
+            get {
                 throw new DomException(DomExceptionType.NotSupportedErr);
             }
         }
 
         IElement IDocument.DocumentElement
         {
-            get
-            {
+            get {
                 return (IElement)DocumentElement;
             }
         }

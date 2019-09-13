@@ -3,7 +3,7 @@
   <Class Name="SharpVectors.Renderers.Texts.WpfTextRenderer" Collapsed="true">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQQEIAAIDBAoQIIEAADIAAIARAABAIAASKoJAQAAQg=</HashCode>
+      <HashCode>AIQQEAAAICBAoQIIEAgDIAAIAREAhAIAATKoJAQIAQg=</HashCode>
       <FileName>Texts\WpfTextRenderer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,7 +24,7 @@
   <Class Name="SharpVectors.Renderers.Texts.WpfVertTextRenderer" Collapsed="true">
     <Position X="4.75" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACEAAAEAAAAAAAAAAAAAAAAAIACAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEACEAAAEAAAAAAAAAAAAAAAAAIACAAAAAABA=</HashCode>
       <FileName>Texts\WpfVertTextRenderer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,7 +45,7 @@
   <Class Name="SharpVectors.Renderers.Texts.WpfTextPlacement" Collapsed="true">
     <Position X="4.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAKAwAAIAAAAAAAAQQAAAACABAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAKAwAAIAAAAAAAAQQEAAACABAAAAAAA=</HashCode>
       <FileName>Texts\WpfTextPlacement.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -54,6 +54,27 @@
     <TypeIdentifier>
       <HashCode>CABIAAAAAAAIAAAAAAAAAAkAAAAAAAQIACAACAAAIAA=</HashCode>
       <FileName>Texts\WpfTextRun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfTextBuilder" Collapsed="true">
+    <Position X="4" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gyAIIIAAgAAQQAAAGACAAkAAAQgAgMEAAgBAAAUIAKA=</HashCode>
+      <FileName>Texts\WpfTextBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfGlyphTextBuilder" Collapsed="true">
+    <Position X="2" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ICBAQIEACAIAQCAAAADSCEIEARAAiCAAgAFAQEICAgQ=</HashCode>
+      <FileName>Texts\WpfGlyphTextBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfSvgTextBuilder" Collapsed="true">
+    <Position X="5.25" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ECABAIIAAAAAAQAAEgCAAEAMAwSAgIUAAQFQKACAIBg=</HashCode>
+      <FileName>Texts\WpfSvgTextBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="SharpVectors.Renderers.Texts.WpfTextPosition" Collapsed="true">

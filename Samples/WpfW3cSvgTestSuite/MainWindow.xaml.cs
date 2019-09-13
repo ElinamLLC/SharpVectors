@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml;
 using System.Text;
 using System.Diagnostics;
+using System.Globalization;
 using System.ComponentModel;
 using System.IO.Compression;
 using System.Collections.Generic;
@@ -108,9 +109,12 @@ namespace WpfW3cSvgTestSuite
 
             _directoryInfo = new DirectoryInfo(_drawingDir);
 
-            _wpfSettings         = new WpfDrawingSettings();
+            _wpfSettings   = new WpfDrawingSettings();
+            // Set the window or rendering area size...
+            _wpfSettings.PixelWidth  = DrawingPage.ImageWidth;
+            _wpfSettings.PixelHeight = DrawingPage.ImageHeight;
 
-            _fileReader          = new FileSvgReader(_wpfSettings);
+            _fileReader = new FileSvgReader(_wpfSettings);
             _fileReader.SaveXaml = false;
             _fileReader.SaveZaml = false;
 

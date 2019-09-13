@@ -131,6 +131,15 @@
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
     <Compile Include="Events\SvgResolveUriEventArgs.cs" />
     <Compile Include="Paint\SvgMarkerPosition.cs" />
+    <Compile Include="Parsers\ISvgPathHandler.cs" />
+    <Compile Include="Parsers\ISvgPointsHandler.cs" />
+    <Compile Include="Parsers\SvgNumberParser.cs" />
+    <Compile Include="Parsers\SvgParser.cs" />
+    <Compile Include="Parsers\SvgPathParser.cs" />
+    <Compile Include="Parsers\SvgPointsParser.cs" />
+    <Compile Include="Parsers\SvgStringReader.cs" />
+    <Compile Include="Parsers\SvgTextReader.cs" />
+    <Compile Include="Paths\SvgPathSegHandler.cs" />
     <Compile Include="Paths\SvgPathSegParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -625,6 +634,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-model.mod" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
