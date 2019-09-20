@@ -232,7 +232,7 @@ namespace SharpVectors.Dom.Svg
 
         public string ResolveUri(string uri)
         {
-            uri = uri.Trim();
+            uri = uri.Trim().Trim(new char[] { '\"', '\'' });
             if (uri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 return uri;

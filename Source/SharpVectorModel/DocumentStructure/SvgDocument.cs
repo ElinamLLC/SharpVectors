@@ -751,7 +751,7 @@ namespace SharpVectors.Dom.Svg
                 return null;
             }
 
-            absoluteUrl = absoluteUrl.Trim();
+            absoluteUrl = absoluteUrl.Trim().Trim(new char[] { '\"', '\'' });
             if (absoluteUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 return GetElementById(absoluteUrl.Substring(1));
