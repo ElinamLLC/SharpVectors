@@ -4,28 +4,28 @@ namespace SharpVectors.Renderers.Wpf
 {
     public sealed class WpfSvgPaintContext
     {
-        private Guid _id;
-        private Guid _targetId;
+        private string _id;
+        private string _targetId;
 
         private WpfSvgPaint _fill;
         private WpfSvgPaint _stroke;
 
         private object _tag;
 
-        public WpfSvgPaintContext(Guid id)
+        public WpfSvgPaintContext(string id)
         {
-            _id = id;
-            _targetId = Guid.Empty;
+            _id       = id;
+            _targetId = string.Empty;
         }
 
-        public Guid Id
+        public string Id
         {
             get {
                 return _id;
             }
         }
 
-        public Guid TargetId
+        public string TargetId
         {
             get {
                 return _targetId;
@@ -38,7 +38,7 @@ namespace SharpVectors.Renderers.Wpf
         public bool HasTarget
         {
             get {
-                return (_targetId.Equals(Guid.Empty) == false);
+                return (string.IsNullOrWhiteSpace(_targetId) == false);
             }
         }
 
@@ -71,6 +71,5 @@ namespace SharpVectors.Renderers.Wpf
                 _tag = value;
             }
         }
-
     }
 }

@@ -234,7 +234,7 @@ namespace SharpVectors.Converters
 
         #region Protected Methods
 
-        protected virtual void BeginProcessing()
+        protected virtual void BeginProcessing(WpfDrawingDocument drawingDocument = null)
         {
             if (_wpfSettings == null)
             {
@@ -277,7 +277,7 @@ namespace SharpVectors.Converters
                 _wpfRenderer.ImageVisitor      = imageVisitor;
                 _wpfRenderer.FontFamilyVisitor = fontFamilyVisitor;
 
-                _wpfRenderer.BeginRender();
+                _wpfRenderer.BeginRender(drawingDocument);
             }
         }
 

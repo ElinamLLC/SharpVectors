@@ -1182,8 +1182,8 @@ namespace SharpVectors.Runtime
 
         private static bool IsValidBounds(Rect rectBounds)
         {
-            if (rectBounds.IsEmpty || Double.IsNaN(rectBounds.Width) || Double.IsNaN(rectBounds.Height)
-                || Double.IsInfinity(rectBounds.Width) || Double.IsInfinity(rectBounds.Height))
+            if (rectBounds.IsEmpty || double.IsNaN(rectBounds.Width) || double.IsNaN(rectBounds.Height)
+                || double.IsInfinity(rectBounds.Width) || double.IsInfinity(rectBounds.Height))
             {
                 return false;
             }

@@ -10,7 +10,7 @@ namespace SharpVectors.Dom.Svg
         private string _uri;
 
         public SvgResolveUriEventArgs()
-        {   
+        {
         }
 
         public SvgResolveUriEventArgs(string uri)
@@ -23,14 +23,12 @@ namespace SharpVectors.Dom.Svg
         /// This value may have already been initialized, it's up to the application to check if it wants to override the resolution
         /// </summary>
         /// <value>The URI.</value>
-        public string Uri 
-        { 
-            get
-            {
+        public string Uri
+        {
+            get {
                 return _uri;
             }
-            set
-            {
+            set {
                 _uri = value;
             }
         }

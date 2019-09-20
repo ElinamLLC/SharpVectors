@@ -129,8 +129,9 @@ namespace SharpVectors.Dom.Svg
 
         private XmlNamespaceManager _namespaceManager;
 
-        private IDictionary<string, XmlElement> _collectedIds;
         private IDictionary<string, string> _styledFontIds;
+        private IDictionary<string, XmlElement> _xmlElementMap;
+        private IDictionary<string, SvgElement> _svgElementMap;
 
         #endregion
 
@@ -854,9 +855,9 @@ namespace SharpVectors.Dom.Svg
         public string Title
         {
             get {
-                string result = "";
+                string result = string.Empty;
 
-                XmlNode node = SelectSingleNode("/svg:svg/svg:title[text()!='']", this.NamespaceManager);
+                XmlNode node = this.SelectSingleNode("/svg:svg/svg:title[text()!='']", this.NamespaceManager);
 
                 if (node != null)
                 {
@@ -903,47 +904,65 @@ namespace SharpVectors.Dom.Svg
         public ISvgSvgElement RootElement
         {
             get {
-                return DocumentElement as ISvgSvgElement;
+                return this.DocumentElement as ISvgSvgElement;
             }
+        }
+
+        public SvgElement GetSvgById(string elementId)
+        {
+            if (string.IsNullOrWhiteSpace(elementId))
+            {
+                return null;
+            }
+            return this.GetElementById(elementId) as SvgElement;
+        }
+
+        public SvgElement GetSvgByUniqueId(Guid uniqueId)
+        {
+            if (uniqueId == Guid.Empty)
+            {
+                return null;
+            }
+            return this.GetSvgByUniqueId(uniqueId.ToString());
+        }
+
+        public SvgElement GetSvgByUniqueId(string uniqueId)
+        {
+            if (string.IsNullOrWhiteSpace(uniqueId))
+            {
+                return null;
+            }
+            if (_svgElementMap == null)
+            {
+                this.BuildElementUniqueMap();
+            }
+
+            // Find the item
+            if (_svgElementMap.ContainsKey(uniqueId))
+            {
+                return _svgElementMap[uniqueId];
+            }
+
+            return null;
         }
 
         public override XmlElement GetElementById(string elementId)
         {
-            // TODO: handle element and attribute updates globally to watch for id changes.
-            if (_collectedIds == null)
+            if (string.IsNullOrWhiteSpace(elementId))
             {
-                _collectedIds = new Dictionary<string, XmlElement>(StringComparer.Ordinal);
+                return null;
+            }
 
-                XmlNodeList ids = this.SelectNodes("//*/@id");
-                foreach (XmlAttribute node in ids)
-                {
-                    string valueKey = node.Value;
-                    if (!_collectedIds.ContainsKey(valueKey))
-                    {
-                        _collectedIds.Add(node.Value, node.OwnerElement);
-                    }
-                }
-
-                // Get the nodes that have xml:ids which mach the given id
-                ids = this.SelectNodes("//*/@xml:id", this.NamespaceManager);
-                foreach (XmlAttribute node in ids)
-                {
-                    string valueKey = node.Value;
-                    if (string.Equals(valueKey, "svg-root"))
-                    {
-                        continue;
-                    }
-                    if (!_collectedIds.ContainsKey(valueKey))
-                    {
-                        _collectedIds.Add(node.Value, node.OwnerElement);
-                    }
-                }
+            // TODO: handle element and attribute updates globally to watch for id changes.
+            if (_xmlElementMap == null)
+            {
+                this.BuildElementMap();
             }
 
             // Find the item
-            if (_collectedIds.ContainsKey(elementId))
+            if (_xmlElementMap.ContainsKey(elementId))
             {
-                return _collectedIds[elementId];
+                return _xmlElementMap[elementId];
             }
 
             return null;
@@ -1059,6 +1078,28 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 return _styledFontIds;
+            }
+        }
+
+        public IDictionary<string, XmlElement> ElementMap
+        {
+            get {
+                if (_xmlElementMap == null)
+                {
+                    this.BuildElementMap();
+                }
+                return _xmlElementMap;
+            }
+        }
+
+        public IDictionary<string, SvgElement> ElementUniqueMap
+        {
+            get {
+                if (_svgElementMap == null)
+                {
+                    this.BuildElementUniqueMap();
+                }
+                return _svgElementMap;
             }
         }
 
@@ -1252,6 +1293,59 @@ namespace SharpVectors.Dom.Svg
             else if (string.Equals(fileExt, ".ttf", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(fileExt, ".otf", StringComparison.OrdinalIgnoreCase))
             {
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void BuildElementMap()
+        {
+            _xmlElementMap = new Dictionary<string, XmlElement>(StringComparer.Ordinal);
+
+            XmlNodeList ids = this.SelectNodes("//*/@id");
+            foreach (XmlAttribute node in ids)
+            {
+                string valueKey = node.Value;
+                if (!_xmlElementMap.ContainsKey(valueKey))
+                {
+                    _xmlElementMap.Add(node.Value, node.OwnerElement);
+                }
+            }
+
+            // Get the nodes that have xml:ids which mach the given id
+            ids = this.SelectNodes("//*/@xml:id", this.NamespaceManager);
+            foreach (XmlAttribute node in ids)
+            {
+                string valueKey = node.Value;
+                if (string.Equals(valueKey, "svg-root"))
+                {
+                    continue;
+                }
+                if (!_xmlElementMap.ContainsKey(valueKey))
+                {
+                    _xmlElementMap.Add(node.Value, node.OwnerElement);
+                }
+            }
+        }
+
+        private void BuildElementUniqueMap()
+        {
+            _svgElementMap = new Dictionary<string, SvgElement>(StringComparer.Ordinal);
+
+            XmlNodeList ids = this.SelectNodes("//*/@uniqueId");
+            foreach (XmlAttribute node in ids)
+            {
+                string valueKey = node.Value;
+                if (!_svgElementMap.ContainsKey(valueKey))
+                {
+                    var svgElement = node.OwnerElement as SvgElement;
+                    if (svgElement != null)
+                    {
+                        _svgElementMap.Add(node.Value, svgElement);
+                    }
+                }
             }
         }
 

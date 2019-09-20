@@ -12,8 +12,6 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private Guid _uniqueId;
-
         private ISvgElementInstance _elementInstance;
 
         #endregion
@@ -23,17 +21,29 @@ namespace SharpVectors.Dom.Svg
         public SvgElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            _uniqueId = Guid.NewGuid();
         }
 
         #endregion
 
         #region Public Properties
 
-        public Guid UniqueId
+        public string UniqueId
         {
             get {
-                return _uniqueId;
+                var uniqueId = string.Empty;
+                if (!this.HasAttribute("uniqueId"))
+                {
+                    if (!this.IsRenderable)
+                    {
+                        return uniqueId;
+                    }
+
+                    uniqueId = Guid.NewGuid().ToString();
+                    this.SetAttribute("uniqueId", uniqueId);
+
+                    return uniqueId;
+                }
+                return this.GetAttribute("uniqueId");
             }
         }
 
@@ -101,16 +111,13 @@ namespace SharpVectors.Dom.Svg
                 {
                     return null;
                 }
-                else
+                XmlNode parent = ParentNode;
+                while (parent != null && !(parent is SvgSvgElement) && !(parent is SvgSymbolElement))
                 {
-                    XmlNode parent = ParentNode;
-                    while (parent != null && !(parent is SvgSvgElement) && !(parent is SvgSymbolElement))
-                    {
-                        parent = parent.ParentNode;
-                    }
-
-                    return parent as SvgElement;
+                    parent = parent.ParentNode;
                 }
+
+                return parent as SvgElement;
             }
         }
 
@@ -210,9 +217,9 @@ namespace SharpVectors.Dom.Svg
         /// this property is used by the renderer to dispatch events. SvgElements that are &lt;use&gt;d exist in a 
         /// conceptual "instance tree" and the target of events for those elements is the conceptual instance 
         /// node represented by the SvgElementInstance.
-        /// <see cref="https://www.w3.org/TR/SVG/struct.html#UseElement"/>
-        /// <see cref="https://www.w3.org/TR/SVG/struct.html#InterfaceSVGElementInstance"/>
         /// </summary>
+        /// <seealso href="https://www.w3.org/TR/SVG/struct.html#UseElement"/>
+        /// <seealso href="https://www.w3.org/TR/SVG/struct.html#InterfaceSVGElementInstance"/>
         public ISvgElementInstance ElementInstance
         {
             get {

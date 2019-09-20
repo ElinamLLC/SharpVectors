@@ -514,5 +514,21 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _matrix        = Matrix.Identity;
+            _drawGroup     = null;
+            _hostElement   = null;
+            _pathFigures   = null;
+
+            _markerElement = element as SvgMarkerElement;
+        }
+
+        #endregion
     }
 }

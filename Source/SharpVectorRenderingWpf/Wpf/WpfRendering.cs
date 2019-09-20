@@ -16,16 +16,16 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
-        private static Regex _reUrl = new Regex(@"^url\((?<uri>.+)\)$", RegexOptions.Compiled);
+        private static Regex _reUrl  = new Regex(@"^url\((?<uri>.+)\)$", RegexOptions.Compiled);
+        private static object _synch = new object();
+        private static IDictionary<string, WpfRendering> _cacheRendering;
 
         private Geometry _clipGeometry;
         private Transform _transformMatrix;
         private Brush _maskBrush;
 
         private SvgUnitType _clipPathUnits;
-
         private SvgUnitType _maskUnits;
-
         private SvgUnitType _maskContentUnits;
 
         private bool _combineTransforms;
@@ -152,14 +152,47 @@ namespace SharpVectors.Renderers.Wpf
 
         public static WpfRendering Create(ISvgElement element)
         {
-            if (element == null)
+            lock(_synch)
             {
-                return null;
+                if (element == null)
+                {
+                    return null;
+                }
+                if (_cacheRendering == null)
+                {
+                    _cacheRendering = new Dictionary<string, WpfRendering>(StringComparer.Ordinal);
+                }
+                SvgElement svgElement = (SvgElement)element;
+                string localName = svgElement.LocalName;
+                if (!string.IsNullOrWhiteSpace(localName))
+                {
+                    if (_cacheRendering.ContainsKey(localName))
+                    {
+                        var wpfRendering = _cacheRendering[localName];
+                        if (wpfRendering.IsReady)
+                        {
+                            wpfRendering.Initialize(svgElement);
+
+                            wpfRendering.IsReady = false;
+                            return wpfRendering;
+                        }
+                    }
+                    else
+                    {
+                        var wpfRendering = CreateRendering(svgElement);
+                        _cacheRendering.Add(localName, wpfRendering);
+
+                        wpfRendering.IsReady = false;
+                        return wpfRendering;
+                    }
+                }
+                return CreateRendering(svgElement);
             }
+        }
 
-            SvgElement svgElement = (SvgElement)element;
-
-            SvgRenderingHint hint = element.RenderingHint;
+        private static WpfRendering CreateRendering(SvgElement svgElement)
+        {
+            SvgRenderingHint hint = svgElement.RenderingHint;
             // For the shapes and text contents...
             if (hint == SvgRenderingHint.Shape)
             {
@@ -170,7 +203,7 @@ namespace SharpVectors.Renderers.Wpf
                 return new WpfTextRendering(svgElement);
             }
 
-            string localName = element.LocalName;
+            string localName = svgElement.LocalName;
             if (string.IsNullOrWhiteSpace(localName))
             {
                 return new WpfRendering(svgElement);
@@ -235,15 +268,25 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return WpfRendering.Create(elm);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         #endregion
 
         #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _clipGeometry     = null;
+            _transformMatrix  = null;
+            _maskBrush        = null;
+
+            _maskUnits        = SvgUnitType.UserSpaceOnUse;
+            _clipPathUnits    = SvgUnitType.UserSpaceOnUse;
+            _maskContentUnits = SvgUnitType.UserSpaceOnUse;
+        }
 
         protected SvgTitleElement GetTitleElement()
         {

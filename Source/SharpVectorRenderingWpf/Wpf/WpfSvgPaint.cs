@@ -373,7 +373,7 @@ namespace SharpVectors.Renderers.Wpf
             }                 
 
             string miterLimitStr = _element.GetPropertyValue("stroke-miterlimit");
-            if (string.IsNullOrWhiteSpace(miterLimitStr) || (float)(strokeWidth) <= 0)
+            if (string.IsNullOrWhiteSpace(miterLimitStr) || (float)strokeWidth <= 0)
             {
                 return -1.0d;
             }

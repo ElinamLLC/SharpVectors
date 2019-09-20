@@ -97,6 +97,7 @@
     <Compile Include="Utils\SvgConvert.cs" />
     <Compile Include="Wpf\WpfARendering.cs" />
     <Compile Include="Wpf\WpfDrawingContext.cs" />
+    <Compile Include="Wpf\WpfDrawingDocument.cs" />
     <Compile Include="Wpf\WpfDrawingSettings.cs" />
     <Compile Include="Wpf\WpfEmbeddedImageVisitor.cs" />
     <Compile Include="Wpf\WpfFontFamilyInfo.cs" />

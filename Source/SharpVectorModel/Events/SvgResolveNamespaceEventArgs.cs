@@ -11,7 +11,7 @@ namespace SharpVectors.Dom.Svg
         private string _prefix;
 
         public SvgResolveNamespaceEventArgs()
-        {   
+        {
         }
 
         public SvgResolveNamespaceEventArgs(string prefix)
@@ -23,14 +23,12 @@ namespace SharpVectors.Dom.Svg
         /// Gets or sets the prefix (for example: 'rdf')
         /// </summary>
         /// <value>The prefix.</value>
-        public string Prefix 
-        { 
-            get
-            {
+        public string Prefix
+        {
+            get {
                 return _prefix;
             }
-            set
-            {
+            set {
                 _prefix = value;
             }
         }
@@ -39,14 +37,12 @@ namespace SharpVectors.Dom.Svg
         /// This value may have already been initialized, it's up to the application to check if it wants to override the resolution
         /// </summary>
         /// <value>The URI.</value>
-        public string Uri 
-        { 
-            get
-            {
+        public string Uri
+        {
+            get {
                 return _uri;
             }
-            set
-            {
+            set {
                 _uri = value;
             }
         }

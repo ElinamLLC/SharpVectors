@@ -27,8 +27,8 @@ namespace SharpVectors.Renderers.Wpf
 
         protected WpfRendererObject()
         {
-            _flattenClosedPath = false;
-            _flattenTolerance = 0.0022;
+            _flattenClosedPath    = false;
+            _flattenTolerance     = 0.0022;
             _flattenToleranceType = ToleranceType.Relative;
         }
 
@@ -93,6 +93,10 @@ namespace SharpVectors.Renderers.Wpf
             if (string.IsNullOrWhiteSpace(elementId))
             {
                 return string.Empty;
+            }
+            if (string.Equals(elementId, "svgbar"))
+            {
+                elementId = "svgbar";
             }
             elementId = elementId.Trim();
             if (IsValidIdentifier(elementId))

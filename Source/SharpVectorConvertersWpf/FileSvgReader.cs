@@ -36,6 +36,8 @@ namespace SharpVectors.Converters
         /// </summary>
         private DrawingGroup _drawing;
 
+        private WpfDrawingDocument _drawingDocument;
+
         #endregion
 
         #region Constructors and Destructor
@@ -143,19 +145,6 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets the last created drawing.
-        /// </summary>
-        /// <value>
-        /// A <see cref="DrawingGroup"/> specifying the last converted drawing.
-        /// </value>
-        public DrawingGroup Drawing
-        {
-            get {
-                return _drawing;
-            }
-        }
-
-        /// <summary>
         /// Gets the output image file path if generated.
         /// </summary>
         /// <value>
@@ -194,6 +183,26 @@ namespace SharpVectors.Converters
         {
             get {
                 return _zamlFile;
+            }
+        }
+
+        /// <summary>
+        /// Gets the last created drawing.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DrawingGroup"/> specifying the last converted drawing.
+        /// </value>
+        public DrawingGroup Drawing
+        {
+            get {
+                return _drawing;
+            }
+        }
+
+        public WpfDrawingDocument DrawingDocument
+        {
+            get {
+                return _drawingDocument;
             }
         }
 
@@ -536,13 +545,16 @@ namespace SharpVectors.Converters
 
         private DrawingGroup LoadFile(string fileName)
         {
-            this.BeginProcessing();
+            _drawingDocument = new WpfDrawingDocument();
+
+            this.BeginProcessing(_drawingDocument);
 
             _wpfWindow.LoadDocument(fileName, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
-            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+            _wpfRenderer.Render(svgDocument);
 
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
@@ -554,18 +566,23 @@ namespace SharpVectors.Converters
 
             this.EndProcessing();
 
+            _drawingDocument.Initialize(svgDocument, _drawing);
+
             return _drawing;
         }
 
         private DrawingGroup LoadFile(Stream stream)
         {
-            this.BeginProcessing();
+            _drawingDocument = new WpfDrawingDocument();
+
+            this.BeginProcessing(_drawingDocument);
 
             _wpfWindow.LoadDocument(stream, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
-            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+            _wpfRenderer.Render(svgDocument);
 
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
@@ -576,19 +593,24 @@ namespace SharpVectors.Converters
             }
 
             this.EndProcessing();
+
+            _drawingDocument.Initialize(svgDocument, _drawing);
 
             return _drawing;
         }
 
         private DrawingGroup LoadFile(Uri svgUri)
         {
-            this.BeginProcessing();
+            _drawingDocument = new WpfDrawingDocument();
+
+            this.BeginProcessing(_drawingDocument);
 
             _wpfWindow.LoadDocument(svgUri, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
-            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+            _wpfRenderer.Render(svgDocument);
 
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
@@ -599,19 +621,24 @@ namespace SharpVectors.Converters
             }
 
             this.EndProcessing();
+
+            _drawingDocument.Initialize(svgDocument, _drawing);
 
             return _drawing;
         }
 
         private DrawingGroup LoadFile(TextReader textReader)
         {
-            this.BeginProcessing();
+            _drawingDocument = new WpfDrawingDocument();
+
+            this.BeginProcessing(_drawingDocument);
 
             _wpfWindow.LoadDocument(textReader, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
-            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+            _wpfRenderer.Render(svgDocument);
 
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
@@ -622,19 +649,24 @@ namespace SharpVectors.Converters
             }
 
             this.EndProcessing();
+
+            _drawingDocument.Initialize(svgDocument, _drawing);
 
             return _drawing;
         }
 
         private DrawingGroup LoadFile(XmlReader xmlReader)
         {
-            this.BeginProcessing();
+            _drawingDocument = new WpfDrawingDocument();
+
+            this.BeginProcessing(_drawingDocument);
 
             _wpfWindow.LoadDocument(xmlReader, _wpfSettings);
 
             _wpfRenderer.InvalidRect = SvgRectF.Empty;
 
-            _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+            _wpfRenderer.Render(svgDocument);
 
             _drawing = _wpfRenderer.Drawing as DrawingGroup;
             if (_drawing == null)
@@ -645,6 +677,8 @@ namespace SharpVectors.Converters
             }
 
             this.EndProcessing();
+
+            _drawingDocument.Initialize(svgDocument, _drawing);
 
             return _drawing;
         }

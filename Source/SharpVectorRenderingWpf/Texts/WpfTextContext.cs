@@ -40,21 +40,14 @@ namespace SharpVectors.Renderers.Texts
 
         public WpfTextContext(SvgTextElement textElement, WpfTextRendering textRendering)
         {
-            if (textElement == null)
-            {
-                throw new ArgumentNullException(nameof(textElement),
-                    "The SVG text element is required, and cannot be null (or Nothing).");
-            }
             if (textRendering == null)
             {
                 throw new ArgumentNullException(nameof(textRendering),
                     "The text rendering object is required, and cannot be null (or Nothing).");
             }
-
-            _textElement   = textElement;
             _textRendering = textRendering;
 
-            this.Initialize();
+            this.SetElement(textElement);
         }
 
         #endregion
@@ -132,6 +125,19 @@ namespace SharpVectors.Renderers.Texts
         #endregion
 
         #region Public Methods
+        
+        public void SetElement(SvgTextElement textElement)
+        {
+            if (textElement == null)
+            {
+                throw new ArgumentNullException(nameof(textElement),
+                    "The SVG text element is required, and cannot be null (or Nothing).");
+            }
+
+            _textElement = textElement;
+
+            this.Initialize();
+        }
 
         public bool IsPositionChanged(SvgTextContentElement element)
         {

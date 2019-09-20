@@ -98,6 +98,9 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
+            // Register this drawing with the Drawing-Document...
+            this.Rendered(_drawGroup);
+
             base.Render(renderer);
         }
 
@@ -118,6 +121,17 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             base.AfterRender(renderer);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _drawGroup = null;
         }
 
         #endregion

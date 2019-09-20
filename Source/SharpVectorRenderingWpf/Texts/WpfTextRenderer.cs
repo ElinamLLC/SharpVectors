@@ -156,6 +156,13 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
+        public virtual void SetElement(SvgTextElement textElement)
+        {
+            _drawContext = null;
+            _context     = null;
+            _textElement = textElement;
+        }
+
         public virtual void Initialize(DrawingContext textContext, WpfDrawingContext drawContext)
         {
             if (textContext == null)

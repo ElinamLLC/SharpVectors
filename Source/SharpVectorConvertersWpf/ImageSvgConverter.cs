@@ -15,8 +15,7 @@ using SharpVectors.Renderers.Utils;
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This converts the SVG file to static or bitmap image, which is 
-    /// saved to a file.
+    /// This converts the SVG file to static or bitmap image, which is saved to a file.
     /// </summary>
     /// <remarks>
     /// <para>

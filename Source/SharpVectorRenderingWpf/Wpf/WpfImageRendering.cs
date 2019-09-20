@@ -355,6 +355,9 @@ namespace SharpVectors.Renderers.Wpf
                             SvgObject.SetId(drawGroup, elementId);
                         }
                     }
+
+                    // Register this drawing with the Drawing-Document...
+                    this.Rendered(drawGroup);
                 }
                 else if (!_idAssigned)
                 {
@@ -369,6 +372,9 @@ namespace SharpVectors.Renderers.Wpf
                             SvgObject.SetId(imageSource, elementId);
                         }
                     }
+
+                    // Register this drawing with the Drawing-Document...
+                    this.Rendered(drawing);
                 }
             }
         }
@@ -376,6 +382,18 @@ namespace SharpVectors.Renderers.Wpf
         public override void AfterRender(WpfDrawingRenderer renderer)
         {
             base.AfterRender(renderer);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _idAssigned       = false;
+            _embeddedRenderer = null;
         }
 
         #endregion

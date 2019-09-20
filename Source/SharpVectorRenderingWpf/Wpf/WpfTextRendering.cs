@@ -558,6 +558,12 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
             }
+
+            // Register this drawing with the Drawing-Document...
+            if (_drawGroup != null)
+            {
+                this.Rendered(_drawGroup);
+            }
         }
 
         public void SetTextWidth(double textWidth)
@@ -595,17 +601,14 @@ namespace SharpVectors.Renderers.Wpf
             if (_horzRenderer != null)
             {
                 _horzRenderer.Uninitialize();
-                _horzRenderer = null;
             }
             if (_vertRenderer != null)
             {
                 _vertRenderer.Uninitialize();
-                _vertRenderer = null;
             }
             if (_pathRenderer != null)
             {
                 _pathRenderer.Uninitialize();
-                _pathRenderer = null;
             }
 
             if (_drawContext != null)
@@ -689,13 +692,65 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
-            _context = null;
+            _context   = null;
             _drawGroup = null;
 
             base.AfterRender(renderer);
         }
 
         #endregion
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _textElement = element as SvgTextElement;
+            if (_textElement == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (_textContext == null)
+            {
+                _textContext  = new WpfTextContext(_textElement, this);
+            }
+            else
+            {
+                _textContext.SetElement(_textElement);
+            }
+
+            if (_horzRenderer == null)
+            {
+                _horzRenderer = new WpfHorzTextRenderer(_textElement, this);
+            }
+            else
+            {
+                _horzRenderer.Uninitialize();
+                _horzRenderer.SetElement(_textElement);
+            }
+            if (_vertRenderer == null)
+            {
+                _vertRenderer = new WpfVertTextRenderer(_textElement, this);
+            }
+            else
+            {
+                _vertRenderer.Uninitialize();
+                _vertRenderer.SetElement(_textElement);
+            }
+            if (_pathRenderer == null)
+            {
+                _pathRenderer = new WpfPathTextRenderer(_textElement, this);
+            }
+            else
+            {
+                _pathRenderer.Uninitialize();
+                _pathRenderer.SetElement(_textElement);
+            }
+        }
 
         #endregion
 

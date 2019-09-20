@@ -644,11 +644,11 @@ namespace SharpVectors.Renderers.Texts
                             string glyphLang = glyph.Lang;
                             if (string.IsNullOrWhiteSpace(glyphLang))
                             {
-                                neutralGlyphs.Add(glyphName, glyph);
+                                neutralGlyphs[glyphName] = glyph;
                                 if (string.Equals(glyphName, Whitespace, StringComparison.OrdinalIgnoreCase))
                                 {
-                                    neutralGlyphs.Add(" ", glyph);
-                                    neutralGlyphs.Add("\u00A0", glyph);
+                                    neutralGlyphs[" "]      = glyph;
+                                    neutralGlyphs["\u00A0"] = glyph;
                                 }
                             }
                             else

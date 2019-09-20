@@ -431,6 +431,9 @@ namespace SharpVectors.Renderers.Wpf
             {
                 RenderMarkers(renderer, styleElm, context);
             }
+
+            // Register this drawing with the Drawing-Document...
+            this.Rendered(drawGroup);
         }
 
         private void RenderPath(WpfDrawingRenderer renderer)
@@ -466,6 +469,8 @@ namespace SharpVectors.Renderers.Wpf
 
             string elementId = this.GetElementName();
             string elementClass = this.GetElementClass();
+
+            GeometryDrawing drawing = null;
 
             if (geometry != null && !geometry.IsEmpty())
             {
@@ -578,7 +583,7 @@ namespace SharpVectors.Renderers.Wpf
                         transform = null; // render any identity transform useless...
                     }
 
-                    GeometryDrawing drawing = new GeometryDrawing(brush, pen, geometry);
+                    drawing = new GeometryDrawing(brush, pen, geometry);
 
                     if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
                     {
@@ -735,6 +740,12 @@ namespace SharpVectors.Renderers.Wpf
             {
                 RenderMarkers(renderer, styleElm, context);
             }
+
+            // Register this drawing with the Drawing-Document...
+            if (drawing != null)
+            {
+                this.Rendered(drawing);
+            }
         }
 
         public override void AfterRender(WpfDrawingRenderer renderer)
@@ -840,6 +851,19 @@ namespace SharpVectors.Renderers.Wpf
                     throw new NotSupportedException();
                 }
             }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _drawGroup       = null;
+            _isLineSegment   = false;
+            _setBrushOpacity = false;
         }
 
         #endregion

@@ -11,7 +11,8 @@
         Polyline = 6,
         Polygon  = 7,
         Marker   = 8,
-        Image    = 9,
-        Group    = 10
+        Path     = 9,
+        Image    = 10,
+        Group    = 11
     }
 }

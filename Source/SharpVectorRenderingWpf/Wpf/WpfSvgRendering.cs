@@ -196,6 +196,9 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
             }
+
+            // Register this drawing with the Drawing-Document...
+            this.Rendered(_drawGroup);
         }
 
         public override void AfterRender(WpfDrawingRenderer renderer)
@@ -313,6 +316,26 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return drawGroup;
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _isRoot      = false;
+            _isRecursive = false;
+
+            var svgRootElm = element as SvgSvgElement;
+            if (svgRootElm != null)
+            {
+                _isRoot = svgRootElm.IsOuterMost;
+            }
+
+            _drawGroup = null;
         }
 
         #endregion

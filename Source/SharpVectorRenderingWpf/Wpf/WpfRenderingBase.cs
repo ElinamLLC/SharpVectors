@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
 
@@ -14,6 +15,9 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        protected bool _isReady;
+        protected string _elementId;
+        protected string _uniqueId;
         protected SvgElement _svgElement;
         protected WpfSvgPaintContext _paintContext;
 
@@ -29,7 +33,13 @@ namespace SharpVectors.Renderers.Wpf
         protected WpfRenderingBase(SvgElement element, WpfDrawingContext context)
             : base(context)
         {
+            _isReady    = true;
             _svgElement = element;
+            if (element != null)
+            {
+                _uniqueId  = element.UniqueId;
+                _elementId = this.GetElementName();
+            }
         }
 
         #endregion
@@ -43,9 +53,18 @@ namespace SharpVectors.Renderers.Wpf
 
         public virtual bool IsRecursive
         {
-            get
-            {
+            get {
                 return false;
+            }
+        }
+
+        public bool IsReady
+        {
+            get {
+                return _isReady;
+            }
+            protected set {
+                _isReady = value;
             }
         }
 
@@ -66,7 +85,6 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return false;
             }
-
             return true;
         }
 
@@ -77,33 +95,87 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return;
             }
+            _isReady = false;
             _context = renderer.Context;
 
             if (_svgElement != null && _context != null)
             {
-                _paintContext = new WpfSvgPaintContext(_svgElement.UniqueId);
+                if (string.IsNullOrWhiteSpace(_uniqueId))
+                {
+                    _uniqueId = _svgElement.UniqueId;
+                }
+                _paintContext = new WpfSvgPaintContext(_uniqueId);
                 _context.RegisterPaintContext(_paintContext);
             }
         }
 
-        public virtual void Render(WpfDrawingRenderer renderer) { }
+        public virtual void Render(WpfDrawingRenderer renderer)
+        {
+            _isReady = false;
+        }
 
         public virtual void AfterRender(WpfDrawingRenderer renderer)
         {
             if (_svgElement != null && _context != null)
             {
-                _context.UnRegisterPaintContext(_svgElement.UniqueId);
+                if (string.IsNullOrWhiteSpace(_uniqueId))
+                {
+                    _uniqueId = _svgElement.UniqueId;
+                }
+                _context.UnRegisterPaintContext(_uniqueId);
             }
+            _isReady = true;
         }
 
-        public string GetElementName()
+        #endregion
+
+        #region Protected Methods
+
+        protected virtual void Initialize(SvgElement element)
         {
-            return GetElementName(_svgElement, _context);
+            _isReady    = true;
+            _elementId  = null;
+            _uniqueId   = null;
+            _svgElement = element;
+            if (element != null)
+            {
+                _uniqueId  = element.UniqueId;
+                _elementId = this.GetElementName();
+            }
+            _paintContext = null;
         }
 
-        public string GetElementClass()
+        protected string GetElementName()
+        {
+            if (!string.IsNullOrWhiteSpace(_elementId))
+            {
+                return _elementId;
+            }
+            _elementId = GetElementName(_svgElement, _context);
+
+            return _elementId;
+        }
+
+        protected string GetElementClass()
         {
             return GetElementClassName(_svgElement, _context);
+        }
+
+        protected void Rendered(Drawing drawing)
+        {
+            if (drawing != null && _context != null)
+            {
+                if (string.IsNullOrWhiteSpace(_elementId))
+                {
+                    _elementId = this.GetElementName();
+                }
+                if (string.IsNullOrWhiteSpace(_uniqueId))
+                {
+                    _uniqueId = _svgElement.UniqueId;
+                }
+
+                _context.RegisterDrawing(_elementId, _uniqueId, drawing);
+            }
         }
 
         #endregion
