@@ -1,0 +1,78 @@
+﻿<Page x:Class="WpfTestSvgControl.SvgPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    xmlns:local="clr-namespace:WpfTestSvgControl"
+    mc:Ignorable="d" 
+    d:DesignHeight="250" d:DesignWidth="860" Title="SvgPage">
+    <DockPanel LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top" Height="36">
+            <ToolBar.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                            <Setter Property="Opacity" Value="0.30" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Resources>
+            <Button Click="OnOpenFileClick" ToolTip="Open Svg File">
+                <Image Source="{svgc:SvgImage Source=/Images/Open.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Button Click="OnSaveFileClick" ToolTip="Save Svg File">
+                <Image Source="{svgc:SvgImage Source=/Images/Save.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <Button Command="Cut" ToolTip="Cut To Clipboard">
+                <Image Source="{svgc:SvgImage Source=/Images/Cut.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Copy" ToolTip="Copy To Clipboard">
+                <Image Source="{svgc:SvgImage Source=/Images/Copy.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Paste" ToolTip="Paste From Clipboard">
+                <Image Source="{svgc:SvgImage Source=/Images/Paste.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Delete" ToolTip="Delete Selection">
+                <Image Source="{svgc:SvgImage Source=/Images/Delete.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <Button Command="Undo" ToolTip="Undo">
+                <Image Source="{svgc:SvgImage Source=/Images/Undo.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="Redo" ToolTip="Redo">
+                <Image Source="{svgc:SvgImage Source=/Images/Redo.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
+                <Image Source="{svgc:SvgImage Source=/Images/WordWrap.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}" ToolTip="Show Line Numbers">
+                <Image Source="{svgc:SvgImage Source=/Images/Number.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}" ToolTip="Show End Of Line">
+                <Image Source="{svgc:SvgImage Source=/Images/Space.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </CheckBox>
+            <ComboBox x:Name="highlightingComboBox" Width="120"
+				    SelectedItem="{Binding SyntaxHighlighting, ElementName=textEditor}"
+				    ItemsSource="{Binding Source={x:Static avalonEdit:HighlightingManager.Instance}, Path=HighlightingDefinitions}"
+				    SelectionChanged="OnHighlightingSelectionChanged"/>
+            <Separator/>
+            <TextBox x:Name="searchTextBox" Width="200" KeyUp="OnSearchTextBoxKeyUp" />
+            <Button Click="OnSearchTextClick" ToolTip="Search">
+                <Image Source="{svgc:SvgImage Source=/Images/Find.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Separator/>
+            <Button Command="Print">
+                <Image Source="{svgc:SvgImage Source=/Images/Print.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+            <Button Command="PrintPreview">
+                <Image Source="{svgc:SvgImage Source=/Images/PrintPreview.svg, AppName=WpfTestSvgControl}" Height="24" Width="24"/>
+            </Button>
+        </ToolBar>
+
+        <avalonEdit:TextEditor x:Name="textEditor" FontFamily="Consolas" FontSize="10pt"/>
+    </DockPanel>
+</Page>

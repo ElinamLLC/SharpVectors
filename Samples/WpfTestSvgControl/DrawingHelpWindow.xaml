@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfTestSvgControl.DrawingHelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTestSvgControl"
+        mc:Ignorable="d"
+        Title="Quick Help - Drawing" Height="500" Width="750" Icon="App.ico" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 
+                Merge in the resource dictionary that contains the help text that is displayed in the window.
+                This is in a separate file to remove some of the clutter and simplify this file.
+                -->
+                <ResourceDictionary Source="DrawingPageHelp.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!--
+    Some text that describes the input bindings.
+    -->
+    <FlowDocumentPageViewer Document="{StaticResource helpText}" Width="700" Background="White"/>
+</Window>

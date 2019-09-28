@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Input;
@@ -104,6 +105,11 @@ namespace WpfTestSvgSample
 
         private DispatcherTimer _dispatcherTimer;
 
+        private WpfDrawingDocument _drawingDocument;
+
+        private EmbeddedImageSerializerVisitor _embeddedImageVisitor;
+        private IList<EmbeddedImageSerializerArgs> _embeddedImages;        
+
         #endregion
 
         #region Constructors and Destructor
@@ -127,9 +133,29 @@ namespace WpfTestSvgSample
 
             _workingDir = new DirectoryInfo(workDir);
 
+            _embeddedImages = new List<EmbeddedImageSerializerArgs>();
+
+            _embeddedImageVisitor = new EmbeddedImageSerializerVisitor(true);
+            _wpfSettings.Visitors.ImageVisitor = _embeddedImageVisitor;
+
+            _embeddedImageVisitor.ImageCreated += OnEmbeddedImageCreated;
+
             this.Loaded      += OnPageLoaded;
             this.Unloaded    += OnPageUnloaded;
             this.SizeChanged += OnPageSizeChanged;
+        }
+
+        private void OnEmbeddedImageCreated(object sender, EmbeddedImageSerializerArgs args)
+        {
+            if (args == null)
+            {
+                return;
+            }
+            if (_embeddedImages == null)
+            {
+                _embeddedImages = new List<EmbeddedImageSerializerArgs>();
+            }
+            _embeddedImages.Add(args);
         }
 
         #endregion
@@ -158,11 +184,6 @@ namespace WpfTestSvgSample
                     if (_fileReader != null)
                     {
                         _fileReader.SaveXaml = Directory.Exists(_drawingDir);
-                    }
-
-                    if (_wpfSettings != null)
-                    {
-                        _wpfSettings.Visitors.ImageVisitor = new EmbeddedImageSerializerVisitor(true, _drawingDir);
                     }
                 }
             }
@@ -202,8 +223,6 @@ namespace WpfTestSvgSample
                         Directory.Exists(_drawingDir))
                     {
                         _fileReader.SaveXaml = Directory.Exists(_drawingDir);
-
-                        _wpfSettings.Visitors.ImageVisitor = new EmbeddedImageSerializerVisitor(true, _drawingDir);
                     }
                 }
             }
@@ -244,12 +263,21 @@ namespace WpfTestSvgSample
         /// <summary>
         /// This allows the same property name to be used for direct and indirect access to the ZoomPanelControl control.
         /// </summary>
-        public ZoomPanControl ZoomPanContent => zoomPanControl;
+        public ZoomPanControl ZoomPanContent {
+            get {
+                return zoomPanControl;
+            }
+        }
 
         /// <summary>
         /// This allows the same property name to be used for direct and indirect access to the SVG Canvas control.
         /// </summary>
-        public SvgDrawingCanvas Viewer => svgViewer;
+        public SvgDrawingCanvas Viewer
+        {
+            get {
+                return svgViewer;
+            }
+        }
 
         #endregion
 
@@ -271,6 +299,7 @@ namespace WpfTestSvgSample
             this.UnloadDocument(true);
 
             _svgFilePath = svgFilePath;
+            _saveXaml    = _optionSettings.ShowOutputFile;
 
             string fileExt = Path.GetExtension(svgFilePath);
 
@@ -282,7 +311,12 @@ namespace WpfTestSvgSample
                     _fileReader.SaveXaml = _saveXaml;
                     _fileReader.SaveZaml = false;
 
+                    _embeddedImageVisitor.SaveImages    = !_wpfSettings.IncludeRuntime;
+                    _embeddedImageVisitor.SaveDirectory = _drawingDir;
+                    _wpfSettings.Visitors.ImageVisitor  = _embeddedImageVisitor;
+
                     DrawingGroup drawing = _fileReader.Read(svgFilePath, workingDir);
+                    _drawingDocument = _fileReader.DrawingDocument;
                     if (drawing != null)
                     {
                         svgViewer.UnloadDiagrams();
@@ -324,12 +358,6 @@ namespace WpfTestSvgSample
                 return Task.FromResult<bool>(false);
             }
 
-            DirectoryInfo workingDir = _workingDir;
-            if (_directoryInfo != null)
-            {
-                workingDir = _directoryInfo;
-            }
-
             string fileExt = Path.GetExtension(svgFilePath);
 
             if (!(string.Equals(fileExt, SvgConverter.SvgExt, StringComparison.OrdinalIgnoreCase) ||
@@ -339,6 +367,23 @@ namespace WpfTestSvgSample
                 return Task.FromResult<bool>(false);
             }
 
+            _isLoadingDrawing = true;
+
+            this.UnloadDocument(true);
+
+            DirectoryInfo workingDir = _workingDir;
+            if (_directoryInfo != null)
+            {
+                workingDir = _directoryInfo;
+            }
+
+            _svgFilePath = svgFilePath;
+            _saveXaml    = _optionSettings.ShowOutputFile;
+
+            _embeddedImageVisitor.SaveImages    = !_wpfSettings.IncludeRuntime;
+            _embeddedImageVisitor.SaveDirectory = _drawingDir;
+            _wpfSettings.Visitors.ImageVisitor  = _embeddedImageVisitor;
+
             if (_fileReader == null)
             {
                 _fileReader = new FileSvgReader(_wpfSettings);
@@ -346,23 +391,18 @@ namespace WpfTestSvgSample
                 _fileReader.SaveZaml = false;
             }
 
-            _isLoadingDrawing = true;
-
-            this.UnloadDocument(true);
-
-            _svgFilePath = svgFilePath;
-
-            MemoryStream drawingStream = new MemoryStream();
+            var drawingStream = new MemoryStream();
 
             // Get the UI thread's context
             var context = TaskScheduler.FromCurrentSynchronizationContext();
 
             return Task<bool>.Factory.StartNew(() =>
             {
-                var saveXaml = _fileReader.SaveXaml;
-                _fileReader.SaveXaml = true; // For threaded, we will save to avoid loading issue later...
+//                var saveXaml = _fileReader.SaveXaml;
+//                _fileReader.SaveXaml = true; // For threaded, we will save to avoid loading issue later...
                 DrawingGroup drawing = _fileReader.Read(svgFilePath, workingDir);
-                _fileReader.SaveXaml = saveXaml;
+//                _fileReader.SaveXaml = saveXaml;
+                _drawingDocument = _fileReader.DrawingDocument;
                 if (drawing != null)
                 {
                     XamlWriter.Save(drawing, drawingStream);
@@ -397,6 +437,9 @@ namespace WpfTestSvgSample
 
                         zoomPanControl.AnimatedZoomTo(bounds);
                         CommandManager.InvalidateRequerySuggested();
+
+                        // The drawing changed, update the source...
+                        _fileReader.Drawing = drawing;
                     }
 
                     _isLoadingDrawing = false;
@@ -413,35 +456,71 @@ namespace WpfTestSvgSample
 
         public void UnloadDocument(bool displayMessage = false)
         {
-            _svgFilePath = null;
-
-            if (svgViewer != null)
+            try
             {
-                svgViewer.UnloadDiagrams();
+                _svgFilePath     = null;
+                _drawingDocument = null;
 
-                if (displayMessage)
+                if (svgViewer != null)
                 {
-                    var drawing = this.DrawText("Loading...");
+                    svgViewer.UnloadDiagrams();
 
-                    svgViewer.RenderDiagrams(drawing);
-
-                    Rect bounds = svgViewer.Bounds;
-                    if (bounds.IsEmpty)
+                    if (displayMessage)
                     {
-                        bounds = drawing.Bounds;
+                        var drawing = this.DrawText("Loading...");
+
+                        svgViewer.RenderDiagrams(drawing);
+
+                        Rect bounds = svgViewer.Bounds;
+                        if (bounds.IsEmpty)
+                        {
+                            bounds = drawing.Bounds;
+                        }
+
+                        zoomPanControl.ZoomTo(bounds);
+                        return;
+                    }
+                }
+
+                var drawRect = this.DrawRect();
+                svgViewer.RenderDiagrams(drawRect);
+
+                zoomPanControl.ZoomTo(drawRect.Bounds);
+                ClearPrevZoomRect();
+                ClearNextZoomRect();
+            }
+            finally
+            {
+                if (_embeddedImages != null && _embeddedImages.Count != 0)
+                {
+                    foreach (var embeddedImage in _embeddedImages)
+                    {
+                        try
+                        {
+                            if (embeddedImage.Image != null)
+                            {
+                                if (embeddedImage.Image.StreamSource != null)
+                                {
+                                    embeddedImage.Image.StreamSource.Dispose();
+                                }
+                            }
+
+                            var imagePath = embeddedImage.ImagePath;
+                            if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
+                            {
+                                File.Delete(imagePath);
+                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            Trace.TraceError(ex.ToString());
+                            // Image this, WPF will typically cache and/or lock loaded images
+                        }
                     }
 
-                    zoomPanControl.ZoomTo(bounds);
-                    return;
+                    _embeddedImages.Clear();
                 }
             }
-
-            var drawRect = this.DrawRect();
-            svgViewer.RenderDiagrams(drawRect);
-
-            zoomPanControl.ZoomTo(drawRect.Bounds);
-            ClearPrevZoomRect();
-            ClearNextZoomRect();
         }
 
         public bool SaveDocument(string fileName)
@@ -455,7 +534,6 @@ namespace WpfTestSvgSample
             {
                 return false;
             }
-
             return _fileReader.Save(fileName, true, false);
         }
 
@@ -645,29 +723,37 @@ namespace WpfTestSvgSample
             _origZoomAndPanControlMouseDownPoint = e.GetPosition(zoomPanControl);
             _origContentMouseDownPoint = e.GetPosition(svgViewer);
 
-            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
-                (e.ChangedButton == MouseButton.Left || e.ChangedButton == MouseButton.Right))
+            if (_mouseHandlingMode == ZoomPanMouseHandlingMode.SelectPoint ||
+                _mouseHandlingMode == ZoomPanMouseHandlingMode.SelectRectangle)
             {
-                // Shift + left- or right-down initiates zooming mode.
-                _mouseHandlingMode = ZoomPanMouseHandlingMode.Zooming;
-
-                if (zoomPanControl != null && _canvasCursor != null)
+            }
+            else
+            {
+                if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
+                    (e.ChangedButton == MouseButton.Left || e.ChangedButton == MouseButton.Right))
                 {
-                    zoomPanControl.Cursor = _canvasCursor;
+                    // Shift + left- or right-down initiates zooming mode.
+                    _mouseHandlingMode = ZoomPanMouseHandlingMode.Zooming;
+
+                    if (zoomPanControl != null && _canvasCursor != null)
+                    {
+                        zoomPanControl.Cursor = _canvasCursor;
+                    }
+                }
+                else if (_mouseButtonDown == MouseButton.Left)
+                {
+                    // Just a plain old left-down initiates panning mode.
+                    _mouseHandlingMode = ZoomPanMouseHandlingMode.Panning;
+                }
+
+                if (_mouseHandlingMode != ZoomPanMouseHandlingMode.None)
+                {
+                    // Capture the mouse so that we eventually receive the mouse up event.
+                    zoomPanControl.CaptureMouse();
+                    e.Handled = true;
                 }
             }
-            else if (_mouseButtonDown == MouseButton.Left)
-            {
-                // Just a plain old left-down initiates panning mode.
-                _mouseHandlingMode = ZoomPanMouseHandlingMode.Panning;
-            }
 
-            if (_mouseHandlingMode != ZoomPanMouseHandlingMode.None)
-            {
-                // Capture the mouse so that we eventually receive the mouse up event.
-                zoomPanControl.CaptureMouse();
-                e.Handled = true;
-            }
         }
 
         /// <summary>
@@ -675,35 +761,42 @@ namespace WpfTestSvgSample
         /// </summary>
         private void OnZoomPanMouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (_mouseHandlingMode != ZoomPanMouseHandlingMode.None)
+            if (_mouseHandlingMode == ZoomPanMouseHandlingMode.SelectPoint ||
+                _mouseHandlingMode == ZoomPanMouseHandlingMode.SelectRectangle)
             {
-                if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Zooming)
-                {
-                    if (_mouseButtonDown == MouseButton.Left)
-                    {
-                        // Shift + left-click zooms in on the content.
-                        ZoomIn(_origContentMouseDownPoint);
-                    }
-                    else if (_mouseButtonDown == MouseButton.Right)
-                    {
-                        // Shift + left-click zooms out from the content.
-                        ZoomOut(_origContentMouseDownPoint);
-                    }
-                }
-                else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.DragZooming)
-                {
-                    // When drag-zooming has finished we zoom in on the rectangle that was highlighted by the user.
-                    ApplyDragZoomRect();
-                }
-
-                zoomPanControl.ReleaseMouseCapture();
-                _mouseHandlingMode = ZoomPanMouseHandlingMode.None;
-                e.Handled = true;
             }
-
-            if (zoomPanControl != null && _canvasCursor != null)
+            else
             {
-                zoomPanControl.Cursor = _canvasCursor;
+                if (_mouseHandlingMode != ZoomPanMouseHandlingMode.None)
+                {
+                    if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Zooming)
+                    {
+                        if (_mouseButtonDown == MouseButton.Left)
+                        {
+                            // Shift + left-click zooms in on the content.
+                            ZoomIn(_origContentMouseDownPoint);
+                        }
+                        else if (_mouseButtonDown == MouseButton.Right)
+                        {
+                            // Shift + left-click zooms out from the content.
+                            ZoomOut(_origContentMouseDownPoint);
+                        }
+                    }
+                    else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.DragZooming)
+                    {
+                        // When drag-zooming has finished we zoom in on the rectangle that was highlighted by the user.
+                        ApplyDragZoomRect();
+                    }
+
+                    zoomPanControl.ReleaseMouseCapture();
+                    _mouseHandlingMode = ZoomPanMouseHandlingMode.None;
+                    e.Handled = true;
+                }
+
+                if (zoomPanControl != null && _canvasCursor != null)
+                {
+                    zoomPanControl.Cursor = _canvasCursor;
+                }
             }
         }
 
@@ -712,67 +805,74 @@ namespace WpfTestSvgSample
         /// </summary>
         private void OnZoomPanMouseMove(object sender, MouseEventArgs e)
         {
-            if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Panning)
+            if (_mouseHandlingMode == ZoomPanMouseHandlingMode.SelectPoint ||
+                _mouseHandlingMode == ZoomPanMouseHandlingMode.SelectRectangle)
             {
-                if (zoomPanControl != null)
-                {
-                    zoomPanControl.Cursor = _panToolCursor;
-                }
-
-                //
-                // The user is left-dragging the mouse.
-                // Pan the viewport by the appropriate amount.
-                //
-                Point curContentMousePoint = e.GetPosition(svgViewer);
-                Vector dragOffset = curContentMousePoint - _origContentMouseDownPoint;
-
-                zoomPanControl.ContentOffsetX -= dragOffset.X;
-                zoomPanControl.ContentOffsetY -= dragOffset.Y;
-
-                e.Handled = true;
             }
-            else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Zooming)
+            else
             {
-                if (zoomPanControl != null && _canvasCursor != null)
+                if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Panning)
                 {
-                    zoomPanControl.Cursor = _canvasCursor;
-                }
+                    if (zoomPanControl != null)
+                    {
+                        zoomPanControl.Cursor = _panToolCursor;
+                    }
 
-                Point curZoomAndPanControlMousePoint = e.GetPosition(zoomPanControl);
-                Vector dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
-                double dragThreshold = 10;
-                if (_mouseButtonDown == MouseButton.Left &&
-                    (Math.Abs(dragOffset.X) > dragThreshold ||
-                     Math.Abs(dragOffset.Y) > dragThreshold))
-                {
                     //
-                    // When Shift + left-down zooming mode and the user drags beyond the drag threshold,
-                    // initiate drag zooming mode where the user can drag out a rectangle to select the area
-                    // to zoom in on.
+                    // The user is left-dragging the mouse.
+                    // Pan the viewport by the appropriate amount.
                     //
-                    _mouseHandlingMode = ZoomPanMouseHandlingMode.DragZooming;
-
                     Point curContentMousePoint = e.GetPosition(svgViewer);
-                    InitDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
-                }
+                    Vector dragOffset = curContentMousePoint - _origContentMouseDownPoint;
 
-                e.Handled = true;
-            }
-            else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.DragZooming)
-            {
-                if (zoomPanControl != null && _canvasCursor != null)
+                    zoomPanControl.ContentOffsetX -= dragOffset.X;
+                    zoomPanControl.ContentOffsetY -= dragOffset.Y;
+
+                    e.Handled = true;
+                }
+                else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Zooming)
                 {
-                    zoomPanControl.Cursor = _canvasCursor;
+                    if (zoomPanControl != null && _canvasCursor != null)
+                    {
+                        zoomPanControl.Cursor = _canvasCursor;
+                    }
+
+                    Point curZoomAndPanControlMousePoint = e.GetPosition(zoomPanControl);
+                    Vector dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
+                    double dragThreshold = 10;
+                    if (_mouseButtonDown == MouseButton.Left &&
+                        (Math.Abs(dragOffset.X) > dragThreshold ||
+                         Math.Abs(dragOffset.Y) > dragThreshold))
+                    {
+                        //
+                        // When Shift + left-down zooming mode and the user drags beyond the drag threshold,
+                        // initiate drag zooming mode where the user can drag out a rectangle to select the area
+                        // to zoom in on.
+                        //
+                        _mouseHandlingMode = ZoomPanMouseHandlingMode.DragZooming;
+
+                        Point curContentMousePoint = e.GetPosition(svgViewer);
+                        InitDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
+                    }
+
+                    e.Handled = true;
                 }
+                else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.DragZooming)
+                {
+                    if (zoomPanControl != null && _canvasCursor != null)
+                    {
+                        zoomPanControl.Cursor = _canvasCursor;
+                    }
 
-                //
-                // When in drag zooming mode continously update the position of the rectangle
-                // that the user is dragging out.
-                //
-                Point curContentMousePoint = e.GetPosition(svgViewer);
-                SetDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
+                    //
+                    // When in drag zooming mode continously update the position of the rectangle
+                    // that the user is dragging out.
+                    //
+                    Point curContentMousePoint = e.GetPosition(svgViewer);
+                    SetDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
 
-                e.Handled = true;
+                    e.Handled = true;
+                }
             }
         }
 

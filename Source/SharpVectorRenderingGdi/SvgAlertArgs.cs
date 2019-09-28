@@ -9,7 +9,7 @@ namespace SharpVectors.Renderers
             this.Message = message;
         }
 
-        public string Message { get; }
+        public string Message { get; private set; }
         public bool Handled { get; set; }
     }
 }

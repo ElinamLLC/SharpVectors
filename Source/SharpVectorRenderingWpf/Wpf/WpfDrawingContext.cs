@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Runtime;
+
 namespace SharpVectors.Renderers.Wpf
 {
     public sealed class WpfDrawingContext : DependencyObject, IEnumerable<DrawingGroup>
@@ -589,6 +591,17 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (_drawingDocument != null)
             {
+                if (_settings != null && _settings.IncludeRuntime)
+                {
+                    if (!string.IsNullOrWhiteSpace(elementId))
+                    {
+                        SvgObject.SetId(drawing, elementId);
+                    }
+                    if (!string.IsNullOrWhiteSpace(uniqueId))
+                    {
+                        SvgObject.SetUniqueId(drawing, uniqueId);
+                    }
+                }
                 _drawingDocument.Add(elementId, uniqueId, drawing);
             }
         }

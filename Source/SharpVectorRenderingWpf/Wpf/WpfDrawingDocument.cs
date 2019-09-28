@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using System.Windows;
 using System.Windows.Media;
@@ -13,6 +12,8 @@ namespace SharpVectors.Renderers.Wpf
 {
     public sealed class WpfDrawingDocument : DependencyObject
     {
+        #region Private Fields
+
         private Transform _displayTransform;
 
         private bool _isEnumerated;
@@ -21,12 +22,20 @@ namespace SharpVectors.Renderers.Wpf
         private IDictionary<string, Drawing> _idMap;
         private IDictionary<string, Drawing> _guidMap;
 
+        #endregion
+
+        #region Constructors and Destructor
+
         public WpfDrawingDocument()
         {
             _idMap   = new Dictionary<string, Drawing>(StringComparer.Ordinal);
             _guidMap = new Dictionary<string, Drawing>(StringComparer.Ordinal);
             _displayTransform = Transform.Identity;
         }
+
+        #endregion
+
+        #region Public Properties
 
         public Transform DisplayTransform
         {
@@ -111,6 +120,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
         public void Initialize(SvgDocument svgDocument, DrawingGroup svgDrawing)
         {
             _svgDocument = svgDocument;
@@ -191,7 +204,7 @@ namespace SharpVectors.Renderers.Wpf
                 var svgElement = _svgDocument.GetSvgById(elementId);
                 if (svgElement != null)
                 {
-                    this.EnumerateDrawing();
+                    // this.EnumerateDrawing();
                 }
                 if (_idMap.Count != 0 && _idMap.ContainsKey(elementId))
                 {
@@ -254,11 +267,71 @@ namespace SharpVectors.Renderers.Wpf
             return _svgDocument.GetSvgByUniqueId(uniqueId);
         }
 
+        public void EnumerateDrawing(DrawingGroup drawing)
+        {
+            if (drawing == null)
+            {
+                return;
+            }
+
+            _svgDrawing = drawing;
+
+            //TODO: Trying a background run...
+            Task.Factory.StartNew(() =>
+            {
+                this.EnumerateDrawing();
+            });
+        }
+
+        public WpfHitTestResult HitTest(Point point)
+        {
+            var svgDrawing = this.PerformHitTest(point);
+            if (svgDrawing == null)
+            {
+                return WpfHitTestResult.Empty;
+            }
+            string uniqueId = SvgObject.GetUniqueId(svgDrawing);
+            if (string.IsNullOrWhiteSpace(uniqueId))
+            {
+                return WpfHitTestResult.Empty;
+            }
+            var svgElement = this.GetSvgByUniqueId(uniqueId);
+            if (svgElement == null)
+            {
+                return WpfHitTestResult.Empty;
+            }
+
+            return new WpfHitTestResult(point, svgElement, svgDrawing);
+        }
+
+        public WpfHitTestResult HitTest(Rect rect, IntersectionDetail detail)
+        {
+            var svgDrawing = this.PerformHitTest(rect, detail);
+            if (svgDrawing == null)
+            {
+                return WpfHitTestResult.Empty;
+            }
+            string uniqueId = SvgObject.GetUniqueId(svgDrawing);
+            if (string.IsNullOrWhiteSpace(uniqueId))
+            {
+                return WpfHitTestResult.Empty;
+            }
+            var svgElement = this.GetSvgByUniqueId(uniqueId);
+            if (svgElement == null)
+            {
+                return WpfHitTestResult.Empty;
+            }
+
+            return new WpfHitTestResult(rect, svgElement, svgDrawing);
+        }
+
+        #endregion
+
         #region Private Methods
 
         #region HitTest Point
 
-        private Drawing HitTest(Point pt)
+        private Drawing PerformHitTest(Point pt)
         {
             if (_svgDrawing == null)
             {
@@ -292,7 +365,7 @@ namespace SharpVectors.Renderers.Wpf
                         foundDrawing = drawing;
                         break;
                     }
-                    else if (SvgObject.GetType(groupDrawing) == SvgObjectType.Text &&
+                    if (SvgObject.GetType(groupDrawing) == SvgObjectType.Text &&
                         groupDrawing.Bounds.Contains(ptDisplay))
                     {
                         foundDrawing = drawing;
@@ -448,7 +521,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region HitTest Geometry
 
-        private Drawing HitTest(Rect rect, IntersectionDetail detail)
+        private Drawing PerformHitTest(Rect rect, IntersectionDetail detail)
         {
             if (_svgDrawing == null)
             {
@@ -657,7 +730,50 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return;
             }
+            _idMap   = new Dictionary<string, Drawing>(StringComparer.Ordinal);
+            _guidMap = new Dictionary<string, Drawing>(StringComparer.Ordinal);
+
+            this.EnumDrawingGroup(_svgDrawing);
+
             _isEnumerated = true;            
+        }
+
+        // Enumerate the drawings in the DrawingGroup.
+        private void EnumDrawingGroup(DrawingGroup drawingGroup)
+        {
+            DrawingCollection dc = drawingGroup.Children;
+
+            DrawingGroup groupDrawing       = null;
+
+            // Enumerate the drawings in the DrawingCollection.
+            foreach (Drawing drawing in dc)
+            {
+                string objectId = SvgObject.GetId(drawing);
+                if (!string.IsNullOrWhiteSpace(objectId))
+                {
+                    _idMap.Add(objectId, drawing);
+                }
+                string objectName = (string)drawing.GetValue(FrameworkElement.NameProperty);
+                if (!string.IsNullOrWhiteSpace(objectName))
+                {
+                    _idMap[objectName] = drawing;
+                }
+                string uniqueId = SvgObject.GetUniqueId(drawing);
+                if (!string.IsNullOrWhiteSpace(uniqueId))
+                {
+                    _guidMap.Add(uniqueId, drawing);
+                }
+
+                // If the drawing is a DrawingGroup, call the function recursively.
+                if (TryCast.Cast(drawing, out groupDrawing))
+                {
+                    SvgObjectType objectType = SvgObject.GetType(groupDrawing);
+                    if (objectType != SvgObjectType.Text)
+                    {
+                        EnumDrawingGroup(groupDrawing);
+                    }
+                }
+            }
         }
 
         #endregion

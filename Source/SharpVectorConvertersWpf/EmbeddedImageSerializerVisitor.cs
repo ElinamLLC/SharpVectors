@@ -14,21 +14,44 @@ using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters
 {
+    public sealed class EmbeddedImageSerializerArgs : EventArgs
+    {
+        public EmbeddedImageSerializerArgs(string imagePath, BitmapImage image)
+        {
+            this.ImagePath = imagePath;
+            this.Image     = image;
+        }
+
+        public string ImagePath { get; private set; }
+        public BitmapImage Image { get; private set; }
+    }
+
     public sealed class EmbeddedImageSerializerVisitor : WpfEmbeddedImageVisitor
     {
         #region Public Private Fields
 
         public const string ImageExt = ".png";
 
+        private int _imageCount;
+
         private bool _saveImages;
+        private bool _converterFallback;
         private string _namePrefix;
         private string _saveDirectory;
 
         private IDictionary<string, ImageSource> _imageCache;
 
+        private event EventHandler<EmbeddedImageSerializerArgs> _imageCreated;
+
         #endregion
 
         #region Constructors and Destructor
+
+        public EmbeddedImageSerializerVisitor(bool converterFallback)
+            : this(false, null)
+        {
+            _converterFallback = converterFallback;
+        }
 
         public EmbeddedImageSerializerVisitor(string saveDirectory)
             : this(true, saveDirectory)
@@ -55,7 +78,18 @@ namespace SharpVectors.Converters
                 Trace.TraceError(ex.ToString());
             }
 
+            _imageCount = 1;
             _imageCache = new Dictionary<string, ImageSource>(StringComparer.Ordinal);
+        }
+
+        #endregion
+
+        #region Public Events
+
+        public event EventHandler<EmbeddedImageSerializerArgs> ImageCreated
+        {
+            add { _imageCreated += value; }
+            remove { _imageCreated -= value; }
         }
 
         #endregion
@@ -67,12 +101,29 @@ namespace SharpVectors.Converters
             get {
                 return _saveImages;
             }
+            set {
+                _saveImages = value;
+            }
         }
+
+        public bool ConverterFallback
+        {
+            get {
+                return _converterFallback;
+            }
+            set {
+                _converterFallback = value;
+            }
+        }
+
 
         public string SaveDirectory
         {
             get {
                 return _saveDirectory;
+            }
+            set {
+                _saveDirectory = value;
             }
         }
 
@@ -123,7 +174,35 @@ namespace SharpVectors.Converters
             {
                 if (!string.IsNullOrWhiteSpace(imageId) && _imageCache.ContainsKey(imageId))
                 {
-                    return _imageCache[imageId];
+                    var cachedSource = _imageCache[imageId];
+                    if (cachedSource != null)
+                    {
+                        var cachedImage = cachedSource as BitmapImage;
+                        if (cachedImage != null)
+                        {
+                            var imageUri = cachedImage.UriSource;
+                            if (imageUri != null)
+                            {
+                                if (imageUri.IsFile && File.Exists(imageUri.LocalPath))
+                                {
+                                    return cachedImage;
+                                }
+                                _imageCache.Remove(imageId);
+                            }
+                            else if (cachedImage.StreamSource != null)
+                            {
+                                return cachedImage;
+                            }
+                        }
+                        else
+                        {
+                            return cachedSource;
+                        }
+                    }
+                    else
+                    {
+                        _imageCache.Remove(imageId);
+                    }
                 }
             }
 
@@ -183,7 +262,9 @@ namespace SharpVectors.Converters
                         using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                         {
                             using (var reader = new FileSvgReader(context.Settings))
+                            {
                                 return new DrawingImage(reader.Read(zipStream));
+                            }
                         }
                     }
                 }
@@ -192,23 +273,27 @@ namespace SharpVectors.Converters
                     using (var stream = new MemoryStream(imageBytes))
                     {
                         using (var reader = new FileSvgReader(context.Settings))
+                        {
                             return new DrawingImage(reader.Read(stream));
+                        }
                     }
                 }
             }
 
+            var memStream = new MemoryStream(imageBytes);
+
             BitmapImage imageSource = new BitmapImage();
             imageSource.BeginInit();
+            imageSource.StreamSource  = memStream;
+            imageSource.CacheOption   = BitmapCacheOption.OnLoad;
             imageSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-            imageSource.StreamSource  = new MemoryStream(imageBytes);
             imageSource.EndInit();
 
-            imageSource.Freeze();
+            string imagePath = null;
 
-            if (isSavingImages && !string.IsNullOrWhiteSpace(imagesDir) 
-                && Directory.Exists(imagesDir))
+            if (isSavingImages && !string.IsNullOrWhiteSpace(imagesDir) && Directory.Exists(imagesDir))
             {
-                var imagePath = this.GetImagePath(imagesDir);
+                imagePath = this.GetImagePath(imagesDir);
 
                 BitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(imageSource));
@@ -218,18 +303,46 @@ namespace SharpVectors.Converters
                     encoder.Save(fileStream);
                 }
 
-                BitmapImage savedSource = new BitmapImage();
+                imageSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat | BitmapCreateOptions.IgnoreImageCache;
+                imageSource.UriSource     = new Uri(imagePath);
 
-                savedSource.BeginInit();
-                savedSource.CacheOption   = BitmapCacheOption.OnLoad;
-                savedSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                savedSource.UriSource = new Uri(imagePath);
-                savedSource.EndInit();
+                //imageSource.StreamSource.Dispose();
+                //imageSource = null;
 
-                savedSource.Freeze();
+                //BitmapImage savedSource = new BitmapImage();
 
-                return savedSource;
+                //savedSource.BeginInit();
+                //savedSource.CacheOption   = BitmapCacheOption.None;
+                //savedSource.CreateOptions = BitmapCreateOptions.PreservePixelFormat | BitmapCreateOptions.IgnoreImageCache;
+                //savedSource.UriSource = new Uri(imagePath);
+                //savedSource.EndInit();
+
+                //savedSource.Freeze();
+
+                //if (_imageCreated != null)
+                //{
+                //    var eventArgs = new EmbeddedImageSerializerArgs(imagePath, savedSource);
+                //    _imageCreated.Invoke(this, eventArgs);
+                //}
+
+                //return savedSource;
             }
+            else if (_converterFallback)
+            {
+                //if (_imageCreated != null)
+                //{
+                //    var eventArgs = new EmbeddedImageSerializerArgs(imagePath, imageSource);
+                //    _imageCreated.Invoke(this, eventArgs);
+                //}
+                return new EmbeddedBitmapSource(memStream, imageSource);
+            }
+            if (_imageCreated != null)
+            {
+                var eventArgs = new EmbeddedImageSerializerArgs(imagePath, imageSource);
+                _imageCreated.Invoke(this, eventArgs);
+            }
+
+            imageSource.Freeze();
 
             return imageSource;
         }
@@ -241,7 +354,7 @@ namespace SharpVectors.Converters
                 savedDir = _saveDirectory;
             }
 
-            int imageCount = 1;
+            int imageCount = _imageCount;
             var nextPath   = Path.Combine(savedDir, string.Format("{0}{1}{2}",
                 _namePrefix, imageCount, ImageExt));
 
@@ -251,6 +364,8 @@ namespace SharpVectors.Converters
                 nextPath = Path.Combine(_saveDirectory, string.Format("{0}{1}{2}",
                     _namePrefix, imageCount, ImageExt));
             }
+
+            _imageCount = imageCount + 1;
 
             return nextPath;
         }

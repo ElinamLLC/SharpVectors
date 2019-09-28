@@ -287,6 +287,16 @@ namespace SharpVectors.Converters
             {
                 _wpfRenderer.EndRender();
             }
+
+            if (_wpfSettings != null)
+            {
+                var visitors = _wpfSettings.Visitors;
+                if (visitors != null)
+                {
+                    visitors.Uninitialize();
+                }
+            }
+
             //TODO: Currently, experimental
             GC.Collect();
         }

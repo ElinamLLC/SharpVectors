@@ -17,8 +17,8 @@ namespace SharpVectors.Renderers
 
         public bool Handled { get; set; }
 
-        public string Message { get; }
+        public string Message { get; private set; }
 
-        public Exception Exception { get; }
+        public Exception Exception { get; private set; }
     }
 }

@@ -1,0 +1,26 @@
+﻿<FlowDocument  x:Class="WpfTestSvgControl.TraceDocument"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               FontSize="12" FontFamily="Courier New" PageWidth="1200"  Loaded="Document_Loaded" Unloaded="Document_Unloaded">
+    <FlowDocument.Resources>
+        <Style TargetType="{x:Type Run}" x:Key="Information">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+        <Style TargetType="{x:Type Run}" x:Key="Error">
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="{x:Type Run}" x:Key="Warning">
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+        <Style TargetType="{x:Type Run}" x:Key="Fail">
+            <Setter Property="Foreground" Value="Fuchsia"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </FlowDocument.Resources>
+    <Paragraph>
+        
+    </Paragraph>
+</FlowDocument>

@@ -16,6 +16,10 @@ namespace SharpVectors.Runtime
             DependencyProperty.RegisterAttached("Id", typeof(string), typeof(SvgObject),
             new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
 
+        public static readonly DependencyProperty UniqueIdProperty =
+            DependencyProperty.RegisterAttached("UniqueId", typeof(string), typeof(SvgObject),
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
+
         public static readonly DependencyProperty ClassProperty =
             DependencyProperty.RegisterAttached("Class", typeof(string), typeof(SvgObject),
             new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
@@ -59,6 +63,16 @@ namespace SharpVectors.Runtime
         public static string GetId(DependencyObject element)
         {
             return (string)element.GetValue(IdProperty);
+        }
+
+        public static void SetUniqueId(DependencyObject element, string value)
+        {
+            element.SetValue(UniqueIdProperty, value);
+        }
+
+        public static string GetUniqueId(DependencyObject element)
+        {
+            return (string)element.GetValue(UniqueIdProperty);
         }
 
         public static void SetClass(DependencyObject element, string value)

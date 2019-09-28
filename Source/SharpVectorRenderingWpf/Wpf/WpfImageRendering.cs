@@ -346,12 +346,12 @@ namespace SharpVectors.Renderers.Wpf
 
                     if (!_idAssigned && !string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
                     {
-                        SvgObject.SetName(drawGroup, elementId);
-
                         context.RegisterId(elementId);
 
                         if (context.IncludeRuntime)
                         {
+                            SvgObject.SetName(drawGroup, elementId);
+
                             SvgObject.SetId(drawGroup, elementId);
                         }
                     }
@@ -363,12 +363,12 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     if (!_idAssigned && !string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
                     {
-                        SvgObject.SetName(imageSource, elementId);
-
                         context.RegisterId(elementId);
 
                         if (context.IncludeRuntime)
                         {
+                            SvgObject.SetName(imageSource, elementId);
+
                             SvgObject.SetId(imageSource, elementId);
                         }
                     }
@@ -501,7 +501,7 @@ namespace SharpVectors.Renderers.Wpf
                         imageSource.CacheOption = BitmapCacheOption.OnLoad;
                         imageSource.CreateOptions = BitmapCreateOptions.IgnoreImageCache 
                             | BitmapCreateOptions.PreservePixelFormat;
-                        imageSource.UriSource     = imageUri;
+                        imageSource.UriSource    = imageUri;
                         imageSource.EndInit();
 
 //                        imageSource.Freeze();

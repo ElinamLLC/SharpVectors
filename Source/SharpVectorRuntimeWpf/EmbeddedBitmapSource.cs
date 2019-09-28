@@ -54,6 +54,33 @@ namespace SharpVectors.Runtime
             this.EndInit();
         }
 
+        public EmbeddedBitmapSource(MemoryStream stream, BitmapImage image)
+            : this()
+        {
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            _stream = stream;
+            // Associated this class with source.
+            this.BeginInit();
+
+            if (image == null)
+            {
+                _bitmap = new BitmapImage();
+
+                _bitmap.BeginInit();
+                _bitmap.StreamSource = _stream;
+                _bitmap.EndInit();
+            }
+            else
+            {
+                _bitmap = image;
+            }
+
+            this.InitWicInfo(_bitmap);
+            this.EndInit();
+        }
+
         #endregion Constructors
 
         #region Public Properties

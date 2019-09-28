@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiW3cSvgTestSuite", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiSvgTestBox", "Samples\GdiSvgTestBox\GdiSvgTestBox.csproj", "{5A71211F-9EDA-4C43-8DDC-E3EB54843113}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestSvgControl", "Samples\WpfTestSvgControl\WpfTestSvgControl.csproj", "{28586359-004C-45B5-823E-38F714784B31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,12 @@ Global
 		{5A71211F-9EDA-4C43-8DDC-E3EB54843113}.Documentation|Any CPU.Build.0 = Debug|Any CPU
 		{5A71211F-9EDA-4C43-8DDC-E3EB54843113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A71211F-9EDA-4C43-8DDC-E3EB54843113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28586359-004C-45B5-823E-38F714784B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28586359-004C-45B5-823E-38F714784B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28586359-004C-45B5-823E-38F714784B31}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{28586359-004C-45B5-823E-38F714784B31}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{28586359-004C-45B5-823E-38F714784B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28586359-004C-45B5-823E-38F714784B31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,6 +162,7 @@ Global
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{406733B7-B9C5-4100-8D10-F3CCE9C58B2C} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{5A71211F-9EDA-4C43-8DDC-E3EB54843113} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{28586359-004C-45B5-823E-38F714784B31} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

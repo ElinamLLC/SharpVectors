@@ -156,8 +156,8 @@ namespace SharpVectors.Renderers.Wpf
                         // We have already applied the transform, which will translate to the start point...
                         if (transform is TranslateTransform)
                         {
-                            _drawGroup.ClipGeometry = new RectangleGeometry(
-                                new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            //_drawGroup.ClipGeometry = new RectangleGeometry(
+                            //    new Rect(0, 0, elmRect.Width, elmRect.Height));
                         }
                         else
                         {
@@ -198,7 +198,11 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             // Register this drawing with the Drawing-Document...
-            this.Rendered(_drawGroup);
+            // ...but not the root SVG object, since there is not point for that
+            if (!_isRoot)
+            {
+                this.Rendered(_drawGroup);
+            }
         }
 
         public override void AfterRender(WpfDrawingRenderer renderer)

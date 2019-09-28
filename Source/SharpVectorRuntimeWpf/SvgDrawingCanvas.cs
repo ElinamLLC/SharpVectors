@@ -25,7 +25,7 @@ namespace SharpVectors.Runtime
     {
         #region Private Fields
 
-        private static readonly Action EmptyDelegate = delegate { };
+        //private static readonly Action EmptyDelegate = delegate { };
 
         private bool _drawForInteractivity;
 

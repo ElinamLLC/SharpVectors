@@ -187,7 +187,7 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets the last created drawing.
+        /// Gets or sets the last created drawing.
         /// </summary>
         /// <value>
         /// A <see cref="DrawingGroup"/> specifying the last converted drawing.
@@ -196,6 +196,13 @@ namespace SharpVectors.Converters
         {
             get {
                 return _drawing;
+            }
+            set {
+                _drawing = value;
+                if (_drawingDocument != null)
+                {
+                    _drawingDocument.EnumerateDrawing(_drawing);
+                }
             }
         }
 

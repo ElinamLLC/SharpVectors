@@ -1076,9 +1076,20 @@ namespace WpfTestSvgSample
                     string[] imageFiles = Directory.GetFiles(_drawingDir, "*.png");
                     if (imageFiles != null && imageFiles.Length != 0)
                     {
-                        foreach (var imageFile in imageFiles)
+                        try
                         {
-                            File.Delete(imageFile);
+                            foreach (var imageFile in imageFiles)
+                            {
+                                if (File.Exists(imageFile))
+                                {
+                                    File.Delete(imageFile);
+                                }
+                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            Trace.TraceError(ex.ToString());
+                            // Image this, WPF will typically cache and/or lock loaded images
                         }
                     }
                 }
