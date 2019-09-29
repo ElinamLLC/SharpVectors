@@ -320,6 +320,10 @@ namespace SharpVectors.Dom.Svg
         public XmlElement ReferencedElement
         {
             get {
+                if (_uriReference == null)
+                {
+                    return null;
+                }
                 return _uriReference.ReferencedNode as XmlElement;
             }
         }

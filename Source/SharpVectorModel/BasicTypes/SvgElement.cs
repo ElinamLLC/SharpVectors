@@ -88,14 +88,27 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public ISvgSvgElement OwnerSvgElement
+        ISvgSvgElement ISvgElement.OwnerSvgElement
+        {
+            get {
+                return this.OwnerSvgElement;
+            }
+        }
+        ISvgElement ISvgElement.ViewportElement
+        {
+            get {
+                return this.OwnerSvgElement;
+            }
+        }
+
+        public SvgSvgElement OwnerSvgElement
         {
             get {
                 if (this.Equals(OwnerDocument.DocumentElement))
                 {
                     return null;
                 }
-                XmlNode parent = ParentNode;
+                XmlNode parent = this.ParentNode;
                 while (parent != null && !(parent is SvgSvgElement))
                 {
                     parent = parent.ParentNode;
@@ -104,14 +117,14 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
-        public ISvgElement ViewportElement
+        public SvgElement ViewportElement
         {
             get {
                 if (this.Equals(OwnerDocument.DocumentElement))
                 {
                     return null;
                 }
-                XmlNode parent = ParentNode;
+                XmlNode parent = this.ParentNode;
                 while (parent != null && !(parent is SvgSvgElement) && !(parent is SvgSymbolElement))
                 {
                     parent = parent.ParentNode;

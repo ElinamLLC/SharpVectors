@@ -155,12 +155,19 @@
             <TabControl>
                 <TabItem Header="Element Drawing">
                     <ScrollViewer x:Name="imageScroller" CanContentScroll="False" Padding="4"
-                    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="White">
+                        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Control.Background>
+                            <DrawingBrush TileMode="Tile" Viewport="0,0,16,16" ViewportUnits="Absolute" Opacity="0.5">
+                                <DrawingBrush.Drawing>
+                                    <GeometryDrawing Geometry="M0,0 H1 V1 H2 V2 H1 V1 H0Z" Brush="LightGray"/>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Control.Background>
                         <Image x:Name="elementImage" Stretch="None" />
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Element XML">
-                    <avalonEdit:TextEditor x:Name="textEditor" FontFamily="Consolas" FontSize="12pt" IsReadOnly="True" Language="XML"/>
+                    <avalonEdit:TextEditor x:Name="textEditor" FontFamily="Consolas" FontSize="12pt" IsReadOnly="True"/>
                 </TabItem>
             </TabControl>
 

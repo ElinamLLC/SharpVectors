@@ -27,6 +27,18 @@ namespace SharpVectors.Dom.Svg
 
         #region Public Properties
 
+        public bool IsEmpty
+        {
+            get {
+                if (_ownerElement != null)
+                {
+                    return !(_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace) ||
+                        _ownerElement.HasAttribute("href"));
+                }
+                return true;
+            }
+        }
+
         public string AbsoluteUri
         {
             get

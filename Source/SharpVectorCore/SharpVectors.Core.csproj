@@ -98,6 +98,7 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -780,8 +781,6 @@
     <Compile Include="Utils\Casting.cs" />
     <Compile Include="Utils\Dom\DomException.cs" />
     <Compile Include="Utils\Dom\DomExceptionType.cs" />
-    <Compile Include="Utils\HttpEncoder.cs" />
-    <Compile Include="Utils\HttpUtility.cs" />
     <Compile Include="Utils\Net\CacheInfo.cs" />
     <Compile Include="Utils\Net\DataWebRequest.cs" />
     <Compile Include="Utils\Net\DataWebResponse.cs" />
@@ -791,7 +790,6 @@
     <Compile Include="Utils\Net\NoCacheManager.cs" />
     <Compile Include="Utils\Polynomials\Polynomial.cs" />
     <Compile Include="Utils\Polynomials\SqrtPolynomial.cs" />
-    <Compile Include="Utils\Text\StringUtil.cs" />
     <Compile Include="Utils\Xml\DynamicXmlNamespaceManager.cs" />
     <Compile Include="Utils\Xml\DynamicXmlUrlResolver.cs" />
     <Compile Include="Utils\Xml\LocalDtdXmlUrlResolver.cs" />
@@ -805,6 +803,7 @@
   <ItemGroup>
     <None Include="SharpVectors.Core.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

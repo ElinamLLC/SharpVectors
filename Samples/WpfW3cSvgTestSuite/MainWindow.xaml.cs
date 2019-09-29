@@ -3,7 +3,6 @@ using System.IO;
 using System.Xml;
 using System.Text;
 using System.Diagnostics;
-using System.Globalization;
 using System.ComponentModel;
 using System.IO.Compression;
 using System.Collections.Generic;

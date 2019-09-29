@@ -3,6 +3,7 @@
     public static class TryCast
     {
         public static bool Cast<B, D>(B baseObject, out D derivedObject)
+            where B : class
             where D : class
         {
             if (baseObject == null)
@@ -20,6 +21,7 @@
     public static class DynamicCast
     {
         public static bool Cast<B, D>(B baseObject, out D derivedObject)
+            where B : class
             where D : class, B
         {
             if (baseObject == null)

@@ -14,20 +14,6 @@ namespace SharpVectors.Polynomials
 
         #endregion
 
-        #region Public Properties
-
-        public int Degree
-        {
-            get { return this._coefficients.Length - 1; }
-        }
-
-        public double this[int index]
-        {
-            get { return this._coefficients[index]; }
-        }
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -62,6 +48,20 @@ namespace SharpVectors.Polynomials
         public Polynomial(Polynomial that)
         {
             this._coefficients = that._coefficients;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public int Degree
+        {
+            get { return this._coefficients.Length - 1; }
+        }
+
+        public double this[int index]
+        {
+            get { return this._coefficients[index]; }
         }
 
         #endregion

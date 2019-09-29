@@ -1,129 +1,126 @@
 using System;
 using System.Net;
 using System.IO;
+using System.Web;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Net
 {
-	/// <summary>
-	/// Summary description for DataWebResponse.
-	/// </summary>
-	/// <remarks>According to http://www.ietf.org/rfc/rfc2397.txt</remarks>
-	[Serializable]
+    /// <summary>
+    /// Summary description for DataWebResponse.
+    /// </summary>
+    /// <remarks>According to http://www.ietf.org/rfc/rfc2397.txt</remarks>
+    [Serializable]
     public sealed class DataWebResponse : WebResponse
-	{
-        private Encoding contentEncoding = Encoding.ASCII;
-        private string contentType;
-        private Uri responseUri;
+    {
+        private static Regex _reData          = new Regex(@"^data:(?<mediatype>.*?),(?<data>.*)$", RegexOptions.Singleline);
+        private static Regex _reSpaceRemover  = new Regex(@"\s", RegexOptions.Singleline);
+        private static Regex _reCharsetFinder = new Regex(@"charset=(?<charset>[^;]+)", RegexOptions.Singleline);
 
-		private byte[] decodedData;
+        private Encoding _contentEncoding = Encoding.ASCII;
+        private string _contentType;
+        private Uri _responseUri;
 
-		private static Regex re = new Regex(@"^data:(?<mediatype>.*?),(?<data>.*)$", RegexOptions.Singleline);
-		private static Regex wsRemover = new Regex(@"\s", RegexOptions.Singleline);
-		private static Regex charsetFinder = new Regex(@"charset=(?<charset>[^;]+)", RegexOptions.Singleline);
+        private byte[] _decodedData;
 
-		internal DataWebResponse(Uri uri)
-		{
-			this.responseUri = uri;
-			
-			string fullUri = HttpUtility.UrlDecode(uri.AbsoluteUri);
-			fullUri = fullUri.Replace(' ', '+');
+        internal DataWebResponse(Uri uri)
+        {
+            this._responseUri = uri;
 
-			// remove all whitespace
-			fullUri = contentType = wsRemover.Replace(fullUri, "");
-			
-			Match match = re.Match(fullUri);
+            string fullUri = HttpUtility.UrlDecode(uri.AbsoluteUri);
+            fullUri = fullUri.Replace(' ', '+');
 
-			if(match.Success)
-			{
-				contentType = match.Groups["mediatype"].Value;
+            // remove all whitespace
+            fullUri = _contentType = _reSpaceRemover.Replace(fullUri, "");
 
-				string data = match.Groups["data"].Value; 			
+            Match match = _reData.Match(fullUri);
 
-				if (contentType.Length == 0)
-				{
-					contentType = "text/plain;charset=US-ASCII";
-				}
-				else if (contentType.StartsWith(";", StringComparison.OrdinalIgnoreCase))
-				{
-					if (contentType.IndexOf(";charset=", StringComparison.OrdinalIgnoreCase) > 0)
-					{
-						contentType = "text/plain" + contentType;
-					}
-					else
-					{
-						throw new Exception("Malformed data URI");
-					}
-				}
+            if (match.Success)
+            {
+                _contentType = match.Groups["mediatype"].Value;
 
-                if (contentType.EndsWith(";base64", StringComparison.OrdinalIgnoreCase))
-				{
-					contentType = contentType.Remove(contentType.Length - 7, 7);
-					decodedData = Convert.FromBase64String(data);
-				}
-				else
-				{
-					Match charsetMatch = charsetFinder.Match(contentType);
-					if(charsetMatch.Success && charsetMatch.Groups["charset"].Success)
-					{
-						try
-						{
-							contentEncoding = Encoding.GetEncoding(charsetMatch.Groups["charset"].Value);
-						}
-						catch (NotSupportedException)
-						{
-							contentEncoding = Encoding.ASCII;
-						}
-					}
-					
-					decodedData = HttpUtility.UrlDecodeToBytes(data);
-				}
-			}
-			else
-			{
-				throw new Exception("Malformed data URI");
-			}
-		}
+                string data = match.Groups["data"].Value;
 
-		public override long ContentLength
-		{
-			get
-			{
-				return decodedData.Length;
-			}
-		}
+                if (_contentType.Length == 0)
+                {
+                    _contentType = "text/plain;charset=US-ASCII";
+                }
+                else if (_contentType.StartsWith(";", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (_contentType.IndexOf(";charset=", StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        _contentType = "text/plain" + _contentType;
+                    }
+                    else
+                    {
+                        throw new Exception("Malformed data URI");
+                    }
+                }
 
-		public Encoding ContentEncoding
-		{
-			get
-			{
-				return contentEncoding;
-			}
-		}
+                if (_contentType.EndsWith(";base64", StringComparison.OrdinalIgnoreCase))
+                {
+                    _contentType = _contentType.Remove(_contentType.Length - 7, 7);
+                    _decodedData = Convert.FromBase64String(data);
+                }
+                else
+                {
+                    Match charsetMatch = _reCharsetFinder.Match(_contentType);
+                    if (charsetMatch.Success && charsetMatch.Groups["charset"].Success)
+                    {
+                        try
+                        {
+                            _contentEncoding = Encoding.GetEncoding(charsetMatch.Groups["charset"].Value);
+                        }
+                        catch (NotSupportedException)
+                        {
+                            _contentEncoding = Encoding.ASCII;
+                        }
+                    }
 
-		public override string ContentType
-		{
-			get
-			{
-				return contentType;
-			}
-		}
+                    _decodedData = HttpUtility.UrlDecodeToBytes(data);
+                }
+            }
+            else
+            {
+                throw new Exception("Malformed data URI");
+            }
+        }
 
-		public override Uri ResponseUri
-		{
-			get
-			{
-				return responseUri;
-			}
-		}
+        public override long ContentLength
+        {
+            get {
+                return _decodedData.Length;
+            }
+        }
 
-		public override Stream GetResponseStream()
-		{
-			MemoryStream ms; 
-			ms = new MemoryStream(decodedData, false);
-			ms.Position = 0;
-			return ms;
-		}
-	}
+        public Encoding ContentEncoding
+        {
+            get {
+                return _contentEncoding;
+            }
+        }
+
+        public override string ContentType
+        {
+            get {
+                return _contentType;
+            }
+        }
+
+        public override Uri ResponseUri
+        {
+            get {
+                return _responseUri;
+            }
+        }
+
+        public override Stream GetResponseStream()
+        {
+            return new MemoryStream(_decodedData, false)
+            {
+                Position = 0
+            };
+        }
+    }
 }

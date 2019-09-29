@@ -495,15 +495,22 @@ namespace WpfTestSvgControl
 
         private void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
         {
+            if (_drawingPage == null)
+            {
+                return;
+            }
+
             TreeViewItem selItem = treeView.SelectedItem as TreeViewItem;
             if (selItem == null || selItem.Tag == null)
             {
+                _drawingPage.SelectElement(null);
                 return;
             }
 
             string selectedName = selItem.Tag as string;
             if (string.IsNullOrWhiteSpace(selectedName))
             {
+                _drawingPage.SelectElement(null);
                 return;
             }
 
@@ -544,7 +551,8 @@ namespace WpfTestSvgControl
             }
 
             TreeViewItem treeItem = e.OriginalSource as TreeViewItem;
-            if (treeItem == null)
+            if (treeItem == null || (treeItem.Tag != null
+                && !string.IsNullOrWhiteSpace(treeItem.Tag.ToString())))
             {
                 return;
             }
@@ -572,7 +580,8 @@ namespace WpfTestSvgControl
             }
 
             TreeViewItem treeItem = e.OriginalSource as TreeViewItem;
-            if (treeItem == null)
+            if (treeItem == null || (treeItem.Tag != null 
+                && !string.IsNullOrWhiteSpace(treeItem.Tag.ToString())))
             {
                 return;
             }
@@ -1012,6 +1021,7 @@ namespace WpfTestSvgControl
                 }
                 decorator.Margin = new Thickness(0, 0, 10, 0);
                 decorator.Child = headerText;
+                decorator.Tag   = "";
 
                 TreeViewItem categoryItem = new TreeViewItem();
                 categoryItem.Tag        = string.Empty;
