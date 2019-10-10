@@ -261,7 +261,7 @@ namespace SharpVectors.Converters
                     {
                         using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
                         {
-                            using (var reader = new FileSvgReader(context.Settings))
+                            using (var reader = new FileSvgReader(context.Settings, true))
                             {
                                 return new DrawingImage(reader.Read(zipStream));
                             }
@@ -272,7 +272,7 @@ namespace SharpVectors.Converters
                 {
                     using (var stream = new MemoryStream(imageBytes))
                     {
-                        using (var reader = new FileSvgReader(context.Settings))
+                        using (var reader = new FileSvgReader(context.Settings, true))
                         {
                             return new DrawingImage(reader.Read(stream));
                         }

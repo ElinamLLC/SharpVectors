@@ -1,0 +1,26 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" 
+xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="200" version="1.1">
+  <g transform="translate(0, 0)">
+    <rect x="10" y="10" width="40" height="40" fill-opacity="0.5" />
+    <rect x="30" y="30" width="40" height="40" fill-opacity="0.5" />
+  </g>
+  <g transform="translate(80, 0)" fill-opacity="0.5">
+    <rect x="10" y="10" width="40" height="40" />
+    <rect x="30" y="30" width="40" height="40" />
+  </g>
+  <g transform="translate(0, 80)">
+    <rect x="10" y="10" width="40" height="40" opacity="0.5" />
+    <rect x="30" y="30" width="40" height="40" opacity="0.5" />
+  </g>
+  <g transform="translate(80, 80)" opacity="0.5">
+    <rect x="10" y="10" width="40" height="40" />
+    <rect x="30" y="30" width="40" height="40" />
+  </g>
+  <text transform="translate(170,45)">fill-opacity</text>
+  <text transform="translate(170,125)">opacity</text>
+  <text transform="translate(10,175)">applied to</text>
+  <text transform="translate(0,190)">each element</text>
+  <text transform="translate(90,175)">applied to</text>
+  <text transform="translate(103,190)">group</text>
+</svg>

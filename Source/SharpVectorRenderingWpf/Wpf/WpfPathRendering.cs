@@ -46,7 +46,7 @@ namespace SharpVectors.Renderers.Wpf
             //SetTransform(context);
             //SetMask(context);
 
-            _drawGroup = new DrawingGroup();
+//            _drawGroup = new DrawingGroup();
 
             SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
             _isLineSegment = false;
@@ -76,6 +76,11 @@ namespace SharpVectors.Renderers.Wpf
                 if (isStyleOpacity && (opacityValue >= 0 && opacityValue < 1))
                 {
                     _setBrushOpacity = false;
+                    if (styleElm.HasAttribute("fill-opacity") || (styleElm.HasAttribute("style") 
+                        && styleElm.GetAttribute("style").Contains("fill-opacity")))
+                    {
+                        _setBrushOpacity = true;
+                    }
                 }
             }
             string eVisibility = _svgElement.GetAttribute("visibility");
@@ -97,15 +102,24 @@ namespace SharpVectors.Renderers.Wpf
             Transform pathTransform = this.Transform;
             if (pathTransform != null && !pathTransform.Value.IsIdentity)
             {
+                if (_drawGroup == null)
+                {
+                    _drawGroup = new DrawingGroup();
+                }
                 _drawGroup.Transform = pathTransform;
             }
             else
             {
                 pathTransform = null; // render any identity transform useless...
             }
+
             Geometry pathClip = this.ClipGeometry;
             if (pathClip != null && !pathClip.IsEmpty())
             {
+                if (_drawGroup == null)
+                {
+                    _drawGroup = new DrawingGroup();
+                }
                 _drawGroup.ClipGeometry = pathClip;
             }
             else
@@ -115,11 +129,19 @@ namespace SharpVectors.Renderers.Wpf
             Brush pathMask = this.Masking;
             if (pathMask != null)
             {
+                if (_drawGroup == null)
+                {
+                    _drawGroup = new DrawingGroup();
+                }
                 _drawGroup.OpacityMask = pathMask;
             }
 
             if (pathTransform != null || pathClip != null || pathMask != null || (opacityValue >= 0 && opacityValue < 1))
             {
+                if (_drawGroup == null)
+                {
+                    _drawGroup = new DrawingGroup();
+                }
                 if ((opacityValue >= 0 && opacityValue < 1))
                 {
                     _drawGroup.Opacity = opacityValue;

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="400px" height="400px" viewBox="0 0 200 200"
+     xml:lang="en">
+    <title>Opacity Adjustments</title>
+    <defs>
+        <ellipse id="background"
+                 ry="15" rx="35" transform="rotate(20)"
+                 stroke="purple" fill="lightSkyBlue"
+                 stroke-width="5" />                       
+        <path id="foreground" stroke-width="10"
+              d="M0,0C0,-60 60,0 0,0 S 0,60 0,0Z" />       
+    </defs>
+    <style type="text/css">
+        svg svg {
+            overflow: visible;
+        }
+        text {
+            text-anchor: middle;
+            font-size: 7px;
+            font-family: sans-serif;                       
+        }
+    </style>
+    <rect fill="#888" width="100%" height="100%"/>
+    <svg width="100" height="100" x="0" y="0"
+         viewBox="-40,-45 80,80">                          
+        <use xlink:href="#background"/>
+        <use xlink:href="#foreground"
+             fill="yellow" stroke="green" />               
+        <text y="-35">solid</text>
+    </svg>
+    <svg width="100" height="100" x="100" y="0"
+         viewBox="-40,-45 80,80">
+        <use xlink:href="#background"/>
+        <use xlink:href="#foreground"
+             fill="yellow" stroke="green"
+             fill-opacity="0.5" stroke-opacity="0.5" />    
+        <text y="-35" dy="-0.3em"> stroke-opacity="0.5"
+            <tspan x="0" dy="1em">fill-opacity="0.5"</tspan>
+        </text>
+    </svg>
+    <svg width="100" height="100" x="0" y="100"
+         viewBox="-40,-45 80,80">
+        <use xlink:href="#background"/>
+        <use xlink:href="#foreground"
+             fill="yellow" stroke="green" opacity="0.5" /> 
+        <text y="-35">opacity="0.5"</text>
+    </svg>
+    <svg width="100" height="100" x="100" y="100"
+         viewBox="-40,-45 80,80">
+        <use xlink:href="#background"/>
+        <use xlink:href="#foreground"
+             fill="rgba(100%, 100%, 0%, 0.5)"
+             stroke="rgba(0%, 50%, 0%, 0.5)" />
+        <text y="-35">rgba(r,g,b,0.5) colors</text>
+    </svg>
+</svg>

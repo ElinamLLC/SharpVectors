@@ -33,6 +33,10 @@ namespace SharpVectors.Renderers.Texts
 
         private double _textWidth;
 
+        private FontStyle _fontStyle;
+        private FontFamily _fontFamily;
+        private FontWeight _fontWeight;
+
         private int _unicodeRangeStart;
         private int _unicodeRangeEnd;
 
@@ -83,6 +87,36 @@ namespace SharpVectors.Renderers.Texts
         {
             get {
                 return (_unicodeRangeStart != -1 && _unicodeRangeStart != _unicodeRangeEnd);
+            }
+        }
+
+        public FontStyle FontStyle
+        {
+            get {
+                return _fontStyle;
+            }
+            set {
+                _fontStyle = value;
+            }
+        }
+
+        public FontWeight FontWeight
+        {
+            get {
+                return _fontWeight;
+            }
+            set {
+                _fontWeight = value;
+            }
+        }
+
+        public FontFamily FontFamily
+        {
+            get {
+                return _fontFamily;
+            }
+            set {
+                _fontFamily = value;
             }
         }
 
@@ -301,6 +335,21 @@ namespace SharpVectors.Renderers.Texts
 
         public override PathGeometry Build(SvgTextContentElement element, string text, double x, double y)
         {
+            var alignment = this.TextAlignment;
+            if (alignment != TextAlignment.Left)
+            {
+                var textSize  = this.MeasureText(element, text, true);
+                var textWidth = Math.Max(textSize.Width, this.Width);
+                if (alignment == TextAlignment.Center)
+                {
+                    x -= textWidth / 2;
+                }
+                else
+                {
+                    x -= textWidth;
+                }
+            }
+
             var textPath = this.Build(element, text, null, false);
             if (textPath.Figures != null && textPath.Figures.Count > 0)
             {
@@ -377,7 +426,8 @@ namespace SharpVectors.Renderers.Texts
                     // Handle this as fall back...
                     if (_missingFallBack == null)
                     {
-                        _missingFallBack = Create(string.Empty, this.Culture, this.FontSize);
+                        //_missingFallBack = Create(string.Empty, this.Culture, this.FontSize);
+                        _missingFallBack = Create(_fontFamily, _fontStyle, _fontWeight, this.Culture, this.FontSize);
                     }
 
                     var missingPath = _missingFallBack.Build(element, inputText, xPos, baseline);
@@ -391,7 +441,7 @@ namespace SharpVectors.Renderers.Texts
                         Rect bounds = missingPath.Bounds;
                         if (measureSpaces && bounds == Rect.Empty)
                         {
-                            textBounds.Add(new Rect(xPos, 0, glyph.HorizAdvX * _emScale, baseline));
+                            textBounds.Add(new Rect(xPos, 0, _font.HorizAdvX * _emScale, baseline));
                         }
                         else
                         {
@@ -404,11 +454,11 @@ namespace SharpVectors.Renderers.Texts
                         textPath.AddGeometry(missingPath);
                     }
 
-//                    xPos += missingPath.Bounds.Width;
+                    //xPos += missingPath.Bounds.Width;
                     xPos += _missingFallBack.Width;
                     continue;
                 }
-                if (!this.IsVariantMatched())
+                if (!this.IsVariantMatched() || !this.IsStyleMatched())
                 {
                     bool isSmallCaps = false; // For simulation of small-caps
                     WpfTextBuilder selectedFallBack = null;
@@ -429,7 +479,8 @@ namespace SharpVectors.Renderers.Texts
                     {
                         if (_missingFallBack == null)
                         {
-                            _missingFallBack = Create(string.Empty, this.Culture, this.FontSize);
+//                            _missingFallBack = Create(string.Empty, this.Culture, this.FontSize);
+                            _missingFallBack = Create(_fontFamily, _fontStyle, _fontWeight, this.Culture, this.FontSize);
                         }
 
                         selectedFallBack = _missingFallBack;
@@ -523,7 +574,7 @@ namespace SharpVectors.Renderers.Texts
         {
             if (_unicodeRangeStart != -1 && _unicodeRangeStart != _unicodeRangeEnd)
             {
-                if (inputText.Length == 0)
+//                if (inputText.Length == 0)
                 {
                     int unicode = inputText[0];
                     return (unicode >= _unicodeRangeStart && unicode <= _unicodeRangeEnd);
@@ -549,12 +600,36 @@ namespace SharpVectors.Renderers.Texts
             return string.Equals(faceVariant, _fontVariant, StringComparison.OrdinalIgnoreCase);
         }
 
+        public bool IsStyleMatched()
+        {
+            if (_fontStyle != FontStyles.Normal)
+            {
+                var fontStyle = _font.FontFace.FontStyle;
+                if (string.IsNullOrWhiteSpace(fontStyle))
+                {
+                    return false;
+                }
+                if (string.Equals(fontStyle, "italic", StringComparison.OrdinalIgnoreCase))
+                {
+                    return _fontStyle == FontStyles.Italic;
+                }
+                if (string.Equals(fontStyle, "oblique", StringComparison.OrdinalIgnoreCase))
+                {
+                    return _fontStyle == FontStyles.Oblique || _fontStyle == FontStyles.Italic;
+                }
+            }
+            return true;
+        }
+
         #endregion
 
         #region Initialization
 
         private bool Initialize()
         {
+            _fontStyle  = FontStyles.Normal;
+            _fontWeight = FontWeights.Normal;
+
             _unicodeRangeStart = -1;
             _unicodeRangeEnd   = -1;
 
@@ -583,6 +658,10 @@ namespace SharpVectors.Renderers.Texts
             }
 
             var unicodeRange = _fontFaceElement.UnicodeRange;
+            if (string.IsNullOrWhiteSpace(unicodeRange))
+            {
+                unicodeRange = _font.UnicodeRange; // use the extension property...
+            }
             if (!string.IsNullOrWhiteSpace(unicodeRange))
             {
                 unicodeRange = unicodeRange.Substring(2).Replace(" ", ""); // move pass the U+

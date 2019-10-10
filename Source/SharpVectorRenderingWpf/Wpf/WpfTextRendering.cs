@@ -386,6 +386,10 @@ namespace SharpVectors.Renderers.Wpf
                                 // No need to render the last white space...
                                 nodeText = nodeText.TrimEnd();
                             }
+                            else if (i == 0)
+                            {
+                                nodeText = nodeText.Trim();
+                            }
 
                             if (isVertical)
                             {
@@ -410,7 +414,7 @@ namespace SharpVectors.Renderers.Wpf
                             else if (string.Equals(nodeName, "tspan", comparer))
                             {
                                 bool isAdded = false;
-                                if ((i + 1) < nodeCount)
+                                if ((i + 1) < nodeCount - 1)
                                 {
                                     XmlNode nextChild = nodeList[i + 1];
                                     if (nextChild.NodeType == XmlNodeType.Whitespace)
@@ -480,6 +484,10 @@ namespace SharpVectors.Renderers.Wpf
                             // No need to render the last white space...
                             nodeText = nodeText.TrimEnd();
                         }
+                        else if (i == 0)
+                        {
+                            nodeText = nodeText.Trim();
+                        }
 
                         if (isVertical)
                         {
@@ -508,7 +516,7 @@ namespace SharpVectors.Renderers.Wpf
                         else if (string.Equals(nodeName, "tspan", comparer))
                         {
                             bool isAdded = false;
-                            if ((i + 1) < nodeCount)
+                            if ((i + 1) < nodeCount - 1)
                             {
                                 XmlNode nextChild = nodeList[i + 1];
                                 if (nextChild.NodeType == XmlNodeType.Whitespace)

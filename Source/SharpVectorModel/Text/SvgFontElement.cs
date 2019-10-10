@@ -269,6 +269,20 @@ namespace SharpVectors.Dom.Svg
             set { this.SetAttribute("vert-origin-y", value); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        /// <remarks>
+        /// This is an extension attribute for externally defined fonts with its unicode-range in 'defs' tag.
+        /// The unicode-range value is lost in the current processing method.
+        /// </remarks>
+        public string UnicodeRange
+        {
+            get { return this.GetAttribute("unicode-range"); }
+            set { this.SetAttribute("unicode-range", value); }
+        }
+
         #endregion
 
         #region ISvgExternalResourcesRequired Members

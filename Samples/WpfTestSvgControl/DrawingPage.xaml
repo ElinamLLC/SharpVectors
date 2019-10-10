@@ -152,6 +152,11 @@
                       BorderThickness="1" BorderBrush="LightGray" Background="LightGray"/>
 
         <DockPanel x:Name="viewerFrame" LastChildFill="True" Grid.Row="2">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="statusText">Ready</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
             <TabControl>
                 <TabItem Header="Element Drawing">
                     <ScrollViewer x:Name="imageScroller" CanContentScroll="False" Padding="4"
@@ -170,7 +175,6 @@
                     <avalonEdit:TextEditor x:Name="textEditor" FontFamily="Consolas" FontSize="12pt" IsReadOnly="True"/>
                 </TabItem>
             </TabControl>
-
         </DockPanel>
     </Grid>
 </Page>

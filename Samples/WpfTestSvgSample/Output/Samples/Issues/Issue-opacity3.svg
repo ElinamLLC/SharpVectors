@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="400px" height="200px" viewBox="0 0 400 200"
+     xml:lang="en">
+    <title>Blending with opacity and gradients</title>
+    <defs>
+        <linearGradient id="gradient">
+            <stop offset="0" stop-color="#F00"/>
+            <stop offset="1" stop-color="#00F"/>
+        </linearGradient>
+        <rect id="square" width="100" height="100" y="100"/>
+    </defs>
+
+    <rect fill="url(#gradient)" width="400" height="100"/>
+    <rect fill="#F00" width="400" height="100" y="100"/>
+    <g fill="#00F">
+        <use xlink:href="#square" x="-50" fill-opacity="0" />
+        <use xlink:href="#square" x="50" fill-opacity="0.25" />
+        <use xlink:href="#square" x="150" fill-opacity="0.5" />
+        <use xlink:href="#square" x="250" fill-opacity="0.75" />
+        <use xlink:href="#square" x="350" fill-opacity="1"  />
+    </g>
+</svg>

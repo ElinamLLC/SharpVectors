@@ -180,7 +180,7 @@
         <test source="fonts-elem-05-t.svg" title="fonts-elem-05-t" state="success" comment="" description="This tests the horiz-origin-x attributes on the font and glyph elements." />
         <test source="fonts-elem-06-t.svg" title="fonts-elem-06-t" state="success" comment="" description="This test validates that the font element's horiz-adv-x is used as the default glyph's advance when there is no glyph advance specified. All fonts have a units-per-em of 1000." />
         <test source="fonts-elem-07-b.svg" title="fonts-elem-07-b" state="success" comment="" description="This is a basic test for embedded SVG fonts. The font &quot;Comic Sans&quot; (available from Microsoft) has been converted into an SVG font and embedded in the SVG file. The test contains two text areas, each with the character string &quot;AyÖ@ç&quot; drawn at the same font size." />
-        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="partial" comment="" description="The first subtest tests the arabic-form attribute on the glyph element, the second subtest is the same, but with glyphs for the letter khah. It should match the reference image." />
+        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="success" comment="" description="The first subtest tests the arabic-form attribute on the glyph element, the second subtest is the same, but with glyphs for the letter khah. It should match the reference image." />
         <test source="fonts-glyph-03-t.svg" title="fonts-glyph-03-t" state="success" comment="" description="ISSUE: http://www.w3.org/2011/02/27-svg-irc#T22-20-51 - unapprove test for now" />
         <test source="fonts-glyph-04-t.svg" title="fonts-glyph-04-t" state="success" comment="" description="This tests that glyph selection is done in the order in the definition of the font element. The first line of text should be represented by two triangles and an 'l'. The second line should be represented by a square." />
         <test source="fonts-kern-01-t.svg" title="fonts-kern-01-t" state="success" comment="" description="This test validates handling of the hkern element." />
@@ -439,7 +439,7 @@
         <test source="struct-svg-02-f.svg" title="struct-svg-02-f" state="success" comment="" description="Testing various interactions on the width attribute on an svg element. The width attribute defaults to &quot;100%&quot; if it's not specified." />
         <test source="struct-svg-03-f.svg" title="struct-svg-03-f" state="success" comment="" description="Test nested svg elements." />
         <test source="struct-symbol-01-b.svg" title="struct-symbol-01-b" state="success" comment="" description="The purpose of the symbol test case is to create some symbols and then have them rendered when instantiated by the use element." />
-        <test source="struct-use-01-t.svg" title="struct-use-01-t" state="partial" comment="" description="The purpose of this test is to validate proper handling of the use element. In particular, the test checks the proper inheritance of properties through the shadow tree (rather than through the document tree)." />
+        <test source="struct-use-01-t.svg" title="struct-use-01-t" state="success" comment="" description="The purpose of this test is to validate proper handling of the use element. In particular, the test checks the proper inheritance of properties through the shadow tree (rather than through the document tree)." />
         <test source="struct-use-03-t.svg" title="struct-use-03-t" state="success" comment="" description="The purpose of this test is to validate proper handling of the x/y attributes on the use element." />
         <test source="struct-use-04-b.svg" title="struct-use-04-b" state="failure" comment="" description="The intent of the file is to determine if the UA supports references to external SVG fragments." />
         <test source="struct-use-05-b.svg" title="struct-use-05-b" state="success" comment="" description="This file is intented to test the computed values in external references. Both files (referencing and referenced) define similar colors/gradients via 'color', 'linearGradient' and 'radialGradient'. The ids of those definitions are the same but the actual appearance are different. These definitions are used to test the property inheritance feature of SVG." />
@@ -475,10 +475,10 @@
         <test source="styling-pres-05-f.svg" title="styling-pres-05-f" state="failure" comment="" description="Presentation attributes have lower priority than other CSS style rules specified in an external style sheet." />
     </category>
     <category label="Text">
-        <test source="text-align-01-b.svg" title="text-align-01-b" state="partial" comment="" description="Test 'text-anchor' property (horizontal)." />
+        <test source="text-align-01-b.svg" title="text-align-01-b" state="success" comment="" description="Test 'text-anchor' property (horizontal)." />
         <test source="text-align-02-b.svg" title="text-align-02-b" state="success" comment="" description="Test the 'baseline-shift' property (horizontal)." />
-        <test source="text-align-03-b.svg" title="text-align-03-b" state="partial" comment="" description="Test for viewer capibility to handle the basics of the 'textAnchor' alignment property for 'text' and related elements." />
-        <test source="text-align-04-b.svg" title="text-align-04-b" state="partial" comment="" description="Test for viewer capibility to handle the basics of the 'text-anchor' alignment property for 'text' and related elements." />
+        <test source="text-align-03-b.svg" title="text-align-03-b" state="success" comment="" description="Test for viewer capibility to handle the basics of the 'textAnchor' alignment property for 'text' and related elements." />
+        <test source="text-align-04-b.svg" title="text-align-04-b" state="success" comment="" description="Test for viewer capibility to handle the basics of the 'text-anchor' alignment property for 'text' and related elements." />
         <test source="text-align-05-b.svg" title="text-align-05-b" state="success" comment="" description="Test 'text-anchor' property (vertical)." />
         <test source="text-align-06-b.svg" title="text-align-06-b" state="partial" comment="" description="Tests various ways that the 'baseline-shift' property (vertical) can be altered." />
         <test source="text-align-07-t.svg" title="text-align-07-t" state="partial" comment="" description="ISSUE - http://www.w3.org/2011/02/27-svg-irc#T22-20-51" />
@@ -530,7 +530,7 @@
         <test source="text-tref-02-b.svg" title="text-tref-02-b" state="partial" comment="" description="Test viewer capability to handle 'tref' elements which point to text strings outside the current SVG document fragment." />
         <test source="text-tref-03-b.svg" title="text-tref-03-b" state="success" comment="" description="Test viewer capability to handle 'tref' elements which point to elements that have children. The flattened text content is to be used." />
         <test source="text-tselect-01-b.svg" title="text-tselect-01-b" state="success" comment="" description="Test text selection." />
-        <test source="text-tselect-02-f.svg" title="text-tselect-02-f" state="failure" comment="" description="This test demonstrates text selection of bidirectional text." />
+        <test source="text-tselect-02-f.svg" title="text-tselect-02-f" state="partial" comment="" description="This test demonstrates text selection of bidirectional text." />
         <test source="text-tselect-03-f.svg" title="text-tselect-03-f" state="partial" comment="" description="This test demonstrates text selection of bidirectional text." />
         <test source="text-tspan-01-b.svg" title="text-tspan-01-b" state="success" comment="" description="Test tspan element styling and relative position adjustments." />
         <test source="text-tspan-02-b.svg" title="text-tspan-02-b" state="failure" comment="" description="Tests the rotate attribute in the tspan element." />

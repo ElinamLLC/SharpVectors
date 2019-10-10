@@ -1,10 +1,3 @@
-// Define this to enable the dispatching of load events.  The implementation
-// of load events requires that a complete implementation of SvgDocument.Load
-// be supplied rather than relying on the base XmlDocument.Load behaviour.
-// This is required because I know of no way to hook into the key stages of
-// XML document creation in order to throw events at the right times during
-// the load process.
-
 using System;
 using System.Xml;
 using System.IO;
@@ -26,39 +19,29 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     /// <remarks>
     /// <para>
-    /// When an 'svg'  element is embedded inline as a component of a
-    /// document from another namespace, such as when an 'svg' element is
-    /// embedded inline within an XHTML document
-    /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>],
-    /// then an
-    /// <see cref="ISvgDocument">ISvgDocument</see> object will not exist;
-    /// instead, the root object in the
-    /// document object hierarchy will be a Document object of a different
-    /// type, such as an HTMLDocument object.
+    /// When an 'svg'  element is embedded inline as a component of a document from another namespace, 
+    /// such as when an 'svg' element is embedded inline within an XHTML document
+    /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>], then an 
+    /// <see cref="ISvgDocument">ISvgDocument</see> object will not exist; instead, the root object in the 
+    /// document object hierarchy will be a Document object of a different type, such as an HTMLDocument object.
     /// </para>
     /// <para>
-    /// However, an <see cref="ISvgDocument">ISvgDocument</see> object will
-    /// indeed exist when the root
-    /// element of the XML document hierarchy is an 'svg' element, such as
-    /// when viewing a stand-alone SVG file (i.e., a file with MIME type
-    /// "image/svg+xml"). In this case, the
-    /// <see cref="ISvgDocument">ISvgDocument</see> object will be the
-    /// root object of the document object model hierarchy.
+    /// However, an <see cref="ISvgDocument">ISvgDocument</see> object will indeed exist when the root
+    /// element of the XML document hierarchy is an 'svg' element, such as when viewing a stand-alone SVG 
+    /// file (i.e., a file with MIME type "image/svg+xml"). In this case, the <see cref="ISvgDocument">ISvgDocument</see> 
+    /// object will be the root object of the document object model hierarchy.
     /// </para>
     /// <para>
-    /// In the case where an SVG document is embedded by reference, such as
-    /// when an XHTML document has an 'object' element whose href attribute
-    /// references an SVG document (i.e., a document whose MIME type is
-    /// "image/svg+xml" and whose root element is thus an 'svg' element),
-    /// there will exist two distinct DOM hierarchies. The first DOM hierarchy
-    /// will be for the referencing document (e.g., an XHTML document). The
-    /// second DOM hierarchy will be for the referenced SVG document. In this
+    /// In the case where an SVG document is embedded by reference, such as when an XHTML document has an 'object' 
+    /// element whose href attribute references an SVG document (i.e., a document whose MIME type is
+    /// "image/svg+xml" and whose root element is thus an 'svg' element), there will exist two distinct DOM hierarchies. 
+    /// The first DOM hierarchy will be for the referencing document (e.g., an XHTML document). 
+    /// The second DOM hierarchy will be for the referenced SVG document. In this
     /// second DOM hierarchy, the root object of the document object model
     /// hierarchy is an <see cref="ISvgDocument">ISvgDocument</see> object.
     /// </para>
     /// <para>
-    /// The <see cref="ISvgDocument">ISvgDocument</see> interface contains a
-    /// similar list of attributes and
+    /// The <see cref="ISvgDocument">ISvgDocument</see> interface contains a similar list of attributes and
     /// methods to the HTMLDocument interface described in the
     /// <see href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html">Document
     /// Object Model (HTML) Level 1</see> chapter of the
@@ -140,7 +123,7 @@ namespace SharpVectors.Dom.Svg
         private SvgDocument()
         {
             _isFontsLoaded                = true;
-            _ignoreComments               = false;
+            _ignoreComments               = true;
             _ignoreWhitespace             = false;
             _ignoreProcessingInstructions = false;
 
@@ -1107,9 +1090,9 @@ namespace SharpVectors.Dom.Svg
 
         #region Protected Methods
 
-        protected virtual IList<string> GetFontUrls()
+        protected virtual IList<Tuple<string, SvgFontFaceElement>> GetFontUrls()
         {
-            List<string> fontUrls = new List<string>();
+            List<Tuple<string, SvgFontFaceElement>> fontUrls = new List<Tuple<string, SvgFontFaceElement>>();
             if (this.IsLoaded == false)
             {
                 return fontUrls;
@@ -1120,12 +1103,19 @@ namespace SharpVectors.Dom.Svg
             {
                 foreach (XmlElement xmlNode in xmlList)
                 {
+                    SvgFontFaceElement fontFace = null;
+                    var fontSource = xmlNode.ParentNode as SvgFontFaceSrcElement;
+                    if (fontSource != null)
+                    {
+                        fontFace = fontSource.ParentNode as SvgFontFaceElement;
+                    }
+
                     if (xmlNode.HasAttribute("href", SvgDocument.XLinkNamespace))
                     {
                         string fontUrl = xmlNode.GetAttribute("href", SvgDocument.XLinkNamespace);
                         if (!string.IsNullOrWhiteSpace(fontUrl))
                         {
-                            fontUrls.Add(fontUrl);
+                            fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, fontFace));
                         }
                     }
                     else if (xmlNode.HasAttribute("href"))
@@ -1133,7 +1123,7 @@ namespace SharpVectors.Dom.Svg
                         string fontUrl = xmlNode.GetAttribute("href");
                         if (!string.IsNullOrWhiteSpace(fontUrl))
                         {
-                            fontUrls.Add(fontUrl);
+                            fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, fontFace));
                         }
                     }
                 }
@@ -1160,7 +1150,7 @@ namespace SharpVectors.Dom.Svg
             return fontUrls;
         }
 
-        private static void GetFontUrl(CssStyleSheet cssSheet, IList<string> fontUrls, IDictionary<string, string> styledFontIds)
+        private static void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls, IDictionary<string, string> styledFontIds)
         {
             if (cssSheet == null || fontUrls == null)
             {
@@ -1184,7 +1174,7 @@ namespace SharpVectors.Dom.Svg
                         fontUrl = fontUrl.Trim();
                         if (!fontUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                         {
-                            fontUrls.Add(fontUrl);
+                            fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, null));
                         }
                         else if (styledFontIds != null)
                         {
@@ -1208,7 +1198,7 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
-            IList<string> fontUrls = this.GetFontUrls();
+            IList<Tuple<string, SvgFontFaceElement>> fontUrls = this.GetFontUrls();
 
             if (fontUrls == null || fontUrls.Count == 0)
             {
@@ -1224,7 +1214,8 @@ namespace SharpVectors.Dom.Svg
 
                 for (int i = 0; i < fontUrls.Count; i++)
                 {
-                    var fontUrl = fontUrls[i];
+                    var fontUrl  = fontUrls[i].Item1;
+                    var fontFace = fontUrls[i].Item2;
                     try
                     {
                         // remove any hash (won't work for local files)
@@ -1243,7 +1234,7 @@ namespace SharpVectors.Dom.Svg
                         string scheme = fileUrl.Scheme;
                         if (string.Equals(scheme, "file", StringComparison.OrdinalIgnoreCase))
                         {
-                            this.LoadLocalFont(fileUrl.LocalPath, ownedWindow);
+                            this.LoadLocalFont(fileUrl.LocalPath, ownedWindow, fontFace);
                         }
                         else
                         {
@@ -1261,7 +1252,7 @@ namespace SharpVectors.Dom.Svg
             });
         }
 
-        private void LoadLocalFont(string fontPath, SvgWindow ownedWindow)
+        private void LoadLocalFont(string fontPath, SvgWindow ownedWindow, SvgFontFaceElement fontFace)
         {
             if (string.IsNullOrWhiteSpace(fontPath) || !File.Exists(fontPath))
             {
@@ -1281,6 +1272,11 @@ namespace SharpVectors.Dom.Svg
                 {
                     foreach (var svgFont in svgFonts)
                     {
+                        if (fontFace != null && fontFace.HasAttribute("unicode-range"))
+                        {
+                            svgFont.SetAttribute("unicode-range", fontFace.GetAttribute("unicode-range"));
+                        }
+
                         var fontNode = this.ImportNode(svgFont, true);
                         this.DocumentElement.AppendChild(fontNode);
 

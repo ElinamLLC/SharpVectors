@@ -33,6 +33,8 @@ namespace SharpVectors.Converters
         private bool _saveZaml;
         private bool _useFrameXamlWriter;
 
+        protected bool _isEmbedded;
+
         protected SolidColorBrush _background;
 
         protected WpfDrawingSettings _wpfSettings;
@@ -288,12 +290,15 @@ namespace SharpVectors.Converters
                 _wpfRenderer.EndRender();
             }
 
-            if (_wpfSettings != null)
+            if (!_isEmbedded)
             {
-                var visitors = _wpfSettings.Visitors;
-                if (visitors != null)
+                if (_wpfSettings != null)
                 {
-                    visitors.Uninitialize();
+                    var visitors = _wpfSettings.Visitors;
+                    if (visitors != null)
+                    {
+                        visitors.Uninitialize();
+                    }
                 }
             }
 

@@ -33,10 +33,10 @@ namespace SharpVectors.Runtime
         public bool CanVerticallyScroll
         {
             get {
-                return canVerticallyScroll;
+                return _canVerticallyScroll;
             }
             set {
-                canVerticallyScroll = value;
+                _canVerticallyScroll = value;
             }
         }
 
@@ -46,10 +46,10 @@ namespace SharpVectors.Runtime
         public bool CanHorizontallyScroll
         {
             get {
-                return canHorizontallyScroll;
+                return _canHorizontallyScroll;
             }
             set {
-                canHorizontallyScroll = value;
+                _canHorizontallyScroll = value;
             }
         }
 
@@ -59,7 +59,7 @@ namespace SharpVectors.Runtime
         public double ExtentWidth
         {
             get {
-                return unScaledExtent.Width * ContentScale;
+                return _unScaledExtent.Width * ContentScale;
             }
         }
 
@@ -69,7 +69,7 @@ namespace SharpVectors.Runtime
         public double ExtentHeight
         {
             get {
-                return unScaledExtent.Height * ContentScale;
+                return _unScaledExtent.Height * ContentScale;
             }
         }
 
@@ -79,7 +79,7 @@ namespace SharpVectors.Runtime
         public double ViewportWidth
         {
             get {
-                return viewport.Width;
+                return _viewport.Width;
             }
         }
 
@@ -89,7 +89,7 @@ namespace SharpVectors.Runtime
         public double ViewportHeight
         {
             get {
-                return viewport.Height;
+                return _viewport.Height;
             }
         }
 
@@ -100,10 +100,10 @@ namespace SharpVectors.Runtime
         public ScrollViewer ScrollOwner
         {
             get {
-                return scrollOwner;
+                return _scrollOwner;
             }
             set {
-                scrollOwner = value;
+                _scrollOwner = value;
             }
         }
 
@@ -132,20 +132,20 @@ namespace SharpVectors.Runtime
         /// </summary>
         public void SetHorizontalOffset(double offset)
         {
-            if (disableScrollOffsetSync)
+            if (_disableScrollOffsetSync)
             {
                 return;
             }
 
             try
             {
-                disableScrollOffsetSync = true;
+                _disableScrollOffsetSync = true;
 
                 ContentOffsetX = offset / ContentScale;
             }
             finally
             {
-                disableScrollOffsetSync = false;
+                _disableScrollOffsetSync = false;
             }
         }
 
@@ -158,20 +158,20 @@ namespace SharpVectors.Runtime
         /// </summary>
         public void SetVerticalOffset(double offset)
         {
-            if (disableScrollOffsetSync)
+            if (_disableScrollOffsetSync)
             {
                 return;
             }
 
             try
             {
-                disableScrollOffsetSync = true;
+                _disableScrollOffsetSync = true;
 
                 ContentOffsetY = offset / ContentScale;
             }
             finally
             {
-                disableScrollOffsetSync = false;
+                _disableScrollOffsetSync = false;
             }
         }
 
@@ -292,9 +292,9 @@ namespace SharpVectors.Runtime
         /// </summary>
         public Rect MakeVisible(Visual visual, Rect rectangle)
         {
-            if (content.IsAncestorOf(visual))
+            if (_content.IsAncestorOf(visual))
             {
-                Rect transformedRect = visual.TransformToAncestor(content).TransformBounds(rectangle);
+                Rect transformedRect = visual.TransformToAncestor(_content).TransformBounds(rectangle);
                 Rect viewportRect    = new Rect(ContentOffsetX, ContentOffsetY, ContentViewportWidth, ContentViewportHeight);
                 if (!transformedRect.Contains(viewportRect))
                 {

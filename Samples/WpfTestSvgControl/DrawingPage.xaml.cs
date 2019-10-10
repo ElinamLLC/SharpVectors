@@ -135,7 +135,7 @@ namespace WpfTestSvgControl
             _fileReader.SaveXaml = _saveXaml;
             _fileReader.SaveZaml = false;
 
-            _mouseHandlingMode = ZoomPanMouseHandlingMode.None;
+            _mouseHandlingMode = ZoomPanMouseHandlingMode.SelectPoint;
 
             string workDir = Path.Combine(Path.GetDirectoryName(
                 System.Reflection.Assembly.GetExecutingAssembly().Location), TemporalDirName);
@@ -353,7 +353,12 @@ namespace WpfTestSvgControl
 
         public bool LoadDocument(string svgFilePath)
         {
-            if (string.IsNullOrWhiteSpace(svgFilePath) || !File.Exists(svgFilePath))
+            if (string.IsNullOrWhiteSpace(svgFilePath))
+            {
+                return false;
+            }
+            Uri uriSvgPath = new Uri(svgFilePath);
+            if (uriSvgPath.IsFile && !File.Exists(svgFilePath))
             {
                 return false;
             }
@@ -421,7 +426,12 @@ namespace WpfTestSvgControl
 
         public Task<bool> LoadDocumentAsync(string svgFilePath)
         {
-            if (_isLoadingDrawing || string.IsNullOrWhiteSpace(svgFilePath) || !File.Exists(svgFilePath))
+            if (_isLoadingDrawing || string.IsNullOrWhiteSpace(svgFilePath))
+            {
+                return Task.FromResult<bool>(false);
+            }
+            Uri uriSvgPath = new Uri(svgFilePath);
+            if (uriSvgPath.IsFile && !File.Exists(svgFilePath))
             {
                 return Task.FromResult<bool>(false);
             }
@@ -831,6 +841,62 @@ namespace WpfTestSvgControl
             if (_mouseHandlingMode == ZoomPanMouseHandlingMode.SelectPoint ||
                 _mouseHandlingMode == ZoomPanMouseHandlingMode.SelectRectangle)
             {
+                if (_drawingDocument != null)
+                {
+                    //_drawingDocument.DisplayTransform = (Transform)(new MatrixTransform(1, 0, 0, 1, -20, -180).Inverse);
+                    //_drawingDocument.DisplayTransform = svgViewer.DisplayTransform;
+                    //_drawingDocument.DisplayTransform = (Transform)svgViewer.DisplayTransform.Inverse;
+                    Trace.WriteLine("Zoom-ContentOffsetX: " + zoomPanControl.ContentOffsetX);
+                    Trace.WriteLine("Zoom-ContentOffsetY: " + zoomPanControl.ContentOffsetY);
+                    Trace.WriteLine("Zoom-ContentScale: "   + zoomPanControl.ContentScale);
+
+                    var bounds = new Rect(0, 0, 0, 0);
+
+                    var rootDiagram = _drawingDocument.Drawing.Children[0] as DrawingGroup;
+                    if (rootDiagram != null)
+                    {
+//                        bounds = rootDiagram.ClipGeometry.Bounds;
+                        bounds = rootDiagram.Bounds;
+                    }
+
+                    Trace.WriteLine("Zoom-Bound: " + bounds);
+                    Trace.WriteLine("Drawing-Transform: " + _drawingDocument.Drawing.Transform);
+
+                    var point = e.GetPosition(svgViewer);
+                    // Retrieve the coordinate of the mouse position.
+                    //var point = e.GetPosition((UIElement)sender);
+
+                    //point.Offset(bounds.Left, bounds.Right);
+
+                    var hitResult = _drawingDocument.HitTest(point);
+                    if (hitResult != null && hitResult.IsHit)
+                    {
+                        var selecteElement = hitResult.Element;
+                        if (selecteElement != null)
+                        {
+                            textEditor.Text = selecteElement.OuterXml;
+                        }
+                        else
+                        {
+                            textEditor.Text = string.Empty;
+                        }
+
+                        var selectedDrawing = hitResult.Drawing;
+                        if (selectedDrawing != null)
+                        {
+                            elementImage.Source = new DrawingImage(selectedDrawing);
+                        }
+                        else
+                        {
+                            elementImage.Source = null;
+                        }
+                    }
+                    else
+                    {
+                        textEditor.Text = string.Empty;
+                        elementImage.Source = null;
+                    }
+                }
             }
             else
             {
@@ -875,6 +941,8 @@ namespace WpfTestSvgControl
             if (_mouseHandlingMode == ZoomPanMouseHandlingMode.SelectPoint ||
                 _mouseHandlingMode == ZoomPanMouseHandlingMode.SelectRectangle)
             {
+                var point = e.GetPosition(svgViewer);
+                statusText.Text = point.ToString();
             }
             else
             {

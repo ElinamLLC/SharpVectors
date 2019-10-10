@@ -734,7 +734,7 @@ namespace SharpVectors.Renderers.Texts
 
                     if (textDecors != null && textDecors.Count != 0)
                     {
-                        textBuilder.SetTextDecorations(textDecors);
+                        textBuilder.TextDecorations = textDecors;
                     }
 
                     WpfTextPosition? textPosition = null;
@@ -824,7 +824,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (textDecors != null && textDecors.Count != 0)
                 {
-                    textBuilder.SetTextDecorations(textDecors);
+                    textBuilder.TextDecorations = textDecors;
                 }
 
                 //float xCorrection = 0;
@@ -1005,7 +1005,7 @@ namespace SharpVectors.Renderers.Texts
 
                     if (textDecors != null && textDecors.Count != 0)
                     {
-                        textBuilder.SetTextDecorations(textDecors);
+                        textBuilder.TextDecorations = textDecors;
                     }
 
                     WpfTextPosition? textPosition = null;
@@ -1114,7 +1114,7 @@ namespace SharpVectors.Renderers.Texts
 
                 if (textDecors != null && textDecors.Count != 0)
                 {
-                    textBuilder.SetTextDecorations(textDecors);
+                    textBuilder.TextDecorations = textDecors;
                 }
 
                 //float xCorrection = 0;

@@ -15,6 +15,8 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private bool _isEmbedded;
+
         private SvgRectF _invalidRect;
         /// <summary>
         /// The renderer's <see cref="SvgWindow">SvgWindow</see> object.
@@ -36,12 +38,18 @@ namespace SharpVectors.Renderers.Wpf
         #region Constructors and Destructor
 
         public WpfDrawingRenderer()
+            : this(new WpfDrawingSettings(), false)
         {
-            _svgRenderer = new WpfRenderingHelper(this);
         }
 
         public WpfDrawingRenderer(WpfDrawingSettings settings)
+            : this(settings, false)
         {
+        }
+
+        public WpfDrawingRenderer(WpfDrawingSettings settings, bool isEmbedded)
+        {
+            _isEmbedded = isEmbedded;
             _svgRenderer = new WpfRenderingHelper(this);
             _settings = settings;
         }
@@ -224,7 +232,7 @@ namespace SharpVectors.Renderers.Wpf
                 _svgRenderer = new WpfRenderingHelper(this);
             }
 
-            _context = new WpfDrawingContext(false, _settings);
+            _context = new WpfDrawingContext(_isEmbedded, _settings);
 
             _context.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
 

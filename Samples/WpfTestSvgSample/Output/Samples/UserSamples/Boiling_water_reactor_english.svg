@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns="http://www.w3.org/2000/svg"
+	version="1.1"
+	width="820"
+	height="480"
+	viewBox="-10,-10,820,480"
+	id="svg2">
+	<rect x="-10" y="-10" width="820" height="480" style="stroke:none; fill:#ffffff;" id="Hintergrund" />
+	<defs id="defs4">
+		<marker
+			refX="0"
+			refY="0"
+			orient="auto"
+			style="overflow:visible"
+			id="Arrow2Mend">
+		<path
+			d="M 8.719,4.034 L -2.207,0.01601 L 8.719,-4.002 C 6.973,-1.63 6.983,1.616 8.719,4.034 L 8.719,4.034 z"
+			transform="scale(-0.6,-0.6)"
+			style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;"
+			id="path4687" />
+		</marker>
+		<linearGradient
+			id="linearGradient31"
+			x1="380"
+			y1="331.8"
+			x2="380"
+			y2="273.4"
+			gradientUnits="userSpaceOnUse"
+			gradientTransform="translate(-0.844,-0.105)">
+			<stop
+				style="stop-color:#098ed7;stop-opacity:1"
+				offset="0"
+				id="stop311" />
+			<stop
+				style="stop-color:#c02c8a;stop-opacity:1"
+				offset="1"
+				id="stop312" />
+		</linearGradient>
+		<linearGradient 
+			id="linearGradient32"
+			x1="405"
+			y1="232"
+			x2="405"
+			y2="265"
+			gradientUnits="userSpaceOnUse">
+			<stop
+				style="stop-color:#ef4545;stop-opacity:1"
+				offset="0"
+				id="stop3947-5" />
+			<stop
+				style="stop-color:#c02c8a;stop-opacity:1"
+				offset="1"
+				id="stop3945-1" />
+		</linearGradient>
+		<linearGradient
+			x1="405"
+			y1="232"
+			x2="405"
+			y2="265"
+			id="linearGradient33"
+			gradientUnits="userSpaceOnUse">
+			<stop
+				style="stop-color:#ef4545;stop-opacity:1"
+				offset="0"
+				id="stop3947" />
+			<stop
+				style="stop-color:#c02c8a;stop-opacity:1"
+				offset="1"
+				id="stop3945" />
+		</linearGradient>       
+		<linearGradient
+			id="linearGradient34"
+			x1="100"
+			y1="78"
+			x2="100"
+			y2="331"
+			gradientUnits="userSpaceOnUse">
+			<stop
+				style="stop-color:#db214c;stop-opacity:1"
+				offset="0"
+				id="stop3501" />
+			<stop
+				style="stop-color:#db214c;stop-opacity:1"
+				offset="0.4"
+				id="stop3502" />
+			<stop
+				style="stop-color:#0093dd;stop-opacity:1"
+				offset="0.75"
+				id="stop3504" />
+			<stop
+				style="stop-color:#0093dd;stop-opacity:1"
+				offset="1"
+				id="stop3506" />
+		</linearGradient>
+	</defs>
+	<g
+		style="fill-opacity:1; stroke-miterlimit:4; stroke-dashoffset:0; stroke-dasharray:none; stroke-opacity:1; stroke-linejoin:miter; stroke-linecap:butt;"
+		id="Paintlayer">
+		<path
+			d="M 0,0 L 643,0 L 643,460 L 0,460 L 0,0 z"
+			style="fill:#cccccc;stroke:#999999;stroke-width:2;"
+			id="Bauwerk" />
+		<path
+			d="M 13.83,44.4 L 179.9,44.4 L 179.9,419.4 L 13.83,419.4 L 13.83,44.4 z"
+			style="fill:#ffffff;stroke:#999999;stroke-width:2;"
+			id="HintergrundReaktor" />
+		<path
+			d="M 198.9,44.4 L 625.9,44.4 L 625.9,419.3 L 198.9,419.3 L 198.9,44.4 z"
+			style="fill:#ffffff;stroke:#999999;stroke-width:2;"
+			id="HintergrundMaschinen" />
+		<path
+			d="M 653.3,350.9 C 728.9,352.2 733.1,347.1 736.8,360.7 C 747.7,401.4 718.9,391.9 710.2,393.5 C 675,399.9 632.8,376 653.3,350.9 z"
+			style="fill:#77ccff;stroke:none;"
+			id="Gewaesser" />
+		<rect
+			x="42"
+			y="78"
+			width="114"
+			height="253"
+			rx="57"
+			ry="57"
+			style="stroke:#000000; stroke-width:8; fill:url(#linearGradient34);"
+			id="Reaktor" />
+		<path
+			d="M 80.65,222.6 L 88.1,222.6 L 88.1,288.5 L 80.65,288.5 L 80.65,222.6 z"
+			style="fill:#72706f;stroke:#504e4c;stroke-width:1;"
+			id="SteuerstabLinks" />
+		<path
+			d="M 108.7,239 L 116.15,239 L 116.15,304.9 L 108.7,304.9 L 108.7,239 z"
+			style="fill:#72706f;stroke:#4d4d4d;stroke-width:1;"
+			id="SteuerstabMitte" />
+		<path
+			d="M 62.16,188.8 L 76.81,188.8 L 76.81,254.9 L 62.16,254.9 L 62.16,188.8 z"
+			style="fill:#da251d;stroke:#333333;stroke-width:1;"
+			id="BrennstabLinks" />
+		<path
+			d="M 90.7,188.8 L 105.35,188.8 L 105.35,254.9 L 90.7,254.9 L 90.7,188.8 z"
+			style="fill:#da251d;stroke:#333333;stroke-width:1;"
+			id="BrennstabMitte" /> 
+		<path
+			d="M 119,188.8 L 133.6,188.8 L 133.6,254.9 L 119,254.9 L 119,188.8 z"
+			style="fill:#da251d;stroke:#333333;stroke-width:1;"
+			id="BrennstabRechts" />
+		<path
+			d="M 59.37,349.9 L 59.37,263.1 L 50.6,263.1 L 69.11,262.9"
+			style="fill:none;stroke:#000000;stroke-width:2;"
+			id="UmwaelzpumpeLinks" />
+		<path
+			d="M 52.17,349.9 L 66.57,349.9 L 66.57,354.8 L 52.17,354.8 L 52.17,349.9 z"
+			style="fill:#605d5c;stroke:#333333;stroke-width:1;stroke-linecap:round;"
+			id="AntriebLinks" />
+		<path
+			d="M 77.3,342.8 L 91.7,342.8 L 91.7,355.8 L 77.3,355.8 L 77.3,342.8 z"
+			style="fill:#605d5c;stroke:#333333;stroke-width:1;stroke-linecap:round;"
+			id="SteuerantriebLinks1" />
+		<path
+			d="M 84.38,288.5 L 84.38,374.3"
+			style="fill:#71625b;stroke:#000000;stroke-width:2;"
+			id="SteuerantriebLinks2" />
+		<path
+			d="M 138.4,349.8 L 138.4,263.1 L 129.7,263 L 148.2,262.8"
+			style="fill:none;stroke:#000000;stroke-width:2;"
+			id="UmwaelzpumpeRechts" />
+		<path
+			d="M 131.2,349.8 L 145.6,349.8 L 145.6,354.7 L 131.2,354.7 L 131.2,349.8 z"
+			style="fill:#605d5c;stroke:#333333;stroke-width:1;stroke-linecap:round;"
+			id="AntriebRechts" />
+		<path
+			d="M 105.35,343.1 L 119.7,343.1 L 119.7,356.1 L 105.35,356.1 L 105.35,343.1 z"
+			style="fill:#605d5c;stroke:#333333;stroke-width:1;stroke-linecap:round;"
+			id="SteuerantriebRechts1" />
+		<path
+			d="M 112.43,304.9 L 112.43,391.1"
+			style="fill:#71625b;stroke:#000000;stroke-width:2;"
+			id="SteuerantriebRechts2" />
+		<g id="HeissdampfrohrHochdruck">
+			<path
+				d="M 151.36,134.5 C 191.56,134.4 220.76,134.6 273.16,134.5 C 277.06,135.6 293.86,140.9 295.66,161.1 L 295.86,176.9 L 281.56,176.9 L 281.56,160.4 C 279.96,150.3 269.66,148.3 269.66,148.3 L 151.46,148.5"
+				style="fill:#db214c;stroke:#000000;stroke-width:1;"
+				id="HeissdampfrohrHochdruck-p1" />
+			<path
+				d="M 203.36,141.7 L 251.36,141.7"
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="HeissdampfrohrHochdruck-p2" />
+		</g>
+		<g id="HeissdampfrohrNiedrigdruck">
+			<path
+				d="M 318.16,176.9 C 318.16,176.9 320.66,163.4 330.86,163.4 L 360.66,163.2 C 373.76,163.2 374.46,176.9 374.46,176.9 L 389.06,176.9 C 389.06,176.9 386.66,149.7 361.76,149.7 L 330.86,149.4 C 305.86,149.4 304.46,176.9 304.46,176.9 L 318.16,176.9 z"
+				style="fill:#db214c;stroke:#000000"
+				id="HeissdampfrohrNiedrigdruck-p" />
+			<path
+				d="M 332.7,156.4 L 360.3,156.4"
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="HeissdampfrohrNiedrigdruckPfeil" />
+		</g>
+		<g id="Kondensator">
+			<path
+				d="M 309.3,261 L 450.4,261 C 458.1,261 464.3,275.5 464.3,293.6 L 464.3,299 C 464.3,317.1 458.1,331.7 450.4,331.7 L 309.3,331.7 C 301.6,331.7 295.4,317.1 295.4,299 L 295.4,293.6 C 295.4,275.5 301.6,261 309.3,261 z"
+				style="fill:url(#linearGradient31);stroke:#000000;stroke-width:1;"
+				id="KondensatorGross" />
+			<path
+				d="M 400.7,232.9 L 408.7,232.9 L 408.7,264.3 L 400.7,264.3 L 400.7,232.9 z"
+				style="fill:url(#linearGradient32);stroke:none;"
+				id="KondensatorInputLinks-f" />
+			<path
+				d="M 400.7,232.9 L 400.7,261.5"
+				style="fill:none;stroke:#000000;"
+				id="KondensatorInputLinks-p1" />
+			<path
+				d="M 408.7,232.9 L 408.7,261.5 "
+				style="fill:none;stroke:#000000;"
+				id="KondensatorInputLinks-p2" />
+			<path
+				d="M 404.6,234.3 L 404.6,264.3 "
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="KondensatorInputLinksArrow" />
+			<path
+				d="M 337,232.9 L 345,232.9 L 345,264.3 L 337,264.3 L 337,232.9 z"
+				style="fill:url(#linearGradient33);stroke:none;"
+				id="KondensatorInputRechts-f" />
+			<path
+				d="M 337.06,232.9 L 337.06,261.5"
+				style="fill:none;stroke:#000000;"
+				id="KondensatorInputRechts-p1" />
+			<path
+				d="M 345,232.9 L 345,261.5"
+				style="fill:none;stroke:#000000;"
+				id="KondensatorInputRechts-p2" />
+			<path
+				d="M 341.3,234.3 L 341.3,264.3"
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="KondensatorInputRechtsArrow" />
+		</g>
+		<path
+			d="M 265.5,192.8 L 271.4,192.8 L 271.4,217 L 265.5,217 L 265.5,192.8 z"
+			style="fill:#00923f;stroke:#000000;stroke-width:1;"
+			id="TurbinePfad1" />
+		<path
+			d="M 422.3,192.8 L 428.3,192.8 L 428.3,217 L 422.3,217 L 422.3,192.8 z"
+			style="fill:#00923f;stroke:#000000;stroke-width:1;"
+			id="TurbinePfad2" />
+		<path
+			d="M 271.4,176.9 L 422.3,176.9 L 422.3,232.9 L 271.4,232.9 L 271.4,176.9 z"
+			style="fill:#00923f;stroke:#000000;stroke-width:1;"
+			id="TurbinePfad3" />
+		<path
+			d="M 324.56,176.9 L 324.56,232.9"
+			style="fill:none;stroke:#000000;"
+			id="TurbineLinieMitte" />
+		<path
+			d="M 261.9,198.4 L 265.5,198.4 L 265.5,211.4 L 261.9,211.4 L 261.9,198.4 z"
+			style="fill:#000000;stroke:none;"
+			id="WellenendeLinks" />
+		<path
+			d="M 428.3,198.4 L 461.5,198.4 L 461.5,211.4 L 428.3,211.4 L 428.3,198.4 z"
+			style="fill:#000000;stroke:none;"
+			id="Welle2" />
+		<path
+			d="M 467.4,176.9 L 546.4,176.9 L 546.4,232.9 L 467.4,232.9 L 467.4,176.9 z"
+			style="fill:#fff500;stroke:#000000;stroke-width:1;"
+			id="GeneratorPfad1" />
+		<path
+			d="M 461.5,192.8 L 467.4,192.8 L 467.4,217 L 461.5,217 L 461.5,192.8 z"
+			style="fill:#fff500;stroke:#000000;stroke-width:1;"
+			id="GeneratorPfad2" />
+		<path
+			d="M 546.4,192.8 L 566.4,192.8 L 566.4,217 L 546.4,217 L 546.4,192.8 z"
+			style="fill:#71625b;stroke:#000000;stroke-width:1;"
+			id="Erregermaschine" />
+		<path
+			d="M 566.4,198.4 L 569.9,198.4 L 569.9,211.4 L 566.4,211.4 L 566.4,198.4 z"
+			style="fill:#000000;stroke:none;"
+			id="WellenendeRechts" />
+		<path
+			d="M 515,233 L 515,250 L 580,250"
+			style="fill:none;stroke:#000000"
+			id="Stromkabel1" />
+		<path
+			d="M 520,233 L 520,245 L 580,245"
+			style="fill:none;stroke:#000000;stroke-width:1;"
+			id="Stromkabel2" />
+		<path
+			d="M 525,233 L 525,240 L 580,240"
+			style="fill:none;stroke:#000000;stroke-width:1;"
+			id="Stromkabel3" />
+		<path
+			d="M 151.3,262.6 C 191.4,262.5 168,262.7 220.4,262.6 C 220.4,262.6 243,263.5 243,289.2 L 243.1,349.5 C 243.1,349.5 244.8,360.3 256.4,360.3 L 256.3,375 C 228.7,375 228.8,349.5 228.8,349.5 L 228.8,288.5 C 228.8,278.8 216.9,276.5 216.9,276.5 L 151.4,276.6"
+			style="fill:#0093dd;stroke:#000000;stroke-width:1;"
+			id="Speisewasser" />
+		<g id="KondensatorOutput">
+			<path
+				d="M 308.5,358.9 L 367,358.7 C 375.5,357.6 376.5,344.5 376.5,344.5 L 376.6,331.7 L 392.1,331.7 L 392.2,344.5 C 392.2,372.6 367,373 367,373 L 309.3,373"
+				style="fill:#0093dd;stroke:#000000;stroke-width:1;"
+				id="KondensatorOutput-p1" />
+			<path
+				d="M 352.1,367.1 L 324.4,367.1"
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="KondensatorOutput-p2" />
+		</g>
+		<g transform="translate(283,366)" 
+			id="Speisewasserpumpe">
+			<circle cx="0" cy="0" r="28" style="fill:#0093dd;stroke:#000000;stroke-width:1;"
+				id="Speisewasserpumpe-p1" />
+			<polygon points="-20,0 12,-16 12,16" style="fill:#000000;stroke:none;"
+				id="Speisewasserpumpe-p2" />
+		</g>
+		<polyline id="vorwaerme" transform="translate(216,291)"
+			style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:miter;" 
+			points=" 0,0 40,0 40,5 0,5 0,10 40,10 40,15 0,15 0,20 40,20 40,25 0,25 0,30 40,30 40,35 0,35 0,40 40,40 40,0 0,0 0,40 "/>
+		<g transform="translate(300,275)"
+			id="coolingsystem">
+			<path
+				d="M 409.1,89.8 L 409.1,26.2 C 409.1,26.2 407.8,14.4 397.3,14.4 C 273.7,14.4 150.2,14.4 26.6,14.4 C 20.1,14.4 20.3,28.6 26.6,28.6 L 367.1,28.6 C 391.2,28.6 391.2,52.7 391.2,52.7 L 391.2,89.9 L 376.8,89.9 L 376.8,52.7 C 376.8,52.7 376,42.7 366.9,42.7 L 24.8,42.7 C 0.4,42.7 0,0 26,0 L 397.8,0 C 421.8,0 423.1,25.2 423.1,25.2 L 423.1,89.8 L 409.1,89.8 z"
+				style="fill:#96aebe;stroke:#000000"
+				id="coolingwatertube" />
+			<g  transform="translate(215,36)">
+				<circle cx="0" cy="0" r="13" style="fill:#96aebe;stroke:#000000;stroke-width:1" />
+				<polygon points="-10,0 4,-8 4,8" style="fill:#000000;stroke:none;" />
+			</g>
+			<path
+				d="M 150.4,36 L 120,36"
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="coolingArrow1" />
+			<path
+				d="M 180.4,7 L 220,7"
+				style="fill:none;stroke:#000000;stroke-width:1;marker-end:url(#Arrow2Mend);"
+				id="coolingArrow2" />
+		</g>
+	</g>
+
+	<g style="fill-opacity:1; stroke-miterlimit:4; stroke-dashoffset:0; stroke-dasharray:none; stroke-opacity:1; stroke-linejoin:miter; stroke-linecap:butt;"
+		id="textlayer">
+		<g  style="fill:#000000;stroke:none;" id="Numbers">
+			<g transform="translate(40,70)">
+				<line
+					x1="0" y1="0" x2="14" y2="29"
+					style="fill:none;stroke:#000000;stroke-width:1;"
+					id="Connect1" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M 0.96,7.8 L -1.15,7.8 L -1.15,-5.7 C -1.66,-5.2 -2.33,-4.7 -3.15,-4.2 C -3.98,-3.7 -4.72,-3.3 -5.37,-3.1 L -5.37,-5.1 C -4.19,-5.7 -3.16,-6.4 -2.28,-7.2 C -1.4,-8 -0.77,-8.7 -0.4,-9.5 L 0.96,-9.5 L 0.96,7.8 z"
+					id="Number1" />
+			</g>
+			<g transform="translate(26,200)">
+				<line
+					x1="0" y1="0" x2="42" y2="10"
+					style="fill:none;stroke:#000000;stroke-width:1;"
+					id="Connect2" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M 5.27,5.7 L 5.27,7.8 L -6.09,7.8 C -6.1,7.2 -6.02,6.8 -5.84,6.3 C -5.55,5.5 -5.09,4.8 -4.45,4 C -3.82,3.3 -2.9,2.4 -1.69,1.4 C 0.17,-0.1 1.44,-1.3 2.09,-2.2 C 2.75,-3.1 3.08,-4 3.08,-4.8 C 3.08,-5.6 2.78,-6.3 2.18,-6.9 C 1.58,-7.5 0.8,-7.7 -0.16,-7.7 C -1.18,-7.7 -1.99,-7.4 -2.6,-6.8 C -3.21,-6.2 -3.52,-5.4 -3.52,-4.3 L -5.69,-4.5 C -5.54,-6.1 -4.98,-7.4 -4.02,-8.2 C -3.05,-9.1 -1.75,-9.5 -0.11,-9.5 C 1.54,-9.5 2.84,-9 3.8,-8.1 C 4.76,-7.2 5.24,-6.1 5.24,-4.7 C 5.24,-4 5.1,-3.4 4.82,-2.7 C 4.54,-2 4.07,-1.3 3.42,-0.6 C 2.77,0.1 1.69,1.1 0.17,2.4 C -1.1,3.5 -1.91,4.2 -2.27,4.6 C -2.63,5 -2.93,5.3 -3.16,5.7 L 5.27,5.7 z"
+					id="Number2" />
+			</g>
+			<g transform="translate(26,240)">
+				<line x1="0" y1="0" x2="58" y2="10"
+					style="fill:none;stroke:#000000;stroke-width:1;"
+					id="Connect3" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.9,4.2 L -3.79,3.9 C -3.55,5.1 -3.14,5.9 -2.56,6.5 C -1.97,7 -1.26,7.3 -0.43,7.3 C 0.57,7.3 1.4,6.9 2.09,6.2 C 2.77,5.5 3.11,4.7 3.11,3.7 C 3.11,2.7 2.8,1.9 2.16,1.3 C 1.53,0.6 0.73,0.3 -0.25,0.3 C -0.65,0.3 -1.15,0.4 -1.74,0.6 L -1.51,-1.3 C -1.37,-1.3 -1.25,-1.3 -1.17,-1.3 C -0.27,-1.3 0.54,-1.5 1.26,-2 C 1.98,-2.4 2.34,-3.2 2.34,-4.1 C 2.34,-4.9 2.08,-5.6 1.55,-6.1 C 1.03,-6.6 0.35,-6.8 -0.47,-6.8 C -1.3,-6.8 -1.98,-6.6 -2.53,-6.1 C -3.07,-5.5 -3.42,-4.8 -3.58,-3.7 L -5.69,-4.1 C -5.43,-5.5 -4.85,-6.6 -3.93,-7.4 C -3.02,-8.2 -1.88,-8.6 -0.52,-8.6 C 0.42,-8.6 1.28,-8.4 2.07,-8 C 2.86,-7.6 3.46,-7 3.88,-6.3 C 4.3,-5.6 4.51,-4.9 4.51,-4.1 C 4.51,-3.4 4.31,-2.7 3.91,-2.1 C 3.51,-1.5 2.92,-1 2.14,-0.6 C 3.15,-0.4 3.94,0.1 4.51,0.8 C 5.07,1.6 5.35,2.5 5.35,3.6 C 5.35,5.1 4.8,6.4 3.71,7.4 C 2.62,8.5 1.23,9 -0.44,9 C -1.95,9 -3.2,8.5 -4.2,7.6 C -5.19,6.8 -5.76,5.6 -5.9,4.2 L -5.9,4.2 z"
+					id="Number3" />
+			</g>
+			<g transform="translate(26,340)">
+				<line x1="0" y1="0" x2="32" y2="12" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect4" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M 1.51,8.6 L 1.51,4.5 L -5.94,4.5 L -5.94,2.6 L 1.9,-8.6 L 3.62,-8.6 L 3.62,2.6 L 5.94,2.6 L 5.94,4.5 L 3.62,4.5 L 3.62,	8.6 L 1.51,8.6 z M 1.51,2.6 L 1.51,-5.2 L -3.87,2.6 L 1.51,2.6 z"	
+					id="Number4" />
+			</g>
+
+			<g transform="translate(50,380)">
+				<line x1="0" y1="0" x2="30" y2="-30" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect5" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.7,3.8 L -3.48,3.6 C -3.32,4.7 -2.94,5.5 -2.34,6.1 C -1.74,6.6 -1.02,6.9 -0.17,6.9 C 0.85,6.9 1.71,6.5 2.41,5.7 C 3.11,5 3.46,4 3.46,2.7 C 3.46,1.5 3.13,0.5 2.45,-0.2 C 1.78,-0.8 0.89,-1.2 -0.2,-1.2 C -0.88,-1.2 -1.51,-1 -2.05,-0.7 C -2.6,-0.4 -3.03,0 -3.34,0.5 L -5.32,0.2 L -3.66,-8.6 L 4.89,-8.6 L 4.89,-6.6 L -1.97,-6.6 L -2.9,-2 C -1.87,-2.7 -0.77,-3.1 0.36,-3.1 C 1.86,-3.1 3.13,-2.5 4.16,-1.5 C 5.19,-0.5 5.7,0.9 5.7,2.5 C 5.7,4.1 5.25,5.4 4.34,6.5 C 3.24,7.9 1.74,8.6 -0.17,8.6 C -1.74,8.6 -3.02,8.2 -4,7.3 C -4.99,6.4 -5.56,5.3 -5.7,3.8 L -5.7,3.8 z"
+				id="Number5" />
+			</g>
+
+			<g transform="translate(220,105)">
+				<line x1="0" y1="0" x2="0" y2="30" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect6" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M 5.3,-4.45 L 3.3,-4.35 C 3.1,-5.15 2.8,-5.75 2.5,-6.15 C 1.9,-6.75 1.2,-7.05 0.3,-7.05 C -0.3,-7.05 -0.9,-6.85 -1.4,-6.45 C -2.1,-5.95 -2.6,-5.25 -3,-4.35 C -3.4,-3.45 -3.6,-2.05 -3.6,-0.35 C -3.1,-1.15 -2.5,-1.75 -1.7,-2.05 C -1,-2.45 -0.2,-2.65 0.6,-2.65 C 2,-2.65 3.2,-2.15 4.2,-1.05 C 5.2,-0.05 5.7,1.25 5.7,2.95 C 5.7,3.95 5.4,5.05 5,5.95 C 4.5,6.85 3.9,7.55 3,8.05 C 2.2,8.55 1.3,8.75 0.3,8.75 C -1.5,8.75 -2.9,8.15 -4,6.85 C -5.1,5.55 -5.7,3.45 -5.7,0.45 C -5.7,-2.85 -5.1,-5.25 -3.9,-6.75 C -2.8,-8.05 -1.3,-8.75 0.5,-8.75 C 1.8,-8.75 2.9,-8.35 3.8,-7.65 C 4.7,-6.85 5.2,-5.85 5.3,-4.45 L 5.3,-4.45 z M -3.3,2.95 C -3.3,3.65 -3.1,4.35 -2.8,5.05 C -2.5,5.65 -2.1,6.15 -1.5,6.55 C -1,6.85 -0.4,7.05 0.2,7.05 C 1.1,7.05 1.9,6.65 2.5,5.95 C 3.2,5.25 3.5,4.25 3.5,3.05 C 3.5,1.85 3.2,0.95 2.5,0.25 C 1.9,-0.45 1.1,-0.75 0.2,-0.75 C -0.8,-0.75 -1.6,-0.45 -2.3,0.25 C -2.9,0.95 -3.3,1.85 -3.3,2.95 L -3.3,2.95 z"
+				id="Number6" />
+			</g>
+
+			<g transform="translate(220,232)">
+				<line x1="0" y1="0" x2="0" y2="30" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect7" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.55,-6.45 L -5.55,-8.45 L 5.55,-8.45 L 5.55,-6.85 C 4.45,-5.65 3.35,-4.15 2.25,-2.25 C 1.25,-0.25 0.35,1.65 -0.25,3.75 C -0.65,5.15 -0.95,6.75 -1.05,8.45 L -3.15,8.45 C -3.15,7.15 -2.85,5.45 -2.35,3.55 C -1.85,1.65 -1.15,-0.25 -0.25,-1.95 C 0.75,-3.75 1.75,-5.25 2.85,-6.45 L -5.55,-6.45 z"
+					id="Number7" />
+			</g>
+
+			<g transform="translate(260,250)">
+				<line x1="0" y1="0" x2="30" y2="-30" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect8" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -2.35,-0.85 C -3.25,-1.15 -3.85,-1.65 -4.25,-2.25 C -4.75,-2.85 -4.95,-3.55 -4.95,-4.35 C -4.95,-5.55 -4.45,-6.65 -3.55,-7.45 C -2.65,-8.35 -1.45,-8.75 0.05,-8.75 C 1.55,-8.75 2.75,-8.35 3.65,-7.45 C 4.55,-6.55 4.95,-5.55 4.95,-4.25 C 4.95,-3.45 4.75,-2.75 4.35,-2.25 C 3.95,-1.65 3.35,-1.15 2.45,-0.85 C 3.55,-0.45 4.35,0.05 4.85,0.85 C 5.45,1.55 5.65,2.55 5.65,3.55 C 5.65,5.05 5.15,6.25 4.15,7.25 C 3.15,8.25 1.75,8.75 0.05,8.75 C -1.65,8.75 -3.05,8.25 -4.05,7.25 C -5.15,6.25 -5.65,5.05 -5.65,3.55 C -5.65,2.35 -5.35,1.45 -4.75,0.75 C -4.25,-0.05 -3.35,-0.55 -2.35,-0.85 L -2.35,-0.85 z M -2.75,-4.45 C -2.75,-3.55 -2.55,-2.95 -1.95,-2.45 C -1.45,-1.95 -0.75,-1.65 0.05,-1.65 C 0.85,-1.65 1.55,-1.95 2.05,-2.45 C 2.55,-2.95 2.85,-3.55 2.85,-4.25 C 2.85,-5.05 2.55,-5.75 2.05,-6.25 C 1.45,-6.75 0.85,-7.05 0.05,-7.05 C -0.75,-7.05 -1.45,-6.75 -1.95,-6.25 C -2.55,-5.75 -2.75,-5.15 -2.75,-4.45 L -2.75,-4.45 z M -3.45,3.55 C -3.45,4.15 -3.35,4.75 -3.05,5.25 C -2.75,5.85 -2.35,6.25 -1.75,6.55 C -1.15,6.85 -0.55,7.05 0.05,7.05 C 1.05,7.05 1.95,6.75 2.55,6.05 C 3.25,5.45 3.55,4.55 3.55,3.55 C 3.55,2.55 3.25,1.75 2.55,1.05 C 1.85,0.45 1.05,0.05 -0.05,0.05 C -1.05,0.05 -1.85,0.45 -2.45,1.05 C -3.15,1.75 -3.45,2.55 -3.45,3.55 z"
+					id="Number8" />
+			</g>
+
+			<g transform="translate(410,150)">
+				<line x1="0" y1="0" x2="0" y2="40" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect9" />
+				<circle cx="0" cy="0" r="10" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.35,4.55 L -3.25,4.35 C -3.15,5.25 -2.75,5.95 -2.25,6.45 C -1.85,6.85 -1.15,7.05 -0.45,7.05 C 0.25,7.05 0.75,6.95 1.25,6.65 C 1.75,6.35 2.15,5.95 2.45,5.45 C 2.75,4.95 3.05,4.25 3.25,3.45 C 3.45,2.55 3.55,1.75 3.55,0.85 C 3.55,0.75 3.55,0.55 3.55,0.45 C 3.15,1.05 2.55,1.65 1.85,2.05 C 1.15,2.45 0.35,2.65 -0.55,2.65 C -1.95,2.65 -3.15,2.15 -4.15,1.15 C -5.15,0.05 -5.65,-1.25 -5.65,-2.95 C -5.65,-4.65 -5.15,-6.05 -4.05,-7.15 C -3.05,-8.25 -1.75,-8.75 -0.25,-8.75 C 0.85,-8.75 1.95,-8.45 2.85,-7.85 C 3.75,-7.25 4.45,-6.35 4.95,-5.25 C 5.45,-4.15 5.65,-2.55 5.65,-0.45 C 5.65,1.75 5.45,3.55 4.95,4.85 C 4.45,6.15 3.75,7.05 2.85,7.75 C 1.85,8.45 0.75,8.75 -0.45,8.75 C -1.85,8.75 -2.95,8.45 -3.75,7.65 C -4.65,6.95 -5.15,5.85 -5.35,4.55 L -5.35,4.55 z M 3.35,-3.05 C 3.35,-4.25 3.05,-5.25 2.35,-5.95 C 1.75,-6.65 0.95,-7.05 0.05,-7.05 C -0.95,-7.05 -1.75,-6.65 -2.45,-5.85 C -3.15,-5.05 -3.45,-4.05 -3.45,-2.85 C -3.45,-1.75 -3.15,-0.85 -2.45,-0.25 C -1.85,0.45 -0.95,0.85 -0.05,0.85 C 0.95,0.85 1.75,0.45 2.35,-0.25 C 3.05,-0.85 3.35,-1.85 3.35,-3.05 z"
+					id="Number9" />
+			</g>
+			<g transform="translate(500,150)">
+				<line x1="0" y1="0" x2="0" y2="40" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect10" />
+				<rect x="-18" y="-10" width="36" rx="10" ry="10" height="20" style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.15,8.45 L -7.25,8.45 L -7.25,-4.95 C -7.75,-4.45 -8.45,-4.05 -9.25,-3.55 C -10.05,-3.05 -10.85,-2.65 -11.45,-2.45 L -11.45,-4.45 C -10.35,-5.05 -9.25,-5.65 -8.45,-6.45 C -7.55,-7.25 -6.85,-8.05 -6.55,-8.75 L -5.15,-8.75 L -5.15,8.45 z M 0.25,-0.05 C 0.25,-2.05 0.45,-3.65 0.85,-4.95 C 1.25,-6.15 1.95,-7.05 2.75,-7.75 C 3.55,-8.45 4.55,-8.75 5.85,-8.75 C 6.75,-8.75 7.55,-8.55 8.25,-8.25 C 8.95,-7.85 9.55,-7.35 9.95,-6.65 C 10.45,-5.95 10.85,-5.05 11.05,-4.05 C 11.35,-3.05 11.45,-1.75 11.45,-0.05 C 11.45,2.05 11.25,3.65 10.85,4.85 C 10.45,6.15 9.75,7.05 8.95,7.75 C 8.15,8.45 7.15,8.75 5.85,8.75 C 4.15,8.75 2.85,8.15 1.95,6.95 C 0.85,5.55 0.25,3.25 0.25,-0.05 L 0.25,-0.05 z M 2.45,-0.05 C 2.45,2.85 2.75,4.65 3.45,5.65 C 4.05,6.55 4.85,7.05 5.85,7.05 C 6.85,7.05 7.65,6.55 8.25,5.65 C 8.95,4.65 9.25,2.85 9.25,-0.05 C 9.25,-2.85 8.95,-4.75 8.25,-5.65 C 7.65,-6.55 6.85,-7.05 5.85,-7.05 C 4.85,-7.05 4.05,-6.65 3.55,-5.85 C 2.75,-4.75 2.45,-2.85 2.45,-0.05 z"
+					id="Number10" />
+			</g>
+
+			<g transform="translate(560,150)">
+				<line x1="0" y1="0" x2="0" y2="50" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect11" />
+				<rect x="-18" y="-10" width="36" rx="10" ry="10" height="20"  style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -3.55,8.65 L -5.65,8.65 L -5.65,-4.85 C -6.15,-4.35 -6.85,-3.85 -7.65,-3.35 C -8.45,-2.95 -9.25,-2.55 -9.85,-2.25 L -9.85,-4.35 C -8.75,-4.85 -7.65,-5.55 -6.75,-6.35 C -5.95,-7.15 -5.25,-7.95 -4.95,-8.65 L -3.55,-8.65 L -3.55,8.65 z M 9.85,8.65 L 7.65,8.65 L 7.65,-4.85 C 7.15,-4.35 6.55,-3.85 5.65,-3.35 C 4.85,-2.95 4.15,-2.55 3.45,-2.25 L 3.45,-4.35 C 4.65,-4.85 5.65,-5.55 6.55,-6.35 C 7.45,-7.15 8.05,-7.95 8.45,-8.65 L 9.85,-8.65 L 9.85,8.65 z"
+				id="Number11" />
+			</g>
+
+			<g transform="translate(420,370)">
+				<line x1="0" y1="0" x2="0" y2="-40" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect12" />
+				<rect x="-18" y="-10" width="36" rx="10" ry="10" height="20"  style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.1,8.6 L -7.2,8.6 L -7.2,-4.8 C -7.7,-4.3 -8.4,-3.9 -9.2,-3.4 C -10,-2.9 -10.8,-2.5 -11.4,-2.3 L -11.4,-4.3 C -10.2,-4.9 -9.2,-5.5 -8.3,-6.3 C -7.4,-7.1 -6.8,-7.9 -6.5,-8.6 L -5.1,-8.6 L -5.1,8.6 z M 11.4,6.6 L 11.4,8.6 L 0.1,8.6 C 0,8.1 0.1,7.6 0.3,7.2 C 0.6,6.4 1.1,5.6 1.7,4.9 C 2.3,4.1 3.2,3.3 4.4,2.3 C 6.3,0.7 7.6,-0.5 8.2,-1.4 C 8.9,-2.3 9.2,-3.1 9.2,-3.9 C 9.2,-4.7 8.9,-5.4 8.3,-6 C 7.7,-6.6 6.9,-6.9 6,-6.9 C 5,-6.9 4.2,-6.6 3.5,-6 C 2.9,-5.4 2.6,-4.5 2.6,-3.4 L 0.5,-3.7 C 0.6,-5.3 1.2,-6.5 2.1,-7.4 C 3.1,-8.2 4.4,-8.6 6,-8.6 C 7.7,-8.6 9,-8.2 9.9,-7.3 C 10.9,-6.3 11.4,-5.2 11.4,-3.9 C 11.4,-3.2 11.2,-2.5 11,-1.8 C 10.7,-1.2 10.2,-0.5 9.6,0.3 C 8.9,1 7.8,2 6.3,3.3 C 5,4.4 4.2,5.1 3.9,5.5 C 3.5,5.8 3.2,6.2 3,6.6 L 11.4,6.6 z"
+					id="Number12" />
+			</g>
+
+			<g transform="translate(600,358)">
+				<line x1="0" y1="0" x2="0" y2="-40" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect13" />
+				<rect x="-18" y="-10" width="36" rx="10" ry="10" height="20"  style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.2,8.45 L -7.3,8.45 L -7.3,-4.95 C -7.8,-4.45 -8.5,-4.05 -9.3,-3.55 C -10.1,-3.05 -10.9,-2.65 -11.5,-2.45 L -11.5,-4.45 C -10.3,-5.05 -9.3,-5.65 -8.4,-6.45 C -7.5,-7.25 -6.9,-8.05 -6.6,-8.75 L -5.2,-8.75 L -5.2,8.45 z M 0.2,3.95 L 2.3,3.65 C 2.6,4.85 3,5.75 3.6,6.25 C 4.2,6.75 4.9,7.05 5.7,7.05 C 6.7,7.05 7.5,6.65 8.2,5.95 C 8.9,5.35 9.2,4.45 9.2,3.45 C 9.2,2.45 8.9,1.65 8.3,1.05 C 7.7,0.45 6.9,0.15 5.9,0.15 C 5.5,0.15 5,0.15 4.4,0.35 L 4.6,-1.55 C 4.8,-1.55 4.9,-1.45 5,-1.45 C 5.9,-1.45 6.7,-1.75 7.4,-2.15 C 8.1,-2.65 8.5,-3.35 8.5,-4.35 C 8.5,-5.15 8.2,-5.75 7.7,-6.25 C 7.2,-6.75 6.5,-7.05 5.7,-7.05 C 4.8,-7.05 4.1,-6.75 3.6,-6.25 C 3.1,-5.75 2.7,-4.95 2.5,-3.95 L 0.4,-4.35 C 0.7,-5.75 1.3,-6.85 2.2,-7.65 C 3.1,-8.35 4.2,-8.75 5.6,-8.75 C 6.5,-8.75 7.4,-8.55 8.2,-8.15 C 9,-7.75 9.6,-7.25 10,-6.55 C 10.4,-5.85 10.6,-5.05 10.6,-4.35 C 10.6,-3.55 10.4,-2.85 10,-2.25 C 9.6,-1.65 9,-1.15 8.3,-0.85 C 9.3,-0.65 10.1,-0.15 10.6,0.65 C 11.2,1.35 11.5,2.25 11.5,3.35 C 11.5,4.85 10.9,6.15 9.8,7.25 C 8.7,8.25 7.4,8.75 5.7,8.75 C 4.2,8.75 2.9,8.35 1.9,7.45 C 0.9,6.55 0.4,5.35 0.2,3.95 L 0.2,3.95 z"
+					id="Number13" />
+			</g>
+
+			<g transform="translate(220,380)">
+				<line x1="0" y1="0" x2="0" y2="-60" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect14" />
+				<rect x="-13" y="-10" width="26" height="20"  style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.15,8.6 L -7.25,8.6 L -7.25,-4.8 C -7.75,-4.3 -8.45,-3.9 -9.25,-3.4 C -10.15,-2.9 -10.85,-2.5 -11.45,-2.3 L -11.45,-4.3 C -10.35,-4.9 -9.25,-5.5 -8.45,-6.3 C -7.55,-7.1 -6.85,-7.9 -6.55,-8.6 L -5.15,-8.6 L -5.15,8.6 z M 7.05,8.6 L 7.05,4.5 L -0.45,4.5 L -0.45,2.6 L 7.35,-8.6 L 9.15,-8.6 L 9.15,2.6 L 11.45,2.6 L 11.45,4.5 L 9.15,4.5 L 9.15,8.6 L 7.05,8.6 z M 7.05,2.6 L 7.05,-5.2 L 1.65,2.6 L 7.05,2.6 z"
+					id="Number14" />
+			</g>
+
+			<g transform="translate(250,400)">
+				<line x1="0" y1="0" x2="20" y2="-20" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect15" />
+				<rect x="-13" y="-10" width="26" height="20"  style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.2,8.5 L -7.3,8.5 L -7.3,-5 C -7.8,-4.5 -8.5,-4 -9.3,-3.5 C -10.2,-3 -10.9,-2.7 -11.6,-2.4 L -11.6,-4.5 C -10.4,-5 -9.3,-5.7 -8.5,-6.5 C -7.6,-7.3 -7,-8 -6.6,-8.8 L -5.2,-8.8 L -5.2,8.5 z M 0.2,4 L 2.4,3.8 C 2.6,4.9 2.9,5.7 3.5,6.2 C 4.1,6.8 4.9,7 5.7,7 C 6.7,7 7.6,6.7 8.3,5.9 C 9,5.1 9.3,4.1 9.3,2.8 C 9.3,1.6 9,0.7 8.3,0 C 7.6,-0.7 6.8,-1.1 5.7,-1.1 C 5,-1.1 4.4,-0.9 3.8,-0.6 C 3.3,-0.3 2.9,0.1 2.5,0.6 L 0.6,0.4 L 2.2,-8.5 L 10.8,-8.5 L 10.8,-6.5 L 3.9,-6.5 L 3,-1.8 C 4,-2.6 5.1,-2.9 6.2,-2.9 C 7.7,-2.9 9,-2.4 10,-1.4 C 11.1,-0.3 11.6,1 11.6,2.7 C 11.6,4.2 11.1,5.5 10.2,6.7 C 9.1,8.1 7.6,8.8 5.7,8.8 C 4.1,8.8 2.9,8.3 1.9,7.5 C 0.9,6.6 0.3,5.4 0.2,4 L 0.2,4 z"
+					id="Number15" />
+			</g>
+
+			<g transform="translate(514,364)">
+				<line x1="0" y1="0" x2="0" y2="-40" style="fill:#000000;stroke:#000000;stroke-width:1;"
+					id="Connect16" />
+				<rect x="-13" y="-10" width="26" height="20"  style="fill:#ffffff; stroke:none;" />
+				<path
+					d="M -5.2,8.45 L -7.3,8.45 L -7.3,-4.95 C -7.8,-4.45 -8.5,-4.05 -9.3,-3.55 C -10.1,-3.05 -10.9,-2.65 -11.5,-2.45 L -11.5,-4.45 C -10.3,-5.05 -9.3,-5.65 -8.4,-6.45 C -7.5,-7.25 -6.9,-8.05 -6.5,-8.75 L -5.2,-8.75 L -5.2,8.45 z M 11.2,-4.55 L 9.1,-4.35 C 8.9,-5.15 8.6,-5.75 8.3,-6.15 C 7.7,-6.75 7,-7.05 6.2,-7.05 C 5.5,-7.05 4.9,-6.85 4.4,-6.45 C 3.7,-5.95 3.2,-5.25 2.8,-4.35 C 2.4,-3.45 2.2,-2.15 2.2,-0.35 C 2.7,-1.15 3.4,-1.75 4.1,-2.15 C 4.8,-2.45 5.6,-2.65 6.4,-2.65 C 7.8,-2.65 9,-2.15 10,-1.15 C 11,-0.05 11.5,1.25 11.5,2.85 C 11.5,3.95 11.2,4.95 10.8,5.85 C 10.3,6.85 9.7,7.55 8.9,8.05 C 8,8.55 7.1,8.75 6.1,8.75 C 4.3,8.75 2.9,8.15 1.8,6.85 C 0.7,5.55 0.1,3.45 0.1,0.45 C 0.1,-2.85 0.7,-5.35 2,-6.85 C 3,-8.15 4.5,-8.75 6.3,-8.75 C 7.6,-8.75 8.8,-8.45 9.6,-7.65 C 10.5,-6.85 11,-5.85 11.2,-4.55 L 11.2,-4.55 z M 2.6,2.95 C 2.6,3.65 2.7,4.35 3,4.95 C 3.3,5.65 3.8,6.15 4.3,6.55 C 4.9,6.85 5.5,7.05 6.1,7.05 C 7,7.05 7.7,6.65 8.4,5.95 C 9,5.25 9.3,4.25 9.3,3.05 C 9.3,1.85 9,0.85 8.4,0.25 C 7.7,-0.45 6.9,-0.85 6,-0.85 C 5,-0.85 4.2,-0.45 3.6,0.25 C 2.9,0.85 2.6,1.75 2.6,2.95 L 2.6,2.95 z"
+					id="Number16" />
+			</g>
+
+			<g transform="translate(450,70)">
+				<path
+					d="M -5.2,8.65 L -7.3,8.65 L -7.3,-4.85 C -7.8,-4.35 -8.4,-3.85 -9.3,-3.35 C -10.1,-2.85 -10.8,-2.55 -11.5,-2.25 L -11.5,-4.35 C -10.3,-4.85 -9.3,-5.55 -8.4,-6.35 C -7.5,-7.15 -6.9,-7.85 -6.5,-8.65 L -5.2,-8.65 L -5.2,8.65 z M 0.4,-6.35 L 0.4,-8.35 L 11.5,-8.35 L 11.5,-6.65 C 10.4,-5.55 9.3,-3.95 8.3,-2.05 C 7.2,-0.15 6.4,1.85 5.8,3.95 C 5.4,5.35 5.1,6.95 5,8.65 L 2.8,8.65 C 2.8,7.25 3.1,5.65 3.6,3.75 C 4.1,1.85 4.8,-0.05 5.8,-1.85 C 6.7,-3.55 7.7,-5.05 8.8,-6.35 L 0.4,-6.35 z"
+					id="Number17" />
+			</g>
+
+			<g transform="translate(600,245)">
+				<path
+					style="fill:#000000;stroke:none;"
+					d="M -5.2,8.45 L -7.3,8.45 L -7.3,-4.95 C -7.8,-4.45 -8.5,-3.95 -9.3,-3.45 C -10.2,-3.05 -10.9,-2.65 -11.5,-2.45 L -11.5,-4.45 C -10.4,-4.95 -9.3,-5.65 -8.5,-6.45 C -7.6,-7.25 -6.9,-8.05 -6.6,-8.75 L -5.2,-8.75 L -5.2,8.45 z M 3.4,-0.85 C 2.6,-1.15 1.9,-1.65 1.5,-2.15 C 1.1,-2.75 0.9,-3.45 0.9,-4.35 C 0.9,-5.55 1.3,-6.65 2.2,-7.45 C 3.1,-8.35 4.3,-8.75 5.8,-8.75 C 7.3,-8.75 8.5,-8.35 9.4,-7.45 C 10.3,-6.55 10.8,-5.55 10.8,-4.25 C 10.8,-3.45 10.6,-2.75 10.2,-2.15 C 9.7,-1.55 9.1,-1.15 8.3,-0.85 C 9.3,-0.45 10.1,0.05 10.7,0.85 C 11.2,1.65 11.5,2.55 11.5,3.55 C 11.5,5.05 11,6.25 9.9,7.25 C 8.9,8.25 7.5,8.75 5.8,8.75 C 4.1,8.75 2.8,8.25 1.7,7.25 C 0.7,6.25 0.2,5.05 0.2,3.55 C 0.2,2.45 0.5,1.45 1,0.75 C 1.6,-0.05 2.4,-0.55 3.4,-0.85 L 3.4,-0.85 z M 3,-4.35 C 3,-3.55 3.3,-2.95 3.8,-2.45 C 4.3,-1.85 5,-1.65 5.8,-1.65 C 6.7,-1.65 7.3,-1.85 7.8,-2.35 C 8.4,-2.95 8.6,-3.55 8.6,-4.25 C 8.6,-5.05 8.4,-5.75 7.8,-6.25 C 7.3,-6.75 6.6,-7.05 5.8,-7.05 C 5,-7.05 4.3,-6.75 3.8,-6.25 C 3.3,-5.75 3,-5.15 3,-4.35 L 3,-4.35 z M 2.3,3.55 C 2.3,4.15 2.5,4.75 2.8,5.25 C 3.1,5.85 3.5,6.25 4,6.55 C 4.6,6.85 5.2,7.05 5.9,7.05 C 6.9,7.05 7.7,6.75 8.3,6.05 C 9,5.45 9.3,4.65 9.3,3.65 C 9.3,2.55 9,1.75 8.3,1.05 C 7.6,0.45 6.8,0.05 5.8,0.05 C 4.8,0.05 4,0.45 3.3,1.05 C 2.7,1.75 2.3,2.55 2.3,3.55 z"
+					id="Number18" />
+			</g>
+		</g>
+		<g transform="translate(650,10)"
+			style="fill:#000000;stroke:none;font-family:Arial, sans-serif;font-size:11px;" id="textdata">
+			<text>
+				<tspan x="6" y="0"  >1 reactor vessel</tspan>
+				<tspan x="6" y="14" >2 fuel core element</tspan>
+				<tspan x="6" y="28" >3 control rod element</tspan>
+				<tspan x="6" y="42" >4 circulation pumps</tspan>
+				<tspan x="6" y="56" >5 control rod motors</tspan>
+				<tspan x="6" y="70" >6 steam</tspan>
+				<tspan x="6" y="84" >7 inlet circulation water</tspan>
+				<tspan x="6" y="98" >8 high pressure turbine</tspan>
+				<tspan x="6" y="112">9 low pressure turbine</tspan>
+				<tspan x="0" y="126">10 electric generator</tspan>
+				<tspan x="0" y="140">11 electrical generator exciter</tspan>
+				<tspan x="0" y="154">12 steam condenser</tspan>
+				<tspan x="0" y="168">13 cold water for condenser</tspan>
+				<tspan x="0" y="182">14 pre-warmer</tspan>
+				<tspan x="0" y="196">15 water circulation pump</tspan>
+				<tspan x="0" y="210">16 condenser cold water pump</tspan>
+				<tspan x="0" y="224">17 concrete chamber</tspan>
+				<tspan x="0" y="238">18 connection to electricity grid</tspan>
+			</text>
+		</g>
+	</g>
+<!--
+		1 reactor vessel
+		2 fuel core element
+		3 control rod element
+		4 circulation pumps
+		5 control rod motors
+		6 steam
+		7 inlet circulation water
+		8 high pressure turbine
+		9 low pressure turbine
+		10 electric generator
+		11 electrical generator exciter
+		12 steam condenser
+		13 cold water for condenser
+		14 pre-warmer
+		15 water circulation pump
+		16 condenser cold water pump
+		17 concrete chamber
+		18 connection to electricity grid 
+-->
+</svg>

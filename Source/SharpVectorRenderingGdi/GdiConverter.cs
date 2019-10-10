@@ -71,6 +71,16 @@ namespace SharpVectors.Renderers
             {
                 return Color.Empty;
             }
+            if (color.HasAlpha)
+            {
+                double dAlpha = color.Alpha.GetFloatValue(color.Alpha.PrimitiveType == CssPrimitiveType.Percentage ?
+                    CssPrimitiveType.Number : CssPrimitiveType.Percentage);
+                if (!double.IsNaN(dAlpha) && !double.IsInfinity(dAlpha))
+                {
+                    return Color.FromArgb(Convert.ToInt32(dAlpha), Convert.ToInt32(dRed),
+                        Convert.ToInt32(dGreen), Convert.ToInt32(dBlue));
+                }
+            }
 
             return Color.FromArgb(Convert.ToInt32(dRed), Convert.ToInt32(dGreen), Convert.ToInt32(dBlue));
         }

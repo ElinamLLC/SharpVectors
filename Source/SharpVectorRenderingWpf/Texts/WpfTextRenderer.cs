@@ -619,7 +619,6 @@ namespace SharpVectors.Renderers.Texts
             FontStretch fontStretch = GetTextFontStretch(element);
 
             var comparer   = StringComparison.OrdinalIgnoreCase;
-
             var docElement = element.OwnerDocument;
 
             ISet<string> svgFontFamilies = docElement.SvgFontFamilies;
@@ -821,10 +820,10 @@ namespace SharpVectors.Renderers.Texts
                         }
                     }
 
+                    SvgFontElement variantFont = null;
                     // For multiple matches, we will test the variants...
                     if (!string.IsNullOrWhiteSpace(fontVariant))
                     {
-                        SvgFontElement variantFont = null;
                         foreach (var svgFont in svgFonts)
                         {
                             var fontFace = svgFont.FontFace;
@@ -851,17 +850,17 @@ namespace SharpVectors.Renderers.Texts
                             }
                         }
 
-                        if (variantFont != null)
-                        {
-                            // If there was a matching variant but either style or weight not matched...
-                            var fontFamilyInfo = new WpfFontFamilyInfo(variantFont.FontFamily, variantFont,
-                                fontWeight, fontStyle, fontStretch);
+                        //if (variantFont != null)
+                        //{
+                        //    // If there was a matching variant but either style or weight not matched...
+                        //    var fontFamilyInfo = new WpfFontFamilyInfo(variantFont.FontFamily, variantFont,
+                        //        fontWeight, fontStyle, fontStretch);
 
-                            fontFamilyInfo.Variant = fontVariant;
-                            // For rendering that do not support the SVG Fonts...
-                            fontFamilyInfo.Family = altFamily;
-                            return fontFamilyInfo;
-                        }
+                        //    fontFamilyInfo.Variant = fontVariant;
+                        //    // For rendering that do not support the SVG Fonts...
+                        //    fontFamilyInfo.Family = altFamily;
+                        //    return fontFamilyInfo;
+                        //}
                     }
 
                     // For the defined font weights...
@@ -926,7 +925,18 @@ namespace SharpVectors.Renderers.Texts
                         }
                     }
 
-                    // If the variant is not found, return the first match...
+                    if (variantFont != null)
+                    {
+                        // If there was a matching variant but either style or weight not matched...
+                        var fontFamilyInfo = new WpfFontFamilyInfo(variantFont.FontFamily, variantFont,
+                            fontWeight, fontStyle, fontStretch);
+
+                        fontFamilyInfo.Variant = fontVariant;
+                        // For rendering that do not support the SVG Fonts...
+                        fontFamilyInfo.Family = altFamily;
+                        return fontFamilyInfo;
+                    }                    
+                    else // If the variant is not found, return the first match...
                     {
                         var fontFamilyInfo = new WpfFontFamilyInfo(svgFonts[0].FontFamily, svgFonts[0],
                             fontWeight, fontStyle, fontStretch);

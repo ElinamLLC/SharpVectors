@@ -21,7 +21,6 @@ namespace SharpVectors.Renderers.Texts
     {
         #region Private Fields
 
-        private const string DefaultFontFamily = "Arial";
         private const double EmMultiplier      = 100.0;
 
         private ushort[] _glyphIndices;
@@ -47,7 +46,7 @@ namespace SharpVectors.Renderers.Texts
         #region Constructors and Destructor
 
         public WpfGlyphTextBuilder(CultureInfo culture, double fontSize)
-            : this(culture, DefaultFontFamily, fontSize)
+            : this(WpfDrawingSettings.DefaultFontFamily, culture, fontSize)
         {
         }
 
@@ -55,6 +54,28 @@ namespace SharpVectors.Renderers.Texts
             : base(culture, familyInfo.Name, fontSize, null)
         {
             _typeface = new Typeface(familyInfo.Family, familyInfo.Style, familyInfo.Weight, familyInfo.Stretch);
+
+            if (!_typeface.TryGetGlyphTypeface(out _glyphTypeface))
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public WpfGlyphTextBuilder(FontFamily fontFamily, CultureInfo culture, double fontSize)
+            : this(fontFamily, FontStyles.Normal, FontWeights.Normal, culture, fontSize)
+        {
+        }
+
+        public WpfGlyphTextBuilder(FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, 
+            CultureInfo culture, double fontSize)
+            : base(culture, fontFamily.Source, fontSize, null)
+        {
+            if (fontFamily == null)
+            {
+                fontFamily = WpfDrawingSettings.DefaultFontFamily;
+            }
+
+            _typeface = new Typeface(fontFamily, fontStyle, fontWeight, FontStretches.Normal);
 
             if (!_typeface.TryGetGlyphTypeface(out _glyphTypeface))
             {
@@ -273,7 +294,7 @@ namespace SharpVectors.Renderers.Texts
 
             // Approximate the width of the text...
             Rect designRect = _glyphRun.ComputeAlignmentBox();
-            designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
+//            designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
 
             _textWidth = Math.Max(0, designRect.Right);
 
@@ -319,7 +340,7 @@ namespace SharpVectors.Renderers.Texts
 
             Rect designRect = _glyphRun.ComputeAlignmentBox();
 
-            designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
+//            designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
 
             return new Size(Math.Max(0, designRect.Right), Math.Max(0, designRect.Bottom));
         }

@@ -56,10 +56,10 @@ namespace SharpVectors.Renderers.Wpf
             base.BeforeRender(renderer);
 
             WpfDrawingContext context = renderer.Context;
-            _drawGroup = new DrawingGroup();
 
             if (context.Count == 0)
             {
+                _drawGroup = new DrawingGroup();
                 context.Push(_drawGroup);
                 context.Root = _drawGroup;
             }
@@ -71,20 +71,37 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     throw new InvalidOperationException("An existing group is expected.");
                 }
-                if (currentGroup == context.Root && !context.IsFragment)
+
+                if (currentGroup == context.Root)
                 {
-                    SvgObject.SetName(_drawGroup, SvgObject.DrawLayer);
-                    if (context.IncludeRuntime)
+                    if (context.IsFragment)
                     {
-                        SvgLink.SetKey(_drawGroup, SvgObject.DrawLayer);
+                        // Do not add extra layer to fragments...
+                        _drawGroup = currentGroup;
+                    }
+                    else
+                    {
+                        _drawGroup = new DrawingGroup();
+                        SvgObject.SetName(_drawGroup, SvgObject.DrawLayer);
+                        if (context.IncludeRuntime)
+                        {
+                            SvgLink.SetKey(_drawGroup, SvgObject.DrawLayer);
+                        }
+
+                        currentGroup.Children.Add(_drawGroup);
+                        context.Push(_drawGroup);
                     }
                 }
-
-                currentGroup.Children.Add(_drawGroup);
-                context.Push(_drawGroup);
+                else
+                {
+                    _drawGroup = new DrawingGroup();
+                    currentGroup.Children.Add(_drawGroup);
+                    context.Push(_drawGroup);
+                }
             }
             else
             {
+                _drawGroup = new DrawingGroup();
                 DrawingGroup currentGroup = context.Peek();
 
                 if (currentGroup == null)
@@ -226,7 +243,6 @@ namespace SharpVectors.Renderers.Wpf
             {
                 this.AdjustViewbox();
             }
-
             if (_isRoot || context.IsFragment)
             {
                 return;

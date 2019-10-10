@@ -747,7 +747,7 @@ namespace SharpVectors.Runtime
 
                 _bounds = rectBounds;
 
-                if (_offsetX > 0 || _offsetY > 0)
+                if (!_offsetX.Equals(0) || !_offsetY.Equals(0))
                 {
                     offsetTransform   = new TranslateTransform(-_offsetX, -_offsetY);  
                     _displayTransform = new TranslateTransform(_offsetX, _offsetY); // the inverse...
