@@ -138,7 +138,7 @@ namespace SharpVectors.Dom.Css
         public string PrimitiveTypeAsString
         {
             get {
-                switch (PrimitiveType)
+                switch (this.PrimitiveType)
                 {
                     case CssPrimitiveType.Percentage:
                         return "%";
@@ -181,19 +181,19 @@ namespace SharpVectors.Dom.Css
         public override string CssText
         {
             get {
-                if (PrimitiveType == CssPrimitiveType.String)
+                if (this.PrimitiveType == CssPrimitiveType.String)
                 {
                     return "\"" + GetStringValue() + "\"";
                 }
                 return base.CssText;
             }
             set {
-                if (ReadOnly)
+                if (this.ReadOnly)
                 {
                     throw new DomException(DomExceptionType.InvalidModificationErr,
                         "CssPrimitiveValue is read-only");
                 }
-                OnSetCssText(value);
+                this.OnSetCssText(value);
             }
         }
 
@@ -274,7 +274,7 @@ namespace SharpVectors.Dom.Css
 
         protected void SetFloatValue(double floatValue)
         {
-            this._floatValue = floatValue;
+            _floatValue = floatValue;
         }
 
         /// <summary>
@@ -294,40 +294,37 @@ namespace SharpVectors.Dom.Css
             {
                 throw new DomException(DomExceptionType.InvalidAccessErr);
             }
-            else
+            double ret = double.NaN;
+            switch (this.PrimitiveType)
             {
-                double ret = double.NaN;
-                switch (PrimitiveType)
-                {
-                    case CssPrimitiveType.Percentage:
-                        if (unitType == CssPrimitiveType.Percentage) ret = _floatValue;
-                        break;
-                    case CssPrimitiveType.Ms:
-                        if (unitType == CssPrimitiveType.Ms) ret = _floatValue;
-                        else if (unitType == CssPrimitiveType.S) ret = _floatValue / 1000;
-                        break;
-                    case CssPrimitiveType.S:
-                        if (unitType == CssPrimitiveType.Ms) ret = _floatValue * 1000;
-                        else if (unitType == CssPrimitiveType.S) ret = _floatValue;
-                        break;
-                    case CssPrimitiveType.Hz:
-                        if (unitType == CssPrimitiveType.Hz) ret = _floatValue;
-                        else if (unitType == CssPrimitiveType.KHz) ret = _floatValue / 1000;
-                        break;
-                    case CssPrimitiveType.KHz:
-                        if (unitType == CssPrimitiveType.Hz) ret = _floatValue * 1000;
-                        else if (unitType == CssPrimitiveType.KHz) ret = _floatValue;
-                        break;
-                    case CssPrimitiveType.Dimension:
-                        if (unitType == CssPrimitiveType.Dimension) ret = _floatValue;
-                        break;
-                }
-                if (double.IsNaN(ret))
-                {
-                    throw new DomException(DomExceptionType.InvalidAccessErr);
-                }
-                return ret;
+                case CssPrimitiveType.Percentage:
+                    if (unitType == CssPrimitiveType.Percentage) ret = _floatValue;
+                    break;
+                case CssPrimitiveType.Ms:
+                    if (unitType == CssPrimitiveType.Ms) ret = _floatValue;
+                    else if (unitType == CssPrimitiveType.S) ret = _floatValue / 1000;
+                    break;
+                case CssPrimitiveType.S:
+                    if (unitType == CssPrimitiveType.Ms) ret = _floatValue * 1000;
+                    else if (unitType == CssPrimitiveType.S) ret = _floatValue;
+                    break;
+                case CssPrimitiveType.Hz:
+                    if (unitType == CssPrimitiveType.Hz) ret = _floatValue;
+                    else if (unitType == CssPrimitiveType.KHz) ret = _floatValue / 1000;
+                    break;
+                case CssPrimitiveType.KHz:
+                    if (unitType == CssPrimitiveType.Hz) ret = _floatValue * 1000;
+                    else if (unitType == CssPrimitiveType.KHz) ret = _floatValue;
+                    break;
+                case CssPrimitiveType.Dimension:
+                    if (unitType == CssPrimitiveType.Dimension) ret = _floatValue;
+                    break;
             }
+            if (double.IsNaN(ret))
+            {
+                throw new DomException(DomExceptionType.InvalidAccessErr);
+            }
+            return ret;
         }
 
         /// <summary>
@@ -373,8 +370,8 @@ namespace SharpVectors.Dom.Css
 
             if (ret != null)
                 return ret;
-            else
-                throw new DomException(DomExceptionType.InvalidAccessErr);
+
+            throw new DomException(DomExceptionType.InvalidAccessErr);
         }
 
         /// <summary>
@@ -402,10 +399,10 @@ namespace SharpVectors.Dom.Css
         /// </exception>
         public virtual ICssRect GetRectValue()
         {
-            if (PrimitiveType == CssPrimitiveType.Rect)
+            if (this.PrimitiveType == CssPrimitiveType.Rect)
                 return _rectValue;
-            else
-                throw new DomException(DomExceptionType.InvalidAccessErr);
+
+            throw new DomException(DomExceptionType.InvalidAccessErr);
         }
 
         /// <summary>
@@ -419,10 +416,10 @@ namespace SharpVectors.Dom.Css
         /// </exception>
         public virtual ICssColor GetRgbColorValue()
         {
-            if (PrimitiveType == CssPrimitiveType.RgbColor)
+            if (this.PrimitiveType == CssPrimitiveType.RgbColor)
                 return _colorValue;
-            else
-                throw new DomException(DomExceptionType.InvalidAccessErr);
+
+            throw new DomException(DomExceptionType.InvalidAccessErr);
         }
 
         protected void SetPrimitiveType(CssPrimitiveType type)

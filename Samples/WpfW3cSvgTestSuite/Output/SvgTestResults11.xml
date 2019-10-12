@@ -21,8 +21,8 @@
         <category label="Data Types" total="15" unknowns="15" failures="0" successes="0" partials="0" />
         <category label="Metadata and Others" total="7" unknowns="7" failures="0" successes="0" partials="0" />
     </result>
-    <result version="1.4.0.0" date="2019-10-06T10:23:26.4234098+09:00">
-        <category label="Animations" total="78" unknowns="60" failures="18" successes="0" partials="0" />
+    <result version="1.4.0.0" date="2019-10-12T08:21:14.1680583+09:00">
+        <category label="Animations" total="78" unknowns="0" failures="78" successes="0" partials="0" />
         <category label="Colors" total="6" unknowns="0" failures="0" successes="5" partials="1" />
         <category label="Coordinates and Transforms" total="32" unknowns="0" failures="4" successes="28" partials="0" />
         <category label="Filter Effects" total="43" unknowns="43" failures="0" successes="0" partials="0" />

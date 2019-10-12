@@ -1,15 +1,18 @@
 ## Project Description
-The Scalable Vector Graphics (SVG) is an XML-based standard file format for creating graphics on the web, and is supported by most modern browsers.
+The Scalable Vector Graphics (SVG) is an XML-based standard file format for creating graphics on the web, 
+and is supported by most modern browsers.
 This project provides a C# library for parsing, converting and viewing the SVG files in WPF applications.
 
-The [Scalable Vector Graphics (SVG)](http://en.wikipedia.org/wiki/Scalable_Vector_Graphics) is now natively supported in most internet browsers, including the IE 9. With the HTML5, the use of the SVG as graphics format on the web is increasing. 
+The [Scalable Vector Graphics (SVG)](http://en.wikipedia.org/wiki/Scalable_Vector_Graphics) is now natively supported 
+in most internet browsers, including the IE 9. With the HTML5, the use of the SVG as graphics format on the web is increasing. 
 
-For .NET application developers, there is currently no library complete enough to handle SVG files. Even the commercial tools are either not available or not complete enough to handle most uses of the SVG in Windows Presentation Foundation (WPF) applications.
-The project does not aim to provide a complete implementation of the SVG file format, but will support the features required in an average graphics application.
+For .NET application developers, there is currently no library complete enough to handle SVG files. 
+Even the commercial tools are either not available or not complete enough to handle most uses of the 
+SVG in Windows Presentation Foundation (WPF) applications.
+The project does not aim to provide a complete implementation of the SVG file format, but will support 
+the features required in an average graphics application.
 
 The SVG specifications is available [here](www.w3.org/Graphics/SVG/).
-
-This project is based on the [SharpVectorGraphics (aka SVG#)](http://sourceforge.net/projects/svgdomcsharp/) library. Besides bug fixes and improved feature support, we updated it to .NET 2/.NET 3.5 platform, removing the dependencies on the depreciated script engine libraries and the zip library, SharpZipLib.
 
 ## Features and Uses
 In general, the following features are implemented:
@@ -36,7 +39,16 @@ This is an application for browsing directory (recursively) of SVG files.
 ![](Home_WpfTestSvgSample.png)
 
 ### WPF W3C Test Suite
-This is an application for viewing the W3C Test Suite compliant results. It has two panes: top and bottom. The top pane is the generated WPF output, the bottom pane is the W3C expected output image.
+This is an application for viewing the W3C Test Suite compliant results. It has two panes: top and bottom. 
+The top pane is the generated WPF output, the bottom pane is the W3C expected output image.
 By the test results, this is the most complete SVG reader for WPF.
 
 ![](Home_WpfW3cSvgTestSuite.png)
+
+## Credits
+
+SharpVectors uses source codes from articles and other open source projects. We wish to acknowledge and thank 
+the authors of these great articles and projects
+* [SharpVectorGraphics (aka SVG#)](https://sourceforge.net/projects/svgdomcsharp/) by SVG# Team of Developers (SourceForge)
+* [WPF Zooming and Panning Control](https://www.codeproject.com/KB/WPF/zoomandpancontrol.aspx) by Ashley Davis (CodeProject)
+* [Render Text On A Path With WPF](https://msdn.microsoft.com/en-us/magazine/dd263097.aspx) by Charles Petzold (MSDN Magazine - December 2008)

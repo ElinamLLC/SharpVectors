@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("WpfW3cSvgTestSuite")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Elinam LLC")]
+[assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("WpfW3cSvgTestSuite")]
-[assembly: AssemblyCopyright("Copyright © Elinam LLC 2010")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2019 Elinam LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

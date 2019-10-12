@@ -1,4 +1,7 @@
-﻿namespace SharpVectors.Dom.Svg
+﻿using System;
+using System.Xml;
+
+namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// The SvgGlyphElement interface corresponds to the 'glyph' element. 
@@ -43,13 +46,31 @@
         public SvgPathSegList PathData
         {
             get {
-                if (!this.HasAttribute("d"))
-                {
-                    return null;
-                }
                 if (_pathSegList == null)
                 {
-                    _pathSegList = new SvgPathSegList(this.GetAttribute("d"), true);
+                    string path = null;
+                    if (!this.HasAttribute("d"))
+                    {
+                        path = this.GetAttribute("d");
+                    }
+                    if (this.HasChildNodes)
+                    {
+                        foreach (XmlNode child in this.ChildNodes)
+                        {
+                            if (child.NodeType == XmlNodeType.Element &&
+                                string.Equals(child.LocalName, "path", StringComparison.OrdinalIgnoreCase))
+                            {
+                                var pathElement = (XmlElement)child;
+                                path = pathElement.GetAttribute("d");
+                                break;
+                            }
+                        }
+                    }
+                    if (string.IsNullOrWhiteSpace(path))
+                    {
+                        return null;
+                    }
+                    _pathSegList = new SvgPathSegList(path, true);
                 }
                 return _pathSegList;
             }
@@ -61,7 +82,26 @@
         // attribute name = "d" <string>
         public string D
         {
-            get { return this.GetAttribute("d"); }
+            get {
+                if (this.HasAttribute("d"))
+                {
+                    return this.GetAttribute("d");
+                }
+                if (this.HasChildNodes)
+                {
+                    foreach (XmlNode child in this.ChildNodes)
+                    {
+                        if (child.NodeType == XmlNodeType.Element &&
+                            string.Equals(child.LocalName, "path", StringComparison.OrdinalIgnoreCase))
+                        {
+                            var pathElement = (XmlElement)child;
+                            return pathElement.GetAttribute("d");
+                        }
+                    }
+                }
+
+                return string.Empty;
+            }
             set { this.SetAttribute("d", value); }
         }
 
