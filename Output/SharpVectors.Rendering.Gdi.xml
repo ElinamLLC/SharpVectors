@@ -1,0 +1,739 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Rendering.Gdi</name>
+    </assembly>
+    <members>
+        <member name="F:SharpVectors.Renderers.Forms.SvgPictureBox.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Forms.SvgPictureBox.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Forms.SvgPictureBox.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Forms.SvgPictureBox.DefaultSize">
+            <summary>
+             Deriving classes can override this to configure a default size for their control.
+             This is more efficient than setting the size in the control's constructor.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Forms.SvgPictureBox.SizeMode">
+            <summary>
+            Gets or sets a value indicating how the rendered image is displayed.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Forms.SvgPictureBox.Source">
+            <summary>
+            Source URL for the Svg Content
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Forms.SvgPictureBox.Window">
+            <summary>
+            Return current SvgWindow used by this control
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Forms.SvgPictureBox.ToString">
+            <summary>
+             Returns a string representation for this control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Forms.SvgPictureBox.CreateEmptySvgDocument">
+            <summary>
+            Create an empty SvgDocument and GdiRenderer for this control.  
+            The empty SvgDocument is returned.  This method is needed only in situations 
+            where the library user needs to create an SVG DOM tree outside of the usual window Src setting mechanism.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Forms.SvgPictureBox.SetupStyleSheets">
+            <summary>
+            Loads the default user and agent stylesheets into the current SvgDocument
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Forms.SvgPictureBox.AdjustSize">
+            <summary>
+            If the <see cref="T:SharpVectors.Renderers.Forms.SvgPictureBox"/> has the <see cref="P:SharpVectors.Renderers.Forms.SvgPictureBox.SizeMode"/> property set to 
+            <see cref="F:System.Windows.Forms.PictureBoxSizeMode.AutoSize"/>, adjust the size to hold the rendered image.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.GdiConverter.ToColor(SharpVectors.Dom.Css.ICssColor)">
+            <summary>
+            A GDI Color representation of the RgbColor
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.GdiConverter.ToRectangle(SharpVectors.Dom.Svg.SvgRectF)">
+            <summary>
+            This converts the specified <see cref="T:System.Drawing.RectangleF"/> structure to a 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRectF"/> structure.
+            </summary>
+            <param name="rect">The <see cref="T:System.Drawing.RectangleF"/> structure to convert.</param>
+            <returns>
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRectF"/> structure that is converted from the 
+            specified <see cref="T:System.Drawing.RectangleF"/> structure.
+            </returns>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.IgnoreRootViewbox">
+            <summary>
+            Gets or sets a value to indicate turning off viewbox at the root of the drawing.
+            </summary>
+            <value>
+            For image outputs, this will force the original size to be saved.
+            <para>
+            The default value is <see langword="false"/>.
+            </para>
+            </value>
+            <remarks>
+            There are reported cases where are diagrams displayed in Inkscape program, but will not
+            show when converted. These are diagrams on the drawing canvas of Inkspace but outside 
+            the svg viewbox. 
+            <para>
+            When converted the drawings are also converted but not displayed due to
+            clipping. Setting this property to <see langword="true"/> will clear the clipping region
+            on conversion.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.EnsureViewboxSize">
+            <summary>
+            Gets or sets a value to indicate preserving the original viewbox size when saving images.
+            </summary>
+            <value>
+            For image outputs, this will force the original size to be saved.
+            <para>
+            The default value is <see langword="false"/>. However, the ImageSvgConverter converted
+            sets this to <see langword="true"/> by default.
+            </para>
+            </value>
+            <remarks>
+            Setting this to <see langword="true"/> will cause the rendering process to draw a transparent
+            box around the output, if a viewbox is defined. This will ensure that the original image
+            size is saved.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.EnsureViewboxPosition">
+            <summary>
+            Gets or sets a value to indicate applying a translate transform to the viewbox to ensure
+            it is visible when rendered.
+            </summary>
+            <value>
+            This determines whether a transformation is applied to the rendered drawing. For drawings
+            where the top-left position of the viewbox is off the screen, due to negative values, this
+            will ensure the drawing is visible.
+            <para>
+            The default value is <see langword="true"/>. Set this value to <see langword="false"/> if
+            you wish to apply your own transformations to the drawings.
+            </para>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.CultureInfo">
+            <summary>
+            Gets or sets the main culture information used for rendering texts.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Renderers.GdiRenderingSettings.CultureInfo"/> specifying the main
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            <para>
+            The library does not currently provide any means of splitting texts
+            into its multi-language parts.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.NeutralCultureInfo">
+            <summary>
+            Gets the neutral language for text rendering.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Renderers.GdiRenderingSettings.CultureInfo"/> specifying the neutral
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            For vertical text rendering, there is a basic text splitting into
+            Western and other languages. This culture information is used to
+            render the Western language part, and the mains culture information
+            for the other languages.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.DefaultFontName">
+            <summary>
+            Gets or sets the default font family name, which is used when a text
+            node does not specify a font family name.
+            </summary>
+            <value>
+            A string containing the default font family name. The default is
+            the <c>Arial Unicode MS</c> font, for its support of Unicode texts.
+            This value cannot be <see langword="null"/> or empty.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.DefaultFontFamily">
+            <summary>
+            Gets or sets the globally available default font family.
+            </summary>
+            <value>
+            An instance of the <see cref="T:System.Drawing.FontFamily"/> specifying the globally available font family. 
+            The default is <c>Arial</c> font (since <c>Arial Unicode MS</c> is no longer shipped by MS).
+            family.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.GenericSerif">
+            <summary>
+            Gets or set the globally available generic serif font family.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Drawing.FontFamily"/> specifying the generic serif
+            font family. The default is <c>Times New Roman</c> font family.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.GenericSansSerif">
+            <summary>
+            Gets or set the globally available generic sans serif font family.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Drawing.FontFamily"/> specifying the generic sans 
+            serif font family. The default is <c>Tahoma</c> font family.
+            </value>
+            <remarks>
+            The possible font names are <c>Tahoma</c>, <c>Arial</c>, 
+            <c>Verdana</c>, <c>Trebuchet</c>, <c>MS Sans Serif</c> and <c>Helvetica</c>.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.GdiRenderingSettings.GenericMonospace">
+            <summary>
+            Gets or set the globally available generic Monospace font family.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Drawing.FontFamily"/> specifying the generic 
+            Monospace font family. The default is <c>MS Gothic</c> font family.
+            </value>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiFontStyles">
+            <summary>
+            Provides a set of static predefined GdiFontStyles values.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStyles.Normal">
+            <summary>
+            Specifies a normal GdiFontStyles.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStyles.Oblique">
+            <summary>
+            Specifies an oblique GdiFontStyles.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStyles.Italic">
+            <summary>
+            Specifies an italic GdiFontStyles.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiFontWeights">
+            <summary>
+            Provides a set of static predefined FontWeight values.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Thin">
+            <summary>
+            Specifies a "Thin" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.ExtraLight">
+            <summary>
+            Specifies an "Extra-light" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.UltraLight">
+            <summary>
+            Specifies an "Ultra-light" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Light">
+            <summary>
+            Specifies a "Light" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Normal">
+            <summary>
+            Specifies a "Normal" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Regular">
+            <summary>
+            Specifies a "Regular" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Medium">
+            <summary>
+            Specifies a "Medium" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.DemiBold">
+            <summary>
+            Specifies a "Demi-bold" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.SemiBold">
+            <summary>
+            Specifies a "Semi-bold" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Bold">
+            <summary>
+            Specifies a "Bold" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.ExtraBold">
+            <summary>
+            Specifies an "Extra-bold" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.UltraBold">
+            <summary>
+            Specifies an "Ultra-bold" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Black">
+            <summary>
+            Specifies a "Black" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.Heavy">
+            <summary>
+            Specifies a "Heavy" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.ExtraBlack">
+            <summary>
+            Specifies an "Extra-black" font weight.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontWeights.UltraBlack">
+            <summary>
+            Specifies an "Ultra-black" font weight.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiFontStretches">
+            <summary>
+            Provides a set of static predefined GdiFontStretches values.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.UltraCondensed">
+            <summary>
+            Specifies an ultra-condensed GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.ExtraCondensed">
+            <summary>
+            Specifies an extra-condensed GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.Condensed">
+            <summary>
+            Specifies a condensed GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.SemiCondensed">
+            <summary>
+            Specifies a semi-condensed GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.Normal">
+            <summary>
+            Specifies a normal GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.Medium">
+            <summary>
+            Specifies a medium GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.SemiExpanded">
+            <summary>
+            Specifies a semi-expanded GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.Expanded">
+            <summary>
+            Specifies an expanded GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.ExtraExpanded">
+            <summary>
+            Specifies an extra-expanded GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.UltraExpanded">
+            <summary>
+            Specifies an ultra-expanded GdiFontStretches.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiFontStretches.Custom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGradientStop">
+            <summary>
+            Describes the location and color of a transition point in a gradient.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGradientStop.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Renderers.Gdi.GdiGradientStop"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGradientStop.#ctor(System.Drawing.Color,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Renderers.Gdi.GdiGradientStop"/> class with
+            the specified color and offset.
+            </summary>
+            <param name="color">The color value of the gradient stop.</param>
+            <param name="offset">The location in the gradient where the gradient stop is placed.</param>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGradientStop.Color">
+            <summary>
+            Gets or sets the color of the gradient stop.
+            </summary>
+            <value>The color of the gradient stop. The default value is <see cref="P:System.Drawing.Color.Transparent"/>.</value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGradientStop.Offset">
+            <summary>
+            Gets or set the location of the gradient stop within the gradient vector.
+            </summary>
+            <value>
+            The relative location of this gradient stop along the gradient vector. 
+            The default value is <c>0.0</c>.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGradientStop.Clone">
+            <summary>
+            Creates a modifiable clone of this <see cref="!:]GdiGradientStop"/>, making
+            deep copies of this object's values.
+            </summary>
+            <returns>A modifiable clone of the current object.</returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGradientStop.ToString">
+            <summary>
+            Creates a string representation of this object based on the current culture.
+            </summary>
+            <returns>
+            A string representation of this object that contains its <see cref="P:SharpVectors.Renderers.Gdi.GdiGradientStop.Color"/>
+            and <see cref="P:SharpVectors.Renderers.Gdi.GdiGradientStop.Offset"/> values.
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsListenerImpl.GdiGraphicsContainerImpl">
+            <summary>
+            Wraps a GraphicsContainer because it is sealed.
+            This is a helper for GraphicsWrapper so that it can save
+            multiple container states. It holds the containers
+            for both the idMapGraphics and the main graphics
+            being rendered in the GraphicsWrapper.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl._colorCounter">
+            <summary>
+            A counter that tracks the next hit color.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl._colorMap">
+            <summary>
+            Maps a 'hit color' to a graphics node.
+            </summary>
+            <remarks>
+            The 'hit color' is an integer identifier that identifies the graphics node that drew it.  
+            When 'hit colors' are drawn onto a bitmap (ie. <see cref="F:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl._idMapRaster">id-mapppe raster</see> 
+            the 'hit color' of each pixel with the help of <see cref="F:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl._colorMap">color map</see> 
+            can identify for a given x, y coordinate the relevant graphics node a mouse event should be dispatched to.
+            </remarks>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl._idMapRaster">
+            <summary>
+            A bitmap image that consists of 'hit color' instead of visual color.  A 'hit color' is an 
+            integer identifier that identifies the graphics node that drew it.  A 'hit color' can 
+            therefore identify the graphics node that corresponds an x-y coordinates.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl.IdMapRaster">
+            <summary>
+            Gets the image map of the rendered Svg document. This
+            is a picture of how the renderer will map the (x,y) positions
+            of mouse events to objects. You can display this raster
+            to help in debugging of hit testing.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl.HitTest(System.Int32,System.Int32)">
+            <summary>
+            Returns the topmost object of a hit test by specifying a Point.
+            </summary>
+            <param name="pointX">The X-value of the point to hit test against.</param>
+            <param name="pointY">The Y-value of the point to hit test against.</param>
+            <returns>The hit test result of the renderer, returned as a <see cref="T:SharpVectors.Renderers.Gdi.GdiHitTestResult"/> type.</returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl.GetNextHitColor(SharpVectors.Dom.Svg.SvgElement)">
+            <summary>
+            Allocate a hit color for the specified graphics node.
+            </summary>
+            <param name="element">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see> object for which to
+            allocate a new hit color.
+            </param>
+            <returns>
+            The hit color for the <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see>
+            object.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl.GetElementFromColor(System.Drawing.Color)">
+            <summary>
+            Gets the <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see> object that
+            corresponds to the given hit color.
+            </summary>
+            <param name="color">
+            The hit color for which to get the corresponding
+            <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see> object.
+            </param>
+            <remarks>
+            Returns <c>null</c> if a corresponding
+            <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see> object cannot be
+            found for the given hit color.
+            </remarks>
+            <returns>
+            The <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see> object that
+            corresponds to the given hit color
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelperImpl.ColorToId(System.Drawing.Color)">
+            <summary>
+            TODO: This method is not used.
+            </summary>
+            <param name="color">
+            </param>
+            <returns>
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsImpl">
+            <summary>
+            Wraps a Graphics object since it's sealed
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsImpl.GdiGraphicsContainerImpl">
+            <summary>
+            Wraps a GraphicsContainer because it is sealed.
+            This is a helper for GraphicsWrapper so that it can save
+            multiple container states. It holds the containers
+            for both the idMapGraphics and the main graphics
+            being rendered in the GraphicsWrapper.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelper.HitTest(System.Int32,System.Int32)">
+            <summary>
+            Returns the topmost object of a hit test by specifying a Point.
+            </summary>
+            <param name="pointX">The X-value of the point to hit test against.</param>
+            <param name="pointY">The Y-value of the point to hit test against.</param>
+            <returns>The hit test result of the renderer, returned as a <see cref="T:SharpVectors.Renderers.Gdi.GdiHitTestResult"/> type.</returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelper.HitTest(System.Drawing.Point)">
+            <summary>
+            Returns the topmost object of a hit test by specifying a Point.
+            </summary>
+            <param name="point">The point value to hit test against.</param>
+            <returns>The hit test result of the renderer, returned as a <see cref="T:SharpVectors.Renderers.Gdi.GdiHitTestResult"/> type.</returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiHitTestHelper.GdiHitTestHelperNoHit.HitTest(System.Int32,System.Int32)">
+            <summary>
+            Returns the topmost object of a hit test by specifying a Point.
+            </summary>
+            <param name="pointX">The X-value of the point to hit test against.</param>
+            <param name="pointY">The Y-value of the point to hit test against.</param>
+            <returns>The hit test result of the renderer, returned as a <see cref="T:SharpVectors.Renderers.Gdi.GdiHitTestResult"/> type.</returns>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiHitTestResult.Point">
+            <summary>
+            The point value to hit test against.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiHitTestResult.Element">
+            <summary>
+            Gets the SVG object that was hit.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer">
+            <summary>
+            Renders a Svg image to GDI+
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer._rasterImage">
+            <summary>
+            The bitmap containing the rendered Svg image.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer._graphics">
+            <summary>
+            The renderer's graphics wrapper object.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer._backColor">
+            <summary>
+            The renderer's back color.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer._svgWindow">
+            <summary>
+            The renderer's <see cref="T:SharpVectors.Dom.Svg.SvgWindow">SvgWindow</see> object.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer._currentDownX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the GdiRenderer class.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.RasterImage">
+            <summary>
+            Gets a bitmap image of the a rendered Svg document.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.Window">
+            <summary>
+            Gets or sets the <see cref="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.Window">Window</see> of the
+            renderer.
+            </summary>
+            <value>
+            The <see cref="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.Window">Window</see> of the renderer.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.BackColor">
+            <summary>
+            Gets or sets the back color of the renderer.
+            </summary>
+            <value>
+            The back color of the renderer.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.GdiGraphics">
+            <summary>
+            Gets or sets the <see cref="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.GdiGraphics">GdiGraphics</see>
+            object associated with this renderer.
+            </summary>
+            <value>
+            The <see cref="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.GdiGraphics">GdiGraphics</see> object
+            associated with this renderer.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.InvalidRect">
+            <summary>
+            The invalidated region
+            </summary>   
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.Render(SharpVectors.Dom.Svg.ISvgElement)">
+            <summary>
+            Renders the <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see>.
+            </summary>
+            <param name="node">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgElement">SvgElement</see> node to be
+            rendered
+            </param>
+            <returns>
+            The bitmap on which the rendering was performed.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.Render(SharpVectors.Dom.Svg.ISvgDocument)">
+            <summary>
+            Renders the <see cref="T:SharpVectors.Dom.Svg.SvgDocument">SvgDocument</see>.
+            </summary>
+            <param name="node">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgDocument">SvgDocument</see> node to be
+            rendered
+            </param>
+            <returns>
+            The bitmap on which the rendering was performed.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.OnMouseEvent(System.String,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Processes mouse events.
+            </summary>
+            <param name="type">
+            A string describing the type of mouse event that occured.
+            </param>
+            <param name="e">
+            The <see cref="T:System.Windows.Forms.MouseEventArgs">MouseEventArgs</see> that contains
+            the event data.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.RendererBeforeRender">
+            <summary>
+            BeforeRender - Make sure we have a Graphics object to render to.
+            If we don't have one, then create one to match the SvgWindow's
+            physical dimensions.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiGraphicsRenderer.RendererAfterRender">
+            <summary>
+            AfterRender - Dispose of Graphics object created for rendering.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Gdi.GdiRendering.CreateByUri(SharpVectors.Dom.Svg.SvgDocument,System.String,System.String)">
+            <summary>
+            Generates a new <see cref="T:SharpVectors.Renderers.Gdi.GdiRendering">GdiRendering</see> that
+            corresponds to the given Uri.
+            </summary>
+            <param name="baseUri">
+            The base Uri.
+            </param>
+            <param name="url">
+            The url.
+            </param>
+            <returns>
+            The generated <see cref="T:SharpVectors.Renderers.Gdi.GdiRendering">GdiRendering</see> that
+            corresponds to the given Uri.
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsWrapper">
+            <summary>
+            Wraps a Graphics object since it's sealed
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsWrapper.GdiGraphicsContainerImpl">
+            <summary>
+            Wraps a GraphicsContainer because it is sealed.
+            This is a helper for GraphicsWrapper so that it can save
+            multiple container states. It holds the containers
+            for both the idMapGraphics and the main graphics
+            being rendered in the GraphicsWrapper.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiGradientFill">
+            <summary>
+            Summary description for PaintServer.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiRootRendering">
+            <summary>
+            Summary description for SvgElementGraphicsNode.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiImageRendering">
+            <summary>
+            Summary description for GdiImageRendering.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiRenderingBase">
+            <summary>      
+            Defines the interface required for a rendering node to interact with the renderer and the SVG DOM
+            </summary>
+        </member>
+    </members>
+</doc>
