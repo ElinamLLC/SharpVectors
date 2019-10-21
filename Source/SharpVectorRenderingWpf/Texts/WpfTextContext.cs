@@ -22,6 +22,7 @@ namespace SharpVectors.Renderers.Texts
         private bool _isVertical;
         private bool _isSingleText;
         private bool _isSingleLine;
+        private bool _isTextPath;
 
         private Point _positioningStart;
         private Point _positioningEnd;
@@ -75,6 +76,13 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        public bool IsTextPath
+        {
+            get {
+                return _isTextPath;
+            }
+        }
+
         public bool IsSingleLine
         {
             get {
@@ -125,7 +133,7 @@ namespace SharpVectors.Renderers.Texts
         #endregion
 
         #region Public Methods
-        
+
         public void SetElement(SvgTextElement textElement)
         {
             if (textElement == null)
@@ -133,6 +141,14 @@ namespace SharpVectors.Renderers.Texts
                 throw new ArgumentNullException(nameof(textElement),
                     "The SVG text element is required, and cannot be null (or Nothing).");
             }
+
+            _isVertical       = false;
+            _isSingleText     = false;
+            _isSingleLine     = false;
+            _isTextPath       = false;
+
+            _positioningStart = new Point(0, 0);
+            _positioningEnd   = new Point(0, 0);
 
             _textElement = textElement;
 
@@ -210,36 +226,63 @@ namespace SharpVectors.Renderers.Texts
             }
             _isSingleText = _textElement.ChildNodes.Count == 1;
 
-            //if (_isSingleText == false)
-            //{
-            //    XmlNodeList nodeList = _textElement.ChildNodes;
-            //    int nodeCount = nodeList.Count;
-            //    for (int i = 0; i < nodeCount; i++)
-            //    {
-            //        XmlNode child = nodeList[i];
-            //        XmlNodeType nodeType = child.NodeType;
-            //        if (nodeType == XmlNodeType.Text || nodeType == XmlNodeType.Whitespace)
-            //        {
-            //            continue;
-            //        }
-            //        if (nodeType == XmlNodeType.Element)
-            //        {
-            //            string nodeName = child.Name;
-            //            if (string.Equals(nodeName, "tref", comparer))
-            //            {
-            //                var trefNode = (SvgTRefElement)child;
-            //            }
-            //            else if (string.Equals(nodeName, "tspan", comparer))
-            //            {
-            //                var tspanNode = (SvgTSpanElement)child;
-            //            }
-            //            else if (string.Equals(nodeName, "textPath", comparer))
-            //            {
-            //                var textPathNode = (SvgTextPathElement)child;
-            //            }
-            //        }
-            //     }
-            //}
+            if (_isSingleText == false)
+            {
+                int textNode = 0;
+                int spanNode = 0;
+                int pathNode = 0;
+
+                XmlNodeList nodeList = _textElement.ChildNodes;
+                int nodeCount = nodeList.Count;
+                for (int i = 0; i < nodeCount; i++)
+                {
+                    XmlNode childNode = nodeList[i];
+                    XmlNodeType nodeType = childNode.NodeType;
+                    if (nodeType == XmlNodeType.Text)
+                    {
+                        textNode++;
+                    }
+                    else if (nodeType == XmlNodeType.Whitespace)
+                    {
+                        if (i != 0 && i != (nodeCount - 1))
+                        {
+                            textNode++;
+                        }
+                    }
+                    else if (nodeType == XmlNodeType.Element)
+                    {
+                        string nodeName = childNode.Name;
+                        if (string.Equals(nodeName, "tref", comparer))
+                        {
+                            //var trefNode = (SvgTRefElement)child;
+                            spanNode++;
+                        }
+                        else if (string.Equals(nodeName, "tspan", comparer))
+                        {
+                            //var tspanNode = (SvgTSpanElement)child;
+                            spanNode++;
+                        }
+                        else if (string.Equals(nodeName, "textPath", comparer))
+                        {
+                            //var textPathNode = (SvgTextPathElement)child;
+                            pathNode++;
+                        }
+                    }
+                }
+
+                if (textNode == 0 && spanNode == 0)
+                {
+                    _isTextPath = (pathNode != 0);
+                }
+            }
+            else
+            {
+                var childNode = _textElement.ChildNodes[0];
+                if (string.Equals(childNode.Name, "textPath", comparer))
+                {
+                    _isTextPath = true;
+                }
+            }
 
             try
             {

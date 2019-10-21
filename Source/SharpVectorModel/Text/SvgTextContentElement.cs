@@ -87,12 +87,17 @@ namespace SharpVectors.Dom.Svg
 
         #region ISvgTextContentElement Members
 
-        public ISvgAnimatedLength TextLength
+        public virtual ISvgAnimatedLength LetterSpacing
         {
             get { throw new NotImplementedException(); }
         }
 
-        public ISvgAnimatedEnumeration LengthAdjust
+        public virtual ISvgAnimatedLength TextLength
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public virtual ISvgAnimatedEnumeration LengthAdjust
         {
             get { throw new NotImplementedException(); }
         }

@@ -77,7 +77,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public override PathGeometry Build(SvgTextContentElement element, string text, double x, double y)
+        public override Geometry Build(SvgTextContentElement element, string text, double x, double y)
         {
             throw new NotImplementedException();
         }

@@ -316,11 +316,11 @@ namespace SharpVectors.Renderers.Texts
         {
             if (canBeWhitespace && string.IsNullOrEmpty(text))
             {
-                return Size.Empty;
+                return new Size(0, 0);
             }
-            else if (string.IsNullOrWhiteSpace(text))
+            if (!canBeWhitespace && string.IsNullOrWhiteSpace(text))
             {
-                return Size.Empty;
+                return new Size(0, 0);
             }
 
             var result   = new List<Rect>();
@@ -328,12 +328,13 @@ namespace SharpVectors.Renderers.Texts
             var nonEmpty = result.Where(r => r != Rect.Empty);
             if (!nonEmpty.Any())
             {
-                return Size.Empty;
+                return new Size(0, 0);
             }
-            return new Size(nonEmpty.Last().Right - nonEmpty.First().Left, this.Baseline);
+            //return new Size(nonEmpty.Last().Right - nonEmpty.First().Left, this.Baseline);
+            return new Size(_textWidth, this.Baseline);
         }
 
-        public override PathGeometry Build(SvgTextContentElement element, string text, double x, double y)
+        public override Geometry Build(SvgTextContentElement element, string text, double x, double y)
         {
             var alignment = this.TextAlignment;
             if (alignment != TextAlignment.Left)
@@ -351,7 +352,7 @@ namespace SharpVectors.Renderers.Texts
             }
 
             var textPath = this.Build(element, text, null, false);
-            if (textPath.Figures != null && textPath.Figures.Count > 0)
+            if (textPath != null && textPath.Children.Count != 0)
             {
                 textPath.Transform = new TranslateTransform(x, y);
             }
@@ -365,16 +366,16 @@ namespace SharpVectors.Renderers.Texts
 
         #region Building
 
-        private PathGeometry Build(SvgTextContentElement element, string text, IList<Rect> textBounds, bool measureSpaces)
+        private GeometryGroup Build(SvgTextContentElement element, string text, IList<Rect> textBounds, bool measureSpaces)
         {
+            var textPath = new GeometryGroup();
+
             if (string.IsNullOrEmpty(text))
             {
-                return new PathGeometry();
+                return textPath;
             }
 
             _textIterator.Initialize(text);
-
-            var textPath = new PathGeometry();
 
             SvgGlyphElement prevGlyph = null;
             double xPos = 0;
@@ -413,11 +414,23 @@ namespace SharpVectors.Renderers.Texts
                     {
                         if (!_latinGlyphMaps.TryGet(inputText, xmlLang, out glyph))
                         {
-                            if (string.IsNullOrWhiteSpace(xmlLang) && this.WithinUnicodeRange(inputText))
-                            {
-                                glyph = _missingGlyph;
-                            }
                             prevGlyph = null;
+                            if (string.IsNullOrWhiteSpace(xmlLang))
+                            {
+                                if (this.HasUnicodeRange && this.WithinUnicodeRange(inputText))
+                                {
+                                    glyph = _missingGlyph;
+                                }
+                                else if (string.IsNullOrWhiteSpace(inputText))
+                                {
+                                    xPos += _font.HorizAdvX * _emScale;
+                                    continue;
+                                }
+                                //else
+                                //{
+                                //    glyph = _missingGlyph; //TODO
+                                //}
+                            }
                         }
                     }
                 }
@@ -430,13 +443,13 @@ namespace SharpVectors.Renderers.Texts
                         _missingFallBack = Create(_fontFamily, _fontStyle, _fontWeight, this.Culture, this.FontSize);
                     }
 
-                    var missingPath = _missingFallBack.Build(element, inputText, xPos, baseline);
+                    var missingPath = _missingFallBack.Build(element, inputText, xPos, baseline - _missingFallBack.Baseline);
                     //var missingTransform = new TransformGroup();
                     //missingTransform.Children.Add(new ScaleTransform(_emScale, -1 * _emScale));
                     //missingTransform.Children.Add(new TranslateTransform(xPos, ascent));
                     //missingPath.Transform = new TranslateTransform(xPos, ascent);
 
-                    if (textBounds != null)
+                    if (textBounds != null && missingPath != null)
                     {
                         Rect bounds = missingPath.Bounds;
                         if (measureSpaces && bounds == Rect.Empty)
@@ -449,9 +462,12 @@ namespace SharpVectors.Renderers.Texts
                         }
                     }
 
-                    if (missingPath.Figures != null && missingPath.Figures.Count > 0)
+                    if (missingPath != null && !missingPath.IsEmpty())
                     {
-                        textPath.AddGeometry(missingPath);
+                        var transformdPath = new PathGeometry();
+                        transformdPath.AddGeometry(missingPath);
+
+                        textPath.Children.Add(transformdPath);
                     }
 
                     //xPos += missingPath.Bounds.Width;
@@ -486,7 +502,7 @@ namespace SharpVectors.Renderers.Texts
                         selectedFallBack = _missingFallBack;
                     }
 
-                    var missingPath = selectedFallBack.Build(element, inputText, xPos, baseline);
+                    var missingPath = selectedFallBack.Build(element, inputText, xPos, baseline - selectedFallBack.Baseline);
                     //var missingTransform = new TransformGroup();
                     //missingTransform.Children.Add(new ScaleTransform(_emScale, -1 * _emScale));
                     //missingTransform.Children.Add(new TranslateTransform(xPos, ascent));
@@ -501,7 +517,7 @@ namespace SharpVectors.Renderers.Texts
                         missingPath.Transform = missingTransform;
                     }
 
-                    if (textBounds != null)
+                    if (textBounds != null && missingPath != null)
                     {
                         Rect bounds = missingPath.Bounds;
                         if (measureSpaces && bounds == Rect.Empty)
@@ -514,9 +530,12 @@ namespace SharpVectors.Renderers.Texts
                         }
                     }
 
-                    if (missingPath.Figures != null && missingPath.Figures.Count > 0)
+                    if (missingPath != null && !missingPath.IsEmpty())
                     {
-                        textPath.AddGeometry(missingPath);
+                        var transformdPath = new PathGeometry();
+                        transformdPath.AddGeometry(missingPath);
+
+                        textPath.Children.Add(transformdPath);
                     }
                     prevGlyph = null;
 
@@ -558,7 +577,10 @@ namespace SharpVectors.Renderers.Texts
 
                 if (glyphPath.Figures != null && glyphPath.Figures.Count > 0)
                 {
-                    textPath.AddGeometry(glyphPath);
+                    var transformdPath = new PathGeometry();
+                    transformdPath.AddGeometry(glyphPath);
+
+                    textPath.Children.Add(transformdPath);
                 }
 
                 xPos += glyph.HorizAdvX * _emScale;

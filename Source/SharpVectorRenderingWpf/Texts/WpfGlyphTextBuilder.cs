@@ -232,6 +232,13 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        public override double Baseline
+        {
+            get {
+                return _glyphTypeface.Baseline * this.FontSize;
+            }
+        }
+
         public bool IsSideways
         {
             get {
@@ -281,39 +288,6 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public override PathGeometry Build(SvgTextContentElement element, string text, double x, double y)
-        {
-            ComputeMeasurement(text, x, y);
-
-            _textWidth = 0;
-
-            if (_glyphRun == null)
-            {
-                return new PathGeometry();
-            }
-
-            // Approximate the width of the text...
-            Rect designRect = _glyphRun.ComputeAlignmentBox();
-//            designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
-
-            _textWidth = Math.Max(0, designRect.Right);
-
-            PathGeometry pathGeometry = null;
-
-            var geometry = _glyphRun.BuildGeometry();
-            if (geometry is PathGeometry)
-            {
-                pathGeometry = (PathGeometry)geometry;
-            }
-            else
-            {
-                pathGeometry = new PathGeometry();
-                pathGeometry.AddGeometry(geometry);
-            }
-
-            return pathGeometry;
-        }
-
         public override IList<Rect> MeasureChars(SvgTextContentElement element, string text, bool canBeWhitespace = true)
         {
             //TODO: This is not an efficient implementation
@@ -336,13 +310,65 @@ namespace SharpVectors.Renderers.Texts
             ComputeMeasurement(text, 0, 0);
 
             if (_glyphRun == null)
-                return new Size();
+            {
+                return new Size(0, 0);
+            }
 
             Rect designRect = _glyphRun.ComputeAlignmentBox();
 
-//            designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
+            //designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
+
+            _textWidth = Math.Max(0, designRect.Right);
 
             return new Size(Math.Max(0, designRect.Right), Math.Max(0, designRect.Bottom));
+        }
+
+        public override Geometry Build(SvgTextContentElement element, string text, double x, double y)
+        {
+            var alignment = this.TextAlignment;
+            if (alignment != TextAlignment.Left)
+            {
+                var textSize = this.MeasureText(element, text, true);
+                var textWidth = Math.Max(textSize.Width, this.Width);
+                if (alignment == TextAlignment.Center)
+                {
+                    x -= textWidth / 2;
+                }
+                else
+                {
+                    x -= textWidth;
+                }
+            }
+
+            ComputeMeasurement(text, x, y + this.Baseline);
+
+            _textWidth = 0;
+
+            if (_glyphRun == null)
+            {
+                return new PathGeometry();
+            }
+
+            // Approximate the width of the text...
+            Rect designRect = _glyphRun.ComputeAlignmentBox();
+            //designRect.Offset(_glyphRunOrigin.X, _glyphRunOrigin.Y);
+
+            _textWidth = Math.Max(0, designRect.Right);
+
+            PathGeometry pathGeometry = null;
+
+            var geometry = _glyphRun.BuildGeometry();
+            if (geometry is PathGeometry)
+            {
+                pathGeometry = (PathGeometry)geometry;
+            }
+            else
+            {
+                pathGeometry = new PathGeometry();
+                pathGeometry.AddGeometry(geometry);
+            }
+
+            return pathGeometry;
         }
 
         #endregion
@@ -373,17 +399,17 @@ namespace SharpVectors.Renderers.Texts
             return new GlyphRun(
                 _glyphTypeface,               // GlyphTypeface
                 _bidiLevel,                   // Bidi level
-                _isSideways,                    // sideways flag
-                _fontSize,           // rendering em size in MIL units
+                _isSideways,                  // sideways flag
+                _fontSize,                    // rendering em size in MIL units
                 _glyphIndices,                // glyph indices
-                origin,                      // origin of glyph-drawing space
+                origin,                       // origin of glyph-drawing space
                 _advanceWidths,               // glyph advances
                 _glyphOffsets,                // glyph offsets
                 _unicodeString.ToCharArray(), // unicode characters
                 _deviceFontName,              // device font
                 _clusterMap,                  // cluster map
-                null,                  // caret stops
-                language                     // language
+                null,                         // caret stops
+                language                      // language
             );
         }
 
@@ -429,9 +455,7 @@ namespace SharpVectors.Renderers.Texts
                 _glyphRunOrigin.Y = -alignmentRect.Y;
 
             if (!measurementGlyphRunOriginValid)
-            {
                 _glyphRun = CreateGlyphRun(_glyphRunOrigin, Language);
-            }
         }
 
         ///<SecurityNote>

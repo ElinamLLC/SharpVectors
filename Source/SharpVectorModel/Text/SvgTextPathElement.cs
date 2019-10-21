@@ -26,6 +26,18 @@ namespace SharpVectors.Dom.Svg
 
         #region ISvgTextPathElement Members
 
+        public override ISvgAnimatedLength TextLength
+        {
+            get {
+                return new SvgAnimatedLength(this, "textLength", SvgLengthDirection.Horizontal, "0");
+            }
+        }
+
+        public override ISvgAnimatedEnumeration LengthAdjust
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public ISvgAnimatedLength StartOffset
         {
             get {
@@ -37,7 +49,7 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 SvgTextPathMethod pathMethod = SvgTextPathMethod.Align;
-                if (this.GetAttribute("method") == "stretch")
+                if (string.Equals(this.GetAttribute("method"), "stretch", StringComparison.OrdinalIgnoreCase))
                 {
                     pathMethod = SvgTextPathMethod.Stretch;
                 }
@@ -49,7 +61,7 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 SvgTextPathSpacing pathSpacing = SvgTextPathSpacing.Exact;
-                if (this.GetAttribute("spacing") == "auto")
+                if (string.Equals(this.GetAttribute("spacing"), "auto", StringComparison.OrdinalIgnoreCase))
                 {
                     pathSpacing = SvgTextPathSpacing.Auto;
                 }

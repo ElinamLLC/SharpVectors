@@ -64,13 +64,13 @@
     <Compile Include="Texts\WpfFontTextBuilder.cs" />
     <Compile Include="Texts\WpfGlyphTextBuilder.cs" />
     <Compile Include="Texts\WpfHorzTextRenderer.cs" />
+    <Compile Include="Texts\WpfPathTextBuilder.cs" />
     <Compile Include="Texts\WpfPathTextRenderer.cs" />
     <Compile Include="Texts\WpfSvgTextBuilder.cs" />
     <Compile Include="Texts\WpfTextAnchor.cs" />
     <Compile Include="Texts\WpfTextBuilder.cs" />
     <Compile Include="Texts\WpfTextContext.cs" />
-    <Compile Include="Texts\WpfTextOnPathBase.cs" />
-    <Compile Include="Texts\WpfTextOnPathDrawing.cs" />
+    <Compile Include="Texts\WpfPathTextRun.cs" />
     <Compile Include="Texts\WpfTextPlacement.cs" />
     <Compile Include="Texts\WpfTextPosition.cs" />
     <Compile Include="Texts\WpfTextRenderer.cs" />

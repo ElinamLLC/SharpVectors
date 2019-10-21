@@ -234,6 +234,130 @@ namespace SharpVectors.Renderers.Wpf
             return null;
         }
 
+        private static bool Equals(double number1, double number2)
+        {
+            return number1.Equals(number2);
+        }
+
+        private static bool Equals(GradientStop stop1, GradientStop stop2)
+        {
+            if (stop1 == null && stop2 == null)
+            {
+                return true;
+            }
+            if (stop1 == null || stop2 == null)
+            {
+                return false;
+            }
+            return Color.Equals(stop1.Color, stop2.Color) && stop1.Offset.Equals(stop2.Offset);
+        }
+
+        private static bool Equals(Transform transform1, Transform transform2)
+        {
+            if (transform1 == null && transform2 == null)
+            {
+                return true;
+            }
+            if (transform1 == null || transform2 == null)
+            {
+                return false;
+            }
+            return Matrix.Equals(transform1.Value, transform2.Value);
+        }
+
+        public static bool IsEqual(Brush brush1, Brush brush2)
+        {
+            if (brush1.GetType() != brush2.GetType())
+                return false;
+
+            if (brush1 is SolidColorBrush)
+            {
+                var wpfBrush1 = (SolidColorBrush)brush1;
+                var wpfBrush2 = (SolidColorBrush)brush2;
+
+                return Color.Equals(wpfBrush1.Color, wpfBrush2.Color) 
+                    && Equals(wpfBrush1.Opacity, wpfBrush2.Opacity) 
+                    && Equals(wpfBrush1.Transform, wpfBrush2.Transform);
+            }
+            if (brush1 is LinearGradientBrush)
+            {
+                var wpfBrush1 = (LinearGradientBrush)brush1;
+                var wpfBrush2 = (LinearGradientBrush)brush2;
+
+                if (wpfBrush1.ColorInterpolationMode != wpfBrush2.ColorInterpolationMode
+                    || wpfBrush1.EndPoint != wpfBrush2.EndPoint
+                    || wpfBrush1.MappingMode != wpfBrush2.MappingMode
+                    || !wpfBrush1.Opacity.Equals(wpfBrush2.Opacity)
+                    || wpfBrush1.StartPoint != wpfBrush2.StartPoint
+                    || wpfBrush1.SpreadMethod != wpfBrush2.SpreadMethod
+                    || !Equals(wpfBrush1.Transform, wpfBrush2.Transform)
+                    || wpfBrush1.GradientStops.Count != wpfBrush2.GradientStops.Count)
+                {
+                    return false;
+                }
+
+                for (int i = 0; i < wpfBrush1.GradientStops.Count; i++)
+                {
+                    if (!Equals(wpfBrush1.GradientStops[i], wpfBrush2.GradientStops[i]))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            if (brush1 is RadialGradientBrush)
+            {
+                var wpfBrush1 = (RadialGradientBrush)brush1;
+                var wpfBrush2 = (RadialGradientBrush)brush2;
+
+                if (wpfBrush1.ColorInterpolationMode != wpfBrush2.ColorInterpolationMode
+                    || wpfBrush1.GradientOrigin != wpfBrush2.GradientOrigin
+                    || wpfBrush1.MappingMode != wpfBrush2.MappingMode
+                    || !wpfBrush1.Opacity.Equals(wpfBrush2.Opacity)
+                    || !wpfBrush1.RadiusX.Equals(wpfBrush2.RadiusX)
+                    || !wpfBrush1.RadiusY.Equals(wpfBrush2.RadiusY)
+                    || wpfBrush1.SpreadMethod != wpfBrush2.SpreadMethod
+                    || !Equals(wpfBrush1.Transform, wpfBrush2.Transform)
+                    || wpfBrush1.GradientStops.Count != wpfBrush2.GradientStops.Count)
+                {
+                    return false;
+                }
+
+                for (int i = 0; i < wpfBrush1.GradientStops.Count; i++)
+                {
+                    if (!Equals(wpfBrush1.GradientStops[i], wpfBrush2.GradientStops[i]))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            if (brush1 is ImageBrush)
+            {
+                var wpfBrush1 = (ImageBrush)brush1;
+                var wpfBrush2 = (ImageBrush)brush2;
+
+                if (wpfBrush1.AlignmentX != wpfBrush2.AlignmentX
+                    || wpfBrush1.AlignmentY != wpfBrush2.AlignmentY
+                    || !wpfBrush1.Opacity.Equals(wpfBrush2.Opacity)
+                    || wpfBrush1.Stretch != wpfBrush2.Stretch
+                    || wpfBrush1.TileMode != wpfBrush2.TileMode
+                    || wpfBrush1.Viewbox != wpfBrush2.Viewbox
+                    || wpfBrush1.ViewboxUnits != wpfBrush2.ViewboxUnits
+                    || wpfBrush1.Viewport != wpfBrush2.Viewport
+                    || wpfBrush1.ViewportUnits != wpfBrush2.ViewportUnits
+                    || !Equals(wpfBrush1.Transform, wpfBrush2.Transform)
+                    || wpfBrush1.ImageSource != wpfBrush2.ImageSource)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
         #endregion
 
         #region Private Methods

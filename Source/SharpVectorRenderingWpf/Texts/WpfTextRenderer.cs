@@ -19,6 +19,8 @@ namespace SharpVectors.Renderers.Texts
         #region Protected Fields
 
         protected const string Whitespace = " ";
+        protected const char NonBreakingChar = '\u00A0';
+        protected readonly static string NonBreaking = char.ConvertFromUtf32(NonBreakingChar);
 
         protected readonly static Regex _tabNewline     = new Regex(@"[\n\f\t]", RegexOptions.Compiled);
         protected readonly static Regex _decimalNumber  = new Regex(@"^\d", RegexOptions.Compiled);

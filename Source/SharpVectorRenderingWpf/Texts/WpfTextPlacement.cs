@@ -92,7 +92,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public static WpfTextPlacement Create(SvgTextPositioningElement posElement, Point p)
+        public static WpfTextPlacement Create(SvgTextPositioningElement posElement, Point p, bool isTextPath = false)
         {
             ISvgLengthList xValues  = posElement.X.AnimVal;
             ISvgLengthList yValues  = posElement.Y.AnimVal;
@@ -113,7 +113,7 @@ namespace SharpVectors.Renderers.Texts
 
             WpfTextPlacement textPlacement = null;
 
-            if (xValues.NumberOfItems > 0)
+            if (xValues.NumberOfItems > 0 && isTextPath == false)
             {
                 if (xValues.NumberOfItems > 1)
                 {
@@ -135,7 +135,7 @@ namespace SharpVectors.Renderers.Texts
                 yValue = yValues.GetItem(yValues.NumberOfItems - 1).Value;
                 p.Y = yValue;
             }
-            if (dxValues.NumberOfItems > 0)
+            if (dxValues.NumberOfItems > 0 && isTextPath == false)
             {
                 if (dxValues.NumberOfItems > 1)
                 {

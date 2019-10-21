@@ -776,8 +776,8 @@ namespace SharpVectors.Renderers.Texts
                     Geometry textGeometry = textBuilder.Build(element, nextText, textPoint.X, textPoint.Y);
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
-
+                        //_drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+                        _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
                     }
 
                     //float bboxWidth = (float)formattedText.Width;
@@ -848,7 +848,8 @@ namespace SharpVectors.Renderers.Texts
                 Geometry textGeometry = textBuilder.Build(element, text, textPoint.X, textPoint.Y);
                 if (textGeometry != null && !textGeometry.IsEmpty())
                 {
-                    _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+//                    _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+                    _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
                 }
 
                 //float bboxWidth = (float)formattedText.Width;
@@ -1047,10 +1048,8 @@ namespace SharpVectors.Renderers.Texts
                     Geometry textGeometry = textBuilder.Build(element, inputText, textPoint.X, textPoint.Y);
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        _drawContext.DrawGeometry(textBrush, textPen,
-                            ExtractTextPathGeometry(textGeometry));
-
-                        this.IsTextPath = true;
+//                        _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+                        _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
                     }
 
                     //float bboxWidth = (float)formattedText.Width;
@@ -1138,12 +1137,12 @@ namespace SharpVectors.Renderers.Texts
                 Geometry textGeometry = textBuilder.Build(element, text, textPoint.X, textPoint.Y);
                 if (textGeometry != null && !textGeometry.IsEmpty())
                 {
-                    _drawContext.DrawGeometry(textBrush, textPen,
-                        ExtractTextPathGeometry(textGeometry));
+//                    _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+                    _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
                 }
 
                 //float bboxWidth = (float)formattedText.Width;
-//                double bboxWidth = textGeometry.Bounds.Width;
+                //                double bboxWidth = textGeometry.Bounds.Width;
                 double bboxWidth = textBuilder.Width;
 
                 if (alignment == TextAlignment.Center)

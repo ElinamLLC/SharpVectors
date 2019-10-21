@@ -83,7 +83,7 @@ namespace SharpVectors.Renderers.Texts
             }
             if (familyInfo.FontFamilyType == WpfFontFamilyType.Svg)
             {
-                WpfSvgTextBuilder textBuilder = new WpfSvgTextBuilder(familyInfo.FontElement, 
+                WpfSvgTextBuilder textBuilder = new WpfSvgTextBuilder(familyInfo.FontElement,
                     culture, familyInfo.Name, fontSize);
 
                 textBuilder.FontStyle   = familyInfo.Style;
@@ -298,6 +298,6 @@ namespace SharpVectors.Renderers.Texts
 
         public abstract Size MeasureText(SvgTextContentElement element, string text, bool canBeWhitespace = true);
 
-        public abstract PathGeometry Build(SvgTextContentElement element, string text, double x, double y);
+        public abstract Geometry Build(SvgTextContentElement element, string text, double x, double y);
     }
 }

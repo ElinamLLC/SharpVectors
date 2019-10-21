@@ -9,9 +9,9 @@ namespace SharpVectors.Renderers.Texts
     {
         #region Private Fields
 
-        private int    _vertOrientation;
-        private int    _horzOrientation;
-        private bool   _isLatinGlyph;
+        private int _vertOrientation;
+        private int _horzOrientation;
+        private bool _isLatinGlyph;
         private string _text;
 
         #endregion
@@ -22,15 +22,15 @@ namespace SharpVectors.Renderers.Texts
         {
             _vertOrientation = -1;
             _horzOrientation = -1;
-            _text            = string.Empty;
-            _isLatinGlyph    = true;
+            _text = string.Empty;
+            _isLatinGlyph = true;
         }
 
         public WpfTextRun(string text, bool isLatin, int vertOrientation,
             int horzOrientation)
         {
-            _text            = text;
-            _isLatinGlyph    = isLatin;
+            _text = text;
+            _isLatinGlyph = isLatin;
             _vertOrientation = vertOrientation;
             _horzOrientation = horzOrientation;
         }
@@ -41,56 +41,47 @@ namespace SharpVectors.Renderers.Texts
 
         public bool IsEmpty
         {
-            get
-            {
+            get {
                 return string.IsNullOrWhiteSpace(_text);
             }
         }
 
         public bool IsLatin
         {
-            get
-            {
+            get {
                 return _isLatinGlyph;
             }
-            set
-            {
+            set {
                 _isLatinGlyph = value;
-            }                         
+            }
         }
 
         public int VerticalOrientation
         {
-            get
-            {
+            get {
                 return _vertOrientation;
             }
-            set
-            {
+            set {
                 _vertOrientation = value;
             }
         }
 
         public int HorizontalOrientation
         {
-            get
-            {
+            get {
                 return _horzOrientation;
             }
-            set
-            {
+            set {
                 _horzOrientation = value;
             }
         }
 
         public string Text
         {
-            get
-            {
+            get {
                 return _text;
             }
-            set
-            {
+            set {
                 _text = value;
             }
         }
@@ -126,7 +117,7 @@ namespace SharpVectors.Renderers.Texts
 
             StringBuilder builder = new StringBuilder();
 
-            int textLength    = text.Length;
+            int textLength = text.Length;
             bool isLatinStart = IsLatinGlyph(text[0]);
             for (int i = 0; i < textLength; i++)
             {
@@ -137,11 +128,11 @@ namespace SharpVectors.Renderers.Texts
                 }
                 else
                 {
-                    textRunList.Add(new WpfTextRun(builder.ToString(), isLatinStart, 
+                    textRunList.Add(new WpfTextRun(builder.ToString(), isLatinStart,
                         vertOrientation, horzOrientation));
 
                     builder.Length = 0;
-                    isLatinStart   = IsLatinGlyph(nextChar);
+                    isLatinStart = IsLatinGlyph(nextChar);
 
                     builder.Append(nextChar);
                 }
