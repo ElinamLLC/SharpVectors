@@ -1,4 +1,6 @@
-﻿namespace SharpVectors.Dom.Svg
+﻿using System;
+
+namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// The SvgFontFaceUriElement interface corresponds to the 'font-face-uri' element. 

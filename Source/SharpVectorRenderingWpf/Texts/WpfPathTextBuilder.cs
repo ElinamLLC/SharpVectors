@@ -24,7 +24,7 @@ namespace SharpVectors.Renderers.Texts
 
         private IList<WpfPathChar> _pathChars;
 
-        private SvgTextElement _textElement;
+        private SvgTextBaseElement _textElement;
         private SvgTextPathElement _textPathElement;
 
         private IList<WpfPathTextRun> _pathTextRuns;
@@ -33,7 +33,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Constructors and Destructor
 
-        public WpfPathTextBuilder(SvgTextElement textElement)
+        public WpfPathTextBuilder(SvgTextBaseElement textElement)
         {
             _textElement = textElement;
             _pathChars    = new List<WpfPathChar>();

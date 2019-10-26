@@ -102,13 +102,13 @@ namespace SharpVectors.Dom.Svg
             get { throw new NotImplementedException(); }
         }
 
-        protected SvgTextElement OwnerTextElement
+        protected SvgTextBaseElement OwnerTextElement
         {
             get {
                 XmlNode node = this;
                 while (node != null)
                 {
-                    SvgTextElement text = node as SvgTextElement;
+                    SvgTextBaseElement text = node as SvgTextBaseElement;
                     if (text != null)
                     {
                         return text;

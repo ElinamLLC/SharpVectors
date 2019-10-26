@@ -335,7 +335,7 @@ namespace SharpVectors.Converters.Shapes
                 }
                 else if (TryCast.Cast(child, out simpleText))
                 {
-                    geometry = ConstructTextGeometry(element as SvgTextElement, 
+                    geometry = ConstructTextGeometry(element as SvgTextBaseElement, 
                         simpleText.InnerText, position, out spanSize);
                     shape = WrapGeometry(geometry, element);
                     shape.IsHitTestVisible = false;

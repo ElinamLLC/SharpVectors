@@ -32,7 +32,7 @@ namespace SharpVectors.Renderers.Texts
         protected string _actualFontName;
 
         protected DrawingContext _drawContext;
-        protected SvgTextElement _textElement;
+        protected SvgTextBaseElement _textElement;
 
         protected WpfTextRendering _textRendering;
 
@@ -40,7 +40,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Constructors and Destructor
 
-        protected WpfTextRenderer(SvgTextElement textElement, WpfTextRendering textRendering)
+        protected WpfTextRenderer(SvgTextBaseElement textElement, WpfTextRendering textRendering)
         {
             if (textElement == null)
             {
@@ -75,7 +75,7 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        public SvgTextElement TextElement
+        public SvgTextBaseElement TextElement
         {
             get {
                 return _textElement;
@@ -158,7 +158,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public virtual void SetElement(SvgTextElement textElement)
+        public virtual void SetElement(SvgTextBaseElement textElement)
         {
             _drawContext = null;
             _context     = null;
@@ -201,6 +201,28 @@ namespace SharpVectors.Renderers.Texts
             if (element.XmlSpace != "preserve")
                 val = val.Replace("\n", string.Empty);
             val = _tabNewline.Replace(val, " ");
+
+            var textTransform = element.GetPropertyValue("text-transform");
+            if (!string.IsNullOrWhiteSpace(textTransform))
+            {
+                switch (textTransform)
+                {
+                    case "capitalize":
+                        val = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(val);
+                        break;
+                    case "uppercase":
+                        val = val.ToUpper(CultureInfo.CurrentCulture);
+                        break;
+                    case "lowercase":
+                        val = val.ToLower(CultureInfo.CurrentCulture);
+                        break;
+                    case "full-width":
+                    case "full-size-kana":
+                    case "none":
+                    default:
+                        break;
+                }
+            }
 
             //if (element.XmlSpace == "preserve" || element.XmlSpace == "default")
             if (element.XmlSpace == "preserve")
@@ -1071,7 +1093,7 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {
-                SvgTextElement textElement = element.ParentNode as SvgTextElement;
+                SvgTextBaseElement textElement = element.ParentNode as SvgTextBaseElement;
                 if (textElement != null)
                 {
                     string anchor = textElement.GetPropertyValue("text-anchor");

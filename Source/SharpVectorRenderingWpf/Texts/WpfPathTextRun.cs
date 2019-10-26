@@ -105,7 +105,7 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        public void SetPosition(Point pos, SvgTextPathElement pathElement, SvgTextElement textElement)
+        public void SetPosition(Point pos, SvgTextPathElement pathElement, SvgTextBaseElement textElement)
         {
             _contentPos  = pos;
             _startOffset = this.GetStartOffset(pathElement, textElement);
@@ -148,7 +148,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Private Methods
 
-        private ISvgAnimatedLength GetStartOffset(SvgTextPathElement pathElement, SvgTextElement textElement)
+        private ISvgAnimatedLength GetStartOffset(SvgTextPathElement pathElement, SvgTextBaseElement textElement)
         {
             ISvgAnimatedLength pathOffset = pathElement.StartOffset;
             if (pathOffset != null && pathOffset.AnimVal != null)
@@ -170,7 +170,7 @@ namespace SharpVectors.Renderers.Texts
             return this.GetStartOffset(textElement);
         }
 
-        private ISvgAnimatedLength GetStartOffset(SvgTextElement textElement)
+        private ISvgAnimatedLength GetStartOffset(SvgTextBaseElement textElement)
         {
             ISvgAnimatedLengthList pathOffsets   = null;
             SvgTextPositioningElement posElement = _contentElement as SvgTextPositioningElement;

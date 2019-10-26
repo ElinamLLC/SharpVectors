@@ -1,4 +1,6 @@
-﻿namespace SharpVectors.Dom.Svg
+﻿using System;
+
+namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// The SvgVKernElement interface corresponds to the 'vkern' element. 

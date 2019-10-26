@@ -30,7 +30,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private double _textWidth;
 
-        private SvgTextElement _textElement;
+        private SvgTextBaseElement _textElement;
 
         private DrawingGroup _drawGroup;
         private DrawingContext _drawContext;
@@ -48,7 +48,7 @@ namespace SharpVectors.Renderers.Wpf
         public WpfTextRendering(SvgElement element)
             : base(element)
         {
-            _textElement = element as SvgTextElement;
+            _textElement = element as SvgTextBaseElement;
             if (_textElement == null)
             {
                 throw new InvalidOperationException();
@@ -275,7 +275,13 @@ namespace SharpVectors.Renderers.Wpf
             if (svgDoc.IsFontsLoaded == false)
             {
                 //TODO: Use of SpinUntil is known to CPU heavy, but will work for now...
-                SpinWait.SpinUntil(() => svgDoc.IsFontsLoaded == true);
+                //SpinWait.SpinUntil(() => svgDoc.IsFontsLoaded == true);
+
+                var svgWnd = svgDoc.Window as SvgWindow;
+                if (svgWnd != null)
+                {
+                    svgWnd.AwaitTasks("SvgDocument");
+                }
             }
 
             XmlNodeType nodeType = XmlNodeType.None;
@@ -742,7 +748,7 @@ namespace SharpVectors.Renderers.Wpf
             _textWidth    = 0;
             _drawGroup    = null;
 
-            _textElement = element as SvgTextElement;
+            _textElement = element as SvgTextBaseElement;
             if (_textElement == null)
             {
                 throw new InvalidOperationException();

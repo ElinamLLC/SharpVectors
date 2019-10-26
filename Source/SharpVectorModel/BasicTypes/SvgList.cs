@@ -4,7 +4,7 @@ namespace SharpVectors.Dom.Svg{	/// <summary>	/// Base class for all SVG*List
     /// Note we're using <see cref="List{T}"/> (as opposed to deriving from) to hide unneeded <see cref="List{T}"/> methods	/// Note that a CLR uint is equivalent to an IDL ulong, so uint is used for all index values	/// </summary>
 	public abstract class SvgList<T> : IEnumerable<T>	{        #region Private Fields
 
-        protected List<T> _items;        private static IDictionary<T, SvgList<T>> _itemOwnerMap;        #endregion
+        protected List<T> _items;        private IDictionary<T, SvgList<T>> _itemOwnerMap;        #endregion
         #region Constructor        /// <summary>        /// SvgList constructor        /// </summary>		protected SvgList()		{			_items        = new List<T>();            _itemOwnerMap = new Dictionary<T, SvgList<T>>();		}        #endregion        #region ISvgList Interface        /// <summary>        /// NumberOfItems        /// </summary>        public uint NumberOfItems        {
             get { return (uint) _items.Count; }
         }

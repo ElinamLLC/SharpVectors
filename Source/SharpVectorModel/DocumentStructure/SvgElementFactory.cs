@@ -67,6 +67,8 @@ namespace SharpVectors.Dom.Svg
                     return new SvgSymbolElement(prefix, localName, ns, doc);
                 case "text": 
                     return new SvgTextElement(prefix, localName, ns, doc);
+                case "textArea": 
+                    return new SvgTextAreaElement(prefix, localName, ns, doc);
                 case "textPath":
                     return new SvgTextPathElement(prefix, localName, ns, doc);
                 case "title": 

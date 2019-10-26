@@ -118,7 +118,7 @@ namespace SharpVectors.Renderers.Gdi
             //    return;
             //}
 
-            SvgTextElement textElement = _svgElement as SvgTextElement;
+            SvgTextBaseElement textElement = _svgElement as SvgTextBaseElement;
             if (textElement == null)
             {
                 return;
@@ -373,7 +373,7 @@ namespace SharpVectors.Renderers.Gdi
 
             if (sBaselineShift.Length > 0)
             {
-                SvgTextElement textElement = (SvgTextElement)element.SelectSingleNode("ancestor::svg:text",
+                SvgTextBaseElement textElement = (SvgTextBaseElement)element.SelectSingleNode("ancestor::svg:text",
                     element.OwnerDocument.NamespaceManager);
 
                 float textFontSize = GetComputedFontSize(textElement);

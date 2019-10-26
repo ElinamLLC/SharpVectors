@@ -17,7 +17,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Constructors and Destructor
 
-        public WpfPathTextRenderer(SvgTextElement textElement, WpfTextRendering textRendering)
+        public WpfPathTextRenderer(SvgTextBaseElement textElement, WpfTextRendering textRendering)
             : base(textElement, textRendering)
         {
         }
@@ -194,7 +194,7 @@ namespace SharpVectors.Renderers.Texts
 
             if (sBaselineShift.Length > 0)
             {
-                SvgTextElement textElement = (SvgTextElement)element.SelectSingleNode("ancestor::svg:text",
+                SvgTextBaseElement textElement = (SvgTextBaseElement)element.SelectSingleNode("ancestor::svg:text",
                     element.OwnerDocument.NamespaceManager);
 
                 double textFontSize = GetComputedFontSize(textElement);

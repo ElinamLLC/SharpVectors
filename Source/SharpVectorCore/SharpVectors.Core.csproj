@@ -111,6 +111,9 @@
     <Compile Include="IElementVisitor.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathMethod.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathSpacing.cs" />
+    <Compile Include="Svg\ClippingMasking\ISharpMarkerHost.cs" />
+    <Compile Include="Svg\ClippingMasking\ISvgClipPathElement.cs" />
+    <Compile Include="Svg\ClippingMasking\ISvgMaskElement.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileElement.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileRule.cs" />
     <Compile Include="Svg\Painting\SvgMarker.cs" />
@@ -480,15 +483,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Svg\Shapes\ISvgRectElement.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Svg\ClippingMaskingCompositing\ISharpMarkerHost.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Svg\ClippingMaskingCompositing\ISvgClipPathElement.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Svg\ClippingMaskingCompositing\ISvgMaskElement.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Svg\Coordinates\ISvgAnimatedPreserveAspectRatio.cs">

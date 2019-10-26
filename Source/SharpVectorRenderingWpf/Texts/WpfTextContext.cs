@@ -28,7 +28,7 @@ namespace SharpVectors.Renderers.Texts
         private Point _positioningEnd;
         private SvgTextContentElement _positioningElement;
 
-        private SvgTextElement _textElement;
+        private SvgTextBaseElement _textElement;
         private WpfTextRendering _textRendering;
 
         private CultureInfo _culture;
@@ -39,7 +39,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Constructors and Destructor
 
-        public WpfTextContext(SvgTextElement textElement, WpfTextRendering textRendering)
+        public WpfTextContext(SvgTextBaseElement textElement, WpfTextRendering textRendering)
         {
             if (textRendering == null)
             {
@@ -55,7 +55,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Properties
 
-        public SvgTextElement TextElement
+        public SvgTextBaseElement TextElement
         {
             get {
                 return _textElement;
@@ -134,7 +134,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Public Methods
 
-        public void SetElement(SvgTextElement textElement)
+        public void SetElement(SvgTextBaseElement textElement)
         {
             if (textElement == null)
             {

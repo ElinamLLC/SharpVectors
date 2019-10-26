@@ -224,8 +224,37 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void AfterRender(WpfDrawingRenderer renderer)
         {
-            base.AfterRender(renderer);
+            this.OnAfterRender(renderer);
 
+            base.AfterRender(renderer);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _isRoot      = false;
+            _isRecursive = false;
+
+            var svgRootElm = element as SvgSvgElement;
+            if (svgRootElm != null)
+            {
+                _isRoot = svgRootElm.IsOuterMost;
+            }
+
+            _drawGroup = null;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OnAfterRender(WpfDrawingRenderer renderer)
+        {
             Debug.Assert(_drawGroup != null);
 
             WpfDrawingContext context = renderer.Context;
@@ -336,26 +365,6 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return drawGroup;
-        }
-
-        #endregion
-
-        #region Protected Methods
-
-        protected override void Initialize(SvgElement element)
-        {
-            base.Initialize(element);
-
-            _isRoot      = false;
-            _isRecursive = false;
-
-            var svgRootElm = element as SvgSvgElement;
-            if (svgRootElm != null)
-            {
-                _isRoot = svgRootElm.IsOuterMost;
-            }
-
-            _drawGroup = null;
         }
 
         #endregion

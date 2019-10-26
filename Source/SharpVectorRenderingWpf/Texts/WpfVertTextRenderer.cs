@@ -18,7 +18,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Constructors and Destructor
 
-        public WpfVertTextRenderer(SvgTextElement textElement, WpfTextRendering textRendering)
+        public WpfVertTextRenderer(SvgTextBaseElement textElement, WpfTextRendering textRendering)
             : base(textElement, textRendering)
         {
         }

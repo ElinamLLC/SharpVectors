@@ -30,6 +30,10 @@ namespace WpfW3cSvgTestSuite
         private static extern void SHParseDisplayName([MarshalAs(UnmanagedType.LPWStr)] string name,
             IntPtr bindingContext, [Out] out IntPtr pidl, uint sfgaoIn, [Out] out uint psfgaoOut);
 
+        [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool IsDirectoryEmpty([MarshalAs(UnmanagedType.LPStr)]string directory);
+
         #endregion
 
         #region Public Events
@@ -42,10 +46,6 @@ namespace WpfW3cSvgTestSuite
 
         private const string ParentSymbol = "..\\";
         private const string SharpVectors = "SharpVectors";
-
-        [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool IsDirectoryEmpty([MarshalAs(UnmanagedType.LPStr)]string directory);
 
         private bool _hidePathsRoot;
         private string _webSuitePath;

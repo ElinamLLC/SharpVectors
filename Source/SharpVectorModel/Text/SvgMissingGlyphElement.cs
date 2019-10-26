@@ -1,4 +1,6 @@
-﻿namespace SharpVectors.Dom.Svg
+﻿using System;
+
+namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// The SvgMissingGlyphElement interface corresponds to the 'missing-glyph' element. 

@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using SharpVectors.Dom.Stylesheets;
 
@@ -9,6 +11,8 @@ namespace SharpVectors.Dom.Svg
     public abstract class SvgWindow : ISvgWindow
     {
         #region Private fields
+
+        protected IDictionary<string, List<Task>> _mappedTasks;
 
         private bool _loadFonts;
 
@@ -19,12 +23,15 @@ namespace SharpVectors.Dom.Svg
 
         private ISvgRenderer _renderer;
 
+        private object _synchObject;
+
         #endregion
 
         #region Contructors and Destructor
 
         private SvgWindow()
         {
+            _synchObject = new object();
         }
 
         protected SvgWindow(long innerWidth, long innerHeight, ISvgRenderer renderer)
@@ -91,6 +98,60 @@ namespace SharpVectors.Dom.Svg
         public SvgDocument CreateEmptySvgDocument()
         {
             return _document = new SvgDocument(this);
+        }
+
+        public void AddTask(string tasksName, Task task)
+        {
+            if (string.IsNullOrWhiteSpace(tasksName) || task == null)
+            {
+                return;
+            }
+            lock (_synchObject)
+            {
+                if (_mappedTasks == null)
+                {
+                    _mappedTasks = new Dictionary<string, List<Task>>(StringComparer.OrdinalIgnoreCase);
+                }
+                if (_mappedTasks.ContainsKey(tasksName))
+                {
+                    var namedTasks = _mappedTasks[tasksName];
+                    if (namedTasks == null)
+                    {
+                        namedTasks = new List<Task>();
+                    }
+                    namedTasks.Add(task);
+                }
+                else
+                {
+                    var namedTasks = new List<Task>();
+                    namedTasks.Add(task);
+
+                    _mappedTasks.Add(tasksName, namedTasks);
+                }
+            }
+        }
+
+        public void AwaitTasks(string tasksName)
+        {
+            lock (_synchObject)
+            {
+                if (string.IsNullOrWhiteSpace(tasksName) || _mappedTasks == null || _mappedTasks.Count == 0)
+                {
+                    return;
+                }
+                if (_mappedTasks.ContainsKey(tasksName))
+                {
+                    var namedTasks = _mappedTasks[tasksName];
+                    if (namedTasks == null || namedTasks.Count == 0)
+                    {
+                        return;
+                    }
+
+                    Task.WaitAll(namedTasks.ToArray());
+
+                    _mappedTasks.Remove(tasksName);
+                }
+            }
         }
 
         #endregion

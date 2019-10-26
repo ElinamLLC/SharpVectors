@@ -387,7 +387,6 @@ namespace SharpVectors.Dom.Svg
                             this.Load(zipStream);
                         }
                     }
-
                     return;
                 }
             }
@@ -610,10 +609,9 @@ namespace SharpVectors.Dom.Svg
         /// <returns></returns>
         private XmlParserContext GetXmlParserContext()
         {
-            DynamicXmlNamespaceManager xmlNamespaceManager = new DynamicXmlNamespaceManager(new NameTable());
+            var xmlNamespaceManager = new DynamicXmlNamespaceManager(new NameTable());
             xmlNamespaceManager.Resolve += OnResolveXmlNamespaceManager;
-            XmlParserContext xmlParserContext = new XmlParserContext(null,
-                xmlNamespaceManager, null, XmlSpace.None);
+            XmlParserContext xmlParserContext = new XmlParserContext(null, xmlNamespaceManager, null, XmlSpace.None);
 
             return xmlParserContext;
         }
@@ -628,9 +626,9 @@ namespace SharpVectors.Dom.Svg
             string uri = null;
             if (this.ResolveNamespace != null)
             {
-                SvgResolveNamespaceEventArgs e = new SvgResolveNamespaceEventArgs(prefix);
-                ResolveNamespace(this, e);
-                uri = e.Uri;
+                 var evtArgs = new SvgResolveNamespaceEventArgs(prefix);
+                ResolveNamespace(this, evtArgs);
+                uri = evtArgs.Uri;
             }
             if (string.IsNullOrWhiteSpace(uri))
             {
@@ -704,11 +702,8 @@ namespace SharpVectors.Dom.Svg
             {
                 return XmlReader.Create(stream, xmlReaderSettings, uri);
             }
-            else
-            {
-                XmlParserContext xmlParserContext = GetXmlParserContext();
-                return XmlReader.Create(stream, xmlReaderSettings, xmlParserContext);
-            }
+            XmlParserContext xmlParserContext = GetXmlParserContext();
+            return XmlReader.Create(stream, xmlReaderSettings, xmlParserContext);
         }
 
         /// <summary>
@@ -739,68 +734,66 @@ namespace SharpVectors.Dom.Svg
             {
                 return GetElementById(absoluteUrl.Substring(1));
             }
-            else
+
+            Uri docUri = ResolveUri("");
+            Uri absoluteUri = new Uri(absoluteUrl);
+
+            if (absoluteUri.IsFile)
             {
-                Uri docUri = ResolveUri("");
-                Uri absoluteUri = new Uri(absoluteUrl);
-
-                if (absoluteUri.IsFile)
+                string localFile = absoluteUri.LocalPath;
+                if (File.Exists(localFile) == false)
                 {
-                    string localFile = absoluteUri.LocalPath;
-                    if (File.Exists(localFile) == false)
-                    {
-                        Trace.TraceError("GetNodeByUri: Locally referenced file not found: " + localFile);
-                        return null;
-                    }
-                    string fileExt = Path.GetExtension(localFile);
-                    if (!string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
-                        && !string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Trace.TraceError("GetNodeByUri: Locally referenced file not valid: " + localFile);
-                        return null;
-                    }
-                }
-
-                if (string.Equals(absoluteUri.Scheme, "data", StringComparison.OrdinalIgnoreCase))
-                {
-                    Trace.TraceError("GetNodeByUri: The Uri Scheme is 'data' is not a valid XmlDode " + absoluteUri);
+                    Trace.TraceError("GetNodeByUri: Locally referenced file not found: " + localFile);
                     return null;
                 }
-
-                string fragment = absoluteUri.Fragment;
-
-                if (fragment.Length == 0)
+                string fileExt = Path.GetExtension(localFile);
+                if (!string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
-                    // no fragment => return entire document
-                    if (docUri != null && docUri.AbsolutePath == absoluteUri.AbsolutePath)
-                    {
-                        return this;
-                    }
-
-                    SvgDocument doc = new SvgDocument((SvgWindow)Window);
-
-                    XmlReaderSettings settings = this.GetXmlReaderSettings();
-
-                    settings.CloseInput = true;
-
-                    //PrepareXmlResolver(settings);
-
-                    using (XmlReader reader = XmlReader.Create(
-                        GetResource(absoluteUri).GetResponseStream(), settings,
-                        absoluteUri.AbsolutePath))
-                    {
-                        doc.Load(reader);
-                    }
-
-                    return doc;
+                    Trace.TraceError("GetNodeByUri: Locally referenced file not valid: " + localFile);
+                    return null;
                 }
-                else
+            }
+
+            if (string.Equals(absoluteUri.Scheme, "data", StringComparison.OrdinalIgnoreCase))
+            {
+                Trace.TraceError("GetNodeByUri: The Uri Scheme is 'data' is not a valid XmlDode " + absoluteUri);
+                return null;
+            }
+
+            string fragment = absoluteUri.Fragment;
+
+            if (fragment.Length == 0)
+            {
+                // no fragment => return entire document
+                if (docUri != null && string.Equals(docUri.AbsolutePath, 
+                    absoluteUri.AbsolutePath, StringComparison.OrdinalIgnoreCase))
                 {
-                    // got a fragment => return XmlElement
-                    string noFragment = absoluteUri.AbsoluteUri.Replace(fragment, "");
-                    SvgDocument doc = (SvgDocument)GetNodeByUri(new Uri(noFragment));
-                    return doc.GetElementById(fragment.Substring(1));
+                    return this;
                 }
+
+                SvgDocument doc = new SvgDocument((SvgWindow)Window);
+
+                XmlReaderSettings settings = this.GetXmlReaderSettings();
+
+                settings.CloseInput = true;
+
+                //PrepareXmlResolver(settings);
+
+                using (XmlReader reader = XmlReader.Create(GetResource(absoluteUri).GetResponseStream(), 
+                    settings, absoluteUri.AbsolutePath))
+                {
+                    doc.Load(reader);
+                }
+
+                return doc;
+            }
+            else
+            {
+                // got a fragment => return XmlElement
+                string noFragment = absoluteUri.AbsoluteUri.Replace(fragment, "");
+                SvgDocument doc = (SvgDocument)GetNodeByUri(new Uri(noFragment));
+                return doc.GetElementById(fragment.Substring(1));
             }
         }
 
@@ -1150,7 +1143,8 @@ namespace SharpVectors.Dom.Svg
             return fontUrls;
         }
 
-        private static void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls, IDictionary<string, string> styledFontIds)
+        private static void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls, 
+            IDictionary<string, string> styledFontIds)
         {
             if (cssSheet == null || fontUrls == null)
             {
@@ -1208,7 +1202,7 @@ namespace SharpVectors.Dom.Svg
             _isFontsLoaded = false;
 
             //TODO: Trying a background run...
-            Task.Factory.StartNew(() => {
+            var loadTask = Task.Factory.StartNew(() => {
                 SvgWindow ownedWindow = _window.CreateOwnedWindow();
                 ownedWindow.LoadFonts = false;
 
@@ -1238,7 +1232,7 @@ namespace SharpVectors.Dom.Svg
                         }
                         else
                         {
-                            //TODO
+                            throw new NotSupportedException("Loading fonts from a remote source is not supported.");
                         }
                     }
                     catch (Exception ex)
@@ -1250,12 +1244,15 @@ namespace SharpVectors.Dom.Svg
 
                 _isFontsLoaded = true;
             });
+
+            _window.AddTask("SvgDocument", loadTask);
         }
 
         private void LoadLocalFont(string fontPath, SvgWindow ownedWindow, SvgFontFaceElement fontFace)
         {
             if (string.IsNullOrWhiteSpace(fontPath) || !File.Exists(fontPath))
             {
+//                Trace.WriteLine("Private font not found: " + fontPath);
                 return;
             }
 
@@ -1289,6 +1286,12 @@ namespace SharpVectors.Dom.Svg
             else if (string.Equals(fileExt, ".ttf", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(fileExt, ".otf", StringComparison.OrdinalIgnoreCase))
             {
+                Debug.Assert(false, "Testing files with this format");
+            }
+            else if (string.Equals(fileExt, ".woff", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(fileExt, ".woff2", StringComparison.OrdinalIgnoreCase))
+            {
+                Debug.Assert(false, "Testing files with this format");
             }
         }
 

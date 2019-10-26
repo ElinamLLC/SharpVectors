@@ -3,8 +3,8 @@
   <Class Name="SharpVectors.Dom.Svg.SvgTextContentElement" Collapsed="true">
     <Position X="2.25" Y="0.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ACEAAAAFCBAAoCAIACEgQABAQAABAABgAAoARAEFgAQ=</HashCode>
-      <FileName>Dom\Svg\Text\SvgTextContentElement.cs</FileName>
+      <HashCode>ACEAEIAFCAAAICAAAAUhAABAQAAAAABAAAAARAAEgAQ=</HashCode>
+      <FileName>Text\SvgTextContentElement.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -12,39 +12,47 @@
     <Position X="2.25" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAYAA=</HashCode>
-      <FileName>Dom\Svg\Text\SvgTextPositioningElement.cs</FileName>
+      <FileName>Text\SvgTextPositioningElement.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="1.325" />
   </Class>
   <Class Name="SharpVectors.Dom.Svg.SvgTextElement" Collapsed="true">
     <Position X="0.5" Y="3.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
-      <FileName>Dom\Svg\Text\SvgTextElement.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Text\SvgTextElement.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="1.025" />
   </Class>
   <Class Name="SharpVectors.Dom.Svg.SvgTRefElement" Collapsed="true">
     <Position X="2.5" Y="3.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAIAAAAAAAAABAABAAAAABAAA=</HashCode>
-      <FileName>Dom\Svg\Text\SvgTRefElement.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAABAAAAAAAAA=</HashCode>
+      <FileName>Text\SvgTRefElement.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="1.017" />
   </Class>
   <Class Name="SharpVectors.Dom.Svg.SvgTSpanElement" Collapsed="true">
     <Position X="4.5" Y="3.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Dom\Svg\Text\SvgTSpanElement.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Text\SvgTSpanElement.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="1.158" />
+  </Class>
+  <Class Name="SharpVectors.Dom.Svg.SvgTextPathElement" Collapsed="true">
+    <Position X="5.5" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAAAAAAAAAgAAAAAEAAAABAABAABAAAgAA=</HashCode>
+      <FileName>Text\SvgTextPathElement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Enum Name="SharpVectors.Dom.Svg.SvgLengthAdjust">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBA=</HashCode>
-      <FileName>Dom\Svg\Text\SvgTextContentElement.cs</FileName>
+      <FileName>Text\SvgTextContentElement.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

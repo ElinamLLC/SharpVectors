@@ -17,7 +17,7 @@ namespace SharpVectors.Renderers.Texts
 
         #region Constructors and Destructor
 
-        public WpfHorzTextRenderer(SvgTextElement textElement, WpfTextRendering textRendering)
+        public WpfHorzTextRenderer(SvgTextBaseElement textElement, WpfTextRendering textRendering)
             : base(textElement, textRendering)
         {
         }
@@ -371,7 +371,7 @@ namespace SharpVectors.Renderers.Texts
             TextDecorationCollection textDecors = GetTextDecoration(element);
             if (textDecors == null)
             {
-                SvgTextElement textElement = element.ParentNode as SvgTextElement;
+                SvgTextBaseElement textElement = element.ParentNode as SvgTextBaseElement;
 
                 if (textElement != null)
                 {
@@ -911,7 +911,7 @@ namespace SharpVectors.Renderers.Texts
             TextDecorationCollection textDecors = GetTextDecoration(element);
             if (textDecors == null)
             {
-                SvgTextElement textElement = element.ParentNode as SvgTextElement;
+                SvgTextBaseElement textElement = element.ParentNode as SvgTextBaseElement;
 
                 if (textElement != null)
                 {

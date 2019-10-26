@@ -123,6 +123,8 @@
     <Compile Include="Animations\SvgAnimateSetElement.cs" />
     <Compile Include="Animations\SvgAnimateTransformElement.cs" />
     <Compile Include="Animations\SvgAnimationElement.cs" />
+    <Compile Include="ClippingMasking\SvgClipPathElement.cs" />
+    <Compile Include="ClippingMasking\SvgMaskElement.cs" />
     <Compile Include="DocumentStructure\SvgAElement.cs" />
     <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
@@ -238,12 +240,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BasicTypes\SvgZoomAndPan.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ClippingMaskingCompositing\SvgClipPathElement.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ClippingMaskingCompositing\SvgMaskElement.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DocumentStructure\SvgDefsElement.cs">
@@ -447,10 +443,12 @@
     <Compile Include="Text\SvgHKernElement.cs" />
     <Compile Include="Text\SvgKernElement.cs" />
     <Compile Include="Text\SvgMissingGlyphElement.cs" />
+    <Compile Include="Text\SvgTextElement.cs" />
     <Compile Include="Text\SvgTextContentElement.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Text\SvgTextElement.cs">
+    <Compile Include="Text\SvgTextAreaElement.cs" />
+    <Compile Include="Text\SvgTextBaseElement.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Text\SvgTextPathElement.cs" />
