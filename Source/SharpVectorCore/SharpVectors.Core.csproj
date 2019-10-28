@@ -99,7 +99,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CssConstants.cs" />
     <Compile Include="IElementTimeControl.cs" />
+    <Compile Include="SvgConstants.cs" />
     <Compile Include="Svg\Animations\ISvgAnimateColorElement.cs" />
     <Compile Include="Svg\Animations\ISvgAnimateElement.cs" />
     <Compile Include="Svg\Animations\ISvgAnimateMotionElement.cs" />
@@ -790,6 +792,7 @@
     <Compile Include="Views\IDocumentView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="XmlConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SharpVectors.Core.snk" />

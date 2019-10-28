@@ -22,6 +22,8 @@ namespace SharpVectors.Renderers.Texts
         protected readonly double _dpiX;
         protected readonly double _dpiY;
 
+        protected bool _buildPathGeometry;
+
         protected CultureInfo _culture;
 
         protected TextDecorationCollection _textDecorations;
@@ -83,7 +85,7 @@ namespace SharpVectors.Renderers.Texts
             }
             if (familyInfo.FontFamilyType == WpfFontFamilyType.Svg)
             {
-                WpfSvgTextBuilder textBuilder = new WpfSvgTextBuilder(familyInfo.FontElement,
+                var textBuilder = new WpfSvgTextBuilder(familyInfo.FontElement,
                     culture, familyInfo.Name, fontSize);
 
                 textBuilder.FontStyle   = familyInfo.Style;
@@ -182,6 +184,16 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        public bool BuildPathGeometry
+        {
+            get {
+                return _buildPathGeometry;
+            }
+            set {
+                _buildPathGeometry = value;
+            }
+        }
+
         public abstract double Ascent { get; }
 
         /// <summary>
@@ -223,6 +235,20 @@ namespace SharpVectors.Renderers.Texts
         /// <value>A <see cref="double"/> that indicates the underline thickness, expressed as a fraction 
         /// of the font em size.</value>
         public abstract double UnderlineThickness { get; }
+
+        /// <summary>
+        /// Gets a value that indicates the distance of the overline from the baseline for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the overline position, measured from the baseline 
+        /// and expressed as a fraction of the font em size.</value>
+        public abstract double OverlinePosition { get; }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the overline thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        public abstract double OverlineThickness { get; }
 
         /// <summary>
         /// Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 

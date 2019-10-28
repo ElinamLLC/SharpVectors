@@ -54,7 +54,7 @@ namespace SharpVectors.Dom.Css
             _origin     = CssStyleSheetType.Collector;
             _readOnly   = true;
             _parentRule = null;
-            _styles     = new Dictionary<string, CssStyleBlock>();
+            _styles     = new Dictionary<string, CssStyleBlock>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>

@@ -117,7 +117,7 @@ namespace SharpVectors.Dom.Stylesheets
                 // yavor87 committed on Sep 19, 2016: Creative-Safety-Supply/sharpvectors
                 //TODO: Fixed stackoverlfow exception in cases when @import css stylesheet statement is used
                 //if (this.OwnerNode is XmlElement)
-                if (this.OwnerNode is XmlElement && string.IsNullOrEmpty(_href))
+                if (this.OwnerNode is XmlElement && string.IsNullOrWhiteSpace(_href))
                 {
                     return this.OwnerNode.InnerText;
                 }
@@ -128,7 +128,9 @@ namespace SharpVectors.Dom.Stylesheets
                     LoadSheet();
                 }
                 if (_succeededDownload)
+                {
                     return _sheetContent;
+                }
                 return string.Empty;
             }
 
@@ -163,24 +165,45 @@ namespace SharpVectors.Dom.Stylesheets
 
         internal void LoadSheet()
         {
-            //WebRequest request = (WebRequest)WebRequest.Create(AbsoluteHref);
-            WebRequest request = new ExtendedHttpWebRequest(AbsoluteHref);
-            _triedDownload = true;
-            try
+            var absoluteUri = this.AbsoluteHref;
+            if (absoluteUri == null)
             {
-                WebResponse response = request.GetResponse();
-
-                _succeededDownload = true;
-                StreamReader str = new StreamReader(response.GetResponseStream(), Encoding.Default, true);
-                _sheetContent = str.ReadToEnd();
-                str.Close();
+                return;
             }
-            catch
+            if (absoluteUri.IsFile)
             {
-                _succeededDownload = false;
-                _sheetContent = string.Empty;
+                try
+                {
+                    _succeededDownload = true;
+                    StreamReader str = new StreamReader(absoluteUri.LocalPath, Encoding.Default, true);
+                    _sheetContent = str.ReadToEnd();
+                    str.Close();
+                }
+                catch
+                {
+                    _succeededDownload = false;
+                    _sheetContent = string.Empty;
+                }
             }
+            else
+            {
+                WebRequest request = new ExtendedHttpWebRequest(AbsoluteHref);
+                _triedDownload = true;
+                try
+                {
+                    WebResponse response = request.GetResponse();
 
+                    _succeededDownload = true;
+                    StreamReader str = new StreamReader(response.GetResponseStream(), Encoding.Default, true);
+                    _sheetContent = str.ReadToEnd();
+                    str.Close();
+                }
+                catch
+                {
+                    _succeededDownload = false;
+                    _sheetContent = string.Empty;
+                }
+            }
         }
 
         #endregion
@@ -231,26 +254,24 @@ namespace SharpVectors.Dom.Stylesheets
         public Uri AbsoluteHref
         {
             get {
-                Uri u = null;
+                Uri uri = null;
                 if (_ownerNode != null)
                 {
                     // Fixed logic for cases in which document base uri is unknown
                     if (!string.IsNullOrWhiteSpace(_ownerNode.BaseURI))
                     {
-                        u = new Uri(new Uri(_ownerNode.BaseURI), Href);
+                        uri = new Uri(new Uri(_ownerNode.BaseURI), Href);
                     }
-                    //else
-                    //{                           
-                    //    u = new Uri(ApplicationContext.DocumentDirectoryUri, Href);
-                    //}
+                    else
+                    {
+                        uri = new Uri(Href, UriKind.RelativeOrAbsolute);
+                    }
                 }
-
-                if (u == null)
+                if (uri == null)
                 {
                     throw new InvalidDataException();
                 }
-
-                return u;
+                return uri;
             }
         }
 

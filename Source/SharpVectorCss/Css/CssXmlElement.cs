@@ -132,11 +132,12 @@ namespace SharpVectors.Dom.Css
 
         public override bool Supports(string feature, string version)
         {
-            if ((feature == "StyleSheets" || feature == "CSS") && version == "2.0")
-            {
-                return true;
-            }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
+            if (string.Equals(feature, "StyleSheets", comparer) || string.Equals(feature, "CSS", comparer))
+            {
+                return (string.Equals(version, "2.0", comparer) || string.Equals(version, "3.0", comparer));
+            }
             return base.Supports(feature, version);
         }
 

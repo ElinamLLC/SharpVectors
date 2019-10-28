@@ -46,10 +46,11 @@ namespace SharpVectors.Dom.Svg
                     _isClosed      = hardler.IsClosed;
                     _mayHaveCurves = hardler.MayHaveCurves;
                 }
-                else if (_segments.Count != 0)
-                {
-                    _segments = new List<SvgPathSeg>();
-                }
+                //else if (_segments.Count != 0)
+                //{
+                //    _segments = new List<SvgPathSeg>();
+                //}
+
                 //SvgPathSegParser parser = new SvgPathSegParser();
                 //if (parser.Parse(this, d))
                 //{

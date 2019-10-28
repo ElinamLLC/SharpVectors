@@ -56,7 +56,7 @@
                     <DataTemplate>
                         <StackPanel Margin="8,8,8,8" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Image Source="{Binding Path=Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="120" Height="120" />
-                            <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" />
+                            <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" FontSize="10px" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -58,7 +58,14 @@ namespace SharpVectors.Dom.Stylesheets
 
                 foreach (XmlElement elm in styleNodes)
                 {
-                    _styleSheets.Add(new CssStyleSheet(elm, CssStyleSheetType.Author));
+                    var styleType = elm.GetAttribute("type");
+
+                    // Check for valid 'type' attribute of the style element
+                    if (string.IsNullOrWhiteSpace(styleType) || 
+                        string.Equals(styleType, "text/css", StringComparison.OrdinalIgnoreCase))
+                    {
+                        _styleSheets.Add(new CssStyleSheet(elm, CssStyleSheetType.Author));
+                    }
                 }
             }
         }
@@ -131,7 +138,6 @@ namespace SharpVectors.Dom.Stylesheets
             get {
                 return _styleSheets[index];
             }
-
             set {
                 _styleSheets[index] = (StyleSheet)value;
             }

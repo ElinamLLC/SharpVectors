@@ -21,7 +21,7 @@ namespace SharpVectors.Dom.Css
 
         private CssCollectedStyleDeclaration()
 		{
-            _collectedStyles = new Dictionary<string, CssCollectedProperty>();
+            _collectedStyles = new Dictionary<string, CssCollectedProperty>(StringComparer.OrdinalIgnoreCase);
         }
 
         public CssCollectedStyleDeclaration(XmlElement elm)

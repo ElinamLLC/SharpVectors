@@ -36,6 +36,11 @@ namespace SharpVectors.Renderers.Texts
             _contentPos     = new Point(0, 0);
             _contentElement = textElement;
             _contentBuilder = textBuilder;
+
+            if (textBuilder != null)
+            {
+                textBuilder.BuildPathGeometry = true;
+            }
         }
 
         #endregion

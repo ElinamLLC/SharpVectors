@@ -233,16 +233,22 @@ namespace SharpVectors.Renderers.Wpf
                 this.EndUseElement(useElement, hashCode);
                 return;
             }
+            XmlElement refElParent = refEl.ParentNode as XmlElement;
+            var siblingNode = refEl.PreviousSibling;
+            if (siblingNode != null && siblingNode.NodeType == XmlNodeType.Whitespace)
+            {
+                siblingNode = siblingNode.PreviousSibling;
+            }
 
             // For the external node, the documents are different, and we may not be
             // able to insert this node, so we first import it...
             if (useElement.OwnerDocument != refEl.OwnerDocument)
             {
-                XmlElement importedNode = useElement.OwnerDocument.ImportNode(refEl, true) as XmlElement;
+                var importedNode = useElement.OwnerDocument.ImportNode(refEl, true) as XmlElement;
 
                 if (importedNode != null)
                 {
-                    SvgElement importedSvgElement = importedNode as SvgElement;
+                    var importedSvgElement = importedNode as SvgElement;
                     if (importedSvgElement != null)
                     {
                         importedSvgElement.Imported       = true;
@@ -259,17 +265,64 @@ namespace SharpVectors.Renderers.Wpf
                 refEl = (XmlElement)refEl.CloneNode(true);
             }
             // Reset any ID on the cloned/copied element to avoid duplication of IDs.
- //           refEl.SetAttribute("id", "");
+            //           refEl.SetAttribute("id", "");
 
             useElement.OwnerDocument.Static = true;
             useElement.CopyToReferencedElement(refEl);
+
+            XmlElement refSiblingEl = null;
+            string useId = null;
+
+            // Compensate for the parent's class and sibling css loss from cloning...
+            if (refElParent != null && refElParent.HasAttribute("class"))
+            {
+                var parentClass = refElParent.GetAttribute("class");
+                if (!string.IsNullOrWhiteSpace(parentClass))
+                {
+                    var parentEl = document.CreateElement(refElParent.LocalName);
+                    parentEl.SetAttribute("class", parentClass);
+
+                    parentEl.AppendChild(refEl);
+
+                    refEl = parentEl;
+                }
+            }
+            else if (refElParent != null && siblingNode != null)
+            {
+                var siblingEl = siblingNode as XmlElement;
+                if (siblingEl != null && siblingEl.HasAttribute("class"))
+                {
+                    var siblingClass = siblingEl.GetAttribute("class");
+                    if (!string.IsNullOrWhiteSpace(siblingClass))
+                    {
+                        refSiblingEl = (XmlElement)siblingEl.CloneNode(true);
+
+                        useElement.AppendChild(refSiblingEl);
+                    }
+                }
+            }
+            else
+            {
+                //useId = useElement.Id;
+                //useElement.SetAttribute("id", "");
+            }
+
             useElement.AppendChild(refEl);
 
             // Now, render the use element...
             this.RenderElement(svgElement);
 
+            if (refSiblingEl != null)
+            {
+                useElement.RemoveChild(refSiblingEl);
+            }
             useElement.RemoveChild(refEl);
             useElement.RestoreReferencedElement(refEl);
+
+            if (useId != null)
+            {
+                useElement.SetAttribute("id", useId);
+            }
 
             this.EndUseElement(useElement, hashCode);
         }

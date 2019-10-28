@@ -217,6 +217,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Diagrams.cd" />
     <None Include="SharpVectors.Css.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

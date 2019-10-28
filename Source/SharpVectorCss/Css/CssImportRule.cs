@@ -15,9 +15,11 @@ namespace SharpVectors.Dom.Css
     {
         #region Static members
 
-        private static Regex regex = new Regex(@"^@import\s(url\()?""(?<importhref>[^""]+)""\)?(\s(?<importmedia>([a-z]+)(\s*,\s*)?)+)?;");
+        private static readonly Regex regex = new Regex(
+            @"^@import\s(url\()?""(?<importhref>[^""]+)""\)?(\s(?<importmedia>([a-z]+)(\s*,\s*)?)+)?;");
 
-        internal static CssRule Parse(ref string css, object parent, bool readOnly, IList<string> replacedStrings, CssStyleSheetType origin)
+        internal static CssRule Parse(ref string css, object parent, bool readOnly, 
+            IList<string> replacedStrings, CssStyleSheetType origin)
         {
             Match match = regex.Match(css);
             if (match.Success)

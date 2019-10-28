@@ -186,41 +186,6 @@ namespace SharpVectors.Renderers.Wpf
             base.AfterRender(renderer);
         }
 
-        public static Matrix GetTransformMatrix(SvgElement element)
-        {
-            ISvgTransformable transElm = element as ISvgTransformable;
-            if (transElm == null)
-                return Matrix.Identity;
-
-            SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
-            SvgTransform svgTransform = (SvgTransform)svgTList.Consolidate();
-            SvgMatrix svgMatrix       = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
-
-            return new Matrix(svgMatrix.A, svgMatrix.B, svgMatrix.C,
-                svgMatrix.D, svgMatrix.E, svgMatrix.F);
-        }
-
-        public static Matrix GetTransformMatrix(SvgElement element, TransformGroup transform)
-        {
-            ISvgTransformable transElm = element as ISvgTransformable;
-            if (transElm == null)
-                return Matrix.Identity;
-
-            SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
-            SvgTransform svgTransform = (SvgTransform)svgTList.Consolidate();
-            SvgMatrix svgMatrix       = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
-
-            var matrix = new Matrix(svgMatrix.A, svgMatrix.B, svgMatrix.C,
-                svgMatrix.D, svgMatrix.E, svgMatrix.F);
-
-            if (!matrix.IsIdentity)
-            {
-                transform.Children.Add(new MatrixTransform(matrix));
-            }
-
-            return matrix;
-        }
-
         public void RenderMarker(WpfDrawingRenderer renderer, WpfDrawingContext gr,
             SvgMarkerPosition markerPos, SvgStyleableElement refElement)
         {
@@ -431,6 +396,61 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _matrix        = Matrix.Identity;
+            _drawGroup     = null;
+            _hostElement   = null;
+            _pathFigures   = null;
+
+            _markerElement = element as SvgMarkerElement;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private static Matrix GetTransformMatrix(SvgElement element)
+        {
+            ISvgTransformable transElm = element as ISvgTransformable;
+            if (transElm == null)
+                return Matrix.Identity;
+
+            SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
+            SvgTransform svgTransform = (SvgTransform)svgTList.Consolidate();
+            SvgMatrix svgMatrix       = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
+
+            return new Matrix(svgMatrix.A, svgMatrix.B, svgMatrix.C,
+                svgMatrix.D, svgMatrix.E, svgMatrix.F);
+        }
+
+        private static Matrix GetTransformMatrix(SvgElement element, TransformGroup transform)
+        {
+            ISvgTransformable transElm = element as ISvgTransformable;
+            if (transElm == null)
+                return Matrix.Identity;
+
+            SvgTransformList svgTList = (SvgTransformList)transElm.Transform.AnimVal;
+            SvgTransform svgTransform = (SvgTransform)svgTList.Consolidate();
+            SvgMatrix svgMatrix       = ((SvgTransformList)transElm.Transform.AnimVal).TotalMatrix;
+
+            var matrix = new Matrix(svgMatrix.A, svgMatrix.B, svgMatrix.C,
+                svgMatrix.D, svgMatrix.E, svgMatrix.F);
+
+            if (!matrix.IsIdentity)
+            {
+                transform.Children.Add(new MatrixTransform(matrix));
+            }
+
+            return matrix;
+        }
+
         private double GetAngleAt(int index, double angle, SvgMarkerPosition position, ISharpMarkerHost markerHost)
         {
             if (markerHost == null || _pathFigures == null || _pathFigures.Count == 0)
@@ -511,22 +531,6 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return angle;
-        }
-
-        #endregion
-
-        #region Protected Methods
-
-        protected override void Initialize(SvgElement element)
-        {
-            base.Initialize(element);
-
-            _matrix        = Matrix.Identity;
-            _drawGroup     = null;
-            _hostElement   = null;
-            _pathFigures   = null;
-
-            _markerElement = element as SvgMarkerElement;
         }
 
         #endregion

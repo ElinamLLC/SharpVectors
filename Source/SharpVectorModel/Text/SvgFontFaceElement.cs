@@ -42,7 +42,7 @@ namespace SharpVectors.Dom.Svg
                     var fontElement = this.ParentNode as SvgFontElement;
                     return (fontElement == null ? 0 : (this.UnitsPerEm - fontElement.VertOriginY));
                 }
-                return this.GetAttribute("ascent", 0.0f);
+                return this.GetAttribute("ascent", this.UnitsPerEm * 0.8f);
             }
             set { this.SetAttribute("ascent", value); }
         }
@@ -77,7 +77,7 @@ namespace SharpVectors.Dom.Svg
                     var fontElement = this.ParentNode as SvgFontElement;
                     return (fontElement == null ? 0.0f : fontElement.VertOriginY);
                 }
-                return this.GetAttribute("descent", 0.0f);
+                return this.GetAttribute("descent", this.UnitsPerEm * 0.2f);
             }
             set { this.SetAttribute("descent", value); }
         }
@@ -188,7 +188,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "panose-1" {string}</remarks>
         public string Panose1
         {
-            get { return this.GetAttribute("panose-1"); }
+            get { return this.GetAttribute("panose-1", SvgConstants.DefFontFacePanose_1); }
             set { this.SetAttribute("panose-1", value); }
         }
 
@@ -211,7 +211,7 @@ namespace SharpVectors.Dom.Svg
         public float UnitsPerEm
         {
             get {
-                return this.GetAttribute("units-per-em", 1000.0f);
+                return this.GetAttribute("units-per-em", Convert.ToSingle(SvgConstants.DefFontFaceUnitsPerEm));
             }
             set { this.SetAttribute("units-per-em", value); }
         }
@@ -250,7 +250,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "strikethrough-position" {number}</remarks>
         public float StrikethroughPosition
         {
-            get { return this.GetAttribute("strikethrough-position", 0.0f); }
+            get { return this.GetAttribute("strikethrough-position", 3 * this.Ascent / 8f); }
             set { this.SetAttribute("strikethrough-position", value); }
         }
 
@@ -262,7 +262,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "strikethrough-thickness" {number}</remarks>
         public float StrikethroughThickness
         {
-            get { return this.GetAttribute("strikethrough-thickness", 0.0f); }
+            get { return this.GetAttribute("strikethrough-thickness", this.UnitsPerEm / 20f); }
             set { this.SetAttribute("strikethrough-thickness", value); }
         }
 
@@ -274,7 +274,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "underline-position" {number}</remarks>
         public float UnderlinePosition
         {
-            get { return this.GetAttribute("underline-position", 0.0f); }
+            get { return this.GetAttribute("underline-position", -3 * this.UnitsPerEm / 40f); }
             set { this.SetAttribute("underline-position", value); }
         }
 
@@ -286,7 +286,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "underline-thickness" {number}</remarks>
         public float UnderlineThickness
         {
-            get { return this.GetAttribute("underline-thickness", 0.0f); }
+            get { return this.GetAttribute("underline-thickness", this.UnitsPerEm / 20f); }
             set { this.SetAttribute("underline-thickness", value); }
         }
 
@@ -298,7 +298,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "overline-position" {number}</remarks>
         public float OverlinePosition
         {
-            get { return this.GetAttribute("overline-position", 0.0f); }
+            get { return this.GetAttribute("overline-position", this.Ascent); }
             set { this.SetAttribute("overline-position", value); }
         }
 
@@ -310,7 +310,7 @@ namespace SharpVectors.Dom.Svg
         /// <remarks>attribute name = "overline-thickness" {number}</remarks>
         public float OverlineThickness
         {
-            get { return this.GetAttribute("overline-thickness", 0.0f); }
+            get { return this.GetAttribute("overline-thickness", this.UnitsPerEm / 20f); }
             set { this.SetAttribute("overline-thickness", value); }
         }
 

@@ -97,12 +97,13 @@ namespace SharpVectors.Dom.Css
 
         private string PreProcessContent()
         {
-            if (!string.IsNullOrWhiteSpace(this.SheetContent))
+            var styleContent = this.SheetContent;
+            if (!string.IsNullOrWhiteSpace(styleContent))
             {
                 // "escape" strings, eg: "foo" => "<<<number>>>"			
                 Regex re = new Regex(@"(""(.|\n)*?[^\\]"")|('(.|\n)*?[^\\]')");
                 _alReplacedStrings.Clear();
-                string s = re.Replace(SheetContent, new MatchEvaluator(StringReplaceEvaluator));
+                string s = re.Replace(styleContent, new MatchEvaluator(StringReplaceEvaluator));
 
                 // remove comments
                 Regex reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");

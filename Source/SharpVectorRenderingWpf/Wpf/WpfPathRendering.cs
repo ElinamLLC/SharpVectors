@@ -83,20 +83,34 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
             }
-            string eVisibility = _svgElement.GetAttribute("visibility");
-            string eDisplay    = _svgElement.GetAttribute("display");
-            if (string.Equals(eVisibility, "hidden") || string.Equals(eDisplay, "none"))
+            //string eVisibility = _svgElement.GetAttribute("visibility");
+            //string eDisplay    = _svgElement.GetAttribute("display");
+            //if (string.Equals(eVisibility, "hidden") || string.Equals(eDisplay, "none"))
+            //{
+            //    opacityValue = 0;
+            //}
+            //else
+            //{
+            //    string sVisibility = styleElm.GetPropertyValue("visibility");
+            //    string sDisplay = styleElm.GetPropertyValue("display");
+            //    if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            //    {
+            //        opacityValue = 0;
+            //    }
+            //}
+            string sVisibility = styleElm.GetPropertyValue("visibility");
+            if (string.IsNullOrWhiteSpace(sVisibility))
+            {
+                sVisibility = _svgElement.GetAttribute("visibility");
+            }
+            string sDisplay = styleElm.GetPropertyValue("display");
+            if (string.IsNullOrWhiteSpace(sDisplay))
+            {
+                sDisplay = _svgElement.GetAttribute("display");
+            }
+            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
             {
                 opacityValue = 0;
-            }
-            else
-            {
-                string sVisibility = styleElm.GetPropertyValue("visibility");
-                string sDisplay = styleElm.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
-                {
-                    opacityValue = 0;
-                }
             }
 
             Transform pathTransform = this.Transform;
@@ -772,13 +786,13 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void AfterRender(WpfDrawingRenderer renderer)
         {
-            base.AfterRender(renderer);
-
             WpfDrawingContext context = renderer.Context;
             if (_drawGroup != null)
             {
                 context.Pop();
             }
+
+            base.AfterRender(renderer);
         }
 
         //==========================================================================

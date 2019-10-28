@@ -69,6 +69,8 @@ namespace SharpVectors.Renderers.Texts
         public override double StrikethroughThickness { get => throw new NotImplementedException(); }
         public override double UnderlinePosition { get => throw new NotImplementedException(); }
         public override double UnderlineThickness { get => throw new NotImplementedException(); }
+        public override double OverlinePosition { get => throw new NotImplementedException(); }
+        public override double OverlineThickness { get => throw new NotImplementedException(); }
         public override double XHeight { get => throw new NotImplementedException(); }
         public override double Alphabetic { get => throw new NotImplementedException(); }
         public override double Width { get => throw new NotImplementedException(); }

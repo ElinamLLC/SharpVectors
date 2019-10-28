@@ -200,6 +200,38 @@ namespace SharpVectors.Renderers.Texts
         }
 
         /// <summary>
+        /// Gets a value that indicates the distance of the overline from the baseline for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the overline position, measured from the baseline 
+        /// and expressed as a fraction of the font em size.</value>
+        public override double OverlinePosition
+        {
+            get {
+                if (_typeface != null)
+                {
+                    //return _typeface.OverlinePosition;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.
+        /// </summary>
+        /// <value>A <see cref="double"/> that indicates the overline thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        public override double OverlineThickness
+        {
+            get {
+                if (_typeface != null)
+                {
+                    return _typeface.UnderlineThickness; // Overline and underline: should be the same!
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 
         /// The distance excludes ascenders.
         /// </summary>
@@ -346,7 +378,7 @@ namespace SharpVectors.Renderers.Texts
 
             if (_glyphRun == null)
             {
-                return new PathGeometry();
+                return new GeometryGroup();
             }
 
             // Approximate the width of the text...
@@ -355,20 +387,79 @@ namespace SharpVectors.Renderers.Texts
 
             _textWidth = Math.Max(0, designRect.Right);
 
-            PathGeometry pathGeometry = null;
-
             var geometry = _glyphRun.BuildGeometry();
-            if (geometry is PathGeometry)
+            if (geometry == null)
             {
-                pathGeometry = (PathGeometry)geometry;
-            }
-            else
-            {
-                pathGeometry = new PathGeometry();
-                pathGeometry.AddGeometry(geometry);
+                return geometry;
             }
 
-            return pathGeometry;
+            if (_textDecorations == null || _textDecorations.Count == 0)
+            {
+                if (_buildPathGeometry)
+                {
+                    PathGeometry pathGeometry = geometry as PathGeometry;
+                    if (pathGeometry == null)
+                    {
+                        pathGeometry = new PathGeometry();
+                        pathGeometry.AddGeometry(geometry);
+                    }
+                    return pathGeometry;
+                }
+                return geometry;
+            }
+
+            var baseline = y + this.Baseline;
+
+            GeometryGroup geomGroup = geometry as GeometryGroup;
+            if (geomGroup == null)
+            {
+                geomGroup = new GeometryGroup();
+                geomGroup.Children.Add(geometry);
+            }
+
+            foreach (var textDeDecoration in _textDecorations)
+            {
+                double decorationPos = 0;
+                double decorationThickness = 0;
+
+                if (textDeDecoration.Location == TextDecorationLocation.Strikethrough)
+                {
+                    decorationPos = baseline - (this.StrikethroughPosition * _fontSize);
+                    decorationThickness = this.StrikethroughThickness * _fontSize;
+                }
+                else if (textDeDecoration.Location == TextDecorationLocation.Underline)
+                {
+                    decorationPos = baseline - (this.UnderlinePosition * _fontSize);
+                    decorationThickness = this.UnderlineThickness * _fontSize;
+                }
+                else if (textDeDecoration.Location == TextDecorationLocation.OverLine)
+                {
+                    decorationPos = baseline - _fontSize;
+                    decorationThickness = this.OverlineThickness * _fontSize;
+                }
+                Rect bounds = new Rect(geomGroup.Bounds.Left, decorationPos, geomGroup.Bounds.Width, decorationThickness + 0.5);
+
+                var rectGeom = new RectangleGeometry(bounds);
+                if (_buildPathGeometry)
+                {
+                    PathGeometry pathGeometry = new PathGeometry();
+                    pathGeometry.AddGeometry(rectGeom);
+                    geomGroup.Children.Add(pathGeometry);
+                }
+                else
+                {
+                    geomGroup.Children.Add(rectGeom);
+                }
+            }
+
+            if (_buildPathGeometry)
+            {
+                PathGeometry pathGeometry = new PathGeometry();
+                pathGeometry.AddGeometry(geomGroup);
+
+                return pathGeometry;
+            }
+            return geomGroup;
         }
 
         #endregion

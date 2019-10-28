@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 using System.Windows;
 using System.Windows.Media;
@@ -16,6 +16,7 @@ namespace WpfTestThreadSafety
 {
     public sealed class ImageData
     {
+        private int _index;
         private string _fileName;
         private Drawing _drawing;
 
@@ -23,16 +24,24 @@ namespace WpfTestThreadSafety
         {
         }
 
-        public ImageData(Drawing drawing, string fileName)
+        public ImageData(int index, Drawing drawing, string fileName)
         {
+            _index    = index;
             _drawing  = drawing;
             _fileName = fileName;
+        }
+
+        public int Index
+        {
+            get {
+                return _index;
+            }
         }
 
         public string Name
         {
             get {
-                return _fileName;
+                return string.Format("{0:D3}: {1}" , _index + 1, _fileName);
             }
         }
 
@@ -188,7 +197,7 @@ namespace WpfTestThreadSafety
         {
             if (Dispatcher.CheckAccess())
             {
-                _imageList.Add(new ImageData(drawing, fileName));
+                _imageList.Add(new ImageData(_imageList.Count, drawing, fileName));
             }
             else
             {

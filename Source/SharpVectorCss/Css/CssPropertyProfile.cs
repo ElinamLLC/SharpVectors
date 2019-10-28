@@ -31,7 +31,7 @@ namespace SharpVectors.Dom.Css
 
         public CssPropertyProfile()
         {
-            _properties = new Dictionary<string, CssProperty>();
+            _properties = new Dictionary<string, CssProperty>(StringComparer.OrdinalIgnoreCase);
         }
 
         #endregion

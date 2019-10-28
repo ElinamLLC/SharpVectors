@@ -151,7 +151,12 @@ namespace SharpVectors.Dom.Css
 
         public override XmlElement CreateElement(string prefix, string localName, string ns)
         {
-            return new CssXmlElement(prefix, localName, ns, this);
+            if (string.Equals(localName, "style", StringComparison.OrdinalIgnoreCase))
+            {
+                return new CssXmlElement(prefix, localName, ns, this);
+            }
+
+            return base.CreateElement(prefix, localName, ns);
         }
 
         /// <summary>

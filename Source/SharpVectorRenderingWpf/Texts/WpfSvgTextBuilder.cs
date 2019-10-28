@@ -224,6 +224,40 @@ namespace SharpVectors.Renderers.Texts
         }
 
         /// <summary>
+        /// Gets a value that indicates the distance of the overline from the baseline for the typeface.
+        /// </summary>
+        /// <value>A <see cref="float"/> that indicates the overline position, measured from the baseline 
+        /// and expressed as a fraction of the font em size.</value>
+        /// <remarks>attribute name = "overline-position" {number}</remarks>
+        public override double OverlinePosition
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.OverlinePosition;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.
+        /// </summary>
+        /// <value>A <see cref="float"/> that indicates the overline thickness, expressed as a fraction 
+        /// of the font em size.</value>
+        /// <remarks>attribute name = "overline-thickness" {number}</remarks>
+        public override double OverlineThickness
+        {
+            get {
+                if (_fontFaceElement != null)
+                {
+                    return _fontFaceElement.OverlineThickness;
+                }
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 
         /// The distance excludes ascenders.
         /// </summary>
@@ -351,13 +385,77 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            var textPath = this.Build(element, text, null, false);
-            if (textPath != null && textPath.Children.Count != 0)
+            var geomGroup = this.Build(element, text, null, false);
+            if (geomGroup == null)
             {
-                textPath.Transform = new TranslateTransform(x, y);
+                return geomGroup;
             }
 
-            return textPath;
+            if (_textDecorations == null || _textDecorations.Count == 0)
+            {
+                if (geomGroup.Children.Count != 0)
+                {
+                    geomGroup.Transform = new TranslateTransform(x, y);
+                }
+                if (_buildPathGeometry)
+                {
+                    var pathGeometry = new PathGeometry();
+                    pathGeometry.AddGeometry(geomGroup);
+                    return pathGeometry;
+                }
+
+                return geomGroup;
+            }
+
+            var baseline = this.Baseline;
+
+            foreach (var textDeDecoration in _textDecorations)
+            {
+                double decorationPos = 0;
+                double decorationThickness = 0;
+
+                if (textDeDecoration.Location == TextDecorationLocation.Strikethrough)
+                {
+                    decorationPos = baseline - (this.StrikethroughPosition * _emScale);
+                    decorationThickness = this.StrikethroughThickness * _emScale;
+                }
+                else if (textDeDecoration.Location == TextDecorationLocation.Underline)
+                {
+                    decorationPos = baseline - (this.UnderlinePosition * _emScale);
+                    decorationThickness = this.UnderlineThickness * _emScale;
+                }
+                else if (textDeDecoration.Location == TextDecorationLocation.OverLine)
+                {
+                    decorationPos = baseline - this.OverlinePosition * _emScale;
+                    decorationThickness = this.OverlineThickness * _emScale;
+                }
+                Rect bounds = new Rect(geomGroup.Bounds.Left, decorationPos, geomGroup.Bounds.Width, decorationThickness + 0.5);
+
+                var rectGeom = new RectangleGeometry(bounds);
+                if (_buildPathGeometry)
+                {
+                    PathGeometry pathGeometry = new PathGeometry();
+                    pathGeometry.AddGeometry(rectGeom);
+                    geomGroup.Children.Add(pathGeometry);
+                }
+                else
+                {
+                    geomGroup.Children.Add(rectGeom);
+                }
+            }
+
+            if (geomGroup.Children.Count != 0)
+            {
+                geomGroup.Transform = new TranslateTransform(x, y);
+            }
+            if (_buildPathGeometry)
+            {
+                var pathGeometry = new PathGeometry();
+                pathGeometry.AddGeometry(geomGroup);
+                return pathGeometry;
+            }
+
+            return geomGroup;
         }
 
         #endregion
@@ -369,6 +467,7 @@ namespace SharpVectors.Renderers.Texts
         private GeometryGroup Build(SvgTextContentElement element, string text, IList<Rect> textBounds, bool measureSpaces)
         {
             var textPath = new GeometryGroup();
+            textPath.FillRule = FillRule.Nonzero;
 
             if (string.IsNullOrEmpty(text))
             {
@@ -552,6 +651,7 @@ namespace SharpVectors.Renderers.Texts
                 if (glyphPath == null)
                 {
                     glyphPath = new PathGeometry();
+                    glyphPath.FillRule = FillRule.Nonzero;
                     glyphPath.Figures = PathFigureCollection.Parse(glyph.D);
 
                     glyph.Tag = glyphPath; // Cache the original path geometry, it is not altered...
@@ -578,6 +678,7 @@ namespace SharpVectors.Renderers.Texts
                 if (glyphPath.Figures != null && glyphPath.Figures.Count > 0)
                 {
                     var transformdPath = new PathGeometry();
+                    transformdPath.FillRule = FillRule.Nonzero;
                     transformdPath.AddGeometry(glyphPath);
 
                     textPath.Children.Add(transformdPath);

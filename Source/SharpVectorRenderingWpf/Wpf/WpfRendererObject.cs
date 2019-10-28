@@ -352,8 +352,8 @@ namespace SharpVectors.Renderers.Wpf
             catch (FormatException ex)
             {
                 Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
-                return null;
-                //return CreateGeometry(element);
+                //return null;
+                return CreateGeometry(element);
             }
         }
 
@@ -384,11 +384,15 @@ namespace SharpVectors.Renderers.Wpf
             SvgPathSegArc pathArc         = null;
 
             SvgPathSegList segments = element.PathSegList;
-            int nElems = segments.NumberOfItems;
+            int numSegs = segments.NumberOfItems;
+            if (numSegs == 0)
+            {
+                return geometry;
+            }
 
             PathFigure pathFigure = null;
 
-            for (int i = 0; i < nElems; i++)
+            for (int i = 0; i < numSegs; i++)
             {
                 segment = segments.GetItem(i);
 
