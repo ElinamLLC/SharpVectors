@@ -44,6 +44,20 @@
             <value>A <see cref="T:System.Double"/> that indicates the underline thickness, expressed as a fraction 
             of the font em size.</value>
         </member>
+        <member name="P:SharpVectors.Renderers.Texts.WpfGlyphTextBuilder.OverlinePosition">
+            <summary>
+            Gets a value that indicates the distance of the overline from the baseline for the typeface.
+            </summary>
+            <value>A <see cref="T:System.Double"/> that indicates the overline position, measured from the baseline 
+            and expressed as a fraction of the font em size.</value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Texts.WpfGlyphTextBuilder.OverlineThickness">
+            <summary>
+            Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.
+            </summary>
+            <value>A <see cref="T:System.Double"/> that indicates the overline thickness, expressed as a fraction 
+            of the font em size.</value>
+        </member>
         <member name="P:SharpVectors.Renderers.Texts.WpfGlyphTextBuilder.XHeight">
             <summary>
             Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 
@@ -88,6 +102,12 @@
             Performs validation against cluster map size and throws a well defined exception.
             </summary>
         </member>
+        <member name="T:SharpVectors.Renderers.Texts.WpfPathTextBuilder">
+            <summary>
+            This is the text-path builder, which handles the rendering using the text-builder objects, 
+            <see cref="T:SharpVectors.Renderers.Texts.WpfTextBuilder"/>, to convert the text characters to geometric representations.
+            </summary>
+        </member>
         <member name="P:SharpVectors.Renderers.Texts.WpfSvgTextBuilder.IsBoldSimulated">
             <summary>
             Gets a value that determines whether to simulate a bold weight for the glyphs represented by the typeface.
@@ -127,6 +147,22 @@
             </summary>
             <value>A <see cref="T:System.Double"/> that indicates the underline thickness, expressed as a fraction 
             of the font em size.</value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Texts.WpfSvgTextBuilder.OverlinePosition">
+            <summary>
+            Gets a value that indicates the distance of the overline from the baseline for the typeface.
+            </summary>
+            <value>A <see cref="T:System.Single"/> that indicates the overline position, measured from the baseline 
+            and expressed as a fraction of the font em size.</value>
+            <remarks>attribute name = "overline-position" {number}</remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Texts.WpfSvgTextBuilder.OverlineThickness">
+            <summary>
+            Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.
+            </summary>
+            <value>A <see cref="T:System.Single"/> that indicates the overline thickness, expressed as a fraction 
+            of the font em size.</value>
+            <remarks>attribute name = "overline-thickness" {number}</remarks>
         </member>
         <member name="P:SharpVectors.Renderers.Texts.WpfSvgTextBuilder.XHeight">
             <summary>
@@ -235,6 +271,20 @@
             <value>A <see cref="T:System.Double"/> that indicates the underline thickness, expressed as a fraction 
             of the font em size.</value>
         </member>
+        <member name="P:SharpVectors.Renderers.Texts.WpfTextBuilder.OverlinePosition">
+            <summary>
+            Gets a value that indicates the distance of the overline from the baseline for the typeface.
+            </summary>
+            <value>A <see cref="T:System.Double"/> that indicates the overline position, measured from the baseline 
+            and expressed as a fraction of the font em size.</value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Texts.WpfTextBuilder.OverlineThickness">
+            <summary>
+            Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.
+            </summary>
+            <value>A <see cref="T:System.Double"/> that indicates the overline thickness, expressed as a fraction 
+            of the font em size.</value>
+        </member>
         <member name="P:SharpVectors.Renderers.Texts.WpfTextBuilder.XHeight">
             <summary>
             Gets the distance from the baseline to the top of an English lowercase letter for a typeface. 
@@ -287,6 +337,11 @@
             in the <see cref="T:SharpVectors.Renderers.Texts.WpfTextBuilder"/> object.
             </summary>
             <value name="textDecorations">The System.Windows.TextDecorationCollection to apply to the text.</value>
+        </member>
+        <member name="T:SharpVectors.Renderers.Texts.WpfPathTextRun">
+            <summary>
+            This defines the information required to render a text-run on a path.
+            </summary>
         </member>
         <member name="M:SharpVectors.Renderers.Texts.WpfTextRenderer.ExtractTextPathGeometry(System.Windows.Media.Geometry)">
             <summary>

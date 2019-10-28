@@ -13,6 +13,17 @@
     <icon>images\SharpVectors64.png</icon>
     <copyright>Copyright (c) 2010 - 2019 Elinam LLC</copyright>
     <releaseNotes>
+        Release 1.5.0
+            * Improved CSS support
+            * WPF Rendering: Reworked text-path rendering
+                - Support for SVG Fonts
+                - Support for letter-spacing, textLength, startOffset etc
+                - For simplicity, characters are rendered as path geometry
+            * WPF Rendering: Improved SVG Fonts supports
+                - Text decorations: Underline, Overline and strike-through features
+            * Issue #115: WPF Rendering: Thread safety fixes
+            * Several bug fixes and code improvements
+
         Release 1.4.0
             * Design time update to SvgImage and SvgImageConverter.
             * Adding support for href in addition to the xlink:href (as in SVG 2)
@@ -89,6 +100,15 @@
     <file src="..\Output\SharpVectors.Rendering.Gdi.xml" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Rendering.Wpf.xml" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Runtime.Wpf.xml" target="lib\net40"/>
+
+    <file src="..\Output\SharpVectors.Converters.Wpf.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Core.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Css.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Dom.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Model.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Rendering.Gdi.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Rendering.Wpf.pdb" target="lib\net40"/>
+    <file src="..\Output\SharpVectors.Runtime.Wpf.pdb" target="lib\net40"/>
     
     <file src="..\Images\SharpVectors64.png" target="images"/>
   </files>

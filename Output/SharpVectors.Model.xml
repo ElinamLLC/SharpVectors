@@ -103,6 +103,42 @@
             This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Animation"/>
             </value>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Clipping"/>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMaskElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMaskElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Masking"/>
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgResolveNamespaceEventArgs">
             <summary>
             Arguments when namespace is trying to be resolved
@@ -824,13 +860,28 @@
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgAnimatedLength.AnimVal">
             <summary>
-            If the given attribute or property is being animated, contains the current animated value of the attribute or property, and both the object itself and its contents are readonly. If the given attribute or property is not currently being animated, contains the same value as 'baseVal'. 
+            If the given attribute or property is being animated, contains the current animated value of the 
+            attribute or property, and both the object itself and its contents are readonly. If the given attribute 
+            or property is not currently being animated, contains the same value as 'baseVal'. 
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgAnimatedLengthList">
             <summary>
             Summary description for SvgAnimatedLengthList.
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedLengthList.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedLengthList"/>.
+            </summary>
+            <value>The number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedLengthList"/>.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedLengthList.Item(System.UInt32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+            <returns>The element at the specified index.</returns>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgAnimatedNumber">
             <summary>
@@ -839,7 +890,32 @@
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgAnimatedNumberList">
             <summary>
-            Summary description for SvgAnimatedLengthList.
+            Summary description for SvgAnimatedNumberList.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedNumberList.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedNumberList"/>.
+            </summary>
+            <value>The number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedNumberList"/>.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedNumberList.Item(System.UInt32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+            <returns>The element at the specified index.</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedNumberList.BaseVal">
+            <summary>
+            The base value of the given attribute before applying any animations
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedNumberList.AnimVal">
+            <summary>
+            If the given attribute or property is being animated, then this attribute contains the current animated
+            value of the attribute or property, and both the object itself and its contents are readonly. If the given 
+            attribute or property is not currently being animated, then this attribute contains the same value as 'BaseVal'.
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgAnimatedPreserveAspectRatio">
@@ -1108,42 +1184,6 @@
             
             TODO:  This class does not yet support custom views
             </summary>
-        </member>
-        <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.IsRenderable">
-            <summary>
-            Gets a value indicating whether this SVG element is renderable.
-            </summary>
-            <value>
-            This is <see langword="'true"/> if the element is renderable; otherwise,
-            it is <see langword="false"/>.
-            </value>
-        </member>
-        <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.RenderingHint">
-            <summary>
-            Gets a value providing a hint on the rendering defined by this element.
-            </summary>
-            <value>
-            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
-            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Clipping"/>
-            </value>
-        </member>
-        <member name="P:SharpVectors.Dom.Svg.SvgMaskElement.IsRenderable">
-            <summary>
-            Gets a value indicating whether this SVG element is renderable.
-            </summary>
-            <value>
-            This is <see langword="'true"/> if the element is renderable; otherwise,
-            it is <see langword="false"/>.
-            </value>
-        </member>
-        <member name="P:SharpVectors.Dom.Svg.SvgMaskElement.RenderingHint">
-            <summary>
-            Gets a value providing a hint on the rendering defined by this element.
-            </summary>
-            <value>
-            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
-            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Masking"/>
-            </value>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgDefsElement">
             <summary>
@@ -2552,6 +2592,11 @@
             The SvgMissingGlyphElement interface corresponds to the 'missing-glyph' element. 
             </summary>
         </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTextElement">
+            <summary>
+            Summary description for SvgTextElement.
+            </summary>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgTextContentElement">
             <summary>
             Summary description for SvgTextContentElement.
@@ -2566,7 +2611,12 @@
             This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Text"/>
             </value>
         </member>
-        <member name="T:SharpVectors.Dom.Svg.SvgTextElement">
+        <member name="T:SharpVectors.Dom.Svg.SvgTextAreaElement">
+            <summary>
+            Summary description for SvgTextAreaElement.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTextBaseElement">
             <summary>
             Summary description for SvgTextElement.
             </summary>

@@ -4,6 +4,11 @@
         <name>SharpVectors.Core</name>
     </assembly>
     <members>
+        <member name="T:SharpVectors.Dom.CssConstants">
+            <summary>
+            This interface defines constants for CSS.
+            </summary>
+        </member>
         <member name="M:SharpVectors.Dom.IElementTimeControl.BeginElement">
             <summary>
             Creates a begin instance time for the current time. The new instance time is added 
@@ -39,6 +44,236 @@
             <param name="offset">
             The offset from the current document time, in seconds, at which to end the element.
             </param>
+        </member>
+        <member name="T:SharpVectors.Dom.SvgConstants">
+            <summary>
+            Define SVG constants, such as tag names, attribute names and URI
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.MouseEventsType">
+            <summary>
+            The event type for MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.UIEventsType">
+            <summary>
+            The event type for UIEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgEventsType">
+            <summary>
+            The event type for SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.KeyEventsType">
+            <summary>
+            The event type for KeyEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.KeydownEventType">
+            <summary>
+            The event type for 'keydown' KeyEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.KeypressEventType">
+            <summary>
+            The event type for 'keypress' KeyEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.KeyupEventType">
+            <summary>
+            The event type for 'keyup' KeyEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.ClickEventType">
+            <summary>
+            The event type for 'click' MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.MouseupEventType">
+            <summary>
+            The event type for 'mouseup' MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.MousedownEventType">
+            <summary>
+            The event type for 'mousedown' MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.MousemoveEventType">
+            <summary>
+            The event type for 'mousemove' MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.MouseoutEventType">
+            <summary>
+            The event type for 'mouseout' MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.MouseoverEventType">
+            <summary>
+            The event type for 'mouseover' MouseEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.DomfocusinEventType">
+            <summary>
+            The event type for 'DOMFocusIn' UIEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.DomfocusoutEventType">
+            <summary>
+            The event type for 'DOMFocusOut' UIEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.DomactivateEventType">
+            <summary>
+            The event type for 'DOMActivate' UIEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgLoadEventType">
+            <summary>
+            The event type for 'SVGLoad' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgUnloadEventType">
+            <summary>
+            The event type for 'SVGUnload' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgAbortEventType">
+            <summary>
+            The event type for 'SVGAbort' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgErrorEventType">
+            <summary>
+            The event type for 'SVGError' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgResizeEventType">
+            <summary>
+            The event type for 'SVGResize' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgScrollEventType">
+            <summary>
+            The event type for 'SVGScroll' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.SvgZoomEventType">
+            <summary>
+            The event type for 'SVGZoom' SVGEvent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnKeyupAttribute">
+            <summary>
+            The 'onkeyup' attribute name of type KeyEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnKeydownAttribute">
+            <summary>
+            The 'onkeydown' attribute name of type KeyEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnKeypressAttribute">
+            <summary>
+            The 'onkeypress' attribute name of type KeyEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnAbortAttribute">
+            <summary>
+            The 'onabort' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnActivateAttribute">
+            <summary>
+            The 'onabort' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnBeginAttribute">
+            <summary>
+            The 'onbegin' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnClickAttribute">
+            <summary>
+            The 'onclick' attribute name of type MouseEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnEndAttribute">
+            <summary>
+            The 'onend' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnErrorAttribute">
+            <summary>
+            The 'onerror' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnFocusinAttribute">
+            <summary>
+            The 'onfocusin' attribute name of type UIEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnFocusoutAttribute">
+            <summary>
+            The 'onfocusout' attribute name of type UIEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnLoadAttribute">
+            <summary>
+            The 'onload' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnMousedownAttribute">
+            <summary>
+            The 'onmousedown' attribute name of type MouseEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnMousemoveAttribute">
+            <summary>
+            The 'onmousemove' attribute name of type MouseEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnMouseoutAttribute">
+            <summary>
+            The 'onmouseout' attribute name of type MouseEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnMouseoverAttribute">
+            <summary>
+            The 'onmouseover' attribute name of type MouseEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnMouseupAttribute">
+            <summary>
+            The 'onmouseup' attribute name of type MouseEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnRepeatAttribute">
+            <summary>
+            The 'onrepeat' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnResizeAttribute">
+            <summary>
+            The 'onresize' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnScrollAttribute">
+            <summary>
+            The 'onscroll' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnUnloadAttribute">
+            <summary>
+            The 'onunload' attribute name of type SVGEvents.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.SvgConstants.OnZoomAttribute">
+            <summary>
+            The 'onzoom' attribute name of type SVGEvents.
+            </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.ISvgAnimateColorElement">
             <summary>
@@ -1354,6 +1589,62 @@
             A value of auto indicates that the user agent should use text-on-a-path 
             layout algorithms to adjust the spacing between glyphs in order to achieve 
             visually appealing results.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.ISharpMarkerHost">
+            <summary>
+            This is an extension to the Svg DOM. It denotes that an element can display markers.
+            </summary>
+            <remarks>
+            <para>
+            A marker is a symbol which is attached to one or more vertices of some Svg elements. In order for 
+            a marker to be drawn correctly, its orientation and position needs to be known.
+            See <see href="http://www.w3.org/TR/SVG/painting.html">SVG 1.0 Masking - Establishing A New Clipping Path</see>
+            </para>
+            <para>
+            This interface provides the information required to calculate the
+            orientation and position for each marker of an Svg element.
+            </para>
+            <para>
+            To give an Svg element the capability to draw markers, let the Svg element implement this interface.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.ISharpMarkerHost.MarkerPositions">
+            <summary>
+            An array specifying the position of each vertex in the Svg element's shape.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISharpMarkerHost.GetStartAngle(System.Int32)">
+            <summary>
+            Get the angle of the path segment entering the specified vertex.
+            </summary>
+            <param name="index">
+            Specifies the vertex to which the path segment is entering.
+            </param>
+            <returns>
+            The angle of the path segment entering the specified vertex in degrees.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISharpMarkerHost.GetEndAngle(System.Int32)">
+            <summary>
+            Get the angle of the path segment leaving the specified vertex in degrees.
+            </summary>
+            <param name="index">
+            Specifies the vertex from which the path segment is leaving.
+            </param>
+            <returns>
+            The angle of the path segment leaving the specified vertex.
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.ISvgClipPathElement">
+            <summary>
+            Used by SvgClipPathElement.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.ISvgMaskElement">
+            <summary>
+            Used by SvgMaskElement.
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgTransformF">
@@ -2709,19 +3000,28 @@
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedLengthList.BaseVal">
             <summary>
-            The base value of the given attribute before applying any
-             animations.
+            The base value of the given attribute before applying any animations.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedLengthList.AnimVal">
             <summary>
-                If the given attribute or property is being animated,
-                contains the current animated value of the attribute
-                or property, and both the object itself and its 
-                contents are readonly. If the given attribute or 
-                property is not currently being animated, contains 
-                the same value as 'BaseVal'.
+            If the given attribute or property is being animated, contains the current animated value of the 
+            attribute or property, and both the object itself and its contents are readonly. If the given 
+            attribute or property is not currently being animated, contains the same value as 'BaseVal'.
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedLengthList.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedLengthList"/>.
+            </summary>
+            <value>The number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedLengthList"/>.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedLengthList.Item(System.UInt32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+            <returns>The element at the specified index.</returns>
         </member>
         <member name="T:SharpVectors.Dom.Svg.ISvgAnimatedNumber">
             <summary>
@@ -2754,20 +3054,28 @@
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedNumberList.BaseVal">
             <summary>
-            The base value of the given attribute before applying 
-            any animations
+            The base value of the given attribute before applying any animations
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedNumberList.AnimVal">
             <summary>
-                If the given attribute or property is being animated,
-                then this attribute contains the current animated
-                value of the attribute or property, and both the 
-                object itself and its contents are readonly. If the
-                given attribute or property is not currently being
-                animated, then this attribute contains the same 
-                value as 'BaseVal'.
+            If the given attribute or property is being animated, then this attribute contains the current animated
+            value of the attribute or property, and both the object itself and its contents are readonly. If the given 
+            attribute or property is not currently being animated, then this attribute contains the same value as 'BaseVal'.
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedNumberList.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedNumberList"/>.
+            </summary>
+            <value>The number of elements contained in the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedNumberList"/>.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.ISvgAnimatedNumberList.Item(System.UInt32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+            <returns>The element at the specified index.</returns>
         </member>
         <member name="T:SharpVectors.Dom.Svg.ISvgAnimatedRect">
             <summary>
@@ -3168,62 +3476,6 @@
         <member name="P:SharpVectors.Dom.Svg.ISvgRectElement.Height">
             <summary>
             Corresponds to attribute height on the given 'rect' element.
-            </summary>
-        </member>
-        <member name="T:SharpVectors.Dom.Svg.ISharpMarkerHost">
-            <summary>
-            This is an extension to the Svg DOM. It denotes that an element can display markers.
-            </summary>
-            <remarks>
-            <para>
-            A marker is a symbol which is attached to one or more vertices of some Svg elements. In order for 
-            a marker to be drawn correctly, its orientation and position needs to be known.
-            See <see href="http://www.w3.org/TR/SVG/painting.html">SVG 1.0 Masking - Establishing A New Clipping Path</see>
-            </para>
-            <para>
-            This interface provides the information required to calculate the
-            orientation and position for each marker of an Svg element.
-            </para>
-            <para>
-            To give an Svg element the capability to draw markers, let the Svg element implement this interface.
-            </para>
-            </remarks>
-        </member>
-        <member name="P:SharpVectors.Dom.Svg.ISharpMarkerHost.MarkerPositions">
-            <summary>
-            An array specifying the position of each vertex in the Svg element's shape.
-            </summary>
-        </member>
-        <member name="M:SharpVectors.Dom.Svg.ISharpMarkerHost.GetStartAngle(System.Int32)">
-            <summary>
-            Get the angle of the path segment entering the specified vertex.
-            </summary>
-            <param name="index">
-            Specifies the vertex to which the path segment is entering.
-            </param>
-            <returns>
-            The angle of the path segment entering the specified vertex in degrees.
-            </returns>
-        </member>
-        <member name="M:SharpVectors.Dom.Svg.ISharpMarkerHost.GetEndAngle(System.Int32)">
-            <summary>
-            Get the angle of the path segment leaving the specified vertex in degrees.
-            </summary>
-            <param name="index">
-            Specifies the vertex from which the path segment is leaving.
-            </param>
-            <returns>
-            The angle of the path segment leaving the specified vertex.
-            </returns>
-        </member>
-        <member name="T:SharpVectors.Dom.Svg.ISvgClipPathElement">
-            <summary>
-            Used by SvgClipPathElement.
-            </summary>
-        </member>
-        <member name="T:SharpVectors.Dom.Svg.ISvgMaskElement">
-            <summary>
-            Used by SvgMaskElement.
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.ISvgAnimatedPreserveAspectRatio">
@@ -7435,6 +7687,11 @@
         <member name="P:SharpVectors.Dom.Views.IDocumentView.DefaultView">
             <summary>
             The default AbstractView for this Document, or null if none available
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.XmlConstants">
+            <summary>
+            Contains common XML constants.
             </summary>
         </member>
         <member name="T:SharpVectors.Net.DataWebResponse">
