@@ -470,165 +470,17 @@
     <None Include="Diagrams\SvgPathSegs.cd" />
     <None Include="Diagrams\SvgTextContentElements.cd" />
     <None Include="Diagrams\SvgTransformableElements.cd" />
+    <EmbeddedResource Include="Resources\svg.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\svg11.dtd" />
+    <EmbeddedResource Include="Resources\xlink.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xml.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="SharpVectors.Model.snk" />
-    <EmbeddedResource Include="Resources\www.w3.org\TR.xhtml1.DTD\xhtml1-strict.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\TR.xhtml1.DTD\xhtml-special.ent" />
-    <EmbeddedResource Include="Resources\www.w3.org\TR.xhtml1.DTD\xhtml-lat1.ent" />
-    <EmbeddedResource Include="Resources\www.w3.org\TR.2003.REC-SVG11-20030114.DTD.svg11.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\TR.2001.REC-SVG-20010904.DTD.svg10.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-flat.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-flat.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic.dtd" />
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic-flat.dtd" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-animation.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-animevents-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-clip.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-color.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-filter.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-font.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-graphics-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-paint-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-structure.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-basic-text.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-clip.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-color.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-conditional.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-container-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-core-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-cursor.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-datatypes.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-docevents-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-extensibility.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-extresources-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-filter.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-font.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-framework.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-gradient.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-graphevents-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-graphics-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-hyperlink.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-image.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-marker.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-mask.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-opacity-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-paint-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-pattern.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-profile.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-qname.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-script.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-shape.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-structure.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-style.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-text.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-view.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-viewport-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg-xlink-attrib.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-attribs.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic-attribs.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-basic-model.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-model.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-attribs.mod" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\www.w3.org\Graphics.SVG.1.1.DTD\svg11-tiny-model.mod" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -504,40 +504,41 @@ namespace SharpVectors.Dom.Svg
             {
                 fullPath = fullPath.Replace('\\', '/');
 
+                bool useSvgDtd = false;
+
                 if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Basic//EN", StringComparison.OrdinalIgnoreCase) ||
                     fullPath.EndsWith("-/W3C/DTD SVG 1.1 Basic/EN", StringComparison.OrdinalIgnoreCase))
                 {
-                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-basic.dtd");
-                    if (resourceUri != null)
-                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                    useSvgDtd = true;
                 }
                 else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1//EN", StringComparison.OrdinalIgnoreCase) ||
                     fullPath.EndsWith("-/W3C/DTD SVG 1.1/EN", StringComparison.OrdinalIgnoreCase))
                 {
-                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11.dtd");
-                    if (resourceUri != null)
-                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                    useSvgDtd = true;
                 }
                 else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Full//EN", StringComparison.OrdinalIgnoreCase) ||
                     fullPath.EndsWith("-/W3C/DTD SVG 1.1 Full/EN", StringComparison.OrdinalIgnoreCase))
                 {
-                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11.dtd");
-                    if (resourceUri != null)
-                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                    useSvgDtd = true;
                 }
                 else if (fullPath.EndsWith("-//W3C//DTD SVG 1.0//EN", StringComparison.OrdinalIgnoreCase) ||
                     fullPath.EndsWith("-/W3C/DTD SVG 1.0/EN", StringComparison.OrdinalIgnoreCase))
                 {
-                    string resourceUri = GetEntityUri("www.w3.org.TR.2001.REC-SVG-20010904.DTD.svg10.dtd");
-                    if (resourceUri != null)
-                        return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                    useSvgDtd = true;
                 }
                 else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Tiny//EN", StringComparison.OrdinalIgnoreCase) ||
                     fullPath.EndsWith("-/W3C/DTD SVG 1.1 Tiny/EN", StringComparison.OrdinalIgnoreCase))
                 {
-                    string resourceUri = GetEntityUri("www.w3.org.Graphics.SVG.1.1.DTD.svg11-tiny.dtd");
+                    useSvgDtd = true;
+                }
+
+                if (useSvgDtd)
+                {
+                    string resourceUri = GetEntityUri("svg11.dtd");
                     if (resourceUri != null)
+                    {
                         return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                    }
                 }
             }
 
@@ -570,10 +571,11 @@ namespace SharpVectors.Dom.Svg
                     {
                         // we copy the contents to a MemoryStream because the loader doesn't release original streams,
                         // resulting in an assembly lock
-                        int resourceLength = (int)resourceStream.Length;
-                        MemoryStream memoryStream = new MemoryStream(resourceLength);
-                        resourceStream.Read(memoryStream.GetBuffer(), 0, resourceLength);
+                        MemoryStream memoryStream = new MemoryStream();
+                        resourceStream.CopyTo(memoryStream);
 
+                        // Move the position to the start of the stream
+                        memoryStream.Seek(0, SeekOrigin.Begin);
                         return memoryStream;
                     }
                 }
