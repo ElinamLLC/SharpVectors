@@ -65,6 +65,9 @@ namespace SharpVectors.Dom.Svg
                     return new SvgSwitchElement(prefix, localName, ns, doc);
                 case "symbol": 
                     return new SvgSymbolElement(prefix, localName, ns, doc);
+                case "solidColor": 
+                case "solidcolor": 
+                    return new SvgSolidColorElement(prefix, localName, ns, doc);
                 case "text": 
                     return new SvgTextElement(prefix, localName, ns, doc);
                 case "textArea": 

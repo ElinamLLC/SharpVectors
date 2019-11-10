@@ -269,11 +269,35 @@ namespace SharpVectors.Renderers.Wpf
             Geometry clipGeom   = this.ClipGeometry;
             Transform transform = this.Transform;
 
+            GeometryDrawing viewportDrawing = null;
+
+            // Support for Tiny 1.2 viewport-fill property...
+            if (_svgElement.HasAttribute("viewport-fill"))
+            {
+                var viewportFill = _svgElement.GetAttribute("viewport-fill");
+                if (!string.IsNullOrWhiteSpace(viewportFill))
+                {
+                    var brush = WpfFill.CreateViewportBrush(imageElement);
+                    if (brush != null)
+                    {
+                        var viewportBounds = new RectangleGeometry(destRect);
+                        viewportDrawing = new GeometryDrawing(brush, null, viewportBounds);
+                    }
+                }
+            }
+
             bool ownedGroup = true;
             if (drawGroup == null)
             {
                 drawGroup  = context.Peek();
                 ownedGroup = false;
+            }
+            else
+            {
+                if (viewportDrawing != null)
+                {
+                    drawGroup.Children.Insert(0, viewportDrawing);
+                }
             }
 
             Debug.Assert(drawGroup != null);
@@ -326,6 +350,10 @@ namespace SharpVectors.Renderers.Wpf
                     clipGroup.Children.Add(drawing);
                     if (!ownedGroup)
                     {
+                        if (viewportDrawing != null)
+                        {
+                            clipGroup.Children.Insert(0, viewportDrawing);
+                        }
                         drawGroup.Children.Add(clipGroup);
                     }
                 }

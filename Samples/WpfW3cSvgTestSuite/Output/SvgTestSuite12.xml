@@ -1,533 +1,533 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <tests version="1.2" description="SVG 1.2 Tiny Test Suite: 12 September 2008">
     <category label="Animations">
-        <test source="animate-elem-02-t.svg" title="animate-elem-02-t" state="unknown" comment="" description="Test 'additive' and 'accumulate' attributes." />
-        <test source="animate-elem-03-t.svg" title="animate-elem-03-t" state="unknown" comment="" description="Test inheritance of animated properties." />
-        <test source="animate-elem-04-t.svg" title="animate-elem-04-t" state="unknown" comment="" description="Test different ways of defining a motion path." />
-        <test source="animate-elem-05-t.svg" title="animate-elem-05-t" state="unknown" comment="" description="Test different ways of defining a motion path." />
-        <test source="animate-elem-06-t.svg" title="animate-elem-06-t" state="unknown" comment="" description="Test different ways of defining a motion path." />
-        <test source="animate-elem-07-t.svg" title="animate-elem-07-t" state="unknown" comment="" description="Test different ways of defining a motion path." />
-        <test source="animate-elem-08-t.svg" title="animate-elem-08-t" state="unknown" comment="" description="Test rotate='auto' and rotate='auto-reverse'" />
-        <test source="animate-elem-09-t.svg" title="animate-elem-09-t" state="unknown" comment="" description="Test possible values for 'calcMode'" />
-        <test source="animate-elem-10-t.svg" title="animate-elem-10-t" state="unknown" comment="" description="Test possible values for 'calcMode'" />
-        <test source="animate-elem-11-t.svg" title="animate-elem-11-t" state="unknown" comment="" description="Test possible values for 'calcMode'" />
-        <test source="animate-elem-12-t.svg" title="animate-elem-12-t" state="unknown" comment="" description="Test possible values for 'calcMode'" />
-        <test source="animate-elem-13-t.svg" title="animate-elem-13-t" state="unknown" comment="" description="Test 'from', 'by', 'to' and 'values'" />
-        <test source="animate-elem-14-t.svg" title="animate-elem-14-t" state="unknown" comment="" description="Test possible values for 'keyTimes'" />
-        <test source="animate-elem-15-t.svg" title="animate-elem-15-t" state="unknown" comment="" description="Test possible values for 'keyTimes'" />
-        <test source="animate-elem-17-t.svg" title="animate-elem-17-t" state="unknown" comment="" description="Test possible values for 'keyTimes'" />
-        <test source="animate-elem-19-t.svg" title="animate-elem-19-t" state="unknown" comment="" description="Test possible values for 'keyTimes'" />
-        <test source="animate-elem-20-t.svg" title="animate-elem-20-t" state="unknown" comment="" description="See if animation, triggered by links, works." />
-        <test source="animate-elem-201-t.svg" title="animate-elem-201-t" state="unknown" comment="" description="Test the animate-elements active intervals" />
-        <test source="animate-elem-202-t.svg" title="animate-elem-202-t" state="unknown" comment="" description="accumulative animateMotion with rotate" />
-        <test source="animate-elem-203-t.svg" title="animate-elem-203-t" state="unknown" comment="" description="additive animateMotion" />
-        <test source="animate-elem-205-t.svg" title="animate-elem-205-t" state="unknown" comment="" description="Advanced test for linear animateMotion" />
-        <test source="animate-elem-206-t.svg" title="animate-elem-206-t" state="unknown" comment="" description="animateMotion with animated mpath" />
-        <test source="animate-elem-207-t.svg" title="animate-elem-207-t" state="unknown" comment="" description="Advanced test for paced animateMotion" />
-        <test source="animate-elem-209-t.svg" title="animate-elem-209-t" state="unknown" comment="" description="Compare from-to, from-by and by animate with values animate." />
-        <test source="animate-elem-21-t.svg" title="animate-elem-21-t" state="unknown" comment="" description="See if animation, triggered by links, works." />
-        <test source="animate-elem-210-t.svg" title="animate-elem-210-t" state="unknown" comment="" description="Compare from-to, from-by and by animateColor with values animateColor and animate." />
-        <test source="animate-elem-211-t.svg" title="animate-elem-211-t" state="unknown" comment="" description="Compare from-to, from-by and by animateMotion with values animateMotion." />
-        <test source="animate-elem-212-t.svg" title="animate-elem-212-t" state="unknown" comment="" description="Compare from-to, from-by and by animateTransform rotate with values animateTransform." />
-        <test source="animate-elem-213-t.svg" title="animate-elem-213-t" state="unknown" comment="" description="Compare from-to, from-by and by animateTransform rotate with values animateTransform." />
-        <test source="animate-elem-214-t.svg" title="animate-elem-214-t" state="unknown" comment="" description="Compare from-to, from-by and by animateTransform scale with values animateTransform." />
-        <test source="animate-elem-215-t.svg" title="animate-elem-215-t" state="unknown" comment="" description="Compare from-to, from-by and by animateTransform translate with values animateTransform and animateMotion." />
-        <test source="animate-elem-216-t.svg" title="animate-elem-216-t" state="unknown" comment="" description="Compare from-to, from-by and by animateTransform skewX with values animateTransform." />
-        <test source="animate-elem-217-t.svg" title="animate-elem-217-t" state="unknown" comment="" description="Compare from-to, from-by and by animateTransform skewY with values animateTransform." />
-        <test source="animate-elem-218-t.svg" title="animate-elem-218-t" state="unknown" comment="" description="xml:id or id? Identification of the element, that is target of an animation." />
-        <test source="animate-elem-219-t.svg" title="animate-elem-219-t" state="unknown" comment="" description="Identify the attributeType and the priority of an animation." />
-        <test source="animate-elem-22-t.svg" title="animate-elem-22-t" state="unknown" comment="" description="Test which verifies that the basic facilities of declarative animation are working." />
-        <test source="animate-elem-221-t.svg" title="animate-elem-221-t" state="unknown" comment="" description="Correct timing with begin, end, dur, fill, max." />
-        <test source="animate-elem-222-t.svg" title="animate-elem-222-t" state="unknown" comment="" description="Correct timing with begin, end, dur, fill, min." />
-        <test source="animate-elem-225-t.svg" title="animate-elem-225-t" state="unknown" comment="" description="Test error handling for the begin attribute" />
-        <test source="animate-elem-226-t.svg" title="animate-elem-226-t" state="unknown" comment="" description="Test resolving of namespace names in animations" />
-        <test source="animate-elem-227-t.svg" title="animate-elem-227-t" state="unknown" comment="" description="test animateColor with currentColor, inherit and none" />
-        <test source="animate-elem-23-t.svg" title="animate-elem-23-t" state="unknown" comment="" description="Test which verifies that the basic facilities of declarative animation are working." />
-        <test source="animate-elem-24-t.svg" title="animate-elem-24-t" state="unknown" comment="" description="Test which verifies that the basic facilities of declarative animation are working." />
-        <test source="animate-elem-25-t.svg" title="animate-elem-25-t" state="unknown" comment="" description="Test animation options for specifying the target attribute/property." />
-        <test source="animate-elem-26-t.svg" title="animate-elem-26-t" state="unknown" comment="" description="Test animation options for specifying the target attribute/property." />
-        <test source="animate-elem-27-t.svg" title="animate-elem-27-t" state="unknown" comment="" description="Test animation options for specifying the target element." />
-        <test source="animate-elem-28-t.svg" title="animate-elem-28-t" state="unknown" comment="" description="Test inheritance of animated properties." />
-        <test source="animate-elem-29-t.svg" title="animate-elem-29-t" state="unknown" comment="" description="See if animation, tiggered by links, works." />
-        <test source="animate-elem-30-t.svg" title="animate-elem-30-t" state="unknown" comment="" description="Tests various types of animations on referenced elements" />
-        <test source="animate-elem-31-t.svg" title="animate-elem-31-t" state="unknown" comment="" description="Tests animation of the display attribute" />
-        <test source="animate-elem-32-t.svg" title="animate-elem-32-t" state="unknown" comment="" description="Test that viewer supports the animation to and from the degenerate cases of the basic shapes" />
-        <test source="animate-elem-33-t.svg" title="animate-elem-33-t" state="unknown" comment="" description="Tests AnimateMotion with keyPoints and keyTimes" />
-        <test source="animate-elem-34-t.svg" title="animate-elem-34-t" state="unknown" comment="" description="Tests animation of attributes 'points' and 'fill-rule'" />
-        <test source="animate-elem-35-t.svg" title="animate-elem-35-t" state="unknown" comment="" description="Tests animation of attributes stroke-dasharray, stroke-dashoffset, stroke-miterlimit, stroke-linecap and stroke-linjoin" />
-        <test source="animate-elem-36-t.svg" title="animate-elem-36-t" state="unknown" comment="" description="Animation of transform on structure, hyperlinking and text elements" />
-        <test source="animate-elem-37-t.svg" title="animate-elem-37-t" state="unknown" comment="" description="Animation of transform on shape elements" />
-        <test source="animate-elem-38-t.svg" title="animate-elem-38-t" state="unknown" comment="" description="Tests animation of the viewBox attribute" />
-        <test source="animate-elem-39-t.svg" title="animate-elem-39-t" state="unknown" comment="" description="Animation of xlink:href on the a, image and use elements" />
-        <test source="animate-elem-40-t.svg" title="animate-elem-40-t" state="unknown" comment="" description="Animation of x/y on use, image, rect and text. Animation of width/height on image and rect." />
-        <test source="animate-elem-41-t.svg" title="animate-elem-41-t" state="unknown" comment="" description="Animation of the various graphics properties with the animate element." />
-        <test source="animate-elem-44-t.svg" title="animate-elem-44-t" state="unknown" comment="" description="Tests animation of attributes 'd' of path element" />
-        <test source="animate-elem-46-t.svg" title="animate-elem-46-t" state="unknown" comment="" description="Animation of text properties: text-anchor, font-size, font-family, font-style and font-weight" />
-        <test source="animate-elem-52-t.svg" title="animate-elem-52-t" state="unknown" comment="" description="Test of eventbase targets" />
-        <test source="animate-elem-53-t.svg" title="animate-elem-53-t" state="unknown" comment="" description="Tests animation of attributes points with calc-mode" />
-        <test source="animate-elem-61-t.svg" title="animate-elem-61-t" state="unknown" comment="" description="Test on multiple begin conditions in begin attribute" />
-        <test source="animate-elem-64-t.svg" title="animate-elem-64-t" state="unknown" comment="" description="Basic Test on dur attribute" />
-        <test source="animate-elem-65-t.svg" title="animate-elem-65-t" state="unknown" comment="" description="Basic tests on the min attribute" />
-        <test source="animate-elem-66-t.svg" title="animate-elem-66-t" state="unknown" comment="" description="Basic test on the max attribute and combinations of the min and max attributes" />
-        <test source="animate-elem-67-t.svg" title="animate-elem-67-t" state="unknown" comment="" description="Basic test on restart attribute" />
-        <test source="animate-elem-68-t.svg" title="animate-elem-68-t" state="unknown" comment="" description="Basic test on the repeatCount attribute" />
-        <test source="animate-elem-69-t.svg" title="animate-elem-69-t" state="unknown" comment="" description="Basic test on the repeatDur attribute" />
-        <test source="animate-elem-70-t.svg" title="animate-elem-70-t" state="unknown" comment="" description="Basic test on the animation's fill attribute" />
-        <test source="animate-elem-77-t.svg" title="animate-elem-77-t" state="unknown" comment="" description="Test on the animation of text properties and inheritance of animated text properties" />
-        <test source="animate-elem-78-t.svg" title="animate-elem-78-t" state="unknown" comment="" description="Test on the animation of graphic properties and the inheritance of animated graphics properties" />
-        <test source="animate-elem-80-t.svg" title="animate-elem-80-t" state="unknown" comment="" description="Test on the animateTransform type attribute" />
-        <test source="animate-elem-81-t.svg" title="animate-elem-81-t" state="unknown" comment="" description="Test on the animateTransform additive behavior" />
-        <test source="animate-elem-82-t.svg" title="animate-elem-82-t" state="unknown" comment="" description="Test on the animateTransform additive behavior" />
-        <test source="animate-elem-83-t.svg" title="animate-elem-83-t" state="unknown" comment="" description="Path element's d attribute animation test." />
-        <test source="animate-elem-84-t.svg" title="animate-elem-84-t" state="unknown" comment="" description="test animation of keywords that resolve to rgb colors" />
-        <test source="animate-elem-85-t.svg" title="animate-elem-85-t" state="unknown" comment="" description="test animation with currentColor" />
-        <test source="animate-elem-86-t.svg" title="animate-elem-86-t" state="unknown" comment="" description="Tests fill='freeze'" />
+        <test source="animate-elem-02-t.svg" title="animate-elem-02-t" state="failure" comment="" description="Test 'additive' and 'accumulate' attributes." />
+        <test source="animate-elem-03-t.svg" title="animate-elem-03-t" state="failure" comment="" description="Test inheritance of animated properties." />
+        <test source="animate-elem-04-t.svg" title="animate-elem-04-t" state="failure" comment="" description="Test different ways of defining a motion path." />
+        <test source="animate-elem-05-t.svg" title="animate-elem-05-t" state="failure" comment="" description="Test different ways of defining a motion path." />
+        <test source="animate-elem-06-t.svg" title="animate-elem-06-t" state="failure" comment="" description="Test different ways of defining a motion path." />
+        <test source="animate-elem-07-t.svg" title="animate-elem-07-t" state="failure" comment="" description="Test different ways of defining a motion path." />
+        <test source="animate-elem-08-t.svg" title="animate-elem-08-t" state="failure" comment="" description="Test rotate='auto' and rotate='auto-reverse'" />
+        <test source="animate-elem-09-t.svg" title="animate-elem-09-t" state="failure" comment="" description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-10-t.svg" title="animate-elem-10-t" state="failure" comment="" description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-11-t.svg" title="animate-elem-11-t" state="failure" comment="" description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-12-t.svg" title="animate-elem-12-t" state="failure" comment="" description="Test possible values for 'calcMode'" />
+        <test source="animate-elem-13-t.svg" title="animate-elem-13-t" state="failure" comment="" description="Test 'from', 'by', 'to' and 'values'" />
+        <test source="animate-elem-14-t.svg" title="animate-elem-14-t" state="failure" comment="" description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-15-t.svg" title="animate-elem-15-t" state="failure" comment="" description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-17-t.svg" title="animate-elem-17-t" state="failure" comment="" description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-19-t.svg" title="animate-elem-19-t" state="failure" comment="" description="Test possible values for 'keyTimes'" />
+        <test source="animate-elem-20-t.svg" title="animate-elem-20-t" state="failure" comment="" description="See if animation, triggered by links, works." />
+        <test source="animate-elem-201-t.svg" title="animate-elem-201-t" state="failure" comment="" description="Test the animate-elements active intervals" />
+        <test source="animate-elem-202-t.svg" title="animate-elem-202-t" state="failure" comment="" description="accumulative animateMotion with rotate" />
+        <test source="animate-elem-203-t.svg" title="animate-elem-203-t" state="failure" comment="" description="additive animateMotion" />
+        <test source="animate-elem-205-t.svg" title="animate-elem-205-t" state="failure" comment="" description="Advanced test for linear animateMotion" />
+        <test source="animate-elem-206-t.svg" title="animate-elem-206-t" state="failure" comment="" description="animateMotion with animated mpath" />
+        <test source="animate-elem-207-t.svg" title="animate-elem-207-t" state="failure" comment="" description="Advanced test for paced animateMotion" />
+        <test source="animate-elem-209-t.svg" title="animate-elem-209-t" state="failure" comment="" description="Compare from-to, from-by and by animate with values animate." />
+        <test source="animate-elem-21-t.svg" title="animate-elem-21-t" state="failure" comment="" description="See if animation, triggered by links, works." />
+        <test source="animate-elem-210-t.svg" title="animate-elem-210-t" state="failure" comment="" description="Compare from-to, from-by and by animateColor with values animateColor and animate." />
+        <test source="animate-elem-211-t.svg" title="animate-elem-211-t" state="failure" comment="" description="Compare from-to, from-by and by animateMotion with values animateMotion." />
+        <test source="animate-elem-212-t.svg" title="animate-elem-212-t" state="failure" comment="" description="Compare from-to, from-by and by animateTransform rotate with values animateTransform." />
+        <test source="animate-elem-213-t.svg" title="animate-elem-213-t" state="failure" comment="" description="Compare from-to, from-by and by animateTransform rotate with values animateTransform." />
+        <test source="animate-elem-214-t.svg" title="animate-elem-214-t" state="failure" comment="" description="Compare from-to, from-by and by animateTransform scale with values animateTransform." />
+        <test source="animate-elem-215-t.svg" title="animate-elem-215-t" state="failure" comment="" description="Compare from-to, from-by and by animateTransform translate with values animateTransform and animateMotion." />
+        <test source="animate-elem-216-t.svg" title="animate-elem-216-t" state="failure" comment="" description="Compare from-to, from-by and by animateTransform skewX with values animateTransform." />
+        <test source="animate-elem-217-t.svg" title="animate-elem-217-t" state="failure" comment="" description="Compare from-to, from-by and by animateTransform skewY with values animateTransform." />
+        <test source="animate-elem-218-t.svg" title="animate-elem-218-t" state="failure" comment="" description="xml:id or id? Identification of the element, that is target of an animation." />
+        <test source="animate-elem-219-t.svg" title="animate-elem-219-t" state="failure" comment="" description="Identify the attributeType and the priority of an animation." />
+        <test source="animate-elem-22-t.svg" title="animate-elem-22-t" state="failure" comment="" description="Test which verifies that the basic facilities of declarative animation are working." />
+        <test source="animate-elem-221-t.svg" title="animate-elem-221-t" state="failure" comment="" description="Correct timing with begin, end, dur, fill, max." />
+        <test source="animate-elem-222-t.svg" title="animate-elem-222-t" state="failure" comment="" description="Correct timing with begin, end, dur, fill, min." />
+        <test source="animate-elem-225-t.svg" title="animate-elem-225-t" state="failure" comment="" description="Test error handling for the begin attribute" />
+        <test source="animate-elem-226-t.svg" title="animate-elem-226-t" state="failure" comment="" description="Test resolving of namespace names in animations" />
+        <test source="animate-elem-227-t.svg" title="animate-elem-227-t" state="failure" comment="" description="test animateColor with currentColor, inherit and none" />
+        <test source="animate-elem-23-t.svg" title="animate-elem-23-t" state="failure" comment="" description="Test which verifies that the basic facilities of declarative animation are working." />
+        <test source="animate-elem-24-t.svg" title="animate-elem-24-t" state="failure" comment="" description="Test which verifies that the basic facilities of declarative animation are working." />
+        <test source="animate-elem-25-t.svg" title="animate-elem-25-t" state="failure" comment="" description="Test animation options for specifying the target attribute/property." />
+        <test source="animate-elem-26-t.svg" title="animate-elem-26-t" state="failure" comment="" description="Test animation options for specifying the target attribute/property." />
+        <test source="animate-elem-27-t.svg" title="animate-elem-27-t" state="failure" comment="" description="Test animation options for specifying the target element." />
+        <test source="animate-elem-28-t.svg" title="animate-elem-28-t" state="failure" comment="" description="Test inheritance of animated properties." />
+        <test source="animate-elem-29-t.svg" title="animate-elem-29-t" state="failure" comment="" description="See if animation, tiggered by links, works." />
+        <test source="animate-elem-30-t.svg" title="animate-elem-30-t" state="failure" comment="" description="Tests various types of animations on referenced elements" />
+        <test source="animate-elem-31-t.svg" title="animate-elem-31-t" state="failure" comment="" description="Tests animation of the display attribute" />
+        <test source="animate-elem-32-t.svg" title="animate-elem-32-t" state="failure" comment="" description="Test that viewer supports the animation to and from the degenerate cases of the basic shapes" />
+        <test source="animate-elem-33-t.svg" title="animate-elem-33-t" state="failure" comment="" description="Tests AnimateMotion with keyPoints and keyTimes" />
+        <test source="animate-elem-34-t.svg" title="animate-elem-34-t" state="failure" comment="" description="Tests animation of attributes 'points' and 'fill-rule'" />
+        <test source="animate-elem-35-t.svg" title="animate-elem-35-t" state="failure" comment="" description="Tests animation of attributes stroke-dasharray, stroke-dashoffset, stroke-miterlimit, stroke-linecap and stroke-linjoin" />
+        <test source="animate-elem-36-t.svg" title="animate-elem-36-t" state="failure" comment="" description="Animation of transform on structure, hyperlinking and text elements" />
+        <test source="animate-elem-37-t.svg" title="animate-elem-37-t" state="failure" comment="" description="Animation of transform on shape elements" />
+        <test source="animate-elem-38-t.svg" title="animate-elem-38-t" state="failure" comment="" description="Tests animation of the viewBox attribute" />
+        <test source="animate-elem-39-t.svg" title="animate-elem-39-t" state="failure" comment="" description="Animation of xlink:href on the a, image and use elements" />
+        <test source="animate-elem-40-t.svg" title="animate-elem-40-t" state="failure" comment="" description="Animation of x/y on use, image, rect and text. Animation of width/height on image and rect." />
+        <test source="animate-elem-41-t.svg" title="animate-elem-41-t" state="failure" comment="" description="Animation of the various graphics properties with the animate element." />
+        <test source="animate-elem-44-t.svg" title="animate-elem-44-t" state="failure" comment="" description="Tests animation of attributes 'd' of path element" />
+        <test source="animate-elem-46-t.svg" title="animate-elem-46-t" state="failure" comment="" description="Animation of text properties: text-anchor, font-size, font-family, font-style and font-weight" />
+        <test source="animate-elem-52-t.svg" title="animate-elem-52-t" state="failure" comment="" description="Test of eventbase targets" />
+        <test source="animate-elem-53-t.svg" title="animate-elem-53-t" state="failure" comment="" description="Tests animation of attributes points with calc-mode" />
+        <test source="animate-elem-61-t.svg" title="animate-elem-61-t" state="failure" comment="" description="Test on multiple begin conditions in begin attribute" />
+        <test source="animate-elem-64-t.svg" title="animate-elem-64-t" state="failure" comment="" description="Basic Test on dur attribute" />
+        <test source="animate-elem-65-t.svg" title="animate-elem-65-t" state="failure" comment="" description="Basic tests on the min attribute" />
+        <test source="animate-elem-66-t.svg" title="animate-elem-66-t" state="failure" comment="" description="Basic test on the max attribute and combinations of the min and max attributes" />
+        <test source="animate-elem-67-t.svg" title="animate-elem-67-t" state="failure" comment="" description="Basic test on restart attribute" />
+        <test source="animate-elem-68-t.svg" title="animate-elem-68-t" state="failure" comment="" description="Basic test on the repeatCount attribute" />
+        <test source="animate-elem-69-t.svg" title="animate-elem-69-t" state="failure" comment="" description="Basic test on the repeatDur attribute" />
+        <test source="animate-elem-70-t.svg" title="animate-elem-70-t" state="failure" comment="" description="Basic test on the animation's fill attribute" />
+        <test source="animate-elem-77-t.svg" title="animate-elem-77-t" state="failure" comment="" description="Test on the animation of text properties and inheritance of animated text properties" />
+        <test source="animate-elem-78-t.svg" title="animate-elem-78-t" state="failure" comment="" description="Test on the animation of graphic properties and the inheritance of animated graphics properties" />
+        <test source="animate-elem-80-t.svg" title="animate-elem-80-t" state="failure" comment="" description="Test on the animateTransform type attribute" />
+        <test source="animate-elem-81-t.svg" title="animate-elem-81-t" state="failure" comment="" description="Test on the animateTransform additive behavior" />
+        <test source="animate-elem-82-t.svg" title="animate-elem-82-t" state="failure" comment="" description="Test on the animateTransform additive behavior" />
+        <test source="animate-elem-83-t.svg" title="animate-elem-83-t" state="failure" comment="" description="Path element's d attribute animation test." />
+        <test source="animate-elem-84-t.svg" title="animate-elem-84-t" state="failure" comment="" description="test animation of keywords that resolve to rgb colors" />
+        <test source="animate-elem-85-t.svg" title="animate-elem-85-t" state="failure" comment="" description="test animation with currentColor" />
+        <test source="animate-elem-86-t.svg" title="animate-elem-86-t" state="failure" comment="" description="Tests fill='freeze'" />
     </category>
     <category label="Coordinates and Transforms">
-        <test source="coords-constr-201-t.svg" title="coords-constr-201-t" state="unknown" comment="" description="Tests constrained transformations" />
-        <test source="coords-constr-202-t.svg" title="coords-constr-202-t" state="unknown" comment="" description="Tests constrained transformations" />
-        <test source="coords-constr-203-t.svg" title="coords-constr-203-t" state="unknown" comment="" description="Tests constrained transformations" />
-        <test source="coords-constr-204-t.svg" title="coords-constr-204-t" state="unknown" comment="" description="Test for animateMotion and transformRef." />
-        <test source="coords-coord-01-t.svg" title="coords-coord-01-t" state="unknown" comment="" description="Tests the default initial coordinate system used by renderer." />
-        <test source="coords-pAR-201-t.svg" title="coords-pAR-201-t" state="unknown" comment="" description="Validates viewBox specification and the preserveAspectRatio attribute on the animation element." />
-        <test source="coords-trans-01-t.svg" title="coords-trans-01-t" state="unknown" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-trans-02-t.svg" title="coords-trans-02-t" state="unknown" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-trans-03-t.svg" title="coords-trans-03-t" state="unknown" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-trans-04-t.svg" title="coords-trans-04-t" state="unknown" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-trans-05-t.svg" title="coords-trans-05-t" state="unknown" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-trans-06-t.svg" title="coords-trans-06-t" state="unknown" comment="" description="Validates elementary transforms and transformation nesting" />
-        <test source="coords-trans-07-t.svg" title="coords-trans-07-t" state="unknown" comment="" description="tests elementary transforms and transform nesting" />
-        <test source="coords-trans-08-t.svg" title="coords-trans-08-t" state="unknown" comment="" description="tests elementary transforms and transform nesting" />
-        <test source="coords-trans-09-t.svg" title="coords-trans-09-t" state="unknown" comment="" description="Tests elementary transforms and transform nesting" />
-        <test source="coords-units-01-t.svg" title="coords-units-01-t" state="unknown" comment="" description="This test validates the processing rules for converting coordinates and length defined in fractions of the current object's bounding box to user space coordinates and length. Note that this test assumes that linear and radial gradients are implemented." />
-        <test source="coords-viewattr-05-t.svg" title="coords-viewattr-05-t" state="unknown" comment="" description="Validates viewBox specification and the preserveAspectRatio attribute" />
+        <test source="coords-constr-201-t.svg" title="coords-constr-201-t" state="partial" comment="" description="Tests constrained transformations" />
+        <test source="coords-constr-202-t.svg" title="coords-constr-202-t" state="partial" comment="" description="Tests constrained transformations" />
+        <test source="coords-constr-203-t.svg" title="coords-constr-203-t" state="partial" comment="" description="Tests constrained transformations" />
+        <test source="coords-constr-204-t.svg" title="coords-constr-204-t" state="failure" comment="" description="Test for animateMotion and transformRef." />
+        <test source="coords-coord-01-t.svg" title="coords-coord-01-t" state="success" comment="" description="Tests the default initial coordinate system used by renderer." />
+        <test source="coords-pAR-201-t.svg" title="coords-pAR-201-t" state="failure" comment="" description="Validates viewBox specification and the preserveAspectRatio attribute on the animation element." />
+        <test source="coords-trans-01-t.svg" title="coords-trans-01-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-02-t.svg" title="coords-trans-02-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-03-t.svg" title="coords-trans-03-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-04-t.svg" title="coords-trans-04-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-05-t.svg" title="coords-trans-05-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-06-t.svg" title="coords-trans-06-t" state="success" comment="" description="Validates elementary transforms and transformation nesting" />
+        <test source="coords-trans-07-t.svg" title="coords-trans-07-t" state="success" comment="" description="tests elementary transforms and transform nesting" />
+        <test source="coords-trans-08-t.svg" title="coords-trans-08-t" state="success" comment="" description="tests elementary transforms and transform nesting" />
+        <test source="coords-trans-09-t.svg" title="coords-trans-09-t" state="success" comment="" description="Tests elementary transforms and transform nesting" />
+        <test source="coords-units-01-t.svg" title="coords-units-01-t" state="partial" comment="" description="This test validates the processing rules for converting coordinates and length defined in fractions of the current object's bounding box to user space coordinates and length. Note that this test assumes that linear and radial gradients are implemented." />
+        <test source="coords-viewattr-05-t.svg" title="coords-viewattr-05-t" state="success" comment="" description="Validates viewBox specification and the preserveAspectRatio attribute" />
     </category>
     <category label="Fonts">
-        <test source="fonts-desc-02-t.svg" title="fonts-desc-02-t" state="unknown" comment="" description="Test the CSS2 font-maching algorithm against a set of SVG fonts." />
-        <test source="fonts-elem-01-t.svg" title="fonts-elem-01-t" state="unknown" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-elem-02-t.svg" title="fonts-elem-02-t" state="unknown" comment="" description="Basic test of embedded fonts using glyph outlines" />
-        <test source="fonts-elem-03-t.svg" title="fonts-elem-03-t" state="unknown" comment="" description="Basic test of external embedded fonts with font-face-src" />
-        <test source="fonts-elem-06-t.svg" title="fonts-elem-06-t" state="unknown" comment="" description="validates that the font element's horiz-adv-x is used" />
-        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="unknown" comment="" description="Test on arabic-form" />
-        <test source="fonts-glyph-03-t.svg" title="fonts-glyph-03-t" state="unknown" comment="" description="Test on the lang attribute" />
-        <test source="fonts-glyph-04-t.svg" title="fonts-glyph-04-t" state="unknown" comment="" description="Test the glyph selection rules" />
-        <test source="fonts-glyph-201-t.svg" title="fonts-glyph-201-t" state="unknown" comment="" description="ligature matching in document order" />
-        <test source="fonts-glyph-202-t.svg" title="fonts-glyph-202-t" state="unknown" comment="" description="longest substring ligature matching" />
-        <test source="fonts-glyph-203-t.svg" title="fonts-glyph-203-t" state="unknown" comment="" description="test path commands in glyphs" />
-        <test source="fonts-kern-01-t.svg" title="fonts-kern-01-t" state="unknown" comment="" description="Test handling of hkern elements in SVG Fonts" />
-        <test source="fonts-overview-201-t.svg" title="fonts-overview-201-t" state="unknown" comment="" description="units-per-em values" />
+        <test source="fonts-desc-02-t.svg" title="fonts-desc-02-t" state="partial" comment="" description="Test the CSS2 font-maching algorithm against a set of SVG fonts." />
+        <test source="fonts-elem-01-t.svg" title="fonts-elem-01-t" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-02-t.svg" title="fonts-elem-02-t" state="success" comment="" description="Basic test of embedded fonts using glyph outlines" />
+        <test source="fonts-elem-03-t.svg" title="fonts-elem-03-t" state="success" comment="" description="Basic test of external embedded fonts with font-face-src" />
+        <test source="fonts-elem-06-t.svg" title="fonts-elem-06-t" state="success" comment="" description="validates that the font element's horiz-adv-x is used" />
+        <test source="fonts-glyph-02-t.svg" title="fonts-glyph-02-t" state="success" comment="" description="Test on arabic-form" />
+        <test source="fonts-glyph-03-t.svg" title="fonts-glyph-03-t" state="success" comment="" description="Test on the lang attribute" />
+        <test source="fonts-glyph-04-t.svg" title="fonts-glyph-04-t" state="success" comment="" description="Test the glyph selection rules" />
+        <test source="fonts-glyph-201-t.svg" title="fonts-glyph-201-t" state="success" comment="" description="ligature matching in document order" />
+        <test source="fonts-glyph-202-t.svg" title="fonts-glyph-202-t" state="success" comment="" description="longest substring ligature matching" />
+        <test source="fonts-glyph-203-t.svg" title="fonts-glyph-203-t" state="success" comment="" description="test path commands in glyphs" />
+        <test source="fonts-kern-01-t.svg" title="fonts-kern-01-t" state="success" comment="" description="Test handling of hkern elements in SVG Fonts" />
+        <test source="fonts-overview-201-t.svg" title="fonts-overview-201-t" state="success" comment="" description="units-per-em values" />
     </category>
     <category label="Interactivities">
-        <test source="interact-dom-02-t.svg" title="interact-dom-02-t" state="unknown" comment="" description="Checks if DOM/ECMA Script binding is supported. Checks that the DOM API supports event listener registration/unregistration." />
-        <test source="interact-event-201-t.svg" title="interact-event-201-t" state="unknown" comment="" description="Testing event bubbling on focus event" />
-        <test source="interact-event-202-t.svg" title="interact-event-202-t" state="unknown" comment="" description="Event bubbling with 'use'" />
-        <test source="interact-event-203-t.svg" title="interact-event-203-t" state="unknown" comment="" description="Shadow tree event listener chain" />
-        <test source="interact-focus-201-t.svg" title="interact-focus-201-t" state="unknown" comment="" description="Test Focusable Property on Animated Elements." />
-        <test source="interact-focus-202-t.svg" title="interact-focus-202-t" state="unknown" comment="" description="Test Focusable Property - Anchor Element" />
-        <test source="interact-focus-203-t.svg" title="interact-focus-203-t" state="unknown" comment="" description="Test Focusable Elements Outside the Viewport" />
-        <test source="interact-focus-204-t.svg" title="interact-focus-204-t" state="unknown" comment="" description="Test Focusable Elements - Focus Direction" />
-        <test source="interact-focus-205-t.svg" title="interact-focus-205-t" state="unknown" comment="" description="Test Focusable Elements - Nested Elements" />
-        <test source="interact-focus-206-t.svg" title="interact-focus-206-t" state="unknown" comment="" description="Test Focusable Elements - Invisible Items" />
-        <test source="interact-focus-207-t.svg" title="interact-focus-207-t" state="unknown" comment="" description="This test tests Initial focus within the svg document" />
-        <test source="interact-focus-208-t.svg" title="interact-focus-208-t" state="unknown" comment="" description="Test Focusable Elements - tspan Element" />
-        <test source="interact-focus-209-t.svg" title="interact-focus-209-t" state="unknown" comment="" description="Test Focusable Elements - tspan in a textArea" />
-        <test source="interact-focus-210-t.svg" title="interact-focus-210-t" state="unknown" comment="" description="Test Focusability with the 'use' Element" />
-        <test source="interact-focus-211-t.svg" title="interact-focus-211-t" state="unknown" comment="" description="Test Focusability with the 'use' Element" />
-        <test source="interact-focus-212-t.svg" title="interact-focus-212-t" state="unknown" comment="" description="Tests focus navigation with use element" />
-        <test source="interact-order-04-t.svg" title="interact-order-04-t" state="unknown" comment="" description="Test event bubbling of event attributes." />
-        <test source="interact-order-05-t.svg" title="interact-order-05-t" state="unknown" comment="" description="Test event bubbling of event attributes." />
-        <test source="interact-order-06-t.svg" title="interact-order-06-t" state="unknown" comment="" description="Test event bubbling of event attributes." />
-        <test source="interact-pevents-02-t.svg" title="interact-pevents-02-t" state="unknown" comment="" description="Tests 'pointer-events' on text" />
-        <test source="interact-pevents-05-t.svg" title="interact-pevents-05-t" state="unknown" comment="" description="Tests the pointer-events attribute with different 'visible' values." />
-        <test source="interact-pevents-06-t.svg" title="interact-pevents-06-t" state="unknown" comment="" description="Tests the pointer-events attribute with different painting values" />
-        <test source="interact-pevents-07-t.svg" title="interact-pevents-07-t" state="unknown" comment="" description="Testing pointer-events and rendering order" />
-        <test source="interact-pevents-08-t.svg" title="interact-pevents-08-t" state="unknown" comment="" description="Tests when text is considered hit by pointer-events" />
-        <test source="interact-zoom-01-t.svg" title="interact-zoom-01-t" state="unknown" comment="" description="Check that zooming and panning is supported" />
-        <test source="interact-zoom-02-t.svg" title="interact-zoom-02-t" state="unknown" comment="" description="Check that zooming and panning is supported" />
-        <test source="interact-zoom-03-t.svg" title="interact-zoom-03-t" state="unknown" comment="" description="Check that zooming and panning can be disabled" />
+        <test source="interact-dom-02-t.svg" title="interact-dom-02-t" state="failure" comment="" description="Checks if DOM/ECMA Script binding is supported. Checks that the DOM API supports event listener registration/unregistration." />
+        <test source="interact-event-201-t.svg" title="interact-event-201-t" state="failure" comment="" description="Testing event bubbling on focus event" />
+        <test source="interact-event-202-t.svg" title="interact-event-202-t" state="failure" comment="" description="Event bubbling with 'use'" />
+        <test source="interact-event-203-t.svg" title="interact-event-203-t" state="failure" comment="" description="Shadow tree event listener chain" />
+        <test source="interact-focus-201-t.svg" title="interact-focus-201-t" state="failure" comment="" description="Test Focusable Property on Animated Elements." />
+        <test source="interact-focus-202-t.svg" title="interact-focus-202-t" state="failure" comment="" description="Test Focusable Property - Anchor Element" />
+        <test source="interact-focus-203-t.svg" title="interact-focus-203-t" state="failure" comment="" description="Test Focusable Elements Outside the Viewport" />
+        <test source="interact-focus-204-t.svg" title="interact-focus-204-t" state="failure" comment="" description="Test Focusable Elements - Focus Direction" />
+        <test source="interact-focus-205-t.svg" title="interact-focus-205-t" state="failure" comment="" description="Test Focusable Elements - Nested Elements" />
+        <test source="interact-focus-206-t.svg" title="interact-focus-206-t" state="failure" comment="" description="Test Focusable Elements - Invisible Items" />
+        <test source="interact-focus-207-t.svg" title="interact-focus-207-t" state="failure" comment="" description="This test tests Initial focus within the svg document" />
+        <test source="interact-focus-208-t.svg" title="interact-focus-208-t" state="failure" comment="" description="Test Focusable Elements - tspan Element" />
+        <test source="interact-focus-209-t.svg" title="interact-focus-209-t" state="failure" comment="" description="Test Focusable Elements - tspan in a textArea" />
+        <test source="interact-focus-210-t.svg" title="interact-focus-210-t" state="failure" comment="" description="Test Focusability with the 'use' Element" />
+        <test source="interact-focus-211-t.svg" title="interact-focus-211-t" state="failure" comment="" description="Test Focusability with the 'use' Element" />
+        <test source="interact-focus-212-t.svg" title="interact-focus-212-t" state="failure" comment="" description="Tests focus navigation with use element" />
+        <test source="interact-order-04-t.svg" title="interact-order-04-t" state="failure" comment="" description="Test event bubbling of event attributes." />
+        <test source="interact-order-05-t.svg" title="interact-order-05-t" state="failure" comment="" description="Test event bubbling of event attributes." />
+        <test source="interact-order-06-t.svg" title="interact-order-06-t" state="failure" comment="" description="Test event bubbling of event attributes." />
+        <test source="interact-pevents-02-t.svg" title="interact-pevents-02-t" state="failure" comment="" description="Tests 'pointer-events' on text" />
+        <test source="interact-pevents-05-t.svg" title="interact-pevents-05-t" state="failure" comment="" description="Tests the pointer-events attribute with different 'visible' values." />
+        <test source="interact-pevents-06-t.svg" title="interact-pevents-06-t" state="failure" comment="" description="Tests the pointer-events attribute with different painting values" />
+        <test source="interact-pevents-07-t.svg" title="interact-pevents-07-t" state="failure" comment="" description="Testing pointer-events and rendering order" />
+        <test source="interact-pevents-08-t.svg" title="interact-pevents-08-t" state="failure" comment="" description="Tests when text is considered hit by pointer-events" />
+        <test source="interact-zoom-01-t.svg" title="interact-zoom-01-t" state="failure" comment="" description="Check that zooming and panning is supported" />
+        <test source="interact-zoom-02-t.svg" title="interact-zoom-02-t" state="failure" comment="" description="Check that zooming and panning is supported" />
+        <test source="interact-zoom-03-t.svg" title="interact-zoom-03-t" state="failure" comment="" description="Check that zooming and panning can be disabled" />
     </category>
     <category label="Linking">
-        <test source="linking-a-03-t.svg" title="linking-a-03-t" state="unknown" comment="" description="Basic in-bound link object addressing formats." />
-        <test source="linking-a-08-t.svg" title="linking-a-08-t" state="unknown" comment="" description="test links on text elements" />
-        <test source="linking-a-201-t.svg" title="linking-a-201-t" state="unknown" comment="" description="Verify target attribute has priority over xlink attribute on the 'a' element" />
-        <test source="linking-frag-201-t.svg" title="linking-frag-201-t" state="unknown" comment="" description="Testing Links to External 'svgView' with Transforms" />
-        <test source="linking-frag-202-t.svg" title="linking-frag-202-t" state="unknown" comment="" description="Testing Links to External 'svgView' with Transforms" />
-        <test source="linking-frag-203-t.svg" title="linking-frag-203-t" state="unknown" comment="" description="Testing Links to Internal Fragment Identifiers" />
-        <test source="linking-frag-204-t.svg" title="linking-frag-204-t" state="unknown" comment="" description="Testing Links to Internal Fragment Identifiers" />
-        <test source="linking-refs-201-t.svg" title="linking-refs-201-t" state="unknown" comment="" description="External Animated Use Elements" />
-        <test source="linking-refs-202-t.svg" title="linking-refs-202-t" state="unknown" comment="" description="Images with 'use' Element" />
-        <test source="linking-refs-203-t.svg" title="linking-refs-203-t" state="unknown" comment="" description="External Fragments with 'use' Element" />
-        <test source="linking-refs-204-t.svg" title="linking-refs-204-t" state="unknown" comment="" description="External Fragments with 'use' Element" />
-        <test source="linking-refs-205-t.svg" title="linking-refs-205-t" state="unknown" comment="" description="Images with 'use' Element" />
-        <test source="linking-refs-206-t.svg" title="linking-refs-206-t" state="unknown" comment="" description="Check xlink role and arcrole are stored in the DOM" />
-        <test source="linking-uri-03-t.svg" title="linking-uri-03-t" state="unknown" comment="" description="Verify xlink attributes on the 'a' element." />
+        <test source="linking-a-03-t.svg" title="linking-a-03-t" state="failure" comment="" description="Basic in-bound link object addressing formats." />
+        <test source="linking-a-08-t.svg" title="linking-a-08-t" state="failure" comment="" description="test links on text elements" />
+        <test source="linking-a-201-t.svg" title="linking-a-201-t" state="failure" comment="" description="Verify target attribute has priority over xlink attribute on the 'a' element" />
+        <test source="linking-frag-201-t.svg" title="linking-frag-201-t" state="failure" comment="" description="Testing Links to External 'svgView' with Transforms" />
+        <test source="linking-frag-202-t.svg" title="linking-frag-202-t" state="failure" comment="" description="Testing Links to External 'svgView' with Transforms" />
+        <test source="linking-frag-203-t.svg" title="linking-frag-203-t" state="failure" comment="" description="Testing Links to Internal Fragment Identifiers" />
+        <test source="linking-frag-204-t.svg" title="linking-frag-204-t" state="failure" comment="" description="Testing Links to Internal Fragment Identifiers" />
+        <test source="linking-refs-201-t.svg" title="linking-refs-201-t" state="failure" comment="" description="External Animated Use Elements" />
+        <test source="linking-refs-202-t.svg" title="linking-refs-202-t" state="failure" comment="" description="Images with 'use' Element" />
+        <test source="linking-refs-203-t.svg" title="linking-refs-203-t" state="failure" comment="" description="External Fragments with 'use' Element" />
+        <test source="linking-refs-204-t.svg" title="linking-refs-204-t" state="failure" comment="" description="External Fragments with 'use' Element" />
+        <test source="linking-refs-205-t.svg" title="linking-refs-205-t" state="failure" comment="" description="Images with 'use' Element" />
+        <test source="linking-refs-206-t.svg" title="linking-refs-206-t" state="failure" comment="" description="Check xlink role and arcrole are stored in the DOM" />
+        <test source="linking-uri-03-t.svg" title="linking-uri-03-t" state="failure" comment="" description="Verify xlink attributes on the 'a' element." />
     </category>
     <category label="Painting">
-        <test source="paint-color-01-t.svg" title="paint-color-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to process the color property" />
-        <test source="paint-color-03-t.svg" title="paint-color-03-t" state="unknown" comment="" description="Test that viewer has the basic capability to render colors, specified as CSS attributes, using any of the equivalent forms." />
-        <test source="paint-color-04-t.svg" title="paint-color-04-t" state="unknown" comment="" description="Tests system colors" />
-        <test source="paint-color-05-t.svg" title="paint-color-05-t" state="unknown" comment="" description="This tests the correct behavior or currentcolor when specified in multiple places." />
-        <test source="paint-color-201-t.svg" title="paint-color-201-t" state="unknown" comment="" description="test the sixteen color names for Tiny" />
-        <test source="paint-fill-01-t.svg" title="paint-fill-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle colour and 'none' values on the 'fill' property." />
-        <test source="paint-fill-02-t.svg" title="paint-fill-02-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'currentColor' value on the 'fill' property." />
-        <test source="paint-fill-03-t.svg" title="paint-fill-03-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'fill-rule' property." />
-        <test source="paint-fill-04-t.svg" title="paint-fill-04-t" state="unknown" comment="" description="Test inheritance of painting properties." />
-        <test source="paint-fill-05-t.svg" title="paint-fill-05-t" state="unknown" comment="" description="Test using fill-opacity values for rect element." />
-        <test source="paint-grad-04-t.svg" title="paint-grad-04-t" state="unknown" comment="" description="Test that checks the capability of the stop element in linear and radial gradients." />
-        <test source="paint-grad-05-t.svg" title="paint-grad-05-t" state="unknown" comment="" description="Test that checks the capability of the stop opacity in linear and radial gradients." />
-        <test source="paint-grad-07-t.svg" title="paint-grad-07-t" state="unknown" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects . This means it needs to understand the following elements : , and the following properties : stop-color, fill:url(# ), stroke(url# )" />
-        <test source="paint-grad-08-t.svg" title="paint-grad-08-t" state="unknown" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : , and the following properties : stop-color, fill:url(# ), stroke(url# )" />
-        <test source="paint-grad-09-t.svg" title="paint-grad-09-t" state="unknown" comment="" description="Test that the viewer can handle the gradientUnits attribute on linear gradients." />
-        <test source="paint-grad-11-t.svg" title="paint-grad-11-t" state="unknown" comment="" description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : , and the following properties : stop-color, fill:url(# ), stroke(url# )" />
-        <test source="paint-grad-12-t.svg" title="paint-grad-12-t" state="unknown" comment="" description="Test that the viewer can handle the gradientUnits attribute on radial gradients." />
-        <test source="paint-grad-15-t.svg" title="paint-grad-15-t" state="unknown" comment="" description="Test linear and radial gradient defaults." />
-        <test source="paint-grad-16-t.svg" title="paint-grad-16-t" state="unknown" comment="" description="Test gradient stop rules." />
-        <test source="paint-grad-17-t.svg" title="paint-grad-17-t" state="unknown" comment="" description="Test that checks that a gradient with objectBoundingBox is not applied on an element without width or height." />
-        <test source="paint-grad-18-t.svg" title="paint-grad-18-t" state="unknown" comment="" description="Tests inherit and currentColor on gradient stops" />
-        <test source="paint-grad-19-t.svg" title="paint-grad-19-t" state="unknown" comment="" description="Tests animation of gradients" />
-        <test source="paint-grad-201-t.svg" title="paint-grad-201-t" state="unknown" comment="" description="Test Stop Opacity Attribute" />
-        <test source="paint-grad-202-t.svg" title="paint-grad-202-t" state="unknown" comment="" description="Stop Opacity Attribute with Text" />
-        <test source="paint-grad-203-t.svg" title="paint-grad-203-t" state="unknown" comment="" description="Gradients with different gradientUnits" />
-        <test source="paint-grad-204-t.svg" title="paint-grad-204-t" state="unknown" comment="" description="LinearGradient with only one stop-color" />
-        <test source="paint-grad-205-t.svg" title="paint-grad-205-t" state="unknown" comment="" description="LinearGradient with no stop-color" />
-        <test source="paint-nsstroke-201-t.svg" title="paint-nsstroke-201-t" state="unknown" comment="" description="Non-scaling Stroke" />
-        <test source="paint-nsstroke-203-t.svg" title="paint-nsstroke-203-t" state="unknown" comment="" description="Non-scaling Stroke" />
-        <test source="paint-other-201-t.svg" title="paint-other-201-t" state="unknown" comment="" description="Test solidColor paint server." />
-        <test source="paint-other-203-t.svg" title="paint-other-203-t" state="unknown" comment="" description="Tests animation of solid-color and solid-opacity" />
-        <test source="paint-stroke-01-t.svg" title="paint-stroke-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'stroke' and 'stroke-width' properties." />
-        <test source="paint-stroke-02-t.svg" title="paint-stroke-02-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'stroke', 'stroke-width' and 'stroke-linejoin' properties." />
-        <test source="paint-stroke-03-t.svg" title="paint-stroke-03-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the" />
-        <test source="paint-stroke-04-t.svg" title="paint-stroke-04-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'stroke', 'stroke-width', 'stroke-dasharray' and 'stroke-dashoffset' properties." />
-        <test source="paint-stroke-05-t.svg" title="paint-stroke-05-t" state="unknown" comment="" description="Shows how a user agent may render thin strokes" />
-        <test source="paint-stroke-06-t.svg" title="paint-stroke-06-t" state="unknown" comment="" description="Test some effects of stroke-dasharray." />
-        <test source="paint-stroke-07-t.svg" title="paint-stroke-07-t" state="unknown" comment="" description="Test effect of different stroke-miterlimits." />
-        <test source="paint-stroke-08-t.svg" title="paint-stroke-08-t" state="unknown" comment="" description="Test effects of stroke-opacity range" />
-        <test source="paint-stroke-201-t.svg" title="paint-stroke-201-t" state="unknown" comment="" description="Stroking for circle, large stroke-width, small r." />
-        <test source="paint-stroke-202-t.svg" title="paint-stroke-202-t" state="unknown" comment="" description="Direction of stroke-dasharray and stroke-dashoffset for basic shapes." />
-        <test source="paint-stroke-204-t.svg" title="paint-stroke-204-t" state="unknown" comment="" description="Precision tests for stroke-linejoin" />
-        <test source="paint-stroke-205-t.svg" title="paint-stroke-205-t" state="unknown" comment="" description="Path length zero subpaths stroking and stroke-linecap" />
-        <test source="paint-stroke-207-t.svg" title="paint-stroke-207-t" state="unknown" comment="" description="Centering of stroke on the outline of rectangles." />
-        <test source="paint-vfill-201-t.svg" title="paint-vfill-201-t" state="unknown" comment="" description="Viewport Fill Attribute" />
-        <test source="paint-vfill-202-t.svg" title="paint-vfill-202-t" state="unknown" comment="" description="Viewport-fill on transparent image" />
-        <test source="paint-vfill-203-t.svg" title="paint-vfill-203-t" state="unknown" comment="" description="Animation of viewport fill and opacity" />
-        <test source="paint-vfill-204-t.svg" title="paint-vfill-204-t" state="unknown" comment="" description="Viewport fill and opacity inheritance" />
-        <test source="paint-vfill-205-t.svg" title="paint-vfill-205-t" state="unknown" comment="" description="Viewport fill and opacity" />
-        <test source="paint-vfill-206-t.svg" title="paint-vfill-206-t" state="unknown" comment="" description="Viewport Fill Attribute" />
+        <test source="paint-color-01-t.svg" title="paint-color-01-t" state="success" comment="" description="Test that viewer has the basic capability to process the color property" />
+        <test source="paint-color-03-t.svg" title="paint-color-03-t" state="success" comment="" description="Test that viewer has the basic capability to render colors, specified as CSS attributes, using any of the equivalent forms." />
+        <test source="paint-color-04-t.svg" title="paint-color-04-t" state="partial" comment="" description="Tests system colors" />
+        <test source="paint-color-05-t.svg" title="paint-color-05-t" state="success" comment="" description="This tests the correct behavior or currentcolor when specified in multiple places." />
+        <test source="paint-color-201-t.svg" title="paint-color-201-t" state="success" comment="" description="test the sixteen color names for Tiny" />
+        <test source="paint-fill-01-t.svg" title="paint-fill-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle colour and 'none' values on the 'fill' property." />
+        <test source="paint-fill-02-t.svg" title="paint-fill-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'currentColor' value on the 'fill' property." />
+        <test source="paint-fill-03-t.svg" title="paint-fill-03-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'fill-rule' property." />
+        <test source="paint-fill-04-t.svg" title="paint-fill-04-t" state="success" comment="" description="Test inheritance of painting properties." />
+        <test source="paint-fill-05-t.svg" title="paint-fill-05-t" state="success" comment="" description="Test using fill-opacity values for rect element." />
+        <test source="paint-grad-04-t.svg" title="paint-grad-04-t" state="success" comment="" description="Test that checks the capability of the stop element in linear and radial gradients." />
+        <test source="paint-grad-05-t.svg" title="paint-grad-05-t" state="success" comment="" description="Test that checks the capability of the stop opacity in linear and radial gradients." />
+        <test source="paint-grad-07-t.svg" title="paint-grad-07-t" state="success" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects . This means it needs to understand the following elements : , and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="paint-grad-08-t.svg" title="paint-grad-08-t" state="success" comment="" description="Test that the viewer has basic capability to handle linear gradients on fills and stroke of objects and text. This means it needs to understand the following elements : , and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="paint-grad-09-t.svg" title="paint-grad-09-t" state="success" comment="" description="Test that the viewer can handle the gradientUnits attribute on linear gradients." />
+        <test source="paint-grad-11-t.svg" title="paint-grad-11-t" state="success" comment="" description="Test that the viewer has basic capability to handle radial gradients on fills and stroke of objects and text. This means it needs to understand the following elements : , and the following properties : stop-color, fill:url(# ), stroke(url# )" />
+        <test source="paint-grad-12-t.svg" title="paint-grad-12-t" state="partial" comment="" description="Test that the viewer can handle the gradientUnits attribute on radial gradients." />
+        <test source="paint-grad-15-t.svg" title="paint-grad-15-t" state="success" comment="" description="Test linear and radial gradient defaults." />
+        <test source="paint-grad-16-t.svg" title="paint-grad-16-t" state="success" comment="" description="Test gradient stop rules." />
+        <test source="paint-grad-17-t.svg" title="paint-grad-17-t" state="success" comment="" description="Test that checks that a gradient with objectBoundingBox is not applied on an element without width or height." />
+        <test source="paint-grad-18-t.svg" title="paint-grad-18-t" state="success" comment="" description="Tests inherit and currentColor on gradient stops" />
+        <test source="paint-grad-19-t.svg" title="paint-grad-19-t" state="failure" comment="" description="Tests animation of gradients" />
+        <test source="paint-grad-201-t.svg" title="paint-grad-201-t" state="success" comment="" description="Test Stop Opacity Attribute" />
+        <test source="paint-grad-202-t.svg" title="paint-grad-202-t" state="success" comment="" description="Stop Opacity Attribute with Text" />
+        <test source="paint-grad-203-t.svg" title="paint-grad-203-t" state="success" comment="" description="Gradients with different gradientUnits" />
+        <test source="paint-grad-204-t.svg" title="paint-grad-204-t" state="success" comment="" description="LinearGradient with only one stop-color" />
+        <test source="paint-grad-205-t.svg" title="paint-grad-205-t" state="success" comment="" description="LinearGradient with no stop-color" />
+        <test source="paint-nsstroke-201-t.svg" title="paint-nsstroke-201-t" state="success" comment="" description="Non-scaling Stroke" />
+        <test source="paint-nsstroke-203-t.svg" title="paint-nsstroke-203-t" state="failure" comment="" description="Non-scaling Stroke" />
+        <test source="paint-other-201-t.svg" title="paint-other-201-t" state="success" comment="" description="Test solidColor paint server." />
+        <test source="paint-other-203-t.svg" title="paint-other-203-t" state="failure" comment="" description="Tests animation of solid-color and solid-opacity" />
+        <test source="paint-stroke-01-t.svg" title="paint-stroke-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'stroke' and 'stroke-width' properties." />
+        <test source="paint-stroke-02-t.svg" title="paint-stroke-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'stroke', 'stroke-width' and 'stroke-linejoin' properties." />
+        <test source="paint-stroke-03-t.svg" title="paint-stroke-03-t" state="success" comment="" description="Test that viewer has the basic capability to handle the" />
+        <test source="paint-stroke-04-t.svg" title="paint-stroke-04-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'stroke', 'stroke-width', 'stroke-dasharray' and 'stroke-dashoffset' properties." />
+        <test source="paint-stroke-05-t.svg" title="paint-stroke-05-t" state="success" comment="" description="Shows how a user agent may render thin strokes" />
+        <test source="paint-stroke-06-t.svg" title="paint-stroke-06-t" state="partial" comment="" description="Test some effects of stroke-dasharray." />
+        <test source="paint-stroke-07-t.svg" title="paint-stroke-07-t" state="success" comment="" description="Test effect of different stroke-miterlimits." />
+        <test source="paint-stroke-08-t.svg" title="paint-stroke-08-t" state="success" comment="" description="Test effects of stroke-opacity range" />
+        <test source="paint-stroke-201-t.svg" title="paint-stroke-201-t" state="partial" comment="" description="Stroking for circle, large stroke-width, small r." />
+        <test source="paint-stroke-202-t.svg" title="paint-stroke-202-t" state="failure" comment="" description="Direction of stroke-dasharray and stroke-dashoffset for basic shapes." />
+        <test source="paint-stroke-204-t.svg" title="paint-stroke-204-t" state="success" comment="" description="Precision tests for stroke-linejoin" />
+        <test source="paint-stroke-205-t.svg" title="paint-stroke-205-t" state="failure" comment="" description="Path length zero subpaths stroking and stroke-linecap" />
+        <test source="paint-stroke-207-t.svg" title="paint-stroke-207-t" state="success" comment="" description="Centering of stroke on the outline of rectangles." />
+        <test source="paint-vfill-201-t.svg" title="paint-vfill-201-t" state="partial" comment="" description="Viewport Fill Attribute" />
+        <test source="paint-vfill-202-t.svg" title="paint-vfill-202-t" state="success" comment="" description="Viewport-fill on transparent image" />
+        <test source="paint-vfill-203-t.svg" title="paint-vfill-203-t" state="partial" comment="" description="Animation of viewport fill and opacity" />
+        <test source="paint-vfill-204-t.svg" title="paint-vfill-204-t" state="success" comment="By the test specs: ...image should show with a yellow viewport-fill and full opacity." description="Viewport fill and opacity inheritance" />
+        <test source="paint-vfill-205-t.svg" title="paint-vfill-205-t" state="success" comment="" description="Viewport fill and opacity" />
+        <test source="paint-vfill-206-t.svg" title="paint-vfill-206-t" state="partial" comment="" description="Viewport Fill Attribute" />
     </category>
     <category label="Paths">
-        <test source="paths-data-01-t.svg" title="paths-data-01-t" state="unknown" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the cubic Bezier curveto, both regular and shorthand/smooth forms - C, c, S, s (along with Mm and Zz)." />
-        <test source="paths-data-02-t.svg" title="paths-data-02-t" state="unknown" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the quadratic Bezier curveto commands, both regular and shorthand/smooth forms - Q, q, T, t (along with Mm and Zz)." />
-        <test source="paths-data-04-t.svg" title="paths-data-04-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
-        <test source="paths-data-05-t.svg" title="paths-data-05-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
-        <test source="paths-data-06-t.svg" title="paths-data-06-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
-        <test source="paths-data-07-t.svg" title="paths-data-07-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
-        <test source="paths-data-08-t.svg" title="paths-data-08-t" state="unknown" comment="" description="tests support for moveto and closepath path commands" />
-        <test source="paths-data-09-t.svg" title="paths-data-09-t" state="unknown" comment="" description="tests moveto and closepath path commands" />
-        <test source="paths-data-10-t.svg" title="paths-data-10-t" state="unknown" comment="" description="tests paths with closepath vs. same start and end point" />
-        <test source="paths-data-12-t.svg" title="paths-data-12-t" state="unknown" comment="" description="Test using multiple coord sets to build a polybézier, and implicit values for initial S." />
-        <test source="paths-data-13-t.svg" title="paths-data-13-t" state="unknown" comment="" description="Test multiple coridinates for V and H" />
-        <test source="paths-data-14-t.svg" title="paths-data-14-t" state="unknown" comment="" description="Test implicit values for moveto." />
-        <test source="paths-data-15-t.svg" title="paths-data-15-t" state="unknown" comment="" description="Test using multiple coord sets to build a polybézier, then T with no preceeding Q or T." />
+        <test source="paths-data-01-t.svg" title="paths-data-01-t" state="success" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the cubic Bezier curveto, both regular and shorthand/smooth forms - C, c, S, s (along with Mm and Zz)." />
+        <test source="paths-data-02-t.svg" title="paths-data-02-t" state="success" comment="" description="Test that the viewer has the basic capability to handle the 'path' element and data (d) attribute in combination with the quadratic Bezier curveto commands, both regular and shorthand/smooth forms - Q, q, T, t (along with Mm and Zz)." />
+        <test source="paths-data-04-t.svg" title="paths-data-04-t" state="success" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-05-t.svg" title="paths-data-05-t" state="success" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-06-t.svg" title="paths-data-06-t" state="success" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-07-t.svg" title="paths-data-07-t" state="success" comment="" description="Test that viewer has the basic capability to handle the element and data (d) attribute in combination with the moveto, lineto, and closepath commands - M, L, Z, m, l, and z." />
+        <test source="paths-data-08-t.svg" title="paths-data-08-t" state="success" comment="" description="tests support for moveto and closepath path commands" />
+        <test source="paths-data-09-t.svg" title="paths-data-09-t" state="success" comment="" description="tests moveto and closepath path commands" />
+        <test source="paths-data-10-t.svg" title="paths-data-10-t" state="success" comment="" description="tests paths with closepath vs. same start and end point" />
+        <test source="paths-data-12-t.svg" title="paths-data-12-t" state="success" comment="" description="Test using multiple coord sets to build a polybézier, and implicit values for initial S." />
+        <test source="paths-data-13-t.svg" title="paths-data-13-t" state="success" comment="" description="Test multiple coridinates for V and H" />
+        <test source="paths-data-14-t.svg" title="paths-data-14-t" state="success" comment="" description="Test implicit values for moveto." />
+        <test source="paths-data-15-t.svg" title="paths-data-15-t" state="success" comment="" description="Test using multiple coord sets to build a polybézier, then T with no preceeding Q or T." />
     </category>
     <category label="Rendering">
-        <test source="render-elems-01-t.svg" title="render-elems-01-t" state="unknown" comment="" description="This test validates that shapes can be both filled." />
-        <test source="render-elems-02-t.svg" title="render-elems-02-t" state="unknown" comment="" description="This test validates that shapes can be both stroked." />
-        <test source="render-elems-03-t.svg" title="render-elems-03-t" state="unknown" comment="" description="This test validates that shapes can be both filled and stroked." />
-        <test source="render-elems-06-t.svg" title="render-elems-06-t" state="unknown" comment="" description="This test validates that text can be both filled." />
-        <test source="render-elems-07-t.svg" title="render-elems-07-t" state="unknown" comment="" description="This test validates that text can be both stroked." />
-        <test source="render-elems-08-t.svg" title="render-elems-08-t" state="unknown" comment="" description="This test validates that text can be both filled and stroked." />
-        <test source="render-groups-01-t.svg" title="render-groups-01-t" state="unknown" comment="" description="This test validates the rendering order of graphic elements and the concept of grouping." />
-        <test source="render-groups-03-t.svg" title="render-groups-03-t" state="unknown" comment="" description="This test validates the rendering order of graphic elements." />
+        <test source="render-elems-01-t.svg" title="render-elems-01-t" state="success" comment="" description="This test validates that shapes can be both filled." />
+        <test source="render-elems-02-t.svg" title="render-elems-02-t" state="success" comment="" description="This test validates that shapes can be both stroked." />
+        <test source="render-elems-03-t.svg" title="render-elems-03-t" state="success" comment="" description="This test validates that shapes can be both filled and stroked." />
+        <test source="render-elems-06-t.svg" title="render-elems-06-t" state="success" comment="" description="This test validates that text can be both filled." />
+        <test source="render-elems-07-t.svg" title="render-elems-07-t" state="success" comment="" description="This test validates that text can be both stroked." />
+        <test source="render-elems-08-t.svg" title="render-elems-08-t" state="success" comment="" description="This test validates that text can be both filled and stroked." />
+        <test source="render-groups-01-t.svg" title="render-groups-01-t" state="success" comment="" description="This test validates the rendering order of graphic elements and the concept of grouping." />
+        <test source="render-groups-03-t.svg" title="render-groups-03-t" state="success" comment="" description="This test validates the rendering order of graphic elements." />
     </category>
     <category label="Scripting">
-        <test source="script-element-201-t.svg" title="script-element-201-t" state="unknown" comment="" description="Test that when a script element has both an xlink:href attribute and child character data, the executable content for the script is retrieved from the IRI of the xlink:href attribute, and the child content is not added to the scripting context." />
-        <test source="script-element-202-t.svg" title="script-element-202-t" state="unknown" comment="" description="Test that scripts are not processed until added to the DOM tree." />
-        <test source="script-element-203-t.svg" title="script-element-203-t" state="unknown" comment="" description="Tests script element processing" />
-        <test source="script-handle-05-t.svg" title="script-handle-05-t" state="unknown" comment="" description="This test validates scripting support by using a simple mouse event handler and manipulating the DOM with the ECMA binding DOM API." />
-        <test source="script-handle-06-t.svg" title="script-handle-06-t" state="unknown" comment="" description="This test validates basic support for the mouse events defined in SVG." />
-        <test source="script-handle-07-t.svg" title="script-handle-07-t" state="unknown" comment="" description="This test validates basic support for the mouse events defined in SVG." />
-        <test source="script-handle-08-t.svg" title="script-handle-08-t" state="unknown" comment="" description="This test validates basic support for the mouse events defined in SVG." />
-        <test source="script-handle-201-t.svg" title="script-handle-201-t" state="unknown" comment="" description="Test with two event handlers on the same object" />
-        <test source="script-handle-202-t.svg" title="script-handle-202-t" state="unknown" comment="" description="Tests event handling with SMIL and scripting" />
-        <test source="script-listener-201-t.svg" title="script-listener-201-t" state="unknown" comment="" description="Test xml prefix declarations for XML Events." />
-        <test source="script-listener-202-t.svg" title="script-listener-202-t" state="unknown" comment="" description="Test listener with IDREF in handler attribute." />
-        <test source="script-listener-203-t.svg" title="script-listener-203-t" state="unknown" comment="" description="Test listener element in svg" />
-        <test source="script-listener-204-t.svg" title="script-listener-204-t" state="unknown" comment="" description="Test listener element in svg" />
+        <test source="script-element-201-t.svg" title="script-element-201-t" state="failure" comment="" description="Test that when a script element has both an xlink:href attribute and child character data, the executable content for the script is retrieved from the IRI of the xlink:href attribute, and the child content is not added to the scripting context." />
+        <test source="script-element-202-t.svg" title="script-element-202-t" state="failure" comment="" description="Test that scripts are not processed until added to the DOM tree." />
+        <test source="script-element-203-t.svg" title="script-element-203-t" state="failure" comment="" description="Tests script element processing" />
+        <test source="script-handle-05-t.svg" title="script-handle-05-t" state="failure" comment="" description="This test validates scripting support by using a simple mouse event handler and manipulating the DOM with the ECMA binding DOM API." />
+        <test source="script-handle-06-t.svg" title="script-handle-06-t" state="failure" comment="" description="This test validates basic support for the mouse events defined in SVG." />
+        <test source="script-handle-07-t.svg" title="script-handle-07-t" state="failure" comment="" description="This test validates basic support for the mouse events defined in SVG." />
+        <test source="script-handle-08-t.svg" title="script-handle-08-t" state="failure" comment="" description="This test validates basic support for the mouse events defined in SVG." />
+        <test source="script-handle-201-t.svg" title="script-handle-201-t" state="failure" comment="" description="Test with two event handlers on the same object" />
+        <test source="script-handle-202-t.svg" title="script-handle-202-t" state="failure" comment="" description="Tests event handling with SMIL and scripting" />
+        <test source="script-listener-201-t.svg" title="script-listener-201-t" state="failure" comment="" description="Test xml prefix declarations for XML Events." />
+        <test source="script-listener-202-t.svg" title="script-listener-202-t" state="failure" comment="" description="Test listener with IDREF in handler attribute." />
+        <test source="script-listener-203-t.svg" title="script-listener-203-t" state="failure" comment="" description="Test listener element in svg" />
+        <test source="script-listener-204-t.svg" title="script-listener-204-t" state="failure" comment="" description="Test listener element in svg" />
     </category>
     <category label="Shapes">
-        <test source="shapes-circle-01-t.svg" title="shapes-circle-01-t" state="unknown" comment="" description="Test ability to handle the 'circle' basic shapes element." />
-        <test source="shapes-circle-02-t.svg" title="shapes-circle-02-t" state="unknown" comment="" description="Defaults test with circle." />
-        <test source="shapes-circle-03-t.svg" title="shapes-circle-03-t" state="unknown" comment="" description="Testing the correct stroking of the circle element." />
-        <test source="shapes-ellipse-01-t.svg" title="shapes-ellipse-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the element." />
-        <test source="shapes-ellipse-02-t.svg" title="shapes-ellipse-02-t" state="unknown" comment="" description="Defaults test with ellipse." />
-        <test source="shapes-ellipse-03-t.svg" title="shapes-ellipse-03-t" state="unknown" comment="" description="Testing the correct stroking of the ellipse element." />
-        <test source="shapes-intro-01-t.svg" title="shapes-intro-01-t" state="unknown" comment="" description="Test that viewer supports the degenerate cases of the basic shapes" />
-        <test source="shapes-line-01-t.svg" title="shapes-line-01-t" state="unknown" comment="" description="Test ability to handle the 'line' basic-shapes element." />
-        <test source="shapes-line-02-t.svg" title="shapes-line-02-t" state="unknown" comment="" description="Test the default attributes of the line element." />
-        <test source="shapes-polygon-01-t.svg" title="shapes-polygon-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'polygon' element." />
-        <test source="shapes-polygon-02-t.svg" title="shapes-polygon-02-t" state="unknown" comment="" description="Test points attribute syntax. Test that empty and invalid points attributes result in not rendering 'polygon' elements." />
-        <test source="shapes-polyline-01-t.svg" title="shapes-polyline-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the 'polyline' element." />
-        <test source="shapes-polyline-02-t.svg" title="shapes-polyline-02-t" state="unknown" comment="" description="Test points attribute syntax. Test that empty and invalid points attributes result in not rendering 'polyline' elements." />
-        <test source="shapes-rect-01-t.svg" title="shapes-rect-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle the element." />
-        <test source="shapes-rect-02-t.svg" title="shapes-rect-02-t" state="unknown" comment="" description="Testing the default attributes on the rect element." />
-        <test source="shapes-rect-03-t.svg" title="shapes-rect-03-t" state="unknown" comment="" description="Testing the correct stroking of the rect element." />
+        <test source="shapes-circle-01-t.svg" title="shapes-circle-01-t" state="success" comment="" description="Test ability to handle the 'circle' basic shapes element." />
+        <test source="shapes-circle-02-t.svg" title="shapes-circle-02-t" state="success" comment="" description="Defaults test with circle." />
+        <test source="shapes-circle-03-t.svg" title="shapes-circle-03-t" state="success" comment="" description="Testing the correct stroking of the circle element." />
+        <test source="shapes-ellipse-01-t.svg" title="shapes-ellipse-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the element." />
+        <test source="shapes-ellipse-02-t.svg" title="shapes-ellipse-02-t" state="success" comment="" description="Defaults test with ellipse." />
+        <test source="shapes-ellipse-03-t.svg" title="shapes-ellipse-03-t" state="success" comment="" description="Testing the correct stroking of the ellipse element." />
+        <test source="shapes-intro-01-t.svg" title="shapes-intro-01-t" state="success" comment="" description="Test that viewer supports the degenerate cases of the basic shapes" />
+        <test source="shapes-line-01-t.svg" title="shapes-line-01-t" state="success" comment="" description="Test ability to handle the 'line' basic-shapes element." />
+        <test source="shapes-line-02-t.svg" title="shapes-line-02-t" state="success" comment="" description="Test the default attributes of the line element." />
+        <test source="shapes-polygon-01-t.svg" title="shapes-polygon-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'polygon' element." />
+        <test source="shapes-polygon-02-t.svg" title="shapes-polygon-02-t" state="partial" comment="" description="Test points attribute syntax. Test that empty and invalid points attributes result in not rendering 'polygon' elements." />
+        <test source="shapes-polyline-01-t.svg" title="shapes-polyline-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the 'polyline' element." />
+        <test source="shapes-polyline-02-t.svg" title="shapes-polyline-02-t" state="partial" comment="" description="Test points attribute syntax. Test that empty and invalid points attributes result in not rendering 'polyline' elements." />
+        <test source="shapes-rect-01-t.svg" title="shapes-rect-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle the element." />
+        <test source="shapes-rect-02-t.svg" title="shapes-rect-02-t" state="success" comment="" description="Testing the default attributes on the rect element." />
+        <test source="shapes-rect-03-t.svg" title="shapes-rect-03-t" state="success" comment="" description="Testing the correct stroking of the rect element." />
     </category>
     <category label="Structures">
-        <test source="struct-class-201-t.svg" title="struct-class-201-t" state="unknown" comment="" description="Tests that the value of the 'class' attribute is included in the DOM" />
-        <test source="struct-common-201-t.svg" title="struct-common-201-t" state="unknown" comment="" description="test id and xml:id modification" />
-        <test source="struct-cond-01-t.svg" title="struct-cond-01-t" state="unknown" comment="" description="Test to determine if a simple switch element can be probably evaluated." />
-        <test source="struct-cond-02-t.svg" title="struct-cond-02-t" state="unknown" comment="" description="Test that viewer has the basic capability to switch on user langauge" />
-        <test source="struct-cond-03-t.svg" title="struct-cond-03-t" state="unknown" comment="" description="Tests the switch element with requiredFeature" />
-        <test source="struct-cond-204-t.svg" title="struct-cond-204-t" state="unknown" comment="" description="Required Formats Attribute" />
-        <test source="struct-cond-205-t.svg" title="struct-cond-205-t" state="unknown" comment="" description="Tests all the feature strings." />
-        <test source="struct-cond-209-t.svg" title="struct-cond-209-t" state="unknown" comment="" description="Test to determine if 'display' or 'visibility' attributes have an incorrect effect on the 'switch' element." />
-        <test source="struct-cond-210-t.svg" title="struct-cond-210-t" state="unknown" comment="" description="Test to determine if referenced resource (elements or paint servers) are still displayed event if hidden by a 'switch' element." />
-        <test source="struct-defs-01-t.svg" title="struct-defs-01-t" state="unknown" comment="" description="Test to determine if the defs element is used as a container correctly" />
-        <test source="struct-defs-201-t.svg" title="struct-defs-201-t" state="unknown" comment="" description="Tests display=none on the defs element." />
-        <test source="struct-discard-201-t.svg" title="struct-discard-201-t" state="unknown" comment="" description="Discard Element" />
-        <test source="struct-discard-204-t.svg" title="struct-discard-204-t" state="unknown" comment="" description="Tests the xlink:href on discard is not animatable." />
-        <test source="struct-discard-205-t.svg" title="struct-discard-205-t" state="unknown" comment="" description="Tests that discard elements are discarded." />
-        <test source="struct-discard-206-t.svg" title="struct-discard-206-t" state="unknown" comment="" description="Tests that discard elements can be discarded before activation." />
-        <test source="struct-discard-207-t.svg" title="struct-discard-207-t" state="unknown" comment="" description="Tests the discard acts the same as removeChild." />
-        <test source="struct-frag-02-t.svg" title="struct-frag-02-t" state="unknown" comment="" description="validates the use of the preserveAspectRatio" />
-        <test source="struct-frag-03-t.svg" title="struct-frag-03-t" state="unknown" comment="" description="validates the use of the preserveAspectRatio" />
-        <test source="struct-frag-04-t.svg" title="struct-frag-04-t" state="unknown" comment="" description="validates svg element with no viewbox" />
-        <test source="struct-frag-05-t.svg" title="struct-frag-05-t" state="unknown" comment="" description="support for namespace prefixes" />
-        <test source="struct-frag-06-t.svg" title="struct-frag-06-t" state="unknown" comment="" description="tests required XML features, such as entities and the internal DTD subset" />
-        <test source="struct-group-01-t.svg" title="struct-group-01-t" state="unknown" comment="" description="Test that the g element functions correctly as a container." />
-        <test source="struct-group-03-t.svg" title="struct-group-03-t" state="unknown" comment="" description="property inheritance" />
-        <test source="struct-image-01-t.svg" title="struct-image-01-t" state="unknown" comment="" description="Test that the jpg and png image formats are understood." />
-        <test source="struct-image-03-t.svg" title="struct-image-03-t" state="unknown" comment="" description="Test gamma correction of PNG images based on gAMA chunk. Derived from original HTML test by Dave Martindale." />
-        <test source="struct-image-04-t.svg" title="struct-image-04-t" state="unknown" comment="" description="Test that jpg and png image formats are understood when inlined with the data: URI scheme." />
-        <test source="struct-image-06-t.svg" title="struct-image-06-t" state="unknown" comment="" description="image preserveAspectRatio" />
-        <test source="struct-image-07-t.svg" title="struct-image-07-t" state="unknown" comment="" description="image support for xml:base" />
-        <test source="struct-image-08-t.svg" title="struct-image-08-t" state="unknown" comment="" description="Alpha PNG test" />
-        <test source="struct-image-09-t.svg" title="struct-image-09-t" state="unknown" comment="" description="tRNS PNG test" />
-        <test source="struct-image-10-t.svg" title="struct-image-10-t" state="unknown" comment="" description="Greyscale PNG test" />
-        <test source="struct-progressive-201-t.svg" title="struct-progressive-201-t" state="unknown" comment="" description="Tests progressive rendering" />
-        <test source="struct-progressive-202-t.svg" title="struct-progressive-202-t" state="unknown" comment="" description="Tests progressive rendering" />
-        <test source="struct-progressive-203-t.svg" title="struct-progressive-203-t" state="unknown" comment="" description="Tests progressive rendering" />
-        <test source="struct-progressive-204-t.svg" title="struct-progressive-204-t" state="unknown" comment="" description="Tests progressive rendering" />
-        <test source="struct-svg-201-t.svg" title="struct-svg-201-t" state="unknown" comment="" description="Tests that the snapshotTime attribute is set" />
-        <test source="struct-svg-202-t.svg" title="struct-svg-202-t" state="unknown" comment="" description="Tests the default value for attribute snapshotTime" />
-        <test source="struct-svg-203-t.svg" title="struct-svg-203-t" state="unknown" comment="" description="Test svg element in svg." />
-        <test source="struct-svg-204-t.svg" title="struct-svg-204-t" state="unknown" comment="" description="Test negative values for width and height on the svg element." />
-        <test source="struct-use-01-t.svg" title="struct-use-01-t" state="unknown" comment="" description="Tests that the viewer can handle various types of use references" />
-        <test source="struct-use-03-t.svg" title="struct-use-03-t" state="unknown" comment="" description="tests x/y attribs on use element" />
-        <test source="struct-use-09-t.svg" title="struct-use-09-t" state="unknown" comment="" description="Tests the use element in symbol definition" />
-        <test source="struct-use-201-t.svg" title="struct-use-201-t" state="unknown" comment="" description="Test reference restrictions on the 'use' element." />
-        <test source="struct-use-202-t.svg" title="struct-use-202-t" state="unknown" comment="" description="Test reference restriction B on the 'use' element." />
-        <test source="struct-use-203-t.svg" title="struct-use-203-t" state="unknown" comment="" description="Tests external references on the use element" />
-        <test source="struct-use-204-t.svg" title="struct-use-204-t" state="unknown" comment="" description="Tests external references on the use element" />
-        <test source="struct-use-205-t.svg" title="struct-use-205-t" state="unknown" comment="" description="Test SVGElementInstance and events" />
-        <test source="struct-use-206-t.svg" title="struct-use-206-t" state="unknown" comment="" description="Tests interaction in use element" />
-        <test source="struct-use-207-t.svg" title="struct-use-207-t" state="unknown" comment="" description="Tests external references and computed inherited values" />
-        <test source="struct-use-208-t.svg" title="struct-use-208-t" state="unknown" comment="" description="Tests interaction in use element" />
-        <test source="struct-use-209-t.svg" title="struct-use-209-t" state="unknown" comment="" description="Tests cyclic references" />
-        <test source="struct-use-recursion-01-t.svg" title="struct-use-recursion-01-t" state="unknown" comment="" description="Test for recursion in 'use' elements." />
-        <test source="struct-use-recursion-02-t.svg" title="struct-use-recursion-02-t" state="unknown" comment="" description="Test for recursion in 'use' elements referencing external files." />
-        <test source="struct-use-recursion-03-t.svg" title="struct-use-recursion-03-t" state="unknown" comment="" description="Test for recursion in 'use' elements referencing external files." />
+        <test source="struct-class-201-t.svg" title="struct-class-201-t" state="failure" comment="" description="Tests that the value of the 'class' attribute is included in the DOM" />
+        <test source="struct-common-201-t.svg" title="struct-common-201-t" state="failure" comment="" description="test id and xml:id modification" />
+        <test source="struct-cond-01-t.svg" title="struct-cond-01-t" state="success" comment="" description="Test to determine if a simple switch element can be probably evaluated." />
+        <test source="struct-cond-02-t.svg" title="struct-cond-02-t" state="success" comment="" description="Test that viewer has the basic capability to switch on user langauge" />
+        <test source="struct-cond-03-t.svg" title="struct-cond-03-t" state="failure" comment="" description="Tests the switch element with requiredFeature" />
+        <test source="struct-cond-204-t.svg" title="struct-cond-204-t" state="failure" comment="" description="Required Formats Attribute" />
+        <test source="struct-cond-205-t.svg" title="struct-cond-205-t" state="failure" comment="" description="Tests all the feature strings." />
+        <test source="struct-cond-209-t.svg" title="struct-cond-209-t" state="success" comment="" description="Test to determine if 'display' or 'visibility' attributes have an incorrect effect on the 'switch' element." />
+        <test source="struct-cond-210-t.svg" title="struct-cond-210-t" state="success" comment="" description="Test to determine if referenced resource (elements or paint servers) are still displayed event if hidden by a 'switch' element." />
+        <test source="struct-defs-01-t.svg" title="struct-defs-01-t" state="success" comment="" description="Test to determine if the defs element is used as a container correctly" />
+        <test source="struct-defs-201-t.svg" title="struct-defs-201-t" state="success" comment="" description="Tests display=none on the defs element." />
+        <test source="struct-discard-201-t.svg" title="struct-discard-201-t" state="failure" comment="" description="Discard Element" />
+        <test source="struct-discard-204-t.svg" title="struct-discard-204-t" state="failure" comment="" description="Tests the xlink:href on discard is not animatable." />
+        <test source="struct-discard-205-t.svg" title="struct-discard-205-t" state="failure" comment="" description="Tests that discard elements are discarded." />
+        <test source="struct-discard-206-t.svg" title="struct-discard-206-t" state="failure" comment="" description="Tests that discard elements can be discarded before activation." />
+        <test source="struct-discard-207-t.svg" title="struct-discard-207-t" state="failure" comment="" description="Tests the discard acts the same as removeChild." />
+        <test source="struct-frag-02-t.svg" title="struct-frag-02-t" state="success" comment="" description="validates the use of the preserveAspectRatio" />
+        <test source="struct-frag-03-t.svg" title="struct-frag-03-t" state="success" comment="" description="validates the use of the preserveAspectRatio" />
+        <test source="struct-frag-04-t.svg" title="struct-frag-04-t" state="success" comment="" description="validates svg element with no viewbox" />
+        <test source="struct-frag-05-t.svg" title="struct-frag-05-t" state="partial" comment="" description="support for namespace prefixes" />
+        <test source="struct-frag-06-t.svg" title="struct-frag-06-t" state="success" comment="" description="tests required XML features, such as entities and the internal DTD subset" />
+        <test source="struct-group-01-t.svg" title="struct-group-01-t" state="success" comment="" description="Test that the g element functions correctly as a container." />
+        <test source="struct-group-03-t.svg" title="struct-group-03-t" state="success" comment="" description="property inheritance" />
+        <test source="struct-image-01-t.svg" title="struct-image-01-t" state="success" comment="" description="Test that the jpg and png image formats are understood." />
+        <test source="struct-image-03-t.svg" title="struct-image-03-t" state="success" comment="" description="Test gamma correction of PNG images based on gAMA chunk. Derived from original HTML test by Dave Martindale." />
+        <test source="struct-image-04-t.svg" title="struct-image-04-t" state="success" comment="" description="Test that jpg and png image formats are understood when inlined with the data: URI scheme." />
+        <test source="struct-image-06-t.svg" title="struct-image-06-t" state="success" comment="" description="image preserveAspectRatio" />
+        <test source="struct-image-07-t.svg" title="struct-image-07-t" state="success" comment="" description="image support for xml:base" />
+        <test source="struct-image-08-t.svg" title="struct-image-08-t" state="success" comment="" description="Alpha PNG test" />
+        <test source="struct-image-09-t.svg" title="struct-image-09-t" state="success" comment="" description="tRNS PNG test" />
+        <test source="struct-image-10-t.svg" title="struct-image-10-t" state="success" comment="" description="Greyscale PNG test" />
+        <test source="struct-progressive-201-t.svg" title="struct-progressive-201-t" state="partial" comment="" description="Tests progressive rendering" />
+        <test source="struct-progressive-202-t.svg" title="struct-progressive-202-t" state="partial" comment="" description="Tests progressive rendering" />
+        <test source="struct-progressive-203-t.svg" title="struct-progressive-203-t" state="partial" comment="" description="Tests progressive rendering" />
+        <test source="struct-progressive-204-t.svg" title="struct-progressive-204-t" state="partial" comment="" description="Tests progressive rendering" />
+        <test source="struct-svg-201-t.svg" title="struct-svg-201-t" state="partial" comment="" description="Tests that the snapshotTime attribute is set" />
+        <test source="struct-svg-202-t.svg" title="struct-svg-202-t" state="partial" comment="" description="Tests the default value for attribute snapshotTime" />
+        <test source="struct-svg-203-t.svg" title="struct-svg-203-t" state="success" comment="" description="Test svg element in svg." />
+        <test source="struct-svg-204-t.svg" title="struct-svg-204-t" state="success" comment="" description="Test negative values for width and height on the svg element." />
+        <test source="struct-use-01-t.svg" title="struct-use-01-t" state="success" comment="" description="Tests that the viewer can handle various types of use references" />
+        <test source="struct-use-03-t.svg" title="struct-use-03-t" state="success" comment="" description="tests x/y attribs on use element" />
+        <test source="struct-use-09-t.svg" title="struct-use-09-t" state="success" comment="" description="Tests the use element in symbol definition" />
+        <test source="struct-use-201-t.svg" title="struct-use-201-t" state="success" comment="" description="Test reference restrictions on the 'use' element." />
+        <test source="struct-use-202-t.svg" title="struct-use-202-t" state="partial" comment="" description="Test reference restriction B on the 'use' element." />
+        <test source="struct-use-203-t.svg" title="struct-use-203-t" state="success" comment="" description="Tests external references on the use element" />
+        <test source="struct-use-204-t.svg" title="struct-use-204-t" state="success" comment="" description="Tests external references on the use element" />
+        <test source="struct-use-205-t.svg" title="struct-use-205-t" state="failure" comment="" description="Test SVGElementInstance and events" />
+        <test source="struct-use-206-t.svg" title="struct-use-206-t" state="success" comment="" description="Tests interaction in use element" />
+        <test source="struct-use-207-t.svg" title="struct-use-207-t" state="success" comment="" description="Tests external references and computed inherited values" />
+        <test source="struct-use-208-t.svg" title="struct-use-208-t" state="success" comment="" description="Tests interaction in use element" />
+        <test source="struct-use-209-t.svg" title="struct-use-209-t" state="success" comment="" description="Tests cyclic references" />
+        <test source="struct-use-recursion-01-t.svg" title="struct-use-recursion-01-t" state="success" comment="" description="Test for recursion in 'use' elements." />
+        <test source="struct-use-recursion-02-t.svg" title="struct-use-recursion-02-t" state="success" comment="" description="Test for recursion in 'use' elements referencing external files." />
+        <test source="struct-use-recursion-03-t.svg" title="struct-use-recursion-03-t" state="success" comment="" description="Test for recursion in 'use' elements referencing external files." />
     </category>
     <category label="Styling">
-        <test source="styling-inherit-01-t.svg" title="styling-inherit-01-t" state="unknown" comment="" description="Verify property inheritance" />
-        <test source="styling-inherit-02-t.svg" title="styling-inherit-02-t" state="unknown" comment="" description="Inheritance test for stop-color" />
-        <test source="styling-inherit-03-t.svg" title="styling-inherit-03-t" state="unknown" comment="" description="test animation and inheritance on solid-color" />
-        <test source="styling-pres-01-t.svg" title="styling-pres-01-t" state="unknown" comment="" description="Check !important in presentation attribute is an unsupported value" />
+        <test source="styling-inherit-01-t.svg" title="styling-inherit-01-t" state="success" comment="" description="Verify property inheritance" />
+        <test source="styling-inherit-02-t.svg" title="styling-inherit-02-t" state="partial" comment="" description="Inheritance test for stop-color" />
+        <test source="styling-inherit-03-t.svg" title="styling-inherit-03-t" state="partial" comment="" description="test animation and inheritance on solid-color" />
+        <test source="styling-pres-01-t.svg" title="styling-pres-01-t" state="success" comment="" description="Check !important in presentation attribute is an unsupported value" />
     </category>
     <category label="Text">
-        <test source="text-align-01-t.svg" title="text-align-01-t" state="unknown" comment="" description="Test 'text-anchor' property (horizontal)." />
-        <test source="text-align-07-t.svg" title="text-align-07-t" state="unknown" comment="" description="Test horizontal baselines across script and font size changes." />
-        <test source="text-align-08-t.svg" title="text-align-08-t" state="unknown" comment="" description="Test horizontal baselines across script and font size changes (SVG Font)." />
-        <test source="text-align-201-t.svg" title="text-align-201-t" state="unknown" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
-        <test source="text-align-202-t.svg" title="text-align-202-t" state="unknown" comment="" description="test alignment on RTL text" />
-        <test source="text-area-201-t.svg" title="text-area-201-t" state="unknown" comment="" description="Testing 'textArea' with fixed 'width' and 'height'" />
-        <test source="text-area-202-t.svg" title="text-area-202-t" state="unknown" comment="" description="Testing 'textArea' with fixed 'width' and 'height'" />
-        <test source="text-area-203-t.svg" title="text-area-203-t" state="unknown" comment="" description="TextArea with Animated Width and Height" />
-        <test source="text-area-204-t.svg" title="text-area-204-t" state="unknown" comment="" description="TextArea with Animated Font-size" />
-        <test source="text-area-205-t.svg" title="text-area-205-t" state="unknown" comment="" description="TextArea with Height Set to Auto" />
-        <test source="text-area-206-t.svg" title="text-area-206-t" state="unknown" comment="" description="TextArea with Line-increment and Tbreak" />
-        <test source="text-area-207-t.svg" title="text-area-207-t" state="unknown" comment="" description="TextArea Transformed by Rotation" />
-        <test source="text-area-208-t.svg" title="text-area-208-t" state="unknown" comment="" description="TextArea with Both Width and Height Set to Auto" />
-        <test source="text-area-209-t.svg" title="text-area-209-t" state="unknown" comment="" description="TextArea Testing Word Breaks and Tbreak" />
-        <test source="text-area-210-t.svg" title="text-area-210-t" state="unknown" comment="" description="Testing 'rotate' attribute" />
-        <test source="text-area-211-t.svg" title="text-area-211-t" state="unknown" comment="" description="Testing 'tbreak' attribute while animating 'font-size' in 'tspan' in 'textArea'" />
-        <test source="text-area-213-t.svg" title="text-area-213-t" state="unknown" comment="" description="TextArea with Animated Width and Height" />
-        <test source="text-area-220-t.svg" title="text-area-220-t" state="unknown" comment="" description="Testing 'rotate' attribute" />
-        <test source="text-area-221-t.svg" title="text-area-221-t" state="unknown" comment="" description="TextArea with Line-increment and Text-anchor" />
-        <test source="text-area-222-t.svg" title="text-area-222-t" state="unknown" comment="" description="Testing 'textArea' with fixed 'width' and 'height'" />
-        <test source="text-edit-201-t.svg" title="text-edit-201-t" state="unknown" comment="" description="Test editable in textArea" />
-        <test source="text-fonts-01-t.svg" title="text-fonts-01-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle different font families" />
-        <test source="text-fonts-02-t.svg" title="text-fonts-02-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle different font weights" />
-        <test source="text-fonts-03-t.svg" title="text-fonts-03-t" state="unknown" comment="" description="Testing font-family attribute" />
-        <test source="text-fonts-04-t.svg" title="text-fonts-04-t" state="unknown" comment="" description="Testing font-family attribute" />
-        <test source="text-fonts-202-t.svg" title="text-fonts-202-t" state="unknown" comment="" description="Test that viewer has the basic capability to handle different font weights" />
-        <test source="text-intro-01-t.svg" title="text-intro-01-t" state="unknown" comment="" description="Test left-to-right aspect of internationalized text." />
-        <test source="text-intro-04-t.svg" title="text-intro-04-t" state="unknown" comment="" description="Test basic of internationalized text." />
-        <test source="text-intro-05-t.svg" title="text-intro-05-t" state="unknown" comment="" description="Tests Arabic text using various platform fonts" />
-        <test source="text-intro-06-t.svg" title="text-intro-06-t" state="unknown" comment="" description="test mandatory arabic ligatures" />
-        <test source="text-intro-201-t.svg" title="text-intro-201-t" state="unknown" comment="" description="Test for basic capability to handle 'text' elements and text presentation attributes." />
-        <test source="text-text-04-t.svg" title="text-text-04-t" state="unknown" comment="" description="Tests that the viewer can handle the rotate attribute on the text element" />
-        <test source="text-text-06-t.svg" title="text-text-06-t" state="unknown" comment="" description="x/y glyph positioning on ligatures" />
-        <test source="text-text-07-t.svg" title="text-text-07-t" state="unknown" comment="" description="Tests multiple x, y, rotate" />
-        <test source="text-text-08-t.svg" title="text-text-08-t" state="unknown" comment="" description="tests text opacity properties" />
-        <test source="text-text-09-t.svg" title="text-text-09-t" state="unknown" comment="" description="Tests multiple x, y, rotate" />
-        <test source="text-tselect-03-t.svg" title="text-tselect-03-t" state="unknown" comment="" description="Tests bidirectional text selection" />
-        <test source="text-ws-01-t.svg" title="text-ws-01-t" state="unknown" comment="" description="Test that viewer correctly handle whitespace and the 'space' attribute." />
-        <test source="text-ws-02-t.svg" title="text-ws-02-t" state="unknown" comment="" description="Test that viewer correctly handle whitespace and the 'space' attribute." />
+        <test source="text-align-01-t.svg" title="text-align-01-t" state="success" comment="" description="Test 'text-anchor' property (horizontal)." />
+        <test source="text-align-07-t.svg" title="text-align-07-t" state="success" comment="" description="Test horizontal baselines across script and font size changes." />
+        <test source="text-align-08-t.svg" title="text-align-08-t" state="failure" comment="" description="Test horizontal baselines across script and font size changes (SVG Font)." />
+        <test source="text-align-201-t.svg" title="text-align-201-t" state="success" comment="" description="Test viewer basic capability to handle 'text-anchor' property." />
+        <test source="text-align-202-t.svg" title="text-align-202-t" state="success" comment="The result is consistent with all browsers and Apache Batik." description="test alignment on RTL text" />
+        <test source="text-area-201-t.svg" title="text-area-201-t" state="failure" comment="" description="Testing 'textArea' with fixed 'width' and 'height'" />
+        <test source="text-area-202-t.svg" title="text-area-202-t" state="failure" comment="" description="Testing 'textArea' with fixed 'width' and 'height'" />
+        <test source="text-area-203-t.svg" title="text-area-203-t" state="failure" comment="" description="TextArea with Animated Width and Height" />
+        <test source="text-area-204-t.svg" title="text-area-204-t" state="failure" comment="" description="TextArea with Animated Font-size" />
+        <test source="text-area-205-t.svg" title="text-area-205-t" state="failure" comment="" description="TextArea with Height Set to Auto" />
+        <test source="text-area-206-t.svg" title="text-area-206-t" state="failure" comment="" description="TextArea with Line-increment and Tbreak" />
+        <test source="text-area-207-t.svg" title="text-area-207-t" state="failure" comment="" description="TextArea Transformed by Rotation" />
+        <test source="text-area-208-t.svg" title="text-area-208-t" state="failure" comment="" description="TextArea with Both Width and Height Set to Auto" />
+        <test source="text-area-209-t.svg" title="text-area-209-t" state="failure" comment="" description="TextArea Testing Word Breaks and Tbreak" />
+        <test source="text-area-210-t.svg" title="text-area-210-t" state="failure" comment="" description="Testing 'rotate' attribute" />
+        <test source="text-area-211-t.svg" title="text-area-211-t" state="failure" comment="" description="Testing 'tbreak' attribute while animating 'font-size' in 'tspan' in 'textArea'" />
+        <test source="text-area-213-t.svg" title="text-area-213-t" state="failure" comment="" description="TextArea with Animated Width and Height" />
+        <test source="text-area-220-t.svg" title="text-area-220-t" state="failure" comment="" description="Testing 'rotate' attribute" />
+        <test source="text-area-221-t.svg" title="text-area-221-t" state="failure" comment="" description="TextArea with Line-increment and Text-anchor" />
+        <test source="text-area-222-t.svg" title="text-area-222-t" state="failure" comment="" description="Testing 'textArea' with fixed 'width' and 'height'" />
+        <test source="text-edit-201-t.svg" title="text-edit-201-t" state="failure" comment="" description="Test editable in textArea" />
+        <test source="text-fonts-01-t.svg" title="text-fonts-01-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font families" />
+        <test source="text-fonts-02-t.svg" title="text-fonts-02-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font weights" />
+        <test source="text-fonts-03-t.svg" title="text-fonts-03-t" state="success" comment="" description="Testing font-family attribute" />
+        <test source="text-fonts-04-t.svg" title="text-fonts-04-t" state="success" comment="" description="Testing font-family attribute" />
+        <test source="text-fonts-202-t.svg" title="text-fonts-202-t" state="success" comment="" description="Test that viewer has the basic capability to handle different font weights" />
+        <test source="text-intro-01-t.svg" title="text-intro-01-t" state="success" comment="" description="Test left-to-right aspect of internationalized text." />
+        <test source="text-intro-04-t.svg" title="text-intro-04-t" state="success" comment="" description="Test basic of internationalized text." />
+        <test source="text-intro-05-t.svg" title="text-intro-05-t" state="success" comment="" description="Tests Arabic text using various platform fonts" />
+        <test source="text-intro-06-t.svg" title="text-intro-06-t" state="success" comment="" description="test mandatory arabic ligatures" />
+        <test source="text-intro-201-t.svg" title="text-intro-201-t" state="success" comment="" description="Test for basic capability to handle 'text' elements and text presentation attributes." />
+        <test source="text-text-04-t.svg" title="text-text-04-t" state="partial" comment="" description="Tests that the viewer can handle the rotate attribute on the text element" />
+        <test source="text-text-06-t.svg" title="text-text-06-t" state="partial" comment="" description="x/y glyph positioning on ligatures" />
+        <test source="text-text-07-t.svg" title="text-text-07-t" state="partial" comment="" description="Tests multiple x, y, rotate" />
+        <test source="text-text-08-t.svg" title="text-text-08-t" state="success" comment="" description="tests text opacity properties" />
+        <test source="text-text-09-t.svg" title="text-text-09-t" state="partial" comment="" description="Tests multiple x, y, rotate" />
+        <test source="text-tselect-03-t.svg" title="text-tselect-03-t" state="partial" comment="" description="Tests bidirectional text selection" />
+        <test source="text-ws-01-t.svg" title="text-ws-01-t" state="success" comment="" description="Test that viewer correctly handle whitespace and the 'space' attribute." />
+        <test source="text-ws-02-t.svg" title="text-ws-02-t" state="success" comment="" description="Test that viewer correctly handle whitespace and the 'space' attribute." />
     </category>
     <category label="Filter Effects">
-        <test source="jpeg-required-201-t.svg" title="jpeg-required-201-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-202-t.svg" title="jpeg-required-202-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-203-t.svg" title="jpeg-required-203-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-204-t.svg" title="jpeg-required-204-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-205-t.svg" title="jpeg-required-205-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-206-t.svg" title="jpeg-required-206-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-207-t.svg" title="jpeg-required-207-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-208-t.svg" title="jpeg-required-208-t" state="unknown" comment="" description="baseline JPEG test" />
-        <test source="jpeg-required-209-t.svg" title="jpeg-required-209-t" state="unknown" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-201-t.svg" title="jpeg-required-201-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-202-t.svg" title="jpeg-required-202-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-203-t.svg" title="jpeg-required-203-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-204-t.svg" title="jpeg-required-204-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-205-t.svg" title="jpeg-required-205-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-206-t.svg" title="jpeg-required-206-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-207-t.svg" title="jpeg-required-207-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-208-t.svg" title="jpeg-required-208-t" state="success" comment="" description="baseline JPEG test" />
+        <test source="jpeg-required-209-t.svg" title="jpeg-required-209-t" state="success" comment="" description="baseline JPEG test" />
     </category>
     <category label="Media">
-        <test source="media-alevel-201-t.svg" title="media-alevel-201-t" state="unknown" comment="" description="Testing 'audio' Element with the 'audio-level' Attribute" />
-        <test source="media-alevel-202-t.svg" title="media-alevel-202-t" state="unknown" comment="" description="Testing 'audio' Element with the 'audio-level' Attribute" />
-        <test source="media-alevel-203-t.svg" title="media-alevel-203-t" state="unknown" comment="" description="Test of audio level animation" />
-        <test source="media-alevel-204-t.svg" title="media-alevel-204-t" state="unknown" comment="" description="test of two simultaneous audio elements with animated audio-level" />
-        <test source="media-alevel-205-t.svg" title="media-alevel-205-t" state="unknown" comment="" description="Simple test of audio-level" />
-        <test source="media-alevel-206-t.svg" title="media-alevel-206-t" state="unknown" comment="" description="inheritence of audio-level" />
-        <test source="media-alevel-207-t.svg" title="media-alevel-207-t" state="unknown" comment="" description="audio-level set to 0" />
-        <test source="media-alevel-208-t.svg" title="media-alevel-208-t" state="unknown" comment="" description="Tests repeat of audio." />
-        <test source="media-anim-201-t.svg" title="media-anim-201-t" state="unknown" comment="" description="Test the Animation element with external references" />
-        <test source="media-anim-202-t.svg" title="media-anim-202-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-203-t.svg" title="media-anim-203-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-204-t.svg" title="media-anim-204-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-205-t.svg" title="media-anim-205-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-206-t.svg" title="media-anim-206-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-207-t.svg" title="media-anim-207-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-208-t.svg" title="media-anim-208-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-209-t.svg" title="media-anim-209-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-210-t.svg" title="media-anim-210-t" state="unknown" comment="" description="Animation Elements with External References" />
-        <test source="media-anim-211-t.svg" title="media-anim-211-t" state="unknown" comment="" description="Tests syncbase behavior togheter with pause/resume element" />
-        <test source="media-anim-212-t.svg" title="media-anim-212-t" state="unknown" comment="" description="tests invalid animation xlink:href values" />
-        <test source="media-anim-213-t.svg" title="media-anim-213-t" state="unknown" comment="" description="A basic test of the animation element." />
-        <test source="media-audio-201-t.svg" title="media-audio-201-t" state="unknown" comment="" description="Test of audio elements running simultaneously" />
-        <test source="media-audio-202-t.svg" title="media-audio-202-t" state="unknown" comment="" description="Simple test of audio element with repeatCount" />
-        <test source="media-audio-203-t.svg" title="media-audio-203-t" state="unknown" comment="" description="Simple test of audio with repeatCount indefinite" />
-        <test source="media-audio-204-t.svg" title="media-audio-204-t" state="unknown" comment="" description="Test of audio with repeat count constrained by end attribute" />
-        <test source="media-audio-205-t.svg" title="media-audio-205-t" state="unknown" comment="" description="Simple test of audio with timing attribute" />
-        <test source="media-audio-206-t.svg" title="media-audio-206-t" state="unknown" comment="" description="Test of audio and timing attributes" />
-        <test source="media-audio-207-t.svg" title="media-audio-207-t" state="unknown" comment="" description="Test of audio and repeats with constrained timing via the end attribute" />
-        <test source="media-audio-208-t.svg" title="media-audio-208-t" state="unknown" comment="" description="Test of audio element with sync-based timing" />
-        <test source="media-audio-209-t.svg" title="media-audio-209-t" state="unknown" comment="" description="Test of audio element with repeatCount" />
-        <test source="media-audio-210-t.svg" title="media-audio-210-t" state="unknown" comment="" description="Test audio elements and repeatCount" />
-        <test source="media-audio-211-t.svg" title="media-audio-211-t" state="unknown" comment="" description="Test of audio element in def, but not used in the renderable document." />
-        <test source="media-audio-212-t.svg" title="media-audio-212-t" state="unknown" comment="" description="Audio with animated display and visibility attribute." />
-        <test source="media-audio-213-t.svg" title="media-audio-213-t" state="unknown" comment="" description="Use on audio with animated display and visibility" />
-        <test source="media-audio-214-t.svg" title="media-audio-214-t" state="unknown" comment="" description="Tests audio elements with incorrect xlink:href values" />
-        <test source="media-audio-215-t.svg" title="media-audio-215-t" state="unknown" comment="" description="Tests the audio-level property for nested audio elements and clamping of audio-level" />
-        <test source="media-video-201-t.svg" title="media-video-201-t" state="unknown" comment="" description="Video Width and Height" />
-        <test source="media-video-202-t.svg" title="media-video-202-t" state="unknown" comment="" description="Video Width and Height" />
-        <test source="media-video-203-t.svg" title="media-video-203-t" state="unknown" comment="" description="Video with TransformBehavior Set to Pinned and Overlay" />
-        <test source="media-video-204-t.svg" title="media-video-204-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-205-t.svg" title="media-video-205-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-206-t.svg" title="media-video-206-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-207-t.svg" title="media-video-207-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-208-t.svg" title="media-video-208-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-209-t.svg" title="media-video-209-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-210-t.svg" title="media-video-210-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-211-t.svg" title="media-video-211-t" state="unknown" comment="" description="Video with PreserveAspectRatio Attribute" />
-        <test source="media-video-212-t.svg" title="media-video-212-t" state="unknown" comment="" description="Video with rendering order" />
-        <test source="media-video-213-t.svg" title="media-video-213-t" state="unknown" comment="" description="Rotation with Video and Image" />
-        <test source="media-video-214-t.svg" title="media-video-214-t" state="unknown" comment="" description="Transformation and rendering order on Video" />
-        <test source="media-video-215-t.svg" title="media-video-215-t" state="unknown" comment="" description="Changing the xlink:href attribute on a video element" />
-        <test source="media-video-216-t.svg" title="media-video-216-t" state="unknown" comment="" description="Video and transformBehavior" />
-        <test source="media-video-218-t.svg" title="media-video-218-t" state="unknown" comment="" description="Use on video with animated display and visibility" />
-        <test source="media-video-219-t.svg" title="media-video-219-t" state="unknown" comment="" description="Remove and insert video from document tree" />
-        <test source="media-video-220-t.svg" title="media-video-220-t" state="unknown" comment="" description="Remove and insert video from document tree" />
-        <test source="media-video-221-t.svg" title="media-video-221-t" state="unknown" comment="" description="Animated xlink:href on use that links to video" />
-        <test source="media-video-222-t.svg" title="media-video-222-t" state="unknown" comment="" description="invalid xlink:href on video" />
+        <test source="media-alevel-201-t.svg" title="media-alevel-201-t" state="failure" comment="" description="Testing 'audio' Element with the 'audio-level' Attribute" />
+        <test source="media-alevel-202-t.svg" title="media-alevel-202-t" state="failure" comment="" description="Testing 'audio' Element with the 'audio-level' Attribute" />
+        <test source="media-alevel-203-t.svg" title="media-alevel-203-t" state="failure" comment="" description="Test of audio level animation" />
+        <test source="media-alevel-204-t.svg" title="media-alevel-204-t" state="failure" comment="" description="test of two simultaneous audio elements with animated audio-level" />
+        <test source="media-alevel-205-t.svg" title="media-alevel-205-t" state="failure" comment="" description="Simple test of audio-level" />
+        <test source="media-alevel-206-t.svg" title="media-alevel-206-t" state="failure" comment="" description="inheritence of audio-level" />
+        <test source="media-alevel-207-t.svg" title="media-alevel-207-t" state="failure" comment="" description="audio-level set to 0" />
+        <test source="media-alevel-208-t.svg" title="media-alevel-208-t" state="failure" comment="" description="Tests repeat of audio." />
+        <test source="media-anim-201-t.svg" title="media-anim-201-t" state="failure" comment="" description="Test the Animation element with external references" />
+        <test source="media-anim-202-t.svg" title="media-anim-202-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-203-t.svg" title="media-anim-203-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-204-t.svg" title="media-anim-204-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-205-t.svg" title="media-anim-205-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-206-t.svg" title="media-anim-206-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-207-t.svg" title="media-anim-207-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-208-t.svg" title="media-anim-208-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-209-t.svg" title="media-anim-209-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-210-t.svg" title="media-anim-210-t" state="failure" comment="" description="Animation Elements with External References" />
+        <test source="media-anim-211-t.svg" title="media-anim-211-t" state="failure" comment="" description="Tests syncbase behavior togheter with pause/resume element" />
+        <test source="media-anim-212-t.svg" title="media-anim-212-t" state="failure" comment="" description="tests invalid animation xlink:href values" />
+        <test source="media-anim-213-t.svg" title="media-anim-213-t" state="failure" comment="" description="A basic test of the animation element." />
+        <test source="media-audio-201-t.svg" title="media-audio-201-t" state="failure" comment="" description="Test of audio elements running simultaneously" />
+        <test source="media-audio-202-t.svg" title="media-audio-202-t" state="failure" comment="" description="Simple test of audio element with repeatCount" />
+        <test source="media-audio-203-t.svg" title="media-audio-203-t" state="failure" comment="" description="Simple test of audio with repeatCount indefinite" />
+        <test source="media-audio-204-t.svg" title="media-audio-204-t" state="failure" comment="" description="Test of audio with repeat count constrained by end attribute" />
+        <test source="media-audio-205-t.svg" title="media-audio-205-t" state="failure" comment="" description="Simple test of audio with timing attribute" />
+        <test source="media-audio-206-t.svg" title="media-audio-206-t" state="failure" comment="" description="Test of audio and timing attributes" />
+        <test source="media-audio-207-t.svg" title="media-audio-207-t" state="failure" comment="" description="Test of audio and repeats with constrained timing via the end attribute" />
+        <test source="media-audio-208-t.svg" title="media-audio-208-t" state="failure" comment="" description="Test of audio element with sync-based timing" />
+        <test source="media-audio-209-t.svg" title="media-audio-209-t" state="failure" comment="" description="Test of audio element with repeatCount" />
+        <test source="media-audio-210-t.svg" title="media-audio-210-t" state="failure" comment="" description="Test audio elements and repeatCount" />
+        <test source="media-audio-211-t.svg" title="media-audio-211-t" state="failure" comment="" description="Test of audio element in def, but not used in the renderable document." />
+        <test source="media-audio-212-t.svg" title="media-audio-212-t" state="failure" comment="" description="Audio with animated display and visibility attribute." />
+        <test source="media-audio-213-t.svg" title="media-audio-213-t" state="failure" comment="" description="Use on audio with animated display and visibility" />
+        <test source="media-audio-214-t.svg" title="media-audio-214-t" state="failure" comment="" description="Tests audio elements with incorrect xlink:href values" />
+        <test source="media-audio-215-t.svg" title="media-audio-215-t" state="failure" comment="" description="Tests the audio-level property for nested audio elements and clamping of audio-level" />
+        <test source="media-video-201-t.svg" title="media-video-201-t" state="failure" comment="" description="Video Width and Height" />
+        <test source="media-video-202-t.svg" title="media-video-202-t" state="failure" comment="" description="Video Width and Height" />
+        <test source="media-video-203-t.svg" title="media-video-203-t" state="failure" comment="" description="Video with TransformBehavior Set to Pinned and Overlay" />
+        <test source="media-video-204-t.svg" title="media-video-204-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-205-t.svg" title="media-video-205-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-206-t.svg" title="media-video-206-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-207-t.svg" title="media-video-207-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-208-t.svg" title="media-video-208-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-209-t.svg" title="media-video-209-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-210-t.svg" title="media-video-210-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-211-t.svg" title="media-video-211-t" state="failure" comment="" description="Video with PreserveAspectRatio Attribute" />
+        <test source="media-video-212-t.svg" title="media-video-212-t" state="failure" comment="" description="Video with rendering order" />
+        <test source="media-video-213-t.svg" title="media-video-213-t" state="failure" comment="" description="Rotation with Video and Image" />
+        <test source="media-video-214-t.svg" title="media-video-214-t" state="failure" comment="" description="Transformation and rendering order on Video" />
+        <test source="media-video-215-t.svg" title="media-video-215-t" state="failure" comment="" description="Changing the xlink:href attribute on a video element" />
+        <test source="media-video-216-t.svg" title="media-video-216-t" state="failure" comment="" description="Video and transformBehavior" />
+        <test source="media-video-218-t.svg" title="media-video-218-t" state="failure" comment="" description="Use on video with animated display and visibility" />
+        <test source="media-video-219-t.svg" title="media-video-219-t" state="failure" comment="" description="Remove and insert video from document tree" />
+        <test source="media-video-220-t.svg" title="media-video-220-t" state="failure" comment="" description="Remove and insert video from document tree" />
+        <test source="media-video-221-t.svg" title="media-video-221-t" state="failure" comment="" description="Animated xlink:href on use that links to video" />
+        <test source="media-video-222-t.svg" title="media-video-222-t" state="failure" comment="" description="invalid xlink:href on video" />
     </category>
     <category label="SVG Micro DOM (uDOM)">
-        <test source="udom-conform-201-t.svg" title="udom-conform-201-t" state="unknown" comment="" description="Test that '#text' trait access works on text content elements" />
-        <test source="udom-dom-201-t.svg" title="udom-dom-201-t" state="unknown" comment="" description="Test that the DOMException interface and its constants exist" />
-        <test source="udom-dom-202-t.svg" title="udom-dom-202-t" state="unknown" comment="" description="Test the attributes of the Node interface" />
-        <test source="udom-dom-203-t.svg" title="udom-dom-203-t" state="unknown" comment="" description="Test that the Node.textContent attribute works" />
-        <test source="udom-dom-204-t.svg" title="udom-dom-204-t" state="unknown" comment="" description="Test the operation of Node.appendChild" />
-        <test source="udom-dom-206-t.svg" title="udom-dom-206-t" state="unknown" comment="" description="Test the operation of Node.removeChild" />
-        <test source="udom-dom-207-t.svg" title="udom-dom-207-t" state="unknown" comment="" description="Test the operation of Node.cloneNode" />
-        <test source="udom-dom-209-t.svg" title="udom-dom-209-t" state="unknown" comment="" description="Test the operation of Element.setAttribute(NS)" />
-        <test source="udom-dom-210-t.svg" title="udom-dom-210-t" state="unknown" comment="" description="Test the operation of Document.createElementNS" />
-        <test source="udom-dom-211-t.svg" title="udom-dom-211-t" state="unknown" comment="" description="Simple test of the Document.documentElement attribute" />
-        <test source="udom-dom-213-t.svg" title="udom-dom-213-t" state="unknown" comment="" description="Test the ElementTraversal interface attributes" />
-        <test source="udom-event-201-t.svg" title="udom-event-201-t" state="unknown" comment="" description="Test the simple operation of the EventTarget interface methods" />
-        <test source="udom-event-202-t.svg" title="udom-event-202-t" state="unknown" comment="" description="Test the simple attributes of the Event interface" />
-        <test source="udom-event-203-t.svg" title="udom-event-203-t" state="unknown" comment="" description="Test the stopPropagation method of the Event interface" />
-        <test source="udom-event-204-t.svg" title="udom-event-204-t" state="unknown" comment="" description="Test the defaultPrevented attribute and preventDefault method of the Event interface" />
-        <test source="udom-event-205-t.svg" title="udom-event-205-t" state="unknown" comment="" description="Test the attributes of the MouseEvent interface" />
-        <test source="udom-event-207-t.svg" title="udom-event-207-t" state="unknown" comment="" description="Test the TextEvent interface" />
-        <test source="udom-event-208-t.svg" title="udom-event-208-t" state="unknown" comment="" description="Test the UIEvent interface and the dispatch order of mouse events" />
-        <test source="udom-event-209-t.svg" title="udom-event-209-t" state="unknown" comment="" description="Test an EventListener given by an object with a .handleEvent property" />
-        <test source="udom-event-210-t.svg" title="udom-event-210-t" state="unknown" comment="" description="Tests the mousewheel event" />
-        <test source="udom-glob-201-t.svg" title="udom-glob-201-t" state="unknown" comment="" description="Test that the GlobalException interface and its constants exist" />
-        <test source="udom-glob-202-t.svg" title="udom-glob-202-t" state="unknown" comment="" description="Test that the method gotoLocation works for a simple case" />
-        <test source="udom-glob-203-t.svg" title="udom-glob-203-t" state="unknown" comment="" description="Testing SVGGlobal postURL's callback status" />
-        <test source="udom-glob-204-t.svg" title="udom-glob-204-t" state="unknown" comment="" description="Testing SVGGlobal getURL's callback status" />
-        <test source="udom-node-201-t.svg" title="udom-node-201-t" state="unknown" comment="" description="CloneNode with use elements" />
-        <test source="udom-node-202-t.svg" title="udom-node-202-t" state="unknown" comment="" description="Test cloneNode and 'deep' parameter" />
-        <test source="udom-node-204-t.svg" title="udom-node-204-t" state="unknown" comment="" description="Tests uDOM Node accessor parentNode" />
-        <test source="udom-over-01-t.svg" title="udom-over-01-t" state="unknown" comment="" description="Checks if SVG DOM ECMA Script binding is supported" />
-        <test source="udom-smil-201-t.svg" title="udom-smil-201-t" state="unknown" comment="" description="Test ElementTimeControl's beginElement and beginElementAt methods" />
-        <test source="udom-smil-202-t.svg" title="udom-smil-202-t" state="unknown" comment="" description="Test ElementTimeControl's beginElement and beginElementAt methods with different begin instance time lists" />
-        <test source="udom-smil-203-t.svg" title="udom-smil-203-t" state="unknown" comment="" description="Test ElementTimeControl's endElement and endElementAt methods" />
-        <test source="udom-svg-201-t.svg" title="udom-svg-201-t" state="unknown" comment="" description="Test that the SVGException interface and its constants exist" />
-        <test source="udom-svg-202-t.svg" title="udom-svg-202-t" state="unknown" comment="" description="Test the global attribute of the SVGDocument interface" />
-        <test source="udom-svg-204-t.svg" title="udom-svg-204-t" state="unknown" comment="" description="Test the SVGElementInstance interface" />
-        <test source="udom-svg-205-t.svg" title="udom-svg-205-t" state="unknown" comment="" description="Test the SVGSVGElement NAV_ constants" />
-        <test source="udom-svg-206-t.svg" title="udom-svg-206-t" state="unknown" comment="" description="Test SVGSVGElement.currentScale" />
-        <test source="udom-svg-208-t.svg" title="udom-svg-208-t" state="unknown" comment="" description="Tests syncbase behavior togheter with pause/resume element" />
-        <test source="udom-svg-209-t.svg" title="udom-svg-209-t" state="unknown" comment="" description="Test raising of begin, end and repeat events togheter with pause/resume element" />
-        <test source="udom-svg-210-t.svg" title="udom-svg-210-t" state="unknown" comment="" description="Test active intervals with pause/resume element and restart 'whenNotActive'" />
-        <test source="udom-svg-211-t.svg" title="udom-svg-211-t" state="unknown" comment="" description="Test active intervals with pause/resume element and restart 'never'" />
-        <test source="udom-svg-213-t.svg" title="udom-svg-213-t" state="unknown" comment="" description="Test that SVGSVGElement.getCurrentTime returns a sensible value" />
-        <test source="udom-svg-216-t.svg" title="udom-svg-216-t" state="unknown" comment="" description="Test SVGSVGElement.createSVGPath()" />
-        <test source="udom-svg-218-t.svg" title="udom-svg-218-t" state="unknown" comment="" description="More SVGGlobal.getURL() tests" />
-        <test source="udom-svg-220-t.svg" title="udom-svg-220-t" state="unknown" comment="" description="Test trait access for 'accumulate'" />
-        <test source="udom-svg-224-t.svg" title="udom-svg-224-t" state="unknown" comment="" description="Test trait access for 'begin'" />
-        <test source="udom-svg-225-t.svg" title="udom-svg-225-t" state="unknown" comment="" description="Test getScreenCTM when the CTM is being animated" />
-        <test source="udom-svg-226-t.svg" title="udom-svg-226-t" state="unknown" comment="" description="Test SVGSVGElement.getCurrentTime" />
-        <test source="udom-svg-227-t.svg" title="udom-svg-227-t" state="unknown" comment="" description="Test SVGSVGElement.setCurrentTime" />
-        <test source="udom-svg-228-t.svg" title="udom-svg-228-t" state="unknown" comment="" description="Test" />
-        <test source="udom-svg-231-t.svg" title="udom-svg-231-t" state="unknown" comment="" description="Test SVG Traits" />
-        <test source="udom-svg-232-t.svg" title="udom-svg-232-t" state="unknown" comment="" description="Test SVG Traits" />
-        <test source="udom-svg-233-t.svg" title="udom-svg-233-t" state="unknown" comment="" description="Test SVG Traits" />
-        <test source="udom-svg-236-t.svg" title="udom-svg-236-t" state="unknown" comment="" description="Test SVG Traits" />
-        <test source="udom-svg-237-t.svg" title="udom-svg-237-t" state="unknown" comment="" description="Test SVG Traits" />
-        <test source="udom-svgcolor-201-t.svg" title="udom-svgcolor-201-t" state="unknown" comment="" description="Test SVGRGBColort" />
-        <test source="udom-svglocatable-201-t.svg" title="udom-svglocatable-201-t" state="unknown" comment="" description="Test SVGLocatable.getBBox." />
-        <test source="udom-svglocatable-202-t.svg" title="udom-svglocatable-202-t" state="unknown" comment="" description="Test SVGLocatable.getScreenBBox." />
-        <test source="udom-svglocatable-203-t.svg" title="udom-svglocatable-203-t" state="unknown" comment="" description="Test SVGLocatable.getScreenCTM" />
-        <test source="udom-svgmatrix-201-t.svg" title="udom-svgmatrix-201-t" state="unknown" comment="" description="Test SVGMatrix.getComponent" />
-        <test source="udom-svgmatrix-202-t.svg" title="udom-svgmatrix-202-t" state="unknown" comment="" description="Test SVGMatrix.inverse" />
-        <test source="udom-svgmatrix-203-t.svg" title="udom-svgmatrix-203-t" state="unknown" comment="" description="Test SVGMatrix.mMultiply" />
-        <test source="udom-svgmatrix-204-t.svg" title="udom-svgmatrix-204-t" state="unknown" comment="" description="Test SVGMatrix.mRotate" />
-        <test source="udom-svgmatrix-205-t.svg" title="udom-svgmatrix-205-t" state="unknown" comment="" description="Test SVGMatrix.mScale" />
-        <test source="udom-svgmatrix-206-t.svg" title="udom-svgmatrix-206-t" state="unknown" comment="" description="Test SVGMatrix.mTranslate" />
-        <test source="udom-svgpath-201-t.svg" title="udom-svgpath-201-t" state="unknown" comment="" description="Testing the SVGPath interface: .close(), .moveTo(), .lineTo(), .quadTo()" />
-        <test source="udom-svgpath-202-t.svg" title="udom-svgpath-202-t" state="unknown" comment="" description="Test SVGPath.close(), .moveTo(), .lineTo()" />
-        <test source="udom-svgpoint-201-t.svg" title="udom-svgpoint-201-t" state="unknown" comment="" description="Test SVGPoint" />
-        <test source="udom-svgrect-201-t.svg" title="udom-svgrect-201-t" state="unknown" comment="" description="Test SVGRect object" />
-        <test source="udom-textcontent-201-t.svg" title="udom-textcontent-201-t" state="unknown" comment="" description="Test on textContent on element with several children containing text nodes" />
-        <test source="udom-textcontent-202-t.svg" title="udom-textcontent-202-t" state="unknown" comment="" description="Test to set textContent, which removes other element children" />
-        <test source="udom-traitaccess-201-t.svg" title="udom-traitaccess-201-t" state="unknown" comment="" description="Trait access in uDOM" />
-        <test source="udom-traitaccess-202-t.svg" title="udom-traitaccess-202-t" state="unknown" comment="" description="Trait access on solidColor" />
-        <test source="udom-traitaccess-203-t.svg" title="udom-traitaccess-203-t" state="unknown" comment="" description="Trait access on solidColor solid-opacity" />
-        <test source="udom-traitaccess-204-t.svg" title="udom-traitaccess-204-t" state="unknown" comment="" description="Tests set/get access on 'fillrule' trait." />
-        <test source="udom-traitaccess-205-t.svg" title="udom-traitaccess-205-t" state="unknown" comment="" description="Test to check trait access with setRGBColorTrait on viewport-fill" />
-        <test source="udom-traitaccess-206-t.svg" title="udom-traitaccess-206-t" state="unknown" comment="" description="Test to check trait access with setTrait on viewport-fill" />
-        <test source="udom-traitaccess-207-t.svg" title="udom-traitaccess-207-t" state="unknown" comment="" description="Test to check trait access with setFloatTrait on viewport-fill-opacity" />
+        <test source="udom-conform-201-t.svg" title="udom-conform-201-t" state="failure" comment="" description="Test that '#text' trait access works on text content elements" />
+        <test source="udom-dom-201-t.svg" title="udom-dom-201-t" state="failure" comment="" description="Test that the DOMException interface and its constants exist" />
+        <test source="udom-dom-202-t.svg" title="udom-dom-202-t" state="failure" comment="" description="Test the attributes of the Node interface" />
+        <test source="udom-dom-203-t.svg" title="udom-dom-203-t" state="failure" comment="" description="Test that the Node.textContent attribute works" />
+        <test source="udom-dom-204-t.svg" title="udom-dom-204-t" state="failure" comment="" description="Test the operation of Node.appendChild" />
+        <test source="udom-dom-206-t.svg" title="udom-dom-206-t" state="failure" comment="" description="Test the operation of Node.removeChild" />
+        <test source="udom-dom-207-t.svg" title="udom-dom-207-t" state="failure" comment="" description="Test the operation of Node.cloneNode" />
+        <test source="udom-dom-209-t.svg" title="udom-dom-209-t" state="failure" comment="" description="Test the operation of Element.setAttribute(NS)" />
+        <test source="udom-dom-210-t.svg" title="udom-dom-210-t" state="failure" comment="" description="Test the operation of Document.createElementNS" />
+        <test source="udom-dom-211-t.svg" title="udom-dom-211-t" state="failure" comment="" description="Simple test of the Document.documentElement attribute" />
+        <test source="udom-dom-213-t.svg" title="udom-dom-213-t" state="failure" comment="" description="Test the ElementTraversal interface attributes" />
+        <test source="udom-event-201-t.svg" title="udom-event-201-t" state="failure" comment="" description="Test the simple operation of the EventTarget interface methods" />
+        <test source="udom-event-202-t.svg" title="udom-event-202-t" state="failure" comment="" description="Test the simple attributes of the Event interface" />
+        <test source="udom-event-203-t.svg" title="udom-event-203-t" state="failure" comment="" description="Test the stopPropagation method of the Event interface" />
+        <test source="udom-event-204-t.svg" title="udom-event-204-t" state="failure" comment="" description="Test the defaultPrevented attribute and preventDefault method of the Event interface" />
+        <test source="udom-event-205-t.svg" title="udom-event-205-t" state="failure" comment="" description="Test the attributes of the MouseEvent interface" />
+        <test source="udom-event-207-t.svg" title="udom-event-207-t" state="failure" comment="" description="Test the TextEvent interface" />
+        <test source="udom-event-208-t.svg" title="udom-event-208-t" state="failure" comment="" description="Test the UIEvent interface and the dispatch order of mouse events" />
+        <test source="udom-event-209-t.svg" title="udom-event-209-t" state="failure" comment="" description="Test an EventListener given by an object with a .handleEvent property" />
+        <test source="udom-event-210-t.svg" title="udom-event-210-t" state="failure" comment="" description="Tests the mousewheel event" />
+        <test source="udom-glob-201-t.svg" title="udom-glob-201-t" state="failure" comment="" description="Test that the GlobalException interface and its constants exist" />
+        <test source="udom-glob-202-t.svg" title="udom-glob-202-t" state="failure" comment="" description="Test that the method gotoLocation works for a simple case" />
+        <test source="udom-glob-203-t.svg" title="udom-glob-203-t" state="failure" comment="" description="Testing SVGGlobal postURL's callback status" />
+        <test source="udom-glob-204-t.svg" title="udom-glob-204-t" state="failure" comment="" description="Testing SVGGlobal getURL's callback status" />
+        <test source="udom-node-201-t.svg" title="udom-node-201-t" state="failure" comment="" description="CloneNode with use elements" />
+        <test source="udom-node-202-t.svg" title="udom-node-202-t" state="failure" comment="" description="Test cloneNode and 'deep' parameter" />
+        <test source="udom-node-204-t.svg" title="udom-node-204-t" state="failure" comment="" description="Tests uDOM Node accessor parentNode" />
+        <test source="udom-over-01-t.svg" title="udom-over-01-t" state="failure" comment="" description="Checks if SVG DOM ECMA Script binding is supported" />
+        <test source="udom-smil-201-t.svg" title="udom-smil-201-t" state="failure" comment="" description="Test ElementTimeControl's beginElement and beginElementAt methods" />
+        <test source="udom-smil-202-t.svg" title="udom-smil-202-t" state="failure" comment="" description="Test ElementTimeControl's beginElement and beginElementAt methods with different begin instance time lists" />
+        <test source="udom-smil-203-t.svg" title="udom-smil-203-t" state="failure" comment="" description="Test ElementTimeControl's endElement and endElementAt methods" />
+        <test source="udom-svg-201-t.svg" title="udom-svg-201-t" state="failure" comment="" description="Test that the SVGException interface and its constants exist" />
+        <test source="udom-svg-202-t.svg" title="udom-svg-202-t" state="failure" comment="" description="Test the global attribute of the SVGDocument interface" />
+        <test source="udom-svg-204-t.svg" title="udom-svg-204-t" state="failure" comment="" description="Test the SVGElementInstance interface" />
+        <test source="udom-svg-205-t.svg" title="udom-svg-205-t" state="failure" comment="" description="Test the SVGSVGElement NAV_ constants" />
+        <test source="udom-svg-206-t.svg" title="udom-svg-206-t" state="failure" comment="" description="Test SVGSVGElement.currentScale" />
+        <test source="udom-svg-208-t.svg" title="udom-svg-208-t" state="failure" comment="" description="Tests syncbase behavior togheter with pause/resume element" />
+        <test source="udom-svg-209-t.svg" title="udom-svg-209-t" state="failure" comment="" description="Test raising of begin, end and repeat events togheter with pause/resume element" />
+        <test source="udom-svg-210-t.svg" title="udom-svg-210-t" state="failure" comment="" description="Test active intervals with pause/resume element and restart 'whenNotActive'" />
+        <test source="udom-svg-211-t.svg" title="udom-svg-211-t" state="failure" comment="" description="Test active intervals with pause/resume element and restart 'never'" />
+        <test source="udom-svg-213-t.svg" title="udom-svg-213-t" state="failure" comment="" description="Test that SVGSVGElement.getCurrentTime returns a sensible value" />
+        <test source="udom-svg-216-t.svg" title="udom-svg-216-t" state="failure" comment="" description="Test SVGSVGElement.createSVGPath()" />
+        <test source="udom-svg-218-t.svg" title="udom-svg-218-t" state="failure" comment="" description="More SVGGlobal.getURL() tests" />
+        <test source="udom-svg-220-t.svg" title="udom-svg-220-t" state="failure" comment="" description="Test trait access for 'accumulate'" />
+        <test source="udom-svg-224-t.svg" title="udom-svg-224-t" state="failure" comment="" description="Test trait access for 'begin'" />
+        <test source="udom-svg-225-t.svg" title="udom-svg-225-t" state="failure" comment="" description="Test getScreenCTM when the CTM is being animated" />
+        <test source="udom-svg-226-t.svg" title="udom-svg-226-t" state="failure" comment="" description="Test SVGSVGElement.getCurrentTime" />
+        <test source="udom-svg-227-t.svg" title="udom-svg-227-t" state="failure" comment="" description="Test SVGSVGElement.setCurrentTime" />
+        <test source="udom-svg-228-t.svg" title="udom-svg-228-t" state="failure" comment="" description="Test" />
+        <test source="udom-svg-231-t.svg" title="udom-svg-231-t" state="failure" comment="" description="Test SVG Traits" />
+        <test source="udom-svg-232-t.svg" title="udom-svg-232-t" state="failure" comment="" description="Test SVG Traits" />
+        <test source="udom-svg-233-t.svg" title="udom-svg-233-t" state="failure" comment="" description="Test SVG Traits" />
+        <test source="udom-svg-236-t.svg" title="udom-svg-236-t" state="failure" comment="" description="Test SVG Traits" />
+        <test source="udom-svg-237-t.svg" title="udom-svg-237-t" state="failure" comment="" description="Test SVG Traits" />
+        <test source="udom-svgcolor-201-t.svg" title="udom-svgcolor-201-t" state="failure" comment="" description="Test SVGRGBColort" />
+        <test source="udom-svglocatable-201-t.svg" title="udom-svglocatable-201-t" state="failure" comment="" description="Test SVGLocatable.getBBox." />
+        <test source="udom-svglocatable-202-t.svg" title="udom-svglocatable-202-t" state="failure" comment="" description="Test SVGLocatable.getScreenBBox." />
+        <test source="udom-svglocatable-203-t.svg" title="udom-svglocatable-203-t" state="failure" comment="" description="Test SVGLocatable.getScreenCTM" />
+        <test source="udom-svgmatrix-201-t.svg" title="udom-svgmatrix-201-t" state="failure" comment="" description="Test SVGMatrix.getComponent" />
+        <test source="udom-svgmatrix-202-t.svg" title="udom-svgmatrix-202-t" state="failure" comment="" description="Test SVGMatrix.inverse" />
+        <test source="udom-svgmatrix-203-t.svg" title="udom-svgmatrix-203-t" state="failure" comment="" description="Test SVGMatrix.mMultiply" />
+        <test source="udom-svgmatrix-204-t.svg" title="udom-svgmatrix-204-t" state="failure" comment="" description="Test SVGMatrix.mRotate" />
+        <test source="udom-svgmatrix-205-t.svg" title="udom-svgmatrix-205-t" state="failure" comment="" description="Test SVGMatrix.mScale" />
+        <test source="udom-svgmatrix-206-t.svg" title="udom-svgmatrix-206-t" state="failure" comment="" description="Test SVGMatrix.mTranslate" />
+        <test source="udom-svgpath-201-t.svg" title="udom-svgpath-201-t" state="failure" comment="" description="Testing the SVGPath interface: .close(), .moveTo(), .lineTo(), .quadTo()" />
+        <test source="udom-svgpath-202-t.svg" title="udom-svgpath-202-t" state="failure" comment="" description="Test SVGPath.close(), .moveTo(), .lineTo()" />
+        <test source="udom-svgpoint-201-t.svg" title="udom-svgpoint-201-t" state="failure" comment="" description="Test SVGPoint" />
+        <test source="udom-svgrect-201-t.svg" title="udom-svgrect-201-t" state="failure" comment="" description="Test SVGRect object" />
+        <test source="udom-textcontent-201-t.svg" title="udom-textcontent-201-t" state="failure" comment="" description="Test on textContent on element with several children containing text nodes" />
+        <test source="udom-textcontent-202-t.svg" title="udom-textcontent-202-t" state="failure" comment="" description="Test to set textContent, which removes other element children" />
+        <test source="udom-traitaccess-201-t.svg" title="udom-traitaccess-201-t" state="failure" comment="" description="Trait access in uDOM" />
+        <test source="udom-traitaccess-202-t.svg" title="udom-traitaccess-202-t" state="failure" comment="" description="Trait access on solidColor" />
+        <test source="udom-traitaccess-203-t.svg" title="udom-traitaccess-203-t" state="failure" comment="" description="Trait access on solidColor solid-opacity" />
+        <test source="udom-traitaccess-204-t.svg" title="udom-traitaccess-204-t" state="failure" comment="" description="Tests set/get access on 'fillrule' trait." />
+        <test source="udom-traitaccess-205-t.svg" title="udom-traitaccess-205-t" state="failure" comment="" description="Test to check trait access with setRGBColorTrait on viewport-fill" />
+        <test source="udom-traitaccess-206-t.svg" title="udom-traitaccess-206-t" state="failure" comment="" description="Test to check trait access with setTrait on viewport-fill" />
+        <test source="udom-traitaccess-207-t.svg" title="udom-traitaccess-207-t" state="failure" comment="" description="Test to check trait access with setFloatTrait on viewport-fill-opacity" />
     </category>
     <category label="Metadata and Others">
-        <test source="conf-reader-201-t.svg" title="conf-reader-201-t" state="unknown" comment="" description="Test for namespaces in XML" />
-        <test source="extend-namespace-02-t.svg" title="extend-namespace-02-t" state="unknown" comment="" description="Test the use of multiple namespaces." />
-        <test source="intro-compat-201-t.svg" title="intro-compat-201-t" state="unknown" comment="" description="Check that UTF-16 is supported" />
-        <test source="metadata-example-01-t.svg" title="metadata-example-01-t" state="unknown" comment="" description="Verify that the viewer is not perturbed by the presence of metadata." />
+        <test source="conf-reader-201-t.svg" title="conf-reader-201-t" state="failure" comment="" description="Test for namespaces in XML" />
+        <test source="extend-namespace-02-t.svg" title="extend-namespace-02-t" state="failure" comment="" description="Test the use of multiple namespaces." />
+        <test source="intro-compat-201-t.svg" title="intro-compat-201-t" state="success" comment="" description="Check that UTF-16 is supported" />
+        <test source="metadata-example-01-t.svg" title="metadata-example-01-t" state="success" comment="" description="Verify that the viewer is not perturbed by the presence of metadata." />
     </category>
 </tests>

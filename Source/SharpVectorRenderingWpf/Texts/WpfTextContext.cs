@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Xml;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
@@ -142,10 +140,13 @@ namespace SharpVectors.Renderers.Texts
                     "The SVG text element is required, and cannot be null (or Nothing).");
             }
 
+            _culture          = null;
+
             _isVertical       = false;
             _isSingleText     = false;
             _isSingleLine     = false;
             _isTextPath       = false;
+            _positioningElement = null;
 
             _positioningStart = new Point(0, 0);
             _positioningEnd   = new Point(0, 0);

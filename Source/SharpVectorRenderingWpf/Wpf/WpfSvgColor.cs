@@ -35,8 +35,24 @@ namespace SharpVectors.Renderers.Wpf
                 SvgColor colorToUse;
                 if (ColorType == SvgColorType.CurrentColor)
                 {
-                    string sCurColor = _element.GetComputedStyle("").GetPropertyValue("color");
-                    colorToUse = new SvgColor(sCurColor);
+                    var cssDeclaration = _element.GetComputedStyle("");
+                    string currentColor = cssDeclaration.GetPropertyValue("color");
+                    if (!string.IsNullOrWhiteSpace(currentColor))
+                    {
+                        colorToUse = new SvgColor(currentColor);
+                    }
+                    else
+                    {
+                        currentColor = cssDeclaration.GetPropertyValue("solid-color");
+                        if (!string.IsNullOrWhiteSpace(currentColor))
+                        {
+                            colorToUse = new SvgColor(currentColor);
+                        }
+                        else
+                        {
+                            colorToUse = new SvgColor("black");
+                        }
+                    }
                 }
                 else if (ColorType == SvgColorType.Unknown)
                 {
@@ -54,11 +70,16 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (rgbColor.HasAlpha)
                 {
-                    int alpha = Convert.ToInt32(rgbColor.Alpha.GetFloatValue(CssPrimitiveType.Number));
-                    return Color.FromArgb((byte)alpha, (byte)red, (byte)green, (byte)blue);
+                    double dAlpha = rgbColor.Alpha.GetFloatValue(rgbColor.Alpha.PrimitiveType == CssPrimitiveType.Percentage ?
+                        CssPrimitiveType.Number : CssPrimitiveType.Percentage);
+                    if (!double.IsNaN(dAlpha) && !double.IsInfinity(dAlpha))
+                    {
+                        return Color.FromArgb(Convert.ToByte(dAlpha), Convert.ToByte(red),
+                            Convert.ToByte(green), Convert.ToByte(blue));
+                    }
                 }
 
-                return Color.FromArgb((byte)this.Alpha, (byte)red, (byte)green, (byte)blue);
+                return Color.FromArgb(Convert.ToByte(this.Alpha), Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
             }
         }
 
@@ -73,6 +94,10 @@ namespace SharpVectors.Renderers.Wpf
                 else if (_propertyName.Equals("flood-color", StringComparison.OrdinalIgnoreCase))
                 {
                     propName = "flood-opacity";
+                }
+                else if (_propertyName.Equals("solid-opacity", StringComparison.OrdinalIgnoreCase))
+                {
+                    propName = "solid-opacity";
                 }
                 else
                 {
@@ -105,6 +130,10 @@ namespace SharpVectors.Renderers.Wpf
                 else if (_propertyName.Equals("flood-color", StringComparison.OrdinalIgnoreCase))
                 {
                     propName = "flood-opacity";
+                }
+                else if (_propertyName.Equals("solid-opacity", StringComparison.OrdinalIgnoreCase))
+                {
+                    propName = "solid-opacity";
                 }
                 else
                 {

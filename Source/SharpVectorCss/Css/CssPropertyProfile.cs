@@ -156,6 +156,8 @@ namespace SharpVectors.Dom.Css
             Add("overflow", false, "visible");
             Add("pointer-events", true, "visiblePainted");
             Add("shape-rendering", true, "auto");
+            Add("solid-color", true, "black");
+            Add("solid-opacity", true, "1");
             Add("stop-color", true, "black");
             Add("stop-opacity", true, "1");
             Add("stroke", true, "none");
@@ -173,6 +175,8 @@ namespace SharpVectors.Dom.Css
             Add("visibility", true, "visible");
             Add("word-spacing", true, "normal");
             Add("writing-mode", true, "lr-tb");
+            Add("viewport-fill", false, "");
+            Add("viewport-fill-opacity", false, "1");
         }
 
         #endregion

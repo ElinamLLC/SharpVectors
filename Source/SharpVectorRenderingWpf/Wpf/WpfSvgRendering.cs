@@ -120,6 +120,13 @@ namespace SharpVectors.Renderers.Wpf
             double width  = Math.Round(svgElm.Width.AnimVal.Value,  4);
             double height = Math.Round(svgElm.Height.AnimVal.Value, 4);
 
+            if (width < 0 || height < 0)
+            {
+                // For invalid dimension, prevent the drawing of the children...
+                _isRecursive = true;
+                return;
+            }
+
             Rect elmRect  = new Rect(x, y, width, height);
 
             XmlNode parentNode = _svgElement.ParentNode;
@@ -256,6 +263,25 @@ namespace SharpVectors.Renderers.Wpf
         private void OnAfterRender(WpfDrawingRenderer renderer)
         {
             Debug.Assert(_drawGroup != null);
+
+            // Support for Tiny 1.2 viewport-fill property...
+            if (_svgElement.HasAttribute("viewport-fill"))
+            {
+                var viewportFill = _svgElement.GetAttribute("viewport-fill");
+                if (!string.IsNullOrWhiteSpace(viewportFill))
+                {
+                    SvgSvgElement svgElm = (SvgSvgElement)_svgElement;
+
+                    var brush = WpfFill.CreateViewportBrush(svgElm);
+                    if (brush != null)
+                    {
+                        var bounds = new RectangleGeometry(_drawGroup.Bounds);
+                        var drawing = new GeometryDrawing(brush, null, bounds);
+
+                        _drawGroup.Children.Insert(0, drawing);
+                    }
+                }
+            }
 
             WpfDrawingContext context = renderer.Context;
 

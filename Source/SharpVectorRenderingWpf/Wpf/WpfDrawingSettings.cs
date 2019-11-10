@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
 
@@ -40,6 +42,13 @@ namespace SharpVectors.Renderers.Wpf
 
         private WpfVisitors _wpfVisitors;
 
+        private object _fontSynch = new object();
+
+        private ISet<string> _fontLocations;
+        private IList<FontFamily> _fontFamilies;
+        private IDictionary<string, string> _fontFamilyNames;
+        private IDictionary<string, FontFamily> _fontFamilyMap;
+
         private IDictionary<string, object> _properties;
 
         #endregion
@@ -70,6 +79,11 @@ namespace SharpVectors.Renderers.Wpf
             _ignoreRootViewbox     = false;
             _wpfVisitors           = new WpfVisitors();
             _properties            = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+
+            _fontSynch             = new object();
+            _fontLocations         = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            _fontFamilyNames       = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            _fontFamilyMap         = new Dictionary<string, FontFamily>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -106,6 +120,11 @@ namespace SharpVectors.Renderers.Wpf
             _userAgentCssFilePath  = settings._userAgentCssFilePath;
 
             _properties            = settings._properties;
+
+            _fontSynch             = settings._fontSynch;
+            _fontLocations         = settings._fontLocations;
+            _fontFamilyNames       = settings._fontFamilyNames;
+            _fontFamilyMap         = settings._fontFamilyMap;
         }
 
         #endregion
@@ -527,6 +546,154 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public IEnumerable<string> FontLocations
+        {
+            get {
+                return _fontLocations;
+            }
+        }
+
+        public IDictionary<string, string> FontFamilyNames
+        {
+            get {
+                return _fontFamilyNames;
+            }
+        }
+
+        public bool HasFontFamilies
+        {
+            get {
+                if (_fontFamilies == null || _fontFamilies.Count == 0)
+                {
+                    this.LoadFontFamilies();
+                }
+                return (_fontFamilies != null && _fontFamilies.Count != 0);
+            }
+        }
+
+        public IEnumerable<FontFamily> FontFamilies
+        {
+            get {
+                if (_fontFamilies == null || _fontFamilies.Count == 0)
+                {
+                    this.LoadFontFamilies();
+                }
+                return _fontFamilies;
+            }
+        }
+
+        public void AddFontFamilyName(string mappedName, string fontName)
+        {
+            lock(_fontSynch)
+            {
+                if (string.IsNullOrWhiteSpace(mappedName) || string.IsNullOrWhiteSpace(fontName))
+                {
+                    return;
+                }
+                if (_fontFamilyNames == null)
+                {
+                    _fontFamilyNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                }
+                if (!_fontFamilyNames.ContainsKey(mappedName))
+                {
+                    _fontFamilyNames.Add(mappedName, fontName);
+                }
+            }
+        }
+
+        public void AddFontLocation(string fontLocation)
+        {
+            lock(_fontSynch)
+            {
+                if (string.IsNullOrWhiteSpace(fontLocation))
+                {
+                    return;
+                }
+                if (File.Exists(fontLocation) == false && Directory.Exists(fontLocation) == false)
+                {
+                    return;
+                }
+
+                if (_fontLocations == null)
+                {
+                    _fontLocations = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                }
+                if (Directory.Exists(fontLocation))
+                {
+                    // Fonts.GetFontFamilies(...) only works for directories with "\\" ending...
+                    if (!fontLocation.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
+                    {
+                        fontLocation += "\\";
+                    }
+                }
+                if (_fontLocations.Contains(fontLocation))
+                {
+                    return;
+                }
+                _fontLocations.Add(fontLocation);
+
+                // If font-families are already loaded, then load the new font path...
+                if (_fontFamilies != null && _fontFamilies.Count != 0)
+                {
+                    this.AddFontFamilies(fontLocation);
+                }
+            }
+        }
+
+        public FontFamily LookupFontFamily(string fontName)
+        {
+            lock (_fontSynch)
+            {
+                if (string.IsNullOrWhiteSpace(fontName))
+                {
+                    return null;
+                }
+
+                if (_fontFamilyMap == null || _fontFamilyMap.Count == 0)
+                {
+                    BuildSystemFonts();
+                }
+
+                if (_fontFamilyMap.ContainsKey(fontName))
+                {
+                    return _fontFamilyMap[fontName];
+                }
+                if (_fontFamilyNames != null && _fontFamilyNames.Count != 0)
+                {
+                    if (_fontFamilyNames.ContainsKey(fontName))
+                    {
+                        var internalName = _fontFamilyNames[fontName];
+
+                        if (_fontFamilyMap.ContainsKey(internalName))
+                        {
+                            return _fontFamilyMap[internalName];
+                        }
+                    }
+                }
+
+                string normalizedName = null;
+                if (fontName.IndexOf('-') > 0)
+                {
+                    normalizedName = fontName.Replace("-", " ");
+                    if (_fontFamilyMap.ContainsKey(normalizedName))
+                    {
+                        return _fontFamilyMap[normalizedName];
+                    }
+                }
+
+                if (WpfRendererObject.SplitByCaps(fontName, out normalizedName))
+                {
+                    normalizedName = fontName.Replace("-", " ");
+                    if (_fontFamilyMap.ContainsKey(normalizedName))
+                    {
+                        return _fontFamilyMap[normalizedName];
+                    }
+                }
+
+                return null;
+            }
+        }
+
         #endregion
 
         #region ICloneable Members
@@ -588,6 +755,87 @@ namespace SharpVectors.Renderers.Wpf
         object ICloneable.Clone()
         {
             return this.Clone();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void BuildSystemFonts()
+        {
+            if (_fontFamilyMap == null)
+            {
+                _fontFamilyMap = new Dictionary<string, FontFamily>(StringComparer.OrdinalIgnoreCase);
+            }
+            if (_fontFamilyMap.Count != 0)
+            {
+                return;
+            }
+            if (_fontFamilies == null || _fontFamilies.Count == 0)
+            {
+                this.LoadFontFamilies();
+            }
+
+            foreach (var fontFamily in _fontFamilies)
+            {
+                var fontName = fontFamily.Source;
+                var hashIndex = fontName.IndexOf('#');
+                if (hashIndex > 0)
+                {
+                    fontName = fontName.Substring(hashIndex + 1);
+                }
+                _fontFamilyMap.Add(fontName, fontFamily);
+
+                var fontNames = fontFamily.FamilyNames;
+                if (fontNames != null && fontNames.Count != 0)
+                {
+                    foreach (var value in fontNames.Values)
+                    {
+                        if (!_fontFamilyMap.ContainsKey(value))
+                        {
+                            _fontFamilyMap.Add(value, fontFamily);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void LoadFontFamilies()
+        {
+            if (_fontFamilies == null)
+            {
+                _fontFamilies = new List<FontFamily>();
+            }
+            if (_fontLocations == null)
+            {
+                _fontLocations = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            foreach (var privateFontPath in _fontLocations)
+            {
+                this.AddFontFamilies(privateFontPath);
+            }
+        }
+
+        private bool AddFontFamilies(string fontLocation)
+        {
+            if (_fontFamilies == null)
+            {
+                _fontFamilies = new List<FontFamily>();
+            }
+
+            bool isLoaded = false;
+            if (File.Exists(fontLocation) || Directory.Exists(fontLocation))
+            {
+                var fontFamilies = Fonts.GetFontFamilies(fontLocation);
+                foreach (var fontFamily in fontFamilies)
+                {
+                    _fontFamilies.Add(fontFamily);
+                    isLoaded = true;
+                }
+                return isLoaded;
+            }
+            return isLoaded;
         }
 
         #endregion

@@ -87,10 +87,11 @@ namespace SharpVectors.Dom.Svg
 
         public string GetPropertyValue(string name1, string name2)
         {
-            string cssString = GetComputedStyle(string.Empty).GetPropertyValue(name1);
-            if (cssString == null)
+            var cssDeclaration = this.GetComputedStyle(string.Empty);
+            string cssString = cssDeclaration.GetPropertyValue(name1);
+            if (string.IsNullOrWhiteSpace(cssString))
             {
-                cssString = GetComputedStyle(string.Empty).GetPropertyValue(name2);
+                cssString = cssDeclaration.GetPropertyValue(name2);
             }
 
             return cssString;
@@ -121,6 +122,11 @@ namespace SharpVectors.Dom.Svg
                             CssStyleSheetType.NonCssPresentationalHints, string.Empty);
                     }
                 }
+
+                //if (!string.IsNullOrWhiteSpace(pseudoElt))
+                //{
+                //    return csd;
+                //}
 
                 _cachedCSD = csd;
             }

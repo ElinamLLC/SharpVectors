@@ -10,23 +10,19 @@ namespace WpfW3cSvgTestSuite
     {
         #region Public Constants
 
-        public const int TestSuiteCount = 3;
+        public const int TestSuiteCount     = 3;
 
-        #endregion
+        public const string LocalDirBase    = @"..\..\W3cSvgTestSuites\";
+        public const string WebDirBase      = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/";
 
-        #region Private Constants
+        public const string FileExtXml      = ".xml";
+        public const string FileExtZip      = ".zip";
 
-        private const string FileExtXml      = ".xml";
-        private const string FileExtZip      = ".zip";
+        public const string W3CDirPrefix    = "Svg";
+        public const string W3CTestPrefix   = "SvgTestSuite";
+        public const string W3CResultPrefix = "SvgTestResults";
 
-        private const string W3CDirPrefix    = "Svg";
-        private const string W3CTestPrefix   = "SvgTestSuite";
-        private const string W3CResultPrefix = "SvgTestResults";
-
-        private const string LocalDirBase    = @"..\..\W3cSvgTestSuites\";
-        private const string WebDirBase      = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/";
-
-        private static readonly string[] Descriptions = {
+        public static readonly string[] Descriptions = {
             "SVG 1.1 First Edition Test Suite: 13 December 2006",
             "SVG 1.1 Second Edition Test Suite: 16 August 2011",
             "SVG 1.2 Tiny Test Suite: 12 September 2008"

@@ -38,4 +38,23 @@
         <category label="SVG Micro DOM (uDOM)" total="77" unknowns="77" failures="0" successes="0" partials="0" />
         <category label="Metadata and Others" total="4" unknowns="4" failures="0" successes="0" partials="0" />
     </result>
+    <result version="1.6.0.0" date="2019-11-04T18:05:18.1231551+09:00">
+        <category label="Animations" total="81" unknowns="0" failures="81" successes="0" partials="0" />
+        <category label="Coordinates and Transforms" total="17" unknowns="0" failures="2" successes="11" partials="4" />
+        <category label="Fonts" total="13" unknowns="0" failures="0" successes="12" partials="1" />
+        <category label="Interactivities" total="27" unknowns="0" failures="27" successes="0" partials="0" />
+        <category label="Linking" total="14" unknowns="0" failures="14" successes="0" partials="0" />
+        <category label="Painting" total="50" unknowns="0" failures="5" successes="38" partials="7" />
+        <category label="Paths" total="13" unknowns="0" failures="0" successes="13" partials="0" />
+        <category label="Rendering" total="8" unknowns="0" failures="0" successes="8" partials="0" />
+        <category label="Scripting" total="13" unknowns="0" failures="13" successes="0" partials="0" />
+        <category label="Shapes" total="16" unknowns="0" failures="0" successes="14" partials="2" />
+        <category label="Structures" total="54" unknowns="0" failures="11" successes="35" partials="8" />
+        <category label="Styling" total="4" unknowns="0" failures="0" successes="2" partials="2" />
+        <category label="Text" total="39" unknowns="0" failures="17" successes="17" partials="5" />
+        <category label="Filter Effects" total="9" unknowns="0" failures="0" successes="9" partials="0" />
+        <category label="Media" total="57" unknowns="0" failures="57" successes="0" partials="0" />
+        <category label="SVG Micro DOM (uDOM)" total="77" unknowns="0" failures="77" successes="0" partials="0" />
+        <category label="Metadata and Others" total="4" unknowns="0" failures="2" successes="2" partials="0" />
+    </result>
 </results>

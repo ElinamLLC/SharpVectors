@@ -46,6 +46,13 @@ namespace SharpVectors.Dom.Css
 		/// <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
 		/// <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
 		string GetPropertyValue(string propertyName);
+
+        /// <summary>
+        /// Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
+        /// </summary>
+        /// <param name="propertyNames">The name of the CSS property. See the CSS property index.</param>
+        /// <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
+        string GetPropertyValue(string[] propertyNames);
 	
 		/// <summary>
 		/// The CSS rule that contains this declaration block or null if this CSSStyleDeclaration is not attached to a CSSRule.

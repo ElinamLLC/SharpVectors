@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace SharpVectors.Dom.Css
 {
     /// <summary>
-    /// The RGBColor interface is used to represent any RGB color value. 
+    /// The RGB-Color interface is used to represent any RGB color value. 
     /// </summary>
     /// <remarks>
     /// <para>

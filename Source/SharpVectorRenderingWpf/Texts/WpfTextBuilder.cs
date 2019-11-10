@@ -106,6 +106,17 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
+        public string XmlLang
+        {
+            get {
+                if (_culture != null)
+                {
+                    return _culture.TwoLetterISOLanguageName;
+                }
+                return string.Empty;
+            }
+        }
+
         public abstract WpfFontFamilyType FontFamilyType
         {
             get;

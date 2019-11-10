@@ -313,19 +313,6 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        public string XmlLanguage
-        {
-            get {
-                var culture = this.Culture;
-                if (culture != null)
-                {
-                    return culture.TwoLetterISOLanguageName;
-                }
-
-                return string.Empty;
-            }
-        }
-
         #endregion
 
         #region Public Methods
@@ -474,13 +461,18 @@ namespace SharpVectors.Renderers.Texts
                 return textPath;
             }
 
-            _textIterator.Initialize(text);
+            var xmlLang = this.XmlLang; // Current language based on the lang/xml:lang of the text tag
+            if (string.IsNullOrWhiteSpace(xmlLang))
+            {
+                xmlLang = element.XmlLang;
+            }
+
+            _textIterator.Initialize(text, xmlLang);
 
             SvgGlyphElement prevGlyph = null;
             double xPos = 0;
 
             var baseline = this.Baseline + this.Alphabetic; //TODO: Better calculation here!
-            var xmlLang  = this.XmlLanguage; // Current language based on the lang/xml:lang of the text tag
 
             bool isAltGlyph = string.Equals(element.LocalName, AltGlyph, StringComparison.OrdinalIgnoreCase);
             SvgAltGlyphElement altGlyph = isAltGlyph ? (SvgAltGlyphElement)element : null;
@@ -1574,7 +1566,7 @@ namespace SharpVectors.Renderers.Texts
                 _attributes.Add(attribute);
             }
 
-            public abstract void Initialize(string inputText);
+            public abstract void Initialize(string inputText, string xmlLang);
 
             public abstract string GetArabicForm(int index);
 
@@ -1608,7 +1600,7 @@ namespace SharpVectors.Renderers.Texts
             public SvgAttributedTextIterator()
             {
                 _isCharMode = false;
-                _inputText = string.Empty;
+                _inputText  = string.Empty;
             }
 
             public override string this[int index]
@@ -1683,11 +1675,31 @@ namespace SharpVectors.Renderers.Texts
                 base.AddAttribute(attribute);
             }
 
-            public override void Initialize(string inputText)
+            public override void Initialize(string inputText, string xmlLang)
             {
-                bool isArabic = ArabicForms.IsArabicText(inputText);
+                bool isArabic = false;
 
-                if (isArabic)
+                var isRightToLeft = false;
+                if (!string.IsNullOrWhiteSpace(xmlLang))
+                {
+                    isArabic = string.Equals(xmlLang, "ar", StringComparison.OrdinalIgnoreCase);
+                    if (string.Equals(xmlLang, "ar", StringComparison.OrdinalIgnoreCase)      // Arabic language
+                        || string.Equals(xmlLang, "he", StringComparison.OrdinalIgnoreCase))  // Hebrew language
+                    {
+                        isRightToLeft = true;
+                    }
+
+                    if (!isArabic)
+                    {
+                        isArabic = ArabicForms.IsArabicText(inputText);
+                    }
+                }
+                else
+                {
+                    isArabic = ArabicForms.IsArabicText(inputText);
+                }
+
+                if (isRightToLeft || isArabic)
                 {
                     char[] charArray = inputText.ToCharArray();
                     Array.Reverse(charArray);

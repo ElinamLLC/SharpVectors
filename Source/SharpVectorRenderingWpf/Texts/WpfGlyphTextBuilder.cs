@@ -357,6 +357,26 @@ namespace SharpVectors.Renderers.Texts
 
         public override Geometry Build(SvgTextContentElement element, string text, double x, double y)
         {
+//            bool isRightToLeft = false;
+            var xmlLang = element.XmlLang;
+            if (!string.IsNullOrWhiteSpace(xmlLang))
+            {
+                if (string.Equals(xmlLang, "ar", StringComparison.OrdinalIgnoreCase)      // Arabic language
+                    || string.Equals(xmlLang, "he", StringComparison.OrdinalIgnoreCase))  // Hebrew language
+                {
+//                    isRightToLeft = true;
+
+                    //                    this.BidiLevel = 1;
+
+                    if (text.Length > 0)
+                    {
+                        char[] charArray = text.ToCharArray();
+                        Array.Reverse(charArray);
+                        text = new string(charArray);
+                    }
+                }
+            }
+
             var alignment = this.TextAlignment;
             if (alignment != TextAlignment.Left)
             {
@@ -371,6 +391,13 @@ namespace SharpVectors.Renderers.Texts
                     x -= textWidth;
                 }
             }
+            //else if (isRightToLeft)
+            //{
+            //    var textSize  = this.MeasureText(element, text, true);
+            //    var textWidth = Math.Max(textSize.Width, this.Width);
+
+            //    x -= textWidth;
+            //}
 
             ComputeMeasurement(text, x, y + this.Baseline);
 
@@ -525,12 +552,12 @@ namespace SharpVectors.Renderers.Texts
             Rect alignmentRect = new Rect();
             if (haveOriginX && haveOriginY && leftToRight)
             {
-                _glyphRun = CreateGlyphRun(new Point(OriginX, OriginY), Language);
+                _glyphRun = CreateGlyphRun(new Point(OriginX, OriginY), this.Language);
                 measurementGlyphRunOriginValid = true;
             }
             else
             {
-                _glyphRun = CreateGlyphRun(new Point(), Language);
+                _glyphRun = CreateGlyphRun(new Point(), this.Language);
                 // compute alignment box for origins
                 alignmentRect = _glyphRun.ComputeAlignmentBox();
             }
@@ -546,7 +573,7 @@ namespace SharpVectors.Renderers.Texts
                 _glyphRunOrigin.Y = -alignmentRect.Y;
 
             if (!measurementGlyphRunOriginValid)
-                _glyphRun = CreateGlyphRun(_glyphRunOrigin, Language);
+                _glyphRun = CreateGlyphRun(_glyphRunOrigin, this.Language);
         }
 
         ///<SecurityNote>

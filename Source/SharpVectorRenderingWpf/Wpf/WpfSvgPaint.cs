@@ -24,9 +24,9 @@ namespace SharpVectors.Renderers.Wpf
         public WpfSvgPaint(WpfDrawingContext context, SvgStyleableElement elm, string propName)
             : base(elm.GetComputedStyle("").GetPropertyValue(propName))
         {
-            _propertyName = propName;
-            _element      = elm;
-            _context      = context;
+            _propertyName  = propName;
+            _element       = elm;
+            _context       = context;
         }
 
         private WpfSvgPaint(string str)
@@ -586,7 +586,9 @@ namespace SharpVectors.Renderers.Wpf
                 SvgStyleableElement styleElm = _element.ImportNode as SvgStyleableElement;
                 if (styleElm != null)
                 {
-                    string propertyValue = styleElm.GetComputedStyle("").GetPropertyValue(_propertyName);
+                    var cssDeclaration = styleElm.GetComputedStyle("");
+
+                    string propertyValue = cssDeclaration.GetPropertyValue(_propertyName);
 
                     if (!string.IsNullOrWhiteSpace(propertyValue))
                     {

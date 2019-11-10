@@ -44,12 +44,14 @@ namespace SharpVectors.Xml
         /// Resolves the absolute URI from the base and relative URIs.
         /// </summary>
         /// <param name="baseUri">The base URI used to resolve the relative URI.</param>
-        /// <param name="relativeUri">The URI to resolve. The URI can be absolute or relative. If absolute, this value effectively replaces the <paramref name="baseUri"/> value. If relative, it combines with the <paramref name="baseUri"/> to make an absolute URI.</param>
+        /// <param name="relativeUri">The URI to resolve. The URI can be absolute or relative. 
+        /// If absolute, this value effectively replaces the <paramref name="baseUri"/> value. 
+        /// If relative, it combines with the <paramref name="baseUri"/> to make an absolute URI.</param>
         /// <returns>
         /// A <see cref="T:System.Uri"/> representing the absolute URI, or null if the relative URI cannot be resolved.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
-        /// 	<paramref name="baseUri "/>is null or <paramref name="relativeUri"/> is null</exception>
+        /// 	<paramref name="baseUri"/>is null or <paramref name="relativeUri"/> is null</exception>
         public override Uri ResolveUri(Uri baseUri, string relativeUri)
         {
             if (this.Resolving != null)

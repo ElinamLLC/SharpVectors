@@ -37,7 +37,8 @@ namespace SharpVectors.Renderers.Texts
 
             WpfTextStringFormat stringFormat = GetTextStringFormat(element);
 
-            if (fontFamilyInfo.FontFamilyType == WpfFontFamilyType.Svg)
+            if (fontFamilyInfo.FontFamilyType == WpfFontFamilyType.Svg ||
+                fontFamilyInfo.FontFamilyType == WpfFontFamilyType.Private)
             {
                 WpfTextTuple textInfo = new WpfTextTuple(fontFamilyInfo, emSize, stringFormat, element);
                 this.RenderText(textInfo, ref ctp, text, rotate, placement);
@@ -126,6 +127,17 @@ namespace SharpVectors.Renderers.Texts
 
             var typeFace = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
 
+            bool isRightToLeft = false;
+            var xmlLang = _textElement.XmlLang;
+            if (!string.IsNullOrWhiteSpace(xmlLang))
+            {
+                if (string.Equals(xmlLang, "ar", StringComparison.OrdinalIgnoreCase)      // Arabic language
+                    || string.Equals(xmlLang, "he", StringComparison.OrdinalIgnoreCase))  // Hebrew language
+                {
+                    isRightToLeft = true;
+                }
+            }
+
             if (hasLetterSpacing || hasWordSpacing || textPositions != null)
             {
                 for (int i = 0; i < text.Length; i++)
@@ -134,6 +146,7 @@ namespace SharpVectors.Renderers.Texts
                     FormattedText formattedText = new FormattedText(nextText, 
                         _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
 
+//                    formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
                     formattedText.TextAlignment = stringFormat.Alignment;
                     formattedText.Trimming      = stringFormat.Trimming;
 
@@ -242,6 +255,8 @@ namespace SharpVectors.Renderers.Texts
                 formattedText.TextAlignment = stringFormat.Alignment;
                 formattedText.Trimming      = stringFormat.Trimming;
 
+//                formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+
                 if (textDecors != null && textDecors.Count != 0)
                 {
                     formattedText.SetTextDecorations(textDecors);
@@ -288,9 +303,13 @@ namespace SharpVectors.Renderers.Texts
                 //float bboxWidth = (float)formattedText.Width;
                 double bboxWidth = formattedText.WidthIncludingTrailingWhitespace;
                 if (alignment == TextAlignment.Center)
+                {
                     bboxWidth /= 2f;
+                }
                 else if (alignment == TextAlignment.Right)
+                {
                     bboxWidth = 0;
+                }
 
                 //ctp.X += bboxWidth + emSize / 4;
                 ctp.X += bboxWidth;

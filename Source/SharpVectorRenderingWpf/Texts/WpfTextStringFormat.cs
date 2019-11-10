@@ -13,14 +13,13 @@ namespace SharpVectors.Renderers.Texts
             WpfTextAnchor anchor)
         {
             this.Direction = direction;
-            this.Trimming = trimming;
-            this.Anchor = anchor;
+            this.Trimming  = trimming;
+            this.Anchor    = anchor;
         }
 
         public TextAlignment Alignment
         {
-            get
-            {
+            get {
                 if (Anchor == WpfTextAnchor.Middle)
                 {
                     return TextAlignment.Center;
@@ -36,8 +35,7 @@ namespace SharpVectors.Renderers.Texts
 
         public static WpfTextStringFormat Default
         {
-            get
-            {
+            get {
                 return new WpfTextStringFormat(FlowDirection.LeftToRight,
                     TextTrimming.None, WpfTextAnchor.Start);
             }

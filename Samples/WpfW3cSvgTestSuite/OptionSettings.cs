@@ -46,10 +46,14 @@ namespace WpfW3cSvgTestSuite
 
         private const string ParentSymbol = "..\\";
         private const string SharpVectors = "SharpVectors";
+        private const string FontsPrefix  = "Fonts";
 
         private bool _hidePathsRoot;
         private string _webSuitePath;
         private string _localSuitePath;
+
+        private string _webFontsPath;
+        private string _localFontsPath;
 
         private string _selectedValuePath;
 
@@ -92,6 +96,16 @@ namespace WpfW3cSvgTestSuite
             {
                 Directory.CreateDirectory(_localSuitePath);
             }
+
+            _webFontsPath   = SvgTestSuite.WebDirBase + FontsPrefix + SvgTestSuite.FileExtZip;
+            _localFontsPath = Path.GetFullPath(Path.Combine(SvgTestSuite.LocalDirBase, FontsPrefix));
+
+            if (!Directory.Exists(_localFontsPath))
+            {
+                Directory.CreateDirectory(_localFontsPath);
+            }
+
+            _wpfSettings.AddFontLocation(_localFontsPath);
         }
 
         public OptionSettings(OptionSettings source)
@@ -138,6 +152,26 @@ namespace WpfW3cSvgTestSuite
             }
             set {
                 _localSuitePath = value;
+            }
+        }
+
+        public string WebFontsPath
+        {
+            get {
+                return _webFontsPath;
+            }
+            set {
+                _webFontsPath = value;
+            }
+        }
+
+        public string LocalFontsPath
+        {
+            get {
+                return _localFontsPath;
+            }
+            set {
+                _localFontsPath = value;
             }
         }
 

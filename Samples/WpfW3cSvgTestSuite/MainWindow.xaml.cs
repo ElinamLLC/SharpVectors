@@ -33,6 +33,7 @@ namespace WpfW3cSvgTestSuite
         private const int LeftPane         = 330;
         private const int LeftBottomPane   = 220;
 
+        private const string TitleFormat   = "SharpVectors: W3C Test Suite - {0}";
         private const string AppTitle      = "SVG Test Suite";
         private const string AppErrorTitle = "SVG Test Suite - Error";
   
@@ -372,107 +373,7 @@ namespace WpfW3cSvgTestSuite
                 File.Delete(backupFile);
             }
 
-            if (!_isTreeModified || string.IsNullOrWhiteSpace(_testFilePath) ||
-                !File.Exists(_testFilePath))
-            {
-                return;
-            }
-
-            backupFile = IoPath.ChangeExtension(_testFilePath, ".bak");
-            try
-            {
-                if (File.Exists(backupFile))
-                {
-                    File.Delete(backupFile);
-                }
-                File.Move(_testFilePath, backupFile);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), AppErrorTitle,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-
-                return;
-            }
-            try
-            {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent      = true;
-                settings.IndentChars = "    ";
-                settings.Encoding    = Encoding.UTF8;
-
-                using (XmlWriter writer = XmlWriter.Create(_testFilePath, settings))
-                {
-                    this.SaveTreeView(writer);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (File.Exists(backupFile))
-                {
-                    File.Move(backupFile, _testFilePath);
-                }
-
-                MessageBox.Show(ex.ToString(), AppErrorTitle,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
-            {
-                File.Delete(backupFile);
-            }
-
-            if (!string.IsNullOrWhiteSpace(_testResultsPath))
-            {
-                if (!string.IsNullOrWhiteSpace(_testResultsPath))
-                {
-                    if (File.Exists(_testResultsPath))
-                    {
-                        backupFile = IoPath.ChangeExtension(_testResultsPath, ".bak");
-                        try
-                        {
-                            if (File.Exists(backupFile))
-                            {
-                                File.Delete(backupFile);
-                            }
-                            File.Move(_testResultsPath, backupFile);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString(), AppErrorTitle,
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                    }
-
-                    try
-                    {
-                        XmlWriterSettings settings = new XmlWriterSettings();
-                        settings.Indent      = true;
-                        settings.IndentChars = "    ";
-                        settings.Encoding    = Encoding.UTF8;
-
-                        using (XmlWriter writer = XmlWriter.Create(_testResultsPath, settings))
-                        {
-                            this.SaveTestResults(writer);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
-                        {
-                            File.Move(backupFile, _testResultsPath);
-                        }
-
-                        MessageBox.Show(ex.ToString(), AppErrorTitle,
-                            MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
-                    {
-                        File.Delete(backupFile);
-                    }
-                }
-            }
+            this.SaveTestSuites();
 
             if (_debugPage != null)
             {
@@ -1078,6 +979,11 @@ namespace WpfW3cSvgTestSuite
                 return;
             }
 
+            // Save the currently seleted test suite, if modified....
+            this.SaveTestSuites();
+
+            this.Title = string.Format(TitleFormat, selectedSuite.Description);
+
             _svgPath          = svgPath;
             _pngPath          = pngPath;
 
@@ -1117,6 +1023,111 @@ namespace WpfW3cSvgTestSuite
 
                 _testFilePath = fullFilePath;
             }   
+        }
+
+        private void SaveTestSuites()
+        {
+            if (!_isTreeModified || string.IsNullOrWhiteSpace(_testFilePath) ||
+                !File.Exists(_testFilePath))
+            {
+                return;
+            }
+
+            var backupFile = IoPath.ChangeExtension(_testFilePath, ".bak");
+            try
+            {
+                if (File.Exists(backupFile))
+                {
+                    File.Delete(backupFile);
+                }
+                File.Move(_testFilePath, backupFile);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return;
+            }
+            try
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.IndentChars = "    ";
+                settings.Encoding = Encoding.UTF8;
+
+                using (XmlWriter writer = XmlWriter.Create(_testFilePath, settings))
+                {
+                    this.SaveTreeView(writer);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (File.Exists(backupFile))
+                {
+                    File.Move(backupFile, _testFilePath);
+                }
+
+                MessageBox.Show(ex.ToString(), AppErrorTitle,
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+            {
+                File.Delete(backupFile);
+            }
+
+            if (!string.IsNullOrWhiteSpace(_testResultsPath))
+            {
+                if (!string.IsNullOrWhiteSpace(_testResultsPath))
+                {
+                    if (File.Exists(_testResultsPath))
+                    {
+                        backupFile = IoPath.ChangeExtension(_testResultsPath, ".bak");
+                        try
+                        {
+                            if (File.Exists(backupFile))
+                            {
+                                File.Delete(backupFile);
+                            }
+                            File.Move(_testResultsPath, backupFile);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), AppErrorTitle,
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
+
+                    try
+                    {
+                        XmlWriterSettings settings = new XmlWriterSettings();
+                        settings.Indent = true;
+                        settings.IndentChars = "    ";
+                        settings.Encoding = Encoding.UTF8;
+
+                        using (XmlWriter writer = XmlWriter.Create(_testResultsPath, settings))
+                        {
+                            this.SaveTestResults(writer);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                        {
+                            File.Move(backupFile, _testResultsPath);
+                        }
+
+                        MessageBox.Show(ex.ToString(), AppErrorTitle,
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
+                    {
+                        File.Delete(backupFile);
+                    }
+                }
+            }
         }
 
         private void LoadTestResults(XmlReader reader)

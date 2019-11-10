@@ -129,6 +129,7 @@
     <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
     <Compile Include="Events\SvgResolveUriEventArgs.cs" />
+    <Compile Include="Fills\SvgSolidColorElement.cs" />
     <Compile Include="Paint\SvgMarkerPosition.cs" />
     <Compile Include="Parsers\ISvgPathHandler.cs" />
     <Compile Include="Parsers\ISvgPointsHandler.cs" />

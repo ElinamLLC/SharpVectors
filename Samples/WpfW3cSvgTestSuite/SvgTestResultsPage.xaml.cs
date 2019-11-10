@@ -332,6 +332,9 @@ namespace WpfW3cSvgTestSuite
 
             // Start with color of newer vesions
             Brush[] changedBrushes = {
+                Brushes.LightCyan,
+                Brushes.LightGoldenrodYellow,
+                Brushes.LightGreen,
                 Brushes.LightSalmon,
                 Brushes.LightSeaGreen,  // Version 1.2
                 Brushes.LightSkyBlue,   // Version 1.1

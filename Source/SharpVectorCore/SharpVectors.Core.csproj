@@ -118,6 +118,7 @@
     <Compile Include="Svg\ClippingMasking\ISvgMaskElement.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileElement.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileRule.cs" />
+    <Compile Include="Svg\Fills\ISvgSolidColorElement.cs" />
     <Compile Include="Svg\Painting\SvgMarker.cs" />
     <Compile Include="Svg\SvgTransformF.cs" />
     <Compile Include="Svg\SvgPointF.cs" />

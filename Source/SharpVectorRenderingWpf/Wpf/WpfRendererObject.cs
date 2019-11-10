@@ -11,6 +11,13 @@ namespace SharpVectors.Renderers.Wpf
 {
     public abstract class WpfRendererObject : DependencyObject, IDisposable
     {
+        #region Private Fields
+
+        private static readonly Regex _regExCaps = new Regex(@"(?<=[A-Z])(?=[A-Z][a-z]) |
+                 (?<=[^A-Z])(?=[A-Z]) | (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
+
+        #endregion
+
         #region Protected Fields
 
         protected bool _isDisposed; // To detect redundant calls
@@ -77,6 +84,18 @@ namespace SharpVectors.Renderers.Wpf
         public static bool IsNullOrIdentity(Transform transform)
         {
             return (transform == null || transform.Value.IsIdentity);
+        }
+
+        public static bool SplitByCaps(string input, out string output)
+        {
+            output = input;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            output = _regExCaps.Replace(input, " ");
+
+            return output.Length > input.Length;
         }
 
         public static string GetElementName(SvgElement element, WpfDrawingContext context = null)

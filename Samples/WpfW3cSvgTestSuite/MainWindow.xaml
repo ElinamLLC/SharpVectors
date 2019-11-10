@@ -4,7 +4,7 @@
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
     local:MainWindowSettings.Save="True"
-    Title="W3C SVG 1.1 Full Test Suite - Full SVG Specifications" Height="640" Width="1080">
+    Title="SharpVectors: W3C Test Suite - Full SVG Specifications" Height="640" Width="1080">
     <DockPanel LastChildFill="True" Margin="3">
         <!-- The main content panel -->
         <Border BorderBrush="Transparent" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
