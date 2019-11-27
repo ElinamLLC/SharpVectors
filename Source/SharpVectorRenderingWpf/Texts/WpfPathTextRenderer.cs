@@ -152,7 +152,7 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
 
-            WpfTextStringFormat stringFormat = GetTextStringFormat(_textElement);
+            WpfTextStringFormat stringFormat = GetTextStringFormat(textPath);
 
             //ISvgAnimatedLength pathOffset  = textPath.StartOffset;
             //SvgTextPathMethod pathMethod   = (SvgTextPathMethod)textPath.Method.BaseVal;

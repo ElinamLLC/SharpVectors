@@ -424,13 +424,14 @@ namespace SharpVectors.Renderers.Texts
             return pathOffset;
         }
 
+        private const double EqualPointsComparer = 0.0001;
         private static bool AreEqual(Point pt1, Point pt2)
         {
             if (pt1 == pt2)
             {
                 return true;
             }
-            return (int)pt1.X == (int)pt2.X && (int)pt1.Y == (int)pt2.Y;
+            return Math.Abs(pt1.X - pt2.X) < EqualPointsComparer && Math.Abs(pt1.Y - pt2.Y) < EqualPointsComparer;
         }
 
         // Utility method
