@@ -33,7 +33,7 @@ namespace SharpVectors.Renderers.Utils
 
         #endregion
 
-        #region ISvgWindow Members
+        #region Public Properties
 
         public XmlReaderSettings CustomSettings
         {
@@ -84,6 +84,10 @@ namespace SharpVectors.Renderers.Utils
                 return WpfApplicationContext.ExecutableDirectory;
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void LoadDocument(Uri documentUri, WpfDrawingSettings drawingSettings)
         {
@@ -213,6 +217,10 @@ namespace SharpVectors.Renderers.Utils
                 cssDocument.SetUserAgentStyleSheet(userAgentCssFilePath);
             }
         }
+
+        #endregion
+
+        #region Protected Methods
 
         #endregion
     }

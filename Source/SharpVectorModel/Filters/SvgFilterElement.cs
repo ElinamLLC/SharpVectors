@@ -9,8 +9,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private SvgUriReference svgURIReference;
-        private SvgExternalResourcesRequired svgExternalResourcesRequired;
+        private SvgUriReference _uriReference;
+        private SvgExternalResourcesRequired _resourcesRequired;
 
         #endregion
 
@@ -19,8 +19,8 @@ namespace SharpVectors.Dom.Svg
         public SvgFilterElement(string prefix, string localname, string ns, SvgDocument doc)
             : base(prefix, localname, ns, doc)
         {
-            svgURIReference = new SvgUriReference(this);
-            svgExternalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _uriReference      = new SvgUriReference(this);
+            _resourcesRequired = new SvgExternalResourcesRequired(this);
         }
 
         #endregion
@@ -95,7 +95,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedString Href
         {
             get {
-                return svgURIReference.Href;
+                return _uriReference.Href;
             }
         }
 
@@ -106,7 +106,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
             get {
-                return svgExternalResourcesRequired.ExternalResourcesRequired;
+                return _resourcesRequired.ExternalResourcesRequired;
             }
         }
 

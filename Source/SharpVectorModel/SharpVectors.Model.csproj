@@ -113,6 +113,7 @@
       <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations\SvgAnimateColorElement.cs" />
@@ -123,8 +124,27 @@
     <Compile Include="Animations\SvgAnimateSetElement.cs" />
     <Compile Include="Animations\SvgAnimateTransformElement.cs" />
     <Compile Include="Animations\SvgAnimationElement.cs" />
+    <Compile Include="BasicTypes\SvgFontFamily.cs" />
     <Compile Include="ClippingMasking\SvgClipPathElement.cs" />
     <Compile Include="ClippingMasking\SvgMaskElement.cs" />
+    <Compile Include="Compressions\Brotli\BitReader.cs" />
+    <Compile Include="Compressions\Brotli\BrotliDecode.cs" />
+    <Compile Include="Compressions\Brotli\BrotliInputStream.cs" />
+    <Compile Include="Compressions\Brotli\BrotliRuntimeException.cs" />
+    <Compile Include="Compressions\Brotli\BrotliState.cs" />
+    <Compile Include="Compressions\Brotli\BrotliTransform.cs" />
+    <Compile Include="Compressions\Brotli\Context.cs" />
+    <Compile Include="Compressions\Brotli\Dictionary.cs" />
+    <Compile Include="Compressions\Brotli\Huffman.cs" />
+    <Compile Include="Compressions\Brotli\HuffmanTreeGroup.cs" />
+    <Compile Include="Compressions\Brotli\IntReader.cs" />
+    <Compile Include="Compressions\Brotli\Prefix.cs" />
+    <Compile Include="Compressions\Brotli\RunningState.cs" />
+    <Compile Include="Compressions\Brotli\Utils.cs" />
+    <Compile Include="Compressions\Brotli\WordTransformType.cs" />
+    <Compile Include="Compressions\ZLib\Adler32.cs" />
+    <Compile Include="Compressions\ZLib\ZLibHeader.cs" />
+    <Compile Include="Compressions\ZLib\ZLibStream.cs" />
     <Compile Include="DocumentStructure\SvgAElement.cs" />
     <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
@@ -464,6 +484,12 @@
     </Compile>
     <Compile Include="DocumentStructure\SvgElementFactory.cs" />
     <Compile Include="Text\SvgVKernElement.cs" />
+    <Compile Include="Woffs\SvgWoffParser.cs" />
+    <Compile Include="Woffs\SvgWoffHeader.cs" />
+    <Compile Include="Woffs\SvgWoffMetadata.cs" />
+    <Compile Include="Woffs\SvgWoffObject.cs" />
+    <Compile Include="Woffs\SvgWoffPrivateData.cs" />
+    <Compile Include="Woffs\SvgWoffTableDirectory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\SvgElements.cd" />

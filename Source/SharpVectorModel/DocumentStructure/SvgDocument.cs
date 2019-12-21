@@ -1,13 +1,14 @@
 using System;
 using System.Xml;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using SharpVectors.Xml;
+using SharpVectors.Woffs;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Resources;
 using SharpVectors.Dom.Stylesheets;
@@ -19,7 +20,7 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     /// <remarks>
     /// <para>
-    /// When an 'svg'  element is embedded inline as a component of a document from another namespace, 
+    /// When an 'svg' element is embedded inline as a component of a document from another namespace, 
     /// such as when an 'svg' element is embedded inline within an XHTML document
     /// [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>], then an 
     /// <see cref="ISvgDocument">ISvgDocument</see> object will not exist; instead, the root object in the 
@@ -108,6 +109,8 @@ namespace SharpVectors.Dom.Svg
         private IList<SvgFontElement> _svgFonts;
         private ISet<string> _svgFontFamilies;
 
+        private IList<SvgFontFamily> _fontFamilies;
+
         private double _dpi;
 
         private XmlNamespaceManager _namespaceManager;
@@ -177,6 +180,13 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 return _isFontsLoaded;
+            }
+        }
+
+        public IList<SvgFontFamily> FontFamilies
+        {
+            get {
+                return _fontFamilies;
             }
         }
 
@@ -302,60 +312,6 @@ namespace SharpVectors.Dom.Svg
             return settings;
         }
 
-        //private void PrepareXmlResolver(XmlReaderSettings settings)
-        //{   
-        //    /*// TODO: 1.2 has removed the DTD, can we do this safely?
-        //    if (reader != null && reader is XmlValidatingReader)
-        //    {
-        //        XmlValidatingReader valReader = (XmlValidatingReader)reader;
-        //        valReader.ValidationType = ValidationType.None;
-        //    }
-        //    return;
-
-        //    LocalDtdXmlUrlResolver localDtdXmlUrlResolver = new LocalDtdXmlUrlResolver();
-        //    localDtdXmlUrlResolver.AddDtd("http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd", @"dtd\svg10.dtd");
-        //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/TR/SVG/DTD/svg10.dtd", @"dtd\svg10.dtd");
-        //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd", @"dtd\svg11-tiny.dtd");
-        //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd", @"dtd\svg11-basic.dtd");
-        //          localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd", @"dtd\svg11.dtd");
-
-        //          if (reader != null && reader is XmlValidatingReader)
-        //          {
-        //              XmlValidatingReader valReader = (XmlValidatingReader)reader;
-
-        //              valReader.ValidationType = ValidationType.None;
-        //              valReader.XmlResolver = localDtdXmlUrlResolver;
-        //          }
-
-        //          this.XmlResolver = localDtdXmlUrlResolver;*/
-
-        //    //LocalDtdXmlUrlResolver localDtdXmlUrlResolver = new LocalDtdXmlUrlResolver();
-        //    //localDtdXmlUrlResolver.AddDtd("http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd", @"dtd\svg10.dtd");
-        //    //localDtdXmlUrlResolver.AddDtd("http://www.w3.org/TR/SVG/DTD/svg10.dtd", @"dtd\svg10.dtd");
-        //    //localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd", @"dtd\svg11-tiny.dtd");
-        //    //localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd", @"dtd\svg11-basic.dtd");
-        //    //localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd", @"dtd\svg11.dtd");
-
-        //    //string currentDir = Path.GetDirectoryName(
-        //    //    System.Reflection.Assembly.GetExecutingAssembly().Location);
-        //    //string localDtd = Path.Combine(currentDir, "dtd");
-        //    //if (Directory.Exists(localDtd))
-        //    //{
-        //    //    LocalDtdXmlUrlResolver localDtdXmlUrlResolver = new LocalDtdXmlUrlResolver();
-        //    //    localDtdXmlUrlResolver.AddDtd("http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd", Path.Combine(localDtd, "svg10.dtd"));
-        //    //    localDtdXmlUrlResolver.AddDtd("http://www.w3.org/TR/SVG/DTD/svg10.dtd", Path.Combine(localDtd, "svg10.dtd"));
-        //    //    localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd", Path.Combine(localDtd, "svg11-tiny.dtd"));
-        //    //    localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd", Path.Combine(localDtd, "svg11-basic.dtd"));
-        //    //    localDtdXmlUrlResolver.AddDtd("http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd", Path.Combine(localDtd, "svg11.dtd"));
-
-        //    //    settings.XmlResolver = localDtdXmlUrlResolver;			
-        //    //}
-        //    //else
-        //    //{
-        //    //    settings.XmlResolver = null;			
-        //    //}
-        //}
-
         /// <overloads>
         /// Loads an XML document.Loads the specified XML data.
         /// <blockquote>
@@ -391,10 +347,6 @@ namespace SharpVectors.Dom.Svg
                 }
             }
 
-            //XmlReaderSettings settings = this.GetXmlReaderSettings();
-
-            //PrepareXmlResolver(settings);
-            //using (XmlReader reader = XmlReader.Create(url, settings))
             using (XmlReader reader = CreateValidatingXmlReader(filename))
             {
                 this.Load(reader);
@@ -413,10 +365,6 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public void Load(string baseUrl, Stream stream)
         {
-            //XmlReaderSettings settings = this.GetXmlReaderSettings();
-
-            //PrepareXmlResolver(settings);
-            //using (XmlReader reader = XmlReader.Create(stream, settings, baseUrl))
             using (XmlReader reader = CreateValidatingXmlReader(baseUrl, stream))
             {
                 this.Load(reader);
@@ -430,10 +378,6 @@ namespace SharpVectors.Dom.Svg
         /// <param name="txtReader"></param>
         public override void Load(TextReader txtReader)
         {
-            //XmlReaderSettings settings = this.GetXmlReaderSettings();
-
-            //PrepareXmlResolver(settings);
-            //using (XmlReader xmlReader = XmlReader.Create(reader, settings))
             using (XmlReader xmlReader = CreateValidatingXmlReader(txtReader))
             {
                 this.Load(xmlReader);
@@ -448,10 +392,6 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public override void Load(Stream inStream)
         {
-            //XmlReaderSettings settings = this.GetXmlReaderSettings();
-
-            //PrepareXmlResolver(settings);
-            //using (XmlReader reader = XmlReader.Create(stream, settings))
             using (XmlReader reader = CreateValidatingXmlReader(string.Empty, inStream))
             {
                 this.Load(reader);
@@ -1285,15 +1225,56 @@ namespace SharpVectors.Dom.Svg
 
                 document = null;
             }
-            else if (string.Equals(fileExt, ".ttf", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(fileExt, ".otf", StringComparison.OrdinalIgnoreCase))
-            {
-                Debug.Assert(false, "Testing files with this format");
-            }
             else if (string.Equals(fileExt, ".woff", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(fileExt, ".woff2", StringComparison.OrdinalIgnoreCase))
             {
-                Debug.Assert(false, "Testing files with this format");
+                if (_fontFamilies == null)
+                {
+                    _fontFamilies = new List<SvgFontFamily>();
+                }
+
+                var woffParser = new SvgWoffParser();
+                if (woffParser.Import(fontPath))
+                {
+                    string fontExportPath = woffParser.DefaultExportPath;
+                    if (File.Exists(fontExportPath))
+                    {
+                        var fontFamily = new SvgFontFamily(true, fontExportPath, fontPath);
+                        _fontFamilies.Add(fontFamily);
+                    }
+                    else
+                    {
+                        fontExportPath = woffParser.GetExportPath();
+                        if (woffParser.Export(fontExportPath))
+                        {
+                            var fontFamily = new SvgFontFamily(true, fontExportPath, fontPath);
+
+                            _fontFamilies.Add(fontFamily);
+                        }
+                    }
+                }
+            }
+            else if (string.Equals(fileExt, ".ttf", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(fileExt, ".otf", StringComparison.OrdinalIgnoreCase))
+            {
+                if (_fontFamilies == null)
+                {
+                    _fontFamilies = new List<SvgFontFamily>();
+                }
+                var fontFamily = new SvgFontFamily(false, fontPath);
+
+                _fontFamilies.Add(fontFamily);
+            }
+            else if (string.Equals(fileExt, ".ttc", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(fileExt, ".otc", StringComparison.OrdinalIgnoreCase))
+            {
+                if (_fontFamilies == null)
+                {
+                    _fontFamilies = new List<SvgFontFamily>();
+                }
+                var fontFamily = new SvgFontFamily(false, fontPath);
+
+                _fontFamilies.Add(fontFamily);
             }
         }
 

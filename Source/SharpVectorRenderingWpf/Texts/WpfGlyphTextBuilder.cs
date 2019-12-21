@@ -21,7 +21,7 @@ namespace SharpVectors.Renderers.Texts
     {
         #region Private Fields
 
-        private const double EmMultiplier      = 100.0;
+        private const double EmMultiplier = 100.0;
 
         private ushort[] _glyphIndices;
         private double[] _advanceWidths;

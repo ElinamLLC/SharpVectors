@@ -203,6 +203,10 @@ namespace SharpVectors.Dom.Svg
                 return _document;
             }
             set {
+                if (_document == value)
+                {
+                    return;
+                }
                 _document = (SvgDocument)value;
             }
         }

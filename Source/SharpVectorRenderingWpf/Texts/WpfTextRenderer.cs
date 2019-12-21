@@ -657,13 +657,24 @@ namespace SharpVectors.Renderers.Texts
             {
                 svgFontNames = new List<string>();
             }
-            //var systemFontFamilies = Fonts.SystemFontFamilies;
-
             var wpfSettings = _context.Settings;
             var fontFamilyNames = wpfSettings.FontFamilyNames;
             var privateFontFamilies = wpfSettings.HasFontFamilies;
 
-            FontFamily family = null;
+            var docFontFamilies = docElement.FontFamilies;
+            if (docFontFamilies != null && docFontFamilies.Count != 0)
+            {
+                foreach (var docFontFamily in docFontFamilies)
+                {
+                    if (!docFontFamily.IsLoaded)
+                    {
+                        wpfSettings.AddFontLocation(docFontFamily.FontUri);
+                        docFontFamily.IsLoaded = true;
+                    }
+                }
+            }
+
+            FontFamily selectedFamily = null;
             // using separate pointer to give less priority to generic font names
             FontFamily genericFamily = null; 
 
@@ -708,8 +719,8 @@ namespace SharpVectors.Renderers.Texts
                     else if (styledFontIds.ContainsKey(fontName))
                     {
                         string mappedFontName = styledFontIds[fontName];
-                        family = LookupFontFamily(mappedFontName, fontFamilyNames);
-                        if (family != null)
+                        selectedFamily = LookupFontFamily(mappedFontName, fontFamilyNames);
+                        if (selectedFamily != null)
                         {
                             _actualFontName = mappedFontName;
                             familyType = WpfFontFamilyType.System;
@@ -718,18 +729,18 @@ namespace SharpVectors.Renderers.Texts
                     else
                     {
                         // Try looking up fonts in the system font registry...
-                        family = LookupFontFamily(fontName, fontFamilyNames);
-                        if (family != null)
+                        selectedFamily = LookupFontFamily(fontName, fontFamilyNames);
+                        if (selectedFamily != null)
                         {
                             _actualFontName = fontName;
                             familyType = WpfFontFamilyType.System;
                         }
 
                         // If not found, look through private fonts if available..
-                        if (family == null && privateFontFamilies)
+                        if (selectedFamily == null && privateFontFamilies)
                         {
-                            family = wpfSettings.LookupFontFamily(fontName);
-                            if (family != null)
+                            selectedFamily = wpfSettings.LookupFontFamily(fontName);
+                            if (selectedFamily != null)
                             {
                                 _actualFontName = fontName;
                                 familyType = WpfFontFamilyType.Private;
@@ -737,9 +748,9 @@ namespace SharpVectors.Renderers.Texts
                         }
                     }
 
-                    if (family != null)
+                    if (selectedFamily != null)
                     {
-                        return new WpfFontFamilyInfo(familyType, _actualFontName, family, 
+                        return new WpfFontFamilyInfo(familyType, _actualFontName, selectedFamily, 
                             fontWeight, fontStyle, fontStretch);
                     }
                 }

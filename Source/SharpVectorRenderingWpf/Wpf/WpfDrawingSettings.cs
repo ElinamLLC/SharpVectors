@@ -42,14 +42,14 @@ namespace SharpVectors.Renderers.Wpf
 
         private WpfVisitors _wpfVisitors;
 
-        private object _fontSynch = new object();
-
         private ISet<string> _fontLocations;
         private IList<FontFamily> _fontFamilies;
         private IDictionary<string, string> _fontFamilyNames;
         private IDictionary<string, FontFamily> _fontFamilyMap;
 
         private IDictionary<string, object> _properties;
+
+        private object _fontSynch = new object();
 
         #endregion
 
@@ -582,6 +582,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
         public void AddFontFamilyName(string mappedName, string fontName)
         {
             lock(_fontSynch)
@@ -651,7 +655,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (_fontFamilyMap == null || _fontFamilyMap.Count == 0)
                 {
-                    BuildSystemFonts();
+                    this.BuildDocumentFonts();
                 }
 
                 if (_fontFamilyMap.ContainsKey(fontName))
@@ -761,7 +765,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Private Methods
 
-        private void BuildSystemFonts()
+        private void BuildDocumentFonts()
         {
             if (_fontFamilyMap == null)
             {

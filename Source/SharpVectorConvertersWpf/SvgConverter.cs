@@ -301,9 +301,6 @@ namespace SharpVectors.Converters
                     }
                 }
             }
-
-            //TODO: Currently, experimental
-            GC.Collect();
         }
 
         protected static BitmapEncoder GetBitmapEncoder(ImageEncoderType encoderType)
