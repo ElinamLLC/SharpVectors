@@ -243,11 +243,67 @@ namespace SharpVectors.Renderers.Wpf
 
         private Brush GetRadialGradientBrush(SvgRadialGradientElement res)
         {
+            var refElem = res.ReferencedElement;
+
             double centerX = res.Cx.AnimVal.Value;
             double centerY = res.Cy.AnimVal.Value;
+
+            // 'fx', 'fy', and 'fr' define the start circle for the radial gradient.
             double focusX  = res.Fx.AnimVal.Value;
             double focusY  = res.Fy.AnimVal.Value;
             double radius  = res.R.AnimVal.Value;
+
+            var lengthUnit = res.Cx.AnimVal.UnitType;
+            // If attribute 'fx' is not specified, 'fx' will coincide with the presentational 
+            // value of 'cx' for the element whether the value for 'cx' was inherited or not. 
+            if (lengthUnit == SvgLengthType.Percentage)
+            {
+                if (!res.HasAttribute("fx") && (refElem == null || !refElem.HasAttribute("fx")))
+                {
+                    focusX = centerX;
+                }
+                else if (focusX.Equals(0.0))
+                {
+                    focusX = centerX;
+                    if (focusX > 0 && focusX >= radius)
+                    {
+                        focusX = (centerX > radius) ? centerX - radius : focusX = radius;
+                    }
+                }
+                else
+                {
+                    if (focusX > 0 && focusX >= radius)
+                    {
+                        focusX = (centerX > radius) ? centerX - radius : focusX = radius;
+                    }
+                }
+            }
+
+            lengthUnit = res.Cy.AnimVal.UnitType;
+            // If attribute 'fy' is not specified, 'fy' will coincide with the presentational 
+            // value of 'cy' for the element whether the value for 'cy' was inherited or not.
+            if (lengthUnit == SvgLengthType.Percentage)
+            {
+                if (!res.HasAttribute("fy") && (refElem == null || !refElem.HasAttribute("fy")))
+                {
+                    focusY = centerY;
+                }
+                else if (focusY.Equals(0.0))
+                {
+                    focusY = centerY;
+                    if (focusY > 0 && focusY >= radius)
+                    {
+                        focusY = (centerY > radius) ? centerY - radius : focusY = radius;
+                    }
+                }
+                else
+                {
+                    if (focusY > 0 && focusY >= radius)
+                    {
+                        focusY = (centerY > radius) ? centerY - radius : focusY = radius;
+                    }
+                }
+            }
 
             GradientStopCollection gradientStops = GetGradientStops(res.Stops);
             if (gradientStops == null || gradientStops.Count == 0)
