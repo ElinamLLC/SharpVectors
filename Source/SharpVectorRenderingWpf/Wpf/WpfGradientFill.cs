@@ -108,15 +108,6 @@ namespace SharpVectors.Renderers.Wpf
                     brush.MappingMode = BrushMappingMode.Absolute;
 
                     _isUserSpace = true;
-
-                    //if (viewBoxTransform == null || viewBoxTransform.Value.IsIdentity)
-                    //{
-                    //    if (!elementBounds.IsEmpty)
-                    //    {
-                    //        viewBoxTransform = FitToViewbox(new SvgRect(x1, y1,
-                    //            Math.Abs(x2 - x1), Math.Abs(y2 - y1)), elementBounds);
-                    //    }
-                    //}
                 }
             }
 
@@ -147,12 +138,7 @@ namespace SharpVectors.Renderers.Wpf
                 else
                 {
                     brush.Transform = transform;
-                    //brush.StartPoint = new Point(0, 0.5);
-                    //brush.EndPoint = new Point(1, 0.5);
                 }
-
-                //brush.StartPoint = new Point(0, 0);
-                //brush.EndPoint = new Point(1, 1);
             }
             else
             {
@@ -176,19 +162,11 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (fTop.Equals(fBottom))
                 {
-                    //mode = LinearGradientMode.Horizontal;
-
-                    //brush.StartPoint = new Point(0, 0.5);
-                    //brush.EndPoint = new Point(1, 0.5);
                 }
                 else
                 {
                     if (fLeft.Equals(fRight))
                     {
-                        //mode = LinearGradientMode.Vertical;
-
-                        //brush.StartPoint = new Point(0.5, 0);
-                        //brush.EndPoint = new Point(0.5, 1);
                     }
                     else
                     {
@@ -196,43 +174,15 @@ namespace SharpVectors.Renderers.Wpf
                         {
                             if (viewBoxTransform != null && !viewBoxTransform.Value.IsIdentity)
                             {
-                                //TransformGroup group = new TransformGroup();
-                                //group.Children.Add(viewBoxTransform);
-                                //group.Children.Add(new RotateTransform(45, 0.5, 0.5));
-
-                                //brush.Transform = group;
                                 brush.Transform = viewBoxTransform;
                             }
-                            //else
-                            //{
-                            //    brush.RelativeTransform = new RotateTransform(45, 0.5, 0.5);
-                            //}
-
-                            //mode = LinearGradientMode.ForwardDiagonal;
-                            //brush.EndPoint = new Point(x1, y1 + 1);
-
-                            //brush.StartPoint = new Point(0, 0);
-                            //brush.EndPoint = new Point(1, 1);
                         }
                         else
                         {
-                            //mode = LinearGradientMode.BackwardDiagonal;
                             if (viewBoxTransform != null && !viewBoxTransform.Value.IsIdentity)
                             {
-                                //TransformGroup group = new TransformGroup();
-                                //group.Children.Add(viewBoxTransform);
-                                //group.Children.Add(new RotateTransform(-45, 0.5, 0.5));
-
-                                //brush.Transform = group;
                                 brush.Transform = viewBoxTransform;
                             }
-                            //else
-                            //{
-                            //    brush.RelativeTransform = new RotateTransform(-45, 0.5, 0.5);
-                            //}
-
-                            //brush.StartPoint = new Point(0, 0);
-                            //brush.EndPoint = new Point(1, 1);
                         }
                     }
                 }
