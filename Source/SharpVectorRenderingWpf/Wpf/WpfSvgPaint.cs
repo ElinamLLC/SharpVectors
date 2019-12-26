@@ -186,7 +186,16 @@ namespace SharpVectors.Renderers.Wpf
                 stroke = this;
             }
 
-            Pen pen = new Pen(stroke.GetBrush(geometry, "stroke", setOpacity), strokeWidth);
+            Brush brush = stroke.GetBrush(geometry, "stroke", setOpacity);
+            if (brush == null)
+            {
+                WpfSvgPaint fallbackPaint = stroke.WpfFallback;
+                if (fallbackPaint != null)
+                {
+                    brush = fallbackPaint.GetBrush(geometry, "stroke", setOpacity);
+                }
+            }
+            Pen pen = new Pen(brush, strokeWidth);
 
             pen.StartLineCap  = pen.EndLineCap = GetLineCap();
             pen.LineJoin      = GetLineJoin();

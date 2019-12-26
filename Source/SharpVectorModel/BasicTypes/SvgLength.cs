@@ -174,7 +174,9 @@ namespace SharpVectors.Dom.Svg
                         break;
                     case SvgLengthType.Percentage:
                         double valueInSpecifiedUnits = _cssLength.GetFloatValue(CssPrimitiveType.Percentage);
-                        if (_ownerElement is SvgGradientElement)
+                        // if (_ownerElement is SvgGradientElement)
+                        if (string.Equals(_ownerElement.LocalName, "radialGradient", StringComparison.Ordinal)
+                            || string.Equals(_ownerElement.LocalName, "linearGradient", StringComparison.Ordinal))
                         {
                             ret = valueInSpecifiedUnits / 100F;
                         }

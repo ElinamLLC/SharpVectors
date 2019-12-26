@@ -24,8 +24,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedTransformList Transform
         {
-            get
-            {
+            get {
                 if (_transform == null)
                 {
                     _transform = new SvgAnimatedTransformList(GetAttribute("transform"));
@@ -36,12 +35,12 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgElement NearestViewportElement
         {
-            get
-            {
+            get {
                 XmlNode parent = this.ParentNode;
                 while (parent != null)
                 {
-                    if (parent is SvgSvgElement)
+                    //                    if (parent is SvgSvgElement)
+                    if (string.Equals(parent.LocalName, "Svg", StringComparison.Ordinal))
                     {
                         return (ISvgElement)parent;
                     }
@@ -53,8 +52,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgElement FarthestViewportElement
         {
-            get
-            {
+            get {
                 ISvgDocument doc = OwnerDocument;
                 if (doc.RootElement == this)
                     return null;
@@ -87,9 +85,10 @@ namespace SharpVectors.Dom.Svg
             ISvgMatrix matrix = new SvgMatrix();
             ISvgTransformList svgTList;
             ISvgMatrix vCTM;
-            if (this is SvgSvgElement)
+            //            if (this is SvgSvgElement)
+            if (string.Equals(this.Name, "svg", StringComparison.Ordinal))
             {
-                vCTM = (this as SvgSvgElement).ViewBoxTransform;
+                vCTM = ((SvgSvgElement)this).ViewBoxTransform;
                 matrix = vCTM;
             }
             else if (this.Transform != null)
@@ -109,9 +108,10 @@ namespace SharpVectors.Dom.Svg
                     par = par.ParentNode as SvgTransformableElement;
                 }
 
-                if (par == nVE && nVE is SvgSvgElement)
+                //                if (par == nVE && nVE is SvgSvgElement)
+                if (par == nVE && string.Equals(nVE.Name, "svg", StringComparison.Ordinal))
                 {
-                    vCTM = (nVE as SvgSvgElement).ViewBoxTransform;
+                    vCTM = ((SvgSvgElement)nVE).ViewBoxTransform;
                     matrix = vCTM.Multiply(matrix);
                 }
             }
@@ -123,9 +123,10 @@ namespace SharpVectors.Dom.Svg
             ISvgMatrix matrix = new SvgMatrix();
             ISvgTransformList svgTList;
             ISvgMatrix vCTM;
-            if (this is SvgSvgElement)
+            //            if (this is SvgSvgElement)
+            if (string.Equals(this.Name, "svg", StringComparison.Ordinal))
             {
-                vCTM = (this as SvgSvgElement).ViewBoxTransform;
+                vCTM = ((SvgSvgElement)this).ViewBoxTransform;
                 matrix = vCTM;
             }
             else if (this.Transform != null)
@@ -138,9 +139,10 @@ namespace SharpVectors.Dom.Svg
             while (par != null)
             {
                 // TODO: other elements can establish viewports, not just <svg>!
-                if (par is SvgSvgElement)
+                //if (par is SvgSvgElement)
+                if (string.Equals(par.Name, "svg", StringComparison.Ordinal))
                 {
-                    vCTM = (par as SvgSvgElement).ViewBoxTransform;
+                    vCTM = ((SvgSvgElement)par).ViewBoxTransform;
                     matrix = vCTM.Multiply(matrix);
                 }
                 else
@@ -173,9 +175,9 @@ namespace SharpVectors.Dom.Svg
             XmlNode node = element.ParentNode;
             while (node != null && node != OwnerDocument)
             {
-                if (node.Name == "svg")
+                if (string.Equals(node.Name, "svg", StringComparison.Ordinal))
                 {
-                    vctm = (node as SvgSvgElement).ViewBoxTransform;
+                    vctm = ((SvgSvgElement)node).ViewBoxTransform;
                     ctm = vctm.Multiply(ctm);
                 }
                 else

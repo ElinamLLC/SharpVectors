@@ -265,6 +265,14 @@ namespace SharpVectors.Renderers.Wpf
             string fileValue = styleElm.GetAttribute("fill");
 
             Brush brush = fillPaint.GetBrush(geometry, _setBrushOpacity);
+            if (brush == null)
+            {
+                WpfSvgPaint fallbackPaint = fillPaint.WpfFallback;
+                if (fallbackPaint != null)
+                {
+                    brush = fallbackPaint.GetBrush(geometry, _setBrushOpacity);
+                }
+            }
             bool isFillTransmable = fillPaint.IsFillTransformable;
 
             WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");
@@ -558,6 +566,14 @@ namespace SharpVectors.Renderers.Wpf
             string fileValue = styleElm.GetAttribute("fill");
 
             Brush brush = fillPaint.GetBrush(geometry, _setBrushOpacity);
+            if (brush == null)
+            {
+                WpfSvgPaint fallbackPaint = fillPaint.WpfFallback;
+                if (fallbackPaint != null)
+                {
+                    brush = fallbackPaint.GetBrush(geometry, _setBrushOpacity);
+                }
+            }
             bool isFillTransmable = fillPaint.IsFillTransformable;
 
             WpfSvgPaint strokePaint = new WpfSvgPaint(context, styleElm, "stroke");

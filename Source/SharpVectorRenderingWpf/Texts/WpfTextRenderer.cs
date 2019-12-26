@@ -1062,9 +1062,12 @@ namespace SharpVectors.Renderers.Texts
             WpfTextStringFormat sf = WpfTextStringFormat.Default;
 
             bool doAlign = true;
-            if (element is SvgTSpanElement || element is SvgTRefElement)
+            var elemName = element.LocalName;
+//            if (element is SvgTSpanElement || element is SvgTRefElement)
+            if (string.Equals(elemName, "tspan", StringComparison.Ordinal)
+                || string.Equals(elemName, "tref", StringComparison.Ordinal))
             {
-                SvgTextPositioningElement posElement = (SvgTextPositioningElement)element;
+                var posElement = (SvgTextPositioningElement)element;
                 if (posElement.X.AnimVal.NumberOfItems == 0)
                     doAlign = false;
             }

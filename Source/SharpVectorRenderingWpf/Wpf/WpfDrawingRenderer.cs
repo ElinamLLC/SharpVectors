@@ -49,9 +49,9 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingRenderer(WpfDrawingSettings settings, bool isEmbedded)
         {
-            _isEmbedded = isEmbedded;
+            _isEmbedded  = isEmbedded;
             _svgRenderer = new WpfRenderingHelper(this);
-            _settings = settings;
+            _settings    = settings;
         }
 
         #endregion
@@ -211,6 +211,31 @@ namespace SharpVectors.Renderers.Wpf
             _context.BeginDrawing(_drawingDocument);
 
             _svgRenderer.Render(node);
+
+            _context.EndDrawing();
+        }
+
+        public void RenderAs(SvgElement node, WpfDrawingContext context)
+        {
+            if (_svgRenderer == null)
+            {
+                _svgRenderer = new WpfRenderingHelper(this);
+            }
+
+            if (context == null)
+            {
+                _context = new WpfDrawingContext(true, _settings);
+
+                _context.Initialize(null, _fontFamilyVisitor, _imageVisitor);
+            }
+            else
+            {
+                _context = context;
+            }
+
+            _context.BeginDrawing(_drawingDocument);
+
+            _svgRenderer.RenderAs(node);
 
             _context.EndDrawing();
         }

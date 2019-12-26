@@ -15,7 +15,7 @@ namespace SharpVectors.Dom.Svg
 
         private bool _isDefaultAlign;
 
-        private SvgElement ownerElement;
+        private SvgElement _ownerElement;
 
         private SvgMeetOrSlice _meetOrSlice;
         private SvgPreserveAspectRatioType _alignment;
@@ -26,7 +26,7 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPreserveAspectRatio(string attr, SvgElement ownerElement)
         {
-            this.ownerElement = ownerElement;
+            _ownerElement = ownerElement;
 
             Match match = parCheck.Match(attr.Trim());
             if (match.Groups["align"].Success)
@@ -114,9 +114,15 @@ namespace SharpVectors.Dom.Svg
 
         public double[] FitToViewBox(SvgRect viewBox, SvgRect rectToFit)
         {
-            if (ownerElement is SvgSvgElement)
+            var localName = _ownerElement.LocalName;
+            if (string.Equals(localName, "svg", StringComparison.Ordinal)) // (_ownerElement is SvgSvgElement)
             {
-                ISvgMatrix mat = ((SvgSvgElement)ownerElement).ViewBoxTransform;
+                ISvgMatrix mat = ((SvgSvgElement)_ownerElement).ViewBoxTransform;
+                return new double[] { mat.E, mat.F, mat.A, mat.D };
+            }                                            
+            if (string.Equals(localName, "pattern", StringComparison.Ordinal)) // (_ownerElement is SvgPatternElement)
+            {
+                ISvgMatrix mat = ((SvgPatternElement)_ownerElement).ViewBoxTransform;
                 return new double[] { mat.E, mat.F, mat.A, mat.D };
             }                                            
 

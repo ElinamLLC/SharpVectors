@@ -109,7 +109,8 @@ namespace SharpVectors.Dom.Svg
                     return null;
                 }
                 XmlNode parent = this.ParentNode;
-                while (parent != null && !(parent is SvgSvgElement))
+                //while (parent != null && !(parent is SvgSvgElement))
+                while (parent != null && !string.Equals(parent.LocalName, "svg", StringComparison.Ordinal)) 
                 {
                     parent = parent.ParentNode;
                 }
@@ -125,7 +126,9 @@ namespace SharpVectors.Dom.Svg
                     return null;
                 }
                 XmlNode parent = this.ParentNode;
-                while (parent != null && !(parent is SvgSvgElement) && !(parent is SvgSymbolElement))
+                //while (parent != null && !(parent is SvgSvgElement) && !(parent is SvgSymbolElement))
+                while (parent != null && !string.Equals(parent.LocalName, "svg", StringComparison.Ordinal)
+                    && !string.Equals(parent.LocalName, "symbol", StringComparison.Ordinal))
                 {
                     parent = parent.ParentNode;
                 }

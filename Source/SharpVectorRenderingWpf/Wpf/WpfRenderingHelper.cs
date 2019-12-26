@@ -23,7 +23,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private WpfDrawingRenderer _renderer;
 
-        private IDictionary<ISvgElement, WpfRenderingBase> _rendererMap;
+        private IDictionary<string, WpfRenderingBase> _rendererMap;
 
         // A simple way to prevent use element circular references.
         private ISet<string> _useIdElements;
@@ -40,7 +40,7 @@ namespace SharpVectors.Renderers.Wpf
             _currentLang     = cultureInfo.TwoLetterISOLanguageName;
             _currentLangName = cultureInfo.Name;
             _renderer        = renderer;
-            _rendererMap     = new Dictionary<ISvgElement, WpfRenderingBase>();
+            _rendererMap     = new Dictionary<string, WpfRenderingBase>(StringComparer.OrdinalIgnoreCase);
             _useElements     = new HashSet<int>();
             _useIdElements   = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
        }
@@ -86,6 +86,16 @@ namespace SharpVectors.Renderers.Wpf
             {
                 RenderElement(svgElement);
             }
+        }
+
+        public void RenderAs(SvgElement svgElement)
+        {
+            if (svgElement == null)
+            {
+                return;
+            }
+
+            RenderElementAs(svgElement);
         }
 
         public void RenderChildren(ISvgElement svgElement)
@@ -190,12 +200,21 @@ namespace SharpVectors.Renderers.Wpf
 
             if (!renderingNode.NeedRender(_renderer))
             {
-                renderingNode.Dispose();
-                renderingNode = null;
+                //renderingNode.Dispose();
+                //renderingNode = null;
                 return;
             }
 
-            _rendererMap[svgElement] = renderingNode;
+            SvgElement currentElement = (SvgElement)svgElement;
+
+            if (_rendererMap.ContainsKey(currentElement.UniqueId))
+            {
+                // Might be circular rendering...
+                System.Diagnostics.Debug.WriteLine("Circular Object: " + currentElement.LocalName);
+                return;
+            }
+
+            _rendererMap[currentElement.UniqueId] = renderingNode;
             renderingNode.BeforeRender(_renderer);
 
             renderingNode.Render(_renderer);
@@ -205,13 +224,47 @@ namespace SharpVectors.Renderers.Wpf
                 RenderChildren(svgElement);
             }
 
-            renderingNode = _rendererMap[svgElement];
+            renderingNode = _rendererMap[currentElement.UniqueId];
             renderingNode.AfterRender(_renderer);
 
-            _rendererMap.Remove(svgElement);
+            _rendererMap.Remove(currentElement.UniqueId);
 
-            renderingNode.Dispose();
-            renderingNode = null;
+            //renderingNode.Dispose();
+            //renderingNode = null;
+        }
+
+        private void RenderElementAs(SvgElement svgElement)
+        {
+            WpfRenderingBase renderingNode = WpfRendering.Create(svgElement);
+            if (renderingNode == null)
+            {
+                return;
+            }
+
+            if (!renderingNode.NeedRender(_renderer))
+            {
+                //renderingNode.Dispose();
+                //renderingNode = null;
+                return;
+            }
+
+            _rendererMap[svgElement.UniqueId] = renderingNode;
+            renderingNode.BeforeRender(_renderer);
+
+            renderingNode.Render(_renderer);
+
+            if (!renderingNode.IsRecursive && svgElement.HasChildNodes)
+            {
+                RenderChildren(svgElement);
+            }
+
+            renderingNode = _rendererMap[svgElement.UniqueId];
+            renderingNode.AfterRender(_renderer);
+
+            _rendererMap.Remove(svgElement.UniqueId);
+
+            //renderingNode.Dispose();
+            //renderingNode = null;
         }
 
         private void RenderUseElement(ISvgElement svgElement)

@@ -7,12 +7,12 @@ namespace SharpVectors.Dom.Svg
 {
     /// <summary>
     /// <para>
-    /// A key interface definition is the SVGSVGElement interface, which is the interface that corresponds 
+    /// A key interface definition is the <see cref="ISvgSvgElement"/> interface, which is the interface that corresponds 
     /// to the 'svg' element. This interface contains various miscellaneous commonly-used utility methods, 
     /// such as matrix operations and the ability to control the time of redraw on visual rendering devices.
     /// </para>
     /// <para>
-    /// SVGSVGElement extends ViewCSS and DocumentCSS to provide access to the 
+    /// <see cref="ISvgSvgElement"/> extends ViewCSS and DocumentCSS to provide access to the 
     /// computed values of properties and the override style sheet as described in DOM2. 
     /// </para>
     /// </summary>

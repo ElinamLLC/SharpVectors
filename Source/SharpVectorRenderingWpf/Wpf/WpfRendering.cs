@@ -227,6 +227,8 @@ namespace SharpVectors.Renderers.Wpf
                     return new WpfImageRendering(svgElement);
                 case "marker":
                     return new WpfMarkerRendering(svgElement);
+                case "pattern":
+                    return new WpfPatternRendering(svgElement);
             }
 
             return new WpfRendering(svgElement);

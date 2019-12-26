@@ -38,9 +38,10 @@ namespace SharpVectors.Dom.Svg
                         double y      = 0;
                         double width  = 0;
                         double height = 0;
-                        if (_ownerElement is SvgSvgElement)
+                        //if (_ownerElement is SvgSvgElement)
+                        if (string.Equals(_ownerElement.LocalName, "svg", StringComparison.Ordinal))
                         {
-                            SvgSvgElement svgSvgElm = _ownerElement as SvgSvgElement;
+                            SvgSvgElement svgSvgElm = (SvgSvgElement)_ownerElement;
 
                             // Because x / y are ignored on the root svg element, the x/ y origin should have 
                             // no effect on the drawing.
@@ -80,9 +81,9 @@ namespace SharpVectors.Dom.Svg
 
         #region Update handling
 
-        private void OnAttributeChange(Object src, XmlNodeChangedEventArgs args)
+        private void OnAttributeChange(object src, XmlNodeChangedEventArgs args)
 		{
-			XmlAttribute attribute = src as XmlAttribute;
+			XmlAttribute attribute = (XmlAttribute)src;
 
 			if (attribute.NamespaceURI.Length == 0)
 			{

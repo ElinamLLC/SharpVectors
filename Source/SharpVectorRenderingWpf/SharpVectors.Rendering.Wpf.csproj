@@ -109,6 +109,7 @@
     <Compile Include="Wpf\WpfHitTestResult.cs" />
     <Compile Include="Wpf\WpfIDVisitor.cs" />
     <Compile Include="Wpf\WpfLinkVisitor.cs" />
+    <Compile Include="Wpf\WpfPatternRendering.cs" />
     <Compile Include="Wpf\WpfRendererObject.cs" />
     <Compile Include="Wpf\WpfSolidColorFill.cs" />
     <Compile Include="Wpf\WpfSvgPaint.cs" />

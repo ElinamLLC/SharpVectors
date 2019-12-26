@@ -15,6 +15,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private const string RegisteredIdKey = "_registeredIds";
 
+        private string _name;
+
         private bool _renderingClip;
         private bool _isFragment;
 
@@ -100,6 +102,16 @@ namespace SharpVectors.Renderers.Wpf
         #endregion
 
         #region Public Properties
+
+        public string Name
+        {
+            get {
+                return _name;
+            }
+            set {
+                _name = value;
+            }
+        }
 
         /// <summary>
         /// Gets the number of elements contained in the drawing stack.
@@ -353,7 +365,7 @@ namespace SharpVectors.Renderers.Wpf
         /// <exception cref="System.InvalidOperationException">The drawing stack is empty.</exception>
         public DrawingGroup Peek()
         {
-            if (_drawStack != null)
+            if (_drawStack != null && _drawStack.Count != 0)
             {
                 return _drawStack.Peek();
             }
@@ -367,7 +379,7 @@ namespace SharpVectors.Renderers.Wpf
         /// <exception cref="System.InvalidOperationException">The drawing stack is empty.</exception>
         public DrawingGroup Pop()
         {
-            if (_drawStack != null)
+            if (_drawStack != null && _drawStack.Count != 0)
             {
                 return _drawStack.Pop();
             }
@@ -433,7 +445,6 @@ namespace SharpVectors.Renderers.Wpf
 
             this.Push(_rootDrawing);
 
-
             if (_idVisitor != null && !_idVisitor.IsInitialized)
             {
                 _idVisitor.Initialize(this);
@@ -461,7 +472,7 @@ namespace SharpVectors.Renderers.Wpf
                 string groupId = _linkVisitor.AggregatedLayerName;
                 if (!string.IsNullOrWhiteSpace(groupId))
                 {
-                    Runtime.SvgObject.SetName(_linkDrawing, groupId);
+                    SvgObject.SetName(_linkDrawing, groupId);
                 }
 
                 _linkVisitor.Initialize(_linkDrawing, this);
