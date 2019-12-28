@@ -135,7 +135,6 @@ namespace SharpVectors.Dom.Svg
         /// <exception cref="FormatException"> if an error occured while processing the path </exception>
         void CurvetoCubicRel(float x1, float y1, float x2, float y2, float x, float y);
 
-
         /// <summary>
         /// Invoked when an absolute cubic bezier curve command has been parsed.
         /// <para>Command : <b>C</b>
@@ -245,7 +244,6 @@ namespace SharpVectors.Dom.Svg
         /// <param name="y"> the relative y coordinate for the end point </param>
         /// <exception cref="FormatException"> if an error occured while processing the path </exception>
         void ArcRel(float rx, float ry, float xAxisRotation, bool largeArcFlag, bool sweepFlag, float x, float y);
-
 
         /// <summary>
         /// Invoked when an absolute elliptical arc command has been parsed.

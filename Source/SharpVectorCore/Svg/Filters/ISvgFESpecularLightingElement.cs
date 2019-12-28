@@ -8,5 +8,8 @@ namespace SharpVectors.Dom.Svg
         ISvgAnimatedNumber SurfaceScale { get; }
         ISvgAnimatedNumber SpecularConstant { get; }
         ISvgAnimatedNumber SpecularExponent { get; }
+
+        ISvgAnimatedNumber KernelUnitLengthX { get; }
+        ISvgAnimatedNumber KernelUnitLengthY { get; }
     }
 }

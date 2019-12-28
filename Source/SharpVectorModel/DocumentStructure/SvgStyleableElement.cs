@@ -14,7 +14,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private static fields
 
-        private static Regex isImportant = new Regex(@"!\s*important$");
+        private static readonly Regex _isImportant = new Regex(@"!\s*important$");
 
         #endregion
 
@@ -56,7 +56,7 @@ namespace SharpVectors.Dom.Svg
                 string attValue = GetAttribute(name, string.Empty).Trim();
                 if (!string.IsNullOrWhiteSpace(attValue))
                 {
-                    if (isImportant.IsMatch(attValue))
+                    if (_isImportant.IsMatch(attValue))
                     {
                         result = null;
                     }

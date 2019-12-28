@@ -5,7 +5,17 @@ namespace SharpVectors.Dom.Svg{	/// <summary>	/// Base class for all SVG*List
 	public abstract class SvgList<T> : IEnumerable<T>	{        #region Private Fields
 
         protected List<T> _items;        private IDictionary<T, SvgList<T>> _itemOwnerMap;        #endregion
-        #region Constructor        /// <summary>        /// SvgList constructor        /// </summary>		protected SvgList()		{			_items        = new List<T>();            _itemOwnerMap = new Dictionary<T, SvgList<T>>();		}        #endregion        #region ISvgList Interface        /// <summary>        /// NumberOfItems        /// </summary>        public uint NumberOfItems        {
+        #region Constructor        /// <summary>        /// SvgList constructor        /// </summary>		protected SvgList()		{			_items        = new List<T>();            _itemOwnerMap = new Dictionary<T, SvgList<T>>();		}        #endregion        #region ISvgList Interface        public int Count
+        {
+            get {
+                return _items.Count;
+            }
+        }        public T this[int index]
+        {
+            get {
+                return this.GetItem((uint)index);
+            }
+        }        /// <summary>        /// NumberOfItems        /// </summary>        public uint NumberOfItems        {
             get { return (uint) _items.Count; }
         }
 

@@ -4,6 +4,7 @@ namespace SharpVectors.Dom.Svg
     /// </summary>
     public interface ISvgFEConvolveMatrixElement : ISvgElement, ISvgFilterPrimitiveStandardAttributes
     {
+        ISvgAnimatedEnumeration EdgeMode { get; }
         ISvgAnimatedInteger OrderX { get; }
         ISvgAnimatedInteger OrderY { get; }
         ISvgAnimatedNumberList KernelMatrix { get; }
@@ -11,9 +12,8 @@ namespace SharpVectors.Dom.Svg
         ISvgAnimatedNumber Bias { get; }
         ISvgAnimatedInteger TargetX { get; }
         ISvgAnimatedInteger TargetY { get; }
-        ISvgAnimatedEnumeration EdgeMode { get; }
         ISvgAnimatedNumber KernelUnitLengthX { get; }
         ISvgAnimatedNumber KernelUnitLengthY { get; }
-        bool PreserveAlpha { get; }
+        ISvgAnimatedBoolean PreserveAlpha { get; }
     }
 }

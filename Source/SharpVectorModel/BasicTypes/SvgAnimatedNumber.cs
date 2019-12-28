@@ -22,6 +22,12 @@ namespace SharpVectors.Dom.Svg
             _animVal = _baseVal;
         }
 
+        public SvgAnimatedNumber(double value)
+        {
+            _baseVal = value;
+            _animVal = value;
+        }
+
         public SvgAnimatedNumber(double baseVal, double animVal)
         {
             _baseVal = baseVal;

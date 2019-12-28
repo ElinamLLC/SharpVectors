@@ -17,6 +17,8 @@
 // limitations under the License.
 //---------------------------------------------------------------------------------
 
+using System;
+
 namespace SharpVectors.Dom.Svg
 {
     /// <summary>

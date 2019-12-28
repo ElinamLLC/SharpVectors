@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Xml;
-using System.Diagnostics;
 
 using System.Windows;
 using System.Windows.Media;

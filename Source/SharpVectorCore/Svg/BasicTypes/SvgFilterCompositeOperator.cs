@@ -3,8 +3,8 @@ namespace SharpVectors.Dom.Svg
 	/// <summary>
 	///	The Filter Composite Operators
 	/// </summary>
-	public enum SvgFilterCompositeOperator
-	{
+	public enum SvgFilterCompositeOperator : ushort
+    {
 		Unknown    = 0,
 		Over       = 1,
 		In         = 2,

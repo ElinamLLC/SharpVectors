@@ -51,16 +51,16 @@ namespace SharpVectors.Dom.Svg
         }
 
         /// <summary>
-        /// Allows an application to register a points handler.
-        /// 
-        /// <para>If the application does not register a handler, all
-        /// events reported by the parser will be silently ignored.
-        /// 
+        /// Gets or sets an application <see cref="ISvgPointsHandler"/> implementation to register a points handler.
+        /// </summary>
+        /// <value>The transform list handler.</value>
+        /// <remarks>
+        /// <para>
+        /// If the application does not register a handler, all events reported by the parser will be silently ignored.
         /// </para>
-        /// <para>Applications may register a new or different handler in the
-        /// middle of a parse, and the parser must begin using the new
-        /// handler immediately.</para> </summary>
-        /// <param name="handler"> The transform list handler. </param>
+        /// <para>Applications may register a new or different handler in the middle of a parse, and the parser must 
+        /// begin using the new handler immediately.</para> 
+        /// </remarks>
         public virtual ISvgPointsHandler Handler
         {
             get {

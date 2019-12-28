@@ -9,12 +9,20 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
+        public readonly static SvgAnimatedNumberList Empty = new SvgAnimatedNumberList();
+
         private SvgNumberList _baseVal;
         private SvgNumberList _animVal;
 
         #endregion
 
         #region Constructor
+
+        public SvgAnimatedNumberList()
+        {
+            _baseVal = new SvgNumberList();
+            _animVal = _baseVal;
+        }
 
         public SvgAnimatedNumberList(string str)
         {

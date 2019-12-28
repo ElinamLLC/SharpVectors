@@ -22,13 +22,13 @@ namespace SharpVectors.Dom.Svg
         #region Constructors and Destructor
 
         public SvgMaskElement(string prefix, string localname, string ns, SvgDocument doc)
-			: base(prefix, localname, ns, doc)
-		{
-			_externalResourcesRequired = new SvgExternalResourcesRequired(this);
-			_svgTests = new SvgTests(this);
-		}
+            : base(prefix, localname, ns, doc)
+        {
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests = new SvgTests(this);
+        }
 
-		#endregion
+        #endregion
 
         #region ISvgElement Members
 
@@ -41,8 +41,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override bool IsRenderable
         {
-            get
-            {
+            get {
                 return false;
             }
         }
@@ -56,131 +55,123 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Masking;
             }
         }
 
         #endregion
 
-		#region ISvgMaskElement Members
+        #region ISvgMaskElement Members
 
-		public ISvgAnimatedEnumeration MaskUnits 
-		{
-			get
-			{ 
-				if (_maskUnits == null)
-				{
-					SvgUnitType mask = SvgUnitType.ObjectBoundingBox;
-					if (GetAttribute("maskUnits") == "userSpaceOnUse") 
-						mask = SvgUnitType.UserSpaceOnUse;
+        public ISvgAnimatedEnumeration MaskUnits
+        {
+            get {
+                if (_maskUnits == null)
+                {
+                    SvgUnitType mask = SvgUnitType.ObjectBoundingBox;
+                    if (string.Equals(this.GetAttribute("maskUnits"), "userSpaceOnUse", StringComparison.Ordinal))
+                        mask = SvgUnitType.UserSpaceOnUse;
 
-					_maskUnits = new SvgAnimatedEnumeration((ushort)mask);
-				}
-				return _maskUnits;
-			}
-		}
+                    _maskUnits = new SvgAnimatedEnumeration((ushort)mask);
+                }
+                return _maskUnits;
+            }
+        }
 
-		public ISvgAnimatedEnumeration MaskContentUnits 
-		{
-			get
-			{
-				if(_maskContentUnits == null)
-				{
-					SvgUnitType maskContent = SvgUnitType.UserSpaceOnUse;
-					if (GetAttribute("maskContentUnits") == "objectBoundingBox") 
-						maskContent = SvgUnitType.ObjectBoundingBox;
-					_maskContentUnits = new SvgAnimatedEnumeration((ushort)maskContent);
-				}
-				return _maskContentUnits;
-			}
-		}
+        public ISvgAnimatedEnumeration MaskContentUnits
+        {
+            get {
+                if (_maskContentUnits == null)
+                {
+                    SvgUnitType maskContent = SvgUnitType.UserSpaceOnUse;
+                    if (string.Equals(this.GetAttribute("maskContentUnits"), "objectBoundingBox", StringComparison.Ordinal))
+                        maskContent = SvgUnitType.ObjectBoundingBox;
+                    _maskContentUnits = new SvgAnimatedEnumeration((ushort)maskContent);
+                }
+                return _maskContentUnits;
+            }
+        }
 
-		public ISvgAnimatedLength X 
-		{
-			get
-			{
-				if (_x == null)
-				{
-					_x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "-10%");
-				}
-				return _x;
-			}
-		}
+        public ISvgAnimatedLength X
+        {
+            get {
+                if (_x == null)
+                {
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "-10%");
+                }
+                return _x;
+            }
+        }
 
-		public ISvgAnimatedLength Y 
-		{
-			get
-			{
-				if(_y == null)
-				{
-					_y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "-10%");
-				}
-				return _y;
-			}
-		}
+        public ISvgAnimatedLength Y
+        {
+            get {
+                if (_y == null)
+                {
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "-10%");
+                }
+                return _y;
+            }
+        }
 
-		public ISvgAnimatedLength Width 
-		{
-			get
-			{
-				if (_width == null)
-				{
-					_width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Viewport, "120%");
-				}
-				return _width;
-			}
-		}
+        public ISvgAnimatedLength Width
+        {
+            get {
+                if (_width == null)
+                {
+                    _width = new SvgAnimatedLength(this, "width", SvgLengthDirection.Viewport, "120%");
+                }
+                return _width;
+            }
+        }
 
-		public ISvgAnimatedLength Height 
-		{
-			get
-			{
-				if (_height == null)
-				{
-					_height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Viewport, "120%");
-				}
-				return _height;
-			}
-		}
-
-		#endregion
-
-		#region ISvgExternalResourcesRequired Members
-
-		public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return _externalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
-
-		#endregion
-
-		#region ISvgTests Members
-
-		public ISvgStringList RequiredFeatures
-		{
-			get { return _svgTests.RequiredFeatures; }
-		}
-
-		public ISvgStringList RequiredExtensions
-		{
-			get { return _svgTests.RequiredExtensions; }
-		}
-
-		public ISvgStringList SystemLanguage
-		{
-			get { return _svgTests.SystemLanguage; }
-		}
-
-		public bool HasExtension(string extension)
-		{
-			return _svgTests.HasExtension(extension);
-		}
+        public ISvgAnimatedLength Height
+        {
+            get {
+                if (_height == null)
+                {
+                    _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Viewport, "120%");
+                }
+                return _height;
+            }
+        }
 
         #endregion
-	}
+
+        #region ISvgExternalResourcesRequired Members
+
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
+
+        #endregion
+
+        #region ISvgTests Members
+
+        public ISvgStringList RequiredFeatures
+        {
+            get { return _svgTests.RequiredFeatures; }
+        }
+
+        public ISvgStringList RequiredExtensions
+        {
+            get { return _svgTests.RequiredExtensions; }
+        }
+
+        public ISvgStringList SystemLanguage
+        {
+            get { return _svgTests.SystemLanguage; }
+        }
+
+        public bool HasExtension(string extension)
+        {
+            return _svgTests.HasExtension(extension);
+        }
+
+        #endregion
+    }
 }

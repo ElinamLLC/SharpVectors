@@ -7,8 +7,7 @@ namespace SharpVectors.Dom.Svg
     /// <para>A 'script' element is equivalent to the 'script' element in HTML and thus is the place for scripts.</para>
     /// <para>Any functions defined within any 'script' element have a 'global' scope across the entire current document.</para>
     /// </remarks>
-    public interface ISvgScriptElement : ISvgElement, ISvgUriReference,
-        ISvgExternalResourcesRequired
+    public interface ISvgScriptElement : ISvgElement, ISvgUriReference, ISvgExternalResourcesRequired
     {
         /// <summary>
         /// Gets or sets a value corresponding to the attribute 'type' on the given 'script' element.

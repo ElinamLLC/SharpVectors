@@ -3,7 +3,7 @@ namespace SharpVectors.Dom.Svg
 	/// <summary>
 	/// The Filter Channel Selectors
 	/// </summary>
-	public enum SvgFilterChannelSelector
+	public enum SvgFilterChannelSelector : ushort
 	{
 		Unknown = 0,
 		R       = 1,

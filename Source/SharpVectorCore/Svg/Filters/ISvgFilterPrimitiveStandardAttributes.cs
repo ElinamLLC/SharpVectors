@@ -8,6 +8,6 @@ namespace SharpVectors.Dom.Svg
         ISvgAnimatedLength Y { get; }
         ISvgAnimatedLength Width { get; }
         ISvgAnimatedLength Height { get; }
-        ISvgAnimatedLength Result { get; }
+        ISvgAnimatedString Result { get; }
     }
 }

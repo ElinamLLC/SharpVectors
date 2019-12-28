@@ -128,6 +128,62 @@ namespace SharpVectors.Dom.Svg
                     return new SvgAnimateTransformElement(prefix, localName, ns, doc);
                 case "mpath":
                     return new SvgAnimateMPathElement(prefix, localName, ns, doc);
+
+                // Filter Effects support
+                case "filter":
+                    return new SvgFilterElement(prefix, localName, ns, doc);
+
+                case "feDistantLight":
+                    return new SvgFEDistantLightElement(prefix, localName, ns, doc);
+                case "fePointLight":
+                    return new SvgFEPointLightElement(prefix, localName, ns, doc);
+                case "feSpotLight":
+                    return new SvgFESpotLightElement(prefix, localName, ns, doc);
+
+                case "feBlend":
+                    return new SvgFEBlendElement(prefix, localName, ns, doc);
+                case "feColorMatrix":
+                    return new SvgFEColorMatrixElement(prefix, localName, ns, doc);
+                case "feComponentTransfer":
+                    return new SvgFEComponentTransferElement(prefix, localName, ns, doc);
+                case "feComposite":
+                    return new SvgFECompositeElement(prefix, localName, ns, doc);
+                case "feConvolveMatrix":
+                    return new SvgFEConvolveMatrixElement(prefix, localName, ns, doc);
+                case "feDiffuseLighting":
+                    return new SvgFEDiffuseLightingElement(prefix, localName, ns, doc);
+                case "feDisplacementMap":
+                    return new SvgFEDisplacementMapElement(prefix, localName, ns, doc);
+                case "feFlood":
+                    return new SvgFEFloodElement(prefix, localName, ns, doc);
+
+                case "feFuncR":
+                    return new SvgFEFuncRElement(prefix, localName, ns, doc);
+                case "feFuncG":
+                    return new SvgFEFuncGElement(prefix, localName, ns, doc);
+                case "feFuncB":
+                    return new SvgFEFuncBElement(prefix, localName, ns, doc);
+                case "feFuncA":
+                    return new SvgFEFuncAElement(prefix, localName, ns, doc);
+
+                case "feGaussianBlur":
+                    return new SvgFEGaussianBlurElement(prefix, localName, ns, doc);
+                case "feImage":
+                    return new SvgFEImageElement(prefix, localName, ns, doc);
+                case "feMerge":
+                    return new SvgFEMergeElement(prefix, localName, ns, doc);
+                case "feMergeNode":
+                    return new SvgFEMergeNodeElement(prefix, localName, ns, doc);
+                case "feMorphology":
+                    return new SvgFEMorphologyElement(prefix, localName, ns, doc);
+                case "feOffset":
+                    return new SvgFEOffsetElement(prefix, localName, ns, doc);
+                case "feSpecularLighting":
+                    return new SvgFESpecularLightingElement(prefix, localName, ns, doc);
+                case "feTile":
+                    return new SvgFETileElement(prefix, localName, ns, doc);
+                case "feTurbulence":
+                    return new SvgFETurbulenceElement(prefix, localName, ns, doc);
             }
 
             return null;

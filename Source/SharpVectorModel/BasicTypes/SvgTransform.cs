@@ -11,6 +11,8 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
+        private static readonly Regex _reSeparators = new Regex("[\\s\\,]+");
+
         private double _angle;
         private ISvgMatrix _matrix;
         private SvgTransformType _type;
@@ -36,8 +38,7 @@ namespace SharpVectors.Dom.Svg
 			int start = str.IndexOf("(", StringComparison.OrdinalIgnoreCase);
 			string type = str.Substring(0, start);
 			string valuesList = (str.Substring(start+1, str.Length - start - 2)).Trim(); //JR added trim
-			Regex re = new Regex("[\\s\\,]+"); 
-			valuesList = re.Replace(valuesList, ",");
+			valuesList = _reSeparators.Replace(valuesList, ",");
 
 			string[] valuesStr = valuesList.Split(new char[]{','});
 			int len = valuesStr.GetLength(0);

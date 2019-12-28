@@ -454,7 +454,7 @@
     <Compile Include="Svg\BasicTypes\SvgMeetOrSlice.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Svg\BasicTypes\SvgMorphologyOperator.cs">
+    <Compile Include="Svg\BasicTypes\SvgFilterMorphologyOperator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Svg\BasicTypes\SvgPreserveAspectRatioType.cs">
