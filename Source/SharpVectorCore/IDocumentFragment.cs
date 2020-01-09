@@ -1,9 +1,9 @@
 namespace SharpVectors.Dom
 {
-	/// <summary>
-	/// Summary description for IDocumentFragment.
-	/// </summary>
-	public interface IDocumentFragment
+    /// <summary>
+    /// Represents a lightweight object that is useful for tree insert operations.
+    /// </summary>
+    public interface IDocumentFragment : INode
 	{
 	}
 }

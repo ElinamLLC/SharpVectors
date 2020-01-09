@@ -148,6 +148,7 @@
     <Compile Include="Compressions\ZLib\ZLibStream.cs" />
     <Compile Include="DocumentStructure\SvgAElement.cs" />
     <Compile Include="DocumentStructure\SvgColorProfileElement.cs" />
+    <Compile Include="DocumentStructure\SvgStyleElement.cs" />
     <Compile Include="Events\SvgResolveNamespaceEventArgs.cs" />
     <Compile Include="Events\SvgResolveUriEventArgs.cs" />
     <Compile Include="Fills\SvgSolidColorElement.cs" />
@@ -177,6 +178,10 @@
     <Compile Include="Filters\SvgFETileElement.cs" />
     <Compile Include="Filters\SvgFETurbulenceElement.cs" />
     <Compile Include="Filters\SvgFilterPrimitiveStandardAttributes.cs" />
+    <Compile Include="IoC\SvgContainer.cs" />
+    <Compile Include="IoC\ISvgRegisteredType.cs" />
+    <Compile Include="IoC\ISvgScope.cs" />
+    <Compile Include="IoC\SvgContainerExtensions.cs" />
     <Compile Include="Paint\SvgMarkerPosition.cs" />
     <Compile Include="Parsers\ISvgPathHandler.cs" />
     <Compile Include="Parsers\ISvgPointsHandler.cs" />
@@ -447,6 +452,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Resources\Root.cs" />
+    <Compile Include="Scripting\ScriptCss.cs" />
+    <Compile Include="Scripting\ScriptDom.cs" />
+    <Compile Include="Scripting\ScriptEvents.cs" />
+    <Compile Include="Scripting\ScriptObject.cs" />
+    <Compile Include="Scripting\ScriptSmil.cs" />
+    <Compile Include="Scripting\ScriptStyleSheets.cs" />
+    <Compile Include="Scripting\ScriptSvg.cs" />
+    <Compile Include="Scripting\ScriptViews.cs" />
+    <Compile Include="Scripting\ScriptWindow.cs" />
+    <Compile Include="Scripting\ScriptAnimations.cs" />
+    <Compile Include="Scripting\ScriptBasicTypes.cs" />
+    <Compile Include="Scripting\ScriptFilters.cs" />
+    <Compile Include="Scripting\ScriptMisc.cs" />
+    <Compile Include="Scripting\ScriptPaths.cs" />
+    <Compile Include="Scripting\ScriptTexts.cs" />
     <Compile Include="Scripting\SvgScriptElement.cs">
       <SubType>Code</SubType>
     </Compile>

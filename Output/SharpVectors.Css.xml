@@ -153,13 +153,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssFontFaceRule">
             <summary>
-            The CSSFontFaceRule interface represents a @font-face rule in a CSS style sheet. 
-            The @font-face rule is used to hold a set of font descriptions.
-            </summary>
-        </member>
-        <member name="M:SharpVectors.Dom.Css.CssFontFaceRule.Parse(System.String@,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
-            <summary>
-            Parses a string containging CSS and creates a CssFontFaceRule instance if found as the first content
+            The <see cref="T:SharpVectors.Dom.Css.ICssFontFaceRule"/> interface represents a <c>@font-face</c> rule in a CSS style sheet. 
+            The <c>@font-face</c> rule is used to hold a set of font descriptions.
             </summary>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssFontFaceRule.#ctor(System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
@@ -168,7 +163,8 @@
             </summary>
             <param name="parent">The parent rule or parent stylesheet</param>
             <param name="readOnly">True if this instance is readonly</param>
-            <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string 
+            used for matching. These needs to be put back use the DereplaceStrings method</param>
             <param name="origin">The type of CssStyleSheet</param>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssFontFaceRule.Style">
@@ -186,6 +182,11 @@
             <summary>
             The parsable textual representation of the rule. This reflects the current state of the 
             rule and not its initial value.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssFontFaceRule.Parse(System.String@,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Parses a string containging CSS and creates a CssFontFaceRule instance if found as the first content
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Css.CssImportRule">
@@ -584,16 +585,16 @@
         <member name="T:SharpVectors.Dom.Css.CssStyleDeclaration">
             <summary>
             <para>
-            The CSSStyleDeclaration interface represents a single CSS declaration block. This interface may 
-            be used to determine the style properties currently set in a block or to set style properties 
-            explicitly within the block.
+            The <see cref="T:SharpVectors.Dom.Css.ICssStyleDeclaration"/> interface represents a single CSS declaration block. 
+            This interface may be used to determine the style properties currently set in a block or 
+            to set style properties explicitly within the block.
             </para>
             <para>
-            While an implementation may not recognize all CSS properties within a CSS declaration block, it is 
-            expected to provide access to all specified properties in the style sheet through the 
-            CSSStyleDeclaration interface. Furthermore, implementations that support a specific level of CSS 
-            should correctly handle CSS shorthand properties for that level. For a further discussion of 
-            shorthand properties, see the CSS2Properties interface.
+            While an implementation may not recognize all CSS properties within a CSS declaration block, 
+            it is expected to provide access to all specified properties in the style sheet through the 
+            <see cref="T:SharpVectors.Dom.Css.ICssStyleDeclaration"/> interface. Furthermore, implementations that support a 
+            specific level of CSS should correctly handle CSS shorthand properties for that level. 
+            For a further discussion of shorthand properties, see the CSS2Properties interface.
             </para>
             <para>
             This interface is also used to provide a read-only access to the computed values of an element. 
@@ -655,7 +656,8 @@
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyPriority(System.String)">
             <summary>
-            Used to retrieve the priority of a CSS property (e.g. the "important" qualifier) if the property has been explicitly set in this declaration block.
+            Used to retrieve the priority of a CSS property (e.g. the "important" qualifier) if the property 
+            has been explicitly set in this declaration block.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
             <returns>A string representing the priority (e.g. "important") if one exists. The empty string if none exists.</returns>
@@ -665,22 +667,38 @@
             Used to remove a CSS property if it has been explicitly set within this declaration block.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set or the property name does not correspond to a known CSS property.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns the empty string if the property has not been set or the property name does not correspond 
+            to a known CSS property.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly 
+            or the property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyCssValue(System.String)">
             <summary>
-            Used to retrieve the object representation of the value of a CSS property if it has been explicitly set within this declaration block. This method returns null if the property is a shorthand property. Shorthand property values can only be accessed and modified as strings, using the getPropertyValue and setProperty methods.
+            Used to retrieve the object representation of the value of a CSS property if it has been explicitly set 
+            within this declaration block. This method returns null if the property is a shorthand property. 
+            Shorthand property values can only be accessed and modified as strings, using the getPropertyValue and 
+            setProperty methods.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns null if the property has not been set.</returns>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns null if the property has not been set.</returns>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyValue(System.String)">
             <summary>
             Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns the empty string if the property has not been set.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyValue(System.String[])">
+            <summary>
+            Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
+            </summary>
+            <param name="propertyNames">The name of the CSS property. See the CSS property index.</param>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns the empty string if the property has not been set.</returns>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.ParentRule">
             <summary>
@@ -689,19 +707,24 @@
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.Length">
             <summary>
-            The number of properties that have been explicitly set in this declaration block. The range of valid indices is 0 to length-1 inclusive.
+            The number of properties that have been explicitly set in this declaration block. 
+            The range of valid indices is 0 to length-1 inclusive.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.CssText">
             <summary>
-            The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.
+            The parsable textual representation of the declaration block (excluding the surrounding curly braces). 
+            Setting this attribute will result in the parsing of the new value and resetting of all the properties 
+            in the declaration block including the removal or addition of properties.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
             <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.Item(System.UInt64)">
             <summary>
-            Used to retrieve the properties that have been explicitly set in this declaration block. The order of the properties retrieved using this method does not have to be the order in which they were set. This method can be used to iterate over all properties in this declaration block.
+            Used to retrieve the properties that have been explicitly set in this declaration block. 
+            The order of the properties retrieved using this method does not have to be the order in which they were set. 
+            This method can be used to iterate over all properties in this declaration block.
             The name of the property at this ordinal position. The empty string if no property exists at this position.
             </summary>
         </member>
@@ -758,7 +781,7 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssStyleSheet">
             <summary>
-            The CSSStyleSheet interface is a concrete interface used to represent a CSS style sheet i.e., 
+            The <see cref="T:SharpVectors.Dom.Css.ICssStyleSheet"/> interface is a concrete interface used to represent a CSS style sheet i.e., 
             a style sheet whose content type is "text/css".
             </summary>
         </member>
@@ -1096,7 +1119,7 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssColor">
             <summary>
-            The RGBColor interface is used to represent any RGB color value. 
+            The RGB-Color interface is used to represent any RGB color value. 
             </summary>
             <remarks>
             <para>

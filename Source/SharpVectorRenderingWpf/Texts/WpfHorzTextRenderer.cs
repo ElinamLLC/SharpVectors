@@ -127,16 +127,16 @@ namespace SharpVectors.Renderers.Texts
 
             var typeFace = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
 
-            bool isRightToLeft = false;
-            var xmlLang = _textElement.XmlLang;
-            if (!string.IsNullOrWhiteSpace(xmlLang))
-            {
-                if (string.Equals(xmlLang, "ar", StringComparison.OrdinalIgnoreCase)      // Arabic language
-                    || string.Equals(xmlLang, "he", StringComparison.OrdinalIgnoreCase))  // Hebrew language
-                {
-                    isRightToLeft = true;
-                }
-            }
+            //bool isRightToLeft = false;
+            //var xmlLang = _textElement.XmlLang;
+            //if (!string.IsNullOrWhiteSpace(xmlLang))
+            //{
+            //    if (string.Equals(xmlLang, "ar", StringComparison.OrdinalIgnoreCase)      // Arabic language
+            //        || string.Equals(xmlLang, "he", StringComparison.OrdinalIgnoreCase))  // Hebrew language
+            //    {
+            //        isRightToLeft = true;
+            //    }
+            //}
 
             if (hasLetterSpacing || hasWordSpacing || textPositions != null)
             {

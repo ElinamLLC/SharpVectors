@@ -19,16 +19,16 @@ namespace SharpVectors.Dom.Svg
 
         #region Constructors and Destructor
 
-        public SvgSymbolElement(string prefix, string localname, string ns, SvgDocument doc) 
-            : base(prefix, localname, ns, doc) 
-		{
-			_externalResourcesRequired = new SvgExternalResourcesRequired(this);
-			_fitToViewBox              = new SvgFitToViewBox(this);
-		}
+        public SvgSymbolElement(string prefix, string localname, string ns, SvgDocument doc)
+            : base(prefix, localname, ns, doc)
+        {
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _fitToViewBox = new SvgFitToViewBox(this);
+        }
 
         #endregion
 
-        #region ISvgElement Members
+        #region ISvgSymbolElement Members
 
         /// <summary>
         /// Corresponds to attribute x on the given 'svg' element.
@@ -127,10 +127,9 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override bool IsRenderable
         {
-            get
-            {
+            get {
                 XmlNode parentNode = this.ParentNode;
-                if (parentNode != null && string.Equals(parentNode.LocalName, 
+                if (parentNode != null && string.Equals(parentNode.LocalName,
                     "use", StringComparison.Ordinal))
                 {
                     return true;
@@ -149,23 +148,21 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Containment;
             }
         }
 
         #endregion
 
-		#region ISvgExternalResourcesRequired Members
+        #region ISvgExternalResourcesRequired Members
 
-		public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return _externalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
 
         #endregion
 
@@ -181,21 +178,19 @@ namespace SharpVectors.Dom.Svg
         #region ISvgFitToViewBox Members
 
         public ISvgAnimatedRect ViewBox
-		{
-			get
-			{
-				return _fitToViewBox.ViewBox;
-			}
-		}
+        {
+            get {
+                return _fitToViewBox.ViewBox;
+            }
+        }
 
-		public ISvgAnimatedPreserveAspectRatio PreserveAspectRatio
-		{
-			get
-			{
-				return _fitToViewBox.PreserveAspectRatio;
-			}
-		}
+        public ISvgAnimatedPreserveAspectRatio PreserveAspectRatio
+        {
+            get {
+                return _fitToViewBox.PreserveAspectRatio;
+            }
+        }
 
-        #endregion   
-	}
+        #endregion
+    }
 }

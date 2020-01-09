@@ -44,9 +44,6 @@
     <Reference Include="ICSharpCode.TextEditor">
       <HintPath>..\..\Libraries\ICSharpCode.TextEditor.dll</HintPath>
     </Reference>
-    <Reference Include="SharpVectors.FastColoredTextBox">
-      <HintPath>..\..\Libraries\SharpVectors.FastColoredTextBox.dll</HintPath>
-    </Reference>
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>

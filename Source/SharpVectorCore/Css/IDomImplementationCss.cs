@@ -8,8 +8,8 @@ namespace SharpVectors.Dom.Css
     /// This interface should inherit from IDomImplementation but System.Xml does not have 
     /// this interface, just a class. You can not inherit from a class in an interface.
 	/// </remarks>	
-	public interface IDomImplementationCss
-	{
+	public interface IDomImplementationCss : IDomImplementation
+    {
 		/// <summary>
 		/// Creates a new CSSStyleSheet.
 		/// </summary>

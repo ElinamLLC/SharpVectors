@@ -100,7 +100,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CssConstants.cs" />
+    <Compile Include="Events\IEventListener.cs" />
+    <Compile Include="IDomTimeStamp.cs" />
     <Compile Include="IElementTimeControl.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="INamedNodeMap.cs" />
+    <Compile Include="INotation.cs" />
+    <Compile Include="Scripting\IScriptCss.cs" />
+    <Compile Include="Scripting\IScriptDom.cs" />
+    <Compile Include="Scripting\IScriptEvents.cs" />
+    <Compile Include="Scripting\IScriptableObject.cs" />
+    <Compile Include="Scripting\IScriptSmil.cs" />
+    <Compile Include="Scripting\IScriptStyleSheets.cs" />
+    <Compile Include="Scripting\IScriptSvg.cs" />
+    <Compile Include="Scripting\IScriptViews.cs" />
+    <Compile Include="Scripting\IScriptWindow.cs" />
+    <Compile Include="Scripting\ISvgScriptClosureHandler.cs" />
+    <Compile Include="Scripting\ISvgScriptEngine.cs" />
+    <Compile Include="Scripting\IScriptEnums.cs" />
+    <Compile Include="Scripting\ISvgScriptEventHandler.cs" />
+    <Compile Include="Scripting\ISvgScriptEngineProvider.cs" />
+    <Compile Include="Scripting\ISvgScriptReferenceCache.cs" />
+    <Compile Include="Scripting\ISvgScriptTimerHandler.cs" />
     <Compile Include="SvgConstants.cs" />
     <Compile Include="Svg\Animations\ISvgAnimateColorElement.cs" />
     <Compile Include="Svg\Animations\ISvgAnimateElement.cs" />
@@ -111,13 +132,18 @@
     <Compile Include="Svg\Animations\ISvgAnimationElement.cs" />
     <Compile Include="Events\ITimeEvent.cs" />
     <Compile Include="IElementVisitor.cs" />
+    <Compile Include="Svg\BasicTypes\ISvgZoomEvent.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathMethod.cs" />
     <Compile Include="Svg\BasicTypes\SvgTextPathSpacing.cs" />
     <Compile Include="Svg\ClippingMasking\ISharpMarkerHost.cs" />
     <Compile Include="Svg\ClippingMasking\ISvgClipPathElement.cs" />
     <Compile Include="Svg\ClippingMasking\ISvgMaskElement.cs" />
+    <Compile Include="Svg\DocumentStructure\IGetSvgDocument.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileElement.cs" />
     <Compile Include="Svg\DocumentStructure\ISvgColorProfileRule.cs" />
+    <Compile Include="Svg\DocumentStructure\ISvgCssRule.cs" />
+    <Compile Include="Svg\DocumentStructure\ISvgForeignObjectElement.cs" />
+    <Compile Include="Svg\DocumentStructure\ISvgStyleElement.cs" />
     <Compile Include="Svg\Fills\ISvgSolidColorElement.cs" />
     <Compile Include="Svg\Painting\SvgMarker.cs" />
     <Compile Include="Svg\SvgTransformF.cs" />
@@ -742,6 +768,7 @@
     <Compile Include="Svg\Text\ISvgAltGlyphDefElement.cs" />
     <Compile Include="Svg\Text\ISvgAltGlyphElement.cs" />
     <Compile Include="Svg\Text\ISvgAltGlyphItemElement.cs" />
+    <Compile Include="Svg\Text\ISvgDefinitionSrcElement.cs" />
     <Compile Include="Svg\Text\ISvgFontElement.cs" />
     <Compile Include="Svg\Text\ISvgFontFaceElement.cs" />
     <Compile Include="Svg\Text\ISvgFontFaceFormatElement.cs" />

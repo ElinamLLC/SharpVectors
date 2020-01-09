@@ -9,8 +9,8 @@ namespace SharpVectors.Dom.Css
 	/// of the CSSStyleDeclaration interface. A CSSPrimitiveValue object
 	/// only occurs in a context of a CSS property. 
 	/// </summary>
-	public interface ICssPrimitiveValue
-	{
+	public interface ICssPrimitiveValue : ICssValue
+    {
 		/// <summary>
 		/// The type of the value as defined by the constants specified above.
 		/// </summary>

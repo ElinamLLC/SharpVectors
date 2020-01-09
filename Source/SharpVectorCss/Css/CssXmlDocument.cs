@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using SharpVectors.Net;
 using SharpVectors.Dom.Stylesheets;
+using SharpVectors.Dom.Views;
 
 namespace SharpVectors.Dom.Css
 {
@@ -144,6 +145,8 @@ namespace SharpVectors.Dom.Css
                 return _isLoaded;
             }
         }
+
+        public IDocumentView Document { get => throw new NotImplementedException(); }
 
         #endregion
 

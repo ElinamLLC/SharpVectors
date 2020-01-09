@@ -103,6 +103,16 @@
             This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Animation"/>
             </value>
         </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedInteger">
+            <summary>
+            An implementation of the <see cref="T:SharpVectors.Dom.Svg.ISvgAnimatedInteger"/> interface.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontFamily">
+            <summary>
+            This provides information on the OpenType and Web fonts to the <see cref="T:SharpVectors.Dom.Svg.SvgDocument"/>.
+            </summary>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.IsRenderable">
             <summary>
             Gets a value indicating whether this SVG element is renderable.
@@ -139,6 +149,11 @@
             This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Masking"/>
             </value>
         </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgStyleElement">
+            <summary>
+            The SvgStyleElement interface corresponds to the 'style' element. 
+            </summary>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgResolveNamespaceEventArgs">
             <summary>
             Arguments when namespace is trying to be resolved
@@ -169,6 +184,1090 @@
             </summary>
             <value>The URI.</value>
         </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgSolidColorElement">
+            <summary>
+            An SVG object represents an 'solidcolor' element in the DOM.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSolidColorElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSolidColorElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement">
+            <summary>
+            This <see langword="abstract"/> defines a base class used by the component transfer function interfaces. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Type">
+            <summary>
+            Corresponds to attribute 'type' on the given element. 
+            </summary>
+            <value>
+            <para>type = "identity | table | discrete | linear | gamma" </para>
+            <para>Indicates the type of component transfer function. The type of function determines the applicability 
+            of the other attributes.</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterTransferType"/>. The default value is 
+            <see cref="F:SharpVectors.Dom.Svg.SvgFilterTransferType.Identity"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.TableValues">
+            <summary>
+            Corresponds to attribute 'tableValues' on the given element. 
+            </summary>
+            <value>
+            <para>tableValues = "(list of numbers)" </para>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Slope">
+            <summary>
+            When type="linear", the slope of the linear function.
+            </summary>
+            <value>
+            <para>slope = "number"</para>
+            The initial value for slope is <c>1</c>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Intercept">
+            <summary>
+            When type="linear", the intercept of the linear function.
+            </summary>
+            <value>
+            <para>slope = "number"</para>
+            The initial value for intercept is <c>0</c>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Amplitude">
+            <summary>
+            When type="gamma", the amplitude of the gamma function.
+            </summary>
+            <value>
+            <para>amplitude = "number" </para>
+            The initial value for amplitude is <c>1</c>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Exponent">
+            <summary>
+            When type="gamma", the exponent of the gamma function.
+            </summary>
+            <value>
+            <para>exponent = "number" </para>
+            The initial value for exponent is <c>1</c>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Offset">
+            <summary>
+            When type="gamma", the offset of the gamma function.
+            </summary>
+            <value>
+            <para>offset = "number" </para>
+            The initial value for offset is <c>0</c>.
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFEBlendElement">
+            <summary>
+            This filter blends two objects together using commonly used imaging software blending modes. 
+            It performs a pixel-wise combination of two input images.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEBlendElement.Mode">
+            <summary>
+            One of the blend modes defined by 'Compositing and Blending Level 1' with the input in representing the source 
+            <c>Cs</c> and the second input <c>in2</c> representing the backdrop <c>Cb</c>. The output of this filter 
+            primitive <c>Cm</c> is the result of blending <c>Cs</c> with <c>Cb</c>.
+            </summary>
+            <value>
+            <para>mode = "blend-mode" </para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterBlendMode"/>. The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterBlendMode.Normal"/>.
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEBlendElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEBlendElement.In2">
+            <summary>
+            Corresponds to attribute <c>in2</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEColorMatrixElement.Type">
+            <summary>
+            </summary>
+            <value>
+            <para></para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterColorMatrix"/>. 
+            The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterColorMatrix.Matrix"/>.
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEColorMatrixElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEComponentTransferElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFECompositeElement.Operator">
+            <summary>
+            </summary>
+            <value>
+            <para></para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterCompositeOperator"/>. 
+            The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterCompositeOperator.Over"/>.
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFECompositeElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFECompositeElement.In2">
+            <summary>
+            Corresponds to attribute <c>in2</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement">
+            <summary>
+            This applies a matrix convolution filter effect. A convolution combines pixels in the input image 
+            with neighboring pixels to produce a resulting image. A wide variety of imaging operations can be 
+            achieved through convolutions, including blurring, edge detection, sharpening, embossing and beveling.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.EdgeMode">
+            <summary>
+            Determines how to extend the input image as necessary with color values so that the matrix operations 
+            can be applied when the kernel is positioned at or near the edge of the input image.
+            </summary>
+            <value>
+            <para>edgeMode = "duplicate | wrap | none"</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterEdgeMode"/>. The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterEdgeMode.Duplicate"/>.
+            </value>
+            <remarks>
+            <para>
+            "duplicate" indicates that the input image is extended along each of its borders as necessary by duplicating 
+            the color values at the given edge of the input image.
+            </para>
+            <para>
+            "wrap" indicates that the input image is extended by taking the color values from the opposite edge of the image.
+            </para>
+            <para>
+            "none" indicates that the input image is extended with pixel values of zero for R, G, B and A.
+            </para>
+            If attribute 'edgeMode' is not specified, then the effect is as if a value of duplicate were specified. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.Bias">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>bias = "number"</para>
+            </value>
+            <remarks>
+            <para>
+            After applying the 'kernelMatrix' to the input image to yield a number and applying the 'divisor', the 
+            'bias' attribute is added to each component.
+            </para>
+            <para>
+            One application of 'bias' is when it is desirable to have .5 gray value be the zero response of the filter. 
+            The bias property shifts the range of the filter. This allows representation of values that would otherwise 
+            be clamped to 0 or 1.
+            </para>
+            If 'bias' is not specified, then the effect is as if a value of 0 were specified.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.Divisor">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>divisor = number</para>
+            </value>
+            <remarks>
+            <para>
+            After applying the <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.KernelMatrix"/> to the input image to yield a number, that number is divided by 'divisor' 
+            to yield the final destination color value. A divisor that is the sum of all the matrix values tends to have 
+            an evening effect on the overall color intensity of the result. It is an error to specify a divisor of zero.
+            </para>
+            <para>
+            The default value is the sum of all values in <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.KernelMatrix"/>, with the exception that if the sum is zero, 
+            then the divisor is set to 1.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.KernelMatrix">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>kernelMatrix = "list of numbers"</para>
+            </value>
+            <remarks>
+            The list of <c>number</c>s that make up the kernel matrix for the convolution. Values are separated by space 
+            characters and/or a comma. The number of entries in the list must equal <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderX"/> times <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderY"/>.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.KernelUnitLengthX">
+            <summary>
+            Corresponds to attribute 'kernelUnitLength' on the given 'feConvolveMatrix' element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.KernelUnitLengthY">
+            <summary>
+            Corresponds to attribute 'kernelUnitLength' on the given 'feConvolveMatrix' element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderX">
+            <summary>
+            Indicates the number of cells in each dimension for 'kernelMatrix'. 
+            </summary>
+            <value>
+            <para>order = "number-optional-number"</para>
+            <para>The values provided must be <c>integer</c>s greater than zero.</para>
+            <para>The first number, <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderX"/>, indicates the number of columns in the matrix. </para>
+            <para>
+            The second number, <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderY"/>, indicates the number of rows in the matrix. 
+            If <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderY"/>is not provided, it defaults to <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderX"/>.
+            </para>
+            </value>
+            <remarks>
+            <para>
+            A typical value is order="3". It is recommended that only small values(e.g., 3) be used; 
+            higher values may result in very high CPU overhead and usually do not produce results that 
+            justify the impact on performance.
+            </para>
+            <para>
+            If the attribute is not specified, the effect is as if a value of <c>3</c> were specified.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderY">
+            <summary>
+            Indicates the number of cells in each dimension for 'kernelMatrix'. 
+            </summary>
+            <value>
+            <para>order = "number-optional-number"</para>
+            <para>The values provided must be <c>integer</c>s greater than zero.</para>
+            <para>The first number, <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderX"/>, indicates the number of columns in the matrix. </para>
+            <para>
+            The second number, <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderY"/>, indicates the number of rows in the matrix. 
+            If <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderY"/>is not provided, it defaults to <see cref="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.OrderX"/>.
+            </para>
+            </value>
+            <remarks>
+            <para>
+            A typical value is order="3". It is recommended that only small values(e.g., 3) be used; 
+            higher values may result in very high CPU overhead and usually do not produce results that 
+            justify the impact on performance.
+            </para>
+            <para>
+            If the attribute is not specified, the effect is as if a value of <c>3</c> were specified.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.TargetX">
+            <summary>
+            Determines the positioning in X of the convolution matrix relative to a given target pixel in the input image. 
+            </summary>
+            <value>
+            <para>targetX = "integer"</para>
+            The leftmost column of the matrix is column number zero. The value must be such that: 
+            <c><![CDATA[ 0 <= targetX < orderX. ]]></c>
+            By default, the convolution matrix is centered in X over each pixel of the input image 
+            (i.e., <c>targetX = floor ( orderX / 2 )</c>).
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.TargetY">
+            <summary>
+            Determines the positioning in Y of the convolution matrix relative to a given target pixel in the input image. 
+            </summary>
+            <value>
+            <para>targetY = "integer"</para>
+            The leftmost column of the matrix is column number zero. The value must be such that: 
+            <c><![CDATA[ 0 <= targetY < orderY. ]]></c>
+            By default, the convolution matrix is centered in Y over each pixel of the input image 
+            (i.e., <c>targetY = floor ( orderY / 2 )</c>).
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEConvolveMatrixElement.PreserveAlpha">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>preserveAlpha = "false | true"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDiffuseLightingElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feDiffuseLighting</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDiffuseLightingElement.SurfaceScale">
+            <summary>
+            Corresponds to attribute 'surfaceScale' on the given 'feDiffuseLighting' element. 
+            </summary>
+            <value>
+            <para>surfaceScale = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDiffuseLightingElement.DiffuseConstant">
+            <summary>
+            Corresponds to attribute 'diffuseConstant' on the given 'feDiffuseLighting' element. 
+            </summary>
+            <value>
+            <para>diffuseConstant = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDiffuseLightingElement.KernelUnitLengthX">
+            <summary>
+            Corresponds to attribute 'kernelUnitLength' on the given 'feDiffuseLighting' element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDiffuseLightingElement.KernelUnitLengthY">
+            <summary>
+            Corresponds to attribute 'kernelUnitLength' on the given 'feDiffuseLighting' element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFEDisplacementMapElement">
+            <summary>
+            This filter primitive uses the pixels values from the image from 'in2' to spatially displace the image from 'in'. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDisplacementMapElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDisplacementMapElement.In2">
+            <summary>
+            Corresponds to attribute <c>in2</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDisplacementMapElement.Scale">
+            <summary>
+            Displacement scale factor. The amount is expressed in the coordinate system established by 
+            attribute 'primitiveUnits' on the 'filter' element. 
+            </summary>
+            <value>
+            <para>scale = "number"</para>
+            <para>When the value of this attribute is <c>0</c>, this operation has no effect on the source image.</para>
+            <para>If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDisplacementMapElement.XChannelSelector">
+            <summary>
+            Indicates which channel from 'in2' to use to displace the pixels in 'in' along the x-axis. 
+            </summary>
+            <value>
+            <para>xChannelSelector = "R | G | B | A"</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterChannelSelector"/>. The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterChannelSelector.A"/>.
+            </value>
+            <remarks>
+            If attribute 'xChannelSelector' is not specified, then the effect is as if a value of A were specified. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDisplacementMapElement.YChannelSelector">
+            <summary>
+            Indicates which channel from 'in2' to use to displace the pixels in 'in' along the y-axis. 
+            </summary>
+            <value>
+            <para>yChannelSelector = "R | G | B | A"</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterChannelSelector"/>. The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterChannelSelector.A"/>.
+            </value>
+            <remarks>
+            If attribute 'yChannelSelector' is not specified, then the effect is as if a value of A were specified. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDistantLightElement.Azimuth">
+            <summary>
+            Direction angle for the light source on the XY plane (clockwise), in degrees from the x axis.
+            </summary>
+            <value>
+            Corresponds to attribute 'azimuth' on the given 'feDistantLight' element. 
+            <para>azimuth = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDistantLightElement.Elevation">
+            <summary>
+            Direction angle for the light source from the XY plane towards the z axis, in degrees. 
+            Note the positive Z-axis points towards the viewer of the content.
+            </summary>
+            <value>
+            Corresponds to attribute 'elevation' on the given 'feDistantLight' element.
+            <para>elevation = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEFloodElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFEGaussianBlurElement">
+            <summary>
+            This filter primitive performs a Gaussian blur on the input image.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEGaussianBlurElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEGaussianBlurElement.StdDeviationX">
+            <summary>
+            
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            <para>
+            The standard deviation for the blur operation. If two <c>number</c>s are provided, the first number represents 
+            a standard deviation value along the x-axis of the coordinate system established by attribute 'primitiveUnits' 
+            on the 'filter' element. The second value represents a standard deviation in Y. If one number is provided, 
+            then that value is used for both X and Y.
+            </para>
+            <para>
+            A negative value is an error(see Error processing). A value of zero disables the effect of the given filter 
+            primitive(i.e., the result is the filter input image). 
+            </para>
+            <para>
+            If 'stdDeviation' is 0 in only one of X or Y, then the effect is that the blur is only applied in the direction 
+            that has a non-zero value.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEGaussianBlurElement.StdDeviationY">
+            <summary>
+            
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            <para>
+            The standard deviation for the blur operation. If two <c>number</c>s are provided, the first number represents 
+            a standard deviation value along the x-axis of the coordinate system established by attribute 'primitiveUnits' 
+            on the 'filter' element. The second value represents a standard deviation in Y. If one number is provided, 
+            then that value is used for both X and Y.
+            </para>
+            <para>
+            A negative value is an error(see Error processing). A value of zero disables the effect of the given filter 
+            primitive(i.e., the result is the filter input image). 
+            </para>
+            <para>
+            If 'stdDeviation' is 0 in only one of X or Y, then the effect is that the blur is only applied in the direction 
+            that has a non-zero value.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEMergeNodeElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEMorphologyElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEMorphologyElement.Operator">
+            <summary>
+            A keyword indicating whether to erode (i.e., thin) or dilate (fatten) the source graphic. 
+            </summary>
+            <value>
+            <para>operator = "erode | dilate"</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterMorphologyOperator"/>. 
+            The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterMorphologyOperator.Erode"/>.
+            </value>
+            <remarks>
+            If attribute 'operator' is not specified, then the effect is as if a value of erode were specified. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEMorphologyElement.RadiusX">
+            <summary>
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            <para>
+            The radius (or radii) for the operation. If two <c>number</c>s are provided, the first number represents a x-radius 
+            and the second value represents a y-radius. If one number is provided, then that value is used for both X and Y. 
+            The values are in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </para>
+            <para>
+            A negative value is an error(see Error processing). A value of zero disables the effect of the given filter 
+            primitive(i.e., the result is a transparent black image).
+            </para>
+            <para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEMorphologyElement.RadiusY">
+            <summary>
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            <para>
+            The radius (or radii) for the operation. If two <c>number</c>s are provided, the first number represents a x-radius 
+            and the second value represents a y-radius. If one number is provided, then that value is used for both X and Y. 
+            The values are in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </para>
+            <para>
+            A negative value is an error(see Error processing). A value of zero disables the effect of the given filter 
+            primitive(i.e., the result is a transparent black image).
+            </para>
+            <para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEOffsetElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEOffsetElement.Dx">
+            <summary>
+            The amount to offset the input graphic along the x-axis. The offset amount is expressed in the 
+            coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </summary>
+            <value>
+            <para>dx = "number"</para>
+            </value>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            <remarks>
+            Corresponds to attribute 'dx' on the given 'feOffset' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEOffsetElement.Dy">
+            <summary>
+            The amount to offset the input graphic along the y-axis. The offset amount is expressed in the 
+            coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </summary>
+            <value>
+            <para>dy = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'dy' on the given 'feOffset' element. 
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFEPointLightElement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEPointLightElement.X">
+            <summary>
+            X location for the light source in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </summary>
+            <value>
+            <para>x = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'x' on the given 'fePointLight' element.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEPointLightElement.Y">
+            <summary>
+            Y location for the light source in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </summary>
+            <value>
+            <para>y = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'y' on the given 'fePointLight' element.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEPointLightElement.Z">
+            <summary>
+            Z location for the light source in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element, 
+            assuming that, in the initial coordinate system, the positive Z-axis comes out towards the person viewing the content 
+            and assuming that one unit along the Z-axis equals one unit in X and Y.
+            </summary>
+            <value>
+            <para>z = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of <c>0</c> were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'z' on the given 'fePointLight' element. 
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFESpecularLightingElement">
+            <summary>
+            This filter primitive lights a source graphic using the alpha channel as a bump map. The resulting image is an 
+            RGBA image based on the light color. The lighting calculation follows the standard specular component of the 
+            Phong lighting model. The resulting image depends on the light color, light position and surface geometry of 
+            the input bump map. The result of the lighting calculation is added. The filter primitive assumes that the 
+            viewer is at infinity in the z direction (i.e., the unit vector in the eye direction is (0,0,1) everywhere).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpecularLightingElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            Corresponds to attribute 'in' on the given 'feSpecularLighting' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpecularLightingElement.SurfaceScale">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>surfaceScale = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'surfaceScale' on the given 'feSpecularLighting' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpecularLightingElement.SpecularConstant">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>specularConstant = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'specularConstant' on the given 'feSpecularLighting' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpecularLightingElement.SpecularExponent">
+            <summary>
+            
+            </summary>
+            <value>
+            <para>specularExponent = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'specularExponent' on the given 'feSpecularLighting' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpecularLightingElement.KernelUnitLengthX">
+            <summary>
+            
+            Corresponds to attribute 'kernelUnitLength' on the given 'feSpecularLighting' element.
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            The first number is the <c>dx</c> value. The second number is the <c>dy</c> value. If the <c>dy</c> value is not specified, 
+            it defaults to the same value as <c>dx</c>. Indicates the intended distance in current filter units (i.e., units as 
+            determined by the value of attribute 'primitiveUnits') for dx and dy, respectively, in the surface normal calculation 
+            formulas. By specifying value(s) for 'kernelUnitLength', the kernel becomes defined in a scalable, abstract coordinate 
+            system. If 'kernelUnitLength' is not specified, the dx and dy values should represent very small deltas relative to a 
+            given (x,y) position, which might be implemented in some cases as one pixel in the intermediate image offscreen bitmap, 
+            which is a pixel-based coordinate system, and thus potentially not scalable. For some level of consistency across 
+            display media and user agents, it is necessary that a value be provided for at least one of 'filterRes' and 
+            'kernelUnitLength'. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpecularLightingElement.KernelUnitLengthY">
+            <summary>
+            
+            Corresponds to attribute 'kernelUnitLength' on the given 'feSpecularLighting' element. 
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            The first number is the <c>dx</c> value. The second number is the <c>dy</c> value. If the <c>dy</c> value is not specified, 
+            it defaults to the same value as <c>dx</c>. Indicates the intended distance in current filter units (i.e., units as 
+            determined by the value of attribute 'primitiveUnits') for dx and dy, respectively, in the surface normal calculation 
+            formulas. By specifying value(s) for 'kernelUnitLength', the kernel becomes defined in a scalable, abstract coordinate 
+            system. If 'kernelUnitLength' is not specified, the dx and dy values should represent very small deltas relative to a 
+            given (x,y) position, which might be implemented in some cases as one pixel in the intermediate image offscreen bitmap, 
+            which is a pixel-based coordinate system, and thus potentially not scalable. For some level of consistency across 
+            display media and user agents, it is necessary that a value be provided for at least one of 'filterRes' and 
+            'kernelUnitLength'. 
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFESpotLightElement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.X">
+            <summary>
+            X location for the light source in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </summary>
+            <value>
+            <para>x = "number"</para>
+            </value>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            <remarks>
+            Corresponds to attribute 'x' on the given 'feSpotLight' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.Y">
+            <summary>
+            Y location for the light source in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element.
+            </summary>
+            <value>
+            <para>y = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'y' on the given 'feSpotLight' element.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.Z">
+            <summary>
+            Z location for the light source in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element, 
+            assuming that, in the initial coordinate system, the positive Z-axis comes out towards the person viewing the content and 
+            assuming that one unit along the Z-axis equals one unit in X and Y.
+            </summary>
+            <value>
+            <para>z = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'z' on the given 'feSpotLight' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.PointsAtX">
+            <summary>
+            X location in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element of the point 
+            at which the light source is pointing.
+            </summary>
+            <value>
+            <para>pointsAtX = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'pointsAtX' on the given 'feSpotLight' element.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.PointsAtY">
+            <summary>
+            Y location in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element of the point 
+            at which the light source is pointing.
+            </summary>
+            <value>
+            <para>pointsAtY = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'pointsAtY' on the given 'feSpotLight' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.PointsAtZ">
+            <summary>
+            Z location in the coordinate system established by attribute 'primitiveUnits' on the 'filter' element of the point 
+            at which the light source is pointing, assuming that, in the initial coordinate system, the positive Z-axis comes 
+            out towards the person viewing the content and assuming that one unit along the Z-axis equals one unit in X and Y. 
+            </summary>
+            <value>
+            <para>pointsAtZ = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'pointsAtZ' on the given 'feSpotLight' element.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.SpecularExponent">
+            <summary>
+            Exponent value controlling the focus for the light source.
+            </summary>
+            <value>
+            <para>specularExponent = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'specularExponent' on the given 'feSpotLight' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.LimitingConeAngle">
+            <summary>
+            A limiting cone which restricts the region where the light is projected. No light is projected outside the cone. 
+            'limitingConeAngle' represents the angle in degrees between the spot light axis (i.e. the axis between the light 
+            source and the point to which it is pointing at) and the spot light cone. User agents should apply a smoothing 
+            technique such as anti-aliasing at the boundary of the cone.
+            </summary>
+            <value>
+            <para>limitingConeAngle = "number"</para>
+            If no value is specified, then no limiting cone will be applied.
+            </value>
+            <remarks>
+            Corresponds to attribute 'limitingConeAngle' on the given 'feSpotLight' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETileElement.In1">
+            <summary>
+            Corresponds to attribute <c>in</c> on the given <c>feBlend</c> element. 
+            </summary>
+            <value>
+            <para> in = "SourceGraphic | SourceAlpha | BackgroundImage | BackgroundAlpha | 
+                        FillPaint | StrokePaint | filter-primitive-reference"</para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFETurbulenceElement">
+            <summary>
+            This filter primitive creates an image using the Perlin turbulence function. It allows the synthesis of 
+            artificial textures like clouds or marble.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETurbulenceElement.BaseFrequencyX">
+            <summary>
+            Corresponds to attribute 'baseFrequency' on the given 'feTurbulence' element. 
+            Contains the X component of the 'baseFrequency' attribute.
+            </summary>
+            <value>
+            <para>baseFrequency = "number-optional-number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            The base frequency (frequencies) parameter(s) for the noise function. If two <c>number</c>s are provided, 
+            the first number represents a base frequency in the X direction and the second value represents a base 
+            frequency in the Y direction. If one number is provided, then that value is used for both X and Y.
+            A negative value for base frequency is an error (see Error processing).
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETurbulenceElement.BaseFrequencyY">
+            <summary>
+            Corresponds to attribute 'baseFrequency' on the given 'feTurbulence' element. 
+            Contains the Y component of the (possibly computed automatically) 'baseFrequency' attribute. 
+            </summary>
+            <value>
+            <para>baseFrequency = "number-optional-number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified.
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETurbulenceElement.NumOctaves">
+            <summary>
+            The numOctaves parameter for the noise function.
+            </summary>
+            <value>
+            <para>numOctaves = "integer"</para>
+            If the attribute is not specified, then the effect is as if a value of 1 were specified.
+            </value>
+            <remarks>
+            Corresponds to attribute 'numOctaves' on the given 'feTurbulence' element.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETurbulenceElement.Seed">
+            <summary>
+            The starting number for the pseudo random number generator.
+            </summary>
+            <value>
+            <para>seed = "number"</para>
+            If the attribute is not specified, then the effect is as if a value of 0 were specified. 
+            When the seed number is handed over to the algorithm above it must first be truncated, i.e. 
+            rounded to the closest integer value towards zero.
+            </value>
+            <remarks>
+            Corresponds to attribute 'seed' on the given 'feTurbulence' element. 
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETurbulenceElement.StitchTiles">
+            <summary>
+            Corresponds to attribute 'stitchTiles' on the given 'feTurbulence' element. 
+            </summary>
+            <value>
+            <para>stitchTiles = "stitch | noStitch"</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterStitchOption"/>. 
+            The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterStitchOption.NoStitch"/>.
+            </value>
+            <remarks>
+            <para>
+            If stitchTiles="noStitch", no attempt it made to achieve smooth transitions at the border of tiles which contain a 
+            turbulence function. Sometimes the result will show clear discontinuities at the tile borders.
+            If stitchTiles = "stitch", then the user agent will automatically adjust baseFrequency-x and baseFrequency-y values 
+            such that the feTurbulence node's width and height (i.e., the width and height of the current subregion) contains 
+            an integral number of the Perlin tile width and height for the first octave. The baseFrequency will be adjusted up 
+            or down depending on which way has the smallest relative (not absolute) change as follows: Given the frequency, 
+            calculate lowFreq=floor(width*frequency)/width and hiFreq=ceil(width*frequency)/width. 
+            If <c><![CDATA[frequency/lowFreq < hiFreq/frequency]]></c> then use lowFreq, else use hiFreq. 
+            While generating turbulence values, generate lattice vectors as normal for Perlin Noise, except for those 
+            lattice points that lie on the right or bottom edges of the active area (the size of the resulting tile). 
+            In those cases, copy the lattice vector from the opposite edge of the active area. 
+            </para>
+            <para>
+            If attribute 'stitchTiles' is not specified, then the effect is as if a value of noStitch were specified. 
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFETurbulenceElement.Type">
+            <summary>
+            Indicates whether the filter primitive should perform a noise or turbulence function. 
+            </summary>
+            <value>
+            <para>type = "fractalNoise | turbulence"</para>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Svg.SvgFilterTurbulenceType"/>. 
+            The default value is <see cref="F:SharpVectors.Dom.Svg.SvgFilterTurbulenceType.Turbulence"/>.
+            </value>
+            <remarks>
+            Corresponds to attribute 'type' on the given 'feTurbulence' element.
+            If attribute 'type' is not specified, then the effect is as if a value of turbulence were specified.
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes">
+            <summary>
+            This is <see langword="abstract"/> class for filter primitive attributes that are available for all filter primitives:
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.X" -->
+        <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Y" -->
+        <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Width" -->
+        <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Height" -->
+        <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Result" -->
         <member name="T:SharpVectors.Dom.Svg.ISvgPathHandler">
             <summary>
             This interface must be implemented and then registred as the handler of a <c>PathParser</c> 
@@ -418,19 +1517,19 @@
         <member name="M:SharpVectors.Dom.Svg.ISvgPointsHandler.StartPoints">
             <summary>
             Invoked when the points attribute starts. </summary>
-            <exception cref="!:FormatException"> if an error occured while processing the points </exception>
+            <exception cref="T:System.FormatException"> if an error occured while processing the points </exception>
         </member>
         <member name="M:SharpVectors.Dom.Svg.ISvgPointsHandler.Point(System.Single,System.Single)">
             <summary>
             Invoked when a point has been parsed. </summary>
             <param name="x"> the x coordinate of the point </param>
             <param name="y"> the y coordinate of the point </param>
-            <exception cref="!:FormatException"> if an error occured while processing the points </exception>
+            <exception cref="T:System.FormatException"> if an error occured while processing the points </exception>
         </member>
         <member name="M:SharpVectors.Dom.Svg.ISvgPointsHandler.EndPoints">
             <summary>
             Invoked when the points attribute ends. </summary>
-            <exception cref="!:FormatException"> if an error occured while processing the points </exception>
+            <exception cref="T:System.FormatException"> if an error occured while processing the points </exception>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgNumberParser">
             <summary>
@@ -675,16 +1774,16 @@
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgPointsParser.Handler">
             <summary>
-            Allows an application to register a points handler.
-            
-            <para>If the application does not register a handler, all
-            events reported by the parser will be silently ignored.
-            
+            Gets or sets an application <see cref="T:SharpVectors.Dom.Svg.ISvgPointsHandler"/> implementation to register a points handler.
+            </summary>
+            <value>The transform list handler.</value>
+            <remarks>
+            <para>
+            If the application does not register a handler, all events reported by the parser will be silently ignored.
             </para>
-            <para>Applications may register a new or different handler in the
-            middle of a parse, and the parser must begin using the new
-            handler immediately.</para> </summary>
-            <param name="handler"> The transform list handler. </param>
+            <para>Applications may register a new or different handler in the middle of a parse, and the parser must 
+            begin using the new handler immediately.</para> 
+            </remarks>
         </member>
         <member name="M:SharpVectors.Dom.Svg.SvgPointsParser.DoParse">
             <summary>
@@ -1219,7 +2318,7 @@
             </summary>
             <remarks>
             <para>
-            When an 'svg'  element is embedded inline as a component of a document from another namespace, 
+            When an 'svg' element is embedded inline as a component of a document from another namespace, 
             such as when an 'svg' element is embedded inline within an XHTML document
             [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>], then an 
             <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will not exist; instead, the root object in the 
@@ -1472,12 +2571,12 @@
         <member name="T:SharpVectors.Dom.Svg.SvgSvgElement">
             <summary>
             <para>
-            A key interface definition is the SVGSVGElement interface, which is the interface that corresponds 
+            A key interface definition is the <see cref="T:SharpVectors.Dom.Svg.ISvgSvgElement"/> interface, which is the interface that corresponds 
             to the 'svg' element. This interface contains various miscellaneous commonly-used utility methods, 
             such as matrix operations and the ability to control the time of redraw on visual rendering devices.
             </para>
             <para>
-            SVGSVGElement extends ViewCSS and DocumentCSS to provide access to the 
+            <see cref="T:SharpVectors.Dom.Svg.ISvgSvgElement"/> extends ViewCSS and DocumentCSS to provide access to the 
             computed values of properties and the override style sheet as described in DOM2. 
             </para>
             </summary>
@@ -1870,8 +2969,151 @@
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgFilterElement">
             <summary>
-            Summary description for SvgFilterElement.
+            An implementation of the <see cref="T:SharpVectors.Dom.Svg.ISvgFilterElement"/> interface, which corresponds to the <c>'filter'</c> element.
             </summary>
+            <remarks>
+            <para>A filter effect is a graphical operation that is applied to an element as it is drawn into the document. 
+            It is an image-based effect, in that it takes zero or more images as input, a number of parameters specific to the 
+            effect, and then produces an image as output. The output image is either rendered into the document instead of the 
+            original element, used as an input image to another filter effect, or provided as a CSS image value.
+            </para>
+            <para>Filter Region</para>
+            <para>A filter element can define a filter region on the canvas to which a given filter effect 
+            applies and can provide a resolution for any intermediate continuous tone images used to process 
+            any raster-based filter primitives.</para>
+            <para>The filter element has the following attributes which work together to define the filter region:</para>
+            <para><see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.FilterUnits"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Y"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Width"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Height"/></para>
+            </remarks>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgFilterElement.SourceGraphic">
+            <summary>
+            This keyword represents the graphics elements that were the original input into the filter element. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgFilterElement.SourceAlpha">
+            <summary>
+            This keyword represents the graphics elements that were the original input into the filter element. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgFilterElement.BackgroundImage">
+            <summary>
+            This keyword represents the back drop defined by the current isolation group behind the filter region 
+            at the time that the filter element was invoked.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgFilterElement.BackgroundAlpha">
+            <summary>
+            Same as BackgroundImage except only the alpha channel is used. See SourceAlpha and the isolation property.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgFilterElement.FillPaint">
+            <summary>
+            This keyword represents the value of the fill property on the target element for the filter effect. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgFilterElement.StrokePaint">
+            <summary>
+            This keyword represents the value of the stroke property on the target element for the filter effect.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.FilterUnits">
+            <summary>
+            Gets a value definining the coordinate system for attributes <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Y"/>, 
+            <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Width"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Height"/>.
+            </summary>
+            <value>
+            <para>filterUnits = "userSpaceOnUse | objectBoundingBox"</para>
+            <para>If the value is equal to <see cref="F:SharpVectors.Dom.Svg.SvgUnitType.UserSpaceOnUse"/>, x, y, width, height represent values 
+            in the current user coordinate system in place at the time when the filter element is referenced (i.e., the 
+            user coordinate system for the element referencing the filter element via a filter property).
+            </para>
+            <para>If the value is equal to <see cref="F:SharpVectors.Dom.Svg.SvgUnitType.ObjectBoundingBox"/>, then x, y, width, height represent 
+            fractions or percentages of the bounding box on the referencing element (see object bounding box units).</para>
+            <para>The initial value for filter-units is <see cref="F:SharpVectors.Dom.Svg.SvgUnitType.ObjectBoundingBox"/>.</para>
+            </value>
+            <remarks></remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.PrimitiveUnits">
+            <summary>
+            Gets a value specifying the coordinate system for the various length values within the filter primitives 
+            and for the attributes that define the filter primitive subregion.
+            </summary>
+            <value>
+            <para>primitiveUnits = "userSpaceOnUse | objectBoundingBox" </para>
+            <para>If the value is equal to <see cref="F:SharpVectors.Dom.Svg.SvgUnitType.UserSpaceOnUse"/>, any length values within the filter 
+            definitions represent values in the current local coordinate system in place at the time when the filter element 
+            is referenced (i.e., the user coordinate system for the element referencing the filter element via a filter property).
+            </para>
+            <para>If the value is equal to <see cref="F:SharpVectors.Dom.Svg.SvgUnitType.ObjectBoundingBox"/>, then any length values within the filter 
+            definitions represent fractions or percentages of the bounding box on the referencing element (see object bounding 
+            box units). Note that if only one number was specified in a <c>number-optional-number</c> value this number is expanded 
+            out before the primitive-units computation takes place.
+            </para>
+            <para>The initial value for primitive-units is <see cref="F:SharpVectors.Dom.Svg.SvgUnitType.UserSpaceOnUse"/>.</para>
+            </value>
+            <remarks></remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.X">
+            <summary>
+            
+            </summary>
+            <value>
+            <para></para>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.Y">
+            <summary>
+            
+            </summary>
+            <value>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.Width">
+            <summary>
+            
+            </summary>
+            <value>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.Height">
+            <summary>
+            
+            </summary>
+            <value>
+            </value>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.FilterResX">
+            <summary>
+            The contains the X component of attribute <c>'filterRes'</c>. 
+            The <c>'filterRes'</c> indicates the width and height of the intermediate images in pixels of a filter primitive.
+            </summary>
+            <value>This value takes one or two values, the first one outlining the resolution in horizontal direction, 
+            the second one in vertical direction. If only one value is specified, it is used for both directions.</value>
+            <remarks>The <c>'filterRes'</c> attribute was removed from the <c>SVG 2</c> specification.</remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.FilterResY">
+            <summary>
+            The contains the X component of attribute <c>'filterRes'</c>. 
+            The <c>'filterRes'</c> indicates the width and height of the intermediate images in pixels of a filter primitive.
+            </summary>
+            <value>This value takes one or two values, the first one outlining the resolution in horizontal direction, 
+            the second one in vertical direction. If only one value is specified, it is used for both directions.</value>
+            <remarks>The <c>'filterRes'</c> attribute was removed from the <c>SVG 2</c> specification.</remarks>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgFilterElement.SetFilterRes(System.UInt64,System.UInt64)">
+            <summary>
+            Sets the values for attribute <c>'filterRes'</c>.
+            </summary>
+            <param name="filterResX">The X component of attribute <c>'filterRes'</c>.</param>
+            <param name="filterResY">The Y component of attribute <c>'filterRes'</c>. </param>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgPatternElement.IsRenderable">
             <summary>
@@ -1890,6 +3132,31 @@
             An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
             This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
             </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPatternElement.ViewBoxTransform">
+            <summary>
+            This function is super useful, calculates out the transformation matrix 
+            (i.e., scale and translate) of the viewport to user space.
+            </summary>
+            <returns>A Matrix which has the translate and scale portions set.</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPatternElement.CurrentView">
+            <summary>
+            The definition of the initial view (i.e., before magnification and panning) of the current innermost SVG document fragment. The meaning depends on the situation:
+            * If the initial view was a "standard" view, then:
+             o the values for viewBox, preserveAspectRatio and zoomAndPan within currentView will match the values for the corresponding DOM attributes that are on SVGSVGElement directly
+             o the values for transform and viewTarget within currentView will be null
+            * If the initial view was a link into a 'view' element, then:
+             o the values for viewBox, preserveAspectRatio and zoomAndPan within currentView will correspond to the corresponding attributes for the given 'view' element
+             o the values for transform and viewTarget within currentView will be null
+            * If the initial view was a link into another element (i.e., other than a 'view'), then:
+             o the values for viewBox, preserveAspectRatio and zoomAndPan within currentView will match the values for the corresponding DOM attributes that are on SVGSVGElement directly for the closest ancestor 'svg' element
+             o the values for transform within currentView will be null
+             o the viewTarget within currentView will represent the target of the link
+            * If the initial view was a link into the SVG document fragment using an SVG view specification fragment identifier (i.e., #svgView(...)), then:
+             o the values for viewBox, preserveAspectRatio, zoomAndPan, transform and viewTarget within currentView will correspond to the values from the SVG view specification fragment identifier
+            The object itself and its contents are both readonly. 
+            </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgRadialGradientElement">
             <summary>
@@ -2503,7 +3770,7 @@
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgFontFaceFormatElement">
             <summary>
-            The SvgFontFaceFormatElement interface corresponds to the 'font-face-format' element. 
+            The <see cref="T:SharpVectors.Dom.Svg.ISvgFontFaceFormatElement"/> interface corresponds to the <c>font-face-format'</c>' element. 
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgFontFaceNameElement">
@@ -2650,6 +3917,2094 @@
         <member name="T:SharpVectors.Dom.Resources.Root">
             <summary>
             Marks resources root
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.BitReader">
+            <summary>Bit reading helpers.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BitReader.Capacity">
+            <summary>
+            Input byte buffer, consist of a ring-buffer and a "slack" region where bytes from the start of
+            the ring-buffer are copied.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BitReader._endOfStreamReached">
+            <summary>Input stream is finished.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BitReader._accumulator">
+            <summary>Pre-fetched bits.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BitReader._bitOffset">
+            <summary>Current bit-reading position in accumulator.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BitReader._intOffset">
+            <summary>Offset of next item in intBuffer.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BitReader.ReadMoreInput(SharpVectors.Compressions.Brotli.BitReader)">
+            <summary>Fills up the input buffer.</summary>
+            <remarks>
+            Fills up the input buffer.
+            <para> No-op if there are at least 36 bytes present after current position.</para>
+            <para> After encountering the end of the input stream, 64 additional zero bytes are copied to the buffer.</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BitReader.FillBitWindow(SharpVectors.Compressions.Brotli.BitReader)">
+            <summary>Advances the Read buffer by 5 bytes to make room for reading next 24 bits.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BitReader.ReadBits(SharpVectors.Compressions.Brotli.BitReader,System.Int32)">
+            <summary>Reads the specified number of bits from Read Buffer.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BitReader.Init(SharpVectors.Compressions.Brotli.BitReader,System.IO.Stream)">
+            <summary>Initialize bit reader.</summary>
+            <remarks>
+            Initialize bit reader.
+            <para> Initialisation turns bit reader to a ready state. Also a number of bytes is prefetched to
+            accumulator. Because of that this method may block until enough data could be read from input.</para>
+            </remarks>
+            <param name="br">BitReader POJO</param>
+            <param name="input">data source</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BitReader.Close(SharpVectors.Compressions.Brotli.BitReader)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.BrotliDecode">
+            <summary>API for Brotli decompression.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BrotliDecode.FixedTable">
+            <summary>Static Huffman code for the code length code lengths.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliDecode.DecodeVarLenUnsignedByte(SharpVectors.Compressions.Brotli.BitReader)">
+            <summary>Decodes a number in the range [0..255], by reading 1 - 11 bits.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliDecode.ReadSymbol(System.Int32[],System.Int32,SharpVectors.Compressions.Brotli.BitReader)">
+            <summary>Decodes the next Huffman code from bit-stream.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliDecode.ReadMetablockInfo(SharpVectors.Compressions.Brotli.BrotliState)">
+            <summary>Reads next metablock header.</summary>
+            <param name="state">decoding state</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliDecode.Decompress(SharpVectors.Compressions.Brotli.BrotliState)">
+            <summary>Actual decompress implementation.</summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.BrotliInputStream">
+            <summary>
+            A <see cref="T:System.IO.Stream"/> decorator that decompresses brotli data.
+            <para> Not thread-safe.</para>
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BrotliInputStream._buffer">
+            <summary>Internal buffer used for efficient byte-by-byte reading.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BrotliInputStream._remainingBufferBytes">
+            <summary>Number of decoded but still unused bytes in internal buffer.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BrotliInputStream._bufferOffset">
+            <summary>Next unused byte offset.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.BrotliInputStream._state">
+            <summary>Decoder state.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.#ctor(System.IO.Stream)">
+            <summary>
+            Creates a <see cref="T:System.IO.Stream"/> wrapper that decompresses brotli data.
+            <para> For byte-by-byte reading (<see cref="M:SharpVectors.Compressions.Brotli.BrotliInputStream.ReadByte"/>) internal buffer with
+            <see cref="F:SharpVectors.Compressions.Brotli.BrotliInputStream.DefaultInternalBufferSize"/> size is allocated and used.</para>
+            <para> Will block the thread until first kilobyte of data of source is available.</para>
+            </summary>
+            <param name="source">underlying data source</param>
+            <exception cref="T:System.IO.IOException">in case of corrupted data or source stream problems</exception>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.#ctor(System.IO.Stream,System.Int32)">
+            <summary>
+            Creates a <see cref="T:System.IO.Stream"/> wrapper that decompresses brotli data.
+            <para> For byte-by-byte reading (<see cref="M:SharpVectors.Compressions.Brotli.BrotliInputStream.ReadByte"/>) internal buffer of specified size is
+            allocated and used.</para>
+            <para> Will block the thread until first kilobyte of data of source is available.</para>
+            </summary>
+            <param name="source">compressed data source</param>
+            <param name="byteReadBufferSize">size of internal buffer used in case of byte-by-byte reading</param>
+            <exception cref="T:System.IO.IOException">in case of corrupted data or source stream problems</exception>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.#ctor(System.IO.Stream,System.Int32,System.Byte[])">
+            <summary>
+            Creates a <see cref="T:System.IO.Stream"/> wrapper that decompresses brotli data.
+            <para> For byte-by-byte reading (<see cref="M:SharpVectors.Compressions.Brotli.BrotliInputStream.ReadByte"/>) internal buffer of specified size is
+            allocated and used.</para>
+            <para> Will block the thread until first kilobyte of data of source is available.</para>
+            </summary>
+            <param name="source">compressed data source</param>
+            <param name="byteReadBufferSize">size of internal buffer used in case of byte-by-byte reading</param>
+            <param name="customDictionary">custom dictionary data; <see langword="null"/> if not used</param>
+            <exception cref="T:System.IO.IOException">in case of corrupted data or source stream problems</exception>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.Close">
+            <summary><inheritDoc/></summary>
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.ReadByte">
+            <summary><inheritDoc/></summary>
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary><inheritDoc/></summary>
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="P:SharpVectors.Compressions.Brotli.BrotliInputStream.CanRead">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="P:SharpVectors.Compressions.Brotli.BrotliInputStream.CanSeek">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="P:SharpVectors.Compressions.Brotli.BrotliInputStream.Length">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="P:SharpVectors.Compressions.Brotli.BrotliInputStream.Position">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.SetLength(System.Int64)">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="P:SharpVectors.Compressions.Brotli.BrotliInputStream.CanWrite">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliInputStream.Flush">
+            <summary><inheritDoc/></summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.BrotliRuntimeException">
+            <summary>Unchecked exception used internally.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliState.SetInput(SharpVectors.Compressions.Brotli.BrotliState,System.IO.Stream)">
+            <summary>Associate input with decoder state.</summary>
+            <param name="state">uninitialized state without associated input</param>
+            <param name="input">compressed data source</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.BrotliState.Close(SharpVectors.Compressions.Brotli.BrotliState)">
+            <exception cref="T:System.IO.IOException"/>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.BrotliTransform">
+            <summary>Transformations on dictionary words.</summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.Context">
+            <summary>Common context lookup table for all context modes.</summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.Dictionary">
+            <summary>Collection of static dictionary words.</summary>
+            <remarks>
+            Collection of static dictionary words.
+            <para>Dictionary content is loaded from binary resource when <see cref="M:SharpVectors.Compressions.Brotli.Dictionary.GetData"/> is executed for the
+            first time. Consequently, it saves memory and CPU in case dictionary is not required.
+            </para>
+            <para>One possible drawback is that multiple threads that need dictionary data may be blocked (only
+            once in each classworld). To avoid this, it is enough to call <see cref="M:SharpVectors.Compressions.Brotli.Dictionary.GetData"/> proactively.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.Dictionary.DataHolder0">
+            <summary>"Initialization-on-demand holder idiom" implementation.</summary>
+            <remarks>
+            "Initialization-on-demand holder idiom" implementation.
+            <para>This static class definition is not initialized until the JVM determines that it must be
+            executed (when the static method <see cref="M:SharpVectors.Compressions.Brotli.Dictionary.DataHolder0.GetData"/> is invoked).
+            </para>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.Huffman">
+            <summary>Utilities for building Huffman decoding tables.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.Huffman.HuffmanMaxTableSize">
+            <summary>
+            Maximum possible Huffman table size for an alphabet size of 704, max code length 15 and root
+            table bits 8.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.Huffman.GetNextKey(System.Int32,System.Int32)">
+            <summary>Returns reverse(reverse(key, len) + 1, len).</summary>
+            <remarks>
+            Returns reverse(reverse(key, len) + 1, len).
+            <para> reverse(key, len) is the bit-wise reversal of the len least significant bits of key.</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.Huffman.ReplicateValue(System.Int32[],System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Stores <paramref name="item"/> in <c>table[0], table[step], table[2 * step] .., table[end]</c>.
+            <para> Assumes that end is an integer multiple of step.</para>
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.Huffman.NextTableBitSize(System.Int32[],System.Int32,System.Int32)">
+            <param name="count">histogram of bit lengths for the remaining symbols,</param>
+            <param name="len">code length of the next processed symbol.</param>
+            <returns>table width of the next 2nd level table.</returns>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.Huffman.BuildHuffmanTable(System.Int32[],System.Int32,System.Int32,System.Int32[],System.Int32)">
+            <summary>Builds Huffman lookup table assuming code lengths are in symbol order.</summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.HuffmanTreeGroup">
+            <summary>Contains a collection of huffman trees with the same alphabet size.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.HuffmanTreeGroup.alphabetSize">
+            <summary>The maximal alphabet size in this group.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.HuffmanTreeGroup.codes">
+            <summary>Storage for Huffman lookup tables.</summary>
+        </member>
+        <member name="F:SharpVectors.Compressions.Brotli.HuffmanTreeGroup.trees">
+            <summary>
+            Offsets of distinct lookup tables in <see cref="F:SharpVectors.Compressions.Brotli.HuffmanTreeGroup.codes"/> storage.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.HuffmanTreeGroup.Init(SharpVectors.Compressions.Brotli.HuffmanTreeGroup,System.Int32,System.Int32)">
+            <summary>Initializes the Huffman tree group.</summary>
+            <param name="group">POJO to be initialised</param>
+            <param name="alphabetSize">the maximal alphabet size in this group</param>
+            <param name="n">number of Huffman codes</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.HuffmanTreeGroup.Decode(SharpVectors.Compressions.Brotli.HuffmanTreeGroup,SharpVectors.Compressions.Brotli.BitReader)">
+            <summary>Decodes Huffman trees from input stream and constructs lookup tables.</summary>
+            <param name="group">target POJO</param>
+            <param name="br">data source</param>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.IntReader">
+            <summary>Byte-to-int conversion magic.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.IntReader.Convert(SharpVectors.Compressions.Brotli.IntReader,System.Int32)">
+            <summary>Translates bytes to ints.</summary>
+            <remarks>
+            Translates bytes to ints.
+            NB: intLen == 4 * byteSize!
+            NB: intLen should be less or equal to intBuffer length.
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.Prefix">
+            <summary>Lookup tables to map prefix codes to value ranges.</summary>
+            <remarks>
+            Lookup tables to map prefix codes to value ranges.
+            <para> This is used during decoding of the block lengths, literal insertion lengths and copy lengths.</para>
+            <para> Range represents values: [offset, offset + 2 ^ n_bits)</para>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.RunningState">
+            <summary>Enumeration of decoding state-machine.</summary>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.Utils">
+            <summary>A set of utility methods.</summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.Utils.FillWithZeroes(System.Byte[],System.Int32,System.Int32)">
+            <summary>Fills byte array with zeroes.</summary>
+            <remarks>
+            Fills byte array with zeroes.
+            <para> Current implementation uses <see cref="!:Array.Copy(object, int, object, int, int)"/>, 
+            so it should be used for length not less than 16.</para>
+            </remarks>
+            <param name="dest">array to fill with zeroes</param>
+            <param name="offset">the first byte to fill</param>
+            <param name="length">number of bytes to change</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.Brotli.Utils.FillWithZeroes(System.Int32[],System.Int32,System.Int32)">
+            <summary>Fills int array with zeroes.</summary>
+            <remarks>
+            Fills int array with zeroes.
+            <para> Current implementation uses <see cref="!:Array.Copy(object, int, object, int, int)"/>, 
+            so it should be used for length not less than 16.</para>
+            </remarks>
+            <param name="dest">array to fill with zeroes</param>
+            <param name="offset">the first item to fill</param>
+            <param name="length">number of item to change</param>
+        </member>
+        <member name="T:SharpVectors.Compressions.Brotli.WordTransformType">
+            <summary>Enumeration of all possible word transformations.</summary>
+            <remarks>
+            Enumeration of all possible word transformations.
+            <para>There are two simple types of transforms: omit X first/last symbols, two character-case
+            transforms and the identity transform.</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.#ctor(System.IO.Stream,SharpVectors.Compressions.ZLib.ZLibCompressionLevel)">
+            <summary>
+            Inicializa una nueva instancia de la clase ZLibStream usando la secuencia y nivel de compresión especificados.
+            </summary>
+            <param name="stream">Secuencia que se va a comprimir</param>
+            <param name="compressionLevel">Nivel de compresión</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)">
+            <summary>
+            Inicializa una nueva instancia de la clase ZLibStream usando la secuencia y modo de compresión especificados.
+            </summary>
+            <param name="stream">Secuencia que se va a comprimir o descomprimir</param>
+            <param name="compressionMode">Modo de compresión</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.#ctor(System.IO.Stream,SharpVectors.Compressions.ZLib.ZLibCompressionLevel,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase ZLibStream usando la secuencia y nivel de compresión especificados y, opcionalmente, deja la secuencia abierta.
+            </summary>
+            <param name="stream">Secuencia que se va a comprimir</param>
+            <param name="compressionLevel">Nivel de compresión</param>
+            <param name="leaveOpen">Indica si se debe de dejar la secuencia abierta después de comprimir la secuencia</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)">
+            <summary>
+            Inicializa una nueva instancia de la clase ZLibStream usando la secuencia y modo de compresión especificados y, opcionalmente, deja la secuencia abierta.
+            </summary>
+            <param name="stream">Secuencia que se va a comprimir o descomprimir</param>
+            <param name="compressionMode">Modo de compresión</param>
+            <param name="leaveOpen">Indica si se debe de dejar la secuencia abierta después de comprimir o descomprimir la secuencia</param>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.IsZLibStream(System.IO.Stream)">
+            <summary>
+            Check if the stream is in ZLib format
+            </summary>
+            <param name="stream">Stream to check</param>
+            <returns>Returns <see langword="true"/> in case the stream is in ZLib format, 
+            otherwise returns <see langword="true"/> or error.</returns>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.ReadCRC">
+            <summary>
+            Read the last 4 bytes of the stream as it is where is the CRC
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.InitializeStream">
+            <summary>
+            Initialize the stream
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Compressions.ZLib.ZLibStream.InitializeZLibHeader">
+            <summary>
+            Initialize the stream header in ZLib format
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssRuleList">
+            <summary>
+            Implementation wrapper for IJsCssRuleList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssRule">
+            <summary>
+            Implementation wrapper for IJsCssRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssStyleRule">
+            <summary>
+            Implementation wrapper for IJsCssStyleRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssMediaRule">
+            <summary>
+            Implementation wrapper for IJsCssMediaRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssFontFaceRule">
+            <summary>
+            Implementation wrapper for IJsCssFontFaceRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssPageRule">
+            <summary>
+            Implementation wrapper for IJsCssPageRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssImportRule">
+            <summary>
+            Implementation wrapper for IJsCssImportRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssCharsetRule">
+            <summary>
+            Implementation wrapper for IJsCssCharsetRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssUnknownRule">
+            <summary>
+            Implementation wrapper for IJsCssUnknownRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssStyleDeclaration">
+            <summary>
+            Implementation wrapper for IJsCssStyleDeclaration
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssValue">
+            <summary>
+            Implementation wrapper for IJsCssValue
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssPrimitiveValue">
+            <summary>
+            Implementation wrapper for IJsCssPrimitiveValue
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssValueList">
+            <summary>
+            Implementation wrapper for IJsCssValueList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsRgbColor">
+            <summary>
+            Implementation wrapper for IJsRgbColor
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsRect">
+            <summary>
+            Implementation wrapper for IJsRect
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCounter">
+            <summary>
+            Implementation wrapper for IJsCounter
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsElementCssInlineStyle">
+            <summary>
+            Implementation wrapper for IJsElementCssInlineStyle
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCssStyleSheet">
+            <summary>
+            Implementation wrapper for IJsCssStyleSheet
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsViewCss">
+            <summary>
+            Implementation wrapper for IJsViewCss
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocumentCss">
+            <summary>
+            Implementation wrapper for IJsDocumentCss
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDomImplementationCss">
+            <summary>
+            Implementation wrapper for IJsDomImplementationCss
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDomTimeStamp">
+            <summary>
+            IJsDomTimeStamp
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDomImplementation">
+            <summary>
+            Implementation wrapper for IJsDomImplementation
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsNode">
+            <summary>
+            Implementation wrapper for IJsNode
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsNodeList">
+            <summary>
+            Implementation wrapper for IJsNodeList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsNamedNodeMap">
+            <summary>
+            Implementation wrapper for IJsNamedNodeMap
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCharacterData">
+            <summary>
+            Implementation wrapper for IJsCharacterData
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsAttr">
+            <summary>
+            Implementation wrapper for IJsAttr
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsElement">
+            <summary>
+            Implementation wrapper for IJsElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsText">
+            <summary>
+            Implementation wrapper for IJsText
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsComment">
+            <summary>
+            Implementation wrapper for IJsComment
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsCDataSection">
+            <summary>
+            Implementation wrapper for IJsCDataSection
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocumentType">
+            <summary>
+            Implementation wrapper for IJsDocumentType
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsNotation">
+            <summary>
+            Implementation wrapper for IJsNotation
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsEntity">
+            <summary>
+            Implementation wrapper for IJsEntity
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsEntityReference">
+            <summary>
+            Implementation wrapper for IJsEntityReference
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsProcessingInstruction">
+            <summary>
+            Implementation wrapper for IJsProcessingInstruction
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocumentFragment">
+            <summary>
+            Implementation wrapper for IJsDocumentFragment
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocument">
+            <summary>
+            Implementation wrapper for IJsDocument
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsEventTarget">
+            <summary>
+            Implementation wrapper for IJsEventTarget
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsEventListener">
+            <summary>
+            Implementation wrapper for IJsEventListener
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsEvent">
+            <summary>
+            Implementation wrapper for IJsEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocumentEvent">
+            <summary>
+            Implementation wrapper for IJsDocumentEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsUiEvent">
+            <summary>
+            Implementation wrapper for IJsUiEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsMouseEvent">
+            <summary>
+            Implementation wrapper for IJsMouseEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsMutationEvent">
+            <summary>
+            Implementation wrapper for IJsMutationEvent
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Scripting.JsObject.CreateWrapper``1(System.Object,SharpVectors.Scripting.ISvgScriptEngine)">
+            <summary>
+            Creates a new scriptable wrapper for the specified object. Use this function instead
+            of calling the JsObject constructor.
+            </summary>
+            <param name="wrappableObject">The object to wrap. It's type will be used as a key
+            in a lookup for creating the correct wrappable type.</param>
+            <returns>A new scriptable object that has been created with a type corresponding
+            to the wrappableObject's type.</returns>
+        </member>
+        <member name="M:SharpVectors.Scripting.JsObject.RemoveWrapper(System.Object)">
+            <summary>
+            Removes the wrapper and base object key value pair. This function is called by the JsObject destructor.
+            </summary>
+            <param name="wrappableObject">The key object that was wrapped, to be removed.</param>
+        </member>
+        <member name="M:SharpVectors.Scripting.JsObject.InitializeWrapperTypes">
+            <summary>
+            Builds the wrapper type table for static lookups
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsObject`1">
+            <summary>
+            Base class for all wrappers
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Scripting.JsObject`1.#ctor">
+            <summary>
+            Base constructor, if used you must assign the baseObject after the call.
+            This constructor should only be called internally. Higher order classes should construct
+            new wrappers using the CreateWrapper function to allow for type lookups.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Scripting.JsObject`1.#ctor(`0,SharpVectors.Scripting.ISvgScriptEngine)">
+            <summary>
+            Base constructor, accepts the baseObject that will be wrapped with all inherited calls. 
+            This constructor should only be called internally. Higher order classes should construct
+            new wrappers using the CreateWrapper function to allow for type lookups.
+            </summary>
+            <param name="baseObject">The object to wrap with a scriptable object.</param>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsTimeEvent">
+            <summary>
+            Implementation wrapper for IJsTimeEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsStyleSheet">
+            <summary>
+            Implementation wrapper for IJsStyleSheet
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsStyleSheetList">
+            <summary>
+            Implementation wrapper for IJsStyleSheetList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsMediaList">
+            <summary>
+            Implementation wrapper for IJsMediaList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsLinkStyle">
+            <summary>
+            Implementation wrapper for IJsLinkStyle
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocumentStyle">
+            <summary>
+            Implementation wrapper for IJsDocumentStyle
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgElement">
+            <summary>
+            Implementation wrapper for IJsSvgElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgStylable">
+            <summary>
+            Implementation wrapper for IJsSvgStylable
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgLocatable">
+            <summary>
+            Implementation wrapper for IJsSvgLocatable
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTransformable">
+            <summary>
+            Implementation wrapper for IJsSvgTransformable
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTests">
+            <summary>
+            Implementation wrapper for IJsSvgTests
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgLangSpace">
+            <summary>
+            Implementation wrapper for IJsSvgLangSpace
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgExternalResourcesRequired">
+            <summary>
+            Implementation wrapper for IJsSvgExternalResourcesRequired
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFitToViewBox">
+            <summary>
+            Implementation wrapper for IJsSvgFitToViewBox
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgZoomAndPan">
+            <summary>
+            Implementation wrapper for IJsSvgZoomAndPan
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgViewSpec">
+            <summary>
+            Implementation wrapper for IJsSvgViewSpec
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgUriReference">
+            <summary>
+            Implementation wrapper for IJsSvgUriReference
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgCssRule">
+            <summary>
+            Implementation wrapper for IJsSvgCssRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgDocument">
+            <summary>
+            Implementation wrapper for IJsSvgDocument
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgSvgElement">
+            <summary>
+            Implementation wrapper for IJsSvgSvgElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgGElement">
+            <summary>
+            Implementation wrapper for IJsSvgGElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgDefsElement">
+            <summary>
+            Implementation wrapper for IJsSvgDefsElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgDescElement">
+            <summary>
+            Implementation wrapper for IJsSvgDescElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTitleElement">
+            <summary>
+            Implementation wrapper for IJsSvgTitleElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgSymbolElement">
+            <summary>
+            Implementation wrapper for IJsSvgSymbolElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgUseElement">
+            <summary>
+            Implementation wrapper for IJsSvgUseElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgImageElement">
+            <summary>
+            Implementation wrapper for IJsSvgImageElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgSwitchElement">
+            <summary>
+            Implementation wrapper for IJsSvgSwitchElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgStyleElement">
+            <summary>
+            Implementation wrapper for IJsSvgStyleElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPaint">
+            <summary>
+            Implementation wrapper for IJsSvgPaint
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgMarkerElement">
+            <summary>
+            Implementation wrapper for IJsSvgMarkerElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgGradientElement">
+            <summary>
+            Implementation wrapper for IJsSvgGradientElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgLinearGradientElement">
+            <summary>
+            Implementation wrapper for IJsSvgLinearGradientElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgRadialGradientElement">
+            <summary>
+            Implementation wrapper for IJsSvgRadialGradientElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgStopElement">
+            <summary>
+            Implementation wrapper for IJsSvgStopElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPatternElement">
+            <summary>
+            Implementation wrapper for IJsSvgPatternElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAElement">
+            <summary>
+            Implementation wrapper for IJsSvgAElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgScriptElement">
+            <summary>
+            Implementation wrapper for IJsSvgScriptElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsAbstractView">
+            <summary>
+            Implementation wrapper for IJsAbstractView
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsDocumentView">
+            <summary>
+            Implementation wrapper for IJsDocumentView
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgWindow">
+            <summary>
+            Implementation wrapper for IJsSvgWindow
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimationElement">
+            <summary>
+            Implementation wrapper for IJsSvgAnimationElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimateElement">
+            <summary>
+            Implementation wrapper for IJsSvgAnimateElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgSetElement">
+            <summary>
+            Implementation wrapper for IJsSvgSetElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimateMotionElement">
+            <summary>
+            Implementation wrapper for IJsSvgAnimateMotionElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgMPathElement">
+            <summary>
+            Implementation wrapper for IJsSvgMPathElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimateColorElement">
+            <summary>
+            Implementation wrapper for IJsSvgAnimateColorElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimateTransformElement">
+            <summary>
+            Implementation wrapper for IJsSvgAnimateTransformElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedBoolean">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedBoolean
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedString">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedString
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgStringList">
+            <summary>
+            Implementation wrapper for IJsSvgStringList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedEnumeration">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedEnumeration
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedInteger">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedInteger
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgNumber">
+            <summary>
+            Implementation wrapper for IJsSvgNumber
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedNumber">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedNumber
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgNumberList">
+            <summary>
+            Implementation wrapper for IJsSvgNumberList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedNumberList">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedNumberList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgLength">
+            <summary>
+            Implementation wrapper for IJsSvgLength
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedLength">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedLength
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgLengthList">
+            <summary>
+            Implementation wrapper for IJsSvgLengthList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedLengthList">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedLengthList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAngle">
+            <summary>
+            Implementation wrapper for IJsSvgAngle
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedAngle">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedAngle
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgColor">
+            <summary>
+            Implementation wrapper for IJsSvgColor
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgIccColor">
+            <summary>
+            Implementation wrapper for IJsSvgIccColor
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgRect">
+            <summary>
+            Implementation wrapper for IJsSvgRect
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedRect">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedRect
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgUnitTypes">
+            <summary>
+            Implementation wrapper for IJsSvgUnitTypes
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgRenderingIntent">
+            <summary>
+            Implementation wrapper for IJsSvgRenderingIntent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPoint">
+            <summary>
+            Implementation wrapper for IJsSvgPoint
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPointList">
+            <summary>
+            Implementation wrapper for IJsSvgPointList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgMatrix">
+            <summary>
+            Implementation wrapper for IJsSvgMatrix
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTransform">
+            <summary>
+            Implementation wrapper for IJsSvgTransform
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTransformList">
+            <summary>
+            Implementation wrapper for IJsSvgTransformList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedTransformList">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedTransformList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPreserveAspectRatio">
+            <summary>
+            Implementation wrapper for IJsSvgPreserveAspectRatio
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedPreserveAspectRatio">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedPreserveAspectRatio
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedPathData">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedPathData
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAnimatedPoints">
+            <summary>
+            Implementation wrapper for IJsSvgAnimatedPoints
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgClipPathElement">
+            <summary>
+            Implementation wrapper for IJsSvgClipPathElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgMaskElement">
+            <summary>
+            Implementation wrapper for IJsSvgMaskElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFilterElement">
+            <summary>
+            Implementation wrapper for IJsSvgFilterElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFilterPrimitiveStandardAttributes">
+            <summary>
+            Implementation wrapper for IJsSvgFilterPrimitiveStandardAttributes
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEBlendElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEBlendElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEColorMatrixElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEColorMatrixElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEComponentTransferElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEComponentTransferElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgComponentTransferFunctionElement">
+            <summary>
+            Implementation wrapper for IJsSvgComponentTransferFunctionElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEFuncRElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEFuncRElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEFuncGElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEFuncGElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEFuncBElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEFuncBElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEFuncAElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEFuncAElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFECompositeElement">
+            <summary>
+            Implementation wrapper for IJsSvgFECompositeElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEConvolveMatrixElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEConvolveMatrixElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEDiffuseLightingElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEDiffuseLightingElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEDistantLightElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEDistantLightElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEPointLightElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEPointLightElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFESpotLightElement">
+            <summary>
+            Implementation wrapper for IJsSvgFESpotLightElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEDisplacementMapElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEDisplacementMapElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEFloodElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEFloodElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEGaussianBlurElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEGaussianBlurElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEImageElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEImageElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEMergeElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEMergeElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEMergeNodeElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEMergeNodeElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEMorphologyElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEMorphologyElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFEOffsetElement">
+            <summary>
+            Implementation wrapper for IJsSvgFEOffsetElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFESpecularLightingElement">
+            <summary>
+            Implementation wrapper for IJsSvgFESpecularLightingElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFETileElement">
+            <summary>
+            Implementation wrapper for IJsSvgFETileElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFETurbulenceElement">
+            <summary>
+            Implementation wrapper for IJsSvgFETurbulenceElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsGetSvgDocument">
+            <summary>
+            Implementation wrapper for IJsGetSvgDocument
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgCursorElement">
+            <summary>
+            Implementation wrapper for IJsSvgCursorElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgViewElement">
+            <summary>
+            Implementation wrapper for IJsSvgViewElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgEvent">
+            <summary>
+            Implementation wrapper for IJsSvgEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgZoomEvent">
+            <summary>
+            Implementation wrapper for IJsSvgZoomEvent
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgDefinitionSrcElement">
+            <summary>
+            Implementation wrapper for IJsSvgDefinitionSrcElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgMetadataElement">
+            <summary>
+            Implementation wrapper for IJsSvgMetadataElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgForeignObjectElement">
+            <summary>
+            Implementation wrapper for IJsSvgForeignObjectElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgElementInstance">
+            <summary>
+            Implementation wrapper for IJsSvgElementInstance
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgElementInstanceList">
+            <summary>
+            Implementation wrapper for IJsSvgElementInstanceList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgColorProfileElement">
+            <summary>
+            Implementation wrapper for IJsSvgColorProfileElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgColorProfileRule">
+            <summary>
+            Implementation wrapper for IJsSvgColorProfileRule
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSeg">
+            <summary>
+            Implementation wrapper for IJsSvgPathSeg
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSeg`1">
+            <summary>
+            Implementation wrapper for IJsSvgPathSeg
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegClosePath">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegClosePath
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegMovetoAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegMovetoAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegMovetoRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegMovetoRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegLinetoAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegLinetoAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegLinetoRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegLinetoRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoCubicAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoCubicAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoCubicRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoCubicRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoQuadraticAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoQuadraticAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoQuadraticRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoQuadraticRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegArcAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegArcAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegArcRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegArcRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegLinetoHorizontalAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegLinetoHorizontalAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegLinetoHorizontalRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegLinetoHorizontalRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegLinetoVerticalAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegLinetoVerticalAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegLinetoVerticalRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegLinetoVerticalRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoCubicSmoothAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoCubicSmoothAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoCubicSmoothRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoCubicSmoothRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoQuadraticSmoothAbs">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoQuadraticSmoothAbs
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegCurvetoQuadraticSmoothRel">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegCurvetoQuadraticSmoothRel
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathSegList">
+            <summary>
+            Implementation wrapper for IJsSvgPathSegList
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPathElement">
+            <summary>
+            Implementation wrapper for IJsSvgPathElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgRectElement">
+            <summary>
+            Implementation wrapper for IJsSvgRectElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgCircleElement">
+            <summary>
+            Implementation wrapper for IJsSvgCircleElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgEllipseElement">
+            <summary>
+            Implementation wrapper for IJsSvgEllipseElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgLineElement">
+            <summary>
+            Implementation wrapper for IJsSvgLineElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPolylineElement">
+            <summary>
+            Implementation wrapper for IJsSvgPolylineElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgPolygonElement">
+            <summary>
+            Implementation wrapper for IJsSvgPolygonElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTextContentElement">
+            <summary>
+            Implementation wrapper for IJsSvgTextContentElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTextPositioningElement">
+            <summary>
+            Implementation wrapper for IJsSvgTextPositioningElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTextElement">
+            <summary>
+            Implementation wrapper for IJsSvgTextElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTSpanElement">
+            <summary>
+            Implementation wrapper for IJsSvgTSpanElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTRefElement">
+            <summary>
+            Implementation wrapper for IJsSvgTRefElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgTextPathElement">
+            <summary>
+            Implementation wrapper for IJsSvgTextPathElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAltGlyphElement">
+            <summary>
+            Implementation wrapper for IJsSvgAltGlyphElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAltGlyphDefElement">
+            <summary>
+            Implementation wrapper for IJsSvgAltGlyphDefElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgAltGlyphItemElement">
+            <summary>
+            Implementation wrapper for IJsSvgAltGlyphItemElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgGlyphRefElement">
+            <summary>
+            Implementation wrapper for IJsSvgGlyphRefElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFontElement">
+            <summary>
+            Implementation wrapper for IJsSvgFontElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgGlyphElement">
+            <summary>
+            Implementation wrapper for IJsSvgGlyphElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgMissingGlyphElement">
+            <summary>
+            Implementation wrapper for IJsSvgMissingGlyphElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgHKernElement">
+            <summary>
+            Implementation wrapper for IJsSvgHKernElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgVKernElement">
+            <summary>
+            Implementation wrapper for IJsSvgVKernElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFontFaceElement">
+            <summary>
+            Implementation wrapper for IJsSvgFontFaceElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFontFaceSrcElement">
+            <summary>
+            Implementation wrapper for IJsSvgFontFaceSrcElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFontFaceUriElement">
+            <summary>
+            Implementation wrapper for IJsSvgFontFaceUriElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFontFaceFormatElement">
+            <summary>
+            Implementation wrapper for IJsSvgFontFaceFormatElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Scripting.JsSvgFontFaceNameElement">
+            <summary>
+            Implementation wrapper for IJsSvgFontFaceNameElement
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Woffs.SvgWoffHeader">
+            <summary>
+            File header with basic font type and version, along with offsets to metadata and private data blocks.
+            </summary>
+            <seealso href="https://www.w3.org/TR/WOFF/">WOFF File Format 1.0</seealso>
+            <seealso href="https://www.w3.org/TR/WOFF2/">WOFF File Format 2.0</seealso>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._signature">
+            <summary>
+            The Woff 1 or 2 signature
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._flavor">
+            <summary>
+            The "sfnt version" of the input font.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._length">
+            <summary>
+            Total size of the WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._numTables">
+            <summary>
+            Number of entries in directory of font tables.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._reserved">
+            <summary>
+            Reserved; set to zero.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._totalSfntSize">
+            <summary>
+            Total size needed for the uncompressed font data, including the sfnt header, 
+            directory, and font tables (including padding).
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._totalCompressedSize">
+            <summary>
+            WOFF2 only: Total length of the compressed data block.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._majorVersion">
+            <summary>
+            Major version of the WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._minorVersion">
+            <summary>
+            Minor version of the WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._metaOffset">
+            <summary>
+            Offset to metadata block, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._metaLength">
+            <summary>
+            Length of compressed metadata block.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._metaOrigLength">
+            <summary>
+            Uncompressed size of metadata block.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._privateOffset">
+            <summary>
+            Offset to private data block, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffHeader._privateLength">
+            <summary>
+            Length of private data block.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.Signature">
+            <summary>
+            Gets or set the signature field of the WOFF format header. The value is <c>0x774F4646 or 'wOFF'</c>.
+            </summary>
+            <value>
+            The signature field in the WOFF header must contain the "magic number" <c>0x774F4646</c>. 
+            If the field does not contain this value, user agents MUST reject the file as invalid.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.Flavor">
+            <summary>
+            The "sfnt version" of the input font.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.Length">
+            <summary>
+            Total size of the WOFF file.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.NumTables">
+            <summary>
+            Number of entries in directory of font tables.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.Reserved">
+            <summary>
+            Reserved; set to zero.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.TotalSfntSize">
+            <summary>
+            Total size needed for the uncompressed font data, including the sfnt header, 
+            directory, and font tables (including padding).
+            </summary>
+            <remarks>
+            <para>WOFF 2</para>
+            <para>
+            The <see cref="P:SharpVectors.Woffs.SvgWoffHeader.TotalSfntSize"/> value in the WOFF2 Header is intended to be used for 
+            reference purposes only. It may represent the size of the uncompressed input font file, 
+            but if the transformed 'glyf' and 'loca' tables are present, the uncompressed size of 
+            the reconstructed tables and the total decompressed font size may differ substantially 
+            from the original total size specified in the WOFF2 Header.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.MajorVersion">
+            <summary>
+            Major version of the WOFF file.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.MinorVersion">
+            <summary>
+            Minor version of the WOFF file.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.MetaOffset">
+            <summary>
+            Offset to metadata block, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.MetaLength">
+            <summary>
+            Length of compressed metadata block.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.MetaOrigLength">
+            <summary>
+            Uncompressed size of metadata block.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.PrivateOffset">
+            <summary>
+            Offset to private data block, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffHeader.PrivateLength">
+            <summary>
+            Length of private data block.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffMetadata._offset">
+            <summary>
+            Offset to metadata block, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffMetadata._length">
+            <summary>
+            Length of compressed metadata block.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffMetadata._origLength">
+            <summary>
+            Uncompressed size of metadata block.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Woffs.SvgWoffObject">
+            <summary>
+            
+            </summary>
+            <remarks>
+            <para>Data types</para>
+            <para>UInt32 32-bit (4-byte) unsigned integer in big-endian format</para>
+            <para>UInt16 16-bit (2-byte) unsigned integer in big-endian format</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.Read(System.IO.Stream,System.Byte[]@,System.Int32,System.Int32)">
+            <summary>
+            Reads a number of characters from the current source Stream and 
+            writes the data to the target array at the specified index.
+            </summary>
+            <param name="sourceStream">
+            The source Stream to read from.
+            </param>
+            <param name="target">
+            Contains the array of characteres read from the source Stream.
+            </param>
+            <param name="start">
+            The starting index of the target array.
+            </param>
+            <param name="count">
+            The maximum number of characters to read from the source Stream.
+            </param>
+            <returns>
+            The number of characters read. The number will be less 
+            than or equal to count depending on the data available 
+            in the source Stream. Returns -1 if the end of the stream 
+            is reached.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.Read(System.IO.TextReader,System.Byte[]@,System.Int32,System.Int32)">
+            <summary>
+            Reads a number of characters from the current source TextReader 
+            and writes the data to the target array at the specified index.
+            </summary>
+            <param name="sourceTextReader">
+            The source TextReader to read from
+            </param>
+            <param name="target">
+            Contains the array of characteres read from the source TextReader.
+            </param>
+            <param name="start">
+            The starting index of the target array.
+            </param>
+            <param name="count">
+            The maximum number of characters to read from the 
+            source TextReader.
+            </param>
+            <returns>
+            The number of characters read. The number will be less than or 
+            equal to count depending on the data available in the source 
+            TextReader. Returns -1 if the end of the stream is reached.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUIntBase128(System.IO.Stream,System.UInt32@)">
+            <summary>
+            <c>UIntBase128</c> is a different variable length encoding of unsigned integers, 
+            suitable for values up to <c>2^32 - 1</c>.
+            </summary>
+            <param name="stream">The font stream.</param>
+            <param name="result">The <c>UIntBase128</c> encoded number</param>
+            <returns></returns>
+            <remarks>
+            <para>
+            A <c>UIntBase128</c>  encoded number is a sequence of bytes for which the most significant bit is set 
+            for all but the last byte, and clear for the last byte. The number itself is base <c>128</c> 
+            encoded in the lower 7 bits of each byte. 
+            </para>
+            <para>
+            Thus, a decoding procedure for a <c>UIntBase128</c> is: 
+            </para>
+            <para>
+            start with value = 0. Consume a byte, setting value = old value times 128 + (byte bitwise-and 127). 
+            Repeat last step until the most significant bit of byte is false.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.Skip(System.IO.Stream,System.Int32)">
+            <summary>
+            Try to skip bytes in the input stream and return the actual 
+            number of bytes skipped.
+            </summary>
+            <param name="stream">
+            Input stream that will be used to skip the bytes.
+            </param>
+            <param name="skipBytes">
+            Number of bytes to be skipped.
+            </param>
+            <returns>
+            Actual number of bytes skipped.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.Skip(System.IO.StreamReader,System.Int64)">
+            <summary>Skips a given number of characters into a given Stream.</summary>
+            <param name="stream">The number of caracters to skip.</param>
+            <param name="number">The stream in which the skips are done.</param>
+            <returns>The number of characters skipped.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteBytes(System.String,System.IO.FileStream)">
+            <summary>
+            Writes the data to the specified file stream
+            </summary>
+            <param name="data">Data to write</param>
+            <param name="fileStream">File to write to</param>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteChars(System.String,System.IO.FileStream)">
+            <summary>
+            Writes the received string to the file stream
+            </summary>
+            <param name="data">String of information to write</param>
+            <param name="fileStream">File to write to</param>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadInt16LE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian small integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadInt16BE(System.Byte[],System.Int32)">
+            <summary>Reads a big endian small integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUInt16LE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian small integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUInt16BE(System.Byte[],System.Int32)">
+            <summary>Reads a big endian small integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadInt32LE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadInt32BE(System.Byte[],System.Int32)">
+            <summary>Reads a big endian integer.</summary>
+            <param name="b">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUInt32LE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUInt32BE(System.Byte[],System.Int32)">
+            <summary>Reads a big endian integer.</summary>
+            <param name="b">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the int resides.</param>
+            <returns>The int read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadInt64LE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian 8 byte integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the long resides.</param>
+            <returns>The long read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadInt64BE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian 8 byte integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the long resides.</param>
+            <returns>The long read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUInt64LE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian 8 byte integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the long resides.</param>
+            <returns>The long read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadUInt64BE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian 8 byte integer.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the long resides.</param>
+            <returns>The long read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadSingleLE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian float.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the float resides.</param>
+            <returns>The float read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadSingleBE(System.Byte[],System.Int32)">
+            <summary>Reads a big endian float.</summary>
+            <param name="buffer">The raw data buffer</param>
+            <param name="offset">The offset into the buffer where the float resides</param>
+            <returns>The float read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadDoubleLE(System.Byte[],System.Int32)">
+            <summary>Reads a little endian double.</summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the double resides.</param>
+            <returns>The double read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.ReadDoubleBE(System.Byte[],System.Int32)">
+            <summary>
+            Reads a big endian double.
+            </summary>
+            <param name="buffer">The raw data buffer.</param>
+            <param name="offset">The offset into the buffer where the double resides.</param>
+            <returns>The double read from the buffer at the offset location.</returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteInt16LE(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes the given short to the given buffer at the given location
+            in big endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer.
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur.
+            </param>
+            <param name="value">
+            the short to write.
+            </param>
+            <returns> 
+            the number of bytes written.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteInt16BE(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes the given short to the given buffer at the given location
+            in big endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer.
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur.
+            </param>
+            <param name="value">
+            the short to write.
+            </param>
+            <returns> 
+            the number of bytes written.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteInt32LE(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes the given integer to the given buffer at the given location
+            in little endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur
+            </param>
+            <param name="value">
+            the integer to write
+            </param>
+            <returns> 
+            the number of bytes written.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteInt32BE(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes the given integer to the given buffer at the given location
+            in big endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer.
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur.
+            </param>
+            <param name="value">
+            the integer to write.
+            </param>
+            <returns> 
+            the number of bytes written.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteInt64LE(System.Byte[],System.Int32,System.Int64)">
+            <summary>
+            Writes the given long to the given buffer at the given location
+            in little endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur
+            </param>
+            <param name="value">
+            the long to write
+            </param>
+            <returns> 
+            the number of bytes written
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteInt64BE(System.Byte[],System.Int32,System.Int64)">
+            <summary>
+            Writes the given long to the given buffer at the given location
+            in big endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur.
+            </param>
+            <param name="value">
+            the long to write.
+            </param>
+            <returns> 
+            the number of bytes written.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteDoubleLE(System.Byte[],System.Int32,System.Double)">
+            <summary>
+            Writes the given double to the given buffer at the given location
+            in little endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur
+            </param>
+            <param name="value">
+            the double to write
+            </param>
+            <returns> 
+            the number of bytes written
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Woffs.SvgWoffObject.WriteDoubleBE(System.Byte[],System.Int32,System.Double)">
+            <summary>
+            Writes the given double to the given buffer at the given location
+            in big endian format.
+            </summary>
+            <param name="buffer">
+            the data buffer
+            </param>
+            <param name="offset">
+            the offset into the buffer where writing should occur
+            </param>
+            <param name="value">
+            the double to write
+            </param>
+            <returns> 
+            the number of bytes written
+            </returns>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffPrivateData._offset">
+            <summary>
+            Offset to private data block, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffPrivateData._length">
+            <summary>
+            Length of private data block.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory.PaddingSize">
+            <summary>
+            The byte boundary.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._flags">
+            <summary>
+            WOFF2: The table type and flags
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._tag">
+            <summary>
+            4-byte sfnt table identifier.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._offset">
+            <summary>
+            Offset to the data, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._compLength">
+            <summary>
+            Length of the compressed data, excluding padding.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._origLength">
+            <summary>
+            Length of the uncompressed table, excluding padding.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._transformLength">
+            <summary>
+            WOFF2: The transformed length (if applicable)
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._origChecksum">
+            <summary>
+            Checksum of the uncompressed table.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Woffs.SvgWoffTableDirectory._padding">
+            <summary>
+            The padding to the next block.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffTableDirectory.Tag">
+            <summary>
+            4-byte sfnt table identifier.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffTableDirectory.Offset">
+            <summary>
+            Offset to the data, from beginning of WOFF file.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffTableDirectory.CompLength">
+            <summary>
+            Length of the compressed data, excluding padding.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffTableDirectory.OrigLength">
+            <summary>
+            Length of the uncompressed table, excluding padding.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Woffs.SvgWoffTableDirectory.OrigChecksum">
+            <summary>
+            Checksum of the uncompressed table.
             </summary>
         </member>
     </members>

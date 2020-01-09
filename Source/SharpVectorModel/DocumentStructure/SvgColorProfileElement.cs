@@ -59,6 +59,10 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public ushort RenderingIntent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string ISvgColorProfileElement.Local { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string ISvgColorProfileElement.Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         #endregion
     }
 }

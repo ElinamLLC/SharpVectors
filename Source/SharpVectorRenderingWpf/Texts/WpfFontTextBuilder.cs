@@ -73,7 +73,13 @@ namespace SharpVectors.Renderers.Texts
         public override double OverlineThickness { get => throw new NotImplementedException(); }
         public override double XHeight { get => throw new NotImplementedException(); }
         public override double Alphabetic { get => throw new NotImplementedException(); }
-        public override double Width { get => throw new NotImplementedException(); }
+
+        public override double Width
+        {
+            get {
+                return _textWidth;
+            }
+        }
 
         #endregion
 

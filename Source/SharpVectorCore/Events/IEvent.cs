@@ -3,7 +3,6 @@ using System;
 namespace SharpVectors.Dom.Events
 {
 	/// <summary>
-	/// (DOM Level 2)
 	/// The Event interface is used to provide contextual information about an
 	/// event to the listener processing the event.
 	/// </summary>
@@ -19,8 +18,6 @@ namespace SharpVectors.Dom.Events
 	public interface IEvent
 	{
 		#region Properties
-		
-		#region DOM Level 2
 		
 		/// <summary>
 		/// (DOM Level 2)
@@ -59,13 +56,11 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// (DOM Level 2)
-		/// Used to indicate the <see cref="IEventTarget">IEventTarget</see>
-		/// whose <see cref="EventListener">EventListener</see>s are
-		/// currently being processed.
+		/// Used to indicate the <see cref="IEventTarget">IEventTarget</see> whose <see cref="EventListener">EventListener</see>s 
+        /// are currently being processed.
 		/// </summary>
 		/// <remarks>
-		/// This is particularly useful during the capture and bubbling
-		/// phases. This attribute could contain the
+		/// This is particularly useful during the capture and bubbling phases. This attribute could contain the
 		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-target-node">target node</see>
 		/// or a target ancestor when used with the
 		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/events.html#Events-flow">DOM event flow</see>.
@@ -77,8 +72,7 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// (DOM Level 2)
-		/// Used to indicate which phase of event flow is currently being
-		/// accomplished.
+		/// Used to indicate which phase of event flow is currently being accomplished.
 		/// </summary>
 		EventPhase EventPhase
 		{
@@ -90,8 +84,7 @@ namespace SharpVectors.Dom.Events
 		/// Used to indicate whether or not an event is a bubbling event.
 		/// </summary>
 		/// <remarks>
-		/// If the event can bubble the value is <c>true</c>, otherwise the
-		/// value is <c>false</c>.
+		/// If the event can bubble the value is <c>true</c>, otherwise the value is <c>false</c>.
 		/// </remarks>
 		bool Bubbles
 		{
@@ -100,12 +93,10 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// (DOM Level 2)
-		/// Used to indicate whether or not an event can have its default
-		/// action prevented.
+		/// Used to indicate whether or not an event can have its default action prevented.
 		/// </summary>
 		/// <remarks>
-		/// If the default action can be prevented the value is <c>true</c>,
-		/// otherwise the value is <c>false</c>.
+		/// If the default action can be prevented the value is <c>true</c>, otherwise the value is <c>false</c>.
 		/// </remarks>
 		/// <seealso href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/events.html#Events-flow-cancelation">Default actions and cancelable events</seealso>
 		bool Cancelable
@@ -118,31 +109,23 @@ namespace SharpVectors.Dom.Events
 		/// Used to specify the time at which the event was created.
 		/// </summary>
 		/// <remarks>
-		/// Due to the fact that some systems may not provide this information
-		/// the value of <see cref="TimeStamp">TimeStamp</see> may be not
-		/// available for all events. When not available, a value of <c>0</c>
-		/// will be returned. Examples of epoch time are the time of the
-		/// system start or 0:0:0 UTC 1st January 1970.
+		/// Due to the fact that some systems may not provide this information the value of <see cref="TimeStamp">TimeStamp</see> 
+        /// may be not available for all events. When not available, a value of <c>0</c> will be returned. Examples of epoch 
+        /// time are the time of the system start or 0:0:0 UTC 1st January 1970.
 		/// </remarks>
 		DateTime TimeStamp
 		{
 			get;
 		}
 		
-		#endregion
-		
-		#region DOM Level 3 Experimental
-		
 		/// <summary>
 		/// (DOM Level 3 Experimental)
-		/// The
-		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</see>
-		/// associated with this event at creation time, or <c>null</c> if it
-		/// is unspecified.
+		/// The <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</see>
+		/// associated with this event at creation time, or <c>null</c> if it is unspecified.
 		/// </summary>
 		/// <remarks>
-		/// For events initialized with a DOM Level 2 Events method, such as
-		/// <see cref="InitEvent">InitEvent</see>, this is always <c>null</c>.
+		/// For events initialized with a DOM Level 2 Events method, such as <see cref="InitEvent">InitEvent</see>, 
+        /// this is always <c>null</c>.
 		/// </remarks>
 		string NamespaceUri
 		{
@@ -151,14 +134,11 @@ namespace SharpVectors.Dom.Events
 		
 		/// <summary>
 		/// (DOM Level 3 Experimental)
-		/// This method will always return <c>false</c>, unless the event
-		/// implements the <see cref="ICustomEvent">ICustomEvent</see>
+		/// This method will always return <c>false</c>, unless the event implements the <see cref="ICustomEvent">ICustomEvent</see>
 		/// interface.
 		/// </summary>
 		/// <value>
-		/// <c>true</c> if the event implements the
-		/// <see cref="ICustomEvent">ICustomEvent</see> interface.
-		/// <c>false</c> otherwise.
+		/// <c>true</c> if the event implements the <see cref="ICustomEvent">ICustomEvent</see> interface. <c>false</c> otherwise.
 		/// </value>
 		bool IsCustom
 		{
@@ -172,8 +152,7 @@ namespace SharpVectors.Dom.Events
 		/// for this event, <c>false</c> otherwise.
 		/// </summary>
 		/// <value>
-		/// <c>true</c> if <see cref="PreventDefault">PreventDefault</see>
-		/// has been called for this event.
+		/// <c>true</c> if <see cref="PreventDefault">PreventDefault</see> has been called for this event.
 		/// </value>
 		bool IsDefaultPrevented
 		{
@@ -182,11 +161,7 @@ namespace SharpVectors.Dom.Events
 		
 		#endregion
 		
-		#endregion
-		
 		#region Methods
-		
-		#region DOM Level 2
 		
 		/// <summary>
 		/// (DOM Level 2)
@@ -194,15 +169,12 @@ namespace SharpVectors.Dom.Events
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// This method is used to prevent event listeners of the same group
-		/// to be triggered but its effect is differed until all event
-		/// listeners attached on the currentTarget have been triggered.
-		/// Once it has been called, further calls to that method
-		/// have no additional effect. 
+		/// This method is used to prevent event listeners of the same group to be triggered but its effect is differed 
+        /// until all event listeners attached on the currentTarget have been triggered. Once it has been called, further 
+        /// calls to that method have no additional effect. 
 		/// </para>
 		/// <para>
-		/// Note: This method does not prevent the default action
-		/// from being invoked; use preventDefault for that effect.
+		/// Note: This method does not prevent the default action from being invoked; use preventDefault for that effect.
 		/// </para>
 		/// </remarks>
 		/// <seealso href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/events.html#Events-propagation-and-groups">
@@ -241,43 +213,21 @@ namespace SharpVectors.Dom.Events
 		/// method.
 		/// </summary>
 		/// <remarks>
-		/// This method may only be called before the
-		/// <see cref="IEvent">IEvent</see> has been dispatched via the
-		/// <see cref="IEventTarget.DispatchEvent">IEventTarget.DispatchEvent</see>
-		/// method. If the method is called several times before invoking
-		/// <see cref="IEventTarget.DispatchEvent">IEventTarget.DispatchEvent</see>,
-		/// only the final invocation takes precedence. If called from a
-		/// subclass of <see cref="IEvent">Event</see> interface only the
-		/// values specified in this method are modified, all other
-		/// attributes are left unchanged. This method sets the
-		/// <see cref="IEvent.Type">IEvent.Type</see> attribute to
-		/// <c>eventTypeArg</c>, and
-		/// <see cref="IEvent.LocalName">IEvent.LocalName</see> and
-		/// <see cref="IEvent.NamespaceUri">IEvent.NamespaceUri</see>
-		/// to <c>null</c>. To initialize an event with a local name and
-		/// namespace URI, use the
-		/// <see cref="InitEventNs">InitEventNs</see> method.
+		/// This method may only be called before the <see cref="IEvent">IEvent</see> has been dispatched via the
+		/// <see cref="IEventTarget.DispatchEvent">IEventTarget.DispatchEvent</see> method. If the method is called 
+        /// several times before invoking <see cref="IEventTarget.DispatchEvent">IEventTarget.DispatchEvent</see>,
+		/// only the final invocation takes precedence. If called from a subclass of <see cref="IEvent">Event</see> 
+        /// interface only the values specified in this method are modified, all other attributes are left unchanged. 
+        /// This method sets the <see cref="IEvent.Type">IEvent.Type</see> attribute to <c>eventTypeArg</c>, 
+        /// and <see cref="IEvent.NamespaceUri">IEvent.NamespaceUri</see> to <c>null</c>. To initialize an event with a 
+        /// local name and namespace URI, use the <see cref="InitEventNs">InitEventNs</see> method.
 		/// </remarks>
-		/// <param name="eventTypeArg">
-		/// Specifies the event type.
-		/// </param>
-		/// <param name="canBubbleArg">
-		/// Specifies whether or not the event can bubble. This parameter
-		/// overrides the intrinsic bubbling behavior of the event.
-		/// </param>
-		/// <param name="cancelableArg">
-		/// Specifies whether or not the event's default action can be
-		/// prevented. This parameter overrides the intrinsic cancelable
-		/// behavior of the event.
-		/// </param>
-		void InitEvent(
-			string eventTypeArg,
-			bool canBubbleArg,
-			bool cancelableArg);
-		
-		#endregion
-		
-		#region DOM Level 3 Experimental
+		/// <param name="eventTypeArg">Specifies the event type.</param>
+		/// <param name="canBubbleArg">Specifies whether or not the event can bubble. This parameter
+		/// overrides the intrinsic bubbling behavior of the event.</param>
+		/// <param name="cancelableArg">Specifies whether or not the event's default action can be
+		/// prevented. This parameter overrides the intrinsic cancelable behavior of the event.</param>
+		void InitEvent(string eventTypeArg, bool canBubbleArg, bool cancelableArg);
 		
 		/// <summary>
 		/// (DOM Level 3 Experimental)
@@ -315,27 +265,18 @@ namespace SharpVectors.Dom.Events
 		/// <param name="canBubbleArg">
 		/// Specifies whether or not the event can bubble.
 		/// </param>
-		/// <param name="cancelableArg">
-		/// Specifies whether or not the event's default action can be prevented.
-		/// </param>
-		void InitEventNs(
-			string namespaceUriArg,
-			string eventTypeArg,
-			bool canBubbleArg,
-			bool cancelableArg);
+		/// <param name="cancelableArg">Specifies whether or not the event's default action can be prevented.</param>
+		void InitEventNs(string namespaceUriArg, string eventTypeArg, bool canBubbleArg, bool cancelableArg);
 		
 		/// <summary>
 		/// (DOM Level 3 Experimental)
-		/// Immediately prevent event listeners of the same group
-		/// to be triggered.
+		/// Immediately prevent event listeners of the same group to be triggered.
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// This method is used to prevent event listeners of the same group
-		/// to be triggered and, unlike
-		/// <see cref="StopPropagation">StopPropagation</see> its effect is
-		/// immediate. Once it has been called, further calls to that method
-		/// have no additional effect.
+		/// This method is used to prevent event listeners of the same group to be triggered and, unlike
+		/// <see cref="StopPropagation">StopPropagation</see> its effect is immediate. Once it has been called, 
+        /// further calls to that method have no additional effect.
 		/// </para>
 		/// <para>
 		/// Note: This method does not prevent the default action from being
@@ -345,8 +286,6 @@ namespace SharpVectors.Dom.Events
 		/// </remarks>
 		/// <seealso href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/events.html#Events-propagation-and-groups">Event propagation and event groups</seealso>
 		void StopImmediatePropagation();
-		
-		#endregion
 		
 		#endregion
 	}

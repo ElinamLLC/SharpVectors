@@ -443,17 +443,17 @@ namespace SharpVectors.Renderers.Gdi
                 style = style | (int)FontStyle.Bold;
             }
 
-            if (element.GetPropertyValue("font-style") == "italic")
+            if (string.Equals(element.GetPropertyValue("font-style"), "italic", comparer))
             {
                 style = style | (int)FontStyle.Italic;
             }
 
             string textDeco = element.GetPropertyValue("text-decoration");
-            if (textDeco == "line-through")
+            if (string.Equals(textDeco, "line-through", comparer))
             {
                 style = style | (int)FontStyle.Strikeout;
             }
-            else if (textDeco == "underline")
+            else if (string.Equals(textDeco, "underline", comparer))
             {
                 style = style | (int)FontStyle.Underline;
             }

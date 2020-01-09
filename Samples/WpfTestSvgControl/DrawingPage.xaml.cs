@@ -102,7 +102,7 @@ namespace WpfTestSvgControl
         private Cursor _panToolCursor;
         private Cursor _panToolDownCursor;
 
-        private Cursor _canvasCursor;
+//        private Cursor _canvasCursor;
 
         private MainWindow _mainWindow;
         private OptionSettings _optionSettings;
@@ -812,10 +812,10 @@ namespace WpfTestSvgControl
                     // Shift + left- or right-down initiates zooming mode.
                     _mouseHandlingMode = ZoomPanMouseHandlingMode.Zooming;
 
-                    if (zoomPanControl != null && _canvasCursor != null)
-                    {
-                        zoomPanControl.Cursor = _canvasCursor;
-                    }
+                    //if (zoomPanControl != null && _canvasCursor != null)
+                    //{
+                    //    zoomPanControl.Cursor = _canvasCursor;
+                    //}
                 }
                 else if (_mouseButtonDown == MouseButton.Left)
                 {
@@ -926,10 +926,10 @@ namespace WpfTestSvgControl
                     e.Handled = true;
                 }
 
-                if (zoomPanControl != null && _canvasCursor != null)
-                {
-                    zoomPanControl.Cursor = _canvasCursor;
-                }
+                //if (zoomPanControl != null && _canvasCursor != null)
+                //{
+                //    zoomPanControl.Cursor = _canvasCursor;
+                //}
             }
         }
 
@@ -967,10 +967,10 @@ namespace WpfTestSvgControl
                 }
                 else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.Zooming)
                 {
-                    if (zoomPanControl != null && _canvasCursor != null)
-                    {
-                        zoomPanControl.Cursor = _canvasCursor;
-                    }
+                    //if (zoomPanControl != null && _canvasCursor != null)
+                    //{
+                    //    zoomPanControl.Cursor = _canvasCursor;
+                    //}
 
                     Point curZoomAndPanControlMousePoint = e.GetPosition(zoomPanControl);
                     Vector dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
@@ -994,10 +994,10 @@ namespace WpfTestSvgControl
                 }
                 else if (_mouseHandlingMode == ZoomPanMouseHandlingMode.DragZooming)
                 {
-                    if (zoomPanControl != null && _canvasCursor != null)
-                    {
-                        zoomPanControl.Cursor = _canvasCursor;
-                    }
+                    //if (zoomPanControl != null && _canvasCursor != null)
+                    //{
+                    //    zoomPanControl.Cursor = _canvasCursor;
+                    //}
 
                     //
                     // When in drag zooming mode continously update the position of the rectangle
