@@ -1,91 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{340EF466-0248-4FAD-9616-EC693BD72D38}</ProjectGuid>
+    <TargetFrameworks>netstandard2.1;net40;net45;net46;net47;net48</TargetFrameworks>
+    <AssemblyOriginatorKeyFile>SharpVectors.Scripting.Jint.snk</AssemblyOriginatorKeyFile>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharpVectors.Scripting.Jint</RootNamespace>
     <AssemblyName>SharpVectors.Scripting.Jint</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <SignAssembly>true</SignAssembly>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>..\..\Output\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <OutputPath>..\..\Output\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>SharpVectors.Scripting.Jint.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Documentation|AnyCPU'">
-    <OutputPath>bin\Documentation\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>$(OutDir)\SharpVectors.Scripting.Jint.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Jint.2.11.58\lib\net40\Jint.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj" />
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj" />
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj" />
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ScriptClosureHandler.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptEngine.cs" />
-    <Compile Include="ScriptEngineProvider.cs" />
-    <Compile Include="ScriptEventHandler.cs" />
-    <Compile Include="ScriptTimerHandler.cs" />
+    <PackageReference Include="Jint" Version="2.11.58" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="SharpVectors.Scripting.Jint.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{d6bb65fc-240e-4241-b2ed-a7fb3f13e978}</Project>
-      <Name>SharpVectors.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
-      <Project>{351b0a6e-2f6b-497a-844b-dcb5a502fb0d}</Project>
-      <Name>SharpVectors.Css</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Project>{fe34cbc0-d23c-4a95-ba64-83a031814010}</Project>
-      <Name>SharpVectors.Dom</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
-      <Project>{5d336f48-3fb9-4382-b4b9-06974c764007}</Project>
-      <Name>SharpVectors.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

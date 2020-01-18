@@ -297,7 +297,7 @@ namespace SharpVectors.Converters
             ConverterOptions options = new ConverterOptions(this);
             if (_errorMessage != null)
             {
-                options._errorMessage = String.Copy(_errorMessage);
+                options._errorMessage = new string(_errorMessage.ToCharArray());
             }
 
             return options;

@@ -137,8 +137,9 @@ namespace WpfTestSvgControl
 
             _mouseHandlingMode = ZoomPanMouseHandlingMode.SelectPoint;
 
-            string workDir = Path.Combine(Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), TemporalDirName);
+            //string workDir = Path.Combine(Path.GetDirectoryName(
+            //    System.Reflection.Assembly.GetExecutingAssembly().Location), TemporalDirName);
+            string workDir = Path.Combine(Path.GetFullPath("..\\"), TemporalDirName);
 
             _workingDir = new DirectoryInfo(workDir);
 

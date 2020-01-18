@@ -1,45 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}</ProjectGuid>
+    <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WpfW3cSvgTestSuite</RootNamespace>
-    <AssemblyName>WpfW3cSvgTestSuite</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
+    <UseWPF>true</UseWPF>
     <ApplicationIcon>App.ico</ApplicationIcon>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>Output\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Output\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit, Version=4.3.0.9390, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
@@ -50,285 +19,73 @@
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="AboutPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Adorned\LoadingWait.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="BrowserPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DebugPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DrawingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PromptDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SvgPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SvgTestResultsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TraceDocument.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="XamlPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Adorned\AdornedControl.cs" />
-    <Compile Include="Adorned\AdornerPlacement.cs" />
-    <Compile Include="Adorned\FrameworkElementAdorner.cs" />
-    <Compile Include="Adorned\LoadingWait.xaml.cs">
-      <DependentUpon>LoadingWait.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="BrowserPage.xaml.cs">
-      <DependentUpon>BrowserPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DebugPage.xaml.cs">
-      <DependentUpon>DebugPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HtmlConverter\HtmlCssParser.cs" />
-    <Compile Include="HtmlConverter\HtmlFromXamlConverter.cs" />
-    <Compile Include="HtmlConverter\HtmlLexicalAnalyzer.cs" />
-    <Compile Include="HtmlConverter\HtmlParser.cs" />
-    <Compile Include="HtmlConverter\HtmlSchema.cs" />
-    <Compile Include="HtmlConverter\HtmlTokenType.cs" />
-    <Compile Include="HtmlConverter\HtmlToXamlConverter.cs" />
-    <Compile Include="ITestPage.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DrawingPage.xaml.cs">
-      <DependentUpon>DrawingPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindowSettings.cs" />
-    <Compile Include="OptionSettings.cs" />
-    <Compile Include="PromptDialog.xaml.cs">
-      <DependentUpon>PromptDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SvgPage.xaml.cs">
-      <DependentUpon>SvgPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SvgTestCase.cs" />
-    <Compile Include="SvgTestCategory.cs" />
-    <Compile Include="SvgTestInfo.cs" />
-    <Compile Include="SvgTestResult.cs" />
-    <Compile Include="SvgTestResultsPage.xaml.cs">
-      <DependentUpon>SvgTestResultsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SvgTestState.cs" />
-    <Compile Include="SvgTestSuite.cs" />
-    <Compile Include="TraceDocument.xaml.cs">
-      <DependentUpon>TraceDocument.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TraceTextSource.cs" />
-    <Compile Include="XamlPage.xaml.cs">
-      <DependentUpon>XamlPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
+    <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj">
-      <Project>{E8056611-E49C-4BC3-A682-A629D5CEC11C}</Project>
-      <Name>SharpVectors.Converters.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
-      <Name>SharpVectors.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj">
-      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
-      <Name>SharpVectors.Css</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
-      <Name>SharpVectors.Dom</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj">
-      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
-      <Name>SharpVectors.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj">
-      <Project>{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}</Project>
-      <Name>SharpVectors.Rendering.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj">
-      <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
-      <Name>SharpVectors.Runtime.Wpf</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PanTool.cur" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\PanToolDown.cur" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="App.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\FolderClose.svg" />
     <Resource Include="Images\FolderOpen.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Copy.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Cut.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Debug.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Delete.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Find.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Format.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Number.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Open.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Output.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Paste.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Redo.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Run.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Save.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Settings.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Space.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\SvgLogo.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Undo.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\WordWrap.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Test.svg" />
     <Resource Include="Images\TestRunner.svg" />
     <Resource Include="Images\Web.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\TestResultDetail.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\SvgLogoBasic.svg" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

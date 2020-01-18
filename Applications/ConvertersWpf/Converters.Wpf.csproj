@@ -1,308 +1,97 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}</ProjectGuid>
+    <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SharpVectors.Converters</RootNamespace>
     <AssemblyName>SharpVectors</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <StartupObject>SharpVectors.Converters.MainStartup</StartupObject>
     <ApplicationIcon>Images\SharpVectors.ico</ApplicationIcon>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>Output\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Output\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit">
       <HintPath>..\..\Libraries\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ConverterWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainApplication.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <EmbeddedResource Include="ConverterHelp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Page Include="CircularProgressBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DirectoryConverterOutput.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DirectoryConverterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FileConverterOutput.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FileConverterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FileListConverterOutput.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FileListConverterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="HelpPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="OptionsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="StartPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="VerticalTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="MainApplication.xaml.cs">
-      <DependentUpon>MainApplication.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircularProgressBar.xaml.cs">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConsoleConverter.cs" />
-    <Compile Include="ConsoleDirectoryConverter.cs" />
-    <Compile Include="ConsoleFileConverter.cs" />
-    <Compile Include="ConsoleFilesConverter.cs" />
-    <Compile Include="ConsoleApplication.cs" />
-    <Compile Include="ConsoleProgress.cs" />
-    <Compile Include="ConsoleWorker.cs" />
-    <Compile Include="ConsoleWriter.cs" />
-    <Compile Include="ConsoleWriterVerbosity.cs" />
-    <Compile Include="ConverterCommandLines.cs" />
-    <Compile Include="ConverterOptions.cs" />
-    <Compile Include="ConverterUIOption.cs" />
-    <Compile Include="ConverterWindow.xaml.cs">
+    <Compile Update="ConverterWindow.xaml.cs">
       <DependentUpon>ConverterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConverterWindowsAPI.cs" />
-    <Compile Include="DirectoryConverterOutput.xaml.cs">
+    <Compile Update="DirectoryConverterOutput.xaml.cs">
       <DependentUpon>DirectoryConverterOutput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DirectoryConverterPage.xaml.cs">
+    <Compile Update="DirectoryConverterPage.xaml.cs">
       <DependentUpon>DirectoryConverterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileConverterOutput.xaml.cs">
+    <Compile Update="FileConverterOutput.xaml.cs">
       <DependentUpon>FileConverterOutput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileConverterPage.xaml.cs">
+    <Compile Update="FileConverterPage.xaml.cs">
       <DependentUpon>FileConverterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileListConverterOutput.xaml.cs">
+    <Compile Update="FileListConverterOutput.xaml.cs">
       <DependentUpon>FileListConverterOutput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileListConverterPage.xaml.cs">
+    <Compile Update="FileListConverterPage.xaml.cs">
       <DependentUpon>FileListConverterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HelpPage.xaml.cs">
+    <Compile Update="HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IObservable.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="IObserver.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindowSettings.cs" />
-    <Compile Include="MouseHandlingMode.cs" />
-    <Compile Include="ConverterOptionsParser.cs" />
-    <Compile Include="OptionsPage.xaml.cs">
+    <Compile Update="OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MainStartup.cs" />
-    <Compile Include="StartPage.xaml.cs">
+    <Compile Update="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WatermarkAdorner.cs" />
-    <Compile Include="WatermarkService.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
+    <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj">
-      <Project>{e8056611-e49c-4bc3-a682-a629d5cec11c}</Project>
-      <Name>SharpVectors.Converters.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
-      <Name>SharpVectors.Core</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj">
-      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
-      <Name>SharpVectors.Css</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
-      <Name>SharpVectors.Dom</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj">
-      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
-      <Name>SharpVectors.Model</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj">
-      <Project>{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}</Project>
-      <Name>SharpVectors.Rendering.Wpf</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj">
-      <Project>{2cd52982-a1c2-4a14-9d69-d64719357216}</Project>
-      <Name>SharpVectors.Runtime.Wpf</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\SharpVectors.ico" />
@@ -325,29 +114,4 @@
   <ItemGroup>
     <Resource Include="Images\ConsoleConversion.png" />
   </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

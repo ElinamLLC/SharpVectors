@@ -13,7 +13,7 @@ namespace TestSvgControl
 
         private void OnFormLoad(object sender, EventArgs e)
         {
-            string quickHelpFile = Path.GetFullPath("QuickHelp.rtf");
+            string quickHelpFile = Path.GetFullPath(Path.Combine("..\\", "QuickHelp.rtf"));
             if (!string.IsNullOrWhiteSpace(quickHelpFile) && File.Exists(quickHelpFile))
             {
                 richTextBox.LoadFile(quickHelpFile);

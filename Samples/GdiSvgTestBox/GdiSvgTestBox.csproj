@@ -1,44 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5A71211F-9EDA-4C43-8DDC-E3EB54843113}</ProjectGuid>
+    <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>GdiSvgTestBox</RootNamespace>
-    <AssemblyName>GdiSvgTestBox</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>Output\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Output\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>App.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.TextEditor">
@@ -47,20 +20,8 @@
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
       <HintPath>..\..\Libraries\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
@@ -69,130 +30,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DebugDockPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebugDockPanel.Designer.cs">
-      <DependentUpon>DebugDockPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DockPanelContent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DockPanelContent.Designer.cs">
-      <DependentUpon>DockPanelContent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HitTestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HitTestForm.Designer.cs">
-      <DependentUpon>HitTestForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ITestPagePanel.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OptionSettings.cs" />
-    <Compile Include="PopupMessage.cs">
+    <Compile Update="PopupMessage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PopupMessage.Designer.cs">
-      <DependentUpon>PopupMessage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReplaceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReplaceForm.Designer.cs">
-      <DependentUpon>ReplaceForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SearchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SearchForm.Designer.cs">
-      <DependentUpon>SearchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SearchGlobals.cs" />
-    <Compile Include="SearchReplaceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SearchReplaceForm.Designer.cs">
-      <DependentUpon>SearchReplaceForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SettingsDockPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SettingsDockPanel.Designer.cs">
-      <DependentUpon>SettingsDockPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SizeModeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SizeModeForm.Designer.cs">
-      <DependentUpon>SizeModeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SvgInputDockPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SvgInputDockPanel.Designer.cs">
-      <DependentUpon>SvgInputDockPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TextBoxTraceListener.cs" />
-    <EmbeddedResource Include="DebugDockPanel.resx">
-      <DependentUpon>DebugDockPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HitTestForm.resx">
-      <DependentUpon>HitTestForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PopupMessage.resx">
-      <DependentUpon>PopupMessage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="ReplaceForm.resx">
-      <DependentUpon>ReplaceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SearchForm.resx">
-      <DependentUpon>SearchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SearchReplaceForm.resx">
-      <DependentUpon>SearchReplaceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsDockPanel.resx">
-      <DependentUpon>SettingsDockPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SizeModeForm.resx">
-      <DependentUpon>SizeModeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvgInputDockPanel.resx">
-      <DependentUpon>SvgInputDockPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
@@ -202,63 +42,38 @@
     <Content Include="Images\Test.ico" />
     <Content Include="Images\TestResultDetail.ico" />
     <Content Include="Images\TestRunner.ico" />
-    <None Include="Resources\ReplaceAll.png" />
-    <None Include="Resources\FindPrevious.png" />
-    <None Include="Resources\FindNext.png" />
-    <None Include="Resources\Run.png" />
-    <None Include="Resources\Format.png" />
-    <None Include="Resources\ZoomReset.png" />
-    <None Include="Resources\ZoomOut.png" />
-    <None Include="Resources\ZoomIn.png" />
-    <None Include="Resources\WordWrap.png" />
-    <None Include="Resources\Unknown.png" />
-    <None Include="Resources\Undo.png" />
-    <None Include="Resources\Thumbnail.png" />
-    <None Include="Resources\Success.png" />
-    <None Include="Resources\Space.png" />
-    <None Include="Resources\SaveAs.png" />
-    <None Include="Resources\Save.png" />
-    <None Include="Resources\Replace.png" />
-    <None Include="Resources\Redo.png" />
-    <None Include="Resources\PrintPreview.png" />
-    <None Include="Resources\Print.png" />
-    <None Include="Resources\Paste.png" />
-    <None Include="Resources\Partial.png" />
-    <None Include="Resources\Panning.png" />
-    <None Include="Resources\PageNumber.png" />
-    <None Include="Resources\Open.png" />
-    <None Include="Resources\NewFile.png" />
-    <None Include="Resources\FolderOpen.png" />
-    <None Include="Resources\FolderClose.png" />
-    <None Include="Resources\Find.png" />
-    <None Include="Resources\Failure.png" />
-    <None Include="Resources\Expand.png" />
-    <None Include="Resources\Delete.png" />
-    <None Include="Resources\Cut.png" />
-    <None Include="Resources\Copy.png" />
-    <None Include="Resources\Collapse.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{d6bb65fc-240e-4241-b2ed-a7fb3f13e978}</Project>
-      <Name>SharpVectors.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj">
-      <Project>{351b0a6e-2f6b-497a-844b-dcb5a502fb0d}</Project>
-      <Name>SharpVectors.Css</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Project>{fe34cbc0-d23c-4a95-ba64-83a031814010}</Project>
-      <Name>SharpVectors.Dom</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj">
-      <Project>{5d336f48-3fb9-4382-b4b9-06974c764007}</Project>
-      <Name>SharpVectors.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj">
-      <Project>{0ad99d97-24ed-484d-9430-9905811f8a4f}</Project>
-      <Name>SharpVectors.Rendering.Gdi</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

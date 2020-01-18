@@ -427,15 +427,15 @@ namespace SharpVectors.Renderers
 
             if (!string.IsNullOrWhiteSpace(_defaultFontName))
             {
-                clonedSettings._defaultFontName = string.Copy(_defaultFontName);
+                clonedSettings._defaultFontName = new string(_defaultFontName.ToCharArray());
             }
             if (!string.IsNullOrWhiteSpace(_userCssFilePath))
             {
-                clonedSettings._userCssFilePath = string.Copy(_userCssFilePath);
+                clonedSettings._userCssFilePath = new string(_userCssFilePath.ToCharArray());
             }
             if (!string.IsNullOrWhiteSpace(_userAgentCssFilePath))
             {
-                clonedSettings._userAgentCssFilePath = string.Copy(_userAgentCssFilePath);
+                clonedSettings._userAgentCssFilePath = new string(_userAgentCssFilePath.ToCharArray());
             }
             if (_culture != null)
             {

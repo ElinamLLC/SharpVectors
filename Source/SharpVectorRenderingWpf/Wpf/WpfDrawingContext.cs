@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Globalization;
 using System.Collections.Generic;
 
@@ -13,9 +14,14 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
+        private const double DefaultDpi = 96.0d;
+
         private const string RegisteredIdKey = "_registeredIds";
 
         private string _name;
+
+        protected readonly double _dpiX;
+        protected readonly double _dpiY;
 
         private bool _renderingClip;
         private bool _isFragment;
@@ -51,6 +57,14 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
         {
+            var sysParam = typeof(SystemParameters);
+
+            var dpiXProperty = sysParam.GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+            var dpiYProperty = sysParam.GetProperty("Dpi",  BindingFlags.NonPublic | BindingFlags.Static);
+
+            _dpiX = (int)dpiXProperty.GetValue(null, null);
+            _dpiY = (int)dpiYProperty.GetValue(null, null);
+
             if (settings == null)
             {
                 settings = new WpfDrawingSettings();                
@@ -247,6 +261,51 @@ namespace SharpVectors.Renderers.Wpf
         {
             get {
                 return _quickBounds;
+            }
+        }
+
+        /// <summary>Gets the DPI along X axis.</summary>
+        /// <value>The DPI along the X axis.</value>
+        public double PixelsPerInchX
+        {
+            get {
+                return _dpiX;
+            }
+        }
+
+        /// <summary>Gets the DPI along Y axis.</summary>
+        /// <value>The DPI along the Y axis.</value>
+        public double PixelsPerInchY
+        {
+            get {
+                return _dpiY;
+            }
+        }
+
+        /// <summary>Gets the DPI scale on the X axis.</summary>
+        /// <value>The DPI scale for the X axis.</value>
+        public double DpiScaleX
+        {
+            get {
+                return _dpiX / DefaultDpi;
+            }
+        }
+
+        /// <summary>Gets the DPI scale on the Yaxis.</summary>
+        /// <value>The DPI scale for the Y axis.</value>
+        public double DpiScaleY
+        {
+            get {
+                return _dpiY / DefaultDpi;
+            }
+        }
+
+        /// <summary>Get or sets the PixelsPerDip at which the text should be rendered.</summary>
+        /// <value>The current PixelsPerDip value.</value>
+        public double PixelsPerDip
+        {
+            get {
+                return _dpiY / DefaultDpi;
             }
         }
 

@@ -79,24 +79,20 @@ namespace SharpVectors.Converters
 
         public string SourceDir
         {
-            get
-            {
+            get {
                 return _sourceDir;
             }
-            set
-            {
+            set {
                 _sourceDir = value;
             }
         }
 
         public bool ContinueOnError
         {
-            get
-            {
+            get {
                 return _continueOnError;
             }
-            set
-            {
+            set {
                 _continueOnError = value;
             }
         }
@@ -112,13 +108,11 @@ namespace SharpVectors.Converters
         /// </value>
         public bool Recursive
         {
-            get
-            {
+            get {
                 return _isRecursive;
             }
 
-            set
-            {
+            set {
                 _isRecursive = value;
             }
         }
@@ -132,13 +126,11 @@ namespace SharpVectors.Converters
         /// </value>
         public bool Overwrite
         {
-            get
-            {
+            get {
                 return _isOverwrite;
             }
 
-            set
-            {
+            set {
                 _isOverwrite = value;
             }
         }
@@ -154,13 +146,11 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeSecurity
         {
-            get
-            {
+            get {
                 return _includeSecurity;
             }
 
-            set
-            {
+            set {
                 _includeSecurity = value;
             }
         }
@@ -176,13 +166,11 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeHidden
         {
-            get
-            {
+            get {
                 return _includeHidden;
             }
 
-            set
-            {
+            set {
                 _includeHidden = value;
             }
         }
@@ -197,8 +185,7 @@ namespace SharpVectors.Converters
         /// </value>
         public bool WriterErrorOccurred
         {
-            get
-            {
+            get {
                 return _writerErrorOccurred;
             }
         }
@@ -217,12 +204,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool FallbackOnWriterError
         {
-            get
-            {
+            get {
                 return _fallbackOnWriterError;
             }
-            set
-            {
+            set {
                 _fallbackOnWriterError = value;
             }
         }
@@ -253,7 +238,7 @@ namespace SharpVectors.Converters
                 Debug.Assert(_sourceDir != null && _sourceDir.Length != 0);
                 if (string.IsNullOrWhiteSpace(outputDir))
                 {
-                    outputDir = String.Copy(_sourceDir);
+                    outputDir = new string(_sourceDir.ToCharArray());
                 }
                 _sourceInfoDir = new DirectoryInfo(_sourceDir);
                 _outputInfoDir = new DirectoryInfo(outputDir);
@@ -481,6 +466,7 @@ namespace SharpVectors.Converters
                 }
 
                 DirectoryInfo targetInfo = null;
+#if NET40
                 if (_includeSecurity)
                 {
                     targetInfo = target.CreateSubdirectory(sourceInfo.Name,
@@ -490,6 +476,9 @@ namespace SharpVectors.Converters
                 {
                     targetInfo = target.CreateSubdirectory(sourceInfo.Name);
                 }
+#elif NETCOREAPP
+                targetInfo = target.CreateSubdirectory(sourceInfo.Name);
+#endif
                 targetInfo.Attributes = fileAttr;
 
                 this.ProcessConversion(e, sourceInfo, targetInfo);
@@ -539,12 +528,13 @@ namespace SharpVectors.Converters
                             }
                         }
 
+#if NET
                         FileSecurity security = null;
-
                         if (_includeSecurity)
                         {
                             security = File.GetAccessControl(svgFileName);
                         }
+#endif
 
                         if (_worker.CancellationPending)
                         {
@@ -572,11 +562,13 @@ namespace SharpVectors.Converters
                             {
                                 File.SetAttributes(xamlFile, fileAttr);
 
+#if NET
                                 // if required to set the security or access control
                                 if (_includeSecurity)
                                 {
                                     File.SetAccessControl(xamlFile, security);
                                 }
+#endif
                             }
                         }
                         if (options.SaveZaml)
@@ -587,11 +579,13 @@ namespace SharpVectors.Converters
                             {
                                 File.SetAttributes(zamlFile, fileAttr);
 
+#if NET
                                 // if required to set the security or access control
                                 if (_includeSecurity)
                                 {
                                     File.SetAccessControl(zamlFile, security);
                                 }
+#endif
                             }
                         }
 
@@ -605,11 +599,13 @@ namespace SharpVectors.Converters
                             {
                                 File.SetAttributes(imageFile, fileAttr);
 
+#if NET
                                 // if required to set the security or access control
                                 if (_includeSecurity)
                                 {
                                     File.SetAccessControl(imageFile, security);
                                 }
+#endif
                             }
                         }
 

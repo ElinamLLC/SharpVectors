@@ -1699,15 +1699,15 @@ namespace SharpVectors.Renderers.Texts
                     isArabic = ArabicForms.IsArabicText(inputText);
                 }
 
+                char[] charArray = inputText.ToCharArray();
                 if (isRightToLeft || isArabic)
                 {
-                    char[] charArray = inputText.ToCharArray();
                     Array.Reverse(charArray);
                     _inputText = new string(charArray);
                 }
                 else
                 {
-                    _inputText = string.Copy(inputText);
+                    _inputText = new string(charArray);
                 }
 
                 if (_multiCharList == null || _multiCharList.Count == 0)

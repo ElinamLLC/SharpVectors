@@ -257,13 +257,13 @@ namespace GdiSvgTestBox
             {
                 return true;
             }
-            string currentPath = string.Copy(currentSuitePath);
+            string currentPath = new string(currentSuitePath.ToCharArray());
             if (!currentSuitePath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
             {
                 currentPath = currentSuitePath + "\\";
             }
 
-            string suitePath = string.Copy(_localSuitePath);
+            string suitePath = new string(_localSuitePath.ToCharArray());
             if (!_localSuitePath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
             {
                 suitePath = _localSuitePath + "\\";
@@ -404,7 +404,7 @@ namespace GdiSvgTestBox
                                 case "LocalSuitePath":
                                     if (optionValue.StartsWith(ParentSymbol, comparer))
                                     {
-                                        var inputPath = string.Copy(_localSuitePath);
+                                        var inputPath = new string(_localSuitePath.ToCharArray());
                                         int indexOf = inputPath.IndexOf(SharpVectors, comparer);
 
                                         if (indexOf > 0)
@@ -583,11 +583,11 @@ namespace GdiSvgTestBox
 
             if (_webSuitePath != null)
             {
-                optSettings._webSuitePath = string.Copy(_webSuitePath);
+                optSettings._webSuitePath = new string(_webSuitePath.ToCharArray());
             }
             if (_localSuitePath != null)
             {
-                optSettings._localSuitePath = string.Copy(_localSuitePath);
+                optSettings._localSuitePath = new string(_localSuitePath.ToCharArray());
             }
             if (_winPosition != null)
             {

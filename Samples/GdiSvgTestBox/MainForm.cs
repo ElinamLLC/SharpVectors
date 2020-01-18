@@ -61,7 +61,7 @@ namespace GdiSvgTestBox
             this.Height = (int)(Math.Min(1080, height) * 0.90);
 
             _optionSettings = new OptionSettings();
-            _testSettingsPath = Path.GetFullPath(SvgTestSettings);
+            _testSettingsPath = Path.GetFullPath(Path.Combine("..\\", SvgTestSettings));
             if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
             {
                 _optionSettings.Load(_testSettingsPath, this);

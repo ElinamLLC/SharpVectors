@@ -90,8 +90,7 @@ namespace WpfTestSvgSample
             this.Unloaded += OnWindowUnloaded;
             this.Closing  += OnWindowClosing;
 
-            _drawingDir = IoPath.Combine(IoPath.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), DrawingPage.TemporalDirName);
+            _drawingDir = IoPath.GetFullPath(IoPath.Combine("..\\", DrawingPage.TemporalDirName));
 
             if (!Directory.Exists(_drawingDir))
             {
@@ -99,7 +98,7 @@ namespace WpfTestSvgSample
             }
 
             _optionSettings = new OptionSettings();
-            _testSettingsPath = IoPath.GetFullPath(SvgTestSettings);
+            _testSettingsPath = IoPath.GetFullPath(IoPath.Combine("..\\", SvgTestSettings));
             if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
             {
                 _optionSettings.Load(_testSettingsPath);
@@ -1118,7 +1117,7 @@ namespace WpfTestSvgSample
                 return;
             }
 
-            _sourceDir = string.Copy(sourceDir);
+            _sourceDir = new string(sourceDir.ToCharArray());
             _isRecursiveSearch = _optionSettings.RecursiveSearch;
 
             string[] svgFiles = Directory.GetFiles(sourceDir, SvgFilePattern, SearchOption.TopDirectoryOnly);

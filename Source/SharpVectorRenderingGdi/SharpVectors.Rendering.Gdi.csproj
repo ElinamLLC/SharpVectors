@@ -1,216 +1,45 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0AD99D97-24ED-484D-9430-9905811F8A4F}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>
-    </ApplicationIcon>
-    <AssemblyKeyContainerName>
-    </AssemblyKeyContainerName>
-    <AssemblyName>SharpVectors.Rendering.Gdi</AssemblyName>
+    <TargetFrameworks>netcoreapp3.1;net40;net45;net46;net47;net48</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
     <AssemblyOriginatorKeyFile>SharpVectors.Rendering.Gdi.snk</AssemblyOriginatorKeyFile>
     <OutputType>Library</OutputType>
     <RootNamespace>SharpVectors.Renderers</RootNamespace>
     <SignAssembly>true</SignAssembly>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\Output\</OutputPath>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <ConfigurationOverrideFile>
-    </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <DocumentationFile>
-    </DocumentationFile>
-    <DebugSymbols>true</DebugSymbols>
-    <FileAlignment>4096</FileAlignment>
-    <NoStdLib>false</NoStdLib>
-    <NoWarn>
-    </NoWarn>
-    <Optimize>false</Optimize>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>full</DebugType>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\..\Output\</OutputPath>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <ConfigurationOverrideFile>
-    </ConfigurationOverrideFile>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>
-    </DocumentationFile>
-    <DebugSymbols>false</DebugSymbols>
-    <FileAlignment>4096</FileAlignment>
-    <NoStdLib>false</NoStdLib>
-    <NoWarn>
-    </NoWarn>
-    <Optimize>true</Optimize>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>none</DebugType>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Documentation|AnyCPU' ">
-    <OutputPath>..\..\Output\</OutputPath>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <ConfigurationOverrideFile>
-    </ConfigurationOverrideFile>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>..\..\Output\SharpVectors.Rendering.Gdi.xml</DocumentationFile>
-    <DebugSymbols>false</DebugSymbols>
-    <FileAlignment>4096</FileAlignment>
-    <NoStdLib>false</NoStdLib>
-    <NoWarn>
-    </NoWarn>
-    <Optimize>true</Optimize>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>none</DebugType>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>$(OutDir)\SharpVectors.Rendering.Gdi.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System">
-      <Name>System</Name>
-    </Reference>
-    <Reference Include="System.Drawing">
-      <Name>System.Drawing</Name>
-    </Reference>
-    <Reference Include="System.Windows.Forms">
-      <Name>System.Windows.Forms</Name>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Name>System.XML</Name>
-    </Reference>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
-      <Name>SharpVectors.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
-      <Name>SharpVectors.Css</Name>
-      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Name>SharpVectors.Dom</Name>
-      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
-      <Name>SharpVectors.Model</Name>
-      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\SvgPictureBox.Designer.cs">
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj" />
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj" />
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj" />
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Forms\SvgPictureBox.Designer.cs">
       <DependentUpon>SvgPictureBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="GdiConverter.cs" />
-    <Compile Include="Forms\SvgApplicationContext.cs" />
-    <Compile Include="Forms\SvgPictureBox.cs">
+    <Compile Update="Forms\SvgPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\SvgPictureBoxWindow.cs" />
-    <Compile Include="Forms\SvgCacheManager.cs" />
-    <Compile Include="GdiRenderingSettings.cs" />
-    <Compile Include="GdiObject.cs" />
-    <Compile Include="Gdi\GdiFontFamilyInfo.cs" />
-    <Compile Include="Gdi\GdiFontFamilyType.cs" />
-    <Compile Include="Gdi\GdiGradientStop.cs" />
-    <Compile Include="Gdi\GdiLinearGradientFill.cs" />
-    <Compile Include="Gdi\GdiRadialGradientFill.cs" />
-    <Compile Include="Internal\GdiGraphicsListenerImpl.cs" />
-    <Compile Include="Internal\GdiHitTestHelperImpl.cs" />
-    <Compile Include="GdiSvgWindow.cs" />
-    <Compile Include="Gdi\GdiGraphics.cs" />
-    <Compile Include="Gdi\GdiGraphicsContainer.cs" />
-    <Compile Include="Internal\GdiGraphicsImpl.cs" />
-    <Compile Include="Gdi\GdiGraphicsListener.cs" />
-    <Compile Include="Gdi\GdiHitTestHelper.cs" />
-    <Compile Include="Gdi\GdiHitTestResult.cs" />
-    <Compile Include="Gdi\GdiRenderingHelper.cs" />
-    <Compile Include="Gdi\GdiTextRendering.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiGraphicsRenderer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiRendering.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiPathRendering.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Internal\GdiGraphicsWrapper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiSvgColor.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiSvgPaint.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiGradientFill.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiFill.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiPatternFill.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiRootRendering.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiImageRendering.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiMarkerRendering.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gdi\GdiRenderingBase.cs" />
-    <Compile Include="SvgAlertArgs.cs" />
-    <Compile Include="SvgConverter.cs" />
-    <Compile Include="SvgErrorArgs.cs" />
-    <Compile Include="SvgImageSource.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Diagrams\GdiGraphics.cd" />
-    <None Include="SharpVectors.Rendering.Gdi.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Forms\SvgPictureBox.resx">
+    <EmbeddedResource Update="Forms\SvgPictureBox.resx">
       <DependentUpon>SvgPictureBox.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>

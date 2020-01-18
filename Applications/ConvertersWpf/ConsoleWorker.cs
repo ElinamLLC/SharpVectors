@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+#if NET40
 using System.Runtime.Remoting.Messaging;
+#endif
 
 namespace SharpVectors.Converters
 {
@@ -29,16 +31,16 @@ namespace SharpVectors.Converters
         /// </summary>
         public ConsoleWorker()
             : this(1)
-        {   
+        {
         }
 
         public ConsoleWorker(int maximumCount)
         {
             _countProtector = new Object();
 
-            _maxCount       = maximumCount;
+            _maxCount = maximumCount;
             _workerCallback = new AsyncCallback(this.OnRunWorkerCompleted);
-            _eventHandler   = new DoWorkEventHandler(this.OnDoWork);
+            _eventHandler = new DoWorkEventHandler(this.OnDoWork);
         }
 
         #endregion
@@ -68,8 +70,7 @@ namespace SharpVectors.Converters
         /// <value><c>true</c> if this instance is busy; otherwise, <c>false</c>.</value>
         public bool IsBusy
         {
-            get
-            {
+            get {
                 lock (_countProtector)
                 {
                     if (_count >= _maxCount)
@@ -88,8 +89,7 @@ namespace SharpVectors.Converters
         /// <value><c>true</c> if [cancellation pending]; otherwise, <c>false</c>.</value>
         public bool CancellationPending
         {
-            get
-            {
+            get {
                 return _cancelationPending;
             }
         }
@@ -105,7 +105,7 @@ namespace SharpVectors.Converters
         public bool RunWorkerAsync(bool abortIfBusy)
         {
             return this.RunWorkerAsync(abortIfBusy, null);
-        }      
+        }
 
         /// <summary>
         /// Runs the worker async.
@@ -223,9 +223,11 @@ namespace SharpVectors.Converters
 
             try
             {
+#if NET40
                 var doWorkDelegate = (DoWorkEventHandler)((AsyncResult)ar).AsyncDelegate;
 
                 doWorkDelegate.EndInvoke(ar);
+#endif
 
                 if (this.RunWorkerCompleted != null)
                 {
@@ -239,7 +241,7 @@ namespace SharpVectors.Converters
                 {
                     this.RunWorkerCompleted(this, new RunWorkerCompletedEventArgs(args.Result,
                             ex, args.Cancel));
-                }               	
+                }
             }
 
             _count--;

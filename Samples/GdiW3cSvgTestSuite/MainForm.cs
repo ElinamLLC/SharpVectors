@@ -14,9 +14,8 @@ namespace GdiW3cSvgTestSuite
     {
         #region Private Fields
 
-        public const string AppTitle        = "Svg Test Suite";
-        public const string AppErrorTitle   = "Svg Test Suite - Error";
-//        public const string SvgTestSettings = "SvgTestSettings.xml";
+        public const string AppTitle      = "Svg Test Suite";
+        public const string AppErrorTitle = "Svg Test Suite - Error";
 
         private DockPanel _dockPanel;
         private DockingTheme _currentTheme;
@@ -67,7 +66,7 @@ namespace GdiW3cSvgTestSuite
             this.Height = (int)(Math.Min(1080, height) * 0.90);
             
             _optionSettings = new OptionSettings();
-            _testSettingsPath = Path.GetFullPath(OptionSettings.SettingsFileName);
+            _testSettingsPath = Path.GetFullPath(Path.Combine("..\\", OptionSettings.SettingsFileName));
             if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
             {
                 _optionSettings.Load(_testSettingsPath, this);

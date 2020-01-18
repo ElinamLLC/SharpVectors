@@ -58,7 +58,8 @@ namespace GdiSvgTestBox
             this._vsToolStripExtender = new VisualStudioToolStripExtender(this.components);
             _vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
 
-            string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string workingDir = Path.GetFullPath("..\\");
 
             _svgFilePath  = Path.Combine(workingDir, SvgFileName);
             _backFilePath = Path.Combine(workingDir, BackFileName);
@@ -409,7 +410,7 @@ namespace GdiSvgTestBox
                 if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
                 {
-                    _currentFileName = string.Copy(filePath);
+                    _currentFileName = new string(filePath.ToCharArray());
 
                     if (!string.IsNullOrWhiteSpace(_svgFilePath))
                     {
@@ -841,7 +842,7 @@ namespace GdiSvgTestBox
 
             textEditor.Document.FoldingManager.UpdateFoldings(string.Empty, null);
 
-            _currentFileName = string.Copy(documentFilePath);
+            _currentFileName = new string(documentFilePath.ToCharArray());
 
             await this.RenderSvgSource(_currentFileName);
         }
@@ -869,7 +870,7 @@ namespace GdiSvgTestBox
 
             if (!isSaveAs)
             {
-                _currentFileName = string.Copy(documentFilePath);
+                _currentFileName = new string(documentFilePath.ToCharArray());
             }
         }
 

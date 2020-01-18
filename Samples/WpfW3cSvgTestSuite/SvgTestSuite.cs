@@ -12,7 +12,7 @@ namespace WpfW3cSvgTestSuite
 
         public const int TestSuiteCount     = 3;
 
-        public const string LocalDirBase    = @"..\..\W3cSvgTestSuites\";
+        public const string LocalDirBase    = @"..\..\..\W3cSvgTestSuites\";
         public const string WebDirBase      = "https://github.com/ElinamLLC/SharpVectors-TestSuites/raw/master/";
 
         public const string FileExtXml      = ".xml";
@@ -440,38 +440,38 @@ namespace WpfW3cSvgTestSuite
 
             if (_version != null)
             {
-                clonedSuite._version = string.Copy(_version);
+                clonedSuite._version = new string(_version.ToCharArray());
             }
             if (_description != null)
             {
-                clonedSuite._description = string.Copy(_description);
+                clonedSuite._description = new string(_description.ToCharArray());
             }
 
             if (_suiteName != null)
             {
-                clonedSuite._suiteName = string.Copy(_suiteName);
+                clonedSuite._suiteName = new string(_suiteName.ToCharArray());
             }
             if (_suiteDirName != null)
             {
-                clonedSuite._suiteDirName = string.Copy(_suiteDirName);
+                clonedSuite._suiteDirName = new string(_suiteDirName.ToCharArray());
             }
 
             if (_testFileName != null)
             {
-                clonedSuite._testFileName = string.Copy(_testFileName);
+                clonedSuite._testFileName = new string(_testFileName.ToCharArray());
             }
             if (_resultFileName != null)
             {
-                clonedSuite._resultFileName = string.Copy(_resultFileName);
+                clonedSuite._resultFileName = new string(_resultFileName.ToCharArray());
             }
 
             if (_webSuitePath != null)
             {
-                clonedSuite._webSuitePath = string.Copy(_webSuitePath);
+                clonedSuite._webSuitePath = new string(_webSuitePath.ToCharArray());
             }
             if (_localSuitePath != null)
             {
-                clonedSuite._localSuitePath = string.Copy(_localSuitePath);
+                clonedSuite._localSuitePath = new string(_localSuitePath.ToCharArray());
             }
 
             return clonedSuite;

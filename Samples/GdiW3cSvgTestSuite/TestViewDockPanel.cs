@@ -135,7 +135,7 @@ namespace GdiW3cSvgTestSuite
 
             _testResults = new List<SvgTestResult>();
 
-            _testResultsPath = Path.GetFullPath(selectedSuite.ResultFileName);
+            _testResultsPath = Path.GetFullPath(Path.Combine("..\\", selectedSuite.ResultFileName));
             if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -149,7 +149,7 @@ namespace GdiW3cSvgTestSuite
                 }
             }
 
-            string fullFilePath = Path.GetFullPath(selectedSuite.TestFileName);
+            string fullFilePath = Path.GetFullPath(Path.Combine("..\\", selectedSuite.TestFileName));
             if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();

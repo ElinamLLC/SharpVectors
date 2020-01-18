@@ -26,6 +26,7 @@ namespace SharpVectors.Renderers.Texts
         public WpfFontTextBuilder(CultureInfo culture, double fontSize)
             : this(WpfDrawingSettings.DefaultFontFamily, culture, fontSize)
         {
+            _textWidth = 0;
         }
 
         public WpfFontTextBuilder(WpfFontFamilyInfo familyInfo, CultureInfo culture, double fontSize)

@@ -313,7 +313,7 @@ namespace WpfW3cSvgTestSuite
 
             string selectedPath     = _optionSettings.LocalSuitePath;
 
-            _testSettingsPath = IoPath.GetFullPath(OptionSettings.SettingsFileName);
+            _testSettingsPath = IoPath.GetFullPath(IoPath.Combine("..\\", OptionSettings.SettingsFileName));
             if (!string.IsNullOrWhiteSpace(_testSettingsPath) && File.Exists(_testSettingsPath))
             {
                 _optionSettings.Load(_testSettingsPath);
@@ -890,43 +890,41 @@ namespace WpfW3cSvgTestSuite
             }
 
             Stream svgStream = (svgStreamInfo != null) ? svgStreamInfo.Stream : null;
-
-            if (svgStream != null)
+            if (svgStream == null)
             {
-                string fileExt = IoPath.GetExtension(svgSource.ToString());
-                bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
-                    string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase);
+                return null;
+            }
 
+            string fileExt = IoPath.GetExtension(svgSource.ToString());
+            bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
+                string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase);
+
+            using (svgStream)
+            {
                 if (isCompressed)
                 {
-                    using (svgStream)
+                    using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
                     {
-                        using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                        using (FileSvgReader reader = new FileSvgReader(settings))
                         {
-                            using (FileSvgReader reader = new FileSvgReader(settings))
-                            {
-                                DrawingGroup drawGroup = reader.Read(zipStream);
+                            DrawingGroup drawGroup = reader.Read(zipStream);
 
-                                if (drawGroup != null)
-                                {
-                                    return drawGroup;
-                                }
+                            if (drawGroup != null)
+                            {
+                                return drawGroup;
                             }
                         }
                     }
                 }
                 else
                 {
-                    using (svgStream)
+                    using (var reader = new FileSvgReader(settings))
                     {
-                        using (FileSvgReader reader = new FileSvgReader(settings))
-                        {
-                            DrawingGroup drawGroup = reader.Read(svgStream);
+                        DrawingGroup drawGroup = reader.Read(svgStream);
 
-                            if (drawGroup != null)
-                            {
-                                return drawGroup;
-                            }
+                        if (drawGroup != null)
+                        {
+                            return drawGroup;
                         }
                     }
                 }
@@ -992,7 +990,7 @@ namespace WpfW3cSvgTestSuite
 
             _testResults = new List<SvgTestResult>();
 
-            _testResultsPath = IoPath.GetFullPath(selectedSuite.ResultFileName);
+            _testResultsPath = IoPath.GetFullPath(IoPath.Combine("..\\", selectedSuite.ResultFileName));
             if (!string.IsNullOrWhiteSpace(_testResultsPath) && File.Exists(_testResultsPath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -1006,7 +1004,7 @@ namespace WpfW3cSvgTestSuite
                 }
             }
 
-            string fullFilePath = IoPath.GetFullPath(selectedSuite.TestFileName);
+            string fullFilePath = IoPath.GetFullPath(IoPath.Combine("..\\", selectedSuite.TestFileName));
             if (!string.IsNullOrWhiteSpace(fullFilePath) && File.Exists(fullFilePath))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();

@@ -270,6 +270,7 @@ namespace SharpVectors.Converters
             }
             if (!destInfo.Exists)
             {
+#if NET40
                 if (dirSecurity != null)
                 {
                     destInfo.Create(dirSecurity);
@@ -278,6 +279,9 @@ namespace SharpVectors.Converters
                 {
                     destInfo.Create();
                 }
+#elif NETCOREAPP
+                destInfo.Create();
+#endif
                 destInfo.Attributes = sourceInfo.Attributes;
             }
             else
@@ -323,6 +327,7 @@ namespace SharpVectors.Converters
                 }
 
                 DirectoryInfo targetInfo = null;
+#if NET40
                 if (_includeSecurity)
                 {
                     targetInfo = target.CreateSubdirectory(sourceInfo.Name,
@@ -332,6 +337,9 @@ namespace SharpVectors.Converters
                 {
                     targetInfo = target.CreateSubdirectory(sourceInfo.Name);
                 }
+#elif NETCOREAPP
+                targetInfo = target.CreateSubdirectory(sourceInfo.Name);
+#endif
                 targetInfo.Attributes = fileAttr;
 
                 this.ProcessConversion(sourceInfo, targetInfo);
@@ -375,11 +383,13 @@ namespace SharpVectors.Converters
                         fileConverter.Convert(svgFileName, xamlFilePath);
 
                         File.SetAttributes(xamlFilePath, fileAttr);
+#if NET40
                         // if required to set the security or access control
                         if (_includeSecurity)
                         {
                             File.SetAccessControl(xamlFilePath, File.GetAccessControl(svgFileName));
                         }
+#endif
 
                         _convertedCount++;
 

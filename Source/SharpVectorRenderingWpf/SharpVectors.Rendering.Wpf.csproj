@@ -1,183 +1,55 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}</ProjectGuid>
+    <TargetFrameworks>netcoreapp3.1;net40;net45;net46;net47;net48</TargetFrameworks>
     <OutputType>library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <UseWpf>true</UseWpf>
     <RootNamespace>SharpVectors.Renderers</RootNamespace>
-    <AssemblyName>SharpVectors.Rendering.Wpf</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SharpVectors.Rendering.Wpf.snk</AssemblyOriginatorKeyFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>..\..\Output\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <OutputPath>..\..\Output\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Documentation|AnyCPU' ">
-    <OutputPath>..\..\Output\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\..\Output\SharpVectors.Rendering.Wpf.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>$(OutDir)\SharpVectors.Rendering.Wpf.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texts\WpfFontTextBuilder.cs" />
-    <Compile Include="Texts\WpfGlyphTextBuilder.cs" />
-    <Compile Include="Texts\WpfHorzTextRenderer.cs" />
-    <Compile Include="Texts\WpfPathTextBuilder.cs" />
-    <Compile Include="Texts\WpfPathTextRenderer.cs" />
-    <Compile Include="Texts\WpfSvgTextBuilder.cs" />
-    <Compile Include="Texts\WpfTextAnchor.cs" />
-    <Compile Include="Texts\WpfTextBuilder.cs" />
-    <Compile Include="Texts\WpfTextContext.cs" />
-    <Compile Include="Texts\WpfPathTextRun.cs" />
-    <Compile Include="Texts\WpfTextPlacement.cs" />
-    <Compile Include="Texts\WpfTextPosition.cs" />
-    <Compile Include="Texts\WpfTextRenderer.cs" />
-    <Compile Include="Texts\WpfTextRun.cs" />
-    <Compile Include="Texts\WpfTextStringFormat.cs" />
-    <Compile Include="Texts\WpfVertTextRenderer.cs" />
-    <Compile Include="Utils\WpfApplicationContext.cs" />
-    <Compile Include="Utils\WpfCacheManager.cs" />
-    <Compile Include="Utils\WpfResources.cs" />
-    <Compile Include="Utils\WpfSvgWindow.cs" />
-    <Compile Include="Utils\WpfConvert.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Utils\SvgConvert.cs" />
-    <Compile Include="Wpf\WpfARendering.cs" />
-    <Compile Include="Wpf\WpfDrawingContext.cs" />
-    <Compile Include="Wpf\WpfDrawingDocument.cs" />
-    <Compile Include="Wpf\WpfDrawingSettings.cs" />
-    <Compile Include="Wpf\WpfEmbeddedImageVisitor.cs" />
-    <Compile Include="Wpf\WpfFontFamilyInfo.cs" />
-    <Compile Include="Wpf\WpfFontFamilyType.cs" />
-    <Compile Include="Wpf\WpfFontFamilyVisitor.cs" />
-    <Compile Include="Wpf\WpfGroupRendering.cs" />
-    <Compile Include="Wpf\WpfClassVisitor.cs" />
-    <Compile Include="Wpf\WpfHitTestResult.cs" />
-    <Compile Include="Wpf\WpfIDVisitor.cs" />
-    <Compile Include="Wpf\WpfLinkVisitor.cs" />
-    <Compile Include="Wpf\WpfPatternRendering.cs" />
-    <Compile Include="Wpf\WpfRendererObject.cs" />
-    <Compile Include="Wpf\WpfSolidColorFill.cs" />
-    <Compile Include="Wpf\WpfSvgPaint.cs" />
-    <Compile Include="Wpf\WpfSvgColor.cs" />
-    <Compile Include="Wpf\WpfDrawingRenderer.cs" />
-    <Compile Include="Wpf\WpfSvgPaintContext.cs" />
-    <Compile Include="Wpf\WpfSymbolRendering.cs" />
-    <Compile Include="Wpf\WpfSvgRendering.cs" />
-    <Compile Include="Wpf\WpfFill.cs" />
-    <Compile Include="Wpf\WpfGradientFill.cs" />
-    <Compile Include="Wpf\WpfImageRendering.cs" />
-    <Compile Include="Wpf\WpfMarkerRendering.cs" />
-    <Compile Include="Wpf\WpfPathRendering.cs" />
-    <Compile Include="Wpf\WpfPatternFill.cs" />
-    <Compile Include="Wpf\WpfRendering.cs" />
-    <Compile Include="Wpf\WpfRenderingBase.cs" />
-    <Compile Include="Wpf\WpfRenderingHelper.cs" />
-    <Compile Include="Wpf\WpfSwitchRendering.cs" />
-    <Compile Include="Wpf\WpfTextRendering.cs" />
-    <Compile Include="Wpf\WpfUseRendering.cs" />
-    <Compile Include="Wpf\WpfVisitor.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Diagrams\Others.cd" />
-    <None Include="Diagrams\Rendering.cd" />
-    <None Include="Diagrams\Texts.cd" />
-    <None Include="Properties\Settings.settings">
+    <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SharpVectors.Rendering.Wpf.snk" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
-      <Project>{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}</Project>
-      <Name>SharpVectors.Core</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
-      <Project>{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}</Project>
-      <Name>SharpVectors.Css</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
-      <Project>{FE34CBC0-D23C-4A95-BA64-83A031814010}</Project>
-      <Name>SharpVectors.Dom</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
-      <Project>{5D336F48-3FB9-4382-B4B9-06974C764007}</Project>
-      <Name>SharpVectors.Model</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj">
-      <Project>{2CD52982-A1C2-4A14-9D69-D64719357216}</Project>
-      <Name>SharpVectors.Runtime.Wpf</Name>
-      <Private>False</Private>
-    </ProjectReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj" />
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj" />
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj" />
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj" />
+    <ProjectReference Include="..\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
+  </ItemGroup>
 </Project>

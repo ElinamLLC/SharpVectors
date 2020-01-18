@@ -59,7 +59,7 @@ namespace WpfTestSvgSample
         public OptionSettings()
         {
             _wpfSettings = new WpfDrawingSettings();
-            string currentDir = Path.GetFullPath(@".\Samples");
+            string currentDir = Path.GetFullPath(Path.Combine("..\\", "Samples"));
             if (!Directory.Exists(currentDir))
             {
                 Directory.CreateDirectory(currentDir);
@@ -87,7 +87,7 @@ namespace WpfTestSvgSample
             }
             if (string.IsNullOrWhiteSpace(testPath))
             {
-                string currentDir = Path.GetFullPath(@".\Samples");
+                string currentDir = Path.GetFullPath(Path.Combine("..\\", "Samples"));
                 _currentSvgPath = currentDir;
             }
             if (!Directory.Exists(_currentSvgPath))
@@ -327,13 +327,13 @@ namespace WpfTestSvgSample
             {
                 return true;
             }
-            string currentPath = string.Copy(svgPath);
+            string currentPath = new string(svgPath.ToCharArray());
             if (!currentPath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
             {
                 currentPath = currentPath + "\\";
             }
 
-            string currentSvgPath = string.Copy(_currentSvgPath);
+            string currentSvgPath = new string(_currentSvgPath.ToCharArray());
             if (!_currentSvgPath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
             {
                 currentSvgPath = _currentSvgPath + "\\";
@@ -456,7 +456,7 @@ namespace WpfTestSvgSample
                             case "DefaultSvgPath":
                                 if (optionValue.StartsWith(ParentSymbol, comparer))
                                 {
-                                    var inputPath = string.Copy(_defaultSvgPath);
+                                    var inputPath = new string(_defaultSvgPath.ToCharArray());
                                     int indexOf = inputPath.IndexOf(SharpVectors, comparer);
 
                                     if (indexOf > 0)
@@ -477,7 +477,7 @@ namespace WpfTestSvgSample
                             case "CurrentSvgPath":
                                 if (optionValue.StartsWith(ParentSymbol, comparer))
                                 {
-                                    var inputPath = string.Copy(_currentSvgPath);
+                                    var inputPath = new string(_currentSvgPath.ToCharArray());
                                     int indexOf = inputPath.IndexOf(SharpVectors, comparer);
 
                                     if (indexOf > 0)
@@ -604,11 +604,11 @@ namespace WpfTestSvgSample
             }
             if (_defaultSvgPath != null)
             {
-                optSettings._defaultSvgPath = string.Copy(_defaultSvgPath);
+                optSettings._defaultSvgPath = new string(_defaultSvgPath.ToCharArray());
             }
             if (_currentSvgPath != null)
             {
-                optSettings._currentSvgPath = string.Copy(_currentSvgPath);
+                optSettings._currentSvgPath = new string(_currentSvgPath.ToCharArray());
             }
 
             return optSettings;

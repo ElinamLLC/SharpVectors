@@ -725,7 +725,7 @@ namespace SharpVectors.Renderers.Forms
             }
             if (File.Exists(svgSource))
             {
-                return new Uri(svgSource);
+                return new Uri(Path.GetFullPath(svgSource));
             }
             try
             {

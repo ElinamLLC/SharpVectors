@@ -295,13 +295,13 @@ namespace WpfW3cSvgTestSuite
             {
                 return true;
             }
-            string currentPath = string.Copy(currentSuitePath);
+            string currentPath = new string(currentSuitePath.ToCharArray());
             if (!currentSuitePath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
             {
                 currentPath = currentSuitePath + "\\";
             }
 
-            string suitePath = string.Copy(_localSuitePath);
+            string suitePath = new string(_localSuitePath.ToCharArray());
             if (!_localSuitePath.EndsWith("\\", StringComparison.OrdinalIgnoreCase))
             {
                 suitePath = _localSuitePath + "\\";
@@ -583,11 +583,11 @@ namespace WpfW3cSvgTestSuite
             }
             if (_webSuitePath != null)
             {
-                clonedSettings._webSuitePath = string.Copy(_webSuitePath);
+                clonedSettings._webSuitePath = new string(_webSuitePath.ToCharArray());
             }
             if (_localSuitePath != null)
             {
-                clonedSettings._localSuitePath = string.Copy(_localSuitePath);
+                clonedSettings._localSuitePath = new string(_localSuitePath.ToCharArray());
             }
             if (_testSuites != null)
             {

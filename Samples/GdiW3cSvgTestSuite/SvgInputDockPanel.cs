@@ -509,7 +509,7 @@ namespace GdiW3cSvgTestSuite
                 textEditor.LoadFile(documentFilePath);
             }
 
-            _fullFilePath = string.Copy(documentFilePath);
+            _fullFilePath = new string(documentFilePath.ToCharArray());
         }
 
         private void SaveFile(string documentFilePath, bool isSaveAs)
@@ -535,7 +535,7 @@ namespace GdiW3cSvgTestSuite
 
             if (!isSaveAs)
             {
-                _fullFilePath = string.Copy(documentFilePath);
+                _fullFilePath = new string(documentFilePath.ToCharArray());
             }
         }
 

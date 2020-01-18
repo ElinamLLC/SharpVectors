@@ -143,10 +143,17 @@ namespace SharpVectors.Renderers.Texts
                 for (int i = 0; i < text.Length; i++)
                 {
                     var nextText = new string(text[i], 1);
+
                     FormattedText formattedText = new FormattedText(nextText, 
                         _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
-
-//                    formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+//#if NET40
+//                    FormattedText formattedText = new FormattedText(nextText, 
+//                        _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
+//#else
+//                    FormattedText formattedText = new FormattedText(nextText, _context.CultureInfo, 
+//                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+//#endif
+                    //                    formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
                     formattedText.TextAlignment = stringFormat.Alignment;
                     formattedText.Trimming      = stringFormat.Trimming;
 
@@ -248,9 +255,16 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
             else
-            {   
+            {
                 FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
                     stringFormat.Direction, typeFace, emSize, textBrush);
+//#if NET40
+//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
+//                    stringFormat.Direction, typeFace, emSize, textBrush);
+//#else
+//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
+//                    stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+//#endif
 
                 formattedText.TextAlignment = stringFormat.Alignment;
                 formattedText.Trimming      = stringFormat.Trimming;
@@ -474,6 +488,13 @@ namespace SharpVectors.Renderers.Texts
 
                     FormattedText formattedText = new FormattedText(inputText,  _context.CultureInfo, 
                         stringFormat.Direction, typeFace, emSize, textBrush);
+//#if NET40
+//                    FormattedText formattedText = new FormattedText(inputText,  _context.CultureInfo, 
+//                        stringFormat.Direction, typeFace, emSize, textBrush);
+//#else
+//                    FormattedText formattedText = new FormattedText(inputText, _context.CultureInfo,
+//                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+//#endif
 
                     if (this.IsMeasuring)
                     {
@@ -584,9 +605,16 @@ namespace SharpVectors.Renderers.Texts
                 }
             }
             else
-            {   
+            {
                 FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-                    stringFormat.Direction, typeFace,  emSize, textBrush);
+                    stringFormat.Direction, typeFace, emSize, textBrush);
+//#if !NET40
+//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
+//                    stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+//#else
+//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
+//                    stringFormat.Direction, typeFace,  emSize, textBrush);
+//#endif
 
                 if (this.IsMeasuring)
                 {
