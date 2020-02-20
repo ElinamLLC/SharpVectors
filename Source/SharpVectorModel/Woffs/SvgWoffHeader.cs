@@ -120,14 +120,14 @@ namespace SharpVectors.Woffs
         public bool IsTrueType
         {
             get {
-                return (_signature == TtfSignature);
+                return (_flavor == TtfSignature);
             }
         }
 
         public bool IsCollection
         {
             get {
-                return (_signature == TtcSignature);
+                return (_flavor == TtcSignature);
             }
         }
 

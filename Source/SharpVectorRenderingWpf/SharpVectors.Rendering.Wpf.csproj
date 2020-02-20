@@ -4,6 +4,7 @@
     <OutputType>library</OutputType>
     <UseWpf>true</UseWpf>
     <RootNamespace>SharpVectors.Renderers</RootNamespace>
+    <AssemblyName>SharpVectors.Rendering.Wpf</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SharpVectors.Rendering.Wpf.snk</AssemblyOriginatorKeyFile>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -12,9 +13,13 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
     <DocumentationFile>$(OutDir)\SharpVectors.Rendering.Wpf.xml</DocumentationFile>
   </PropertyGroup>
@@ -52,4 +57,14 @@
     <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj" />
     <ProjectReference Include="..\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
   </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
+    <DefineConstants>$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net45' ">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net46' ">$(DefineConstants);DOTNET46;NETFULL</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net47' ">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net48' ">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
+  </PropertyGroup>
 </Project>

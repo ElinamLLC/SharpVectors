@@ -5,9 +5,15 @@ namespace SharpVectors.Dom.Css
 {
     public sealed class CssPrimitiveAngleValue : CssPrimitiveValue
 	{
-		#region Constructors
+        #region Private Fields
 
-		public CssPrimitiveAngleValue(string number, string unit, bool readOnly) 
+        private static readonly Regex _reAngle = new Regex(CssValue.AnglePattern);
+
+        #endregion
+
+        #region Constructors
+
+        public CssPrimitiveAngleValue(string number, string unit, bool readOnly) 
             : base(number+unit, readOnly)
 		{
 			SetUnitType(unit);
@@ -72,8 +78,7 @@ namespace SharpVectors.Dom.Css
 
         protected override void OnSetCssText(string cssText)
         {
-            Regex re = new Regex(CssValue.AnglePattern);
-            Match match = re.Match(cssText);
+            Match match = _reAngle.Match(cssText);
             if (match.Success)
             {
                 SetUnitType(match.Groups["angleUnit"].Value);

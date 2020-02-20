@@ -30,6 +30,11 @@ namespace SharpVectors.Dom.Css
     {
         #region Static Members
 
+        internal const string UrlName     = "url:Name";
+        internal const string UrlMime     = "url:Mime";
+        internal const string UrlData     = "url:Data";
+        internal const string UrlEncoding = "url:Encoding";
+
         private static readonly Regex _reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");
         private static readonly Regex _styleRegex = new Regex(
             @"^(?<name>[A-Za-z\-0-9]+)\s*:(?<value>[^;\}!]+)(!\s?(?<priority>important))?;?");
@@ -51,6 +56,8 @@ namespace SharpVectors.Dom.Css
         private static readonly Regex _reSplitCssOther = new Regex(@"({|;)([^:{;]+:[^;}]+)(;|})");
 
         private static readonly Regex _reUrlTidy = new Regex(@"(^|{|})(\\s*{[^}]*})");
+
+        private static readonly Regex _reEmbeddedUrl = new Regex(@"^(?<name>[A-Za-z\-0-9]+)\s*:\s*url\(data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>[^;\}!]+)(!\s?(?<priority>important))?;?");
 
         // Enter properties that can validly contain a URL here (in lowercase):
         private static readonly ISet<string> _validUrlProps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
@@ -264,6 +271,10 @@ namespace SharpVectors.Dom.Css
 
         private string ParseString(string cssText)
         {
+            if (string.IsNullOrWhiteSpace(cssText))
+            {
+                return string.Empty;
+            }
             bool startedWithABracket = false;
 
             cssText = cssText.Trim();
@@ -273,14 +284,51 @@ namespace SharpVectors.Dom.Css
                 startedWithABracket = true;
             }
 
+            var quotes = new char[2] { '\'', '"' };
+
             Match match = _styleRegex.Match(cssText);
             while (match.Success)
             {
-                string name = match.Groups["name"].Value;
-                string value = match.Groups["value"].Value;
+                string name  = match.Groups["name"].Value.Trim();
+                string value = match.Groups["value"].Value.Trim();
                 if (_parentRule != null)
                 {
                     value = ((CssRule)_parentRule).DeReplaceStrings(value);
+                }
+                value = value.Trim(quotes);
+
+                if (value.StartsWith("url(", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (value.IndexOf("data:", StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        var matchUrl = _reEmbeddedUrl.Match(cssText);
+                        if (matchUrl != null && matchUrl.Groups != null && matchUrl.Groups.Count >= 3)
+                        {
+                            var nameUrl     = matchUrl.Groups["name"].Value;
+                            var mimeUrl     = matchUrl.Groups["mime"].Value;
+                            var encodingUrl = matchUrl.Groups["encoding"].Value;
+                            var dataUrl     = matchUrl.Groups["data"].Value;
+
+                            if (string.Equals(name, nameUrl, StringComparison.Ordinal) 
+                                && !string.IsNullOrWhiteSpace(mimeUrl)
+                                && !string.IsNullOrWhiteSpace(encodingUrl)
+                                && !string.IsNullOrWhiteSpace(dataUrl))
+                            {
+                                value = matchUrl.Groups[0].Value.Remove(0, name.Length + 1).TrimEnd(';');
+                                match = matchUrl;
+
+                                int foundAt = dataUrl.IndexOf(")", StringComparison.Ordinal);
+
+                                if (!_styles.ContainsKey(UrlName) && foundAt > 0)
+                                {
+                                    _styles.Add(UrlName,     new CssStyleBlock(UrlName, nameUrl, string.Empty, _origin));
+                                    _styles.Add(UrlMime,     new CssStyleBlock(UrlMime, mimeUrl, string.Empty, _origin));
+                                    _styles.Add(UrlData,     new CssStyleBlock(UrlData, dataUrl.Substring(0, foundAt), string.Empty, _origin));
+                                    _styles.Add(UrlEncoding, new CssStyleBlock(UrlEncoding, encodingUrl, string.Empty, _origin));
+                                }
+                            }
+                        }
+                    }
                 }
                 string prio = match.Groups["priority"].Value;
 
@@ -300,7 +348,6 @@ namespace SharpVectors.Dom.Css
                 else
                 {
                     addStyle = true;
-
                 }
 
                 if (addStyle)
@@ -309,7 +356,7 @@ namespace SharpVectors.Dom.Css
                 }
 
                 cssText = cssText.Substring(match.Length).Trim();
-                match = _styleRegex.Match(cssText);
+                match   = _styleRegex.Match(cssText);
             }
 
             cssText = cssText.Trim();
@@ -489,15 +536,12 @@ namespace SharpVectors.Dom.Css
             get {
                 StringBuilder builder = new StringBuilder();
 
-                //string ret = string.Empty;
-
                 IEnumerator<KeyValuePair<string, CssStyleBlock>> enu = _styles.GetEnumerator();
                 while (enu.MoveNext())
                 {
                     CssStyleBlock style = enu.Current.Value;
                     builder.Append(style.CssText);
                     builder.Append(";");
-                    //ret += style.CssText + ";";
                 }
 
                 return builder.ToString();
@@ -531,6 +575,37 @@ namespace SharpVectors.Dom.Css
 
                 return enu.Key;
             }
+        }
+
+        #endregion
+
+        #region Internal Methods
+
+        internal CssStyleBlock Get(string key)
+        {
+            if (_styles != null && _styles.Count != 0 && _styles.ContainsKey(key))
+            {
+                return _styles[key];
+            }
+            return null;
+        }
+
+        internal string GetValue(string key)
+        {
+            if (_styles != null && _styles.Count != 0 && _styles.ContainsKey(key))
+            {
+                return _styles[key].Value;
+            }
+            return null;
+        }
+
+        internal bool Contains(string key)
+        {
+            if (_styles != null && _styles.Count != 0)
+            {
+                return _styles.ContainsKey(key);
+            }
+            return false;
         }
 
         #endregion

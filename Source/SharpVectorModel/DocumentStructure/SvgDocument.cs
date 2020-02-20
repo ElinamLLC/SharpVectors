@@ -1099,26 +1099,110 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
+            string fontFileDir = Path.GetTempPath();
+            if (!Directory.Exists(fontFileDir))
+            {
+                fontFileDir = null;
+            }
+            else
+            {
+                fontFileDir = Path.Combine(fontFileDir, SvgWoffParser.DirectoryName);
+                if (!Directory.Exists(fontFileDir))
+                {
+                    Directory.CreateDirectory(fontFileDir);
+                }
+            }
+
             foreach (var rule in ruleList)
             {
-                if (rule.Type == CssRuleType.FontFaceRule)
+                if (rule.Type != CssRuleType.FontFaceRule)
                 {
-                    var fontRule = (CssFontFaceRule)rule;
-                    string fontUrl = fontRule.FontUrl;
-                    if (!string.IsNullOrWhiteSpace(fontUrl))
+                    continue;
+                }
+
+                var fontRule = (CssFontFaceRule)rule;
+                if (fontRule.IsEmbedded)
+                {
+                    if (string.IsNullOrWhiteSpace(fontFileDir))
                     {
-                        fontUrl = fontUrl.Trim();
-                        if (!fontUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                        continue;
+                    }
+
+                    string fontFamily = fontRule.FontFamily;
+                    string fontEncoding = fontRule.EmbeddedEncoding;
+                    string fontMimeType = fontRule.EmbeddedMimeType;
+                    if (!string.IsNullOrWhiteSpace(fontFamily) 
+                        && !string.IsNullOrWhiteSpace(fontFamily)
+                        && !string.IsNullOrWhiteSpace(fontMimeType)
+                        && !fontMimeType.Equals("base64", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string fileExt = null;
+                        switch (fontMimeType)
                         {
-                            fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, null));
+                            case "image/svg+xml": fileExt = ".svg";               // (W3C: August 2011)
+                                break;
+                            case "application/x-font-ttf": 
+                                fileExt = ".ttf";       // (IANA: March 2013)
+                                break;
+                            case "application/x-font-truetype": 
+                            case "application/font-truetype": 
+                                fileExt = ".ttf";
+                                break;
+                            case "application/x-font-opentype": 
+                            case "application/font-opentype": 
+                                fileExt = ".otf";   // (IANA: March 2013)
+                                break;
+                            case "application/font-woff": 
+                            case "application/x-font-woff": 
+                            case "font/woff": 
+                                fileExt = ".woff";        //  (IANA: January 2013)
+                                break;
+                            case "application/font-woff2": 
+                            case "application/x-font-woff2": 
+                            case "font/woff2": 
+                                fileExt = ".woff2";      //   (W3C W./E.Draft: May 2014/March 2016)
+                                break;
+                            case "application/vnd.ms-fontobject": fileExt = ".eot";  // (IA;NA: December 2005)
+                                break;
+                            case "application/font-sfnt": 
+                            case "application/x-font-sfnt": 
+                                fileExt = ".sfnt";         //  (IANA: March 2013) 
+                                break;
                         }
-                        else if (styledFontIds != null)
+
+                        if (!string.IsNullOrWhiteSpace(fileExt))
                         {
-                            string fontFamily = fontRule.FontFamily;
-                            if (!string.IsNullOrWhiteSpace(fontFamily))
+                            string fontPath = Path.Combine(fontFileDir, fontFamily + fileExt);
+                            if (!File.Exists(fontPath))
                             {
-                                styledFontIds[fontFamily] = fontUrl.TrimStart('#').Trim('\'');
+                                string fontData   = fontRule.EmbeddedData;
+                                byte[] imageBytes = Convert.FromBase64CharArray(fontData.ToCharArray(),
+                                    0, fontData.Length);
+                                using (var stream = File.OpenWrite(fontPath))
+                                {
+                                    stream.Write(imageBytes, 0, imageBytes.Length);
+                                }
                             }
+                            fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontPath, null));
+                        }
+                    }
+
+                    continue;
+                }
+                string fontUrl = fontRule.FontUrl;
+                if (!string.IsNullOrWhiteSpace(fontUrl))
+                {
+                    fontUrl = fontUrl.Trim();
+                    if (!fontUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                    {
+                        fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, null));
+                    }
+                    else if (styledFontIds != null)
+                    {
+                        string fontFamily = fontRule.FontFamily;
+                        if (!string.IsNullOrWhiteSpace(fontFamily))
+                        {
+                            styledFontIds[fontFamily] = fontUrl.TrimStart('#').Trim('\'');
                         }
                     }
                 }
@@ -1222,8 +1306,6 @@ namespace SharpVectors.Dom.Svg
 //                        this.SvgFonts.Add(svgFont);
                     }
                 }
-
-                document = null;
             }
             else if (string.Equals(fileExt, ".woff", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(fileExt, ".woff2", StringComparison.OrdinalIgnoreCase))

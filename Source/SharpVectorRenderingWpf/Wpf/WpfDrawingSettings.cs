@@ -788,7 +788,13 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     fontName = fontName.Substring(hashIndex + 1);
                 }
-                _fontFamilyMap.Add(fontName, fontFamily);
+                if (!string.IsNullOrWhiteSpace(fontName))
+                {
+                    if (!_fontFamilyMap.ContainsKey(fontName))
+                    {
+                        _fontFamilyMap.Add(fontName, fontFamily);
+                    }
+                }
 
                 var fontNames = fontFamily.FamilyNames;
                 if (fontNames != null && fontNames.Count != 0)

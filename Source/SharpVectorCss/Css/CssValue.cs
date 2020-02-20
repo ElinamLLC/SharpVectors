@@ -12,11 +12,11 @@ namespace SharpVectors.Dom.Css
     {
         #region Static members
 
-        private static string numberPattern    = @"[\-\+]?[0-9]*\.?[0-9]+";
-        public static string LengthUnitPattern = "(?<lengthUnit>in|cm|mm|px|em|ex|pc|pt|%)?";
-        public static string AngleUnitPattern  = "(?<angleUnit>deg|rad|grad)?";
-        public static string LengthPattern     = @"(?<lengthNumber>" + numberPattern + ")" + LengthUnitPattern;
-        public static string AnglePattern      = @"(?<angleNumber>" + numberPattern + ")" + AngleUnitPattern;
+        private readonly static string numberPattern    = @"[\-\+]?[0-9]*\.?[0-9]+";
+        public readonly static string LengthUnitPattern = "(?<lengthUnit>in|cm|mm|px|em|ex|pc|pt|%)?";
+        public readonly static string AngleUnitPattern  = "(?<angleUnit>deg|rad|grad)?";
+        public readonly static string LengthPattern     = @"(?<lengthNumber>" + numberPattern + ")" + LengthUnitPattern;
+        public readonly static string AnglePattern      = @"(?<angleNumber>" + numberPattern + ")" + AngleUnitPattern;
 
         private static string cssPrimValuePattern = @"^(?<primitiveValue>"
             + @"(?<func>(?<funcname>attr|url|counter|rect|rgb)\((?<funcvalue>[^\)]+)\))"
@@ -27,8 +27,8 @@ namespace SharpVectors.Dom.Css
             + @"|(?<colorIdent>([A-Za-z]+)|(\#[A-Fa-f0-9]{6})|(\#[A-Fa-f0-9]{3}))"
             + @")";
 
-        private static Regex reCssPrimitiveValue = new Regex(cssPrimValuePattern + "$");
-        private static Regex reCssValueList      = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
+        private readonly static Regex reCssPrimitiveValue = new Regex(cssPrimValuePattern + "$");
+        private readonly static Regex reCssValueList      = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
 
         #endregion
 

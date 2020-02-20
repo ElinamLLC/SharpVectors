@@ -15,7 +15,8 @@ namespace SharpVectors.Dom.Css
     {
         #region Private fields
 
-        private static readonly Regex _reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");
+        //private static readonly Regex _reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");
+        private static readonly Regex _reComment = new Regex(@"(?<!"")\/\*.+?\*\/(?!"")");
         private static readonly Regex _reEscape  = new Regex(@"(""(.|\n)*?[^\\]"")|('(.|\n)*?[^\\]')");
 
         private readonly CssStyleSheetType _origin;
@@ -106,6 +107,9 @@ namespace SharpVectors.Dom.Css
                 // "escape" strings, eg: "foo" => "<<<number>>>"			
                 _alReplacedStrings.Clear();
                 string s = _reEscape.Replace(styleContent, new MatchEvaluator(StringReplaceEvaluator));
+
+                // remove comments
+                s = s.Replace(";;", ";");
 
                 // remove comments
                 return _reComment.Replace(s, string.Empty).Trim();

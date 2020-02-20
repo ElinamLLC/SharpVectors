@@ -20,6 +20,8 @@ namespace SharpVectors.Dom.Stylesheets
     {
         #region Private Fields
 
+        private static readonly Regex _reParser = new Regex(@"(?<name>[a-z]+)=[""'](?<value>[^""']*)[""']");
+
         private bool _triedDownload;
         private bool _succeededDownload;
         private MediaList _media;
@@ -54,8 +56,7 @@ namespace SharpVectors.Dom.Stylesheets
         public StyleSheet(XmlProcessingInstruction pi)
             : this(string.Empty)
         {
-            Regex re = new Regex(@"(?<name>[a-z]+)=[""'](?<value>[^""']*)[""']");
-            Match match = re.Match(pi.Data);
+            Match match = _reParser.Match(pi.Data);
 
             while (match.Success)
             {

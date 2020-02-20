@@ -3,12 +3,17 @@
     <TargetFrameworks>netstandard2.1;net40;net45;net46;net47;net48</TargetFrameworks>
     <AssemblyOriginatorKeyFile>SharpVectors.Css.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>SharpVectors.Dom</RootNamespace>
+    <AssemblyName>SharpVectors.Css</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
     <DocumentationFile>$(OutDir)\SharpVectors.Css.xml</DocumentationFile>
   </PropertyGroup>

@@ -10,6 +10,8 @@ namespace SharpVectors.Dom.Svg
 	{
         #region Private Fields
 
+        private static readonly Regex _reDelim = new Regex(@"\s+,?\s*|,\s*");
+
 		private string _propertyName;
         private SvgElement _ownerElement;
         private SvgLengthDirection _direction;
@@ -51,8 +53,7 @@ namespace SharpVectors.Dom.Svg
 
                 if (listString.Length > 0)
                 {
-                    Regex delim = new Regex(@"\s+,?\s*|,\s*");
-                    foreach (string item in delim.Split(listString))
+                    foreach (string item in _reDelim.Split(listString))
                     {
                         // the following test is needed to catch consecutive commas
                         // for example, "one,two,,three"

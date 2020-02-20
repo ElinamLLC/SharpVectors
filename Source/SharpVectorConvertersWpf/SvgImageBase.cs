@@ -353,11 +353,18 @@ namespace SharpVectors.Converters
 
         protected void GetAppName()
         {
-            Assembly asm = this.GetEntryAssembly();
-
-            if (asm != null)
+            try
             {
-                _appName = asm.GetName().Name;
+                Assembly asm = this.GetEntryAssembly();
+
+                if (asm != null)
+                {
+                    _appName = asm.GetName().Name;
+                }
+            }
+            catch
+            {
+                // Issue #125
             }
         }
 
@@ -384,6 +391,7 @@ namespace SharpVectors.Converters
                 {
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
                           let assmName = Path.GetFileName(assembly.CodeBase).Trim()
                           where assmName.EndsWith(".exe", comparer)
                           where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
@@ -407,6 +415,7 @@ namespace SharpVectors.Converters
                 {
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
                           let assmName = Path.GetFileName(assembly.CodeBase).Trim()
                           where assmName.EndsWith(".exe", comparer)
                           where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe

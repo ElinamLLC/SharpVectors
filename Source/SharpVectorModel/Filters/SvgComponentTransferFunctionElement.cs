@@ -10,7 +10,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Protected Fields
 
-        protected static readonly Regex _reSeparators = new Regex("[\\s\\,]+", RegexOptions.Compiled);
+        protected static readonly Regex _reSeparators = new Regex("[\\s\\,]+");
 
         protected ISvgAnimatedEnumeration _type;
         protected ISvgAnimatedNumberList _tableValues;

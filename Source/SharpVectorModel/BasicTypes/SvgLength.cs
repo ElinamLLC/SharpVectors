@@ -29,7 +29,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private static Regex ReUnit = new Regex(CssValue.LengthUnitPattern + "$");
+        private static readonly Regex ReUnit = new Regex(CssValue.LengthUnitPattern + "$");
 
         private string _defaultValue;
         private string _propertyName;

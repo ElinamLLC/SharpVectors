@@ -13,6 +13,8 @@ namespace SharpVectors.Renderers.Gdi
     {
         #region Private Fields
 
+        private static readonly Regex _reUrl = new Regex(@"^url\((?<uri>.+)\)$");
+
         private Matrix _transformMatrix;
         internal Color _uniqueColor;
         internal GdiGraphicsContainer _graphicsContainer;
@@ -851,8 +853,7 @@ namespace SharpVectors.Renderers.Gdi
 
         protected static string ExtractMarkerUrl(string propValue)
         {
-            Regex reUrl = new Regex(@"^url\((?<uri>.+)\)$");
-            Match match = reUrl.Match(propValue);
+            Match match = _reUrl.Match(propValue);
             if (match.Success)
             {
                 return match.Groups["uri"].Value;

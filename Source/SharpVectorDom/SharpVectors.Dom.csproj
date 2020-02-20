@@ -4,11 +4,17 @@
     <AssemblyOriginatorKeyFile>SharpVectors.Dom.snk</AssemblyOriginatorKeyFile>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>SharpVectors.Dom</RootNamespace>
+    <AssemblyName>SharpVectors.Dom</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
     <DocumentationFile>$(OutDir)\SharpVectors.Dom.xml</DocumentationFile>
   </PropertyGroup>

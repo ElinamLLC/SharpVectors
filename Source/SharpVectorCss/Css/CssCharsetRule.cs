@@ -19,7 +19,7 @@ namespace SharpVectors.Dom.Css
     {
         #region Private Fields
 
-        private static Regex regex = new Regex(@"^@charset\s""(?<charsetencoding>[^""]+)"";");
+        private static readonly Regex regex = new Regex(@"^@charset\s""(?<charsetencoding>[^""]+)"";");
 
         private string _encoding;
 

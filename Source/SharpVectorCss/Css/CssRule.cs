@@ -11,6 +11,8 @@ namespace SharpVectors.Dom.Css
     {
         #region Private and protected fields
 
+        private static readonly Regex _reReplace = new Regex(@"(?<quote>"")?<<<(?<number>[0-9]+)>>>""?");
+
         /// <summary>
         /// The origin stylesheet type of this rule
         /// </summary>
@@ -55,14 +57,14 @@ namespace SharpVectors.Dom.Css
         {
             int i = Convert.ToInt32(match.Groups["number"].Value);
             string r = _replacedStrings[i];
-            if (!match.Groups["quote"].Success) r = r.Trim(new char[2] { '\'', '"' });
+            if (!match.Groups["quote"].Success) 
+                r = r.Trim(new char[2] { '\'', '"' });
             return r;
         }
 
         internal string DeReplaceStrings(string s)
         {
-            Regex re = new Regex(@"(?<quote>"")?<<<(?<number>[0-9]+)>>>""?");
-            return re.Replace(s, new MatchEvaluator(StringReplaceEvaluator));
+            return _reReplace.Replace(s, new MatchEvaluator(StringReplaceEvaluator));
         }
 
         /// <summary>

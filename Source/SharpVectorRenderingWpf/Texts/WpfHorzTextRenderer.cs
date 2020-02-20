@@ -144,16 +144,17 @@ namespace SharpVectors.Renderers.Texts
                 {
                     var nextText = new string(text[i], 1);
 
-                    FormattedText formattedText = new FormattedText(nextText, 
+                    FormattedText formattedText = new FormattedText(nextText,
                         _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
-//#if NET40
+//#if NETCOREAPP30
 //                    FormattedText formattedText = new FormattedText(nextText, 
 //                        _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
 //#else
-//                    FormattedText formattedText = new FormattedText(nextText, _context.CultureInfo, 
+//                    FormattedText formattedText = new FormattedText(nextText, _context.CultureInfo,
 //                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
 //#endif
-                    //                    formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+
+//                    formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
                     formattedText.TextAlignment = stringFormat.Alignment;
                     formattedText.Trimming      = stringFormat.Trimming;
 
@@ -694,9 +695,9 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
 
         private void RenderText(WpfTextTuple textInfo, ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
@@ -1207,9 +1208,9 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        #endregion
+#endregion
 
-        #region Private Classes
+#region Private Classes
 
         private sealed class WpfTextTuple : Tuple<WpfFontFamilyInfo, double, WpfTextStringFormat, SvgTextContentElement>
         {
@@ -1220,6 +1221,6 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        #endregion
+#endregion
     }
 }

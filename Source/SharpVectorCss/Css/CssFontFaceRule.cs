@@ -32,12 +32,58 @@ namespace SharpVectors.Dom.Css
             : base(parent, readOnly, replacedStrings, origin)
         {
             // always read-only
-            readOnly = true;
+            _isReadOnly = true;
         }
 
         #endregion
 
         #region Implementation of ICssFontFaceRule
+
+        public bool IsEmbedded
+        {
+            get {
+                if (_style != null)
+                {
+                    return _style.Contains(CssStyleDeclaration.UrlName) 
+                        && _style.Contains(CssStyleDeclaration.UrlMime)
+                        && _style.Contains(CssStyleDeclaration.UrlData);
+                }
+                return false;
+            }
+        }
+
+        public string EmbeddedMimeType
+        {
+            get {
+                if (_style != null)
+                {
+                    return _style.GetValue(CssStyleDeclaration.UrlMime);
+                }
+                return null;
+            }
+        }
+
+        public string EmbeddedData
+        {
+            get {
+                if (_style != null)
+                {
+                    return _style.GetValue(CssStyleDeclaration.UrlData);
+                }
+                return null;
+            }
+        }
+
+        public string EmbeddedEncoding
+        {
+            get {
+                if (_style != null)
+                {
+                    return _style.GetValue(CssStyleDeclaration.UrlEncoding);
+                }
+                return null;
+            }
+        }
 
         /// <summary>
         /// The declaration-block of this rule.

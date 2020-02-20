@@ -8,6 +8,8 @@ namespace SharpVectors.Dom.Css
 	{
         #region Protected Fields
 
+        private static readonly Regex _reLength = new Regex(CssValue.LengthPattern);
+
         protected const double Dpi = 96;
         //protected const double Dpi     = 90; // The common default value for this is 90, not 96
         protected const double CmPerIn = 2.54;
@@ -129,8 +131,7 @@ namespace SharpVectors.Dom.Css
 
         private void SetCssText(string cssText)
         {
-            Regex re = new Regex(CssValue.LengthPattern);
-            Match match = re.Match(cssText);
+            Match match = _reLength.Match(cssText);
             if (match.Success)
             {
                 SetUnitType(match.Groups["lengthUnit"].Value);

@@ -10,7 +10,7 @@ namespace SharpVectors.Dom.Svg
     {
         #region Private Fields
 
-        private static Regex isImportant = new Regex(@"!\s*important$");
+        private static readonly Regex _isImportant = new Regex(@"!\s*important$");
 
         private ISvgAnimatedString _className;
         private IDictionary<string, ICssValue> _presentationAttributes = new Dictionary<string, ICssValue>();
@@ -161,7 +161,7 @@ namespace SharpVectors.Dom.Svg
                 string attValue = GetAttribute(name, string.Empty).Trim();
                 if (attValue != null && attValue.Length > 0)
                 {
-                    if (isImportant.IsMatch(attValue))
+                    if (_isImportant.IsMatch(attValue))
                     {
                         result = null;
                     }

@@ -53,7 +53,7 @@ namespace SharpVectors.Dom.Svg
 
         #region Private Fields
 
-        private static readonly Regex _reSeparators = new Regex("[\\s\\,]+", RegexOptions.Compiled);
+        private static readonly Regex _reSeparators = new Regex("[\\s\\,]+");
 
         private ISvgAnimatedLength _x;
         private ISvgAnimatedLength _y;

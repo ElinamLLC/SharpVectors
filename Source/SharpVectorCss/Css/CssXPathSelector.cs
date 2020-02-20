@@ -19,7 +19,16 @@ namespace SharpVectors.Dom.Css
     {
         #region Static Fields
 
-        internal static Regex reSelector = new Regex(CssStyleRule.sSelector);
+        internal static readonly Regex reSelector = new Regex(CssStyleRule.RegexSelector);
+        private static readonly Regex _reAttributeValueCheck = new Regex("^" + CssStyleRule.AttributeValueCheck + "?$");
+
+        private static readonly Regex _reLang = new Regex(@"^lang\(([A-Za-z\-]+)\)$");
+        private static readonly Regex _reContains = new Regex("^contains\\((\"|\')?(?<stringvalue>.*?)(\"|\')?\\)$");
+
+        private static readonly string Nth = @"^(?<type>(nth-child)|(nth-last-child)|(nth-of-type)|(nth-last-of-type))\(\s*"
+            + @"(?<exp>(odd)|(even)|(((?<a>[\+-]?\d*)n)?(?<b>[\+-]?\d+)?))" + @"\s*\)$";
+
+        private static readonly Regex _reNth = new Regex(Nth);
 
         #endregion
 
@@ -228,12 +237,10 @@ namespace SharpVectors.Dom.Css
             }
 
             g = match.Groups["attributevaluecheck"];
-            Regex reAttributeValueCheck = new Regex("^" + CssStyleRule.attributeValueCheck + "?$");
-
 
             foreach (Capture c in g.Captures)
             {
-                Match valueCheckMatch = reAttributeValueCheck.Match(c.Value);
+                Match valueCheckMatch = _reAttributeValueCheck.Match(c.Value);
 
                 string attName = valueCheckMatch.Groups["attname"].Value;
                 string attMatch = GetAttributeMatch(attName);
@@ -287,14 +294,6 @@ namespace SharpVectors.Dom.Css
             int specificityC = 0;
             string r = string.Empty;
             Group g = match.Groups["pseudoclass"];
-
-            Regex reLang = new Regex(@"^lang\(([A-Za-z\-]+)\)$");
-            Regex reContains = new Regex("^contains\\((\"|\')?(?<stringvalue>.*?)(\"|\')?\\)$");
-
-            string s = @"^(?<type>(nth-child)|(nth-last-child)|(nth-of-type)|(nth-last-of-type))\(\s*";
-            s += @"(?<exp>(odd)|(even)|(((?<a>[\+-]?\d*)n)?(?<b>[\+-]?\d+)?))";
-            s += @"\s*\)$";
-            Regex reNth = new Regex(s);
 
             foreach (Capture c in g.Captures)
             {
@@ -359,17 +358,17 @@ namespace SharpVectors.Dom.Css
                     r += "[false]";
                     //r += "[.=(../*[local-name='roffe'][position()=1])]";
                 }
-                else if (reLang.IsMatch(p))
+                else if (_reLang.IsMatch(p))
                 {
-                    r += "[lang('" + reLang.Match(p).Groups[1].Value + "')]";
+                    r += "[lang('" + _reLang.Match(p).Groups[1].Value + "')]";
                 }
-                else if (reContains.IsMatch(p))
+                else if (_reContains.IsMatch(p))
                 {
-                    r += "[contains(string(.),'" + reContains.Match(p).Groups["stringvalue"].Value + "')]";
+                    r += "[contains(string(.),'" + _reContains.Match(p).Groups["stringvalue"].Value + "')]";
                 }
-                else if (reNth.IsMatch(p))
+                else if (_reNth.IsMatch(p))
                 {
-                    Match m = reNth.Match(p);
+                    Match m = _reNth.Match(p);
                     string type = m.Groups["type"].Value;
                     string exp = m.Groups["exp"].Value;
                     int a = 0;
