@@ -18,6 +18,8 @@
     <OutputPath>..\..\Output\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
     <DocumentationFile>$(OutDir)\SharpVectors.Scripting.Jint.xml</DocumentationFile>

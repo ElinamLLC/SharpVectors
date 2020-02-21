@@ -401,10 +401,13 @@ namespace SharpVectors.Converters
                     if (asm == null)
                     {
                         asm = Application.ResourceAssembly;
-                        var appName = asm.GetName().Name;
-                        if (string.Equals(appName, XDesProc, comparer))
+                        if (asm != null)
                         {
-                            asm = null;
+                            var appName = asm.GetName().Name;
+                            if (string.Equals(appName, XDesProc, comparer))
+                            {
+                                asm = null;
+                            }
                         }
                     }
                 }
