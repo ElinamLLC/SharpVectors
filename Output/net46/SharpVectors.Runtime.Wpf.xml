@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>SharpVectors.Runtime</name>
+        <name>SharpVectors.Runtime.Wpf</name>
     </assembly>
     <members>
         <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.BeginInit">

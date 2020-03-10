@@ -43,8 +43,8 @@ namespace SvgImageBindingSample
     /// </summary>
     public partial class PageMultiple : Page
     {
-        public const string IconZipFile = "svg-icons.zip";
-        public const string IconFolder  = "Svg-Icons";
+        public const string IconZipFile = @"..\svg-icons.zip";
+        public const string IconFolder  = @"..\Svg-Icons";
 
         public PageMultiple()
         {

@@ -15,6 +15,8 @@ namespace SvgCanvasSample
         {
             InitializeComponent();
 
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
             this.Loaded += OnWindowLoaded;
         }
 

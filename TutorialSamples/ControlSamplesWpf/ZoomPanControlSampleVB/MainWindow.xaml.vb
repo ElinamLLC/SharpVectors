@@ -8,6 +8,7 @@ Partial Public Class MainWindow
 
     Public Sub New()
         InitializeComponent()
+
         AddHandler Me.Loaded, AddressOf OnWindowLoaded
     End Sub
 

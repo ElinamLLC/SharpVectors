@@ -48,7 +48,7 @@
                     <ScrollViewer CanContentScroll="False" Background="White" 
                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <!-- 2. Load local SVG file -->
-                        <svgc:SvgCanvas Source="../Test1.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <svgc:SvgCanvas Source="../../Test1.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ScrollViewer>
                 </TabItem.Content>
             </TabItem>
@@ -58,7 +58,7 @@
                     <ScrollViewer CanContentScroll="False" Background="White" 
                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <!-- 3. Load local SVG file -->
-                        <svgc:SvgCanvas Source="Test2.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <svgc:SvgCanvas Source="../Test2.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ScrollViewer>
                 </TabItem.Content>
             </TabItem>
@@ -68,7 +68,7 @@
                     <ScrollViewer CanContentScroll="False" Background="White" 
                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <!-- 4. Load local sub-folder SVG file  -->
-                        <svgc:SvgCanvas Source="\SubFolder\Test3.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <svgc:SvgCanvas Source="..\SubFolder\Test3.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ScrollViewer>
                 </TabItem.Content>
             </TabItem>

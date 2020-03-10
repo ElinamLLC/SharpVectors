@@ -111,7 +111,7 @@
                 <TabItem.Header>By Local File</TabItem.Header>
                 <TabItem.Content>
                     <!-- 1. Load local SVG file, using the constructor -->
-                    <Image Source="{svgc:SvgImage ../Test1.svg}"/>
+                    <Image Source="{svgc:SvgImage ../../Test1.svg}"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem Background="White">
@@ -125,14 +125,14 @@
                 <TabItem.Header>By Local/Resource File</TabItem.Header>
                 <TabItem.Content>
                     <!-- 3. Load local, using the constructor and a property. -->
-                    <Image Source="{svgc:SvgImage Test2.svg, TextAsGeometry=True}"/>
+                    <Image Source="{svgc:SvgImage ../Test2.svg, TextAsGeometry=True}"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>By Sub-Folder File</TabItem.Header>
                 <TabItem.Content>
                     <!-- 4. Load local, using constructor - not recommended syntax -->
-                    <Image Source="{svgc:SvgImage \\SubFolder\\Test3.svg}"/>
+                    <Image Source="{svgc:SvgImage ..\\SubFolder\\Test3.svg}"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>

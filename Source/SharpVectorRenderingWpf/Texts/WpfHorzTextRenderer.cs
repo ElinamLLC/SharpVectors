@@ -697,7 +697,7 @@ namespace SharpVectors.Renderers.Texts
 
 #endregion
 
-#region Private Methods
+        #region Private Methods
 
         private void RenderText(WpfTextTuple textInfo, ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
@@ -1208,9 +1208,9 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-#endregion
+        #endregion
 
-#region Private Classes
+        #region Private Classes
 
         private sealed class WpfTextTuple : Tuple<WpfFontFamilyInfo, double, WpfTextStringFormat, SvgTextContentElement>
         {
@@ -1221,6 +1221,6 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-#endregion
+        #endregion
     }
 }

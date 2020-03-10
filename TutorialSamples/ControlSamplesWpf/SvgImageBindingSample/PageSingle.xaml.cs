@@ -11,7 +11,7 @@ namespace SvgImageBindingSample
     /// </summary>
     public partial class PageSingle : Page
     {
-        private const string SvgFileName = "Asian_Openbill.svg";
+        private const string SvgFileName = @"..\Asian_Openbill.svg";
 
         public static readonly DependencyProperty LocalFileNameProperty =
             DependencyProperty.Register("LocalFileName", typeof(string),

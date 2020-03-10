@@ -7,6 +7,8 @@ Class MainWindow
     Public Sub New()
         InitializeComponent()
 
+        ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol Or SecurityProtocolType.Tls11 Or SecurityProtocolType.Tls12
+
         AddHandler Me.Loaded, AddressOf OnWindowLoaded
     End Sub
 

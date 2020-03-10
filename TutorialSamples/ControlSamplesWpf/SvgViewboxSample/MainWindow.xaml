@@ -42,21 +42,21 @@
                 <TabItem.Header>Local File 1 (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 2. Load local SVG file -->
-                    <svgc:SvgViewbox Source="../Test1.svg"/>
+                    <svgc:SvgViewbox Source="../../Test1.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Local File 2 (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 3. Load local SVG file -->
-                    <svgc:SvgViewbox Source="Test2.svg"/>
+                    <svgc:SvgViewbox Source="../Test2.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
                 <TabItem.Header>Sub-Folder File (Uri)</TabItem.Header>
                 <TabItem.Content>
                     <!-- 4. Load local sub-folder SVG file  -->
-                    <svgc:SvgViewbox Source="\SubFolder\Test3.svg"/>
+                    <svgc:SvgViewbox Source="..\SubFolder\Test3.svg"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>

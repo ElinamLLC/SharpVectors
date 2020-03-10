@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SvgImageSampleVB", "SvgImageSampleVB\SvgImageSampleVB.vbproj", "{457F6BBD-4B75-493A-BD78-71BE14C016EF}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SvgViewboxSampleVB", "SvgViewboxSampleVB\SvgViewboxSampleVB.vbproj", "{A363C92C-351D-49F3-853A-596A6E52EBD9}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SvgCanvasSampleVB", "SvgCanvasSampleVB\SvgCanvasSampleVB.vbproj", "{74401787-14BD-4DFB-B387-5FF2A0854E47}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SvgImageBindingSampleVB", "SvgImageBindingSampleVB\SvgImageBindingSampleVB.vbproj", "{5D7FC498-6F97-4A9D-9B5A-E4F312C43C23}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ZoomPanControlSampleVB", "ZoomPanControlSampleVB\ZoomPanControlSampleVB.vbproj", "{587E2D68-0A72-422D-BE8D-37224F820E40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{457F6BBD-4B75-493A-BD78-71BE14C016EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{457F6BBD-4B75-493A-BD78-71BE14C016EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{457F6BBD-4B75-493A-BD78-71BE14C016EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{457F6BBD-4B75-493A-BD78-71BE14C016EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A363C92C-351D-49F3-853A-596A6E52EBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A363C92C-351D-49F3-853A-596A6E52EBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A363C92C-351D-49F3-853A-596A6E52EBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A363C92C-351D-49F3-853A-596A6E52EBD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74401787-14BD-4DFB-B387-5FF2A0854E47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74401787-14BD-4DFB-B387-5FF2A0854E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74401787-14BD-4DFB-B387-5FF2A0854E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74401787-14BD-4DFB-B387-5FF2A0854E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D7FC498-6F97-4A9D-9B5A-E4F312C43C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D7FC498-6F97-4A9D-9B5A-E4F312C43C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D7FC498-6F97-4A9D-9B5A-E4F312C43C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D7FC498-6F97-4A9D-9B5A-E4F312C43C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{587E2D68-0A72-422D-BE8D-37224F820E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{587E2D68-0A72-422D-BE8D-37224F820E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{587E2D68-0A72-422D-BE8D-37224F820E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{587E2D68-0A72-422D-BE8D-37224F820E40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE661166-0B98-47C2-A696-AED55B31C3CD}
+	EndGlobalSection
+EndGlobal

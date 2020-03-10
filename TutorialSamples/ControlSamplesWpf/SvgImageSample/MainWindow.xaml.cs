@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
 
 namespace SvgImageSample
@@ -11,6 +12,8 @@ namespace SvgImageSample
         public MainWindow()
         {
             InitializeComponent();
+
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
     }
 }
