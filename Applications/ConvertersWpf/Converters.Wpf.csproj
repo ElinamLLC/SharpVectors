@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net46;net48;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
@@ -33,9 +33,7 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.AvalonEdit">
-      <HintPath>..\..\Libraries\ICSharpCode.AvalonEdit.dll</HintPath>
-    </Reference>
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ConverterHelp.xaml">

@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "WeifenLuo.WinFormsUI.Docking.ThemeVS2015/1.0.0": {
+        "dependencies": {
+          "WeifenLuo.WinFormsUI.Docking": "1.0.0"
+        },
+        "runtime": {
+          "WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll": {}
+        }
+      },
+      "WeifenLuo.WinFormsUI.Docking/1.0.0": {
+        "runtime": {
+          "WeifenLuo.WinFormsUI.Docking.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WeifenLuo.WinFormsUI.Docking.ThemeVS2015/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WeifenLuo.WinFormsUI.Docking/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net46;net48;netcoreapp3.1</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>App.ico</ApplicationIcon>
@@ -29,13 +29,36 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.AvalonEdit, Version=4.3.0.9390, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\ICSharpCode.AvalonEdit.dll</HintPath>
-    </Reference>
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <Reference Include="ReachFramework" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="SharpVectors.ShellFileDialogs">
-      <HintPath>..\..\Libraries\SharpVectors.ShellFileDialogs.dll</HintPath>
+      <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\netstandard2.1\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
