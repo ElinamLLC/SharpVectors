@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.NetworkInformation;
 
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Controls;
 
 using FolderBrowserDialog = ShellFileDialogs.FolderBrowserDialog;
@@ -65,7 +66,8 @@ namespace WpfW3cSvgTestSuite
 
         private void OnBrowseForSvgSuitePath(object sender, RoutedEventArgs e)
         {
-            string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+            string selectedDirectory = FolderBrowserDialog.ShowDialog(windowHandle,
                 "Select the location of the W3C SVG 1.1 Full Test Suite", null);
             if (!string.IsNullOrWhiteSpace(selectedDirectory))
             {

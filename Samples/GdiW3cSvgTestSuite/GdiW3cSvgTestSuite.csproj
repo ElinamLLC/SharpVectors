@@ -3,6 +3,8 @@
     <TargetFrameworks>net46;net48;netcoreapp3.1</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>GdiW3cSvgTestSuite</RootNamespace>
+    <AssemblyName>GdiW3cSvgTestSuite</AssemblyName>
     <StartupObject>GdiW3cSvgTestSuite.Program</StartupObject>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
@@ -138,8 +140,5 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>

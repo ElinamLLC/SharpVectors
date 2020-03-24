@@ -108,7 +108,7 @@ namespace SharpVectors.Dom.Css
                 _alReplacedStrings.Clear();
                 string s = _reEscape.Replace(styleContent, new MatchEvaluator(StringReplaceEvaluator));
 
-                // remove comments
+                // remove dual semicolon, which may affect the parsing...
                 s = s.Replace(";;", ";");
 
                 // remove comments

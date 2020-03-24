@@ -4,6 +4,7 @@
     <UseWpf>true</UseWpf>
     <OutputType>library</OutputType>
     <RootNamespace>SharpVectors.Converters</RootNamespace>
+    <AssemblyName>SharpVectors.Converters</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SharpVectors.Converters.snk</AssemblyOriginatorKeyFile>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

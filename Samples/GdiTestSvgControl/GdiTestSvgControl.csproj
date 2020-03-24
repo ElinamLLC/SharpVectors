@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>TestSvgControl</RootNamespace>
-    <AssemblyName>TestSvgControl</AssemblyName>
+    <AssemblyName>GdiTestSvgControl</AssemblyName>
     <StartupObject>TestSvgControl.Program</StartupObject>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>

@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>net46;net48;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
     <RootNamespace>SharpVectors.Converters</RootNamespace>
     <AssemblyName>SharpVectors</AssemblyName>
@@ -46,6 +45,21 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\netstandard2.1\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="CircularProgressBar.xaml.cs">
