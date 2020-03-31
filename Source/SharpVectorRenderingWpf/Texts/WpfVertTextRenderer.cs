@@ -606,7 +606,7 @@ namespace SharpVectors.Renderers.Texts
             }
         }
 
-        #endregion
+#endregion
 
         #region DrawTextRun Method
 

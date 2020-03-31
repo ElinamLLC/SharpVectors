@@ -1129,7 +1129,7 @@ namespace SharpVectors.Renderers.Wpf
                 string markerAll       = ExtractMarkerUrl(styleElm.GetPropertyValue("marker", "marker"));
 
                 //  The SVG specification defines three properties to reference markers: marker-start, 
-                // marker -mid, marker-end. It also provides a shorthand property,marker. Using the marker 
+                // marker -mid, marker-end. It also provides a shorthand property, marker. Using the marker 
                 // property from a style sheet is equivalent to using all three (start, mid, end). 
                 // However, shorthand properties cannot be used as presentation attributes.
                 if (!string.IsNullOrWhiteSpace(markerAll) && !IsPresentationMarker(styleElm))

@@ -219,6 +219,13 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public bool IsSizeDefined
+        {
+            get {
+                return this.HasAttribute("markerHeight") && this.HasAttribute("markerWidth");
+            }
+        }
+
         #endregion
 
         #region ISvgFitToViewBox Members

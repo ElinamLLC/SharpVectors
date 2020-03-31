@@ -172,7 +172,7 @@ namespace SharpVectors.Renderers.Wpf
                             _drawGroup.ClipGeometry = new RectangleGeometry(
                                 new Rect(clipRect.X, clipRect.Y, clipRect.Width, clipRect.Height));
                         }
-                        else
+                        else if (_markerElement.IsSizeDefined)
                         {
                             _drawGroup.ClipGeometry = new RectangleGeometry(new Rect(0, 0, 
                                 _markerElement.MarkerWidth.AnimVal.Value, _markerElement.MarkerHeight.AnimVal.Value));
@@ -242,11 +242,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 SvgPointF point = vertexPositions[i];
 
-                //GdiGraphicsContainer gc = gr.BeginContainer();
-
                 this.BeforeRender(renderer);
-
-                //Matrix matrix = Matrix.Identity;
 
                 Matrix matrix = GetTransformMatrix(_svgElement, transform);
 
@@ -386,11 +382,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 this.Render(renderer);
 
-                //Clip(gr);
-
                 renderer.RenderChildren(_markerElement);
-
-                //gr.EndContainer(gc);
 
                 this.AfterRender(renderer);
             }
