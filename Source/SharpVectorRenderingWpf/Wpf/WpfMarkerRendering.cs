@@ -159,9 +159,10 @@ namespace SharpVectors.Renderers.Wpf
             ISvgAnimatedEnumeration markerUnits = _markerElement.MarkerUnits;
             if (markerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
             {
+                var comparer = StringComparison.OrdinalIgnoreCase;
                 string overflowAttr = _markerElement.GetAttribute("overflow");
                 if (string.IsNullOrWhiteSpace(overflowAttr) 
-                    || overflowAttr.Equals("scroll") || overflowAttr.Equals("hidden"))
+                    || overflowAttr.Equals("scroll", comparer) || overflowAttr.Equals("hidden", comparer))
                 {
                     Geometry markerClip = this.ClipGeometry;
                     if (markerClip == null || markerClip.IsEmpty())
@@ -328,7 +329,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 // 'viewBox' and 'preserveAspectRatio' attributes
                 // viewBox -> viewport(0, 0, markerWidth, markerHeight)
-                SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)_markerElement.PreserveAspectRatio.AnimVal;
+                var spar = (SvgPreserveAspectRatio)_markerElement.PreserveAspectRatio.AnimVal;
                 double[] translateAndScale = spar.FitToViewBox((SvgRect)_markerElement.ViewBox.AnimVal,
                     new SvgRect(0, 0, _markerElement.MarkerWidth.AnimVal.Value, _markerElement.MarkerHeight.AnimVal.Value));
 

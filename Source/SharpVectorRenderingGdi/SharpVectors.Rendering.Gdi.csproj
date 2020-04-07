@@ -3,13 +3,15 @@
     <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyOriginatorKeyFile>SharpVectors.Rendering.Gdi.snk</AssemblyOriginatorKeyFile>
-    <OutputType>Library</OutputType>
     <RootNamespace>SharpVectors.Renderers</RootNamespace>
     <AssemblyName>SharpVectors.Rendering.Gdi</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -22,7 +24,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Rendering.Gdi.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\SharpVectors.Rendering.Gdi.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>

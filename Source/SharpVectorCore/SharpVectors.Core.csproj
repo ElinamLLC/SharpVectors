@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1</TargetFrameworks>
-    <IsPackable>false</IsPackable>
     <AssemblyOriginatorKeyFile>SharpVectors.Core.snk</AssemblyOriginatorKeyFile>
-    <OutputType>Library</OutputType>
     <RootNamespace>SharpVectors.Dom</RootNamespace>
     <AssemblyName>SharpVectors.Core</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <OutputType>Library</OutputType>
+    <IsPackable>false</IsPackable>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -20,7 +22,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Core.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\SharpVectors.Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

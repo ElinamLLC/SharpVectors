@@ -2,10 +2,14 @@
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1</TargetFrameworks>
     <AssemblyOriginatorKeyFile>SharpVectors.Dom.snk</AssemblyOriginatorKeyFile>
-    <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>SharpVectors.Dom</RootNamespace>
     <AssemblyName>SharpVectors.Dom</AssemblyName>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -18,7 +22,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Dom.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\SharpVectors.Dom.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

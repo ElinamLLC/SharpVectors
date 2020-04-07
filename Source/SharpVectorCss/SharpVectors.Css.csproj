@@ -5,6 +5,11 @@
     <RootNamespace>SharpVectors.Dom</RootNamespace>
     <AssemblyName>SharpVectors.Css</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -17,7 +22,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Css.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\SharpVectors.Css.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1</TargetFrameworks>
     <AssemblyOriginatorKeyFile>SharpVectors.Scripting.Jint.snk</AssemblyOriginatorKeyFile>
-    <OutputType>Library</OutputType>
     <RootNamespace>SharpVectors.Scripting.Jint</RootNamespace>
     <AssemblyName>SharpVectors.Scripting.Jint</AssemblyName>
     <SignAssembly>true</SignAssembly>
@@ -10,19 +9,22 @@
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <OutputPath>..\..\Output\</OutputPath>
+    <OutputPath>..\..\Output\Scripting\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
-    <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Scripting.Jint.xml</DocumentationFile>
+    <OutputPath>..\..\Output\Scripting\</OutputPath>
+    <DocumentationFile>..\..\Output\Scripting\SharpVectors.Scripting.Jint.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
@@ -34,10 +36,18 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj" />
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj" />
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj" />
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj" />
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />

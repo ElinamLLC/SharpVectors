@@ -2,13 +2,15 @@
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1</TargetFrameworks>
     <AssemblyOriginatorKeyFile>SharpVectors.Model.snk</AssemblyOriginatorKeyFile>
-    <OutputType>Library</OutputType>
     <RootNamespace>SharpVectors.Dom</RootNamespace>
     <AssemblyName>SharpVectors.Model</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -21,7 +23,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Model.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\SharpVectors.Model.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>

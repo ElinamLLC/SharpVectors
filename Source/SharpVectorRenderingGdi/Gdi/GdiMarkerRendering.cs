@@ -39,6 +39,7 @@ namespace SharpVectors.Renderers.Gdi
 			{
 				return;
 			}
+			var comparer = StringComparison.OrdinalIgnoreCase;
 
 			bool mayHaveCurves = markerHostElm.MayHaveCurves;
 			int start;
@@ -131,7 +132,7 @@ namespace SharpVectors.Renderers.Gdi
 
 				// 'viewBox' and 'preserveAspectRatio' attributes
 				// viewBox -> viewport(0, 0, markerWidth, markerHeight)
-				SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
+				var spar = (SvgPreserveAspectRatio)markerElm.PreserveAspectRatio.AnimVal;
 				double[] translateAndScale = spar.FitToViewBox((SvgRect)markerElm.ViewBox.AnimVal,
 					new SvgRect(0, 0, markerElm.MarkerWidth.AnimVal.Value, markerElm.MarkerHeight.AnimVal.Value));
 
@@ -193,7 +194,7 @@ namespace SharpVectors.Renderers.Gdi
 				{
 					string overflowAttr = markerElm.GetAttribute("overflow");
 					if (string.IsNullOrWhiteSpace(overflowAttr)
-						|| overflowAttr.Equals("scroll") || overflowAttr.Equals("hidden"))
+						|| overflowAttr.Equals("scroll", comparer) || overflowAttr.Equals("hidden", comparer))
 					{
 						var markerClip = RectangleF.Empty;
 						SvgRect clipRect = (SvgRect)markerElm.ViewBox.AnimVal;

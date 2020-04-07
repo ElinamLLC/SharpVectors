@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1</TargetFrameworks>
-    <OutputType>library</OutputType>
     <UseWpf>true</UseWpf>
     <RootNamespace>SharpVectors.Renderers</RootNamespace>
     <AssemblyName>SharpVectors.Rendering.Wpf</AssemblyName>
@@ -11,6 +10,9 @@
     <EnableDefaultPageItems>false</EnableDefaultPageItems>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -23,7 +25,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Rendering.Wpf.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\SharpVectors.Rendering.Wpf.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
