@@ -1,6 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>net46;net48</TargetFrameworks>
+    <UseWpf>true</UseWpf>
     <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>SharpVectors.Converters</RootNamespace>
@@ -88,9 +89,54 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Update="CircularProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ConverterHelp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ConverterWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DirectoryConverterOutput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DirectoryConverterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="FileConverterOutput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="FileConverterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="FileListConverterOutput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="FileListConverterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="HelpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainApplication.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="OptionsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="StartPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="VerticalTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
   <ItemGroup>

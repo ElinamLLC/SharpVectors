@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net46;net48</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+    <UseWpf>true</UseWpf>
     <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <RootNamespace>SharpVectors.Squiggle</RootNamespace>
     <AssemblyName>SharpVectors.Squiggle</AssemblyName>
@@ -43,5 +44,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

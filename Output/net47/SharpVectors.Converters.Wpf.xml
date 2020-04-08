@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>SharpVectors.Converters</name>
+        <name>SharpVectors.Converters.Wpf</name>
     </assembly>
     <members>
         <member name="T:SharpVectors.Converters.DirectorySvgConverter">

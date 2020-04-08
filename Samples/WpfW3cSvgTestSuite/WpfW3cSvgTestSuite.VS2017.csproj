@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net46;net48</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+    <UseWpf>true</UseWpf>
     <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -73,9 +74,48 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Update="AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Adorned\LoadingWait.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="BrowserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DebugPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DrawingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="PromptDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SvgPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SvgTestResultsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="TraceDocument.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="XamlPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
   <ItemGroup>

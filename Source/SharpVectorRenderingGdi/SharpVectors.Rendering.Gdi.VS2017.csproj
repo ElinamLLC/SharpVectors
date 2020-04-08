@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48</TargetFrameworks>
-    <ExtrasEnableWpfProjectSetup>false</ExtrasEnableWpfProjectSetup>
+    <UseWindowsForms>true</UseWindowsForms>
     <ExtrasEnableWinFormsProjectSetup>true</ExtrasEnableWinFormsProjectSetup>
     <AssemblyOriginatorKeyFile>SharpVectors.Rendering.Gdi.snk</AssemblyOriginatorKeyFile>
     <OutputType>Library</OutputType>
@@ -24,7 +24,7 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Rendering.Gdi.xml</DocumentationFile>
+    <DocumentationFile>..\..\Output\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>

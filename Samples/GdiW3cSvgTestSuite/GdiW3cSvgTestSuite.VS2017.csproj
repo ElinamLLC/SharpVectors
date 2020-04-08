@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net46;net48</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
     <ExtrasEnableWinFormsProjectSetup>true</ExtrasEnableWinFormsProjectSetup>
     <RootNamespace>GdiW3cSvgTestSuite</RootNamespace>
     <AssemblyName>GdiW3cSvgTestSuite</AssemblyName>

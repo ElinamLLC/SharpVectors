@@ -16,14 +16,14 @@
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <OutputPath>..\..\Output\</OutputPath>
+    <OutputPath>..\..\Output\Scripting\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
-    <OutputPath>..\..\Output\</OutputPath>
-    <DocumentationFile>$(OutDir)\SharpVectors.Scripting.Jint.xml</DocumentationFile>
+    <OutputPath>..\..\Output\Scripting\</OutputPath>
+    <DocumentationFile>..\..\Output\Scripting\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
@@ -35,10 +35,18 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.VS2017.csproj" />
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.VS2017.csproj" />
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.VS2017.csproj" />
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.VS2017.csproj" />
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.VS2017.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.VS2017.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.VS2017.csproj">
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.VS2017.csproj">
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
