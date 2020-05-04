@@ -41,5 +41,10 @@ namespace SharpVectors.Dom.Css
         /// Gets a value which indicates whether the color is system-defined color.
         /// </summary>
         bool IsSystemColor { get; }
+
+        /// <summary>
+        /// Gets a value which indicates whether the color is defined by custom properties.
+        /// </summary>
+        bool IsVarColor { get; }
 	}
 }

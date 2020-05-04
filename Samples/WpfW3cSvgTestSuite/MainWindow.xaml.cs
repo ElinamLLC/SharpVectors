@@ -30,13 +30,13 @@ namespace WpfW3cSvgTestSuite
     {
         #region Private Fields
 
+        public const string TitleFormat   = "SharpVectors: W3C Test Suite - {0}";
+        public const string AppTitle      = "SVG Test Suite";
+        public const string AppErrorTitle = "SVG Test Suite - Error";
+  
         private const int LeftPane         = 330;
         private const int LeftBottomPane   = 220;
 
-        private const string TitleFormat   = "SharpVectors: W3C Test Suite - {0}";
-        private const string AppTitle      = "SVG Test Suite";
-        private const string AppErrorTitle = "SVG Test Suite - Error";
-  
         private bool _isTreeModified;
         private bool _isShown;
         private bool _isTestAvailable;
@@ -510,12 +510,12 @@ namespace WpfW3cSvgTestSuite
             {
                 if (_aboutPage != null)
                 {
-                    _aboutPage.LoadDocument(svgFilePath, testItem, null);
+                    _aboutPage.LoadDocument(svgFilePath, testItem, _optionSettings);
                 }
 
                 if (_svgPage != null)
                 {
-                    _svgPage.LoadDocument(svgFilePath, testItem, null);
+                    _svgPage.LoadDocument(svgFilePath, testItem, _optionSettings);
                 }
             }
             catch (Exception ex)
@@ -579,7 +579,7 @@ namespace WpfW3cSvgTestSuite
 
                     if (File.Exists(xamlFilePath))
                     {
-                        _xamlPage.LoadDocument(xamlFilePath, testItem, null);
+                        _xamlPage.LoadDocument(xamlFilePath, testItem, _optionSettings);
 
                         // Delete the file after loading it...
                         File.Delete(xamlFilePath);

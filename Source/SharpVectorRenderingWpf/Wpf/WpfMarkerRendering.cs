@@ -6,6 +6,7 @@ using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
+using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -18,6 +19,7 @@ namespace SharpVectors.Renderers.Wpf
         private SvgMarkerElement _markerElement;
         private SvgStyleableElement _hostElement;
 
+        private PathGeometry _hostGeometry;
         private PathFigureCollection _pathFigures;
 
         #endregion
@@ -178,6 +180,60 @@ namespace SharpVectors.Renderers.Wpf
                             _drawGroup.ClipGeometry = new RectangleGeometry(new Rect(0, 0, 
                                 _markerElement.MarkerWidth.AnimVal.Value, _markerElement.MarkerHeight.AnimVal.Value));
                         }
+                        else if (_hostElement != null)
+                        {
+                            // Special cases for zero-length 'path' and 'line' segments.
+                            var isLineSegment = false;
+                            if (_hostGeometry != null)
+                            {
+                                var bounds = _hostGeometry.Bounds;
+                                if (string.Equals(_hostElement.LocalName, "line", StringComparison.Ordinal))
+                                {
+                                    isLineSegment = true;
+                                }
+                                else if (string.Equals(_hostElement.LocalName, "rect", StringComparison.Ordinal))
+                                {
+                                    isLineSegment = bounds.Width.Equals(0) || bounds.Height.Equals(0);
+                                }
+                                else if (string.Equals(_hostElement.LocalName, "path", StringComparison.Ordinal))
+                                {
+                                    isLineSegment = bounds.Width.Equals(0) || bounds.Height.Equals(0);
+                                }
+                            }
+                            else
+                            {
+                                if (string.Equals(_hostElement.LocalName, "line", StringComparison.Ordinal))
+                                {
+                                    isLineSegment = true;
+                                }
+                            }
+                            if (isLineSegment)
+                            {
+                                bool isZeroWidthLine = false;
+                                if (_pathFigures != null)
+                                {
+                                    if (_pathFigures.Count == 0)
+                                    {
+                                        isZeroWidthLine = true;
+                                    }
+                                    else
+                                    {
+                                        var pathWidth = 0.0d;
+                                        foreach (PathFigure pathFigure in _pathFigures)
+                                        {
+                                            pathWidth += WpfConvert.GetPathFigureLength(pathFigure); 
+                                        }
+                                        isZeroWidthLine = pathWidth.Equals(0.0d);
+                                    }
+                                }
+
+                                if (isZeroWidthLine)
+                                {
+                                    _drawGroup.ClipGeometry = new RectangleGeometry(new Rect(0, 0,
+                                        _markerElement.MarkerWidth.AnimVal.Value, _markerElement.MarkerHeight.AnimVal.Value));
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -201,6 +257,17 @@ namespace SharpVectors.Renderers.Wpf
                     if (pathGeometry != null)
                     {
                         _pathFigures = pathGeometry.Figures;
+
+                        _hostGeometry = pathGeometry;
+                    }
+                    else
+                    {
+                        var hostGeometry = paintContext.Tag as Geometry;
+                        if (hostGeometry != null)
+                        {
+                            _hostGeometry = hostGeometry.GetFlattenedPathGeometry();
+                            _pathFigures  = _hostGeometry.Figures;
+                        }
                     }
                 }
             }
@@ -401,6 +468,7 @@ namespace SharpVectors.Renderers.Wpf
             _drawGroup     = null;
             _hostElement   = null;
             _pathFigures   = null;
+            _hostGeometry  = null;
 
             _markerElement = element as SvgMarkerElement;
         }

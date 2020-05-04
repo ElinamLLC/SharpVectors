@@ -39,7 +39,7 @@ namespace SharpVectors.Dom.Css
         #region Private Fields
 
         private CssXPathSelector[] _xPathSelectors;
-        private CssStyleDeclaration _Style;
+        private CssStyleDeclaration _style;
 
         #endregion
 
@@ -117,7 +117,14 @@ namespace SharpVectors.Dom.Css
 
                 css = css.Substring(match.Length);
 
-                rule._Style = new CssStyleDeclaration(ref css, rule, readOnly, origin);
+                if (string.IsNullOrWhiteSpace(css))
+                {
+                    rule._style = CssStyleDeclaration.EmptyCssStyle;
+                }
+                else
+                {
+                    rule._style = new CssStyleDeclaration(ref css, rule, readOnly, origin);
+                }
 
                 return rule;
             }
@@ -168,7 +175,7 @@ namespace SharpVectors.Dom.Css
         public ICssStyleDeclaration Style
         {
             get {
-                return _Style;
+                return _style;
             }
         }
 

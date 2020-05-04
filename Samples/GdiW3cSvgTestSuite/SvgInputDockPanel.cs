@@ -500,7 +500,7 @@ namespace GdiW3cSvgTestSuite
                 {
                     using (var zipStream = new GZipStream(stream, CompressionMode.Decompress))
                     {
-                        textEditor.LoadFile(documentFilePath, zipStream, false, true);
+                        textEditor.LoadFile(documentFilePath, zipStream, false, false);
                     }
                 }
             }

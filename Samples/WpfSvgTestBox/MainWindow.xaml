@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="SharpVectors: WPF SVG TestBox" d:DesignHeight="720" d:DesignWidth="860" WindowStartupLocation="CenterScreen">
     <DockPanel LastChildFill="True" Margin="3">
-        <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
+        <Frame x:Name="mainPage" Source="MainPage.xaml"/>
+        <!--<TabControl Margin="6" Grid.Row="0" Grid.Column="2">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -72,6 +73,6 @@
                 </TabItem.Header>
                 <Frame x:Name="frameDebugging" Source="DebugPage.xaml"/>
             </TabItem>
-        </TabControl>
+        </TabControl>-->
     </DockPanel>
 </Window>

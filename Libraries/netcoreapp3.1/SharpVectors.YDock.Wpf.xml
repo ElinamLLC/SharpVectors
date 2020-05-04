@@ -1,0 +1,743 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.YDock.Wpf</name>
+    </assembly>
+    <members>
+        <member name="P:YDock.DockControl.CanFloat">
+            <summary>
+            是否可以转为浮动模式
+            </summary>
+        </member>
+        <member name="P:YDock.DockControl.CanDock">
+            <summary>
+            是否可以转为Dock模式
+            </summary>
+        </member>
+        <member name="P:YDock.DockControl.CanDockAsDocument">
+            <summary>
+            是否可以转为Document模式
+            </summary>
+        </member>
+        <member name="P:YDock.DockControl.CanSwitchAutoHideStatus">
+            <summary>
+            是否可以切换自动隐藏状态
+            </summary>
+        </member>
+        <member name="P:YDock.DockControl.CanHide">
+            <summary>
+            是否可以隐藏
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.Show(System.Boolean)">
+            <summary>
+            通用显示的方法。
+            显示的模式（Dock，Float，AnchorSide）与当前Status有关
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.Hide">
+            <summary>
+            此方法会直接从用户界面隐藏该项（CanSelect设为False）
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.ToFloat(System.Boolean)">
+            <summary>
+            转为浮动窗口
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.ToDock(System.Boolean)">
+            <summary>
+            转为Dock模式
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.ToDockAsDocument(System.Boolean)">
+            <summary>
+            转为Document模式
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.ToDockAsDocument(System.Int32,System.Boolean)">
+            <summary>
+            转为Document模式
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.SwitchAutoHideStatus">
+            <summary>
+            在Normal和DockBar模式间切换
+            </summary>
+        </member>
+        <member name="M:YDock.DockControl.Close">
+            <summary>
+            将CanSelect设为False，并从界面移除此项
+            对于Normal or Float模式，效果与Hide方法相同
+            </summary>
+        </member>
+        <member name="P:YDock.DragItem.DockMode">
+            <summary>
+            拖动前的Mode
+            </summary>
+        </member>
+        <member name="P:YDock.Interface.IDockSource.DockControl">
+            <summary>
+            布局管理器，包含控制Dock布局的一些操作，例如Show，Hide之类
+            </summary>
+        </member>
+        <member name="P:YDock.Interface.IDockSource.Header">
+            <summary>
+            显示用的标题
+            </summary>
+        </member>
+        <member name="P:YDock.Interface.IDockSource.Icon">
+            <summary>
+            显示用的图标
+            </summary>
+        </member>
+        <member name="P:YDock.Interface.IDockDocSource.IsModified">
+            <summary>
+            源文件是否修改
+            </summary>
+        </member>
+        <member name="P:YDock.Interface.IDockDocSource.FullFileName">
+            <summary>
+            源文件的完整路径
+            </summary>
+        </member>
+        <member name="P:YDock.Interface.IDockDocSource.FileName">
+            <summary>
+            源文件的名称
+            </summary>
+        </member>
+        <member name="M:YDock.Interface.IDockDocSource.Save">
+            <summary>
+            源文件的保存接口
+            </summary>
+        </member>
+        <member name="M:YDock.Interface.IDockDocSource.ReLoad">
+            <summary>
+            重新加载源文件
+            </summary>
+        </member>
+        <member name="M:YDock.Interface.IDockDocSource.AllowClose">
+            <summary>
+            提供一个操作，在关闭选项卡前会询问是否允许关闭
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:YDock.Model.DockElement.IsVisible">
+            <summary>
+            Content是否可见
+            </summary>
+        </member>
+        <member name="P:YDock.Model.DockElement.IsDocument">
+            <summary>
+            是否以Document模式注册，该属性将影响Dock的浮动窗口的模式
+            </summary>
+        </member>
+        <member name="P:YDock.Model.DockElement.IsActive">
+            <summary>
+            是否为当前的活动窗口
+            </summary>
+        </member>
+        <member name="P:YDock.Model.DockElement.CanSelect">
+            <summary>
+            是否显示在用户界面供用户点击显示，默认为false
+            </summary>
+        </member>
+        <member name="T:YDock.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources._AutoHide">
+            <summary>
+              查找类似 AutoHide 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources._Close">
+            <summary>
+              查找类似 Close(_C) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.AutoHide">
+            <summary>
+              查找类似 AutoHide(_A) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Close">
+            <summary>
+              查找类似 Close 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Close_All">
+            <summary>
+              查找类似 Close all 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Close_All_Except">
+            <summary>
+              查找类似 Close all except this(_A) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Dock">
+            <summary>
+              查找类似 ToDock(_K) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Dock_Document">
+            <summary>
+              查找类似 Dock as Tabbed Document(_T) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Float">
+            <summary>
+              查找类似 ToFloat(_F) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Float_All">
+            <summary>
+              查找类似 Float all 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Hide">
+            <summary>
+              查找类似 Hide(_H) 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Maximize">
+            <summary>
+              查找类似 Maximize 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Minimize">
+            <summary>
+              查找类似 Minimize 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Restore">
+            <summary>
+              查找类似 Restore 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:YDock.Properties.Resources.Window_Position">
+            <summary>
+              查找类似 Window position 的本地化字符串。
+            </summary>
+        </member>
+        <member name="F:YDock.View.AnchorSidePanel._needCompensate">
+            <summary>此标志位表示Arrange时是否需要补偿子元素的宽度</summary>
+        </member>
+        <member name="M:YDock.View.AnchorSidePanel.MeasureOverride(System.Windows.Size)">
+            <summary>
+            测量阶段若子元素总宽度超过可用宽度，则对子元素的宽度进行排序后依次裁剪多余得到宽度
+            </summary>
+            <param name="availableSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YDock.View.LayoutGroupPanel">
+            <summary>
+            the core class for layout and resize region
+            </summary>
+        </member>
+        <member name="P:YDock.View.LayoutGroupPanel.IsDocumentPanel">
+            <summary>
+            表示该Panel的Children中除了<see cref="T:YDock.View.LayoutDragSplitter"/>就是<see cref="T:YDock.View.LayoutDocumentGroupControl"/>
+            </summary>
+        </member>
+        <member name="P:YDock.View.LayoutGroupPanel.IsAnchorPanel">
+            <summary>
+            表示该Panel的Children中除了<see cref="T:YDock.View.LayoutDragSplitter"/>就是<see cref="T:YDock.View.AnchorSideGroupControl"/>
+            </summary>
+        </member>
+        <member name="P:YDock.View.LayoutGroupPanel.ContainDocument">
+            <summary>
+            表示该Panel的Children中递归包含<see cref="T:YDock.View.LayoutDocumentGroupControl"/>
+            </summary>
+        </member>
+        <member name="M:YDock.View.LayoutGroupPanel._MeasureOverrideFull(System.Windows.Size)">
+            <summary>
+            Children全部为同一种<see cref="T:YDock.Interface.ILayoutGroupControl"/>时调用
+            </summary>
+            <param name="availableSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YDock.View.LayoutGroupPanel._ComputeDragBounds(YDock.View.LayoutDragSplitter,System.Double@,System.Double@)">
+            <summary>
+            计算拖动时的上下边界值
+            </summary>
+            <param name="splitter">拖动的对象</param>
+            <param name="x1">下界</param>
+            <param name="x2">上界</param>
+        </member>
+        <member name="M:YDock.View.LayoutGroupPanel._IsDocumentChild(System.Object)">
+            <summary>
+            判断Child是否包含文档（文档区域大小判定方式为Auto）
+            </summary>
+            <param name="child"></param>
+            <returns></returns>
+        </member>
+        <member name="M:YDock.View.LayoutGroupPanel._GetMinLength(System.Object)">
+            <summary>
+            计算obj的中最小长度
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:YDock.View.LayoutRootPanel">
+            <summary>
+            用于容纳<see cref="T:YDock.View.LayoutGroupPanel"/>,以及AutoHideWindow
+            </summary>
+        </member>
+        <member name="P:YDock.View.BaseDropPanel.Target">
+            <summary>
+            拖放目标
+            </summary>
+        </member>
+        <member name="P:YDock.View.BaseDropPanel.Source">
+            <summary>
+            拖放源
+            </summary>
+        </member>
+        <member name="P:YDock.View.AnchorGroupWindow.IsSingleMode">
+            <summary>
+            是否Content为<see cref="T:YDock.Interface.ILayoutGroupControl"/>
+            </summary>
+        </member>
+        <member name="P:YDock.View.AnchorGroupWindow.NoBorder">
+            <summary>
+            是否需要Border
+            </summary>
+        </member>
+        <member name="M:YDock.View.AutoHideWindow._ComputeDragBounds(YDock.View.LayoutDragSplitter,System.Double@,System.Double@)">
+            <summary>
+            计算拖动时的上下边界值
+            </summary>
+            <param name="splitter">拖动的对象</param>
+            <param name="x1">下界</param>
+            <param name="x2">上界</param>
+        </member>
+        <member name="F:YDock.View.TransitioningContentControl.ScaleTransitionState">
+            <summary>
+            代表缩放状态转换
+            </summary>
+        </member>
+        <member name="P:YDock.View.TransitioningContentControl.CurrentContentPresentationSite">
+            <summary>
+            Gets or sets the current content presentation site.
+            </summary>
+            <value>The current content presentation site.</value>
+        </member>
+        <member name="P:YDock.View.TransitioningContentControl.PreviousContentPresentationSite">
+            <summary>
+            Gets or sets the previous content presentation site.
+            </summary>
+            <value>The previous content presentation site.</value>
+        </member>
+        <member name="F:YDock.View.TransitioningContentControl._allowIsTransitioningWrite">
+            <summary>
+            Indicates whether the control allows writing IsTransitioning.
+            </summary>
+        </member>
+        <member name="P:YDock.View.TransitioningContentControl.IsTransitioning">
+            <summary>
+            Gets a value indicating whether this instance is currently performing
+            a transition.
+            </summary>
+        </member>
+        <member name="F:YDock.View.TransitioningContentControl.IsTransitioningProperty">
+            <summary>
+            Identifies the IsTransitioning dependency property.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnIsTransitioningPropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            IsTransitioningProperty property changed handler.
+            </summary>
+            <param name="d">TransitioningContentControl that changed its IsTransitioning.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="F:YDock.View.TransitioningContentControl._currentTransition">
+            <summary>
+            The storyboard that is used to transition old and new content.
+            </summary>
+        </member>
+        <member name="P:YDock.View.TransitioningContentControl.CurrentTransition">
+            <summary>
+            Gets or sets the storyboard that is used to transition old and new content.
+            </summary>
+        </member>
+        <member name="P:YDock.View.TransitioningContentControl.Transition">
+            <summary>
+            Gets or sets the name of the transition to use. These correspond
+            directly to the VisualStates inside the PresentationStates group.
+            </summary>
+        </member>
+        <member name="F:YDock.View.TransitioningContentControl.TransitionProperty">
+            <summary>
+            Identifies the Transition dependency property.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnTransitionPropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            TransitionProperty property changed handler.
+            </summary>
+            <param name="d">TransitioningContentControl that changed its Transition.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="P:YDock.View.TransitioningContentControl.RestartTransitionOnContentChange">
+            <summary>
+            Gets or sets a value indicating whether the current transition
+            will be aborted when setting new content during a transition.
+            </summary>
+        </member>
+        <member name="F:YDock.View.TransitioningContentControl.RestartTransitionOnContentChangeProperty">
+            <summary>
+            Identifies the RestartTransitionOnContentChange dependency property.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnRestartTransitionOnContentChangePropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            RestartTransitionOnContentChangeProperty property changed handler.
+            </summary>
+            <param name="d">TransitioningContentControl that changed its RestartTransitionOnContentChange.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnRestartTransitionOnContentChangeChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Called when the RestartTransitionOnContentChangeProperty changes.
+            </summary>
+            <param name="oldValue">The old value of RestartTransitionOnContentChange.</param>
+            <param name="newValue">The new value of RestartTransitionOnContentChange.</param>
+        </member>
+        <member name="E:YDock.View.TransitioningContentControl.TransitionCompleted">
+            <summary>
+            Occurs when the current transition has completed.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YDock.View.TransitioningContentControl"/> class.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnApplyTemplate">
+            <summary>
+            Builds the visual tree for the TransitioningContentControl control 
+            when a new template is applied.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnContentChanged(System.Object,System.Object)">
+            <summary>
+            Called when the value of the <see cref="P:System.Windows.Controls.ContentControl.Content"/> property changes.
+            </summary>
+            <param name="oldContent">The old value of the <see cref="P:System.Windows.Controls.ContentControl.Content"/> property.</param>
+            <param name="newContent">The new value of the <see cref="P:System.Windows.Controls.ContentControl.Content"/> property.</param>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.StartTransition(System.Object,System.Object)">
+            <summary>
+            Starts the transition.
+            </summary>
+            <param name="oldContent">The old content.</param>
+            <param name="newContent">The new content.</param>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.OnTransitionCompleted(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Completed event of the transition storyboard.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.AbortTransition">
+            <summary>
+            Aborts the transition and releases the previous content.
+            </summary>
+        </member>
+        <member name="M:YDock.View.TransitioningContentControl.GetStoryboard(System.String)">
+            <summary>
+            Attempts to find a storyboard that matches the newTransition name.
+            </summary>
+            <param name="newTransition">The new transition.</param>
+            <returns>A storyboard or null, if no storyboard was found.</returns>
+        </member>
+        <member name="M:YDock.View.VisualStates.TryGetVisualStateGroup(System.Windows.DependencyObject,System.String)">
+            <summary>
+            This method tries to get the named VisualStateGroup for the 
+            dependency object. The provided object's ImplementationRoot will be 
+            looked up in this call.
+            </summary>
+            <param name="dependencyObject">The dependency object.</param>
+            <param name="groupName">The visual state group's name.</param>
+            <returns>Returns null or the VisualStateGroup object.</returns>
+        </member>
+        <member name="M:YDock.View.VisualStates.GetImplementationRoot(System.Windows.DependencyObject)">
+            <summary>
+            Gets the implementation root of the Control.
+            </summary>
+            <param name="dependencyObject">The DependencyObject.</param>
+            <remarks>
+            Implements Silverlight's corresponding internal property on Control.
+            </remarks>
+            <returns>Returns the implementation root or null.</returns>
+        </member>
+        <member name="P:YDock.DockManager.DockImageSource">
+            <summary>
+            用于浮动窗口显示，一般用作应用程序的图标
+            </summary>
+        </member>
+        <member name="P:YDock.DockManager.DockTitle">
+            <summary>
+            用于浮动窗口显示，一般用作应用程序的Title
+            </summary>
+        </member>
+        <member name="P:YDock.DockManager.AutoHideElement">
+            <summary>
+            自动隐藏窗口的Model
+            </summary>
+        </member>
+        <member name="P:YDock.DockManager.ActiveElement">
+            <summary>
+            current ActiveElement
+            </summary>
+        </member>
+        <member name="P:YDock.DockManager.ActiveControl">
+            <summary>
+            当前活动的DockControl
+            </summary>
+        </member>
+        <member name="P:YDock.DockManager.SelectedDocument">
+            <summary>
+            当前选中的文档
+            </summary>
+        </member>
+        <member name="P:YDock.DockManager.DockControls">
+            <summary>
+            all registed DockControl
+            </summary>
+        </member>
+        <member name="M:YDock.DockManager.RegisterDocument(YDock.Interface.IDockSource,System.Nullable{System.Int32},System.Boolean,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            以选项卡模式向DockManager注册一个DockElement
+            </summary>
+            <param name="title">标题栏文字</param>
+            <param name="content">内容</param>
+            <param name="imageSource">标题栏图标</param>
+            <param name="canSelect">是否直接停靠在选项栏中供用户选择(默认为False)</param>
+            <param name="desiredWidth">期望的宽度</param>
+            <param name="desiredHeight">期望的高度</param>
+            <returns></returns>
+        </member>
+        <member name="M:YDock.DockManager.RegisterDock(YDock.Interface.IDockSource,YDock.Enum.DockSide,System.Nullable{System.Int32},System.Boolean,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            以DockBar模式（必须指定停靠方向，否则默认停靠在左侧）向DockManager注册一个DockElement
+            </summary>
+            <param name="title">标题栏文字</param>
+            <param name="content">内容</param>
+            <param name="imageSource">标题栏图标</param>
+            <param name="side">停靠方向（默认左侧）</param>
+            <param name="canSelect">是否直接停靠在选项栏中供用户选择(默认为False)</param>
+            <param name="desiredWidth">期望的宽度</param>
+            <param name="desiredHeight">期望的高度</param>
+            <returns></returns>
+        </member>
+        <member name="M:YDock.DockManager.RegisterFloat(YDock.Interface.IDockSource,YDock.Enum.DockSide,System.Nullable{System.Int32},System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            以Float模式向DockManager注册一个DockElement
+            </summary>
+            <param name="title">标题栏文字</param>
+            <param name="content">内容</param>
+            <param name="imageSource">标题栏图标</param>
+            <param name="side">停靠方向（默认左侧）</param>
+            <param name="desiredWidth">期望的宽度</param>
+            <param name="desiredHeight">期望的高度</param>
+            <returns></returns>
+        </member>
+        <member name="M:YDock.DockManager.NavigateBackward">
+            <summary>
+            向后导航
+            </summary>
+        </member>
+        <member name="M:YDock.DockManager.NavigateForward">
+            <summary>
+            向前导航
+            </summary>
+        </member>
+        <member name="M:YDock.DockManager.AttachTo(YDock.Interface.IDockControl,YDock.Interface.IDockControl,YDock.Enum.AttachMode,System.Double)">
+            <summary>
+            attach source to target by <see cref="T:YDock.Enum.AttachMode"/>
+            </summary>
+            <param name="source">源</param>
+            <param name="target">目标</param>
+            <param name="mode">附加模式</param>
+        </member>
+        <member name="M:YDock.DockManager.SaveCurrentLayout(System.String)">
+            <summary>
+            If name has exist, it will override the current layout,otherwise create a new layout.
+            </summary>
+            <param name="name">layout name</param>
+        </member>
+        <member name="T:YDock.Win32Helper.SetWindowPosFlags">
+            <summary>
+            SetWindowPos Flags
+            </summary>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.SynchronousWindowPosition">
+            <summary>If the calling thread and the thread that owns the window are attached to different input queues,
+            the system posts the request to the thread that owns the window. This prevents the calling thread from
+            blocking its execution while other threads process the request.</summary>
+            <remarks>SWP_ASYNCWINDOWPOS</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DeferErase">
+            <summary>Prevents generation of the WM_SYNCPAINT message.</summary>
+            <remarks>SWP_DEFERERASE</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DrawFrame">
+            <summary>Draws a frame (defined in the window's class description) around the window.</summary>
+            <remarks>SWP_DRAWFRAME</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.FrameChanged">
+            <summary>Applies new frame styles set using the SetWindowLong function. Sends a WM_NCCALCSIZE message to
+            the window, even if the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE
+            is sent only when the window's size is being changed.</summary>
+            <remarks>SWP_FRAMECHANGED</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.HideWindow">
+            <summary>Hides the window.</summary>
+            <remarks>SWP_HIDEWINDOW</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DoNotActivate">
+            <summary>Does not activate the window. If this flag is not set, the window is activated and moved to the
+            top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter
+            parameter).</summary>
+            <remarks>SWP_NOACTIVATE</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DoNotCopyBits">
+            <summary>Discards the entire contents of the client area. If this flag is not specified, the valid
+            contents of the client area are saved and copied back into the client area after the window is sized or
+            repositioned.</summary>
+            <remarks>SWP_NOCOPYBITS</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.IgnoreMove">
+            <summary>Retains the current position (ignores X and Y parameters).</summary>
+            <remarks>SWP_NOMOVE</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DoNotChangeOwnerZOrder">
+            <summary>Does not change the owner window's position in the Z order.</summary>
+            <remarks>SWP_NOOWNERZORDER</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DoNotRedraw">
+            <summary>Does not redraw changes. If this flag is set, no repainting of any kind occurs. This applies to
+            the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent
+            window uncovered as a result of the window being moved. When this flag is set, the application must
+            explicitly invalidate or redraw any parts of the window and parent window that need redrawing.</summary>
+            <remarks>SWP_NOREDRAW</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DoNotReposition">
+            <summary>Same as the SWP_NOOWNERZORDER flag.</summary>
+            <remarks>SWP_NOREPOSITION</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.DoNotSendChangingEvent">
+            <summary>Prevents the window from receiving the WM_WINDOWPOSCHANGING message.</summary>
+            <remarks>SWP_NOSENDCHANGING</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.IgnoreResize">
+            <summary>Retains the current size (ignores the cx and cy parameters).</summary>
+            <remarks>SWP_NOSIZE</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.IgnoreZOrder">
+            <summary>Retains the current Z order (ignores the hWndInsertAfter parameter).</summary>
+            <remarks>SWP_NOZORDER</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.SetWindowPosFlags.ShowWindow">
+            <summary>Displays the window.</summary>
+            <remarks>SWP_SHOWWINDOW</remarks>
+        </member>
+        <member name="F:YDock.Win32Helper.HWND_TOPMOST">
+            <summary>
+                Special window handles
+            </summary>
+        </member>
+        <member name="M:YDock.Win32Helper.SetWindowLong(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Changes an attribute of the specified window. The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
+            </summary>
+            <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs..</param>
+            <param name="nIndex">The zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer. To set any other value, specify one of the following values: GWL_EXSTYLE, GWL_HINSTANCE, GWL_ID, GWL_STYLE, GWL_USERDATA, GWL_WNDPROC </param>
+            <param name="dwNewLong">The replacement value.</param>
+            <returns>If the function succeeds, the return value is the previous value of the specified 32-bit integer.
+            If the function fails, the return value is zero. To get extended error information, call GetLastError. </returns>
+        </member>
+        <member name="M:YDock.Win32Helper.MonitorFromRect(YDock.Win32Helper.RECT@,System.UInt32)">
+            <summary>
+            The MonitorFromRect function retrieves a handle to the display monitor that 
+            has the largest area of intersection with a specified rectangle.
+            </summary>
+            <param name="lprc">Pointer to a RECT structure that specifies the rectangle of interest in 
+            virtual-screen coordinates</param>
+            <param name="dwFlags">Determines the function's return value if the rectangle does not intersect 
+            any display monitor</param>
+            <returns>
+            If the rectangle intersects one or more display monitor rectangles, the return value 
+            is an HMONITOR handle to the display monitor that has the largest area of intersection with the rectangle.
+            If the rectangle does not intersect a display monitor, the return value depends on the value of dwFlags.
+            </returns>
+        </member>
+        <member name="M:YDock.Win32Helper.MonitorFromWindow(System.IntPtr,System.UInt32)">
+            <summary>
+            The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window. 
+            </summary>
+            <param name="hwnd">A handle to the window of interest.</param>
+            <param name="dwFlags">Determines the function's return value if the window does not intersect any display monitor.</param>
+            <returns>If the window intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the display monitor that has the largest area of intersection with the window. 
+            If the window does not intersect a display monitor, the return value depends on the value of dwFlags.
+            </returns>
+        </member>
+        <member name="T:YDock.Win32Helper.MonitorInfo">
+            <summary>
+            The MONITORINFO structure contains information about a display monitor.
+            </summary>
+        </member>
+        <member name="F:YDock.Win32Helper.MonitorInfo.Size">
+            <summary>
+            The size of the structure, in bytes. 
+            </summary>
+        </member>
+        <member name="F:YDock.Win32Helper.MonitorInfo.Monitor">
+            <summary>
+            A RECT structure that specifies the display monitor rectangle, expressed 
+            in virtual-screen coordinates. 
+            Note that if the monitor is not the primary display monitor, 
+            some of the rectangle's coordinates may be negative values. 
+            </summary>
+        </member>
+        <member name="F:YDock.Win32Helper.MonitorInfo.Work">
+            <summary>
+            A RECT structure that specifies the work area rectangle of the display monitor, 
+            expressed in virtual-screen coordinates. Note that if the monitor is not the primary 
+            display monitor, some of the rectangle's coordinates may be negative values.
+            </summary>
+        </member>
+        <member name="F:YDock.Win32Helper.MonitorInfo.Flags">
+            <summary>
+            A set of flags that represent attributes of the display monitor. 
+            </summary>
+        </member>
+        <member name="M:YDock.Win32Helper.GetMonitorInfo(System.IntPtr,YDock.Win32Helper.MonitorInfo)">
+            <summary>
+            The GetMonitorInfo function retrieves information about a display monitor. 
+            </summary>
+            <param name="hMonitor">Handle to the display monitor of interest.</param>
+            <param name="lpmi">Pointer to a MONITORINFO or MONITORINFOEX structure that receives 
+            information about the specified display monitor</param>
+            <returns>If the function succeeds, the return value is nonzero.
+            If the function fails, the return value is zero.</returns>
+        </member>
+    </members>
+</doc>

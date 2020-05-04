@@ -19,7 +19,7 @@ namespace SharpVectors.Dom.Css
         public readonly static string AnglePattern      = @"(?<angleNumber>" + numberPattern + ")" + AngleUnitPattern;
 
         private static string cssPrimValuePattern = @"^(?<primitiveValue>"
-            + @"(?<func>(?<funcname>attr|url|counter|rect|rgb)\((?<funcvalue>[^\)]+)\))"
+            + @"(?<func>(?<funcname>attr|url|counter|rect|rgb|rgba|hsl|hsla|var)\((?<funcvalue>[^\)]+)\))"
             + @"|(?<length>" + LengthPattern + ")"
             + @"|(?<angle>" + AnglePattern + ")"
             + @"|(?<freqTimeNumber>(?<numberValue2>" + numberPattern + ")(?<unit2>Hz|kHz|in|s|ms|%)?)"
@@ -27,8 +27,8 @@ namespace SharpVectors.Dom.Css
             + @"|(?<colorIdent>([A-Za-z]+)|(\#[A-Fa-f0-9]{6})|(\#[A-Fa-f0-9]{3}))"
             + @")";
 
-        private readonly static Regex reCssPrimitiveValue = new Regex(cssPrimValuePattern + "$");
-        private readonly static Regex reCssValueList      = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
+        private readonly static Regex _reCssPrimitiveValue = new Regex(cssPrimValuePattern + "$");
+        private readonly static Regex _reCssValueList      = new Regex(cssPrimValuePattern + @"(\s*,\s*)+$");
 
         #endregion
 
@@ -90,14 +90,14 @@ namespace SharpVectors.Dom.Css
                 // inherit
                 return new CssValue(CssValueType.Inherit, cssText, readOnly);
             }
-            Match match = reCssPrimitiveValue.Match(cssText);
+            Match match = _reCssPrimitiveValue.Match(cssText);
             if (match.Success)
             {
                 // single primitive value
                 return CssPrimitiveValue.Create(match, readOnly);
             }
 
-            match = reCssValueList.Match(cssText);
+            match = _reCssValueList.Match(cssText);
             if (match.Success)
             {
                 // list of primitive values
@@ -157,6 +157,13 @@ namespace SharpVectors.Dom.Css
         {
             get {
                 return _cssValueType;
+            }
+        }
+
+        public virtual bool IsAbsolute
+        {
+            get {
+                return false;
             }
         }
 

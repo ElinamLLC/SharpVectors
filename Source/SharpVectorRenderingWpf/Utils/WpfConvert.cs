@@ -10,7 +10,7 @@ namespace SharpVectors.Renderers.Utils
     public static class WpfConvert
     {
         /// <summary>
-        /// A GDI Color representation of the RgbColor
+        /// A WPF <see cref="Color"/> representation of the <c>RgbColor</c>.
         /// </summary>
         public static Color? ToColor(ICssColor color)
         {
@@ -54,6 +54,11 @@ namespace SharpVectors.Renderers.Utils
                 }
 
                 return (Color)ColorConverter.ConvertFromString(colorName);
+            }
+
+            if (color.Red == null || color.Green == null || color.Blue == null)
+            {
+                return null;
             }
 
             double dRed   = color.Red.GetFloatValue(CssPrimitiveType.Number);
@@ -140,5 +145,49 @@ namespace SharpVectors.Renderers.Utils
 
             return GradientSpreadMethod.Pad;
         }
+
+        public static double GetPathFigureLength(PathFigure pathFigure)
+        {
+            if (pathFigure == null)
+                return 0;
+
+            bool isAlreadyFlattened = true;
+
+            foreach (PathSegment pathSegment in pathFigure.Segments)
+            {
+                if (!(pathSegment is PolyLineSegment) && !(pathSegment is LineSegment))
+                {
+                    isAlreadyFlattened = false;
+                    break;
+                }
+            }
+
+            var pathFigureFlattened = isAlreadyFlattened ? pathFigure : pathFigure.GetFlattenedPathFigure();
+
+            double length = 0;
+            Point pt1 = pathFigureFlattened.StartPoint;
+
+            foreach (PathSegment pathSegment in pathFigureFlattened.Segments)
+            {
+                if (pathSegment is LineSegment)
+                {
+                    Point pt2 = (pathSegment as LineSegment).Point;
+                    length += (pt2 - pt1).Length;
+                    pt1 = pt2;
+                }
+                else if (pathSegment is PolyLineSegment)
+                {
+                    PointCollection pointCollection = (pathSegment as PolyLineSegment).Points;
+                    foreach (Point pt2 in pointCollection)
+                    {
+                        length += (pt2 - pt1).Length;
+                        pt1 = pt2;
+                    }
+                }
+            }
+
+            return length;
+        }
+
     }
 }

@@ -15,6 +15,8 @@ namespace GdiW3cSvgTestSuite
     {
         #region Private Fields
 
+        private const string NamespaceText = " xmlns=\"http://www.w3.org/1999/xhtml\"";
+
         private string _svgFilePath;
         private SvgTestCase _testCase;
 
@@ -31,10 +33,10 @@ namespace GdiW3cSvgTestSuite
 
             this.Font = new Font(PanelDefaultFont, 14F, FontStyle.Regular, GraphicsUnit.World);
 
-            testTitleLabel.Font      = new Font(testTitleLabel.Font, FontStyle.Bold);
-            testDescritionLabel.Font = new Font(testDescritionLabel.Font, FontStyle.Bold);
-            testFilePathLabel.Font   = new Font(testFilePathLabel.Font, FontStyle.Bold);
-            testDetailsLabel.Font    = new Font(testDetailsLabel.Font, FontStyle.Bold);
+            testTitleLabel.Font      = new Font(PanelDefaultFont, 16F, FontStyle.Bold, GraphicsUnit.World);
+            testDescritionLabel.Font = new Font(PanelDefaultFont, 16F, FontStyle.Bold, GraphicsUnit.World);
+            testFilePathLabel.Font   = new Font(PanelDefaultFont, 16F, FontStyle.Bold, GraphicsUnit.World);
+            testDetailsLabel.Font    = new Font(PanelDefaultFont, 16F, FontStyle.Bold, GraphicsUnit.World);
 
             testTitle.BorderStyle      = BorderStyle.None;
             testDescrition.BorderStyle = BorderStyle.None;
@@ -196,7 +198,7 @@ namespace GdiW3cSvgTestSuite
             settings.IgnoreWhitespace             = false;
             settings.IgnoreComments               = true;
             settings.IgnoreProcessingInstructions = true;
-            settings.DtdProcessing                = DtdProcessing.Ignore;
+            settings.DtdProcessing                = DtdProcessing.Parse;
 
             StringBuilder textBuilder = new StringBuilder();
 
@@ -207,49 +209,195 @@ namespace GdiW3cSvgTestSuite
             textBuilder.AppendLine("<body>");
             textBuilder.AppendLine("<div style=\"padding:0px;margin:0px 0px 15px 0px;\">");
 
+            SvgTestSuite selectedTestSuite = null;
+            if (_optionSettings != null)
+            {
+                selectedTestSuite = _optionSettings.SelectedTestSuite;
+            }
+            if (selectedTestSuite == null)
+            {
+                selectedTestSuite = SvgTestSuite.GetDefault(SvgTestSuite.Create());
+            }
+
+            int majorVersion = selectedTestSuite.MajorVersion;
+            int minorVersion = selectedTestSuite.MinorVersion;
+
+            var paraStyle = new StringBuilder();
+            paraStyle.Append("padding:3px;");
+            paraStyle.Append("margin:0px;");
+
+            var paraTag = string.Format("<p style=\"{0}\">", paraStyle);
+
+            var tableStyle = new StringBuilder();
+            tableStyle.Append("border:1px solid gray;");
+            tableStyle.AppendFormat("margin:{0}px {1}px {2}px {3}px;", 16, 16, 16, 16);
+//            tableStyle.Append("width:75%;");
+            var tableTag = string.Format("<table style=\"{0}\" border=\"1\" cellpadding=\"3\" cellspacing=\"0\">", tableStyle);
+
+            tableStyle.Length = 0;
+            //            tableStyle.Append("border:1px solid gray;");
+            tableStyle.Append("font-weight:bold;");
+            tableStyle.Append("font-size:16px;");
+            tableStyle.Append("text-align:center;");
+            var cellTag = string.Format("<td style=\"{0}\">", tableStyle);
+
             using (XmlReader reader = XmlReader.Create(stream, settings))
             {
-                if (reader.ReadToFollowing("SVGTestCase"))
+                if (majorVersion == 1 && minorVersion == 1)
                 {
-                    _testCase = new SvgTestCase();
+                    var titleStyle = new StringBuilder();
+                    titleStyle.Append("font-weight:bold;");
+                    titleStyle.Append("font-size:14px;");
+                    titleStyle.Append("padding:10px 0px 10px 0px;");
+                    titleStyle.Append("margin:0px;");
 
-                    while (reader.Read())
+                    if (reader.ReadToFollowing("d:SVGTestCase"))
                     {
-                        string nodeName = reader.Name;
-                        XmlNodeType nodeType = reader.NodeType;
-                        if (nodeType == XmlNodeType.Element)
+                        _testCase = new SvgTestCase();
+
+                        while (reader.Read())
                         {
-                            if (string.Equals(nodeName, "OperatorScript", StringComparison.OrdinalIgnoreCase))
+                            string nodeName = reader.Name;
+                            XmlNodeType nodeType = reader.NodeType;
+                            if (nodeType == XmlNodeType.Element)
                             {
-                                string revisionText = reader.GetAttribute("version");
-                                if (!string.IsNullOrWhiteSpace(revisionText))
+                                if (string.Equals(nodeName, "d:operatorScript", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    revisionText = revisionText.Replace("$", "");
-                                    _testCase.Revision = revisionText.Trim();
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+                                    inputText = inputText.Replace("<p>", paraTag);
+                                    inputText = inputText.Replace("<table>", tableTag);
+                                    inputText = inputText.Replace("<th>", cellTag);
+                                    inputText = inputText.Replace("</th>", "</td>");
+                                    textBuilder.AppendLine(string.Format("<p style=\"{0}\">Operator Script</p>", titleStyle));
+                                    textBuilder.AppendLine(inputText);
                                 }
-                                string nameText = reader.GetAttribute("testname");
-                                if (!string.IsNullOrWhiteSpace(nameText))
+                                else if (string.Equals(nodeName, "d:passCriteria", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    _testCase.Name = nameText.Trim();
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+                                    inputText = inputText.Replace("<p>", paraTag);
+                                    inputText = inputText.Replace("<table>", tableTag);
+                                    inputText = inputText.Replace("<th>", cellTag);
+                                    inputText = inputText.Replace("</th>", "</td>");
+                                    textBuilder.AppendLine(string.Format("<p style=\"{0}\">Pass Criteria</p>", titleStyle));
+                                    textBuilder.AppendLine(inputText);
+                                }
+                                else if (string.Equals(nodeName, "d:testDescription", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+                                    inputText = inputText.Replace("<p>", paraTag);
+                                    inputText = inputText.Replace("<table>", tableTag);
+                                    inputText = inputText.Replace("<th>", cellTag);
+                                    inputText = inputText.Replace("</th>", "</td>");
+                                    textBuilder.AppendLine(string.Format("<p style=\"{0}\">Test Description</p>", titleStyle));
+                                    textBuilder.AppendLine(inputText);
+
+                                    _testCase.Paragraphs.Add(inputText);
                                 }
                             }
-                            else if (string.Equals(nodeName, "Paragraph", StringComparison.OrdinalIgnoreCase))
+                            else if (nodeType == XmlNodeType.EndElement &&
+                                string.Equals(nodeName, "SVGTestCase", StringComparison.OrdinalIgnoreCase))
                             {
-                                string inputText = reader.ReadInnerXml();
-
-                                string paraText = rgx.Replace(inputText, " ").Trim();
-
-                                textBuilder.AppendLine("<p>" + paraText + "</p>");
-                                _testCase.Paragraphs.Add(inputText);
+                                break;
                             }
                         }
-                        else if (nodeType == XmlNodeType.EndElement &&
-                            string.Equals(nodeName, "SVGTestCase", StringComparison.OrdinalIgnoreCase))
-                        {
-                            break;
-                        }
+
                     }
+                }
+                else if (majorVersion == 1 && minorVersion == 2)
+                {
+                    if (reader.ReadToFollowing("SVGTestCase"))
+                    {
+                        _testCase = new SvgTestCase();
 
+                        while (reader.Read())
+                        {
+                            string nodeName = reader.Name;
+                            XmlNodeType nodeType = reader.NodeType;
+                            if (nodeType == XmlNodeType.Element)
+                            {
+                                if (string.Equals(nodeName, "d:OperatorScript", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+                                    inputText = inputText.Replace("<p>", paraTag);
+                                    inputText = inputText.Replace("<table>", tableTag);
+                                    inputText = inputText.Replace("<th>", cellTag);
+                                    inputText = inputText.Replace("</th>", "</td>");
+                                    textBuilder.AppendLine(inputText);
+                                }
+                                else if (string.Equals(nodeName, "d:PassCriteria", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+                                    inputText = inputText.Replace("<p>", paraTag);
+                                    inputText = inputText.Replace("<table>", tableTag);
+                                    inputText = inputText.Replace("<th>", cellTag);
+                                    inputText = inputText.Replace("</th>", "</td>");
+                                    textBuilder.AppendLine(inputText);
+                                }
+                                else if (string.Equals(nodeName, "d:TestDescription", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+                                    inputText = inputText.Replace("<p>", paraTag);
+                                    inputText = inputText.Replace("<table>", tableTag);
+                                    inputText = inputText.Replace("<th>", cellTag);
+                                    inputText = inputText.Replace("</th>", "</td>");
+                                    textBuilder.AppendLine(inputText);
+
+                                    _testCase.Paragraphs.Add(inputText);
+                                }
+                            }
+                            else if (nodeType == XmlNodeType.EndElement &&
+                                string.Equals(nodeName, "SVGTestCase", StringComparison.OrdinalIgnoreCase))
+                            {
+                                break;
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (reader.ReadToFollowing("SVGTestCase"))
+                    {
+                        _testCase = new SvgTestCase();
+
+                        while (reader.Read())
+                        {
+                            string nodeName = reader.Name;
+                            XmlNodeType nodeType = reader.NodeType;
+                            if (nodeType == XmlNodeType.Element)
+                            {
+                                if (string.Equals(nodeName, "OperatorScript", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string revisionText = reader.GetAttribute("version");
+                                    if (!string.IsNullOrWhiteSpace(revisionText))
+                                    {
+                                        revisionText = revisionText.Replace("$", "");
+                                        _testCase.Revision = revisionText.Trim();
+                                    }
+                                    string nameText = reader.GetAttribute("testname");
+                                    if (!string.IsNullOrWhiteSpace(nameText))
+                                    {
+                                        _testCase.Name = nameText.Trim();
+                                    }
+                                }
+                                else if (string.Equals(nodeName, "Paragraph", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string inputText = reader.ReadInnerXml().Replace(NamespaceText, string.Empty);
+
+                                    string paraText = rgx.Replace(inputText, " ").Trim();
+
+                                    textBuilder.AppendLine("<p>" + paraText + "</p>");
+                                    _testCase.Paragraphs.Add(inputText);
+                                }
+                            }
+                            else if (nodeType == XmlNodeType.EndElement &&
+                                string.Equals(nodeName, "SVGTestCase", StringComparison.OrdinalIgnoreCase))
+                            {
+                                break;
+                            }
+                        }
+
+                    }
                 }
             }
 

@@ -1,7 +1,7 @@
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSPrimitiveValue interface represents a single CSS value. 
+	/// The <see cref="ICssPrimitiveValue"/> interface represents a single CSS value. 
 	/// This interface may be used to determine the value of a specific
 	/// style property currently set in a block or to set a specific 
 	/// style property explicitly within the block. An instance of this 
@@ -14,10 +14,11 @@ namespace SharpVectors.Dom.Css
 		/// <summary>
 		/// The type of the value as defined by the constants specified above.
 		/// </summary>
-		CssPrimitiveType PrimitiveType{get;}
+		CssPrimitiveType PrimitiveType { get; }
 
 		/// <summary>
-		/// A method to set the float value with a specified unit. If the property attached with this value can not accept the specified unit or the float value, the value will be unchanged and a DOMException will be raised
+		/// A method to set the float value with a specified unit. If the property attached with this value cannot 
+		/// accept the specified unit or the float value, the value will be unchanged and a DOMException will be raised.
 		/// </summary>
 		/// <param name="unitType">A unit code as defined above. The unit code can only be a float unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, CSS_IN, CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
 		/// <param name="floatValue">The new float value.</param>
@@ -70,6 +71,5 @@ namespace SharpVectors.Dom.Css
 		/// <returns>the RGB color value.</returns>
 		/// <exception cref="DomException">INVALID_ACCESS_ERR: Raised if the attached property can't return a RGB color value (e.g. this is not CSS_RGBCOLOR).</exception>
 		ICssColor GetRgbColorValue();
-
 	}
 }

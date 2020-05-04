@@ -75,15 +75,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.testDescrition.BackColor = System.Drawing.SystemColors.Window;
             this.testDescrition.Location = new System.Drawing.Point(43, 86);
+            this.testDescrition.Multiline = true;
             this.testDescrition.Name = "testDescrition";
             this.testDescrition.ReadOnly = true;
-            this.testDescrition.Size = new System.Drawing.Size(745, 19);
+            this.testDescrition.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.testDescrition.Size = new System.Drawing.Size(745, 54);
             this.testDescrition.TabIndex = 3;
             // 
             // testFilePathLabel
             // 
             this.testFilePathLabel.AutoSize = true;
-            this.testFilePathLabel.Location = new System.Drawing.Point(17, 118);
+            this.testFilePathLabel.Location = new System.Drawing.Point(17, 153);
             this.testFilePathLabel.Name = "testFilePathLabel";
             this.testFilePathLabel.Size = new System.Drawing.Size(78, 12);
             this.testFilePathLabel.TabIndex = 4;
@@ -94,7 +96,7 @@
             this.testFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.testFilePath.BackColor = System.Drawing.SystemColors.Window;
-            this.testFilePath.Location = new System.Drawing.Point(43, 140);
+            this.testFilePath.Location = new System.Drawing.Point(43, 175);
             this.testFilePath.Name = "testFilePath";
             this.testFilePath.ReadOnly = true;
             this.testFilePath.Size = new System.Drawing.Size(664, 19);
@@ -108,9 +110,9 @@
             this.btnFilePath.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnFilePath.FlatAppearance.BorderSize = 2;
             this.btnFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFilePath.Location = new System.Drawing.Point(713, 137);
+            this.btnFilePath.Location = new System.Drawing.Point(713, 172);
             this.btnFilePath.Name = "btnFilePath";
-            this.btnFilePath.Size = new System.Drawing.Size(75, 32);
+            this.btnFilePath.Size = new System.Drawing.Size(75, 30);
             this.btnFilePath.TabIndex = 6;
             this.btnFilePath.Text = "Locate...";
             this.btnFilePath.UseVisualStyleBackColor = false;
@@ -119,7 +121,7 @@
             // testDetailsLabel
             // 
             this.testDetailsLabel.AutoSize = true;
-            this.testDetailsLabel.Location = new System.Drawing.Point(19, 177);
+            this.testDetailsLabel.Location = new System.Drawing.Point(19, 211);
             this.testDetailsLabel.Name = "testDetailsLabel";
             this.testDetailsLabel.Size = new System.Drawing.Size(68, 12);
             this.testDetailsLabel.TabIndex = 7;
@@ -135,10 +137,11 @@
             this.testDetailsDoc.BaseStylesheet = null;
             this.testDetailsDoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.testDetailsDoc.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.testDetailsDoc.Location = new System.Drawing.Point(43, 199);
+            this.testDetailsDoc.Location = new System.Drawing.Point(43, 233);
             this.testDetailsDoc.Name = "testDetailsDoc";
-            this.testDetailsDoc.Size = new System.Drawing.Size(745, 579);
+            this.testDetailsDoc.Size = new System.Drawing.Size(745, 541);
             this.testDetailsDoc.TabIndex = 8;
+            this.testDetailsDoc.Text = null;
             this.testDetailsDoc.UseGdiPlusTextRendering = true;
             // 
             // AboutTestDockPanel

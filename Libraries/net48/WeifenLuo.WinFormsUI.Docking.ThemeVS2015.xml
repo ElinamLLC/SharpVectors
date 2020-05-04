@@ -324,4 +324,170 @@
         <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockIndicator_ToolTipText">
             <summary>
               Looks up a localized string similar to Press SHIFT for docking to full side..
-        
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_ActiveContent_InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid Content: ActiveContent must be one of the visible contents, or null if there is no visible content..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_Constructor_NullContent">
+            <summary>
+              Looks up a localized string similar to Invalid argument: Content can not be &quot;null&quot;..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_Constructor_NullDockPanel">
+            <summary>
+              Looks up a localized string similar to Invalid argument: The content&apos;s DockPanel can not be &quot;null&quot;..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_DockTo_InvalidContainer">
+            <summary>
+              Looks up a localized string similar to The specified container conflicts with the IsFloat property..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_DockTo_NoPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane does not exist in the nested docking pane collection..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_DockTo_NullContainer">
+            <summary>
+              Looks up a localized string similar to The container can not be null..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_DockTo_NullPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane can not be null when the nested docking pane collection is not empty..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_DockTo_SelfPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane can not be itself..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_FloatWindow_InvalidValue">
+            <summary>
+              Looks up a localized string similar to FloatWindow property can not be set to &quot;null&quot; when DockState is DockState.Float..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_SetContentIndex_InvalidContent">
+            <summary>
+              Looks up a localized string similar to Invalid Content: Content not within the collection..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_SetContentIndex_InvalidIndex">
+            <summary>
+              Looks up a localized string similar to Invalid Index: The index is out of range..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPane_SetDockState_InvalidState">
+            <summary>
+              Looks up a localized string similar to The state for the dock pane is invalid..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPaneCaption_ToolTipAutoHide">
+            <summary>
+              Looks up a localized string similar to Auto Hide.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPaneCaption_ToolTipClose">
+            <summary>
+              Looks up a localized string similar to Close.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPaneCaption_ToolTipOptions">
+            <summary>
+              Looks up a localized string similar to Window Position.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2012.Strings.DockPaneStrip_ToolTipWindowList">
+            <summary>
+              Looks up a localized string similar to Window List.
+            </summary>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.ThemeVS2013.VS2013DockPaneStrip.CalculateTabs_Document">
+            <summary>
+            Calculate which tabs are displayed and in what order.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.VS2013DockPaneCaption.CloseButtonVisible">
+            <summary>
+            Determines whether the close button is visible on the content
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.VS2015LightTheme">
+            <summary>
+            Visual Studio 2015 Light theme.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme">
+            <summary>
+            Visual Studio 2015 Light theme.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.VS2012AutoHideStrip.TabVS2012.TabX">
+            <summary>
+            X for this <see href="TabVS2012"/> inside the logical strip rectangle.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.VS2012AutoHideStrip.TabVS2012.TabWidth">
+            <summary>
+            Width of this <see href="TabVS2012"/>.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.VS2012DockWindow">
+            <summary>
+            Dock window of Visual Studio 2012 Light theme.
+            </summary>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.VS2012DockWindow.#ctor(WeifenLuo.WinFormsUI.Docking.DockPanel,WeifenLuo.WinFormsUI.Docking.DockState)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WeifenLuo.WinFormsUI.Docking.VS2012DockWindow"/> class.
+            </summary>
+            <param name="dockPanel">The dock panel.</param>
+            <param name="dockState">State of the dock.</param>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme">
+            <summary>
+            Visual Studio 2015 Light theme.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.ThemeVS2015.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2015.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2015.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2015.Resources.vs2015blue_vstheme">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2015.Resources.vs2015dark_vstheme">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.ThemeVS2015.Resources.vs2015light_vstheme">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.ThemeVS2015.VS2015ThemeBase">
+            <summary>
+            Visual Studio 2015 theme base.
+            </summary>
+        </member>
+    </members>
+</doc>

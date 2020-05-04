@@ -23,7 +23,14 @@ namespace SharpVectors.Dom.Css
                 CssPageRule rule = new CssPageRule(match, parent, readOnly, replacedStrings, origin);
                 css = css.Substring(match.Length);
 
-                rule._style = new CssStyleDeclaration(ref css, rule, true, origin);
+                if (string.IsNullOrWhiteSpace(css))
+                {
+                    rule._style = CssStyleDeclaration.EmptyCssStyle;
+                }
+                else
+                {
+                    rule._style = new CssStyleDeclaration(ref css, rule, true, origin);
+                }
 
                 return rule;
             }

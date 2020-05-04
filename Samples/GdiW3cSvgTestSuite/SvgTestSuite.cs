@@ -51,6 +51,9 @@ namespace GdiW3cSvgTestSuite
         private string _testFileName;
         private string _resultFileName;
 
+        private int _majorVersion;
+        private int _minorVersion;
+
         #endregion
 
         #region Constructors and Destructor
@@ -84,12 +87,17 @@ namespace GdiW3cSvgTestSuite
             _localSuitePath = source._localSuitePath;
             _testFileName   = source._testFileName;
             _resultFileName = source._resultFileName;
+            _majorVersion   = source._majorVersion;
+            _minorVersion   = source._minorVersion;
         }
 
         private SvgTestSuite(int majorVersion, int minorVersion)
         {
             if (majorVersion == 1 && (minorVersion >= 0 && minorVersion <= 2))
             {
+                _majorVersion   = majorVersion;
+                _minorVersion   = minorVersion;
+
                 string versionSuffix = string.Format("{0}{1}", majorVersion, minorVersion);
 
                 _isDefault      = (majorVersion == 1 && minorVersion == 0);
@@ -135,6 +143,26 @@ namespace GdiW3cSvgTestSuite
             }
             private set {
                 _isSelected = value;
+            }
+        }
+
+        public int MajorVersion
+        {
+            get {
+                return _majorVersion;
+            }
+            private set {
+                this._majorVersion = value;
+            }
+        }
+
+        public int MinorVersion
+        {
+            get {
+                return _minorVersion;
+            }
+            private set {
+                this._minorVersion = value;
             }
         }
 
@@ -358,6 +386,12 @@ namespace GdiW3cSvgTestSuite
                         {
                             case "Version":
                                 _version = propertyValue;
+                                Version version;
+                                if (System.Version.TryParse(_version, out version))
+                                {
+                                    _majorVersion = version.Major;
+                                    _minorVersion = version.Minor;
+                                }
                                 break;
                             case "Description":
                                 _description = propertyValue;

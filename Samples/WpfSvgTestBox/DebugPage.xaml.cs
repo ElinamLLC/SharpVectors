@@ -1,37 +1,50 @@
 ﻿using System;
 using System.Diagnostics;
 
+using System.Windows;
 using System.Windows.Controls;
+
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Search;
 
 namespace WpfSvgTestBox
 {
     /// <summary>
     /// Interaction logic for DebugPage.xaml
     /// </summary>
-    public partial class DebugPage : Page, ITraceTextSink
+    public partial class DebugPage : Page
     {
-        private delegate void AppendTextDelegate(string msg, string style);
+        private bool _isTraceStarted;
+        private TextBoxTraceListener _listener;
 
-        private TraceListener _listener;
+        private SearchPanel _searchPanel;
 
         public DebugPage()
         {
             InitializeComponent();
 
-            textEditor.IsReadOnly = true;
+            _isTraceStarted = false;
+
+            this.Loaded += OnPageLoaded;
 
             Trace.UseGlobalLock = true;
+        }
 
-            _listener = new TraceTextSource(this);
-            Trace.Listeners.Add(_listener);
+        public bool IsTraceStarted
+        {
+            get {
+                return _isTraceStarted;
+            }
         }
 
         public void Startup()
         {
             if (_listener == null)
             {
-                _listener = new TraceTextSource(this);
+                _listener = new TextBoxTraceListener(textEditor);
                 Trace.Listeners.Add(_listener);
+
+                _isTraceStarted = true;
             }
 
             Trace.WriteLine("Startup");
@@ -46,38 +59,38 @@ namespace WpfSvgTestBox
                 _listener.Dispose();
                 _listener = null;
             }
+
+            _isTraceStarted = false;
         }
 
-        public void Event(string msg, TraceEventType eventType)
+        private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            Append(msg, eventType.ToString());
-        }
-
-        public void Fail(string msg)
-        {
-            Append(msg, "Fail");
-        }
-
-        private void Append(string msg, string style)
-        {
-            if (Dispatcher.CheckAccess())
+            if (_searchPanel == null)
             {
-                if (!this.IsLoaded)
+                TextEditorOptions options = textEditor.Options;
+                if (options != null)
                 {
-                    return;
+                    //options.AllowScrollBelowDocument = true;
+                    options.EnableHyperlinks           = true;
+                    options.EnableEmailHyperlinks      = true;
+                    options.EnableVirtualSpace         = false;
+                    options.HighlightCurrentLine       = true;
+                    //options.ShowSpaces               = true;
+                    //options.ShowTabs                 = true;
+                    //options.ShowEndOfLine            = true;              
                 }
-                if (string.IsNullOrWhiteSpace(style))
-                {
-                    textEditor.AppendText(msg + Environment.NewLine);
-                }
-                else
-                {
-                    textEditor.AppendText(style + ": " + msg + Environment.NewLine);
-                }
+
+                textEditor.IsReadOnly      = true;
+                textEditor.WordWrap        = false;
+                textEditor.ShowLineNumbers = true;
+
+                _searchPanel = SearchPanel.Install(textEditor);
             }
-            else
+
+            if (_listener == null)
             {
-                Dispatcher.Invoke(new AppendTextDelegate(Append), msg, style);
+                _listener = new TextBoxTraceListener(textEditor);
+                Trace.Listeners.Add(_listener);
             }
         }
     }

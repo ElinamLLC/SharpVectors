@@ -49,6 +49,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private IDictionary<string, object> _properties;
 
+        private IDictionary<string, string> _cssVariables;
+
         private object _fontSynch = new object();
 
         #endregion
@@ -84,6 +86,7 @@ namespace SharpVectors.Renderers.Wpf
             _fontLocations         = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             _fontFamilyNames       = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             _fontFamilyMap         = new Dictionary<string, FontFamily>(StringComparer.OrdinalIgnoreCase);
+            _cssVariables          = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -125,6 +128,7 @@ namespace SharpVectors.Renderers.Wpf
             _fontLocations         = settings._fontLocations;
             _fontFamilyNames       = settings._fontFamilyNames;
             _fontFamilyMap         = settings._fontFamilyMap;
+            _cssVariables          = settings._cssVariables;
         }
 
         #endregion
@@ -207,6 +211,33 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _userAgentCssFilePath = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets user-defined CSS custom properties for the rendering.
+        /// </summary>
+        /// <value>A <see cref="IDictionary{TKey, TValue}"/> of user-defined styles. This value is
+        /// never <see langword="null"/>.
+        /// </value>
+        public IDictionary<string, string> CssVariables
+        {
+            get {
+                if (_cssVariables == null)
+                {
+                    _cssVariables = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                }
+                return _cssVariables;
+            }
+            set {
+                if (value != null)
+                {
+                    _cssVariables = value;
+                }
+                else
+                {
+                    _cssVariables = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                }
             }
         }
 

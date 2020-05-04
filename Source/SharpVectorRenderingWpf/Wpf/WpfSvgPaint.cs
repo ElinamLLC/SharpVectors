@@ -3,6 +3,7 @@ using System.Xml;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Utils;
 
@@ -761,6 +762,60 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
+            if (fill.RgbColor.IsVarColor)
+            {
+                var cssVar = this.GetVarsValue(fill);
+                if (cssVar != null)
+                {
+                    var cssVariables = _context.Settings.CssVariables;
+                    if (cssVariables != null && cssVariables.ContainsKey(cssVar.VarName))
+                    {
+                        var cssColor = new CssColor(cssVariables[cssVar.VarName]);
+                        Color? varColor = WpfConvert.ToColor(cssColor);
+                        if (varColor != null)
+                        {
+                            var varBrush = new SolidColorBrush(varColor.Value);
+                            if (setOpacity)
+                            {
+                                varBrush.Opacity = GetOpacity(propPrefix);
+                            }
+                            return varBrush;
+                        }
+                    }
+
+                    var cssValue = _element.GetComputedCssValue(cssVar.VarName, string.Empty) as CssAbsPrimitiveValue;
+                    if (cssValue != null)
+                    {
+                        Color? varColor = WpfConvert.ToColor(cssValue.GetRgbColorValue());
+                        if (varColor != null)
+                        {
+                            var varBrush = new SolidColorBrush(varColor.Value);
+                            if (setOpacity)
+                            {
+                                varBrush.Opacity = GetOpacity(propPrefix);
+                            }
+                            return varBrush;
+                        }
+                    }
+
+                    var fallbackValue = cssVar.VarValue;
+                    if (!string.IsNullOrWhiteSpace(fallbackValue))
+                    {
+                        var cssColor = new CssColor(fallbackValue);
+                        Color? varColor = WpfConvert.ToColor(cssColor);
+                        if (varColor != null)
+                        {
+                            var varBrush = new SolidColorBrush(varColor.Value);
+                            if (setOpacity)
+                            {
+                                varBrush.Opacity = GetOpacity(propPrefix);
+                            }
+                            return varBrush;
+                        }
+                    }
+                }
+            }
+
             Color? solidColor = WpfConvert.ToColor(fill.RgbColor);
             if (solidColor == null)
             {
@@ -773,6 +828,37 @@ namespace SharpVectors.Renderers.Wpf
                 solidBrush.Opacity = GetOpacity(propPrefix);
             }
             return solidBrush;
+        }
+
+        private CssPrimitiveVarsValue GetVarsValue(WpfSvgPaint fill)
+        {
+            if (fill == null || fill.RgbColor == null)
+            {
+                return null;
+            }
+            if (!fill.RgbColor.IsVarColor)
+            {
+                return null;
+            }
+            var cssDeclaration = _element.GetComputedStyle("");
+            if (cssDeclaration == null)
+            {
+                return null;
+            }
+            var cssValue = cssDeclaration.GetPropertyCssValue("fill");
+            if (cssValue == null)
+            {
+                return null;
+            }
+            if (cssValue.IsAbsolute)
+            {
+                var cssAbs = cssValue as CssAbsPrimitiveValue;
+                if (cssAbs != null && cssAbs.CssValue != null)
+                {
+                    return cssAbs.CssValue as CssPrimitiveVarsValue;
+                }
+            }
+            return cssValue as CssPrimitiveVarsValue;
         }
 
         #endregion

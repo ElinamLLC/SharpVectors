@@ -171,7 +171,7 @@ namespace SharpVectors.Dom.Stylesheets
             {
                 return;
             }
-            if (absoluteUri.IsFile)
+            if (absoluteUri.IsAbsoluteUri && absoluteUri.IsFile)
             {
                 try
                 {

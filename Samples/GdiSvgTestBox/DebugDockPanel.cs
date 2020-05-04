@@ -31,7 +31,7 @@ namespace GdiSvgTestBox
             debugTextBox.Font      = new Font(debugTextBox.Font.FontFamily, debugTextBox.Font.Size + 4, 
                 FontStyle.Regular, debugTextBox.Font.Unit);
 
-            _textBoxListener = new TextBoxTraceListener(debugTextBox);
+            _textBoxListener = new TextBoxTraceListener(debugTextBox, this.Icon);
             Trace.Listeners.Add(_textBoxListener);
         }
 

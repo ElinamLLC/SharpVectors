@@ -4,23 +4,24 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
-      Title="AboutPage" Background="White" FontSize="12" KeepAlive="True">
+      mc:Ignorable="d"
+      Title="AboutPage" Background="White" FontSize="14" KeepAlive="True" d:DesignHeight="720" d:DesignWidth="860">
     <DockPanel LastChildFill="True">
         <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-            <Label x:Name="testTitleLabel" FontWeight="Bold" HorizontalAlignment="Left">Test Title</Label>
+            <Label x:Name="testTitleLabel" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left">Test Title</Label>
             <TextBlock x:Name="testTitle" Margin="40, 0, 0, 6" TextAlignment="Left" HorizontalAlignment="Stretch"></TextBlock>
 
-            <Label x:Name="testDescritionLabel" FontWeight="Bold">Test Description</Label>
+            <Label x:Name="testDescritionLabel" FontSize="18" FontWeight="Bold">Test Description</Label>
             <TextBlock x:Name="testDescrition" Margin="40, 0, 0, 6" TextAlignment="Left" TextTrimming="None" TextWrapping="Wrap"></TextBlock>
 
-            <Label x:Name="testFilePathLabel" FontWeight="Bold">Test File Path</Label>
+            <Label x:Name="testFilePathLabel" FontSize="18" FontWeight="Bold">Test File Path</Label>
             <DockPanel LastChildFill="true" Margin="3 3 3 6">
                 <Button x:Name="btnFilePath" DockPanel.Dock="Right" Click="OnLocateFile" Style="{StaticResource MetroButton}" 
                         IsEnabled="False">Locate...</Button>
                 <TextBox x:Name="testFilePath" Margin="40, 0, 0, 0" TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" TextWrapping="NoWrap"/>
             </DockPanel>
 
-            <Label x:Name="testDetailsLabel" FontWeight="Bold" DockPanel.Dock="Top">Test Details</Label>
+            <Label x:Name="testDetailsLabel" FontSize="18" FontWeight="Bold" DockPanel.Dock="Top">Test Details</Label>
         </StackPanel>
         <Border BorderBrush="LightGray" BorderThickness="1" Margin="40, 0, 0, 6">
             <FlowDocumentReader x:Name="flowDocViewer" Zoom="100" ViewingMode="Scroll" IsTwoPageViewEnabled="False">

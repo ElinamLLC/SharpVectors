@@ -30,6 +30,9 @@ namespace SharpVectors.Dom.Css
     {
         #region Static Members
 
+        [ThreadStatic]
+        private static CssStyleDeclaration _emptyCssStyle;
+
         internal const string UrlName     = "url:Name";
         internal const string UrlMime     = "url:Mime";
         internal const string UrlData     = "url:Data";
@@ -81,7 +84,7 @@ namespace SharpVectors.Dom.Css
         /// <summary>
         /// The constructor used internally when collecting styles for a specified element
         /// </summary>
-        internal CssStyleDeclaration()
+        protected CssStyleDeclaration()
         {
             _origin     = CssStyleSheetType.Collector;
             _readOnly   = true;
@@ -579,7 +582,19 @@ namespace SharpVectors.Dom.Css
 
         #endregion
 
-        #region Internal Methods
+        #region Internal Properties and Methods
+
+        internal static CssStyleDeclaration EmptyCssStyle
+        {
+            get {
+                if (_emptyCssStyle == null)
+                {
+                    _emptyCssStyle = new CssStyleDeclaration();
+                }
+
+                return _emptyCssStyle;
+            }
+        }
 
         internal CssStyleBlock Get(string key)
         {

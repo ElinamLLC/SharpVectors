@@ -369,7 +369,7 @@
         </member>
         <member name="M:SharpVectors.Renderers.Utils.WpfConvert.ToColor(SharpVectors.Dom.Css.ICssColor)">
             <summary>
-            A GDI Color representation of the RgbColor
+            A WPF <see cref="T:System.Windows.Media.Color"/> representation of the <c>RgbColor</c>.
             </summary>
         </member>
         <member name="M:SharpVectors.Renderers.Utils.WpfConvert.ToRect(SharpVectors.Dom.Svg.SvgRectF)">
@@ -508,6 +508,14 @@
             <param name="settings">
             This specifies the initial options for the rendering or drawing engine.
             </param>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.CssVariables">
+            <summary>
+            Gets or sets user-defined CSS custom properties for the rendering.
+            </summary>
+            <value>A <see cref="T:System.Collections.Generic.IDictionary`2"/> of user-defined styles. This value is
+            never <see langword="null"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.IgnoreRootViewbox">
             <summary>

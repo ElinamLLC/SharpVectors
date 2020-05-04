@@ -52,15 +52,33 @@
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net46\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.YDock.Wpf">
+      <HintPath>..\..\Libraries\net46\SharpVectors.YDock.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net48\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.YDock.Wpf">
+      <HintPath>..\..\Libraries\net48\SharpVectors.YDock.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\netstandard2.1\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\netcoreapp3.1\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.YDock.Wpf">
+      <HintPath>..\..\Libraries\netcoreapp3.1\SharpVectors.YDock.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

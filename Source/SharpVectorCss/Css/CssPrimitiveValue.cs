@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace SharpVectors.Dom.Css
 {
     /// <summary>
-    /// The CSSPrimitiveValue interface represents a single CSS value. 
+    /// This implements the <see cref="ICssPrimitiveValue"/> interface which represents a single CSS value. 
     /// </summary>
     /// <remarks>
     /// <para>
@@ -28,12 +28,12 @@ namespace SharpVectors.Dom.Css
     {
         #region Private Fields
 
-        private CssPrimitiveType _primitiveType;
-
         private string _stringValue;
         private CssRect _rectValue;
         protected double _floatValue;
         protected CssColor _colorValue;
+
+        private CssPrimitiveType _primitiveType;
 
         #endregion
 
@@ -183,7 +183,7 @@ namespace SharpVectors.Dom.Css
             get {
                 if (this.PrimitiveType == CssPrimitiveType.String)
                 {
-                    return "\"" + GetStringValue() + "\"";
+                    return "\"" + this.GetStringValue() + "\"";
                 }
                 return base.CssText;
             }
@@ -211,9 +211,20 @@ namespace SharpVectors.Dom.Css
             {
                 return new CssPrimitiveAngleValue(match.Groups["angleNumber"].Value, match.Groups["angleUnit"].Value, readOnly);
             }
-            if (match.Groups["funcname"].Success && match.Groups["funcname"].Value == "rgb")
+            if (match.Groups["funcname"].Success)
             {
-                return new CssPrimitiveRgbValue(match.Groups["func"].Value, readOnly);
+                var funcValue = match.Groups["funcname"].Value;
+                if (string.Equals(funcValue, "rgb", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(funcValue, "rgba", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(funcValue, "hsl", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(funcValue, "hsla", StringComparison.OrdinalIgnoreCase))
+                {
+                    return new CssPrimitiveRgbValue(match.Groups["func"].Value, readOnly);
+                }
+                if (string.Equals(funcValue, "var", StringComparison.OrdinalIgnoreCase))
+                {
+                    return new CssPrimitiveVarsValue(match.Groups["func"].Value, readOnly);
+                }
             }
             if (match.Groups["colorIdent"].Success && CssPrimitiveRgbValue.IsColorName(match.Groups["colorIdent"].Value))
             {
@@ -224,7 +235,7 @@ namespace SharpVectors.Dom.Css
 
         public override CssValue GetAbsoluteValue(string propertyName, XmlElement elm)
         {
-            if (propertyName == "font-size")
+            if (string.Equals(propertyName, "font-size", StringComparison.OrdinalIgnoreCase))
             {
                 return new CssAbsPrimitiveLengthValue(this, propertyName, elm);
             }

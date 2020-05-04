@@ -30,6 +30,7 @@ namespace SharpVectors.Dom.Css
         private readonly static IDictionary<string, string> _knownColors;
         private readonly static ISet<string> _systemColorNames;
 
+        private bool _isVarColor;
         private string _name;
 
         private CssPrimitiveValue _red;
@@ -326,6 +327,16 @@ namespace SharpVectors.Dom.Css
             }
         }
 
+        /// <summary>
+        /// Gets a value which indicates whether the color is defined by custom properties.
+        /// </summary>
+        public bool IsVarColor 
+        { 
+            get {
+                return _isVarColor;
+            }
+        }
+
         #endregion
 
         #region IRgbColor Members
@@ -530,6 +541,11 @@ namespace SharpVectors.Dom.Css
                 {
                     throw new DomException(DomExceptionType.SyntaxErr, "hsla() color in the wrong format: " + str);
                 }
+            }
+            else if (str.StartsWith("var(", StringComparison.OrdinalIgnoreCase))
+            {
+                _name       = str;
+                _isVarColor = true;
             }
             else
             {

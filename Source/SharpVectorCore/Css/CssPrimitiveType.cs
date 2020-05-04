@@ -110,6 +110,10 @@ namespace SharpVectors.Dom.Css
         /// <summary>
         /// The value is a RGB color. The value can be obtained by using the getRGBColorValue method.
         /// </summary>
-        RgbColor = 25
+        RgbColor = 25,
+        /// <summary>
+        /// The value is a var() or custom properties.
+        /// </summary>
+        Vars = 25
     }
 }

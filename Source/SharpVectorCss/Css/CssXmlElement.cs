@@ -59,7 +59,15 @@ namespace SharpVectors.Dom.Css
                         styleValue = _reComment.Replace(styleValue, string.Empty).Trim();
                     }
 
-                    _style = new CssStyleDeclaration(styleValue, null, false, CssStyleSheetType.Inline);
+                    if (string.IsNullOrWhiteSpace(styleValue))
+                    {
+                        _style = CssStyleDeclaration.EmptyCssStyle;
+                    }
+                    else
+                    {
+                        _style = new CssStyleDeclaration(styleValue, null, false, CssStyleSheetType.Inline);
+                    }
+
                 }
                 return _style;
             }

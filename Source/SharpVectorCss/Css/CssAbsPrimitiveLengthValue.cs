@@ -9,6 +9,7 @@ namespace SharpVectors.Dom.Css
 
         private string _propertyName;
         private XmlElement _element;
+        private CssPrimitiveValue _cssValue;
 
         #endregion
 
@@ -16,6 +17,8 @@ namespace SharpVectors.Dom.Css
 
         public CssAbsPrimitiveLengthValue(CssPrimitiveValue cssValue, string propertyName, XmlElement element)
         {
+            _cssValue = cssValue;
+
             if (cssValue.PrimitiveType == CssPrimitiveType.Ident)
             {
                 // this is primarily to deal with font sizes.
@@ -96,6 +99,20 @@ namespace SharpVectors.Dom.Css
         {
             get {
                 return false;
+            }
+        }
+
+        public override bool IsAbsolute
+        {
+            get {
+                return true;
+            }
+        }
+
+        public CssPrimitiveValue CssValue
+        {
+            get {
+                return _cssValue;
             }
         }
 

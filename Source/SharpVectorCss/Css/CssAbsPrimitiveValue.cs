@@ -38,6 +38,20 @@ namespace SharpVectors.Dom.Css
             }
         }
 
+        public override bool IsAbsolute
+        {
+            get {
+                return true;
+            }
+        }
+
+        public CssPrimitiveValue CssValue
+        {
+            get {
+                return _cssValue;
+            }
+        }
+
         public override double GetFloatValue(CssPrimitiveType unitType)
         {
             return _cssValue.GetFloatValue(unitType);

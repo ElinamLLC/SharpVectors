@@ -7,6 +7,8 @@ using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
 
+using SharpVectors.Renderers.Utils;
+
 namespace SharpVectors.Renderers.Texts
 {
     /// <summary>
@@ -159,7 +161,7 @@ namespace SharpVectors.Renderers.Texts
 
             var pathFigure = svgPath.Figures[0];
 
-            _pathLength = GetPathFigureLength(pathFigure);
+            _pathLength = WpfConvert.GetPathFigureLength(pathFigure);
             if (_pathLength.Equals(0) || _textLength.Equals(0))
                 return;
 
@@ -280,7 +282,7 @@ namespace SharpVectors.Renderers.Texts
 
             var pathFigure = svgPath.Figures[0];
 
-            _pathLength = GetPathFigureLength(pathFigure);
+            _pathLength = WpfConvert.GetPathFigureLength(pathFigure);
             if (_pathLength.Equals(0) || _textLength.Equals(0))
                 return;
 
@@ -432,50 +434,6 @@ namespace SharpVectors.Renderers.Texts
                 return true;
             }
             return Math.Abs(pt1.X - pt2.X) < EqualPointsComparer && Math.Abs(pt1.Y - pt2.Y) < EqualPointsComparer;
-        }
-
-        // Utility method
-        private static double GetPathFigureLength(PathFigure pathFigure)
-        {
-            if (pathFigure == null)
-                return 0;
-
-            bool isAlreadyFlattened = true;
-
-            foreach (PathSegment pathSegment in pathFigure.Segments)
-            {
-                if (!(pathSegment is PolyLineSegment) && !(pathSegment is LineSegment))
-                {
-                    isAlreadyFlattened = false;
-                    break;
-                }
-            }
-
-            var pathFigureFlattened = isAlreadyFlattened ? pathFigure : pathFigure.GetFlattenedPathFigure();
-
-            double length = 0;
-            Point pt1 = pathFigureFlattened.StartPoint;
-
-            foreach (PathSegment pathSegment in pathFigureFlattened.Segments)
-            {
-                if (pathSegment is LineSegment)
-                {
-                    Point pt2 = (pathSegment as LineSegment).Point;
-                    length += (pt2 - pt1).Length;
-                    pt1 = pt2;
-                }
-                else if (pathSegment is PolyLineSegment)
-                {
-                    PointCollection pointCollection = (pathSegment as PolyLineSegment).Points;
-                    foreach (Point pt2 in pointCollection)
-                    {
-                        length += (pt2 - pt1).Length;
-                        pt1 = pt2;
-                    }
-                }
-            }
-
-            return length;
         }
 
         #endregion

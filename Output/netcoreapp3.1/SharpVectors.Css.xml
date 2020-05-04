@@ -157,6 +157,11 @@
             </summary>
             <param name="str">String to parse to find the color</param>
         </member>
+        <member name="P:SharpVectors.Dom.Css.CssColor.IsVarColor">
+            <summary>
+            Gets a value which indicates whether the color is defined by custom properties.
+            </summary>
+        </member>
         <member name="P:SharpVectors.Dom.Css.CssColor.Red">
             <summary>
             This attribute is used for the red value of the RGB color
@@ -379,7 +384,7 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssPrimitiveValue">
             <summary>
-            The CSSPrimitiveValue interface represents a single CSS value. 
+            This implements the <see cref="T:SharpVectors.Dom.Css.ICssPrimitiveValue"/> interface which represents a single CSS value. 
             </summary>
             <remarks>
             <para>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfW3cSvgTestSuite"
         mc:Ignorable="d"
-        Title="Svg Test Results" Background="White">
+        Title="Svg Test Results" Background="White" d:DesignHeight="720" d:DesignWidth="860">
     <DockPanel LastChildFill="True">
         <Label x:Name="testTitleLabel" DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left">SVG Test Results</Label>
         <Border BorderBrush="LightGray" BorderThickness="1" Margin="10, 6, 10, 10">

@@ -262,7 +262,7 @@ namespace SharpVectors.Renderers.Wpf
 
             WpfSvgPaint fillPaint = new WpfSvgPaint(context, styleElm, "fill");
 
-            string fileValue = styleElm.GetAttribute("fill");
+//            string fileValue = styleElm.GetAttribute("fill");
 
             Brush brush = fillPaint.GetBrush(geometry, _setBrushOpacity);
             if (brush == null)
@@ -563,7 +563,7 @@ namespace SharpVectors.Renderers.Wpf
 
             WpfSvgPaint fillPaint = new WpfSvgPaint(context, styleElm, "fill");
 
-            string fileValue = styleElm.GetAttribute("fill");
+//            string fileValue = styleElm.GetAttribute("fill");
 
             Brush brush = fillPaint.GetBrush(geometry, _setBrushOpacity);
             if (brush == null)

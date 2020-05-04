@@ -9,10 +9,10 @@
 //---------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
-using System.Text;
 using System.IO;
 using System.Xml;
+using System.Text;
+using System.Diagnostics;
 
 namespace HTMLConverter
 {

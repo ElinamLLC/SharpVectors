@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebugDockPanel));
             this.debugTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 228);
             this.Controls.Add(this.debugTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DebugDockPanel";
             this.Text = "DebugDockPanel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
