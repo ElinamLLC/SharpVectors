@@ -19,6 +19,7 @@ namespace SharpVectors.Dom.Svg
         private SvgExternalResourcesRequired _externalResourcesRequired;
 
         // For rendering support...
+        private bool _transformAdded;
         private string _saveTransform;
         private string _saveWidth;
         private string _saveHeight;
@@ -248,6 +249,8 @@ namespace SharpVectors.Dom.Svg
 
                     this.SetAttribute("transform", transform);
                 }
+
+                _transformAdded = true;
             }
 
             // if (refEl is SvgSymbolElement)
@@ -268,16 +271,23 @@ namespace SharpVectors.Dom.Svg
         public void RestoreReferencedElement(XmlElement refEl)
         {
             if (!string.IsNullOrWhiteSpace(_saveTransform))
+            { 
                 this.SetAttribute("transform", _saveTransform);
+            }
+            else if (_transformAdded)
+            {
+                this.RemoveAttribute("transform");
+            }
             if (_saveWidth != null && _saveHeight != null)
             {
                 refEl.SetAttribute("width", _saveWidth);
                 refEl.SetAttribute("height", _saveHeight);
             }
 
-            _saveTransform = null;
-            _saveWidth     = null;
-            _saveHeight    = null;
+            _transformAdded = false;
+            _saveTransform  = null;
+            _saveWidth      = null;
+            _saveHeight     = null;
         }
 
         #endregion

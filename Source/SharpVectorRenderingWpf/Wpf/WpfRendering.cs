@@ -691,9 +691,8 @@ namespace SharpVectors.Renderers.Wpf
             if (transElm != null)
             {
                 SvgTransformList transformList = (SvgTransformList)transElm.Transform.AnimVal;
-                if (transformList.NumberOfItems > 1 && _combineTransforms == false)
+                if (transformList.NumberOfItems != 0 && _combineTransforms == false)
                 {
-                    TransformGroup transformGroup = new TransformGroup();
                     List<Transform> transforms = new List<Transform>();
 
                     for (uint i = 0; i < transformList.NumberOfItems; i++)
@@ -705,75 +704,68 @@ namespace SharpVectors.Renderers.Wpf
                             case SvgTransformType.Translate:
                                 if (values.Length == 1)
                                 {
-                                    // SetTranslate(values[0], 0);
-                                    //transformGroup.Children.Add(new TranslateTransform(values[0], 0));
                                     transforms.Add(new TranslateTransform(values[0], 0));
                                 }
                                 else if (values.Length == 2)
                                 {
-                                    // SetTranslate(values[0], values[1]);                        
-                                    //transformGroup.Children.Add(new TranslateTransform(values[0], values[1]));
                                     transforms.Add(new TranslateTransform(values[0], values[1]));
                                 }
                                 break;
                             case SvgTransformType.Rotate:
                                 if (values.Length == 1)
                                 {
-                                    // SetRotate(values[0]);
-                                    //transformGroup.Children.Add(new RotateTransform(values[0]));
                                     transforms.Add(new RotateTransform(values[0]));
                                 }
                                 else if (values.Length == 3)
                                 {
-                                    // SetRotate(values[0], values[1], values[2]);
-                                    //transformGroup.Children.Add(new RotateTransform(values[0], values[1], values[2]));
                                     transforms.Add(new RotateTransform(values[0], values[1], values[2]));
                                 }
                                 break;
                             case SvgTransformType.Scale:
                                 if (values.Length == 1)
                                 {
-                                    //SetScale(values[0], values[0]);
-                                    transformGroup.Children.Add(new ScaleTransform(values[0], values[0]));
+                                    transforms.Add(new ScaleTransform(values[0], values[0]));
                                 }
                                 else if (values.Length == 2)
                                 {
-                                    //SetScale(values[0], values[1]);
-                                    //transformGroup.Children.Add(new ScaleTransform(values[0], values[1]));
                                     transforms.Add(new ScaleTransform(values[0], values[1]));
                                 }
                                 break;
                             case SvgTransformType.SkewX:
                                 if (values.Length == 1)
                                 {
-                                    //SetSkewX(values[0]);
-                                    //transformGroup.Children.Add(new SkewTransform(values[0], 0));
                                     transforms.Add(new SkewTransform(values[0], 0));
                                 }
                                 break;
                             case SvgTransformType.SkewY:
                                 if (values.Length == 1)
                                 {
-                                    //SetSkewY(values[0]);                        
-                                    //transformGroup.Children.Add(new SkewTransform(0, values[0]));
                                     transforms.Add(new SkewTransform(0, values[0]));
                                 }
                                 break;
                             case SvgTransformType.Matrix:
                                 if (values.Length == 6)
                                 {
-                                    //SetMatrix(new SvgMatrix(values[0], values[1], values[2], values[3], values[4], values[5]));
-                                    //transformGroup.Children.Add(new MatrixTransform(values[0], values[1], values[2], values[3], values[4], values[5]));
                                     transforms.Add(new MatrixTransform(values[0], values[1], values[2], values[3], values[4], values[5]));
                                 }
                                 break;
                         }
                     }
 
-                    transforms.Reverse();
-                    transformGroup.Children = new TransformCollection(transforms);
-                    _transformMatrix = transformGroup;
-                    //_transformMatrix = new MatrixTransform(transformGroup.Value);
+                    if (transforms.Count == 1)
+                    {
+                        _transformMatrix = transforms[0];
+
+                    }
+                    else if(transforms.Count > 1)
+                    {
+                        transforms.Reverse();
+
+                        TransformGroup transformGroup = new TransformGroup();
+                        transformGroup.Children = new TransformCollection(transforms);
+                        _transformMatrix = transformGroup;
+                    }
+
                     return;
                 }
                 SvgMatrix svgMatrix = transformList.TotalMatrix;
@@ -783,9 +775,9 @@ namespace SharpVectors.Renderers.Wpf
                     return;
                 }
 
-                _transformMatrix = new MatrixTransform(Math.Round(svgMatrix.A, 4), Math.Round(svgMatrix.B, 4),
-                    Math.Round(svgMatrix.C, 4), Math.Round(svgMatrix.D, 4), 
-                    Math.Round(svgMatrix.E, 4), Math.Round(svgMatrix.F, 4));
+                _transformMatrix = new MatrixTransform(Math.Round(svgMatrix.A, 6), Math.Round(svgMatrix.B, 6),
+                    Math.Round(svgMatrix.C, 6), Math.Round(svgMatrix.D, 6), 
+                    Math.Round(svgMatrix.E, 6), Math.Round(svgMatrix.F, 6));
             }
         }
 
@@ -802,10 +794,10 @@ namespace SharpVectors.Renderers.Wpf
             double[] transformArray = spar.FitToViewBox((SvgRect)fitToView.ViewBox.AnimVal,
               new SvgRect(elementBounds.X, elementBounds.Y, elementBounds.Width, elementBounds.Height));
 
-            double translateX = Math.Round(transformArray[0], 4);
-            double translateY = Math.Round(transformArray[1], 4);
-            double scaleX     = Math.Round(transformArray[2], 4);
-            double scaleY     = Math.Round(transformArray[3], 4);
+            double translateX = Math.Round(transformArray[0], 6);
+            double translateY = Math.Round(transformArray[1], 6);
+            double scaleX     = Math.Round(transformArray[2], 6);
+            double scaleY     = Math.Round(transformArray[3], 6);
 
             Transform translateMatrix = null;
             Transform scaleMatrix = null;
@@ -871,10 +863,10 @@ namespace SharpVectors.Renderers.Wpf
 
             double[] transformArray = spar.FitToViewBox(viewBox, rectToFit);
 
-            double translateX = Math.Round(transformArray[0], 4);
-            double translateY = Math.Round(transformArray[1], 4);
-            double scaleX     = Math.Round(transformArray[2], 4);
-            double scaleY     = Math.Round(transformArray[3], 4);
+            double translateX = Math.Round(transformArray[0], 6);
+            double translateY = Math.Round(transformArray[1], 6);
+            double scaleX     = Math.Round(transformArray[2], 6);
+            double scaleY     = Math.Round(transformArray[3], 6);
 
             Transform translateMatrix = null;
             Transform scaleMatrix = null;

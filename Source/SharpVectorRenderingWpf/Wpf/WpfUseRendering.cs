@@ -36,8 +36,6 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgUseElement useElement = (SvgUseElement)_svgElement;
 
-            string elementId = this.GetElementName();
-
             float opacityValue = -1;
 
             string opacity = useElement.GetAttribute("opacity");
@@ -63,6 +61,8 @@ namespace SharpVectors.Renderers.Wpf
 
             currentGroup.Children.Add(_drawGroup);
             context.Push(_drawGroup);
+
+            string elementId = this.GetElementName();
 
             if (clipGeom != null || transform != null || (opacityValue >= 0 && opacityValue < 1) ||
                 (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId)))
