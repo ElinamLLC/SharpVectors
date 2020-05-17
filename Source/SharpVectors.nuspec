@@ -10,9 +10,25 @@
     <description>A library for parsing, converting and viewing SVG files in WPF and WinForms applications.</description>
     <license type="expression">BSD-3-Clause</license>
     <projectUrl>https://github.com/ElinamLLC/SharpVectors</projectUrl>
+    <repository type="git" url="https://github.com/ElinamLLC/SharpVectors" />
     <icon>images\SharpVectors64.png</icon>
     <copyright>Copyright (c) 2010 - 2019 Elinam LLC</copyright>
     <releaseNotes>
+        Release 1.6.0
+            * Multi-frameworks support: .NET4.0 ~ .NET4.8, .NETCORE3.1
+            * More Tiny Specs support: solidColor, viewport-fill
+            * Private fonts supports and system font caching
+            * Initial support for web fonts (woff and woff2)
+            * Replaced the embedded modular DTD files with single DTD to reduce the size
+            * Fixed radial gradient issues: pservers-grad-21-b.svg, pservers-grad-20-b.svg
+            * WPF Rendering: Reworked pattern paint rendering
+            * Added filter effects classes
+            * Added Scripting interfaces and classes
+            * Added IoC container, from on Microsoft MinIoC
+            * Fixed performance degradation issue introduced in previous version.
+            * Initial support for CSS Custom Properties
+            * Several bug fixes and code improvements
+
         Release 1.5.0
             * Improved CSS support
             * WPF Rendering: Reworked text-path rendering
@@ -80,36 +96,137 @@
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETFramework4.6" />
+      <group targetFramework=".NETFramework4.7" />
+      <group targetFramework=".NETFramework4.8" />
+      <group targetFramework=".NETCoreApp3.1" />
     </dependencies>  
   </metadata>
   <files>
-    <file src="..\Output\SharpVectors.Converters.Wpf.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Core.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Css.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Dom.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Model.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Runtime.Wpf.dll" target="lib\net40"/>
+    <!-- net40 -->
+    <file src="..\Output\net40\SharpVectors.Converters.Wpf.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Core.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Css.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Dom.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Model.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Runtime.Wpf.dll" target="lib\net40"/>
 
-    <file src="..\Output\SharpVectors.Converters.Wpf.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Core.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Css.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Dom.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Model.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Rendering.Gdi.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Rendering.Wpf.xml" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Runtime.Wpf.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Converters.Wpf.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Core.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Css.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Dom.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Model.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Rendering.Gdi.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Rendering.Wpf.xml" target="lib\net40"/>
+    <file src="..\Output\net40\SharpVectors.Runtime.Wpf.xml" target="lib\net40"/>
 
-    <file src="..\Output\SharpVectors.Converters.Wpf.pdb" target="lib\net40"/>
+    <!--<file src="..\Output\SharpVectors.Converters.Wpf.pdb" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Core.pdb" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Css.pdb" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Dom.pdb" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Model.pdb" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Rendering.Gdi.pdb" target="lib\net40"/>
     <file src="..\Output\SharpVectors.Rendering.Wpf.pdb" target="lib\net40"/>
-    <file src="..\Output\SharpVectors.Runtime.Wpf.pdb" target="lib\net40"/>
-    
+    <file src="..\Output\SharpVectors.Runtime.Wpf.pdb" target="lib\net40"/>-->
+
+    <!-- net45 -->
+    <file src="..\Output\net45\SharpVectors.Converters.Wpf.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Core.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Css.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Dom.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Model.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Rendering.Gdi.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Rendering.Wpf.dll" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Runtime.Wpf.dll" target="lib\net45"/>
+
+    <file src="..\Output\net45\SharpVectors.Converters.Wpf.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Core.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Css.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Dom.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Model.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Rendering.Gdi.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Rendering.Wpf.xml" target="lib\net45"/>
+    <file src="..\Output\net45\SharpVectors.Runtime.Wpf.xml" target="lib\net45"/>
+
+    <!-- net46 -->
+    <file src="..\Output\net46\SharpVectors.Converters.Wpf.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Core.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Css.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Dom.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Model.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Rendering.Gdi.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Rendering.Wpf.dll" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Runtime.Wpf.dll" target="lib\net46"/>
+
+    <file src="..\Output\net46\SharpVectors.Converters.Wpf.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Core.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Css.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Dom.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Model.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Rendering.Gdi.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Rendering.Wpf.xml" target="lib\net46"/>
+    <file src="..\Output\net46\SharpVectors.Runtime.Wpf.xml" target="lib\net46"/>
+
+    <!-- net47 -->
+    <file src="..\Output\net47\SharpVectors.Converters.Wpf.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Core.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Css.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Dom.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Model.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Rendering.Gdi.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Rendering.Wpf.dll" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Runtime.Wpf.dll" target="lib\net47"/>
+
+    <file src="..\Output\net47\SharpVectors.Converters.Wpf.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Core.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Css.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Dom.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Model.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Rendering.Gdi.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Rendering.Wpf.xml" target="lib\net47"/>
+    <file src="..\Output\net47\SharpVectors.Runtime.Wpf.xml" target="lib\net47"/>
+
+    <!-- net48 -->
+    <file src="..\Output\net48\SharpVectors.Converters.Wpf.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Core.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Css.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Dom.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Model.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Rendering.Gdi.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Rendering.Wpf.dll" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Runtime.Wpf.dll" target="lib\net48"/>
+
+    <file src="..\Output\net48\SharpVectors.Converters.Wpf.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Core.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Css.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Dom.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Model.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Rendering.Gdi.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Rendering.Wpf.xml" target="lib\net48"/>
+    <file src="..\Output\net48\SharpVectors.Runtime.Wpf.xml" target="lib\net48"/>
+
+    <!-- NetCoreApp3.1 -->
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Converters.Wpf.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Core.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Css.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Dom.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Model.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Gdi.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Wpf.dll" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Runtime.Wpf.dll" target="lib\netcoreapp3.1"/>
+
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Converters.Wpf.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Core.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Css.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Dom.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Model.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Gdi.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Wpf.xml" target="lib\netcoreapp3.1"/>
+    <file src="..\Output\netcoreapp3.1\SharpVectors.Runtime.Wpf.xml" target="lib\netcoreapp3.1"/>
+
     <file src="..\Images\SharpVectors64.png" target="images"/>
   </files>
 </package>

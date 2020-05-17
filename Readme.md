@@ -29,13 +29,22 @@ In general, the following features are implemented:
 See the [Documentation](Docs/Documentation.md) section for more information on the features.
 
 ## Installation
-The SharpVectors is a .NET 4.0 or up library and applications. The library can be used in WPF and Windows Forms applications.
+The SharpVectors library targets the following frameworks
+* .NET Framework, Version 4.0
+* .NET Framework, Version 4.5
+* .NET Framework, Version 4.6
+* .NET Framework, Version 4.7
+* .NET Framework, Version 4.8
+* .NET Standard, Version 2.1
+* .NET Core, Version 3.1
+ 
+The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
-Install the latest released version from NuGet, the [Version 1.5.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
+Install the latest released version from NuGet, the [Version 1.6.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
 
 ### For the Applications
-Download the latest released version from GitHub Releases Page, the [Version 1.5.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
+Download the latest released version from GitHub Releases Page, the [Version 1.6.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
 
 ## Documentation
 An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
@@ -75,3 +84,6 @@ the authors of these great articles and projects
 * [SharpVectorGraphics (aka SVG#)](https://sourceforge.net/projects/svgdomcsharp/) by SVG# Team of Developers (SourceForge)
 * [WPF Zooming and Panning Control](https://www.codeproject.com/KB/WPF/zoomandpancontrol.aspx) by Ashley Davis (CodeProject)
 * [Render Text On A Path With WPF](https://msdn.microsoft.com/en-us/magazine/dd263097.aspx) by Charles Petzold (MSDN Magazine - December 2008)
+* [MinIoC](https://github.com/microsoft/MinIoC) by Microsoft (Single-file minimal C# IoC container)
+* [.NET ZLib Implementation](https://www.codeproject.com/Tips/830793/NET-ZLib-Implementation) by Alberto M (CodeProject)
+* [Brotli compression format](https://github.com/google/brotli) by Google (C# Decoder)
