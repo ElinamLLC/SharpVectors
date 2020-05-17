@@ -27,6 +27,20 @@ namespace SharpVectors.Dom.Svg
         #region ISvgGlyphRefElement Members
 
         /// <summary>
+        /// Gets a value indicating whether this SVG element is renderable.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="'true"/> if the element is renderable; otherwise,
+        /// it is <see langword="false"/>.
+        /// </value>
+        public override bool IsRenderable
+        {
+            get {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Corresponds to attribute 'glyphRef attribute' on the given element.
         /// </summary>
         /// <remarks>It is read only attribute</remarks>

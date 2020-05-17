@@ -613,9 +613,19 @@
             Defines the interface required for a rendering node to interact with the renderer and the SVG DOM
             </summary>
         </member>
-        <member name="T:SharpVectors.Renderers.Gdi.GdiRootRendering">
+        <member name="T:SharpVectors.Renderers.Gdi.GdiSvgRendering">
             <summary>
-            Summary description for SvgElementGraphicsNode.
+            Summary description for <see cref="T:SharpVectors.Renderers.Gdi.GdiSvgRendering"/>.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiSymbolRendering">
+            <summary>
+            Summary description for <see cref="T:SharpVectors.Renderers.Gdi.GdiSymbolRendering"/>.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Renderers.Gdi.GdiUseRendering">
+            <summary>
+            Summary description for <see cref="T:SharpVectors.Renderers.Gdi.GdiUseRendering"/>.
             </summary>
         </member>
         <member name="T:SharpVectors.Renderers.Gdi.GdiGraphicsImpl">

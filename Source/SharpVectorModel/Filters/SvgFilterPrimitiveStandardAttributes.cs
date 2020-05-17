@@ -32,6 +32,20 @@ namespace SharpVectors.Dom.Svg
         #region ISvgFilterPrimitiveStandardAttributes Members
 
         /// <summary>
+        /// Gets a value indicating whether this SVG element is renderable.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="'true"/> if the element is renderable; otherwise,
+        /// it is <see langword="false"/>.
+        /// </value>
+        public override bool IsRenderable
+        {
+            get {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// The minimum x coordinate for the subregion which restricts calculation and rendering of the given filter primitive. 
         /// </summary>
         /// <value>

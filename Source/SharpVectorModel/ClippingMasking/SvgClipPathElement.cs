@@ -15,13 +15,13 @@ namespace SharpVectors.Dom.Svg
         #region	Constructors and Destructor
 
         public SvgClipPathElement(string prefix, string localname, string ns, SvgDocument doc)
-			: base(prefix, localname, ns, doc)
-		{
-			_externalResourcesRequired = new SvgExternalResourcesRequired(this);
-			_svgTests = new SvgTests(this);
-		}
+            : base(prefix, localname, ns, doc)
+        {
+            _externalResourcesRequired = new SvgExternalResourcesRequired(this);
+            _svgTests = new SvgTests(this);
+        }
 
-		#endregion
+        #endregion
 
         #region ISvgElement Members
 
@@ -34,8 +34,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override bool IsRenderable
         {
-            get
-            {
+            get {
                 return false;
             }
         }
@@ -49,8 +48,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Clipping;
             }
         }
@@ -60,60 +58,58 @@ namespace SharpVectors.Dom.Svg
         #region ISvgClipPathElement Members
 
         public ISvgAnimatedEnumeration ClipPathUnits
-		{
-			get
-			{
-				if (_clipPathUnits == null)
-				{
-					SvgUnitType clipPath = SvgUnitType.UserSpaceOnUse;
-					if (GetAttribute("clipPathUnits") == "objectBoundingBox")
-					{
-						clipPath = SvgUnitType.ObjectBoundingBox;
-					}
+        {
+            get {
+                if (_clipPathUnits == null)
+                {
+                    SvgUnitType clipPath = SvgUnitType.UserSpaceOnUse;
+                    if (GetAttribute("clipPathUnits") == "objectBoundingBox")
+                    {
+                        clipPath = SvgUnitType.ObjectBoundingBox;
+                    }
 
-					_clipPathUnits = new SvgAnimatedEnumeration((ushort)clipPath);
-				}
+                    _clipPathUnits = new SvgAnimatedEnumeration((ushort)clipPath);
+                }
 
-				return _clipPathUnits;
-			}
-		}
+                return _clipPathUnits;
+            }
+        }
 
-		#endregion
+        #endregion
 
         #region ISvgExternalResourcesRequired Members
-        
-        public ISvgAnimatedBoolean ExternalResourcesRequired
-		{
-			get
-			{
-				return _externalResourcesRequired.ExternalResourcesRequired;
-			}
-		}
 
-		#endregion
+        public ISvgAnimatedBoolean ExternalResourcesRequired
+        {
+            get {
+                return _externalResourcesRequired.ExternalResourcesRequired;
+            }
+        }
+
+        #endregion
 
         #region ISvgTests Members
 
         public ISvgStringList RequiredFeatures
-		{
-			get { return _svgTests.RequiredFeatures; }
-		}
+        {
+            get { return _svgTests.RequiredFeatures; }
+        }
 
-		public ISvgStringList RequiredExtensions
-		{
-			get { return _svgTests.RequiredExtensions; }
-		}
+        public ISvgStringList RequiredExtensions
+        {
+            get { return _svgTests.RequiredExtensions; }
+        }
 
-		public ISvgStringList SystemLanguage
-		{
-			get { return _svgTests.SystemLanguage; }
-		}
+        public ISvgStringList SystemLanguage
+        {
+            get { return _svgTests.SystemLanguage; }
+        }
 
-		public bool HasExtension(string extension)
-		{
-			return _svgTests.HasExtension(extension);
-		}
+        public bool HasExtension(string extension)
+        {
+            return _svgTests.HasExtension(extension);
+        }
 
         #endregion
-	}
+    }
 }

@@ -255,7 +255,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 // do nothing
             }
-            else if (baseUri != "")
+            else if (!string.IsNullOrWhiteSpace(baseUri))
             {
                 Uri absoluteUri = new Uri(new Uri(baseUri), url);
                 url = absoluteUri.AbsoluteUri;
@@ -321,16 +321,19 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
+            var comparer  = StringComparison.OrdinalIgnoreCase;
+            var localName = _svgElement.LocalName == null ? string.Empty : _svgElement.LocalName;
+
             #region Clip with clip
 
             // see http://www.w3.org/TR/SVG/masking.html#OverflowAndClipProperties 
-            if (_svgElement is ISvgSvgElement || _svgElement is ISvgMarkerElement ||
-                _svgElement is ISvgSymbolElement || _svgElement is ISvgPatternElement)
+            if (localName.Equals("svg", comparer) || localName.Equals("marker", comparer) ||
+                localName.Equals("symbol", comparer) || localName.Equals("pattern", comparer))
             {
                 // check overflow property
-                CssValue overflow = _svgElement.GetComputedCssValue("overflow", string.Empty) as CssValue;
+                var overflow = _svgElement.GetComputedCssValue("overflow", string.Empty) as CssValue;
                 // TODO: clip can have "rect(10 10 auto 10)"
-                CssPrimitiveValue clip = _svgElement.GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
+                var clip = _svgElement.GetComputedCssValue("clip", string.Empty) as CssPrimitiveValue;
 
                 string sOverflow = null;
 
@@ -340,7 +343,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else
                 {
-                    if (this is ISvgSvgElement)
+                    if (localName.Equals("svg", comparer))
                         sOverflow = "hidden";
                 }
 
@@ -348,12 +351,12 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     // "If the 'overflow' property has a value other than hidden or scroll, 
                     // the property has no effect (i.e., a clipping rectangle is not created)."
-                    if (sOverflow == "hidden" || sOverflow == "scroll")
+                    if (string.Equals(sOverflow, "hidden", comparer) || string.Equals(sOverflow, "scroll", comparer))
                     {
                         Rect clipRect = Rect.Empty;
                         if (clip != null && clip.PrimitiveType == CssPrimitiveType.Rect)
                         {
-                            if (_svgElement is ISvgSvgElement)
+                            if (localName.Equals("svg", comparer))
                             {
                                 ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
@@ -369,16 +372,17 @@ namespace SharpVectors.Renderers.Wpf
                                     clipRect.Height = (clipRect.Bottom - clipRect.Y) - clipShape.Bottom.GetFloatValue(CssPrimitiveType.Number);
                             }
                         }
-                        else if (clip == null || (clip.PrimitiveType == CssPrimitiveType.Ident && clip.GetStringValue() == "auto"))
+                        else if (clip == null || (clip.PrimitiveType == CssPrimitiveType.Ident
+                            && string.Equals(clip.GetStringValue(), "auto", comparer)))
                         {
-                            if (_svgElement is ISvgSvgElement)
+                            if (localName.Equals("svg", comparer))
                             {
                                 ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
                                 clipRect = WpfConvert.ToRect(viewPort);
                             }
-                            else if (_svgElement is ISvgMarkerElement || _svgElement is ISvgSymbolElement ||
-                              _svgElement is ISvgPatternElement)
+                            else if (localName.Equals("marker", comparer) || localName.Equals("symbol", comparer) 
+                                || localName.Equals("pattern", comparer))
                             {
                                 // TODO: what to do here?
                             }
@@ -402,18 +406,17 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             // see: http://www.w3.org/TR/SVG/masking.html#EstablishingANewClippingPath
-
             if (hint == SvgRenderingHint.Shape || hint == SvgRenderingHint.Text ||
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment || hint == SvgRenderingHint.Image)
             {
-                CssPrimitiveValue clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
+                var clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
                 if (clipPath != null && clipPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
                     string absoluteUri = _svgElement.ResolveUri(clipPath.GetStringValue());
 
-                    SvgClipPathElement eClipPath = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
+                    var eClipPath = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
 
                     if (eClipPath != null)
                     {
@@ -485,7 +488,7 @@ namespace SharpVectors.Renderers.Wpf
 
         protected void SetMask(WpfDrawingContext context)
         {
-            _maskUnits = SvgUnitType.UserSpaceOnUse;
+            _maskUnits        = SvgUnitType.UserSpaceOnUse;
             _maskContentUnits = SvgUnitType.UserSpaceOnUse;
 
             CssPrimitiveValue maskPath = _svgElement.GetComputedCssValue("mask", string.Empty) as CssPrimitiveValue;
@@ -498,7 +501,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 maskElement = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgMaskElement;
             }
-            else if (string.Equals(_svgElement.ParentNode.LocalName, "use"))
+            else if (string.Equals(_svgElement.ParentNode.LocalName, "use", StringComparison.OrdinalIgnoreCase))
             {
                 var parentElement = _svgElement.ParentNode as SvgElement;
 
@@ -856,7 +859,7 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            SvgPreserveAspectRatio spar = (SvgPreserveAspectRatio)fitToView.PreserveAspectRatio.AnimVal;
+            var spar = (SvgPreserveAspectRatio)fitToView.PreserveAspectRatio.AnimVal;
 
             SvgRect viewBox   = (SvgRect)fitToView.ViewBox.AnimVal;
             SvgRect rectToFit = new SvgRect(elementBounds.X, elementBounds.Y, elementBounds.Width, elementBounds.Height);
@@ -941,6 +944,8 @@ namespace SharpVectors.Renderers.Wpf
         {
             GeometryCollection geomColl = new GeometryCollection();
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             foreach (XmlNode node in clipPath.ChildNodes)
             {
                 if (node.NodeType != XmlNodeType.Element)
@@ -949,7 +954,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 // Handle a case where the clip element has "use" element as a child...
-                if (string.Equals(node.LocalName, "use"))
+                if (string.Equals(node.LocalName, "use", comparer))
                 {
                     SvgUseElement useElement = (SvgUseElement)node;
 
@@ -1029,15 +1034,14 @@ namespace SharpVectors.Renderers.Wpf
 
             WpfDrawingSettings settings = context.Settings.Clone();
             settings.TextAsGeometry = true;
-            WpfDrawingContext clipContext = new WpfDrawingContext(true,
-                settings);
+            WpfDrawingContext clipContext = new WpfDrawingContext(true, settings);
             clipContext.RenderingClipRegion = true;
 
             clipContext.Initialize(null, context.FontFamilyVisitor, null);
 
             renderer.Render(element, clipContext);
 
-            DrawingGroup rootGroup = renderer.Drawing as DrawingGroup;
+            DrawingGroup rootGroup = renderer.Drawing;
             if (rootGroup != null && rootGroup.Children.Count == 1)
             {
                 DrawingGroup textGroup = rootGroup.Children[0] as DrawingGroup;
@@ -1093,7 +1097,6 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
         }
-
 
         #endregion
 

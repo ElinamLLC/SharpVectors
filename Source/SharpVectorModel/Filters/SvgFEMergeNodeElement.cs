@@ -21,6 +21,20 @@ namespace SharpVectors.Dom.Svg
 
         #region ISvgFEMergeNodeElement Members
 
+        /// <summary>
+        /// Gets a value indicating whether this SVG element is renderable.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="'true"/> if the element is renderable; otherwise,
+        /// it is <see langword="false"/>.
+        /// </value>
+        public override bool IsRenderable
+        {
+            get {
+                return false;
+            }
+        }
+
         public ISvgAnimatedString In
         {
             get {

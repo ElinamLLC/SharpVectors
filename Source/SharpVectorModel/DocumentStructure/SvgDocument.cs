@@ -471,6 +471,11 @@ namespace SharpVectors.Dom.Svg
                 {
                     useSvgDtd = true;
                 }
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 20010904//EN", StringComparison.OrdinalIgnoreCase) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 20010904/EN", StringComparison.OrdinalIgnoreCase))
+                {
+                    useSvgDtd = true;
+                }
 
                 if (useSvgDtd)
                 {

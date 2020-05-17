@@ -32,6 +32,20 @@ namespace SharpVectors.Dom.Svg
         #region ISvgAltGlyphItemElement Members
 
         /// <summary>
+        /// Gets a value indicating whether this SVG element is renderable.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="'true"/> if the element is renderable; otherwise,
+        /// it is <see langword="false"/>.
+        /// </value>
+        public override bool IsRenderable
+        {
+            get {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets the <see cref="ISvgGlyphRefElement"/> with the specified name or ID.
         /// </summary>
         /// <param name="name">The name or ID of the required <see cref="ISvgGlyphRefElement"/>.</param>

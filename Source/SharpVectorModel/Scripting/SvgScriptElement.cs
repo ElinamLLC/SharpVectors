@@ -45,6 +45,20 @@ namespace SharpVectors.Dom.Svg
         #region ISvgScriptElement Members
 
         /// <summary>
+        /// Gets a value indicating whether this SVG element is renderable.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="'true"/> if the element is renderable; otherwise,
+        /// it is <see langword="false"/>.
+        /// </value>
+        public override bool IsRenderable
+        {
+            get {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets a value corresponding to the attribute 'type' on the given 'script' element.
         /// </summary>
         /// <value>A string specifying the script type.</value>

@@ -210,7 +210,7 @@ namespace SharpVectors.Renderers.Wpf
             if (_rendererMap.ContainsKey(currentElement.UniqueId))
             {
                 // Might be circular rendering...
-                System.Diagnostics.Debug.WriteLine("Circular Object: " + currentElement.LocalName);
+//                System.Diagnostics.Debug.WriteLine("Circular Object: " + currentElement.LocalName);
                 return;
             }
 

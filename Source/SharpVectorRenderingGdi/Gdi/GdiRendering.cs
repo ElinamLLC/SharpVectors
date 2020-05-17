@@ -92,7 +92,7 @@ namespace SharpVectors.Renderers.Gdi
 
         #region Public Static Methods
 
-        public static GdiRendering Create(ISvgElement element)
+        public static GdiRendering Create(SvgElement element)
         {
             if (element == null)
             {
@@ -119,9 +119,13 @@ namespace SharpVectors.Renderers.Gdi
             switch (localName)
             {
                 case "svg":
-                    return new GdiRootRendering((SvgElement)element);
+                    return new GdiSvgRendering((SvgElement)element);
                 case "image":
                     return new GdiImageRendering((SvgElement)element);
+                case "use":
+                    return new GdiUseRendering(element);
+                case "symbol":
+                    return new GdiSymbolRendering(element);
                 case "marker":
                     return new GdiMarkerRendering((SvgElement)element);
             }
@@ -145,11 +149,12 @@ namespace SharpVectors.Renderers.Gdi
         /// </returns>
         public static GdiRendering CreateByUri(SvgDocument document, string baseUri, string url)
         {
+            url = url.Trim().Trim(new char[] { '\"', '\'' });
             if (url.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 // do nothing
             }
-            else if (baseUri != "")
+            else if (!string.IsNullOrWhiteSpace(baseUri))
             {
                 Uri absoluteUri = new Uri(new Uri(baseUri), url);
                 url = absoluteUri.AbsoluteUri;
@@ -159,16 +164,13 @@ namespace SharpVectors.Renderers.Gdi
                 // TODO: Handle xml:base here?        
                 // Right now just skip this... it can't be resolved, must assume it is absolute
             }
-            ISvgElement elm = document.GetNodeByUri(url) as ISvgElement;
+            var elm = document.GetNodeByUri(url) as SvgElement;
 
             if (elm != null)
             {
                 return GdiRendering.Create(elm);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         #endregion
@@ -182,6 +184,9 @@ namespace SharpVectors.Renderers.Gdi
                 return;
             }
 
+            var comparer  = StringComparison.OrdinalIgnoreCase;
+            var localName = _svgElement.LocalName == null ? string.Empty : _svgElement.LocalName;
+
             SvgRenderingHint hint = _svgElement.RenderingHint;
 
             // todo: should we correct the clipping to adjust to the off-one-pixel drawing?
@@ -189,8 +194,8 @@ namespace SharpVectors.Renderers.Gdi
 
             #region Clip with clip
             // see http://www.w3.org/TR/SVG/masking.html#OverflowAndClipProperties 
-            if (_svgElement is ISvgSvgElement || _svgElement is ISvgMarkerElement ||
-                _svgElement is ISvgSymbolElement || _svgElement is ISvgPatternElement)
+            if (localName.Equals("svg", comparer) || localName.Equals("marker", comparer) ||
+                localName.Equals("symbol", comparer) || localName.Equals("pattern", comparer))
             {
                 // check overflow property
                 CssValue overflow = _svgElement.GetComputedCssValue("overflow", string.Empty) as CssValue;
@@ -199,25 +204,25 @@ namespace SharpVectors.Renderers.Gdi
 
                 string sOverflow = null;
 
-                if (overflow != null || overflow.CssText == "")
+                if (overflow != null && !string.IsNullOrWhiteSpace(overflow.CssText))
                 {
                     sOverflow = overflow.CssText;
                 }
                 else
                 {
-                    if (this is ISvgSvgElement)
+                    if (localName.Equals("svg", comparer))
                         sOverflow = "hidden";
                 }
 
                 if (sOverflow != null)
                 {
                     // "If the 'overflow' property has a value other than hidden or scroll, the property has no effect (i.e., a clipping rectangle is not created)."
-                    if (sOverflow == "hidden" || sOverflow == "scroll")
+                    if (string.Equals(sOverflow, "hidden", comparer) || string.Equals(sOverflow, "scroll", comparer))
                     {
                         RectangleF clipRect = RectangleF.Empty;
                         if (clip != null && clip.PrimitiveType == CssPrimitiveType.Rect)
                         {
-                            if (_svgElement is ISvgSvgElement)
+                            if (localName.Equals("svg", comparer))
                             {
                                 ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
@@ -233,16 +238,17 @@ namespace SharpVectors.Renderers.Gdi
                                     clipRect.Height = (clipRect.Bottom - clipRect.Y) - (float)clipShape.Bottom.GetFloatValue(CssPrimitiveType.Number);
                             }
                         }
-                        else if (clip == null || (clip.PrimitiveType == CssPrimitiveType.Ident && clip.GetStringValue() == "auto"))
+                        else if (clip == null || (clip.PrimitiveType == CssPrimitiveType.Ident 
+                            && string.Equals(clip.GetStringValue(), "auto", comparer)))
                         {
-                            if (_svgElement is ISvgSvgElement)
+                            if (localName.Equals("svg", comparer))
                             {
                                 ISvgSvgElement svgElement = (ISvgSvgElement)_svgElement;
                                 SvgRect viewPort = svgElement.Viewport as SvgRect;
                                 clipRect = GdiConverter.ToRectangle(viewPort);
                             }
-                            else if (_svgElement is ISvgMarkerElement || _svgElement is ISvgSymbolElement ||
-                              _svgElement is ISvgPatternElement)
+                            else if (localName.Equals("marker", comparer) || localName.Equals("symbol", comparer)
+                                || localName.Equals("pattern", comparer))
                             {
                                 // TODO: what to do here?
                             }
@@ -264,13 +270,13 @@ namespace SharpVectors.Renderers.Gdi
                 hint == SvgRenderingHint.Clipping || hint == SvgRenderingHint.Masking ||
                 hint == SvgRenderingHint.Containment || hint == SvgRenderingHint.Image)
             {
-                CssPrimitiveValue clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
+                var clipPath = _svgElement.GetComputedCssValue("clip-path", string.Empty) as CssPrimitiveValue;
 
                 if (clipPath != null && clipPath.PrimitiveType == CssPrimitiveType.Uri)
                 {
                     string absoluteUri = _svgElement.ResolveUri(clipPath.GetStringValue());
 
-                    SvgClipPathElement eClipPath = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
+                    var eClipPath = _svgElement.OwnerDocument.GetNodeByUri(absoluteUri) as SvgClipPathElement;
 
                     if (eClipPath != null)
                     {
@@ -287,7 +293,7 @@ namespace SharpVectors.Renderers.Gdi
 
                         if (pathUnits == SvgUnitType.ObjectBoundingBox)
                         {
-                            SvgTransformableElement transElement = _svgElement as SvgTransformableElement;
+                            var transElement = _svgElement as SvgTransformableElement;
 
                             if (transElement != null)
                             {
@@ -429,6 +435,8 @@ namespace SharpVectors.Renderers.Gdi
         {
             GraphicsPath path = new GraphicsPath();
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             foreach (XmlNode node in clipPath.ChildNodes)
             {
                 if (node.NodeType != XmlNodeType.Element)
@@ -437,7 +445,7 @@ namespace SharpVectors.Renderers.Gdi
                 }
 
                 // Handle a case where the clip element has "use" element as a child...
-                if (string.Equals(node.LocalName, "use"))
+                if (string.Equals(node.LocalName, "use", comparer))
                 {
                     SvgUseElement useElement = (SvgUseElement)node;
 
@@ -465,7 +473,7 @@ namespace SharpVectors.Renderers.Gdi
                                 if (childPath != null)
                                 {
                                     string clipRule = element.GetPropertyValue("clip-rule");
-                                    path.FillMode = (clipRule == "evenodd") ? FillMode.Alternate : FillMode.Winding;
+                                    path.FillMode = string.Equals(clipRule, "evenodd", comparer) ? FillMode.Alternate : FillMode.Winding;
 
                                     path.AddPath(childPath, true);
                                 }
@@ -490,7 +498,7 @@ namespace SharpVectors.Renderers.Gdi
                             if (childPath != null)
                             {
                                 string clipRule = element.GetPropertyValue("clip-rule");
-                                path.FillMode = (clipRule == "evenodd") ? FillMode.Alternate : FillMode.Winding;
+                                path.FillMode = string.Equals(clipRule, "evenodd", comparer) ? FillMode.Alternate : FillMode.Winding;
 
                                 path.AddPath(childPath, true);
                             }
@@ -510,7 +518,7 @@ namespace SharpVectors.Renderers.Gdi
                             if (childPath != null)
                             {
                                 string clipRule = element.GetPropertyValue("clip-rule");
-                                path.FillMode = (clipRule == "evenodd") ? FillMode.Alternate : FillMode.Winding;
+                                path.FillMode = string.Equals(clipRule, "evenodd", comparer) ? FillMode.Alternate : FillMode.Winding;
 
                                 path.AddPath(childPath, true);
                             }
@@ -587,12 +595,12 @@ namespace SharpVectors.Renderers.Gdi
 
         public static GraphicsPath CreatePath(SvgRectElement element)
         {
-            float dx = (float)Math.Round(element.X.AnimVal.Value, 4);
-            float dy = (float)Math.Round(element.Y.AnimVal.Value, 4);
-            float width = (float)Math.Round(element.Width.AnimVal.Value, 4);
-            float height = (float)Math.Round(element.Height.AnimVal.Value, 4);
-            float rx = (float)Math.Round(element.Rx.AnimVal.Value, 4);
-            float ry = (float)Math.Round(element.Ry.AnimVal.Value, 4);
+            float dx     = (float)Math.Round(element.X.AnimVal.Value,      6);
+            float dy     = (float)Math.Round(element.Y.AnimVal.Value,      6);
+            float width  = (float)Math.Round(element.Width.AnimVal.Value,  6);
+            float height = (float)Math.Round(element.Height.AnimVal.Value, 6);
+            float rx     = (float)Math.Round(element.Rx.AnimVal.Value,     6);
+            float ry     = (float)Math.Round(element.Ry.AnimVal.Value,     6);
 
             if (width <= 0 || height <= 0)
             {

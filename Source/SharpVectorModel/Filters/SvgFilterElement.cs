@@ -85,6 +85,20 @@ namespace SharpVectors.Dom.Svg
         #region ISvgFilterElement Interface
 
         /// <summary>
+        /// Gets a value indicating whether this SVG element is renderable.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="'true"/> if the element is renderable; otherwise,
+        /// it is <see langword="false"/>.
+        /// </value>
+        public override bool IsRenderable
+        {
+            get {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets a value definining the coordinate system for attributes <see cref="X"/>, <see cref="Y"/>, 
         /// <see cref="Width"/>, <see cref="Height"/>.
         /// </summary>

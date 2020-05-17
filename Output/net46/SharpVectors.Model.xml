@@ -94,6 +94,15 @@
             </list>
             </value>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimationElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgAnimationElement.RenderingHint">
             <summary>
             Gets a value providing a hint on the rendering defined by this element.
@@ -590,6 +599,15 @@
             The SvgDescElement interface corresponds to the 'desc' element. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDescElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgDocument">
             <summary>
             The root object in the document object hierarchy of an Svg document.
@@ -850,6 +868,15 @@
             <summary>
             The SvgStyleElement interface corresponds to the 'style' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgStyleElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgSvgElement">
             <summary>
@@ -1226,6 +1253,15 @@
             The SvgTitleElement interface corresponds to the 'title' element. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgTitleElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="M:SharpVectors.Dom.Svg.SvgTransformableElement.GetCTM">
             <summary>
             For each given element, the accumulation of all transformations that have been defined 
@@ -1280,6 +1316,24 @@
             </summary>
             <value>The URI.</value>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGradientElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgLinearGradientElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgPatternElement.IsRenderable">
             <summary>
             Gets a value indicating whether this SVG element is renderable.
@@ -1328,6 +1382,15 @@
             Summary description for SvgRadialGradientElement.
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgRadialGradientElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgSolidColorElement">
             <summary>
             An SVG object represents an 'solidcolor' element in the DOM.
@@ -1356,10 +1419,28 @@
             Summary description for SvgStopElement.
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgStopElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement">
             <summary>
             This <see langword="abstract"/> defines a base class used by the component transfer function interfaces. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgComponentTransferFunctionElement.Type">
             <summary>
@@ -1834,6 +1915,15 @@
             If attribute 'yChannelSelector' is not specified, then the effect is as if a value of A were specified. 
             </remarks>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEDistantLightElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFEDistantLightElement.Azimuth">
             <summary>
             Direction angle for the light source on the XY plane (clockwise), in degrees from the x axis.
@@ -1929,6 +2019,15 @@
             that has a non-zero value.
             </para>
             </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEMergeNodeElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFEMergeNodeElement.In1">
             <summary>
@@ -2048,6 +2147,15 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFEPointLightElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFEPointLightElement.X">
             <summary>
@@ -2188,6 +2296,15 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFESpotLightElement.X">
             <summary>
@@ -2456,6 +2573,15 @@
             This keyword represents the value of the stroke property on the target element for the filter effect.
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFilterElement.FilterUnits">
             <summary>
             Gets a value definining the coordinate system for attributes <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgFilterElement.Y"/>, 
@@ -2560,11 +2686,29 @@
             This is <see langword="abstract"/> class for filter primitive attributes that are available for all filter primitives:
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.X" -->
         <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Y" -->
         <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Width" -->
         <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Height" -->
         <!-- Badly formed XML comment ignored for member "P:SharpVectors.Dom.Svg.SvgFilterPrimitiveStandardAttributes.Result" -->
+        <member name="P:SharpVectors.Dom.Svg.SvgMetadataElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.IsRenderable">
             <summary>
             Gets a value indicating whether this SVG element is renderable.
@@ -3325,6 +3469,15 @@
             <para>Any functions defined within any 'script' element have a 'global' scope across the entire current document.</para>
             </remarks>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgScriptElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgScriptElement.Type">
             <summary>
             Gets or sets a value corresponding to the attribute 'type' on the given 'script' element.
@@ -3443,6 +3596,15 @@
             <param name="ns"></param>
             <param name="doc"></param>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAltGlyphDefElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgAltGlyphDefElement.IsSimple">
             <summary>
             Gets a value indicating whether this is a simple content model.
@@ -3489,6 +3651,15 @@
             The ISvgAltGlyphElement interface corresponds to the 'altGlyph' element.
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAltGlyphElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.SvgAltGlyphElement.GlyphRef">
             <summary>
             Corresponds to attribute 'glyphRef attribute' on the given element.
@@ -3521,6 +3692,15 @@
             <param name="ns"></param>
             <param name="doc"></param>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAltGlyphItemElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="M:SharpVectors.Dom.Svg.SvgAltGlyphItemElement.GetGlyphRef(System.String)">
             <summary>
             Gets the <see cref="T:SharpVectors.Dom.Svg.ISvgGlyphRefElement"/> with the specified name or ID.
@@ -3534,6 +3714,15 @@
             <summary>
             The SvgFontElement interface corresponds to the 'font' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFontElement.HorizAdvX">
             <summary>
@@ -3609,6 +3798,15 @@
             <summary>
             The SvgFontFaceElement interface corresponds to the 'font-face' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.Alphabetic">
             <summary>
@@ -3773,25 +3971,70 @@
             The <see cref="T:SharpVectors.Dom.Svg.ISvgFontFaceFormatElement"/> interface corresponds to the <c>font-face-format'</c>' element. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceFormatElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgFontFaceNameElement">
             <summary>
             The SvgFontFaceNameElement interface corresponds to the 'font-face-name' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceNameElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgFontFaceSrcElement">
             <summary>
             The SvgFontFaceSrcElement interface corresponds to the 'font-face-src' element. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceSrcElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgFontFaceUriElement">
             <summary>
             The SvgFontFaceUriElement interface corresponds to the 'font-face-uri' element. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceUriElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgGlyphElement">
             <summary>
             The SvgGlyphElement interface corresponds to the 'glyph' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgGlyphElement.PathData">
             <summary>
@@ -3807,6 +4050,15 @@
             <summary>
             The ISvgGlyphRefElement interface corresponds to the 'glyphRef' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.GlyphRef">
             <summary>
@@ -3849,15 +4101,42 @@
             The SvgHKernElement interface corresponds to the 'hkern' element. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgHKernElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgKernElement">
             <summary>
             The SvgKernElement is the base interface corresponds to the 'vkern' and 'hkern' elements. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgKernElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="T:SharpVectors.Dom.Svg.SvgMissingGlyphElement">
             <summary>
             The SvgMissingGlyphElement interface corresponds to the 'missing-glyph' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMissingGlyphElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgTextAreaElement">
             <summary>
@@ -3913,6 +4192,15 @@
             <summary>
             The SvgVKernElement interface corresponds to the 'vkern' element. 
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgVKernElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.Resources.Root">
             <summary>
