@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Gdi;
+using System.Collections.Generic;
 
 namespace SharpVectors.Renderers.Forms
 {

@@ -111,6 +111,14 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _svgWindow = value;
+
+                if (_context != null)
+                {
+                    if (_svgWindow != null && _svgWindow.BaseUrls == null)
+                    {
+                        _svgWindow.BaseUrls = _context.BaseUrls;
+                    }
+                }
             }
         }
 
@@ -261,11 +269,27 @@ namespace SharpVectors.Renderers.Wpf
 
             _context.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
 
+            if (!_isEmbedded)
+            {
+                if (_svgWindow != null && _svgWindow.BaseUrls == null)
+                {
+                    _svgWindow.BaseUrls = _context.BaseUrls;
+                }
+            }
+
             _context.BeginDrawing(_drawingDocument);
 
             _svgRenderer.Render(node);
 
             _context.EndDrawing();
+
+            if (!_isEmbedded)
+            {
+                if (_svgWindow != null && _svgWindow.BaseUrls != null && _svgWindow.BaseUrls.Count != 0)
+                {
+                    _svgWindow.BaseUrls.Clear();
+                }
+            }
 
             //RendererAfterRender();
 

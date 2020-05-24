@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Gdi;
@@ -15,6 +16,10 @@ namespace SharpVectors.Renderers
         public GdiSvgWindow(long innerWidth, long innerHeight, ISvgRenderer renderer)
             : base(innerWidth, innerHeight, renderer)
         {
+            if (this.BaseUrls == null)
+            {
+                this.BaseUrls = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            }
         }
 
         public GdiSvgWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)

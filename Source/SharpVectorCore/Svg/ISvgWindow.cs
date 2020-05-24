@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml;
+using System.Collections.Generic;
 
 using SharpVectors.Dom.Stylesheets;
 
@@ -12,6 +13,7 @@ namespace SharpVectors.Dom.Svg
         long InnerHeight { get; }
         long InnerWidth { get; }
         string Source { get; set; }
+        ISet<string> BaseUrls { get; set; }
         XmlDocumentFragment ParseXML(string source, XmlDocument document);
         string PrintNode(XmlNode node);
         void Alert(string message);

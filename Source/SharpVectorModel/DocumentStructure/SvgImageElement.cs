@@ -100,8 +100,8 @@ namespace SharpVectors.Dom.Svg
                         Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
                         if (svgUri.IsFile)
                         {
-                            return absoluteUri.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
-                                absoluteUri.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase);
+                            return absoluteUri.EndsWith(SvgConstants.FileExt, StringComparison.OrdinalIgnoreCase) ||
+                                absoluteUri.EndsWith(SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase);
                         }
                     }
 
@@ -115,8 +115,8 @@ namespace SharpVectors.Dom.Svg
                     // this "fix" tests the file extension for .svg and .svgz
                     string name = resource.ResponseUri.ToString().ToLower(CultureInfo.InvariantCulture);
                     return (resource.ContentType.StartsWith("image/svg+xml", StringComparison.OrdinalIgnoreCase) ||
-                        name.EndsWith(".svg", StringComparison.OrdinalIgnoreCase) ||
-                        name.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase));
+                        name.EndsWith(SvgConstants.FileExt, StringComparison.OrdinalIgnoreCase) ||
+                        name.EndsWith(SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase));
                 }
                 catch (WebException)
                 {
@@ -138,15 +138,29 @@ namespace SharpVectors.Dom.Svg
 
                     if (parentWindow != null)
                     {
+                        var baseUrls = parentWindow.BaseUrls;
+
+                        string absoluteUri = _uriReference.AbsoluteUri;
+                        Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
+                        if (baseUrls != null && svgUri.IsAbsoluteUri)
+                        {
+                            var temp = svgUri.ToString();
+                            if (baseUrls.Contains(svgUri.AbsoluteUri) || baseUrls.Contains(svgUri.ToString()))
+                            {
+                                return null;
+                            }
+                            if (svgUri.IsFile && baseUrls.Contains(svgUri.LocalPath))
+                            {
+                                return null;
+                            }
+                        }
+
                         SvgWindow wnd = parentWindow.CreateOwnedWindow(
                             (long)Width.AnimVal.Value, (long)Height.AnimVal.Value);
 
                         SvgDocument doc = new SvgDocument(wnd);
                         wnd.Document = doc;
 
-                        string absoluteUri = _uriReference.AbsoluteUri;
-
-                        Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
                         if (svgUri.IsFile)
                         {
                             if (!File.Exists(svgUri.LocalPath))
@@ -156,11 +170,15 @@ namespace SharpVectors.Dom.Svg
                             }
                             Stream resStream = File.OpenRead(svgUri.LocalPath);
                             doc.Load(absoluteUri, resStream);
+
+                            baseUrls.Add(svgUri.ToString());
                         }
                         else
                         {
                             Stream resStream = _uriReference.ReferencedResource.GetResponseStream();
                             doc.Load(absoluteUri, resStream);
+
+                            baseUrls.Add(absoluteUri);
                         }
 
                         return wnd;

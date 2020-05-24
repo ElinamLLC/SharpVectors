@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -268,6 +269,17 @@ namespace SharpVectors.Renderers.Gdi
                 if (!element.Href.AnimVal.StartsWith("data:", comparer))
                 {
                     SvgUriReference svgUri = element.UriReference;
+                    string absoluteUri = svgUri.AbsoluteUri;
+                    if (string.IsNullOrWhiteSpace(absoluteUri))
+                    {
+                        return null; // most likely, the image does not exist...
+                    }
+                    if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Debug.WriteLine("Uri: " + absoluteUri); // image elements can't reference elements in an svg file
+                        return null;
+                    }
+
                     Uri imageUri = new Uri(svgUri.AbsoluteUri);
                     if (imageUri.IsFile && File.Exists(imageUri.LocalPath))
                     {

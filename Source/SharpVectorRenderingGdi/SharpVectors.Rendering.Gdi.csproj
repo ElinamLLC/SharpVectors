@@ -51,9 +51,7 @@
     <Compile Update="Forms\SvgPictureBox.Designer.cs">
       <DependentUpon>SvgPictureBox.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\SvgPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="Forms\SvgPictureBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Forms\SvgPictureBox.resx">

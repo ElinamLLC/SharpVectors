@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Runtime;
+using System.Text;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -46,6 +47,8 @@ namespace SharpVectors.Renderers.Wpf
         private WpfDrawingDocument _drawingDocument;
         private Dictionary<string, WpfSvgPaintContext> _paintContexts;
 
+        private ISet<string> _baseUrls;
+
         #endregion
 
         #region Constructors and Destructor
@@ -74,6 +77,7 @@ namespace SharpVectors.Renderers.Wpf
             _settings      = settings;
             _drawStack     = new Stack<DrawingGroup>();
             _paintContexts = new Dictionary<string, WpfSvgPaintContext>(StringComparer.Ordinal);
+            _baseUrls      = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             _registeredIds = settings[RegisteredIdKey] as HashSet<string>;
             if (_registeredIds == null)
@@ -306,6 +310,13 @@ namespace SharpVectors.Renderers.Wpf
         {
             get {
                 return _dpiY / DefaultDpi;
+            }
+        }
+
+        public ISet<string> BaseUrls
+        {
+            get {
+                return _baseUrls;
             }
         }
 
@@ -673,6 +684,45 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
                 _drawingDocument.Add(elementId, uniqueId, drawing);
+            }
+        }
+
+        public bool ContainsUrl(string baseUrl)
+        {
+            if (string.IsNullOrWhiteSpace(baseUrl))
+            {
+                return false;
+            }
+            if (_baseUrls.Count != 0 && _baseUrls.Contains(baseUrl))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void AddUrl(string baseUrl)
+        {
+            if (string.IsNullOrWhiteSpace(baseUrl))
+            {
+                return;
+            }
+            if (_baseUrls.Count != 0 && _baseUrls.Contains(baseUrl))
+            {
+                return;
+            }
+            _baseUrls.Add(baseUrl);
+        }
+
+        public void RemoveUrl(string baseUrl)
+        {
+            if (string.IsNullOrWhiteSpace(baseUrl))
+            {
+                return;
+            }
+            if (_baseUrls.Count != 0 && _baseUrls.Contains(baseUrl))
+            {
+                _baseUrls.Remove(baseUrl);
             }
         }
 

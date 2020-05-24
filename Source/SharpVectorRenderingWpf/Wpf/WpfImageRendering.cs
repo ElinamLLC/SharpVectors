@@ -60,7 +60,8 @@ namespace SharpVectors.Renderers.Wpf
             ImageSource imageSource = null;
             if (imageElement.IsSvgImage)
             {
-                if (imageElement.IsRootReferenced(imageElement.OwnerDocument.BaseURI))
+                var baseUrl = imageElement.OwnerDocument.BaseURI;
+                if (imageElement.IsRootReferenced(baseUrl) /*|| context.ContainsUrl(baseUrl)*/)
                 {
                     return;
                 }
@@ -514,7 +515,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                 {                    
-                    Trace.WriteLine("Uri: " + absoluteUri); // image elements can't reference elements in an svg file
+                    Debug.WriteLine("Uri: " + absoluteUri); // image elements can't reference elements in an svg file
                     return null;
                 }
 

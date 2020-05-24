@@ -25,6 +25,8 @@ namespace SharpVectors.Dom.Svg
 
         private object _synchObject;
 
+        private ISet<string> _baseUrls;
+
         #endregion
 
         #region Contructors and Destructor
@@ -53,6 +55,7 @@ namespace SharpVectors.Dom.Svg
             : this(innerWidth, innerHeight, parentWindow.CreateSvgRenderer())
         {
             _parentWindow = parentWindow;
+            _baseUrls     = parentWindow.BaseUrls;
         }
 
         #endregion
@@ -70,6 +73,16 @@ namespace SharpVectors.Dom.Svg
         {
             get { return _renderer; }
             set { _renderer = value; }
+        }
+
+        public ISet<string> BaseUrls
+        {
+            get {
+                return _baseUrls;
+            }
+            set {
+                _baseUrls = value;
+            }
         }
 
         public abstract DirectoryInfo WorkingDir

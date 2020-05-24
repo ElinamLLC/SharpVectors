@@ -55,7 +55,7 @@ namespace SharpVectors.Dom.Svg
 
         public static readonly int DotsPerInch = 96;
 
-        public const string SvgNamespace   = "http://www.w3.org/2000/svg";
+        public const string SvgNamespace = "http://www.w3.org/2000/svg";
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
         /// <summary>
         /// Namespace URI to map to the xml prefix
@@ -85,10 +85,65 @@ namespace SharpVectors.Dom.Svg
         private static readonly Type _rootType = typeof(Root);
 
         private readonly string[] _supportedFeatures = {
-            "org.w3c.svg.static",
-            "http://www.w3.org/TR/Svg11/feature#Shape",
-            "http://www.w3.org/TR/Svg11/feature#BasicText",
-            "http://www.w3.org/TR/Svg11/feature#OpacityAttribute"
+            // SVG 1.0 feature strings
+            SvgConstants.FeatureOrgW3cSvg,
+            SvgConstants.FeatureOrgW3cSvgStatic,
+            SvgConstants.FeatureOrgW3cSvgAnimation,
+            SvgConstants.FeatureOrgW3cSvgDynamic,
+            SvgConstants.FeatureOrgW3cSvgAll,
+            SvgConstants.FeatureOrgW3cDomSvg,
+            SvgConstants.FeatureOrgW3cDomSvgStatic,
+            SvgConstants.FeatureOrgW3cDomSvgAnimation,
+            SvgConstants.FeatureOrgW3cDomSvgDynamic,
+            SvgConstants.FeatureOrgW3cDomSvgAll,
+
+            // SVG1.1 feature strings
+            SvgConstants.FeatureSvg,
+            SvgConstants.FeatureSvgDom,
+            SvgConstants.FeatureSvgStatic,
+            SvgConstants.FeatureSvgDomStatic,
+            SvgConstants.FeatureSvgAnimation,
+            SvgConstants.FeatureSvgDomAnimation,
+            SvgConstants.FeatureSvgDynamic,
+            SvgConstants.FeatureSvgDomDynamic,
+            SvgConstants.FeatureCoreAttribute,
+            SvgConstants.FeatureStructure,
+            SvgConstants.FeatureBasicStructure,
+            SvgConstants.FeatureContainerAttribute,
+            SvgConstants.FeatureConditionalProcessing,
+            SvgConstants.FeatureImage,
+            SvgConstants.FeatureStyle,
+            SvgConstants.FeatureViewportAttribute,
+            SvgConstants.FeatureShape,
+            SvgConstants.FeatureText,
+            SvgConstants.FeatureBasicText,
+            SvgConstants.FeaturePaintAttribute,
+            SvgConstants.FeatureBasicPaintAttribute,
+            SvgConstants.FeatureOpacityAttribute,
+            SvgConstants.FeatureGraphicsAttribute,
+            SvgConstants.FeatureBasicGraphicsAttribute,
+            SvgConstants.FeatureMarker,
+            SvgConstants.FeatureColorProfile,
+            SvgConstants.FeatureGradient,
+            SvgConstants.FeaturePattern,
+            SvgConstants.FeatureClip,
+            SvgConstants.FeatureBasicClip,
+            SvgConstants.FeatureMask,
+            SvgConstants.FeatureFilter,
+            SvgConstants.FeatureBasicFilter,
+            SvgConstants.FeatureDocumentEventsAttribute,
+            SvgConstants.FeatureGraphicalEventsAttribute,
+            SvgConstants.FeatureAnimationEventsAttribute,
+            SvgConstants.FeatureCursor,
+            SvgConstants.FeatureHyperlinking,
+            SvgConstants.FeatureXlink,
+            SvgConstants.FeatureExternalResourcesRequired,
+            SvgConstants.FeatureView,
+            SvgConstants.FeatureScript,
+            SvgConstants.FeatureAnimation,
+            SvgConstants.FeatureFont,
+            SvgConstants.FeatureBasicFont,
+            SvgConstants.FeatureExtensibility
         };
 
         private readonly string[] _supportedExtensions = { };
@@ -100,6 +155,8 @@ namespace SharpVectors.Dom.Svg
         private readonly bool _ignoreComments;
         private readonly bool _ignoreProcessingInstructions;
         private readonly bool _ignoreWhitespace;
+
+        private string _baseURI;
 
         private bool _isFontsLoaded;
         private SvgWindow _window;
@@ -125,6 +182,7 @@ namespace SharpVectors.Dom.Svg
 
         private SvgDocument()
         {
+            _baseURI                      = string.Empty;
             _isFontsLoaded                = true;
             _ignoreComments               = true;
             _ignoreWhitespace             = false;
@@ -140,7 +198,7 @@ namespace SharpVectors.Dom.Svg
         public SvgDocument(SvgWindow window)
             : this()
         {
-            _window = window;
+            _window          = window;
             _window.Document = this;
 
             // set up CSS properties
@@ -231,6 +289,24 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public override string BaseURI
+        {
+            get {
+                if (_baseURI == null)
+                {
+                    _baseURI = string.Empty;
+                }
+                var baseUrl = base.BaseURI;
+
+                if (!string.IsNullOrWhiteSpace(baseUrl))
+                {
+                    return baseUrl;
+                }
+
+                return _baseURI;
+            }
+        }
+
         #endregion
 
         #region Type handling and creation of elements
@@ -267,9 +343,11 @@ namespace SharpVectors.Dom.Svg
 
         public override bool Supports(string feature, string version)
         {
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             foreach (string supportedFeature in _supportedFeatures)
             {
-                if (supportedFeature == feature)
+                if (string.Equals(supportedFeature, feature, comparer))
                 {
                     return true;
                 }
@@ -277,7 +355,7 @@ namespace SharpVectors.Dom.Svg
 
             foreach (string supportedExtension in _supportedExtensions)
             {
-                if (supportedExtension == feature)
+                if (string.Equals(supportedExtension, feature, comparer))
                 {
                     return true;
                 }
@@ -347,6 +425,8 @@ namespace SharpVectors.Dom.Svg
                 }
             }
 
+            _baseURI = filename;
+
             using (XmlReader reader = CreateValidatingXmlReader(filename))
             {
                 this.Load(reader);
@@ -365,6 +445,8 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public void Load(string baseUrl, Stream stream)
         {
+            _baseURI = baseUrl == null ? string.Empty : baseUrl;
+
             using (XmlReader reader = CreateValidatingXmlReader(baseUrl, stream))
             {
                 this.Load(reader);
@@ -573,7 +655,7 @@ namespace SharpVectors.Dom.Svg
             string uri = null;
             if (this.ResolveNamespace != null)
             {
-                 var evtArgs = new SvgResolveNamespaceEventArgs(prefix);
+                var evtArgs = new SvgResolveNamespaceEventArgs(prefix);
                 ResolveNamespace(this, evtArgs);
                 uri = evtArgs.Uri;
             }
@@ -713,7 +795,7 @@ namespace SharpVectors.Dom.Svg
             if (fragment.Length == 0)
             {
                 // no fragment => return entire document
-                if (docUri != null && string.Equals(docUri.AbsolutePath, 
+                if (docUri != null && string.Equals(docUri.AbsolutePath,
                     absoluteUri.AbsolutePath, StringComparison.OrdinalIgnoreCase))
                 {
                     return this;
@@ -727,7 +809,7 @@ namespace SharpVectors.Dom.Svg
 
                 //PrepareXmlResolver(settings);
 
-                using (XmlReader reader = XmlReader.Create(GetResource(absoluteUri).GetResponseStream(), 
+                using (XmlReader reader = XmlReader.Create(GetResource(absoluteUri).GetResponseStream(),
                     settings, absoluteUri.AbsolutePath))
                 {
                     doc.Load(reader);
@@ -1090,7 +1172,7 @@ namespace SharpVectors.Dom.Svg
             return fontUrls;
         }
 
-        private static void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls, 
+        private static void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls,
             IDictionary<string, string> styledFontIds)
         {
             if (cssSheet == null || fontUrls == null)
@@ -1136,7 +1218,7 @@ namespace SharpVectors.Dom.Svg
                     string fontFamily = fontRule.FontFamily;
                     string fontEncoding = fontRule.EmbeddedEncoding;
                     string fontMimeType = fontRule.EmbeddedMimeType;
-                    if (!string.IsNullOrWhiteSpace(fontFamily) 
+                    if (!string.IsNullOrWhiteSpace(fontFamily)
                         && !string.IsNullOrWhiteSpace(fontFamily)
                         && !string.IsNullOrWhiteSpace(fontMimeType)
                         && !fontMimeType.Equals("base64", StringComparison.OrdinalIgnoreCase))
@@ -1144,33 +1226,35 @@ namespace SharpVectors.Dom.Svg
                         string fileExt = null;
                         switch (fontMimeType)
                         {
-                            case "image/svg+xml": fileExt = ".svg";               // (W3C: August 2011)
+                            case "image/svg+xml":
+                                fileExt = ".svg";               // (W3C: August 2011)
                                 break;
-                            case "application/x-font-ttf": 
+                            case "application/x-font-ttf":
                                 fileExt = ".ttf";       // (IANA: March 2013)
                                 break;
-                            case "application/x-font-truetype": 
-                            case "application/font-truetype": 
+                            case "application/x-font-truetype":
+                            case "application/font-truetype":
                                 fileExt = ".ttf";
                                 break;
-                            case "application/x-font-opentype": 
-                            case "application/font-opentype": 
+                            case "application/x-font-opentype":
+                            case "application/font-opentype":
                                 fileExt = ".otf";   // (IANA: March 2013)
                                 break;
-                            case "application/font-woff": 
-                            case "application/x-font-woff": 
-                            case "font/woff": 
+                            case "application/font-woff":
+                            case "application/x-font-woff":
+                            case "font/woff":
                                 fileExt = ".woff";        //  (IANA: January 2013)
                                 break;
-                            case "application/font-woff2": 
-                            case "application/x-font-woff2": 
-                            case "font/woff2": 
+                            case "application/font-woff2":
+                            case "application/x-font-woff2":
+                            case "font/woff2":
                                 fileExt = ".woff2";      //   (W3C W./E.Draft: May 2014/March 2016)
                                 break;
-                            case "application/vnd.ms-fontobject": fileExt = ".eot";  // (IA;NA: December 2005)
+                            case "application/vnd.ms-fontobject":
+                                fileExt = ".eot";  // (IA;NA: December 2005)
                                 break;
-                            case "application/font-sfnt": 
-                            case "application/x-font-sfnt": 
+                            case "application/font-sfnt":
+                            case "application/x-font-sfnt":
                                 fileExt = ".sfnt";         //  (IANA: March 2013) 
                                 break;
                         }
@@ -1180,7 +1264,7 @@ namespace SharpVectors.Dom.Svg
                             string fontPath = Path.Combine(fontFileDir, fontFamily + fileExt);
                             if (!File.Exists(fontPath))
                             {
-                                string fontData   = fontRule.EmbeddedData;
+                                string fontData = fontRule.EmbeddedData;
                                 byte[] imageBytes = Convert.FromBase64CharArray(fontData.ToCharArray(),
                                     0, fontData.Length);
                                 using (var stream = File.OpenWrite(fontPath))
@@ -1223,6 +1307,15 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
+            var baseUrl = this.BaseURI;
+            if (_window.BaseUrls != null)
+            {
+                if (_window.BaseUrls.Contains(baseUrl) == false)
+                {
+                    _window.BaseUrls.Add(baseUrl);
+                }
+            }
+
             IList<Tuple<string, SvgFontFaceElement>> fontUrls = this.GetFontUrls();
 
             if (fontUrls == null || fontUrls.Count == 0)
@@ -1233,13 +1326,14 @@ namespace SharpVectors.Dom.Svg
             _isFontsLoaded = false;
 
             //TODO: Trying a background run...
-            var loadTask = Task.Factory.StartNew(() => {
+            var loadTask = Task.Factory.StartNew(() =>
+            {
                 SvgWindow ownedWindow = _window.CreateOwnedWindow();
                 ownedWindow.LoadFonts = false;
 
                 for (int i = 0; i < fontUrls.Count; i++)
                 {
-                    var fontUrl  = fontUrls[i].Item1;
+                    var fontUrl = fontUrls[i].Item1;
                     var fontFace = fontUrls[i].Item2;
                     try
                     {
@@ -1283,7 +1377,7 @@ namespace SharpVectors.Dom.Svg
         {
             if (string.IsNullOrWhiteSpace(fontPath) || !File.Exists(fontPath))
             {
-//                Trace.WriteLine("Private font not found: " + fontPath);
+                //                Trace.WriteLine("Private font not found: " + fontPath);
                 return;
             }
 
@@ -1308,7 +1402,7 @@ namespace SharpVectors.Dom.Svg
                         var fontNode = this.ImportNode(svgFont, true);
                         this.DocumentElement.AppendChild(fontNode);
 
-//                        this.SvgFonts.Add(svgFont);
+                        //                        this.SvgFonts.Add(svgFont);
                     }
                 }
             }

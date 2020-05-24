@@ -80,9 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="PopupMessage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="PopupMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />

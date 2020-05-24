@@ -383,7 +383,7 @@
     <category label="Structures">
         <test source="struct-cond-01-t.svg" title="struct-cond-01-t" state="success" comment="" description="This test evaluates a switch statement." />
         <test source="struct-cond-02-t.svg" title="struct-cond-02-t" state="success" comment="The result will depend on the language of the system." description="This tests ability to use the 'systemLanguage' as a test attribute within a switch element." />
-        <test source="struct-cond-03-t.svg" title="struct-cond-03-t" state="failure" comment="" description="Tests the &amp;lt;switch&amp;gt; element with requiredFeatures." />
+        <test source="struct-cond-03-t.svg" title="struct-cond-03-t" state="success" comment="" description="Tests the &amp;lt;switch&amp;gt; element with requiredFeatures." />
         <test source="struct-cond-overview-02-f.svg" title="struct-cond-overview-02-f" state="failure" comment="" description="Test that 'use' instances of elements with failing conditional processing attributes are not rendered." />
         <test source="struct-cond-overview-03-f.svg" title="struct-cond-overview-03-f" state="failure" comment="" description="Test that conditional processing attributes set to an empty string are evaluated as false." />
         <test source="struct-cond-overview-04-f.svg" title="struct-cond-overview-04-f" state="failure" comment="" description="Test that elements with conditional processing attributes that evaluate to true do not render if their parent contains conditional processing attributes that evaluate to false." />
@@ -417,7 +417,7 @@
         <test source="struct-group-02-b.svg" title="struct-group-02-b" state="success" comment="" description="The purpose of this test is to check the nesting of SVG elements." />
         <test source="struct-group-03-t.svg" title="struct-group-03-t" state="success" comment="" description="This test validates that properties are inherited (or not, depending on their defintion), from a group to its children." />
         <test source="struct-image-01-t.svg" title="struct-image-01-t" state="success" comment="" description="The image test case checks to see if the required raster image formats are supported." />
-        <test source="struct-image-02-b.svg" title="struct-image-02-b" state="failure" comment="" description="To test the 9 structure elements and their relationships." />
+        <test source="struct-image-02-b.svg" title="struct-image-02-b" state="success" comment="" description="To test the 9 structure elements and their relationships." />
         <test source="struct-image-03-t.svg" title="struct-image-03-t" state="partial" comment="" description="This test verifies the support for gamma correction of displayed PNG images." />
         <test source="struct-image-04-t.svg" title="struct-image-04-t" state="success" comment="" description="The image test case checks to see if the basic image formats allowed in are supported using the data: URI schema and base64 encoding." />
         <test source="struct-image-05-b.svg" title="struct-image-05-b" state="success" comment="" description="The image test case checks to see if the svg image format are supported." />
@@ -431,7 +431,7 @@
         <test source="struct-image-13-f.svg" title="struct-image-13-f" state="success" comment="" description="Tests that different PNG image types are correctly handled. These images are non-interlaced." />
         <test source="struct-image-14-f.svg" title="struct-image-14-f" state="success" comment="" description="Tests that different PNG image types are correctly handled. These images are interlaced." />
         <test source="struct-image-15-f.svg" title="struct-image-15-f" state="success" comment="" description="The first row tests that alpha PNG images are correctly displayed as part of an SVG image, ignoring the background colour in the image which is only used to display the PNG image stand-alone." />
-        <test source="struct-image-16-f.svg" title="struct-image-16-f" state="failure" comment="" description="Test that the 'image' element loads the same resources as when it's standalone." />
+        <test source="struct-image-16-f.svg" title="struct-image-16-f" state="success" comment="" description="Test that the 'image' element loads the same resources as when it's standalone." />
         <test source="struct-image-17-b.svg" title="struct-image-17-b" state="success" comment="" description="Verifies that SVG images referenced from an &amp;lt;image&amp;gt; element do not have any scripting or animation run." />
         <test source="struct-image-18-f.svg" title="struct-image-18-f" state="failure" comment="" description="Test referencing an svg from an 'image' element, where the referenced svg has no viewBox and a larger width and height than the 'image' element viewport." />
         <test source="struct-image-19-f.svg" title="struct-image-19-f" state="success" comment="" description="Test referencing an svg from an 'image' element, where the referenced svg has a viewBox and a larger width and height than the 'image' element viewport." />

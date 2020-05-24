@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Gdi;
@@ -36,6 +37,10 @@ namespace SharpVectors.Renderers.Forms
             if (control == null)
             {
                 throw new ArgumentNullException(nameof(control), "control cannot be null");
+            }
+            if (this.BaseUrls == null)
+            {
+                this.BaseUrls = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             }
 
             _preferUserSize = true;

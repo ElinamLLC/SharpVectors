@@ -53,19 +53,57 @@ namespace SharpVectors.Renderers.Wpf
         {
             SvgSvgElement root = docElement.RootElement as SvgSvgElement;
 
+            var baseUrl = root.BaseURI;
+
+            var context = _renderer.Context;
+            if (!string.IsNullOrWhiteSpace(baseUrl) && context != null)
+            {
+                context.AddUrl(baseUrl);
+
+                var window = docElement.Window;
+                if (window != null && window.BaseUrls == null)
+                {
+                    window.BaseUrls = context.BaseUrls;
+                }
+            }
+
             if (root != null)
             {
                 this.Render(root);
+            }
+
+            if (!string.IsNullOrWhiteSpace(baseUrl) && context != null)
+            {
+                context.RemoveUrl(baseUrl);
             }
         }
 
         public void Render(SvgDocument docElement)
         {
+            var baseUrl = docElement.BaseURI;
+
+            var context = _renderer.Context;
+            if (!string.IsNullOrWhiteSpace(baseUrl) && context != null)
+            {
+                context.AddUrl(baseUrl);
+
+                var window = docElement.Window;
+                if (window != null && window.BaseUrls == null)
+                {
+                    window.BaseUrls = context.BaseUrls;
+                }
+            }
+
             SvgSvgElement root = docElement.RootElement as SvgSvgElement;
 
             if (root != null)
             {
                 this.Render(root);
+            }
+
+            if (!string.IsNullOrWhiteSpace(baseUrl) && context != null)
+            {
+                context.RemoveUrl(baseUrl);
             }
         }
 
