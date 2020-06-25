@@ -865,10 +865,32 @@
             method descriptions.
             </summary>
         </member>
+        <member name="M:SharpVectors.Dom.Events.EventException.#ctor(SharpVectors.Dom.Events.EventExceptionCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Dom.Events.EventException"/> class with event exception code.
+            </summary>
+            <param name="code">
+            An instance of <see cref="T:SharpVectors.Dom.Events.EventExceptionCode"/> defining the event exception code.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Events.EventException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Dom.Events.EventException"/> class with serialized data.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.
+            </param>
+        </member>
         <member name="P:SharpVectors.Dom.Events.EventException.Code">
             <summary>
             An integer indicating the type of error generated.
             </summary>
+            <value>
+            An enumeration of the type <see cref="T:SharpVectors.Dom.Events.EventExceptionCode"/> specifying the type of error generated.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.Events.EventPhase">
             <summary>

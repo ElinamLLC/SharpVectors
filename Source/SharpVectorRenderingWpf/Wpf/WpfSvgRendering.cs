@@ -210,8 +210,8 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else if (settings.EnsureViewboxSize)
                 {
-                    var bounds = _drawGroup.ClipGeometry.Bounds;
-                    if (!bounds.IsEmpty)
+                    var bounds = _drawGroup.ClipGeometry.Bounds;                    
+                    if (!bounds.IsEmpty && !bounds.Width.Equals(0) && !bounds.Height.Equals(0))
                     {
                         using (var ctx = _drawGroup.Open())
                         {
@@ -335,7 +335,7 @@ namespace SharpVectors.Renderers.Wpf
                 bounds.Union(_drawGroup.ClipGeometry.Bounds);
             }
 
-            if (bounds.IsEmpty || _context.Settings == null)
+            if (bounds.IsEmpty || bounds.Width.Equals(0) || bounds.Height.Equals(0) || _context.Settings == null)
             {
                 return;
             }
@@ -381,6 +381,10 @@ namespace SharpVectors.Renderers.Wpf
             double y      = svgElm.Y.AnimVal.Value;
             double width  = svgElm.Width.AnimVal.Value;
             double height = svgElm.Height.AnimVal.Value;
+            if (width.Equals(0.0) || height.Equals(0.0))
+            {
+                return drawGroup;
+            }
 
             Rect clipRect = new Rect(x, y, width, height);
 

@@ -3,7 +3,7 @@ using System;
 namespace SharpVectors.Dom.Svg
 {
     /// <summary>
-    /// The SvgGElement interface corresponds to the 'g' element.
+    /// This implements the <see cref="ISvgGElement"/> interface, which corresponds to the 'g' element.
     /// </summary>
     public sealed class SvgGElement : SvgTransformableElement, ISvgGElement
     {
@@ -21,7 +21,7 @@ namespace SharpVectors.Dom.Svg
             : base(prefix, localname, ns, doc)
         {
             _externalResourcesRequired = new SvgExternalResourcesRequired(this);
-            _svgTests                  = new SvgTests(this);
+            _svgTests = new SvgTests(this);
         }
 
         #endregion
@@ -37,8 +37,7 @@ namespace SharpVectors.Dom.Svg
         /// </value>
         public override SvgRenderingHint RenderingHint
         {
-            get
-            {
+            get {
                 return SvgRenderingHint.Containment;
             }
         }
@@ -49,8 +48,7 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedBoolean ExternalResourcesRequired
         {
-            get
-            {
+            get {
                 return _externalResourcesRequired.ExternalResourcesRequired;
             }
         }

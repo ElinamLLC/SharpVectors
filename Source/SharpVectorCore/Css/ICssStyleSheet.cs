@@ -33,7 +33,6 @@ namespace SharpVectors.Dom.Css
 		ICssRuleList CssRules
 		{
 			get;
-			set;
 		}
 	
 		/// <summary>

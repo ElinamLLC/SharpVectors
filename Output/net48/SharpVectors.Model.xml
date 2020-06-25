@@ -838,7 +838,7 @@
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgGElement">
             <summary>
-            The SvgGElement interface corresponds to the 'g' element.
+            This implements the <see cref="T:SharpVectors.Dom.Svg.ISvgGElement"/> interface, which corresponds to the 'g' element.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgGElement.RenderingHint">

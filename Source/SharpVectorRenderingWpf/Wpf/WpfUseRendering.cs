@@ -121,6 +121,15 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 context.Pop();
+
+                if (_drawGroup.Children.Count == 0)
+                {
+                    DrawingGroup curGroup = _context.Peek();
+                    if (curGroup != null)
+                    {
+                        curGroup.Children.Remove(_drawGroup);
+                    }
+                }
             }
 
             base.AfterRender(renderer);

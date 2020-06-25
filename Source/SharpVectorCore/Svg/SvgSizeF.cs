@@ -256,8 +256,7 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public override int GetHashCode()
         {
-            double[] values = this.GetHashValues();
-            return values[0].GetHashCode() ^ values[0].GetHashCode();
+            return this.Width.GetHashCode() ^ this.Height.GetHashCode();
         }
 
         /// <summary>
@@ -312,15 +311,6 @@ namespace SharpVectors.Dom.Svg
         public static SvgSizeF Subtract(SvgSizeF sz1, SvgSizeF sz2)
         {
             return new SvgSizeF(sz1.Width - sz2.Width, sz1.Height - sz2.Height);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private double[] GetHashValues()
-        {
-            return new double[] { _width, _height };
         }
 
         #endregion

@@ -776,8 +776,8 @@ namespace SharpVectors.Dom.Svg
                     return null;
                 }
                 string fileExt = Path.GetExtension(localFile);
-                if (!string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
-                    && !string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(fileExt, SvgConstants.FileExt, StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(fileExt, SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase))
                 {
                     Trace.TraceError("GetNodeByUri: Locally referenced file not valid: " + localFile);
                     return null;
@@ -1216,10 +1216,10 @@ namespace SharpVectors.Dom.Svg
                     }
 
                     string fontFamily = fontRule.FontFamily;
-                    string fontEncoding = fontRule.EmbeddedEncoding;
+//                    string fontEncoding = fontRule.EmbeddedEncoding;
                     string fontMimeType = fontRule.EmbeddedMimeType;
                     if (!string.IsNullOrWhiteSpace(fontFamily)
-                        && !string.IsNullOrWhiteSpace(fontFamily)
+//                        && !string.IsNullOrWhiteSpace(fontFamily)
                         && !string.IsNullOrWhiteSpace(fontMimeType)
                         && !fontMimeType.Equals("base64", StringComparison.OrdinalIgnoreCase))
                     {

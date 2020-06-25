@@ -164,6 +164,23 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public bool IsHiddenCss
+        {
+            get {
+                var sVisibility = this.GetAttribute("visibility");
+                if (string.Equals(sVisibility, "hidden", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+                var sDisplay = this.GetAttribute("display");
+                if (string.Equals(sDisplay, "none", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         #endregion
 
         #region ISvgLangSpace Members

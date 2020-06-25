@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Diagnostics;
 
 using System.Windows.Media;
@@ -102,7 +103,29 @@ namespace SharpVectors.Renderers.Wpf
 
                 string sVisibility = element.GetPropertyValue("visibility");
                 string sDisplay = element.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                if (string.Equals(sVisibility, "hidden", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isOverriden = false;
+                    foreach (XmlNode child in element.ChildNodes)
+                    {
+                        if (child.NodeType == XmlNodeType.Element)
+                        {
+                            var svgElem = child as SvgElement;
+                            if (svgElem != null && string.Equals(svgElem.GetAttribute("visibility"),
+                                "visible", StringComparison.OrdinalIgnoreCase))
+                            {
+                                isOverriden = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!isOverriden)
+                    {
+                        _drawGroup.Opacity = 0;
+                    }
+                }
+                else if (string.Equals(sDisplay, "none", StringComparison.OrdinalIgnoreCase))
                 {
                     _drawGroup.Opacity = 0;
                 }

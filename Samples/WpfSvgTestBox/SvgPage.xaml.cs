@@ -348,6 +348,7 @@ namespace WpfSvgTestBox
                 {
                     return false;
                 }
+
                 DrawingGroup drawing = _fileReader.Read(filePath, _directoryInfo);
                 if (drawing == null)
                 {

@@ -117,6 +117,13 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public SvgUriReference UriReference
+        {
+            get {
+                return _uriReference;
+            }
+        }
+
         public XmlElement ReferencedElement
         {
             get {

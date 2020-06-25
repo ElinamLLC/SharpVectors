@@ -182,6 +182,34 @@ namespace SharpVectors.Renderers.Wpf
         {
             hashCode = -1;
 
+            if (element.Href != null && !string.IsNullOrWhiteSpace(element.Href.AnimVal))
+            {
+                var hrefVal = element.Href.AnimVal;
+                int hashStart = hrefVal.IndexOf("#", StringComparison.OrdinalIgnoreCase);
+                if (hashStart > -1)
+                {
+                    var svgRoot = element.OwnerSvgElement;
+                    var elemId = hrefVal.Substring(hashStart + 1).Trim();
+                    if (!string.IsNullOrWhiteSpace(elemId) 
+                        && elemId.Equals(svgRoot.Id, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            var refUri = element.UriReference.AbsoluteUri;
+            if (!string.IsNullOrWhiteSpace(refUri))
+            {
+                var context = _renderer.Context;
+                if (context != null && context.ContainsUrl(refUri))
+                {
+                    return false;
+                }
+
+                context.AddUrl(refUri);
+            }
+
             string useId = element.Id;
             if (string.IsNullOrWhiteSpace(useId))
             {
@@ -207,6 +235,17 @@ namespace SharpVectors.Renderers.Wpf
 
         private bool EndUseElement(SvgUseElement element, int hashCode)
         {
+            var refUri = element.UriReference.AbsoluteUri;
+            if (!string.IsNullOrWhiteSpace(refUri))
+            {
+                var context = _renderer.Context;
+                if (context != null && context.ContainsUrl(refUri))
+                {
+                    context.RemoveUrl(refUri);
+                }
+
+            }
+
             bool isRemoved = _useElements.Remove(hashCode);
             string useId = element.Id;
             if (string.IsNullOrWhiteSpace(useId))

@@ -182,9 +182,6 @@ namespace SharpVectors.Dom.Css
 
                 return _cssRules;
             }
-            set {
-                throw new NotImplementedException();
-            }
         }
 
         /// <summary>

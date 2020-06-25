@@ -125,7 +125,8 @@ namespace SharpVectors.Renderers.Wpf
                 _drawGroup.Transform = transform;
             }
 
-            if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
+            if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0) 
+                && !elmRect.Equals(this.GetRootBounds()))
             {
                 // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
                 // dealing with the root SVG element...
@@ -346,16 +347,37 @@ namespace SharpVectors.Renderers.Wpf
             double y      = svgElm.Y.AnimVal.Value;
             double width  = svgElm.Width.AnimVal.Value;
             double height = svgElm.Height.AnimVal.Value;
+            if (width.Equals(0.0) || height.Equals(0.0))
+            {
+                return drawGroup;
+            }
 
             Rect clipRect = new Rect(x, y, width, height);
 
-            if (!clipRect.IsEmpty)
+            if (!clipRect.IsEmpty && !clipRect.Equals(this.GetRootBounds()))
             {
                 drawGroup = new DrawingGroup();
                 drawGroup.ClipGeometry = new RectangleGeometry(clipRect);
             }
 
             return drawGroup;
+        }
+
+        private Rect GetRootBounds()
+        {
+            if (_svgElement == null)
+            {
+                return Rect.Empty;
+            }
+            var rootSvg = _svgElement.OwnerSvgElement;
+
+            var viewBox = rootSvg.ViewBox;
+            if (viewBox != null && viewBox.AnimVal != null)
+            {
+                var svgRect = viewBox.AnimVal;
+                return new Rect(svgRect.X, svgRect.Y, svgRect.Width, svgRect.Height);
+            }
+            return Rect.Empty;
         }
 
         #endregion

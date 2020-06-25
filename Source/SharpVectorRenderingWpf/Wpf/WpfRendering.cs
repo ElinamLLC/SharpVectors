@@ -420,9 +420,16 @@ namespace SharpVectors.Renderers.Wpf
 
                     if (eClipPath != null)
                     {
+                        if (eClipPath.IsHiddenCss)
+                        {
+                            _clipGeometry = Geometry.Empty;
+                            return;
+                        }
+
                         GeometryCollection geomColl = CreateClippingRegion(eClipPath, context);
                         if (geomColl == null || geomColl.Count == 0)
                         {
+                            _clipGeometry = Geometry.Empty;
                             return;
                         }
                         Geometry gpClip = geomColl[0];
@@ -517,6 +524,12 @@ namespace SharpVectors.Renderers.Wpf
 
             if (maskElement != null)
             {
+                if (maskElement.IsHiddenCss)
+                {
+                    this.Masking = Brushes.Transparent;
+                    return;
+                }
+
                 WpfDrawingRenderer renderer = new WpfDrawingRenderer();
                 renderer.Window = _svgElement.OwnerDocument.Window as SvgWindow;
 
@@ -529,6 +542,20 @@ namespace SharpVectors.Renderers.Wpf
 
                 renderer.RenderMask(maskElement, maskContext);
                 DrawingGroup maskDrawing = renderer.Drawing;
+                if (maskDrawing.Children.Count == 0 || maskDrawing.Opacity == 0)
+                {
+                    this.Masking = Brushes.Transparent;
+                    return;
+                }
+                else if (maskDrawing.Children.Count == 1)
+                {
+                    var childGroup = maskDrawing.Children[0] as DrawingGroup;
+                    if (childGroup != null && (childGroup.Children.Count == 0 || childGroup.Opacity == 0))
+                    {
+                        this.Masking = Brushes.Transparent;
+                        return;
+                    }
+                }
 
                 Rect bounds = new Rect(0, 0, 1, 1);
                 //Rect destRect = GetMaskDestRect(maskElement, bounds);
@@ -959,7 +986,7 @@ namespace SharpVectors.Renderers.Wpf
                     SvgUseElement useElement = (SvgUseElement)node;
 
                     XmlElement refEl = useElement.ReferencedElement;
-                    if (refEl != null)
+                    if (refEl != null && !useElement.IsHiddenCss)
                     {
                         XmlElement refElParent = (XmlElement)refEl.ParentNode;
                         useElement.OwnerDocument.Static = true;
@@ -975,7 +1002,7 @@ namespace SharpVectors.Renderers.Wpf
                             }
 
                             SvgStyleableElement element = useChild as SvgStyleableElement;
-                            if (element != null && element.RenderingHint == SvgRenderingHint.Shape)
+                            if (element != null && element.RenderingHint == SvgRenderingHint.Shape && !element.IsHiddenCss)
                             {
                                 Geometry childPath = CreateGeometry(element, context.OptimizePath);
 
@@ -995,7 +1022,7 @@ namespace SharpVectors.Renderers.Wpf
                 else
                 {
                     SvgStyleableElement element = node as SvgStyleableElement;
-                    if (element != null)
+                    if (element != null && !element.IsHiddenCss)
                     {
                         if (element.RenderingHint == SvgRenderingHint.Shape)
                         {

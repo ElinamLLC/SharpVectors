@@ -958,7 +958,20 @@ namespace SharpVectors.Dom.Svg
         /// <returns>The matching element.</returns>
         public XmlElement GetElementById(string elementId)
         {
-            return this.GetElementById(elementId);
+            if (string.IsNullOrWhiteSpace(elementId))
+            {
+                return null;
+            }
+
+            var svgDoc = this.ParentNode as SvgDocument;
+            if (svgDoc != null)
+            {
+                return svgDoc.GetElementById(elementId);
+            }
+
+            var xpath = string.Format("//*[@id='{0}']", elementId);
+
+            return this.SelectSingleNode(xpath) as XmlElement;
         }
 
         #endregion

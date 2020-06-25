@@ -114,6 +114,22 @@ namespace SharpVectors.Renderers.Gdi
         {
             hashCode = -1;
 
+            if (element.Href != null && !string.IsNullOrWhiteSpace(element.Href.AnimVal))
+            {
+                var hrefVal = element.Href.AnimVal;
+                int hashStart = hrefVal.IndexOf("#", StringComparison.OrdinalIgnoreCase);
+                if (hashStart > -1)
+                {
+                    var svgRoot = element.OwnerSvgElement;
+                    var elemId = hrefVal.Substring(hashStart + 1).Trim();
+                    if (!string.IsNullOrWhiteSpace(elemId)
+                        && elemId.Equals(svgRoot.Id, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
+                }
+            }
+
             string useId = element.Id;
             if (string.IsNullOrWhiteSpace(useId))
             {
