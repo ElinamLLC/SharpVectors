@@ -1,0 +1,47 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5380 2370" class="layout">
+  <defs>
+    <pattern id="svg-diagonalHatch" patternUnits="userSpaceOnUse" width="25" height="25">
+      <path d="M-10,10 l20,-20 M0,25 l25,-25 M170,190 l20,-20" class="svg-pattern" stroke="grey" stroke-width="2" />
+    </pattern>
+  </defs>
+  <rect width="5280" height="2070" x="0" y="300" class="svg-sheet" stroke="grey" stroke-width="5" fill="url(#svg-diagonalHatch)" />
+  <style> .dim { font: bold 100px sans-serif; } </style>
+  <style> .ref { font: bold 125px sans-serif; fill:grey; } </style>
+  <rect x="15" y="315" width="2600" height="1150" class="svg-part svg-l2" fill="rgb(71, 193, 161)" stroke="Red" onmousemove="showSVGTooltip(evt,'5902;CO 2600 x 1150');" onmouseout="hideSVGTooltip();" />
+  <text x="1315" y="890" class="ref" text-anchor="middle">202011: 1111</text>
+  <line stroke="blue" stroke-width="10" x1="20" x2="2610" y1="325" y2="325" />
+  <line stroke="blue" stroke-width="10" x1="20" x2="2610" y1="1455" y2="1455" />
+  <line stroke="blue" stroke-width="10" x1="25" x2="25" y1="320" y2="1460" />
+  <line stroke="blue" stroke-width="10" x1="2605" x2="2605" y1="320" y2="1460" />
+  <text x="1315" y="890" class="dim" text-anchor="middle" transform="translate(0, -455)">2600</text>
+  <text x="1315" y="890" class="dim" text-anchor="middle" transform="rotate(-90,1315,890) translate(0, -1180)">1150</text>
+  <rect x="2619.8" y="315" width="2600" height="1150" class="svg-part svg-l2" fill="rgb(71, 193, 161)" stroke="Red" onmousemove="showSVGTooltip(evt,'5902;CO 2600 x 1150');" onmouseout="hideSVGTooltip();" />
+  <text x="3919.8" y="890" class="ref" text-anchor="middle">202011: 1111</text>
+  <line stroke="blue" stroke-width="10" x1="2624.8" x2="5214.8" y1="325" y2="325" />
+  <line stroke="blue" stroke-width="10" x1="2624.8" x2="5214.8" y1="1455" y2="1455" />
+  <line stroke="blue" stroke-width="10" x1="2629.8" x2="2629.8" y1="320" y2="1460" />
+  <line stroke="blue" stroke-width="10" x1="5209.8" x2="5209.8" y1="320" y2="1460" />
+  <text x="3919.8" y="890" class="dim" text-anchor="middle" transform="translate(0, -455)">2600</text>
+  <text x="3919.8" y="890" class="dim" text-anchor="middle" transform="rotate(-90,3919.8,890) translate(0, -1180)">1150</text>
+  <line x1="0" y1="2272.2" x2="5282.4" y2="2272.2" stroke="red" stroke-width="4.8" />
+  <rect x="15" y="1469.8" width="2600" height="800" class="svg-part svg-l2" fill="rgb(71, 193, 161)" stroke="Red" onmousemove="showSVGTooltip(evt,'5906;CO 2600 x 800');" onmouseout="hideSVGTooltip();" />
+  <text x="1315" y="1869.8" class="ref" text-anchor="middle">202017: 1111</text>
+  <line stroke="blue" stroke-width="10" x1="20" x2="2610" y1="1479.8" y2="1479.8" />
+  <line stroke="blue" stroke-width="10" x1="20" x2="2610" y1="2259.8" y2="2259.8" />
+  <line stroke="blue" stroke-width="10" x1="25" x2="25" y1="1474.8" y2="2264.8" />
+  <line stroke="blue" stroke-width="10" x1="2605" x2="2605" y1="1474.8" y2="2264.8" />
+  <text x="1315" y="1869.8" class="dim" text-anchor="middle" transform="translate(0, -280)">2600</text>
+  <text x="1315" y="1869.8" class="dim" text-anchor="middle" transform="rotate(-90,1315,1869.8) translate(0, -1180)">800</text>
+  <rect x="2619.8" y="1469.8" width="2600" height="800" class="svg-part svg-l2" fill="rgb(71, 193, 161)" stroke="Red" onmousemove="showSVGTooltip(evt,'5906;CO 2600 x 800');" onmouseout="hideSVGTooltip();" />
+  <text x="3919.8" y="1869.8" class="ref" text-anchor="middle">202017: 1111</text>
+  <line stroke="blue" stroke-width="10" x1="2624.8" x2="5214.8" y1="1479.8" y2="1479.8" />
+  <line stroke="blue" stroke-width="10" x1="2624.8" x2="5214.8" y1="2259.8" y2="2259.8" />
+  <line stroke="blue" stroke-width="10" x1="2629.8" x2="2629.8" y1="1474.8" y2="2264.8" />
+  <line stroke="blue" stroke-width="10" x1="5209.8" x2="5209.8" y1="1474.8" y2="2264.8" />
+  <text x="3919.8" y="1869.8" class="dim" text-anchor="middle" transform="translate(0, -280)">2600</text>
+  <text x="3919.8" y="1869.8" class="dim" text-anchor="middle" transform="rotate(-90,3919.8,1869.8) translate(0, -1180)">800</text>
+  <line x1="0" y1="1467.4" x2="5282.4" y2="1467.4" stroke="red" stroke-width="4.8" />
+  <text x="2640" y="280" class="dim" text-anchor="middle">5280</text>
+  <text x="0" y="1335" class="dim" text-anchor="middle" transform="rotate(-90,0,1335) translate(0, 5370)">2070</text>
+  <text x="0" y="150" class="ref" word-spacing="4">753737 - xxxFP15 - P638ST10</text>
+</svg>
