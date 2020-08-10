@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace SharpVectors.Dom.Css
 {
@@ -60,13 +61,30 @@ namespace SharpVectors.Dom.Css
 
         private static readonly Regex _reUrlTidy = new Regex(@"(^|{|})(\\s*{[^}]*})");
 
-        private static readonly Regex _reEmbeddedUrl = new Regex(@"^(?<name>[A-Za-z\-0-9]+)\s*:\s*url\(data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>[^;\}!]+)(!\s?(?<priority>important))?;?");
+        private static readonly Regex _reEmbeddedUrl = new Regex(
+            @"^(?<name>[A-Za-z\-0-9]+)\s*:\s*url\(data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>[^;\}!]+)(!\s?(?<priority>important))?;?");
 
         // Enter properties that can validly contain a URL here (in lowercase):
         private static readonly ISet<string> _validUrlProps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "src", "background", "background-image"
         };
+
+        // font: font-style font-variant font-weight font-size/line-height font-family
+        // NOTE: font-stretch is not yet supported!
+        private static readonly Regex _reFont = new Regex(@"^\s*(?=(?:(?:[-a-z]+\s*){0,2}(italic|oblique))?)"
+                + @"(?=(?:(?:[-a-z]+\s*){0,2}(small-caps))?)"
+                + @"(?=(?:(?:[-a-z]+\s*){0,2}(bold(?:er)?|lighter|[1-9]00\b))?)"
+                + @"(?:(?:normal|\1|\2|\3)\s*){0,3}"
+                + @"((?:xx?-)?(?:small|large)|medium|smaller|larger|[.\d]+(?:\%|in|[cem]m|ex|p[ctx])?)?"
+                + @"(?:\s*\/\s*(normal|[.\d]+(?:\%|in|[cem]m|ex|p[ctx])?))?\s*([-,\""\sa-z]+|(['""])(?:(?!\1|\\).|\\.)*\1?)?\s*$", 
+            RegexOptions.IgnoreCase);
+
+        private static readonly Regex _reFontStretch = new Regex(
+            @"\s*(ultra-condensed|extra-condensed|condensed|semi-condensed|semi-expanded|expanded|extra-expanded|ultra-expanded)?$", 
+            RegexOptions.IgnoreCase);
+        private static readonly Regex _reFontWeight = new Regex(
+            @"\s*(bold(?:er)?|lighter|[1-9]00)?$", RegexOptions.IgnoreCase);
 
         #endregion
 
@@ -333,6 +351,57 @@ namespace SharpVectors.Dom.Css
                         }
                     }
                 }
+                else if (string.Equals(name, "font"))
+                {
+                    var fontParts = new string[] { 
+                        "font", "font-style", "font-variant", "font-weight", 
+                        "font-size", "line-height", "font-family", "font-family", "font-stretch" 
+                    };
+                    int count = 0;
+
+                    // The font CSS shorthand property sets all the different properties of an element's font.
+                    var matchFont = _reFont.Match(value);
+                    if (!matchFont.Success)
+                    {
+                        var fontValue = value.Trim();
+                        var indexSel = fontValue.IndexOf(' ');
+                        if (indexSel > 0)
+                        {
+                            var preText = fontValue.Substring(0, indexSel).TrimStart();
+                            fontValue = fontValue.Substring(indexSel).TrimStart();
+
+                            var tempMatch = _reFontStretch.Match(preText);
+                            if (tempMatch.Success)
+                            {
+                                var fontStretch = fontParts[8];
+                                _styles.Add(fontStretch, new CssStyleBlock(fontStretch, tempMatch.Value, string.Empty, _origin));
+                            }
+                            else
+                            {
+                                tempMatch = _reFontWeight.Match(preText);
+                                if (tempMatch.Success)
+                                {
+                                    var fontWeight = fontParts[3];
+                                    _styles.Add(fontWeight, new CssStyleBlock(fontWeight, tempMatch.Value, string.Empty, _origin));
+                                }
+                            }
+                        }
+                        matchFont = _reFont.Match(fontValue);
+                    }
+                    if (matchFont.Success)
+                    {
+                        foreach (Group group in matchFont.Groups)
+                        {
+                            if (group.Success)
+                            {
+                                var fontPart = fontParts[count];
+                                _styles.Add(fontPart, new CssStyleBlock(fontPart, group.Value, string.Empty, _origin));
+                            }
+                            count++;
+                        }
+                    }
+                }
+
                 string prio = match.Groups["priority"].Value;
 
                 CssStyleBlock style = new CssStyleBlock(name, value, prio, _origin);

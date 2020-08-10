@@ -15,6 +15,7 @@ using System.Windows.Controls.Primitives;
 using IoPath = System.IO.Path;
 
 using SharpVectors.Runtime.Utils;
+using System.Runtime.CompilerServices;
 
 namespace SharpVectors.Runtime
 {
@@ -146,6 +147,13 @@ namespace SharpVectors.Runtime
         {
             get {
                 return _linkObjects;
+            }
+        }
+
+        public DrawingVisual HostVisual
+        {
+            get {
+                return _hostVisual;
             }
         }
 

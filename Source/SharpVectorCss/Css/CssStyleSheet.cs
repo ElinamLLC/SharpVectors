@@ -90,7 +90,7 @@ namespace SharpVectors.Dom.Css
 
         #endregion
 
-        #region Private methods
+        #region Private Methods
 
         private string StringReplaceEvaluator(Match match)
         {

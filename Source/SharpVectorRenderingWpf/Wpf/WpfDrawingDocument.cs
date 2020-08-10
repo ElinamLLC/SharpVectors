@@ -14,7 +14,7 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
-        private Transform _displayTransform;
+        private GeneralTransform _displayTransform;
 
         private bool _isEnumerated;
         private SvgDocument _svgDocument;
@@ -39,7 +39,7 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Properties
 
-        public Transform DisplayTransform
+        public GeneralTransform DisplayTransform
         {
             get {
                 return _displayTransform;
@@ -310,7 +310,8 @@ namespace SharpVectors.Renderers.Wpf
             var svgElement = this.GetSvgByUniqueId(uniqueId);
             if (svgElement == null)
             {
-                return WpfHitTestResult.Empty;
+                return new WpfHitTestResult(point, null, svgDrawing);
+//                return WpfHitTestResult.Empty;
             }
 
             return new WpfHitTestResult(point, svgElement, svgDrawing);
@@ -332,7 +333,8 @@ namespace SharpVectors.Renderers.Wpf
             var svgElement = this.GetSvgByUniqueId(uniqueId);
             if (svgElement == null)
             {
-                return WpfHitTestResult.Empty;
+                return new WpfHitTestResult(rect, null, svgDrawing);
+//                return WpfHitTestResult.Empty;
             }
 
             return new WpfHitTestResult(rect, svgElement, svgDrawing);

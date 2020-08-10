@@ -28,7 +28,7 @@ namespace SharpVectors.Dom.Css
         /// <summary>
         /// The calculated specificity of the owner selector
         /// </summary>
-        private int _specificity = -1;
+        private int _specificity;
 
         private CssValue _cssValue;
 
@@ -38,10 +38,11 @@ namespace SharpVectors.Dom.Css
 
         public CssStyleBlock(string name, string val, string priority, CssStyleSheetType origin)
         {
-            _name     = name.Trim();
-            _value    = val.Trim();
-            _priority = priority.Trim();
-            _origin   = origin;
+            _specificity = -1;
+            _name        = name.Trim();
+            _value       = val.Trim();
+            _priority    = priority.Trim();
+            _origin      = origin;
         }
 
         public CssStyleBlock(string name, string val, string priority, int specificity,

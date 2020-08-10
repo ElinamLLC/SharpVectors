@@ -350,6 +350,10 @@ namespace SharpVectors.Renderers.Wpf
                 string prop  = stop.GetAttribute("stop-color");
                 string style = stop.GetAttribute("style");
                 Color color  = Colors.Transparent; // no auto-inherited...
+                if (string.IsNullOrWhiteSpace(prop))
+                {
+                    prop = stop.GetPropertyValue("stop-color");
+                }
                 if (!string.IsNullOrWhiteSpace(prop) || !string.IsNullOrWhiteSpace(style))
                 {
                     WpfSvgColor svgColor = new WpfSvgColor(stop, "stop-color");
@@ -473,34 +477,33 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     // uniform scaling
                     scaleX = Math.Max(scaleX, scaleY);
-
                     scaleY = scaleX;
 
                     if (alignment == SvgPreserveAspectRatioType.XMidYMax ||
-                      alignment == SvgPreserveAspectRatioType.XMidYMid ||
-                      alignment == SvgPreserveAspectRatioType.XMidYMin)
+                        alignment == SvgPreserveAspectRatioType.XMidYMid ||
+                        alignment == SvgPreserveAspectRatioType.XMidYMin)
                     {
-                        // align to the Middle X
+                        // align to the middle X
                         translateX = (rectToFit.X + rectToFit.Width / 2) - scaleX * (viewBox.X + viewBox.Width / 2);
                     }
                     else if (alignment == SvgPreserveAspectRatioType.XMaxYMax ||
-                      alignment == SvgPreserveAspectRatioType.XMaxYMid ||
-                      alignment == SvgPreserveAspectRatioType.XMaxYMin)
+                             alignment == SvgPreserveAspectRatioType.XMaxYMid ||
+                             alignment == SvgPreserveAspectRatioType.XMaxYMin)
                     {
                         // align to the right X
                         translateX = (rectToFit.Width - viewBox.Width * scaleX);
                     }
 
                     if (alignment == SvgPreserveAspectRatioType.XMaxYMid ||
-                      alignment == SvgPreserveAspectRatioType.XMidYMid ||
-                      alignment == SvgPreserveAspectRatioType.XMinYMid)
+                        alignment == SvgPreserveAspectRatioType.XMidYMid ||
+                        alignment == SvgPreserveAspectRatioType.XMinYMid)
                     {
-                        // align to the Middle Y
+                        // align to the middle Y
                         translateY = (rectToFit.Y + rectToFit.Height / 2) - scaleY * (viewBox.Y + viewBox.Height / 2);
                     }
                     else if (alignment == SvgPreserveAspectRatioType.XMaxYMax ||
-                      alignment == SvgPreserveAspectRatioType.XMidYMax ||
-                      alignment == SvgPreserveAspectRatioType.XMinYMax)
+                             alignment == SvgPreserveAspectRatioType.XMidYMax ||
+                             alignment == SvgPreserveAspectRatioType.XMinYMax)
                     {
                         // align to the bottom Y
                         translateY = (rectToFit.Height - viewBox.Height * scaleY);
