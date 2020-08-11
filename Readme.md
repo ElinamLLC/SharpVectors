@@ -37,7 +37,7 @@ The SharpVectors library targets the following frameworks
 * .NET Framework, Version 4.8
 * .NET Standard, Version 2.1
 * .NET Core, Version 3.1
- 
+
 The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
@@ -87,3 +87,9 @@ the authors of these great articles and projects
 * [MinIoC](https://github.com/microsoft/MinIoC) by Microsoft (Single-file minimal C# IoC container)
 * [.NET ZLib Implementation](https://www.codeproject.com/Tips/830793/NET-ZLib-Implementation) by Alberto M (CodeProject)
 * [Brotli compression format](https://github.com/google/brotli) by Google (C# Decoder)
+
+## Related Projects
+The following are related SVG viewer projects for the .NET platforms
+* [SVG](https://github.com/vvvv/SVG) for GDI+
+* [SVGImage](https://github.com/dotnetprojects/SVGImage) for WPF
+
