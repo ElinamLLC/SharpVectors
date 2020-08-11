@@ -102,6 +102,260 @@
                     </ScrollViewer>
                 </TabItem.Content>
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>Embedded SVG</TabItem.Header>
+                <TabItem.Content>
+                    <ScrollViewer CanContentScroll="False" Background="White" 
+                           VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <!-- 8. Load local SVG file -->
+                        <svgc:SvgCanvas HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <svgc:SvgCanvas.SvgSource>
+                                <![CDATA[
+<svg id="Layer_4" data-name="Layer 4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 837 783">
+  <defs>
+    <style>
+      .cls-1, .cls-20, .cls-3, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+      .cls-1, .cls-10 {
+        stroke: #f15a29;
+      }
+      .cls-2 {
+        fill: #69c;
+        opacity: 0.14;
+      }
+      .cls-11, .cls-20, .cls-3, .cls-8, .cls-9 {
+        stroke: #3974bc;
+      }
+      .cls-4 {
+        fill: #8dc63f;
+      }
+      .cls-4, .cls-5 {
+        stroke: #8dc63f;
+      }
+      .cls-10, .cls-11, .cls-12, .cls-13, .cls-4 {
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+      .cls-12, .cls-6 {
+        stroke: #fbb040;
+      }
+      .cls-13, .cls-7 {
+        stroke: #2b3990;
+      }
+      .cls-20, .cls-8, .cls-9 {
+        stroke-linecap: round;
+      }
+      .cls-9 {
+        stroke-dasharray: 1.01 6.05;
+      }
+      .cls-10 {
+        fill: #f15a29;
+      }
+      .cls-11 {
+        fill: #3974bc;
+      }
+      .cls-12 {
+        fill: #fbb040;
+      }
+      .cls-13 {
+        fill: #2b3990;
+      }
+      .cls-14 {
+        font-size: 9px;
+        font-family: Helvetica-Bold, Helvetica;
+        font-weight: 700;
+      }
+      .cls-14, .cls-21, .cls-22 {
+        fill: #231f20;
+      }
+      .cls-15 {
+        letter-spacing: -0.07em;
+      }
+      .cls-16 {
+        letter-spacing: -0.01em;
+      }
+      .cls-17 {
+        letter-spacing: -0.04em;
+      }
+      .cls-18 {
+        letter-spacing: -0.02em;
+      }
+      .cls-19 {
+        letter-spacing: -0.05em;
+      }
+      .cls-20 {
+        stroke-dasharray: 0.96 5.78;
+      }
+      .cls-21 {
+        font-size: 8px;
+      }
+      .cls-21, .cls-22 {
+        font-family: Helvetica, Helvetica;
+      }
+      .cls-22 {
+        font-size: 7px;
+      }
+    </style>
+  </defs>
+  <title>wikimap15Artboard 1</title>
+  <path class="cls-1" d="M634.5,450v24.75c0,9,0,9-9,18l-46.12,46.13"/>
+  <path class="cls-2" d="M292.5,337.5c4.5,0,9,4.5,9,9v45c0,9,0,9-9,18L270,432c-9,9-9,9-9,18v49.5c0,4.5,4.5,9,9,9H405c9,0,9,0,18,9l59.63,61.88c9,9,9,9,9,18l1.13,70.88c0,9,0,9-9,18l-40.5,40.5c-9,9-9,9-9,18V783L0,787.5s0-261.37,0-261H49.5c4.5,0,9-4.5,9-9V459c0-4.5,4.5-9,9-9h144c9,0,9,0,18-9L270,400.5c9-9,9-9,9-18v-36c0-4.5,4.5-9,9-9Z"/>
+  <path class="cls-1" d="M756,220.5V270c0,9,0,9-9,18"/>
+  <path class="cls-1" d="M495,243c9-9,9-9,18-9h54c9,0,9,0,18,9l40.5,40.5c9,9,9,9,9,18V342"/>
+  <path class="cls-3" d="M499.5,378c9,0,9,0,18,9l81,81c9,9,9,9,18,9h54"/>
+  <polygon class="cls-4" points="337.5 319.49 328.5 319.49 328.5 319.5 342 319.5 337.5 319.49"/>
+  <path class="cls-5" d="M526.5,619.19C624.18,579.27,693,483.29,693,371.25,693,223.38,573.12,103.5,425.25,103.5a266.68,266.68,0,0,0-172.54,63s-9.71,9-18.71,9H189"/>
+  <path class="cls-5" d="M333,319.5V270a4.84,4.84,0,0,0-4.5-4.5H216c-4.5,0-9-4.5-9-9V189"/>
+  <path class="cls-5" d="M490.5,261c0,4.5-4.5,9-9,9h-117c-4.5,0-9,4.5-9,9v36c0,4.5-4.5,9-9,9h-18c-4.5,0-9,4.5-9,9v18c0,4.5-4.5,9-9,9h-54c-9,0-9,0-18,9"/>
+  <path class="cls-5" d="M207,189c0-4.5-4.5-9-9-9h-9"/>
+  <path class="cls-1" d="M292.5,432c-4.5,0-9,4.5-9,9v4.5"/>
+  <path class="cls-1" d="M364.5,351c-4.5,0-9,4.5-9,9V477"/>
+  <path class="cls-1" d="M418.5,202.5c4.5,0,9,4.5,9,9V225"/>
+  <path class="cls-1" d="M355.5,423c0,4.5-4.5,9-9,9h-54"/>
+  <path class="cls-1" d="M463.5,729h54c4.5,0,9-4.5,9-9V693"/>
+  <path class="cls-1" d="M364.5,211.5c0-4.5,4.5-9,9-9h108c4.5,0,9,4.5,9,9"/>
+  <path class="cls-5" d="M85.5,351v49.5c0,4.5,4.5,9,9,9h18"/>
+  <path class="cls-6" d="M184.5,261h-90c-4.5,0-9,4.5-9,9v81"/>
+  <path class="cls-7" d="M603,711H535.5c-4.5,0-9-4.5-9-9v-9"/>
+  <path class="cls-3" d="M634.5,342c0-4.5-4.5-9-9-9"/>
+  <path class="cls-3" d="M445.5,351c4.5,0,9,4.5,9,9V522"/>
+  <line class="cls-3" x1="490.5" y1="315" x2="490.5" y2="63"/>
+  <line class="cls-7" x1="117" y1="616.5" x2="76.5" y2="616.5"/>
+  <path class="cls-3" d="M337.5,270c0-4.5-4.5-9-9-9h-81c-4.5,0-9,4.5-9,9v67.5"/>
+  <rect class="cls-3" x="337.5" y="297" width="90" height="54" rx="9" ry="9"/>
+  <line class="cls-3" x1="364.5" y1="234" x2="364.5" y2="67.5"/>
+  <line class="cls-3" x1="265.5" y1="261" x2="184.5" y2="261"/>
+  <path class="cls-6" d="M121.5,261c-9,0-9,0-18-9L90,238.5c-9-9-9-9-18-9H54"/>
+  <path class="cls-3" d="M184.5,261c-9,0-9,0-18-9L90,175.5c-9-9-9-9-9-18v-54"/>
+  <path class="cls-1" d="M558,373.5c9-9,9-9,9-18V324"/>
+  <path class="cls-3" d="M490.5,256.5c0-9,0-9,9-18l117-117c9-9,9-9,18-9h54"/>
+  <path class="cls-3" d="M693,333c9,0,9,0,18-9l36-36"/>
+  <path class="cls-3" d="M684,643.5c9,9,9,9,18,9h72"/>
+  <path class="cls-3" d="M693,333c9,0,9,0,18,9l27,27c9,9,9,9,18,9h18"/>
+  <path class="cls-1" d="M747,288l40.5-40.5c9-9,9-9,9-18V153"/>
+  <path class="cls-3" d="M454.5,369c0,4.5,4.5,9,9,9h81c9,0,9,0,18-9l27-27c9-9,9-9,18-9H693"/>
+  <path class="cls-3" d="M490.5,315c0,9,0,9-9,18l-9,9c-9,9-9,9-18,9h-36"/>
+  <path class="cls-3" d="M454.5,405c0,9,0,9,9,18L684,643.5"/>
+  <path class="cls-3" d="M207,400.5c-9,9-9,9-18,9H112.5"/>
+  <path class="cls-3" d="M517.5,477c9,9,9,9,9,18V657"/>
+  <path class="cls-3" d="M684,643.5c9,9,9,9,9,18v36"/>
+  <path class="cls-3" d="M130.5,409.5c9,0,9,0,18,9s9,9,18,9H171c9,0,9,0,18-9L229.5,378c9-9,9-9,9-18"/>
+  <g>
+    <path class="cls-8" d="M306,261h.5"/>
+    <path class="cls-9" d="M312.54,260.69c3.41-.64,5.39-2.61,11.46-8.69,9-9,9-9,18-9h31.5c4.5,0,9,4.5,9,9V405c0,4.5,4.5,9,9,9H451"/>
+    <line class="cls-8" x1="454" y1="414" x2="454.5" y2="414"/>
+  </g>
+  <path class="cls-3" d="M292.5,49.5V252c0,4.5,4.5,9,9,9"/>
+  <line class="cls-3" x1="634.5" y1="342" x2="634.5" y2="450"/>
+  <line class="cls-5" x1="693" y1="733.5" x2="693" y2="697.5"/>
+  <rect class="cls-10" x="423" y="224.99" width="9" height="0.01"/>
+  <rect class="cls-10" x="279" y="445.49" width="9" height="0.01"/>
+  <rect class="cls-10" x="351" y="476.99" width="9" height="0.01"/>
+  <rect class="cls-10" x="562.5" y="323.99" width="9" height="0.01"/>
+  <rect class="cls-10" x="751.5" y="220.49" width="9" height="0.01"/>
+  <line class="cls-1" x1="490.5" y1="27.01" x2="490.5" y2="63"/>
+  <rect class="cls-10" x="486" y="27" width="9" height="0.01"/>
+  <rect class="cls-10" x="792" y="153" width="9" height="0.01"/>
+  <rect class="cls-11" x="360" y="67.49" width="9" height="0.01"/>
+  <rect class="cls-11" x="486" y="62.99" width="9" height="0.01"/>
+  <rect class="cls-12" x="522" y="692.99" width="9" height="0.01"/>
+  <rect class="cls-11" x="450" y="522.04" width="9" height="0.01"/>
+  <rect class="cls-11" x="630" y="449.99" width="9" height="0.01"/>
+  <rect class="cls-11" x="688.5" y="697.5" width="9" height="0.01"/>
+  <rect class="cls-4" x="688.5" y="733.5" width="9" height="0.01"/>
+  <rect class="cls-11" x="769.5" y="652.49" width="9" height="0.01" transform="translate(1426.49 -121.51) rotate(90)"/>
+  <rect class="cls-11" x="769.51" y="377.99" width="9" height="0.01" transform="translate(396.01 1152.01) rotate(-90)"/>
+  <rect class="cls-11" x="742.5" y="287.99" width="9" height="0.01" transform="translate(1071.56 1019.86) rotate(-135)"/>
+  <rect class="cls-13" x="598.49" y="710.99" width="9" height="0.01" transform="translate(-108 1313.99) rotate(-90)"/>
+  <rect class="cls-10" x="459.01" y="728.99" width="9" height="0.01" transform="translate(-265.49 1192.51) rotate(-90)"/>
+  <rect class="cls-11" x="684" y="112.49" width="9" height="0.01" transform="translate(800.99 -576) rotate(90)"/>
+  <rect class="cls-11" x="288" y="49.5" width="9" height="0.01"/>
+  <rect class="cls-11" x="76.5" y="103.5" width="9" height="0.01"/>
+  <rect class="cls-11" x="107.99" y="409.49" width="9" height="0.01" transform="translate(-297.01 521.99) rotate(-90)"/>
+  <rect class="cls-11" x="234" y="409.5" width="9" height="0.01" transform="translate(477 819.01) rotate(-180)"/>
+  <rect class="cls-12" x="81.01" y="351" width="9" height="0.01" transform="translate(171.01 702.01) rotate(-180)"/>
+  <rect class="cls-12" x="49.49" y="229.49" width="9" height="0.01" transform="translate(283.5 175.51) rotate(90)"/>
+  <polygon class="cls-4" points="189 175.5 189 184.5 189 184.5 189 171 189 175.5"/>
+  <text class="cls-14" transform="translate(433 321.47)">City<tspan x="0" y="8">Loop</tspan></text>
+  <text class="cls-14" transform="translate(388 370.97)">Metro<tspan class="cls-15" x="0" y="8">T</tspan><tspan x="4.83" y="8">unnel</tspan></text>
+  <text class="cls-14" transform="translate(402.58 281.97)">Metro <tspan class="cls-15" x="27" y="0">T</tspan><tspan x="31.83" y="0">unnel 2</tspan></text>
+  <text class="cls-14" transform="translate(403.75 237.97)">Fiztroy line</text>
+  <text class="cls-14" transform="translate(425.75 535.05)">Sandringham<tspan x="21" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(338.75 490.05)">St Kilda<tspan x="9" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(250.5 458.55)">Port Melbourne<tspan x="25.25" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(209.79 421.47)"><tspan class="cls-16">W</tspan><tspan x="8.42" y="0">illiamstown</tspan><tspan x="20.96" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(473.99 654.55)">Frankston<tspan x="28" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(588.49 447.47)">Alamein<tspan x="19.51" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(679.5 474.55)">Glen <tspan class="cls-17" x="0" y="8">W</tspan><tspan x="8.17" y="8">averley</tspan><tspan x="0" y="16">line</tspan></text>
+  <text class="cls-14" transform="translate(751.49 633.47)">Pakenham<tspan x="14.76" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(703 695.47)">Cranbourne<tspan x="0" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(703 731.97)">Clyde<tspan x="0" y="8">extension</tspan></text>
+  <text class="cls-14" transform="translate(755.24 395.55)">Belgrave<tspan x="11.26" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(756 294.55)">Lilydale<tspan x="0" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(697.47 219.05)">Healesville<tspan x="31.03" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(740.34 151.47)"><tspan class="cls-17">W</tspan><tspan x="8.17" y="0">arburton</tspan><tspan x="29.66" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(535.5 692.55)">Baxter<tspan x="0" y="8">extension</tspan></text>
+  <text class="cls-14" transform="translate(438.76 708.47)">Mornington <tspan x="16.99" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(578 728.47)">Stony Point <tspan x="17.25" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(548.75 316.97)">Kew line</text>
+  <text class="cls-14" transform="translate(165 163.97)">Airport line</text>
+  <text class="cls-14" transform="translate(393.74 195.47)">Inner Circle line</text>
+  <text class="cls-14" transform="translate(523.74 265.97)">Outer Circle line</text>
+  <text class="cls-14" transform="translate(384.75 96.47)">Suburban Rail Loop</text>
+  <text class="cls-14" transform="translate(340.25 60.47)">Upfield line</text>
+  <text class="cls-14" transform="translate(258.24 42.47)">Craigieburn line</text>
+  <text class="cls-14" transform="translate(53.75 96.47)">Sunbury line</text>
+  <text class="cls-14" transform="translate(30.5 217.97)">Melton line</text>
+  <text class="cls-14" transform="translate(95.5 349.97)"><tspan class="cls-18">W</tspan><tspan x="8.34" y="0">yndham </tspan><tspan class="cls-19" x="45.34" y="0">V</tspan><tspan x="50.85" y="0">ale</tspan><tspan x="0" y="8">line</tspan></text>
+  <text class="cls-14" transform="translate(121.5 618.47)">Non-electrified suburban lines (2019)</text>
+  <g>
+    <line class="cls-8" x1="117" y1="589.5" x2="116.5" y2="589.5"/>
+    <line class="cls-20" x1="110.72" y1="589.5" x2="79.89" y2="589.5"/>
+    <line class="cls-8" x1="77" y1="589.5" x2="76.5" y2="589.5"/>
+  </g>
+  <text class="cls-14" transform="translate(121.5 591.47)">Under construction (2019)</text>
+  <line class="cls-3" x1="117" y1="562.5" x2="76.5" y2="562.5"/>
+  <text class="cls-14" transform="translate(121.5 564.47)">Current suburban lines (2019)</text>
+  <line class="cls-1" x1="117" y1="643.5" x2="76.5" y2="643.5"/>
+  <text class="cls-14" transform="translate(121.5 645.47)">Former lines</text>
+  <line class="cls-5" x1="117" y1="670.5" x2="76.5" y2="670.5"/>
+  <text class="cls-14" transform="translate(121.5 672.47)">Proposed lines (2019)</text>
+  <line class="cls-6" x1="117" y1="697.5" x2="76.5" y2="697.5"/>
+  <text class="cls-14" transform="translate(121.5 699.47)">Existing lines proposed for electrification (2019)</text>
+  <text class="cls-21" transform="translate(121.5 725.75)">Note: V/line regional lines are not shown on this map</text>
+  <text class="cls-14" transform="translate(93.32 426.97)"><tspan class="cls-18">W</tspan><tspan x="8.34" y="0">erribee</tspan><tspan x="11.43" y="8">line</tspan></text>
+  <text class="cls-22" transform="translate(46.45 378.53)"><tspan class="cls-18">W</tspan><tspan x="6.48" y="0">erribee - </tspan><tspan class="cls-16" x="-14.34" y="7">W</tspan><tspan x="-7.79" y="7">yndham </tspan><tspan class="cls-15" x="19.06" y="7">V</tspan><tspan x="23.21" y="7">ale </tspan><tspan x="-1.31" y="14">connection</tspan></text>
+  <text class="cls-22" transform="translate(308.92 405.53)">Converted to <tspan x="-1.56" y="7">light rail 1987</tspan></text>
+  <text class="cls-22" transform="translate(388 392.03)">Est. competion<tspan x="0" y="7">2025</tspan></text>
+  <text class="cls-22" transform="translate(389.76 117.53)">Northern section:<tspan class="cls-19" x="53.3" y="0"> </tspan><tspan x="54.87" y="0">Airport </tspan><tspan x="21.99" y="7">to Box Hill</tspan></text>
+  <text class="cls-22" transform="translate(216 189.53)"><tspan class="cls-18">W</tspan><tspan x="6.48" y="0">estern section: </tspan><tspan class="cls-18" x="0" y="7">W</tspan><tspan x="6.48" y="7">erribee to</tspan><tspan class="cls-19" x="36.06" y="7"> </tspan><tspan x="37.62" y="7">Airport</tspan></text>
+  <text class="cls-22" transform="translate(376.35 213.03)">Closed 1981</text>
+  <text class="cls-22" transform="translate(444.19 47.53)">Closed 1959</text>
+  <text class="cls-22" transform="translate(565.85 276.58)">Closed 1893</text>
+  <text class="cls-22" transform="translate(538.71 342.53)">Closed <tspan x="6.22" y="7">1957</tspan></text>
+  <text class="cls-22" transform="translate(477.6 740.53)">Closed 1981</text>
+  <text class="cls-22" transform="translate(567 608.03)">Eastern section: <tspan x="0" y="7">Box Hill to </tspan><tspan x="0" y="14">Cheltenham</tspan></text>
+  <text class="cls-22" transform="translate(726.71 252.53)">Closed<tspan x="6.22" y="7">1983</tspan></text>
+  <text class="cls-22" transform="translate(767.71 185.03)">Closed<tspan x="6.22" y="7">1965</tspan></text>
+  <text class="cls-14" transform="translate(499.5 64.97)">Mernda line</text>
+  <text class="cls-14" transform="translate(499.5 28.97)">Whittlesea line</text>
+  <text class="cls-14" transform="translate(654 100.97)">Hurstbridge line</text>
+  <path class="cls-3" d="M364.5,229.5c0,9,0,9-9,18l-9,9c-9,9-9,9-9,18V315"/>
+  <line class="cls-6" x1="526.5" y1="656.99" x2="526.5" y2="692.99"/>
+  <rect class="cls-11" x="522" y="657" width="9" height="0.01"/>
+  <line class="cls-3" x1="238.5" y1="324" x2="238.5" y2="409.5"/>
+</svg>
+                                ]]>
+                            </svgc:SvgCanvas.SvgSource>
+                        </svgc:SvgCanvas>
+                    </ScrollViewer>
+                </TabItem.Content>
+            </TabItem>
+
             <TabItem>
                 <TabItem.Header>Load (Method)</TabItem.Header>
                 <TabItem.Content>
@@ -132,7 +386,7 @@
                         </StackPanel>
                         <ScrollViewer CanContentScroll="False" Padding="4" Background="White" 
                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                            <!-- 8. Load (Method) -->
+                            <!-- 9. Load (Method) -->
                             <svgc:SvgCanvas x:Name="loadSvgCanvas" HorizontalAlignment="Center" VerticalAlignment="Center"/>                                
                         </ScrollViewer>
                     </DockPanel>
@@ -167,7 +421,7 @@
                         </StackPanel>
                         <ScrollViewer CanContentScroll="False" Padding="4" Background="White" 
                            VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                            <!-- 9. LoadAsync (Method) -->
+                            <!-- 10. LoadAsync (Method) -->
                             <svgc:SvgCanvas x:Name="loadSvgCanvasAsync" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <!-- Create custom style for the message text -->
                                 <svgc:SvgCanvas.Style>

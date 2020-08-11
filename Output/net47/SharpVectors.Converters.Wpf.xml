@@ -1202,6 +1202,16 @@
             Identifies the <see cref="P:SharpVectors.Converters.SvgCanvas.Source"/> dependency property.
             </summary>
         </member>
+        <member name="F:SharpVectors.Converters.SvgCanvas.UriSourceProperty">
+            <summary>
+            Identifies the <see cref="P:SharpVectors.Converters.SvgCanvas.UriSource"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.SvgCanvas.SvgSourceProperty">
+            <summary>
+            Identifies the <see cref="P:SharpVectors.Converters.SvgCanvas.SvgSource"/> dependency property.
+            </summary>
+        </member>
         <member name="F:SharpVectors.Converters.SvgCanvas.StreamSourceProperty">
             <summary>
             Identifies the <see cref="P:SharpVectors.Converters.SvgCanvas.StreamSource"/> dependency property.
@@ -1304,6 +1314,33 @@
             The file can be located on a computer, network or assembly resources.
             Settings this to <see langword="null"/> will close any opened diagram.
             </value>
+            <seealso cref="P:SharpVectors.Converters.SvgCanvas.UriSource"/>
+            <seealso cref="P:SharpVectors.Converters.SvgCanvas.StreamSource"/>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.UriSource">
+            <summary>
+            Gets or sets the path to the SVG file to load into this <see cref="T:System.Windows.Controls.Canvas"/>.
+            </summary>
+            <value>
+            A <see cref="T:System.Uri"/> specifying the path to the SVG source file.
+            The file can be located on a computer, network or assembly resources.
+            Settings this to <see langword="null"/> will close any opened diagram.
+            </value>
+            <remarks>
+            This is the same as the <see cref="P:SharpVectors.Converters.SvgCanvas.Source"/> property, and added for consistency.
+            </remarks>
+            <seealso cref="P:SharpVectors.Converters.SvgCanvas.UriSource"/>
+            <seealso cref="P:SharpVectors.Converters.SvgCanvas.StreamSource"/>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.SvgSource">
+            <summary>
+            Gets or sets the SVG contents to load into this <see cref="T:System.Windows.Controls.Canvas"/>.
+            </summary>
+            <value>
+            A <see cref="T:System.String"/> specifying the embedded SVG contents.
+            Settings this to <see langword="null"/> will close any opened diagram.
+            </value>
+            <seealso cref="P:SharpVectors.Converters.SvgCanvas.UriSource"/>
             <seealso cref="P:SharpVectors.Converters.SvgCanvas.StreamSource"/>
         </member>
         <member name="P:SharpVectors.Converters.SvgCanvas.StreamSource">
@@ -1493,6 +1530,21 @@
             if successful, otherwise, it is <see langword="false"/>.
             </returns>
         </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.Load(System.String,System.Boolean)">
+            <summary>
+            This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgCanvas"/> by accessing text content 
+            and optionally processing the result asynchronously.
+            </summary>
+            <param name="svgSource">The stream source that sets the SVG source value.</param>
+            <param name="useAsync">
+            A value indicating whether to process the result asynchronously. The default value is <see langword="false"/>,
+            the SVG conversion is processed synchronously.
+            </param>
+            <returns>
+            A value that indicates whether the operation was successful. This is <see langword="true"/>
+            if successful, otherwise, it is <see langword="false"/>.
+            </returns>
+        </member>
         <member name="M:SharpVectors.Converters.SvgCanvas.Load(System.IO.Stream,System.Boolean,System.Boolean)">
             <summary>
             This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgCanvas"/> by accessing a stream 
@@ -1523,6 +1575,17 @@
             and processing the result asynchronously.
             </summary>
             <param name="uriSource">A reference to the SVG source file.</param>
+            <returns>
+            A value that indicates whether the operation was successful. This is <see langword="true"/>
+            if successful, otherwise, it is <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.LoadAsync(System.String)">
+            <summary>
+            This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgCanvas"/> by accessing text contents 
+            and processing the result asynchronously.
+            </summary>
+            <param name="svgSource">The stream source that sets the SVG source value.</param>
             <returns>
             A value that indicates whether the operation was successful. This is <see langword="true"/>
             if successful, otherwise, it is <see langword="false"/>.
@@ -1603,6 +1666,20 @@
             </returns>
         </member>
         <member name="M:SharpVectors.Converters.SvgCanvas.CreateDrawing(System.IO.Stream,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Performs the conversion of a valid SVG source stream to the <see cref="T:System.Windows.Media.DrawingGroup"/>.
+            </summary>
+            <param name="svgStream">A stream providing access to the SVG source data.</param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+            <returns>
+            This returns <see cref="T:System.Windows.Media.DrawingGroup"/> if successful; otherwise, it
+            returns <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.CreateDrawing(System.String,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
             <summary>
             Performs the conversion of a valid SVG source stream to the <see cref="T:System.Windows.Media.DrawingGroup"/>.
             </summary>
@@ -2406,6 +2483,16 @@
             Identifies the <see cref="P:SharpVectors.Converters.SvgViewbox.Source"/> dependency property.
             </summary>
         </member>
+        <member name="F:SharpVectors.Converters.SvgViewbox.UriSourceProperty">
+            <summary>
+            Identifies the <see cref="P:SharpVectors.Converters.SvgViewbox.UriSource"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.SvgViewbox.SvgSourceProperty">
+            <summary>
+            Identifies the <see cref="P:SharpVectors.Converters.SvgViewbox.SvgSource"/> dependency property.
+            </summary>
+        </member>
         <member name="F:SharpVectors.Converters.SvgViewbox.StreamSourceProperty">
             <summary>
             Identifies the <see cref="P:SharpVectors.Converters.SvgViewbox.StreamSource"/> dependency property.
@@ -2508,6 +2595,32 @@
             The file can be located on a computer, network or assembly resources.
             Settings this to <see langword="null"/> will close any opened diagram.
             </value>
+            <seealso cref="P:SharpVectors.Converters.SvgViewbox.StreamSource"/>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.UriSource">
+            <summary>
+            Gets or sets the path to the SVG file to load into this <see cref="T:System.Windows.Controls.Canvas"/>.
+            </summary>
+            <value>
+            A <see cref="T:System.Uri"/> specifying the path to the SVG source file.
+            The file can be located on a computer, network or assembly resources.
+            Settings this to <see langword="null"/> will close any opened diagram.
+            </value>
+            <remarks>
+            This is the same as the <see cref="P:SharpVectors.Converters.SvgViewbox.Source"/> property, and added for consistency.
+            </remarks>
+            <seealso cref="P:SharpVectors.Converters.SvgViewbox.UriSource"/>
+            <seealso cref="P:SharpVectors.Converters.SvgViewbox.StreamSource"/>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.SvgSource">
+            <summary>
+            Gets or sets the SVG contents to load into this <see cref="T:System.Windows.Controls.Canvas"/>.
+            </summary>
+            <value>
+            A <see cref="T:System.String"/> specifying the embedded SVG contents.
+            Settings this to <see langword="null"/> will close any opened diagram.
+            </value>
+            <seealso cref="P:SharpVectors.Converters.SvgViewbox.UriSource"/>
             <seealso cref="P:SharpVectors.Converters.SvgViewbox.StreamSource"/>
         </member>
         <member name="P:SharpVectors.Converters.SvgViewbox.StreamSource">
@@ -2698,6 +2811,25 @@
             if successful, otherwise, it is <see langword="false"/>.
             </returns>
         </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.Load(System.String,System.Boolean)">
+            <summary>
+            This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgViewbox"/> by accessing text contents 
+            and optionally processing the result asynchronously.
+            </summary>
+            <param name="svgSource">The stream source that sets the SVG source value.</param>
+            <param name="useCopyStream">
+            A value specifying whether to use a copy of the stream. The default is <see langword="true"/>,
+            the SVG source stream is copied, rendered and stored.
+            </param>
+            <param name="useAsync">
+            A value indicating whether to process the result asynchronously. The default value is <see langword="false"/>,
+            the SVG conversion is processed synchronously.
+            </param>
+            <returns>
+            A value that indicates whether the operation was successful. This is <see langword="true"/>
+            if successful, otherwise, it is <see langword="false"/>.
+            </returns>
+        </member>
         <member name="M:SharpVectors.Converters.SvgViewbox.Load(System.IO.Stream,System.Boolean,System.Boolean)">
             <summary>
             This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgViewbox"/> by accessing a stream 
@@ -2728,6 +2860,17 @@
             and processing the result asynchronously.
             </summary>
             <param name="uriSource">A reference to the SVG source file.</param>
+            <returns>
+            A value that indicates whether the operation was successful. This is <see langword="true"/>
+            if successful, otherwise, it is <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.LoadAsync(System.String)">
+            <summary>
+            This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgViewbox"/> by accessing text contents 
+            and processing the result asynchronously.
+            </summary>
+            <param name="svgSource">The stream source that sets the SVG source value.</param>
             <returns>
             A value that indicates whether the operation was successful. This is <see langword="true"/>
             if successful, otherwise, it is <see langword="false"/>.
@@ -2808,6 +2951,20 @@
             </returns>
         </member>
         <member name="M:SharpVectors.Converters.SvgViewbox.CreateDrawing(System.IO.Stream,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Performs the conversion of a valid SVG source stream to the <see cref="T:System.Windows.Media.DrawingGroup"/>.
+            </summary>
+            <param name="svgStream">A stream providing access to the SVG source data.</param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+            <returns>
+            This returns <see cref="T:System.Windows.Media.DrawingGroup"/> if successful; otherwise, it
+            returns <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.CreateDrawing(System.String,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
             <summary>
             Performs the conversion of a valid SVG source stream to the <see cref="T:System.Windows.Media.DrawingGroup"/>.
             </summary>

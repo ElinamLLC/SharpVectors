@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Xml.Linq;
 using System.Reflection;
 using System.Globalization;
 using System.ComponentModel;
@@ -35,7 +37,21 @@ namespace SharpVectors.Converters
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register("Source", typeof(Uri), typeof(SvgViewbox),
-                new FrameworkPropertyMetadata(null, OnSourceChanged));
+                new FrameworkPropertyMetadata(null, OnUriSourceChanged));
+
+        /// <summary>
+        /// Identifies the <see cref="UriSource"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty UriSourceProperty =
+            DependencyProperty.Register("UriSource", typeof(Uri), typeof(SvgViewbox),
+                new FrameworkPropertyMetadata(null, OnUriSourceChanged));
+
+        /// <summary>
+        /// Identifies the <see cref="SvgSource"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SvgSourceProperty =
+            DependencyProperty.Register("SvgSource", typeof(string), typeof(SvgViewbox),
+                new FrameworkPropertyMetadata(null, OnSvgSourceChanged));
 
         /// <summary>
         /// Identifies the <see cref="StreamSource"/> dependency property.
@@ -151,6 +167,7 @@ namespace SharpVectors.Converters
 
         private Uri _baseUri;
         private Uri _sourceUri;
+        private string _sourceSvg;
         private Stream _sourceStream;
 
         private SvgDrawingCanvas _drawingCanvas;
@@ -203,6 +220,50 @@ namespace SharpVectors.Converters
             set {
                 _sourceUri = value;
                 this.SetValue(SourceProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the path to the SVG file to load into this <see cref="Canvas"/>.
+        /// </summary>
+        /// <value>
+        /// A <see cref="System.Uri"/> specifying the path to the SVG source file.
+        /// The file can be located on a computer, network or assembly resources.
+        /// Settings this to <see langword="null"/> will close any opened diagram.
+        /// </value>
+        /// <remarks>
+        /// This is the same as the <see cref="Source"/> property, and added for consistency.
+        /// </remarks>
+        /// <seealso cref="UriSource"/>
+        /// <seealso cref="StreamSource"/>
+        public Uri UriSource
+        {
+            get {
+                return (Uri)GetValue(UriSourceProperty);
+            }
+            set {
+                _sourceUri = value;
+                this.SetValue(UriSourceProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the SVG contents to load into this <see cref="Canvas"/>.
+        /// </summary>
+        /// <value>
+        /// A <see cref="System.String"/> specifying the embedded SVG contents.
+        /// Settings this to <see langword="null"/> will close any opened diagram.
+        /// </value>
+        /// <seealso cref="UriSource"/>
+        /// <seealso cref="StreamSource"/>
+        public string SvgSource
+        {
+            get {
+                return (string)GetValue(SvgSourceProperty);
+            }
+            set {
+                _sourceSvg = value;
+                this.SetValue(SvgSourceProperty, value);
             }
         }
 
@@ -530,7 +591,7 @@ namespace SharpVectors.Converters
             WpfDrawingSettings settings = new WpfDrawingSettings();
             settings.IncludeRuntime = _includeRuntime;
             settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath = _optimizePath;
+            settings.OptimizePath   = _optimizePath;
             if (_culture != null)
             {
                 settings.CultureInfo = _culture;
@@ -572,7 +633,8 @@ namespace SharpVectors.Converters
                     DrawingGroup drawing = this.CreateDrawing(uriSource, settings);
                     if (drawing != null)
                     {
-                        _sourceUri = uriSource;
+                        _sourceUri    = uriSource;
+                        _sourceSvg    = null;
                         _sourceStream = null;
 
                         this.OnLoadDrawing(drawing);
@@ -581,6 +643,89 @@ namespace SharpVectors.Converters
                     }
                 }
 
+                return false;
+            }
+            catch
+            {
+                //TODO: Rethrow the exception?
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// This sets the source SVG for a <see cref="SvgViewbox"/> by accessing text contents 
+        /// and optionally processing the result asynchronously.
+        /// </summary>
+        /// <param name="svgSource">The stream source that sets the SVG source value.</param>
+        /// <param name="useCopyStream">
+        /// A value specifying whether to use a copy of the stream. The default is <see langword="true"/>,
+        /// the SVG source stream is copied, rendered and stored.
+        /// </param>
+        /// <param name="useAsync">
+        /// A value indicating whether to process the result asynchronously. The default value is <see langword="false"/>,
+        /// the SVG conversion is processed synchronously.
+        /// </param>
+        /// <returns>
+        /// A value that indicates whether the operation was successful. This is <see langword="true"/>
+        /// if successful, otherwise, it is <see langword="false"/>.
+        /// </returns>
+        public bool Load(string svgSource, bool useAsync = false)
+        {
+            if (string.IsNullOrWhiteSpace(svgSource))
+            {
+                return false;
+            }
+            WpfDrawingSettings settings = new WpfDrawingSettings();
+            settings.IncludeRuntime = _includeRuntime;
+            settings.TextAsGeometry = _textAsGeometry;
+            settings.OptimizePath   = _optimizePath;
+            if (_culture != null)
+            {
+                settings.CultureInfo = _culture;
+            }
+
+            try
+            {
+                _sourceUri    = null;
+                _sourceSvg    = svgSource;
+                _sourceStream = null;
+
+                if (useAsync)
+                {
+                    MemoryStream drawingStream = new MemoryStream();
+
+                    // Get the UI thread's context
+                    var context = TaskScheduler.FromCurrentSynchronizationContext();
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        DrawingGroup drawing = this.CreateDrawing(svgSource, settings);
+                        if (drawing != null)
+                        {
+                            XamlWriter.Save(drawing, drawingStream);
+                            drawingStream.Seek(0, SeekOrigin.Begin);
+                        }
+                    }).ContinueWith((t) => {
+                        if (drawingStream.Length != 0)
+                        {
+                            DrawingGroup drawing = (DrawingGroup)XamlReader.Load(drawingStream);
+
+                            this.OnLoadDrawing(drawing);
+                        }
+                    }, context);
+
+                    return true;
+                }
+                else
+                {
+                    DrawingGroup drawing = this.CreateDrawing(svgSource, settings);
+                    if (drawing != null)
+                    {
+                        this.OnLoadDrawing(drawing);
+
+                        return true;
+                    }
+                }
                 return false;
             }
             catch
@@ -621,7 +766,7 @@ namespace SharpVectors.Converters
             WpfDrawingSettings settings = new WpfDrawingSettings();
             settings.IncludeRuntime = _includeRuntime;
             settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath = _optimizePath;
+            settings.OptimizePath   = _optimizePath;
             if (_culture != null)
             {
                 settings.CultureInfo = _culture;
@@ -648,7 +793,8 @@ namespace SharpVectors.Converters
                     }
                 }
 
-                _sourceUri = null;
+                _sourceUri    = null;
+                _sourceSvg    = null;
                 _sourceStream = svgStream;
 
                 if (useAsync)
@@ -717,7 +863,7 @@ namespace SharpVectors.Converters
             WpfDrawingSettings settings = new WpfDrawingSettings();
             settings.IncludeRuntime = _includeRuntime;
             settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath = _optimizePath;
+            settings.OptimizePath   = _optimizePath;
             if (_culture != null)
             {
                 settings.CultureInfo = _culture;
@@ -735,7 +881,8 @@ namespace SharpVectors.Converters
                     DrawingGroup drawing = this.CreateDrawing(uriSource, settings);
                     if (drawing != null)
                     {
-                        _sourceUri = uriSource;
+                        _sourceUri    = uriSource;
+                        _sourceSvg    = null;
                         _sourceStream = null;
 
                         XamlWriter.Save(drawing, drawingStream);
@@ -753,6 +900,77 @@ namespace SharpVectors.Converters
 
                         return true;
                     }
+                    return false;
+                }, context);
+            }
+            catch (Exception ex)
+            {
+                result.SetResult(false);
+                result.SetException(ex);
+
+                return result.Task;
+            }
+        }
+
+        /// <summary>
+        /// This sets the source SVG for a <see cref="SvgViewbox"/> by accessing text contents 
+        /// and processing the result asynchronously.
+        /// </summary>
+        /// <param name="svgSource">The stream source that sets the SVG source value.</param>
+        /// <returns>
+        /// A value that indicates whether the operation was successful. This is <see langword="true"/>
+        /// if successful, otherwise, it is <see langword="false"/>.
+        /// </returns>
+        public Task<bool> LoadAsync(string svgSource)
+        {
+            TaskCompletionSource<bool> result = new TaskCompletionSource<bool>();
+
+            if (string.IsNullOrWhiteSpace(svgSource))
+            {
+                result.SetResult(false);
+                return result.Task;
+            }
+            WpfDrawingSettings settings = new WpfDrawingSettings();
+            settings.IncludeRuntime = _includeRuntime;
+            settings.TextAsGeometry = _textAsGeometry;
+            settings.OptimizePath   = _optimizePath;
+            if (_culture != null)
+            {
+                settings.CultureInfo = _culture;
+            }
+
+            try
+            {
+                _sourceUri    = null;
+                _sourceSvg    = svgSource;
+                _sourceStream = null;
+
+                MemoryStream drawingStream = new MemoryStream();
+
+                // Get the UI thread's context
+                var context = TaskScheduler.FromCurrentSynchronizationContext();
+
+                return Task.Factory.StartNew<bool>(() =>
+                {
+                    DrawingGroup drawing = this.CreateDrawing(svgSource, settings);
+                    if (drawing != null)
+                    {
+                        XamlWriter.Save(drawing, drawingStream);
+                        drawingStream.Seek(0, SeekOrigin.Begin);
+
+                        return true;
+                    }
+                    return false;
+                }).ContinueWith((t) => {
+                    if (t.Result && drawingStream.Length != 0)
+                    {
+                        DrawingGroup drawing = (DrawingGroup)XamlReader.Load(drawingStream);
+
+                        this.OnLoadDrawing(drawing);
+
+                        return true;
+                    }
+
                     return false;
                 }, context);
             }
@@ -795,7 +1013,7 @@ namespace SharpVectors.Converters
             WpfDrawingSettings settings = new WpfDrawingSettings();
             settings.IncludeRuntime = _includeRuntime;
             settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath = _optimizePath;
+            settings.OptimizePath   = _optimizePath;
             if (_culture != null)
             {
                 settings.CultureInfo = _culture;
@@ -822,7 +1040,8 @@ namespace SharpVectors.Converters
                     }
                 }
 
-                _sourceUri = null;
+                _sourceUri    = null;
+                _sourceSvg    = null;
                 _sourceStream = svgStream;
 
                 MemoryStream drawingStream = new MemoryStream();
@@ -878,7 +1097,8 @@ namespace SharpVectors.Converters
         /// </param>
         public void Unload(bool displayMessage = false, string message = "")
         {
-            _sourceUri = null;
+            _sourceUri    = null;
+            _sourceSvg    = null;
             _sourceStream = null;
 
             this.OnUnloadDiagram();
@@ -921,7 +1141,7 @@ namespace SharpVectors.Converters
 
             base.OnInitialized(e);
 
-            if (_sourceUri != null || _sourceStream != null)
+            if (_sourceUri != null || _sourceStream != null || !string.IsNullOrWhiteSpace(_sourceSvg))
             {
                 if (_svgDrawing == null)
                 {
@@ -939,7 +1159,8 @@ namespace SharpVectors.Converters
         /// </summary>
         protected virtual void OnSettingsChanged()
         {
-            if (!this.IsInitialized || (_sourceUri == null && _sourceStream == null))
+            if (!this.IsInitialized || (_sourceUri == null &&
+                _sourceStream == null && string.IsNullOrWhiteSpace(_sourceSvg)))
             {
                 return;
             }
@@ -1000,15 +1221,23 @@ namespace SharpVectors.Converters
 
             try
             {
+                // 1. Load from the stream. The stream source has precedence
                 if (_sourceStream != null)
                 {
                     return this.CreateDrawing(_sourceStream, settings);
                 }
 
+                // 2. Load from the Uri, if available
                 Uri svgSource = this.GetAbsoluteUri();
                 if (svgSource != null)
                 {
                     return this.CreateDrawing(svgSource, settings);
+                }
+
+                // 3. Load embedded SVG contents...
+                if (!string.IsNullOrWhiteSpace(_sourceSvg))
+                {
+                    return this.CreateDrawing(_sourceSvg, settings);
                 }
 
                 return null;
@@ -1185,6 +1414,55 @@ namespace SharpVectors.Converters
             return drawing;
         }
 
+        /// <summary>
+        /// Performs the conversion of a valid SVG source stream to the <see cref="DrawingGroup"/>.
+        /// </summary>
+        /// <param name="svgStream">A stream providing access to the SVG source data.</param>
+        /// <param name="settings">
+        /// This specifies the settings used by the rendering or drawing engine.
+        /// If this is <see langword="null"/>, the default settings is used.
+        /// </param>
+        /// <returns>
+        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it
+        /// returns <see langword="null"/>.
+        /// </returns>
+        protected virtual DrawingGroup CreateDrawing(string svgSource, WpfDrawingSettings settings)
+        {
+            if (string.IsNullOrWhiteSpace(svgSource))
+            {
+                return null;
+            }
+
+            DrawingGroup drawing = null;
+
+            var svgContent = svgSource.Trim();
+
+            var cdataStart = "<![CDATA[";
+            var cdataEnd = "]]>";
+
+            if (svgContent.StartsWith(cdataStart, StringComparison.OrdinalIgnoreCase) ||
+                svgContent.EndsWith(cdataEnd, StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine();
+                var xmlDoc = XDocument.Parse(svgSource);
+                var cdataElement = xmlDoc.DescendantNodes().OfType<XCData>().FirstOrDefault();
+                if (cdataElement != null)
+                {
+                    svgContent = cdataElement.Value;
+                }
+            }
+
+            using (FileSvgReader reader = new FileSvgReader(settings))
+            {
+                var textReader = new StringReader(svgContent);
+                drawing = reader.Read(textReader);
+
+                textReader.Dispose();
+            }
+
+            return drawing;
+        }
+
         #endregion
 
         #region Private Methods
@@ -1329,7 +1607,7 @@ namespace SharpVectors.Converters
             }
         }
 
-        private static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private static void OnUriSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             SvgViewbox viewbox = obj as SvgViewbox;
             if (viewbox == null)
@@ -1339,6 +1617,25 @@ namespace SharpVectors.Converters
 
             viewbox._sourceUri = (Uri)args.NewValue;
             if (viewbox._sourceUri == null)
+            {
+                viewbox.OnUnloadDiagram();
+            }
+            else
+            {
+                viewbox.OnSettingsChanged();
+            }
+        }
+
+        private static void OnSvgSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            SvgViewbox viewbox = obj as SvgViewbox;
+            if (viewbox == null)
+            {
+                return;
+            }
+
+            viewbox._sourceSvg = (string)args.NewValue;
+            if (string.IsNullOrWhiteSpace(viewbox._sourceSvg))
             {
                 viewbox.OnUnloadDiagram();
             }
