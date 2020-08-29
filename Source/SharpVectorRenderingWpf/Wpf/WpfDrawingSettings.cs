@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Runtime;
+
 namespace SharpVectors.Renderers.Wpf
 {
     /// <summary>
@@ -52,6 +54,8 @@ namespace SharpVectors.Renderers.Wpf
         private IDictionary<string, string> _cssVariables;
 
         private object _fontSynch = new object();
+
+        private SvgInteractiveModes _interactiveMode;
 
         #endregion
 
@@ -610,6 +614,16 @@ namespace SharpVectors.Renderers.Wpf
                     this.LoadFontFamilies();
                 }
                 return _fontFamilies;
+            }
+        }
+
+        public SvgInteractiveModes InteractiveMode
+        {
+            get {
+                return _interactiveMode;
+            }
+            set {
+                _interactiveMode = value;
             }
         }
 

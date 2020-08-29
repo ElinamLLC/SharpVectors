@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Reflection;
 using System.Globalization;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using System.Windows;
 using System.Windows.Media;
 
 using SharpVectors.Runtime;
-using System.Text;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -18,6 +18,8 @@ namespace SharpVectors.Renderers.Wpf
         private const double DefaultDpi = 96.0d;
 
         private const string RegisteredIdKey = "_registeredIds";
+
+        private int _elementOrder;
 
         private string _name;
 
@@ -49,6 +51,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private ISet<string> _baseUrls;
 
+        private SvgInteractiveModes _interactiveMode;
+
         #endregion
 
         #region Constructors and Destructor
@@ -60,6 +64,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
         {
+            _elementOrder = -1;
             var sysParam = typeof(SystemParameters);
 
             var dpiXProperty = sysParam.GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
@@ -115,6 +120,8 @@ namespace SharpVectors.Renderers.Wpf
                     _classVisitor = classVisitor;
                 }
             }
+
+            _interactiveMode = isFragment ? SvgInteractiveModes.None : settings.InteractiveMode;
         }
 
         #endregion
@@ -317,6 +324,16 @@ namespace SharpVectors.Renderers.Wpf
         {
             get {
                 return _baseUrls;
+            }
+        }
+
+        public SvgInteractiveModes InteractiveMode
+        {
+            get {
+                return _interactiveMode;
+            }
+            private set {
+                _interactiveMode = value;
             }
         }
 
@@ -670,7 +687,7 @@ namespace SharpVectors.Renderers.Wpf
 
         public void RegisterDrawing(string elementId, string uniqueId, Drawing drawing)
         {
-            if (_drawingDocument != null)
+            if (_drawingDocument != null) // && _interactiveMode != SvgInteractiveModes.None
             {
                 if (_settings != null && _settings.IncludeRuntime)
                 {
@@ -682,8 +699,18 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         SvgObject.SetUniqueId(drawing, uniqueId);
                     }
+
+                    if (_interactiveMode != SvgInteractiveModes.None)
+                    {
+                        _elementOrder += 1;
+                        SvgObject.SetOrder(drawing, _elementOrder);
+                    }
                 }
-                _drawingDocument.Add(elementId, uniqueId, drawing);
+
+                if (_interactiveMode != SvgInteractiveModes.None)
+                {
+                    _drawingDocument.Add(elementId, uniqueId, drawing);
+                }
             }
         }
 

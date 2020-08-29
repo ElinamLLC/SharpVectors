@@ -172,6 +172,8 @@ namespace SharpVectors.Converters
 
         private SvgDrawingCanvas _drawingCanvas;
 
+        private SvgInteractiveModes _interactiveMode;
+
         #endregion
 
         #region Constructors and Destructor
@@ -560,6 +562,16 @@ namespace SharpVectors.Converters
         {
             get { return (Brush)GetValue(MessageStrokeBrushProperty); }
             set { SetValue(MessageStrokeBrushProperty, value); }
+        }
+
+        public SvgInteractiveModes InteractiveMode
+        {
+            get {
+                return _interactiveMode;
+            }
+            set {
+                _interactiveMode = value;
+            }
         }
 
         #endregion

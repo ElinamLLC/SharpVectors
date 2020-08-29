@@ -9,8 +9,8 @@ namespace SharpVectors.Runtime
 
         public const string GZipSignature = "H4sI";
 
-        public const string LinksLayer    = "AnimationLayer";
-        public const string DrawLayer     = "DrawingLayer";
+        public const string LinksLayer    = "_SvgAnimationLayer";
+        public const string DrawLayer     = "_SvgDrawingLayer";
 
         public static readonly DependencyProperty IdProperty =
             DependencyProperty.RegisterAttached("Id", typeof(string), typeof(SvgObject),
@@ -31,6 +31,10 @@ namespace SharpVectors.Runtime
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.RegisterAttached("Title", typeof(String), typeof(SvgObject),
             new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.None));
+
+        public static readonly DependencyProperty OrderProperty =
+            DependencyProperty.RegisterAttached("Order", typeof(int), typeof(SvgObject),
+            new FrameworkPropertyMetadata(-1, FrameworkPropertyMetadataOptions.None));
 
         #endregion
 
@@ -103,6 +107,16 @@ namespace SharpVectors.Runtime
         public static string GetTitle(DependencyObject element)
         {
             return (string)element.GetValue(TitleProperty);
+        }
+
+        public static void SetOrder(DependencyObject element, int value)
+        {
+            element.SetValue(OrderProperty, value);
+        }
+
+        public static int GetOrder(DependencyObject element)
+        {
+            return (int)element.GetValue(OrderProperty);
         }
 
         public static bool IsValid(double value)

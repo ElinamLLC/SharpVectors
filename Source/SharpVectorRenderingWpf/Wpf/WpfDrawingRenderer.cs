@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
+using SharpVectors.Runtime;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
@@ -33,6 +34,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private WpfDrawingDocument _drawingDocument;
 
+        private SvgInteractiveModes _interactiveMode;
+
         #endregion
 
         #region Constructors and Destructor
@@ -52,6 +55,8 @@ namespace SharpVectors.Renderers.Wpf
             _isEmbedded  = isEmbedded;
             _svgRenderer = new WpfRenderingHelper(this);
             _settings    = settings;
+
+            _interactiveMode = isEmbedded ? SvgInteractiveModes.None : settings.InteractiveMode;
         }
 
         #endregion
@@ -97,6 +102,16 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _fontFamilyVisitor = value;
+            }
+        }
+
+        public SvgInteractiveModes InteractiveMode
+        {
+            get {
+                return _interactiveMode;
+            }
+            private set {
+                _interactiveMode = value;
             }
         }
 

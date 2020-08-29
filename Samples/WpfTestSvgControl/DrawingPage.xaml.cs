@@ -129,7 +129,8 @@ namespace WpfTestSvgControl
 
             _saveXaml = true;
             _wpfSettings = new WpfDrawingSettings();
-            _wpfSettings.CultureInfo = _wpfSettings.NeutralCultureInfo;
+            _wpfSettings.CultureInfo     = _wpfSettings.NeutralCultureInfo;
+            _wpfSettings.InteractiveMode = SvgInteractiveModes.Standard;
 
             _fileReader = new FileSvgReader(_wpfSettings);
             _fileReader.SaveXaml = _saveXaml;
@@ -173,7 +174,22 @@ namespace WpfTestSvgControl
             this.Loaded      += OnPageLoaded;
             this.Unloaded    += OnPageUnloaded;
             this.SizeChanged += OnPageSizeChanged;
+
+//            svgViewer.Hits   += OnDrawingHits;
         }
+
+        //private void OnDrawingHits(object sender, SvgDrawingHitArgs args)
+        //{
+        //    var selectedDrawing = args.Drawing;
+        //    if (selectedDrawing != null)
+        //    {
+        //        elementImage.Source = new DrawingImage(selectedDrawing);
+        //    }
+        //    else
+        //    {
+        //        elementImage.Source = null;
+        //    }
+        //}
 
         private void OnEmbeddedImageCreated(object sender, EmbeddedImageSerializerArgs args)
         {
@@ -243,6 +259,7 @@ namespace WpfTestSvgControl
                 if (value != null)
                 {
                     _wpfSettings = value;
+                    _wpfSettings.InteractiveMode = SvgInteractiveModes.Standard;
 
                     // Recreated the conveter
                     _fileReader = new FileSvgReader(_wpfSettings);
@@ -344,26 +361,25 @@ namespace WpfTestSvgControl
             var selectedDrawing = _drawingDocument.GetById(selectedName);
             if (selectedDrawing != null)
             {
-                elementImage.Source = new DrawingImage(selectedDrawing);
+                elementImage.Source = new DrawingImage(selectedDrawing.Clone());
 
-                System.Windows.Media.DrawingVisual drawingVisual = new System.Windows.Media.DrawingVisual();
-                DrawingContext drawingContext = drawingVisual.RenderOpen();
+                //System.Windows.Media.DrawingVisual drawingVisual = new System.Windows.Media.DrawingVisual();
+                //DrawingContext drawingContext = drawingVisual.RenderOpen();
 
+                //TransformGroup transforms = new TransformGroup();
+                //transforms.Children.Add(new ScaleTransform(0.377953, 0.377953));
+                //transforms.Children.Add(new TranslateTransform(0, 23.622047));
 
-                TransformGroup transforms = new TransformGroup();
-                transforms.Children.Add(new ScaleTransform(0.377953, 0.377953));
-                transforms.Children.Add(new TranslateTransform(0, 23.622047));
+                //drawingContext.PushOpacity(0.5);
+                //drawingContext.PushTransform(new MatrixTransform(1, 0, 0, 1, 200, 38));
+                //drawingContext.DrawDrawing(selectedDrawing.Clone());
 
-                drawingContext.PushOpacity(0.5);
-                drawingContext.PushTransform(new MatrixTransform(1, 0, 0, 1, 200, 38));
-                drawingContext.DrawDrawing(selectedDrawing.Clone());
+                //drawingContext.Pop();
+                //drawingContext.Pop();
 
-                drawingContext.Pop();
-                drawingContext.Pop();
+                //drawingContext.Close();
 
-                drawingContext.Close();
-
-                svgViewer.HostVisual.Children.Add(drawingVisual);
+//                svgViewer.HostVisual.Children.Add(drawingVisual);
 //                svgViewer.HostVisual.Children.Insert(0, drawingVisual);
             }
             else
@@ -445,19 +461,21 @@ namespace WpfTestSvgControl
             return false;
         }
 
-        protected DrawingGroup WrapDrawing(Drawing currentDrawing)
+        protected DrawingGroup WrapDrawing(DrawingGroup currentDrawing)
         {
-            var bounds = currentDrawing.Bounds;
-            var backgroundLayer = new DrawingGroup();
-            var backgroundDrawing = new GeometryDrawing(null, 
-                new Pen(Brushes.Red, 2), new RectangleGeometry(bounds));
-            backgroundLayer.Children.Add(backgroundDrawing);
+            //var bounds = currentDrawing.Bounds;
+            //var backgroundLayer = new DrawingGroup();
+            //var backgroundDrawing = new GeometryDrawing(null, 
+            //    new Pen(Brushes.Red, 2), new RectangleGeometry(bounds));
+            //backgroundLayer.Children.Add(backgroundDrawing);
 
-            var combinedDrawing = new DrawingGroup();
-            combinedDrawing.Children.Add(backgroundLayer);
-            combinedDrawing.Children.Add(currentDrawing);
+            //var combinedDrawing = new DrawingGroup();
+            //combinedDrawing.Children.Add(backgroundLayer);
+            //combinedDrawing.Children.Add(currentDrawing);
 
-            return combinedDrawing;
+            //return combinedDrawing;
+
+            return currentDrawing;
         }
 
         public Task<bool> LoadDocumentAsync(string svgFilePath)
@@ -893,93 +911,8 @@ namespace WpfTestSvgControl
             {
                 if (_drawingDocument != null)
                 {
-                    //_drawingDocument.DisplayTransform = (Transform)(new MatrixTransform(1, 0, 0, 1, -20, -180).Inverse);
-                    //_drawingDocument.DisplayTransform = svgViewer.DisplayTransform;
-                    //_drawingDocument.DisplayTransform = (Transform)svgViewer.DisplayTransform.Inverse;
-                    Trace.WriteLine("Zoom-ContentOffsetX: " + zoomPanControl.ContentOffsetX);
-                    Trace.WriteLine("Zoom-ContentOffsetY: " + zoomPanControl.ContentOffsetY);
-                    Trace.WriteLine("Zoom-ContentScale: "   + zoomPanControl.ContentScale);
-
-                    var bounds = new Rect(0, 0, 0, 0);
-
-//                    var rootDiagram = _drawingDocument.Drawing.Children[0] as DrawingGroup;
-                    var rootDiagram = svgViewer.DrawObjects[0] as DrawingGroup;
-                    if (rootDiagram != null)
-                    {
-//                        bounds = rootDiagram.ClipGeometry.Bounds;
-                        bounds = rootDiagram.Bounds;
-                    }
-
-                    // Get the mouse's position relative to the viewport.
-                    Point mouse_pos = e.GetPosition(svgViewer);
-
-                    // Perform the hit test.
-                    HitTestResult hitResultV = VisualTreeHelper.HitTest(svgViewer, mouse_pos);
-                    if (hitResultV != null)
-                    {
-                        Trace.WriteLine(hitResultV.ToString());
-
-                        var geoResultV = hitResultV as GeometryHitTestResult;
-                        var ptResultV = hitResultV as PointHitTestResult;
-                        if (geoResultV != null)
-                        {
-                            Trace.WriteLine(geoResultV.ToString());
-                        }
-                        else if (ptResultV != null)
-                        {
-                            var drawingVisual = ptResultV.VisualHit as DrawingVisual;
-                            if (drawingVisual != null)
-                            {
-                                elementImage.Source = new DrawingImage(drawingVisual.Drawing);
-                                return;
-                            }
-                        }
-                    }
-
-                    Trace.WriteLine("Zoom-Bound: " + bounds);
-                    Trace.WriteLine("Drawing-Transform: " + _drawingDocument.Drawing.Transform);
-
-                    //                    _drawingDocument.DisplayTransform = svgViewer.DisplayTransform;
-
-                    var point = e.GetPosition((UIElement)sender);
-                    Trace.WriteLine("point: " + zoomPanControl.TranslatePoint(point, svgViewer));
-
-                    point = zoomPanControl.TranslatePoint(point, svgViewer);
-
-                    svgViewer.HostVisual.Children.Add(CreateEllipse(Brushes.Blue, point));
-
-                    var transform1 = svgViewer.TransformToVisual(svgViewer.HostVisual);
-                    TransformGroup transforms = new TransformGroup();
-//                    transforms.Children.Add(svgViewer.HostVisual.Transform);
-                    transforms.Children.Add(svgViewer.RenderTransform);
-                    //transforms.Children.Add(new ScaleTransform(0.377953, 0.377953));
-                    //transforms.Children.Add(new TranslateTransform(0, 23.622047));
-
-                    var rect = svgViewer.Bounds;
-
-                    Point pt = PointToScreen(Mouse.GetPosition(this));
-                    // This is important to get the mouse position relative to the canvas, otherwise it won't work
-                    point = svgViewer.PointFromScreen(pt);
-
-                    point.X += rect.TopLeft.X;
-                    point.Y += rect.TopLeft.Y;
-
-                    svgViewer.HostVisual.Children.Add(CreateEllipse(Brushes.Red, point, true));
-
-                    //                    var point = e.GetPosition(svgViewer);
-                    //                    var point = e.GetPosition(zoomPanControl);
-                    // Retrieve the coordinate of the mouse position.
-                    //var point = e.GetPosition((UIElement)sender);
-
-                    //point.Offset(bounds.Left, bounds.Right);
-
-                    Trace.WriteLine("transform1: " + transform1);
-                    Trace.WriteLine("transform1R: " + transform1.Inverse);
-
-                    //                    _drawingDocument.DisplayTransform = svgViewer.DisplayTransform;
-                    var transform = new MatrixTransform(1, 0, 0, 1, 200, 37);
-                    _drawingDocument.DisplayTransform = zoomPanControl.RenderTransform.Inverse;
-
+                    Point point = e.GetPosition(svgViewer);
+                    _drawingDocument.DisplayTransform = svgViewer.DisplayTransform;
                     var hitResult = _drawingDocument.HitTest(point);
                     if (hitResult != null && hitResult.IsHit)
                     {
@@ -991,6 +924,16 @@ namespace WpfTestSvgControl
                         else
                         {
                             textEditor.Text = string.Empty;
+                        }
+
+                        var selectedDrawing = hitResult.Drawing;
+                        if (selectedDrawing != null)
+                        {
+                            elementImage.Source = new DrawingImage(selectedDrawing);
+                        }
+                        else
+                        {
+                            elementImage.Source = null;
                         }
                     }
                     else

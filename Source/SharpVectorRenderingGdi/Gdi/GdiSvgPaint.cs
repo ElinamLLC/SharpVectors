@@ -65,8 +65,8 @@ namespace SharpVectors.Renderers.Gdi
 
             Pen pen = new Pen(stroke.GetBrush(gp, "stroke"), strokeWidth);
 
-            pen.StartCap = pen.EndCap = GetLineCap();
-            pen.LineJoin = GetLineJoin();
+            pen.StartCap   = pen.EndCap = GetLineCap();
+            pen.LineJoin   = GetLineJoin();
             pen.MiterLimit = GetMiterLimit();
 
             float[] fDashArray = GetDashArray(strokeWidth);
@@ -98,10 +98,12 @@ namespace SharpVectors.Renderers.Gdi
             string opacity;
 
             opacity = _element.GetPropertyValue(fillOrStroke + "-opacity");
-            if (opacity.Length > 0) alpha *= SvgNumber.ParseNumber(opacity);
+            if (opacity.Length > 0) 
+                alpha *= SvgNumber.ParseNumber(opacity);
 
             opacity = _element.GetPropertyValue("opacity");
-            if (opacity.Length > 0) alpha *= SvgNumber.ParseNumber(opacity);
+            if (opacity.Length > 0) 
+                alpha *= SvgNumber.ParseNumber(opacity);
 
             alpha = Math.Min(alpha, 255);
             alpha = Math.Max(alpha, 0);
@@ -195,13 +197,13 @@ namespace SharpVectors.Renderers.Gdi
 
                 for (uint i = 0; i < len; i++)
                 {
-                    //divide by strokeWidth to take care of the difference between Svg and GDI+
+                    // divide by strokeWidth to take care of the difference between Svg and GDI+
                     fDashArray[i] = (float)(list.GetItem(i).Value / strokeWidth);
                 }
 
                 if (len % 2 == 1)
                 {
-                    //odd number of values, duplicate
+                    // odd number of values, duplicate
                     float[] tmpArray = new float[len * 2];
                     fDashArray.CopyTo(tmpArray, 0);
                     fDashArray.CopyTo(tmpArray, (int)len);
@@ -219,7 +221,7 @@ namespace SharpVectors.Renderers.Gdi
             if (dashOffset.Length > 0)
             {
                 //divide by strokeWidth to take care of the difference between Svg and GDI+
-                SvgLength dashOffsetLength = new SvgLength(_element, "stroke-dashoffset", SvgLengthDirection.Viewport, dashOffset);
+                var dashOffsetLength = new SvgLength(_element, "stroke-dashoffset", SvgLengthDirection.Viewport, dashOffset);
                 return (float)dashOffsetLength.Value;
             }
             else
@@ -328,7 +330,7 @@ namespace SharpVectors.Renderers.Gdi
                 return null;
             }
 
-            SolidBrush brush = new SolidBrush(GdiConverter.ToColor(painter.RgbColor));
+            var brush = new SolidBrush(GdiConverter.ToColor(painter.RgbColor));
             int opacity = GetOpacity(propPrefix);
             brush.Color = Color.FromArgb(opacity, brush.Color);
             return brush;

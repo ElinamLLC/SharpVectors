@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using SharpVectors.Runtime;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Renderers.Utils;

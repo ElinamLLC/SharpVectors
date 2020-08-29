@@ -74,6 +74,37 @@
             <see href="http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/5c226430-c54d-45b8-a8a2-7e4a79e3692a"/>
             </remarks>
         </member>
+        <member name="T:SharpVectors.Runtime.SvgInteractiveModes">
+            <summary>
+            <para>
+            A value specifying the type of interactivity to be supported by the conversion process
+            and controls.
+            </para>
+            <para>
+            In the conversion process, more information are added to make the interactivity 
+            defined possible, and might be unnecessary overhead where no interactivity is needed.
+            </para>
+            <para>
+            In the rendering process at the control level, keyboard and mouse operations are monitored
+            to support interactivities.
+            </para>
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.SvgInteractiveModes.None">
+            <summary>
+            A value specifying no interactivity.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.SvgInteractiveModes.Standard">
+            <summary>
+            A value specifying the default or standard interactivity per the SVG specifications.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.SvgInteractiveModes.Advanced">
+            <summary>
+            A value specifying extra or custom interactivity features.
+            </summary>
+        </member>
         <member name="T:SharpVectors.Runtime.ZoomPanAnimationHelper">
             <summary>
             A helper class to simplify animation.

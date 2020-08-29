@@ -132,7 +132,7 @@
                     MouseMove="OnZoomPanMouseMove" MouseWheel="OnZoomPanMouseWheel">
                     <Grid x:Name="theGrid">
                         <!-- This Canvas is the content that is displayed by the ZoomPanControl.
-                        Width and Height determine the size of the content. -->
+                           Width and Height determine the size of the content. -->
                         <svg:SvgDrawingCanvas x:Name="svgViewer" Background="White"/>
 
                         <!--

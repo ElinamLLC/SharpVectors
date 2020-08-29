@@ -16,6 +16,7 @@ using IoPath = System.IO.Path;
 
 using SharpVectors.Runtime.Utils;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace SharpVectors.Runtime
 {
@@ -26,8 +27,6 @@ namespace SharpVectors.Runtime
     {
         #region Private Fields
 
-        //private static readonly Action EmptyDelegate = delegate { };
-
         private bool _drawForInteractivity;
 
         private Rect _bounds;
@@ -37,7 +36,7 @@ namespace SharpVectors.Runtime
         private double _offsetX;
         private double _offsetY;
 
-        private ToolTip   _tooltip;
+        private ToolTip _tooltip;
         private TextBlock _tooltipText;
 
         private DrawingGroup _wholeDrawing;
@@ -47,6 +46,8 @@ namespace SharpVectors.Runtime
         private Drawing _hitVisual;
 
         private DrawingVisual _hostVisual;
+
+        private SvgInteractiveModes _interactiveMode;
 
         // Create a collection of child visual objects.
         private List<Drawing> _drawObjects;
@@ -76,36 +77,38 @@ namespace SharpVectors.Runtime
             _displayTransform = Transform.Identity;
 
             // Create a tooltip and set its position.
-            _tooltip                    = new ToolTip();
-            _tooltip.Placement          = PlacementMode.MousePoint;
+            _tooltip = new ToolTip();
+            _tooltip.Placement = PlacementMode.MousePoint;
             _tooltip.PlacementRectangle = new Rect(50, 0, 0, 0);
-            _tooltip.HorizontalOffset   = 20;
-            _tooltip.VerticalOffset     = 20;
+            _tooltip.HorizontalOffset = 20;
+            _tooltip.VerticalOffset = 20;
 
-            _tooltipText        = new TextBlock();
-            _tooltipText.Text   = string.Empty;
+            _tooltipText = new TextBlock();
+            _tooltipText.Text = string.Empty;
             _tooltipText.Margin = new Thickness(6, 0, 0, 0);
 
             //Create BulletDecorator and set it as the tooltip content.
             Ellipse bullet = new Ellipse();
-            bullet.Height  = 10;
-            bullet.Width   = 10;
-            bullet.Fill    = Brushes.LightCyan;
+            bullet.Height = 10;
+            bullet.Width = 10;
+            bullet.Fill = Brushes.LightCyan;
 
             BulletDecorator decorator = new BulletDecorator();
             decorator.Bullet = bullet;
             decorator.Margin = new Thickness(0, 0, 10, 0);
-            decorator.Child  = _tooltipText;
+            decorator.Child = _tooltipText;
 
-            _tooltip.Content    = decorator;
-            _tooltip.IsOpen     = false;
+            _tooltip.Content = decorator;
+            _tooltip.IsOpen = false;
             _tooltip.Visibility = Visibility.Hidden;
 
             //Finally, set tooltip on this canvas
-            this.ToolTip    = _tooltip;
+            this.ToolTip = _tooltip;
             this.Background = Brushes.Transparent;
 
             _animationCanvas = new SvgAnimationLayer(this);
+
+            this.SnapsToDevicePixels = true;
         }
 
         #endregion
@@ -114,25 +117,29 @@ namespace SharpVectors.Runtime
 
         public Rect Bounds
         {
-            get
-            {
+            get {
                 return _bounds;
             }
         }
 
         public SvgAnimationLayer AnimationCanvas
         {
-            get
-            {
+            get {
                 return _animationCanvas;
             }
         }
 
         public Transform DisplayTransform
         {
-            get
-            {
+            get {
                 return _displayTransform;
+            }
+        }
+
+        public Point DisplayOffset
+        {
+            get {
+                return new Point(_offsetX, _offsetY);
             }
         }
 
@@ -157,6 +164,16 @@ namespace SharpVectors.Runtime
             }
         }
 
+        public SvgInteractiveModes InteractiveMode 
+        {
+            get {
+                return _interactiveMode;
+            }
+            set {
+                _interactiveMode = value;
+            }
+        }
+
         #endregion
 
         #region Protected Properties
@@ -164,13 +181,11 @@ namespace SharpVectors.Runtime
         // Provide a required override for the VisualChildrenCount property.
         protected override int VisualChildrenCount
         {
-            get 
-            {
+            get {
                 if (_hostVisual != null)
                 {
                     return 1;
                 }
-
                 return 0;
             }
         }
@@ -245,7 +260,7 @@ namespace SharpVectors.Runtime
 
             _wholeDrawing = whole;
             _linksDrawing = links;
-            _mainDrawing  = main;
+            _mainDrawing = main;
 
             this.InvalidateMeasure();
         }
@@ -254,7 +269,7 @@ namespace SharpVectors.Runtime
         {
             _offsetX = 0;
             _offsetY = 0;
-            _bounds  = new Rect(0, 0, 1, 1);
+            _bounds = new Rect(0, 0, 1, 1);
 
             _wholeDrawing = null;
 
@@ -264,11 +279,11 @@ namespace SharpVectors.Runtime
             this.ClearDrawings();
 
             this.InvalidateMeasure();
-//            this.InvalidateVisual();
+            //            this.InvalidateVisual();
             this.UpdateLayout();
 
-//            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
-//            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
+            //            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
+            //            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
         }
 
         #region RenderDiagrams Methods
@@ -364,7 +379,7 @@ namespace SharpVectors.Runtime
                 if (!rectBounds.IsEmpty)
                 {
                     // Return the new size
-                    double diaWidth  = rectBounds.Width;
+                    double diaWidth = rectBounds.Width;
                     double diaHeight = rectBounds.Height;
                     if (rectBounds.X > 0)
                     {
@@ -736,7 +751,7 @@ namespace SharpVectors.Runtime
             _displayTransform = Transform.Identity;
 
             TranslateTransform offsetTransform = null;
-            Rect rectBounds = group.Bounds; 
+            Rect rectBounds = group.Bounds;
             if (!rectBounds.IsEmpty)
             {
                 // Return the new size
@@ -757,7 +772,7 @@ namespace SharpVectors.Runtime
 
                 if (!_offsetX.Equals(0) || !_offsetY.Equals(0))
                 {
-                    offsetTransform   = new TranslateTransform(-_offsetX, -_offsetY);  
+                    offsetTransform = new TranslateTransform(-_offsetX, -_offsetY);
                     _displayTransform = new TranslateTransform(_offsetX, _offsetY); // the inverse...
                 }
             }
@@ -765,29 +780,29 @@ namespace SharpVectors.Runtime
             //Canvas.SetTop(this, -_offsetX);
             //Canvas.SetLeft(this, -_offsetY);
 
-            //if (offsetTransform != null)
-            //{
-            //    drawingContext.PushTransform(offsetTransform);
-            //}
+            if (offsetTransform != null)
+            {
+                drawingContext.PushTransform(offsetTransform);
+            }
 
             drawingContext.DrawDrawing(group);
 
-            //if (offsetTransform != null)
-            //{
-            //    drawingContext.Pop();
-            //}
+            if (offsetTransform != null)
+            {
+                drawingContext.Pop();
+            }
 
-            drawingVisual.Opacity = group.Opacity;
+//            drawingVisual.Opacity = group.Opacity;
 
             //Transform transform = group.Transform;
             //if (transform == null)
             //{
             //    transform = offsetTransform;
             //}
-            if (offsetTransform != null)
-            {
-                drawingVisual.Transform = offsetTransform;
-            }
+            //if (offsetTransform != null)
+            //{
+            //    drawingVisual.Transform = offsetTransform;
+            //}
             Geometry clipGeometry = group.ClipGeometry;
             if (clipGeometry != null)
             {
@@ -894,7 +909,7 @@ namespace SharpVectors.Runtime
         private void InsertLinkDrawing(DrawingGroup group)
         {
             this.AddDrawing(group);
-            
+
             if (_linkObjects != null)
             {
                 _linkObjects.Add(group);
@@ -910,22 +925,17 @@ namespace SharpVectors.Runtime
 
         #region HitTest Methods
 
-        //private Brush _testHitBrush;
-        //private Brush _testHitBrushPen;
-        //private Pen _testHitPen;
-        //private GeometryDrawing _testHit;
-        //private DrawingGroup _testHitGroup;
         private Drawing HitTest(Point pt)
         {
             if (_linkObjects == null)
             {
                 return null;
-            }   
-            
+            }
+
             Point ptDisplay = _displayTransform.Transform(pt);
 
-            DrawingGroup groupDrawing       = null;
-            GlyphRunDrawing glyRunDrawing   = null;
+            DrawingGroup groupDrawing = null;
+            GlyphRunDrawing glyRunDrawing = null;
             GeometryDrawing geometryDrawing = null;
 
             Drawing foundDrawing = null;
@@ -1146,8 +1156,8 @@ namespace SharpVectors.Runtime
         {
             if (group.Bounds.Contains(pt))
             {
-                DrawingGroup groupDrawing       = null;
-                GlyphRunDrawing glyRunDrawing   = null;
+                DrawingGroup groupDrawing = null;
+                GlyphRunDrawing glyRunDrawing = null;
                 GeometryDrawing geometryDrawing = null;
                 DrawingCollection drawings = group.Children;
 
@@ -1159,7 +1169,7 @@ namespace SharpVectors.Runtime
                         if (HitTestDrawing(geometryDrawing, pt))
                         {
                             return true;
-                        }               
+                        }
                     }
                     else if (TryCast.Cast(drawing, out groupDrawing))
                     {

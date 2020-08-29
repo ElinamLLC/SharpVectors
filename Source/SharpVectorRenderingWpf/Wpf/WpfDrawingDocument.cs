@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ using System.Windows.Media;
 
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
+using System.Linq;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -23,6 +25,7 @@ namespace SharpVectors.Renderers.Wpf
         private IDictionary<string, Drawing> _guidMap;
 
         private DrawingGroup _hitGroup;
+        private SortedList<int, Drawing> _hitList;
 
         #endregion
 
@@ -30,9 +33,10 @@ namespace SharpVectors.Renderers.Wpf
 
         public WpfDrawingDocument()
         {
-            _idMap   = new Dictionary<string, Drawing>(StringComparer.Ordinal);
-            _guidMap = new Dictionary<string, Drawing>(StringComparer.Ordinal);
+            _idMap            = new Dictionary<string, Drawing>(StringComparer.Ordinal);
+            _guidMap          = new Dictionary<string, Drawing>(StringComparer.Ordinal);
             _displayTransform = Transform.Identity;
+            _hitList          = new SortedList<int, Drawing>();
         }
 
         #endregion
@@ -349,6 +353,14 @@ namespace SharpVectors.Renderers.Wpf
         private Drawing PerformHitTest(Point pt)
         {
             _hitGroup = null;
+            if (_hitList == null)
+            {
+                _hitList = new SortedList<int, Drawing>();
+            }
+            else if (_hitList.Count != 0)
+            {
+                _hitList.Clear();
+            }
 
             if (_svgDrawing == null)
             {
@@ -357,8 +369,8 @@ namespace SharpVectors.Renderers.Wpf
 
             Point ptDisplay = _displayTransform.Transform(pt);
 
-            DrawingGroup groupDrawing = null;
-            GlyphRunDrawing glyRunDrawing = null;
+            DrawingGroup groupDrawing       = null;
+            GlyphRunDrawing glyRunDrawing   = null;
             GeometryDrawing geometryDrawing = null;
 
             Drawing foundDrawing = null;
@@ -371,29 +383,52 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     if (HitTestDrawing(geometryDrawing, ptDisplay))
                     {
-                        string uniqueId = SvgObject.GetUniqueId(geometryDrawing);
-                        if (!string.IsNullOrWhiteSpace(uniqueId))
+                        int orderNumber = SvgObject.GetOrder(drawing);
+                        if (orderNumber >= 0)
                         {
-                            foundDrawing = drawing;
-                            break;
+                            _hitList[orderNumber] = drawing;
+                        }
+                        else
+                        {
+                            string uniqueId = SvgObject.GetUniqueId(geometryDrawing);
+                            if (!string.IsNullOrWhiteSpace(uniqueId))
+                            {
+                                foundDrawing = drawing;
+                                break;
+                            }
                         }
                     }
                 }
                 else if (TryCast.Cast(drawing, out groupDrawing))
                 {
+                    int orderNumber = SvgObject.GetOrder(drawing);
                     if (SvgObject.GetType(groupDrawing) == SvgObjectType.Text &&
                         groupDrawing.Bounds.Contains(ptDisplay))
                     {
-                        foundDrawing = drawing;
-                        break;
+                        if (orderNumber >= 0)
+                        {
+                            _hitList[orderNumber] = drawing;
+                        }
+                        else
+                        {
+                            foundDrawing = drawing;
+                            break;
+                        }
                     }
                     if (HitTestDrawing(groupDrawing, ptDisplay, out foundDrawing))
                     {
-                        string uniqueId = SvgObject.GetUniqueId(foundDrawing);
-                        if (!string.IsNullOrWhiteSpace(uniqueId))
+                        if (orderNumber >= 0)
                         {
-                            //foundDrawing = drawing;
-                            break;
+                            _hitList[orderNumber] = drawing;
+                        }
+                        else
+                        {
+                            string uniqueId = SvgObject.GetUniqueId(foundDrawing);
+                            if (!string.IsNullOrWhiteSpace(uniqueId))
+                            {
+                                //foundDrawing = drawing;
+                                break;
+                            }
                         }
                     }
                 }
@@ -401,10 +436,23 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     if (HitTestDrawing(glyRunDrawing, ptDisplay))
                     {
-                        foundDrawing = drawing;
-                        break;
+                        int orderNumber = SvgObject.GetOrder(drawing);
+                        if (orderNumber >= 0)
+                        {
+                            _hitList[orderNumber] = drawing;
+                        }
+                        else
+                        {
+                            foundDrawing = drawing;
+                            break;
+                        }
                     }
                 }
+            }
+
+            if (_hitList.Count != 0)
+            {
+                return _hitList.LastOrDefault().Value;
             }
 
             if (foundDrawing == null)
@@ -417,10 +465,16 @@ namespace SharpVectors.Renderers.Wpf
 
         private bool HitTestDrawing(GlyphRunDrawing drawing, Point pt)
         {
-            if (drawing != null && drawing.Bounds.Contains(pt))
+            GeometryGroup geomGroup = (GeometryGroup)drawing.GlyphRun.BuildGeometry();
+            if (drawing.Bounds.Contains(pt) || geomGroup.Bounds.Contains(pt)
+                 || geomGroup.FillContains(pt, 1, ToleranceType.Absolute))
             {
                 return true;
             }
+            //if (drawing != null && drawing.Bounds.Contains(pt))
+            //{
+            //    return true;
+            //}
 
             return false;
         }
@@ -516,9 +570,20 @@ namespace SharpVectors.Renderers.Wpf
         private bool HitTestDrawing(DrawingGroup group, Point pt, out Drawing hitDrawing)
         {
             hitDrawing = null;
+            bool isHit = false;
 
             if (group.Bounds.Contains(pt))
             {
+                var transform = group.Transform;
+                if (transform != null)
+                {
+                    var matrix = transform.Value;
+                    if (matrix != null && matrix.IsIdentity == false)
+                    {
+                        pt = transform.Inverse.Transform(pt);
+                    }
+                }
+
                 DrawingGroup groupDrawing       = null;
                 GlyphRunDrawing glyRunDrawing   = null;
                 GeometryDrawing geometryDrawing = null;
@@ -532,7 +597,16 @@ namespace SharpVectors.Renderers.Wpf
                         if (HitTestDrawing(geometryDrawing, pt))
                         {
                             hitDrawing = drawing;
-                            return true;
+                            int orderNumber = SvgObject.GetOrder(drawing);
+                            if (orderNumber >= 0)
+                            {
+                                _hitList[orderNumber] = drawing;
+                                isHit = false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                     }
                     else if (TryCast.Cast(drawing, out groupDrawing))
@@ -542,11 +616,29 @@ namespace SharpVectors.Renderers.Wpf
                         if (objectType == SvgObjectType.Text)
                         {
                             hitDrawing = drawing;
-                            return true;
+                            int orderNumber = SvgObject.GetOrder(drawing);
+                            if (orderNumber >= 0)
+                            {
+                                _hitList[orderNumber] = drawing;
+                                isHit = false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                         if (HitTestDrawing(groupDrawing, pt, out hitDrawing))
                         {
-                            return true;
+                            int orderNumber = SvgObject.GetOrder(drawing);
+                            if (orderNumber >= 0)
+                            {
+                                _hitList[orderNumber] = drawing;
+                                isHit = false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                     }
                     else if (TryCast.Cast(drawing, out glyRunDrawing))
@@ -554,7 +646,16 @@ namespace SharpVectors.Renderers.Wpf
                         if (HitTestDrawing(glyRunDrawing, pt))
                         {
                             hitDrawing = glyRunDrawing;
-                            return true;
+                            int orderNumber = SvgObject.GetOrder(drawing);
+                            if (orderNumber >= 0)
+                            {
+                                _hitList[orderNumber] = drawing;
+                                isHit = false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -565,7 +666,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
-            return false;
+            return isHit;
         }
 
         #endregion
@@ -794,6 +895,42 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Enumerate Drawing
 
+        private DrawingGroup GetDrawingLayer(DrawingGroup drawingGroup)
+        {
+            DrawingGroup groupDrawing = null;
+
+            // Enumerate the drawings in the DrawingCollection.
+            foreach (Drawing drawing in drawingGroup.Children)
+            {
+                var itemKey = SvgLink.GetKey(drawing);
+                if (!string.IsNullOrWhiteSpace(itemKey) &&
+                    itemKey.Equals(SvgObject.DrawLayer, StringComparison.OrdinalIgnoreCase))
+                {
+                    return (DrawingGroup)drawing;
+                }
+
+                // If the drawing is a DrawingGroup, call the function recursively.
+                if (TryCast.Cast(drawing, out groupDrawing))
+                {
+                    SvgObjectType objectType = SvgObject.GetType(groupDrawing);
+                    if (objectType != SvgObjectType.Text)
+                    {
+                        var nextGroup = GetDrawingLayer(groupDrawing);
+                        if (nextGroup != groupDrawing)
+                        {
+                            itemKey = SvgLink.GetKey(nextGroup);
+                            if (!string.IsNullOrWhiteSpace(itemKey) &&
+                                itemKey.Equals(SvgObject.DrawLayer, StringComparison.OrdinalIgnoreCase))
+                            {
+                                return nextGroup;
+                            }
+                        }
+                    }
+                }
+            }
+            return drawingGroup;
+        }
+
         private void EnumerateDrawing()
         {
             if (_svgDocument == null || _svgDrawing == null)
@@ -803,7 +940,7 @@ namespace SharpVectors.Renderers.Wpf
             _idMap   = new Dictionary<string, Drawing>(StringComparer.Ordinal);
             _guidMap = new Dictionary<string, Drawing>(StringComparer.Ordinal);
 
-            this.EnumDrawingGroup(_svgDrawing);
+            this.EnumDrawingGroup(GetDrawingLayer(_svgDrawing));
 
             _isEnumerated = true;            
         }
@@ -811,17 +948,13 @@ namespace SharpVectors.Renderers.Wpf
         // Enumerate the drawings in the DrawingGroup.
         private void EnumDrawingGroup(DrawingGroup drawingGroup)
         {
-            DrawingCollection dc = drawingGroup.Children;
-
-            DrawingGroup groupDrawing       = null;
-
             // Enumerate the drawings in the DrawingCollection.
-            foreach (Drawing drawing in dc)
+            foreach (Drawing drawing in drawingGroup.Children)
             {
                 string objectId = SvgObject.GetId(drawing);
                 if (!string.IsNullOrWhiteSpace(objectId))
                 {
-                    _idMap.Add(objectId, drawing);
+                    _idMap[objectId] = drawing;
                 }
                 string objectName = (string)drawing.GetValue(FrameworkElement.NameProperty);
                 if (!string.IsNullOrWhiteSpace(objectName))
@@ -831,13 +964,16 @@ namespace SharpVectors.Renderers.Wpf
                 string uniqueId = SvgObject.GetUniqueId(drawing);
                 if (!string.IsNullOrWhiteSpace(uniqueId))
                 {
-                    _guidMap.Add(uniqueId, drawing);
+                    _guidMap[uniqueId] = drawing;
                 }
+
+                DrawingGroup groupDrawing = null;
 
                 // If the drawing is a DrawingGroup, call the function recursively.
                 if (TryCast.Cast(drawing, out groupDrawing))
                 {
                     SvgObjectType objectType = SvgObject.GetType(groupDrawing);
+
                     if (objectType != SvgObjectType.Text)
                     {
                         EnumDrawingGroup(groupDrawing);

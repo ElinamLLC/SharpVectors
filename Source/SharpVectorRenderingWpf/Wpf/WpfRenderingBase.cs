@@ -165,8 +165,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (drawing != null && _context != null)
             {
-                if (string.IsNullOrWhiteSpace(_elementId) 
-                    || !string.Equals(_elementId, _svgElement.Id))
+                if (string.IsNullOrWhiteSpace(_elementId) || !string.Equals(_elementId, _svgElement.Id))
                 {
                     //_elementId = this.GetElementName();
                     _elementId = _svgElement.Id;

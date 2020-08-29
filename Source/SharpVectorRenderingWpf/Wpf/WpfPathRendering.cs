@@ -155,6 +155,14 @@ namespace SharpVectors.Renderers.Wpf
                 //}
             }
 
+            if (context.InteractiveMode != SvgInteractiveModes.None)
+            {
+                if (_drawGroup == null)
+                {
+                    _drawGroup = new DrawingGroup();
+                }
+            }
+
             if (pathTransform != null || pathClip != null || pathMask != null || (opacityValue >= 0 && opacityValue < 1))
             {
                 if (_drawGroup == null)
@@ -176,7 +184,20 @@ namespace SharpVectors.Renderers.Wpf
             }
             else
             {
-                _drawGroup = null;
+                if (context.InteractiveMode == SvgInteractiveModes.None)
+                {
+                    _drawGroup = null;
+                }
+                else
+                {
+                    DrawingGroup curGroup = _context.Peek();
+                    Debug.Assert(curGroup != null);
+                    if (curGroup != null)
+                    {
+                        curGroup.Children.Add(_drawGroup);
+                        context.Push(_drawGroup);
+                    }
+                }
             }
 
             if (_drawGroup != null)
