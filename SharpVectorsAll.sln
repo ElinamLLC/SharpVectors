@@ -1,48 +1,43 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A1967865-8F3B-4976-A7EC-8F91EAE4C964}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Css", "Source\SharpVectorCss\SharpVectors.Css.csproj", "{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Css", "Source\SharpVectorCss\SharpVectors.Css.csproj", "{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Dom", "Source\SharpVectorDom\SharpVectors.Dom.csproj", "{FE34CBC0-D23C-4A95-BA64-83A031814010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Dom", "Source\SharpVectorDom\SharpVectors.Dom.csproj", "{FE34CBC0-D23C-4A95-BA64-83A031814010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Model", "Source\SharpVectorModel\SharpVectors.Model.csproj", "{5D336F48-3FB9-4382-B4B9-06974C764007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Model", "Source\SharpVectorModel\SharpVectors.Model.csproj", "{5D336F48-3FB9-4382-B4B9-06974C764007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Gdi", "Source\SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj", "{0AD99D97-24ED-484D-9430-9905811F8A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Rendering.Gdi", "Source\SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj", "{0AD99D97-24ED-484D-9430-9905811F8A4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core", "Source\SharpVectorCore\SharpVectors.Core.csproj", "{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Core", "Source\SharpVectorCore\SharpVectors.Core.csproj", "{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Wpf", "Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Rendering.Wpf", "Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestSvgSample", "Samples\WpfTestSvgSample\WpfTestSvgSample.csproj", "{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgSample", "Samples\WpfTestSvgSample\WpfTestSvgSample.csproj", "{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfW3cSvgTestSuite", "Samples\WpfW3cSvgTestSuite\WpfW3cSvgTestSuite.csproj", "{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfW3cSvgTestSuite", "Samples\WpfW3cSvgTestSuite\WpfW3cSvgTestSuite.csproj", "{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Converters.Wpf", "Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Converters.Wpf", "Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Runtime.Wpf", "Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Runtime.Wpf", "Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiTestSvgControl", "Samples\GdiTestSvgControl\GdiTestSvgControl.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiTestSvgControl", "Samples\GdiTestSvgControl\GdiTestSvgControl.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfSvgTestBox", "Samples\WpfSvgTestBox\WpfSvgTestBox.csproj", "{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converters.Wpf", "Applications\ConvertersWpf\Converters.Wpf.csproj", "{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiW3cSvgTestSuite", "Samples\GdiW3cSvgTestSuite\GdiW3cSvgTestSuite.csproj", "{406733B7-B9C5-4100-8D10-F3CCE9C58B2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squiggle.Wpf", "Applications\SquiggleWpf\Squiggle.Wpf.csproj", "{950268C7-328C-4921-A554-B806DD966869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiSvgTestBox", "Samples\GdiSvgTestBox\GdiSvgTestBox.csproj", "{5A71211F-9EDA-4C43-8DDC-E3EB54843113}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSvgTestBox", "Samples\WpfSvgTestBox\WpfSvgTestBox.csproj", "{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgControl", "Samples\WpfTestSvgControl\WpfTestSvgControl.csproj", "{28586359-004C-45B5-823E-38F714784B31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiW3cSvgTestSuite", "Samples\GdiW3cSvgTestSuite\GdiW3cSvgTestSuite.csproj", "{406733B7-B9C5-4100-8D10-F3CCE9C58B2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestThreadSafety", "Samples\WpfTestThreadSafety\WpfTestThreadSafety.csproj", "{19ED33D1-7D07-43ED-878A-16630CD4035D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiSvgTestBox", "Samples\GdiSvgTestBox\GdiSvgTestBox.csproj", "{5A71211F-9EDA-4C43-8DDC-E3EB54843113}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestSvgControl", "Samples\WpfTestSvgControl\WpfTestSvgControl.csproj", "{28586359-004C-45B5-823E-38F714784B31}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestThreadSafety", "Samples\WpfTestThreadSafety\WpfTestThreadSafety.csproj", "{19ED33D1-7D07-43ED-878A-16630CD4035D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Scripting.Jint", "Source\SharpVectorScriptingJint\SharpVectors.Scripting.Jint.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Scripting.Jint", "Source\SharpVectorScriptingJint\SharpVectors.Scripting.Jint.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,14 +89,6 @@ Global
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{950268C7-328C-4921-A554-B806DD966869}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -134,8 +121,6 @@ Global
 		{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{2B1A01CB-E5C5-4D51-A0D1-2FF715260164} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{CCFEF6F0-D931-419A-8833-1C3464232ACB} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
-		{0B1FD1AD-6004-40CC-94A1-B598F6B00A1A} = {B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}
-		{950268C7-328C-4921-A554-B806DD966869} = {B86D794E-1A2E-4F5D-AEFB-30D6A2A295E2}
 		{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{406733B7-B9C5-4100-8D10-F3CCE9C58B2C} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{5A71211F-9EDA-4C43-8DDC-E3EB54843113} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
