@@ -2,7 +2,10 @@
 using System.Xml;
 using System.IO;
 using System.IO.Compression;
+using System.Diagnostics;
+using System.ComponentModel;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 using System.Windows;
 using System.Windows.Input;
@@ -12,21 +15,22 @@ using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
-using IoPath = System.IO.Path;
-
 using SharpVectors.Runtime.Utils;
-using System.Runtime.CompilerServices;
-using System.Diagnostics;
+
+using IoPath = System.IO.Path;
 
 namespace SharpVectors.Runtime
 {
     /// <summary>
-    /// This is the main drawing canvas for the wiring diagrams.
+    /// This is the main drawing canvas for the rendered SVG diagrams.
     /// </summary>
     public class SvgDrawingCanvas : Canvas
     {
         #region Private Fields
 
+        private const string DefaultTitle = "SharpVectors";
+
+        private string _appTitle;
         private bool _drawForInteractivity;
 
         private Rect _bounds;
@@ -57,6 +61,9 @@ namespace SharpVectors.Runtime
 
         private SvgAnimationLayer _animationCanvas;
 
+        private event EventHandler<SvgAlertArgs> _svgAlerts;
+        private event EventHandler<SvgErrorArgs> _svgErrors;
+
         #endregion
 
         #region Constructors and Destructor
@@ -70,6 +77,8 @@ namespace SharpVectors.Runtime
         public SvgDrawingCanvas()
         {
             _drawForInteractivity = true;
+
+            _appTitle    = DefaultTitle;
 
             _drawObjects = new List<Drawing>();
             _linkObjects = new List<Drawing>();
@@ -114,6 +123,33 @@ namespace SharpVectors.Runtime
         #endregion
 
         #region Public Properties
+
+        [DefaultValue(DefaultTitle)]
+        [Description("The title of the application, used in displaying error and alert messages.")]
+        public string AppTitle
+        {
+            get {
+                return _appTitle;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _appTitle = value;
+                }
+            }
+        }
+
+        public bool DesignMode
+        {
+            get {
+                if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
+                    LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
 
         public Rect Bounds
         {
@@ -172,6 +208,22 @@ namespace SharpVectors.Runtime
             set {
                 _interactiveMode = value;
             }
+        }
+
+        #endregion
+
+        #region Public Events
+
+        public event EventHandler<SvgAlertArgs> Alert
+        {
+            add { _svgAlerts += value; }
+            remove { _svgAlerts -= value; }
+        }
+
+        public event EventHandler<SvgErrorArgs> Error
+        {
+            add { _svgErrors += value; }
+            remove { _svgErrors -= value; }
         }
 
         #endregion
@@ -655,6 +707,34 @@ namespace SharpVectors.Runtime
             _hitVisual = null;
 
             this.Cursor = Cursors.Arrow;
+        }
+
+        protected virtual void OnHandleAlert(string message)
+        {
+            if (this.DesignMode)
+            {
+                return;
+            }
+            var alertArgs = new SvgAlertArgs(message);
+            _svgAlerts?.Invoke(this, alertArgs);
+            if (!alertArgs.Handled)
+            {
+                MessageBox.Show(alertArgs.Message, _appTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        protected virtual void OnHandleError(string message, Exception exception)
+        {
+            if (this.DesignMode)
+            {
+                return;
+            }
+            var errorArgs = new SvgErrorArgs(message, exception);
+            _svgErrors?.Invoke(this, errorArgs);
+            if (!errorArgs.Handled)
+            {
+                throw new SvgErrorException(errorArgs);
+            }
         }
 
         #endregion

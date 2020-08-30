@@ -377,7 +377,7 @@ namespace SharpVectors.Renderers.Gdi
 
                 Matrix matrix = new Matrix((float)svgMatrix.A, (float)svgMatrix.B, (float)svgMatrix.C,
                       (float)svgMatrix.D, (float)svgMatrix.E, (float)svgMatrix.F);
-                SvgRectF bounds = SvgConverter.ToRect(gp.GetBounds(matrix));
+                SvgRectF bounds = SvgConvert.ToRect(gp.GetBounds(matrix));
                 bounds = SvgRectF.Inflate(bounds, margin, margin);
 
                 return bounds;

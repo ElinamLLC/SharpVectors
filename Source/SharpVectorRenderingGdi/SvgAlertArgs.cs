@@ -4,12 +4,32 @@ namespace SharpVectors.Renderers
 {
     public sealed class SvgAlertArgs : EventArgs
     {
+        private bool _isHandled;
+        private string _message;
+
         public SvgAlertArgs(string message)
         {
-            this.Message = message;
+            _message = message;
         }
 
-        public string Message { get; private set; }
-        public bool Handled { get; set; }
+        public bool Handled
+        {
+            get {
+                return _isHandled;
+            }
+            set {
+                _isHandled = value;
+            }
+        }
+
+        public string Message
+        {
+            get {
+                return _message;
+            }
+            private set {
+                _message = value;
+            }
+        }
     }
 }

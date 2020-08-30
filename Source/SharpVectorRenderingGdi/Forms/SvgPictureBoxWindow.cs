@@ -13,7 +13,7 @@ namespace SharpVectors.Renderers.Forms
         #region Private fields
 
         private bool _preferUserSize;
-        private SvgPictureBox _svgPictureBox;
+        private ISvgControl _svgControl;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace SharpVectors.Renderers.Forms
             _preferUserSize = true;
         }
 
-        public SvgPictureBoxWindow(SvgPictureBox control, ISvgRenderer renderer)
+        public SvgPictureBoxWindow(ISvgControl control, ISvgRenderer renderer)
             : base(control.Width, control.Height, renderer)
         {
             if (control == null)
@@ -44,10 +44,10 @@ namespace SharpVectors.Renderers.Forms
             }
 
             _preferUserSize = true;
-            _svgPictureBox  = control;
+            _svgControl  = control;
         }
 
-        private SvgPictureBoxWindow(SvgPictureBox control, SvgWindow parentWindow, long innerWidth, long innerHeight)
+        private SvgPictureBoxWindow(ISvgControl control, SvgWindow parentWindow, long innerWidth, long innerHeight)
             : base(parentWindow, innerWidth, innerHeight)
         {
             if (control == null)
@@ -56,7 +56,7 @@ namespace SharpVectors.Renderers.Forms
             }
 
             _preferUserSize = true;
-            _svgPictureBox  = control;
+            _svgControl  = control;
         }
 
         #endregion
@@ -70,9 +70,9 @@ namespace SharpVectors.Renderers.Forms
                 {
                     return base.InnerWidth;
                 }
-                if (_svgPictureBox != null)
+                if (_svgControl != null)
                 {
-                    return _svgPictureBox.Width;
+                    return _svgControl.Width;
                 }
                 return base.InnerWidth;
             }
@@ -88,9 +88,9 @@ namespace SharpVectors.Renderers.Forms
                 {
                     return base.InnerHeight;
                 }
-                if (_svgPictureBox != null)
+                if (_svgControl != null)
                 {
-                    return _svgPictureBox.Height;
+                    return _svgControl.Height;
                 }
 
                 return base.InnerHeight;
@@ -125,12 +125,12 @@ namespace SharpVectors.Renderers.Forms
 
         public override void Alert(string message)
         {
-            if (string.IsNullOrWhiteSpace(message) || _svgPictureBox == null)
+            if (string.IsNullOrWhiteSpace(message) || _svgControl == null)
             {
                 return;
             }
 
-            _svgPictureBox.HandleAlert(message);
+            _svgControl.HandleAlert(message);
         }
 
         public override ISvgRenderer CreateSvgRenderer()

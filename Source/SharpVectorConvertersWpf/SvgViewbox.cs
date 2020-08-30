@@ -15,20 +15,20 @@ using System.Windows.Controls;
 using System.Windows.Resources;
 
 using SharpVectors.Runtime;
+using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This is a <see cref="Viewbox"/> control for viewing SVG file in WPF
-    /// applications.
+    /// This is a <see cref="Viewbox"/> control for viewing SVG file in WPF applications.
     /// </summary>
     /// <remarks>
     /// It wraps the drawing canvas, <see cref="SvgDrawingCanvas"/>, instead of
     /// image control, therefore any interactivity support implemented in the
     /// drawing canvas will be available in the <see cref="Viewbox"/>.
     /// </remarks>
-    public class SvgViewbox : Viewbox, IUriContext
+    public class SvgViewbox : Viewbox, ISvgControl, IUriContext
     {
         #region Public Fields
 
@@ -155,6 +155,8 @@ namespace SharpVectors.Converters
 
         #region Private Fields
 
+        private const string DefaultTitle = "SharpVectors";
+
         private bool _isAutoSized;
         private bool _autoSize;
         private bool _textAsGeometry;
@@ -163,6 +165,7 @@ namespace SharpVectors.Converters
 
         private DrawingGroup _svgDrawing;
 
+        private string _appTitle;
         private CultureInfo _culture;
 
         private Uri _baseUri;
@@ -173,6 +176,9 @@ namespace SharpVectors.Converters
         private SvgDrawingCanvas _drawingCanvas;
 
         private SvgInteractiveModes _interactiveMode;
+
+        private event EventHandler<SvgAlertArgs> _svgAlerts;
+        private event EventHandler<SvgErrorArgs> _svgErrors;
 
         #endregion
 
@@ -188,6 +194,8 @@ namespace SharpVectors.Converters
             _optimizePath   = true;
             _drawingCanvas  = new SvgDrawingCanvas();
 
+            _appTitle       = DefaultTitle;
+
             this.Child      = _drawingCanvas;
         }
 
@@ -202,7 +210,38 @@ namespace SharpVectors.Converters
 
         #endregion
 
+        #region Public Events
+
+        public event EventHandler<SvgAlertArgs> Alert
+        {
+            add { _svgAlerts += value; }
+            remove { _svgAlerts -= value; }
+        }
+
+        public event EventHandler<SvgErrorArgs> Error
+        {
+            add { _svgErrors += value; }
+            remove { _svgErrors -= value; }
+        }
+
+        #endregion
+
         #region Public Properties
+
+        [DefaultValue(DefaultTitle)]
+        [Description("The title of the application, used in displaying error and alert messages.")]
+        public string AppTitle
+        {
+            get {
+                return _appTitle;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _appTitle = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the path to the SVG file to load into this 
@@ -657,9 +696,9 @@ namespace SharpVectors.Converters
 
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
-                //TODO: Rethrow the exception?
+                this.OnHandleError(null, ex);
                 return false;
             }
         }
@@ -740,9 +779,9 @@ namespace SharpVectors.Converters
                 }
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
-                //TODO: Rethrow the exception?
+                this.OnHandleError(null, ex);
                 return false;
             }
         }
@@ -847,9 +886,9 @@ namespace SharpVectors.Converters
                 }
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
-                //TODO: Rethrow the exception?
+                this.OnHandleError(null, ex);
                 return false;
             }
         }
@@ -1109,30 +1148,37 @@ namespace SharpVectors.Converters
         /// </param>
         public void Unload(bool displayMessage = false, string message = "")
         {
-            _sourceUri    = null;
-            _sourceSvg    = null;
-            _sourceStream = null;
-
-            this.OnUnloadDiagram();
-
-            _svgDrawing = null;
-
-            if (_drawingCanvas != null)
+            try
             {
-                var messageText = this.MessageText;
-                if (!string.IsNullOrWhiteSpace(message))
-                {
-                    messageText = message;
-                }
+                _sourceUri    = null;
+                _sourceSvg    = null;
+                _sourceStream = null;
 
-                if (displayMessage && !string.IsNullOrWhiteSpace(messageText))
+                this.OnUnloadDiagram();
+
+                _svgDrawing = null;
+
+                if (_drawingCanvas != null)
                 {
-                    var messageDrawing = this.CreateMessageText(messageText);
-                    if (messageDrawing != null)
+                    var messageText = this.MessageText;
+                    if (!string.IsNullOrWhiteSpace(message))
                     {
-                        _drawingCanvas.RenderDiagrams(messageDrawing);
+                        messageText = message;
+                    }
+
+                    if (displayMessage && !string.IsNullOrWhiteSpace(messageText))
+                    {
+                        var messageDrawing = this.CreateMessageText(messageText);
+                        if (messageDrawing != null)
+                        {
+                            _drawingCanvas.RenderDiagrams(messageDrawing);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                this.OnHandleError(null, ex);
             }
         }
 
@@ -1254,15 +1300,10 @@ namespace SharpVectors.Converters
 
                 return null;
             }
-            catch
+            catch (Exception ex)
             {
-                if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
-                    LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                {
-                    return null;
-                }
-
-                throw;
+                this.OnHandleError(null, ex);
+                return null;
             }
         }
 
@@ -1280,121 +1321,129 @@ namespace SharpVectors.Converters
         /// </returns>
         protected virtual DrawingGroup CreateDrawing(Uri svgSource, WpfDrawingSettings settings)
         {
-            if (svgSource == null)
+            try
             {
-                return null;
-            }
+                if (svgSource == null)
+                {
+                    return null;
+                }
 
-            string scheme = svgSource.Scheme;
-            if (string.IsNullOrWhiteSpace(scheme))
-            {
-                return null;
-            }
+                string scheme = svgSource.Scheme;
+                if (string.IsNullOrWhiteSpace(scheme))
+                {
+                    return null;
+                }
 
-            var comparer = StringComparison.OrdinalIgnoreCase;
+                var comparer = StringComparison.OrdinalIgnoreCase;
 
-            DrawingGroup drawing = null;
+                DrawingGroup drawing = null;
 
-            switch (scheme)
-            {
-                case "file":
-                //case "ftp":
-                case "https":
-                case "http":
-                    using (FileSvgReader reader = new FileSvgReader(settings))
-                    {
-                        drawing = reader.Read(svgSource);
-                    }
-                    break;
-                case "pack":
-                    StreamResourceInfo svgStreamInfo = null;
-                    if (svgSource.ToString().IndexOf("siteoforigin", comparer) >= 0)
-                    {
-                        svgStreamInfo = Application.GetRemoteStream(svgSource);
-                    }
-                    else
-                    {
-                        svgStreamInfo = Application.GetResourceStream(svgSource);
-                    }
-
-                    Stream svgStream = (svgStreamInfo != null) ? svgStreamInfo.Stream : null;
-
-                    if (svgStream != null)
-                    {
-                        string fileExt = Path.GetExtension(svgSource.ToString());
-                        bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
-                            string.Equals(fileExt, ".svgz", comparer);
-
-                        if (isCompressed)
+                switch (scheme)
+                {
+                    case "file":
+                    //case "ftp":
+                    case "https":
+                    case "http":
+                        using (FileSvgReader reader = new FileSvgReader(settings))
                         {
-                            using (svgStream)
+                            drawing = reader.Read(svgSource);
+                        }
+                        break;
+                    case "pack":
+                        StreamResourceInfo svgStreamInfo = null;
+                        if (svgSource.ToString().IndexOf("siteoforigin", comparer) >= 0)
+                        {
+                            svgStreamInfo = Application.GetRemoteStream(svgSource);
+                        }
+                        else
+                        {
+                            svgStreamInfo = Application.GetResourceStream(svgSource);
+                        }
+
+                        Stream svgStream = (svgStreamInfo != null) ? svgStreamInfo.Stream : null;
+
+                        if (svgStream != null)
+                        {
+                            string fileExt = Path.GetExtension(svgSource.ToString());
+                            bool isCompressed = !string.IsNullOrWhiteSpace(fileExt) &&
+                                string.Equals(fileExt, ".svgz", comparer);
+
+                            if (isCompressed)
                             {
-                                using (GZipStream zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                                using (svgStream)
+                                {
+                                    using (GZipStream zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                                    {
+                                        using (FileSvgReader reader = new FileSvgReader(settings))
+                                        {
+                                            drawing = reader.Read(zipStream);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                using (svgStream)
                                 {
                                     using (FileSvgReader reader = new FileSvgReader(settings))
                                     {
-                                        drawing = reader.Read(zipStream);
+                                        drawing = reader.Read(svgStream);
                                     }
                                 }
                             }
                         }
-                        else
+                        break;
+                    case "data":
+                        var sourceData = svgSource.OriginalString.Replace(" ", "");
+
+                        int nColon = sourceData.IndexOf(":", comparer);
+                        int nSemiColon = sourceData.IndexOf(";", comparer);
+                        int nComma = sourceData.IndexOf(",", comparer);
+
+                        string sMimeType = sourceData.Substring(nColon + 1, nSemiColon - nColon - 1);
+                        string sEncoding = sourceData.Substring(nSemiColon + 1, nComma - nSemiColon - 1);
+
+                        if (string.Equals(sMimeType.Trim(), "image/svg+xml", comparer)
+                            && string.Equals(sEncoding.Trim(), "base64", comparer))
                         {
-                            using (svgStream)
+                            string sContent = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
+                            byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
+                                0, sContent.Length);
+                            bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
+                            if (isGZiped)
                             {
-                                using (FileSvgReader reader = new FileSvgReader(settings))
+                                using (var stream = new MemoryStream(imageBytes))
                                 {
-                                    drawing = reader.Read(svgStream);
+                                    using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                                    {
+                                        using (var reader = new FileSvgReader(settings))
+                                        {
+                                            drawing = reader.Read(zipStream);
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                    break;
-                case "data":
-                    var sourceData = svgSource.OriginalString.Replace(" ", "");
-
-                    int nColon     = sourceData.IndexOf(":", comparer);
-                    int nSemiColon = sourceData.IndexOf(";", comparer);
-                    int nComma     = sourceData.IndexOf(",", comparer);
-
-                    string sMimeType = sourceData.Substring(nColon + 1, nSemiColon - nColon - 1);
-                    string sEncoding = sourceData.Substring(nSemiColon + 1, nComma - nSemiColon - 1);
-
-                    if (string.Equals(sMimeType.Trim(), "image/svg+xml", comparer)
-                        && string.Equals(sEncoding.Trim(), "base64", comparer))
-                    {
-                        string sContent   = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
-                        byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
-                            0, sContent.Length);
-                        bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
-                        if (isGZiped)
-                        {
-                            using (var stream = new MemoryStream(imageBytes))
+                            else
                             {
-                                using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                                using (var stream = new MemoryStream(imageBytes))
                                 {
                                     using (var reader = new FileSvgReader(settings))
                                     {
-                                        drawing = reader.Read(zipStream);
+                                        drawing = reader.Read(stream);
                                     }
                                 }
                             }
                         }
-                        else
-                        {
-                            using (var stream = new MemoryStream(imageBytes))
-                            {
-                                using (var reader = new FileSvgReader(settings))
-                                {
-                                    drawing = reader.Read(stream);
-                                }
-                            }
-                        }
-                    }
-                    break;
-            }
+                        break;
+                }
 
-            return drawing;
+                return drawing;
+            }
+            catch (Exception ex)
+            {
+                this.OnHandleError(null, ex);
+                return null;
+            }
         }
 
         /// <summary>
@@ -1411,19 +1460,27 @@ namespace SharpVectors.Converters
         /// </returns>
         protected virtual DrawingGroup CreateDrawing(Stream svgStream, WpfDrawingSettings settings)
         {
-            if (svgStream == null)
+            try
             {
+                if (svgStream == null)
+                {
+                    return null;
+                }
+
+                DrawingGroup drawing = null;
+
+                using (FileSvgReader reader = new FileSvgReader(settings))
+                {
+                    drawing = reader.Read(svgStream);
+                }
+
+                return drawing;
+            }
+            catch (Exception ex)
+            {
+                this.OnHandleError(null, ex);
                 return null;
             }
-
-            DrawingGroup drawing = null;
-
-            using (FileSvgReader reader = new FileSvgReader(settings))
-            {
-                drawing = reader.Read(svgStream);
-            }
-
-            return drawing;
         }
 
         /// <summary>
@@ -1440,39 +1497,75 @@ namespace SharpVectors.Converters
         /// </returns>
         protected virtual DrawingGroup CreateDrawing(string svgSource, WpfDrawingSettings settings)
         {
-            if (string.IsNullOrWhiteSpace(svgSource))
+            try
             {
+                if (string.IsNullOrWhiteSpace(svgSource))
+                {
+                    return null;
+                }
+
+                DrawingGroup drawing = null;
+
+                var svgContent = svgSource.Trim();
+
+                var cdataStart = "<![CDATA[";
+                var cdataEnd = "]]>";
+
+                if (svgContent.StartsWith(cdataStart, StringComparison.OrdinalIgnoreCase) ||
+                    svgContent.EndsWith(cdataEnd, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine();
+                    var xmlDoc = XDocument.Parse(svgSource);
+                    var cdataElement = xmlDoc.DescendantNodes().OfType<XCData>().FirstOrDefault();
+                    if (cdataElement != null)
+                    {
+                        svgContent = cdataElement.Value;
+                    }
+                }
+
+                using (FileSvgReader reader = new FileSvgReader(settings))
+                {
+                    var textReader = new StringReader(svgContent);
+                    drawing = reader.Read(textReader);
+
+                    textReader.Dispose();
+                }
+
+                return drawing;
+            }
+            catch (Exception ex)
+            {
+                this.OnHandleError(null, ex);
                 return null;
             }
+        }
 
-            DrawingGroup drawing = null;
-
-            var svgContent = svgSource.Trim();
-
-            var cdataStart = "<![CDATA[";
-            var cdataEnd = "]]>";
-
-            if (svgContent.StartsWith(cdataStart, StringComparison.OrdinalIgnoreCase) ||
-                svgContent.EndsWith(cdataEnd, StringComparison.OrdinalIgnoreCase))
+        protected virtual void OnHandleAlert(string message)
+        {
+            if (this.DesignMode)
             {
-                Console.WriteLine();
-                var xmlDoc = XDocument.Parse(svgSource);
-                var cdataElement = xmlDoc.DescendantNodes().OfType<XCData>().FirstOrDefault();
-                if (cdataElement != null)
-                {
-                    svgContent = cdataElement.Value;
-                }
+                return;
             }
-
-            using (FileSvgReader reader = new FileSvgReader(settings))
+            var alertArgs = new SvgAlertArgs(message);
+            _svgAlerts?.Invoke(this, alertArgs);
+            if (!alertArgs.Handled)
             {
-                var textReader = new StringReader(svgContent);
-                drawing = reader.Read(textReader);
-
-                textReader.Dispose();
+                MessageBox.Show(alertArgs.Message, _appTitle, MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
 
-            return drawing;
+        protected virtual void OnHandleError(string message, Exception exception)
+        {
+            if (this.DesignMode)
+            {
+                return;
+            }
+            var errorArgs = new SvgErrorArgs(message, exception);
+            _svgErrors?.Invoke(this, errorArgs);
+            if (!errorArgs.Handled)
+            {
+                throw new SvgErrorException(errorArgs);
+            }
         }
 
         #endregion
@@ -1481,38 +1574,52 @@ namespace SharpVectors.Converters
 
         private void OnLoadDrawing(DrawingGroup drawing)
         {
-            if (drawing == null || _drawingCanvas == null)
+            try
             {
-                return;
+                if (drawing == null || _drawingCanvas == null)
+                {
+                    return;
+                }
+
+                // Clear the current drawing
+                this.OnUnloadDiagram();
+
+                // Allow the contained canvas to render the object.
+                _drawingCanvas.RenderDiagrams(drawing);
+
+                // Pass any tooltip object to the contained canvas
+                _drawingCanvas.ToolTip = this.ToolTip;
+
+                // Keep an instance of the current drawing
+                _svgDrawing = drawing;
+
+                // Finally, force a resize of the viewbox
+                this.OnAutoSizeChanged();
             }
-
-            // Clear the current drawing
-            this.OnUnloadDiagram();
-
-            // Allow the contained canvas to render the object.
-            _drawingCanvas.RenderDiagrams(drawing);
-
-            // Pass any tooltip object to the contained canvas
-            _drawingCanvas.ToolTip = this.ToolTip;
-
-            // Keep an instance of the current drawing
-            _svgDrawing = drawing;
-
-            // Finally, force a resize of the viewbox
-            this.OnAutoSizeChanged();
+            catch (Exception ex)
+            {
+                this.OnHandleError(null, ex);
+            }
         }
 
         private void OnUnloadDiagram()
         {
-            if (_drawingCanvas != null)
+            try
             {
-                _drawingCanvas.UnloadDiagrams();
-
-                if (_isAutoSized)
+                if (_drawingCanvas != null)
                 {
-                    this.Width  = double.NaN;
-                    this.Height = double.NaN;
+                    _drawingCanvas.UnloadDiagrams();
+
+                    if (_isAutoSized)
+                    {
+                        this.Width  = double.NaN;
+                        this.Height = double.NaN;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                this.OnHandleError(null, ex);
             }
         }
 
@@ -1701,6 +1808,72 @@ namespace SharpVectors.Converters
             set {
                 _baseUri = value;
             }
+        }
+
+        #endregion
+
+        #region ISvgControl Members
+
+        public bool DesignMode
+        {
+            get {
+                if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
+                    LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        int ISvgControl.Width
+        {
+            get {
+                return (int)this.ActualWidth;
+            }
+        }
+
+        int ISvgControl.Height
+        {
+            get {
+                return (int)this.ActualHeight;
+            }
+        }
+
+        void ISvgControl.HandleAlert(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleAlert(message);
+        }
+
+        void ISvgControl.HandleError(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleError(message, null);
+        }
+
+        void ISvgControl.HandleError(Exception exception)
+        {
+            if (exception == null || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleError(null, exception);
+        }
+
+        void ISvgControl.HandleError(string message, Exception exception)
+        {
+            if ((string.IsNullOrWhiteSpace(message) && exception == null) || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleError(message, exception);
         }
 
         #endregion

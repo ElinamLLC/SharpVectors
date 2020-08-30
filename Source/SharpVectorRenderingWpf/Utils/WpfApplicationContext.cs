@@ -5,12 +5,11 @@ using System.Security.Permissions;
 
 namespace SharpVectors.Renderers.Utils
 {
-    public sealed class WpfApplicationContext
+    public static class WpfApplicationContext
     {
         public static DirectoryInfo ExecutableDirectory
         {
-            get
-            {
+            get {
                 DirectoryInfo di;
                 try
                 {
@@ -22,7 +21,7 @@ namespace SharpVectors.Renderers.Utils
                     di = new DirectoryInfo(Path.GetDirectoryName(
                         System.Reflection.Assembly.GetExecutingAssembly().Location));
                 }
-                catch(SecurityException)
+                catch (SecurityException)
                 {
                     di = new DirectoryInfo(Directory.GetCurrentDirectory());
                 }
@@ -32,16 +31,14 @@ namespace SharpVectors.Renderers.Utils
 
         public static DirectoryInfo DocumentDirectory
         {
-            get
-            {
+            get {
                 return new DirectoryInfo(Directory.GetCurrentDirectory());
             }
         }
 
         public static Uri DocumentDirectoryUri
         {
-            get
-            {
+            get {
                 string sUri = DocumentDirectory.FullName + "/";
                 sUri = "file://" + sUri.Replace("\\", "/");
                 return new Uri(sUri);

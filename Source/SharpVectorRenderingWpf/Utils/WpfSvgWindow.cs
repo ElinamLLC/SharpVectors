@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Reflection;
+using System.Collections.Generic;
 
 using System.Windows;
 
@@ -15,6 +16,9 @@ namespace SharpVectors.Renderers.Utils
     {
         #region Private fields
 
+        private bool _preferUserSize;
+        private ISvgControl _svgControl;
+
         private XmlReaderSettings _settings;
 
         #endregion
@@ -24,11 +28,41 @@ namespace SharpVectors.Renderers.Utils
         public WpfSvgWindow(long innerWidth, long innerHeight, ISvgRenderer renderer)
             : base(innerWidth, innerHeight, renderer)
         {
+//            _preferUserSize = true;
         }
 
         public WpfSvgWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)
             : base(parentWindow, innerWidth, innerHeight)
         {
+//            _preferUserSize = true;
+        }
+
+        public WpfSvgWindow(ISvgControl control, ISvgRenderer renderer)
+            : base(control.Width, control.Height, renderer)
+        {
+            if (control == null)
+            {
+                throw new ArgumentNullException(nameof(control), "control cannot be null");
+            }
+            if (this.BaseUrls == null)
+            {
+                this.BaseUrls = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+//            _preferUserSize = true;
+            _svgControl = control;
+        }
+
+        private WpfSvgWindow(ISvgControl control, SvgWindow parentWindow, long innerWidth, long innerHeight)
+            : base(parentWindow, innerWidth, innerHeight)
+        {
+            if (control == null)
+            {
+                throw new ArgumentNullException(nameof(control), "control cannot be null");
+            }
+
+//            _preferUserSize = true;
+            _svgControl = control;
         }
 
         #endregion
@@ -48,6 +82,14 @@ namespace SharpVectors.Renderers.Utils
         public override long InnerWidth
         {
             get {
+                if (_preferUserSize && base.InnerWidth != 0 && base.InnerHeight != 0)
+                {
+                    return base.InnerWidth;
+                }
+                if (_svgControl != null)
+                {
+                    return _svgControl.Width;
+                }
                 return base.InnerWidth;
             }
             set {
@@ -58,6 +100,15 @@ namespace SharpVectors.Renderers.Utils
         public override long InnerHeight
         {
             get {
+                if (_preferUserSize && base.InnerWidth != 0 && base.InnerHeight != 0)
+                {
+                    return base.InnerHeight;
+                }
+                if (_svgControl != null)
+                {
+                    return _svgControl.Height;
+                }
+
                 return base.InnerHeight;
             }
             set {
@@ -179,16 +230,20 @@ namespace SharpVectors.Renderers.Utils
 
         public override void Alert(string message)
         {
-            if (string.IsNullOrWhiteSpace(message))
+            if (string.IsNullOrWhiteSpace(message) || _svgControl == null)
             {
                 return;
             }
 
-            MessageBox.Show(message);
+            _svgControl.HandleAlert(message);
         }
 
         public override SvgWindow CreateOwnedWindow(long innerWidth, long innerHeight)
         {
+            if (innerWidth == 0 || innerHeight == 0)
+            {
+                return new WpfSvgWindow(this, this.InnerWidth, this.InnerHeight);
+            }
             return new WpfSvgWindow(this, innerWidth, innerHeight);
         }
 
@@ -217,10 +272,6 @@ namespace SharpVectors.Renderers.Utils
                 cssDocument.SetUserAgentStyleSheet(userAgentCssFilePath);
             }
         }
-
-        #endregion
-
-        #region Protected Methods
 
         #endregion
     }

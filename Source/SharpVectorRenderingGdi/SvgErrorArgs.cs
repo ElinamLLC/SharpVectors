@@ -4,21 +4,66 @@ namespace SharpVectors.Renderers
 {
     public sealed class SvgErrorArgs : EventArgs
     {
+        private bool _isHandled;
+        private string _message;
+        private Exception _exception;
+
         public SvgErrorArgs(string message)
+            : this(message, null)
         {
-            this.Message = message;
+        }
+        
+        public SvgErrorArgs(Exception exception)
+            : this(null, exception)
+        {
         }
         
         public SvgErrorArgs(string message, Exception exception)
         {
-            this.Message   = message;
-            this.Exception = exception;
+            _message   = message;
+            _exception = exception;
+
+            if (string.IsNullOrWhiteSpace(message) && exception != null)
+            {
+                _message = exception.Message;
+            }
         }
 
-        public bool Handled { get; set; }
+        public bool IsException
+        {
+            get {
+                return (_exception != null);
+            }
+        }
 
-        public string Message { get; private set; }
+        public bool Handled 
+        { 
+            get {
+                return _isHandled;
+            }
+            set {
+                _isHandled = value;
+            }
+        }
 
-        public Exception Exception { get; private set; }
+        public string Message 
+        { 
+            get {
+                return _message;
+            }
+            private set {
+                _message = value;
+            } 
+        }
+
+        public Exception Exception 
+        { 
+            get {
+                return _exception;
+            }
+            private set {
+                _exception = value;
+            } 
+        }
     }
 }

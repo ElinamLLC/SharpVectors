@@ -165,7 +165,8 @@ namespace SharpVectors.Renderers.Utils
 
             Uri cachedUri = GetLocalPathUri(cacheElm);
 
-            return new CacheInfo(expires, cacheElm.GetAttribute("etag"), lastModified, cachedUri, cacheElm.GetAttribute("content-type"));
+            return new CacheInfo(expires, cacheElm.GetAttribute("etag"), 
+                lastModified, cachedUri, cacheElm.GetAttribute("content-type"));
         }
 
         public void SetCacheInfo(Uri uri, CacheInfo cacheInfo, Stream stream)

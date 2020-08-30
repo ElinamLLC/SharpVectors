@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpVectors.Renderers
+namespace SharpVectors.Runtime
 {
     public sealed class SvgAlertArgs : EventArgs
     {

@@ -60,7 +60,7 @@
         </member>
         <member name="T:SharpVectors.Runtime.SvgDrawingCanvas">
             <summary>
-            This is the main drawing canvas for the wiring diagrams.
+            This is the main drawing canvas for the rendered SVG diagrams.
             </summary>
         </member>
         <member name="T:SharpVectors.Runtime.SvgImageNameScope">

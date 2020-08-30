@@ -6,15 +6,15 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Gdi;
-using System.Collections.Generic;
 
 namespace SharpVectors.Renderers.Forms
 {
-    public partial class SvgPictureBox : Control, ISupportInitialize
+    public partial class SvgPictureBox : Control, ISvgControl, ISupportInitialize
     {
         #region Private Fields
 
@@ -56,9 +56,9 @@ namespace SharpVectors.Renderers.Forms
         {
             InitializeComponent();
 
-            _appTitle = DefaultTitle;
-            _sizeMode         = PictureBoxSizeMode.Normal;
-            _savedSize        = this.Size;
+            _appTitle  = DefaultTitle;
+            _sizeMode  = PictureBoxSizeMode.Normal;
+            _savedSize = this.Size;
 
             SetStyle(ControlStyles.Opaque | ControlStyles.Selectable, false);
             SetStyle(ControlStyles.UserPaint, true);
@@ -804,6 +804,34 @@ namespace SharpVectors.Renderers.Forms
             return null;
         }
 
+        protected virtual void OnHandleAlert(string message)
+        {
+            if (this.DesignMode)
+            {
+                return;
+            }
+            var alertArgs = new SvgAlertArgs(message);
+            _svgAlerts?.Invoke(this, alertArgs);
+            if (!alertArgs.Handled)
+            {
+                MessageBox.Show(alertArgs.Message, _appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        protected virtual void OnHandleError(string message, Exception exception)
+        {
+            if (this.DesignMode)
+            {
+                return;
+            }
+            var errorArgs = new SvgErrorArgs(message, exception);
+            _svgErrors?.Invoke(this, errorArgs);
+            if (!errorArgs.Handled)
+            {
+                throw new SvgErrorException(errorArgs);
+            }
+        }
+
         #endregion
 
         #region Protected Override Methods
@@ -973,7 +1001,7 @@ namespace SharpVectors.Renderers.Forms
         {
             if (_svgRenderer != null)
             {
-                _svgRenderer.InvalidateRect(SvgConverter.ToRect(rect));
+                _svgRenderer.InvalidateRect(SvgConvert.ToRect(rect));
                 InvalidateAndRender();
             }
         }
@@ -1075,24 +1103,6 @@ namespace SharpVectors.Renderers.Forms
 
             return imageRect;
         }
-        #endregion
-
-        #region Internal Methods
-
-        internal void HandleAlert(string message)
-        {
-            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
-            {
-                return;
-            }
-            var alertArgs = new SvgAlertArgs(message);
-            _svgAlerts?.Invoke(this, alertArgs);
-            if (!alertArgs.Handled)
-            {
-                MessageBox.Show(alertArgs.Message, _appTitle);
-            }
-        }
-
         #endregion
 
         #region Scripting Methods and Properties
@@ -1377,6 +1387,53 @@ namespace SharpVectors.Renderers.Forms
             }
 
             this.Invalidate();
+        }
+
+        #endregion
+
+        #region ISvgControl Members
+
+        bool ISvgControl.DesignMode
+        {
+            get {
+                return this.DesignMode;
+            }
+        }
+
+        void ISvgControl.HandleAlert(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleAlert(message);
+        }
+
+        void ISvgControl.HandleError(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleError(message, null);
+        }
+
+        void ISvgControl.HandleError(Exception exception)
+        {
+            if (exception == null || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleError(null, exception);
+        }
+
+        void ISvgControl.HandleError(string message, Exception exception)
+        {
+            if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
+            {
+                return;
+            }
+            this.OnHandleError(message, exception);
         }
 
         #endregion

@@ -1187,14 +1187,12 @@
         </member>
         <member name="T:SharpVectors.Converters.SvgCanvas">
             <summary>
-            This is a <see cref="T:System.Windows.Controls.Canvas"/> control for viewing SVG file in WPF
-            applications.
+            This is a <see cref="T:System.Windows.Controls.Canvas"/> control for viewing SVG file in WPF applications.
             </summary>
             <remarks>
             It extends the drawing canvas, <see cref="T:SharpVectors.Runtime.SvgDrawingCanvas"/>, instead of
             generic <see cref="T:System.Windows.Controls.Canvas"/> control, therefore any interactivity support 
-            implemented in the drawing canvas will be available in the 
-            <see cref="T:System.Windows.Controls.Canvas"/>.
+            implemented in the drawing canvas will be available in the <see cref="T:System.Windows.Controls.Canvas"/>.
             </remarks>
         </member>
         <member name="F:SharpVectors.Converters.SvgCanvas.SourceProperty">
@@ -1306,8 +1304,7 @@
         </member>
         <member name="P:SharpVectors.Converters.SvgCanvas.Source">
             <summary>
-            Gets or sets the path to the SVG file to load into this 
-            <see cref="T:System.Windows.Controls.Canvas"/>.
+            Gets or sets the path to the SVG file to load into this <see cref="T:System.Windows.Controls.Canvas"/>.
             </summary>
             <value>
             A <see cref="T:System.Uri"/> specifying the path to the SVG source file.
@@ -1507,14 +1504,6 @@
             If both the fill and stroke brushes of the message text are <see langword="null"/>, no text is drawn.
             </remarks>
         </member>
-        <member name="P:SharpVectors.Converters.SvgCanvas.BaseUri">
-            <summary>
-            Gets or sets the base URI of the current application context.
-            </summary>
-            <value>
-            The base URI of the application context.
-            </value>
-        </member>
         <member name="M:SharpVectors.Converters.SvgCanvas.Load(System.Uri,System.Boolean)">
             <summary>
             This sets the source SVG for a <see cref="T:SharpVectors.Converters.SvgCanvas"/> by using the supplied Uniform Resource Identifier (URI)
@@ -1692,6 +1681,14 @@
             This returns <see cref="T:System.Windows.Media.DrawingGroup"/> if successful; otherwise, it
             returns <see langword="null"/>.
             </returns>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.BaseUri">
+            <summary>
+            Gets or sets the base URI of the current application context.
+            </summary>
+            <value>
+            The base URI of the application context.
+            </value>
         </member>
         <member name="T:SharpVectors.Converters.SvgControl">
             <summary>
@@ -2469,8 +2466,7 @@
         </member>
         <member name="T:SharpVectors.Converters.SvgViewbox">
             <summary>
-            This is a <see cref="T:System.Windows.Controls.Viewbox"/> control for viewing SVG file in WPF
-            applications.
+            This is a <see cref="T:System.Windows.Controls.Viewbox"/> control for viewing SVG file in WPF applications.
             </summary>
             <remarks>
             It wraps the drawing canvas, <see cref="T:SharpVectors.Runtime.SvgDrawingCanvas"/>, instead of
