@@ -42,7 +42,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestSvgControl", "Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestThreadSafety", "Samples\WpfTestThreadSafety\WpfTestThreadSafety.VS2017.csproj", "{19ED33D1-7D07-43ED-878A-16630CD4035D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Scripting.Jint", "Source\SharpVectorScriptingJint\SharpVectors.Scripting.Jint.VS2017.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Scripting", "Source\SharpVectorScripting\SharpVectors.Scripting.VS2017.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

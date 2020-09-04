@@ -54,18 +54,37 @@ namespace SharpVectors.Dom.Svg
             {
                 sc = sc.Trim();
                 // remove the unit
-                Match match = reUnit.Match(sc);
-                string value = sc.Substring(0, sc.Length - match.Length);
 
-                var numberValue = decimal.Parse(value,
-                    NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, 
-                    CultureInfo.InvariantCulture);
+                Match match = DoubleRegex.Match(sc);
+                if (match.Success)
+                {
+                    string value = match.Value;
 
-                // <number> values in conforming SVG Tiny 1.2 content must have no more 
-                // than 4 decimal digits in the fractional part of their decimal expansion
-                var roundedValue = decimal.Round(numberValue, 4, MidpointRounding.AwayFromZero);
+                    var numberValue = decimal.Parse(value,
+                        NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, 
+                        CultureInfo.InvariantCulture);
 
-                return roundedValue.ToString(Format) + match.Value;
+                    // <number> values in conforming SVG Tiny 1.2 content must have no more 
+                    // than 4 decimal digits in the fractional part of their decimal expansion
+                    var roundedValue = decimal.Round(numberValue, 4, MidpointRounding.AwayFromZero);
+
+                    return roundedValue.ToString(Format) + sc.Substring(match.Length);
+                }
+                else
+                {
+                    match = reUnit.Match(sc);
+                    string value = sc.Substring(0, sc.Length - match.Length);
+
+                    var numberValue = decimal.Parse(value,
+                        NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, 
+                        CultureInfo.InvariantCulture);
+
+                    // <number> values in conforming SVG Tiny 1.2 content must have no more 
+                    // than 4 decimal digits in the fractional part of their decimal expansion
+                    var roundedValue = decimal.Round(numberValue, 4, MidpointRounding.AwayFromZero);
+
+                    return roundedValue.ToString(Format) + match.Value;
+                }
             }
             return sc;
         }

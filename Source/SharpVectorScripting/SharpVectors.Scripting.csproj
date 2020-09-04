@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48</TargetFrameworks>
-    <AssemblyOriginatorKeyFile>SharpVectors.Scripting.Jint.snk</AssemblyOriginatorKeyFile>
-    <OutputType>Library</OutputType>
-    <RootNamespace>SharpVectors.Scripting.Jint</RootNamespace>
-    <AssemblyName>SharpVectors.Scripting.Jint</AssemblyName>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1</TargetFrameworks>
+    <AssemblyOriginatorKeyFile>SharpVectors.Scripting.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>SharpVectors.Scripting</RootNamespace>
+    <AssemblyName>SharpVectors.Scripting</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,16 +36,16 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.VS2017.csproj">
+    <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj">
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.VS2017.csproj">
+    <ProjectReference Include="..\SharpVectorCss\SharpVectors.Css.csproj">
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.VS2017.csproj">
+    <ProjectReference Include="..\SharpVectorDom\SharpVectors.Dom.csproj">
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.VS2017.csproj">
+    <ProjectReference Include="..\SharpVectorModel\SharpVectors.Model.csproj">
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

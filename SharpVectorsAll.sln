@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgControl", "Sample
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestThreadSafety", "Samples\WpfTestThreadSafety\WpfTestThreadSafety.csproj", "{19ED33D1-7D07-43ED-878A-16630CD4035D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Scripting.Jint", "Source\SharpVectorScriptingJint\SharpVectors.Scripting.Jint.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Scripting", "Source\SharpVectorScripting\SharpVectors.Scripting.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

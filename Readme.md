@@ -13,8 +13,7 @@ the SVG in Windows Presentation Foundation (WPF) applications.
 The project does not aim to provide a complete implementation of the SVG file format, but will 
 support the features required in an average graphics application.
 
-The SVG specification is available in [HTML](https://www.w3.org/TR/SVG11/) format 
-or the [PDF](https://www.w3.org/TR/SVG11/REC-SVG11-20110816.pdf) format.
+The SVG specification is available in [HTML](https://www.w3.org/TR/SVG11/) format or the [PDF](https://www.w3.org/TR/SVG11/REC-SVG11-20110816.pdf) format.
 
 ## Features and Uses
 In general, the following features are implemented:
@@ -41,18 +40,12 @@ The SharpVectors library targets the following frameworks
 The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
-Install the latest released version from NuGet, the [Version 1.6.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
-
-### For the Applications
-Download the latest released version from GitHub Releases Page, the [Version 1.6.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
+The library can be downloaded from the following sources
+* **NuGet**, [Version 1.6.0.0](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
+* **GitHub Releases Page**, [Version 1.6.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
 
 ## Documentation
 An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
-
-## Converter Application
-There is a converter application. It converts a single SVG file, multiple SVG files and directory of SVG files to XAML.
-
-![](Images/Home_SharpVectors.png)
 
 ## Sample Applications
 The library includes a number of sample application for both WPF and GDI+. Here are some of them:
@@ -92,4 +85,11 @@ the authors of these great articles and projects
 The following are related SVG viewer projects for the .NET platforms
 * [SVG](https://github.com/vvvv/SVG) for GDI+
 * [SVGImage](https://github.com/dotnetprojects/SVGImage) for WPF
+
+## Related Repositories
+The following are related SharpVectors repositories
+* [SharpVectors-TestSuites](https://github.com/ElinamLLC/SharpVectors-TestSuites) : The W3C Test Suite files used by the SharpVectors for testing.
+* [SharpVectors-SvgXaml](https://github.com/ElinamLLC/SharpVectors-SvgXaml) : SharpVectors based SVG to XAML converter application.
+* [SharpVectors-SvgViewer](https://github.com/ElinamLLC/SharpVectors-SvgViewer) : SharpVectors based SVG viewer application.
+
 
