@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net46;net48;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -8,6 +8,8 @@
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <RootNamespace>WpfSvgTestBox</RootNamespace>
     <AssemblyName>WpfSvgTestBox</AssemblyName>
+    <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
+    <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -48,6 +50,23 @@
     <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj" />
     <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net40\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net45\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net45\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
@@ -55,8 +74,13 @@
     <Reference Include="SharpVectors.Notifications.Wpf">
       <HintPath>..\..\Libraries\net46\SharpVectors.Notifications.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="SharpVectors.YDock.Wpf">
-      <HintPath>..\..\Libraries\net46\SharpVectors.YDock.Wpf.dll</HintPath>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net47\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net47\SharpVectors.Notifications.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
@@ -66,9 +90,6 @@
     <Reference Include="SharpVectors.Notifications.Wpf">
       <HintPath>..\..\Libraries\net48\SharpVectors.Notifications.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="SharpVectors.YDock.Wpf">
-      <HintPath>..\..\Libraries\net48\SharpVectors.YDock.Wpf.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
     <Reference Include="SharpVectors.ShellFileDialogs">
@@ -76,9 +97,6 @@
     </Reference>
     <Reference Include="SharpVectors.Notifications.Wpf">
       <HintPath>..\..\Libraries\netcoreapp3.1\SharpVectors.Notifications.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.YDock.Wpf">
-      <HintPath>..\..\Libraries\netcoreapp3.1\SharpVectors.YDock.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

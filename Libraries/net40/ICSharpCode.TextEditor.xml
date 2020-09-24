@@ -1,0 +1,3332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ICSharpCode.TextEditor</name>
+    </assembly>
+    <members>
+        <member name="T:ICSharpCode.TextEditor.Document.LineViewerStyle">
+            <summary>
+                Describes the caret marker
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.LineViewerStyle.None">
+            <summary>
+                No line viewer will be displayed
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.LineViewerStyle.FullRow">
+            <summary>
+                The row in which the caret is will be marked
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.IndentStyle">
+            <summary>
+                Describes the indent style
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.IndentStyle.None">
+            <summary>
+                No indentation occurs
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.IndentStyle.Auto">
+            <summary>
+                The indentation from the line above will be
+                taken to indent the curent line
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.IndentStyle.Smart">
+            <summary>
+                Inteligent, context sensitive indentation will occur
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.BracketHighlightingStyle">
+            <summary>
+                Describes the bracket highlighting style
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.BracketHighlightingStyle.None">
+            <summary>
+                Brackets won't be highlighted
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.BracketHighlightingStyle.OnBracket">
+            <summary>
+                Brackets will be highlighted if the caret is on the bracket
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.BracketHighlightingStyle.AfterBracket">
+            <summary>
+                Brackets will be highlighted if the caret is after the bracket
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DocumentSelectionMode">
+            <summary>
+                Describes the selection mode of the text area
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.DocumentSelectionMode.Normal">
+            <summary>
+                The 'normal' selection mode.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.DocumentSelectionMode.Additive">
+            <summary>
+                Selections will be added to the current selection or new
+                ones will be created (multi-select mode)
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DefaultDocument">
+            <summary>
+                The default <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> implementation.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DocumentEventHandler">
+            <summary>
+                This delegate is used for document events.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DocumentEventArgs">
+            <summary>
+                This class contains more information on a document event
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentEventArgs.#ctor(ICSharpCode.TextEditor.Document.IDocument)">
+            <summary>
+                Creates a new instance off <see cref="T:ICSharpCode.TextEditor.Document.DocumentEventArgs" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentEventArgs.#ctor(ICSharpCode.TextEditor.Document.IDocument,System.Int32)">
+            <summary>
+                Creates a new instance off <see cref="T:ICSharpCode.TextEditor.Document.DocumentEventArgs" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentEventArgs.#ctor(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.Int32)">
+            <summary>
+                Creates a new instance off <see cref="T:ICSharpCode.TextEditor.Document.DocumentEventArgs" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentEventArgs.#ctor(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.Int32,System.String)">
+            <summary>
+                Creates a new instance off <see cref="T:ICSharpCode.TextEditor.Document.DocumentEventArgs" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DocumentEventArgs.Document">
+            <returns>
+                always a valid Document which is related to the Event.
+            </returns>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DocumentEventArgs.Offset">
+            <returns>
+                -1 if no offset was specified for this event
+            </returns>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DocumentEventArgs.Text">
+            <returns>
+                null if no text was specified for this event
+            </returns>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DocumentEventArgs.Length">
+            <returns>
+                -1 if no length was specified for this event
+            </returns>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DocumentFactory">
+            <summary>
+                This interface represents a container which holds a text sequence and
+                all necessary information about it. It is used as the base for a text editor.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentFactory.CreateDocument">
+            <remarks>
+                Creates a new <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> object. Only create
+                <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> with this method.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentFactory.CreateFromTextBuffer(ICSharpCode.TextEditor.Document.ITextBufferStrategy)">
+            <summary>
+                Creates a new document and loads the given file
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DocumentFactory.CreateFromFile(System.String)">
+            <summary>
+                Creates a new document and loads the given file
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.XmlFoldStart">
+            <summary>
+            Holds information about the start of a fold in an xml string.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.XmlFoldStart.Line">
+            <summary>
+            The line where the fold should start.  Lines start from 0.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.XmlFoldStart.Column">
+            <summary>
+            The column where the fold should start.  Columns start from 0.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.XmlFoldStart.Name">
+            <summary>
+            The name of the xml item with its prefix if it has one.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.XmlFoldStart.FoldText">
+            <summary>
+            The text to be displayed when the item is folded.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.XmlFoldingStrategy">
+            <summary>
+            Determines folds for an xml string in the editor.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.showAttributesWhenFolded">
+            <summary>
+            Flag indicating whether attributes should be displayed on folded
+            elements.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.GenerateFoldMarkers(ICSharpCode.TextEditor.Document.IDocument,System.String,System.Object)">
+            <summary>
+            Adds folds to the text editor around each start-end element pair.
+            </summary>
+            <remarks>
+            <para>If the xml is not well formed then no folds are created.</para> 
+            <para>Note that the xml text reader lines and positions start 
+            from 1 and the SharpDevelop text editor line information starts
+            from 0.</para>
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.CreateCommentFold(ICSharpCode.TextEditor.Document.IDocument,System.Collections.Generic.List{ICSharpCode.TextEditor.Document.FoldMarker},System.Xml.XmlTextReader)">
+            <summary>
+            Creates a comment fold if the comment spans more than one line.
+            </summary>
+            <remarks>The text displayed when the comment is folded is the first 
+            line of the comment.</remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.CreateElementFoldStart(System.Xml.XmlTextReader)">
+            <summary>
+            Creates an XmlFoldStart for the start tag of an element.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.CreateElementFold(ICSharpCode.TextEditor.Document.IDocument,System.Collections.Generic.List{ICSharpCode.TextEditor.Document.FoldMarker},System.Xml.XmlTextReader,ICSharpCode.TextEditor.Document.XmlFoldStart)">
+            <summary>
+            Create an element fold if the start and end tag are on 
+            different lines.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.GetAttributeFoldText(System.Xml.XmlTextReader)">
+            <summary>
+            Gets the element's attributes as a string on one line that will
+            be displayed when the element is folded.
+            </summary>
+            <remarks>
+            Currently this puts all attributes from an element on the same
+            line of the start tag.  It does not cater for elements where attributes
+            are not on the same line as the start tag.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFoldingStrategy.XmlEncodeAttributeValue(System.String,System.Char)">
+            <summary>
+            Xml encode the attribute string since the string returned from
+            the XmlTextReader is the plain unencoded string and .NET
+            does not provide us with an xml encode method.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.XmlFormattingStrategy">
+            <summary>
+            This class currently inserts the closing tags to typed openening tags
+            and does smart indentation for xml files.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFormattingStrategy.SmartIndentLine(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <summary>
+            Define XML specific smart indenting for a line :)
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.XmlFormattingStrategy.IndentLines(ICSharpCode.TextEditor.TextArea,System.Int32,System.Int32)">
+            <summary>
+            This function sets the indentlevel in a range of lines.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.HighlightingDefinitionInvalidException">
+            <summary>
+                Indicates that the highlighting definition that was tried to load was invalid.
+                You get this exception only once per highlighting definition, after that the definition
+                is replaced with the default highlighter.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.IDocument">
+            <summary>
+                This interface represents a container which holds a text sequence and
+                all necessary information about it. It is used as the base for a text editor.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.ReadOnly">
+            <value>
+                If true the document can't be altered
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.FormattingStrategy">
+            <summary>
+                The <see cref="T:ICSharpCode.TextEditor.Document.IFormattingStrategy" /> attached to the <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> instance
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.TextBufferStrategy">
+            <summary>
+                The <see cref="T:ICSharpCode.TextEditor.Document.ITextBufferStrategy" /> attached to the <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> instance
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.FoldingManager">
+            <summary>
+                The <see cref="P:ICSharpCode.TextEditor.Document.IDocument.FoldingManager" /> attached to the <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> instance
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.HighlightingStrategy">
+            <summary>
+                The <see cref="T:ICSharpCode.TextEditor.Document.IHighlightingStrategy" /> attached to the <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> instance
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.BookmarkManager">
+            <summary>
+                The <see cref="P:ICSharpCode.TextEditor.Document.IDocument.BookmarkManager" /> attached to the <see cref="T:ICSharpCode.TextEditor.Document.IDocument" /> instance
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.UpdateQueue">
+            <value>
+                A container where all TextAreaUpdate objects get stored
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.RequestUpdate(ICSharpCode.TextEditor.TextAreaUpdate)">
+            <remarks>
+                Requests an update of the textarea
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.CommitUpdate">
+            <remarks>
+                Commits all updates in the queue to the textarea (the
+                textarea will be painted)
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.UpdateSegmentListOnDocumentChange``1(System.Collections.Generic.List{``0},ICSharpCode.TextEditor.Document.DocumentEventArgs)">
+            <summary>
+                Moves, Resizes, Removes a list of segments on insert/remove/replace events.
+            </summary>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Document.IDocument.UpdateCommited">
+            <summary>
+                Is fired when CommitUpdate is called
+            </summary>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Document.IDocument.DocumentAboutToBeChanged">
+            <summary>
+            </summary>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Document.IDocument.DocumentChanged">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.LineSegmentCollection">
+            <value>
+                A collection of all line segments
+            </value>
+            <remarks>
+                The collection should only be used if you're aware
+                of the 'last line ends with a delimiter problem'. Otherwise
+                the <see cref="M:ICSharpCode.TextEditor.Document.IDocument.GetLineSegment(System.Int32)" /> method should be used.
+            </remarks>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.TotalNumberOfLines">
+            <value>
+                The total number of lines in the document.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetLineNumberForOffset(System.Int32)">
+            <remarks>
+                Returns a valid line number for the given offset.
+            </remarks>
+            <param name="offset">
+                A offset which points to a character in the line which
+                line number is returned.
+            </param>
+            <returns>
+                An int which value is the line number.
+            </returns>
+            <exception cref="T:System.ArgumentException">If offset points not to a valid position</exception>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetLineSegmentForOffset(System.Int32)">
+            <remarks>
+                Returns a <see cref="T:ICSharpCode.TextEditor.Document.LineSegment" /> for the given offset.
+            </remarks>
+            <param name="offset">
+                A offset which points to a character in the line which
+                is returned.
+            </param>
+            <returns>
+                A <see cref="T:ICSharpCode.TextEditor.Document.LineSegment" /> object.
+            </returns>
+            <exception cref="T:System.ArgumentException">If offset points not to a valid position</exception>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetLineSegment(System.Int32)">
+            <remarks>
+                Returns a <see cref="T:ICSharpCode.TextEditor.Document.LineSegment" /> for the given line number.
+                This function should be used to get a line instead of getting the
+                line using the list.
+            </remarks>
+            <param name="lineNumber">
+                The line number which is requested.
+            </param>
+            <returns>
+                A <see cref="T:ICSharpCode.TextEditor.Document.LineSegment" /> object.
+            </returns>
+            <exception cref="T:System.ArgumentException">If offset points not to a valid position</exception>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetFirstLogicalLine(System.Int32)">
+            <remarks>
+                Get the first logical line for a given visible line.
+                example : lineNumber == 100 foldings are in the linetracker
+                between 0..1 (2 folded, invisible lines) this method returns 102
+                the 'logical' line number
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetLastLogicalLine(System.Int32)">
+            <remarks>
+                Get the last logical line for a given visible line.
+                example : lineNumber == 100 foldings are in the linetracker
+                between 0..1 (2 folded, invisible lines) this method returns 102
+                the 'logical' line number
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetVisibleLine(System.Int32)">
+            <remarks>
+                Get the visible line for a given logical line.
+                example : lineNumber == 100 foldings are in the linetracker
+                between 0..1 (2 folded, invisible lines) this method returns 98
+                the 'visible' line number
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetNextVisibleLineAbove(System.Int32,System.Int32)">
+            <remarks>
+                Get the next visible line after lineNumber
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetNextVisibleLineBelow(System.Int32,System.Int32)">
+            <remarks>
+                Get the next visible line below lineNumber
+            </remarks>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.TextContent">
+            <value>
+                Get the whole text as string.
+                When setting the text using the TextContent property, the undo stack is cleared.
+                Set TextContent only for actions such as loading a file; if you want to change the current document
+                use the Replace method instead.
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IDocument.TextLength">
+            <value>
+                The current length of the sequence of characters that can be edited.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.Insert(System.Int32,System.String)">
+            <summary>
+                Inserts a string of characters into the sequence.
+            </summary>
+            <param name="offset">
+                offset where to insert the string.
+            </param>
+            <param name="text">
+                text to be inserted.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.Remove(System.Int32,System.Int32)">
+            <summary>
+                Removes some portion of the sequence.
+            </summary>
+            <param name="offset">
+                offset of the remove.
+            </param>
+            <param name="length">
+                number of characters to remove.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.Replace(System.Int32,System.Int32,System.String)">
+            <summary>
+                Replace some portion of the sequence.
+            </summary>
+            <param name="offset">
+                offset.
+            </param>
+            <param name="length">
+                number of characters to replace.
+            </param>
+            <param name="text">
+                text to be replaced with.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetCharAt(System.Int32)">
+            <summary>
+                Returns a specific char of the sequence.
+            </summary>
+            <param name="offset">
+                Offset of the char to get.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.GetText(System.Int32,System.Int32)">
+            <summary>
+                Fetches a string of characters contained in the sequence.
+            </summary>
+            <param name="offset">
+                Offset into the sequence to fetch
+            </param>
+            <param name="length">
+                number of characters to copy.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.OffsetToPosition(System.Int32)">
+            <summary>
+                returns the logical line/column position from an offset
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IDocument.PositionToOffset(ICSharpCode.TextEditor.TextLocation)">
+            <summary>
+                returns the offset from a logical line/column position
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.ISegment">
+            <summary>
+                This interface is used to describe a span inside a text sequence
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ISegment.Offset">
+            <value>
+                The offset where the span begins
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ISegment.Length">
+            <value>
+                The length of the span
+            </value>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DeferredEventList">
+            <summary>
+                A list of events that are fired after the line manager has finished working.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.LineSegmentTree">
+            <summary>
+                Data structure for efficient management of the line segments (most operations are O(lg n)).
+                This implements an augmented red-black tree where each node has fields for the number of
+                nodes in its subtree (like an order statistics tree) for access by index(=line number).
+                Additionally, each node knows the total length of all segments in its subtree.
+                This means we can find nodes by offset in O(lg n) time. Since the offset itself is not stored in
+                the line segment but computed from the lengths stored in the tree, we adjusting the offsets when
+                text is inserted in one line means we just have to increment the totalLength of the affected line and
+                its parent nodes - an O(lg n) operation.
+                However this means getting the line number or offset from a LineSegment is not a constant time
+                operation, but takes O(lg n).
+                NOTE: The tree is never empty, Clear() causes it to contain an empty segment.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineSegmentTree.TotalLength">
+            <summary>
+                Gets the total length of all line segments. Runs in O(1).
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineSegmentTree.Count">
+            <summary>
+                Gets the number of items in the collections. Runs in O(1).
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineSegmentTree.Item(System.Int32)">
+            <summary>
+                Gets or sets an item by index. Runs in O(lg n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.IndexOf(ICSharpCode.TextEditor.Document.LineSegment)">
+            <summary>
+                Gets the index of an item. Runs in O(lg n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.Clear">
+            <summary>
+                Clears the list. Runs in O(1).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.Contains(ICSharpCode.TextEditor.Document.LineSegment)">
+            <summary>
+                Tests whether an item is in the list. Runs in O(n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.CopyTo(ICSharpCode.TextEditor.Document.LineSegment[],System.Int32)">
+            <summary>
+                Copies all elements from the list to the array.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.SetSegmentLength(ICSharpCode.TextEditor.Document.LineSegment,System.Int32)">
+            <summary>
+                Updates the length of a line segment. Runs in O(lg n).
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.LineSegmentTree.Enumerator.Invalid">
+            <summary>
+                An invalid enumerator value. Calling MoveNext on the invalid enumerator
+                will always return false, accessing Current will throw an exception.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineSegmentTree.Enumerator.Current">
+            <summary>
+                Gets the current value. Runs in O(1).
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineSegmentTree.Enumerator.CurrentIndex">
+            <summary>
+                Gets the index of the current value. Runs in O(lg n).
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineSegmentTree.Enumerator.CurrentOffset">
+            <summary>
+                Gets the offset of the current value. Runs in O(lg n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.Enumerator.MoveNext">
+            <summary>
+                Moves to the next index. Runs in O(lg n), but for k calls, the combined time is only O(k+lg n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegmentTree.Enumerator.MoveBack">
+            <summary>
+                Moves to the previous index. Runs in O(lg n), but for k calls, the combined time is only O(k+lg n).
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.AnchorMovementType.BeforeInsertion">
+            <summary>
+                Behaves like a start marker - when text is inserted at the anchor position, the anchor will stay
+                before the inserted text.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Document.AnchorMovementType.AfterInsertion">
+            <summary>
+                Behave like an end marker - when text is insered at the anchor position, the anchor will move
+                after the inserted text.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.TextAnchor">
+            <summary>
+                An anchor that can be put into a document and moves around when the document is changed.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.TextAnchor.MovementType">
+            <summary>
+                Controls how the anchor moves.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.TextUtilities.LeadingWhiteSpaceToTabs(System.String,System.Int32)">
+            <remarks>
+                This function takes a string and converts the whitespace in front of
+                it to tabs. If the length of the whitespace at the start of the string
+                was not a whole number of tabs then there will still be some spaces just
+                before the text starts.
+                the output string will be of the form:
+                1. zero or more tabs
+                2. zero or more spaces (less than tabIndent)
+                3. the rest of the line
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.TextUtilities.GetExpressionBeforeOffset(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <remarks>
+                This method returns the expression before a specified offset.
+                That method is used in code completion to determine the expression given
+                to the parser for type resolve.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.TextUtilities.IsEmptyLine(ICSharpCode.TextEditor.Document.IDocument,System.Int32)">
+            <remarks>
+                Returns true, if the line lineNumber is empty or filled with whitespaces.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.TextUtilities.IsEmptyLine(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.Document.LineSegment)">
+            <remarks>
+                Returns true, if the line lineNumber is empty or filled with whitespaces.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.BookmarkManager">
+            <summary>
+                This class handles the bookmarks for a buffer
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.BookmarkManager.Marks">
+            <value>
+                Contains all bookmarks
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.#ctor(ICSharpCode.TextEditor.Document.IDocument)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.BookmarkManager" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.BookmarkManager.Factory">
+            <summary>
+                Gets/Sets the bookmark factory used to create bookmarks for "ToggleMarkAt".
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.ToggleMarkAt(ICSharpCode.TextEditor.TextLocation)">
+            <summary>
+                Sets the mark at the line <code>location.Line</code> if it is not set, if the
+                line is already marked the mark is cleared.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.IsMarked(System.Int32)">
+            <returns>
+                true, if a mark at mark exists, otherwise false
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.Clear">
+            <remarks>
+                Clears all bookmark
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.GetFirstMark(System.Predicate{ICSharpCode.TextEditor.Document.Bookmark})">
+            <value>
+                The lowest mark, if no marks exists it returns -1
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.GetLastMark(System.Predicate{ICSharpCode.TextEditor.Document.Bookmark})">
+            <value>
+                The highest mark, if no marks exists it returns -1
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.GetNextMark(System.Int32,System.Predicate{ICSharpCode.TextEditor.Document.Bookmark})">
+            <remarks>
+                returns first mark higher than <code>lineNr</code>
+            </remarks>
+            <returns>
+                returns the next mark > cur, if it not exists it returns FirstMark()
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManager.GetPrevMark(System.Int32,System.Predicate{ICSharpCode.TextEditor.Document.Bookmark})">
+            <remarks>
+                returns first mark lower than <code>lineNr</code>
+            </remarks>
+            <returns>
+                returns the next mark lower than cur, if it not exists it returns LastMark()
+            </returns>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.BookmarkManagerMemento">
+            <summary>
+                This class is used for storing the state of a bookmark manager
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.#ctor">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.BookmarkManagerMemento" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.#ctor(System.Xml.XmlElement)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.BookmarkManagerMemento" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.#ctor(System.Collections.Generic.List{System.Int32})">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.BookmarkManagerMemento" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.Bookmarks">
+            <value>
+                Contains all bookmarks as int values
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.CheckMemento(ICSharpCode.TextEditor.Document.IDocument)">
+            <summary>
+                Validates all bookmarks if they're in range of the document.
+                (removing all bookmarks &lt; 0 and bookmarks &gt; max. line number
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.FromXmlElement(System.Xml.XmlElement)">
+            <summary>
+                Converts a xml element to a <see cref="T:ICSharpCode.TextEditor.Document.BookmarkManagerMemento" /> object
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.BookmarkManagerMemento.ToXmlElement(System.Xml.XmlDocument)">
+            <summary>
+                Converts this <see cref="T:ICSharpCode.TextEditor.Document.BookmarkManagerMemento" /> to a xml element
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy">
+            <summary>
+                This class handles the auto and smart indenting in the textbuffer while
+                you type.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.FormatLine(ICSharpCode.TextEditor.TextArea,System.Int32,System.Int32,System.Char)">
+            <summary>
+                This function formats a specific line after <code>ch</code> is pressed.
+            </summary>
+            <returns>
+                the caret delta position the caret will be moved this number
+                of bytes (e.g. the number of bytes inserted before the caret, or
+                removed, if this number is negative)
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.IndentLine(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <summary>
+                This function sets the indentation level in a specific line
+            </summary>
+            <returns>
+                the number of inserted characters.
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.IndentLines(ICSharpCode.TextEditor.TextArea,System.Int32,System.Int32)">
+            <summary>
+                This function sets the indentlevel in a range of lines.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.GetIndentation(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <summary>
+                returns the whitespaces which are before a non white space character in the line line
+                as a string.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.AutoIndentLine(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <summary>
+                Could be overwritten to define more complex indenting.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.SmartReplaceLine(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.Document.LineSegment,System.String)">
+            <summary>
+                Replaces the text in a line.
+                If only whitespace at the beginning and end of the line was changed, this method
+                only adjusts the whitespace and doesn't replace the other text.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultFormattingStrategy.SmartIndentLine(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <summary>
+                Could be overwritten to define more complex indenting.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.IFormattingStrategy">
+            <summary>
+                This interface handles the auto and smart indenting and formating
+                in the document while  you type. Language bindings could overwrite this
+                interface and define their own indentation/formating.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IFormattingStrategy.FormatLine(ICSharpCode.TextEditor.TextArea,System.Int32,System.Int32,System.Char)">
+            <summary>
+                This function formats a specific line after <code>ch</code> is pressed.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IFormattingStrategy.IndentLine(ICSharpCode.TextEditor.TextArea,System.Int32)">
+            <summary>
+                This function sets the indentation level in a specific line
+            </summary>
+            <returns>
+                The target caret position (length of new indentation).
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IFormattingStrategy.IndentLines(ICSharpCode.TextEditor.TextArea,System.Int32,System.Int32)">
+            <summary>
+                This function sets the indentlevel in a range of lines.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IFormattingStrategy.SearchBracketBackward(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.Char,System.Char)">
+            <summary>
+                Finds the offset of the opening bracket in the block defined by offset skipping
+                brackets in strings and comments.
+            </summary>
+            <param name="document">The document to search in.</param>
+            <param name="offset">The offset of an position in the block or the offset of the closing bracket.</param>
+            <param name="openBracket">The character for the opening bracket.</param>
+            <param name="closingBracket">The character for the closing bracket.</param>
+            <returns>Returns the offset of the opening bracket or -1 if no matching bracket was found.</returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IFormattingStrategy.SearchBracketForward(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.Char,System.Char)">
+            <summary>
+                Finds the offset of the closing bracket in the block defined by offset skipping
+                brackets in strings and comments.
+            </summary>
+            <param name="document">The document to search in.</param>
+            <param name="offset">The offset of an position in the block or the offset of the opening bracket.</param>
+            <param name="openBracket">The character for the opening bracket.</param>
+            <param name="closingBracket">The character for the closing bracket.</param>
+            <returns>Returns the offset of the closing bracket or -1 if no matching bracket was found.</returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultHighlightingStrategy.PushCurWord(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.Document.HighlightColor@,System.Collections.Generic.List{ICSharpCode.TextEditor.Document.TextWord})">
+            <summary>
+                pushes the curWord string on the word list, with the
+                correct color.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultHighlightingStrategy.GetRegString(ICSharpCode.TextEditor.Document.LineSegment,System.Char[],System.Int32,ICSharpCode.TextEditor.Document.IDocument)">
+            <summary>
+                get the string, which matches the regular expression expr,
+                in string s2 at index
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultHighlightingStrategy.MatchExpr(ICSharpCode.TextEditor.Document.LineSegment,System.Char[],System.Int32,ICSharpCode.TextEditor.Document.IDocument,System.Boolean)">
+            <summary>
+                returns true, if the get the string s2 at index matches the expression expr
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.FontContainer">
+            <summary>
+                This class is used to generate bold, italic and bold/italic fonts out
+                of a base font.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.FontContainer.RegularFont">
+            <value>
+                The scaled, regular version of the base font
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.FontContainer.BoldFont">
+            <value>
+                The scaled, bold version of the base font
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.FontContainer.ItalicFont">
+            <value>
+                The scaled, italic version of the base font
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.FontContainer.BoldItalicFont">
+            <value>
+                The scaled, bold/italic version of the base font
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.FontContainer.DefaultFont">
+            <value>
+                The base font
+            </value>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.HighlightBackground">
+            <summary>
+                Extens the highlighting color with a background image.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightBackground.#ctor(System.Xml.XmlElement)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightBackground" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightBackground.#ctor(System.Drawing.Color,System.Drawing.Color,System.Boolean,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightBackground" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.HighlightBackground.BackgroundImage">
+            <value>
+                The image used as background
+            </value>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.HighlightColor">
+            <summary>
+                A color used for highlighting
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.#ctor(System.Xml.XmlElement)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.#ctor(System.Xml.XmlElement,ICSharpCode.TextEditor.Document.HighlightColor)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.#ctor(System.Drawing.Color,System.Boolean,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.#ctor(System.Drawing.Color,System.Drawing.Color,System.Boolean,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.HighlightColor.Bold">
+            <value>
+                If true the font will be displayed bold style
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.HighlightColor.Italic">
+            <value>
+                If true the font will be displayed italic style
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.HighlightColor.BackgroundColor">
+            <value>
+                The background color used
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.HighlightColor.Color">
+            <value>
+                The foreground color used
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.GetFont(ICSharpCode.TextEditor.Document.FontContainer)">
+            <value>
+                The font used
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightColor.ToString">
+            <summary>
+                Converts a <see cref="T:ICSharpCode.TextEditor.Document.HighlightColor" /> instance to string (for debug purposes)
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.HighlightRuleSet.MergeFrom(ICSharpCode.TextEditor.Document.HighlightRuleSet)">
+            <summary>
+                Merges spans etc. from the other rule set into this rule set.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.IHighlightingStrategy">
+            <summary>
+                A highlighting strategy for a buffer.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IHighlightingStrategy.Name">
+            <value>
+                The name of the highlighting strategy, must be unique
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.IHighlightingStrategy.Extensions">
+            <value>
+                The file extenstions on which this highlighting strategy gets
+                used
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IHighlightingStrategy.GetColorFor(System.String)">
+            <remarks>
+                Gets the color of an Environment element.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IHighlightingStrategy.MarkTokens(ICSharpCode.TextEditor.Document.IDocument,System.Collections.Generic.List{ICSharpCode.TextEditor.Document.LineSegment})">
+            <remarks>
+                Used internally, do not call
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IHighlightingStrategy.MarkTokens(ICSharpCode.TextEditor.Document.IDocument)">
+            <remarks>
+                Used internally, do not call
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IHighlightingStrategyUsingRuleSets.GetRuleSet(ICSharpCode.TextEditor.Document.Span)">
+            <remarks>
+                Used internally, do not call
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IHighlightingStrategyUsingRuleSets.GetColor(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.Document.LineSegment,System.Int32,System.Int32)">
+            <remarks>
+                Used internally, do not call
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.NextMarker">
+            <summary>
+                Used for mark next token
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.NextMarker.#ctor(System.Xml.XmlElement)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.NextMarker" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.NextMarker.What">
+            <value>
+                String value to indicate to mark next token
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.NextMarker.Color">
+            <value>
+                Color for marking next token
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.NextMarker.MarkMarker">
+            <value>
+                If true the indication text will be marked with the same color
+                too
+            </value>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.PrevMarker">
+            <summary>
+                Used for mark previous token
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.PrevMarker.#ctor(System.Xml.XmlElement)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.PrevMarker" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.PrevMarker.What">
+            <value>
+                String value to indicate to mark previous token
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.PrevMarker.Color">
+            <value>
+                Color for marking previous token
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.PrevMarker.MarkMarker">
+            <value>
+                If true the indication text will be marked with the same color
+                too
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.Span.EscapeCharacter">
+            <summary>
+                Gets the escape character of the span. The escape character is a character that can be used in front
+                of the span end to make it not end the span. The escape character followed by another escape character
+                means the escape character was escaped like in @"a "" b" literals in C#.
+                The default value '\0' means no escape character is allowed.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.TextWord">
+            <summary>
+                This class represents single words with color information, two special versions of a word are
+                spaces and tabs.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.TextWord.Split(ICSharpCode.TextEditor.Document.TextWord@,System.Int32)">
+            <summary>
+                Splits the <paramref name="word" /> into two parts: the part before <paramref name="pos" /> is assigned to
+                the reference parameter <paramref name="word" />, the part after <paramref name="pos" /> is returned.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.TextWord.ToString">
+            <summary>
+                Converts a <see cref="T:ICSharpCode.TextEditor.Document.TextWord" /> instance to string (for debug purposes)
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegment.ToString">
+            <summary>
+                Converts a <see cref="T:ICSharpCode.TextEditor.Document.LineSegment" /> instance to string (for debug purposes)
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegment.Deleted(ICSharpCode.TextEditor.Document.DeferredEventList@)">
+            <summary>
+                Is called when the LineSegment is deleted.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegment.RemovedLinePart(ICSharpCode.TextEditor.Document.DeferredEventList@,System.Int32,System.Int32)">
+            <summary>
+                Is called when a part of the line is removed.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegment.InsertedLinePart(System.Int32,System.Int32)">
+            <summary>
+                Is called when a part of the line is inserted.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegment.MergedWith(ICSharpCode.TextEditor.Document.LineSegment,System.Int32)">
+            <summary>
+                Is called after another line's content is appended to this line because the newline in between
+                was deleted.
+                The DefaultLineManager will call Deleted() on the deletedLine after the MergedWith call.
+                firstLineLength: the length of the line before the merge.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.LineSegment.SplitTo(ICSharpCode.TextEditor.Document.LineSegment)">
+            <summary>
+                Is called after a newline was inserted into this line, splitting it into this and followingLine.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineCountChangeEventArgs.Document">
+            <returns>
+                always a valid Document which is related to the Event.
+            </returns>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineCountChangeEventArgs.LineStart">
+            <returns>
+                -1 if no offset was specified for this event
+            </returns>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.LineCountChangeEventArgs.LinesMoved">
+            <returns>
+                -1 if no length was specified for this event
+            </returns>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.ITextBufferStrategy">
+            <summary>
+                Interface to describe a sequence of characters that can be edited.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ITextBufferStrategy.Length">
+            <value>
+                The current length of the sequence of characters that can be edited.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.ITextBufferStrategy.Insert(System.Int32,System.String)">
+            <summary>
+                Inserts a string of characters into the sequence.
+            </summary>
+            <param name="offset">
+                offset where to insert the string.
+            </param>
+            <param name="text">
+                text to be inserted.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.ITextBufferStrategy.Remove(System.Int32,System.Int32)">
+            <summary>
+                Removes some portion of the sequence.
+            </summary>
+            <param name="offset">
+                offset of the remove.
+            </param>
+            <param name="length">
+                number of characters to remove.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.ITextBufferStrategy.Replace(System.Int32,System.Int32,System.String)">
+            <summary>
+                Replace some portion of the sequence.
+            </summary>
+            <param name="offset">
+                offset.
+            </param>
+            <param name="length">
+                number of characters to replace.
+            </param>
+            <param name="text">
+                text to be replaced with.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.ITextBufferStrategy.GetText(System.Int32,System.Int32)">
+            <summary>
+                Fetches a string of characters contained in the sequence.
+            </summary>
+            <param name="offset">
+                Offset into the sequence to fetch
+            </param>
+            <param name="length">
+                number of characters to copy.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.ITextBufferStrategy.GetCharAt(System.Int32)">
+            <summary>
+                Returns a specific char of the sequence.
+            </summary>
+            <param name="offset">
+                Offset of the char to get.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.ITextBufferStrategy.SetContent(System.String)">
+            <summary>
+                This method sets the stored content.
+            </summary>
+            <param name="text">
+                The string that represents the character sequence.
+            </param>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.StringTextBufferStrategy">
+            <summary>
+                Simple implementation of the ITextBuffer interface implemented using a
+                string.
+                Only for fall-back purposes.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.ISelection">
+            <summary>
+                An interface representing a portion of the current selection.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ISelection.IsRectangularSelection">
+            <value>
+                Returns true, if the selection is rectangular
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ISelection.IsEmpty">
+            <value>
+                Returns true, if the selection is empty
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ISelection.SelectedText">
+            <value>
+                The text which is selected by this selection.
+            </value>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.DefaultSelection">
+            <summary>
+                Default implementation of the <see cref="T:ICSharpCode.TextEditor.Document.ISelection" /> interface.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultSelection.#ctor(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.TextLocation,ICSharpCode.TextEditor.TextLocation)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.DefaultSelection" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DefaultSelection.IsEmpty">
+            <value>
+                Returns true, if the selection is empty
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DefaultSelection.IsRectangularSelection">
+            <value>
+                Returns true, if the selection is rectangular
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.DefaultSelection.SelectedText">
+            <value>
+                The text which is selected by this selection.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.DefaultSelection.ToString">
+            <summary>
+                Converts a <see cref="T:ICSharpCode.TextEditor.Document.DefaultSelection" /> instance to string (for debug purposes)
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.IFoldingStrategy">
+            <summary>
+                This interface is used for the folding capabilities
+                of the textarea.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.IFoldingStrategy.GenerateFoldMarkers(ICSharpCode.TextEditor.Document.IDocument,System.String,System.Object)">
+            <remarks>
+                Calculates the fold level of a specific line.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.IndentFoldingStrategy">
+            <summary>
+                A simple folding strategy which calculates the folding level
+                using the indent level of the line.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.SelectionManager">
+            <summary>
+                This class manages the selections in a document.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.#ctor(ICSharpCode.TextEditor.Document.IDocument)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.SelectionManager" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.#ctor(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.TextArea)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Document.SelectionManager" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.SelectionManager.SelectionCollection">
+            <value>
+                A collection containing all selections.
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.SelectionManager.HasSomethingSelected">
+            <value>
+                true if the <see cref="P:ICSharpCode.TextEditor.Document.SelectionManager.SelectionCollection" /> is not empty, false otherwise.
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.SelectionManager.SelectedText">
+            <value>
+                The text that is currently selected.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.SetSelection(ICSharpCode.TextEditor.Document.ISelection)">
+            <remarks>
+                Clears the selection and sets a new selection
+                using the given <see cref="T:ICSharpCode.TextEditor.Document.ISelection" /> object.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.ClearSelection">
+            <remarks>
+                Clears the selection.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.RemoveSelectedText">
+            <remarks>
+                Removes the selected text from the buffer and clears
+                the selection.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.IsSelected(System.Int32)">
+            <remarks>
+                Returns true if the given offset points to a section which is
+                selected.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.GetSelectionAt(System.Int32)">
+            <remarks>
+                Returns a <see cref="T:ICSharpCode.TextEditor.Document.ISelection" /> object giving the selection in which
+                the offset points to.
+            </remarks>
+            <returns>
+                <code>null</code> if the offset doesn't point to a selection
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.Insert(System.Int32,System.String)">
+            <remarks>
+                Used internally, do not call.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.Remove(System.Int32,System.Int32)">
+            <remarks>
+                Used internally, do not call.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Document.SelectionManager.Replace(System.Int32,System.Int32,System.String)">
+            <remarks>
+                Used internally, do not call.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.AbstractSegment">
+            <summary>
+                This interface is used to describe a span inside a text sequence
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ITextEditorProperties.TabIndent">
+            <summary>
+                The width of a tab.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.ITextEditorProperties.IndentationSize">
+            <summary>
+                The amount of spaces a tab is converted to if ConvertTabsToSpaces is true.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.MarkerStrategy">
+            <summary>
+                Manages the list of markers and provides ways to retrieve markers for specific positions.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.TextMarker">
+            <summary>
+                Marks a part of a document.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.TextMarker.IsReadOnly">
+            <summary>
+                Marks the text segment as read-only.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.TextMarker.EndOffset">
+            <summary>
+                Gets the last offset that is inside the marker region.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.Bookmark">
+            <summary>
+                Description of Bookmark.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.Bookmark.Anchor">
+            <summary>
+                Gets the TextAnchor used for this bookmark.
+                Is null if the bookmark is not connected to a document.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Document.Bookmark.CanToggle">
+            <summary>
+                Gets if the bookmark can be toggled off using the 'set/unset bookmark' command.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.BookmarkEventArgs">
+            <summary>
+                Description of BookmarkEventHandler.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Document.SpanStack">
+            <summary>
+                A stack of Span instances. Works like Stack&lt;Span&gt;, but can be cloned quickly
+                because it is implemented as linked list.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextLocation">
+            <summary>
+                A line/column position.
+                Text editor lines/columns are counting from zero.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.TextLocation.Empty">
+            <summary>
+                Represents no text location (-1, -1).
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.AugmentableRedBlackTree`2">
+            <summary>
+                Description of RedBlackTree.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.AugmentableRedBlackTree`2.Find(`0)">
+            <summary>
+                Returns the iterator pointing to the specified item, or an iterator in End state if the item is not found.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.AugmentableRedBlackTree`2.LowerBound(`0)">
+            <summary>
+                Returns the iterator pointing to the first item greater or equal to <paramref name="item" />.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.AugmentableRedBlackTree`2.UpperBound(`0)">
+            <summary>
+                Returns the iterator pointing to the first item greater than <paramref name="item" />.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.AugmentableRedBlackTree`2.Begin">
+            <summary>
+                Gets a tree iterator that starts on the first node.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.AugmentableRedBlackTree`2.GetEnumerator">
+            <summary>
+                Gets a tree iterator that starts one node before the first node.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.CheckedList`1">
+            <summary>
+                A IList{T} that checks that it is only accessed on the thread that created it, and that
+                it is not modified while an enumerator is running.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.LoggingService">
+            <summary>
+                Central location for logging calls in the text editor.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.LookupTable">
+            <summary>
+                This class implements a keyword map. It implements a digital search trees (tries) to find
+                a word.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.LookupTable.#ctor(System.Boolean)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Util.LookupTable" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Util.LookupTable.Count">
+            <value>
+                The number of elements in the table
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Util.LookupTable.Item(ICSharpCode.TextEditor.Document.IDocument,ICSharpCode.TextEditor.Document.LineSegment,System.Int32,System.Int32)">
+            <summary>
+                Get the object, which was inserted under the keyword (line, at offset, with length length),
+                returns null, if no such keyword was inserted.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Util.LookupTable.Item(System.String)">
+            <summary>
+                Inserts an object in the tree, under keyword
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.MouseWheelHandler">
+            <summary>
+                Accumulates mouse wheel deltas and reports the actual number of lines to scroll.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.FileReader">
+            <summary>
+                Class that can open text files with auto-detection of the encoding.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Util.WeakCollection`1">
+            <summary>
+                A collection that does not allows its elements to be garbage-collected (unless there are other
+                references to the elements). Elements will disappear from the collection when they are
+                garbage-collected.
+                The WeakCollection is not thread-safe, not even for read-only access!
+                No methods may be called on the WeakCollection while it is enumerated, not even a Contains or
+                creating a second enumerator.
+                The WeakCollection does not preserve any order among its contents; the ordering may be different each
+                time the collection is enumerated.
+                Since items may disappear at any time when they are garbage collected, this class
+                cannot provide a useful implementation for Count and thus cannot implement the ICollection interface.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.WeakCollection`1.GetEnumerator">
+            <summary>
+                Enumerates the collection.
+                Each MoveNext() call on the enumerator is O(1), thus the enumeration is O(n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.WeakCollection`1.Add(`0)">
+            <summary>
+                Adds an element to the collection. Runtime: O(n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.WeakCollection`1.Clear">
+            <summary>
+                Removes all elements from the collection. Runtime: O(n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.WeakCollection`1.Contains(`0)">
+            <summary>
+                Checks if the collection contains an item. Runtime: O(n).
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Util.WeakCollection`1.Remove(`0)">
+            <summary>
+                Removes an element from the collection. Returns true if the item is found and removed,
+                false when the item is not found.
+                Runtime: O(n).
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Undo.UndoableDelete">
+            <summary>
+                This class is for the undo of Document insert operations
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableDelete.#ctor(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.String)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Undo.UndoableDelete" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableDelete.Undo">
+            <remarks>
+                Undo last operation
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableDelete.Redo">
+            <remarks>
+                Redo last undone operation
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Undo.UndoableInsert">
+            <summary>
+                This class is for the undo of Document insert operations
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableInsert.#ctor(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.String)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Undo.UndoableInsert" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableInsert.Undo">
+            <remarks>
+                Undo last operation
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableInsert.Redo">
+            <remarks>
+                Redo last undone operation
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Undo.UndoableReplace">
+            <summary>
+                This class is for the undo of Document insert operations
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableReplace.#ctor(ICSharpCode.TextEditor.Document.IDocument,System.Int32,System.String,System.String)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.Undo.UndoableReplace" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableReplace.Undo">
+            <remarks>
+                Undo last operation
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoableReplace.Redo">
+            <remarks>
+                Redo last undone operation
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Undo.IUndoableOperation">
+            <summary>
+                This Interface describes a the basic Undo/Redo operation
+                all Undo Operations must implement this interface.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.IUndoableOperation.Undo">
+            <summary>
+                Undo the last operation
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.IUndoableOperation.Redo">
+            <summary>
+                Redo the last operation
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Undo.UndoQueue">
+            <summary>
+                This class stacks the last x operations from the undostack and makes
+                one undo/redo operation from it.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoQueue.#ctor(System.Collections.Generic.Stack{ICSharpCode.TextEditor.Undo.IUndoableOperation},System.Int32)">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Undo.UndoStack">
+            <summary>
+                This class implements an undo stack
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Undo.UndoStack.AcceptChanges">
+            <summary>
+                Gets/Sets if changes to the document are protocolled by the undo stack.
+                Used internally to disable the undo stack temporarily while undoing an action.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Undo.UndoStack.CanUndo">
+            <summary>
+                Gets if there are actions on the undo stack.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Undo.UndoStack.CanRedo">
+            <summary>
+                Gets if there are actions on the redo stack.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Undo.UndoStack.UndoItemCount">
+            <summary>
+                Gets the number of actions on the undo stack.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Undo.UndoStack.RedoItemCount">
+            <summary>
+                Gets the number of actions on the redo stack.
+            </summary>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Undo.UndoStack.ActionUndone">
+            <summary>
+            </summary>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Undo.UndoStack.ActionRedone">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.Undo">
+            <summary>
+                Call this method to undo the last operation on the stack
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.Redo">
+            <summary>
+                Call this method to redo the last undone operation
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.Push(ICSharpCode.TextEditor.Undo.IUndoableOperation)">
+            <summary>
+                Call this method to push an UndoableOperation on the undostack, the redostack
+                will be cleared, if you use this method.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.ClearRedoStack">
+            <summary>
+                Call this method, if you want to clear the redo stack
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.ClearAll">
+            <summary>
+                Clears both the undo and redo stack.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.OnActionUndone">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Undo.UndoStack.OnActionRedone">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Actions.IEditAction">
+            <summary>
+                To define a new key for the textarea, you must write a class which
+                implements this interface.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Actions.IEditAction.Keys">
+            <value>
+                An array of keys on which this edit action occurs.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.IEditAction.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                When the key which is defined per XML is pressed, this method will be launched.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Actions.AbstractEditAction">
+            <summary>
+                To define a new key for the textarea, you must write a class which
+                implements this interface.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Actions.AbstractEditAction.Keys">
+            <value>
+                An array of keys on which this edit action occurs.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.AbstractEditAction.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                When the key which is defined per XML is pressed, this method will be launched.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.Tab.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.ShiftTab.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.ToggleComment.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.ToggleLineComment.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.ToggleBlockComment.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.BlockCommentRegion.#ctor(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+                The end offset is the offset where the comment end string starts from.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.Backspace.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.Delete.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.MovePageDown.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.MovePageUp.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.Return.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="T:ICSharpCode.TextEditor.TextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.ToggleEditMode.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.Undo.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.Redo.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Actions.WordBackspace">
+            <summary>
+                handles the ctrl-backspace key
+                functionality attempts to roughly mimic MS Developer studio
+                I will implement this as deleting back to the point that ctrl-leftarrow would
+                take you to
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.WordBackspace.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Actions.DeleteWord">
+            <summary>
+                handles the ctrl-delete key
+                functionality attempts to mimic MS Developer studio
+                I will implement this as deleting forwardto the point that
+                ctrl-leftarrow would take you to
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Actions.DeleteWord.Execute(ICSharpCode.TextEditor.TextArea)">
+            <remarks>
+                Executes this edit action
+            </remarks>
+            <param name="textArea">The <see cref="!:ItextArea" /> which is used for callback purposes</param>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Actions.IndentSelection">
+            <summary>
+                This is a sample editaction plugin, it indents the selected area.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Ime">
+            <summary>
+                Used internally, not for own use.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextAreaUpdateType">
+            <summary>
+                This enum describes all implemented request types
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextAreaUpdate">
+            <summary>
+                This class is used to request an update of the textarea
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaUpdate.#ctor(ICSharpCode.TextEditor.TextAreaUpdateType)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.TextAreaUpdate" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaUpdate.#ctor(ICSharpCode.TextEditor.TextAreaUpdateType,ICSharpCode.TextEditor.TextLocation)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.TextAreaUpdate" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaUpdate.#ctor(ICSharpCode.TextEditor.TextAreaUpdateType,System.Int32,System.Int32)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.TextAreaUpdate" />
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaUpdate.#ctor(ICSharpCode.TextEditor.TextAreaUpdateType,System.Int32)">
+            <summary>
+                Creates a new instance of <see cref="T:ICSharpCode.TextEditor.TextAreaUpdate" />
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionData.Priority">
+            <summary>
+                Gets a priority value for the completion data item.
+                When selecting items by their start characters, the item with the highest
+                priority is selected first.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionData.InsertAction(ICSharpCode.TextEditor.TextArea,System.Char)">
+            <summary>
+                Insert the element represented by the completion data into the text
+                editor.
+            </summary>
+            <param name="textArea">TextArea to insert the completion data in.</param>
+            <param name="ch">
+                Character that should be inserted after the completion data.
+                \0 when no character should be inserted.
+            </param>
+            <returns>
+                Returns true when the insert action has processed the character
+                <paramref name="ch" />; false when the character was not processed.
+            </returns>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionDataProvider.DefaultIndex">
+            <summary>
+                Gets the index of the element in the list that is chosen by default.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionDataProvider.ProcessKey(System.Char)">
+            <summary>
+                Processes a keypress. Returns the action to be run with the key.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionDataProvider.InsertAction(ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionData,ICSharpCode.TextEditor.TextArea,System.Int32,System.Char)">
+            <summary>
+                Executes the insertion. The provider should set the caret position and then
+                call data.InsertAction.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.ICompletionDataProvider.GenerateCompletionData(System.String,ICSharpCode.TextEditor.TextArea,System.Char)">
+            <summary>
+                Generates the completion data. This method is called by the text editor control.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Gui.CompletionWindow.CompletionDataProviderKeyResult.NormalKey">
+            <summary>
+                Normal key, used to choose an entry from the completion list
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Gui.CompletionWindow.CompletionDataProviderKeyResult.InsertionKey">
+            <summary>
+                This key triggers insertion of the completed expression
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.Gui.CompletionWindow.CompletionDataProviderKeyResult.BeforeStartKey">
+            <summary>
+                Increment both start and end offset of completion region when inserting this
+                key. Can be used to insert whitespace (or other characters) in front of the expression
+                while the completion window is open.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Gui.CompletionWindow.CodeCompletionWindow.CloseWhenCaretAtBeginning">
+            <summary>
+                When this flag is set, code completion closes if the caret moves to the
+                beginning of the allowed range. This is useful in Ctrl+Space and "complete when typing",
+                but not in dot-completion.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.CodeCompletionWindow.GetListViewWidth(System.Int32,System.Int32)">
+            <summary>
+                Gets the list view width large enough to handle the longest completion data
+                text string.
+            </summary>
+            <param name="defaultWidth">The default width of the list view.</param>
+            <param name="height">
+                The height of the list view.  This is
+                used to determine if the scrollbar is visible.
+            </param>
+            <returns>
+                The list view width to accommodate the longest completion
+                data text string; otherwise the default width.
+            </returns>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Gui.CompletionWindow.AbstractCompletionWindow">
+            <summary>
+                Description of AbstractCompletionWindow.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.AbstractCompletionWindow.AddShadowToWindow(System.Windows.Forms.CreateParams)">
+            <summary>
+                Adds a shadow to the create params if it is supported by the operating system.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.CompletionWindow.AbstractCompletionWindow.ControlMouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+                Invoked when the mouse moves over this form or any child control.
+                Shows the mouse cursor on the text area if it has been hidden.
+            </summary>
+            <remarks>
+                Derived classes should attach this handler to the MouseMove event
+                of all created controls which are not added to the Controls
+                collection.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.Gui.CompletionWindow.CodeCompletionListView">
+            <summary>
+                Description of CodeCompletionListView.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Gui.InsightWindow.IInsightDataProvider.InsightDataCount">
+            <summary>
+                Gets the number of available insight entries, e.g. the number of available
+                overloads to call.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Gui.InsightWindow.IInsightDataProvider.DefaultIndex">
+            <summary>
+                Gets the index of the entry to initially select.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.InsightWindow.IInsightDataProvider.SetupDataProvider(System.String,ICSharpCode.TextEditor.TextArea)">
+            <summary>
+                Tells the insight provider to prepare its data.
+            </summary>
+            <param name="fileName">The name of the edited file</param>
+            <param name="textArea">The text area in which the file is being edited</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.InsightWindow.IInsightDataProvider.CaretOffsetChanged">
+            <summary>
+                Notifies the insight provider that the caret offset has changed.
+            </summary>
+            <returns>
+                Return true to close the insight window (e.g. when the
+                caret was moved outside the region where insight is displayed for).
+                Return false to keep the window open.
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Gui.InsightWindow.IInsightDataProvider.GetInsightData(System.Int32)">
+            <summary>
+                Gets the text to display in the insight window.
+            </summary>
+            <param name="number">
+                The number of the active insight entry.
+                Multiple insight entries might be multiple overloads of the same method.
+            </param>
+            <returns>
+                The text to display, e.g. a multi-line string where
+                the first line is the method definition, followed by a description.
+            </returns>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.CaretMode">
+            <summary>
+                In this enumeration are all caret modes listed.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.CaretMode.InsertMode">
+            <summary>
+                If the caret is in insert mode typed characters will be
+                inserted at the caret position
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.CaretMode.OverwriteMode">
+            <summary>
+                If the caret is in overwrite mode typed characters will
+                overwrite the character at the caret position
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Caret.DesiredColumn">
+            <value>
+                The 'preferred' xPos in which the caret moves, when it is moved
+                up/down. Measured in pixels, not in characters!
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.Caret.CaretMode">
+            <value>
+                The current caret mode.
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.Caret.ValidateCaretPos">
+            <remarks>
+                If the caret position is outside the document text bounds
+                it is set to the correct position by calling ValidateCaretPos.
+            </remarks>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Caret.PositionChanged">
+            <remarks>
+                Is called each time the caret is moved.
+            </remarks>
+        </member>
+        <member name="E:ICSharpCode.TextEditor.Caret.CaretModeChanged">
+            <remarks>
+                Is called each time the CaretMode has changed.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextArea">
+            <summary>
+                This class paints the textarea.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.TextArea.mouseCursorHidePosition">
+            <summary>
+                The position where the mouse cursor was when it was hidden. Sometimes the text editor gets MouseMove
+                events when typing text even if the mouse is not moved.
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.TextArea.toolTipRectangle">
+            <summary>
+                Rectangle in text area that caused the current tool tip.
+                Prevents tooltip from re-showing when it was closed because of a click or keyboard
+                input and the mouse was not used.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextArea.ShowHiddenCursor(System.Boolean)">
+            <summary>
+                Shows the mouse cursor if it has been hidden.
+            </summary>
+            <param name="forceShow">
+                <c>true</c> to always show the cursor or <c>false</c> to show it only if it has been moved
+                since it was hidden.
+            </param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextArea.InsertChar(System.Char)">
+            <remarks>
+                Inserts a single character at the caret position
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextArea.InsertString(System.String)">
+            <remarks>
+                Inserts a whole string at the caret position
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextArea.ReplaceChar(System.Char)">
+            <remarks>
+                Replaces a char at the caret position
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextArea.HandleKeyPress(System.Char)">
+            <summary>
+                This method is called on each Keypress
+            </summary>
+            <returns>
+                True, if the key is handled by this method and should NOT be
+                inserted in the textarea.
+            </returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextArea.ExecuteDialogKey(System.Windows.Forms.Keys)">
+            <summary>
+                This method executes a dialog key
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextEditorControl">
+            <summary>
+                This class is used for a basic text area control
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextEditorControlBase">
+            <summary>
+                This class is used for a basic text area control
+            </summary>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.TextEditorControlBase.editactions">
+            <summary>
+                This hashtable contains all editor keys, where
+                the key is the key combination and the value the
+                action.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.Encoding">
+            <value>
+                Current file's character encoding
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.FileName">
+            <value>
+                The current file name
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.Document">
+            <value>
+                The current document
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.IsReadOnly">
+            <value>
+                If set to true the contents can't be altered.
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.IsInUpdate">
+            <value>
+                true, if the textarea is updating it's status, while
+                it updates it status no redraw operation occurs.
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.DefaultSize">
+            <value>
+                supposedly this is the way to do it according to .NET docs,
+                as opposed to setting the size in the constructor
+            </value>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.BeginUpdate">
+            <remarks>
+                Call this method before a long update operation this
+                'locks' the text area so that no screen update occurs.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.EndUpdate">
+            <remarks>
+                Call this method to 'unlock' the text area. After this call
+                screen update can occur. But no automatical refresh occurs you
+                have to commit the updates in the queue.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.LoadFile(System.String,System.Boolean,System.Boolean)">
+            <remarks>
+                Loads a file given by fileName
+            </remarks>
+            <param name="fileName">The name of the file to open</param>
+            <param name="autoLoadHighlighting">Automatically load the highlighting for the file</param>
+            <param name="autodetectEncoding">Automatically detect file encoding and set Encoding property to the detected encoding.</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.LoadFile(System.String,System.IO.Stream,System.Boolean,System.Boolean)">
+            <remarks>
+                Loads a file from the specified stream.
+            </remarks>
+            <param name="fileName">
+                The name of the file to open. Used to find the correct highlighting strategy
+                if autoLoadHighlighting is active, and sets the filename property to this value.
+            </param>
+            <param name="stream">The stream to actually load the file content from.</param>
+            <param name="autoLoadHighlighting">Automatically load the highlighting for the file</param>
+            <param name="autodetectEncoding">Automatically detect file encoding and set Encoding property to the detected encoding.</param>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.CanSaveWithCurrentEncoding">
+            <summary>
+                Gets if the document can be saved with the current encoding without losing data.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.SaveFile(System.String)">
+            <remarks>
+                Saves the text editor content into the file.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.SaveFile(System.IO.Stream)">
+            <remarks>
+                Saves the text editor content into the specified stream.
+                Does not close the stream.
+            </remarks>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextEditorControlBase.Refresh">
+            <remarks>
+                Overwritten refresh method that does nothing if the control is in
+                an update cycle.
+            </remarks>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowSpaces">
+            <value>
+                If true spaces are shown in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.TextRenderingHint">
+            <value>
+                Specifies the quality of text rendering (whether to use hinting and/or anti-aliasing).
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowTabs">
+            <value>
+                If true tabs are shown in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowEOLMarkers">
+            <value>
+                If true EOL markers are shown in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowHRuler">
+            <value>
+                If true the horizontal ruler is shown in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowVRuler">
+            <value>
+                If true the vertical ruler is shown in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.VRulerRow">
+            <value>
+                The row in which the vertical ruler is displayed
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowLineNumbers">
+            <value>
+                If true line numbers are shown in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ShowInvalidLines">
+            <value>
+                If true invalid lines are marked in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.EnableFolding">
+            <value>
+                If true folding is enabled in the textarea
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.TabIndent">
+            <value>
+                The width in spaces of a tab character
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.LineViewerStyle">
+            <value>
+                The line viewer style
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.IndentStyle">
+            <value>
+                The indent style
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.ConvertTabsToSpaces">
+            <value>
+                if true spaces are converted to tabs
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.HideMouseCursor">
+            <value>
+                if true spaces are converted to tabs
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.AllowCaretBeyondEOL">
+            <value>
+                if true spaces are converted to tabs
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.BracketMatchingStyle">
+            <value>
+                if true spaces are converted to tabs
+            </value>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextEditorControlBase.Font">
+            <value>
+                The base font of the text area. No bold or italic fonts
+                can be used because bold/italic is reserved for highlighting
+                purposes.
+            </value>
+        </member>
+        <member name="F:ICSharpCode.TextEditor.TextAreaClipboardHandler.GetClipboardContainsText">
+            <summary>
+                Is called when CachedClipboardContainsText should be updated.
+                If this property is null (the default value), the text editor uses
+                System.Windows.Forms.Clipboard.ContainsText.
+            </summary>
+            <remarks>
+                This property is useful if you want to prevent the default Clipboard.ContainsText
+                behaviour that waits for the clipboard to be available - the clipboard might
+                never become available if it is owned by a process that is paused by the debugger.
+            </remarks>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextView">
+            <summary>
+                This class paints the textarea.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextView.FirstVisibleLine">
+            <summary>Gets the first visible <b>logical</b> line.</summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextView.SpaceWidth">
+            <summary>
+                Gets the width of a space character.
+                This value can be quite small in some fonts - consider using WideSpaceWidth instead.
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.TextView.WideSpaceWidth">
+            <summary>
+                Gets the width of a 'wide space' (=one quarter of a tab, if tab is set to 4 spaces).
+                On monospaced fonts, this is the same value as spaceWidth.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextView.GetMarkerBrush(System.Collections.Generic.IList{ICSharpCode.TextEditor.Document.TextMarker},System.Drawing.Color@)">
+            <summary>
+                Get the marker brush (for solid block markers) at a given position.
+            </summary>
+            <param name="offset">The offset.</param>
+            <param name="length">The length.</param>
+            <param name="markers">All markers that have been found.</param>
+            <returns>The Brush or null when no marker was found.</returns>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextView.GetLogicalPosition(System.Drawing.Point)">
+            <summary>
+                returns line/column for a visual point position
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextView.GetLogicalPosition(System.Int32,System.Int32)">
+            <summary>
+                returns line/column for a visual point position
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextView.GetFoldMarkerFromPosition(System.Int32,System.Int32)">
+            <summary>
+                returns line/column for a visual point position
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextView.GetLogicalLine(System.Int32)">
+            <summary>
+                returns logical line number for a visual point
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.GutterMargin">
+            <summary>
+                This class views the line numbers and folding markers.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.AbstractMargin">
+            <summary>
+                This class views the line numbers and folding markers.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextAreaControl">
+            <summary>
+                This class paints the textarea.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaControl.ScrollTo(System.Int32)">
+            <summary>
+                Ensure that <paramref name="line" /> is visible.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaControl.CenterViewOn(System.Int32,System.Int32)">
+            <summary>
+                Scroll so that the specified line is centered.
+            </summary>
+            <param name="line">Line to center view on</param>
+            <param name="treshold">
+                If this action would cause scrolling by less than or equal to
+                <paramref name="treshold" /> lines in any direction, don't scroll.
+                Use -1 to always center the view.
+            </param>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.TextAreaMouseHandler">
+            <summary>
+                This class handles all mouse stuff for a textArea.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.IconBarMargin">
+            <summary>
+                This class views the line numbers and folding markers.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.FoldMargin">
+            <summary>
+                This class views the line numbers and folding markers.
+            </summary>
+        </member>
+        <member name="M:ICSharpCode.TextEditor.TextAreaDragDropHandler.MakeDragEventHandler(System.Windows.Forms.DragEventHandler)">
+            <summary>
+                Create a drag'n'drop event handler.
+                Windows Forms swallows unhandled exceptions during drag'n'drop, so we report them here.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.BrushRegistry">
+            <summary>
+                Contains brushes/pens for the text editor to speed up drawing. Re-Creation of brushes and pens
+                seems too costly.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.HRuler">
+            <summary>
+                Horizontal ruler - text column measuring ruler at the top of the text area.
+            </summary>
+        </member>
+        <member name="T:ICSharpCode.TextEditor.DrawableLine">
+            <summary>
+                A class that is able to draw a line on any control (outside the text editor)
+            </summary>
+        </member>
+        <member name="P:ICSharpCode.TextEditor.ToolTipRequestEventArgs.ToolTipShown">
+            <summary>
+                Gets if some client handling the event has already shown a tool tip.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.TupleElementNamesAttribute">
+            <summary>
+            Indicates that the use of <see cref="T:System.ValueTuple"/> on a member is meant to be treated as a tuple with element names.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.TupleElementNamesAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see
+            cref="T:System.Runtime.CompilerServices.TupleElementNamesAttribute"/> class.
+            </summary>
+            <param name="transformNames">
+            Specifies, in a pre-order depth-first traversal of a type's
+            construction, which <see cref="T:System.ValueType"/> occurrences are
+            meant to carry element names.
+            </param>
+            <remarks>
+            This constructor is meant to be used on types that contain an
+            instantiation of <see cref="T:System.ValueType"/> that contains
+            element names.  For instance, if <c>C</c> is a generic type with
+            two type parameters, then a use of the constructed type <c>C{<see
+            cref="T:System.ValueTuple`2"/>, <see
+            cref="T:System.ValueTuple`3"/></c> might be intended to
+            treat the first type argument as a tuple with element names and the
+            second as a tuple without element names. In which case, the
+            appropriate attribute specification should use a
+            <c>transformNames</c> value of <c>{ "name1", "name2", null, null,
+            null }</c>.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.TupleElementNamesAttribute.TransformNames">
+            <summary>
+            Specifies, in a pre-order depth-first traversal of a type's
+            construction, which <see cref="T:System.ValueTuple"/> elements are
+            meant to carry element names.
+            </summary>
+        </member>
+        <member name="T:System.ITupleInternal">
+            <summary>
+            Helper so we can call some tuple methods recursively without knowing the underlying types.
+            </summary>
+        </member>
+        <member name="T:System.ValueTuple">
+            <summary>
+            The ValueTuple types (from arity 0 to 8) comprise the runtime implementation that underlies tuples in C# and struct tuples in F#.
+            Aside from created via language syntax, they are most easily created via the ValueTuple.Create factory methods.
+            The System.ValueTuple types differ from the System.Tuple types in that:
+            - they are structs rather than classes,
+            - they are mutable rather than readonly, and
+            - their members (such as Item1, Item2, etc) are fields rather than properties.
+            </summary>
+        </member>
+        <member name="M:System.ValueTuple.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> is a <see cref="T:System.ValueTuple"/>.</returns>
+        </member>
+        <member name="M:System.ValueTuple.Equals(System.ValueTuple)">
+            <summary>Returns a value indicating whether this instance is equal to a specified value.</summary>
+            <param name="other">An instance to compare to this instance.</param>
+            <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
+        </member>
+        <member name="M:System.ValueTuple.CompareTo(System.ValueTuple)">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>()</c>.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple.Create">
+            <summary>Creates a new struct 0-tuple.</summary>
+            <returns>A 0-tuple.</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``1(``0)">
+            <summary>Creates a new struct 1-tuple, or singleton.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <returns>A 1-tuple (singleton) whose value is (item1).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``2(``0,``1)">
+            <summary>Creates a new struct 2-tuple, or pair.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <returns>A 2-tuple (pair) whose value is (item1, item2).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``3(``0,``1,``2)">
+            <summary>Creates a new struct 3-tuple, or triple.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <param name="item3">The value of the third component of the tuple.</param>
+            <returns>A 3-tuple (triple) whose value is (item1, item2, item3).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``4(``0,``1,``2,``3)">
+            <summary>Creates a new struct 4-tuple, or quadruple.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+            <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <param name="item3">The value of the third component of the tuple.</param>
+            <param name="item4">The value of the fourth component of the tuple.</param>
+            <returns>A 4-tuple (quadruple) whose value is (item1, item2, item3, item4).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``5(``0,``1,``2,``3,``4)">
+            <summary>Creates a new struct 5-tuple, or quintuple.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+            <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+            <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <param name="item3">The value of the third component of the tuple.</param>
+            <param name="item4">The value of the fourth component of the tuple.</param>
+            <param name="item5">The value of the fifth component of the tuple.</param>
+            <returns>A 5-tuple (quintuple) whose value is (item1, item2, item3, item4, item5).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``6(``0,``1,``2,``3,``4,``5)">
+            <summary>Creates a new struct 6-tuple, or sextuple.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+            <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+            <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+            <typeparam name="T6">The type of the sixth component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <param name="item3">The value of the third component of the tuple.</param>
+            <param name="item4">The value of the fourth component of the tuple.</param>
+            <param name="item5">The value of the fifth component of the tuple.</param>
+            <param name="item6">The value of the sixth component of the tuple.</param>
+            <returns>A 6-tuple (sextuple) whose value is (item1, item2, item3, item4, item5, item6).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``7(``0,``1,``2,``3,``4,``5,``6)">
+            <summary>Creates a new struct 7-tuple, or septuple.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+            <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+            <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+            <typeparam name="T6">The type of the sixth component of the tuple.</typeparam>
+            <typeparam name="T7">The type of the seventh component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <param name="item3">The value of the third component of the tuple.</param>
+            <param name="item4">The value of the fourth component of the tuple.</param>
+            <param name="item5">The value of the fifth component of the tuple.</param>
+            <param name="item6">The value of the sixth component of the tuple.</param>
+            <param name="item7">The value of the seventh component of the tuple.</param>
+            <returns>A 7-tuple (septuple) whose value is (item1, item2, item3, item4, item5, item6, item7).</returns>
+        </member>
+        <member name="M:System.ValueTuple.Create``8(``0,``1,``2,``3,``4,``5,``6,``7)">
+            <summary>Creates a new struct 8-tuple, or octuple.</summary>
+            <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+            <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+            <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+            <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+            <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+            <typeparam name="T6">The type of the sixth component of the tuple.</typeparam>
+            <typeparam name="T7">The type of the seventh component of the tuple.</typeparam>
+            <typeparam name="T8">The type of the eighth component of the tuple.</typeparam>
+            <param name="item1">The value of the first component of the tuple.</param>
+            <param name="item2">The value of the second component of the tuple.</param>
+            <param name="item3">The value of the third component of the tuple.</param>
+            <param name="item4">The value of the fourth component of the tuple.</param>
+            <param name="item5">The value of the fifth component of the tuple.</param>
+            <param name="item6">The value of the sixth component of the tuple.</param>
+            <param name="item7">The value of the seventh component of the tuple.</param>
+            <param name="item8">The value of the eighth component of the tuple.</param>
+            <returns>An 8-tuple (octuple) whose value is (item1, item2, item3, item4, item5, item6, item7, item8).</returns>
+        </member>
+        <member name="T:System.ValueTuple`1">
+            <summary>Represents a 1-tuple, or singleton, as a value type.</summary>
+            <typeparam name="T1">The type of the tuple's only component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`1"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+        </member>
+        <member name="M:System.ValueTuple`1.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`1"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`1"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`1.Equals(System.ValueTuple{`0})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`1"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`1"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its field
+            is equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`1.CompareTo(System.ValueTuple{`0})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`1.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`1"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`1.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`1"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`1"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1)</c>,
+            where <c>Item1</c> represents the value of <see cref="F:System.ValueTuple`1.Item1"/>. If the field is <see langword="null"/>,
+            it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`2">
+            <summary>
+            Represents a 2-tuple, or pair, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`2.#ctor(`0,`1)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`2"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+        </member>
+        <member name="M:System.ValueTuple`2.Equals(System.Object)">
+             <summary>
+             Returns a value that indicates whether the current <see cref="T:System.ValueTuple`2"/> instance is equal to a specified object.
+             </summary>
+             <param name="obj">The object to compare with this instance.</param>
+             <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            
+             <remarks>
+             The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+             <list type="bullet">
+                 <item><description>It is a <see cref="T:System.ValueTuple`2"/> value type.</description></item>
+                 <item><description>Its components are of the same types as those of the current instance.</description></item>
+                 <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+             </list>
+             </remarks>
+        </member>
+        <member name="M:System.ValueTuple`2.Equals(System.ValueTuple{`0,`1})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`2"/> instance is equal to a specified <see cref="T:System.ValueTuple`2"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`2.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)">
+             <summary>
+             Returns a value that indicates whether the current <see cref="T:System.ValueTuple`2"/> instance is equal to a specified object based on a specified comparison method.
+             </summary>
+             <param name="other">The object to compare with this instance.</param>
+             <param name="comparer">An object that defines the method to use to evaluate whether the two objects are equal.</param>
+             <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            
+             <remarks>
+             This member is an explicit interface member implementation. It can be used only when the
+              <see cref="T:System.ValueTuple`2"/> instance is cast to an <see cref="T:System.Collections.IStructuralEquatable"/> interface.
+            
+             The <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)"/> implementation is called only if <c>other</c> is not <see langword="null"/>,
+              and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="T:System.ValueTuple`2"/>
+              whose components are of the same types as those of the current instance. The IStructuralEquatable.Equals(Object, IEqualityComparer) method
+              first passes the <see cref="F:System.ValueTuple`2.Item1"/> values of the <see cref="T:System.ValueTuple`2"/> objects to be compared to the
+              <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)"/> implementation. If this method call returns <see langword="true"/>, the method is
+              called again and passed the <see cref="F:System.ValueTuple`2.Item2"/> values of the two <see cref="T:System.ValueTuple`2"/> instances.
+             </remarks>
+        </member>
+        <member name="M:System.ValueTuple`2.CompareTo(System.ValueTuple{`0,`1})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`2.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`2"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`2.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`2"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`2"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2)</c>,
+            where <c>Item1</c> and <c>Item2</c> represent the values of the <see cref="F:System.ValueTuple`2.Item1"/>
+            and <see cref="F:System.ValueTuple`2.Item2"/> fields. If either field value is <see langword="null"/>,
+            it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`3">
+            <summary>
+            Represents a 3-tuple, or triple, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+            <typeparam name="T3">The type of the tuple's third component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`3.#ctor(`0,`1,`2)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`3"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+            <param name="item3">The value of the tuple's third component.</param>
+        </member>
+        <member name="M:System.ValueTuple`3.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`3"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`3"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`3.Equals(System.ValueTuple{`0,`1,`2})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`3"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`3"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`3.CompareTo(System.ValueTuple{`0,`1,`2})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`3.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`3"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`3.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`3"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`3"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2, Item3)</c>.
+            If any field value is <see langword="null"/>, it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`4">
+            <summary>
+            Represents a 4-tuple, or quadruple, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+            <typeparam name="T3">The type of the tuple's third component.</typeparam>
+            <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`4.#ctor(`0,`1,`2,`3)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`4"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+            <param name="item3">The value of the tuple's third component.</param>
+            <param name="item4">The value of the tuple's fourth component.</param>
+        </member>
+        <member name="M:System.ValueTuple`4.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`4"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`4"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`4.Equals(System.ValueTuple{`0,`1,`2,`3})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`4"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`4"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`4.CompareTo(System.ValueTuple{`0,`1,`2,`3})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`4.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`4"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`4.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`4"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`4"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4)</c>.
+            If any field value is <see langword="null"/>, it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`5">
+            <summary>
+            Represents a 5-tuple, or quintuple, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+            <typeparam name="T3">The type of the tuple's third component.</typeparam>
+            <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+            <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`5.#ctor(`0,`1,`2,`3,`4)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`5"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+            <param name="item3">The value of the tuple's third component.</param>
+            <param name="item4">The value of the tuple's fourth component.</param>
+            <param name="item5">The value of the tuple's fifth component.</param>
+        </member>
+        <member name="M:System.ValueTuple`5.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`5"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`5"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`5.Equals(System.ValueTuple{`0,`1,`2,`3,`4})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`5"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`5"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`5.CompareTo(System.ValueTuple{`0,`1,`2,`3,`4})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`5.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`5"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`5.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`5"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`5"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5)</c>.
+            If any field value is <see langword="null"/>, it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`6">
+            <summary>
+            Represents a 6-tuple, or sixtuple, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+            <typeparam name="T3">The type of the tuple's third component.</typeparam>
+            <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+            <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+            <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`6.#ctor(`0,`1,`2,`3,`4,`5)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`6"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+            <param name="item3">The value of the tuple's third component.</param>
+            <param name="item4">The value of the tuple's fourth component.</param>
+            <param name="item5">The value of the tuple's fifth component.</param>
+            <param name="item6">The value of the tuple's sixth component.</param>
+        </member>
+        <member name="M:System.ValueTuple`6.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`6"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`6"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`6.Equals(System.ValueTuple{`0,`1,`2,`3,`4,`5})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`6"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`6"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`6.CompareTo(System.ValueTuple{`0,`1,`2,`3,`4,`5})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`6.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`6"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`6.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`6"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`6"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6)</c>.
+            If any field value is <see langword="null"/>, it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`7">
+            <summary>
+            Represents a 7-tuple, or sentuple, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+            <typeparam name="T3">The type of the tuple's third component.</typeparam>
+            <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+            <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+            <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
+            <typeparam name="T7">The type of the tuple's seventh component.</typeparam>
+        </member>
+        <member name="M:System.ValueTuple`7.#ctor(`0,`1,`2,`3,`4,`5,`6)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`7"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+            <param name="item3">The value of the tuple's third component.</param>
+            <param name="item4">The value of the tuple's fourth component.</param>
+            <param name="item5">The value of the tuple's fifth component.</param>
+            <param name="item6">The value of the tuple's sixth component.</param>
+            <param name="item7">The value of the tuple's seventh component.</param>
+        </member>
+        <member name="M:System.ValueTuple`7.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`7"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`7"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`7.Equals(System.ValueTuple{`0,`1,`2,`3,`4,`5,`6})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`7"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`7"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`7.CompareTo(System.ValueTuple{`0,`1,`2,`3,`4,`5,`6})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`7.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`7"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`7.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`7"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`7"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7)</c>.
+            If any field value is <see langword="null"/>, it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+        <member name="T:System.ValueTuple`8">
+            <summary>
+            Represents an 8-tuple, or octuple, as a value type.
+            </summary>
+            <typeparam name="T1">The type of the tuple's first component.</typeparam>
+            <typeparam name="T2">The type of the tuple's second component.</typeparam>
+            <typeparam name="T3">The type of the tuple's third component.</typeparam>
+            <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+            <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+            <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
+            <typeparam name="T7">The type of the tuple's seventh component.</typeparam>
+            <typeparam name="TRest">The type of the tuple's eighth component.</typeparam>
+        </member>
+        <member name="F:System.ValueTuple`8.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's second component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Item3">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's third component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Item4">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's fourth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Item5">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's fifth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Item6">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's sixth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Item7">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's seventh component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`8.Rest">
+            <summary>
+            The current <see cref="T:System.ValueTuple`8"/> instance's eighth component.
+            </summary>
+        </member>
+        <member name="M:System.ValueTuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.ValueTuple`8"/> value type.
+            </summary>
+            <param name="item1">The value of the tuple's first component.</param>
+            <param name="item2">The value of the tuple's second component.</param>
+            <param name="item3">The value of the tuple's third component.</param>
+            <param name="item4">The value of the tuple's fourth component.</param>
+            <param name="item5">The value of the tuple's fifth component.</param>
+            <param name="item6">The value of the tuple's sixth component.</param>
+            <param name="item7">The value of the tuple's seventh component.</param>
+            <param name="rest">The value of the tuple's eight component.</param>
+        </member>
+        <member name="M:System.ValueTuple`8.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`8"/> instance is equal to a specified object.
+            </summary>
+            <param name="obj">The object to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+            <list type="bullet">
+                <item><description>It is a <see cref="T:System.ValueTuple`8"/> value type.</description></item>
+                <item><description>Its components are of the same types as those of the current instance.</description></item>
+                <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`8.Equals(System.ValueTuple{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary>
+            Returns a value that indicates whether the current <see cref="T:System.ValueTuple`8"/>
+            instance is equal to a specified <see cref="T:System.ValueTuple`8"/>.
+            </summary>
+            <param name="other">The tuple to compare with this instance.</param>
+            <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+            are equal to that of the current instance, using the default comparer for that field's type.
+            </remarks>
+        </member>
+        <member name="M:System.ValueTuple`8.CompareTo(System.ValueTuple{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+            <param name="other">An instance to compare.</param>
+            <returns>
+            A signed number indicating the relative values of this instance and <paramref name="other"/>.
+            Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+            instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+            than <paramref name="other"/>.
+            </returns>
+        </member>
+        <member name="M:System.ValueTuple`8.GetHashCode">
+            <summary>
+            Returns the hash code for the current <see cref="T:System.ValueTuple`8"/> instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+        </member>
+        <member name="M:System.ValueTuple`8.ToString">
+            <summary>
+            Returns a string that represents the value of this <see cref="T:System.ValueTuple`8"/> instance.
+            </summary>
+            <returns>The string representation of this <see cref="T:System.ValueTuple`8"/> instance.</returns>
+            <remarks>
+            The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7, Rest)</c>.
+            If any field value is <see langword="null"/>, it is represented as <see cref="F:System.String.Empty"/>.
+            </remarks>
+        </member>
+    </members>
+</doc>

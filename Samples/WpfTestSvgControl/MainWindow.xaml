@@ -131,7 +131,7 @@
                             <Frame x:Name="frameSettings" Source="SettingsPage.xaml"/>
                         </TabItem.Content>
                     </TabItem>
-                    <TabItem x:Name="tabDebugging">
+                    <TabItem x:Name="tabDebugging" IsSelected="True">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfTestSvgControl}" />

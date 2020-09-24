@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 
+using SharpVectors.Net;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Dom.Events;
 
@@ -176,6 +177,7 @@ namespace TestSvgControl
 
         private void OnFormLoad(object sender, EventArgs e)
         {
+            DataSecurityProtocols.Initialize();
         }
 
         private async void OnFormShown(object sender, EventArgs e)

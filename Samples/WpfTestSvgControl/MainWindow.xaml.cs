@@ -28,14 +28,18 @@ namespace WpfTestSvgControl
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Public Fields
+
+        public const string AppTitle        = "SharpVectors: WPF Testing SVG";
+        public const string AppErrorTitle   = "SharpVectors: WPF Testing SVG - Error";
+        public const string SvgTestSettings = "SvgTestSettings.xml";
+
+        #endregion
+
         #region Private Fields
 
         private const int LeftPane       = 350;
         private const int LeftBottomPane = 300;
-
-        private const string AppTitle        = "SharpVectors: WPF Testing SVG";
-        private const string AppErrorTitle   = "SharpVectors: WPF Testing SVG - Error";
-        private const string SvgTestSettings = "SvgTestSettings.xml";
 
         private const string SvgFilePattern  = "*.svg*";
 
@@ -238,7 +242,6 @@ namespace WpfTestSvgControl
             }
             if (_debugPage != null)
             {
-                _debugPage.MainWindow = this;
                 _debugPage.Startup();
             }
             if (_settingsPage != null)
@@ -248,6 +251,8 @@ namespace WpfTestSvgControl
 
             tabSvgInput.Visibility   = _optionSettings.ShowInputFile ? Visibility.Visible : Visibility.Collapsed;
             tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
+
+            tabDrawing.IsSelected = true;
         }
 
         private void OnWindowUnloaded(object sender, RoutedEventArgs e)

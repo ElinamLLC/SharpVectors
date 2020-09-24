@@ -46,13 +46,10 @@ namespace WpfSvgTestBox
 
                 _isTraceStarted = true;
             }
-
-            Trace.WriteLine("Startup");
         }
 
         public void Shutdown()
         {
-            Trace.WriteLine("Shutdown");
             if (_listener != null)
             {
                 Trace.Listeners.Remove(_listener);

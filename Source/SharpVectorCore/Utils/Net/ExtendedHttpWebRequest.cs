@@ -9,6 +9,7 @@ namespace SharpVectors.Net
     {
         public ExtendedHttpWebRequestCreator()
         {
+            DataSecurityProtocols.Initialize();
         }
 
         WebRequest IWebRequestCreate.Create(Uri uri)

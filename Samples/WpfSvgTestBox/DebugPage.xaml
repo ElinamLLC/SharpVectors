@@ -8,12 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Title="DebugPage">
     <DockPanel LastChildFill="True">
-        <!--<RichTextBox x:Name="debugBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"  
-                     IsReadOnly="True" AllowDrop="False" VerticalScrollBarVisibility="Auto" 
-                     IsUndoEnabled="False" HorizontalScrollBarVisibility="Auto">
-            <local:TraceDocument x:Name="traceDocument"/>
-        </RichTextBox>-->
-        
         <avalonEdit:TextEditor x:Name="textEditor" FontFamily="Consolas" FontSize="12pt"/>
     </DockPanel>
 </Page>

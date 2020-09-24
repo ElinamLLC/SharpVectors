@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
+using SharpVectors.Net;
+
 namespace GdiSvgTestBox
 {
     public partial class MainForm : Form
@@ -147,6 +149,7 @@ namespace GdiSvgTestBox
 
         private void OnFormLoad(object sender, EventArgs e)
         {
+            DataSecurityProtocols.Initialize();
         }
 
         private void OnFormClosing(object sender, FormClosingEventArgs e)

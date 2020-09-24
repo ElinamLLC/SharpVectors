@@ -334,6 +334,15 @@ namespace WpfTestThreadSafety
 
             for (int i = 0; i < NumberOfConsumers; ++i)
             {
+#if DOTNET40
+                allTasks.Add(TaskEx.Run(() =>
+                {
+                    while (queue.TryDequeue(out string imageData))
+                    {
+                        UpdateDrawing(imageData);
+                    }
+                }));
+#else
                 allTasks.Add(Task.Run(() =>
                 {
                     while (queue.TryDequeue(out string imageData))
@@ -341,9 +350,14 @@ namespace WpfTestThreadSafety
                         UpdateDrawing(imageData);
                     }
                 }));
+#endif
             }
 
+#if DOTNET40
+            await TaskEx.WhenAll(allTasks);
+#else
             await Task.WhenAll(allTasks);
+#endif
 
             AppendLine("");
             AppendLine("**** Completed Tests");

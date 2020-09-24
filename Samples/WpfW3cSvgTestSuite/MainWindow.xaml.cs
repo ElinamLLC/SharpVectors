@@ -28,14 +28,18 @@ namespace WpfW3cSvgTestSuite
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Private Fields
+        #region Public Fields
 
         public const string TitleFormat   = "SharpVectors: W3C Test Suite - {0}";
         public const string AppTitle      = "SVG Test Suite";
         public const string AppErrorTitle = "SVG Test Suite - Error";
+
+        #endregion
+
+        #region Private Fields
   
-        private const int LeftPane         = 330;
-        private const int LeftBottomPane   = 220;
+        private const int LeftPane       = 330;
+        private const int LeftBottomPane = 220;
 
         private bool _isTreeModified;
         private bool _isShown;
@@ -326,6 +330,8 @@ namespace WpfW3cSvgTestSuite
                 _isTestAvailable = true;
                 this.InitializePath(selectedPath);
             }
+
+            tabDrawing.IsSelected = true;
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)

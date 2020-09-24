@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net46;net48;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -8,6 +8,8 @@
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
     <RootNamespace>GdiSvgTestBox</RootNamespace>
     <AssemblyName>GdiSvgTestBox</AssemblyName>
+    <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
+    <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -33,6 +35,38 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <Reference Include="System.Design" />
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>..\..\Libraries\net40\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\..\Libraries\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
+      <HintPath>..\..\Libraries\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <Reference Include="System.Design" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net45\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>..\..\Libraries\net45\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\..\Libraries\net45\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
+      <HintPath>..\..\Libraries\net45\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
     <Reference Include="System.Design" />
     <Reference Include="System.IO.Compression" />
@@ -47,6 +81,22 @@
     </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
       <HintPath>..\..\Libraries\net46\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <Reference Include="System.Design" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net47\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>..\..\Libraries\net47\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\..\Libraries\net47\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
+      <HintPath>..\..\Libraries\net47\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">

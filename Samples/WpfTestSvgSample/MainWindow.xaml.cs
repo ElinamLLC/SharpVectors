@@ -28,14 +28,18 @@ namespace WpfTestSvgSample
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Public Fields
+
+        public const string AppTitle        = "SharpVectors: WPF SVG Application";
+        public const string AppErrorTitle   = "SharpVectors: WPF SVG Application - Error";
+        public const string SvgTestSettings = "SvgTestSettings.xml";
+
+        #endregion
+
         #region Private Fields
 
         private const int LeftPane       = 350;
         private const int LeftBottomPane = 300;
-
-        private const string AppTitle        = "SharpVectors: WPF SVG Application";
-        private const string AppErrorTitle   = "SharpVectors: WPF SVG Application - Error";
-        private const string SvgTestSettings = "SvgTestSettings.xml";
 
         private const string SvgFilePattern  = "*.svg*";
 
@@ -267,7 +271,6 @@ namespace WpfTestSvgSample
             }
             if (_debugPage != null)
             {
-                _debugPage.MainWindow = this;
                 _debugPage.Startup();
             }
             if (_settingsPage != null)
@@ -295,6 +298,8 @@ namespace WpfTestSvgSample
             tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
 
             this.InitializedPath(_optionSettings.CurrentSvgPath);
+
+            tabDrawing.IsSelected = true;
         }
 
         private void OnWindowUnloaded(object sender, RoutedEventArgs e)

@@ -109,11 +109,17 @@ namespace GdiSvgTestBox
             else
             {
                 this.ShowMessage(string.Format(SearchGlobals.TargetFound, count));
-
+#if DOTNET40
+                await TaskEx.Delay(5000).ContinueWith(t =>
+                {
+                    this.Close();
+                });
+#else
                 await Task.Delay(5000).ContinueWith(t =>
                 {
                     this.Close();
                 });
+#endif
             }
         }
 

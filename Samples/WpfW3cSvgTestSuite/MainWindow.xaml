@@ -164,7 +164,7 @@
                         </TabItem.Header>
                         <Frame Name="frameSettings" Source="SettingsPage.xaml"/>
                     </TabItem>
-                    <TabItem Name="tabDebugging">
+                    <TabItem Name="tabDebugging" IsSelected="True">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfW3cSvgTestSuite}" />

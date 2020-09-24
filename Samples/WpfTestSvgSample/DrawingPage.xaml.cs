@@ -355,7 +355,11 @@ namespace WpfTestSvgSample
         {
             if (_isLoadingDrawing || string.IsNullOrWhiteSpace(svgFilePath) || !File.Exists(svgFilePath))
             {
+#if DOTNET40
+                return TaskEx.FromResult<bool>(false);
+#else
                 return Task.FromResult<bool>(false);
+#endif
             }
 
             string fileExt = Path.GetExtension(svgFilePath);
@@ -364,7 +368,11 @@ namespace WpfTestSvgSample
                 string.Equals(fileExt, SvgConverter.CompressedSvgExt, StringComparison.OrdinalIgnoreCase)))
             {
                 _svgFilePath = null;
+#if DOTNET40
+                return TaskEx.FromResult<bool>(false);
+#else
                 return Task.FromResult<bool>(false);
+#endif
             }
 
             _isLoadingDrawing = true;

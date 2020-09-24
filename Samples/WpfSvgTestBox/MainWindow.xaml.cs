@@ -16,12 +16,10 @@ namespace WpfSvgTestBox
 
         private bool _isShown;
 
-        private MainPage _mainPage;
-
-        //private SvgPage _svgPage;
-        //private XamlPage _xamlPage;
-        //private DebugPage _debugPage;
-        //private SettingsPage _settingsPage;
+        private SvgPage _svgPage;
+        private XamlPage _xamlPage;
+        private DebugPage _debugPage;
+        private SettingsPage _settingsPage;
 
         #endregion
 
@@ -59,15 +57,10 @@ namespace WpfSvgTestBox
             }
             _isShown = true;
 
-            if (_mainPage != null)
+            if (_svgPage != null)
             {
-                _mainPage.ContentRendered(this, e);
+                _svgPage.InitializeDocument();
             }
-
-            //if (_svgPage != null)
-            //{
-            //    _svgPage.InitializeDocument();
-            //}
         }
 
         #endregion
@@ -77,43 +70,35 @@ namespace WpfSvgTestBox
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             // Retrieve the display pages...
-            _mainPage = mainPage.Content as MainPage;
-            if (_mainPage != null)
+            _svgPage      = frameSvgInput.Content as SvgPage;
+            _xamlPage     = frameXamlOutput.Content as XamlPage;
+            _debugPage    = frameDebugging.Content as DebugPage;
+            _settingsPage = frameSettings.Content as SettingsPage;
+
+            if (_svgPage != null && _xamlPage != null)
             {
-                _mainPage.WindowLoaded(sender, e);
+                _svgPage.XamlPage = _xamlPage;
             }
 
-            //_svgPage      = frameSvgInput.Content as SvgPage;
-            //_xamlPage     = frameXamlOutput.Content as XamlPage;
-            //_debugPage    = frameDebugging.Content as DebugPage;
-            //_settingsPage = frameSettings.Content as SettingsPage;
+            if (_svgPage != null && _settingsPage != null)
+            {
+                _settingsPage.SvgPage = _svgPage;
+            }
 
-            //if (_svgPage != null && _xamlPage != null)
-            //{
-            //    _svgPage.XamlPage = _xamlPage;
-            //}
+            if (_debugPage != null)
+            {
+                _debugPage.Startup();
+            }
 
-            //if (_svgPage != null && _settingsPage != null)
-            //{
-            //    _settingsPage.SvgPage = _svgPage;
-            //}
-
-            //if (_debugPage != null)
-            //{
-            //    _debugPage.Startup();
-            //}
+            tabSvgInput.IsSelected = true;
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (_mainPage != null)
+            if (_debugPage != null)
             {
-                _mainPage.WindowClosing(sender, e);
+                _debugPage.Startup();
             }
-            //if (_debugPage != null)
-            //{
-            //    _debugPage.Startup();
-            //}
         }
 
         #endregion

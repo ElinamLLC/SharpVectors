@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 using WeifenLuo.WinFormsUI.Docking;
 
+using SharpVectors.Net;
+
 namespace GdiW3cSvgTestSuite
 {
     public partial class MainForm : Form
@@ -182,6 +184,8 @@ namespace GdiW3cSvgTestSuite
 
         private void OnFormLoad(object sender, EventArgs e)
         {
+            DataSecurityProtocols.Initialize();
+
             string selectedPath = _optionSettings.LocalSuitePath;
 
             if (OptionSettings.IsTestSuiteAvailable(selectedPath))

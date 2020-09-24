@@ -11,6 +11,7 @@ namespace SharpVectors.Net
         //only for use from Register();
         private DataWebRequest()
         {
+            DataSecurityProtocols.Initialize();
         }
 
         public DataWebRequest(Uri uri)
