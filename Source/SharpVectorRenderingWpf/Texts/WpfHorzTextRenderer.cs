@@ -144,15 +144,13 @@ namespace SharpVectors.Renderers.Texts
                 {
                     var nextText = new string(text[i], 1);
 
-                    FormattedText formattedText = new FormattedText(nextText,
+#if DOTNET40 || DOTNET45 || DOTNET46
+                    FormattedText formattedText = new FormattedText(nextText, 
                         _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
-//#if NETCOREAPP30
-//                    FormattedText formattedText = new FormattedText(nextText, 
-//                        _context.CultureInfo, stringFormat.Direction, typeFace, emSize, textBrush);
-//#else
-//                    FormattedText formattedText = new FormattedText(nextText, _context.CultureInfo,
-//                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
-//#endif
+#else
+                    FormattedText formattedText = new FormattedText(nextText, _context.CultureInfo,
+                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+#endif
 
 //                    formattedText.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
                     formattedText.TextAlignment = stringFormat.Alignment;
@@ -257,15 +255,13 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {
+#if DOTNET40 || DOTNET45 || DOTNET46
                 FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
                     stringFormat.Direction, typeFace, emSize, textBrush);
-//#if NET40
-//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-//                    stringFormat.Direction, typeFace, emSize, textBrush);
-//#else
-//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-//                    stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
-//#endif
+#else
+                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
+                    stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                 formattedText.TextAlignment = stringFormat.Alignment;
                 formattedText.Trimming      = stringFormat.Trimming;
@@ -487,15 +483,13 @@ namespace SharpVectors.Renderers.Texts
                         inputText = new string(text[i], 1);
                     }
 
+#if DOTNET40 || DOTNET45 || DOTNET46
                     FormattedText formattedText = new FormattedText(inputText,  _context.CultureInfo, 
                         stringFormat.Direction, typeFace, emSize, textBrush);
-//#if NET40
-//                    FormattedText formattedText = new FormattedText(inputText,  _context.CultureInfo, 
-//                        stringFormat.Direction, typeFace, emSize, textBrush);
-//#else
-//                    FormattedText formattedText = new FormattedText(inputText, _context.CultureInfo,
-//                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
-//#endif
+#else
+                    FormattedText formattedText = new FormattedText(inputText, _context.CultureInfo,
+                        stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                     if (this.IsMeasuring)
                     {
@@ -607,15 +601,13 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {
+#if DOTNET40 || DOTNET45 || DOTNET46
                 FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-                    stringFormat.Direction, typeFace, emSize, textBrush);
-//#if !NET40
-//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-//                    stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
-//#else
-//                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
-//                    stringFormat.Direction, typeFace,  emSize, textBrush);
-//#endif
+                    stringFormat.Direction, typeFace,  emSize, textBrush);
+#else
+                FormattedText formattedText = new FormattedText(text, _context.CultureInfo,
+                    stringFormat.Direction, typeFace, emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                 if (this.IsMeasuring)
                 {

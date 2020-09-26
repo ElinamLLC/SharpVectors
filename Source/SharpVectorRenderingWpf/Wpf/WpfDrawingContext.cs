@@ -15,16 +15,14 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Private Fields
 
-        private const double DefaultDpi = 96.0d;
-
         private const string RegisteredIdKey = "_registeredIds";
 
         private int _elementOrder;
 
         private string _name;
 
-        protected readonly double _dpiX;
-        protected readonly double _dpiY;
+        private readonly double _dpiX;
+        private readonly double _dpiY;
 
         private bool _renderingClip;
         private bool _isFragment;
@@ -65,18 +63,29 @@ namespace SharpVectors.Renderers.Wpf
         public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)
         {
             _elementOrder = -1;
-            var sysParam = typeof(SystemParameters);
-
-            var dpiXProperty = sysParam.GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
-            var dpiYProperty = sysParam.GetProperty("Dpi",  BindingFlags.NonPublic | BindingFlags.Static);
-
-            _dpiX = (int)dpiXProperty.GetValue(null, null);
-            _dpiY = (int)dpiYProperty.GetValue(null, null);
 
             if (settings == null)
             {
                 settings = new WpfDrawingSettings();                
             }
+
+            var dpiScale = settings.DpiScale;
+            if (dpiScale == null)
+            {
+                var sysParam = typeof(SystemParameters);
+
+                var dpiXProperty = sysParam.GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+                var dpiYProperty = sysParam.GetProperty("Dpi",  BindingFlags.NonPublic | BindingFlags.Static);
+
+                _dpiX = (int)dpiXProperty.GetValue(null, null);
+                _dpiY = (int)dpiYProperty.GetValue(null, null);
+            }
+            else
+            {
+                _dpiX = dpiScale.PixelsPerInchX;
+                _dpiY = dpiScale.PixelsPerInchY;
+            }
+
             _quickBounds   = Rect.Empty;
             _isFragment    = isFragment;
             _settings      = settings;
@@ -298,7 +307,7 @@ namespace SharpVectors.Renderers.Wpf
         public double DpiScaleX
         {
             get {
-                return _dpiX / DefaultDpi;
+                return _dpiX / DpiUtilities.DefaultPixelsPerInch;
             }
         }
 
@@ -307,7 +316,7 @@ namespace SharpVectors.Renderers.Wpf
         public double DpiScaleY
         {
             get {
-                return _dpiY / DefaultDpi;
+                return _dpiY / DpiUtilities.DefaultPixelsPerInch;
             }
         }
 
@@ -316,7 +325,7 @@ namespace SharpVectors.Renderers.Wpf
         public double PixelsPerDip
         {
             get {
-                return _dpiY / DefaultDpi;
+                return _dpiY / DpiUtilities.DefaultPixelsPerInch;
             }
         }
 

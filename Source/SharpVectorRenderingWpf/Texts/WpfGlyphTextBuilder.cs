@@ -514,6 +514,7 @@ namespace SharpVectors.Renderers.Texts
 
         private GlyphRun CreateGlyphRun(Point origin, XmlLanguage language)
         {
+#if DOTNET40 || DOTNET45 || DOTNET46
             return new GlyphRun(
                 _glyphTypeface,               // GlyphTypeface
                 _bidiLevel,                   // Bidi level
@@ -529,6 +530,24 @@ namespace SharpVectors.Renderers.Texts
                 null,                         // caret stops
                 language                      // language
             );
+#else
+            return new GlyphRun(
+                _glyphTypeface,               // GlyphTypeface
+                _bidiLevel,                   // Bidi level
+                _isSideways,                  // sideways flag
+                _fontSize,                    // rendering em size in MIL units
+                (float)this.PixelsPerDip,     // PixelsPerDip at which the text should be rendered.
+                _glyphIndices,                // glyph indices
+                origin,                       // origin of glyph-drawing space
+                _advanceWidths,               // glyph advances
+                _glyphOffsets,                // glyph offsets
+                _unicodeString.ToCharArray(), // unicode characters
+                _deviceFontName,              // device font
+                _clusterMap,                  // cluster map
+                null,                         // caret stops
+                language                      // language
+            );
+#endif
         }
 
         private void ComputeMeasurement(string text, double OriginX, double OriginY)

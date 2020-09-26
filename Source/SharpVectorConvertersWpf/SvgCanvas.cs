@@ -18,6 +18,9 @@ using SharpVectors.Runtime;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 
+using DpiScale     = SharpVectors.Runtime.DpiScale;
+using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+
 namespace SharpVectors.Converters
 {
     /// <summary>
@@ -169,6 +172,8 @@ namespace SharpVectors.Converters
         private Uri _sourceUri;
         private string _sourceSvg;
         private Stream _sourceStream;
+
+        private DpiScale _dpiScale;
 
         #endregion
 
@@ -1244,6 +1249,14 @@ namespace SharpVectors.Converters
             {
                 return null;
             }
+            if (settings != null)
+            {
+                if (_dpiScale == null)
+                {
+                    _dpiScale = DpiUtilities.GetWindowScale(this);
+                }
+                settings.DpiScale = _dpiScale;
+            }
 
             string scheme = svgSource.Scheme;
             if (string.IsNullOrWhiteSpace(scheme))
@@ -1569,6 +1582,10 @@ namespace SharpVectors.Converters
             {
                 strokeBrush = Brushes.Transparent;
             }
+            if (_dpiScale == null)
+            {
+                _dpiScale = DpiUtilities.GetWindowScale(this);
+            }
 
             // Create a new DrawingGroup of the control.
             DrawingGroup drawingGroup = new DrawingGroup();
@@ -1579,10 +1596,18 @@ namespace SharpVectors.Converters
             using (DrawingContext drawingContext = drawingGroup.Open())
             {
                 // Create the formatted text based on the properties set.
-                FormattedText formattedText = new FormattedText(messageText,
+                FormattedText formattedText = null;
+#if DOTNET40 || DOTNET45 || DOTNET46
+                formattedText = new FormattedText(messageText,
                     CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
                     new Typeface(fontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
                     this.MessageFontSize, Brushes.Black);
+#else
+                formattedText = new FormattedText(messageText,
+                    CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+                    new Typeface(fontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+                    this.MessageFontSize, Brushes.Black, _dpiScale.PixelsPerDip);
+#endif
 
                 // Build the geometry object that represents the text.
                 Geometry textGeometry = formattedText.BuildGeometry(new Point(20, 0));

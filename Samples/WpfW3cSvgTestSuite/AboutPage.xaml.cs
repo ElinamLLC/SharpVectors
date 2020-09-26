@@ -168,6 +168,7 @@ namespace WpfW3cSvgTestSuite
             settings.IgnoreComments               = true;
             settings.IgnoreProcessingInstructions = true;
             settings.DtdProcessing                = DtdProcessing.Parse;
+            settings.XmlResolver                  = null;
 
             SvgTestSuite selectedTestSuite = null;
             if (_optionSettings != null)

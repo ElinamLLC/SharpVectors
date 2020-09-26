@@ -7,11 +7,16 @@ using System.Windows.Media;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
+using DpiScale     = SharpVectors.Runtime.DpiScale;
+using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+
 namespace SharpVectors.Converters.Shapes
 {
     public static class WpfShapeHelper
     {
         private static readonly Regex _decimalNumber = new Regex(@"^\d");
+
+        private static readonly DpiScale _dpiScale = DpiUtilities.GetSystemScale();
 
         private static readonly string GenericSerifFontFamily     = "Times New Roman";
         private static readonly string GenericSansSerifFontFamily = "Tahoma";
@@ -563,15 +568,23 @@ namespace SharpVectors.Converters.Shapes
                 GetTextFontWeight(textContentElement),
                 GetTextFontStretch(textContentElement));
 
-            FormattedText formattedText = new FormattedText(text,
-                System.Globalization.CultureInfo.CurrentUICulture,
-                GetTextDirection(textContentElement),
-                typeface,
-                GetComputedFontSize(textContentElement),
-                Brushes.Black)
+            FormattedText formattedText = null;
+
+#if DOTNET40 || DOTNET45 || DOTNET46
+            formattedText = new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture,
+                GetTextDirection(textContentElement), typeface,
+                GetComputedFontSize(textContentElement), Brushes.Black)
             {
                 LineHeight = GetComputedLineHeight(textContentElement)
             };
+#else
+            formattedText = new FormattedText(text, System.Globalization.CultureInfo.CurrentUICulture,
+                GetTextDirection(textContentElement), typeface,
+                GetComputedFontSize(textContentElement), Brushes.Black, _dpiScale.PixelsPerDip)
+            {
+                LineHeight = GetComputedLineHeight(textContentElement)
+            };
+#endif
 
             SvgTextPositioningElement tpe = textContentElement as SvgTextPositioningElement;
             if (tpe != null)

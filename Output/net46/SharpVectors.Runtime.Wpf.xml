@@ -4,6 +4,228 @@
         <name>SharpVectors.Runtime.Wpf</name>
     </assembly>
     <members>
+        <member name="T:SharpVectors.Runtime.DpiScale">
+            <summary>
+            Stores DPI information from which a <see cref="T:System.Windows.Media.Visual"/> 
+            or <see cref="T:System.Windows.UIElement"/> is rendered.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.#ctor">
+            <summary>
+            Initializes a new instance of the DpiScale class.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the DpiScale class.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the DpiScale class.
+            </summary>
+            <param name="dpiScaleX">DPI scale on X-axis</param>
+            <param name="dpiScaleY">DPI scale on Y-axis</param>         
+        </member>
+        <member name="P:SharpVectors.Runtime.DpiScale.DpiScaleX">
+            <summary>
+            Gets the DPI scale on the X axis.When DPI is 96, <see cref="P:SharpVectors.Runtime.DpiScale.DpiScaleX"/> is 1. 
+            </summary>
+            <remarks>
+            On Windows Desktop, this value is the same as <see cref="P:SharpVectors.Runtime.DpiScale.DpiScaleY"/>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Runtime.DpiScale.DpiScaleY">
+            <summary>
+            Gets the DPI scale on the Y axis. When DPI is 96, <see cref="P:SharpVectors.Runtime.DpiScale.DpiScaleY"/> is 1. 
+            </summary>
+            <remarks>
+            On Windows Desktop, this value is the same as <see cref="P:SharpVectors.Runtime.DpiScale.DpiScaleX"/>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Runtime.DpiScale.PixelsPerDip">
+            <summary>
+            Get or sets the PixelsPerDip at which the text should be rendered.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.DpiScale.PixelsPerInchX">
+            <summary>
+            Gets the PPI along X axis.
+            </summary>
+            <remarks>
+            On Windows Desktop, this value is the same as <see cref="P:SharpVectors.Runtime.DpiScale.PixelsPerInchY"/>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Runtime.DpiScale.PixelsPerInchY">
+            <summary>
+            Gets the PPI along Y axis.
+            </summary>
+            <remarks>
+            On Windows Desktop, this value is the same as <see cref="P:SharpVectors.Runtime.DpiScale.PixelsPerInchX"/>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.Equals(System.Object)">
+            <summary>
+            Equality test
+            </summary>
+            <param name="obj">The object being compared against</param>
+            <returns>True if the objects are equal, False otherwise</returns>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.GetHashCode">
+            <summary>
+            Returns the hash code of the current object
+            </summary>
+            <returns>The hash code of the object</returns>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.Equals(SharpVectors.Runtime.DpiScale)">
+             <summary>
+             Equality test against a <see cref="T:SharpVectors.Runtime.DpiScale"/> object.
+             </summary>
+             <param name="dpiScale2">The object being compared against</param>
+             <returns>True if the objects are equal, False otherwise</returns>
+             <remarks>
+             Two DPI scale values are equal if they are equal after rounding up
+             to hundredths place.
+            
+             Common PPI values in use are:
+             <list type="table">
+             <listheader><term>PPI</term><term>DPI(%)</term><term>DPI(Ratio)</term></listheader>
+             <item><term>96</term><term>100%</term><term>1.00</term></item>
+             <item><term>120</term><term>125%</term><term>1.25</term></item>
+             <item><term>144</term><term>150%</term><term>1.50</term></item>
+             <item><term>192</term><term>200%</term><term>2.00</term></item>
+             </list>
+             </remarks>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.op_Inequality(SharpVectors.Runtime.DpiScale,SharpVectors.Runtime.DpiScale)">
+            <summary>
+            Checks to inequality between two <see cref="T:SharpVectors.Runtime.DpiScale"/> instances.
+            </summary>
+            <param name="dpiScaleA">The first object being compared</param>
+            <param name="dpiScaleB">The second object being compared</param>
+            <returns>True if the objects are not equal, otherwise False</returns>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiScale.op_Equality(SharpVectors.Runtime.DpiScale,SharpVectors.Runtime.DpiScale)">
+            <summary>
+            Checks for equality between two <see cref="T:SharpVectors.Runtime.DpiScale"/> instances.
+            </summary>
+            <param name="dpiScaleA">The first object being compared</param>
+            <param name="dpiScaleB">The second object being compared</param>
+            <returns>True if the two objects are equal, otherwise False</returns>
+        </member>
+        <member name="F:SharpVectors.Runtime.DpiUtilities.DefaultPixelsPerInch">
+            <summary>
+            This is the default PPI value used in WPF and Windows.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetWindowScale(System.Windows.Window)">
+            <summary>
+            Gets the window (monitor) scale versus System DPI.
+            </summary>
+            <param name="window">The window.</param>
+            <returns></returns>
+            <remarks>
+            <para>When developing a DPI-aware application, this is useful for applying a ScaleTransform
+            to your window so all fonts and graphics are scaled and rendered beautifully based on the
+            physical capabilities of the display and the accessibility settings of the user.</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetWindowScale(System.Windows.Media.Visual)">
+            <summary>
+            Gets the window (monitor) scale versus System DPI.
+            </summary>
+            <param name="window">The window.</param>
+            <returns></returns>
+            <remarks>
+            <para>When developing a DPI-aware application, this is useful for applying a ScaleTransform
+            to your window so all fonts and graphics are scaled and rendered beautifully based on the
+            physical capabilities of the display and the accessibility settings of the user.</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetWindowScale(System.IntPtr)">
+            <summary>
+            Gets the window (monitor) scale versus System DPI.
+            </summary>
+            <param name="window">The window.</param>
+            <returns></returns>
+            <remarks>
+            <para>When developing a DPI-aware application, this is useful for applying a ScaleTransform
+            to your window so all fonts and graphics are scaled and rendered beautifully based on the
+            physical capabilities of the display and the accessibility settings of the user.</para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetVirtualPixelScale(System.Windows.Window)">
+            <summary>
+            Gets the virtual pixel scale for a window. This is essentially
+            the Effective DPI of the monitor versus a standard 96 DPI.
+            </summary>
+            <param name="window">The window.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetVirtualPixelScale(System.IntPtr)">
+            <summary>
+            Gets the virtual pixel scale for a window. This is essentially
+            the Effective DPI of the monitor versus a standard 96 DPI.
+            </summary>
+            <param name="hwnd">The HWND.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetVirtualPixelScaleByMonitor(System.IntPtr)">
+            <summary>
+            Gets the virtual pixel scale for a monitor. This is essentially
+            the Effective DPI of the monitor versus a standard 96 DPI.
+            </summary>
+            <param name="hMonitor">The h monitor.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetMonitorEffectiveDpi(System.IntPtr,System.UInt32@,System.UInt32@)">
+            <summary>
+            Get the Effective DPI of a monitor after a user's accessibility
+            preferences have been applied.
+            </summary>
+            <param name="hMonitor">The monitor.</param>
+            <param name="dpiX">The dpi x.</param>
+            <param name="dpiY">The dpi y.</param>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetSystemEffectiveDpi(System.UInt32@,System.UInt32@)">
+            <summary>
+            Get the System Effective DPI.
+            </summary>
+            <remarks>
+            <para>The System Effective DPI is derived by the operating system
+            by looking across all monitors and determining an "Effective DPI" that works
+            well across all the screens for applications that do not support
+             per-monitor DPI.</para>
+            </remarks>
+            <param name="dpiX">The dpi x.</param>
+            <param name="dpiY">The dpi y.</param>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetWindowEffectiveDpi(System.Windows.Window,System.UInt32@,System.UInt32@)">
+            <summary>
+            Get the Effective DPI of a windows (monitor) after a user's accessibility
+            preferences have been applied.
+            </summary>
+            <param name="window">The window.</param>
+            <param name="dpiX">The dpi x.</param>
+            <param name="dpiY">The dpi y.</param>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetWindowEffectiveDpi(System.IntPtr,System.UInt32@,System.UInt32@)">
+            <summary>
+            Get the Effective DPI of a windows (monitor) after a user's accessibility
+            preferences have been applied.
+            </summary>
+            <param name="hwnd">The window.</param>
+            <param name="dpiX">The dpi x.</param>
+            <param name="dpiY">The dpi y.</param>
+        </member>
+        <member name="M:SharpVectors.Runtime.DpiUtilities.GetScreenScalingFactor(System.String)">
+            <summary>
+            Gets scaling factor for a monitor
+            This is defined as current pixel size relative to effective DPI
+            </summary>
+            <param name="deviceName">Monitor device name or null for the primary monitor</param>
+            <returns></returns>
+        </member>
         <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.BeginInit">
             <summary>
             Call BeginInit every time the WICSourceHandle is going to be change.
@@ -26,6 +248,268 @@
         <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.EnsureStream">
             <summary>
             In the designer Data is not set. To prevent exceptions when displaying in the Designer, add a dummy bitmap.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.POINT.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Construct a point of coordinates (x,y).
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.RECT.Empty">
+            <summary> Win32 </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> Win32 </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.#ctor(SharpVectors.Runtime.NativeMethods.RECT)">
+            <summary> Win32 </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.NativeMethods.RECT.IsEmpty">
+            <summary> Win32 </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.ToString">
+            <summary> Return a user friendly representation of this struct </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.Equals(System.Object)">
+            <summary> Determine if 2 RECT are equal (deep compare) </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.GetHashCode">
+            <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.op_Equality(SharpVectors.Runtime.NativeMethods.RECT,SharpVectors.Runtime.NativeMethods.RECT)">
+            <summary> Determine if 2 RECT are equal (deep compare)</summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.RECT.op_Inequality(SharpVectors.Runtime.NativeMethods.RECT,SharpVectors.Runtime.NativeMethods.RECT)">
+            <summary> Determine if 2 RECT are different(deep compare)</summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.GaFlags.GA_PARENT">
+            <summary>
+            Retrieves the parent window. This does not include the owner, as it does with the GetParent function.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.GaFlags.GA_ROOT">
+            <summary>
+            Retrieves the root window by walking the chain of parent windows.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.GaFlags.GA_ROOTOWNER">
+            <summary>
+            Retrieves the owned root window by walking the chain of parent and owner windows returned by GetParent.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.GwlIndex.GWL_STYLE">
+            <summary>
+            Gets/sets the window styles.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.GwlIndex.GWL_EXSTYLE">
+            <summary>
+            Gets/sets the extended window styles.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.NativeMethods.GetWindowLongPtr(System.IntPtr,SharpVectors.Runtime.NativeMethods.GwlIndex)">
+            <summary>
+            Handles 32/64 bit differences
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Runtime.NativeMethods.TokenInformationClass">
+            <summary>
+            Passed to <see cref="M:SharpVectors.Runtime.NativeMethods.GetTokenInformation(System.IntPtr,SharpVectors.Runtime.NativeMethods.TokenInformationClass,System.IntPtr,System.UInt32,System.UInt32@)"/> to specify what information about the token to return.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.DRIVERVERSION">
+            <summary>
+            Device driver version
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.TECHNOLOGY">
+            <summary>
+            Device classification
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.HORZSIZE">
+            <summary>
+            Horizontal size in millimeters
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.VERTSIZE">
+            <summary>
+            Vertical size in millimeters
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.HORZRES">
+            <summary>
+            Horizontal width in pixels
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.VERTRES">
+            <summary>
+            Vertical height in pixels
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.BITSPIXEL">
+            <summary>
+            Number of bits per pixel
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.PLANES">
+            <summary>
+            Number of planes
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.NUMBRUSHES">
+            <summary>
+            Number of brushes the device has
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.NUMPENS">
+            <summary>
+            Number of pens the device has
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.NUMMARKERS">
+            <summary>
+            Number of markers the device has
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.NUMFONTS">
+            <summary>
+            Number of fonts the device has
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.NUMCOLORS">
+            <summary>
+            Number of colors the device supports
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.PDEVICESIZE">
+            <summary>
+            Size required for device descriptor
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.CURVECAPS">
+            <summary>
+            Curve capabilities
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.LINECAPS">
+            <summary>
+            Line capabilities
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.POLYGONALCAPS">
+            <summary>
+            Polygonal capabilities
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.TEXTCAPS">
+            <summary>
+            Text capabilities
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.CLIPCAPS">
+            <summary>
+            Clipping capabilities
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.RASTERCAPS">
+            <summary>
+            Bitblt capabilities
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.ASPECTX">
+            <summary>
+            Length of the X leg
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.ASPECTY">
+            <summary>
+            Length of the Y leg
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.ASPECTXY">
+            <summary>
+            Length of the hypotenuse
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.SHADEBLENDCAPS">
+            <summary>
+            Shading and Blending caps
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.LOGPIXELSX">
+            <summary>
+            Logical pixels inch in X
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.LOGPIXELSY">
+            <summary>
+            Logical pixels inch in Y
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.SIZEPALETTE">
+            <summary>
+            Number of entries in physical palette
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.NUMRESERVED">
+            <summary>
+            Number of reserved entries in palette
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.COLORRES">
+            <summary>
+            Actual color resolution
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.PHYSICALWIDTH">
+            <summary>
+            Physical Width in device units
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.PHYSICALHEIGHT">
+            <summary>
+            Physical Height in device units
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.PHYSICALOFFSETX">
+            <summary>
+            Physical Printable Area x margin
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.PHYSICALOFFSETY">
+            <summary>
+            Physical Printable Area y margin
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.SCALINGFACTORX">
+            <summary>
+            Scaling factor x
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.SCALINGFACTORY">
+            <summary>
+            Scaling factor y
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.VREFRESH">
+            <summary>
+            Current vertical refresh rate of the display device (for displays only) in Hz
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.DESKTOPVERTRES">
+            <summary>
+            Vertical height of entire desktop in pixels
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.DESKTOPHORZRES">
+            <summary>
+            Horizontal width of entire desktop in pixels
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.NativeMethods.DeviceCap.BLTALIGNMENT">
+            <summary>
+            Preferred blt alignment
             </summary>
         </member>
         <member name="T:SharpVectors.Runtime.Properties.Resources">

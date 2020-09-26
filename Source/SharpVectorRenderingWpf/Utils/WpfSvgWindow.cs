@@ -69,6 +69,16 @@ namespace SharpVectors.Renderers.Utils
 
         #region Public Properties
 
+        public bool PreferUserSize
+        {
+            get {
+                return _preferUserSize;
+            }
+            set {
+                _preferUserSize = value;
+            }
+        }
+
         public XmlReaderSettings CustomSettings
         {
             get {
@@ -152,6 +162,11 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
+            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            {
+                var dpiScale = drawingSettings.DpiScale;
+                document.Dpi = dpiScale.PixelsPerInchY;
+            }
             document.Load(documentUri.AbsoluteUri);
 
             this.Document = document;
@@ -183,6 +198,11 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
+            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            {
+                var dpiScale = drawingSettings.DpiScale;
+                document.Dpi = dpiScale.PixelsPerInchY;
+            }
             document.Load(documentStream);
 
             this.Document = document;
@@ -201,6 +221,11 @@ namespace SharpVectors.Renderers.Utils
             if (_settings != null)
             {
                 document.CustomSettings = _settings;
+            }
+            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            {
+                var dpiScale = drawingSettings.DpiScale;
+                document.Dpi = dpiScale.PixelsPerInchY;
             }
             document.Load(textReader);
 
@@ -221,6 +246,12 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
+            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            {
+                var dpiScale = drawingSettings.DpiScale;
+                document.Dpi = dpiScale.PixelsPerInchY;
+            }
+
             document.Load(xmlReader);
 
             this.Document = document;

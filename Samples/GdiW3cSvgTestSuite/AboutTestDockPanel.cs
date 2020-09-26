@@ -199,6 +199,7 @@ namespace GdiW3cSvgTestSuite
             settings.IgnoreComments               = true;
             settings.IgnoreProcessingInstructions = true;
             settings.DtdProcessing                = DtdProcessing.Parse;
+            settings.XmlResolver                  = null;
 
             StringBuilder textBuilder = new StringBuilder();
 

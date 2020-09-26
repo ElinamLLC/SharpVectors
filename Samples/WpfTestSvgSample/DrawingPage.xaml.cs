@@ -16,6 +16,9 @@ using SharpVectors.Runtime;
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
 
+using DpiScale     = SharpVectors.Runtime.DpiScale;
+using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+
 namespace WpfTestSvgSample
 {
     /// <summary>
@@ -44,6 +47,8 @@ namespace WpfTestSvgSample
         private WpfDrawingSettings _wpfSettings;
 
         private DirectoryInfo _workingDir;
+
+        private DpiScale _dpiScale;
 
         /// <summary>
         /// Specifies the current state of the mouse handling logic.
@@ -1329,14 +1334,25 @@ namespace WpfTestSvgSample
 
             drawingGroup.Opacity = 0.8;
 
+            if (_dpiScale == null)
+            {
+                _dpiScale = DpiUtilities.GetWindowScale(this);
+            }
+
             // Open the DrawingGroup in order to access the DrawingContext.
             using (DrawingContext drawingContext = drawingGroup.Open())
             {
                 // Create the formatted text based on the properties set.
-                var formattedText = new FormattedText(textString,
-                    CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+                FormattedText formattedText = null;
+#if DOTNET40 || DOTNET45 || DOTNET46
+                formattedText = new FormattedText(textString, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
                     new Typeface(new FontFamily("Tahoma"), FontStyles.Normal, 
                     FontWeights.Normal, FontStretches.Normal), 72, Brushes.Black);
+#else
+                formattedText = new FormattedText(textString, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
+                    new Typeface(new FontFamily("Tahoma"), FontStyles.Normal, 
+                    FontWeights.Normal, FontStretches.Normal), 72, Brushes.Black, _dpiScale.PixelsPerDip);
+#endif
 
                 // Build the geometry object that represents the text.
                 Geometry textGeometry = formattedText.BuildGeometry(new Point(20, 0));

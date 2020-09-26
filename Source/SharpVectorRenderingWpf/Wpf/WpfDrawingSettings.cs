@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-using SharpVectors.Runtime;
-
 namespace SharpVectors.Renderers.Wpf
 {
+    using DpiScale            = SharpVectors.Runtime.DpiScale;
+    using DpiUtilities        = SharpVectors.Runtime.DpiUtilities;
+    using SvgInteractiveModes = SharpVectors.Runtime.SvgInteractiveModes;
+
     /// <summary>
     /// This provides the options for the drawing/rendering engine of the WPF.
     /// </summary>
@@ -55,6 +57,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private object _fontSynch = new object();
 
+        private DpiScale _dpiScale;
+
         private SvgInteractiveModes _interactiveMode;
 
         #endregion
@@ -91,6 +95,8 @@ namespace SharpVectors.Renderers.Wpf
             _fontFamilyNames       = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             _fontFamilyMap         = new Dictionary<string, FontFamily>(StringComparer.OrdinalIgnoreCase);
             _cssVariables          = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            _dpiScale              = DpiUtilities.GetSystemScale();
         }
 
         /// <summary>
@@ -101,6 +107,7 @@ namespace SharpVectors.Renderers.Wpf
         /// This specifies the initial options for the rendering or drawing engine.
         /// </param>
         public WpfDrawingSettings(WpfDrawingSettings settings)
+            : this()
         {
             if (settings == null)
             {
@@ -133,6 +140,7 @@ namespace SharpVectors.Renderers.Wpf
             _fontFamilyNames       = settings._fontFamilyNames;
             _fontFamilyMap         = settings._fontFamilyMap;
             _cssVariables          = settings._cssVariables;
+            _dpiScale              = settings._dpiScale;
         }
 
         #endregion
@@ -627,6 +635,19 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public DpiScale DpiScale
+        {
+            get {
+                return _dpiScale;
+            }
+            set {
+                if (value != null)
+                {
+                    _dpiScale = value;
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -785,6 +806,10 @@ namespace SharpVectors.Renderers.Wpf
             if (_neutralCulture != null)
             {
                 clonedSettings._neutralCulture = (CultureInfo)_neutralCulture.Clone();
+            }
+            if (_dpiScale != null)
+            {
+                clonedSettings._dpiScale = _dpiScale.Clone();
             }
 
             return clonedSettings;

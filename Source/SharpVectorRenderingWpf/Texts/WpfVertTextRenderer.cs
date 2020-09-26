@@ -388,8 +388,13 @@ namespace SharpVectors.Renderers.Texts
         {
             var verticalText = this.GetVerticalText(text);
 
+#if DOTNET40 || DOTNET45 || DOTNET46
             FormattedText formattedText = new FormattedText(verticalText, System.Globalization.CultureInfo.CurrentCulture,
                  FlowDirection.LeftToRight, typeFace, fontSize, Brushes.Black);
+#else
+            FormattedText formattedText = new FormattedText(verticalText, System.Globalization.CultureInfo.CurrentCulture,
+                 FlowDirection.LeftToRight, typeFace, fontSize, Brushes.Black, _context.PixelsPerDip);
+#endif
 
             //formattedText.LineHeight = this.CharSpacing;
 
@@ -465,9 +470,15 @@ namespace SharpVectors.Renderers.Texts
             string letterSpacing = element.GetAttribute("letter-spacing");
             if (string.IsNullOrWhiteSpace(letterSpacing))
             {
+#if DOTNET40 || DOTNET45 || DOTNET46
                 FormattedText formattedText = new FormattedText(text, 
                     textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
                     stringFormat.Direction, typeface, emSize, textBrush);
+#else
+                FormattedText formattedText = new FormattedText(text, 
+                    textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
+                    stringFormat.Direction, typeface, emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                 if (this.IsMeasuring)
                 {
@@ -558,9 +569,15 @@ namespace SharpVectors.Renderers.Texts
                 double spacing = Convert.ToDouble(letterSpacing);
                 for (int i = 0; i < text.Length; i++)
                 {
+#if DOTNET40 || DOTNET45 || DOTNET46
                     FormattedText formattedText = new FormattedText(new string(text[i], 1),
                         textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
                         stringFormat.Direction, typeface, emSize, textBrush);
+#else
+                    FormattedText formattedText = new FormattedText(new string(text[i], 1),
+                        textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
+                        stringFormat.Direction, typeface, emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                     if (this.IsMeasuring)
                     {
@@ -666,11 +683,18 @@ namespace SharpVectors.Renderers.Texts
 
             string letterSpacing = element.GetAttribute("letter-spacing");
             if (string.IsNullOrWhiteSpace(letterSpacing))
-            {   
+            {
+#if DOTNET40 || DOTNET45 || DOTNET46
                 FormattedText formattedText = new FormattedText(text,
                     textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
                     stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
                     emSize, textBrush);
+#else
+                FormattedText formattedText = new FormattedText(text,
+                    textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo,
+                    stringFormat.Direction, new Typeface(fontFamily, fontStyle, fontWeight, fontStretch), 
+                    emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                 formattedText.TextAlignment = stringFormat.Alignment;
                 formattedText.Trimming      = stringFormat.Trimming;
@@ -718,11 +742,19 @@ namespace SharpVectors.Renderers.Texts
                 float spacing = Convert.ToSingle(letterSpacing);
                 for (int i = 0; i < text.Length; i++)
                 {
+#if DOTNET40 || DOTNET45 || DOTNET46
                     FormattedText formattedText = new FormattedText(new string(text[i], 1),
                         textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
                         stringFormat.Direction, 
                         new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
                         emSize, textBrush);
+#else
+                    FormattedText formattedText = new FormattedText(new string(text[i], 1),
+                        textRun.IsLatin ? _context.EnglishCultureInfo : _context.CultureInfo, 
+                        stringFormat.Direction, 
+                        new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
+                        emSize, textBrush, _context.PixelsPerDip);
+#endif
 
                     formattedText.Trimming      = stringFormat.Trimming;
                     formattedText.TextAlignment = stringFormat.Alignment;
@@ -775,7 +807,11 @@ namespace SharpVectors.Renderers.Texts
             }
             GlyphRun glyphRun = glyphDrawing.GlyphRun;
 
+#if DOTNET40 || DOTNET45 || DOTNET46
             GlyphRun verticalRun = new GlyphRun();
+#else
+            GlyphRun verticalRun = new GlyphRun((float)_context.PixelsPerDip);
+#endif
             ISupportInitialize glyphInit = verticalRun;
             glyphInit.BeginInit();
 
