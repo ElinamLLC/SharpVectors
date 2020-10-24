@@ -100,7 +100,7 @@ namespace SharpVectors.Dom.Stylesheets
         /// INVALID_CHARACTER_ERR: If the medium contains characters that are invalid in the underlying style language.
         /// </exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.
         /// </exception>
         public void AppendMedium(string newMedium)
         {
@@ -119,7 +119,7 @@ namespace SharpVectors.Dom.Stylesheets
         /// <param name="oldMedium">The medium to delete in the media list.</param>
         /// <exception cref="DomException">NOT_FOUND_ERR: Raised if oldMedium is not in the list.</exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.
         /// </exception>
         public void DeleteMedium(string oldMedium)
         {
@@ -143,10 +143,10 @@ namespace SharpVectors.Dom.Stylesheets
         /// The parsable textual representation of the media list. This is a comma-separated list of media.
         /// </summary>
         /// <exception cref="DomException">
-        /// SYNTAX_ERR: Raised if the specified string value has a syntax error and is unparsable.
+        /// <c>SYNTAX_ERR:</c> Raised if the specified string value has a syntax error and is unparsable.
         /// </exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.
         /// </exception>
         public string MediaText
         {

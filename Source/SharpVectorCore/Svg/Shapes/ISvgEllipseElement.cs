@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgEllipseElement interface corresponds to the 'ellipse' element. 
 	/// </summary>
 	public interface ISvgEllipseElement	: ISvgElement, ISvgTests, ISvgLangSpace,
-		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, IElementVisitorTarget
+		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, ISvgElementVisitorTarget
     {
 		ISvgAnimatedLength Cx{get;}
 

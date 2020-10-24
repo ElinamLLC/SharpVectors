@@ -1,8 +1,8 @@
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The <c>CssValueType</c> Enum Class contains the possible CSS Value Types. This is an extension to the 
-	/// CSS specification. The specification has a list of constants defined within the ICssValue Interface 
+	/// The <c>CssValueType</c> Enum contains the possible CSS Value Types. This is an extension to the 
+	/// CSS specification. The specification has a list of constants defined within the <see cref="ICssValue"/> Interface 
 	/// </summary>
 	public enum CssValueType
 	{

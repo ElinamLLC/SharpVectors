@@ -140,8 +140,8 @@ namespace SharpVectors.Dom.Css
         /// have stripped out insignificant whitespace while parsing the selector.
         /// </summary>
         /// <exception cref="DomException">
-        /// SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly</exception>
+        /// <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this rule is readonly</exception>
         public string SelectorText
         {
             get {

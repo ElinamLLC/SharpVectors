@@ -1,5 +1,11 @@
+using System.Xml;
+
 namespace SharpVectors.Dom
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <see cref="XmlDocument"/>
 	public interface IDocument : INode
 	{
 		IDocumentType Doctype

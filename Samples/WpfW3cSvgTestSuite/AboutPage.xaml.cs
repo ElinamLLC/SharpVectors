@@ -132,11 +132,11 @@ namespace WpfW3cSvgTestSuite
 
         public void UnloadDocument()
         {
-            _svgFilePath        = "";
+            _svgFilePath        = string.Empty;
 
-            testTitle.Text      = "";
-            testDescrition.Text = "";
-            testFilePath.Text   = "";
+            testTitle.Text      = string.Empty;
+            testDescrition.Text = string.Empty;
+            testFilePath.Text   = string.Empty;
 
             _testCase           = null;
 
@@ -439,7 +439,7 @@ namespace WpfW3cSvgTestSuite
                                     string revisionText = reader.GetAttribute("version");
                                     if (!string.IsNullOrWhiteSpace(revisionText))
                                     {
-                                        revisionText = revisionText.Replace("$", "");
+                                        revisionText = revisionText.Replace("$", string.Empty);
                                         _testCase.Revision = revisionText.Trim();
                                     }
                                     string nameText = reader.GetAttribute("testname");

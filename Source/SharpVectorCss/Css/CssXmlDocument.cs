@@ -17,16 +17,16 @@ namespace SharpVectors.Dom.Css
     {
         #region Private Fields
 
-        internal List<string[]> _styleElements;
         internal MediaList _currentMedia;
+        internal IList<string[]> _styleElements;
 
+        private bool _isStatic;
         private bool _isLoaded;
-        private bool _static;
         private StyleSheetList _styleSheets;
         private CssPropertyProfile _cssPropertyProfile;
 
-        private CssStyleSheet _userAgentStyleSheet;
         private CssStyleSheet _userStyleSheet;
+        private CssStyleSheet _userAgentStyleSheet;
 
         #endregion
 
@@ -38,12 +38,14 @@ namespace SharpVectors.Dom.Css
         public CssXmlDocument()
         {
             _styleElements      = new List<string[]>();
-            _currentMedia       = new MediaList("all");
+            _currentMedia       = new MediaList(CssConstants.ValAll);
             _cssPropertyProfile = new CssPropertyProfile();
 
             SetupNodeChangeListeners();
 
             DataWebRequest.Register();
+
+            _isStatic           = false;
         }
 
         /// <summary>
@@ -54,12 +56,14 @@ namespace SharpVectors.Dom.Css
             : base(nt)
         {
             _styleElements      = new List<string[]>();
-            _currentMedia       = new MediaList("all");
+            _currentMedia       = new MediaList(CssConstants.ValAll);
             _cssPropertyProfile = new CssPropertyProfile();
 
             SetupNodeChangeListeners();
 
             DataWebRequest.Register();
+
+            _isStatic           = false;
         }
 
         #endregion
@@ -94,8 +98,12 @@ namespace SharpVectors.Dom.Css
         /// <value><c>true</c> if static; otherwise, <c>false</c>.</value>
         public bool Static
         {
-            get { return _static; }
-            set { _static = value; }
+            get { 
+                return _isStatic; 
+            }
+            set { 
+                _isStatic = value; 
+            }
         }
 
         public MediaList Media
@@ -146,7 +154,12 @@ namespace SharpVectors.Dom.Css
             }
         }
 
-        public IDocumentView Document { get => throw new NotImplementedException(); }
+        public IDocumentView Document 
+        {
+            get {
+                throw new NotImplementedException();
+            }
+        }
 
         #endregion
 
@@ -154,7 +167,7 @@ namespace SharpVectors.Dom.Css
 
         public override XmlElement CreateElement(string prefix, string localName, string ns)
         {
-            if (string.Equals(localName, "style", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(localName, SvgConstants.TagStyle, StringComparison.OrdinalIgnoreCase))
             {
                 return new CssXmlElement(prefix, localName, ns, this);
             }
@@ -171,7 +184,7 @@ namespace SharpVectors.Dom.Css
             using (StaticSection.Use(this))
             {
                 // remove any hash (won't work for local files)
-                int hashStart = filename.IndexOf("#", StringComparison.OrdinalIgnoreCase);
+                int hashStart = filename.IndexOf(XmlConstants.XlinkHash, StringComparison.OrdinalIgnoreCase);
                 if (hashStart > -1)
                 {
                     filename = filename.Substring(0, hashStart);
@@ -266,7 +279,6 @@ namespace SharpVectors.Dom.Css
 
         protected virtual void OnLoaded()
         {
-
         }
 
         #endregion
@@ -315,51 +327,58 @@ namespace SharpVectors.Dom.Css
 
         public void NodeChangedEvent(object src, XmlNodeChangedEventArgs args)
         {
-            if (!Static)
+            if (_isStatic || args.Node == null || args.NewParent == null)
             {
-                // Attribute updates
-                // xmlns:xml is auto-inserted whenever a selectNode is performed, we don't want those events
-                if (args.Node is XmlText && args.NewParent is XmlAttribute 
-                    && args.NewParent.Name != "xmlns:xml")
-                {
-                    XmlAttribute attr = args.NewParent as XmlAttribute;
-                    CssXmlElement elm = attr.OwnerElement as CssXmlElement;
-                    if (elm != null)
-                    {
-                        elm.AttributeChange(attr, args);
-                    }
-                }
-                else if (args.Node is XmlAttribute && args.Node.Name != "xmlns:xml")
-                {
-                    // the cause of the change is a XmlAttribute => happens during inserting or removing
-                    CssXmlElement oldElm = args.OldParent as CssXmlElement;
-                    if (oldElm != null) oldElm.AttributeChange(args.Node, args);
+                return;
+            }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
-                    CssXmlElement newElm = args.NewParent as CssXmlElement;
-                    if (newElm != null) newElm.AttributeChange(args.Node, args);
-                }
+            var nodeType       = args.Node.NodeType;
+            var parentNodeType = args.NewParent.NodeType;
 
-                // OnElementChange
-                if (args.Node is XmlText && args.NewParent is XmlElement)
+            // Attribute updates
+            // xmlns:xml is auto-inserted whenever a selectNode is performed, we don't want those events
+            if (nodeType == XmlNodeType.Text && parentNodeType == XmlNodeType.Attribute 
+                && !string.Equals(args.NewParent.Name, XmlConstants.XmlNamespacePrefix, comparer))
+            {
+                XmlAttribute attr = args.NewParent as XmlAttribute;
+                CssXmlElement elm = attr.OwnerElement as CssXmlElement;
+                if (elm != null)
                 {
-                    CssXmlElement element = (CssXmlElement)args.NewParent;
-                    element.ElementChange(src, args);
+                    elm.AttributeChange(attr, args);
                 }
-                else if (args.Node is CssXmlElement)
+            }
+            else if (nodeType == XmlNodeType.Attribute 
+                && !string.Equals(args.Node.Name, XmlConstants.XmlNamespacePrefix, comparer))
+            {
+                // the cause of the change is a XmlAttribute => happens during inserting or removing
+                CssXmlElement oldElm = args.OldParent as CssXmlElement;
+                if (oldElm != null) oldElm.AttributeChange(args.Node, args);
+
+                CssXmlElement newElm = args.NewParent as CssXmlElement;
+                if (newElm != null) newElm.AttributeChange(args.Node, args);
+            }
+
+            // OnElementChange
+            if (nodeType == XmlNodeType.Text && parentNodeType == XmlNodeType.Element)
+            {
+                CssXmlElement element = (CssXmlElement)args.NewParent;
+                element.ElementChange(src, args);
+            }
+            else if (args.Node is CssXmlElement)
+            {
+                if (args.Action == XmlNodeChangedAction.Insert || args.Action == XmlNodeChangedAction.Change)
                 {
-                    if (args.Action == XmlNodeChangedAction.Insert || args.Action == XmlNodeChangedAction.Change)
-                    {
-                        // Changes to a child XML node may affect the sibling offsets (for example in tspan)
-                        // By calling the parent's OnElementChange, invalidation will propogate back to Node
-                        CssXmlElement newParent = (CssXmlElement)args.NewParent;
-                        newParent.ElementChange(src, args);
-                    }
-                    else if (args.Action == XmlNodeChangedAction.Remove)
-                    {
-                        // Removing a child XML node may affect the sibling offsets (for example in tspan)
-                        CssXmlElement oldParent = (CssXmlElement)args.OldParent;
-                        oldParent.ElementChange(src, args);
-                    }
+                    // Changes to a child XML node may affect the sibling offsets (for example in tspan)
+                    // By calling the parent's OnElementChange, invalidation will propogate back to Node
+                    CssXmlElement newParent = (CssXmlElement)args.NewParent;
+                    newParent.ElementChange(src, args);
+                }
+                else if (args.Action == XmlNodeChangedAction.Remove)
+                {
+                    // Removing a child XML node may affect the sibling offsets (for example in tspan)
+                    CssXmlElement oldParent = (CssXmlElement)args.OldParent;
+                    oldParent.ElementChange(src, args);
                 }
             }
         }

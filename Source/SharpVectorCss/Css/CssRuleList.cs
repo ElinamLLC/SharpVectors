@@ -99,9 +99,9 @@ namespace SharpVectors.Dom.Css
         internal ulong InsertRule(CssRule rule, ulong index)
         {
             /* TODO:
-			 * HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index 
+			 * <c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at the specified index 
              * e.g. if an @import rule is inserted after a standard rule set or other at-rule.
-			 * SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable
+			 * <c>SYNTAX_ERR:</c> Raised if the specified rule has a syntax error and is unparsable
 			 */
 
             if (_isReadOnly) throw new DomException(DomExceptionType.NoModificationAllowedErr);

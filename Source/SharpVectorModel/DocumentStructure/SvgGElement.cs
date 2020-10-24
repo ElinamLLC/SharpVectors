@@ -57,7 +57,7 @@ namespace SharpVectors.Dom.Svg
 
         #region Implementation of IElementVisitorTarget
 
-        public void Accept(IElementVisitor visitor)
+        public void Accept(ISvgElementVisitor visitor)
         {
             visitor.Visit(this);
 
@@ -66,7 +66,7 @@ namespace SharpVectors.Dom.Svg
                 visitor.BeginContainer(this);
                 foreach (var item in this.ChildNodes)
                 {
-                    IElementVisitorTarget evt = item as IElementVisitorTarget;
+                    ISvgElementVisitorTarget evt = item as ISvgElementVisitorTarget;
                     if (evt != null)
                     {
                         evt.Accept(visitor);

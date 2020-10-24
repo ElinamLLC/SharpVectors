@@ -35,7 +35,7 @@ namespace SharpVectors.Dom.Events
 		public void InitMutationNameEvent(string eventType, bool bubbles, bool cancelable,
 			INode relatedNode, string prevNamespaceUri, string prevNodeName)
 		{
-			InitMutationEvent(eventType, bubbles, cancelable, relatedNode, "", "", "", AttrChangeType.None);
+			InitMutationEvent(eventType, bubbles, cancelable, relatedNode, string.Empty, string.Empty, string.Empty, AttrChangeType.None);
 			
 			_prevNamespaceUri = prevNamespaceUri;
 			_prevNodeName     = prevNodeName;
@@ -45,7 +45,7 @@ namespace SharpVectors.Dom.Events
 			bool cancelable, INode relatedNode, string prevNamespaceUri, string prevNodeName)
 		{
 			InitMutationEventNs(namespaceUri, eventType, bubbles, cancelable,
-				relatedNode, "", "", "", AttrChangeType.None);
+				relatedNode, string.Empty, string.Empty, string.Empty, AttrChangeType.None);
 			
 			_prevNamespaceUri = prevNamespaceUri;
 			_prevNodeName     = prevNodeName;

@@ -86,7 +86,7 @@ namespace SharpVectors.Dom.Events
 		/// </summary>
 		/// <param name="namespaceUri">
 		/// Specifies the
-		/// <see cref="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</see>
+		/// <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</see>
 		/// associated with this event, or <c>null</c> if the application
 		/// wish to have no namespace.
 		/// </param>

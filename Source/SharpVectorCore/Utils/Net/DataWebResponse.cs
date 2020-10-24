@@ -32,7 +32,7 @@ namespace SharpVectors.Net
             fullUri = fullUri.Replace(' ', '+');
 
             // remove all whitespace
-            fullUri = _contentType = _reSpaceRemover.Replace(fullUri, "");
+            fullUri = _contentType = _reSpaceRemover.Replace(fullUri, string.Empty);
 
             Match match = _reData.Match(fullUri);
 

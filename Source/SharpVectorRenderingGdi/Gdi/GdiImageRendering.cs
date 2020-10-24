@@ -301,8 +301,8 @@ namespace SharpVectors.Renderers.Gdi
                     return Image.FromStream(stream, element.ColorProfile != null);
                 }
 
-                string sURI    = element.Href.AnimVal.Replace(" ", "").Trim();
-                sURI = sURI.Replace(@"\n", "");
+                string sURI    = element.Href.AnimVal.Replace(" ", string.Empty).Trim();
+                sURI = sURI.Replace(@"\n", string.Empty);
                 int nColon     = sURI.IndexOf(":", comparer);
                 int nSemiColon = sURI.IndexOf(";", comparer);
                 int nComma     = sURI.IndexOf(",", comparer);

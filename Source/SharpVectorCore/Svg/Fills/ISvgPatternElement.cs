@@ -10,5 +10,7 @@ namespace SharpVectors.Dom.Svg
         ISvgAnimatedLength Y { get; }
         ISvgAnimatedLength Width { get; }
         ISvgAnimatedLength Height { get; }
+
+        ISvgRect PatternBounds { get; set; }
     }
 }

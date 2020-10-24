@@ -387,7 +387,7 @@ namespace HTMLConverter
                 else if (Char.IsLetter(_lookAheadCharacter))
                 {
                     // entity is written as a string
-                    string entity = "";
+                    string entity = string.Empty;
 
                     // maximum length of string entities is 10 characters
                     for (int i = 0; i < 10 && (Char.IsLetter(_lookAheadCharacter) || Char.IsDigit(_lookAheadCharacter)); i++)

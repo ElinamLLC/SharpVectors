@@ -145,6 +145,12 @@ namespace SharpVectors.Dom.Css
 
         private void SetUnitType(string unit)
         {
+            if (string.IsNullOrWhiteSpace(unit))
+            {
+                SetPrimitiveType(CssPrimitiveType.Number);
+                return;
+            }
+
             switch (unit)
             {
                 case "cm":

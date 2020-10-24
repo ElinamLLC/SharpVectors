@@ -71,13 +71,13 @@ namespace SharpVectors.Dom.Css
             var match = _reParser.Match(cssText);
             if (match.Success)
             {
-                var varName = match.Groups.Count > 0 ? match.Groups[1].ToString() : "";
+                var varName = match.Groups.Count > 0 ? match.Groups[1].ToString() : string.Empty;
                 if (!string.IsNullOrWhiteSpace(varName))
                 {
                     _varName = "--" + varName.Trim();
                 }
                 // fallback 
-                _varValue = match.Groups.Count > 2 ? match.Groups[match.Groups.Count - 1].ToString() : "";
+                _varValue = match.Groups.Count > 2 ? match.Groups[match.Groups.Count - 1].ToString() : string.Empty;
             }
         }
 

@@ -2,6 +2,9 @@
 
 namespace SharpVectors.Dom
 {
+    /// <summary>
+    /// An <c>SMIL</c> animation interface to supports several methods for controlling the behavior of animation.
+    /// </summary>
     public interface IElementTimeControl
     {
         /// <summary>

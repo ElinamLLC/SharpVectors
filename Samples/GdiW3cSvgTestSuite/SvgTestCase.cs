@@ -15,8 +15,8 @@ namespace GdiW3cSvgTestSuite
 
         public SvgTestCase()
         {
-            _revision   = "";
-            _name       = "";
+            _revision   = string.Empty;
+            _name       = string.Empty;
             _paragraphs = new List<string>();
         }
 

@@ -175,7 +175,7 @@ namespace SharpVectors.Dom.Css
             Add("visibility", true, "visible");
             Add("word-spacing", true, "normal");
             Add("writing-mode", true, "lr-tb");
-            Add("viewport-fill", false, "");
+            Add("viewport-fill", false, string.Empty);
             Add("viewport-fill-opacity", false, "1");
         }
 

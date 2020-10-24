@@ -88,7 +88,7 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     return _family.Source;
                 }
-                return "";
+                return string.Empty;
             }
         }
 

@@ -463,7 +463,7 @@ the rendered image quality vary and the Test Suite fonts are mostly not availabl
                     var cellBackground = cellBackgrounds[i];
                     if (string.IsNullOrWhiteSpace(cellBackground))
                     {
-                        resultRow = resultRow.Replace("background-color:transparent;", "");
+                        resultRow = resultRow.Replace("background-color:transparent;", string.Empty);
                     }
                     else
                     {

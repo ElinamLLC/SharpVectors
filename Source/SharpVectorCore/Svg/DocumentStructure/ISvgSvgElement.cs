@@ -20,7 +20,7 @@ namespace SharpVectors.Dom.Svg
     /// </remarks>
     public interface ISvgSvgElement : ISvgElement, ISvgTests, ISvgLangSpace, 
         ISvgExternalResourcesRequired, ISvgStylable, ISvgLocatable, ISvgFitToViewBox, 
-        ISvgZoomAndPan, IEventTarget, IElementVisitorTarget
+        ISvgZoomAndPan, IEventTarget, ISvgElementVisitorTarget
     {
         /// <summary>
         /// Corresponds to attribute x on the given 'svg' element.

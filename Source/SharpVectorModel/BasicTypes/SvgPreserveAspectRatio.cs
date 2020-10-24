@@ -8,7 +8,7 @@ namespace SharpVectors.Dom.Svg
         #region Static members
 
         private static Regex parCheck = new Regex("^(?<align>[A-Za-z]+)\\s*(?<meet>[A-Za-z]*)$");
-        
+
         #endregion
 
         #region Private Fields
@@ -102,8 +102,7 @@ namespace SharpVectors.Dom.Svg
 
         public bool IsDefaultAlign
         {
-            get
-            {
+            get {
                 return _isDefaultAlign;
             }
         }
@@ -119,17 +118,17 @@ namespace SharpVectors.Dom.Svg
             {
                 ISvgMatrix mat = ((SvgSvgElement)_ownerElement).ViewBoxTransform;
                 return new double[] { mat.E, mat.F, mat.A, mat.D };
-            }                                            
+            }
             if (string.Equals(localName, "pattern", StringComparison.Ordinal)) // (_ownerElement is SvgPatternElement)
             {
                 ISvgMatrix mat = ((SvgPatternElement)_ownerElement).ViewBoxTransform;
                 return new double[] { mat.E, mat.F, mat.A, mat.D };
-            }                                            
+            }
 
             double translateX = 0;
             double translateY = 0;
-            double scaleX     = 1;
-            double scaleY     = 1;
+            double scaleX = 1;
+            double scaleY = 1;
 
             if (!viewBox.IsEmpty && !rectToFit.IsEmpty)
             {
@@ -148,14 +147,14 @@ namespace SharpVectors.Dom.Svg
                     scaleY = scaleX;
 
                     if (_alignment == SvgPreserveAspectRatioType.XMidYMax ||
-                      _alignment == SvgPreserveAspectRatioType.XMidYMid   ||
+                      _alignment == SvgPreserveAspectRatioType.XMidYMid ||
                       _alignment == SvgPreserveAspectRatioType.XMidYMin)
                     {
                         // align to the Middle X
                         translateX = (rectToFit.X + rectToFit.Width / 2) - scaleX * (viewBox.X + viewBox.Width / 2);
                     }
                     else if (_alignment == SvgPreserveAspectRatioType.XMaxYMax ||
-                      _alignment == SvgPreserveAspectRatioType.XMaxYMid        ||
+                      _alignment == SvgPreserveAspectRatioType.XMaxYMid ||
                       _alignment == SvgPreserveAspectRatioType.XMaxYMin)
                     {
                         // align to the right X
@@ -163,14 +162,14 @@ namespace SharpVectors.Dom.Svg
                     }
 
                     if (_alignment == SvgPreserveAspectRatioType.XMaxYMid ||
-                      _alignment == SvgPreserveAspectRatioType.XMidYMid   ||
+                      _alignment == SvgPreserveAspectRatioType.XMidYMid ||
                       _alignment == SvgPreserveAspectRatioType.XMinYMid)
                     {
                         // align to the Middle Y
                         translateY = (rectToFit.Y + rectToFit.Height / 2) - scaleY * (viewBox.Y + viewBox.Height / 2);
                     }
                     else if (_alignment == SvgPreserveAspectRatioType.XMaxYMax ||
-                      _alignment == SvgPreserveAspectRatioType.XMidYMax        ||
+                      _alignment == SvgPreserveAspectRatioType.XMidYMax ||
                       _alignment == SvgPreserveAspectRatioType.XMinYMax)
                     {
                         // align to the bottom Y
@@ -210,24 +209,20 @@ namespace SharpVectors.Dom.Svg
 
         public SvgPreserveAspectRatioType Align
         {
-            get
-            {
+            get {
                 return _alignment;
             }
-            set
-            {
+            set {
                 throw new NotImplementedException();
             }
         }
 
         public SvgMeetOrSlice MeetOrSlice
         {
-            get
-            {
+            get {
                 return _meetOrSlice;
             }
-            set
-            {
+            set {
                 throw new NotImplementedException();
             }
         }

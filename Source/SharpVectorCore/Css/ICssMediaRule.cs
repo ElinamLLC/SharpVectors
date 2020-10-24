@@ -3,8 +3,8 @@ using SharpVectors.Dom.Stylesheets;
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	///	The CSSMediaRule interface represents a @media rule in a CSS style sheet. 
-    ///	A @media rule can be used to delimit style rules for specific media types
+	///	The <c>ICssMediaRule</c> interface represents a <c>@media</c> rule in a CSS style sheet. 
+	///	A <c>@media</c> rule can be used to delimit style rules for specific media types
 	/// </summary>
 	public interface ICssMediaRule : ICssRule
 	{
@@ -13,10 +13,10 @@ namespace SharpVectors.Dom.Css
 		/// </summary>
 		/// <param name="index">The index within the media block's rule collection of the rule to remove.</param>
 		/// <exception cref="DomException">
-        /// INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the media rule list.
+        /// <c>INDEX_SIZE_ERR</c>: Raised if the specified index does not correspond to a rule in the media rule list.
         /// </exception>
 		/// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly
+        /// <c>NO_MODIFICATION_ALLOWED_ERR</c>: Raised if this media rule is readonly
         /// </exception>
 		void DeleteRule(ulong index);
 	

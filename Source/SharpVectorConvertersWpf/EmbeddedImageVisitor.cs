@@ -72,7 +72,7 @@ namespace SharpVectors.Converters
 
             var comparer = StringComparison.OrdinalIgnoreCase;
 
-            string sURI    = element.Href.AnimVal.Replace(" ", "");
+            string sURI    = element.Href.AnimVal.Replace(" ", string.Empty);
             int nColon     = sURI.IndexOf(":", comparer);
             int nSemiColon = sURI.IndexOf(";", comparer);
             int nComma     = sURI.IndexOf(",", comparer);

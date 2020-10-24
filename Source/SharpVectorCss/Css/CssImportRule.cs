@@ -11,7 +11,7 @@ namespace SharpVectors.Dom.Css
     /// The CSSImportRule interface represents a @import rule within a CSS style sheet. 
     /// The @import rule is used to import style rules from other style sheets.
     /// </summary>
-    public class CssImportRule : CssRule, ICssImportRule
+    public sealed class CssImportRule : CssRule, ICssImportRule
     {
         #region Static members
 
@@ -59,8 +59,7 @@ namespace SharpVectors.Dom.Css
         {
             _media      = new MediaList(match.Groups["importmedia"].Value);
             _href       = DeReplaceStrings(match.Groups["importhref"].Value);
-            _styleSheet = new CssStyleSheet(ResolveOwnerNode(), Href, null,
-                match.Groups["importmedia"].Value, this, origin);
+            _styleSheet = new CssStyleSheet(ResolveOwnerNode(), Href, null, match.Groups["importmedia"].Value, this, origin);
         }
 
         #endregion

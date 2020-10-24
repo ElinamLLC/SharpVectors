@@ -158,7 +158,7 @@ namespace GdiSvgTestBox
             for (int i = 0; i < 3; i++)
             {
                 DockingTheme theme = (DockingTheme)i;
-                cmbTheme.Items.Add(theme.ToString().Replace("Theme", ""));
+                cmbTheme.Items.Add(theme.ToString().Replace("Theme", string.Empty));
             }
             cmbTheme.SelectedIndex = (int)_optionSettings.Theme;
 

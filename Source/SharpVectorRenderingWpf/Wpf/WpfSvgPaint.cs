@@ -215,7 +215,8 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
 
-            pen.StartLineCap = pen.EndLineCap = GetLineCap();
+            var lineCap = this.GetLineCap();
+            pen.StartLineCap = pen.EndLineCap = lineCap;
             pen.LineJoin = GetLineJoin();
             double miterLimit = GetMiterLimit(strokeWidth);
             if (miterLimit > 0)
@@ -245,7 +246,8 @@ namespace SharpVectors.Renderers.Wpf
                     pen.DashStyle = dashStyle;
                     // This is the one that works well for the XAML, the default is not Flat as
                     // stated in the documentations...
-                    pen.DashCap = PenLineCap.Flat;
+                    //pen.DashCap = PenLineCap.Flat;
+                    pen.DashCap = lineCap;
                 }
             }
             return pen;
@@ -613,7 +615,7 @@ namespace SharpVectors.Renderers.Wpf
                 SvgStyleableElement styleElm = _element.ImportNode as SvgStyleableElement;
                 if (styleElm != null)
                 {
-                    var cssDeclaration = styleElm.GetComputedStyle("");
+                    var cssDeclaration = styleElm.GetComputedStyle(string.Empty);
 
                     string propertyValue = cssDeclaration.GetPropertyValue(_propertyName);
 

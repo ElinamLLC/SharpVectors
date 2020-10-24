@@ -175,7 +175,7 @@ namespace SharpVectors.Woffs
                 }
                 var fontFileBase = Path.GetFileNameWithoutExtension(_fontPath);
 
-                string fontExt = "";
+                string fontExt = string.Empty;
                 if (_woffHeader.IsCollection)
                 {
                     fontExt = _woffHeader.IsTrueType ? TtcFileExt : OtcFileExt;
@@ -209,7 +209,7 @@ namespace SharpVectors.Woffs
             }
             var fontFileBase = Path.GetFileNameWithoutExtension(_fontPath);
 
-            string fontExt = "";
+            string fontExt = string.Empty;
             if (_woffHeader.IsCollection)
             {
                 fontExt = _woffHeader.IsTrueType ? TtcFileExt : OtcFileExt;

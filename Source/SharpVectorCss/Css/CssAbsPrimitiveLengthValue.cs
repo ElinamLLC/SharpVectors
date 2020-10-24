@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SharpVectors.Dom.Css
 {
-    public class CssAbsPrimitiveLengthValue : CssPrimitiveLengthValue
+    public sealed class CssAbsPrimitiveLengthValue : CssPrimitiveLengthValue
     {
         #region Private Fields
 

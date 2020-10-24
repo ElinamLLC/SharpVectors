@@ -744,36 +744,36 @@ namespace SharpVectors.Dom.Css
                 saturation = saturation.TrimEnd('%');
                 lightness  = lightness.TrimEnd('%');
 
-                string hueUnit = "";
+                string hueUnit = string.Empty;
                 if (hue.EndsWith("deg", StringComparison.OrdinalIgnoreCase))
                 {
                     hueUnit = "deg";
-                    hue = hue.Replace("deg", "");
+                    hue = hue.Replace("deg", string.Empty);
                 }
                 else if (hue.EndsWith("rad", StringComparison.OrdinalIgnoreCase))
                 {
                     hueUnit = "rad";
-                    hue = hue.Replace("rad", "");
+                    hue = hue.Replace("rad", string.Empty);
                 }
                 else if (hue.EndsWith("turn", StringComparison.OrdinalIgnoreCase))
                 {
                     hueUnit = "turn";
-                    hue = hue.Replace("turn", "");
+                    hue = hue.Replace("turn", string.Empty);
                 }
                 else if (hue.EndsWith("grad", StringComparison.OrdinalIgnoreCase))
                 {
                     hueUnit = "grad";
-                    hue = hue.Replace("grad", "");
+                    hue = hue.Replace("grad", string.Empty);
                 }
                 else if (hue.EndsWith("gon", StringComparison.OrdinalIgnoreCase))
                 {
                     hueUnit = "grad";
-                    hue = hue.Replace("gon", "");
+                    hue = hue.Replace("gon", string.Empty);
                 }
                 else if (hue.EndsWith("g", StringComparison.OrdinalIgnoreCase))
                 {
                     hueUnit = "grad";
-                    hue = hue.Replace("g", "");
+                    hue = hue.Replace("g", string.Empty);
                 }
 
                 // Get the HSL values in a range from 0 to 1.

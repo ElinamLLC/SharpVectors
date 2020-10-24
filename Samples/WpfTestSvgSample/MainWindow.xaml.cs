@@ -680,7 +680,7 @@ namespace WpfTestSvgSample
 
         private async void OnDragDrop(object sender, DragEventArgs de)
         {
-            string fileName = "";
+            string fileName = string.Empty;
             if (de.Data.GetDataPresent(DataFormats.Text))
             {
                 fileName = (string)de.Data.GetData(DataFormats.Text);

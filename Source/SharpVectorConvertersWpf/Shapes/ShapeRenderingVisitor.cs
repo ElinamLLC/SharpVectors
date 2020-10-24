@@ -5,14 +5,13 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Converters.Shapes
 {
     using static SharpVectors.Converters.Shapes.WpfShapeHelper;
 
-    public class ShapeRenderingVisitor : IElementVisitor
+    public class ShapeRenderingVisitor : ISvgElementVisitor
     {
         private readonly WpfShapeRenderer renderer;
         private Canvas currentCanvas;
@@ -280,7 +279,7 @@ namespace SharpVectors.Converters.Shapes
 
             // Now, render the use element...
             var refElement = useElement?.FirstChild;
-            IElementVisitorTarget evt = refElement as IElementVisitorTarget;
+            ISvgElementVisitorTarget evt = refElement as ISvgElementVisitorTarget;
             if (evt != null)
             {
                 evt.Accept(this);

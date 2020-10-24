@@ -3,8 +3,8 @@ using SharpVectors.Dom.Stylesheets;
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSImportRule interface represents a @import rule within a CSS style sheet. 
-    /// The @import rule is used to import style rules from other style sheets. 
+	/// The <c>ICssImportRule</c> interface represents a <c>@import</c> rule within a CSS style sheet. 
+	/// The <c>@import</c> rule is used to import style rules from other style sheets. 
 	/// </summary>
 	public interface ICssImportRule : ICssRule
 	{
@@ -28,7 +28,7 @@ namespace SharpVectors.Dom.Css
 	
 		/// <summary>
 		/// The location of the style sheet to be imported. The attribute will not contain the 
-        /// "url(...)" specifier around the URI.
+        /// <c>"url(...)"</c> specifier around the URI.
 		/// </summary>
 		string Href
 		{

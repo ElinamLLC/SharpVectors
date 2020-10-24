@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgCircleElement interface corresponds to the 'circle' element. 
 	/// </summary>
 	public interface ISvgCircleElement : ISvgElement, ISvgTests, ISvgLangSpace,
-		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, IElementVisitorTarget
+		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, ISvgElementVisitorTarget
     {
 		/// <summary>
 		/// Corresponds to attribute cx on the given 'circle' element.

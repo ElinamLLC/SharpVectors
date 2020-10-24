@@ -23,6 +23,8 @@ namespace SharpVectors.Dom.Svg
         private ISvgViewSpec _currentView;
         private ISvgMatrix _cachedViewBoxTransform;
 
+        private ISvgRect _patternBounds;
+
         #endregion
 
         #region Constructors and Destructor
@@ -96,22 +98,18 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedEnumeration PatternUnits
         {
-            get {
-                if (!HasAttribute("patternUnits") && ReferencedElement != null)
+            get {                
+                if (!this.HasAttribute(SvgConstants.AttrPatternUnits) && ReferencedElement != null)
                 {
                     return ReferencedElement.PatternUnits;
                 }
                 if (_patternUnits == null)
                 {
-                    SvgUnitType type;
-                    switch (GetAttribute("patternUnits"))
+                    SvgUnitType type = SvgUnitType.ObjectBoundingBox;
+                    if (string.Equals(this.GetAttribute(SvgConstants.AttrPatternUnits), 
+                        SvgConstants.ValUserSpaceOnUse, StringComparison.Ordinal))
                     {
-                        case "userSpaceOnUse":
-                            type = SvgUnitType.UserSpaceOnUse;
-                            break;
-                        default:
-                            type = SvgUnitType.ObjectBoundingBox;
-                            break;
+                        type = SvgUnitType.UserSpaceOnUse;
                     }
                     _patternUnits = new SvgAnimatedEnumeration((ushort)type);
                 }
@@ -121,22 +119,19 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedEnumeration PatternContentUnits
         {
-            get {
-                if (!HasAttribute("patternContentUnits") && ReferencedElement != null)
+            get {                
+                if (!this.HasAttribute(SvgConstants.AttrPatternContentUnits) && ReferencedElement != null)
                 {
                     return ReferencedElement.PatternContentUnits;
                 }
                 if (_patternContentUnits == null)
-                {
-                    SvgUnitType type;
-                    switch (GetAttribute("patternContentUnits"))
+                {                    
+                    SvgUnitType type = SvgUnitType.UserSpaceOnUse;
+                    
+                    if (string.Equals(this.GetAttribute(SvgConstants.AttrPatternContentUnits), 
+                        SvgConstants.ValObjectBoundingBox, StringComparison.Ordinal))
                     {
-                        case "objectBoundingBox":
-                            type = SvgUnitType.ObjectBoundingBox;
-                            break;
-                        default:
-                            type = SvgUnitType.UserSpaceOnUse;
-                            break;
+                        type = SvgUnitType.ObjectBoundingBox;
                     }
                     _patternContentUnits = new SvgAnimatedEnumeration((ushort)type);
                 }
@@ -146,14 +141,14 @@ namespace SharpVectors.Dom.Svg
 
         public ISvgAnimatedTransformList PatternTransform
         {
-            get {
-                if (!HasAttribute("patternTransform") && ReferencedElement != null)
+            get {                
+                if (!this.HasAttribute(SvgConstants.AttrPatternTransform) && ReferencedElement != null)
                 {
                     return ReferencedElement.PatternTransform;
                 }
                 if (_patternTransform == null)
                 {
-                    _patternTransform = new SvgAnimatedTransformList(GetAttribute("patternTransform"));
+                    _patternTransform = new SvgAnimatedTransformList(this.GetAttribute(SvgConstants.AttrPatternTransform));
                 }
                 return _patternTransform;
             }
@@ -162,7 +157,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength X
         {
             get {
-                if (!HasAttribute("x") && ReferencedElement != null)
+                if (!this.HasAttribute("x") && ReferencedElement != null)
                 {
                     return ReferencedElement.X;
                 }
@@ -177,7 +172,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Y
         {
             get {
-                if (!HasAttribute("y") && ReferencedElement != null)
+                if (!this.HasAttribute("y") && ReferencedElement != null)
                 {
                     return ReferencedElement.Y;
                 }
@@ -192,7 +187,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Width
         {
             get {
-                if (!HasAttribute("width") && ReferencedElement != null)
+                if (!this.HasAttribute("width") && ReferencedElement != null)
                 {
                     return ReferencedElement.Width;
                 }
@@ -207,7 +202,7 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Height
         {
             get {
-                if (!HasAttribute("height") && ReferencedElement != null)
+                if (!this.HasAttribute("height") && ReferencedElement != null)
                 {
                     return ReferencedElement.Height;
                 }
@@ -216,6 +211,23 @@ namespace SharpVectors.Dom.Svg
                     _height = new SvgAnimatedLength(this, "height", SvgLengthDirection.Vertical, "0");
                 }
                 return _height;
+            }
+        }
+
+        public ISvgRect PatternBounds 
+        { 
+            get {
+                return _patternBounds;
+            }
+            set {
+                if (_patternBounds != null && value != null)
+                {
+                    if (!_patternBounds.Equals(value))
+                    {
+                        _cachedViewBoxTransform = null;
+                    }
+                }
+                _patternBounds = value;
             }
         }
 
@@ -281,19 +293,20 @@ namespace SharpVectors.Dom.Svg
                 {
                     ISvgMatrix matrix = new SvgMatrix();
 
-                    SvgDocument doc = this.OwnerDocument;
                     double x = 0;
                     double y = 0;
                     double w = 0;
                     double h = 0;
 
-                    double attrWidth = Width.AnimVal.Value;
-                    double attrHeight = Height.AnimVal.Value;
-                    //if (this != doc.RootElement)
+                    var widthLength   = this.Width.AnimVal;
+                    var heightLength  = this.Height.AnimVal;
+                    double attrWidth  = widthLength.Value;
+                    double attrHeight = heightLength.Value;
+                    if (this.HasAttribute(SvgConstants.AttrX) && this.HasAttribute(SvgConstants.AttrY))
                     {
                         // X and Y on the root <svg> have no meaning
-                        ISvgLength xLength = X.AnimVal;
-                        ISvgLength yLength = Y.AnimVal;
+                        ISvgLength xLength = this.X.AnimVal;
+                        ISvgLength yLength = this.Y.AnimVal;
                         double xValue = xLength.Value;
                         double yValue = yLength.Value;
 
@@ -309,7 +322,7 @@ namespace SharpVectors.Dom.Svg
                     }
 
                     // Apply the viewBox viewport
-                    if (HasAttribute("viewBox"))
+                    if (this.HasAttribute(SvgConstants.AttrViewBox))
                     {
                         ISvgRect r = CurrentView.ViewBox.AnimVal;
                         x += -r.X;
@@ -334,7 +347,7 @@ namespace SharpVectors.Dom.Svg
                         y_ratio = attrHeight / h;
                     }
 
-                    ISvgPreserveAspectRatio par = CurrentView.PreserveAspectRatio.AnimVal;
+                    ISvgPreserveAspectRatio par = this.CurrentView.PreserveAspectRatio.AnimVal;
                     if (par.Align == SvgPreserveAspectRatioType.None)
                     {
                         matrix = matrix.ScaleNonUniform(x_ratio, y_ratio);

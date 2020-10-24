@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace SharpVectors.Dom.Css
 {
-    public class CssAbsPrimitiveValue : CssPrimitiveValue
+    public sealed class CssAbsPrimitiveValue : CssPrimitiveValue
     {
         private string _propertyName;
         private XmlElement _element;

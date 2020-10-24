@@ -180,10 +180,10 @@ namespace SharpVectors.Dom.Events
 
         public void InitEventNs(string namespaceUri, string eventType, bool bubbles, bool cancelable)
         {
-            _namespaceUri = namespaceUri == "" ? null : namespaceUri;
-            _eventType = eventType;
-            _bubbles = bubbles;
-            _cancelable = cancelable;
+            _namespaceUri = namespaceUri == string.Empty ? null : namespaceUri;
+            _eventType    = eventType;
+            _bubbles      = bubbles;
+            _cancelable   = cancelable;
         }
 
         public void StopImmediatePropagation()

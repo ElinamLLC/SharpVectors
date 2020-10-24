@@ -278,7 +278,7 @@ namespace SharpVectors.Converters
                     }
                     break;
                 case "data":
-                    var sourceData = svgSource.OriginalString.Replace(" ", "");
+                    var sourceData = svgSource.OriginalString.Replace(" ", string.Empty);
 
                     int nColon = sourceData.IndexOf(":", StringComparison.OrdinalIgnoreCase);
                     int nSemiColon = sourceData.IndexOf(";", StringComparison.OrdinalIgnoreCase);

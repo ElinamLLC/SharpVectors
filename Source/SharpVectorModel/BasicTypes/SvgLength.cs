@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 
 using SharpVectors.Dom.Css;
+using SharpVectors.Scripting;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -118,7 +119,7 @@ namespace SharpVectors.Dom.Svg
             _direction = direction;
 
             string baseVal = ownerElement.GetPropertyValue(propertyName);
-            if (baseVal == null || baseVal == "")
+            if (string.IsNullOrWhiteSpace(baseVal))
             {
                 baseVal = defaultValue;
             }
@@ -145,7 +146,7 @@ namespace SharpVectors.Dom.Svg
         public SvgLengthType UnitType
         {
             get {
-                return (SvgLengthType)_cssLength.PrimitiveType;
+                return (SvgLengthType)_cssLength.PrimitiveType; 
             }
         }
 
@@ -153,7 +154,7 @@ namespace SharpVectors.Dom.Svg
         /// The value as an floating point value, in user units. Setting this attribute will cause 
         /// valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting. 
         /// </summary>
-        /// <exception cref="DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+        /// <exception cref="DomException"> <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change 
         /// the value of a readonly attribute.</exception>
         public double Value
         {
@@ -175,8 +176,8 @@ namespace SharpVectors.Dom.Svg
                     case SvgLengthType.Percentage:
                         double valueInSpecifiedUnits = _cssLength.GetFloatValue(CssPrimitiveType.Percentage);
                         // if (_ownerElement is SvgGradientElement)
-                        if (string.Equals(_ownerElement.LocalName, "radialGradient", StringComparison.Ordinal)
-                            || string.Equals(_ownerElement.LocalName, "linearGradient", StringComparison.Ordinal))
+                        if (string.Equals(_ownerElement.LocalName, SvgConstants.TagRadialGradient, StringComparison.Ordinal)
+                            || string.Equals(_ownerElement.LocalName, SvgConstants.TagLinearGradient, StringComparison.Ordinal))
                         {
                             ret = valueInSpecifiedUnits / 100F;
                         }
@@ -184,7 +185,19 @@ namespace SharpVectors.Dom.Svg
                         {
                             double w = 0;
                             double h = 0;
-                            if (_ownerElement.ViewportElement != null)
+                            ISvgRect svgRect = null;
+                            if (string.Equals(_ownerElement.LocalName, SvgConstants.TagPattern, StringComparison.Ordinal))
+                            {
+                                var svgPatternElem = (ISvgPatternElement)_ownerElement;
+                                svgRect = svgPatternElem.PatternBounds;
+                            }
+
+                            if (svgRect != null)
+                            {
+                                w = svgRect.Width;
+                                h = svgRect.Height;
+                            }
+                            else if (_ownerElement.ViewportElement != null)
                             {
                                 ISvgFitToViewBox ftv = (ISvgFitToViewBox)_ownerElement.ViewportElement;
                                 w = ftv.ViewBox.AnimVal.Width;
@@ -230,7 +243,7 @@ namespace SharpVectors.Dom.Svg
         /// The value as an floating point value, in the units expressed by unitType. Setting this 
         /// attribute will cause value and valueAsString to be updated automatically to reflect this setting.
         /// </summary>
-        /// <exception cref="DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+        /// <exception cref="DomException"> <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change 
         /// the value of a readonly attribute.</exception>
         public double ValueInSpecifiedUnits
         {
@@ -246,7 +259,7 @@ namespace SharpVectors.Dom.Svg
         /// The value as a string value, in the units expressed by unitType. Setting this attribute will 
         /// cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
         /// </summary>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
         /// value of a readonly attribute.</exception>
         public string ValueAsString
         {
@@ -254,7 +267,7 @@ namespace SharpVectors.Dom.Svg
                 return _cssLength.CssText;
             }
             set {
-                _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(value, false), "", _ownerElement);
+                _cssLength = new CssAbsPrimitiveLengthValue(new CssPrimitiveLengthValue(value, false), string.Empty, _ownerElement);
             }
         }
 

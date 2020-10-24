@@ -51,13 +51,15 @@ namespace SharpVectors.Renderers.Wpf
 
         public override Brush GetBrush(Rect elementBounds, WpfDrawingContext context, Transform viewTransform)
         {
-            DrawingGroup image = GetImage(context);
+            Rect bounds = elementBounds;
+
+            DrawingGroup image = this.GetImage(context, bounds);
             if (image == null || image.Bounds.Width.Equals(0) || image.Bounds.Height.Equals(0))
             {
                 return null;
             }
+
             bool isUserSpace = true;
-            Rect bounds = elementBounds;
             if (_renderedElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
             {
                 bounds = new Rect(0, 0, 1, 1);
@@ -238,9 +240,11 @@ namespace SharpVectors.Renderers.Wpf
             _renderedElement = renderedElement;
         }
 
-        private DrawingGroup GetImage(WpfDrawingContext context)
+        private DrawingGroup GetImage(WpfDrawingContext context, Rect bounds)
         {
             PrepareTargetPattern();
+
+            _renderedElement.PatternBounds = new SvgRect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
 
             WpfDrawingRenderer renderer = new WpfDrawingRenderer();
             renderer.Window = _renderedElement.OwnerDocument.Window as SvgWindow;

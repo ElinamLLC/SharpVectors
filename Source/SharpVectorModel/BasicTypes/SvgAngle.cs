@@ -77,7 +77,7 @@ namespace SharpVectors.Dom.Svg
 		///  The angle value as a floating point value, in degrees. Setting this attribute will cause 
         ///  valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting.
 		/// </summary>
-		/// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+		/// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
         /// value of a readonly attribute.</exception>
 		public double Value
 		{
@@ -103,7 +103,7 @@ namespace SharpVectors.Dom.Svg
 		///  The angle value as a floating point value, in the units expressed by unitType. Setting this 
         ///  attribute will cause value and valueAsString to be updated automatically to reflect this setting.
 		/// </summary>
-		/// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+		/// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
         /// value of a readonly attribute.</exception>
 		public double ValueInSpecifiedUnits
 		{
@@ -125,7 +125,7 @@ namespace SharpVectors.Dom.Svg
 		///  The angle value as a string value, in the units expressed by unitType. Setting this attribute 
         ///  will cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
 		/// </summary>
-		/// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+		/// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
         /// value of a readonly attribute.</exception>
 		public string ValueAsString
 		{

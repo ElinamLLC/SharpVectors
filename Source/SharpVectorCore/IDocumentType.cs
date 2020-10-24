@@ -2,53 +2,55 @@ using System.Xml;
 
 namespace SharpVectors.Dom
 {
-	/// <summary>
-	/// Summary description for IDocumentType.
-	/// </summary>
-	public interface IDocumentType : INode
+    /// <summary>
+    /// This represents the document type declaration.
+    /// </summary>
+    /// <seealso cref="XmlDocumentType"/>
+    public interface IDocumentType : INode
 	{
-        //
-        // Summary:
-        //     Gets the collection of System.Xml.XmlEntity nodes declared in the document type
-        //     declaration.
-        //
-        // Returns:
-        //     An System.Xml.XmlNamedNodeMap containing the XmlEntity nodes. The returned XmlNamedNodeMap
-        //     is read-only.
+        /// <summary>
+        /// Gets the collection of <see cref="XmlEntity"/> nodes declared in the document type declaration.
+        /// </summary>
+        /// <value>
+        /// An <see cref="XmlNamedNodeMap"/> containing the <see cref="XmlEntity"/> nodes. 
+        /// The returned <see cref="XmlNamedNodeMap"/> is read-only.
+        /// </value>
         XmlNamedNodeMap Entities { get; }
-        //
-        // Summary:
-        //     Gets the collection of System.Xml.XmlNotation nodes present in the document type
-        //     declaration.
-        //
-        // Returns:
-        //     An System.Xml.XmlNamedNodeMap containing the XmlNotation nodes. The returned
-        //     XmlNamedNodeMap is read-only.
+
+        ///<summary>
+        /// Gets the collection of <see cref="XmlNotation"/> nodes present in the document type declaration.
+        ///</summary>
+        ///<value>
+        /// An <see cref="XmlNamedNodeMap"/> containing the <see cref="XmlNotation"/> nodes. The returned
+        /// <see cref="XmlNamedNodeMap"/> is read-only.
+        ///</value>
         XmlNamedNodeMap Notations { get; }
-        //
-        // Summary:
-        //     Gets the value of the public identifier on the DOCTYPE declaration.
-        //
-        // Returns:
-        //     The public identifier on the DOCTYPE. If there is no public identifier, null
-        //     is returned.
+
+        ///<summary>
+        /// Gets the value of the public identifier on the <c>DOCTYPE</c> declaration.
+        ///</summary>
+        ///<value>
+        /// The public identifier on the <c>DOCTYPE</c>. If there is no public identifier, <see langword="null"/>
+        /// is returned.
+        ///</value>
         string PublicId { get; }
-        //
-        // Summary:
-        //     Gets the value of the system identifier on the DOCTYPE declaration.
-        //
-        // Returns:
-        //     The system identifier on the DOCTYPE. If there is no system identifier, null
-        //     is returned.
+
+        ///<summary>
+        /// Gets the value of the system identifier on the <c>DOCTYPE</c> declaration.
+        ///</summary>
+        ///<value>
+        /// The system identifier on the <c>DOCTYPE</c>. If there is no system identifier, <see langword="null"/>
+        /// is returned.
+        ///</value>
         string SystemId { get; }
-        //
-        // Summary:
-        //     Gets the value of the document type definition (DTD) internal subset on the DOCTYPE
-        //     declaration.
-        //
-        // Returns:
-        //     The DTD internal subset on the DOCTYPE. If there is no DTD internal subset, String.Empty
-        //     is returned.
+
+        ///<summary>
+        /// Gets the value of the document type definition (DTD) internal subset on the <c>DOCTYPE</c> declaration.
+        ///</summary>
+        ///<value>
+        /// The DTD internal subset on the <c>DOCTYPE</c>. If there is no DTD internal subset, <see cref="String.Empty"/>
+        /// is returned.
+        ///</value>
         string InternalSubset { get; }
     }
 }

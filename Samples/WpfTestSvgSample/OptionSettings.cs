@@ -462,7 +462,7 @@ namespace WpfTestSvgSample
                                     if (indexOf > 0)
                                     {
                                         var basePath = inputPath.Substring(0, indexOf);
-                                        _defaultSvgPath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
+                                        _defaultSvgPath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
                                     }
                                     else
                                     {
@@ -483,7 +483,7 @@ namespace WpfTestSvgSample
                                     if (indexOf > 0)
                                     {
                                         var basePath = inputPath.Substring(0, indexOf);
-                                        _currentSvgPath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, ""));
+                                        _currentSvgPath = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
                                     }
                                     else
                                     {

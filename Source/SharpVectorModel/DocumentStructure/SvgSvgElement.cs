@@ -308,7 +308,7 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Corresponds to attribute contentScriptType on the given 'svg' element
         /// </summary>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute.</exception>
         public string ContentScriptType
         {
             get {
@@ -322,7 +322,7 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Corresponds to attribute contentStyleType on the given 'svg' element.
         /// </summary>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute.</exception>
         public string ContentStyleType
         {
             get {
@@ -447,7 +447,7 @@ namespace SharpVectors.Dom.Svg
         /// attribute is false. If the initial view is a "custom" view, then this attribute is 
         /// true.
         /// </summary>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute.</exception>
         public bool UseCurrentView
         {
             get {
@@ -487,7 +487,7 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// This attribute indicates the current scale factor relative to the initial view to take into account user magnification and panning operations, as described under Magnification and panning. DOM attributes currentScale and currentTranslate are equivalent to the 2x3 matrix [a b c d e f] = [currentScale 0 0 currentScale currentTranslate.x currentTranslate.y]. If "magnification" is enabled (i.e., zoomAndPan="magnify"), then the effect is as if an extra transformation were placed at the outermost level on the SVG document fragment (i.e., outside the outermost 'svg' element).
         /// </summary>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute</exception>
         public float CurrentScale
         {
             get {
@@ -704,7 +704,7 @@ namespace SharpVectors.Dom.Svg
         /// Cancels a specified suspendRedraw() by providing a unique suspend_handle_id.
         /// </summary>
         /// <param name="suspendHandleId">A number which acts as a unique identifier for the desired suspendRedraw() call. The number supplied must be a value returned from a previous call to suspendRedraw()</param>
-        /// <exception cref="DomException">This method will raise a DOMException with value NOT_FOUND_ERR if an invalid value (i.e., no such suspend_handle_id is active) for suspend_handle_id is provided.</exception>
+        /// <exception cref="DomException">This method will raise a <see cref="DomException"/> with value NOT_FOUND_ERR if an invalid value (i.e., no such suspend_handle_id is active) for suspend_handle_id is provided.</exception>
         public void UnsuspendRedraw(int suspendHandleId)
         {
             Timer timer = null;
@@ -996,7 +996,7 @@ namespace SharpVectors.Dom.Svg
 
         #region Implementation of IElementVisitorTarget
 
-        public void Accept(IElementVisitor visitor)
+        public void Accept(ISvgElementVisitor visitor)
         {
             visitor.Visit(this);
 
@@ -1005,7 +1005,7 @@ namespace SharpVectors.Dom.Svg
                 visitor.BeginContainer(this);
                 foreach (var item in this.ChildNodes)
                 {
-                    IElementVisitorTarget evt = item as IElementVisitorTarget;
+                    ISvgElementVisitorTarget evt = item as ISvgElementVisitorTarget;
                     if (evt != null)
                     {
                         evt.Accept(visitor);

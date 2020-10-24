@@ -25,7 +25,7 @@ namespace SharpVectors.Converters.Shapes
 
         public void Render(ISvgElement node)
         {
-            Dom.IElementVisitorTarget evt = node as Dom.IElementVisitorTarget;
+            ISvgElementVisitorTarget evt = node as ISvgElementVisitorTarget;
             if (evt != null)
             {
                 RenderElement(evt);
@@ -37,7 +37,7 @@ namespace SharpVectors.Converters.Shapes
             RenderElement(node.RootElement);
         }
 
-        private void RenderElement(Dom.IElementVisitorTarget element)
+        private void RenderElement(ISvgElementVisitorTarget element)
         {
             if (this.Canvas == null)
                 this.Canvas = new Canvas();

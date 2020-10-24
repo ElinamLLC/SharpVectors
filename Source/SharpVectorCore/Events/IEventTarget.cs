@@ -49,7 +49,7 @@ namespace SharpVectors.Dom.Events
 		/// This method allows the registration of an event listener in the
 		/// default group and, depending on the <c>useCapture</c> parameter,
 		/// on the capture phase of the DOM event flow or its target and
-		/// bubbling phases. <see cref=" http://www.w3.org/TR/SVG/interact.html#SVGEvents"/>
+		/// bubbling phases. <see href="https://www.w3.org/TR/SVG/interact.html#SVGEvents"/>
 		/// </summary>
 		/// <param name="type">
 		/// Specifies the <see cref="IEvent.Type">IEvent.Type</see> associated
@@ -64,11 +64,11 @@ namespace SharpVectors.Dom.Events
 		/// <param name="useCapture">
 		/// If <c>true</c>, <c>useCapture</c> indicates that the user wishes
 		/// to add the event listener for the
-		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-capture-phase">capture phase</see>
+		/// <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-capture-phase">capture phase</see>
 		/// only, i.e. this event listener will not be triggered during the
-		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-target-phase">target</see>
+		/// <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-target-phase">target</see>
 		/// and
-		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-bubbling-phase">bubbling phases</see>.
+		/// <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-bubbling-phase">bubbling phases</see>.
 		/// If <c>false</c>, the event listener will only be triggered during the target and bubbling phases.
 		/// </param>
 		void AddEventListener(string type, EventListener listener, bool useCapture);
@@ -108,7 +108,7 @@ namespace SharpVectors.Dom.Events
 		/// </summary>
 		/// <remarks>
 		/// The
-		/// <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event-target">event target</see>
+		/// <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event-target">event target</see>
 		/// of the event is the <see cref="IEventTarget">IEventTarget</see>
 		/// object on which <see cref="DispatchEvent">DispatchEvent</see>
 		/// is called.

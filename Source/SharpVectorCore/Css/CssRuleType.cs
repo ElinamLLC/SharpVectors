@@ -1,9 +1,8 @@
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	///     The CssRuleType Enum Class contains the possible Rule Type
-	///     Values.  This is an extension of the CSS spec.  The spec
-	///     contains only a list of contstant in the CssRule Interface. 
+	/// The <c>CssRuleType</c> Enum contains the possible Rule Type Values. This is an extension of the CSS specification.
+	/// The spec contains only a list of contstant in the <see cref="ICssRule"/> interface. 
 	/// </summary>
 	public enum CssRuleType
 	{

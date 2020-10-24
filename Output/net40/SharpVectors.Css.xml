@@ -105,8 +105,8 @@
             <summary>
             The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or a property is readonly.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Item(System.UInt64)">
             <summary>
@@ -307,8 +307,8 @@
             Used to delete a rule from the media block.
             </summary>
             <param name="index">The index within the media block's rule collection of the rule to remove.</param>
-            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the media rule list.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the media rule list.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media rule is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssMediaRule.InsertRule(System.String,System.UInt64)">
             <summary>
@@ -321,11 +321,11 @@
             to insert the specified rule. If the specified index is equal to the length of the media blocks's 
             rule collection, the rule will be added to the end of the media block.</param>
             <returns>The index within the media block's rule collection of the newly inserted rule.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at the 
             specified index, e.g., if an @import rule is inserted after a standard rule set or other at-rule.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index is not a valid insertion point.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>INDEX_SIZE_ERR:</c> Raised if the specified index is not a valid insertion point.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media rule is readonly</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified rule has a syntax error and is unparsable</exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssMediaRule.CssRules">
             <summary>
@@ -364,10 +364,10 @@
             The parsable textual representation of the page selector for the rule.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.
+            <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this rule is readonly.
             </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssPageRule.Style">
@@ -420,88 +420,88 @@
             <summary>
             A method to set the float value with a specified unit. If the property attached with this 
             value can not accept the specified unit or the float value, the value will be unchanged 
-            and a DOMException will be raised.
+            and a <see cref="T:SharpVectors.Dom.DomException"/> will be raised.
             </summary>
             <param name="unitType">A unit code as defined above. The unit code can only be a float 
             unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, CSS_IN,
             CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
             <param name="floatValue">The new float value.</param>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a float value.</exception>
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a float value.</exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this property is readonly.</exception>
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetFloatValue(SharpVectors.Dom.Css.CssPrimitiveType)">
             <summary>
             This method is used to get a float value in a specified unit. If this CSS value doesn't 
-            contain a float value or can't be converted into the specified unit, a DOMException is raised
+            contain a float value or can't be converted into the specified unit, a <see cref="T:SharpVectors.Dom.DomException"/> is raised
             </summary>
             <param name="unitType">A unit code to get the float value. The unit code can only be a 
             float unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, 
             CSS_IN, CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
             <returns>The float value in the specified unit.</returns>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a float value.
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a float value.
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.SetStringValue(SharpVectors.Dom.Css.CssPrimitiveType,System.String)">
             <summary>
             A method to set the string value with the specified unit. If the property attached to this 
             value can't accept the specified unit or the string value, the value will be unchanged and 
-            a DOMException will be raised.
+            a <see cref="T:SharpVectors.Dom.DomException"/> will be raised.
             </summary>
             <param name="stringType">A string code as defined above. The string code can only 
             be a string unit type (i.e. CSS_STRING, CSS_URI, CSS_IDENT, and CSS_ATTR).</param>
             <param name="stringValue">The new string value</param>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a string value.</exception>
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a string value.</exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this property is readonly.</exception>
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetStringValue">
             <summary>
             This method is used to get the string value. If the CSS value doesn't contain a 
-            string value, a DOMException is raised.
+            string value, a <see cref="T:SharpVectors.Dom.DomException"/> is raised.
             Note: Some properties (like 'font-family' or 'voice-family') convert a whitespace 
             separated list of idents to a string.
             </summary>
             <returns>The string value in the current unit. The current primitiveType can only 
             be a string unit type (i.e. CSS_STRING, CSS_URI, CSS_IDENT and CSS_ATTR).</returns>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a string value.
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a string value.
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetCounterValue">
             <summary>
             This method is used to get the Counter value. If this CSS value doesn't contain a counter value, 
-            a DOMException is raised. Modification to the corresponding style property can be achieved 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. Modification to the corresponding style property can be achieved 
             using the Counter interface
             </summary>
             <returns>The Counter value.</returns>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a Counter value (e.g. this is not CSS_COUNTER).
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a Counter value (e.g. this is not CSS_COUNTER).
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetRectValue">
             <summary>
             This method is used to get the Rect value. If this CSS value doesn't contain a rect value, 
-            a DOMException is raised. Modification to the corresponding style property can be achieved 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. Modification to the corresponding style property can be achieved 
             using the Rect interface.
             </summary>
             <returns>The Rect value.</returns>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a rect value.
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a rect value.
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetRgbColorValue">
             <summary>
             This method is used to get the RGB color. If this CSS value doesn't contain a RGB color value, 
-            a DOMException is raised. Modification to the corresponding style property can be achieved 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. Modification to the corresponding style property can be achieved 
             using the RGBColor interface.
             </summary>
             <returns>the RGB color value.</returns>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a rgb value.
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a rgb value.
             </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssPrimitiveValue.PrimitiveType">
@@ -743,8 +743,8 @@
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
             <param name="value">The new value of the property.</param>
             <param name="priority">The new priority of the property (e.g. "important").</param>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or the property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.SetPropertyValue(System.String,System.String)">
             <summary>
@@ -752,8 +752,8 @@
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
             <param name="value">The new value of the property.</param>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or the property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyPriority(System.String)">
             <summary>
@@ -771,7 +771,7 @@
             <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
             Returns the empty string if the property has not been set or the property name does not correspond 
             to a known CSS property.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly 
             or the property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyCssValue(System.String)">
@@ -818,8 +818,8 @@
             Setting this attribute will result in the parsing of the new value and resetting of all the properties 
             in the declaration block including the removal or addition of properties.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or a property is readonly.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.Item(System.UInt64)">
             <summary>
@@ -861,8 +861,8 @@
             have stripped out insignificant whitespace while parsing the selector.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly</exception>
+            <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this rule is readonly</exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleRule.CssText">
             <summary>
@@ -926,10 +926,10 @@
             </summary>
             <param name="index">The index within the style sheet's rule list of the rule to remove.</param>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.
+            <c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the style sheet's rule list.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this style sheet is readonly.
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.CssStyleSheet.InsertRule(System.String,System.UInt64)">
@@ -947,17 +947,17 @@
             </param>
             <returns>The index within the style sheet's rule collection of the newly inserted rule.</returns>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.
+            <c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the style sheet's rule list.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this style sheet is readonly.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index 
+            <c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at the specified index 
             e.g. if an @import rule is inserted after a standard rule set or other at-rule.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable.
+            <c>SYNTAX_ERR:</c> Raised if the specified rule has a syntax error and is unparsable.
             </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssStyleSheet.CssRules">
@@ -1056,15 +1056,15 @@
             A string representation of the current value.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified CSS string value has a syntax error 
+            <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error 
             (according to the attached property) or is unparsable.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INVALID_MODIFICATION_ERR: Raised if the specified CSS string value represents a different 
+            <c>INVALID_MODIFICATION_ERR:</c> Raised if the specified CSS string value represents a different 
             type of values than the values allowed by the CSS property
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this value is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this value is readonly.
             </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.CssValue.CssValueType">
@@ -1254,7 +1254,7 @@
             INVALID_CHARACTER_ERR: If the medium contains characters that are invalid in the underlying style language.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Stylesheets.MediaList.DeleteMedium(System.String)">
@@ -1264,7 +1264,7 @@
             <param name="oldMedium">The medium to delete in the media list.</param>
             <exception cref="T:SharpVectors.Dom.DomException">NOT_FOUND_ERR: Raised if oldMedium is not in the list.</exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.
             </exception>
         </member>
         <member name="P:SharpVectors.Dom.Stylesheets.MediaList.Length">
@@ -1277,10 +1277,10 @@
             The parsable textual representation of the media list. This is a comma-separated list of media.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified string value has a syntax error and is unparsable.
+            <c>SYNTAX_ERR:</c> Raised if the specified string value has a syntax error and is unparsable.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.
             </exception>
         </member>
         <member name="P:SharpVectors.Dom.Stylesheets.MediaList.Item(System.UInt64)">

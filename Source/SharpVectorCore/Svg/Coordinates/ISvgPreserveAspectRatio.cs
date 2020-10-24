@@ -7,6 +7,14 @@ namespace SharpVectors.Dom.Svg
     public interface ISvgPreserveAspectRatio
     {
         /// <summary>
+        /// Gets a value indicating if this a default aspect ratio or it is defined by the target element.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if it is the default aspect ratio; otherwise it is <see langword="false"/>.
+        /// </value>
+        bool IsDefaultAlign { get; }
+
+        /// <summary>
         /// The type of the alignment value as specified by one of the constants specified above.
         /// </summary>
         SvgPreserveAspectRatioType Align { get; set; }

@@ -12,7 +12,7 @@ namespace SharpVectors.Renderers.Wpf
         private readonly SvgStyleableElement _element;
 
         public WpfSvgColor(SvgStyleableElement elm, string propertyName)
-            : base(elm.GetComputedStyle("").GetPropertyValue(propertyName))
+            : base(elm.GetComputedStyle(string.Empty).GetPropertyValue(propertyName))
         {
             _element      = elm;
             _propertyName = propertyName;
@@ -35,7 +35,7 @@ namespace SharpVectors.Renderers.Wpf
                 SvgColor colorToUse;
                 if (ColorType == SvgColorType.CurrentColor)
                 {
-                    var cssDeclaration = _element.GetComputedStyle("");
+                    var cssDeclaration = _element.GetComputedStyle(string.Empty);
                     string currentColor = cssDeclaration.GetPropertyValue("color");
                     if (!string.IsNullOrWhiteSpace(currentColor))
                     {

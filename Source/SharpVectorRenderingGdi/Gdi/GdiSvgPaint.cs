@@ -18,7 +18,7 @@ namespace SharpVectors.Renderers.Gdi
         #region Constructors and Destructor
 
         public GdiSvgPaint(SvgStyleableElement elm, string propName)
-            : base(elm.GetComputedStyle("").GetPropertyValue(propName))
+            : base(elm.GetComputedStyle(string.Empty).GetPropertyValue(propName))
         {
             _element = elm;
         }

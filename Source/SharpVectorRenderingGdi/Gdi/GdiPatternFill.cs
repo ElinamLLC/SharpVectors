@@ -74,7 +74,15 @@ namespace SharpVectors.Renderers.Gdi
                 return brush;
             }
 
-            TextureBrush textureBrush = new TextureBrush(image, destRect);
+            TextureBrush textureBrush = null;
+            if (destRect.IsEmpty)
+            {
+                textureBrush = new TextureBrush(image);
+            }
+            else
+            {
+                textureBrush = new TextureBrush(image, destRect);
+            }
             textureBrush.Transform = GetTransformMatrix(bounds);
             return textureBrush;
         }
@@ -86,7 +94,7 @@ namespace SharpVectors.Renderers.Gdi
 		private SvgSvgElement MoveIntoSvgElement()
 		{
             SvgDocument doc = _patternElement.OwnerDocument;
-			SvgSvgElement svgElm = doc.CreateElement("", "svg", SvgDocument.SvgNamespace) as SvgSvgElement;
+			SvgSvgElement svgElm = doc.CreateElement(string.Empty, "svg", SvgDocument.SvgNamespace) as SvgSvgElement;
 
 			XmlNodeList children = _patternElement.Children;
 			if (children.Count > 0)
@@ -130,6 +138,8 @@ namespace SharpVectors.Renderers.Gdi
 
 		private Image GetImage(RectangleF bounds)
 		{
+            _patternElement.PatternBounds = new SvgRect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+
             // For single image pattern...
             if (_patternElement.ChildNodes.Count == 1)
             {

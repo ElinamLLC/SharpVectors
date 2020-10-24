@@ -20,7 +20,7 @@ namespace SharpVectors.Dom.Svg
 
         #region IElementVisitorTarget Members
 
-        public void Accept(IElementVisitor visitor)
+        public void Accept(ISvgElementVisitor visitor)
         {
             visitor.Visit(this);
         }

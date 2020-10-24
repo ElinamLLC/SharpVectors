@@ -406,7 +406,7 @@ namespace SharpVectors.Dom.Svg
         /// <returns>The hash code for this <see cref="SvgRectF"/>.</returns>
         public override int GetHashCode()
         {
-            double[] values = this.GetHashValues();
+            float[] values = this.GetHashValues();
             return (values[0].GetHashCode() ^ values[1].GetHashCode() ^
                 values[2].GetHashCode() ^ values[3].GetHashCode());
         }
@@ -624,9 +624,9 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public static SvgRectF Intersection(SvgRectF a, SvgRectF b)
         {
-            float dLeft = Math.Max(a.X, b.X);
-            float dRight = Math.Min(a.X + a.Width, b.X + b.Width);
-            float dTop = Math.Max(a.Y, b.Y);
+            float dLeft   = Math.Max(a.X, b.X);
+            float dRight  = Math.Min(a.X + a.Width, b.X + b.Width);
+            float dTop    = Math.Max(a.Y, b.Y);
             float dBottom = Math.Min(a.Y + a.Height, b.Y + b.Height);
             if ((dRight >= dLeft) && (dBottom >= dTop))
             {
@@ -649,9 +649,9 @@ namespace SharpVectors.Dom.Svg
         /// </returns>
         public static SvgRectF Union(SvgRectF a, SvgRectF b)
         {
-            float dLeft = Math.Min(a.X, b.X);
-            float dRight = Math.Max(a.X + a.Width, b.X + b.Width);
-            float dTop = Math.Min(a.Y, b.Y);
+            float dLeft   = Math.Min(a.X, b.X);
+            float dRight  = Math.Max(a.X + a.Width, b.X + b.Width);
+            float dTop    = Math.Min(a.Y, b.Y);
             float dBottom = Math.Max(a.Y + a.Height, b.Y + b.Height);
 
             return new SvgRectF(dLeft, dTop, dRight - dLeft, dBottom - dTop);
@@ -661,9 +661,9 @@ namespace SharpVectors.Dom.Svg
 
         #region Private Methods
 
-        private double[] GetHashValues()
+        private float[] GetHashValues()
         {
-            return new double[] { _x, _y, _width, _height };
+            return new float[] { _x, _y, _width, _height };
         }
 
         #endregion

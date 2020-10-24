@@ -12,7 +12,7 @@ namespace SharpVectors.Renderers.Gdi
         private SvgStyleableElement _element;
 
         public GdiSvgColor(SvgStyleableElement elm, string propertyName)
-            : base(elm.GetComputedStyle("").GetPropertyValue(propertyName))
+            : base(elm.GetComputedStyle(string.Empty).GetPropertyValue(propertyName))
         {
             _element      = elm;
             _propertyName = propertyName;
@@ -24,7 +24,7 @@ namespace SharpVectors.Renderers.Gdi
                 SvgColor colorToUse;
                 if (ColorType == SvgColorType.CurrentColor)
                 {
-                    string sCurColor = _element.GetComputedStyle("").GetPropertyValue("color");
+                    string sCurColor = _element.GetComputedStyle(string.Empty).GetPropertyValue("color");
                     colorToUse = new SvgColor(sCurColor);
                 }
                 else if (ColorType == SvgColorType.Unknown)

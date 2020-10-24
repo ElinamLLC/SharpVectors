@@ -1,8 +1,8 @@
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSFontFaceRule interface represents a @font-face rule in a CSS style sheet. 
-    /// The @font-face rule is used to hold a set of font descriptions. 
+	/// The <c>ICssFontFaceRule</c> interface represents a <c>@font-face </c>rule in a CSS style sheet. 
+	/// The <c>@font-face</c> rule is used to hold a set of font descriptions. 
 	/// </summary>
 	public interface ICssFontFaceRule : ICssRule 
 	{

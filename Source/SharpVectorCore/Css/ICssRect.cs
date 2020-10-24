@@ -1,9 +1,8 @@
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The Rect interface is used to represent any rect value. This
-	/// interface reflects the values in the underlying style 
-	/// property. Hence, modifications made to the CSSPrimitiveValue
+	/// The <c>ICssRect</c> interface is used to represent any rect value. This interface reflects the values 
+	/// in the underlying style property. Hence, modifications made to the <see cref="ICssPrimitiveValue"/>
 	/// objects modify the style property. 
 	/// </summary>
 	public interface ICssRect

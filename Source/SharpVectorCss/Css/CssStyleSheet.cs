@@ -126,10 +126,10 @@ namespace SharpVectors.Dom.Css
         /// </summary>
         /// <param name="index">The index within the style sheet's rule list of the rule to remove.</param>
         /// <exception cref="DomException">
-        /// INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.
+        /// <c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the style sheet's rule list.
         /// </exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this style sheet is readonly.
         /// </exception>
         public void DeleteRule(ulong index)
         {
@@ -150,17 +150,17 @@ namespace SharpVectors.Dom.Css
         /// </param>
         /// <returns>The index within the style sheet's rule collection of the newly inserted rule.</returns>
         /// <exception cref="DomException">
-        /// INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.
+        /// <c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the style sheet's rule list.
         /// </exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this style sheet is readonly.
         /// </exception>
         /// <exception cref="DomException">
-        /// HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index 
+        /// <c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at the specified index 
         /// e.g. if an @import rule is inserted after a standard rule set or other at-rule.
         /// </exception>
         /// <exception cref="DomException">
-        /// SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable.
+        /// <c>SYNTAX_ERR:</c> Raised if the specified rule has a syntax error and is unparsable.
         /// </exception>
         public ulong InsertRule(string rule, ulong index)
         {

@@ -988,6 +988,7 @@ namespace SharpVectors.Renderers.Wpf
                     XmlElement refEl = useElement.ReferencedElement;
                     if (refEl != null && !useElement.IsHiddenCss)
                     {
+                        var isStatic = useElement.OwnerDocument.Static;
                         XmlElement refElParent = (XmlElement)refEl.ParentNode;
                         useElement.OwnerDocument.Static = true;
                         useElement.CopyToReferencedElement(refEl);
@@ -1016,7 +1017,7 @@ namespace SharpVectors.Renderers.Wpf
                         useElement.RemoveChild(refEl);
                         useElement.RestoreReferencedElement(refEl);
                         refElParent.AppendChild(refEl);
-                        useElement.OwnerDocument.Static = false;
+                        useElement.OwnerDocument.Static = isStatic;
                     }
                 }
                 else

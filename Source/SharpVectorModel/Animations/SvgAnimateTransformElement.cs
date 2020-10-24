@@ -127,7 +127,7 @@ namespace SharpVectors.Dom.Svg
                 return this.GetAttribute("additive");
             }
             set {
-                this.SetAttribute("", value);
+                this.SetAttribute(string.Empty, value);
             }
         }
 

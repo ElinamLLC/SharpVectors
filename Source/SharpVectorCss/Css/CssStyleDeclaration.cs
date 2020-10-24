@@ -453,8 +453,8 @@ namespace SharpVectors.Dom.Css
         /// <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
         /// <param name="value">The new value of the property.</param>
         /// <param name="priority">The new priority of the property (e.g. "important").</param>
-        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified value has a syntax error and is unparsable.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+        /// <exception cref="DomException"><c>SYNTAX_ERR:</c> Raised if the specified value has a syntax error and is unparsable.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or the property is readonly.</exception>
         public void SetProperty(string propertyName, string value, string priority)
         {
             if (_readOnly)
@@ -468,8 +468,8 @@ namespace SharpVectors.Dom.Css
         /// </summary>
         /// <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
         /// <param name="value">The new value of the property.</param>
-        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified value has a syntax error and is unparsable.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+        /// <exception cref="DomException"><c>SYNTAX_ERR:</c> Raised if the specified value has a syntax error and is unparsable.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or the property is readonly.</exception>
         public void SetPropertyValue(string propertyName, string value)
         {
             if (_readOnly)
@@ -504,7 +504,7 @@ namespace SharpVectors.Dom.Css
         /// <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
         /// Returns the empty string if the property has not been set or the property name does not correspond 
         /// to a known CSS property.</returns>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly 
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly 
         /// or the property is readonly.</exception>
         public string RemoveProperty(string propertyName)
         {
@@ -601,8 +601,8 @@ namespace SharpVectors.Dom.Css
         /// Setting this attribute will result in the parsing of the new value and resetting of all the properties 
         /// in the declaration block including the removal or addition of properties.
         /// </summary>
-        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+        /// <exception cref="DomException"><c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or a property is readonly.</exception>
         public virtual string CssText
         {
             get {

@@ -198,7 +198,7 @@ namespace SharpVectors.Converters.Shapes
 
         public static bool TryGetBrush(SvgStyleableElement element, string property, Rect bounds, Matrix transform, out Brush brush)
         {
-            SvgPaint paint = new SvgPaint(element.GetComputedStyle("").GetPropertyValue(property));
+            SvgPaint paint = new SvgPaint(element.GetComputedStyle(string.Empty).GetPropertyValue(property));
             SvgPaint svgBrush;
             if (paint.PaintType == SvgPaintType.None)
             {
@@ -207,7 +207,7 @@ namespace SharpVectors.Converters.Shapes
             }
             if (paint.PaintType == SvgPaintType.CurrentColor)
             {
-                svgBrush = new SvgPaint(element.GetComputedStyle("").GetPropertyValue("color"));
+                svgBrush = new SvgPaint(element.GetComputedStyle(string.Empty).GetPropertyValue("color"));
             }
             else
             {
@@ -230,11 +230,11 @@ namespace SharpVectors.Converters.Shapes
                     SvgStyleableElement styleElm = element.ImportNode as SvgStyleableElement;
                     if (styleElm != null)
                     {
-                        string propertyValue = styleElm.GetComputedStyle("").GetPropertyValue(property);
+                        string propertyValue = styleElm.GetComputedStyle(string.Empty).GetPropertyValue(property);
 
                         if (!string.IsNullOrWhiteSpace(propertyValue))
                         {
-                            SvgPaint importFill = new SvgPaint(styleElm.GetComputedStyle("").GetPropertyValue(property));
+                            SvgPaint importFill = new SvgPaint(styleElm.GetComputedStyle(string.Empty).GetPropertyValue(property));
                             if (string.Equals(svgBrush.Uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))
                             {
                                 fillNode = element.ImportDocument.GetNodeByUri(absoluteUri) as SvgStyleableElement;
@@ -444,10 +444,10 @@ namespace SharpVectors.Converters.Shapes
                 Color color = Colors.Transparent; // no auto-inherited...
                 if (!string.IsNullOrWhiteSpace(prop) || !string.IsNullOrWhiteSpace(style))
                 {
-                    SvgColor svgColor = new SvgColor(stop.GetComputedStyle("").GetPropertyValue("stop-color"));
+                    SvgColor svgColor = new SvgColor(stop.GetComputedStyle(string.Empty).GetPropertyValue("stop-color"));
                     if (svgColor.ColorType == SvgColorType.CurrentColor)
                     {
-                        string sCurColor = stop.GetComputedStyle("").GetPropertyValue("color");
+                        string sCurColor = stop.GetComputedStyle(string.Empty).GetPropertyValue("color");
                         svgColor = new SvgColor(sCurColor);
                     }
                     TryConvertColor(svgColor.RgbColor, out color);

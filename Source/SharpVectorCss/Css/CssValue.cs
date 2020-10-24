@@ -126,15 +126,15 @@ namespace SharpVectors.Dom.Css
         /// A string representation of the current value.
         /// </summary>
         /// <exception cref="DomException">
-        /// SYNTAX_ERR: Raised if the specified CSS string value has a syntax error 
+        /// <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error 
         /// (according to the attached property) or is unparsable.
         /// </exception>
         /// <exception cref="DomException">
-        /// INVALID_MODIFICATION_ERR: Raised if the specified CSS string value represents a different 
+        /// <c>INVALID_MODIFICATION_ERR:</c> Raised if the specified CSS string value represents a different 
         /// type of values than the values allowed by the CSS property
         /// </exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this value is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this value is readonly.
         /// </exception>
         public virtual string CssText
         {

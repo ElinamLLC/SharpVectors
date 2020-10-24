@@ -488,7 +488,6 @@ namespace SharpVectors.Dom.Css
             //}
 
             return nsman;
-
         }
 
         internal void Compile(XPathNavigator nav)

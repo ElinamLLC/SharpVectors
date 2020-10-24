@@ -12,6 +12,7 @@ using SharpVectors.Woffs;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Resources;
 using SharpVectors.Dom.Stylesheets;
+using System.Threading;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -526,35 +527,36 @@ namespace SharpVectors.Dom.Svg
             {
                 fullPath = fullPath.Replace('\\', '/');
 
-                bool useSvgDtd = false;
+                var useSvgDtd = false;
+                var comparer  = StringComparison.OrdinalIgnoreCase;
 
-                if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Basic//EN", StringComparison.OrdinalIgnoreCase) ||
-                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Basic/EN", StringComparison.OrdinalIgnoreCase))
+                if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Basic//EN", comparer) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Basic/EN", comparer))
                 {
                     useSvgDtd = true;
                 }
-                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1//EN", StringComparison.OrdinalIgnoreCase) ||
-                    fullPath.EndsWith("-/W3C/DTD SVG 1.1/EN", StringComparison.OrdinalIgnoreCase))
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1//EN", comparer) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1/EN", comparer))
                 {
                     useSvgDtd = true;
                 }
-                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Full//EN", StringComparison.OrdinalIgnoreCase) ||
-                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Full/EN", StringComparison.OrdinalIgnoreCase))
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Full//EN", comparer) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Full/EN", comparer))
                 {
                     useSvgDtd = true;
                 }
-                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.0//EN", StringComparison.OrdinalIgnoreCase) ||
-                    fullPath.EndsWith("-/W3C/DTD SVG 1.0/EN", StringComparison.OrdinalIgnoreCase))
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.0//EN", comparer) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.0/EN", comparer))
                 {
                     useSvgDtd = true;
                 }
-                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Tiny//EN", StringComparison.OrdinalIgnoreCase) ||
-                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Tiny/EN", StringComparison.OrdinalIgnoreCase))
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 1.1 Tiny//EN", comparer) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 1.1 Tiny/EN", comparer))
                 {
                     useSvgDtd = true;
                 }
-                else if (fullPath.EndsWith("-//W3C//DTD SVG 20010904//EN", StringComparison.OrdinalIgnoreCase) ||
-                    fullPath.EndsWith("-/W3C/DTD SVG 20010904/EN", StringComparison.OrdinalIgnoreCase))
+                else if (fullPath.EndsWith("-//W3C//DTD SVG 20010904//EN", comparer) ||
+                    fullPath.EndsWith("-/W3C/DTD SVG 20010904/EN", comparer))
                 {
                     useSvgDtd = true;
                 }
@@ -764,7 +766,7 @@ namespace SharpVectors.Dom.Svg
                 return GetElementById(absoluteUrl.Substring(1));
             }
 
-            Uri docUri = ResolveUri("");
+            Uri docUri = ResolveUri(string.Empty);
             Uri absoluteUri = new Uri(absoluteUrl);
 
             if (absoluteUri.IsFile)
@@ -820,7 +822,7 @@ namespace SharpVectors.Dom.Svg
             else
             {
                 // got a fragment => return XmlElement
-                string noFragment = absoluteUri.AbsoluteUri.Replace(fragment, "");
+                string noFragment = absoluteUri.AbsoluteUri.Replace(fragment, string.Empty);
                 SvgDocument doc = (SvgDocument)GetNodeByUri(new Uri(noFragment));
                 return doc.GetElementById(fragment.Substring(1));
             }
@@ -1377,7 +1379,6 @@ namespace SharpVectors.Dom.Svg
         {
             if (string.IsNullOrWhiteSpace(fontPath) || !File.Exists(fontPath))
             {
-                //                Trace.WriteLine("Private font not found: " + fontPath);
                 return;
             }
 
@@ -1386,12 +1387,15 @@ namespace SharpVectors.Dom.Svg
                 || string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
             {
                 SvgDocument document = new SvgDocument(ownedWindow);
+                document.Static = true;
 
                 document.Load(fontPath);
                 var svgFonts = document.SvgFonts;
 
                 if (svgFonts != null && svgFonts.Count != 0)
                 {
+                    var isStatic = this.Static;
+                    this.Static = true;
                     foreach (var svgFont in svgFonts)
                     {
                         if (fontFace != null && fontFace.HasAttribute("unicode-range"))
@@ -1401,9 +1405,9 @@ namespace SharpVectors.Dom.Svg
 
                         var fontNode = this.ImportNode(svgFont, true);
                         this.DocumentElement.AppendChild(fontNode);
-
-                        //                        this.SvgFonts.Add(svgFont);
                     }
+
+                    this.Static = isStatic;
                 }
             }
             else if (string.Equals(fileExt, ".woff", StringComparison.OrdinalIgnoreCase)

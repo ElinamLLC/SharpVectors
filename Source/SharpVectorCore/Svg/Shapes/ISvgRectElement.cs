@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgRectElement interface corresponds to the 'rect' element. 
 	/// </summary>
 	public interface ISvgRectElement : ISvgElement, ISvgTests, ISvgLangSpace,
-		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, IElementVisitorTarget
+		ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, ISvgElementVisitorTarget
     {
 		/// <summary>
 		/// Corresponds to attribute x on the given 'rect' element.

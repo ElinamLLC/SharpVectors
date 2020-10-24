@@ -630,7 +630,7 @@ namespace WpfTestSvgControl
 
         private async void OnDragDrop(object sender, DragEventArgs de)
         {
-            string fileName = "";
+            string fileName = string.Empty;
             if (de.Data.GetDataPresent(DataFormats.Text))
             {
                 fileName = (string)de.Data.GetData(DataFormats.Text);
@@ -1026,7 +1026,7 @@ namespace WpfTestSvgControl
                 }
                 decorator.Margin = new Thickness(0, 0, 10, 0);
                 decorator.Child = headerText;
-                decorator.Tag   = "";
+                decorator.Tag   = string.Empty;
 
                 TreeViewItem categoryItem = new TreeViewItem();
                 categoryItem.Tag        = string.Empty;

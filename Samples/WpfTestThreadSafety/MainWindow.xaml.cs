@@ -153,7 +153,7 @@ namespace WpfTestThreadSafety
                                 _columnCount = 0;
                                 if (_imageCount < NumberOfImages)
                                 {
-                                    AppendLine("");
+                                    AppendLine(string.Empty);
                                 }
                             }
                         }
@@ -249,7 +249,7 @@ namespace WpfTestThreadSafety
 
         private static bool GetValidSvgTestsDir(out string svgDir, int majorVersion, int minorVersion)
         {
-            svgDir = "";
+            svgDir = string.Empty;
 
             string versionSuffix = string.Format("{0}{1}", majorVersion, minorVersion);
             var suiteDirName = W3CDirPrefix + versionSuffix;
@@ -327,7 +327,7 @@ namespace WpfTestThreadSafety
             AppendLine("Starting Tests ****");
             if (_isVerbose)
             {
-                AppendLine("");
+                AppendLine(string.Empty);
             }
 
             var allTasks = new List<Task>();
@@ -359,7 +359,7 @@ namespace WpfTestThreadSafety
             await Task.WhenAll(allTasks);
 #endif
 
-            AppendLine("");
+            AppendLine(string.Empty);
             AppendLine("**** Completed Tests");
 
             btnStart.IsEnabled = true;

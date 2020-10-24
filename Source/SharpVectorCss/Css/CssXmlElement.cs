@@ -51,7 +51,7 @@ namespace SharpVectors.Dom.Css
             get {
                 if (_style == null)
                 {
-                    string styleValue = GetAttribute("style", string.Empty);
+                    string styleValue = GetAttribute(SvgConstants.TagStyle, string.Empty);
 
                     if (!string.IsNullOrWhiteSpace(styleValue))
                     {
@@ -235,11 +235,9 @@ namespace SharpVectors.Dom.Css
         {
             if (attribute.NamespaceURI.Length == 0)
             {
-                switch (attribute.LocalName)
+                if (string.Equals(attribute.LocalName, SvgConstants.TagStyle, StringComparison.OrdinalIgnoreCase))
                 {
-                    case "style":
-                        _style = null;
-                        break;
+                    _style = null;
                 }
             }
         }

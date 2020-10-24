@@ -88,7 +88,7 @@ namespace WpfTestSvgSample
                 if (_notifyIcon != null)
                 {
                     _notifyIcon.Show(MainWindow.AppTitle, "There is a reported error or exception. See the Debug Window.",
-                        NotificationType.Error, "", TimeSpan.FromSeconds(5));
+                        NotificationType.Error, string.Empty, TimeSpan.FromSeconds(5));
                 }
 
                 _textBox.SelectionStart = _textBox.Document.TextLength;
@@ -109,7 +109,7 @@ namespace WpfTestSvgSample
                 if (_notifyIcon != null)
                 {
                     _notifyIcon.Show(MainWindow.AppTitle, "There is a reported warning. See the Debug Window.",
-                        NotificationType.Warning, "", TimeSpan.FromSeconds(5));
+                        NotificationType.Warning, string.Empty, TimeSpan.FromSeconds(5));
                 }
                 _textBox.SelectionStart = _textBox.Document.TextLength;
                 _textBox.SelectionLength = 0;

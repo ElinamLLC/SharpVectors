@@ -3,13 +3,13 @@ using System.Collections.Generic;
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The CSSRuleList interface provides the abstraction of an 
+	/// The <c>ICssRuleList</c> interface provides the abstraction of an 
 	/// ordered collection of CSS rules. 
 	/// </summary>
 	public interface ICssRuleList : IList<ICssRule>
 	{
 		/// <summary>
-		/// The number of CSSRules in the list. The range of valid child rule indices is 0 to length-1 inclusive.
+		/// The number of CSS rules in the list. The range of valid child rule indices is 0 to length-1 inclusive.
 		/// </summary>
 		ulong Length
 		{
@@ -26,6 +26,10 @@ namespace SharpVectors.Dom.Css
 			get;
 		}
 
+		/// <summary>
+		/// Gets a value specifying whether the contents of this list includes a font rule.
+		/// <para>This is an implementation extension, not CSS specification.</para>
+		/// </summary>
         bool HasFontRule { get; }
 	}
 }

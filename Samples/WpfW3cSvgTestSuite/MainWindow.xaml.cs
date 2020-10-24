@@ -350,9 +350,9 @@ namespace WpfW3cSvgTestSuite
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine("");
+                    Trace.WriteLine(string.Empty);
                     Trace.TraceError(ex.ToString());
-                    Trace.WriteLine("");
+                    Trace.WriteLine(string.Empty);
 
                     MessageBox.Show(ex.ToString(), AppErrorTitle,
                         MessageBoxButton.OK, MessageBoxImage.Error);
@@ -391,7 +391,7 @@ namespace WpfW3cSvgTestSuite
         {
             if (_optionSettings != null && isEnabled == false)
             {
-                _optionSettings.SelectedValuePath = "";
+                _optionSettings.SelectedValuePath = string.Empty;
             }
 
             testInfoPanel.IsEnabled = isEnabled;
@@ -529,9 +529,9 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 this.Cursor = Cursors.Arrow;
 
-                Trace.WriteLine("");
+                Trace.WriteLine(string.Empty);
                 Trace.TraceError(ex.ToString());
-                Trace.WriteLine("");
+                Trace.WriteLine(string.Empty);
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -561,9 +561,9 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 this.Cursor = Cursors.Arrow;
 
-                Trace.WriteLine("");
+                Trace.WriteLine(string.Empty);
                 Trace.TraceError(ex.ToString());
-                Trace.WriteLine("");
+                Trace.WriteLine(string.Empty);
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -636,9 +636,9 @@ namespace WpfW3cSvgTestSuite
                 //EnableTestPanel(false);
                 _isTreeChangedPending = false;
 
-                Trace.WriteLine("");
+                Trace.WriteLine(string.Empty);
                 Trace.TraceError(ex.ToString());
-                Trace.WriteLine("");
+                Trace.WriteLine(string.Empty);
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -1190,8 +1190,8 @@ namespace WpfW3cSvgTestSuite
             treeView.BeginInit();
             treeView.Items.Clear();
 
-            string selectedCategory = "";
-            string selectedTest     = "";
+            string selectedCategory = string.Empty;
+            string selectedTest     = string.Empty;
             if (_optionSettings != null &&
                 !string.IsNullOrWhiteSpace(_optionSettings.SelectedValuePath))
             {

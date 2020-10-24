@@ -136,11 +136,11 @@ namespace GdiW3cSvgTestSuite
 
         public void UnloadDocument()
         {
-            _svgFilePath        = "";
+            _svgFilePath        = string.Empty;
 
-            testTitle.Text      = "";
-            testDescrition.Text = "";
-            testFilePath.Text   = "";
+            testTitle.Text      = string.Empty;
+            testDescrition.Text = string.Empty;
+            testFilePath.Text   = string.Empty;
 
             _testCase           = null;
 

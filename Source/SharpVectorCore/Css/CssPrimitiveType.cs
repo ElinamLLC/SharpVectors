@@ -1,9 +1,8 @@
 namespace SharpVectors.Dom.Css
 {
     /// <summary>
-    ///	The CssPrimativeType Enum Class contains the list of possible primitive 
-    ///	value types in CSS.  This class is an extension of the CSS spec. The CSS 
-    ///	spec has a list of constants instead of an enum class.
+    ///	The <c>CssPrimitiveType</c> enumeration contains the list of possible primitive value types in CSS. 
+    ///	This class is an extension of the CSS spec. The CSS spec has a list of constants instead of an enum class.
     /// </summary>
     public enum CssPrimitiveType
     {

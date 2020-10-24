@@ -15,7 +15,7 @@ namespace SharpVectors.Dom.Css
     ///	encoding the document actually came in; character encoding information e.g. in an HTTP header, has 
     ///	priority (see CSS document representation) but this is not reflected in the CSSCharsetRule.
     /// </summary>
-    public class CssCharsetRule : CssRule, ICssCharsetRule
+    public sealed class CssCharsetRule : CssRule, ICssCharsetRule
     {
         #region Private Fields
 
@@ -75,7 +75,7 @@ namespace SharpVectors.Dom.Css
             }
             set {
                 /*
-				 * TODO: SYNTAX_ERR: Raised if the specified encoding value has a syntax error and 
+				 * TODO: <c>SYNTAX_ERR:</c> Raised if the specified encoding value has a syntax error and 
                  * is unparsable.
 				 * */
                 if (_isReadOnly)

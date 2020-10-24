@@ -11,9 +11,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssPrimitiveType">
             <summary>
-            The CssPrimativeType Enum Class contains the list of possible primitive 
-            value types in CSS.  This class is an extension of the CSS spec. The CSS 
-            spec has a list of constants instead of an enum class.
+            The <c>CssPrimitiveType</c> enumeration contains the list of possible primitive value types in CSS. 
+            This class is an extension of the CSS spec. The CSS spec has a list of constants instead of an enum class.
             </summary>
         </member>
         <member name="F:SharpVectors.Dom.Css.CssPrimitiveType.Unknown">
@@ -153,9 +152,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssRuleType">
             <summary>
-                The CssRuleType Enum Class contains the possible Rule Type
-                Values.  This is an extension of the CSS spec.  The spec
-                contains only a list of contstant in the CssRule Interface. 
+            The <c>CssRuleType</c> Enum contains the possible Rule Type Values. This is an extension of the CSS specification.
+            The spec contains only a list of contstant in the <see cref="T:SharpVectors.Dom.Css.ICssRule"/> interface. 
             </summary>
         </member>
         <member name="F:SharpVectors.Dom.Css.CssRuleType.UnknownRule">
@@ -195,8 +193,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.CssValueType">
             <summary>
-            The <c>CssValueType</c> Enum Class contains the possible CSS Value Types. This is an extension to the 
-            CSS specification. The specification has a list of constants defined within the ICssValue Interface 
+            The <c>CssValueType</c> Enum contains the possible CSS Value Types. This is an extension to the 
+            CSS specification. The specification has a list of constants defined within the <see cref="T:SharpVectors.Dom.Css.ICssValue"/> Interface 
             </summary>
         </member>
         <member name="F:SharpVectors.Dom.Css.CssValueType.Inherit">
@@ -223,30 +221,30 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssCharsetRule">
             <summary>
-            The CSSCharsetRule interface represents a @charset rule in a CSS style sheet. The value of the 
+            The <c>ICssCharsetRule</c> interface represents a <c>@charset</c> rule in a CSS style sheet. The value of the 
             encoding attribute does not affect the encoding of text data in the DOM objects; this encoding is 
             always UTF-16. After a stylesheet is loaded, the value of the encoding attribute is the value found in the 
-            @charset rule. If there was no @charset in the original document, then no CSSCharsetRule is created. 
+            <c>@charset</c> rule. If there was no <c>@charset</c> in the original document, then no <c>ICssCharsetRule</c> is created. 
             The value of the encoding attribute may also be used as a hint for the 
             encoding used on serialization of the style sheet. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssCharsetRule.Encoding">
             <summary>
-            The encoding information used in this @charset rule.
+            The encoding information used in this <c>@charset</c> rule.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified encoding value has a syntax error and is unparsable.
+            <c>SYNTAX_ERR</c>: Raised if the specified encoding value has a syntax error and is unparsable.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this encoding rule is readonly.
+            <c>NO_MODIFICATION_ALLOWED_ERR</c>: Raised if this encoding rule is readonly.
             </exception>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssColor">
             <summary>
-            The RGBColor interface is used to represent any RGB color value. This interface reflects the 
+            The RGB-Color interface is used to represent any RGB color value. This interface reflects the 
             values in the underlying style property. Hence, modifications made to the 
-            CSSPrimitiveValue objects modify the style property. 
+            <see cref="T:SharpVectors.Dom.Css.ICssPrimitiveValue"/> objects modify the style property. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssColor.Name">
@@ -291,9 +289,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssCounter">
             <summary>
-            The Counter interface is used to represent any counter or 
-            counters function value. This interface reflects the values 
-            in the underlying style property.
+            The Counter interface is used to represent any counter or counters function value. 
+            This interface reflects the values in the underlying style property.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssCounter.Separator">
@@ -313,8 +310,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssFontFaceRule">
             <summary>
-            The CSSFontFaceRule interface represents a @font-face rule in a CSS style sheet. 
-            The @font-face rule is used to hold a set of font descriptions. 
+            The <c>ICssFontFaceRule</c> interface represents a <c>@font-face </c>rule in a CSS style sheet. 
+            The <c>@font-face</c> rule is used to hold a set of font descriptions. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssFontFaceRule.Style">
@@ -324,8 +321,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssImportRule">
             <summary>
-            The CSSImportRule interface represents a @import rule within a CSS style sheet. 
-            The @import rule is used to import style rules from other style sheets. 
+            The <c>ICssImportRule</c> interface represents a <c>@import</c> rule within a CSS style sheet. 
+            The <c>@import</c> rule is used to import style rules from other style sheets. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssImportRule.StyleSheet">
@@ -343,13 +340,13 @@
         <member name="P:SharpVectors.Dom.Css.ICssImportRule.Href">
             <summary>
             The location of the style sheet to be imported. The attribute will not contain the 
-            "url(...)" specifier around the URI.
+            <c>"url(...)"</c> specifier around the URI.
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssMediaRule">
             <summary>
-            The CSSMediaRule interface represents a @media rule in a CSS style sheet. 
-            A @media rule can be used to delimit style rules for specific media types
+            The <c>ICssMediaRule</c> interface represents a <c>@media</c> rule in a CSS style sheet. 
+            A <c>@media</c> rule can be used to delimit style rules for specific media types
             </summary>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssMediaRule.DeleteRule(System.UInt64)">
@@ -358,10 +355,10 @@
             </summary>
             <param name="index">The index within the media block's rule collection of the rule to remove.</param>
             <exception cref="T:SharpVectors.Dom.DomException">
-            INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the media rule list.
+            <c>INDEX_SIZE_ERR</c>: Raised if the specified index does not correspond to a rule in the media rule list.
             </exception>
             <exception cref="T:SharpVectors.Dom.DomException">
-            NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly
+            <c>NO_MODIFICATION_ALLOWED_ERR</c>: Raised if this media rule is readonly
             </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssMediaRule.InsertRule(System.String,System.UInt64)">
@@ -390,8 +387,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssPageRule">
             <summary>
-            The CSSPageRule interface represents a @page rule within a CSS style sheet. 
-            The @page rule is used to specify the dimensions, orientation, margins, etc. of a page box for paged media. 
+            The <c>ICssPageRule</c> interface represents a <c>@page</c> rule within a CSS style sheet. 
+            The <c>@page</c> rule is used to specify the dimensions, orientation, margins, etc. of a page box for paged media. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssPageRule.Style">
@@ -404,20 +401,22 @@
             The parsable textual representation of the page selector for the rule.
             </summary>
             <exception cref="T:SharpVectors.Dom.DomException">
-            SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.
+            <c>SYNTAX_ERR</c>: Raised if the specified CSS string value has a syntax error and is unparsable.
             </exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR</c>: Raised if this rule is readonly.
+            </exception>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssPrimitiveValue">
             <summary>
-            The <see cref="T:SharpVectors.Dom.Css.ICssPrimitiveValue"/> interface represents a single CSS value. 
-            This interface may be used to determine the value of a specific
-            style property currently set in a block or to set a specific 
-            style property explicitly within the block. An instance of this 
-            interface might be obtained from the getPropertyCSSValue method
-            of the CSSStyleDeclaration interface. A CSSPrimitiveValue object
-            only occurs in a context of a CSS property. 
+            The <c>ICssPrimitiveValue</c> interface represents a single CSS value. 
             </summary>
+            <remarks>
+            This interface may be used to determine the value of a specific style property currently set in a block 
+            or to set a specific style property explicitly within the block. An instance of this interface might be 
+            obtained from the <see cref="M:SharpVectors.Dom.Css.ICssStyleDeclaration.GetPropertyCssValue(System.String)"/> method of the <see cref="T:SharpVectors.Dom.Css.ICssStyleDeclaration"/> interface. 
+            A <see cref="T:SharpVectors.Dom.Css.ICssPrimitiveValue"/> object only occurs in a context of a CSS property. 
+            </remarks>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssPrimitiveValue.PrimitiveType">
             <summary>
@@ -427,64 +426,97 @@
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.SetFloatValue(SharpVectors.Dom.Css.CssPrimitiveType,System.Double)">
             <summary>
             A method to set the float value with a specified unit. If the property attached with this value cannot 
-            accept the specified unit or the float value, the value will be unchanged and a DOMException will be raised.
+            accept the specified unit or the float value, the value will be unchanged and a <see cref="T:SharpVectors.Dom.DomException"/> 
+            will be raised.
             </summary>
-            <param name="unitType">A unit code as defined above. The unit code can only be a float unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, CSS_IN, CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
+            <param name="unitType">A unit code as defined above. The unit code can only be a float unit type 
+            (i.e. <c>NUMBER</c>, <c>PERCENTAGE</c>, <c>EMS</c>, <c>EXS</c>, <c>PX</c>, <c>CM</c>, <c>MM</c>, <c>IN</c>, 
+            <c>PT</c>, <c>PC</c>, <c>DEG</c>, <c>RAD</c>, <c>GRAD</c>, <c>MS</c>, <c>S</c>, <c>HZ</c>, <c>KHZ</c>, <c>DIMENSION</c>).
+            </param>
             <param name="floatValue">The new float value.</param>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the attached property doesn't support the float value or the unit type.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_ACCESS_ERR:</c> Raised if the attached property doesn't support the float value or the unit type.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.GetFloatValue(SharpVectors.Dom.Css.CssPrimitiveType)">
             <summary>
-            This method is used to get a float value in a specified unit. If this CSS value doesn't contain a float value or can't be converted into the specified unit, a DOMException is raised.
+            This method is used to get a float value in a specified unit. If this CSS value doesn't contain a float value 
+            or can't be converted into the specified unit, a <see cref="T:SharpVectors.Dom.DomException"/> is raised.
             </summary>
-            <param name="unitType">A unit code to get the float value. The unit code can only be a float unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, CSS_IN, CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
+            <param name="unitType">A unit code to get the float value. The unit code can only be a float unit type 
+            (i.e. <c>NUMBER</c>, <c>PERCENTAGE</c>, <c>EMS</c>, <c>EXS</c>, <c>PX</c>, <c>CM</c>, <c>MM</c>, <c>IN</c>, 
+            <c>PT</c>, <c>PC</c>, <c>DEG</c>, <c>RAD</c>, <c>GRAD</c>, <c>MS</c>, <c>S</c>, <c>HZ</c>, <c>KHZ</c>, <c>DIMENSION</c>).</param>
             <returns>The float value in the specified unit.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a float value or if the float value can't be converted into the specified unit.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a float value or if the float value 
+            can't be converted into the specified unit.
+            </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.SetStringValue(SharpVectors.Dom.Css.CssPrimitiveType,System.String)">
             <summary>
-            A method to set the string value with the specified unit. If the property attached to this value can't accept the specified unit or the string value, the value will be unchanged and a DOMException will be raised.
+            A method to set the string value with the specified unit. If the property attached to this value can't accept the 
+            specified unit or the string value, the value will be unchanged and a <see cref="T:SharpVectors.Dom.DomException"/> will be raised.
             </summary>
-            <param name="stringType">A string code as defined above. The string code can only be a string unit type (i.e. CSS_STRING, CSS_URI, CSS_IDENT, and CSS_ATTR).</param>
+            <param name="stringType">A string code as defined above. The string code can only be a string unit type 
+            (i.e. <c>STRING</c>, <c>URI</c>, <c>IDENT</c>, and <c>ATTR</c>).</param>
             <param name="stringValue">The new string value.</param>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a string value or if the string value can't be converted into the specified unit.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a string value or if the string 
+            value can't be converted into the specified unit.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this property is readonly.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.GetStringValue">
             <summary>
-            This method is used to get the string value. If the CSS value doesn't contain a string value, a DOMException is raised.
+            This method is used to get the string value. If the CSS value doesn't contain a string value, 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. 
+            <para>
             Note: Some properties (like 'font-family' or 'voice-family') convert a whitespace separated list of idents to a string.
+            </para>
             </summary>
-            <returns>The string value in the current unit. The current primitiveType can only be a string unit type (i.e. CSS_STRING, CSS_URI, CSS_IDENT and CSS_ATTR).</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a string value.</exception>
+            <returns>The string value in the current unit. The current primitiveType can only be a string 
+            unit type (i.e. <c>STRING</c>, <c>URI</c>, <c>IDENT</c>, and <c>ATTR</c>).</returns>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a string value.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.GetCounterValue">
             <summary>
-            This method is used to get the Counter value. If this CSS value doesn't contain a counter value, a DOMException is raised. Modification to the corresponding style property can be achieved using the Counter interface
+            This method is used to get the <see cref="T:SharpVectors.Dom.Css.ICssCounter"/> value. If this CSS value doesn't contain a counter value, 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. Modification to the corresponding style property can 
+            be achieved using the <see cref="T:SharpVectors.Dom.Css.ICssCounter"/> interface
             </summary>
             <returns>The Counter value</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a Counter value (e.g. this is not CSS_COUNTER).</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a Counter value (e.g. this is not <c>COUNTER</c>).
+            </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.GetRectValue">
             <summary>
-            This method is used to get the Rect value. If this CSS value doesn't contain a rect value, a DOMException is raised. Modification to the corresponding style property can be achieved using the Rect interface.
+            This method is used to get the <see cref="T:SharpVectors.Dom.Css.ICssRect"/> value. If this CSS value doesn't contain a rect value, 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. Modification to the corresponding style property 
+            can be achieved using the <see cref="T:SharpVectors.Dom.Css.ICssRect"/> interface.
             </summary>
             <returns>The Rect value</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a Rect value. (e.g. this is not CSS_RECT).</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_ACCESS_ERR:</c> Raised if the CSS value doesn't contain a Rect value. (e.g. this is not <c>RECT</c>).
+            </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssPrimitiveValue.GetRgbColorValue">
             <summary>
-            This method is used to get the RGB color. If this CSS value doesn't contain a RGB color value, a DOMException is raised. Modification to the corresponding style property can be achieved using the RGBColor interface.
+            This method is used to get the RGB color. If this CSS value doesn't contain a RGB color value, 
+            a <see cref="T:SharpVectors.Dom.DomException"/> is raised. Modification to the corresponding style property can be achieved 
+            using the <see cref="T:SharpVectors.Dom.Css.ICssColor"/> interface.
             </summary>
             <returns>the RGB color value.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the attached property can't return a RGB color value (e.g. this is not CSS_RGBCOLOR).</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_ACCESS_ERR:</c> Raised if the attached property can't return a RGB color value (e.g. this is not <c>RGBCOLOR</c>).
+            </exception>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssRect">
             <summary>
-            The Rect interface is used to represent any rect value. This
-            interface reflects the values in the underlying style 
-            property. Hence, modifications made to the CSSPrimitiveValue
+            The <c>ICssRect</c> interface is used to represent any rect value. This interface reflects the values 
+            in the underlying style property. Hence, modifications made to the <see cref="T:SharpVectors.Dom.Css.ICssPrimitiveValue"/>
             objects modify the style property. 
             </summary>
         </member>
@@ -510,7 +542,7 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssRule">
             <summary>
-            The CSSRule interface is the abstract base interface for any type of CSS statement. 
+            The <c>ICssRule</c> interface is the abstract base interface for any type of CSS statement. 
             This includes both rule sets and at-rules. An implementation is expected to preserve all rules 
             specified in a CSS style sheet, even if the rule is not recognized by the parser. 
             Unrecognized rules are represented using the <see cref="T:SharpVectors.Dom.Css.ICssUnknownRule"/> interface. 
@@ -519,7 +551,7 @@
         <member name="P:SharpVectors.Dom.Css.ICssRule.ParentStyleSheet">
             <summary>
             The type of the rule, as defined above. The expectation is that binding-specific casting methods 
-            can be used to cast down from an instance of the CSSRule interface to the specific derived 
+            can be used to cast down from an instance of the <see cref="T:SharpVectors.Dom.Css.ICssRule"/> interface to the specific derived 
             interface implied by the type.
             </summary>
         </member>
@@ -530,7 +562,7 @@
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssRule.Type">
             <summary>
-            If this rule is contained inside another rule (e.g. a style rule inside an @media block), this is the 
+            If this rule is contained inside another rule (e.g. a style rule inside an <c>@media</c> block), this is the 
             containing rule. If this rule is not nested inside any other rules, this returns null
             </summary>
         </member>
@@ -538,23 +570,23 @@
             <summary>
             The parsable textual representation of the rule. This reflects the current state of the rule and not its initial value.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax 
             error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_MODIFICATION_ERR: Raised if the specified CSS string value 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>INVALID_MODIFICATION_ERR:</c> Raised if the specified CSS string value 
             represents a different type of rule than the current one.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at this 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at this 
             point in the style sheet.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if the rule is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if the rule is readonly.</exception>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssRuleList">
             <summary>
-            The CSSRuleList interface provides the abstraction of an 
+            The <c>ICssRuleList</c> interface provides the abstraction of an 
             ordered collection of CSS rules. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssRuleList.Length">
             <summary>
-            The number of CSSRules in the list. The range of valid child rule indices is 0 to length-1 inclusive.
+            The number of CSS rules in the list. The range of valid child rule indices is 0 to length-1 inclusive.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssRuleList.Item(System.UInt64)">
@@ -564,13 +596,20 @@
             of rules in the list, this returns null.
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Css.ICssRuleList.HasFontRule">
+            <summary>
+            Gets a value specifying whether the contents of this list includes a font rule.
+            <para>This is an implementation extension, not CSS specification.</para>
+            </summary>
+        </member>
         <member name="T:SharpVectors.Dom.Css.ICssStyleDeclaration">
             <summary>
-            The CSSStyleDeclaration interface represents a single CSS 
-            declaration block. This interface may be used to determine 
-            the style properties currently set in a block or to set 
-            style properties explicitly within the block. 
+            The <c>ICssStyleDeclaration</c> interface represents a single CSS declaration block. 
             </summary>
+            <remarks>
+            This interface may be used to determine the style properties currently set in a block or to set 
+            style properties explicitly within the block. 
+            </remarks>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleDeclaration.SetProperty(System.String,System.String,System.String)">
             <summary>
@@ -579,79 +618,109 @@
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
             <param name="value">The new value of the property.</param>
             <param name="priority">The new priority of the property (e.g. "important").</param>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>SYNTAX_ERR:</c> Raised if the specified value has a syntax error and is unparsable.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or the property is readonly.
+            </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleDeclaration.GetPropertyPriority(System.String)">
             <summary>
-            Used to retrieve the priority of a CSS property (e.g. the "important" qualifier) if the property has been explicitly set in this declaration block.
+            Used to retrieve the priority of a CSS property (e.g. the "important" qualifier) if the property has 
+            been explicitly set in this declaration block.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>A string representing the priority (e.g. "important") if one exists. The empty string if none exists.</returns>
+            <returns>A string representing the priority (e.g. "important") if one exists. 
+            The empty string if none exists.</returns>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleDeclaration.RemoveProperty(System.String)">
             <summary>
             Used to remove a CSS property if it has been explicitly set within this declaration block.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set or the property name does not correspond to a known CSS property.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns the empty string if the property has not been set or the property name does not correspond 
+            to a known CSS property.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or the property is readonly.
+            </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleDeclaration.GetPropertyCssValue(System.String)">
             <summary>
-            Used to retrieve the object representation of the value of a CSS property if it has been explicitly set within this declaration block. This method returns null if the property is a shorthand property. Shorthand property values can only be accessed and modified as strings, using the getPropertyValue and setProperty methods.
+            Used to retrieve the object representation of the value of a CSS property if it has been explicitly 
+            set within this declaration block. This method returns null if the property is a shorthand property. 
+            Shorthand property values can only be accessed and modified as strings, using the <see cref="M:SharpVectors.Dom.Css.ICssStyleDeclaration.GetPropertyValue(System.String)"/> 
+            and <see cref="M:SharpVectors.Dom.Css.ICssStyleDeclaration.SetProperty(System.String,System.String,System.String)"/> methods.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns null if the property has not been set.</returns>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns null if the property has not been set.</returns>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleDeclaration.GetPropertyValue(System.String)">
             <summary>
             Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
             </summary>
             <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns the empty string if the property has not been set.</returns>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleDeclaration.GetPropertyValue(System.String[])">
             <summary>
             Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
             </summary>
             <param name="propertyNames">The name of the CSS property. See the CSS property index.</param>
-            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. 
+            Returns the empty string if the property has not been set.</returns>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleDeclaration.ParentRule">
             <summary>
-            The CSS rule that contains this declaration block or null if this CSSStyleDeclaration is not attached to a CSSRule.
+            The CSS rule that contains this declaration block or null if this <see cref="T:SharpVectors.Dom.Css.ICssStyleDeclaration"/> is 
+            not attached to a <see cref="T:SharpVectors.Dom.Css.ICssRule"/>.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleDeclaration.Length">
             <summary>
-            The number of properties that have been explicitly set in this declaration block. The range of valid indices is 0 to length-1 inclusive.
+            The number of properties that have been explicitly set in this declaration block. 
+            The range of valid indices is 0 to length-1 inclusive.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleDeclaration.CssText">
             <summary>
-            The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.
+            The parsable textual representation of the declaration block (excluding the surrounding curly braces). 
+            Setting this attribute will result in the parsing of the new value and resetting of all the properties 
+            in the declaration block including the removal or addition of properties.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or a property is readonly.
+            </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleDeclaration.Item(System.UInt64)">
             <summary>
-            Used to retrieve the properties that have been explicitly set in this declaration block. The order of the properties retrieved using this method does not have to be the order in which they were set. This method can be used to iterate over all properties in this declaration block.
+            Used to retrieve the properties that have been explicitly set in this declaration block. 
+            The order of the properties retrieved using this method does not have to be the order in which 
+            they were set. This method can be used to iterate over all properties in this declaration block.
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssStyleRule">
             <summary>
-            The CSSStyleRule interface represents a single rule set 
-            in a CSS style sheet. 
+            The <c>ICssStyleRule</c> interface represents a single rule set in a CSS style sheet. 
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleRule.SelectorText">
             <summary>
-            The textual representation of the selector for the rule set. The implementation may have stripped out insignificant whitespace while parsing the selector.
+            The textual representation of the selector for the rule set. The implementation may have stripped 
+            out insignificant whitespace while parsing the selector.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this rule is readonly.
+            </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleRule.Style">
             <summary>
@@ -660,9 +729,8 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssStyleSheet">
             <summary>
-            The CSSStyleSheet interface is a concrete interface used to 
-            represent a CSS style sheet i.e., a style sheet whose 
-            content type is "text/css". 
+            The <c>ICssStyleSheet</c> interface is a concrete interface used to represent a CSS style sheet 
+            i.e., a style sheet whose content type is <c>text/css</c>. 
             </summary>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleSheet.DeleteRule(System.UInt64)">
@@ -670,20 +738,34 @@
             Used to delete a rule from the style sheet.
             </summary>
             <param name="index">The index within the style sheet's rule list of the rule to remove.</param>
-            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the style sheet's rule list.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this style sheet is readonly.
+            </exception>
         </member>
         <member name="M:SharpVectors.Dom.Css.ICssStyleSheet.InsertRule(System.String,System.UInt64)">
             <summary>
             Used to insert a new rule into the style sheet. The new rule now becomes part of the cascade.
             </summary>
-            <param name="rule">The parsable text representing the rule. For rule sets this contains both the selector and the style declaration. For at-rules, this specifies both the at-identifier and the rule content.</param>
-            <param name="index">The index within the style sheet's rule list of the rule before which to insert the specified rule. If the specified index is equal to the length of the style sheet's rule collection, the rule will be added to the end of the style sheet.</param>
+            <param name="rule">The parsable text representing the rule. For rule sets this contains both the selector 
+            and the style declaration. For at-rules, this specifies both the at-identifier and the rule content.</param>
+            <param name="index">The index within the style sheet's rule list of the rule before which to insert 
+            the specified rule. If the specified index is equal to the length of the style sheet's rule collection, 
+            the rule will be added to the end of the style sheet.</param>
             <returns>The index within the style sheet's rule collection of the newly inserted rule.</returns>
-            <exception cref="T:SharpVectors.Dom.DomException">HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index e.g. if an @import rule is inserted after a standard rule set or other at-rule.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at the specified index 
+            e.g. if an <c>@import</c> rule is inserted after a standard rule set or other at-rule.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the style sheet's rule list.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this style sheet is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>SYNTAX_ERR:</c> Raised if the specified rule has a syntax error and is unparsable.
+            </exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleSheet.CssRules">
             <summary>
@@ -692,44 +774,64 @@
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssStyleSheet.OwnerRule">
             <summary>
-            If this style sheet comes from an @import rule, the ownerRule attribute will contain the CSSImportRule. In that case, the ownerNode attribute in the StyleSheet interface will be null. If the style sheet comes from an element or a processing instruction, the ownerRule attribute will be null and the ownerNode attribute will contain the Node.
+            If this style sheet comes from an <c>@import</c> rule, the ownerRule attribute will 
+            contain the <see cref="T:SharpVectors.Dom.Css.ICssImportRule"/>. 
             </summary>
+            <remarks>
+            In that case, the <see cref="!:OwnerNode"/> attribute in the <see cref="T:SharpVectors.Dom.Stylesheets.IStyleSheet"/> interface 
+            will be <see langword="null"/>. If the style sheet comes from an element or a processing instruction, 
+            the <c>OwnerRule</c> attribute will be <see langword="null"/> and the <see cref="!:OwnerNode"/> 
+            attribute will contain the node.
+            </remarks>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssUnknownRule">
             <summary>
-            The CSSUnknownRule interface represents an at-rule not supported by this user agent. 
+            The <c>ICssUnknownRule</c> interface represents an at-rule not supported by this user agent. 
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssValue">
             <summary>
+            The <c>ICssValue</c> interface represents the current computed value of a CSS property.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssValue.CssText">
             <summary>
             A string representation of the current value.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error (according to the attached property) or is unparsable</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">INVALID_MODIFICATION_ERR: Raised if the specified CSS string value represents a different type of values than the values allowed by the CSS property.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this value is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error 
+            (according to the attached property) or is unparsable.
+            </exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>INVALID_MODIFICATION_ERR:</c> Raised if the specified CSS string value represents a 
+            different type of values than the values allowed by the CSS property.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this value is readonly.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssValue.CssValueType">
             <summary>
-            A code defining the type of the value as defined above
+            An enumeration code defining the type of the value.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.ICssValue.IsAbsolute">
+            <summary>
+            Gets a value specifiying whether this CSS value an absolute or variable.
+            <para>This is an implementation extension, not part of the CSS specification.</para>
             </summary>
         </member>
         <member name="T:SharpVectors.Dom.Css.ICssValueList">
             <summary>
-            The CSSValueList interface provides the abstraction of an ordered collection of CSS values.
+            The <c>ICssValueList</c> interface provides the abstraction of an ordered collection of CSS values.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssValueList.Length">
             <summary>
-            The number of CSSValues in the list. The range of valid values of the indices is 0 to length-1 inclusive.
+            The number of CSS Values in the list. The range of valid values of the indices is 0 to length-1 inclusive.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Css.ICssValueList.Item(System.UInt64)">
             <summary>
-            Used to retrieve a CSSValue by ordinal index. The order in this collection represents the 
+            Used to retrieve a <see cref="T:SharpVectors.Dom.Css.ICssValue"/> by ordinal index. The order in this collection represents the 
             order of the values in the CSS style property. If index is greater than or equal to the number 
             of values in the list, this returns null.
             </summary>
@@ -760,17 +862,17 @@
         </member>
         <member name="T:SharpVectors.Dom.Css.IDomImplementationCss">
             <summary>
-            This interface allows the DOM user to create a CSSStyleSheet outside the context of a document. 
-            There is no way to associate the new CSSStyleSheet with a document in DOM Level 2. 
+            This interface allows the DOM user to create a <see cref="T:SharpVectors.Dom.Css.ICssStyleSheet"/> outside the context of a document. 
+            There is no way to associate the new <see cref="T:SharpVectors.Dom.Css.ICssStyleSheet"/> with a document in DOM Level 2. 
             </summary>
             <remarks>
-            This interface should inherit from IDomImplementation but System.Xml does not have 
+            This interface should inherit from <see cref="T:SharpVectors.Dom.IDomImplementation"/> but System.Xml does not have 
             this interface, just a class. You can not inherit from a class in an interface.
             </remarks>	
         </member>
         <member name="M:SharpVectors.Dom.Css.IDomImplementationCss.CreateCssStyleSheet(System.String,System.String)">
             <summary>
-            Creates a new CSSStyleSheet.
+            Creates a new <see cref="T:SharpVectors.Dom.Css.ICssStyleSheet"/>.
             </summary>
             <param name="title">The advisory title. See also the Style Sheet Interfaces section.</param>
             <param name="media">The comma-separated list of media associated with the new style sheet. 
@@ -784,7 +886,7 @@
             <remarks>
             This represents the contents of the STYLE attribute for HTML elements (or elements in other 
             schemas or DTDs which use the STYLE attribute in the same way). The expectation is that an 
-            instance of the ElementCSSInlineStyle interface can be obtained by using binding-specific casting 
+            instance of the <see cref="T:SharpVectors.Dom.Css.IElementCssInlineStyle"/> interface can be obtained by using binding-specific casting 
             methods on an instance of the Element interface when the element supports inline CSS style informations. 
             </remarks>
         </member>
@@ -825,37 +927,27 @@
             </summary>
             <remarks>
             <para>
-            Users register their event listener on an
-            <see cref="T:SharpVectors.Dom.Events.IEventTarget">IEventTarget</see>. The users should also
-            remove their <see cref="T:SharpVectors.Dom.Events.EventListener">EventListener</see> from its
-            <see cref="T:SharpVectors.Dom.Events.IEventTarget">IEventTarget</see> after they have completed
-            using the listener.
+            Users register their event listener on an <see cref="T:SharpVectors.Dom.Events.IEventTarget">IEventTarget</see>. The users should also
+            remove their <see cref="T:SharpVectors.Dom.Events.EventListener">EventListener</see> from its <see cref="T:SharpVectors.Dom.Events.IEventTarget">IEventTarget</see> 
+            after they have completed using the listener.
             </para>
             <para>
-            Copying a <see cref="T:SharpVectors.Dom.INode">INode</see> does not copy the event
-            listeners attached to it. Event listeners must be attached to the
-            newly created <see cref="T:SharpVectors.Dom.INode">INode</see> afterwards if so desired.
-            Therefore, <see cref="T:SharpVectors.Dom.INode">INode</see>s are copied using
-            <see cref="!:INode.CloneNode">INode.CloneNode</see> or
-            <see cref="!:IRange.CloneContents">IRange.CloneContents</see>, the
-            <see cref="T:SharpVectors.Dom.Events.EventListener">EventListener</see>s attached to the
-            source <see cref="T:SharpVectors.Dom.INode">INode</see>s are not attached to their copies.
+            Copying a <see cref="T:SharpVectors.Dom.INode">INode</see> does not copy the event listeners attached to it. Event listeners 
+            must be attached to the newly created <see cref="T:SharpVectors.Dom.INode">INode</see> afterwards if so desired.
+            Therefore, <see cref="T:SharpVectors.Dom.INode">INode</see>s are copied using <see cref="M:SharpVectors.Dom.IXmlNode.CloneNode(System.Boolean)">INode.CloneNode</see> or
+            <see cref="!:IRange.CloneContents">IRange.CloneContents</see>, the <see cref="T:SharpVectors.Dom.Events.EventListener">EventListener</see>s 
+            attached to the source <see cref="T:SharpVectors.Dom.INode">INode</see>s are not attached to their copies.
             </para>
             <para>
-            Moving a <see cref="T:SharpVectors.Dom.INode">INode</see> does not affect the event
-            listeners attached to it. Therefore, when
-            <see cref="T:SharpVectors.Dom.INode">INode</see>s are moved using
-            <see cref="!:IDocument.AdoptNode">IDocument.AdoptNode</see>,
-            <see cref="!:INode.AppendChild">INode.AppendChild</see>, or
-            <see cref="!:IRange.ExtractContents">IRange.ExtractContents</see>, the
-            <see cref="T:SharpVectors.Dom.Events.EventListener">EventListener</see>s attached to the
-            moved <see cref="T:SharpVectors.Dom.INode">INode</see>s stay attached to them.
+            Moving a <see cref="T:SharpVectors.Dom.INode">INode</see> does not affect the event listeners attached to it. Therefore, when
+            <see cref="T:SharpVectors.Dom.INode">INode</see>s are moved using <see cref="!:IDocument.AdoptNode">IDocument.AdoptNode</see>,
+            <see cref="M:SharpVectors.Dom.IXmlNode.AppendChild(System.Xml.XmlNode)">INode.AppendChild</see>, or <see cref="!:IRange.ExtractContents">IRange.ExtractContents</see>, the
+            <see cref="T:SharpVectors.Dom.Events.EventListener">EventListener</see>s attached to the moved <see cref="T:SharpVectors.Dom.INode">INode</see>s stay attached to them.
             </para>
             </remarks>
             <paramref name="e">
             The <see cref="T:SharpVectors.Dom.Events.IEvent">IEvent</see> contains contextual information
-            about the
-            <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event">event</see>.
+            about the <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event">event</see>.
             </paramref>
         </member>
         <member name="T:SharpVectors.Dom.Events.EventException">
@@ -1408,7 +1500,7 @@
             This method allows the registration of an event listener in the
             default group and, depending on the <c>useCapture</c> parameter,
             on the capture phase of the DOM event flow or its target and
-            bubbling phases. <see cref="!: http://www.w3.org/TR/SVG/interact.html#SVGEvents"/>
+            bubbling phases. <see href="https://www.w3.org/TR/SVG/interact.html#SVGEvents"/>
             </summary>
             <param name="type">
             Specifies the <see cref="P:SharpVectors.Dom.Events.IEvent.Type">IEvent.Type</see> associated
@@ -1423,11 +1515,11 @@
             <param name="useCapture">
             If <c>true</c>, <c>useCapture</c> indicates that the user wishes
             to add the event listener for the
-            <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-capture-phase">capture phase</see>
+            <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-capture-phase">capture phase</see>
             only, i.e. this event listener will not be triggered during the
-            <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-target-phase">target</see>
+            <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-target-phase">target</see>
             and
-            <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-bubbling-phase">bubbling phases</see>.
+            <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-bubbling-phase">bubbling phases</see>.
             If <c>false</c>, the event listener will only be triggered during the target and bubbling phases.
             </param>
         </member>
@@ -1467,7 +1559,7 @@
             </summary>
             <remarks>
             The
-            <see href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event-target">event target</see>
+            <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event-target">event target</see>
             of the event is the <see cref="T:SharpVectors.Dom.Events.IEventTarget">IEventTarget</see>
             object on which <see cref="M:SharpVectors.Dom.Events.IEventTarget.DispatchEvent(SharpVectors.Dom.Events.IEvent)">DispatchEvent</see>
             is called.
@@ -2350,7 +2442,7 @@
             </summary>
             <param name="namespaceUri">
             Specifies the
-            <see cref="!:http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</see>
+            <see href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</see>
             associated with this event, or <c>null</c> if the application
             wish to have no namespace.
             </param>
@@ -2665,13 +2757,52 @@
         </member>
         <member name="T:SharpVectors.Dom.ICharacterData">
             <summary>
-            Summary description for ICharacterData.
+            Provides text manipulation methods that are used by several classes.
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.ICharacterData.Data">
+            <summary>Contains the data of the node.</summary>
+            <value>The data of the node.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.ICharacterData.Length">
+            <summary>Gets the length of the data, in characters.</summary>
+            <value>The length, in characters, of the string in the <see cref="P:SharpVectors.Dom.ICharacterData.Data"/>
+            property. The length may be zero; that is, <see cref="T:SharpVectors.Dom.ICharacterData"/> nodes can be empty.</value>
+        </member>
+        <member name="M:SharpVectors.Dom.ICharacterData.AppendData(System.String)">
+            <summary>Appends the specified string to the end of the character data of the node.</summary>
+            <param name="strData">The string to insert into the existing string.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.ICharacterData.DeleteData(System.Int32,System.Int32)">
+            <summary>Removes a range of characters from the node.</summary>
+            <param name="offset">The position within the string to start deleting.</param>
+            <param name="count">The number of characters to delete.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.ICharacterData.InsertData(System.Int32,System.String)">
+            <summary>Inserts the specified string at the specified character offset.</summary>
+            <param name="offset">The position within the string to insert the supplied string data.</param>
+            <param name="strData">The string data that is to be inserted into the existing string.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SharpVectors.Dom.ICharacterData.ReplaceData(System.Int32,System.Int32,System.String)" -->
+        <member name="M:SharpVectors.Dom.ICharacterData.Substring(System.Int32,System.Int32)">
+            <summary>Retrieves a substring of the full string from the specified range.</summary>
+            <param name="offset">
+            The position within the string to start retrieving. An offset of zero indicates
+            the starting point is at the start of the data.
+            </param>
+            <param name="count">The number of characters to retrieve.</param>
+            <returns>The substring corresponding to the specified range.</returns>
         </member>
         <member name="T:SharpVectors.Dom.IComment">
             <summary>
             Summary description for IComment.
             </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.IDocument">
+            <summary>
+            
+            </summary>
+            <see cref="T:System.Xml.XmlDocument"/>
         </member>
         <member name="T:SharpVectors.Dom.IDocumentFragment">
             <summary>
@@ -2680,28 +2811,194 @@
         </member>
         <member name="T:SharpVectors.Dom.IDocumentType">
             <summary>
-            Summary description for IDocumentType.
+            This represents the document type declaration.
             </summary>
+            <seealso cref="T:System.Xml.XmlDocumentType"/>
+        </member>
+        <member name="P:SharpVectors.Dom.IDocumentType.Entities">
+            <summary>
+            Gets the collection of <see cref="T:System.Xml.XmlEntity"/> nodes declared in the document type declaration.
+            </summary>
+            <value>
+            An <see cref="T:System.Xml.XmlNamedNodeMap"/> containing the <see cref="T:System.Xml.XmlEntity"/> nodes. 
+            The returned <see cref="T:System.Xml.XmlNamedNodeMap"/> is read-only.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IDocumentType.Notations">
+            <summary>
+             Gets the collection of <see cref="T:System.Xml.XmlNotation"/> nodes present in the document type declaration.
+            </summary>
+            <value>
+             An <see cref="T:System.Xml.XmlNamedNodeMap"/> containing the <see cref="T:System.Xml.XmlNotation"/> nodes. The returned
+             <see cref="T:System.Xml.XmlNamedNodeMap"/> is read-only.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IDocumentType.PublicId">
+            <summary>
+             Gets the value of the public identifier on the <c>DOCTYPE</c> declaration.
+            </summary>
+            <value>
+             The public identifier on the <c>DOCTYPE</c>. If there is no public identifier, <see langword="null"/>
+             is returned.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IDocumentType.SystemId">
+            <summary>
+             Gets the value of the system identifier on the <c>DOCTYPE</c> declaration.
+            </summary>
+            <value>
+             The system identifier on the <c>DOCTYPE</c>. If there is no system identifier, <see langword="null"/>
+             is returned.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IDocumentType.InternalSubset">
+            <summary>
+             Gets the value of the document type definition (DTD) internal subset on the <c>DOCTYPE</c> declaration.
+            </summary>
+            <value>
+             The DTD internal subset on the <c>DOCTYPE</c>. If there is no DTD internal subset, <see cref="!:String.Empty"/>
+             is returned.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.IDomConfiguration">
             <summary>
-            Summary description for IDomConfiguration.
+            The <see cref="T:SharpVectors.Dom.IDomConfiguration"/> interface represents the configuration of a document 
+            and maintains a table of recognized parameters.
             </summary>
+            <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/DOMConfiguration">DOMConfiguration</seealso>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomConfiguration.CanSetParameter(System.String,System.Object)">
+            <summary>
+            Check if setting a parameter to a specific value is supported.
+            </summary>
+            <param name="name">The name of the parameter to check.</param>
+            <param name="value">An object. If <see langword="null"/>, the returned value is <see langword="true"/>.</param>
+            <returns>Returns <see langword="true"/> if the parameter could be successfully set to the specified value, 
+            or <see langword="false"/> if the parameter is not recognized or the requested value is not supported. 
+            This does not change the current value of the parameter itself.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomConfiguration.GetParameter(System.String)">
+            <summary>
+            Gets the value of the known parameter with the specified name.
+            </summary>
+            <param name="name">The name of the parameter.</param>
+            <returns>The current object associated with the specified parameter or <see langword="null"/> if no object 
+            has been associated or if the parameter is not supported.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomConfiguration.SetParameter(System.String,System.Object)">
+            <summary>
+            Sets the name and the value of a parameter. If the name is already set, the value is changed.
+            </summary>
+            <param name="name">The name of the parameter to set.</param>
+            <param name="value">The value or <see langword="null"/> to unset the parameter.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomConfiguration.GetParameterNames">
+            <summary>
+            The list of the parameters supported by this <see cref="T:SharpVectors.Dom.IDomConfiguration"/> object.
+            </summary>
+            <returns>A collection specifying the names of the parameters.</returns>
         </member>
         <member name="T:SharpVectors.Dom.IDomImplementation">
             <summary>
-            Summary description for IDomImplementation.
+            The <see cref="T:SharpVectors.Dom.IDomImplementation"/> interface provides a number of methods for performing operations 
+            that are independent of any particular instance of the document object model.
             </summary>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomImplementation.HasFeature(System.String,System.String)">
+            <summary>
+            Test if the DOM implementation implements a specific feature. </summary>
+            <param name="feature"> name of the feature to test (case-insensitive). The values used by DOM features 
+            are defined throughout the DOM Level 2 specifications and listed in the  section. The name must be an XML
+            name. To avoid possible conflicts, as a convention, names referring to features defined outside the DOM 
+            specification should be made unique by reversing the name of the Internet domain name of the person 
+            (or the organization that the person belongs to) who defines the feature, component by component, and using 
+            this as a prefix. For instance, the W3C SVG Working Group defines the feature "org.w3c.dom.svg".
+            </param>
+            <param name="version"> is the version number of the feature to test. In Level 2, the string can be 
+            either "2.0" or "1.0". If the version is not specified, supporting any version of the feature causes 
+            the method to return <see langword="true"/>. </param>
+            <returns> <see langword="true"/> if the feature is implemented in the specified version, 
+            <see langword="false"/> otherwise. </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomImplementation.CreateDocumentType(System.String,System.String,System.String)">
+            <summary>
+            Creates an empty <see cref="T:SharpVectors.Dom.IDocumentType"/> node. Entity declarations and notations are not made available. 
+            </summary>
+            <remarks>
+            Entity reference expansions and default attribute additions do not occur. It is expected that a 
+            future version of the DOM will provide a way for populating a <see cref="T:SharpVectors.Dom.IDocumentType"/>.
+            HTML-only DOM implementations do not need to implement this method. 
+            </remarks>
+            <param name="qualifiedName"> qualified name of the document type to be created. </param>
+            <param name="publicId"> external subset public identifier. </param>
+            <param name="systemId"> external subset system identifier. </param>
+            <returns> A new <see cref="T:SharpVectors.Dom.IDocumentType"/> node with <see cref="!:INode.OwnerDocument"/> 
+            set to <see langword="null"/>. </returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            INVALID_CHARACTER_ERR: Raised if the specified qualified name contains an illegal character.
+            <para>
+            NAMESPACE_ERR: Raised if the <paramref name="qualifiedName"/> is malformed.
+            </para>
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Dom.IDomImplementation.CreateDocument(System.String,System.String,SharpVectors.Dom.IDocumentType)">
+            <summary>
+            Creates an XML <see cref="T:SharpVectors.Dom.IDocument"/> object of the specified type with 
+            its document element. HTML-only DOM implementations do not need to 
+            implement this method. 
+            </summary>
+            <param name="namespaceURI"> namespace URI of the document element to create. </param>
+            <param name="qualifiedName"> qualified name of the document element to be created. </param>
+            <param name="doctype"> type of document to be created or <see langword="null"/>. 
+            When <paramref name="doctype"/> is not <see langword="null"/>, its <see cref="!:INode.OwnerDocument"/> 
+            attribute is set to the document being created.
+            </param>
+            <returns> A new <see cref="T:SharpVectors.Dom.IDocument"/> object. </returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <para>INVALID_CHARACTER_ERR: Raised if the specified qualified name contains an illegal character.
+            </para>
+            <para>NAMESPACE_ERR: Raised if the <paramref name="qualifiedName"/> is malformed, 
+            if the <paramref name="qualifiedName"/> has a prefix and the <paramref name="namespaceURI"/> 
+            is <see langword="null"/>, or if the <paramref name="qualifiedName"/> has a prefix that is "xml" and the
+            <paramref name="namespaceURI"/> is different from <see href="https://www.w3.org/XML/1998/namespace"/>.
+            </para>
+            WRONG_DOCUMENT_ERR: Raised if <paramref name="doctype"/> has already been used with a different 
+            document or was created from a different implementation.
+            </exception>
         </member>
         <member name="T:SharpVectors.Dom.IDomTimeStamp">
             <summary>
-            The <c>DOMTimeStamp</c> type represents an absolute or relative number of milliseconds, depending on the specification in which it appears.
+            The <c>DOMTimeStamp</c> type represents an absolute or relative number of milliseconds, 
+            depending on the specification in which it appears.
             </summary>
             <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTimeStamp"/>
         </member>
         <member name="T:SharpVectors.Dom.IElement">
             <summary>
-            Summary description for IElement.
+            The <see cref="T:SharpVectors.Dom.IElement"/> interface represents an element in an HTML or XML document. 
+            </summary>
+            <remarks>
+            Elements may have attributes associated with them; since the <see cref="T:SharpVectors.Dom.IElement"/> interface inherits 
+            from <see cref="T:SharpVectors.Dom.INode"/>, the generic <see cref="T:SharpVectors.Dom.INode"/> interface attribute <see cref="T:SharpVectors.Dom.IAttribute"/> may 
+            be used to retrieve the set of all attributes for an element. There are 
+            methods on the <see cref="T:SharpVectors.Dom.IElement"/> interface to retrieve either an 
+            <see cref="T:SharpVectors.Dom.IAttribute"/> object by name or an attribute value by name. In XML, 
+            where an attribute value may contain entity references, an 
+            <see cref="T:SharpVectors.Dom.IAttribute"/> object should be retrieved to examine the possibly 
+            fairly complex sub-tree representing the attribute value. On the other 
+            hand, in HTML, where all attributes have simple string values, methods to 
+            directly access an attribute value can safely be used as a convenience.In 
+            DOM Level 2, the method <see cref="!:INode.Normalize"/> is inherited from the 
+            <see cref="T:SharpVectors.Dom.INode"/> interface where it was moved.
+            </remarks>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="T:SharpVectors.Dom.IElementTimeControl">
+            <summary>
+            An <c>SMIL</c> animation interface to supports several methods for controlling the behavior of animation.
             </summary>
         </member>
         <member name="M:SharpVectors.Dom.IElementTimeControl.BeginElement">
@@ -2740,36 +3037,828 @@
             The offset from the current document time, in seconds, at which to end the element.
             </param>
         </member>
-        <member name="T:SharpVectors.Dom.IElementVisitor">
+        <!-- Badly formed XML comment ignored for member "T:SharpVectors.Dom.IEntity" -->
+        <member name="P:SharpVectors.Dom.IEntity.PublicId">
             <summary>
-            Visitor that visits all renderable elements
+            Gets the public identifier associated with the entity, if specified. If the 
+            public identifier was not specified, this is <see langword="null"/>.
             </summary>
+            <value>
+            The public identifier on the entity. If there is no public identifier, <see langword="null"/> is returned.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IEntity.SystemId">
+            <summary>
+            Gets the value of system identifier associated with the entity declaration, if specified. If the 
+            system identifier was not specified, this is <see langword="null"/>.
+            </summary>
+            <value>
+            The system identifier on the entity. If there is no system identifier, <see langword="null"/> is
+            returned.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IEntity.NotationName">
+            <summary>
+            <para>Gets the name of the optional NDATA attribute on the entity declaration.</para>
+            For unparsed entities, the name of the notation for the entity. For 
+            parsed entities, this is <see langword="null"/>. 
+            </summary>
+            <value>
+            The name of the NDATA attribute. If there is no NDATA, <see langword="null"/> is returned.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.IEntityReference">
             <summary>
-            Summary description for IEntityReference.
+            <see cref="T:SharpVectors.Dom.IEntityReference"/> objects may be inserted into the structure model when an entity reference 
+            is in the source document, or when the user wishes to insert an entity reference. 
             </summary>
+            <remarks>
+            <para>
+            Note that character references and references to predefined entities are considered to be expanded by 
+            the HTML or XML processor so that characters are represented by their Unicode equivalent rather than 
+            by an entity reference. Moreover, the XML processor may completely expand references to entities while 
+            building the structure model, instead of providing <see cref="T:SharpVectors.Dom.IEntityReference"/> objects. 
+            </para>
+            <para>
+            If it does provide such objects, then for a given <see cref="T:SharpVectors.Dom.IEntityReference"/> node, it may be that there is no 
+            <see cref="T:SharpVectors.Dom.IEntity"/> node representing the referenced entity. If such an <see cref="T:SharpVectors.Dom.IEntity"/> exists, then 
+            the subtree of the <see cref="T:SharpVectors.Dom.IEntityReference"/> node is in general a copy of the <see cref="T:SharpVectors.Dom.IEntity"/> node subtree. 
+            </para>
+            However, this may not be true when an entity contains an unbound namespace prefix. In such a case, because the 
+            namespace prefix resolution depends on where the entity reference is, the descendants of the 
+            <see cref="T:SharpVectors.Dom.IEntityReference"/> node may be bound to different namespace URIs.
+            <para>As for <see cref="T:SharpVectors.Dom.IEntity"/> nodes, <see cref="T:SharpVectors.Dom.IEntityReference"/> nodes and 
+            all their descendants are readonly.
+            </para>
+            </remarks>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="T:SharpVectors.Dom.INamedNodeMap">
+            <summary>
+            Represents a collection of nodes that can be accessed by name or index.
+            <para>
+            Objects implementing the <see cref="T:SharpVectors.Dom.INamedNodeMap"/> interface are used to represent collections of nodes 
+            that can be accessed by name. 
+            </para>
+            </summary>
+            <remarks>
+            <para>
+            Note that <see cref="T:SharpVectors.Dom.INamedNodeMap"/> does not inherit from <see cref="T:SharpVectors.Dom.INodeList"/>; <see cref="T:SharpVectors.Dom.INamedNodeMap"/>s 
+            are not maintained in any particular order. Objects contained in an object implementing <see cref="T:SharpVectors.Dom.INamedNodeMap"/> 
+            may also be accessed by an ordinal index, but this is simply to allow convenient enumeration of the contents 
+            of a <see cref="T:SharpVectors.Dom.INamedNodeMap"/>, and does not imply that the DOM specifies an order to these Nodes. 
+            </para>
+            <para><see cref="T:SharpVectors.Dom.INamedNodeMap"/> objects in the DOM are live.</para>
+            </remarks>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+            <seealso cref="T:System.Xml.XmlAttributeCollection"/>
+        </member>
+        <member name="P:SharpVectors.Dom.INamedNodeMap.Count">
+            <summary>
+            Gets the number of nodes in the <see cref="T:SharpVectors.Dom.INamedNodeMap"/>.
+            </summary>
+            <value>The number of nodes.</value>
+        </member>
+        <member name="M:SharpVectors.Dom.INamedNodeMap.GetNamedItem(System.String)">
+            <summary>
+            Retrieves an <see cref="T:System.Xml.XmlNode"/> specified by name.
+            </summary>
+            <param name="name">
+            The qualified name of the node to retrieve. It is matched against the <see cref="P:System.Xml.XmlNode.Name"/>
+            property of the matching node.
+            </param>
+            <returns>An <see cref="T:System.Xml.XmlNode"/> with the specified name or <see langword="null"/> if a matching node is not found.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.INamedNodeMap.GetNamedItem(System.String,System.String)">
+            <summary>
+            Retrieves a node with the matching <see cref="P:System.Xml.XmlNode.LocalName"/> and <see cref="P:System.Xml.XmlNode.NamespaceURI"/>.
+            </summary>
+            <param name="localName">The local name of the node to retrieve.</param>
+            <param name="namespaceURI">The namespace Uniform Resource Identifier (URI) of the node to retrieve.</param>
+            <returns>
+            An <see cref="T:System.Xml.XmlNode"/> with the matching local name and namespace URI or <see langword="null"/>
+            if a matching node was not found.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.INamedNodeMap.Item(System.Int32)">
+            <summary>
+            Retrieves the node at the specified index in the <see cref="T:SharpVectors.Dom.INamedNodeMap"/>.
+            </summary>
+            <param name="index">
+            The index position of the node to retrieve from the <see cref="T:SharpVectors.Dom.INamedNodeMap"/>. The index
+            is zero-based; therefore, the index of the first node is 0 and the index of the
+            last node is <see cref="P:SharpVectors.Dom.INamedNodeMap.Count"/> -1.
+            </param>
+            <returns>
+            The <see cref="T:System.Xml.XmlNode"/> at the specified index. If index is less than 0 or greater
+            than or equal to the <see cref="P:SharpVectors.Dom.INamedNodeMap.Count"/> property, <see langword="null"/> is returned.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.INamedNodeMap.RemoveNamedItem(System.String)">
+            <summary>
+            Removes the node from the <see cref="T:SharpVectors.Dom.INamedNodeMap"/>.
+            </summary>
+            <param name="name">
+            The qualified name of the node to remove. The name is matched against the <see cref="P:System.Xml.XmlNode.Name"/>
+            property of the matching node.
+            </param>
+            <returns>The <see cref="T:System.Xml.XmlNode"/> removed from this <see cref="T:SharpVectors.Dom.INamedNodeMap"/> 
+            or <see langword="null"/> if a matching node was not found.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.INamedNodeMap.RemoveNamedItem(System.String,System.String)">
+            <summary>
+            Removes a node with the matching <see cref="P:System.Xml.XmlNode.LocalName"/> and <see cref="P:System.Xml.XmlNode.NamespaceURI"/>.
+            </summary>
+            <param name="localName">The local name of the node to remove.</param>
+            <param name="namespaceURI">The namespace URI of the node to remove.</param>
+            <returns>The <see cref="T:System.Xml.XmlNode"/> removed or <see langword="null"/> if a matching node was not found.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.INamedNodeMap.SetNamedItem(System.Xml.XmlNode)">
+            <summary>
+            Adds an <see cref="T:System.Xml.XmlNode"/> using its <see cref="P:System.Xml.XmlNode.Name"/> property
+            </summary>
+            <param name="node">An <see cref="T:System.Xml.XmlNode"/> to store in the <see cref="T:SharpVectors.Dom.INamedNodeMap"/>. If a node with that name is already
+            present in the map, it is replaced by the new one.</param>
+            <returns>
+            If the node replaces an existing node with the same name, the old node is returned;
+            otherwise, <see langword="null"/> is returned.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The node was created from a different <see cref="T:System.Xml.XmlDocument"/> than the one that
+            created the <see cref="T:SharpVectors.Dom.INamedNodeMap"/>; or the <see cref="T:SharpVectors.Dom.INamedNodeMap"/> is read-only.
+            </exception>
         </member>
         <member name="T:SharpVectors.Dom.INode">
             <summary>
-            Summary description for INode.
+            The <see cref="T:SharpVectors.Dom.INode"/> interface is the primary datatype for the entire Document Object Model. 
+            It represents a single node in the document tree. 
             </summary>
+            <remarks>
+            While all objects implementing the <see cref="T:SharpVectors.Dom.INode"/> interface expose methods for dealing with children, 
+            not all objects implementing the <see cref="T:SharpVectors.Dom.INode"/> interface may have children. For example, <see cref="T:SharpVectors.Dom.IText"/> 
+            nodes may not have children, and adding children to such nodes results in a <see cref="T:SharpVectors.Dom.DomException"/> being raised.
+            <para>The attributes <see cref="!:NodeName"/>, <see cref="!:NodeValue"/> and <see cref="!:Attributes"/> are included 
+            as a mechanism to get at node information without casting down to the specific derived interface. 
+            In cases where there is no obvious mapping of these attributes for a specific <see cref="!:NodeType"/> 
+            (e.g., <see cref="!:NodeValue"/> for an <see cref="T:SharpVectors.Dom.IElement"/> or <see cref="!:Attributes"/> for a <see cref="T:SharpVectors.Dom.IComment"/>), 
+            this returns <see langword="null"/>. Note that the specialized interfaces may contain additional and more 
+            convenient mechanisms to get and set the relevant information.
+            </para>
+            </remarks>
+            <seealso href="https://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
         </member>
         <member name="T:SharpVectors.Dom.INodeList">
             <summary>
-            Summary description for INodeList.
+            The <see cref="T:SharpVectors.Dom.INodeList"/> interface provides the abstraction of an ordered 
+            collection of nodes, without defining or constraining how this collection 
+            is implemented. <see cref="T:SharpVectors.Dom.INodeList"/> objects in the DOM are live.
+            <para>The items in the <see cref="T:SharpVectors.Dom.INodeList"/> are accessible via an integral 
+            index, starting from <c>0</c>.
+            </para>
             </summary>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="P:SharpVectors.Dom.INodeList.Item(System.UInt64)">
+            <summary>
+            Gets the <paramref name="index"/>th item in the collection. If <paramref name="index"/> is greater 
+            than or equal to the number of nodes in the list, this returns <see langword="null"/>. 
+            </summary>
+            <param name="index"> into the collection. </param>
+            <returns> The node at the <paramref name="index"/>th position in the 
+            <see cref="T:SharpVectors.Dom.INodeList"/>, or <see langword="null"/> if that is not a valid index. 
+            </returns>
+        </member>
+        <member name="P:SharpVectors.Dom.INodeList.Count">
+            <summary>
+            Gets the number of nodes in the list. The range of valid child node indices 
+            is <c>0</c> to <c><see cref="P:SharpVectors.Dom.INodeList.Count"/>-1</c> inclusive. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.INotation">
+            <summary>
+            This interface represents a notation declared in the DTD. A notation either 
+            declares, by name, the format of an unparsed entity (see section 4.7 of 
+            the XML 1.0 specification ), or is used for formal declaration of 
+            processing instruction targets (see section 2.6 of the XML 1.0 
+            specification ). The <see cref="!:INode.NodeName"/> attribute inherited from 
+            <see cref="T:SharpVectors.Dom.INode"/> is set to the declared name of the notation.
+            <para>The DOM Level 1 does not support editing <see cref="T:SharpVectors.Dom.INotation"/> nodes; 
+            they are therefore readonly.
+            </para>
+            <para>A <see cref="T:SharpVectors.Dom.INotation"/> node does not have any parent.</para>
+            </summary>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="P:SharpVectors.Dom.INotation.PublicId">
+            <summary>
+            <para>Gets the value of the public identifier on the notation declaration.</para>
+            If the public identifier was not specified, this is <see langword="null"/>.
+            </summary>
+            <value>
+            The public identifier on the notation. If there is no public identifier, <see langword="null"/>
+            is returned.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.INotation.SystemId">
+            <summary>
+            Gets the value of the system identifier on the notation declaration. If the system identifier was 
+            not specified, this is <see langword="null"/>.
+            </summary>
+            <value>
+            The system identifier on the notation. If there is no system identifier, <see langword="null"/>
+            is returned.
+            </value>
         </member>
         <member name="T:SharpVectors.Dom.IProcessingInstruction">
             <summary>
-              Represents a processing instruction, which XML defines to keep processor-specific
-              information in the text of the document.
+            Represents a processing instruction, which XML defines to keep processor-specific
+            information in the text of the document.
             </summary>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="P:SharpVectors.Dom.IProcessingInstruction.Target">
+            <summary>
+            Gets the target of the processing instruction.
+            </summary>
+            <value>The target of the processing instruction.</value>
+            <remarks>
+            The target of this processing instruction. XML defines this as being 
+            the first token following the markup that begins the processing 
+            instruction.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.IProcessingInstruction.Data">
+            <summary>
+            Gets or sets the content of the processing instruction, excluding the target.
+            </summary>
+            <value>The content of the processing instruction, excluding the target.</value>
+            <remarks>
+            </remarks>
         </member>
         <member name="T:SharpVectors.Dom.IText">
             <summary>
-            Summary description for IText.
+            Represents the text content of an element or attribute.
             </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.IText.SplitText(System.Int32)">
+            <summary>
+            Splits the node into two nodes at the specified offset, keeping both in the tree as siblings.
+            </summary>
+            <param name="offset">The offset at which to split the node.</param>
+            <returns>The new node.</returns>
+        </member>
+        <member name="T:SharpVectors.Dom.IXmlElement">
+            <summary>
+            The <see cref="T:SharpVectors.Dom.IElement"/> interface represents an element in an HTML or XML document. 
+            </summary>
+            <remarks>
+            <para>
+            Elements may have attributes associated with them; since the <see cref="T:SharpVectors.Dom.IElement"/> interface inherits 
+            from <see cref="T:SharpVectors.Dom.INode"/>, the generic <see cref="T:SharpVectors.Dom.INode"/> interface attribute <see cref="T:SharpVectors.Dom.IAttribute"/> may 
+            be used to retrieve the set of all attributes for an element. 
+            </para>
+            <para>
+            There are methods on the <see cref="T:SharpVectors.Dom.IElement"/> interface to retrieve either an <see cref="T:SharpVectors.Dom.IAttribute"/> object 
+            by name or an attribute value by name. In XML, where an attribute value may contain entity references, an 
+            <see cref="T:SharpVectors.Dom.IAttribute"/> object should be retrieved to examine the possibly fairly complex sub-tree representing 
+            the attribute value. 
+            </para>
+            <para>
+            On the other hand, in HTML, where all attributes have simple string values, methods to directly access an attribute 
+            value can safely be used as a convenience. In DOM Level 2, the method <see cref="!:INode.Normalize"/> is inherited from the 
+            <see cref="T:SharpVectors.Dom.INode"/> interface where it was moved.
+            </para>
+            </remarks>
+            <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlElement.HasAttributes">
+            <summary>
+            Gets a value indicating whether this node (if it is an element) has any attributes. 
+            </summary>
+            <value><see langword="true"/> if this node has any attributes, <see langword="false"/> otherwise.</value>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.GetAttribute(System.String)">
+            <summary>
+            Returns the value for the attribute with the specified name.
+            </summary>
+            <param name="name">The name of the attribute to retrieve. This is a qualified name. 
+            It is matched against the <see cref="!:Name"/> property of the matching node.
+            </param>
+            <returns>The value of the specified attribute. An empty string is returned if a matching
+            attribute is not found or if the attribute does not have a specified or default value.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.GetAttribute(System.String,System.String)">
+            <summary>
+            Returns the value for the attribute with the specified local name and namespace URI.
+            </summary>
+            <param name="localName">The local name of the attribute to retrieve.</param>
+            <param name="namespaceURI">The namespace URI of the attribute to retrieve.</param>
+            <returns>The value of the specified attribute. An empty string is returned if a matching
+            attribute is not found or if the attribute does not have a specified or default value.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.SetAttribute(System.String,System.String)">
+            <summary>
+            Sets the value of the attribute with the specified name.
+            </summary>
+            <param name="name">The name of the attribute to create or alter. This is a qualified name. If the
+            name contains a colon it is parsed into prefix and local name components.
+            </param>
+            <param name="value">The value to set for the attribute.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.SetAttribute(System.String,System.String,System.String)">
+            <summary>
+            Sets the value of the attribute with the specified local name and namespace URI.
+            </summary>
+            <param name="qualifiedName">The local name of the attribute.</param>
+            <param name="namespaceURI">The namespace URI of the attribute.</param>
+            <param name="value">The value to set for the attribute.</param>
+            <returns>The attribute value.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.RemoveAttribute(System.String)">
+            <summary>
+            Removes an attribute by name.
+            </summary>
+            <param name="name">The name of the attribute to remove.This is a qualified name. 
+            It is matched against the Name property of the matching node.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.RemoveAttribute(System.String,System.String)">
+            <summary>
+            Removes an attribute with the specified local name and namespace URI. (If the
+            removed attribute has a default value, it is immediately replaced).
+            </summary>
+            <param name="localName">The local name of the attribute to remove.</param>
+            <param name="namespaceURI">The namespace URI of the attribute to remove.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.GetAttributeNode(System.String)">
+            <summary>
+            Returns the <see cref="T:System.Xml.XmlAttribute"/> with the specified name.
+            </summary>
+            <param name="name">The name of the attribute to retrieve. This is a qualified name. 
+            It is matched against the Name property of the matching node.
+            </param>
+            <returns>The specified <see cref="T:System.Xml.XmlAttribute"/> or <see langword="null"/> if a matching attribute was not found.</returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.GetAttributeNode(System.String,System.String)">
+            <summary>
+            Returns the <see cref="T:System.Xml.XmlAttribute"/> with the specified local name and namespace URI.
+            </summary>
+            <param name="localName">The local name of the attribute.</param>
+            <param name="namespaceURI">The namespace URI of the attribute.</param>
+            <returns>The specified <see cref="T:System.Xml.XmlAttribute"/> or <see langword="null"/> if a matching attribute was not found.</returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.GetElementsByTagName(System.String)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XmlNodeList"/> containing a list of all descendant elements
+            that match the specified <see cref="P:System.Xml.XmlElement.Name"/>.
+            </summary>
+            <param name="name">The name tag to match. This is a qualified name. It is matched against the Name
+            property of the matching node. The asterisk (*) is a special value that matches all tags.
+            </param>
+            <returns>An <see cref="T:System.Xml.XmlNodeList"/> containing a list of all matching nodes.</returns>
+            <seealso cref="T:SharpVectors.Dom.INodeList"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.GetElementsByTagName(System.String,System.String)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XmlNodeList"/> containing a list of all descendant elements
+            that match the specified <see cref="P:System.Xml.XmlElement.LocalName"/> and <see cref="P:System.Xml.XmlElement.NamespaceURI"/>.
+            </summary>
+            <param name="localName">The local name to match. The asterisk (*) is a special value that matches all tags.</param>
+            <param name="namespaceURI">The namespace URI to match.</param>
+            <returns>An <see cref="T:System.Xml.XmlNodeList"/> containing a list of all matching nodes.</returns>
+            <seealso cref="T:SharpVectors.Dom.INodeList"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.SetAttributeNode(System.String,System.String)">
+            <summary>
+            Adds the specified <see cref="T:System.Xml.XmlAttribute"/>.
+            </summary>
+            <param name="localName">The local name of the attribute.</param>
+            <param name="namespaceURI">The namespace URI of the attribute.</param>
+            <returns>The <see cref="T:System.Xml.XmlAttribute"/> to add.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.SetAttributeNode(System.Xml.XmlAttribute)">
+            <summary>
+            Adds the specified <see cref="T:System.Xml.XmlAttribute"/>.
+            </summary>
+            <param name="newAttr">The <see cref="T:System.Xml.XmlAttribute"/> node to add to the attribute collection for this element.</param>
+            <returns>
+            If the attribute replaces an existing attribute with the same name, the old <see cref="T:System.Xml.XmlAttribute"/>
+            is returned; otherwise, <see langword="null"/> is returned.
+            </returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.RemoveAttributeNode(System.Xml.XmlAttribute)">
+            <summary>
+            Removes the specified <see cref="T:System.Xml.XmlAttribute"/>.
+            </summary>
+            <param name="oldAttr">
+            The <see cref="T:System.Xml.XmlAttribute"/> node to remove. If the removed attribute has a default value,
+            it is immediately replaced.
+            </param>
+            <returns>The removed <see cref="T:System.Xml.XmlAttribute"/> or <see langword="null"/> if <paramref name="oldAttr"/> 
+            is not an attribute node of the <see cref="T:System.Xml.XmlElement"/> .</returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.RemoveAttributeNode(System.String,System.String)">
+            <summary>
+            Removes the <see cref="T:System.Xml.XmlAttribute"/> specified by the local name and namespace
+            URI. (If the removed attribute has a default value, it is immediately replaced).
+            </summary>
+            <param name="localName">The local name of the attribute.</param>
+            <param name="namespaceURI">The namespace URI of the attribute.</param>
+            <returns>
+            The removed <see cref="T:System.Xml.XmlAttribute"/> or <see langword="null"/> if the <see cref="T:System.Xml.XmlElement"/> 
+            does not have a matching attribute node.
+            </returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.HasAttribute(System.String)">
+            <summary>
+            Determines whether the current node has an attribute with the specified name.
+            </summary>
+            <param name="name">
+            The name of the attribute to find. This is a qualified name. It is matched against
+            the Name property of the matching node.
+            </param>
+            <returns><see langword="true"/> if the current node has the specified attribute; otherwise, <see langword="false"/>.</returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlElement.HasAttribute(System.String,System.String)">
+            <summary>
+            Determines whether the current node has an attribute with the specified local
+            name and namespace URI.
+            </summary>
+            <param name="localName">The local name of the attribute to find.</param>
+            <param name="namespaceURI">The namespace URI of the attribute to find.</param>
+            <returns><see langword="true"/> if the current node has the specified attribute; otherwise, <see langword="false"/>.</returns>
+            <see cref="T:SharpVectors.Dom.IAttribute"/>
+        </member>
+        <member name="T:SharpVectors.Dom.IXmlNode">
+            <summary>
+            The <see cref="T:SharpVectors.Dom.IXmlNode"/> interface is the primary datatype for the entire Document Object Model. 
+            It represents a single node in the document tree. <see cref="T:System.Xml.XmlNode"/>
+            </summary>
+            <remarks>
+            While all objects implementing the <see cref="T:SharpVectors.Dom.INode"/> interface expose methods for dealing with children, 
+            not all objects implementing the <see cref="T:SharpVectors.Dom.INode"/> interface may have children. For example, <see cref="T:SharpVectors.Dom.IText"/> 
+            nodes may not have children, and adding children to such nodes results in a <see cref="T:SharpVectors.Dom.DomException"/> being raised.
+            <para>The attributes <see cref="P:SharpVectors.Dom.IXmlNode.Name"/>, <see cref="P:SharpVectors.Dom.IXmlNode.Value"/> and <see cref="P:SharpVectors.Dom.IXmlNode.Attributes"/> are included 
+            as a mechanism to get at node information without casting down to the specific derived interface. 
+            In cases where there is no obvious mapping of these attributes for a specific <see cref="P:SharpVectors.Dom.IXmlNode.NodeType"/> 
+            (e.g., <see cref="P:SharpVectors.Dom.IXmlNode.Value"/> for an <see cref="T:SharpVectors.Dom.IElement"/> or <see cref="P:SharpVectors.Dom.IXmlNode.Attributes"/> for a <see cref="T:SharpVectors.Dom.IComment"/>), 
+            this returns <see langword="null"/>. Note that the specialized interfaces may contain additional and more 
+            convenient mechanisms to get and set the relevant information.
+            </para>
+            </remarks>
+            <seealso href="https://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.Name">
+            <summary>
+            Gets the qualified name of the node.
+            </summary>
+            <value>
+            The qualified name of the node. The name returned is dependent on the <see cref="P:SharpVectors.Dom.IXmlNode.NodeType"/> of the node.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.Value">
+            <summary>
+            Gets or sets the value of the node.
+            </summary>
+            <value>The value returned depends on the <see cref="P:SharpVectors.Dom.IXmlNode.NodeType"/> of the node</value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.NodeType">
+            <summary>
+            Gets the type of the current node.
+            </summary>
+            <value>An enumeration of the type <see cref="T:System.Xml.XmlNodeType"/> specifying the type of this node.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.ParentNode">
+            <summary>
+            Gets the parent of this node (for nodes that can have parents).
+            </summary>
+            <value>
+            The <see cref="T:System.Xml.XmlNode"/> that is the parent of the current node. If a node has just been created
+            and not yet added to the tree, or if it has been removed from the tree, the parent
+            is <see langword="null"/>. For all other nodes, the value returned depends on the <see cref="P:SharpVectors.Dom.IXmlNode.NodeType"/>
+            of the node. 
+            </value>
+            <remarks>
+            Gets the parent of this node. All nodes, except <see cref="T:SharpVectors.Dom.IAttribute"/>, <see cref="T:SharpVectors.Dom.IDocument"/>, 
+            <see cref="T:SharpVectors.Dom.IDocumentFragment"/>, <see cref="T:SharpVectors.Dom.IEntity"/>, and <see cref="T:SharpVectors.Dom.INotation"/> may have a parent. 
+            However, if a node has just been created and not yet added to the tree, or if it has been 
+            removed from the tree, this is <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.ChildNodes">
+            <summary>
+            Gets all the child nodes of the node.
+            </summary>
+            <value>
+            An System.Xml.XmlNodeList that contains all the child nodes of the node. If there
+            are no child nodes, this property returns an empty System.Xml.XmlNodeList not <see langword="null"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.FirstChild">
+            <summary>
+            Gets the first child of this node. If there is no such node, this returns <see langword="null"/>.
+            </summary>
+            <value>The first child of the node. If there is no such node, <see langword="null"/> is returned.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.LastChild">
+            <summary>
+            Gets the last child of this node. If there is no such node, this returns <see langword="null"/>.
+            </summary>
+            <value>The last child of the node. If there is no such node, <see langword="null"/> is returned.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.PreviousSibling">
+            <summary>
+            Gets the node immediately preceding this node. If there is no such node, this returns <see langword="null"/>.
+            </summary>
+            <value>The preceding XmlNode. If there is no preceding node, null is returned.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.NextSibling">
+            <summary>
+            Gets the node immediately following this node. If there is no such node, this returns <see langword="null"/>.
+            </summary>
+            <value>The next XmlNode. If there is no next node, null is returned.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.Attributes">
+            <summary>
+            Gets a <see cref="T:SharpVectors.Dom.INamedNodeMap"/> containing the attributes of this node (if 
+            it is an <see cref="T:SharpVectors.Dom.IElement"/>) or <see langword="null"/> otherwise. 
+            <para>This implementation returns an System.Xml.XmlAttributeCollection containing the attributes of this node.</para>
+            </summary>
+            <value>
+            An XmlAttributeCollection containing the attributes of the node. If the node is
+            of type XmlNodeType.Element, the attributes of the node are returned. Otherwise,
+            this property returns null.
+            </value>
+            <seealso cref="T:SharpVectors.Dom.INamedNodeMap"/>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.OwnerDocument">
+            <summary>
+            The <see cref="T:SharpVectors.Dom.IDocument"/> object associated with this node. This is also the <see cref="T:SharpVectors.Dom.IDocument"/> 
+            object used to create new nodes. When this node is a <see cref="T:SharpVectors.Dom.IDocument"/> or a <see cref="T:SharpVectors.Dom.IDocumentType"/> 
+            which is not used with any <see cref="T:SharpVectors.Dom.IDocument"/> yet, this is <see langword="null"/>.
+            <para>This implementation returns the System.Xml.XmlDocument to which this node belongs.</para>
+            </summary>
+            <value>
+            The System.Xml.XmlDocument to which this node belongs.If the node is an System.Xml.XmlDocument
+            (NodeType equals XmlNodeType.Document), this property returns null.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.HasChildNodes">
+            <summary>
+            Gets a value indicating whether this node has any children.
+            </summary>
+            <value><see langword="true"/> if this node has any children, <see langword="false"/> otherwise. </value>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.NamespaceURI">
+            <summary>
+            
+            </summary>
+            <summary> 
+            Gets the namespace URI of this node, or <see langword="null"/> if it is unspecified.
+            </summary>
+            <value>
+            The namespace URI of this node. If there is no namespace URI, this property returns <see cref="F:System.String.Empty"/>.
+            </value>
+            <remarks>
+            <para>
+            This is not a computed value that is the result of a namespace lookup based on an examination of the 
+            namespace declarations in scope. It is merely the namespace URI given at creation time.
+            </para>
+            <para>
+            For nodes of any type other than <see cref="F:System.Xml.XmlNodeType.Element"/> and <see cref="F:System.Xml.XmlNodeType.Attribute"/> 
+            and nodes created with a DOM Level 1 method, such as <see cref="o:IDocument.CreateElement"/> from the 
+            <see cref="T:SharpVectors.Dom.IDocument"/> interface, this is always <see langword="null"/>. Per the Namespaces in XML Specification 
+            an attribute does not inherit its namespace from the element it is attached to. If an attribute is 
+            not explicitly given a namespace, it simply has no namespace.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.Prefix">
+            <summary>
+            Gets or sets the namespace prefix of this node, or <see langword="null"/> if it is unspecified.
+            </summary>
+            <value>
+            The namespace prefix of this node. For example, Prefix is <c>inkscape</c> for the element
+            <c>&lt; inkscape:label &gt;</c>. If there is no prefix, this property returns String.Empty.
+            </value>
+            <remarks>
+            <para>
+            Note that setting this attribute, when permitted, changes the <see cref="!:NodeName"/> attribute, which holds 
+            the qualified name, as well as the <see cref="!:IElement.TagName"/> and <see cref="!:IAttribute.Name"/> attributes of 
+            the <see cref="T:SharpVectors.Dom.IElement"/> and <see cref="T:SharpVectors.Dom.IAttribute"/> interfaces, when applicable.
+            </para>
+            <para>
+            Note also that changing the prefix of an attribute that is known to have a default value, does not make a new 
+            attribute with the default value and the original prefix appear, since the <see cref="P:SharpVectors.Dom.IXmlNode.NamespaceURI"/> and 
+            <see cref="P:SharpVectors.Dom.IXmlNode.LocalName"/> do not change.
+            </para>
+            <para>
+            For nodes of any type other than <see cref="F:System.Xml.XmlNodeType.Element"/> and <see cref="F:System.Xml.XmlNodeType.Attribute"/> and 
+            nodes created with a DOM Level 1 method, such as <see cref="0:IDocument.CreateElement"/> from the 
+            <see cref="T:SharpVectors.Dom.IDocument"/> interface, this is always <see langword="null"/>. 
+            </para>
+            </remarks>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <para>
+            INVALID_CHARACTER_ERR: Raised if the specified prefix contains an illegal character.
+            </para>
+            <para>
+            NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+            </para>
+            <para>
+            NAMESPACE_ERR: Raised if the specified <see cref="P:SharpVectors.Dom.IXmlNode.Prefix"/> is malformed, if the <see cref="P:SharpVectors.Dom.IXmlNode.NamespaceURI"/> of 
+            this node is <see langword="null"/>, if the specified prefix is "xml" and the <see cref="P:SharpVectors.Dom.IXmlNode.NamespaceURI"/> of this 
+            node is different from <see href="https://www.w3.org/XML/1998/namespace"/>, if this node is an attribute and the 
+            specified prefix is <c>xmlns</c> and the <see cref="P:SharpVectors.Dom.IXmlNode.NamespaceURI"/> of this node is different from 
+            <see href="https://www.w3.org/2000/xmlns/"/>, or if this node is an attribute and the <c>QualifiedName</c> of 
+            this node is <c>xmlns</c>.
+            </para>
+            </exception>
+        </member>
+        <member name="P:SharpVectors.Dom.IXmlNode.LocalName">
+            <summary>
+            Gets the local part of the qualified name of this node.
+            </summary>
+            <value>
+            The name of the node with the prefix removed. For example, <see cref="P:SharpVectors.Dom.IXmlNode.LocalName"/> is <c>label</c>
+            for the element <c>&lt; inkscape:label &gt;</c>.The name returned is dependent on the System.Xml.XmlNode.NodeType
+            of the node.
+            </value>
+            <remarks>
+            For nodes of any type other than <see cref="F:System.Xml.XmlNodeType.Element"/> and <see cref="F:System.Xml.XmlNodeType.Attribute"/> and 
+            nodes created with a DOM Level 1 method, such as <see cref="o:IDocument.CreateElement"/> from the 
+            <see cref="T:SharpVectors.Dom.IDocument"/> interface, this is always <see langword="null"/>.
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.InsertBefore(System.Xml.XmlNode,System.Xml.XmlNode)">
+            <summary>
+            Inserts the node <paramref name="newChild"/> before the existing child node <paramref name="refChild"/>. 
+            </summary>
+            <remarks>
+            If <paramref name="refChild"/> is <see langword="null"/>, insert <paramref name="newChild"/> at the end 
+            of the list of children.
+            <para>
+            If <paramref name="newChild"/> is a <see cref="T:SharpVectors.Dom.IDocumentFragment"/> object, 
+            all of its children are inserted, in the same order, before <paramref name="refChild"/>. 
+            </para>
+            If the <paramref name="newChild"/> is already in the tree, it is first removed. 
+            </remarks>
+            <param name="newChild"> node to insert.</param>
+            <param name="refChild"> reference node, i.e., the node before which the new node must be inserted.</param>
+            <returns> The node being inserted. </returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <para>
+            HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type 
+            of the <paramref name="newChild"/> node, or if the node to insert is one of this node's ancestors.
+            </para>
+            WRONG_DOCUMENT_ERR: Raised if <paramref name="newChild"/> was created from a different document 
+            than the one that created this node.
+            <para>
+            NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly or if the parent of 
+            the node being inserted is readonly.
+            </para>
+            <para>
+            NOT_FOUND_ERR: Raised if <paramref name="refChild"/> is not a child of this node. 
+            </para>
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.ReplaceChild(System.Xml.XmlNode,System.Xml.XmlNode)">
+            <summary>
+            Replaces the child node <paramref name="oldChild"/> with <paramref name="newChild"/>
+            in the list of children, and returns the <paramref name="oldChild"/> node.
+            </summary>
+            <remarks>
+            If <paramref name="newChild"/> is a <see cref="T:SharpVectors.Dom.IDocumentFragment"/> object, <paramref name="oldChild"/> 
+            is replaced by all of the <see cref="T:SharpVectors.Dom.IDocumentFragment"/> children, which are inserted in the 
+            same order. If the <paramref name="newChild"/> is already in the tree, it is first removed. 
+            </remarks>
+            <param name="newChild"> new node to put in the child list. </param>
+            <param name="oldChild"> node being replaced in the list. </param>
+            <returns> The node replaced. </returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <para>
+            HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of 
+            the type of the <paramref name="newChild"/> node, or if the node to put in is one of this node's ancestors.
+            </para>
+            <para>
+            WRONG_DOCUMENT_ERR: Raised if <paramref name="newChild"/> was created from a different 
+            document than the one that created this node.
+            </para>
+            <para>
+            NO_MODIFICATION_ALLOWED_ERR: Raised if this node or the parent of the new node is readonly.
+            </para>
+            <para>
+            NOT_FOUND_ERR: Raised if <paramref name="oldChild"/> is not a child of this node. 
+            </para>
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.RemoveChild(System.Xml.XmlNode)">
+            <summary>
+            Removes the child node indicated by <paramref name="oldChild"/> from the list of children, and returns it. 
+            </summary>
+            <param name="oldChild"> node being removed. </param>
+            <returns> The node removed. </returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+            <para>
+            NOT_FOUND_ERR: Raised if <paramref name="oldChild"/> is not a child of this node. 
+            </para>
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.AppendChild(System.Xml.XmlNode)">
+            <summary>
+            Adds the node <paramref name="newChild"/> to the end of the list of children of this node. 
+            If the <paramref name="newChild"/> is already in the tree, it is first removed. 
+            </summary>
+            <param name="newChild"> The node to add. If it is a <see cref="T:SharpVectors.Dom.IDocumentFragment"/> object, the entire 
+            contents of the document fragment are moved into the child list of this node </param>
+            <returns> The node added. </returns>
+            <exception cref="T:SharpVectors.Dom.DomException">
+            <para>
+            HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the 
+            type of the <paramref name="newChild"/> node, or if the node to append is one of this node's ancestors.
+            </para>
+            <para>
+            WRONG_DOCUMENT_ERR: Raised if <paramref name="newChild"/> was created from a different document 
+            than the one that created this node.
+            </para>
+            <para>
+            NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly. 
+            </para>
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.CloneNode(System.Boolean)">
+            <summary>
+            Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes. 
+            The duplicate node has no parent; (<see cref="P:SharpVectors.Dom.IXmlNode.ParentNode"/> is <see langword="null"/>.).
+            </summary>
+            <remarks>
+            <para>
+            Cloning an <see cref="T:SharpVectors.Dom.IElement"/> copies all attributes and their values, including those generated 
+            by the XML processor to represent defaulted attributes, but this method does not copy any text it 
+            contains unless it is a deep clone, since the text is contained in a child <see cref="T:SharpVectors.Dom.IText"/> node. 
+            </para>
+            <para>
+            Cloning an <see cref="!:Attribute"/> directly, as opposed to be cloned as part of an <see cref="T:SharpVectors.Dom.IElement"/> 
+            cloning operation, returns a specified attribute (<see cref="P:SharpVectors.Dom.IAttribute.Specified"/> is <see langword="true"/>). 
+            </para>
+            <para>
+            Cloning any other type of node simply returns a copy of this node.
+            Note that cloning an immutable subtree results in a mutable copy, but the children of an 
+            <see cref="T:SharpVectors.Dom.IEntityReference"/> clone are readonly. In addition, clones of unspecified <see cref="T:SharpVectors.Dom.IAttribute"/> 
+            nodes are specified. And, cloning <see cref="T:SharpVectors.Dom.IDocument"/>, <see cref="T:SharpVectors.Dom.IDocumentType"/>, <see cref="T:SharpVectors.Dom.IEntity"/>, 
+            and <see cref="T:SharpVectors.Dom.INotation"/> nodes is implementation dependent. 
+            </para>
+            </remarks>
+            <param name="deep"> <see langword="true"/>, recursively clone the subtree under the specified node; 
+            if <see langword="false"/>, clone only the node itself (and its attributes, if it is an <see cref="T:SharpVectors.Dom.IElement"/>). 
+            </param>
+            <returns> The duplicate node. </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.Normalize">
+            <summary>
+            Puts all <see cref="T:SharpVectors.Dom.IText"/> nodes in the full depth of the sub-tree underneath this <see cref="T:SharpVectors.Dom.INode"/>, 
+            including attribute nodes, into a "normal" form where only structure (e.g., elements, comments, 
+            processing instructions, CDATA sections, and entity references) separates <see cref="T:SharpVectors.Dom.IText"/> nodes, 
+            i.e., there are neither adjacent <see cref="T:SharpVectors.Dom.IText"/> nodes nor empty <see cref="T:SharpVectors.Dom.IText"/> nodes. 
+            </summary>
+            <remarks>
+            This can be used to ensure that the DOM view of a document is the same as if it were saved and re-loaded, 
+            and is useful when operations (such as <c>XPointer</c> lookups) that depend on a particular document tree 
+            structure are to be used. 
+            <para>
+            In cases where the document contains <see cref="T:SharpVectors.Dom.ICDataSection"/>, the normalize operation alone may not be 
+            sufficient, since XPointers do not differentiate between <see cref="T:SharpVectors.Dom.IText"/> nodes and <see cref="T:SharpVectors.Dom.ICDataSection"/> nodes.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Dom.IXmlNode.Supports(System.String,System.String)">
+            <summary>
+            Tests whether the DOM implementation implements a specific feature and that feature is supported by this node. 
+            </summary>
+            <param name="feature"> name of the feature to test. This is the same name which can be passed to the 
+            method <see cref="M:SharpVectors.Dom.IDomImplementation.HasFeature(System.String,System.String)"/> on <see cref="T:SharpVectors.Dom.IDomImplementation"/>. </param>
+            <param name="version"> This is the version number of the feature to test. In Level 2, version 1, 
+            this is the string <c>"2.0"</c>. If the version is not specified, supporting any version of the feature will cause the
+            method to return <see langword="true"/>.</param>
+            <returns> Returns <see langword="true"/> if the specified feature is supported on this node, 
+            <see langword="false"/> otherwise.</returns>
         </member>
         <member name="T:SharpVectors.Dom.Stylesheets.IDocumentStyle">
             <summary>
@@ -2813,14 +3902,14 @@
             </summary>
             <param name="newMedium">The new medium to add.</param>
             <exception cref="T:SharpVectors.Dom.DomException">INVALID_CHARACTER_ERR: If the medium contains characters that are invalid in the underlying style language.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this list is readonly</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this list is readonly</exception>
         </member>
         <member name="M:SharpVectors.Dom.Stylesheets.IMediaList.DeleteMedium(System.String)">
             <summary>
             
             </summary>
             <param name="oldMedium"></param>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this list is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this list is readonly.</exception>
             <exception cref="T:SharpVectors.Dom.DomException">NOT_FOUND_ERR: Raised if oldMedium is not in the list.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Stylesheets.IMediaList.Length">
@@ -2832,8 +3921,8 @@
             <summary>
             The parsable textual representation of the media list. This is a comma-separated list of media.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified string value has a syntax error and is unparsable.</exception>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>SYNTAX_ERR:</c> Raised if the specified string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media list is readonly.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Stylesheets.IMediaList.Item(System.UInt64)">
             <summary>
@@ -5300,6 +6389,14 @@
             which is available for some of Svg's elements. 
             </summary>
         </member>
+        <member name="P:SharpVectors.Dom.Svg.ISvgPreserveAspectRatio.IsDefaultAlign">
+            <summary>
+            Gets a value indicating if this a default aspect ratio or it is defined by the target element.
+            </summary>
+            <value>
+            This is <see langword="true"/> if it is the default aspect ratio; otherwise it is <see langword="false"/>.
+            </value>
+        </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgPreserveAspectRatio.Align">
             <summary>
             The type of the alignment value as specified by one of the constants specified above.
@@ -5344,63 +6441,52 @@
             </summary>
             <remarks>
             <para>
-            When an 'svg'  element is embedded inline as a component of a
-            document from another namespace, such as when an 'svg' element is
-            embedded inline within an XHTML document
+            When an 'svg'  element is embedded inline as a component of a document from another namespace, 
+            such as when an 'svg' element is embedded inline within an XHTML document
             [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>],
-            then an
-            <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will not exist;
-            instead, the root object in the
-            document object hierarchy will be a Document object of a different
-            type, such as an HTMLDocument object.
+            then an <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will not exist; instead, the root object in the
+            document object hierarchy will be a Document object of a different type, such as an HTMLDocument object.
             </para>
             <para>
-            However, an <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will
-            indeed exist when the root
-            element of the XML document hierarchy is an 'svg' element, such as
-            when viewing a stand-alone SVG file (i.e., a file with MIME type
-            "image/svg+xml"). In this case, the
-            <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will be the
-            root object of the document object model hierarchy.
+            However, an <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will indeed exist when the root
+            element of the XML document hierarchy is an 'svg' element, such as when viewing a stand-alone SVG file 
+            (i.e., a file with MIME type "image/svg+xml"). In this case, the <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> 
+            object will be the root object of the document object model hierarchy.
             </para>
             <para>
-            In the case where an SVG document is embedded by reference, such as
-            when an XHTML document has an 'object' element whose href attribute
-            references an SVG document (i.e., a document whose MIME type is
-            "image/svg+xml" and whose root element is thus an 'svg' element),
-            there will exist two distinct DOM hierarchies. The first DOM hierarchy
-            will be for the referencing document (e.g., an XHTML document). The
-            second DOM hierarchy will be for the referenced SVG document. In this
-            second DOM hierarchy, the root object of the document object model
+            In the case where an SVG document is embedded by reference, such as when an XHTML document has an 'object' 
+            element whose href attribute references an SVG document (i.e., a document whose MIME type is "image/svg+xml" 
+            and whose root element is thus an 'svg' element), there will exist two distinct DOM hierarchies. The first DOM hierarchy
+            will be for the referencing document (e.g., an XHTML document). The second DOM hierarchy will be for the referenced 
+            SVG document. In this/ second DOM hierarchy, the root object of the document object model
             hierarchy is an <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object.
             </para>
             <para>
-            The <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> interface contains a
-            similar list of attributes and
+            The <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> interface contains a  similar list of attributes and
             methods to the HTMLDocument interface described in the
-            <see href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html">Document
-            Object Model (HTML) Level 1</see> chapter of the
-            [<see href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</see>] specification.
+            <see href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html">Document Object Model (HTML) Level 1</see> 
+            chapter of the [<see href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</see>] specification.
             </para>
             </remarks>
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgDocument.Title">
             <summary>
-            The title of a document as specified by the title sub-element of
-            the 'svg' root element.
+            The title of a document as specified by the title sub-element of the 'svg' root element.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgDocument.Referrer">
             <summary>
-            Returns the URI of the page that linked to this page. The value
-            is an empty string if the user navigated to the page directly
-            (not through a link, but, for example, via a bookmark).
+            Returns the URI of the page that linked to this page. 
             </summary>
+            <value>
+            The value is an empty string if the user navigated to the page directly
+            (not through a link, but, for example, via a bookmark).
+            </value>
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgDocument.Domain">
             <summary>
             The domain name of the server that served the document, or a
-            null string if the server cannot be identified by a domain name.
+            <see langword="null"/> string if the server cannot be identified by a domain name.
             </summary>
         </member>
         <member name="P:SharpVectors.Dom.Svg.ISvgDocument.Url">
@@ -5417,6 +6503,13 @@
             <summary>
             The window object of the Svg document.
             </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.ISvgDocument.Static">
+            <summary>
+            Gets a value specifying whether this document is in static mode. In static mode (non-interactive),
+            events are not processed.
+            </summary>
+            <value>This returns <see langword="true"/> if the document is in static mode; otherwise, it is <see langword="false"/>.</value>
         </member>
         <member name="T:SharpVectors.Dom.Svg.ISvgElementInstance">
             <summary>
@@ -6104,6 +7197,118 @@
         <member name="T:SharpVectors.Dom.Svg.ISvgFilterPrimitiveStandardAttributes">
             <summary>
             </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.ISvgElementVisitor">
+            <summary>
+            A visitor pattern interface that visits all renderable SVG elements.
+            </summary>
+            <remarks>
+            The implementation is defined are follows:
+            <list type="bullet">
+            <item>
+            <term>Implements visitor (<see cref="T:SharpVectors.Dom.Svg.ISvgElementVisitor"/>) object that implements an operation to be 
+            performed on elements of SVG DOM structure.</term>
+            </item>
+            <item>
+            <term>Implement the client that traverses the SVG DOM structure and call a dispatching operation 
+            <see cref="M:SharpVectors.Dom.Svg.ISvgElementVisitorTarget.Accept(SharpVectors.Dom.Svg.ISvgElementVisitor)"/> on the SVG element — that dispatches (delegates) 
+            the request to the accepted visitor object. 
+            </term>
+            </item>
+            <item>
+            <term>The visitor object then performs the operation on the element.</term>
+            </item>
+            </list>
+            </remarks>
+            <seealso href="https://en.wikipedia.org/wiki/Visitor_pattern">Wikipedia: Visitor pattern</seealso>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgCircleElement)">
+            <summary>Visits the circle shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgCircleElement"/> specifying the circle shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgEllipseElement)">
+            <summary>Visits the ellipse shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgEllipseElement"/> specifying the ellipse shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgLineElement)">
+            <summary>Visits the line shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgLineElement"/> specifying the line shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgPathElement)">
+            <summary>Visits the path shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgPathElement"/> specifying the path shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgPolygonElement)">
+            <summary>Visits the polygon shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgPolygonElement"/> specifying the polygon shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgPolylineElement)">
+            <summary>Visits the polyline shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgPolylineElement"/> specifying the polyline shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgRectElement)">
+            <summary>Visits the rectangle shape element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgRectElement"/> specifying the rectangle shape.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgImageElement)">
+            <summary>Visits the <c>image</c> graphics element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgImageElement"/> specifying the <c>image</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgUseElement)">
+            <summary>Visits the use element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgUseElement"/> specifying the <c>use</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.BeginContainer(SharpVectors.Dom.Svg.ISvgElement)">
+            <summary>Signal the beginning of a graphics container element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgElement"/> specifying the container element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgAElement)">
+            <summary>Visits the <c>link</c> element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgAElement"/> specifying the <c>link</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgGElement)">
+            <summary>Visits the <c>group</c> element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgGElement"/> specifying the <c>group</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgSvgElement)">
+            <summary>Visits the <c>svg</c> clipart element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgSvgElement"/> specifying the <c>svg</c> clipart element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgSwitchElement)">
+            <summary>Visits the <c>switch</c> element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgSwitchElement"/> specifying the <c>switch</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgSymbolElement)">
+            <summary>Visits the <c>symbol</c> element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgRectElement"/> specifying the <c>symbol</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.EndContainer(SharpVectors.Dom.Svg.ISvgElement)">
+            <summary>Signal the ending of a graphics container element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgElement"/> specifying the container element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgTextElement)">
+            <summary>Visits the <c>text</c> content element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgTextElement"/> specifying the <c>text</c> content element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgTextPathElement)">
+            <summary>Visits the <c>text-path</c> content element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgTextPathElement"/> specifying the <c>text-path</c> element.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgTSpanElement)">
+            <summary>Visits the <c>text-span</c> content element.</summary>
+            <param name="element">An instance of <see cref="T:SharpVectors.Dom.Svg.ISvgTSpanElement"/> specifying the <c>text-span</c> content element.</param>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.ISvgElementVisitorTarget">
+            <summary>
+            A host target of the element visitor. Each renderable SVG element implements this interface.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.ISvgElementVisitorTarget.Accept(SharpVectors.Dom.Svg.ISvgElementVisitor)">
+            <summary>
+            This dispatches the rendering request to the accepted <see cref="T:SharpVectors.Dom.Svg.ISvgElementVisitor"/> object.
+            </summary>
+            <param name="visitor">An implementation of the <see cref="T:SharpVectors.Dom.Svg.ISvgElementVisitor"/> interface, to which the
+            rendering operation is delegated.</param>
         </member>
         <member name="T:SharpVectors.Dom.Svg.ISvgRenderer">
             <summary>
@@ -7913,6 +9118,170 @@
             The ISvgVKernElement interface corresponds to the 'vkern' element. 
             </summary>
         </member>
+        <member name="T:SharpVectors.Dom.DomException">
+            <summary>
+            Represents errors that occur during DOM operation execution.
+            </summary>
+            <remarks>
+            DOM operations only raise exceptions in "exceptional" circumstances, i.e., 
+            when an operation is impossible to perform (either for logical reasons, 
+            because data is lost, or because the implementation has become unstable). 
+            In general, DOM methods return specific error values in ordinary 
+            processing situations, such as out-of-bound errors when using <see cref="T:SharpVectors.Dom.INodeList"/>. 
+            <para>Implementations should raise other exceptions under other circumstances. 
+            For example, implementations should raise an implementation-dependent 
+            exception if a <see langword="null"/> argument is passed. 
+            </para>
+            <para>Some languages and object systems do not support the concept of 
+            exceptions. For such systems, error conditions may be indicated using 
+            native error reporting mechanisms. For some bindings, for example, 
+            methods may return error codes similar to those listed in the 
+            corresponding method descriptions.
+            </para>
+            </remarks>
+            <seealso href="https://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+            Document Object Model (DOM) Level 2 Core Specification</seealso>
+        </member>
+        <member name="M:SharpVectors.Dom.DomException.#ctor">
+            <summary>
+            Initializes a new instance of the System.Exception class.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.DomException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the System.Exception class with a specified error
+            message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="msg">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or <see langword="null"/> if no inner exception is specified.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.DomException.#ctor(SharpVectors.Dom.DomExceptionType)">
+            <summary>
+            Initializes a new instance of the System.Exception class with a specified error code.
+            </summary>
+            <param name="code">The DOM exception code.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.DomException.#ctor(SharpVectors.Dom.DomExceptionType,System.String)">
+            <summary>
+            Initializes a new instance of the System.Exception class with a specified error message and error code.
+            </summary>
+            <param name="code">The DOM exception code.</param>
+            <param name="msg"> The message that describes the error.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.DomException.#ctor(SharpVectors.Dom.DomExceptionType,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the System.Exception class with a specified error
+            message, error code and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="code">The DOM exception code.</param>
+            <param name="msg"> The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or <see langword="null"/> if no inner exception is specified.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.DomException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the System.Exception class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data 
+            about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information 
+            about the source or destination.</param>
+        </member>
+        <member name="P:SharpVectors.Dom.DomException.Code">
+            <summary>
+            Gets or sets a code specifying the type of the error.
+            </summary>
+            <value>An enumeration of the type <see cref="T:SharpVectors.Dom.DomExceptionType"/> specifying the code defining the error.</value>
+        </member>
+        <member name="T:SharpVectors.Dom.DomExceptionType">
+            <summary>
+            DOM exception code types.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.UnknowError">
+            <summary>
+            If there is no defined error code for this exception or the exception is unknown.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.IndexSizeErr">
+            <summary>
+            If index or size is negative, or greater than the allowed value.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.DomstringSizeErr">
+            <summary>
+            If the specified range of text does not fit into a string.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.HierarchyRequestErr">
+            <summary>
+            If any node is inserted somewhere it doesn't belong.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.WrongDocumentErr">
+            <summary>
+            If a node is used in a different document than the one that created it (that doesn't support it).
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.InvalidCharacterErr">
+            <summary>
+            If an invalid or illegal character is specified, such as in a name. See 
+            production 2 in the XML specification for the definition of a legal 
+            character, and production 5 for the definition of a legal name character.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.NoDataAllowedErr">
+            <summary>
+            If data is specified for a node which does not support data.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.NoModificationAllowedErr">
+            <summary>
+            If an attempt is made to modify an object where modifications are not allowed.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.NotFoundErr">
+            <summary>
+            If an attempt is made to reference a node in a context where it does not exist.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.NotSupportedErr">
+            <summary>
+            If the implementation does not support the requested type of object or operation.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.InuseAttributeErr">
+            <summary>
+            If an attempt is made to add an attribute that is already in use elsewhere.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.InvalidStateErr">
+            <summary>
+            If an attempt is made to use an object that is not, or is no longer, usable.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.SyntaxErr">
+            <summary>
+            If an invalid or illegal string is specified.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.InvalidModificationErr">
+            <summary>
+            If an attempt is made to modify the type of the underlying object.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.NamespaceErr">
+            <summary>
+            If an attempt is made to create or change an object in a way which is 
+            incorrect with regard to namespaces.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.DomExceptionType.InvalidAccessErr">
+            <summary>
+            If a parameter or an operation is not supported by the underlying object.
+            </summary>
+        </member>
         <member name="T:SharpVectors.Dom.Views.IAbstractView">
             <summary>
             A base interface that all views shall derive from
@@ -7937,6 +9306,11 @@
         <member name="T:SharpVectors.Dom.XmlConstants">
             <summary>
             Contains common XML constants.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.XmlConstants.XmlNamespacePrefix">
+            <summary>
+            Specifies a namespace prefix.
             </summary>
         </member>
         <member name="T:SharpVectors.Scripting.IJsCssRuleList">

@@ -280,6 +280,9 @@ namespace SharpVectors.Renderers.Wpf
                 _svgRenderer = new WpfRenderingHelper(this);
             }
 
+            var isStatic = node.Static;
+            node.Static = true;
+
             _context = new WpfDrawingContext(_isEmbedded, _settings);
 
             _context.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
@@ -304,6 +307,8 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     _svgWindow.BaseUrls.Clear();
                 }
+
+                node.Static = isStatic;
             }
 
             //RendererAfterRender();

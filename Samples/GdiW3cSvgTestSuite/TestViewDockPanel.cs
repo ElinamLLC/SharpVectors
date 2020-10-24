@@ -409,7 +409,7 @@ namespace GdiW3cSvgTestSuite
         {
             if (_optionSettings != null)
             {
-                _optionSettings.SelectedValuePath = "";
+                _optionSettings.SelectedValuePath = string.Empty;
             }
             // Prompt for any un-applied modifications to avoid lost.
             if (_isTreeChangedPending)
@@ -472,7 +472,7 @@ namespace GdiW3cSvgTestSuite
         {
             if (_optionSettings != null && isEnabled == false)
             {
-                _optionSettings.SelectedValuePath = "";
+                _optionSettings.SelectedValuePath = string.Empty;
             }
 
             stateExpander.Enabled = isEnabled;
@@ -587,8 +587,8 @@ namespace GdiW3cSvgTestSuite
             // Clear the TreeView each time the method is called.
             treeView.Nodes.Clear();
 
-            string selectedCategory = "";
-            string selectedTest     = "";
+            string selectedCategory = string.Empty;
+            string selectedTest     = string.Empty;
 
             if (_optionSettings != null &&
                 !string.IsNullOrWhiteSpace(_optionSettings.SelectedValuePath))

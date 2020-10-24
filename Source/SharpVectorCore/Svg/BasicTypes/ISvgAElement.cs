@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// </summary>
 	public interface ISvgAElement : ISvgElement, ISvgUriReference, ISvgTests,
 		ISvgLangSpace, ISvgExternalResourcesRequired, ISvgStylable, 
-        ISvgTransformable, IEventTarget, IElementVisitorTarget
+        ISvgTransformable, IEventTarget, ISvgElementVisitorTarget
     {
 		ISvgAnimatedString Target{get;}
 	}

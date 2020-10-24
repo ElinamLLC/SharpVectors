@@ -6,7 +6,7 @@ namespace SharpVectors.Dom.Svg
 	/// The SvgLineElement interface corresponds to the 'line' element. 
 	/// </summary>
 	public interface ISvgLineElement : ISvgElement, ISvgTests, ISvgLangSpace,
-				ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, IElementVisitorTarget
+				ISvgExternalResourcesRequired, ISvgStylable, ISvgTransformable, IEventTarget, ISvgElementVisitorTarget
     {
 		ISvgAnimatedLength X1{get;}
 

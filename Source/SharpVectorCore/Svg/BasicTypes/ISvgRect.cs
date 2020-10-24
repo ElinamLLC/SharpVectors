@@ -1,3 +1,5 @@
+using System;
+
 namespace SharpVectors.Dom.Svg
 {
 	/// <summary>
@@ -5,7 +7,7 @@ namespace SharpVectors.Dom.Svg
     /// a minimum X value, a minimum Y value, and a width and height, which are usually 
     /// constrained to be non-negative. 
 	/// </summary>
-	public interface ISvgRect
+	public interface ISvgRect : IEquatable<ISvgRect>
 	{
 		double X { get; set; }
 		double Y { get; set; }

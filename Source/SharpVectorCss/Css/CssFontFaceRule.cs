@@ -8,7 +8,7 @@ namespace SharpVectors.Dom.Css
     /// The <see cref="ICssFontFaceRule"/> interface represents a <c>@font-face</c> rule in a CSS style sheet. 
     /// The <c>@font-face</c> rule is used to hold a set of font descriptions.
     /// </summary>
-    public class CssFontFaceRule : CssRule, ICssFontFaceRule
+    public sealed class CssFontFaceRule : CssRule, ICssFontFaceRule
     {
         #region Private Fields
 

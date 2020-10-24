@@ -411,23 +411,30 @@ namespace WpfTestSvgSample
 
             return Task<bool>.Factory.StartNew(() =>
             {
-//                var saveXaml = _fileReader.SaveXaml;
-//                _fileReader.SaveXaml = true; // For threaded, we will save to avoid loading issue later...
+                //                var saveXaml = _fileReader.SaveXaml;
+                //                _fileReader.SaveXaml = true; // For threaded, we will save to avoid loading issue later...
 
-                    //Stopwatch stopwatch = new Stopwatch();
+                //Stopwatch stopwatch = new Stopwatch();
 
-                    //stopwatch.Start();
+                //stopwatch.Start();
 
-                    //DrawingGroup drawing = _fileReader.Read(svgFilePath, workingDir);
+                //DrawingGroup drawing = _fileReader.Read(svgFilePath, workingDir);
 
-                    //stopwatch.Stop();
+                //stopwatch.Stop();
 
-                    //Trace.WriteLine(string.Format("FileName={0}, Time={1}", 
-                    //    Path.GetFileName(svgFilePath), stopwatch.ElapsedMilliseconds));
-                    
+                //Trace.WriteLine(string.Format("FileName={0}, Time={1}", 
+                //    Path.GetFileName(svgFilePath), stopwatch.ElapsedMilliseconds));
+
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+
                 DrawingGroup drawing = _fileReader.Read(svgFilePath, workingDir);
 
-//                _fileReader.SaveXaml = saveXaml;
+                watch.Stop();
+
+                Debug.WriteLine("{0}: {1}", Path.GetFileName(svgFilePath), watch.ElapsedMilliseconds);
+
+                //                _fileReader.SaveXaml = saveXaml;
                 _drawingDocument = _fileReader.DrawingDocument;
                 if (drawing != null)
                 {

@@ -8,7 +8,7 @@ namespace SharpVectors.Dom.Css
     /// <summary>
     /// Used internally for collection of styles for a specific element
     /// </summary>
-    public class CssCollectedStyleDeclaration : CssStyleDeclaration
+    public sealed class CssCollectedStyleDeclaration : CssStyleDeclaration
     {
         #region Private Fields
 
@@ -157,8 +157,8 @@ namespace SharpVectors.Dom.Css
         /// <summary>
         /// The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.
         /// </summary>
-        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+        /// <exception cref="DomException"><c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this declaration is readonly or a property is readonly.</exception>
         public override string CssText
         {
             get {

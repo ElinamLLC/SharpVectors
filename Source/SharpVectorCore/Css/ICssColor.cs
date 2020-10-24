@@ -1,9 +1,9 @@
 namespace SharpVectors.Dom.Css
 {
 	/// <summary>
-	/// The RGBColor interface is used to represent any RGB color value. This interface reflects the 
-    /// values in the underlying style property. Hence, modifications made to the 
-	/// CSSPrimitiveValue objects modify the style property. 
+	/// The RGB-Color interface is used to represent any RGB color value. This interface reflects the 
+	/// values in the underlying style property. Hence, modifications made to the 
+	/// <see cref="ICssPrimitiveValue"/> objects modify the style property. 
 	/// </summary>
 	public interface ICssColor
 	{

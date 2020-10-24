@@ -73,10 +73,10 @@ namespace SharpVectors.Dom.Css
         /// The parsable textual representation of the page selector for the rule.
         /// </summary>
         /// <exception cref="DomException">
-        /// SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.
+        /// <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.
         /// </exception>
         /// <exception cref="DomException">
-        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.
+        /// <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this rule is readonly.
         /// </exception>
         public string SelectorText
         {
@@ -84,7 +84,7 @@ namespace SharpVectors.Dom.Css
                 return _selectorText;
             }
             set {
-                /*    SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.*/
+                /*    <c>SYNTAX_ERR:</c> Raised if the specified CSS string value has a syntax error and is unparsable.*/
                 if (_isReadOnly)
                     throw new DomException(DomExceptionType.NoModificationAllowedErr);
 

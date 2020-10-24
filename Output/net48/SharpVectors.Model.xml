@@ -151,7 +151,7 @@
              The angle value as a floating point value, in degrees. Setting this attribute will cause 
              valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
             value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgAngle.ValueInSpecifiedUnits">
@@ -159,7 +159,7 @@
              The angle value as a floating point value, in the units expressed by unitType. Setting this 
              attribute will cause value and valueAsString to be updated automatically to reflect this setting.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
             value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgAngle.ValueAsString">
@@ -167,7 +167,7 @@
              The angle value as a string value, in the units expressed by unitType. Setting this attribute 
              will cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
             value of a readonly attribute.</exception>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgAnimatedBoolean">
@@ -354,7 +354,7 @@
             The value as an floating point value, in user units. Setting this attribute will cause 
             valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting. 
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+            <exception cref="T:SharpVectors.Dom.DomException"> <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change 
             the value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgLength.ValueInSpecifiedUnits">
@@ -362,7 +362,7 @@
             The value as an floating point value, in the units expressed by unitType. Setting this 
             attribute will cause value and valueAsString to be updated automatically to reflect this setting.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+            <exception cref="T:SharpVectors.Dom.DomException"> <c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change 
             the value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgLength.ValueAsString">
@@ -370,7 +370,7 @@
             The value as a string value, in the units expressed by unitType. Setting this attribute will 
             cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the 
             value of a readonly attribute.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Svg.SvgLength.NewValueSpecifiedUnits(SharpVectors.Dom.Svg.SvgLengthType,System.Double)">
@@ -508,6 +508,225 @@
             Rectangles are defined as consisting of a (x,y) coordinate pair identifying a minimum X value, 
             a minimum Y value, and a width and height, which are usually constrained to be non-negative. 
             </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.op_Equality(SharpVectors.Dom.Svg.SvgRect,SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            This tests whether two <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structures have equal 
+            location and size.
+            </summary>
+            <param name="left">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure that is to the left of the 
+            equality operator. 
+            </param>
+            <param name="right">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure that is to the right of the 
+            equality operator. 
+            </param>
+            <returns>
+            This operator returns true if the two specified 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structures have equal 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Y"/>, 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.Width"/>, and <see cref="P:SharpVectors.Dom.Svg.SvgRect.Height"/>
+            properties.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.op_Inequality(SharpVectors.Dom.Svg.SvgRect,SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            This tests whether two <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structures differ in 
+            location or size.</summary>
+            <param name="left">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure that is to the left of the 
+            inequality operator. 
+            </param>
+            <param name="right">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure that is to the right of the 
+            inequality operator. 
+            </param>
+            <returns>
+            This operator returns true if any of the <see cref="P:SharpVectors.Dom.Svg.SvgRect.X"/>, 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.Y"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Width"/>, or 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.Height"/> properties of the two 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structures are unequal; otherwise false.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Equals(System.Object)">
+            <summary>
+            This tests whether an object is a <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> with the 
+            same location and size of this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>.
+            </summary>
+            <param name="obj">
+            The <see cref="T:System.Object"/> to test. 
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the specified object is a 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> and its <see cref="P:SharpVectors.Dom.Svg.SvgRect.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Y"/>, 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.Width"/>, and <see cref="P:SharpVectors.Dom.Svg.SvgRect.Height"/> properties are equal 
+            to the corresponding properties of this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>; 
+            otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Equals(SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            This tests whether the specified <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> is with 
+            the same location and size of this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>.
+            </summary>
+            <param name="other">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> to test. 
+            </param>
+            <returns>
+            This returns <see langword="true"/> if specified <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> 
+            has its <see cref="P:SharpVectors.Dom.Svg.SvgRect.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Y"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Width"/>, and 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.Height"/> properties are equal to the corresponding 
+            properties of this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>; otherwise, 
+            <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Equals(SharpVectors.Dom.Svg.ISvgRect)">
+            <summary>
+            This tests whether the specified <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> is with 
+            the same location and size of this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>.
+            </summary>
+            <param name="other">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> to test. 
+            </param>
+            <returns>
+            This returns <see langword="true"/> if specified <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> 
+            has its <see cref="P:SharpVectors.Dom.Svg.SvgRect.X"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Y"/>, <see cref="P:SharpVectors.Dom.Svg.SvgRect.Width"/>, and 
+            <see cref="P:SharpVectors.Dom.Svg.SvgRect.Height"/> properties are equal to the corresponding 
+            properties of this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>; otherwise, 
+            <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Contains(System.Double,System.Double)">
+            <overloads>
+            This determines if the specified point or rectangle is contained 
+            within this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure.
+            </overloads>
+            <summary>
+            This determines if the specified point is contained within this 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure.
+            </summary>
+            <param name="x">The x-coordinate of the point to test. </param>
+            <param name="y">The y-coordinate of the point to test. </param>
+            <returns>
+            This method returns true if the point defined by x and y is 
+            contained within this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure; otherwise 
+            false.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Contains(SharpVectors.Dom.Svg.SvgPoint)">
+            <summary>
+            This determines if the specified point is contained within this 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure.
+            </summary>
+            <param name="pt">The <see cref="T:SharpVectors.Dom.Svg.SvgPoint"/> to test. </param>
+            <returns>
+            This method returns true if the point represented by the pt 
+            parameter is contained within this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> 
+            structure; otherwise false.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Contains(SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            This determines if the rectangular region represented by rect is 
+            entirely contained within this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure.
+            </summary>
+            <param name="rect">The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> to test. </param>
+            <returns>
+            This method returns true if the rectangular region represented by 
+            rect is entirely contained within the rectangular region represented 
+            by this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>; otherwise false.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.GetHashCode">
+            <summary>
+            Gets the hash code for this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure. 
+            For information about the use of hash codes, see Object.GetHashCode.
+            </summary>
+            <returns>The hash code for this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Inflate(System.Double,System.Double)">
+            <overloads>
+            Inflates this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure by the specified 
+            amount.
+            </overloads>
+            <summary>
+            Inflates this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure by the specified 
+            amount.
+            </summary>
+            <param name="x">The amount to inflate this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure horizontally. </param>
+            <param name="y">The amount to inflate this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure vertically. </param>
+            <returns>This method does not return a value.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Intersection(SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            This replaces this <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure with the 
+            intersection of itself and the specified <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> 
+            structure.
+            </summary>
+            <param name="rect">The rectangle to intersect. </param>
+            <returns>This method does not return a value.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Intersects(SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            This determines if this rectangle intersects with rect.
+            </summary>
+            <param name="rect">The rectangle to test. </param>
+            <returns>
+            This method returns <see langword="true"/> if there is any 
+            intersection; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Offset(System.Double,System.Double)">
+            <summary>
+            Adjusts the location of this rectangle by the specified amount.
+            </summary>
+            <param name="y">The amount to offset the location vertically. </param>
+            <param name="x">The amount to offset the location horizontally. </param>
+            <returns>This method does not return a value.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Inflate(SharpVectors.Dom.Svg.SvgRect,System.Single,System.Single)">
+            <summary>
+            Creates and returns an inflated copy of the specified 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure. The copy is inflated by the 
+            specified amount. The original rectangle remains unmodified.
+            </summary>
+            <param name="rect">
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> to be copied. This rectangle is not 
+            modified. 
+            </param>
+            <param name="x">
+            The amount to inflate the copy of the rectangle horizontally. 
+            </param>
+            <param name="y">
+            The amount to inflate the copy of the rectangle vertically. 
+            </param>
+            <returns>The inflated <see cref="T:SharpVectors.Dom.Svg.SvgRect"/>.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Intersection(SharpVectors.Dom.Svg.SvgRect,SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            Returns a <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure that represents the 
+            intersection of two rectangles. If there is no intersection, and 
+            empty <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> is returned.
+            </summary>
+            <param name="a">A rectangle to intersect. </param>
+            <param name="b">A rectangle to intersect. </param>
+            <returns>
+            A third <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure the size of which 
+            represents the overlapped area of the two specified rectangles.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgRect.Union(SharpVectors.Dom.Svg.SvgRect,SharpVectors.Dom.Svg.SvgRect)">
+            <summary>
+            Creates the smallest possible third rectangle that can contain both 
+            of two rectangles that form a union.
+            </summary>
+            <param name="a">A rectangle to union. </param>
+            <param name="b">A rectangle to union. </param>
+            <returns>
+            A third <see cref="T:SharpVectors.Dom.Svg.SvgRect"/> structure that contains both of 
+            the two rectangles that form the union.
+            </returns>
         </member>
         <member name="T:SharpVectors.Dom.Svg.SvgStringList">
             <summary>
@@ -924,13 +1143,13 @@
             <summary>
             Corresponds to attribute contentScriptType on the given 'svg' element
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ContentStyleType">
             <summary>
             Corresponds to attribute contentStyleType on the given 'svg' element.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.Viewport">
             <summary>
@@ -968,7 +1187,7 @@
             attribute is false. If the initial view is a "custom" view, then this attribute is 
             true.
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute.</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.CurrentView">
             <summary>
@@ -992,7 +1211,7 @@
             <summary>
             This attribute indicates the current scale factor relative to the initial view to take into account user magnification and panning operations, as described under Magnification and panning. DOM attributes currentScale and currentTranslate are equivalent to the 2x3 matrix [a b c d e f] = [currentScale 0 0 currentScale currentTranslate.x currentTranslate.y]. If "magnification" is enabled (i.e., zoomAndPan="magnify"), then the effect is as if an extra transformation were placed at the outermost level on the SVG document fragment (i.e., outside the outermost 'svg' element).
             </summary>
-            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute</exception>
+            <exception cref="T:SharpVectors.Dom.DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised on an attempt to change the value of a readonly attribute</exception>
         </member>
         <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ViewBoxTransform">
             <summary>
@@ -1031,7 +1250,7 @@
             Cancels a specified suspendRedraw() by providing a unique suspend_handle_id.
             </summary>
             <param name="suspendHandleId">A number which acts as a unique identifier for the desired suspendRedraw() call. The number supplied must be a value returned from a previous call to suspendRedraw()</param>
-            <exception cref="T:SharpVectors.Dom.DomException">This method will raise a DOMException with value NOT_FOUND_ERR if an invalid value (i.e., no such suspend_handle_id is active) for suspend_handle_id is provided.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">This method will raise a <see cref="T:SharpVectors.Dom.DomException"/> with value NOT_FOUND_ERR if an invalid value (i.e., no such suspend_handle_id is active) for suspend_handle_id is provided.</exception>
         </member>
         <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.UnsuspendRedrawAll">
             <summary>

@@ -116,8 +116,8 @@ namespace SharpVectors.Dom.Css
         /// Used to delete a rule from the media block.
         /// </summary>
         /// <param name="index">The index within the media block's rule collection of the rule to remove.</param>
-        /// <exception cref="DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the media rule list.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly.</exception>
+        /// <exception cref="DomException"><c>INDEX_SIZE_ERR:</c> Raised if the specified index does not correspond to a rule in the media rule list.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media rule is readonly.</exception>
         public void DeleteRule(ulong index)
         {
             _cssRules.DeleteRule(index);
@@ -133,11 +133,11 @@ namespace SharpVectors.Dom.Css
         /// to insert the specified rule. If the specified index is equal to the length of the media blocks's 
         /// rule collection, the rule will be added to the end of the media block.</param>
         /// <returns>The index within the media block's rule collection of the newly inserted rule.</returns>
-        /// <exception cref="DomException">HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the 
+        /// <exception cref="DomException"><c>HIERARCHY_REQUEST_ERR:</c> Raised if the rule cannot be inserted at the 
         /// specified index, e.g., if an @import rule is inserted after a standard rule set or other at-rule.</exception>
-        /// <exception cref="DomException">INDEX_SIZE_ERR: Raised if the specified index is not a valid insertion point.</exception>
-        /// <exception cref="DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly</exception>
-        /// <exception cref="DomException">SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable</exception>
+        /// <exception cref="DomException"><c>INDEX_SIZE_ERR:</c> Raised if the specified index is not a valid insertion point.</exception>
+        /// <exception cref="DomException"><c>NO_MODIFICATION_ALLOWED_ERR:</c> Raised if this media rule is readonly</exception>
+        /// <exception cref="DomException"><c>SYNTAX_ERR:</c> Raised if the specified rule has a syntax error and is unparsable</exception>
         public ulong InsertRule(string rule, ulong index)
         {
             throw new NotImplementedException("CssMediaRule.InsertRule()");
