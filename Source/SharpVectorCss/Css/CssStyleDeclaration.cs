@@ -535,7 +535,11 @@ namespace SharpVectors.Dom.Css
             if (_styles.ContainsKey(propertyName))
             {
                 CssStyleBlock scs = _styles[propertyName];
-                if (scs.CssValue == null)
+                if(propertyName == "font-family")
+                {
+                    scs.CssValue = new CssValue(CssValueType.PrimitiveValue, scs.Value, ReadOnly);
+                }
+                else if (scs.CssValue == null)
                 {
                     scs.CssValue = CssValue.GetCssValue(scs.Value, ReadOnly);
                 }
