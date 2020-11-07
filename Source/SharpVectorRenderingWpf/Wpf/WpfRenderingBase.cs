@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
@@ -81,7 +82,8 @@ namespace SharpVectors.Renderers.Wpf
 
         public virtual bool NeedRender(WpfDrawingRenderer renderer)
         {
-            if (_svgElement.GetAttribute("display") == "none")
+            if (string.Equals(_svgElement.GetAttribute(CssConstants.PropDisplay), 
+                CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }

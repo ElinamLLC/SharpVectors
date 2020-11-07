@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text.RegularExpressions;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
@@ -211,13 +212,13 @@ namespace SharpVectors.Renderers.Gdi
                 else
                 {
                     if (localName.Equals("svg", comparer))
-                        sOverflow = "hidden";
+                        sOverflow = CssConstants.ValHidden;
                 }
 
                 if (sOverflow != null)
                 {
                     // "If the 'overflow' property has a value other than hidden or scroll, the property has no effect (i.e., a clipping rectangle is not created)."
-                    if (string.Equals(sOverflow, "hidden", comparer) || string.Equals(sOverflow, "scroll", comparer))
+                    if (string.Equals(sOverflow, CssConstants.ValHidden, comparer) || string.Equals(sOverflow, "scroll", comparer))
                     {
                         RectangleF clipRect = RectangleF.Empty;
                         if (clip != null && clip.PrimitiveType == CssPrimitiveType.Rect)
@@ -239,7 +240,7 @@ namespace SharpVectors.Renderers.Gdi
                             }
                         }
                         else if (clip == null || (clip.PrimitiveType == CssPrimitiveType.Ident 
-                            && string.Equals(clip.GetStringValue(), "auto", comparer)))
+                            && string.Equals(clip.GetStringValue(), CssConstants.ValAuto, comparer)))
                         {
                             if (localName.Equals("svg", comparer))
                             {

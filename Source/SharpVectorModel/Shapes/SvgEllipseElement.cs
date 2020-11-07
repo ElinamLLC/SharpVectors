@@ -60,7 +60,7 @@ namespace SharpVectors.Dom.Svg
                         Invalidate();
                         return;
                     // Color.attrib, Paint.attrib 
-                    case "color":
+                    case CssConstants.PropColor:
                     case "fill":
                     case "fill-rule":
                     case "stroke":
@@ -75,11 +75,11 @@ namespace SharpVectors.Dom.Svg
                     case "stroke-opacity":
                     case "fill-opacity":
                     // Graphics.attrib
-                    case "display":
+                    case CssConstants.PropDisplay:
                     case "image-rendering":
                     case "shape-rendering":
                     case "text-rendering":
-                    case "visibility":
+                    case CssConstants.PropVisibility:
                         Invalidate();
                         break;
                     case "transform":
@@ -118,7 +118,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_cx == null)
                 {
-                    _cx = new SvgAnimatedLength(this, "cx", SvgLengthDirection.Horizontal, "0");
+                    _cx = new SvgAnimatedLength(this, "cx", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
                 }
                 return _cx;
             }
@@ -129,7 +129,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_cy == null)
                 {
-                    _cy = new SvgAnimatedLength(this, "cy", SvgLengthDirection.Vertical, "0");
+                    _cy = new SvgAnimatedLength(this, "cy", SvgLengthDirection.Vertical, SvgConstants.ValZero);
                 }
                 return _cy;
             }

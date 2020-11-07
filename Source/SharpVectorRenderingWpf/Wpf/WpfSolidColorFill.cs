@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
@@ -64,7 +65,7 @@ namespace SharpVectors.Renderers.Wpf
                     var svgParent = _solidColorElement.ParentNode as SvgStyleableElement;
                     if (svgParent != null)
                     {
-                        prop = svgParent.GetPropertyValue("color", "solid-color");
+                        prop = svgParent.GetPropertyValue(CssConstants.PropColor, "solid-color");
                     }
                 }
 

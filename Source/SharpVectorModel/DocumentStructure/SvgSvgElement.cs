@@ -884,7 +884,8 @@ namespace SharpVectors.Dom.Svg
         /// <returns>An SVGLength object.</returns>
         public ISvgLength CreateSvgLength()
         {
-            return new SvgLength(null, string.Empty, SvgLengthSource.String, SvgLengthDirection.Horizontal, "0");
+            return new SvgLength(null, string.Empty, 
+                SvgLengthSource.String, SvgLengthDirection.Horizontal, SvgConstants.ValZero);
         }
 
         /// <summary>
@@ -894,7 +895,7 @@ namespace SharpVectors.Dom.Svg
         /// <returns>An SVGAngle object.</returns>
         public ISvgAngle CreateSvgAngle()
         {
-            return new SvgAngle("0", "0", false);
+            return new SvgAngle(SvgConstants.ValZero, SvgConstants.ValZero, false);
         }
 
         /// <summary>

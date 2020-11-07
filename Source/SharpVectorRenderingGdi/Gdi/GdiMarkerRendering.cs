@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -170,7 +171,7 @@ namespace SharpVectors.Renderers.Gdi
 				if (markerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
 				{
 					SvgLength strokeWidthLength = new SvgLength(refElement,
-						"stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, "1");
+						"stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, SvgConstants.ValOne);
 					double strokeWidth = strokeWidthLength.Value;
 					if (!strokeWidth.Equals(1))
 					{
@@ -194,7 +195,7 @@ namespace SharpVectors.Renderers.Gdi
 				{
 					string overflowAttr = markerElm.GetAttribute("overflow");
 					if (string.IsNullOrWhiteSpace(overflowAttr)
-						|| overflowAttr.Equals("scroll", comparer) || overflowAttr.Equals("hidden", comparer))
+						|| overflowAttr.Equals("scroll", comparer) || overflowAttr.Equals(CssConstants.ValHidden, comparer))
 					{
 						var markerClip = RectangleF.Empty;
 						SvgRect clipRect = (SvgRect)markerElm.ViewBox.AnimVal;

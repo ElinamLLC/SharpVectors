@@ -168,7 +168,7 @@ namespace SharpVectors.Renderers.Gdi
             //			SvgTransformList svgTList = (SvgTransformList)transElm.transform.AnimVal;
             //			brush.Transform = svgTList.matrix.matrix;
 
-            //if (res.GetPropertyValue("color-interpolation") == "linearRGB")
+            //if (res.GetPropertyValue("color-interpolation") == CssConstants.ValLinearRgb)
             //{
             //    //GdipSetPathGradientGammaCorrection(brush, true);
             //}

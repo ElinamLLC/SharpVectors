@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;  
@@ -220,7 +221,7 @@ namespace SharpVectors.Converters
 
         private void AddExtraLinkInformation(DrawingGroup group, SvgElement element)
         {
-            string linkColor = element.GetAttribute("color");
+            string linkColor = element.GetAttribute(CssConstants.PropColor);
             if (!string.IsNullOrWhiteSpace(linkColor))
             {
                 SvgLink.SetColor(group, linkColor);

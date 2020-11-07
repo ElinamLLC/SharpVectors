@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
@@ -12,6 +13,8 @@ namespace SharpVectors.Renderers.Wpf
     public abstract class WpfRendererObject : DependencyObject, IDisposable
     {
         #region Private Fields
+
+        private static readonly Regex _regFix = new Regex(@"[^[0-9a-zA-Z]]*");
 
         private static readonly Regex _regExCaps = new Regex(@"(?<=[A-Z])(?=[A-Z][a-z]) |
                  (?<=[^A-Z])(?=[A-Z]) | (?<=[A-Za-z])(?=[^A-Za-z])", RegexOptions.IgnorePatternWhitespace);
@@ -113,17 +116,13 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return string.Empty;
             }
-            if (string.Equals(elementId, "svgbar"))
-            {
-                elementId = "svgbar";
-            }
             elementId = elementId.Trim();
             if (IsValidIdentifier(elementId))
             {
                 return elementId;
             }
 
-            return Regex.Replace(elementId, @"[^[0-9a-zA-Z]]*", "_");
+            return _regFix.Replace(elementId, "_");
         }
 
         public static string GetElementClassName(SvgElement element, WpfDrawingContext context = null)
@@ -229,23 +228,23 @@ namespace SharpVectors.Renderers.Wpf
                 string localName = element.LocalName;
                 switch (localName)
                 {
-                    case "ellipse":
+                    case SvgConstants.TagEllipse: 
                         return CreateGeometry((SvgEllipseElement)element);
-                    case "rect":
+                    case SvgConstants.TagRect:
                         return CreateGeometry((SvgRectElement)element);
-                    case "line":
+                    case SvgConstants.TagLine:
                         return CreateGeometry((SvgLineElement)element);
-                    case "path":
+                    case SvgConstants.TagPath:
                         if (optimizePath)
                         {
                             return CreateGeometryEx((SvgPathElement)element);
                         }
                         return CreateGeometry((SvgPathElement)element);
-                    case "circle":
+                    case SvgConstants.TagCircle:
                         return CreateGeometry((SvgCircleElement)element);
-                    case "polyline":
+                    case SvgConstants.TagPolyline:
                         return CreateGeometry((SvgPolylineElement)element);
-                    case "polygon":
+                    case SvgConstants.TagPolygon:
                         return CreateGeometry((SvgPolygonElement)element);
                 }
 
@@ -284,12 +283,12 @@ namespace SharpVectors.Renderers.Wpf
 
         public Geometry CreateGeometry(SvgRectElement element)
         {
-            double dx = Math.Round(element.X.AnimVal.Value, 4);
-            double dy = Math.Round(element.Y.AnimVal.Value, 4);
-            double width = Math.Round(element.Width.AnimVal.Value, 4);
+            double dx     = Math.Round(element.X.AnimVal.Value,      4);
+            double dy     = Math.Round(element.Y.AnimVal.Value,      4);
+            double width  = Math.Round(element.Width.AnimVal.Value,  4);
             double height = Math.Round(element.Height.AnimVal.Value, 4);
-            double rx = Math.Round(element.Rx.AnimVal.Value, 4);
-            double ry = Math.Round(element.Ry.AnimVal.Value, 4);
+            double rx     = Math.Round(element.Rx.AnimVal.Value,     4);
+            double ry     = Math.Round(element.Ry.AnimVal.Value,     4);
 
             if (width <= 0 || height <= 0)
             {
@@ -332,16 +331,17 @@ namespace SharpVectors.Renderers.Wpf
                 return geometry;
             }
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!string.IsNullOrWhiteSpace(clipRule) &&
-                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrWhiteSpace(clipRule) && string.Equals(clipRule, "evenodd", comparer) 
+                || string.Equals(clipRule, CssConstants.ValNonzero, comparer))
             {
                 fillRule = clipRule;
             }
-            if (fillRule == "evenodd")
+            if (string.Equals(fillRule, "evenodd", comparer))
                 geometry.FillRule = FillRule.EvenOdd;
-            else if (fillRule == "nonzero")
+            else if (string.Equals(fillRule, CssConstants.ValNonzero, comparer))
                 geometry.FillRule = FillRule.Nonzero;
 
             try
@@ -380,16 +380,17 @@ namespace SharpVectors.Renderers.Wpf
         {
             PathGeometry geometry = new PathGeometry();
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
-            if (!string.IsNullOrWhiteSpace(clipRule) &&
-                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
+            if (!string.IsNullOrWhiteSpace(clipRule) && string.Equals(clipRule, "evenodd", comparer) 
+                || string.Equals(clipRule, CssConstants.ValNonzero, comparer))
             {
                 fillRule = clipRule;
             }
-            if (fillRule == "evenodd")
+            if (string.Equals(fillRule, "evenodd", comparer))
                 geometry.FillRule = FillRule.EvenOdd;
-            else if (fillRule == "nonzero")
+            else if (string.Equals(fillRule, CssConstants.ValNonzero, comparer))
                 geometry.FillRule = FillRule.Nonzero;
 
             SvgPointF initPoint = new SvgPointF(0, 0);
@@ -511,7 +512,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             double _cx = Math.Round(element.Cx.AnimVal.Value, 4);
             double _cy = Math.Round(element.Cy.AnimVal.Value, 4);
-            double _r = Math.Round(element.R.AnimVal.Value, 4);
+            double _r  = Math.Round(element.R.AnimVal.Value,  4);
 
             if (_r <= 0)
             {
@@ -558,13 +559,13 @@ namespace SharpVectors.Renderers.Wpf
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
             if (!string.IsNullOrWhiteSpace(clipRule) &&
-                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, CssConstants.ValNonzero))
             {
                 fillRule = clipRule;
             }
             if (fillRule == "evenodd")
                 geometry.FillRule = FillRule.EvenOdd;
-            else if (fillRule == "nonzero")
+            else if (fillRule == CssConstants.ValNonzero)
                 geometry.FillRule = FillRule.Nonzero;
 
             geometry.Figures.Add(polylineFigure);
@@ -608,13 +609,13 @@ namespace SharpVectors.Renderers.Wpf
             string fillRule = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
             if (!string.IsNullOrWhiteSpace(clipRule) &&
-                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, CssConstants.ValNonzero))
             {
                 fillRule = clipRule;
             }
             if (fillRule == "evenodd")
                 geometry.FillRule = FillRule.EvenOdd;
-            else if (fillRule == "nonzero")
+            else if (fillRule == CssConstants.ValNonzero)
                 geometry.FillRule = FillRule.Nonzero;
 
             geometry.Figures.Add(polylineFigure);

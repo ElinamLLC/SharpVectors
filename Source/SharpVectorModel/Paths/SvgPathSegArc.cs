@@ -144,16 +144,16 @@ namespace SharpVectors.Dom.Svg
                 sb.Append(",");
 
                 if (LargeArcFlag)
-                    sb.Append("1");
+                    sb.Append(SvgConstants.ValOne);
                 else
-                    sb.Append("0");
+                    sb.Append(SvgConstants.ValZero);
 
                 sb.Append(",");
 
                 if (SweepFlag)
-                    sb.Append("1");
+                    sb.Append(SvgConstants.ValOne);
                 else
-                    sb.Append("0");
+                    sb.Append(SvgConstants.ValZero);
 
                 sb.Append(",");
                 sb.Append(X);

@@ -1,8 +1,9 @@
 using System;
 using System.Drawing;
 
-using SharpVectors.Dom.Svg;
+using SharpVectors.Dom;
 using SharpVectors.Dom.Css;
+using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
 {
@@ -24,12 +25,12 @@ namespace SharpVectors.Renderers.Gdi
                 SvgColor colorToUse;
                 if (ColorType == SvgColorType.CurrentColor)
                 {
-                    string sCurColor = _element.GetComputedStyle(string.Empty).GetPropertyValue("color");
+                    string sCurColor = _element.GetComputedStyle(string.Empty).GetPropertyValue(CssConstants.PropColor);
                     colorToUse = new SvgColor(sCurColor);
                 }
                 else if (ColorType == SvgColorType.Unknown)
                 {
-                    colorToUse = new SvgColor("black");
+                    colorToUse = new SvgColor(CssConstants.ValBlack);
                 }
                 else
                 {
@@ -37,9 +38,9 @@ namespace SharpVectors.Renderers.Gdi
                 }
 
                 ICssColor rgbColor = colorToUse.RgbColor;
-                int red = Convert.ToInt32(rgbColor.Red.GetFloatValue(CssPrimitiveType.Number));
+                int red   = Convert.ToInt32(rgbColor.Red.GetFloatValue(CssPrimitiveType.Number));
                 int green = Convert.ToInt32(rgbColor.Green.GetFloatValue(CssPrimitiveType.Number));
-                int blue = Convert.ToInt32(rgbColor.Blue.GetFloatValue(CssPrimitiveType.Number));
+                int blue  = Convert.ToInt32(rgbColor.Blue.GetFloatValue(CssPrimitiveType.Number));
 
                 return Color.FromArgb(this.Opacity, red, green, blue);
             }

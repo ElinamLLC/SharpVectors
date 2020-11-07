@@ -4,6 +4,7 @@ using System.Xml;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 
@@ -211,7 +212,7 @@ namespace SharpVectors.Renderers.Texts
                 {
                     shiftBy = 0.6F * textFontSize;
                 }
-                else if (string.Equals(sBaselineShift, "baseline", comparer))
+                else if (string.Equals(sBaselineShift, CssConstants.ValBaseline, comparer))
                 {
                     shiftBy = 0;
                 }

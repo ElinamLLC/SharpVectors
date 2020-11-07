@@ -114,10 +114,10 @@ namespace SharpVectors.Dom.Svg
         public string Accumulate
         {
             get {
-                return this.GetAttribute("accumulate");
+                return this.GetAttribute(SvgConstants.AttrAccumulate);
             }
             set {
-                this.SetAttribute("accumulate", value);
+                this.SetAttribute(SvgConstants.AttrAccumulate, value);
             }
         }
 

@@ -3,6 +3,7 @@ using System.Xml;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
@@ -87,7 +88,7 @@ namespace SharpVectors.Renderers.Wpf
                     var svgParent = svgElm.ParentNode as SvgStyleableElement;
                     if (svgParent != null)
                     {
-                        prop = svgParent.GetPropertyValue("color", "viewport-fill");
+                        prop = svgParent.GetPropertyValue(CssConstants.PropColor, "viewport-fill");
                     }
                 }
 

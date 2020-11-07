@@ -33,7 +33,7 @@ namespace SharpVectors.Dom.Svg
             {
                 switch (match.Groups["align"].Value)
                 {
-                    case "none":
+                    case CssConstants.ValNone:
                         _alignment = SvgPreserveAspectRatioType.None;
                         break;
                     case "xMinYMin":

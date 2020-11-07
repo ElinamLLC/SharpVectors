@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -56,7 +57,7 @@ namespace SharpVectors.Renderers.Gdi
             }
             else if (PaintType == SvgPaintType.CurrentColor)
             {
-                stroke = new GdiSvgPaint(_element, "color");
+                stroke = new GdiSvgPaint(_element, CssConstants.PropColor);
             }
             else
             {
@@ -184,35 +185,34 @@ namespace SharpVectors.Renderers.Gdi
         {
             string dashArray = _element.GetPropertyValue("stroke-dasharray");
 
-            if (dashArray.Length == 0 || dashArray == "none")
+            if (string.IsNullOrWhiteSpace(dashArray) 
+                || dashArray.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
             {
                 return null;
             }
-            else
+
+            SvgNumberList list = new SvgNumberList(dashArray);
+
+            uint len = list.NumberOfItems;
+            float[] fDashArray = new float[len];
+
+            for (uint i = 0; i < len; i++)
             {
-                SvgNumberList list = new SvgNumberList(dashArray);
-
-                uint len = list.NumberOfItems;
-                float[] fDashArray = new float[len];
-
-                for (uint i = 0; i < len; i++)
-                {
-                    // divide by strokeWidth to take care of the difference between Svg and GDI+
-                    fDashArray[i] = (float)(list.GetItem(i).Value / strokeWidth);
-                }
-
-                if (len % 2 == 1)
-                {
-                    // odd number of values, duplicate
-                    float[] tmpArray = new float[len * 2];
-                    fDashArray.CopyTo(tmpArray, 0);
-                    fDashArray.CopyTo(tmpArray, (int)len);
-
-                    fDashArray = tmpArray;
-                }
-
-                return fDashArray;
+                // divide by strokeWidth to take care of the difference between Svg and GDI+
+                fDashArray[i] = (float)(list.GetItem(i).Value / strokeWidth);
             }
+
+            if (len % 2 == 1)
+            {
+                // odd number of values, duplicate
+                float[] tmpArray = new float[len * 2];
+                fDashArray.CopyTo(tmpArray, 0);
+                fDashArray.CopyTo(tmpArray, (int)len);
+
+                fDashArray = tmpArray;
+            }
+
+            return fDashArray;
         }
 
         private float GetDashOffset(float strokeWidth)
@@ -224,10 +224,7 @@ namespace SharpVectors.Renderers.Gdi
                 var dashOffsetLength = new SvgLength(_element, "stroke-dashoffset", SvgLengthDirection.Viewport, dashOffset);
                 return (float)dashOffsetLength.Value;
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
 
         private GdiFill GetPaintFill(string uri)
@@ -239,19 +236,16 @@ namespace SharpVectors.Renderers.Gdi
 
         private Brush GetBrush(GraphicsPath gp, string propPrefix)
         {
-            SvgPaint painter;
             SvgPaintType curPaintType = this.PaintType;
             if (curPaintType == SvgPaintType.None)
             {
                 return null;
             }
-            else if (curPaintType == SvgPaintType.CurrentColor)
+            
+            SvgPaint painter = this;
+            if (curPaintType == SvgPaintType.CurrentColor)
             {
-                painter = new GdiSvgPaint(_element, "color");
-            }
-            else
-            {
-                painter = this;
+                painter = new GdiSvgPaint(_element, CssConstants.PropColor);
             }
 
             SvgPaintType paintType = painter.PaintType;
@@ -316,7 +310,7 @@ namespace SharpVectors.Renderers.Gdi
                     }
                     else if (curPaintType == SvgPaintType.UriCurrentColor)
                     {
-                        painter = new GdiSvgPaint(_element, "color");
+                        painter = new GdiSvgPaint(_element, CssConstants.PropColor);
                     }
                     else
                     {

@@ -154,7 +154,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (!this.HasAttribute("font-variant"))
                 {
-                    return "normal";
+                    return CssConstants.ValNormal;
                 }
                 return this.GetAttribute("font-variant");
             }
@@ -188,7 +188,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (!this.HasAttribute("font-stretch"))
                 {
-                    return "normal";
+                    return CssConstants.ValNormal;
                 }
                 return this.GetAttribute("font-stretch");
             }

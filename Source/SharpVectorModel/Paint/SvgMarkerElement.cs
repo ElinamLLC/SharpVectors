@@ -69,7 +69,7 @@ namespace SharpVectors.Dom.Svg
         public void SetOrientToAuto()
         {
             _orientType = null;
-            SetAttribute("orient", "auto");
+            SetAttribute("orient", CssConstants.ValAuto);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_refX == null)
                 {
-                    _refX = new SvgAnimatedLength(this, "refX", SvgLengthDirection.Horizontal, "0");
+                    _refX = new SvgAnimatedLength(this, "refX", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
                 }
                 return _refX;
             }
@@ -105,7 +105,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_refY == null)
                 {
-                    _refY = new SvgAnimatedLength(this, "refY", SvgLengthDirection.Vertical, "0");
+                    _refY = new SvgAnimatedLength(this, "refY", SvgLengthDirection.Vertical, SvgConstants.ValZero);
                 }
                 return _refY;
             }
@@ -172,12 +172,12 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_orientType == null)
                 {
-                    string orientAttr = GetAttribute("orient");
-                    if (orientAttr.Equals("auto", StringComparison.OrdinalIgnoreCase))
+                    string orientAttr = this.GetAttribute("orient");
+                    if (orientAttr.Equals(CssConstants.ValAuto, StringComparison.OrdinalIgnoreCase))
                     {
                         _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Auto);
                     }
-                    else if (orientAttr.Equals("none", StringComparison.OrdinalIgnoreCase))
+                    else if (orientAttr.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
                     {
                         _orientType = new SvgAnimatedEnumeration((ushort)SvgMarkerOrient.Unknown);
                     }
@@ -204,15 +204,15 @@ namespace SharpVectors.Dom.Svg
                 {
                     if (OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.Angle))
                     {
-                        _orientAngle = new SvgAnimatedAngle(GetAttribute("orient"), "0");
+                        _orientAngle = new SvgAnimatedAngle(this.GetAttribute("orient"), SvgConstants.ValZero);
                     }
                     else if (OrientType.AnimVal.Equals((ushort)SvgMarkerOrient.AutoStartReverse))
                     {
-                        _orientAngle = new SvgAnimatedAngle("180", "0");
+                        _orientAngle = new SvgAnimatedAngle("180", SvgConstants.ValZero);
                     }
                     else
                     {
-                        _orientAngle = new SvgAnimatedAngle("0", "0");
+                        _orientAngle = new SvgAnimatedAngle(SvgConstants.ValZero, SvgConstants.ValZero);
                     }
                 }
                 return _orientAngle;

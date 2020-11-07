@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -111,8 +112,8 @@ namespace SharpVectors.Renderers.Gdi
 			{
 				svgElm.SetAttribute("viewBox", _patternElement.GetAttribute("viewBox"));
 			}
-			svgElm.SetAttribute("x", "0");
-			svgElm.SetAttribute("y", "0");
+			svgElm.SetAttribute("x", SvgConstants.ValZero);
+			svgElm.SetAttribute("y", SvgConstants.ValZero);
 			svgElm.SetAttribute("width", _patternElement.GetAttribute("width"));
 			svgElm.SetAttribute("height", _patternElement.GetAttribute("height"));
 

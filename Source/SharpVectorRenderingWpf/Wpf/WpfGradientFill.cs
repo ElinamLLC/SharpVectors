@@ -3,6 +3,7 @@ using System.Xml;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Utils;
 
@@ -114,7 +115,7 @@ namespace SharpVectors.Renderers.Wpf
             string colorInterpolation = res.GetPropertyValue("color-interpolation");
             if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
-                if (string.Equals(colorInterpolation, "linearRGB", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(colorInterpolation, CssConstants.ValLinearRgb, StringComparison.OrdinalIgnoreCase))
                 {
                     brush.ColorInterpolationMode = ColorInterpolationMode.ScRgbLinearInterpolation;
                 }
@@ -306,7 +307,7 @@ namespace SharpVectors.Renderers.Wpf
             string colorInterpolation = res.GetPropertyValue("color-interpolation");
             if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
-                if (string.Equals(colorInterpolation, "linearRGB", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(colorInterpolation, CssConstants.ValLinearRgb, StringComparison.OrdinalIgnoreCase))
                 {
                     brush.ColorInterpolationMode = ColorInterpolationMode.SRgbLinearInterpolation;
                 }

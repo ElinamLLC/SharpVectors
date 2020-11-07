@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
 
@@ -78,6 +79,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 return;
             }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             WpfDrawingContext context = renderer.Context;
 
@@ -160,9 +162,10 @@ namespace SharpVectors.Renderers.Wpf
                     _drawGroup.Opacity = opacityValue;
                 }
 
-                string sVisibility = element.GetPropertyValue("visibility");
-                string sDisplay = element.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                string sVisibility = element.GetPropertyValue(CssConstants.PropVisibility);
+                string sDisplay = element.GetPropertyValue(CssConstants.PropDisplay);
+                if (string.Equals(sVisibility, CssConstants.ValHidden, comparer) 
+                    || string.Equals(sDisplay, CssConstants.ValNone, comparer))
                 {
                     opacityValue = 0;
                     _drawGroup.Opacity = 0;

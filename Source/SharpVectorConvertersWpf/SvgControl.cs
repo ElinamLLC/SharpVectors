@@ -1314,6 +1314,11 @@ namespace SharpVectors.Converters
             {
                 return null;
             }
+            if (svgStream.CanSeek && svgStream.Position != 0)
+            {
+                // Move the position to the start of the stream
+                svgStream.Seek(0, SeekOrigin.Begin);
+            }
 
             DrawingGroup drawing = null;
 

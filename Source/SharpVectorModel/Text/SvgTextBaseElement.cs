@@ -15,14 +15,14 @@ namespace SharpVectors.Dom.Svg
         public override ISvgAnimatedLength LetterSpacing
         {
             get {
-                return new SvgAnimatedLength(this, "letter-spacing", SvgLengthDirection.Horizontal, "0");
+                return new SvgAnimatedLength(this, "letter-spacing", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
             }
         }
 
         public override ISvgAnimatedLength TextLength
         {
             get {
-                return new SvgAnimatedLength(this, "textLength", SvgLengthDirection.Horizontal, "0");
+                return new SvgAnimatedLength(this, "textLength", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
             }
         }
 

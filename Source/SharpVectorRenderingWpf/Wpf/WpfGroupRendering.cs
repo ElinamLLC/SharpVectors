@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 using System.Windows.Media;
 
+using SharpVectors.Dom; 
 using SharpVectors.Dom.Svg; 
 using SharpVectors.Runtime;
 
@@ -69,6 +70,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (_drawGroup != null)
             {
+                var comparer = StringComparison.OrdinalIgnoreCase;
                 Geometry clipGeom = this.ClipGeometry;
                 if (clipGeom != null)
                 {
@@ -101,9 +103,9 @@ namespace SharpVectors.Renderers.Wpf
                     _drawGroup.Opacity = opacityValue;
                 }
 
-                string sVisibility = element.GetPropertyValue("visibility");
-                string sDisplay = element.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden", StringComparison.OrdinalIgnoreCase))
+                string sVisibility = element.GetPropertyValue(CssConstants.PropVisibility);
+                string sDisplay = element.GetPropertyValue(CssConstants.PropDisplay);
+                if (string.Equals(sVisibility, CssConstants.ValHidden, comparer))
                 {
                     var isOverriden = false;
                     foreach (XmlNode child in element.ChildNodes)
@@ -111,8 +113,8 @@ namespace SharpVectors.Renderers.Wpf
                         if (child.NodeType == XmlNodeType.Element)
                         {
                             var svgElem = child as SvgElement;
-                            if (svgElem != null && string.Equals(svgElem.GetAttribute("visibility"),
-                                "visible", StringComparison.OrdinalIgnoreCase))
+                            if (svgElem != null && string.Equals(svgElem.GetAttribute(CssConstants.PropVisibility),
+                                CssConstants.ValVisible, comparer))
                             {
                                 isOverriden = true;
                                 break;
@@ -125,7 +127,7 @@ namespace SharpVectors.Renderers.Wpf
                         _drawGroup.Opacity = 0;
                     }
                 }
-                else if (string.Equals(sDisplay, "none", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(sDisplay, CssConstants.ValNone, comparer))
                 {
                     _drawGroup.Opacity = 0;
                 }

@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text.RegularExpressions;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -123,10 +124,12 @@ namespace SharpVectors.Renderers.Gdi
             {
                 return;
             }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
-            string sVisibility = textElement.GetPropertyValue("visibility");
-            string sDisplay = textElement.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            string sVisibility = textElement.GetPropertyValue(CssConstants.PropVisibility);
+            string sDisplay    = textElement.GetPropertyValue(CssConstants.PropDisplay);
+            if (string.Equals(sVisibility, CssConstants.ValHidden, comparer) 
+                || string.Equals(sDisplay, CssConstants.ValNone, comparer))
             {
                 return;
             }
@@ -145,7 +148,7 @@ namespace SharpVectors.Renderers.Gdi
             if (sBaselineShift.Length > 0)
             {
                 float textFontSize = GetComputedFontSize(textElement);
-                if (sBaselineShift.EndsWith("%", StringComparison.OrdinalIgnoreCase))
+                if (sBaselineShift.EndsWith("%", comparer))
                 {
                     shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
                         sBaselineShift.Length - 1)) / 100 * textFontSize;
@@ -158,7 +161,7 @@ namespace SharpVectors.Renderers.Gdi
                 {
                     shiftBy = 0.6F * textFontSize;
                 }
-                else if (sBaselineShift == "baseline")
+                else if (sBaselineShift == CssConstants.ValBaseline)
                 {
                     shiftBy = 0;
                 }
@@ -182,9 +185,10 @@ namespace SharpVectors.Renderers.Gdi
                 SvgStyleableElement stylable = child as SvgStyleableElement;
                 if (stylable != null)
                 {
-                    sVisibility = stylable.GetPropertyValue("visibility");
-                    sDisplay = stylable.GetPropertyValue("display");
-                    if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                    sVisibility = stylable.GetPropertyValue(CssConstants.PropVisibility);
+                    sDisplay = stylable.GetPropertyValue(CssConstants.PropDisplay);
+                    if (string.Equals(sVisibility, CssConstants.ValHidden, comparer) 
+                        || string.Equals(sDisplay, CssConstants.ValNone, comparer))
                     {
                         continue;
                     }
@@ -200,11 +204,11 @@ namespace SharpVectors.Renderers.Gdi
                 else if (nodeType == XmlNodeType.Element)
                 {
                     string nodeName = child.Name;
-                    if (string.Equals(nodeName, "tref"))
+                    if (string.Equals(nodeName, "tref", comparer))
                     {
                         AddTRefElementPath((SvgTRefElement)child, ref ctp);
                     }
-                    else if (string.Equals(nodeName, "tspan"))
+                    else if (string.Equals(nodeName, "tspan", comparer))
                     {
                         AddTSpanElementPath((SvgTSpanElement)child, ref ctp);
                     }
@@ -390,7 +394,7 @@ namespace SharpVectors.Renderers.Gdi
                 {
                     shiftBy = 0.6F * textFontSize;
                 }
-                else if (sBaselineShift == "baseline")
+                else if (sBaselineShift == CssConstants.ValBaseline)
                 {
                     shiftBy = 0;
                 }
@@ -822,7 +826,7 @@ namespace SharpVectors.Renderers.Gdi
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return GdiFontWeights.Normal;
                 case "bold":
                     return GdiFontWeights.Bold;
@@ -887,7 +891,7 @@ namespace SharpVectors.Renderers.Gdi
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return GdiFontWeights.Bold;
                 case "bold":
                     return GdiFontWeights.ExtraBold;
@@ -925,7 +929,7 @@ namespace SharpVectors.Renderers.Gdi
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return GdiFontWeights.Light;
                 case "bold":
                     return GdiFontWeights.Normal;
@@ -969,7 +973,7 @@ namespace SharpVectors.Renderers.Gdi
 
             var comparer = StringComparison.OrdinalIgnoreCase;
 
-            if (string.Equals(fontStyle, "normal", comparer))
+            if (string.Equals(fontStyle, CssConstants.ValNormal, comparer))
             {
                 return GdiFontStyles.Normal;
             }
@@ -995,7 +999,7 @@ namespace SharpVectors.Renderers.Gdi
 
             switch (fontStretch)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return GdiFontStretches.Normal;
                 case "ultra-condensed":
                     return GdiFontStretches.UltraCondensed;

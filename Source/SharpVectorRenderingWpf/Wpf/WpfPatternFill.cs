@@ -135,46 +135,46 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Private Methods
 
-//        private SvgSvgElement MoveIntoSvgElement()
-//        {
-//            SvgDocument doc = _patternElement.OwnerDocument;
-//            SvgSvgElement svgElm = doc.CreateElement("", "svg", SvgDocument.SvgNamespace) as SvgSvgElement;
+        //        private SvgSvgElement MoveIntoSvgElement()
+        //        {
+        //            SvgDocument doc = _patternElement.OwnerDocument;
+        //            SvgSvgElement svgElm = doc.CreateElement("", "svg", SvgDocument.SvgNamespace) as SvgSvgElement;
 
-//            XmlNodeList children = _patternElement.Children;
-//            if (children.Count > 0)
-//            {
-//                oldParent = children[0].ParentNode as XmlElement;
-//            }
+        //            XmlNodeList children = _patternElement.Children;
+        //            if (children.Count > 0)
+        //            {
+        //                oldParent = children[0].ParentNode as XmlElement;
+        //            }
 
-//            for (int i = 0; i < children.Count; i++)
-//            {
-//                svgElm.AppendChild(children[i]);
-//            }
+        //            for (int i = 0; i < children.Count; i++)
+        //            {
+        //                svgElm.AppendChild(children[i]);
+        //            }
 
-//            if (_patternElement.HasAttribute("viewBox"))
-//            {
-//                svgElm.SetAttribute("viewBox", _patternElement.GetAttribute("viewBox"));
-//            }
-//            //svgElm.SetAttribute("x", "0");
-//            //svgElm.SetAttribute("y", "0");
-//            svgElm.SetAttribute("x",      _patternElement.GetAttribute("x"));
-//            svgElm.SetAttribute("y",      _patternElement.GetAttribute("y"));
-//            svgElm.SetAttribute("width",  _patternElement.GetAttribute("width"));
-//            svgElm.SetAttribute("height", _patternElement.GetAttribute("height"));
+        //            if (_patternElement.HasAttribute("viewBox"))
+        //            {
+        //                svgElm.SetAttribute("viewBox", _patternElement.GetAttribute("viewBox"));
+        //            }
+        //            //svgElm.SetAttribute("x", SvgConstants.ValZero);
+        //            //svgElm.SetAttribute("y", SvgConstants.ValZero);
+        //            svgElm.SetAttribute("x",      _patternElement.GetAttribute("x"));
+        //            svgElm.SetAttribute("y",      _patternElement.GetAttribute("y"));
+        //            svgElm.SetAttribute("width",  _patternElement.GetAttribute("width"));
+        //            svgElm.SetAttribute("height", _patternElement.GetAttribute("height"));
 
-//            if (_patternElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
-//            {
-////                svgElm.SetAttribute("viewBox", "0 0 1 1");
-//            }
-//            else
-//            {
-//                _isUserSpace = true;
-//            }
+        //            if (_patternElement.PatternContentUnits.AnimVal.Equals((ushort)SvgUnitType.ObjectBoundingBox))
+        //            {
+        ////                svgElm.SetAttribute("viewBox", "0 0 1 1");
+        //            }
+        //            else
+        //            {
+        //                _isUserSpace = true;
+        //            }
 
-//            _patternElement.AppendChild(svgElm);
+        //            _patternElement.AppendChild(svgElm);
 
-//            return svgElm;
-//        }
+        //            return svgElm;
+        //        }
 
         //private void MoveOutOfSvgElement(SvgSvgElement svgElm)
         //{

@@ -410,7 +410,7 @@ namespace SharpVectors.Dom.Css
                 if (_styles.ContainsKey(name))
                 {
                     string existingPrio = _styles[name].Priority;
-
+                    
                     if (existingPrio != "important" || prio == "important")
                     {
                         _styles.Remove(name);
@@ -532,10 +532,14 @@ namespace SharpVectors.Dom.Css
         /// Returns null if the property has not been set.</returns>
         public virtual ICssValue GetPropertyCssValue(string propertyName)
         {
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                return null;
+            }
             if (_styles.ContainsKey(propertyName))
             {
                 CssStyleBlock scs = _styles[propertyName];
-                if(propertyName == "font-family")
+                if (propertyName.Equals(SvgConstants.AttrFontFamily, StringComparison.OrdinalIgnoreCase))
                 {
                     scs.CssValue = new CssValue(CssValueType.PrimitiveValue, scs.Value, ReadOnly);
                 }
@@ -556,6 +560,10 @@ namespace SharpVectors.Dom.Css
         /// Returns the empty string if the property has not been set.</returns>
         public virtual string GetPropertyValue(string propertyName)
         {
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                return string.Empty;
+            }
             return (_styles.ContainsKey(propertyName)) ? _styles[propertyName].Value.Trim('\'') : string.Empty;
         }
 

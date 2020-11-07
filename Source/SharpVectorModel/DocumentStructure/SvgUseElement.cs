@@ -47,7 +47,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_x == null)
                 {
-                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
                 }
                 return _x;
             }
@@ -58,7 +58,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_y == null)
                 {
-                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, SvgConstants.ValZero);
                 }
                 return _y;
             }

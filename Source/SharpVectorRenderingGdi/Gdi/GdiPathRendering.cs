@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -45,12 +46,14 @@ namespace SharpVectors.Renderers.Gdi
             {
                 return;
             }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             SvgStyleableElement styleElm = (SvgStyleableElement)_svgElement;
 
-			string sVisibility = styleElm.GetPropertyValue("visibility");
-			string sDisplay    = styleElm.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+			string sVisibility = styleElm.GetPropertyValue(CssConstants.PropVisibility);
+			string sDisplay    = styleElm.GetPropertyValue(CssConstants.PropDisplay);
+            if (string.Equals(sVisibility, CssConstants.ValHidden, comparer) 
+                || string.Equals(sDisplay, CssConstants.ValNone, comparer))
             {
                 return;
             }

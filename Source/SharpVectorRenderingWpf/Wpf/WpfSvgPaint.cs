@@ -560,13 +560,13 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            if (dashArrayText.Equals("none", StringComparison.OrdinalIgnoreCase)
+            if (dashArrayText.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase)
                 || dashArrayText.Equals("null", StringComparison.OrdinalIgnoreCase))
             {
                 // NOTE: Rule changed in Second Edition of Test Suite 1.1
                 //string dashArrayAttr = _element.GetAttribute("stroke-dasharray");
                 //if (string.IsNullOrWhiteSpace(dashArrayAttr) ||
-                //    dashArrayAttr.Equals("none", StringComparison.OrdinalIgnoreCase)
+                //    dashArrayAttr.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase)
                 //    || dashArrayAttr.Equals("null", StringComparison.OrdinalIgnoreCase))
                 //{
                 //    return null;

@@ -1,8 +1,9 @@
 using System;
 using System.Windows.Media;
 
-using SharpVectors.Dom.Svg;
+using SharpVectors.Dom;
 using SharpVectors.Dom.Css;
+using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -36,7 +37,7 @@ namespace SharpVectors.Renderers.Wpf
                 if (ColorType == SvgColorType.CurrentColor)
                 {
                     var cssDeclaration = _element.GetComputedStyle(string.Empty);
-                    string currentColor = cssDeclaration.GetPropertyValue("color");
+                    string currentColor = cssDeclaration.GetPropertyValue(CssConstants.PropColor);
                     if (!string.IsNullOrWhiteSpace(currentColor))
                     {
                         colorToUse = new SvgColor(currentColor);
@@ -50,13 +51,13 @@ namespace SharpVectors.Renderers.Wpf
                         }
                         else
                         {
-                            colorToUse = new SvgColor("black");
+                            colorToUse = new SvgColor(CssConstants.ValBlack);
                         }
                     }
                 }
                 else if (ColorType == SvgColorType.Unknown)
                 {
-                    colorToUse = new SvgColor("black");
+                    colorToUse = new SvgColor(CssConstants.ValBlack);
                 }
                 else
                 {
@@ -74,8 +75,7 @@ namespace SharpVectors.Renderers.Wpf
                         CssPrimitiveType.Number : CssPrimitiveType.Percentage);
                     if (!double.IsNaN(dAlpha) && !double.IsInfinity(dAlpha))
                     {
-                        return Color.FromArgb(Convert.ToByte(dAlpha), Convert.ToByte(red),
-                            Convert.ToByte(green), Convert.ToByte(blue));
+                        return Color.FromArgb(Convert.ToByte(dAlpha), Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
                     }
                 }
 

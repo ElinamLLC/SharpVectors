@@ -117,7 +117,7 @@ namespace SharpVectors.Dom.Svg
             }
             else
             {
-                _rgbColor = new CssColor("black");
+                _rgbColor = new CssColor(CssConstants.ValBlack);
             }
 
             //TODO--PAUL: deal with ICC colors

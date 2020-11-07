@@ -86,10 +86,10 @@ namespace SharpVectors.Dom.Css
             // Color values and names extracted from https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
             _knownColors = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            _knownColors.Add("black",                "#000000");
+            _knownColors.Add(CssConstants.ValBlack, "#000000");
             _knownColors.Add("silver",               "#c0c0c0");
             _knownColors.Add("gray",                 "#808080");
-            _knownColors.Add("white",                "#ffffff");
+            _knownColors.Add(CssConstants.ValWhite,  "#ffffff");
             _knownColors.Add("maroon",               "#800000");
             _knownColors.Add("red",                  "#ff0000");
             _knownColors.Add("purple",               "#800080");
@@ -422,7 +422,7 @@ namespace SharpVectors.Dom.Css
                         }
                         else
                         {
-                            SetPrimitiveValues("0", "0", "0", alpha);
+                            SetPrimitiveValues(SvgConstants.ValZero, SvgConstants.ValZero, SvgConstants.ValZero, alpha);
                         }
                     }
                     else
@@ -468,7 +468,7 @@ namespace SharpVectors.Dom.Css
                         }
                         else
                         {
-                            SetPrimitiveValues("0", "0", "0", alpha);
+                            SetPrimitiveValues(SvgConstants.ValZero, SvgConstants.ValZero, SvgConstants.ValZero, alpha);
                         }
                     }
                     else

@@ -59,7 +59,7 @@ namespace SharpVectors.Dom.Svg
                     case "marker-mid":
                     case "marker-end":
                     // Color.attrib, Paint.attrib 
-                    case "color":
+                    case CssConstants.PropColor:
                     case "fill":
                     case "fill-rule":
                     case "stroke":
@@ -74,11 +74,11 @@ namespace SharpVectors.Dom.Svg
                     case "stroke-opacity":
                     case "fill-opacity":
                     // Graphics.attrib
-                    case "display":
+                    case CssConstants.PropDisplay:
                     case "image-rendering":
                     case "shape-rendering":
                     case "text-rendering":
-                    case "visibility":
+                    case CssConstants.PropVisibility:
                         Invalidate();
                         break;
                     case "transform":
