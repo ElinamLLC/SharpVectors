@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 
@@ -76,7 +77,7 @@ namespace SharpVectors.Converters.Shapes
             string fillRuleStr = element.GetPropertyValue("fill-rule");
             string clipRule = element.GetAttribute("clip-rule");
             if (!string.IsNullOrWhiteSpace(clipRule) &&
-                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, "nonzero"))
+                string.Equals(clipRule, "evenodd") || string.Equals(clipRule, CssConstants.ValNonzero))
             {
                 fillRuleStr = clipRule;
             }
@@ -85,7 +86,7 @@ namespace SharpVectors.Converters.Shapes
                 fillRule = FillRule.EvenOdd;
                 return true;
             }
-            else if (StringComparer.InvariantCultureIgnoreCase.Equals(fillRuleStr, "nonzero"))
+            else if (StringComparer.InvariantCultureIgnoreCase.Equals(fillRuleStr, CssConstants.ValNonzero))
             {
                 fillRule = FillRule.Nonzero;
                 return true;
@@ -160,7 +161,7 @@ namespace SharpVectors.Converters.Shapes
                 return false;
             }
 
-            if (dashArrayText == "none")
+            if (dashArrayText.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }
@@ -207,7 +208,7 @@ namespace SharpVectors.Converters.Shapes
             }
             if (paint.PaintType == SvgPaintType.CurrentColor)
             {
-                svgBrush = new SvgPaint(element.GetComputedStyle(string.Empty).GetPropertyValue("color"));
+                svgBrush = new SvgPaint(element.GetComputedStyle(string.Empty).GetPropertyValue(CssConstants.PropColor));
             }
             else
             {
@@ -340,7 +341,7 @@ namespace SharpVectors.Converters.Shapes
             string colorInterpolation = gradient.GetPropertyValue("color-interpolation");
             if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
-                if (colorInterpolation == "linearRGB")
+                if (colorInterpolation == CssConstants.ValLinearRgb)
                 {
                     brush.ColorInterpolationMode = ColorInterpolationMode.ScRgbLinearInterpolation;
                 }
@@ -412,7 +413,7 @@ namespace SharpVectors.Converters.Shapes
             string colorInterpolation = gradient.GetPropertyValue("color-interpolation");
             if (!string.IsNullOrWhiteSpace(colorInterpolation))
             {
-                if (colorInterpolation == "linearRGB")
+                if (colorInterpolation == CssConstants.ValLinearRgb)
                 {
                     brush.ColorInterpolationMode = ColorInterpolationMode.SRgbLinearInterpolation;
                 }
@@ -447,7 +448,7 @@ namespace SharpVectors.Converters.Shapes
                     SvgColor svgColor = new SvgColor(stop.GetComputedStyle(string.Empty).GetPropertyValue("stop-color"));
                     if (svgColor.ColorType == SvgColorType.CurrentColor)
                     {
-                        string sCurColor = stop.GetComputedStyle(string.Empty).GetPropertyValue("color");
+                        string sCurColor = stop.GetComputedStyle(string.Empty).GetPropertyValue(CssConstants.PropColor);
                         svgColor = new SvgColor(sCurColor);
                     }
                     TryConvertColor(svgColor.RgbColor, out color);
@@ -717,7 +718,7 @@ namespace SharpVectors.Converters.Shapes
                 return FontStyles.Normal;
             }
 
-            if (fontStyle == "normal")
+            if (fontStyle == CssConstants.ValNormal)
             {
                 return FontStyles.Normal;
             }
@@ -743,7 +744,7 @@ namespace SharpVectors.Converters.Shapes
 
             switch (fontStretch)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontStretches.Normal;
                 case "ultra-condensed":
                     return FontStretches.UltraCondensed;
@@ -795,7 +796,7 @@ namespace SharpVectors.Converters.Shapes
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontWeights.Normal;
                 case "bold":
                     return FontWeights.Bold;

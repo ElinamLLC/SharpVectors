@@ -7,9 +7,10 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
-using SharpVectors.Renderers.Texts;
 using SharpVectors.Runtime;
+using SharpVectors.Renderers.Texts;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -121,18 +122,18 @@ namespace SharpVectors.Renderers.Wpf
             _textWidth    = 0;
             _isMeasuring  = false;
 
-            WpfDrawingContext context = renderer.Context;
-
             SvgRenderingHint hint = _svgElement.RenderingHint;
             if (hint == SvgRenderingHint.Clipping)
             {
                 return;
             }
 
+            var context = renderer.Context;
+
             var comparer = StringComparison.OrdinalIgnoreCase;
 
             // We do not directly render the contents of the clip-path, unless specifically requested...
-            if (string.Equals(_svgElement.ParentNode.LocalName, "clipPath", comparer) &&
+            if (string.Equals(_svgElement.ParentNode.LocalName, SvgConstants.TagClipPath, comparer) &&
                 !context.RenderingClipRegion)
             {
                 return;
@@ -149,9 +150,10 @@ namespace SharpVectors.Renderers.Wpf
 
             _drawGroup = new DrawingGroup();
 
-            string sVisibility = _textElement.GetPropertyValue("visibility");
-            string sDisplay = _textElement.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden", comparer) || string.Equals(sDisplay, "none", comparer))
+            string sVisibility = _textElement.GetPropertyValue(CssConstants.PropVisibility);
+            string sDisplay = _textElement.GetPropertyValue(CssConstants.PropDisplay);
+            if (string.Equals(sVisibility, CssConstants.ValHidden, comparer) 
+                || string.Equals(sDisplay, CssConstants.ValNone, comparer))
             {
                 _drawGroup.Opacity = 0;
             }
@@ -260,7 +262,7 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     shiftBy = 0.6F * textFontSize;
                 }
-                else if (string.Equals(sBaselineShift, "baseline", comparer))
+                else if (string.Equals(sBaselineShift, CssConstants.ValBaseline, comparer))
                 {
                     shiftBy = 0;
                 }
@@ -1033,7 +1035,7 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     shiftBy = 0.6F * textFontSize;
                 }
-                else if (string.Equals(sBaselineShift, "baseline", comparer))
+                else if (string.Equals(sBaselineShift, CssConstants.ValBaseline, comparer))
                 {
                     shiftBy = 0;
                 }

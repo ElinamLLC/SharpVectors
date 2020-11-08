@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" 
+	xmlns:cc="http://creativecommons.org/ns#" 
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+	xmlns:svg="http://www.w3.org/2000/svg" 
+	xmlns="http://www.w3.org/2000/svg" 
+	xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" 
+	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+	id="svg2" 
+	version="1.1" 
+	inkscape:version="0.48.1 " 
+	sodipodi:docname="text.svg">
+  <g 
+	inkscape:label="Livello 1" 
+	inkscape:groupmode="layer" 
+	id="id000001" 
+	fill-rule="evenodd">
+    <text 
+	xml:space="preserve" 
+	
+	style="font-style:normal;font-weight:normal;font-size:16px;line-height:125%;font-family:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#AAAAAA;stroke-width:0.001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+	x="90" 
+	y="90" 
+	id="text2985" 
+	sodipodi:linespacing="125%" >
+	<tspan 
+	sodipodi:role="line" 
+	id="tspan2987" 
+	x="90" 
+	y="90" 
+	>Hello world!!</tspan>
+	</text>
+  </g>
+  <!-- 
+  
+	style="
+	stroke:none;
+	stroke-width:1px;
+	stroke-linecap:butt;
+	stroke-linejoin:miter;
+	stroke-opacity:1"  
+
+	style="
+	font-variant:normal;
+	font-stretch:normal;
+	stroke:#AAAAAA;
+	stroke-opacity:0;
+	stroke-width:0.001000"  
+  
+  
+  font-family:Arial;
+  fill:#000000;
+  fill-opacity:1;
+	letter-spacing:0px;
+	word-spacing:0px;
+	line-height:125%;
+  font-size:16px;
+    font-style:normal;
+  font-weight:normal;
+  -inkscape-font-specification:Arial;
+  
+  -->
+</svg>

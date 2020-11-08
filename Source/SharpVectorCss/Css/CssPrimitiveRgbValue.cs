@@ -38,7 +38,7 @@ namespace SharpVectors.Dom.Css
             _namedColors.Add("azure");
             _namedColors.Add("beige");
             _namedColors.Add("bisque");
-            _namedColors.Add("black");
+            _namedColors.Add(CssConstants.ValBlack);
             _namedColors.Add("blanchedalmond");
             _namedColors.Add("blue");
             _namedColors.Add("blueviolet");
@@ -174,7 +174,7 @@ namespace SharpVectors.Dom.Css
             _namedColors.Add("turquoise");
             _namedColors.Add("violet");
             _namedColors.Add("wheat");
-            _namedColors.Add("white");
+            _namedColors.Add(CssConstants.ValWhite);
             _namedColors.Add("whitesmoke");
             _namedColors.Add("yellow");
             _namedColors.Add("yellowgreen");

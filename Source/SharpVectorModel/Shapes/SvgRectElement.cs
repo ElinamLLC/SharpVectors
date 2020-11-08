@@ -70,7 +70,7 @@ namespace SharpVectors.Dom.Svg
                         Invalidate();
                         return;
                     // Color.attrib, Paint.attrib 
-                    case "color":
+                    case CssConstants.PropColor:
                     case "fill":
                     case "fill-rule":
                     case "stroke":
@@ -85,11 +85,11 @@ namespace SharpVectors.Dom.Svg
                     case "stroke-opacity":
                     case "fill-opacity":
                     // Graphics.attrib
-                    case "display":
+                    case CssConstants.PropDisplay:
                     case "image-rendering":
                     case "shape-rendering":
                     case "text-rendering":
-                    case "visibility":
+                    case CssConstants.PropVisibility:
                         Invalidate();
                         break;
                     case "transform":
@@ -163,7 +163,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_x == null)
                 {
-                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, "0");
+                    _x = new SvgAnimatedLength(this, "x", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
                 }
                 return _x;
             }
@@ -174,7 +174,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_y == null)
                 {
-                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, "0");
+                    _y = new SvgAnimatedLength(this, "y", SvgLengthDirection.Vertical, SvgConstants.ValZero);
                 }
                 return _y;
             }
@@ -185,7 +185,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_rx == null)
                 {
-                    _rx = new SvgAnimatedLength(this, "rx", SvgLengthDirection.Horizontal, "0");
+                    _rx = new SvgAnimatedLength(this, "rx", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
                 }
                 return _rx;
             }
@@ -196,7 +196,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_ry == null)
                 {
-                    _ry = new SvgAnimatedLength(this, "ry", SvgLengthDirection.Vertical, "0");
+                    _ry = new SvgAnimatedLength(this, "ry", SvgLengthDirection.Vertical, SvgConstants.ValZero);
                 }
                 return _ry;
             }

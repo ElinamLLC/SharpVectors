@@ -232,7 +232,7 @@ namespace SharpVectors.Dom
         public const string ValLightyellow          = "lightyellow";
         public const string ValLimegreen            = "limegreen";
         public const string ValLime                 = "lime";
-        public const string ValLinearrgb            = "linearrgb";
+        public const string ValLinearRgb            = "linearRGB";
         public const string ValLinen                = "linen";
         public const string ValLineThrough          = "line-through";
         public const string ValListItem             = "list-item";

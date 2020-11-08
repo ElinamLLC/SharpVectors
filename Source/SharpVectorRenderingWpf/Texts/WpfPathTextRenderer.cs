@@ -4,6 +4,7 @@ using System.Xml;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 
@@ -72,8 +73,8 @@ namespace SharpVectors.Renderers.Texts
             // If the path has a transform, apply it to get a transformed path...
             if (targetPath.HasAttribute("transform"))
             {
-                var svgTransform = new SvgTransform(targetPath.GetAttribute("transform"));
-                var svgMatrix = svgTransform.Matrix;
+                var svgTransform = new SvgTransformList(targetPath.GetAttribute("transform"));
+                var svgMatrix = svgTransform.TotalMatrix;
                 if (!svgMatrix.IsIdentity)
                 {
                     pathGeometry.Transform = new MatrixTransform(svgMatrix.A, svgMatrix.B, svgMatrix.C,
@@ -211,7 +212,7 @@ namespace SharpVectors.Renderers.Texts
                 {
                     shiftBy = 0.6F * textFontSize;
                 }
-                else if (string.Equals(sBaselineShift, "baseline", comparer))
+                else if (string.Equals(sBaselineShift, CssConstants.ValBaseline, comparer))
                 {
                     shiftBy = 0;
                 }

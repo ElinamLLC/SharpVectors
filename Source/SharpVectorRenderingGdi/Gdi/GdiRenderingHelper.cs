@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -188,14 +189,16 @@ namespace SharpVectors.Renderers.Gdi
                 renderingNode = null;
                 return;
             }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             bool shouldRender = true;
             SvgStyleableElement stylable = svgElement as SvgStyleableElement;
             if (stylable != null)
             {
-                string sVisibility = stylable.GetPropertyValue("visibility");
-                string sDisplay    = stylable.GetPropertyValue("display");
-                if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                string sVisibility = stylable.GetPropertyValue(CssConstants.PropVisibility);
+                string sDisplay    = stylable.GetPropertyValue(CssConstants.PropDisplay);
+                if (string.Equals(sVisibility, CssConstants.ValHidden, comparer) 
+                    || string.Equals(sDisplay, CssConstants.ValNone, comparer))
                 {
                     shouldRender = false;
                 }

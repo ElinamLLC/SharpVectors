@@ -359,7 +359,16 @@ namespace SharpVectors.Renderers.Wpf
                     }
                     else
                     {
+                        // The translation should not resize the drawing, if it does, reset it
+                        var bounds1 = _drawGroup.Bounds;
                         _drawGroup.Transform = translate;
+                        var bounds2 = _drawGroup.Bounds;
+
+                        // Issue #157: Stroke-width and BoundingBox 
+                        if (!WpfConvert.Equals(bounds1.Size, bounds2.Size))
+                        {
+                            _drawGroup.Transform = null;
+                        }
                     }
                 }
             }

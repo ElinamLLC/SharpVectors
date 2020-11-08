@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
 
@@ -366,9 +367,10 @@ namespace SharpVectors.Renderers.Wpf
                 string elementId = this.GetElementName();
                 if (ownedGroup)
                 {
-                    string sVisibility = imageElement.GetPropertyValue("visibility");
-                    string sDisplay = imageElement.GetPropertyValue("display");
-                    if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+                    string sVisibility = imageElement.GetPropertyValue(CssConstants.PropVisibility);
+                    string sDisplay = imageElement.GetPropertyValue(CssConstants.PropDisplay);
+                    if (string.Equals(sVisibility, CssConstants.ValHidden, StringComparison.OrdinalIgnoreCase) 
+                        || string.Equals(sDisplay, CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
                     {
                         drawGroup.Opacity = 0;
                     }

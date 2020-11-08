@@ -1,0 +1,750 @@
+<?xml-stylesheet type="text/css" href="../css/svg.css.php" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="7300px" height="5400px" viewBox="0 0 7300 5400">
+<g id="background">
+	<rect x="2826" y="1955.9" fill-rule="evenodd" clip-rule="evenodd" fill="#FAF6ED" width="1492" height="1085"/>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3156" y1="2273.5" x2="3171" y2="2273.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3222.1" y1="2273.5" x2="4749.5" y2="2273.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4775" y1="2273.5" x2="4790" y2="2273.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3174" y1="2062.5" x2="3189" y2="2062.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3240.1" y1="2062.5" x2="4767.5" y2="2062.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4793" y1="2062.5" x2="4808" y2="2062.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3233" y1="1851.5" x2="3248" y2="1851.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3299.1" y1="1851.5" x2="4826.5" y2="1851.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4852" y1="1851.5" x2="4867" y2="1851.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4280" y1="3463.5" x2="4280" y2="3448.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="4280" y1="3397.4" x2="4280" y2="1870"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4280" y1="1844.5" x2="4280" y2="1829.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4491" y1="3499.5" x2="4491" y2="3484.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="4491" y1="3433.4" x2="4491" y2="1906"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4491" y1="1880.5" x2="4491" y2="1865.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3220" y1="1955.5" x2="3235" y2="1955.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3286.1" y1="1955.5" x2="4813.5" y2="1955.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4839" y1="1955.5" x2="4854" y2="1955.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3225" y1="3463.5" x2="3225" y2="3448.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3225" y1="3397.4" x2="3225" y2="1870"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3225" y1="1844.5" x2="3225" y2="1829.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3102" y1="3121.5" x2="3117" y2="3121.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3168.1" y1="3121.5" x2="4695.5" y2="3121.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4721" y1="3121.5" x2="4736" y2="3121.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3024" y1="3332.5" x2="3039" y2="3332.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3090.1" y1="3332.5" x2="4617.5" y2="3332.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="4643" y1="3332.5" x2="4658" y2="3332.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3428" y1="3277.5" x2="3428" y2="3262.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3428" y1="3211.4" x2="3428" y2="1684"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3428" y1="1658.5" x2="3428" y2="1643.5"/>
+		</g>
+	</g>
+	<g>
+		<g opacity="0.3">
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3004" y1="3229.5" x2="3004" y2="3214.5"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30.6497,51.0828" x1="3004" y1="3163.4" x2="3004" y2="1636"/>
+			
+				<line fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" x1="3004" y1="1610.5" x2="3004" y2="1595.5"/>
+		</g>
+	</g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#96C350" fill-opacity="0.3" d="M4259.5,2459.6c0,3.9-2.5,7-5.6,7h-125.1
+		c-3.1,0-5.6-3.1-5.6-7v-144.5c0-3.9,2.5-7,5.6-7h125.1c3.1,0,5.6,3.1,5.6,7V2459.6z"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#96C350" fill-opacity="0.3" d="M4235.9,2438.3c0,3.9-3.1,7-7,7h-71.1
+		c-3.9,0-7-3.1-7-7v-98.8c0-3.9,3.1-7,7-7h71.1c3.9,0,7,3.1,7,7V2438.3z"/>
+	<text transform="matrix(0.75 0 0 1 4161.5 2395.625)" fill="#FFFFFF" font-family="'mplus-2p-medium'" font-size="25">大阪城</text>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#B3CBE7" stroke-width="15" d="M4233.5,2443.8c0,3.9-3.1,7-7,7
+		H4153c-3.9,0-7-3.1-7-7v-110.3c0-3.9,3.1-7,7-7h73.5c3.9,0,7,3.1,7,7V2443.8z"/>
+</g>
+<g id="river">
+	<g>
+		<line fill="none" stroke="#B3CBE7" stroke-width="25" stroke-linecap="round" x1="2547" y1="1783.5" x2="4269" y2="1783.5"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#B3CBE7" stroke-width="20" stroke-linecap="round" d="M4105.5,1803.5V2191c0,5.5-4.5,10-10,10H2991.2
+			c-5.5,0-13.2,3.2-17.1,7.1l-219.2,220.2c-3.9,3.9-11.6,7.1-17.1,7.1H2556"/>
+	</g>
+</g>
+<g id="airport">
+</g>
+<g id="lines">
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3645,3478.5v-332c0-5.5-4.5-10-10-10h-194c-5.5,0-10-4.5-10-10v-1032c0-5.5,4.5-10,10-10h152.5"/>
+		<path fill="none" stroke="#0E71AE" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3645,3478.5v-332c0-5.5-4.5-10-10-10h-194c-5.5,0-10-4.5-10-10v-1032c0-5.5,4.5-10,10-10h152.5"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3645,2272h413.5c5.5,0,13.2-3.2,17.1-7.1l194.9-194.9c3.9-3.9,11.6-7.1,17.1-7.1h44.5c5.5,0,13.2-3.2,17.1-7.1l567.2-567.2"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3857,1166.5v2155c0,5.5-4.5,10-10,10h-46.8"/>
+		<path fill="none" stroke="#7E4621" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3857,1166.5v2155c0,5.5-4.5,10-10,10h-46.8"/>
+	</g>
+	<g>
+		
+			<polyline fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			4064.5,4107.5 4064.5,3117.5 3645,3117.5 3645,1055.5 		"/>
+		
+			<polyline fill="none" stroke="#D72121" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			4064.5,4107.5 4064.5,3117.5 3645,3117.5 3645,1055.5 		"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M4790,3837.5l-713.9-713.9c-3.9-3.9-7.1-11.6-7.1-17.1v-1010c0-5.5-4.5-10-10-10h-354c-5.5,0-10-4.5-10-10v-222
+			c0-5.5,4.5-10,10-10h778c5.5,0,13.2-3.2,17.1-7.1l637.4-637.4"/>
+		<path fill="none" stroke="#4D277F" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M4790,3837.5l-713.9-713.9c-3.9-3.9-7.1-11.6-7.1-17.1v-1010c0-5.5-4.5-10-10-10h-354c-5.5,0-10-4.5-10-10v-222
+			c0-5.5,4.5-10,10-10h778c5.5,0,13.2-3.2,17.1-7.1l637.4-637.4"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M4724,2906.5H3234c-5.5,0-10-4.5-10-10v-990"/>
+		<path fill="none" stroke="#D44B8A" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M4724,2906.5H3234c-5.5,0-10-4.5-10-10v-990"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3008,3044.5v-339c0-5.5,4.5-10,10-10h1255c5.5,0,10-4.5,10-10v-582c0-5.5,4.5-10,10-10h379"/>
+		<path fill="none" stroke="#A3C453" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3008,3044.5v-339c0-5.5,4.5-10,10-10h1255c5.5,0,10-4.5,10-10v-582c0-5.5,4.5-10,10-10h379"/>
+	</g>
+	<g>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="2776" y1="2484.5" x2="4790" y2="2484.5"/>
+		
+			<line fill="none" stroke="#0D9463" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="2776" y1="2484.5" x2="4790" y2="2484.5"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-miterlimit="10" d="M4491,2906.5v-950
+			c0-5.5,4.5-10,10-10h247c5.5,0,10-4.5,10-10v-341"/>
+		<path fill="none" stroke="#E37821" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" d="M4491,2906.5v-950
+			c0-5.5,4.5-10,10-10h247c5.5,0,10-4.5,10-10v-341"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" d="M3365.9,2964.5v99c0,5.5,4.5,10,10,10H4631"/>
+		<path fill="none" stroke="#17923B" stroke-width="15" stroke-linecap="round" d="M3365.9,2964.5v99c0,5.5,4.5,10,10,10H4631"/>
+		<g opacity="0.5">
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" x1="3365.9" y1="2964.5" x2="3365.9" y2="2979.5"/>
+			<path fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" stroke-dasharray="30.2213,50.3688" d="
+				M3365.9,3029.9v33.6c0,5.5,4.5,10,10,10h1214.9"/>
+			<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" x1="4616" y1="3073.5" x2="4631" y2="3073.5"/>
+		</g>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" d="M4064.5,3095.5h205.1c5.5,0,10,4.5,10,10v385
+			c0,5.5-4.5,10-10,10H3944c-5.5,0-10,4.5-10,10v328"/>
+		<path fill="none" stroke="#EC651A" stroke-width="15" stroke-linecap="round" d="M4064.5,3095.5h205.1c5.5,0,10,4.5,10,10v385
+			c0,5.5-4.5,10-10,10H3944c-5.5,0-10,4.5-10,10v328"/>
+		<g opacity="0.5">
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" x1="4064.5" y1="3095.5" x2="4079.5" y2="3095.5"/>
+			<path fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" stroke-dasharray="30.2595,50.4325" d="
+				M4129.9,3095.5h139.7c5.5,0,10,4.5,10,10v385c0,5.5-4.5,10-10,10H3944c-5.5,0-10,4.5-10,10v287.8"/>
+			<line fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" x1="3934" y1="3823.5" x2="3934" y2="3838.5"/>
+		</g>
+	</g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#EC651A" stroke-width="15" stroke-linecap="round" d="
+		M4141,3030.5"/>
+	
+		<line fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#7C7B7C" stroke-width="15" stroke-linecap="round" x1="4123" y1="3119.5" x2="4732" y2="3119.5"/>
+	
+		<line fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="0.7" x1="4064.5" y1="2230" x2="3279" y2="2230"/>
+	<g>
+		
+			<line fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="3540.2" y1="2935.3" x2="4431" y2="2935.3"/>
+		
+			<line fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="3540.2" y1="2935.3" x2="4431" y2="2935.3"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M2971.5,1710.6l164.4,164.4c3.9,3.9,11.6,7.1,17.1,7.1h76.8c5.5,0,13.2,3.2,17.1,7.1l149.8,149.8c3.9,3.9,11.6,7.1,17.1,7.1H3594"
+			/>
+		<path fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M2971.5,1710.6l164.4,164.4c3.9,3.9,11.6,7.1,17.1,7.1h76.8c5.5,0,13.2,3.2,17.1,7.1l149.8,149.8c3.9,3.9,11.6,7.1,17.1,7.1H3594"
+			/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3668.5,1898.5H3552c-5.5,0-13.2-3.2-17.1-7.1l-207.2-207.2"/>
+		<path fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3668.5,1898.5H3552c-5.5,0-13.2-3.2-17.1-7.1l-207.2-207.2"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3660,1875.5h-97c-5.5,0-13.2-3.2-17.1-7.1l-193.9-193.9"/>
+		<path fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3660,1875.5h-97c-5.5,0-13.2-3.2-17.1-7.1l-193.9-193.9"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3668.5,1851.8h-94.8c-5.5,0-13.2-3.2-17.1-7.1l-178.6-178.6"/>
+		<path fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3668.5,1851.8h-94.8c-5.5,0-13.2-3.2-17.1-7.1l-178.6-178.6"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" d="M4343,2116.5h-827
+			c-5.5,0-13.2-3.2-17.1-7.1l-414.3-414.3"/>
+		<path fill="none" stroke="#E62889" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" d="M4343,2116.5h-827
+			c-5.5,0-13.2-3.2-17.1-7.1l-414.3-414.3"/>
+		
+			<path opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" stroke-miterlimit="10" stroke-dasharray="30,50" d="
+			M4343,2116.5h-827c-5.5,0-13.2-3.2-17.1-7.1l-414.3-414.3"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" d="M3753.3,1672.2v244.2
+			c0,5.5-4.5,10-10,10h-99.7c-5.5,0-14.5,0-20,0h-167c-5.5,0-13.2-3.2-17.1-7.1l-231.8-231.8"/>
+		<path fill="none" stroke="#066BAF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" d="M3753.3,1672.2v244.2
+			c0,5.5-4.5,10-10,10h-99.7c-5.5,0-14.5,0-20,0h-167c-5.5,0-13.2-3.2-17.1-7.1l-231.8-231.8"/>
+		
+			<path opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="square" stroke-miterlimit="10" stroke-dasharray="30,50" d="
+			M3753.3,1672.2v244.2c0,5.5-4.5,10-10,10h-99.7c-5.5,0-14.5,0-20,0h-167c-5.5,0-13.2-3.2-17.1-7.1l-231.8-231.8"/>
+	</g>
+	<g>
+		
+			<polyline fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			3813,3376.5 3813,2961 3671,2961 		"/>
+		
+			<polyline fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			3813,3376.5 3813,2961 3671,2961 		"/>
+	</g>
+	<g>
+		
+			<polyline fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			3787.5,3414 3787.5,2985 3674,2985 		"/>
+		
+			<polyline fill="none" stroke="#7C7B7C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			3787.5,3414 3787.5,2985 3674,2985 		"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3538.8,2935.8H2991c-5.5,0-10-4.5-10-10v-480.3c0-5.5-3.2-13.2-7.1-17.1l-214.9-214.9c-3.9-3.9-7.1-11.6-7.1-17.1V1959
+			c0-5.5-3.2-13.2-7.1-17.1l-145-145"/>
+		<path fill="none" stroke="#9F9FA0" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M3538.8,2935.8H2991c-5.5,0-10-4.5-10-10v-480.3c0-5.5-3.2-13.2-7.1-17.1l-214.9-214.9c-3.9-3.9-7.1-11.6-7.1-17.1V1959
+			c0-5.5-3.2-13.2-7.1-17.1l-145-145"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="39" stroke-linecap="square" stroke-miterlimit="10" d="M2826,1985.5
+			c0-16.5,13.5-30,30-30h1432c16.5,0,30,13.5,30,30v1025c0,16.5-13.5,30-30,30H2856c-16.5,0-30-13.5-30-30V1985.5z"/>
+		<path fill="none" stroke="#D91617" stroke-width="35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M2826,1985.5c0-16.5,13.5-30,30-30h1432c16.5,0,30,13.5,30,30v1025c0,16.5-13.5,30-30,30H2856c-16.5,0-30-13.5-30-30V1985.5z"/>
+		
+			<path opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="square" stroke-miterlimit="10" stroke-dasharray="30.0137,70.0319" d="
+			M2826,1985.5c0-16.5,13.5-30,30-30h1432c16.5,0,30,13.5,30,30v1025c0,16.5-13.5,30-30,30H2856c-16.5,0-30-13.5-30-30V1985.5z"/>
+	</g>
+</g>
+<g id="line-name">
+	<g id="阪急電鉄">
+		<text transform="matrix(0.75 0 0 1 3568.666 1879.0122)" fill="#7C7B7C" font-family="'mplus-2p-medium'" font-size="18">阪急宝塚線</text>
+		<rect x="3540.1" y="1863.1" fill="#441B1C" stroke="#FFFFFF" stroke-width="2" width="24.2" height="17.9"/>
+		<text transform="matrix(0.75 0 0 1 3543.6953 1877.9683)" fill="#FFFFFF" font-family="'mplus-2p-heavy'" font-size="16">HK</text>
+	</g>
+	<g id="阪急電鉄_2_">
+		<text transform="matrix(0.75 0 0 1 3568.9404 1902.4253)" fill="#7C7B7C" font-family="'mplus-2p-medium'" font-size="18">阪急神戸線</text>
+		<rect x="3540.3" y="1886.6" fill="#441B1C" stroke="#FFFFFF" stroke-width="2" width="24.2" height="17.9"/>
+		<text transform="matrix(0.75 0 0 1 3543.9697 1901.3813)" fill="#FFFFFF" font-family="'mplus-2p-heavy'" font-size="16">HK</text>
+	</g>
+	<g id="阪急電鉄_3_">
+		<text transform="matrix(0.75 0 0 1 3568.8984 1855.3608)" fill="#7C7B7C" font-family="'mplus-2p-medium'" font-size="18">阪急京都線</text>
+		<rect x="3540.3" y="1839.5" fill="#441B1C" stroke="#FFFFFF" stroke-width="2" width="24.2" height="17.9"/>
+		<text transform="matrix(0.75 0 0 1 3543.9277 1854.3169)" fill="#FFFFFF" font-family="'mplus-2p-heavy'" font-size="16">HK</text>
+	</g>
+	<text transform="matrix(0.75 0 0 1 3703.1572 2128.4033)"><tspan x="0" y="0" fill="#E62889" font-family="'mplus-2p-medium'" font-size="18">J</tspan><tspan x="9.6" y="0" fill="#E62889" font-family="'mplus-2p-medium'" font-size="18" letter-spacing="4">R</tspan><tspan x="25.5" y="0" fill="#E62889" font-family="'mplus-2p-medium'" font-size="18">東西線</tspan></text>
+	<text transform="matrix(0.75 0 0 1 3012.8428 1948.9575)"><tspan x="0" y="0" fill="#D91617" font-family="'mplus-2p-medium'" font-size="18">J</tspan><tspan x="9.6" y="0" fill="#D91617" font-family="'mplus-2p-medium'" font-size="18" letter-spacing="4">R</tspan><tspan x="25.5" y="0" fill="#D91617" font-family="'mplus-2p-medium'" font-size="18">大阪環状線</tspan></text>
+	<text transform="matrix(0.75 0 0 1 3719.9219 1945.9575)"><tspan x="0" y="0" fill="#D91617" font-family="'mplus-2p-medium'" font-size="18">J</tspan><tspan x="9.6" y="0" fill="#D91617" font-family="'mplus-2p-medium'" font-size="18" letter-spacing="4">R</tspan><tspan x="25.5" y="0" fill="#D91617" font-family="'mplus-2p-medium'" font-size="18">大阪環状線</tspan></text>
+	<text transform="matrix(0.5303 0.5303 -0.7071 0.7071 3124.7495 1755.6411)"><tspan x="0" y="0" fill="#E62889" font-family="'mplus-2p-medium'" font-size="18">J</tspan><tspan x="9.6" y="0" fill="#E62889" font-family="'mplus-2p-medium'" font-size="18" letter-spacing="4">R</tspan><tspan x="25.5" y="0" fill="#E62889" font-family="'mplus-2p-medium'" font-size="18">東西線</tspan></text>
+	<g id="阪急電鉄_4_">
+		
+			<text transform="matrix(0.5303 0.5303 -0.7071 0.7071 3015.811 1782.2778)" fill="#7C7B7C" font-family="'mplus-2p-medium'" font-size="18">阪神本線</text>
+		
+			<rect x="2996.9" y="1756.7" transform="matrix(-0.7071 -0.7072 0.7072 -0.7071 3887.8921 5142.0156)" stroke="#FFFFFF" stroke-width="2" width="24.2" height="17.9"/>
+		
+			<text transform="matrix(0.5303 0.5303 -0.7071 0.7071 2999.1885 1764.1807)" fill="#FFFFFF" font-family="'mplus-2p-heavy'" font-size="16">HS</text>
+	</g>
+	<text transform="matrix(0.5303 0.5303 -0.7071 0.7071 3255.7495 1755.6411)"><tspan x="0" y="0" fill="#066BAF" font-family="'mplus-2p-medium'" font-size="18">J</tspan><tspan x="9.6" y="0" fill="#066BAF" font-family="'mplus-2p-medium'" font-size="18" letter-spacing="4">R</tspan><tspan x="25.5" y="0" fill="#066BAF" font-family="'mplus-2p-medium'" font-size="18">神戸線</tspan></text>
+</g>
+<g id="station-points">
+	<g id="other_1_">
+	</g>
+	<g id="arrow">
+	</g>
+	<g id="lv4-tram" display="none">
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="4002" cy="1642.3" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3886.5" cy="1528.2" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3968.5" cy="1608.7" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3978.5" cy="1620" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3792" cy="1432.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3816" cy="1456.6" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3863" cy="1503.7" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3602.9" cy="1392.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3687" cy="1387.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3632" cy="1387.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3660" cy="1387.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3714.5" cy="1387.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3742" cy="1388.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3439.7" cy="1555.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3367.9" cy="1625.1" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3220.5" cy="1628.9" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3270.5" cy="1627.9" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3202" cy="1644.5" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3202" cy="1677.2" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3202" cy="1809.3" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3203" cy="1895.5" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3202" cy="1932" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3202" cy="1975.5" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3209" cy="2043" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3246.5" cy="2044.5" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3288.5" cy="2044.5" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3760.4" cy="1402.5" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3935.8" cy="1576.4" r="3"/>
+		<circle display="inline" fill="#FFFFFF" fill-opacity="0.5" cx="3923.4" cy="1563.2" r="3"/>
+	</g>
+	<g id="lv3-normal">
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3431" cy="2271" r="6"/>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3801.5" cy="2230.2" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3764.1855 2215.5)" font-family="'mplus-2p-medium'" font-size="25">なにわ橋</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3547.8" cy="2229.9" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3520.5 2215.125)" font-family="'mplus-2p-medium'" font-size="25">大江橋</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3400" cy="2229.8" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3372.6855 2215)" font-family="'mplus-2p-medium'" font-size="25">渡辺橋</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3280.5" cy="2230.1" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3253.1855 2214.375)" font-family="'mplus-2p-medium'" font-size="25">中之島</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3645" cy="1813.9" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3608.5 1772.125)"><tspan x="0" y="0" font-family="'mplus-2p-medium'" font-size="25">（市営</tspan><tspan x="75" y="0" font-family="'mplus-2p-medium'" font-size="25" letter-spacing="-12">）</tspan><tspan x="25" y="26" font-family="'mplus-2p-medium'" font-size="25">中津</tspan></text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3703.2" cy="1843.9" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3680 1829.125)" font-family="'mplus-2p-medium'" font-size="25">中崎町</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3974" cy="2695.2" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3947.8428 2677.5)" font-family="'mplus-2p-medium'" font-size="25">松屋町</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3345.6" cy="2695.1" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3327.4219 2677.375)" font-family="'mplus-2p-medium'" font-size="25">西大橋</text>
+		<text transform="matrix(0.75 0 0 1 3677.334 1891.5322)"><tspan x="0" y="0" font-family="'mplus-2p-bold'" font-size="25">（阪急</tspan><tspan x="75" y="0" font-family="'mplus-2p-bold'" font-size="25" letter-spacing="-12">）</tspan><tspan x="25" y="26" font-family="'mplus-2p-bold'" font-size="25">梅田</tspan></text>
+		<text transform="matrix(0.75 0 0 1 3457.625 2056.5005)" font-family="'mplus-2p-bold'" font-size="25">（阪神）梅田</text>
+		<text transform="matrix(0.75 0 0 1 3498.125 1819.875)" font-family="'mplus-2p-medium'" font-size="25">中津</text>
+		<text transform="matrix(0.75 0 0 1 3871 2000.5)" font-family="'mplus-2p-bold'" font-size="25">扇町</text>
+		<text transform="matrix(0.75 0 0 1 3876.5 2154.5)" font-family="'mplus-2p-bold'" font-size="25">大阪天満宮</text>
+		<text transform="matrix(0.75 0 0 1 3564.5 2154.5)" font-family="'mplus-2p-bold'" font-size="25">北新地</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#17923B" stroke-width="2" cx="3365.9" cy="2965" r="6"/>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3812.8" cy="2962" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3778.25 2993.5)" font-family="'mplus-2p-medium'" font-size="25">今宮戎</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="3856.8" cy="2969.5" r="6"/>
+		<text transform="matrix(0.75 0 0 1 3872.5 2978.75)" font-family="'mplus-2p-medium'" font-size="25">恵美須町</text>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" cx="4282.7" cy="2258.4" r="6"/>
+		<text transform="matrix(0.75 0 0 1 4231.5 2240.625)" font-family="'mplus-2p-medium'" font-size="25">大阪ビジネスパーク</text>
+		<text transform="matrix(0.75 0 0 1 2995.1377 2851.4102)" font-family="'mplus-2p-medium'" font-size="25">ドーム前千代崎</text>
+		<text transform="matrix(0.75 0 0 1 2926.1377 2799.9102)" font-family="'mplus-2p-medium'" font-size="25">ドーム前</text>
+	</g>
+	<g id="lv2-junction">
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3645.5" cy="2273.5" r="13.5"/>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M4352,2485.5c0,9.7-7.8,17.5-17.5,17.5h-61c-9.7,0-17.5-7.8-17.5-17.5l0,0c0-9.7,7.8-17.5,17.5-17.5h61
+			C4344.2,2468,4352,2475.8,4352,2485.5L4352,2485.5z"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3857" cy="1845" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4069.2" cy="2696" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3856" cy="2696" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3224" cy="2696" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3222.8" cy="2484.5" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3857" cy="2484.5" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4068.2" cy="2484.5" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4491.5" cy="2906.1" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4490.5" cy="2483.9" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4490.5" cy="2092.5" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4757" cy="1584.5" r="13.5"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3224,1980.2c-1,0-1.9,0.2-2.8,0.5l-17.6-17.6
+					c1.5-2.2,2.4-4.8,2.4-7.6c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.1,0,4-0.5,5.8-1.3l17.9,17.9
+					c-0.4,1-0.6,2-0.6,3.2c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S3228.7,1980.2,3224,1980.2z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3224,1980.2c-1,0-1.9,0.2-2.8,0.5l-17.6-17.6
+					c1.5-2.2,2.4-4.8,2.4-7.6c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.1,0,4-0.5,5.8-1.3l17.9,17.9
+					c-0.4,1-0.6,2-0.6,3.2c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S3228.7,1980.2,3224,1980.2z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M3668,2484.5c0,12.3-10,22.2-22.2,22.2h-211.5c-12.3,0-22.2-10-22.2-22.2l0,0c0-12.3,10-22.2,22.2-22.2h211.5
+			C3658,2462.2,3668,2472.2,3668,2484.5L3668,2484.5z"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3646,2674h-163.5c-12.2,0-22,9.8-22,22c0,3.4,0.8,6.5,2.1,9.4
+					l-27.2,27.2c-1.2-0.4-2.5-0.6-3.9-0.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-3.1-1.1-6-2.9-8.3
+					l25.2-25.2c3.9,3.8,9.3,6.1,15.2,6.1H3646c12.2,0,22-9.8,22-22S3658.2,2674,3646,2674z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3646,2674h-163.5c-12.2,0-22,9.8-22,22
+					c0,3.4,0.8,6.5,2.1,9.4l-27.2,27.2c-1.2-0.4-2.5-0.6-3.9-0.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5s13.5-6,13.5-13.5
+					c0-3.1-1.1-6-2.9-8.3l25.2-25.2c3.9,3.8,9.3,6.1,15.2,6.1H3646c12.2,0,22-9.8,22-22S3658.2,2674,3646,2674z"/>
+			</g>
+		</g>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3857" cy="2272.5" r="13.5"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4139" cy="1955.9" r="13.5"/>
+		
+			<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" fill-opacity="0.8" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M4349.5,2129c0,3.3-2.7,6-6,6h-86c-3.3,0-6-2.7-6-6v-78.5c0-3.3,2.7-6,6-6h86c3.3,0,6,2.7,6,6V2129z"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3411.8,1946.6c-5.3-5.3-13.8-5.3-19.1,0
+					c-4.6,4.6-5.2,11.7-1.7,17l-12.6,12.6c-0.9-0.3-1.8-0.5-2.8-0.5c-4.7,0-8.5,3.8-8.5,8.5c0,1,0.2,1.9,0.5,2.8l-6.7,6.7
+					c-0.6-0.1-1.2-0.2-1.8-0.2c-4.7,0-8.5,3.8-8.5,8.5c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5c0-1.5-0.4-2.8-1-4l5.9-5.9
+					c1,0.4,2.1,0.6,3.2,0.6c4.7,0,8.5-3.8,8.5-8.5c0-1.1-0.2-2.2-0.6-3.2l12.8-12.8c5.1,2.5,11.4,1.7,15.6-2.5
+					C3417.1,1960.5,3417.1,1951.9,3411.8,1946.6z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3411.8,1946.6c-5.3-5.3-13.8-5.3-19.1,0
+					c-4.6,4.6-5.2,11.7-1.7,17l-12.6,12.6c-0.9-0.3-1.8-0.5-2.8-0.5c-4.7,0-8.5,3.8-8.5,8.5c0,1,0.2,1.9,0.5,2.8l-6.7,6.7
+					c-0.6-0.1-1.2-0.2-1.8-0.2c-4.7,0-8.5,3.8-8.5,8.5c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5c0-1.5-0.4-2.8-1-4l5.9-5.9
+					c1,0.4,2.1,0.6,3.2,0.6c4.7,0,8.5-3.8,8.5-8.5c0-1.1-0.2-2.2-0.6-3.2l12.8-12.8c5.1,2.5,11.4,1.7,15.6-2.5
+					C3417.1,1960.5,3417.1,1951.9,3411.8,1946.6z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3857.1,1978.6c-1.2,0-2.3,0.2-3.3,0.7l-14.6-14.6
+					c2.2-2.4,3.6-5.6,3.6-9.2c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5c0,7.5,6,13.5,13.5,13.5c1.3,0,2.6-0.2,3.8-0.5l15.9,15.9
+					c-0.3,0.8-0.4,1.8-0.4,2.7c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S3861.8,1978.6,3857.1,1978.6z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3857.1,1978.6c-1.2,0-2.3,0.2-3.3,0.7
+					l-14.6-14.6c2.2-2.4,3.6-5.6,3.6-9.2c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5c0,7.5,6,13.5,13.5,13.5c1.3,0,2.6-0.2,3.8-0.5
+					l15.9,15.9c-0.3,0.8-0.4,1.8-0.4,2.7c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S3861.8,1978.6,3857.1,1978.6z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3258.8,1861.4c-4.7,0-8.5,3.8-8.5,8.5c0,1.3,0.3,2.4,0.8,3.5
+					l-4.1,4.1c-1.2-0.6-2.5-1-4-1c-4.7,0-8.5,3.8-8.5,8.5c0,1.4,0.4,2.8,1,4l-7.7,7.7c-1.1-0.6-2.4-0.9-3.7-0.9
+					c-4.7,0-8.5,3.8-8.5,8.5s3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5c0-1.5-0.4-3-1.1-4.2l7.6-7.6c1.2,0.6,2.5,1,4,1c4.7,0,8.5-3.8,8.5-8.5
+					c0-1.4-0.4-2.8-1-4l3.9-3.9c1.3,0.8,2.8,1.2,4.4,1.2c4.7,0,8.5-3.8,8.5-8.5S3263.4,1861.4,3258.8,1861.4z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="square" d="M3258.8,1861.4c-4.7,0-8.5,3.8-8.5,8.5
+					c0,1.3,0.3,2.4,0.8,3.5l-4.1,4.1c-1.2-0.6-2.5-1-4-1c-4.7,0-8.5,3.8-8.5,8.5c0,1.4,0.4,2.8,1,4l-7.7,7.7
+					c-1.1-0.6-2.4-0.9-3.7-0.9c-4.7,0-8.5,3.8-8.5,8.5s3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5c0-1.5-0.4-3-1.1-4.2l7.6-7.6
+					c1.2,0.6,2.5,1,4,1c4.7,0,8.5-3.8,8.5-8.5c0-1.4-0.4-2.8-1-4l3.9-3.9c1.3,0.8,2.8,1.2,4.4,1.2c4.7,0,8.5-3.8,8.5-8.5
+					S3263.4,1861.4,3258.8,1861.4z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M3827.6,3332.5c0,6.1-4.9,11-11,11H3786c-6.1,0-11-4.9-11-11l0,0c0-6.1,4.9-11,11-11h30.6
+			C3822.7,3321.5,3827.6,3326.4,3827.6,3332.5L3827.6,3332.5z"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M4317.7,2678.2c-6,0-11,3.9-12.8,9.2H4288
+					c-1.2-3.2-4.3-5.5-7.9-5.5c-4.7,0-8.5,3.8-8.5,8.5s3.8,8.5,8.5,8.5c3.2,0,6.1-1.8,7.5-4.5h16.9c1.3,6.1,6.7,10.8,13.2,10.8
+					c7.5,0,13.5-6,13.5-13.5C4331.2,2684.3,4325.1,2678.2,4317.7,2678.2z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M4317.7,2678.2c-6,0-11,3.9-12.8,9.2H4288
+					c-1.2-3.2-4.3-5.5-7.9-5.5c-4.7,0-8.5,3.8-8.5,8.5s3.8,8.5,8.5,8.5c3.2,0,6.1-1.8,7.5-4.5h16.9c1.3,6.1,6.7,10.8,13.2,10.8
+					c7.5,0,13.5-6,13.5-13.5C4331.2,2684.3,4325.1,2678.2,4317.7,2678.2z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M4342.1,2946c0,2.2-1.8,4-4,4H4299c-2.2,0-4-1.8-4-4v-50.5c0-2.2,1.8-4,4-4h39.1c2.2,0,4,1.8,4,4V2946z"/>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M3237,2935.5c0,6.4-5.1,11.5-11.5,11.5l0,0c-6.4,0-11.5-5.1-11.5-11.5V2906c0-6.4,5.1-11.5,11.5-11.5l0,0
+			c6.4,0,11.5,5.1,11.5,11.5V2935.5z"/>
+	</g>
+	<g id="lv1-terminal_1_">
+		<g>
+			<g opacity="0.8">
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M4127.5,3106c-5.7,0-10.5,3.5-12.5,8.5h-7.5V3015
+					c0-3.3-2.7-6-6-6H4036c-3.3,0-6,2.7-6,6v112c0,3.3,2.7,6,6,6h65.5c3.3,0,6-2.7,6-6v-4.5h6.8c1.4,6,6.7,10.5,13.2,10.5
+					c7.5,0,13.5-6,13.5-13.5S4135,3106,4127.5,3106z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M4127.5,3106c-5.7,0-10.5,3.5-12.5,8.5h-7.5
+					V3015c0-3.3-2.7-6-6-6H4036c-3.3,0-6,2.7-6,6v112c0,3.3,2.7,6,6,6h65.5c3.3,0,6-2.7,6-6v-4.5h6.8c1.4,6,6.7,10.5,13.2,10.5
+					c7.5,0,13.5-6,13.5-13.5S4135,3106,4127.5,3106z"/>
+			</g>
+		</g>
+		<g>
+			<g opacity="0.8">
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3698,2031c-6.9,0-12.5,5.1-13.4,11.8h-10.1v-130.1
+					c3.8-1.6,6.5-5.4,6.5-9.9v-53.5c0-5.9-4.8-10.8-10.8-10.8s-10.8,4.8-10.8,10.8v53.5c0,4.6,2.9,8.5,7,10.1v70.2h-46
+					c-3.9,0-7,3.1-7,7v5.5l-8.8,0v-73.2c0-4.1-2.8-7.4-6.3-7.4h-112.6c-3.5,0-6.3,3.3-6.3,7.4v92.9c0,4.1,2.8,7.4,6.3,7.4h102.7
+					v10.9c-5.5,1.7-9.5,6.8-9.5,12.9s4,11.2,9.5,12.9v12.2c-5.5,1.7-9.5,6.8-9.5,12.9s4,11.2,9.5,12.9v12.2
+					c-3.2,1.2-5.5,4.3-5.5,7.9c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5c0-3.7-2.3-6.8-5.5-8v-11.7c5.2-0.8,9.4-4.4,10.9-9.3h8.1v1.5
+					c0,3.9,3.1,7,7,7h47c3.9,0,7-3.1,7-7v-41.2h10.7c1.8,5.4,6.8,9.2,12.8,9.2c7.5,0,13.5-6,13.5-13.5S3705.5,2031,3698,2031z
+					 M3598.4,2022.7c3.5,0,6.3-3.3,6.3-7.4V2003h8.8v39.7h-8c-1.4-5-5.7-8.8-11-9.6v-10.5H3598.4z M3613.5,2081h-8
+					c-1.4-5.1-5.7-9.1-11.1-9.8v-11.3c5.8-0.8,10.4-5.3,11.3-11.1h7.7V2081z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3698,2031c-6.9,0-12.5,5.1-13.4,11.8h-10.1
+					v-130.1c3.8-1.6,6.5-5.4,6.5-9.9v-53.5c0-5.9-4.8-10.8-10.8-10.8s-10.8,4.8-10.8,10.8v53.5c0,4.6,2.9,8.5,7,10.1v70.2h-46
+					c-3.9,0-7,3.1-7,7v5.5l-8.8,0v-73.2c0-4.1-2.8-7.4-6.3-7.4h-112.6c-3.5,0-6.3,3.3-6.3,7.4v92.9c0,4.1,2.8,7.4,6.3,7.4h102.7
+					v10.9c-5.5,1.7-9.5,6.8-9.5,12.9s4,11.2,9.5,12.9v12.2c-5.5,1.7-9.5,6.8-9.5,12.9s4,11.2,9.5,12.9v12.2
+					c-3.2,1.2-5.5,4.3-5.5,7.9c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5c0-3.7-2.3-6.8-5.5-8v-11.7c5.2-0.8,9.4-4.4,10.9-9.3h8.1v1.5
+					c0,3.9,3.1,7,7,7h47c3.9,0,7-3.1,7-7v-41.2h10.7c1.8,5.4,6.8,9.2,12.8,9.2c7.5,0,13.5-6,13.5-13.5S3705.5,2031,3698,2031z
+					 M3598.4,2022.7c3.5,0,6.3-3.3,6.3-7.4V2003h8.8v39.7h-8c-1.4-5-5.7-8.8-11-9.6v-10.5H3598.4z M3613.5,2081h-8
+					c-1.4-5.1-5.7-9.1-11.1-9.8v-11.3c5.8-0.8,10.4-5.3,11.3-11.1h7.7V2081z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M4085.2,2275c0,9.7-7.8,17.5-17.5,17.5l0,0c-9.7,0-17.5-7.8-17.5-17.5v-42c0-9.7,7.8-17.5,17.5-17.5l0,0c9.7,0,17.5,7.8,17.5,17.5
+			V2275z"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3888.3,2109c-1.5,0-2.9,0.4-4.2,1.1l-16-16
+					c1.5-2.2,2.3-4.8,2.3-7.6c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.5,0,4.8-0.7,6.7-1.8l16.6,16.6
+					c-0.3,0.9-0.5,1.8-0.5,2.8c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S3893,2109,3888.3,2109z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3888.3,2109c-1.5,0-2.9,0.4-4.2,1.1l-16-16
+					c1.5-2.2,2.3-4.8,2.3-7.6c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.5,0,4.8-0.7,6.7-1.8l16.6,16.6
+					c-0.3,0.9-0.5,1.8-0.5,2.8c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S3893,2109,3888.3,2109z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3857,3104c-2.1,0-4.1,0.5-5.9,1.4l-23.4-23.4
+					c0-0.2,0.1-0.5,0.1-0.7v-58.8c0-2.2-1.8-4-4-4h-47c-2.2,0-4,1.8-4,4v58.8c0,2.2,1.8,4,4,4h44.3l24.7,24.7
+					c-1.4,2.1-2.3,4.7-2.3,7.5c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5S3864.5,3104,3857,3104z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3857,3104c-2.1,0-4.1,0.5-5.9,1.4l-23.4-23.4
+					c0-0.2,0.1-0.5,0.1-0.7v-58.8c0-2.2-1.8-4-4-4h-47c-2.2,0-4,1.8-4,4v58.8c0,2.2,1.8,4,4,4h44.3l24.7,24.7
+					c-1.4,2.1-2.3,4.7-2.3,7.5c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5S3864.5,3104,3857,3104z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="2" stroke-linecap="square" d="
+			M3682.9,2985.9c0,5.7-4.6,10.3-10.3,10.3l0,0c-5.7,0-10.3-4.6-10.3-10.3v-25.6c0-5.7,4.6-10.3,10.3-10.3l0,0
+			c5.7,0,10.3,4.6,10.3,10.3V2985.9z"/>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3886.2,2926.3c-1.2,0-2.4,0.3-3.5,0.8l-13.3-13.3
+					c1.2-2,2-4.4,2-7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.7,0,5.2-0.8,7.4-2.2l13.2,13.2
+					c-0.5,1.1-0.8,2.3-0.8,3.5c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5C3894.7,2930.1,3890.9,2926.3,3886.2,2926.3z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3886.2,2926.3c-1.2,0-2.4,0.3-3.5,0.8
+					l-13.3-13.3c1.2-2,2-4.4,2-7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.7,0,5.2-0.8,7.4-2.2l13.2,13.2
+					c-0.5,1.1-0.8,2.3-0.8,3.5c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5C3894.7,2930.1,3890.9,2926.3,3886.2,2926.3z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M4097.4,2927.2c-1.2,0-2.4,0.3-3.5,0.8l-13.3-13.3
+					c1.2-2,2-4.4,2-7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.7,0,5.2-0.8,7.4-2.2l13.2,13.2
+					c-0.5,1.1-0.8,2.3-0.8,3.5c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5C4105.9,2931.1,4102.1,2927.2,4097.4,2927.2z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M4097.4,2927.2c-1.2,0-2.4,0.3-3.5,0.8
+					l-13.3-13.3c1.2-2,2-4.4,2-7c0-7.5-6-13.5-13.5-13.5s-13.5,6-13.5,13.5s6,13.5,13.5,13.5c2.7,0,5.2-0.8,7.4-2.2l13.2,13.2
+					c-0.5,1.1-0.8,2.3-0.8,3.5c0,4.7,3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5C4105.9,2931.1,4102.1,2927.2,4097.4,2927.2z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3647.2,2891.5h-217c-8.1,0-14.8,6.6-14.8,14.8
+					s6.6,14.8,14.8,14.8h106.3v6c-4.4,1.6-7.5,5.8-7.5,10.8c0,6.4,5.1,11.5,11.5,11.5s11.5-5.1,11.5-11.5c0-4.9-3.1-9.1-7.5-10.8v-6
+					h102.8c8.1,0,14.8-6.6,14.8-14.8S3655.4,2891.5,3647.2,2891.5z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="square" d="M3647.2,2891.5h-217c-8.1,0-14.8,6.6-14.8,14.8
+					s6.6,14.8,14.8,14.8h106.3v6c-4.4,1.6-7.5,5.8-7.5,10.8c0,6.4,5.1,11.5,11.5,11.5s11.5-5.1,11.5-11.5c0-4.9-3.1-9.1-7.5-10.8v-6
+					h102.8c8.1,0,14.8-6.6,14.8-14.8S3655.4,2891.5,3647.2,2891.5z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M3014.4,2810.5c-3.3-3.3-8.7-3.3-12,0
+					c-1.1,1.1-1.8,2.3-2.2,3.7h-11.9c-0.4-1.3-1.1-2.6-2.2-3.6c-3.3-3.3-8.7-3.3-12,0c-3.3,3.3-3.3,8.7,0,12c3.3,3.3,8.7,3.3,12,0
+					c1.2-1.2,2-2.8,2.3-4.4l11.5,0c0.3,1.6,1.1,3.1,2.3,4.4c3.3,3.3,8.7,3.3,12,0C3017.7,2819.2,3017.7,2813.8,3014.4,2810.5z"/>
+			</g>
+			<g>
+				<path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="square" d="M3014.4,2810.5c-3.3-3.3-8.7-3.3-12,0
+					c-1.1,1.1-1.8,2.3-2.2,3.7h-11.9c-0.4-1.3-1.1-2.6-2.2-3.6c-3.3-3.3-8.7-3.3-12,0c-3.3,3.3-3.3,8.7,0,12c3.3,3.3,8.7,3.3,12,0
+					c1.2-1.2,2-2.8,2.3-4.4l11.5,0c0.3,1.6,1.1,3.1,2.3,4.4c3.3,3.3,8.7,3.3,12,0C3017.7,2819.2,3017.7,2813.8,3014.4,2810.5z"/>
+			</g>
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="2" stroke-linecap="square" d="
+			M3490.3,1796.9c4.4,4.4,4.4,11.5,0,15.9l-18.1,18.1c-4.4,4.4-11.5,4.4-15.9,0l0,0c-4.4-4.4-4.4-11.5,0-15.9l18.1-18.1
+			C3478.8,1792.5,3485.9,1792.5,3490.3,1796.9L3490.3,1796.9z"/>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="2" stroke-linecap="square" d="
+			M3435.3,1703.9c4.7,4.7,4.7,12.3,0,17l-37.6,37.6c-4.7,4.7-12.3,4.7-17,0l0,0c-4.7-4.7-4.7-12.3,0-17l37.6-37.6
+			C3423,1699.2,3430.6,1699.2,3435.3,1703.9L3435.3,1703.9z"/>
+	</g>
+</g>
+<g id="station-names">
+	<g id="to">
+	</g>
+	<g id="lv5-small">
+	</g>
+	<g id="lv4-normal">
+		<text transform="matrix(0.75 0 0 1 3238.4355 2007.75)" font-family="'mplus-2p-medium'" font-size="25">玉川</text>
+		<text transform="matrix(0.75 0 0 1 3362.6855 2281.75)" font-family="'mplus-2p-medium'" font-size="25">肥後橋</text>
+		<text transform="matrix(0.75 0 0 1 3326.3369 1987.1025)" font-family="'mplus-2p-medium'" font-size="25">福島</text>
+		<text transform="matrix(0.75 0 0 1 3292.5 2014)" font-family="'mplus-2p-medium'" font-size="25">新福島</text>
+		<text transform="matrix(0.75 0 0 1 3193.792 1860.145)" font-family="'mplus-2p-medium'" font-size="25">海老江</text>
+		<text transform="matrix(0.75 0 0 1 3191.792 1888.5581)" font-family="'mplus-2p-medium'" font-size="25">野田</text>
+		<text transform="matrix(0.75 0 0 1 3136.479 1915.375)" font-family="'mplus-2p-medium'" font-size="25">野田阪神</text>
+	</g>
+	<g id="lv3-junction">
+		<text transform="matrix(0.75 0 0 1 3329.5005 2760)" font-family="'mplus-2p-bold'" font-size="36">四ツ橋</text>
+		<text transform="matrix(0.75 0 0 1 4069.25 2875)" font-family="'mplus-2p-bold'" font-size="36">谷町九丁目</text>
+		<text transform="matrix(0.75 0 0 1 4069.25 2665)" font-family="'mplus-2p-bold'" font-size="36">谷町六丁目</text>
+		<text transform="matrix(0.75 0 0 1 4069.25 2453)" font-family="'mplus-2p-bold'" font-size="36">谷町四丁目</text>
+		<text transform="matrix(0.75 0 0 1 3854.75 2875)" font-family="'mplus-2p-bold'" font-size="36">日本橋</text>
+		<text transform="matrix(0.75 0 0 1 3854.75 2665)" font-family="'mplus-2p-bold'" font-size="36">長堀橋</text>
+		<text transform="matrix(0.75 0 0 1 3854.75 2453)" font-family="'mplus-2p-bold'" font-size="36">堺筋本町</text>
+		<text transform="matrix(0.75 0 0 1 3643 2253)" font-family="'mplus-2p-bold'" font-size="36">淀屋橋</text>
+		<text transform="matrix(0.75 0 0 1 3643 3095.5)" font-family="'mplus-2p-bold'" font-size="36">大国町</text>
+		<text transform="matrix(0.75 0 0 1 3857 3095.5)" font-family="'mplus-2p-bold'" font-size="36">動物園前</text>
+		<text transform="matrix(0.75 0 0 1 3222.7505 2667)" font-family="'mplus-2p-bold'" font-size="36">西長堀</text>
+		<text transform="matrix(0.75 0 0 1 3222.7505 2455)" font-family="'mplus-2p-bold'" font-size="36">阿波座</text>
+		<text transform="matrix(0.75 0 0 1 4491 2875)" font-family="'mplus-2p-bold'" font-size="36">今里</text>
+		<text transform="matrix(0.75 0 0 1 4491 2453)" font-family="'mplus-2p-bold'" font-size="36">緑橋</text>
+		<text transform="matrix(0.75 0 0 1 4263.75 2453)" font-family="'mplus-2p-bold'" font-size="36">森ノ宮</text>
+		<text transform="matrix(0.75 0 0 1 4313.5 2880)" font-family="'mplus-2p-bold'" font-size="48">鶴橋</text>
+		<text transform="matrix(0.75 0 0 1 4491 2065.5)" font-family="'mplus-2p-bold'" font-size="36">蒲生四丁目</text>
+		<text transform="matrix(0.75 0 0 1 3854.75 2065.5)" font-family="'mplus-2p-bold'" font-size="36">南森町</text>
+		<text transform="matrix(0.75 0 0 1 3854.75 1810.5)" font-family="'mplus-2p-bold'" font-size="36">天神橋筋六丁目</text>
+		<text transform="matrix(0.75 0 0 1 4589 1588.5)" font-family="'mplus-2p-bold'" font-size="36">太子橋今市</text>
+		<text transform="matrix(0.75 0 0 1 3259.7505 2986)"><tspan x="0" y="0" font-family="'mplus-2p-bold'" font-size="36">J</tspan><tspan x="20.1" y="0" font-family="'mplus-2p-bold'" font-size="36" letter-spacing="8">R</tspan><tspan x="52.5" y="0" font-family="'mplus-2p-bold'" font-size="36">難波</tspan></text>
+		<text transform="matrix(0.75 0 0 1 4144 3149.5)" font-family="'mplus-2p-bold'" font-size="36">大阪阿部野橋</text>
+		<text transform="matrix(0.75 0 0 1 4263.5 2108)" font-family="'mplus-2p-bold'" font-size="48">京橋</text>
+		<text transform="matrix(0.75 0 0 1 3854.75 2252)" font-family="'mplus-2p-bold'" font-size="36">北浜</text>
+		<text transform="matrix(0.75 0 0 1 4101.75 1928)" font-family="'mplus-2p-bold'" font-size="36">桜ノ宮</text>
+		<text transform="matrix(0.75 0 0 1 3489.9238 2098.46)" font-family="'mplus-2p-bold'" font-size="36">西梅田</text>
+		<text transform="matrix(0.75 0 0 1 3716 2056.6255)" font-family="'mplus-2p-bold'" font-size="36">東梅田</text>
+		<text transform="matrix(0.75 0 0 1 3119.75 1969)" font-family="'mplus-2p-bold'" font-size="36">野田</text>
+		<text transform="matrix(0.75 0 0 1 3333.543 1957.9092)" font-family="'mplus-2p-bold'" font-size="36">福島</text>
+		<text transform="matrix(0.75 0 0 1 3801.5 1931)" font-family="'mplus-2p-bold'" font-size="36">天満</text>
+		<text transform="matrix(0.75 0 0 1 3591.5 3035.7246)" font-family="'mplus-2p-bold'" font-size="36">（南海）難波</text>
+		<text transform="matrix(0.75 0 0 1 3786.5 3309)" font-family="'mplus-2p-bold'" font-size="36">天下茶屋</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4318" cy="2992.9" r="13.5"/>
+		<text transform="matrix(0.75 0 0 1 4340.125 3006.4297)" font-family="'mplus-2p-bold'" font-size="36">桃谷</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4201.6" cy="3040.5" r="13.5"/>
+		<text transform="matrix(0.75 0 0 1 4161.5 3090.25)" font-family="'mplus-2p-bold'" font-size="36">寺田町</text>
+		<text transform="matrix(0.75 0 0 1 4269.5 2665)" font-family="'mplus-2p-bold'" font-size="48">玉造</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="4318.9" cy="2348.9" r="13.5"/>
+		<text transform="matrix(0.75 0 0 1 4309.5 2326.4297)" font-family="'mplus-2p-bold'" font-size="36">大阪城公園</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="2827" cy="2149.4" r="13.5"/>
+		<text transform="matrix(0.75 0 0 1 2789.7505 2121.4839)" font-family="'mplus-2p-bold'" font-size="36">西九条</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3188.4" cy="3040.1" r="13.5"/>
+		<text transform="matrix(0.75 0 0 1 3151.1255 3012.1602)" font-family="'mplus-2p-bold'" font-size="36">芦原橋</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="3009" cy="3039.5" r="18.5"/>
+		<text transform="matrix(0.75 0 0 1 2973.5005 3007.4297)" font-family="'mplus-2p-bold'" font-size="48">大正</text>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M3376.8,3071.6c0,5.7-4.6,10.4-10.4,10.4l0,0c-5.7,0-10.4-4.6-10.4-10.4v-42.2c0-5.7,4.6-10.4,10.4-10.4l0,0
+			c5.7,0,10.4,4.6,10.4,10.4V3071.6z"/>
+		<text transform="matrix(0.75 0 0 1 3899.75 2938)" font-family="'mplus-2p-bold'" font-size="36">近鉄日本橋</text>
+		<text transform="matrix(0.75 0 0 1 4112 2937.75)" font-family="'mplus-2p-bold'" font-size="36">大阪上本町</text>
+		<text transform="matrix(0.75 0 0 1 3483 2985)" font-family="'mplus-2p-bold'" font-size="36">大阪難波</text>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" d="
+			M3656.5,3141.4c0,6.4-5.2,11.5-11.5,11.5l0,0c-6.4,0-11.5-5.2-11.5-11.5v-23.9c0-6.4,5.2-11.5,11.5-11.5l0,0
+			c6.4,0,11.5,5.2,11.5,11.5V3141.4z"/>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="2826.2" cy="2484.1" r="18.5"/>
+		<text transform="matrix(0.75 0 0 1 2774.7505 2452)" font-family="'mplus-2p-bold'" font-size="48">弁天町</text>
+		<text transform="matrix(0.75 0 0 1 3222.7505 2884)" font-family="'mplus-2p-bold'" font-size="36">桜川</text>
+		
+			<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#000000" stroke-width="3" stroke-linecap="square" cx="2980.2" cy="2484.5" r="13.5"/>
+		<text transform="matrix(0.75 0 0 1 3023.1821 2455)" font-family="'mplus-2p-bold'" font-size="36">九条</text>
+	</g>
+	<g id="lv2-big-junction">
+		<text transform="matrix(0.75 0 0 1 3499.4355 2444.5)" font-family="'mplus-2p-bold'" font-size="48">本町</text>
+		<text transform="matrix(0.75 0 0 1 3503.4355 2655.5)" font-family="'mplus-2p-bold'" font-size="48">心斎橋</text>
+		<text transform="matrix(0.75 0 0 1 4094.25 2251)" font-family="'mplus-2p-bold'" font-size="48">天満橋</text>
+		<text transform="matrix(0.75 0 0 1 3434.543 1750.4585)" font-family="'mplus-2p-bold'" font-size="48">十三</text>
+		<text transform="matrix(0.75 0 0 1 3840 3040.875)" font-family="'mplus-2p-bold'" font-size="48">新今宮</text>
+		<text transform="matrix(0.75 0 0 1 3274.8926 3068.875)" font-family="'mplus-2p-bold'" font-size="48">今宮</text>
+	</g>
+	<g id="lv1-terminal">
+		<text transform="matrix(0.75 0 0 1 3460.5 2868.75)" font-family="'mplus-2p-heavy'" font-size="60">なんば</text>
+		<text id="天王寺" transform="matrix(0.75 0 0 1 4054.75 3050)"><tspan x="0" y="0" font-family="'mplus-2p-heavy'" font-size="36">天</tspan><tspan x="0" y="34" font-family="'mplus-2p-heavy'" font-size="36">王</tspan><tspan x="0" y="68" font-family="'mplus-2p-heavy'" font-size="36">寺</tspan></text>
+		<text id="天王寺_1_" transform="matrix(0.75 0 0 1 3628 2034)"><tspan x="0" y="0" font-family="'mplus-2p-heavy'" font-size="40">梅</tspan><tspan x="0" y="40" font-family="'mplus-2p-heavy'" font-size="40">田</tspan></text>
+		<text id="天王寺_2_" transform="matrix(0.75 0 0 1 3491 1993.5)" font-family="'mplus-2p-heavy'" font-size="66">大阪</text>
+	</g>
+</g>
+</svg>

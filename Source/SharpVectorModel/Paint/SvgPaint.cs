@@ -45,26 +45,26 @@ namespace SharpVectors.Dom.Svg
             bool hasNone         = false;
             bool hasCurrentColor = false;
 
-            const StringComparison compareType = StringComparison.OrdinalIgnoreCase;
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             str = str.Trim();
 
-            if (string.IsNullOrWhiteSpace(str) || str.Equals("none", compareType) 
-                || str.Equals("transparent", compareType) || str.Equals("null", compareType))
+            if (string.IsNullOrWhiteSpace(str) || str.Equals(CssConstants.ValNone, comparer) 
+                || str.Equals("transparent", comparer) || str.Equals("null", comparer))
             {
                 hasNone = true;
             }
-            else if (str.Equals("currentColor", compareType))
+            else if (str.Equals("currentColor", comparer))
             {
                 base.ParseColor(str);
                 hasCurrentColor = true;
             }
-            else if (str.Equals("context-fill", compareType) || str.Equals("contextFill", compareType))
+            else if (str.Equals("context-fill", comparer) || str.Equals("contextFill", comparer))
             {
                 _paintType = SvgPaintType.ContextFill;
                 return;
             }
-            else if (str.Equals("context-stroke", compareType) || str.Equals("contextStroke", compareType))
+            else if (str.Equals("context-stroke", comparer) || str.Equals("contextStroke", comparer))
             {
                 _paintType = SvgPaintType.ContextStroke;
                 return;
@@ -75,37 +75,37 @@ namespace SharpVectors.Dom.Svg
 
                 while (!string.IsNullOrWhiteSpace(str))
                 {
-                    if (str.StartsWith("url(", compareType))
+                    if (str.StartsWith("url(", comparer))
                     {
                         var endUri = str.IndexOf(')', 4);
                         strList.Add(str.Substring(0, endUri + 1));
                         str = str.Substring(endUri + 1).Trim();
                     }
-                    else if (str.StartsWith("rgb(", compareType))
+                    else if (str.StartsWith("rgb(", comparer))
                     {
                         var leftParen = str.IndexOf(')', 4);
                         strList.Add(str.Substring(0, leftParen + 1));
                         str = str.Substring(leftParen + 1).Trim();
                     }
-                    else if (str.StartsWith("rgba(", compareType))
+                    else if (str.StartsWith("rgba(", comparer))
                     {
                         var leftParen = str.IndexOf(')', 5);
                         strList.Add(str.Substring(0, leftParen + 1));
                         str = str.Substring(leftParen + 1).Trim();
                     }
-                    else if (str.StartsWith("hsl(", compareType))
+                    else if (str.StartsWith("hsl(", comparer))
                     {
                         var leftParen = str.IndexOf(')', 4);
                         strList.Add(str.Substring(0, leftParen + 1));
                         str = str.Substring(leftParen + 1).Trim();
                     }
-                    else if (str.StartsWith("hsla(", compareType))
+                    else if (str.StartsWith("hsla(", comparer))
                     {
                         var leftParen = str.IndexOf(')', 5);
                         strList.Add(str.Substring(0, leftParen + 1));
                         str = str.Substring(leftParen + 1).Trim();
                     }
-                    else if (str.StartsWith("#", compareType)) // Otherwise try and parse as colour
+                    else if (str.StartsWith("#", comparer)) // Otherwise try and parse as colour
                     {
                         switch (CountHexDigits(str, 1))
                         {
@@ -150,10 +150,10 @@ namespace SharpVectors.Dom.Svg
                 {
                     str = strList[0];
 
-                    if (str.StartsWith("url(", compareType))
+                    if (str.StartsWith("url(", comparer))
                     {
                         hasUri = true;
-                        int endUri = str.IndexOf(")", compareType);
+                        int endUri = str.IndexOf(")", comparer);
                         _uri = str.Substring(4, endUri - 4);
                         str = str.Substring(endUri + 1).Trim();
                     }
@@ -193,13 +193,10 @@ namespace SharpVectors.Dom.Svg
             {
                 if (hasRgb)
                 {
+                    _paintType = SvgPaintType.UriRgbColor;
                     if (hasIcc)
                     {
                         _paintType = SvgPaintType.UriRgbColorIccColor;
-                    }
-                    else
-                    {
-                        _paintType = SvgPaintType.UriRgbColor;
                     }
                 }
                 else if (hasNone)
@@ -219,13 +216,10 @@ namespace SharpVectors.Dom.Svg
             {
                 if (hasRgb)
                 {
+                    _paintType = SvgPaintType.RgbColor;
                     if (hasIcc)
                     {
                         _paintType = SvgPaintType.RgbColorIccColor;
-                    }
-                    else
-                    {
-                        _paintType = SvgPaintType.RgbColor;
                     }
                 }
                 else if (hasNone)
@@ -260,7 +254,7 @@ namespace SharpVectors.Dom.Svg
                         cssText = base.CssText;
                         break;
                     case SvgPaintType.None:
-                        cssText = "none";
+                        cssText = CssConstants.ValNone;
                         break;
                     case SvgPaintType.UriNone:
                         cssText = "url(" + _uri + ") none";

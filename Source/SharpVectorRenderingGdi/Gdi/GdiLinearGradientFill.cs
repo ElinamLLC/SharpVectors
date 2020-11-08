@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -223,7 +224,8 @@ namespace SharpVectors.Renderers.Gdi
 
             brush.Transform = GetTransformMatrix(res);
 
-            if (res.GetPropertyValue("color-interpolation") == "linearRGB")
+            if (string.Equals(res.GetPropertyValue("color-interpolation"), 
+                CssConstants.ValLinearRgb, StringComparison.OrdinalIgnoreCase))
             {
                 brush.GammaCorrection = true;
             }

@@ -167,13 +167,13 @@ namespace SharpVectors.Dom.Svg
         public bool IsHiddenCss
         {
             get {
-                var sVisibility = this.GetAttribute("visibility");
-                if (string.Equals(sVisibility, "hidden", StringComparison.OrdinalIgnoreCase))
+                var sVisibility = this.GetAttribute(CssConstants.PropVisibility);
+                if (string.Equals(sVisibility, CssConstants.ValHidden, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
-                var sDisplay = this.GetAttribute("display");
-                if (string.Equals(sDisplay, "none", StringComparison.OrdinalIgnoreCase))
+                var sDisplay = this.GetAttribute(CssConstants.PropDisplay);
+                if (string.Equals(sDisplay, CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

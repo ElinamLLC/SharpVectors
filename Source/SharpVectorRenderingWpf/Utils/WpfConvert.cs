@@ -106,6 +106,23 @@ namespace SharpVectors.Renderers.Utils
             return new Rect(x, y, width, height);
         }
 
+        public static bool Equals(Size size1, Size size2)
+        {
+            var width1 = Math.Round(size1.Width, 4);
+            var width2 = Math.Round(size2.Width, 4);
+            if (!width1.Equals(width2))
+            {
+                return false;
+            }
+            var height1 = Math.Round(size1.Height, 4);
+            var height2 = Math.Round(size2.Height, 4);
+            if (!height1.Equals(height2))
+            {
+                return false;
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// This converts the specified <see cref="Rect"/> structure to a 

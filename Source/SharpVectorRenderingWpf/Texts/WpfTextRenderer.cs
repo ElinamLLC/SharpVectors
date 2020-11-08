@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Wpf;
 
@@ -222,7 +223,7 @@ namespace SharpVectors.Renderers.Texts
                         break;
                     case "full-width":
                     case "full-size-kana":
-                    case "none":
+                    case CssConstants.ValNone:
                     default:
                         break;
                 }
@@ -367,7 +368,7 @@ namespace SharpVectors.Renderers.Texts
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontWeights.Normal;
                 case "bold":
                     return FontWeights.Bold;
@@ -406,7 +407,7 @@ namespace SharpVectors.Renderers.Texts
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontWeights.Normal;
                 case "bold":
                     return FontWeights.Bold;
@@ -471,7 +472,7 @@ namespace SharpVectors.Renderers.Texts
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontWeights.Bold;
                 case "bold":
                     return FontWeights.ExtraBold;
@@ -509,7 +510,7 @@ namespace SharpVectors.Renderers.Texts
 
             switch (fontWeight)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontWeights.Light;
                 case "bold":
                     return FontWeights.Normal;
@@ -557,7 +558,7 @@ namespace SharpVectors.Renderers.Texts
 
             var comparer = StringComparison.OrdinalIgnoreCase;
 
-            if (string.Equals(fontStyle, "normal", comparer))
+            if (string.Equals(fontStyle, CssConstants.ValNormal, comparer))
             {
                 return FontStyles.Normal;
             }
@@ -583,7 +584,7 @@ namespace SharpVectors.Renderers.Texts
 
             switch (fontStretch)
             {
-                case "normal":
+                case CssConstants.ValNormal:
                     return FontStretches.Normal;
                 case "ultra-condensed":
                     return FontStretches.UltraCondensed;

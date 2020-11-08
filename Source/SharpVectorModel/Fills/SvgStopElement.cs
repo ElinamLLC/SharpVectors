@@ -45,7 +45,7 @@ namespace SharpVectors.Dom.Svg
                     }
                     else if (tmp < 0)
                     {
-                        attr = "0";
+                        attr = SvgConstants.ValZero;
                     }
                 }
                 else
@@ -57,7 +57,7 @@ namespace SharpVectors.Dom.Svg
                     }
                     else if (tmp < 0)
                     {
-                        attr = "0";
+                        attr = SvgConstants.ValZero;
                     }
                     else
                     {

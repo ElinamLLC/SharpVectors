@@ -29,7 +29,7 @@ namespace SharpVectors.Dom.Svg
         public override ISvgAnimatedLength TextLength
         {
             get {
-                return new SvgAnimatedLength(this, "textLength", SvgLengthDirection.Horizontal, "0");
+                return new SvgAnimatedLength(this, "textLength", SvgLengthDirection.Horizontal, SvgConstants.ValZero);
             }
         }
 
@@ -61,7 +61,7 @@ namespace SharpVectors.Dom.Svg
         {
             get {
                 SvgTextPathSpacing pathSpacing = SvgTextPathSpacing.Exact;
-                if (string.Equals(this.GetAttribute("spacing"), "auto", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(this.GetAttribute("spacing"), CssConstants.ValAuto, StringComparison.OrdinalIgnoreCase))
                 {
                     pathSpacing = SvgTextPathSpacing.Auto;
                 }

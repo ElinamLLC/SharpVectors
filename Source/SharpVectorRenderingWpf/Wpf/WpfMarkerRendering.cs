@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Utils;
@@ -57,9 +58,10 @@ namespace SharpVectors.Renderers.Wpf
 
             _drawGroup = new DrawingGroup();
 
-            string sVisibility = _markerElement.GetPropertyValue("visibility");
-            string sDisplay = _markerElement.GetPropertyValue("display");
-            if (string.Equals(sVisibility, "hidden") || string.Equals(sDisplay, "none"))
+            string sVisibility = _markerElement.GetPropertyValue(CssConstants.PropVisibility);
+            string sDisplay = _markerElement.GetPropertyValue(CssConstants.PropDisplay);
+            if (string.Equals(sVisibility, CssConstants.ValHidden, StringComparison.OrdinalIgnoreCase) 
+                || string.Equals(sDisplay, CssConstants.ValNone, StringComparison.OrdinalIgnoreCase))
             {
                 // A 'marker' element with 'display' set to 'none' on that element or any 
                 // ancestor is rendered when referenced by another element.
@@ -164,7 +166,7 @@ namespace SharpVectors.Renderers.Wpf
                 var comparer = StringComparison.OrdinalIgnoreCase;
                 string overflowAttr = _markerElement.GetAttribute("overflow");
                 if (string.IsNullOrWhiteSpace(overflowAttr) 
-                    || overflowAttr.Equals("scroll", comparer) || overflowAttr.Equals("hidden", comparer))
+                    || overflowAttr.Equals("scroll", comparer) || overflowAttr.Equals(CssConstants.ValHidden, comparer))
                 {
                     Geometry markerClip = this.ClipGeometry;
                     if (markerClip == null || markerClip.IsEmpty())
@@ -426,7 +428,7 @@ namespace SharpVectors.Renderers.Wpf
                 if (markerUnits.AnimVal.Equals((ushort)SvgMarkerUnit.StrokeWidth))
                 {
                     SvgLength strokeWidthLength = new SvgLength(refElement,
-                        "stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, "1");
+                        "stroke-width", SvgLengthSource.Css, SvgLengthDirection.Viewport, SvgConstants.ValOne);
                     double strokeWidth = strokeWidthLength.Value;
                     if (!strokeWidth.Equals(1))
                     {
