@@ -73,8 +73,9 @@ namespace SharpVectors.Renderers.Texts
             // If the path has a transform, apply it to get a transformed path...
             if (targetPath.HasAttribute("transform"))
             {
-                var svgTransform = new SvgTransform(targetPath.GetAttribute("transform"));
-                var svgMatrix = svgTransform.Matrix;
+                var svgTransform = new SvgTransformList(targetPath.GetAttribute("transform"));
+                var svgMatrix = svgTransform.TotalMatrix;
+
                 if (!svgMatrix.IsIdentity)
                 {
                     pathGeometry.Transform = new MatrixTransform(svgMatrix.A, svgMatrix.B, svgMatrix.C,
