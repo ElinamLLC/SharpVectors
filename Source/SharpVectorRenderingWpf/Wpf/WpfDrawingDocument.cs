@@ -575,13 +575,9 @@ namespace SharpVectors.Renderers.Wpf
             if (group.Bounds.Contains(pt))
             {
                 var transform = group.Transform;
-                if (transform != null)
+                if (transform != null && !transform.Value.IsIdentity)
                 {
-                    var matrix = transform.Value;
-                    if (matrix != null && matrix.IsIdentity == false)
-                    {
-                        pt = transform.Inverse.Transform(pt);
-                    }
+                    pt = transform.Inverse.Transform(pt);
                 }
 
                 DrawingGroup groupDrawing       = null;

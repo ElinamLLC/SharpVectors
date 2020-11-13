@@ -389,6 +389,16 @@ namespace SharpVectors.Converters
                 // Design time
                 if (asm == null)
                 {
+#if NET50
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = Path.GetFileName(assembly.Location).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                          select assembly
+                          ).FirstOrDefault();
+#else
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
@@ -397,6 +407,7 @@ namespace SharpVectors.Converters
                           where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
                           select assembly
                           ).FirstOrDefault();
+#endif
 
                     if (asm == null)
                     {
@@ -416,6 +427,16 @@ namespace SharpVectors.Converters
             {
                 if (asm == null)
                 {
+#if NET50
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = Path.GetFileName(assembly.Location).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                          select assembly
+                          ).FirstOrDefault();
+#else
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
@@ -424,6 +445,7 @@ namespace SharpVectors.Converters
                           where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
                           select assembly
                           ).FirstOrDefault();
+#endif
                 }
 
                 Trace.TraceError(ex.ToString());

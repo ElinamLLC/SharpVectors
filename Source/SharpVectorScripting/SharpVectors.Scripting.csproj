@@ -33,7 +33,7 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
-    <DefineConstants Condition="$(TargetFramework.StartsWith('net5'))">$(DefineConstants);NETCORE;NETNEXT</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net5'))">$(DefineConstants);NETCORE;NET50</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>

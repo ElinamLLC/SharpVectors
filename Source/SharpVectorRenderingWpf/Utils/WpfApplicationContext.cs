@@ -13,11 +13,12 @@ namespace SharpVectors.Renderers.Utils
                 DirectoryInfo di;
                 try
                 {
+#if !NET50
                     FileIOPermission f = new FileIOPermission(PermissionState.None);
                     f.AllLocalFiles = FileIOPermissionAccess.Read;
 
                     f.Assert();
-
+#endif
                     di = new DirectoryInfo(Path.GetDirectoryName(
                         System.Reflection.Assembly.GetExecutingAssembly().Location));
                 }

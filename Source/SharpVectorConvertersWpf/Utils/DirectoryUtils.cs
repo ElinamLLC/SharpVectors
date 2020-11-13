@@ -18,7 +18,9 @@ namespace SharpVectors.Converters.Utils
     {
         private sealed class SafeFindHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
+#if !NET50
             [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
+#endif
             private SafeFindHandle() : base(true) 
             { 
             }
@@ -29,7 +31,9 @@ namespace SharpVectors.Converters.Utils
             }
 
             [DllImport("kernel32.dll")]
+#if !NET50
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+#endif
             [SuppressUnmanagedCodeSecurity]
             private static extern bool FindClose(IntPtr handle);
         }
@@ -133,7 +137,9 @@ namespace SharpVectors.Converters.Utils
             string pattern, SearchOption searchOption)
         {
             // We suppressed this demand for each p/invoke call, so demand it upfront once
+#if !NET50
             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+#endif
 
             // Validate parameters
             if (dir == null) 
