@@ -1,0 +1,1659 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.HtmlRenderer.WinForms</name>
+    </assembly>
+    <members>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.BrushAdapter">
+            <summary>
+            Adapter for WinForms brushes objects for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.BrushAdapter._brush">
+            <summary>
+            The actual WinForms brush instance.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.BrushAdapter._dispose">
+            <summary>
+            If to dispose the brush when <see cref="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.BrushAdapter.Dispose"/> is called.<br/>
+            Ignore dispose for cached brushes.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.BrushAdapter.#ctor(System.Drawing.Brush,System.Boolean)">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.BrushAdapter.Brush">
+            <summary>
+            The actual WinForms brush instance.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontFamilyAdapter">
+            <summary>
+            Adapter for WinForms Font family object for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontFamilyAdapter._fontFamily">
+            <summary>
+            the underline win-forms font.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontFamilyAdapter.#ctor(System.Drawing.FontFamily)">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontFamilyAdapter.FontFamily">
+            <summary>
+            the underline win-forms font family.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter">
+            <summary>
+            Adapter for WinForms Font object for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter._font">
+            <summary>
+            the underline win-forms font.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter._hFont">
+            <summary>
+            a handle to this Font.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter._underlineOffset">
+            <summary>
+            the vertical offset of the font underline location from the top of the font.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter._height">
+            <summary>
+            Cached font height.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter._whitespaceWidth">
+            <summary>
+            Cached font whitespace width.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter.#ctor(System.Drawing.Font)">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter.Font">
+            <summary>
+            the underline win-forms font.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter.HFont">
+            <summary>
+            Get the handle to this Font.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.FontAdapter.SetMetrics(System.Int32,System.Int32)">
+            <summary>
+            Set font metrics to be cached for the font for future use.
+            </summary>
+            <param name="height">the full height of the font</param>
+            <param name="underlineOffset">the vertical offset of the font underline location from the top of the font.</param>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.WinFormsAdapter">
+            <summary>
+            Adapter for WinForms platforms.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.WinFormsAdapter._instance">
+            <summary>
+            Singleton instance of global adapter.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.WinFormsAdapter.#ctor">
+            <summary>
+            Init installed font families and set default font families mapping.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.WinFormsAdapter.Instance">
+            <summary>
+            Singleton instance of global adapter.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsPathAdapter">
+            <summary>
+            Adapter for WinForms graphics path object for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsPathAdapter._graphicsPath">
+            <summary>
+            The actual WinForms graphics path instance.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsPathAdapter._lastPoint">
+            <summary>
+            the last point added to the path to begin next segment from
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsPathAdapter.GraphicsPath">
+            <summary>
+            The actual WinForms graphics path instance.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsPathAdapter.GetStartAngle(TheArtOfDev.HtmlRenderer.Adapters.RGraphicsPath.Corner)">
+            <summary>
+            Get arc start angle for the given corner.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ImageAdapter">
+            <summary>
+            Adapter for WinForms Image object for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ImageAdapter._image">
+            <summary>
+            the underline win-forms image.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ImageAdapter.#ctor(System.Drawing.Image)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Object"/> class.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ImageAdapter.Image">
+            <summary>
+            the underline win-forms image.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ContextMenuAdapter">
+            <summary>
+            Adapter for WinForms context menu for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ContextMenuAdapter._contextMenu">
+            <summary>
+            the underline win forms context menu
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ContextMenuAdapter.#ctor">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ControlAdapter">
+            <summary>
+            Adapter for WinForms Control for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ControlAdapter._control">
+            <summary>
+            the underline win forms control.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ControlAdapter._useGdiPlusTextRendering">
+            <summary>
+            Use GDI+ text rendering to measure/draw text.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ControlAdapter.#ctor(System.Windows.Forms.Control,System.Boolean)">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.ControlAdapter.Control">
+            <summary>
+            Get the underline win forms control
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter">
+            <summary>
+            Adapter for WinForms Graphics for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._charFit">
+            <summary>
+            used for <see cref="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.MeasureString(System.String,TheArtOfDev.HtmlRenderer.Adapters.RFont,System.Double,System.Int32@,System.Double@)"/> calculation.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._charFitWidth">
+            <summary>
+            used for <see cref="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.MeasureString(System.String,TheArtOfDev.HtmlRenderer.Adapters.RFont,System.Double,System.Int32@,System.Double@)"/> calculation.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._characterRanges">
+            <summary>
+            Used for GDI+ measure string.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._stringFormat">
+            <summary>
+            The string format to use for measuring strings for GDI+ text rendering
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._stringFormat2">
+            <summary>
+            The string format to use for rendering strings for GDI+ text rendering
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._g">
+            <summary>
+            The wrapped WinForms graphics object
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._useGdiPlusTextRendering">
+            <summary>
+            Use GDI+ text rendering to measure/draw text.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._hdc">
+            <summary>
+            the initialized HDC used
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._releaseGraphics">
+            <summary>
+            if to release the graphics object on dispose
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter._setRtl">
+            <summary>
+            If text alignment was set to RTL
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.#cctor">
+            <summary>
+            Init static resources.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.#ctor(System.Drawing.Graphics,System.Boolean,System.Boolean)">
+            <summary>
+            Init.
+            </summary>
+            <param name="g">the win forms graphics object to use</param>
+            <param name="useGdiPlusTextRendering">Use GDI+ text rendering to measure/draw text</param>
+            <param name="releaseGraphics">optional: if to release the graphics object on dispose (default - false)</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.ReleaseHdc">
+            <summary>
+            Release current HDC to be able to use <see cref="T:System.Drawing.Graphics"/> methods.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.InitHdc">
+            <summary>
+            Init HDC for the current graphics object to be used to call GDI directly.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.SetFont(TheArtOfDev.HtmlRenderer.Adapters.RFont)">
+            <summary>
+            Set a resource (e.g. a font) for the specified device context.
+            WARNING: Calling Font.ToHfont() many times without releasing the font handle crashes the app.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.SetTextColor(System.Drawing.Color)">
+            <summary>
+            Set the text color of the device context.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.SetRtlAlignGdi(System.Boolean)">
+            <summary>
+            Change text align to Left-to-Right or Right-to-Left if required.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.DrawTransparentText(System.IntPtr,System.String,TheArtOfDev.HtmlRenderer.Adapters.RFont,System.Drawing.Point,System.Drawing.Size,System.Drawing.Color)">
+            <summary>
+            Special draw logic to draw transparent text using GDI.<br/>
+            1. Create in-memory DC<br/>
+            2. Copy background to in-memory DC<br/>
+            3. Draw the text to in-memory DC<br/>
+            4. Copy the in-memory DC to the proper location with alpha blend<br/>
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.GraphicsAdapter.SetRtlAlignGdiPlus(System.Boolean)">
+            <summary>
+            Change text align to Left-to-Right or Right-to-Left if required.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.Adapters.PenAdapter">
+            <summary>
+            Adapter for WinForms pens objects for core.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.Adapters.PenAdapter._pen">
+            <summary>
+            The actual WinForms brush instance.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.Adapters.PenAdapter.#ctor(System.Drawing.Pen)">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.Adapters.PenAdapter.Pen">
+            <summary>
+            The actual WinForms brush instance.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer">
+            <summary>
+            Low level handling of Html Renderer logic, this class is used by <see cref="T:TheArtOfDev.HtmlRenderer.Core.Parse.HtmlParser"/>, 
+            <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel"/>, <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlToolTip"/> and <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender"/>.<br/>
+            </summary>
+            <seealso cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HtmlContainerInt"/>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer._htmlContainerInt">
+            <summary>
+            The internal core html container
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer._useGdiPlusTextRendering">
+            <summary>
+            Use GDI+ text rendering to measure/draw text.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.#ctor">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.LoadComplete">
+            <summary>
+            Raised when the set html document has been fully loaded.<br/>
+            Allows manipulation of the html dom, scroll position, etc.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.LinkClicked">
+            <summary>
+            Raised when the user clicks on a link in the html.<br/>
+            Allows canceling the execution of the link.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.Refresh">
+            <summary>
+            Raised when html renderer requires refresh of the control hosting (invalidation and re-layout).
+            </summary>
+            <remarks>
+            There is no guarantee that the event will be raised on the main thread, it can be raised on thread-pool thread.
+            </remarks>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.ScrollChange">
+            <summary>
+            Raised when Html Renderer request scroll to specific location.<br/>
+            This can occur on document anchor click.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.RenderError">
+            <summary>
+            Raised when an error occurred during html rendering.<br/>
+            </summary>
+            <remarks>
+            There is no guarantee that the event will be raised on the main thread, it can be raised on thread-pool thread.
+            </remarks>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.StylesheetLoad">
+            <summary>
+            Raised when a stylesheet is about to be loaded by file path or URI by link element.<br/>
+            This event allows to provide the stylesheet manually or provide new source (file or Uri) to load from.<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.ImageLoad">
+            <summary>
+            Raised when an image is about to be loaded by file path or URI.<br/>
+            This event allows to provide the image manually, if not handled the image will be loaded from file or download from URI.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HtmlContainerInt">
+            <summary>
+            The internal core html container
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.UseGdiPlusTextRendering">
+            <summary>
+            Use GDI+ text rendering to measure/draw text.<br/>
+            </summary>
+            <remarks>
+            <para>
+            GDI+ text rendering is less smooth than GDI text rendering but it natively supports alpha channel
+            thus allows creating transparent images.
+            </para>
+            <para>
+            While using GDI+ text rendering you can control the text rendering using <see cref="P:System.Drawing.Graphics.TextRenderingHint"/>, note that
+            using <see cref="F:System.Drawing.Text.TextRenderingHint.ClearTypeGridFit"/> doesn't work well with transparent background.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.CssData">
+            <summary>
+            the parsed stylesheet data used for handling the html
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.AvoidGeometryAntialias">
+            <summary>
+            Gets or sets a value indicating if anti-aliasing should be avoided for geometry like backgrounds and borders (default - false).
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.AvoidAsyncImagesLoading">
+            <summary>
+            Gets or sets a value indicating if image asynchronous loading should be avoided (default - false).<br/>
+            True - images are loaded synchronously during html parsing.<br/>
+            False - images are loaded asynchronously to html parsing when downloaded from URL or loaded from disk.<br/>
+            </summary>
+            <remarks>
+            Asynchronously image loading allows to unblock html rendering while image is downloaded or loaded from disk using IO 
+            ports to achieve better performance.<br/>
+            Asynchronously image loading should be avoided when the full html content must be available during render, like render to image.
+            </remarks>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.AvoidImagesLateLoading">
+            <summary>
+            Gets or sets a value indicating if image loading only when visible should be avoided (default - false).<br/>
+            True - images are loaded as soon as the html is parsed.<br/>
+            False - images that are not visible because of scroll location are not loaded until they are scrolled to.
+            </summary>
+            <remarks>
+            Images late loading improve performance if the page contains image outside the visible scroll area, especially if there is large 
+            amount of images, as all image loading is delayed (downloading and loading into memory).<br/>
+            Late image loading may effect the layout and actual size as image without set size will not have actual size until they are loaded
+            resulting in layout change during user scroll.<br/>
+            Early image loading may also effect the layout if image without known size above the current scroll location are loaded as they
+            will push the html elements down.
+            </remarks>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.IsSelectionEnabled">
+            <summary>
+            Is content selection is enabled for the rendered html (default - true).<br/>
+            If set to 'false' the rendered html will be static only with ability to click on links.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.IsContextMenuEnabled">
+            <summary>
+            Is the build-in context menu enabled and will be shown on mouse right click (default - true)
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.ScrollOffset">
+            <summary>
+            The scroll offset of the html.<br/>
+            This will adjust the rendered html by the given offset so the content will be "scrolled".<br/>
+            </summary>
+            <example>
+            Element that is rendered at location (50,100) with offset of (0,200) will not be rendered as it
+            will be at -100 therefore outside the client rectangle.
+            </example>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.Location">
+            <summary>
+            The top-left most location of the rendered html.<br/>
+            This will offset the top-left corner of the rendered html.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.MaxSize">
+            <summary>
+            The max width and height of the rendered html.<br/>
+            The max width will effect the html layout wrapping lines, resize images and tables where possible.<br/>
+            The max height does NOT effect layout, but will not render outside it (clip).<br/>
+            <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.ActualSize"/> can be exceed the max size by layout restrictions (unwrappable line, set image size, etc.).<br/>
+            Set zero for unlimited (width\height separately).<br/>
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.ActualSize">
+            <summary>
+            The actual size of the rendered html (after layout)
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.SelectedText">
+            <summary>
+            Get the currently selected text segment in the html.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.SelectedHtml">
+            <summary>
+            Copy the currently selected html segment with style.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.ClearSelection">
+            <summary>
+            Clear the current selection.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.SetHtml(System.String,TheArtOfDev.HtmlRenderer.Core.CssData)">
+            <summary>
+            Init with optional document and stylesheet.
+            </summary>
+            <param name="htmlSource">the html to init with, init empty if not given</param>
+            <param name="baseCssData">optional: the stylesheet to init with, init default if not given</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.GetHtml(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlGenerationStyle)">
+            <summary>
+            Get html from the current DOM tree with style if requested.
+            </summary>
+            <param name="styleGen">Optional: controls the way styles are generated when html is generated (default: <see cref="F:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlGenerationStyle.Inline"/>)</param>
+            <returns>generated html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.GetAttributeAt(System.Drawing.Point,System.String)">
+            <summary>
+            Get attribute value of element at the given x,y location by given key.<br/>
+            If more than one element exist with the attribute at the location the inner most is returned.
+            </summary>
+            <param name="location">the location to find the attribute at</param>
+            <param name="attribute">the attribute key to get value by</param>
+            <returns>found attribute value or null if not found</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.GetLinks">
+            <summary>
+            Get all the links in the HTML with the element rectangle and href data.
+            </summary>
+            <returns>collection of all the links in the HTML</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.GetLinkAt(System.Drawing.Point)">
+            <summary>
+            Get css link href at the given x,y location.
+            </summary>
+            <param name="location">the location to find the link at</param>
+            <returns>css link href if exists or null</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.GetElementRectangle(System.String)">
+            <summary>
+            Get the rectangle of html element as calculated by html layout.<br/>
+            Element if found by id (id attribute on the html element).<br/>
+            Note: to get the screen rectangle you need to adjust by the hosting control.<br/>
+            </summary>
+            <param name="elementId">the id of the element to get its rectangle</param>
+            <returns>the rectangle of the element or null if not found</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.PerformLayout(System.Drawing.Graphics)">
+            <summary>
+            Measures the bounds of box and children, recursively.
+            </summary>
+            <param name="g">Device context to draw</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.PerformPaint(System.Drawing.Graphics)">
+            <summary>
+            Render the html using the given device.
+            </summary>
+            <param name="g">the device to use to render</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HandleMouseDown(System.Windows.Forms.Control,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse down to handle selection.
+            </summary>
+            <param name="parent">the control hosting the html to invalidate</param>
+            <param name="e">the mouse event args</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HandleMouseUp(System.Windows.Forms.Control,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse up to handle selection and link click.
+            </summary>
+            <param name="parent">the control hosting the html to invalidate</param>
+            <param name="e">the mouse event args</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HandleMouseDoubleClick(System.Windows.Forms.Control,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse double click to select word under the mouse.
+            </summary>
+            <param name="parent">the control hosting the html to set cursor and invalidate</param>
+            <param name="e">mouse event args</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HandleMouseMove(System.Windows.Forms.Control,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse move to handle hover cursor and text selection.
+            </summary>
+            <param name="parent">the control hosting the html to set cursor and invalidate</param>
+            <param name="e">the mouse event args</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HandleMouseLeave(System.Windows.Forms.Control)">
+            <summary>
+            Handle mouse leave to handle hover cursor.
+            </summary>
+            <param name="parent">the control hosting the html to set cursor and invalidate</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.HandleKeyDown(System.Windows.Forms.Control,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Handle key down event for selection and copy.
+            </summary>
+            <param name="parent">the control hosting the html to invalidate</param>
+            <param name="e">the pressed key</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.CreateMouseEvent(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Create HtmlRenderer mouse event from win forms mouse event.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer.CreateKeyEevent(System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Create HtmlRenderer key event from win forms key event.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel">
+            <summary>
+            Provides HTML rendering using the text property.<br/>
+            WinForms control that will render html content in it's client rectangle.<br/>
+            Using <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSize"/> and <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSizeHeightOnly"/> client can control how the html content effects the
+            size of the label. Either case scrollbars are never shown and html content outside of client bounds will be clipped.
+            <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.MaximumSize"/> and <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.MinimumSize"/> with AutoSize can limit the max/min size of the control<br/>
+            The control will handle mouse and keyboard events on it to support html text selection, copy-paste and mouse clicks.<br/>
+            <para>
+            The major differential to use HtmlPanel or HtmlLabel is size and scrollbars.<br/>
+            If the size of the control depends on the html content the HtmlLabel should be used.<br/>
+            If the size is set by some kind of layout then HtmlPanel is more suitable, also shows scrollbars if the html contents is larger than the control client rectangle.<br/>
+            </para>
+            <para>
+            <h4>AutoSize:</h4>
+            <u>AutoSize = AutoSizeHeightOnly = false</u><br/>
+            The label size will not change by the html content. MaximumSize and MinimumSize are ignored.<br/>
+            <br/>
+            <u>AutoSize = true</u><br/>
+            The width and height is adjustable by the html content, the width will be longest line in the html, MaximumSize.Width will restrict it but it can be lower than that.<br/>
+            <br/>
+            <u>AutoSizeHeightOnly = true</u><br/>
+            The width of the label is set and will not change by the content, the height is adjustable by the html content with restrictions to the MaximumSize.Height and MinimumSize.Height values.<br/>
+            </para>
+            <para>
+            <h4>LinkClicked event</h4>
+            Raised when the user clicks on a link in the html.<br/>
+            Allows canceling the execution of the link.
+            </para>
+            <para>
+            <h4>StylesheetLoad event:</h4>
+            Raised when aa stylesheet is about to be loaded by file path or URI by link element.<br/>
+            This event allows to provide the stylesheet manually or provide new source (file or uri) to load from.<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            </para>
+            <para>
+            <h4>ImageLoad event:</h4>
+            Raised when an image is about to be loaded by file path or URI.<br/>
+            This event allows to provide the image manually, if not handled the image will be loaded from file or download from URI.
+            </para>
+            <para>
+            <h4>RenderError event:</h4>
+            Raised when an error occurred during html rendering.<br/>
+            </para>
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._htmlContainer">
+            <summary>
+            Underline html container instance.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._borderStyle">
+            <summary>
+            The current border style of the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._baseRawCssData">
+            <summary>
+            the raw base stylesheet data used in the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._baseCssData">
+            <summary>
+            the base stylesheet data used in the panel
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._text">
+            <summary>
+            the current html text set in the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._autoSizeHight">
+            <summary>
+            is to handle auto size of the control height only
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._useSystemCursors">
+            <summary>
+            If to use cursors defined by the operating system or .NET cursors
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel._textRenderingHint">
+            <summary>
+            The text rendering hint to be used for text rendering.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.#ctor">
+            <summary>
+            Creates a new HTML Label
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.BorderStyleChanged">
+            <summary>
+              Raised when the BorderStyle property value changes.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.LoadComplete">
+            <summary>
+            Raised when the set html document has been fully loaded.<br/>
+            Allows manipulation of the html dom, scroll position, etc.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.LinkClicked">
+            <summary>
+            Raised when the user clicks on a link in the html.<br/>
+            Allows canceling the execution of the link.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.RenderError">
+            <summary>
+            Raised when an error occurred during html rendering.<br/>
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.StylesheetLoad">
+            <summary>
+            Raised when aa stylesheet is about to be loaded by file path or URI by link element.<br/>
+            This event allows to provide the stylesheet manually or provide new source (file or uri) to load from.<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.ImageLoad">
+            <summary>
+            Raised when an image is about to be loaded by file path or URI.<br/>
+            This event allows to provide the image manually, if not handled the image will be loaded from file or download from URI.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AvoidGeometryAntialias">
+            <summary>
+            Gets or sets a value indicating if anti-aliasing should be avoided for geometry like backgrounds and borders (default - false).
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.UseGdiPlusTextRendering">
+            <summary>
+            Use GDI+ text rendering to measure/draw text.<br/>
+            </summary>
+            <remarks>
+            <para>
+            GDI+ text rendering is less smooth than GDI text rendering but it natively supports alpha channel
+            thus allows creating transparent images.
+            </para>
+            <para>
+            While using GDI+ text rendering you can control the text rendering using <see cref="P:System.Drawing.Graphics.TextRenderingHint"/>, note that
+            using <see cref="F:System.Drawing.Text.TextRenderingHint.ClearTypeGridFit"/> doesn't work well with transparent background.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.TextRenderingHint">
+            <summary>
+            The text rendering hint to be used for text rendering.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.UseSystemCursors">
+            <summary>
+            If to use cursors defined by the operating system or .NET cursors
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.BorderStyle">
+            <summary>
+            Gets or sets the border style.
+            </summary>
+            <value>The border style.</value>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.IsSelectionEnabled">
+            <summary>
+            Is content selection is enabled for the rendered html (default - true).<br/>
+            If set to 'false' the rendered html will be static only with ability to click on links.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.IsContextMenuEnabled">
+            <summary>
+            Is the build-in context menu enabled and will be shown on mouse right click (default - true)
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.BaseStylesheet">
+            <summary>
+            Set base stylesheet to be used by html rendered in the panel.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSize">
+            <summary>
+            Automatically sets the size of the label by content size
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSizeHeightOnly">
+            <summary>
+            Automatically sets the height of the label by content height (width is not effected).
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.MaximumSize">
+            <summary>
+            Gets or sets the max size the control get be set by <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSize"/> or <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSizeHeightOnly"/>.
+            </summary>
+            <returns>An ordered pair of type <see cref="T:System.Drawing.Size"/> representing the width and height of a rectangle.</returns>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.MinimumSize">
+            <summary>
+            Gets or sets the min size the control get be set by <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSize"/> or <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AutoSizeHeightOnly"/>.
+            </summary>
+            <returns>An ordered pair of type <see cref="T:System.Drawing.Size"/> representing the width and height of a rectangle.</returns>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.Text">
+            <summary>
+            Gets or sets the html of this control.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.SelectedText">
+            <summary>
+            Get the currently selected text segment in the html.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.SelectedHtml">
+            <summary>
+            Copy the currently selected html segment with style.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.GetHtml">
+            <summary>
+            Get html from the current DOM tree with inline style.
+            </summary>
+            <returns>generated html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.GetElementRectangle(System.String)">
+            <summary>
+            Get the rectangle of html element as calculated by html layout.<br/>
+            Element if found by id (id attribute on the html element).<br/>
+            Note: to get the screen rectangle you need to adjust by the hosting control.<br/>
+            </summary>
+            <param name="elementId">the id of the element to get its rectangle</param>
+            <returns>the rectangle of the element or null if not found</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.ClearSelection">
+            <summary>
+            Clear the current selection.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.CreateParams">
+            <summary>
+            Override to support border for the control.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnLayout(System.Windows.Forms.LayoutEventArgs)">
+            <summary>
+            Perform the layout of the html in the control.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Perform paint of the html in the control.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse move to handle hover cursor and text selection. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse down to handle selection. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnMouseLeave(System.EventArgs)">
+            <summary>
+            Handle mouse leave to handle cursor change.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse up to handle selection and link click. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnMouseDoubleClick(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse double click to select word under the mouse. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnBorderStyleChanged(System.EventArgs)">
+            <summary>
+              Raises the <see cref="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.BorderStyleChanged" /> event.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnLoadComplete(System.EventArgs)">
+            <summary>
+            Propagate the LoadComplete event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnLinkClicked(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlLinkClickedEventArgs)">
+            <summary>
+            Propagate the LinkClicked event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnRenderError(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlRenderErrorEventArgs)">
+            <summary>
+            Propagate the Render Error event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnStylesheetLoad(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs)">
+            <summary>
+            Propagate the stylesheet load event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnImageLoad(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs)">
+            <summary>
+            Propagate the image load event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.OnRefresh(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlRefreshEventArgs)">
+            <summary>
+            Handle html renderer invalidate and re-layout as requested.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Override the proc processing method to set OS specific hand cursor.
+            </summary>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process. </param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.Dispose(System.Boolean)">
+            <summary>
+            Release the html container resources.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.Font">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.ForeColor">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.AllowDrop">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.RightToLeft">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.Cursor">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel.UseWaitCursor">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel">
+            <summary>
+            Provides HTML rendering using the text property.<br/>
+            WinForms control that will render html content in it's client rectangle.<br/>
+            If <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.AutoScroll"/> is true and the layout of the html resulted in its content beyond the client bounds 
+            of the panel it will show scrollbars (horizontal/vertical) allowing to scroll the content.<br/>
+            If <see cref="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.AutoScroll"/> is false html content outside the client bounds will be clipped.<br/>
+            The control will handle mouse and keyboard events on it to support html text selection, copy-paste and mouse clicks.<br/>
+            <para>
+            The major differential to use HtmlPanel or HtmlLabel is size and scrollbars.<br/>
+            If the size of the control depends on the html content the HtmlLabel should be used.<br/>
+            If the size is set by some kind of layout then HtmlPanel is more suitable, also shows scrollbars if the html contents is larger than the control client rectangle.<br/>
+            </para>
+            <para>
+            <h4>AutoScroll:</h4>
+            Allows showing scrollbars if html content is placed outside the visible boundaries of the panel.
+            </para>
+            <para>
+            <h4>LinkClicked event:</h4>
+            Raised when the user clicks on a link in the html.<br/>
+            Allows canceling the execution of the link.
+            </para>
+            <para>
+            <h4>StylesheetLoad event:</h4>
+            Raised when a stylesheet is about to be loaded by file path or URI by link element.<br/>
+            This event allows to provide the stylesheet manually or provide new source (file or uri) to load from.<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            </para>
+            <para>
+            <h4>ImageLoad event:</h4>
+            Raised when an image is about to be loaded by file path or URI.<br/>
+            This event allows to provide the image manually, if not handled the image will be loaded from file or download from URI.
+            </para>
+            <para>
+            <h4>RenderError event:</h4>
+            Raised when an error occurred during html rendering.<br/>
+            </para>
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._htmlContainer">
+            <summary>
+            Underline html container instance.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._borderStyle">
+            <summary>
+            The current border style of the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._baseRawCssData">
+            <summary>
+            the raw base stylesheet data used in the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._baseCssData">
+            <summary>
+            the base stylesheet data used in the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._text">
+            <summary>
+            the current html text set in the control
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._useSystemCursors">
+            <summary>
+            If to use cursors defined by the operating system or .NET cursors
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._textRenderingHint">
+            <summary>
+            The text rendering hint to be used for text rendering.
+            </summary>
+        </member>
+        <member name="F:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel._lastScrollOffset">
+            <summary>
+            The last position of the scrollbars to know if it has changed to update mouse
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.#ctor">
+            <summary>
+            Creates a new HtmlPanel and sets a basic css for it's styling.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.BorderStyleChanged">
+            <summary>
+              Raised when the BorderStyle property value changes.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.LoadComplete">
+            <summary>
+            Raised when the set html document has been fully loaded.<br/>
+            Allows manipulation of the html dom, scroll position, etc.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.LinkClicked">
+            <summary>
+            Raised when the user clicks on a link in the html.<br/>
+            Allows canceling the execution of the link.
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.RenderError">
+            <summary>
+            Raised when an error occurred during html rendering.<br/>
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.StylesheetLoad">
+            <summary>
+            Raised when a stylesheet is about to be loaded by file path or URI by link element.<br/>
+            This event allows to provide the stylesheet manually or provide new source (file or uri) to load from.<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            </summary>
+        </member>
+        <member name="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.ImageLoad">
+            <summary>
+            Raised when an image is about to be loaded by file path or URI.<br/>
+            This event allows to provide the image manually, if not handled the image will be loaded from file or download from URI.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.AvoidGeometryAntialias">
+            <summary>
+            Gets or sets a value indicating if anti-aliasing should be avoided for geometry like backgrounds and borders (default - false).
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.AvoidImagesLateLoading">
+            <summary>
+            Gets or sets a value indicating if image loading only when visible should be avoided (default - false).<br/>
+            True - images are loaded as soon as the html is parsed.<br/>
+            False - images that are not visible because of scroll location are not loaded until they are scrolled to.
+            </summary>
+            <remarks>
+            Images late loading improve performance if the page contains image outside the visible scroll area, especially if there is large 
+            amount of images, as all image loading is delayed (downloading and loading into memory).<br/>
+            Late image loading may effect the layout and actual size as image without set size will not have actual size until they are loaded
+            resulting in layout change during user scroll.<br/>
+            Early image loading may also effect the layout if image without known size above the current scroll location are loaded as they
+            will push the html elements down.
+            </remarks>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.UseGdiPlusTextRendering">
+            <summary>
+            Use GDI+ text rendering to measure/draw text.<br/>
+            </summary>
+            <remarks>
+            <para>
+            GDI+ text rendering is less smooth than GDI text rendering but it natively supports alpha channel
+            thus allows creating transparent images.
+            </para>
+            <para>
+            While using GDI+ text rendering you can control the text rendering using <see cref="P:System.Drawing.Graphics.TextRenderingHint"/>, note that
+            using <see cref="F:System.Drawing.Text.TextRenderingHint.ClearTypeGridFit"/> doesn't work well with transparent background.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.TextRenderingHint">
+            <summary>
+            The text rendering hint to be used for text rendering.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.UseSystemCursors">
+            <summary>
+            If to use cursors defined by the operating system or .NET cursors
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.BorderStyle">
+            <summary>
+            Gets or sets the border style.
+            </summary>
+            <value>The border style.</value>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.IsSelectionEnabled">
+            <summary>
+            Is content selection is enabled for the rendered html (default - true).<br/>
+            If set to 'false' the rendered html will be static only with ability to click on links.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.IsContextMenuEnabled">
+            <summary>
+            Is the build-in context menu enabled and will be shown on mouse right click (default - true)
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.BaseStylesheet">
+            <summary>
+            Set base stylesheet to be used by html rendered in the panel.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.AutoScroll">
+            <summary>
+            Gets or sets a value indicating whether the container enables the user to scroll to any controls placed outside of its visible boundaries. 
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.Text">
+            <summary>
+            Gets or sets the text of this panel
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.SelectedText">
+            <summary>
+            Get the currently selected text segment in the html.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.SelectedHtml">
+            <summary>
+            Copy the currently selected html segment with style.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.GetHtml">
+            <summary>
+            Get html from the current DOM tree with inline style.
+            </summary>
+            <returns>generated html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.GetElementRectangle(System.String)">
+            <summary>
+            Get the rectangle of html element as calculated by html layout.<br/>
+            Element if found by id (id attribute on the html element).<br/>
+            Note: to get the screen rectangle you need to adjust by the hosting control.<br/>
+            </summary>
+            <param name="elementId">the id of the element to get its rectangle</param>
+            <returns>the rectangle of the element or null if not found</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.ScrollToElement(System.String)">
+            <summary>
+            Adjust the scrollbar of the panel on html element by the given id.<br/>
+            The top of the html element rectangle will be at the top of the panel, if there
+            is not enough height to scroll to the top the scroll will be at maximum.<br/>
+            </summary>
+            <param name="elementId">the id of the element to scroll to</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.ClearSelection">
+            <summary>
+            Clear the current selection.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.CreateParams">
+            <summary>
+            Override to support border for the control.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnLayout(System.Windows.Forms.LayoutEventArgs)">
+            <summary>
+            Perform the layout of the html in the control.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.PerformHtmlLayout">
+            <summary>
+            Perform html container layout by the current panel client size.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Perform paint of the html in the control.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnClick(System.EventArgs)">
+            <summary>
+            Set focus on the control for keyboard scrollbars handling.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse move to handle hover cursor and text selection. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnMouseLeave(System.EventArgs)">
+            <summary>
+            Handle mouse leave to handle cursor change.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse down to handle selection. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse up to handle selection and link click. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnMouseDoubleClick(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handle mouse double click to select word under the mouse. 
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnKeyDown(System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Handle key down event for selection, copy and scrollbars handling.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnBorderStyleChanged(System.EventArgs)">
+            <summary>
+              Raises the <see cref="E:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.BorderStyleChanged" /> event.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnLoadComplete(System.EventArgs)">
+            <summary>
+            Propagate the LoadComplete event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnLinkClicked(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlLinkClickedEventArgs)">
+            <summary>
+            Propagate the LinkClicked event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnRenderError(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlRenderErrorEventArgs)">
+            <summary>
+            Propagate the Render Error event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnStylesheetLoad(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs)">
+            <summary>
+            Propagate the stylesheet load event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnImageLoad(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs)">
+            <summary>
+            Propagate the image load event from root container.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnRefresh(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlRefreshEventArgs)">
+            <summary>
+            Handle html renderer invalidate and re-layout as requested.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnScrollChange(TheArtOfDev.HtmlRenderer.Core.Entities.HtmlScrollEventArgs)">
+            <summary>
+            On html renderer scroll request adjust the scrolling of the panel to the requested location.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.UpdateScroll(System.Drawing.Point)">
+            <summary>
+            Adjust the scrolling of the panel to the requested location.
+            </summary>
+            <param name="location">the location to adjust the scroll to</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.InvokeMouseMove">
+            <summary>
+            call mouse move to handle paint after scroll or html change affecting mouse cursor.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.IsInputKey(System.Windows.Forms.Keys)">
+            <summary>
+            Used to add arrow keys to the handled keys in <see cref="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.OnKeyDown(System.Windows.Forms.KeyEventArgs)"/>.
+            </summary>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Override the proc processing method to set OS specific hand cursor.
+            </summary>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process. </param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.Dispose(System.Boolean)">
+            <summary>
+            Release the html container resources.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.Font">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.ForeColor">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.AllowDrop">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.RightToLeft">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.Cursor">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="P:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel.UseWaitCursor">
+            <summary>
+            Not applicable.
+            </summary>
+        </member>
+        <member name="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender">
+            <summary>
+            Standalone static class for simple and direct HTML rendering.<br/>
+            For WinForms UI prefer using HTML controls: <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlPanel"/> or <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel"/>.<br/>
+            For low-level control and performance consider using <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer"/>.<br/>
+            </summary>
+            <remarks>
+            <para>
+            <b>GDI vs. GDI+ text rendering</b><br/>
+            Windows supports two text rendering technologies: GDI and GDI+.<br/> 
+            GDI is older, has better performance and looks better on standard monitors but doesn't support alpha channel for transparency.<br/> 
+            GDI+ is newer, device independent so work better for printers but is slower and looks worse on monitors.<br/>
+            HtmlRender supports both GDI and GDI+ text rendering to accommodate different needs, GDI+ text rendering methods have "GdiPlus" suffix
+            in their name where GDI do not.<br/>
+            </para>
+            <para>
+            <b>Rendering to image</b><br/>
+            See https://htmlrenderer.codeplex.com/wikipage?title=Image%20generation <br/>
+            Because of GDI text rendering issue with alpha channel clear type text rendering rendering to image requires special handling.<br/>
+            <u>Solid color background -</u> generate an image where the background is filled with solid color and all the html is rendered on top
+            of the background color, GDI text rendering will be used. (RenderToImage method where the first argument is html string)<br/>
+            <u>Image background -</u> render html on top of existing image with whatever currently exist but it cannot have transparent pixels, 
+            GDI text rendering will be used. (RenderToImage method where the first argument is Image object)<br/>
+            <u>Transparent background -</u> render html to empty image using GDI+ text rendering, the generated image can be transparent.
+            Text rendering can be controlled using <see cref="T:System.Drawing.Text.TextRenderingHint"/>, note that <see cref="F:System.Drawing.Text.TextRenderingHint.ClearTypeGridFit"/>
+            doesn't render well on transparent background. (RenderToImageGdiPlus method)<br/>
+            </para>
+            <para>
+            <b>Overwrite stylesheet resolution</b><br/>
+            Exposed by optional "stylesheetLoad" delegate argument.<br/>
+            Invoked when a stylesheet is about to be loaded by file path or URL in 'link' element.<br/>
+            Allows to overwrite the loaded stylesheet by providing the stylesheet data manually, or different source (file or URL) to load from.<br/>
+            Example: The stylesheet 'href' can be non-valid URI string that is interpreted in the overwrite delegate by custom logic to pre-loaded stylesheet object<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            </para>
+            <para>
+            <b>Overwrite image resolution</b><br/>
+            Exposed by optional "imageLoad" delegate argument.<br/>
+            Invoked when an image is about to be loaded by file path, URL or inline data in 'img' element or background-image CSS style.<br/>
+            Allows to overwrite the loaded image by providing the image object manually, or different source (file or URL) to load from.<br/>
+            Example: image 'src' can be non-valid string that is interpreted in the overwrite delegate by custom logic to resource image object<br/>
+            Example: image 'src' in the html is relative - the overwrite intercepts the load and provide full source URL to load the image from<br/>
+            Example: image download requires authentication - the overwrite intercepts the load, downloads the image to disk using custom code and provide 
+            file path to load the image from.<br/>
+            If no alternative data is provided the original source will be used.<br/>
+            Note: Cannot use asynchronous scheme overwrite scheme.<br/>
+            </para>
+            </remarks>
+            <example>
+            <para>
+            <b>Simple rendering</b><br/>
+            HtmlRender.Render(g, "<![CDATA[<div>Hello <b>World</b></div>]]>");<br/>
+            HtmlRender.Render(g, "<![CDATA[<div>Hello <b>World</b></div>]]>", 10, 10, 500, CssData.Parse("body {font-size: 20px}")");<br/>
+            </para>
+            <para>
+            <b>Image rendering</b><br/>
+            HtmlRender.RenderToImage("<![CDATA[<div>Hello <b>World</b></div>]]>", new Size(600,400));<br/>
+            HtmlRender.RenderToImage("<![CDATA[<div>Hello <b>World</b></div>]]>", 600);<br/>
+            HtmlRender.RenderToImage(existingImage, "<![CDATA[<div>Hello <b>World</b></div>]]>");<br/>
+            </para>
+            </example>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.AddFontFamily(System.Drawing.FontFamily)">
+            <summary>
+            Adds a font family to be used in html rendering.<br/>
+            The added font will be used by all rendering function including <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlContainer"/> and all WinForms controls.
+            </summary>
+            <remarks>
+            The given font family instance must be remain alive while the renderer is in use.<br/>
+            If loaded to <see cref="T:System.Drawing.Text.PrivateFontCollection"/> then the collection must be alive.<br/>
+            If loaded from file then the file must not be deleted.
+            </remarks>
+            <param name="fontFamily">The font family to add.</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.AddFontFamilyMapping(System.String,System.String)">
+            <summary>
+            Adds a font mapping from <paramref name="fromFamily"/> to <paramref name="toFamily"/> iff the <paramref name="fromFamily"/> is not found.<br/>
+            When the <paramref name="fromFamily"/> font is used in rendered html and is not found in existing 
+            fonts (installed or added) it will be replaced by <paramref name="toFamily"/>.<br/>
+            </summary>
+            <remarks>
+            This fonts mapping can be used as a fallback in case the requested font is not installed in the client system.
+            </remarks>
+            <param name="fromFamily">the font family to replace</param>
+            <param name="toFamily">the font family to replace with</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.ParseStyleSheet(System.String,System.Boolean)">
+            <summary>
+            Parse the given stylesheet to <see cref="T:TheArtOfDev.HtmlRenderer.Core.CssData"/> object.<br/>
+            If <paramref name="combineWithDefault"/> is true the parsed css blocks are added to the 
+            default css data (as defined by W3), merged if class name already exists. If false only the data in the given stylesheet is returned.
+            </summary>
+            <seealso cref="!:http://www.w3.org/TR/CSS21/sample.html"/>
+            <param name="stylesheet">the stylesheet source to parse</param>
+            <param name="combineWithDefault">true - combine the parsed css data with default css data, false - return only the parsed css data</param>
+            <returns>the parsed css data</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.Measure(System.Drawing.Graphics,System.String,System.Single,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Measure the size (width and height) required to draw the given html under given max width restriction.<br/>
+            If no max width restriction is given the layout will use the maximum possible width required by the content,
+            it can be the longest text line or full image width.<br/>
+            Use GDI text rendering, note <see cref="P:System.Drawing.Graphics.TextRenderingHint"/> has no effect.
+            </summary>
+            <param name="g">Device to use for measure</param>
+            <param name="html">HTML source to render</param>
+            <param name="maxWidth">optional: bound the width of the html to render in (default - 0, unlimited)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the size required for the html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.MeasureGdiPlus(System.Drawing.Graphics,System.String,System.Single,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Measure the size (width and height) required to draw the given html under given max width restriction.<br/>
+            If no max width restriction is given the layout will use the maximum possible width required by the content,
+            it can be the longest text line or full image width.<br/>
+            Use GDI+ text rending, use <see cref="P:System.Drawing.Graphics.TextRenderingHint"/> to control text rendering.
+            </summary>
+            <param name="g">Device to use for measure</param>
+            <param name="html">HTML source to render</param>
+            <param name="maxWidth">optional: bound the width of the html to render in (default - 0, unlimited)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the size required for the html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.Render(System.Drawing.Graphics,System.String,System.Single,System.Single,System.Single,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML source on the specified location and max width restriction.<br/>
+            Use GDI text rendering, note <see cref="P:System.Drawing.Graphics.TextRenderingHint"/> has no effect.<br/>
+            If <paramref name="maxWidth"/> is zero the html will use all the required width, otherwise it will perform line 
+            wrap as specified in the html<br/>
+            Returned is the actual width and height of the rendered html.<br/>
+            </summary>
+            <param name="g">Device to render with</param>
+            <param name="html">HTML source to render</param>
+            <param name="left">optional: the left most location to start render the html at (default - 0)</param>
+            <param name="top">optional: the top most location to start render the html at (default - 0)</param>
+            <param name="maxWidth">optional: bound the width of the html to render in (default - 0, unlimited)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the actual size of the rendered html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.Render(System.Drawing.Graphics,System.String,System.Drawing.PointF,System.Drawing.SizeF,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML source on the specified location and max size restriction.<br/>
+            Use GDI text rendering, note <see cref="P:System.Drawing.Graphics.TextRenderingHint"/> has no effect.<br/>
+            If <paramref name="maxSize"/>.Width is zero the html will use all the required width, otherwise it will perform line 
+            wrap as specified in the html<br/>
+            If <paramref name="maxSize"/>.Height is zero the html will use all the required height, otherwise it will clip at the
+            given max height not rendering the html below it.<br/>
+            Returned is the actual width and height of the rendered html.<br/>
+            </summary>
+            <param name="g">Device to render with</param>
+            <param name="html">HTML source to render</param>
+            <param name="location">the top-left most location to start render the html at</param>
+            <param name="maxSize">the max size of the rendered html (if height above zero it will be clipped)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the actual size of the rendered html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderGdiPlus(System.Drawing.Graphics,System.String,System.Single,System.Single,System.Single,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML source on the specified location and max size restriction.<br/>
+            Use GDI+ text rending, use <see cref="P:System.Drawing.Graphics.TextRenderingHint"/> to control text rendering.<br/>
+            If <paramref name="maxWidth"/> is zero the html will use all the required width, otherwise it will perform line 
+            wrap as specified in the html<br/>
+            Returned is the actual width and height of the rendered html.<br/>
+            </summary>
+            <param name="g">Device to render with</param>
+            <param name="html">HTML source to render</param>
+            <param name="left">optional: the left most location to start render the html at (default - 0)</param>
+            <param name="top">optional: the top most location to start render the html at (default - 0)</param>
+            <param name="maxWidth">optional: bound the width of the html to render in (default - 0, unlimited)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the actual size of the rendered html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderGdiPlus(System.Drawing.Graphics,System.String,System.Drawing.PointF,System.Drawing.SizeF,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML source on the specified location and max size restriction.<br/>
+            Use GDI+ text rending, use <see cref="P:System.Drawing.Graphics.TextRenderingHint"/> to control text rendering.<br/>
+            If <paramref name="maxSize"/>.Width is zero the html will use all the required width, otherwise it will perform line 
+            wrap as specified in the html<br/>
+            If <paramref name="maxSize"/>.Height is zero the html will use all the required height, otherwise it will clip at the
+            given max height not rendering the html below it.<br/>
+            Returned is the actual width and height of the rendered html.<br/>
+            </summary>
+            <param name="g">Device to render with</param>
+            <param name="html">HTML source to render</param>
+            <param name="location">the top-left most location to start render the html at</param>
+            <param name="maxSize">the max size of the rendered html (if height above zero it will be clipped)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the actual size of the rendered html</returns>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImage(System.Drawing.Image,System.String,System.Drawing.PointF,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML on top of the given image.<br/>
+            <paramref name="image"/> will contain the rendered html in it on top of original content.<br/>
+            <paramref name="image"/> must not contain transparent pixels as it will corrupt the rendered html text.<br/>
+            The HTML will be layout by the given image size but may be clipped if cannot fit.<br/>
+            See "Rendering to image" remarks section on <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender"/>.<br/>
+            </summary>
+            <param name="image">the image to render the html on</param>
+            <param name="html">HTML source to render</param>
+            <param name="location">optional: the top-left most location to start render the html at (default - 0,0)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImage(System.Drawing.Image,System.String,System.Drawing.PointF,System.Drawing.SizeF,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML on top of the given image.<br/>
+            <paramref name="image"/> will contain the rendered html in it on top of original content.<br/>
+            <paramref name="image"/> must not contain transparent pixels as it will corrupt the rendered html text.<br/>
+            See "Rendering to image" remarks section on <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender"/>.<br/>
+            </summary>
+            <param name="image">the image to render the html on</param>
+            <param name="html">HTML source to render</param>
+            <param name="location">the top-left most location to start render the html at</param>
+            <param name="maxSize">the max size of the rendered html (if height above zero it will be clipped)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImage(System.String,System.Drawing.Size,System.Drawing.Color,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML into a new image of the requested size.<br/>
+            The HTML will be layout by the given size but will be clipped if cannot fit.<br/>
+            <p>
+            Limitation: The image cannot have transparent background, by default it will be white.<br/>
+            See "Rendering to image" remarks section on <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender"/>.<br/>
+            </p>
+            </summary>
+            <param name="html">HTML source to render</param>
+            <param name="size">The size of the image to render into, layout html by width and clipped by height</param>
+            <param name="backgroundColor">optional: the color to fill the image with (default - white)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the generated image of the html</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">if <paramref name="backgroundColor"/> is <see cref="P:System.Drawing.Color.Transparent"/></exception>.
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImage(System.String,System.Int32,System.Int32,System.Drawing.Color,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML into a new image of unknown size that will be determined by max width/height and HTML layout.<br/>
+            If <paramref name="maxWidth"/> is zero the html will use all the required width, otherwise it will perform line 
+            wrap as specified in the html<br/>
+            If <paramref name="maxHeight"/> is zero the html will use all the required height, otherwise it will clip at the
+            given max height not rendering the html below it.<br/>
+            <p>
+            Limitation: The image cannot have transparent background, by default it will be white.<br/>
+            See "Rendering to image" remarks section on <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender"/>.<br/>
+            </p>
+            </summary>
+            <param name="html">HTML source to render</param>
+            <param name="maxWidth">optional: the max width of the rendered html, if not zero and html cannot be layout within the limit it will be clipped</param>
+            <param name="maxHeight">optional: the max height of the rendered html, if not zero and html cannot be layout within the limit it will be clipped</param>
+            <param name="backgroundColor">optional: the color to fill the image with (default - white)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the generated image of the html</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">if <paramref name="backgroundColor"/> is <see cref="P:System.Drawing.Color.Transparent"/></exception>.
+        </member>
+        <member name="M:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender.RenderToImage(System.String,System.Drawing.Size,System.Drawing.Size,System.Drawing.Color,TheArtOfDev.HtmlRenderer.Core.CssData,System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs},System.EventHandler{TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs})">
+            <summary>
+            Renders the specified HTML into a new image of unknown size that will be determined by min/max width/height and HTML layout.<br/>
+            If <paramref name="maxSize.Width.Width"/> is zero the html will use all the required width, otherwise it will perform line 
+            wrap as specified in the html<br/>
+            If <paramref name="maxSize.Height.Height"/> is zero the html will use all the required height, otherwise it will clip at the
+            given max height not rendering the html below it.<br/>
+            If <paramref name="minSize"/> (Width/Height) is above zero the rendered image will not be smaller than the given min size.<br/>
+            <p>
+            Limitation: The image cannot have transparent background, by default it will be white.<br/>
+            See "Rendering to image" remarks section on <see cref="T:TheArtOfDev.HtmlRenderer.WinForms.HtmlRender"/>.<br/>
+            </p>
+            </summary>
+            <param name="html">HTML source to render</param>
+            <param name="minSize">optional: the min size of the rendered html (zero - not limit the width/height)</param>
+            <param name="maxSize">optional: the max size of the rendered html, if not zero and html cannot be layout within the limit it will be clipped (zero - not limit the width/height)</param>
+            <param name="backgroundColor">optional: the color to fill the image with (default - white)</param>
+            <param name="cssData">optional: the style to use for html rendering (default - use W3 default style)</param>
+            <param name="stylesheetLoad">optional: can be used to overwrite stylesheet resolution logic</param>
+            <param name="imageLoad">optional: can be used to overwrite image resolution logic</param>
+            <returns>the generated image of the html</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">if <paramref name="backgroundColor"/> is <see cref="P:System.Drawing.Color.Transparent"/></exception>.
+        </member>
+        <member name="M:
