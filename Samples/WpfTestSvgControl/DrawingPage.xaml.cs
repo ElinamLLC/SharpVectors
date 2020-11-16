@@ -22,6 +22,7 @@ using ICSharpCode.AvalonEdit.Highlighting;
 
 using DpiScale     = SharpVectors.Runtime.DpiScale;
 using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+using System.Linq;
 
 namespace WpfTestSvgControl
 {
@@ -124,6 +125,8 @@ namespace WpfTestSvgControl
         private FoldingManager _foldingManager;
         private XmlFoldingStrategy _foldingStrategy;
 
+        private IList<Color> _colors;
+
         #endregion
 
         #region Constructors and Destructor
@@ -180,7 +183,14 @@ namespace WpfTestSvgControl
             this.Unloaded    += OnPageUnloaded;
             this.SizeChanged += OnPageSizeChanged;
 
-//            svgViewer.Hits   += OnDrawingHits;
+            //            svgViewer.Hits   += OnDrawingHits;
+
+            var colors = from System.Reflection.PropertyInfo property in typeof(Colors).GetProperties()
+                orderby property.Name
+                    //orderby ((Color)property.GetValue(null, null)).ToString()
+                    select (Color)property.GetValue(null, null);
+
+            _colors = colors.ToList();
         }
 
         //private void OnDrawingHits(object sender, SvgDrawingHitArgs args)
@@ -481,6 +491,56 @@ namespace WpfTestSvgControl
             //return combinedDrawing;
 
             return currentDrawing;
+        }
+
+        System.Windows.Media.DrawingVisual _drawingVisual = null;
+
+
+        private void DrawDebugHitList(IList<Drawing> drawings, IList<WpfHitPath> hitPaths)
+        {
+            if (drawings == null)
+            {
+                return;
+            }
+            Trace.WriteLine(string.Format("Debug List Count: {0}, {1}", drawings.Count, hitPaths.Count));
+//            var hitDrawings = new DrawingGroup();
+
+            _drawingVisual = new System.Windows.Media.DrawingVisual();
+            DrawingContext drawingContext = _drawingVisual.RenderOpen();
+
+            //drawingContext.PushOpacity(0.5);
+
+            for (int i = 0; i < drawings.Count; i++)
+            {
+                var drawing = drawings[i];
+                var boundsDrawing = new GeometryDrawing(null,
+                    new Pen(Brushes.Green, 2), new RectangleGeometry(drawing.Bounds));
+                //hitDrawings.Children.Add(boundsDrawing);
+                if (drawings.Count == hitPaths.Count)
+                {
+                    var hitPath = hitPaths[i];
+                    drawingContext.PushTransform(hitPath.GetTransform(_drawingDocument, drawing));
+                }
+                else
+                {
+                    drawingContext.PushTransform((Transform)svgViewer.DisplayTransform.Inverse);
+                }
+                //TransformGroup transforms = new TransformGroup();
+                //transforms.Children.Add((Transform)svgViewer.DisplayTransform.Inverse);
+                //transforms.Children.Add(new MatrixTransform(1, 0, 0, 1, -107.61384, -0.044941));
+                //transforms.Children.Add(new MatrixTransform(1, 0, 0, 1, 118.57143, -70));
+                //drawingContext.PushTransform(transforms);
+                //                drawingContext.DrawDrawing(hitDrawings);
+                drawingContext.DrawDrawing(boundsDrawing);
+
+    //            drawingContext.Pop();
+                drawingContext.Pop();
+            }
+
+            drawingContext.Close();
+
+            svgViewer.HostVisual.Children.Add(_drawingVisual);
+            //svgViewer.HostVisual.Children.Insert(0, drawingVisual);
         }
 
         public Task<bool> LoadDocumentAsync(string svgFilePath)
@@ -928,9 +988,18 @@ namespace WpfTestSvgControl
             {
                 if (_drawingDocument != null)
                 {
+                    if (_drawingVisual != null)
+                    {
+                        svgViewer.HostVisual.Children.Remove(_drawingVisual);
+                        _drawingVisual = null;
+                    }
+
                     Point point = e.GetPosition(svgViewer);
                     _drawingDocument.DisplayTransform = svgViewer.DisplayTransform;
                     var hitResult = _drawingDocument.HitTest(point);
+
+                    DrawDebugHitList(_drawingDocument.HitList, _drawingDocument.HitPaths); //TODO:Testing
+                    
                     if (hitResult != null && hitResult.IsHit)
                     {
                         var selecteElement = hitResult.Element;
