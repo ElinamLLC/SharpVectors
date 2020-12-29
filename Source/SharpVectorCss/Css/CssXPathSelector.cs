@@ -154,7 +154,8 @@ namespace SharpVectors.Dom.Css
             string r = string.Empty;
             Group g = match.Groups["type"];
             string s = g.Value;
-            if (!g.Success || s == "*") r = string.Empty;
+            if (!g.Success || s == "*") 
+                r = string.Empty;
             else
             {
                 r = "[local-name()='" + s + "']";

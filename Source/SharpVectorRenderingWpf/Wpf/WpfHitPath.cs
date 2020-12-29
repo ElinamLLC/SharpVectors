@@ -266,7 +266,11 @@ namespace SharpVectors.Renderers.Wpf
             var drawingLayer = document.GetDrawingLayer();
             if (drawingLayer != null && drawingLayer.Transform != null)
             {
-                transforms.Children.Add(drawingLayer.Transform);
+                var transform = drawingLayer.Transform;
+                if (!transform.Value.IsIdentity)
+                {
+                    transforms.Children.Add(transform);
+                }
             }
 
             for (int i = 0; i < splitPaths.Length; i++)

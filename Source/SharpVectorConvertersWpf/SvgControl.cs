@@ -531,10 +531,6 @@ namespace SharpVectors.Converters
 
         #endregion
 
-        public void RenderDiagrams(DrawingGroup renderedGroup)
-        {
-        }
-
         #region IUriContext Members
 
         /// <summary>
@@ -556,6 +552,10 @@ namespace SharpVectors.Converters
         #endregion
 
         #region Public Methods
+
+        public void RenderDiagrams(DrawingGroup renderedGroup)
+        {
+        }
 
         /// <summary>
         /// This sets the source SVG for a <see cref="SvgControl"/> by using the supplied Uniform Resource Identifier (URI)
@@ -700,7 +700,7 @@ namespace SharpVectors.Converters
                     }
                 }
 
-                _sourceUri = null;
+                _sourceUri    = null;
                 _sourceStream = svgStream;
 
                 if (useAsync)
@@ -1200,7 +1200,7 @@ namespace SharpVectors.Converters
                 //case "ftp":
                 case "https":
                 case "http":
-                    using (FileSvgReader reader = new FileSvgReader(settings))
+                    using (var reader = new FileSvgReader(settings))
                     {
                         drawing = reader.Read(svgSource);
                     }
@@ -1228,9 +1228,9 @@ namespace SharpVectors.Converters
                         {
                             using (svgStream)
                             {
-                                using (GZipStream zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
+                                using (var zipStream = new GZipStream(svgStream, CompressionMode.Decompress))
                                 {
-                                    using (FileSvgReader reader = new FileSvgReader(settings))
+                                    using (var reader = new FileSvgReader(settings))
                                     {
                                         drawing = reader.Read(zipStream);
                                     }
@@ -1241,7 +1241,7 @@ namespace SharpVectors.Converters
                         {
                             using (svgStream)
                             {
-                                using (FileSvgReader reader = new FileSvgReader(settings))
+                                using (var reader = new FileSvgReader(settings))
                                 {
                                     drawing = reader.Read(svgStream);
                                 }
@@ -1270,7 +1270,7 @@ namespace SharpVectors.Converters
                         {
                             using (var stream = new MemoryStream(imageBytes))
                             {
-                                using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress))
+                                using (var zipStream = new GZipStream(stream, CompressionMode.Decompress))
                                 {
                                     using (var reader = new FileSvgReader(settings))
                                     {
@@ -1322,7 +1322,7 @@ namespace SharpVectors.Converters
 
             DrawingGroup drawing = null;
 
-            using (FileSvgReader reader = new FileSvgReader(settings))
+            using (var reader = new FileSvgReader(settings))
             {
                 drawing = reader.Read(svgStream);
             }
@@ -1385,8 +1385,8 @@ namespace SharpVectors.Converters
                 double yscale = actualHeight / r.Height;
                 _renderScale.CenterX = r.Left;
                 _renderScale.CenterY = r.Top;
-                _renderScale.ScaleX = xscale;
-                _renderScale.ScaleY = yscale;
+                _renderScale.ScaleX  = xscale;
+                _renderScale.ScaleY  = yscale;
 
                 _renderOffset.X = -r.Left;
                 _renderOffset.Y = -r.Top;
@@ -1402,8 +1402,8 @@ namespace SharpVectors.Converters
                 {
                     _renderScale.CenterX = r.Left;
                     _renderScale.CenterY = r.Top;
-                    _renderScale.ScaleX = 1;
-                    _renderScale.ScaleY = 1;
+                    _renderScale.ScaleX  = 1;
+                    _renderScale.ScaleY  = 1;
 
                     _renderOffset.X = -r.Left; // move to left by default
                     _renderOffset.Y = -r.Top;  // move to top by default

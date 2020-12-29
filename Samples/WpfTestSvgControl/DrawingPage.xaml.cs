@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -22,7 +23,6 @@ using ICSharpCode.AvalonEdit.Highlighting;
 
 using DpiScale     = SharpVectors.Runtime.DpiScale;
 using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
-using System.Linq;
 
 namespace WpfTestSvgControl
 {
@@ -495,7 +495,6 @@ namespace WpfTestSvgControl
 
         System.Windows.Media.DrawingVisual _drawingVisual = null;
 
-
         private void DrawDebugHitList(IList<Drawing> drawings, IList<WpfHitPath> hitPaths)
         {
             if (drawings == null)
@@ -510,9 +509,19 @@ namespace WpfTestSvgControl
 
             //drawingContext.PushOpacity(0.5);
 
+            var drawingLayer = _drawingDocument.GetDrawingLayer();
+
             for (int i = 0; i < drawings.Count; i++)
             {
                 var drawing = drawings[i];
+                //if (i == 0)
+                //{
+                //    continue;
+                //}
+                if (drawingLayer != null && drawing == drawingLayer)
+                {
+                    continue;
+                }
                 var boundsDrawing = new GeometryDrawing(null,
                     new Pen(Brushes.Green, 2), new RectangleGeometry(drawing.Bounds));
                 //hitDrawings.Children.Add(boundsDrawing);

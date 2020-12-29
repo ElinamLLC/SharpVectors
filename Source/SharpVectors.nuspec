@@ -14,6 +14,9 @@
     <icon>images\SharpVectors64.png</icon>
     <copyright>Copyright (c) 2010 - 2019 Elinam LLC</copyright>
     <releaseNotes>
+        Release 1.7.1
+            * Fixed DPI bug causing the controls to throw exceptions.
+
         Release 1.7.0
             * Updated requiredFeatures support, fixed nested URI and circular references
             * Add support for CSS font shorthand properties
@@ -24,7 +27,6 @@
             * Fixed error when font-family name is a color name (by LucaPassarella)
             * Considered SvgTransformList and not single transform (by LucaPassarella)
             * Adding support for .NET 5.0
-            * Added IoC container, from on Microsoft MinIoC
             * Several bug fixes and code improvements
 
         Release 1.6.0

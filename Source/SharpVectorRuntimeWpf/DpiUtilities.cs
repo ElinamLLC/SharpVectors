@@ -115,7 +115,7 @@ namespace SharpVectors.Runtime
         /// <summary>
         /// Gets the window (monitor) scale versus System DPI.
         /// </summary>
-        /// <param name="window">The window.</param>
+        /// <param name="visual">The window.</param>
         /// <returns></returns>
         /// <remarks>
         /// <para>When developing a DPI-aware application, this is useful for applying a ScaleTransform
@@ -130,7 +130,7 @@ namespace SharpVectors.Runtime
         /// <summary>
         /// Gets the window (monitor) scale versus System DPI.
         /// </summary>
-        /// <param name="window">The window.</param>
+        /// <param name="hwnd">The window.</param>
         /// <returns></returns>
         /// <remarks>
         /// <para>When developing a DPI-aware application, this is useful for applying a ScaleTransform

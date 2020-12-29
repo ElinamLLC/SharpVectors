@@ -1453,7 +1453,6 @@ namespace SharpVectors.Converters
                 if (svgContent.StartsWith(cdataStart, StringComparison.OrdinalIgnoreCase) ||
                     svgContent.EndsWith(cdataEnd, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine();
                     var xmlDoc = XDocument.Parse(svgSource);
                     var cdataElement = xmlDoc.DescendantNodes().OfType<XCData>().FirstOrDefault();
                     if (cdataElement != null)

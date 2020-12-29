@@ -55,8 +55,7 @@ namespace SharpVectors.Dom.Css
         /// An array of strings that have been replaced in the string used for matching. 
         /// These needs to be put back use the DereplaceStrings method</param>
         /// <param name="origin">The type of CssStyleSheet</param>
-        internal CssStyleRule(Match match, object parent, bool readOnly,
-            IList<string> replacedStrings, CssStyleSheetType origin)
+        internal CssStyleRule(Match match, object parent, bool readOnly, IList<string> replacedStrings, CssStyleSheetType origin)
             : base(parent, readOnly, replacedStrings, origin)
         {
             //SelectorText = DeReplaceStrings(match.Groups["selectors"].Value.Trim());

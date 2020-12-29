@@ -31,6 +31,8 @@ namespace SharpVectors.Renderers.Wpf
 
         private GeneralTransform _displayTransform;
 
+        private DrawingGroup _drawingLayer;
+
         #endregion
 
         #region Constructors and Destructor
@@ -346,6 +348,15 @@ namespace SharpVectors.Renderers.Wpf
             string uniqueId = SvgObject.GetUniqueId(svgDrawing);
             if (string.IsNullOrWhiteSpace(uniqueId))
             {
+                if (_hitGroup != null && _hitGroup.Children.Contains(svgDrawing))
+                {
+                    var groupElement = this.GetSvgByUniqueId(uniqueId);
+                    if (groupElement != null)
+                    {
+                        return new WpfHitTestResult(point, groupElement, svgDrawing);
+                    }
+                }
+
                 return new WpfHitTestResult(point, null, svgDrawing);
 //                return WpfHitTestResult.Empty;
             }
@@ -384,9 +395,19 @@ namespace SharpVectors.Renderers.Wpf
 
         public DrawingGroup GetDrawingLayer()
         {
+            if (_drawingLayer != null)
+            {
+                return _drawingLayer;
+            }
+
             var isFound = false;
 
-            return this.GetDrawingLayer(_svgDrawing, ref isFound);
+            var drawingLayer = this.GetDrawingLayer(_svgDrawing, ref isFound);
+            if (isFound)
+            {
+                _drawingLayer = drawingLayer;
+            }
+            return drawingLayer;
         }
 
         #endregion
@@ -709,8 +730,12 @@ namespace SharpVectors.Renderers.Wpf
                             orderNumber = SvgObject.GetOrder(group);
                             if (orderNumber >= 0)
                             {
-                                _hitList[orderNumber] = group;
+                                _hitList[orderNumber]  = group;
                                 _hitPaths[orderNumber] = _hitPath.AddChild(SvgObject.GetUniqueId(group));
+                            }
+                            if (!string.IsNullOrWhiteSpace(SvgObject.GetUniqueId(group)))
+                            {
+                                _hitGroup = group;
                             }
                             return true;
                         }

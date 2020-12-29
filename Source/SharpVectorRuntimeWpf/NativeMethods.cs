@@ -929,12 +929,20 @@ namespace SharpVectors.Runtime
         public static IntPtr GetWindowHwnd(Window window)
         {
             WindowInteropHelper windowHwnd = new WindowInteropHelper(window);
+            if (windowHwnd == null)
+            {
+                return IntPtr.Zero;
+            }
             return windowHwnd.Handle;
         }
 
         public static IntPtr GetWindowHwnd(Visual visual)
         {
             HwndSource windowHwnd = (HwndSource)HwndSource.FromVisual(visual);
+            if (windowHwnd == null)
+            {
+                return IntPtr.Zero;
+            }
             return windowHwnd.Handle;
         }
 
