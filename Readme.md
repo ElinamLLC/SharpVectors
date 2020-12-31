@@ -42,9 +42,9 @@ The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
 The library can be downloaded from the following sources
-* **NuGet**, [Version 1.7.0.0 - SharpVectors](https://www.nuget.org/packages/SharpVectors/). 
-* **NuGet**, [Version 1.7.0.0 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
-* **GitHub Releases Page**, [Version 1.7.0.0](https://github.com/ElinamLLC/SharpVectors/releases).
+* **NuGet**, [Version 1.7.1.1 - SharpVectors](https://www.nuget.org/packages/SharpVectors/). 
+* **NuGet**, [Version 1.7.1.1 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/). 
+* **GitHub Releases Page**, [Version 1.7.1.1](https://github.com/ElinamLLC/SharpVectors/releases).
 
 ## Documentation
 An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
