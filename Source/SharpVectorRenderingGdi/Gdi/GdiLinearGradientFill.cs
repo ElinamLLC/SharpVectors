@@ -222,7 +222,9 @@ namespace SharpVectors.Renderers.Gdi
                 brush.WrapMode = WrapMode.Tile;
             }
 
-            brush.Transform = GetTransformMatrix(res);
+            Matrix OriginalMatrix = brush.Transform.Clone();
+            OriginalMatrix.Multiply(GetTransformMatrix(res));
+            brush.Transform = OriginalMatrix;
 
             if (string.Equals(res.GetPropertyValue("color-interpolation"), 
                 CssConstants.ValLinearRgb, StringComparison.OrdinalIgnoreCase))
