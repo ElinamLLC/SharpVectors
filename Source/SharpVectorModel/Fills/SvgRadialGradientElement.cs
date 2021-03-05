@@ -90,13 +90,13 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Fx
         {
             get {
-                if (!HasAttribute("fx") && HasAttribute("fy"))
-                {
-                    return Fy;
-                }
                 if (!HasAttribute("fx") && ReferencedElement != null)
                 {
                     return ReferencedElement.Fx;
+                }
+                if (!HasAttribute("fx") && HasAttribute("cx"))
+                {
+                    return Cx;
                 }
                 if (_fx == null)
                 {
@@ -109,13 +109,13 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Fy
         {
             get {
-                if (!HasAttribute("fy") && HasAttribute("fx"))
-                {
-                    return Fx;
-                }
                 if (!HasAttribute("fy") && ReferencedElement != null)
                 {
                     return ReferencedElement.Fy;
+                }
+                if (!HasAttribute("fy") && HasAttribute("cy"))
+                {
+                    return Cy;
                 }
                 if (_fy == null)
                 {
