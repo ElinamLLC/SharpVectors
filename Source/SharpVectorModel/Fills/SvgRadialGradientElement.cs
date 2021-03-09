@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -90,9 +91,9 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Fx
         {
             get {
-                if (!HasAttribute("fx") && ReferencedElement != null)
+                if (!HasAttribute("fx") && RecursivelyFindAttribute("fx") is SvgRadialGradientElement element)
                 {
-                    return ReferencedElement.Fx;
+                    return element.Fx;
                 }
                 if (!HasAttribute("fx") && HasAttribute("cx"))
                 {
@@ -109,9 +110,9 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Fy
         {
             get {
-                if (!HasAttribute("fy") && ReferencedElement != null)
+                if (!HasAttribute("fy") && RecursivelyFindAttribute("fy") is SvgRadialGradientElement element)
                 {
-                    return ReferencedElement.Fy;
+                    return element.Fy;
                 }
                 if (!HasAttribute("fy") && HasAttribute("cy"))
                 {
@@ -138,33 +139,24 @@ namespace SharpVectors.Dom.Svg
 
         #endregion
 
-        #region Update handling
-        /*public override void OnAttributeChange(XmlNodeChangedAction action, XmlAttribute attribute)
-		{
-			base.OnAttributeChange(action, attribute);
+        private SvgRadialGradientElement RecursivelyFindAttribute(string attributeName, HashSet<SvgRadialGradientElement> visitedElements = null)
+        {
+            if (visitedElements == null)
+            {
+                visitedElements = new HashSet<SvgRadialGradientElement>();
+            }
 
-			if(attribute.NamespaceURI.Length == 0)
-			{
-				switch(attribute.LocalName)
-				{
-					case "cx":
-						cx = null;
-						break;
-					case "cy":
-						cy = null;
-						break;
-					case "r":
-						r = null;
-						break;
-					case "fx":
-						fx = null;
-						break;
-					case "fy":
-						fy = null;
-						break;
-				}
-			}
-		}*/
-        #endregion
+            if (ReferencedElement == null || !visitedElements.Add(this))
+            {
+                return null;
+            }
+
+            if (ReferencedElement.HasAttribute(attributeName))
+            {
+                return ReferencedElement;
+            }
+
+            return ReferencedElement.RecursivelyFindAttribute(attributeName, visitedElements);
+        }
     }
 }
