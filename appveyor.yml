@@ -36,10 +36,10 @@ configuration:
   - Release
 
 build:
-  project: Main\Source\SharpVectorsReloaded.sln
+  project: Source\SharpVectors.sln
 
 after_build:
-  - ps: nuget pack "Main\Source\SharpVectorsReloaded.nuspec" -Properties "version=$env:GitVersion_NuGetVersionV2"
+  - ps: nuget pack "Source\SharpVectorsReloaded.nuspec" -Properties "version=$env:GitVersion_NuGetVersionV2"
 
 #---------------------------------#
 #      packaging artifacts        #
