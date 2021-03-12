@@ -94,9 +94,9 @@ namespace SharpVectors.Dom.Svg
                 {
                     return ReferencedElement.Fx;
                 }
-                if (!HasAttribute("fx") && HasAttribute("cx"))
+                if (!HasAttribute("fx") && HasAttribute("fy"))
                 {
-                    return Cx;
+                    return Fy;
                 }
                 if (_fx == null)
                 {
@@ -113,9 +113,9 @@ namespace SharpVectors.Dom.Svg
                 {
                     return ReferencedElement.Fy;
                 }
-                if (!HasAttribute("fy") && HasAttribute("cy"))
+                if (!HasAttribute("fy") && HasAttribute("fx"))
                 {
-                    return Cy;
+                    return Fx;
                 }
                 if (_fy == null)
                 {

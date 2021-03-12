@@ -73,7 +73,9 @@ namespace SharpVectors.Dom.Svg
             {
                 List<string> strList = new List<string>();
 
-                while (!string.IsNullOrWhiteSpace(str))
+                var exitLoop = false;
+
+                while (!string.IsNullOrWhiteSpace(str) && !exitLoop)
                 {
                     if (str.StartsWith("url(", comparer))
                     {
@@ -129,6 +131,7 @@ namespace SharpVectors.Dom.Svg
                                 break;
                             default:
                                 strList.Add(str);
+                                exitLoop = true;
                                 break;
                         }
                     }

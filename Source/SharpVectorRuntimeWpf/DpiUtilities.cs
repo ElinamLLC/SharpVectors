@@ -259,6 +259,8 @@ namespace SharpVectors.Runtime
 
             dpiX = x > 0 ? (uint)x : _defaultPixelsPerInch;
             dpiY = y > 0 ? (uint)y : _defaultPixelsPerInch;
+
+            NativeMethods.ReleaseDC(IntPtr.Zero, handle);
         }
 
         /// <summary>
@@ -313,8 +315,8 @@ namespace SharpVectors.Runtime
 
             double ScreenScalingFactor = (double)PhysicalScreenHeight / (double)LogicalScreenHeight;
 
-            System.Diagnostics.Trace.WriteLine("Monitor:\"" + deviceName + "\" Scaling factor:" + ScreenScalingFactor
-                 + " Logical height:" + LogicalScreenHeight + " Physical height:" + PhysicalScreenHeight);
+            //System.Diagnostics.Trace.WriteLine("Monitor:\"" + deviceName + "\" Scaling factor:" + ScreenScalingFactor
+            //     + " Logical height:" + LogicalScreenHeight + " Physical height:" + PhysicalScreenHeight);
 
             NativeMethods.DeleteDC(dc);
 
