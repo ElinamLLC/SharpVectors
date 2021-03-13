@@ -158,8 +158,8 @@ namespace SharpVectors.Dom.Css
             Add("shape-rendering", true, CssConstants.ValAuto);
             Add("solid-color", true, CssConstants.ValBlack);
             Add("solid-opacity", true, SvgConstants.ValOne);
-            Add("stop-color", true, CssConstants.ValBlack);
-            Add("stop-opacity", true, SvgConstants.ValOne);
+            Add("stop-color", false, CssConstants.ValBlack);
+            Add("stop-opacity", false, SvgConstants.ValOne);
             Add("stroke", true, CssConstants.ValNone);
             Add("stroke-dasharray", true, CssConstants.ValNone);
             Add("stroke-dashoffset", true, SvgConstants.ValZero);

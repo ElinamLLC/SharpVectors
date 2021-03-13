@@ -194,6 +194,12 @@ namespace SharpVectors.Renderers.Wpf
 
         private Brush GetRadialGradientBrush(SvgRadialGradientElement res)
         {
+            GradientStopCollection gradientStops = GetGradientStops(res.Stops);
+            if (gradientStops == null || gradientStops.Count == 0)
+            {
+                return null;
+            }
+
             var refElem = res.ReferencedElement;
 
             double centerX = res.Cx.AnimVal.Value;
@@ -254,12 +260,6 @@ namespace SharpVectors.Renderers.Wpf
                         focusY = (centerY > radius) ? centerY - radius : focusY = radius;
                     }
                 }
-            }
-
-            GradientStopCollection gradientStops = GetGradientStops(res.Stops);
-            if (gradientStops == null || gradientStops.Count == 0)
-            {
-                return null;
             }
 
             RadialGradientBrush brush = new RadialGradientBrush(gradientStops);
