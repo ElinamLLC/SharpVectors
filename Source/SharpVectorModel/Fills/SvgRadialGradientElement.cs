@@ -3,8 +3,14 @@ using System;
 namespace SharpVectors.Dom.Svg
 {
     /// <summary>
-    /// Summary description for SvgRadialGradientElement.
+    /// The implementation of the <c>radialGradient</c> element or the <see cref="ISvgRadialGradientElement"/> interface.
     /// </summary>
+    /// <remarks>
+    /// Radial Gradient fx/fy values should only be inherited from a referenced element if that element is explicitly 
+    /// defining them, otherwise they should follow the cy special case behavior. Additionally, because xlink references 
+    /// can inherit to an arbitrary level, we should walk up the tree looking for explicitly defined fx/fy values to 
+    /// inherit before falling back to the cx/cy definitions.
+    /// </remarks>
     public sealed class SvgRadialGradientElement : SvgGradientElement, ISvgRadialGradientElement
     {
         #region Private Fields
@@ -45,9 +51,10 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Cx
         {
             get {
-                if (!HasAttribute("cx") && ReferencedElement != null)
+                var refElem = this.ReferencedElement;
+                if (!HasAttribute("cx") && refElem != null)
                 {
-                    return ReferencedElement.Cx;
+                    return refElem.Cx;
                 }
                 if (_cx == null)
                 {
@@ -60,9 +67,10 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Cy
         {
             get {
-                if (!HasAttribute("cy") && ReferencedElement != null)
+                var refElem = this.ReferencedElement;
+                if (!HasAttribute("cy") && refElem != null)
                 {
-                    return ReferencedElement.Cy;
+                    return refElem.Cy;
                 }
                 if (_cy == null)
                 {
@@ -75,9 +83,10 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength R
         {
             get {
-                if (!HasAttribute("r") && ReferencedElement != null)
+                var refElem = this.ReferencedElement;
+                if (!HasAttribute("r") && refElem != null)
                 {
-                    return ReferencedElement.R;
+                    return refElem.R;
                 }
                 if (_r == null)
                 {
@@ -90,9 +99,31 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Fx
         {
             get {
-                if (!HasAttribute("fx") && ReferencedElement != null)
+                var refElem = this.ReferencedElement;
+                if (!HasAttribute("fx") && refElem != null)
                 {
-                    return ReferencedElement.Fx;
+                    if (!refElem.HasAttribute("fx"))
+                    {
+                        var nextRef = refElem.ReferencedElement;
+                        while (nextRef != null)
+                        {
+                            if (nextRef.HasAttribute("fx"))
+                            {
+                                return nextRef.Fx;
+                            }
+                            nextRef = nextRef.ReferencedElement;
+                        }
+
+                        if (HasAttribute("cx"))
+                        {
+                            return Cx;
+                        }
+                    }
+                    return refElem.Fx;
+                }
+                if (!HasAttribute("fx") && HasAttribute("cx"))
+                {
+                    return Cx;
                 }
                 if (!HasAttribute("fx") && HasAttribute("fy"))
                 {
@@ -109,9 +140,31 @@ namespace SharpVectors.Dom.Svg
         public ISvgAnimatedLength Fy
         {
             get {
-                if (!HasAttribute("fy") && ReferencedElement != null)
+                var refElem = this.ReferencedElement;
+                if (!HasAttribute("fy") && refElem != null)
                 {
-                    return ReferencedElement.Fy;
+                    if (!refElem.HasAttribute("fy"))
+                    {
+                        var nextRef = refElem.ReferencedElement;
+                        while (nextRef != null)
+                        {
+                            if (nextRef.HasAttribute("fy"))
+                            {
+                                return nextRef.Fy;
+                            }
+                            nextRef = nextRef.ReferencedElement;
+                        }
+
+                        if (HasAttribute("cy"))
+                        {
+                            return Cy;
+                        }
+                    }
+                    return refElem.Fy;
+                }
+                if (!HasAttribute("fy") && HasAttribute("cy"))
+                {
+                    return Cy;
                 }
                 if (!HasAttribute("fy") && HasAttribute("fx"))
                 {
@@ -139,6 +192,7 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Update handling
+
         /*public override void OnAttributeChange(XmlNodeChangedAction action, XmlAttribute attribute)
 		{
 			base.OnAttributeChange(action, attribute);
@@ -165,6 +219,7 @@ namespace SharpVectors.Dom.Svg
 				}
 			}
 		}*/
+
         #endregion
     }
 }
