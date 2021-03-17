@@ -79,8 +79,7 @@ namespace SharpVectors.Renderers.Utils
             }
             if (color.HasAlpha)
             {
-                double dAlpha = color.Alpha.GetFloatValue(color.Alpha.PrimitiveType == CssPrimitiveType.Percentage ?
-                    CssPrimitiveType.Number : CssPrimitiveType.Percentage);
+                double dAlpha = color.Alpha.GetFloatValue(color.Alpha.PrimitiveType == CssPrimitiveType.Percentage ? CssPrimitiveType.Percentage : CssPrimitiveType.Number);
                 if (!double.IsNaN(dAlpha) && !double.IsInfinity(dAlpha))
                 {
                     return Color.FromArgb(Convert.ToByte(dAlpha), Convert.ToByte(dRed), 
