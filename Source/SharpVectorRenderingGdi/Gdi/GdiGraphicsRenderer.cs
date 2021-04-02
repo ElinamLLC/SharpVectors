@@ -221,14 +221,14 @@ namespace SharpVectors.Renderers.Gdi
             else
                 updatedRect = SvgRectF.Empty;
 
-            RendererBeforeRender();
+            OnBeforeRender();
 
             if (_graphics != null && _graphics.Graphics != null)
             {
                 _svgRenderer.Render(node);
             }
 
-            RendererAfterRender();
+            OnAfterRender();
 
             if (_onRender != null)
                 OnRender(updatedRect);
@@ -253,14 +253,14 @@ namespace SharpVectors.Renderers.Gdi
             else
                 updatedRect = SvgRectF.Empty;
 
-            RendererBeforeRender();
+            OnBeforeRender();
 
             if (_graphics != null && _graphics.Graphics != null)
             {
                 _svgRenderer.Render(node);
             }
 
-            RendererAfterRender();
+            OnAfterRender();
 
             if (_onRender != null)
                 OnRender(updatedRect);
@@ -558,7 +558,7 @@ namespace SharpVectors.Renderers.Gdi
         /// If we don't have one, then create one to match the SvgWindow's
         /// physical dimensions.
         /// </summary>
-        private void RendererBeforeRender()
+        private void OnBeforeRender()
         {
             // Testing for null here allows "advanced" developers to create their own Graphics object for rendering
             if (_graphics == null)
@@ -596,7 +596,7 @@ namespace SharpVectors.Renderers.Gdi
         /// <summary>
         /// AfterRender - Dispose of Graphics object created for rendering.
         /// </summary>
-        private void RendererAfterRender()
+        private void OnAfterRender()
         {
             if (_ownsGraphics)
             {

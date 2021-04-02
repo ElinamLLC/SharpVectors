@@ -57,9 +57,12 @@
             this.svgPictureBox.Location = new System.Drawing.Point(6, 6);
             this.svgPictureBox.Name = "svgPictureBox";
             this.svgPictureBox.Padding = new System.Windows.Forms.Padding(3);
-            this.svgPictureBox.Size = new System.Drawing.Size(1134, 623);
+            this.svgPictureBox.Size = new System.Drawing.Size(1134, 625);
+            this.svgPictureBox.Source = null;
             this.svgPictureBox.TabIndex = 0;
             this.svgPictureBox.Text = "svgPictureBox1";
+            this.svgPictureBox.UriSource = null;
+            this.svgPictureBox.XmlSource = null;
             // 
             // toolStripContainer
             // 
@@ -69,7 +72,7 @@
             this.toolStripContainer.ContentPanel.BackColor = System.Drawing.SystemColors.Window;
             this.toolStripContainer.ContentPanel.Controls.Add(this.svgPictureBox);
             this.toolStripContainer.ContentPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(1146, 635);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(1146, 637);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
@@ -92,7 +95,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1146, 26);
+            this.menuStrip.Size = new System.Drawing.Size(1146, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -102,20 +105,20 @@
             this.menuItemSelect,
             this.menuItemExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(40, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // menuItemSelect
             // 
             this.menuItemSelect.Name = "menuItemSelect";
-            this.menuItemSelect.Size = new System.Drawing.Size(197, 22);
+            this.menuItemSelect.Size = new System.Drawing.Size(177, 22);
             this.menuItemSelect.Text = "Select SVG Source...";
             this.menuItemSelect.Click += new System.EventHandler(this.OnSelectClicked);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(197, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(177, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.OnExitClicked);
             // 
@@ -128,7 +131,7 @@
             this.menuItemCenterImage,
             this.menuItemZoom});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(79, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.viewToolStripMenuItem.Text = "Size Mode";
             // 
             // menuItemNormal
@@ -137,7 +140,7 @@
             this.menuItemNormal.CheckOnClick = true;
             this.menuItemNormal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuItemNormal.Name = "menuItemNormal";
-            this.menuItemNormal.Size = new System.Drawing.Size(180, 22);
+            this.menuItemNormal.Size = new System.Drawing.Size(146, 22);
             this.menuItemNormal.Tag = "Normal";
             this.menuItemNormal.Text = "Normal";
             this.menuItemNormal.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -146,7 +149,7 @@
             // 
             this.menuItemStretchImage.CheckOnClick = true;
             this.menuItemStretchImage.Name = "menuItemStretchImage";
-            this.menuItemStretchImage.Size = new System.Drawing.Size(180, 22);
+            this.menuItemStretchImage.Size = new System.Drawing.Size(146, 22);
             this.menuItemStretchImage.Tag = "StretchImage";
             this.menuItemStretchImage.Text = "Stretch Image";
             this.menuItemStretchImage.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -155,7 +158,7 @@
             // 
             this.menuItemAutoSize.CheckOnClick = true;
             this.menuItemAutoSize.Name = "menuItemAutoSize";
-            this.menuItemAutoSize.Size = new System.Drawing.Size(180, 22);
+            this.menuItemAutoSize.Size = new System.Drawing.Size(146, 22);
             this.menuItemAutoSize.Tag = "AutoSize";
             this.menuItemAutoSize.Text = "Auto Size";
             this.menuItemAutoSize.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -164,7 +167,7 @@
             // 
             this.menuItemCenterImage.CheckOnClick = true;
             this.menuItemCenterImage.Name = "menuItemCenterImage";
-            this.menuItemCenterImage.Size = new System.Drawing.Size(180, 22);
+            this.menuItemCenterImage.Size = new System.Drawing.Size(146, 22);
             this.menuItemCenterImage.Tag = "CenterImage";
             this.menuItemCenterImage.Text = "Center Image";
             this.menuItemCenterImage.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -173,7 +176,7 @@
             // 
             this.menuItemZoom.CheckOnClick = true;
             this.menuItemZoom.Name = "menuItemZoom";
-            this.menuItemZoom.Size = new System.Drawing.Size(180, 22);
+            this.menuItemZoom.Size = new System.Drawing.Size(146, 22);
             this.menuItemZoom.Tag = "Zoom";
             this.menuItemZoom.Text = "Zoom";
             this.menuItemZoom.Click += new System.EventHandler(this.OnSizeModeChanged);
@@ -183,13 +186,13 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemQuickHelp});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(46, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // menuItemQuickHelp
             // 
             this.menuItemQuickHelp.Name = "menuItemQuickHelp";
-            this.menuItemQuickHelp.Size = new System.Drawing.Size(146, 22);
+            this.menuItemQuickHelp.Size = new System.Drawing.Size(139, 22);
             this.menuItemQuickHelp.Text = "QuickHelp...";
             this.menuItemQuickHelp.Click += new System.EventHandler(this.OnQuickHelpClick);
             // 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
@@ -141,6 +142,7 @@ namespace SharpVectors.Renderers.Gdi
                 var gradientStop = gradientStops[i];
                 colors[i] = gradientStop.Color;
                 positions[i] = gradientStop.Offset;
+                Trace.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
             }
             //LinearGradientBrush brush = new LinearGradientBrush(new PointF(fLeft, fTop),
             //    new PointF(fRight, fBottom), gradientStops[0].Color, gradientStops[stopCount - 1].Color);
@@ -203,8 +205,21 @@ namespace SharpVectors.Renderers.Gdi
             }
             else
             {
+                //TODO
+                if (positions.Length == 2 && positions[0] < 1)
+                {
+                    positions[1] = 1.0f;
+                }
                 cb.Colors    = colors;
                 cb.Positions = positions;
+            }
+
+            if (colors != null && positions != null)
+            {
+                for (int i = 0; i < positions.Length; i++)
+                {
+                    Trace.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
+                }
             }
 
             brush.InterpolationColors = cb;

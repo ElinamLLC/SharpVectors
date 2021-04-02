@@ -1,8 +1,9 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Drawing;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Design;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -14,9 +15,53 @@ using SharpVectors.Renderers.Gdi;
 
 namespace SharpVectors.Renderers.Forms
 {
+    /// <summary>
+    /// This represents an <c>SVG</c> picture box control for displaying <c>GDI+</c> rendered <c>SVG</c> images.
+    /// </summary>
+    /// <remarks>This is similar to the Windows picture box control for displaying an image.</remarks>
+    [DefaultProperty(nameof(Source))]
+    [DefaultBindingProperty(nameof(Source))]
+    [Docking(DockingBehavior.Ask)]
+    [Designer(typeof(SvgPictureBoxDesigner))]
     public partial class SvgPictureBox : Control, ISvgControl, ISupportInitialize
     {
         #region Private Fields
+
+        [Flags]
+        internal enum WindowStyles : uint
+        {
+            WS_BORDER           = 0x800000,
+            WS_CAPTION          = 0xc00000,
+            WS_CHILD            = 0x40000000,
+            WS_CLIPCHILDREN     = 0x2000000,
+            WS_CLIPSIBLINGS     = 0x4000000,
+            WS_DISABLED         = 0x8000000,
+            WS_DLGFRAME         = 0x400000,
+            WS_GROUP            = 0x20000,
+            WS_HSCROLL          = 0x100000,
+            WS_MAXIMIZE         = 0x1000000,
+            WS_MAXIMIZEBOX      = 0x10000,
+            WS_MINIMIZE         = 0x20000000,
+            WS_MINIMIZEBOX      = 0x20000,
+            WS_OVERLAPPED       = 0x0,
+            WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_SIZEFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
+            WS_POPUP            = 0x80000000u,
+            WS_POPUPWINDOW      = WS_POPUP | WS_BORDER | WS_SYSMENU,
+            WS_SIZEFRAME        = 0x40000,
+            WS_SYSMENU          = 0x80000,
+            WS_THICKFRAME       = 0x40000,
+            WS_TABSTOP          = 0x10000,
+            WS_VISIBLE          = 0x10000000,
+            WS_VSCROLL          = 0x200000
+        }
+
+        [Flags]
+        internal enum WindowStylesEx : uint
+        {
+            WS_EX_TRANSPARENT = 0x00000020,
+            WS_EX_TOOLWINDOW  = 0x00000080,
+            WS_EX_CLIENTEDGE  = 0x00000200
+        }
 
         private const double BitmapLimit          = 23169*23169d;
 
@@ -46,12 +91,22 @@ namespace SharpVectors.Renderers.Forms
         private event EventHandler<SvgErrorArgs> _svgErrors;
 
         private Size _savedSize;
+        /// <summary>
+        ///  Controls how the image is placed within our bounds, or how we are sized to fit said image.
+        /// </summary>
         private PictureBoxSizeMode _sizeMode = PictureBoxSizeMode.Normal;
+        /// <summary>
+        ///  The type of border this control will have.
+        /// </summary>
+        private BorderStyle _borderStyle = BorderStyle.None;
 
         #endregion
 
         #region Constructors and Destructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgPictureBox"/> class.
+        /// </summary>
         public SvgPictureBox()
         {
             InitializeComponent();
@@ -98,12 +153,20 @@ namespace SharpVectors.Renderers.Forms
 
         #region Public Events
 
+        /// <summary>
+        /// An event that occurs when there is an alert message to be displayed.
+        /// </summary>
+        /// <remarks>Handle this to display a customized message box or prevent the display of the alert.</remarks>
         public event EventHandler<SvgAlertArgs> Alert
         {
             add { _svgAlerts += value; }
             remove { _svgAlerts -= value; }
         }
 
+        /// <summary>
+        /// An event that occurs when there is an error message to be displayed.
+        /// </summary>
+        /// <remarks>Handle this to display a customized message box or prevent the display of the error.</remarks>
         public event EventHandler<SvgErrorArgs> Error
         {
             add { _svgErrors += value; }
@@ -115,71 +178,33 @@ namespace SharpVectors.Renderers.Forms
         #region Public Properties
 
         /// <summary>
-        ///  Deriving classes can override this to configure a default size for their control.
-        ///  This is more efficient than setting the size in the control's constructor.
+        ///  Indicates the border style for the control.
         /// </summary>
-        protected override Size DefaultSize
+        /// <value>An enumeration of the type <see cref="BorderStyle"/> specifying the border style.</value>
+        [DefaultValue(BorderStyle.None)]
+        [Category(nameof(Appearance))]
+        [Description("The border style for this control")]
+        public BorderStyle BorderStyle
         {
             get {
-                return new Size(200, 200);
-            }
-        }
-
-        protected override ImeMode DefaultImeMode
-        {
-            get {
-                return ImeMode.Disable;
-            }
-        }
-
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color ForeColor
-        {
-            get {
-                return base.ForeColor;
+                return _borderStyle;
             }
             set {
-                base.ForeColor = value;
+                if (_borderStyle != value)
+                {
+                    _borderStyle = value;
+                    RecreateHandle();
+                    AdjustSize();
+                }
             }
         }
-
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Font Font
-        {
-            get {
-                return base.Font;
-            }
-            set {
-                base.Font = value;
-            }
-        }
-
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override RightToLeft RightToLeft
-        {
-            get {
-                return base.RightToLeft;
-            }
-            set {
-                base.RightToLeft = value;
-            }
-        }
-
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Bindable(false)]
-        public override string Text
-        {
-            get {
-                return base.Text;
-            }
-            set {
-                base.Text = value;
-            }
-        }
-
         /// <summary>
         /// Gets or sets a value indicating how the rendered image is displayed.
         /// </summary>
-        [DefaultValue(PictureBoxSizeMode.Normal)]        
+        /// <value>An enumeration of the type <see cref="PictureBoxSizeMode"/> specifying the size mode.</value>
+        [DefaultValue(PictureBoxSizeMode.Normal)]
+        [Category("Behavior")]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         public PictureBoxSizeMode SizeMode
         {
             get {
@@ -205,8 +230,14 @@ namespace SharpVectors.Renderers.Forms
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the application title. This is used for message dialog titles.
+        /// </summary>
+        /// <value>A string specifying the application title.</value>
         [DefaultValue(DefaultTitle)]
         [Description("The title of the application, used in displaying error and alert messages.")]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         public string AppTitle
         {
             get {
@@ -221,31 +252,114 @@ namespace SharpVectors.Renderers.Forms
         }
 
         /// <summary>
-        /// Source URL for the Svg Content
+        /// Gets or sets the source URL for the <c>SVG</c> contents.
         /// </summary>
+        /// <value>A string specifying the path of the <c>SVG</c> contents.</value>
         [Category("Data")]
         [DefaultValue("")]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         [Description("The path of the document currently being display in this SvgPictureBox")]
+        [EditorAttribute(typeof(SvgFilesUITypeEditor), typeof(UITypeEditor))]
         public string Source
         {
             get {
-                if (_svgWindow != null)
-                {
-                    return _svgWindow.Source;
-                }
-                return string.Empty;
+                return _svgSource;
             }
             set {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     this.Load(value);
                 }
+                else
+                {
+                    _svgSource = string.Empty;
+                    if (_svgRenderer != null)
+                    {
+                        _svgRenderer.ClearAll();
+                    }
+                    if (_svgWindow != null)
+                    {
+                        _svgWindow.Document = null;
+                    }
+                    this.Refresh();
+                }
             }
         }
 
         /// <summary>
-        /// Return current SvgWindow used by this control
+        /// Gets or sets the source URL for the <c>SVG</c> contents.
         /// </summary>
+        /// <value>An <see cref="Uri"/> specifying the path of the <c>SVG</c> contents.</value>
+        [Category("Data")]
+        [DefaultValue(null)]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
+        [Description("The Uri of the document currently being display in this SvgPictureBox")]
+        [EditorAttribute(typeof(SvgUrlUITypeEditor), typeof(UITypeEditor))]
+        public Uri UriSource
+        {
+            get {
+                return _uriSource;
+            }
+            set {
+                if (value != null)
+                {
+                    this.Load(value);
+                }
+                else
+                {
+                    _uriSource = null;
+                    if (_svgRenderer != null)
+                    {
+                        _svgRenderer.ClearAll();
+                    }
+                    if (_svgWindow != null)
+                    {
+                        _svgWindow.Document = null;
+                    }
+                    this.Refresh();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the <c>SVG</c> contents.
+        /// </summary>
+        /// <value>A string containing the <c>SVG</c> contents.</value>
+        [Category("Data")]
+        [DefaultValue("")]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
+        [Description("The SVG content of the document currently being display in this SvgPictureBox")]
+        [EditorAttribute(typeof(SvgTextUITypeEditor), typeof(UITypeEditor))]
+        public string XmlSource
+        {
+            get {
+                return _xmlSource;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this.LoadXml(value);
+                }
+                else
+                {
+                    _xmlSource = string.Empty;
+                    if (_svgRenderer != null)
+                    {
+                        _svgRenderer.ClearAll();
+                    }
+                    if (_svgWindow != null)
+                    {
+                        _svgWindow.Document = null;
+                    }
+                    this.Refresh();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the current SVG window implementation or <see cref="ISvgWindow"/> used by this control
+        /// </summary>
+        /// <value>An SVG window interface, <see cref="ISvgWindow"/>.</value>
         [Category("Data")]
         [Description("The Window Interface connected to the SvgPictureBox")]
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -256,6 +370,10 @@ namespace SharpVectors.Renderers.Forms
             }
         }
 
+        /// <summary>
+        /// Gets A rectangle that represents the invalidated region of the control.
+        /// </summary>
+        /// <value>A <see cref="RectangleF"/> that represents the invalidated region.</value>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public RectangleF InvalidRect
         {
@@ -268,10 +386,125 @@ namespace SharpVectors.Renderers.Forms
             }
         }
 
+        /// <summary>
+        /// Gets or sets the foreground color of the control.
+        /// </summary>
+        /// <value>The foreground <see cref="System.Drawing.Color"/> of the control. 
+        /// The default is the value of the <see cref="DefaultForeColor"/> property.</value>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Color ForeColor
+        {
+            get {
+                return base.ForeColor;
+            }
+            set {
+                base.ForeColor = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the font of the text displayed by the control.
+        /// </summary>
+        /// <value>The <see cref="System.Drawing.Font"/> to apply to the text displayed by the control. 
+        /// The default is the value of the <see cref="DefaultFont"/> property.</value>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Font Font
+        {
+            get {
+                return base.Font;
+            }
+            set {
+                base.Font = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether control's elements are aligned to support locales using right-to-left languages.
+        /// </summary>
+        /// <value>One of the <see cref="System.Windows.Forms.RightToLeft"/> values.</value>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override RightToLeft RightToLeft
+        {
+            get {
+                return base.RightToLeft;
+            }
+            set {
+                base.RightToLeft = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the text of this control.
+        /// </summary>
+        /// <value>The text of the <see cref="SvgPictureBox"/>.</value>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Bindable(false)]
+        public override string Text
+        {
+            get {
+                return base.Text;
+            }
+            set {
+                base.Text = value;
+            }
+        }
+
+        #endregion
+
+        #region Protected Properties
+
+        /// <summary>
+        ///  Deriving classes can override this to configure a default size for their control.
+        ///  This is more efficient than setting the size in the control's constructor.
+        /// </summary>
+        /// <value>The default Size of the control. The default size is 200 pixel square.</value>
+        protected override Size DefaultSize
+        {
+            get {
+                return new Size(200, 200);
+            }
+        }
+
+        /// <summary>
+        /// Gets the default Input Method Editor (IME) mode supported by the control.
+        /// </summary>
+        /// <value>This is one of the <see cref="ImeMode"/> values, and it is set to <see cref="ImeMode.Disable"/>.</value>
+        protected override ImeMode DefaultImeMode
+        {
+            get {
+                return ImeMode.Disable;
+            }
+        }
+
+        /// <summary>
+        ///  Returns the parameters needed to create the handle.
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+
+                switch (_borderStyle)
+                {
+                    case BorderStyle.Fixed3D:
+                        cp.ExStyle |= (int)WindowStylesEx.WS_EX_CLIENTEDGE;
+                        break;
+                    case BorderStyle.FixedSingle:
+                        cp.Style |= (int)WindowStyles.WS_BORDER;
+                        break;
+                }
+
+                return cp;
+            }
+        }
+
         #endregion
 
         #region Public Methods
 
+        /// <summary>
+        /// Loads and renders the SVG contents specified by the file path.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="string"/> specifying the path of the SVG contents.</param>
         public void Load(string svgSource)
         {
             if (string.IsNullOrWhiteSpace(svgSource))
@@ -305,6 +538,10 @@ namespace SharpVectors.Renderers.Forms
             this.Load();
         }
 
+        /// <summary>
+        /// Loads and renders asynchronously the SVG contents specified by the file path.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="string"/> specifying the path of the SVG contents.</param>
         public Task<bool> LoadAsync(string svgSource)
         {
             var tcs = new TaskCompletionSource<bool>();
@@ -359,6 +596,10 @@ namespace SharpVectors.Renderers.Forms
             return tcs.Task;
         }
 
+        /// <summary>
+        /// Loads and renders the SVG contents.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="string"/> specifying the SVG contents.</param>
         public void LoadXml(string xmlSource)
         {
             if (_isInitializing || this.IsHandleCreated == false)
@@ -384,6 +625,10 @@ namespace SharpVectors.Renderers.Forms
             this.Load();
         }
 
+        /// <summary>
+        /// Loads and renders the SVG contents specified by the URI.
+        /// </summary>
+        /// <param name="svgSource">A <see cref="Uri"/> specifying the path of the SVG contents.</param>
         public void Load(Uri svgSource)
         {
             if (_isInitializing || this.IsHandleCreated == false || svgSource == null)
@@ -406,6 +651,10 @@ namespace SharpVectors.Renderers.Forms
             this.Load();
         }
 
+        /// <summary>
+        /// Loads and renders the SVG contents in the specified stream.
+        /// </summary>
+        /// <param name="streamSource">A stream containing the SVG contents.</param>
         public void Load(Stream streamSource)
         {
             if (_isInitializing || this.IsHandleCreated == false)
@@ -432,6 +681,14 @@ namespace SharpVectors.Renderers.Forms
         }
 
         /// <summary>
+        /// Clears both the SVG document content and the rendered drawings.
+        /// </summary>
+        public void Unload()
+        {
+            this.Clear();
+        }
+
+        /// <summary>
         ///  Returns a string representation for this control.
         /// </summary>
         public override string ToString()
@@ -448,6 +705,20 @@ namespace SharpVectors.Renderers.Forms
             return builder.ToString();
         }
 
+        public override void Refresh()
+        {
+            base.Refresh();
+
+            if (_svgWindow != null)
+            {
+                InvalidateAndRender();
+            }
+            else
+            {
+                this.Invalidate();
+            }
+        }
+
         #endregion
 
         #region Protected Methods
@@ -462,7 +733,7 @@ namespace SharpVectors.Renderers.Forms
                 {
                     _streamSource.Dispose();
                 }
-                _svgSource   = string.Empty;
+                _svgSource    = string.Empty;
                 _xmlSource    = string.Empty;
                 _uriSource    = null;
                 _streamSource = null;
@@ -471,8 +742,11 @@ namespace SharpVectors.Renderers.Forms
                 {
                     return;
                 }
-
                 _svgRenderer.ClearAll();
+                if (_svgWindow != null)
+                {
+                    _svgWindow.Document = null;
+                }
 
                 GC.Collect();
                 System.Threading.Thread.Sleep(1);
@@ -657,15 +931,44 @@ namespace SharpVectors.Renderers.Forms
 
         protected virtual void Draw(Graphics gr, Rectangle rect)
         {
-            if (this.DesignMode || _svgWindow == null)
+            //if (this.DesignMode || _svgWindow == null)
+            //{
+            //    return;
+            //}
+            try
             {
-                return;
-            }
-            Bitmap rasterImage = ((GdiGraphicsRenderer)_svgWindow.Renderer).RasterImage;
+                if (_svgWindow == null)
+                {
+                    gr.Clear(this.BackColor);
+                    return;
+                }
+                Bitmap rasterImage = ((GdiGraphicsRenderer)_svgWindow.Renderer).RasterImage;
 
-            if (rasterImage != null)
+                if (rasterImage != null)
+                {
+                    gr.DrawImage(rasterImage, rect);
+                }
+                else
+                {
+                    gr.Clear(this.BackColor);
+                }
+            }
+            catch (Exception ex)
             {
-                gr.DrawImage(rasterImage, rect);
+                Trace.TraceError(ex.ToString());
+
+                if (this.DesignMode)
+                {
+                    return;
+                }
+
+                var errorArgs = new SvgErrorArgs("An exception occurred while rendering", ex);
+                _svgErrors?.Invoke(this, errorArgs);
+                if (!errorArgs.Handled)
+                {
+                    MessageBox.Show(errorArgs.Message + ": " + ex.Message,
+                        _appTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -951,6 +1254,10 @@ namespace SharpVectors.Renderers.Forms
 
         private void InvalidateAndRender()
         {
+            if (_svgWindow == null || _svgWindow.Document == null)
+            {
+                return;
+            }
             try
             {
                 if (_svgRenderer != null)
