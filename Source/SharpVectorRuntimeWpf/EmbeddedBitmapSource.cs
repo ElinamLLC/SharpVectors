@@ -281,6 +281,7 @@ namespace SharpVectors.Runtime
         {
             this.BeginInit();
 
+            _stream = source._stream;
             _bitmap = source._bitmap;
 
             this.InitWicInfo(_bitmap);
