@@ -166,6 +166,10 @@ namespace SharpVectors.Converters
         private bool _includeRuntime;
         private bool _optimizePath;
 
+        private bool _ensureViewboxPosition;
+        private bool _ensureViewboxSize;
+        private bool _ignoreRootViewbox;
+
         private DrawingGroup _svgDrawing;
 
         private string _appTitle;
@@ -366,7 +370,7 @@ namespace SharpVectors.Converters
         /// An instance of the <see cref="SvgDrawingCanvas"/> specifying the child
         /// of this <see cref="Viewbox"/>, which handles the rendering.
         /// </value>
-        public Canvas DrawingCanvas
+        public SvgDrawingCanvas DrawingCanvas
         {
             get {
                 return _drawingCanvas;
@@ -510,6 +514,89 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
+        /// Gets or sets a value to indicate turning off viewbox at the root of the drawing.
+        /// </summary>
+        /// <value>
+        /// For image outputs, this will force the original size to be saved.
+        /// <para>
+        /// The default value is <see langword="false"/>.
+        /// </para>
+        /// </value>
+        /// <remarks>
+        /// There are reported cases where are diagrams displayed in Inkscape program, but will not
+        /// show when converted. These are diagrams on the drawing canvas of Inkspace but outside 
+        /// the svg viewbox. 
+        /// <para>
+        /// When converted the drawings are also converted but not displayed due to
+        /// clipping. Setting this property to <see langword="true"/> will clear the clipping region
+        /// on conversion.
+        /// </para>
+        /// </remarks>
+        public bool IgnoreRootViewbox
+        {
+            get {
+                return _ignoreRootViewbox;
+            }
+            set {
+                _ignoreRootViewbox = value;
+
+                this.OnAutoSizeChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value to indicate preserving the original viewbox size when saving images.
+        /// </summary>
+        /// <value>
+        /// For image outputs, this will force the original size to be saved.
+        /// <para>
+        /// The default value is <see langword="false"/>. However, the ImageSvgConverter converted
+        /// sets this to <see langword="true"/> by default.
+        /// </para>
+        /// </value>
+        /// <remarks>
+        /// Setting this to <see langword="true"/> will cause the rendering process to draw a transparent
+        /// box around the output, if a viewbox is defined. This will ensure that the original image
+        /// size is saved.
+        /// </remarks>
+        public bool EnsureViewboxSize
+        {
+            get {
+                return _ensureViewboxSize;
+            }
+            set {
+                _ensureViewboxSize = value;
+
+                this.OnAutoSizeChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value to indicate applying a translate transform to the viewbox to ensure
+        /// it is visible when rendered.
+        /// </summary>
+        /// <value>
+        /// This determines whether a transformation is applied to the rendered drawing. For drawings
+        /// where the top-left position of the viewbox is off the screen, due to negative values, this
+        /// will ensure the drawing is visible.
+        /// <para>
+        /// The default value is <see langword="true"/>. Set this value to <see langword="false"/> if
+        /// you wish to apply your own transformations to the drawings.
+        /// </para>
+        /// </value>
+        public bool EnsureViewboxPosition
+        {
+            get {
+                return _ensureViewboxPosition;
+            }
+            set {
+                _ensureViewboxPosition = value;
+
+                this.OnAutoSizeChanged();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the font family of the desired font for the message text.
         /// </summary>
         /// <value>
@@ -644,14 +731,7 @@ namespace SharpVectors.Converters
 
             var sourceUri = this.ResolveUri(uriSource);
 
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
@@ -731,14 +811,7 @@ namespace SharpVectors.Converters
             {
                 return false;
             }
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
@@ -819,14 +892,7 @@ namespace SharpVectors.Converters
             {
                 return false;
             }
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
@@ -916,14 +982,7 @@ namespace SharpVectors.Converters
                 result.SetResult(false);
                 return result.Task;
             }
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
@@ -986,14 +1045,7 @@ namespace SharpVectors.Converters
                 result.SetResult(false);
                 return result.Task;
             }
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
@@ -1066,14 +1118,7 @@ namespace SharpVectors.Converters
                 result.SetResult(false);
                 return result.Task;
             }
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
@@ -1191,6 +1236,25 @@ namespace SharpVectors.Converters
 
         #region Protected Methods
 
+        protected virtual WpfDrawingSettings GetDrawingSettings()
+        {
+            WpfDrawingSettings settings = new WpfDrawingSettings();
+            settings.IncludeRuntime = _includeRuntime;
+            settings.TextAsGeometry = _textAsGeometry;
+            settings.OptimizePath = _optimizePath;
+
+            settings.IgnoreRootViewbox = _ignoreRootViewbox;
+            settings.EnsureViewboxSize = _ensureViewboxSize;
+            settings.EnsureViewboxPosition = _ensureViewboxPosition;
+
+            if (_culture != null)
+            {
+                settings.CultureInfo = _culture;
+            }
+
+            return settings;
+        }
+
         /// <summary>
         /// Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.
         /// </summary>
@@ -1273,14 +1337,7 @@ namespace SharpVectors.Converters
         /// </returns>
         protected virtual DrawingGroup CreateDrawing()
         {
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath   = _optimizePath;
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
+            WpfDrawingSettings settings = this.GetDrawingSettings();
 
             try
             {
