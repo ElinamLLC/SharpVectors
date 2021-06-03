@@ -76,48 +76,48 @@ namespace SharpVectors.Runtime
 
         public SvgDrawingCanvas()
         {
-            _drawForInteractivity = true;
+            _drawForInteractivity       = true;
 
-            _appTitle    = DefaultTitle;
+            _appTitle                   = DefaultTitle;
 
-            _drawObjects = new List<Drawing>();
-            _linkObjects = new List<Drawing>();
+            _drawObjects                = new List<Drawing>();
+            _linkObjects                = new List<Drawing>();
 
-            _displayTransform = Transform.Identity;
+            _displayTransform           = Transform.Identity;
 
             // Create a tooltip and set its position.
-            _tooltip = new ToolTip();
-            _tooltip.Placement = PlacementMode.MousePoint;
+            _tooltip                    = new ToolTip();
+            _tooltip.Placement          = PlacementMode.MousePoint;
             _tooltip.PlacementRectangle = new Rect(50, 0, 0, 0);
-            _tooltip.HorizontalOffset = 20;
-            _tooltip.VerticalOffset = 20;
+            _tooltip.HorizontalOffset   = 20;
+            _tooltip.VerticalOffset     = 20;
 
-            _tooltipText = new TextBlock();
-            _tooltipText.Text = string.Empty;
-            _tooltipText.Margin = new Thickness(6, 0, 0, 0);
+            _tooltipText                = new TextBlock();
+            _tooltipText.Text           = string.Empty;
+            _tooltipText.Margin         = new Thickness(6, 0, 0, 0);
 
             //Create BulletDecorator and set it as the tooltip content.
-            Ellipse bullet = new Ellipse();
-            bullet.Height = 10;
-            bullet.Width = 10;
-            bullet.Fill = Brushes.LightCyan;
+            Ellipse bullet              = new Ellipse();
+            bullet.Height               = 10;
+            bullet.Width                = 10;
+            bullet.Fill                 = Brushes.LightCyan;
 
-            BulletDecorator decorator = new BulletDecorator();
-            decorator.Bullet = bullet;
-            decorator.Margin = new Thickness(0, 0, 10, 0);
-            decorator.Child = _tooltipText;
+            BulletDecorator decorator   = new BulletDecorator();
+            decorator.Bullet            = bullet;
+            decorator.Margin            = new Thickness(0, 0, 10, 0);
+            decorator.Child             = _tooltipText;
 
-            _tooltip.Content = decorator;
-            _tooltip.IsOpen = false;
-            _tooltip.Visibility = Visibility.Hidden;
+            _tooltip.Content            = decorator;
+            _tooltip.IsOpen             = false;
+            _tooltip.Visibility         = Visibility.Hidden;
 
             //Finally, set tooltip on this canvas
-            this.ToolTip = _tooltip;
-            this.Background = Brushes.Transparent;
+            this.ToolTip                = _tooltip;
+            this.Background             = Brushes.Transparent;
 
-            _animationCanvas = new SvgAnimationLayer(this);
+            _animationCanvas            = new SvgAnimationLayer(this);
 
-            this.SnapsToDevicePixels = true;
+            this.SnapsToDevicePixels    = true;
         }
 
         #endregion
@@ -274,8 +274,7 @@ namespace SharpVectors.Runtime
                 {
                     using (FileStream fileStream = File.OpenRead(fileName))
                     {
-                        using (GZipStream zipStream =
-                            new GZipStream(fileStream, CompressionMode.Decompress))
+                        using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
                         {
                             xamlObject = XamlReader.Load(zipStream);
                         }
@@ -366,8 +365,7 @@ namespace SharpVectors.Runtime
                 Drawing drawing = drawings[i];
                 //string drawingName = SvgObject.GetName(drawing);
                 string drawingName = SvgLink.GetKey(drawing);
-                if (!string.IsNullOrWhiteSpace(drawingName) &&
-                    string.Equals(drawingName, SvgObject.DrawLayer))
+                if (!string.IsNullOrWhiteSpace(drawingName) && string.Equals(drawingName, SvgObject.DrawLayer))
                 {
                     drawIndex = i;
                 }
@@ -421,8 +419,6 @@ namespace SharpVectors.Runtime
 
         protected override Size MeasureOverride(Size constraint)
         {
-            //return base.MeasureOverride(constraint);
-
             if (_wholeDrawing != null)
             {
                 Rect rectBounds = _wholeDrawing.Bounds;
@@ -447,7 +443,17 @@ namespace SharpVectors.Runtime
                 }
             }
 
-            return new Size(320, 240);
+            var sizeCtrl = base.MeasureOverride(constraint);
+            if ((!Double.IsNaN(sizeCtrl.Width) && !Double.IsInfinity(sizeCtrl.Width)) &&
+                (!Double.IsNaN(sizeCtrl.Height) && !Double.IsInfinity(sizeCtrl.Height)))
+            {
+                if (sizeCtrl.Width != 0 && sizeCtrl.Height != 0)
+                {
+                    return sizeCtrl;
+                }
+            }
+
+            return new Size(120, 120);
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
@@ -470,7 +476,7 @@ namespace SharpVectors.Runtime
                     _tooltip.Visibility = Visibility.Hidden;
                 }
 
-                this.Cursor = Cursors.Arrow;
+//                this.Cursor = Cursors.Arrow;
                 return;
             }
 
@@ -538,7 +544,7 @@ namespace SharpVectors.Runtime
 
             if (hitVisual == null)
             {
-                this.Cursor = Cursors.Arrow;
+//                this.Cursor = Cursors.Arrow;
 
                 if (_hitVisual != null)
                 {
@@ -566,7 +572,7 @@ namespace SharpVectors.Runtime
             }
             else
             {
-                this.Cursor = Cursors.Hand;
+//                this.Cursor = Cursors.Hand;
 
                 if (hitVisual == _hitVisual)
                 {
@@ -672,7 +678,7 @@ namespace SharpVectors.Runtime
             //}
             _hitVisual = null;
 
-            this.Cursor = Cursors.Arrow;
+//            this.Cursor = Cursors.Arrow;
         }
 
         protected virtual void OnHandleAlert(string message)
