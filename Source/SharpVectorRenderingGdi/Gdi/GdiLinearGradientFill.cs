@@ -142,7 +142,7 @@ namespace SharpVectors.Renderers.Gdi
                 var gradientStop = gradientStops[i];
                 colors[i] = gradientStop.Color;
                 positions[i] = gradientStop.Offset;
-                Trace.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
+//                Trace.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
             }
             //LinearGradientBrush brush = new LinearGradientBrush(new PointF(fLeft, fTop),
             //    new PointF(fRight, fBottom), gradientStops[0].Color, gradientStops[stopCount - 1].Color);
@@ -193,12 +193,20 @@ namespace SharpVectors.Renderers.Gdi
                         readjcolors[nSize - 1] = readjcolors[nSize - 2];
                         readjpositions[nSize - 1] = 1;
                     }
+                    if (readjpositions[0] > 0.0) // The first stop must start at zero
+                    {
+                        readjpositions[0] = 0.0f;
+                    }
 
                     cb.Colors    = readjcolors;
                     cb.Positions = readjpositions;
                 }
                 else
                 {
+                    if (positions[0] > 0.0) // The first stop must start at zero
+                    {
+                        positions[0] = 0.0f;
+                    }
                     cb.Colors    = colors;
                     cb.Positions = positions;
                 }
@@ -210,16 +218,12 @@ namespace SharpVectors.Renderers.Gdi
                 {
                     positions[1] = 1.0f;
                 }
+                if (positions[0] > 0.0) // The first stop must start at zero
+                {
+                    positions[0] = 0.0f;
+                }
                 cb.Colors    = colors;
                 cb.Positions = positions;
-            }
-
-            if (colors != null && positions != null)
-            {
-                for (int i = 0; i < positions.Length; i++)
-                {
-                    Trace.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
-                }
             }
 
             brush.InterpolationColors = cb;

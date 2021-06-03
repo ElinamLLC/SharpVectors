@@ -421,67 +421,33 @@ namespace SharpVectors.Runtime
 
         protected override Size MeasureOverride(Size constraint)
         {
-            //_offsetX = 0;
-            //_offsetY = 0;
+            //return base.MeasureOverride(constraint);
 
             if (_wholeDrawing != null)
             {
                 Rect rectBounds = _wholeDrawing.Bounds;
-
                 if (!rectBounds.IsEmpty)
                 {
                     // Return the new size
                     double diaWidth = rectBounds.Width;
                     double diaHeight = rectBounds.Height;
-                    if (rectBounds.X > 0)
-                    {
-                        //diaWidth += rectBounds.X;
-                        //_offsetX = rectBounds.X;
-                    }
-                    if (rectBounds.Y > 0)
-                    {
-                        //diaHeight += rectBounds.Y;
-                        //_offsetY = rectBounds.Y;
-                    }
 
                     _bounds = rectBounds;
-
-                    //double sizeX = this.Width;
-                    //double sizeY = this.Height;
-                    //if ((!Double.IsNaN(sizeX) && !Double.IsInfinity(sizeX)) &&
-                    //    (!Double.IsNaN(sizeY) && !Double.IsInfinity(sizeY)))
-                    //{
-                    //    diaWidth = sizeX;
-                    //    diaHeight = sizeY;
-
-                    //    _bounds.Width  = sizeX;
-                    //    _bounds.Height = sizeY;
-                    //}
-
                     return new Size(diaWidth, diaHeight);
-
-                    //double inflateX = 6;
-                    //double inflateY = 6;
-                    //if (rectBounds.X > 0)
-                    //{
-                    //    inflateX = rectBounds.X/2d;
-                    //}
-                    //double diaHeight = rectBounds.Height;
-                    //if (rectBounds.Y > 0)
-                    //{
-                    //    inflateY = rectBounds.Y / 2d;
-                    //}
-
-                    //rectBounds.Inflate(inflateX, inflateY);
-
-                    //_bounds = rectBounds;
-
-                    //return rectBounds.Size;
+                }
+            }
+            else
+            {
+                double dWidth  = this.Width;
+                double dHeight = this.Height;
+                if ((!Double.IsNaN(dWidth) && !Double.IsInfinity(dWidth)) &&
+                    (!Double.IsNaN(dHeight) && !Double.IsInfinity(dHeight)))
+                {
+                    return new Size(dWidth, dHeight);
                 }
             }
 
-            return new Size(640, 480);
-            //return base.MeasureOverride(constraint);
+            return new Size(320, 240);
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
