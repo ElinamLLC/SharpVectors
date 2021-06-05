@@ -17,6 +17,11 @@ namespace SharpVectors.Dom.Svg
 		{
 			get
 			{
+				//if (_limits != null && _limits.Length == 2)
+				//{
+				//	return _limits[1];
+				//}
+
 				SvgPathSeg prevSeg = PreviousSeg;
                 SvgPointF prevPoint;
 				if (prevSeg == null)

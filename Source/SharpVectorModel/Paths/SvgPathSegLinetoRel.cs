@@ -30,6 +30,10 @@ namespace SharpVectors.Dom.Svg
         public override SvgPointF AbsXY
         {
             get {
+                //if (_limits != null && _limits.Length == 2)
+                //{
+                //    return _limits[1];
+                //}
                 SvgPathSeg prevSeg = this.PreviousSeg;
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);

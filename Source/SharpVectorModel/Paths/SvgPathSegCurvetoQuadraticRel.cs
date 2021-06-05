@@ -56,10 +56,6 @@ namespace SharpVectors.Dom.Svg
             set { _y1 = value; }
         }
 
-        #endregion
-
-        #region Pubic Methods
-
         public override SvgPointF AbsXY
         {
             get {

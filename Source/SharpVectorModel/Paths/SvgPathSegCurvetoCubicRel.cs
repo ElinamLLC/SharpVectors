@@ -79,9 +79,18 @@ namespace SharpVectors.Dom.Svg
         public override SvgPointF AbsXY
         {
             get {
-                SvgPathSeg prevSeg = PreviousSeg;
                 SvgPointF prevPoint;
-                if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
+                SvgPathSeg prevSeg = this.PreviousSeg;
+                if (prevSeg == null || prevSeg.IsRelative)
+                {
+                    if (_limits != null && _limits.Length == 2)
+                    {
+                        prevPoint = _limits[0];
+                        return new SvgPointF(prevPoint.X + X, prevPoint.Y + Y);
+                    }
+                }
+                if (prevSeg == null) 
+                    prevPoint = new SvgPointF(0, 0);
                 else prevPoint = prevSeg.AbsXY;
 
                 return new SvgPointF(prevPoint.X + X, prevPoint.Y + Y);
@@ -91,7 +100,8 @@ namespace SharpVectors.Dom.Svg
         public override SvgPointF CubicX1Y1
         {
             get {
-                SvgPathSeg prevSeg = PreviousSeg;
+                SvgPathSeg prevSeg = this.PreviousSeg;
+                System.Diagnostics.Debug.Assert(prevSeg != this);
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
                 else prevPoint = prevSeg.AbsXY;
@@ -103,7 +113,7 @@ namespace SharpVectors.Dom.Svg
         public override SvgPointF CubicX2Y2
         {
             get {
-                SvgPathSeg prevSeg = PreviousSeg;
+                SvgPathSeg prevSeg = this.PreviousSeg;
                 SvgPointF prevPoint;
                 if (prevSeg == null) prevPoint = new SvgPointF(0, 0);
                 else prevPoint = prevSeg.AbsXY;

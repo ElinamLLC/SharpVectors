@@ -257,6 +257,7 @@ paket-files/
 Samples/W3cSvgTestSuites/Svg10
 Samples/W3cSvgTestSuites/Svg11
 Samples/W3cSvgTestSuites/Svg12
+Samples/WpfTestOtherSvg
 
 # Third-party library source codes
 Libraries/Sources

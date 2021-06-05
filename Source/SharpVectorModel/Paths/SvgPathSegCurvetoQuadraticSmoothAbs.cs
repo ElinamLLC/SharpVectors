@@ -46,10 +46,6 @@ namespace SharpVectors.Dom.Svg
             set { _y = value; }
         }
 
-        #endregion
-
-        #region Public Methods
-
         public override SvgPointF QuadraticX1Y1
         {
             get {

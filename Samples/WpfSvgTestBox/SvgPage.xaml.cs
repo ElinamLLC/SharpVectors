@@ -349,6 +349,9 @@ namespace WpfSvgTestBox
                     return false;
                 }
 
+                //TODO
+                _fileReader.DrawingSettings.OptimizePath = false;
+
                 DrawingGroup drawing = _fileReader.Read(filePath, _directoryInfo);
                 if (drawing == null)
                 {

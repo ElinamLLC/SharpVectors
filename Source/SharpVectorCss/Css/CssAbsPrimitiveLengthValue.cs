@@ -17,7 +17,9 @@ namespace SharpVectors.Dom.Css
 
         public CssAbsPrimitiveLengthValue(CssPrimitiveValue cssValue, string propertyName, XmlElement element)
         {
-            _cssValue = cssValue;
+            _cssValue     = cssValue;
+            _propertyName = propertyName;
+            _element      = element;
 
             if (cssValue.PrimitiveType == CssPrimitiveType.Ident)
             {
@@ -80,8 +82,6 @@ namespace SharpVectors.Dom.Css
                 SetFloatValue(cssValue.GetFloatValue(cssValue.PrimitiveType));
                 SetPrimitiveType(cssValue.PrimitiveType);
             }
-            _propertyName = propertyName;
-            _element = element;
         }
 
         #endregion

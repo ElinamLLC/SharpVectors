@@ -8,9 +8,9 @@ namespace SharpVectors.Dom.Svg
 
         internal int _index;
         internal SvgPathSegList _list;
-        private SvgPathSegType _type;
+        protected SvgPathSegType _type;
 
-        private SvgPointF[] _limits;
+        protected SvgPointF[] _limits;
 
         #endregion
 
@@ -119,6 +119,68 @@ namespace SharpVectors.Dom.Svg
                         return false;
                     case SvgPathSegType.MoveToRel:
                         return false;
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        public bool IsAbsolute
+        {
+            get {
+                switch (this.PathSegType)
+                {
+                    case SvgPathSegType.ArcAbs:
+                        return true;
+                    case SvgPathSegType.ClosePath:
+                        return true;
+                    case SvgPathSegType.CurveToCubicAbs:
+                        return true;
+                    case SvgPathSegType.CurveToCubicSmoothAbs:
+                        return true;
+                    case SvgPathSegType.CurveToQuadraticAbs:
+                        return true;
+                    case SvgPathSegType.CurveToQuadraticSmoothAbs:
+                        return true;
+
+                    case SvgPathSegType.LineToAbs:
+                        return true;
+                    case SvgPathSegType.LineToHorizontalAbs:
+                        return true;
+                    case SvgPathSegType.LineToVerticalAbs:
+                        return true;
+                    case SvgPathSegType.MoveToAbs:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        public bool IsRelative
+        {
+            get {
+                switch (this.PathSegType)
+                {
+                    case SvgPathSegType.ArcRel:
+                        return true;
+                    case SvgPathSegType.CurveToCubicRel:
+                        return true;
+                    case SvgPathSegType.CurveToCubicSmoothRel:
+                        return true;
+                    case SvgPathSegType.CurveToQuadraticRel:
+                        return true;
+                    case SvgPathSegType.CurveToQuadraticSmoothRel:
+                        return true;
+
+                    case SvgPathSegType.LineToHorizontalRel:
+                        return true;
+                    case SvgPathSegType.LineToRel:
+                        return true;
+                    case SvgPathSegType.LineToVerticalRel:
+                        return true;
+                    case SvgPathSegType.MoveToRel:
+                        return true;
                     default:
                         return false;
                 }

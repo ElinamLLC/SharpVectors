@@ -349,6 +349,48 @@ namespace SharpVectors.Converters
 
         #region Private Methods
 
+        //private static string ReducePrecision(string s, int precision = 2)
+        //{
+        //    string old = s;
+        //    if (old.Length == 0 || old.Length < precision)
+        //    {
+        //        return old;
+        //    }
+
+        //    int begin = 0;
+        //    int end   = 0;
+
+        //    while (true)
+        //    {
+        //        begin = old.IndexOf('.', begin);
+        //        if (begin == -1) break;
+
+        //        // get past the period
+        //        begin++;
+
+        //        for (int i = 0; i < precision; i++)
+        //        {
+        //            if (old[begin] >= '0' && old[begin] <= '9') 
+        //                begin++;
+        //            if (begin >= old.Length)
+        //                break;
+        //        }
+        //        if (begin >= old.Length)
+        //            break;
+
+        //        end = begin;
+
+        //        while (end < old.Length && old[end] >= '0' && old[end] <= '9') end++;
+
+        //        old = old.Substring(0, begin) + old.Substring(end, old.Length - end);
+
+        //        begin++;
+        //        if (begin >= old.Length)
+        //            break;
+        //    }
+        //    return old;
+        //}
+
         private void WriteObject(object key, object obj, XmlWriter writer, bool isRoot)
         {
             List<MarkupProperty> propertyElements = new List<MarkupProperty>();
@@ -401,6 +443,7 @@ namespace SharpVectors.Converters
                         //writer.WriteAttributeString("Figures", 
                         //    markupObj.Instance.ToString());
                         writer.WriteAttributeString("Figures", StringConvert.ToString(markupObj.Instance, _culture));
+//                        writer.WriteAttributeString("Figures", ReducePrecision(StringConvert.ToString(markupObj.Instance, _culture)));
                     }
                     else
                     {
