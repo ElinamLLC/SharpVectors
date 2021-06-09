@@ -447,39 +447,54 @@ namespace SharpVectors.Dom.Css
                 str = str.Substring(5, str.Length - 6);
                 string[] parts = str.Split(new char[] { ',', ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (parts.Length != 4)
+                if (parts.Length != 4 && parts.Length != 1) // Adding support for rgba(1) for Issue: #198
                 {
                     throw new DomException(DomExceptionType.SyntaxErr);
                 }
 
                 try
                 {
-                    string red   = parts[0].Trim();
-                    string green = parts[1].Trim();
-                    string blue  = parts[2].Trim();
-                    string alpha = parts[3].Trim();
-
-                    if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
-                        string.IsNullOrWhiteSpace(blue))
+                    if (parts.Length == 1) // Adding support for rgba(1) for Issue: #198
                     {
-                        if (string.IsNullOrWhiteSpace(alpha))
+                        string all = parts[0].Trim();
+                        if (string.IsNullOrWhiteSpace(all))
                         {
-                            SetPrimitiveValues(0, 0, 0, 0);
+                            SetPrimitiveValues(0, 0, 0, 1);
                         }
                         else
                         {
-                            SetPrimitiveValues(SvgConstants.ValZero, SvgConstants.ValZero, SvgConstants.ValZero, alpha);
+                            SetPrimitiveValues(all, all, all, all);
                         }
                     }
                     else
                     {
-                        if (string.IsNullOrWhiteSpace(alpha))
+                        string red   = parts[0].Trim();
+                        string green = parts[1].Trim();
+                        string blue  = parts[2].Trim();
+                        string alpha = parts[3].Trim();
+
+                        if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
+                            string.IsNullOrWhiteSpace(blue))
                         {
-                            SetPrimitiveValues(red, green, blue);
+                            if (string.IsNullOrWhiteSpace(alpha))
+                            {
+                                SetPrimitiveValues(0, 0, 0, 1);
+                            }
+                            else
+                            {
+                                SetPrimitiveValues(SvgConstants.ValZero, SvgConstants.ValZero, SvgConstants.ValZero, alpha);
+                            }
                         }
                         else
                         {
-                            SetPrimitiveValues(red, green, blue, alpha);
+                            if (string.IsNullOrWhiteSpace(alpha))
+                            {
+                                SetPrimitiveValues(red, green, blue);
+                            }
+                            else
+                            {
+                                SetPrimitiveValues(red, green, blue, alpha);
+                            }
                         }
                     }
                 }
