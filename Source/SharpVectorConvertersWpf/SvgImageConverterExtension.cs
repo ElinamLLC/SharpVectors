@@ -184,7 +184,7 @@ namespace SharpVectors.Converters
                 var assembly = this.GetExecutingAssembly();
                 if (assembly != null)
                 {
-                    string localFile = Path.Combine(LocationUtils.GetAssemblyDirectory(assembly), svgPath);
+                    string localFile = PathUtils.Combine(assembly, svgPath);
 
                     if (File.Exists(localFile))
                     {

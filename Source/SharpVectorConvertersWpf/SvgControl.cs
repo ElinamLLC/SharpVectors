@@ -1605,7 +1605,7 @@ namespace SharpVectors.Converters
             svgPath = svgPath.Replace('/', '\\');
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string localFile = Path.Combine(LocationUtils.GetAssemblyDirectory(assembly), svgPath);
+            string localFile = PathUtils.Combine(assembly, svgPath);
 
             if (File.Exists(localFile))
             {

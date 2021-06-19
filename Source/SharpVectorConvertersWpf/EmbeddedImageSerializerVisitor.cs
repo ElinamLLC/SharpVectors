@@ -235,7 +235,7 @@ namespace SharpVectors.Converters
                     var assembly = Assembly.GetExecutingAssembly();
                     if (assembly != null)
                     {
-                        imagesDir = LocationUtils.GetAssemblyDirectory(assembly);
+                        imagesDir = PathUtils.Combine(assembly);
                     }
                 }
             }
