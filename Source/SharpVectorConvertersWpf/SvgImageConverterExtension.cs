@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Globalization;
 using System.ComponentModel;
 
@@ -8,6 +7,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Markup;
+using SharpVectors.Dom.Utils;
 
 namespace SharpVectors.Converters
 {
@@ -184,7 +184,7 @@ namespace SharpVectors.Converters
                 var assembly = this.GetExecutingAssembly();
                 if (assembly != null)
                 {
-                    string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+                    string localFile = Path.Combine(LocationUtils.GetAssemblyDirectory(assembly), svgPath);
 
                     if (File.Exists(localFile))
                     {

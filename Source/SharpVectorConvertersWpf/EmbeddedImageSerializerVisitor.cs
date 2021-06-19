@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using SharpVectors.Dom.Svg;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
@@ -234,7 +235,7 @@ namespace SharpVectors.Converters
                     var assembly = Assembly.GetExecutingAssembly();
                     if (assembly != null)
                     {
-                        imagesDir = Path.GetDirectoryName(assembly.Location);
+                        imagesDir = LocationUtils.GetAssemblyDirectory(assembly);
                     }
                 }
             }

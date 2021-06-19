@@ -16,6 +16,7 @@ using System.Windows.Resources;
 
 using SharpVectors.Runtime;
 using SharpVectors.Dom.Svg;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Renderers.Wpf;
 
 using DpiScale     = SharpVectors.Runtime.DpiScale;
@@ -1728,7 +1729,7 @@ namespace SharpVectors.Converters
             svgPath = svgPath.Replace('/', '\\');
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+            string localFile = Path.Combine(LocationUtils.GetAssemblyDirectory(assembly), svgPath);
 
             if (File.Exists(localFile))
             {

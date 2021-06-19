@@ -19,7 +19,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-
+using SharpVectors.Dom.Utils;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
@@ -1605,7 +1605,7 @@ namespace SharpVectors.Converters
             svgPath = svgPath.Replace('/', '\\');
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+            string localFile = Path.Combine(LocationUtils.GetAssemblyDirectory(assembly), svgPath);
 
             if (File.Exists(localFile))
             {
