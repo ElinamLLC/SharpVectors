@@ -18,7 +18,7 @@ namespace SharpVectors.Dom.Utils
 				return basePath;
 
 			var newPaths = new string[paths.Length + 1];
-			Buffer.BlockCopy(paths, 0, newPaths, 1, paths.Length);
+			Array.Copy(paths, 0, newPaths, 1, paths.Length);
 			newPaths[0] = basePath;
 
 			return Path.Combine(newPaths);
