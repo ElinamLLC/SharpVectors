@@ -31,8 +31,7 @@ namespace SharpVectors.Dom.Svg
 			{
 				if (_externalResourcesRequired == null)
 				{
-					_externalResourcesRequired = new SvgAnimatedBoolean(
-                        _ownerElement.GetAttribute("externalResourcesRequired"), false);
+					_externalResourcesRequired = new SvgAnimatedBoolean(_ownerElement.GetAttribute("externalResourcesRequired"), false);
 				}
 				return _externalResourcesRequired;
 			}

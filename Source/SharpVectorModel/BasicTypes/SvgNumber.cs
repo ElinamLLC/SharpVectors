@@ -102,6 +102,33 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public static double TryParseNumber(string str, double defNumber)
+        {
+            try
+            {
+                str = DoubleRegex.Match(str).Value;
+                return double.Parse(str, SvgNumber.Format);
+            }
+            catch
+            {
+                return defNumber;
+            }
+        }
+
+        public static Tuple<double, string> ParseNumberUnit(string str, double defVal)
+        {
+            str = str.Trim();
+            Match match = DoubleRegex.Match(str);
+            if (match.Success)
+            {
+                string value = match.Value;
+
+                return Tuple.Create(double.Parse(value, SvgNumber.Format), str.Substring(match.Length).Trim());
+            }
+
+            return Tuple.Create(defVal, string.Empty);
+        }
+
         public static double ParseNumber(string str)
         {
             str = DoubleRegex.Match(str).Value;

@@ -97,7 +97,7 @@ namespace WpfSvgTestBox
         {
             if (_debugPage != null)
             {
-                _debugPage.Startup();
+                _debugPage.Shutdown();
             }
         }
 

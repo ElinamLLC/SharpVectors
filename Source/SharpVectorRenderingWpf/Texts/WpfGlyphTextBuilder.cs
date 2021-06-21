@@ -357,6 +357,11 @@ namespace SharpVectors.Renderers.Texts
 
         public override Geometry Build(SvgTextContentElement element, string text, double x, double y)
         {
+            if (_fontSize <= 0)
+            {
+                return new GeometryGroup();
+            }
+
 //            bool isRightToLeft = false;
             var xmlLang = element.XmlLang;
             if (!string.IsNullOrWhiteSpace(xmlLang))

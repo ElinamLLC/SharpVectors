@@ -8,15 +8,15 @@ using System.Text.RegularExpressions;
 namespace SharpVectors.Net
 {
     /// <summary>
-    /// Summary description for DataWebResponse.
+    /// Provides a response from a Uniform Resource Identifier (URI).
     /// </summary>
     /// <remarks>According to http://www.ietf.org/rfc/rfc2397.txt</remarks>
     [Serializable]
     public sealed class DataWebResponse : WebResponse
     {
-        private static Regex _reData          = new Regex(@"^data:(?<mediatype>.*?),(?<data>.*)$", RegexOptions.Singleline);
-        private static Regex _reSpaceRemover  = new Regex(@"\s", RegexOptions.Singleline);
-        private static Regex _reCharsetFinder = new Regex(@"charset=(?<charset>[^;]+)", RegexOptions.Singleline);
+        private static readonly Regex _reData          = new Regex(@"^data:(?<mediatype>.*?),(?<data>.*)$", RegexOptions.Singleline);
+        private static readonly Regex _reSpaceRemover  = new Regex(@"\s", RegexOptions.Singleline);
+        private static readonly Regex _reCharsetFinder = new Regex(@"charset=(?<charset>[^;]+)", RegexOptions.Singleline);
 
         private Encoding _contentEncoding = Encoding.ASCII;
         private string _contentType;
@@ -24,6 +24,10 @@ namespace SharpVectors.Net
 
         private byte[] _decodedData;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="DataWebResponse"/> with the specified URI.
+        /// </summary>
+        /// <param name="uri"></param>
         internal DataWebResponse(Uri uri)
         {
             this._responseUri = uri;
@@ -87,6 +91,10 @@ namespace SharpVectors.Net
             }
         }
 
+        /// <summary>
+        /// Gets the content length of data being received.
+        /// </summary>
+        /// <value>The number of bytes returned from the Internet resource.</value>
         public override long ContentLength
         {
             get {
@@ -94,6 +102,10 @@ namespace SharpVectors.Net
             }
         }
 
+        /// <summary>
+        /// Gets the content encoding of data being received.
+        /// </summary>
+        /// <value>A <see cref="Encoding"/> specifying the encoding. The default is <see cref="Encoding.ASCII"/>.</value>
         public Encoding ContentEncoding
         {
             get {
@@ -101,6 +113,10 @@ namespace SharpVectors.Net
             }
         }
 
+        /// <summary>
+        /// Gets the content type of the data being received.
+        /// </summary>
+        /// <value>A string that contains the content type of the response.</value>
         public override string ContentType
         {
             get {
@@ -108,6 +124,11 @@ namespace SharpVectors.Net
             }
         }
 
+        /// <summary>
+        /// Gets the URI of the Internet resource that actually responded to the request.
+        /// </summary>
+        /// <value>An instance of the <see cref="Uri"/> class that contains the URI of the Internet resource 
+        /// that actually responded to the request.</value>
         public override Uri ResponseUri
         {
             get {
@@ -115,6 +136,10 @@ namespace SharpVectors.Net
             }
         }
 
+        /// <summary>
+        /// This returns the data stream from the Internet resource.
+        /// </summary>
+        /// <returns>An instance of the <see cref="Stream"/> class for reading data from the Internet resource.</returns>
         public override Stream GetResponseStream()
         {
             return new MemoryStream(_decodedData, false)

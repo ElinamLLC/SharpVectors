@@ -155,7 +155,7 @@ namespace SharpVectors.Renderers.Texts
         {
             if (svgPath == null || svgPath.Figures == null || svgPath.Figures.Count != 1)
             {
-                Debug.Assert(false, "Monitor invalid path cases in debug mode!");
+//                Debug.Assert(false, "Monitor invalid path cases in debug mode!");
                 return;
             }
 

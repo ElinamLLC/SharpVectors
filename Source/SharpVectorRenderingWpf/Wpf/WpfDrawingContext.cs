@@ -47,7 +47,7 @@ namespace SharpVectors.Renderers.Wpf
         private WpfDrawingDocument _drawingDocument;
         private Dictionary<string, WpfSvgPaintContext> _paintContexts;
 
-        private ISet<string> _baseUrls;
+        private HashSet<string> _baseUrls;
 
         private SvgInteractiveModes _interactiveMode;
 

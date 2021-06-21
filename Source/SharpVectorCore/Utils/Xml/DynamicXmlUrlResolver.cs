@@ -4,7 +4,7 @@ using System.Xml;
 namespace SharpVectors.Xml
 {
     /// <summary>
-    /// Hook URL solving
+    /// Provides event-based interface to resolve external XML resources named by a Uniform Resource Identifier (URI).
     /// </summary>
     public sealed class DynamicXmlUrlResolver : XmlUrlResolver
     {
@@ -28,6 +28,13 @@ namespace SharpVectors.Xml
         /// </summary>
         public event GettingEntityEventHandler GettingEntity;
 
+        /// <summary>
+        /// Maps a URI to an object that contains the actual resource.
+        /// </summary>
+        /// <param name="absoluteUri">The URI returned from <see cref="ResolveUri(Uri, String)"/>.</param>
+        /// <param name="role">Currently not used.</param>
+        /// <param name="ofObjectToReturn">The type of object to return. The current implementation only returns <see cref="Stream"/> objects.</param>
+        /// <returns>A stream object or <see langword="null"/> if a type other than stream is specified.</returns>
         public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             if (this.GettingEntity != null)
@@ -48,7 +55,7 @@ namespace SharpVectors.Xml
         /// If absolute, this value effectively replaces the <paramref name="baseUri"/> value. 
         /// If relative, it combines with the <paramref name="baseUri"/> to make an absolute URI.</param>
         /// <returns>
-        /// A <see cref="T:System.Uri"/> representing the absolute URI, or null if the relative URI cannot be resolved.
+        /// A <see cref="T:System.Uri"/> representing the absolute URI, or <see langword="null"/> if the relative URI cannot be resolved.
         /// </returns>
         /// <exception cref="T:System.ArgumentNullException">
         /// 	<paramref name="baseUri"/>is null or <paramref name="relativeUri"/> is null</exception>

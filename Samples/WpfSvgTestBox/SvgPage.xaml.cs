@@ -350,7 +350,7 @@ namespace WpfSvgTestBox
                 }
 
                 //TODO
-                _fileReader.DrawingSettings.OptimizePath = false;
+                _fileReader.DrawingSettings.OptimizePath = true;
 
                 DrawingGroup drawing = _fileReader.Read(filePath, _directoryInfo);
                 if (drawing == null)

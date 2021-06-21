@@ -15,6 +15,7 @@ namespace SharpVectors.Renderers.Wpf
 
         //private bool _isRoot;
         private bool _isRecursive;
+        private string _idElement;
         private DrawingGroup _drawGroup;
 
         #endregion
@@ -46,6 +47,8 @@ namespace SharpVectors.Renderers.Wpf
         public override void BeforeRender(WpfDrawingRenderer renderer)
         {
             base.BeforeRender(renderer);
+
+            _idElement = string.Empty;
 
             WpfDrawingContext context = renderer.Context;
 
@@ -84,6 +87,12 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             SvgPatternElement svgElm = (SvgPatternElement)_svgElement;
+
+            _idElement = svgElm.Id;
+            if (!string.IsNullOrWhiteSpace(_idElement))
+            {
+                context.AddUrl(_idElement);
+            }
 
             double x      = Math.Round(svgElm.X.AnimVal.Value, 4);
             double y      = Math.Round(svgElm.Y.AnimVal.Value, 4);
@@ -142,6 +151,12 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void AfterRender(WpfDrawingRenderer renderer)
         {
+            if (!string.IsNullOrWhiteSpace(_idElement))
+            {
+                renderer.Context.AddUrl(_idElement);
+            }
+            _idElement = string.Empty;
+
             base.AfterRender(renderer);
         }
 

@@ -50,16 +50,14 @@ namespace SharpVectors.Renderers.Wpf
             : base(element)
         {
             _textElement = element as SvgTextBaseElement;
-            if (_textElement == null)
+            if (_textElement != null)
             {
-                throw new InvalidOperationException();
+                _textContext = new WpfTextContext(_textElement, this);
+
+                _horzRenderer = new WpfHorzTextRenderer(_textElement, this);
+                _vertRenderer = new WpfVertTextRenderer(_textElement, this);
+                _pathRenderer = new WpfPathTextRenderer(_textElement, this);
             }
-
-            _textContext = new WpfTextContext(_textElement, this);
-
-            _horzRenderer = new WpfHorzTextRenderer(_textElement, this);
-            _vertRenderer = new WpfVertTextRenderer(_textElement, this);
-            _pathRenderer = new WpfPathTextRenderer(_textElement, this);
         }
 
         #endregion
@@ -116,6 +114,10 @@ namespace SharpVectors.Renderers.Wpf
         public override void BeforeRender(WpfDrawingRenderer renderer)
         {
             base.BeforeRender(renderer);
+            if (_textElement == null || _textContext == null)
+            {
+                return;
+            }
 
             _isTextPath   = false;
             _isGroupAdded = false;
@@ -227,6 +229,10 @@ namespace SharpVectors.Renderers.Wpf
 
         public override void Render(WpfDrawingRenderer renderer)
         {
+            if (_textElement == null || _textContext == null)
+            {
+                return;
+            }
             if (_drawGroup == null || _drawContext == null)
             {
                 return;
@@ -251,8 +257,8 @@ namespace SharpVectors.Renderers.Wpf
                 double textFontSize = WpfTextRenderer.GetComputedFontSize(_textElement);
                 if (sBaselineShift.EndsWith("%", comparer))
                 {
-                    shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
-                        sBaselineShift.Length - 1)) / 100 * textFontSize;
+                    shiftBy = SvgNumber.TryParseNumber(sBaselineShift.Substring(0,
+                        sBaselineShift.Length - 1), shiftBy) / 100 * textFontSize;
                 }
                 else if (string.Equals(sBaselineShift, "sub", comparer))
                 {
@@ -268,7 +274,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else
                 {
-                    shiftBy = SvgNumber.ParseNumber(sBaselineShift);
+                    shiftBy = SvgNumber.TryParseNumber(sBaselineShift, shiftBy);
                 }
             }
 
@@ -597,6 +603,10 @@ namespace SharpVectors.Renderers.Wpf
 
         private void ResetGuidelineSet(DrawingGroup group)
         {
+            if (_textElement == null || _textContext == null)
+            {
+                return;
+            }
             if (_isTextPath)
             {
                 return;
@@ -1024,8 +1034,8 @@ namespace SharpVectors.Renderers.Wpf
                 double textFontSize = WpfTextRenderer.GetComputedFontSize(_textElement);
                 if (sBaselineShift.EndsWith("%", comparer))
                 {
-                    shiftBy = SvgNumber.ParseNumber(sBaselineShift.Substring(0,
-                        sBaselineShift.Length - 1)) / 100f * textFontSize;
+                    shiftBy = SvgNumber.TryParseNumber(sBaselineShift.Substring(0,
+                        sBaselineShift.Length - 1), shiftBy) / 100f * textFontSize;
                 }
                 else if (string.Equals(sBaselineShift, "sub", comparer))
                 {
@@ -1041,7 +1051,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else
                 {
-                    shiftBy = SvgNumber.ParseNumber(sBaselineShift);
+                    shiftBy = SvgNumber.TryParseNumber(sBaselineShift, shiftBy);
                 }
             }
 

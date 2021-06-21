@@ -15,16 +15,25 @@ namespace SharpVectors.Dom.Css
     {
         #region Static members
 
-        private static readonly Regex regex = new Regex(
+        private static readonly Regex _mediaRegex = new Regex(
             @"^@import\s(url\()?""(?<importhref>[^""]+)""\)?(\s(?<importmedia>([a-z]+)(\s*,\s*)?)+)?;");
+
+        private static readonly Regex _urlRegex = new Regex(@"(?:@import)\s(?:url\()?\s?[""\'](.*?)[""\']\s?\)?(?:[^;]*);?");
 
         internal static CssRule Parse(ref string css, object parent, bool readOnly, 
             IList<string> replacedStrings, CssStyleSheetType origin)
         {
-            Match match = regex.Match(css);
+            Match match = _mediaRegex.Match(css);
             if (match.Success)
             {
                 CssImportRule rule = new CssImportRule(match, parent, readOnly, replacedStrings, origin);
+                css = css.Substring(match.Length);
+                return rule;
+            }
+            match = _urlRegex.Match(css);
+            if (match.Success && match.Groups != null && match.Groups.Count == 2)
+            {
+                CssImportRule rule = new CssImportRule(match.Groups[1], parent, readOnly, replacedStrings, origin);
                 css = css.Substring(match.Length);
                 return rule;
             }
@@ -60,6 +69,24 @@ namespace SharpVectors.Dom.Css
             _media      = new MediaList(match.Groups["importmedia"].Value);
             _href       = DeReplaceStrings(match.Groups["importhref"].Value);
             _styleSheet = new CssStyleSheet(ResolveOwnerNode(), Href, null, match.Groups["importmedia"].Value, this, origin);
+        }
+
+        /// <summary>
+        /// The constructor for CssImportRule
+        /// </summary>
+        /// <param name="match">The Regex match that found the charset rule</param>
+        /// <param name="parent">The parent rule or parent stylesheet</param>
+        /// <param name="readOnly">True if this instance is readonly</param>
+        /// <param name="replacedStrings">An array of strings that have been replaced in the string used 
+        /// for matching. These needs to be put back use the DereplaceStrings method</param>
+        /// <param name="origin">The type of CssStyleSheet</param>
+        internal CssImportRule(Group group, object parent, bool readOnly,
+            IList<string> replacedStrings, CssStyleSheetType origin)
+            : base(parent, readOnly, replacedStrings, origin)
+        {
+            _media      = new MediaList();
+            _href       = DeReplaceStrings(group.Value);
+            _styleSheet = new CssStyleSheet(ResolveOwnerNode(), Href, null, null, this, origin);
         }
 
         #endregion

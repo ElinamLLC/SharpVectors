@@ -7,7 +7,18 @@ namespace SharpVectors.Dom.Css
         public CssPrimitiveColorValue(int color, bool readOnly)
             : base(color.ToString(CssNumber.Format), readOnly)
         {
-            SetFloatValue(color);
+            if (color < 0)
+            {
+                SetFloatValue(0);
+            }
+            else if (color > 255)
+            {
+                SetFloatValue(255);
+            }
+            else
+            {
+                SetFloatValue(color);
+            }
             SetPrimitiveType(CssPrimitiveType.Number);
         }
 
@@ -37,7 +48,16 @@ namespace SharpVectors.Dom.Css
                 SetPrimitiveType(CssPrimitiveType.Number);
 
             }
-            SetFloatValue(cssText);
+            var color = double.Parse(cssText, CssNumber.Format);
+            if (color < 0)
+            {
+                color = 0;
+            }
+            else if (color > 255)
+            {
+                color = 255;
+            }
+            SetFloatValue(color);
         }
 
         public override double GetFloatValue(CssPrimitiveType unitType)

@@ -5,24 +5,44 @@ using System.IO.Compression;
 
 namespace SharpVectors.Net
 {
+    /// <summary>
+    /// This provides an implementation of the <see cref="IWebRequestCreate"/> interface for creating the extended
+    /// <see cref="WebRequest"/> instances with support of custom request caching.
+    /// </summary>
     public sealed class ExtendedHttpWebRequestCreator : IWebRequestCreate
     {
+        /// <summary>
+        /// Initializes an instance of the <see cref="ExtendedHttpWebRequestCreator"/> class.
+        /// </summary>
         public ExtendedHttpWebRequestCreator()
         {
             DataSecurityProtocols.Initialize();
         }
 
+        /// <summary>
+        /// Creates a <see cref="WebRequest"/> instance.
+        /// </summary>
+        /// <param name="uri">The uniform resource identifier (URI) of the Web resource.</param>
+        /// <returns>A <see cref="WebRequest"/> instance.</returns>
         WebRequest IWebRequestCreate.Create(Uri uri)
         {
             return new ExtendedHttpWebRequest(uri);
         }
 
+        /// <summary>
+        /// Creates a <see cref="ExtendedHttpWebRequest"/> instance.
+        /// </summary>
+        /// <param name="uri">The uniform resource identifier (URI) of the Web resource.</param>
+        /// <returns>A <see cref="ExtendedHttpWebRequest"/> instance.</returns>
         public ExtendedHttpWebRequest Create(Uri uri)
         {
             return new ExtendedHttpWebRequest(uri);
         }
     }
 
+    /// <summary>
+    /// A class providing an extension to the <see cref="WebRequest"/> class with support of a custom caching method.
+    /// </summary>
     [Serializable]
     public sealed class ExtendedHttpWebRequest : WebRequest
     {
@@ -35,6 +55,10 @@ namespace SharpVectors.Net
 
         #region Constructors and Destructor
 
+        /// <summary>
+        /// Initializes an instance of the <see cref="ExtendedHttpWebRequest"/> class with the specified URI.
+        /// </summary>
+        /// <param name="uri">A value representing the resource associated with the request.</param>
         public ExtendedHttpWebRequest(Uri uri)
         {
             _requestUri = uri;
@@ -44,6 +68,10 @@ namespace SharpVectors.Net
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets the URI of the Internet resource associated with the request.
+        /// </summary>
+        /// <value>A <see cref="Uri"/> representing the resource associated with the request.</value>
         public override Uri RequestUri
         {
             get {
@@ -51,6 +79,10 @@ namespace SharpVectors.Net
             }
         }
 
+        /// <summary>
+        /// Gets or sets a class instance implementing the cache manager interface, <see cref="ICacheManager"/>.
+        /// </summary>
+        /// <value>An implementation of the <see cref="ICacheManager"/> interface. The default is the <see cref="NoCacheManager"/>.</value>
         public static ICacheManager CacheManager
         {
             get {
@@ -69,6 +101,10 @@ namespace SharpVectors.Net
 
         #region Public Methods
 
+        /// <summary>
+        /// Register the <see cref="WebRequest"/> instance creation factories.
+        /// </summary>
+        /// <returns>This returns <see langword="true"/> if successful; otherwise, <see langword="false"/>.</returns>
         public static bool Register()
         {
             if (!WebRequest.RegisterPrefix("http://", new ExtendedHttpWebRequestCreator()))
@@ -83,19 +119,24 @@ namespace SharpVectors.Net
             return true;
         }
 
+        /// <summary>
+        /// This returns a response to an Internet request.
+        /// </summary>
+        /// <returns>A <see cref="WebResponse"/> containing the response to the Internet request.</returns>
+        /// <seealso cref="WebRequest.GetResponse"/>
         public override WebResponse GetResponse()
         {
             CacheInfo cacheInfo = CacheManager.GetCacheInfo(RequestUri);
 
-            WebRequest request = GetRequest(cacheInfo);
-            WebResponse response = GetResponse(request, cacheInfo);
+            var request  = GetRequest(cacheInfo);
+            var response = GetResponse(request, cacheInfo);
 
             if (response == null)
             {
                 return null;
             }
 
-            Stream stream = ProcessResponseStream(response);
+            var stream = ProcessResponseStream(response);
 
             if (response is HttpWebResponse)
             {
@@ -114,9 +155,7 @@ namespace SharpVectors.Net
         private WebRequest GetRequest(CacheInfo cacheInfo)
         {
             WebRequest request;
-            if (cacheInfo != null &&
-                cacheInfo.CachedUri != null &&
-                cacheInfo.Expires > DateTime.Now)
+            if (cacheInfo != null && cacheInfo.CachedUri != null && cacheInfo.Expires > DateTime.Now)
             {
                 request = WebRequest.Create(cacheInfo.CachedUri);
             }

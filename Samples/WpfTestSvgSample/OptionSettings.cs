@@ -218,7 +218,7 @@ namespace WpfTestSvgSample
                 return _selectedValuePath;
             }
             set {
-                bool isChanged = !string.Equals(_defaultSvgPath, value, StringComparison.OrdinalIgnoreCase);
+                bool isChanged = !string.Equals(_selectedValuePath, value, StringComparison.OrdinalIgnoreCase);
                 _selectedValuePath = value;
 
                 if (isChanged)

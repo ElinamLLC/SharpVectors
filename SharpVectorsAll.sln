@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestThreadSafety", "Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Scripting", "Source\SharpVectorScripting\SharpVectors.Scripting.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestOtherSvg", "Samples\WpfTestOtherSvg\WpfTestOtherSvg.csproj", "{812C131D-604E-403B-BF39-40980C5DA9B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{340EF466-0248-4FAD-9616-EC693BD72D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{340EF466-0248-4FAD-9616-EC693BD72D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{340EF466-0248-4FAD-9616-EC693BD72D38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{812C131D-604E-403B-BF39-40980C5DA9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{812C131D-604E-403B-BF39-40980C5DA9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{812C131D-604E-403B-BF39-40980C5DA9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{812C131D-604E-403B-BF39-40980C5DA9B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{5A71211F-9EDA-4C43-8DDC-E3EB54843113} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{28586359-004C-45B5-823E-38F714784B31} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{19ED33D1-7D07-43ED-878A-16630CD4035D} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{812C131D-604E-403B-BF39-40980C5DA9B5} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

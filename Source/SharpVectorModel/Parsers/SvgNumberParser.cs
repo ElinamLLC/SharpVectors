@@ -73,7 +73,8 @@ namespace SharpVectors.Dom.Svg
             {
                 default:
                     ReportUnexpectedCharacterError(_current);
-                    return 0.0f;
+//                    return 0.0f;
+                    return float.NaN;
 
                 case '.':
                     break;
@@ -180,7 +181,8 @@ m1Break:
                         if (!mantRead)
                         {
                             ReportUnexpectedCharacterError(_current);
-                            return 0.0f;
+//                            return 0.0f;
+                            return float.NaN;
                         }
                         break;
 
@@ -283,7 +285,8 @@ m2Break: //TODO-check this well
                     {
                         default:
                             ReportUnexpectedCharacterError(_current);
-                            return 0f;
+//                            return 0.0f;
+                            return float.NaN;
                         case '-':
                             expPos = false;
                             goto case '+';
@@ -305,7 +308,8 @@ m2Break: //TODO-check this well
                                 {
                                     default:
                                         ReportUnexpectedCharacterError(_current);
-                                        return 0f;
+//                                        return 0f;
+                                        return float.NaN;
                                     case '0':
                                     case '1':
                                     case '2':

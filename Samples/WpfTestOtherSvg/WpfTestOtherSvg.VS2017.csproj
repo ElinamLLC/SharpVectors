@@ -1,0 +1,182 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>net46;net48</TargetFrameworks>
+    <OutputType>WinExe</OutputType>
+    <UseWpf>true</UseWpf>
+    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <RootNamespace>WpfTestSvgSample</RootNamespace>
+    <AssemblyName>WpfTestSvgSample</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>Output\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>Output\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">$(DefineConstants);DOTNET46;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="Accessibility" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="Accessibility" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <Reference Include="Accessibility" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
+    <Reference Include="Accessibility" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <Reference Include="Accessibility" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Update="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DebugPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DrawingHelpWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DrawingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="DrawingPageHelp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="PrintPreviewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="SvgPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="TraceDocument.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="XamlPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ZoomPanOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.VS2017.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.VS2017.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.VS2017.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.VS2017.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.VS2017.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.VS2017.csproj" />
+    <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.VS2017.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PanTool.cur" />
+    <Resource Include="Resources\PanToolDown.cur" />
+    <Resource Include="App.ico" />
+    <Resource Include="Images\Copy.svg" />
+    <Resource Include="Images\Cut.svg" />
+    <Resource Include="Images\Debug.svg" />
+    <Resource Include="Images\Delete.svg" />
+    <Resource Include="Images\Find.svg" />
+    <Resource Include="Images\FolderClose.svg" />
+    <Resource Include="Images\FolderOpen.svg" />
+    <Resource Include="Images\Format.svg" />
+    <Resource Include="Images\Number.svg" />
+    <Resource Include="Images\Open.svg" />
+    <Resource Include="Images\Output.svg" />
+    <Resource Include="Images\Paste.svg" />
+    <Resource Include="Images\Redo.svg" />
+    <Resource Include="Images\Run.svg" />
+    <Resource Include="Images\Save.svg" />
+    <Resource Include="Images\Settings.svg" />
+    <Resource Include="Images\Space.svg" />
+    <Resource Include="Images\SvgLogo.svg" />
+    <Resource Include="Images\SvgLogoBasic.svg" />
+    <Resource Include="Images\Test.svg" />
+    <Resource Include="Images\TestResultDetail.svg" />
+    <Resource Include="Images\TestRunner.svg" />
+    <Resource Include="Images\Undo.svg" />
+    <Resource Include="Images\Web.svg" />
+    <Resource Include="Images\WordWrap.svg" />
+    <Resource Include="Images\OpenFolder.svg" />
+    <Resource Include="Images\Panning.svg" />
+    <Resource Include="Images\Print.svg" />
+    <Resource Include="Images\PrintPreview.svg" />
+    <Resource Include="Images\ZoomIn.svg" />
+    <Resource Include="Images\ZoomOut.svg" />
+    <Resource Include="Images\ZoomReset.svg" />
+    <Resource Include="Images\ZoomToFit.svg" />
+    <Resource Include="Images\View.svg" />
+    <Resource Include="Images\Information.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

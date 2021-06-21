@@ -50,7 +50,7 @@ namespace SharpVectors.Dom.Svg
                     if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace) ||
                         _ownerElement.HasAttribute("href"))
                     {
-                        string href = Href.AnimVal.Trim().Trim(new char[] { '\"', '\'' });
+                        string href = Href.AnimVal.Trim().Trim(CssConstants.TrimUri);
 
                         if (href.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                         {

@@ -265,7 +265,7 @@ namespace SharpVectors.Dom.Svg
 
         public string ResolveUri(string uri)
         {
-            uri = uri.Trim().Trim(new char[] { '\"', '\'' });
+            uri = uri.Trim().Trim(CssConstants.TrimUri);
             if (uri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 return uri;

@@ -249,8 +249,9 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Trace.TraceError(ex.ToString());
                 return null;
             }
 
@@ -266,9 +267,27 @@ namespace SharpVectors.Renderers.Wpf
             double _rx = Math.Round(element.Rx.AnimVal.Value, 4);
             double _ry = Math.Round(element.Ry.AnimVal.Value, 4);
 
+            // New in SVG 2. The auto value for rx and ry was added to allow consistent parsing of these properties for both ellipses and rectangles.
+            // Previously, if either rx or ry was unspecified, the ellipse would not render.
+            double r = Math.Max(_rx, _ry);
+
             if (_rx <= 0 || _ry <= 0)
             {
-                return null;
+                if (r <= 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    if (_rx <= 0)
+                    {
+                        _rx = r;
+                    }
+                    else if (_ry <= 0)
+                    {
+                        _ry = r;
+                    }
+                }
             }
 
             EllipseGeometry geometry = new EllipseGeometry(new Point(_cx, _cy),

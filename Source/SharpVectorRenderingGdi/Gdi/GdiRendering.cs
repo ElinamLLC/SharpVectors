@@ -150,7 +150,7 @@ namespace SharpVectors.Renderers.Gdi
         /// </returns>
         public static GdiRendering CreateByUri(SvgDocument document, string baseUri, string url)
         {
-            url = url.Trim().Trim(new char[] { '\"', '\'' });
+            url = url.Trim().Trim(CssConstants.TrimUri);
             if (url.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 // do nothing

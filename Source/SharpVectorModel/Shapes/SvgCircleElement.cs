@@ -78,7 +78,7 @@ namespace SharpVectors.Dom.Svg
             get {
                 if (_r == null)
                 {
-                    _r = new SvgAnimatedLength(this, "r", SvgLengthDirection.Viewport, "100");
+                    _r = new SvgAnimatedLength(this, "r", SvgLengthDirection.Viewport, SvgConstants.ValZero);
                 }
                 return _r;
             }

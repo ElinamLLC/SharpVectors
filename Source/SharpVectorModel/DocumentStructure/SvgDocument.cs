@@ -760,7 +760,7 @@ namespace SharpVectors.Dom.Svg
                 return null;
             }
 
-            absoluteUrl = absoluteUrl.Trim().Trim(new char[] { '\"', '\'' });
+            absoluteUrl = absoluteUrl.Trim().Trim(CssConstants.TrimUri);
             if (absoluteUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 return GetElementById(absoluteUrl.Substring(1));

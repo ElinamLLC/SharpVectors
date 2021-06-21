@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("GdiTestSvgControl")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2019 Elinam LLC")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2021 Elinam LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

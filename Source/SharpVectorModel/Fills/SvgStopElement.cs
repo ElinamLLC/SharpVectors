@@ -50,18 +50,27 @@ namespace SharpVectors.Dom.Svg
                 }
                 else
                 {
-                    double tmp = SvgNumber.ParseNumber(attr) * 100;
-                    if (tmp > 100)
+                    //double tmp = SvgNumber.ParseNumber(attr) * 100;
+                    Tuple<double, string> values = SvgNumber.ParseNumberUnit(attr, 0);
+                    if (!string.IsNullOrWhiteSpace(values.Item2))
                     {
-                        attr = "100";
-                    }
-                    else if (tmp < 0)
-                    {
-                        attr = SvgConstants.ValZero;
+                        attr = SvgConstants.ValZero; // The offset supports only numbers and %
                     }
                     else
                     {
-                        attr = tmp.ToString(SvgNumber.Format);
+                        double tmp = values.Item1 * 100;
+                        if (tmp > 100)
+                        {
+                            attr = "100";
+                        }
+                        else if (tmp < 0)
+                        {
+                            attr = SvgConstants.ValZero;
+                        }
+                        else
+                        {
+                            attr = tmp.ToString(SvgNumber.Format);
+                        }
                     }
                 }
 

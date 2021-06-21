@@ -532,16 +532,16 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             double miterLimit = SvgNumber.ParseNumber(miterLimitStr);
-            if (miterLimit < 1)
-            {
-                throw new SvgException(SvgExceptionType.SvgInvalidValueErr,
-                    "stroke-miterlimit can not be less then 1");
-            }
-
-            //if (miterLimit < 1.0d)
+            //if (miterLimit < 1)
             //{
-            //    return -1.0d;
+            //    throw new SvgException(SvgExceptionType.SvgInvalidValueErr,
+            //        "stroke-miterlimit can not be less then 1");
             //}
+
+            if (miterLimit < 1.0d)
+            {
+                return -1.0d;
+            }
 
             double ratioLimit = miterLimit / strokeWidth;
             if (ratioLimit >= 1.8d)
@@ -607,6 +607,14 @@ namespace SharpVectors.Renderers.Wpf
         private WpfFill GetPaintFill(string uri)
         {
             string absoluteUri = _element.ResolveUri(uri);
+            if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+            {
+                var elementId = absoluteUri.Substring(1);
+                if (_context.ContainsUrl(elementId))
+                {
+                    return null;
+                }
+            }
 
             if (_element.Imported && _element.ImportDocument != null && _element.ImportNode != null)
             {

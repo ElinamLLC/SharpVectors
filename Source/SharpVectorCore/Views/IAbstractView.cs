@@ -6,8 +6,9 @@ namespace SharpVectors.Dom.Views
     public interface IAbstractView
     {
         /// <summary>
-        /// The source DocumentView of which this is an AbstractView.
+        /// The source <see cref="IDocumentView"/> of which this is an <see cref="IAbstractView"/>.
         /// </summary>
+        /// <value>An instance of <see cref="IDocumentView"/> representing the document view.</value>
         IDocumentView Document { get; }
     }
 }

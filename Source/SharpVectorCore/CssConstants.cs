@@ -11,6 +11,7 @@ namespace SharpVectors.Dom
         // The CSS mime-type string.
         //
         public const string MimeType = "text/css";
+        public static readonly char[] TrimUri = new char[] { '\"', '\'' };
 
         //
         // The CSS property names.

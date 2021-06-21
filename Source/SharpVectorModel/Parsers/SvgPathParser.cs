@@ -189,6 +189,12 @@ namespace SharpVectors.Dom.Svg
             float x = ParseFloat();
             SkipCommaSpaces();
             float y = ParseFloat();
+
+            if (float.IsNaN(x) || float.IsNaN(y))
+            {
+                return;
+            }
+
             _pathHandler.MovetoRel(x, y);
 
             bool expectNumber = SkipCommaSpaces2();
@@ -206,6 +212,11 @@ namespace SharpVectors.Dom.Svg
             float x = ParseFloat();
             SkipCommaSpaces();
             float y = ParseFloat();
+            if (float.IsNaN(x) || float.IsNaN(y))
+            {
+                return;
+            }
+
             _pathHandler.MovetoAbs(x, y);
 
             bool expectNumber = SkipCommaSpaces2();
@@ -252,6 +263,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    return;
+                }
 
                 _pathHandler.LinetoRel(x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -298,6 +313,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    return;
+                }
 
                 _pathHandler.LinetoAbs(x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -339,6 +358,11 @@ namespace SharpVectors.Dom.Svg
                         break;
                 }
                 float x = ParseFloat();
+                if (float.IsNaN(x))
+                {
+                    return;
+                }
+
                 _pathHandler.LinetoHorizontalRel(x);
                 expectNumber = SkipCommaSpaces2();
             }
@@ -380,6 +404,11 @@ namespace SharpVectors.Dom.Svg
                         break;
                 }
                 float x = ParseFloat();
+                if (float.IsNaN(x))
+                {
+                    return;
+                }
+
                 _pathHandler.LinetoHorizontalAbs(x);
                 expectNumber = SkipCommaSpaces2();
             }
@@ -421,6 +450,10 @@ namespace SharpVectors.Dom.Svg
                         break;
                 }
                 float x = ParseFloat();
+                if (float.IsNaN(x))
+                {
+                    return;
+                }
 
                 _pathHandler.LinetoVerticalRel(x);
                 expectNumber = SkipCommaSpaces2();
@@ -463,6 +496,10 @@ namespace SharpVectors.Dom.Svg
                         break;
                 }
                 float x = ParseFloat();
+                if (float.IsNaN(x))
+                {
+                    return;
+                }
 
                 _pathHandler.LinetoVerticalAbs(x);
                 expectNumber = SkipCommaSpaces2();
@@ -516,6 +553,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(x1) || float.IsNaN(x2) || float.IsNaN(y) || float.IsNaN(y1) || float.IsNaN(y2))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoCubicRel(x1, y1, x2, y2, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -569,6 +610,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(x1) || float.IsNaN(x2) || float.IsNaN(y) || float.IsNaN(y1) || float.IsNaN(y2))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoCubicAbs(x1, y1, x2, y2, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -618,6 +663,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(x1) || float.IsNaN(y) || float.IsNaN(y1))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoQuadraticRel(x1, y1, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -667,6 +716,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(x1) || float.IsNaN(y) || float.IsNaN(y1))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoQuadraticAbs(x1, y1, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -716,6 +769,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(x2) || float.IsNaN(y) || float.IsNaN(y2))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoCubicSmoothRel(x2, y2, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -765,6 +822,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(x2) || float.IsNaN(y) || float.IsNaN(y2))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoCubicSmoothAbs(x2, y2, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -810,6 +871,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoQuadraticSmoothRel(x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -857,6 +922,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    return;
+                }
 
                 _pathHandler.CurvetoQuadraticSmoothAbs(x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -945,6 +1014,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    return;
+                }
 
                 _pathHandler.ArcRel(rx, ry, ax, laf, sf, x, y);
                 expectNumber = SkipCommaSpaces2();
@@ -1032,6 +1105,10 @@ namespace SharpVectors.Dom.Svg
                 float x = ParseFloat();
                 SkipCommaSpaces();
                 float y = ParseFloat();
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    return;
+                }
 
                 _pathHandler.ArcAbs(rx, ry, ax, laf, sf, x, y);
                 expectNumber = SkipCommaSpaces2();

@@ -3,10 +3,16 @@ using System.Net;
 
 namespace SharpVectors.Net
 {
+    /// <summary>
+    /// A class for setting the security protocol used by the <see cref="ServicePoint"/> objects managed by the <see cref="ServicePointManager"/> object.
+    /// </summary>
     public static class DataSecurityProtocols
     {
         private static bool _isIntialized = false;
 
+        /// <summary>
+        /// This sets the security protocol used by the <see cref="ServicePoint"/> objects managed by the <see cref="ServicePointManager"/> object.
+        /// </summary>
         public static void Initialize()
         {
             if (_isIntialized)

@@ -95,24 +95,31 @@ namespace SharpVectors.Dom.Svg
         {
             _isSuccessful = false;
 
-            Console.WriteLine("--------------ReportError-------------");
-            Console.WriteLine(key);
+            Debug.WriteLine("--------------ReportError-------------");
+            Debug.WriteLine(key);
             foreach (var arg in args)
             {
                 if (arg is char)
                 {
-                    Console.WriteLine(Convert.ToChar(arg));
+                    Debug.WriteLine(Convert.ToChar(arg));
                 }
                 else if (arg is int)
                 {
-                    Console.WriteLine(Convert.ToChar(arg));
+                    if ((int)arg < 0)
+                    {
+                        Debug.WriteLine(arg);
+                    }
+                    else
+                    {
+                        Debug.WriteLine(Convert.ToChar(arg));
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(arg);
+                    Debug.WriteLine(arg);
                 }
             }
-            Console.WriteLine("--------------ReportError-------------");
+            Debug.WriteLine("--------------ReportError-------------");
         }
 
         /// <summary>
