@@ -1,3 +1,8 @@
+### Release 1.7.6
+    * WPF: Font Family support improvements
+    * WPF: Fallback use of AppDomain.Current.BaseDirectory instead of Assembly.Location (by @MihailsKuzminsDG)
+    * Several bug fixes and code improvements
+
 ### Release 1.7.5
     * Several bug fixes and code improvements
 
