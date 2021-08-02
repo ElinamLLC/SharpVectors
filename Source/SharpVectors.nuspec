@@ -12,9 +12,11 @@
     <projectUrl>https://github.com/ElinamLLC/SharpVectors</projectUrl>
     <repository type="git" url="https://github.com/ElinamLLC/SharpVectors" />
     <icon>images\SharpVectors64.png</icon>
-    <copyright>Copyright (c) 2010 - 2019 Elinam LLC</copyright>
+    <copyright>Copyright (c) 2010 - 2021 Elinam LLC</copyright>
     <releaseNotes>
-        Release 1.7.5
+        Release 1.7.6
+          * WPF: Font Family support improvements
+          * WPF: Fallback use of AppDomain.Current.BaseDirectory instead of Assembly.Location (by @MihailsKuzminsDG)
           * Several bug fixes and code improvements
     </releaseNotes>
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
