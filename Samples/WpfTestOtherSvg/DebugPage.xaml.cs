@@ -72,6 +72,11 @@ namespace WpfTestOtherSvg
             }
         }
 
+        public void ClearDocument()
+        {
+            textEditor.Clear();
+        }
+
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
             this.Startup();
@@ -82,17 +87,17 @@ namespace WpfTestOtherSvg
                 if (options != null)
                 {
                     //options.AllowScrollBelowDocument = true;
-                    options.EnableHyperlinks = true;
-                    options.EnableEmailHyperlinks = true;
-                    options.EnableVirtualSpace = false;
-                    options.HighlightCurrentLine = true;
+                    options.EnableHyperlinks           = true;
+                    options.EnableEmailHyperlinks      = true;
+                    options.EnableVirtualSpace         = false;
+                    options.HighlightCurrentLine       = true;
                     //options.ShowSpaces               = true;
                     //options.ShowTabs                 = true;
                     //options.ShowEndOfLine            = true;              
                 }
 
-                textEditor.IsReadOnly = true;
-                textEditor.WordWrap = false;
+                textEditor.IsReadOnly      = true;
+                textEditor.WordWrap        = false;
                 textEditor.ShowLineNumbers = true;
 
                 _searchPanel = SearchPanel.Install(textEditor);

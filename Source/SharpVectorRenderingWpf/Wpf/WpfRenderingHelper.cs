@@ -23,7 +23,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private WpfDrawingRenderer _renderer;
 
-        private IDictionary<string, WpfRenderingBase> _rendererMap;
+        private IDictionary<string, WpfRendering> _rendererMap;
 
         // A simple way to prevent use element circular references.
         private ISet<string> _useIdElements;
@@ -40,7 +40,7 @@ namespace SharpVectors.Renderers.Wpf
             _currentLang     = cultureInfo.TwoLetterISOLanguageName;
             _currentLangName = cultureInfo.Name;
             _renderer        = renderer;
-            _rendererMap     = new Dictionary<string, WpfRenderingBase>(StringComparer.OrdinalIgnoreCase);
+            _rendererMap     = new Dictionary<string, WpfRendering>(StringComparer.OrdinalIgnoreCase);
             _useElements     = new HashSet<int>();
             _useIdElements   = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
        }
@@ -269,7 +269,7 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            WpfRenderingBase renderingNode = WpfRendering.Create(svgElement);
+            var renderingNode = WpfRendering.Create(svgElement);
             if (renderingNode == null)
             {
                 return;
@@ -312,7 +312,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private void RenderElementAs(SvgElement svgElement)
         {
-            WpfRenderingBase renderingNode = WpfRendering.Create(svgElement);
+            var renderingNode = WpfRendering.Create(svgElement);
             if (renderingNode == null)
             {
                 return;

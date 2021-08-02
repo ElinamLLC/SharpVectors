@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 
 namespace SharpVectors.Renderers.Gdi
@@ -324,7 +325,7 @@ namespace SharpVectors.Renderers.Gdi
                     renderer.Window = svgWindow;
 
                     SvgDocument doc = svgWindow.CreateEmptySvgDocument();
-                    bool isGZiped = sContent.StartsWith(GdiObject.GZipSignature, StringComparison.Ordinal);
+                    bool isGZiped = sContent.StartsWith(SvgConstants.GZipSignature, StringComparison.Ordinal);
                     if (isGZiped)
                     {
                         byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),

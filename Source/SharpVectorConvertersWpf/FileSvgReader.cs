@@ -895,8 +895,7 @@ namespace SharpVectors.Converters
                     File.Delete(zamlFileName);
                 }
 
-                FileStream zamlSourceFile = new FileStream(xamlFileName, 
-                    FileMode.Open, FileAccess.Read, FileShare.Read);
+                FileStream zamlSourceFile = new FileStream(xamlFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 byte[] buffer = new byte[zamlSourceFile.Length];
                 // Read the file to ensure it is readable.
                 int count = zamlSourceFile.Read(buffer, 0, buffer.Length);

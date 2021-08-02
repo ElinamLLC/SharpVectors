@@ -141,7 +141,64 @@ namespace SharpVectors.Dom.Svg
         public SvgGradientElement ReferencedElement
         {
             get {
-                return _uriReference.ReferencedNode as SvgGradientElement;
+                var gradientElem = _uriReference.ReferencedNode as SvgGradientElement;
+                if (gradientElem == this)
+                {
+                    return null; // prevent self-recursive 
+                }
+                if (gradientElem != null)
+                {
+                    var refUri = gradientElem._uriReference;
+                    string absoluteUri = refUri.AbsoluteUri;
+                    if (string.IsNullOrWhiteSpace(absoluteUri))
+                    {
+                        return gradientElem;
+                    }
+
+                    SvgGradientElement nextGradient = null;
+
+                    // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                    // We are supporting both options
+                    if (gradientElem.HasAttribute("href", SvgDocument.XLinkNamespace)
+                        || gradientElem.HasAttribute("href"))
+                    {
+                        XmlNode referencedNode = gradientElem.OwnerDocument.GetNodeByUri(absoluteUri);
+                        if (referencedNode == this)
+                        {
+                            return null; // prevent inter-element recursive 
+                        }
+
+                        nextGradient = referencedNode as SvgGradientElement;
+                    }
+                    
+                    while (nextGradient != null)
+                    {
+                        var targetElem = nextGradient;
+                        refUri = targetElem._uriReference;
+                        absoluteUri = refUri.AbsoluteUri;
+                        if (string.IsNullOrWhiteSpace(absoluteUri))
+                        {
+                            return gradientElem;
+                        }
+
+                        nextGradient = null;
+
+                        // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                        // We are supporting both options
+                        if (targetElem.HasAttribute("href", SvgDocument.XLinkNamespace)
+                            || targetElem.HasAttribute("href"))
+                        {
+                            XmlNode referencedNode = targetElem.OwnerDocument.GetNodeByUri(absoluteUri);
+                            if (referencedNode == this)
+                            {
+                                return null; // prevent inter-element recursive 
+                            }
+
+                            nextGradient = referencedNode as SvgGradientElement;
+                        }
+                    }
+                }
+                return gradientElem;
             }
         }
 

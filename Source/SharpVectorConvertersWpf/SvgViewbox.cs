@@ -14,9 +14,10 @@ using System.Windows.Markup;
 using System.Windows.Controls;
 using System.Windows.Resources;
 
-using SharpVectors.Runtime;
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Dom.Utils;
+using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
 using DpiScale     = SharpVectors.Runtime.DpiScale;
@@ -222,12 +223,32 @@ namespace SharpVectors.Converters
 
         #region Public Events
 
+        /// <summary>
+        /// This event occurs when an alert message needs to be displayed.
+        /// </summary>
+        /// <remarks>
+        /// <para>If this event is not handled, the control may display the alert message using the standard message dialog.</para>
+        /// <para>
+        /// If you do not want to display the alert messages, handle this event and set <see cref="SvgAlertArgs.Handled"/> 
+        /// property to <see langword="true"/>.
+        /// </para>
+        /// </remarks>
         public event EventHandler<SvgAlertArgs> Alert
         {
             add { _svgAlerts += value; }
             remove { _svgAlerts -= value; }
         }
 
+        /// <summary>
+        /// This event occurs when an error message needs to be displayed.
+        /// </summary>
+        /// <remarks>
+        /// <para>If this event is not handled, the control may display the error message using the standard message dialog.</para>
+        /// <para>
+        /// If you do not want to display the error messages, handle this event and set <see cref="SvgErrorArgs.Handled"/> 
+        /// property to <see langword="true"/>.
+        /// </para>
+        /// </remarks>
         public event EventHandler<SvgErrorArgs> Error
         {
             add { _svgErrors += value; }
@@ -238,6 +259,12 @@ namespace SharpVectors.Converters
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets the application title, which is used to display the alert and error messages not handled
+        /// by the user.
+        /// </summary>
+        /// <value>A string containg the application title. This cannot be <see langword="null"/> or empty. 
+        /// The default is <c>SharpVectors</c>.</value>
         [DefaultValue(DefaultTitle)]
         [Description("The title of the application, used in displaying error and alert messages.")]
         public string AppTitle
@@ -252,7 +279,7 @@ namespace SharpVectors.Converters
                 }
             }
         }
-
+        
         /// <summary>
         /// Gets or sets the path to the SVG file to load into this 
         /// <see cref="Viewbox"/>.
@@ -696,6 +723,12 @@ namespace SharpVectors.Converters
             set { SetValue(MessageStrokeBrushProperty, value); }
         }
 
+        /// <summary>
+        /// Gets or sets a value specifying the interactive mode, which controls the level of information attached
+        /// to the generated drawing.
+        /// </summary>
+        /// <value>An enumeration of the type <see cref="SvgInteractiveModes"/> specifying the interactive mode.
+        /// The default is <see cref="SvgInteractiveModes.None"/>; no interactivity and may change in the future.</value>
         public SvgInteractiveModes InteractiveMode
         {
             get {
@@ -1480,7 +1513,7 @@ namespace SharpVectors.Converters
                             string sContent = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
                             byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                                 0, sContent.Length);
-                            bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
+                            bool isGZiped = sContent.StartsWith(SvgConstants.GZipSignature, StringComparison.Ordinal);
                             if (isGZiped)
                             {
                                 using (var stream = new MemoryStream(imageBytes))

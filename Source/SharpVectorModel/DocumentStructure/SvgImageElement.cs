@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Xml;
 using System.Diagnostics;
@@ -169,19 +170,36 @@ namespace SharpVectors.Dom.Svg
                                 Trace.TraceError("Image file does not exist; " + svgUri.LocalPath);
                                 return null;
                             }
-                            Stream resStream = File.OpenRead(svgUri.LocalPath);
-                            doc.Load(absoluteUri, resStream);
+                            string fileExt = Path.GetExtension(svgUri.LocalPath);
+                            if (string.Equals(fileExt, SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase))
+                            {
+                                using (var fileStream = File.OpenRead(svgUri.LocalPath))
+                                {
+                                    using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                                    {
+                                        doc.Load(absoluteUri, zipStream);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                using (Stream resStream = File.OpenRead(svgUri.LocalPath))
+                                {
+                                    doc.Load(absoluteUri, resStream);
+                                }
+                            }
 
                             baseUrls.Add(svgUri.ToString());
                         }
                         else
                         {
-                            Stream resStream = _uriReference.ReferencedResource.GetResponseStream();
-                            doc.Load(absoluteUri, resStream);
+                            using (Stream resStream = _uriReference.ReferencedResource.GetResponseStream())
+                            {
+                                doc.Load(absoluteUri, resStream);
+                            }
 
                             baseUrls.Add(absoluteUri);
                         }
-
                         return wnd;
                     }
                 }

@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Collections.Generic;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
@@ -80,11 +81,12 @@ namespace SharpVectors.Converters
             string sMimeType  = sURI.Substring(nColon + 1, nSemiColon - nColon - 1);
 
             string sContent   = SvgObject.RemoveWhitespace(sURI.Substring(nComma + 1));
-            byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
-                0, sContent.Length);
-            bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
+            byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(), 0, sContent.Length);
+            bool isGZiped     = sContent.StartsWith(SvgConstants.GZipSignature, StringComparison.Ordinal);
+            bool isSvgOrXml   = sContent.StartsWith(SvgConstants.SvgSignature, StringComparison.Ordinal) 
+                || sContent.StartsWith(SvgConstants.XmlSignature, StringComparison.Ordinal);
 
-            if (string.Equals(sMimeType, "image/svg+xml", comparer))
+            if (string.Equals(sMimeType, "image/svg+xml", comparer) || isSvgOrXml)
             {
                 if (isGZiped)
                 {

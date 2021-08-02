@@ -7,8 +7,6 @@ namespace SharpVectors.Runtime
     {
         #region Public Fields
 
-        public const string GZipSignature = "H4sI";
-
         public const string LinksLayer    = "_SvgAnimationLayer";
         public const string DrawLayer     = "_SvgDrawingLayer";
 

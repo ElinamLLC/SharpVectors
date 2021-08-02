@@ -44,18 +44,20 @@ namespace SharpVectors.Renderers.Wpf
         private static FontFamily _genericSansSerif;
         private static FontFamily _genericMonospace;
 
+        private static FontFamily _genericCursive;
+        private static FontFamily _genericFantasy;
+
         private WpfVisitors _wpfVisitors;
 
         private ISet<string> _fontLocations;
         private IList<FontFamily> _fontFamilies;
         private IDictionary<string, string> _fontFamilyNames;
-        private IDictionary<string, FontFamily> _fontFamilyMap;
+        private IDictionary<string, IList<FontFamily>> _fontFamilyMap;
 
         private IDictionary<string, object> _properties;
-
         private IDictionary<string, string> _cssVariables;
 
-        private object _fontSynch = new object();
+        private object _fontSynch;
 
         private DpiScale _dpiScale;
 
@@ -93,7 +95,7 @@ namespace SharpVectors.Renderers.Wpf
             _fontSynch             = new object();
             _fontLocations         = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             _fontFamilyNames       = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            _fontFamilyMap         = new Dictionary<string, FontFamily>(StringComparer.OrdinalIgnoreCase);
+            _fontFamilyMap         = new Dictionary<string, IList<FontFamily>>(StringComparer.OrdinalIgnoreCase);
             _cssVariables          = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             _dpiScale              = DpiUtilities.GetSystemScale();
@@ -147,6 +149,11 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public object this[string name]
         {
             get {
@@ -179,6 +186,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public int PixelWidth
         {
             get {
@@ -189,6 +200,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public int PixelHeight
         {
             get {
@@ -199,6 +214,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public bool HasPixelSize
         {
             get {
@@ -206,6 +225,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public string UserCssFilePath
         {
             get {
@@ -216,6 +239,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public string UserAgentCssFilePath
         {
             get {
@@ -470,6 +497,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public WpfVisitors Visitors
         {
             get {
@@ -549,8 +580,8 @@ namespace SharpVectors.Renderers.Wpf
             get {
                 if (_genericSansSerif == null)
                 {
-                    // Possibilities: Tahoma, Arial, Verdana, Trebuchet, MS Sans Serif, Helvetica
-                    _genericSansSerif = new FontFamily("Tahoma");
+                    // Possibilities: Tahoma, Verdana, Arial, Trebuchet, MS Sans Serif, Helvetica
+                    _genericSansSerif = new FontFamily("Arial, Tohama");
                 }
 
                 return _genericSansSerif;
@@ -576,7 +607,7 @@ namespace SharpVectors.Renderers.Wpf
                 if (_genericMonospace == null)
                 {
                     // Possibilities: Courier New, MS Gothic
-                    _genericMonospace = new FontFamily("MS Gothic");
+                    _genericMonospace = new FontFamily("MS Gothic, Courier New");
                 }
 
                 return _genericMonospace;
@@ -589,6 +620,62 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// Gets or set the globally available generic cursive font family.
+        /// </summary>
+        /// <value>
+        /// An instance of <see cref="FontFamily"/> specifying the generic 
+        /// cursive font family. The default is <c>Comic Sans MS</c> font family.
+        /// </value>
+        public static FontFamily GenericCursive
+        {
+            get {
+                if (_genericCursive == null)
+                {
+                    // Possibilities: Comic Sans MS, Comic Sans
+                    _genericCursive = new FontFamily("Comic Sans MS, Comic Sans");
+                }
+
+                return _genericCursive;
+            }
+            set {
+                if (value != null)
+                {
+                    _genericCursive = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or set the globally available generic fantasy font family.
+        /// </summary>
+        /// <value>
+        /// An instance of <see cref="FontFamily"/> specifying the generic 
+        /// fantasy font family. The default is <c>Impact</c> font family.
+        /// </value>
+        public static FontFamily GenericFantasy
+        {
+            get {
+                if (_genericFantasy == null)
+                {
+                    // Possibilities: Impact
+                    _genericFantasy = new FontFamily("Impact");
+                }
+
+                return _genericFantasy;
+            }
+            set {
+                if (value != null)
+                {
+                    _genericFantasy = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public IEnumerable<string> FontLocations
         {
             get {
@@ -596,6 +683,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public IDictionary<string, string> FontFamilyNames
         {
             get {
@@ -603,6 +694,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public bool HasFontFamilies
         {
             get {
@@ -614,6 +709,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public IEnumerable<FontFamily> FontFamilies
         {
             get {
@@ -625,6 +724,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public SvgInteractiveModes InteractiveMode
         {
             get {
@@ -635,6 +738,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public DpiScale DpiScale
         {
             get {
@@ -652,6 +759,11 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Public Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mappedName"></param>
+        /// <param name="fontName"></param>
         public void AddFontFamilyName(string mappedName, string fontName)
         {
             lock(_fontSynch)
@@ -671,6 +783,10 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fontLocation"></param>
         public void AddFontLocation(string fontLocation)
         {
             lock(_fontSynch)
@@ -710,7 +826,12 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public FontFamily LookupFontFamily(string fontName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fontName"></param>
+        /// <returns></returns>
+        public FontFamily LookupFontFamily(string fontName, FontWeight weight, FontStyle style, FontStretch stretch)
         {
             lock (_fontSynch)
             {
@@ -726,7 +847,7 @@ namespace SharpVectors.Renderers.Wpf
 
                 if (_fontFamilyMap.ContainsKey(fontName))
                 {
-                    return _fontFamilyMap[fontName];
+                    return GetMatchingFontFamily(_fontFamilyMap[fontName], weight, style, stretch);
                 }
                 if (_fontFamilyNames != null && _fontFamilyNames.Count != 0)
                 {
@@ -736,7 +857,7 @@ namespace SharpVectors.Renderers.Wpf
 
                         if (_fontFamilyMap.ContainsKey(internalName))
                         {
-                            return _fontFamilyMap[internalName];
+                            return GetMatchingFontFamily(_fontFamilyMap[internalName], weight, style, stretch);
                         }
                     }
                 }
@@ -747,7 +868,7 @@ namespace SharpVectors.Renderers.Wpf
                     normalizedName = fontName.Replace("-", " ");
                     if (_fontFamilyMap.ContainsKey(normalizedName))
                     {
-                        return _fontFamilyMap[normalizedName];
+                        return GetMatchingFontFamily(_fontFamilyMap[normalizedName], weight, style, stretch);
                     }
                 }
 
@@ -756,12 +877,156 @@ namespace SharpVectors.Renderers.Wpf
                     normalizedName = fontName.Replace("-", " ");
                     if (_fontFamilyMap.ContainsKey(normalizedName))
                     {
-                        return _fontFamilyMap[normalizedName];
+                        return GetMatchingFontFamily(_fontFamilyMap[normalizedName], weight, style, stretch);
                     }
                 }
 
                 return null;
             }
+        }
+
+        private FontFamily GetMatchingFontFamily(IList<FontFamily> fontFamilies,
+            FontWeight weight, FontStyle style, FontStretch stretch)
+        {
+            if (fontFamilies == null || fontFamilies.Count == 0)
+            {
+                return null;
+            }
+            // For a single match...
+            if (fontFamilies.Count == 1)
+            {
+                return fontFamilies[0];
+            }
+
+            // 1. Look for a possibility of all properties matching
+            foreach (FontFamily fontFamily in fontFamilies)
+            {
+                // Return the family typeface collection for the font family.
+                FamilyTypefaceCollection familyTypefaces = fontFamily.FamilyTypefaces;
+
+                // Enumerate the family typefaces in the collection.
+                foreach (FamilyTypeface typeface in familyTypefaces)
+                {
+                    FontStyle fontStyle     = typeface.Style;
+                    FontWeight fontWeight   = typeface.Weight;
+                    FontStretch fontStretch = typeface.Stretch;
+
+                    if (fontStyle.Equals(style) && fontWeight.Equals(weight) && fontStretch.Equals(stretch))
+                    {
+                        return fontFamily;
+                    }
+                }
+            }
+
+            // For the defined font style...
+            if (style != FontStyles.Normal)
+            {
+                // Then it is either oblique or italic
+                FontFamily closeFamily   = null;
+                FontFamily closestFamily = null;
+                bool isItalic            = style.Equals(FontStyles.Italic);
+
+                foreach (FontFamily fontFamily in fontFamilies)
+                {
+                    // Return the family typeface collection for the font family.
+                    FamilyTypefaceCollection familyTypefaces = fontFamily.FamilyTypefaces;
+
+                    // Enumerate the family typefaces in the collection.
+                    foreach (FamilyTypeface typeface in familyTypefaces)
+                    {
+                        FontStyle fontStyle     = typeface.Style;
+                        FontWeight fontWeight   = typeface.Weight;
+                        FontStretch fontStretch = typeface.Stretch;
+
+                        if (fontStyle.Equals(style))
+                        {
+                            closeFamily = fontFamily;
+                            if (closestFamily == null)
+                            {
+                                closestFamily = fontFamily;
+                            }
+                            if (fontStretch.Equals(stretch))
+                            {
+                                closestFamily = fontFamily;
+                                if (fontWeight.Equals(weight))
+                                {
+                                    return fontFamily;
+                                }
+                            }
+                        }
+                        if (closeFamily == null)
+                        {
+                            if (isItalic && fontStyle == FontStyles.Oblique)
+                            {
+                                closeFamily = fontFamily;
+                            }
+                            if (!isItalic && fontStyle == FontStyles.Italic)
+                            {
+                                closeFamily = fontFamily;
+                            }
+                        }
+                    }
+                    if (closestFamily != null)
+                    {
+                        closeFamily = closestFamily;
+                    }
+
+                    if (closeFamily != null)
+                    {
+                        return closeFamily;
+                    }
+                }
+            }
+
+            // For the defined font weights...
+            if (weight != FontWeights.Normal && weight != FontWeights.Regular)
+            {
+                int weightValue             = weight.ToOpenTypeWeight();
+                int selectedValue           = int.MaxValue;
+                FontFamily sameWeightFamily = null;
+                FontFamily closestFamily    = null;
+                foreach (FontFamily fontFamily in fontFamilies)
+                {
+                    // Return the family typeface collection for the font family.
+                    FamilyTypefaceCollection familyTypefaces = fontFamily.FamilyTypefaces;
+
+                    // Enumerate the family typefaces in the collection.
+                    foreach (FamilyTypeface typeface in familyTypefaces)
+                    {
+                        FontStyle fontStyle     = typeface.Style;
+                        FontWeight fontWeight   = typeface.Weight;
+                        FontStretch fontStretch = typeface.Stretch;
+
+                        if (fontWeight.Equals(weight))
+                        {
+                            sameWeightFamily = fontFamily;
+                            if (fontStyle.Equals(style))
+                            {
+                                return fontFamily;
+                            }
+                        }
+
+                        int weightDiff = Math.Abs(weightValue - fontWeight.ToOpenTypeWeight());
+                        if (weightDiff < selectedValue)
+                        {
+                            closestFamily = fontFamily;
+                            selectedValue = weightDiff;
+                        }
+
+                        // If the weights matched, but not the style
+                        if (sameWeightFamily != null)
+                        {
+                            return sameWeightFamily;
+                        }
+                        if (closestFamily != null)
+                        {
+                            return closestFamily;
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
         #endregion
@@ -839,7 +1104,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             if (_fontFamilyMap == null)
             {
-                _fontFamilyMap = new Dictionary<string, FontFamily>(StringComparer.OrdinalIgnoreCase);
+                _fontFamilyMap = new Dictionary<string, IList<FontFamily>>(StringComparer.OrdinalIgnoreCase);
             }
             if (_fontFamilyMap.Count != 0)
             {
@@ -852,6 +1117,8 @@ namespace SharpVectors.Renderers.Wpf
 
             foreach (var fontFamily in _fontFamilies)
             {
+                IList<FontFamily> fontFamilies = null;
+
                 var fontName = fontFamily.Source;
                 var hashIndex = fontName.IndexOf('#');
                 if (hashIndex > 0)
@@ -862,8 +1129,14 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     if (!_fontFamilyMap.ContainsKey(fontName))
                     {
-                        _fontFamilyMap.Add(fontName, fontFamily);
+                        fontFamilies = new List<FontFamily>();
+                        _fontFamilyMap.Add(fontName, fontFamilies);
                     }
+                    else
+                    {
+                        fontFamilies = _fontFamilyMap[fontName];
+                    }
+                    fontFamilies.Add(fontFamily);
                 }
 
                 var fontNames = fontFamily.FamilyNames;
@@ -873,8 +1146,14 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         if (!_fontFamilyMap.ContainsKey(value))
                         {
-                            _fontFamilyMap.Add(value, fontFamily);
+                            fontFamilies = new List<FontFamily>();
+                            _fontFamilyMap.Add(value, fontFamilies);
                         }
+                        else
+                        {
+                            fontFamilies = _fontFamilyMap[fontName];
+                        }
+                        fontFamilies.Add(fontFamily);
                     }
                 }
             }

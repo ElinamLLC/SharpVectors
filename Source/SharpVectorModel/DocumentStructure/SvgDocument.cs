@@ -312,6 +312,11 @@ namespace SharpVectors.Dom.Svg
 
         #region Type handling and creation of elements
 
+        public static bool IsGZipped(Stream stream)
+        {
+            return SvgConstants.GZipMagic == (stream.ReadByte() & 0xff | ((stream.ReadByte() << 8) & 0xff00));
+        }
+
         public override XmlElement CreateElement(string prefix, string localName, string ns)
         {
             XmlElement result = SvgElementFactory.Create(prefix, localName, ns, this);
@@ -410,10 +415,10 @@ namespace SharpVectors.Dom.Svg
         {
             // Provide a support for the .svgz files...
             UriBuilder fileUrl = new UriBuilder(filename);
-            if (string.Equals(fileUrl.Scheme, "file"))
+            if (string.Equals(fileUrl.Scheme, "file", StringComparison.OrdinalIgnoreCase))
             {
                 string fileExt = Path.GetExtension(filename);
-                if (string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(fileExt, SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase))
                 {
                     using (FileStream fileStream = File.OpenRead(fileUrl.Uri.LocalPath))
                     {
@@ -448,9 +453,34 @@ namespace SharpVectors.Dom.Svg
         {
             _baseURI = baseUrl == null ? string.Empty : baseUrl;
 
-            using (XmlReader reader = CreateValidatingXmlReader(baseUrl, stream))
+            if (stream.CanSeek && stream.Position == 0)
             {
-                this.Load(reader);
+                if (IsGZipped(stream))
+                {
+                    stream.Position = 0;
+                    using (GZipStream zipStream = new GZipStream(stream, CompressionMode.Decompress, true))
+                    {
+                        using (XmlReader reader = CreateValidatingXmlReader(baseUrl, zipStream))
+                        {
+                            this.Load(reader);
+                        }
+                    }
+                }
+                else
+                {
+                    stream.Position = 0;
+                    using (XmlReader reader = CreateValidatingXmlReader(baseUrl, stream))
+                    {
+                        this.Load(reader);
+                    }
+                }
+            } 
+            else
+            {
+                using (XmlReader reader = CreateValidatingXmlReader(baseUrl, stream))
+                {
+                    this.Load(reader);
+                }
             }
         }
 
@@ -475,9 +505,34 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public override void Load(Stream inStream)
         {
-            using (XmlReader reader = CreateValidatingXmlReader(string.Empty, inStream))
+            if (inStream.CanSeek && inStream.Position == 0)
             {
-                this.Load(reader);
+                if (IsGZipped(inStream))
+                {
+                    inStream.Position = 0;
+                    using (GZipStream zipStream = new GZipStream(inStream, CompressionMode.Decompress, true))
+                    {
+                        using (XmlReader reader = CreateValidatingXmlReader(string.Empty, zipStream))
+                        {
+                            this.Load(reader);
+                        }
+                    }
+                }
+                else
+                {
+                    inStream.Position = 0;
+                    using (XmlReader reader = CreateValidatingXmlReader(string.Empty, inStream))
+                    {
+                        this.Load(reader);
+                    }
+                }
+            }
+            else
+            {
+                using (XmlReader reader = CreateValidatingXmlReader(string.Empty, inStream))
+                {
+                    this.Load(reader);
+                }
             }
         }
 

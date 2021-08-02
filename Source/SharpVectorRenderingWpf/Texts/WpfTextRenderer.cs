@@ -659,8 +659,6 @@ namespace SharpVectors.Renderers.Texts
                 svgFontNames = new List<string>();
             }
             var wpfSettings = _context.Settings;
-            var fontFamilyNames = wpfSettings.FontFamilyNames;
-            var privateFontFamilies = wpfSettings.HasFontFamilies;
 
             var docFontFamilies = docElement.FontFamilies;
             if (docFontFamilies != null && docFontFamilies.Count != 0)
@@ -674,6 +672,8 @@ namespace SharpVectors.Renderers.Texts
                     }
                 }
             }
+            var fontFamilyNames     = wpfSettings.FontFamilyNames;
+            var privateFontFamilies = wpfSettings.HasFontFamilies;
 
             FontFamily selectedFamily = null;
             // using separate pointer to give less priority to generic font names
@@ -717,6 +717,14 @@ namespace SharpVectors.Renderers.Texts
                     {
                         genericFamily = WpfDrawingSettings.GenericMonospace;
                     }
+                    else if (string.Equals(fontName, "cursive", comparer))
+                    {
+                        genericFamily = WpfDrawingSettings.GenericCursive;
+                    }
+                    else if (string.Equals(fontName, "fantasy", comparer))
+                    {
+                        genericFamily = WpfDrawingSettings.GenericFantasy;
+                    }
                     else if (styledFontIds.ContainsKey(fontName))
                     {
                         string mappedFontName = styledFontIds[fontName];
@@ -740,7 +748,7 @@ namespace SharpVectors.Renderers.Texts
                         // If not found, look through private fonts if available..
                         if (selectedFamily == null && privateFontFamilies)
                         {
-                            selectedFamily = wpfSettings.LookupFontFamily(fontName);
+                            selectedFamily = wpfSettings.LookupFontFamily(fontName, fontWeight, fontStyle, fontStretch);
                             if (selectedFamily != null)
                             {
                                 _actualFontName = fontName;
@@ -1026,13 +1034,21 @@ namespace SharpVectors.Renderers.Texts
                     {
                         family = WpfDrawingSettings.GenericSerif;
                     }
-                    else if (string.Equals(fontName, "sans-serif", comparer))
+                    else if (string.Equals(fontName, "sans-serif", comparer) || string.Equals(fontName, "sansserif", comparer))
                     {
                         family = WpfDrawingSettings.GenericSansSerif;
                     }
                     else if (string.Equals(fontName, "monospace", comparer))
                     {
                         family = WpfDrawingSettings.GenericMonospace;
+                    }
+                    else if (string.Equals(fontName, "cursive", comparer))
+                    {
+                        family = WpfDrawingSettings.GenericCursive;
+                    }
+                    else if (string.Equals(fontName, "fantasy", comparer))
+                    {
+                        family = WpfDrawingSettings.GenericFantasy;
                     }
                     else
                     {

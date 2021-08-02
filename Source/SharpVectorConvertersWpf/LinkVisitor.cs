@@ -7,7 +7,7 @@ using System.Windows.Media;
 using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
-using SharpVectors.Renderers.Wpf;  
+using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Converters
 {
@@ -15,8 +15,8 @@ namespace SharpVectors.Converters
     {
         #region Private Fields
 
-        private bool                _isAggregated;
-        private GeometryCollection  _aggregatedGeom;
+        private bool _isAggregated;
+        private GeometryCollection _aggregatedGeom;
 
         private SvgStyleableElement _aggregatedFill;
 
@@ -37,24 +37,21 @@ namespace SharpVectors.Converters
 
         public override bool Aggregates
         {
-            get
-            {
+            get {
                 return true;
             }
         }
 
         public override bool IsAggregate
         {
-            get
-            {
+            get {
                 return _isAggregated;
             }
         }
 
         public override string AggregatedLayerName
         {
-            get
-            {
+            get {
                 return SvgObject.LinksLayer;
             }
         }
@@ -86,8 +83,7 @@ namespace SharpVectors.Converters
             }
         }
 
-        public override void Visit(DrawingGroup group, SvgAElement element,
-            WpfDrawingContext context, float opacity)
+        public override void Visit(DrawingGroup group, SvgAElement element, WpfDrawingContext context, float opacity)
         {
             _isAggregated = false;
 
@@ -116,7 +112,7 @@ namespace SharpVectors.Converters
             if (string.IsNullOrWhiteSpace(linkAction))
             {
                 linkAction = element.GetAttribute("onmouseover");
-                if (!string.IsNullOrWhiteSpace(linkAction) && 
+                if (!string.IsNullOrWhiteSpace(linkAction) &&
                     linkAction.StartsWith("parent.svgMouseOverName", StringComparison.OrdinalIgnoreCase))
                 {
                     SvgLink.SetAction(group, SvgLinkAction.LinkTooltip);
@@ -143,7 +139,7 @@ namespace SharpVectors.Converters
             }
 
             if (!string.IsNullOrWhiteSpace(linkAction))
-            {   
+            {
                 if (linkAction.IndexOf("'Top'", StringComparison.OrdinalIgnoreCase) > 0)
                 {
                     SvgLink.SetLocation(group, "Top");
@@ -170,7 +166,7 @@ namespace SharpVectors.Converters
                 {
                     GeometryGroup geomGroup = new GeometryGroup();
                     geomGroup.FillRule = FillRule.Nonzero;
-                    
+
                     for (int i = 0; i < _aggregatedGeom.Count; i++)
                     {
                         geomGroup.Children.Add(_aggregatedGeom[i]);
@@ -186,7 +182,7 @@ namespace SharpVectors.Converters
 
                 GeometryDrawing drawing = new GeometryDrawing(brush, null, drawGeometry);
 
-                group.Children.Add(drawing);                
+                group.Children.Add(drawing);
             }
 
             _dicLinks.Add(linkId, _isAggregated);

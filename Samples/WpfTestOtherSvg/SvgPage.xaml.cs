@@ -111,8 +111,7 @@ namespace WpfTestOtherSvg
             {
                 using (FileStream fileStream = File.OpenRead(documentFileName))
                 {
-                    using (GZipStream zipStream =
-                        new GZipStream(fileStream, CompressionMode.Decompress))
+                    using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
                     {
                         // Text Editor does not work with this stream, so we read the data to memory stream...
                         MemoryStream memoryStream = new MemoryStream();

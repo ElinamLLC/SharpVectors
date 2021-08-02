@@ -230,6 +230,10 @@ namespace SharpVectors.Renderers.Wpf
         public WpfLinkVisitor LinkVisitor
         {
             get {
+                if (_interactiveMode == SvgInteractiveModes.None)
+                {
+                    return null;
+                }
                 return _linkVisitor;
             }
             set {

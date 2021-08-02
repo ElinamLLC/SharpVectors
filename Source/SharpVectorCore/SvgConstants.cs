@@ -10,12 +10,17 @@ namespace SharpVectors.Dom
         // ---------------------------------------------------------------------
         // SVG general
         // ---------------------------------------------------------------------
-        public const string FileExt      = ".svg";
-        public const string FileExtZ     = ".svgz";
-        public const string PublicId     = "-//W3C//DTD SVG 1.0//EN";
-        public const string SystemId     = "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd";
-        public const string NamespaceUri = "http://www.w3.org/2000/svg";
-        public const string Version      = "1.1";
+        public const string FileExt       = ".svg";
+        public const string FileExtZ      = ".svgz";
+        public const string PublicId      = "-//W3C//DTD SVG 1.0//EN";
+        public const string SystemId      = "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd";
+        public const string NamespaceUri  = "http://www.w3.org/2000/svg";
+        public const string Version       = "1.1";
+        public const int GZipMagic        = 35615;
+
+        public const string GZipSignature = "H4sI";
+        public const string SvgSignature  = "PHN2Zy";
+        public const string XmlSignature  = "PD94bW";
 
         // ---------------------------------------------------------------------
         // Events type and attributes

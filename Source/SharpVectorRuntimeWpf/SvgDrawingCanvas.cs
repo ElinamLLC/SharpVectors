@@ -124,6 +124,12 @@ namespace SharpVectors.Runtime
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets the application title, which is used to display the alert and error messages not handled
+        /// by the user.
+        /// </summary>
+        /// <value>A string containg the application title. This cannot be <see langword="null"/> or empty. 
+        /// The default is <c>SharpVectors</c>.</value>
         [DefaultValue(DefaultTitle)]
         [Description("The title of the application, used in displaying error and alert messages.")]
         public string AppTitle
@@ -200,6 +206,12 @@ namespace SharpVectors.Runtime
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value specifying the interactive mode, which controls the level of information attached
+        /// to the generated drawing.
+        /// </summary>
+        /// <value>An enumeration of the type <see cref="SvgInteractiveModes"/> specifying the interactive mode.
+        /// The default is <see cref="SvgInteractiveModes.None"/>; no interactivity and may change in the future.</value>
         public SvgInteractiveModes InteractiveMode 
         {
             get {

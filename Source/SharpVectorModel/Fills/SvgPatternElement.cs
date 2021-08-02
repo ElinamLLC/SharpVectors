@@ -245,7 +245,65 @@ namespace SharpVectors.Dom.Svg
         public SvgPatternElement ReferencedElement
         {
             get {
-                return _uriReference.ReferencedNode as SvgPatternElement;
+                var patternElem = _uriReference.ReferencedNode as SvgPatternElement;
+                if (patternElem == this)
+                {
+                    return null; // prevent self-recursive 
+                }
+                if (patternElem != null)
+                {
+                    var refUri = patternElem._uriReference;
+                    string absoluteUri = refUri.AbsoluteUri;
+                    if (string.IsNullOrWhiteSpace(absoluteUri))
+                    {
+                        return patternElem;
+                    }
+
+                    SvgPatternElement nextPattern = null;
+
+                    // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                    // We are supporting both options
+                    if (patternElem.HasAttribute("href", SvgDocument.XLinkNamespace)
+                        || patternElem.HasAttribute("href"))
+                    {
+                        XmlNode referencedNode = patternElem.OwnerDocument.GetNodeByUri(absoluteUri);
+                        if (referencedNode == this)
+                        {
+                            return null; // prevent inter-element recursive 
+                        }
+
+                        nextPattern = referencedNode as SvgPatternElement;
+                    }
+
+                    while (nextPattern != null)
+                    {
+                        var targetElem = nextPattern;
+                        refUri = targetElem._uriReference;
+                        absoluteUri = refUri.AbsoluteUri;
+                        if (string.IsNullOrWhiteSpace(absoluteUri))
+                        {
+                            return patternElem;
+                        }
+
+                        nextPattern = null;
+
+                        // Since SVG 2, the xlink:href attribute is deprecated in favor of simply href. 
+                        // We are supporting both options
+                        if (targetElem.HasAttribute("href", SvgDocument.XLinkNamespace)
+                            || targetElem.HasAttribute("href"))
+                        {
+                            XmlNode referencedNode = targetElem.OwnerDocument.GetNodeByUri(absoluteUri);
+                            if (referencedNode == this)
+                            {
+                                return null; // prevent inter-element recursive 
+                            }
+
+                            nextPattern = referencedNode as SvgPatternElement;
+                        }
+                    }
+                }
+
+                return patternElem;
             }
         }
 

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfTestOtherSvg"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="800" Background="White" Title="SettingsPage">
+      d:DesignHeight="1100" d:DesignWidth="800" Background="White" Title="SettingsPage">
     <Page.Resources>
         <Style TargetType="GroupBox">
             <Setter Property="BorderBrush" Value="DarkGray"/>
@@ -19,148 +19,188 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,-51">
-        <DockPanel LastChildFill="True" Margin="10 10 10 10">
-            <GroupBox Header="General Settings" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
-                <StackPanel Orientation="Vertical" Margin="15 6 6 3">
-                    <CheckBox x:Name="chkHidePathsRoot" Click="OnGeneralSettingsChanged">
-                        <TextBlock Text="Hide Path Roots" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
-                        Security feature, which is only useful in screenshot to be posted on the web.
-                    </TextBlock>
-                    <CheckBox x:Name="chkRecursiveSearch" Click="OnGeneralSettingsChanged">
-                        <TextBlock Text="Recursive Directory Search" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
-                        Indicates whether to search the selected directory recursively.
-                    </TextBlock>
-                    <CheckBox x:Name="chkShowInputFile" Click="OnGeneralSettingsChanged">
-                        <TextBlock Text="Show Input File" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
-                        Indicates whether to show the input SVG file tab.
-                    </TextBlock>
-                    <CheckBox x:Name="chkShowOutputFile" Click="OnGeneralSettingsChanged">
-                        <TextBlock Text="Show Output File" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
-                        Indicates whether to show the output XAML file tab.
-                    </TextBlock>
-                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
-                        <TextBlock x:Name="lblSvgPathDefault" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                                   Margin="3">SVG Directory:</TextBlock>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                            <Button x:Name="btnSvgBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
-                                    Click="OnBrowseSvgDirectory" Style="{StaticResource MetroButton}"/>
-                            <Button x:Name="btnSvgOpen" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="3" Content="Open..." 
-                                        Click="OnOpenSvgDirectory" Style="{StaticResource MetroButton}"/>
-                        </StackPanel>
-                        <TextBox Name="txtSvgDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" TextChanged="OnSvgPathTextChanged"/>
-                    </DockPanel>
-                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
-                        <TextBlock x:Name="lblSvgPath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                                   Margin="3">PNG Directory:</TextBlock>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                            <Button x:Name="btnPngBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
-                                    Click="OnBrowsePngDirectory" Style="{StaticResource MetroButton}"/>
-                            <Button x:Name="btnPngOpen" HorizontalAlignment="Right" Margin="3" Content="Open..." 
-                                    Click="OnOpenPngDirectory" Style="{StaticResource MetroButton}"/>
-                        </StackPanel>
-                        <TextBox x:Name="txtPngDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" TextChanged="OnPngPathTextChanged" />
-                    </DockPanel>
-                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
-                        <TextBlock x:Name="lblFontPath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                                   Margin="3">Fonts Directory:</TextBlock>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                            <Button x:Name="btnFontBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
-                                    Click="OnBrowseFontDirectory" Style="{StaticResource MetroButton}"/>
-                            <Button x:Name="btnFontOpen" HorizontalAlignment="Right" Margin="3" Content="Open..." 
-                                    Click="OnOpenFontDirectory" Style="{StaticResource MetroButton}"/>
-                        </StackPanel>
-                        <TextBox x:Name="txtFontDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" TextChanged="OnPngPathTextChanged" />
-                    </DockPanel>
-                    <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
-                        <TextBlock x:Name="lblImagePath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
-                                   Margin="3">Images Directory:</TextBlock>
-                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                            <Button x:Name="btnImageBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
-                                    Click="OnBrowseImageDirectory" Style="{StaticResource MetroButton}"/>
-                            <Button x:Name="btnImageOpen" HorizontalAlignment="Right" Margin="3" Content="Open..." 
-                                    Click="OnOpenImageDirectory" Style="{StaticResource MetroButton}"/>
-                        </StackPanel>
-                        <TextBox x:Name="txtImageDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" TextChanged="OnPngPathTextChanged" />
-                    </DockPanel>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Conversion Settings" HorizontalAlignment="Stretch">
-                <StackPanel Orientation="Vertical" Margin="15 6 6 3">
-                    <CheckBox x:Name="chkTextAsGeometry" Click="OnSettingsChanged">
-                        <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
-                        <Run>All SVG text elements will be converted to paths.</Run>                    
-                        <LineBreak/>
-                        <Bold>NOTE:&#160;</Bold>
-                        <Run>      
-                            Depending on the styling (eg. text with both stroke and fill), the text may still be converted to paths.
-                            Also, text on paths are converted to path geometries.
-                        </Run>
-                    </TextBlock>
-                    <CheckBox x:Name="chkIncludeRuntime" Click="OnSettingsChanged">
-                        <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
-                        <Run>Select this if you want to link to the SharpVectors Runtime library.</Run>
-                        <LineBreak/>
-                        <Bold>NOTE:&#160;</Bold>
-                        <Run>      
-                            If this option is not selected, then select the option to render
-                            text as geometric paths; otherwise, font locations may not be resolved
-                            properly on the end-user system.
-                        </Run>
-                    </TextBlock>
-
-                    <CheckBox x:Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
-                        <TextBlock Text="Ignore SVG Root Viewbox" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 3">
-                        Indicates turning off viewbox at the root of the drawing.
-                    </TextBlock>
-                    <CheckBox x:Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
-                        <TextBlock Text="Ensure Viewbox Size" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 3">
-                        Indicate preserving the original viewbox size when saving images.
-                    </TextBlock>
-                    <CheckBox x:Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
-                        <TextBlock Text="Ensure Viewbox Position" FontWeight="Bold"/>
-                    </CheckBox>
-                    <TextBlock Padding="32 3 3 20">
-                        Indicate applying a translate transform to the viewbox to ensure it is visible when rendered.
-                    </TextBlock>
-
-                    <GroupBox Header="Pixel Size" Visibility="Collapsed">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <Label>Width</Label>
-                                <TextBox x:Name="pixelWidth" Width="100"></TextBox>                            
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="False">        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+            <StackPanel Orientation="Vertical" Margin="10 10 10 10">
+                <GroupBox Header="General Settings" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                    <StackPanel Orientation="Vertical" Margin="15 6 6 3">
+                        <CheckBox x:Name="chkHidePathsRoot" Click="OnGeneralSettingsChanged">
+                            <TextBlock Text="Hide Path Roots" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
+                            Security feature, which is only useful in screenshot to be posted on the web.
+                        </TextBlock>
+                        <CheckBox x:Name="chkRecursiveSearch" Click="OnGeneralSettingsChanged">
+                            <TextBlock Text="Recursive Directory Search" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
+                            Indicates whether to search the selected directory recursively.
+                        </TextBlock>
+                        <CheckBox x:Name="chkShowInputFile" Click="OnGeneralSettingsChanged">
+                            <TextBlock Text="Show Input File" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
+                            Indicates whether to show the input SVG file tab.
+                        </TextBlock>
+                        <CheckBox x:Name="chkShowOutputFile" Click="OnGeneralSettingsChanged">
+                            <TextBlock Text="Show Output File" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 3" TextWrapping="Wrap">
+                            Indicates whether to show the output XAML file tab.
+                        </TextBlock>
+                        <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock x:Name="lblSvgPathDefault" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                       Margin="3">SVG Directory:</TextBlock>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                <Button x:Name="btnSvgBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                        Click="OnBrowseSvgDirectory" Style="{StaticResource MetroButton}"/>
+                                <Button x:Name="btnSvgOpen" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                            Click="OnOpenSvgDirectory" Style="{StaticResource MetroButton}" IsEnabled="False"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">                            
-                                <Label Width="150" HorizontalContentAlignment="Right">Height</Label>
-                                <TextBox x:Name="pixelHeight" Width="100"></TextBox>                            
+                            <TextBox Name="txtSvgDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" IsReadOnly="True" TextChanged="OnSvgPathTextChanged"/>
+                        </DockPanel>
+                        <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock x:Name="lblSvgPath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                       Margin="3">PNG Directory:</TextBlock>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                <Button x:Name="btnPngBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                        Click="OnBrowsePngDirectory" Style="{StaticResource MetroButton}"/>
+                                <Button x:Name="btnPngOpen" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                        Click="OnOpenPngDirectory" Style="{StaticResource MetroButton}" IsEnabled="False"/>
                             </StackPanel>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>            
-            </GroupBox>
-        </DockPanel>
+                            <TextBox x:Name="txtPngDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" IsReadOnly="True" TextChanged="OnPngPathTextChanged" />
+                        </DockPanel>
+                        <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock x:Name="lblFontPath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                       Margin="3">Fonts Directory:</TextBlock>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                <Button x:Name="btnFontBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                        Click="OnBrowseFontDirectory" Style="{StaticResource MetroButton}"/>
+                                <Button x:Name="btnFontOpen" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                        Click="OnOpenFontDirectory" Style="{StaticResource MetroButton}" IsEnabled="False"/>
+                            </StackPanel>
+                            <TextBox x:Name="txtFontDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" IsReadOnly="True" TextChanged="OnPngPathTextChanged" />
+                        </DockPanel>
+                        <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock x:Name="lblImagePath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                       Margin="3">Images Directory:</TextBlock>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                <Button x:Name="btnImageBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                        Click="OnBrowseImageDirectory" Style="{StaticResource MetroButton}"/>
+                                <Button x:Name="btnImageOpen" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                        Click="OnOpenImageDirectory" Style="{StaticResource MetroButton}" IsEnabled="False"/>
+                            </StackPanel>
+                            <TextBox x:Name="txtImageDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" IsReadOnly="True" TextChanged="OnPngPathTextChanged" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Tools Settings" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Margin="15 6 6 3">
+                        <TextBlock Padding="6 3 3 3" TextWrapping="Wrap" FontWeight="Bold" HorizontalAlignment="Center">
+                            <Run>Most test tools used by this test application are automatically detected, and two are downloaded (Batik and Resvg).</Run>
+                            <LineBreak/>
+                            <Run>Rsvg, however must be manually installed by the user as there is no known and up to date packaging for Windows.</Run>
+                            <LineBreak/>
+                            <Run>Rsvg is built into Image-Magick, and installed versions of Image-Magick will be automatically detected by the application.</Run>
+                            <LineBreak/>
+                            <Run>Use the options below to specify the path of portable version of Image-Magick, Rsvg or installed version of Rsvg.</Run>
+                        </TextBlock>
+                        <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock x:Name="lblMagick" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                           Margin="3">Magick Directory:</TextBlock>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                <Button x:Name="btnMagickBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                            Click="OnBrowseMagickDirectory" Style="{StaticResource MetroButton}"/>
+                                <Button x:Name="btnMagickOpen" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                                Click="OnOpenMagickDirectory" Style="{StaticResource MetroButton}" IsEnabled="False"/>
+                            </StackPanel>
+                            <TextBox Name="txtMagickDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" IsReadOnly="True" TextChanged="OnMagickPathTextChanged"/>
+                        </DockPanel>
 
-        <TextBlock Padding="32 10 32 10" TextWrapping="Wrap" FontSize="14" TextAlignment="Center">
-            <Bold>NOTE:&#160;</Bold>
-            <Run>      
-                Changes are automatically applied if you switch to any other tab.
-            </Run>
-        </TextBlock>
-    </StackPanel>
+                        <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                            <TextBlock x:Name="lblRsvg" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                                           Margin="3">Rsvg Directory:</TextBlock>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                                <Button x:Name="btnRsvgBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                            Click="OnBrowseRsvgDirectory" Style="{StaticResource MetroButton}"/>
+                                <Button x:Name="btnRsvgOpen" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                                Click="OnOpenRsvgDirectory" Style="{StaticResource MetroButton}" IsEnabled="False"/>
+                            </StackPanel>
+                            <TextBox Name="txtRsvgDirectory" HorizontalAlignment="Stretch" Margin="30 3 3 3" VerticalContentAlignment="Center" IsReadOnly="True" TextChanged="OnRsvgPathTextChanged"/>
+                        </DockPanel>                    
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Conversion Settings" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical" Margin="15 6 6 3">
+                        <CheckBox x:Name="chkTextAsGeometry" Click="OnSettingsChanged">
+                            <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                            <Run>All SVG text elements will be converted to paths.</Run>                    
+                            <LineBreak/>
+                            <Bold>NOTE:&#160;</Bold>
+                            <Run>      
+                                Depending on the styling (eg. text with both stroke and fill), the text may still be converted to paths.
+                                Also, text on paths are converted to path geometries.
+                            </Run>
+                        </TextBlock>
+                        <CheckBox x:Name="chkIncludeRuntime" Click="OnSettingsChanged">
+                            <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                            <Run>Select this if you want to link to the SharpVectors Runtime library.</Run>
+                            <LineBreak/>
+                            <Bold>NOTE:&#160;</Bold>
+                            <Run>      
+                                If this option is not selected, then select the option to render
+                                text as geometric paths; otherwise, font locations may not be resolved
+                                properly on the end-user system.
+                            </Run>
+                        </TextBlock>
+
+                        <CheckBox x:Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
+                            <TextBlock Text="Ignore SVG Root Viewbox" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 3">
+                            Indicates turning off viewbox at the root of the drawing.
+                        </TextBlock>
+                        <CheckBox x:Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
+                            <TextBlock Text="Ensure Viewbox Size" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 3">
+                            Indicate preserving the original viewbox size when saving images.
+                        </TextBlock>
+                        <CheckBox x:Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
+                            <TextBlock Text="Ensure Viewbox Position" FontWeight="Bold"/>
+                        </CheckBox>
+                        <TextBlock Padding="32 3 3 20">
+                            Indicate applying a translate transform to the viewbox to ensure it is visible when rendered.
+                        </TextBlock>
+
+                        <GroupBox Header="Pixel Size" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label>Width</Label>
+                                    <TextBox x:Name="pixelWidth" Width="100"></TextBox>                            
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">                            
+                                    <Label Width="150" HorizontalContentAlignment="Right">Height</Label>
+                                    <TextBox x:Name="pixelHeight" Width="100"></TextBox>                            
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>            
+                </GroupBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0 0 0 20">
+                <TextBlock Padding="32 0 32 0" TextWrapping="Wrap" FontSize="14" FontWeight="Bold" TextAlignment="Center">
+                    <Bold>NOTE:&#160;</Bold>
+                    <Run>      
+                        Changes are automatically applied if you switch to any other tab.
+                    </Run>
+                </TextBlock>            
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

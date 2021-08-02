@@ -1,0 +1,29 @@
+  <style type="text/css" media="screen, print">
+	.serif { font-family: "Noto Serif", serif; }
+	.sansserif { font-family: "Noto Sans", sans-serif; 	}
+	.sans-serif { font-family: "Noto Sans", sans-serif; 	}
+	.monospace { font-family: "Noto Mono", monospace; }
+	.cursive { font-family: "Yellowtail", cursive; }
+	.fantasy {  font-family: "Sedgwick Ave Display", fantasy; }
+	.emoji {  font-family: "Noto Color Emoji", "Noto Emoji", emoji; }
+	.math { font-family: math; }
+	.fangsong { font-family: fangsong; }
+	@font-face { font-family: 'Noto Serif'; font-style: normal; font-weight: 400; src: url(../fonts/NotoSerif-Regular.ttf) format('truetype'); }
+	@font-face { font-family: 'Noto Serif'; font-style: italic; font-weight: 400; src: url(../fonts/NotoSerif-Italic.ttf) format('truetype'); }
+	@font-face { font-family: 'Noto Serif'; font-style: normal; font-weight: 700; src: url(../fonts/NotoSerif-Bold.ttf) format('truetype'); }
+	@font-face { font-family: 'Noto Serif'; font-style: italic; font-weight: 700; src: url(../fonts/NotoSerif-BoldItalic.ttf) format('truetype'); }
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 100; src: url(../fonts/NotoSans-Thin.ttf) format('truetype'); }
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 200; src: url(../fonts/NotoSans-Light.ttf) format('truetype'); }
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 300; src: url(../fonts/NotoSans-DemiLight.ttf) format('truetype'); } 
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 400; src: url(../fonts/NotoSans-Regular.ttf) format('truetype'); } 
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 500; src: url(../fonts/NotoSans-Medium.ttf) format('truetype'); } 
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 700; src: url(../fonts/NotoSans-Bold.ttf) format('truetype'); }
+	@font-face { font-family: "Noto Sans"; font-style: normal; font-weight: 900; src: url(../fonts/NotoSans-Black.ttf) format('truetype'); }
+	@font-face { font-family: Yellowtail; font-style: normal; font-weight: 400; src: url(../fonts/Yellowtail-Regular.ttf) format('truetype'); } 
+	@font-face { font-family: "Sedgwick Ave Display"; font-style: normal; font-weight: 400; src: url(../fonts/SedgwickAveDisplay-Regular.ttf) format('truetype'); }
+	@font-face { font-family: "Source Sans Pro"; font-style: normal; font-weight: 400; src: url(../fonts/SourceSansPro-Regular.ttf) format('truetype'); } 
+	@font-face { font-family: "Noto Color Emoji"; font-style: normal; font-weight: 400; src: url(../fonts/NotoColorEmoji.ttf) format('truetype'); }
+	@font-face { font-family: "Noto Emoji"; font-style: normal; font-weight: 400; src: url(../fonts/NotoEmoji-Regular.ttf) format('truetype'); }
+	@font-face { font-family: Amiri; font-style: normal; font-weight: 400; src: url(../fonts/Amiri-Regular.ttf) format('truetype'); }
+	@font-face { font-family: MPLUS1p; font-style: normal; font-weight: 400; src: url(../fonts/MPLUS1p-Regular.ttf) format('truetype'); }
+  </style>

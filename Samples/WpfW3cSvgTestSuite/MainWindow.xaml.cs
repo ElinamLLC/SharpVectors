@@ -354,8 +354,7 @@ namespace WpfW3cSvgTestSuite
                     Trace.TraceError(ex.ToString());
                     Trace.WriteLine(string.Empty);
 
-                    MessageBox.Show(ex.ToString(), AppErrorTitle,
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
                     return;
                 }
@@ -371,8 +370,7 @@ namespace WpfW3cSvgTestSuite
                     File.Move(backupFile, _testSettingsPath);
                 }
 
-                MessageBox.Show(ex.ToString(), AppErrorTitle,
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (!string.IsNullOrWhiteSpace(backupFile) && File.Exists(backupFile))
             {

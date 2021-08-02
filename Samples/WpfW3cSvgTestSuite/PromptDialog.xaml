@@ -10,7 +10,7 @@
         <local:AdornedControl.AdornerContent>
             <local:LoadingWait></local:LoadingWait>
         </local:AdornedControl.AdornerContent>
-        <StackPanel Orientation="Vertical" Margin="15 6 6 3">
+        <StackPanel Orientation="Vertical" Margin="15 6 15 6">
             <TextBlock TextWrapping="Wrap" FontSize="14" Margin="3 3 3 20">
             <Run>
                 The W3C SVG Test Suite is not found in the specified local directory. Click the Download button to download

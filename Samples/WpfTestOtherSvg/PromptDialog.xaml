@@ -1,0 +1,65 @@
+﻿<Window x:Class="WpfTestOtherSvg.PromptDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTestOtherSvg"
+        mc:Ignorable="d"
+        Title="Download Resvg Test Suite and Test Tools" Height="360" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False" Icon="App.ico">
+    <local:AdornedControl x:Name="LoadingAdorner">
+        <local:AdornedControl.AdornerContent>
+            <local:LoadingWait></local:LoadingWait>
+        </local:AdornedControl.AdornerContent>
+        <StackPanel Orientation="Vertical" Margin="15 6 15 6">
+            <TextBlock TextWrapping="Wrap" FontSize="14" Margin="3 3 3 3">
+            <Run>
+                The Resvg Test Suite is not found in the specified local directory. Click the Download button to download
+                it or Browse... button to select the local directory where the tests are stored.
+            </Run>
+            </TextBlock>
+            <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                <TextBlock Name="lblSvgSuitePathWeb" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                               Margin="3">Resvg SVG Suite Path (Required):</TextBlock>
+                <TextBox Name="txtSvgSuitePathWeb" HorizontalAlignment="Stretch" Margin="20 3 3 3" IsReadOnly="True"/>
+            </DockPanel>
+            <StackPanel Orientation="Vertical" Margin="3">
+                <TextBlock FontWeight="Bold">Test Tools (Optional):</TextBlock>
+                <StackPanel Orientation="Vertical" Margin="20 3 3 10">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="chkResvg" IsChecked="True">Resvg Library</CheckBox>
+                        <TextBlock Margin="60 0 0 0">                            
+                            (<Hyperlink NavigateUri="https://github.com/RazrFalcon/resvg" RequestNavigate="OnHyperlinkRequestNavigate">https://github.com/RazrFalcon/resvg</Hyperlink>)
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="chkBatik" IsChecked="True">Apache Batik Library</CheckBox>                       
+                        <TextBlock Margin="21 0 0 0">                            
+                            (<Hyperlink NavigateUri="https://xmlgraphics.apache.org" RequestNavigate="OnHyperlinkRequestNavigate">https://xmlgraphics.apache.org</Hyperlink>)
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 5">
+                <Button x:Name="btnDownload" Style="{StaticResource MetroButton}" Width="150" IsEnabled="False" Click="OnDownloadClicked">Download</Button>
+            </StackPanel>
+            <DockPanel Margin="3" HorizontalAlignment="Stretch" LastChildFill="True">
+                <TextBlock Name="lblSvgSuitePath" FontWeight="Bold" DockPanel.Dock="Top" VerticalAlignment="Center" 
+                               Margin="3">Local Resvg Suite Path:</TextBlock>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Button Name="btnPathBrowse" HorizontalAlignment="Right" Margin="3" Content="Browse..." 
+                                Click="OnBrowseForSvgSuitePath" Style="{StaticResource MetroButton}"/>
+                    <Button Name="btnPathLocate" HorizontalAlignment="Right" Margin="3" Content="Open..." 
+                                Click="OnOpenSvgSuitePath" Style="{StaticResource MetroButton}" IsEnabled="False"/>
+                </StackPanel>
+                <TextBox Name="txtSvgSuitePath" HorizontalAlignment="Stretch" Margin="20 3 3 3" VerticalContentAlignment="Center"
+                         TextChanged="OnSvgSuitePathTextChanged" FocusableChanged="OnSvgSuitePathFocusableChanged"/>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button x:Name="btnCancel" Style="{StaticResource MetroButton}" Margin="20 3 20 3" 
+                    Width="120" Click="OnCancelClicked">Cancel</Button>
+                <Button x:Name="btnOK" Style="{StaticResource MetroButton}" Margin="20 3 20 3" 
+                    Width="120" IsEnabled="False" Click="OnOKClicked">OK</Button>
+            </StackPanel>
+        </StackPanel>
+    </local:AdornedControl>
+</Window>

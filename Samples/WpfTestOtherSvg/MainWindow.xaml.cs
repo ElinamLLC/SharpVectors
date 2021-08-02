@@ -57,10 +57,7 @@ namespace WpfTestOtherSvg
 
         private bool _isTreeChangedPending;
 
-        private string _drawingDir;
-
         private bool _isShown;
-        private bool _canDeleteXaml;
         private bool _isRecursiveSearch;
 
         private string _sourceDir;
@@ -68,11 +65,12 @@ namespace WpfTestOtherSvg
         private string _testSettingsPath;
 
         private string _svgFilePath;
-        private string _xamlFilePath;
+
+        private TestsPage _testsPage;
+        private TestsOtherPage _otherPage;
 
         private SvgPage _svgPage;
         private XamlPage _xamlPage;
-        private DrawingPage _drawingPage;
         private DebugPage _debugPage;
         private SettingsPage _settingsPage;
 
@@ -109,13 +107,6 @@ namespace WpfTestOtherSvg
             this.Loaded   += OnWindowLoaded;
             this.Unloaded += OnWindowUnloaded;
             this.Closing  += OnWindowClosing;
-
-            _drawingDir = IoPath.GetFullPath(IoPath.Combine("..\\", DrawingPage.TemporalDirName));
-
-            if (!Directory.Exists(_drawingDir))
-            {
-                Directory.CreateDirectory(_drawingDir);
-            }
 
             _optionSettings = new OptionSettings();
             _testSettingsPath = IoPath.GetFullPath(IoPath.Combine("..\\", SvgTestSettings));
@@ -244,6 +235,48 @@ namespace WpfTestOtherSvg
             }
         }
 
+        public TestsPage TestsPage
+        {
+            get {
+                return _testsPage;
+            }
+        }
+
+        public TestsOtherPage OtherPage
+        {
+            get {
+                return _otherPage;
+            }
+        }
+
+        public SvgPage SvgPage
+        {
+            get {
+                return _svgPage;
+            }
+        }
+
+        public XamlPage XamlPage
+        {
+            get {
+                return _xamlPage;
+            }
+        }
+
+        public DebugPage DebugPage
+        {
+            get {
+                return _debugPage;
+            }
+        }
+
+        public SettingsPage SettingsPage
+        {
+            get {
+                return _settingsPage;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -334,6 +367,23 @@ namespace WpfTestOtherSvg
                 return;
 
             _isShown = true;
+
+            if (!_optionSettings.IsTestAvailable())
+            {
+                PromptDialog dlg = new PromptDialog();
+                dlg.Owner = this;
+                dlg.OptionSettings = _optionSettings;
+
+                var dialogResult = dlg.ShowDialog();
+
+                if (dialogResult != null && dialogResult.Value)
+                {
+                    if (_optionSettings.IsTestAvailable())
+                    {
+                        this.InitializePath(_optionSettings.SvgDirectory);
+                    }
+                }
+            }
         }
 
         #endregion
@@ -348,9 +398,11 @@ namespace WpfTestOtherSvg
             leftExpander.IsExpanded   = false;
 
             // Retrieve the display pages...
+            _testsPage    = frameTests.Content      as TestsPage;
+            _otherPage    = frameOthers.Content     as TestsOtherPage;
+
             _svgPage      = frameSvgInput.Content   as SvgPage;
             _xamlPage     = frameXamlOutput.Content as XamlPage;
-            _drawingPage  = frameDrawing.Content    as DrawingPage;
             _debugPage    = frameDebugging.Content  as DebugPage;
             _settingsPage = frameSettings.Content   as SettingsPage;
 
@@ -362,10 +414,10 @@ namespace WpfTestOtherSvg
             {
                 _xamlPage.MainWindow = this;
             }
-            if (_drawingPage != null)
+            if (_testsPage != null)
             {
-                _drawingPage.WorkingDrawingDir = _drawingDir;
-                _drawingPage.MainWindow = this;
+//                _testsPage.WorkingDrawingDir = _drawingDir;
+                _testsPage.MainWindow = this;
             }
             if (_debugPage != null)
             {
@@ -379,9 +431,9 @@ namespace WpfTestOtherSvg
             tabSvgInput.Visibility   = _optionSettings.ShowInputFile ? Visibility.Visible : Visibility.Collapsed;
             tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
 
-            this.InitializedPath(_optionSettings.SvgDirectory);
+            this.InitializePath(_optionSettings.SvgDirectory);
 
-            tabDrawing.IsSelected = true;
+            tabTests.IsSelected = true;
         }
 
         private void OnWindowUnloaded(object sender, RoutedEventArgs e)
@@ -390,29 +442,6 @@ namespace WpfTestOtherSvg
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            try
-            {
-                if (_canDeleteXaml && !string.IsNullOrWhiteSpace(_xamlFilePath) && File.Exists(_xamlFilePath))
-                {
-                    File.Delete(_xamlFilePath);
-                }
-                if (!string.IsNullOrWhiteSpace(_drawingDir) && Directory.Exists(_drawingDir))
-                {
-                    var imageFiles = Directory.GetFiles(_drawingDir, "*.png");
-                    if (imageFiles != null && imageFiles.Length != 0)
-                    {
-                        foreach (var imageFile in imageFiles)
-                        {
-                            File.Delete(imageFile);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError(ex.ToString());
-            }
-
             this.SaveSettings();
             this.SaveTreeView(this.GetTestFilePath());
 
@@ -589,7 +618,7 @@ namespace WpfTestOtherSvg
 
         private void OnFillXamlOutputChecked()
         {
-            if (_xamlPage == null || string.IsNullOrWhiteSpace(_xamlFilePath))
+            if (_xamlPage == null || _testsPage == null)
             {
                 tabXamlOutput.Visibility = _optionSettings.ShowOutputFile ? Visibility.Visible : Visibility.Collapsed;
                 return;
@@ -604,11 +633,7 @@ namespace WpfTestOtherSvg
                     this.Cursor      = Cursors.Wait;
                     this.ForceCursor = true;
 
-                    if (File.Exists(_xamlFilePath))
-                    {
-                        _xamlPage.LoadDocument(_xamlFilePath);
-                    }
-                    else
+                    if (!_testsPage.LoadXaml())
                     {
                         _xamlPage.UnloadDocument();
                     }
@@ -633,11 +658,18 @@ namespace WpfTestOtherSvg
 
         private void OnTabItemGotFocus(object sender, RoutedEventArgs e)
         {
-            if (sender == tabDrawing)
+            if (sender == tabTests)
             {
-                if (_drawingPage != null)
+                if (_testsPage != null)
                 {
-                    _drawingPage.PageSelected(true);
+                    _testsPage.PageSelected(true);
+                }
+            }
+            if (sender == tabTests)
+            {
+                if (_otherPage != null)
+                {
+                    _otherPage.PageSelected(true);
                 }
             }
             else if (sender == tabXamlOutput)
@@ -678,7 +710,7 @@ namespace WpfTestOtherSvg
         {
         }
 
-        private void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
+        private async void OnTreeViewItemSelected(object sender, RoutedEventArgs e)
         {
             TreeViewItem selItem = treeView.SelectedItem as TreeViewItem;
             if (selItem == null || selItem.Tag == null)
@@ -720,25 +752,18 @@ namespace WpfTestOtherSvg
                     isSvgLoaded = _svgPage.LoadDocument(svgFilePath);
                 }
 
-                if (isSvgLoaded && _drawingPage != null)
+                if (isSvgLoaded && _testsPage != null)
                 {
-                    isSvgLoaded = _drawingPage.LoadTests(svgFilePath, pngFilePath);
+                    isSvgLoaded = _testsPage.LoadTests(svgFilePath, pngFilePath);
                 }
-                if (isSvgLoaded && _xamlPage != null && _optionSettings.ShowOutputFile)
-                {
-                    if (_xamlPage != null && !string.IsNullOrWhiteSpace(_drawingDir))
-                    {
-                        string xamlFilePath = IoPath.Combine(_drawingDir, fileName + ".xaml");
 
-                        if (File.Exists(xamlFilePath))
-                        {
-                            _xamlPage.LoadDocument(xamlFilePath);
+#if DOTNET40
+                await TaskEx.Delay(2000);
+#else
+                await Task.Delay(2000);
+#endif
 
-                            // Delete the file after loading it...
-                            File.Delete(xamlFilePath);
-                        }
-                    }
-                }
+                await _otherPage.LoadDocumentAsync(_optionSettings, svgFilePath);
 
                 stateComboBox.SelectedIndex = (int)testItem.State;
                 testComment.Text = testItem.Comment;
@@ -1062,7 +1087,7 @@ namespace WpfTestOtherSvg
             return IoPath.GetFullPath(IoPath.Combine("..\\", SvgOldFileName));
         }
 
-        private void InitializedPath(string selectePath)
+        private void InitializePath(string selectePath)
         {
             if (selectePath != null)
             {
@@ -1116,41 +1141,16 @@ namespace WpfTestOtherSvg
                 {
                     _xamlPage.UnloadDocument();
                 }
-                if (_drawingPage != null)
+                if (_testsPage != null)
                 {
-                    _drawingPage.UnloadDocument();
+                    _testsPage.UnloadDocument();
+                }
+                if (_debugPage != null)
+                {
+                    _debugPage.ClearDocument();
                 }
 
-                if (_canDeleteXaml && !string.IsNullOrWhiteSpace(_xamlFilePath) && File.Exists(_xamlFilePath))
-                {
-                    File.Delete(_xamlFilePath);
-                }
-                if (!string.IsNullOrWhiteSpace(_drawingDir) && Directory.Exists(_drawingDir))
-                {
-                    string[] imageFiles = Directory.GetFiles(_drawingDir, "*.png");
-                    if (imageFiles != null && imageFiles.Length != 0)
-                    {
-                        try
-                        {
-                            foreach (var imageFile in imageFiles)
-                            {
-                                if (File.Exists(imageFile))
-                                {
-                                    File.Delete(imageFile);
-                                }
-                            }
-                        }
-                        catch (IOException ex)
-                        {
-                            Trace.TraceError(ex.ToString());
-                            // Image this, WPF will typically cache and/or lock loaded images
-                        }
-                    }
-                }
-
-                _svgFilePath   = null;
-                _xamlFilePath  = null;
-                _canDeleteXaml = false;
+                _svgFilePath = null;
             }
             catch (Exception ex)
             {
@@ -1304,7 +1304,7 @@ namespace WpfTestOtherSvg
         private void InitTreeView(string sourceDir, TreeViewItem rootTreeItem)
         {
             TextBlock headerText = new TextBlock();
-            headerText.Text = "Attributes";
+            headerText.Text   = "Attributes";
             headerText.Margin = new Thickness(3, 0, 0, 0);
 
             BulletDecorator decorator = new BulletDecorator();
@@ -1340,7 +1340,7 @@ namespace WpfTestOtherSvg
             rootTreeItem.Items.Add(attributesItem);
 
             headerText = new TextBlock();
-            headerText.Text = "Elements";
+            headerText.Text   = "Elements";
             headerText.Margin = new Thickness(3, 0, 0, 0);
 
             decorator = new BulletDecorator();
@@ -1531,7 +1531,7 @@ namespace WpfTestOtherSvg
         private void LoadTreeView(XmlReader reader, TreeViewItem rootTreeItem)
         {
             TextBlock headerText = new TextBlock();
-            headerText.Text = "Attributes";
+            headerText.Text   = "Attributes";
             headerText.Margin = new Thickness(3, 0, 0, 0);
 
             BulletDecorator decorator = new BulletDecorator();

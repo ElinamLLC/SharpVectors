@@ -279,19 +279,22 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else
                 {
-                    if (_rx <= 0)
+                    if (_rx <= 0 && !element.HasAttribute("rx"))
                     {
                         _rx = r;
                     }
-                    else if (_ry <= 0)
+                    else if (_ry <= 0 && !element.HasAttribute("ry"))
                     {
                         _ry = r;
                     }
                 }
+                if (_rx <= 0 || _ry <= 0)
+                {
+                    return null;
+                }
             }
 
-            EllipseGeometry geometry = new EllipseGeometry(new Point(_cx, _cy),
-                _rx, _ry);
+            EllipseGeometry geometry = new EllipseGeometry(new Point(_cx, _cy), _rx, _ry);
 
             return geometry;
         }
@@ -600,7 +603,7 @@ namespace SharpVectors.Renderers.Wpf
         {
             ISvgPointList list = element.AnimatedPoints;
             ulong nElems = list.NumberOfItems;
-            if (nElems == 0)
+            if (nElems < 3)
             {
                 return null;
             }

@@ -94,6 +94,11 @@ namespace SharpVectors.Dom.Svg
                 SkipCommaSpaces();
                 float y = ParseFloat();
 
+                if (float.IsNaN(x) || float.IsNaN(y))
+                {
+                    break;
+                }
+
                 _pointsHandler.Point(x, y);
                 SkipCommaSpaces();
             }

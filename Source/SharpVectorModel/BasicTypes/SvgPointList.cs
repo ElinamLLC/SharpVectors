@@ -14,9 +14,9 @@ namespace SharpVectors.Dom.Svg
         {
         }
 
-        public SvgPointList(string listString)
+        public SvgPointList(string listString, bool clearOnError = false)
         {
-            this.FromString(listString);
+            this.FromString(listString, clearOnError);
             //try
             //{
             //    this.FromString(listString);
@@ -43,7 +43,7 @@ namespace SharpVectors.Dom.Svg
 
         #region Public Methods
 
-        public void FromString(string listString)
+        public void FromString(string listString, bool clearOnError = false)
         {
             if (string.IsNullOrWhiteSpace(listString))
             {
@@ -54,7 +54,10 @@ namespace SharpVectors.Dom.Svg
                 SvgPointsParser parser = new SvgPointsParser(new SvgPointListHandler(this));
                 if (!parser.Parse(listString))
                 {
-                    this.Clear();
+                    if (clearOnError)
+                    {
+                        this.Clear();
+                    }
                 }
             }
             catch (Exception ex)

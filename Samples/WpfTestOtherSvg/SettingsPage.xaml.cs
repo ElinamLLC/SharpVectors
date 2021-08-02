@@ -103,13 +103,13 @@ namespace WpfTestOtherSvg
 
             _isInitialising = true;
 
-            txtPngDirectory.Text = _optionSettings.GetPath(_optionSettings.PngDirectory);
-            txtSvgDirectory.Text = _optionSettings.GetPath(_optionSettings.SvgDirectory);
+            txtPngDirectory.Text               = _optionSettings.GetPath(_optionSettings.PngDirectory);
+            txtSvgDirectory.Text               = _optionSettings.GetPath(_optionSettings.SvgDirectory);
 
-            txtPngDirectory.IsReadOnly = _optionSettings.HidePathsRoot;
+            txtPngDirectory.IsReadOnly         = _optionSettings.HidePathsRoot;
 
-            txtFontDirectory.Text = _optionSettings.FontDirectory;
-            txtImageDirectory.Text = _optionSettings.ImageDirectory;
+            txtFontDirectory.Text              = _optionSettings.FontsDirectory;
+            txtImageDirectory.Text             = _optionSettings.ImagesDirectory;
 
             chkHidePathsRoot.IsChecked         = _optionSettings.HidePathsRoot;
             chkRecursiveSearch.IsChecked       = _optionSettings.RecursiveSearch;
@@ -122,6 +122,19 @@ namespace WpfTestOtherSvg
             chkIgnoreRootViewbox.IsChecked     = _wpfSettings.IgnoreRootViewbox;
             chkEnsureViewboxSize.IsChecked     = _wpfSettings.EnsureViewboxSize;
             chkEnsureViewboxPosition.IsChecked = _wpfSettings.EnsureViewboxPosition;
+
+            txtMagickDirectory.Text            = _optionSettings.MagickDirectory;
+            txtRsvgDirectory.Text              = _optionSettings.RsvgDirectory;
+            if (_optionSettings.IsMagickInstalled)
+            {
+                txtMagickDirectory.IsEnabled = false;
+                btnMagickBrowse.IsEnabled    = false;
+                btnMagickOpen.IsEnabled      = false;
+
+                txtRsvgDirectory.IsEnabled   = false;
+                btnRsvgBrowse.IsEnabled      = false;
+                btnRsvgOpen.IsEnabled        = false;
+            }
 
             _isConversionModified = false;
 
@@ -300,12 +313,12 @@ namespace WpfTestOtherSvg
             }
             if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
             {
-                btnPngOpen.IsEnabled = false;
+                btnSvgOpen.IsEnabled = false;
 
                 return;
             }
 
-            btnPngOpen.IsEnabled = true;
+            btnSvgOpen.IsEnabled = true;
 
             _isGeneralModified = true;
             _optionSettings.SvgDirectory = selectePath;
@@ -334,6 +347,99 @@ namespace WpfTestOtherSvg
 
             _isGeneralModified = true;
             _optionSettings.PngDirectory = selectePath;
+        }
+
+
+        private void OnOpenMagickDirectory(object sender, RoutedEventArgs e)
+        {
+            var filePath = txtMagickDirectory.Text;
+            if (string.IsNullOrWhiteSpace(filePath) || Directory.Exists(filePath) == false)
+            {
+                return;
+            }
+
+            OptionSettings.OpenFolderAndSelectItem(filePath, null);
+        }
+
+        private void OnBrowseMagickDirectory(object sender, RoutedEventArgs e)
+        {
+            string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
+                "Select the location of the Image-Magick Application", null);
+            if (selectedDirectory != null)
+            {
+                txtMagickDirectory.Text = selectedDirectory;
+            }
+        }
+
+        private void OnMagickPathTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!this.IsLoaded)
+            {
+                return;
+            }
+
+            string selectePath = txtMagickDirectory.Text;
+            if (selectePath != null)
+            {
+                selectePath = selectePath.Trim();
+            }
+            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
+            {
+                btnMagickOpen.IsEnabled = false;
+
+                return;
+            }
+
+            btnMagickOpen.IsEnabled = true;
+
+            _isGeneralModified = true;
+            _optionSettings.MagickDirectory = selectePath;
+        }
+
+        private void OnOpenRsvgDirectory(object sender, RoutedEventArgs e)
+        {
+            var filePath = txtRsvgDirectory.Text;
+            if (string.IsNullOrWhiteSpace(filePath) || Directory.Exists(filePath) == false)
+            {
+                return;
+            }
+
+            OptionSettings.OpenFolderAndSelectItem(filePath, null);
+        }
+
+        private void OnBrowseRsvgDirectory(object sender, RoutedEventArgs e)
+        {
+            string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
+                "Select the location of the Rsvg Application", null);
+            if (selectedDirectory != null)
+            {
+                txtRsvgDirectory.Text = selectedDirectory;
+            }
+        }
+
+        private void OnRsvgPathTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!this.IsLoaded)
+            {
+                return;
+            }
+
+            string selectePath = txtRsvgDirectory.Text;
+            if (selectePath != null)
+            {
+                selectePath = selectePath.Trim();
+            }
+            if (string.IsNullOrWhiteSpace(selectePath) || !Directory.Exists(selectePath))
+            {
+                btnRsvgOpen.IsEnabled = false;
+
+                return;
+            }
+
+            btnRsvgOpen.IsEnabled = true;
+
+            _isGeneralModified = true;
+            _optionSettings.RsvgDirectory = selectePath;
         }
 
         #endregion

@@ -23,8 +23,7 @@ namespace SharpVectors.Converters
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This is designed to be used by the SVG to XAML converters, and may not be
-    /// useful in general applications.
+    /// This is designed to be used by the SVG to XAML converters, and may not be useful in general applications.
     /// </para>
     /// <para>
     /// <see href="https://social.msdn.microsoft.com/Forums/vstudio/en-US/c9225e3d-298d-4012-b6c4-663973c426ed/xaml-serialization-replacement?forum=wpf"/>
@@ -34,9 +33,6 @@ namespace SharpVectors.Converters
     /// </para>
     /// <para>
     /// <see href="https://social.msdn.microsoft.com/Forums/vstudio/en-US/08aebbf1-0a61-4305-83b2-a0a37bb24002/xamlwriter-markupobject-how-to-?forum=wpf"/>
-    /// </para>
-    /// <para>
-    /// <see href=""/>
     /// </para>
     /// </remarks>
     public sealed class XmlXamlWriter
@@ -65,8 +61,7 @@ namespace SharpVectors.Converters
         /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class.
         /// </overloads>
         /// <summary>
-        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class
-        /// with the default settings.
+        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class with the default settings.
         /// </summary>
         public XmlXamlWriter()
             : this(null)
@@ -74,28 +69,26 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class
-        /// with the specified settings.
+        /// Initializes a new instance of the <see cref="XmlXamlWriter"/> class with the specified settings.
         /// </summary>
         /// <param name="settings">
-        /// An instance of <see cref="WpfDrawingSettings"/> specifying the
-        /// rendering options.
+        /// An instance of <see cref="WpfDrawingSettings"/> specifying the rendering options.
         /// </param>
         public XmlXamlWriter(WpfDrawingSettings settings)
         {
-            _culture = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+            _culture           = (CultureInfo)CultureInfo.InvariantCulture.Clone();
             _culture.NumberFormat.NumberDecimalDigits = 4;
 
-            _nullType = typeof(NullExtension);
-            _namespaceCache = new NamespaceCache(_culture);
-            _dicNamespaceMap = new Dictionary<string, NamespaceMap>(StringComparer.OrdinalIgnoreCase);
+            _nullType          = typeof(NullExtension);
+            _namespaceCache    = new NamespaceCache(_culture);
+            _dicNamespaceMap   = new Dictionary<string, NamespaceMap>(StringComparer.OrdinalIgnoreCase);
             _contentProperties = new Dictionary<Type, string>();
 
-            _windowsPath = "%WINDIR%";
-            _windowsDir = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
+            _windowsPath       = "%WINDIR%";
+            _windowsDir        = Environment.ExpandEnvironmentVariables(_windowsPath).ToLower();
 
-            _windowsDir = _windowsDir.Replace(@"\", "/");
-            _wpfSettings = settings;
+            _windowsDir        = _windowsDir.Replace(@"\", "/");
+            _wpfSettings       = settings;
         }
 
         #endregion
@@ -103,13 +96,11 @@ namespace SharpVectors.Converters
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether to include a null markup
-        /// extension in the output XAML.
+        /// Gets or sets a value indicating whether to include a null markup extension in the output XAML.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the null markup extension is
-        /// included in the output XAML; otherwise, it is <see langword="false"/>.
-        /// The default is <see langword="false"/>.
+        /// This is <see langword="true"/> if the null markup extension is included in the output XAML; otherwise, 
+        /// it is <see langword="false"/>. The default is <see langword="false"/>.
         /// </value>
         public bool IncludeNullExtension
         {
@@ -125,6 +116,14 @@ namespace SharpVectors.Converters
 
         #region Public Methods
 
+        /// <summary>
+        /// Returns a Extensible Application Markup Language (XAML) string that serializes the provided object.
+        /// </summary>
+        /// <param name="obj">The element to be serialized. Typically, this is the root element of a page or application.</param>
+        /// <returns>
+        /// Extensible Application Markup Language (XAML) string that can be written to a stream or file. 
+        /// The logical tree of all elements that fall under the provided obj element will be serialized.
+        /// </returns>
         public static string Convert(object obj)
         {
             XmlXamlWriter writer = new XmlXamlWriter();
@@ -132,26 +131,14 @@ namespace SharpVectors.Converters
             return writer.Save(obj);
         }
 
-        // Summary:
-        // Returns a Extensible Application Markup Language (XAML) string that serializes
-        // the provided object.
-        //
-        // Parameters:
-        // obj:
-        // The element to be serialized. Typically, this is the root element of a page
-        // or application.
-        //
-        // Returns:
-        // Extensible Application Markup Language (XAML) string that can be written
-        // to a stream or file. The logical tree of all elements that fall under the
-        // provided obj element will be serialized.
-        //
-        // Exceptions:
-        // System.Security.SecurityException:
-        // the application is not running in full trust.
-        //
-        // System.ArgumentNullException:
-        // obj is null.
+        /// <summary>
+        /// Returns a Extensible Application Markup Language (XAML) string that serializes the provided object.
+        /// </summary>
+        /// <param name="obj">The element to be serialized. Typically, this is the root element of a page or application.</param>
+        /// <returns>
+        /// Extensible Application Markup Language (XAML) string that can be written to a stream or file. 
+        /// The logical tree of all elements that fall under the provided obj element will be serialized.
+        /// </returns>
         public string Save(object obj)
         {
             if (obj == null)
@@ -167,7 +154,7 @@ namespace SharpVectors.Converters
             //TODO--PAUL: For now just cheat...
             string nsName = obj.GetType().Namespace;
 
-            if (nsName != null && nsName.StartsWith("System.Windows"))
+            if (nsName != null && nsName.StartsWith("System.Windows", StringComparison.OrdinalIgnoreCase))
             {
                 _namespaceCache.IsFrameworkRoot = true;
             }
@@ -175,11 +162,11 @@ namespace SharpVectors.Converters
             ResolveXmlNamespaces(obj);
 
             XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
+            settings.Indent             = true;
             settings.OmitXmlDeclaration = true;
 
             StringBuilder builder = new StringBuilder();
-            StringWriter writer = new StringWriter(builder);
+            StringWriter writer   = new StringWriter(builder);
             using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings))
             {
                 WriteObject(null, obj, xmlWriter, true);
@@ -191,25 +178,12 @@ namespace SharpVectors.Converters
             return builder.ToString();
         }
 
-        //
-        // Summary:
-        // Saves Extensible Application Markup Language (XAML) information into a provided
-        // stream to serialize the provided object.
-        //
-        // Parameters:
-        // obj:
-        // The element to be serialized. Typically, this is the root element of a page
-        // or application.
-        //
-        // stream:
-        // Destination stream for the serialized XAML information.
-        //
-        // Exceptions:
-        // System.Security.SecurityException:
-        // the application is not running in full trust.
-        //
-        // System.ArgumentNullException:
-        // obj is null -or- stream is null.
+        /// <summary>
+        /// Saves Extensible Application Markup Language (XAML) information into a provided
+        /// stream to serialize the provided object.
+        /// </summary>
+        /// <param name="obj">The element to be serialized. Typically, this is the root element of a page or application.</param>
+        /// <param name="stream">Destination stream for the serialized XAML information.</param>
         public void Save(object obj, Stream stream)
         {
             if (obj == null)
@@ -225,7 +199,7 @@ namespace SharpVectors.Converters
             //TODO--PAUL: For now just cheat...
             string nsName = obj.GetType().Namespace;
 
-            if (nsName != null && nsName.StartsWith("System.Windows"))
+            if (nsName != null && nsName.StartsWith("System.Windows", StringComparison.OrdinalIgnoreCase))
             {
                 _namespaceCache.IsFrameworkRoot = true;
             }
@@ -243,27 +217,13 @@ namespace SharpVectors.Converters
 
             _contentProperties = null;
         }
-
-        //
-        // Summary:
-        // Saves Extensible Application Markup Language (XAML) information as the source
-        // for a provided text writer object. The output of the text writer can then
-        // be used to serialize the provided object.
-        //
-        // Parameters:
-        // writer:
-        // TextWriter instance to use to write the serialized XAML information.
-        //
-        // obj:
-        // The element to be serialized. Typically, this is the root element of a page
-        // or application.
-        //
-        // Exceptions:
-        // System.ArgumentNullException:
-        // obj is null -or- writer is null.
-        //
-        // System.Security.SecurityException:
-        // the application is not running in full trust.
+        
+        /// <summary>
+        /// Saves Extensible Application Markup Language (XAML) information as the source for a provided text writer object. 
+        /// The output of the text writer can then be used to serialize the provided object.
+        /// </summary>
+        /// <param name="obj">The element to be serialized. Typically, this is the root element of a page or application.</param>
+        /// <param name="writer">TextWriter instance to use to write the serialized XAML information.</param>
         public void Save(object obj, TextWriter writer)
         {
             if (obj == null)
@@ -279,7 +239,7 @@ namespace SharpVectors.Converters
             //TODO--PAUL: For now just cheat...
             string nsName = obj.GetType().Namespace;
 
-            if (nsName != null && nsName.StartsWith("System.Windows"))
+            if (nsName != null && nsName.StartsWith("System.Windows", StringComparison.OrdinalIgnoreCase))
             {
                 _namespaceCache.IsFrameworkRoot = true;
             }
@@ -298,26 +258,12 @@ namespace SharpVectors.Converters
             _contentProperties = null;
         }
 
-        //
-        // Summary:
-        // Saves Extensible Application Markup Language (XAML) information as the source
-        // for a provided XML writer object. The output of the XML writer can then be
-        // used to serialize the provided object.
-        //
-        // Parameters:
-        // obj:
-        // The element to be serialized. Typically, this is the root element of a page
-        // or application.
-        //
-        // xmlWriter:
-        // Writer to use to write the serialized XAML information.
-        //
-        // Exceptions:
-        // System.ArgumentNullException:
-        // obj is null -or- manager is null.
-        //
-        // System.Security.SecurityException:
-        // the application is not running in full trust.
+        /// <summary>
+        /// Saves Extensible Application Markup Language (XAML) information as the source for a provided XML writer object. 
+        /// The output of the XML writer can then be used to serialize the provided object.
+        /// </summary>
+        /// <param name="obj">The element to be serialized. Typically, this is the root element of a page or application.</param>
+        /// <param name="xmlWriter">Writer to use to write the serialized XAML information.</param>
         public void Save(object obj, XmlWriter xmlWriter)
         {
             if (obj == null)
@@ -333,7 +279,7 @@ namespace SharpVectors.Converters
             //TODO--PAUL: For now just cheat...
             string nsName = obj.GetType().Namespace;
 
-            if (nsName != null && nsName.StartsWith("System.Windows"))
+            if (nsName != null && nsName.StartsWith("System.Windows", StringComparison.OrdinalIgnoreCase))
             {
                 _namespaceCache.IsFrameworkRoot = true;
             }
@@ -399,7 +345,7 @@ namespace SharpVectors.Converters
             MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
             Type objectType = markupObj.ObjectType;
 
-            string ns = _namespaceCache.GetNamespaceUriFor(objectType);
+            string ns     = _namespaceCache.GetNamespaceUriFor(objectType);
             string prefix = _namespaceCache.GetDefaultPrefixFor(ns);
 
             if (isRoot)
@@ -409,8 +355,7 @@ namespace SharpVectors.Converters
                     if (string.IsNullOrWhiteSpace(ns))
                     {
                         writer.WriteStartElement(markupObj.ObjectType.Name, NamespaceCache.DefaultNamespace);
-                        writer.WriteAttributeString("xmlns",
-                            NamespaceCache.XmlnsNamespace, NamespaceCache.DefaultNamespace);
+                        writer.WriteAttributeString("xmlns", NamespaceCache.XmlnsNamespace, NamespaceCache.DefaultNamespace);
                     }
                     else
                     {
@@ -422,8 +367,7 @@ namespace SharpVectors.Converters
                 {
                     writer.WriteStartElement(prefix, markupObj.ObjectType.Name, ns);
                 }
-                writer.WriteAttributeString("xmlns", "x",
-                    NamespaceCache.XmlnsNamespace, NamespaceCache.XamlNamespace);
+                writer.WriteAttributeString("xmlns", "x", NamespaceCache.XmlnsNamespace, NamespaceCache.XamlNamespace);
 
                 foreach (NamespaceMap map in _dicNamespaceMap.Values)
                 {
@@ -814,6 +758,9 @@ namespace SharpVectors.Converters
 
         #region NamespaceCache Class
 
+        /// <summary>
+        /// Xml namespace caching class.
+        /// </summary>
         private sealed class NamespaceCache
         {
             public const string XamlNamespace    = "http://schemas.microsoft.com/winfx/2006/xaml";
@@ -830,8 +777,7 @@ namespace SharpVectors.Converters
 
             public NamespaceCache(CultureInfo culture)
             {
-                _culture = culture;
-
+                _culture          = culture;
                 _defaultPrefixes  = new Dictionary<string, string>();
                 _xmlnsDefinitions = new Dictionary<Assembly, Dictionary<string, string>>();
             }
@@ -965,6 +911,9 @@ namespace SharpVectors.Converters
 
         #region NamespaceMap Class
 
+        /// <summary>
+        /// A class encapsulating XML name prefix to namespace map.
+        /// </summary>
         private sealed class NamespaceMap
         {
             private string _prefix;
@@ -972,7 +921,7 @@ namespace SharpVectors.Converters
 
             public NamespaceMap(string prefix, string xmlNamespace)
             {
-                _prefix = prefix;
+                _prefix       = prefix;
                 _xmlNamespace = xmlNamespace;
             }
 

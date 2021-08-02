@@ -89,55 +89,17 @@ namespace WpfTestOtherSvg
 
         #region Public Methods
 
-        public void LoadDocument(string documentFileName)
+        public void LoadDocument(Stream memoryStream)
         {
-            if (textEditor == null || string.IsNullOrWhiteSpace(documentFileName))
+            if (textEditor == null || memoryStream == null)
             {
                 return;
             }
 
-            string fileExt = Path.GetExtension(documentFileName);
-            if (string.Equals(fileExt, ".zaml", StringComparison.OrdinalIgnoreCase))
-            {
-                using (FileStream fileStream = File.OpenRead(documentFileName))
-                {
-                    using (GZipStream zipStream = new GZipStream(fileStream, CompressionMode.Decompress))
-                    {
-                        // Text Editor does not work with this stream, so we read the data to memory stream...
-                        MemoryStream memoryStream = new MemoryStream();
-                        // Use this method is used to read all bytes from a stream.
-                        int totalCount = 0;
-                        int bufferSize = 512;
-                        byte[] buffer = new byte[bufferSize];
-                        while (true)
-                        {
-                            int bytesRead = zipStream.Read(buffer, 0, bufferSize);
-                            if (bytesRead == 0)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                memoryStream.Write(buffer, 0, bytesRead);
-                            }
-                            totalCount += bytesRead;
-                        }
+            memoryStream.Position = 0;
+            textEditor.Load(memoryStream);
 
-                        if (totalCount > 0)
-                        {
-                            memoryStream.Position = 0;
-                        }
-
-                        textEditor.Load(memoryStream);
-
-                        memoryStream.Close();
-                    }
-                }
-            }
-            else
-            {
-                textEditor.Load(documentFileName);
-            }
+            memoryStream.Close();
 
             if (_foldingManager == null || _foldingStrategy == null)
             {

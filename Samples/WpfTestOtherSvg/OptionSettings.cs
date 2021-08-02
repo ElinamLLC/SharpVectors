@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 using SharpVectors.Renderers.Wpf;
+using WpfTestOtherSvg.Handlers;
 
 namespace WpfTestOtherSvg
 {
@@ -23,6 +24,10 @@ namespace WpfTestOtherSvg
         private static extern void SHParseDisplayName([MarshalAs(UnmanagedType.LPWStr)] string name,
             IntPtr bindingContext, [Out] out IntPtr pidl, uint sfgaoIn, [Out] out uint psfgaoOut);
 
+        [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool IsDirectoryEmpty([MarshalAs(UnmanagedType.LPStr)]string directory);
+
         #endregion
 
         #region Public Events
@@ -33,26 +38,38 @@ namespace WpfTestOtherSvg
 
         #region Private Fields
 
+        private const string TestCss      = "test.css";
+        private const string EmptyImage   = "empty.png";
+        private const string CrashImage   = "crash.png";
+        private const string TestRunner   = @"SvgRun\SvgRun.exe";
+
         private const string ParentSymbol = "..\\";
         private const string SharpVectors = "SharpVectors";
-
-        [DllImport("Shlwapi.dll", EntryPoint = "PathIsDirectoryEmpty")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool IsDirectoryEmpty([MarshalAs(UnmanagedType.LPStr)]string directory);
 
         private bool _hidePathsRoot;
         private bool _showInputFile;
         private bool _showOutputFile;
         private bool _recursiveSearch;
 
+        private string _testsDirectory;
         private string _svgDirectory;
         private string _pngDirectory;
-        private string _fontDirectory;
-        private string _imageDirectory;
+        private string _fontsDirectory;
+        private string _imagesDirectory;
 
+        private string _cacheDirectory;
+        private string _toolsDirectory;
+
+        private string _rsvgDirectory;
+        private string _magickDirectory;
+
+        private bool _isMagickInstalled;
         private uint _selectedNumber;
 
         private string _emptyImageFile;
+        private string _crashImageFile;
+        private string _testCssFile;
+        private string _testRunnerFile;
 
         private WpfDrawingSettings _wpfSettings;
 
@@ -63,22 +80,45 @@ namespace WpfTestOtherSvg
         public OptionSettings()
         {
             _wpfSettings = new WpfDrawingSettings();
-            string currentDir = Path.GetFullPath(Path.Combine("..\\", "Tests"));
-            if (!Directory.Exists(currentDir))
+            _testsDirectory = Path.GetFullPath(Path.Combine("..\\", "Tests"));
+            if (!Directory.Exists(_testsDirectory))
             {
-                Directory.CreateDirectory(currentDir);
+                Directory.CreateDirectory(_testsDirectory);
             }
-            _pngDirectory   = Path.Combine(currentDir, "png");
-            _svgDirectory   = Path.Combine(currentDir, "svg");
-            _fontDirectory  = Path.Combine(currentDir, "fonts");
-            _imageDirectory = Path.Combine(currentDir, "images");
-            _emptyImageFile = Path.Combine(currentDir, @"images\empty.png");
+            _pngDirectory    = Path.Combine(_testsDirectory, "png");
+            _svgDirectory    = Path.Combine(_testsDirectory, "svg");
+            _fontsDirectory  = Path.Combine(_testsDirectory, "fonts");
+            _imagesDirectory = Path.Combine(_testsDirectory, "images");
+
+            _cacheDirectory = Path.GetFullPath(Path.Combine("..\\", "Cache"));
+            if (!Directory.Exists(_cacheDirectory))
+            {
+                Directory.CreateDirectory(_cacheDirectory);
+            }
+
+            _toolsDirectory = Path.GetFullPath(Path.Combine("..\\", "Tools"));
+            if (!Directory.Exists(_toolsDirectory))
+            {
+                Directory.CreateDirectory(_toolsDirectory);
+            }
+
+            _crashImageFile  = Path.Combine(_testsDirectory, CrashImage);
+            _emptyImageFile  = Path.Combine(_imagesDirectory, EmptyImage);
+
+            _testCssFile     = Path.Combine(_testsDirectory, TestCss);
+            _testRunnerFile  = Path.Combine(_toolsDirectory, TestRunner);
+
+            _magickDirectory = MagickTestHandler.GetInstalledDir();
+            if (!string.IsNullOrWhiteSpace(_magickDirectory) && Directory.Exists(_magickDirectory))
+            {
+                _isMagickInstalled = File.Exists(Path.Combine(_magickDirectory, MagickTestHandler.FileName));
+            }
 
             _showInputFile   = false;
             _showOutputFile  = false;
             _recursiveSearch = true;
 
-            _wpfSettings.AddFontLocation(_fontDirectory);
+//            _wpfSettings.AddFontLocation(_fontDirectory);
         }
 
         public OptionSettings(OptionSettings source)
@@ -87,14 +127,24 @@ namespace WpfTestOtherSvg
             {
                 return;
             }
-            _hidePathsRoot   = source._hidePathsRoot;
-            _svgDirectory    = source._svgDirectory;
-            _pngDirectory    = source._pngDirectory;
-            _fontDirectory   = source._fontDirectory;
-            _showInputFile   = source._showInputFile;
-            _showOutputFile  = source._showOutputFile;
-            _recursiveSearch = source._recursiveSearch;
-            _wpfSettings     = source._wpfSettings;
+            _hidePathsRoot     = source._hidePathsRoot;
+            _isMagickInstalled = source._isMagickInstalled;
+            _svgDirectory      = source._svgDirectory;
+            _pngDirectory      = source._pngDirectory;
+            _fontsDirectory    = source._fontsDirectory;
+            _imagesDirectory   = source._imagesDirectory;
+
+            _rsvgDirectory     = source._rsvgDirectory;
+            _magickDirectory   = source._magickDirectory;
+
+            _showInputFile     = source._showInputFile;
+            _showOutputFile    = source._showOutputFile;
+            _recursiveSearch   = source._recursiveSearch;
+            _testCssFile       = source._testCssFile;
+            _testRunnerFile    = source._testRunnerFile;
+            _emptyImageFile    = source._emptyImageFile;
+            _crashImageFile    = source._crashImageFile;
+            _wpfSettings       = source._wpfSettings;
         }
 
         #endregion
@@ -113,6 +163,22 @@ namespace WpfTestOtherSvg
                 if (isChanged)
                 {
                     this.RaisePropertyChanged("HidePathsRoot");
+                }
+            }
+        }
+
+        public bool IsMagickInstalled
+        {
+            get {
+                return _isMagickInstalled;
+            }
+            set {
+                bool isChanged = (_isMagickInstalled != value);
+                _isMagickInstalled = value;
+
+                if (isChanged)
+                {
+                    this.RaisePropertyChanged("IsMagickInstalled");
                 }
             }
         }
@@ -197,14 +263,14 @@ namespace WpfTestOtherSvg
             }
         }
 
-        public string FontDirectory
+        public string FontsDirectory
         {
             get {
-                return _fontDirectory;
+                return _fontsDirectory;
             }
             set {
-                bool isChanged = !string.Equals(_fontDirectory, value, StringComparison.OrdinalIgnoreCase);
-                _fontDirectory = value;
+                bool isChanged = !string.Equals(_fontsDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _fontsDirectory = value;
 
                 if (isChanged)
                 {
@@ -213,18 +279,98 @@ namespace WpfTestOtherSvg
             }
         }
 
-        public string ImageDirectory
+        public string ImagesDirectory
         {
             get {
-                return _imageDirectory;
+                return _imagesDirectory;
             }
             set {
-                bool isChanged = !string.Equals(_imageDirectory, value, StringComparison.OrdinalIgnoreCase);
-                _imageDirectory = value;
+                bool isChanged = !string.Equals(_imagesDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _imagesDirectory = value;
 
                 if (isChanged)
                 {
                     this.RaisePropertyChanged("ImageDirectory");
+                }
+            }
+        }
+
+        public string TestsDirectory
+        {
+            get {
+                return _testsDirectory;
+            }
+            set {
+                bool isChanged = !string.Equals(_testsDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _testsDirectory = value;
+
+                if (isChanged)
+                {
+                    this.RaisePropertyChanged("TestDirectory");
+                }
+            }
+        }
+
+        public string ToolsDirectory
+        {
+            get {
+                return _toolsDirectory;
+            }
+            set {
+                bool isChanged = !string.Equals(_toolsDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _toolsDirectory = value;
+
+                if (isChanged)
+                {
+                    this.RaisePropertyChanged("ToolsDirectory");
+                }
+            }
+        }
+
+        public string CacheDirectory
+        {
+            get {
+                return _cacheDirectory;
+            }
+            set {
+                bool isChanged = !string.Equals(_cacheDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _cacheDirectory = value;
+
+                if (isChanged)
+                {
+                    this.RaisePropertyChanged("CacheDirectory");
+                }
+            }
+        }
+
+        public string RsvgDirectory
+        {
+            get {
+                return _rsvgDirectory;
+            }
+            set {
+                bool isChanged = !string.Equals(_rsvgDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _rsvgDirectory = value;
+
+                if (isChanged)
+                {
+                    this.RaisePropertyChanged("RsvgDirectory");
+                }
+            }
+        }
+
+        public string MagickDirectory
+        {
+            get {
+                return _magickDirectory;
+            }
+            set {
+                bool isChanged = !string.Equals(_magickDirectory, value, StringComparison.OrdinalIgnoreCase);
+                _magickDirectory = value;
+
+                if (isChanged)
+                {
+                    this.RaisePropertyChanged("MagickDirectory");
                 }
             }
         }
@@ -254,6 +400,45 @@ namespace WpfTestOtherSvg
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     _emptyImageFile = value;
+                }
+            }
+        }
+
+        public string CrashImageFile
+        {
+            get {
+                return _crashImageFile;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _crashImageFile = value;
+                }
+            }
+        }
+
+        public string TestCssFile
+        {
+            get {
+                return _testCssFile;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _testCssFile = value;
+                }
+            }
+        }
+
+        public string TestRunnerFile
+        {
+            get {
+                return _testRunnerFile;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    _testRunnerFile = value;
                 }
             }
         }
@@ -371,6 +556,32 @@ namespace WpfTestOtherSvg
             return !(string.Equals(currentPath, currentSvgPath, StringComparison.OrdinalIgnoreCase));
         }
 
+        public bool IsTestAvailable()
+        {
+            if (string.IsNullOrWhiteSpace(_testsDirectory) || Directory.Exists(_testsDirectory) == false)
+            {
+                return false;
+            }
+            if (!Directory.Exists(_svgDirectory) || IsDirectoryEmpty(_svgDirectory) == true)
+            {
+                return false;
+            }
+            if (!Directory.Exists(_pngDirectory) || IsDirectoryEmpty(_pngDirectory) == true)
+            {
+                return false;
+            }
+            if (!Directory.Exists(_fontsDirectory) || IsDirectoryEmpty(_fontsDirectory) == true)
+            {
+                return false;
+            }
+            if (!Directory.Exists(_imagesDirectory) || IsDirectoryEmpty(_imagesDirectory) == true)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public static void OpenFolderAndSelectItem(string folderPath, string file)
         {
             if (string.IsNullOrEmpty(folderPath) || Directory.Exists(folderPath) == false)
@@ -381,8 +592,8 @@ namespace WpfTestOtherSvg
             if (string.IsNullOrWhiteSpace(file))
             {
                 var selectedIsFile = false;
-                var selectedName = string.Empty;
-                var dirInfo = new DirectoryInfo(folderPath);
+                var selectedName   = string.Empty;
+                var dirInfo        = new DirectoryInfo(folderPath);
 
                 var firstFileName = dirInfo.EnumerateFiles()
                     .Select(f => f.Name)
@@ -390,7 +601,7 @@ namespace WpfTestOtherSvg
                 if (!string.IsNullOrWhiteSpace(firstFileName))
                 {
                     selectedIsFile = true;
-                    selectedName = firstFileName;
+                    selectedName   = firstFileName;
                 }
                 else
                 {
@@ -402,7 +613,7 @@ namespace WpfTestOtherSvg
                         if (!string.IsNullOrWhiteSpace(firstDirName))
                         {
                             selectedIsFile = false;
-                            selectedName = firstDirName;
+                            selectedName   = firstDirName;
                         }
                     }
                 }
@@ -432,8 +643,7 @@ namespace WpfTestOtherSvg
             IntPtr nativeFile = IntPtr.Zero;
             if (!string.IsNullOrWhiteSpace(file))
             {
-                SHParseDisplayName(Path.Combine(folderPath, file),
-                    IntPtr.Zero, out nativeFile, 0, out psfgaoOut);
+                SHParseDisplayName(Path.Combine(folderPath, file), IntPtr.Zero, out nativeFile, 0, out psfgaoOut);
             }
 
             IntPtr[] fileArray;
@@ -527,43 +737,85 @@ namespace WpfTestOtherSvg
                             case "FontDirectory":
                                 if (optionValue.StartsWith(ParentSymbol, comparer))
                                 {
-                                    var inputPath = new string(_fontDirectory.ToCharArray());
+                                    var inputPath = new string(_fontsDirectory.ToCharArray());
                                     int indexOf = inputPath.IndexOf(SharpVectors, comparer);
 
                                     if (indexOf > 0)
                                     {
                                         var basePath = inputPath.Substring(0, indexOf);
-                                        _fontDirectory = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
+                                        _fontsDirectory = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
                                     }
                                     else
                                     {
-                                        _fontDirectory = optionValue;
+                                        _fontsDirectory = optionValue;
                                     }
                                 }
                                 else
                                 {
-                                    _fontDirectory = optionValue;
+                                    _fontsDirectory = optionValue;
                                 }
                                 break;
                             case "ImageDirectory":
                                 if (optionValue.StartsWith(ParentSymbol, comparer))
                                 {
-                                    var inputPath = new string(_imageDirectory.ToCharArray());
+                                    var inputPath = new string(_imagesDirectory.ToCharArray());
                                     int indexOf = inputPath.IndexOf(SharpVectors, comparer);
 
                                     if (indexOf > 0)
                                     {
                                         var basePath = inputPath.Substring(0, indexOf);
-                                        _imageDirectory = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
+                                        _imagesDirectory = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
                                     }
                                     else
                                     {
-                                        _imageDirectory = optionValue;
+                                        _imagesDirectory = optionValue;
                                     }
                                 }
                                 else
                                 {
-                                    _imageDirectory = optionValue;
+                                    _imagesDirectory = optionValue;
+                                }
+                                break;
+                            case "RsvgDirectory":
+                                if (optionValue.StartsWith(ParentSymbol, comparer))
+                                {
+                                    var inputPath = new string(_rsvgDirectory.ToCharArray());
+                                    int indexOf = inputPath.IndexOf(SharpVectors, comparer);
+
+                                    if (indexOf > 0)
+                                    {
+                                        var basePath = inputPath.Substring(0, indexOf);
+                                        _rsvgDirectory = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
+                                    }
+                                    else
+                                    {
+                                        _rsvgDirectory = optionValue;
+                                    }
+                                }
+                                else
+                                {
+                                    _rsvgDirectory = optionValue;
+                                }
+                                break;
+                            case "MagickDirectory":
+                                if (optionValue.StartsWith(ParentSymbol, comparer))
+                                {
+                                    var inputPath = new string(_magickDirectory.ToCharArray());
+                                    int indexOf = inputPath.IndexOf(SharpVectors, comparer);
+
+                                    if (indexOf > 0)
+                                    {
+                                        var basePath = inputPath.Substring(0, indexOf);
+                                        _magickDirectory = Path.Combine(basePath, optionValue.Replace(ParentSymbol, string.Empty));
+                                    }
+                                    else
+                                    {
+                                        _magickDirectory = optionValue;
+                                    }
+                                }
+                                else
+                                {
+                                    _magickDirectory = optionValue;
                                 }
                                 break;
                         }
@@ -631,8 +883,12 @@ namespace WpfTestOtherSvg
             this.SaveOption(writer, "RecursiveSearch", _recursiveSearch);
             this.SaveOption(writer, "SvgDirectory", this.GetPath(_svgDirectory));
             this.SaveOption(writer, "PngDirectory", this.GetPath(_pngDirectory));
-            this.SaveOption(writer, "FontDirectory", this.GetPath(_fontDirectory));
-            this.SaveOption(writer, "ImageDirectory", this.GetPath(_imageDirectory));
+            this.SaveOption(writer, "FontDirectory", this.GetPath(_fontsDirectory));
+            this.SaveOption(writer, "ImageDirectory", this.GetPath(_imagesDirectory));
+
+            this.SaveOption(writer, "RsvgDirectory", this.GetPath(_rsvgDirectory));
+            this.SaveOption(writer, "MagickDirectory", this.GetPath(_magickDirectory));
+
             this.SaveOption(writer, "SelectedNumber", _selectedNumber);
 
             if (_wpfSettings != null)

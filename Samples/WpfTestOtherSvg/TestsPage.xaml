@@ -1,11 +1,12 @@
-﻿<Page x:Class="WpfTestOtherSvg.DrawingPage"
+﻿<Page x:Class="WpfTestOtherSvg.TestsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:WpfTestOtherSvg"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-    mc:Ignorable="d" Title="DrawingPage" d:DesignHeight="550" d:DesignWidth="800">
+    xmlns:wv2="clr-namespace:WebViews.Wpf;assembly=WebViews.Wpf"
+    mc:Ignorable="d" Title="TestsPage" d:DesignHeight="550" d:DesignWidth="800">
     <Grid x:Name="rightGrid"> 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,14 +24,23 @@
         </DockPanel>
         <GridSplitter x:Name="rightSplitter" Grid.Row="1" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
                       BorderThickness="1" BorderBrush="Gray" Background="Gray"/>
-        <DockPanel LastChildFill="True" Grid.Row="2">
-            <TextBlock DockPanel.Dock="Top" Height="24" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Expected Image</TextBlock>
-            <ScrollViewer IsDeferredScrollingEnabled="True">
-                <Canvas x:Name="pngCanvas" Background="White">
-                    <Image x:Name="pngImage" Margin="6, 6, 6, 6" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Canvas>                
-            </ScrollViewer>
-        </DockPanel>
+
+        <UniformGrid Columns="2" Rows="1" Grid.Row="2">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Height="24" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">Expected Image</TextBlock>
+                <ScrollViewer IsDeferredScrollingEnabled="True">
+                    <Canvas x:Name="pngCanvas" Background="White">
+                        <Image x:Name="pngImage" Margin="6, 6, 6, 6" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Canvas>                
+                </ScrollViewer>
+            </DockPanel>
+            
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Height="24" FontSize="14" FontWeight="Bold" VerticalAlignment="Center">WebView (Edge-Chrome)</TextBlock>
+                <wv2:WebView x:Name="webView"/>
+            </DockPanel>            
+        </UniformGrid>
+        
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right">
             <Border x:Name="ctrlSave" MouseLeftButtonDown="OnSaveTests" BorderThickness="3" BorderBrush="LightGray" CornerRadius="360"

@@ -8,7 +8,7 @@
     mc:Ignorable="d" 
     x:Name="mainWindow"
     local:MainWindowSettings.Save="True"
-    Title="WPF Test Application" Height="589" Width="988" WindowStartupLocation="CenterScreen" Icon="App.ico">
+    Title="WPF Test Application" Height="589" Width="1098" WindowStartupLocation="CenterScreen" Icon="App.ico">
     <DockPanel LastChildFill="True" Margin="3">
         <!-- Main Content -->
         <Border BorderBrush="Transparent" BorderThickness="1" CornerRadius="6" Margin="0, 3, 0, 3">
@@ -137,15 +137,26 @@
                             </Setter>
                         </Style>
                     </TabControl.Resources>
-                    <TabItem x:Name="tabDrawing" GotFocus="OnTabItemGotFocus">
+                    <TabItem x:Name="tabTests" GotFocus="OnTabItemGotFocus">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/View.svg, AppName=WpfTestOtherSvg}" />
-                                <TextBlock Text="Viewer" Margin="3" Width="80" VerticalAlignment="Center"/>
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Test.svg, AppName=WpfTestOtherSvg}" />
+                                <TextBlock Text="Tests" Margin="3" Width="80" VerticalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
                         <TabItem.Content>
-                            <Frame x:Name="frameDrawing" Source="DrawingPage.xaml"/>
+                            <Frame x:Name="frameTests" Source="TestsPage.xaml"/>
+                        </TabItem.Content>
+                    </TabItem>
+                    <TabItem x:Name="tabOthers" GotFocus="OnTabItemGotFocus">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/TestResultDetail.svg, AppName=WpfTestOtherSvg}" />
+                                <TextBlock Text="Tests - Other" Margin="3" Width="80" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <Frame x:Name="frameOthers" Source="TestsOtherPage.xaml"/>
                         </TabItem.Content>
                     </TabItem>
                     <TabItem x:Name="tabSvgInput" GotFocus="OnTabItemGotFocus">

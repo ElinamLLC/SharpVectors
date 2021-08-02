@@ -2695,6 +2695,11 @@
             <summary>Represents a 1-tuple, or singleton, as a value type.</summary>
             <typeparam name="T1">The type of the tuple's only component.</typeparam>
         </member>
+        <member name="F:System.ValueTuple`1.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`1"/> instance's first component.
+            </summary>
+        </member>
         <member name="M:System.ValueTuple`1.#ctor(`0)">
             <summary>
             Initializes a new instance of the <see cref="T:System.ValueTuple`1"/> value type.
@@ -2761,6 +2766,16 @@
             </summary>
             <typeparam name="T1">The type of the tuple's first component.</typeparam>
             <typeparam name="T2">The type of the tuple's second component.</typeparam>
+        </member>
+        <member name="F:System.ValueTuple`2.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`2"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`2.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`2"/> instance's first component.
+            </summary>
         </member>
         <member name="M:System.ValueTuple`2.#ctor(`0,`1)">
             <summary>
@@ -2852,6 +2867,21 @@
             <typeparam name="T2">The type of the tuple's second component.</typeparam>
             <typeparam name="T3">The type of the tuple's third component.</typeparam>
         </member>
+        <member name="F:System.ValueTuple`3.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`3"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`3.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`3"/> instance's second component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`3.Item3">
+            <summary>
+            The current <see cref="T:System.ValueTuple`3"/> instance's third component.
+            </summary>
+        </member>
         <member name="M:System.ValueTuple`3.#ctor(`0,`1,`2)">
             <summary>
             Initializes a new instance of the <see cref="T:System.ValueTuple`3"/> value type.
@@ -2921,6 +2951,26 @@
             <typeparam name="T2">The type of the tuple's second component.</typeparam>
             <typeparam name="T3">The type of the tuple's third component.</typeparam>
             <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+        </member>
+        <member name="F:System.ValueTuple`4.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`4"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`4.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`4"/> instance's second component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`4.Item3">
+            <summary>
+            The current <see cref="T:System.ValueTuple`4"/> instance's third component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`4.Item4">
+            <summary>
+            The current <see cref="T:System.ValueTuple`4"/> instance's fourth component.
+            </summary>
         </member>
         <member name="M:System.ValueTuple`4.#ctor(`0,`1,`2,`3)">
             <summary>
@@ -2993,6 +3043,31 @@
             <typeparam name="T3">The type of the tuple's third component.</typeparam>
             <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
             <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+        </member>
+        <member name="F:System.ValueTuple`5.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`5"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`5.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`5"/> instance's second component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`5.Item3">
+            <summary>
+            The current <see cref="T:System.ValueTuple`5"/> instance's third component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`5.Item4">
+            <summary>
+            The current <see cref="T:System.ValueTuple`5"/> instance's fourth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`5.Item5">
+            <summary>
+            The current <see cref="T:System.ValueTuple`5"/> instance's fifth component.
+            </summary>
         </member>
         <member name="M:System.ValueTuple`5.#ctor(`0,`1,`2,`3,`4)">
             <summary>
@@ -3067,6 +3142,36 @@
             <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
             <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
             <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
+        </member>
+        <member name="F:System.ValueTuple`6.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`6"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`6.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`6"/> instance's second component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`6.Item3">
+            <summary>
+            The current <see cref="T:System.ValueTuple`6"/> instance's third component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`6.Item4">
+            <summary>
+            The current <see cref="T:System.ValueTuple`6"/> instance's fourth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`6.Item5">
+            <summary>
+            The current <see cref="T:System.ValueTuple`6"/> instance's fifth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`6.Item6">
+            <summary>
+            The current <see cref="T:System.ValueTuple`6"/> instance's sixth component.
+            </summary>
         </member>
         <member name="M:System.ValueTuple`6.#ctor(`0,`1,`2,`3,`4,`5)">
             <summary>
@@ -3143,6 +3248,41 @@
             <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
             <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
             <typeparam name="T7">The type of the tuple's seventh component.</typeparam>
+        </member>
+        <member name="F:System.ValueTuple`7.Item1">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's first component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`7.Item2">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's second component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`7.Item3">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's third component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`7.Item4">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's fourth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`7.Item5">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's fifth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`7.Item6">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's sixth component.
+            </summary>
+        </member>
+        <member name="F:System.ValueTuple`7.Item7">
+            <summary>
+            The current <see cref="T:System.ValueTuple`7"/> instance's seventh component.
+            </summary>
         </member>
         <member name="M:System.ValueTuple`7.#ctor(`0,`1,`2,`3,`4,`5,`6)">
             <summary>

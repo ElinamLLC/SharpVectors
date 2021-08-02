@@ -14,9 +14,10 @@ using System.Windows.Markup;
 using System.Windows.Controls;
 using System.Windows.Resources;
 
-using SharpVectors.Runtime;
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Dom.Utils;
+using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
 using DpiScale     = SharpVectors.Runtime.DpiScale;
@@ -1399,7 +1400,7 @@ namespace SharpVectors.Converters
                             string sContent = SvgObject.RemoveWhitespace(sourceData.Substring(nComma + 1));
                             byte[] imageBytes = Convert.FromBase64CharArray(sContent.ToCharArray(),
                                 0, sContent.Length);
-                            bool isGZiped = sContent.StartsWith(SvgObject.GZipSignature, StringComparison.Ordinal);
+                            bool isGZiped = sContent.StartsWith(SvgConstants.GZipSignature, StringComparison.Ordinal);
                             if (isGZiped)
                             {
                                 using (var stream = new MemoryStream(imageBytes))

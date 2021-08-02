@@ -16,6 +16,6 @@ namespace SharpVectors.Dom.Svg
 		ISvgPoint AppendItem(ISvgPoint newItem);
                         
         // not part of the SVG spec
-        void FromString(string listString);
+        void FromString(string listString, bool clearOnError);
 	}
 }
