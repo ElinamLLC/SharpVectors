@@ -32,5 +32,18 @@ namespace SharpVectors.Dom.Utils
 
 			return Path.Combine(newPaths);
 		}
+
+		public static string GetAssemblyPath(Assembly assembly)
+		{
+			var location = assembly.Location;
+
+			if (!string.IsNullOrEmpty(location))
+				return location;
+
+			var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+			var assemblyName = $"{assembly.GetName().Name}.dll";
+
+			return Path.Combine(baseDirectory, assemblyName);
+		}
 	}
 }

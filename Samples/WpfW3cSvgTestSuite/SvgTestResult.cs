@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using SharpVectors.Dom.Utils;
 
 namespace WpfW3cSvgTestSuite
 {
@@ -24,7 +25,7 @@ namespace WpfW3cSvgTestSuite
         public SvgTestResult()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(PathUtils.GetAssemblyPath(assembly));
 
             _date       = DateTime.Now;
             _version    = fvi.FileVersion;

@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Resources;
 
 using SharpVectors.Converters;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Renderers.Wpf;
 
 using IoPath = System.IO.Path;
@@ -103,8 +104,8 @@ namespace WpfW3cSvgTestSuite
             this.Loaded  += OnWindowLoaded;
             this.Closing += OnWindowClosing;
 
-            _drawingDir = IoPath.Combine(IoPath.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), "XamlDrawings");
+            _drawingDir = PathUtils.Combine(
+                System.Reflection.Assembly.GetExecutingAssembly(), "XamlDrawings");
 
             if (!Directory.Exists(_drawingDir))
             {

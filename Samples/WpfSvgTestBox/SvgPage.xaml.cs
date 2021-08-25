@@ -88,7 +88,7 @@ namespace WpfSvgTestBox
         {
             InitializeComponent();
 
-//            string workingDir = IoPath.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+//            string workingDir = PathUtils.Combine(Assembly.GetExecutingAssembly());
             string workingDir = IoPath.GetFullPath("..\\");
 
             _svgFilePath  = IoPath.Combine(workingDir, SvgFileName);
