@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Renderers.Gdi;
 
 namespace SharpVectors.Renderers.Forms
@@ -1058,7 +1059,7 @@ namespace SharpVectors.Renderers.Forms
                 svgPath = svgPath.Replace('/', '\\');
 
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+                localFile = PathUtils.Combine(assembly, svgPath);
                 if (File.Exists(localFile))
                 {
                     return new Uri(localFile);
@@ -1088,7 +1089,7 @@ namespace SharpVectors.Renderers.Forms
             svgPath = svgPath.Replace('/', '\\');
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            string localFile = Path.Combine(Path.GetDirectoryName(assembly.Location), svgPath);
+            string localFile = PathUtils.Combine(assembly, svgPath);
             if (File.Exists(localFile))
             {
                 return new Uri(localFile);

@@ -8,6 +8,7 @@ using System.Windows;
 
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Renderers.Utils
@@ -133,7 +134,7 @@ namespace SharpVectors.Renderers.Utils
                 return (document != null) ? document.Url : string.Empty;
             }
             set {
-                Uri uri = new Uri(new Uri(Assembly.GetExecutingAssembly().Location), value);
+                Uri uri = new Uri(new Uri(PathUtils.GetAssemblyPath(Assembly.GetExecutingAssembly())), value);
 
                 this.LoadDocument(uri, null);
             }
@@ -181,7 +182,7 @@ namespace SharpVectors.Renderers.Utils
                 return;
             }
 
-            Uri uri = new Uri(new Uri(Assembly.GetExecutingAssembly().Location), documentSource);
+            Uri uri = new Uri(new Uri(PathUtils.GetAssemblyPath(Assembly.GetExecutingAssembly())), documentSource);
 
             this.LoadDocument(uri, drawingSettings);
         }
