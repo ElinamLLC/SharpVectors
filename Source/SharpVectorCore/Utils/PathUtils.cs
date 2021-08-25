@@ -33,6 +33,11 @@ namespace SharpVectors.Dom.Utils
 			return Path.Combine(newPaths);
 		}
 
+		/// <summary>
+		/// Gets the full path to the assembly file.
+		/// </summary>
+		/// <param name="assembly">An <see cref="Assembly"/> which is taken as the base path.</param>
+		/// <returns>A string containing the full path to the assembly file.</returns>
 		public static string GetAssemblyPath(Assembly assembly)
 		{
 			var location = assembly.Location;
@@ -46,6 +51,11 @@ namespace SharpVectors.Dom.Utils
 			return Path.Combine(baseDirectory, assemblyName);
 		}
 
+		/// <summary>
+		/// Gets the file name if the assembly.
+		/// </summary>
+		/// <param name="assembly">An <see cref="Assembly"/> which is taken as the base path.</param>
+		/// <returns>A string containing the file name of the assembly.</returns>
 		public static string GetAssemblyFileName(Assembly assembly) =>
 			assembly.ManifestModule.Name;
 	}
