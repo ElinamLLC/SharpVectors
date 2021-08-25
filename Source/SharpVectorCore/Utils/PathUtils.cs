@@ -41,9 +41,12 @@ namespace SharpVectors.Dom.Utils
 				return location;
 
 			var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-			var assemblyName = assembly.ManifestModule.Name;
+			var assemblyName = GetAssemblyFileName(assembly);
 
 			return Path.Combine(baseDirectory, assemblyName);
 		}
+
+		public static string GetAssemblyFileName(Assembly assembly) =>
+			assembly.ManifestModule.Name;
 	}
 }

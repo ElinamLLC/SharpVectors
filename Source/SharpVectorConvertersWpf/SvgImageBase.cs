@@ -394,7 +394,7 @@ namespace SharpVectors.Converters
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
-                          let assmName = Path.GetFileName(assembly.Location).Trim()
+                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
                           where assmName.EndsWith(".exe", comparer)
                           where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
                           select assembly
@@ -432,7 +432,7 @@ namespace SharpVectors.Converters
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
-                          let assmName = Path.GetFileName(assembly.Location).Trim()
+                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
                           where assmName.EndsWith(".exe", comparer)
                           where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
                           select assembly
