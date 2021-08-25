@@ -41,9 +41,16 @@ namespace SharpVectors.Dom.Utils
 				return location;
 
 			var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-			var assemblyName = $"{assembly.GetName().Name}.dll";
+			var assemblyName = assembly.GetName().Name;
 
-			return Path.Combine(baseDirectory, assemblyName);
+			var path = BuildPath(baseDirectory, assemblyName, "dll");
+
+			return !File.Exists(path)
+				? BuildPath(baseDirectory, assemblyName, "exe")
+				: path;
+
+			static string BuildPath(in string baseDirectory, in string assemblyName, in string extension) =>
+				Path.Combine(baseDirectory, $"{assemblyName}.{extension}");
 		}
 	}
 }
