@@ -14,6 +14,7 @@ using System.Windows.Threading;
 
 using SharpVectors.Runtime;
 using SharpVectors.Converters;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Renderers.Wpf;
 
 using DpiScale     = SharpVectors.Runtime.DpiScale;
@@ -133,8 +134,8 @@ namespace WpfTestSvgSample
 
             _mouseHandlingMode = ZoomPanMouseHandlingMode.None;
 
-            string workDir = Path.Combine(Path.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), TemporalDirName);
+            string workDir = PathUtils.Combine(
+                System.Reflection.Assembly.GetExecutingAssembly(), TemporalDirName);
 
             _workingDir = new DirectoryInfo(workDir);
 

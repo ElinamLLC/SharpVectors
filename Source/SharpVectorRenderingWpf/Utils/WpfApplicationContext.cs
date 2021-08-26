@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
+using SharpVectors.Dom.Utils;
 
 namespace SharpVectors.Renderers.Utils
 {
@@ -19,8 +20,8 @@ namespace SharpVectors.Renderers.Utils
 
                     f.Assert();
 #endif
-                    di = new DirectoryInfo(Path.GetDirectoryName(
-                        System.Reflection.Assembly.GetExecutingAssembly().Location));
+                    di = new DirectoryInfo(PathUtils.Combine(
+                        System.Reflection.Assembly.GetExecutingAssembly()));
                 }
                 catch (SecurityException)
                 {

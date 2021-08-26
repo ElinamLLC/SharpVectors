@@ -58,7 +58,7 @@ namespace GdiSvgTestBox
             this._vsToolStripExtender = new VisualStudioToolStripExtender(this.components);
             _vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
 
-            //string workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //string workingDir = PathUtils.Combine(Assembly.GetExecutingAssembly());
             string workingDir = Path.GetFullPath("..\\");
 
             _svgFilePath  = Path.Combine(workingDir, SvgFileName);

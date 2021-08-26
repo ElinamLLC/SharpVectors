@@ -17,6 +17,7 @@ using System.Windows.Controls.Primitives;
 using Microsoft.Win32;
 
 using SharpVectors.Converters;
+using SharpVectors.Dom.Utils;
 using SharpVectors.Renderers.Wpf;
 
 using IoPath = System.IO.Path;
@@ -89,8 +90,8 @@ namespace WpfTestSvgControl
             this.Unloaded += OnWindowUnloaded;
             this.Closing  += OnWindowClosing;
 
-            _drawingDir = IoPath.Combine(IoPath.GetDirectoryName(
-                System.Reflection.Assembly.GetExecutingAssembly().Location), DrawingPage.TemporalDirName);
+            _drawingDir = PathUtils.Combine(
+	            System.Reflection.Assembly.GetExecutingAssembly(), DrawingPage.TemporalDirName);
 
             if (!Directory.Exists(_drawingDir))
             {
