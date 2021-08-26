@@ -84,13 +84,43 @@ namespace SharpVectors.Core.Tests.Utils
 			const string dir1 = nameof(dir1), dir2 = nameof(dir2);
 
 			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, dir1, dir2),
-				got = GetProjectRelativePath(CombineInternal("", dir1, dir2));
+				got = GetProjectRelativePath(CombineInternal(dir1, dir2));
 
 			Assert.AreEqual(want, got);
 		}
 
-		private string CombineInternal(string location, params string[] paths) =>
-			(string)_combineInternal.Invoke(null, new object[] { location, paths });
+		[Test]
+		public void GetAssemblyPathLocation()
+		{
+			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, "SharpVectors.Core.Tests.dll"),
+				got = GetProjectRelativePath(PathUtils.GetAssemblyPath(_fixture));
+
+			Assert.AreEqual(want, got);
+		}
+
+		[Test]
+		public void GetAssemblyPathAppDomain()
+		{
+			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, "SharpVectors.Core.Tests.dll"),
+				got = GetProjectRelativePath(GetAssemblyPathInternal(_fixture));
+
+			Assert.AreEqual(want, got);
+		}
+
+		[Test]
+		public void GetAssemblyFileName()
+		{
+			const string want = "SharpVectors.Core.Tests.dll";
+			var got = PathUtils.GetAssemblyFileName(_fixture);
+
+			Assert.AreEqual(want, got);
+		}
+
+		private string CombineInternal(params string[] paths) =>
+			(string)_combineInternal.Invoke(null, new object[] { "", paths });
+
+		private string GetAssemblyPathInternal(Assembly assembly) =>
+			(string)_getAssemblyPathInternal.Invoke(null, new object[] { assembly, "" });
 
 		private static MethodInfo GetPrivateMethod(string name) =>
 			typeof(PathUtils).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic);
