@@ -35,7 +35,7 @@ namespace SharpVectors.Dom.Utils
 			assembly.ManifestModule.Name;
 
 		/// <summary>
-		/// 
+		/// Exposes <see cref="Combine"/> for unit-testing where it is possible to mock an empty location
 		/// </summary>
 		private static string CombineInternal(string location, string[] paths)
 		{
@@ -53,6 +53,9 @@ namespace SharpVectors.Dom.Utils
 			return Path.Combine(newPaths);
 		}
 
+		/// <summary>
+		/// Exposes <see cref="GetAssemblyPath"/> for unit-testing where it is possible to mock an empty location
+		/// </summary>
 		private static string GetAssemblyPathInternal(Assembly assembly, string location)
 		{
 			if (!string.IsNullOrEmpty(location))
