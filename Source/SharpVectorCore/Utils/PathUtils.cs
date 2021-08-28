@@ -75,7 +75,7 @@ namespace SharpVectors.Dom.Utils
 
 		private static string GetBaseDirectory()
 		{
-#if NET50
+#if NETCORE
 			return AppContext.BaseDirectory;
 #else
 			return AppDomain.CurrentDomain.BaseDirectory;
