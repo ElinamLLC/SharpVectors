@@ -15,24 +15,30 @@ namespace SharpVectors.Dom.Utils
 		/// <param name="assembly">An <see cref="Assembly"/> which is taken as the base path.</param>
 		/// <param name="paths">Path segments which are appended to the assembly location.</param>
 		/// <returns>A string containing the combined path.</returns>
-		public static string Combine(Assembly assembly, params string[] paths) =>
-			CombineInternal(assembly.Location, paths);
+		public static string Combine(Assembly assembly, params string[] paths)
+		{
+			return CombineInternal(assembly.Location, paths);
+		}
 
 		/// <summary>
 		/// Gets the full path to the assembly file.
 		/// </summary>
 		/// <param name="assembly">An <see cref="Assembly"/> which is taken as the base path.</param>
 		/// <returns>A string containing the full path to the assembly file.</returns>
-		public static string GetAssemblyPath(Assembly assembly) =>
-			GetAssemblyPathInternal(assembly, assembly.Location);
+		public static string GetAssemblyPath(Assembly assembly)
+		{
+			return GetAssemblyPathInternal(assembly, assembly.Location);
+		}
 
 		/// <summary>
 		/// Gets the file name if the assembly.
 		/// </summary>
 		/// <param name="assembly">An <see cref="Assembly"/> which is taken as the base path.</param>
 		/// <returns>A string containing the file name of the assembly.</returns>
-		public static string GetAssemblyFileName(Assembly assembly) =>
-			assembly.ManifestModule.Name;
+		public static string GetAssemblyFileName(Assembly assembly)
+		{
+			return assembly.ManifestModule.ScopeName;
+		}
 
 		/// <summary>
 		/// Exposes <see cref="Combine"/> for unit-testing where it is possible to mock an empty location
@@ -40,7 +46,7 @@ namespace SharpVectors.Dom.Utils
 		private static string CombineInternal(string location, string[] paths)
 		{
 			var basePath = string.IsNullOrEmpty(location)
-				? AppDomain.CurrentDomain.BaseDirectory
+				? GetBaseDirectory()
 				: Path.GetDirectoryName(location);
 
 			if (paths.Length == 0)
@@ -61,10 +67,19 @@ namespace SharpVectors.Dom.Utils
 			if (!string.IsNullOrEmpty(location))
 				return location;
 
-			var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+			var baseDirectory = GetBaseDirectory();
 			var assemblyName = GetAssemblyFileName(assembly);
 
 			return Path.Combine(baseDirectory, assemblyName);
+		}
+
+		private static string GetBaseDirectory()
+		{
+#if NETCORE
+			return AppContext.BaseDirectory;
+#else
+			return AppDomain.CurrentDomain.BaseDirectory;
+#endif
 		}
 	}
 }
