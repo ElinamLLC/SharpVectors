@@ -32,7 +32,7 @@ namespace SharpVectors.Dom.Utils
 		/// <param name="assembly">An <see cref="Assembly"/> which is taken as the base path.</param>
 		/// <returns>A string containing the file name of the assembly.</returns>
 		public static string GetAssemblyFileName(Assembly assembly) =>
-			assembly.ManifestModule.Name;
+			assembly.ManifestModule.ScopeName;
 
 		/// <summary>
 		/// Exposes <see cref="Combine"/> for unit-testing where it is possible to mock an empty location
