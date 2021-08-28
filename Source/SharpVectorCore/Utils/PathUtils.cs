@@ -40,7 +40,7 @@ namespace SharpVectors.Dom.Utils
 		private static string CombineInternal(string location, string[] paths)
 		{
 			var basePath = string.IsNullOrEmpty(location)
-				? AppDomain.CurrentDomain.BaseDirectory
+				? GetBaseDirectory()
 				: Path.GetDirectoryName(location);
 
 			if (paths.Length == 0)
@@ -61,10 +61,19 @@ namespace SharpVectors.Dom.Utils
 			if (!string.IsNullOrEmpty(location))
 				return location;
 
-			var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+			var baseDirectory = GetBaseDirectory();
 			var assemblyName = GetAssemblyFileName(assembly);
 
 			return Path.Combine(baseDirectory, assemblyName);
+		}
+
+		private static string GetBaseDirectory()
+		{
+#if NET5_0
+			return AppContext.BaseDirectory;
+#else
+			return AppDomain.CurrentDomain.BaseDirectory;
+#endif
 		}
 	}
 }
