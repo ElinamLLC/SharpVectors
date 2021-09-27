@@ -94,6 +94,7 @@ namespace SharpVectors.Dom.Svg
                 return this.OwnerSvgElement;
             }
         }
+
         ISvgElement ISvgElement.ViewportElement
         {
             get {

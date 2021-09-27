@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
 
 namespace SharpVectors.Woffs
@@ -8,18 +9,8 @@ namespace SharpVectors.Woffs
     /// </summary>
     /// <seealso href="https://www.w3.org/TR/WOFF/">WOFF File Format 1.0</seealso>
     /// <seealso href="https://www.w3.org/TR/WOFF2/">WOFF File Format 2.0</seealso>
-    public sealed class SvgWoffHeader : SvgWoffObject
+    public sealed class WoffHeader
     {
-        public const uint Woff1Size     = (9 * SizeULong) + (4 * SizeUShort);  //  a 44-byte header
-        public const uint Woff2Size     = (10 * SizeULong) + (4 * SizeUShort);  //  a 48-byte header
-
-        public const uint TtfSignature  = 0x00010000;
-        public const uint TtcSignature  = 0x74746366; // 'ttcf'
-        public const uint OtfSignature  = 0x4F54544F; // 'OTTO'
-
-        public const uint Woff1Signature = 0x774F4646; // 'wOFF'
-        public const uint Woff2Signature = 0x774F4632; // 'wOF2'
-
         /// <summary>
         /// The Woff 1 or 2 signature
         /// </summary>
@@ -91,15 +82,40 @@ namespace SharpVectors.Woffs
         /// </summary>
         private uint _privateLength;
 
-        public SvgWoffHeader()
+        // Extra information
+
+        /// <summary>
+        /// The format version of the WOFF file. Possible values are 1 or 2.
+        /// </summary>
+        private byte _woffVersion;
+
+        public WoffHeader(byte woffVersion)
         {
-            _signature = Woff1Signature;
+            if (woffVersion != WoffUtils.Woff1Version && woffVersion != WoffUtils.Woff2Version)
+            {
+                throw new ArgumentException(nameof(woffVersion), "Possible values for woffVersion are 1 or 2.");
+            }
+
+            _woffVersion = woffVersion;
+            _signature   = _woffVersion == WoffUtils.Woff1Version 
+                ? WoffUtils.Woff1Signature : WoffUtils.Woff2Signature;
+        }
+
+        /// <summary>
+        /// Gets the <c>W3C</c> Specifications Format Version of the WOFF file.
+        /// </summary>
+        /// <value>Possible values are <c>1</c> or <c>2</c>, for the Web Open Font Format 1 (WOFF1) and 2 (WOFF2).</value>
+        public byte WoffVersion
+        {
+            get {
+                return _woffVersion;
+            }
         }
 
         public string Name
         {
             get {
-                return StringValue(_signature);
+                return WoffBuffer.TagString(_signature);
             }
         }
 
@@ -120,14 +136,14 @@ namespace SharpVectors.Woffs
         public bool IsTrueType
         {
             get {
-                return (_flavor == TtfSignature);
+                return (_flavor == WoffUtils.TtfSignature);
             }
         }
 
         public bool IsCollection
         {
             get {
-                return (_flavor == TtcSignature);
+                return (_flavor == WoffUtils.TtcSignature);
             }
         }
 
@@ -230,7 +246,7 @@ namespace SharpVectors.Woffs
                 return _totalCompressedSize;
             }
             set {
-                _totalCompressedSize = value;
+                this._totalCompressedSize = value;
             }
         }
 
@@ -325,85 +341,72 @@ namespace SharpVectors.Woffs
             }
         }
 
-        public override uint HeaderSize
+        public ushort HeaderSize
         {
             get {
-                return Woff1Size;
+                return _woffVersion == WoffUtils.Woff1Version 
+                    ? WoffUtils.Woff1HeaderSize : WoffUtils.Woff2HeaderSize;
             }
         }
 
-        public override bool SetHeader(byte[] header)
+        public bool Read(Stream stream)
         {
-            if (header == null || (header.Length != Woff1Size && header.Length != Woff2Size))
+            if (stream == null)
             {
                 return false;
             }
+            Debug.Assert(_woffVersion == WoffUtils.Woff1Version || _woffVersion == WoffUtils.Woff2Version);
+
+            var headerSize = this.HeaderSize;
+
+            var header = new byte[headerSize];
+
+            var sizeRead = stream.Read(header, 0, headerSize);
+            Debug.Assert(sizeRead == headerSize);
 
             var bufferSize = header.Length;
 
-            base.SetHeader(header);
+            _signature      = WoffBuffer.ReadUInt32BE(header, 0);
+            _flavor         = WoffBuffer.ReadUInt32BE(header, 4);
+            _length         = WoffBuffer.ReadUInt32BE(header, 8);
 
-            _signature      = ReadUInt32BE(header, 0);
-            _flavor         = ReadUInt32BE(header, 4);
-            _length         = ReadUInt32BE(header, 8);
+            _numTables      = WoffBuffer.ReadUInt16BE(header, 12);
+            _reserved       = WoffBuffer.ReadUInt16BE(header, 14);
 
-            _numTables      = ReadUInt16BE(header, 12);
-            _reserved       = ReadUInt16BE(header, 14);
-            if (_reserved != 0)
+            _totalSfntSize = WoffBuffer.ReadUInt32BE(header, 16);
+            if (_woffVersion == WoffUtils.Woff1Version)
             {
-                return false;
-            }
+                _majorVersion   = WoffBuffer.ReadUInt16BE(header, 20);
+                _minorVersion   = WoffBuffer.ReadUInt16BE(header, 22);
 
-            _totalSfntSize = ReadUInt32BE(header, 16);
-            if (bufferSize == Woff1Size)
-            {
-                _majorVersion   = ReadUInt16BE(header, 20);
-                _minorVersion   = ReadUInt16BE(header, 22);
-
-                _metaOffset     = ReadUInt32BE(header, 24);
-                _metaLength     = ReadUInt32BE(header, 28);
-                _metaOrigLength = ReadUInt32BE(header, 32);
-                _privateOffset  = ReadUInt32BE(header, 36);
-                _privateLength  = ReadUInt32BE(header, 40);
+                _metaOffset     = WoffBuffer.ReadUInt32BE(header, 24);
+                _metaLength     = WoffBuffer.ReadUInt32BE(header, 28);
+                _metaOrigLength = WoffBuffer.ReadUInt32BE(header, 32);
+                _privateOffset  = WoffBuffer.ReadUInt32BE(header, 36);
+                _privateLength  = WoffBuffer.ReadUInt32BE(header, 40);
             }
             else
             {
-                _totalCompressedSize = ReadUInt32BE(header, 20);
+                _totalCompressedSize = WoffBuffer.ReadUInt32BE(header, 20);
 
-                _majorVersion   = ReadUInt16BE(header, 24);
-                _minorVersion   = ReadUInt16BE(header, 26);
+                _majorVersion   = WoffBuffer.ReadUInt16BE(header, 24);
+                _minorVersion   = WoffBuffer.ReadUInt16BE(header, 26);
 
-                _metaOffset     = ReadUInt32BE(header, 28);
-                _metaLength     = ReadUInt32BE(header, 32);
-                _metaOrigLength = ReadUInt32BE(header, 36);
-                _privateOffset  = ReadUInt32BE(header, 40);
-                _privateLength  = ReadUInt32BE(header, 44);
+                _metaOffset     = WoffBuffer.ReadUInt32BE(header, 28);
+                _metaLength     = WoffBuffer.ReadUInt32BE(header, 32);
+                _metaOrigLength = WoffBuffer.ReadUInt32BE(header, 36);
+                _privateOffset  = WoffBuffer.ReadUInt32BE(header, 40);
+                _privateLength  = WoffBuffer.ReadUInt32BE(header, 44);
             }
 
-            // The signature field in the WOFF header MUST contain the "magic number" 0x774F4646. 
-            // If the field does not contain this value, user agents MUST reject the file as invalid.
-            Debug.Assert((bufferSize == Woff1Size) ? _signature == Woff1Signature : _signature == Woff2Signature);
-            if (bufferSize == Woff1Size)
-            {
-                if (_signature != Woff1Signature)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (_signature != Woff2Signature)
-                {
-                    return false;
-                }
-            }
-            // The header includes a reserved field; this MUST be set to zero. 
-            // If this field is non-zero, a conforming user agent MUST reject the file as invalid.
+            // The signature field in the WOFF-1 header must contain the "magic number" 0x774F4646. 
+            // If the field does not contain this value, user agents must reject the file as invalid.
+            Debug.Assert((bufferSize == WoffUtils.Woff1HeaderSize)
+                ? _signature == WoffUtils.Woff1Signature : _signature == WoffUtils.Woff2Signature);
+
+            // The header includes a reserved field; this must be set to zero. 
+            // If this field is non-zero, a conforming user agent must reject the file as invalid.
             Debug.Assert(_reserved == 0);
-            if (_reserved != 0)
-            {
-                return false;
-            }
 
             return true;
         }

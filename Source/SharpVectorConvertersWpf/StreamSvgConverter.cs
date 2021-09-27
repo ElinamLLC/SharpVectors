@@ -487,29 +487,41 @@ namespace SharpVectors.Converters
             var bitmapEncoder = this.GetBitmapEncoder(this.GetImageFileExtention());
 
             // The image parameters...
-            //Rect drawingBounds = drawing.Bounds;
-            //int pixelWidth  = (int)drawingBounds.Width;
-            //int pixelHeight = (int)drawingBounds.Height;
-            double dpiX = 96;
-            double dpiY = 96;
+            Rect drawingBounds = drawing.Bounds;
+            double imageWidth  = drawingBounds.Width;
+            double imageHeight = drawingBounds.Height;
+            double ratio = 1;
+
+            int pixelWidth  = _wpfSettings.PixelWidth;
+            int pixelHeight = _wpfSettings.PixelHeight;
+            if (_wpfSettings.HasPixelSize)
+            {
+                double ratioX = pixelWidth / imageWidth;
+                double ratioY = pixelHeight / imageHeight;
+                ratio         = ratioX < ratioY ? ratioX : ratioY;
+            }
+            else
+            {
+                pixelWidth  = (int)imageWidth;
+                pixelHeight = (int)imageHeight;
+            }
+
+            var imageTransform = new ScaleTransform(ratio, ratio);
 
             // The Visual to use as the source of the RenderTargetBitmap.
-            DrawingVisual drawingVisual   = new DrawingVisual();
+            DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
+            drawingContext.PushTransform(imageTransform);
             if (this.Background != null)
             {
                 drawingContext.DrawRectangle(this.Background, null, drawing.Bounds);
             }
             drawingContext.DrawDrawing(drawing);
+            drawingContext.Pop();
             drawingContext.Close();
 
-            /// get bound of the visual
-            Rect drawingBounds = VisualTreeHelper.GetDescendantBounds(drawingVisual);
-            int pixelWidth  = (int)drawingBounds.Width;
-            int pixelHeight = (int)drawingBounds.Height;
-
             // The BitmapSource that is rendered with a Visual.
-            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, dpiX, dpiY, PixelFormats.Pbgra32);
+            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, _dpiX, _dpiY, PixelFormats.Pbgra32);
             targetBitmap.Render(drawingVisual);
 
             // Encoding the RenderBitmapTarget as an image file.

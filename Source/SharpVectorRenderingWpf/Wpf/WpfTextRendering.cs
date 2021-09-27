@@ -249,42 +249,60 @@ namespace SharpVectors.Renderers.Wpf
             {
                 placement = null; // render it useless
             }
-            string sBaselineShift = _textElement.GetPropertyValue("baseline-shift").Trim();
+            string sBaselineShift    = _textElement.GetPropertyValue("baseline-shift").Trim();
+            string alignmentBaseline = _textElement.GetPropertyValue("alignment-baseline").Trim();
+
             double shiftBy = 0;
 
-            if (sBaselineShift.Length > 0)
+            if (sBaselineShift.Length > 0 || alignmentBaseline.Length > 0)
             {
+                double alignShiftBy = 0;
+
                 double textFontSize = WpfTextRenderer.GetComputedFontSize(_textElement);
-                if (sBaselineShift.EndsWith("%", comparer))
+                if (alignmentBaseline.Length > 0)
                 {
-                    shiftBy = SvgNumber.TryParseNumber(sBaselineShift.Substring(0,
-                        sBaselineShift.Length - 1), shiftBy) / 100 * textFontSize;
+                    if (string.Equals(alignmentBaseline, "hanging", comparer))
+                    {
+                        alignShiftBy = -1.0 * textFontSize;
+                    }
+                    else if (string.Equals(alignmentBaseline, "middle", comparer))
+                    {
+                        alignShiftBy = -0.25F * textFontSize;
+                    }
                 }
-                else if (string.Equals(sBaselineShift, "sub", comparer))
+
+                if (sBaselineShift.Length > 0)
                 {
-                    shiftBy = -0.6F * textFontSize;
+                    if (sBaselineShift.EndsWith("%", comparer))
+                    {
+                        shiftBy = SvgNumber.TryParseNumber(sBaselineShift.Substring(0,
+                            sBaselineShift.Length - 1), shiftBy) / 100 * textFontSize;
+                    }
+                    else if (string.Equals(sBaselineShift, "sub", comparer))
+                    {
+                        shiftBy = -0.6F * textFontSize;
+                    }
+                    else if (string.Equals(sBaselineShift, "super", comparer))
+                    {
+                        shiftBy = 0.6F * textFontSize;
+                    }
+                    else if (string.Equals(sBaselineShift, CssConstants.ValBaseline, comparer))
+                    {
+                        shiftBy = 0;
+                    }
+                    else
+                    {
+                        shiftBy = SvgNumber.TryParseNumber(sBaselineShift, shiftBy);
+                    }
                 }
-                else if (string.Equals(sBaselineShift, "super", comparer))
-                {
-                    shiftBy = 0.6F * textFontSize;
-                }
-                else if (string.Equals(sBaselineShift, CssConstants.ValBaseline, comparer))
-                {
-                    shiftBy = 0;
-                }
-                else
-                {
-                    shiftBy = SvgNumber.TryParseNumber(sBaselineShift, shiftBy);
-                }
+
+                shiftBy += alignShiftBy;
             }
 
             // For for fonts loading in the background...
             var svgDoc = _svgElement.OwnerDocument;
             if (svgDoc.IsFontsLoaded == false)
             {
-                //TODO: Use of SpinUntil is known to CPU heavy, but will work for now...
-                //SpinWait.SpinUntil(() => svgDoc.IsFontsLoaded == true);
-
                 var svgWnd = svgDoc.Window as SvgWindow;
                 if (svgWnd != null)
                 {
@@ -965,7 +983,7 @@ namespace SharpVectors.Renderers.Wpf
             bool isVertical, bool isSingleLine)
         {
             _textContext.PositioningElement = element;
-            _textContext.PositioningStart = new Point(ctp.X, ctp.Y);
+            _textContext.PositioningStart   = new Point(ctp.X, ctp.Y);
 
             WpfTextPlacement placement = WpfTextPlacement.Create(element, ctp);
             ctp = placement.Location;

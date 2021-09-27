@@ -210,7 +210,7 @@ namespace SharpVectors.Renderers.Texts
             var textTransform = element.GetPropertyValue("text-transform");
             if (!string.IsNullOrWhiteSpace(textTransform))
             {
-                switch (textTransform)
+                switch (textTransform.ToLower())
                 {
                     case "capitalize":
                         val = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(val);
@@ -277,12 +277,12 @@ namespace SharpVectors.Renderers.Texts
 
         public static double GetComputedFontSize(SvgTextContentElement element)
         {
-            string str = element.GetPropertyValue("font-size");
+            string str = element.GetPropertyValue(CssConstants.PropFontSize);
             double fontSize = 12;
             if (_decimalNumber.IsMatch(str))
             {
                 // svg length
-                var fontLength = new SvgLength(element, "font-size", SvgLengthDirection.Viewport, str, "10px");
+                var fontLength = new SvgLength(element, CssConstants.PropFontSize, SvgLengthDirection.Viewport, str, "10px");
                 fontSize = fontLength.Value;
             }
 
@@ -399,7 +399,7 @@ namespace SharpVectors.Renderers.Texts
 
         protected FontWeight GetTextFontWeight(SvgTextContentElement element)
         {
-            string fontWeight = element.GetPropertyValue("font-weight");
+            string fontWeight = element.GetPropertyValue(CssConstants.PropFontWeight);
             if (string.IsNullOrWhiteSpace(fontWeight))
             {
                 return FontWeights.Normal;
@@ -438,7 +438,7 @@ namespace SharpVectors.Renderers.Texts
                 SvgTransformableElement parentElement = element.ParentNode as SvgTransformableElement;
                 if (parentElement != null)
                 {
-                    fontWeight = parentElement.GetPropertyValue("font-weight");
+                    fontWeight = parentElement.GetPropertyValue(CssConstants.PropFontWeight);
                     if (!string.IsNullOrWhiteSpace(fontWeight))
                     {
                         return this.GetBolderFontWeight(fontWeight);
@@ -451,7 +451,7 @@ namespace SharpVectors.Renderers.Texts
                 SvgTransformableElement parentElement = element.ParentNode as SvgTransformableElement;
                 if (parentElement != null)
                 {
-                    fontWeight = parentElement.GetPropertyValue("font-weight");
+                    fontWeight = parentElement.GetPropertyValue(CssConstants.PropFontWeight);
                     if (!string.IsNullOrWhiteSpace(fontWeight))
                     {
                         return this.GetLighterFontWeight(fontWeight);

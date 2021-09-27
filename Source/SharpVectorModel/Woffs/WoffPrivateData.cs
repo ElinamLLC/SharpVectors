@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SharpVectors.Woffs
 {
-    public sealed class SvgWoffPrivateData
+    public sealed class WoffPrivateData
     {
         /// <summary>
         /// Offset to private data block, from beginning of WOFF file.
@@ -19,11 +16,11 @@ namespace SharpVectors.Woffs
 
         private byte[] _data;
 
-        public SvgWoffPrivateData()
+        public WoffPrivateData()
         {
         }
 
-        public SvgWoffPrivateData(uint offset, uint length)
+        public WoffPrivateData(uint offset, uint length)
         {
             _offset = offset;
             _length = length;

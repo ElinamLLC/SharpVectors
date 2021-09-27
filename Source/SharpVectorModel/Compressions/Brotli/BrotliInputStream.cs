@@ -159,7 +159,7 @@ namespace SharpVectors.Compressions.Brotli
                 BrotliDecode.Decompress(_state);
                 if (_state.outputUsed == 0)
                 {
-                    return -1;
+                    return 0;
                 }
                 return _state.outputUsed + copyLen;
             }

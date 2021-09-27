@@ -943,10 +943,9 @@ namespace SharpVectors.Converters
             string outputFileName = null;
             if (string.IsNullOrWhiteSpace(imageFileName))
             {
-                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
-
-                string workingDir = Path.GetDirectoryName(fileName);
-                outputFileName = Path.Combine(workingDir, fileNameWithoutExt + outputExt);
+                var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+                var workingDir         = Path.GetDirectoryName(fileName);
+                outputFileName         = Path.Combine(workingDir, fileNameWithoutExt + outputExt);
             }
             else
             {
@@ -975,23 +974,40 @@ namespace SharpVectors.Converters
 
             // The image parameters...
             Rect drawingBounds = _drawing.Bounds;
-            int pixelWidth     = (int)drawingBounds.Width;
-            int pixelHeight    = (int)drawingBounds.Height;
-            double dpiX        = 96;
-            double dpiY        = 96;
+            double imageWidth  = drawingBounds.Width;
+            double imageHeight = drawingBounds.Height;
+            double ratio       = 1;
+
+            int pixelWidth  = _wpfSettings.PixelWidth;
+            int pixelHeight = _wpfSettings.PixelHeight;
+            if (_wpfSettings.HasPixelSize)
+            {
+                double ratioX = pixelWidth / imageWidth;
+                double ratioY = pixelHeight / imageHeight;
+                ratio         = ratioX < ratioY ? ratioX : ratioY;
+            }
+            else
+            {
+                pixelWidth  = (int)imageWidth;
+                pixelHeight = (int)imageHeight;
+            }
+
+            var imageTransform = new ScaleTransform(ratio, ratio);
 
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
+            drawingContext.PushTransform(imageTransform);
             if (this.Background != null)
             {
                 drawingContext.DrawRectangle(this.Background, null, _drawing.Bounds);
             }
             drawingContext.DrawDrawing(_drawing);
+            drawingContext.Pop();
             drawingContext.Close();
 
             // The BitmapSource that is rendered with a Visual.
-            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, dpiX, dpiY, PixelFormats.Pbgra32);
+            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, _dpiX, _dpiY, PixelFormats.Pbgra32);
             targetBitmap.Render(drawingVisual);
 
             // Encoding the RenderBitmapTarget as an image file.

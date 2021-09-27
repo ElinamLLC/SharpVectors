@@ -88,7 +88,8 @@ namespace SharpVectors.Converters
 
             if (settings != null)
             {
-                settings.EnsureViewboxSize = true;
+                settings.EnsureViewboxSize = false;
+                settings.IgnoreRootViewbox = true;
 
                 if (settings.HasPixelSize)
                 {
@@ -628,9 +629,9 @@ namespace SharpVectors.Converters
             string outputFileName = null;
             if (string.IsNullOrWhiteSpace(imageFileName))
             {
-                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+                var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
 
-                string workingDir = Path.GetDirectoryName(fileName);
+                var workingDir = Path.GetDirectoryName(fileName);
                 outputFileName = Path.Combine(workingDir, fileNameWithoutExt + outputExt);
             }
             else
@@ -660,23 +661,40 @@ namespace SharpVectors.Converters
 
             // The image parameters...
             Rect drawingBounds = drawing.Bounds;
-            int pixelWidth     = (int)drawingBounds.Width;
-            int pixelHeight    = (int)drawingBounds.Height;
-            double dpiX        = 96;
-            double dpiY        = 96;
+            double imageWidth  = drawingBounds.Width;
+            double imageHeight = drawingBounds.Height;
+            double ratio = 1;
+
+            int pixelWidth  = _wpfSettings.PixelWidth;
+            int pixelHeight = _wpfSettings.PixelHeight;
+            if (_wpfSettings.HasPixelSize)
+            {
+                double ratioX = pixelWidth / imageWidth;
+                double ratioY = pixelHeight / imageHeight;
+                ratio         = ratioX < ratioY ? ratioX : ratioY;
+            }
+            else
+            {
+                pixelWidth  = (int)imageWidth;
+                pixelHeight = (int)imageHeight;
+            }
+
+            var imageTransform = new ScaleTransform(ratio, ratio);
 
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
             DrawingContext drawingContext = drawingVisual.RenderOpen();
+            drawingContext.PushTransform(imageTransform);
             if (this.Background != null)
             {
                 drawingContext.DrawRectangle(this.Background, null, drawing.Bounds);
             }
             drawingContext.DrawDrawing(drawing);
+            drawingContext.Pop();
             drawingContext.Close();
 
             // The BitmapSource that is rendered with a Visual.
-            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, dpiX, dpiY, PixelFormats.Pbgra32);
+            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, _dpiX, _dpiY, PixelFormats.Pbgra32);
             targetBitmap.Render(drawingVisual);
 
             // Encoding the RenderBitmapTarget as an image file.
@@ -726,8 +744,7 @@ namespace SharpVectors.Converters
                 {
                     bitmapEncoder = _bitampEncoder;
                 }
-                else if (!string.IsNullOrWhiteSpace(mimeTypes) &&
-                    !string.IsNullOrWhiteSpace(mimeType))
+                else if (!string.IsNullOrWhiteSpace(mimeTypes) && !string.IsNullOrWhiteSpace(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)

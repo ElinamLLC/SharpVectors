@@ -1,85 +1,518 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
+using System.Diagnostics;
 
 namespace SharpVectors.Woffs
 {
     /// <summary>
-    /// 
+    /// A memory buffer with support for Big-Endian based data types conversions (bytes to/from integers). 
     /// </summary>
-    /// <remarks>
-    /// <para>Data types</para>
-    /// <para>UInt32 32-bit (4-byte) unsigned integer in big-endian format</para>
-    /// <para>UInt16 16-bit (2-byte) unsigned integer in big-endian format</para>
-    /// </remarks>
-    public abstract class SvgWoffObject
+    public sealed class WoffBuffer
     {
-        public const byte SizeByte         = 1;
-        public const byte SizeChar         = 1;
-        public const byte SizeUShort       = 2;
-        public const byte SizeShort        = 2;
-        public const byte SizeUInt24       = 3;
-        public const byte SizeULong        = 4;
-        public const byte SizeLong         = 4;
-        public const byte SizeFixed        = 4;
-        public const byte SizeFUnit        = 4;
-        public const byte SizeFWord        = 2;
-        public const byte SizeUFWord       = 2;
-        public const byte SizeF2Dot14      = 2;
-        public const byte SizeLongDatetime = 8;
-        public const byte SizeTag          = 4;
-        public const byte SizeGlyphID      = 2;
-        public const byte SizeOffset       = 2;
+        #region Public Constants
 
-        protected byte[] _header;
+        public const byte SizeOfByte         = 1;
+        public const byte SizeOfChar         = 1;
+        public const byte SizeOfUShort       = 2;
+        public const byte SizeOfShort        = 2;
+        public const byte SizeOfUInt24       = 3;
+        public const byte SizeOfUInt         = 4;
+        public const byte SizeOfInt          = 4;
+        public const byte SizeOfULong        = 8;
+        public const byte SizeOfLong         = 8;
+        public const byte SizeOfFixed        = 4;
+        public const byte SizeOfFUnit        = 4;
+        public const byte SizeOfFWord        = 2;
+        public const byte SizeOfUFWord       = 2;
+        public const byte SizeOfF2Dot14      = 2;
+        public const byte SizeOfLongDatetime = 8;
+        public const byte SizeOfTag          = 4;
+        public const byte SizeOfGlyphID      = 2;
+        public const byte SizeOfOffset       = 2;
 
-        protected SvgWoffObject()
+        // 255UInt16 data type parameters
+        public const byte OneMoreByteCode1 = 255;
+        public const byte OneMoreByteCode2 = 254;
+        public const byte WordCode         = 253;
+        public const byte LowestUCode      = 253;
+
+        #endregion
+
+        #region Private Fields
+
+        private long _filePos; // file position from which this buffer was read, -1 if not from file
+        private uint _length; // number of data bytes
+        private uint _padBytesLength; // number of padding bytes on the end
+        private byte[] _buffer;
+        private uint _cachedChecksum;
+        private bool _isValidChecksumAvailable;
+
+        #endregion
+
+        #region Constructors and Destructor
+
+        public WoffBuffer()
         {
+            _filePos        = -1; // -1 means not read from a file
+            _length         = 0;
+            _padBytesLength = 0;
+            _buffer         = null;
+
+            _cachedChecksum = 0;
+        }  
+
+        public WoffBuffer(uint length)
+        {
+            _filePos        = -1; // -1 means not read from a file
+            _length         = length;
+            _padBytesLength = (uint)CalcPadBytes((int)length, 4);
+            _buffer         = new byte[_length + _padBytesLength];
+
+            _cachedChecksum = 0;
+        } 
+
+        public WoffBuffer(byte[] buffer, bool padBytes = false)
+        {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer), "The buffer parameter is required and cannot be null.");
+            }
+            var length      = buffer.Length;
+            _filePos        = -1; // -1 means not read from a file
+            _length         = (uint)length;
+
+            if (padBytes)
+            {
+                _padBytesLength = (uint)CalcPadBytes((int)length, 4);
+                if (_padBytesLength > 0)
+                {
+                    _buffer = new byte[_length + _padBytesLength];
+                    this.Copy(buffer);
+                }
+                else
+                {
+                    _buffer = buffer;
+                }
+            }
+            else
+            {
+                _padBytesLength = 0;
+                _buffer = buffer;
+            }
+
+            _cachedChecksum = 0;
+        } 
+
+        public WoffBuffer(uint filepos, uint length)
+        {
+            _filePos        = filepos;
+            _length         = length;
+            _padBytesLength = (uint)CalcPadBytes((int)length, 4);
+            _buffer         = new byte[_length + _padBytesLength];
+
+            _cachedChecksum = 0;
         }
 
-        public byte[] Header
+        #endregion
+
+        #region Public Properties
+
+        public uint PadBytesLength
         {
             get {
-                return _header;
-            }
-            protected set {
-                _header = value;
+                return _padBytesLength;
             }
         }
 
-        public abstract uint HeaderSize { get; }
-
-        public virtual bool SetHeader(byte[] header)
+        public byte[] Buffer
         {
-            _header = header;
-            return (_header != null && _header.Length == this.HeaderSize);
+            get {
+                return _buffer;
+            }
         }
 
-        public static uint IntValue(byte[] tag)
+        public uint Length
         {
+            get {
+                return _length;
+            }
+        }
+
+        public byte this[short index]
+        {
+            get {
+                return _buffer[index];
+            }
+            set {
+                _buffer[index] = value;
+            }
+        }
+
+        public byte this[ushort index]
+        {
+            get {
+                return _buffer[index];
+            }
+            set {
+                _buffer[index] = value;
+            }
+        }
+
+        public byte this[int index]
+        {
+            get {
+                return _buffer[index];
+            }
+            set {
+                _buffer[index] = value;
+            }
+        }
+
+        public byte this[uint index]
+        {
+            get {
+                return _buffer[index];
+            }
+            set {
+                _buffer[index] = value;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public byte[] GetBuffer()
+        {
+            return _buffer;
+        }
+
+        public uint GetLength()
+        {
+            return _length;
+        }
+
+        public uint GetPaddedLength()
+        {
+            return _length + _padBytesLength;
+        }
+
+        public void Copy(byte[] buffer)
+        {
+            if (buffer == null || buffer.Length == 0)
+            {
+                return;
+            }
+            if (_buffer == null || _buffer.Length < buffer.Length)
+            {
+                _length = (uint)Math.Max(_length, buffer.Length);
+                _buffer = new byte[_length + _padBytesLength];
+            }
+            System.Buffer.BlockCopy(buffer, 0, _buffer, 0, buffer.Length);
+        }
+
+        public sbyte GetSbyte(uint offset)
+        {
+            return (sbyte)_buffer[offset];
+        }
+
+        public void SetSbyte(sbyte value, uint offset)
+        {
+            _buffer[offset] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }  
+
+        public byte GetByte(uint offset)
+        {
+            return _buffer[offset];
+        }
+
+        public void SetByte(byte value, uint offset)
+        {
+            _buffer[offset] = value;
+
+            _isValidChecksumAvailable = false;
+        }     
+
+        public byte[] GetBytes(uint offset, int size)
+        {
+            byte[] buf = new byte[size];
+            System.Buffer.BlockCopy(_buffer, (int)offset, buf, 0, size);
+            return buf;
+        }
+
+        public byte[] GetBytes(uint offset, uint size)
+        {
+            byte[] buf = new byte[size];
+            System.Buffer.BlockCopy(_buffer, (int)offset, buf, 0, (int)size);
+            return buf;
+        }
+
+        public short GetShort(uint offset)
+        {
+            return (short)(_buffer[offset] << 8 | _buffer[offset + 1]);
+        }
+
+        public void SetShort(short value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 8);
+            _buffer[offset + 1] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }  
+
+        public void SetShort(int value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 8);
+            _buffer[offset + 1] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }  
+
+        public ushort GetUShort(uint offset)
+        {
+            return (ushort)(_buffer[offset] << 8 | _buffer[offset + 1]);
+        }
+
+        public void SetUShort(ushort value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 8);
+            _buffer[offset + 1] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }  
+
+        public int GetInt(uint offset)
+        {
+            return _buffer[offset] << 24 | _buffer[offset + 1] << 16 | _buffer[offset + 2] << 8 | _buffer[offset + 3];
+        }
+
+        public void SetInt(int value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 24);
+            _buffer[offset + 1] = (byte)(value >> 16);
+            _buffer[offset + 2] = (byte)(value >> 8);
+            _buffer[offset + 3] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }  
+
+        public uint GetUInt24(uint offset)
+        {
+            return (uint)
+                (_buffer[offset] << 16 | _buffer[offset + 1] << 8 | _buffer[offset + 2]);
+        }
+
+        public uint GetUInt(uint offset)
+        {
+            return (uint)(
+                _buffer[offset] << 24 | 
+                _buffer[offset + 1] << 16 | 
+                _buffer[offset + 2] << 8 | 
+                _buffer[offset + 3]);
+        }
+
+        public void SetUInt(uint value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 24);
+            _buffer[offset + 1] = (byte)(value >> 16);
+            _buffer[offset + 2] = (byte)(value >> 8);
+            _buffer[offset + 3] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }
+
+        public long GetLong(uint offset)
+        {
+            return (long)(
+                (ulong)_buffer[offset] << 56 |
+                (ulong)_buffer[offset + 1] << 48 |
+                (ulong)_buffer[offset + 2] << 40 |
+                (ulong)_buffer[offset + 3] << 32 |
+                (ulong)_buffer[offset + 4] << 24 |
+                (ulong)_buffer[offset + 5] << 16 |
+                (ulong)_buffer[offset + 6] << 8 |
+                (ulong)_buffer[offset + 7]);
+
+        }
+
+        public void SetLong(long value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 56);
+            _buffer[offset + 1] = (byte)(value >> 48);
+            _buffer[offset + 2] = (byte)(value >> 40);
+            _buffer[offset + 3] = (byte)(value >> 32);
+            _buffer[offset + 4] = (byte)(value >> 24);
+            _buffer[offset + 5] = (byte)(value >> 16);
+            _buffer[offset + 6] = (byte)(value >> 8);
+            _buffer[offset + 7] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }     
+
+        public ulong GetULong(uint offset)
+        {
+            return
+                (ulong)_buffer[offset] << 56 |
+                (ulong)_buffer[offset + 1] << 48 |
+                (ulong)_buffer[offset + 2] << 40 |
+                (ulong)_buffer[offset + 3] << 32 |
+                (ulong)_buffer[offset + 4] << 24 |
+                (ulong)_buffer[offset + 5] << 16 |
+                (ulong)_buffer[offset + 6] << 8 |
+                (ulong)_buffer[offset + 7];
+        }
+
+        public void SetULong(ulong value, uint offset)
+        {
+            _buffer[offset] = (byte)(value >> 56);
+            _buffer[offset + 1] = (byte)(value >> 48);
+            _buffer[offset + 2] = (byte)(value >> 40);
+            _buffer[offset + 3] = (byte)(value >> 32);
+            _buffer[offset + 4] = (byte)(value >> 24);
+            _buffer[offset + 5] = (byte)(value >> 16);
+            _buffer[offset + 6] = (byte)(value >> 8);
+            _buffer[offset + 7] = (byte)value;
+
+            _isValidChecksumAvailable = false;
+        }  
+
+        public float GetFixed(uint offset)
+        {
+            return GetInt(offset) / 65536F;
+        }
+
+        public void SetFixed(float value, uint offset)
+        {
+        }
+
+        public float GetF2Dot14(uint offset)
+        {
+            return (float)GetShort(offset) / 16384;
+        }
+
+        public string GetTag(uint offset)
+        {
+            var tag = GetUInt(offset);
+            return TagString(tag);
+        }
+
+        public void SetTag(string tag, uint offset)
+        {
+            byte[] buf = TagBytes(TagInt(tag));
+            for (int i = 0; i < 4; i++) 
+                _buffer[offset + i] = buf[i];
+            
+            _isValidChecksumAvailable = false;
+        }  
+
+        public long GetFilePos()
+        {
+            return _filePos;
+        }
+
+        public uint CalcChecksum()
+        {
+            if (!_isValidChecksumAvailable)
+            {
+                _cachedChecksum = CalculateChecksum();
+                _isValidChecksumAvailable = true;
+            }
+            return _cachedChecksum;
+        }
+
+        #endregion
+
+        #region Public Static Methods
+
+        public static int CalcPadBytes(int nLength, int nByteAlignment)
+        {
+            int nPadBytes = 0;
+            int nRemainderBytes = nLength % nByteAlignment;
+
+            if (nRemainderBytes != 0)
+            {
+                nPadBytes = nByteAlignment - nRemainderBytes;
+            }
+
+            return nPadBytes;
+        }     
+
+        // get a short from a buffer that is storing data in MBO
+        public static short GetShortBE(byte[] buf, uint offset)
+        {
+            return (short)(buf[offset] << 8 | buf[offset + 1]);
+        }   
+
+        public static ushort GetUShortBE(byte[] buf, uint offset)
+        {
+            return (ushort)(buf[offset] << 8 | buf[offset + 1]);
+        }    
+
+        public static int GetIntBE(byte[] buf, uint offset)
+        {
+            return buf[offset] << 24 | buf[offset + 1] << 16 | buf[offset + 2] << 8 | buf[offset + 3];
+        }   
+
+        public static uint GetUIntBE(byte[] buf, uint offset)
+        {
+            return (uint)(buf[offset] << 24 | buf[offset + 1] << 16 | buf[offset + 2] << 8 | buf[offset + 3]);
+        }
+
+        public static bool BinaryEqual(WoffBuffer buf1, WoffBuffer buf2)
+        {
+            bool bEqual = true;
+
+            if (buf1.GetLength() != buf2.GetLength())
+            {
+                bEqual = false;
+            }
+            else
+            {
+                byte[] b1 = buf1.GetBuffer();
+                byte[] b2 = buf2.GetBuffer();
+                for (int i = 0; i < b1.Length; i++)
+                {
+                    if (b1[i] != b2[i])
+                    {
+                        bEqual = false;
+                        break;
+                    }
+                }
+            }
+
+            return bEqual;
+        }     
+
+        public static uint TagInt(byte[] tag)
+        {
+            if (tag == null || tag.Length < 3)
+            {
+                throw new InvalidOperationException(nameof(tag));
+            }
+            if (tag.Length == 3)
+            {
+                var temp = new byte[4] { tag[0], tag[1], tag[2], 0 };
+                tag = temp;
+            }
             return (uint)(tag[0] << 24 | tag[1] << 16 | tag[2] << 8 | tag[3]);
         }
 
-        public static uint IntValue(string s)
+        public static uint TagInt(string tag)
         {
-            if (string.IsNullOrWhiteSpace(s))
+            if (string.IsNullOrWhiteSpace(tag))
             {
-                throw new InvalidOperationException(nameof(s));
+                throw new InvalidOperationException(nameof(tag));
             }
 
-            try
-            {
-                string sub = s.PadRight(4).Substring(0, 4);
-                byte[] b = Encoding.ASCII.GetBytes(sub);
-                return IntValue(b);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException("SvgWoffObject.IntValue", e);
-            }
+            string sub = tag.PadRight(4).Substring(0, 4);
+            byte[] b = Encoding.ASCII.GetBytes(sub);
+            return TagInt(b);
         }
 
-        public static byte[] ByteValue(uint tag)
+        public static byte[] TagBytes(uint tag)
         {
             byte[] b = new byte[4];
             b[0] = (byte)(0xff & (tag >> 24));
@@ -89,55 +522,33 @@ namespace SharpVectors.Woffs
             return b;
         }
 
-        public static string StringValue(uint tag)
+        public static string TagString(uint tag)
         {
-            try
-            {
-                return Encoding.ASCII.GetString(ByteValue(tag));
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException("SvgWoffObject.StringValue", e);
-            }
+            return Encoding.ASCII.GetString(TagBytes(tag));
         }
 
-        public static ushort MaxPower2LE(ushort n)
-        {
-            // returns max power of 2 <= n
-            if (n == 0)
-            {
-                throw new ArithmeticException();
-            }
+        #endregion
 
-            ushort pow2 = 1;
-            n >>= 1;
-            while (n != 0)
+        #region Private Methods
+
+        private uint CalculateChecksum()
+        {
+            Debug.Assert(_length != 0);
+
+            uint sum = 0;
+
+            uint nLongs = (_length + 3) / 4;
+
+            for (uint i = 0; i < nLongs; i++)
             {
-                n >>= 1;
-                pow2 <<= 1;
-            }
-            return pow2;
+                sum += GetUInt(i * 4);
+            }  
+            return sum;
         }
 
-        public static ushort Log2(ushort n)
-        {
-            // returns the integer component of log2 of n
-            // fractional component is lost, but not needed by font spec
-            if (n == 0)
-            {
-                throw new ArithmeticException();
-            }
+        #endregion
 
-            ushort log2 = 0;
-            n >>= 1;
-
-            while (n != 0)
-            {
-                n >>= 1;
-                log2++;
-            }
-            return log2;
-        }
+        #region Public Stream-based Methods
 
         /// <summary>
         /// Reads a number of characters from the current source Stream and 
@@ -205,7 +616,7 @@ namespace SharpVectors.Woffs
             {
                 // Trim buffer in this case.
                 byte[] trimmedBuffer = new byte[bytesRead];
-                Buffer.BlockCopy(buffer, 0, trimmedBuffer, 0, bytesRead);
+                System.Buffer.BlockCopy(buffer, 0, trimmedBuffer, 0, bytesRead);
                 buffer = trimmedBuffer;
             }
 
@@ -307,6 +718,46 @@ namespace SharpVectors.Woffs
         }
 
         /// <summary>
+        /// Read a <c>255UInt16</c>, which is a variable-length encoding of an unsigned integer in the range 
+        /// <c>0</c> to <c>65535</c> inclusive.
+        /// </summary>
+        /// <returns>A variable-length encoding of an unsigned short.</returns>
+        /// <remarks>
+        /// This data type is intended to be used as intermediate representation of various font values, 
+        /// which are typically expressed as UInt16 but represent relatively small values.
+        /// </remarks>
+        public static ushort Read255UInt16(Stream stream)
+        {
+            ushort value;
+
+            byte code = (byte)stream.ReadByte();
+            if (code == WordCode)
+            {
+                // Read two more bytes and concatenate them to form UInt16 value
+                value = (byte)stream.ReadByte();
+                value <<= 8;
+                value &= 0xff00;
+                ushort value2 = (byte)stream.ReadByte();
+                value |= (ushort)(value2 & 0x00ff);
+            }
+            else if (code == OneMoreByteCode1)
+            {
+                value = (byte)stream.ReadByte();
+                value += LowestUCode;
+            }
+            else if (code == OneMoreByteCode2)
+            {
+                value = (byte)stream.ReadByte();
+                value += LowestUCode * 2;
+            }
+            else
+            {
+                value = code;
+            }
+            return value;
+        }
+
+        /// <summary>
         /// Try to skip bytes in the input stream and return the actual 
         /// number of bytes skipped.
         /// </summary>
@@ -346,7 +797,7 @@ namespace SharpVectors.Woffs
         /// </summary>
         /// <param name="data">Data to write</param>
         /// <param name="fileStream">File to write to</param>
-        public static void WriteBytes(string data, FileStream fileStream)
+        public static void WriteBytes(string data, Stream fileStream)
         {
             int index = 0;
             int length = data.Length;
@@ -362,10 +813,12 @@ namespace SharpVectors.Woffs
         /// </summary>
         /// <param name="data">String of information to write</param>
         /// <param name="fileStream">File to write to</param>
-        public static void WriteChars(string data, FileStream fileStream)
+        public static void WriteChars(string data, Stream fileStream)
         {
             WriteBytes(data, fileStream);
         }
+
+        #endregion
 
         #region Public BytesReader Methods
 
@@ -417,7 +870,7 @@ namespace SharpVectors.Woffs
         {
             return ((buffer[offset + 3] & 0xff) << 24) |
                    ((buffer[offset + 2] & 0xff) << 16) |
-                   ((buffer[offset + 1] & 0xff) << 8)  |
+                   ((buffer[offset + 1] & 0xff) << 8) |
                    ((buffer[offset + 0] & 0xff));
         }
 
@@ -429,7 +882,7 @@ namespace SharpVectors.Woffs
         {
             return ((buffer[offset + 0] & 0xff) << 24) |
                    ((buffer[offset + 1] & 0xff) << 16) |
-                   ((buffer[offset + 2] & 0xff) << 8)  |
+                   ((buffer[offset + 2] & 0xff) << 8) |
                    ((buffer[offset + 3] & 0xff));
         }
 
@@ -441,7 +894,7 @@ namespace SharpVectors.Woffs
         {
             return (((uint)buffer[offset + 3] & 0xff) << 24) |
                    (((uint)buffer[offset + 2] & 0xff) << 16) |
-                   (((uint)buffer[offset + 1] & 0xff) << 8)  |
+                   (((uint)buffer[offset + 1] & 0xff) << 8) |
                    (((uint)buffer[offset + 0] & 0xff));
         }
 
@@ -453,7 +906,7 @@ namespace SharpVectors.Woffs
         {
             return (((uint)buffer[offset + 0] & 0xff) << 24) |
                    (((uint)buffer[offset + 1] & 0xff) << 16) |
-                   (((uint)buffer[offset + 2] & 0xff) << 8)  |
+                   (((uint)buffer[offset + 2] & 0xff) << 8) |
                    (((uint)buffer[offset + 3] & 0xff));
         }
 
@@ -463,8 +916,8 @@ namespace SharpVectors.Woffs
         /// <returns>The long read from the buffer at the offset location.</returns>
         public static long ReadInt64LE(byte[] buffer, int offset)
         {
-            return ((buffer[offset + 0] & 0xffL))       |
-                   ((buffer[offset + 1] & 0xffL) << 8)  |
+            return ((buffer[offset + 0] & 0xffL)) |
+                   ((buffer[offset + 1] & 0xffL) << 8) |
                    ((buffer[offset + 2] & 0xffL) << 16) |
                    ((buffer[offset + 3] & 0xffL) << 24) |
                    ((buffer[offset + 4] & 0xffL) << 32) |
@@ -479,8 +932,8 @@ namespace SharpVectors.Woffs
         /// <returns>The long read from the buffer at the offset location.</returns>
         public static long ReadInt64BE(byte[] buffer, int offset)
         {
-            return ((buffer[offset + 7] & 0xffL))       |
-                   ((buffer[offset + 6] & 0xffL) << 8)  |
+            return ((buffer[offset + 7] & 0xffL)) |
+                   ((buffer[offset + 6] & 0xffL) << 8) |
                    ((buffer[offset + 5] & 0xffL) << 16) |
                    ((buffer[offset + 4] & 0xffL) << 24) |
                    ((buffer[offset + 3] & 0xffL) << 32) |
@@ -495,8 +948,8 @@ namespace SharpVectors.Woffs
         /// <returns>The long read from the buffer at the offset location.</returns>
         public static ulong ReadUInt64LE(byte[] buffer, int offset)
         {
-            return (((ulong)buffer[offset + 0] & 0xffL))       |
-                   (((ulong)buffer[offset + 1] & 0xffL) << 8)  |
+            return (((ulong)buffer[offset + 0] & 0xffL)) |
+                   (((ulong)buffer[offset + 1] & 0xffL) << 8) |
                    (((ulong)buffer[offset + 2] & 0xffL) << 16) |
                    (((ulong)buffer[offset + 3] & 0xffL) << 24) |
                    (((ulong)buffer[offset + 4] & 0xffL) << 32) |
@@ -511,8 +964,8 @@ namespace SharpVectors.Woffs
         /// <returns>The long read from the buffer at the offset location.</returns>
         public static ulong ReadUInt64BE(byte[] buffer, int offset)
         {
-            return (((ulong)buffer[offset + 7] & 0xffL))       |
-                   (((ulong)buffer[offset + 6] & 0xffL) << 8)  |
+            return (((ulong)buffer[offset + 7] & 0xffL)) |
+                   (((ulong)buffer[offset + 6] & 0xffL) << 8) |
                    (((ulong)buffer[offset + 5] & 0xffL) << 16) |
                    (((ulong)buffer[offset + 4] & 0xffL) << 24) |
                    (((ulong)buffer[offset + 3] & 0xffL) << 32) |
@@ -798,6 +1251,5 @@ namespace SharpVectors.Woffs
         }
 
         #endregion
-
     }
 }

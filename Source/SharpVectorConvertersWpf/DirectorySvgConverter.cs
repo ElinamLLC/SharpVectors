@@ -3,19 +3,28 @@ using System.IO;
 using System.Collections.Generic;
 using System.Security.AccessControl;
 
+using System.Windows.Media.Imaging;
+
 using SharpVectors.Renderers.Wpf;
-using SharpVectors.Converters.Utils;
 
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This converts a directory (and optionally the sub-directories) of SVG 
-    /// files to XAML files in a specified directory, maintaining the original 
-    /// directory structure.
+    /// This converts a directory (and optionally the sub-directories) of SVG files to XAML files in a specified directory, 
+    /// maintaining the original directory structure.
+    /// <para>
+    /// It uses <see cref="FileSvgConverter"/> or <see cref="ImageSvgConverter"/> converter to process each SVG file 
+    /// in the specified directory.
+    /// </para>
     /// </summary>
     public sealed class DirectorySvgConverter : SvgConverter
     {
         #region Private Fields
+
+        private bool _saveImage;
+
+        private ImageEncoderType _encoderType;
+        private BitmapEncoder _bitampEncoder;
 
         private int _convertedCount;
         private bool _isOverwrite;
@@ -48,6 +57,7 @@ namespace SharpVectors.Converters
         {
             _isOverwrite = true;
             _isRecursive = true;
+            _encoderType = ImageEncoderType.PngBitmap;
         }
 
         #endregion
@@ -212,6 +222,65 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to save static or bitmap image output.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if the conversion saves static or bitmap image file; otherwise, 
+        /// it is <see langword="false"/>. The default value is <see langword="false"/>.
+        /// </value>
+        public bool SaveImage
+        {
+            get {
+                return _saveImage;
+            }
+            set {
+                _saveImage = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or set the bitmap encoder type to use in encoding the drawing 
+        /// to an image file.
+        /// </summary>
+        /// <value>
+        /// An enumeration of the type <see cref="ImageEncoderType"/> specifying
+        /// the bitmap encoder. The default is the <see cref="ImageEncoderType.PngBitmap"/>.
+        /// </value>
+        public ImageEncoderType EncoderType
+        {
+            get {
+                return _encoderType;
+            }
+            set {
+                _encoderType = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a custom bitmap encoder to use in encoding the drawing
+        /// to an image file.
+        /// </summary>
+        /// <value>
+        /// A derived <see cref="BitmapEncoder"/> object specifying the bitmap
+        /// encoder for encoding the images. The default is <see langword="null"/>,
+        /// and the <see cref="EncoderType"/> property determines the encoder used.
+        /// </value>
+        /// <remarks>
+        /// If the value of this is set, it must match the MIME type or file 
+        /// extension defined by the <see cref="EncoderType"/> property for it 
+        /// to be used.
+        /// </remarks>
+        public BitmapEncoder Encoder
+        {
+            get {
+                return _bitampEncoder;
+            }
+            set {
+                _bitampEncoder = value;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -259,6 +328,10 @@ namespace SharpVectors.Converters
             {
                 throw new ArgumentException("The source directory must exists.", nameof(sourceInfo));
             }
+            if (!this.SaveXaml && !this.SaveZaml && !this.SaveImage)
+            {
+                return;
+            }
 
             _convertedCount = 0;
             _sourceDir      = sourceInfo;
@@ -302,7 +375,14 @@ namespace SharpVectors.Converters
         private void ProcessConversion(DirectoryInfo source, DirectoryInfo target)
         {
             // Convert the files in the specified directory...
-            this.ConvertFiles(source, target);
+            if (_saveImage)
+            {
+                this.ConvertImages(source, target);
+            }
+            else
+            {
+                this.ConvertFiles(source, target);
+            }
 
             if (!_isRecursive)
             {
@@ -346,20 +426,23 @@ namespace SharpVectors.Converters
             }
         }
 
-        private void ConvertFiles(DirectoryInfo source, DirectoryInfo target)
+        private void ConvertImages(DirectoryInfo source, DirectoryInfo target)
         {
             _errorFile = null;
 
-            FileSvgConverter fileConverter = new FileSvgConverter(this.SaveXaml,
-                this.SaveZaml, this.DrawingSettings);
-            fileConverter.Background = this.Background;
-            fileConverter.FallbackOnWriterError = _fallbackOnWriterError;
+            var imageConverter = new ImageSvgConverter(this.SaveXaml, this.SaveZaml, this.DrawingSettings);
+            imageConverter.Background            = this.Background;
+            imageConverter.FallbackOnWriterError = _fallbackOnWriterError;
+            imageConverter.EncoderType           = _encoderType;
+            imageConverter.Encoder               = _bitampEncoder;
+
+            imageConverter.DpiX = _dpiX;
+            imageConverter.DpiY = _dpiY;
 
             string targetDirName = target.ToString();
             string xamlFilePath;
 
-            IEnumerable<string> fileIterator = DirectoryUtils.FindFiles(
-              source, "*.svg*", SearchOption.TopDirectoryOnly);
+            var fileIterator = Directory.EnumerateFiles(source.FullName, "*.svg*", SearchOption.TopDirectoryOnly);
             foreach (string svgFileName in fileIterator)
             {
                 string fileExt = Path.GetExtension(svgFileName);
@@ -377,8 +460,68 @@ namespace SharpVectors.Converters
                             }
                         }
 
-                        xamlFilePath = Path.Combine(targetDirName,
-                            Path.GetFileNameWithoutExtension(svgFileName) + XamlExt);
+                        xamlFilePath = Path.Combine(targetDirName, Path.GetFileNameWithoutExtension(svgFileName) + XamlExt);
+
+                        imageConverter.Convert(svgFileName, xamlFilePath);
+
+                        File.SetAttributes(xamlFilePath, fileAttr);
+#if NET40
+                        // if required to set the security or access control
+                        if (_includeSecurity)
+                        {
+                            File.SetAccessControl(xamlFilePath, File.GetAccessControl(svgFileName));
+                        }
+#endif
+                        _convertedCount++;
+
+                        if (imageConverter.WriterErrorOccurred)
+                        {
+                            _writerErrorOccurred = true;
+                        }
+                    }
+                    catch
+                    {
+                        _errorFile = svgFileName;
+
+                        throw;
+                    }
+                }
+            }
+        }
+
+        private void ConvertFiles(DirectoryInfo source, DirectoryInfo target)
+        {
+            _errorFile = null;
+
+            var fileConverter = new FileSvgConverter(this.SaveXaml, this.SaveZaml, this.DrawingSettings);
+            fileConverter.Background            = this.Background;
+            fileConverter.FallbackOnWriterError = _fallbackOnWriterError;
+
+            fileConverter.DpiX = _dpiX;
+            fileConverter.DpiY = _dpiY;
+
+            string targetDirName = target.ToString();
+            string xamlFilePath;
+
+            var fileIterator = Directory.EnumerateFiles(source.FullName, "*.svg*", SearchOption.TopDirectoryOnly);
+            foreach (string svgFileName in fileIterator)
+            {
+                string fileExt = Path.GetExtension(svgFileName);
+                if (string.Equals(fileExt, SvgExt, StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExt, CompressedSvgExt, StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        FileAttributes fileAttr = File.GetAttributes(svgFileName);
+                        if (!_includeHidden)
+                        {
+                            if ((fileAttr & FileAttributes.Hidden) == FileAttributes.Hidden)
+                            {
+                                continue;
+                            }
+                        }
+
+                        xamlFilePath = Path.Combine(targetDirName, Path.GetFileNameWithoutExtension(svgFileName) + XamlExt);
 
                         fileConverter.Convert(svgFileName, xamlFilePath);
 
@@ -390,7 +533,6 @@ namespace SharpVectors.Converters
                             File.SetAccessControl(xamlFilePath, File.GetAccessControl(svgFileName));
                         }
 #endif
-
                         _convertedCount++;
 
                         if (fileConverter.WriterErrorOccurred)

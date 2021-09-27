@@ -2,10 +2,12 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using System.Text;
+using System.Collections.Generic;
 
 namespace SharpVectors.Woffs
 {
-    public sealed class SvgWoffMetadata
+    public sealed class WoffMetadata
     {
         /// <summary>
         /// Offset to metadata block, from beginning of WOFF file.
@@ -23,16 +25,15 @@ namespace SharpVectors.Woffs
         private uint _origLength;
 
         private byte[] _data;
-
         private byte[] _origData;
 
         private XDocument _document;
 
-        public SvgWoffMetadata()
+        public WoffMetadata()
         {
         }
 
-        public SvgWoffMetadata(uint offset, uint length, uint origLength)
+        public WoffMetadata(uint offset, uint length, uint origLength)
         {
             _offset     = offset;
             _length     = length;

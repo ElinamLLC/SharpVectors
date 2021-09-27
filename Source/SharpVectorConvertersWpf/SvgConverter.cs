@@ -12,7 +12,7 @@ using SharpVectors.Renderers.Utils;
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This is the <see langword="abstract"/> base class for all SVG to WPF converters.
+    /// This is the <see langword="abstract"/> base class for all <c>SVG</c> to WPF converters.
     /// </summary>
     public abstract class SvgConverter : DependencyObject, IDisposable
     {
@@ -28,13 +28,16 @@ namespace SharpVectors.Converters
 
         #endregion
 
-        #region Private Fields
+        #region Protected Fields
 
-        private bool _saveXaml;
-        private bool _saveZaml;
-        private bool _useFrameXamlWriter;
+        protected bool _saveXaml;
+        protected bool _saveZaml;
+        protected bool _useFrameXamlWriter;
 
         protected bool _isEmbedded;
+
+        protected double _dpiX;
+        protected double _dpiY;
 
         protected SolidColorBrush _background;
 
@@ -72,6 +75,8 @@ namespace SharpVectors.Converters
         /// </param>
         protected SvgConverter(WpfDrawingSettings settings)
         {
+            _dpiX        = 96;
+            _dpiY        = 96;
             _saveXaml    = true;
             _saveZaml    = false;
             _wpfSettings = settings;
@@ -119,13 +124,11 @@ namespace SharpVectors.Converters
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether to save the conversion
-        /// output to the XAML file.
+        /// Gets or sets a value indicating whether to save the conversion output to the <c>XAML</c> file.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the conversion output is saved
-        /// to the XAML file; otherwise, it is <see langword="false"/>.
-        /// The default depends on the converter.
+        /// This is <see langword="true"/> if the conversion output is saved to the <c>XAML</c> file; otherwise, 
+        /// it is <see langword="false"/>. The default depends on the converter.
         /// </value>
         public bool SaveXaml
         {
@@ -138,17 +141,14 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to save the conversion
-        /// output to the ZAML file.
+        /// Gets or sets a value indicating whether to save the conversion output to the <c>ZAML</c> file.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the conversion output is saved
-        /// to the ZAML file; otherwise, it is <see langword="false"/>.
-        /// The default depends on the converter.
+        /// This is <see langword="true"/> if the conversion output is saved to the <c>ZAML</c> file; otherwise, 
+        /// it is <see langword="false"/>. The default depends on the converter.
         /// </value>
         /// <remarks>
-        /// The ZAML is simply a G-Zip compressed XAML format, similar to the
-        /// SVGZ.
+        /// The <c>ZAML</c> is simply a G-Zip compressed <c>XAML</c> format, similar to the <c>SVGZ</c>.
         /// </remarks>
         public bool SaveZaml
         {
@@ -161,18 +161,15 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to use the .NET framework
-        /// version of the XAML writer.
+        /// Gets or sets a value indicating whether to use the .NET framework version of the XAML writer.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the .NET framework version of the
-        /// XAML writer is used; otherwise, a customized XAML writer, 
-        /// <see cref="XmlXamlWriter"/>, is used. The default is <see langword="false"/>.
+        /// This is <see langword="true"/> if the .NET framework version of the <c>XAML</c> writer is used; otherwise, 
+        /// a customized XAML writer, <see cref="XmlXamlWriter"/>, is used. The default is <see langword="false"/>.
         /// </value>
         /// <remarks>
-        /// The customized XAML writer is optimized for the conversion process,
-        /// and it is recommended as the writer, unless in cases where it fails
-        /// to produce accurate result.
+        /// The customized <c>XAML</c> writer is optimized for the conversion process, and it is recommended as the writer, 
+        /// unless in cases where it fails to produce accurate result.
         /// </remarks>
         public bool UseFrameXamlWriter
         {
@@ -215,6 +212,10 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets the <c>SVG</c> Window object created by this converter.
+        /// </summary>
+        /// <value>An instance of <see cref="WpfSvgWindow"/> specifying the <c>WPF</c> implementation of the <see cref="ISvgWindow"/>.</value>
         public WpfSvgWindow SvgWindow
         {
             get {
@@ -222,6 +223,11 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets the current <c>SVG</c> Document created by this converter.
+        /// </summary>
+        /// <value>An instance of <see cref="SvgDocument"/> specifying the SVG DOM currently opened by the converter; 
+        /// or <see langword="null"/> if no <c>SVG</c> document is currently opened.</value>
         public SvgDocument SvgDocument
         {
             get {
@@ -233,10 +239,48 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets the horizontal dots per inch (dpi) of the static image.
+        /// </summary>
+        /// <value>The horizontal dots per inch (dpi) of the image; that is, the dots per inch (dpi) along the x-axis.</value>
+        public double DpiX
+        {
+            get {
+                return _dpiX;
+            }
+            set {
+                if (value > 0)
+                {
+                    _dpiX = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the vertical dots per inch (dpi) of the static image.
+        /// </summary>
+        /// <value>The vertical dots per inch (dpi) of the image; that is, the dots per inch (dpi) along the y-axis.</value>
+        public double DpiY
+        {
+            get {
+                return _dpiY;
+            }
+            set {
+                if (value > 0)
+                {
+                    _dpiY = value;
+                }
+            }
+        }
+
         #endregion
 
         #region Protected Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="drawingDocument"></param>
         protected virtual void BeginProcessing(WpfDrawingDocument drawingDocument = null)
         {
             if (_wpfSettings == null)
@@ -284,6 +328,9 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void EndProcessing()
         {
             if (_wpfRenderer != null)
@@ -304,6 +351,11 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="encoderType"></param>
+        /// <returns></returns>
         protected static BitmapEncoder GetBitmapEncoder(ImageEncoderType encoderType)
         {
             BitmapEncoder bitmapEncoder = null;
@@ -344,6 +396,11 @@ namespace SharpVectors.Converters
             return bitmapEncoder;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="encoderType"></param>
+        /// <returns></returns>
         protected static string GetImageFileExtention(ImageEncoderType encoderType)
         {
             switch (encoderType)

@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestOtherSvg", "Samples\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DB43362-F0A9-447A-9FD0-2323D2868830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core.Tests", "Tests\SharpVectors.Core.Tests\SharpVectors.Core.Tests.csproj", "{F69F8D82-6D2F-4D91-9595-7DC2A7371479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core.Tests", "Tests\SharpVectorsCore\SharpVectors.Core.Tests.csproj", "{F69F8D82-6D2F-4D91-9595-7DC2A7371479}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

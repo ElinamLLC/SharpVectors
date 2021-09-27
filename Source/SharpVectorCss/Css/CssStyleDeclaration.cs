@@ -1,8 +1,8 @@
 using System;
 using System.Text;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 
 namespace SharpVectors.Dom.Css
 {
@@ -56,13 +56,18 @@ namespace SharpVectors.Dom.Css
                         )
                     \s* \)");
 
-        private static readonly Regex _reSplitCss = new Regex(@"([^:\s]+)*\s*:\s*([^;]+);");
+        //private static readonly Regex _reSplitCss = new Regex(@"([^:\s]+)*\s*:\s*([^;]+);");
+        private static readonly Regex _reSplitCss = new Regex(@"([^:\s]+)\s*:\s*([^;]+);");
+
         private static readonly Regex _reSplitCssOther = new Regex(@"({|;)([^:{;]+:[^;}]+)(;|})");
 
         private static readonly Regex _reUrlTidy = new Regex(@"(^|{|})(\\s*{[^}]*})");
 
+        //private static readonly Regex _reEmbeddedUrl = new Regex(
+        //    @"^(?<name>[A-Za-z\-0-9]+)\s*:\s*url\(data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>[^;\}!]+)(!\s?(?<priority>important))?;?");
+
         private static readonly Regex _reEmbeddedUrl = new Regex(
-            @"^(?<name>[A-Za-z\-0-9]+)\s*:\s*url\(data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>[^;\}!]+)(!\s?(?<priority>important))?;?");
+            @"^(?<name>[A-Za-z\-0-9]+)\s*:\s*url\(['""]?data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>[^;\}!]+)(!\s?(?<priority>important))?;?");
 
         // Enter properties that can validly contain a URL here (in lowercase):
         private static readonly ISet<string> _validUrlProps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
@@ -344,10 +349,14 @@ namespace SharpVectors.Dom.Css
                                 {
                                     _styles.Add(UrlName,     new CssStyleBlock(UrlName, nameUrl, string.Empty, _origin));
                                     _styles.Add(UrlMime,     new CssStyleBlock(UrlMime, mimeUrl, string.Empty, _origin));
-                                    _styles.Add(UrlData,     new CssStyleBlock(UrlData, dataUrl.Substring(0, foundAt), string.Empty, _origin));
+                                    _styles.Add(UrlData,     new CssStyleBlock(UrlData, dataUrl.Substring(0, foundAt).Trim(quotes), string.Empty, _origin));
                                     _styles.Add(UrlEncoding, new CssStyleBlock(UrlEncoding, encodingUrl, string.Empty, _origin));
                                 }
                             }
+                        }
+                        else
+                        {
+
                         }
                     }
                 }

@@ -94,7 +94,17 @@ namespace SharpVectors.Dom.Css
 
         private string StringReplaceEvaluator(Match match)
         {
-            _alReplacedStrings.Add(match.Value);
+            //TODO: Make exception for quoted embedded fonts...
+            string value = match.Value;
+            if (value.IndexOf("data:application/font-woff2") > 0 || value.IndexOf("data:application/font-woff") > 0
+                || value.IndexOf("data:application/x-font-ttf") > 0 || value.IndexOf("data:application/x-font-otf") > 0)
+            {
+                var quotes = new char[2] { '\'', '"' };
+
+                return value.Trim(quotes);
+            }
+
+            _alReplacedStrings.Add(value);
 
             return "\"<<<" + (_alReplacedStrings.Count - 1) + ">>>\"";
         }

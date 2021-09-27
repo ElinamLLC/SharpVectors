@@ -14,12 +14,9 @@ namespace SharpVectors.Converters
 {
     /// <summary>
     /// <para>
-    /// This converts an SVG file to the corresponding XAML file, which can 
-    /// be viewed in WPF application. 
+    /// This converts an SVG file to the corresponding XAML file, which can be viewed in WPF application. 
     /// </para>
-    /// <para>
-    /// The root object in the converted file is <see cref="DrawingGroup"/>.
-    /// </para>
+    /// <para>The root object in the converted file is <see cref="DrawingGroup"/>.</para>
     /// </summary>
     public sealed class FileSvgConverter : SvgConverter
     {

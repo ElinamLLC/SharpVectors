@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -12,7 +13,6 @@ using SharpVectors.Woffs;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Resources;
 using SharpVectors.Dom.Stylesheets;
-using System.Threading;
 
 namespace SharpVectors.Dom.Svg
 {
