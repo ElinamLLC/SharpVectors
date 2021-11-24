@@ -90,8 +90,8 @@ The following are related SVG viewer projects for the .NET platforms
 
 ## Related Repositories
 The following are related SharpVectors repositories
-* [SharpVectors-TestSuites](https://github.com/ElinamLLC/SharpVectors-TestSuites) : The W3C Test Suite files used by the SharpVectors for testing.
-* [SharpVectors-SvgXaml](https://github.com/ElinamLLC/SharpVectors-SvgXaml) : SharpVectors based SVG to XAML converter application.
-* [SharpVectors-SvgViewer](https://github.com/ElinamLLC/SharpVectors-SvgViewer) : SharpVectors based SVG viewer application.
+* [SvgTestSuites](https://github.com/ElinamLLC/SvgTestSuites) : The W3C Test Suite files used by the SharpVectors for testing.
+* [SvgXaml](https://github.com/ElinamLLC/SvgXaml) : SharpVectors based SVG to XAML converter application.
+* [SvgViewer](https://github.com/ElinamLLC/SvgViewer) : SharpVectors based SVG viewer application.
 
 
