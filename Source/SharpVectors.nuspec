@@ -14,9 +14,8 @@
     <icon>images\SharpVectors64.png</icon>
     <copyright>Copyright (c) 2010 - 2021 Elinam LLC</copyright>
     <releaseNotes>
-        Release 1.7.6
-          * WPF: Font Family support improvements
-          * WPF: Fallback use of AppDomain.Current.BaseDirectory instead of Assembly.Location (by @MihailsKuzminsDG)
+        Release 1.7.7
+          * Reworked and completed WOFF1 and WOFF2 fonts support.
           * Several bug fixes and code improvements
     </releaseNotes>
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>

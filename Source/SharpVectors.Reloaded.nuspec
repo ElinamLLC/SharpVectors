@@ -14,7 +14,7 @@
     <icon>images\SharpVectors64.png</icon>
     <copyright>Copyright (c) 2010 - 2021 Elinam LLC</copyright>
     <releaseNotes>
-        Release 1.7.6
+        Release 1.7.7
           * WPF: Font Family support improvements
           * WPF: Fallback use of AppDomain.Current.BaseDirectory instead of Assembly.Location (by @MihailsKuzminsDG)
           * Several bug fixes and code improvements
