@@ -1,14 +1,16 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>net46;net48</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+	<ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <UseWpf>true</UseWpf>
-    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <RootNamespace>WpfSvgTestBox</RootNamespace>
     <AssemblyName>WpfSvgTestBox</AssemblyName>
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
+    <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -48,16 +50,6 @@
     <ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.VS2017.csproj" />
     <ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.VS2017.csproj" />
     <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.VS2017.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
-    <Reference Include="SharpVectors.ShellFileDialogs">
-      <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
-    <Reference Include="SharpVectors.ShellFileDialogs">
-      <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="WpfSvgTestBox.ico" />
@@ -100,6 +92,56 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Xaml" />
+  </ItemGroup> 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net40\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net45\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net45\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net46\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net47\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net47\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net48\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">

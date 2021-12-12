@@ -884,7 +884,7 @@ namespace SharpVectors.Dom.Svg
         /// <returns>An SVGLength object.</returns>
         public ISvgLength CreateSvgLength()
         {
-            return new SvgLength(null, string.Empty, 
+            return new SvgLength(null, string.Empty,
                 SvgLengthSource.String, SvgLengthDirection.Horizontal, SvgConstants.ValZero);
         }
 

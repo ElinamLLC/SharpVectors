@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>net40;net45;net46;net47;net48</TargetFrameworks>
     <UseWpf>true</UseWpf>
-    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <OutputType>library</OutputType>
     <RootNamespace>SharpVectors.Converters</RootNamespace>
     <AssemblyName>SharpVectors.Converters.Wpf</AssemblyName>

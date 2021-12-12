@@ -4,7 +4,7 @@ using System.IO;
 namespace SharpVectors.Net
 {
 	/// <summary>
-	/// An implementation of the <see cref="]ICacheManager"/> interface providing no caching to internet requests.
+	/// An implementation of the <see cref="ICacheManager"/> interface providing no caching to internet requests.
 	/// </summary>
 	public sealed class NoCacheManager : ICacheManager
 	{

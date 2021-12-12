@@ -85,7 +85,7 @@ namespace SharpVectors.Dom.Css
         /// <returns>The correct type of CSS value</returns>
         public static CssValue GetCssValue(string cssText, bool readOnly)
         {
-            if (cssText == "inherit")
+            if (string.Equals(cssText, "inherit", StringComparison.OrdinalIgnoreCase))
             {
                 // inherit
                 return new CssValue(CssValueType.Inherit, cssText, readOnly);

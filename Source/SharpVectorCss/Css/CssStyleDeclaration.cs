@@ -165,9 +165,9 @@ namespace SharpVectors.Dom.Css
         #region Public Methods
 
         /// <summary>
-		/// Used to find matching style rules in the cascading order
-		/// </summary>
-		public void GetStylesForElement(CssCollectedStyleDeclaration csd, int specificity)
+        /// Used to find matching style rules in the cascading order
+        /// </summary>
+        public void GetStylesForElement(CssCollectedStyleDeclaration csd, int specificity)
         {
             foreach (KeyValuePair<string, CssStyleBlock> de in _styles)
             {

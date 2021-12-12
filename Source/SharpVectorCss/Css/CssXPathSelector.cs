@@ -464,9 +464,8 @@ namespace SharpVectors.Dom.Css
                     x += IdToXPath(match);
                     x += PredicatesToXPath(match);
                     x += PseudoClassesToXPath(match, nav);
+
                     SeperatorToXPath(match, xpath, x);
-
-
                 }
                 match = match.NextMatch();
             }

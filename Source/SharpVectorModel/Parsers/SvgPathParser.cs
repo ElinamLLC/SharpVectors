@@ -884,8 +884,6 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Parses a 'T' command.
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
-        //ORIGINAL LINE: protected void parseT() throws FormatException, java.io.IOException
         protected internal virtual void ParseT()
         {
             _current = _reader.Read();
@@ -935,8 +933,6 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Parses a 'a' command.
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
-        //ORIGINAL LINE: protected void parsea() throws FormatException, java.io.IOException
         protected internal virtual void Parsea()
         {
             _current = _reader.Read();
@@ -1027,8 +1023,6 @@ namespace SharpVectors.Dom.Svg
         /// <summary>
         /// Parses a 'A' command.
         /// </summary>
-        //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
-        //ORIGINAL LINE: protected void parseA() throws FormatException, java.io.IOException
         protected internal virtual void ParseA()
         {
             _current = _reader.Read();

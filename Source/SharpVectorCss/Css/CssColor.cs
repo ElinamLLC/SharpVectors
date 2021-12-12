@@ -43,23 +43,23 @@ namespace SharpVectors.Dom.Css
         #region Contructors and Destructor
 
         /// <summary>
-		/// Constructs a RgbColor based on the GDI color
-		/// </summary>
-		/// <param name="red"></param>
-		/// <param name="green"></param>
-		/// <param name="blue"></param>
+        /// Constructs a RgbColor based on the GDI color
+        /// </summary>
+        /// <param name="red"></param>
+        /// <param name="green"></param>
+        /// <param name="blue"></param>
         public CssColor(int red, int green, int blue)
         {
             SetPrimitiveValues(red, green, blue);
         }
 
         /// <summary>
-		/// Constructs a RgbColor based on the GDI color
-		/// </summary>
-		/// <param name="red"></param>
-		/// <param name="green"></param>
-		/// <param name="blue"></param>
-		/// <param name="alpha"></param>
+        /// Constructs a RgbColor based on the GDI color
+        /// </summary>
+        /// <param name="red"></param>
+        /// <param name="green"></param>
+        /// <param name="blue"></param>
+        /// <param name="alpha"></param>
         public CssColor(int red, int green, int blue, int alpha)
         {
             SetPrimitiveValues(red, green, blue, alpha);

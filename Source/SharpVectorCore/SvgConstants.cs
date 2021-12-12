@@ -390,8 +390,9 @@ namespace SharpVectors.Dom
         public const string TagPolyline            = "polyline";
         public const string TagRadialGradient      = "radialGradient";
         public const string TagRect                = "rect";
-        public const string TagSet                 = "set";
         public const string TagScript              = "script";
+        public const string TagSet                 = "set";
+        public const string TagSolidColor          = "solidcolor";
         public const string TagStop                = "stop";
         public const string TagStyle               = "style";
         public const string TagSvg                 = "svg";

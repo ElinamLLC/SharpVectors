@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>net46;net48</TargetFrameworks>
     <OutputType>WinExe</OutputType>
+	<ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <UseWpf>true</UseWpf>
-    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
@@ -34,36 +34,113 @@
   <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.0.1" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="Accessibility" />
+  <ItemGroup>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="ReachFramework" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Xaml" />
+  </ItemGroup> 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <Reference Include="Accessibility" />
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+    <PackageReference Include="DotNetZip" Version="1.13.8" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net40\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Core">
+      <HintPath>..\..\Libraries\net40\WebViews.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Wpf">
+      <HintPath>..\..\Libraries\net40\WebViews.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
     <Reference Include="Accessibility" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="System.Printing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net45\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net45\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Core">
+      <HintPath>..\..\Libraries\net45\WebViews.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Wpf">
+      <HintPath>..\..\Libraries\net45\WebViews.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
     <Reference Include="Accessibility" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="System.Printing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net46\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Core">
+      <HintPath>..\..\Libraries\net46\WebViews.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Wpf">
+      <HintPath>..\..\Libraries\net46\WebViews.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net47' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
     <Reference Include="Accessibility" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="System.Printing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net47\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net47\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Core">
+      <HintPath>..\..\Libraries\net47\WebViews.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Wpf">
+      <HintPath>..\..\Libraries\net47\WebViews.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
     <Reference Include="Accessibility" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="System.Printing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
+    <Reference Include="SharpVectors.Notifications.Wpf">
+      <HintPath>..\..\Libraries\net48\SharpVectors.Notifications.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Core">
+      <HintPath>..\..\Libraries\net48\WebViews.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WebViews.Wpf">
+      <HintPath>..\..\Libraries\net48\WebViews.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ContentWithTargetPath Include="..\..\Libraries\$(TargetFramework)\native\arm64\WebView2Loader.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>native\arm64\WebView2Loader.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\..\Libraries\$(TargetFramework)\native\x64\WebView2Loader.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>native\x64\WebView2Loader.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\..\Libraries\$(TargetFramework)\native\x86\WebView2Loader.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>native\x86\WebView2Loader.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="..\..\Libraries\$(TargetFramework)\native\LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>native\LICENSE.txt</TargetPath>
+    </ContentWithTargetPath>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

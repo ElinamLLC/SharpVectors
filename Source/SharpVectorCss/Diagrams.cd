@@ -3,21 +3,21 @@
   <Class Name="SharpVectors.Dom.Css.CssAbsPrimitiveLengthValue" Collapsed="true">
     <Position X="0.5" Y="6" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>EAAAACAABAAAAQAAgAAAAAAAAAAAAAgAAAAIQABAAAI=</HashCode>
+      <HashCode>EAAAACAABAAAAQAAgAAAAAAAAAAAAAiAAAIIQARAAAI=</HashCode>
       <FileName>Css\CssAbsPrimitiveLengthValue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Dom.Css.CssAbsPrimitiveValue" Collapsed="true">
     <Position X="3.5" Y="4.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>EAAAACAABABAAAAAAAAAAAAAAgBAAAAAAAAACAQIAAA=</HashCode>
+      <HashCode>EAAAACAABABAAAAAAAAAAAAAAgBAAACAAAIACAQIAAA=</HashCode>
       <FileName>Css\CssAbsPrimitiveValue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Dom.Css.CssAbsValue" Collapsed="true">
     <Position X="0.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAACAQAAAA=</HashCode>
+      <HashCode>EAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAIACAQAAAA=</HashCode>
       <FileName>Css\CssAbsValue.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -46,7 +46,7 @@
   <Class Name="SharpVectors.Dom.Css.CssColor" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="3.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAACIAAABgAAAgAUAAAAAAQAAAAAABAAAAAAChAgAoA=</HashCode>
+      <HashCode>BAACIAAABgAAAgEUAAAAAAQAAAEAABAAAAAAChAgAoA=</HashCode>
       <FileName>Css\CssColor.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -54,7 +54,7 @@
   <Class Name="SharpVectors.Dom.Css.CssFontFaceRule" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAQgABAAAAAAggAAAAQIAAAAAQAAAAAABQIQCCAAEAA=</HashCode>
+      <HashCode>EAQgABCACAAAggAAAAIIAAAAAQAAAAAABQKQCCAAEAA=</HashCode>
       <FileName>Css\CssFontFaceRule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -62,7 +62,7 @@
   <Class Name="SharpVectors.Dom.Css.CssImportRule" Collapsed="true">
     <Position X="0.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAABAgIAAQAAAAAAABAAABAAQAAAAgAAAQ=</HashCode>
+      <HashCode>AAggAAAAAAAABAgIAAAAAAAAAABAEABAAQAAAAgAAAQ=</HashCode>
       <FileName>Css\CssImportRule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -93,7 +93,7 @@
   <Class Name="SharpVectors.Dom.Css.CssPrimitiveAngleValue" Collapsed="true">
     <Position X="8.5" Y="4.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAACACAAAAAIAABAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <HashCode>AAACACAAAAAIAABAAAAAAAAAAAAAAAAgAAAACAAAAAA=</HashCode>
       <FileName>Css\CssPrimitiveAngleValue.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -107,7 +107,7 @@
   <Class Name="SharpVectors.Dom.Css.CssPrimitiveLengthValue" Collapsed="true">
     <Position X="0.75" Y="4.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAIAADAAAAAAAAAAAAEgAAAAAAAKAAEAAI=</HashCode>
+      <HashCode>AAAAACAAAAAIAADAAAAAAACAAAAEgAAAAAAAKAAEAAI=</HashCode>
       <FileName>Css\CssPrimitiveLengthValue.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -151,7 +151,7 @@
   <Class Name="SharpVectors.Dom.Css.CssRule" Collapsed="true">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAAQCAAAAAAAAAAAQAAAAAABAEAAIJQAECIAAAAA=</HashCode>
+      <HashCode>ACAAAAQCAAABAAAAAAAQAAAAAABAEAAIJQAECIAAAAA=</HashCode>
       <FileName>Css\CssRule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -174,7 +174,7 @@
   <Class Name="SharpVectors.Dom.Css.CssStyleDeclaration" Collapsed="true">
     <Position X="14.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACAAAAQAABAABAAACACEAABAAgFAAAEQBQAICggAIAA=</HashCode>
+      <HashCode>ECAAAAwgIRAABIBAKASEAABCAgFAAAFQDUAICggQIAA=</HashCode>
       <FileName>Css\CssStyleDeclaration.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -182,7 +182,7 @@
   <Class Name="SharpVectors.Dom.Css.CssStyleRule" Collapsed="true">
     <Position X="9.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAoAAAAAAAgAAAAAAQAAAIAABRAAAAABQAAKAAAAAA=</HashCode>
+      <HashCode>AAAoAAAAAFIAAAAAAgAABAAAAABAAAAABQAACCAAAAA=</HashCode>
       <FileName>Css\CssStyleRule.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -190,7 +190,7 @@
   <Class Name="SharpVectors.Dom.Css.CssStyleSheet" Collapsed="true">
     <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgBAEAQAAAAAAAAEAAAAAEAAAABAEAABAAABAAAAAAg=</HashCode>
+      <HashCode>AgBAEAQAAAAAAAAEAAAAAEAAAgBAEAABBAABAAAAAAg=</HashCode>
       <FileName>Css\CssStyleSheet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -206,7 +206,7 @@
   <Class Name="SharpVectors.Dom.Css.CssValue" Collapsed="true">
     <Position X="3.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAACAkACEAAwBAAAAAAgAEAEAAAAYCAABAAA=</HashCode>
+      <HashCode>AAAAAAEAAACAkACEAAgCAAAAAAgAEAUAAAIYCAABAAA=</HashCode>
       <FileName>Css\CssValue.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -214,7 +214,7 @@
   <Class Name="SharpVectors.Dom.Css.CssXmlDocument" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="9.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>BAABiAAAEACiAAkIQAAAgQAkAABAQAAECBCACAAIQUQ=</HashCode>
+      <HashCode>BAABiAAAEACiAAkIQAAAgQAkAABAQAAGCBCACAAIRQQ=</HashCode>
       <FileName>Css\CssXmlDocument.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -228,9 +228,9 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SharpVectors.Dom.Css.CssXPathSelector" Collapsed="true">
-    <Position X="5.25" Y="9.75" Width="1.5" />
+    <Position X="3.25" Y="10.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BHIQAQAAAABIAaAAIAQIAAAgAAZAAAAAAAEAAAAAUEA=</HashCode>
+      <HashCode>BHoQAQAAAABIAaAAKAQIAAAgAAZBAACAAAEAAAAA0EA=</HashCode>
       <FileName>Css\CssXPathSelector.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -253,13 +253,13 @@
   <Class Name="SharpVectors.Dom.Stylesheets.StyleSheet" Collapsed="true">
     <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAGANAABETAgAKQAAAAAABAAABIAQAUAAgAAAQ=</HashCode>
+      <HashCode>AAAAAAAGANAABUTAgAKQAAAAAABAAABIAQAUAAgAAAQ=</HashCode>
       <FileName>Stylesheets\StyleSheet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SharpVectors.Dom.Stylesheets.StyleSheetList" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3.25" Y="10.75" Width="1.5" />
+    <Position X="5.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BEIAAEAAAAAAABgQCAAABARAAABAAAAECAEAAABQIAA=</HashCode>
       <FileName>Stylesheets\StyleSheetList.cs</FileName>
