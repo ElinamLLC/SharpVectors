@@ -230,14 +230,24 @@ namespace SharpVectors.Renderers.Wpf
             if (dashArray != null && dashArray.Count != 0)
             {
                 bool isValidDashes = true;
-                //Do not draw if dash array had a zero value in it
+                int nonZeroCount = 0;
+
+                // Specs: If all of the values in the list are zero, then the stroke is
+                // rendered as a solid line without any dashing.
+                // If any value in the list is negative, the dash-array value is invalid.
                 for (int i = 0; i < dashArray.Count; i++)
                 {
-                    if (dashArray[i].Equals(0.0d))
+                    if (dashArray[i] < 0.0d)
                     {
                         isValidDashes = false;
+                        break;
+                    }
+                    if (dashArray[i].Equals(0.0d) == false)
+                    {
+                        nonZeroCount++;
                     }
                 }
+                isValidDashes = isValidDashes && nonZeroCount != 0;
 
                 if (isValidDashes)
                 {
