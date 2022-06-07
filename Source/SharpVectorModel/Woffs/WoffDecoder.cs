@@ -5,13 +5,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Collections.Generic;
 
-using SharpVectors.Compressions.ZLib;
 using SharpVectors.Compressions.Brotli;
 
 namespace SharpVectors.Woffs
 {
     using CollectionHeader    = WoffFont.CollectionHeader;
     using CollectionFontEntry = WoffFont.CollectionFontEntry;
+    using ZLibStream = SharpVectors.Compressions.ZLib.ZLibStream;
 
     public sealed class WoffDecoder
     {
