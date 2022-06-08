@@ -18,18 +18,20 @@ namespace SharpVectors.Core.Tests.Utils
 		;
 
 		private const string RuntimeDir =
-#if NET40
+#if DOTNET40
 			"net40"
-#elif NET45
+#elif DOTNET45
 			"net45"
-#elif NET46
+#elif DOTNET46
 			"net46"
-#elif NET47
+#elif DOTNET47
 			"net47"
-#elif NET48
+#elif DOTNET48
 			"net48"
-#elif NET5_0
+#elif NET50
 			"net5.0"
+#elif NET60
+			"net6.0"
 #endif
 			;
 

@@ -371,7 +371,8 @@ namespace SharpVectors.Converters
 
         protected Assembly GetEntryAssembly()
         {
-            string XDesProc = "XDesProc"; // WPF designer process
+            string XDesProc = "XDesProc"; // WPF designer process - Designer Isolation
+            string DevEnv   = "DevEnv";   // WPF designer process - Surface Isolation
             var comparer    = StringComparison.OrdinalIgnoreCase;
 
             Assembly asm = null;
@@ -382,7 +383,7 @@ namespace SharpVectors.Converters
                 if (asm != null)
                 {
                     var appName = asm.GetName().Name;
-                    if (string.Equals(appName, XDesProc, comparer))
+                    if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
                     {
                         asm = null;
                     }
@@ -390,13 +391,14 @@ namespace SharpVectors.Converters
                 // Design time
                 if (asm == null)
                 {
-#if NET50
+#if NETCORE
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
                           let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
                           where assmName.EndsWith(".exe", comparer)
-                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
                           select assembly
                           ).FirstOrDefault();
 #else
@@ -405,7 +407,8 @@ namespace SharpVectors.Converters
                           where !assembly.IsDynamic
                           let assmName = Path.GetFileName(assembly.CodeBase).Trim()
                           where assmName.EndsWith(".exe", comparer)
-                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
                           select assembly
                           ).FirstOrDefault();
 #endif
@@ -416,7 +419,7 @@ namespace SharpVectors.Converters
                         if (asm != null)
                         {
                             var appName = asm.GetName().Name;
-                            if (string.Equals(appName, XDesProc, comparer))
+                            if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
                             {
                                 asm = null;
                             }
@@ -428,13 +431,14 @@ namespace SharpVectors.Converters
             {
                 if (asm == null)
                 {
-#if NET50
+#if NETCORE
                     asm = (
                           from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           where !assembly.IsDynamic
                           let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
                           where assmName.EndsWith(".exe", comparer)
-                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
                           select assembly
                           ).FirstOrDefault();
 #else
@@ -443,7 +447,8 @@ namespace SharpVectors.Converters
                           where !assembly.IsDynamic
                           let assmName = Path.GetFileName(assembly.CodeBase).Trim()
                           where assmName.EndsWith(".exe", comparer)
-                          where !string.Equals(assmName, "XDesProc.exe", comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
                           select assembly
                           ).FirstOrDefault();
 #endif

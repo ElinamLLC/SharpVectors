@@ -1,49 +1,49 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32526.322
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A1967865-8F3B-4976-A7EC-8F91EAE4C964}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Css", "Source\SharpVectorCss\SharpVectors.Css.csproj", "{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Css", "Source\SharpVectorCss\SharpVectors.Css.VS2019.csproj", "{351B0A6E-2F6B-497A-844B-DCB5A502FB0D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Dom", "Source\SharpVectorDom\SharpVectors.Dom.csproj", "{FE34CBC0-D23C-4A95-BA64-83A031814010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Dom", "Source\SharpVectorDom\SharpVectors.Dom.VS2019.csproj", "{FE34CBC0-D23C-4A95-BA64-83A031814010}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Model", "Source\SharpVectorModel\SharpVectors.Model.csproj", "{5D336F48-3FB9-4382-B4B9-06974C764007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Model", "Source\SharpVectorModel\SharpVectors.Model.VS2019.csproj", "{5D336F48-3FB9-4382-B4B9-06974C764007}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Rendering.Gdi", "Source\SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.csproj", "{0AD99D97-24ED-484D-9430-9905811F8A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Rendering.Gdi", "Source\SharpVectorRenderingGdi\SharpVectors.Rendering.Gdi.VS2019.csproj", "{0AD99D97-24ED-484D-9430-9905811F8A4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Core", "Source\SharpVectorCore\SharpVectors.Core.csproj", "{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Core", "Source\SharpVectorCore\SharpVectors.Core.VS2019.csproj", "{D6BB65FC-240E-4241-B2ED-A7FB3F13E978}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Rendering.Wpf", "Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Rendering.Wpf", "Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.VS2019.csproj", "{A2576CE0-E492-490F-97E9-C0E7ABAFAF27}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgSample", "Samples\WpfTestSvgSample\WpfTestSvgSample.csproj", "{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgSample", "Samples\WpfTestSvgSample\WpfTestSvgSample.VS2019.csproj", "{514A1E9D-0900-46A5-8073-F3C9CB2AAEE3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfW3cSvgTestSuite", "Samples\WpfW3cSvgTestSuite\WpfW3cSvgTestSuite.csproj", "{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfW3cSvgTestSuite", "Samples\WpfW3cSvgTestSuite\WpfW3cSvgTestSuite.VS2019.csproj", "{2B1A01CB-E5C5-4D51-A0D1-2FF715260164}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Converters.Wpf", "Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Converters.Wpf", "Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.VS2019.csproj", "{E8056611-E49C-4BC3-A682-A629D5CEC11C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Runtime.Wpf", "Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Runtime.Wpf", "Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.VS2019.csproj", "{2CD52982-A1C2-4A14-9D69-D64719357216}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiTestSvgControl", "Samples\GdiTestSvgControl\GdiTestSvgControl.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiTestSvgControl", "Samples\GdiTestSvgControl\GdiTestSvgControl.VS2019.csproj", "{CCFEF6F0-D931-419A-8833-1C3464232ACB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfSvgTestBox", "Samples\WpfSvgTestBox\WpfSvgTestBox.csproj", "{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfSvgTestBox", "Samples\WpfSvgTestBox\WpfSvgTestBox.VS2019.csproj", "{D3B055DA-D97B-4B97-BFB6-18837FFA7C2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiW3cSvgTestSuite", "Samples\GdiW3cSvgTestSuite\GdiW3cSvgTestSuite.csproj", "{406733B7-B9C5-4100-8D10-F3CCE9C58B2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiW3cSvgTestSuite", "Samples\GdiW3cSvgTestSuite\GdiW3cSvgTestSuite.VS2019.csproj", "{406733B7-B9C5-4100-8D10-F3CCE9C58B2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiSvgTestBox", "Samples\GdiSvgTestBox\GdiSvgTestBox.csproj", "{5A71211F-9EDA-4C43-8DDC-E3EB54843113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiSvgTestBox", "Samples\GdiSvgTestBox\GdiSvgTestBox.VS2019.csproj", "{5A71211F-9EDA-4C43-8DDC-E3EB54843113}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgControl", "Samples\WpfTestSvgControl\WpfTestSvgControl.csproj", "{28586359-004C-45B5-823E-38F714784B31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSvgControl", "Samples\WpfTestSvgControl\WpfTestSvgControl.VS2019.csproj", "{28586359-004C-45B5-823E-38F714784B31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestThreadSafety", "Samples\WpfTestThreadSafety\WpfTestThreadSafety.csproj", "{19ED33D1-7D07-43ED-878A-16630CD4035D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestThreadSafety", "Samples\WpfTestThreadSafety\WpfTestThreadSafety.VS2019.csproj", "{19ED33D1-7D07-43ED-878A-16630CD4035D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Scripting", "Source\SharpVectorScripting\SharpVectors.Scripting.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Scripting", "Source\SharpVectorScripting\SharpVectors.Scripting.VS2019.csproj", "{340EF466-0248-4FAD-9616-EC693BD72D38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestOtherSvg", "Samples\WpfTestOtherSvg\WpfTestOtherSvg.csproj", "{812C131D-604E-403B-BF39-40980C5DA9B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestOtherSvg", "Samples\WpfTestOtherSvg\WpfTestOtherSvg.VS2019.csproj", "{812C131D-604E-403B-BF39-40980C5DA9B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DB43362-F0A9-447A-9FD0-2323D2868830}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Core.Tests", "Tests\SharpVectorsCore\SharpVectors.Core.Tests.csproj", "{F69F8D82-6D2F-4D91-9595-7DC2A7371479}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Core.Tests", "Tests\SharpVectorsCore\SharpVectors.Core.Tests.VS2019.csproj", "{F69F8D82-6D2F-4D91-9595-7DC2A7371479}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

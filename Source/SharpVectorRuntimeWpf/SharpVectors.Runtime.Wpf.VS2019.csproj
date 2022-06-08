@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+    <UseWpf>true</UseWpf>
+    <RootNamespace>SharpVectors.Runtime</RootNamespace>
+    <AssemblyName>SharpVectors.Runtime.Wpf</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SharpVectors.Runtime.snk</AssemblyOriginatorKeyFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <IsPackable>false</IsPackable>
+    <OutputType>Library</OutputType>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\..\Output\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>..\..\Output\</OutputPath>
+    <DocumentationFile>..\..\Output\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">$(DefineConstants);DOTNET46;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net5'))">$(DefineConstants);NETCORE;NET50</DefineConstants>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

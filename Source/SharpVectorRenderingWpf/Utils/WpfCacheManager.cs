@@ -6,7 +6,7 @@ using SharpVectors.Net;
 
 namespace SharpVectors.Renderers.Utils
 {
-    public sealed class WpfCacheManager : ICacheManager
+    internal sealed class WpfCacheManager : ICacheManager
     {
         private XmlElement lastCacheElm;
         private Uri lastUri;
@@ -45,7 +45,7 @@ namespace SharpVectors.Renderers.Utils
                 cacheDoc = new XmlDocument();
             }
 
-            if(File.Exists(cacheDocPath))
+            if (File.Exists(cacheDocPath))
             {
                 cacheDoc.Load(cacheDocPath);
             }
@@ -67,7 +67,7 @@ namespace SharpVectors.Renderers.Utils
 
         private XmlElement GetCacheElm(Uri uri)
         {
-            if(uri == lastUri && lastCacheElm != null)
+            if (uri == lastUri && lastCacheElm != null)
             {
                 return lastCacheElm;
             }
@@ -76,7 +76,7 @@ namespace SharpVectors.Renderers.Utils
                 //string xpath = "/cache/resource[@url='" + uri.ToString() + "']";
                 string xpath = "/cache/resource[@url='" + uri.ToString().Replace("'", "&apos;") + "']";
                 XmlNode node = cacheDoc.SelectSingleNode(xpath);
-                if(node != null)
+                if (node != null)
                 {
                     lastCacheElm = node as XmlElement;
                 }
@@ -97,7 +97,7 @@ namespace SharpVectors.Renderers.Utils
             if (cacheElm.HasAttribute("local-path"))
             {
                 string path = Path.Combine(cacheDir, cacheElm.GetAttribute("local-path"));
-                if(File.Exists(path))
+                if (File.Exists(path))
                 {
                     path = "file:///" + path.Replace('\\', '/');
                     return new Uri(path);
@@ -113,7 +113,7 @@ namespace SharpVectors.Renderers.Utils
                 return null;
             }
         }
-        
+
         public long Size
         {
             get
@@ -121,11 +121,11 @@ namespace SharpVectors.Renderers.Utils
                 DirectoryInfo di = new DirectoryInfo(cacheDir);
                 FileInfo[] files = di.GetFiles();
                 long size = 0;
-                foreach(FileInfo file in files)
+                foreach (FileInfo file in files)
                 {
                     size += file.Length;
                 }
-                return size;				
+                return size;
             }
         }
 
@@ -133,13 +133,13 @@ namespace SharpVectors.Renderers.Utils
         {
             DirectoryInfo di = new DirectoryInfo(cacheDir);
             FileInfo[] files = di.GetFiles();
-            foreach(FileInfo file in files)
+            foreach (FileInfo file in files)
             {
                 try
                 {
                     file.Delete();
                 }
-                catch{}
+                catch { }
             }
 
             cacheDoc = new XmlDocument();
@@ -152,30 +152,30 @@ namespace SharpVectors.Renderers.Utils
             XmlElement cacheElm = GetCacheElm(uri);
 
             DateTime expires = DateTime.MinValue;
-            if(cacheElm.HasAttribute("expires"))
+            if (cacheElm.HasAttribute("expires"))
             {
                 expires = DateTime.Parse(cacheElm.GetAttribute("expires"));
             }
 
             DateTime lastModified = DateTime.MinValue;
-            if(cacheElm.HasAttribute("last-modified"))
+            if (cacheElm.HasAttribute("last-modified"))
             {
                 lastModified = DateTime.Parse(cacheElm.GetAttribute("last-modified"));
             }
 
             Uri cachedUri = GetLocalPathUri(cacheElm);
 
-            return new CacheInfo(expires, cacheElm.GetAttribute("etag"), 
+            return new CacheInfo(expires, cacheElm.GetAttribute("etag"),
                 lastModified, cachedUri, cacheElm.GetAttribute("content-type"));
         }
 
         public void SetCacheInfo(Uri uri, CacheInfo cacheInfo, Stream stream)
-        {	
+        {
             XmlElement cacheElm = GetCacheElm(uri);
 
-            if(cacheInfo != null)
+            if (cacheInfo != null)
             {
-                if(cacheInfo.ETag != null)
+                if (cacheInfo.ETag != null)
                 {
                     cacheElm.SetAttribute("etag", cacheInfo.ETag);
                 }
@@ -184,7 +184,7 @@ namespace SharpVectors.Renderers.Utils
                     cacheElm.RemoveAttribute("etag");
                 }
 
-                if(cacheInfo.ContentType != null)
+                if (cacheInfo.ContentType != null)
                 {
                     cacheElm.SetAttribute("content-type", cacheInfo.ContentType);
                 }
@@ -193,7 +193,7 @@ namespace SharpVectors.Renderers.Utils
                     cacheElm.RemoveAttribute("content-type");
                 }
 
-                if(cacheInfo.Expires != DateTime.MinValue)
+                if (cacheInfo.Expires != DateTime.MinValue)
                 {
                     cacheElm.SetAttribute("expires", cacheInfo.Expires.ToString("s"));
                 }
@@ -202,7 +202,7 @@ namespace SharpVectors.Renderers.Utils
                     cacheElm.RemoveAttribute("expires");
                 }
 
-                if(cacheInfo.LastModified != DateTime.MinValue)
+                if (cacheInfo.LastModified != DateTime.MinValue)
                 {
                     cacheElm.SetAttribute("last-modified", cacheInfo.LastModified.ToString("s"));
                 }
@@ -215,7 +215,7 @@ namespace SharpVectors.Renderers.Utils
             if (stream != null)
             {
                 string localPath;
-                if(cacheElm.HasAttribute("local-path"))
+                if (cacheElm.HasAttribute("local-path"))
                 {
                     localPath = cacheElm.GetAttribute("local-path");
                 }
@@ -230,7 +230,7 @@ namespace SharpVectors.Renderers.Utils
                 byte[] buffer = new byte[4096];
 
                 FileStream fs = File.OpenWrite(Path.Combine(cacheDir, localPath));
-                while((count = stream.Read(buffer, 0, 4096)) > 0) fs.Write(buffer, 0, count);
+                while ((count = stream.Read(buffer, 0, 4096)) > 0) fs.Write(buffer, 0, count);
                 fs.Flush();
                 fs.Close();
             }

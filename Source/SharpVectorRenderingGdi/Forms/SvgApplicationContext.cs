@@ -13,7 +13,7 @@ namespace SharpVectors.Renderers.Forms
                 DirectoryInfo di;
                 try
                 {
-#if !NET50
+#if !NETCORE
                     FileIOPermission f = new FileIOPermission(PermissionState.None);
                     f.AllLocalFiles = FileIOPermissionAccess.Read;
 

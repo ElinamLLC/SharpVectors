@@ -2,11 +2,10 @@ using System;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
-using SharpVectors.Dom.Utils;
 
 namespace SharpVectors.Renderers.Utils
 {
-    public static class WpfApplicationContext
+    internal static class WpfApplicationContext
     {
         public static DirectoryInfo ExecutableDirectory
         {
@@ -14,13 +13,13 @@ namespace SharpVectors.Renderers.Utils
                 DirectoryInfo di;
                 try
                 {
-#if !NET50
+#if !NETCORE
                     FileIOPermission f = new FileIOPermission(PermissionState.None);
                     f.AllLocalFiles = FileIOPermissionAccess.Read;
 
                     f.Assert();
 #endif
-                    di = new DirectoryInfo(PathUtils.Combine(
+                    di = new DirectoryInfo(SharpVectors.Dom.Utils.PathUtils.Combine(
                         System.Reflection.Assembly.GetExecutingAssembly()));
                 }
                 catch (SecurityException)
