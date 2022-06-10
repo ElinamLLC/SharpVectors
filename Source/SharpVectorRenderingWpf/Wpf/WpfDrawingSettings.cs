@@ -18,6 +18,13 @@ namespace SharpVectors.Renderers.Wpf
     /// </summary>
     public sealed class WpfDrawingSettings : DependencyObject, ICloneable
     {
+        #region Public Fields
+
+        public const string PropertyNonePen   = "_NonePen";
+        public const string PropertyNoneBrush = "_NoneBrush";
+
+        #endregion
+
         #region Private Fields
 
         private bool _textAsGeometry;
@@ -168,7 +175,7 @@ namespace SharpVectors.Renderers.Wpf
                 return _properties[name];
             }
             set {
-                if (string.IsNullOrWhiteSpace(name) || _properties == null || _properties.Count == 0)
+                if (string.IsNullOrWhiteSpace(name) || _properties == null)
                 {
                     return;
                 }

@@ -373,6 +373,13 @@ namespace SharpVectors.Renderers.Wpf
                 _paintContext.Stroke = strokePaint;
                 _paintContext.Tag    = geometry;
             }
+            
+            if (brush == null && pen == null)
+            {
+                WpfDrawingSettings settings = context.Settings;
+                pen   = (Pen)settings[WpfDrawingSettings.PropertyNonePen];
+                brush = (Brush)settings[WpfDrawingSettings.PropertyNoneBrush];
+            }
 
             if (brush != null || pen != null)
             {
@@ -690,6 +697,13 @@ namespace SharpVectors.Renderers.Wpf
                 _paintContext.Fill   = fillPaint;
                 _paintContext.Stroke = strokePaint;
                 _paintContext.Tag    = geometry;
+            }
+
+            if (brush == null && pen == null)
+            {
+                WpfDrawingSettings settings = context.Settings;
+                pen   = (Pen)settings[WpfDrawingSettings.PropertyNonePen];
+                brush = (Brush)settings[WpfDrawingSettings.PropertyNoneBrush];
             }
 
             if (brush != null || pen != null)
