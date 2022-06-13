@@ -31,6 +31,8 @@ namespace SharpVectors.Converters
     {
         #region Private Fields
 
+        private delegate void AppendTextDelegate(string msg, string style);
+
         private bool _writerErrorOccurred;
         private bool _fallbackOnWriterError;
 
@@ -83,24 +85,26 @@ namespace SharpVectors.Converters
         public ImageSvgConverter(bool saveXaml, bool saveZaml,
             WpfDrawingSettings settings) : base(saveXaml, saveZaml, settings)
         {
-            long pixelWidth  = 0;
+            long pixelWidth = 0;
             long pixelHeight = 0;
 
             if (settings != null)
             {
+                //settings.EnsureViewboxSize = true;
+
                 settings.EnsureViewboxSize = false;
                 settings.IgnoreRootViewbox = true;
 
                 if (settings.HasPixelSize)
                 {
-                    pixelWidth  = settings.PixelWidth;
+                    pixelWidth = settings.PixelWidth;
                     pixelHeight = settings.PixelHeight;
                 }
             }
 
             _encoderType = ImageEncoderType.PngBitmap;
             _wpfRenderer = new WpfDrawingRenderer(this.DrawingSettings);
-            _wpfWindow   = new WpfSvgWindow(pixelWidth, pixelHeight, _wpfRenderer);
+            _wpfWindow = new WpfSvgWindow(pixelWidth, pixelHeight, _wpfRenderer);
         }
 
         #endregion
@@ -291,13 +295,11 @@ namespace SharpVectors.Converters
             }
             if (svgFileName.Length == 0)
             {
-                throw new ArgumentException(
-                    "The SVG source file cannot be empty.", nameof(svgFileName));
+                throw new ArgumentException("The SVG source file cannot be empty.", nameof(svgFileName));
             }
             if (!File.Exists(svgFileName))
             {
-                throw new ArgumentException(
-                    "The SVG source file must exists.", nameof(svgFileName));
+                throw new ArgumentException("The SVG source file must exists.", nameof(svgFileName));
             }
 
             _xamlFile = null;
@@ -501,7 +503,7 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -533,7 +535,7 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -565,7 +567,7 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -597,7 +599,7 @@ namespace SharpVectors.Converters
 
             _wpfRenderer.Render(_wpfWindow.Document as SvgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -623,10 +625,119 @@ namespace SharpVectors.Converters
 
         #region SaveImageFile Method
 
-        private bool SaveImageFile(Drawing drawing, string fileName, string imageFileName)
+        private bool SaveImageFile(DrawingGroup drawing, string fileName, string imageFileName)
         {
-            string outputExt      = this.GetImageFileExtention();
-            string outputFileName = null;
+            if (_wpfSettings.HasPixelSize)
+            {
+                return this.SaveSizedImage(drawing, fileName, imageFileName);
+            }
+
+            return this.SaveUnSizedImage(drawing, fileName, imageFileName);
+        }
+
+        private bool SaveSizedImage(DrawingGroup drawing, string fileName, string imageFileName)
+        {
+            string outputExt = this.GetImageFileExtention();
+            string outputFileName;
+            if (string.IsNullOrWhiteSpace(imageFileName))
+            {
+                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+
+                string workingDir = Path.GetDirectoryName(fileName);
+                outputFileName = Path.Combine(workingDir, fileNameWithoutExt + outputExt);
+            }
+            else
+            {
+                string fileExt = Path.GetExtension(imageFileName);
+                if (string.IsNullOrWhiteSpace(fileExt))
+                {
+                    outputFileName = imageFileName + outputExt;
+                }
+                else if (!string.Equals(fileExt, outputExt, StringComparison.OrdinalIgnoreCase))
+                {
+                    outputFileName = Path.ChangeExtension(imageFileName, outputExt);
+                }
+                else
+                {
+                    outputFileName = imageFileName;
+                }
+            }
+
+            string outputFileDir = Path.GetDirectoryName(outputFileName);
+            if (!Directory.Exists(outputFileDir))
+            {
+                Directory.CreateDirectory(outputFileDir);
+            }
+
+            BitmapEncoder bitmapEncoder = this.GetBitmapEncoder(outputExt);
+
+            // The image parameters...
+            Rect drawingBounds = drawing.Bounds;
+            double imageWidth = drawingBounds.Width;
+            double imageHeight = drawingBounds.Height;
+            int pixelWidth = _wpfSettings.PixelWidth;
+            int pixelHeight = _wpfSettings.PixelHeight;
+            double dpiX = 96;
+            double dpiY = 96;
+
+            double ratioX = pixelWidth / imageWidth;
+            double ratioY = pixelHeight / imageHeight;
+
+            double ratio = ratioX < ratioY ? ratioX : ratioY;
+
+            int finalWidth = (int)(imageWidth * ratio);
+            int finalHeight = (int)(imageHeight * ratio);
+
+            int offsetX = pixelWidth - finalWidth;
+            int offsetY = pixelHeight - finalHeight;
+            if (offsetX < 0)
+            {
+                offsetX = 0;
+            }
+            if (offsetY < 0)
+            {
+                offsetY = 0;
+            }
+
+            TransformGroup imageTransform = new TransformGroup();
+            imageTransform.Children.Add(new TranslateTransform(-drawingBounds.X, -drawingBounds.Y));
+            imageTransform.Children.Add(new ScaleTransform(ratio, ratio));
+            if (offsetX != 0 || offsetY != 0)
+            {
+                imageTransform.Children.Add(new TranslateTransform(offsetX / 2, offsetY / 2));
+            }
+
+            // The Visual to use as the source of the RenderTargetBitmap.
+            DrawingVisual drawingVisual = new DrawingVisual();
+            DrawingContext drawingContext = drawingVisual.RenderOpen();
+            if (this.Background != null)
+            {
+                Rect imageBounds = new Rect(0, 0, pixelWidth, pixelHeight);
+                drawingContext.DrawRectangle(this.Background, null, imageBounds);
+            }
+            drawingContext.PushTransform(imageTransform);
+            drawingContext.DrawDrawing(drawing);
+            drawingContext.Pop();
+            drawingContext.Close();
+
+            // The BitmapSource that is rendered with a Visual.
+            var targetBitmap = new RenderTargetBitmap(pixelWidth, pixelHeight, dpiX, dpiY, PixelFormats.Pbgra32);
+            targetBitmap.Render(drawingVisual);
+
+            // Encoding the RenderBitmapTarget as an image file.
+            bitmapEncoder.Frames.Add(BitmapFrame.Create(targetBitmap));
+            using (FileStream stream = File.Create(outputFileName))
+            {
+                bitmapEncoder.Save(stream);
+            }
+
+            return true;
+        }
+
+        private bool SaveUnSizedImage(DrawingGroup drawing, string fileName, string imageFileName)
+        {
+            string outputExt = this.GetImageFileExtention();
+            string outputFileName;
             if (string.IsNullOrWhiteSpace(imageFileName))
             {
                 var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
@@ -661,25 +772,11 @@ namespace SharpVectors.Converters
 
             // The image parameters...
             Rect drawingBounds = drawing.Bounds;
-            double imageWidth  = drawingBounds.Width;
-            double imageHeight = drawingBounds.Height;
-            double ratio = 1;
+            int pixelWidth = (int)drawingBounds.Width;
+            int pixelHeight = (int)drawingBounds.Height;
 
-            int pixelWidth  = _wpfSettings.PixelWidth;
-            int pixelHeight = _wpfSettings.PixelHeight;
-            if (_wpfSettings.HasPixelSize)
-            {
-                double ratioX = pixelWidth / imageWidth;
-                double ratioY = pixelHeight / imageHeight;
-                ratio         = ratioX < ratioY ? ratioX : ratioY;
-            }
-            else
-            {
-                pixelWidth  = (int)imageWidth;
-                pixelHeight = (int)imageHeight;
-            }
-
-            var imageTransform = new ScaleTransform(ratio, ratio);
+            var imageTransform = new TranslateTransform(-drawingBounds.X, -drawingBounds.Y);
+            //var imageTransform = new ScaleTransform(ratio, ratio);
 
             // The Visual to use as the source of the RenderTargetBitmap.
             DrawingVisual drawingVisual = new DrawingVisual();
@@ -713,10 +810,10 @@ namespace SharpVectors.Converters
 
             if (_bitampEncoder != null && _bitampEncoder.CodecInfo != null)
             {
-                string mimeType           = string.Empty;
+                string mimeType = string.Empty;
                 BitmapCodecInfo codecInfo = _bitampEncoder.CodecInfo;
-                string mimeTypes          = codecInfo.MimeTypes;
-                string fileExtensions     = codecInfo.FileExtensions;
+                string mimeTypes = codecInfo.MimeTypes;
+                string fileExtensions = codecInfo.FileExtensions;
                 switch (_encoderType)
                 {
                     case ImageEncoderType.BmpBitmap:
@@ -744,7 +841,8 @@ namespace SharpVectors.Converters
                 {
                     bitmapEncoder = _bitampEncoder;
                 }
-                else if (!string.IsNullOrWhiteSpace(mimeTypes) && !string.IsNullOrWhiteSpace(mimeType))
+                else if (!string.IsNullOrWhiteSpace(mimeTypes) &&
+                    !string.IsNullOrWhiteSpace(mimeType))
                 {
                     string[] arrayMimeTypes = mimeType.Split(',');
                     for (int i = 0; i < arrayMimeTypes.Length; i++)
@@ -809,8 +907,8 @@ namespace SharpVectors.Converters
             if (this.UseFrameXamlWriter)
             {
                 XmlWriterSettings writerSettings = new XmlWriterSettings();
-                writerSettings.Indent             = true;
-                writerSettings.Encoding           = Encoding.UTF8;
+                writerSettings.Indent = true;
+                writerSettings.Encoding = Encoding.UTF8;
                 writerSettings.OmitXmlDeclaration = true;
 
                 using (FileStream xamlFile = File.Create(xamlFileName))
@@ -844,8 +942,8 @@ namespace SharpVectors.Converters
                         }
 
                         XmlWriterSettings writerSettings = new XmlWriterSettings();
-                        writerSettings.Indent             = true;
-                        writerSettings.Encoding           = Encoding.UTF8;
+                        writerSettings.Indent = true;
+                        writerSettings.Encoding = Encoding.UTF8;
                         writerSettings.OmitXmlDeclaration = true;
 
                         using (FileStream xamlFile = File.Create(xamlFileName))
