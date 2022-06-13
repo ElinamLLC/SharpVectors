@@ -7,8 +7,6 @@ using System.Collections;
 using System.Globalization;
 using System.Collections.Generic;
 
-using StringConvert = System.Convert;
-
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Markup.Primitives;
@@ -46,6 +44,8 @@ namespace SharpVectors.Converters
         private string _windowsPath;
 
         private CultureInfo _culture;
+
+        private string _numberFormat;
 
         private NamespaceCache _namespaceCache;
         private WpfDrawingSettings _wpfSettings;
@@ -89,6 +89,8 @@ namespace SharpVectors.Converters
 
             _windowsDir        = _windowsDir.Replace(@"\", "/");
             _wpfSettings       = settings;
+
+            this.SetNumberFormat(_culture.NumberFormat.NumberDecimalDigits);
         }
 
         #endregion
@@ -109,6 +111,22 @@ namespace SharpVectors.Converters
             }
             set {
                 _nullExtension = value;
+            }
+        }
+
+
+        public int NumberDecimalDigits
+        {
+            get {
+                return _culture.NumberFormat.NumberDecimalDigits;
+            }
+            set {
+                if (value >= 0)
+                {
+                    _culture.NumberFormat.NumberDecimalDigits = value;
+
+                    this.SetNumberFormat(_culture.NumberFormat.NumberDecimalDigits);
+                }
             }
         }
 
@@ -295,48 +313,11 @@ namespace SharpVectors.Converters
 
         #region Private Methods
 
-        //private static string ReducePrecision(string s, int precision = 2)
-        //{
-        //    string old = s;
-        //    if (old.Length == 0 || old.Length < precision)
-        //    {
-        //        return old;
-        //    }
-
-        //    int begin = 0;
-        //    int end   = 0;
-
-        //    while (true)
-        //    {
-        //        begin = old.IndexOf('.', begin);
-        //        if (begin == -1) break;
-
-        //        // get past the period
-        //        begin++;
-
-        //        for (int i = 0; i < precision; i++)
-        //        {
-        //            if (old[begin] >= '0' && old[begin] <= '9') 
-        //                begin++;
-        //            if (begin >= old.Length)
-        //                break;
-        //        }
-        //        if (begin >= old.Length)
-        //            break;
-
-        //        end = begin;
-
-        //        while (end < old.Length && old[end] >= '0' && old[end] <= '9') end++;
-
-        //        old = old.Substring(0, begin) + old.Substring(end, old.Length - end);
-
-        //        begin++;
-        //        if (begin >= old.Length)
-        //            break;
-        //    }
-        //    return old;
-        //}
-
+        private void SetNumberFormat(int decimalDigits)
+        {
+            _numberFormat = "0." + new string('#', decimalDigits);
+        }
+ 
         private void WriteObject(object key, object obj, XmlWriter writer, bool isRoot)
         {
             List<MarkupProperty> propertyElements = new List<MarkupProperty>();
@@ -382,12 +363,11 @@ namespace SharpVectors.Converters
                 {
                     WriteState writeState = writer.WriteState;
 
+                    var formattable = (IFormattable)markupObj.Instance;
+
                     if (writeState == WriteState.Element)
                     {
-                        //writer.WriteAttributeString("Figures", 
-                        //    markupObj.Instance.ToString());
-                        writer.WriteAttributeString("Figures", StringConvert.ToString(markupObj.Instance, _culture));
-//                        writer.WriteAttributeString("Figures", ReducePrecision(StringConvert.ToString(markupObj.Instance, _culture)));
+                        writer.WriteAttributeString("Figures", formattable.ToString(_numberFormat, _culture));
                     }
                     else
                     {
@@ -399,11 +379,22 @@ namespace SharpVectors.Converters
                         {
                             writer.WriteStartElement("PathGeometry.Figures", ns);
                         }
-                        //writer.WriteString(markupObj.Instance.ToString());
-                        writer.WriteString(StringConvert.ToString(markupObj.Instance, _culture));
+                        writer.WriteString(formattable.ToString(_numberFormat, _culture));
                         writer.WriteEndElement();
                     }
                     return;
+                }
+                else if (markupObj.ObjectType.Name == "PathGeometry" && markupObj.Instance != null)
+                {
+                    var formattable = (IFormattable)markupObj.Instance;
+                    if (string.IsNullOrWhiteSpace(prefix))
+                    {
+                        writer.WriteStartElement(markupObj.ObjectType.Name);
+                    }
+                    else
+                    {
+                        writer.WriteStartElement(markupObj.ObjectType.Name, ns);
+                    }
                 }
                 else
                 {
@@ -520,6 +511,22 @@ namespace SharpVectors.Converters
                                 builder.Append("}");
 
                                 writer.WriteAttributeString(markupProperty.Name, builder.ToString());
+                            }
+                            else if (markupProperty.Name == "Rect" &&
+                                markupObj.ObjectType.Name == "RectangleGeometry")
+                            {
+                                var rect = (System.Windows.Media.RectangleGeometry)markupObj.Instance;
+                                var formattable = (IFormattable)rect.Rect;
+
+                                writer.WriteAttributeString(markupProperty.Name, formattable.ToString(_numberFormat, _culture));
+                            }
+                            else if (markupProperty.Name == "Transform" &&
+                                markupObj.ObjectType.Name == "DrawingGroup")
+                            {
+                                var drawGroup = (System.Windows.Media.DrawingGroup)markupObj.Instance;
+                                var formattable = (IFormattable)drawGroup.Transform;
+
+                                writer.WriteAttributeString(markupProperty.Name, formattable.ToString(_numberFormat, _culture));
                             }
                             else
                             {
