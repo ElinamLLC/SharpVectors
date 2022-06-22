@@ -390,7 +390,14 @@ namespace SharpVectors.Renderers.Wpf
                         }
                         if (clipRect != Rect.Empty)
                         {
-                            _clipGeometry = new RectangleGeometry(clipRect);
+                            if (context.IsResourceDictionary)
+                            {
+                                _clipGeometry = WpfConvert.ToPath(clipRect); // new RectangleGeometry(clipRect);
+                            }
+                            else
+                            {
+                                _clipGeometry = new RectangleGeometry(clipRect);
+                            }
                             //gr.SetClip(clipRect);
                         }
                     }

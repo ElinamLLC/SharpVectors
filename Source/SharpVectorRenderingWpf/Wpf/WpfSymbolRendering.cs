@@ -132,7 +132,14 @@ namespace SharpVectors.Renderers.Wpf
                 // dealing with the root SVG element...
                 if (parentNode != null && parentNode.NodeType == XmlNodeType.Document)
                 {
-                    _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                    if (context.IsResourceDictionary)
+                    {
+                        _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                    }
+                    else
+                    {
+                        _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                    }
                 }
                 else
                 {
@@ -141,17 +148,39 @@ namespace SharpVectors.Renderers.Wpf
                         // We have already applied the transform, which will translate to the start point...
                         if (transform is TranslateTransform)
                         {
-                            _drawGroup.ClipGeometry = new RectangleGeometry(
-                                new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            //_drawGroup.ClipGeometry = new RectangleGeometry(
+                            //    new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            if (context.IsResourceDictionary)
+                            {
+                                _drawGroup.ClipGeometry = WpfConvert.ToPath(new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            }
+                            else
+                            {
+                                _drawGroup.ClipGeometry = new RectangleGeometry(new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            }
+                        }
+                        else
+                        {
+                            if (context.IsResourceDictionary)
+                            {
+                                _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                            }
+                            else
+                            {
+                                _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (context.IsResourceDictionary)
+                        {
+                            _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
                         }
                         else
                         {
                             _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
                         }
-                    }
-                    else
-                    {
-                        _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
                     }
                 }
             }

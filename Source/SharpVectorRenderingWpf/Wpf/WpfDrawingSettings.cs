@@ -20,8 +20,9 @@ namespace SharpVectors.Renderers.Wpf
     {
         #region Public Fields
 
-        public const string PropertyNonePen   = "_NonePen";
-        public const string PropertyNoneBrush = "_NoneBrush";
+        public const string PropertyNonePen     = "_NonePen";
+        public const string PropertyNoneBrush   = "_NoneBrush";
+        public const string PropertyIsResources = "_IsResources";
 
         #endregion
 
@@ -69,6 +70,8 @@ namespace SharpVectors.Renderers.Wpf
         private DpiScale _dpiScale;
 
         private SvgInteractiveModes _interactiveMode;
+
+        private WpfDrawingResources _drawingResources;
 
         #endregion
 
@@ -759,6 +762,16 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     _dpiScale = value;
                 }
+            }
+        }
+
+        public WpfDrawingResources DrawingResources
+        {
+            get {
+                return _drawingResources;
+            }
+            set {
+                _drawingResources = value;
             }
         }
 

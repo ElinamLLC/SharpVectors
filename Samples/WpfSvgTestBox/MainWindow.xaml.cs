@@ -20,6 +20,7 @@ namespace WpfSvgTestBox
         private XamlPage _xamlPage;
         private DebugPage _debugPage;
         private SettingsPage _settingsPage;
+        private SvgResourcePage _resourcePage;
 
         #endregion
 
@@ -74,6 +75,7 @@ namespace WpfSvgTestBox
             _xamlPage     = frameXamlOutput.Content as XamlPage;
             _debugPage    = frameDebugging.Content as DebugPage;
             _settingsPage = frameSettings.Content as SettingsPage;
+            _resourcePage = frameSvgResource.Content as SvgResourcePage;  
 
             if (_svgPage != null && _xamlPage != null)
             {
@@ -83,6 +85,12 @@ namespace WpfSvgTestBox
             if (_svgPage != null && _settingsPage != null)
             {
                 _settingsPage.SvgPage = _svgPage;
+            }
+
+            if (_svgPage != null && _resourcePage != null)
+            {
+                _resourcePage.Window = this;
+                _settingsPage.ResourcePage = _resourcePage;
             }
 
             if (_debugPage != null)

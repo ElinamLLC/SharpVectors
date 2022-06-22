@@ -174,13 +174,28 @@ namespace SharpVectors.Renderers.Wpf
                         SvgRect clipRect = (SvgRect)_markerElement.ViewBox.AnimVal;
                         if (clipRect != null && !clipRect.IsEmpty)
                         {
-                            _drawGroup.ClipGeometry = new RectangleGeometry(
-                                new Rect(clipRect.X, clipRect.Y, clipRect.Width, clipRect.Height));
+                            var elmRect = new Rect(clipRect.X, clipRect.Y, clipRect.Width, clipRect.Height);
+                            if (context.IsResourceDictionary)
+                            {
+                                _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                            }
+                            else
+                            {
+                                _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                            }
                         }
                         else if (_markerElement.IsSizeDefined)
                         {
-                            _drawGroup.ClipGeometry = new RectangleGeometry(new Rect(0, 0, 
-                                _markerElement.MarkerWidth.AnimVal.Value, _markerElement.MarkerHeight.AnimVal.Value));
+                            var elmRect = new Rect(0, 0, _markerElement.MarkerWidth.AnimVal.Value, 
+                                _markerElement.MarkerHeight.AnimVal.Value);
+                            if (context.IsResourceDictionary)
+                            {
+                                _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                            }
+                            else
+                            {
+                                _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                            }
                         }
                         else if (_hostElement != null)
                         {
@@ -231,8 +246,16 @@ namespace SharpVectors.Renderers.Wpf
 
                                 if (isZeroWidthLine)
                                 {
-                                    _drawGroup.ClipGeometry = new RectangleGeometry(new Rect(0, 0,
-                                        _markerElement.MarkerWidth.AnimVal.Value, _markerElement.MarkerHeight.AnimVal.Value));
+                                    var elmRect = new Rect(0, 0, _markerElement.MarkerWidth.AnimVal.Value, 
+                                        _markerElement.MarkerHeight.AnimVal.Value);
+                                    if (context.IsResourceDictionary)
+                                    {
+                                        _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                                    }
+                                    else
+                                    {
+                                        _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                                    }
                                 }
                             }
                         }

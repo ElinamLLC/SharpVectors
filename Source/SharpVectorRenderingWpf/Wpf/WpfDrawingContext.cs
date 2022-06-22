@@ -26,6 +26,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private bool _renderingClip;
         private bool _isFragment;
+        private bool _resourceDictionary;
 
         private Rect _quickBounds;
         private object _tag;
@@ -45,6 +46,7 @@ namespace SharpVectors.Renderers.Wpf
         private HashSet<string> _registeredIds;
 
         private WpfDrawingDocument _drawingDocument;
+        private WpfDrawingResources _drawingResources;
         private Dictionary<string, WpfSvgPaintContext> _paintContexts;
 
         private HashSet<string> _baseUrls;
@@ -55,8 +57,8 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Constructors and Destructor
 
-        public WpfDrawingContext(bool isFragment)
-            : this(isFragment, new WpfDrawingSettings())
+        public WpfDrawingContext()
+            : this(false, new WpfDrawingSettings())
         {
         }
 
@@ -131,6 +133,20 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             _interactiveMode = isFragment ? SvgInteractiveModes.None : settings.InteractiveMode;
+            var value = _settings[WpfDrawingSettings.PropertyIsResources];
+            if (value != null)
+            {
+                _resourceDictionary = Convert.ToBoolean(value);
+                if (_resourceDictionary)
+                {
+                    _drawingResources = _settings.DrawingResources;
+                    if (_drawingResources == null)
+                    {
+                        _drawingResources = new WpfDrawingResources();
+                        _settings.DrawingResources = _drawingResources;
+                    }
+                }
+            }
         }
 
         #endregion
@@ -201,6 +217,13 @@ namespace SharpVectors.Renderers.Wpf
         {
             get {
                 return _isFragment;
+            }
+        }
+
+        public bool IsResourceDictionary
+        {
+            get {
+                return _resourceDictionary;
             }
         }
 
@@ -764,6 +787,33 @@ namespace SharpVectors.Renderers.Wpf
             {
                 _baseUrls.Remove(baseUrl);
             }
+        }
+
+        public void AddResources(Brush brush)
+        {
+            if (_resourceDictionary == false || brush == null)
+            {
+                return;
+            }
+            _drawingResources.AddResource(brush as SolidColorBrush);
+        }
+
+        public void AddResources(SolidColorBrush brush)
+        {
+            if (_resourceDictionary == false || brush == null)
+            {
+                return;
+            }
+            _drawingResources.AddResource(brush);
+        }
+
+        public void AddResources(Pen pen)
+        {
+            if (_resourceDictionary == false || pen == null)
+            {
+                return;
+            }
+            _drawingResources.AddResource(pen);
         }
 
         #endregion

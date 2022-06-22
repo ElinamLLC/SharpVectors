@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
+using SharpVectors.Renderers.Utils;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -220,7 +221,14 @@ namespace SharpVectors.Renderers.Wpf
                           new SvgRect(destRect.X, destRect.Y, destRect.Width, destRect.Height));
 
                         DrawingGroup sliceGroup = new DrawingGroup();
-                        sliceGroup.ClipGeometry = new RectangleGeometry(clipRect);
+                        if (context.IsResourceDictionary)
+                        {
+                            sliceGroup.ClipGeometry = WpfConvert.ToPath(clipRect);
+                        }
+                        else
+                        {
+                            sliceGroup.ClipGeometry = new RectangleGeometry(clipRect);
+                        }
 
                         DrawingGroup lastGroup = context.Peek();
                         Debug.Assert(lastGroup != null);

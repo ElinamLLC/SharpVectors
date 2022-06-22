@@ -8,11 +8,15 @@ using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Renderers.Utils;
 
+using static SharpVectors.Dom.CssConstants;
+
 namespace SharpVectors.Renderers.Wpf
 {
     public sealed class WpfSvgPaint : SvgPaint
     {
         #region Private Fields
+
+        private static readonly StringComparison Comparer = StringComparison.OrdinalIgnoreCase;
 
         private string _propertyName;
         private WpfFill _paintFill;
@@ -116,27 +120,52 @@ namespace SharpVectors.Renderers.Wpf
 
         public Brush GetBrush()
         {
-            return GetBrush(null, CssConstants.PropFill, true);
+            var brush = GetBrush(null, PropFill, true);
+            if (brush != null)
+            {
+                _context.AddResources(brush);
+            }
+            return brush;
         }
 
         public Brush GetBrush(bool setOpacity)
         {
-            return GetBrush(null, CssConstants.PropFill, setOpacity);
+            var brush = GetBrush(null, PropFill, setOpacity);
+            if (brush != null)
+            {
+                _context.AddResources(brush);
+            }
+            return brush;
         }
 
         public Brush GetBrush(Geometry geometry)
         {
-            return GetBrush(geometry, CssConstants.PropFill, true);
+            var brush = GetBrush(geometry, PropFill, true);
+            if (brush != null)
+            {
+                _context.AddResources(brush);
+            }
+            return brush;
         }
 
         public Brush GetBrush(Geometry geometry, bool setOpacity)
         {
-            return GetBrush(geometry, CssConstants.PropFill, setOpacity);
+            var brush = GetBrush(geometry, PropFill, setOpacity);
+            if (brush != null)
+            {
+                _context.AddResources(brush);
+            }
+            return brush;
         }
 
         public Pen GetPen(bool setOpacity = true)
         {
-            return this.GetPen(null, setOpacity);
+            var pen = this.GetPen(null, setOpacity);
+            if (pen != null)
+            {
+                _context.AddResources(pen);
+            }
+            return pen;
         }
 
         public Pen GetPen(Geometry geometry, bool setOpacity = true)
@@ -156,7 +185,7 @@ namespace SharpVectors.Renderers.Wpf
             }
             if (paintType == SvgPaintType.CurrentColor)
             {
-                stroke = new WpfSvgPaint(_context, _element, CssConstants.PropColor);
+                stroke = new WpfSvgPaint(_context, _element, PropColor);
             }
             else if (paintType == SvgPaintType.ContextFill)
             {
@@ -187,22 +216,22 @@ namespace SharpVectors.Renderers.Wpf
                 stroke = this;
             }
 
-            Brush brush = stroke.GetBrush(geometry, CssConstants.PropStroke, setOpacity);
+            Brush brush = stroke.GetBrush(geometry, PropStroke, setOpacity);
             if (brush == null)
             {
                 WpfSvgPaint fallbackPaint = stroke.WpfFallback;
                 if (fallbackPaint != null)
                 {
-                    brush = fallbackPaint.GetBrush(geometry, CssConstants.PropStroke, setOpacity);
+                    brush = fallbackPaint.GetBrush(geometry, PropStroke, setOpacity);
                 }
             }
             Pen pen = new Pen(brush, strokeWidth);
 
-            if (_element.HasAttribute(CssConstants.PropStrokeOpacity))
+            if (_element.HasAttribute(PropStrokeOpacity))
             {
                 double opacityValue = -1;
 
-                string opacity = _element.GetAttribute(CssConstants.PropStrokeOpacity);
+                string opacity = _element.GetAttribute(PropStrokeOpacity);
                 if (!string.IsNullOrWhiteSpace(opacity))
                 {
                     opacityValue = SvgNumber.ParseNumber(opacity);
@@ -260,6 +289,10 @@ namespace SharpVectors.Renderers.Wpf
                     pen.DashCap = lineCap;
                 }
             }
+            if (pen != null)
+            {
+                _context.AddResources(pen);
+            }
             return pen;
         }
 
@@ -273,12 +306,12 @@ namespace SharpVectors.Renderers.Wpf
             return null;
         }
 
-        private static bool Equals(double number1, double number2)
+        internal static bool Equals(double number1, double number2)
         {
             return number1.Equals(number2);
         }
 
-        private static bool Equals(GradientStop stop1, GradientStop stop2)
+        internal static bool Equals(GradientStop stop1, GradientStop stop2)
         {
             if (stop1 == null && stop2 == null)
             {
@@ -291,7 +324,7 @@ namespace SharpVectors.Renderers.Wpf
             return Color.Equals(stop1.Color, stop2.Color) && stop1.Offset.Equals(stop2.Offset);
         }
 
-        private static bool Equals(Transform transform1, Transform transform2)
+        internal static bool Equals(Transform transform1, Transform transform2)
         {
             if (transform1 == null && transform2 == null)
             {
@@ -483,13 +516,13 @@ namespace SharpVectors.Renderers.Wpf
         {
             switch (_element.GetPropertyValue("stroke-linecap").Trim())
             {
-                case "round":
+                case ValRound:
                     return PenLineCap.Round;
-                case "square":
+                case ValSquare:
                     return PenLineCap.Square;
-                case "butt":
+                case ValButt:
                     return PenLineCap.Flat;
-                case "triangle":
+                case ValTriangle:
                     return PenLineCap.Triangle;
                 default:
                     return PenLineCap.Flat;
@@ -500,9 +533,9 @@ namespace SharpVectors.Renderers.Wpf
         {
             switch (_element.GetPropertyValue("stroke-linejoin").Trim())
             {
-                case "round":
+                case ValRound:
                     return PenLineJoin.Round;
-                case "bevel":
+                case ValBevel:
                     return PenLineJoin.Bevel;
                 default:
                     return PenLineJoin.Miter;
@@ -528,7 +561,7 @@ namespace SharpVectors.Renderers.Wpf
             if (string.IsNullOrWhiteSpace(miterLimitAttr))
             {
                 string strokeLinecap = _element.GetAttribute("stroke-linecap");
-                if (string.Equals(strokeLinecap, "round", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(strokeLinecap, "round", Comparer))
                 {
                     return 1.0d;
                 }
@@ -570,14 +603,14 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            if (dashArrayText.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase)
-                || dashArrayText.Equals("null", StringComparison.OrdinalIgnoreCase))
+            if (dashArrayText.Equals(ValNone, Comparer)
+                || dashArrayText.Equals("null", Comparer))
             {
                 // NOTE: Rule changed in Second Edition of Test Suite 1.1
                 //string dashArrayAttr = _element.GetAttribute("stroke-dasharray");
                 //if (string.IsNullOrWhiteSpace(dashArrayAttr) ||
-                //    dashArrayAttr.Equals(CssConstants.ValNone, StringComparison.OrdinalIgnoreCase)
-                //    || dashArrayAttr.Equals("null", StringComparison.OrdinalIgnoreCase))
+                //    dashArrayAttr.Equals(ValNone, Comparer)
+                //    || dashArrayAttr.Equals("null", Comparer))
                 //{
                 //    return null;
                 //}
@@ -617,7 +650,7 @@ namespace SharpVectors.Renderers.Wpf
         private WpfFill GetPaintFill(string uri)
         {
             string absoluteUri = _element.ResolveUri(uri);
-            if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+            if (absoluteUri.StartsWith("#", Comparer))
             {
                 var elementId = absoluteUri.Substring(1);
                 if (_context.ContainsUrl(elementId))
@@ -640,7 +673,7 @@ namespace SharpVectors.Renderers.Wpf
                     if (!string.IsNullOrWhiteSpace(propertyValue))
                     {
                         WpfSvgPaint importFill = new WpfSvgPaint(_context, styleElm, _propertyName);
-                        if (string.Equals(uri, importFill.Uri, StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(uri, importFill.Uri, Comparer))
                         {
                             WpfFill fill = WpfFill.CreateFill(_element.ImportDocument, absoluteUri);
                             if (fill != null)
@@ -664,13 +697,13 @@ namespace SharpVectors.Renderers.Wpf
             }
             // Try a shortcut...
             SvgStyleableElement svgElement = _element.ParentNode as SvgStyleableElement;
-            if (svgElement != null && svgElement.HasAttribute(CssConstants.PropFill)
-                && string.Equals("currentColor", svgElement.GetAttribute(CssConstants.PropFill)))
+            if (svgElement != null && svgElement.HasAttribute(PropFill)
+                && string.Equals(ValCurrentcolor, svgElement.GetAttribute(PropFill), Comparer))
             {
-                string color = svgElement.GetAttribute(CssConstants.PropColor);
+                string color = svgElement.GetAttribute(PropColor);
                 if (!string.IsNullOrWhiteSpace(color))
                 {
-                    return new WpfSvgPaint(_context, svgElement, CssConstants.PropColor);
+                    return new WpfSvgPaint(_context, svgElement, PropColor);
                 }
             }
 
@@ -689,10 +722,10 @@ namespace SharpVectors.Renderers.Wpf
                     {
                         if (childNode == _element)
                         {
-                            string color = svgElement.GetAttribute(CssConstants.PropColor);
+                            string color = svgElement.GetAttribute(PropColor);
                             if (!string.IsNullOrWhiteSpace(color))
                             {
-                                return new WpfSvgPaint(_context, svgElement, CssConstants.PropColor);
+                                return new WpfSvgPaint(_context, svgElement, PropColor);
                             }
                         }
                     }
@@ -718,7 +751,7 @@ namespace SharpVectors.Renderers.Wpf
                 var deferredFill = this.GetDeferredFill();
                 if (deferredFill == null)
                 {
-                    fill = new WpfSvgPaint(_context, _element, CssConstants.PropColor);
+                    fill = new WpfSvgPaint(_context, _element, PropColor);
                 }
                 else
                 {
@@ -786,7 +819,7 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 if (paintType == SvgPaintType.UriCurrentColor)
                 {
-                    fill = new WpfSvgPaint(_context, _element, CssConstants.PropColor);
+                    fill = new WpfSvgPaint(_context, _element, PropColor);
                 }
                 else
                 {
@@ -882,7 +915,7 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return null;
             }
-            var cssValue = cssDeclaration.GetPropertyCssValue(CssConstants.PropFill);
+            var cssValue = cssDeclaration.GetPropertyCssValue(PropFill);
             if (cssValue == null)
             {
                 return null;

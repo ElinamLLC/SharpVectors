@@ -371,6 +371,7 @@ namespace SharpVectors.Dom
         public const string ValThreedshadow         = "threedshadow";
         public const string ValTomato               = "tomato";
         public const string ValTop                  = "top";
+        public const string ValTriangle             = "triangle";
         public const string ValTurquoise            = "turquoise";
         public const string ValUltraCondensed       = "ultra-condensed";
         public const string ValUltraExpanded        = "ultra-expanded";

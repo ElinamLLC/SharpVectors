@@ -171,7 +171,14 @@ namespace SharpVectors.Renderers.Wpf
                 // dealing with the root SVG element...
                 if (parentNode != null && parentNode.NodeType == XmlNodeType.Document)
                 {
-                    _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                    if (context.IsResourceDictionary)
+                    {
+                        _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                    }
+                    else
+                    {
+                        _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                    }
                 }
                 else
                 {
@@ -185,12 +192,26 @@ namespace SharpVectors.Renderers.Wpf
                         }
                         else
                         {
-                            _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                            if (context.IsResourceDictionary)
+                            {
+                                _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                            }
+                            else
+                            {
+                                _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                            }
                         }
                     }
                     else
                     {
-                        _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                        if (context.IsResourceDictionary)
+                        {
+                            _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                        }
+                        else
+                        {
+                            _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                        }
                     }
                 }
             }

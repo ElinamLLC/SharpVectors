@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SharpVectors.Runtime
 {
@@ -45,6 +46,15 @@ namespace SharpVectors.Runtime
                 name = "_" + name;
             }
             element.SetValue(FrameworkElement.NameProperty, name);
+        }
+
+        public static void SetName(DrawingGroup element, string name)
+        {
+            //if (!string.IsNullOrEmpty(name) && char.IsDigit(name[0]))
+            //{
+            //    name = "_" + name;
+            //}
+            //element.SetValue(FrameworkElement.NameProperty, name);
         }
 
         public static string GetName(DependencyObject element)

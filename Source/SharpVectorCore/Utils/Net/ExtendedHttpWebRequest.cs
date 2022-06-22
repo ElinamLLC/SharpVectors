@@ -259,10 +259,11 @@ namespace SharpVectors.Net
                 respStream = new GZipStream(respStream, CompressionMode.Decompress);
             }
 
+            const int BufferSize = 4096;
             Stream stream = new MemoryStream();
             int count = 0;
-            byte[] buffer = new byte[4096];
-            while ((count = respStream.Read(buffer, 0, 4096)) > 0)
+            byte[] buffer = new byte[BufferSize];
+            while ((count = respStream.Read(buffer, 0, BufferSize)) > 0)
             {
                 stream.Write(buffer, 0, count);
             }

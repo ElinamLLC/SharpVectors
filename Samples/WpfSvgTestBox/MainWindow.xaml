@@ -37,6 +37,7 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
+            
             <TabItem x:Name="tabSvgInput">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -46,6 +47,7 @@
                 </TabItem.Header>
                 <Frame x:Name="frameSvgInput" Source="SvgPage.xaml"/>
             </TabItem>
+            
             <TabItem x:Name="tabXamlOutput">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -55,6 +57,17 @@
                 </TabItem.Header>
                 <Frame x:Name="frameXamlOutput" Source="XamlPage.xaml"/>
             </TabItem>
+            
+            <TabItem x:Name="tabSvgResource">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfSvgTestBox}" />
+                        <TextBlock Text="Resource Dictionary" Margin="3" VerticalAlignment="Center" MinWidth="70"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="frameSvgResource" Source="SvgResourcePage.xaml"/>
+            </TabItem>
+
             <TabItem x:Name="tabSettings">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -64,6 +77,7 @@
                 </TabItem.Header>
                 <Frame x:Name="frameSettings" Source="SettingsPage.xaml"/>
             </TabItem>
+            
             <TabItem x:Name="tabDebugging" IsSelected="True">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">

@@ -1,0 +1,328 @@
+﻿<Window x:Class="WpfSvgTestBox.SvgResourceColors"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSvgTestBox"
+        mc:Ignorable="d"
+        Title="Pick a Color" Height="800" Width="490" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Window.Resources>
+        <!--<Style x:Key="StretchedContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>-->
+
+        <Style x:Key="Item.FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Item.Static.Background" Color="#FFFCFCFC" />
+        <SolidColorBrush x:Key="Item.Static.Border" Color="#FFFCFCFC" />
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA" />
+        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da" />
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA" />
+        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA" />
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA" />
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA" />
+        <Style x:Key="StretchedContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="1,1" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource Item.FocusVisual}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        Padding="{TemplateBinding Padding}" 
+                        SnapsToDevicePixels="true">
+                            <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource Item.MouseOver.Background}" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Item.MouseOver.Border}" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource Item.SelectedActive.Background}" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Item.SelectedActive.Border}" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource Item.SelectedActive.Background}" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Item.SelectedActive.Border}" />
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical" x:Name="grid" Margin="12" VerticalAlignment="Top">
+        <GroupBox Margin="0,0,0,12">
+            <GroupBox.Header>
+                <TextBlock Text="Resource Colors" FontWeight="Bold" FontSize="14" />
+            </GroupBox.Header>
+            <Grid Height="340" Margin="6">
+                <ListBox x:Name="resourceColors" SelectionChanged="OnResourceSelectionChanged"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Stretch"
+                         ItemsSource="{Binding}" ItemContainerStyle="{StaticResource StretchedContainerStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                                <TextBlock Text="{Binding Name}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" DockPanel.Dock="Left" Margin="6,0,6,0"/>
+                                <Ellipse Fill="{Binding SelectedBrush}" Width="100" Height="32" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="6,0,6,0" />
+                                <Ellipse Fill="{Binding OriginalBrush}" Width="100" Height="32" HorizontalAlignment="Center" Margin="6,0,6,0" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>                
+            </Grid>
+        </GroupBox>
+        
+        <StackPanel Orientation="Horizontal" >
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightSteelBlue" ToolTip="Light Steel Blue"/>
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="BlueViolet" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumPurple" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumSlateBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SlateBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SteelBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MidnightBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkSlateBlue" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Lavender" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Thistle" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Plum" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Violet" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Orchid" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumOrchid" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkViolet" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkOrchid" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkMagenta" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Purple" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Indigo" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MistyRose" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightCoral" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightSalmon" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Salmon" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkSalmon" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="RosyBrown" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="IndianRed" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Red" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Crimson" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Firebrick" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkRed" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Maroon" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Brown" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LavenderBlush" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SeaShell" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Linen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Pink" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightPink" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="HotPink" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DeepPink" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Fuchsia" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Magenta" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumVioletRed" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PaleVioletRed" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="FloralWhite" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PapayaWhip" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Moccasin" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PeachPuff" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="NavajoWhite" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkOrange" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Orange" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Coral" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Tomato" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="OrangeRed" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Ivory" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightYellow" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightGoldenrodYellow" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LemonChiffon" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PaleGoldenrod" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Khaki" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Yellow" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Gold" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkKhaki" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Goldenrod" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkGoldenrod" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Olive" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MintCream" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="GreenYellow" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Chartreuse" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LawnGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Lime" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LimeGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="YellowGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="OliveDrab" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="ForestGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Green" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkOliveGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkGreen" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PaleGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SpringGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumSpringGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumAquamarine" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkSeaGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightSeaGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="CadetBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumSeaGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SeaGreen" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkCyan" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Teal" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkSlateGray" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="AliceBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SkyBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightSkyBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Turquoise" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumTurquoise" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkTurquoise" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DodgerBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="CornflowerBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="RoyalBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Blue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="MediumBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Navy" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Azure" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Honeydew" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightCyan" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Aqua" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Cyan" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Aquamarine" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PaleTurquoise" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="PowderBlue" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DeepSkyBlue" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Cornsilk" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Beige" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="OldLace" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="AntiqueWhite" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="BlanchedAlmond" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Bisque" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Wheat" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Tan" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="BurlyWood" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SandyBrown" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Peru" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Chocolate" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Sienna" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SaddleBrown" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="24">
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="White" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Snow" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="GhostWhite" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="WhiteSmoke" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Gainsboro" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightGray" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Silver" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DarkGray" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="LightSlateGray" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="SlateGray" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Gray" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="DimGray" />
+                <Button Height="20" Margin="1" Click="OnColorClicked" Style="{StaticResource btnBorderOnly}" Background="Black" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="12 0 0 0">
+                <GroupBox>
+                    <GroupBox.Header>
+                        <TextBlock Text="Selected Color" FontWeight="Bold"/>
+                    </GroupBox.Header>
+                    <StackPanel Orientation="Vertical" Margin="6,3,3,6">
+                        <Border x:Name="brdrOrgColor" BorderBrush="LightGray" BorderThickness="1 1 1 1" Height="40"/>
+                        <Border x:Name="brdrSelColor" BorderBrush="LightGray" BorderThickness="1 0 1 1" Height="40"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                            <!-- Hex -->
+                            <TextBlock x:Name="lblHex" Text="Hex" VerticalAlignment="Center" Margin="0 0 3 0" />
+                            <TextBox x:Name="txtHex" Height="24" Text="#000000" VerticalContentAlignment="Center" Width="90" MaxLength="9" TextChanged="OnHexTextChanged" />
+                            <TextBlock x:Name="lblQ" Text="s" Foreground="Red" FontFamily="Webdings" FontSize="16" VerticalAlignment="Center" Visibility="Hidden" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox>
+                    <GroupBox.Header>
+                        <TextBlock x:Name="lblAlpha" Text="ARGB" FontWeight="Bold"/>
+                    </GroupBox.Header>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="6,0,6,0">
+                        <DockPanel>
+                            <!-- A -->
+                            <TextBlock x:Name="lblA" DockPanel.Dock="Left" HorizontalAlignment="Left" Text="A" VerticalAlignment="Center"/>
+                            <local:NumericSpinner x:Name="nudAlpha" DockPanel.Dock="Right" HorizontalAlignment="Right" Height="24" VerticalAlignment="Center" Width="80" Value="0" Minimum="0" Increment="1" Maximum="255" IntegerChanged="OnAlphaChanged" />
+                        </DockPanel>
+                        <DockPanel>
+                            <!-- R -->
+                            <TextBlock x:Name="lblR" DockPanel.Dock="Left" HorizontalAlignment="Left" Text="R" VerticalAlignment="Center"/>
+                            <local:NumericSpinner x:Name="nudR" DockPanel.Dock="Right" HorizontalAlignment="Right" Height="24" VerticalAlignment="Center" Width="80" Value="0" Minimum="0" Maximum="255" Increment="1" IntegerChanged="OnRgbChanged" />
+                        </DockPanel>
+                        <DockPanel>
+                            <!-- G -->
+                            <TextBlock x:Name="lblG" DockPanel.Dock="Left" HorizontalAlignment="Left" Text="G" VerticalAlignment="Center"/>
+                            <local:NumericSpinner x:Name="nudG" DockPanel.Dock="Right" HorizontalAlignment="Right" Height="24" VerticalAlignment="Center" Width="80" Value="0" Minimum="0" Maximum="255" Increment="1" IntegerChanged="OnRgbChanged" />
+                        </DockPanel>
+                        <DockPanel>
+                            <!-- B -->
+                            <TextBlock x:Name="lblB" DockPanel.Dock="Left" HorizontalAlignment="Left" Text="B" VerticalAlignment="Center"/>
+                            <local:NumericSpinner x:Name="nudB" DockPanel.Dock="Right" HorizontalAlignment="Right" Height="24" VerticalAlignment="Center" Width="80" Value="0" Minimum="0" Maximum="255" Increment="1" IntegerChanged="OnRgbChanged" />
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <Button x:Name="btnChange" Click="OnChangeClicked" IsEnabled="False" Margin="6,12,6,0" Content="Change" VerticalAlignment="Center" Height="24" Width="120" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="12">
+            <Button x:Name="btnOK" Click="OnApplyClicked" Margin="6,0,6,0" Content="OK" VerticalAlignment="Center" Height="24" Width="120" />
+            <Button x:Name="btnCancel" Click="OnCancelClicked" Margin="6,0,6,0" Content="Cancel" VerticalAlignment="Center" Height="24" Width="120" />
+        </StackPanel>
+    </StackPanel>
+</Window>

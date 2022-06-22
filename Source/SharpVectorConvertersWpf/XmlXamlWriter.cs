@@ -8,10 +8,14 @@ using System.Globalization;
 using System.Collections.Generic;
 
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Markup;
 using System.Windows.Markup.Primitives;
 
 using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils;
+
+using SvgConvert = System.Convert;
 
 namespace SharpVectors.Converters
 {
@@ -37,6 +41,7 @@ namespace SharpVectors.Converters
     {
         #region Private Fields
 
+        private bool _resourceDictionary;
         private bool _nullExtension;
         private Type _nullType;
 
@@ -45,13 +50,17 @@ namespace SharpVectors.Converters
 
         private CultureInfo _culture;
 
+        private int _indentSpaces;
         private string _numberFormat;
 
         private NamespaceCache _namespaceCache;
         private WpfDrawingSettings _wpfSettings;
+        private WpfDrawingResources _drawingResources;
 
         private Dictionary<Type, string> _contentProperties;
         private Dictionary<string, NamespaceMap> _dicNamespaceMap;
+
+        private StringComparison _comparer;
 
         #endregion
 
@@ -76,8 +85,11 @@ namespace SharpVectors.Converters
         /// </param>
         public XmlXamlWriter(WpfDrawingSettings settings)
         {
+            _comparer          = StringComparison.OrdinalIgnoreCase;
             _culture           = (CultureInfo)CultureInfo.InvariantCulture.Clone();
             _culture.NumberFormat.NumberDecimalDigits = 4;
+
+            _indentSpaces      = 2;
 
             _nullType          = typeof(NullExtension);
             _namespaceCache    = new NamespaceCache(_culture);
@@ -91,6 +103,15 @@ namespace SharpVectors.Converters
             _wpfSettings       = settings;
 
             this.SetNumberFormat(_culture.NumberFormat.NumberDecimalDigits);
+
+            if (_wpfSettings != null)
+            {
+                var value = _wpfSettings[WpfDrawingSettings.PropertyIsResources];
+                if (value != null)
+                {
+                    _resourceDictionary = SvgConvert.ToBoolean(value);
+                }
+            }
         }
 
         #endregion
@@ -114,6 +135,25 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets the number of character string to use when indenting. 
+        /// </summary>
+        /// <value>
+        /// A non-negative value (from 0 to 8) specifying the number of character string. 
+        /// The default is 2 or two spaces.
+        /// </value>
+        public int IndentSpaces
+        {
+            get {
+                return _indentSpaces;
+            }
+            set {
+                if (value >= 0 && value <= 8)
+                {
+                    _indentSpaces = value;
+                }
+            }
+        }
 
         public int NumberDecimalDigits
         {
@@ -126,6 +166,11 @@ namespace SharpVectors.Converters
                     _culture.NumberFormat.NumberDecimalDigits = value;
 
                     this.SetNumberFormat(_culture.NumberFormat.NumberDecimalDigits);
+                }
+                else
+                {
+                    _culture.NumberFormat.NumberDecimalDigits = 99;
+                    _numberFormat = null;
                 }
             }
         }
@@ -179,9 +224,15 @@ namespace SharpVectors.Converters
 
             ResolveXmlNamespaces(obj);
 
+            string indentChars = string.Empty;
+            if (_indentSpaces > 0)
+            {
+                indentChars = new string(' ', _indentSpaces);
+            }
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent             = true;
             settings.OmitXmlDeclaration = true;
+            settings.IndentChars        = indentChars;
 
             StringBuilder builder = new StringBuilder();
             StringWriter writer   = new StringWriter(builder);
@@ -224,9 +275,15 @@ namespace SharpVectors.Converters
 
             ResolveXmlNamespaces(obj);
 
+            string indentChars = string.Empty;
+            if (_indentSpaces > 0)
+            {
+                indentChars = new string(' ', _indentSpaces);
+            }
             XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
+            settings.Indent             = true;
             settings.OmitXmlDeclaration = true;
+            settings.IndentChars        = indentChars;
 
             using (XmlWriter xmlWriter = XmlWriter.Create(stream, settings))
             {
@@ -264,9 +321,15 @@ namespace SharpVectors.Converters
 
             ResolveXmlNamespaces(obj);
 
+            string indentChars = string.Empty;
+            if (_indentSpaces > 0)
+            {
+                indentChars = new string(' ', _indentSpaces);
+            }
             XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
+            settings.Indent             = true;
             settings.OmitXmlDeclaration = true;
+            settings.IndentChars        = indentChars;
 
             using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings))
             {
@@ -315,7 +378,18 @@ namespace SharpVectors.Converters
 
         private void SetNumberFormat(int decimalDigits)
         {
-            _numberFormat = "0." + new string('#', decimalDigits);
+            if (decimalDigits == 0)
+            {
+                _numberFormat = "0.";
+            }
+            else if (decimalDigits > 0)
+            {
+                _numberFormat = "0." + new string('#', decimalDigits);
+            }
+            else
+            {
+                _numberFormat = null;
+            }
         }
  
         private void WriteObject(object key, object obj, XmlWriter writer, bool isRoot)
@@ -354,6 +428,39 @@ namespace SharpVectors.Converters
                 {
                     if (!string.IsNullOrWhiteSpace(map.Prefix) && !string.Equals(map.Prefix, "x"))
                         writer.WriteAttributeString("xmlns", map.Prefix, NamespaceCache.XmlnsNamespace, map.XmlNamespace);
+                }
+
+                if (_resourceDictionary)
+                {
+                    if (_wpfSettings != null && _wpfSettings.DrawingResources != null)
+                    {
+                        _drawingResources = _wpfSettings.DrawingResources;
+                        _drawingResources.InitialiseKeys();
+
+                        if (_drawingResources.ResourceFreeze)
+                        {
+                            writer.WriteAttributeString("xmlns", "po", NamespaceCache.XmlnsNamespace, NamespaceCache.OptionsNamespace);
+                            writer.WriteAttributeString("xmlns", "mc", NamespaceCache.XmlnsNamespace, NamespaceCache.CompatNamespace);
+                            writer.WriteAttributeString("Ignorable", NamespaceCache.CompatNamespace, "po");
+                        }
+
+                        if (_drawingResources.IsReady)
+                        {
+                            var resourceKeys = _drawingResources.Keys;
+                            foreach (var resourceKey in resourceKeys)
+                            {
+                                var resourceValue = _drawingResources[resourceKey];
+                                if (resourceValue != null)
+                                {
+                                    this.WriteObject(resourceKey, resourceValue, writer, false);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            _drawingResources = null;
+                        }
+                    }
                 }
             }
             else
@@ -423,15 +530,29 @@ namespace SharpVectors.Converters
             if (key != null)
             {
                 string keyString = key.ToString();
-                if (keyString.Length > 0)
+                if (!string.IsNullOrWhiteSpace(keyString))
                 {
                     writer.WriteAttributeString("x", "Key", NamespaceCache.XamlNamespace, keyString);
-                }
-                else
-                {
-                    //TODO: key may not be a string, what about x:Type...
-                    throw new NotImplementedException(
-                        "Sample XamlWriter cannot yet handle keys that aren't strings");
+
+                    if (_resourceDictionary && (_drawingResources != null && _drawingResources.ResourceFreeze))
+                    {
+                        if (string.Equals(markupObj.ObjectType.Name, "DrawingGroup", _comparer))
+                        {
+                            var drawGroup = (System.Windows.Media.DrawingGroup)markupObj.Instance;
+                            if (drawGroup != null && drawGroup.IsFrozen)
+                            {
+                                writer.WriteAttributeString("Freeze", NamespaceCache.OptionsNamespace, "True");
+                            }
+                        }
+                        else if (string.Equals(markupObj.ObjectType.Name, "DrawingImage", _comparer))
+                        {
+                            var drawImage = (System.Windows.Media.DrawingImage)markupObj.Instance;
+                            if (drawImage != null && drawImage.IsFrozen)
+                            {
+                                writer.WriteAttributeString("Freeze", NamespaceCache.OptionsNamespace, "True");
+                            }
+                        }
+                    }
                 }
             }
 
@@ -456,6 +577,7 @@ namespace SharpVectors.Converters
 
             contentPropertyName = _contentProperties[objectType];
             string contentString = string.Empty;
+            string contentName   = string.Empty;
 
             foreach (MarkupProperty markupProperty in markupObj.Properties)
             {
@@ -464,6 +586,7 @@ namespace SharpVectors.Converters
                     if (markupProperty.IsValueAsString)
                     {
                         contentString = markupProperty.Value as string;
+                        contentName = markupProperty.Name;
                     }
                     else if (markupProperty.Value == null)
                     {
@@ -534,6 +657,35 @@ namespace SharpVectors.Converters
                                 {
                                     temp = "{}" + temp;
                                 }
+                                if (_resourceDictionary && _drawingResources != null
+                                    && string.Equals(markupProperty.Name, "Brush", _comparer))
+                                {
+                                    if (string.Equals(markupObj.ObjectType.Name, "GeometryDrawing", _comparer))
+                                    {
+                                        var brush = (System.Windows.Media.Brush)markupProperty.Value;
+                                        if (_drawingResources.HasResource(brush))
+                                        {
+                                            var brushKey = _drawingResources.GetResourceKey(brush);
+                                            if (!string.IsNullOrWhiteSpace(brushKey))
+                                            {
+                                                temp = string.Format("{{DynamicResource {0}}}", brushKey);
+                                            }
+                                        }
+                                    } 
+                                    else if (_drawingResources.BindPenToBrushes &&
+                                        string.Equals(markupObj.ObjectType.Name, "Pen", _comparer))
+                                    {
+                                        var brush = (System.Windows.Media.Brush)markupProperty.Value;
+                                        if (_drawingResources.HasResource(brush))
+                                        {
+                                            var brushKey = _drawingResources.GetResourceKey(brush);
+                                            if (!string.IsNullOrWhiteSpace(brushKey))
+                                            {
+                                                temp = string.Format("{{DynamicResource {0}}}", brushKey);
+                                            }
+                                        }
+                                    }
+                                }
                                 writer.WriteAttributeString(markupProperty.Name, temp);
                             }
                         }
@@ -568,6 +720,46 @@ namespace SharpVectors.Converters
                     }
 
                     string propElementName = markupObj.ObjectType.Name + "." + markupProp.Name;
+                    if (_resourceDictionary)
+                    {
+                        if (propElementName.Equals("ResourceDictionary.Entries", _comparer))
+                        {
+                            WriteChildren(writer, markupProp);
+                            continue;
+                        }
+                        if (writer.WriteState == WriteState.Element)
+                        {
+                            if (propElementName.Equals("DrawingGroup.ClipGeometry", _comparer))
+                            {
+                                if (string.Equals(markupProp.PropertyType.Name, "Geometry") &&
+                                    TryWriteAttribute(markupProp.Name, markupProp.Value, writer))
+                                {
+                                    continue;
+                                }
+                            }
+                            if (propElementName.Equals("GeometryDrawing.Geometry", _comparer))
+                            {
+                                if (string.Equals(markupProp.PropertyType.Name, "Geometry") &&
+                                    TryWriteAttribute(markupProp.Name, markupProp.Value, writer))
+                                {
+                                    continue;
+                                } 
+                            }
+                            if (propElementName.Equals("GeometryDrawing.Pen", _comparer) && _drawingResources != null)
+                            {
+                                var pen = (System.Windows.Media.Pen)markupProp.Value;
+                                if (_drawingResources.HasResource(pen))
+                                {
+                                    var penKey = _drawingResources.GetResourceKey(pen);
+                                    if (!string.IsNullOrWhiteSpace(penKey))
+                                    {
+                                        writer.WriteAttributeString("Pen", string.Format("{{DynamicResource {0}}}", penKey));
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     if (string.IsNullOrWhiteSpace(prefix2))
                     {
                         writer.WriteStartElement(propElementName);
@@ -581,9 +773,31 @@ namespace SharpVectors.Converters
                     writer.WriteEndElement();
                 }
 
-                if (contentString != string.Empty)
+                if (!string.IsNullOrWhiteSpace(contentString))
                 {
-                    writer.WriteValue(contentString);
+                    if (writer.WriteState == WriteState.Element
+                        && string.Equals(markupObj.ObjectType.Name, "SolidColorBrush", _comparer)
+                        && contentString.StartsWith("#", _comparer)) 
+                    {
+                        string colorText = contentString;
+                        if (_resourceDictionary && _drawingResources != null)
+                        {
+                            if (_drawingResources.BindToColors && 
+                                _drawingResources.HasResource(contentString, out Color color))
+                            {
+                                var colorKey = _drawingResources.GetResourceKey(color);
+                                if (!string.IsNullOrWhiteSpace(colorKey))
+                                {
+                                    colorText = string.Format("{{DynamicResource {0}}}", colorKey);
+                                }
+                            }
+                        }
+                        writer.WriteAttributeString("Color", colorText);
+                    }
+                    else
+                    {
+                        writer.WriteValue(contentString);
+                    }
                 }
                 else if (contentProperty != null)
                 {
@@ -599,6 +813,64 @@ namespace SharpVectors.Converters
             }
             writer.WriteEndElement();
         }
+ 
+        private bool TryWriteAttribute(string attrName, object obj, XmlWriter writer)
+        {
+            MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
+            if (markupObj == null || markupObj.Instance == null)
+            {
+                return false;
+            }
+
+            if (string.Equals(attrName, "ClipGeometry", _comparer)
+                || string.Equals(attrName, "Geometry", _comparer))
+            {
+                PathGeometry pathGeometry = null;
+                if (string.Equals(markupObj.ObjectType.Name, "PathGeometry", _comparer))
+                {
+                    pathGeometry = (PathGeometry)markupObj.Instance;
+                }
+                else if (string.Equals(markupObj.ObjectType.Name, "RectangleGeometry", _comparer))
+                {
+                    pathGeometry = WpfConvert.ToPath((RectangleGeometry)markupObj.Instance);
+                }
+                else if (string.Equals(markupObj.ObjectType.Name, "EllipseGeometry", _comparer))
+                {
+                    pathGeometry = WpfConvert.ToPath((EllipseGeometry)markupObj.Instance);
+                }
+                else if (string.Equals(markupObj.ObjectType.Name, "LineGeometry", _comparer))
+                {
+                    pathGeometry = WpfConvert.ToPath((LineGeometry)markupObj.Instance);
+                }
+                else if (string.Equals(markupObj.ObjectType.Name, "GeometryGroup", _comparer))
+                {
+                    GeometryGroup geometryGroup = (GeometryGroup)markupObj.Instance;
+                    pathGeometry = new PathGeometry();
+                    pathGeometry.AddGeometry(geometryGroup);
+
+                    pathGeometry.FillRule = geometryGroup.FillRule;
+                }
+
+                if (pathGeometry != null)
+                {
+                    var formattable = (IFormattable)pathGeometry;
+                    string pathFigures = formattable.ToString(_numberFormat, _culture);
+                    if (!pathFigures.StartsWith("F1") && !pathFigures.StartsWith("F0"))
+                    {
+                        if (pathGeometry.FillRule == FillRule.Nonzero)
+                            pathFigures = "F1" + pathFigures; // Nonzero
+                        else
+                            pathFigures = "F0" + pathFigures; // EvenOdd
+                    }
+
+                    writer.WriteAttributeString(attrName, pathFigures);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private void WriteChildren(XmlWriter writer, MarkupProperty markupProp)
         {
@@ -609,31 +881,30 @@ namespace SharpVectors.Converters
             else
             {
                 IList collection = markupProp.Value as IList;
-                IDictionary dictionary = markupProp.Value as IDictionary;
                 if (collection != null)
                 {
                     foreach (object obj in collection)
                     {
                         WriteObject(null, obj, writer, false);
                     }
+                    return;
                 }
-                else if (dictionary != null)
+                IDictionary dictionary = markupProp.Value as IDictionary;
+                if (dictionary != null)
                 {
                     foreach (object key in dictionary.Keys)
                     {
                         WriteObject(key, dictionary[key], writer, false);
                     }
+                    return;
                 }
-                else
-                {
-                    WriteObject(null, markupProp.Value, writer, false);
-                }
+                WriteObject(null, markupProp.Value, writer, false);
             }
         }
 
         private void ResolveXmlNamespaces(object obj)
         {
-            List<MarkupProperty> propertyElements = new List<MarkupProperty>();
+            List<MarkupProperty> propertyElements = null;
             MarkupProperty contentProperty = null;
             string contentPropertyName = null;
             MarkupObject markupObj = MarkupWriter.GetMarkupObjectFor(obj);
@@ -698,6 +969,10 @@ namespace SharpVectors.Converters
                     }
                     else
                     {
+                        if (propertyElements == null)
+                        {
+                            propertyElements = new List<MarkupProperty>();
+                        }
                         propertyElements.Add(markupProperty);
                     }
                 }
@@ -707,17 +982,21 @@ namespace SharpVectors.Converters
                 }
             }
 
-            if (contentProperty != null || propertyElements.Count > 0 || contentString != string.Empty)
+            if (contentProperty != null || contentString != string.Empty 
+                || (propertyElements != null && propertyElements.Count > 0))
             {
-                foreach (MarkupProperty markupProp in propertyElements)
+                if (propertyElements != null && propertyElements.Count > 0)
                 {
-                    string ns2 = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
-                    if (!string.IsNullOrWhiteSpace(ns2))
+                    foreach (MarkupProperty markupProp in propertyElements)
                     {
-                        string prefix2 = _namespaceCache.GetDefaultPrefixFor(ns2);
-                        _dicNamespaceMap[ns2] = new NamespaceMap(prefix2, ns2);
+                        string ns2 = _namespaceCache.GetNamespaceUriFor(markupObj.ObjectType);
+                        if (!string.IsNullOrWhiteSpace(ns2))
+                        {
+                            string prefix2 = _namespaceCache.GetDefaultPrefixFor(ns2);
+                            _dicNamespaceMap[ns2] = new NamespaceMap(prefix2, ns2);
+                        }
+                        ResolveChildXmlNamespaces(markupProp);
                     }
-                    ResolveChildXmlNamespaces(markupProp);
                 }
 
                 if (contentProperty != null)
@@ -774,6 +1053,8 @@ namespace SharpVectors.Converters
             public const string XmlNamespace     = "http://www.w3.org/XML/1998/namespace";
             public const string DefaultNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
             public const string XmlnsNamespace   = "http://www.w3.org/2000/xmlns/";
+            public const string OptionsNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation/options";
+            public const string CompatNamespace  = "http://schemas.openxmlformats.org/markup-compatibility/2006";
 
             public const string ClrNamespace     = "clr-namespace:";
 

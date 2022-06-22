@@ -110,7 +110,7 @@ namespace SharpVectors.Renderers.Wpf
                 string elementId = this.GetElementName();
                 if (!string.IsNullOrWhiteSpace(elementId) && !context.IsRegisteredId(elementId))
                 {
-                    SvgObject.SetName(_drawGroup, elementId);
+                    //SvgObject.SetName(_drawGroup, elementId);
 
                     context.RegisterId(elementId);
 

@@ -188,7 +188,7 @@ namespace SharpVectors.Dom.Stylesheets
             }
             else
             {
-                WebRequest request = new ExtendedHttpWebRequest(AbsoluteHref);
+                WebRequest request = new ExtendedHttpWebRequest(absoluteUri);
                 _triedDownload = true;
                 try
                 {
