@@ -53,6 +53,7 @@ namespace SharpVectors.Converters
         private int _indentSpaces;
         private string _numberFormat;
 
+        private string _resourceFormat;
         private NamespaceCache _namespaceCache;
         private WpfDrawingSettings _wpfSettings;
         private WpfDrawingResources _drawingResources;
@@ -104,12 +105,32 @@ namespace SharpVectors.Converters
 
             this.SetNumberFormat(_culture.NumberFormat.NumberDecimalDigits);
 
+            _resourceFormat    = "{{DynamicResource {0}}}";
+
             if (_wpfSettings != null)
             {
                 var value = _wpfSettings[WpfDrawingSettings.PropertyIsResources];
                 if (value != null)
                 {
                     _resourceDictionary = SvgConvert.ToBoolean(value);
+                }
+
+                if (_resourceDictionary && _wpfSettings.DrawingResources != null)
+                {
+                    _drawingResources = _wpfSettings.DrawingResources;
+                    _drawingResources.InitialiseKeys();
+
+                    if (_drawingResources.IsReady)
+                    {
+                        if (_drawingResources.ResourceAccess == WpfResourceAccess.Static)
+                        {
+                            _resourceFormat = "{{StaticResource {0}}}";
+                        }
+                    }
+                    else
+                    {
+                        _drawingResources = null;
+                    }
                 }
             }
         }
@@ -430,36 +451,30 @@ namespace SharpVectors.Converters
                         writer.WriteAttributeString("xmlns", map.Prefix, NamespaceCache.XmlnsNamespace, map.XmlNamespace);
                 }
 
-                if (_resourceDictionary)
+                if (_resourceDictionary && _drawingResources != null)
                 {
-                    if (_wpfSettings != null && _wpfSettings.DrawingResources != null)
+                    if (_drawingResources.ResourceFreeze)
                     {
-                        _drawingResources = _wpfSettings.DrawingResources;
-                        _drawingResources.InitialiseKeys();
+                        writer.WriteAttributeString("xmlns", "po", NamespaceCache.XmlnsNamespace, NamespaceCache.OptionsNamespace);
+                        writer.WriteAttributeString("xmlns", "mc", NamespaceCache.XmlnsNamespace, NamespaceCache.CompatNamespace);
+                        writer.WriteAttributeString("Ignorable", NamespaceCache.CompatNamespace, "po");
+                    }
 
-                        if (_drawingResources.ResourceFreeze)
+                    if (_drawingResources.IsReady)
+                    {
+                        var resourceKeys = _drawingResources.Keys;
+                        foreach (var resourceKey in resourceKeys)
                         {
-                            writer.WriteAttributeString("xmlns", "po", NamespaceCache.XmlnsNamespace, NamespaceCache.OptionsNamespace);
-                            writer.WriteAttributeString("xmlns", "mc", NamespaceCache.XmlnsNamespace, NamespaceCache.CompatNamespace);
-                            writer.WriteAttributeString("Ignorable", NamespaceCache.CompatNamespace, "po");
-                        }
-
-                        if (_drawingResources.IsReady)
-                        {
-                            var resourceKeys = _drawingResources.Keys;
-                            foreach (var resourceKey in resourceKeys)
+                            var resourceValue = _drawingResources[resourceKey];
+                            if (resourceValue != null)
                             {
-                                var resourceValue = _drawingResources[resourceKey];
-                                if (resourceValue != null)
-                                {
-                                    this.WriteObject(resourceKey, resourceValue, writer, false);
-                                }
+                                this.WriteObject(resourceKey, resourceValue, writer, false);
                             }
                         }
-                        else
-                        {
-                            _drawingResources = null;
-                        }
+                    }
+                    else
+                    {
+                        _drawingResources = null;
                     }
                 }
             }
@@ -668,7 +683,7 @@ namespace SharpVectors.Converters
                                             var brushKey = _drawingResources.GetResourceKey(brush);
                                             if (!string.IsNullOrWhiteSpace(brushKey))
                                             {
-                                                temp = string.Format("{{DynamicResource {0}}}", brushKey);
+                                                temp = string.Format(_resourceFormat, brushKey);
                                             }
                                         }
                                     } 
@@ -681,7 +696,7 @@ namespace SharpVectors.Converters
                                             var brushKey = _drawingResources.GetResourceKey(brush);
                                             if (!string.IsNullOrWhiteSpace(brushKey))
                                             {
-                                                temp = string.Format("{{DynamicResource {0}}}", brushKey);
+                                                temp = string.Format(_resourceFormat, brushKey);
                                             }
                                         }
                                     }
@@ -753,7 +768,7 @@ namespace SharpVectors.Converters
                                     var penKey = _drawingResources.GetResourceKey(pen);
                                     if (!string.IsNullOrWhiteSpace(penKey))
                                     {
-                                        writer.WriteAttributeString("Pen", string.Format("{{DynamicResource {0}}}", penKey));
+                                        writer.WriteAttributeString("Pen", string.Format(_resourceFormat, penKey));
                                         continue;
                                     }
                                 }
@@ -788,7 +803,7 @@ namespace SharpVectors.Converters
                                 var colorKey = _drawingResources.GetResourceKey(color);
                                 if (!string.IsNullOrWhiteSpace(colorKey))
                                 {
-                                    colorText = string.Format("{{DynamicResource {0}}}", colorKey);
+                                    colorText = string.Format(_resourceFormat, colorKey);
                                 }
                             }
                         }

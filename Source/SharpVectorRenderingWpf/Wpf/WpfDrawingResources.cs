@@ -15,6 +15,13 @@ namespace SharpVectors.Renderers.Wpf
         Image
     }
 
+    public enum WpfResourceAccess
+    {
+        None,
+        Dynamic,
+        Static
+    }
+
     public sealed class WpfDrawingResources
     {
         public static readonly string TagName   = "${name}";
@@ -37,6 +44,7 @@ namespace SharpVectors.Renderers.Wpf
         private bool _resourceFreeze;
         private bool _useResourceIndex;
         private WpfResourceMode _resourceMode;
+        private WpfResourceAccess _resourceAccess;
 
         private IDictionary<Pen, int> _pens;
         private IDictionary<Color, int> _colors;
@@ -58,6 +66,7 @@ namespace SharpVectors.Renderers.Wpf
             _resourceFreeze     = true;
             _useResourceIndex   = false;
             _resourceMode       = WpfResourceMode.Drawing;
+            _resourceAccess     = WpfResourceAccess.Dynamic;
 
             _penNameFormat      = DefaultPenNameFormat;
             _colorNameFormat    = DefaultColorNameFormat;
@@ -175,6 +184,16 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _resourceMode = value;
+            }
+        }
+
+        public WpfResourceAccess ResourceAccess
+        {
+            get {
+                return _resourceAccess;
+            }
+            set {
+                _resourceAccess = value;
             }
         }
 

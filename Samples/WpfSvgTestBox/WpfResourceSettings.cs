@@ -21,6 +21,7 @@ namespace WpfSvgTestBox
         private bool _resourceFreeze;
         private bool _useResourceIndex;
         private WpfResourceMode _resourceMode;
+        private WpfResourceAccess _resourceAccess;
 
         private int _indentSpaces;
         private int _numericPrecision;
@@ -37,6 +38,7 @@ namespace WpfSvgTestBox
             _resourceFreeze     = true;
             _useResourceIndex   = false;
             _resourceMode       = WpfResourceMode.Drawing;
+            _resourceAccess     = WpfResourceAccess.Dynamic;
 
             _indentSpaces       = 2;
             _numericPrecision   = 4;
@@ -59,6 +61,7 @@ namespace WpfSvgTestBox
             _resourceFreeze     = source._resourceFreeze;
             _useResourceIndex   = source._useResourceIndex;
             _resourceMode       = source._resourceMode;
+            _resourceAccess     = source._resourceAccess;
 
             _indentSpaces       = source._indentSpaces;
             _numericPrecision   = source._numericPrecision;
@@ -180,6 +183,16 @@ namespace WpfSvgTestBox
             }
         }
 
+        public WpfResourceAccess ResourceAccess
+        {
+            get {
+                return _resourceAccess;
+            }
+            set {
+                _resourceAccess = value;
+            }
+        }
+
         public int IndentSpaces
         {
             get {
@@ -239,6 +252,7 @@ namespace WpfSvgTestBox
             resources.ResourceFreeze     = this._resourceFreeze;
             resources.UseResourceIndex   = this._useResourceIndex;
             resources.ResourceMode       = this._resourceMode;
+            resources.ResourceAccess     = this._resourceAccess;
         }
 
         public static bool ValidateNameFormat(string nameFormat, bool isRequired)

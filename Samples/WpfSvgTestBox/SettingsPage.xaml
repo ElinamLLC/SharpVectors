@@ -181,11 +181,28 @@
                                     <sys:String>DrawingImage</sys:String>
                                 </ComboBox>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 3 3 3">
+                                <StackPanel.ToolTip>
+                                    <TextBlock TextWrapping="Wrap" MaxWidth="500">
+                                        Supports the DynamicResource and StaticResource resource access types.
+                                    </TextBlock>
+                                </StackPanel.ToolTip>
+                                <Label HorizontalContentAlignment="Left" Width="160">Resource Access</Label>
+                                <ComboBox x:Name="cboResourceAccess" Width="250" IsEditable="False" SelectedIndex="0" SelectionChanged="OnResourceSettingsChanged">
+                                    <ComboBox.Resources>
+                                        <DataTemplate DataType="{x:Type sys:String}">
+                                            <TextBlock x:Name="text" Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ComboBox.Resources>
+                                    <sys:String>DynamicResource</sys:String>
+                                    <sys:String>StaticResource</sys:String>
+                                </ComboBox>
+                            </StackPanel>
 
                             <GroupBox Margin="0 10 10 10" HorizontalAlignment="Left">
                                 <GroupBox.Header>
                                     <CheckBox x:Name="chkResourceBindToResources" Click="OnResourceSettingsChanged" IsChecked="True">
-                                        <TextBlock Text="Resource Binding (or Dynamic Resource)" FontWeight="Bold" FontSize="14"/>
+                                        <TextBlock Text="Resource Binding" FontWeight="Bold" FontSize="14"/>
                                     </CheckBox>
                                 </GroupBox.Header>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20 10 10 10">

@@ -202,6 +202,8 @@ namespace WpfSvgTestBox
                     chkResourceFreeze.IsChecked           = _resourceSettings.ResourceFreeze;
                     chkResourceUseIndex.IsChecked         = _resourceSettings.UseResourceIndex;
                     cboResourceMode.SelectedIndex         = _resourceSettings.ResourceMode == WpfResourceMode.Drawing ? 0 : 1;
+                    cboResourceAccess.SelectedIndex       = _resourceSettings.ResourceAccess == WpfResourceAccess.Dynamic ? 0 : 1;
+
                     cboIndentSpaces.SelectedValue         = _resourceSettings.IndentSpaces;
                     cboNumericPrecision.SelectedValue     = _resourceSettings.NumericPrecision;
                 }
@@ -359,6 +361,7 @@ namespace WpfSvgTestBox
             _resourceSettings.ResourceFreeze     = chkResourceFreeze.IsChecked.Value;
             _resourceSettings.UseResourceIndex   = chkResourceUseIndex.IsChecked.Value;
             _resourceSettings.ResourceMode       = cboResourceMode.SelectedIndex == 0 ? WpfResourceMode.Drawing : WpfResourceMode.Image;
+            _resourceSettings.ResourceAccess     = cboResourceAccess.SelectedIndex == 0 ? WpfResourceAccess.Dynamic : WpfResourceAccess.Static;
 
             _resourceSettings.IndentSpaces       = (int)cboIndentSpaces.SelectedValue;
             _resourceSettings.NumericPrecision   = (int)cboNumericPrecision.SelectedValue;
