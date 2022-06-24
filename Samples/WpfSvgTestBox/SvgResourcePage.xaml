@@ -17,19 +17,20 @@
         <DockPanel x:Name="viewerFrame" LastChildFill="True" Grid.Row="0">
             <StackPanel Orientation="Vertical" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
                 <DockPanel LastChildFill="True" Margin="0 3 0 3" Height="28">
-                    <Label DockPanel.Dock="Left" Width="100">Svg Files Directory:</Label>
+                    <Label DockPanel.Dock="Left" Width="140">Svg Files Directory:</Label>
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
                         <!--<Button x:Name="btnConvertOptions" Width="80" Padding="3" Margin="4 0 4 0" Click="OnOptionsClicked">Options</Button>-->
-                        <Button x:Name="btnLoad" Width="80" Padding="3" Margin="4 0 4 0" Click="OnLoadClicked">Import</Button>
+                        <Button x:Name="btnLoad" Width="80" Padding="3" Margin="4 0 4 0" Click="OnLoadClicked">Browse</Button>
                         <Button x:Name="btnConvertResources" IsEnabled="False" Width="80" Padding="3" Margin="4 0 4 0" Click="OnConvertClicked">Convert</Button>
                     </StackPanel>
                     <TextBox x:Name="txtSvgSource" HorizontalAlignment="Stretch" Margin="4 0 4 0" VerticalContentAlignment="Center"></TextBox>
                 </DockPanel>
 
                 <DockPanel LastChildFill="True" Margin="0 3 0 3" Height="28">
-                    <Button x:Name="btnClearAll" DockPanel.Dock="Left" Width="100" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnClearAllClicked">Clear All</Button>
-                    <Button x:Name="btnSaveXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnSaveXamlClicked">Export</Button>
-                    <Button x:Name="btnChangeColors" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnChangeColorsClicked">Colors</Button>
+                    <Button x:Name="btnClearAll" DockPanel.Dock="Left" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnClearAllClicked">Clear All</Button>
+                    <Button x:Name="btnChangeColors" IsEnabled="False" DockPanel.Dock="Left" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnChangeColorsClicked">Colors</Button>
+                    <Button x:Name="btnSaveXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnSaveXamlClicked">Save Xaml</Button>
+                    <Button x:Name="btnCopyXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnCopyXamlClicked">Copy Xaml</Button>
                     <Slider x:Name="Slider" Orientation="Horizontal" Minimum="160" Maximum="500" Value="180" 
                         LargeChange="20" SmallChange="10" Width="240" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </DockPanel>

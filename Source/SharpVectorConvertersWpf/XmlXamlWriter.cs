@@ -549,22 +549,27 @@ namespace SharpVectors.Converters
                 {
                     writer.WriteAttributeString("x", "Key", NamespaceCache.XamlNamespace, keyString);
 
-                    if (_resourceDictionary && (_drawingResources != null && _drawingResources.ResourceFreeze))
+                    if (_resourceDictionary && _drawingResources != null &&
+                        (string.Equals(markupObj.ObjectType.Name, "DrawingGroup", _comparer) ||
+                            string.Equals(markupObj.ObjectType.Name, "DrawingImage", _comparer)))
                     {
-                        if (string.Equals(markupObj.ObjectType.Name, "DrawingGroup", _comparer))
+                        if (_drawingResources.ResourceFreeze)
                         {
-                            var drawGroup = (System.Windows.Media.DrawingGroup)markupObj.Instance;
-                            if (drawGroup != null && drawGroup.IsFrozen)
+                            if (string.Equals(markupObj.ObjectType.Name, "DrawingGroup", _comparer))
                             {
-                                writer.WriteAttributeString("Freeze", NamespaceCache.OptionsNamespace, "True");
+                                var drawGroup = (System.Windows.Media.DrawingGroup)markupObj.Instance;
+                                if (drawGroup != null && drawGroup.IsFrozen)
+                                {
+                                    writer.WriteAttributeString("Freeze", NamespaceCache.OptionsNamespace, "True");
+                                }
                             }
-                        }
-                        else if (string.Equals(markupObj.ObjectType.Name, "DrawingImage", _comparer))
-                        {
-                            var drawImage = (System.Windows.Media.DrawingImage)markupObj.Instance;
-                            if (drawImage != null && drawImage.IsFrozen)
+                            else if (string.Equals(markupObj.ObjectType.Name, "DrawingImage", _comparer))
                             {
-                                writer.WriteAttributeString("Freeze", NamespaceCache.OptionsNamespace, "True");
+                                var drawImage = (System.Windows.Media.DrawingImage)markupObj.Instance;
+                                if (drawImage != null && drawImage.IsFrozen)
+                                {
+                                    writer.WriteAttributeString("Freeze", NamespaceCache.OptionsNamespace, "True");
+                                }
                             }
                         }
                     }
@@ -797,7 +802,7 @@ namespace SharpVectors.Converters
                         string colorText = contentString;
                         if (_resourceDictionary && _drawingResources != null)
                         {
-                            if (_drawingResources.BindToColors && 
+                            if (/*_drawingResources.BindToColors &&*/
                                 _drawingResources.HasResource(contentString, out Color color))
                             {
                                 var colorKey = _drawingResources.GetResourceKey(color);

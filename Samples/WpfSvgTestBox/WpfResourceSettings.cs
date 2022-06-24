@@ -3,6 +3,8 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 
+using System.Windows.Media;
+
 using SharpVectors.Renderers.Wpf;
 
 namespace WpfSvgTestBox
@@ -25,6 +27,8 @@ namespace WpfSvgTestBox
 
         private int _indentSpaces;
         private int _numericPrecision;
+
+        private IDictionary<Color, string> _colorPalette;
 
         public WpfResourceSettings()
         {
@@ -62,6 +66,7 @@ namespace WpfSvgTestBox
             _useResourceIndex   = source._useResourceIndex;
             _resourceMode       = source._resourceMode;
             _resourceAccess     = source._resourceAccess;
+            _colorPalette       = source._colorPalette;
 
             _indentSpaces       = source._indentSpaces;
             _numericPrecision   = source._numericPrecision;
@@ -223,6 +228,16 @@ namespace WpfSvgTestBox
             }
         }
 
+        public IDictionary<Color, string> ColorPalette
+        {
+            get {
+                return _colorPalette;
+            }
+            set {
+                _colorPalette = value;
+            }
+        }
+
         object ICloneable.Clone()
         {
             return this.Clone();
@@ -253,6 +268,7 @@ namespace WpfSvgTestBox
             resources.UseResourceIndex   = this._useResourceIndex;
             resources.ResourceMode       = this._resourceMode;
             resources.ResourceAccess     = this._resourceAccess;
+            resources.ColorPalette       = this._colorPalette;
         }
 
         public static bool ValidateNameFormat(string nameFormat, bool isRequired)

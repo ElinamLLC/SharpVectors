@@ -433,6 +433,7 @@ namespace WpfSvgTestBox
             txtSvgSource.Text = string.Empty;
 
             btnSaveXaml.IsEnabled = false;
+            btnCopyXaml.IsEnabled = false;
             btnChangeColors.IsEnabled = false;
             btnConvertResources.IsEnabled = false;
 
@@ -506,11 +507,12 @@ namespace WpfSvgTestBox
 
         private void OnResourceColorClosed(object sender, EventArgs e)
         {
-            if (_colorsDlg == null)
+            if (_colorsDlg == null || string.IsNullOrWhiteSpace(_xamlText))
             {
                 return;
             }
             _colorsDlg.Closed -= OnResourceColorClosed;
+
             if (_colorsDlg.DialogResult == false)
             {
                 return;
@@ -522,77 +524,61 @@ namespace WpfSvgTestBox
                 return;
             }
 
-            Trace.TraceWarning("TODO: The color changes are not currently working as expected: See SvgResourcePage.xaml.cs/OnResourceColorClosed");
-
-            if (_resourcesHasColors)
+            bool isModified = false;
+            var appResources = Application.Current.Resources;
+            foreach (var resourceColor in _resourceColors)
             {
-                //Application.Current.Resources.MergedDictionaries.Clear();
-                bool isModified = false;
-                foreach (var resourceColor in _resourceColors)
+                if (resourceColor.IsModified)
                 {
-                    if (resourceColor.IsModified)
+                    isModified = true;
+                    if (_resourcesHasColors)
                     {
-                        isModified = true;
-
-                        //Trace.WriteLine("Before: " + _mergedResourceDictionary[resourceColor.Name]);
-                        //Trace.WriteLine("Before: " + Application.Current.Resources[resourceColor.Name]);
-
-                        //_mergedResourceDictionary[resourceColor.Name] = resourceColor.SelectedColor;
-                        Application.Current.Resources[resourceColor.Name] = resourceColor.SelectedColor;
-
-                        //Trace.WriteLine("After: " + _mergedResourceDictionary[resourceColor.Name]);
-                        //Trace.WriteLine("After: " + Application.Current.Resources[resourceColor.Name]);
+                        appResources[resourceColor.Name] = resourceColor.SelectedColor;
                     }
-                }
-
-                if (isModified)
-                {
-                    //Trace.WriteLine("isModified: " + isModified);
-                    //_resourceList.Clear();
-                    //Application.Current.Resources.MergedDictionaries.Clear();
-                    //this.ResourceView.Items.Refresh();
-
-                    //Application.Current.Resources.MergedDictionaries.Add(_mergedResourceDictionary);
-                    //foreach (var imageData in _imageList)
-                    //{
-                    //    _resourceList.Add(new ResourceData(imageData.ResourceName, _drawingResources.ResourceMode, _dpiScale));
-                    //}
-                    //this.ResourceView.Items.Refresh();
-
-                    //TODO: Color changes not working as expected - recreate it
-                    this.OnConvertClicked(null, null);
-                }
-            }
-            else
-            {
-                bool isModified = false;
-                foreach (var resourceColor in _resourceColors)
-                {
-                    if (resourceColor.IsModified)
+                    else
                     {
-                        isModified = true;
-
-                        //Trace.WriteLine("Before: " + _mergedResourceDictionary[resourceColor.Name]);
-                        //Trace.WriteLine("Before: " + Application.Current.Resources[resourceColor.Name]);
-
                         var brush = new SolidColorBrush(resourceColor.SelectedColor);
-
-                        //_mergedResourceDictionary[resourceColor.Name] = brush;
-                        Application.Current.Resources[resourceColor.Name] = brush;
-
-                        //Trace.WriteLine("After: " + _mergedResourceDictionary[resourceColor.Name]);
-                        //Trace.WriteLine("After: " + Application.Current.Resources[resourceColor.Name]);
+                        appResources[resourceColor.Name] = brush;
                     }
                 }
+            }
 
-                if (isModified)
+            if (isModified)
+            {
+                try
                 {
-                    //this.ResourceView.Items.Refresh();
+                    _mergedResourceDictionary = (ResourceDictionary)XamlReader.Parse(_xamlText);
+                    if (_mergedResourceDictionary == null)
+                    {
+                        return;
+                    }
 
-                    //TODO: Color changes not working as expected - recreate it
-                    this.OnConvertClicked(null, null);
+                    Application.Current.Resources.MergedDictionaries.Clear();
+                    Application.Current.Resources.MergedDictionaries.Add(_mergedResourceDictionary);
+
+                    _resourceList.Clear();
+                    foreach (var imageData in _imageList)
+                    {
+                        _resourceList.Add(new ResourceData(imageData.ResourceName, _drawingResources.ResourceMode, _dpiScale));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _mergedResourceDictionary = null;
+
+                    ReportError(ex);
                 }
             }
+        }
+
+        private void OnCopyXamlClicked(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(_xamlText))
+            {
+                return;
+            }
+
+            Clipboard.SetText(_xamlText, TextDataFormat.UnicodeText);
         }
 
         private void OnSaveXamlClicked(object sender, RoutedEventArgs e)
@@ -664,6 +650,7 @@ namespace WpfSvgTestBox
             }
 
             btnSaveXaml.IsEnabled = false;
+            btnCopyXaml.IsEnabled = false;
             btnChangeColors.IsEnabled = false;
             btnConvertResources.IsEnabled = false;
 
@@ -734,6 +721,19 @@ namespace WpfSvgTestBox
                 _drawingResources = _conversionSettings.DrawingResources;
             }
 
+            //var colorPalette = new Dictionary<Color, string>(WpfDrawingResources.ColorComparer);
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF008000"), "SvgColor01");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF000000"), "SvgColor02");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFFF00"), "SvgColor03");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF0000FF"), "SvgColor04");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF00FF00"), "SvgColor05");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF339966"), "SvgColor06");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFF00FF"), "SvgColor07");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFA500"), "SvgColor08");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF007700"), "SvgColor09");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF33CC66"), "SvgColor10");
+            //_resourceSettings.ColorPalette = colorPalette;
+
             _resourceSettings.CopyTo(_drawingResources);
             _drawingResources.InitialiseKeys();
             var resourceFreeze = _resourceSettings.ResourceFreeze;
@@ -784,6 +784,7 @@ namespace WpfSvgTestBox
                     {
                         drawGroup.Freeze();
                     }
+
                     _resourceDictionary.Add(resourceName, drawGroup);
                 }
                 imageData.ResourceName = resourceName;
@@ -815,6 +816,7 @@ namespace WpfSvgTestBox
                 }
 
                 btnSaveXaml.IsEnabled = _resourceList.Count != 0;
+                btnCopyXaml.IsEnabled = _resourceList.Count != 0;
                 btnChangeColors.IsEnabled = _resourceList.Count != 0;
             }
             catch (Exception ex)

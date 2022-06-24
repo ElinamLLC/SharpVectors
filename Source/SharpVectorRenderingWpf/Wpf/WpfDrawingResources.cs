@@ -32,6 +32,10 @@ namespace SharpVectors.Renderers.Wpf
         public static readonly string DefaultBrushNameFormat    = "Brush{0}";
         public static readonly string DefaultResourceNameFormat = string.Empty;
 
+        public static readonly DependencyProperty SharedProperty =
+            DependencyProperty.RegisterAttached("Shared", typeof(bool), typeof(FrameworkElement),
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.None));
+
         private bool _bindToColors;
         private bool _bindToResources;
         private bool _bindPenToBrushes;
@@ -54,6 +58,8 @@ namespace SharpVectors.Renderers.Wpf
         private IDictionary<Pen, string> _penKeys;
         private IDictionary<Color, string> _colorKeys;
         private IDictionary<SolidColorBrush, string> _brushKeys;
+
+        private IDictionary<Color, string> _colorPalette;
 
         private ResourceDictionary _resourceDictionary;
 
@@ -260,6 +266,16 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public IDictionary<Color, string> ColorPalette
+        {
+            get {
+                return _colorPalette;
+            }
+            set {
+                _colorPalette = value;
+            }
+        }
+
         public bool Contains(string resourceKey)
         {
             if (string.IsNullOrWhiteSpace(resourceKey) || _resourceDictionary == null || _resourceDictionary.Count == 0)
@@ -278,6 +294,27 @@ namespace SharpVectors.Renderers.Wpf
                     return _brushKeys.Values;
                 }
                 return null;
+            }
+        }
+
+        public static IEqualityComparer<Color> ColorComparer
+        {
+            get {
+                return new ColorEqualityComparer();
+            }
+        }
+
+        public static IEqualityComparer<SolidColorBrush> BrushComparer
+        {
+            get {
+                return new BrushEqualityComparer();
+            }
+        }
+
+        public static IEqualityComparer<Pen> PenComparer
+        {
+            get {
+                return new PenEqualityComparer();
             }
         }
 
@@ -349,6 +386,13 @@ namespace SharpVectors.Renderers.Wpf
 
         public bool HasResource(Color color)
         {
+            if (_colorPalette != null && _colorPalette.Count != 0)
+            {
+                if (_colorPalette.ContainsKey(color))
+                {
+                    return true;
+                }
+            }
             if (_colors == null || _colors.Count == 0)
             {
                 return false;
@@ -356,9 +400,39 @@ namespace SharpVectors.Renderers.Wpf
             return _colors.ContainsKey(color);
         }
 
+        public static bool TryParseColor(string colorText, out Color color)
+        {
+            color = Colors.Transparent;
+            try
+            {
+                var colorVal = ColorConverter.ConvertFromString(colorText);
+                if (colorVal != null && colorVal is Color)
+                {
+                    color = (Color)colorVal;
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool HasResource(string colorText, out Color color)
         {
-            color = (Color)ColorConverter.ConvertFromString(colorText);                
+            if (TryParseColor(colorText, out color) == false)
+            {
+                return false;
+            }
+            if (_colorPalette != null && _colorPalette.Count != 0)
+            {
+                if (_colorPalette.ContainsKey(color))
+                {
+                    return true;
+                }
+            }
+            
             if (_colors == null || _colors.Count == 0)
             {
                 return false;
@@ -399,6 +473,14 @@ namespace SharpVectors.Renderers.Wpf
 
         public string GetResourceKey(Color color)
         {
+            if (_colorPalette != null && _colorPalette.Count != 0)
+            {
+                if (_colorPalette.ContainsKey(color))
+                {
+                    return _colorPalette[color];
+                }
+            }
+
             if (this.HasResource(color) == false || this.IsReady == false)
             {
                 return null;
@@ -480,6 +562,23 @@ namespace SharpVectors.Renderers.Wpf
                     _resourceDictionary[colorKey] = color;
                     _resourceKeys.Add(colorKey);
                     itemCount++;
+                }
+            }
+
+            if (_colorPalette != null && _colorPalette.Count != 0)
+            {
+                foreach (var color in _colorPalette.Keys)
+                {
+                    string colorKey = _colorPalette[color];
+                    if (_colorKeys.ContainsKey(color))
+                    {
+                        var curColorKey = _colorKeys[color];
+                        _resourceKeys.Remove(curColorKey);
+                        _resourceDictionary.Remove(curColorKey);
+                    }
+                    _colorKeys[color] = colorKey;
+                    _resourceDictionary[colorKey] = color;
+                    _resourceKeys.Add(colorKey);
                 }
             }
 
