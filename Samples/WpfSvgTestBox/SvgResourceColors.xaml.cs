@@ -137,6 +137,7 @@ namespace WpfSvgTestBox
         /// Gets or sets the color selected in this dialog.
         /// </summary>
         public Color SelectedColor { get; private set; } = Colors.Transparent;
+
         /// <summary>
         /// Gets the dialog result of this dialog, based upon whether the user accepted the changes.
         /// </summary>

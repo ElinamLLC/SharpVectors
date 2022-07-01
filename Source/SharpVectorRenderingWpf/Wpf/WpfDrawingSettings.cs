@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Xml;
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
@@ -9,15 +10,22 @@ using System.Windows.Media;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    using DpiScale            = SharpVectors.Runtime.DpiScale;
-    using DpiUtilities        = SharpVectors.Runtime.DpiUtilities;
+    using DpiScale = SharpVectors.Runtime.DpiScale;
+    using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
     using SvgInteractiveModes = SharpVectors.Runtime.SvgInteractiveModes;
 
     /// <summary>
     /// This provides the options for the drawing/rendering engine of the WPF.
     /// </summary>
-    public sealed class WpfDrawingSettings : DependencyObject, ICloneable
+    [Serializable]
+    public sealed class WpfDrawingSettings : WpfSettings<WpfDrawingSettings>
     {
+        /// <summary>
+        /// Gets the name of the <c>XML</c> tag name, under which this object is stored.
+        /// </summary>
+        public const string XmlTagName = "drawingSettings";
+        public const string XmlVersion = "1.0.0";
+
         #region Public Fields
 
         public const string PropertyNonePen     = "_NonePen";
@@ -1051,6 +1059,45 @@ namespace SharpVectors.Renderers.Wpf
 
         #endregion
 
+        #region IXmlSerializable Members
+
+        /// <summary>
+        /// This reads and sets its state or attributes stored in a <c>XML</c> format
+        /// with the given reader. 
+        /// </summary>
+        /// <param name="reader">
+        /// The reader with which the <c>XML</c> attributes of this object are accessed.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="reader"/> is <see langword="null"/>.
+        /// </exception>
+        public override void ReadXml(XmlReader reader)
+        {
+            NotNull(reader, nameof(reader));
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// This writes the current state or attributes of this object,
+        /// in the <c>XML</c> format, to the media or storage accessible by the given writer.
+        /// </summary>
+        /// <param name="writer">
+        /// The <c>XML</c> writer with which the <c>XML</c> format of this object's state 
+        /// is written.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="reader"/> is <see langword="null"/>.
+        /// </exception>
+        public override void WriteXml(XmlWriter writer)
+        {
+            NotNull(writer, nameof(writer));
+
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         #region ICloneable Members
 
         /// <overloads>
@@ -1068,7 +1115,7 @@ namespace SharpVectors.Renderers.Wpf
         /// This is deep cloning of the members of this settings object. If you 
         /// need just a copy, use the copy constructor to create a new instance.
         /// </remarks>
-        public WpfDrawingSettings Clone()
+        public override WpfDrawingSettings Clone()
         {
             WpfDrawingSettings clonedSettings = new WpfDrawingSettings(this);
 
@@ -1098,22 +1145,6 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return clonedSettings;
-        }
-
-        /// <summary>
-        /// This creates a new settings object that is a deep copy of the current 
-        /// instance.
-        /// </summary>
-        /// <returns>
-        /// A new settings object that is a deep copy of this instance.
-        /// </returns>
-        /// <remarks>
-        /// This is deep cloning of the members of this style object. If you need just a copy,
-        /// use the copy constructor to create a new instance.
-        /// </remarks>
-        object ICloneable.Clone()
-        {
-            return this.Clone();
         }
 
         #endregion

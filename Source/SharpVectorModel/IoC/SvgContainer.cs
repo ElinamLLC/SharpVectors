@@ -84,7 +84,31 @@ namespace SharpVectors.IoC
             {
                 return null;
             }
-            return _registeredTypes[type](_lifetime);
+
+            Func<ILifetime, object> registeredType;
+
+            if (!_registeredTypes.TryGetValue(type, out registeredType))
+            {
+                return null;
+            }
+
+            return registeredType(_lifetime);
+            //return _registeredTypes[type](_lifetime);
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether the object type is registered or not.
+        /// </summary>
+        /// <param name="type">Type as registered with the container</param>
+        /// <returns>Returns <see langword="true"/> if the specified type is registered, otherwise; return <see langword="false"/>.</returns>
+        public bool HasService(Type type)
+        {
+            if (_isDisposed || _lifetime.IsDisposed)
+            {
+                return false;
+            }
+
+            return _registeredTypes.ContainsKey(type);
         }
 
         /// <summary>

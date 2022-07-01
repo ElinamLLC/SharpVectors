@@ -8,34 +8,8 @@ using System.Windows.Media;
 
 namespace SharpVectors.Renderers.Wpf
 {
-    public enum WpfResourceMode
-    {
-        None,
-        Drawing,
-        Image
-    }
-
-    public enum WpfResourceAccess
-    {
-        None,
-        Dynamic,
-        Static
-    }
-
     public sealed class WpfDrawingResources
     {
-        public static readonly string TagName   = "${name}";
-        public static readonly string TagNumber = "${number}";
-
-        public static readonly string DefaultPenNameFormat      = "Pen{0}";
-        public static readonly string DefaultColorNameFormat    = "Color{0}";
-        public static readonly string DefaultBrushNameFormat    = "Brush{0}";
-        public static readonly string DefaultResourceNameFormat = string.Empty;
-
-        public static readonly DependencyProperty SharedProperty =
-            DependencyProperty.RegisterAttached("Shared", typeof(bool), typeof(FrameworkElement),
-            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.None));
-
         private bool _bindToColors;
         private bool _bindToResources;
         private bool _bindPenToBrushes;
@@ -43,12 +17,11 @@ namespace SharpVectors.Renderers.Wpf
         private string _penNameFormat;
         private string _colorNameFormat;
         private string _brushNameFormat;
-        private string _resourceNameFormat;
 
         private bool _resourceFreeze;
         private bool _useResourceIndex;
-        private WpfResourceMode _resourceMode;
-        private WpfResourceAccess _resourceAccess;
+        private ResourceModeType _resourceMode;
+        private ResourceAccessType _resourceAccess;
 
         private IDictionary<Pen, int> _pens;
         private IDictionary<Color, int> _colors;
@@ -61,7 +34,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private IDictionary<Color, string> _colorPalette;
 
-        private ResourceDictionary _resourceDictionary;
+        private IDictionary<string, object> _resourceDictionary;
 
         public WpfDrawingResources()
         {
@@ -71,17 +44,16 @@ namespace SharpVectors.Renderers.Wpf
 
             _resourceFreeze     = true;
             _useResourceIndex   = false;
-            _resourceMode       = WpfResourceMode.Drawing;
-            _resourceAccess     = WpfResourceAccess.Dynamic;
+            _resourceMode       = ResourceModeType.Drawing;
+            _resourceAccess     = ResourceAccessType.Dynamic;
 
-            _penNameFormat      = DefaultPenNameFormat;
-            _colorNameFormat    = DefaultColorNameFormat;
-            _brushNameFormat    = DefaultBrushNameFormat;
-            _resourceNameFormat = DefaultResourceNameFormat;
+            _penNameFormat      = ResourceKeyResolver.DefaultPenNameFormat;
+            _colorNameFormat    = ResourceKeyResolver.DefaultColorNameFormat;
+            _brushNameFormat    = ResourceKeyResolver.DefaultBrushNameFormat;
 
-            _pens               = new Dictionary<Pen, int>(new PenEqualityComparer());
-            _colors             = new Dictionary<Color, int>(new ColorEqualityComparer());
-            _brushes            = new Dictionary<SolidColorBrush, int>(new BrushEqualityComparer());
+            _pens               = new Dictionary<Pen, int>(PenComparer);
+            _colors             = new Dictionary<Color, int>(ColorComparer);
+            _brushes            = new Dictionary<SolidColorBrush, int>(BrushComparer);
         }
 
         public bool BindToColors
@@ -153,16 +125,6 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public string ResourceNameFormat
-        {
-            get {
-                return _resourceNameFormat;
-            }
-            set {
-                _resourceNameFormat = value;
-            }
-        }
-
         public bool ResourceFreeze
         {
             get {
@@ -183,7 +145,7 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public WpfResourceMode ResourceMode
+        public ResourceModeType ResourceMode
         {
             get {
                 return _resourceMode;
@@ -193,7 +155,7 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public WpfResourceAccess ResourceAccess
+        public ResourceAccessType ResourceAccess
         {
             get {
                 return _resourceAccess;
@@ -229,7 +191,7 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     return null;
                 }
-                if (_resourceDictionary.Contains(key))
+                if (_resourceDictionary.ContainsKey(key))
                 {
                     return _resourceDictionary[key];
                 }
@@ -276,16 +238,6 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public bool Contains(string resourceKey)
-        {
-            if (string.IsNullOrWhiteSpace(resourceKey) || _resourceDictionary == null || _resourceDictionary.Count == 0)
-            {
-                return false;
-            }
-
-            return _resourceDictionary.Contains(resourceKey);
-        }
-
         public ICollection<string> BrushKeys
         {
             get {
@@ -316,6 +268,17 @@ namespace SharpVectors.Renderers.Wpf
             get {
                 return new PenEqualityComparer();
             }
+        }
+
+        public bool Contains(string resourceKey)
+        {
+            if (string.IsNullOrWhiteSpace(resourceKey) 
+                || _resourceDictionary == null || _resourceDictionary.Count == 0)
+            {
+                return false;
+            }
+
+            return _resourceDictionary.ContainsKey(resourceKey);
         }
 
         public void AddResource(Brush brush)
@@ -523,12 +486,12 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            _penKeys   = new Dictionary<Pen, string>(new PenEqualityComparer());
-            _colorKeys = new Dictionary<Color, string>(new ColorEqualityComparer());
-            _brushKeys = new Dictionary<SolidColorBrush, string>(new BrushEqualityComparer());
+            _penKeys   = new Dictionary<Pen, string>(PenComparer);
+            _colorKeys = new Dictionary<Color, string>(ColorComparer);
+            _brushKeys = new Dictionary<SolidColorBrush, string>(BrushComparer);
 
             _resourceKeys = new List<string>();
-            _resourceDictionary = new ResourceDictionary();
+            _resourceDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
             if (_bindToResources == false)
             {

@@ -155,14 +155,41 @@
                                 <TextBox x:Name="txtResourcePenNameFormat" Width="250" VerticalContentAlignment="Center" Text="Pen{0}" TextChanged="OnResourceSettingsChanged" LostFocus="OnLostFocusHandler" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="0 3 3 0">
-                                <Label HorizontalContentAlignment="Left" Width="160">Resource Name Format</Label>
-                                <TextBox x:Name="txtResourceNameFormat" Width="250" VerticalContentAlignment="Center" Text="" TextChanged="OnResourceSettingsChanged" LostFocus="OnLostFocusHandler" />
-                                <TextBlock Margin="3 0 0 0" VerticalAlignment="Center" Foreground="Blue">String template format. If not provided, the SVG file name without extension is used.</TextBlock>
+                            <StackPanel Orientation="Vertical" Margin="0 3 3 3">
+                                <StackPanel Orientation="Horizontal" Margin="0 3 3 3">
+                                    <StackPanel.ToolTip>
+                                        <TextBlock TextWrapping="Wrap" MaxWidth="500">
+                                            Key name resolver is used to provide the names of the resources in the ResourceDictionary.
+                                        </TextBlock>
+                                    </StackPanel.ToolTip>
+                                    <Label HorizontalContentAlignment="Left" Width="160">Resource Key Resolver</Label>
+                                    <ComboBox x:Name="cboResourceKeyResolver" Width="250" IsEditable="False" SelectedIndex="0" SelectionChanged="OnResourceKeyResolverChanged">
+                                        <ComboBox.Resources>
+                                            <DataTemplate DataType="{x:Type sys:String}">
+                                                <TextBlock x:Name="text" Text="{Binding}" />
+                                            </DataTemplate>
+                                        </ComboBox.Resources>
+                                        <sys:String>Default</sys:String>
+                                        <sys:String>Dictionary</sys:String>
+                                        <sys:String>CodeSnippet</sys:String>
+                                        <sys:String>Custom</sys:String>
+                                    </ComboBox>
+                                    <Button x:Name="btnKeyDictionary" Visibility="Collapsed" Content="Define Dictionary" Width="250" Margin="6 0 0 0" Click="OnDictionaryKeyClicked"/>
+                                    <Button x:Name="btnKeyCodeSnippet" Visibility="Collapsed" Content="Edit Code Snippet" Width="250" Margin="6 0 0 0" Click="OnCodeSnippetClicked"/>
+                                    <Button x:Name="btnKeyCustom" Visibility="Collapsed" IsEnabled="False" Content="SvgTestResourceKeyResolver is used" Width="250" Margin="6 0 0 0" />
+                                </StackPanel>
+                                <TextBlock x:Name="txtResourceKeyResolver" Foreground="Blue" Margin="40 0 0 0" Visibility="Collapsed"> </TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="40 0 3 6">
-                                <TextBlock Foreground="Blue">Supported tags are ${name} for file name without extension and ${number} for resource number. Eg: Icon_${name}, Icon_${number}</TextBlock>
+
+                            <StackPanel Orientation="Vertical" Margin="0 0 3 6" x:Name="panelDefault">
+                                <StackPanel Orientation="Horizontal" Margin="0 3 3 0">
+                                    <Label HorizontalContentAlignment="Left" Width="160">Resource Name Format</Label>
+                                    <TextBox x:Name="txtResourceNameFormat" Width="250" VerticalContentAlignment="Center" Text="" TextChanged="OnResourceSettingsChanged" LostFocus="OnLostFocusHandler" />
+                                    <TextBlock Margin="3 0 0 0" VerticalAlignment="Center" Foreground="Blue">String template format. If not provided, the SVG file name without extension is used.</TextBlock>
+                                </StackPanel>
+                                <TextBlock Foreground="Blue" Margin="40 0 0 0" >Supported tags are ${name} for file name without extension and ${number} for resource number. Eg: Icon_${name}, Icon_${number}</TextBlock>
                             </StackPanel>
+                            
                             <StackPanel Orientation="Horizontal" Margin="0 3 3 3">
                                 <StackPanel.ToolTip>
                                     <TextBlock TextWrapping="Wrap" MaxWidth="500">
@@ -181,6 +208,7 @@
                                     <sys:String>DrawingImage</sys:String>
                                 </ComboBox>
                             </StackPanel>
+                            
                             <StackPanel Orientation="Horizontal" Margin="0 3 3 3">
                                 <StackPanel.ToolTip>
                                     <TextBlock TextWrapping="Wrap" MaxWidth="500">

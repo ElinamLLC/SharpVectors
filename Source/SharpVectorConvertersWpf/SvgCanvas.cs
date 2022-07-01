@@ -531,6 +531,7 @@ namespace SharpVectors.Converters
         /// <value>
         /// An instance of the <see cref="DrawingGroup"/> specifying the converted drawings
         /// which is rendered in this canvas.
+        /// </value>
         public DrawingGroup Drawings
         {
             get {

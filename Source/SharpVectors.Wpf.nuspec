@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>SharpVectors.Reloaded</id>
+    <id>SharpVectors.Wpf</id>
     <version>$version$</version>
     <title>SharpVectors</title>
     <authors>Elinam LLC (Japan)</authors>
     <owners>SharpVectors Team</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A library for parsing, converting and viewing SVG files in WPF and WinForms applications. Please move over to the SharpVectors package, this package will be depreciated soon!</description>
+    <description>A library for parsing, converting and viewing SVG files in WPF applications.</description>
     <license type="expression">BSD-3-Clause</license>
     <licenseUrl>https://licenses.nuget.org/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ElinamLLC/SharpVectors</projectUrl>
@@ -27,15 +27,9 @@
       <group targetFramework=".NETFramework4.6" />
       <group targetFramework=".NETFramework4.7" />
       <group targetFramework=".NETFramework4.8" />
-      <group targetFramework=".NETCoreApp3.1">
-         <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
-      </group>
-     <group targetFramework=".NET5.0-Windows">
-        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
-      </group>
-      <group targetFramework=".NET6.0-Windows">
-        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
-      </group>
+      <group targetFramework=".NETCoreApp3.1" />
+      <group targetFramework=".NET5.0-Windows" />
+      <group targetFramework=".NET6.0-Windows" />
     </dependencies>  
   </metadata>
   <files>
@@ -45,7 +39,6 @@
     <file src="..\Output\net40\SharpVectors.Css.dll" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Dom.dll" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Model.dll" target="lib\net40"/>
-    <file src="..\Output\net40\SharpVectors.Rendering.Gdi.dll" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Rendering.Wpf.dll" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Runtime.Wpf.dll" target="lib\net40"/>
 
@@ -54,7 +47,6 @@
     <file src="..\Output\net40\SharpVectors.Css.xml" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Dom.xml" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Model.xml" target="lib\net40"/>
-    <file src="..\Output\net40\SharpVectors.Rendering.Gdi.xml" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Rendering.Wpf.xml" target="lib\net40"/>
     <file src="..\Output\net40\SharpVectors.Runtime.Wpf.xml" target="lib\net40"/>
 
@@ -64,7 +56,6 @@
     <file src="..\Output\net45\SharpVectors.Css.dll" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Dom.dll" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Model.dll" target="lib\net45"/>
-    <file src="..\Output\net45\SharpVectors.Rendering.Gdi.dll" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Rendering.Wpf.dll" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Runtime.Wpf.dll" target="lib\net45"/>
 
@@ -73,7 +64,6 @@
     <file src="..\Output\net45\SharpVectors.Css.xml" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Dom.xml" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Model.xml" target="lib\net45"/>
-    <file src="..\Output\net45\SharpVectors.Rendering.Gdi.xml" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Rendering.Wpf.xml" target="lib\net45"/>
     <file src="..\Output\net45\SharpVectors.Runtime.Wpf.xml" target="lib\net45"/>
 
@@ -83,7 +73,6 @@
     <file src="..\Output\net46\SharpVectors.Css.dll" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Dom.dll" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Model.dll" target="lib\net46"/>
-    <file src="..\Output\net46\SharpVectors.Rendering.Gdi.dll" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Rendering.Wpf.dll" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Runtime.Wpf.dll" target="lib\net46"/>
 
@@ -92,7 +81,6 @@
     <file src="..\Output\net46\SharpVectors.Css.xml" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Dom.xml" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Model.xml" target="lib\net46"/>
-    <file src="..\Output\net46\SharpVectors.Rendering.Gdi.xml" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Rendering.Wpf.xml" target="lib\net46"/>
     <file src="..\Output\net46\SharpVectors.Runtime.Wpf.xml" target="lib\net46"/>
 
@@ -102,7 +90,6 @@
     <file src="..\Output\net47\SharpVectors.Css.dll" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Dom.dll" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Model.dll" target="lib\net47"/>
-    <file src="..\Output\net47\SharpVectors.Rendering.Gdi.dll" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Rendering.Wpf.dll" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Runtime.Wpf.dll" target="lib\net47"/>
 
@@ -111,7 +98,6 @@
     <file src="..\Output\net47\SharpVectors.Css.xml" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Dom.xml" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Model.xml" target="lib\net47"/>
-    <file src="..\Output\net47\SharpVectors.Rendering.Gdi.xml" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Rendering.Wpf.xml" target="lib\net47"/>
     <file src="..\Output\net47\SharpVectors.Runtime.Wpf.xml" target="lib\net47"/>
 
@@ -121,7 +107,6 @@
     <file src="..\Output\net48\SharpVectors.Css.dll" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Dom.dll" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Model.dll" target="lib\net48"/>
-    <file src="..\Output\net48\SharpVectors.Rendering.Gdi.dll" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Rendering.Wpf.dll" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Runtime.Wpf.dll" target="lib\net48"/>
 
@@ -130,7 +115,6 @@
     <file src="..\Output\net48\SharpVectors.Css.xml" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Dom.xml" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Model.xml" target="lib\net48"/>
-    <file src="..\Output\net48\SharpVectors.Rendering.Gdi.xml" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Rendering.Wpf.xml" target="lib\net48"/>
     <file src="..\Output\net48\SharpVectors.Runtime.Wpf.xml" target="lib\net48"/>
 
@@ -140,7 +124,6 @@
     <file src="..\Output\netcoreapp3.1\SharpVectors.Css.dll" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Dom.dll" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Model.dll" target="lib\netcoreapp3.1"/>
-    <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Gdi.dll" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Wpf.dll" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Runtime.Wpf.dll" target="lib\netcoreapp3.1"/>
 
@@ -149,7 +132,6 @@
     <file src="..\Output\netcoreapp3.1\SharpVectors.Css.xml" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Dom.xml" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Model.xml" target="lib\netcoreapp3.1"/>
-    <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Gdi.xml" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Wpf.xml" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Runtime.Wpf.xml" target="lib\netcoreapp3.1"/>
 
@@ -159,7 +141,6 @@
     <file src="..\Output\net5.0-windows\SharpVectors.Css.dll" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Dom.dll" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Model.dll" target="lib\net5.0-windows"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Gdi.dll" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Wpf.dll" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Runtime.Wpf.dll" target="lib\net5.0-windows"/>
 
@@ -168,7 +149,6 @@
     <file src="..\Output\net5.0-windows\SharpVectors.Css.xml" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Dom.xml" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Model.xml" target="lib\net5.0-windows"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Gdi.xml" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Wpf.xml" target="lib\net5.0-windows"/>
     <file src="..\Output\net5.0-windows\SharpVectors.Runtime.Wpf.xml" target="lib\net5.0-windows"/>
 
@@ -178,7 +158,6 @@
     <file src="..\Output\net6.0-windows\SharpVectors.Css.dll" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Dom.dll" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Model.dll" target="lib\net6.0-windows"/>
-    <file src="..\Output\net6.0-windows\SharpVectors.Rendering.Gdi.dll" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Rendering.Wpf.dll" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Runtime.Wpf.dll" target="lib\net6.0-windows"/>
 
@@ -187,7 +166,6 @@
     <file src="..\Output\net6.0-windows\SharpVectors.Css.xml" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Dom.xml" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Model.xml" target="lib\net6.0-windows"/>
-    <file src="..\Output\net6.0-windows\SharpVectors.Rendering.Gdi.xml" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Rendering.Wpf.xml" target="lib\net6.0-windows"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Runtime.Wpf.xml" target="lib\net6.0-windows"/>
 

@@ -49,7 +49,7 @@ namespace SharpVectors.Dom.Svg
         /// The minimum x coordinate for the subregion which restricts calculation and rendering of the given filter primitive. 
         /// </summary>
         /// <value>
-        /// <para>x = "<length-percentage>"</para>
+        /// <para>x = <c>length-percentage</c> </para>
         /// The initial value is <c>0%</c>.
         /// </value>
         /// <remarks>
@@ -69,7 +69,7 @@ namespace SharpVectors.Dom.Svg
         /// The minimum y coordinate for the subregion which restricts calculation and rendering of the given filter primitive.
         /// </summary>
         /// <value>
-        /// <para>y = "<length-percentage>" </para>
+        /// <para>y = <c>length-percentage</c> </para>
         /// The initial value is <c>0%</c>.
         /// </value>
         /// <remarks>
@@ -89,7 +89,7 @@ namespace SharpVectors.Dom.Svg
         /// The width of the subregion which restricts calculation and rendering of the given filter primitive.
         /// </summary>
         /// <value>
-        /// <para>width = "<length-percentage>" </para>
+        /// <para>width = <c>length-percentage</c> </para>
         /// <para>A negative or zero value disables the effect of the given filter primitive (i.e., the 
         /// result is a transparent black image).</para>
         /// The initial value is <c>100%</c>.
@@ -111,7 +111,7 @@ namespace SharpVectors.Dom.Svg
         /// The height of the subregion which restricts calculation and rendering of the given filter primitive.
         /// </summary>
         /// <value>
-        /// <para>height = "<length-percentage>" </para>
+        /// <para>height = <c>length-percentage</c> </para>
         /// <para>A negative or zero value must disable the effect of the given filter primitive (i.e., the 
         /// result is a transparent black image).</para>
         /// The initial value is <c>100%</c>.
@@ -133,7 +133,7 @@ namespace SharpVectors.Dom.Svg
         /// This is an <c>custom-ident</c> and an assigned name for this filter primitive. 
         /// </summary>
         /// <value>
-        /// <para>result = "<filter-primitive-reference>"</para>
+        /// <para>result = <c>filter-primitive-reference</c> </para>
         /// </value>
         /// <remarks>
         /// <para>

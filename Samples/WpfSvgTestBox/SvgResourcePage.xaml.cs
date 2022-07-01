@@ -24,6 +24,7 @@ using ICSharpCode.AvalonEdit.Indentation;
 
 using SharpVectors.Runtime;
 using SharpVectors.Converters;
+using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 
 using FolderBrowserDialog = ShellFileDialogs.FolderBrowserDialog;
@@ -105,17 +106,17 @@ namespace WpfSvgTestBox
 
     public sealed class ResourceData
     {
-        private WpfResourceMode _resourceMode;
+        private ResourceModeType _resourceMode;
         private string _fileName;
 
         private DpiScale _dpiScale;
 
         public ResourceData()
         {
-            _resourceMode = WpfResourceMode.None;
+            _resourceMode = ResourceModeType.None;
         }
 
-        public ResourceData(string fileName, WpfResourceMode resourceMode, DpiScale dpiScale)
+        public ResourceData(string fileName, ResourceModeType resourceMode, DpiScale dpiScale)
         {
             _fileName     = fileName;
             _resourceMode = resourceMode;
@@ -134,7 +135,7 @@ namespace WpfSvgTestBox
             get {
                 if (!string.IsNullOrWhiteSpace(_fileName))
                 {
-                    if (_resourceMode == WpfResourceMode.Drawing)
+                    if (_resourceMode == ResourceModeType.Drawing)
                     {
                         var drawing = Application.Current.TryFindResource(_fileName) as DrawingGroup;
                         if (drawing != null)
@@ -142,7 +143,7 @@ namespace WpfSvgTestBox
                             return new DrawingImage(drawing);
                         }
                     }
-                    else if (_resourceMode == WpfResourceMode.Image)
+                    else if (_resourceMode == ResourceModeType.Image)
                     {
                         var image = Application.Current.TryFindResource(_fileName) as DrawingImage;
                         if (image != null)
@@ -315,7 +316,7 @@ namespace WpfSvgTestBox
                 {
                     _conversionSettings = value;
 
-                    _conversionSettings.CultureInfo = _conversionSettings.NeutralCultureInfo;
+                    _conversionSettings.CultureInfo     = _conversionSettings.NeutralCultureInfo;
                     _conversionSettings.InteractiveMode = SvgInteractiveModes.None;
 
                     _conversionSettings[WpfDrawingSettings.PropertyIsResources] = true;
@@ -346,7 +347,15 @@ namespace WpfSvgTestBox
                     string svgPath = txtSvgSource.Text;
                     this.OnClearAllClicked(null, null);
 
-                    txtSvgSource.Text = svgPath;
+                    var svgDir = value.Sources.FirstOrDefault();
+                    if (!string.IsNullOrWhiteSpace(svgDir) && Directory.Exists(svgDir))
+                    {
+                        txtSvgSource.Text = svgDir;
+                    }
+                    else
+                    {
+                        txtSvgSource.Text = svgPath;
+                    }
                 }
             }
         }
@@ -421,6 +430,211 @@ namespace WpfSvgTestBox
             MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        private void OnLoadClicked(object sender, RoutedEventArgs e)
+        {
+            string svgDir = txtSvgSource.Text;
+            if (string.IsNullOrWhiteSpace(svgDir) || Directory.Exists(svgDir) == false)
+            {
+                string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
+                    "Select the location of the SVG files", null);
+                if (selectedDirectory != null)
+                {
+                    txtSvgSource.Text = selectedDirectory;
+                    svgDir = selectedDirectory;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            _imageList.Clear();
+            _resourceList.Clear();
+            _xamlText = string.Empty;
+            textEditor.Text = string.Empty;
+            _resourceColors = null;
+
+            if (_mergedResourceDictionary != null)
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(_mergedResourceDictionary);
+                _mergedResourceDictionary = null;
+            }
+
+            btnSaveXaml.IsEnabled = false;
+            btnCopyXaml.IsEnabled = false;
+            btnChangeColors.IsEnabled = false;
+            btnConvertResources.IsEnabled = false;
+
+            _resourceSettings.AddSource(svgDir);
+
+            _drawingResources = new WpfDrawingResources();
+            _conversionSettings.DrawingResources = _drawingResources;
+
+            foreach (var svgFilePath in Directory.EnumerateFiles(svgDir, "*.svg"))
+            {
+                // Eliminate any compressed file, not supported in this test...
+                if (svgFilePath.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                UpdateDrawing(svgFilePath);
+            }
+
+            btnConvertResources.IsEnabled = _imageList.Count != 0;
+            btnTestXaml.IsEnabled = _imageList.Count != 0;
+        }
+
+        private void UpdateDrawing(string svgFilePath)
+        {
+            using (var textReader = new StreamReader(svgFilePath))
+            {
+                _imageCount++;
+                try
+                {
+                    var drawing = _fileReader.Read(textReader);
+
+                    AppendImage(drawing, Path.GetFileNameWithoutExtension(svgFilePath));
+                }
+                catch (Exception ex)
+                {
+                    ReportError("File: " + svgFilePath);
+                    ReportError(ex);
+                }
+            }
+        }
+
+        private void AppendImage(DrawingGroup drawing, string fileName)
+        {
+            if (Dispatcher.CheckAccess())
+            {
+                _imageList.Add(new ImageData(_imageList.Count, drawing, fileName));
+            }
+            else
+            {
+                Dispatcher.Invoke(new AppendImageDelegate(AppendImage), drawing, fileName);
+            }
+        }
+
+        private void OnConvertClicked(object sender, RoutedEventArgs e)
+        {
+            _xamlText = string.Empty;
+
+            textEditor.Clear();
+            _resourceList.Clear();
+
+            if (_imageList == null || _imageList.Count == 0)
+            {
+                return;
+            }
+
+            _resourceDictionary = new ResourceDictionary();
+
+            if (_drawingResources == null)
+            {
+                _drawingResources = _conversionSettings.DrawingResources;
+            }
+
+            //var colorPalette = new Dictionary<Color, string>(WpfDrawingResources.ColorComparer);
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF008000"), "SvgColor01");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF000000"), "SvgColor02");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFFF00"), "SvgColor03");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF0000FF"), "SvgColor04");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF00FF00"), "SvgColor05");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF339966"), "SvgColor06");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFF00FF"), "SvgColor07");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFA500"), "SvgColor08");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF007700"), "SvgColor09");
+            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF33CC66"), "SvgColor10");
+            //_resourceSettings.ColorPalette = colorPalette;
+
+            _resourceSettings.CopyTo(_drawingResources);
+            _drawingResources.InitialiseKeys();
+            var resourceFreeze = _resourceSettings.ResourceFreeze;
+
+            var keyResolver = _resourceSettings.RetrieveResolver();
+            if (keyResolver == null || keyResolver.IsValid == false)
+            {
+                keyResolver = new ResourceKeyResolver();
+            }
+
+            keyResolver.BeginResolve();
+            int itemCount = _resourceSettings.UseResourceIndex ? 0 : 1;
+            foreach (var imageData in _imageList)
+            {
+                var drawGroup = imageData.Drawing;
+                if (drawGroup.Children.Count == 1)
+                {
+                    drawGroup = (DrawingGroup)drawGroup.Children[0];
+                    string drawingName = drawGroup.GetValue(FrameworkElement.NameProperty) as string;
+                    if (!string.IsNullOrWhiteSpace(drawingName) && string.Equals(drawingName, SvgObject.DrawLayer))
+                    {
+                        drawGroup.SetValue(FrameworkElement.NameProperty, null);
+                    }
+                }
+
+                string resourceName = string.Empty;
+                if (_drawingResources.ResourceMode == ResourceModeType.Image)
+                {
+                    var drawImage = new DrawingImage(drawGroup);
+                    resourceName = keyResolver.Resolve(drawImage, itemCount, imageData.FileName, imageData.FileName);
+                    if (resourceFreeze)
+                    {
+                        drawImage.Freeze();
+                    }
+                    _resourceDictionary.Add(resourceName, drawImage);
+                }
+                else
+                {
+                    resourceName = keyResolver.Resolve(drawGroup, itemCount, imageData.FileName, imageData.FileName);
+                    if (resourceFreeze)
+                    {
+                        drawGroup.Freeze();
+                    }
+                    _resourceDictionary.Add(resourceName, drawGroup);
+                }
+                imageData.ResourceName = resourceName;
+
+                itemCount++;
+            }
+
+            XmlXamlWriter writer = new XmlXamlWriter(_conversionSettings);
+            writer.NumberDecimalDigits = _resourceSettings.NumericPrecision;
+            writer.IndentSpaces = _resourceSettings.IndentSpaces;
+
+            _xamlText = writer.Save(_resourceDictionary);
+
+            textEditor.Text = _xamlText;
+
+            try
+            {
+                _mergedResourceDictionary = (ResourceDictionary)XamlReader.Parse(_xamlText);
+                if (_mergedResourceDictionary == null)
+                {
+                    return;
+                }
+
+                Application.Current.Resources.MergedDictionaries.Add(_mergedResourceDictionary);
+
+                foreach (var imageData in _imageList)
+                {
+                    _resourceList.Add(new ResourceData(imageData.ResourceName, _drawingResources.ResourceMode, _dpiScale));
+                }
+
+                btnSaveXaml.IsEnabled = _resourceList.Count != 0;
+                btnCopyXaml.IsEnabled = _resourceList.Count != 0;
+                btnChangeColors.IsEnabled = _resourceList.Count != 0;
+
+                btnTestXaml.IsEnabled = _resourceList.Count != 0;
+            }
+            catch (Exception ex)
+            {
+                _mergedResourceDictionary = null;
+
+                ReportError(ex);
+            }
+        }
+
         private void OnClearAllClicked(object sender, RoutedEventArgs e)
         {
             _imageList.Clear();
@@ -436,6 +650,8 @@ namespace WpfSvgTestBox
             btnCopyXaml.IsEnabled = false;
             btnChangeColors.IsEnabled = false;
             btnConvertResources.IsEnabled = false;
+
+            btnTestXaml.IsEnabled = false;
 
             if (_mergedResourceDictionary != null)
             {
@@ -608,223 +824,23 @@ namespace WpfSvgTestBox
                 return;
             }
 
-            string fileExt = Path.GetExtension(selectedFile);
-            if (!string.Equals(fileExt, ".xaml", StringComparison.OrdinalIgnoreCase))
-            {
-                fileExt = Path.ChangeExtension(selectedFile, ".xaml");
-            }
             using (var textWriter = File.CreateText(selectedFile))
             {
                 textWriter.WriteLine(_xamlText);
             }
         }
 
-        private void OnLoadClicked(object sender, RoutedEventArgs e)
+        private void OnTestXamlClicked(object sender, RoutedEventArgs e)
         {
-            string svgDir = txtSvgSource.Text;
-            if (string.IsNullOrWhiteSpace(svgDir) || Directory.Exists(svgDir) == false)
-            {
-                string selectedDirectory = FolderBrowserDialog.ShowDialog(IntPtr.Zero,
-                    "Select the location of the W3C SVG 1.1 Full Test ", null);
-                if (selectedDirectory != null)
-                {
-                    txtSvgSource.Text = selectedDirectory;
-                    svgDir = selectedDirectory;
-                }
-                else
-                {
-                    return;
-                }
-            }
+            var resourceConverter = new ResourceSvgConverter(_conversionSettings, _resourceSettings);
 
-            _imageList.Clear();
-            _resourceList.Clear();
-            _xamlText = string.Empty;
-            textEditor.Text = string.Empty;
-            _resourceColors = null;
-
-            if (_mergedResourceDictionary != null)
-            {
-                Application.Current.Resources.MergedDictionaries.Remove(_mergedResourceDictionary);
-                _mergedResourceDictionary = null;
-            }
-
-            btnSaveXaml.IsEnabled = false;
-            btnCopyXaml.IsEnabled = false;
-            btnChangeColors.IsEnabled = false;
-            btnConvertResources.IsEnabled = false;
-
-            _drawingResources = new WpfDrawingResources();
-            _conversionSettings.DrawingResources = _drawingResources;
-
-            foreach (var svgFilePath in Directory.EnumerateFiles(svgDir, "*.svg"))
-            {
-                // Eliminate any compressed file, not supported in this test...
-                if (svgFilePath.EndsWith(".svgz", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                UpdateDrawing(svgFilePath);
-            }
-
-            btnConvertResources.IsEnabled = _imageList.Count != 0;
-        }
-
-        private void UpdateDrawing(string svgFilePath)
-        {
-            using (var textReader = new StreamReader(svgFilePath))
-            {
-                _imageCount++;
-                try
-                {
-                    var drawing = _fileReader.Read(textReader);
-
-                    AppendImage(drawing, Path.GetFileNameWithoutExtension(svgFilePath));
-                }
-                catch (Exception ex)
-                {
-                    ReportError("File: " + svgFilePath);
-                    ReportError(ex);
-                }
-            }
-        }
-
-        private void AppendImage(DrawingGroup drawing, string fileName)
-        {
-            if (Dispatcher.CheckAccess())
-            {
-                _imageList.Add(new ImageData(_imageList.Count, drawing, fileName));
-            }
-            else
-            {
-                Dispatcher.Invoke(new AppendImageDelegate(AppendImage), drawing, fileName);
-            }
-        }
-
-        private void OnConvertClicked(object sender, RoutedEventArgs e)
-        {
-            _xamlText = string.Empty;
-
-            textEditor.Clear();
-            _resourceList.Clear();
-
-            if (_imageList == null || _imageList.Count == 0)
+            var xamlText = resourceConverter.Convert();
+            if (string.IsNullOrWhiteSpace(xamlText))
             {
                 return;
             }
 
-            _resourceDictionary = new ResourceDictionary();
-
-            if (_drawingResources == null) 
-            { 
-                _drawingResources = _conversionSettings.DrawingResources;
-            }
-
-            //var colorPalette = new Dictionary<Color, string>(WpfDrawingResources.ColorComparer);
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF008000"), "SvgColor01");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF000000"), "SvgColor02");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFFF00"), "SvgColor03");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF0000FF"), "SvgColor04");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF00FF00"), "SvgColor05");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF339966"), "SvgColor06");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFF00FF"), "SvgColor07");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFA500"), "SvgColor08");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF007700"), "SvgColor09");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF33CC66"), "SvgColor10");
-            //_resourceSettings.ColorPalette = colorPalette;
-
-            _resourceSettings.CopyTo(_drawingResources);
-            _drawingResources.InitialiseKeys();
-            var resourceFreeze = _resourceSettings.ResourceFreeze;
-
-            string nameFormat = _resourceSettings.ResourceNameFormat;
-            var useNameFormat = string.IsNullOrWhiteSpace(nameFormat) == false && nameFormat.Length > 6;
-            IDictionary<string, string> nameParameters = null;
-            if (useNameFormat)
-            {
-                nameParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                nameParameters.Add(WpfDrawingResources.TagName, string.Empty);
-                nameParameters.Add(WpfDrawingResources.TagNumber, string.Empty);
-            }
-
-            int itemCount = _resourceSettings.UseResourceIndex ? 0 : 1;
-            foreach (var imageData in _imageList)
-            {
-                var drawGroup = imageData.Drawing;
-                if (drawGroup.Children.Count == 1)
-                {
-                    drawGroup = (DrawingGroup)drawGroup.Children[0];
-                    string drawingName = drawGroup.GetValue(FrameworkElement.NameProperty) as string;
-                    if (!string.IsNullOrWhiteSpace(drawingName) && string.Equals(drawingName, SvgObject.DrawLayer))
-                    {
-                        drawGroup.SetValue(FrameworkElement.NameProperty, null);
-                    }
-                }
-
-                string resourceName = imageData.FileName;
-                if (useNameFormat)
-                {
-                    nameParameters[WpfDrawingResources.TagName]   = resourceName;
-                    nameParameters[WpfDrawingResources.TagNumber] = itemCount.ToString();
-                    resourceName = nameParameters.Aggregate(nameFormat, (s, kv) => s.Replace(kv.Key, kv.Value));
-                }
-                if (_drawingResources.ResourceMode == WpfResourceMode.Image)
-                {
-                    var drawImage = new DrawingImage(drawGroup);
-                    if (resourceFreeze)
-                    {
-                        drawImage.Freeze();
-                    }
-                    _resourceDictionary.Add(resourceName, drawImage);
-                }
-                else
-                {
-                    if (resourceFreeze)
-                    {
-                        drawGroup.Freeze();
-                    }
-
-                    _resourceDictionary.Add(resourceName, drawGroup);
-                }
-                imageData.ResourceName = resourceName;
-
-                itemCount++;
-            }
-
-            XmlXamlWriter writer = new XmlXamlWriter(_conversionSettings);
-            writer.NumberDecimalDigits = _resourceSettings.NumericPrecision;
-            writer.IndentSpaces        = _resourceSettings.IndentSpaces;
-
-            _xamlText = writer.Save(_resourceDictionary);
-
-            textEditor.Text = _xamlText;
-
-            try
-            {
-                _mergedResourceDictionary = (ResourceDictionary)XamlReader.Parse(_xamlText);
-                if (_mergedResourceDictionary == null)
-                {
-                    return;
-                }
-
-                Application.Current.Resources.MergedDictionaries.Add(_mergedResourceDictionary);
-
-                foreach (var imageData in _imageList)
-                {
-                    _resourceList.Add(new ResourceData(imageData.ResourceName, _drawingResources.ResourceMode, _dpiScale));
-                }
-
-                btnSaveXaml.IsEnabled = _resourceList.Count != 0;
-                btnCopyXaml.IsEnabled = _resourceList.Count != 0;
-                btnChangeColors.IsEnabled = _resourceList.Count != 0;
-            }
-            catch (Exception ex)
-            {
-                _mergedResourceDictionary = null;
-
-                ReportError(ex);
-            }
+            Clipboard.SetText(xamlText, TextDataFormat.UnicodeText);
         }
 
         private void UpdateFoldings()

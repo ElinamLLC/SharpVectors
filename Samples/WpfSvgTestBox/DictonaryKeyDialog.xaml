@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfSvgTestBox.DictonaryKeyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSvgTestBox"
+        mc:Ignorable="d"
+        Title="ResourceDictionary Key Resolver - Dictonary Keys" Height="600" Width="640" Icon="/WpfSvgTestBox.ico" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="CanResize" WindowStyle="ToolWindow" Loaded="OnWindowLoaded" Closed="OnWindowClosed" Closing="OnWindowClosing" SizeChanged="OnWindowSizeChanged">
+    <DockPanel LastChildFill="True" Margin="3">
+        <DockPanel LastChildFill="True" Margin="0 3 0 3" Height="28" DockPanel.Dock="Top">
+            <Label DockPanel.Dock="Left" Width="140">Svg Files Directory:</Label>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <!--<Button x:Name="btnConvertOptions" Width="80" Padding="3" Margin="4 0 4 0" Click="OnOptionsClicked">Options</Button>-->
+                <Button x:Name="btnBrowse" Width="80" Padding="3" Margin="4 0 4 0" Click="OnBrowseClicked">Browse</Button>
+            </StackPanel>
+            <TextBox x:Name="txtSvgSource" HorizontalAlignment="Stretch" Margin="4 0 4 0" VerticalContentAlignment="Center"></TextBox>
+        </DockPanel>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Height="32" Margin="3 3 3 6">
+            <Button x:Name="btnApplySnippet" Content="Apply" Width="120" Margin="3 3 24 3" Click="OnApplyClicked"/>
+            <Button x:Name="btnCancelSnippet" Content="Cancel" Width="120" Margin="24 3 3 3" Click="OnCancelClicked" />
+        </StackPanel>
+
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderHeight="32" Margin="3"
+                  AlternatingRowBackground="LightBlue" AlternationCount="2" HorizontalScrollBarVisibility="Hidden" 
+                  FontSize="14" HorizontalGridLinesBrush="Gray" CanUserAddRows="False" CanUserDeleteRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="SVG File Name" Binding="{Binding FileName}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Resource Key" Binding="{Binding ResourceKey}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>        
+    </DockPanel>
+</Window>

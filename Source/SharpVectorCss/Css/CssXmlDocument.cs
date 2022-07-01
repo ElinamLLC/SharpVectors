@@ -93,7 +93,7 @@ namespace SharpVectors.Dom.Css
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="CssXmlDocument"/> handles DOM dynamic changes.
         /// Sometimes (when loading or rendering) this needs to be disabled.
-        /// See <see href="StaticSection"/> for more information about use
+        /// See <see cref="StaticSection"/> for more information about use
         /// </summary>
         /// <value><c>true</c> if static; otherwise, <c>false</c>.</value>
         public bool Static

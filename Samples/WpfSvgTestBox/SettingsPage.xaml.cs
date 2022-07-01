@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
+using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 
 using Notification.Wpf;
@@ -26,12 +29,34 @@ namespace WpfSvgTestBox
 
         private NotificationManager _notifyIcon;
 
+        private ResourceKeyResolver _defaultKeyResolver;
+        private DictionaryKeyResolver _dictionaryKeyResolver;
+        private CodeSnippetKeyResolver _codeSnippetKeyResolver;
+        private SvgTestResourceKeyResolver _customKeyResolver;
+
+        private MainWindow _mainWindow;
+
         public SettingsPage()
         {
             InitializeComponent();
 
+            _defaultKeyResolver     = new ResourceKeyResolver();
+            _dictionaryKeyResolver  = new DictionaryKeyResolver();
+            _codeSnippetKeyResolver = new CodeSnippetKeyResolver();
+            _customKeyResolver      = new SvgTestResourceKeyResolver();
+
             this.Loaded += OnPageLoaded;
             this.Unloaded += OnPageUnloaded;
+        }
+
+        public MainWindow Window
+        {
+            get {
+                return _mainWindow;
+            }
+            set {
+                _mainWindow = value;
+            }
         }
 
         public SvgPage SvgPage
@@ -70,6 +95,30 @@ namespace WpfSvgTestBox
                 {
                     _resourcePage.ResourceSettings = _resourceSettings;
                 }
+
+                int selectedIndex = cboResourceKeyResolver.SelectedIndex;
+                IResourceKeyResolver keyResolver = null;
+                if (selectedIndex == 0)
+                {
+                    keyResolver = _defaultKeyResolver;
+                }
+                else if (selectedIndex == 1)
+                {
+                    keyResolver = _dictionaryKeyResolver;
+                }
+                else if (selectedIndex == 2)
+                {
+                    keyResolver = _codeSnippetKeyResolver;
+                }
+                else if (selectedIndex == 3)
+                {
+                    keyResolver = _customKeyResolver;
+                }
+
+                if (keyResolver != null && keyResolver.IsValid)
+                {
+                    _resourceSettings.RegisterResolver(keyResolver);
+                }
             }
 
             if (_notifyIcon != null)
@@ -98,7 +147,7 @@ namespace WpfSvgTestBox
                     {
                         return true;
                     }
-                    isValid = WpfResourceSettings.ValidateResourceNameFormat(nameFormat);
+                    isValid = ResourceKeyResolver.ValidateResourceNameFormat(nameFormat);
                 }
                 else
                 {
@@ -111,7 +160,7 @@ namespace WpfSvgTestBox
                         }
                         return false;
                     }
-                    isValid = WpfResourceSettings.ValidateNameFormat(nameFormat, true);
+                    isValid = ResourceKeyResolver.ValidateNameFormat(nameFormat, true);
                 }
 
                 if (!isValid)
@@ -198,14 +247,26 @@ namespace WpfSvgTestBox
                     txtResourcePenNameFormat.Text         = _resourceSettings.PenNameFormat;
                     txtResourceColorNameFormat.Text       = _resourceSettings.ColorNameFormat;
                     txtResourceBrushNameFormat.Text       = _resourceSettings.BrushNameFormat;
-                    txtResourceNameFormat.Text            = _resourceSettings.ResourceNameFormat;
                     chkResourceFreeze.IsChecked           = _resourceSettings.ResourceFreeze;
                     chkResourceUseIndex.IsChecked         = _resourceSettings.UseResourceIndex;
-                    cboResourceMode.SelectedIndex         = _resourceSettings.ResourceMode == WpfResourceMode.Drawing ? 0 : 1;
-                    cboResourceAccess.SelectedIndex       = _resourceSettings.ResourceAccess == WpfResourceAccess.Dynamic ? 0 : 1;
+                    cboResourceMode.SelectedIndex         = _resourceSettings.ResourceMode == ResourceModeType.Drawing ? 0 : 1;
+                    cboResourceAccess.SelectedIndex       = _resourceSettings.ResourceAccess == ResourceAccessType.Dynamic ? 0 : 1;
+
+                    txtResourceNameFormat.Text            = _defaultKeyResolver.NameFormat;
 
                     cboIndentSpaces.SelectedValue         = _resourceSettings.IndentSpaces;
                     cboNumericPrecision.SelectedValue     = _resourceSettings.NumericPrecision;
+
+                    ResourceKeyResolverType keyResolverType = ResourceKeyResolverType.Default;
+                    var resourceKeyResolver = _resourceSettings.RetrieveResolver();
+                    if (resourceKeyResolver != null && resourceKeyResolver.IsValid)
+                    {
+                        keyResolverType = resourceKeyResolver.ResolverType;
+                    }
+
+                    cboResourceKeyResolver.SelectedIndex = (int)keyResolverType - 1;
+
+                    UpdateResourceKeyResolver();
                 }
             }
 
@@ -322,13 +383,137 @@ namespace WpfSvgTestBox
             }
         }
 
-        private void OnResourceSettingsChanged(object sender, RoutedEventArgs e)
+        private void OnCodeSnippetClicked(object sender, RoutedEventArgs e)
         {
-            if (_resourcePage == null || _resourceSettings == null)
+            string codeSnippet = _codeSnippetKeyResolver.CodeSnippet;
+
+            if (string.IsNullOrWhiteSpace(codeSnippet))
+            {
+                try
+                {
+                    Uri uri = new Uri("/Resources/CodeSnppets.txt", UriKind.Relative);
+                    var streamInfo = Application.GetResourceStream(uri);
+                    using (var reader = new System.IO.StreamReader(streamInfo.Stream))
+                    {
+                        codeSnippet = reader.ReadToEnd();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceError(ex.ToString());
+                }
+            }
+
+            CodeSnippetDialog dlg = new CodeSnippetDialog();
+            dlg.Owner = _mainWindow;
+            dlg.CodeSnippet = codeSnippet;
+
+            var dlgResult = dlg.ShowDialog();
+            if (dlgResult == null || dlgResult.Value == false)
             {
                 return;
             }
-            if (_isInitialising)
+
+            _isResourceModified = true;
+
+            _codeSnippetKeyResolver.CodeSnippet = dlg.CodeSnippet;
+        }
+
+        private void OnDictionaryKeyClicked(object sender, RoutedEventArgs e)
+        {
+            if (_resourceSettings == null)
+            {
+                return;
+            }
+
+            string svgDir = string.Empty;
+            if (_resourceSettings.SourceCount != 0)
+            {
+                foreach (var svgSource in _resourceSettings.Sources)
+                {
+                    if (!string.IsNullOrWhiteSpace(svgSource) && Directory.Exists(svgSource))
+                    {
+                        svgDir = svgSource;
+                        break;
+                    }
+                }
+            }
+            DictonaryKeyDialog dlg = new DictonaryKeyDialog();
+            dlg.Owner = _mainWindow;
+            dlg.SvgDir = svgDir;
+            dlg.KeyDictionary = _dictionaryKeyResolver.Dictionary;
+
+            var dlgResult = dlg.ShowDialog();
+            if (dlgResult == null || dlgResult.Value == false)
+            {
+                return;
+            }
+
+            _isResourceModified = true;
+
+            svgDir = dlg.SvgDir;
+            if (!string.IsNullOrWhiteSpace(svgDir) && Directory.Exists(svgDir))
+            {
+                _resourceSettings.ClearSources();
+                _resourceSettings.AddSource(svgDir);
+            }
+
+            _dictionaryKeyResolver.Dictionary = dlg.KeyDictionary;
+        }
+
+        private void OnResourceKeyResolverChanged(object sender, RoutedEventArgs e)
+        {
+            if (_resourcePage == null || _resourceSettings == null || _isInitialising)
+            {
+                return;
+            }
+
+            UpdateResourceKeyResolver();
+        }
+
+        private void UpdateResourceKeyResolver()
+        {
+            panelDefault.Visibility = Visibility.Collapsed;
+            btnKeyDictionary.Visibility = Visibility.Collapsed;
+            btnKeyCodeSnippet.Visibility = Visibility.Collapsed;
+            btnKeyCustom.Visibility = Visibility.Collapsed;
+            txtResourceKeyResolver.Visibility = Visibility.Collapsed;
+
+            int selectedIndex = cboResourceKeyResolver.SelectedIndex;
+            if (selectedIndex == 0)
+            {
+                panelDefault.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                string strDescription = string.Empty;
+                if (selectedIndex == 1)
+                {
+                    strDescription = "Click the button to define a sample dictionary to be used for naming. The key is the SVG file name without extension.";
+                    btnKeyDictionary.Visibility = Visibility.Visible;
+                }
+                else if (selectedIndex == 2)
+                {
+                    strDescription = "Click the button to provide the code snippets. An implementation of IResourceKeyResolver, which is compiled in memory.";
+                    btnKeyCodeSnippet.Visibility = Visibility.Visible;
+                }
+                else if (selectedIndex == 3)
+                {
+                    strDescription = "The custom key resolver must be created in code, SvgTestResourceKeyResolver is used in this case.";
+                    btnKeyCustom.Visibility = Visibility.Visible;
+
+                    _isResourceModified = true;
+                }
+
+                txtResourceKeyResolver.Text = strDescription;
+                txtResourceKeyResolver.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnResourceSettingsChanged(object sender, RoutedEventArgs e)
+        {
+            if (_resourcePage == null || _resourceSettings == null || _isInitialising)
             {
                 return;
             }
@@ -354,15 +539,17 @@ namespace WpfSvgTestBox
             _resourceSettings.BindToColors       = chkResourceBindToColors.IsChecked.Value;
             _resourceSettings.BindToResources    = chkResourceBindToResources.IsChecked.Value;
             _resourceSettings.BindPenToBrushes   = chkResourceBindPenToBrushes.IsChecked.Value;
-            _resourceSettings.PenNameFormat      = GetTextValue(txtResourcePenNameFormat, WpfDrawingResources.DefaultPenNameFormat);
-            _resourceSettings.ColorNameFormat    = GetTextValue(txtResourceColorNameFormat, WpfDrawingResources.DefaultColorNameFormat);
-            _resourceSettings.BrushNameFormat    = GetTextValue(txtResourceBrushNameFormat, WpfDrawingResources.DefaultBrushNameFormat);
-            _resourceSettings.ResourceNameFormat = GetTextValue(txtResourceNameFormat, WpfDrawingResources.DefaultResourceNameFormat);
+            _resourceSettings.PenNameFormat      = GetTextValue(txtResourcePenNameFormat, ResourceKeyResolver.DefaultPenNameFormat);
+            _resourceSettings.ColorNameFormat    = GetTextValue(txtResourceColorNameFormat, ResourceKeyResolver.DefaultColorNameFormat);
+            _resourceSettings.BrushNameFormat    = GetTextValue(txtResourceBrushNameFormat, ResourceKeyResolver.DefaultBrushNameFormat);
             _resourceSettings.ResourceFreeze     = chkResourceFreeze.IsChecked.Value;
             _resourceSettings.UseResourceIndex   = chkResourceUseIndex.IsChecked.Value;
-            _resourceSettings.ResourceMode       = cboResourceMode.SelectedIndex == 0 ? WpfResourceMode.Drawing : WpfResourceMode.Image;
-            _resourceSettings.ResourceAccess     = cboResourceAccess.SelectedIndex == 0 ? WpfResourceAccess.Dynamic : WpfResourceAccess.Static;
+            _resourceSettings.ResourceMode       = cboResourceMode.SelectedIndex == 0 ? ResourceModeType.Drawing : ResourceModeType.Image;
+            _resourceSettings.ResourceAccess     = cboResourceAccess.SelectedIndex == 0 ? ResourceAccessType.Dynamic : ResourceAccessType.Static;
 
+            _defaultKeyResolver.NameFormat       = GetTextValue(txtResourceNameFormat, 
+                ResourceKeyResolver.DefaultResourceNameFormat);
+            
             _resourceSettings.IndentSpaces       = (int)cboIndentSpaces.SelectedValue;
             _resourceSettings.NumericPrecision   = (int)cboNumericPrecision.SelectedValue;
 
@@ -370,10 +557,10 @@ namespace WpfSvgTestBox
 
             _isInitialising = false;
 
-            ValidateNameFormat(txtResourcePenNameFormat, "Pen Name Format", WpfDrawingResources.DefaultPenNameFormat, false);
-            ValidateNameFormat(txtResourceColorNameFormat, "Color Name Format", WpfDrawingResources.DefaultColorNameFormat, false);
-            ValidateNameFormat(txtResourceBrushNameFormat, "Brush Name Format", WpfDrawingResources.DefaultBrushNameFormat, false);
-            ValidateNameFormat(txtResourceNameFormat, "Resource Name Format", WpfDrawingResources.DefaultResourceNameFormat, true);
+            ValidateNameFormat(txtResourcePenNameFormat, "Pen Name Format", ResourceKeyResolver.DefaultPenNameFormat, false);
+            ValidateNameFormat(txtResourceColorNameFormat, "Color Name Format", ResourceKeyResolver.DefaultColorNameFormat, false);
+            ValidateNameFormat(txtResourceBrushNameFormat, "Brush Name Format", ResourceKeyResolver.DefaultBrushNameFormat, false);
+            ValidateNameFormat(txtResourceNameFormat, "Resource Name Format", ResourceKeyResolver.DefaultResourceNameFormat, true);
         }
     }
 }

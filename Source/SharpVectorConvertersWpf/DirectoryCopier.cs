@@ -8,7 +8,7 @@ namespace SharpVectors.Converters
     /// Copies a file or a directory and its contents to a new location. 
     /// </summary>
     [Serializable]
-    public sealed class DirectoryCopier
+    internal sealed class DirectoryCopier
     {
         #region Private Fields
 

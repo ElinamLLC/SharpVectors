@@ -84,6 +84,7 @@ namespace WpfSvgTestBox
 
             if (_svgPage != null && _settingsPage != null)
             {
+                _settingsPage.Window = this;
                 _settingsPage.SvgPage = _svgPage;
             }
 

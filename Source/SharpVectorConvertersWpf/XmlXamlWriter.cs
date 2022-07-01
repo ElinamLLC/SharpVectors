@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Markup;
 using System.Windows.Markup.Primitives;
 
+using SharpVectors.Renderers;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Renderers.Utils;
 
@@ -122,7 +123,7 @@ namespace SharpVectors.Converters
 
                     if (_drawingResources.IsReady)
                     {
-                        if (_drawingResources.ResourceAccess == WpfResourceAccess.Static)
+                        if (_drawingResources.ResourceAccess == ResourceAccessType.Static)
                         {
                             _resourceFormat = "{{StaticResource {0}}}";
                         }

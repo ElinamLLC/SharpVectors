@@ -41,6 +41,9 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+	  <Resource Include="Resources\CodeSnppets.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
