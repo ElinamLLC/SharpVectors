@@ -3,43 +3,29 @@
   <Class Name="SharpVectors.Renderers.Texts.WpfTextRenderer" Collapsed="true">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQQEAAAICBAoQIIEAgDIAAIAREAhAIAATKoJAQIAQg=</HashCode>
+      <HashCode>AKQQEAIAoCBAoYIIEAADIAAIAZEAhAJAASKoJAQIAQg=</HashCode>
       <FileName>Texts\WpfTextRenderer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfHorzTextRenderer" Collapsed="true">
     <Position X="2.5" Y="1.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>Texts\WpfHorzTextRenderer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfPathTextRenderer" Collapsed="true">
     <Position X="0.5" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAACAAAAAAAAAAAAAAAAABAAAAAgCAAAAAAAA=</HashCode>
+      <HashCode>ACAAIAAAAAAAAAAAAAAAAAAAAAABAAAAAgCAAAAAAAA=</HashCode>
       <FileName>Texts\WpfPathTextRenderer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfVertTextRenderer" Collapsed="true">
     <Position X="4.75" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEACEAAAEAAAAAAAAAAAAAAAAAIACAAAAAABA=</HashCode>
+      <HashCode>ACAAAAAEAAEAAAEAAAAAAAAAAAAAAAAAIACAAAAAABA=</HashCode>
       <FileName>Texts\WpfVertTextRenderer.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SharpVectors.Renderers.Texts.WpfTextOnPathBase" Collapsed="true">
-    <Position X="2.5" Y="2.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AgCAADAAAAAAAkAAAAAAAAAwAAAAAAAIAAoAAAAAECA=</HashCode>
-      <FileName>Texts\WpfTextOnPathBase.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SharpVectors.Renderers.Texts.WpfTextOnPathDrawing" Collapsed="true">
-    <Position X="2.5" Y="3.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AACBABAAAUAAAAAEAAAAQgAAABAEAAAAABIABAQAAAA=</HashCode>
-      <FileName>Texts\WpfTextOnPathDrawing.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfTextPlacement" Collapsed="true">
@@ -57,24 +43,31 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfTextBuilder" Collapsed="true">
-    <Position X="4" Y="6.25" Width="1.5" />
+    <Position X="3.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gyAIIIAAgAAQQAAAGACAAkAAAQgAgMEAAgBAAAUIAKA=</HashCode>
+      <HashCode>gyQIIICAkAAYWAAAGiCAAkAAgQgIwMEAAABAAQUIAKA=</HashCode>
       <FileName>Texts\WpfTextBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfGlyphTextBuilder" Collapsed="true">
-    <Position X="2" Y="7.5" Width="2" />
+    <Position X="0.5" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>ICBAQIEACAIAQCAAAADSCEIEARAAiCAAgAFAQEICAgQ=</HashCode>
+      <HashCode>ICBIYIEAGAIAWCAAAiCSCEIEARAAyCAAgAFAQUICAgQ=</HashCode>
       <FileName>Texts\WpfGlyphTextBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Texts.WpfSvgTextBuilder" Collapsed="true">
-    <Position X="5.25" Y="7.5" Width="2" />
+    <Position X="3" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>ECABAIIAAAAAAQAAEgCAAEAMAwSAgIUAAQFQKACAIBg=</HashCode>
+      <HashCode>EKABIJIAEAEBGwABEiCgAEAMAwSA0IEAAQFQOQCAMBg=</HashCode>
       <FileName>Texts\WpfSvgTextBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Texts.WpfFontTextBuilder" Collapsed="true">
+    <Position X="5.5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAIIAAEAAAGAAAAiCAAEAAAAAAwAAAAAFAQQAAAAA=</HashCode>
+      <FileName>Texts\WpfFontTextBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="SharpVectors.Renderers.Texts.WpfTextPosition" Collapsed="true">

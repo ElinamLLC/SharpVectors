@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SharpVectors.Converters.SvgCanvas">
-    <Position X="0.5" Y="1" Width="1.75" />
+    <Position X="0.5" Y="1" Width="2.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAACEIAKAiBAAAQAAAIAmAAAAAEAEKAAAQMAAAAgAAg=</HashCode>
+      <HashCode>AwADmIDuA0lBBAQAMAIAmACCFgGBMqEBDQsIAUEwBCo=</HashCode>
       <FileName>SvgCanvas.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SharpVectors.Converters.SvgViewbox">
-    <Position X="3" Y="1" Width="1.75" />
+    <Position X="4" Y="0.75" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAACMIAKAiBAAAQAAAIAmAAAAgEAEKAAAQMAAAAgAAg=</HashCode>
+      <HashCode>AwBDuIDuA0lDJQQAMAIAmACCFgORMqEBDQsIAUGwBCo=</HashCode>
       <FileName>SvgViewbox.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

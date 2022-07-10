@@ -1,3 +1,0 @@
-## SVG Filters
-
-Under-construction.

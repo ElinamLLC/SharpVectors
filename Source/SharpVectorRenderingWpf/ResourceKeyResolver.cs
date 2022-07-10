@@ -580,6 +580,12 @@ namespace SharpVectors.Renderers
         {
         }
 
+        public CodeSnippetKeyResolver(string codeSnippet)
+        {
+            _codeSnippet = codeSnippet;
+            this.CreateKeyResolver();
+        }
+
         #endregion
 
         #region Public Properties
@@ -909,11 +915,22 @@ namespace SharpVectors.Renderers
 
             // Add reference to assemblies 
             Assembly currAssembly = this.GetType().Assembly;
-            foreach (AssemblyName assemName in currAssembly.GetReferencedAssemblies())
+
+            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var referencedPaths = currAssembly.GetReferencedAssemblies()
+                .Select(name => loadedAssemblies.SingleOrDefault(a => a.FullName == name.FullName)?.Location)
+                .Where(l => l != null);
+            foreach (var referencedPath in referencedPaths)
             {
-                string assemPath = Assembly.ReflectionOnlyLoad(assemName.FullName).Location;
-                parameters.ReferencedAssemblies.Add(assemPath);
+                Trace.WriteLine(referencedPath);
+                parameters.ReferencedAssemblies.Add(referencedPath);
             }
+            //foreach (AssemblyName assemName in currAssembly.GetReferencedAssemblies())
+            //{
+            //    string assemPath = Assembly.Load(assemName.FullName).Location;
+            //    parameters.ReferencedAssemblies.Add(assemPath);
+            //}
+
             parameters.ReferencedAssemblies.Add(currAssembly.Location);
 
             // True - memory generation, false - external file generation

@@ -1,0 +1,89 @@
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
+
+<h1 id="{{id}}" data-uid="{{uid}}">{{>partials/title}}{{>partials/tsref/releaseStage}}</h1>
+<div class="markdown level0 summary">{{{summary}}}</div>
+<div class="markdown level0 conceptual">{{{conceptual}}}</div>
+{{#deprecated}}
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+    <tr>
+      <th><span style="color: red; text-transform: uppercase;">{{{__global.deprecated}}}</span></th>
+    </tr>
+  </thead>
+  {{#content}}
+    <tbody>
+      <tr>
+        <td>{{{.}}}</td>
+      </tr>
+    </tbody>
+  {{/content}}
+</table>
+{{/deprecated}}
+{{#inheritance.0}}
+<div class="inheritance">
+  <h5>{{__global.inheritance}}</h5>
+{{/inheritance.0}}
+{{#inheritance.0.value}}
+    {{>partials/tsref/inheritance}}
+{{/inheritance.0.value}}
+{{#inheritance.0}}
+    <div class="level{{level}}"><span class="xref">{{name.0.value}}</span></div>
+</div>
+{{/inheritance.0}}
+{{#implements.0}}
+<div class="implements">
+  <h5>{{__global.implements}}</h5>
+{{/implements.0}}
+{{#implements.0.value}}
+  {{#definition}}
+    <div><xref href="{{definition}}" altProperty="fullName" displayProperty="nameWithType"/></div>
+  {{/definition}}
+  {{^definition}}
+    <div><xref href="{{uid}}" altProperty="fullName" displayProperty="nameWithType"/></div>
+  {{/definition}}
+{{/implements.0.value}}
+{{#implements.0}}
+</div>
+{{/implements.0}}
+{{#inheritedMembers.0}}
+<div class="inheritedMembers">
+  <h5>{{__global.inheritedMembers}}</h5>
+{{/inheritedMembers.0}}
+{{#inheritedMembers.0.value}}
+  <div>
+  {{#definition}}
+    <xref uid="{{definition}}" altProperty="fullName" displayProperty="name"/>
+  {{/definition}}
+  {{^definition}}
+    <xref uid="{{uid}}" altProperty="fullName" displayProperty="name"/>
+  {{/definition}}
+  </div>
+{{/inheritedMembers.0.value}}
+{{#inheritedMembers.0}}
+</div>
+{{/inheritedMembers.0}}
+{{#namespace.0}}
+<h6 data-noindex><strong>{{__global.namespace}}</strong>: {{{value.specName.0.value}}}</h6>
+{{/namespace.0}}
+{{#module.0}}
+<h6 data-noindex><strong>{{__global.module}}</strong>: {{{value.specName.0.value}}}</h6>
+{{/module.0}}
+{{#package.0}}
+<h6 data-noindex><strong>{{__global.package}}</strong>: {{{value.specName.0.value}}}</h6>
+{{/package.0}}
+<h5 id="{{id}}_syntax">{{__global.syntax}}</h5>
+{{#syntax}}
+<div class="codewrapper">
+  <pre><code class="lang-{{syntax.content.0.lang}} hljs">{{syntax.content.0.value}}</code></pre>
+</div>
+{{/syntax}}
+{{#remarks}}
+<h5 id="{{id}}_remarks"><strong>{{__global.remarks}}</strong></h5>
+<div class="markdown level0 remarks">{{{remarks}}}</div>
+{{/remarks}}
+{{#example.0}}
+<h5 id="{{id}}_examples"><strong>{{__global.examples}}</strong></h5>
+{{/example.0}}
+{{#example}}
+{{{.}}}
+{{/example}}

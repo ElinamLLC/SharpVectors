@@ -1,3 +1,0 @@
-## SVG Animations
-
-Under-construction.

@@ -1,0 +1,219 @@
+/* Color schemes */
+:root.theme-dark
+{
+    /* General */
+    --main-bg-color: #36393f;
+    --footer-bg-color: rgba(0, 0, 0, .4);
+    --table-strip-bg-color: #121315;
+    --table-header-bg-color: #202225;
+    --table-header-color: hsla(0, 0%, 100%, .8);
+    --table-header-border-color: #040405;
+    --elevation-low: rgba(4, 4, 5, 0.2) 0px 1px 0px 0px, rgba(6, 6, 7, 0.05) 0px 1.5px 0px 0px, rgba(4, 4, 5, 0.05) 0px 2px 0px 0px;
+    --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.24);
+
+    /* Text */
+    --text-color: #dcddde;
+    --text-placeholder: #72767d;
+    --link-color: #00b0f4;
+    --link-hover-color: #4bd5ff;
+    --link-active-color: #fff;
+    --link-active-bg-color: #7289da;
+    --header-primary: #ffffff;
+    --header-secondary: #b9bbbe;
+    /*--h3-color: #ffffff85;
+    --h4-color: #ffffffeb;
+    --h5-color: #ffffffd1;*/
+
+    /* Topbar */
+    --topbar-bg-color: #18191c;
+    --topbar-icon-color: #babbbd;
+
+    /* Button */
+    --button-color: #747f8d;
+
+    /* Sidebar */
+    --separator-color: #4f545c;
+    --sidebar-bg-color: #2f3136;
+    --sidebar-item-color: #b9bbbe;
+    --sidebar-item-active-color: #ffffff;
+    --sidebar-item-2nd-color: hsla(0, 0%, 100%, .35);
+    --sidebar-item-3rd-color: hsla(0, 0%, 100%, .25);
+
+    /* Scrollbar */
+    --scrollbar-track-color: #2e3338;
+    --scrollbar-thumb-color: #202225;
+
+    /* Alerts and Blocks */
+    --alert-info-border-color: rgba(114, 137, 218, .5);
+    --alert-info-bg-color: rgba(114, 137, 218, .1);
+
+    --alert-warning-border-color: rgba(250, 166, 26, .5);
+    --alert-warning-bg-color: rgba(250, 166, 26, .1);
+
+    --alert-danger-border-color: rgba(240, 71, 71, .5);
+    --alert-danger-bg-color: rgba(240, 71, 71, .1);
+
+    --alert-tip-border-color: rgba(255, 255, 255, .5);
+    --alert-tip-bg-color: rgba(255, 255, 255, .1);
+
+    --blockquote-border-color: rgba(255, 255, 255, .5);
+    --blockquote-bg-color: rgba(255, 255, 255, .1);
+
+    /* Code Higlighting */
+    --code-bg-color: #18191c;
+    --code-color: #8790a3;
+    --code-keyword-color: #569cd6;
+    --code-comment-color: #57a64a;
+    --code-macro-color: #beb7ff;
+    --code-string-color: #d69d85;
+    --code-string-escape-color: #ffd68f;
+    --code-field-color: #c8c8c8;
+    --code-function-color: #dcdcaa;
+    --code-control-color: #d8a0df;
+    --code-class-color: #4ec9b0;
+    --code-number-color: #b5cea8;
+    --code-params-color: #9a9a9a;
+    --code-breakpoint-color: #8c2f2f;
+
+    /* Search */
+    --search-bg-color: #202225;
+    --search-bg-color-alt: #4f535c;
+    --search-text-placeholder: #72767d;
+    --search-text-placeholder-alt: #babbbf;
+    --search-text-filter-bg-color: #34383d;
+    --search-text-filter-color: #ffffff;
+    --search-popup-text: #cacbce;
+    --search-popup-text-alt: #72767d;
+    --search-popup-shadow: 0 0 0 1px rgb(32 34 37 / 60%), 0 2px 10px 0 rgb(0 0 0 / 20%);
+    --search-icon-bg-color: #738ad6;
+    --search-icon-text: #ffffff;
+
+    /* Affix */
+    --affix-text-color: #666666;
+    --affix-uref-color: #be60ff;
+    --affix-uref-color-interface: #7da01f;
+    --affix-uref-color-class: #4da6ff;
+    --affix-uref-color-enum: #cc9900;
+
+    /* Mermaid diagrams */
+    --diagr-primary-color: #1f2020;
+    --diagr-primary-border-color: #448bca;
+    --diagr-primary-text-color: #ffffff;
+    --diagr-secondary-color: #637777;
+    --diagr-secondary-border-color: #7fdbca;
+    --diagr-secondary-text-color: #ffffff;
+    --diagr-tertiary-color: #0c1c2a;
+    --diagr-tertiary-border-color: #193a58;
+    --diagr-line-color: lightgray;
+}
+
+:root.theme-light
+{
+    /* General */
+    --main-bg-color: #fff;
+    --footer-bg-color: #e3e5e8;
+    --table-strip-bg-color: #e3e5e8;
+    --table-cell-color: #dcddde;
+    --table-header-bg-color: #ebedef;
+    --table-header-color: #2e3338;
+    --table-header-border-color: #040405;
+    --elevation-low: 0 1px 0 rgba(6, 6, 7, 0.1),0 1.5px 0 rgba(6, 6, 7, 0.025),0 2px 0 rgba(6, 6, 7, 0.025);
+    --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.16);
+
+    /* Text */
+    --text-color: #2e3338;
+    --text-placeholder: #747f8d;
+    --link-color: hsl(212, calc(var(--saturation-factor, 1) * 100%), 43.9%);
+    --link-hover-color: #4bd5ff;
+    --link-active-color: #747f8d;
+    --link-active-bg-color: #7289da;
+    --header-primary: #060607;
+    --header-secondary: #4f5660;
+    /*--h1-color: #060607ff;
+    --h2-color: #4f5660ff;
+    --h3-color: #4f566085;
+    --h4-color: #4f5660eb;
+    --h5-color: #4f5660d1;*/
+
+    /* Topbar */
+    --topbar-bg-color: #e3e5e8;
+    --topbar-icon-color: #4f5660;
+
+    /* Button */
+    --button-color: #747f8d;
+
+    /* Sidebar */
+    --separator-color: rgba(6,6,7,0.08);
+    --sidebar-bg-color: #ebedef;
+    --sidebar-item-color: #6a7480;
+    --sidebar-item-active-color: #060607;
+    --sidebar-item-2nd-color: #6a7480;
+    --sidebar-item-3rd-color: #6a7480;
+
+    /* Scrollbar */
+    --scrollbar-track-color: #f2f2f2;
+    --scrollbar-thumb-color: #ccc;
+
+    /* Alerts and Blocks */
+    --alert-info-border-color: rgba(114, 137, 218, .5);
+    --alert-info-bg-color: rgba(114, 137, 218, .1);
+
+    --alert-warning-border-color: rgba(250, 166, 26, .5);
+    --alert-warning-bg-color: rgba(250, 166, 26, .1);
+
+    --alert-danger-border-color: rgba(240, 71, 71, .5);
+    --alert-danger-bg-color: rgba(240, 71, 71, .1);
+
+    --alert-tip-border-color: rgba(127, 127, 127, .5);
+    --alert-tip-bg-color: rgba(229, 229, 229, .1);
+
+    --blockquote-border-color: rgba(127, 127, 127, .5);
+    --blockquote-bg-color: rgba(229, 229, 229, .1);
+
+    /* Code Higlighting */
+    --code-bg-color: #f6f6f6;
+    --code-color: #8790a3;
+    --code-keyword-color: #569cd6;
+    --code-comment-color: #57a64a;
+    --code-macro-color: #beb7ff;
+    --code-string-color: #d69d85;
+    --code-string-escape-color: #ffd68f;
+    --code-field-color: #c8c8c8;
+    --code-function-color: #dcdcaa;
+    --code-control-color: #d8a0df;
+    --code-class-color: #4ec9b0;
+    --code-number-color: #b5cea8;
+    --code-params-color: #9a9a9a;
+    --code-breakpoint-color: #8c2f2f;
+
+    /* Search */
+    --search-bg-color: #e3e5e8;
+    --search-bg-color-alt: #C7CCD0;
+    --search-text-placeholder: #72767d;
+    --search-text-placeholder-alt: #babbbf;
+    --search-text-filter-color: #fff;
+    --search-text-filter-bg-color: #72767d;
+    --search-popup-text: #72767d;
+    --search-popup-text-alt: #cacbce;
+    --search-popup-shadow: 0 0 0 1px rgb(218 216 213 / 60%), 0 2px 10px 0 rgb(255 255 255 / 20%);
+    --search-icon-bg-color: #738ad6;
+    --search-icon-text: #ffffff;
+
+    /* Affix */
+    --affix-text-color: #666666;
+    --affix-uref-color: #be60ff;
+    --affix-uref-color-interface: #7da01f;
+    --affix-uref-color-class: #4da6ff;
+    --affix-uref-color-enum: #cc9900;
+
+    /* Mermaid diagrams */
+    --diagr-primary-color: #e0dfdf;
+    --diagr-primary-border-color: #448bca;
+    --diagr-primary-text-color: #2e3338;
+    --diagr-secondary-color: #637777;
+    --diagr-secondary-border-color: #802435;
+    --diagr-secondary-text-color: #2e3338;
+    --diagr-tertiary-color: #0c1c2a;
+    --diagr-tertiary-border-color: #193a58;
+    --diagr-line-color: #2c2c2c;
+}

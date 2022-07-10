@@ -29,10 +29,14 @@
                 <DockPanel LastChildFill="True" Margin="0 3 0 3" Height="28">
                     <Button x:Name="btnClearAll" DockPanel.Dock="Left" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnClearAllClicked">Clear All</Button>
                     <Button x:Name="btnChangeColors" IsEnabled="False" DockPanel.Dock="Left" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnChangeColorsClicked">Colors</Button>
-                    <Button x:Name="btnSession" IsEnabled="False" DockPanel.Dock="Left" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnChangeColorsClicked">Session</Button>
+                    <Button x:Name="btnSession" IsEnabled="True" DockPanel.Dock="Left" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnSessionClicked">Session</Button>
                     <Button x:Name="btnSaveXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnSaveXamlClicked">Save Xaml</Button>
                     <Button x:Name="btnCopyXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnCopyXamlClicked">Copy Xaml</Button>
-                    <Button x:Name="btnTestXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnTestXamlClicked">Test Xaml</Button>
+                    <Button x:Name="btnTestXaml" IsEnabled="False" DockPanel.Dock="Right" Width="80" Padding="3" Margin="4 0 4 0" HorizontalAlignment="Left" Click="OnTestXamlClicked" Content="Test Xaml">
+                        <Button.ToolTip>
+                            Uses ResourceSvgConverter for conversion and places the result in the clipboard.
+                        </Button.ToolTip>
+                    </Button>
                     <Slider x:Name="Slider" Orientation="Horizontal" Minimum="160" Maximum="500" Value="180" 
                         LargeChange="20" SmallChange="10" Width="240" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </DockPanel>

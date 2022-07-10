@@ -3,15 +3,15 @@
   <Class Name="SharpVectors.Renderers.Gdi.GdiRendering" Collapsed="true">
     <Position X="2.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAACBAEgCgEAAAAAAAAAQQCAAAAAEAIAIgAICQgAAA=</HashCode>
+      <HashCode>gAAQCBAFgKgEAAAAAAAAAQACAAAAAEAIAIgAACQgAAA=</HashCode>
       <FileName>Gdi\GdiRendering.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpVectors.Renderers.Gdi.GdiRootRendering" Collapsed="true">
+  <Class Name="SharpVectors.Renderers.Gdi.GdiSvgRendering" Collapsed="true">
     <Position X="0.5" Y="3" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
-      <FileName>Gdi\GdiRootRendering.cs</FileName>
+      <FileName>Gdi\GdiSvgRendering.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Gdi.GdiMarkerRendering" Collapsed="true">
@@ -24,21 +24,21 @@
   <Class Name="SharpVectors.Renderers.Gdi.GdiFill" Collapsed="true">
     <Position X="2.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAgAAAACAA=</HashCode>
       <FileName>Gdi\GdiFill.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Gdi.GdiGradientFill" Collapsed="true">
-    <Position X="0.5" Y="4.25" Width="1.5" />
+    <Position X="2.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAADAAAAAAAAAAAIAAAAQAAAGAAAYgAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Gdi\GdiGradientFill.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Gdi.GdiPatternFill" Collapsed="true">
-    <Position X="5" Y="4.25" Width="1.5" />
+    <Position X="0.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACCAAAAAABIAAAAAAAAAAAQAAABAAAAAAAhAAIAAAA=</HashCode>
+      <HashCode>AACCAAAAAQBIAAAAAAAAAAAQAAABAAAAAAAhAAIACAA=</HashCode>
       <FileName>Gdi\GdiPatternFill.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -60,15 +60,29 @@
   <Class Name="SharpVectors.Renderers.Gdi.GdiImageRendering" Collapsed="true">
     <Position X="4.75" Y="3" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAACAAgABAAAAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAQAAAAAACAAgABAAAAACAAA=</HashCode>
       <FileName>Gdi\GdiImageRendering.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpVectors.Renderers.Gdi.GdiTextRendering" Collapsed="true">
     <Position X="2.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgBAYAAAIAAAAAQAIAAAARAAiEBIgAARAAAA=</HashCode>
+      <HashCode>AAQQAAAAgBAYgIIIAEgAIQAIABEAxAImATIoAgQAAAA=</HashCode>
       <FileName>Gdi\GdiTextRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiLinearGradientFill" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAgAAAACAA=</HashCode>
+      <FileName>Gdi\GdiLinearGradientFill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpVectors.Renderers.Gdi.GdiRadialGradientFill" Collapsed="true">
+    <Position X="4.75" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAAAgAAAACAA=</HashCode>
+      <FileName>Gdi\GdiRadialGradientFill.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

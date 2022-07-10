@@ -208,7 +208,7 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
-        public ResourceKeyResolverType ResourceKeyResolverType
+        public ResourceKeyResolverType ResourceResolverType
         {
             get {
                 var keyResolver = this.RetrieveResolver();
@@ -453,11 +453,22 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        public string Save()
+        {
+            var builder = new StringBuilder();
+            using (var writer = new StringWriter(builder))
+            {
+                this.Save(writer);
+            }
+
+            return builder.ToString();
+        }
+
         public void Save(string contentFile)
         {
             NotNullNotEmpty(contentFile, nameof(contentFile));
 
-            XmlWriterSettings settings = new XmlWriterSettings();
+            var settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.Encoding = Encoding.UTF8;
             settings.IndentChars = new string(' ', 4);
@@ -467,6 +478,68 @@ namespace SharpVectors.Renderers.Wpf
             try
             {
                 writer = XmlWriter.Create(contentFile, settings);
+
+                writer.WriteStartDocument();
+
+                this.WriteXml(writer);
+
+                writer.WriteEndDocument();
+            }
+            finally
+            {
+                if (writer != null)
+                {
+                    writer.Close();
+                    writer = null;
+                }
+            }
+        }
+
+        public void Save(TextWriter textWriter)
+        {
+            NotNull(textWriter, nameof(textWriter));
+
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.Encoding = Encoding.UTF8;
+            settings.IndentChars = new string(' ', 4);
+            settings.OmitXmlDeclaration = false;
+
+            XmlWriter writer = null;
+            try
+            {
+                writer = XmlWriter.Create(textWriter, settings);
+
+                writer.WriteStartDocument();
+
+                this.WriteXml(writer);
+
+                writer.WriteEndDocument();
+            }
+            finally
+            {
+                if (writer != null)
+                {
+                    writer.Close();
+                    writer = null;
+                }
+            }
+        }
+
+        public void Save(Stream stream)
+        {
+            NotNull(stream, nameof(stream));
+
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.Encoding = Encoding.UTF8;
+            settings.IndentChars = new string(' ', 4);
+            settings.OmitXmlDeclaration = false;
+
+            XmlWriter writer = null;
+            try
+            {
+                writer = XmlWriter.Create(stream, settings);
 
                 writer.WriteStartDocument();
 
@@ -581,9 +654,16 @@ namespace SharpVectors.Renderers.Wpf
             {
                 foreach (var svgSource in _svgSources)
                 {
-                    writer.WriteStartElement("sources");
-                    writer.WriteString(svgSource);
-                    writer.WriteEndElement();
+                    if (string.IsNullOrWhiteSpace(svgSource))
+                    {
+                        continue;
+                    }
+
+                    var unixSource = svgSource.Replace("\\", "/");
+
+                    writer.WriteStartElement("source"); // start - source
+                    writer.WriteString(unixSource);
+                    writer.WriteEndElement();           // end - source
                 }
             }
             writer.WriteEndElement();                // end - sources

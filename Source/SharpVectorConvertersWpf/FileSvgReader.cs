@@ -562,7 +562,7 @@ namespace SharpVectors.Converters
             var svgDocument = _wpfWindow.Document as SvgDocument;
             _wpfRenderer.Render(svgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 return null;
@@ -593,7 +593,7 @@ namespace SharpVectors.Converters
             var svgDocument = _wpfWindow.Document as SvgDocument;
             _wpfRenderer.Render(svgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -624,7 +624,7 @@ namespace SharpVectors.Converters
             var svgDocument = _wpfWindow.Document as SvgDocument;
             _wpfRenderer.Render(svgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -655,7 +655,7 @@ namespace SharpVectors.Converters
             var svgDocument = _wpfWindow.Document as SvgDocument;
             _wpfRenderer.Render(svgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();
@@ -686,7 +686,7 @@ namespace SharpVectors.Converters
             var svgDocument = _wpfWindow.Document as SvgDocument;
             _wpfRenderer.Render(svgDocument);
 
-            _drawing = _wpfRenderer.Drawing as DrawingGroup;
+            _drawing = _wpfRenderer.Drawing;
             if (_drawing == null)
             {
                 this.EndProcessing();

@@ -51,6 +51,11 @@ namespace SharpVectors.Converters
         {
         }
 
+        public ResourceSvgConverter(WpfResourceSettings resourceSettings)
+            : this(new WpfDrawingSettings(), resourceSettings)
+        {
+        }
+
         public ResourceSvgConverter(WpfDrawingSettings drawingSettings, WpfResourceSettings resourceSettings)
             : base(drawingSettings)
         {

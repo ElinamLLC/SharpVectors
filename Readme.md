@@ -37,14 +37,15 @@ The SharpVectors library targets the following frameworks
 * .NET Standard, Version 2.1
 * .NET Core, Version 3.1
 * .NET 5.0
+* .NET 6.0
 
 The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
 The library can be downloaded from the following sources
-* **NuGet (Recommended)**, [Version 1.7.7 - SharpVectors](https://www.nuget.org/packages/SharpVectors/).
-* **NuGet (Same as SharpVectors package above)**, [Version 1.7.7 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/).
-* **GitHub Releases Page**, [Version 1.7.7](https://github.com/ElinamLLC/SharpVectors/releases).
+* **NuGet (Recommended)**, [Version 1.8.0 - SharpVectors](https://www.nuget.org/packages/SharpVectors/).
+* **NuGet (Same as SharpVectors package above)**, [Version 1.8.0 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/).
+* **GitHub Releases Page**, [Version 1.8.0](https://github.com/ElinamLLC/SharpVectors/releases).
 
 ## Documentation
 An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.

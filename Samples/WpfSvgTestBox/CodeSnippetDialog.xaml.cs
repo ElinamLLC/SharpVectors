@@ -68,6 +68,8 @@ namespace WpfSvgTestBox
 
             _searchPanel = SearchPanel.Install(textEditor);
 
+            textEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
+
             textEditor.TextChanged += OnEditorTextChanged;
         }
 
@@ -257,7 +259,7 @@ namespace WpfSvgTestBox
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.CheckFileExists = true;
             dlg.Title = "Select Code Snippet File";
-            dlg.DefaultExt = "*.svg";
+            dlg.DefaultExt = "*.txt";
             dlg.Filter = "All Code Snippet Files (*.txt,*.cs)|*.txt;*.cs"
                                 + "|Plain Text Files (*.txt)|*.txt"
                                 + "|C# Files (*.cs)|*.cs";

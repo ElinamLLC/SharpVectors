@@ -33,6 +33,8 @@ using Microsoft.Win32;
 using DpiScale = SharpVectors.Runtime.DpiScale;
 using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
 
+using SharpVectors.Test.Sample;
+
 namespace WpfSvgTestBox
 {
     public sealed class ImageData
@@ -465,6 +467,7 @@ namespace WpfSvgTestBox
             btnChangeColors.IsEnabled = false;
             btnConvertResources.IsEnabled = false;
 
+            _resourceSettings.ClearSources();
             _resourceSettings.AddSource(svgDir);
 
             _drawingResources = new WpfDrawingResources();
@@ -535,18 +538,18 @@ namespace WpfSvgTestBox
                 _drawingResources = _conversionSettings.DrawingResources;
             }
 
-            //var colorPalette = new Dictionary<Color, string>(WpfDrawingResources.ColorComparer);
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF008000"), "SvgColor01");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF000000"), "SvgColor02");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFFF00"), "SvgColor03");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF0000FF"), "SvgColor04");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF00FF00"), "SvgColor05");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF339966"), "SvgColor06");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFF00FF"), "SvgColor07");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFA500"), "SvgColor08");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF007700"), "SvgColor09");
-            //colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF33CC66"), "SvgColor10");
-            //_resourceSettings.ColorPalette = colorPalette;
+            var colorPalette = new Dictionary<Color, string>(WpfDrawingResources.ColorComparer);
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF008000"), "SvgColor01");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF000000"), "SvgColor02");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFFF00"), "SvgColor03");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF0000FF"), "SvgColor04");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF00FF00"), "SvgColor05");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF339966"), "SvgColor06");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFF00FF"), "SvgColor07");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FFFFA500"), "SvgColor08");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF007700"), "SvgColor09");
+            colorPalette.Add((Color)ColorConverter.ConvertFromString("#FF33CC66"), "SvgColor10");
+            _resourceSettings.ColorPalette = colorPalette;
 
             _resourceSettings.CopyTo(_drawingResources);
             _drawingResources.InitialiseKeys();
@@ -787,6 +790,36 @@ namespace WpfSvgTestBox
             }
         }
 
+        private void OnSessionClicked(object sender, RoutedEventArgs e)
+        {
+            if (_resourceSettings == null)
+            {
+                return;
+            }
+            var converter = new ResourceSvgConverterSample();
+            XmlViewerDialog dlg = new XmlViewerDialog();
+            dlg.Owner = _mainWindow;
+            dlg.XmlType = XmlViewerType.Xml;
+            //dlg.XmlText = _resourceSettings.Save();
+            dlg.XmlText = converter.Save();
+
+            dlg.ShowDialog();
+
+            //var wpfSettings = new WpfDrawingSettings();
+            //wpfSettings.IncludeRuntime = false;
+            //wpfSettings.TextAsGeometry = false;
+
+            //wpfSettings.PixelWidth = 120;
+            //wpfSettings.PixelHeight = 120;
+
+            //var converter = new ImageSvgConverter(wpfSettings);
+            //converter.Convert(@"D:\Visual Studio\Workspaces\SharpVectors\DocFx\images\about.svg");
+            //converter.Convert(@"D:\Visual Studio\Workspaces\SharpVectors\DocFx\images\area_chart.svg");
+            //converter.Convert(@"D:\Visual Studio\Workspaces\SharpVectors\DocFx\images\crystal_oscillator.svg");
+
+            //Clipboard.SetText(converter.Convert(@"C:\Users\Paul Selormey\Desktop\icons2"), TextDataFormat.UnicodeText);
+        }
+
         private void OnCopyXamlClicked(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(_xamlText))
@@ -840,7 +873,14 @@ namespace WpfSvgTestBox
                 return;
             }
 
-            Clipboard.SetText(xamlText, TextDataFormat.UnicodeText);
+            XmlViewerDialog dlg = new XmlViewerDialog();
+            dlg.Owner = _mainWindow;
+            dlg.XmlType = XmlViewerType.Xaml;
+            dlg.XmlText = xamlText;
+
+            dlg.ShowDialog();
+
+            //Clipboard.SetText(xamlText, TextDataFormat.UnicodeText);
         }
 
         private void UpdateFoldings()

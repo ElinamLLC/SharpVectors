@@ -1,3 +1,0 @@
-## SVG Coordinates
-
-Under-construction.

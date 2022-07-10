@@ -100,6 +100,7 @@ namespace WpfSvgTestBox
                 IResourceKeyResolver keyResolver = null;
                 if (selectedIndex == 0)
                 {
+                    _defaultKeyResolver.NameFormat = txtResourceNameFormat.Text.Trim();
                     keyResolver = _defaultKeyResolver;
                 }
                 else if (selectedIndex == 1)
@@ -396,7 +397,6 @@ namespace WpfSvgTestBox
                     using (var reader = new System.IO.StreamReader(streamInfo.Stream))
                     {
                         codeSnippet = reader.ReadToEnd();
-
                     }
                 }
                 catch (Exception ex)

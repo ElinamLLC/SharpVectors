@@ -1,0 +1,41 @@
+apiRules:
+- exclude:
+    # inherited members from Form
+    uidRegex: ^SharpVectors$
+    type: Namespace
+- exclude:
+    # inherited members SharpVectors.Compressions.Brotli
+    uidRegex: ^SharpVectors\.Compressions\.Brotli$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Compressions.ZLib.* namespace
+    uidRegex: ^SharpVectors\.Compressions\.ZLib$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Converters.Shapes.* namespace
+    uidRegex: ^SharpVectors\.Converters\.Shapes$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Dom.Utils.* namespace
+    uidRegex: ^SharpVectors\.Dom\.Utils$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Polynomials.* namespace
+    uidRegex: ^SharpVectors\.Polynomials$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Scripting.* namespace
+    uidRegex: ^SharpVectors\.Scripting$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Woffs.* namespace
+    uidRegex: ^SharpVectors\.Woffs$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Xml.* namespace
+    uidRegex: ^SharpVectors\.Xml$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Net.* namespace
+    uidRegex: ^SharpVectors\.Net$
+    type: Namespace
