@@ -464,13 +464,13 @@ button.btn-link:active
 
 .logomark
 {
-    height: 32px;
+    height: 28px;
 }
 
 .brand-title
 {
     padding: 0 .5em;
-    font-size: 1.2em;
+    font-size: .9em;
     color: var(--header-primary);
 }
 

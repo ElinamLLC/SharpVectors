@@ -143,15 +143,15 @@
 
 <p>The SharpVectors library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.</p>
 <p>For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below:</p>
-<p><img src="/images/rendering.png" alt=""></p>
+<p><img src="../images/rendering.png" alt=""></p>
 <p>In some cases, the listed classes are entry points to the actual implementations as shown below for the text rendering.</p>
-<p><img src="/images/rendering_texts.png" alt=""></p>
+<p><img src="../images/rendering_texts.png" alt=""></p>
 <p>For the GDI+ application, the rendering classes are shown in the diagram below:</p>
-<p><img src="/images/rendering_gdi.png" alt=""></p>
+<p><img src="../images/rendering_gdi.png" alt=""></p>
 <h3 id="options-and-settings">Options and Settings</h3>
 <p>A class <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></strong> in the <code>SharpVectors.Rendering.Wpf</code> assembly provides the currently available user-defined options for the rendering.
 The other options class shown below is the <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></strong> class, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a> specific output options that will be discussed later:</p>
-<p><img src="/images/drawing_settings.png" alt=""></p>
+<p><img src="../images/drawing_settings.png" alt=""></p>
 <p>All the properties of this class are well documented. The most important properties are</p>
 <ul>
 <li><strong>CultureInfo</strong>: This is the culture information used for the text rendering, and it is passed to the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.media.formattedtext">FormattedText</a> class. The default is the English culture.</li>

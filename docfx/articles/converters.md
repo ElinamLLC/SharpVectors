@@ -7,7 +7,7 @@ title: SVG Converters
 The SVG to WPF conversion is the main use of this SharpVectors library currently. The other uses will be improved with time.
 The following is a diagram showing all the available converters.
 
-![](/images/converters.png)
+![](../images/converters.png)
 
 * **[](xref:SharpVectors.Converters.FileSvgConverter)**: This converts the SVG file to the corresponding XAML file, which can be viewed in WPF application. The root object in the converted file is [DrawingGroup](xref:System.Windows.Media.DrawingGroup).
 * **[](xref:SharpVectors.Converters.FileSvgReader)**: This converts the SVG file to [DrawingGroup](xref:System.Windows.Media.DrawingGroup) and can optionally save the result to a file as XAML. 
@@ -18,7 +18,7 @@ The following is a diagram showing all the available converters.
 
 Now, as shown **[](xref:SharpVectors.Converters.SvgConverter)** is the base class for the converters and defines the following common properties:
 
-![](/images/svgconverter.png)
+![](../images/svgconverter.png)
 
 * **DrawingSettings**: This is the rendering options class, [WpfDrawingSettings](xref:SharpVectors.Renderers.Wpf.WpfDrawingSettings).
 * **SaveXaml**: Determines whether to save conversion output to XAML format.

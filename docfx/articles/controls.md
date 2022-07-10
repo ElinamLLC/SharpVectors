@@ -13,14 +13,14 @@ These are WPF controls for directly viewing the SVG files or sources in the WPF 
 #### 1.3.1 Viewbox Control - SvgViewbox
 The **SvgViewbox** control is a WPF [Viewbox](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.viewbox) derived control for viewing the SVG files in WPF applications, and allowing you to use all the Viewbox decorator properties. 
 
-![](/images/Usage_SvgViewbox.png)
+![](../images/Usage_SvgViewbox.png)
 
 * It wraps a drawing canvas instead of image, so will support interactivity when added to future release of the drawing canvas.
 * The main property is the **SvgViewbox.Source**, which is an [System.Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri) specifying the path to the SVG file.
 
 For the illustration, we will create the following WPF sample application:
 
-![](/images/Usage_SvgViewboxSample.png)
+![](../images/Usage_SvgViewboxSample.png)
 
 1. Create a WPF application project, named **SvgViewboxSample**, similar to the steps in **Section 1.2**.
 2. Modify the XAML of the main window to the following
@@ -77,14 +77,14 @@ For the illustration, we will create the following WPF sample application:
 #### 1.3.2 Canvas Control - SvgCanvas
 The **SvgCanvas** control is a WPF [Canvas](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) derived control for viewing the SVG files in WPF applications, and allowing you to use all the canvas properties. 
 
-![](/images/Usage_SvgCanvas.png)
+![](../images/Usage_SvgCanvas.png)
 
 * It derives from a drawing canvas instead of the generic canvas control, so will support interactivity when added to future release of the drawing canvas.
 * The main property is the **SvgCanvas.Source**, which is an [System.Uri](https://docs.microsoft.com/en-us/dotnet/api/system.uri) specifying the path to the SVG file.
 
 For the illustration, we will create the following WPF sample application:
 
-![](/images/Usage_SvgCanvasSample.png)
+![](../images/Usage_SvgCanvasSample.png)
 
 1. Create a WPF application project, named **SvgCanvasSample**, similar to the steps in **Section 1.2**.
 2. Modify the XAML of the main window to the following

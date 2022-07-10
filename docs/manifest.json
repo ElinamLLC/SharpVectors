@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/Visual Studio/Workspaces/SharpVectors/DocFx",
+  "source_base_path": "D:/Visual Studio/Workspaces/SharpVectors/docfx",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -7998,7 +7998,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/controls.html",
-          "hash": "mbHuGz+A5n0h/xFvL+CFPzyycXvDhJarrUW1T3d75fY="
+          "hash": "V0VGM+MgpZ166s7UARaBeNixVjfcSL1EPL5Wilfp0ZA="
         }
       },
       "is_incremental": false,
@@ -8010,7 +8010,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/converters.html",
-          "hash": "YkjosR7VF1nfcuxQ8V4ctYngWP5Bgg/EsQ+jhrfwcUo="
+          "hash": "XZBIYoqb16gJjfvhATDhupHZ/H6+BQLiC3CymLKEoRs="
         }
       },
       "is_incremental": false,
@@ -8058,7 +8058,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting_started.html",
-          "hash": "c1R9ypGnwhfRbysbQnOFSo3VZslmb06G1unDsuAsELI="
+          "hash": "eBVGhLKpUz/p/vVWgx4GLOulYRBdB1J2ZC9HU6I0oQk="
         }
       },
       "is_incremental": false,
@@ -8078,23 +8078,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/index-old.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/index-old.html",
-          "hash": "KElKSmlgz/LVvLBBDOzlfnnQp6sI+ybotoSbv1dXLU4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "articles/index.md",
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "iP6vZMzkBkm3r4QhDChcXpOqpScQ3/pvJE4reuEdeWs="
+          "hash": "NZCSOILKsqrFWeNg2bRQqRaTr5ldjZ0wVno9gi/wE2Y="
         }
       },
       "is_incremental": false,
@@ -8118,7 +8106,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/markup_extensions.html",
-          "hash": "StfgJ/yuZXlIZqu0l3Iaxe8M6ks7TL/O/nd7JfPdOKw="
+          "hash": "nPpndqqayCtReGu8RXspmyuB8PlREmp8yLavEwED4ms="
         }
       },
       "is_incremental": false,
@@ -8133,7 +8121,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/resource_converter.html",
-          "hash": "U8Vtl6SIU7Ther9gu0CiLvs30Vjt3vJRq3lKXrNfjw4="
+          "hash": "+agBONoGCt26VXOmRvGWy5M1WKX9dDfYyypXsPpejno="
         }
       },
       "is_incremental": false,
@@ -8706,14 +8694,14 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 17,
-          "skipped_file_count": 17
+          "total_file_count": 16,
+          "skipped_file_count": 10
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 661,
-          "skipped_file_count": 661
+          "skipped_file_count": 274
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

@@ -21,7 +21,7 @@ It is the most recent SharpVector SVG converter and adds extension features that
 ## Resource Options
 This converter offers extra settings or options in the form of **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings)** class.
 
-![resource_settings](/images/resource_settings.png)
+![resource_settings](../images/resource_settings.png)
 
 The following are the properties exposed by the resource options to customize the output resource dictionary XAML:
 * **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode)**: An enumeration specifying the type of the resource object; 
@@ -326,7 +326,7 @@ It returns @SharpVectors.Renderers.ResourceKeyResolverType.None, if no resource 
 ### ResourceKeyResolverType - Default
 For the illustration of the resource key resolvers, we will assume a directory containing the following three SVG files
 
-| ![](/images/about.png) | ![](/images/area_chart.png) | ![](/images/crystal_oscillator.png) |
+| ![](../images/about.png) | ![](../images/area_chart.png) | ![](../images/crystal_oscillator.png) |
 |:-------------------------:|:-------------------------------:|:-------------------------------------:|
 |          about.svg           |            area_chart.svg         |           crystal_oscillator.svg          |
 

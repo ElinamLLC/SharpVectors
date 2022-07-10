@@ -11,7 +11,7 @@ The SVG# Reloaded comes with one main end-user application, an SVG Viewer or Bro
 These are WPF markup extensions or type converters for handling the SVG files in WPF applications.
 Currently, the SVG# Reloaded provides one markup extension, **SvgImageExtension**, which converts an SVG source file to a [DrawingImage](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.drawingimage).
 
-![](/images/Usage_SvgImageExtension.png)
+![](../images/Usage_SvgImageExtension.png)
 
 * As shown in the diagram above, all the rendering settings are available on this markup extension as properties.
 * The main property here is the **SvgImageExtension.Source**, which is the path to the SVG file, and the file itself can be located in the following:
@@ -21,7 +21,7 @@ Currently, the SVG# Reloaded provides one markup extension, **SvgImageExtension*
 
 For the illustration, we will create a simple WPF Application shown below, each image displayed is an SVG file in the WPF [Image Control](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.image):
 
-![](/images/Usage_SvgImageSample.png)
+![](../images/Usage_SvgImageSample.png)
 
 1. Create a .NET 3.5 WPF Application in C# or VB.NET, we will name it **SvgImageSample** and rename the main Window, **MainWindow**.
 2. As above, add the following SVG# Reloaded assemblies
