@@ -2,7 +2,7 @@
 
 This project provides a C# library for parsing, converting and viewing the SVG files in WPF applications.
 
-More documentation is available at the [ShapeVectors Github Pages](https://github.com/ElinamLLC/SharpVectors/).
+More documentation is available at the [ShapeVectors Github Pages](https://elinamllc.github.io/SharpVectors/).
 
 > ### Marked for Retirement
 > This package naming of the SharpVectors library will be depreciated in Version 2.0.
