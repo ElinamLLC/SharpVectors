@@ -61,7 +61,7 @@
 
     /* Code Higlighting */
     --code-bg-color: #18191c;
-    --code-color: #8790a3;
+    --code-color: #89d4f1;
     --code-keyword-color: #569cd6;
     --code-comment-color: #57a64a;
     --code-macro-color: #beb7ff;
@@ -152,7 +152,7 @@
 
     /* Scrollbar */
     --scrollbar-track-color: #f2f2f2;
-    --scrollbar-thumb-color: #ccc;
+    --scrollbar-thumb-color: #707bf4; /* #ccc */
 
     /* Alerts and Blocks */
     --alert-info-border-color: rgba(114, 137, 218, .5);
@@ -172,7 +172,7 @@
 
     /* Code Higlighting */
     --code-bg-color: #f6f6f6;
-    --code-color: #8790a3;
+    --code-color: #707bf4;
     --code-keyword-color: #569cd6;
     --code-comment-color: #57a64a;
     --code-macro-color: #beb7ff;

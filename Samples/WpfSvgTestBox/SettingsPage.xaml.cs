@@ -42,7 +42,7 @@ namespace WpfSvgTestBox
 
             _defaultKeyResolver     = new ResourceKeyResolver();
             _dictionaryKeyResolver  = new DictionaryKeyResolver();
-            _codeSnippetKeyResolver = new CodeSnippetKeyResolver();
+            _codeSnippetKeyResolver = new CodeSnippetKeyResolver("", "cs");
             _customKeyResolver      = new SvgTestResourceKeyResolver();
 
             this.Loaded += OnPageLoaded;

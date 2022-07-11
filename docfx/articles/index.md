@@ -7,6 +7,27 @@ The SharpVectors is packaged in several .NET assemblies. Here is the complete li
 
 ![](../images/dependency_full.png)
 
+```mermaid
+graph TD
+    B[SharpVectors.Dom] --> A[SharpVectors.Core]
+    C[SharpVectors.Css] --> A
+    D[SharpVectors.Model] --> A
+    E[SharpVectors.Rendering.Wpf] --> A
+    F[SharpVectors.Converters] --> A
+    E --> G[SharpVectors.Runtime]
+    E --> B
+    E --> C
+    E --> D
+    F --> G
+    F --> E
+    F --> D
+    F --> C
+    F --> B    
+    D --> C
+    D --> B
+    C --> B
+```
+
 * **SharpVectors.Core**: This the core library defining all the required interfaces as defined by the W3C SVG specifications, including the events and the style sheets interfaces. 
 * **SharpVectors.Dom**: This is an extension to the .NET Framework implementation of the XML DOM (XmlDocument) to support the SVG.
 * **SharpVectors.Css**: This is an extension to the .NET Framework DOM to support style sheets interfaces.

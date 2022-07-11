@@ -25,7 +25,7 @@ In general, the following features are implemented:
 * Interaction with the conversion process (by a visitor pattern) to allow for custom hyper-link implementations, font substitutions etc.
 
 **NOTE**: Only Geometry/Drawing level elements are exported, which will not work with Silverlight. 
-See the [Documentation](Docs/Documentation.md) section for more information on the features.
+See the [Documentation](https://elinamllc.github.io/SharpVectors) section for more information on the features.
 
 ## Installation
 The SharpVectors library targets the following frameworks
@@ -48,7 +48,7 @@ The library can be downloaded from the following sources
 * **GitHub Releases Page**, [Version 1.8.0](https://github.com/ElinamLLC/SharpVectors/releases).
 
 ## Documentation
-An introduction and a tutorial with sample are available. See the [Documentation](Docs/Documentation.md) section for more information.
+An introduction and a tutorial with sample are available. See the [Documentation](https://elinamllc.github.io/SharpVectors) section for more information.
 
 ## Sample Applications
 The library includes a number of sample application for both WPF and GDI+. Here are some of them:

@@ -45,6 +45,10 @@ html, body
     background-color: var(--main-bg-color);
 }
 
+img {
+    max-width: 100%;
+}
+
 h1, h2
 {
     margin-block-start: 2em;
@@ -122,13 +126,13 @@ p
 
 ol
 {
-    padding-inline-start: 1em;
+    padding-inline-start: 2em;
     position: relative;
 }
 
 ul 
 {
-    padding-inline-start: 1em;
+    padding-inline-start: 2em;
     position: relative;
 }
 
@@ -139,6 +143,7 @@ ul.level1
 
 ul.level2, ul.level3
 {
+	padding-inline-start: 1em;
     font-size: .9em;
 }
 
@@ -459,18 +464,19 @@ button.btn-link:active
 
 .sidebar .brand 
 {
-    margin-top: .5em;
+    margin-top: .1em;
 }
 
 .logomark
 {
-    height: 28px;
+    height: 42px;
 }
 
 .brand-title
 {
-    padding: 0 .5em;
-    font-size: .9em;
+    height: 32px;
+    padding: 0.5em .5em;
+    font-size: 1.5em;
     color: var(--header-primary);
 }
 
@@ -754,6 +760,7 @@ code
 code
 {
     background-color: var(--code-bg-color) !important;
+    color: var(--code-color);
 }
 
 pre code

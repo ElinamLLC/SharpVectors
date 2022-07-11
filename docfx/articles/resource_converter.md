@@ -709,8 +709,8 @@ End Namespace
 
 ### ResourceKeyResolverType - CodeSnippet
 In applications you need to use a code snippet to implement the @SharpVectors.Renderers.IResourceKeyResolver interface, we provider the code snippet resolver,
-or @SharpVectors.Renderers.CodeSnippetKeyResolver, which uses @System.CodeDom.Compiler.CSharpCodeProvider to compile the implementation in memory
-and use it to resolve the keys. This is used to reduce dependencies but limit the snippets to C# and lanagauge feature support.
+or @SharpVectors.Renderers.CodeSnippetKeyResolver, which uses @System.CodeDom.Compiler.CodeDomProvider to compile the implementation in memory
+and use it to resolve the keys. This is used to reduce dependencies but limits the lanagauge feature supports to .NET 4.0.
 
 For the code snippet, the following conditions are required
 * The namespace must be `SharpVectors.Renderers`.
@@ -719,7 +719,7 @@ For the code snippet, the following conditions are required
 The following sample code uses the snippet resource key resolver, or @SharpVectors.Renderers.CodeSnippetKeyResolver, to resolve the keys. To reduce the code length
 for the screen, we will assume the snippet is stored in a file, and load it from the file.
 
-The test code snippet will convert the specified SVG file name to the lower camel case naming format as the resource key.
+The test code snippet (C# code) will convert the specified SVG file name to the lower camel case naming format as the resource key.
 # [C#](#tab/csharp)
 ```csharp
 using System.Windows;
@@ -749,7 +749,7 @@ namespace SharpVectors.Test.Sample
             }
 
             // Initialize the code snippet key resolver and register it
-            var resolver = new CodeSnippetKeyResolver(codeSnippet);
+            var resolver = new CodeSnippetKeyResolver(codeSnippet, "cs");
             _resourceSettings.RegisterResolver(resolver);
         }
 
@@ -791,7 +791,7 @@ Namespace SharpVectors.Test.Sample
             End Using
 
             ' Initialize the code snippet key resolver and register it
-            Dim resolver = New CodeSnippetKeyResolver(codeSnippet)
+            Dim resolver = New CodeSnippetKeyResolver(codeSnippet, "cs")
             _resourceSettings.RegisterResolver(resolver)
         End Sub
 

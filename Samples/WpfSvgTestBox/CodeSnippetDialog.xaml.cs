@@ -159,7 +159,7 @@ namespace WpfSvgTestBox
             }
             else
             {
-                var compileResult = CodeSnippetKeyResolver.CompileSnippet(codeSnippet);
+                var compileResult = CodeSnippetKeyResolver.CompileSnippet(codeSnippet, "cs");
                 if (compileResult.Item1)
                 {
                     _codeSnippet = codeSnippet;

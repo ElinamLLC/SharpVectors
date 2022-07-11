@@ -10,8 +10,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-using Microsoft.CSharp;
-
 namespace SharpVectors.Renderers
 {
     /// <summary>
@@ -570,6 +568,7 @@ namespace SharpVectors.Renderers
         #region Private Fields
 
         private string _codeSnippet;
+        private string _codeLangugage;
         private IResourceKeyResolver _keyResolver;
 
         #endregion
@@ -580,15 +579,56 @@ namespace SharpVectors.Renderers
         {
         }
 
-        public CodeSnippetKeyResolver(string codeSnippet)
+        public CodeSnippetKeyResolver(string codeSnippet, string codeLangugage)
         {
             _codeSnippet = codeSnippet;
+            if (!string.IsNullOrWhiteSpace(codeLangugage))
+            {
+                var comparer = StringComparison.OrdinalIgnoreCase;
+                if (codeLangugage.Equals("cs", comparer) || 
+                    codeLangugage.Equals("c#", comparer) || 
+                    codeLangugage.Equals("csharp", comparer))
+                {
+                    _codeLangugage = "cs";
+                }
+                else if (codeLangugage.Equals("vb", comparer) || 
+                    codeLangugage.Equals("vbnet", comparer) || 
+                    codeLangugage.Equals("vb.net", comparer))
+                {
+                    _codeLangugage = "vb";
+                }
+            }
             this.CreateKeyResolver();
         }
 
         #endregion
 
         #region Public Properties
+
+        public string CodeLangugage
+        {
+            get {
+                return _codeLangugage;
+            }
+            set {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    var comparer = StringComparison.OrdinalIgnoreCase;
+                    if (value.Equals("cs", comparer) ||
+                        value.Equals("c#", comparer) ||
+                        value.Equals("csharp", comparer))
+                    {
+                        _codeLangugage = "cs";
+                    }
+                    else if (value.Equals("vb", comparer) ||
+                        value.Equals("vbnet", comparer) ||
+                        value.Equals("vb.net", comparer))
+                    {
+                        _codeLangugage = "vb";
+                    }
+                }
+            }
+        }
 
         public string CodeSnippet
         {
@@ -774,12 +814,11 @@ namespace SharpVectors.Renderers
 
         #region Public Methods
 
-        public static Tuple<bool, string> CompileSnippet(string codeSnippet)
+        public static Tuple<bool, string> CompileSnippet(string codeSnippet, string codeLangugage)
         {
             try
             {
-                CodeSnippetKeyResolver keyResolver = new CodeSnippetKeyResolver();
-                keyResolver._codeSnippet = codeSnippet;
+                var keyResolver = new CodeSnippetKeyResolver(codeSnippet, codeLangugage);
 
                 StringBuilder compileOutput = new StringBuilder();
                 CompilerResults compileResults = keyResolver.CompileSnippets();
@@ -818,12 +857,11 @@ namespace SharpVectors.Renderers
             }
         }
 
-        public static Tuple<bool, CodeSnippetKeyResolver, string> CompileResolver(string codeSnippet)
+        public static Tuple<bool, CodeSnippetKeyResolver, string> CompileResolver(string codeSnippet, string codeLangugage)
         {
             try
             {
-                CodeSnippetKeyResolver keyResolver = new CodeSnippetKeyResolver();
-                keyResolver._codeSnippet = codeSnippet;
+                CodeSnippetKeyResolver keyResolver = new CodeSnippetKeyResolver(codeSnippet, codeLangugage);
 
                 StringBuilder compileOutput = new StringBuilder();
                 CompilerResults compileResults = keyResolver.CompileSnippets();
@@ -906,7 +944,7 @@ namespace SharpVectors.Renderers
 
         private CompilerResults CompileSnippets()
         {
-            if (string.IsNullOrWhiteSpace(_codeSnippet))
+            if (string.IsNullOrWhiteSpace(_codeSnippet) || string.IsNullOrWhiteSpace(_codeLangugage))
             {
                 return null;
             }
@@ -943,7 +981,15 @@ namespace SharpVectors.Renderers
             parameters.CompilerOptions = "/optimize+";
 
             var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v4.0" } };
-            CSharpCodeProvider provider = new CSharpCodeProvider(providerOptions);
+            CodeDomProvider provider = null;
+            if (_codeLangugage.Equals("cs", StringComparison.OrdinalIgnoreCase))
+            {
+                provider = CodeDomProvider.CreateProvider("CSharp", providerOptions);
+            }
+            else
+            {
+                provider = CodeDomProvider.CreateProvider("VisualBasic", providerOptions);
+            }
 
             CompilerResults results = provider.CompileAssemblyFromSource(parameters, _codeSnippet);
 

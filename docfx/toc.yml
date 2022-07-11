@@ -1,7 +1,8 @@
 - name: Articles
   href: articles/
-- name: API Documentation
+- name: API Reference
   href: api/
   topicHref: api/index.md
 - name: GitHub
   href: https://github.com/ElinamLLC/SharpVectors
+  
