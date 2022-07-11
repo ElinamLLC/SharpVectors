@@ -39,8 +39,8 @@ the authors of these great articles and projects
 
 ## Related Packages
 
-* Full Package (WPF/GDI+) - Recommended: [SharpVectors](https://www.nuget.org/packages/SharpVectors/)
 * Full Package (WPF/GDI+) - Retiring (Old Name): [ SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/)
+* WPF Package (WPF Only)  - Recommended for WPF: [ SharpVectors.Wpf](https://www.nuget.org/packages/SharpVectors.Wpf/)
 
 ## Feedback
 

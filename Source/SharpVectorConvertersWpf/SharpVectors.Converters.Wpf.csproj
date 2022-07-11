@@ -10,7 +10,15 @@
     <EnableDefaultPageItems>false</EnableDefaultPageItems>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
-    <IsPackable>false</IsPackable>
+	<PackageProjectUrl>https://github.com/ElinamLLC/SharpVectors/</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/ElinamLLC/SharpVectors/</RepositoryUrl>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
@@ -95,7 +103,8 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-	  <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" PrivateAssets="All" />
+	<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpVectorCore\SharpVectors.Core.csproj" />

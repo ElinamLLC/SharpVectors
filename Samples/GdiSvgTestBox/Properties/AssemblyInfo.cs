@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("GdiSvgTestBox")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2021 Elinam LLC")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2022 Elinam LLC")]
+[assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.7.6.0")]
-[assembly: AssemblyFileVersion("1.7.6.0")]
+[assembly: AssemblyVersion("1.8.0.0")]
+[assembly: AssemblyFileVersion("1.8.0.0")]
