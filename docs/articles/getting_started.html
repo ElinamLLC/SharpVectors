@@ -9,7 +9,7 @@
     <title>Getting Started | SharpVectors Documentation </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Getting Started | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -132,7 +132,7 @@
                                     </ul>
                                 </span>
 
-<h2 id="getting-started">Getting Started</h2>
+<h1 id="getting-started">Getting Started</h1>
 
 <p>The SharpVectors library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.</p>
 <p>For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below:</p>
@@ -141,7 +141,7 @@
 <p><img src="../images/rendering_texts.png" alt=""></p>
 <p>For the GDI+ application, the rendering classes are shown in the diagram below:</p>
 <p><img src="../images/rendering_gdi.png" alt=""></p>
-<h3 id="options-and-settings">Options and Settings</h3>
+<h2 id="options-and-settings">Options and Settings</h2>
 <p>A class <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></strong> in the <code>SharpVectors.Rendering.Wpf</code> assembly provides the currently available user-defined options for the rendering.
 The other options class shown below is the <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></strong> class, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a> specific output options that will be discussed later:</p>
 <p><img src="../images/drawing_settings.png" alt=""></p>
@@ -155,7 +155,7 @@ The other options class shown below is the <strong><a class="xref" href="../api/
 <h5>Note</h5>
 <p>The <strong>TextAsGeometry</strong> property is marked as deprecated in this version, and will be removed in version 2.0 of the SharpVectors library.</p>
 </div>
-<h3 id="rendering-process">Rendering Process</h3>
+<h2 id="rendering-process">Rendering Process</h2>
 <p>For the WPF system, the rendering process is managed by various classes listed below: named</p>
 <ul>
 <li><strong><a class="xref" href="../api/SharpVectors.Renderers.Utils.WpfSvgWindow.html">WpfSvgWindow</a></strong>: An class implementing an abstraction of browser window object.</li>

@@ -3,7 +3,7 @@ uid: topic_drawing_converter
 title: FileSvgReader
 ---
 
-## Drawing SVG Converter - FileSvgReader
+# Drawing SVG Converter - FileSvgReader
 The **[](xref:SharpVectors.Converters.FileSvgReader)** converter class takes SVG file as input and outputs [DrawingGroup](xref:System.Windows.Media.DrawingGroup) object.
 The SVG input can also be one of the following
 * @System.Uri: A representation of a resource available to your application locally, on the intranet or internet
@@ -17,7 +17,7 @@ The SVG input can also be one of the following
 > * User demands gave rise to the multiple SVG converters forcing this object to be considered as a converter for simplicity.
 > * This converter will be renamed `DrawingSvgConverter` in SharpVectors 2.x and stripped of some of its shared features (a breaking change).
 
-### Sample Code
+## Sample Code
 
 # [SVG to XAML C#](#tab/csharp)
 ```csharp

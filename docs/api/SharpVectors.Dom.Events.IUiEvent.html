@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface IUiEvent
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -200,7 +200,7 @@ contextual information associated with User Interface events.</p>
   <div class="markdown level0 remarks"><p>Note: To create an instance of the <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html">IUiEvent</a>
 interface, use the feature string <code>&quot;UIEvent&quot;</code> as the value of the
 input parameter used with the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method.</p>
 </div>
   <h3 id="properties">Properties
@@ -266,10 +266,10 @@ event was generated.</p>
   
   <a id="SharpVectors_Dom_Events_IUiEvent_InitUiEvent_" data-uid="SharpVectors.Dom.Events.IUiEvent.InitUiEvent*"></a>
   <h4 id="SharpVectors_Dom_Events_IUiEvent_InitUiEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_" data-uid="SharpVectors.Dom.Events.IUiEvent.InitUiEvent(System.String,System.Boolean,System.Boolean,SharpVectors.Dom.Views.IAbstractView,System.Int64)">InitUiEvent(String, Boolean, Boolean, IAbstractView, Int64)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEvent</a> method is used to
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEvent(String, Boolean, Boolean, IAbstractView, Int64)</a> method is used to
 initialize the value of a <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html">IUiEvent</a>
 created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -325,9 +325,9 @@ behavior of the event.</p>
   </table>
   <h5 id="SharpVectors_Dom_Events_IUiEvent_InitUiEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method may only be called before the
-<a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEvent</a> has been dispatched via
+<a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEvent(String, Boolean, Boolean, IAbstractView, Int64)</a> has been dispatched via
 the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times during that phase
 if necessary. If called multiple times, the final invocation takes
 precedence.</p>
@@ -336,13 +336,13 @@ precedence.</p>
   
   <a id="SharpVectors_Dom_Events_IUiEvent_InitUiEventNs_" data-uid="SharpVectors.Dom.Events.IUiEvent.InitUiEventNs*"></a>
   <h4 id="SharpVectors_Dom_Events_IUiEvent_InitUiEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_" data-uid="SharpVectors.Dom.Events.IUiEvent.InitUiEventNs(System.String,System.String,System.Boolean,System.Boolean,SharpVectors.Dom.Views.IAbstractView,System.Int64)">InitUiEventNs(String, String, Boolean, Boolean, IAbstractView, Int64)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEventNs</a> method is used
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEventNs(String, String, Boolean, Boolean, IAbstractView, Int64)</a> method is used
 to initialize the value of a <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html">IUiEvent</a>
 created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method. This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html">IUiEvent</a> has been dispatched via the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times during that phase
 if necessary. If called multiple times, the final invocation
 takes precedence.</p>
@@ -394,7 +394,7 @@ interface).</p>
       <tr>
         <td><a class="xref" href="SharpVectors.Dom.Views.IAbstractView.html">IAbstractView</a></td>
         <td><span class="parametername">viewArg</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">Event</a>'s
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a>'s
 <a class="xref" href="SharpVectors.Dom.Views.IAbstractView.html">IAbstractView</a></p>
 </td>
       </tr>

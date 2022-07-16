@@ -2,7 +2,7 @@
 uid: topic_getting_started
 title: Getting Started
 ---
-## Getting Started
+# Getting Started
 The SharpVectors library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.
 
 For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below: 
@@ -17,7 +17,7 @@ For the GDI+ application, the rendering classes are shown in the diagram below:
 
 ![](../images/rendering_gdi.png)
 
-### Options and Settings
+## Options and Settings
 
 A class **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingSettings)** in the `SharpVectors.Rendering.Wpf` assembly provides the currently available user-defined options for the rendering. 
 The other options class shown below is the **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings)** class, [ResourceDictionary](xref:System.Windows.ResourceDictionary) specific output options that will be discussed later:
@@ -32,7 +32,7 @@ All the properties of this class are well documented. The most important propert
 > [!NOTE]
 > The **TextAsGeometry** property is marked as deprecated in this version, and will be removed in version 2.0 of the SharpVectors library.
 
-### Rendering Process
+## Rendering Process
 For the WPF system, the rendering process is managed by various classes listed below: named 
 * **[](xref:SharpVectors.Renderers.Utils.WpfSvgWindow)**: An class implementing an abstraction of browser window object.
 * **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingRenderer)**: The controlling class used by the WPF implementation.

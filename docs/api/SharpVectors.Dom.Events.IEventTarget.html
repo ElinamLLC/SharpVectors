@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface IEventTarget
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -165,12 +165,12 @@ and target ancestors, i.e. all DOM <a class="xref" href="SharpVectors.Dom.INode.
 the tree support this interface when the implementation conforms to
 DOM Level 3 Events and, therefore, this interface can be obtained by
 using binding-specific casting methods on an instance of the
-<a class="xref" href="SharpVectors.Dom.INode.html">Node</a> interface.
+<a class="xref" href="SharpVectors.Dom.INode.html">INode</a> interface.
 </p>
 <p>
 Invoking multiple times
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_AddEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">AddEventListener</a> or
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_System_Object_">AddEventListenerNs</a> on the same
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_AddEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">AddEventListener(String, EventListener, Boolean)</a> or
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_System_Object_">AddEventListenerNs(String, String, EventListener, Boolean, Object)</a> on the same
 <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a> with the same parameters
 (<code>namespaceUri</code>, <code>type</code>, <code>listener</code>, and
 <code>useCapture</code>) is considered to be a no-op and thus independently
@@ -179,8 +179,8 @@ of the event group. They do not cause the
 than once and do not cause a change in the triggering order. In order
 to guarantee that an event listener will be added to the event target
 for the specified event group, one needs to invoke
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListener</a> or
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListenerNs</a> first.
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListener(String, EventListener, Boolean)</a> or
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListenerNs(String, String, EventListener, Boolean)</a> first.
 </p>
 </div>
   <h3 id="methods">Methods
@@ -212,7 +212,7 @@ bubbling phases. <a href="https://www.w3.org/TR/SVG/interact.html#SVGEvents">htt
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a> associated
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a> associated
 with the event for which the user is registering.</p>
 </td>
       </tr>
@@ -268,14 +268,14 @@ event flow or its target and bubbling phases.</p>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">namespaceUri</span></td>
         <td><p>Specifies the
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a>
 associated with the event for which the user is registering.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a>
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a>
 associated with the event for which the user is registering.</p>
 </td>
       </tr>
@@ -361,8 +361,8 @@ implementation's event model.</p>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p>Indicates whether any of the listeners which handled the event
 called
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">IEvent.PreventDefault</a>.
-If <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">IEvent.PreventDefault</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault()</a>.
+If <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault()</a>
 was called the returned value is <code>false</code>, else it is
 <code>true</code>.</p>
 </td>
@@ -373,7 +373,7 @@ was called the returned value is <code>false</code>, else it is
   <div class="markdown level1 remarks"><p>The
 <a href="https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-event-target">event target</a>
 of the event is the <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a>
-object on which <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent</a>
+object on which <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 is called.</p>
 </div>
   <h5 class="exceptions">Exceptions</h5>
@@ -433,14 +433,14 @@ listener registered for the specified event type.</p>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">namespaceUri</span></td>
         <td><p>Specifies the
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a>
 associated with the event.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a>
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a>
 associated with the event.</p>
 </td>
       </tr>
@@ -499,7 +499,7 @@ group.</p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a> for which
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a> for which
 the user registered the event listener.</p>
 </td>
       </tr>
@@ -525,7 +525,7 @@ bubbling phases, and vice versa.</p>
     </tbody>
   </table>
   <h5 id="SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Calling <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListener</a>
+  <div class="markdown level1 remarks"><p>Calling <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListener(String, EventListener, Boolean)</a>
 with arguments which do not identify any currently registered
 <a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a> on the
 <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a> has no effect.</p>
@@ -556,7 +556,7 @@ group or the default group.</p>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">namespaceUri</span></td>
         <td><p>Specifies the
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a>
 associated with the event for which the user registered the event
 listener.</p>
 </td>
@@ -564,7 +564,7 @@ listener.</p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a> associated
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a> associated
 with the event for which the user registered the event listener.</p>
 </td>
       </tr>
@@ -593,7 +593,7 @@ and bubbling phases, and vice versa.</p>
   </table>
   <h5 id="SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Calling
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListenerNs</a> with
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">RemoveEventListenerNs(String, String, EventListener, Boolean)</a> with
 arguments which do not identify any currently registered
 <a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a> on the EventTarget
 has no effect.</p>
@@ -628,14 +628,14 @@ descendants.</p>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">namespaceUri</span></td>
         <td><p>Specifies the
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a>
 associated with the event.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a>
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a>
 associated with the event.</p>
 </td>
       </tr>

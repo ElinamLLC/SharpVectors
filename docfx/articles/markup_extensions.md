@@ -3,11 +3,11 @@ uid: topic_markup_extensions
 title: SVG Markup Extensions
 ---
 
-## SVG Markup Extensions
+# SVG Markup Extensions
 The SVG# Reloaded comes with one main end-user application, an SVG Viewer or Browser. The viewer is named Squiggle.NET or simply Squiggle, after a similar viewer in the [Batik SVG Toolkit](http://xmlgraphics.apache.org/batik/) (since the target is to produce something similar to the [Batik Squiggle](http://xmlgraphics.apache.org/batik/tools/browser.html)).
 
 
-### [](#TypeConverters)1.2 WPF Extensions and Type Converters
+## WPF Extensions and Type Converters
 These are WPF markup extensions or type converters for handling the SVG files in WPF applications.
 Currently, the SVG# Reloaded provides one markup extension, **SvgImageExtension**, which converts an SVG source file to a [DrawingImage](https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.drawingimage).
 

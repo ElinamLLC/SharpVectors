@@ -3,14 +3,14 @@ uid: topic_controls
 title: SVG Controls
 ---
 
-## SVG Controls
+# SVG Controls
 The SVG# Reloaded comes with one main end-user application, an SVG Viewer or Browser. The viewer is named Squiggle.NET or simply Squiggle, after a similar viewer in the [Batik SVG Toolkit](http://xmlgraphics.apache.org/batik/) (since the target is to produce something similar to the [Batik Squiggle](http://xmlgraphics.apache.org/batik/tools/browser.html)).
 
 
-### [](#Controls)1.3 Controls and Viewers
+## Controls and Viewers
 These are WPF controls for directly viewing the SVG files or sources in the WPF applications.
 
-#### 1.3.1 Viewbox Control - SvgViewbox
+### 1.3.1 Viewbox Control - SvgViewbox
 The **SvgViewbox** control is a WPF [Viewbox](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.viewbox) derived control for viewing the SVG files in WPF applications, and allowing you to use all the Viewbox decorator properties. 
 
 ![](../images/Usage_SvgViewbox.png)
@@ -74,7 +74,7 @@ For the illustration, we will create the following WPF sample application:
 	```
 3. Compile and run the program.
 
-#### 1.3.2 Canvas Control - SvgCanvas
+### 1.3.2 Canvas Control - SvgCanvas
 The **SvgCanvas** control is a WPF [Canvas](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) derived control for viewing the SVG files in WPF applications, and allowing you to use all the canvas properties. 
 
 ![](../images/Usage_SvgCanvas.png)
@@ -158,6 +158,6 @@ For the illustration, we will create the following WPF sample application:
 	```
 3. Compile and run the program.
 
-### [](#Codes)1.4 Sample Codes
+## Sample Codes
 Download the sample codes from the **TutorialSamples Folder** tab.
 

@@ -53,14 +53,14 @@ The following are the properties exposed by the resource options to customize th
 To freeze a resource object declared in markup, the `PresentationOptions:Freeze` attribute is used, as shown above as `po.Freeze`, and the `xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"` namespace is added.
     > [!NOTE] 
     > If this property is set to `true`, it is admisable to set the `ResourceAccessType` type below to `Static`.
-* **IndentSpaces**: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the @System.Xml.XmlReaderSettings. The default is `2 spaces`.
-* **NumericPrecision**: This specifies numeric precision or number of decimal places for the floating number. The default is `4`, in complaince to the SVG specifications. Setting this to `-1` will disable this property.
-* **ColorNameFormat**: This determines the key name of color objects, if both **BindToResources**  and **BindToColors** properties are enabled. The default is `Color{0}`.
-* **BrushNameFormat**: This determines the key name of brush objects, if the **BindToResources** property is enabled. The default is `Brush{0}`.
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.IndentSpaces)**: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the @System.Xml.XmlReaderSettings. The default is `2 spaces`.
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.NumericPrecision)**: This specifies numeric precision or number of decimal places for the floating number. The default is `4`, in complaince to the SVG specifications. Setting this to `-1` will disable this property.
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorNameFormat)**: This determines the key name of color objects, if both **BindToResources**  and **BindToColors** properties are enabled. The default is `Color{0}`.
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.BrushNameFormat)**: This determines the key name of brush objects, if the **BindToResources** property is enabled. The default is `Brush{0}`.
     > [!NOTE] 
     > Only solid color brushes are supported and extracted from the drawings.
-* **PenNameFormat**:  This determines the key name of pen or stroke objects, if the **BindToResources** property is enabled. The default is `Pen{0}`
-* **BindToResources**: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is `true`.
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.PenNameFormat)**:  This determines the key name of pen or stroke objects, if the **BindToResources** property is enabled. The default is `Pen{0}`
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToResources)**: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is `true`.
     # [BindToResources == true](#tab/xaml1)
     ```xml
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 

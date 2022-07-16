@@ -2,7 +2,7 @@
   href: index.md
 - name: Getting Started
   href: getting_started.md
-- name: SVG Converters
+- name: Converters
   href: converters.md
   items:
   - name: File Converters
@@ -17,8 +17,18 @@
     href: directory_converter.md
   - name: Resource Dictionary Converters
     href: resource_converter.md
-- name: SVG Markup Extensions
+- name: Markup Extensions
   href: markup_extensions.md
-- name: SVG Controls
+- name: Controls
   href: controls.md
-
+- name: Applications
+  href: applications.md
+- name: Samples
+  href: samples.md
+- name: Test Tools
+  href: test_tools.md
+- name: FAQ
+  href: faq.md
+- name: Licenses
+  href: licenses.md
+  

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" height="669" width="604">
+<desc>Coat of Arms of Switzerland</desc>
+	<path fill="#DA291C" d="M302,2 C 402,2 502,19 602,52 C 602,286 604,534 302,667 C 0,534 2,286 2,52 C 102,19 202,2 302,2 z"/>
+	<path fill="#fff" d="M102,242 h140 v-140 h120 v140 h140 v120 h-140 v140 h-120 v-140 h-140 z"/>
+</svg>

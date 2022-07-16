@@ -11,7 +11,7 @@ using System.Windows.Interop;
 namespace SharpVectors.Runtime
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct POINT
+    internal struct POINT
     {
         public int X;
         public int Y;
@@ -1183,6 +1183,5 @@ namespace SharpVectors.Runtime
         internal class ScreenCaptureClass
         {
         }
-
     }
 }

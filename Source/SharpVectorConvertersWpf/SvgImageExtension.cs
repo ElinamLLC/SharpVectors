@@ -115,8 +115,7 @@ namespace SharpVectors.Converters
             {
                 if (string.IsNullOrWhiteSpace(_appName))
                 {
-                    if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
-                        LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    if (this.IsDesignMode() || LicenseManager.UsageMode == LicenseUsageMode.Designtime)
                     {
                         this.GetAppName();
                     }
@@ -132,12 +131,6 @@ namespace SharpVectors.Converters
             }
             catch
             {
-                if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
-                    LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                {
-                    return null;
-                }
-
                 //throw; #82
             }
 
@@ -164,6 +157,11 @@ namespace SharpVectors.Converters
             {
                 return null;
             }
+            if (string.IsNullOrWhiteSpace(_appName))
+            {
+                this.GetAppName();
+            }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             Uri svgSource;
             if (Uri.TryCreate(_svgPath, UriKind.RelativeOrAbsolute, out svgSource))
@@ -195,25 +193,47 @@ namespace SharpVectors.Converters
                 IUriContext uriContext = serviceProvider.GetService(typeof(IUriContext)) as IUriContext;
                 if (uriContext != null && uriContext.BaseUri != null)
                 {
-                    return new Uri(uriContext.BaseUri, svgSource);
+                    var contextUri = new Uri(uriContext.BaseUri, svgSource);
+                    if (contextUri.IsAbsoluteUri)
+                    {
+                        if (contextUri.IsFile && File.Exists(contextUri.LocalPath))
+                        {
+                            return contextUri;
+                        }
+                    }
+                    if (uriContext is DependencyObject)
+                    {
+                        var baseUri = System.Windows.Navigation.BaseUriHelper.GetBaseUri((DependencyObject)uriContext);
+                        if (baseUri != null && baseUri != uriContext.BaseUri)
+                        {
+                            contextUri = new Uri(baseUri, svgSource);
+                            if (contextUri.IsFile && File.Exists(contextUri.LocalPath))
+                            {
+                                return contextUri;
+                            }
+                        }
+                    }
                 }
                 string asmName = _appName;
-                // It should not be the SharpVectors.Converters.Wpf.dll, which contains this extension...
-                if (assembly != null && !string.Equals("SharpVectors.Converters.Wpf",
-                    assembly.GetName().Name, StringComparison.OrdinalIgnoreCase))
+                if (string.IsNullOrWhiteSpace(asmName) && assembly != null)
                 {
-                    asmName = assembly.GetName().Name;
+                    // It should not be the SharpVectors.Converters.Wpf.dll, which contains this extension...
+                    string tempName = assembly.GetName().Name;
+                    if (!string.Equals("SharpVectors.Converters.Wpf", tempName, comparer)
+                        && !string.Equals("WpfSurface", tempName, comparer))
+                    {
+                        asmName = tempName;
+                    }
                 }
 
                 svgPath = _svgPath;
-                if (_svgPath.StartsWith("/", StringComparison.OrdinalIgnoreCase))
+                if (_svgPath.StartsWith("/", comparer))
                 {
                     svgPath = svgPath.TrimStart('/');
                 }
 
                 // A little hack to display preview in design mode
-                bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
-                if (designTime && !string.IsNullOrWhiteSpace(_appName))
+                if (this.IsDesignMode(serviceProvider) && !string.IsNullOrWhiteSpace(_appName))
                 {
                     string uriDesign = string.Format("/{0};component/{1}", _appName, svgPath);
 

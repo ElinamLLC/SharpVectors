@@ -59,9 +59,8 @@ namespace SharpVectors.Converters
         /// optimized using the <see cref="StreamGeometry"/>.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the path geometry is optimized
-        /// using the <see cref="StreamGeometry"/>; otherwise, it is 
-        /// <see langword="false"/>. The default is <see langword="true"/>.
+        /// This is <see langword="true"/> if the path geometry is optimized using the <see cref="StreamGeometry"/>; 
+        /// otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
         /// </value>
         public bool OptimizePath
         {
@@ -185,8 +184,7 @@ namespace SharpVectors.Converters
         {
             string scheme = null;
             // A little hack to display preview in design mode: The design mode Uri is not absolute.
-            bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
-            if (designTime && svgSource.IsAbsoluteUri == false)
+            if (this.IsDesignMode() && svgSource.IsAbsoluteUri == false)
             {
                 scheme = "pack";
             }
@@ -371,9 +369,10 @@ namespace SharpVectors.Converters
 
         protected Assembly GetEntryAssembly()
         {
-            string XDesProc = "XDesProc"; // WPF designer process - Designer Isolation
-            string DevEnv   = "DevEnv";   // WPF designer process - Surface Isolation
-            var comparer    = StringComparison.OrdinalIgnoreCase;
+            string XDesProc   = "XDesProc";   // WPF designer process - Designer Isolation
+            string DevEnv     = "DevEnv";     // WPF designer process - Surface Isolation
+            string WpfSurface = "WpfSurface"; // WPF designer process - New .NETCore
+            var comparer      = StringComparison.OrdinalIgnoreCase;
 
             Assembly asm = null;
             try
@@ -383,7 +382,9 @@ namespace SharpVectors.Converters
                 if (asm != null)
                 {
                     var appName = asm.GetName().Name;
-                    if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
+                    if (appName.StartsWith(XDesProc, comparer)
+                        || appName.StartsWith(DevEnv, comparer)
+                        || appName.StartsWith(WpfSurface, comparer))
                     {
                         asm = null;
                     }
@@ -399,6 +400,7 @@ namespace SharpVectors.Converters
                           where assmName.EndsWith(".exe", comparer)
                               && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
                               && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
                           select assembly
                           ).FirstOrDefault();
 #else
@@ -409,6 +411,7 @@ namespace SharpVectors.Converters
                           where assmName.EndsWith(".exe", comparer)
                               && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
                               && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
                           select assembly
                           ).FirstOrDefault();
 #endif
@@ -439,6 +442,7 @@ namespace SharpVectors.Converters
                           where assmName.EndsWith(".exe", comparer)
                               && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
                               && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
                           select assembly
                           ).FirstOrDefault();
 #else
@@ -449,6 +453,7 @@ namespace SharpVectors.Converters
                           where assmName.EndsWith(".exe", comparer)
                               && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
                               && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
                           select assembly
                           ).FirstOrDefault();
 #endif
@@ -464,13 +469,48 @@ namespace SharpVectors.Converters
             Assembly asm = null;
             try
             {
+                var invalidAssemblies = new string[] { "SharpVectors.Converters.Wpf", "WpfSurface", "XDesProc", "DevEnv" };
+
                 asm = Assembly.GetExecutingAssembly();
+                string asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
+                if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
+                {
+                    return asm;
+                }
+                else
+                {
+                    asm = Assembly.GetEntryAssembly();
+                    asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
+                    if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return asm;
+                    }
+                }
+
+                return this.GetEntryAssembly();
             }
             catch
             {
                 asm = Assembly.GetEntryAssembly();
             }
             return asm;
+        }
+
+        protected bool IsDesignMode(IServiceProvider serviceProvider = null)
+        {
+            if (serviceProvider != null)
+            {
+                var pvt = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
+                if (pvt != null)
+                {
+                    var targetObject = pvt.TargetObject as DependencyObject;
+                    if (targetObject != null)
+                    {
+                        return DesignerProperties.GetIsInDesignMode(targetObject);
+                    }
+                }
+            }
+            return DesignerProperties.GetIsInDesignMode(new DependencyObject());
         }
 
         #endregion

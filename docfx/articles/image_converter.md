@@ -3,7 +3,7 @@ uid: topic_image_converter
 title: ImageSvgConverter
 ---
 
-## File SVG Converter - ImageSvgConverter
+# File SVG Converter - ImageSvgConverter
 The **[](xref:SharpVectors.Converters.ImageSvgConverter)** converter class takes SVG file as input and outputs XAML file.
 The SVG input can also be one of the following
 * @System.IO.Stream: A stream object providing access to the SVG input content.
@@ -13,7 +13,7 @@ The SVG input can also be one of the following
 > [!NOTE] 
 > The output is always to a local file or a network file. It does not provide a backup of existing file.
 
-### Sample Code
+## Sample Code
 The following illustrate a simple case of using the static image SVG converter.
 
 # [SVG to XAML C#](#tab/csharp)

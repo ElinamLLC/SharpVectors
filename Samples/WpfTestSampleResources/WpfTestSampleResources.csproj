@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+	  <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
+	  <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\clapperboard.svg" />
+    <Resource Include="Images\clear_filters.svg" />
+    <Resource Include="Images\clock.svg" />
+    <Resource Include="Images\close_up_mode.svg" />
+    <Resource Include="Images\down.svg" />
+    <Resource Include="Images\down_left.svg" />
+    <Resource Include="Images\down_right.svg" />
+    <Resource Include="Resources\Coat_of_arms_of_Bosnia_and_Herzegovina.svg" />
+    <Resource Include="Resources\Coat_of_Arms_of_Switzerland.svg" />
+    <Resource Include="Resources\Emblem_of_Ethiopia.svg" />
+    <Resource Include="Resources\Imperial_Seal_of_Japan.svg" />
+    <Resource Include="Resources\Lesser_Coat_of_Arms_of_Ukraine.svg" />
+    <Resource Include="Resources\National_Emblem_of_the_Republic_of_China.svg" />
+  </ItemGroup>
+
+</Project>

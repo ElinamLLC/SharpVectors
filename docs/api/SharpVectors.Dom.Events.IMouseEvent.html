@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface IMouseEvent
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -546,9 +546,9 @@ the origin of the screen coordinate system.</p>
   
   <a id="SharpVectors_Dom_Events_IMouseEvent_InitMouseEvent_" data-uid="SharpVectors.Dom.Events.IMouseEvent.InitMouseEvent*"></a>
   <h4 id="SharpVectors_Dom_Events_IMouseEvent_InitMouseEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_UInt16_SharpVectors_Dom_Events_IEventTarget_" data-uid="SharpVectors.Dom.Events.IMouseEvent.InitMouseEvent(System.String,System.Boolean,System.Boolean,SharpVectors.Dom.Views.IAbstractView,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.UInt16,SharpVectors.Dom.Events.IEventTarget)">InitMouseEvent(String, Boolean, Boolean, IAbstractView, Int64, Int64, Int64, Int64, Int64, Boolean, Boolean, Boolean, Boolean, UInt16, IEventTarget)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html#SharpVectors_Dom_Events_IMouseEvent_InitMouseEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_UInt16_SharpVectors_Dom_Events_IEventTarget_">InitMouseEvent</a> method is used
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html#SharpVectors_Dom_Events_IMouseEvent_InitMouseEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_UInt16_SharpVectors_Dom_Events_IEventTarget_">InitMouseEvent(String, Boolean, Boolean, IAbstractView, Int64, Int64, Int64, Int64, Int64, Boolean, Boolean, Boolean, Boolean, UInt16, IEventTarget)</a> method is used
 to initialize the value of a MouseEvent created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -672,7 +672,7 @@ the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a>.</p>
   <div class="markdown level1 remarks"><p>This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html">IMouseEvent</a> has been dispatched via
 the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times before being
 dispatched. If called multiple times, the final invocation
 takes precedence.</p>
@@ -681,10 +681,10 @@ takes precedence.</p>
   
   <a id="SharpVectors_Dom_Events_IMouseEvent_InitMouseEventNs_" data-uid="SharpVectors.Dom.Events.IMouseEvent.InitMouseEventNs*"></a>
   <h4 id="SharpVectors_Dom_Events_IMouseEvent_InitMouseEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_UInt16_SharpVectors_Dom_Events_IEventTarget_System_Boolean_" data-uid="SharpVectors.Dom.Events.IMouseEvent.InitMouseEventNs(System.String,System.String,System.Boolean,System.Boolean,SharpVectors.Dom.Views.IAbstractView,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.UInt16,SharpVectors.Dom.Events.IEventTarget,System.Boolean)">InitMouseEventNs(String, String, Boolean, Boolean, IAbstractView, Int64, Int64, Int64, Int64, Int64, Boolean, Boolean, Boolean, Boolean, UInt16, IEventTarget, Boolean)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html#SharpVectors_Dom_Events_IMouseEvent_InitMouseEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_UInt16_SharpVectors_Dom_Events_IEventTarget_System_Boolean_">InitMouseEventNs</a> method
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html#SharpVectors_Dom_Events_IMouseEvent_InitMouseEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Boolean_System_Boolean_System_Boolean_System_Boolean_System_UInt16_SharpVectors_Dom_Events_IEventTarget_System_Boolean_">InitMouseEventNs(String, String, Boolean, Boolean, IAbstractView, Int64, Int64, Int64, Int64, Int64, Boolean, Boolean, Boolean, Boolean, UInt16, IEventTarget, Boolean)</a> method
 is used to initialize the value of a
 <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html">IMouseEvent</a> created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 interface.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -823,7 +823,7 @@ coordinate.</p>
   <div class="markdown level1 remarks"><p>This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.IMouseEvent.html">IMouseEvent</a> has been dispatched via
 the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times during that phase
 if necessary. If called multiple times, the final invocation takes
 precedence.</p>

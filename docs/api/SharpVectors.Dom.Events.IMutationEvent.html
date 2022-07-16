@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface IMutationEvent
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -199,7 +199,7 @@ information associated with Mutation events.</p>
   <h5 id="SharpVectors_Dom_Events_IMutationEvent_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Note: To create an instance of the <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> interface, use the
 feature string <code>&quot;MutationEvent&quot;</code> as the value of the input parameter used with the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a> method.</p>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a> method.</p>
 </div>
   <h3 id="properties">Properties
   </h3>
@@ -209,10 +209,10 @@ feature string <code>&quot;MutationEvent&quot;</code> as the value of the input 
   <h4 id="SharpVectors_Dom_Events_IMutationEvent_AttrChange" data-uid="SharpVectors.Dom.Events.IMutationEvent.AttrChange">AttrChange</h4>
   <div class="markdown level1 summary"><p><code>attrChange</code> indicates the type of change which triggered
 the DOMAttrModified event. The values can be
-<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a>,
-<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Addition">AttrChangeType.Addition</a>,
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">Modification</a>,
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Addition">Addition</a>,
 or
-<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Removal">AttrChangeType.Removal</a>.</p>
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Removal">Removal</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -240,7 +240,7 @@ or
   <h4 id="SharpVectors_Dom_Events_IMutationEvent_AttrName" data-uid="SharpVectors.Dom.Events.IMutationEvent.AttrName">AttrName</h4>
   <div class="markdown level1 summary"><p><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_AttrName">AttrName</a> indicates the name of the
 changed attribute node in a
-<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a>
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">Modification</a>
 event.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -298,7 +298,7 @@ DOMCharacterDataModified events.</p>
   <h4 id="SharpVectors_Dom_Events_IMutationEvent_PrevValue" data-uid="SharpVectors.Dom.Events.IMutationEvent.PrevValue">PrevValue</h4>
   <div class="markdown level1 summary"><p><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_PrevValue">PrevValue</a> indicates the previous value
 of the attribute node in
-<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a>
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">Modification</a>
 events, and of the <a class="xref" href="SharpVectors.Dom.ICharacterData.html">ICharacterData</a>
 node in DOMCharacterDataModified events.</p>
 </div>
@@ -354,7 +354,7 @@ mutation event.</p>
 has changed, the <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_RelatedNode">RelatedNode</a> is the changed parent. If an event
 is instead dispatched to a subtree indicating a node was changed within it, the
 <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_RelatedNode">RelatedNode</a> is the changed node. In the case of the
-<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a> event it indicates the
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">Modification</a> event it indicates the
 attribute node which was modified, added, or removed.</p>
 </div>
   <h3 id="methods">Methods
@@ -363,14 +363,14 @@ attribute node which was modified, added, or removed.</p>
   
   <a id="SharpVectors_Dom_Events_IMutationEvent_InitMutationEvent_" data-uid="SharpVectors.Dom.Events.IMutationEvent.InitMutationEvent*"></a>
   <h4 id="SharpVectors_Dom_Events_IMutationEvent_InitMutationEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_" data-uid="SharpVectors.Dom.Events.IMutationEvent.InitMutationEvent(System.String,System.Boolean,System.Boolean,SharpVectors.Dom.INode,System.String,System.String,System.String,SharpVectors.Dom.Events.AttrChangeType)">InitMutationEvent(String, Boolean, Boolean, INode, String, String, String, AttrChangeType)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_InitMutationEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEvent</a> method
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_InitMutationEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEvent(String, Boolean, Boolean, INode, String, String, String, AttrChangeType)</a> method
 is used to initialize the value of a
 <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method. This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> has been
 dispatched via the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times before being
 dispatched if necessary. If called multiple times, the final
 invocation takes precedence.</p>
@@ -454,10 +454,10 @@ be <code>null</code>.</p>
   
   <a id="SharpVectors_Dom_Events_IMutationEvent_InitMutationEventNs_" data-uid="SharpVectors.Dom.Events.IMutationEvent.InitMutationEventNs*"></a>
   <h4 id="SharpVectors_Dom_Events_IMutationEvent_InitMutationEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_" data-uid="SharpVectors.Dom.Events.IMutationEvent.InitMutationEventNs(System.String,System.String,System.Boolean,System.Boolean,SharpVectors.Dom.INode,System.String,System.String,System.String,SharpVectors.Dom.Events.AttrChangeType)">InitMutationEventNs(String, String, Boolean, Boolean, INode, String, String, String, AttrChangeType)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_InitMutationEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEventNs</a>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_InitMutationEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEventNs(String, String, Boolean, Boolean, INode, String, String, String, AttrChangeType)</a>
 method is used to initialize the value of a
 <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -546,7 +546,7 @@ be <code>null</code>.</p>
   <div class="markdown level1 remarks"><p>This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> has been
 dispatched via the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times during that phase
 if necessary. If called multiple times, the final invocation
 takes precedence.</p>

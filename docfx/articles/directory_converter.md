@@ -3,13 +3,13 @@ uid: topic_directory_converter
 title: DirectorySvgConverter
 ---
 
-## Directory SVG Converter - DirectorySvgConverter
+# Directory SVG Converter - DirectorySvgConverter
 The **[](xref:SharpVectors.Converters.DirectorySvgConverter)** converter class converts a directory (and optionally the subdirectories) of SVG 
 input files to directory of XAML or static image files. It uses
 * **[](xref:SharpVectors.Converters.FileSvgReader)**: If the requested output is XAML file, or
 * **[](xref:SharpVectors.Converters.ImageSvgConverter)**: If the requested output is static image.
 
-### Sample Code
+## Sample Code
 The following codes illustrate how to recursively convert a directory of SVG to a directory of XAML files (the default), maintaining the order of the
 subdirectories.
 

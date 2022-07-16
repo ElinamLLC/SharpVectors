@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
 using System.Reflection;
+using System.Diagnostics;
 using System.Globalization;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -20,8 +21,9 @@ using SharpVectors.Dom.Utils;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
-using DpiScale     = SharpVectors.Runtime.DpiScale;
+using DpiScale = SharpVectors.Runtime.DpiScale;
 using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+using SharpVectors.Converters.Utils;
 
 namespace SharpVectors.Converters
 {
@@ -156,6 +158,12 @@ namespace SharpVectors.Converters
            DependencyProperty.Register("MessageStrokeBrush", typeof(Brush), typeof(SvgCanvas), 
               new FrameworkPropertyMetadata(Brushes.Maroon, OnMessageStyleChanged));
 
+        /// <summary>
+        ///  The <see cref="DependencyProperty"/> for the <c>AppName</c> property.
+        /// </summary>
+        public static readonly DependencyProperty AppNameProperty = DependencyProperty.Register(
+            "AppName", typeof(string), typeof(SvgCanvas), new FrameworkPropertyMetadata((string)null));
+
         #endregion
 
         #region Private Fields
@@ -207,6 +215,24 @@ namespace SharpVectors.Converters
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// The <c>AppName</c> for the element.
+        /// If the value is of type <c>AppName</c>, then that is the <c>AppName</c> that will be used.
+        /// If the value is of any other type, then that value will be used
+        /// as the content for a <c>AppName</c> provided by the system. Refer to SvgObjectService
+        /// for attached properties to customize the <c>AppName</c>.
+        /// </summary>
+        [Bindable(true), Category("Appearance")]
+        public string AppName
+        {
+            get {
+                return (string)GetValue(AppNameProperty);
+            }
+            set {
+                this.SetValue(AppNameProperty, value);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the path to the SVG file to load into this <see cref="Canvas"/>.
@@ -1318,7 +1344,19 @@ namespace SharpVectors.Converters
                 settings.DpiScale = _dpiScale;
             }
 
-            string scheme = svgSource.Scheme;
+            string scheme = null;
+            if (DesignerProperties.GetIsInDesignMode(this) && svgSource.IsAbsoluteUri == false)
+            {
+                scheme = "pack";
+            }
+            else if (svgSource.IsAbsoluteUri == false)
+            {
+                scheme = "pack"; //TODO
+            }
+            else
+            {
+                scheme = svgSource.Scheme;
+            }
             if (string.IsNullOrWhiteSpace(scheme))
             {
                 return null;
@@ -1607,7 +1645,7 @@ namespace SharpVectors.Converters
             }
             svgPath = svgPath.Replace('/', '\\');
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = this.GetExecutingAssembly(); // Assembly.GetExecutingAssembly();
             string localFile = PathUtils.Combine(assembly, svgPath);
 
             if (File.Exists(localFile))
@@ -1618,13 +1656,57 @@ namespace SharpVectors.Converters
             // Try getting it as resource file...
             if (_baseUri != null)
             {
-                return new Uri(_baseUri, svgSource);
+                var validUri = new Uri(_baseUri, svgSource);
+                if (validUri.IsAbsoluteUri)
+                {
+                    if (validUri.IsFile && File.Exists(validUri.LocalPath))
+                    {
+                        return validUri;
+                    }
+                }
+            }
+            var baseUri = System.Windows.Navigation.BaseUriHelper.GetBaseUri(this);
+            if (baseUri != null)
+            {
+                var contextUri = new Uri(baseUri, svgSource);
+                if (contextUri.IsFile && File.Exists(contextUri.LocalPath))
+                {
+                    return contextUri;
+                }
             }
 
-            string asmName = assembly.GetName().Name;
+            string asmName = this.AppName;
+            if (string.IsNullOrWhiteSpace(asmName))
+            {
+                if (assembly != null)
+                {
+                    asmName = assembly.GetName().Name;
+                }
+                else
+                {
+                    asmName = this.GetAppName();
+                }
+            }
+            else
+            {
+                string uriDesign = string.Format("/{0};component/{1}", asmName, svgPath);
+
+                return new Uri(uriDesign, UriKind.Relative);
+            }
+
+            if (DesignerProperties.GetIsInDesignMode(this) || LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                string uriDesign = string.Format("/{0};component/{1}", asmName, svgPath);
+
+                return new Uri(uriDesign, UriKind.Relative);
+            }
+
             string uriString = string.Format("pack://application:,,,/{0};component/{1}",
                 asmName, svgPath);
-
+            if (!WpfResources.ResourceExists(assembly, svgPath))
+            {
+                return null;
+            }
             return new Uri(uriString);
         }
 
@@ -1754,6 +1836,153 @@ namespace SharpVectors.Converters
             SvgCanvas canvas = d as SvgCanvas;
 
             canvas.InvalidateVisual();
+        }
+
+        private string GetAppName()
+        {
+            try
+            {
+                Assembly asm = this.GetEntryAssembly();
+
+                if (asm != null)
+                {
+                    return asm.GetName().Name;
+                }
+            }
+            catch
+            {
+                // Issue #125
+            }
+            return null;
+        }
+
+        private Assembly GetEntryAssembly()
+        {
+            string XDesProc   = "XDesProc";   // WPF designer process - Designer Isolation
+            string DevEnv     = "DevEnv";     // WPF designer process - Surface Isolation
+            string WpfSurface = "WpfSurface"; // WPF designer process - New .NETCore
+            var comparer      = StringComparison.OrdinalIgnoreCase;
+
+            Assembly asm = null;
+            try
+            {
+                // Should work at runtime...
+                asm = Assembly.GetEntryAssembly(); //...but mostly loading the design-time process: XDesProc.exe
+                if (asm != null)
+                {
+                    var appName = asm.GetName().Name;
+                    if (appName.StartsWith(XDesProc, comparer) 
+                        || appName.StartsWith(DevEnv, comparer) 
+                        || appName.StartsWith(WpfSurface, comparer))
+                    {
+                        asm = null;
+                    }
+                }
+                // Design time
+                if (asm == null)
+                {
+#if NETCORE
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
+                          select assembly
+                          ).FirstOrDefault();
+#else
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
+                          select assembly
+                          ).FirstOrDefault();
+#endif
+
+                    if (asm == null)
+                    {
+                        asm = Application.ResourceAssembly;
+                        if (asm != null)
+                        {
+                            var appName = asm.GetName().Name;
+                            if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
+                            {
+                                asm = null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (asm == null)
+                {
+#if NETCORE
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
+                          select assembly
+                          ).FirstOrDefault();
+#else
+                    asm = (
+                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                          where !assembly.IsDynamic
+                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
+                          where assmName.EndsWith(".exe", comparer)
+                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
+                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
+                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
+                          select assembly
+                          ).FirstOrDefault();
+#endif
+                }
+
+                Trace.TraceError(ex.ToString());
+            }
+            return asm;
+        }
+
+        private Assembly GetExecutingAssembly()
+        {
+            Assembly asm = null;
+            try
+            {
+                var invalidAssemblies = new string[] { "SharpVectors.Converters.Wpf", "WpfSurface", "XDesProc", "DevEnv" };
+
+                asm = Assembly.GetExecutingAssembly();
+                string asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
+                if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
+                {
+                    return asm;
+                }
+                else
+                {
+                    asm = Assembly.GetEntryAssembly();
+                    asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
+                    if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return asm;
+                    }
+                }
+
+                return this.GetEntryAssembly();
+            }
+            catch
+            {
+                asm = Assembly.GetEntryAssembly();
+            }
+            return asm;
         }
 
         #endregion

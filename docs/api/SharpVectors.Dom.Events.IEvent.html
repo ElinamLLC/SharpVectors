@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface IEvent
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -319,7 +319,7 @@ interface.</p>
   <h4 id="SharpVectors_Dom_Events_IEvent_IsDefaultPrevented" data-uid="SharpVectors.Dom.Events.IEvent.IsDefaultPrevented">IsDefaultPrevented</h4>
   <div class="markdown level1 summary"><p>(DOM Level 3 Experimental)
 This method will return true if the method
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault</a> has been called
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault()</a> has been called
 for this event, <code>false</code> otherwise.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -338,7 +338,7 @@ for this event, <code>false</code> otherwise.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p><code>true</code> if <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault</a> has been called for this event.</p>
+        <td><p><code>true</code> if <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault()</a> has been called for this event.</p>
 </td>
       </tr>
     </tbody>
@@ -372,7 +372,7 @@ associated with this event at creation time, or <code>null</code> if it is unspe
     </tbody>
   </table>
   <h5 id="SharpVectors_Dom_Events_IEvent_NamespaceUri_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>For events initialized with a DOM Level 2 Events method, such as <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEvent</a>,
+  <div class="markdown level1 remarks"><p>For events initialized with a DOM Level 2 Events method, such as <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEvent(String, Boolean, Boolean)</a>,
 this is always <code>null</code>.</p>
 </div>
   
@@ -474,7 +474,7 @@ and is case-sensitive.</p>
   </table>
   <h5 id="SharpVectors_Dom_Events_IEvent_Type_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The character &quot;:&quot; (colon) should not be used in this attribute.
-If the attribute <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a>
+If the attribute <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a>
 is different from <code>null</code>, this attribute represents a
 <a href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-localname">local name</a>.</p>
 </div>
@@ -485,9 +485,9 @@ is different from <code>null</code>, this attribute represents a
   <a id="SharpVectors_Dom_Events_IEvent_InitEvent_" data-uid="SharpVectors.Dom.Events.IEvent.InitEvent*"></a>
   <h4 id="SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_" data-uid="SharpVectors.Dom.Events.IEvent.InitEvent(System.String,System.Boolean,System.Boolean)">InitEvent(String, Boolean, Boolean)</h4>
   <div class="markdown level1 summary"><p>(DOM Level 2)
-The <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEvent</a> method is used to initialize
+The <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEvent(String, Boolean, Boolean)</a> method is used to initialize
 the value of an <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> created through the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
 method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -529,13 +529,13 @@ prevented. This parameter overrides the intrinsic cancelable behavior of the eve
   </table>
   <h5 id="SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method may only be called before the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> has been dispatched via the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a> method. If the method is called
-several times before invoking <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>,
-only the final invocation takes precedence. If called from a subclass of <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">Event</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a> method. If the method is called
+several times before invoking <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>,
+only the final invocation takes precedence. If called from a subclass of <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a>
 interface only the values specified in this method are modified, all other attributes are left unchanged.
-This method sets the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a> attribute to <code>eventTypeArg</code>,
-and <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a> to <code>null</code>. To initialize an event with a
-local name and namespace URI, use the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEventNs_System_String_System_String_System_Boolean_System_Boolean_">InitEventNs</a> method.</p>
+This method sets the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a> attribute to <code>eventTypeArg</code>,
+and <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a> to <code>null</code>. To initialize an event with a
+local name and namespace URI, use the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEventNs_System_String_System_String_System_Boolean_System_Boolean_">InitEventNs(String, String, Boolean, Boolean)</a> method.</p>
 </div>
   
   
@@ -575,7 +575,7 @@ associated with this event, or <code>null</code> if no namespace.</p>
         <td><p>Specifies the
 <a href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-localname">local name</a>
 of the event type (see also the description of
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a>).</p>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a>).</p>
 </td>
       </tr>
       <tr>
@@ -595,17 +595,17 @@ of the event type (see also the description of
   <h5 id="SharpVectors_Dom_Events_IEvent_InitEventNs_System_String_System_String_System_Boolean_System_Boolean__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> has been dispatched via the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
 method, though it may be called multiple times the event has been
 dispatched. If called multiple times the final invocation takes
-precedence. If a call to <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEventNs</a>
+precedence. If a call to <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEvent(String, Boolean, Boolean)</a>
 is made after one of the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> derived
 interfaces' init methods has been called, only the values
-specified in the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEventNs</a> method
+specified in the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_InitEvent_System_String_System_Boolean_System_Boolean_">InitEvent(String, Boolean, Boolean)</a> method
 are modified, all other attributes are left unchanged.
-This method sets the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a>
+This method sets the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a>
 attribute to <code>eventTypeArg</code>, and
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a> to
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a> to
 <code>namespaceUriArg</code>.</p>
 </div>
   
@@ -623,7 +623,7 @@ Signify that the event is to be canceled.</p>
   <h5 id="SharpVectors_Dom_Events_IEvent_PreventDefault_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 If an event is cancelable, the
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault</a> method is used to
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault()</a> method is used to
 signify that the event is to be canceled, meaning any default
 action normally taken by the implementation as a result of the
 event will not occur and thus independently of event groups.
@@ -631,8 +631,8 @@ Calling this method for a non-cancelable event has no effect.
 </p>
 <p>
 Note: This method does not stop the event propagation; use
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_StopPropagation">StopPropagation</a> or
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_StopImmediatePropagation">StopImmediatePropagation</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_StopPropagation">StopPropagation()</a> or
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_StopImmediatePropagation">StopImmediatePropagation()</a>
 for that effect.
 </p>
 </div>
@@ -655,12 +655,12 @@ Immediately prevent event listeners of the same group to be triggered.</p>
   <h5 id="SharpVectors_Dom_Events_IEvent_StopImmediatePropagation_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 This method is used to prevent event listeners of the same group to be triggered and, unlike
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_StopPropagation">StopPropagation</a> its effect is immediate. Once it has been called, 
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_StopPropagation">StopPropagation()</a> its effect is immediate. Once it has been called, 
 further calls to that method have no additional effect.
 </p>
 <p>
 Note: This method does not prevent the default action from being
-invoked; use <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault</a> for
+invoked; use <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_PreventDefault">PreventDefault()</a> for
 that effect.
 </p>
 </div>

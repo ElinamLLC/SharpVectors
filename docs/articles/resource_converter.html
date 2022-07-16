@@ -9,7 +9,7 @@
     <title>ResourceSvgConverter | SharpVectors Documentation </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="ResourceSvgConverter | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.2.0">
+    <meta name="generator" content="docfx 2.59.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -197,17 +197,17 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 <p>If this property is set to <code>true</code>, it is admisable to set the <code>ResourceAccessType</code> type below to <code>Static</code>.</p>
 </div>
 </li>
-<li><strong>IndentSpaces</strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
-<li><strong>NumericPrecision</strong>: This specifies numeric precision or number of decimal places for the floating number. The default is <code>4</code>, in complaince to the SVG specifications. Setting this to <code>-1</code> will disable this property.</li>
-<li><strong>ColorNameFormat</strong>: This determines the key name of color objects, if both <strong>BindToResources</strong>  and <strong>BindToColors</strong> properties are enabled. The default is <code>Color{0}</code>.</li>
-<li><strong>BrushNameFormat</strong>: This determines the key name of brush objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Brush{0}</code>.
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision">NumericPrecision</a></strong>: This specifies numeric precision or number of decimal places for the floating number. The default is <code>4</code>, in complaince to the SVG specifications. Setting this to <code>-1</code> will disable this property.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat">ColorNameFormat</a></strong>: This determines the key name of color objects, if both <strong>BindToResources</strong>  and <strong>BindToColors</strong> properties are enabled. The default is <code>Color{0}</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat">BrushNameFormat</a></strong>: This determines the key name of brush objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Brush{0}</code>.
 <div class="NOTE">
 <h5>Note</h5>
 <p>Only solid color brushes are supported and extracted from the drawings.</p>
 </div>
 </li>
-<li><strong>PenNameFormat</strong>:  This determines the key name of pen or stroke objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Pen{0}</code></li>
-<li><strong>BindToResources</strong>: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-1">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat">PenNameFormat</a></strong>:  This determines the key name of pen or stroke objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Pen{0}</code></li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources">BindToResources</a></strong>: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-1">
 <ul role="tablist">
 <li role="presentation">
 <a href="#tabpanel_bHGHmlrG6S-1_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S-1_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToResources == true</a>

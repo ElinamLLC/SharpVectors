@@ -95,8 +95,7 @@ namespace SharpVectors.Converters
             {
                 if (string.IsNullOrWhiteSpace(_appName))
                 {
-                    if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
-                        LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                    if (this.IsDesignMode() || LicenseManager.UsageMode == LicenseUsageMode.Designtime)
                     {
                         this.GetAppName();
                     }
@@ -129,12 +128,6 @@ namespace SharpVectors.Converters
             }
             catch
             {
-                if (DesignerProperties.GetIsInDesignMode(new DependencyObject()) ||
-                    LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                {
-                    return null;
-                }
-
                 //throw; #82
             }
             return null;
@@ -165,6 +158,11 @@ namespace SharpVectors.Converters
             {
                 return null;
             }
+            if (string.IsNullOrWhiteSpace(_appName))
+            {
+                this.GetAppName();
+            }
+            var comparer = StringComparison.OrdinalIgnoreCase;
 
             Uri svgSource;
             if (Uri.TryCreate(inputParameter, UriKind.RelativeOrAbsolute, out svgSource))
@@ -203,28 +201,36 @@ namespace SharpVectors.Converters
                     if (_baseUri != null)
                     {
                         var validUri = new Uri(_baseUri, inputUri);
-
-                        return validUri;
+                        if (validUri.IsAbsoluteUri)
+                        {
+                            if (validUri.IsFile && File.Exists(validUri.LocalPath))
+                            {
+                                return validUri;
+                            }
+                        }
                     }
                 }
 
                 string asmName = _appName;
-                // It should not be the SharpVectors.Converters.Wpf.dll, which contains this extension...
-                if (assembly != null && !string.Equals("SharpVectors.Converters.Wpf",
-                    assembly.GetName().Name, StringComparison.OrdinalIgnoreCase))
+                if (string.IsNullOrWhiteSpace(asmName) && assembly != null)
                 {
-                    asmName = assembly.GetName().Name;
+                    // It should not be the SharpVectors.Converters.Wpf.dll, which contains this extension...
+                    string tempName = assembly.GetName().Name;
+                    if (!string.Equals("SharpVectors.Converters.Wpf", tempName, comparer)
+                        && !string.Equals("WpfSurface", tempName, comparer))
+                    {
+                        asmName = tempName;
+                    }
                 }
 
                 svgPath = inputParameter;
-                if (inputParameter.StartsWith("/", StringComparison.OrdinalIgnoreCase))
+                if (inputParameter.StartsWith("/", comparer))
                 {
                     svgPath = svgPath.TrimStart('/');
                 }
 
                 // A little hack to display preview in design mode
-                bool designTime = DesignerProperties.GetIsInDesignMode(new DependencyObject());
-                if (designTime && !string.IsNullOrWhiteSpace(_appName))
+                if (this.IsDesignMode() && !string.IsNullOrWhiteSpace(_appName))
                 {
                     //string uriDesign = string.Format("/{0};component/{1}", _appName, svgPath);
                     //return new Uri(uriDesign, UriKind.Relative);
@@ -232,6 +238,7 @@ namespace SharpVectors.Converters
                     // The relative path is not working with the Converter...
                     string uriDesign = string.Format("pack://application:,,,/{0};component/{1}",
                         _appName, svgPath);
+
                     return new Uri(uriDesign);
                 }
 

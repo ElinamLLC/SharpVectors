@@ -2,17 +2,17 @@
 using System.IO;
 using System.Security.AccessControl;
 
-namespace SharpVectors.Converters
+namespace SharpVectors.Converters.Utils
 {
     /// <summary>
     /// Copies a file or a directory and its contents to a new location. 
     /// </summary>
     [Serializable]
-    internal sealed class DirectoryCopier
+    internal sealed class DirectoryUtils
     {
         #region Private Fields
 
-        private int  _copiedCount;
+        private int _copiedCount;
         private bool _isOverwrite;
         private bool _isRecursive;
         private bool _includeHidden;
@@ -22,18 +22,18 @@ namespace SharpVectors.Converters
 
         #region Constructors and Destructor
 
-        public DirectoryCopier()
+        public DirectoryUtils()
         {
-            _isOverwrite      = true;
-            _isRecursive     = true;
+            _isOverwrite = true;
+            _isRecursive = true;
         }
 
-        public DirectoryCopier(DirectoryCopier source)
+        public DirectoryUtils(DirectoryUtils source)
         {
-            _copiedCount     = source._copiedCount;
-            _isOverwrite      = source._isOverwrite;
-            _isRecursive     = source._isRecursive;
-            _includeHidden   = source._includeHidden;
+            _copiedCount = source._copiedCount;
+            _isOverwrite = source._isOverwrite;
+            _isRecursive = source._isRecursive;
+            _includeHidden = source._includeHidden;
             _includeSecurity = source._includeSecurity;
         }
 
@@ -52,12 +52,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool Recursive
         {
-            get
-            {
+            get {
                 return _isRecursive;
             }
-            set
-            {
+            set {
                 _isRecursive = value;
             }
         }
@@ -71,12 +69,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool Overwrite
         {
-            get
-            {
+            get {
                 return _isOverwrite;
             }
-            set
-            {
+            set {
                 _isOverwrite = value;
             }
         }
@@ -92,12 +88,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeSecurity
         {
-            get
-            {
+            get {
                 return _includeSecurity;
             }
-            set
-            {
+            set {
                 _includeSecurity = value;
             }
         }
@@ -113,12 +107,10 @@ namespace SharpVectors.Converters
         /// </value>
         public bool IncludeHidden
         {
-            get
-            {
+            get {
                 return _includeHidden;
             }
-            set
-            {
+            set {
                 _includeHidden = value;
             }
         }
@@ -126,7 +118,7 @@ namespace SharpVectors.Converters
         #endregion
 
         #region Public Methods
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -161,8 +153,8 @@ namespace SharpVectors.Converters
             {
                 throw new ArgumentException("targetDir");
             }
-            
-            if (string.Equals(sourceDir, targetDir, 
+
+            if (string.Equals(sourceDir, targetDir,
                 StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new InvalidOperationException();
@@ -204,7 +196,7 @@ namespace SharpVectors.Converters
             return _copiedCount;
         }
 
-#endregion
+        #endregion
 
         #region Private Methods
 
@@ -219,12 +211,12 @@ namespace SharpVectors.Converters
 
             DirectoryInfo[] arrSourceInfo = source.GetDirectories();
 
-            int dirCount = (arrSourceInfo == null) ? 0 : arrSourceInfo.Length;
+            int dirCount = arrSourceInfo == null ? 0 : arrSourceInfo.Length;
 
             for (int i = 0; i < dirCount; i++)
             {
                 DirectoryInfo sourceInfo = arrSourceInfo[i];
-                FileAttributes fileAttr  = sourceInfo.Attributes;
+                FileAttributes fileAttr = sourceInfo.Attributes;
                 if (!_includeHidden)
                 {
                     if ((fileAttr & FileAttributes.Hidden) == FileAttributes.Hidden)
@@ -250,18 +242,18 @@ namespace SharpVectors.Converters
                 targetInfo.Attributes = fileAttr;
 
                 Copy(sourceInfo, targetInfo);
-            }                   
+            }
         }
 
         private void CopyFiles(DirectoryInfo source, DirectoryInfo target)
         {
             FileInfo[] listInfo = source.GetFiles();
 
-            int fileCount = (listInfo == null) ? 0 : listInfo.Length;
+            int fileCount = listInfo == null ? 0 : listInfo.Length;
 
             string targetDirName = target.ToString();
             string filePath;
-            
+
             // Handle the copy of each file into it's new directory.
             for (int i = 0; i < fileCount; i++)
             {

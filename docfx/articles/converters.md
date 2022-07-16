@@ -3,7 +3,7 @@ uid: topic_converters
 title: SVG Converters
 ---
 
-## SVG Converters
+# SVG Converters
 The SVG to WPF conversion is the main use of this SharpVectors library currently. The other uses will be improved with time.
 The following is a diagram showing all the available converters.
 

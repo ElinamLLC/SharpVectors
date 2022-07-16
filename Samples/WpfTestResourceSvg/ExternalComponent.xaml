@@ -1,0 +1,56 @@
+﻿<Page x:Class="WpfTestResourceSvg.ExternalComponent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      xmlns:local="clr-namespace:WpfTestResourceSvg"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ExternalComponent">
+    <DockPanel LastChildFill="True" Margin="10">
+        <TextBlock DockPanel.Dock="Top" Margin="6" Text="Displaying SVG files in external resources from the library: WpfTestSampleResources." 
+                    TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TabControl TabStripPlacement="Left">
+            <TabItem x:Name="tabSvgImage">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="32">
+                        <Image Height="24px" Width="24px" HorizontalAlignment="Left" Source="{svgc:SvgImage Source=/Images/clock.svg, AppName=WpfTestSampleResources}" />
+                        <TextBlock Text="SvgImage Markup" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{svgc:SvgImage Source=/Resources/Lesser_Coat_of_Arms_of_Ukraine.svg, AppName=WpfTestSampleResources}" />
+            </TabItem>
+
+            <TabItem x:Name="tabSvgImageConverter">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Height="32">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/clear_filters.svg, AppName=WpfTestSampleResources}" />
+                        <TextBlock Text="SvgImageConverter Markup" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Image Source="{Binding Converter={svgc:SvgImageConverter AppName=WpfTestSampleResources}, ConverterParameter=/Resources/Coat_of_arms_of_Bosnia_and_Herzegovina.svg, Mode=OneWay}"/>
+            </TabItem>
+
+            <TabItem x:Name="tabSvgCanvas">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Height="32">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/down.svg, AppName=WpfTestSampleResources}" />
+                        <TextBlock Text="SvgCanvas Control" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <svgc:SvgCanvas Source="/Resources/Imperial_Seal_of_Japan.svg" AppName="WpfTestSampleResources" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </TabItem>
+
+            <TabItem x:Name="tabSvgViewbox">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Height="32">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/clapperboard.svg, AppName=WpfTestSampleResources}" />
+                        <TextBlock Text="SvgViewbox Control" Margin="3" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <svgc:SvgViewbox AppName="WpfTestSampleResources" Source="/Resources/Emblem_of_Ethiopia.svg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Page>
