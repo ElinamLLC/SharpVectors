@@ -145,6 +145,12 @@ namespace SharpVectors.Runtime
             }
         }
 
+        /// <summary>
+        /// Gets a value specifying whether the viewer control is in design-mode.
+        /// </summary>
+        /// <value>
+        /// This is <see langword="true"/> if the viewer control is in design-mode, otherwise; it is <see langword="false"/>.
+        /// </value>
         public bool DesignMode
         {
             get {

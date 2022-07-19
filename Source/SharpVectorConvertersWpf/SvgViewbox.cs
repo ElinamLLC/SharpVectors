@@ -20,21 +20,21 @@ using SharpVectors.Dom.Svg;
 using SharpVectors.Dom.Utils;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
+using SharpVectors.Converters.Utils;
 
 using DpiScale = SharpVectors.Runtime.DpiScale;
 using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
-using SharpVectors.Converters.Utils;
 
 namespace SharpVectors.Converters
 {
     /// <summary>
-    /// This is a <see cref="Viewbox"/> control for viewing SVG file in WPF applications.
+    /// This is a <see cref="Viewbox"/> control for viewing <c>SVG</c> file in <c>WPF</c> applications.
     /// </summary>
     /// <remarks>
-    /// It wraps the drawing canvas, <see cref="SvgDrawingCanvas"/>, instead of
-    /// image control, therefore any interactivity support implemented in the
-    /// drawing canvas will be available in the <see cref="Viewbox"/>.
+    /// It wraps the drawing canvas, <see cref="SvgDrawingCanvas"/>, instead of image control, therefore any 
+    /// interactivity support implemented in the drawing canvas will be available in the <see cref="Viewbox"/>.
     /// </remarks>
+    /// <seealso cref="SvgCanvas"/>
     public class SvgViewbox : Viewbox, ISvgControl, IUriContext
     {
         #region Public Fields
@@ -268,12 +268,12 @@ namespace SharpVectors.Converters
         #region Public Properties
 
         /// <summary>
-        /// The <c>AppName</c> for the element.
-        /// If the value is of type <c>AppName</c>, then that is the <c>AppName</c> that will be used.
-        /// If the value is of any other type, then that value will be used
-        /// as the content for a <c>AppName</c> provided by the system. Refer to SvgObjectService
-        /// for attached properties to customize the <c>AppName</c>.
+        /// Gets or sets the <c>name</c> of the parent assembly for this element.
         /// </summary>
+        /// <value>
+        /// A string containing the name of the parent assembly or the name of the assembly containing <c>SVG</c> file 
+        /// referenced on this control in XAML, if the source type is <see cref="Uri"/>.
+        /// </value>
         [Bindable(true), Category("Appearance")]
         public string AppName
         {
@@ -289,8 +289,10 @@ namespace SharpVectors.Converters
         /// Gets or sets the application title, which is used to display the alert and error messages not handled
         /// by the user.
         /// </summary>
-        /// <value>A string containg the application title. This cannot be <see langword="null"/> or empty. 
-        /// The default is <c>SharpVectors</c>.</value>
+        /// <value>
+        /// A string containg the application title. This cannot be <see langword="null"/> or empty. 
+        /// The default is <c>SharpVectors</c>.
+        /// </value>
         [DefaultValue(DefaultTitle)]
         [Description("The title of the application, used in displaying error and alert messages.")]
         public string AppTitle
@@ -305,16 +307,16 @@ namespace SharpVectors.Converters
                 }
             }
         }
-        
+
         /// <summary>
-        /// Gets or sets the path to the SVG file to load into this 
-        /// <see cref="Viewbox"/>.
+        /// Gets or sets the path to the <c>SVG</c> file to load into this <see cref="Viewbox"/>.
         /// </summary>
         /// <value>
-        /// A <see cref="System.Uri"/> specifying the path to the SVG source file.
-        /// The file can be located on a computer, network or assembly resources.
-        /// Settings this to <see langword="null"/> will close any opened diagram.
+        /// A <see cref="System.Uri"/> specifying the path to the <c>SVG</c> source file. The file can be located on a computer, 
+        /// network or assembly resources. Settings this to <see langword="null"/> will close any rendered <c>SVG</c> diagram.
         /// </value>
+        /// <seealso cref="UriSource"/>
+        /// <seealso cref="SvgSource"/>
         /// <seealso cref="StreamSource"/>
         public Uri Source
         {
@@ -328,17 +330,16 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets the path to the SVG file to load into this <see cref="Canvas"/>.
+        /// Gets or sets the path to the <c>SVG</c> file to load into this <see cref="Viewbox"/>.
         /// </summary>
         /// <value>
-        /// A <see cref="System.Uri"/> specifying the path to the SVG source file.
-        /// The file can be located on a computer, network or assembly resources.
-        /// Settings this to <see langword="null"/> will close any opened diagram.
+        /// A <see cref="Uri"/> specifying the path to the <c>SVG</c> source file. The file can be located on a computer, 
+        /// network or assembly resources. Settings this to <see langword="null"/> will close any rendered <c>SVG</c> diagram.
         /// </value>
         /// <remarks>
         /// This is the same as the <see cref="Source"/> property, and added for consistency.
         /// </remarks>
-        /// <seealso cref="UriSource"/>
+        /// <seealso cref="SvgSource"/>
         /// <seealso cref="StreamSource"/>
         public Uri UriSource
         {
@@ -352,10 +353,10 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets the SVG contents to load into this <see cref="Canvas"/>.
+        /// Gets or sets the <c>SVG</c> contents to load into this <see cref="Viewbox"/>.
         /// </summary>
         /// <value>
-        /// A <see cref="System.String"/> specifying the embedded SVG contents.
+        /// A <see cref="System.String"/> specifying the embedded <c>SVG</c> contents.
         /// Settings this to <see langword="null"/> will close any opened diagram.
         /// </value>
         /// <seealso cref="UriSource"/>
@@ -372,8 +373,7 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="System.IO.Stream"/> to the SVG source to load into this 
-        /// <see cref="Canvas"/>.
+        /// Gets or sets the <see cref="System.IO.Stream"/> to the SVG source to load into this <see cref="Viewbox"/>.
         /// </summary>
         /// <value>
         /// A <see cref="System.IO.Stream"/> specifying the stream to the SVG source.
@@ -391,6 +391,8 @@ namespace SharpVectors.Converters
         /// </para>
         /// </remarks>
         /// <seealso cref="Source"/>
+        /// <seealso cref="SvgSource"/>
+        /// <seealso cref="UriSource"/>
         public Stream StreamSource
         {
             get {
@@ -450,11 +452,9 @@ namespace SharpVectors.Converters
         /// <see cref="Viewbox"/> based on the size of the loaded drawing.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if this <see cref="Viewbox"/> is
-        /// automatically resized based on the size of the loaded drawing;
-        /// otherwise, it is <see langword="false"/>. The default is 
-        /// <see langword="false"/>, and the user-defined size or the parent assigned
-        /// layout size is used.
+        /// This is <see langword="true"/> if this <see cref="Viewbox"/> is automatically resized based on the size of 
+        /// the loaded drawing; otherwise, it is <see langword="false"/>. The default is <see langword="false"/>, and 
+        /// the user-defined size or the parent assigned layout size is used.
         /// </value>
         public bool AutoSize
         {
@@ -473,9 +473,8 @@ namespace SharpVectors.Converters
         /// optimized using the <see cref="StreamGeometry"/>.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the path geometry is optimized
-        /// using the <see cref="StreamGeometry"/>; otherwise, it is 
-        /// <see langword="false"/>. The default is <see langword="true"/>.
+        /// This is <see langword="true"/> if the path geometry is optimized using the <see cref="StreamGeometry"/>; 
+        /// otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
         /// </value>
         public bool OptimizePath
         {
@@ -490,14 +489,17 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the texts are rendered as
-        /// path geometry.
+        /// Gets or sets a value indicating whether the texts are rendered as path geometry.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if texts are rendered as path 
-        /// geometries; otherwise, this is <see langword="false"/>. The default
-        /// is <see langword="false"/>.
+        /// This is <see langword="true"/> if texts are rendered as path geometries; otherwise, this is 
+        /// <see langword="false"/>. The default is <see langword="false"/>.
         /// </value>
+        /// <remarks>
+        /// The text features of the <c>SVG</c> format are complex and difficult to fully support without directly reverting
+        /// the text paths (or glyph geometry). This options will, therefore, be removed in future versions of the library,
+        /// as it is not always honored when set to <see langword="false"/>.
+        /// </remarks>
         public bool TextAsGeometry
         {
             get {
@@ -515,14 +517,12 @@ namespace SharpVectors.Converters
         /// classes are used in the generated output.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c>
-        /// classes and types are used in the generated output; otherwise, it is 
-        /// <see langword="false"/>. The default is <see langword="true"/>.
+        /// This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c> classes and types are used in the 
+        /// generated output; otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
         /// </value>
         /// <remarks>
-        /// The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded
-        /// font path generated by the <see cref="FormattedText"/> class, support
-        /// for embedded images etc.
+        /// The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded font path generated by the 
+        /// <see cref="FormattedText"/> class, support for embedded images etc.
         /// </remarks>
         public bool IncludeRuntime
         {
@@ -549,8 +549,7 @@ namespace SharpVectors.Converters
         /// class instance for the text rendering.
         /// </para>
         /// <para>
-        /// The library does not currently provide any means of splitting texts
-        /// into its multi-language parts.
+        /// The library does not currently provide any means of splitting texts into its multi-language parts.
         /// </para>
         /// </remarks>
         public CultureInfo CultureInfo
@@ -578,13 +577,11 @@ namespace SharpVectors.Converters
         /// </para>
         /// </value>
         /// <remarks>
-        /// There are reported cases where are diagrams displayed in Inkscape program, but will not
-        /// show when converted. These are diagrams on the drawing canvas of Inkspace but outside 
-        /// the svg viewbox. 
+        /// There are reported cases where are diagrams displayed in Inkscape program, but will not show when converted. 
+        /// These are diagrams on the drawing canvas of Inkspace but outside the svg viewbox. 
         /// <para>
-        /// When converted the drawings are also converted but not displayed due to
-        /// clipping. Setting this property to <see langword="true"/> will clear the clipping region
-        /// on conversion.
+        /// When converted the drawings are also converted but not displayed due to clipping. Setting this property 
+        /// to <see langword="true"/> will clear the clipping region on conversion.
         /// </para>
         /// </remarks>
         public bool IgnoreRootViewbox
@@ -611,8 +608,7 @@ namespace SharpVectors.Converters
         /// </value>
         /// <remarks>
         /// Setting this to <see langword="true"/> will cause the rendering process to draw a transparent
-        /// box around the output, if a viewbox is defined. This will ensure that the original image
-        /// size is saved.
+        /// box around the output, if a viewbox is defined. This will ensure that the original image size is saved.
         /// </remarks>
         public bool EnsureViewboxSize
         {
@@ -631,9 +627,8 @@ namespace SharpVectors.Converters
         /// it is visible when rendered.
         /// </summary>
         /// <value>
-        /// This determines whether a transformation is applied to the rendered drawing. For drawings
-        /// where the top-left position of the viewbox is off the screen, due to negative values, this
-        /// will ensure the drawing is visible.
+        /// This determines whether a transformation is applied to the rendered drawing. For drawings where the top-left 
+        /// position of the viewbox is off the screen, due to negative values, this will ensure the drawing is visible.
         /// <para>
         /// The default value is <see langword="true"/>. Set this value to <see langword="false"/> if
         /// you wish to apply your own transformations to the drawings.
@@ -1297,6 +1292,12 @@ namespace SharpVectors.Converters
 
         #region Protected Methods
 
+        /// <summary>
+        /// Gets the rendering settings or options to be used in rendering the SVG in this control.
+        /// </summary>
+        /// <returns> 
+        /// An instance of <see cref="WpfDrawingSettings"/> specifying the rendering options or settings.
+        /// </returns>
         protected virtual WpfDrawingSettings GetDrawingSettings()
         {
             WpfDrawingSettings settings = new WpfDrawingSettings();
@@ -1393,8 +1394,7 @@ namespace SharpVectors.Converters
         /// Performs the conversion of a valid SVG source to the <see cref="DrawingGroup"/>.
         /// </summary>
         /// <returns>
-        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it
-        /// returns <see langword="null"/>.
+        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it returns <see langword="null"/>.
         /// </returns>
         protected virtual DrawingGroup CreateDrawing()
         {
@@ -1439,8 +1439,7 @@ namespace SharpVectors.Converters
         /// If this is <see langword="null"/>, the default settings is used.
         /// </param>
         /// <returns>
-        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it
-        /// returns <see langword="null"/>.
+        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it returns <see langword="null"/>.
         /// </returns>
         protected virtual DrawingGroup CreateDrawing(Uri svgSource, WpfDrawingSettings settings)
         {
@@ -1458,7 +1457,7 @@ namespace SharpVectors.Converters
             }
 
             string scheme = null;
-            if (DesignerProperties.GetIsInDesignMode(this) && svgSource.IsAbsoluteUri == false)
+            if (this.DesignMode && svgSource.IsAbsoluteUri == false)
             {
                 scheme = "pack";
             }
@@ -1598,8 +1597,7 @@ namespace SharpVectors.Converters
         /// If this is <see langword="null"/>, the default settings is used.
         /// </param>
         /// <returns>
-        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it
-        /// returns <see langword="null"/>.
+        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it returns <see langword="null"/>.
         /// </returns>
         protected virtual DrawingGroup CreateDrawing(Stream svgStream, WpfDrawingSettings settings)
         {
@@ -1634,14 +1632,13 @@ namespace SharpVectors.Converters
         /// <summary>
         /// Performs the conversion of a valid SVG source stream to the <see cref="DrawingGroup"/>.
         /// </summary>
-        /// <param name="svgStream">A stream providing access to the SVG source data.</param>
+        /// <param name="svgSource">A stream providing access to the SVG source data.</param>
         /// <param name="settings">
         /// This specifies the settings used by the rendering or drawing engine.
         /// If this is <see langword="null"/>, the default settings is used.
         /// </param>
         /// <returns>
-        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it
-        /// returns <see langword="null"/>.
+        /// This returns <see cref="DrawingGroup"/> if successful; otherwise, it returns <see langword="null"/>.
         /// </returns>
         protected virtual DrawingGroup CreateDrawing(string svgSource, WpfDrawingSettings settings)
         {
@@ -1849,7 +1846,7 @@ namespace SharpVectors.Converters
                 return new Uri(uriDesign, UriKind.Relative);
             }
 
-            if (DesignerProperties.GetIsInDesignMode(this) || LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            if (this.DesignMode)
             {
                 string uriDesign = string.Format("/{0};component/{1}", asmName, svgPath);
 
@@ -2165,6 +2162,7 @@ namespace SharpVectors.Converters
 
         #region ISvgControl Members
 
+        /// <inheritdoc/>
         public bool DesignMode
         {
             get {
@@ -2177,6 +2175,7 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <inheritdoc/>
         int ISvgControl.Width
         {
             get {
@@ -2184,6 +2183,7 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <inheritdoc/>
         int ISvgControl.Height
         {
             get {
@@ -2191,6 +2191,7 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <inheritdoc/>
         void ISvgControl.HandleAlert(string message)
         {
             if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
@@ -2200,6 +2201,7 @@ namespace SharpVectors.Converters
             this.OnHandleAlert(message);
         }
 
+        /// <inheritdoc/>
         void ISvgControl.HandleError(string message)
         {
             if (string.IsNullOrWhiteSpace(message) || this.DesignMode)
@@ -2209,6 +2211,7 @@ namespace SharpVectors.Converters
             this.OnHandleError(message, null);
         }
 
+        /// <inheritdoc/>
         void ISvgControl.HandleError(Exception exception)
         {
             if (exception == null || this.DesignMode)
@@ -2218,6 +2221,7 @@ namespace SharpVectors.Converters
             this.OnHandleError(null, exception);
         }
 
+        /// <inheritdoc/>
         void ISvgControl.HandleError(string message, Exception exception)
         {
             if ((string.IsNullOrWhiteSpace(message) && exception == null) || this.DesignMode)

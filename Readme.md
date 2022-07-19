@@ -48,6 +48,12 @@ The library can be downloaded from the following sources
 * **NuGet (Full Package - WPF/GDI++)**, [Version 1.8.0 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/).
 * **GitHub Releases Page**, [Version 1.8.0](https://github.com/ElinamLLC/SharpVectors/releases).
 
+> * The **SharpVectors.Reloaded** package is the same as the **SharpVectors**, which is the recommended package if you need the full package.
+> * The **SharpVectors.Reloaded** name was used for the Nuget package at the time the **SharpVectors** package name was not available.
+> * The **SharpVectors.Reloaded** package name will be retired in Version 2.0.
+> * The **SharpVectors.Wpf** is the recommended package, for `WPF` only application.
+> * As outlined in the [roadmap](https://github.com/ElinamLLC/SharpVectors/issues/147), other packages such as the **SharpVectors.Gdi** for the `GDI+`, will be available as the renderers mature.
+
 ## Documentation
 An introduction and a tutorial with sample are available. See the [Documentation](https://elinamllc.github.io/SharpVectors) section for more information.
 
