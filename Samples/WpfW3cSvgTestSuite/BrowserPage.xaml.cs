@@ -112,7 +112,7 @@ namespace WpfW3cSvgTestSuite
 
             try
             {
-                webBrowserBox.Navigate(svgFilePath);
+                webBrowserBox.Navigate(new Uri($"file:///{svgFilePath}"));
             }
             catch
             {
