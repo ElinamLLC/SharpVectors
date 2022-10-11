@@ -163,10 +163,16 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
-            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            if (drawingSettings != null)
             {
-                var dpiScale = drawingSettings.DpiScale;
-                document.Dpi = dpiScale.PixelsPerInchY;
+                if (drawingSettings.DpiScale != null)
+                {
+                    var dpiScale = drawingSettings.DpiScale;
+                    document.Dpi = dpiScale.PixelsPerInchY;
+                }
+
+                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
             document.Load(documentUri.AbsoluteUri);
 
@@ -199,10 +205,16 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
-            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            if (drawingSettings != null)
             {
-                var dpiScale = drawingSettings.DpiScale;
-                document.Dpi = dpiScale.PixelsPerInchY;
+                if (drawingSettings.DpiScale != null)
+                {
+                    var dpiScale = drawingSettings.DpiScale;
+                    document.Dpi = dpiScale.PixelsPerInchY;
+                }
+
+                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
             document.Load(documentStream);
 
@@ -223,10 +235,16 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
-            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            if (drawingSettings != null)
             {
-                var dpiScale = drawingSettings.DpiScale;
-                document.Dpi = dpiScale.PixelsPerInchY;
+                if (drawingSettings.DpiScale != null)
+                {
+                    var dpiScale = drawingSettings.DpiScale;
+                    document.Dpi = dpiScale.PixelsPerInchY;
+                }
+
+                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
             document.Load(textReader);
 
@@ -247,10 +265,16 @@ namespace SharpVectors.Renderers.Utils
             {
                 document.CustomSettings = _settings;
             }
-            if (drawingSettings != null && drawingSettings.DpiScale != null)
+            if (drawingSettings != null)
             {
-                var dpiScale = drawingSettings.DpiScale;
-                document.Dpi = dpiScale.PixelsPerInchY;
+                if (drawingSettings.DpiScale != null)
+                {
+                    var dpiScale = drawingSettings.DpiScale;
+                    document.Dpi = dpiScale.PixelsPerInchY;
+                }
+
+                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
 
             document.Load(xmlReader);

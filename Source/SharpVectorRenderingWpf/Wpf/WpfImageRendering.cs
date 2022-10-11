@@ -515,10 +515,22 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            if (!element.Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+            SvgDocument ownerDocument = element.OwnerDocument;
+            if (!ownerDocument.CanUseBitmap)
             {
+                return null;
+            }
+
+            if (!element.Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+            {              
                 SvgUriReference svgUri = element.UriReference;
                 string absoluteUri = svgUri.AbsoluteUri;
+
+                if (ownerDocument != null && !ownerDocument.CanAccessExternalResources(absoluteUri))
+                {
+                    return null;
+                }
+
                 if (string.IsNullOrWhiteSpace(absoluteUri))
                 {
                     return null; // most likely, the image does not exist...
