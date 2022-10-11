@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Media;
+using SharpVectors.Dom;
 
 namespace SharpVectors.Renderers.Wpf
 {
@@ -80,6 +81,8 @@ namespace SharpVectors.Renderers.Wpf
         private SvgInteractiveModes _interactiveMode;
 
         private WpfDrawingResources _drawingResources;
+        private AccessExternalResourcesMode _accessMode;
+        private bool _canUseBitmap = true;
 
         #endregion
 
@@ -117,6 +120,8 @@ namespace SharpVectors.Renderers.Wpf
             _cssVariables          = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             _dpiScale              = DpiUtilities.GetSystemScale();
+            _accessMode            = AccessExternalResourcesMode.Allow;
+            _canUseBitmap          = true;
         }
 
         /// <summary>
@@ -161,6 +166,8 @@ namespace SharpVectors.Renderers.Wpf
             _fontFamilyMap         = settings._fontFamilyMap;
             _cssVariables          = settings._cssVariables;
             _dpiScale              = settings._dpiScale;
+            _accessMode            = settings._accessMode;
+            _canUseBitmap          = settings._canUseBitmap;
         }
 
         #endregion
@@ -687,6 +694,28 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     _genericFantasy = value;
                 }
+            }
+        }
+
+        public AccessExternalResourcesMode AccessExternalResourcesMode
+        {
+            get {
+                return _accessMode;
+            }
+            set {
+                _accessMode = value;
+            }
+        }
+
+        public bool CanUseBitmap
+        {
+            get
+            {
+                return _canUseBitmap;
+            }
+            set
+            {
+                _canUseBitmap = value;
             }
         }
 

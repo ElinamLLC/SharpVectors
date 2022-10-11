@@ -866,8 +866,13 @@ namespace SharpVectors.Dom.Svg
 
                 //PrepareXmlResolver(settings);
 
+                if (!CanAccessExternalResources(absoluteUri.ToString()))
+                {
+                    return doc;
+                }
+
                 using (XmlReader reader = XmlReader.Create(GetResource(absoluteUri).GetResponseStream(),
-                    settings, absoluteUri.AbsolutePath))
+                        settings, absoluteUri.AbsolutePath))
                 {
                     doc.Load(reader);
                 }

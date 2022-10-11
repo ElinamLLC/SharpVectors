@@ -171,6 +171,13 @@ namespace SharpVectors.Dom.Stylesheets
             {
                 return;
             }
+
+            IDocument document = (OwnerNode.OwnerDocument) as IDocument;
+            if (document == null || !document.CanAccessExternalResources(absoluteUri.ToString()))
+            {
+                return;
+            }
+
             if (absoluteUri.IsAbsoluteUri && absoluteUri.IsFile)
             {
                 try

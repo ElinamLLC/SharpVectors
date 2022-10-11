@@ -22,8 +22,10 @@ namespace SharpVectors.Dom
 		{
 			get;
 		}
-		
-		IElement CreateElement(string tagName);
+
+		bool CanAccessExternalResources(string resourcesUri);
+
+        IElement CreateElement(string tagName);
 		
 		IDocumentFragment CreateDocumentFragment();
 		

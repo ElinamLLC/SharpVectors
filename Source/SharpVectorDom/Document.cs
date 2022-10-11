@@ -14,6 +14,8 @@ namespace SharpVectors.Dom
 
         private bool _mutationEvents;
         private EventTarget _eventTarget;
+        private AccessExternalResourcesMode _accessExternalResourcesMode;
+        private bool _canUseBitmap;
 
         #endregion
 
@@ -59,6 +61,30 @@ namespace SharpVectors.Dom
             }
             set {
                 _mutationEvents = value;
+            }
+        }
+
+        public AccessExternalResourcesMode AccessExternalResourcesMode
+        {
+            get
+            {
+                return _accessExternalResourcesMode;
+            }
+            set
+            {
+                _accessExternalResourcesMode = value;
+            }
+        }
+
+        public bool CanUseBitmap
+        {
+            get
+            {
+                return _canUseBitmap;
+            }
+            set
+            {
+                _canUseBitmap = value;
             }
         }
 
@@ -494,6 +520,26 @@ namespace SharpVectors.Dom
         #endregion
 
         #region IDocument interface
+
+        public bool CanAccessExternalResources(string resourcesUri)
+        {
+            if (AccessExternalResourcesMode == AccessExternalResourcesMode.Ignore)
+            {
+                return false;
+            }
+            
+            if (AccessExternalResourcesMode == AccessExternalResourcesMode.ThrowError)
+            {
+                if(resourcesUri == null)
+                {
+                    throw new InvalidOperationException("Unauthorized attempt to Access External Resources, resourcesUri = null");
+                }
+
+                throw new InvalidOperationException("Unauthorized attempt to Access External Resources, resourcesUri = " + resourcesUri);
+            }
+            
+            return true;
+        }
 
         IDocumentType IDocument.Doctype
         {

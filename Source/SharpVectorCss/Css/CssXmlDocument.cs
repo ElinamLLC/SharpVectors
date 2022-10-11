@@ -271,6 +271,11 @@ namespace SharpVectors.Dom.Css
 
         public WebResponse GetResource(Uri absoluteUri)
         {
+            if (!CanAccessExternalResources(absoluteUri.ToString()))
+            {
+                return null;
+            }
+
             WebRequest request = new ExtendedHttpWebRequest(absoluteUri);
             WebResponse response = request.GetResponse();
 
