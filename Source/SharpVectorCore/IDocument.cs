@@ -23,7 +23,15 @@ namespace SharpVectors.Dom
 			get;
 		}
 
-		bool CanAccessExternalResources(string resourcesUri);
+        /// <summary>
+        /// Check if the Document allows access of external resource
+        /// </summary>
+        /// <param name="resourcesUri">the URI to the external resource</param>
+        /// <returns>
+        /// This returns <see langword="true"/> if access of external resource is allowed;
+        /// otherwise, it return <see langword="false"/>.
+        /// </returns>
+        bool CanAccessExternalResources(string resourcesUri);
 
         IElement CreateElement(string tagName);
 		
