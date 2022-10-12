@@ -697,6 +697,13 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating how to handled external resources.
+        /// </summary>
+        /// <value>
+        /// The default is <see cref="AccessExternalResourcesMode.Allow"/>.
+        /// </value>
+        /// <see cref="AccessExternalResourcesMode"/>
         public AccessExternalResourcesMode AccessExternalResourcesMode
         {
             get {
@@ -707,6 +714,14 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating if image elements will render bitmaps.
+        /// </summary>
+        /// <value>
+        /// if <see langword="true"/> elements will render bitmaps; otherwise, it is 
+        /// <see langword="false"/> elements will not render bitmaps.
+        /// The default is <see langword="true"/>.
+        /// </value>
         public bool CanUseBitmap
         {
             get

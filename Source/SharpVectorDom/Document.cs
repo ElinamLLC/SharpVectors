@@ -64,6 +64,12 @@ namespace SharpVectors.Dom
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating how to handled external resources.
+        /// </summary>
+        /// <value>
+        /// The default is <see cref="AccessExternalResourcesMode.Allow"/>.
+        /// </value>
         public AccessExternalResourcesMode AccessExternalResourcesMode
         {
             get
@@ -76,6 +82,14 @@ namespace SharpVectors.Dom
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating if image elements will render bitmaps.
+        /// </summary>
+        /// <value>
+        /// if <see langword="true"/> elements will render bitmaps; otherwise, it is 
+        /// <see langword="false"/> elements will not render bitmaps.
+        /// The default is <see langword="true"/>.
+        /// </value>
         public bool CanUseBitmap
         {
             get
@@ -521,6 +535,7 @@ namespace SharpVectors.Dom
 
         #region IDocument interface
 
+        /// <inheritdoc />
         public bool CanAccessExternalResources(string resourcesUri)
         {
             if (AccessExternalResourcesMode == AccessExternalResourcesMode.Ignore)
