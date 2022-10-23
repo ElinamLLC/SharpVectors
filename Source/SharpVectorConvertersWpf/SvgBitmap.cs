@@ -21,11 +21,15 @@ using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Converters.Utils;
 
-using DpiScale = SharpVectors.Runtime.DpiScale;
-using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
-
 namespace SharpVectors.Converters
 {
+    using DpiScale = SharpVectors.Runtime.DpiScale;
+    using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+
+    /// <summary>
+    /// This is an extension of the WPF <see cref="Image"/> control to provide SVG-based image sources.
+    /// </summary>
+    /// <seealso cref="SvgIcon"/>
     public class SvgBitmap : Image
     {
         #region Public Fields
@@ -63,6 +67,9 @@ namespace SharpVectors.Converters
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgBitmap"/> class.
+        /// </summary>
         public SvgBitmap()
         {
         }
@@ -72,12 +79,13 @@ namespace SharpVectors.Converters
         #region Public Properties
 
         /// <summary>
-        /// The <c>AppName</c> for the element.
-        /// If the value is of type <c>AppName</c>, then that is the <c>AppName</c> that will be used.
-        /// If the value is of any other type, then that value will be used
-        /// as the content for a <c>AppName</c> provided by the system. Refer to SvgObjectService
-        /// for attached properties to customize the <c>AppName</c>.
+        /// Gets or sets the <c>name</c> of the parent assembly for this element.
         /// </summary>
+        /// <value>
+        /// A string containing the name of the parent assembly or the name of the assembly containing <c>SVG</c> file 
+        /// referenced on this control in XAML, if the source type is <see cref="Uri"/>.
+        /// </value>
+        [Bindable(true), Category("Appearance")]
         public string AppName
         {
             get {
@@ -89,7 +97,7 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets the path to the SVG file to load into this <see cref="Canvas"/>.
+        /// Gets or sets the path to the SVG file to load into this <see cref="SvgBitmap"/>.
         /// </summary>
         /// <value>
         /// A <see cref="System.Uri"/> specifying the path to the SVG source file.
@@ -116,7 +124,7 @@ namespace SharpVectors.Converters
         }
 
         /// <summary>
-        /// Gets or sets the SVG contents to load into this <see cref="Canvas"/>.
+        /// Gets or sets the SVG contents to load into this <see cref="SvgBitmap"/>.
         /// </summary>
         /// <value>
         /// A <see cref="System.String"/> specifying the embedded SVG contents.

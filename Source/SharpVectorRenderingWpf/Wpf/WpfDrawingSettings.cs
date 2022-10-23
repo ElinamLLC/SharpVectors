@@ -2,11 +2,13 @@
 using System.IO;
 using System.Xml;
 using System.Linq;
+using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
 
 using System.Windows;
 using System.Windows.Media;
+
 using SharpVectors.Dom;
 
 namespace SharpVectors.Renderers.Wpf
@@ -16,21 +18,48 @@ namespace SharpVectors.Renderers.Wpf
     using SvgInteractiveModes = SharpVectors.Runtime.SvgInteractiveModes;
 
     /// <summary>
-    /// This provides the options for the drawing/rendering engine of the WPF.
+    /// This provides the settings or options for the drawing/rendering engine of the WPF.
     /// </summary>
     [Serializable]
     public sealed class WpfDrawingSettings : WpfSettings<WpfDrawingSettings>
     {
-        /// <summary>
-        /// Gets the name of the <c>XML</c> tag name, under which this object is stored.
-        /// </summary>
-        public const string XmlTagName = "drawingSettings";
-        public const string XmlVersion = "1.0.0";
-
         #region Public Fields
 
+        /// <summary>
+        /// The name of the <c>XML</c> tag name, under which this object is stored.
+        /// </summary>
+        public const string XmlTagName = "drawingSettings";
+        /// <summary>
+        /// The version of the file format, under which this object is stored.
+        /// </summary>
+        public const string XmlVersion = "1.0.0";
+
+        /// <summary>
+        /// A well-known property name, specifies the <see cref="Pen"/> object to be used for an <c>SVG</c> element, 
+        /// which is defined with display styling <c>none</c>, but no stroke styling options.
+        /// <para>
+        /// The default value is <see langword="null"/>.
+        /// </para>
+        /// </summary>
         public const string PropertyNonePen     = "_NonePen";
+        /// <summary>
+        /// A well-known property name, specifies the <see cref="Brush"/> object to be used for an <c>SVG</c> element, 
+        /// which is defined with display styling <c>none</c>, but no fill styling options. 
+        /// <para>
+        /// The default value is <see langword="null"/>.
+        /// </para>
+        /// </summary>
         public const string PropertyNoneBrush   = "_NoneBrush";
+        /// <summary>
+        /// A well-known property name, a Boolean value specifying the target output of the rendering is 
+        /// resource dictionary <c>XAML</c>.
+        /// <para>
+        /// If set to <see langword="true"/>, operations required to enhance the output of <see cref="ResourceDictionary"/>
+        /// <c>XAML</c> are enabled.
+        /// </para>
+        /// The default value is <see langword="false"/>.
+        /// </summary>
+        /// <seealso cref="DrawingResources"/>.
         public const string PropertyIsResources = "_IsResources";
 
         #endregion
@@ -81,7 +110,7 @@ namespace SharpVectors.Renderers.Wpf
         private SvgInteractiveModes _interactiveMode;
 
         private WpfDrawingResources _drawingResources;
-        private AccessExternalResourcesMode _accessMode;
+        private ExternalResourcesAccessModes _resourcesAccessMode;
         private bool _canUseBitmap = true;
 
         #endregion
@@ -120,7 +149,7 @@ namespace SharpVectors.Renderers.Wpf
             _cssVariables          = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             _dpiScale              = DpiUtilities.GetSystemScale();
-            _accessMode            = AccessExternalResourcesMode.Allow;
+            _resourcesAccessMode   = ExternalResourcesAccessModes.Allow;
             _canUseBitmap          = true;
         }
 
@@ -166,7 +195,7 @@ namespace SharpVectors.Renderers.Wpf
             _fontFamilyMap         = settings._fontFamilyMap;
             _cssVariables          = settings._cssVariables;
             _dpiScale              = settings._dpiScale;
-            _accessMode            = settings._accessMode;
+            _resourcesAccessMode            = settings._resourcesAccessMode;
             _canUseBitmap          = settings._canUseBitmap;
         }
 
@@ -175,10 +204,16 @@ namespace SharpVectors.Renderers.Wpf
         #region Public Properties
 
         /// <summary>
-        /// 
+        /// Gets or sets a well-known property value.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">
+        /// The well-known name of the property. It can be <c>SharpVectors</c> or user-defined. Only the <c>SharpVectors</c>
+        /// defined properties are supported by default. A <see langword="null"/> or empty <see cref="String"/> names are ignored.
+        /// </param>
+        /// <value>
+        /// The value of the well-known or user-defined property. Setting the value of an existing property 
+        /// to <see langword="null"/> will remove the property.
+        /// </value>
         public object this[string name]
         {
             get {
@@ -193,9 +228,13 @@ namespace SharpVectors.Renderers.Wpf
                 return _properties[name];
             }
             set {
-                if (string.IsNullOrWhiteSpace(name) || _properties == null)
+                if (string.IsNullOrWhiteSpace(name))
                 {
                     return;
+                }
+                if (_properties == null)
+                {
+                    _properties = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
                 }
                 if (value == null)
                 {
@@ -212,9 +251,13 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the pixel width of the rendered drawing.
         /// </summary>
-        /// <value></value>
+        /// <value>The width of the rendered drawing in pixels. The default is <c>-1</c>, not set.</value>
+        /// <remarks>
+        /// This, together with a valid <see cref="PixelHeight"/> value, may defined a bounding box around the rendered drawing
+        /// to constrain its bounds. Only effective where static images are required.
+        /// </remarks>
         public int PixelWidth
         {
             get {
@@ -226,9 +269,13 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the pixel height of the rendered drawing.
         /// </summary>
-        /// <value></value>
+        /// <value>The height of the rendered drawing in pixels. The default is <c>-1</c>, not set.</value>
+        /// <remarks>
+        /// This, together with a valid <see cref="PixelWidth"/> value, may defined a bounding box around the rendered drawing
+        /// to constrain its bounds. Only effective where static images are required.
+        /// </remarks>
         public int PixelHeight
         {
             get {
@@ -240,9 +287,12 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets a value indicating the dimension or size of the target drawing is specified.
         /// </summary>
-        /// <value></value>
+        /// <value>
+        /// This is <see langword="true"/> if the values of both <see cref="PixelWidth"/> and <see cref="PixelHeight"/> are
+        /// positive; otherwise, it is <see langword="false"/>.
+        /// </value>
         public bool HasPixelSize
         {
             get {
@@ -251,9 +301,16 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets a stylesheet to override the styles in <c>SVG</c> documents using a custom user stylesheet, 
+        /// similar to that in browsers.
         /// </summary>
-        /// <value></value>
+        /// <value>A string containing the path to the user stylesheet file. The default is <see langword="null"/>.</value>
+        /// <remarks>
+        /// In most browsers, the user (or reader) of the web site can choose to override styles using a custom 
+        /// user stylesheet designed to tailor the experience to the user's wishes. Depending on the user agent, 
+        /// user styles can be configured directly or added via browser extensions.
+        /// </remarks>
+        /// <seealso cref="UserAgentCssFilePath"/>
         public string UserCssFilePath
         {
             get {
@@ -265,9 +322,19 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the basic style sheet that give default styles to any <c>SVG</c> document, similar to
+        /// the user-agent or browsers styles.
         /// </summary>
-        /// <value></value>
+        /// <value>A string containing the path to the user-agent stylesheet file. The default is <see langword="null"/>.</value>
+        /// <remarks>
+        /// These style sheets are named user-agent stylesheets in browsers. Most browsers use actual stylesheets 
+        /// for this purpose, while others simulate them in code. The end result is the same.
+        /// <para>
+        /// Some browsers let users modify the user-agent stylesheet, but this is rare and is the approach used
+        /// by the <c>SharpVectors</c>.
+        /// </para>
+        /// </remarks>
+        /// <seealso cref="UserCssFilePath"/>
         public string UserAgentCssFilePath
         {
             get {
@@ -306,7 +373,7 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// Gets or sets a value to indicate turning off viewbox at the root of the drawing.
+        /// Gets or sets a value to indicate whether to turn off viewbox at the root of the drawing.
         /// </summary>
         /// <value>
         /// For image outputs, this will force the original size to be saved.
@@ -383,13 +450,11 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the path geometry is 
-        /// optimized using the <see cref="StreamGeometry"/>.
+        /// Gets or sets a value indicating whether the path geometry is optimized using the <see cref="StreamGeometry"/>.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the path geometry is optimized
-        /// using the <see cref="StreamGeometry"/>; otherwise, it is 
-        /// <see langword="false"/>. The default is <see langword="true"/>.
+        /// This is <see langword="true"/> if the path geometry is optimized using the <see cref="StreamGeometry"/>; 
+        /// otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
         /// </value>
         public bool OptimizePath
         {
@@ -402,13 +467,11 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the texts are rendered as
-        /// path geometry.
+        /// Gets or sets a value indicating whether the texts are rendered as path geometry.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if texts are rendered as path 
-        /// geometries; otherwise, this is <see langword="false"/>. The default
-        /// is <see langword="false"/>.
+        /// This is <see langword="true"/> if texts are rendered as path geometries; otherwise, this is 
+        /// <see langword="false"/>. The default is <see langword="false"/>.
         /// </value>
         public bool TextAsGeometry
         {
@@ -425,14 +488,12 @@ namespace SharpVectors.Renderers.Wpf
         /// classes are used in the generated output.
         /// </summary>
         /// <value>
-        /// This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c>
-        /// classes and types are used in the generated output; otherwise, it is 
-        /// <see langword="false"/>. The default is <see langword="true"/>.
+        /// This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c> classes and types are used in the 
+        /// generated output; otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
         /// </value>
         /// <remarks>
-        /// The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded
-        /// font path generated by the <see cref="FormattedText"/> class, support
-        /// for embedded images etc.
+        /// The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded font path generated by the 
+        /// <see cref="FormattedText"/> class, support for embedded images etc.
         /// </remarks>
         public bool IncludeRuntime
         {
@@ -499,9 +560,8 @@ namespace SharpVectors.Renderers.Wpf
         /// node does not specify a font family name.
         /// </summary>
         /// <value>
-        /// A string containing the default font family name. The default is
-        /// the <c>Arial Unicode MS</c> font, for its support of Unicode texts.
-        /// This value cannot be <see langword="null"/> or empty.
+        /// A string containing the default font family name. The default is the <c>Arial</c> font, 
+        /// for its support of Unicode texts. This value cannot be <see langword="null"/> or empty.
         /// </value>
         public string DefaultFontName
         {
@@ -523,9 +583,9 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets the list of custom rendering visitor implementation objects to be used by the <c>SharpVectors</c>.
         /// </summary>
-        /// <value></value>
+        /// <value>An object <see cref="WpfVisitors"/> specifying the list of the visitor objects.</value>
         public WpfVisitors Visitors
         {
             get {
@@ -542,8 +602,7 @@ namespace SharpVectors.Renderers.Wpf
         /// </summary>
         /// <value>
         /// An instance of the <see cref="FontFamily"/> specifying the globally available font family. 
-        /// The default is <c>Arial</c> font (since <c>Arial Unicode MS</c> is no longer shipped by MS).
-        /// family.
+        /// The default is <c>Arial</c> font family (since <c>Arial Unicode MS</c> is no longer shipped by MS).
         /// </value>
         public static FontFamily DefaultFontFamily
         {
@@ -701,16 +760,17 @@ namespace SharpVectors.Renderers.Wpf
         /// Gets or sets a value indicating how to handled external resources.
         /// </summary>
         /// <value>
-        /// The default is <see cref="AccessExternalResourcesMode.Allow"/>.
+        /// An enumeration of the type <see cref="ExternalResourcesAccessModes"/> specifying the access mode. 
+        /// The default is <see cref="ExternalResourcesAccessModes.Allow"/>.
         /// </value>
-        /// <see cref="AccessExternalResourcesMode"/>
-        public AccessExternalResourcesMode AccessExternalResourcesMode
+        /// <seealso cref="Document.ExternalResourcesAccessMode"/>
+        public ExternalResourcesAccessModes ExternalResourcesAccessMode
         {
             get {
-                return _accessMode;
+                return _resourcesAccessMode;
             }
             set {
-                _accessMode = value;
+                _resourcesAccessMode = value;
             }
         }
 
@@ -718,26 +778,24 @@ namespace SharpVectors.Renderers.Wpf
         /// Gets or sets a value indicating if image elements will render bitmaps.
         /// </summary>
         /// <value>
-        /// if <see langword="true"/> elements will render bitmaps; otherwise, it is 
-        /// <see langword="false"/> elements will not render bitmaps.
-        /// The default is <see langword="true"/>.
+        /// A value specifying how bitmaps are rendered. If <see langword="true"/> elements will render bitmaps; 
+        /// otherwise, it is <see langword="false"/> elements will not render bitmaps. The default is <see langword="true"/>.
         /// </value>
+        /// <seealso cref="Document.CanUseBitmap"/>
         public bool CanUseBitmap
         {
-            get
-            {
+            get {
                 return _canUseBitmap;
             }
-            set
-            {
+            set {
                 _canUseBitmap = value;
             }
         }
 
         /// <summary>
-        /// 
+        /// Gets the list of the custom font locations or paths.
         /// </summary>
-        /// <value></value>
+        /// <value>An iterator to the custom font locations or paths.</value>
         public IEnumerable<string> FontLocations
         {
             get {
@@ -746,9 +804,9 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// A dictionary specifying a map of the font family names to their locations.
         /// </summary>
-        /// <value></value>
+        /// <value>A dictionary of the font family names to their locations.</value>
         public IDictionary<string, string> FontFamilyNames
         {
             get {
@@ -757,9 +815,9 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets a value specifying whether user-defined font families are associated with the target rendering.
         /// </summary>
-        /// <value></value>
+        /// <value>This is <see langword="true"/> if user-defined font families exists; otherwise, it is <see langword="false"/>. </value>
         public bool HasFontFamilies
         {
             get {
@@ -772,9 +830,9 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets the list of a custom font family objects.
         /// </summary>
-        /// <value></value>
+        /// <value>An iterator to the custom font families.</value>
         public IEnumerable<FontFamily> FontFamilies
         {
             get {
@@ -787,9 +845,16 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets a value specifying the interactive mode of the target rendering.
         /// </summary>
-        /// <value></value>
+        /// <value>
+        /// An enumeration of the type <see cref="SvgInteractiveModes"/> specifying the interactive mode.
+        /// The default is <see cref="SvgInteractiveModes.None"/>, no interactivity.
+        /// </value>
+        /// <remarks>
+        /// The interactive mode determine whether extra attributes are added to the individual rendered elements
+        /// to make it easy to select or identity at runtime.
+        /// </remarks>
         public SvgInteractiveModes InteractiveMode
         {
             get {
@@ -801,9 +866,12 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets an object that stores <c>DPI</c> information from which an <c>SVG</c> element is rendered.
         /// </summary>
-        /// <value></value>
+        /// <value>
+        /// An object <see cref="DpiScale"/> specifying the <c>DPI</c> information for rendering. Setting 
+        /// a <see langword="null"/> value is ignored.
+        /// </value>
         public DpiScale DpiScale
         {
             get {
@@ -817,6 +885,23 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        /// <summary>
+        /// Gets or sets an object used to collect extra information used to enhance the output of
+        /// <see cref="ResourceDictionary"/> XAML.
+        /// </summary>
+        /// <value>
+        /// An object <see cref="WpfDrawingResources"/> specifying the store of the extra information used by 
+        /// resource dictionary output <c>XAML</c>. The default is <see langword="null"/>.
+        /// </value>
+        /// <remarks>
+        /// This is only used if the user-defined property specified by <see cref="PropertyIsResources"/> is set
+        /// to <see langword="true"/>; otherwise, the extra information used by the resource dictionary output are
+        /// not generation. 
+        /// <para>
+        /// If the value of <see cref="PropertyIsResources"/> is set to <see langword="true"/>, an instance of the
+        /// <see cref="WpfDrawingResources"/> is created a associated with this drawing options, if not provided.
+        /// </para>
+        /// </remarks>
         public WpfDrawingResources DrawingResources
         {
             get {
@@ -832,13 +917,24 @@ namespace SharpVectors.Renderers.Wpf
         #region Public Methods
 
         /// <summary>
-        /// 
+        /// This adds a mapped font family name. A mapped name can be a localized name of a font family or
+        /// an alternative font family name.
         /// </summary>
-        /// <param name="mappedName"></param>
-        /// <param name="fontName"></param>
+        /// <param name="mappedName">The mapped or alternative font family name.</param>
+        /// <param name="fontName">The target font family name.</param>
+        /// <remarks>
+        /// <para>
+        /// The font family name mapping applies to both system and private fonts.
+        /// </para>
+        /// Both the <paramref name="mappedName"/> and the <paramref name="fontName"/> values must not be
+        /// <see langword="null"/> or empty <see cref="String"/>.
+        /// </remarks>
         public void AddFontFamilyName(string mappedName, string fontName)
         {
-            lock(_fontSynch)
+            Debug.Assert(!string.IsNullOrWhiteSpace(mappedName), "mappedName cannot be null or empty");
+            Debug.Assert(!string.IsNullOrWhiteSpace(fontName), "fontName cannot be null or empty");
+
+            lock (_fontSynch)
             {
                 if (string.IsNullOrWhiteSpace(mappedName) || string.IsNullOrWhiteSpace(fontName))
                 {
@@ -856,12 +952,22 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// This adds the specified local font location (file or directory) to enable the use of private fonts.
         /// </summary>
-        /// <param name="fontLocation"></param>
+        /// <param name="fontLocation">A string containing the path to a font file.</param>
+        /// <remarks>
+        /// <para>
+        /// The <paramref name="fontLocation"/> value cannot be a file path or a directory. If a directory is specified,
+        /// all the files with the standard font file extensions in the directory will be loaded.
+        /// </para>
+        /// The <paramref name="fontLocation"/> must not be <see langword="null"/> or empty <see cref="String"/> and
+        /// the specified location must exists.
+        /// </remarks>
         public void AddFontLocation(string fontLocation)
         {
-            lock(_fontSynch)
+            Debug.Assert(!string.IsNullOrWhiteSpace(fontLocation), "fontLocation cannot be null or empty");
+
+            lock (_fontSynch)
             {
                 if (string.IsNullOrWhiteSpace(fontLocation))
                 {
@@ -899,12 +1005,17 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// 
+        /// This looks for or matches the specified font family name and attributes.
         /// </summary>
-        /// <param name="fontName"></param>
-        /// <returns></returns>
+        /// <param name="fontName">The font family name to search in the list of defined fonts.</param>
+        /// <returns>
+        /// It returns an <see cref="FontFamily"/> defining the font family object matched; otherwise, it
+        /// returns <see langword="null"/>.
+        /// </returns>
         public FontFamily LookupFontFamily(string fontName, FontWeight weight, FontStyle style, FontStretch stretch)
         {
+            Debug.Assert(!string.IsNullOrWhiteSpace(fontName), "fontName cannot be null or empty");
+
             lock (_fontSynch)
             {
                 if (string.IsNullOrWhiteSpace(fontName))
@@ -957,6 +1068,96 @@ namespace SharpVectors.Renderers.Wpf
             }
         }
 
+        #endregion
+
+        #region IXmlSerializable Members
+
+        /// <summary>
+        /// This reads and sets its state or attributes stored in a <c>XML</c> format with the given reader. 
+        /// </summary>
+        /// <param name="reader">
+        /// The reader with which the <c>XML</c> attributes of this object are accessed.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="reader"/> is <see langword="null"/>.
+        /// </exception>
+        public override void ReadXml(XmlReader reader)
+        {
+            NotNull(reader, nameof(reader));
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// This writes the current state or attributes of this object,
+        /// in the <c>XML</c> format, to the media or storage accessible by the given writer.
+        /// </summary>
+        /// <param name="writer">
+        /// The <c>XML</c> writer with which the <c>XML</c> format of this object's state is written.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If the <paramref name="reader"/> is <see langword="null"/>.
+        /// </exception>
+        public override void WriteXml(XmlWriter writer)
+        {
+            NotNull(writer, nameof(writer));
+
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region ICloneable Members
+
+        /// <overloads>
+        /// This creates a new settings object that is a deep copy of the current instance.
+        /// </overloads>
+        /// <summary>
+        /// This creates a new settings object that is a deep copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new settings object that is a deep copy of this instance.
+        /// </returns>
+        /// <remarks>
+        /// This is deep cloning of the members of this settings object. If you 
+        /// need just a copy, use the copy constructor to create a new instance.
+        /// </remarks>
+        public override WpfDrawingSettings Clone()
+        {
+            WpfDrawingSettings clonedSettings = new WpfDrawingSettings(this);
+
+            if (!string.IsNullOrWhiteSpace(_defaultFontName))
+            {
+                clonedSettings._defaultFontName = new string(_defaultFontName.ToCharArray());
+            }
+            if (!string.IsNullOrWhiteSpace(_userCssFilePath))
+            {
+                clonedSettings._userCssFilePath = new string(_userCssFilePath.ToCharArray());
+            }
+            if (!string.IsNullOrWhiteSpace(_userAgentCssFilePath))
+            {
+                clonedSettings._userAgentCssFilePath = new string(_userAgentCssFilePath.ToCharArray());
+            }
+            if (_culture != null)
+            {
+                clonedSettings._culture = (CultureInfo)_culture.Clone();
+            }
+            if (_neutralCulture != null)
+            {
+                clonedSettings._neutralCulture = (CultureInfo)_neutralCulture.Clone();
+            }
+            if (_dpiScale != null)
+            {
+                clonedSettings._dpiScale = _dpiScale.Clone();
+            }
+
+            return clonedSettings;
+        }
+
+        #endregion
+
+        #region Private Methods
+
         private FontFamily GetMatchingFontFamily(IList<FontFamily> fontFamilies,
             FontWeight weight, FontStyle style, FontStretch stretch)
         {
@@ -979,8 +1180,8 @@ namespace SharpVectors.Renderers.Wpf
                 // Enumerate the family typefaces in the collection.
                 foreach (FamilyTypeface typeface in familyTypefaces)
                 {
-                    FontStyle fontStyle     = typeface.Style;
-                    FontWeight fontWeight   = typeface.Weight;
+                    FontStyle fontStyle = typeface.Style;
+                    FontWeight fontWeight = typeface.Weight;
                     FontStretch fontStretch = typeface.Stretch;
 
                     if (fontStyle.Equals(style) && fontWeight.Equals(weight) && fontStretch.Equals(stretch))
@@ -994,9 +1195,9 @@ namespace SharpVectors.Renderers.Wpf
             if (style != FontStyles.Normal)
             {
                 // Then it is either oblique or italic
-                FontFamily closeFamily   = null;
+                FontFamily closeFamily = null;
                 FontFamily closestFamily = null;
-                bool isItalic            = style.Equals(FontStyles.Italic);
+                bool isItalic = style.Equals(FontStyles.Italic);
 
                 foreach (FontFamily fontFamily in fontFamilies)
                 {
@@ -1006,8 +1207,8 @@ namespace SharpVectors.Renderers.Wpf
                     // Enumerate the family typefaces in the collection.
                     foreach (FamilyTypeface typeface in familyTypefaces)
                     {
-                        FontStyle fontStyle     = typeface.Style;
-                        FontWeight fontWeight   = typeface.Weight;
+                        FontStyle fontStyle = typeface.Style;
+                        FontWeight fontWeight = typeface.Weight;
                         FontStretch fontStretch = typeface.Stretch;
 
                         if (fontStyle.Equals(style))
@@ -1053,10 +1254,10 @@ namespace SharpVectors.Renderers.Wpf
             // For the defined font weights...
             if (weight != FontWeights.Normal && weight != FontWeights.Regular)
             {
-                int weightValue             = weight.ToOpenTypeWeight();
-                int selectedValue           = int.MaxValue;
+                int weightValue = weight.ToOpenTypeWeight();
+                int selectedValue = int.MaxValue;
                 FontFamily sameWeightFamily = null;
-                FontFamily closestFamily    = null;
+                FontFamily closestFamily = null;
                 foreach (FontFamily fontFamily in fontFamilies)
                 {
                     // Return the family typeface collection for the font family.
@@ -1065,8 +1266,8 @@ namespace SharpVectors.Renderers.Wpf
                     // Enumerate the family typefaces in the collection.
                     foreach (FamilyTypeface typeface in familyTypefaces)
                     {
-                        FontStyle fontStyle     = typeface.Style;
-                        FontWeight fontWeight   = typeface.Weight;
+                        FontStyle fontStyle = typeface.Style;
+                        FontWeight fontWeight = typeface.Weight;
                         FontStretch fontStretch = typeface.Stretch;
 
                         if (fontWeight.Equals(weight))
@@ -1100,100 +1301,6 @@ namespace SharpVectors.Renderers.Wpf
 
             return null;
         }
-
-        #endregion
-
-        #region IXmlSerializable Members
-
-        /// <summary>
-        /// This reads and sets its state or attributes stored in a <c>XML</c> format
-        /// with the given reader. 
-        /// </summary>
-        /// <param name="reader">
-        /// The reader with which the <c>XML</c> attributes of this object are accessed.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If the <paramref name="reader"/> is <see langword="null"/>.
-        /// </exception>
-        public override void ReadXml(XmlReader reader)
-        {
-            NotNull(reader, nameof(reader));
-
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// This writes the current state or attributes of this object,
-        /// in the <c>XML</c> format, to the media or storage accessible by the given writer.
-        /// </summary>
-        /// <param name="writer">
-        /// The <c>XML</c> writer with which the <c>XML</c> format of this object's state 
-        /// is written.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If the <paramref name="reader"/> is <see langword="null"/>.
-        /// </exception>
-        public override void WriteXml(XmlWriter writer)
-        {
-            NotNull(writer, nameof(writer));
-
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region ICloneable Members
-
-        /// <overloads>
-        /// This creates a new settings object that is a deep copy of the current 
-        /// instance.
-        /// </overloads>
-        /// <summary>
-        /// This creates a new settings object that is a deep copy of the current 
-        /// instance.
-        /// </summary>
-        /// <returns>
-        /// A new settings object that is a deep copy of this instance.
-        /// </returns>
-        /// <remarks>
-        /// This is deep cloning of the members of this settings object. If you 
-        /// need just a copy, use the copy constructor to create a new instance.
-        /// </remarks>
-        public override WpfDrawingSettings Clone()
-        {
-            WpfDrawingSettings clonedSettings = new WpfDrawingSettings(this);
-
-            if (!string.IsNullOrWhiteSpace(_defaultFontName))
-            {
-                clonedSettings._defaultFontName = new string(_defaultFontName.ToCharArray());
-            }
-            if (!string.IsNullOrWhiteSpace(_userCssFilePath))
-            {
-                clonedSettings._userCssFilePath = new string(_userCssFilePath.ToCharArray());
-            }
-            if (!string.IsNullOrWhiteSpace(_userAgentCssFilePath))
-            {
-                clonedSettings._userAgentCssFilePath = new string(_userAgentCssFilePath.ToCharArray());
-            }
-            if (_culture != null)
-            {
-                clonedSettings._culture = (CultureInfo)_culture.Clone();
-            }
-            if (_neutralCulture != null)
-            {
-                clonedSettings._neutralCulture = (CultureInfo)_neutralCulture.Clone();
-            }
-            if (_dpiScale != null)
-            {
-                clonedSettings._dpiScale = _dpiScale.Clone();
-            }
-
-            return clonedSettings;
-        }
-
-        #endregion
-
-        #region Private Methods
 
         private void BuildDocumentFonts()
         {

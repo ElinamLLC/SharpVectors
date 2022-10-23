@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="SharpVector - Design Mode Tests" Height="720" Width="960" Icon="App.ico" WindowStartupLocation="CenterScreen">
     <DockPanel LastChildFill="True" Margin="3">
-        <TextBlock DockPanel.Dock="Top" Margin="3" Height="32" Text="A sample to demonstrate support for SVG files in resources in Design-Mode." 
+        <TextBlock Visibility="Collapsed" DockPanel.Dock="Top" Margin="3" Height="32" Text="A sample to demonstrate support for SVG files in resources in Design-Mode." 
                     TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-        <TabControl>
+        <TabControl SelectedIndex="5">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -38,7 +38,7 @@
                 </Style>
             </TabControl.Resources>
 
-            <TabItem x:Name="tabSvgImage">
+            <TabItem x:Name="tabSvgImage" Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfTestResourceSvg}" />
@@ -122,7 +122,7 @@
                 </DockPanel>
             </TabItem>
 
-            <TabItem x:Name="tabSvgImageConverter">
+            <TabItem x:Name="tabSvgImageConverter" Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Output.svg, AppName=WpfTestResourceSvg}" />
@@ -154,7 +154,7 @@
                 </UniformGrid>
             </TabItem>
 
-            <TabItem x:Name="tabSvgViewbox">
+            <TabItem x:Name="tabSvgViewbox" Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfTestResourceSvg}" />
@@ -171,7 +171,7 @@
                 </UniformGrid>
             </TabItem>
 
-            <TabItem x:Name="tabBitmap">
+            <TabItem x:Name="tabBitmap" Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfTestResourceSvg}" />
@@ -186,7 +186,7 @@
                 </UniformGrid>
             </TabItem>
 
-            <TabItem x:Name="tabSvgIcon">
+            <TabItem x:Name="tabSvgIcon" Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfTestResourceSvg}" />
@@ -344,7 +344,7 @@
                 </DockPanel>
             </TabItem>
 
-            <TabItem x:Name="tabExternal">
+            <TabItem x:Name="tabExternal" Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfTestResourceSvg}" />

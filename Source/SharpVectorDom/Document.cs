@@ -6,16 +6,16 @@ using SharpVectors.Dom.Events;
 namespace SharpVectors.Dom
 {
     /// <summary>
-    /// Summary description for Document.
+    /// The base implementation of an <c>XML</c> document to support both <c>SVG</c> and <c>CSS</c> documents.
     /// </summary>
     public class Document : XmlDocument, IDocument, INode, IEventTargetSupport, IDocumentEvent
     {
         #region Private Fields
 
+        private bool _canUseBitmap;
         private bool _mutationEvents;
         private EventTarget _eventTarget;
-        private AccessExternalResourcesMode _accessExternalResourcesMode;
-        private bool _canUseBitmap;
+        private ExternalResourcesAccessModes _resourcesAccessMode;
 
         #endregion
 
@@ -23,26 +23,33 @@ namespace SharpVectors.Dom
 
         public Document()
         {
-            _eventTarget = new EventTarget(this);
-
-            NodeChanged += WhenNodeChanged;
-            NodeChanging += WhenNodeChanging;
-            NodeInserted += WhenNodeInserted;
-            NodeInserting += WhenNodeInserting;
-            NodeRemoved += WhenNodeRemoved;
-            NodeRemoving += WhenNodeRemoving;
+            InitDocument();
         }
 
         protected internal Document(DomImplementation domImplementation)
             : base(domImplementation)
         {
-            _eventTarget = new EventTarget(this);
+            InitDocument();
         }
 
         public Document(XmlNameTable nameTable)
             : base(nameTable)
         {
-            _eventTarget = new EventTarget(this);
+            InitDocument();
+        }
+
+        private void InitDocument()
+        {
+            _canUseBitmap        = true;
+            _resourcesAccessMode = ExternalResourcesAccessModes.Allow;
+            _eventTarget         = new EventTarget(this);
+
+            NodeChanged   += WhenNodeChanged;
+            NodeChanging  += WhenNodeChanging;
+            NodeInserted  += WhenNodeInserted;
+            NodeInserting += WhenNodeInserting;
+            NodeRemoved   += WhenNodeRemoved;
+            NodeRemoving  += WhenNodeRemoving;
         }
 
         #endregion
@@ -52,8 +59,11 @@ namespace SharpVectors.Dom
         #region Configuration Properties
 
         /// <summary>
-        /// Enables or disables mutation events.
+        /// Gets or sets a value to enable or disable mutation events.
         /// </summary>
+        /// <value>
+        /// A value specifying whether to enable or disable mutation events. The default is <see langword="false"/>.
+        /// </value>
         public bool MutationEvents
         {
             get {
@@ -68,17 +78,16 @@ namespace SharpVectors.Dom
         /// Gets or sets a value indicating how to handled external resources.
         /// </summary>
         /// <value>
-        /// The default is <see cref="AccessExternalResourcesMode.Allow"/>.
+        /// An enumeration of the type <see cref="ExternalResourcesAccessModes"/> specifying the access mode. 
+        /// The default is <see cref="ExternalResourcesAccessModes.Allow"/>.
         /// </value>
-        public AccessExternalResourcesMode AccessExternalResourcesMode
+        public ExternalResourcesAccessModes ExternalResourcesAccessMode
         {
-            get
-            {
-                return _accessExternalResourcesMode;
+            get {
+                return _resourcesAccessMode;
             }
-            set
-            {
-                _accessExternalResourcesMode = value;
+            set {
+                _resourcesAccessMode = value;
             }
         }
 
@@ -86,18 +95,15 @@ namespace SharpVectors.Dom
         /// Gets or sets a value indicating if image elements will render bitmaps.
         /// </summary>
         /// <value>
-        /// if <see langword="true"/> elements will render bitmaps; otherwise, it is 
-        /// <see langword="false"/> elements will not render bitmaps.
-        /// The default is <see langword="true"/>.
+        /// A value specifying how bitmaps are rendered. If <see langword="true"/> elements will render bitmaps; 
+        /// otherwise, it is <see langword="false"/> elements will not render bitmaps. The default is <see langword="true"/>.
         /// </value>
         public bool CanUseBitmap
         {
-            get
-            {
+            get {
                 return _canUseBitmap;
             }
-            set
-            {
+            set {
                 _canUseBitmap = value;
             }
         }
@@ -538,19 +544,19 @@ namespace SharpVectors.Dom
         /// <inheritdoc />
         public bool CanAccessExternalResources(string resourcesUri)
         {
-            if (AccessExternalResourcesMode == AccessExternalResourcesMode.Ignore)
+            if (ExternalResourcesAccessMode == ExternalResourcesAccessModes.Ignore)
             {
                 return false;
             }
             
-            if (AccessExternalResourcesMode == AccessExternalResourcesMode.ThrowError)
+            if (ExternalResourcesAccessMode == ExternalResourcesAccessModes.ThrowError)
             {
-                if(resourcesUri == null)
+                if (string.IsNullOrWhiteSpace(resourcesUri))
                 {
-                    throw new InvalidOperationException("Unauthorized attempt to Access External Resources, resourcesUri = null");
+                    throw new InvalidOperationException("Unauthorized attempt to access external resources, resourcesUri = null");
                 }
 
-                throw new InvalidOperationException("Unauthorized attempt to Access External Resources, resourcesUri = " + resourcesUri);
+                throw new InvalidOperationException("Unauthorized attempt to access external resources, resourcesUri = " + resourcesUri);
             }
             
             return true;

@@ -10,14 +10,26 @@ using System.Windows.Controls;
 
 namespace SharpVectors.Converters
 {
+    /// <summary>
+    /// This is an extension of the WPF <see cref="Image"/> control to provide SVG-based image sources.
+    /// </summary>
     public sealed class SvgIcon : SvgBitmap
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly DependencyProperty FillProperty = DependencyProperty.Register("Fill", 
             typeof(Brush), typeof(SvgIcon), new PropertyMetadata(Brushes.Black));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register("Stroke", 
             typeof(Brush), typeof(SvgIcon), new PropertyMetadata(Brushes.Transparent));
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SvgIcon"/> class.
+        /// </summary>
         public SvgIcon()
         {
         }
@@ -42,6 +54,8 @@ namespace SharpVectors.Converters
             }
         }
 
+        #region Protected Methods
+
         protected override void OnLoadDrawing(DrawingGroup drawing)
         {
             base.OnLoadDrawing(drawing);
@@ -64,6 +78,10 @@ namespace SharpVectors.Converters
 
             base.OnUnloadDiagram();
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void SetBindings(DrawingGroup group)
         {
@@ -128,5 +146,7 @@ namespace SharpVectors.Converters
                 }
             }
         }
+
+        #endregion
     }
 }

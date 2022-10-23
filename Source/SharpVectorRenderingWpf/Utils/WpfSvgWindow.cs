@@ -171,7 +171,7 @@ namespace SharpVectors.Renderers.Utils
                     document.Dpi = dpiScale.PixelsPerInchY;
                 }
 
-                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
             document.Load(documentUri.AbsoluteUri);
@@ -213,7 +213,7 @@ namespace SharpVectors.Renderers.Utils
                     document.Dpi = dpiScale.PixelsPerInchY;
                 }
 
-                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
             document.Load(documentStream);
@@ -243,7 +243,7 @@ namespace SharpVectors.Renderers.Utils
                     document.Dpi = dpiScale.PixelsPerInchY;
                 }
 
-                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
             document.Load(textReader);
@@ -273,7 +273,7 @@ namespace SharpVectors.Renderers.Utils
                     document.Dpi = dpiScale.PixelsPerInchY;
                 }
 
-                document.AccessExternalResourcesMode = drawingSettings.AccessExternalResourcesMode;
+                document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
             }
 

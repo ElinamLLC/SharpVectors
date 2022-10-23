@@ -1184,31 +1184,6 @@ namespace SharpVectors.Converters
         #region Protected Methods
 
         /// <summary>
-        /// Gets the rendering settings or options to be used in rendering the SVG in this control.
-        /// </summary>
-        /// <returns> 
-        /// An instance of <see cref="WpfDrawingSettings"/> specifying the rendering options or settings.
-        /// </returns>
-        protected virtual WpfDrawingSettings GetDrawingSettings()
-        {
-            WpfDrawingSettings settings = new WpfDrawingSettings();
-            settings.IncludeRuntime = _includeRuntime;
-            settings.TextAsGeometry = _textAsGeometry;
-            settings.OptimizePath = _optimizePath;
-
-            settings.IgnoreRootViewbox = _ignoreRootViewbox;
-            settings.EnsureViewboxSize = _ensureViewboxSize;
-            settings.EnsureViewboxPosition = _ensureViewboxPosition;
-
-            if (_culture != null)
-            {
-                settings.CultureInfo = _culture;
-            }
-
-            return settings;
-        }
-
-        /// <summary>
         /// Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.
         /// </summary>
         /// <param name="e">Event data for the event.</param>
@@ -1227,6 +1202,31 @@ namespace SharpVectors.Converters
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the rendering settings or options to be used in rendering the SVG in this control.
+        /// </summary>
+        /// <returns> 
+        /// An instance of <see cref="WpfDrawingSettings"/> specifying the rendering options or settings.
+        /// </returns>
+        protected virtual WpfDrawingSettings GetDrawingSettings()
+        {
+            var settings = new WpfDrawingSettings();
+            settings.IncludeRuntime = _includeRuntime;
+            settings.TextAsGeometry = _textAsGeometry;
+            settings.OptimizePath   = _optimizePath;
+
+            settings.IgnoreRootViewbox = _ignoreRootViewbox;
+            settings.EnsureViewboxSize = _ensureViewboxSize;
+            settings.EnsureViewboxPosition = _ensureViewboxPosition;
+
+            if (_culture != null)
+            {
+                settings.CultureInfo = _culture;
+            }
+
+            return settings;
         }
 
         /// <summary>

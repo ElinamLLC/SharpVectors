@@ -163,13 +163,6 @@ namespace SharpVectors.Runtime
             }
         }
 
-        public Rect Bounds
-        {
-            get {
-                return _bounds;
-            }
-        }
-
         public SvgAnimationLayer AnimationCanvas
         {
             get {
@@ -181,6 +174,13 @@ namespace SharpVectors.Runtime
         {
             get {
                 return _displayTransform;
+            }
+        }
+
+        public Rect Bounds
+        {
+            get {
+                return _bounds;
             }
         }
 
@@ -355,8 +355,6 @@ namespace SharpVectors.Runtime
             //            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Render, EmptyDelegate);
         }
 
-        #region RenderDiagrams Methods
-
         public void RenderDiagrams(SvgImageNameScope image)
         {
             DrawingImage drawingImage = image.Source as DrawingImage;
@@ -417,8 +415,6 @@ namespace SharpVectors.Runtime
             this.InvalidateMeasure();
             this.InvalidateVisual();
         }
-
-        #endregion
 
         #endregion
 

@@ -9,7 +9,7 @@
     <title>ResourceSvgConverter | SharpVectors Documentation </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="ResourceSvgConverter | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.1.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -135,18 +135,18 @@
 <h1 id="resource-svg-converter---resourcesvgconverter">Resource SVG Converter - ResourceSvgConverter</h1>
 
 <p>The <strong><a class="xref" href="../api/SharpVectors.Converters.ResourceSvgConverter.html">ResourceSvgConverter</a></strong> converter class takes multiple files and directories as input and outputs a
-<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a>  in XAML format.
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a>  in XAML format.
 This is useful for vector icons, but required supports in the rendering process to track brushes and pens, and an extension to the
 <strong><a class="xref" href="../api/SharpVectors.Converters.XmlXamlWriter.html">XmlXamlWriter</a></strong> class to format a compact XAML output.
 It is the most recent SharpVector SVG converter and adds extension features that will be supported in the other converters.</p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>Currently, the input is restricted to local or network files and directories.</p>
-<p>The output is <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a> or local or network file or one of the following</p>
+<p>The output is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a> or local or network file or one of the following</p>
 <ul>
-<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.stream">Stream</a>: A stream object created by the user.</li>
-<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a>: A text writer object created by the user.</li>
-<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a>: An XML writer object created by the user</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>: A stream object created by the user.</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a>: A text writer object created by the user.</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a>: An XML writer object created by the user</li>
 </ul>
 </div>
 <h2 id="resource-options">Resource Options</h2>
@@ -155,7 +155,7 @@ It is the most recent SharpVector SVG converter and adds extension features that
 <p>The following are the properties exposed by the resource options to customize the output resource dictionary XAML:</p>
 <ul>
 <li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode">ResourceMode</a></strong>: An enumeration specifying the type of the resource object;
-<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S">
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S">
 <ul role="tablist">
 <li role="presentation">
 <a href="#tabpanel_bHGHmlrG6S_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">DrawingGroup Resource</a>
@@ -190,14 +190,14 @@ It is the most recent SharpVector SVG converter and adds extension features that
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze">ResourceFreeze</a></strong>: Makes the freezable resource object unmodifiable and sets its <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.freezable.isfrozen#system-windows-freezable-isfrozen">IsFrozen</a> property to <code>true</code>.
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze">ResourceFreeze</a></strong>: Makes the freezable resource object unmodifiable and sets its <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.isfrozen#system-windows-freezable-isfrozen">IsFrozen</a> property to <code>true</code>.
 To freeze a resource object declared in markup, the <code>PresentationOptions:Freeze</code> attribute is used, as shown above as <code>po.Freeze</code>, and the <code>xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot;</code> namespace is added.
 <div class="NOTE">
 <h5>Note</h5>
 <p>If this property is set to <code>true</code>, it is admisable to set the <code>ResourceAccessType</code> type below to <code>Static</code>.</p>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
 <li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision">NumericPrecision</a></strong>: This specifies numeric precision or number of decimal places for the floating number. The default is <code>4</code>, in complaince to the SVG specifications. Setting this to <code>-1</code> will disable this property.</li>
 <li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat">ColorNameFormat</a></strong>: This determines the key name of color objects, if both <strong>BindToResources</strong>  and <strong>BindToColors</strong> properties are enabled. The default is <code>Color{0}</code>.</li>
 <li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat">BrushNameFormat</a></strong>: This determines the key name of brush objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Brush{0}</code>.
@@ -540,7 +540,7 @@ Dim xamlText = converter.Convert()
 </li>
 <li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType">ResourceResolverType</a></strong>: Get a value specifying the current type of the resource object key resolver,
 which is implemented through the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface.
-This applies to the main resource objects; <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> (and not the color, brush or pen objects).
+This applies to the main resource objects; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> (and not the color, brush or pen objects).
 It returns <a class="xref" href="../api/SharpVectors.Renderers.ResourceKeyResolverType.html#SharpVectors_Renderers_ResourceKeyResolverType_None">None</a>, if no resource key resolver is attached, in which case the default resolver will be used.</li>
 </ul>
 <h3 id="resourcekeyresolvertype---default">ResourceKeyResolverType - Default</h3>

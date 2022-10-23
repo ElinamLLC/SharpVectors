@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Delegate EventListener
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.1.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -174,14 +174,14 @@ after they have completed using the listener.
 <p>
 Copying a <a class="xref" href="SharpVectors.Dom.INode.html">INode</a> does not copy the event listeners attached to it. Event listeners 
 must be attached to the newly created <a class="xref" href="SharpVectors.Dom.INode.html">INode</a> afterwards if so desired.
-Therefore, <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>s are copied using <a class="xref" href="SharpVectors.Dom.IXmlNode.html#SharpVectors_Dom_IXmlNode_CloneNode_System_Boolean_">CloneNode(Boolean)</a> or
+Therefore, <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>s are copied using <a class="xref" href="SharpVectors.Dom.IXmlNode.html#SharpVectors_Dom_IXmlNode_CloneNode_System_Boolean_">INode.CloneNode</a> or
 <see cref="!:IRange.CloneContents">IRange.CloneContents</see>, the <a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a>s 
 attached to the source <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>s are not attached to their copies.
 </p>
 <p>
 Moving a <a class="xref" href="SharpVectors.Dom.INode.html">INode</a> does not affect the event listeners attached to it. Therefore, when
 <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>s are moved using <see cref="!:IDocument.AdoptNode">IDocument.AdoptNode</see>,
-<a class="xref" href="SharpVectors.Dom.IXmlNode.html#SharpVectors_Dom_IXmlNode_AppendChild_System_Xml_XmlNode_">AppendChild(XmlNode)</a>, or <see cref="!:IRange.ExtractContents">IRange.ExtractContents</see>, the
+<a class="xref" href="SharpVectors.Dom.IXmlNode.html#SharpVectors_Dom_IXmlNode_AppendChild_System_Xml_XmlNode_">INode.AppendChild</a>, or <see cref="!:IRange.ExtractContents">IRange.ExtractContents</see>, the
 <a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a>s attached to the moved <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>s stay attached to them.
 </p>
 </div>

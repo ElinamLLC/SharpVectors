@@ -16,12 +16,13 @@
     <copyright>Copyright (c) 2010 - 2022 Elinam LLC</copyright>
     <readme>docs\SharpVectors.Wpf.md</readme>
     <releaseNotes>
-        Release 1.8.0
-          * WPF: ResourceSvgConverter - An SVG converter to handle conversion of SVG files to ResourceDictionary XAML.
-          * WPF: Improvements in the XmlXamlWriter.
-          * WPF: A new SharpVectors.Wpf Nuget package for WPF applications.
-          * Improvements in the documentation site using Github Pages.
-          * Several bug fixes and code improvements.
+        Release 1.8.1
+          * WPF: Added controls (SvgBitmap, SvgIcon) to improve binding and supports monochrome SVG.
+          * WPF: Design-mode support improvements and fixes.
+          * Options to ignore or accept external resources, contributed by @mb-jp.
+          * Options to ignore or render bitmaps, contributed by @mb-jp.
+          * Source codes and manual documentation improvements.
+          * Bug fixes and code improvements.
     </releaseNotes>
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
     <dependencies>

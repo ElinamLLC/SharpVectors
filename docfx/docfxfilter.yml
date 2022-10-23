@@ -39,3 +39,15 @@ apiRules:
     # mentioning types from SharpVectors.Net.* namespace
     uidRegex: ^SharpVectors\.Net$
     type: Namespace
+- exclude:
+    # constants SharpVectors.Dom.CssConstants class
+    uidRegex: ^SharpVectors\.Dom\.CssConstants$
+    type: Class
+- exclude:
+    # constants SharpVectors.Dom.SvgConstants class
+    uidRegex: ^SharpVectors\.Dom\.SvgConstants$
+    type: Class
+- exclude:
+    # constants SharpVectors.Dom.XmlConstants class
+    uidRegex: ^SharpVectors\.Dom\.XmlConstants$
+    type: Class

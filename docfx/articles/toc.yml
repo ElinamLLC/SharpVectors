@@ -19,6 +19,8 @@
     href: resource_converter.md
 - name: Markup Extensions
   href: markup_extensions.md
+- name: Image Controls
+  href: image_controls.md
 - name: Controls
   href: controls.md
 - name: Applications

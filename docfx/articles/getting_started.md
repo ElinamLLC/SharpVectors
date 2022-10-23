@@ -2,29 +2,32 @@
 uid: topic_getting_started
 title: Getting Started
 ---
+
 # Getting Started
+
 The SharpVectors library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.
 
-For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below: 
+For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below:
 
-![](../images/rendering.png)
+![WPF Rendering](../images/rendering.png)
 
 In some cases, the listed classes are entry points to the actual implementations as shown below for the text rendering.
 
-![](../images/rendering_texts.png)
+![WPF Text Rendering](../images/rendering_texts.png)
 
 For the GDI+ application, the rendering classes are shown in the diagram below:
 
-![](../images/rendering_gdi.png)
+![WPF Image Rendering](../images/rendering_gdi.png)
 
 ## Options and Settings
 
 A class **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingSettings)** in the `SharpVectors.Rendering.Wpf` assembly provides the currently available user-defined options for the rendering. 
 The other options class shown below is the **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings)** class, [ResourceDictionary](xref:System.Windows.ResourceDictionary) specific output options that will be discussed later:
 
-![](../images/drawing_settings.png)
+![WPF Settings](../images/drawing_settings.png)
 
 All the properties of this class are well documented. The most important properties are
+
 * **CultureInfo**: This is the culture information used for the text rendering, and it is passed to the [FormattedText](xref:System.Windows.Media.FormattedText) class. The default is the English culture.
 * **IncludeRuntime**: This determines whether the application using the output of the conversion will link to the SharpVectors.Runtime.dll. The default is **true**, set this to **false** if you do not intend to use the runtime assembly.
 * **TextAsGeometry**: This determines whether the texts are rendered as path geometry. The default is **false**. The vertical text does not currently support this option. Set this to **true** if do not want to use the runtime assembly, so that font path will not be included in the output.
@@ -33,7 +36,9 @@ All the properties of this class are well documented. The most important propert
 > The **TextAsGeometry** property is marked as deprecated in this version, and will be removed in version 2.0 of the SharpVectors library.
 
 ## Rendering Process
-For the WPF system, the rendering process is managed by various classes listed below: named 
+
+For the WPF system, the rendering process is managed by various classes listed below: named
+
 * **[](xref:SharpVectors.Renderers.Utils.WpfSvgWindow)**: An class implementing an abstraction of browser window object.
 * **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingRenderer)**: The controlling class used by the WPF implementation.
 * **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingDocument)**:: This is used to collect rendered drawing information such as a mapping of an SVG ID to the rendered drawing object,
@@ -166,12 +171,88 @@ End Namespace
 
 In order to simplify the above codes and avoid repetitions, utility classes (named: Converters) are provided to handle specific needs such as converting a whole directory or converting a set of SVG files into a `ResourceDictionary` object.
 
-### XAML Output - XmlXamlWriter
-The WPF framework provides an XAML writer to convert framework objects to XAML format. However, the SharpVectors library provides a similar class, 
-named **[](xref:SharpVectors.Converters.XmlXamlWriter)**, for the same purpose but specifically for SharpVectors rendered objects.
+## XAML Support - Namespaces
+
+SharpVectors defines two [XmlnsPrefixAttribute](xref:System.Windows.Markup.XmlnsPrefixAttribute) and [XmlnsDefinitionAttribute](xref:System.Windows.Markup.XmlnsDefinitionAttribute) values to simplify the use of the SVG controls and markup extensions in XAML files.
+The following are the available `Xmlns` prefix and definitions:
+
+* **For Generic Controls** - SharpVectors.Runtime.dll Assembly
+  * XmlnsPrefix("http://sharpvectors.codeplex.com/runtime/", "svg")
+  * XmlnsDefinition("http://sharpvectors.codeplex.com/runtime/", "SharpVectors.Runtime")
+* **For SVG Controls** -  SharpVectors.Converters.dll Assembly
+  * XmlnsPrefix("http://sharpvectors.codeplex.com/svgc/", "svgc")
+  * XmlnsDefinition("http://sharpvectors.codeplex.com/svgc/", "SharpVectors.Converters")
+
+> [!NOTE]
+> The supports of the above XAML namespaces will change in the SharpVectors 2.0+ as the various WPF assemblies are merged.
+
+A sample XAML code, from the **WpfSvgTestBox** test application, illustrating the uses of these XAML namespaces is shown below:
+
+```xml
+<Page x:Class="WpfSvgTestBox.SvgPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:svg="http://sharpvectors.codeplex.com/runtime/"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+    xmlns:local="clr-namespace:WpfSvgTestBox"
+    mc:Ignorable="d" Title="SvgPage" Background="White" d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="rightGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="220"/>
+        </Grid.RowDefinitions>
+        
+        <DockPanel LastChildFill="True" Grid.Row="0">
+            <ToolBar DockPanel.Dock="Top" Height="36">
+                <Button Click="OnOpenFileClick" ToolTip="Open Svg File">
+                    <Image Source="{svgc:SvgImage Source=/Images/Open.svg, AppName=WpfSvgTestBox}"/>
+                </Button>
+                <Button Click="OnSaveFileClick" ToolTip="Save Svg File">
+                    <Image Source="{svgc:SvgImage Source=/Images/Save.svg, AppName=WpfSvgTestBox}"/>
+                </Button>
+                <Separator/>
+                <Button Command="Cut" ToolTip="Cut To Clipboard">
+                    <Image Source="{svgc:SvgImage Source=/Images/Cut.svg, AppName=WpfSvgTestBox}"/>
+                </Button>
+            </ToolBar>
+        </DockPanel>
+
+        <local:GridExpander x:Name="rightSplitter" Grid.Row="1"/>
+        
+        <DockPanel x:Name="viewerFrame" LastChildFill="True" Grid.Row="2">
+            <ScrollViewer x:Name="canvasScroller" CanContentScroll="True" Padding="4"
+                VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+                <!-- This is the control that handles zooming and panning. -->
+                <svg:ZoomPanControl x:Name="zoomPanControl">
+                    <!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                    Width and Height determine the size of the content. -->
+                    <svg:SvgDrawingCanvas x:Name="svgDrawing" Background="Transparent"/>
+                </svg:ZoomPanControl>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</Page>
+```
+
+## XAML Output - XmlXamlWriter
+
+The WPF framework provides an XAML writer to convert framework objects to XAML format. However, the SharpVectors library provides a similar class, named **[](xref:SharpVectors.Converters.XmlXamlWriter)**, for the same purpose but specifically for SharpVectors rendered objects.
+
+Also, the system [XamlWriter.Save](https://docs.microsoft.com/en-us/dotnet/api/system.windows.markup.xamlwriter.save) method has a number of [limitations](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/serialization-limitations-of-xamlwriter-save), some of which we hope to resolved with our custom implementations:
+
+* Run-Time, Not Design-Time Representation
+* Serialization is Self-Contained
+* Extension References are Dereferenced
+* Event Handling is Not Preserved
+
 The `XmlXamlWriter` class makes it possible to control and customize the XAML outputs, and it is particularly useful for the `ResourceDictionary` XAML output.
 
 We will create a simple application for illustration, using the following sample SVG file below:
+
 ```xml
 <svg width="6cm" height="5cm" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="1" width="598" height="498" fill="none" stroke="blue"/>
@@ -181,6 +262,7 @@ We will create a simple application for illustration, using the following sample
     </text>
 </svg>
 ```
+
 A modified version of the previous codes to output XAML is shown below:
 
 # [XAML C# Sample](#tab/csharp)
@@ -310,6 +392,7 @@ End Namespace
 ***
 
 For the given SVG sample, the output XAML is shown below:
+
 ```xml
 <DrawingGroup xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:svg="http://sharpvectors.codeplex.com/runtime/">
@@ -346,7 +429,9 @@ For the given SVG sample, the output XAML is shown below:
   </DrawingGroup>
 </DrawingGroup>
 ```
+
 You will observe the following extra information from the XAML output
+
 * **svg:SvgObject.UniqueId**: This is added to uniquely identity the rendered object since not all SVG elements will have identifier (ID) specified. This is only useful if you wish to interact with the rendered drawing.
 * **GlyphTypeface FontUri**: This uses a SharpVectors extension to output the font URI. This is useful to correctly resolve the font path on the deployment user PC, since the font directory may not be the same. This can be eliminated by setting the `TextAsGeometry` property to `true`.
 

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface ITextEvent
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.1.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -213,7 +213,7 @@ specific contextual information associated with Text Events.</p>
 <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a> interface, use the
 feature string <code>&quot;TextEvent&quot;</code> as the value of the input parameter
 used with the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
 method.</p>
 </div>
   <h3 id="properties">Properties
@@ -241,7 +241,7 @@ Unicode character or it may be a string.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -252,10 +252,10 @@ Unicode character or it may be a string.</p>
   
   <a id="SharpVectors_Dom_Events_ITextEvent_InitTextEvent_" data-uid="SharpVectors.Dom.Events.ITextEvent.InitTextEvent*"></a>
   <h4 id="SharpVectors_Dom_Events_ITextEvent_InitTextEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_String_" data-uid="SharpVectors.Dom.Events.ITextEvent.InitTextEvent(System.String,System.Boolean,System.Boolean,SharpVectors.Dom.Views.IAbstractView,System.String)">InitTextEvent(String, Boolean, Boolean, IAbstractView, String)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html#SharpVectors_Dom_Events_ITextEvent_InitTextEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_String_">InitTextEvent(String, Boolean, Boolean, IAbstractView, String)</a> method is used
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html#SharpVectors_Dom_Events_ITextEvent_InitTextEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_String_">InitTextEvent</a> method is used
 to initialize the value of a
 <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a> created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
 method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -274,20 +274,20 @@ method.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">typeArg</span></td>
         <td><p>Specifies the event type.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">canBubbleArg</span></td>
         <td><p>Specifies whether or not the event can bubble. This parameter
 overrides the intrinsic bubbling behavior of the event.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">cancelableArg</span></td>
         <td><p>Specifies whether or not the event's default action can be
 prevent. This parameter overrides the intrinsic cancelable
@@ -297,13 +297,13 @@ behavior of the event.</p>
       <tr>
         <td><a class="xref" href="SharpVectors.Dom.Views.IAbstractView.html">IAbstractView</a></td>
         <td><span class="parametername">viewArg</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a>'s view.</p>
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">TextEvent</a>'s view.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">dataArg</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a>'s data
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">TextEvent</a>'s data
 attribute.</p>
 </td>
       </tr>
@@ -313,7 +313,7 @@ attribute.</p>
   <div class="markdown level1 remarks"><p>This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a> has been dispatched via
 the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
 method, though it may be called multiple times during that phase
 if necessary. If called multiple times, the final invocation takes
 precedence. This method has no effect if called after the event
@@ -323,14 +323,14 @@ has been dispatched.</p>
   
   <a id="SharpVectors_Dom_Events_ITextEvent_InitTextEventNs_" data-uid="SharpVectors.Dom.Events.ITextEvent.InitTextEventNs*"></a>
   <h4 id="SharpVectors_Dom_Events_ITextEvent_InitTextEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_String_" data-uid="SharpVectors.Dom.Events.ITextEvent.InitTextEventNs(System.String,System.String,System.Boolean,System.Boolean,SharpVectors.Dom.Views.IAbstractView,System.String)">InitTextEventNs(String, String, Boolean, Boolean, IAbstractView, String)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html#SharpVectors_Dom_Events_ITextEvent_InitTextEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_String_">InitTextEventNs(String, String, Boolean, Boolean, IAbstractView, String)</a> method is
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html#SharpVectors_Dom_Events_ITextEvent_InitTextEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_String_">InitTextEventNs</a> method is
 used to initialize the value of a
 <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a> created using the
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
 method. This method may only be called before the
 <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a> has been dispatched via
 the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
 method, though it may be called multiple times during that phase
 if necessary. If called multiple times, the final invocation takes
 precedence. This method has no effect if called after the event
@@ -352,7 +352,7 @@ has been dispatched.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">namespaceUri</span></td>
         <td><p>Specifies the
 <a href="http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/glossary.html#dt-namespaceURI">namespace URI</a>
@@ -361,19 +361,19 @@ wish to have no namespace.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
         <td><p>Specifies the event type.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">canBubbleArg</span></td>
         <td><p>Specifies whether or not the event can bubble.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">cancelableArg</span></td>
         <td><p>Specifies whether or not the event's default action can be
 prevent.</p>
@@ -386,7 +386,7 @@ prevent.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">dataArg</span></td>
         <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.ITextEvent.html">ITextEvent</a>'s data
 attribute</p>

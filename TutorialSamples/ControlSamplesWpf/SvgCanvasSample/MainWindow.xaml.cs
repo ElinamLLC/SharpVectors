@@ -15,7 +15,7 @@ namespace SvgCanvasSample
         {
             InitializeComponent();
 
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            //ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             this.Loaded += OnWindowLoaded;
         }
@@ -25,7 +25,8 @@ namespace SvgCanvasSample
             // 6. Load Web SVG file (Stream)
             try
             {
-                string webUrl = "https://upload.wikimedia.org/wikipedia/commons/d/dd/PoliceCar.svg";
+                //string webUrl = "https://upload.wikimedia.org/wikipedia/commons/d/dd/PoliceCar.svg";
+                string webUrl = "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/gallardo.svg";
 
                 HttpWebRequest requestInfo = (HttpWebRequest)WebRequest.Create(webUrl);
                 if (requestInfo != null)

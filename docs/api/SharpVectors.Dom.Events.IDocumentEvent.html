@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="title" content="Interface IDocumentEvent
    | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.1.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
@@ -175,17 +175,17 @@ which supports the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IE
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">namespaceUri</span></td>
         <td><p>Specifies the
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">NamespaceUri</a> of the
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_NamespaceUri">IEvent.NamespaceUri</a> of the
 event.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">Type</a> of the
+        <td><p>Specifies the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_Type">IEvent.Type</a> of the
 event.</p>
 </td>
       </tr>
@@ -201,7 +201,7 @@ event.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p><code>true</code> if the implementation can generate and dispatch this
 event type, <code>false</code> otherwise.</p>
 </td>
@@ -212,7 +212,7 @@ event type, <code>false</code> otherwise.</p>
   
   <a id="SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_" data-uid="SharpVectors.Dom.Events.IDocumentEvent.CreateEvent*"></a>
   <h4 id="SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_" data-uid="SharpVectors.Dom.Events.IDocumentEvent.CreateEvent(System.String)">CreateEvent(String)</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a> method is used in
+  <div class="markdown level1 summary"><p>The <a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent</a> method is used in
 creating <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a>s when it is either
 inconvenient or unnecessary for the user to create an
 <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> themselves.</p>
@@ -233,27 +233,27 @@ inconvenient or unnecessary for the user to create an
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">eventType</span></td>
         <td><p>The <code>eventType</code> parameter specifies the name of the DOM
 Events interface to be supported by the created event object, e.g.
 <code>&quot;Event&quot;</code>, <code>&quot;MouseEvent&quot;</code>, <code>&quot;MutationEvent&quot;</code> ...
 If the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> is to be dispatched via the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
 method the appropriate event init method must be called after
 creation in order to initialize the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a>'s
 values.  As an example, a user wishing to synthesize some kind of
 <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html">IUiEvent</a> would call
-<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">CreateEvent(String)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
 with the parameter <code>&quot;UIEvent&quot;</code>. The
-<a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">InitUiEventNs(String, String, Boolean, Boolean, IAbstractView, Int64)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_InitUiEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_Views_IAbstractView_System_Int64_">IUiEvent.InitUiEventNs</a>
 method could then be called on the newly created
 <a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html">IUiEvent</a> object to set the specific
 type of user interface event to be dispatched,
 {<code>&quot;http://www.w3.org/2001/xml-events&quot;</code>,
 <code>&quot;DOMActivate&quot;</code>} for example, and set its context
 information, e.g.
-<a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_Detail">Detail</a> in this example.</p>
+<a class="xref" href="SharpVectors.Dom.Events.IUiEvent.html#SharpVectors_Dom_Events_IUiEvent_Detail">IUiEvent.Detail</a> in this example.</p>
 </td>
       </tr>
     </tbody>
@@ -280,11 +280,11 @@ In cases where the implementation provided
 <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> is insufficient, users may supply
 their own <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> implementations for use
 with the
-<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">DispatchEvent(IEvent)</a>
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
 method. However, the DOM implementation needs access to the
 attributes
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_CurrentTarget">CurrentTarget</a> and
-<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_EventPhase">EventPhase</a> to propagate
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_CurrentTarget">IEvent.CurrentTarget</a> and
+<a class="xref" href="SharpVectors.Dom.Events.IEvent.html#SharpVectors_Dom_Events_IEvent_EventPhase">IEvent.EventPhase</a> to propagate
 appropriately the event in the DOM tree. Therefore users&apos;
 <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> implementations might need to
 support the <a class="xref" href="SharpVectors.Dom.Events.ICustomEvent.html">ICustomEvent</a> interface
@@ -311,7 +311,7 @@ interfaces <code>&quot;UIEvent&quot;</code>, <code>&quot;MouseEvent&quot;</code>
       <tr>
         <td><a class="xref" href="SharpVectors.Dom.DomException.html">DomException</a></td>
         <td><p>NOT_SUPPORTED_ERR: Raised if the implementation does not support
-the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a> interface requested.</p>
+the <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">Event</a> interface requested.</p>
 </td>
       </tr>
     </tbody>
