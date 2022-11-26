@@ -388,14 +388,18 @@ namespace SharpVectors.Dom.Css
         #endregion
 
         #region Private Methods
-
+        
+        private readonly static char[] ColorSeparators = { ',', ' ', '/' };
+        
         private void ParseColor(string str)
         {
             str = str.Trim();
-            if (str.StartsWith("rgb(", StringComparison.OrdinalIgnoreCase))
+            char first = string.IsNullOrEmpty(str) ? ' ' : str[0];
+            
+            if (first=='r' && str.StartsWith("rgb(", StringComparison.OrdinalIgnoreCase))
             {
-                str = str.Substring(4, str.Length - 5);
-                string[] parts = str.Split(new char[] { ',', ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var strSlice = str.ToSlice().Substring(4, str.Length - 5);
+                StrSlice[] parts= strSlice.Split(ColorSeparators);
 
                 if (parts.Length < 3)
                 {
@@ -404,30 +408,29 @@ namespace SharpVectors.Dom.Css
 
                 try
                 {
-                    string red   = parts[0].Trim();
-                    string green = parts[1].Trim();
-                    string blue  = parts[2].Trim();
-                    string alpha = null;
+                   StrSlice red   = parts[0].Trim();
+                   StrSlice green = parts[1].Trim();
+                   StrSlice blue  = parts[2].Trim();
+                   StrSlice alpha = StrSlice.Empty;
                     if (parts.Length == 4)
                     {
                         alpha = parts[3].Trim();
                     }
 
-                    if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
-                        string.IsNullOrWhiteSpace(blue))
+                    if (red.IsEmpty || green.IsEmpty || blue.IsEmpty)
                     {
-                        if (string.IsNullOrWhiteSpace(alpha))
+                        if (alpha.IsEmpty)
                         {
                             SetPrimitiveValues(0, 0, 0);
                         }
                         else
                         {
-                            SetPrimitiveValues(SvgConstants.ValZero, SvgConstants.ValZero, SvgConstants.ValZero, alpha);
+                            SetPrimitiveValues(SvgConstants.ValZero, SvgConstants.ValZero, SvgConstants.ValZero, alpha.ToString());
                         }
                     }
                     else
                     {
-                        if (string.IsNullOrWhiteSpace(alpha))
+                        if (alpha.IsEmpty)
                         {
                             SetPrimitiveValues(red, green, blue);
                         }
@@ -442,10 +445,10 @@ namespace SharpVectors.Dom.Css
                     throw new DomException(DomExceptionType.SyntaxErr, "rgb() color in the wrong format: " + str);
                 }
             }
-            else if (str.StartsWith("rgba(", StringComparison.OrdinalIgnoreCase))
+            else if (first=='r' && str.StartsWith("rgba(", StringComparison.OrdinalIgnoreCase))
             {
-                str = str.Substring(5, str.Length - 6);
-                string[] parts = str.Split(new char[] { ',', ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
+                StrSlice strSlice = str.ToSlice().Substring(5, str.Length - 6);
+                StrSlice[] parts = strSlice.Split(ColorSeparators);
 
                 if (parts.Length != 4 && parts.Length != 1) // Adding support for rgba(1) for Issue: #198
                 {
@@ -456,8 +459,8 @@ namespace SharpVectors.Dom.Css
                 {
                     if (parts.Length == 1) // Adding support for rgba(1) for Issue: #198
                     {
-                        string all = parts[0].Trim();
-                        if (string.IsNullOrWhiteSpace(all))
+                        StrSlice all = parts[0].Trim();
+                        if (all.IsEmpty)
                         {
                             SetPrimitiveValues(0, 0, 0, 1);
                         }
@@ -468,15 +471,14 @@ namespace SharpVectors.Dom.Css
                     }
                     else
                     {
-                        string red   = parts[0].Trim();
-                        string green = parts[1].Trim();
-                        string blue  = parts[2].Trim();
-                        string alpha = parts[3].Trim();
+                        StrSlice red   = parts[0].Trim();
+                        StrSlice green = parts[1].Trim();
+                        StrSlice blue  = parts[2].Trim();
+                        StrSlice alpha = parts[3].Trim();
 
-                        if (string.IsNullOrWhiteSpace(red) || string.IsNullOrWhiteSpace(green) ||
-                            string.IsNullOrWhiteSpace(blue))
+                        if (red.IsEmpty || green.IsEmpty || blue.IsEmpty)
                         {
-                            if (string.IsNullOrWhiteSpace(alpha))
+                            if (alpha.IsEmpty)
                             {
                                 SetPrimitiveValues(0, 0, 0, 1);
                             }
@@ -487,7 +489,7 @@ namespace SharpVectors.Dom.Css
                         }
                         else
                         {
-                            if (string.IsNullOrWhiteSpace(alpha))
+                            if (alpha.IsEmpty)
                             {
                                 SetPrimitiveValues(red, green, blue);
                             }
@@ -503,10 +505,10 @@ namespace SharpVectors.Dom.Css
                     throw new DomException(DomExceptionType.SyntaxErr, "rgba() color in the wrong format: " + str);
                 }
             }
-            else if (str.StartsWith("hsl(", StringComparison.OrdinalIgnoreCase))
+            else if (first=='h' && str.StartsWith("hsl(", StringComparison.OrdinalIgnoreCase))
             {
-                str = str.Substring(4, str.Length - 5);
-                string[] parts = str.Split(new char[] { ',', ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
+                StrSlice strSlice = str.ToSlice().Substring(4, str.Length - 5);
+                StrSlice[] parts = strSlice.Split(ColorSeparators);
 
                 if (parts.Length < 3)
                 {
@@ -515,10 +517,10 @@ namespace SharpVectors.Dom.Css
 
                 try
                 {
-                    string hue        = parts[0].Trim(); // An angle of the color circle given in degs, rads, grads, or turns
-                    string saturation = parts[1].Trim(); // A percentage. 100% saturation is completely saturated, while 0% is completely unsaturated (gray)
-                    string lightness  = parts[2].Trim(); // A percentage. 100% lightness is white, 0% lightness is black, and 50% lightness is "normal."
-                    string alpha      = null;            // A number between 0 and 1, or a percentage, where the number 1 corresponds to 100% (full opacity).
+                    StrSlice hue        = parts[0].Trim(); // An angle of the color circle given in degs, rads, grads, or turns
+                    StrSlice saturation = parts[1].Trim(); // A percentage. 100% saturation is completely saturated, while 0% is completely unsaturated (gray)
+                    StrSlice lightness  = parts[2].Trim(); // A percentage. 100% lightness is white, 0% lightness is black, and 50% lightness is "normal."
+                    StrSlice alpha      = StrSlice.Empty;            // A number between 0 and 1, or a percentage, where the number 1 corresponds to 100% (full opacity).
                     if (parts.Length  == 4)
                     {
                         alpha = parts[3].Trim();
@@ -532,10 +534,10 @@ namespace SharpVectors.Dom.Css
                     throw new DomException(DomExceptionType.SyntaxErr, "hsl() color in the wrong format: " + str);
                 }
             }
-            else if (str.StartsWith("hsla(", StringComparison.OrdinalIgnoreCase))
+            else if (first=='h' && str.StartsWith("hsla(", StringComparison.OrdinalIgnoreCase))
             {
-                str = str.Substring(5, str.Length - 6);
-                string[] parts = str.Split(new char[] { ',', ' ', '/' }, StringSplitOptions.RemoveEmptyEntries);
+                StrSlice strSlice = str.ToSlice().Substring(5, str.Length - 6);
+                StrSlice[] parts = strSlice.Split(ColorSeparators, removeEmptyEntries: true);
 
                 if (parts.Length != 4)
                 {
@@ -544,10 +546,10 @@ namespace SharpVectors.Dom.Css
 
                 try
                 {
-                    string hue        = parts[0].Trim();  // An angle of the color circle given in degs, rads, grads, or turns
-                    string saturation = parts[1].Trim();  // A percentage. 100% saturation is completely saturated, while 0% is completely unsaturated (gray)
-                    string lightness  = parts[2].Trim();  // A percentage. 100% lightness is white, 0% lightness is black, and 50% lightness is "normal."
-                    string alpha      = parts[3].Trim();  // A number between 0 and 1, or a percentage, where the number 1 corresponds to 100% (full opacity).
+                    StrSlice hue        = parts[0].Trim();  // An angle of the color circle given in degs, rads, grads, or turns
+                    StrSlice saturation = parts[1].Trim();  // A percentage. 100% saturation is completely saturated, while 0% is completely unsaturated (gray)
+                    StrSlice lightness  = parts[2].Trim();  // A percentage. 100% lightness is white, 0% lightness is black, and 50% lightness is "normal."
+                    StrSlice alpha      = parts[3].Trim();  // A number between 0 and 1, or a percentage, where the number 1 corresponds to 100% (full opacity).
 
                     // Convert the HSL color to an RGB color
                     SetPrimitiveValues(ColorRGBA.FromHsl(hue, saturation, lightness, alpha), alpha);
@@ -557,7 +559,7 @@ namespace SharpVectors.Dom.Css
                     throw new DomException(DomExceptionType.SyntaxErr, "hsla() color in the wrong format: " + str);
                 }
             }
-            else if (str.StartsWith("var(", StringComparison.OrdinalIgnoreCase))
+            else if (first=='v' && str.StartsWith("var(", StringComparison.OrdinalIgnoreCase))
             {
                 _name       = str;
                 _isVarColor = true;
@@ -573,8 +575,8 @@ namespace SharpVectors.Dom.Css
                 {
                     _name = str;
 
-                    string color = _knownColors[str];
-                    if (color.Length == 7 && color.StartsWith("#", StringComparison.OrdinalIgnoreCase))  // Expected actually!
+                    StrSlice color = _knownColors[str].ToSlice();
+                    if (color.Length == 7 && color[0] == '#')  // Expected actually!
                     {
                         color = color.Substring(1);
                     }
@@ -582,9 +584,10 @@ namespace SharpVectors.Dom.Css
                     {
                         throw new DomException(DomExceptionType.SyntaxErr);
                     }
-                    SetPrimitiveValues(int.Parse(color.Substring(0, 2), NumberStyles.HexNumber),
-                        int.Parse(color.Substring(2, 2), NumberStyles.HexNumber),
-                        int.Parse(color.Substring(4, 2), NumberStyles.HexNumber));
+                    SetPrimitiveValues(
+                        color.Substring(0, 2).ParseIntBase16(),
+                        color.Substring(2, 2).ParseIntBase16(),
+                        color.Substring(4, 2).ParseIntBase16());
                 }
                 else if (_systemColorNames.Contains(str))
                 {
@@ -707,14 +710,14 @@ namespace SharpVectors.Dom.Css
                     return new ColorRGBA();
                 }
 
-                string color = value.Trim();
-                if (value.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                StrSlice color = value.ToSlice().Trim();
+                if (color[0] == '#')
                 {
-                    color = value.Substring(1);
+                    color = color.Substring(1);
                 }
-                else if (value.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+                else if (color[0] == '0' && color[1] == 'x')
                 {
-                    color = value.Substring(2);
+                    color = color.Substring(2);
                 }
 
                 int a = -1;
@@ -725,28 +728,26 @@ namespace SharpVectors.Dom.Css
                 switch (color.Length)
                 {
                     case 3:
-                        var rgbColor = string.Format("{0}{0}{1}{1}{2}{2}", color[0], color[1], color[2]);
-                        r = int.Parse(rgbColor.Substring(0, 2), NumberStyles.HexNumber);
-                        g = int.Parse(rgbColor.Substring(2, 2), NumberStyles.HexNumber);
-                        b = int.Parse(rgbColor.Substring(4, 2), NumberStyles.HexNumber);
+                        r = color.Substring(0, 1).ParseIntBase16() * 0x11;
+                        g = color.Substring(1, 1).ParseIntBase16() * 0x11;
+                        b = color.Substring(2, 1).ParseIntBase16() * 0x11;
                         break;
                     case 4:
-                        var argbColor = string.Format("{0}{0}{1}{1}{2}{2}{3}{3}", color[0], color[1], color[2], color[3]);
-                        r = int.Parse(argbColor.Substring(0, 2), NumberStyles.HexNumber);
-                        g = int.Parse(argbColor.Substring(2, 2), NumberStyles.HexNumber);
-                        b = int.Parse(argbColor.Substring(4, 2), NumberStyles.HexNumber);
-                        a = int.Parse(argbColor.Substring(6, 2), NumberStyles.HexNumber);
+                        r = color.Substring(0, 1).ParseIntBase16() * 0x11;
+                        g = color.Substring(1, 1).ParseIntBase16() * 0x11;
+                        b = color.Substring(2, 1).ParseIntBase16() * 0x11;
+                        a = color.Substring(3, 1).ParseIntBase16() * 0x11;
                         break;
                     case 6:
-                        r = int.Parse(color.Substring(0, 2), NumberStyles.HexNumber);
-                        g = int.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
-                        b = int.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
+                        r = color.Substring(0, 2).ParseIntBase16();
+                        g = color.Substring(2, 2).ParseIntBase16();
+                        b = color.Substring(4, 2).ParseIntBase16();
                         break;
                     case 8:
-                        r = int.Parse(color.Substring(0, 2), NumberStyles.HexNumber);
-                        g = int.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
-                        b = int.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
-                        a = int.Parse(color.Substring(6, 2), NumberStyles.HexNumber);
+                        r = color.Substring(0, 2).ParseIntBase16();
+                        g = color.Substring(2, 2).ParseIntBase16();
+                        b = color.Substring(4, 2).ParseIntBase16();
+                        a = color.Substring(6, 2).ParseIntBase16();
                         break;
                 }
 
