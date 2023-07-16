@@ -2,60 +2,82 @@
 {
     struct StrSlice
     {
-        public string Text { get; }
-        public int Pos { get; }
-        public int Length { get; }
+        private int _pos;
+        private int _length;
+        private string _text;
 
-        public bool IsEmpty
-        {
-            get { return Length == 0; }
-        }
-
-        public static StrSlice Empty = new StrSlice("");
-
-        public override string ToString()
-        {
-            return Text.Substring(Pos, Length);
-        }
+        public static readonly StrSlice Empty = new StrSlice(string.Empty);
 
         public StrSlice(string text)
         {
-            Text = text;
-            Pos = 0;
-            Length = text.Length;
+            _text = text;
+            _pos = 0;
+            _length = text.Length;
         }
 
         private StrSlice(string text, int pos, int length)
         {
-            Text = text;
-            Pos = pos;
-            Length = length;
+            _text = text;
+            _pos = pos;
+            _length = length;
+        }
+
+        public string Text
+        {
+            get {
+                return _text;
+            }
+        }
+
+        public int Pos
+        {
+            get {
+                return _pos;
+            }
+        }
+
+        public int Length
+        {
+            get {
+                return _length;
+            }
+        }
+
+        public bool IsEmpty
+        {
+            get { return _length == 0; }
         }
 
         public char this[int i]
         {
-            get { return Text[i+Pos]; }
+            get { return _text[i + _pos]; }
         }
 
         public StrSlice Substring(int pos, int len)
         {
-            return new StrSlice(Text, Pos+pos, len);
+            return new StrSlice(_text, _pos + pos, len);
         }
 
         public StrSlice Substring(int pos)
         {
-            return new StrSlice(Text, Pos+pos, Length-pos);
+            return new StrSlice(_text, _pos + pos, _length - pos);
         }
+
+        public override string ToString()
+        {
+            return _text.Substring(_pos, _length);
+        }
+
         public static implicit operator string(StrSlice strSlice) => strSlice.ToString();
 
         public StrSlice Trim()
         {
-            if (IsEmpty)
+            if (_length == 0)
             {
                 return this;
             }
             int startNoSpaces = -1;
-            for (var i = 0; i < Length; i++)
+            for (var i = 0; i < _length; i++)
             {
                 if (!char.IsWhiteSpace(this[i]))
                 {
@@ -67,12 +89,12 @@
             {
                 return Empty;
             }
-            var indexDesc = Length-1;
+            var indexDesc = _length - 1;
             while (char.IsWhiteSpace(this[indexDesc]))
             {
                 indexDesc--;
             }
-            return this.Substring(startNoSpaces, indexDesc-startNoSpaces+1);
+            return this.Substring(startNoSpaces, indexDesc - startNoSpaces + 1);
         }
     }
 }

@@ -25,11 +25,11 @@ using SharpVectors.Dom.Utils;
 using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 
-using DpiScale     = SharpVectors.Runtime.DpiScale;
-using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
-
 namespace SharpVectors.Converters
 {
+    using DpiScale     = SharpVectors.Runtime.DpiScale;
+    using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+
     /// <summary>
     /// 
     /// </summary>

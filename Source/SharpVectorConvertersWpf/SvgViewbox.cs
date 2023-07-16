@@ -22,11 +22,11 @@ using SharpVectors.Runtime;
 using SharpVectors.Renderers.Wpf;
 using SharpVectors.Converters.Utils;
 
-using DpiScale = SharpVectors.Runtime.DpiScale;
-using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
-
 namespace SharpVectors.Converters
 {
+    using DpiScale = SharpVectors.Runtime.DpiScale;
+    using DpiUtilities = SharpVectors.Runtime.DpiUtilities;
+
     /// <summary>
     /// This is a <see cref="Viewbox"/> control for viewing <c>SVG</c> file in <c>WPF</c> applications.
     /// </summary>

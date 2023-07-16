@@ -13,22 +13,20 @@ namespace SharpVectors.Dom.Css
         {
             var len = slice.Length;
             var pos = 0;
-            List<StrSlice> items = new List<StrSlice>();
+            var items = new List<StrSlice>();
             for (var i = 0; i < len; i++)
             {
-                char currChar = slice[i];
-                bool isSeparator = IsInArrayOfChar(separators, currChar);
-                if (isSeparator)
+                if (IsInArrayOfChar(separators, slice[i]))
                 {
-                    var subSlice = slice.Substring(pos, i-pos);
+                    var subSlice = slice.Substring(pos, i - pos);
                     if (!removeEmptyEntries || !subSlice.IsEmpty)
                     {
                         items.Add(subSlice);
                     }
-                    pos = i+1;
+                    pos = i + 1;
                 }
             }
-            var subSliceFinal = slice.Substring(pos, len-pos);
+            var subSliceFinal = slice.Substring(pos, len - pos);
             if (!removeEmptyEntries || !subSliceFinal.IsEmpty)
             {
                 items.Add(subSliceFinal);
@@ -50,22 +48,22 @@ namespace SharpVectors.Dom.Css
 
         private static int DigitBase10Value(char ch)
         {
-            return ch-'0';
+            return ch - '0';
         }
 
         private static int DigitBase16Value(char ch)
         {
             if (ch >= 0 && ch <= '9')
             {
-                return ch-'0';
+                return ch - '0';
             }
             if (ch >= 'a' && ch <= 'f')
             {
-                return ch-'a'+10;
+                return ch - 'a' + 10;
             }
             if (ch >= 'A' && ch <= 'F')
             {
-                return ch-'A'+10;
+                return ch - 'A' + 10;
             }
             return 0;
         }
@@ -80,9 +78,7 @@ namespace SharpVectors.Dom.Css
             int result = 0;
             for (var index = 0; index < strSlice.Length; index++)
             {
-                char ch = strSlice[index];
-                int digitValue = DigitBase10Value(ch);
-                result = result * 10+digitValue;
+                result = result * 10 + DigitBase10Value(strSlice[index]);
             }
             if (isMinus)
             {
@@ -101,9 +97,7 @@ namespace SharpVectors.Dom.Css
             int result = 0;
             for (var index = 0; index < strSlice.Length; index++)
             {
-                char ch = strSlice[index];
-                int digitValue = DigitBase16Value(ch);
-                result = result * 16+digitValue;
+                result = result * 16 + DigitBase16Value(strSlice[index]);
             }
             if (isMinus)
             {

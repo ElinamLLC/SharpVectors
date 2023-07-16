@@ -171,7 +171,8 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 if ((opacityValue >= 0 && opacityValue < 1))
                 {
-                    _drawGroup.Opacity = opacityValue;
+                    _drawGroup.Opacity = Math.Round(opacityValue, 4);
+                    _setBrushOpacity = false;
                 }
 
                 DrawingGroup curGroup = _context.Peek();
