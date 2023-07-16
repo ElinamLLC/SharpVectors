@@ -23,6 +23,7 @@ using ICSharpCode.AvalonEdit.Indentation;
 
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
+using System.Collections.Generic;
 
 namespace WpfSvgTestBox
 {
@@ -80,6 +81,9 @@ namespace WpfSvgTestBox
         /// </summary>
         private MouseButton mouseButtonDown;
 
+        private EmbeddedImageSerializerVisitor _embeddedImageVisitor;
+        private IList<EmbeddedImageSerializerArgs> _embeddedImages;
+
         #endregion
 
         #region Constructors and Destructor
@@ -98,6 +102,13 @@ namespace WpfSvgTestBox
             _directoryInfo = new DirectoryInfo(workingDir);
 
             _wpfSettings = new WpfDrawingSettings();
+
+            _embeddedImages = new List<EmbeddedImageSerializerArgs>();
+
+            _embeddedImageVisitor = new EmbeddedImageSerializerVisitor(true);
+            _wpfSettings.Visitors.ImageVisitor = _embeddedImageVisitor;
+
+            _embeddedImageVisitor.ImageCreated += OnEmbeddedImageCreated;
 
             _fileReader = new FileSvgReader(_wpfSettings);
             _fileReader.SaveXaml = true;
@@ -155,6 +166,7 @@ namespace WpfSvgTestBox
                 if (value != null)
                 {
                     _wpfSettings = value;
+                    _wpfSettings.Visitors.ImageVisitor = _embeddedImageVisitor;
 
                     // Recreated the conveter
                     _fileReader = new FileSvgReader(_wpfSettings);
@@ -286,6 +298,19 @@ namespace WpfSvgTestBox
         #endregion
 
         #region Private Methods
+
+        private void OnEmbeddedImageCreated(object sender, EmbeddedImageSerializerArgs args)
+        {
+            if (args == null)
+            {
+                return;
+            }
+            if (_embeddedImages == null)
+            {
+                _embeddedImages = new List<EmbeddedImageSerializerArgs>();
+            }
+            _embeddedImages.Add(args);
+        }
 
         private void UpdateFoldings()
         {
