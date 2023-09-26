@@ -12,6 +12,7 @@ using SharpVectors.Xml;
 using SharpVectors.Woffs;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Resources;
+using SharpVectors.Dom.Settings;
 using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Svg
@@ -376,10 +377,16 @@ namespace SharpVectors.Dom.Svg
 
         private XmlReaderSettings GetXmlReaderSettings()
         {
+            if (GlobalXmlReaderSettingsConfigurator.XmlReaderSettings != null)
+            {
+                return GlobalXmlReaderSettingsConfigurator.XmlReaderSettings;
+            }
+            
             if (_settings != null)
             {
                 return _settings;
             }
+            
             DynamicXmlUrlResolver xmlResolver = new DynamicXmlUrlResolver();
             xmlResolver.Resolving += OnXmlResolverResolving;
             xmlResolver.GettingEntity += OnXmlResolverGettingEntity;
