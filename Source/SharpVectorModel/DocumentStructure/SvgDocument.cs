@@ -12,7 +12,6 @@ using SharpVectors.Xml;
 using SharpVectors.Woffs;
 using SharpVectors.Dom.Css;
 using SharpVectors.Dom.Resources;
-using SharpVectors.Dom.Settings;
 using SharpVectors.Dom.Stylesheets;
 
 namespace SharpVectors.Dom.Svg
@@ -56,6 +55,8 @@ namespace SharpVectors.Dom.Svg
         #region Public Static Fields
 
         public static readonly int DotsPerInch = 96;
+        
+        public static XmlReaderSettings GlobalXmlReaderSettings { get; set; }
 
         public const string SvgNamespace = "http://www.w3.org/2000/svg";
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
@@ -377,9 +378,9 @@ namespace SharpVectors.Dom.Svg
 
         private XmlReaderSettings GetXmlReaderSettings()
         {
-            if (GlobalXmlReaderSettingsConfigurator.XmlReaderSettings != null)
+            if (GlobalXmlReaderSettings != null)
             {
-                return GlobalXmlReaderSettingsConfigurator.XmlReaderSettings;
+                return GlobalXmlReaderSettings;
             }
             
             if (_settings != null)
