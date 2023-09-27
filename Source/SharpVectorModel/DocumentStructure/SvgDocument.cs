@@ -55,6 +55,8 @@ namespace SharpVectors.Dom.Svg
         #region Public Static Fields
 
         public static readonly int DotsPerInch = 96;
+        
+        public static XmlReaderSettings GlobalXmlReaderSettings { get; set; }
 
         public const string SvgNamespace = "http://www.w3.org/2000/svg";
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
@@ -376,10 +378,16 @@ namespace SharpVectors.Dom.Svg
 
         private XmlReaderSettings GetXmlReaderSettings()
         {
+            if (GlobalXmlReaderSettings != null)
+            {
+                return GlobalXmlReaderSettings;
+            }
+            
             if (_settings != null)
             {
                 return _settings;
             }
+            
             DynamicXmlUrlResolver xmlResolver = new DynamicXmlUrlResolver();
             xmlResolver.Resolving += OnXmlResolverResolving;
             xmlResolver.GettingEntity += OnXmlResolverGettingEntity;
