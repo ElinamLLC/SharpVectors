@@ -401,8 +401,22 @@ namespace SharpVectors.Woffs
 
             // The signature field in the WOFF-1 header must contain the "magic number" 0x774F4646. 
             // If the field does not contain this value, user agents must reject the file as invalid.
-            Debug.Assert((bufferSize == WoffUtils.Woff1HeaderSize)
-                ? _signature == WoffUtils.Woff1Signature : _signature == WoffUtils.Woff2Signature);
+            //Debug.Assert((bufferSize == WoffUtils.Woff1HeaderSize)
+            //    ? _signature == WoffUtils.Woff1Signature : _signature == WoffUtils.Woff2Signature);
+            if (bufferSize == WoffUtils.Woff1HeaderSize)
+            {
+                if (_signature != WoffUtils.Woff1Signature)
+                {
+                    return false;
+                }
+            }
+            else if (bufferSize == WoffUtils.Woff2HeaderSize)
+            {
+                if (_signature != WoffUtils.Woff2Signature)
+                {
+                    return false;
+                }
+            }
 
             // The header includes a reserved field; this must be set to zero. 
             // If this field is non-zero, a conforming user agent must reject the file as invalid.

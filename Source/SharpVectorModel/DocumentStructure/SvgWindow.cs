@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using SharpVectors.Dom.Stylesheets;
+using System.Diagnostics;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -119,51 +120,78 @@ namespace SharpVectors.Dom.Svg
             {
                 return;
             }
+            if (_mappedTasks == null)
+            {
+                _mappedTasks = new Dictionary<string, List<Task>>(StringComparer.OrdinalIgnoreCase);
+            }
             lock (_synchObject)
             {
-                if (_mappedTasks == null)
-                {
-                    _mappedTasks = new Dictionary<string, List<Task>>(StringComparer.OrdinalIgnoreCase);
-                }
+                List<Task> namedTasks = null;
                 if (_mappedTasks.ContainsKey(tasksName))
                 {
-                    var namedTasks = _mappedTasks[tasksName];
+                    namedTasks = _mappedTasks[tasksName];
                     if (namedTasks == null)
                     {
                         namedTasks = new List<Task>();
+                        _mappedTasks[tasksName] = namedTasks;
                     }
-                    namedTasks.Add(task);
                 }
                 else
                 {
-                    var namedTasks = new List<Task>();
-                    namedTasks.Add(task);
-
+                    namedTasks = new List<Task>();
                     _mappedTasks.Add(tasksName, namedTasks);
                 }
+
+                namedTasks.Add(task);
+                this.PurgeList(namedTasks);
             }
         }
 
         public void AwaitTasks(string tasksName)
         {
+            if (string.IsNullOrWhiteSpace(tasksName) || _mappedTasks == null || _mappedTasks.Count == 0)
+            {
+                return;
+            }
+            List<Task> namedTasks = null;
             lock (_synchObject)
             {
-                if (string.IsNullOrWhiteSpace(tasksName) || _mappedTasks == null || _mappedTasks.Count == 0)
-                {
-                    return;
-                }
                 if (_mappedTasks.ContainsKey(tasksName))
                 {
-                    var namedTasks = _mappedTasks[tasksName];
+                    namedTasks = _mappedTasks[tasksName];
                     if (namedTasks == null || namedTasks.Count == 0)
                     {
+                        _mappedTasks.Remove(tasksName);
                         return;
                     }
-
-                    Task.WaitAll(namedTasks.ToArray());
-
-                    _mappedTasks.Remove(tasksName);
+                    this.PurgeList(namedTasks);
                 }
+            }
+
+            if (namedTasks != null && namedTasks.Count != 0)
+            {
+                Task.WaitAll(namedTasks.ToArray());
+            }
+        }
+
+        private void PurgeList(List<Task> namedTasks)
+        {
+            if (namedTasks == null || namedTasks.Count == 0)
+            {
+                return;
+            }
+
+            List<Task> doneTasks = new List<Task>();
+            foreach (Task task in namedTasks)
+            {
+                if (task.IsCanceled || task.IsCompleted)
+                {
+                    doneTasks.Add(task);
+                }
+            }
+            foreach (Task task in doneTasks)
+            {
+                namedTasks.Remove(task);
             }
         }
 

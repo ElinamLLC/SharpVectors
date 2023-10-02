@@ -164,6 +164,15 @@ namespace SharpVectors.Renderers.Wpf
                     _drawGroup.Transform = transform;
                 }
             }
+            else
+            {
+                // TODO
+                transform = this.Transform;
+                if (transform != null)
+                {
+                    _drawGroup.Transform = transform;
+                }
+            }
 
             if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
             {   

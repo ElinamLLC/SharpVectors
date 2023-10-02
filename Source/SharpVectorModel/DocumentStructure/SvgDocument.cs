@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Xml;
 using System.Threading;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using SharpVectors.Net;
 using SharpVectors.Xml;
 using SharpVectors.Woffs;
 using SharpVectors.Dom.Css;
@@ -423,7 +425,7 @@ namespace SharpVectors.Dom.Svg
         {
             // Provide a support for the .svgz files...
             UriBuilder fileUrl = new UriBuilder(filename);
-            if (string.Equals(fileUrl.Scheme, "file", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileUrl.Scheme, Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
             {
                 string fileExt = Path.GetExtension(filename);
                 if (string.Equals(fileExt, SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase))
@@ -499,6 +501,7 @@ namespace SharpVectors.Dom.Svg
         /// <param name="txtReader"></param>
         public override void Load(TextReader txtReader)
         {
+            _baseURI = string.Empty;
             using (XmlReader xmlReader = CreateValidatingXmlReader(txtReader))
             {
                 this.Load(xmlReader);
@@ -513,6 +516,7 @@ namespace SharpVectors.Dom.Svg
         /// </param>
         public override void Load(Stream inStream)
         {
+            _baseURI = string.Empty;
             if (inStream.CanSeek && inStream.Position == 0)
             {
                 if (IsGZipped(inStream))
@@ -581,9 +585,10 @@ namespace SharpVectors.Dom.Svg
         /// Handles DynamicXmlUrlResolver GettingEntity event.
         /// </summary>
         /// <param name="absoluteUri">The absolute URI.</param>
+        /// <param name="role">Currently not used.</param>
         /// <param name="ofObjectToReturn">The of object to return.</param>
         /// <returns></returns>
-        private object OnXmlResolverGettingEntity(Uri absoluteUri, string cc, Type ofObjectToReturn)
+        private object OnXmlResolverGettingEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             string fullPath = absoluteUri.ToString();
             if (!string.IsNullOrWhiteSpace(fullPath))
@@ -630,6 +635,31 @@ namespace SharpVectors.Dom.Svg
                     if (resourceUri != null)
                     {
                         return GetEntityFromUri(resourceUri, ofObjectToReturn);
+                    }
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.BaseURI))
+            {
+                UriBuilder sourceUri = new UriBuilder(this.BaseURI);
+                if (sourceUri.Uri == absoluteUri)
+                {
+                    if (string.Equals(sourceUri.Scheme, Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new FileStream(absoluteUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, 1);
+                    }
+                    else
+                    {
+                        WebRequest request = new ExtendedHttpWebRequest(absoluteUri);
+                        try
+                        {
+                            WebResponse response = request.GetResponse();
+                            return response.GetResponseStream();
+                        }
+                        catch
+                        {
+                            return null;
+                        }
                     }
                 }
             }
@@ -1401,6 +1431,8 @@ namespace SharpVectors.Dom.Svg
                 SvgWindow ownedWindow = _window.CreateOwnedWindow();
                 ownedWindow.LoadFonts = false;
 
+                var comparer = StringComparison.OrdinalIgnoreCase;
+
                 for (int i = 0; i < fontUrls.Count; i++)
                 {
                     var fontUrl = fontUrls[i].Item1;
@@ -1408,7 +1440,7 @@ namespace SharpVectors.Dom.Svg
                     try
                     {
                         // remove any hash (won't work for local files)
-                        int hashStart = fontUrl.IndexOf("#", StringComparison.OrdinalIgnoreCase);
+                        int hashStart = fontUrl.IndexOf("#", comparer);
                         if (hashStart > -1)
                         {
                             fontUrl = fontUrl.Substring(0, hashStart);
@@ -1421,7 +1453,7 @@ namespace SharpVectors.Dom.Svg
                             continue;
                         }
                         string scheme = fileUrl.Scheme;
-                        if (string.Equals(scheme, "file", StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(scheme, Uri.UriSchemeFile, comparer))
                         {
                             this.LoadLocalFont(fileUrl.LocalPath, ownedWindow, fontFace);
                         }

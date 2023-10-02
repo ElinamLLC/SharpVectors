@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 
 namespace SharpVectors.Xml
@@ -28,6 +29,26 @@ namespace SharpVectors.Xml
         /// </summary>
         public event GettingEntityEventHandler GettingEntity;
 
+        public static readonly UrlResolvePolicy UrlDefaultPolicy = new UrlResolvePolicy(DtdProcessing.Parse);
+
+        private static UrlResolvePolicy _urlPolicy;
+
+        public DynamicXmlUrlResolver() { }
+
+        public static UrlResolvePolicy UrlPolicy
+        {
+            get {
+                if (_urlPolicy == null)
+                {
+                    _urlPolicy = UrlDefaultPolicy;
+                }
+                return _urlPolicy;
+            }
+            set {
+                _urlPolicy = value;
+            }
+        }
+
         /// <summary>
         /// Maps a URI to an object that contains the actual resource.
         /// </summary>
@@ -42,6 +63,15 @@ namespace SharpVectors.Xml
                 object entity = GettingEntity(absoluteUri, role, ofObjectToReturn);
                 if (entity != null)
                     return entity;
+            }
+
+            UrlResolvePolicy urlPolicy = DynamicXmlUrlResolver.UrlPolicy;
+            if (urlPolicy.Processing == DtdProcessing.Parse)
+            {
+                if (urlPolicy.Entity.HasFlag(UrlResolveTypes.Resource))
+                {
+                    return new MemoryStream();
+                }
             }
 
             return base.GetEntity(absoluteUri, role, ofObjectToReturn);
