@@ -2,10 +2,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Xml;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 
 using SharpVectors.Net;
+using SharpVectors.Xml;
 using SharpVectors.Dom.Css;
 
 namespace SharpVectors.Dom.Stylesheets
@@ -175,6 +177,17 @@ namespace SharpVectors.Dom.Stylesheets
             IDocument document = (OwnerNode.OwnerDocument) as IDocument;
             if (document == null || !document.CanAccessExternalResources(absoluteUri.ToString()))
             {
+                return;
+            }
+            if (!UrlResolvePolicy.Supports(absoluteUri.Scheme))
+            {
+                Debug.WriteLine("Unsupported CSS Uri: " + absoluteUri);
+                return;
+            }
+            var resolvePolicy = DynamicXmlUrlResolver.UrlPolicy;
+            if (!resolvePolicy.Supports(absoluteUri, UrlResolveSource.Style))
+            {
+                Debug.WriteLine("Skipping CSS Uri: " + absoluteUri);
                 return;
             }
 

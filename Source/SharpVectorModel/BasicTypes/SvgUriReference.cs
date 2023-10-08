@@ -3,6 +3,9 @@ using System.Xml;
 using System.IO;
 using System.Net;
 
+using SharpVectors.Xml;
+using System.Diagnostics;
+
 namespace SharpVectors.Dom.Svg
 {
     public sealed class SvgUriReference : ISvgUriReference
@@ -35,6 +38,32 @@ namespace SharpVectors.Dom.Svg
                     return !(_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace) ||
                         _ownerElement.HasAttribute("href"));
                 }
+                return true;
+            }
+        }
+
+        public bool IsSupported
+        {
+            get {
+                string absoluteUri = this.AbsoluteUri;
+                if (string.IsNullOrWhiteSpace(absoluteUri))
+                {
+                    return false;
+                }
+                var resourceUri = new Uri(absoluteUri);
+                var elementName = _ownerElement.Name;
+                if (!UrlResolvePolicy.Supports(resourceUri.Scheme))
+                {
+                    Debug.WriteLine("Unsupported {0} Uri: {1}", elementName, absoluteUri);
+                    return false;
+                }
+                var resolvePolicy = DynamicXmlUrlResolver.UrlPolicy;
+                if (!resolvePolicy.Supports(resourceUri, UrlResolvePolicy.GetSource(elementName)))
+                {
+                    Debug.WriteLine("Skipping {0} Uri: {1}", elementName, absoluteUri);
+                    return false;
+                }
+
                 return true;
             }
         }
@@ -140,11 +169,27 @@ namespace SharpVectors.Dom.Svg
                     string absoluteUri = this.AbsoluteUri;
                     if (!string.IsNullOrWhiteSpace(absoluteUri))
                     {
-                        WebResponse referencedResource = _ownerElement.OwnerDocument.GetResource(
-                            new Uri(absoluteUri));
+                        var resourceUri = new Uri(absoluteUri);
+                        var elementName = _ownerElement.Name;
+                        if (!UrlResolvePolicy.Supports(resourceUri.Scheme))
+                        {
+                            Debug.WriteLine("Unsupported {0} Uri: {1}", elementName, absoluteUri);
+                            return null;
+                        }
+                        var resolvePolicy = DynamicXmlUrlResolver.UrlPolicy;
+                        if (!resolvePolicy.Supports(resourceUri, UrlResolvePolicy.GetSource(elementName)))
+                        {
+                            Debug.WriteLine("Skipping {0} Uri: {1}", elementName, absoluteUri);
+                            return null;
+                        }
 
-                        ISvgExternalResourcesRequired extReqElm =
-                            _ownerElement as ISvgExternalResourcesRequired;
+                        var referencedResource = _ownerElement.OwnerDocument.GetResource(resourceUri);
+                        if (referencedResource == null)
+                        {
+                            return null;
+                        }
+
+                        var extReqElm = _ownerElement as ISvgExternalResourcesRequired;
 
                         if (referencedResource == null && extReqElm != null)
                         {

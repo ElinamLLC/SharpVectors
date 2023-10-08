@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSampleResources", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfXXETestBox", "Samples\WpfXXETestBox\WpfXXETestBox.csproj", "{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfQuickTest", "Samples\WpfQuickTest\WpfQuickTest.csproj", "{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,10 @@ Global
 		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +169,7 @@ Global
 		{3EE349D1-5BAC-455F-AFE3-8DB41509B0E9} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{EB6717D1-7A87-45FB-8893-C06B5B51AC6F} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

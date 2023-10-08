@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+		<UseWPF>true</UseWPF>
+		<AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
+		<AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj" />
+		<ProjectReference Include="..\..\Source\SharpVectorCore\SharpVectors.Core.csproj" />
+		<ProjectReference Include="..\..\Source\SharpVectorCss\SharpVectors.Css.csproj" />
+		<ProjectReference Include="..\..\Source\SharpVectorDom\SharpVectors.Dom.csproj" />
+		<ProjectReference Include="..\..\Source\SharpVectorModel\SharpVectors.Model.csproj" />
+		<ProjectReference Include="..\..\Source\SharpVectorRenderingWpf\SharpVectors.Rendering.Wpf.csproj" />
+		<ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+		<PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
+	</ItemGroup>
+
+</Project>

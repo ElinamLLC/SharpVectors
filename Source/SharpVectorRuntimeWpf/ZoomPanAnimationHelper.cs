@@ -33,6 +33,11 @@ namespace SharpVectors.Runtime
         public static void StartAnimation(UIElement animatableElement, DependencyProperty dependencyProperty,
             double toValue, double animationDurationSeconds, EventHandler completedEvent, bool useAnimations)
         {
+            if (double.IsNaN(toValue) || double.IsNaN(animationDurationSeconds))
+            {
+                return;
+            }
+
             if (useAnimations)
             {
                 var fromValue = (double)animatableElement.GetValue(dependencyProperty);
@@ -81,6 +86,10 @@ namespace SharpVectors.Runtime
             double toValue, double animationDurationSeconds, EventHandler completedEvent)
         {
             double fromValue = (double)animatableElement.GetValue(dependencyProperty);
+            if (double.IsNaN(fromValue) || double.IsNaN(toValue) || double.IsNaN(animationDurationSeconds))
+            {
+                return;
+            }
 
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = fromValue;

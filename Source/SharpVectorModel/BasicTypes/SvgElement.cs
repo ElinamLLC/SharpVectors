@@ -2,6 +2,7 @@ using System;
 using System.Xml;
 
 using SharpVectors.Dom.Css;
+using SharpVectors.Xml;
 
 namespace SharpVectors.Dom.Svg
 {
@@ -276,7 +277,16 @@ namespace SharpVectors.Dom.Svg
             {
                 return uri;
             }
-            return new Uri(new Uri(baseUri), uri).AbsoluteUri;
+            var resolvedUri = new Uri(new Uri(baseUri), uri);
+            if (resolvedUri.IsAbsoluteUri)
+            {
+                if (!UrlResolvePolicy.Supports(resolvedUri.Scheme))
+                {
+                    return null;
+                }
+            }
+
+            return resolvedUri.AbsoluteUri;
         }
 
         public float GetAttribute(string name, float defValue)

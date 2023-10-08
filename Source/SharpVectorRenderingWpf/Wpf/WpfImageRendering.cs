@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using SharpVectors.Xml;
 using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
 using SharpVectors.Runtime;
@@ -122,12 +123,11 @@ namespace SharpVectors.Renderers.Wpf
 
             DrawingGroup drawGroup = null;
 
-            ISvgAnimatedPreserveAspectRatio animatedAspectRatio = imageElement.PreserveAspectRatio;
+            var animatedAspectRatio = imageElement.PreserveAspectRatio;
             if (animatedAspectRatio != null && animatedAspectRatio.AnimVal != null)
             {
-                SvgPreserveAspectRatio aspectRatio = animatedAspectRatio.AnimVal as SvgPreserveAspectRatio;
-                SvgPreserveAspectRatioType aspectRatioType = 
-                    (aspectRatio != null) ? aspectRatio.Align : SvgPreserveAspectRatioType.Unknown;
+                var aspectRatio = animatedAspectRatio.AnimVal as SvgPreserveAspectRatio;
+                var aspectRatioType = (aspectRatio != null) ? aspectRatio.Align : SvgPreserveAspectRatioType.Unknown;
                 if (aspectRatio != null && aspectRatioType != SvgPreserveAspectRatioType.None &&
                     aspectRatioType != SvgPreserveAspectRatioType.Unknown)
                 {                      
@@ -505,10 +505,10 @@ namespace SharpVectors.Renderers.Wpf
 
         private ImageSource GetBitmap(SvgImageElement element, WpfDrawingContext context)
         {
-            if (element.IsSvgImage)
-            {
-                return null;
-            }
+            //if (element.IsSvgImage)
+            //{
+            //    return null;
+            //}
 
             if (element.Href == null)
             {
@@ -530,6 +530,10 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     return null;
                 }
+                if (!svgUri.IsSupported)
+                {
+                    return null;
+                }
 
                 if (string.IsNullOrWhiteSpace(absoluteUri))
                 {
@@ -542,6 +546,17 @@ namespace SharpVectors.Renderers.Wpf
                 }
 
                 Uri imageUri = new Uri(svgUri.AbsoluteUri);
+                if (!UrlResolvePolicy.Supports(imageUri.Scheme))
+                {
+                    Debug.WriteLine("Unsupported Image Uri: " + absoluteUri);
+                    return null;
+                }
+                var resolvePolicy = DynamicXmlUrlResolver.UrlPolicy;
+                if (!resolvePolicy.Supports(imageUri, UrlResolveSource.Image))
+                {
+                    Debug.WriteLine("Skipping Image Uri: " + absoluteUri);
+                    return null;
+                }
                 if (imageUri.IsFile)
                 {
                     if (File.Exists(imageUri.LocalPath))
@@ -564,7 +579,12 @@ namespace SharpVectors.Renderers.Wpf
                 }
                 else
                 {
-                    Stream stream = svgUri.ReferencedResource.GetResponseStream();
+                    var webResource = svgUri.ReferencedResource;
+                    if (webResource == null)
+                    {
+                        return null;
+                    }
+                    Stream stream = webResource.GetResponseStream();
 
                     BitmapImage imageSource = new BitmapImage();
                     imageSource.BeginInit();

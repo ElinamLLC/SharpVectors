@@ -1,3 +1,4 @@
+using System;
 using System.Xml;
 
 namespace SharpVectors.Dom
@@ -32,6 +33,7 @@ namespace SharpVectors.Dom
         /// otherwise, it return <see langword="false"/>.
         /// </returns>
         bool CanAccessExternalResources(string resourcesUri);
+        bool CanAccessExternalResources(Uri resourcesUri);
 
         IElement CreateElement(string tagName);
 		

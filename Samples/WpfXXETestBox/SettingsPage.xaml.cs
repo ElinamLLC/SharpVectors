@@ -18,7 +18,6 @@ namespace WpfXXETestBox
     {
         private bool _isInitialising;
         private bool _isModified;
-        private bool _isResourceModified;
 
 //        private SvgPage _svgPage;
 
@@ -170,7 +169,6 @@ namespace WpfXXETestBox
             }
 
             _isModified = false;
-            _isResourceModified = false;
 
             _isInitialising = false;
         }

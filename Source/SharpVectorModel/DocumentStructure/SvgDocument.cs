@@ -946,6 +946,10 @@ namespace SharpVectors.Dom.Svg
             Uri sourceUri = new Uri(uri, UriKind.RelativeOrAbsolute);
             if (sourceUri.IsAbsoluteUri)
             {
+                if (!UrlResolvePolicy.Supports(sourceUri.Scheme))
+                {
+                    return null;
+                }
                 return sourceUri;
             }
 
@@ -957,7 +961,16 @@ namespace SharpVectors.Dom.Svg
                 baseUri = "file:///" + workingDir.FullName.Replace('\\', '/');
             }
 
-            return new Uri(new Uri(baseUri), uri);
+            var resolvedUri = new Uri(new Uri(baseUri), uri);
+            if (resolvedUri.IsAbsoluteUri)
+            {
+                if (!UrlResolvePolicy.Supports(resolvedUri.Scheme))
+                {
+                    return null;
+                }
+            }
+
+            return resolvedUri;
         }
 
         #endregion

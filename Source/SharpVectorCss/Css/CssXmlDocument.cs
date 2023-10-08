@@ -4,6 +4,7 @@ using System.Net;
 using System.Xml;
 using System.Collections.Generic;
 
+using SharpVectors.Xml;
 using SharpVectors.Net;
 using SharpVectors.Dom.Stylesheets;
 using SharpVectors.Dom.Views;
@@ -271,6 +272,15 @@ namespace SharpVectors.Dom.Css
 
         public WebResponse GetResource(Uri absoluteUri)
         {
+            if (!absoluteUri.IsAbsoluteUri)
+            {
+                return null;
+            }
+            if (!UrlResolvePolicy.Supports(absoluteUri.Scheme))
+            {
+                return null;
+            }
+
             if (!CanAccessExternalResources(absoluteUri.ToString()))
             {
                 return null;

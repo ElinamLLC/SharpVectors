@@ -17,6 +17,8 @@ namespace SharpVectors.Xml
         private readonly UrlResolveTypes _style;
         private readonly UrlResolveTypes _script;
 
+        public static readonly string UriSchemePack = "pack";
+
         public UrlResolvePolicy(DtdProcessing processing)
         {
             _processing = processing;
@@ -50,6 +52,58 @@ namespace SharpVectors.Xml
         public UrlResolveTypes Style { get => _style; }
         public UrlResolveTypes Script { get => _script; }
 
+        public static UrlResolveSource GetSource(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return UrlResolveSource.Element;
+            }
+            var comparer = StringComparison.OrdinalIgnoreCase;
+            if (string.Equals(name, "image", comparer))
+            {
+                return UrlResolveSource.Image;
+            }
+            if (string.Equals(name, "font", comparer))
+            {
+                return UrlResolveSource.Font;
+            }
+            if (string.Equals(name, "style", comparer))
+            {
+                return UrlResolveSource.Style;
+            }
+            if (string.Equals(name, "script", comparer))
+            {
+                return UrlResolveSource.Script;
+            }
+            if (string.Equals(name, "svg", comparer))
+            {
+                return UrlResolveSource.Document;
+            }
+
+            return UrlResolveSource.Element;
+        }
+
+        public static bool Supports(string uriScheme)
+        {
+            if (string.IsNullOrWhiteSpace(uriScheme))
+            {
+                return false;
+            }
+            var comparer = StringComparison.OrdinalIgnoreCase;
+            if (string.Equals(uriScheme, Uri.UriSchemeFile, comparer) ||
+                string.Equals(uriScheme, UriSchemePack, comparer))
+            {
+                return true;
+            }
+            if (string.Equals(uriScheme, Uri.UriSchemeHttp, comparer) ||
+                string.Equals(uriScheme, Uri.UriSchemeHttps, comparer))
+            {
+                return true;
+            }
+
+            return false;
+        }
+             
         public virtual bool Supports(Uri uri, UrlResolveSource source)
         {
             if (uri == null || !uri.IsAbsoluteUri)
@@ -63,19 +117,25 @@ namespace SharpVectors.Xml
                     types = this.Entity;
                     break;
                 case UrlResolveSource.Element:
+                    types = this.Element;
                     break;
                 case UrlResolveSource.Document:
+                    types = this.Document;
                     break;
                 case UrlResolveSource.Font:
+                    types = this.Font;
                     break;
                 case UrlResolveSource.Image:
+                    types = this.Image;
                     break;
                 case UrlResolveSource.Style:
+                    types = this.Style;
                     break;
                 case UrlResolveSource.Script:
+                    types = this.Script;
                     break;
             }
-            if (uri.Scheme.StartsWith("pack") && types.HasFlag(UrlResolveTypes.Resource))
+            if (uri.Scheme.StartsWith(UriSchemePack) && types.HasFlag(UrlResolveTypes.Resource))
             {
                 return true;
             }

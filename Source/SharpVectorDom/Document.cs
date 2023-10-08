@@ -562,6 +562,27 @@ namespace SharpVectors.Dom
             return true;
         }
 
+        /// <inheritdoc />
+        public bool CanAccessExternalResources(Uri resourcesUri)
+        {
+            if (ExternalResourcesAccessMode == ExternalResourcesAccessModes.Ignore)
+            {
+                return false;
+            }
+            
+            if (ExternalResourcesAccessMode == ExternalResourcesAccessModes.ThrowError)
+            {
+                if (resourcesUri == null)
+                {
+                    throw new InvalidOperationException("Unauthorized attempt to access external resources, resourcesUri = null");
+                }
+
+                throw new InvalidOperationException("Unauthorized attempt to access external resources, resourcesUri = " + resourcesUri);
+            }
+            
+            return true;
+        }
+
         IDocumentType IDocument.Doctype
         {
             get {

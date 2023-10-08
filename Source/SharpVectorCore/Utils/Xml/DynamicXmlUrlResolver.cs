@@ -72,7 +72,7 @@ namespace SharpVectors.Xml
             {
                 if (urlPolicy.Entity.HasFlag(UrlResolveTypes.Resource))
                 {
-                    return new MemoryStream();
+                    return Stream.Null;
                 }
             }
 

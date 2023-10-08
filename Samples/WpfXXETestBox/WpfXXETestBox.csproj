@@ -42,7 +42,6 @@
 	<DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AvalonEdit" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\SharpVectorConvertersWpf\SharpVectors.Converters.Wpf.csproj" />
@@ -54,6 +53,7 @@
     <ProjectReference Include="..\..\Source\SharpVectorRuntimeWpf\SharpVectors.Runtime.Wpf.csproj" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
     <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net45\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -71,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net46\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -79,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net47'">
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net47\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -87,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net48\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -95,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\netstandard2.1\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -103,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0-windows'">
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net5.0\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -111,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0-windows'">
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net6.0\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
@@ -119,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0-windows'">
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <Reference Include="SharpVectors.ShellFileDialogs">
       <HintPath>..\..\Libraries\net7.0\SharpVectors.ShellFileDialogs.dll</HintPath>
     </Reference>
