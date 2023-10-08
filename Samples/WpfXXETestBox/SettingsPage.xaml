@@ -1,0 +1,74 @@
+﻿<Page x:Class="WpfXXETestBox.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:local="clr-namespace:WpfXXETestBox"
+      mc:Ignorable="d" 
+      d:DesignHeight="960" d:DesignWidth="960" Background="White" Title="SettingsPage">
+    <Page.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="Margin" Value="5,1,5,5"/>
+        </Style>
+    </Page.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20 10 20 10" ToolTipService.ShowDuration="10000">
+            <GroupBox HorizontalAlignment="Stretch" FontSize="14">
+                <GroupBox.Header>
+                    <TextBlock Text="Svg Input Settings" FontWeight="Bold" FontSize="18"/>
+                </GroupBox.Header>
+                <StackPanel Orientation="Vertical" Margin="20 6 6 3">
+                    <CheckBox x:Name="chkTextAsGeometry" Click="OnSettingsChanged">
+                        <TextBlock Text="Convert text as path geometry" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                        <Run>All SVG text elements will be converted to paths.</Run>                    
+                        <LineBreak/>
+                        <Bold>NOTE:&#160;</Bold>
+                        <Run>      
+                            Depending on the styling (eg. text with both stroke and fill), the text may still be converted to paths.
+                            Also, text on paths are converted to path geometries.
+                        </Run>
+                    </TextBlock>
+                    <CheckBox x:Name="chkIncludeRuntime" Click="OnSettingsChanged">
+                        <TextBlock Text="Include support for SharpVectors Runtime library" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 10" TextWrapping="Wrap">
+                        <Run>                    
+                            Select this if you want to link to the SharpVectors Runtime library.
+                        </Run>
+                        <LineBreak/>
+                        <Bold>NOTE:&#160;</Bold>
+                        <Run>      
+                            If this option is not selected, then select the option to render
+                            text as geometric paths; otherwise, font locations may not be resolved
+                            properly on the end-user system.
+                        </Run>
+                    </TextBlock>
+
+                    <CheckBox x:Name="chkIgnoreRootViewbox" Click="OnSettingsChanged">
+                        <TextBlock Text="Ignore SVG Root Viewbox" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 3">
+                        Indicates turning off viewbox at the root of the drawing.
+                    </TextBlock>
+                    <CheckBox x:Name="chkEnsureViewboxSize" Click="OnSettingsChanged">
+                        <TextBlock Text="Ensure Viewbox Size" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 3">
+                        Indicate preserving the original viewbox size when saving images.
+                    </TextBlock>
+                    <CheckBox x:Name="chkEnsureViewboxPosition" Click="OnSettingsChanged">
+                        <TextBlock Text="Ensure Viewbox Position" FontWeight="Bold"/>
+                    </CheckBox>
+                    <TextBlock Padding="32 3 3 3">
+                        Indicate applying a translate transform to the viewbox to ensure it is visible when rendered.
+                    </TextBlock>
+                </StackPanel>            
+            </GroupBox>
+        </StackPanel>
+        
+    </ScrollViewer>
+</Page>

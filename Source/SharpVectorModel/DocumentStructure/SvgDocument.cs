@@ -57,8 +57,6 @@ namespace SharpVectors.Dom.Svg
         #region Public Static Fields
 
         public static readonly int DotsPerInch = 96;
-        
-        public static XmlReaderSettings GlobalXmlReaderSettings { get; set; }
 
         public const string SvgNamespace = "http://www.w3.org/2000/svg";
         public const string XLinkNamespace = "http://www.w3.org/1999/xlink";
@@ -70,6 +68,8 @@ namespace SharpVectors.Dom.Svg
         #endregion
 
         #region Private Static Fields
+
+        private static XmlReaderSettings _globalSettings;
 
         // Resource handling
 
@@ -263,6 +263,16 @@ namespace SharpVectors.Dom.Svg
             }
         }
 
+        public static XmlReaderSettings GlobalSettings 
+        { 
+            get {
+                return _globalSettings;
+            }
+            set {
+                _globalSettings = value;
+            }
+        }
+
         /// <summary>
         /// Get or sets the dots per inch at which the objects should be rendered.
         /// </summary>
@@ -380,9 +390,9 @@ namespace SharpVectors.Dom.Svg
 
         private XmlReaderSettings GetXmlReaderSettings()
         {
-            if (GlobalXmlReaderSettings != null)
+            if (_globalSettings != null)
             {
-                return GlobalXmlReaderSettings;
+                return _globalSettings;
             }
             
             if (_settings != null)
@@ -394,10 +404,11 @@ namespace SharpVectors.Dom.Svg
             xmlResolver.Resolving += OnXmlResolverResolving;
             xmlResolver.GettingEntity += OnXmlResolverGettingEntity;
 
+            var resolvePolicy = DynamicXmlUrlResolver.UrlPolicy;
+
             XmlReaderSettings settings = new XmlReaderSettings();
 
-            settings.DtdProcessing = DtdProcessing.Parse;
-
+            settings.DtdProcessing                = resolvePolicy.Processing;
             settings.IgnoreComments               = _ignoreComments;
             settings.IgnoreWhitespace             = _ignoreWhitespace;
             settings.IgnoreProcessingInstructions = _ignoreProcessingInstructions;
@@ -569,7 +580,7 @@ namespace SharpVectors.Dom.Svg
                     {
                         if (name.StartsWith(_rootType.Namespace, StringComparison.OrdinalIgnoreCase))
                         {
-                            string namePart = name.Substring(_rootType.Namespace.Length + 1); // the +1 is for the "."
+                            var namePart = name.Substring(_rootType.Namespace.Length + 1); // the +1 is for the "."
                             _entitiesUris[namePart] = name;
                             _entitiesUris[namePart.Replace("_", "")] = name;
                         }
@@ -687,12 +698,12 @@ namespace SharpVectors.Dom.Svg
         {
             if (ofObjectToReturn == typeof(Stream))
             {
-                using (Stream resourceStream = _rootType.Assembly.GetManifestResourceStream(path))
+                using (var resourceStream = _rootType.Assembly.GetManifestResourceStream(path))
                 {
                     if (resourceStream != null)
                     {
-                        // we copy the contents to a MemoryStream because the loader doesn't release original streams,
-                        // resulting in an assembly lock
+                        // we copy the contents to a MemoryStream because the loader doesn't
+                        // release original streams, resulting in an assembly lock
                         MemoryStream memoryStream = new MemoryStream();
                         resourceStream.CopyTo(memoryStream);
 
@@ -1482,9 +1493,11 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
+            var comparer = StringComparison.OrdinalIgnoreCase;
+
             string fileExt = Path.GetExtension(fontPath);
-            if (string.Equals(fileExt, ".svg", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(fileExt, ".svgz", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileExt, ".svg", comparer)
+                || string.Equals(fileExt, ".svgz", comparer))
             {
                 SvgDocument document = new SvgDocument(ownedWindow);
                 document.Static = true;
@@ -1510,8 +1523,8 @@ namespace SharpVectors.Dom.Svg
                     this.Static = isStatic;
                 }
             }
-            else if (string.Equals(fileExt, ".woff", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(fileExt, ".woff2", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(fileExt, ".woff", comparer)
+                || string.Equals(fileExt, ".woff2", comparer))
             {
                 if (_fontFamilies == null)
                 {
@@ -1539,8 +1552,8 @@ namespace SharpVectors.Dom.Svg
                     }
                 }
             }
-            else if (string.Equals(fileExt, ".ttf", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(fileExt, ".otf", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(fileExt, ".ttf", comparer)
+                || string.Equals(fileExt, ".otf", comparer))
             {
                 if (_fontFamilies == null)
                 {
@@ -1550,8 +1563,8 @@ namespace SharpVectors.Dom.Svg
 
                 _fontFamilies.Add(fontFamily);
             }
-            else if (string.Equals(fileExt, ".ttc", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(fileExt, ".otc", StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(fileExt, ".ttc", comparer)
+                || string.Equals(fileExt, ".otc", comparer))
             {
                 if (_fontFamilies == null)
                 {

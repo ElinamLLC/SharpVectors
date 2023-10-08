@@ -45,9 +45,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DB43362
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpVectors.Core.Tests", "Tests\SharpVectorsCore\SharpVectors.Core.Tests.csproj", "{F69F8D82-6D2F-4D91-9595-7DC2A7371479}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestResourceSvg", "Samples\WpfTestResourceSvg\WpfTestResourceSvg.csproj", "{3EE349D1-5BAC-455F-AFE3-8DB41509B0E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestResourceSvg", "Samples\WpfTestResourceSvg\WpfTestResourceSvg.csproj", "{3EE349D1-5BAC-455F-AFE3-8DB41509B0E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfTestSampleResources", "Samples\WpfTestSampleResources\WpfTestSampleResources.csproj", "{EB6717D1-7A87-45FB-8893-C06B5B51AC6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfXXETestBox", "Samples\WpfXXETestBox\WpfXXETestBox.csproj", "{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,6 +141,10 @@ Global
 		{EB6717D1-7A87-45FB-8893-C06B5B51AC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB6717D1-7A87-45FB-8893-C06B5B51AC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB6717D1-7A87-45FB-8893-C06B5B51AC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +162,7 @@ Global
 		{F69F8D82-6D2F-4D91-9595-7DC2A7371479} = {7DB43362-F0A9-447A-9FD0-2323D2868830}
 		{3EE349D1-5BAC-455F-AFE3-8DB41509B0E9} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{EB6717D1-7A87-45FB-8893-C06B5B51AC6F} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

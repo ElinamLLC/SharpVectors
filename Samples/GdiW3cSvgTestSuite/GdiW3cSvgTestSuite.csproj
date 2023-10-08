@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>GdiW3cSvgTestSuite</RootNamespace>
@@ -36,6 +36,7 @@
     <DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net5'))">$(DefineConstants);NETCORE;NET50</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NET60</DefineConstants>
+	<DefineConstants Condition="$(TargetFramework.StartsWith('net7'))">$(DefineConstants);NETCORE;NET70</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
@@ -187,6 +188,23 @@
     </Reference>
     <Reference Include="SharpVectors.HtmlRenderer.WinForms">
       <HintPath>..\..\Libraries\net6.0-windows\SharpVectors.HtmlRenderer.WinForms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0-windows'">
+    <Reference Include="SharpVectors.ShellFileDialogs">
+      <HintPath>..\..\Libraries\net7.0\SharpVectors.ShellFileDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>..\..\Libraries\net7.0-windows\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\..\Libraries\net7.0-windows\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
+      <HintPath>..\..\Libraries\net7.0-windows\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpVectors.HtmlRenderer.WinForms">
+      <HintPath>..\..\Libraries\net7.0-windows\SharpVectors.HtmlRenderer.WinForms.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

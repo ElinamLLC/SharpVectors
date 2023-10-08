@@ -33,7 +33,9 @@ namespace SharpVectors.Xml
 
         private static UrlResolvePolicy _urlPolicy;
 
-        public DynamicXmlUrlResolver() { }
+        public DynamicXmlUrlResolver() 
+        {
+        }
 
         public static UrlResolvePolicy UrlPolicy
         {

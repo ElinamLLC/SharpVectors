@@ -46,79 +46,12 @@
                     </StackPanel>
                 </TabItem.Header>
                 <DockPanel LastChildFill="True">
-                    <ToolBar DockPanel.Dock="Top" Height="36">
-                        <ToolBar.Resources>
-                            <Style TargetType="{x:Type Image}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
-                                        <Setter Property="Opacity" Value="0.30" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ToolBar.Resources>
-                        <Button>
-                            <Image Source="{svgc:SvgImage Source=/Images/Open.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Button>
-                            <Image Source="{svgc:SvgImage Source=/Images/Save.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Separator/>
-                        <Button Command="Cut" ToolTip="Cut To Clipboard">
-                            <Image Source="{svgc:SvgImage Source=/Images/Cut.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Button Command="Copy" ToolTip="Copy To Clipboard">
-                            <Image Source="{svgc:SvgImage Source=/Images/Copy.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Button Command="Paste" ToolTip="Paste From Clipboard">
-                            <Image Source="{svgc:SvgImage Source=/Images/Paste.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Button Command="Delete" ToolTip="Delete Selection">
-                            <Image Source="{svgc:SvgImage Source=/Images/Delete.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Separator/>
-                        <Button Command="Undo" ToolTip="Undo">
-                            <Image Source="{svgc:SvgImage Source=/Images/Undo.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Button Command="Redo" ToolTip="Redo">
-                            <Image Source="{svgc:SvgImage Source=/Images/Redo.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Separator/>
-                        <CheckBox IsChecked="{Binding ElementName=textEditor,Path=WordWrap}" ToolTip="Word Wrap">
-                            <Image Source="{svgc:SvgImage Source=/Images/WordWrap.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </CheckBox>
-                        <CheckBox IsChecked="{Binding ElementName=textEditor,Path=ShowLineNumbers}" ToolTip="Show Line Numbers">
-                            <Image Source="{svgc:SvgImage Source=/Images/Number.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </CheckBox>
-                        <CheckBox IsChecked="{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}" ToolTip="Show End Of Line">
-                            <Image Source="{svgc:SvgImage Source=/Images/Space.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </CheckBox>
-                        <TextBox x:Name="searchTextBox" Width="200" />
-                        <Button>
-                            <Image Source="{svgc:SvgImage Source=/Images/Find.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                        </Button>
-                        <Separator/>
-                        <Button x:Name="formatInput" ToolTip="Format Document">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{svgc:SvgImage Source=/Images/Format.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                                <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Format</TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Separator/>
-                        <Button x:Name="convertInput" ToolTip="Convert Document">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{svgc:SvgImage Source=/Images/Run.svg, AppName=WpfTestResourceSvg}" Height="24" Width="24"/>
-                                <TextBlock Margin="3,0,0,0" VerticalAlignment="Center">Convert</TextBlock>
-                            </StackPanel>
-                        </Button>
-                    </ToolBar>
-                
                     <UniformGrid Rows="2" Columns="2">
                         <Image Source="{svgc:SvgImage Source=/Resources/autum_leaf.svg, AppName=WpfTestResourceSvg}" Stretch="Uniform"/>
                         <Image Source="{svgc:SvgImage Source=/Resources/basket.svg, AppName=WpfTestResourceSvg}" Stretch="Uniform"/>
                         <Image Source="{svgc:SvgImage Source=/Resources/kite.svg, AppName=WpfTestResourceSvg}" Stretch="Uniform"/>
                         <Image Source="{svgc:SvgImage Source=/Resources/beach_ball.svg, AppName=WpfTestResourceSvg}" Stretch="Uniform"/>
                     </UniformGrid>
-
                 </DockPanel>
             </TabItem>
 

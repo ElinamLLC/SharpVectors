@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using SharpVectors.Dom.Stylesheets;
-using System.Diagnostics;
 
 namespace SharpVectors.Dom.Svg
 {

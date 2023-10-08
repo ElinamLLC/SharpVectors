@@ -1,0 +1,82 @@
+﻿<Window x:Class="WpfXXETestBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfXXETestBox"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        local:MainWindowSettings.Save="True"
+        mc:Ignorable="d"
+        Title="SharpVectors: WPF SVG TestBox" d:DesignHeight="720" d:DesignWidth="860" WindowStartupLocation="CenterScreen">
+    <DockPanel LastChildFill="True" Margin="3">
+        <!--<Frame x:Name="mainPage" Source="MainPage.xaml"/>-->
+        <TabControl Margin="6" Grid.Row="0" Grid.Column="2">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Silver" CornerRadius="0,0,0,0" Margin="2,2">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                ContentSource="Header" Margin="4,4"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.8"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            
+            <TabItem x:Name="tabXXEInput">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfXXETestBox}" />
+                        <TextBlock Text="XXE SVG Input" Margin="3" VerticalAlignment="Center" MinWidth="70"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="frameXXEInput" Source="XXEInputPage.xaml"/>
+            </TabItem>
+
+            <TabItem x:Name="tabXXEInjection">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfXXETestBox}" />
+                        <TextBlock Text="XXE Injection Samples" Margin="3" VerticalAlignment="Center" MinWidth="70" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="frameXXEInjection" Source="XXEInjectionPage.xaml"/>
+            </TabItem>
+
+            <TabItem x:Name="tabSettings">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Settings.svg, AppName=WpfXXETestBox}" />
+                        <TextBlock Text="Settings" Margin="3" VerticalAlignment="Center" MinWidth="70" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="frameSettings" Source="SettingsPage.xaml"/>
+            </TabItem>
+            
+            <TabItem x:Name="tabDebugging" IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/Debug.svg, AppName=WpfXXETestBox}" />
+                        <TextBlock Text="Debugging" Margin="3" VerticalAlignment="Center" MinWidth="70" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame x:Name="frameDebugging" Source="DebugPage.xaml"/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
