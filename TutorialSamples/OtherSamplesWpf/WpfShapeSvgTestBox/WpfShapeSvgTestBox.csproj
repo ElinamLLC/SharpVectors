@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net452</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net452</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -25,30 +25,32 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0-windows'">
+    <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <Reference Include="SharpVectors.Converters.Wpf">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Converters.Wpf.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Converters.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.Core">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Core.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Core.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.Css">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Css.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Css.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.Dom">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Dom.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Dom.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.Model">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Model.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Model.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.Rendering.Wpf">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Rendering.Wpf.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Rendering.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="SharpVectors.Runtime.Wpf">
-      <HintPath>..\..\..\Output\netcoreapp3.1\SharpVectors.Runtime.Wpf.dll</HintPath>
+      <HintPath>..\..\..\Output\net7.0-windows\SharpVectors.Runtime.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452'">
+    <PackageReference Include="AvalonEdit" Version="6.1.3.50" />
     <Reference Include="SharpVectors.Converters.Wpf">
       <HintPath>..\..\..\Output\net45\SharpVectors.Converters.Wpf.dll</HintPath>
     </Reference>
@@ -72,7 +74,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AvalonEdit" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Copy.png" />
