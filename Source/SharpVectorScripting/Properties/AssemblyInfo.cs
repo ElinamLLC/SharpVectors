@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Scripting.Jint")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2022 Elinam LLC, JavaScript-based scripting component for SharpVectors.")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2023 Elinam LLC, JavaScript-based scripting component for SharpVectors.")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.8.1.0")]
-[assembly: AssemblyFileVersion("1.8.1.0")]
-[assembly: AssemblyInformationalVersion("1.8.1.0")]
+[assembly: AssemblyVersion("1.8.2.0")]
+[assembly: AssemblyFileVersion("1.8.2.0")]
+[assembly: AssemblyInformationalVersion("1.8.2.0")]

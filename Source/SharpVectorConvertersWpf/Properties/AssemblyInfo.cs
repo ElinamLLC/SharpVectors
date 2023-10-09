@@ -16,7 +16,7 @@ using System.Windows.Markup;
 #endif
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Converters.Wpf")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2022 Elinam LLC")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2023 Elinam LLC")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
@@ -55,9 +55,9 @@ using System.Windows.Markup;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.8.1.0")]
-[assembly: AssemblyFileVersion("1.8.1.0")]
-[assembly: AssemblyInformationalVersion("1.8.1.0")]
+[assembly: AssemblyVersion("1.8.2.0")]
+[assembly: AssemblyFileVersion("1.8.2.0")]
+[assembly: AssemblyInformationalVersion("1.8.2.0")]
 
 [assembly: XmlnsPrefix("http://sharpvectors.codeplex.com/svgc/", "svgc")]
 [assembly: XmlnsDefinition("http://sharpvectors.codeplex.com/svgc/", "SharpVectors.Converters")]

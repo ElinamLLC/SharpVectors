@@ -19,10 +19,7 @@ namespace WpfXXETestBox
         private bool _isInitialising;
         private bool _isModified;
 
-//        private SvgPage _svgPage;
-
         private WpfDrawingSettings _wpfSettings;
-        private WpfDrawingSettings _conversionSettings;
 
         private NotificationManager _notifyIcon;
 
@@ -53,16 +50,6 @@ namespace WpfXXETestBox
                 _mainWindow = value;
             }
         }
-
-        //public SvgPage SvgPage
-        //{
-        //    get {
-        //        return _svgPage;
-        //    }
-        //    set {
-        //        _svgPage = value;
-        //    }
-        //}
 
         private void OnPageUnloaded(object sender, RoutedEventArgs e)
         {

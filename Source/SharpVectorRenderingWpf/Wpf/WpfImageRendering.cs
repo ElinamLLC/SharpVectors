@@ -530,10 +530,6 @@ namespace SharpVectors.Renderers.Wpf
                 {
                     return null;
                 }
-                if (!svgUri.IsSupported)
-                {
-                    return null;
-                }
 
                 if (string.IsNullOrWhiteSpace(absoluteUri))
                 {
@@ -545,6 +541,10 @@ namespace SharpVectors.Renderers.Wpf
                     return null;
                 }
 
+                if (!svgUri.IsSupported)
+                {
+                    return null;
+                }
                 Uri imageUri = new Uri(svgUri.AbsoluteUri);
                 if (!UrlResolvePolicy.Supports(imageUri.Scheme))
                 {
