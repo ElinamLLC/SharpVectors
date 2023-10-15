@@ -176,7 +176,7 @@ namespace SharpVectors.Dom
 		/// </para>
 		/// <para>
 		/// For nodes of any type other than <see cref="XmlNodeType.Element"/> and <see cref="XmlNodeType.Attribute"/> 
-		/// and nodes created with a DOM Level 1 method, such as <see cref="o:IDocument.CreateElement"/> from the 
+		/// and nodes created with a DOM Level 1 method, such as <see cref="IDocument.CreateElement"/> from the 
 		/// <see cref="IDocument"/> interface, this is always <see langword="null"/>. Per the Namespaces in XML Specification 
 		/// an attribute does not inherit its namespace from the element it is attached to. If an attribute is 
 		/// not explicitly given a namespace, it simply has no namespace.
@@ -187,47 +187,46 @@ namespace SharpVectors.Dom
 			get;
 		}
 
-		/// <summary>
-		/// Gets or sets the namespace prefix of this node, or <see langword="null"/> if it is unspecified.
-		/// </summary>
-		/// <value>
-		/// The namespace prefix of this node. For example, Prefix is <c>inkscape</c> for the element
-		/// <c>&lt; inkscape:label &gt;</c>. If there is no prefix, this property returns String.Empty.
-		/// </value>
-		/// <remarks>
-		/// <para>
-		/// Note that setting this attribute, when permitted, changes the <see cref="NodeName"/> attribute, which holds 
-		/// the qualified name, as well as the <see cref="IElement.TagName"/> and <see cref="IAttribute.Name"/> attributes of 
-		/// the <see cref="IElement"/> and <see cref="IAttribute"/> interfaces, when applicable.
-		/// </para>
-		/// <para>
-		/// Note also that changing the prefix of an attribute that is known to have a default value, does not make a new 
-		/// attribute with the default value and the original prefix appear, since the <see cref="NamespaceURI"/> and 
-		/// <see cref="LocalName"/> do not change.
-		/// </para>
-		/// <para>
-		/// For nodes of any type other than <see cref="XmlNodeType.Element"/> and <see cref="XmlNodeType.Attribute"/> and 
-		/// nodes created with a DOM Level 1 method, such as <see cref="0:IDocument.CreateElement"/> from the 
-		/// <see cref="IDocument"/> interface, this is always <see langword="null"/>. 
-		/// </para>
-		/// </remarks>
-		/// <exception cref="DomException">
-		/// <para>
-		/// INVALID_CHARACTER_ERR: Raised if the specified prefix contains an illegal character.
-		/// </para>
-		/// <para>
-		/// NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
-		/// </para>
-		/// <para>
-		/// NAMESPACE_ERR: Raised if the specified <see cref="Prefix"/> is malformed, if the <see cref="NamespaceURI"/> of 
-		/// this node is <see langword="null"/>, if the specified prefix is "xml" and the <see cref="NamespaceURI"/> of this 
-		/// node is different from <see href="https://www.w3.org/XML/1998/namespace"/>, if this node is an attribute and the 
-		/// specified prefix is <c>xmlns</c> and the <see cref="NamespaceURI"/> of this node is different from 
-		/// <see href="https://www.w3.org/2000/xmlns/"/>, or if this node is an attribute and the <c>QualifiedName</c> of 
-		/// this node is <c>xmlns</c>.
-		/// </para>
-		/// </exception>
-		string Prefix
+        /// <summary>
+        /// Gets or sets the namespace prefix of this node, or <see langword="null"/> if it is unspecified.
+        /// </summary>
+        /// <value>
+        /// The namespace prefix of this node. For example, Prefix is <c>inkscape</c> for the element
+        /// <c>&lt; inkscape:label &gt;</c>. If there is no prefix, this property returns String.Empty.
+        /// </value>
+        /// <remarks>
+        /// <para>
+        /// Note that setting this attribute, when permitted, changes the <see cref="Name"/> attribute, which holds 
+        /// the qualified name.
+        /// </para>
+        /// <para>
+        /// Note also that changing the prefix of an attribute that is known to have a default value, does not make a new 
+        /// attribute with the default value and the original prefix appear, since the <see cref="NamespaceURI"/> and 
+        /// <see cref="LocalName"/> do not change.
+        /// </para>
+        /// <para>
+        /// For nodes of any type other than <see cref="XmlNodeType.Element"/> and <see cref="XmlNodeType.Attribute"/> and 
+        /// nodes created with a DOM Level 1 method, such as <see cref="IDocument.CreateElement"/> from the 
+        /// <see cref="IDocument"/> interface, this is always <see langword="null"/>. 
+        /// </para>
+        /// </remarks>
+        /// <exception cref="DomException">
+        /// <para>
+        /// INVALID_CHARACTER_ERR: Raised if the specified prefix contains an illegal character.
+        /// </para>
+        /// <para>
+        /// NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.
+        /// </para>
+        /// <para>
+        /// NAMESPACE_ERR: Raised if the specified <see cref="Prefix"/> is malformed, if the <see cref="NamespaceURI"/> of 
+        /// this node is <see langword="null"/>, if the specified prefix is "xml" and the <see cref="NamespaceURI"/> of this 
+        /// node is different from <see href="https://www.w3.org/XML/1998/namespace"/>, if this node is an attribute and the 
+        /// specified prefix is <c>xmlns</c> and the <see cref="NamespaceURI"/> of this node is different from 
+        /// <see href="https://www.w3.org/2000/xmlns/"/>, or if this node is an attribute and the <c>QualifiedName</c> of 
+        /// this node is <c>xmlns</c>.
+        /// </para>
+        /// </exception>
+        string Prefix
 		{
 			get;
 			set;
@@ -243,7 +242,7 @@ namespace SharpVectors.Dom
 		/// </value>
 		/// <remarks>
 		/// For nodes of any type other than <see cref="XmlNodeType.Element"/> and <see cref="XmlNodeType.Attribute"/> and 
-		/// nodes created with a DOM Level 1 method, such as <see cref="o:IDocument.CreateElement"/> from the 
+		/// nodes created with a DOM Level 1 method, such as <see cref="IDocument.CreateElement"/> from the 
 		/// <see cref="IDocument"/> interface, this is always <see langword="null"/>.
 		/// </remarks>
 		string LocalName
@@ -359,7 +358,7 @@ namespace SharpVectors.Dom
 		/// contains unless it is a deep clone, since the text is contained in a child <see cref="IText"/> node. 
 		/// </para>
 		/// <para>
-		/// Cloning an <see cref="Attribute"/> directly, as opposed to be cloned as part of an <see cref="IElement"/> 
+		/// Cloning an <see cref="IAttribute"/> directly, as opposed to be cloned as part of an <see cref="IElement"/> 
 		/// cloning operation, returns a specified attribute (<see cref="IAttribute.Specified"/> is <see langword="true"/>). 
 		/// </para>
 		/// <para>

@@ -8,11 +8,11 @@ namespace SharpVectors.Dom
     /// declaration. <see cref="IEntity"/> declaration modeling has been left for a 
     /// later Level of the DOM specification.
     /// <para>
-    /// Represents an entity declaration, such as <!ENTITY... >.
+    /// Represents an entity declaration, such as <c>&lt;!ENTITY... &gt;</c>.
     /// </para>
     /// </summary>
     /// <remarks>
-    /// <para>The <see cref="INode.NodeName"/> attribute that is inherited from 
+    /// <para>The <see cref="IXmlNode.Name"/> attribute that is inherited from 
     /// <see cref="INode"/> contains the name of the entity.
     /// </para>
     /// <para>An XML processor may choose to completely expand entities before the 
@@ -36,7 +36,7 @@ namespace SharpVectors.Dom
     /// <see cref="IEntity"/> nodes and all their descendants are readonly.
     /// </para>
     /// <para>An <see cref="IEntity"/> node does not have any parent. If the entity 
-    /// contains an unbound namespace prefix, the <see cref="INode.NamespaceURI"/> of 
+    /// contains an unbound namespace prefix, the <see cref="IXmlNode.NamespaceURI"/> of 
     /// the corresponding node in the <see cref="IEntity"/> node subtree is 
     /// <see langword="null"/>. The same is true for <see cref="IEntityReference"/> 
     /// nodes that refer to this entity, when they are created using the 

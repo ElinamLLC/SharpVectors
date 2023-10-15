@@ -14,7 +14,7 @@ namespace SharpVectors.Dom
     /// fairly complex sub-tree representing the attribute value. On the other 
     /// hand, in HTML, where all attributes have simple string values, methods to 
     /// directly access an attribute value can safely be used as a convenience.In 
-    /// DOM Level 2, the method <see cref="INode.Normalize"/> is inherited from the 
+    /// DOM Level 2, the method <see cref="IXmlNode.Normalize"/> is inherited from the 
     /// <see cref="INode"/> interface where it was moved.
     /// </remarks>
     /// <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">

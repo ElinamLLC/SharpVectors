@@ -11,8 +11,6 @@ namespace SharpVectors.Dom.Events
 	{
 		#region Methods
 		
-		#region DOM Level 2
-		
 		/// <summary>
 		/// The <see cref="CreateEvent">CreateEvent</see> method is used in
 		/// creating <see cref="IEvent">IEvent</see>s when it is either
@@ -72,12 +70,7 @@ namespace SharpVectors.Dom.Events
 		/// NOT_SUPPORTED_ERR: Raised if the implementation does not support
 		/// the <see cref="IEvent">Event</see> interface requested.
 		/// </exception>
-		IEvent CreateEvent(
-			string eventType);
-		
-		#endregion
-		
-		#region DOM Level 3 Experimental
+		IEvent CreateEvent(string eventType);
 		
 		/// <summary>
 		/// Test if the implementation can generate events of a specified type.
@@ -95,11 +88,7 @@ namespace SharpVectors.Dom.Events
 		/// <c>true</c> if the implementation can generate and dispatch this
 		/// event type, <c>false</c> otherwise.
 		/// </returns>
-		bool CanDispatch(
-			string namespaceUri,
-			string type);
-		
-		#endregion
+		bool CanDispatch(string namespaceUri, string type);
 		
 		#endregion
 	}

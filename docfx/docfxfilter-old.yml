@@ -1,0 +1,59 @@
+apiRules:
+- exclude:
+    uidRegex: ^SharpVectors\.DynamicCast$
+    type: Class
+- exclude:
+    uidRegex: ^SharpVectors\.TryCast$
+    type: Class
+- exclude:
+    # inherited members SharpVectors.Compressions.Brotli
+    uidRegex: ^SharpVectors\.Compressions\.Brotli$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Compressions.ZLib.* namespace
+    uidRegex: ^SharpVectors\.Compressions\.ZLib$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Converters.Shapes.* namespace
+    uidRegex: ^SharpVectors\.Converters\.Shapes$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Dom.Utils.* namespace
+    uidRegex: ^SharpVectors\.Dom\.Utils$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Polynomials.* namespace
+    uidRegex: ^SharpVectors\.Polynomials$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Scripting.* namespace
+    uidRegex: ^SharpVectors\.Scripting$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Woffs.* namespace
+    uidRegex: ^SharpVectors\.Woffs$
+    type: Namespace	
+- exclude:
+    # mentioning types from SharpVectors.Xml.* namespace
+    uidRegex: ^SharpVectors\.Xml\.LocalDtdXmlUrlResolver$
+    type: Class
+- exclude:
+    # mentioning types from SharpVectors.Net.* namespace
+    uidRegex: ^SharpVectors\.Net$
+    type: Namespace
+- exclude:
+    # mentioning types from SharpVectors.Dom.Views.* namespace
+    uidRegex: ^SharpVectors\.Dom\.Views$
+    type: Namespace
+- exclude:
+    # constants SharpVectors.Dom.CssConstants class
+    uidRegex: ^SharpVectors\.Dom\.CssConstants$
+    type: Class
+- exclude:
+    # constants SharpVectors.Dom.SvgConstants class
+    uidRegex: ^SharpVectors\.Dom\.SvgConstants$
+    type: Class
+- exclude:
+    # constants SharpVectors.Dom.XmlConstants class
+    uidRegex: ^SharpVectors\.Dom\.XmlConstants$
+    type: Class

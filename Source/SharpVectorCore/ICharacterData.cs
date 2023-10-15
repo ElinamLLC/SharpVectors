@@ -36,7 +36,7 @@ namespace SharpVectors.Dom
         /// </summary>
         /// <param name="offset">The position within the string to start replacing.</param>
         /// <param name="count">The number of characters to replace.</param>
-        /// <param name="strData"The new data that replaces the old string data.></param>
+        /// <param name="strData">The new data that replaces the old string data.</param>
         void ReplaceData(int offset, int count, string strData);
 
         /// <summary>Retrieves a substring of the full string from the specified range.</summary>

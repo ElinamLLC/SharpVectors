@@ -2,30 +2,30 @@ using System.Xml;
 
 namespace SharpVectors.Dom
 {
-	/// <summary>
-	/// The <see cref="IElement"/> interface represents an element in an HTML or XML document. 
-	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// Elements may have attributes associated with them; since the <see cref="IElement"/> interface inherits 
-	/// from <see cref="INode"/>, the generic <see cref="INode"/> interface attribute <see cref="IAttribute"/> may 
-	/// be used to retrieve the set of all attributes for an element. 
-	/// </para>
-	/// <para>
-	/// There are methods on the <see cref="IElement"/> interface to retrieve either an <see cref="IAttribute"/> object 
-	/// by name or an attribute value by name. In XML, where an attribute value may contain entity references, an 
-	/// <see cref="IAttribute"/> object should be retrieved to examine the possibly fairly complex sub-tree representing 
-	/// the attribute value. 
-	/// </para>
-	/// <para>
-	/// On the other hand, in HTML, where all attributes have simple string values, methods to directly access an attribute 
-	/// value can safely be used as a convenience. In DOM Level 2, the method <see cref="INode.Normalize"/> is inherited from the 
-	/// <see cref="INode"/> interface where it was moved.
-	/// </para>
-	/// </remarks>
-	/// <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
-	/// Document Object Model (DOM) Level 2 Core Specification</seealso>
-	public interface IXmlElement : INode
+    /// <summary>
+    /// The <see cref="IElement"/> interface represents an element in an HTML or XML document. 
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Elements may have attributes associated with them; since the <see cref="IElement"/> interface inherits 
+    /// from <see cref="INode"/>, the generic <see cref="INode"/> interface attribute <see cref="IAttribute"/> may 
+    /// be used to retrieve the set of all attributes for an element. 
+    /// </para>
+    /// <para>
+    /// There are methods on the <see cref="IElement"/> interface to retrieve either an <see cref="IAttribute"/> object 
+    /// by name or an attribute value by name. In XML, where an attribute value may contain entity references, an 
+    /// <see cref="IAttribute"/> object should be retrieved to examine the possibly fairly complex sub-tree representing 
+    /// the attribute value. 
+    /// </para>
+    /// <para>
+    /// On the other hand, in HTML, where all attributes have simple string values, methods to directly access an attribute 
+    /// value can safely be used as a convenience. In DOM Level 2, the method <see cref="IXmlNode.Normalize"/> is inherited from the 
+    /// <see cref="INode"/> interface where it was moved.
+    /// </para>
+    /// </remarks>
+    /// <seealso href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113">
+    /// Document Object Model (DOM) Level 2 Core Specification</seealso>
+    public interface IXmlElement : INode
 	{
 		/// <summary>
 		/// Gets a value indicating whether this node (if it is an element) has any attributes. 
@@ -36,16 +36,16 @@ namespace SharpVectors.Dom
 			get;
 		}
 
-		/// <summary>
-		/// Returns the value for the attribute with the specified name.
-		/// </summary>
-		/// <param name="name">The name of the attribute to retrieve. This is a qualified name. 
-		/// It is matched against the <see cref="Name"/> property of the matching node.
-		/// </param>
-		/// <returns>The value of the specified attribute. An empty string is returned if a matching
-		/// attribute is not found or if the attribute does not have a specified or default value.
-		/// </returns>
-		string GetAttribute(string name);
+        /// <summary>
+        /// Returns the value for the attribute with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the attribute to retrieve. This is a qualified name. 
+        /// It is matched against the <see cref="IXmlNode.Name"/> property of the matching node.
+        /// </param>
+        /// <returns>The value of the specified attribute. An empty string is returned if a matching
+        /// attribute is not found or if the attribute does not have a specified or default value.
+        /// </returns>
+        string GetAttribute(string name);
 
 		/// <summary>
 		/// Returns the value for the attribute with the specified local name and namespace URI.

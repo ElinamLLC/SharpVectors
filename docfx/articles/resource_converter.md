@@ -256,7 +256,7 @@ To freeze a resource object declared in markup, the `PresentationOptions:Freeze`
     ' Perform the conversion to ResourceDictionary XAML
     Dim xamlText = converter.Convert()
     ```
-    # [XAML Output](#tab/xml)
+    # [XAML Output](#tab/xaml)
     ```xml
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -399,7 +399,7 @@ Namespace SharpVectors.Test.Sample
     End Class
 End Namespace
 ```
-# [XAML](#tab/xml)
+# [XAML](#tab/xaml)
 ```xml
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -524,7 +524,7 @@ Namespace SharpVectors.Test.Sample
     End Class
 End Namespace
 ```
-# [XAML](#tab/xml)
+# [XAML](#tab/xaml)
 ```xml
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -664,7 +664,7 @@ Namespace SharpVectors.Test.Sample
     End Class
 End Namespace
 ```
-# [XAML](#tab/xml)
+# [XAML](#tab/xaml)
 ```xml
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -718,6 +718,88 @@ For the code snippet, the following conditions are required
 
 The following sample code uses the snippet resource key resolver, or @SharpVectors.Renderers.CodeSnippetKeyResolver, to resolve the keys. To reduce the code length
 for the screen, we will assume the snippet is stored in a file, and load it from the file.
+```csharp
+using System;
+using System.Xml;
+using System.Windows;
+
+namespace SharpVectors.Renderers {
+    public sealed class SnippetKeyResolver : WpfSettings<SnippetKeyResolver>, IResourceKeyResolver {
+        public SnippetKeyResolver() {
+        }
+
+        public ResourceKeyResolverType ResolverType {
+            get {
+                return ResourceKeyResolverType.Custom;
+            }
+        }
+
+        public bool IsValid {
+            get {
+                return true;
+            }
+        }
+
+        public void BeginResolve() {
+        }
+
+        public void EndResolve() {
+        }
+
+        public override SnippetKeyResolver Clone() {
+            return new SnippetKeyResolver();
+        }
+
+        public override void ReadXml(XmlReader reader) {
+        }
+
+        public override void WriteXml(XmlWriter writer) {
+        }
+
+        public string Resolve(DependencyObject resource, int index, string fileName, string fileSource) {
+            if (index < 0) {
+                throw new ArgumentException("The specified index is invalid", "index");
+            }
+            NotNullNotEmpty(fileName, "fileName");
+
+            var keyValue = ToLowerCamelCase(fileName.ToUpper());
+            if (!string.IsNullOrWhiteSpace(keyValue) && keyValue.Length >= 3 && keyValue.Length < 255) {
+                return keyValue;
+            }
+            return fileName;
+        }
+
+        private static string ToLowerCamelCase(string fileName) {
+            if (string.IsNullOrWhiteSpace(fileName)) {
+                return string.Empty;
+            }
+
+            string camelCaseStr = char.ToLower(fileName[0]).ToString();
+
+            if (fileName.Length > 1) {
+                bool isStartOfWord = false;
+                for (int i = 1; i < fileName.Length; i++) {
+                    char currChar = fileName[i];
+                    if (currChar == '_' || currChar == '-') {
+                        isStartOfWord = true;
+                    } else if (char.IsUpper(currChar)) {
+                        if (isStartOfWord) {
+                            camelCaseStr += currChar;
+                        } else {
+                            camelCaseStr += char.ToLower(currChar);
+                        }
+                        isStartOfWord = false;
+                    } else {
+                        camelCaseStr += currChar;
+                        isStartOfWord = false;
+                    }
+                }
+            }
+            return camelCaseStr;
+        }
+    }
+}
+```
 
 The test code snippet (C# code) will convert the specified SVG file name to the lower camel case naming format as the resource key.
 # [C#](#tab/csharp)
@@ -808,89 +890,6 @@ Namespace SharpVectors.Test.Sample
     End Class
 End Namespace
 ```
-# [Snippet](#tab/snippet)
-```csharp
-using System;
-using System.Xml;
-using System.Windows;
-
-namespace SharpVectors.Renderers {
-    public sealed class SnippetKeyResolver : WpfSettings<SnippetKeyResolver>, IResourceKeyResolver {
-        public SnippetKeyResolver() {
-        }
-
-        public ResourceKeyResolverType ResolverType {
-            get {
-                return ResourceKeyResolverType.Custom;
-            }
-        }
-
-        public bool IsValid {
-            get {
-                return true;
-            }
-        }
-
-        public void BeginResolve() {
-        }
-
-        public void EndResolve() {
-        }
-
-        public override SnippetKeyResolver Clone() {
-            return new SnippetKeyResolver();
-        }
-
-        public override void ReadXml(XmlReader reader) {
-        }
-
-        public override void WriteXml(XmlWriter writer) {
-        }
-
-        public string Resolve(DependencyObject resource, int index, string fileName, string fileSource) {
-            if (index < 0) {
-                throw new ArgumentException("The specified index is invalid", "index");
-            }
-            NotNullNotEmpty(fileName, "fileName");
-
-            var keyValue = ToLowerCamelCase(fileName.ToUpper());
-            if (!string.IsNullOrWhiteSpace(keyValue) && keyValue.Length >= 3 && keyValue.Length < 255) {
-                return keyValue;
-            }
-            return fileName;
-        }
-
-        private static string ToLowerCamelCase(string fileName) {
-            if (string.IsNullOrWhiteSpace(fileName)) {
-                return string.Empty;
-            }
-
-            string camelCaseStr = char.ToLower(fileName[0]).ToString();
-
-            if (fileName.Length > 1) {
-                bool isStartOfWord = false;
-                for (int i = 1; i < fileName.Length; i++) {
-                    char currChar = fileName[i];
-                    if (currChar == '_' || currChar == '-') {
-                        isStartOfWord = true;
-                    } else if (char.IsUpper(currChar)) {
-                        if (isStartOfWord) {
-                            camelCaseStr += currChar;
-                        } else {
-                            camelCaseStr += char.ToLower(currChar);
-                        }
-                        isStartOfWord = false;
-                    } else {
-                        camelCaseStr += currChar;
-                        isStartOfWord = false;
-                    }
-                }
-            }
-            return camelCaseStr;
-        }
-    }
-}
-```
 # [XAML](#tab/xaml)
 ```xml
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
@@ -938,82 +937,6 @@ namespace SharpVectors.Renderers {
 You can create a custom resource key resolver by implementing the @SharpVectors.Renderers.IResourceKeyResolver interface.
 
 The following sample code implements a resource key resolver that will convert the specified SVG file name to the upper camel case naming format as the resource key.
-# [C#](#tab/csharp)
-```csharp
-using System.Windows;
-using System.Windows.Media;
-
-using SharpVectors.Renderers;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
-
-namespace SharpVectors.Test.Sample
-{
-    public class ResourceSvgConverterSample
-    {
-        private WpfResourceSettings _resourceSettings;
-
-        public ResourceSvgConverterSample()
-        {
-            // Create the resource settings or options
-            _resourceSettings = new WpfResourceSettings();
-            _resourceSettings.ResourceFreeze = false; // Do not freeze
-
-            // Initialize the custom key resolver and register it
-            var resolver = new CustomResourceKeyResolver();
-            _resourceSettings.RegisterResolver(resolver);
-        }
-
-        public string Convert(string svgDir)
-        {
-            // Add a directory as SVG source
-            _resourceSettings.AddSource(svgDir);
-
-            // Create the resource converter
-            var converter = new ResourceSvgConverter(_resourceSettings);
-
-            // Perform the conversion to ResourceDictionary XAML
-            return converter.Convert();
-        }
-    }
-}
-```
-# [VB.NET](#tab/vb)
-```vb
-Imports System.Windows.Media
-
-Imports SharpVectors.Renderers
-Imports SharpVectors.Converters
-Imports SharpVectors.Renderers.Wpf
-
-Namespace SharpVectors.Test.Sample
-    Public Class ResourceSvgConverterSample
-        Private _resourceSettings As WpfResourceSettings
-
-        Public Sub New()
-            ' Create the resource settings or options
-            _resourceSettings = New WpfResourceSettings()
-            _resourceSettings.ResourceFreeze = False ' Do not freeze
-
-            ' Initialize the custom key resolver and register it
-            Dim resolver = New CustomResourceKeyResolver()
-            _resourceSettings.RegisterResolver(resolver)
-        End Sub
-
-        Public Function Convert(ByVal svgDir As String) As String
-            ' Add a directory as SVG source
-            _resourceSettings.AddSource(svgDir)
-
-            ' Create the resource converter
-            Dim converter = New ResourceSvgConverter(_resourceSettings)
-
-            ' Perform the conversion to ResourceDictionary XAML
-            Return converter.Convert()
-        End Function
-    End Class
-End Namespace
-```
-# [Custom](#tab/snippet)
 ```cs
 using System;
 using System.Xml;
@@ -1100,6 +1023,84 @@ namespace SharpVectors.Test.Sample {
         }
     }
 }
+```
+
+The following illustrate how to use the custom resource key resolver.
+
+# [C#](#tab/csharp)
+```csharp
+using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Initialize the custom key resolver and register it
+            var resolver = new CustomResourceKeyResolver();
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+```
+# [VB.NET](#tab/vb)
+```vb
+Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Initialize the custom key resolver and register it
+            Dim resolver = New CustomResourceKeyResolver()
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
 ```
 # [XAML](#tab/xaml)
 ```xml

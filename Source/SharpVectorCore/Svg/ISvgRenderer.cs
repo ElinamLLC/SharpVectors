@@ -10,10 +10,6 @@ namespace SharpVectors.Dom.Svg
     /// <remarks>
     /// The <see cref="ISvgRenderer">ISvgRenderer</see> is used to render
     /// a <see cref="ISvgElement">ISvgElement</see> object onto a bitmap.
-    /// During the rendering process, it will also generate
-    /// <see cref="RenderingNode">RenderingNode</see> objects for each
-    /// <see cref="XmlElement">XmlElement</see> object in the DOM tree to
-    /// assist in the rendering.
     /// </remarks>
     public interface ISvgRenderer
     {

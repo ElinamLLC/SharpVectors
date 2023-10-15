@@ -236,7 +236,7 @@ namespace SharpVectors.Renderers.Wpf
         }
 
         /// <summary>
-        /// Generates a new <see cref="WpfRendering">RenderingNode</see> that
+        /// Generates a new <see cref="WpfRendering">WpfRendering</see> that
         /// corresponds to the given Uri.
         /// </summary>
         /// <param name="baseUri">
@@ -246,7 +246,7 @@ namespace SharpVectors.Renderers.Wpf
         /// The url.
         /// </param>
         /// <returns>
-        /// The generated <see cref="WpfRendering">RenderingNode</see> that
+        /// The generated <see cref="WpfRendering">WpfRendering</see> that
         /// corresponds to the given Uri.
         /// </returns>
         public static WpfRendering CreateByUri(SvgDocument document, string baseUri, string url)

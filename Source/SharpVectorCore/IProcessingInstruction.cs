@@ -14,8 +14,7 @@ namespace SharpVectors.Dom
         /// <value>The target of the processing instruction.</value>
         /// <remarks>
         /// The target of this processing instruction. XML defines this as being 
-        /// the first token following the markup that begins the processing 
-        /// instruction.
+        /// the first token following the markup that begins the processing instruction.
         /// </remarks>
         string Target { get; }
 
@@ -23,8 +22,6 @@ namespace SharpVectors.Dom
         /// Gets or sets the content of the processing instruction, excluding the target.
         /// </summary>
         /// <value>The content of the processing instruction, excluding the target.</value>
-        /// <remarks>
-        /// </remarks>
         string Data { get; set; }
     }
 }

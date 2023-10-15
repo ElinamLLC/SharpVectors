@@ -15,15 +15,6 @@ namespace SharpVectors.Dom.Events
 	/// <para>
 	/// Copying a <see cref="INode">INode</see> does not copy the event listeners attached to it. Event listeners 
 	/// must be attached to the newly created <see cref="INode">INode</see> afterwards if so desired.
-	/// Therefore, <see cref="INode">INode</see>s are copied using <see cref="IXmlNode.CloneNode">INode.CloneNode</see> or
-	/// <see cref="IRange.CloneContents">IRange.CloneContents</see>, the <see cref="EventListener">EventListener</see>s 
-	/// attached to the source <see cref="INode">INode</see>s are not attached to their copies.
-	/// </para>
-	/// <para>
-	/// Moving a <see cref="INode">INode</see> does not affect the event listeners attached to it. Therefore, when
-	/// <see cref="INode">INode</see>s are moved using <see cref="IDocument.AdoptNode">IDocument.AdoptNode</see>,
-	/// <see cref="IXmlNode.AppendChild">INode.AppendChild</see>, or <see cref="IRange.ExtractContents">IRange.ExtractContents</see>, the
-	/// <see cref="EventListener">EventListener</see>s attached to the moved <see cref="INode">INode</see>s stay attached to them.
 	/// </para>
 	/// </remarks>
 	/// <paramref name="e">

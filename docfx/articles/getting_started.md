@@ -173,7 +173,8 @@ In order to simplify the above codes and avoid repetitions, utility classes (nam
 
 ## XAML Support - Namespaces
 
-SharpVectors defines two [XmlnsPrefixAttribute](xref:System.Windows.Markup.XmlnsPrefixAttribute) and [XmlnsDefinitionAttribute](xref:System.Windows.Markup.XmlnsDefinitionAttribute) values to simplify the use of the SVG controls and markup extensions in XAML files.
+SharpVectors defines two [XmlnsPrefixAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.xmlnsprefixattribute) 
+and [XmlnsDefinitionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.xmlnsdefinitionattribute) values to simplify the use of the SVG controls and markup extensions in XAML files.
 The following are the available `Xmlns` prefix and definitions:
 
 * **For Generic Controls** - SharpVectors.Runtime.dll Assembly

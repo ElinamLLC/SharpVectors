@@ -104,9 +104,6 @@ namespace SharpVectors.Converters
         /// The file can be located on a computer, network or assembly resources.
         /// Settings this to <see langword="null"/> will close any opened diagram.
         /// </value>
-        /// <remarks>
-        /// This is the same as the <see cref="Source"/> property, and added for consistency.
-        /// </remarks>
         /// <seealso cref="SvgSource"/>
         public Uri UriSource
         {

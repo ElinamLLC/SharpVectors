@@ -35,7 +35,7 @@ namespace SharpVectors.Dom
         /// <param name="qualifiedName"> qualified name of the document type to be created. </param>
         /// <param name="publicId"> external subset public identifier. </param>
         /// <param name="systemId"> external subset system identifier. </param>
-        /// <returns> A new <see cref="IDocumentType"/> node with <see cref="INode.OwnerDocument"/> 
+        /// <returns> A new <see cref="IDocumentType"/> node with <see cref="IXmlNode.OwnerDocument"/> 
         /// set to <see langword="null"/>. </returns>
         /// <exception cref="DomException">
         /// INVALID_CHARACTER_ERR: Raised if the specified qualified name contains an illegal character.
@@ -53,7 +53,7 @@ namespace SharpVectors.Dom
         /// <param name="namespaceURI"> namespace URI of the document element to create. </param>
         /// <param name="qualifiedName"> qualified name of the document element to be created. </param>
         /// <param name="doctype"> type of document to be created or <see langword="null"/>. 
-        /// When <paramref name="doctype"/> is not <see langword="null"/>, its <see cref="INode.OwnerDocument"/> 
+        /// When <paramref name="doctype"/> is not <see langword="null"/>, its <see cref="IXmlNode.OwnerDocument"/> 
         /// attribute is set to the document being created.
         /// </param>
         /// <returns> A new <see cref="IDocument"/> object. </returns>

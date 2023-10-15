@@ -7,7 +7,7 @@ namespace SharpVectors.Dom
     /// declares, by name, the format of an unparsed entity (see section 4.7 of 
     /// the XML 1.0 specification ), or is used for formal declaration of 
     /// processing instruction targets (see section 2.6 of the XML 1.0 
-    /// specification ). The <see cref="INode.NodeName"/> attribute inherited from 
+    /// specification ). The <see cref="IXmlNode.Name"/> attribute inherited from 
     /// <see cref="INode"/> is set to the declared name of the notation.
     /// <para>The DOM Level 1 does not support editing <see cref="INotation"/> nodes; 
     /// they are therefore readonly.

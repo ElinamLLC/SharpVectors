@@ -68,6 +68,7 @@ namespace SharpVectors.Woffs
             }
         }
 
+        /// <summary>
         ///  Initializes a new non-resizable instance of the <see cref="WoffWriter"/> class
         ///  based on the specified byte array.
         /// </summary>
@@ -132,6 +133,7 @@ namespace SharpVectors.Woffs
             Dispose(false);
         }
 
+        /// <summary>
         /// Gets or sets the current position within the stream.
         /// </summary>
         /// <value>The current position within the stream.</value>

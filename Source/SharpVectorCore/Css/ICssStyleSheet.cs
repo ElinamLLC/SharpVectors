@@ -50,17 +50,17 @@ namespace SharpVectors.Dom.Css
 			get;
 		}
 
-		/// <summary>
-		/// If this style sheet comes from an <c>@import</c> rule, the ownerRule attribute will 
-		/// contain the <see cref="ICssImportRule"/>. 
-		/// </summary>
-		/// <remarks>
-		/// In that case, the <see cref="OwnerNode"/> attribute in the <see cref="IStyleSheet"/> interface 
-		/// will be <see langword="null"/>. If the style sheet comes from an element or a processing instruction, 
-		/// the <c>OwnerRule</c> attribute will be <see langword="null"/> and the <see cref="OwnerNode"/> 
-		/// attribute will contain the node.
-		/// </remarks>
-		ICssRule OwnerRule
+        /// <summary>
+        /// If this style sheet comes from an <c>@import</c> rule, the ownerRule attribute will 
+        /// contain the <see cref="ICssImportRule"/>. 
+        /// </summary>
+        /// <remarks>
+        /// In that case, the <see cref="IStyleSheet.OwnerNode"/> attribute in the <see cref="IStyleSheet"/> interface 
+        /// will be <see langword="null"/>. If the style sheet comes from an element or a processing instruction, 
+        /// the <c>OwnerRule</c> attribute will be <see langword="null"/> and the <see cref="IStyleSheet.OwnerNode"/> 
+        /// attribute will contain the node.
+        /// </remarks>
+        ICssRule OwnerRule
 		{
 			get;
 		}
