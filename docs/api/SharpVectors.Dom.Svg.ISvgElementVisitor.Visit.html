@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Method Visit
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Method Visit
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*">
+
+
+
+
+
+<h1 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*" class="text-break">
+  Method Visit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L29"><i class="bi bi-code-slash"></i></a>
+</h1>
+
+<div class="facts text-secondary">
+  <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+</div>
+
+<div class="markdown summary"></div>
+<div class="markdown conceptual"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgCircleElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgCircleElement)">
+  Visit(ISvgCircleElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L29"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the circle shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgCircleElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgCircleElement.html">ISvgCircleElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgCircleElement.html">ISvgCircleElement</a> specifying the circle shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgEllipseElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgEllipseElement)">
+  Visit(ISvgEllipseElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L33"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the ellipse shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgEllipseElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgEllipseElement.html">ISvgEllipseElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgEllipseElement.html">ISvgEllipseElement</a> specifying the ellipse shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgLineElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgLineElement)">
+  Visit(ISvgLineElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L37"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the line shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgLineElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgLineElement.html">ISvgLineElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgLineElement.html">ISvgLineElement</a> specifying the line shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgPathElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgPathElement)">
+  Visit(ISvgPathElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L41"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the path shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgPathElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgPathElement.html">ISvgPathElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgPathElement.html">ISvgPathElement</a> specifying the path shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgPolygonElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgPolygonElement)">
+  Visit(ISvgPolygonElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L45"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the polygon shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgPolygonElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgPolygonElement.html">ISvgPolygonElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgPolygonElement.html">ISvgPolygonElement</a> specifying the polygon shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgPolylineElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgPolylineElement)">
+  Visit(ISvgPolylineElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L49"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the polyline shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgPolylineElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgPolylineElement.html">ISvgPolylineElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgPolylineElement.html">ISvgPolylineElement</a> specifying the polyline shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgRectElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgRectElement)">
+  Visit(ISvgRectElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L53"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the rectangle shape element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgRectElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgRectElement.html">ISvgRectElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgRectElement.html">ISvgRectElement</a> specifying the rectangle shape.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgImageElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgImageElement)">
+  Visit(ISvgImageElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L58"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>image</code> graphics element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgImageElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgImageElement.html">ISvgImageElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgImageElement.html">ISvgImageElement</a> specifying the <code>image</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgUseElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgUseElement)">
+  Visit(ISvgUseElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L62"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the use element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgUseElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgUseElement.html">ISvgUseElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgUseElement.html">ISvgUseElement</a> specifying the <code>use</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgAElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgAElement)">
+  Visit(ISvgAElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L70"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>link</code> element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgAElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgAElement.html">ISvgAElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgAElement.html">ISvgAElement</a> specifying the <code>link</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgGElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgGElement)">
+  Visit(ISvgGElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L74"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>group</code> element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgGElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgGElement.html">ISvgGElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgGElement.html">ISvgGElement</a> specifying the <code>group</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgSvgElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgSvgElement)">
+  Visit(ISvgSvgElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L78"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>svg</code> clipart element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgSvgElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.html">ISvgSvgElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.html">ISvgSvgElement</a> specifying the <code>svg</code> clipart element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgSwitchElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgSwitchElement)">
+  Visit(ISvgSwitchElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L82"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>switch</code> element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgSwitchElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgSwitchElement.html">ISvgSwitchElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgSwitchElement.html">ISvgSwitchElement</a> specifying the <code>switch</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgSymbolElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgSymbolElement)">
+  Visit(ISvgSymbolElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L86"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>symbol</code> element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgSymbolElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgSymbolElement.html">ISvgSymbolElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgRectElement.html">ISvgRectElement</a> specifying the <code>symbol</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgTextElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgTextElement)">
+  Visit(ISvgTextElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L94"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>text</code> content element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgTextElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgTextElement.html">ISvgTextElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgTextElement.html">ISvgTextElement</a> specifying the <code>text</code> content element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgTextPathElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgTextPathElement)">
+  Visit(ISvgTextPathElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L98"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>text-path</code> content element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgTextPathElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgTextPathElement.html">ISvgTextPathElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgTextPathElement.html">ISvgTextPathElement</a> specifying the <code>text-path</code> element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+<a id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit*"></a>
+
+<h3 id="SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgTSpanElement_" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit(SharpVectors.Dom.Svg.ISvgTSpanElement)">
+  Visit(ISvgTSpanElement)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L102"><i class="bi bi-code-slash"></i></a>
+</h3>
+
+<div class="markdown level1 summary"><p>Visits the <code>text-span</code> content element.</p>
+</div>
+<div class="markdown level1 conceptual"></div>
+
+<div class="codewrapper">
+  <pre><code class="lang-csharp hljs">void Visit(ISvgTSpanElement element)</code></pre>
+</div>
+
+<h4 class="section">Parameters</h4>
+<dl class="parameters">
+  <dt><code>element</code> <a class="xref" href="SharpVectors.Dom.Svg.ISvgTSpanElement.html">ISvgTSpanElement</a></dt>
+  <dd><p>An instance of <a class="xref" href="SharpVectors.Dom.Svg.ISvgTSpanElement.html">ISvgTSpanElement</a> specifying the <code>text-span</code> content element.</p>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/ISvgElementVisitor.cs/#L29" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

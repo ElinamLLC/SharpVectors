@@ -1,274 +1,169 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface ISvgMarker
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Interface ISvgMarker
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Interface ISvgMarker
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISvgMarker
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_ISvgMarker.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.ISvgMarker%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column interface">
+        <article data-uid="SharpVectors.Dom.Svg.ISvgMarker">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Svg.ISvgMarker">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Svg_ISvgMarker" data-uid="SharpVectors.Dom.Svg.ISvgMarker" class="text-break">Interface ISvgMarker
+  <h1 id="SharpVectors_Dom_Svg_ISvgMarker" data-uid="SharpVectors.Dom.Svg.ISvgMarker" class="text-break">
+    Interface ISvgMarker
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/Painting/SvgMarker.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.Svg.html">SharpVectors.Dom.Svg</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Core.dll</h6>
-  <h5 id="SharpVectors_Dom_Svg_ISvgMarker_syntax">Syntax</h5>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface ISvgMarker</code></pre>
   </div>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_ISvgMarker_Index_" data-uid="SharpVectors.Dom.Svg.ISvgMarker.Index*"></a>
-  <h4 id="SharpVectors_Dom_Svg_ISvgMarker_Index" data-uid="SharpVectors.Dom.Svg.ISvgMarker.Index">Index</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int Index { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_ISvgMarker_IsCurve_" data-uid="SharpVectors.Dom.Svg.ISvgMarker.IsCurve*"></a>
-  <h4 id="SharpVectors_Dom_Svg_ISvgMarker_IsCurve" data-uid="SharpVectors.Dom.Svg.ISvgMarker.IsCurve">IsCurve</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IsCurve { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_ISvgMarker_Position_" data-uid="SharpVectors.Dom.Svg.ISvgMarker.Position*"></a>
-  <h4 id="SharpVectors_Dom_Svg_ISvgMarker_Position" data-uid="SharpVectors.Dom.Svg.ISvgMarker.Position">Position</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">SvgPointF Position { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_ISvgMarker_Segment_" data-uid="SharpVectors.Dom.Svg.ISvgMarker.Segment*"></a>
-  <h4 id="SharpVectors_Dom_Svg_ISvgMarker_Segment" data-uid="SharpVectors.Dom.Svg.ISvgMarker.Segment">Segment</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ISvgPathSeg Segment { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.ISvgPathSeg.html">ISvgPathSeg</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgMarker.Index.html#SharpVectors_Dom_Svg_ISvgMarker_Index">Index</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgMarker.IsCurve.html#SharpVectors_Dom_Svg_ISvgMarker_IsCurve">IsCurve</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgMarker.Position.html#SharpVectors_Dom_Svg_ISvgMarker_Position">Position</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgMarker.Segment.html#SharpVectors_Dom_Svg_ISvgMarker_Segment">Segment</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/Painting/SvgMarker.cs/#L5" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

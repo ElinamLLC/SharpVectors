@@ -1,756 +1,346 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class Declaration
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class Declaration
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class Declaration
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Declaration
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Declaration.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Declaration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Dom.Declaration">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Declaration">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Declaration" data-uid="SharpVectors.Dom.Declaration" class="text-break">Class Declaration
+  <h1 id="SharpVectors_Dom_Declaration" data-uid="SharpVectors.Dom.Declaration" class="text-break">
+    Class Declaration
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorDom/Declaration.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>Summary description for Declaration.</p>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Dom.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Summary description for Declaration.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmllinkednode">XmlLinkedNode</a></div>
-    <div class="level3"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration">XmlDeclaration</a></div>
-    <div class="level4"><span class="xref">Declaration</span></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.ixpathnavigable">IXPathNavigable</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IEventTargetSupport.html">IEventTargetSupport</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.clonenode#system-xml-xmldeclaration-clonenode(system-boolean)">XmlDeclaration.CloneNode(Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.writeto#system-xml-xmldeclaration-writeto(system-xml-xmlwriter)">XmlDeclaration.WriteTo(XmlWriter)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.writecontentto#system-xml-xmldeclaration-writecontentto(system-xml-xmlwriter)">XmlDeclaration.WriteContentTo(XmlWriter)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.version#system-xml-xmldeclaration-version">XmlDeclaration.Version</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.encoding#system-xml-xmldeclaration-encoding">XmlDeclaration.Encoding</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.standalone#system-xml-xmldeclaration-standalone">XmlDeclaration.Standalone</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.value#system-xml-xmldeclaration-value">XmlDeclaration.Value</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.innertext#system-xml-xmldeclaration-innertext">XmlDeclaration.InnerText</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.name#system-xml-xmldeclaration-name">XmlDeclaration.Name</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.localname#system-xml-xmldeclaration-localname">XmlDeclaration.LocalName</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.nodetype#system-xml-xmldeclaration-nodetype">XmlDeclaration.NodeType</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmllinkednode.previoussibling#system-xml-xmllinkednode-previoussibling">XmlLinkedNode.PreviousSibling</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmllinkednode.nextsibling#system-xml-xmllinkednode-nextsibling">XmlLinkedNode.NextSibling</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.createnavigator#system-xml-xmlnode-createnavigator">XmlNode.CreateNavigator()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string)">XmlNode.SelectSingleNode(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectSingleNode(String, XmlNamespaceManager)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string)">XmlNode.SelectNodes(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectNodes(String, XmlNamespaceManager)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertbefore#system-xml-xmlnode-insertbefore(system-xml-xmlnode-system-xml-xmlnode)">XmlNode.InsertBefore(XmlNode, XmlNode)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertafter#system-xml-xmlnode-insertafter(system-xml-xmlnode-system-xml-xmlnode)">XmlNode.InsertAfter(XmlNode, XmlNode)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.replacechild#system-xml-xmlnode-replacechild(system-xml-xmlnode-system-xml-xmlnode)">XmlNode.ReplaceChild(XmlNode, XmlNode)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removechild#system-xml-xmlnode-removechild(system-xml-xmlnode)">XmlNode.RemoveChild(XmlNode)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prependchild#system-xml-xmlnode-prependchild(system-xml-xmlnode)">XmlNode.PrependChild(XmlNode)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.appendchild#system-xml-xmlnode-appendchild(system-xml-xmlnode)">XmlNode.AppendChild(XmlNode)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.normalize#system-xml-xmlnode-normalize">XmlNode.Normalize()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.supports#system-xml-xmlnode-supports(system-string-system-string)">XmlNode.Supports(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.clone#system-xml-xmlnode-clone">XmlNode.Clone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.system-icloneable-clone#system-xml-xmlnode-system-icloneable-clone">XmlNode.ICloneable.Clone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.system-collections-ienumerable-getenumerator#system-xml-xmlnode-system-collections-ienumerable-getenumerator">XmlNode.IEnumerable.GetEnumerator()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getenumerator#system-xml-xmlnode-getenumerator">XmlNode.GetEnumerator()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removeall#system-xml-xmlnode-removeall">XmlNode.RemoveAll()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getnamespaceofprefix#system-xml-xmlnode-getnamespaceofprefix(system-string)">XmlNode.GetNamespaceOfPrefix(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getprefixofnamespace#system-xml-xmlnode-getprefixofnamespace(system-string)">XmlNode.GetPrefixOfNamespace(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.parentnode#system-xml-xmlnode-parentnode">XmlNode.ParentNode</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.childnodes#system-xml-xmlnode-childnodes">XmlNode.ChildNodes</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.attributes#system-xml-xmlnode-attributes">XmlNode.Attributes</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.ownerdocument#system-xml-xmlnode-ownerdocument">XmlNode.OwnerDocument</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.firstchild#system-xml-xmlnode-firstchild">XmlNode.FirstChild</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.lastchild#system-xml-xmlnode-lastchild">XmlNode.LastChild</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.haschildnodes#system-xml-xmlnode-haschildnodes">XmlNode.HasChildNodes</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.namespaceuri#system-xml-xmlnode-namespaceuri">XmlNode.NamespaceURI</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prefix#system-xml-xmlnode-prefix">XmlNode.Prefix</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.isreadonly#system-xml-xmlnode-isreadonly">XmlNode.IsReadOnly</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.outerxml#system-xml-xmlnode-outerxml">XmlNode.OuterXml</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.innerxml#system-xml-xmlnode-innerxml">XmlNode.InnerXml</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.schemainfo#system-xml-xmlnode-schemainfo">XmlNode.SchemaInfo</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.baseuri#system-xml-xmlnode-baseuri">XmlNode.BaseURI</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.item#system-xml-xmlnode-item(system-string)">XmlNode.Item[String]</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.item#system-xml-xmlnode-item(system-string-system-string)">XmlNode.Item[String, String]</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.html">SharpVectors.Dom</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Dom.dll</h6>
-  <h5 id="SharpVectors_Dom_Declaration_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class Declaration : XmlDeclaration, ICloneable, IEnumerable, IXPathNavigable, INode, IXmlNode, IEventTargetSupport, IEventTarget</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Declaration__ctor_" data-uid="SharpVectors.Dom.Declaration.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Declaration__ctor_System_String_System_String_System_String_SharpVectors_Dom_Document_" data-uid="SharpVectors.Dom.Declaration.#ctor(System.String,System.String,System.String,SharpVectors.Dom.Document)">Declaration(String, String, String, Document)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Declaration(string version, string encoding, string standAlone, Document document)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">version</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">encoding</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">standAlone</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Document.html">Document</a></td>
-        <td><span class="parametername">document</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_AddEventListener_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#AddEventListener*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_AddEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#AddEventListener(System.String,SharpVectors.Dom.Events.EventListener,System.Boolean)">IEventTarget.AddEventListener(String, EventListener, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IEventTarget.AddEventListener(string type, EventListener listener, bool useCapture)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a></td>
-        <td><span class="parametername">listener</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">useCapture</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#AddEventListenerNs*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_System_Object_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#AddEventListenerNs(System.String,System.String,SharpVectors.Dom.Events.EventListener,System.Boolean,System.Object)">IEventTarget.AddEventListenerNs(String, String, EventListener, Boolean, Object)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IEventTarget.AddEventListenerNs(string namespaceUri, string type, EventListener listener, bool useCapture, object eventGroup)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">namespaceUri</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a></td>
-        <td><span class="parametername">listener</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">useCapture</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">eventGroup</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_DispatchEvent_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#DispatchEvent*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#DispatchEvent(SharpVectors.Dom.Events.IEvent)">IEventTarget.DispatchEvent(IEvent)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEventTarget.DispatchEvent(IEvent eventArgs)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a></td>
-        <td><span class="parametername">eventArgs</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_HasEventListenerNs_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#HasEventListenerNs*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_HasEventListenerNs_System_String_System_String_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#HasEventListenerNs(System.String,System.String)">IEventTarget.HasEventListenerNs(String, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEventTarget.HasEventListenerNs(string namespaceUri, string type)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">namespaceUri</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#RemoveEventListener*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#RemoveEventListener(System.String,SharpVectors.Dom.Events.EventListener,System.Boolean)">IEventTarget.RemoveEventListener(String, EventListener, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IEventTarget.RemoveEventListener(string type, EventListener listener, bool useCapture)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a></td>
-        <td><span class="parametername">listener</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">useCapture</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#RemoveEventListenerNs*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#RemoveEventListenerNs(System.String,System.String,SharpVectors.Dom.Events.EventListener,System.Boolean)">IEventTarget.RemoveEventListenerNs(String, String, EventListener, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IEventTarget.RemoveEventListenerNs(string namespaceUri, string type, EventListener listener, bool useCapture)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">namespaceUri</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.EventListener.html">EventListener</a></td>
-        <td><span class="parametername">listener</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">useCapture</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_WillTriggerNs_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#WillTriggerNs*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTarget_WillTriggerNs_System_String_System_String_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTarget#WillTriggerNs(System.String,System.String)">IEventTarget.WillTriggerNs(String, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEventTarget.WillTriggerNs(string namespaceUri, string type)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">namespaceUri</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTargetSupport_FireEvent_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTargetSupport#FireEvent*"></a>
-  <h4 id="SharpVectors_Dom_Declaration_SharpVectors_Dom_Events_IEventTargetSupport_FireEvent_SharpVectors_Dom_Events_IEvent_" data-uid="SharpVectors.Dom.Declaration.SharpVectors#Dom#Events#IEventTargetSupport#FireEvent(SharpVectors.Dom.Events.IEvent)">IEventTargetSupport.FireEvent(IEvent)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IEventTargetSupport.FireEvent(IEvent eventArgs)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a></td>
-        <td><span class="parametername">eventArgs</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">System.ICloneable</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.ixpathnavigable">System.Xml.XPath.IXPathNavigable</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IEventTargetSupport.html">IEventTargetSupport</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a>
-  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmllinkednode">XmlLinkedNode</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration">XmlDeclaration</a></div>
+      <div><span class="xref">Declaration</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.ixpathnavigable">IXPathNavigable</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IEventTargetSupport.html">IEventTargetSupport</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.clonenode">XmlDeclaration.CloneNode(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.writeto">XmlDeclaration.WriteTo(XmlWriter)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.writecontentto">XmlDeclaration.WriteContentTo(XmlWriter)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.version">XmlDeclaration.Version</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.encoding">XmlDeclaration.Encoding</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.standalone">XmlDeclaration.Standalone</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.value">XmlDeclaration.Value</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.innertext">XmlDeclaration.InnerText</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.name">XmlDeclaration.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.localname">XmlDeclaration.LocalName</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldeclaration.nodetype">XmlDeclaration.NodeType</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmllinkednode.previoussibling">XmlLinkedNode.PreviousSibling</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmllinkednode.nextsibling">XmlLinkedNode.NextSibling</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.createnavigator">XmlNode.CreateNavigator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string)">XmlNode.SelectSingleNode(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectSingleNode(string, XmlNamespaceManager)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string)">XmlNode.SelectNodes(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectNodes(string, XmlNamespaceManager)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertbefore">XmlNode.InsertBefore(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertafter">XmlNode.InsertAfter(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.replacechild">XmlNode.ReplaceChild(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removechild">XmlNode.RemoveChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prependchild">XmlNode.PrependChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.appendchild">XmlNode.AppendChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.normalize">XmlNode.Normalize()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.supports">XmlNode.Supports(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.clone">XmlNode.Clone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getenumerator">XmlNode.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removeall">XmlNode.RemoveAll()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getnamespaceofprefix">XmlNode.GetNamespaceOfPrefix(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getprefixofnamespace">XmlNode.GetPrefixOfNamespace(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.parentnode">XmlNode.ParentNode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.childnodes">XmlNode.ChildNodes</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.attributes">XmlNode.Attributes</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.ownerdocument">XmlNode.OwnerDocument</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.firstchild">XmlNode.FirstChild</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.lastchild">XmlNode.LastChild</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.haschildnodes">XmlNode.HasChildNodes</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.namespaceuri">XmlNode.NamespaceURI</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prefix">XmlNode.Prefix</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.isreadonly">XmlNode.IsReadOnly</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.outerxml">XmlNode.OuterXml</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.innerxml">XmlNode.InnerXml</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.schemainfo">XmlNode.SchemaInfo</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.baseuri">XmlNode.BaseURI</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">XmlNode.this[string]</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">XmlNode.this[string, string]</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Declaration.-ctor.html#SharpVectors_Dom_Declaration__ctor_System_String_System_String_System_String_SharpVectors_Dom_Document_">Declaration(string, string, string, Document)</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorDom/Declaration.cs/#L11" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

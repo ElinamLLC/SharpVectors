@@ -1,413 +1,320 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class SvgDocument
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class SvgDocument
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class SvgDocument
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SvgDocument
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_SvgDocument.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.SvgDocument%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Dom.Svg.SvgDocument">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Svg.SvgDocument">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Svg_SvgDocument" data-uid="SharpVectors.Dom.Svg.SvgDocument" class="text-break">Class SvgDocument
+  <h1 id="SharpVectors_Dom_Svg_SvgDocument" data-uid="SharpVectors.Dom.Svg.SvgDocument" class="text-break">
+    Class SvgDocument
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorModel/DocumentStructure/SvgDocument.cs/#L55"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>The root object in the document object hierarchy of an Svg document.</p>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Model.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>The root object in the document object hierarchy of an Svg document.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></div>
-    <div class="level3"><a class="xref" href="SharpVectors.Dom.Document.html">Document</a></div>
-    <div class="level4"><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html">CssXmlDocument</a></div>
-    <div class="level5"><span class="xref">SvgDocument</span></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SvgDocument : CssXmlDocument, ICloneable, IEnumerable, IXPathNavigable, IEventTargetSupport, IEventTarget, IDocumentEvent, IDocumentCss, IDocumentStyle, ICssView, ISvgDocument, IDocument, INode, IXmlNode</code></pre>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.ixpathnavigable">IXPathNavigable</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IEventTargetSupport.html">IEventTargetSupport</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html">IDocumentEvent</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Css.IDocumentCss.html">IDocumentCss</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Stylesheets.IDocumentStyle.html">IDocumentStyle</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Css.ICssView.html">ICssView</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Views.IAbstractView.html">IAbstractView</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.IDocument.html">IDocument</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Document.html">Document</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html">CssXmlDocument</a></div>
+      <div><span class="xref">SvgDocument</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.ixpathnavigable">IXPathNavigable</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IEventTargetSupport.html">IEventTargetSupport</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html">IDocumentEvent</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Css.IDocumentCss.html">IDocumentCss</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Stylesheets.IDocumentStyle.html">IDocumentStyle</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Css.ICssView.html">ICssView</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.IDocument.html">IDocument</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_UserAgentStyleSheet">CssXmlDocument.UserAgentStyleSheet</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.UserAgentStyleSheet.html#SharpVectors_Dom_Css_CssXmlDocument_UserAgentStyleSheet">CssXmlDocument.UserAgentStyleSheet</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_UserStyleSheet">CssXmlDocument.UserStyleSheet</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.UserStyleSheet.html#SharpVectors_Dom_Css_CssXmlDocument_UserStyleSheet">CssXmlDocument.UserStyleSheet</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Static">CssXmlDocument.Static</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.Static.html#SharpVectors_Dom_Css_CssXmlDocument_Static">CssXmlDocument.Static</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Media">CssXmlDocument.Media</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.Media.html#SharpVectors_Dom_Css_CssXmlDocument_Media">CssXmlDocument.Media</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_CssPropertyProfile">CssXmlDocument.CssPropertyProfile</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.CssPropertyProfile.html#SharpVectors_Dom_Css_CssXmlDocument_CssPropertyProfile">CssXmlDocument.CssPropertyProfile</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Url">CssXmlDocument.Url</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.Url.html#SharpVectors_Dom_Css_CssXmlDocument_Url">CssXmlDocument.Url</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_StyleSheets">CssXmlDocument.StyleSheets</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.StyleSheets.html#SharpVectors_Dom_Css_CssXmlDocument_StyleSheets">CssXmlDocument.StyleSheets</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_IsLoaded">CssXmlDocument.IsLoaded</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.IsLoaded.html#SharpVectors_Dom_Css_CssXmlDocument_IsLoaded">CssXmlDocument.IsLoaded</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Document">CssXmlDocument.Document</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.Document.html#SharpVectors_Dom_Css_CssXmlDocument_Document">CssXmlDocument.Document</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_LoadXml_System_String_">CssXmlDocument.LoadXml(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.LoadXml.html#SharpVectors_Dom_Css_CssXmlDocument_LoadXml_System_String_">CssXmlDocument.LoadXml(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Load_System_Xml_XmlReader_">CssXmlDocument.Load(XmlReader)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.Load.html#SharpVectors_Dom_Css_CssXmlDocument_Load_System_Xml_XmlReader_">CssXmlDocument.Load(XmlReader)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_AddStyleElement_System_String_System_String_">CssXmlDocument.AddStyleElement(String, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.AddStyleElement.html#SharpVectors_Dom_Css_CssXmlDocument_AddStyleElement_System_String_System_String_">CssXmlDocument.AddStyleElement(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_SetUserAgentStyleSheet_System_String_">CssXmlDocument.SetUserAgentStyleSheet(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.SetUserAgentStyleSheet.html#SharpVectors_Dom_Css_CssXmlDocument_SetUserAgentStyleSheet_System_String_">CssXmlDocument.SetUserAgentStyleSheet(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_SetUserStyleSheet_System_String_">CssXmlDocument.SetUserStyleSheet(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.SetUserStyleSheet.html#SharpVectors_Dom_Css_CssXmlDocument_SetUserStyleSheet_System_String_">CssXmlDocument.SetUserStyleSheet(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_AddStyleSheet_System_String_">CssXmlDocument.AddStyleSheet(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.AddStyleSheet.html#SharpVectors_Dom_Css_CssXmlDocument_AddStyleSheet_System_String_">CssXmlDocument.AddStyleSheet(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_GetResource_System_Uri_">CssXmlDocument.GetResource(Uri)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.GetResource.html#SharpVectors_Dom_Css_CssXmlDocument_GetResource_System_Uri_">CssXmlDocument.GetResource(Uri)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_GetOverrideStyle_System_Xml_XmlElement_System_String_">CssXmlDocument.GetOverrideStyle(XmlElement, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.GetOverrideStyle.html#SharpVectors_Dom_Css_CssXmlDocument_GetOverrideStyle_System_Xml_XmlElement_System_String_">CssXmlDocument.GetOverrideStyle(XmlElement, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_GetComputedStyle_System_Xml_XmlElement_System_String_">CssXmlDocument.GetComputedStyle(XmlElement, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.GetComputedStyle.html#SharpVectors_Dom_Css_CssXmlDocument_GetComputedStyle_System_Xml_XmlElement_System_String_">CssXmlDocument.GetComputedStyle(XmlElement, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_NodeChangedEvent_System_Object_System_Xml_XmlNodeChangedEventArgs_">CssXmlDocument.NodeChangedEvent(Object, XmlNodeChangedEventArgs)</a>
+      <a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.NodeChangedEvent.html#SharpVectors_Dom_Css_CssXmlDocument_NodeChangedEvent_System_Object_System_Xml_XmlNodeChangedEventArgs_">CssXmlDocument.NodeChangedEvent(object, XmlNodeChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_MutationEvents">Document.MutationEvents</a>
+      <a class="xref" href="SharpVectors.Dom.Document.MutationEvents.html#SharpVectors_Dom_Document_MutationEvents">Document.MutationEvents</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_ExternalResourcesAccessMode">Document.ExternalResourcesAccessMode</a>
+      <a class="xref" href="SharpVectors.Dom.Document.ExternalResourcesAccessMode.html#SharpVectors_Dom_Document_ExternalResourcesAccessMode">Document.ExternalResourcesAccessMode</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CanUseBitmap">Document.CanUseBitmap</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CanUseBitmap.html#SharpVectors_Dom_Document_CanUseBitmap">Document.CanUseBitmap</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_ReplacedText_SharpVectors_Dom_INode_">Document.ReplacedText(INode)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.ReplacedText.html#SharpVectors_Dom_Document_ReplacedText_SharpVectors_Dom_INode_">Document.ReplacedText(INode)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_DeletedText_SharpVectors_Dom_INode_System_Int32_System_Int32_">Document.DeletedText(INode, Int32, Int32)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.DeletedText.html#SharpVectors_Dom_Document_DeletedText_SharpVectors_Dom_INode_System_Int32_System_Int32_">Document.DeletedText(INode, int, int)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_InsertedText_SharpVectors_Dom_INode_System_Int32_System_Int32_">Document.InsertedText(INode, Int32, Int32)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.InsertedText.html#SharpVectors_Dom_Document_InsertedText_SharpVectors_Dom_INode_System_Int32_System_Int32_">Document.InsertedText(INode, int, int)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_ModifyingCharacterData_SharpVectors_Dom_INode_">Document.ModifyingCharacterData(INode)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.ModifyingCharacterData.html#SharpVectors_Dom_Document_ModifyingCharacterData_SharpVectors_Dom_INode_">Document.ModifyingCharacterData(INode)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_ModifiedCharacterData_SharpVectors_Dom_INode_System_String_System_String_">Document.ModifiedCharacterData(INode, String, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.ModifiedCharacterData.html#SharpVectors_Dom_Document_ModifiedCharacterData_SharpVectors_Dom_INode_System_String_System_String_">Document.ModifiedCharacterData(INode, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_InsertingNode_SharpVectors_Dom_INode_System_Boolean_">Document.InsertingNode(INode, Boolean)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.InsertingNode.html#SharpVectors_Dom_Document_InsertingNode_SharpVectors_Dom_INode_System_Boolean_">Document.InsertingNode(INode, bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_InsertedNode_SharpVectors_Dom_INode_SharpVectors_Dom_INode_System_Boolean_">Document.InsertedNode(INode, INode, Boolean)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.InsertedNode.html#SharpVectors_Dom_Document_InsertedNode_SharpVectors_Dom_INode_SharpVectors_Dom_INode_System_Boolean_">Document.InsertedNode(INode, INode, bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_RemovingNode_SharpVectors_Dom_INode_SharpVectors_Dom_INode_System_Boolean_">Document.RemovingNode(INode, INode, Boolean)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.RemovingNode.html#SharpVectors_Dom_Document_RemovingNode_SharpVectors_Dom_INode_SharpVectors_Dom_INode_System_Boolean_">Document.RemovingNode(INode, INode, bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_RemovedNode_SharpVectors_Dom_INode_System_Boolean_">Document.RemovedNode(INode, Boolean)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.RemovedNode.html#SharpVectors_Dom_Document_RemovedNode_SharpVectors_Dom_INode_System_Boolean_">Document.RemovedNode(INode, bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_replacingNode_SharpVectors_Dom_INode_">Document.replacingNode(INode)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.replacingNode.html#SharpVectors_Dom_Document_replacingNode_SharpVectors_Dom_INode_">Document.replacingNode(INode)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_ReplacedNode_SharpVectors_Dom_INode_">Document.ReplacedNode(INode)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.ReplacedNode.html#SharpVectors_Dom_Document_ReplacedNode_SharpVectors_Dom_INode_">Document.ReplacedNode(INode)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_ModifiedAttrValue_SharpVectors_Dom_IAttribute_System_String_">Document.ModifiedAttrValue(IAttribute, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.ModifiedAttrValue.html#SharpVectors_Dom_Document_ModifiedAttrValue_SharpVectors_Dom_IAttribute_System_String_">Document.ModifiedAttrValue(IAttribute, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SetAttrNode_SharpVectors_Dom_IAttribute_SharpVectors_Dom_IAttribute_">Document.SetAttrNode(IAttribute, IAttribute)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.SetAttrNode.html#SharpVectors_Dom_Document_SetAttrNode_SharpVectors_Dom_IAttribute_SharpVectors_Dom_IAttribute_">Document.SetAttrNode(IAttribute, IAttribute)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_RemovedAttrNode_SharpVectors_Dom_IAttribute_SharpVectors_Dom_INode_System_String_">Document.RemovedAttrNode(IAttribute, INode, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.RemovedAttrNode.html#SharpVectors_Dom_Document_RemovedAttrNode_SharpVectors_Dom_IAttribute_SharpVectors_Dom_INode_System_String_">Document.RemovedAttrNode(IAttribute, INode, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_RenamedAttrNode_SharpVectors_Dom_IAttribute_SharpVectors_Dom_IAttribute_">Document.RenamedAttrNode(IAttribute, IAttribute)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.RenamedAttrNode.html#SharpVectors_Dom_Document_RenamedAttrNode_SharpVectors_Dom_IAttribute_SharpVectors_Dom_IAttribute_">Document.RenamedAttrNode(IAttribute, IAttribute)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_RenamedElement_SharpVectors_Dom_IElement_SharpVectors_Dom_IElement_">Document.RenamedElement(IElement, IElement)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.RenamedElement.html#SharpVectors_Dom_Document_RenamedElement_SharpVectors_Dom_IElement_SharpVectors_Dom_IElement_">Document.RenamedElement(IElement, IElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateAttribute_System_String_System_String_System_String_">Document.CreateAttribute(String, String, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateAttribute.html#SharpVectors_Dom_Document_CreateAttribute_System_String_System_String_System_String_">Document.CreateAttribute(string, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateCDataSection_System_String_">Document.CreateCDataSection(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateCDataSection.html#SharpVectors_Dom_Document_CreateCDataSection_System_String_">Document.CreateCDataSection(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateComment_System_String_">Document.CreateComment(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateComment.html#SharpVectors_Dom_Document_CreateComment_System_String_">Document.CreateComment(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateDocumentFragment">Document.CreateDocumentFragment()</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateDocumentFragment.html#SharpVectors_Dom_Document_CreateDocumentFragment">Document.CreateDocumentFragment()</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateDocumentType_System_String_System_String_System_String_System_String_">Document.CreateDocumentType(String, String, String, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateDocumentType.html#SharpVectors_Dom_Document_CreateDocumentType_System_String_System_String_System_String_System_String_">Document.CreateDocumentType(string, string, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateEntityReference_System_String_">Document.CreateEntityReference(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateEntityReference.html#SharpVectors_Dom_Document_CreateEntityReference_System_String_">Document.CreateEntityReference(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateProcessingInstruction_System_String_System_String_">Document.CreateProcessingInstruction(String, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateProcessingInstruction.html#SharpVectors_Dom_Document_CreateProcessingInstruction_System_String_System_String_">Document.CreateProcessingInstruction(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateSignificantWhitespace_System_String_">Document.CreateSignificantWhitespace(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateSignificantWhitespace.html#SharpVectors_Dom_Document_CreateSignificantWhitespace_System_String_">Document.CreateSignificantWhitespace(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateTextNode_System_String_">Document.CreateTextNode(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateTextNode.html#SharpVectors_Dom_Document_CreateTextNode_System_String_">Document.CreateTextNode(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateWhitespace_System_String_">Document.CreateWhitespace(String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateWhitespace.html#SharpVectors_Dom_Document_CreateWhitespace_System_String_">Document.CreateWhitespace(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateXmlDeclaration_System_String_System_String_System_String_">Document.CreateXmlDeclaration(String, String, String)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateXmlDeclaration.html#SharpVectors_Dom_Document_CreateXmlDeclaration_System_String_System_String_System_String_">Document.CreateXmlDeclaration(string, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_AddEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">Document.IEventTarget.AddEventListener(String, EventListener, Boolean)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CanAccessExternalResources.html#SharpVectors_Dom_Document_CanAccessExternalResources_System_String_">Document.CanAccessExternalResources(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">Document.IEventTarget.RemoveEventListener(String, EventListener, Boolean)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CanAccessExternalResources.html#SharpVectors_Dom_Document_CanAccessExternalResources_System_Uri_">Document.CanAccessExternalResources(Uri)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">Document.IEventTarget.DispatchEvent(IEvent)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CreateEvent.html#SharpVectors_Dom_Document_CreateEvent_System_String_">Document.CreateEvent(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_System_Object_">Document.IEventTarget.AddEventListenerNs(String, String, EventListener, Boolean, Object)</a>
+      <a class="xref" href="SharpVectors.Dom.Document.CanDispatch.html#SharpVectors_Dom_Document_CanDispatch_System_String_System_String_">Document.CanDispatch(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">Document.IEventTarget.RemoveEventListenerNs(String, String, EventListener, Boolean)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.clonenode">XmlDocument.CloneNode(bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_WillTriggerNs_System_String_System_String_">Document.IEventTarget.WillTriggerNs(String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createattribute#system-xml-xmldocument-createattribute(system-string)">XmlDocument.CreateAttribute(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTarget_HasEventListenerNs_System_String_System_String_">Document.IEventTarget.HasEventListenerNs(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CanAccessExternalResources_System_String_">Document.CanAccessExternalResources(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_Doctype">Document.IDocument.Doctype</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_Implementation">Document.IDocument.Implementation</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_DocumentElement">Document.IDocument.DocumentElement</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateElement_System_String_">Document.IDocument.CreateElement(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateDocumentFragment">Document.IDocument.CreateDocumentFragment()</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateTextNode_System_String_">Document.IDocument.CreateTextNode(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateComment_System_String_">Document.IDocument.CreateComment(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateCDataSection_System_String_">Document.IDocument.CreateCDataSection(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateProcessingInstruction_System_String_System_String_">Document.IDocument.CreateProcessingInstruction(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateAttribute_System_String_">Document.IDocument.CreateAttribute(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateEntityReference_System_String_">Document.IDocument.CreateEntityReference(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_GetElementsByTagName_System_String_">Document.IDocument.GetElementsByTagName(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_ImportNode_SharpVectors_Dom_INode_System_Boolean_">Document.IDocument.ImportNode(INode, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateElementNs_System_String_System_String_">Document.IDocument.CreateElementNs(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_CreateAttributeNs_System_String_System_String_">Document.IDocument.CreateAttributeNs(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_GetElementsByTagNameNs_System_String_System_String_">Document.IDocument.GetElementsByTagNameNs(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_IDocument_GetElementById_System_String_">Document.IDocument.GetElementById(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CreateEvent_System_String_">Document.CreateEvent(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_CanDispatch_System_String_System_String_">Document.CanDispatch(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Document.html#SharpVectors_Dom_Document_SharpVectors_Dom_Events_IEventTargetSupport_FireEvent_SharpVectors_Dom_Events_IEvent_">Document.IEventTargetSupport.FireEvent(IEvent)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.clonenode#system-xml-xmldocument-clonenode(system-boolean)">XmlDocument.CloneNode(Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createattribute#system-xml-xmldocument-createattribute(system-string)">XmlDocument.CreateAttribute(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createelement#system-xml-xmldocument-createelement(system-string)">XmlDocument.CreateElement(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createelement#system-xml-xmldocument-createelement(system-string)">XmlDocument.CreateElement(string)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnavigator#system-xml-xmldocument-createnavigator">XmlDocument.CreateNavigator()</a>
@@ -416,37 +323,37 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnavigator#system-xml-xmldocument-createnavigator(system-xml-xmlnode)">XmlDocument.CreateNavigator(XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.getelementsbytagname#system-xml-xmldocument-getelementsbytagname(system-string)">XmlDocument.GetElementsByTagName(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.getelementsbytagname#system-xml-xmldocument-getelementsbytagname(system-string)">XmlDocument.GetElementsByTagName(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createattribute#system-xml-xmldocument-createattribute(system-string-system-string)">XmlDocument.CreateAttribute(String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createattribute#system-xml-xmldocument-createattribute(system-string-system-string)">XmlDocument.CreateAttribute(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createelement#system-xml-xmldocument-createelement(system-string-system-string)">XmlDocument.CreateElement(String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createelement#system-xml-xmldocument-createelement(system-string-system-string)">XmlDocument.CreateElement(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.getelementsbytagname#system-xml-xmldocument-getelementsbytagname(system-string-system-string)">XmlDocument.GetElementsByTagName(String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.getelementsbytagname#system-xml-xmldocument-getelementsbytagname(system-string-system-string)">XmlDocument.GetElementsByTagName(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.importnode#system-xml-xmldocument-importnode(system-xml-xmlnode-system-boolean)">XmlDocument.ImportNode(XmlNode, Boolean)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.importnode">XmlDocument.ImportNode(XmlNode, bool)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createdefaultattribute#system-xml-xmldocument-createdefaultattribute(system-string-system-string-system-string)">XmlDocument.CreateDefaultAttribute(String, String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createdefaultattribute">XmlDocument.CreateDefaultAttribute(string, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnode#system-xml-xmldocument-createnode(system-xml-xmlnodetype-system-string-system-string-system-string)">XmlDocument.CreateNode(XmlNodeType, String, String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnode#system-xml-xmldocument-createnode(system-xml-xmlnodetype-system-string-system-string-system-string)">XmlDocument.CreateNode(XmlNodeType, string, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnode#system-xml-xmldocument-createnode(system-string-system-string-system-string)">XmlDocument.CreateNode(String, String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnode#system-xml-xmldocument-createnode(system-string-system-string-system-string)">XmlDocument.CreateNode(string, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnode#system-xml-xmldocument-createnode(system-xml-xmlnodetype-system-string-system-string)">XmlDocument.CreateNode(XmlNodeType, String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.createnode#system-xml-xmldocument-createnode(system-xml-xmlnodetype-system-string-system-string)">XmlDocument.CreateNode(XmlNodeType, string, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.readnode#system-xml-xmldocument-readnode(system-xml-xmlreader)">XmlDocument.ReadNode(XmlReader)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.readnode">XmlDocument.ReadNode(XmlReader)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.save#system-xml-xmldocument-save(system-string)">XmlDocument.Save(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.save#system-xml-xmldocument-save(system-string)">XmlDocument.Save(string)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.save#system-xml-xmldocument-save(system-io-stream)">XmlDocument.Save(Stream)</a>
@@ -458,10 +365,10 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.save#system-xml-xmldocument-save(system-xml-xmlwriter)">XmlDocument.Save(XmlWriter)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.writeto#system-xml-xmldocument-writeto(system-xml-xmlwriter)">XmlDocument.WriteTo(XmlWriter)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.writeto">XmlDocument.WriteTo(XmlWriter)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.writecontentto#system-xml-xmldocument-writecontentto(system-xml-xmlwriter)">XmlDocument.WriteContentTo(XmlWriter)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.writecontentto">XmlDocument.WriteContentTo(XmlWriter)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.validate#system-xml-xmldocument-validate(system-xml-schema-validationeventhandler)">XmlDocument.Validate(ValidationEventHandler)</a>
@@ -470,49 +377,49 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.validate#system-xml-xmldocument-validate(system-xml-schema-validationeventhandler-system-xml-xmlnode)">XmlDocument.Validate(ValidationEventHandler, XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.nodetype#system-xml-xmldocument-nodetype">XmlDocument.NodeType</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.nodetype">XmlDocument.NodeType</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.parentnode#system-xml-xmldocument-parentnode">XmlDocument.ParentNode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.parentnode">XmlDocument.ParentNode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.documenttype#system-xml-xmldocument-documenttype">XmlDocument.DocumentType</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.documenttype">XmlDocument.DocumentType</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.implementation#system-xml-xmldocument-implementation">XmlDocument.Implementation</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.implementation">XmlDocument.Implementation</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.name#system-xml-xmldocument-name">XmlDocument.Name</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.name">XmlDocument.Name</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.localname#system-xml-xmldocument-localname">XmlDocument.LocalName</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.localname">XmlDocument.LocalName</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.documentelement#system-xml-xmldocument-documentelement">XmlDocument.DocumentElement</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.documentelement">XmlDocument.DocumentElement</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.schemas#system-xml-xmldocument-schemas">XmlDocument.Schemas</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.schemas">XmlDocument.Schemas</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.xmlresolver#system-xml-xmldocument-xmlresolver">XmlDocument.XmlResolver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.xmlresolver">XmlDocument.XmlResolver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.nametable#system-xml-xmldocument-nametable">XmlDocument.NameTable</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.nametable">XmlDocument.NameTable</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.preservewhitespace#system-xml-xmldocument-preservewhitespace">XmlDocument.PreserveWhitespace</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.preservewhitespace">XmlDocument.PreserveWhitespace</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.isreadonly#system-xml-xmldocument-isreadonly">XmlDocument.IsReadOnly</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.isreadonly">XmlDocument.IsReadOnly</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.innertext#system-xml-xmldocument-innertext">XmlDocument.InnerText</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.innertext">XmlDocument.InnerText</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.innerxml#system-xml-xmldocument-innerxml">XmlDocument.InnerXml</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.innerxml">XmlDocument.InnerXml</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.schemainfo#system-xml-xmldocument-schemainfo">XmlDocument.SchemaInfo</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.schemainfo">XmlDocument.SchemaInfo</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.nodeinserting">XmlDocument.NodeInserting</a>
@@ -533,144 +440,136 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.nodechanged">XmlDocument.NodeChanged</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string)">XmlNode.SelectSingleNode(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string)">XmlNode.SelectSingleNode(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectSingleNode(String, XmlNamespaceManager)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectsinglenode#system-xml-xmlnode-selectsinglenode(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectSingleNode(string, XmlNamespaceManager)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string)">XmlNode.SelectNodes(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string)">XmlNode.SelectNodes(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectNodes(String, XmlNamespaceManager)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.selectnodes#system-xml-xmlnode-selectnodes(system-string-system-xml-xmlnamespacemanager)">XmlNode.SelectNodes(string, XmlNamespaceManager)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertbefore#system-xml-xmlnode-insertbefore(system-xml-xmlnode-system-xml-xmlnode)">XmlNode.InsertBefore(XmlNode, XmlNode)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertbefore">XmlNode.InsertBefore(XmlNode, XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertafter#system-xml-xmlnode-insertafter(system-xml-xmlnode-system-xml-xmlnode)">XmlNode.InsertAfter(XmlNode, XmlNode)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.insertafter">XmlNode.InsertAfter(XmlNode, XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.replacechild#system-xml-xmlnode-replacechild(system-xml-xmlnode-system-xml-xmlnode)">XmlNode.ReplaceChild(XmlNode, XmlNode)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.replacechild">XmlNode.ReplaceChild(XmlNode, XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removechild#system-xml-xmlnode-removechild(system-xml-xmlnode)">XmlNode.RemoveChild(XmlNode)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removechild">XmlNode.RemoveChild(XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prependchild#system-xml-xmlnode-prependchild(system-xml-xmlnode)">XmlNode.PrependChild(XmlNode)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prependchild">XmlNode.PrependChild(XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.appendchild#system-xml-xmlnode-appendchild(system-xml-xmlnode)">XmlNode.AppendChild(XmlNode)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.appendchild">XmlNode.AppendChild(XmlNode)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.normalize#system-xml-xmlnode-normalize">XmlNode.Normalize()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.normalize">XmlNode.Normalize()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.clone#system-xml-xmlnode-clone">XmlNode.Clone()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.clone">XmlNode.Clone()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.system-icloneable-clone#system-xml-xmlnode-system-icloneable-clone">XmlNode.ICloneable.Clone()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getenumerator">XmlNode.GetEnumerator()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.system-collections-ienumerable-getenumerator#system-xml-xmlnode-system-collections-ienumerable-getenumerator">XmlNode.IEnumerable.GetEnumerator()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removeall">XmlNode.RemoveAll()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getenumerator#system-xml-xmlnode-getenumerator">XmlNode.GetEnumerator()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getnamespaceofprefix">XmlNode.GetNamespaceOfPrefix(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.removeall#system-xml-xmlnode-removeall">XmlNode.RemoveAll()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getprefixofnamespace">XmlNode.GetPrefixOfNamespace(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getnamespaceofprefix#system-xml-xmlnode-getnamespaceofprefix(system-string)">XmlNode.GetNamespaceOfPrefix(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.value">XmlNode.Value</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.getprefixofnamespace#system-xml-xmlnode-getprefixofnamespace(system-string)">XmlNode.GetPrefixOfNamespace(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.childnodes">XmlNode.ChildNodes</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.value#system-xml-xmlnode-value">XmlNode.Value</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.previoussibling">XmlNode.PreviousSibling</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.childnodes#system-xml-xmlnode-childnodes">XmlNode.ChildNodes</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.nextsibling">XmlNode.NextSibling</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.previoussibling#system-xml-xmlnode-previoussibling">XmlNode.PreviousSibling</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.attributes">XmlNode.Attributes</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.nextsibling#system-xml-xmlnode-nextsibling">XmlNode.NextSibling</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.firstchild">XmlNode.FirstChild</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.attributes#system-xml-xmlnode-attributes">XmlNode.Attributes</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.lastchild">XmlNode.LastChild</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.firstchild#system-xml-xmlnode-firstchild">XmlNode.FirstChild</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.haschildnodes">XmlNode.HasChildNodes</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.lastchild#system-xml-xmlnode-lastchild">XmlNode.LastChild</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.namespaceuri">XmlNode.NamespaceURI</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.haschildnodes#system-xml-xmlnode-haschildnodes">XmlNode.HasChildNodes</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prefix">XmlNode.Prefix</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.namespaceuri#system-xml-xmlnode-namespaceuri">XmlNode.NamespaceURI</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.outerxml">XmlNode.OuterXml</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prefix#system-xml-xmlnode-prefix">XmlNode.Prefix</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">XmlNode.this[string]</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.outerxml#system-xml-xmlnode-outerxml">XmlNode.OuterXml</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">XmlNode.this[string, string]</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.item#system-xml-xmlnode-item(system-string)">XmlNode.Item[String]</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.item#system-xml-xmlnode-item(system-string-system-string)">XmlNode.Item[String, String]</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
     </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.Svg.html">SharpVectors.Dom.Svg</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Model.dll</h6>
-  <h5 id="SharpVectors_Dom_Svg_SvgDocument_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SvgDocument : CssXmlDocument, ICloneable, IEnumerable, IXPathNavigable, IEventTargetSupport, IEventTarget, IDocumentEvent, IDocumentCss, IDocumentStyle, ICssView, IAbstractView, ISvgDocument, IDocument, INode, IXmlNode</code></pre>
-  </div>
-  <h5 id="SharpVectors_Dom_Svg_SvgDocument_remarks"><strong>Remarks</strong></h5>
+  </dd></dl>
+
+
+
+
+  <h2 id="SharpVectors_Dom_Svg_SvgDocument_remarks">Remarks</h2>
   <div class="markdown level0 remarks"><p>
-When an &apos;svg&apos; element is embedded inline as a component of a document from another namespace, 
-such as when an &apos;svg&apos; element is embedded inline within an XHTML document
+When an 'svg' element is embedded inline as a component of a document from another namespace, 
+such as when an 'svg' element is embedded inline within an XHTML document
 [<a href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</a>], then an 
 <a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a> object will not exist; instead, the root object in the 
 document object hierarchy will be a Document object of a different type, such as an HTMLDocument object.
 </p>
 <p>
 However, an <a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a> object will indeed exist when the root
-element of the XML document hierarchy is an &apos;svg&apos; element, such as when viewing a stand-alone SVG 
-file (i.e., a file with MIME type &quot;image/svg+xml&quot;). In this case, the <a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a> 
+element of the XML document hierarchy is an 'svg' element, such as when viewing a stand-alone SVG 
+file (i.e., a file with MIME type "image/svg+xml"). In this case, the <a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a> 
 object will be the root object of the document object model hierarchy.
 </p>
 <p>
-In the case where an SVG document is embedded by reference, such as when an XHTML document has an &apos;object&apos; 
+In the case where an SVG document is embedded by reference, such as when an XHTML document has an 'object' 
 element whose href attribute references an SVG document (i.e., a document whose MIME type is
-&quot;image/svg+xml&quot; and whose root element is thus an &apos;svg&apos; element), there will exist two distinct DOM hierarchies. 
+"image/svg+xml" and whose root element is thus an 'svg' element), there will exist two distinct DOM hierarchies. 
 The first DOM hierarchy will be for the referencing document (e.g., an XHTML document). 
 The second DOM hierarchy will be for the referenced SVG document. In this
 second DOM hierarchy, the root object of the document object model
@@ -684,1409 +583,249 @@ Object Model (HTML) Level 1</a> chapter of the
 [<a href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</a>] specification.
 </p>
 </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument__ctor_" data-uid="SharpVectors.Dom.Svg.SvgDocument.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument__ctor_SharpVectors_Dom_Svg_SvgWindow_" data-uid="SharpVectors.Dom.Svg.SvgDocument.#ctor(SharpVectors.Dom.Svg.SvgWindow)">SvgDocument(SvgWindow)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgDocument(SvgWindow window)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgWindow.html">SvgWindow</a></td>
-        <td><span class="parametername">window</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="fields">Fields
-  </h3>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_DotsPerInch" data-uid="SharpVectors.Dom.Svg.SvgDocument.DotsPerInch">DotsPerInch</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly int DotsPerInch</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_SvgNamespace" data-uid="SharpVectors.Dom.Svg.SvgDocument.SvgNamespace">SvgNamespace</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string SvgNamespace = &quot;http://www.w3.org/2000/svg&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_XLinkNamespace" data-uid="SharpVectors.Dom.Svg.SvgDocument.XLinkNamespace">XLinkNamespace</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string XLinkNamespace = &quot;http://www.w3.org/1999/xlink&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_XmlIdUrl" data-uid="SharpVectors.Dom.Svg.SvgDocument.XmlIdUrl">XmlIdUrl</h4>
-  <div class="markdown level1 summary"><p>Namespace URI to map to the xml prefix</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string XmlIdUrl = &quot;http://www.w3.org/XML/1998/namespace&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_BaseURI_" data-uid="SharpVectors.Dom.Svg.SvgDocument.BaseURI*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_BaseURI" data-uid="SharpVectors.Dom.Svg.SvgDocument.BaseURI">BaseURI</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string BaseURI { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.baseuri#system-xml-xmldocument-baseuri">XmlDocument.BaseURI</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_CustomSettings_" data-uid="SharpVectors.Dom.Svg.SvgDocument.CustomSettings*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_CustomSettings" data-uid="SharpVectors.Dom.Svg.SvgDocument.CustomSettings">CustomSettings</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlReaderSettings CustomSettings { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Domain_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Domain*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Domain" data-uid="SharpVectors.Dom.Svg.SvgDocument.Domain">Domain</h4>
-  <div class="markdown level1 summary"><p>The domain name of the server that served the document, or a null string if the
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.-ctor.html#SharpVectors_Dom_Svg_SvgDocument__ctor_SharpVectors_Dom_Svg_SvgWindow_">SvgDocument(SvgWindow)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.DotsPerInch.html">DotsPerInch</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.SvgNamespace.html">SvgNamespace</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.XLinkNamespace.html">XLinkNamespace</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.XmlIdUrl.html">XmlIdUrl</a></dt>
+    <dd><p>Namespace URI to map to the xml prefix</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.BaseURI.html#SharpVectors_Dom_Svg_SvgDocument_BaseURI">BaseURI</a></dt>
+    <dd><p>Gets the base URI of the current node.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.CustomSettings.html#SharpVectors_Dom_Svg_SvgDocument_CustomSettings">CustomSettings</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Domain.html#SharpVectors_Dom_Svg_SvgDocument_Domain">Domain</a></dt>
+    <dd><p>The domain name of the server that served the document, or a null string if the
 server cannot be identified by a domain name.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Domain { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Dpi_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Dpi*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Dpi" data-uid="SharpVectors.Dom.Svg.SvgDocument.Dpi">Dpi</h4>
-  <div class="markdown level1 summary"><p>Get or sets the dots per inch at which the objects should be rendered.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double Dpi { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The current dots per inch value.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_ElementMap_" data-uid="SharpVectors.Dom.Svg.SvgDocument.ElementMap*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_ElementMap" data-uid="SharpVectors.Dom.Svg.SvgDocument.ElementMap">ElementMap</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, XmlElement&gt; ElementMap { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_ElementUniqueMap_" data-uid="SharpVectors.Dom.Svg.SvgDocument.ElementUniqueMap*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_ElementUniqueMap" data-uid="SharpVectors.Dom.Svg.SvgDocument.ElementUniqueMap">ElementUniqueMap</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, SvgElement&gt; ElementUniqueMap { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="SharpVectors.Dom.Svg.SvgElement.html">SvgElement</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_FontFamilies_" data-uid="SharpVectors.Dom.Svg.SvgDocument.FontFamilies*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_FontFamilies" data-uid="SharpVectors.Dom.Svg.SvgDocument.FontFamilies">FontFamilies</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IList&lt;SvgFontFamily&gt; FontFamilies { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="SharpVectors.Dom.Svg.SvgFontFamily.html">SvgFontFamily</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_IsFontsLoaded_" data-uid="SharpVectors.Dom.Svg.SvgDocument.IsFontsLoaded*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_IsFontsLoaded" data-uid="SharpVectors.Dom.Svg.SvgDocument.IsFontsLoaded">IsFontsLoaded</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsFontsLoaded { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_NamespaceManager_" data-uid="SharpVectors.Dom.Svg.SvgDocument.NamespaceManager*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_NamespaceManager" data-uid="SharpVectors.Dom.Svg.SvgDocument.NamespaceManager">NamespaceManager</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlNamespaceManager NamespaceManager { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager">XmlNamespaceManager</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_OwnerDocument_" data-uid="SharpVectors.Dom.Svg.SvgDocument.OwnerDocument*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_OwnerDocument" data-uid="SharpVectors.Dom.Svg.SvgDocument.OwnerDocument">OwnerDocument</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgDocument OwnerDocument { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.html">SvgDocument</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Referrer_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Referrer*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Referrer" data-uid="SharpVectors.Dom.Svg.SvgDocument.Referrer">Referrer</h4>
-  <div class="markdown level1 summary"><p>Returns the URI of the page that linked to this page. The value is an empty
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Dpi.html#SharpVectors_Dom_Svg_SvgDocument_Dpi">Dpi</a></dt>
+    <dd><p>Get or sets the dots per inch at which the objects should be rendered.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ElementMap.html#SharpVectors_Dom_Svg_SvgDocument_ElementMap">ElementMap</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ElementUniqueMap.html#SharpVectors_Dom_Svg_SvgDocument_ElementUniqueMap">ElementUniqueMap</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.FontFamilies.html#SharpVectors_Dom_Svg_SvgDocument_FontFamilies">FontFamilies</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GlobalSettings.html#SharpVectors_Dom_Svg_SvgDocument_GlobalSettings">GlobalSettings</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.IsFontsLoaded.html#SharpVectors_Dom_Svg_SvgDocument_IsFontsLoaded">IsFontsLoaded</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.NamespaceManager.html#SharpVectors_Dom_Svg_SvgDocument_NamespaceManager">NamespaceManager</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.OwnerDocument.html#SharpVectors_Dom_Svg_SvgDocument_OwnerDocument">OwnerDocument</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Referrer.html#SharpVectors_Dom_Svg_SvgDocument_Referrer">Referrer</a></dt>
+    <dd><p>Returns the URI of the page that linked to this page. The value is an empty
 string if the user navigated to the page directly (not through a link, but,
 for example, via a bookmark).</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Referrer { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_RootElement_" data-uid="SharpVectors.Dom.Svg.SvgDocument.RootElement*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_RootElement" data-uid="SharpVectors.Dom.Svg.SvgDocument.RootElement">RootElement</h4>
-  <div class="markdown level1 summary"><p>The root 'svg' element in the document hierarchy</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ISvgSvgElement RootElement { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.html">ISvgSvgElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_StyledFontIds_" data-uid="SharpVectors.Dom.Svg.SvgDocument.StyledFontIds*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_StyledFontIds" data-uid="SharpVectors.Dom.Svg.SvgDocument.StyledFontIds">StyledFontIds</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, string&gt; StyledFontIds { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_SvgFontFamilies_" data-uid="SharpVectors.Dom.Svg.SvgDocument.SvgFontFamilies*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_SvgFontFamilies" data-uid="SharpVectors.Dom.Svg.SvgDocument.SvgFontFamilies">SvgFontFamilies</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ISet&lt;string&gt; SvgFontFamilies { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1">ISet</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_SvgFonts_" data-uid="SharpVectors.Dom.Svg.SvgDocument.SvgFonts*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_SvgFonts" data-uid="SharpVectors.Dom.Svg.SvgDocument.SvgFonts">SvgFonts</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IList&lt;SvgFontElement&gt; SvgFonts { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="SharpVectors.Dom.Svg.SvgFontElement.html">SvgFontElement</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Title_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Title*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Title" data-uid="SharpVectors.Dom.Svg.SvgDocument.Title">Title</h4>
-  <div class="markdown level1 summary"><p>The title of the document which is the text content of the first child title
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.RootElement.html#SharpVectors_Dom_Svg_SvgDocument_RootElement">RootElement</a></dt>
+    <dd><p>The root 'svg' element in the document hierarchy</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.StyledFontIds.html#SharpVectors_Dom_Svg_SvgDocument_StyledFontIds">StyledFontIds</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.SvgFontFamilies.html#SharpVectors_Dom_Svg_SvgDocument_SvgFontFamilies">SvgFontFamilies</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.SvgFonts.html#SharpVectors_Dom_Svg_SvgDocument_SvgFonts">SvgFonts</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Title.html#SharpVectors_Dom_Svg_SvgDocument_Title">Title</a></dt>
+    <dd><p>The title of the document which is the text content of the first child title
 element of the 'svg' root element.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Title { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Window_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Window*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Window" data-uid="SharpVectors.Dom.Svg.SvgDocument.Window">Window</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ISvgWindow Window { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.ISvgWindow.html">ISvgWindow</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_CreateElement_" data-uid="SharpVectors.Dom.Svg.SvgDocument.CreateElement*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_CreateElement_System_String_System_String_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.CreateElement(System.String,System.String,System.String)">CreateElement(String, String, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override XmlElement CreateElement(string prefix, string localName, string ns)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">prefix</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">localName</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">ns</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_CreateElement_System_String_System_String_System_String_">CssXmlDocument.CreateElement(String, String, String)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetElementById_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetElementById*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetElementById_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetElementById(System.String)">GetElementById(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override XmlElement GetElementById(string elementId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">elementId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.getelementbyid#system-xml-xmldocument-getelementbyid(system-string)">XmlDocument.GetElementById(String)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetFonts_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetFonts*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetFonts_System_Collections_Generic_IList_System_String__" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetFonts(System.Collections.Generic.IList{System.String})">GetFonts(IList&lt;String&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IList&lt;SvgFontElement&gt; GetFonts(IList&lt;string&gt; fontFamilies)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td><span class="parametername">fontFamilies</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="SharpVectors.Dom.Svg.SvgFontElement.html">SvgFontElement</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetFonts_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetFonts*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetFonts_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetFonts(System.String)">GetFonts(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IList&lt;SvgFontElement&gt; GetFonts(string fontFamily)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fontFamily</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="SharpVectors.Dom.Svg.SvgFontElement.html">SvgFontElement</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetFontUrls_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetFontUrls*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetFontUrls" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetFontUrls">GetFontUrls()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual IList&lt;Tuple&lt;string, SvgFontFaceElement&gt;&gt; GetFontUrls()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.tuple-2">Tuple</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="SharpVectors.Dom.Svg.SvgFontFaceElement.html">SvgFontFaceElement</a>&gt;&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetNodeByUri_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetNodeByUri*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetNodeByUri_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetNodeByUri(System.String)">GetNodeByUri(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlNode GetNodeByUri(string absoluteUrl)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">absoluteUrl</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetNodeByUri_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetNodeByUri*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetNodeByUri_System_Uri_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetNodeByUri(System.Uri)">GetNodeByUri(Uri)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlNode GetNodeByUri(Uri absoluteUri)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></td>
-        <td><span class="parametername">absoluteUri</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetSvgById_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetSvgById*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetSvgById_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetSvgById(System.String)">GetSvgById(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgElement GetSvgById(string elementId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">elementId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgElement.html">SvgElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetSvgByUniqueId_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetSvgByUniqueId*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetSvgByUniqueId_System_Guid_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetSvgByUniqueId(System.Guid)">GetSvgByUniqueId(Guid)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgElement GetSvgByUniqueId(Guid uniqueId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></td>
-        <td><span class="parametername">uniqueId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgElement.html">SvgElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_GetSvgByUniqueId_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetSvgByUniqueId*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_GetSvgByUniqueId_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.GetSvgByUniqueId(System.String)">GetSvgByUniqueId(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgElement GetSvgByUniqueId(string uniqueId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">uniqueId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgElement.html">SvgElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_IsGZipped_" data-uid="SharpVectors.Dom.Svg.SvgDocument.IsGZipped*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_IsGZipped_System_IO_Stream_" data-uid="SharpVectors.Dom.Svg.SvgDocument.IsGZipped(System.IO.Stream)">IsGZipped(Stream)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool IsGZipped(Stream stream)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
-        <td><span class="parametername">stream</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Load_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Load_System_IO_Stream_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load(System.IO.Stream)">Load(Stream)</h4>
-  <div class="markdown level1 summary"><p>Loads the XML document from the specified stream.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Load(Stream inStream)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
-        <td><span class="parametername">inStream</span></td>
-        <td><p>The stream containing the XML document to load.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Load_System_IO_Stream_">CssXmlDocument.Load(Stream)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Load_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Load_System_IO_TextReader_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load(System.IO.TextReader)">Load(TextReader)</h4>
-  <div class="markdown level1 summary"><p>Loads the XML document from the specified
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Window.html#SharpVectors_Dom_Svg_SvgDocument_Window">Window</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.CreateElement.html#SharpVectors_Dom_Svg_SvgDocument_CreateElement_System_String_System_String_System_String_">CreateElement(string, string, string)</a></dt>
+    <dd><p>Creates an element with the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.prefix">Prefix</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.localname">LocalName</a>, and <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.namespaceuri">NamespaceURI</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetElementById.html#SharpVectors_Dom_Svg_SvgDocument_GetElementById_System_String_">GetElementById(string)</a></dt>
+    <dd><p>Gets the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a> with the specified ID.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetFontUrls.html#SharpVectors_Dom_Svg_SvgDocument_GetFontUrls">GetFontUrls()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetFonts.html#SharpVectors_Dom_Svg_SvgDocument_GetFonts_System_Collections_Generic_IList_System_String__">GetFonts(IList&lt;string&gt;)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetFonts.html#SharpVectors_Dom_Svg_SvgDocument_GetFonts_System_String_">GetFonts(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetNodeByUri.html#SharpVectors_Dom_Svg_SvgDocument_GetNodeByUri_System_String_">GetNodeByUri(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetNodeByUri.html#SharpVectors_Dom_Svg_SvgDocument_GetNodeByUri_System_Uri_">GetNodeByUri(Uri)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetSvgById.html#SharpVectors_Dom_Svg_SvgDocument_GetSvgById_System_String_">GetSvgById(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetSvgByUniqueId.html#SharpVectors_Dom_Svg_SvgDocument_GetSvgByUniqueId_System_Guid_">GetSvgByUniqueId(Guid)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.GetSvgByUniqueId.html#SharpVectors_Dom_Svg_SvgDocument_GetSvgByUniqueId_System_String_">GetSvgByUniqueId(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.IsGZipped.html#SharpVectors_Dom_Svg_SvgDocument_IsGZipped_System_IO_Stream_">IsGZipped(Stream)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Load.html#SharpVectors_Dom_Svg_SvgDocument_Load_System_IO_Stream_">Load(Stream)</a></dt>
+    <dd><p>Loads the XML document from the specified stream.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Load.html#SharpVectors_Dom_Svg_SvgDocument_Load_System_IO_TextReader_">Load(TextReader)</a></dt>
+    <dd><p>Loads the XML document from the specified
 <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textreader">TextReader</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Load(TextReader txtReader)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textreader">TextReader</a></td>
-        <td><span class="parametername">txtReader</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument.load#system-xml-xmldocument-load(system-io-textreader)">XmlDocument.Load(TextReader)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Load_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Load_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load(System.String)">Load(String)</h4>
-  <div class="markdown level1 summary"><p>Loads the XML document from the specified URL.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Load(string filename)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">filename</span></td>
-        <td><p>URL for the file containing the XML document to load.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_Load_System_String_">CssXmlDocument.Load(String)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Load_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Load_System_String_System_IO_Stream_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Load(System.String,System.IO.Stream)">Load(String, Stream)</h4>
-  <div class="markdown level1 summary"><p>Loads the XML document from the specified stream but with the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Load.html#SharpVectors_Dom_Svg_SvgDocument_Load_System_String_">Load(string)</a></dt>
+    <dd><p>Loads the XML document from the specified URL.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Load.html#SharpVectors_Dom_Svg_SvgDocument_Load_System_String_System_IO_Stream_">Load(string, Stream)</a></dt>
+    <dd><p>Loads the XML document from the specified stream but with the
 specified base URL</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Load(string baseUrl, Stream stream)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">baseUrl</span></td>
-        <td><p>Base URL for the stream from which the XML document is loaded.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
-        <td><span class="parametername">stream</span></td>
-        <td><p>The stream containing the XML document to load.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_OnLoaded_" data-uid="SharpVectors.Dom.Svg.SvgDocument.OnLoaded*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_OnLoaded" data-uid="SharpVectors.Dom.Svg.SvgDocument.OnLoaded">OnLoaded()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnLoaded()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html#SharpVectors_Dom_Css_CssXmlDocument_OnLoaded">CssXmlDocument.OnLoaded()</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_RegisterFont_" data-uid="SharpVectors.Dom.Svg.SvgDocument.RegisterFont*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_RegisterFont_SharpVectors_Dom_Svg_SvgFontElement_" data-uid="SharpVectors.Dom.Svg.SvgDocument.RegisterFont(SharpVectors.Dom.Svg.SvgFontElement)">RegisterFont(SvgFontElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterFont(SvgFontElement svgFont)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgFontElement.html">SvgFontElement</a></td>
-        <td><span class="parametername">svgFont</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_ResolveUri_" data-uid="SharpVectors.Dom.Svg.SvgDocument.ResolveUri*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_ResolveUri_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.ResolveUri(System.String)">ResolveUri(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Uri ResolveUri(string uri)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">uri</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgDocument_Supports_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Supports*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_Supports_System_String_System_String_" data-uid="SharpVectors.Dom.Svg.SvgDocument.Supports(System.String,System.String)">Supports(String, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Supports(string feature, string version)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">feature</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">version</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode.supports#system-xml-xmlnode-supports(system-string-system-string)">XmlNode.Supports(String, String)</a></div>
-  <h3 id="events">Events
-  </h3>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_ResolveNamespace" data-uid="SharpVectors.Dom.Svg.SvgDocument.ResolveNamespace">ResolveNamespace</h4>
-  <div class="markdown level1 summary"><p>Occurs when a namespace is being resolved.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event SvgDocument.ResolveNamespaceDelegate ResolveNamespace</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ResolveNamespaceDelegate.html">SvgDocument.ResolveNamespaceDelegate</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgDocument_ResolvingUri" data-uid="SharpVectors.Dom.Svg.SvgDocument.ResolvingUri">ResolvingUri</h4>
-  <div class="markdown level1 summary"><p>Occurs when an URI is resolved (always).</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event SvgDocument.ResolveUriDelegate ResolvingUri</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ResolveUriDelegate.html">SvgDocument.ResolveUriDelegate</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">System.ICloneable</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.ixpathnavigable">System.Xml.XPath.IXPathNavigable</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IEventTargetSupport.html">IEventTargetSupport</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.html">IEventTarget</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.html">IDocumentEvent</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Css.IDocumentCss.html">IDocumentCss</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Stylesheets.IDocumentStyle.html">IDocumentStyle</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Css.ICssView.html">ICssView</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Views.IAbstractView.html">IAbstractView</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Svg.ISvgDocument.html">ISvgDocument</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.IDocument.html">IDocument</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.INode.html">INode</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a>
-  </div>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.OnLoaded.html#SharpVectors_Dom_Svg_SvgDocument_OnLoaded">OnLoaded()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.RegisterFont.html#SharpVectors_Dom_Svg_SvgDocument_RegisterFont_SharpVectors_Dom_Svg_SvgFontElement_">RegisterFont(SvgFontElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ResolveUri.html#SharpVectors_Dom_Svg_SvgDocument_ResolveUri_System_String_">ResolveUri(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.Supports.html#SharpVectors_Dom_Svg_SvgDocument_Supports_System_String_System_String_">Supports(string, string)</a></dt>
+    <dd><p>Test if the DOM implementation implements a specific feature.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="events">Events
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ResolveNamespace.html">ResolveNamespace</a></dt>
+    <dd><p>Occurs when a namespace is being resolved.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgDocument.ResolvingUri.html">ResolvingUri</a></dt>
+    <dd><p>Occurs when an URI is resolved (always).</p>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorModel/DocumentStructure/SvgDocument.cs/#L55" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

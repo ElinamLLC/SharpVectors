@@ -1,137 +1,92 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>SVG Controls | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="SVG Controls | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>SVG Controls | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SVG Controls | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx/articles/controls.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column Conceptual">
-
-
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
-
-                        <article class="content wrap hide-when-search" id="_content" data-uid="topic_controls">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
+        <article data-uid="topic_controls">
 <h1 id="svg-controls">SVG Controls</h1>
 
 <p>These are WPF controls for directly viewing the SVG documents in the WPF applications. The class diagrams are shown below:</p>
@@ -227,9 +182,9 @@
 <p>The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html">SvgDrawingCanvas</a> control is a generic canvas that extends the WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.canvas">Canvas</a> control to provide rendering of drawing objects or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> created from SVG documents.</p>
 <ul>
 <li>The <strong>SvgDrawingCanvas</strong> is specilized for rendering drawings generated by the SharpVectors, and therefore will not be useful for rendering other WPF drawings.
-The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html#SharpVectors_Runtime_SvgDrawingCanvas_RenderDiagrams_System_Windows_Media_DrawingGroup_">SvgDrawingCanvas.RenderDiagrams</a> methods takes the WPF drawing generated from the conversion of the SVG documents and render it for viewing.</li>
+The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.RenderDiagrams.html#SharpVectors_Runtime_SvgDrawingCanvas_RenderDiagrams_System_Windows_Media_DrawingGroup_">SvgDrawingCanvas.RenderDiagrams</a> methods takes the WPF drawing generated from the conversion of the SVG documents and render it for viewing.</li>
 <li>The <strong>SvgDrawingCanvas</strong> itself does not handle the processing or conversion of the SVG documents to the WPF drawings. This is generic so that the serialized XAML format of the generated drawings can also be reloaded or deserialized and rendered by the <strong>SvgDrawingCanvas</strong> class.
-The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html#SharpVectors_Runtime_SvgDrawingCanvas_LoadDiagrams_System_String_">SvgDrawingCanvas.LoadDiagrams</a> method takes the serialized XAML file, deserialized it to the corresponding WPF drawing and renders it.</li>
+The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.LoadDiagrams.html#SharpVectors_Runtime_SvgDrawingCanvas_LoadDiagrams_System_String_">SvgDrawingCanvas.LoadDiagrams</a> method takes the serialized XAML file, deserialized it to the corresponding WPF drawing and renders it.</li>
 <li>The <a class="xref" href="../api/SharpVectors.Converters.SvgCanvas.html">SvgCanvas</a> and <a class="xref" href="../api/SharpVectors.Converters.SvgViewbox.html">SvgViewbox</a> controls extends and embeds <strong>SvgDrawingCanvas</strong> respectively. These controls handle the conversion of the SVG documents to WPF drawings and uses the <strong>SvgDrawingCanvas</strong> to render.</li>
 <li>Controls deriving from the <strong>SvgDrawingCanvas</strong> class instead of the WPF canvas control will support interactivity when added to future release of the drawing canvas.</li>
 </ul>
@@ -253,12 +208,12 @@ The <strong>Source</strong> property is the original name, and may be removed in
 <p>The SVG controls convert SVG documents to WPF drawings and controls the settings or options (<a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a>) used by the conversion process. Therefore, the controls expose the conversion settings or options through properties for customization.
 The current settings or options are shown below:</p>
 <ul>
-<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_OptimizePath">WpfDrawingSettings.OptimizePath</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether the path geometry is optimized using <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.streamgeometry">StreamGeometry</a>.</li>
-<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_TextAsGeometry">WpfDrawingSettings.TextAsGeometry</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether the text elements are rendered as path geometry.</li>
-<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IncludeRuntime">WpfDrawingSettings.IncludeRuntime</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to include SharpVectors specific markup extensions in the generated WPF objects.</li>
-<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IgnoreRootViewbox">WpfDrawingSettings.IgnoreRootViewbox</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to turn off viewbox at the root of the drawing.</li>
-<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxSize">WpfDrawingSettings.EnsureViewboxSize</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to preserve the original viewbox size when saving images.</li>
-<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxPosition">WpfDrawingSettings.EnsureViewboxPosition</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to apply a translate transform to the viewbox to ensure it is visible when rendered.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.OptimizePath.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_OptimizePath">WpfDrawingSettings.OptimizePath</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether the path geometry is optimized using <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.streamgeometry">StreamGeometry</a>.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.TextAsGeometry.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_TextAsGeometry">WpfDrawingSettings.TextAsGeometry</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether the text elements are rendered as path geometry.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.IncludeRuntime.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IncludeRuntime">WpfDrawingSettings.IncludeRuntime</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to include SharpVectors specific markup extensions in the generated WPF objects.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.IgnoreRootViewbox.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IgnoreRootViewbox">WpfDrawingSettings.IgnoreRootViewbox</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to turn off viewbox at the root of the drawing.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxSize.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxSize">WpfDrawingSettings.EnsureViewboxSize</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to preserve the original viewbox size when saving images.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxPosition.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxPosition">WpfDrawingSettings.EnsureViewboxPosition</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to apply a translate transform to the viewbox to ensure it is visible when rendered.</li>
 </ul>
 <h3 id="svg-progress-message-options">SVG Progress Message Options</h3>
 <p>Loading and rendering a large SVG documents requires seconds to few minutes. The SVG controls provide a means to display a progress message to the user to indicate a long process in progress. The text of the progress message and its styling is controlled by the following properties:</p>
@@ -467,26 +422,28 @@ The <strong>SvgViewbox</strong> control is a WPF <a class="xref" href="https://l
 <p>The image of the  <strong>SvgCanvasSample</strong> sample is shown below:</p>
 <p><img src="../images/svgviewbox.png" alt="SvgCanvasSample"></p>
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx/articles/controls.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

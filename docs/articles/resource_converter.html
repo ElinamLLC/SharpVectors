@@ -1,137 +1,92 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>ResourceSvgConverter | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="ResourceSvgConverter | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>ResourceSvgConverter | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ResourceSvgConverter | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx/articles/resource_converter.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column Conceptual">
-
-
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
-
-                        <article class="content wrap hide-when-search" id="_content" data-uid="topic_resource_converter">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
+        <article data-uid="topic_resource_converter">
 <h1 id="resource-svg-converter---resourcesvgconverter">Resource SVG Converter - ResourceSvgConverter</h1>
 
 <p>The <strong><a class="xref" href="../api/SharpVectors.Converters.ResourceSvgConverter.html">ResourceSvgConverter</a></strong> converter class takes multiple files and directories as input and outputs a
@@ -142,7 +97,7 @@ It is the most recent SharpVector SVG converter and adds extension features that
 <div class="NOTE">
 <h5>Note</h5>
 <p>Currently, the input is restricted to local or network files and directories.</p>
-<p>The output is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a> or local or network file or one of the following</p>
+<p>The output is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a> or local or network file or one of the following</p>
 <ul>
 <li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>: A stream object created by the user.</li>
 <li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a>: A text writer object created by the user.</li>
@@ -154,17 +109,17 @@ It is the most recent SharpVector SVG converter and adds extension features that
 <p><img src="../images/resource_settings.png" alt="resource_settings"></p>
 <p>The following are the properties exposed by the resource options to customize the output resource dictionary XAML:</p>
 <ul>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode">ResourceMode</a></strong>: An enumeration specifying the type of the resource object;
-<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode">ResourceMode</a></strong>: An enumeration specifying the type of the resource object;
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.<div class="tabGroup" id="tabgroup_1">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">DrawingGroup Resource</a>
+<a href="#tabpanel_1_xaml1" role="tab" aria-controls="tabpanel_1_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">DrawingGroup Resource</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S_xaml2" role="tab" aria-controls="tabpanel_bHGHmlrG6S_xaml2" data-tab="xaml2" tabindex="-1">DrawingImage Resource</a>
+<a href="#tabpanel_1_xaml2" role="tab" aria-controls="tabpanel_1_xaml2" data-tab="xaml2" tabindex="-1">DrawingImage Resource</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S_xaml1" role="tabpanel" data-tab="xaml1">
+<section id="tabpanel_1_xaml1" role="tabpanel" data-tab="xaml1">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot; 
@@ -174,7 +129,7 @@ It is the most recent SharpVector SVG converter and adds extension features that
 &lt;/ResourceDictionary&gt;
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_1_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot; 
@@ -190,33 +145,33 @@ It is the most recent SharpVector SVG converter and adds extension features that
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze">ResourceFreeze</a></strong>: Makes the freezable resource object unmodifiable and sets its <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.isfrozen#system-windows-freezable-isfrozen">IsFrozen</a> property to <code>true</code>.
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceFreeze.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze">ResourceFreeze</a></strong>: Makes the freezable resource object unmodifiable and sets its <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.isfrozen">IsFrozen</a> property to <code>true</code>.
 To freeze a resource object declared in markup, the <code>PresentationOptions:Freeze</code> attribute is used, as shown above as <code>po.Freeze</code>, and the <code>xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot;</code> namespace is added.
 <div class="NOTE">
 <h5>Note</h5>
 <p>If this property is set to <code>true</code>, it is admisable to set the <code>ResourceAccessType</code> type below to <code>Static</code>.</p>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision">NumericPrecision</a></strong>: This specifies numeric precision or number of decimal places for the floating number. The default is <code>4</code>, in complaince to the SVG specifications. Setting this to <code>-1</code> will disable this property.</li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat">ColorNameFormat</a></strong>: This determines the key name of color objects, if both <strong>BindToResources</strong>  and <strong>BindToColors</strong> properties are enabled. The default is <code>Color{0}</code>.</li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat">BrushNameFormat</a></strong>: This determines the key name of brush objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Brush{0}</code>.
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.IndentSpaces.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.NumericPrecision.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision">NumericPrecision</a></strong>: This specifies numeric precision or number of decimal places for the floating number. The default is <code>4</code>, in complaince to the SVG specifications. Setting this to <code>-1</code> will disable this property.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat">ColorNameFormat</a></strong>: This determines the key name of color objects, if both <strong>BindToResources</strong>  and <strong>BindToColors</strong> properties are enabled. The default is <code>Color{0}</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BrushNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat">BrushNameFormat</a></strong>: This determines the key name of brush objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Brush{0}</code>.
 <div class="NOTE">
 <h5>Note</h5>
 <p>Only solid color brushes are supported and extracted from the drawings.</p>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat">PenNameFormat</a></strong>:  This determines the key name of pen or stroke objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Pen{0}</code></li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources">BindToResources</a></strong>: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-1">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.PenNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat">PenNameFormat</a></strong>:  This determines the key name of pen or stroke objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Pen{0}</code></li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToResources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources">BindToResources</a></strong>: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_2">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-1_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S-1_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToResources == true</a>
+<a href="#tabpanel_2_xaml1" role="tab" aria-controls="tabpanel_2_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToResources == true</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-1_xaml2" role="tab" aria-controls="tabpanel_bHGHmlrG6S-1_xaml2" data-tab="xaml2" tabindex="-1">BindToResources == false</a>
+<a href="#tabpanel_2_xaml2" role="tab" aria-controls="tabpanel_2_xaml2" data-tab="xaml2" tabindex="-1">BindToResources == false</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-1_xaml1" role="tabpanel" data-tab="xaml1">
+<section id="tabpanel_2_xaml1" role="tabpanel" data-tab="xaml1">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -236,7 +191,7 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 &lt;/ResourceDictionary&gt;
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-1_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_2_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -259,16 +214,16 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToColors">BindToColors</a></strong>: This determines if the color object of brushes is extracted. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-2">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToColors.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToColors">BindToColors</a></strong>: This determines if the color object of brushes is extracted. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_3">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-2_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S-2_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToColors == true</a>
+<a href="#tabpanel_3_xaml1" role="tab" aria-controls="tabpanel_3_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToColors == true</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-2_xaml2" role="tab" aria-controls="tabpanel_bHGHmlrG6S-2_xaml2" data-tab="xaml2" tabindex="-1">BindToColors == false</a>
+<a href="#tabpanel_3_xaml2" role="tab" aria-controls="tabpanel_3_xaml2" data-tab="xaml2" tabindex="-1">BindToColors == false</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-2_xaml1" role="tabpanel" data-tab="xaml1">
+<section id="tabpanel_3_xaml1" role="tabpanel" data-tab="xaml1">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -288,7 +243,7 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 &lt;/ResourceDictionary&gt;
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-2_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_3_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -308,16 +263,16 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindPenToBrushes">BindPenToBrushes</a></strong>: This determines if solid color brushes of pen/stroke is extracted. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-3">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BindPenToBrushes.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindPenToBrushes">BindPenToBrushes</a></strong>: This determines if solid color brushes of pen/stroke is extracted. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_4">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-3_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S-3_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindPenToBrushes == true</a>
+<a href="#tabpanel_4_xaml1" role="tab" aria-controls="tabpanel_4_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindPenToBrushes == true</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-3_xaml2" role="tab" aria-controls="tabpanel_bHGHmlrG6S-3_xaml2" data-tab="xaml2" tabindex="-1">BindPenToBrushes == false</a>
+<a href="#tabpanel_4_xaml2" role="tab" aria-controls="tabpanel_4_xaml2" data-tab="xaml2" tabindex="-1">BindPenToBrushes == false</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-3_xaml1" role="tabpanel" data-tab="xaml1">
+<section id="tabpanel_4_xaml1" role="tabpanel" data-tab="xaml1">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -337,7 +292,7 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 &lt;/ResourceDictionary&gt;
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-3_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_4_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -362,16 +317,16 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 <p>If <strong>BindToResources</strong> property is set to <code>false</code>, then <strong>BindToColors</strong> and <strong>BindPenToBrushes</strong> values have no effect.</p>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a></strong>: This specifies whether a zero-based numbering is applied to the key names. The default is <code>false</code>.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-4">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a></strong>: This specifies whether a zero-based numbering is applied to the key names. The default is <code>false</code>.<div class="tabGroup" id="tabgroup_5">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-4_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S-4_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">UseResourceIndex == true</a>
+<a href="#tabpanel_5_xaml1" role="tab" aria-controls="tabpanel_5_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">UseResourceIndex == true</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-4_xaml2" role="tab" aria-controls="tabpanel_bHGHmlrG6S-4_xaml2" data-tab="xaml2" tabindex="-1">UseResourceIndex == false</a>
+<a href="#tabpanel_5_xaml2" role="tab" aria-controls="tabpanel_5_xaml2" data-tab="xaml2" tabindex="-1">UseResourceIndex == false</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-4_xaml1" role="tabpanel" data-tab="xaml1">
+<section id="tabpanel_5_xaml1" role="tabpanel" data-tab="xaml1">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -391,7 +346,7 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 &lt;/ResourceDictionary&gt;
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-4_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_5_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -413,19 +368,19 @@ To freeze a resource object declared in markup, the <code>PresentationOptions:Fr
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorPalette">ColorPalette</a></strong>: This is a dictionary of color to resource key, specifying a predefined resource keys for the colors.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-5">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorPalette.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorPalette">ColorPalette</a></strong>: This is a dictionary of color to resource key, specifying a predefined resource keys for the colors.<div class="tabGroup" id="tabgroup_6">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-5_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-5_csharp" data-tab="csharp" tabindex="0" aria-selected="true">Color Palette C#</a>
+<a href="#tabpanel_6_csharp" role="tab" aria-controls="tabpanel_6_csharp" data-tab="csharp" tabindex="0" aria-selected="true">Color Palette C#</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-5_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-5_vb" data-tab="vb" tabindex="-1">Color Palette VB.NET</a>
+<a href="#tabpanel_6_vb" role="tab" aria-controls="tabpanel_6_vb" data-tab="vb" tabindex="-1">Color Palette VB.NET</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-5_xml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-5_xml" data-tab="xml" tabindex="-1">XAML Output</a>
+<a href="#tabpanel_6_xaml" role="tab" aria-controls="tabpanel_6_xaml" data-tab="xaml" tabindex="-1">XAML Output</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-5_csharp" role="tabpanel" data-tab="csharp">
+<section id="tabpanel_6_csharp" role="tabpanel" data-tab="csharp">
 
 <pre><code class="lang-csharp">// Create the resource settings or options
 var resourceSettings = new WpfResourceSettings() {
@@ -444,7 +399,7 @@ var converter = new ResourceSvgConverter(resourceSettings);
 var xamlText = converter.Convert();
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-5_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_6_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-vb">' Create the resource settings or options
 Dim resourceSettings = New WpfResourceSettings() With {
@@ -463,7 +418,7 @@ Dim converter = New ResourceSvgConverter(resourceSettings)
 Dim xamlText = converter.Convert()
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-5_xml" role="tabpanel" data-tab="xml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_6_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -485,18 +440,18 @@ Dim xamlText = converter.Convert()
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Sources">Sources</a></strong>: Gets an enumeration of all the SVG sources to be converted to the resource dictionary.</li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_SourceCount">SourceCount</a></strong>: Gets the count of the SVG sources to be converted to the resource dictionary.</li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceAccess">ResourceAccess</a></strong>: This specifies the type of the resource access, <strong>DynamicResource</strong> or <strong>StaticResource</strong>, to be applied to the resource objects.<div class="tabGroup" id="tabgroup_bHGHmlrG6S-6">
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.Sources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Sources">Sources</a></strong>: Gets an enumeration of all the SVG sources to be converted to the resource dictionary.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.SourceCount.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_SourceCount">SourceCount</a></strong>: Gets the count of the SVG sources to be converted to the resource dictionary.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceAccess.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceAccess">ResourceAccess</a></strong>: This specifies the type of the resource access, <strong>DynamicResource</strong> or <strong>StaticResource</strong>, to be applied to the resource objects.<div class="tabGroup" id="tabgroup_7">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-6_xaml1" role="tab" aria-controls="tabpanel_bHGHmlrG6S-6_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">ResourceAccessType.Dynamic</a>
+<a href="#tabpanel_7_xaml1" role="tab" aria-controls="tabpanel_7_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">ResourceAccessType.Dynamic</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-6_xaml2" role="tab" aria-controls="tabpanel_bHGHmlrG6S-6_xaml2" data-tab="xaml2" tabindex="-1">ResourceAccessType.Static</a>
+<a href="#tabpanel_7_xaml2" role="tab" aria-controls="tabpanel_7_xaml2" data-tab="xaml2" tabindex="-1">ResourceAccessType.Static</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-6_xaml1" role="tabpanel" data-tab="xaml1">
+<section id="tabpanel_7_xaml1" role="tabpanel" data-tab="xaml1">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -516,7 +471,7 @@ Dim xamlText = converter.Convert()
 &lt;/ResourceDictionary&gt;
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-6_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_7_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -538,7 +493,7 @@ Dim xamlText = converter.Convert()
 </section>
 </div>
 </li>
-<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType">ResourceResolverType</a></strong>: Get a value specifying the current type of the resource object key resolver,
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceResolverType.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType">ResourceResolverType</a></strong>: Get a value specifying the current type of the resource object key resolver,
 which is implemented through the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface.
 This applies to the main resource objects; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> (and not the color, brush or pen objects).
 It returns <a class="xref" href="../api/SharpVectors.Renderers.ResourceKeyResolverType.html#SharpVectors_Renderers_ResourceKeyResolverType_None">None</a>, if no resource key resolver is attached, in which case the default resolver will be used.</li>
@@ -563,19 +518,19 @@ It returns <a class="xref" href="../api/SharpVectors.Renderers.ResourceKeyResolv
 </table>
 <p>The following sample code uses the default resource key resolver, or <a class="xref" href="../api/SharpVectors.Renderers.ResourceKeyResolver.html">ResourceKeyResolver</a>, to resolve the keys. If not specified, the keys are
 simply the SVG file names without the file extension.</p>
-<div class="tabGroup" id="tabgroup_bHGHmlrG6S-7">
+<div class="tabGroup" id="tabgroup_8">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-7_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-7_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+<a href="#tabpanel_8_csharp" role="tab" aria-controls="tabpanel_8_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-7_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-7_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+<a href="#tabpanel_8_vb" role="tab" aria-controls="tabpanel_8_vb" data-tab="vb" tabindex="-1">VB.NET</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-7_xml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-7_xml" data-tab="xml" tabindex="-1">XAML</a>
+<a href="#tabpanel_8_xaml" role="tab" aria-controls="tabpanel_8_xaml" data-tab="xaml" tabindex="-1">XAML</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-7_csharp" role="tabpanel" data-tab="csharp">
+<section id="tabpanel_8_csharp" role="tabpanel" data-tab="csharp">
 
 <pre><code class="lang-csharp">using System.Windows;
 using System.Windows.Media;
@@ -612,7 +567,7 @@ namespace SharpVectors.Test.Sample
 }
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-7_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_8_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-vb">Imports System.Windows.Media
 
@@ -644,7 +599,7 @@ Namespace SharpVectors.Test.Sample
 End Namespace
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-7_xml" role="tabpanel" data-tab="xml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_8_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -691,23 +646,23 @@ End Namespace
 <p>The default resource key resolver supports simple string substitution template to customize the resource keys with the following two tags</p>
 <ul>
 <li><strong>${name}</strong>: Representing the SVG file name without the extension.</li>
-<li><strong>${number}</strong>: Representing the resource number or index, depending on the value of the <a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a> property.</li>
+<li><strong>${number}</strong>: Representing the resource number or index, depending on the value of the <a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a> property.</li>
 </ul>
 <p>For instance, using a key format of <strong>icon_${name}</strong>, an SVG file with the name <code>about.svg</code> will be have a resource key: <strong>icon_about</strong>.</p>
 <p>The following sample code illustrates how the customized resource key format is applied with the default resolver, and the resulting XAML output:</p>
-<div class="tabGroup" id="tabgroup_bHGHmlrG6S-8">
+<div class="tabGroup" id="tabgroup_9">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-8_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-8_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+<a href="#tabpanel_9_csharp" role="tab" aria-controls="tabpanel_9_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-8_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-8_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+<a href="#tabpanel_9_vb" role="tab" aria-controls="tabpanel_9_vb" data-tab="vb" tabindex="-1">VB.NET</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-8_xml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-8_xml" data-tab="xml" tabindex="-1">XAML</a>
+<a href="#tabpanel_9_xaml" role="tab" aria-controls="tabpanel_9_xaml" data-tab="xaml" tabindex="-1">XAML</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-8_csharp" role="tabpanel" data-tab="csharp">
+<section id="tabpanel_9_csharp" role="tabpanel" data-tab="csharp">
 
 <pre><code class="lang-csharp">using System.Windows;
 using System.Windows.Media;
@@ -748,7 +703,7 @@ namespace SharpVectors.Test.Sample
 }
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-8_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_9_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-vb">Imports System.Windows.Media
 
@@ -784,7 +739,7 @@ Namespace SharpVectors.Test.Sample
 End Namespace
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-8_xml" role="tabpanel" data-tab="xml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_9_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -831,19 +786,19 @@ End Namespace
 <p>For the cases where the resource keys are already defined, you can use the dictionary resolver, or <a class="xref" href="../api/SharpVectors.Renderers.DictionaryKeyResolver.html">DictionaryKeyResolver</a>, which maps the
 SVG file names without the extension to the predefined keys.</p>
 <p>The following sample code uses the dictionary resource key resolver, or <a class="xref" href="../api/SharpVectors.Renderers.DictionaryKeyResolver.html">DictionaryKeyResolver</a>, to resolve the keys of the previous SVG sample files.</p>
-<div class="tabGroup" id="tabgroup_bHGHmlrG6S-9">
+<div class="tabGroup" id="tabgroup_10">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-9_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-9_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+<a href="#tabpanel_10_csharp" role="tab" aria-controls="tabpanel_10_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-9_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-9_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+<a href="#tabpanel_10_vb" role="tab" aria-controls="tabpanel_10_vb" data-tab="vb" tabindex="-1">VB.NET</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-9_xml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-9_xml" data-tab="xml" tabindex="-1">XAML</a>
+<a href="#tabpanel_10_xaml" role="tab" aria-controls="tabpanel_10_xaml" data-tab="xaml" tabindex="-1">XAML</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-9_csharp" role="tabpanel" data-tab="csharp">
+<section id="tabpanel_10_csharp" role="tabpanel" data-tab="csharp">
 
 <pre><code class="lang-csharp">using System;
 using System.Collections.Generic;
@@ -893,7 +848,7 @@ namespace SharpVectors.Test.Sample
 }
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-9_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_10_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-vb">Imports System
 Imports System.Collections.Generic
@@ -937,7 +892,7 @@ Namespace SharpVectors.Test.Sample
 End Namespace
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-9_xml" role="tabpanel" data-tab="xml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_10_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -982,7 +937,7 @@ End Namespace
 </div>
 <h3 id="resourcekeyresolvertype---codesnippet">ResourceKeyResolverType - CodeSnippet</h3>
 <p>In applications you need to use a code snippet to implement the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface, we provider the code snippet resolver,
-or <a class="xref" href="../api/SharpVectors.Renderers.CodeSnippetKeyResolver.html">CodeSnippetKeyResolver</a>, which uses <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.codedom.compiler.codedomprovider">CodeDomProvider</a> to compile the implementation in memory
+or <a class="xref" href="../api/SharpVectors.Renderers.CodeSnippetKeyResolver.html">CodeSnippetKeyResolver</a>, which uses @System.CodeDom.Compiler.CodeDomProvider to compile the implementation in memory
 and use it to resolve the keys. This is used to reduce dependencies but limits the lanagauge feature supports to .NET 4.0.</p>
 <p>For the code snippet, the following conditions are required</p>
 <ul>
@@ -991,114 +946,6 @@ and use it to resolve the keys. This is used to reduce dependencies but limits t
 </ul>
 <p>The following sample code uses the snippet resource key resolver, or <a class="xref" href="../api/SharpVectors.Renderers.CodeSnippetKeyResolver.html">CodeSnippetKeyResolver</a>, to resolve the keys. To reduce the code length
 for the screen, we will assume the snippet is stored in a file, and load it from the file.</p>
-<p>The test code snippet (C# code) will convert the specified SVG file name to the lower camel case naming format as the resource key.</p>
-<div class="tabGroup" id="tabgroup_bHGHmlrG6S-10">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-10_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-10_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-10_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-10_vb" data-tab="vb" tabindex="-1">VB.NET</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-10_snippet" role="tab" aria-controls="tabpanel_bHGHmlrG6S-10_snippet" data-tab="snippet" tabindex="-1">Snippet</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-10_xaml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-10_xaml" data-tab="xaml" tabindex="-1">XAML</a>
-</li>
-</ul>
-<section id="tabpanel_bHGHmlrG6S-10_csharp" role="tabpanel" data-tab="csharp">
-
-<pre><code class="lang-csharp">using System.Windows;
-using System.Windows.Media;
-
-using SharpVectors.Renderers;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
-
-namespace SharpVectors.Test.Sample
-{
-    public class ResourceSvgConverterSample
-    {
-        private WpfResourceSettings _resourceSettings;
-
-        public ResourceSvgConverterSample(string snippetFile)
-        {
-            // Create the resource settings or options
-            _resourceSettings = new WpfResourceSettings();
-            _resourceSettings.ResourceFreeze = false; // Do not freeze
-
-            // Get the code snippet, here assumed from a file
-            string codeSnippet = string.Empty;
-            using (var reader = new System.IO.StreamReader(snippetFile))
-            {
-                codeSnippet = reader.ReadToEnd();
-            }
-
-            // Initialize the code snippet key resolver and register it
-            var resolver = new CodeSnippetKeyResolver(codeSnippet, &quot;cs&quot;);
-            _resourceSettings.RegisterResolver(resolver);
-        }
-
-        public string Convert(string svgDir)
-        {
-            // Add a directory as SVG source
-            _resourceSettings.AddSource(svgDir);
-
-            // Create the resource converter
-            var converter = new ResourceSvgConverter(_resourceSettings);
-
-            // Perform the conversion to ResourceDictionary XAML
-            return converter.Convert();
-        }
-    }
-}
-</code></pre>
-</section>
-<section id="tabpanel_bHGHmlrG6S-10_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-vb">Imports System.Windows.Media
-
-Imports SharpVectors.Renderers
-Imports SharpVectors.Converters
-Imports SharpVectors.Renderers.Wpf
-
-Namespace SharpVectors.Test.Sample
-    Public Class ResourceSvgConverterSample
-        Private _resourceSettings As WpfResourceSettings
-
-        Public Sub New(ByVal snippetFile As String)
-            ' Create the resource settings or options
-            _resourceSettings = New WpfResourceSettings()
-            _resourceSettings.ResourceFreeze = False ' Do not freeze
-
-            ' Get the code snippet, here assumed from a file
-            Dim codeSnippet = String.Empty
-            Using reader = New StreamReader(snippetFile)
-                codeSnippet = reader.ReadToEnd()
-            End Using
-
-            ' Initialize the code snippet key resolver and register it
-            Dim resolver = New CodeSnippetKeyResolver(codeSnippet, &quot;cs&quot;)
-            _resourceSettings.RegisterResolver(resolver)
-        End Sub
-
-        Public Function Convert(ByVal svgDir As String) As String
-            ' Add a directory as SVG source
-            _resourceSettings.AddSource(svgDir)
-
-            ' Create the resource converter
-            Dim converter = New ResourceSvgConverter(_resourceSettings)
-
-            ' Perform the conversion to ResourceDictionary XAML
-            Return converter.Convert()
-        End Function
-    End Class
-End Namespace
-</code></pre>
-</section>
-<section id="tabpanel_bHGHmlrG6S-10_snippet" role="tabpanel" data-tab="snippet" aria-hidden="true" hidden="hidden">
-
 <pre><code class="lang-csharp">using System;
 using System.Xml;
 using System.Windows;
@@ -1180,8 +1027,110 @@ namespace SharpVectors.Renderers {
     }
 }
 </code></pre>
+<p>The test code snippet (C# code) will convert the specified SVG file name to the lower camel case naming format as the resource key.</p>
+<div class="tabGroup" id="tabgroup_11">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_11_csharp" role="tab" aria-controls="tabpanel_11_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_11_vb" role="tab" aria-controls="tabpanel_11_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_11_xaml" role="tab" aria-controls="tabpanel_11_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_11_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample(string snippetFile)
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Get the code snippet, here assumed from a file
+            string codeSnippet = string.Empty;
+            using (var reader = new System.IO.StreamReader(snippetFile))
+            {
+                codeSnippet = reader.ReadToEnd();
+            }
+
+            // Initialize the code snippet key resolver and register it
+            var resolver = new CodeSnippetKeyResolver(codeSnippet, &quot;cs&quot;);
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-10_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_11_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New(ByVal snippetFile As String)
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Get the code snippet, here assumed from a file
+            Dim codeSnippet = String.Empty
+            Using reader = New StreamReader(snippetFile)
+                codeSnippet = reader.ReadToEnd()
+            End Using
+
+            ' Initialize the code snippet key resolver and register it
+            Dim resolver = New CodeSnippetKeyResolver(codeSnippet, &quot;cs&quot;)
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_11_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -1227,100 +1176,6 @@ namespace SharpVectors.Renderers {
 <h3 id="resourcekeyresolvertype---custom">ResourceKeyResolverType - Custom</h3>
 <p>You can create a custom resource key resolver by implementing the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface.</p>
 <p>The following sample code implements a resource key resolver that will convert the specified SVG file name to the upper camel case naming format as the resource key.</p>
-<div class="tabGroup" id="tabgroup_bHGHmlrG6S-11">
-<ul role="tablist">
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-11_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-11_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-11_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-11_vb" data-tab="vb" tabindex="-1">VB.NET</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-11_snippet" role="tab" aria-controls="tabpanel_bHGHmlrG6S-11_snippet" data-tab="snippet" tabindex="-1">Custom</a>
-</li>
-<li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-11_xaml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-11_xaml" data-tab="xaml" tabindex="-1">XAML</a>
-</li>
-</ul>
-<section id="tabpanel_bHGHmlrG6S-11_csharp" role="tabpanel" data-tab="csharp">
-
-<pre><code class="lang-csharp">using System.Windows;
-using System.Windows.Media;
-
-using SharpVectors.Renderers;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
-
-namespace SharpVectors.Test.Sample
-{
-    public class ResourceSvgConverterSample
-    {
-        private WpfResourceSettings _resourceSettings;
-
-        public ResourceSvgConverterSample()
-        {
-            // Create the resource settings or options
-            _resourceSettings = new WpfResourceSettings();
-            _resourceSettings.ResourceFreeze = false; // Do not freeze
-
-            // Initialize the custom key resolver and register it
-            var resolver = new CustomResourceKeyResolver();
-            _resourceSettings.RegisterResolver(resolver);
-        }
-
-        public string Convert(string svgDir)
-        {
-            // Add a directory as SVG source
-            _resourceSettings.AddSource(svgDir);
-
-            // Create the resource converter
-            var converter = new ResourceSvgConverter(_resourceSettings);
-
-            // Perform the conversion to ResourceDictionary XAML
-            return converter.Convert();
-        }
-    }
-}
-</code></pre>
-</section>
-<section id="tabpanel_bHGHmlrG6S-11_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
-
-<pre><code class="lang-vb">Imports System.Windows.Media
-
-Imports SharpVectors.Renderers
-Imports SharpVectors.Converters
-Imports SharpVectors.Renderers.Wpf
-
-Namespace SharpVectors.Test.Sample
-    Public Class ResourceSvgConverterSample
-        Private _resourceSettings As WpfResourceSettings
-
-        Public Sub New()
-            ' Create the resource settings or options
-            _resourceSettings = New WpfResourceSettings()
-            _resourceSettings.ResourceFreeze = False ' Do not freeze
-
-            ' Initialize the custom key resolver and register it
-            Dim resolver = New CustomResourceKeyResolver()
-            _resourceSettings.RegisterResolver(resolver)
-        End Sub
-
-        Public Function Convert(ByVal svgDir As String) As String
-            ' Add a directory as SVG source
-            _resourceSettings.AddSource(svgDir)
-
-            ' Create the resource converter
-            Dim converter = New ResourceSvgConverter(_resourceSettings)
-
-            ' Perform the conversion to ResourceDictionary XAML
-            Return converter.Convert()
-        End Function
-    End Class
-End Namespace
-</code></pre>
-</section>
-<section id="tabpanel_bHGHmlrG6S-11_snippet" role="tabpanel" data-tab="snippet" aria-hidden="true" hidden="hidden">
-
 <pre><code class="lang-cs">using System;
 using System.Xml;
 
@@ -1407,8 +1262,97 @@ namespace SharpVectors.Test.Sample {
     }
 }
 </code></pre>
+<p>The following illustrate how to use the custom resource key resolver.</p>
+<div class="tabGroup" id="tabgroup_12">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_12_csharp" role="tab" aria-controls="tabpanel_12_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_12_vb" role="tab" aria-controls="tabpanel_12_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_12_xaml" role="tab" aria-controls="tabpanel_12_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_12_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Initialize the custom key resolver and register it
+            var resolver = new CustomResourceKeyResolver();
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-11_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_12_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Initialize the custom key resolver and register it
+            Dim resolver = New CustomResourceKeyResolver()
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_12_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
@@ -1455,19 +1399,19 @@ namespace SharpVectors.Test.Sample {
 <p>The resource settings,  <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></strong> object can be saved to file in an XML format, or initialized from an XML format file.</p>
 <p>You can, therefore, create a resource dictionary converter options for a project and share with other developers or projects. The following code defines a sample resource dictionary converter
 options and serializes <a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a> object to XML.</p>
-<div class="tabGroup" id="tabgroup_bHGHmlrG6S-12">
+<div class="tabGroup" id="tabgroup_13">
 <ul role="tablist">
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-12_csharp" role="tab" aria-controls="tabpanel_bHGHmlrG6S-12_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+<a href="#tabpanel_13_csharp" role="tab" aria-controls="tabpanel_13_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-12_vb" role="tab" aria-controls="tabpanel_bHGHmlrG6S-12_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+<a href="#tabpanel_13_vb" role="tab" aria-controls="tabpanel_13_vb" data-tab="vb" tabindex="-1">VB.NET</a>
 </li>
 <li role="presentation">
-<a href="#tabpanel_bHGHmlrG6S-12_xaml" role="tab" aria-controls="tabpanel_bHGHmlrG6S-12_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+<a href="#tabpanel_13_xaml" role="tab" aria-controls="tabpanel_13_xaml" data-tab="xaml" tabindex="-1">XAML</a>
 </li>
 </ul>
-<section id="tabpanel_bHGHmlrG6S-12_csharp" role="tabpanel" data-tab="csharp">
+<section id="tabpanel_13_csharp" role="tabpanel" data-tab="csharp">
 
 <pre><code class="lang-csharp">using System.Collections.Generic;
 using System.Windows.Media;
@@ -1520,7 +1464,7 @@ namespace SharpVectors.Test.Sample
 }
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-12_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_13_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-vb">Imports System.Collections.Generic
 Imports System.Windows.Media
@@ -1568,7 +1512,7 @@ Namespace SharpVectors.Test.Sample
 End Namespace
 </code></pre>
 </section>
-<section id="tabpanel_bHGHmlrG6S-12_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+<section id="tabpanel_13_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
 
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
 &lt;resourceSettings version=&quot;1.0.0&quot;&gt;
@@ -1614,26 +1558,28 @@ End Namespace
 </section>
 </div>
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx/articles/resource_converter.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

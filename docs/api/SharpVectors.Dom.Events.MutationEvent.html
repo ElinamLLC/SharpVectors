@@ -1,534 +1,325 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class MutationEvent
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class MutationEvent
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class MutationEvent
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MutationEvent
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Events_MutationEvent.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Events.MutationEvent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Dom.Events.MutationEvent">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Events.MutationEvent">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Events_MutationEvent" data-uid="SharpVectors.Dom.Events.MutationEvent" class="text-break">Class MutationEvent
+  <h1 id="SharpVectors_Dom_Events_MutationEvent" data-uid="SharpVectors.Dom.Events.MutationEvent" class="text-break">
+    Class MutationEvent
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorDom/Events/MutationEvent.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>Summary description for MutationEvent.</p>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Events.html">Events</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Dom.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Summary description for MutationEvent.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="SharpVectors.Dom.Events.Event.html">Event</a></div>
-    <div class="level2"><span class="xref">MutationEvent</span></div>
-      <div class="level3"><a class="xref" href="SharpVectors.Dom.Events.MutationNameEvent.html">MutationNameEvent</a></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a></div>
-    <div><a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event__eventType">Event._eventType</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_Type">Event.Type</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_Target">Event.Target</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_CurrentTarget">Event.CurrentTarget</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_EventPhase">Event.EventPhase</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_Bubbles">Event.Bubbles</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_Cancelable">Event.Cancelable</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_TimeStamp">Event.TimeStamp</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_NamespaceUri">Event.NamespaceUri</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_IsCustom">Event.IsCustom</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_IsDefaultPrevented">Event.IsDefaultPrevented</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_StopPropagation">Event.StopPropagation()</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_PreventDefault">Event.PreventDefault()</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_InitEvent_System_String_System_Boolean_System_Boolean_">Event.InitEvent(String, Boolean, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_InitEventNs_System_String_System_String_System_Boolean_System_Boolean_">Event.InitEventNs(String, String, Boolean, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Events.Event.html#SharpVectors_Dom_Events_Event_StopImmediatePropagation">Event.StopImmediatePropagation()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.Events.html">SharpVectors.Dom.Events</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Dom.dll</h6>
-  <h5 id="SharpVectors_Dom_Events_MutationEvent_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class MutationEvent : Event, IMutationEvent, IEvent</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent__ctor_" data-uid="SharpVectors.Dom.Events.MutationEvent.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent__ctor" data-uid="SharpVectors.Dom.Events.MutationEvent.#ctor">MutationEvent()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MutationEvent()</code></pre>
-  </div>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_AttrChange_" data-uid="SharpVectors.Dom.Events.MutationEvent.AttrChange*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_AttrChange" data-uid="SharpVectors.Dom.Events.MutationEvent.AttrChange">AttrChange</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public AttrChangeType AttrChange { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html">AttrChangeType</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_AttrName_" data-uid="SharpVectors.Dom.Events.MutationEvent.AttrName*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_AttrName" data-uid="SharpVectors.Dom.Events.MutationEvent.AttrName">AttrName</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string AttrName { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_NewValue_" data-uid="SharpVectors.Dom.Events.MutationEvent.NewValue*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_NewValue" data-uid="SharpVectors.Dom.Events.MutationEvent.NewValue">NewValue</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string NewValue { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_PrevValue_" data-uid="SharpVectors.Dom.Events.MutationEvent.PrevValue*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_PrevValue" data-uid="SharpVectors.Dom.Events.MutationEvent.PrevValue">PrevValue</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string PrevValue { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_RelatedNode_" data-uid="SharpVectors.Dom.Events.MutationEvent.RelatedNode*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_RelatedNode" data-uid="SharpVectors.Dom.Events.MutationEvent.RelatedNode">RelatedNode</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public INode RelatedNode { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_InitMutationEvent_" data-uid="SharpVectors.Dom.Events.MutationEvent.InitMutationEvent*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_InitMutationEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_" data-uid="SharpVectors.Dom.Events.MutationEvent.InitMutationEvent(System.String,System.Boolean,System.Boolean,SharpVectors.Dom.INode,System.String,System.String,System.String,SharpVectors.Dom.Events.AttrChangeType)">InitMutationEvent(String, Boolean, Boolean, INode, String, String, String, AttrChangeType)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void InitMutationEvent(string eventType, bool bubbles, bool cancelable, INode relatedNode, string prevValue, string newValue, string attrName, AttrChangeType attrChange)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">eventType</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">bubbles</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">cancelable</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></td>
-        <td><span class="parametername">relatedNode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">prevValue</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">newValue</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">attrName</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html">AttrChangeType</a></td>
-        <td><span class="parametername">attrChange</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Events_MutationEvent_InitMutationEventNs_" data-uid="SharpVectors.Dom.Events.MutationEvent.InitMutationEventNs*"></a>
-  <h4 id="SharpVectors_Dom_Events_MutationEvent_InitMutationEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_" data-uid="SharpVectors.Dom.Events.MutationEvent.InitMutationEventNs(System.String,System.String,System.Boolean,System.Boolean,SharpVectors.Dom.INode,System.String,System.String,System.String,SharpVectors.Dom.Events.AttrChangeType)">InitMutationEventNs(String, String, Boolean, Boolean, INode, String, String, String, AttrChangeType)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void InitMutationEventNs(string namespaceUri, string eventType, bool bubbles, bool cancelable, INode relatedNode, string prevValue, string newValue, string attrName, AttrChangeType attrChange)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">namespaceUri</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">eventType</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">bubbles</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">cancelable</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></td>
-        <td><span class="parametername">relatedNode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">prevValue</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">newValue</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">attrName</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html">AttrChangeType</a></td>
-        <td><span class="parametername">attrChange</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a>
-  </div>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a>
-  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.Event.html">Event</a></div>
+      <div><span class="xref">MutationEvent</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Events.IEvent.html">IEvent</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="SharpVectors.Dom.Events.MutationNameEvent.html">MutationNameEvent</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event._eventType.html">Event._eventType</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.Type.html#SharpVectors_Dom_Events_Event_Type">Event.Type</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.Target.html#SharpVectors_Dom_Events_Event_Target">Event.Target</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.CurrentTarget.html#SharpVectors_Dom_Events_Event_CurrentTarget">Event.CurrentTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.EventPhase.html#SharpVectors_Dom_Events_Event_EventPhase">Event.EventPhase</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.Bubbles.html#SharpVectors_Dom_Events_Event_Bubbles">Event.Bubbles</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.Cancelable.html#SharpVectors_Dom_Events_Event_Cancelable">Event.Cancelable</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.TimeStamp.html#SharpVectors_Dom_Events_Event_TimeStamp">Event.TimeStamp</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.NamespaceUri.html#SharpVectors_Dom_Events_Event_NamespaceUri">Event.NamespaceUri</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.IsCustom.html#SharpVectors_Dom_Events_Event_IsCustom">Event.IsCustom</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.IsDefaultPrevented.html#SharpVectors_Dom_Events_Event_IsDefaultPrevented">Event.IsDefaultPrevented</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.StopPropagation.html#SharpVectors_Dom_Events_Event_StopPropagation">Event.StopPropagation()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.PreventDefault.html#SharpVectors_Dom_Events_Event_PreventDefault">Event.PreventDefault()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.InitEvent.html#SharpVectors_Dom_Events_Event_InitEvent_System_String_System_Boolean_System_Boolean_">Event.InitEvent(string, bool, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.InitEventNs.html#SharpVectors_Dom_Events_Event_InitEventNs_System_String_System_String_System_Boolean_System_Boolean_">Event.InitEventNs(string, string, bool, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.Event.StopImmediatePropagation.html#SharpVectors_Dom_Events_Event_StopImmediatePropagation">Event.StopImmediatePropagation()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.-ctor.html#SharpVectors_Dom_Events_MutationEvent__ctor">MutationEvent()</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.AttrChange.html#SharpVectors_Dom_Events_MutationEvent_AttrChange">AttrChange</a></dt>
+    <dd><p><code>attrChange</code> indicates the type of change which triggered
+the DOMAttrModified event. The values can be
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a>,
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Addition">AttrChangeType.Addition</a>,
+or
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Removal">AttrChangeType.Removal</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.AttrName.html#SharpVectors_Dom_Events_MutationEvent_AttrName">AttrName</a></dt>
+    <dd><p><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.AttrName.html#SharpVectors_Dom_Events_IMutationEvent_AttrName">AttrName</a> indicates the name of the
+changed attribute node in a
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a>
+event.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.NewValue.html#SharpVectors_Dom_Events_MutationEvent_NewValue">NewValue</a></dt>
+    <dd><p><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.NewValue.html#SharpVectors_Dom_Events_IMutationEvent_NewValue">NewValue</a> indicates the new value of the
+attribute node in DOMAttrModified events, and
+of the <a class="xref" href="SharpVectors.Dom.ICharacterData.html">ICharacterData</a> node in
+DOMCharacterDataModified events.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.PrevValue.html#SharpVectors_Dom_Events_MutationEvent_PrevValue">PrevValue</a></dt>
+    <dd><p><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.PrevValue.html#SharpVectors_Dom_Events_IMutationEvent_PrevValue">PrevValue</a> indicates the previous value
+of the attribute node in
+<a class="xref" href="SharpVectors.Dom.Events.AttrChangeType.html#SharpVectors_Dom_Events_AttrChangeType_Modification">AttrChangeType.Modification</a>
+events, and of the <a class="xref" href="SharpVectors.Dom.ICharacterData.html">ICharacterData</a>
+node in DOMCharacterDataModified events.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.RelatedNode.html#SharpVectors_Dom_Events_MutationEvent_RelatedNode">RelatedNode</a></dt>
+    <dd><p><a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.RelatedNode.html#SharpVectors_Dom_Events_IMutationEvent_RelatedNode">RelatedNode</a> is used to identify a secondary node related to a
+mutation event.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.InitMutationEvent.html#SharpVectors_Dom_Events_MutationEvent_InitMutationEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEvent(string, bool, bool, INode, string, string, string, AttrChangeType)</a></dt>
+    <dd><p>The <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.InitMutationEvent.html#SharpVectors_Dom_Events_IMutationEvent_InitMutationEvent_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEvent</a> method
+is used to initialize the value of a
+<a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> created using the
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.CreateEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+method. This method may only be called before the
+<a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> has been
+dispatched via the
+<a class="xref" href="SharpVectors.Dom.Events.IEventTarget.DispatchEvent.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent</a>
+method, though it may be called multiple times before being
+dispatched if necessary. If called multiple times, the final
+invocation takes precedence.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Events.MutationEvent.InitMutationEventNs.html#SharpVectors_Dom_Events_MutationEvent_InitMutationEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEventNs(string, string, bool, bool, INode, string, string, string, AttrChangeType)</a></dt>
+    <dd><p>The <a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.InitMutationEventNs.html#SharpVectors_Dom_Events_IMutationEvent_InitMutationEventNs_System_String_System_String_System_Boolean_System_Boolean_SharpVectors_Dom_INode_System_String_System_String_System_String_SharpVectors_Dom_Events_AttrChangeType_">InitMutationEventNs</a>
+method is used to initialize the value of a
+<a class="xref" href="SharpVectors.Dom.Events.IMutationEvent.html">IMutationEvent</a> created using the
+<a class="xref" href="SharpVectors.Dom.Events.IDocumentEvent.CreateEvent.html#SharpVectors_Dom_Events_IDocumentEvent_CreateEvent_System_String_">IDocumentEvent.CreateEvent</a>
+method.</p>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorDom/Events/MutationEvent.cs/#L8" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

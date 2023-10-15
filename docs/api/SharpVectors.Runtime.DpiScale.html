@@ -1,738 +1,272 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class DpiScale
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class DpiScale
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class DpiScale
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DpiScale
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Runtime_DpiScale.md&amp;value=---%0Auid%3A%20SharpVectors.Runtime.DpiScale%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Runtime.DpiScale">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Runtime.DpiScale">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Runtime_DpiScale" data-uid="SharpVectors.Runtime.DpiScale" class="text-break">Class DpiScale
+  <h1 id="SharpVectors_Runtime_DpiScale" data-uid="SharpVectors.Runtime.DpiScale" class="text-break">
+    Class DpiScale
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRuntimeWpf/DpiScale.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>Stores DPI information from which a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual">Visual</a>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Runtime.html">Runtime</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Runtime.Wpf.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores DPI information from which a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual">Visual</a>
 or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement">UIElement</a> is rendered.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">DpiScale</span></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a>&gt;</div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Runtime.html">SharpVectors.Runtime</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Runtime.Wpf.dll</h6>
-  <h5 id="SharpVectors_Runtime_DpiScale_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Serializable]
 public class DpiScale : IEquatable&lt;DpiScale&gt;, ICloneable</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale__ctor_" data-uid="SharpVectors.Runtime.DpiScale.#ctor*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale__ctor" data-uid="SharpVectors.Runtime.DpiScale.#ctor">DpiScale()</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the DpiScale class.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DpiScale()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale__ctor_" data-uid="SharpVectors.Runtime.DpiScale.#ctor*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale__ctor_System_Double_" data-uid="SharpVectors.Runtime.DpiScale.#ctor(System.Double)">DpiScale(Double)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the DpiScale class.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DpiScale(double value)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">value</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale__ctor_" data-uid="SharpVectors.Runtime.DpiScale.#ctor*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale__ctor_System_Double_System_Double_" data-uid="SharpVectors.Runtime.DpiScale.#ctor(System.Double,System.Double)">DpiScale(Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the DpiScale class.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DpiScale(double dpiScaleX, double dpiScaleY)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">dpiScaleX</span></td>
-        <td><p>DPI scale on X-axis</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">dpiScaleY</span></td>
-        <td><p>DPI scale on Y-axis</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_DpiScaleX_" data-uid="SharpVectors.Runtime.DpiScale.DpiScaleX*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_DpiScaleX" data-uid="SharpVectors.Runtime.DpiScale.DpiScaleX">DpiScaleX</h4>
-  <div class="markdown level1 summary"><p>Gets the DPI scale on the X axis.When DPI is 96, <a class="xref" href="SharpVectors.Runtime.DpiScale.html#SharpVectors_Runtime_DpiScale_DpiScaleX">DpiScaleX</a> is 1.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double DpiScaleX { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Runtime_DpiScale_DpiScaleX_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>On Windows Desktop, this value is the same as <a class="xref" href="SharpVectors.Runtime.DpiScale.html#SharpVectors_Runtime_DpiScale_DpiScaleY">DpiScaleY</a></p>
-</div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_DpiScaleY_" data-uid="SharpVectors.Runtime.DpiScale.DpiScaleY*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_DpiScaleY" data-uid="SharpVectors.Runtime.DpiScale.DpiScaleY">DpiScaleY</h4>
-  <div class="markdown level1 summary"><p>Gets the DPI scale on the Y axis. When DPI is 96, <a class="xref" href="SharpVectors.Runtime.DpiScale.html#SharpVectors_Runtime_DpiScale_DpiScaleY">DpiScaleY</a> is 1.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double DpiScaleY { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Runtime_DpiScale_DpiScaleY_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>On Windows Desktop, this value is the same as <a class="xref" href="SharpVectors.Runtime.DpiScale.html#SharpVectors_Runtime_DpiScale_DpiScaleX">DpiScaleX</a></p>
-</div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_PixelsPerDip_" data-uid="SharpVectors.Runtime.DpiScale.PixelsPerDip*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_PixelsPerDip" data-uid="SharpVectors.Runtime.DpiScale.PixelsPerDip">PixelsPerDip</h4>
-  <div class="markdown level1 summary"><p>Get or sets the PixelsPerDip at which the text should be rendered.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double PixelsPerDip { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_PixelsPerInchX_" data-uid="SharpVectors.Runtime.DpiScale.PixelsPerInchX*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_PixelsPerInchX" data-uid="SharpVectors.Runtime.DpiScale.PixelsPerInchX">PixelsPerInchX</h4>
-  <div class="markdown level1 summary"><p>Gets the PPI along X axis.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double PixelsPerInchX { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Runtime_DpiScale_PixelsPerInchX_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>On Windows Desktop, this value is the same as <a class="xref" href="SharpVectors.Runtime.DpiScale.html#SharpVectors_Runtime_DpiScale_PixelsPerInchY">PixelsPerInchY</a></p>
-</div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_PixelsPerInchY_" data-uid="SharpVectors.Runtime.DpiScale.PixelsPerInchY*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_PixelsPerInchY" data-uid="SharpVectors.Runtime.DpiScale.PixelsPerInchY">PixelsPerInchY</h4>
-  <div class="markdown level1 summary"><p>Gets the PPI along Y axis.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double PixelsPerInchY { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Runtime_DpiScale_PixelsPerInchY_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>On Windows Desktop, this value is the same as <a class="xref" href="SharpVectors.Runtime.DpiScale.html#SharpVectors_Runtime_DpiScale_PixelsPerInchX">PixelsPerInchX</a></p>
-</div>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_Clone_" data-uid="SharpVectors.Runtime.DpiScale.Clone*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_Clone" data-uid="SharpVectors.Runtime.DpiScale.Clone">Clone()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DpiScale Clone()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_Equals_" data-uid="SharpVectors.Runtime.DpiScale.Equals*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_Equals_SharpVectors_Runtime_DpiScale_" data-uid="SharpVectors.Runtime.DpiScale.Equals(SharpVectors.Runtime.DpiScale)">Equals(DpiScale)</h4>
-  <div class="markdown level1 summary"><p>Equality test against a <a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a> object.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Equals(DpiScale other)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a></td>
-        <td><span class="parametername">other</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True if the objects are equal, False otherwise</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Runtime_DpiScale_Equals_SharpVectors_Runtime_DpiScale__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Two DPI scale values are equal if they are equal after rounding up
-to hundredths place.</p>
-<p>Common PPI values in use are:</p>
-<table><thead><tr><th>PPI</th><th>DPI(%)</th><th>DPI(Ratio)</th></tr></thead><tbody><tr><td>96</td><td>100%</td><td>1.00</td></tr><tr><td>120</td><td>125%</td><td>1.25</td></tr><tr><td>144</td><td>150%</td><td>1.50</td></tr><tr><td>192</td><td>200%</td><td>2.00</td></tr></tbody></table>
-</div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_Equals_" data-uid="SharpVectors.Runtime.DpiScale.Equals*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_Equals_System_Object_" data-uid="SharpVectors.Runtime.DpiScale.Equals(System.Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Equality test</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed override bool Equals(object obj)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">obj</span></td>
-        <td><p>The object being compared against</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True if the objects are equal, False otherwise</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a></div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_GetHashCode_" data-uid="SharpVectors.Runtime.DpiScale.GetHashCode*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_GetHashCode" data-uid="SharpVectors.Runtime.DpiScale.GetHashCode">GetHashCode()</h4>
-  <div class="markdown level1 summary"><p>Returns the hash code of the current object</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><p>The hash code of the object</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a></div>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_ToString_" data-uid="SharpVectors.Runtime.DpiScale.ToString*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_ToString" data-uid="SharpVectors.Runtime.DpiScale.ToString">ToString()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a></div>
-  <h3 id="operators">Operators
-  </h3>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_op_Equality_" data-uid="SharpVectors.Runtime.DpiScale.op_Equality*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_op_Equality_SharpVectors_Runtime_DpiScale_SharpVectors_Runtime_DpiScale_" data-uid="SharpVectors.Runtime.DpiScale.op_Equality(SharpVectors.Runtime.DpiScale,SharpVectors.Runtime.DpiScale)">Equality(DpiScale, DpiScale)</h4>
-  <div class="markdown level1 summary"><p>Checks for equality between two <a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a> instances.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool operator ==(DpiScale dpiScaleA, DpiScale dpiScaleB)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a></td>
-        <td><span class="parametername">dpiScaleA</span></td>
-        <td><p>The first object being compared</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a></td>
-        <td><span class="parametername">dpiScaleB</span></td>
-        <td><p>The second object being compared</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True if the two objects are equal, otherwise False</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_op_Inequality_" data-uid="SharpVectors.Runtime.DpiScale.op_Inequality*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_op_Inequality_SharpVectors_Runtime_DpiScale_SharpVectors_Runtime_DpiScale_" data-uid="SharpVectors.Runtime.DpiScale.op_Inequality(SharpVectors.Runtime.DpiScale,SharpVectors.Runtime.DpiScale)">Inequality(DpiScale, DpiScale)</h4>
-  <div class="markdown level1 summary"><p>Checks to inequality between two <a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a> instances.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool operator !=(DpiScale dpiScaleA, DpiScale dpiScaleB)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a></td>
-        <td><span class="parametername">dpiScaleA</span></td>
-        <td><p>The first object being compared</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a></td>
-        <td><span class="parametername">dpiScaleB</span></td>
-        <td><p>The second object being compared</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>True if the objects are not equal, otherwise False</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  
-  
-  <a id="SharpVectors_Runtime_DpiScale_System_ICloneable_Clone_" data-uid="SharpVectors.Runtime.DpiScale.System#ICloneable#Clone*"></a>
-  <h4 id="SharpVectors_Runtime_DpiScale_System_ICloneable_Clone" data-uid="SharpVectors.Runtime.DpiScale.System#ICloneable#Clone">ICloneable.Clone()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">object ICloneable.Clone()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">System.IEquatable&lt;T&gt;</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">System.ICloneable</a>
-  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">DpiScale</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.-ctor.html#SharpVectors_Runtime_DpiScale__ctor">DpiScale()</a></dt>
+    <dd><p>Initializes a new instance of the DpiScale class.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.-ctor.html#SharpVectors_Runtime_DpiScale__ctor_System_Double_">DpiScale(double)</a></dt>
+    <dd><p>Initializes a new instance of the DpiScale class.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.-ctor.html#SharpVectors_Runtime_DpiScale__ctor_System_Double_System_Double_">DpiScale(double, double)</a></dt>
+    <dd><p>Initializes a new instance of the DpiScale class.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.DpiScaleX.html#SharpVectors_Runtime_DpiScale_DpiScaleX">DpiScaleX</a></dt>
+    <dd><p>Gets the DPI scale on the X axis.When DPI is 96, <a class="xref" href="SharpVectors.Runtime.DpiScale.DpiScaleX.html#SharpVectors_Runtime_DpiScale_DpiScaleX">DpiScaleX</a> is 1.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.DpiScaleY.html#SharpVectors_Runtime_DpiScale_DpiScaleY">DpiScaleY</a></dt>
+    <dd><p>Gets the DPI scale on the Y axis. When DPI is 96, <a class="xref" href="SharpVectors.Runtime.DpiScale.DpiScaleY.html#SharpVectors_Runtime_DpiScale_DpiScaleY">DpiScaleY</a> is 1.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.PixelsPerDip.html#SharpVectors_Runtime_DpiScale_PixelsPerDip">PixelsPerDip</a></dt>
+    <dd><p>Get or sets the PixelsPerDip at which the text should be rendered.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.PixelsPerInchX.html#SharpVectors_Runtime_DpiScale_PixelsPerInchX">PixelsPerInchX</a></dt>
+    <dd><p>Gets the PPI along X axis.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.PixelsPerInchY.html#SharpVectors_Runtime_DpiScale_PixelsPerInchY">PixelsPerInchY</a></dt>
+    <dd><p>Gets the PPI along Y axis.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.Clone.html#SharpVectors_Runtime_DpiScale_Clone">Clone()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.Equals.html#SharpVectors_Runtime_DpiScale_Equals_SharpVectors_Runtime_DpiScale_">Equals(DpiScale)</a></dt>
+    <dd><p>Equality test against a <a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a> object.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.Equals.html#SharpVectors_Runtime_DpiScale_Equals_System_Object_">Equals(object)</a></dt>
+    <dd><p>Equality test</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.GetHashCode.html#SharpVectors_Runtime_DpiScale_GetHashCode">GetHashCode()</a></dt>
+    <dd><p>Returns the hash code of the current object</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.ToString.html#SharpVectors_Runtime_DpiScale_ToString">ToString()</a></dt>
+    <dd><p>Returns a string that represents the current object.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.op_Equality.html#SharpVectors_Runtime_DpiScale_op_Equality_SharpVectors_Runtime_DpiScale_SharpVectors_Runtime_DpiScale_">operator ==(DpiScale, DpiScale)</a></dt>
+    <dd><p>Checks for equality between two <a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a> instances.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.DpiScale.op_Inequality.html#SharpVectors_Runtime_DpiScale_op_Inequality_SharpVectors_Runtime_DpiScale_SharpVectors_Runtime_DpiScale_">operator !=(DpiScale, DpiScale)</a></dt>
+    <dd><p>Checks to inequality between two <a class="xref" href="SharpVectors.Runtime.DpiScale.html">DpiScale</a> instances.</p>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRuntimeWpf/DpiScale.cs/#L13" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

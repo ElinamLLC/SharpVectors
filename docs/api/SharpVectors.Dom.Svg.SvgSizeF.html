@@ -1,940 +1,292 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Struct SvgSizeF
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Struct SvgSizeF
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Struct SvgSizeF
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct SvgSizeF
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_SvgSizeF.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.SvgSizeF%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column struct">
+        <article data-uid="SharpVectors.Dom.Svg.SvgSizeF">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Svg.SvgSizeF">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Svg_SvgSizeF" data-uid="SharpVectors.Dom.Svg.SvgSizeF" class="text-break">Struct SvgSizeF
+  <h1 id="SharpVectors_Dom_Svg_SvgSizeF" data-uid="SharpVectors.Dom.Svg.SvgSizeF" class="text-break">
+    Struct SvgSizeF
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/SvgSizeF.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>Stores an ordered pair of floating-point numbers, typically the width
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores an ordered pair of floating-point numbers, typically the width
 and height of a rectangle.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>&gt;</div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.Svg.html">SharpVectors.Dom.Svg</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Core.dll</h6>
-  <h5 id="SharpVectors_Dom_Svg_SvgSizeF_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Serializable]
 public struct SvgSizeF : IEquatable&lt;SvgSizeF&gt;</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF__ctor_SharpVectors_Dom_Svg_SvgPointF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.#ctor(SharpVectors.Dom.Svg.SvgPointF)">SvgSizeF(SvgPointF)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class from the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgSizeF(SvgPointF pt)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a></td>
-        <td><span class="parametername">pt</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> from which to initialize this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF__ctor_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.#ctor(SharpVectors.Dom.Svg.SvgSizeF)">SvgSizeF(SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class from the specified existing <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgSizeF(SvgSizeF size)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">size</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> from which to create the new <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF__ctor_System_Single_System_Single_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.#ctor(System.Single,System.Single)">SvgSizeF(Single, Single)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class from the specified dimensions.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgSizeF(float width, float height)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">width</span></td>
-        <td><p>The width component of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">height</span></td>
-        <td><p>The height component of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="fields">Fields
-  </h3>
-  
-  
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Empty" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Empty">Empty</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly SvgSizeF Empty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_Height_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Height*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Height" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Height">Height</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the vertical component of this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float Height { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><p>The vertical component of this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_IsEmpty_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.IsEmpty*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_IsEmpty" data-uid="SharpVectors.Dom.Svg.SvgSizeF.IsEmpty">IsEmpty</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> has zero
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.-ctor.html#SharpVectors_Dom_Svg_SvgSizeF__ctor_SharpVectors_Dom_Svg_SvgPointF_">SvgSizeF(SvgPointF)</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class from the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.-ctor.html#SharpVectors_Dom_Svg_SvgSizeF__ctor_SharpVectors_Dom_Svg_SvgSizeF_">SvgSizeF(SvgSizeF)</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class from the specified existing <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.-ctor.html#SharpVectors_Dom_Svg_SvgSizeF__ctor_System_Single_System_Single_">SvgSizeF(float, float)</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class from the specified dimensions.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Empty.html">Empty</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> class.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Height.html#SharpVectors_Dom_Svg_SvgSizeF_Height">Height</a></dt>
+    <dd><p>Gets or sets the vertical component of this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.IsEmpty.html#SharpVectors_Dom_Svg_SvgSizeF_IsEmpty">IsEmpty</a></dt>
+    <dd><p>Gets a value indicating whether this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> has zero
 width and height.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly bool IsEmpty { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This property returns <span class="xref">true</span> when this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> has both a width and height of zero;
-otherwise, <span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_Width_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Width*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Width" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Width">Width</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the horizontal component of this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float Width { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><p>The horizontal component of this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_Add_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Add*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Add_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Add(SharpVectors.Dom.Svg.SvgSizeF,SharpVectors.Dom.Svg.SvgSizeF)">Add(SvgSizeF, SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Adds the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure to
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Width.html#SharpVectors_Dom_Svg_SvgSizeF_Width">Width</a></dt>
+    <dd><p>Gets or sets the horizontal component of this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Add.html#SharpVectors_Dom_Svg_SvgSizeF_Add_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_">Add(SvgSizeF, SvgSizeF)</a></dt>
+    <dd><p>Adds the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure to
 the width and height of another <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static SvgSizeF Add(SvgSizeF sz1, SvgSizeF sz2)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz1</span></td>
-        <td><p>The first <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to add.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz2</span></td>
-        <td><p>The second <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to add.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure that is the result of the addition
-operation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_Equals_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Equals*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Equals_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Equals(SharpVectors.Dom.Svg.SvgSizeF)">Equals(SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>This to see whether the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> is with the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Equals.html#SharpVectors_Dom_Svg_SvgSizeF_Equals_SharpVectors_Dom_Svg_SvgSizeF_">Equals(SvgSizeF)</a></dt>
+    <dd><p>This to see whether the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> is with the
 same dimensions as this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Equals(SvgSizeF other)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">other</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to test.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This returns <span class="xref">true</span> if the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> and has
-the same width and height as this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>; otherwise, <span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_Equals_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Equals*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Equals_System_Object_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Equals(System.Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>This tests whether the specified object is a <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Equals.html#SharpVectors_Dom_Svg_SvgSizeF_Equals_System_Object_">Equals(object)</a></dt>
+    <dd><p>This tests whether the specified object is a <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>
 with the same dimensions as this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">obj</span></td>
-        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a> to test.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This returns <span class="xref">true</span> if specified object is a
-<a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> and has the same width and height as this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>; otherwise, <span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals#system-valuetype-equals(system-object)">ValueType.Equals(Object)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_GetHashCode_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.GetHashCode*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_GetHashCode" data-uid="SharpVectors.Dom.Svg.SvgSizeF.GetHashCode">GetHashCode()</h4>
-  <div class="markdown level1 summary"><p>This returns a hash code for this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><p>An integer value that specifies a hash value for this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode#system-valuetype-gethashcode">ValueType.GetHashCode()</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_Subtract_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Subtract*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_Subtract_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.Subtract(SharpVectors.Dom.Svg.SvgSizeF,SharpVectors.Dom.Svg.SvgSizeF)">Subtract(SvgSizeF, SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Subtracts the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.GetHashCode.html#SharpVectors_Dom_Svg_SvgSizeF_GetHashCode">GetHashCode()</a></dt>
+    <dd><p>This returns a hash code for this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.Subtract.html#SharpVectors_Dom_Svg_SvgSizeF_Subtract_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_">Subtract(SvgSizeF, SvgSizeF)</a></dt>
+    <dd><p>Subtracts the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>
 structure from the width and height of another
 <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static SvgSizeF Subtract(SvgSizeF sz1, SvgSizeF sz2)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz1</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure on the left side of the
-subtraction operator.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz2</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure on the right side of the
-subtraction operator.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> that is a result of the subtraction
-operation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_ToString_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.ToString*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_ToString" data-uid="SharpVectors.Dom.Svg.SvgSizeF.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>This creates a human-readable string that represents this
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.ToString.html#SharpVectors_Dom_Svg_SvgSizeF_ToString">ToString()</a></dt>
+    <dd><p>This creates a human-readable string that represents this
 <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>A string that represents this <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring#system-valuetype-tostring">ValueType.ToString()</a></div>
-  <h3 id="operators">Operators
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_op_Addition_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Addition*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_op_Addition_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Addition(SharpVectors.Dom.Svg.SvgSizeF,SharpVectors.Dom.Svg.SvgSizeF)">Addition(SvgSizeF, SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Adds the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure
+</dd>
+  </dl>
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.op_Addition.html#SharpVectors_Dom_Svg_SvgSizeF_op_Addition_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_">operator +(SvgSizeF, SvgSizeF)</a></dt>
+    <dd><p>Adds the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure
 to the width and height of another <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static SvgSizeF operator +(SvgSizeF sz1, SvgSizeF sz2)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz1</span></td>
-        <td><p>The first <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to add.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz2</span></td>
-        <td><p>The second <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to add.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure that is the result of the
-addition operation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_op_Equality_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Equality*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_op_Equality_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Equality(SharpVectors.Dom.Svg.SvgSizeF,SharpVectors.Dom.Svg.SvgSizeF)">Equality(SvgSizeF, SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Tests whether two <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structures are equal.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool operator ==(SvgSizeF sz1, SvgSizeF sz2)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz1</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure on the left side of the
-equality operator.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz2</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure on the right of the equality
-operator.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This operator returns <span class="xref">true</span> if <code data-dev-comment-type="paramref" class="paramref">sz1</code>
-and <code data-dev-comment-type="paramref" class="paramref">sz2</code> have equal width and height; otherwise,
-<span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_op_Explicit_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Explicit*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_op_Explicit_SharpVectors_Dom_Svg_SvgSizeF__SharpVectors_Dom_Svg_SvgPointF" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Explicit(SharpVectors.Dom.Svg.SvgSizeF)~SharpVectors.Dom.Svg.SvgPointF">Explicit(SvgSizeF to SvgPointF)</h4>
-  <div class="markdown level1 summary"><p>This converts the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to a
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.op_Equality.html#SharpVectors_Dom_Svg_SvgSizeF_op_Equality_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_">operator ==(SvgSizeF, SvgSizeF)</a></dt>
+    <dd><p>Tests whether two <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structures are equal.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.op_Explicit.html#SharpVectors_Dom_Svg_SvgSizeF_op_Explicit_SharpVectors_Dom_Svg_SvgSizeF__SharpVectors_Dom_Svg_SvgPointF">explicit operator SvgPointF(SvgSizeF)</a></dt>
+    <dd><p>This converts the specified <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> to a
 <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static explicit operator SvgPointF(SvgSizeF size)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">size</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure to be converted.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> structure specifying the result of the
-conversion.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_op_Inequality_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Inequality*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_op_Inequality_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Inequality(SharpVectors.Dom.Svg.SvgSizeF,SharpVectors.Dom.Svg.SvgSizeF)">Inequality(SvgSizeF, SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Tests whether two <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structures are different.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool operator !=(SvgSizeF sz1, SvgSizeF sz2)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz1</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure on the left of the inequality
-operator.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz2</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure on the right of the inequality
-operator.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This operator returns <span class="xref">true</span> if
-<code data-dev-comment-type="paramref" class="paramref">sz1</code> and <code data-dev-comment-type="paramref" class="paramref">sz2</code> differ either
-in width or height; <span class="xref">false</span> if <code data-dev-comment-type="paramref" class="paramref">sz1</code>
-and <code data-dev-comment-type="paramref" class="paramref">sz2</code> are equal.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgSizeF_op_Subtraction_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Subtraction*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgSizeF_op_Subtraction_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_" data-uid="SharpVectors.Dom.Svg.SvgSizeF.op_Subtraction(SharpVectors.Dom.Svg.SvgSizeF,SharpVectors.Dom.Svg.SvgSizeF)">Subtraction(SvgSizeF, SvgSizeF)</h4>
-  <div class="markdown level1 summary"><p>Subtracts the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.op_Inequality.html#SharpVectors_Dom_Svg_SvgSizeF_op_Inequality_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_">operator !=(SvgSizeF, SvgSizeF)</a></dt>
+    <dd><p>Tests whether two <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structures are different.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.op_Subtraction.html#SharpVectors_Dom_Svg_SvgSizeF_op_Subtraction_SharpVectors_Dom_Svg_SvgSizeF_SharpVectors_Dom_Svg_SvgSizeF_">operator -(SvgSizeF, SvgSizeF)</a></dt>
+    <dd><p>Subtracts the width and height of one <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a>
 structure from the width and height of another
 <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> structure.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static SvgSizeF operator -(SvgSizeF sz1, SvgSizeF sz2)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz1</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> on the left side of the subtraction
-operator.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><span class="parametername">sz2</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> on the right side of the subtraction
-operator.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgSizeF.html">SvgSizeF</a> that is the result of the subtraction
-operation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">System.IEquatable&lt;T&gt;</a>
-  </div>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/SvgSizeF.cs/#L10" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

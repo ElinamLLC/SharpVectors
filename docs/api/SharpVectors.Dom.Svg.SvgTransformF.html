@@ -1,1373 +1,383 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class SvgTransformF
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class SvgTransformF
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class SvgTransformF
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SvgTransformF
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_SvgTransformF.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.SvgTransformF%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Dom.Svg.SvgTransformF">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Svg.SvgTransformF">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Svg_SvgTransformF" data-uid="SharpVectors.Dom.Svg.SvgTransformF" class="text-break">Class SvgTransformF
+  <h1 id="SharpVectors_Dom_Svg_SvgTransformF" data-uid="SharpVectors.Dom.Svg.SvgTransformF" class="text-break">
+    Class SvgTransformF
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/SvgTransformF.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>This is an implementation of the 3-by-3 affine matrix that represents
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>This is an implementation of the 3-by-3 affine matrix that represents
 a geometric transform.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">SvgTransformF</span></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.Svg.html">SharpVectors.Dom.Svg</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Core.dll</h6>
-  <h5 id="SharpVectors_Dom_Svg_SvgTransformF_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class SvgTransformF : ICloneable</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF__ctor" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor">SvgTransformF()</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">SvgTransformF</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.-ctor.html#SharpVectors_Dom_Svg_SvgTransformF__ctor">SvgTransformF()</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
 as the identity transform or matrix.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTransformF()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF__ctor_SharpVectors_Dom_Svg_SvgRectF_SharpVectors_Dom_Svg_SvgPointF___" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor(SharpVectors.Dom.Svg.SvgRectF,SharpVectors.Dom.Svg.SvgPointF[])">SvgTransformF(SvgRectF, SvgPointF[])</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.-ctor.html#SharpVectors_Dom_Svg_SvgTransformF__ctor_SharpVectors_Dom_Svg_SvgRectF_SharpVectors_Dom_Svg_SvgPointF___">SvgTransformF(SvgRectF, SvgPointF[])</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
 to the geometric transform defined by the specified rectangle and
 array of points.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTransformF(SvgRectF rect, SvgPointF[] plgpts)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgRectF.html">SvgRectF</a></td>
-        <td><span class="parametername">rect</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgRectF.html">SvgRectF</a> structure that represents the rectangle
-to be transformed.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a>[]</td>
-        <td><span class="parametername">plgpts</span></td>
-        <td><p>An array of three <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> structures that represents the
-points of a parallelogram to which the upper-left, upper-right, and
-lower-left corners of the rectangle is to be transformed. The
-lower-right corner of the parallelogram is implied by the first three
-corners.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If the <code data-dev-comment-type="paramref" class="paramref">plgpts</code> is <span class="xref">null</span>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
-        <td><p>If the length of the <code data-dev-comment-type="paramref" class="paramref">plgpts</code> array is not equal
-to 3.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
-        <td><p>If the width or height of the <code data-dev-comment-type="paramref" class="paramref">rect</code> is zero.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF__ctor_SharpVectors_Dom_Svg_SvgTransformF_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor(SharpVectors.Dom.Svg.SvgTransformF)">SvgTransformF(SvgTransformF)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.-ctor.html#SharpVectors_Dom_Svg_SvgTransformF__ctor_SharpVectors_Dom_Svg_SvgTransformF_">SvgTransformF(SvgTransformF)</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
 with parameters copied from the specified parameter, a copy
 constructor.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTransformF(SvgTransformF source)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a></td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> instance from which the parameters
-are to be copied.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If the <code data-dev-comment-type="paramref" class="paramref">source</code> is <span class="xref">null</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF__ctor_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">SvgTransformF(Single, Single, Single, Single, Single, Single)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.-ctor.html#SharpVectors_Dom_Svg_SvgTransformF__ctor_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_">SvgTransformF(float, float, float, float, float, float)</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
 with the specified elements.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTransformF(float m11, float m12, float m21, float m22, float dx, float dy)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">m11</span></td>
-        <td><p>The value in the first row and first column of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">m12</span></td>
-        <td><p>The value in the first row and second column of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">m21</span></td>
-        <td><p>The value in the second row and first column of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">m22</span></td>
-        <td><p>The value in the second row and second column of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">dx</span></td>
-        <td><p>The value in the third row and first column of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">dy</span></td>
-        <td><p>The value in the third row and second column of the new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF__ctor_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF__ctor_System_Single___" data-uid="SharpVectors.Dom.Svg.SvgTransformF.#ctor(System.Single[])">SvgTransformF(Single[])</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.-ctor.html#SharpVectors_Dom_Svg_SvgTransformF__ctor_System_Single___">SvgTransformF(float[])</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> class
 with the specified elements.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTransformF(float[] elements)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
-        <td><span class="parametername">elements</span></td>
-        <td><p>An array of six items defining the transform.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If the <code data-dev-comment-type="paramref" class="paramref">elements</code> is <span class="xref">null</span>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
-        <td><p>If the length of the <code data-dev-comment-type="paramref" class="paramref">elements</code> array is not equal
-to 6.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Elements_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Elements*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Elements" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Elements">Elements</h4>
-  <div class="markdown level1 summary"><p>Gets an array of floating-point values that represents the elements
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Elements.html#SharpVectors_Dom_Svg_SvgTransformF_Elements">Elements</a></dt>
+    <dd><p>Gets an array of floating-point values that represents the elements
 of this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float[] Elements { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
-        <td><p>An array of floating-point values that represents the elements
-of this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_IsIdentity_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.IsIdentity*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_IsIdentity" data-uid="SharpVectors.Dom.Svg.SvgTransformF.IsIdentity">IsIdentity</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> is the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.IsIdentity.html#SharpVectors_Dom_Svg_SvgTransformF_IsIdentity">IsIdentity</a></dt>
+    <dd><p>Gets a value indicating whether this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> is the
 identity matrix.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsIdentity { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This property is <span class="xref">true</span> if this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> is identity; otherwise, <span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_IsInvertible_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.IsInvertible*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_IsInvertible" data-uid="SharpVectors.Dom.Svg.SvgTransformF.IsInvertible">IsInvertible</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> is
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.IsInvertible.html#SharpVectors_Dom_Svg_SvgTransformF_IsInvertible">IsInvertible</a></dt>
+    <dd><p>Gets a value indicating whether this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> is
 invertible.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsInvertible { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This property is <span class="xref">true</span> if this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> is invertible; otherwise, <span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_OffsetX_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.OffsetX*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_OffsetX" data-uid="SharpVectors.Dom.Svg.SvgTransformF.OffsetX">OffsetX</h4>
-  <div class="markdown level1 summary"><p>Gets the <code>x</code> translation value (the <code>dx</code> value, or the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.OffsetX.html#SharpVectors_Dom_Svg_SvgTransformF_OffsetX">OffsetX</a></dt>
+    <dd><p>Gets the <code>x</code> translation value (the <code>dx</code> value, or the
 element in the third row and first column) of this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float OffsetX { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><p>The <code>x</code> translation value of this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_OffsetY_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.OffsetY*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_OffsetY" data-uid="SharpVectors.Dom.Svg.SvgTransformF.OffsetY">OffsetY</h4>
-  <div class="markdown level1 summary"><p>Gets the <code>y</code> translation value (the <code>dy</code> value, or the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.OffsetY.html#SharpVectors_Dom_Svg_SvgTransformF_OffsetY">OffsetY</a></dt>
+    <dd><p>Gets the <code>y</code> translation value (the <code>dy</code> value, or the
 element in the third row and second column) of this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float OffsetY { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><p>The <code>y</code> translation value of this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Clone_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Clone*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Clone" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Clone">Clone()</h4>
-  <div class="markdown level1 summary"><p>This creates a new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> that is a deep
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Clone.html#SharpVectors_Dom_Svg_SvgTransformF_Clone">Clone()</a></dt>
+    <dd><p>This creates a new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> that is a deep
 copy of the current instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTransformF Clone()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a></td>
-        <td><p>A new object that is a copy of this instance.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Equals_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Equals*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Equals_System_Object_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Equals(System.Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determine whether the specified object is a <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Equals.html#SharpVectors_Dom_Svg_SvgTransformF_Equals_System_Object_">Equals(object)</a></dt>
+    <dd><p>Determine whether the specified object is a <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
 and is identical to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><span class="parametername">obj</span></td>
-        <td><p>The object to test.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>This method returns <span class="xref">true</span> if obj is the specified
-<a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> identical to this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>; otherwise, <span class="xref">false</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_GetHashCode_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.GetHashCode*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_GetHashCode" data-uid="SharpVectors.Dom.Svg.SvgTransformF.GetHashCode">GetHashCode()</h4>
-  <div class="markdown level1 summary"><p>Returns a hash code.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><p>The hash code for this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Invert_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Invert*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Invert" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Invert">Invert()</h4>
-  <div class="markdown level1 summary"><p>Inverts this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>, if it is invertible.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Invert()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Multiply_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Multiply*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Multiply_SharpVectors_Dom_Svg_SvgTransformF_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Multiply(SharpVectors.Dom.Svg.SvgTransformF)">Multiply(SvgTransformF)</h4>
-  <div class="markdown level1 summary"><p>Multiplies this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by the specified
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.GetHashCode.html#SharpVectors_Dom_Svg_SvgTransformF_GetHashCode">GetHashCode()</a></dt>
+    <dd><p>Returns a hash code.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Invert.html#SharpVectors_Dom_Svg_SvgTransformF_Invert">Invert()</a></dt>
+    <dd><p>Inverts this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>, if it is invertible.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Multiply.html#SharpVectors_Dom_Svg_SvgTransformF_Multiply_SharpVectors_Dom_Svg_SvgTransformF_">Multiply(SvgTransformF)</a></dt>
+    <dd><p>Multiplies this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by the specified
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by prepending the specified
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Multiply(SvgTransformF matrix)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a></td>
-        <td><span class="parametername">matrix</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by which this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
-is to be multiplied.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Multiply_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Multiply*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Multiply_SharpVectors_Dom_Svg_SvgTransformF_SharpVectors_Dom_Svg_SvgTransformOrder_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Multiply(SharpVectors.Dom.Svg.SvgTransformF,SharpVectors.Dom.Svg.SvgTransformOrder)">Multiply(SvgTransformF, SvgTransformOrder)</h4>
-  <div class="markdown level1 summary"><p>Multiplies this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by the matrix specified in
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Multiply.html#SharpVectors_Dom_Svg_SvgTransformF_Multiply_SharpVectors_Dom_Svg_SvgTransformF_SharpVectors_Dom_Svg_SvgTransformOrder_">Multiply(SvgTransformF, SvgTransformOrder)</a></dt>
+    <dd><p>Multiplies this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by the matrix specified in
 the matrix parameter, and in the order specified in the order parameter.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Multiply(SvgTransformF matrix, SvgTransformOrder order)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a></td>
-        <td><span class="parametername">matrix</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by which this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
-is to be multiplied.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a></td>
-        <td><span class="parametername">order</span></td>
-        <td><p>The <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a> that represents the order of the
-multiplication.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Reset_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Reset*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Reset" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Reset">Reset()</h4>
-  <div class="markdown level1 summary"><p>Resets this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> to have the elements of the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Reset.html#SharpVectors_Dom_Svg_SvgTransformF_Reset">Reset()</a></dt>
+    <dd><p>Resets this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> to have the elements of the
 identity matrix.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_ReverseTransform_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.ReverseTransform*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_ReverseTransform_System_Single_System_Single_System_Single__System_Single__" data-uid="SharpVectors.Dom.Svg.SvgTransformF.ReverseTransform(System.Single,System.Single,System.Single@,System.Single@)">ReverseTransform(Single, Single, out Single, out Single)</h4>
-  <div class="markdown level1 summary"><p>Applies the reverse geometric transform represented by this
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.ReverseTransform.html#SharpVectors_Dom_Svg_SvgTransformF_ReverseTransform_System_Single_System_Single_System_Single__System_Single__">ReverseTransform(float, float, out float, out float)</a></dt>
+    <dd><p>Applies the reverse geometric transform represented by this
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> to a specified point.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ReverseTransform(float x, float y, out float ox, out float oy)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">x</span></td>
-        <td><p>The input <code>x</code> value of the point.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">y</span></td>
-        <td><p>The input <code>y</code> value of the point.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">ox</span></td>
-        <td><p>The transformed <code>x</code> value of the point.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">oy</span></td>
-        <td><p>The transformed <code>y</code> value of the point.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Rotate_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Rotate*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Rotate_System_Single_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Rotate(System.Single)">Rotate(Single)</h4>
-  <div class="markdown level1 summary"><p>Applies a clockwise rotation of the specified angle about the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Rotate.html#SharpVectors_Dom_Svg_SvgTransformF_Rotate_System_Single_">Rotate(float)</a></dt>
+    <dd><p>Applies a clockwise rotation of the specified angle about the
 origin to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Rotate(float angle)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">angle</span></td>
-        <td><p>The angle (extent) of the rotation, in degrees.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Rotate_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Rotate*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Rotate_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Rotate(System.Single,SharpVectors.Dom.Svg.SvgTransformOrder)">Rotate(Single, SvgTransformOrder)</h4>
-  <div class="markdown level1 summary"><p>Applies a clockwise rotation of the specified angle about the
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Rotate.html#SharpVectors_Dom_Svg_SvgTransformF_Rotate_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_">Rotate(float, SvgTransformOrder)</a></dt>
+    <dd><p>Applies a clockwise rotation of the specified angle about the
 origin to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>, and in the order specified
 in the order parameter.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Rotate(float angle, SvgTransformOrder order)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">angle</span></td>
-        <td><p>The angle (extent) of the rotation, in degrees.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a></td>
-        <td><span class="parametername">order</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a> that specifies the order (append or
-prepend) in which the rotation is applied to this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_RotateAt_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.RotateAt*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_RotateAt_System_Single_SharpVectors_Dom_Svg_SvgPointF_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.RotateAt(System.Single,SharpVectors.Dom.Svg.SvgPointF)">RotateAt(Single, SvgPointF)</h4>
-  <div class="markdown level1 summary"><p>Applies a clockwise rotation about the specified point to this
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.RotateAt.html#SharpVectors_Dom_Svg_SvgTransformF_RotateAt_System_Single_SharpVectors_Dom_Svg_SvgPointF_">RotateAt(float, SvgPointF)</a></dt>
+    <dd><p>Applies a clockwise rotation about the specified point to this
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by prepending the rotation.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RotateAt(float angle, SvgPointF point)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">angle</span></td>
-        <td><p>The angle (extent) of the rotation, in degrees.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a></td>
-        <td><span class="parametername">point</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> that represents the center of the rotation.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_RotateAt_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.RotateAt*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_RotateAt_System_Single_SharpVectors_Dom_Svg_SvgPointF_SharpVectors_Dom_Svg_SvgTransformOrder_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.RotateAt(System.Single,SharpVectors.Dom.Svg.SvgPointF,SharpVectors.Dom.Svg.SvgTransformOrder)">RotateAt(Single, SvgPointF, SvgTransformOrder)</h4>
-  <div class="markdown level1 summary"><p>Applies a clockwise rotation about the specified point to this
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.RotateAt.html#SharpVectors_Dom_Svg_SvgTransformF_RotateAt_System_Single_SharpVectors_Dom_Svg_SvgPointF_SharpVectors_Dom_Svg_SvgTransformOrder_">RotateAt(float, SvgPointF, SvgTransformOrder)</a></dt>
+    <dd><p>Applies a clockwise rotation about the specified point to this
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in the specified order.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RotateAt(float angle, SvgPointF point, SvgTransformOrder order)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">angle</span></td>
-        <td><p>The angle (extent) of the rotation, in degrees.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a></td>
-        <td><span class="parametername">point</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> that represents the center of the rotation.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a></td>
-        <td><span class="parametername">order</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a> that specifies the order (append or
-prepend) in which the rotation is applied.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Scale_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Scale*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Scale_System_Single_System_Single_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Scale(System.Single,System.Single)">Scale(Single, Single)</h4>
-  <div class="markdown level1 summary"><p>Applies the specified scale vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Scale.html#SharpVectors_Dom_Svg_SvgTransformF_Scale_System_Single_System_Single_">Scale(float, float)</a></dt>
+    <dd><p>Applies the specified scale vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
 by prepending the scale vector.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Scale(float scaleX, float scaleY)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">scaleX</span></td>
-        <td><p>The value by which to scale this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in the
-x-axis direction.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">scaleY</span></td>
-        <td><p>The value by which to scale this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in the
-y-axis direction.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Scale_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Scale*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Scale_System_Single_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Scale(System.Single,System.Single,SharpVectors.Dom.Svg.SvgTransformOrder)">Scale(Single, Single, SvgTransformOrder)</h4>
-  <div class="markdown level1 summary"><p>Applies the specified scale vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Scale.html#SharpVectors_Dom_Svg_SvgTransformF_Scale_System_Single_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_">Scale(float, float, SvgTransformOrder)</a></dt>
+    <dd><p>Applies the specified scale vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
 using the specified order.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Scale(float scaleX, float scaleY, SvgTransformOrder order)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">scaleX</span></td>
-        <td><p>The value by which to scale this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in the
-x-axis direction.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">scaleY</span></td>
-        <td><p>The value by which to scale this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in the
-y-axis direction.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a></td>
-        <td><span class="parametername">order</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a> that specifies the order (append or
-prepend) in which the scale vector is applied to this
-<a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Shear_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Shear*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Shear_System_Single_System_Single_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Shear(System.Single,System.Single)">Shear(Single, Single)</h4>
-  <div class="markdown level1 summary"><p>Applies the specified shear vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Shear.html#SharpVectors_Dom_Svg_SvgTransformF_Shear_System_Single_System_Single_">Shear(float, float)</a></dt>
+    <dd><p>Applies the specified shear vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> by
 prepending the shear vector.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Shear(float shearX, float shearY)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">shearX</span></td>
-        <td><p>The horizontal shear factor.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">shearY</span></td>
-        <td><p>The vertical shear factor.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Shear_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Shear*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Shear_System_Single_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Shear(System.Single,System.Single,SharpVectors.Dom.Svg.SvgTransformOrder)">Shear(Single, Single, SvgTransformOrder)</h4>
-  <div class="markdown level1 summary"><p>Applies the specified shear vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Shear.html#SharpVectors_Dom_Svg_SvgTransformF_Shear_System_Single_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_">Shear(float, float, SvgTransformOrder)</a></dt>
+    <dd><p>Applies the specified shear vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> in
 the specified order.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Shear(float shearX, float shearY, SvgTransformOrder order)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">shearX</span></td>
-        <td><p>The horizontal shear factor.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">shearY</span></td>
-        <td><p>The vertical shear factor.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a></td>
-        <td><span class="parametername">order</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a> that specifies the order (append or
-prepend) in which the shear is applied.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Transform_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Transform*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Transform_System_Single_System_Single_System_Single__System_Single__" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Transform(System.Single,System.Single,System.Single@,System.Single@)">Transform(Single, Single, out Single, out Single)</h4>
-  <div class="markdown level1 summary"><p>Applies the geometric transform represented by this
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Transform.html#SharpVectors_Dom_Svg_SvgTransformF_Transform_System_Single_System_Single_System_Single__System_Single__">Transform(float, float, out float, out float)</a></dt>
+    <dd><p>Applies the geometric transform represented by this
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> to a specified point.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Transform(float x, float y, out float ox, out float oy)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">x</span></td>
-        <td><p>The input <code>x</code> value of the point.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">y</span></td>
-        <td><p>The input <code>y</code> value of the point.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">ox</span></td>
-        <td><p>The transformed <code>x</code> value of the point.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">oy</span></td>
-        <td><p>The transformed <code>y</code> value of the point.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_TransformPoints_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.TransformPoints*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_TransformPoints_SharpVectors_Dom_Svg_SvgPointF___" data-uid="SharpVectors.Dom.Svg.SvgTransformF.TransformPoints(SharpVectors.Dom.Svg.SvgPointF[])">TransformPoints(SvgPointF[])</h4>
-  <div class="markdown level1 summary"><p>Applies the geometric transform represented by this
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.TransformPoints.html#SharpVectors_Dom_Svg_SvgTransformF_TransformPoints_SharpVectors_Dom_Svg_SvgPointF___">TransformPoints(SvgPointF[])</a></dt>
+    <dd><p>Applies the geometric transform represented by this
 <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> to a specified array of points.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void TransformPoints(SvgPointF[] pts)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a>[]</td>
-        <td><span class="parametername">pts</span></td>
-        <td><p>An array of <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> structures that represents the points
-to transform.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_TransformVectors_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.TransformVectors*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_TransformVectors_SharpVectors_Dom_Svg_SvgPointF___" data-uid="SharpVectors.Dom.Svg.SvgTransformF.TransformVectors(SharpVectors.Dom.Svg.SvgPointF[])">TransformVectors(SvgPointF[])</h4>
-  <div class="markdown level1 summary"><p>Multiplies each vector in an array by the matrix. The translation
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.TransformVectors.html#SharpVectors_Dom_Svg_SvgTransformF_TransformVectors_SharpVectors_Dom_Svg_SvgPointF___">TransformVectors(SvgPointF[])</a></dt>
+    <dd><p>Multiplies each vector in an array by the matrix. The translation
 elements of this matrix (third row) are ignored.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void TransformVectors(SvgPointF[] pts)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a>[]</td>
-        <td><span class="parametername">pts</span></td>
-        <td><p>An array of <a class="xref" href="SharpVectors.Dom.Svg.SvgPointF.html">SvgPointF</a> structures that represents the points
-to transform.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Translate_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Translate*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Translate_System_Single_System_Single_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Translate(System.Single,System.Single)">Translate(Single, Single)</h4>
-  <div class="markdown level1 summary"><p>Applies the specified translation vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Translate.html#SharpVectors_Dom_Svg_SvgTransformF_Translate_System_Single_System_Single_">Translate(float, float)</a></dt>
+    <dd><p>Applies the specified translation vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
 by prepending the translation vector.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Translate(float offsetX, float offsetY)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">offsetX</span></td>
-        <td><p>The <code>x</code> value by which to translate this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">offsetY</span></td>
-        <td><p>The <code>y</code> value by which to translate this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_Translate_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Translate*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_Translate_System_Single_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.Translate(System.Single,System.Single,SharpVectors.Dom.Svg.SvgTransformOrder)">Translate(Single, Single, SvgTransformOrder)</h4>
-  <div class="markdown level1 summary"><p>Applies the specified translation vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.Translate.html#SharpVectors_Dom_Svg_SvgTransformF_Translate_System_Single_System_Single_SharpVectors_Dom_Svg_SvgTransformOrder_">Translate(float, float, SvgTransformOrder)</a></dt>
+    <dd><p>Applies the specified translation vector to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>
 in the specified order.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Translate(float offsetX, float offsetY, SvgTransformOrder order)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">offsetX</span></td>
-        <td><p>The <code>x</code> value by which to translate this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td><span class="parametername">offsetY</span></td>
-        <td><p>The <code>y</code> value by which to translate this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a></td>
-        <td><span class="parametername">order</span></td>
-        <td><p>A <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformOrder.html">SvgTransformOrder</a> that specifies the order (append or
-prepend) in which the translation is applied to this <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Svg_SvgTransformF_System_ICloneable_Clone_" data-uid="SharpVectors.Dom.Svg.SvgTransformF.System#ICloneable#Clone*"></a>
-  <h4 id="SharpVectors_Dom_Svg_SvgTransformF_System_ICloneable_Clone" data-uid="SharpVectors.Dom.Svg.SvgTransformF.System#ICloneable#Clone">ICloneable.Clone()</h4>
-  <div class="markdown level1 summary"><p>This creates a new <a class="xref" href="SharpVectors.Dom.Svg.SvgTransformF.html">SvgTransformF</a> that is a deep
-copy of the current instance.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">object ICloneable.Clone()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><p>A new object that is a copy of this instance.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">System.ICloneable</a>
-  </div>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCore/Svg/SvgTransformF.cs/#L9" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

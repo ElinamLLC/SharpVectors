@@ -1,254 +1,239 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class WpfTextRenderer
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class WpfTextRenderer
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class WpfTextRenderer
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WpfTextRenderer
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Renderers_Texts_WpfTextRenderer.md&amp;value=---%0Auid%3A%20SharpVectors.Renderers.Texts.WpfTextRenderer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Renderers_Texts_WpfTextRenderer" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer" class="text-break">Class WpfTextRenderer
+  <h1 id="SharpVectors_Renderers_Texts_WpfTextRenderer" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer" class="text-break">
+    Class WpfTextRenderer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRenderingWpf/Texts/WpfTextRenderer.cs/#L18"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
-    <div class="level3"><a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html">WpfRendererObject</a></div>
-    <div class="level4"><span class="xref">WpfTextRenderer</span></div>
-      <div class="level5"><a class="xref" href="SharpVectors.Renderers.Texts.WpfHorzTextRenderer.html">WpfHorzTextRenderer</a></div>
-      <div class="level5"><a class="xref" href="SharpVectors.Renderers.Texts.WpfPathTextRenderer.html">WpfPathTextRenderer</a></div>
-      <div class="level5"><a class="xref" href="SharpVectors.Renderers.Texts.WpfVertTextRenderer.html">WpfVertTextRenderer</a></div>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Renderers.html">Renderers</a>.<a class="xref" href="SharpVectors.Renderers.Texts.html">Texts</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Rendering.Wpf.dll</dd></dl>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class WpfTextRenderer : WpfRendererObject, IDisposable</code></pre>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html">WpfRendererObject</a></div>
+      <div><span class="xref">WpfTextRenderer</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="SharpVectors.Renderers.Texts.WpfHorzTextRenderer.html">WpfHorzTextRenderer</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.Texts.WpfPathTextRenderer.html">WpfPathTextRenderer</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.Texts.WpfVertTextRenderer.html">WpfVertTextRenderer</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject__isDisposed">WpfRendererObject._isDisposed</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject._isDisposed.html">WpfRendererObject._isDisposed</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject__context">WpfRendererObject._context</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject._context.html">WpfRendererObject._context</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject__flattenClosedPath">WpfRendererObject._flattenClosedPath</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject._flattenClosedPath.html">WpfRendererObject._flattenClosedPath</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject__flattenTolerance">WpfRendererObject._flattenTolerance</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject._flattenTolerance.html">WpfRendererObject._flattenTolerance</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject__flattenToleranceType">WpfRendererObject._flattenToleranceType</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject._flattenToleranceType.html">WpfRendererObject._flattenToleranceType</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsDisposed">WpfRendererObject.IsDisposed</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.IsDisposed.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsDisposed">WpfRendererObject.IsDisposed</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Context">WpfRendererObject.Context</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.Context.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Context">WpfRendererObject.Context</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsNullOrIdentity_System_Windows_Media_Transform_">WpfRendererObject.IsNullOrIdentity(Transform)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.IsNullOrIdentity.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsNullOrIdentity_System_Windows_Media_Transform_">WpfRendererObject.IsNullOrIdentity(Transform)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_SplitByCaps_System_String_System_String__">WpfRendererObject.SplitByCaps(String, String)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.SplitByCaps.html#SharpVectors_Renderers_Wpf_WpfRendererObject_SplitByCaps_System_String_System_String__">WpfRendererObject.SplitByCaps(string, out string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_GetElementName_SharpVectors_Dom_Svg_SvgElement_SharpVectors_Renderers_Wpf_WpfDrawingContext_">WpfRendererObject.GetElementName(SvgElement, WpfDrawingContext)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.GetElementName.html#SharpVectors_Renderers_Wpf_WpfRendererObject_GetElementName_SharpVectors_Dom_Svg_SvgElement_SharpVectors_Renderers_Wpf_WpfDrawingContext_">WpfRendererObject.GetElementName(SvgElement, WpfDrawingContext)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_GetElementClassName_SharpVectors_Dom_Svg_SvgElement_SharpVectors_Renderers_Wpf_WpfDrawingContext_">WpfRendererObject.GetElementClassName(SvgElement, WpfDrawingContext)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.GetElementClassName.html#SharpVectors_Renderers_Wpf_WpfRendererObject_GetElementClassName_SharpVectors_Dom_Svg_SvgElement_SharpVectors_Renderers_Wpf_WpfDrawingContext_">WpfRendererObject.GetElementClassName(SvgElement, WpfDrawingContext)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsValidIdentifier_System_String_">WpfRendererObject.IsValidIdentifier(String)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.IsValidIdentifier.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsValidIdentifier_System_String_">WpfRendererObject.IsValidIdentifier(string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsIdentifierStart_System_Char_">WpfRendererObject.IsIdentifierStart(Char)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.IsIdentifierStart.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsIdentifierStart_System_Char_">WpfRendererObject.IsIdentifierStart(char)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsIdentifierPart_System_Char_">WpfRendererObject.IsIdentifierPart(Char)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.IsIdentifierPart.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsIdentifierPart_System_Char_">WpfRendererObject.IsIdentifierPart(char)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Combine_System_Windows_Media_Transform_System_Windows_Media_Transform_System_Boolean_System_Boolean_">WpfRendererObject.Combine(Transform, Transform, Boolean, Boolean)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.Combine.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Combine_System_Windows_Media_Transform_System_Windows_Media_Transform_System_Boolean_System_Boolean_">WpfRendererObject.Combine(Transform, Transform, bool, bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_ISvgElement_System_Boolean_">WpfRendererObject.CreateGeometry(ISvgElement, Boolean)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_ISvgElement_System_Boolean_">WpfRendererObject.CreateGeometry(ISvgElement, bool)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgEllipseElement_">WpfRendererObject.CreateGeometry(SvgEllipseElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgEllipseElement_">WpfRendererObject.CreateGeometry(SvgEllipseElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgRectElement_">WpfRendererObject.CreateGeometry(SvgRectElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgRectElement_">WpfRendererObject.CreateGeometry(SvgRectElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgLineElement_">WpfRendererObject.CreateGeometry(SvgLineElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgLineElement_">WpfRendererObject.CreateGeometry(SvgLineElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometryEx_SharpVectors_Dom_Svg_SvgPathElement_">WpfRendererObject.CreateGeometryEx(SvgPathElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometryEx.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometryEx_SharpVectors_Dom_Svg_SvgPathElement_">WpfRendererObject.CreateGeometryEx(SvgPathElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgPathElement_">WpfRendererObject.CreateGeometry(SvgPathElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgPathElement_">WpfRendererObject.CreateGeometry(SvgPathElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgCircleElement_">WpfRendererObject.CreateGeometry(SvgCircleElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgCircleElement_">WpfRendererObject.CreateGeometry(SvgCircleElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgPolylineElement_">WpfRendererObject.CreateGeometry(SvgPolylineElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgPolylineElement_">WpfRendererObject.CreateGeometry(SvgPolylineElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgPolygonElement_">WpfRendererObject.CreateGeometry(SvgPolygonElement)</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.CreateGeometry.html#SharpVectors_Renderers_Wpf_WpfRendererObject_CreateGeometry_SharpVectors_Dom_Svg_SvgPolygonElement_">WpfRendererObject.CreateGeometry(SvgPolygonElement)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Dispose">WpfRendererObject.Dispose()</a>
+      <a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.Dispose.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Dispose">WpfRendererObject.Dispose()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals#system-windows-dependencyobject-equals(system-object)">DependencyObject.Equals(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals">DependencyObject.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode#system-windows-dependencyobject-gethashcode">DependencyObject.GetHashCode()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode">DependencyObject.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue#system-windows-dependencyobject-getvalue(system-windows-dependencyproperty)">DependencyObject.GetValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue">DependencyObject.GetValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue#system-windows-dependencyobject-setcurrentvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetCurrentValue(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue">DependencyObject.SetCurrentValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencyproperty)">DependencyObject.ClearValue(DependencyProperty)</a>
@@ -257,1593 +242,279 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencypropertykey)">DependencyObject.ClearValue(DependencyPropertyKey)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue#system-windows-dependencyobject-coercevalue(system-windows-dependencyproperty)">DependencyObject.CoerceValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue">DependencyObject.CoerceValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty#system-windows-dependencyobject-invalidateproperty(system-windows-dependencyproperty)">DependencyObject.InvalidateProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty">DependencyObject.InvalidateProperty(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.onpropertychanged#system-windows-dependencyobject-onpropertychanged(system-windows-dependencypropertychangedeventargs)">DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.onpropertychanged">DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty#system-windows-dependencyobject-shouldserializeproperty(system-windows-dependencyproperty)">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue#system-windows-dependencyobject-readlocalvalue(system-windows-dependencyproperty)">DependencyObject.ReadLocalValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue">DependencyObject.ReadLocalValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator#system-windows-dependencyobject-getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype#system-windows-dependencyobject-dependencyobjecttype">DependencyObject.DependencyObjectType</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype">DependencyObject.DependencyObjectType</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed#system-windows-dependencyobject-issealed">DependencyObject.IsSealed</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed">DependencyObject.IsSealed</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher#system-windows-threading-dispatcherobject-dispatcher">DispatcherObject.Dispatcher</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher">DispatcherObject.Dispatcher</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
     </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Renderers.Texts.html">SharpVectors.Renderers.Texts</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Rendering.Wpf.dll</h6>
-  <h5 id="SharpVectors_Renderers_Texts_WpfTextRenderer_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class WpfTextRenderer : WpfRendererObject, IDisposable</code></pre>
-  </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer__ctor_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.#ctor*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__ctor_SharpVectors_Dom_Svg_SvgTextBaseElement_SharpVectors_Renderers_Wpf_WpfTextRendering_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.#ctor(SharpVectors.Dom.Svg.SvgTextBaseElement,SharpVectors.Renderers.Wpf.WpfTextRendering)">WpfTextRenderer(SvgTextBaseElement, WpfTextRendering)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected WpfTextRenderer(SvgTextBaseElement textElement, WpfTextRendering textRendering)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextBaseElement.html">SvgTextBaseElement</a></td>
-        <td><span class="parametername">textElement</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfTextRendering.html">WpfTextRendering</a></td>
-        <td><span class="parametername">textRendering</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="fields">Fields
-  </h3>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__actualFontName" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._actualFontName">_actualFontName</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected string _actualFontName</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__decimalNumber" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._decimalNumber">_decimalNumber</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static readonly Regex _decimalNumber</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex">Regex</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__drawContext" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._drawContext">_drawContext</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected DrawingContext _drawContext</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingcontext">DrawingContext</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__multipleSpaces" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._multipleSpaces">_multipleSpaces</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static readonly Regex _multipleSpaces</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex">Regex</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__tabNewline" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._tabNewline">_tabNewline</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static readonly Regex _tabNewline</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex">Regex</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__textElement" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._textElement">_textElement</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected SvgTextBaseElement _textElement</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextBaseElement.html">SvgTextBaseElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer__textRendering" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer._textRendering">_textRendering</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected WpfTextRendering _textRendering</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfTextRendering.html">WpfTextRendering</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_NonBreaking" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.NonBreaking">NonBreaking</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static readonly string NonBreaking</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_NonBreakingChar" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.NonBreakingChar">NonBreakingChar</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected const char NonBreakingChar = '&#160;'</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.char">Char</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_Whitespace" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Whitespace">Whitespace</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected const string Whitespace = &quot; &quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_DrawContext_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.DrawContext*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_DrawContext" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.DrawContext">DrawContext</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DrawingContext DrawContext { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingcontext">DrawingContext</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_IsInitialized_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.IsInitialized*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_IsInitialized" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.IsInitialized">IsInitialized</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool IsInitialized { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_IsInitialized">WpfRendererObject.IsInitialized</a></div>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_IsMeasuring_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.IsMeasuring*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_IsMeasuring" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.IsMeasuring">IsMeasuring</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected bool IsMeasuring { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_IsTextPath_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.IsTextPath*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_IsTextPath" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.IsTextPath">IsTextPath</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected bool IsTextPath { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextContext_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextContext*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextContext" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextContext">TextContext</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected WpfTextContext TextContext { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextContext.html">WpfTextContext</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextCulture_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextCulture*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextCulture" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextCulture">TextCulture</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected CultureInfo TextCulture { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo">CultureInfo</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextElement*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextElement" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextElement">TextElement</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgTextBaseElement TextElement { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextBaseElement.html">SvgTextBaseElement</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextWidth_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextWidth*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_TextWidth" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TextWidth">TextWidth</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected double TextWidth { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_AddTextWidth_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.AddTextWidth*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_AddTextWidth_System_Windows_Point_System_Double_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.AddTextWidth(System.Windows.Point,System.Double)">AddTextWidth(Point, Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected void AddTextWidth(Point location, double textWidth)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.point">Point</a></td>
-        <td><span class="parametername">location</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">textWidth</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_Dispose_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Dispose*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_Dispose_System_Boolean_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Dispose(System.Boolean)">Dispose(Boolean)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">disposing</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Renderers.Wpf.WpfRendererObject.html#SharpVectors_Renderers_Wpf_WpfRendererObject_Dispose_System_Boolean_">WpfRendererObject.Dispose(Boolean)</a></div>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_ExtractTextPathGeometry_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.ExtractTextPathGeometry*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_ExtractTextPathGeometry_System_Windows_Media_Geometry_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.ExtractTextPathGeometry(System.Windows.Media.Geometry)">ExtractTextPathGeometry(Geometry)</h4>
-  <div class="markdown level1 summary"><p>This will extract a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.pathgeometry">PathGeometry</a> that is nested into GeometryGroup, which
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.-ctor.html#SharpVectors_Renderers_Texts_WpfTextRenderer__ctor_SharpVectors_Dom_Svg_SvgTextBaseElement_SharpVectors_Renderers_Wpf_WpfTextRendering_">WpfTextRenderer(SvgTextBaseElement, WpfTextRendering)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.NonBreaking.html">NonBreaking</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.NonBreakingChar.html">NonBreakingChar</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.Whitespace.html">Whitespace</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._actualFontName.html">_actualFontName</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._decimalNumber.html">_decimalNumber</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._drawContext.html">_drawContext</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._multipleSpaces.html">_multipleSpaces</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._tabNewline.html">_tabNewline</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._textElement.html">_textElement</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer._textRendering.html">_textRendering</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.DrawContext.html#SharpVectors_Renderers_Texts_WpfTextRenderer_DrawContext">DrawContext</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.IsInitialized.html#SharpVectors_Renderers_Texts_WpfTextRenderer_IsInitialized">IsInitialized</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.IsMeasuring.html#SharpVectors_Renderers_Texts_WpfTextRenderer_IsMeasuring">IsMeasuring</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.IsTextPath.html#SharpVectors_Renderers_Texts_WpfTextRenderer_IsTextPath">IsTextPath</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.TextContext.html#SharpVectors_Renderers_Texts_WpfTextRenderer_TextContext">TextContext</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.TextCulture.html#SharpVectors_Renderers_Texts_WpfTextRenderer_TextCulture">TextCulture</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.TextElement.html#SharpVectors_Renderers_Texts_WpfTextRenderer_TextElement">TextElement</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.TextWidth.html#SharpVectors_Renderers_Texts_WpfTextRenderer_TextWidth">TextWidth</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.AddTextWidth.html#SharpVectors_Renderers_Texts_WpfTextRenderer_AddTextWidth_System_Windows_Point_System_Double_">AddTextWidth(Point, double)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.Dispose.html#SharpVectors_Renderers_Texts_WpfTextRenderer_Dispose_System_Boolean_">Dispose(bool)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.ExtractTextPathGeometry.html#SharpVectors_Renderers_Texts_WpfTextRenderer_ExtractTextPathGeometry_System_Windows_Media_Geometry_">ExtractTextPathGeometry(Geometry)</a></dt>
+    <dd><p>This will extract a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.pathgeometry">PathGeometry</a> that is nested into GeometryGroup, which
 is normally created by the FormattedText.BuildGeometry() method.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static Geometry ExtractTextPathGeometry(Geometry sourceGeometry)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.geometry">Geometry</a></td>
-        <td><span class="parametername">sourceGeometry</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.geometry">Geometry</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetBolderFontWeight_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetBolderFontWeight*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetBolderFontWeight_System_String_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetBolderFontWeight(System.String)">GetBolderFontWeight(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontWeight GetBolderFontWeight(string fontWeight)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fontWeight</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontweight">FontWeight</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetBrush_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetBrush*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetBrush" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetBrush">GetBrush()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Brush GetBrush()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.brush">Brush</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetComputedFontSize_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetComputedFontSize*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetComputedFontSize_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetComputedFontSize(SharpVectors.Dom.Svg.SvgTextContentElement)">GetComputedFontSize(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double GetComputedFontSize(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetLighterFontWeight_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetLighterFontWeight*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetLighterFontWeight_System_String_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetLighterFontWeight(System.String)">GetLighterFontWeight(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontWeight GetLighterFontWeight(string fontWeight)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fontWeight</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontweight">FontWeight</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetPen_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetPen*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetPen" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetPen">GetPen()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Pen GetPen()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.pen">Pen</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_SharpVectors_Dom_Svg_SvgAltGlyphElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText(SharpVectors.Dom.Svg.SvgAltGlyphElement)">GetText(SvgAltGlyphElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string GetText(SvgAltGlyphElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgAltGlyphElement.html">SvgAltGlyphElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_SharpVectors_Dom_Svg_SvgTextContentElement_System_Xml_XmlNode_System_Xml_XmlNode_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText(SharpVectors.Dom.Svg.SvgTextContentElement,System.Xml.XmlNode,System.Xml.XmlNode)">GetText(SvgTextContentElement, XmlNode, XmlNode)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string GetText(SvgTextContentElement element, XmlNode child, XmlNode spaceNode = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
-        <td><span class="parametername">child</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></td>
-        <td><span class="parametername">spaceNode</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_SharpVectors_Dom_Svg_SvgTRefElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText(SharpVectors.Dom.Svg.SvgTRefElement)">GetText(SvgTRefElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string GetText(SvgTRefElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTRefElement.html">SvgTRefElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextDecoration_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextDecoration*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextDecoration_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextDecoration(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextDecoration(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected TextDecorationCollection GetTextDecoration(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.textdecorationcollection">TextDecorationCollection</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontFamily_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontFamily*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontFamily_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontFamily(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextFontFamily(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontFamily GetTextFontFamily(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.fontfamily">FontFamily</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontFamilyInfo_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontFamilyInfo*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontFamilyInfo_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontFamilyInfo(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextFontFamilyInfo(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected WpfFontFamilyInfo GetTextFontFamilyInfo(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfFontFamilyInfo.html">WpfFontFamilyInfo</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStretch_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStretch*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStretch_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStretch(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextFontStretch(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontStretch GetTextFontStretch(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontstretch">FontStretch</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStyle_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStyle*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStyle_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStyle(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextFontStyle(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontStyle GetTextFontStyle(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontstyle">FontStyle</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStyle_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStyle*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStyle_System_String_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStyle(System.String)">GetTextFontStyle(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontStyle GetTextFontStyle(string fontStyle)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fontStyle</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontstyle">FontStyle</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontWeight_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontWeight*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontWeight_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontWeight(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextFontWeight(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontWeight GetTextFontWeight(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontweight">FontWeight</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontWeight_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontWeight*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontWeight_System_String_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontWeight(System.String)">GetTextFontWeight(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected FontWeight GetTextFontWeight(string fontWeight)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fontWeight</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.fontweight">FontWeight</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextStringFormat_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextStringFormat*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextStringFormat_SharpVectors_Dom_Svg_SvgTextContentElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextStringFormat(SharpVectors.Dom.Svg.SvgTextContentElement)">GetTextStringFormat(SvgTextContentElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected WpfTextStringFormat GetTextStringFormat(SvgTextContentElement element)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextStringFormat.html">WpfTextStringFormat</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_Initialize_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Initialize*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_Initialize_System_Windows_Media_DrawingContext_SharpVectors_Renderers_Wpf_WpfDrawingContext_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Initialize(System.Windows.Media.DrawingContext,SharpVectors.Renderers.Wpf.WpfDrawingContext)">Initialize(DrawingContext, WpfDrawingContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Initialize(DrawingContext textContext, WpfDrawingContext drawContext)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingcontext">DrawingContext</a></td>
-        <td><span class="parametername">textContext</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.html">WpfDrawingContext</a></td>
-        <td><span class="parametername">drawContext</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_RenderText_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.RenderText*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_RenderText_SharpVectors_Dom_Svg_SvgTextContentElement_System_Windows_Point__System_String_System_Double_SharpVectors_Renderers_Texts_WpfTextPlacement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.RenderText(SharpVectors.Dom.Svg.SvgTextContentElement,System.Windows.Point@,System.String,System.Double,SharpVectors.Renderers.Texts.WpfTextPlacement)">RenderText(SvgTextContentElement, ref Point, String, Double, WpfTextPlacement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract void RenderText(SvgTextContentElement element, ref Point ctp, string text, double rotate, WpfTextPlacement placement)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.point">Point</a></td>
-        <td><span class="parametername">ctp</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">text</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">rotate</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextPlacement.html">WpfTextPlacement</a></td>
-        <td><span class="parametername">placement</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_RenderTextRun_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.RenderTextRun*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_RenderTextRun_SharpVectors_Dom_Svg_SvgTextContentElement_System_Windows_Point__System_String_System_Double_SharpVectors_Renderers_Texts_WpfTextPlacement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.RenderTextRun(SharpVectors.Dom.Svg.SvgTextContentElement,System.Windows.Point@,System.String,System.Double,SharpVectors.Renderers.Texts.WpfTextPlacement)">RenderTextRun(SvgTextContentElement, ref Point, String, Double, WpfTextPlacement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract void RenderTextRun(SvgTextContentElement element, ref Point ctp, string text, double rotate, WpfTextPlacement placement)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.point">Point</a></td>
-        <td><span class="parametername">ctp</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">text</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">rotate</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextPlacement.html">WpfTextPlacement</a></td>
-        <td><span class="parametername">placement</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_SetElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.SetElement*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_SetElement_SharpVectors_Dom_Svg_SvgTextBaseElement_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.SetElement(SharpVectors.Dom.Svg.SvgTextBaseElement)">SetElement(SvgTextBaseElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void SetElement(SvgTextBaseElement textElement)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextBaseElement.html">SvgTextBaseElement</a></td>
-        <td><span class="parametername">textElement</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_SetTextWidth_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.SetTextWidth*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_SetTextWidth_System_Double_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.SetTextWidth(System.Double)">SetTextWidth(Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected void SetTextWidth(double textWidth)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">textWidth</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_TrimText_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TrimText*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_TrimText_SharpVectors_Dom_Svg_SvgTextContentElement_System_String_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.TrimText(SharpVectors.Dom.Svg.SvgTextContentElement,System.String)">TrimText(SvgTextContentElement, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static string TrimText(SvgTextContentElement element, string val)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Svg.SvgTextContentElement.html">SvgTextContentElement</a></td>
-        <td><span class="parametername">element</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">val</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Texts_WpfTextRenderer_Uninitialize_" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Uninitialize*"></a>
-  <h4 id="SharpVectors_Renderers_Texts_WpfTextRenderer_Uninitialize" data-uid="SharpVectors.Renderers.Texts.WpfTextRenderer.Uninitialize">Uninitialize()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Uninitialize()</code></pre>
-  </div>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
-  </div>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetBolderFontWeight.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetBolderFontWeight_System_String_">GetBolderFontWeight(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetBrush.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetBrush">GetBrush()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetComputedFontSize.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetComputedFontSize_SharpVectors_Dom_Svg_SvgTextContentElement_">GetComputedFontSize(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetLighterFontWeight.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetLighterFontWeight_System_String_">GetLighterFontWeight(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetPen.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetPen">GetPen()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_SharpVectors_Dom_Svg_SvgAltGlyphElement_">GetText(SvgAltGlyphElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_SharpVectors_Dom_Svg_SvgTRefElement_">GetText(SvgTRefElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetText.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetText_SharpVectors_Dom_Svg_SvgTextContentElement_System_Xml_XmlNode_System_Xml_XmlNode_">GetText(SvgTextContentElement, XmlNode, XmlNode)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextDecoration.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextDecoration_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextDecoration(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontFamily.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontFamily_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextFontFamily(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontFamilyInfo.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontFamilyInfo_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextFontFamilyInfo(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStretch.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStretch_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextFontStretch(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStyle.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStyle_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextFontStyle(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontStyle.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontStyle_System_String_">GetTextFontStyle(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontWeight.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontWeight_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextFontWeight(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextFontWeight.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextFontWeight_System_String_">GetTextFontWeight(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.GetTextStringFormat.html#SharpVectors_Renderers_Texts_WpfTextRenderer_GetTextStringFormat_SharpVectors_Dom_Svg_SvgTextContentElement_">GetTextStringFormat(SvgTextContentElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.Initialize.html#SharpVectors_Renderers_Texts_WpfTextRenderer_Initialize_System_Windows_Media_DrawingContext_SharpVectors_Renderers_Wpf_WpfDrawingContext_">Initialize(DrawingContext, WpfDrawingContext)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.RenderText.html#SharpVectors_Renderers_Texts_WpfTextRenderer_RenderText_SharpVectors_Dom_Svg_SvgTextContentElement_System_Windows_Point__System_String_System_Double_SharpVectors_Renderers_Texts_WpfTextPlacement_">RenderText(SvgTextContentElement, ref Point, string, double, WpfTextPlacement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.RenderTextRun.html#SharpVectors_Renderers_Texts_WpfTextRenderer_RenderTextRun_SharpVectors_Dom_Svg_SvgTextContentElement_System_Windows_Point__System_String_System_Double_SharpVectors_Renderers_Texts_WpfTextPlacement_">RenderTextRun(SvgTextContentElement, ref Point, string, double, WpfTextPlacement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.SetElement.html#SharpVectors_Renderers_Texts_WpfTextRenderer_SetElement_SharpVectors_Dom_Svg_SvgTextBaseElement_">SetElement(SvgTextBaseElement)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.SetTextWidth.html#SharpVectors_Renderers_Texts_WpfTextRenderer_SetTextWidth_System_Double_">SetTextWidth(double)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.TrimText.html#SharpVectors_Renderers_Texts_WpfTextRenderer_TrimText_SharpVectors_Dom_Svg_SvgTextContentElement_System_String_">TrimText(SvgTextContentElement, string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextRenderer.Uninitialize.html#SharpVectors_Renderers_Texts_WpfTextRenderer_Uninitialize">Uninitialize()</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRenderingWpf/Texts/WpfTextRenderer.cs/#L18" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

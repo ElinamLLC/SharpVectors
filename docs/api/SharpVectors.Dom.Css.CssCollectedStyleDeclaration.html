@@ -1,627 +1,275 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class CssCollectedStyleDeclaration
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class CssCollectedStyleDeclaration
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class CssCollectedStyleDeclaration
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CssCollectedStyleDeclaration
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Css_CssCollectedStyleDeclaration.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Css.CssCollectedStyleDeclaration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration" class="text-break">Class CssCollectedStyleDeclaration
+  <h1 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration" class="text-break">
+    Class CssCollectedStyleDeclaration
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCss/Css/CssCollectedStyleDeclaration.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>Used internally for collection of styles for a specific element</p>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Css.html">Css</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Css.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Used internally for collection of styles for a specific element</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html">CssStyleDeclaration</a></div>
-    <div class="level2"><span class="xref">CssCollectedStyleDeclaration</span></div>
-  </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="SharpVectors.Dom.Css.ICssStyleDeclaration.html">ICssStyleDeclaration</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_ReadOnly">CssStyleDeclaration.ReadOnly</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_Origin">CssStyleDeclaration.Origin</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetStylesForElement_SharpVectors_Dom_Css_CssCollectedStyleDeclaration_System_Int32_">CssStyleDeclaration.GetStylesForElement(CssCollectedStyleDeclaration, Int32)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetValidUrlFromCSS_System_String_System_String_">CssStyleDeclaration.GetValidUrlFromCSS(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetValidUrlsFromCSS_System_String_">CssStyleDeclaration.GetValidUrlsFromCSS(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_SetProperty_System_String_System_String_System_String_">CssStyleDeclaration.SetProperty(String, String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_SetPropertyValue_System_String_System_String_">CssStyleDeclaration.SetPropertyValue(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_RemoveProperty_System_String_">CssStyleDeclaration.RemoveProperty(String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetPropertyValue_System_String___">CssStyleDeclaration.GetPropertyValue(String[])</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_ParentRule">CssStyleDeclaration.ParentRule</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Dom.Css.html">SharpVectors.Dom.Css</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Css.dll</h6>
-  <h5 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_syntax">Syntax</h5>
+  <div class="markdown conceptual"></div>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class CssCollectedStyleDeclaration : CssStyleDeclaration, ICssStyleDeclaration</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration__ctor_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.#ctor*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration__ctor_System_Xml_XmlElement_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.#ctor(System.Xml.XmlElement)">CssCollectedStyleDeclaration(XmlElement)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CssCollectedStyleDeclaration(XmlElement elm)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlelement">XmlElement</a></td>
-        <td><span class="parametername">elm</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_CssText_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CssText*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_CssText" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CssText">CssText</h4>
-  <div class="markdown level1 summary"><p>The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string CssText { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_CssText">CssStyleDeclaration.CssText</a></div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.DomException.html">DomException</a></td>
-        <td><p><code>SYNTAX_ERR:</code> Raised if the specified CSS string value has a syntax error and is unparsable.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.DomException.html">DomException</a></td>
-        <td><p><code>NO_MODIFICATION_ALLOWED_ERR:</code> Raised if this declaration is readonly or a property is readonly.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_Item_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Item*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_Item_System_UInt64_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Item(System.UInt64)">Item[UInt64]</h4>
-  <div class="markdown level1 summary"><p>Used to retrieve the properties that have been explicitly set in this declaration block. The order of the properties retrieved using this method does not have to be the order in which they were set. This method can be used to iterate over all properties in this declaration block.
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html">CssStyleDeclaration</a></div>
+      <div><span class="xref">CssCollectedStyleDeclaration</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="SharpVectors.Dom.Css.ICssStyleDeclaration.html">ICssStyleDeclaration</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.ReadOnly.html#SharpVectors_Dom_Css_CssStyleDeclaration_ReadOnly">CssStyleDeclaration.ReadOnly</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.Origin.html#SharpVectors_Dom_Css_CssStyleDeclaration_Origin">CssStyleDeclaration.Origin</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.GetStylesForElement.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetStylesForElement_SharpVectors_Dom_Css_CssCollectedStyleDeclaration_System_Int32_">CssStyleDeclaration.GetStylesForElement(CssCollectedStyleDeclaration, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.GetValidUrlFromCSS.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetValidUrlFromCSS_System_String_System_String_">CssStyleDeclaration.GetValidUrlFromCSS(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.GetValidUrlsFromCSS.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetValidUrlsFromCSS_System_String_">CssStyleDeclaration.GetValidUrlsFromCSS(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.SetProperty.html#SharpVectors_Dom_Css_CssStyleDeclaration_SetProperty_System_String_System_String_System_String_">CssStyleDeclaration.SetProperty(string, string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.SetPropertyValue.html#SharpVectors_Dom_Css_CssStyleDeclaration_SetPropertyValue_System_String_System_String_">CssStyleDeclaration.SetPropertyValue(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.RemoveProperty.html#SharpVectors_Dom_Css_CssStyleDeclaration_RemoveProperty_System_String_">CssStyleDeclaration.RemoveProperty(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyValue.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetPropertyValue_System_String___">CssStyleDeclaration.GetPropertyValue(string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.ParentRule.html#SharpVectors_Dom_Css_CssStyleDeclaration_ParentRule">CssStyleDeclaration.ParentRule</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.-ctor.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration__ctor_System_Xml_XmlElement_">CssCollectedStyleDeclaration(XmlElement)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CssText.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_CssText">CssText</a></dt>
+    <dd><p>The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Item.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_Item_System_UInt64_">this[ulong]</a></dt>
+    <dd><p>Used to retrieve the properties that have been explicitly set in this declaration block. The order of the properties retrieved using this method does not have to be the order in which they were set. This method can be used to iterate over all properties in this declaration block.
 The name of the property at this ordinal position. The empty string if no property exists at this position.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string this[ulong index] { get; }</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">UInt64</a></td>
-        <td><span class="parametername">index</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_Item_System_UInt64_">CssStyleDeclaration.Item[UInt64]</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_Length_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Length*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_Length" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Length">Length</h4>
-  <div class="markdown level1 summary"><p>The number of properties that have been explicitly set in this declaration block. The range of valid indices is 0 to length-1 inclusive.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override ulong Length { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">UInt64</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_Length">CssStyleDeclaration.Length</a></div>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_CollectProperty_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CollectProperty*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_CollectProperty_System_String_System_Int32_SharpVectors_Dom_Css_CssValue_SharpVectors_Dom_Css_CssStyleSheetType_System_String_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CollectProperty(System.String,System.Int32,SharpVectors.Dom.Css.CssValue,SharpVectors.Dom.Css.CssStyleSheetType,System.String)">CollectProperty(String, Int32, CssValue, CssStyleSheetType, String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CollectProperty(string name, int specificity, CssValue cssValue, CssStyleSheetType origin, string priority)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">name</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><span class="parametername">specificity</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Css.CssValue.html">CssValue</a></td>
-        <td><span class="parametername">cssValue</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Css.CssStyleSheetType.html">CssStyleSheetType</a></td>
-        <td><span class="parametername">origin</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">priority</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyCssValue_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyCssValue*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyCssValue_System_String_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyCssValue(System.String)">GetPropertyCssValue(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override ICssValue GetPropertyCssValue(string propertyName)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">propertyName</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Css.ICssValue.html">ICssValue</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetPropertyCssValue_System_String_">CssStyleDeclaration.GetPropertyCssValue(String)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyOrigin_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyOrigin*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyOrigin_System_String_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyOrigin(System.String)">GetPropertyOrigin(String)</h4>
-  <div class="markdown level1 summary"><p>Returns the origin type of the collected property</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CssStyleSheetType GetPropertyOrigin(string propertyName)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">propertyName</span></td>
-        <td><p>The name of the property</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Dom.Css.CssStyleSheetType.html">CssStyleSheetType</a></td>
-        <td><p>The origin type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyPriority_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyPriority*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyPriority_System_String_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyPriority(System.String)">GetPropertyPriority(String)</h4>
-  <div class="markdown level1 summary"><p>Used to retrieve the priority of a CSS property (e.g. the &quot;important&quot; qualifier) if the property has been explicitly set in this declaration block.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string GetPropertyPriority(string propertyName)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">propertyName</span></td>
-        <td><p>The name of the CSS property. See the CSS property index.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>A string representing the priority (e.g. &quot;important&quot;) if one exists. The empty string if none exists.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetPropertyPriority_System_String_">CssStyleDeclaration.GetPropertyPriority(String)</a></div>
-  
-  
-  <a id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyValue_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyValue*"></a>
-  <h4 id="SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyValue_System_String_" data-uid="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyValue(System.String)">GetPropertyValue(String)</h4>
-  <div class="markdown level1 summary"><p>Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override string GetPropertyValue(string propertyName)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">propertyName</span></td>
-        <td><p>The name of the CSS property. See the CSS property index.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html#SharpVectors_Dom_Css_CssStyleDeclaration_GetPropertyValue_System_String_">CssStyleDeclaration.GetPropertyValue(String)</a></div>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="SharpVectors.Dom.Css.ICssStyleDeclaration.html">ICssStyleDeclaration</a>
-  </div>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Length.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_Length">Length</a></dt>
+    <dd><p>The number of properties that have been explicitly set in this declaration block. The range of valid indices is 0 to length-1 inclusive.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CollectProperty.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_CollectProperty_System_String_System_Int32_SharpVectors_Dom_Css_CssValue_SharpVectors_Dom_Css_CssStyleSheetType_System_String_">CollectProperty(string, int, CssValue, CssStyleSheetType, string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyCssValue.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyCssValue_System_String_">GetPropertyCssValue(string)</a></dt>
+    <dd><p>Used to retrieve the object representation of the value of a CSS property if it has been explicitly set
+within this declaration block. This method returns null if the property is a shorthand property.
+Shorthand property values can only be accessed and modified as strings, using the getPropertyValue and
+setProperty methods.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyOrigin.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyOrigin_System_String_">GetPropertyOrigin(string)</a></dt>
+    <dd><p>Returns the origin type of the collected property</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyPriority.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyPriority_System_String_">GetPropertyPriority(string)</a></dt>
+    <dd><p>Used to retrieve the priority of a CSS property (e.g. the &quot;important&quot; qualifier) if the property has been explicitly set in this declaration block.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyValue.html#SharpVectors_Dom_Css_CssCollectedStyleDeclaration_GetPropertyValue_System_String_">GetPropertyValue(string)</a></dt>
+    <dd><p>Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.</p>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorCss/Css/CssCollectedStyleDeclaration.cs/#L11" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,176 +1,156 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class WpfDrawingContext
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class WpfDrawingContext
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class WpfDrawingContext
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WpfDrawingContext
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Renderers_Wpf_WpfDrawingContext.md&amp;value=---%0Auid%3A%20SharpVectors.Renderers.Wpf.WpfDrawingContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Renderers_Wpf_WpfDrawingContext" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext" class="text-break">Class WpfDrawingContext
+  <h1 id="SharpVectors_Renderers_Wpf_WpfDrawingContext" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext" class="text-break">
+    Class WpfDrawingContext
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRenderingWpf/Wpf/WpfDrawingContext.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
-    <div class="level3"><span class="xref">WpfDrawingContext</span></div>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Renderers.html">Renderers</a>.<a class="xref" href="SharpVectors.Renderers.Wpf.html">Wpf</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Rendering.Wpf.dll</dd></dl>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>&gt;</div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class WpfDrawingContext : DependencyObject, IEnumerable&lt;DrawingGroup&gt;, IEnumerable</code></pre>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
+      <div><span class="xref">WpfDrawingContext</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals#system-windows-dependencyobject-equals(system-object)">DependencyObject.Equals(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals">DependencyObject.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode#system-windows-dependencyobject-gethashcode">DependencyObject.GetHashCode()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode">DependencyObject.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue#system-windows-dependencyobject-getvalue(system-windows-dependencyproperty)">DependencyObject.GetValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue">DependencyObject.GetValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue#system-windows-dependencyobject-setcurrentvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetCurrentValue(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue">DependencyObject.SetCurrentValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencyproperty)">DependencyObject.ClearValue(DependencyProperty)</a>
@@ -179,1578 +159,304 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencypropertykey)">DependencyObject.ClearValue(DependencyPropertyKey)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue#system-windows-dependencyobject-coercevalue(system-windows-dependencyproperty)">DependencyObject.CoerceValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue">DependencyObject.CoerceValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty#system-windows-dependencyobject-invalidateproperty(system-windows-dependencyproperty)">DependencyObject.InvalidateProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty">DependencyObject.InvalidateProperty(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.onpropertychanged#system-windows-dependencyobject-onpropertychanged(system-windows-dependencypropertychangedeventargs)">DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue">DependencyObject.ReadLocalValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty#system-windows-dependencyobject-shouldserializeproperty(system-windows-dependencyproperty)">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue#system-windows-dependencyobject-readlocalvalue(system-windows-dependencyproperty)">DependencyObject.ReadLocalValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype">DependencyObject.DependencyObjectType</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator#system-windows-dependencyobject-getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed">DependencyObject.IsSealed</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype#system-windows-dependencyobject-dependencyobjecttype">DependencyObject.DependencyObjectType</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher">DispatcherObject.Dispatcher</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed#system-windows-dependencyobject-issealed">DependencyObject.IsSealed</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher#system-windows-threading-dispatcherobject-dispatcher">DispatcherObject.Dispatcher</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Renderers.Wpf.html">SharpVectors.Renderers.Wpf</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Rendering.Wpf.dll</h6>
-  <h5 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class WpfDrawingContext : DependencyObject, IEnumerable&lt;DrawingGroup&gt;, IEnumerable</code></pre>
-  </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext__ctor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.#ctor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext__ctor" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.#ctor">WpfDrawingContext()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfDrawingContext()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext__ctor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.#ctor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext__ctor_System_Boolean_SharpVectors_Renderers_Wpf_WpfDrawingSettings_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.#ctor(System.Boolean,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">WpfDrawingContext(Boolean, WpfDrawingSettings)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfDrawingContext(bool isFragment, WpfDrawingSettings settings)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">isFragment</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_BaseUrls_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.BaseUrls*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_BaseUrls" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.BaseUrls">BaseUrls</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ISet&lt;string&gt; BaseUrls { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.iset-1">ISet</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Bounds_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Bounds*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Bounds" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Bounds">Bounds</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Rect Bounds { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.rect">Rect</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ClassVisitor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ClassVisitor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ClassVisitor" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ClassVisitor">ClassVisitor</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfClassVisitor ClassVisitor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfClassVisitor.html">WpfClassVisitor</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Count_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Count*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Count" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Count">Count</h4>
-  <div class="markdown level1 summary"><p>Gets the number of elements contained in the drawing stack.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><p>The number of elements contained in the drawing stack.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_DpiScaleX_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.DpiScaleX*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_DpiScaleX" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.DpiScaleX">DpiScaleX</h4>
-  <div class="markdown level1 summary"><p>Gets the DPI scale on the X axis.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double DpiScaleX { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The DPI scale for the X axis.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_DpiScaleY_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.DpiScaleY*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_DpiScaleY" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.DpiScaleY">DpiScaleY</h4>
-  <div class="markdown level1 summary"><p>Gets the DPI scale on the Yaxis.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double DpiScaleY { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The DPI scale for the Y axis.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_FontFamilyVisitor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.FontFamilyVisitor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_FontFamilyVisitor" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.FontFamilyVisitor">FontFamilyVisitor</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfFontFamilyVisitor FontFamilyVisitor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfFontFamilyVisitor.html">WpfFontFamilyVisitor</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IDVisitor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IDVisitor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IDVisitor" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IDVisitor">IDVisitor</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfIDVisitor IDVisitor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfIDVisitor.html">WpfIDVisitor</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ImageVisitor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ImageVisitor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ImageVisitor" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ImageVisitor">ImageVisitor</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfEmbeddedImageVisitor ImageVisitor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfEmbeddedImageVisitor.html">WpfEmbeddedImageVisitor</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_InteractiveMode_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.InteractiveMode*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_InteractiveMode" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.InteractiveMode">InteractiveMode</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgInteractiveModes InteractiveMode { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Runtime.SvgInteractiveModes.html">SvgInteractiveModes</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsFragment_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsFragment*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsFragment" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsFragment">IsFragment</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsFragment { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsResourceDictionary_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsResourceDictionary*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsResourceDictionary" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsResourceDictionary">IsResourceDictionary</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsResourceDictionary { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Links_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Links*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Links" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Links">Links</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DrawingGroup Links { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_LinkVisitor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.LinkVisitor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_LinkVisitor" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.LinkVisitor">LinkVisitor</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfLinkVisitor LinkVisitor { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfLinkVisitor.html">WpfLinkVisitor</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Name_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Name*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Name" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Name">Name</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerDip_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerDip*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerDip" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerDip">PixelsPerDip</h4>
-  <div class="markdown level1 summary"><p>Get or sets the PixelsPerDip at which the text should be rendered.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double PixelsPerDip { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The current PixelsPerDip value.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerInchX_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerInchX*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerInchX" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerInchX">PixelsPerInchX</h4>
-  <div class="markdown level1 summary"><p>Gets the DPI along X axis.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double PixelsPerInchX { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The DPI along the X axis.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerInchY_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerInchY*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerInchY" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerInchY">PixelsPerInchY</h4>
-  <div class="markdown level1 summary"><p>Gets the DPI along Y axis.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double PixelsPerInchY { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The DPI along the Y axis.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RenderingClipRegion_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RenderingClipRegion*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RenderingClipRegion" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RenderingClipRegion">RenderingClipRegion</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RenderingClipRegion { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Root_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Root*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Root" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Root">Root</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DrawingGroup Root { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Settings_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Settings*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Settings" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Settings">Settings</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfDrawingSettings Settings { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Tag_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Tag*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Tag" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Tag">Tag</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public object Tag { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_System_Windows_Media_Brush_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources(System.Windows.Media.Brush)">AddResources(Brush)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddResources(Brush brush)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.brush">Brush</a></td>
-        <td><span class="parametername">brush</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_System_Windows_Media_Pen_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources(System.Windows.Media.Pen)">AddResources(Pen)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddResources(Pen pen)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.pen">Pen</a></td>
-        <td><span class="parametername">pen</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_System_Windows_Media_SolidColorBrush_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources(System.Windows.Media.SolidColorBrush)">AddResources(SolidColorBrush)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddResources(SolidColorBrush brush)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.solidcolorbrush">SolidColorBrush</a></td>
-        <td><span class="parametername">brush</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddUrl_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddUrl*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_AddUrl_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddUrl(System.String)">AddUrl(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddUrl(string baseUrl)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">baseUrl</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_BeginDrawing_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.BeginDrawing*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_BeginDrawing_SharpVectors_Renderers_Wpf_WpfDrawingDocument_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.BeginDrawing(SharpVectors.Renderers.Wpf.WpfDrawingDocument)">BeginDrawing(WpfDrawingDocument)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void BeginDrawing(WpfDrawingDocument drawingDocument)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingDocument.html">WpfDrawingDocument</a></td>
-        <td><span class="parametername">drawingDocument</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Clear_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Clear*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Clear" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Clear">Clear()</h4>
-  <div class="markdown level1 summary"><p>Removes all objects from the drawing stack.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Contains_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Contains*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Contains_System_Windows_Media_DrawingGroup_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Contains(System.Windows.Media.DrawingGroup)">Contains(DrawingGroup)</h4>
-  <div class="markdown level1 summary"><p>Determines whether an element is in the drawing stack.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Contains(DrawingGroup item)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><span class="parametername">item</span></td>
-        <td><p>The object to locate in the drawing stack. The value can be null for reference types.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p>true if item is found in the drawing stack; otherwise, false.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ContainsUrl_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ContainsUrl*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ContainsUrl_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ContainsUrl(System.String)">ContainsUrl(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ContainsUrl(string baseUrl)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">baseUrl</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_CopyTo_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.CopyTo*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_CopyTo_System_Windows_Media_DrawingGroup___System_Int32_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.CopyTo(System.Windows.Media.DrawingGroup[],System.Int32)">CopyTo(DrawingGroup[], Int32)</h4>
-  <div class="markdown level1 summary"><p>Copies the drawing stack to an existing one-dimensional array, starting at the specified array index.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CopyTo(DrawingGroup[] array, int arrayIndex)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>[]</td>
-        <td><span class="parametername">array</span></td>
-        <td><p>The one-dimensional System.Array that is the destination of the elements
-copied from drawing stack. The array must have zero-based indexing.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><span class="parametername">arrayIndex</span></td>
-        <td><p>The zero-based index in array at which copying begins.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If <code data-dev-comment-type="paramref" class="paramref">array</code> is <span class="xref">null</span>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
-        <td><p><code data-dev-comment-type="paramref" class="paramref">arrayIndex</code> is less than zero.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
-        <td><p><code data-dev-comment-type="paramref" class="paramref">arrayIndex</code> is equal to or greater than the length of array.</p>
-<p>-or-</p>
-The number of elements in the source drawing stack is greater than the available 
-space from <code data-dev-comment-type="paramref" class="paramref">arrayIndex</code> to the end of the destination array.
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_EndDrawing_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.EndDrawing*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_EndDrawing" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.EndDrawing">EndDrawing()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void EndDrawing()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_GetEnumerator_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.GetEnumerator*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_GetEnumerator" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.GetEnumerator">GetEnumerator()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerator&lt;DrawingGroup&gt; GetEnumerator()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_GetPaintContext_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.GetPaintContext*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_GetPaintContext_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.GetPaintContext(System.String)">GetPaintContext(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfSvgPaintContext GetPaintContext(string guidId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">guidId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfSvgPaintContext.html">WpfSvgPaintContext</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Initialize_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Initialize*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Initialize_SharpVectors_Renderers_Wpf_WpfLinkVisitor_SharpVectors_Renderers_Wpf_WpfFontFamilyVisitor_SharpVectors_Renderers_Wpf_WpfEmbeddedImageVisitor_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Initialize(SharpVectors.Renderers.Wpf.WpfLinkVisitor,SharpVectors.Renderers.Wpf.WpfFontFamilyVisitor,SharpVectors.Renderers.Wpf.WpfEmbeddedImageVisitor)">Initialize(WpfLinkVisitor, WpfFontFamilyVisitor, WpfEmbeddedImageVisitor)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Initialize(WpfLinkVisitor linkVisitor, WpfFontFamilyVisitor fontFamilyVisitor, WpfEmbeddedImageVisitor imageVisitor)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfLinkVisitor.html">WpfLinkVisitor</a></td>
-        <td><span class="parametername">linkVisitor</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfFontFamilyVisitor.html">WpfFontFamilyVisitor</a></td>
-        <td><span class="parametername">fontFamilyVisitor</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfEmbeddedImageVisitor.html">WpfEmbeddedImageVisitor</a></td>
-        <td><span class="parametername">imageVisitor</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsPaintContext_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsPaintContext*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsPaintContext_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsPaintContext(System.String)">IsPaintContext(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsPaintContext(string guidId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">guidId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsRegisteredId_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsRegisteredId*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_IsRegisteredId_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsRegisteredId(System.String)">IsRegisteredId(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsRegisteredId(string elementId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">elementId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Peek_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Peek*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Peek" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Peek">Peek()</h4>
-  <div class="markdown level1 summary"><p>Returns the object at the top of the drawing stack without removing it.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DrawingGroup Peek()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><p>The object at the top of the drawing stack.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
-        <td><p>The drawing stack is empty.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Pop_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Pop*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Pop" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Pop">Pop()</h4>
-  <div class="markdown level1 summary"><p>Removes and returns the object at the top of the drawing stack.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DrawingGroup Pop()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><p>The object removed from the top of the drawing stack.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
-        <td><p>The drawing stack is empty.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Push_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Push*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Push_System_Windows_Media_DrawingGroup_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Push(System.Windows.Media.DrawingGroup)">Push(DrawingGroup)</h4>
-  <div class="markdown level1 summary"><p>Inserts an object at the top of the drawing stack.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Push(DrawingGroup item)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><span class="parametername">item</span></td>
-        <td><p>The object to push onto the drawing stack. The value can be null for reference types.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterDrawing_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterDrawing*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterDrawing_System_String_System_String_System_Windows_Media_Drawing_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterDrawing(System.String,System.String,System.Windows.Media.Drawing)">RegisterDrawing(String, String, Drawing)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterDrawing(string elementId, string uniqueId, Drawing drawing)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">elementId</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">uniqueId</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawing">Drawing</a></td>
-        <td><span class="parametername">drawing</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterId_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterId*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterId_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterId(System.String)">RegisterId(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterId(string elementId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">elementId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterPaintContext_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterPaintContext*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterPaintContext_SharpVectors_Renderers_Wpf_WpfSvgPaintContext_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterPaintContext(SharpVectors.Renderers.Wpf.WpfSvgPaintContext)">RegisterPaintContext(WpfSvgPaintContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterPaintContext(WpfSvgPaintContext paintContext)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfSvgPaintContext.html">WpfSvgPaintContext</a></td>
-        <td><span class="parametername">paintContext</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RemoveUrl_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RemoveUrl*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_RemoveUrl_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.RemoveUrl(System.String)">RemoveUrl(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RemoveUrl(string baseUrl)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">baseUrl</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ToArray_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ToArray*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_ToArray" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.ToArray">ToArray()</h4>
-  <div class="markdown level1 summary"><p>Copies the drawing stack to a new array.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DrawingGroup[] ToArray()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>[]</td>
-        <td><p>A new array containing copies of the elements of the drawing stack.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_TrimExcess_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.TrimExcess*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_TrimExcess" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.TrimExcess">TrimExcess()</h4>
-  <div class="markdown level1 summary"><p>Sets the capacity to the actual number of elements in the drawing stack,
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.-ctor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext__ctor">WpfDrawingContext()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.-ctor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext__ctor_System_Boolean_SharpVectors_Renderers_Wpf_WpfDrawingSettings_">WpfDrawingContext(bool, WpfDrawingSettings)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.BaseUrls.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_BaseUrls">BaseUrls</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Bounds.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Bounds">Bounds</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.ClassVisitor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_ClassVisitor">ClassVisitor</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Count.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Count">Count</a></dt>
+    <dd><p>Gets the number of elements contained in the drawing stack.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.DpiScaleX.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_DpiScaleX">DpiScaleX</a></dt>
+    <dd><p>Gets the DPI scale on the X axis.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.DpiScaleY.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_DpiScaleY">DpiScaleY</a></dt>
+    <dd><p>Gets the DPI scale on the Yaxis.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.FontFamilyVisitor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_FontFamilyVisitor">FontFamilyVisitor</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.IDVisitor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_IDVisitor">IDVisitor</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.ImageVisitor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_ImageVisitor">ImageVisitor</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.InteractiveMode.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_InteractiveMode">InteractiveMode</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsFragment.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_IsFragment">IsFragment</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsResourceDictionary.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_IsResourceDictionary">IsResourceDictionary</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.LinkVisitor.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_LinkVisitor">LinkVisitor</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Links.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Links">Links</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Name.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Name">Name</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerDip.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerDip">PixelsPerDip</a></dt>
+    <dd><p>Get or sets the PixelsPerDip at which the text should be rendered.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerInchX.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerInchX">PixelsPerInchX</a></dt>
+    <dd><p>Gets the DPI along X axis.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.PixelsPerInchY.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_PixelsPerInchY">PixelsPerInchY</a></dt>
+    <dd><p>Gets the DPI along Y axis.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.RenderingClipRegion.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_RenderingClipRegion">RenderingClipRegion</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Root.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Root">Root</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Settings.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Settings">Settings</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Tag.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Tag">Tag</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_System_Windows_Media_Brush_">AddResources(Brush)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_System_Windows_Media_Pen_">AddResources(Pen)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddResources.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_AddResources_System_Windows_Media_SolidColorBrush_">AddResources(SolidColorBrush)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.AddUrl.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_AddUrl_System_String_">AddUrl(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.BeginDrawing.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_BeginDrawing_SharpVectors_Renderers_Wpf_WpfDrawingDocument_">BeginDrawing(WpfDrawingDocument)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Clear.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Clear">Clear()</a></dt>
+    <dd><p>Removes all objects from the drawing stack.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Contains.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Contains_System_Windows_Media_DrawingGroup_">Contains(DrawingGroup)</a></dt>
+    <dd><p>Determines whether an element is in the drawing stack.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.ContainsUrl.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_ContainsUrl_System_String_">ContainsUrl(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.CopyTo.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_CopyTo_System_Windows_Media_DrawingGroup___System_Int32_">CopyTo(DrawingGroup[], int)</a></dt>
+    <dd><p>Copies the drawing stack to an existing one-dimensional array, starting at the specified array index.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.EndDrawing.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_EndDrawing">EndDrawing()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.GetEnumerator.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_GetEnumerator">GetEnumerator()</a></dt>
+    <dd><p>Returns an enumerator that iterates through the collection.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.GetPaintContext.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_GetPaintContext_System_String_">GetPaintContext(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Initialize.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Initialize_SharpVectors_Renderers_Wpf_WpfLinkVisitor_SharpVectors_Renderers_Wpf_WpfFontFamilyVisitor_SharpVectors_Renderers_Wpf_WpfEmbeddedImageVisitor_">Initialize(WpfLinkVisitor, WpfFontFamilyVisitor, WpfEmbeddedImageVisitor)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsPaintContext.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_IsPaintContext_System_String_">IsPaintContext(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.IsRegisteredId.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_IsRegisteredId_System_String_">IsRegisteredId(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Peek.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Peek">Peek()</a></dt>
+    <dd><p>Returns the object at the top of the drawing stack without removing it.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Pop.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Pop">Pop()</a></dt>
+    <dd><p>Removes and returns the object at the top of the drawing stack.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Push.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Push_System_Windows_Media_DrawingGroup_">Push(DrawingGroup)</a></dt>
+    <dd><p>Inserts an object at the top of the drawing stack.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterDrawing.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterDrawing_System_String_System_String_System_Windows_Media_Drawing_">RegisterDrawing(string, string, Drawing)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterId.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterId_System_String_">RegisterId(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.RegisterPaintContext.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_RegisterPaintContext_SharpVectors_Renderers_Wpf_WpfSvgPaintContext_">RegisterPaintContext(WpfSvgPaintContext)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.RemoveUrl.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_RemoveUrl_System_String_">RemoveUrl(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.ToArray.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_ToArray">ToArray()</a></dt>
+    <dd><p>Copies the drawing stack to a new array.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.TrimExcess.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_TrimExcess">TrimExcess()</a></dt>
+    <dd><p>Sets the capacity to the actual number of elements in the drawing stack,
 if that number is less than 90 percent of current capacity.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void TrimExcess()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Uninitialize_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Uninitialize*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_Uninitialize" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.Uninitialize">Uninitialize()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Uninitialize()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_UnRegisterId_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.UnRegisterId*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_UnRegisterId_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.UnRegisterId(System.String)">UnRegisterId(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UnRegisterId(string elementId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">elementId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_UnRegisterPaintContext_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.UnRegisterPaintContext*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_UnRegisterPaintContext_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.UnRegisterPaintContext(System.String)">UnRegisterPaintContext(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UnRegisterPaintContext(string guidId)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">guidId</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_UpdateBounds_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.UpdateBounds*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_UpdateBounds_System_Windows_Rect_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.UpdateBounds(System.Windows.Rect)">UpdateBounds(Rect)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UpdateBounds(Rect bounds)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.rect">Rect</a></td>
-        <td><span class="parametername">bounds</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfDrawingContext_System_Collections_IEnumerable_GetEnumerator_" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.System#Collections#IEnumerable#GetEnumerator*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfDrawingContext_System_Collections_IEnumerable_GetEnumerator" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingContext.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IEnumerator IEnumerable.GetEnumerator()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerator">IEnumerator</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">System.Collections.Generic.IEnumerable&lt;T&gt;</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
-  </div>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.UnRegisterId.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_UnRegisterId_System_String_">UnRegisterId(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.UnRegisterPaintContext.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_UnRegisterPaintContext_System_String_">UnRegisterPaintContext(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.Uninitialize.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_Uninitialize">Uninitialize()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingContext.UpdateBounds.html#SharpVectors_Renderers_Wpf_WpfDrawingContext_UpdateBounds_System_Windows_Rect_">UpdateBounds(Rect)</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRenderingWpf/Wpf/WpfDrawingContext.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

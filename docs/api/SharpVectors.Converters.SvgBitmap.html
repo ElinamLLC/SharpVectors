@@ -1,169 +1,154 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class SvgBitmap
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class SvgBitmap
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class SvgBitmap
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SvgBitmap
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Converters_SvgBitmap.md&amp;value=---%0Auid%3A%20SharpVectors.Converters.SvgBitmap%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Converters.SvgBitmap">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Converters.SvgBitmap">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Converters_SvgBitmap" data-uid="SharpVectors.Converters.SvgBitmap" class="text-break">Class SvgBitmap
+  <h1 id="SharpVectors_Converters_SvgBitmap" data-uid="SharpVectors.Converters.SvgBitmap" class="text-break">
+    Class SvgBitmap
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorConvertersWpf/SvgBitmap.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"><p>This is an extension of the WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image">Image</a> control to provide SVG-based image sources.</p>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Converters.html">Converters</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Converters.Wpf.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>This is an extension of the WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image">Image</a> control to provide SVG-based image sources.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
-    <div class="level3"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual">Visual</a></div>
-    <div class="level4"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement">UIElement</a></div>
-    <div class="level5"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement">FrameworkElement</a></div>
-    <div class="level6"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image">Image</a></div>
-    <div class="level7"><span class="xref">SvgBitmap</span></div>
-      <div class="level8"><a class="xref" href="SharpVectors.Converters.SvgIcon.html">SvgIcon</a></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SvgBitmap : Image, IAnimatable, IFrameworkInputElement, IInputElement, ISupportInitialize, IQueryAmbient, IUriContext</code></pre>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.ianimatable">IAnimatable</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.iframeworkinputelement">IFrameworkInputElement</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.iinputelement">IInputElement</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.isupportinitialize">ISupportInitialize</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.iqueryambient">IQueryAmbient</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.iuricontext">IUriContext</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual">Visual</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement">UIElement</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement">FrameworkElement</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image">Image</a></div>
+      <div><span class="xref">SvgBitmap</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.ianimatable">IAnimatable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.iframeworkinputelement">IFrameworkInputElement</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.iinputelement">IInputElement</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.isupportinitialize">ISupportInitialize</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.iqueryambient">IQueryAmbient</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.iuricontext">IUriContext</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="SharpVectors.Converters.SvgIcon.html">SvgIcon</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.sourceproperty">Image.SourceProperty</a>
     </div>
@@ -177,31 +162,28 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.imagefailedevent">Image.ImageFailedEvent</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.oncreateautomationpeer#system-windows-controls-image-oncreateautomationpeer">Image.OnCreateAutomationPeer()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.oncreateautomationpeer">Image.OnCreateAutomationPeer()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.measureoverride#system-windows-controls-image-measureoverride(system-windows-size)">Image.MeasureOverride(Size)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.measureoverride">Image.MeasureOverride(Size)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.arrangeoverride#system-windows-controls-image-arrangeoverride(system-windows-size)">Image.ArrangeOverride(Size)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.arrangeoverride">Image.ArrangeOverride(Size)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.onrender#system-windows-controls-image-onrender(system-windows-media-drawingcontext)">Image.OnRender(DrawingContext)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.onrender">Image.OnRender(DrawingContext)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.source#system-windows-controls-image-source">Image.Source</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.source">Image.Source</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.stretch#system-windows-controls-image-stretch">Image.Stretch</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.stretch">Image.Stretch</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.stretchdirection#system-windows-controls-image-stretchdirection">Image.StretchDirection</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.stretchdirection">Image.StretchDirection</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.system-windows-markup-iuricontext-baseuri#system-windows-controls-image-system-windows-markup-iuricontext-baseuri">Image.IUriContext.BaseUri</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.baseuri#system-windows-controls-image-baseuri">Image.BaseUri</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.baseuri">Image.BaseUri</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image.imagefailed">Image.ImageFailed</a>
@@ -315,16 +297,16 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.contextmenuclosingevent">FrameworkElement.ContextMenuClosingEvent</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onstylechanged#system-windows-frameworkelement-onstylechanged(system-windows-style-system-windows-style)">FrameworkElement.OnStyleChanged(Style, Style)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onstylechanged">FrameworkElement.OnStyleChanged(Style, Style)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.parentlayoutinvalidated#system-windows-frameworkelement-parentlayoutinvalidated(system-windows-uielement)">FrameworkElement.ParentLayoutInvalidated(UIElement)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.parentlayoutinvalidated">FrameworkElement.ParentLayoutInvalidated(UIElement)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.applytemplate#system-windows-frameworkelement-applytemplate">FrameworkElement.ApplyTemplate()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.applytemplate">FrameworkElement.ApplyTemplate()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onapplytemplate#system-windows-frameworkelement-onapplytemplate">FrameworkElement.OnApplyTemplate()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onapplytemplate">FrameworkElement.OnApplyTemplate()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.beginstoryboard#system-windows-frameworkelement-beginstoryboard(system-windows-media-animation-storyboard)">FrameworkElement.BeginStoryboard(Storyboard)</a>
@@ -333,43 +315,40 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.beginstoryboard#system-windows-frameworkelement-beginstoryboard(system-windows-media-animation-storyboard-system-windows-media-animation-handoffbehavior)">FrameworkElement.BeginStoryboard(Storyboard, HandoffBehavior)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.beginstoryboard#system-windows-frameworkelement-beginstoryboard(system-windows-media-animation-storyboard-system-windows-media-animation-handoffbehavior-system-boolean)">FrameworkElement.BeginStoryboard(Storyboard, HandoffBehavior, Boolean)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.beginstoryboard#system-windows-frameworkelement-beginstoryboard(system-windows-media-animation-storyboard-system-windows-media-animation-handoffbehavior-system-boolean)">FrameworkElement.BeginStoryboard(Storyboard, HandoffBehavior, bool)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getvisualchild#system-windows-frameworkelement-getvisualchild(system-int32)">FrameworkElement.GetVisualChild(Int32)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getvisualchild">FrameworkElement.GetVisualChild(int)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.system-windows-markup-iqueryambient-isambientpropertyavailable#system-windows-frameworkelement-system-windows-markup-iqueryambient-isambientpropertyavailable(system-string)">FrameworkElement.IQueryAmbient.IsAmbientPropertyAvailable(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.gettemplatechild">FrameworkElement.GetTemplateChild(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.gettemplatechild#system-windows-frameworkelement-gettemplatechild(system-string)">FrameworkElement.GetTemplateChild(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.findresource">FrameworkElement.FindResource(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.findresource#system-windows-frameworkelement-findresource(system-object)">FrameworkElement.FindResource(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.tryfindresource">FrameworkElement.TryFindResource(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.tryfindresource#system-windows-frameworkelement-tryfindresource(system-object)">FrameworkElement.TryFindResource(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setresourcereference">FrameworkElement.SetResourceReference(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setresourcereference#system-windows-frameworkelement-setresourcereference(system-windows-dependencyproperty-system-object)">FrameworkElement.SetResourceReference(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onpropertychanged">FrameworkElement.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onpropertychanged#system-windows-frameworkelement-onpropertychanged(system-windows-dependencypropertychangedeventargs)">FrameworkElement.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onvisualparentchanged">FrameworkElement.OnVisualParentChanged(DependencyObject)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onvisualparentchanged#system-windows-frameworkelement-onvisualparentchanged(system-windows-dependencyobject)">FrameworkElement.OnVisualParentChanged(DependencyObject)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getbindingexpression#system-windows-frameworkelement-getbindingexpression(system-windows-dependencyproperty)">FrameworkElement.GetBindingExpression(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getbindingexpression">FrameworkElement.GetBindingExpression(DependencyProperty)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setbinding#system-windows-frameworkelement-setbinding(system-windows-dependencyproperty-system-windows-data-bindingbase)">FrameworkElement.SetBinding(DependencyProperty, BindingBase)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setbinding#system-windows-frameworkelement-setbinding(system-windows-dependencyproperty-system-string)">FrameworkElement.SetBinding(DependencyProperty, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setbinding#system-windows-frameworkelement-setbinding(system-windows-dependencyproperty-system-string)">FrameworkElement.SetBinding(DependencyProperty, string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getuiparentcore#system-windows-frameworkelement-getuiparentcore">FrameworkElement.GetUIParentCore()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getuiparentcore">FrameworkElement.GetUIParentCore()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.bringintoview#system-windows-frameworkelement-bringintoview">FrameworkElement.BringIntoView()</a>
@@ -378,175 +357,175 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.bringintoview#system-windows-frameworkelement-bringintoview(system-windows-rect)">FrameworkElement.BringIntoView(Rect)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getflowdirection#system-windows-frameworkelement-getflowdirection(system-windows-dependencyobject)">FrameworkElement.GetFlowDirection(DependencyObject)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getflowdirection">FrameworkElement.GetFlowDirection(DependencyObject)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setflowdirection#system-windows-frameworkelement-setflowdirection(system-windows-dependencyobject-system-windows-flowdirection)">FrameworkElement.SetFlowDirection(DependencyObject, FlowDirection)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.setflowdirection">FrameworkElement.SetFlowDirection(DependencyObject, FlowDirection)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.measurecore#system-windows-frameworkelement-measurecore(system-windows-size)">FrameworkElement.MeasureCore(Size)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.measurecore">FrameworkElement.MeasureCore(Size)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.arrangecore#system-windows-frameworkelement-arrangecore(system-windows-rect)">FrameworkElement.ArrangeCore(Rect)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.arrangecore">FrameworkElement.ArrangeCore(Rect)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onrendersizechanged#system-windows-frameworkelement-onrendersizechanged(system-windows-sizechangedinfo)">FrameworkElement.OnRenderSizeChanged(SizeChangedInfo)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.onrendersizechanged">FrameworkElement.OnRenderSizeChanged(SizeChangedInfo)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getlayoutclip#system-windows-frameworkelement-getlayoutclip(system-windows-size)">FrameworkElement.GetLayoutClip(Size)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.getlayoutclip">FrameworkElement.GetLayoutClip(Size)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.movefocus#system-windows-frameworkelement-movefocus(system-windows-input-traversalrequest)">FrameworkElement.MoveFocus(TraversalRequest)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.movefocus">FrameworkElement.MoveFocus(TraversalRequest)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.predictfocus#system-windows-frameworkelement-predictfocus(system-windows-input-focusnavigationdirection)">FrameworkElement.PredictFocus(FocusNavigationDirection)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.predictfocus">FrameworkElement.PredictFocus(FocusNavigationDirection)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.ongotfocus#system-windows-frameworkelement-ongotfocus(system-windows-routedeventargs)">FrameworkElement.OnGotFocus(RoutedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.ongotfocus">FrameworkElement.OnGotFocus(RoutedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.begininit#system-windows-frameworkelement-begininit">FrameworkElement.BeginInit()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.begininit">FrameworkElement.BeginInit()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.endinit#system-windows-frameworkelement-endinit">FrameworkElement.EndInit()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.endinit">FrameworkElement.EndInit()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.ontooltipopening#system-windows-frameworkelement-ontooltipopening(system-windows-controls-tooltipeventargs)">FrameworkElement.OnToolTipOpening(ToolTipEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.ontooltipopening">FrameworkElement.OnToolTipOpening(ToolTipEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.ontooltipclosing#system-windows-frameworkelement-ontooltipclosing(system-windows-controls-tooltipeventargs)">FrameworkElement.OnToolTipClosing(ToolTipEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.ontooltipclosing">FrameworkElement.OnToolTipClosing(ToolTipEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.oncontextmenuopening#system-windows-frameworkelement-oncontextmenuopening(system-windows-controls-contextmenueventargs)">FrameworkElement.OnContextMenuOpening(ContextMenuEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.oncontextmenuopening">FrameworkElement.OnContextMenuOpening(ContextMenuEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.oncontextmenuclosing#system-windows-frameworkelement-oncontextmenuclosing(system-windows-controls-contextmenueventargs)">FrameworkElement.OnContextMenuClosing(ContextMenuEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.oncontextmenuclosing">FrameworkElement.OnContextMenuClosing(ContextMenuEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.registername#system-windows-frameworkelement-registername(system-string-system-object)">FrameworkElement.RegisterName(String, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.registername">FrameworkElement.RegisterName(string, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.unregistername#system-windows-frameworkelement-unregistername(system-string)">FrameworkElement.UnregisterName(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.unregistername">FrameworkElement.UnregisterName(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.findname#system-windows-frameworkelement-findname(system-string)">FrameworkElement.FindName(String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.findname">FrameworkElement.FindName(string)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.addlogicalchild#system-windows-frameworkelement-addlogicalchild(system-object)">FrameworkElement.AddLogicalChild(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.addlogicalchild">FrameworkElement.AddLogicalChild(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.removelogicalchild#system-windows-frameworkelement-removelogicalchild(system-object)">FrameworkElement.RemoveLogicalChild(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.removelogicalchild">FrameworkElement.RemoveLogicalChild(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.style#system-windows-frameworkelement-style">FrameworkElement.Style</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.style">FrameworkElement.Style</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.overridesdefaultstyle#system-windows-frameworkelement-overridesdefaultstyle">FrameworkElement.OverridesDefaultStyle</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.overridesdefaultstyle">FrameworkElement.OverridesDefaultStyle</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.uselayoutrounding#system-windows-frameworkelement-uselayoutrounding">FrameworkElement.UseLayoutRounding</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.uselayoutrounding">FrameworkElement.UseLayoutRounding</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.defaultstylekey#system-windows-frameworkelement-defaultstylekey">FrameworkElement.DefaultStyleKey</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.defaultstylekey">FrameworkElement.DefaultStyleKey</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.triggers#system-windows-frameworkelement-triggers">FrameworkElement.Triggers</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.triggers">FrameworkElement.Triggers</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.templatedparent#system-windows-frameworkelement-templatedparent">FrameworkElement.TemplatedParent</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.templatedparent">FrameworkElement.TemplatedParent</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.visualchildrencount#system-windows-frameworkelement-visualchildrencount">FrameworkElement.VisualChildrenCount</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.visualchildrencount">FrameworkElement.VisualChildrenCount</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.resources#system-windows-frameworkelement-resources">FrameworkElement.Resources</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.resources">FrameworkElement.Resources</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.inheritancebehavior#system-windows-frameworkelement-inheritancebehavior">FrameworkElement.InheritanceBehavior</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.inheritancebehavior">FrameworkElement.InheritanceBehavior</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.datacontext#system-windows-frameworkelement-datacontext">FrameworkElement.DataContext</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.datacontext">FrameworkElement.DataContext</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.bindinggroup#system-windows-frameworkelement-bindinggroup">FrameworkElement.BindingGroup</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.bindinggroup">FrameworkElement.BindingGroup</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.language#system-windows-frameworkelement-language">FrameworkElement.Language</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.language">FrameworkElement.Language</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.name#system-windows-frameworkelement-name">FrameworkElement.Name</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.name">FrameworkElement.Name</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.tag#system-windows-frameworkelement-tag">FrameworkElement.Tag</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.tag">FrameworkElement.Tag</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.inputscope#system-windows-frameworkelement-inputscope">FrameworkElement.InputScope</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.inputscope">FrameworkElement.InputScope</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.actualwidth#system-windows-frameworkelement-actualwidth">FrameworkElement.ActualWidth</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.actualwidth">FrameworkElement.ActualWidth</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.actualheight#system-windows-frameworkelement-actualheight">FrameworkElement.ActualHeight</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.actualheight">FrameworkElement.ActualHeight</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.layouttransform#system-windows-frameworkelement-layouttransform">FrameworkElement.LayoutTransform</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.layouttransform">FrameworkElement.LayoutTransform</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.width#system-windows-frameworkelement-width">FrameworkElement.Width</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.width">FrameworkElement.Width</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.minwidth#system-windows-frameworkelement-minwidth">FrameworkElement.MinWidth</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.minwidth">FrameworkElement.MinWidth</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.maxwidth#system-windows-frameworkelement-maxwidth">FrameworkElement.MaxWidth</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.maxwidth">FrameworkElement.MaxWidth</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.height#system-windows-frameworkelement-height">FrameworkElement.Height</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.height">FrameworkElement.Height</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.minheight#system-windows-frameworkelement-minheight">FrameworkElement.MinHeight</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.minheight">FrameworkElement.MinHeight</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.maxheight#system-windows-frameworkelement-maxheight">FrameworkElement.MaxHeight</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.maxheight">FrameworkElement.MaxHeight</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.flowdirection#system-windows-frameworkelement-flowdirection">FrameworkElement.FlowDirection</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.flowdirection">FrameworkElement.FlowDirection</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.margin#system-windows-frameworkelement-margin">FrameworkElement.Margin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.margin">FrameworkElement.Margin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.horizontalalignment#system-windows-frameworkelement-horizontalalignment">FrameworkElement.HorizontalAlignment</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.horizontalalignment">FrameworkElement.HorizontalAlignment</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.verticalalignment#system-windows-frameworkelement-verticalalignment">FrameworkElement.VerticalAlignment</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.verticalalignment">FrameworkElement.VerticalAlignment</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.focusvisualstyle#system-windows-frameworkelement-focusvisualstyle">FrameworkElement.FocusVisualStyle</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.focusvisualstyle">FrameworkElement.FocusVisualStyle</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.cursor#system-windows-frameworkelement-cursor">FrameworkElement.Cursor</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.cursor">FrameworkElement.Cursor</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.forcecursor#system-windows-frameworkelement-forcecursor">FrameworkElement.ForceCursor</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.forcecursor">FrameworkElement.ForceCursor</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.isinitialized#system-windows-frameworkelement-isinitialized">FrameworkElement.IsInitialized</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.isinitialized">FrameworkElement.IsInitialized</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.isloaded#system-windows-frameworkelement-isloaded">FrameworkElement.IsLoaded</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.isloaded">FrameworkElement.IsLoaded</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.tooltip#system-windows-frameworkelement-tooltip">FrameworkElement.ToolTip</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.tooltip">FrameworkElement.ToolTip</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.contextmenu#system-windows-frameworkelement-contextmenu">FrameworkElement.ContextMenu</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.contextmenu">FrameworkElement.ContextMenu</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.parent#system-windows-frameworkelement-parent">FrameworkElement.Parent</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.parent">FrameworkElement.Parent</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.logicalchildren#system-windows-frameworkelement-logicalchildren">FrameworkElement.LogicalChildren</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.logicalchildren">FrameworkElement.LogicalChildren</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.targetupdated">FrameworkElement.TargetUpdated</a>
@@ -948,316 +927,316 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.beginanimation#system-windows-uielement-beginanimation(system-windows-dependencyproperty-system-windows-media-animation-animationtimeline-system-windows-media-animation-handoffbehavior)">UIElement.BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.getanimationbasevalue#system-windows-uielement-getanimationbasevalue(system-windows-dependencyproperty)">UIElement.GetAnimationBaseValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.getanimationbasevalue">UIElement.GetAnimationBaseValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.raiseevent#system-windows-uielement-raiseevent(system-windows-routedeventargs)">UIElement.RaiseEvent(RoutedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.raiseevent">UIElement.RaiseEvent(RoutedEventArgs)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.addhandler#system-windows-uielement-addhandler(system-windows-routedevent-system-delegate)">UIElement.AddHandler(RoutedEvent, Delegate)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.addhandler#system-windows-uielement-addhandler(system-windows-routedevent-system-delegate-system-boolean)">UIElement.AddHandler(RoutedEvent, Delegate, Boolean)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.addhandler#system-windows-uielement-addhandler(system-windows-routedevent-system-delegate-system-boolean)">UIElement.AddHandler(RoutedEvent, Delegate, bool)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.removehandler#system-windows-uielement-removehandler(system-windows-routedevent-system-delegate)">UIElement.RemoveHandler(RoutedEvent, Delegate)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.removehandler">UIElement.RemoveHandler(RoutedEvent, Delegate)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.addtoeventroute#system-windows-uielement-addtoeventroute(system-windows-eventroute-system-windows-routedeventargs)">UIElement.AddToEventRoute(EventRoute, RoutedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.addtoeventroute">UIElement.AddToEventRoute(EventRoute, RoutedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmousedown#system-windows-uielement-onpreviewmousedown(system-windows-input-mousebuttoneventargs)">UIElement.OnPreviewMouseDown(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmousedown">UIElement.OnPreviewMouseDown(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmousedown#system-windows-uielement-onmousedown(system-windows-input-mousebuttoneventargs)">UIElement.OnMouseDown(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmousedown">UIElement.OnMouseDown(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouseup#system-windows-uielement-onpreviewmouseup(system-windows-input-mousebuttoneventargs)">UIElement.OnPreviewMouseUp(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouseup">UIElement.OnPreviewMouseUp(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseup#system-windows-uielement-onmouseup(system-windows-input-mousebuttoneventargs)">UIElement.OnMouseUp(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseup">UIElement.OnMouseUp(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouseleftbuttondown#system-windows-uielement-onpreviewmouseleftbuttondown(system-windows-input-mousebuttoneventargs)">UIElement.OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouseleftbuttondown">UIElement.OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseleftbuttondown#system-windows-uielement-onmouseleftbuttondown(system-windows-input-mousebuttoneventargs)">UIElement.OnMouseLeftButtonDown(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseleftbuttondown">UIElement.OnMouseLeftButtonDown(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouseleftbuttonup#system-windows-uielement-onpreviewmouseleftbuttonup(system-windows-input-mousebuttoneventargs)">UIElement.OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouseleftbuttonup">UIElement.OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseleftbuttonup#system-windows-uielement-onmouseleftbuttonup(system-windows-input-mousebuttoneventargs)">UIElement.OnMouseLeftButtonUp(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseleftbuttonup">UIElement.OnMouseLeftButtonUp(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouserightbuttondown#system-windows-uielement-onpreviewmouserightbuttondown(system-windows-input-mousebuttoneventargs)">UIElement.OnPreviewMouseRightButtonDown(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouserightbuttondown">UIElement.OnPreviewMouseRightButtonDown(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouserightbuttondown#system-windows-uielement-onmouserightbuttondown(system-windows-input-mousebuttoneventargs)">UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouserightbuttondown">UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouserightbuttonup#system-windows-uielement-onpreviewmouserightbuttonup(system-windows-input-mousebuttoneventargs)">UIElement.OnPreviewMouseRightButtonUp(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmouserightbuttonup">UIElement.OnPreviewMouseRightButtonUp(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouserightbuttonup#system-windows-uielement-onmouserightbuttonup(system-windows-input-mousebuttoneventargs)">UIElement.OnMouseRightButtonUp(MouseButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouserightbuttonup">UIElement.OnMouseRightButtonUp(MouseButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmousemove#system-windows-uielement-onpreviewmousemove(system-windows-input-mouseeventargs)">UIElement.OnPreviewMouseMove(MouseEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmousemove">UIElement.OnPreviewMouseMove(MouseEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmousemove#system-windows-uielement-onmousemove(system-windows-input-mouseeventargs)">UIElement.OnMouseMove(MouseEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmousemove">UIElement.OnMouseMove(MouseEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmousewheel#system-windows-uielement-onpreviewmousewheel(system-windows-input-mousewheeleventargs)">UIElement.OnPreviewMouseWheel(MouseWheelEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewmousewheel">UIElement.OnPreviewMouseWheel(MouseWheelEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmousewheel#system-windows-uielement-onmousewheel(system-windows-input-mousewheeleventargs)">UIElement.OnMouseWheel(MouseWheelEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmousewheel">UIElement.OnMouseWheel(MouseWheelEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseenter#system-windows-uielement-onmouseenter(system-windows-input-mouseeventargs)">UIElement.OnMouseEnter(MouseEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseenter">UIElement.OnMouseEnter(MouseEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseleave#system-windows-uielement-onmouseleave(system-windows-input-mouseeventargs)">UIElement.OnMouseLeave(MouseEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmouseleave">UIElement.OnMouseLeave(MouseEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongotmousecapture#system-windows-uielement-ongotmousecapture(system-windows-input-mouseeventargs)">UIElement.OnGotMouseCapture(MouseEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongotmousecapture">UIElement.OnGotMouseCapture(MouseEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlostmousecapture#system-windows-uielement-onlostmousecapture(system-windows-input-mouseeventargs)">UIElement.OnLostMouseCapture(MouseEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlostmousecapture">UIElement.OnLostMouseCapture(MouseEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onquerycursor#system-windows-uielement-onquerycursor(system-windows-input-querycursoreventargs)">UIElement.OnQueryCursor(QueryCursorEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onquerycursor">UIElement.OnQueryCursor(QueryCursorEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusdown#system-windows-uielement-onpreviewstylusdown(system-windows-input-stylusdowneventargs)">UIElement.OnPreviewStylusDown(StylusDownEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusdown">UIElement.OnPreviewStylusDown(StylusDownEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusdown#system-windows-uielement-onstylusdown(system-windows-input-stylusdowneventargs)">UIElement.OnStylusDown(StylusDownEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusdown">UIElement.OnStylusDown(StylusDownEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusup#system-windows-uielement-onpreviewstylusup(system-windows-input-styluseventargs)">UIElement.OnPreviewStylusUp(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusup">UIElement.OnPreviewStylusUp(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusup#system-windows-uielement-onstylusup(system-windows-input-styluseventargs)">UIElement.OnStylusUp(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusup">UIElement.OnStylusUp(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusmove#system-windows-uielement-onpreviewstylusmove(system-windows-input-styluseventargs)">UIElement.OnPreviewStylusMove(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusmove">UIElement.OnPreviewStylusMove(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusmove#system-windows-uielement-onstylusmove(system-windows-input-styluseventargs)">UIElement.OnStylusMove(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusmove">UIElement.OnStylusMove(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusinairmove#system-windows-uielement-onpreviewstylusinairmove(system-windows-input-styluseventargs)">UIElement.OnPreviewStylusInAirMove(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusinairmove">UIElement.OnPreviewStylusInAirMove(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusinairmove#system-windows-uielement-onstylusinairmove(system-windows-input-styluseventargs)">UIElement.OnStylusInAirMove(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusinairmove">UIElement.OnStylusInAirMove(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusenter#system-windows-uielement-onstylusenter(system-windows-input-styluseventargs)">UIElement.OnStylusEnter(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusenter">UIElement.OnStylusEnter(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusleave#system-windows-uielement-onstylusleave(system-windows-input-styluseventargs)">UIElement.OnStylusLeave(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusleave">UIElement.OnStylusLeave(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusinrange#system-windows-uielement-onpreviewstylusinrange(system-windows-input-styluseventargs)">UIElement.OnPreviewStylusInRange(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusinrange">UIElement.OnPreviewStylusInRange(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusinrange#system-windows-uielement-onstylusinrange(system-windows-input-styluseventargs)">UIElement.OnStylusInRange(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusinrange">UIElement.OnStylusInRange(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusoutofrange#system-windows-uielement-onpreviewstylusoutofrange(system-windows-input-styluseventargs)">UIElement.OnPreviewStylusOutOfRange(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusoutofrange">UIElement.OnPreviewStylusOutOfRange(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusoutofrange#system-windows-uielement-onstylusoutofrange(system-windows-input-styluseventargs)">UIElement.OnStylusOutOfRange(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusoutofrange">UIElement.OnStylusOutOfRange(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylussystemgesture#system-windows-uielement-onpreviewstylussystemgesture(system-windows-input-stylussystemgestureeventargs)">UIElement.OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylussystemgesture">UIElement.OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylussystemgesture#system-windows-uielement-onstylussystemgesture(system-windows-input-stylussystemgestureeventargs)">UIElement.OnStylusSystemGesture(StylusSystemGestureEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylussystemgesture">UIElement.OnStylusSystemGesture(StylusSystemGestureEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongotstyluscapture#system-windows-uielement-ongotstyluscapture(system-windows-input-styluseventargs)">UIElement.OnGotStylusCapture(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongotstyluscapture">UIElement.OnGotStylusCapture(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onloststyluscapture#system-windows-uielement-onloststyluscapture(system-windows-input-styluseventargs)">UIElement.OnLostStylusCapture(StylusEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onloststyluscapture">UIElement.OnLostStylusCapture(StylusEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusbuttondown#system-windows-uielement-onstylusbuttondown(system-windows-input-stylusbuttoneventargs)">UIElement.OnStylusButtonDown(StylusButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusbuttondown">UIElement.OnStylusButtonDown(StylusButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusbuttonup#system-windows-uielement-onstylusbuttonup(system-windows-input-stylusbuttoneventargs)">UIElement.OnStylusButtonUp(StylusButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onstylusbuttonup">UIElement.OnStylusButtonUp(StylusButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusbuttondown#system-windows-uielement-onpreviewstylusbuttondown(system-windows-input-stylusbuttoneventargs)">UIElement.OnPreviewStylusButtonDown(StylusButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusbuttondown">UIElement.OnPreviewStylusButtonDown(StylusButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusbuttonup#system-windows-uielement-onpreviewstylusbuttonup(system-windows-input-stylusbuttoneventargs)">UIElement.OnPreviewStylusButtonUp(StylusButtonEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewstylusbuttonup">UIElement.OnPreviewStylusButtonUp(StylusButtonEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewkeydown#system-windows-uielement-onpreviewkeydown(system-windows-input-keyeventargs)">UIElement.OnPreviewKeyDown(KeyEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewkeydown">UIElement.OnPreviewKeyDown(KeyEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onkeydown#system-windows-uielement-onkeydown(system-windows-input-keyeventargs)">UIElement.OnKeyDown(KeyEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onkeydown">UIElement.OnKeyDown(KeyEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewkeyup#system-windows-uielement-onpreviewkeyup(system-windows-input-keyeventargs)">UIElement.OnPreviewKeyUp(KeyEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewkeyup">UIElement.OnPreviewKeyUp(KeyEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onkeyup#system-windows-uielement-onkeyup(system-windows-input-keyeventargs)">UIElement.OnKeyUp(KeyEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onkeyup">UIElement.OnKeyUp(KeyEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewgotkeyboardfocus#system-windows-uielement-onpreviewgotkeyboardfocus(system-windows-input-keyboardfocuschangedeventargs)">UIElement.OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewgotkeyboardfocus">UIElement.OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongotkeyboardfocus#system-windows-uielement-ongotkeyboardfocus(system-windows-input-keyboardfocuschangedeventargs)">UIElement.OnGotKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongotkeyboardfocus">UIElement.OnGotKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewlostkeyboardfocus#system-windows-uielement-onpreviewlostkeyboardfocus(system-windows-input-keyboardfocuschangedeventargs)">UIElement.OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewlostkeyboardfocus">UIElement.OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlostkeyboardfocus#system-windows-uielement-onlostkeyboardfocus(system-windows-input-keyboardfocuschangedeventargs)">UIElement.OnLostKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlostkeyboardfocus">UIElement.OnLostKeyboardFocus(KeyboardFocusChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtextinput#system-windows-uielement-onpreviewtextinput(system-windows-input-textcompositioneventargs)">UIElement.OnPreviewTextInput(TextCompositionEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtextinput">UIElement.OnPreviewTextInput(TextCompositionEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontextinput#system-windows-uielement-ontextinput(system-windows-input-textcompositioneventargs)">UIElement.OnTextInput(TextCompositionEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontextinput">UIElement.OnTextInput(TextCompositionEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewquerycontinuedrag#system-windows-uielement-onpreviewquerycontinuedrag(system-windows-querycontinuedrageventargs)">UIElement.OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewquerycontinuedrag">UIElement.OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onquerycontinuedrag#system-windows-uielement-onquerycontinuedrag(system-windows-querycontinuedrageventargs)">UIElement.OnQueryContinueDrag(QueryContinueDragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onquerycontinuedrag">UIElement.OnQueryContinueDrag(QueryContinueDragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewgivefeedback#system-windows-uielement-onpreviewgivefeedback(system-windows-givefeedbackeventargs)">UIElement.OnPreviewGiveFeedback(GiveFeedbackEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewgivefeedback">UIElement.OnPreviewGiveFeedback(GiveFeedbackEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongivefeedback#system-windows-uielement-ongivefeedback(system-windows-givefeedbackeventargs)">UIElement.OnGiveFeedback(GiveFeedbackEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongivefeedback">UIElement.OnGiveFeedback(GiveFeedbackEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdragenter#system-windows-uielement-onpreviewdragenter(system-windows-drageventargs)">UIElement.OnPreviewDragEnter(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdragenter">UIElement.OnPreviewDragEnter(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondragenter#system-windows-uielement-ondragenter(system-windows-drageventargs)">UIElement.OnDragEnter(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondragenter">UIElement.OnDragEnter(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdragover#system-windows-uielement-onpreviewdragover(system-windows-drageventargs)">UIElement.OnPreviewDragOver(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdragover">UIElement.OnPreviewDragOver(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondragover#system-windows-uielement-ondragover(system-windows-drageventargs)">UIElement.OnDragOver(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondragover">UIElement.OnDragOver(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdragleave#system-windows-uielement-onpreviewdragleave(system-windows-drageventargs)">UIElement.OnPreviewDragLeave(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdragleave">UIElement.OnPreviewDragLeave(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondragleave#system-windows-uielement-ondragleave(system-windows-drageventargs)">UIElement.OnDragLeave(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondragleave">UIElement.OnDragLeave(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdrop#system-windows-uielement-onpreviewdrop(system-windows-drageventargs)">UIElement.OnPreviewDrop(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewdrop">UIElement.OnPreviewDrop(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondrop#system-windows-uielement-ondrop(system-windows-drageventargs)">UIElement.OnDrop(DragEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ondrop">UIElement.OnDrop(DragEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtouchdown#system-windows-uielement-onpreviewtouchdown(system-windows-input-toucheventargs)">UIElement.OnPreviewTouchDown(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtouchdown">UIElement.OnPreviewTouchDown(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchdown#system-windows-uielement-ontouchdown(system-windows-input-toucheventargs)">UIElement.OnTouchDown(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchdown">UIElement.OnTouchDown(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtouchmove#system-windows-uielement-onpreviewtouchmove(system-windows-input-toucheventargs)">UIElement.OnPreviewTouchMove(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtouchmove">UIElement.OnPreviewTouchMove(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchmove#system-windows-uielement-ontouchmove(system-windows-input-toucheventargs)">UIElement.OnTouchMove(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchmove">UIElement.OnTouchMove(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtouchup#system-windows-uielement-onpreviewtouchup(system-windows-input-toucheventargs)">UIElement.OnPreviewTouchUp(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onpreviewtouchup">UIElement.OnPreviewTouchUp(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchup#system-windows-uielement-ontouchup(system-windows-input-toucheventargs)">UIElement.OnTouchUp(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchup">UIElement.OnTouchUp(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongottouchcapture#system-windows-uielement-ongottouchcapture(system-windows-input-toucheventargs)">UIElement.OnGotTouchCapture(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ongottouchcapture">UIElement.OnGotTouchCapture(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlosttouchcapture#system-windows-uielement-onlosttouchcapture(system-windows-input-toucheventargs)">UIElement.OnLostTouchCapture(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlosttouchcapture">UIElement.OnLostTouchCapture(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchenter#system-windows-uielement-ontouchenter(system-windows-input-toucheventargs)">UIElement.OnTouchEnter(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchenter">UIElement.OnTouchEnter(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchleave#system-windows-uielement-ontouchleave(system-windows-input-toucheventargs)">UIElement.OnTouchLeave(TouchEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ontouchleave">UIElement.OnTouchLeave(TouchEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onismousedirectlyoverchanged#system-windows-uielement-onismousedirectlyoverchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsMouseDirectlyOverChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onismousedirectlyoverchanged">UIElement.OnIsMouseDirectlyOverChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.oniskeyboardfocuswithinchanged#system-windows-uielement-oniskeyboardfocuswithinchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.oniskeyboardfocuswithinchanged">UIElement.OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onismousecapturedchanged#system-windows-uielement-onismousecapturedchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsMouseCapturedChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onismousecapturedchanged">UIElement.OnIsMouseCapturedChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onismousecapturewithinchanged#system-windows-uielement-onismousecapturewithinchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsMouseCaptureWithinChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onismousecapturewithinchanged">UIElement.OnIsMouseCaptureWithinChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onisstylusdirectlyoverchanged#system-windows-uielement-onisstylusdirectlyoverchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsStylusDirectlyOverChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onisstylusdirectlyoverchanged">UIElement.OnIsStylusDirectlyOverChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onisstyluscapturedchanged#system-windows-uielement-onisstyluscapturedchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsStylusCapturedChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onisstyluscapturedchanged">UIElement.OnIsStylusCapturedChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onisstyluscapturewithinchanged#system-windows-uielement-onisstyluscapturewithinchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsStylusCaptureWithinChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onisstyluscapturewithinchanged">UIElement.OnIsStylusCaptureWithinChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.oniskeyboardfocusedchanged#system-windows-uielement-oniskeyboardfocusedchanged(system-windows-dependencypropertychangedeventargs)">UIElement.OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.oniskeyboardfocusedchanged">UIElement.OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.invalidatemeasure#system-windows-uielement-invalidatemeasure">UIElement.InvalidateMeasure()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.invalidatemeasure">UIElement.InvalidateMeasure()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.invalidatearrange#system-windows-uielement-invalidatearrange">UIElement.InvalidateArrange()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.invalidatearrange">UIElement.InvalidateArrange()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.invalidatevisual#system-windows-uielement-invalidatevisual">UIElement.InvalidateVisual()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.invalidatevisual">UIElement.InvalidateVisual()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onchilddesiredsizechanged#system-windows-uielement-onchilddesiredsizechanged(system-windows-uielement)">UIElement.OnChildDesiredSizeChanged(UIElement)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onchilddesiredsizechanged">UIElement.OnChildDesiredSizeChanged(UIElement)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.measure#system-windows-uielement-measure(system-windows-size)">UIElement.Measure(Size)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.measure">UIElement.Measure(Size)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.arrange#system-windows-uielement-arrange(system-windows-rect)">UIElement.Arrange(Rect)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.arrange">UIElement.Arrange(Rect)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.updatelayout#system-windows-uielement-updatelayout">UIElement.UpdateLayout()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.updatelayout">UIElement.UpdateLayout()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.translatepoint#system-windows-uielement-translatepoint(system-windows-point-system-windows-uielement)">UIElement.TranslatePoint(Point, UIElement)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.translatepoint">UIElement.TranslatePoint(Point, UIElement)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.inputhittest#system-windows-uielement-inputhittest(system-windows-point)">UIElement.InputHitTest(Point)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.inputhittest">UIElement.InputHitTest(Point)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.capturemouse#system-windows-uielement-capturemouse">UIElement.CaptureMouse()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.capturemouse">UIElement.CaptureMouse()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasemousecapture#system-windows-uielement-releasemousecapture">UIElement.ReleaseMouseCapture()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasemousecapture">UIElement.ReleaseMouseCapture()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.capturestylus#system-windows-uielement-capturestylus">UIElement.CaptureStylus()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.capturestylus">UIElement.CaptureStylus()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasestyluscapture#system-windows-uielement-releasestyluscapture">UIElement.ReleaseStylusCapture()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasestyluscapture">UIElement.ReleaseStylusCapture()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.focus#system-windows-uielement-focus">UIElement.Focus()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.focus">UIElement.Focus()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onaccesskey#system-windows-uielement-onaccesskey(system-windows-input-accesskeyeventargs)">UIElement.OnAccessKey(AccessKeyEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onaccesskey">UIElement.OnAccessKey(AccessKeyEventArgs)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.hittestcore#system-windows-uielement-hittestcore(system-windows-media-pointhittestparameters)">UIElement.HitTestCore(PointHitTestParameters)</a>
@@ -1266,181 +1245,181 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.hittestcore#system-windows-uielement-hittestcore(system-windows-media-geometryhittestparameters)">UIElement.HitTestCore(GeometryHitTestParameters)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlostfocus#system-windows-uielement-onlostfocus(system-windows-routedeventargs)">UIElement.OnLostFocus(RoutedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onlostfocus">UIElement.OnLostFocus(RoutedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationstarting#system-windows-uielement-onmanipulationstarting(system-windows-input-manipulationstartingeventargs)">UIElement.OnManipulationStarting(ManipulationStartingEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationstarting">UIElement.OnManipulationStarting(ManipulationStartingEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationstarted#system-windows-uielement-onmanipulationstarted(system-windows-input-manipulationstartedeventargs)">UIElement.OnManipulationStarted(ManipulationStartedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationstarted">UIElement.OnManipulationStarted(ManipulationStartedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationdelta#system-windows-uielement-onmanipulationdelta(system-windows-input-manipulationdeltaeventargs)">UIElement.OnManipulationDelta(ManipulationDeltaEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationdelta">UIElement.OnManipulationDelta(ManipulationDeltaEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationinertiastarting#system-windows-uielement-onmanipulationinertiastarting(system-windows-input-manipulationinertiastartingeventargs)">UIElement.OnManipulationInertiaStarting(ManipulationInertiaStartingEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationinertiastarting">UIElement.OnManipulationInertiaStarting(ManipulationInertiaStartingEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationboundaryfeedback#system-windows-uielement-onmanipulationboundaryfeedback(system-windows-input-manipulationboundaryfeedbackeventargs)">UIElement.OnManipulationBoundaryFeedback(ManipulationBoundaryFeedbackEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationboundaryfeedback">UIElement.OnManipulationBoundaryFeedback(ManipulationBoundaryFeedbackEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationcompleted#system-windows-uielement-onmanipulationcompleted(system-windows-input-manipulationcompletedeventargs)">UIElement.OnManipulationCompleted(ManipulationCompletedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.onmanipulationcompleted">UIElement.OnManipulationCompleted(ManipulationCompletedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.capturetouch#system-windows-uielement-capturetouch(system-windows-input-touchdevice)">UIElement.CaptureTouch(TouchDevice)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.capturetouch">UIElement.CaptureTouch(TouchDevice)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasetouchcapture#system-windows-uielement-releasetouchcapture(system-windows-input-touchdevice)">UIElement.ReleaseTouchCapture(TouchDevice)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasetouchcapture">UIElement.ReleaseTouchCapture(TouchDevice)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasealltouchcaptures#system-windows-uielement-releasealltouchcaptures">UIElement.ReleaseAllTouchCaptures()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.releasealltouchcaptures">UIElement.ReleaseAllTouchCaptures()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.hasanimatedproperties#system-windows-uielement-hasanimatedproperties">UIElement.HasAnimatedProperties</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.hasanimatedproperties">UIElement.HasAnimatedProperties</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.inputbindings#system-windows-uielement-inputbindings">UIElement.InputBindings</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.inputbindings">UIElement.InputBindings</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.commandbindings#system-windows-uielement-commandbindings">UIElement.CommandBindings</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.commandbindings">UIElement.CommandBindings</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.allowdrop#system-windows-uielement-allowdrop">UIElement.AllowDrop</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.allowdrop">UIElement.AllowDrop</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.stylusplugins#system-windows-uielement-stylusplugins">UIElement.StylusPlugIns</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.stylusplugins">UIElement.StylusPlugIns</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.desiredsize#system-windows-uielement-desiredsize">UIElement.DesiredSize</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.desiredsize">UIElement.DesiredSize</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismeasurevalid#system-windows-uielement-ismeasurevalid">UIElement.IsMeasureValid</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismeasurevalid">UIElement.IsMeasureValid</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isarrangevalid#system-windows-uielement-isarrangevalid">UIElement.IsArrangeValid</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isarrangevalid">UIElement.IsArrangeValid</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.rendersize#system-windows-uielement-rendersize">UIElement.RenderSize</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.rendersize">UIElement.RenderSize</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.rendertransform#system-windows-uielement-rendertransform">UIElement.RenderTransform</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.rendertransform">UIElement.RenderTransform</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.rendertransformorigin#system-windows-uielement-rendertransformorigin">UIElement.RenderTransformOrigin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.rendertransformorigin">UIElement.RenderTransformOrigin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismousedirectlyover#system-windows-uielement-ismousedirectlyover">UIElement.IsMouseDirectlyOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismousedirectlyover">UIElement.IsMouseDirectlyOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismouseover#system-windows-uielement-ismouseover">UIElement.IsMouseOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismouseover">UIElement.IsMouseOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstylusover#system-windows-uielement-isstylusover">UIElement.IsStylusOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstylusover">UIElement.IsStylusOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.iskeyboardfocuswithin#system-windows-uielement-iskeyboardfocuswithin">UIElement.IsKeyboardFocusWithin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.iskeyboardfocuswithin">UIElement.IsKeyboardFocusWithin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismousecaptured#system-windows-uielement-ismousecaptured">UIElement.IsMouseCaptured</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismousecaptured">UIElement.IsMouseCaptured</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismousecapturewithin#system-windows-uielement-ismousecapturewithin">UIElement.IsMouseCaptureWithin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismousecapturewithin">UIElement.IsMouseCaptureWithin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstylusdirectlyover#system-windows-uielement-isstylusdirectlyover">UIElement.IsStylusDirectlyOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstylusdirectlyover">UIElement.IsStylusDirectlyOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstyluscaptured#system-windows-uielement-isstyluscaptured">UIElement.IsStylusCaptured</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstyluscaptured">UIElement.IsStylusCaptured</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstyluscapturewithin#system-windows-uielement-isstyluscapturewithin">UIElement.IsStylusCaptureWithin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isstyluscapturewithin">UIElement.IsStylusCaptureWithin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.iskeyboardfocused#system-windows-uielement-iskeyboardfocused">UIElement.IsKeyboardFocused</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.iskeyboardfocused">UIElement.IsKeyboardFocused</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isinputmethodenabled#system-windows-uielement-isinputmethodenabled">UIElement.IsInputMethodEnabled</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isinputmethodenabled">UIElement.IsInputMethodEnabled</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.opacity#system-windows-uielement-opacity">UIElement.Opacity</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.opacity">UIElement.Opacity</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.opacitymask#system-windows-uielement-opacitymask">UIElement.OpacityMask</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.opacitymask">UIElement.OpacityMask</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.bitmapeffect#system-windows-uielement-bitmapeffect">UIElement.BitmapEffect</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.bitmapeffect">UIElement.BitmapEffect</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.effect#system-windows-uielement-effect">UIElement.Effect</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.effect">UIElement.Effect</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.bitmapeffectinput#system-windows-uielement-bitmapeffectinput">UIElement.BitmapEffectInput</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.bitmapeffectinput">UIElement.BitmapEffectInput</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.cachemode#system-windows-uielement-cachemode">UIElement.CacheMode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.cachemode">UIElement.CacheMode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.uid#system-windows-uielement-uid">UIElement.Uid</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.uid">UIElement.Uid</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.visibility#system-windows-uielement-visibility">UIElement.Visibility</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.visibility">UIElement.Visibility</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.cliptobounds#system-windows-uielement-cliptobounds">UIElement.ClipToBounds</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.cliptobounds">UIElement.ClipToBounds</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.clip#system-windows-uielement-clip">UIElement.Clip</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.clip">UIElement.Clip</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.snapstodevicepixels#system-windows-uielement-snapstodevicepixels">UIElement.SnapsToDevicePixels</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.snapstodevicepixels">UIElement.SnapsToDevicePixels</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isfocused#system-windows-uielement-isfocused">UIElement.IsFocused</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isfocused">UIElement.IsFocused</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isenabled#system-windows-uielement-isenabled">UIElement.IsEnabled</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isenabled">UIElement.IsEnabled</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isenabledcore#system-windows-uielement-isenabledcore">UIElement.IsEnabledCore</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isenabledcore">UIElement.IsEnabledCore</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ishittestvisible#system-windows-uielement-ishittestvisible">UIElement.IsHitTestVisible</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ishittestvisible">UIElement.IsHitTestVisible</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isvisible#system-windows-uielement-isvisible">UIElement.IsVisible</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.isvisible">UIElement.IsVisible</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.focusable#system-windows-uielement-focusable">UIElement.Focusable</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.focusable">UIElement.Focusable</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.persistid#system-windows-uielement-persistid">UIElement.PersistId</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.persistid">UIElement.PersistId</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismanipulationenabled#system-windows-uielement-ismanipulationenabled">UIElement.IsManipulationEnabled</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.ismanipulationenabled">UIElement.IsManipulationEnabled</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchesover#system-windows-uielement-areanytouchesover">UIElement.AreAnyTouchesOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchesover">UIElement.AreAnyTouchesOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchesdirectlyover#system-windows-uielement-areanytouchesdirectlyover">UIElement.AreAnyTouchesDirectlyOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchesdirectlyover">UIElement.AreAnyTouchesDirectlyOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchescapturedwithin#system-windows-uielement-areanytouchescapturedwithin">UIElement.AreAnyTouchesCapturedWithin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchescapturedwithin">UIElement.AreAnyTouchesCapturedWithin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchescaptured#system-windows-uielement-areanytouchescaptured">UIElement.AreAnyTouchesCaptured</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.areanytouchescaptured">UIElement.AreAnyTouchesCaptured</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchescaptured#system-windows-uielement-touchescaptured">UIElement.TouchesCaptured</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchescaptured">UIElement.TouchesCaptured</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchescapturedwithin#system-windows-uielement-touchescapturedwithin">UIElement.TouchesCapturedWithin</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchescapturedwithin">UIElement.TouchesCapturedWithin</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchesover#system-windows-uielement-touchesover">UIElement.TouchesOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchesover">UIElement.TouchesOver</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchesdirectlyover#system-windows-uielement-touchesdirectlyover">UIElement.TouchesDirectlyOver</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.touchesdirectlyover">UIElement.TouchesDirectlyOver</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.previewmousedown">UIElement.PreviewMouseDown</a>
@@ -1731,22 +1710,22 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.uielement.manipulationcompleted">UIElement.ManipulationCompleted</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.addvisualchild#system-windows-media-visual-addvisualchild(system-windows-media-visual)">Visual.AddVisualChild(Visual)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.addvisualchild">Visual.AddVisualChild(Visual)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.removevisualchild#system-windows-media-visual-removevisualchild(system-windows-media-visual)">Visual.RemoveVisualChild(Visual)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.removevisualchild">Visual.RemoveVisualChild(Visual)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.onvisualchildrenchanged#system-windows-media-visual-onvisualchildrenchanged(system-windows-dependencyobject-system-windows-dependencyobject)">Visual.OnVisualChildrenChanged(DependencyObject, DependencyObject)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.onvisualchildrenchanged">Visual.OnVisualChildrenChanged(DependencyObject, DependencyObject)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.isancestorof#system-windows-media-visual-isancestorof(system-windows-dependencyobject)">Visual.IsAncestorOf(DependencyObject)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.isancestorof">Visual.IsAncestorOf(DependencyObject)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.isdescendantof#system-windows-media-visual-isdescendantof(system-windows-dependencyobject)">Visual.IsDescendantOf(DependencyObject)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.isdescendantof">Visual.IsDescendantOf(DependencyObject)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.findcommonvisualancestor#system-windows-media-visual-findcommonvisualancestor(system-windows-dependencyobject)">Visual.FindCommonVisualAncestor(DependencyObject)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.findcommonvisualancestor">Visual.FindCommonVisualAncestor(DependencyObject)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.transformtoancestor#system-windows-media-visual-transformtoancestor(system-windows-media-visual)">Visual.TransformToAncestor(Visual)</a>
@@ -1755,88 +1734,88 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.transformtoancestor#system-windows-media-visual-transformtoancestor(system-windows-media-media3d-visual3d)">Visual.TransformToAncestor(Visual3D)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.transformtodescendant#system-windows-media-visual-transformtodescendant(system-windows-media-visual)">Visual.TransformToDescendant(Visual)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.transformtodescendant">Visual.TransformToDescendant(Visual)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.transformtovisual#system-windows-media-visual-transformtovisual(system-windows-media-visual)">Visual.TransformToVisual(Visual)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.transformtovisual">Visual.TransformToVisual(Visual)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.pointtoscreen#system-windows-media-visual-pointtoscreen(system-windows-point)">Visual.PointToScreen(Point)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.pointtoscreen">Visual.PointToScreen(Point)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.pointfromscreen#system-windows-media-visual-pointfromscreen(system-windows-point)">Visual.PointFromScreen(Point)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.pointfromscreen">Visual.PointFromScreen(Point)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualparent#system-windows-media-visual-visualparent">Visual.VisualParent</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualparent">Visual.VisualParent</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualtransform#system-windows-media-visual-visualtransform">Visual.VisualTransform</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualtransform">Visual.VisualTransform</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualeffect#system-windows-media-visual-visualeffect">Visual.VisualEffect</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualeffect">Visual.VisualEffect</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualbitmapeffect#system-windows-media-visual-visualbitmapeffect">Visual.VisualBitmapEffect</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualbitmapeffect">Visual.VisualBitmapEffect</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualbitmapeffectinput#system-windows-media-visual-visualbitmapeffectinput">Visual.VisualBitmapEffectInput</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualbitmapeffectinput">Visual.VisualBitmapEffectInput</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualcachemode#system-windows-media-visual-visualcachemode">Visual.VisualCacheMode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualcachemode">Visual.VisualCacheMode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualscrollableareaclip#system-windows-media-visual-visualscrollableareaclip">Visual.VisualScrollableAreaClip</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualscrollableareaclip">Visual.VisualScrollableAreaClip</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualclip#system-windows-media-visual-visualclip">Visual.VisualClip</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualclip">Visual.VisualClip</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualoffset#system-windows-media-visual-visualoffset">Visual.VisualOffset</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualoffset">Visual.VisualOffset</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualopacity#system-windows-media-visual-visualopacity">Visual.VisualOpacity</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualopacity">Visual.VisualOpacity</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualedgemode#system-windows-media-visual-visualedgemode">Visual.VisualEdgeMode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualedgemode">Visual.VisualEdgeMode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualbitmapscalingmode#system-windows-media-visual-visualbitmapscalingmode">Visual.VisualBitmapScalingMode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualbitmapscalingmode">Visual.VisualBitmapScalingMode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualcleartypehint#system-windows-media-visual-visualcleartypehint">Visual.VisualClearTypeHint</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualcleartypehint">Visual.VisualClearTypeHint</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualtextrenderingmode#system-windows-media-visual-visualtextrenderingmode">Visual.VisualTextRenderingMode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualtextrenderingmode">Visual.VisualTextRenderingMode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualtexthintingmode#system-windows-media-visual-visualtexthintingmode">Visual.VisualTextHintingMode</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualtexthintingmode">Visual.VisualTextHintingMode</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualopacitymask#system-windows-media-visual-visualopacitymask">Visual.VisualOpacityMask</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualopacitymask">Visual.VisualOpacityMask</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualxsnappingguidelines#system-windows-media-visual-visualxsnappingguidelines">Visual.VisualXSnappingGuidelines</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualxsnappingguidelines">Visual.VisualXSnappingGuidelines</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualysnappingguidelines#system-windows-media-visual-visualysnappingguidelines">Visual.VisualYSnappingGuidelines</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.visual.visualysnappingguidelines">Visual.VisualYSnappingGuidelines</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals#system-windows-dependencyobject-equals(system-object)">DependencyObject.Equals(Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals">DependencyObject.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode#system-windows-dependencyobject-gethashcode">DependencyObject.GetHashCode()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode">DependencyObject.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue#system-windows-dependencyobject-getvalue(system-windows-dependencyproperty)">DependencyObject.GetValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue">DependencyObject.GetValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue#system-windows-dependencyobject-setcurrentvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetCurrentValue(DependencyProperty, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue">DependencyObject.SetCurrentValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencyproperty)">DependencyObject.ClearValue(DependencyProperty)</a>
@@ -1845,524 +1824,166 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencypropertykey)">DependencyObject.ClearValue(DependencyPropertyKey)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue#system-windows-dependencyobject-coercevalue(system-windows-dependencyproperty)">DependencyObject.CoerceValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue">DependencyObject.CoerceValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty#system-windows-dependencyobject-invalidateproperty(system-windows-dependencyproperty)">DependencyObject.InvalidateProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty">DependencyObject.InvalidateProperty(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty#system-windows-dependencyobject-shouldserializeproperty(system-windows-dependencyproperty)">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue#system-windows-dependencyobject-readlocalvalue(system-windows-dependencyproperty)">DependencyObject.ReadLocalValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue">DependencyObject.ReadLocalValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator#system-windows-dependencyobject-getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype#system-windows-dependencyobject-dependencyobjecttype">DependencyObject.DependencyObjectType</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype">DependencyObject.DependencyObjectType</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed#system-windows-dependencyobject-issealed">DependencyObject.IsSealed</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed">DependencyObject.IsSealed</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher#system-windows-threading-dispatcherobject-dispatcher">DispatcherObject.Dispatcher</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher">DispatcherObject.Dispatcher</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
     </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Converters.html">SharpVectors.Converters</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Converters.Wpf.dll</h6>
-  <h5 id="SharpVectors_Converters_SvgBitmap_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SvgBitmap : Image, IAnimatable, IFrameworkInputElement, IInputElement, ISupportInitialize, IQueryAmbient, IUriContext</code></pre>
-  </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap__ctor_" data-uid="SharpVectors.Converters.SvgBitmap.#ctor*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap__ctor" data-uid="SharpVectors.Converters.SvgBitmap.#ctor">SvgBitmap()</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a> class.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SvgBitmap()</code></pre>
-  </div>
-  <h3 id="fields">Fields
-  </h3>
-  
-  
-  <h4 id="SharpVectors_Converters_SvgBitmap_AppNameProperty" data-uid="SharpVectors.Converters.SvgBitmap.AppNameProperty">AppNameProperty</h4>
-  <div class="markdown level1 summary"><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyproperty">DependencyProperty</a> for the <code>AppName</code> property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly DependencyProperty AppNameProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyproperty">DependencyProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Converters_SvgBitmap_SvgSourceProperty" data-uid="SharpVectors.Converters.SvgBitmap.SvgSourceProperty">SvgSourceProperty</h4>
-  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="SharpVectors.Converters.SvgBitmap.html#SharpVectors_Converters_SvgBitmap_SvgSource">SvgSource</a> dependency property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly DependencyProperty SvgSourceProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyproperty">DependencyProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Converters_SvgBitmap_UriSourceProperty" data-uid="SharpVectors.Converters.SvgBitmap.UriSourceProperty">UriSourceProperty</h4>
-  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="SharpVectors.Converters.SvgBitmap.html#SharpVectors_Converters_SvgBitmap_UriSource">UriSource</a> dependency property.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly DependencyProperty UriSourceProperty</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyproperty">DependencyProperty</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_AppName_" data-uid="SharpVectors.Converters.SvgBitmap.AppName*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_AppName" data-uid="SharpVectors.Converters.SvgBitmap.AppName">AppName</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the <code>name</code> of the parent assembly for this element.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Bindable(true)]
-public string AppName { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>A string containing the name of the parent assembly or the name of the assembly containing <code>SVG</code> file
-referenced on this control in XAML, if the source type is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_SvgSource_" data-uid="SharpVectors.Converters.SvgBitmap.SvgSource*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_SvgSource" data-uid="SharpVectors.Converters.SvgBitmap.SvgSource">SvgSource</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the SVG contents to load into this <a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SvgSource { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a> specifying the embedded SVG contents.
-Settings this to <span class="xref">null</span> will close any opened diagram.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Converters_SvgBitmap_SvgSource_seealso">See Also</h5>
-  <div class="seealso">
-      <div><a class="xref" href="SharpVectors.Converters.SvgBitmap.html#SharpVectors_Converters_SvgBitmap_UriSource">UriSource</a></div>
-  </div>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_UriSource_" data-uid="SharpVectors.Converters.SvgBitmap.UriSource*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_UriSource" data-uid="SharpVectors.Converters.SvgBitmap.UriSource">UriSource</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the path to the SVG file to load into this <a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Uri UriSource { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></td>
-        <td><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a> specifying the path to the SVG source file.
-The file can be located on a computer, network or assembly resources.
-Settings this to <span class="xref">null</span> will close any opened diagram.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="SharpVectors_Converters_SvgBitmap_UriSource_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This is the same as the <see cref="!:Source"></see> property, and added for consistency.</p>
-</div>
-  <h5 id="SharpVectors_Converters_SvgBitmap_UriSource_seealso">See Also</h5>
-  <div class="seealso">
-      <div><a class="xref" href="SharpVectors.Converters.SvgBitmap.html#SharpVectors_Converters_SvgBitmap_SvgSource">SvgSource</a></div>
-  </div>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_CreateDrawing_" data-uid="SharpVectors.Converters.SvgBitmap.CreateDrawing*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_CreateDrawing" data-uid="SharpVectors.Converters.SvgBitmap.CreateDrawing">CreateDrawing()</h4>
-  <div class="markdown level1 summary"><p>Performs the conversion of a valid SVG source to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual DrawingGroup CreateDrawing()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><p>This returns <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> if successful; otherwise, it
-returns <span class="xref">null</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_CreateDrawing_" data-uid="SharpVectors.Converters.SvgBitmap.CreateDrawing*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_CreateDrawing_System_String_SharpVectors_Renderers_Wpf_WpfDrawingSettings_" data-uid="SharpVectors.Converters.SvgBitmap.CreateDrawing(System.String,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">CreateDrawing(String, WpfDrawingSettings)</h4>
-  <div class="markdown level1 summary"><p>Performs the conversion of a valid SVG source stream to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual DrawingGroup CreateDrawing(string svgSource, WpfDrawingSettings settings)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">svgSource</span></td>
-        <td><p>A stream providing access to the SVG source data.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>This specifies the settings used by the rendering or drawing engine.
-If this is <span class="xref">null</span>, the default settings is used.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><p>This returns <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> if successful; otherwise, it
-returns <span class="xref">null</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_CreateDrawing_" data-uid="SharpVectors.Converters.SvgBitmap.CreateDrawing*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_CreateDrawing_System_Uri_SharpVectors_Renderers_Wpf_WpfDrawingSettings_" data-uid="SharpVectors.Converters.SvgBitmap.CreateDrawing(System.Uri,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">CreateDrawing(Uri, WpfDrawingSettings)</h4>
-  <div class="markdown level1 summary"><p>Performs the conversion of a valid SVG source file to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual DrawingGroup CreateDrawing(Uri svgSource, WpfDrawingSettings settings)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a></td>
-        <td><span class="parametername">svgSource</span></td>
-        <td><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a> defining the path to the SVG source.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>This specifies the settings used by the rendering or drawing engine.
-If this is <span class="xref">null</span>, the default settings is used.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><p>This returns <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> if successful; otherwise, it
-returns <span class="xref">null</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_GetDrawingSettings_" data-uid="SharpVectors.Converters.SvgBitmap.GetDrawingSettings*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_GetDrawingSettings" data-uid="SharpVectors.Converters.SvgBitmap.GetDrawingSettings">GetDrawingSettings()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual WpfDrawingSettings GetDrawingSettings()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_OnInitialized_" data-uid="SharpVectors.Converters.SvgBitmap.OnInitialized*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_OnInitialized_System_EventArgs_" data-uid="SharpVectors.Converters.SvgBitmap.OnInitialized(System.EventArgs)">OnInitialized(EventArgs)</h4>
-  <div class="markdown level1 summary"><p>Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnInitialized(EventArgs e)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></td>
-        <td><span class="parametername">e</span></td>
-        <td><p>Event data for the event.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.frameworkelement.oninitialized#system-windows-frameworkelement-oninitialized(system-eventargs)">FrameworkElement.OnInitialized(EventArgs)</a></div>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_OnLoadDrawing_" data-uid="SharpVectors.Converters.SvgBitmap.OnLoadDrawing*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_OnLoadDrawing_System_Windows_Media_DrawingGroup_" data-uid="SharpVectors.Converters.SvgBitmap.OnLoadDrawing(System.Windows.Media.DrawingGroup)">OnLoadDrawing(DrawingGroup)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void OnLoadDrawing(DrawingGroup drawing)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a></td>
-        <td><span class="parametername">drawing</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_OnSettingsChanged_" data-uid="SharpVectors.Converters.SvgBitmap.OnSettingsChanged*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_OnSettingsChanged" data-uid="SharpVectors.Converters.SvgBitmap.OnSettingsChanged">OnSettingsChanged()</h4>
-  <div class="markdown level1 summary"><p>This handles changes in the rendering settings of this control.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void OnSettingsChanged()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Converters_SvgBitmap_OnUnloadDiagram_" data-uid="SharpVectors.Converters.SvgBitmap.OnUnloadDiagram*"></a>
-  <h4 id="SharpVectors_Converters_SvgBitmap_OnUnloadDiagram" data-uid="SharpVectors.Converters.SvgBitmap.OnUnloadDiagram">OnUnloadDiagram()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void OnUnloadDiagram()</code></pre>
-  </div>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.ianimatable">System.Windows.Media.Animation.IAnimatable</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.iframeworkinputelement">System.Windows.IFrameworkInputElement</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.iinputelement">System.Windows.IInputElement</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.isupportinitialize">System.ComponentModel.ISupportInitialize</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.iqueryambient">System.Windows.Markup.IQueryAmbient</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.iuricontext">System.Windows.Markup.IUriContext</a>
-  </div>
-  <h3 id="seealso">See Also</h3>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.-ctor.html#SharpVectors_Converters_SvgBitmap__ctor">SvgBitmap()</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a> class.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.AppNameProperty.html">AppNameProperty</a></dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyproperty">DependencyProperty</a> for the <code>AppName</code> property.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.SvgSourceProperty.html">SvgSourceProperty</a></dt>
+    <dd><p>Identifies the <a class="xref" href="SharpVectors.Converters.SvgBitmap.SvgSource.html#SharpVectors_Converters_SvgBitmap_SvgSource">SvgSource</a> dependency property.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.UriSourceProperty.html">UriSourceProperty</a></dt>
+    <dd><p>Identifies the <a class="xref" href="SharpVectors.Converters.SvgBitmap.UriSource.html#SharpVectors_Converters_SvgBitmap_UriSource">UriSource</a> dependency property.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.AppName.html#SharpVectors_Converters_SvgBitmap_AppName">AppName</a></dt>
+    <dd><p>Gets or sets the <code>name</code> of the parent assembly for this element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.SvgSource.html#SharpVectors_Converters_SvgBitmap_SvgSource">SvgSource</a></dt>
+    <dd><p>Gets or sets the SVG contents to load into this <a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.UriSource.html#SharpVectors_Converters_SvgBitmap_UriSource">UriSource</a></dt>
+    <dd><p>Gets or sets the path to the SVG file to load into this <a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a>.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.CreateDrawing.html#SharpVectors_Converters_SvgBitmap_CreateDrawing">CreateDrawing()</a></dt>
+    <dd><p>Performs the conversion of a valid SVG source to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.CreateDrawing.html#SharpVectors_Converters_SvgBitmap_CreateDrawing_System_String_SharpVectors_Renderers_Wpf_WpfDrawingSettings_">CreateDrawing(string, WpfDrawingSettings)</a></dt>
+    <dd><p>Performs the conversion of a valid SVG source stream to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.CreateDrawing.html#SharpVectors_Converters_SvgBitmap_CreateDrawing_System_Uri_SharpVectors_Renderers_Wpf_WpfDrawingSettings_">CreateDrawing(Uri, WpfDrawingSettings)</a></dt>
+    <dd><p>Performs the conversion of a valid SVG source file to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.GetDrawingSettings.html#SharpVectors_Converters_SvgBitmap_GetDrawingSettings">GetDrawingSettings()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.OnInitialized.html#SharpVectors_Converters_SvgBitmap_OnInitialized_System_EventArgs_">OnInitialized(EventArgs)</a></dt>
+    <dd><p>Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.OnLoadDrawing.html#SharpVectors_Converters_SvgBitmap_OnLoadDrawing_System_Windows_Media_DrawingGroup_">OnLoadDrawing(DrawingGroup)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.OnSettingsChanged.html#SharpVectors_Converters_SvgBitmap_OnSettingsChanged">OnSettingsChanged()</a></dt>
+    <dd><p>This handles changes in the rendering settings of this control.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.OnUnloadDiagram.html#SharpVectors_Converters_SvgBitmap_OnUnloadDiagram">OnUnloadDiagram()</a></dt>
+    <dd></dd>
+  </dl>
+
+
+  <h2 id="seealso">See Also</h2>
   <div class="seealso">
       <div><a class="xref" href="SharpVectors.Converters.SvgIcon.html">SvgIcon</a></div>
   </div>
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorConvertersWpf/SvgBitmap.cs/#L33" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

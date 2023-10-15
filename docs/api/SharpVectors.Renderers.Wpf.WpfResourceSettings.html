@@ -1,232 +1,177 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class WpfResourceSettings
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Class WpfResourceSettings
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Class WpfResourceSettings
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WpfResourceSettings
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Renderers_Wpf_WpfResourceSettings.md&amp;value=---%0Auid%3A%20SharpVectors.Renderers.Wpf.WpfResourceSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
-
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column class">
+        <article data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings">
 
 
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
 
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
-  
-  <h1 id="SharpVectors_Renderers_Wpf_WpfResourceSettings" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings" class="text-break">Class WpfResourceSettings
+  <h1 id="SharpVectors_Renderers_Wpf_WpfResourceSettings" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings" class="text-break">
+    Class WpfResourceSettings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRenderingWpf/Wpf/WpfResourceSettings.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
-    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
-    <div class="level3"><a class="xref" href="SharpVectors.Renderers.WpfObject.html">WpfObject</a></div>
-    <div class="level4"><a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html">WpfSettings</a>&lt;<a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a>&gt;</div>
-    <div class="level5"><span class="xref">WpfResourceSettings</span></div>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Renderers.html">Renderers</a>.<a class="xref" href="SharpVectors.Renderers.Wpf.html">Wpf</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Rendering.Wpf.dll</dd></dl>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.serialization.ixmlserializable">IXmlSerializable</a></div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public sealed class WpfResourceSettings : WpfSettings&lt;WpfResourceSettings&gt;, ICloneable, IXmlSerializable</code></pre>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.WpfObject.html">WpfObject</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html">WpfSettings</a>&lt;<a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a>&gt;</div>
+      <div><span class="xref">WpfResourceSettings</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.serialization.ixmlserializable">IXmlSerializable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1__comparer">WpfSettings&lt;WpfResourceSettings&gt;._comparer</a>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNull.html#SharpVectors_Renderers_WpfObject_NotNull_System_Object_System_String_">WpfObject.NotNull(object, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_System_Xml_Serialization_IXmlSerializable_GetSchema">WpfSettings&lt;WpfResourceSettings&gt;.IXmlSerializable.GetSchema()</a>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNull.html#SharpVectors_Renderers_WpfObject_NotNull_System_String_System_String_">WpfObject.NotNull(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteEnum_System_Xml_XmlWriter_System_String_System_String_">WpfSettings&lt;WpfResourceSettings&gt;.WriteEnum(XmlWriter, String, String)</a>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotEmpty.html#SharpVectors_Renderers_WpfObject_NotEmpty_System_String_System_String_">WpfObject.NotEmpty(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteEnum_System_Xml_XmlWriter_System_String_System_String_System_String_">WpfSettings&lt;WpfResourceSettings&gt;.WriteEnum(XmlWriter, String, String, String)</a>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNullNotEmpty.html#SharpVectors_Renderers_WpfObject_NotNullNotEmpty_System_String_System_String_">WpfObject.NotNullNotEmpty(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteCData_System_Xml_XmlWriter_System_String_System_String_">WpfSettings&lt;WpfResourceSettings&gt;.WriteCData(XmlWriter, String, String)</a>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNullNotEmpty.html#SharpVectors_Renderers_WpfObject_NotNullNotEmpty__1_System_Collections_Generic_IList___0__System_String_">WpfObject.NotNullNotEmpty&lt;E&gt;(IList&lt;E&gt;, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteCData_System_Xml_XmlWriter_System_String_System_String_System_String_">WpfSettings&lt;WpfResourceSettings&gt;.WriteCData(XmlWriter, String, String, String)</a>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.PathMustExist.html#SharpVectors_Renderers_WpfObject_PathMustExist_System_String_System_String_">WpfObject.PathMustExist(string, string)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteProperty_System_Xml_XmlWriter_System_String_System_String_">WpfSettings&lt;WpfResourceSettings&gt;.WriteProperty(XmlWriter, String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals">DependencyObject.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteProperty_System_Xml_XmlWriter_System_String_System_String_System_String_">WpfSettings&lt;WpfResourceSettings&gt;.WriteProperty(XmlWriter, String, String, String)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode">DependencyObject.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteProperty_System_Xml_XmlWriter_System_String_System_Object_">WpfSettings&lt;WpfResourceSettings&gt;.WriteProperty(XmlWriter, String, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue">DependencyObject.GetValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteProperty_System_Xml_XmlWriter_System_String_System_Boolean_">WpfSettings&lt;WpfResourceSettings&gt;.WriteProperty(XmlWriter, String, Boolean)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_WriteProperty_System_Xml_XmlWriter_System_String_System_Int32_">WpfSettings&lt;WpfResourceSettings&gt;.WriteProperty(XmlWriter, String, Int32)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue">DependencyObject.SetCurrentValue(DependencyProperty, object)</a>
     </div>
     <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html#SharpVectors_Renderers_WpfSettings_1_System_ICloneable_Clone">WpfSettings&lt;WpfResourceSettings&gt;.ICloneable.Clone()</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfObject.html#SharpVectors_Renderers_WpfObject_NotNull_System_Object_System_String_">WpfObject.NotNull(Object, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfObject.html#SharpVectors_Renderers_WpfObject_NotNull_System_String_System_String_">WpfObject.NotNull(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfObject.html#SharpVectors_Renderers_WpfObject_NotEmpty_System_String_System_String_">WpfObject.NotEmpty(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfObject.html#SharpVectors_Renderers_WpfObject_NotNullNotEmpty_System_String_System_String_">WpfObject.NotNullNotEmpty(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfObject.html#SharpVectors_Renderers_WpfObject_NotNullNotEmpty__1_System_Collections_Generic_IList___0__System_String_">WpfObject.NotNullNotEmpty&lt;E&gt;(IList&lt;E&gt;, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="SharpVectors.Renderers.WpfObject.html#SharpVectors_Renderers_WpfObject_PathMustExist_System_String_System_String_">WpfObject.PathMustExist(String, String)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals#system-windows-dependencyobject-equals(system-object)">DependencyObject.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode#system-windows-dependencyobject-gethashcode">DependencyObject.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue#system-windows-dependencyobject-getvalue(system-windows-dependencyproperty)">DependencyObject.GetValue(DependencyProperty)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue#system-windows-dependencyobject-setcurrentvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetCurrentValue(DependencyProperty, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencyproperty)">DependencyObject.ClearValue(DependencyProperty)</a>
@@ -235,1059 +180,235 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencypropertykey)">DependencyObject.ClearValue(DependencyPropertyKey)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue#system-windows-dependencyobject-coercevalue(system-windows-dependencyproperty)">DependencyObject.CoerceValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue">DependencyObject.CoerceValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty#system-windows-dependencyobject-invalidateproperty(system-windows-dependencyproperty)">DependencyObject.InvalidateProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty">DependencyObject.InvalidateProperty(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.onpropertychanged#system-windows-dependencyobject-onpropertychanged(system-windows-dependencypropertychangedeventargs)">DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue">DependencyObject.ReadLocalValue(DependencyProperty)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty#system-windows-dependencyobject-shouldserializeproperty(system-windows-dependencyproperty)">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue#system-windows-dependencyobject-readlocalvalue(system-windows-dependencyproperty)">DependencyObject.ReadLocalValue(DependencyProperty)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype">DependencyObject.DependencyObjectType</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator#system-windows-dependencyobject-getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed">DependencyObject.IsSealed</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype#system-windows-dependencyobject-dependencyobjecttype">DependencyObject.DependencyObjectType</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher">DispatcherObject.Dispatcher</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed#system-windows-dependencyobject-issealed">DependencyObject.IsSealed</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher#system-windows-threading-dispatcherobject-dispatcher">DispatcherObject.Dispatcher</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="SharpVectors.Renderers.Wpf.html">SharpVectors.Renderers.Wpf</a></h6>
-  <h6><strong>Assembly</strong>: SharpVectors.Rendering.Wpf.dll</h6>
-  <h5 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Serializable]
-public sealed class WpfResourceSettings : WpfSettings&lt;WpfResourceSettings&gt;, ICloneable, IXmlSerializable</code></pre>
-  </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings__ctor_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.#ctor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings__ctor" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.#ctor">WpfResourceSettings()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfResourceSettings()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings__ctor_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.#ctor*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings__ctor_SharpVectors_Renderers_Wpf_WpfResourceSettings_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.#ctor(SharpVectors.Renderers.Wpf.WpfResourceSettings)">WpfResourceSettings(WpfResourceSettings)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WpfResourceSettings(WpfResourceSettings source)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></td>
-        <td><span class="parametername">source</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="fields">Fields
-  </h3>
-  
-  
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_XmlTagName" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.XmlTagName">XmlTagName</h4>
-  <div class="markdown level1 summary"><p>Gets the name of the <code>XML</code> tag name, under which this object is stored.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string XmlTagName = &quot;resourceSettings&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_XmlVersion" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.XmlVersion">XmlVersion</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string XmlVersion = &quot;1.0.0&quot;</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BindPenToBrushes_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindPenToBrushes*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BindPenToBrushes" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindPenToBrushes">BindPenToBrushes</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool BindPenToBrushes { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToColors_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToColors*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToColors" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToColors">BindToColors</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool BindToColors { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToResources*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToResources">BindToResources</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool BindToResources { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BrushNameFormat*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.BrushNameFormat">BrushNameFormat</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string BrushNameFormat { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorNameFormat*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorNameFormat">ColorNameFormat</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string ColorNameFormat { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorPalette_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorPalette*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorPalette" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorPalette">ColorPalette</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDictionary&lt;Color, string&gt; ColorPalette { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.color">Color</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.IndentSpaces*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.IndentSpaces">IndentSpaces</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int IndentSpaces { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.NumericPrecision*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.NumericPrecision">NumericPrecision</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int NumericPrecision { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.PenNameFormat*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.PenNameFormat">PenNameFormat</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string PenNameFormat { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceAccess_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceAccess*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceAccess" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceAccess">ResourceAccess</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResourceAccessType ResourceAccess { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.ResourceAccessType.html">ResourceAccessType</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceFreeze*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceFreeze">ResourceFreeze</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ResourceFreeze { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode">ResourceMode</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResourceModeType ResourceMode { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.ResourceModeType.html">ResourceModeType</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceResolverType*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceResolverType">ResourceResolverType</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ResourceKeyResolverType ResourceResolverType { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.ResourceKeyResolverType.html">ResourceKeyResolverType</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_SourceCount_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.SourceCount*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_SourceCount" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.SourceCount">SourceCount</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int SourceCount { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Sources_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Sources*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Sources" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Sources">Sources</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;string&gt; Sources { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex">UseResourceIndex</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool UseResourceIndex { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_AddSource_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.AddSource*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_AddSource_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.AddSource(System.String)">AddSource(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool AddSource(string sourcePath)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">sourcePath</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ClearSources_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ClearSources*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ClearSources" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ClearSources">ClearSources()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ClearSources()</code></pre>
-  </div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Clone_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Clone*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Clone" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Clone">Clone()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override WpfResourceSettings Clone()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">SharpVectors.Renderers.WpfSettings&lt;SharpVectors.Renderers.Wpf.WpfResourceSettings&gt;.Clone()</span></div>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_CopyTo_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.CopyTo*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_CopyTo_SharpVectors_Renderers_Wpf_WpfDrawingResources_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.CopyTo(SharpVectors.Renderers.Wpf.WpfDrawingResources)">CopyTo(WpfDrawingResources)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CopyTo(WpfDrawingResources resources)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingResources.html">WpfDrawingResources</a></td>
-        <td><span class="parametername">resources</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_IsResolverRegistered_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.IsResolverRegistered*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_IsResolverRegistered" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.IsResolverRegistered">IsResolverRegistered()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsResolverRegistered()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Load_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Load*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Load_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Load(System.String)">Load(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Load(string contentFile)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">contentFile</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ReadXml_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ReadXml*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_ReadXml_System_Xml_XmlReader_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.ReadXml(System.Xml.XmlReader)">ReadXml(XmlReader)</h4>
-  <div class="markdown level1 summary"><p>This reads and sets its state or attributes stored in a <code>XML</code> format
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.-ctor.html#SharpVectors_Renderers_Wpf_WpfResourceSettings__ctor">WpfResourceSettings()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.-ctor.html#SharpVectors_Renderers_Wpf_WpfResourceSettings__ctor_SharpVectors_Renderers_Wpf_WpfResourceSettings_">WpfResourceSettings(WpfResourceSettings)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.XmlTagName.html">XmlTagName</a></dt>
+    <dd><p>Gets the name of the <code>XML</code> tag name, under which this object is stored.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.XmlVersion.html">XmlVersion</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindPenToBrushes.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindPenToBrushes">BindPenToBrushes</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToColors.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToColors">BindToColors</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToResources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources">BindToResources</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.BrushNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat">BrushNameFormat</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat">ColorNameFormat</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorPalette.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorPalette">ColorPalette</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.IndentSpaces.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.NumericPrecision.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision">NumericPrecision</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.PenNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat">PenNameFormat</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceAccess.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceAccess">ResourceAccess</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceFreeze.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze">ResourceFreeze</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode">ResourceMode</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceResolverType.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType">ResourceResolverType</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.SourceCount.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_SourceCount">SourceCount</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Sources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Sources">Sources</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.AddSource.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_AddSource_System_String_">AddSource(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ClearSources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ClearSources">ClearSources()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Clone.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Clone">Clone()</a></dt>
+    <dd><p>This creates a new build object that is a deep copy of the current
+instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.CopyTo.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_CopyTo_SharpVectors_Renderers_Wpf_WpfDrawingResources_">CopyTo(WpfDrawingResources)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.IsResolverRegistered.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IsResolverRegistered">IsResolverRegistered()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Load.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Load_System_String_">Load(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.ReadXml.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ReadXml_System_Xml_XmlReader_">ReadXml(XmlReader)</a></dt>
+    <dd><p>This reads and sets its state or attributes stored in a <code>XML</code> format
 with the given reader.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ReadXml(XmlReader reader)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreader">XmlReader</a></td>
-        <td><span class="parametername">reader</span></td>
-        <td><p>The reader with which the <code>XML</code> attributes of this object are accessed.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">SharpVectors.Renderers.WpfSettings&lt;SharpVectors.Renderers.Wpf.WpfResourceSettings&gt;.ReadXml(System.Xml.XmlReader)</span></div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If the <code data-dev-comment-type="paramref" class="paramref">reader</code> is <span class="xref">null</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RegisterResolver_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RegisterResolver*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RegisterResolver_SharpVectors_Renderers_IResourceKeyResolver_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RegisterResolver(SharpVectors.Renderers.IResourceKeyResolver)">RegisterResolver(IResourceKeyResolver)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterResolver(IResourceKeyResolver keyResolver)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a></td>
-        <td><span class="parametername">keyResolver</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RegisterResolver_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RegisterResolver*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RegisterResolver_System_Func_SharpVectors_Renderers_IResourceKeyResolver__" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RegisterResolver(System.Func{SharpVectors.Renderers.IResourceKeyResolver})">RegisterResolver(Func&lt;IResourceKeyResolver&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RegisterResolver(Func&lt;IResourceKeyResolver&gt; keyResolver)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a>&gt;</td>
-        <td><span class="parametername">keyResolver</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RemoveSource_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RemoveSource*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RemoveSource_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RemoveSource(System.String)">RemoveSource(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RemoveSource(string sourcePath)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">sourcePath</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RetrieveResolver_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RetrieveResolver*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_RetrieveResolver" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.RetrieveResolver">RetrieveResolver()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IResourceKeyResolver RetrieveResolver()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save">Save()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Save()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_System_IO_Stream_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save(System.IO.Stream)">Save(Stream)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Save(Stream stream)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
-        <td><span class="parametername">stream</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_System_IO_TextWriter_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save(System.IO.TextWriter)">Save(TextWriter)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Save(TextWriter textWriter)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></td>
-        <td><span class="parametername">textWriter</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_System_String_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save(System.String)">Save(String)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Save(string contentFile)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">contentFile</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="SharpVectors_Renderers_Wpf_WpfResourceSettings_WriteXml_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.WriteXml*"></a>
-  <h4 id="SharpVectors_Renderers_Wpf_WpfResourceSettings_WriteXml_System_Xml_XmlWriter_" data-uid="SharpVectors.Renderers.Wpf.WpfResourceSettings.WriteXml(System.Xml.XmlWriter)">WriteXml(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>This writes the current state or attributes of this object,
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.RegisterResolver.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_RegisterResolver_SharpVectors_Renderers_IResourceKeyResolver_">RegisterResolver(IResourceKeyResolver)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.RegisterResolver.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_RegisterResolver_System_Func_SharpVectors_Renderers_IResourceKeyResolver__">RegisterResolver(Func&lt;IResourceKeyResolver&gt;)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.RemoveSource.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_RemoveSource_System_String_">RemoveSource(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.RetrieveResolver.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_RetrieveResolver">RetrieveResolver()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Save">Save()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_System_IO_Stream_">Save(Stream)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_System_IO_TextWriter_">Save(TextWriter)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.Save.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Save_System_String_">Save(string)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfResourceSettings.WriteXml.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_WriteXml_System_Xml_XmlWriter_">WriteXml(XmlWriter)</a></dt>
+    <dd><p>This writes the current state or attributes of this object,
 in the <code>XML</code> format, to the media or storage accessible by the given writer.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void WriteXml(XmlWriter writer)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a></td>
-        <td><span class="parametername">writer</span></td>
-        <td><p>The <code>XML</code> writer with which the <code>XML</code> format of this object's state
-is written.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">SharpVectors.Renderers.WpfSettings&lt;SharpVectors.Renderers.Wpf.WpfResourceSettings&gt;.WriteXml(System.Xml.XmlWriter)</span></div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td><p>If the <code data-dev-comment-type="paramref" class="paramref">reader</code> is <span class="xref">null</span>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">System.ICloneable</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.serialization.ixmlserializable">System.Xml.Serialization.IXmlSerializable</a>
-  </div>
+</dd>
+  </dl>
+
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source/SharpVectorRenderingWpf/Wpf/WpfResourceSettings.cs/#L16" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

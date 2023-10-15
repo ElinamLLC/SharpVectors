@@ -1,317 +1,366 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
-<html class="theme-dark">
-  
-  
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace SharpVectors.Dom
-   | SharpVectors Documentation </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Namespace SharpVectors.Dom
-   | SharpVectors Documentation ">
-    <meta name="generator" content="docfx 2.59.4.0">
-    
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" integrity="sha512-T3VL1q6jMUIzGLRB9z86oJg9PgF7A55eC2XkB93zyWSqQw3Ju+6IEJZYBfT7E9wOHM7HCMCOZSpcssxnUn6AeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-dark.min.css" integrity="sha512-Xn1b0y/BrCD7usnEh6r9CcKxHXFVleVUjGDnfc95zDDwFUwtOz3lJC/XtJcuLRNyrMQJEEToFfwjC9Ue/aWY/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/stackoverflow-light.min.css" integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css" integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/discord.css">
-    <link rel="stylesheet" href="../styles/main.css">
-    <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      <title>Namespace SharpVectors.Dom
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace SharpVectors.Dom
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx/namespaces/SharpVectors.Dom.md/#L2">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
   </head>
 
-  <body>
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
 
-        <div class="body-content">
-
-            <nav id="sidebar" role="navigation">
-
-                <div class="sidebar">
-                    
-                    
-                    
-                    
-                    <div>
-                      
-                      <a class="brand" href="../index.html">
-                        <img src="../images/logo.svg" alt="SharpVectors" class="logomark">
-                        <span class="brand-title">SharpVectors</span>
-                      </a>
-                      <div id="navbar">
-                    
-                      </div>
-                    
-                    </div>
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
 
 
-                        <div class="sidebar-item-separator"></div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-                        
-                        <div id="sidetoggle">
-                          <div id="sidetoc"></div>
-                        </div>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
 
-                </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
 
-                    <div class="footer">
-                      Elinam LLC, Toyota City - Japan<br><small>Generated by DocFX</small>
-                      
-                    </div>
-            </nav>
+          <nav id="breadcrumb"></nav>
+        </div>
 
-            <main class="main-panel">
+        <article data-uid="SharpVectors.Dom">
 
-                <div class="blackout desktop-hide"></div>
-
-                    
-                    <div class="subnav navbar navbar-default">
-                      <button class="btn-link search-back desktop-hide"></button>
-                      <button class="btn-link navbar-toggler" aria-label="Toggle navigation"></button>
-                      <div class="container" id="breadcrumb">
-                        <ul class="breadcrumb">
-                          <li></li>
-                        </ul>
-                      </div>
-                      <div class="flex-space"></div>
-                      <div class="toolbar">
-                          <div style="position: relative; margin: 0 8px;">
-                            <form class="search-bar mobile-hide" role="search" id="search" style="position: relative;">
-                              <button class="btn-link clear" id="search-query-clear"></button>
-                              <div role="textbox" class="form-control" id="search-query" placeholder="Search" contenteditable="true"></div>
-                            </form>
-                            <div class="popout" id="search-menu">
-                              <span class="title">
-                                Search options:
-                              </span>
-                            </div>
-                            <button class="btn-link search-tip desktop-hide"></button>
-                          </div>
-                      </div>
-                      <button class="btn-link btn-floating search desktop-hide"></button>
-                      <div class="theme">
-                        <button class="btn-link theme" aria-label="Switch theme"></button>
-                        <div class="popout" id="theme-menu">
-                          <div class="theme-option light" data-theme="light">
-                            <span class="btn-link theme-light">Light</span>
-                          </div>
-                          <div class="theme-option dark" data-theme="dark">
-                            <span class="btn-link theme-dark">Dark</span>
-                          </div>
-                          <div class="theme-option auto" data-theme="auto">
-                            <span class="btn-link theme-auto">Sync with OS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                <div class="content-region" role="main">
-
-                    <div class="content-column namespace">
-
-
-                            
-                            <div id="search-results">
-                              <div class="search-list">Search Results for <span></span></div>
-                              <div class="sr-items">
-                                <p><span class="glyphicon glyphicon-refresh index-loading"></span></p>
-                              </div>
-                              <ul id="pagination" data-first="" data-prev="&#xf053;" data-next="&#xf054;" data-last=""></ul>
-                            </div>
-
-                        <article class="content wrap hide-when-search" id="_content" data-uid="SharpVectors.Dom">
-
-                                <span class="small pull-right article mobile-hide" style="margin: 0;" data-noindex="">
-                                    <ul class="subnav contribution">
-                                    </ul>
-                                </span>
-
-  
   <h1 id="SharpVectors_Dom" data-uid="SharpVectors.Dom" class="text-break">Namespace SharpVectors.Dom
-  </h1>
+</h1>
   <div class="markdown level0 summary">
 <p>The <strong>SharpVectors.Dom</strong> namespace contains a bunch of classes and interfaces.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
-  </h3>
-      <h4><a class="xref" href="SharpVectors.Dom.Attribute.html">Attribute</a></h4>
-      <section><p>Summary description for Attribute.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.CDataSection.html">CDataSection</a></h4>
-      <section><p>Summary description for CDataSection.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.Comment.html">Comment</a></h4>
-      <section><p>Summary description for Comment.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.Declaration.html">Declaration</a></h4>
-      <section><p>Summary description for Declaration.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.Document.html">Document</a></h4>
-      <section><p>The base implementation of an <code>XML</code> document to support both <code>SVG</code> and <code>CSS</code> documents.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.DocumentFragment.html">DocumentFragment</a></h4>
-      <section><p>Summary description for DocumentFragment.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.DocumentType.html">DocumentType</a></h4>
-      <section><p>Summary description for DocumentType.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.DomException.html">DomException</a></h4>
-      <section><p>Represents errors that occur during DOM operation execution.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.DomImplementation.html">DomImplementation</a></h4>
-      <section><p>Summary description for DomImplementation.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.Element.html">Element</a></h4>
-      <section><p>Summary description for Element.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.EntityReference.html">EntityReference</a></h4>
-      <section><p>Summary description for EntityReference.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.NodeListAdapter.html">NodeListAdapter</a></h4>
-      <section><p>Summary description for NodeListAdapter.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.ProcessingInstruction.html">ProcessingInstruction</a></h4>
-      <section><p>Summary description for ProcessingInstruction.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.SignificantWhitespace.html">SignificantWhitespace</a></h4>
-      <section><p>Summary description for SignificantWhitespace.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.Text.html">Text</a></h4>
-      <section><p>Summary description for Text.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.Whitespace.html">Whitespace</a></h4>
-      <section><p>Summary description for Whitespace.</p>
-</section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="SharpVectors.Dom.IAttribute.html">IAttribute</a></h4>
-      <section><p>Summary description for IAttribute.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.ICDataSection.html">ICDataSection</a></h4>
-      <section><p>Summary description for ICDataSection.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.ICharacterData.html">ICharacterData</a></h4>
-      <section><p>Provides text manipulation methods that are used by several classes.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IComment.html">IComment</a></h4>
-      <section><p>Summary description for IComment.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IDocument.html">IDocument</a></h4>
-      <section></section>
-      <h4><a class="xref" href="SharpVectors.Dom.IDocumentFragment.html">IDocumentFragment</a></h4>
-      <section><p>Represents a lightweight object that is useful for tree insert operations.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IDocumentType.html">IDocumentType</a></h4>
-      <section><p>This represents the document type declaration.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IDomConfiguration.html">IDomConfiguration</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.IDomConfiguration.html">IDomConfiguration</a> interface represents the configuration of a document
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Attribute.html">Attribute</a></dt>
+      <dd><p>Summary description for Attribute.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.CDataSection.html">CDataSection</a></dt>
+      <dd><p>Summary description for CDataSection.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Comment.html">Comment</a></dt>
+      <dd><p>Summary description for Comment.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Declaration.html">Declaration</a></dt>
+      <dd><p>Summary description for Declaration.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Document.html">Document</a></dt>
+      <dd><p>The base implementation of an <code>XML</code> document to support both <code>SVG</code> and <code>CSS</code> documents.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.DocumentFragment.html">DocumentFragment</a></dt>
+      <dd><p>Summary description for DocumentFragment.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.DocumentType.html">DocumentType</a></dt>
+      <dd><p>Summary description for DocumentType.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.DomException.html">DomException</a></dt>
+      <dd><p>Represents errors that occur during DOM operation execution.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.DomImplementation.html">DomImplementation</a></dt>
+      <dd><p>Summary description for DomImplementation.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Element.html">Element</a></dt>
+      <dd><p>Summary description for Element.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.EntityReference.html">EntityReference</a></dt>
+      <dd><p>Summary description for EntityReference.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.NodeListAdapter.html">NodeListAdapter</a></dt>
+      <dd><p>Summary description for NodeListAdapter.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.ProcessingInstruction.html">ProcessingInstruction</a></dt>
+      <dd><p>Summary description for ProcessingInstruction.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.SignificantWhitespace.html">SignificantWhitespace</a></dt>
+      <dd><p>Summary description for SignificantWhitespace.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Text.html">Text</a></dt>
+      <dd><p>Summary description for Text.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Whitespace.html">Whitespace</a></dt>
+      <dd><p>Summary description for Whitespace.</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IAttribute.html">IAttribute</a></dt>
+      <dd><p>Summary description for IAttribute.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.ICDataSection.html">ICDataSection</a></dt>
+      <dd><p>Summary description for ICDataSection.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.ICharacterData.html">ICharacterData</a></dt>
+      <dd><p>Provides text manipulation methods that are used by several classes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IComment.html">IComment</a></dt>
+      <dd><p>Summary description for IComment.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IDocument.html">IDocument</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IDocumentFragment.html">IDocumentFragment</a></dt>
+      <dd><p>Represents a lightweight object that is useful for tree insert operations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IDocumentType.html">IDocumentType</a></dt>
+      <dd><p>This represents the document type declaration.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IDomConfiguration.html">IDomConfiguration</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.IDomConfiguration.html">IDomConfiguration</a> interface represents the configuration of a document
 and maintains a table of recognized parameters.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IDomImplementation.html">IDomImplementation</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.IDomImplementation.html">IDomImplementation</a> interface provides a number of methods for performing operations
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IDomImplementation.html">IDomImplementation</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.IDomImplementation.html">IDomImplementation</a> interface provides a number of methods for performing operations
 that are independent of any particular instance of the document object model.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IDomTimeStamp.html">IDomTimeStamp</a></h4>
-      <section><p>The <code>DOMTimeStamp</code> type represents an absolute or relative number of milliseconds,
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IDomTimeStamp.html">IDomTimeStamp</a></dt>
+      <dd><p>The <code>DOMTimeStamp</code> type represents an absolute or relative number of milliseconds,
 depending on the specification in which it appears.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IElement.html">IElement</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.IElement.html">IElement</a> interface represents an element in an HTML or XML document.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IElementTimeControl.html">IElementTimeControl</a></h4>
-      <section><p>An <code>SMIL</code> animation interface to supports several methods for controlling the behavior of animation.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IEntity.html">IEntity</a></h4>
-      <section></section>
-      <h4><a class="xref" href="SharpVectors.Dom.IEntityReference.html">IEntityReference</a></h4>
-      <section><p><a class="xref" href="SharpVectors.Dom.IEntityReference.html">IEntityReference</a> objects may be inserted into the structure model when an entity reference
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IElement.html">IElement</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.IElement.html">IElement</a> interface represents an element in an HTML or XML document.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IElementTimeControl.html">IElementTimeControl</a></dt>
+      <dd><p>An <code>SMIL</code> animation interface to supports several methods for controlling the behavior of animation.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IEntity.html">IEntity</a></dt>
+      <dd><p>This interface represents an entity, either parsed or unparsed, in an XML
+document. Note that this models the entity itself not the entity
+declaration. <a class="xref" href="SharpVectors.Dom.IEntity.html">IEntity</a> declaration modeling has been left for a
+later Level of the DOM specification.</p>
+<p>
+Represents an entity declaration, such as <code>&lt;!ENTITY... &gt;</code>.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IEntityReference.html">IEntityReference</a></dt>
+      <dd><p><a class="xref" href="SharpVectors.Dom.IEntityReference.html">IEntityReference</a> objects may be inserted into the structure model when an entity reference
 is in the source document, or when the user wishes to insert an entity reference.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.INamedNodeMap.html">INamedNodeMap</a></h4>
-      <section><p>Represents a collection of nodes that can be accessed by name or index.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.INamedNodeMap.html">INamedNodeMap</a></dt>
+      <dd><p>Represents a collection of nodes that can be accessed by name or index.</p>
 <p>
 Objects implementing the <a class="xref" href="SharpVectors.Dom.INamedNodeMap.html">INamedNodeMap</a> interface are used to represent collections of nodes 
 that can be accessed by name. 
 </p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.INode.html">INode</a> interface is the primary datatype for the entire Document Object Model.
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.INode.html">INode</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.INode.html">INode</a> interface is the primary datatype for the entire Document Object Model.
 It represents a single node in the document tree.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.INodeList.html">INodeList</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.INodeList.html">INodeList</a> interface provides the abstraction of an ordered
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.INodeList.html">INodeList</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.INodeList.html">INodeList</a> interface provides the abstraction of an ordered
 collection of nodes, without defining or constraining how this collection
 is implemented. <a class="xref" href="SharpVectors.Dom.INodeList.html">INodeList</a> objects in the DOM are live.</p>
 <p>The items in the <a class="xref" href="SharpVectors.Dom.INodeList.html">INodeList</a> are accessible via an integral 
 index, starting from <code>0</code>.
 </p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.INotation.html">INotation</a></h4>
-      <section><p>This interface represents a notation declared in the DTD. A notation either
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.INotation.html">INotation</a></dt>
+      <dd><p>This interface represents a notation declared in the DTD. A notation either
 declares, by name, the format of an unparsed entity (see section 4.7 of
 the XML 1.0 specification ), or is used for formal declaration of
 processing instruction targets (see section 2.6 of the XML 1.0
-specification ). The <see cref="!:INode.NodeName"></see> attribute inherited from
+specification ). The <a class="xref" href="SharpVectors.Dom.IXmlNode.Name.html#SharpVectors_Dom_IXmlNode_Name">Name</a> attribute inherited from
 <a class="xref" href="SharpVectors.Dom.INode.html">INode</a> is set to the declared name of the notation.</p>
 <p>The DOM Level 1 does not support editing <a class="xref" href="SharpVectors.Dom.INotation.html">INotation</a> nodes; 
 they are therefore readonly.
 </p>
 <p>A <a class="xref" href="SharpVectors.Dom.INotation.html">INotation</a> node does not have any parent.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IProcessingInstruction.html">IProcessingInstruction</a></h4>
-      <section><p>Represents a processing instruction, which XML defines to keep processor-specific
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IProcessingInstruction.html">IProcessingInstruction</a></dt>
+      <dd><p>Represents a processing instruction, which XML defines to keep processor-specific
 information in the text of the document.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IText.html">IText</a></h4>
-      <section><p>Represents the text content of an element or attribute.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IXmlElement.html">IXmlElement</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.IElement.html">IElement</a> interface represents an element in an HTML or XML document.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a></h4>
-      <section><p>The <a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a> interface is the primary datatype for the entire Document Object Model.
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IText.html">IText</a></dt>
+      <dd><p>Represents the text content of an element or attribute.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IXmlElement.html">IXmlElement</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.IElement.html">IElement</a> interface represents an element in an HTML or XML document.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.IXmlNode.html">IXmlNode</a> interface is the primary datatype for the entire Document Object Model.
 It represents a single node in the document tree. <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnode">XmlNode</a></p>
-</section>
-    <h3 id="enums">Enums
-  </h3>
-      <h4><a class="xref" href="SharpVectors.Dom.DomExceptionType.html">DomExceptionType</a></h4>
-      <section><p>DOM exception code types.</p>
-</section>
-      <h4><a class="xref" href="SharpVectors.Dom.ExternalResourcesAccessModes.html">ExternalResourcesAccessModes</a></h4>
-      <section><p>This provides possible options to controls how external resources will be handled.</p>
-</section>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.DomExceptionType.html">DomExceptionType</a></dt>
+      <dd><p>DOM exception code types.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.ExternalResourcesAccessModes.html">ExternalResourcesAccessModes</a></dt>
+      <dd><p>This provides possible options to controls how external resources will be handled.</p>
+</dd>
+    </dl>
+
+
 </article>
-                    </div>
 
-                </div>
-
-            </main>
-
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx/namespaces/SharpVectors.Dom.md/#L2" class="edit-link">Edit this page</a>
         </div>
 
         
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/arrive/2.4.1/arrive.min.js" integrity="sha512-wkU3qYWjenbM+t2cmvw2ADRRh4opbOYBjkhrPGHV7M6dcE/TR0oKpoDkWXfUs3HrulI2JFuTQyqPLRih1V54EQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.3.1/anchor.min.js" integrity="sha512-zPB79j2C+3sFS9zcA3vg/z6bVKzJVEyu9pY5w89akQRys76zpAT2t6S3wZKla3QQ14O5l/Yt0RUQ/DHXx82Y5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../styles/docfx.js"></script>
-<script type="text/javascript" src="../styles/discord.js"></script>
-<script type="text/javascript" src="../styles/main.js"></script>
+      </div>
 
-    </body>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
