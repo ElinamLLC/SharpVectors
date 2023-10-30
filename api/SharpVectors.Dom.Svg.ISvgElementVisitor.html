@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface ISvgElementVisitor
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISvgElementVisitor
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_ISvgElementVisitor.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.ISvgElementVisitor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor">
+
+
+
+  <h1 id="SharpVectors_Dom_Svg_ISvgElementVisitor" data-uid="SharpVectors.Dom.Svg.ISvgElementVisitor" class="text-break">
+    Interface ISvgElementVisitor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorCore\Svg\ISvgElementVisitor.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A visitor pattern interface that visits all renderable SVG elements.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ISvgElementVisitor</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="SharpVectors_Dom_Svg_ISvgElementVisitor_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The implementation is defined are follows:</p>
+<ul><li><span class="term">Implements visitor (<a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.html">ISvgElementVisitor</a>) object that implements an operation to be 
+performed on elements of SVG DOM structure.</span></li><li><span class="term">Implement the client that traverses the SVG DOM structure and call a dispatching operation 
+<a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitorTarget.Accept.html#SharpVectors_Dom_Svg_ISvgElementVisitorTarget_Accept_SharpVectors_Dom_Svg_ISvgElementVisitor_">Accept(ISvgElementVisitor)</a> on the SVG element — that dispatches (delegates) 
+the request to the accepted visitor object. 
+</span></li><li><span class="term">The visitor object then performs the operation on the element.</span></li></ul>
+</div>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.BeginContainer.html#SharpVectors_Dom_Svg_ISvgElementVisitor_BeginContainer_SharpVectors_Dom_Svg_ISvgElement_">BeginContainer(ISvgElement)</a></dt>
+    <dd><p>Signal the beginning of a graphics container element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.EndContainer.html#SharpVectors_Dom_Svg_ISvgElementVisitor_EndContainer_SharpVectors_Dom_Svg_ISvgElement_">EndContainer(ISvgElement)</a></dt>
+    <dd><p>Signal the ending of a graphics container element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgAElement_">Visit(ISvgAElement)</a></dt>
+    <dd><p>Visits the <code>link</code> element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgCircleElement_">Visit(ISvgCircleElement)</a></dt>
+    <dd><p>Visits the circle shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgEllipseElement_">Visit(ISvgEllipseElement)</a></dt>
+    <dd><p>Visits the ellipse shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgGElement_">Visit(ISvgGElement)</a></dt>
+    <dd><p>Visits the <code>group</code> element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgImageElement_">Visit(ISvgImageElement)</a></dt>
+    <dd><p>Visits the <code>image</code> graphics element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgLineElement_">Visit(ISvgLineElement)</a></dt>
+    <dd><p>Visits the line shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgPathElement_">Visit(ISvgPathElement)</a></dt>
+    <dd><p>Visits the path shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgPolygonElement_">Visit(ISvgPolygonElement)</a></dt>
+    <dd><p>Visits the polygon shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgPolylineElement_">Visit(ISvgPolylineElement)</a></dt>
+    <dd><p>Visits the polyline shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgRectElement_">Visit(ISvgRectElement)</a></dt>
+    <dd><p>Visits the rectangle shape element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgSvgElement_">Visit(ISvgSvgElement)</a></dt>
+    <dd><p>Visits the <code>svg</code> clipart element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgSwitchElement_">Visit(ISvgSwitchElement)</a></dt>
+    <dd><p>Visits the <code>switch</code> element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgSymbolElement_">Visit(ISvgSymbolElement)</a></dt>
+    <dd><p>Visits the <code>symbol</code> element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgTSpanElement_">Visit(ISvgTSpanElement)</a></dt>
+    <dd><p>Visits the <code>text-span</code> content element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgTextElement_">Visit(ISvgTextElement)</a></dt>
+    <dd><p>Visits the <code>text</code> content element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgTextPathElement_">Visit(ISvgTextPathElement)</a></dt>
+    <dd><p>Visits the <code>text-path</code> content element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitor.Visit.html#SharpVectors_Dom_Svg_ISvgElementVisitor_Visit_SharpVectors_Dom_Svg_ISvgUseElement_">Visit(ISvgUseElement)</a></dt>
+    <dd><p>Visits the use element.</p>
+</dd>
+  </dl>
+
+
+  <h2 id="seealso">See Also</h2>
+  <div class="seealso">
+      <div><span><a href="https://en.wikipedia.org/wiki/Visitor_pattern">Wikipedia: Visitor pattern</a></span></div>
+  </div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorCore\Svg\ISvgElementVisitor.cs/#L25" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

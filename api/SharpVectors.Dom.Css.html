@@ -1,0 +1,474 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace SharpVectors.Dom.Css
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace SharpVectors.Dom.Css
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\namespaces\SharpVectors.Dom.Css.md/#L2">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Dom.Css">
+
+  <h1 id="SharpVectors_Dom_Css" data-uid="SharpVectors.Dom.Css" class="text-break">Namespace SharpVectors.Dom.Css
+</h1>
+  <div class="markdown level0 summary">
+<p>The <strong>SharpVectors.Dom.Css</strong> namespace contains a bunch of classes and interfaces.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssAbsPrimitiveLengthValue.html">CssAbsPrimitiveLengthValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssAbsPrimitiveValue.html">CssAbsPrimitiveValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssAbsValue.html">CssAbsValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssCharsetRule.html">CssCharsetRule</a></dt>
+      <dd><p>The CSSCharsetRule interface represents a @charset rule in a CSS style sheet. The value of the
+encoding attribute does not affect the encoding of text data in the DOM objects; this encoding is
+always UTF-16. After a stylesheet is loaded, the value of the encoding attribute is the value found
+in the @charset rule. If there was no @charset in the original document, then no CSSCharsetRule is
+created. The value of the encoding attribute may also be used as a hint for the encoding used on
+serialization of the style sheet.
+The value of the @charset rule (and therefore of the CSSCharsetRule) may not correspond to the
+encoding the document actually came in; character encoding information e.g. in an HTTP header, has
+priority (see CSS document representation) but this is not reflected in the CSSCharsetRule.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedProperty.html">CssCollectedProperty</a></dt>
+      <dd><p>Used internally to store collected properties.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssCollectedStyleDeclaration.html">CssCollectedStyleDeclaration</a></dt>
+      <dd><p>Used internally for collection of styles for a specific element</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssColor.html">CssColor</a></dt>
+      <dd><p>The RGB-Color interface is used to represent any RGB color value.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssFontFaceRule.html">CssFontFaceRule</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.Css.ICssFontFaceRule.html">ICssFontFaceRule</a> interface represents a <code>@font-face</code> rule in a CSS style sheet.
+The <code>@font-face</code> rule is used to hold a set of font descriptions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssImportRule.html">CssImportRule</a></dt>
+      <dd><p>The CSSImportRule interface represents a @import rule within a CSS style sheet.
+The @import rule is used to import style rules from other style sheets.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssMediaRule.html">CssMediaRule</a></dt>
+      <dd><p>The CSSMediaRule interface represents a @media rule in a CSS style sheet. A @media rule can be
+used to delimit style rules for specific media types.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssNumber.html">CssNumber</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPageRule.html">CssPageRule</a></dt>
+      <dd><p>The CSSPageRule interface represents a @page rule within a CSS style sheet. The @page rule is
+used to specify the dimensions, orientation, margins, etc. of a page box for paged media.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveAngleValue.html">CssPrimitiveAngleValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveColorValue.html">CssPrimitiveColorValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveLengthValue.html">CssPrimitiveLengthValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveRgbValue.html">CssPrimitiveRgbValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveValue.html">CssPrimitiveValue</a></dt>
+      <dd><p>This implements the <a class="xref" href="SharpVectors.Dom.Css.ICssPrimitiveValue.html">ICssPrimitiveValue</a> interface which represents a single CSS value.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveVarsValue.html">CssPrimitiveVarsValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPropertyProfile.html">CssPropertyProfile</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssRect.html">CssRect</a></dt>
+      <dd><p>The Rect interface is used to represent any rect value. This interface reflects the values in
+the underlying style property. Hence, modifications made to the CSSPrimitiveValue objects modify
+the style property.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssRule.html">CssRule</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssRuleList.html">CssRuleList</a></dt>
+      <dd><p>The CSSRuleList interface provides the abstraction of an ordered collection of CSS rules.
+The items in the CSSRuleList are accessible via an integral index, starting from 0.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssStyleDeclaration.html">CssStyleDeclaration</a></dt>
+      <dd><p>
+The <a class="xref" href="SharpVectors.Dom.Css.ICssStyleDeclaration.html">ICssStyleDeclaration</a> interface represents a single CSS declaration block. 
+This interface may be used to determine the style properties currently set in a block or 
+to set style properties explicitly within the block.
+</p>
+<p>
+While an implementation may not recognize all CSS properties within a CSS declaration block, 
+it is expected to provide access to all specified properties in the style sheet through the 
+<a class="xref" href="SharpVectors.Dom.Css.ICssStyleDeclaration.html">ICssStyleDeclaration</a> interface. Furthermore, implementations that support a 
+specific level of CSS should correctly handle CSS shorthand properties for that level. 
+For a further discussion of shorthand properties, see the CSS2Properties interface.
+</p>
+<p>
+This interface is also used to provide a read-only access to the computed values of an element. 
+See also the ViewCSS interface.
+</p>
+<p>
+Note: The CSS Object Model doesn't provide an access to the specified or actual values of the CSS cascade
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssStyleRule.html">CssStyleRule</a></dt>
+      <dd><p>The CSSStyleRule interface represents a single rule set in a CSS style sheet.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssStyleSheet.html">CssStyleSheet</a></dt>
+      <dd><p>The <a class="xref" href="SharpVectors.Dom.Css.ICssStyleSheet.html">ICssStyleSheet</a> interface is a concrete interface used to represent a CSS style sheet i.e.,
+a style sheet whose content type is &quot;text/css&quot;.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssUnknownRule.html">CssUnknownRule</a></dt>
+      <dd><p>The CSSUnknownRule interface represents an at-rule not supported by this user agent.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssValue.html">CssValue</a></dt>
+      <dd><p>This implements the <a class="xref" href="SharpVectors.Dom.Css.ICssValue.html">ICssValue</a> interface, which represents a simple or a complex value.
+A <a class="xref" href="SharpVectors.Dom.Css.ICssValue.html">ICssValue</a> object only occurs in a context of a CSS property.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssXPathSelector.html">CssXPathSelector</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssXmlDocument.html">CssXmlDocument</a></dt>
+      <dd><p>A XmlDocument with CSS support</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssXmlElement.html">CssXmlElement</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.StaticSection.html">StaticSection</a></dt>
+      <dd><p>Creates a static section for a CssXmlDocument.
+Typical use:
+using(StaticSection.Use(doc))
+{
+// blah blah
+}</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssCharsetRule.html">ICssCharsetRule</a></dt>
+      <dd><p>The <code>ICssCharsetRule</code> interface represents a <code>@charset</code> rule in a CSS style sheet. The value of the
+encoding attribute does not affect the encoding of text data in the DOM objects; this encoding is
+always UTF-16. After a stylesheet is loaded, the value of the encoding attribute is the value found in the
+<code>@charset</code> rule. If there was no <code>@charset</code> in the original document, then no <code>ICssCharsetRule</code> is created.
+The value of the encoding attribute may also be used as a hint for the
+encoding used on serialization of the style sheet.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssColor.html">ICssColor</a></dt>
+      <dd><p>The RGB-Color interface is used to represent any RGB color value. This interface reflects the
+values in the underlying style property. Hence, modifications made to the
+<a class="xref" href="SharpVectors.Dom.Css.ICssPrimitiveValue.html">ICssPrimitiveValue</a> objects modify the style property.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssCounter.html">ICssCounter</a></dt>
+      <dd><p>The Counter interface is used to represent any counter or counters function value.
+This interface reflects the values in the underlying style property.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssFontFaceRule.html">ICssFontFaceRule</a></dt>
+      <dd><p>The <code>ICssFontFaceRule</code> interface represents a <code>@font-face </code>rule in a CSS style sheet.
+The <code>@font-face</code> rule is used to hold a set of font descriptions.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssImportRule.html">ICssImportRule</a></dt>
+      <dd><p>The <code>ICssImportRule</code> interface represents a <code>@import</code> rule within a CSS style sheet.
+The <code>@import</code> rule is used to import style rules from other style sheets.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssMediaRule.html">ICssMediaRule</a></dt>
+      <dd><p>The <code>ICssMediaRule</code> interface represents a <code>@media</code> rule in a CSS style sheet.
+A <code>@media</code> rule can be used to delimit style rules for specific media types</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssPageRule.html">ICssPageRule</a></dt>
+      <dd><p>The <code>ICssPageRule</code> interface represents a <code>@page</code> rule within a CSS style sheet.
+The <code>@page</code> rule is used to specify the dimensions, orientation, margins, etc. of a page box for paged media.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssPrimitiveValue.html">ICssPrimitiveValue</a></dt>
+      <dd><p>The <code>ICssPrimitiveValue</code> interface represents a single CSS value.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssRect.html">ICssRect</a></dt>
+      <dd><p>The <code>ICssRect</code> interface is used to represent any rect value. This interface reflects the values
+in the underlying style property. Hence, modifications made to the <a class="xref" href="SharpVectors.Dom.Css.ICssPrimitiveValue.html">ICssPrimitiveValue</a>
+objects modify the style property.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssRule.html">ICssRule</a></dt>
+      <dd><p>The <code>ICssRule</code> interface is the abstract base interface for any type of CSS statement.
+This includes both rule sets and at-rules. An implementation is expected to preserve all rules
+specified in a CSS style sheet, even if the rule is not recognized by the parser.
+Unrecognized rules are represented using the <a class="xref" href="SharpVectors.Dom.Css.ICssUnknownRule.html">ICssUnknownRule</a> interface.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssRuleList.html">ICssRuleList</a></dt>
+      <dd><p>The <code>ICssRuleList</code> interface provides the abstraction of an
+ordered collection of CSS rules.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssStyleDeclaration.html">ICssStyleDeclaration</a></dt>
+      <dd><p>The <code>ICssStyleDeclaration</code> interface represents a single CSS declaration block.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssStyleRule.html">ICssStyleRule</a></dt>
+      <dd><p>The <code>ICssStyleRule</code> interface represents a single rule set in a CSS style sheet.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssStyleSheet.html">ICssStyleSheet</a></dt>
+      <dd><p>The <code>ICssStyleSheet</code> interface is a concrete interface used to represent a CSS style sheet
+i.e., a style sheet whose content type is <code>text/css</code>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssUnknownRule.html">ICssUnknownRule</a></dt>
+      <dd><p>The <code>ICssUnknownRule</code> interface represents an at-rule not supported by this user agent.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssValue.html">ICssValue</a></dt>
+      <dd><p>The <code>ICssValue</code> interface represents the current computed value of a CSS property.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssValueList.html">ICssValueList</a></dt>
+      <dd><p>The <code>ICssValueList</code> interface provides the abstraction of an ordered collection of CSS values.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.ICssView.html">ICssView</a></dt>
+      <dd><p>This interface represents a CSS view. The <a class="xref" href="SharpVectors.Dom.Css.ICssView.GetComputedStyle.html#SharpVectors_Dom_Css_ICssView_GetComputedStyle_System_Xml_XmlElement_System_String_">GetComputedStyle(XmlElement, string)</a> method provides a read only access
+to the computed values of an element.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.IDocumentCss.html">IDocumentCss</a></dt>
+      <dd><p>This interface represents a document with a CSS view.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.IDomImplementationCss.html">IDomImplementationCss</a></dt>
+      <dd><p>This interface allows the DOM user to create a <a class="xref" href="SharpVectors.Dom.Css.ICssStyleSheet.html">ICssStyleSheet</a> outside the context of a document.
+There is no way to associate the new <a class="xref" href="SharpVectors.Dom.Css.ICssStyleSheet.html">ICssStyleSheet</a> with a document in DOM Level 2.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.IElementCssInlineStyle.html">IElementCssInlineStyle</a></dt>
+      <dd><p>Inline style information attached to elements is exposed through the style attribute.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssPrimitiveType.html">CssPrimitiveType</a></dt>
+      <dd><p>The <code>CssPrimitiveType</code> enumeration contains the list of possible primitive value types in CSS.
+This class is an extension of the CSS spec. The CSS spec has a list of constants instead of an enum class.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssRuleType.html">CssRuleType</a></dt>
+      <dd><p>The <code>CssRuleType</code> Enum contains the possible Rule Type Values. This is an extension of the CSS specification.
+The spec contains only a list of contstant in the <a class="xref" href="SharpVectors.Dom.Css.ICssRule.html">ICssRule</a> interface.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssStyleSheetType.html">CssStyleSheetType</a></dt>
+      <dd><p>The different types of CssStyleSheets</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssValueType.html">CssValueType</a></dt>
+      <dd><p>The <code>CssValueType</code> Enum contains the possible CSS Value Types. This is an extension to the
+CSS specification. The specification has a list of constants defined within the <a class="xref" href="SharpVectors.Dom.Css.ICssValue.html">ICssValue</a> Interface</p>
+</dd>
+    </dl>
+    <h3 id="delegates">
+Delegates
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.CssChangeHandler.html">CssChangeHandler</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Dom.Css.NodeChangeHandler.html">NodeChangeHandler</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\namespaces\SharpVectors.Dom.Css.md/#L2" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

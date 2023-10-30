@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Getting Started | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Getting Started | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\getting_started.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_getting_started">
+<h1 id="getting-started">Getting Started</h1>
+
+<p>The SharpVectors library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.</p>
+<p>For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below:</p>
+<p><img src="../images/rendering.png" alt="WPF Rendering"></p>
+<p>In some cases, the listed classes are entry points to the actual implementations as shown below for the text rendering.</p>
+<p><img src="../images/rendering_texts.png" alt="WPF Text Rendering"></p>
+<p>For the GDI+ application, the rendering classes are shown in the diagram below:</p>
+<p><img src="../images/rendering_gdi.png" alt="WPF Image Rendering"></p>
+<h2 id="options-and-settings">Options and Settings</h2>
+<p>A class <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a></strong> in the <code>SharpVectors.Rendering.Wpf</code> assembly provides the currently available user-defined options for the rendering.
+The other options class shown below is the <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></strong> class, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a> specific output options that will be discussed later:</p>
+<p><img src="../images/drawing_settings.png" alt="WPF Settings"></p>
+<p>All the properties of this class are well documented. The most important properties are</p>
+<ul>
+<li><strong>CultureInfo</strong>: This is the culture information used for the text rendering, and it is passed to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.formattedtext">FormattedText</a> class. The default is the English culture.</li>
+<li><strong>IncludeRuntime</strong>: This determines whether the application using the output of the conversion will link to the SharpVectors.Runtime.dll. The default is <strong>true</strong>, set this to <strong>false</strong> if you do not intend to use the runtime assembly.</li>
+<li><strong>TextAsGeometry</strong>: This determines whether the texts are rendered as path geometry. The default is <strong>false</strong>. The vertical text does not currently support this option. Set this to <strong>true</strong> if do not want to use the runtime assembly, so that font path will not be included in the output.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <strong>TextAsGeometry</strong> property is marked as deprecated in this version, and will be removed in version 2.0 of the SharpVectors library.</p>
+</div>
+<h2 id="rendering-process">Rendering Process</h2>
+<p>For the WPF system, the rendering process is managed by various classes listed below: named</p>
+<ul>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Utils.WpfSvgWindow.html">WpfSvgWindow</a></strong>: An class implementing an abstraction of browser window object.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingRenderer.html">WpfDrawingRenderer</a></strong>: The controlling class used by the WPF implementation.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingDocument.html">WpfDrawingDocument</a></strong>:: This is used to collect rendered drawing information such as a mapping of an SVG ID to the rendered drawing object,</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingContext.html">WpfDrawingContext</a></strong>: The rendering context, which is not directly accessed by the user.</li>
+</ul>
+<p>The following code illustrate the basic code required to render an SVG file to a WPF drawing object:</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_csharp" role="tab" aria-controls="tabpanel_1_csharp" data-tab="csharp" tabindex="0" aria-selected="true">Rendering C# Sample</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_vb" role="tab" aria-controls="tabpanel_1_vb" data-tab="vb" tabindex="-1">Rendering VB.NET Sample</a>
+</li>
+</ul>
+<section id="tabpanel_1_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System;
+
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+using SharpVectors.Dom.Svg;
+using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils;
+
+namespace SharpVectors.Test.Sample
+{
+    public class TestRendering
+    {
+        // The drawing settings or options.
+        private WpfDrawingSettings _wpfSettings;
+
+        // The browser window object abstraction.
+        private WpfSvgWindow _wpfWindow;
+
+        // The main rendering controller.
+        private WpfDrawingRenderer _wpfRenderer;
+
+        public TestRendering()
+        {
+            // Initialize the options
+            _wpfSettings = new WpfDrawingSettings();
+            // Set the options to the rendering controller
+            _wpfRenderer = new WpfDrawingRenderer(_wpfSettings);
+            // Create a drawing area of 500x500 pixels and set the rending object to it.
+            _wpfWindow   = new WpfSvgWindow(500, 500, _wpfRenderer);
+        }
+
+        public void Render(string svgFile)
+        {
+            // Create an instance of the rendered document
+            var drawingDocument = new WpfDrawingDocument();
+
+            // Signal the start of the rendering process, the drawing context is created.
+            _wpfRenderer.BeginRender(drawingDocument);
+
+            // Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            _wpfWindow.LoadDocument(svgFile, _wpfSettings);
+
+            // Get the created SVG document
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+
+            // Render the SVG document
+            _wpfRenderer.Render(svgDocument);
+
+            // Retrived the rendered drawing, and do something with it
+            DrawingGroup drawing = _wpfRenderer.Drawing;
+
+            // Signal an end to the rendering process
+            _wpfRenderer.EndRender();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_1_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+Imports System.Windows.Media.Imaging
+
+Imports SharpVectors.Dom.Svg
+Imports SharpVectors.Renderers.Wpf
+Imports SharpVectors.Renderers.Utils
+
+Namespace SharpVectors.Test.Sample
+    Public Class TestRendering
+        ' The drawing settings or options.
+        Private _wpfSettings As WpfDrawingSettings
+
+        ' The browser window object abstraction.
+        Private _wpfWindow As WpfSvgWindow
+
+        ' The main rendering controller.
+        Private _wpfRenderer As WpfDrawingRenderer
+
+        Public Sub New()
+            ' Initialize the options
+            _wpfSettings = New WpfDrawingSettings()
+            ' Set the options to the rendering controller
+            _wpfRenderer = New WpfDrawingRenderer(_wpfSettings)
+            ' Create a drawing area of 500x500 pixels and set the rending object to it.
+            _wpfWindow = New WpfSvgWindow(500, 500, _wpfRenderer)
+        End Sub
+
+        Public Sub Render(ByVal svgFile As String)
+            ' Create an instance of the rendered document
+            Dim drawingDocument = New WpfDrawingDocument()
+
+            ' Signal the start of the rendering process, the drawing context is created.
+            _wpfRenderer.BeginRender(drawingDocument)
+
+            ' Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            _wpfWindow.LoadDocument(svgFile, _wpfSettings)
+
+            ' Get the created SVG document
+            Dim svgDocument = TryCast(_wpfWindow.Document, SvgDocument)
+
+            ' Render the SVG document
+            _wpfRenderer.Render(svgDocument)
+
+            ' Retrived the rendered drawing, and do something with it
+            Dim drawing As DrawingGroup = _wpfRenderer.Drawing
+
+            ' Signal an end to the rendering process
+            _wpfRenderer.EndRender()
+        End Sub
+    End Class
+End Namespace
+</code></pre>
+</section>
+</div>
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>The specified dimensions to the window object is not necessarily applied, since the conversion to WPF is a vector-to-vector conversion.
+This enables the rendered to be scaled in the displaying control, such as the <code>Image</code> or <code>Canvas</code>.
+To explicitly apply the dimension, set the <code>PixelWidth</code> and <code>PixelHeight</code> properties in the settings object. This is mainly useful for the generation of static images.</p>
+</div>
+<p>In order to simplify the above codes and avoid repetitions, utility classes (named: Converters) are provided to handle specific needs such as converting a whole directory or converting a set of SVG files into a <code>ResourceDictionary</code> object.</p>
+<h2 id="xaml-support---namespaces">XAML Support - Namespaces</h2>
+<p>SharpVectors defines two <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.xmlnsprefixattribute">XmlnsPrefixAttribute</a>
+and <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.markup.xmlnsdefinitionattribute">XmlnsDefinitionAttribute</a> values to simplify the use of the SVG controls and markup extensions in XAML files.
+The following are the available <code>Xmlns</code> prefix and definitions:</p>
+<ul>
+<li><strong>For Generic Controls</strong> - SharpVectors.Runtime.dll Assembly
+<ul>
+<li>XmlnsPrefix(&quot;http://sharpvectors.codeplex.com/runtime/&quot;, &quot;svg&quot;)</li>
+<li>XmlnsDefinition(&quot;http://sharpvectors.codeplex.com/runtime/&quot;, &quot;SharpVectors.Runtime&quot;)</li>
+</ul>
+</li>
+<li><strong>For SVG Controls</strong> -  SharpVectors.Converters.dll Assembly
+<ul>
+<li>XmlnsPrefix(&quot;http://sharpvectors.codeplex.com/svgc/&quot;, &quot;svgc&quot;)</li>
+<li>XmlnsDefinition(&quot;http://sharpvectors.codeplex.com/svgc/&quot;, &quot;SharpVectors.Converters&quot;)</li>
+</ul>
+</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The supports of the above XAML namespaces will change in the SharpVectors 2.0+ as the various WPF assemblies are merged.</p>
+</div>
+<p>A sample XAML code, from the <strong>WpfSvgTestBox</strong> test application, illustrating the uses of these XAML namespaces is shown below:</p>
+<pre><code class="lang-xml">&lt;Page x:Class=&quot;WpfSvgTestBox.SvgPage&quot;
+    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+    xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; 
+    xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot; 
+    xmlns:svg=&quot;http://sharpvectors.codeplex.com/runtime/&quot;
+    xmlns:svgc=&quot;http://sharpvectors.codeplex.com/svgc/&quot;
+    xmlns:local=&quot;clr-namespace:WpfSvgTestBox&quot;
+    mc:Ignorable=&quot;d&quot; Title=&quot;SvgPage&quot; Background=&quot;White&quot; d:DesignHeight=&quot;450&quot; d:DesignWidth=&quot;800&quot;&gt;
+    &lt;Grid x:Name=&quot;rightGrid&quot;&gt;
+        &lt;Grid.RowDefinitions&gt;
+            &lt;RowDefinition Height=&quot;*&quot;/&gt;
+            &lt;RowDefinition Height=&quot;16&quot;/&gt;
+            &lt;RowDefinition Height=&quot;220&quot;/&gt;
+        &lt;/Grid.RowDefinitions&gt;
+        
+        &lt;DockPanel LastChildFill=&quot;True&quot; Grid.Row=&quot;0&quot;&gt;
+            &lt;ToolBar DockPanel.Dock=&quot;Top&quot; Height=&quot;36&quot;&gt;
+                &lt;Button Click=&quot;OnOpenFileClick&quot; ToolTip=&quot;Open Svg File&quot;&gt;
+                    &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Open.svg, AppName=WpfSvgTestBox}&quot;/&gt;
+                &lt;/Button&gt;
+                &lt;Button Click=&quot;OnSaveFileClick&quot; ToolTip=&quot;Save Svg File&quot;&gt;
+                    &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Save.svg, AppName=WpfSvgTestBox}&quot;/&gt;
+                &lt;/Button&gt;
+                &lt;Separator/&gt;
+                &lt;Button Command=&quot;Cut&quot; ToolTip=&quot;Cut To Clipboard&quot;&gt;
+                    &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Cut.svg, AppName=WpfSvgTestBox}&quot;/&gt;
+                &lt;/Button&gt;
+            &lt;/ToolBar&gt;
+        &lt;/DockPanel&gt;
+
+        &lt;local:GridExpander x:Name=&quot;rightSplitter&quot; Grid.Row=&quot;1&quot;/&gt;
+        
+        &lt;DockPanel x:Name=&quot;viewerFrame&quot; LastChildFill=&quot;True&quot; Grid.Row=&quot;2&quot;&gt;
+            &lt;ScrollViewer x:Name=&quot;canvasScroller&quot; CanContentScroll=&quot;True&quot; Padding=&quot;4&quot;
+                VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+
+                &lt;!-- This is the control that handles zooming and panning. --&gt;
+                &lt;svg:ZoomPanControl x:Name=&quot;zoomPanControl&quot;&gt;
+                    &lt;!-- This Canvas is the content that is displayed by the ZoomPanControl.
+                    Width and Height determine the size of the content. --&gt;
+                    &lt;svg:SvgDrawingCanvas x:Name=&quot;svgDrawing&quot; Background=&quot;Transparent&quot;/&gt;
+                &lt;/svg:ZoomPanControl&gt;
+            &lt;/ScrollViewer&gt;
+        &lt;/DockPanel&gt;
+    &lt;/Grid&gt;
+&lt;/Page&gt;
+</code></pre>
+<h2 id="xaml-output---xmlxamlwriter">XAML Output - XmlXamlWriter</h2>
+<p>The WPF framework provides an XAML writer to convert framework objects to XAML format. However, the SharpVectors library provides a similar class, named <strong><a class="xref" href="../api/SharpVectors.Converters.XmlXamlWriter.html">XmlXamlWriter</a></strong>, for the same purpose but specifically for SharpVectors rendered objects.</p>
+<p>Also, the system <a href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.markup.xamlwriter.save">XamlWriter.Save</a> method has a number of <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/serialization-limitations-of-xamlwriter-save">limitations</a>, some of which we hope to resolved with our custom implementations:</p>
+<ul>
+<li>Run-Time, Not Design-Time Representation</li>
+<li>Serialization is Self-Contained</li>
+<li>Extension References are Dereferenced</li>
+<li>Event Handling is Not Preserved</li>
+</ul>
+<p>The <code>XmlXamlWriter</code> class makes it possible to control and customize the XAML outputs, and it is particularly useful for the <code>ResourceDictionary</code> XAML output.</p>
+<p>We will create a simple application for illustration, using the following sample SVG file below:</p>
+<pre><code class="lang-xml">&lt;svg width=&quot;6cm&quot; height=&quot;5cm&quot; viewBox=&quot;0 0 600 500&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+    &lt;rect x=&quot;1&quot; y=&quot;1&quot; width=&quot;598&quot; height=&quot;498&quot; fill=&quot;none&quot; stroke=&quot;blue&quot;/&gt;
+    &lt;circle cx=&quot;300&quot; cy=&quot;225&quot; r=&quot;100&quot; fill=&quot;red&quot;/&gt;
+    &lt;text x=&quot;300&quot; y=&quot;480&quot; font-family=&quot;Verdana&quot; font-size=&quot;35&quot; text-anchor=&quot;middle&quot;&gt;
+        Sample Text
+    &lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+<p>A modified version of the previous codes to output XAML is shown below:</p>
+<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_csharp" role="tab" aria-controls="tabpanel_2_csharp" data-tab="csharp" tabindex="0" aria-selected="true">XAML C# Sample</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_vb" role="tab" aria-controls="tabpanel_2_vb" data-tab="vb" tabindex="-1">XAML VB.NET Sample</a>
+</li>
+</ul>
+<section id="tabpanel_2_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+using SharpVectors.Dom.Svg;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils;
+
+namespace SharpVectors.Test.Sample
+{
+    public class TestXamlOutput
+    {
+        // The drawing settings or options.
+        private WpfDrawingSettings _wpfSettings;
+
+        // The browser window object abstraction.
+        private WpfSvgWindow _wpfWindow;
+
+        // The main rendering controller.
+        private WpfDrawingRenderer _wpfRenderer;
+
+        public TestXamlOutput()
+        {
+            // Initialize the options
+            _wpfSettings = new WpfDrawingSettings();
+            // Set the options to the rendering controller
+            _wpfRenderer = new WpfDrawingRenderer(_wpfSettings);
+            // Create a drawing area of 500x500 pixels and set the rending object to it.
+            _wpfWindow   = new WpfSvgWindow(500, 500, _wpfRenderer);
+        }
+
+        public string SvgToXaml(string svgFile)
+        {
+            // Create an instance of the rendered document
+            var drawingDocument = new WpfDrawingDocument();
+
+            // Signal the start of the rendering process, the drawing context is created.
+            _wpfRenderer.BeginRender(drawingDocument);
+
+            // Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            _wpfWindow.LoadDocument(svgFile, _wpfSettings);
+
+            // Get the created SVG document
+            var svgDocument = _wpfWindow.Document as SvgDocument;
+
+            // Render the SVG document
+            _wpfRenderer.Render(svgDocument);
+
+            // Retrived the rendered drawing, and do something with it
+            DrawingGroup drawing = _wpfRenderer.Drawing;
+
+            // Signal an end to the rendering process
+            _wpfRenderer.EndRender();
+
+            // Create an instance of the XAML writer, and return XAML output
+            var xamlWriter = new XmlXamlWriter();
+            return xamlWriter.Save(drawing);
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_2_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+Imports System.Windows.Media.Imaging
+
+Imports SharpVectors.Dom.Svg
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+Imports SharpVectors.Renderers.Utils
+
+Namespace SharpVectors.Test.Sample
+    Public Class TestXamlOutput
+        ' The drawing settings or options.
+        Private _wpfSettings As WpfDrawingSettings
+
+        ' The browser window object abstraction.
+        Private _wpfWindow As WpfSvgWindow
+
+        ' The main rendering controller.
+        Private _wpfRenderer As WpfDrawingRenderer
+
+        Public Sub New()
+            ' Initialize the options
+            _wpfSettings = New WpfDrawingSettings()
+            ' Set the options to the rendering controller
+            _wpfRenderer = New WpfDrawingRenderer(_wpfSettings)
+            ' Create a drawing area of 500x500 pixels and set the rending object to it.
+            _wpfWindow = New WpfSvgWindow(500, 500, _wpfRenderer)
+        End Sub
+
+        Public Function SvgToXaml(ByVal svgFile As String) As String
+            ' Create an instance of the rendered document
+            Dim drawingDocument = New WpfDrawingDocument()
+
+            ' Signal the start of the rendering process, the drawing context is created.
+            _wpfRenderer.BeginRender(drawingDocument)
+
+            ' Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            _wpfWindow.LoadDocument(svgFile, _wpfSettings)
+
+            ' Get the created SVG document
+            Dim svgDocument = TryCast(_wpfWindow.Document, SvgDocument)
+
+            ' Render the SVG document
+            _wpfRenderer.Render(svgDocument)
+
+            ' Retrived the rendered drawing, and do something with it
+            Dim drawing As DrawingGroup = _wpfRenderer.Drawing
+
+            ' Signal an end to the rendering process
+            _wpfRenderer.EndRender()
+
+            ' Create an instance of the XAML writer, and return XAML output
+            Dim xamlWriter = New XmlXamlWriter()
+            Return xamlWriter.Save(drawing)
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+</div>
+
+<p>For the given SVG sample, the output XAML is shown below:</p>
+<pre><code class="lang-xml">&lt;DrawingGroup xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+	xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; xmlns:svg=&quot;http://sharpvectors.codeplex.com/runtime/&quot;&gt;
+  &lt;DrawingGroup svg:SvgLink.Key=&quot;_SvgDrawingLayer&quot;&gt;
+    &lt;DrawingGroup.ClipGeometry&gt;
+      &lt;RectangleGeometry Rect=&quot;0,0,600,500&quot; /&gt;
+    &lt;/DrawingGroup.ClipGeometry&gt;
+    &lt;GeometryDrawing svg:SvgObject.UniqueId=&quot;4f9c747c-3c2a-4ce3-976f-4538181b17b1&quot;&gt;
+      &lt;GeometryDrawing.Pen&gt;
+        &lt;Pen Brush=&quot;#FF0000FF&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot;/&gt;
+      &lt;/GeometryDrawing.Pen&gt;
+      &lt;GeometryDrawing.Geometry&gt;
+        &lt;RectangleGeometry RadiusX=&quot;0&quot; RadiusY=&quot;0&quot; Rect=&quot;1,1,598,498&quot; /&gt;
+      &lt;/GeometryDrawing.Geometry&gt;
+    &lt;/GeometryDrawing&gt;
+    &lt;GeometryDrawing Brush=&quot;#FFFF0000&quot; svg:SvgObject.UniqueId=&quot;914b46d1-987f-4e04-9fb8-0609cefd5cf3&quot;&gt;
+      &lt;GeometryDrawing.Geometry&gt;
+        &lt;EllipseGeometry RadiusX=&quot;100&quot; RadiusY=&quot;100&quot; Center=&quot;300,225&quot; /&gt;
+      &lt;/GeometryDrawing.Geometry&gt;
+    &lt;/GeometryDrawing&gt;
+    &lt;DrawingGroup svg:SvgObject.UniqueId=&quot;268b85e1-d9bc-4cc3-9b61-01423f096cf5&quot; svg:SvgObject.Type=&quot;Text&quot;&gt;
+      &lt;GlyphRunDrawing ForegroundBrush=&quot;#FF000000&quot;&gt;
+        &lt;GlyphRunDrawing.GlyphRun&gt;
+          &lt;GlyphRun PixelsPerDip=&quot;1&quot; BaselineOrigin=&quot;191.643333333333,480&quot; FontRenderingEmSize=&quot;35&quot; BidiLevel=&quot;0&quot; Language=&quot;en-us&quot; 
+			IsSideways=&quot;False&quot; ClusterMap=&quot;0 1 2 3 4 5 6 7 8 9 10&quot; Characters=&quot;Sample Text&quot; GlyphIndices=&quot;54 68 80 83 79 72 3 55 72 91 87&quot; 
+			AdvanceWidths=&quot;23.94 21.035 34.055 21.805 9.59 20.86 12.32 17.815 20.86 20.72 13.79&quot; GlyphOffsets=&quot;0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0&quot;&gt;
+            &lt;GlyphRun.GlyphTypeface&gt;
+              &lt;GlyphTypeface FontUri=&quot;{svg:SvgFontUri k:/win10/fonts/verdana.ttf}&quot; StyleSimulations=&quot;None&quot; /&gt;
+            &lt;/GlyphRun.GlyphTypeface&gt;
+          &lt;/GlyphRun&gt;
+        &lt;/GlyphRunDrawing.GlyphRun&gt;
+      &lt;/GlyphRunDrawing&gt;
+    &lt;/DrawingGroup&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/DrawingGroup&gt;
+</code></pre>
+<p>You will observe the following extra information from the XAML output</p>
+<ul>
+<li><strong>svg:SvgObject.UniqueId</strong>: This is added to uniquely identity the rendered object since not all SVG elements will have identifier (ID) specified. This is only useful if you wish to interact with the rendered drawing.</li>
+<li><strong>GlyphTypeface FontUri</strong>: This uses a SharpVectors extension to output the font URI. This is useful to correctly resolve the font path on the deployment user PC, since the font directory may not be the same. This can be eliminated by setting the <code>TextAsGeometry</code> property to <code>true</code>.</li>
+</ul>
+<p>The extra information can be turned off by setting the <code>IncludeRuntime</code> property to <code>false</code>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\getting_started.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

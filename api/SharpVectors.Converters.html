@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace SharpVectors.Converters
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace SharpVectors.Converters
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\namespaces\SharpVectors.Converters.md/#L2">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Converters">
+
+  <h1 id="SharpVectors_Converters" data-uid="SharpVectors.Converters" class="text-break">Namespace SharpVectors.Converters
+</h1>
+  <div class="markdown level0 summary">
+<p>The <strong>SharpVectors.Converters</strong> namespace contains a bunch of classes and interfaces.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.DirectorySvgConverter.html">DirectorySvgConverter</a></dt>
+      <dd><p>This converts a directory (and optionally the sub-directories) of SVG files to XAML files in a specified directory,
+maintaining the original directory structure.</p>
+<p>
+It uses <a class="xref" href="SharpVectors.Converters.FileSvgConverter.html">FileSvgConverter</a> or <a class="xref" href="SharpVectors.Converters.ImageSvgConverter.html">ImageSvgConverter</a> converter to process each SVG file 
+in the specified directory.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.EmbeddedImageSerializerArgs.html">EmbeddedImageSerializerArgs</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.EmbeddedImageSerializerVisitor.html">EmbeddedImageSerializerVisitor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.EmbeddedImageVisitor.html">EmbeddedImageVisitor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.FileSvgConverter.html">FileSvgConverter</a></dt>
+      <dd><p>
+This converts an SVG file to the corresponding XAML file, which can be viewed in WPF application. 
+</p>
+<p>The root object in the converted file is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.FileSvgReader.html">FileSvgReader</a></dt>
+      <dd><p>This converts a SVG file to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> object, and can
+optionally save the result to a file as XAML.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.FontFamilyVisitor.html">FontFamilyVisitor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.ImageSvgConverter.html">ImageSvgConverter</a></dt>
+      <dd><p>This converts the SVG file to static or bitmap image, which is saved to a file.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.LinkVisitor.html">LinkVisitor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.ResourceSvgConverter.html">ResourceSvgConverter</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.ResourceSvgConverter.ResourceItem.html">ResourceSvgConverter.ResourceItem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.ShapeSvgCanvas.html">ShapeSvgCanvas</a></dt>
+      <dd><p>Component that visualizes svg document contents.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.StreamSvgConverter.html">StreamSvgConverter</a></dt>
+      <dd><p>This converts the SVG file to static or bitmap image, which is saved to a file.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a></dt>
+      <dd><p>This is an extension of the WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image">Image</a> control to provide SVG-based image sources.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgCanvas.html">SvgCanvas</a></dt>
+      <dd><p>This is a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.canvas">Canvas</a> control for viewing <code>SVG</code> file in <code>WPF</code> applications.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgControl.html">SvgControl</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgConverter.html">SvgConverter</a></dt>
+      <dd><p>This is the <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/abstract">abstract</a> base class for all <code>SVG</code> to WPF converters.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgIcon.html">SvgIcon</a></dt>
+      <dd><p>This is an extension of the WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.image">Image</a> control to provide SVG-based image sources.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgImageBase.html">SvgImageBase</a></dt>
+      <dd><p>This is an <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/abstract">abstract</a> implementation of a markup extension that enables the creation
+of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> from SVG sources.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgImageConverterExtension.html">SvgImageConverterExtension</a></dt>
+      <dd><p>This implements a markup extension that enables the creation
+of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> from SVG sources.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgImageExtension.html">SvgImageExtension</a></dt>
+      <dd><p>This implements a markup extension that enables the creation
+of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> from SVG sources.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgViewbox.html">SvgViewbox</a></dt>
+      <dd><p>This is a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.viewbox">Viewbox</a> control for viewing <code>SVG</code> file in <code>WPF</code> applications.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.XmlXamlWriter.html">XmlXamlWriter</a></dt>
+      <dd><p>This is a customized XAML writer, which provides Extensible Application
+Markup Language (XAML) serialization of provided runtime objects into XAML.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.ImageEncoderType.html">ImageEncoderType</a></dt>
+      <dd><p>
+This specifies the encoder type used to encode a collection of 
+bitmap frame objects to an image stream.
+</p>
+<p>
+This is used by the <a class="xref" href="SharpVectors.Converters.ImageSvgConverter.html">ImageSvgConverter</a> converter.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SharpVectors.Converters.SvgControlSizeMode.html">SvgControlSizeMode</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\namespaces\SharpVectors.Converters.md/#L2" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

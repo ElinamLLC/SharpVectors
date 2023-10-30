@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SVG Converters | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SVG Converters | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\converters.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_converters">
+<h1 id="svg-converters">SVG Converters</h1>
+
+<p>The SVG to WPF conversion is the main use of this SharpVectors library currently. The other uses will be improved with time.
+The following is a diagram showing all the available converters.</p>
+<p><img src="../images/converters.png" alt=""></p>
+<ul>
+<li><strong><a class="xref" href="../api/SharpVectors.Converters.FileSvgConverter.html">FileSvgConverter</a></strong>: This converts the SVG file to the corresponding XAML file, which can be viewed in WPF application. The root object in the converted file is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Converters.FileSvgReader.html">FileSvgReader</a></strong>: This converts the SVG file to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> and can optionally save the result to a file as XAML.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Converters.ImageSvgConverter.html">ImageSvgConverter</a></strong>: This converts the SVG file to static or bitmap image, which can be saved to a file.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Converters.StreamSvgConverter.html">StreamSvgConverter</a></strong>: This converts the SVG file or stream to static or bitmap image, which can be saved to a stream. This can be used for ASP.NET pages.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Converters.DirectorySvgConverter.html">DirectorySvgConverter</a></strong>: This converts a directory (and optionally the sub-directories) of SVG files to XAML files in a specified directory, maintaining the original directory structure.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Converters.ResourceSvgConverter.html">ResourceSvgConverter</a></strong>: This converts multiple directories (without the sub-directories) of SVG files and SVG files a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.resourcedictionary">DrawingGroup</a> XAML.</li>
+</ul>
+<p>Now, as shown <strong><a class="xref" href="../api/SharpVectors.Converters.SvgConverter.html">SvgConverter</a></strong> is the base class for the converters and defines the following common properties:</p>
+<p><img src="../images/svgconverter.png" alt=""></p>
+<ul>
+<li><strong>DrawingSettings</strong>: This is the rendering options class, <a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a>.</li>
+<li><strong>SaveXaml</strong>: Determines whether to save conversion output to XAML format.</li>
+<li><strong>SaveZaml</strong>: Determines whether to save conversion output to ZAML format, which is a G-zip compression of the XAML format, and similar to the SVGZ (for SVG).</li>
+<li><strong>UseFrameXamlWriter</strong>: Determines whether the use the .NET Framework version of the XAML writer when saving the output to the XAML format. The default is <strong>false</strong>, and a customized XAML writer is used.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\converters.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

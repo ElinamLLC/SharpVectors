@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Introduction | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Introduction | SharpVectors Documentation ">
+      
+      <link rel="icon" href="images/favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="introduction">Introduction</h1>
+
+<p>The Scalable Vector Graphics (SVG) is a well-known graphics format developed and maintained by the W3C SVG Working Group. The SVG is designed to be used on the web, but the format is flexible enough for applications outside the web. Moreover, the format is exported and imported by most image editing applications, making it the ideal format for image file exchanges.</p>
+<p>SVG is a markup language (an XML format) for describing two-dimensional graphics applications and images, and a set of related graphics script interfaces. With the script interfaces, it can be created and manipulated through JavaScript scripts.</p>
+<p>The <strong>SharpVectors</strong> project aims to provide libraries and tools to parse, convert and view the SVG on Windows, especially on the Windows Presentation Foundation (WPF) platform.</p>
+<h2 id="installation">Installation</h2>
+<p>The SharpVectors library currently targets the following .NET frameworks</p>
+<ul>
+<li>.NET Framework, Version 4.0</li>
+<li>.NET Framework, Version 4.5</li>
+<li>.NET Framework, Version 4.6</li>
+<li>.NET Framework, Version 4.7</li>
+<li>.NET Framework, Version 4.8</li>
+<li>.NET Standard, Version 2.1</li>
+<li>.NET Core, Version 3.1</li>
+<li>.NET 5.0</li>
+<li>.NET 6.0</li>
+<li>.NET 7.0</li>
+</ul>
+<p>The library consists of a number of shared or common components and rendering implementations for Windows Presentation Foundation (WPF) and Windows Forms applications.</p>
+<h3 id="for-the-libraries">For the Libraries</h3>
+<p>The library can be downloaded from the following sources</p>
+<ul>
+<li><strong>NuGet (Full Package - WPF/GDI+)</strong>, <a href="https://www.nuget.org/packages/SharpVectors/">Version 1.8.2 - SharpVectors</a>.</li>
+<li><strong>NuGet (Full Package - WPF/GDI+)</strong>, <a href="https://www.nuget.org/packages/SharpVectors.Reloaded/">Version 1.8.2 - SharpVectors.Reloaded</a>.</li>
+<li><strong>NuGet (WPF Only)</strong>, <a href="https://www.nuget.org/packages/SharpVectors.Wpf/">Version 1.8.2 - SharpVectors.Wpf</a>.</li>
+<li><strong>GitHub Releases Page</strong>, <a href="https://github.com/ElinamLLC/SharpVectors/releases">Version 1.8.2</a>.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>The <strong>SharpVectors.Reloaded</strong> package is the same as the <strong>SharpVectors</strong>, which is the recommended package if you need the full package.</li>
+<li>The <strong>SharpVectors.Reloaded</strong> name was used for the Nuget package at the time the <strong>SharpVectors</strong> package name was not available.</li>
+<li>The <strong>SharpVectors.Reloaded</strong> package name will be retired in Version 2.0.</li>
+<li>The <strong>SharpVectors.Wpf</strong> is the recommended package, for <code>WPF</code> only application.</li>
+<li>As outlined in the <a href="https://github.com/ElinamLLC/SharpVectors/issues/147">roadmap</a>, other packages such as the <strong>SharpVectors.Gdi</strong> for the <code>GDI+</code>, will be available as the renderers mature.</li>
+</ul>
+</div>
+<h3 id="for-the-applications">For the Applications</h3>
+<p>The following are related SharpVectors application repositories</p>
+<ul>
+<li><a href="https://github.com/ElinamLLC/SvgXaml">SvgXaml</a> : SharpVectors based SVG to XAML converter application.</li>
+<li><a href="https://github.com/ElinamLLC/SvgViewer">SvgViewer</a> : SharpVectors based SVG viewer application.</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<p>This section provides <a class="xref" href="articles/getting_started.html">Getting Start</a> information to help you get started.</p>
+<h2 id="credits">Credits</h2>
+<p>SharpVectors uses source codes from articles and other open source projects. We wish to acknowledge and thank
+the authors of these great articles and projects</p>
+<ul>
+<li><a href="https://sourceforge.net/projects/svgdomcsharp/">SharpVectorGraphics (aka SVG#)</a> by SVG# Team of Developers (SourceForge)</li>
+<li><a href="https://www.codeproject.com/KB/WPF/zoomandpancontrol.aspx">WPF Zooming and Panning Control</a> by Ashley Davis (CodeProject)</li>
+<li><a href="https://msdn.microsoft.com/en-us/magazine/dd263097.aspx">Render Text On A Path With WPF</a> by Charles Petzold (MSDN Magazine - December 2008)</li>
+<li><a href="https://github.com/microsoft/MinIoC">MinIoC</a> by Microsoft (Single-file minimal C# IoC container)</li>
+<li><a href="https://www.codeproject.com/Tips/830793/NET-ZLib-Implementation">.NET ZLib Implementation</a> by Alberto M (CodeProject)</li>
+<li><a href="https://github.com/google/brotli">Brotli compression format</a> by Google (C# Decoder)</li>
+</ul>
+<h2 id="links-to-resources">Links to Resources</h2>
+<ul>
+<li><p><strong>Overview</strong></p>
+<ul>
+<li><a href="https://www.w3.org/Graphics/SVG/About.html">About SVG</a></li>
+</ul>
+</li>
+<li><p><strong>Scalable Vector Graphics (SVG) Specifications</strong></p>
+<ul>
+<li><a href="https://www.w3.org/TR/2003/REC-SVG11-20030114/">SVG 1.1 (First Edition)</a> - This version is outdated!</li>
+<li><a href="https://www.w3.org/TR/SVG11/">SVG 1.1 (Second Edition)</a></li>
+</ul>
+</li>
+<li><p><strong>Libraries and Frameworks</strong></p>
+<ul>
+<li><a href="https://xmlgraphics.apache.org/batik/">Batik SVG Toolkit</a>, the most complete SVG toolkit available (Java).</li>
+</ul>
+</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

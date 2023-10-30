@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>ImageSvgConverter | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ImageSvgConverter | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\image_converter.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_image_converter">
+<h1 id="file-svg-converter---imagesvgconverter">File SVG Converter - ImageSvgConverter</h1>
+
+<p>The <strong><a class="xref" href="../api/SharpVectors.Converters.ImageSvgConverter.html">ImageSvgConverter</a></strong> converter class takes SVG file as input and outputs XAML file.
+The SVG input can also be one of the following</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>: A stream object providing access to the SVG input content.</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textreader">TextReader</a>: A text reader file providing access to the SVG input content.</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreader">XmlReader</a>: An XML reader providing access to the SVG input content.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The output is always to a local file or a network file. It does not provide a backup of existing file.</p>
+</div>
+<h2 id="sample-code">Sample Code</h2>
+<p>The following illustrate a simple case of using the static image SVG converter.</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_csharp" role="tab" aria-controls="tabpanel_1_csharp" data-tab="csharp" tabindex="0" aria-selected="true">SVG to XAML C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_vb" role="tab" aria-controls="tabpanel_1_vb" data-tab="vb" tabindex="-1">SVG to XAML VB.NET</a>
+</li>
+</ul>
+<section id="tabpanel_1_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+using SharpVectors.Dom.Svg;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+using SharpVectors.Renderers.Utils;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ImageSvgConverterSample
+    {
+        // The drawing settings or options.
+        private WpfDrawingSettings _wpfSettings;
+
+        public ImageSvgConverterSample()
+        {
+            // Initialize the options
+            _wpfSettings = new WpfDrawingSettings();
+            _wpfSettings.IncludeRuntime = false;
+            _wpfSettings.TextAsGeometry = false;
+        }
+
+        public void Convert(string svgFile, string pngFile)
+        {
+            // Create an image converter
+            var converter = new ImageSvgConverter(_wpfSettings);
+
+            // Perform the conversion to static image
+            converter.Convert(svgFile, pngFile);
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_1_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+Imports System.Windows.Media.Imaging
+
+Imports SharpVectors.Dom.Svg
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+Imports SharpVectors.Renderers.Utils
+
+Namespace SharpVectors.Test.Sample
+    Public Class ImageSvgConverterSample
+        ' The drawing settings or options.
+        Private _wpfSettings As WpfDrawingSettings
+
+        Public Sub New()
+            ' Initialize the options
+            _wpfSettings = New WpfDrawingSettings()
+            _wpfSettings.IncludeRuntime = False
+            _wpfSettings.TextAsGeometry = False
+        End Sub
+
+        Public Sub Convert(ByVal svgFile As String, ByVal pngFile As String)
+            ' Create an image converter
+            Dim converter = New ImageSvgConverter(_wpfSettings)
+
+            ' Perform the conversion to static image
+            converter.Convert(svgFile, pngFile)
+        End Sub
+    End Class
+End Namespace
+</code></pre>
+</section>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\image_converter.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class EmbeddedBitmapSource
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class EmbeddedBitmapSource
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Runtime_EmbeddedBitmapSource.md&amp;value=---%0Auid%3A%20SharpVectors.Runtime.EmbeddedBitmapSource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Runtime.EmbeddedBitmapSource">
+
+
+
+  <h1 id="SharpVectors_Runtime_EmbeddedBitmapSource" data-uid="SharpVectors.Runtime.EmbeddedBitmapSource" class="text-break">
+    Class EmbeddedBitmapSource
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorRuntimeWpf\EmbeddedBitmapSource.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Runtime.html">Runtime</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Runtime.Wpf.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EmbeddedBitmapSource : BitmapSource, IAnimatable, IFormattable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable">Freezable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable">Animatable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imagesource">ImageSource</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource">BitmapSource</a></div>
+      <div><span class="xref">EmbeddedBitmapSource</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.ianimatable">IAnimatable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iformattable">IFormattable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.create#system-windows-media-imaging-bitmapsource-create(system-int32-system-int32-system-double-system-double-system-windows-media-pixelformat-system-windows-media-imaging-bitmappalette-system-array-system-int32)">BitmapSource.Create(int, int, double, double, PixelFormat, BitmapPalette, Array, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.create#system-windows-media-imaging-bitmapsource-create(system-int32-system-int32-system-double-system-double-system-windows-media-pixelformat-system-windows-media-imaging-bitmappalette-system-intptr-system-int32-system-int32)">BitmapSource.Create(int, int, double, double, PixelFormat, BitmapPalette, IntPtr, int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.clone">BitmapSource.Clone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.clonecurrentvalue">BitmapSource.CloneCurrentValue()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.copypixels#system-windows-media-imaging-bitmapsource-copypixels(system-windows-int32rect-system-array-system-int32-system-int32)">BitmapSource.CopyPixels(Int32Rect, Array, int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.copypixels#system-windows-media-imaging-bitmapsource-copypixels(system-array-system-int32-system-int32)">BitmapSource.CopyPixels(Array, int, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.checkifsiteoforigin">BitmapSource.CheckIfSiteOfOrigin()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.freezecore">BitmapSource.FreezeCore(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.isdownloading">BitmapSource.IsDownloading</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.width">BitmapSource.Width</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.height">BitmapSource.Height</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.metadata">BitmapSource.Metadata</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.downloadcompleted">BitmapSource.DownloadCompleted</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.downloadprogress">BitmapSource.DownloadProgress</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.downloadfailed">BitmapSource.DownloadFailed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource.decodefailed">BitmapSource.DecodeFailed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imagesource.tostring#system-windows-media-imagesource-tostring">ImageSource.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imagesource.tostring#system-windows-media-imagesource-tostring(system-iformatprovider)">ImageSource.ToString(IFormatProvider)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imagesource.pixelstodips">ImageSource.PixelsToDIPs(double, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable.applyanimationclock#system-windows-media-animation-animatable-applyanimationclock(system-windows-dependencyproperty-system-windows-media-animation-animationclock)">Animatable.ApplyAnimationClock(DependencyProperty, AnimationClock)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable.applyanimationclock#system-windows-media-animation-animatable-applyanimationclock(system-windows-dependencyproperty-system-windows-media-animation-animationclock-system-windows-media-animation-handoffbehavior)">Animatable.ApplyAnimationClock(DependencyProperty, AnimationClock, HandoffBehavior)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable.beginanimation#system-windows-media-animation-animatable-beginanimation(system-windows-dependencyproperty-system-windows-media-animation-animationtimeline)">Animatable.BeginAnimation(DependencyProperty, AnimationTimeline)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable.beginanimation#system-windows-media-animation-animatable-beginanimation(system-windows-dependencyproperty-system-windows-media-animation-animationtimeline-system-windows-media-animation-handoffbehavior)">Animatable.BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable.getanimationbasevalue">Animatable.GetAnimationBaseValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.animation.animatable.hasanimatedproperties">Animatable.HasAnimatedProperties</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.getasfrozen">Freezable.GetAsFrozen()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.getcurrentvalueasfrozen">Freezable.GetCurrentValueAsFrozen()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.freeze#system-windows-freezable-freeze">Freezable.Freeze()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.onpropertychanged">Freezable.OnPropertyChanged(DependencyPropertyChangedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.createinstance">Freezable.CreateInstance()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.onchanged">Freezable.OnChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.readpreamble">Freezable.ReadPreamble()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.writepreamble">Freezable.WritePreamble()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.writepostscript">Freezable.WritePostscript()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.onfreezablepropertychanged#system-windows-freezable-onfreezablepropertychanged(system-windows-dependencyobject-system-windows-dependencyobject)">Freezable.OnFreezablePropertyChanged(DependencyObject, DependencyObject)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.onfreezablepropertychanged#system-windows-freezable-onfreezablepropertychanged(system-windows-dependencyobject-system-windows-dependencyobject-system-windows-dependencyproperty)">Freezable.OnFreezablePropertyChanged(DependencyObject, DependencyObject, DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.freeze#system-windows-freezable-freeze(system-windows-freezable-system-boolean)">Freezable.Freeze(Freezable, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.canfreeze">Freezable.CanFreeze</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.isfrozen">Freezable.IsFrozen</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.changed">Freezable.Changed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals">DependencyObject.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode">DependencyObject.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue">DependencyObject.GetValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue">DependencyObject.SetCurrentValue(DependencyProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencyproperty)">DependencyObject.ClearValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencypropertykey)">DependencyObject.ClearValue(DependencyPropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue">DependencyObject.CoerceValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty">DependencyObject.InvalidateProperty(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.shouldserializeproperty">DependencyObject.ShouldSerializeProperty(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue">DependencyObject.ReadLocalValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype">DependencyObject.DependencyObjectType</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed">DependencyObject.IsSealed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher">DispatcherObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.-ctor.html#SharpVectors_Runtime_EmbeddedBitmapSource__ctor">EmbeddedBitmapSource()</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.-ctor.html#SharpVectors_Runtime_EmbeddedBitmapSource__ctor_System_IO_MemoryStream_">EmbeddedBitmapSource(MemoryStream)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.-ctor.html#SharpVectors_Runtime_EmbeddedBitmapSource__ctor_System_IO_MemoryStream_System_Windows_Media_Imaging_BitmapImage_">EmbeddedBitmapSource(MemoryStream, BitmapImage)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.Data.html#SharpVectors_Runtime_EmbeddedBitmapSource_Data">Data</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.DpiX.html#SharpVectors_Runtime_EmbeddedBitmapSource_DpiX">DpiX</a></dt>
+    <dd><p>Gets the horizontal dots per inch (dpi) of the image.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.DpiY.html#SharpVectors_Runtime_EmbeddedBitmapSource_DpiY">DpiY</a></dt>
+    <dd><p>Gets the vertical dots per inch (dpi) of the image.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.Format.html#SharpVectors_Runtime_EmbeddedBitmapSource_Format">Format</a></dt>
+    <dd><p>Gets the native <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.pixelformat">PixelFormat</a> of the bitmap data.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.MimeType.html#SharpVectors_Runtime_EmbeddedBitmapSource_MimeType">MimeType</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.Palette.html#SharpVectors_Runtime_EmbeddedBitmapSource_Palette">Palette</a></dt>
+    <dd><p>Gets the color palette of the bitmap, if one is specified.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.PixelHeight.html#SharpVectors_Runtime_EmbeddedBitmapSource_PixelHeight">PixelHeight</a></dt>
+    <dd><p>Gets the height of the bitmap in pixels.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.PixelWidth.html#SharpVectors_Runtime_EmbeddedBitmapSource_PixelWidth">PixelWidth</a></dt>
+    <dd><p>Gets the width of the bitmap in pixels.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.CloneCore.html#SharpVectors_Runtime_EmbeddedBitmapSource_CloneCore_System_Windows_Freezable_">CloneCore(Freezable)</a></dt>
+    <dd><p>Makes this instance a deep copy of the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource">BitmapSource</a>. When copying dependency properties, this method copies resource references and data bindings (but they might no longer resolve) but not animations or their current values.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.CloneCurrentValueCore.html#SharpVectors_Runtime_EmbeddedBitmapSource_CloneCurrentValueCore_System_Windows_Freezable_">CloneCurrentValueCore(Freezable)</a></dt>
+    <dd><p>Makes this instance a modifiable deep copy of the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource">BitmapSource</a> using current property values. Resource references, data bindings, and animations are not copied, but their current values are.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.CopyPixels.html#SharpVectors_Runtime_EmbeddedBitmapSource_CopyPixels_System_Windows_Int32Rect_System_IntPtr_System_Int32_System_Int32_">CopyPixels(Int32Rect, IntPtr, int, int)</a></dt>
+    <dd><p>Copies the bitmap pixel data within the specified rectangle</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.CreateInstanceCore.html#SharpVectors_Runtime_EmbeddedBitmapSource_CreateInstanceCore">CreateInstanceCore()</a></dt>
+    <dd><p>When implemented in a derived class, creates a new instance of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable">Freezable</a> derived class.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.GetAsFrozenCore.html#SharpVectors_Runtime_EmbeddedBitmapSource_GetAsFrozenCore_System_Windows_Freezable_">GetAsFrozenCore(Freezable)</a></dt>
+    <dd><p>Makes this instance a clone of the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource">BitmapSource</a> object.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Runtime.EmbeddedBitmapSource.GetCurrentValueAsFrozenCore.html#SharpVectors_Runtime_EmbeddedBitmapSource_GetCurrentValueAsFrozenCore_System_Windows_Freezable_">GetCurrentValueAsFrozenCore(Freezable)</a></dt>
+    <dd><p>Makes this instance a frozen clone of the specified <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.imaging.bitmapsource">BitmapSource</a>. Resource references, data bindings, and animations are not copied, but their current values are.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorRuntimeWpf\EmbeddedBitmapSource.cs/#L12" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

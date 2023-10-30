@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface ISvgSvgElement
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISvgSvgElement
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_ISvgSvgElement.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.ISvgSvgElement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Dom.Svg.ISvgSvgElement">
+
+
+
+  <h1 id="SharpVectors_Dom_Svg_ISvgSvgElement" data-uid="SharpVectors.Dom.Svg.ISvgSvgElement" class="text-break">
+    Interface ISvgSvgElement
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorCore\Svg\DocumentStructure\ISvgSvgElement.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A key interface definition is the
+<a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.html">ISvgSvgElement</a> interface, which is
+the interface that corresponds to the 'svg' element.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ISvgSvgElement : ISvgElement, IElement, IXmlElement, INode, IXmlNode, ISvgTests, ISvgLangSpace, ISvgExternalResourcesRequired, ISvgStylable, ISvgLocatable, ISvgFitToViewBox, ISvgZoomAndPan, IEventTarget, ISvgElementVisitorTarget</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.Id.html#SharpVectors_Dom_Svg_ISvgElement_Id">ISvgElement.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.OwnerSvgElement.html#SharpVectors_Dom_Svg_ISvgElement_OwnerSvgElement">ISvgElement.OwnerSvgElement</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.ViewportElement.html#SharpVectors_Dom_Svg_ISvgElement_ViewportElement">ISvgElement.ViewportElement</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.IsRenderable.html#SharpVectors_Dom_Svg_ISvgElement_IsRenderable">ISvgElement.IsRenderable</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.RenderingHint.html#SharpVectors_Dom_Svg_ISvgElement_RenderingHint">ISvgElement.RenderingHint</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.HasAttributes.html#SharpVectors_Dom_IXmlElement_HasAttributes">IXmlElement.HasAttributes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttribute.html#SharpVectors_Dom_IXmlElement_GetAttribute_System_String_">IXmlElement.GetAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttribute.html#SharpVectors_Dom_IXmlElement_GetAttribute_System_String_System_String_">IXmlElement.GetAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttribute.html#SharpVectors_Dom_IXmlElement_SetAttribute_System_String_System_String_">IXmlElement.SetAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttribute.html#SharpVectors_Dom_IXmlElement_SetAttribute_System_String_System_String_System_String_">IXmlElement.SetAttribute(string, string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttribute.html#SharpVectors_Dom_IXmlElement_RemoveAttribute_System_String_">IXmlElement.RemoveAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttribute.html#SharpVectors_Dom_IXmlElement_RemoveAttribute_System_String_System_String_">IXmlElement.RemoveAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttributeNode.html#SharpVectors_Dom_IXmlElement_GetAttributeNode_System_String_">IXmlElement.GetAttributeNode(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttributeNode.html#SharpVectors_Dom_IXmlElement_GetAttributeNode_System_String_System_String_">IXmlElement.GetAttributeNode(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetElementsByTagName.html#SharpVectors_Dom_IXmlElement_GetElementsByTagName_System_String_">IXmlElement.GetElementsByTagName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetElementsByTagName.html#SharpVectors_Dom_IXmlElement_GetElementsByTagName_System_String_System_String_">IXmlElement.GetElementsByTagName(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttributeNode.html#SharpVectors_Dom_IXmlElement_SetAttributeNode_System_String_System_String_">IXmlElement.SetAttributeNode(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttributeNode.html#SharpVectors_Dom_IXmlElement_SetAttributeNode_System_Xml_XmlAttribute_">IXmlElement.SetAttributeNode(XmlAttribute)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttributeNode.html#SharpVectors_Dom_IXmlElement_RemoveAttributeNode_System_Xml_XmlAttribute_">IXmlElement.RemoveAttributeNode(XmlAttribute)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttributeNode.html#SharpVectors_Dom_IXmlElement_RemoveAttributeNode_System_String_System_String_">IXmlElement.RemoveAttributeNode(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.HasAttribute.html#SharpVectors_Dom_IXmlElement_HasAttribute_System_String_">IXmlElement.HasAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.HasAttribute.html#SharpVectors_Dom_IXmlElement_HasAttribute_System_String_System_String_">IXmlElement.HasAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Name.html#SharpVectors_Dom_IXmlNode_Name">IXmlNode.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Value.html#SharpVectors_Dom_IXmlNode_Value">IXmlNode.Value</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.NodeType.html#SharpVectors_Dom_IXmlNode_NodeType">IXmlNode.NodeType</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.ParentNode.html#SharpVectors_Dom_IXmlNode_ParentNode">IXmlNode.ParentNode</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.ChildNodes.html#SharpVectors_Dom_IXmlNode_ChildNodes">IXmlNode.ChildNodes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.FirstChild.html#SharpVectors_Dom_IXmlNode_FirstChild">IXmlNode.FirstChild</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.LastChild.html#SharpVectors_Dom_IXmlNode_LastChild">IXmlNode.LastChild</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.PreviousSibling.html#SharpVectors_Dom_IXmlNode_PreviousSibling">IXmlNode.PreviousSibling</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.NextSibling.html#SharpVectors_Dom_IXmlNode_NextSibling">IXmlNode.NextSibling</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Attributes.html#SharpVectors_Dom_IXmlNode_Attributes">IXmlNode.Attributes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.OwnerDocument.html#SharpVectors_Dom_IXmlNode_OwnerDocument">IXmlNode.OwnerDocument</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.HasChildNodes.html#SharpVectors_Dom_IXmlNode_HasChildNodes">IXmlNode.HasChildNodes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.NamespaceURI.html#SharpVectors_Dom_IXmlNode_NamespaceURI">IXmlNode.NamespaceURI</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Prefix.html#SharpVectors_Dom_IXmlNode_Prefix">IXmlNode.Prefix</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.LocalName.html#SharpVectors_Dom_IXmlNode_LocalName">IXmlNode.LocalName</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.InsertBefore.html#SharpVectors_Dom_IXmlNode_InsertBefore_System_Xml_XmlNode_System_Xml_XmlNode_">IXmlNode.InsertBefore(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.ReplaceChild.html#SharpVectors_Dom_IXmlNode_ReplaceChild_System_Xml_XmlNode_System_Xml_XmlNode_">IXmlNode.ReplaceChild(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.RemoveChild.html#SharpVectors_Dom_IXmlNode_RemoveChild_System_Xml_XmlNode_">IXmlNode.RemoveChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.AppendChild.html#SharpVectors_Dom_IXmlNode_AppendChild_System_Xml_XmlNode_">IXmlNode.AppendChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.CloneNode.html#SharpVectors_Dom_IXmlNode_CloneNode_System_Boolean_">IXmlNode.CloneNode(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Normalize.html#SharpVectors_Dom_IXmlNode_Normalize">IXmlNode.Normalize()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Supports.html#SharpVectors_Dom_IXmlNode_Supports_System_String_System_String_">IXmlNode.Supports(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.RequiredFeatures.html#SharpVectors_Dom_Svg_ISvgTests_RequiredFeatures">ISvgTests.RequiredFeatures</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.RequiredExtensions.html#SharpVectors_Dom_Svg_ISvgTests_RequiredExtensions">ISvgTests.RequiredExtensions</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.SystemLanguage.html#SharpVectors_Dom_Svg_ISvgTests_SystemLanguage">ISvgTests.SystemLanguage</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.HasExtension.html#SharpVectors_Dom_Svg_ISvgTests_HasExtension_System_String_">ISvgTests.HasExtension(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLangSpace.XmlLang.html#SharpVectors_Dom_Svg_ISvgLangSpace_XmlLang">ISvgLangSpace.XmlLang</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLangSpace.XmlSpace.html#SharpVectors_Dom_Svg_ISvgLangSpace_XmlSpace">ISvgLangSpace.XmlSpace</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgExternalResourcesRequired.ExternalResourcesRequired.html#SharpVectors_Dom_Svg_ISvgExternalResourcesRequired_ExternalResourcesRequired">ISvgExternalResourcesRequired.ExternalResourcesRequired</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgStylable.ClassName.html#SharpVectors_Dom_Svg_ISvgStylable_ClassName">ISvgStylable.ClassName</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgStylable.Style.html#SharpVectors_Dom_Svg_ISvgStylable_Style">ISvgStylable.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgStylable.GetPresentationAttribute.html#SharpVectors_Dom_Svg_ISvgStylable_GetPresentationAttribute_System_String_">ISvgStylable.GetPresentationAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLocatable.NearestViewportElement.html#SharpVectors_Dom_Svg_ISvgLocatable_NearestViewportElement">ISvgLocatable.NearestViewportElement</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLocatable.FarthestViewportElement.html#SharpVectors_Dom_Svg_ISvgLocatable_FarthestViewportElement">ISvgLocatable.FarthestViewportElement</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLocatable.GetBBox.html#SharpVectors_Dom_Svg_ISvgLocatable_GetBBox">ISvgLocatable.GetBBox()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLocatable.GetCTM.html#SharpVectors_Dom_Svg_ISvgLocatable_GetCTM">ISvgLocatable.GetCTM()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLocatable.GetScreenCTM.html#SharpVectors_Dom_Svg_ISvgLocatable_GetScreenCTM">ISvgLocatable.GetScreenCTM()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgLocatable.GetTransformToElement.html#SharpVectors_Dom_Svg_ISvgLocatable_GetTransformToElement_SharpVectors_Dom_Svg_ISvgElement_">ISvgLocatable.GetTransformToElement(ISvgElement)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgFitToViewBox.ViewBox.html#SharpVectors_Dom_Svg_ISvgFitToViewBox_ViewBox">ISvgFitToViewBox.ViewBox</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgFitToViewBox.PreserveAspectRatio.html#SharpVectors_Dom_Svg_ISvgFitToViewBox_PreserveAspectRatio">ISvgFitToViewBox.PreserveAspectRatio</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgZoomAndPan.ZoomAndPan.html#SharpVectors_Dom_Svg_ISvgZoomAndPan_ZoomAndPan">ISvgZoomAndPan.ZoomAndPan</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.AddEventListener.html#SharpVectors_Dom_Events_IEventTarget_AddEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">IEventTarget.AddEventListener(string, EventListener, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.RemoveEventListener.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">IEventTarget.RemoveEventListener(string, EventListener, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.DispatchEvent.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent(IEvent)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.AddEventListenerNs.html#SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_System_Object_">IEventTarget.AddEventListenerNs(string, string, EventListener, bool, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.RemoveEventListenerNs.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">IEventTarget.RemoveEventListenerNs(string, string, EventListener, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.WillTriggerNs.html#SharpVectors_Dom_Events_IEventTarget_WillTriggerNs_System_String_System_String_">IEventTarget.WillTriggerNs(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.HasEventListenerNs.html#SharpVectors_Dom_Events_IEventTarget_HasEventListenerNs_System_String_System_String_">IEventTarget.HasEventListenerNs(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElementVisitorTarget.Accept.html#SharpVectors_Dom_Svg_ISvgElementVisitorTarget_Accept_SharpVectors_Dom_Svg_ISvgElementVisitor_">ISvgElementVisitorTarget.Accept(ISvgElementVisitor)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="SharpVectors_Dom_Svg_ISvgSvgElement_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This interface
+contains various miscellaneous commonly-used utility methods, such
+as matrix operations and the ability to control the time of redraw
+on visual rendering devices.
+<a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.html">ISvgSvgElement</a> extends ViewCSS and
+DocumentCSS to provide access to
+the computed values of properties and the override style sheet as
+described in DOM2.</p>
+</div>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.ContentScriptType.html#SharpVectors_Dom_Svg_ISvgSvgElement_ContentScriptType">ContentScriptType</a></dt>
+    <dd><p>Corresponds to attribute contentScriptType on the given 'svg'
+element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.ContentStyleType.html#SharpVectors_Dom_Svg_ISvgSvgElement_ContentStyleType">ContentStyleType</a></dt>
+    <dd><p>Corresponds to attribute contentStyleType on the given 'svg' element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CurrentScale.html#SharpVectors_Dom_Svg_ISvgSvgElement_CurrentScale">CurrentScale</a></dt>
+    <dd><p>This attribute indicates the current scale factor relative to
+the initial view to take into account user magnification and
+panning operations, as described under <a href="http://www.w3.org/TR/SVG/interact.html#ZoomAndPanAttribute">Magnification and panning</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CurrentTime.html#SharpVectors_Dom_Svg_ISvgSvgElement_CurrentTime">CurrentTime</a></dt>
+    <dd><p>The current time in seconds relative to the start time
+for the current SVG document fragment.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CurrentTranslate.html#SharpVectors_Dom_Svg_ISvgSvgElement_CurrentTranslate">CurrentTranslate</a></dt>
+    <dd><p>The corresponding translation factor that takes into account
+user &quot;magnification&quot;.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CurrentView.html#SharpVectors_Dom_Svg_ISvgSvgElement_CurrentView">CurrentView</a></dt>
+    <dd><p>The definition of the initial view (i.e., before magnification
+and panning) of the current innermost SVG document fragment.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.Height.html#SharpVectors_Dom_Svg_ISvgSvgElement_Height">Height</a></dt>
+    <dd><p>Corresponds to attribute height on the given 'svg' element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.PixelUnitToMillimeterX.html#SharpVectors_Dom_Svg_ISvgSvgElement_PixelUnitToMillimeterX">PixelUnitToMillimeterX</a></dt>
+    <dd><p>Size of a pixel unit (as defined by CSS2) along the x-axis of the
+viewport, which represents a unit somewhere in the range of 70dpi
+to 120dpi, and, on systems that support this, might actually match
+the characteristics of the target medium.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.PixelUnitToMillimeterY.html#SharpVectors_Dom_Svg_ISvgSvgElement_PixelUnitToMillimeterY">PixelUnitToMillimeterY</a></dt>
+    <dd><p>Corresponding size of a pixel unit along the y-axis of the viewport.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.ScreenPixelToMillimeterX.html#SharpVectors_Dom_Svg_ISvgSvgElement_ScreenPixelToMillimeterX">ScreenPixelToMillimeterX</a></dt>
+    <dd><p>User interface (UI) events in DOM Level 2 indicate the screen
+positions at which the given UI event occurred. When the user
+agent actually knows the physical size of a &quot;screen unit&quot;, this
+attribute will express that information; otherwise, user agents
+will provide a suitable default value such as .28mm.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.ScreenPixelToMillimeterY.html#SharpVectors_Dom_Svg_ISvgSvgElement_ScreenPixelToMillimeterY">ScreenPixelToMillimeterY</a></dt>
+    <dd><p>Corresponding size of a screen pixel along the y-axis of the
+viewport.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.UseCurrentView.html#SharpVectors_Dom_Svg_ISvgSvgElement_UseCurrentView">UseCurrentView</a></dt>
+    <dd><p>The initial view (i.e., before magnification and panning) of the
+current innermost SVG document fragment can be either the
+&quot;standard&quot; view (i.e., based on attributes on the 'svg' element
+such as fitBoxToViewport) or to a &quot;custom&quot; view (i.e., a
+hyperlink into a particular 'view' or other element - see
+<a href="http://www.w3.org/TR/SVG/linking.html#LinksIntoSVG">Linking into SVG content: URI fragments and SVG views</a>). If
+the initial view is the &quot;standard&quot; view, then this attribute is
+false. If the initial view is a &quot;custom&quot; view, then this
+attribute is true.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.Viewport.html#SharpVectors_Dom_Svg_ISvgSvgElement_Viewport">Viewport</a></dt>
+    <dd><p>The position and size of the viewport (implicit or explicit) that
+corresponds to this 'svg' element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.Width.html#SharpVectors_Dom_Svg_ISvgSvgElement_Width">Width</a></dt>
+    <dd><p>Corresponds to attribute width on the given 'svg' element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.X.html#SharpVectors_Dom_Svg_ISvgSvgElement_X">X</a></dt>
+    <dd><p>Corresponds to attribute x on the given 'svg' element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.Y.html#SharpVectors_Dom_Svg_ISvgSvgElement_Y">Y</a></dt>
+    <dd><p>Corresponds to attribute y on the given 'svg' element.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.AnimationsPaused.html#SharpVectors_Dom_Svg_ISvgSvgElement_AnimationsPaused">AnimationsPaused()</a></dt>
+    <dd><p>Returns true if this SVG document fragment is in a paused state.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CheckEnclosure.html#SharpVectors_Dom_Svg_ISvgSvgElement_CheckEnclosure_SharpVectors_Dom_Svg_ISvgElement_SharpVectors_Dom_Svg_ISvgRect_">CheckEnclosure(ISvgElement, ISvgRect)</a></dt>
+    <dd><p>Returns true if the rendered content of the given element is
+entirely contained within the supplied rectangle, honoring the
+'pointer-events' property value on each candidate graphics
+element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CheckIntersection.html#SharpVectors_Dom_Svg_ISvgSvgElement_CheckIntersection_SharpVectors_Dom_Svg_ISvgElement_SharpVectors_Dom_Svg_ISvgRect_">CheckIntersection(ISvgElement, ISvgRect)</a></dt>
+    <dd><p>Returns true if the rendered content of the given element
+intersects the supplied rectangle, honoring the 'pointer-events'
+property value on each candidate graphics element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgAngle.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgAngle">CreateSvgAngle()</a></dt>
+    <dd><p>Creates an SVGAngle object outside of any document trees. The
+object is initialized to the value 0 degrees (unitless).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgLength.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgLength">CreateSvgLength()</a></dt>
+    <dd><p>Creates an SVGLength object outside of any document trees. The
+object is initialized to the value of 0 user units.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgMatrix.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgMatrix">CreateSvgMatrix()</a></dt>
+    <dd><p>Creates an SVGMatrix object outside of any document trees. The
+object is initialized to the identity matrix.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgNumber.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgNumber">CreateSvgNumber()</a></dt>
+    <dd><p>Creates an SVGNumber object outside of any document trees. The
+object is initialized to a value of zero.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgPoint.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgPoint">CreateSvgPoint()</a></dt>
+    <dd><p>Creates an SVGPoint object outside of any document trees. The
+object is initialized to the point (0,0) in the user coordinate
+system.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgRect.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgRect">CreateSvgRect()</a></dt>
+    <dd><p>Creates an SVGRect object outside of any document trees. The
+object is initialized such that all values are set to 0 user
+units.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgTransform.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgTransform">CreateSvgTransform()</a></dt>
+    <dd><p>Creates an SVGTransform object outside of any document trees. The
+object is initialized to an identity matrix transform
+(SVG_TRANSFORM_MATRIX).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.CreateSvgTransformFromMatrix.html#SharpVectors_Dom_Svg_ISvgSvgElement_CreateSvgTransformFromMatrix_SharpVectors_Dom_Svg_ISvgMatrix_">CreateSvgTransformFromMatrix(ISvgMatrix)</a></dt>
+    <dd><p>Creates an SVGTransform object outside of any document trees.
+The object is initialized to the given matrix transform (i.e.,
+SVG_TRANSFORM_MATRIX).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.DeselectAll.html#SharpVectors_Dom_Svg_ISvgSvgElement_DeselectAll">DeselectAll()</a></dt>
+    <dd><p>Unselects any selected objects, including any selections of text
+strings and type-in bars.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.ForceRedraw.html#SharpVectors_Dom_Svg_ISvgSvgElement_ForceRedraw">ForceRedraw()</a></dt>
+    <dd><p>In rendering environments supporting interactivity, forces the
+user agent to immediately redraw all regions of the viewport
+that require updating.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.GetElementById.html#SharpVectors_Dom_Svg_ISvgSvgElement_GetElementById_System_String_">GetElementById(string)</a></dt>
+    <dd><p>Searches this SVG document fragment (i.e., the search is
+restricted to a subset of the document tree) for an Element whose
+id is given by elementId.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.GetEnclosureList.html#SharpVectors_Dom_Svg_ISvgSvgElement_GetEnclosureList_SharpVectors_Dom_Svg_ISvgRect_SharpVectors_Dom_Svg_ISvgElement_">GetEnclosureList(ISvgRect, ISvgElement)</a></dt>
+    <dd><p>Returns the list of graphics elements whose rendered content is
+entirely contained within the supplied rectangle, honoring the
+'pointer-events' property value on each candidate graphics
+element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.GetIntersectionList.html#SharpVectors_Dom_Svg_ISvgSvgElement_GetIntersectionList_SharpVectors_Dom_Svg_ISvgRect_SharpVectors_Dom_Svg_ISvgElement_">GetIntersectionList(ISvgRect, ISvgElement)</a></dt>
+    <dd><p>Returns the list of graphics elements whose rendered content
+intersects the supplied rectangle, honoring the 'pointer-events'
+property value on each candidate graphics element.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.PauseAnimations.html#SharpVectors_Dom_Svg_ISvgSvgElement_PauseAnimations">PauseAnimations()</a></dt>
+    <dd><p>Suspends (i.e., pauses) all currently running animations that are
+defined within the SVG document fragment corresponding to this
+'svg' element, causing the animation clock corresponding to this
+document fragment to stand still until it is unpaused.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.SuspendRedraw.html#SharpVectors_Dom_Svg_ISvgSvgElement_SuspendRedraw_System_Int32_">SuspendRedraw(int)</a></dt>
+    <dd><p>Takes a time-out value which indicates that redraw shall not
+occur until certain conditions are met.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.UnpauseAnimations.html#SharpVectors_Dom_Svg_ISvgSvgElement_UnpauseAnimations">UnpauseAnimations()</a></dt>
+    <dd><p>Unsuspends (i.e., unpauses) currently running animations that are
+defined within the SVG document fragment, causing the animation
+clock to continue from the time at which it was suspended.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.UnsuspendRedraw.html#SharpVectors_Dom_Svg_ISvgSvgElement_UnsuspendRedraw_System_Int32_">UnsuspendRedraw(int)</a></dt>
+    <dd><p>Cancels a specified suspendRedraw() by providing a unique
+suspend_handle_id.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgSvgElement.UnsuspendRedrawAll.html#SharpVectors_Dom_Svg_ISvgSvgElement_UnsuspendRedrawAll">UnsuspendRedrawAll()</a></dt>
+    <dd><p>Cancels all currently active suspendRedraw() method calls.
+been cancelled.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorCore\Svg\DocumentStructure\ISvgSvgElement.cs/#L21" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

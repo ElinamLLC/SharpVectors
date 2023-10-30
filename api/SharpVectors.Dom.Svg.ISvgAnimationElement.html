@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface ISvgAnimationElement
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface ISvgAnimationElement
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Dom_Svg_ISvgAnimationElement.md&amp;value=---%0Auid%3A%20SharpVectors.Dom.Svg.ISvgAnimationElement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Dom.Svg.ISvgAnimationElement">
+
+
+
+  <h1 id="SharpVectors_Dom_Svg_ISvgAnimationElement" data-uid="SharpVectors.Dom.Svg.ISvgAnimationElement" class="text-break">
+    Interface ISvgAnimationElement
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorCore\Svg\Animations\ISvgAnimationElement.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Dom.html">Dom</a>.<a class="xref" href="SharpVectors.Dom.Svg.html">Svg</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>This is the base interface for all of the animation element interfaces:
+<a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimateElement.html">ISvgAnimateElement</a>, <a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimateSetElement.html">ISvgAnimateSetElement</a>, <a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimateColorElement.html">ISvgAnimateColorElement</a>,
+<a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimateMotionElement.html">ISvgAnimateMotionElement</a> and <a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimateTransformElement.html">ISvgAnimateTransformElement</a>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ISvgAnimationElement : ISvgElement, IElement, IXmlElement, INode, IXmlNode, ISvgTests, ISvgUriReference, ISvgExternalResourcesRequired, IElementTimeControl, IEventTarget</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.Id.html#SharpVectors_Dom_Svg_ISvgElement_Id">ISvgElement.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.OwnerSvgElement.html#SharpVectors_Dom_Svg_ISvgElement_OwnerSvgElement">ISvgElement.OwnerSvgElement</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.ViewportElement.html#SharpVectors_Dom_Svg_ISvgElement_ViewportElement">ISvgElement.ViewportElement</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.IsRenderable.html#SharpVectors_Dom_Svg_ISvgElement_IsRenderable">ISvgElement.IsRenderable</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgElement.RenderingHint.html#SharpVectors_Dom_Svg_ISvgElement_RenderingHint">ISvgElement.RenderingHint</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.HasAttributes.html#SharpVectors_Dom_IXmlElement_HasAttributes">IXmlElement.HasAttributes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttribute.html#SharpVectors_Dom_IXmlElement_GetAttribute_System_String_">IXmlElement.GetAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttribute.html#SharpVectors_Dom_IXmlElement_GetAttribute_System_String_System_String_">IXmlElement.GetAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttribute.html#SharpVectors_Dom_IXmlElement_SetAttribute_System_String_System_String_">IXmlElement.SetAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttribute.html#SharpVectors_Dom_IXmlElement_SetAttribute_System_String_System_String_System_String_">IXmlElement.SetAttribute(string, string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttribute.html#SharpVectors_Dom_IXmlElement_RemoveAttribute_System_String_">IXmlElement.RemoveAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttribute.html#SharpVectors_Dom_IXmlElement_RemoveAttribute_System_String_System_String_">IXmlElement.RemoveAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttributeNode.html#SharpVectors_Dom_IXmlElement_GetAttributeNode_System_String_">IXmlElement.GetAttributeNode(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetAttributeNode.html#SharpVectors_Dom_IXmlElement_GetAttributeNode_System_String_System_String_">IXmlElement.GetAttributeNode(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetElementsByTagName.html#SharpVectors_Dom_IXmlElement_GetElementsByTagName_System_String_">IXmlElement.GetElementsByTagName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.GetElementsByTagName.html#SharpVectors_Dom_IXmlElement_GetElementsByTagName_System_String_System_String_">IXmlElement.GetElementsByTagName(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttributeNode.html#SharpVectors_Dom_IXmlElement_SetAttributeNode_System_String_System_String_">IXmlElement.SetAttributeNode(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.SetAttributeNode.html#SharpVectors_Dom_IXmlElement_SetAttributeNode_System_Xml_XmlAttribute_">IXmlElement.SetAttributeNode(XmlAttribute)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttributeNode.html#SharpVectors_Dom_IXmlElement_RemoveAttributeNode_System_Xml_XmlAttribute_">IXmlElement.RemoveAttributeNode(XmlAttribute)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.RemoveAttributeNode.html#SharpVectors_Dom_IXmlElement_RemoveAttributeNode_System_String_System_String_">IXmlElement.RemoveAttributeNode(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.HasAttribute.html#SharpVectors_Dom_IXmlElement_HasAttribute_System_String_">IXmlElement.HasAttribute(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlElement.HasAttribute.html#SharpVectors_Dom_IXmlElement_HasAttribute_System_String_System_String_">IXmlElement.HasAttribute(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Name.html#SharpVectors_Dom_IXmlNode_Name">IXmlNode.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Value.html#SharpVectors_Dom_IXmlNode_Value">IXmlNode.Value</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.NodeType.html#SharpVectors_Dom_IXmlNode_NodeType">IXmlNode.NodeType</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.ParentNode.html#SharpVectors_Dom_IXmlNode_ParentNode">IXmlNode.ParentNode</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.ChildNodes.html#SharpVectors_Dom_IXmlNode_ChildNodes">IXmlNode.ChildNodes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.FirstChild.html#SharpVectors_Dom_IXmlNode_FirstChild">IXmlNode.FirstChild</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.LastChild.html#SharpVectors_Dom_IXmlNode_LastChild">IXmlNode.LastChild</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.PreviousSibling.html#SharpVectors_Dom_IXmlNode_PreviousSibling">IXmlNode.PreviousSibling</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.NextSibling.html#SharpVectors_Dom_IXmlNode_NextSibling">IXmlNode.NextSibling</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Attributes.html#SharpVectors_Dom_IXmlNode_Attributes">IXmlNode.Attributes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.OwnerDocument.html#SharpVectors_Dom_IXmlNode_OwnerDocument">IXmlNode.OwnerDocument</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.HasChildNodes.html#SharpVectors_Dom_IXmlNode_HasChildNodes">IXmlNode.HasChildNodes</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.NamespaceURI.html#SharpVectors_Dom_IXmlNode_NamespaceURI">IXmlNode.NamespaceURI</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Prefix.html#SharpVectors_Dom_IXmlNode_Prefix">IXmlNode.Prefix</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.LocalName.html#SharpVectors_Dom_IXmlNode_LocalName">IXmlNode.LocalName</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.InsertBefore.html#SharpVectors_Dom_IXmlNode_InsertBefore_System_Xml_XmlNode_System_Xml_XmlNode_">IXmlNode.InsertBefore(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.ReplaceChild.html#SharpVectors_Dom_IXmlNode_ReplaceChild_System_Xml_XmlNode_System_Xml_XmlNode_">IXmlNode.ReplaceChild(XmlNode, XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.RemoveChild.html#SharpVectors_Dom_IXmlNode_RemoveChild_System_Xml_XmlNode_">IXmlNode.RemoveChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.AppendChild.html#SharpVectors_Dom_IXmlNode_AppendChild_System_Xml_XmlNode_">IXmlNode.AppendChild(XmlNode)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.CloneNode.html#SharpVectors_Dom_IXmlNode_CloneNode_System_Boolean_">IXmlNode.CloneNode(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Normalize.html#SharpVectors_Dom_IXmlNode_Normalize">IXmlNode.Normalize()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IXmlNode.Supports.html#SharpVectors_Dom_IXmlNode_Supports_System_String_System_String_">IXmlNode.Supports(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.RequiredFeatures.html#SharpVectors_Dom_Svg_ISvgTests_RequiredFeatures">ISvgTests.RequiredFeatures</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.RequiredExtensions.html#SharpVectors_Dom_Svg_ISvgTests_RequiredExtensions">ISvgTests.RequiredExtensions</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.SystemLanguage.html#SharpVectors_Dom_Svg_ISvgTests_SystemLanguage">ISvgTests.SystemLanguage</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgTests.HasExtension.html#SharpVectors_Dom_Svg_ISvgTests_HasExtension_System_String_">ISvgTests.HasExtension(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgUriReference.Href.html#SharpVectors_Dom_Svg_ISvgUriReference_Href">ISvgUriReference.Href</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Svg.ISvgExternalResourcesRequired.ExternalResourcesRequired.html#SharpVectors_Dom_Svg_ISvgExternalResourcesRequired_ExternalResourcesRequired">ISvgExternalResourcesRequired.ExternalResourcesRequired</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IElementTimeControl.BeginElement.html#SharpVectors_Dom_IElementTimeControl_BeginElement">IElementTimeControl.BeginElement()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IElementTimeControl.BeginElementAt.html#SharpVectors_Dom_IElementTimeControl_BeginElementAt_System_Single_">IElementTimeControl.BeginElementAt(float)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IElementTimeControl.EndElement.html#SharpVectors_Dom_IElementTimeControl_EndElement">IElementTimeControl.EndElement()</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.IElementTimeControl.EndElementAt.html#SharpVectors_Dom_IElementTimeControl_EndElementAt_System_Single_">IElementTimeControl.EndElementAt(float)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.AddEventListener.html#SharpVectors_Dom_Events_IEventTarget_AddEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">IEventTarget.AddEventListener(string, EventListener, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.RemoveEventListener.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListener_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">IEventTarget.RemoveEventListener(string, EventListener, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.DispatchEvent.html#SharpVectors_Dom_Events_IEventTarget_DispatchEvent_SharpVectors_Dom_Events_IEvent_">IEventTarget.DispatchEvent(IEvent)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.AddEventListenerNs.html#SharpVectors_Dom_Events_IEventTarget_AddEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_System_Object_">IEventTarget.AddEventListenerNs(string, string, EventListener, bool, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.RemoveEventListenerNs.html#SharpVectors_Dom_Events_IEventTarget_RemoveEventListenerNs_System_String_System_String_SharpVectors_Dom_Events_EventListener_System_Boolean_">IEventTarget.RemoveEventListenerNs(string, string, EventListener, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.WillTriggerNs.html#SharpVectors_Dom_Events_IEventTarget_WillTriggerNs_System_String_System_String_">IEventTarget.WillTriggerNs(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Dom.Events.IEventTarget.HasEventListenerNs.html#SharpVectors_Dom_Events_IEventTarget_HasEventListenerNs_System_String_System_String_">IEventTarget.HasEventListenerNs(string, string)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="SharpVectors_Dom_Svg_ISvgAnimationElement_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Unlike other SVG DOM interfaces, the SVG DOM does not specify convenience DOM properties corresponding to
+the various language attributes on SVG's animation elements.</p>
+</div>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.Begin.html#SharpVectors_Dom_Svg_ISvgAnimationElement_Begin">Begin</a></dt>
+    <dd><p>Gets or sets values of values that defines when the element should begin (i.e. become active).</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.CurrentTime.html#SharpVectors_Dom_Svg_ISvgAnimationElement_CurrentTime">CurrentTime</a></dt>
+    <dd><p>Gets the current time in seconds relative to time zero for the given time container.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.Duration.html#SharpVectors_Dom_Svg_ISvgAnimationElement_Duration">Duration</a></dt>
+    <dd><p>Gets or sets a value that specifies the simple duration.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.End.html#SharpVectors_Dom_Svg_ISvgAnimationElement_End">End</a></dt>
+    <dd><p>Gets or sets the attribute that defines an end value for the animation that can
+constrain the active duration.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.Fill.html#SharpVectors_Dom_Svg_ISvgAnimationElement_Fill">Fill</a></dt>
+    <dd><p>Gets or sets the attribute can be used to maintain the value of the animation after
+the active duration of the animation element ends.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.Maximum.html#SharpVectors_Dom_Svg_ISvgAnimationElement_Maximum">Maximum</a></dt>
+    <dd><p>Gets or sets the value that specifies the maximum value of the active duration.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.Minimum.html#SharpVectors_Dom_Svg_ISvgAnimationElement_Minimum">Minimum</a></dt>
+    <dd><p>Gets or sets a value that specifies the minimum value of the active duration.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.RepeatCount.html#SharpVectors_Dom_Svg_ISvgAnimationElement_RepeatCount">RepeatCount</a></dt>
+    <dd><p>Gets or sets a value that specifies the number of iterations of the animation function.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.RepeatDuration.html#SharpVectors_Dom_Svg_ISvgAnimationElement_RepeatDuration">RepeatDuration</a></dt>
+    <dd><p>Gets or sets a value that specifies the total duration for repeat.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.Restart.html#SharpVectors_Dom_Svg_ISvgAnimationElement_Restart">Restart</a></dt>
+    <dd><p>Gets or sets the attribute that controls the circumstances under which an animation is restarted.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.SimpleDuration.html#SharpVectors_Dom_Svg_ISvgAnimationElement_SimpleDuration">SimpleDuration</a></dt>
+    <dd><p>Gets the number of seconds for the simple duration for this animation. If the simple duration
+is undefined (e.g., the end time is indefinite), then an exception is raised.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.StartTime.html#SharpVectors_Dom_Svg_ISvgAnimationElement_StartTime">StartTime</a></dt>
+    <dd><p>Gets the begin time, in seconds, for this animation element's current interval, if it exists,
+regardless of whether the interval has begun yet. If there is no current interval, then a
+<a class="xref" href="SharpVectors.Dom.DomException.html">DomException</a> with code INVALID_STATE_ERR is thrown.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Dom.Svg.ISvgAnimationElement.TargetElement.html#SharpVectors_Dom_Svg_ISvgAnimationElement_TargetElement">TargetElement</a></dt>
+    <dd><p>Gets the element which is being animated.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorCore\Svg\Animations\ISvgAnimationElement.cs/#L16" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

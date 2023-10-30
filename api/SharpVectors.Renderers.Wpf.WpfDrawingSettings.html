@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WpfDrawingSettings
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WpfDrawingSettings
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Renderers_Wpf_WpfDrawingSettings.md&amp;value=---%0Auid%3A%20SharpVectors.Renderers.Wpf.WpfDrawingSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Renderers.Wpf.WpfDrawingSettings">
+
+
+
+  <h1 id="SharpVectors_Renderers_Wpf_WpfDrawingSettings" data-uid="SharpVectors.Renderers.Wpf.WpfDrawingSettings" class="text-break">
+    Class WpfDrawingSettings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorRenderingWpf\Wpf\WpfDrawingSettings.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Renderers.html">Renderers</a>.<a class="xref" href="SharpVectors.Renderers.Wpf.html">Wpf</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Rendering.Wpf.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>This provides the settings or options for the drawing/rendering engine of the WPF.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public sealed class WpfDrawingSettings : WpfSettings&lt;WpfDrawingSettings&gt;, ICloneable, IXmlSerializable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject">DispatcherObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject">DependencyObject</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.WpfObject.html">WpfObject</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.WpfSettings-1.html">WpfSettings</a>&lt;<a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a>&gt;</div>
+      <div><span class="xref">WpfDrawingSettings</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icloneable">ICloneable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.serialization.ixmlserializable">IXmlSerializable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNull.html#SharpVectors_Renderers_WpfObject_NotNull_System_Object_System_String_">WpfObject.NotNull(object, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNull.html#SharpVectors_Renderers_WpfObject_NotNull_System_String_System_String_">WpfObject.NotNull(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotEmpty.html#SharpVectors_Renderers_WpfObject_NotEmpty_System_String_System_String_">WpfObject.NotEmpty(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNullNotEmpty.html#SharpVectors_Renderers_WpfObject_NotNullNotEmpty_System_String_System_String_">WpfObject.NotNullNotEmpty(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.NotNullNotEmpty.html#SharpVectors_Renderers_WpfObject_NotNullNotEmpty__1_System_Collections_Generic_IList___0__System_String_">WpfObject.NotNullNotEmpty&lt;E&gt;(IList&lt;E&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.WpfObject.PathMustExist.html#SharpVectors_Renderers_WpfObject_PathMustExist_System_String_System_String_">WpfObject.PathMustExist(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.equals">DependencyObject.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.gethashcode">DependencyObject.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getvalue">DependencyObject.GetValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencyproperty-system-object)">DependencyObject.SetValue(DependencyProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setcurrentvalue">DependencyObject.SetCurrentValue(DependencyProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.setvalue#system-windows-dependencyobject-setvalue(system-windows-dependencypropertykey-system-object)">DependencyObject.SetValue(DependencyPropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencyproperty)">DependencyObject.ClearValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.clearvalue#system-windows-dependencyobject-clearvalue(system-windows-dependencypropertykey)">DependencyObject.ClearValue(DependencyPropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.coercevalue">DependencyObject.CoerceValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.invalidateproperty">DependencyObject.InvalidateProperty(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.readlocalvalue">DependencyObject.ReadLocalValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.getlocalvalueenumerator">DependencyObject.GetLocalValueEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.dependencyobjecttype">DependencyObject.DependencyObjectType</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.dependencyobject.issealed">DependencyObject.IsSealed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.threading.dispatcherobject.dispatcher">DispatcherObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.-ctor.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings__ctor">WpfDrawingSettings()</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a> class
+with the default parameters and settings.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.-ctor.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings__ctor_SharpVectors_Renderers_Wpf_WpfDrawingSettings_">WpfDrawingSettings(WpfDrawingSettings)</a></dt>
+    <dd><p>Initializes a new instance of the <a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a> class
+with the specified initial drawing or rendering settings, a copy constructor.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.PropertyIsResources.html">PropertyIsResources</a></dt>
+    <dd><p>A well-known property name, a Boolean value specifying the target output of the rendering is
+resource dictionary <code>XAML</code>.</p>
+<p>
+If set to <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, operations required to enhance the output of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a>
+<code>XAML</code> are enabled.
+</p>
+The default value is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.PropertyNoneBrush.html">PropertyNoneBrush</a></dt>
+    <dd><p>A well-known property name, specifies the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.brush">Brush</a> object to be used for an <code>SVG</code> element,
+which is defined with display styling <code>none</code>, but no fill styling options.</p>
+<p>
+The default value is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.PropertyNonePen.html">PropertyNonePen</a></dt>
+    <dd><p>A well-known property name, specifies the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.pen">Pen</a> object to be used for an <code>SVG</code> element,
+which is defined with display styling <code>none</code>, but no stroke styling options.</p>
+<p>
+The default value is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.XmlTagName.html">XmlTagName</a></dt>
+    <dd><p>The name of the <code>XML</code> tag name, under which this object is stored.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.XmlVersion.html">XmlVersion</a></dt>
+    <dd><p>The version of the file format, under which this object is stored.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.CanUseBitmap.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_CanUseBitmap">CanUseBitmap</a></dt>
+    <dd><p>Gets or sets a value indicating if image elements will render bitmaps.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.CssVariables.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_CssVariables">CssVariables</a></dt>
+    <dd><p>Gets or sets user-defined CSS custom properties for the rendering.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.CultureInfo.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_CultureInfo">CultureInfo</a></dt>
+    <dd><p>Gets or sets the main culture information used for rendering texts.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.DefaultFontFamily.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_DefaultFontFamily">DefaultFontFamily</a></dt>
+    <dd><p>Gets or sets the globally available default font family.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.DefaultFontName.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_DefaultFontName">DefaultFontName</a></dt>
+    <dd><p>Gets or sets the default font family name, which is used when a text
+node does not specify a font family name.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.DpiScale.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_DpiScale">DpiScale</a></dt>
+    <dd><p>Gets or sets an object that stores <code>DPI</code> information from which an <code>SVG</code> element is rendered.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.DrawingResources.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_DrawingResources">DrawingResources</a></dt>
+    <dd><p>Gets or sets an object used to collect extra information used to enhance the output of
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a> XAML.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxPosition.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxPosition">EnsureViewboxPosition</a></dt>
+    <dd><p>Gets or sets a value to indicate applying a translate transform to the viewbox to ensure
+it is visible when rendered.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxSize.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxSize">EnsureViewboxSize</a></dt>
+    <dd><p>Gets or sets a value to indicate preserving the original viewbox size when saving images.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.ExternalResourcesAccessMode.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_ExternalResourcesAccessMode">ExternalResourcesAccessMode</a></dt>
+    <dd><p>Gets or sets a value indicating how to handled external resources.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.FontFamilies.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_FontFamilies">FontFamilies</a></dt>
+    <dd><p>Gets the list of a custom font family objects.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.FontFamilyNames.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_FontFamilyNames">FontFamilyNames</a></dt>
+    <dd><p>A dictionary specifying a map of the font family names to their locations.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.FontLocations.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_FontLocations">FontLocations</a></dt>
+    <dd><p>Gets the list of the custom font locations or paths.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericCursive.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_GenericCursive">GenericCursive</a></dt>
+    <dd><p>Gets or set the globally available generic cursive font family.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericFantasy.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_GenericFantasy">GenericFantasy</a></dt>
+    <dd><p>Gets or set the globally available generic fantasy font family.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericMonospace.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_GenericMonospace">GenericMonospace</a></dt>
+    <dd><p>Gets or set the globally available generic Monospace font family.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericSansSerif.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_GenericSansSerif">GenericSansSerif</a></dt>
+    <dd><p>Gets or set the globally available generic sans serif font family.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericSerif.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_GenericSerif">GenericSerif</a></dt>
+    <dd><p>Gets or set the globally available generic serif font family.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.HasFontFamilies.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_HasFontFamilies">HasFontFamilies</a></dt>
+    <dd><p>Gets a value specifying whether user-defined font families are associated with the target rendering.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.HasPixelSize.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_HasPixelSize">HasPixelSize</a></dt>
+    <dd><p>Gets a value indicating the dimension or size of the target drawing is specified.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.IgnoreRootViewbox.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IgnoreRootViewbox">IgnoreRootViewbox</a></dt>
+    <dd><p>Gets or sets a value to indicate whether to turn off viewbox at the root of the drawing.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.IncludeRuntime.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IncludeRuntime">IncludeRuntime</a></dt>
+    <dd><p>Gets or sets a value indicating whether the <code>SharpVectors.Runtime.dll</code>
+classes are used in the generated output.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.InteractiveMode.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_InteractiveMode">InteractiveMode</a></dt>
+    <dd><p>Gets or sets a value specifying the interactive mode of the target rendering.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.Item.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_Item_System_String_">this[string]</a></dt>
+    <dd><p>Gets or sets a well-known property value.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.NeutralCultureInfo.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_NeutralCultureInfo">NeutralCultureInfo</a></dt>
+    <dd><p>Gets the neutral language for text rendering.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.OptimizePath.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_OptimizePath">OptimizePath</a></dt>
+    <dd><p>Gets or sets a value indicating whether the path geometry is optimized using the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.streamgeometry">StreamGeometry</a>.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.PixelHeight.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_PixelHeight">PixelHeight</a></dt>
+    <dd><p>Gets or sets the pixel height of the rendered drawing.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.PixelWidth.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_PixelWidth">PixelWidth</a></dt>
+    <dd><p>Gets or sets the pixel width of the rendered drawing.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.TextAsGeometry.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_TextAsGeometry">TextAsGeometry</a></dt>
+    <dd><p>Gets or sets a value indicating whether the texts are rendered as path geometry.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.UserAgentCssFilePath.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_UserAgentCssFilePath">UserAgentCssFilePath</a></dt>
+    <dd><p>Gets or sets the basic style sheet that give default styles to any <code>SVG</code> document, similar to
+the user-agent or browsers styles.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.UserCssFilePath.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_UserCssFilePath">UserCssFilePath</a></dt>
+    <dd><p>Gets or sets a stylesheet to override the styles in <code>SVG</code> documents using a custom user stylesheet,
+similar to that in browsers.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.Visitors.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_Visitors">Visitors</a></dt>
+    <dd><p>Gets the list of custom rendering visitor implementation objects to be used by the <code>SharpVectors</code>.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.AddFontFamilyName.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_AddFontFamilyName_System_String_System_String_">AddFontFamilyName(string, string)</a></dt>
+    <dd><p>This adds a mapped font family name. A mapped name can be a localized name of a font family or
+an alternative font family name.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.AddFontLocation.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_AddFontLocation_System_String_">AddFontLocation(string)</a></dt>
+    <dd><p>This adds the specified local font location (file or directory) to enable the use of private fonts.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.Clone.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_Clone">Clone()</a></dt>
+    <dd><p>This creates a new settings object that is a deep copy of the current instance.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.LookupFontFamily.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_LookupFontFamily_System_String_System_Windows_FontWeight_System_Windows_FontStyle_System_Windows_FontStretch_">LookupFontFamily(string, FontWeight, FontStyle, FontStretch)</a></dt>
+    <dd><p>This looks for or matches the specified font family name and attributes.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.ReadXml.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_ReadXml_System_Xml_XmlReader_">ReadXml(XmlReader)</a></dt>
+    <dd><p>This reads and sets its state or attributes stored in a <code>XML</code> format with the given reader.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Wpf.WpfDrawingSettings.WriteXml.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_WriteXml_System_Xml_XmlWriter_">WriteXml(XmlWriter)</a></dt>
+    <dd><p>This writes the current state or attributes of this object,
+in the <code>XML</code> format, to the media or storage accessible by the given writer.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorRenderingWpf\Wpf\WpfDrawingSettings.cs/#L23" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

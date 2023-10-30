@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SVG Markup Extensions | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SVG Markup Extensions | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\markup_extensions.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_markup_extensions">
+<h1 id="svg-markup-extensions">SVG Markup Extensions</h1>
+
+<p>These are WPF markup extensions or type converters for handling the SVG files in WPF applications.
+Currently, SharpVectors provides two markup extensions, <a class="xref" href="../api/SharpVectors.Converters.SvgImageExtension.html">SvgImageExtension</a> and <a class="xref" href="../api/SharpVectors.Converters.SvgImageConverterExtension.html">SvgImageConverterExtension</a>, which convert an SVG source document to a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.</p>
+<p>These classes derived from <a class="xref" href="../api/SharpVectors.Converters.SvgImageBase.html">SvgImageBase</a> class, which extents the WPF markup extension base class <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.markup.markupextension">MarkupExtension</a> as shown below.</p>
+<p>Markup extensions in WPF are not dependency objects, and cannot support data binding. The <a class="xref" href="../api/SharpVectors.Converters.SvgImageConverterExtension.html">SvgImageConverterExtension</a> class implements the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.data.ivalueconverter">IValueConverter</a> interface to enable data binding supports on the markup extension. Use this where data binding is required or the <a class="xref" href="image_controls.html">SVG Image Controls</a> (<a class="xref" href="../api/SharpVectors.Converters.SvgBitmap.html">SvgBitmap</a>, <a class="xref" href="../api/SharpVectors.Converters.SvgIcon.html">SvgIcon</a>), which also provide static images.</p>
+<pre><code class="lang-mermaid">classDiagram
+    class MarkupExtension
+    class IValueConverter
+    &lt;&lt;abstract&gt;&gt; MarkupExtension
+    &lt;&lt;interface&gt;&gt; IValueConverter
+    MarkupExtension &lt;|-- SvgImageBase
+    SvgImageBase &lt;|-- SvgImageExtension
+    SvgImageBase &lt;|-- SvgImageConverterExtension
+    IValueConverter &lt;|-- SvgImageConverterExtension
+    MarkupExtension: +ProvideValue(IServiceProvider)* object
+    IValueConverter: +Convert(object, Type, object, CultureInfo)* object
+    class SvgImageBase{
+      &lt;&lt;abstract&gt;&gt;
+      +bool OptimizePath
+      +bool TextAsGeometry
+      +bool IncludeRuntime
+      +string AppName
+      #GetDrawing(Uri) DrawingGroup
+      #GetImage(Uri) DrawingImage
+      #GetAppName() void
+      #GetEntryAssembly() Assembly
+      #GetExecutingAssembly() Assembly
+      #IsDesignMode(IServiceProvider) bool
+    }
+    class SvgImageExtension{
+      &lt;&lt;sealed&gt;&gt;
+      +string Source
+      +ProvideValue(IServiceProvider) object
+    }
+    class SvgImageConverterExtension{
+      &lt;&lt;sealed&gt;&gt;
+      +ProvideValue(IServiceProvider) object
+      +Convert(object, Type, object, CultureInfo) object
+    }
+</code></pre>
+<ul>
+<li>As shown in the diagram above of the <a class="xref" href="../api/SharpVectors.Converters.SvgImageBase.html">SvgImageBase</a> class, the relevant rendering settings or options are available on these markup extensions as properties.</li>
+<li>The additional property, <strong>SvgImageBase.AppName</strong>, is used to specify the name of the source assembly in cases where the SVG document is a resource in a .NET assembly. This provides a hint to the system when resolving the URI to the resource file, especially in the design-mode.</li>
+<li>The main property here is the <strong>SvgImageExtension.Source</strong>, which is the path to the SVG file, and the file itself can be located in the following:
+<ul>
+<li><strong>Web/Internet</strong>: The path in this case is the HTTP, FTP, etc scheme URI of the file.</li>
+<li><strong>Local Computer Disk</strong>: The path is the absolute or the relative URI to the SVG file.</li>
+<li><strong>Resources</strong>: The path is the <a href="https://docs.microsoft.com/en-us/dotnet/framework/wpf/app-development/pack-uris-in-wpf">Microsoft Pack URI</a> of the SVG resource file.</li>
+</ul>
+</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <strong>SVG Markup Extensions</strong> are lightweight objects, and unlike the <strong>SVG Image Controls</strong>, these are not WPF controls. However, if the target use is within image control, then the SVG image controls are preferred.</p>
+</div>
+<h2 id="svgimageextension-markup-extension">SvgImageExtension Markup Extension</h2>
+<p>This is the basic SVG markup extension to provide SVG static images, and as stated above does not support data binding. The source codes of the <strong>WpfTestResourceSvg</strong> sample is used for illustration.</p>
+<p>The XAML source is shown below: SVG resource files are also used as toolbar images.</p>
+<pre><code class="lang-xml">&lt;Window x:Class=&quot;WpfTestResourceSvg.MainWindow&quot;
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot;
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;
+        xmlns:svgc=&quot;http://sharpvectors.codeplex.com/svgc/&quot;
+        xmlns:local=&quot;clr-namespace:WpfTestResourceSvg&quot;
+        mc:Ignorable=&quot;d&quot;
+        Title=&quot;SharpVector - Design Mode Tests&quot; Height=&quot;720&quot; Width=&quot;960&quot; Icon=&quot;App.ico&quot; WindowStartupLocation=&quot;CenterScreen&quot;&gt;
+    &lt;DockPanel LastChildFill=&quot;True&quot; Margin=&quot;3&quot;&gt;
+        &lt;TabControl&gt;
+            &lt;TabItem x:Name=&quot;tabSvgImage&quot;&gt;
+                &lt;TabItem.Header&gt;
+                    &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                        &lt;Image Height=&quot;24px&quot; Width=&quot;24px&quot; Source=&quot;{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfTestResourceSvg}&quot; /&gt;
+                        &lt;TextBlock Text=&quot;SvgImage&quot; Margin=&quot;3&quot; VerticalAlignment=&quot;Center&quot; MinWidth=&quot;70&quot;/&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/TabItem.Header&gt;
+                &lt;DockPanel LastChildFill=&quot;True&quot;&gt;
+                    &lt;ToolBar DockPanel.Dock=&quot;Top&quot; Height=&quot;36&quot;&gt;
+                        &lt;ToolBar.Resources&gt;
+                            &lt;Style TargetType=&quot;{x:Type Image}&quot;&gt;
+                                &lt;Style.Triggers&gt;
+                                    &lt;DataTrigger Binding=&quot;{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}&quot; Value=&quot;False&quot;&gt;
+                                        &lt;Setter Property=&quot;Opacity&quot; Value=&quot;0.30&quot; /&gt;
+                                    &lt;/DataTrigger&gt;
+                                &lt;/Style.Triggers&gt;
+                            &lt;/Style&gt;
+                        &lt;/ToolBar.Resources&gt;
+                        &lt;Button&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Open.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Save.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Separator/&gt;
+                        &lt;Button Command=&quot;Cut&quot; ToolTip=&quot;Cut To Clipboard&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Cut.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button Command=&quot;Copy&quot; ToolTip=&quot;Copy To Clipboard&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Copy.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button Command=&quot;Paste&quot; ToolTip=&quot;Paste From Clipboard&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Paste.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button Command=&quot;Delete&quot; ToolTip=&quot;Delete Selection&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Delete.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Separator/&gt;
+                        &lt;Button Command=&quot;Undo&quot; ToolTip=&quot;Undo&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Undo.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button Command=&quot;Redo&quot; ToolTip=&quot;Redo&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Redo.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Separator/&gt;
+                        &lt;CheckBox IsChecked=&quot;{Binding ElementName=textEditor,Path=WordWrap}&quot; ToolTip=&quot;Word Wrap&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/WordWrap.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/CheckBox&gt;
+                        &lt;CheckBox IsChecked=&quot;{Binding ElementName=textEditor,Path=ShowLineNumbers}&quot; ToolTip=&quot;Show Line Numbers&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Number.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/CheckBox&gt;
+                        &lt;CheckBox IsChecked=&quot;{Binding ElementName=textEditor,Path=Options.ShowEndOfLine}&quot; ToolTip=&quot;Show End Of Line&quot;&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Space.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/CheckBox&gt;
+                        &lt;TextBox x:Name=&quot;searchTextBox&quot; Width=&quot;200&quot; /&gt;
+                        &lt;Button&gt;
+                            &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Find.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Separator/&gt;
+                        &lt;Button x:Name=&quot;formatInput&quot; ToolTip=&quot;Format Document&quot;&gt;
+                            &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                                &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Format.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                                &lt;TextBlock Margin=&quot;3,0,0,0&quot; VerticalAlignment=&quot;Center&quot;&gt;Format&lt;/TextBlock&gt;
+                            &lt;/StackPanel&gt;
+                        &lt;/Button&gt;
+                        &lt;Separator/&gt;
+                        &lt;Button x:Name=&quot;convertInput&quot; ToolTip=&quot;Convert Document&quot;&gt;
+                            &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                                &lt;Image Source=&quot;{svgc:SvgImage Source=/Images/Run.svg, AppName=WpfTestResourceSvg}&quot; Height=&quot;24&quot; Width=&quot;24&quot;/&gt;
+                                &lt;TextBlock Margin=&quot;3,0,0,0&quot; VerticalAlignment=&quot;Center&quot;&gt;Convert&lt;/TextBlock&gt;
+                            &lt;/StackPanel&gt;
+                        &lt;/Button&gt;
+                    &lt;/ToolBar&gt;
+                
+                    &lt;UniformGrid Rows=&quot;2&quot; Columns=&quot;2&quot;&gt;
+                        &lt;Image Source=&quot;{svgc:SvgImage Source=/Resources/autum_leaf.svg, AppName=WpfTestResourceSvg}&quot; Stretch=&quot;Uniform&quot;/&gt;
+                        &lt;Image Source=&quot;{svgc:SvgImage Source=/Resources/basket.svg, AppName=WpfTestResourceSvg}&quot; Stretch=&quot;Uniform&quot;/&gt;
+                        &lt;Image Source=&quot;{svgc:SvgImage Source=/Resources/kite.svg, AppName=WpfTestResourceSvg}&quot; Stretch=&quot;Uniform&quot;/&gt;
+                        &lt;Image Source=&quot;{svgc:SvgImage Source=/Resources/beach_ball.svg, AppName=WpfTestResourceSvg}&quot; Stretch=&quot;Uniform&quot;/&gt;
+                    &lt;/UniformGrid&gt;
+
+                &lt;/DockPanel&gt;
+            &lt;/TabItem&gt;
+        &lt;/TabControl&gt;
+    &lt;/DockPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>The following image shows the result of the above uses of the <strong>SvgImageExtension</strong> class:</p>
+<p><img src="../images/svgimage.png" alt="SvgImageExtension"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more extensive illustration of the <strong>SvgImageExtension</strong> class in both C# and VB.NET, see the <strong>SvgImageSample</strong> and <strong>SvgImageSampleVB</strong> samples in the <a href="https://github.com/ElinamLLC/SharpVectors/tree/master/TutorialSamples/ControlSamplesWpf">TutorialSamples/ControlSamplesWpf</a> directory.</p>
+</div>
+<h2 id="svgimageconverterextension-markup-extension">SvgImageConverterExtension Markup Extension</h2>
+<p>This is an extended implementation of the SVG markup extension to support data binding through the converter interface. As above, the source codes of the <strong>WpfTestResourceSvg</strong> sample is used for illustration.</p>
+<p>The XAML source is shown below:</p>
+<pre><code class="lang-xml">&lt;Window x:Class=&quot;WpfTestResourceSvg.MainWindow&quot;
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot;
+        xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;
+        xmlns:svgc=&quot;http://sharpvectors.codeplex.com/svgc/&quot;
+        xmlns:local=&quot;clr-namespace:WpfTestResourceSvg&quot;
+        mc:Ignorable=&quot;d&quot;
+        Title=&quot;SharpVector - Design Mode Tests&quot; Height=&quot;720&quot; Width=&quot;960&quot; Icon=&quot;App.ico&quot; WindowStartupLocation=&quot;CenterScreen&quot;&gt;
+    &lt;DockPanel LastChildFill=&quot;True&quot; Margin=&quot;3&quot;&gt;
+        &lt;TabControl&gt;
+            &lt;TabItem x:Name=&quot;tabSvgImageConverter&quot;&gt;
+                &lt;TabItem.Header&gt;
+                    &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                        &lt;Image Height=&quot;24px&quot; Width=&quot;24px&quot; Source=&quot;{svgc:SvgImage Source=/Images/Output.svg, AppName=WpfTestResourceSvg}&quot; /&gt;
+                        &lt;TextBlock Text=&quot;SvgImageConverter&quot; Margin=&quot;3&quot; VerticalAlignment=&quot;Center&quot; MinWidth=&quot;70&quot;/&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/TabItem.Header&gt;
+                &lt;UniformGrid Rows=&quot;2&quot; Columns=&quot;2&quot;&gt;
+                    &lt;Image Source=&quot;{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/compass.svg, Mode=OneWay}&quot;/&gt;
+                    &lt;Image Source=&quot;{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=/Resources/autum_leaf.svg, Mode=OneWay}&quot;/&gt;
+                    &lt;Image Source=&quot;{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=/Resources/basket.svg, Mode=OneWay}&quot;/&gt;
+                    &lt;Image Source=&quot;{Binding Converter={svgc:SvgImageConverter}, ConverterParameter=/Resources/beach_ball.svg, Mode=OneWay}&quot;/&gt;
+                &lt;/UniformGrid&gt;
+            &lt;/TabItem&gt;
+        &lt;/TabControl&gt;
+    &lt;/DockPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>The following image shows the result of the above uses of the <strong>SvgImageConverterExtension</strong> class:</p>
+<p><img src="../images/svgimageconverter.png" alt="SvgImageConverterExtension"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more extensive illustration of the <strong>SvgImageConverterExtension</strong> class in both C# and VB.NET, see the <strong>SvgImageBindingSample</strong> and <strong>SvgImageBindingSampleVB</strong> samples in the <a href="https://github.com/ElinamLLC/SharpVectors/tree/master/TutorialSamples/ControlSamplesWpf">TutorialSamples/ControlSamplesWpf</a> directory.</p>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\markup_extensions.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

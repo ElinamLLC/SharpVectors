@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WpfFontTextBuilder
+ | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WpfFontTextBuilder
+ | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/new/master/apiSpec/new?filename=SharpVectors_Renderers_Texts_WpfFontTextBuilder.md&amp;value=---%0Auid%3A%20SharpVectors.Renderers.Texts.WpfFontTextBuilder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SharpVectors.Renderers.Texts.WpfFontTextBuilder">
+
+
+
+  <h1 id="SharpVectors_Renderers_Texts_WpfFontTextBuilder" data-uid="SharpVectors.Renderers.Texts.WpfFontTextBuilder" class="text-break">
+    Class WpfFontTextBuilder
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorRenderingWpf\Texts\WpfFontTextBuilder.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SharpVectors.html">SharpVectors</a>.<a class="xref" href="SharpVectors.Renderers.html">Renderers</a>.<a class="xref" href="SharpVectors.Renderers.Texts.html">Texts</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SharpVectors.Rendering.Wpf.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class WpfFontTextBuilder : WpfTextBuilder</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.html">WpfTextBuilder</a></div>
+      <div><span class="xref">WpfFontTextBuilder</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Create.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Create_System_Windows_Media_FontFamily_System_Globalization_CultureInfo_System_Double_">WpfTextBuilder.Create(FontFamily, CultureInfo, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Create.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Create_System_Windows_Media_FontFamily_System_Windows_FontStyle_System_Windows_FontWeight_System_Globalization_CultureInfo_System_Double_">WpfTextBuilder.Create(FontFamily, FontStyle, FontWeight, CultureInfo, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Create.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Create_System_String_System_Globalization_CultureInfo_System_Double_">WpfTextBuilder.Create(string, CultureInfo, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Create.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Create_SharpVectors_Renderers_Wpf_WpfFontFamilyInfo_System_Globalization_CultureInfo_System_Double_">WpfTextBuilder.Create(WpfFontFamilyInfo, CultureInfo, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Culture.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Culture">WpfTextBuilder.Culture</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.XmlLang.html#SharpVectors_Renderers_Texts_WpfTextBuilder_XmlLang">WpfTextBuilder.XmlLang</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.FontName.html#SharpVectors_Renderers_Texts_WpfTextBuilder_FontName">WpfTextBuilder.FontName</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.FontSize.html#SharpVectors_Renderers_Texts_WpfTextBuilder_FontSize">WpfTextBuilder.FontSize</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.FontSizeInPoints.html#SharpVectors_Renderers_Texts_WpfTextBuilder_FontSizeInPoints">WpfTextBuilder.FontSizeInPoints</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.FontUri.html#SharpVectors_Renderers_Texts_WpfTextBuilder_FontUri">WpfTextBuilder.FontUri</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.PixelsPerInchX.html#SharpVectors_Renderers_Texts_WpfTextBuilder_PixelsPerInchX">WpfTextBuilder.PixelsPerInchX</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.PixelsPerInchY.html#SharpVectors_Renderers_Texts_WpfTextBuilder_PixelsPerInchY">WpfTextBuilder.PixelsPerInchY</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.DpiScaleX.html#SharpVectors_Renderers_Texts_WpfTextBuilder_DpiScaleX">WpfTextBuilder.DpiScaleX</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.DpiScaleY.html#SharpVectors_Renderers_Texts_WpfTextBuilder_DpiScaleY">WpfTextBuilder.DpiScaleY</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.PixelsPerDip.html#SharpVectors_Renderers_Texts_WpfTextBuilder_PixelsPerDip">WpfTextBuilder.PixelsPerDip</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.BuildPathGeometry.html#SharpVectors_Renderers_Texts_WpfTextBuilder_BuildPathGeometry">WpfTextBuilder.BuildPathGeometry</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Baseline.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Baseline">WpfTextBuilder.Baseline</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.FlowDirection.html#SharpVectors_Renderers_Texts_WpfTextBuilder_FlowDirection">WpfTextBuilder.FlowDirection</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.TextAlignment.html#SharpVectors_Renderers_Texts_WpfTextBuilder_TextAlignment">WpfTextBuilder.TextAlignment</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.Trimming.html#SharpVectors_Renderers_Texts_WpfTextBuilder_Trimming">WpfTextBuilder.Trimming</a>
+    </div>
+    <div>
+      <a class="xref" href="SharpVectors.Renderers.Texts.WpfTextBuilder.TextDecorations.html#SharpVectors_Renderers_Texts_WpfTextBuilder_TextDecorations">WpfTextBuilder.TextDecorations</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.-ctor.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder__ctor_SharpVectors_Renderers_Wpf_WpfFontFamilyInfo_System_Globalization_CultureInfo_System_Double_">WpfFontTextBuilder(WpfFontFamilyInfo, CultureInfo, double)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.-ctor.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder__ctor_System_Globalization_CultureInfo_System_Double_">WpfFontTextBuilder(CultureInfo, double)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.-ctor.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder__ctor_System_Globalization_CultureInfo_System_String_System_Double_System_Uri_">WpfFontTextBuilder(CultureInfo, string, double, Uri)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.-ctor.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder__ctor_System_Windows_Media_FontFamily_System_Globalization_CultureInfo_System_Double_">WpfFontTextBuilder(FontFamily, CultureInfo, double)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.-ctor.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder__ctor_System_Windows_Media_FontFamily_System_Windows_FontStyle_System_Windows_FontWeight_System_Globalization_CultureInfo_System_Double_">WpfFontTextBuilder(FontFamily, FontStyle, FontWeight, CultureInfo, double)</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.Alphabetic.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_Alphabetic">Alphabetic</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.Ascent.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_Ascent">Ascent</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.FontFamilyType.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_FontFamilyType">FontFamilyType</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.IsBoldSimulated.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_IsBoldSimulated">IsBoldSimulated</a></dt>
+    <dd><p>Gets a value that determines whether to simulate a bold weight for the glyphs represented by the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.IsObliqueSimulated.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_IsObliqueSimulated">IsObliqueSimulated</a></dt>
+    <dd><p>Gets a value that determines whether to simulate an italic style for the glyphs represented by the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.OverlinePosition.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_OverlinePosition">OverlinePosition</a></dt>
+    <dd><p>Gets a value that indicates the distance of the overline from the baseline for the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.OverlineThickness.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_OverlineThickness">OverlineThickness</a></dt>
+    <dd><p>Gets a value that indicates the thickness of the overline relative to the font em size for the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.StrikethroughPosition.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_StrikethroughPosition">StrikethroughPosition</a></dt>
+    <dd><p>Gets a value that indicates the distance from the baseline to the strikethrough for the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.StrikethroughThickness.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_StrikethroughThickness">StrikethroughThickness</a></dt>
+    <dd><p>Gets a value that indicates the thickness of the strikethrough relative to the font em size.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.UnderlinePosition.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_UnderlinePosition">UnderlinePosition</a></dt>
+    <dd><p>Gets a value that indicates the distance of the underline from the baseline for the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.UnderlineThickness.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_UnderlineThickness">UnderlineThickness</a></dt>
+    <dd><p>Gets a value that indicates the thickness of the underline relative to the font em size for the typeface.</p>
+</dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.Width.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_Width">Width</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.XHeight.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_XHeight">XHeight</a></dt>
+    <dd><p>Gets the distance from the baseline to the top of an English lowercase letter for a typeface.
+The distance excludes ascenders.</p>
+</dd>
+  </dl>
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.Build.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_Build_SharpVectors_Dom_Svg_SvgTextContentElement_System_String_System_Double_System_Double_">Build(SvgTextContentElement, string, double, double)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.MeasureChars.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_MeasureChars_SharpVectors_Dom_Svg_SvgTextContentElement_System_String_System_Boolean_">MeasureChars(SvgTextContentElement, string, bool)</a></dt>
+    <dd></dd>
+  </dl>
+  <dl class="jumplist">
+    <dt><a class="xref" href="SharpVectors.Renderers.Texts.WpfFontTextBuilder.MeasureText.html#SharpVectors_Renderers_Texts_WpfFontTextBuilder_MeasureText_SharpVectors_Dom_Svg_SvgTextContentElement_System_String_System_Boolean_">MeasureText(SvgTextContentElement, string, bool)</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/Source\SharpVectorRenderingWpf\Texts\WpfFontTextBuilder.cs/#L15" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

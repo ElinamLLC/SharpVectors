@@ -1,0 +1,1582 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>ResourceSvgConverter | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ResourceSvgConverter | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\resource_converter.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_resource_converter">
+<h1 id="resource-svg-converter---resourcesvgconverter">Resource SVG Converter - ResourceSvgConverter</h1>
+
+<p>The <strong><a class="xref" href="../api/SharpVectors.Converters.ResourceSvgConverter.html">ResourceSvgConverter</a></strong> converter class takes multiple files and directories as input and outputs a
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.resourcedictionary">ResourceDictionary</a>  in XAML format.
+This is useful for vector icons, but required supports in the rendering process to track brushes and pens, and an extension to the
+<strong><a class="xref" href="../api/SharpVectors.Converters.XmlXamlWriter.html">XmlXamlWriter</a></strong> class to format a compact XAML output.
+It is the most recent SharpVector SVG converter and adds extension features that will be supported in the other converters.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Currently, the input is restricted to local or network files and directories.</p>
+<p>The output is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a> or local or network file or one of the following</p>
+<ul>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>: A stream object created by the user.</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a>: A text writer object created by the user.</li>
+<li><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlwriter">XmlWriter</a>: An XML writer object created by the user</li>
+</ul>
+</div>
+<h2 id="resource-options">Resource Options</h2>
+<p>This converter offers extra settings or options in the form of <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></strong> class.</p>
+<p><img src="../images/resource_settings.png" alt="resource_settings"></p>
+<p>The following are the properties exposed by the resource options to customize the output resource dictionary XAML:</p>
+<ul>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceMode">ResourceMode</a></strong>: An enumeration specifying the type of the resource object;
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a>.<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_xaml1" role="tab" aria-controls="tabpanel_1_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">DrawingGroup Resource</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_xaml2" role="tab" aria-controls="tabpanel_1_xaml2" data-tab="xaml2" tabindex="-1">DrawingImage Resource</a>
+</li>
+</ul>
+<section id="tabpanel_1_xaml1" role="tabpanel" data-tab="xaml1">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot; 
+  xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; mc:Ignorable=&quot;po&quot;&gt;
+  &lt;DrawingGroup x:Key=&quot;shapes-rect-01-t&quot; po:Freeze=&quot;True&quot; ClipGeometry=&quot;F0M0,0L480,0L480,360L0,360z&quot;&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+<section id="tabpanel_1_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot; 
+  xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; mc:Ignorable=&quot;po&quot;&gt;
+  &lt;DrawingImage x:Key=&quot;shapes-rect-01-t&quot; po:Freeze=&quot;True&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L480,0L480,360L0,360z&quot;&gt;
+        &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceFreeze.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceFreeze">ResourceFreeze</a></strong>: Makes the freezable resource object unmodifiable and sets its <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.freezable.isfrozen">IsFrozen</a> property to <code>true</code>.
+To freeze a resource object declared in markup, the <code>PresentationOptions:Freeze</code> attribute is used, as shown above as <code>po.Freeze</code>, and the <code>xmlns:po=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/options&quot;</code> namespace is added.
+<div class="NOTE">
+<h5>Note</h5>
+<p>If this property is set to <code>true</code>, it is admisable to set the <code>ResourceAccessType</code> type below to <code>Static</code>.</p>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.IndentSpaces.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_IndentSpaces">IndentSpaces</a></strong>: This specifies the number of spaces used for the indentation of the XAML output. It is honored with the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlreadersettings">XmlReaderSettings</a>. The default is <code>2 spaces</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.NumericPrecision.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_NumericPrecision">NumericPrecision</a></strong>: This specifies numeric precision or number of decimal places for the floating number. The default is <code>4</code>, in complaince to the SVG specifications. Setting this to <code>-1</code> will disable this property.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorNameFormat">ColorNameFormat</a></strong>: This determines the key name of color objects, if both <strong>BindToResources</strong>  and <strong>BindToColors</strong> properties are enabled. The default is <code>Color{0}</code>.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BrushNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BrushNameFormat">BrushNameFormat</a></strong>: This determines the key name of brush objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Brush{0}</code>.
+<div class="NOTE">
+<h5>Note</h5>
+<p>Only solid color brushes are supported and extracted from the drawings.</p>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.PenNameFormat.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_PenNameFormat">PenNameFormat</a></strong>:  This determines the key name of pen or stroke objects, if the <strong>BindToResources</strong> property is enabled. The default is <code>Pen{0}</code></li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToResources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToResources">BindToResources</a></strong>: This determines whether the media basic objects; color, brush and stroke/pen are extracted and the drawing objects bind to them. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_2_xaml1" role="tab" aria-controls="tabpanel_2_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToResources == true</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_2_xaml2" role="tab" aria-controls="tabpanel_2_xaml2" data-tab="xaml2" tabindex="-1">BindToResources == false</a>
+</li>
+</ul>
+<section id="tabpanel_2_xaml1" role="tabpanel" data-tab="xaml1">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+<section id="tabpanel_2_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;#FF000000&quot;&gt;
+          &lt;GeometryDrawing.Pen&gt;
+            &lt;Pen Brush=&quot;#FF008000&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+          &lt;/GeometryDrawing.Pen&gt;
+          &lt;GeometryDrawing.Geometry&gt;
+            &lt;PathGeometry FillRule=&quot;Nonzero&quot; Figures=&quot;M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+          &lt;/GeometryDrawing.Geometry&gt;
+        &lt;/GeometryDrawing&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BindToColors.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindToColors">BindToColors</a></strong>: This determines if the color object of brushes is extracted. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_3_xaml1" role="tab" aria-controls="tabpanel_3_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindToColors == true</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_3_xaml2" role="tab" aria-controls="tabpanel_3_xaml2" data-tab="xaml2" tabindex="-1">BindToColors == false</a>
+</li>
+</ul>
+<section id="tabpanel_3_xaml1" role="tabpanel" data-tab="xaml1">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+<section id="tabpanel_3_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;#FF000000&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;#FF008000&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.BindPenToBrushes.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_BindPenToBrushes">BindPenToBrushes</a></strong>: This determines if solid color brushes of pen/stroke is extracted. The default is <code>true</code>.<div class="tabGroup" id="tabgroup_4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_4_xaml1" role="tab" aria-controls="tabpanel_4_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">BindPenToBrushes == true</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_4_xaml2" role="tab" aria-controls="tabpanel_4_xaml2" data-tab="xaml2" tabindex="-1">BindPenToBrushes == false</a>
+</li>
+</ul>
+<section id="tabpanel_4_xaml1" role="tabpanel" data-tab="xaml1">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+<section id="tabpanel_4_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;#FF008000&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>If <strong>BindToResources</strong> property is set to <code>false</code>, then <strong>BindToColors</strong> and <strong>BindPenToBrushes</strong> values have no effect.</p>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a></strong>: This specifies whether a zero-based numbering is applied to the key names. The default is <code>false</code>.<div class="tabGroup" id="tabgroup_5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_5_xaml1" role="tab" aria-controls="tabpanel_5_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">UseResourceIndex == true</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_5_xaml2" role="tab" aria-controls="tabpanel_5_xaml2" data-tab="xaml2" tabindex="-1">UseResourceIndex == false</a>
+</li>
+</ul>
+<section id="tabpanel_5_xaml1" role="tabpanel" data-tab="xaml1">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color0&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush0&quot; Color=&quot;{DynamicResource Color0}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen0&quot; Brush=&quot;{DynamicResource Brush1}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush0}&quot; Pen=&quot;{DynamicResource Pen0}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+<section id="tabpanel_5_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ColorPalette.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ColorPalette">ColorPalette</a></strong>: This is a dictionary of color to resource key, specifying a predefined resource keys for the colors.<div class="tabGroup" id="tabgroup_6">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_6_csharp" role="tab" aria-controls="tabpanel_6_csharp" data-tab="csharp" tabindex="0" aria-selected="true">Color Palette C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_6_vb" role="tab" aria-controls="tabpanel_6_vb" data-tab="vb" tabindex="-1">Color Palette VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_6_xaml" role="tab" aria-controls="tabpanel_6_xaml" data-tab="xaml" tabindex="-1">XAML Output</a>
+</li>
+</ul>
+<section id="tabpanel_6_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">// Create the resource settings or options
+var resourceSettings = new WpfResourceSettings() {
+    ColorPalette = new Dictionary&lt;Color, string&gt;(WpfDrawingResources.ColorComparer) {
+        { (Color)ColorConverter.ConvertFromString(&quot;#FF000000&quot;), &quot;IconFill&quot; },
+        { (Color)ColorConverter.ConvertFromString(&quot;#FF008000&quot;), &quot;IconBorder&quot; },
+    }
+};
+// Add a directory as SVG source
+resourceSettings.AddSource(svgDir);
+
+// Create the resource converter
+var converter = new ResourceSvgConverter(resourceSettings);
+
+// Perform the conversion to ResourceDictionary XAML
+var xamlText = converter.Convert();
+</code></pre>
+</section>
+<section id="tabpanel_6_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">' Create the resource settings or options
+Dim resourceSettings = New WpfResourceSettings() With {
+    .ColorPalette = New Dictionary(Of Color, String)(WpfDrawingResources.ColorComparer) From {
+        {CType(ColorConverter.ConvertFromString(&quot;#FF000000&quot;), Color), &quot;IconFill&quot;},
+        {CType(ColorConverter.ConvertFromString(&quot;#FF008000&quot;), Color), &quot;IconBorder&quot;}
+    }
+}
+' Add a directory as SVG source
+resourceSettings.AddSource(svgDir)
+
+' Create the resource converter
+Dim converter = New ResourceSvgConverter(resourceSettings)
+
+' Perform the conversion to ResourceDictionary XAML
+Dim xamlText = converter.Convert()
+</code></pre>
+</section>
+<section id="tabpanel_6_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;IconFill&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;IconBorder&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource IconFill}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource IconBorder}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.Sources.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_Sources">Sources</a></strong>: Gets an enumeration of all the SVG sources to be converted to the resource dictionary.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.SourceCount.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_SourceCount">SourceCount</a></strong>: Gets the count of the SVG sources to be converted to the resource dictionary.</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceAccess.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceAccess">ResourceAccess</a></strong>: This specifies the type of the resource access, <strong>DynamicResource</strong> or <strong>StaticResource</strong>, to be applied to the resource objects.<div class="tabGroup" id="tabgroup_7">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_7_xaml1" role="tab" aria-controls="tabpanel_7_xaml1" data-tab="xaml1" tabindex="0" aria-selected="true">ResourceAccessType.Dynamic</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_7_xaml2" role="tab" aria-controls="tabpanel_7_xaml2" data-tab="xaml2" tabindex="-1">ResourceAccessType.Static</a>
+</li>
+</ul>
+<section id="tabpanel_7_xaml1" role="tabpanel" data-tab="xaml1">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{DynamicResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Pen=&quot;{DynamicResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+<section id="tabpanel_7_xaml2" role="tabpanel" data-tab="xaml2" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF000000&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FF008000&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{StaticResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{StaticResource Color2}&quot; /&gt;
+  &lt;Pen x:Key=&quot;Pen1&quot; Brush=&quot;{StaticResource Brush2}&quot; Thickness=&quot;1&quot; StartLineCap=&quot;Flat&quot; EndLineCap=&quot;Flat&quot; LineJoin=&quot;Miter&quot; /&gt;
+  &lt;DrawingImage x:Key=&quot;simple-path&quot;&gt;
+    &lt;DrawingImage.Drawing&gt;
+      &lt;DrawingGroup ClipGeometry=&quot;F0M0,0L110,0L110,110L0,110z&quot;&gt;
+        &lt;GeometryDrawing Brush=&quot;{StaticResource Brush1}&quot; Pen=&quot;{StaticResource Pen1}&quot; 
+        Geometry=&quot;F1M10,30A20,20,0,0,1,50,30A20,20,0,0,1,90,30Q90,60 50,90 10,60 10,30z&quot; /&gt;
+      &lt;/DrawingGroup&gt;
+    &lt;/DrawingImage.Drawing&gt;
+  &lt;/DrawingImage&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+</li>
+<li><strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceResolverType.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_ResourceResolverType">ResourceResolverType</a></strong>: Get a value specifying the current type of the resource object key resolver,
+which is implemented through the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface.
+This applies to the main resource objects; <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawingimage">DrawingImage</a> (and not the color, brush or pen objects).
+It returns <a class="xref" href="../api/SharpVectors.Renderers.ResourceKeyResolverType.html#SharpVectors_Renderers_ResourceKeyResolverType_None">None</a>, if no resource key resolver is attached, in which case the default resolver will be used.</li>
+</ul>
+<h3 id="resourcekeyresolvertype---default">ResourceKeyResolverType - Default</h3>
+<p>For the illustration of the resource key resolvers, we will assume a directory containing the following three SVG files</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img src="../images/about.png" alt=""></th>
+<th style="text-align: center;"><img src="../images/area_chart.png" alt=""></th>
+<th style="text-align: center;"><img src="../images/crystal_oscillator.png" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">about.svg</td>
+<td style="text-align: center;">area_chart.svg</td>
+<td style="text-align: center;">crystal_oscillator.svg</td>
+</tr>
+</tbody>
+</table>
+<p>The following sample code uses the default resource key resolver, or <a class="xref" href="../api/SharpVectors.Renderers.ResourceKeyResolver.html">ResourceKeyResolver</a>, to resolve the keys. If not specified, the keys are
+simply the SVG file names without the file extension.</p>
+<div class="tabGroup" id="tabgroup_8">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_8_csharp" role="tab" aria-controls="tabpanel_8_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_8_vb" role="tab" aria-controls="tabpanel_8_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_8_xaml" role="tab" aria-controls="tabpanel_8_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_8_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_8_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_8_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF2196F3&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FFFFFFFF&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color3&quot;&gt;#FF3F51B5&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color4&quot;&gt;#FF00BCD4&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color5&quot;&gt;#FFFF9800&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color6&quot;&gt;#FF64B5F6&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush3&quot; Color=&quot;{DynamicResource Color3}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush4&quot; Color=&quot;{DynamicResource Color4}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush5&quot; Color=&quot;{DynamicResource Color5}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush6&quot; Color=&quot;{DynamicResource Color6}&quot; /&gt;
+  &lt;DrawingGroup x:Key=&quot;area_chart&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush3}&quot; Geometry=&quot;F1M42,37L42,37 6,37 6,25 16,10 30,17 42,6z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush4}&quot; Geometry=&quot;F1M42,42L42,42 6,42 6,32 16,24 30,26 42,17z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;about&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M37,40L11,40 5,46 5,12C5,8.7,7.7,6,11,6L37,
+         6C40.3,6,43,8.7,43,12L43,34C43,37.3,40.3,40,37,40z&quot; /&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M22,20L26,20 26,31 22,31z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M26,15C26,16.1046,25.1046,17,24,17C22.8954,
+         17,22,16.1046,22,15C22,13.8954,22.8954,13,24,13C25.1046,13,26,13.8954,26,15z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;crystal_oscillator&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,28L29,28 29,32 3,32z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,16L29,16 29,20 3,20z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M43,11L20,11 20,37 43,37C44.1,37,45,36.1,
+        45,35L45,13C45,11.9,44.1,11,43,11z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush6}&quot; Geometry=&quot;F1M20,9L18,9 18,39 20,39C21.1,39,22,38.1,
+        22,37L22,11C22,9.9,21.1,9,20,9z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+
+<p>The default resource key resolver supports simple string substitution template to customize the resource keys with the following two tags</p>
+<ul>
+<li><strong>${name}</strong>: Representing the SVG file name without the extension.</li>
+<li><strong>${number}</strong>: Representing the resource number or index, depending on the value of the <a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.UseResourceIndex.html#SharpVectors_Renderers_Wpf_WpfResourceSettings_UseResourceIndex">UseResourceIndex</a> property.</li>
+</ul>
+<p>For instance, using a key format of <strong>icon_${name}</strong>, an SVG file with the name <code>about.svg</code> will be have a resource key: <strong>icon_about</strong>.</p>
+<p>The following sample code illustrates how the customized resource key format is applied with the default resolver, and the resulting XAML output:</p>
+<div class="tabGroup" id="tabgroup_9">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_9_csharp" role="tab" aria-controls="tabpanel_9_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_9_vb" role="tab" aria-controls="tabpanel_9_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_9_xaml" role="tab" aria-controls="tabpanel_9_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_9_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Initialize the default key resolver and register it
+            var resolver = new ResourceKeyResolver(&quot;icon_${name}&quot;);
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_9_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Initialize the default key resolver and register it
+            Dim resolver = New ResourceKeyResolver(&quot;icon_${name}&quot;)
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_9_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF2196F3&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FFFFFFFF&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color3&quot;&gt;#FF3F51B5&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color4&quot;&gt;#FF00BCD4&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color5&quot;&gt;#FFFF9800&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color6&quot;&gt;#FF64B5F6&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush3&quot; Color=&quot;{DynamicResource Color3}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush4&quot; Color=&quot;{DynamicResource Color4}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush5&quot; Color=&quot;{DynamicResource Color5}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush6&quot; Color=&quot;{DynamicResource Color6}&quot; /&gt;
+  &lt;DrawingGroup x:Key=&quot;icon_area_chart&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush3}&quot; Geometry=&quot;F1M42,37L42,37 6,37 6,25 16,10 30,17 42,6z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush4}&quot; Geometry=&quot;F1M42,42L42,42 6,42 6,32 16,24 30,26 42,17z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;icon_crystal_oscillator&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,28L29,28 29,32 3,32z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,16L29,16 29,20 3,20z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M43,11L20,11 20,37 43,37C44.1,37,45,36.1,
+       45,35L45,13C45,11.9,44.1,11,43,11z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush6}&quot; Geometry=&quot;F1M20,9L18,9 18,39 20,39C21.1,39,22,38.1,22,
+       37L22,11C22,9.9,21.1,9,20,9z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;icon_about&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M37,40L11,40 5,46 5,12C5,8.7,7.7,6,11,6L37,
+       6C40.3,6,43,8.7,43,12L43,34C43,37.3,40.3,40,37,40z&quot; /&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M22,20L26,20 26,31 22,31z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M26,15C26,16.1046,25.1046,17,24,17C22.8954,17,22,
+       16.1046,22,15C22,13.8954,22.8954,13,24,13C25.1046,13,26,13.8954,26,15z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+<h3 id="resourcekeyresolvertype---dictionary">ResourceKeyResolverType - Dictionary</h3>
+<p>For the cases where the resource keys are already defined, you can use the dictionary resolver, or <a class="xref" href="../api/SharpVectors.Renderers.DictionaryKeyResolver.html">DictionaryKeyResolver</a>, which maps the
+SVG file names without the extension to the predefined keys.</p>
+<p>The following sample code uses the dictionary resource key resolver, or <a class="xref" href="../api/SharpVectors.Renderers.DictionaryKeyResolver.html">DictionaryKeyResolver</a>, to resolve the keys of the previous SVG sample files.</p>
+<div class="tabGroup" id="tabgroup_10">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_10_csharp" role="tab" aria-controls="tabpanel_10_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_10_vb" role="tab" aria-controls="tabpanel_10_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_10_xaml" role="tab" aria-controls="tabpanel_10_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_10_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Create a dictionary of SVG file name to predefined names
+            var dictionaryKeys = new Dictionary&lt;string, string&gt;(StringComparer.OrdinalIgnoreCase)
+            {
+                { &quot;about&quot;,              &quot;About&quot; },
+                { &quot;area_chart&quot;,         &quot;AreaChart&quot; },
+                { &quot;crystal_oscillator&quot;, &quot;CrystalOscillator&quot; }
+            };
+            // Initialize the dictionary key resolver and register it
+            var resolver = new DictionaryKeyResolver(dictionaryKeys);
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_10_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System
+Imports System.Collections.Generic
+Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Create a dictionary of SVG file name to predefined names
+            Dim dictionaryKeys = New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase) From {
+                {&quot;about&quot;, &quot;About&quot;},
+                {&quot;area_chart&quot;, &quot;AreaChart&quot;},
+                {&quot;crystal_oscillator&quot;, &quot;CrystalOscillator&quot;}
+            }
+            ' Initialize the dictionary key resolver and register it
+            Dim resolver = New DictionaryKeyResolver(dictionaryKeys)
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_10_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF2196F3&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FFFFFFFF&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color3&quot;&gt;#FF3F51B5&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color4&quot;&gt;#FF00BCD4&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color5&quot;&gt;#FFFF9800&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color6&quot;&gt;#FF64B5F6&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush3&quot; Color=&quot;{DynamicResource Color3}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush4&quot; Color=&quot;{DynamicResource Color4}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush5&quot; Color=&quot;{DynamicResource Color5}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush6&quot; Color=&quot;{DynamicResource Color6}&quot; /&gt;
+  &lt;DrawingGroup x:Key=&quot;CrystalOscillator&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,28L29,28 29,32 3,32z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,16L29,16 29,20 3,20z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M43,11L20,11 20,37 43,37C44.1,37,
+        45,36.1,45,35L45,13C45,11.9,44.1,11,43,11z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush6}&quot; Geometry=&quot;F1M20,9L18,9 18,39 20,39C21.1,39,22,
+        38.1,22,37L22,11C22,9.9,21.1,9,20,9z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;About&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M37,40L11,40 5,46 5,12C5,8.7,7.7,6,
+        11,6L37,6C40.3,6,43,8.7,43,12L43,34C43,37.3,40.3,40,37,40z&quot; /&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M22,20L26,20 26,31 22,31z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M26,15C26,16.1046,25.1046,17,24,17C22.8954,
+	      17,22,16.1046,22,15C22,13.8954,22.8954,13,24,13C25.1046,13,26,13.8954,26,15z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;AreaChart&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush3}&quot; Geometry=&quot;F1M42,37L42,37 6,37 6,25 16,10 30,17 42,6z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush4}&quot; Geometry=&quot;F1M42,42L42,42 6,42 6,32 16,24 30,26 42,17z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+<h3 id="resourcekeyresolvertype---codesnippet">ResourceKeyResolverType - CodeSnippet</h3>
+<p>In applications you need to use a code snippet to implement the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface, we provider the code snippet resolver,
+or <a class="xref" href="../api/SharpVectors.Renderers.CodeSnippetKeyResolver.html">CodeSnippetKeyResolver</a>, which uses @System.CodeDom.Compiler.CodeDomProvider to compile the implementation in memory
+and use it to resolve the keys. This is used to reduce dependencies but limits the lanagauge feature supports to .NET 4.0.</p>
+<p>For the code snippet, the following conditions are required</p>
+<ul>
+<li>The namespace must be <code>SharpVectors.Renderers</code>.</li>
+<li>The class name must be <code>SnippetKeyResolver</code>.</li>
+</ul>
+<p>The following sample code uses the snippet resource key resolver, or <a class="xref" href="../api/SharpVectors.Renderers.CodeSnippetKeyResolver.html">CodeSnippetKeyResolver</a>, to resolve the keys. To reduce the code length
+for the screen, we will assume the snippet is stored in a file, and load it from the file.</p>
+<pre><code class="lang-csharp">using System;
+using System.Xml;
+using System.Windows;
+
+namespace SharpVectors.Renderers {
+    public sealed class SnippetKeyResolver : WpfSettings&lt;SnippetKeyResolver&gt;, IResourceKeyResolver {
+        public SnippetKeyResolver() {
+        }
+
+        public ResourceKeyResolverType ResolverType {
+            get {
+                return ResourceKeyResolverType.Custom;
+            }
+        }
+
+        public bool IsValid {
+            get {
+                return true;
+            }
+        }
+
+        public void BeginResolve() {
+        }
+
+        public void EndResolve() {
+        }
+
+        public override SnippetKeyResolver Clone() {
+            return new SnippetKeyResolver();
+        }
+
+        public override void ReadXml(XmlReader reader) {
+        }
+
+        public override void WriteXml(XmlWriter writer) {
+        }
+
+        public string Resolve(DependencyObject resource, int index, string fileName, string fileSource) {
+            if (index &lt; 0) {
+                throw new ArgumentException(&quot;The specified index is invalid&quot;, &quot;index&quot;);
+            }
+            NotNullNotEmpty(fileName, &quot;fileName&quot;);
+
+            var keyValue = ToLowerCamelCase(fileName.ToUpper());
+            if (!string.IsNullOrWhiteSpace(keyValue) &amp;&amp; keyValue.Length &gt;= 3 &amp;&amp; keyValue.Length &lt; 255) {
+                return keyValue;
+            }
+            return fileName;
+        }
+
+        private static string ToLowerCamelCase(string fileName) {
+            if (string.IsNullOrWhiteSpace(fileName)) {
+                return string.Empty;
+            }
+
+            string camelCaseStr = char.ToLower(fileName[0]).ToString();
+
+            if (fileName.Length &gt; 1) {
+                bool isStartOfWord = false;
+                for (int i = 1; i &lt; fileName.Length; i++) {
+                    char currChar = fileName[i];
+                    if (currChar == '_' || currChar == '-') {
+                        isStartOfWord = true;
+                    } else if (char.IsUpper(currChar)) {
+                        if (isStartOfWord) {
+                            camelCaseStr += currChar;
+                        } else {
+                            camelCaseStr += char.ToLower(currChar);
+                        }
+                        isStartOfWord = false;
+                    } else {
+                        camelCaseStr += currChar;
+                        isStartOfWord = false;
+                    }
+                }
+            }
+            return camelCaseStr;
+        }
+    }
+}
+</code></pre>
+<p>The test code snippet (C# code) will convert the specified SVG file name to the lower camel case naming format as the resource key.</p>
+<div class="tabGroup" id="tabgroup_11">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_11_csharp" role="tab" aria-controls="tabpanel_11_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_11_vb" role="tab" aria-controls="tabpanel_11_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_11_xaml" role="tab" aria-controls="tabpanel_11_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_11_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample(string snippetFile)
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Get the code snippet, here assumed from a file
+            string codeSnippet = string.Empty;
+            using (var reader = new System.IO.StreamReader(snippetFile))
+            {
+                codeSnippet = reader.ReadToEnd();
+            }
+
+            // Initialize the code snippet key resolver and register it
+            var resolver = new CodeSnippetKeyResolver(codeSnippet, &quot;cs&quot;);
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_11_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New(ByVal snippetFile As String)
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Get the code snippet, here assumed from a file
+            Dim codeSnippet = String.Empty
+            Using reader = New StreamReader(snippetFile)
+                codeSnippet = reader.ReadToEnd()
+            End Using
+
+            ' Initialize the code snippet key resolver and register it
+            Dim resolver = New CodeSnippetKeyResolver(codeSnippet, &quot;cs&quot;)
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_11_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF2196F3&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FFFFFFFF&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color3&quot;&gt;#FF3F51B5&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color4&quot;&gt;#FF00BCD4&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color5&quot;&gt;#FFFF9800&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color6&quot;&gt;#FF64B5F6&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush3&quot; Color=&quot;{DynamicResource Color3}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush4&quot; Color=&quot;{DynamicResource Color4}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush5&quot; Color=&quot;{DynamicResource Color5}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush6&quot; Color=&quot;{DynamicResource Color6}&quot; /&gt;
+  &lt;DrawingGroup x:Key=&quot;crystalOscillator&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,28L29,28 29,32 3,32z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,16L29,16 29,20 3,20z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M43,11L20,11 20,37 43,37C44.1,37,
+        45,36.1,45,35L45,13C45,11.9,44.1,11,43,11z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush6}&quot; Geometry=&quot;F1M20,9L18,9 18,39 20,39C21.1,39,22,
+        38.1,22,37L22,11C22,9.9,21.1,9,20,9z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;about&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M37,40L11,40 5,46 5,12C5,8.7,7.7,6,11,
+        6L37,6C40.3,6,43,8.7,43,12L43,34C43,37.3,40.3,40,37,40z&quot; /&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M22,20L26,20 26,31 22,31z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M26,15C26,16.1046,25.1046,17,24,
+	17C22.8954,17,22,16.1046,22,15C22,13.8954,22.8954,13,24,13C25.1046,13,26,13.8954,26,15z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;areaChart&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush3}&quot; Geometry=&quot;F1M42,37L42,37 6,37 6,25 16,10 30,17 42,6z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush4}&quot; Geometry=&quot;F1M42,42L42,42 6,42 6,32 16,24 30,26 42,17z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+<h3 id="resourcekeyresolvertype---custom">ResourceKeyResolverType - Custom</h3>
+<p>You can create a custom resource key resolver by implementing the <a class="xref" href="../api/SharpVectors.Renderers.IResourceKeyResolver.html">IResourceKeyResolver</a> interface.</p>
+<p>The following sample code implements a resource key resolver that will convert the specified SVG file name to the upper camel case naming format as the resource key.</p>
+<pre><code class="lang-cs">using System;
+using System.Xml;
+
+using System.Windows;
+
+using SharpVectors.Renderers;
+
+namespace SharpVectors.Test.Sample {
+    internal sealed class CustomResourceKeyResolver : WpfSettings&lt;CustomResourceKeyResolver&gt;, IResourceKeyResolver {
+        public CustomResourceKeyResolver() {
+        }
+
+        public override CustomResourceKeyResolver Clone() {
+            return new CustomResourceKeyResolver();
+        }
+
+        public override void ReadXml(XmlReader reader) {
+            NotNull(reader, nameof(reader));
+        }
+
+        public override void WriteXml(XmlWriter writer) {
+            NotNull(writer, nameof(writer));
+        }
+
+        public ResourceKeyResolverType ResolverType {
+            get {
+                return ResourceKeyResolverType.Custom;
+            }
+        }
+
+        public bool IsValid {
+            get {
+                return true;
+            }
+        }
+
+        public void BeginResolve() {
+        }
+
+        public void EndResolve() {
+        }
+
+        public string Resolve(DependencyObject resource, int index, string fileName, string fileSource) {
+            if (index &lt; 0) {
+                throw new ArgumentException(&quot;The specified index is invalid&quot;, &quot;index&quot;);
+            }
+            NotNullNotEmpty(fileName, &quot;fileName&quot;);
+
+            var keyValue = ToUpperCamelCase(fileName.ToUpper());
+            if (!string.IsNullOrWhiteSpace(keyValue) &amp;&amp; keyValue.Length &gt;= 3 &amp;&amp; keyValue.Length &lt; 255) {
+                return keyValue;
+            }
+            return fileName;
+        }
+
+        internal static string ToUpperCamelCase(string fileName) {
+            if (string.IsNullOrWhiteSpace(fileName)) {
+                return string.Empty;
+            }
+
+            string camelCaseStr = fileName[0].ToString();
+
+            if (fileName.Length &gt; 1) {
+                bool isStartOfWord = false;
+                for (int i = 1; i &lt; fileName.Length; i++) {
+                    char currChar = fileName[i];
+                    if (currChar == '_' || currChar == '-') {
+                        isStartOfWord = true;
+                    } else if (char.IsUpper(currChar)) {
+                        if (isStartOfWord) {
+                            camelCaseStr += currChar;
+                        } else {
+                            camelCaseStr += char.ToLower(currChar);
+                        }
+                        isStartOfWord = false;
+                    } else {
+                        camelCaseStr += currChar;
+                        isStartOfWord = false;
+                    }
+                }
+            }
+            return camelCaseStr;
+        }
+    }
+}
+</code></pre>
+<p>The following illustrate how to use the custom resource key resolver.</p>
+<div class="tabGroup" id="tabgroup_12">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_12_csharp" role="tab" aria-controls="tabpanel_12_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_12_vb" role="tab" aria-controls="tabpanel_12_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_12_xaml" role="tab" aria-controls="tabpanel_12_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_12_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Windows;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Initialize the custom key resolver and register it
+            var resolver = new CustomResourceKeyResolver();
+            _resourceSettings.RegisterResolver(resolver);
+        }
+
+        public string Convert(string svgDir)
+        {
+            // Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir);
+
+            // Create the resource converter
+            var converter = new ResourceSvgConverter(_resourceSettings);
+
+            // Perform the conversion to ResourceDictionary XAML
+            return converter.Convert();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_12_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Converters
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Initialize the custom key resolver and register it
+            Dim resolver = New CustomResourceKeyResolver()
+            _resourceSettings.RegisterResolver(resolver)
+        End Sub
+
+        Public Function Convert(ByVal svgDir As String) As String
+            ' Add a directory as SVG source
+            _resourceSettings.AddSource(svgDir)
+
+            ' Create the resource converter
+            Dim converter = New ResourceSvgConverter(_resourceSettings)
+
+            ' Perform the conversion to ResourceDictionary XAML
+            Return converter.Convert()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_12_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;ResourceDictionary xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot; 
+  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+  &lt;Color x:Key=&quot;Color1&quot;&gt;#FF2196F3&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color2&quot;&gt;#FFFFFFFF&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color3&quot;&gt;#FF3F51B5&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color4&quot;&gt;#FF00BCD4&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color5&quot;&gt;#FFFF9800&lt;/Color&gt;
+  &lt;Color x:Key=&quot;Color6&quot;&gt;#FF64B5F6&lt;/Color&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush1&quot; Color=&quot;{DynamicResource Color1}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush2&quot; Color=&quot;{DynamicResource Color2}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush3&quot; Color=&quot;{DynamicResource Color3}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush4&quot; Color=&quot;{DynamicResource Color4}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush5&quot; Color=&quot;{DynamicResource Color5}&quot; /&gt;
+  &lt;SolidColorBrush x:Key=&quot;Brush6&quot; Color=&quot;{DynamicResource Color6}&quot; /&gt;
+  &lt;DrawingGroup x:Key=&quot;CrystalOscillator&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,28L29,28 29,32 3,32z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush5}&quot; Geometry=&quot;F0M3,16L29,16 29,20 3,20z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M43,11L20,11 20,37 43,
+      37C44.1,37,45,36.1,45,35L45,13C45,11.9,44.1,11,43,11z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush6}&quot; Geometry=&quot;F1M20,9L18,9 18,39 20,39C21.1,
+      39,22,38.1,22,37L22,11C22,9.9,21.1,9,20,9z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;About&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush1}&quot; Geometry=&quot;F1M37,40L11,40 5,46 5,12C5,8.7,
+      7.7,6,11,6L37,6C40.3,6,43,8.7,43,12L43,34C43,37.3,40.3,40,37,40z&quot; /&gt;
+    &lt;DrawingGroup&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M22,20L26,20 26,31 22,31z&quot; /&gt;
+      &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush2}&quot; Geometry=&quot;F0M26,15C26,16.1046,25.1046,17,24,
+       17C22.8954,17,22,16.1046,22,15C22,13.8954,22.8954,13,24,13C25.1046,13,26,13.8954,26,15z&quot; /&gt;
+    &lt;/DrawingGroup&gt;
+  &lt;/DrawingGroup&gt;
+  &lt;DrawingGroup x:Key=&quot;AreaChart&quot; ClipGeometry=&quot;F0M0,0L48,0L48,48L0,48z&quot;&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush3}&quot; Geometry=&quot;F1M42,37L42,37 6,37 6,25 16,10 30,17 42,6z&quot; /&gt;
+    &lt;GeometryDrawing Brush=&quot;{DynamicResource Brush4}&quot; Geometry=&quot;F1M42,42L42,42 6,42 6,32 16,24 30,26 42,17z&quot; /&gt;
+  &lt;/DrawingGroup&gt;
+&lt;/ResourceDictionary&gt;
+</code></pre>
+</section>
+</div>
+<h2 id="options-xml-serialization">Options XML Serialization</h2>
+<p>The resource settings,  <strong><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a></strong> object can be saved to file in an XML format, or initialized from an XML format file.</p>
+<p>You can, therefore, create a resource dictionary converter options for a project and share with other developers or projects. The following code defines a sample resource dictionary converter
+options and serializes <a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfResourceSettings.html">WpfResourceSettings</a> object to XML.</p>
+<div class="tabGroup" id="tabgroup_13">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_13_csharp" role="tab" aria-controls="tabpanel_13_csharp" data-tab="csharp" tabindex="0" aria-selected="true">C#</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_13_vb" role="tab" aria-controls="tabpanel_13_vb" data-tab="vb" tabindex="-1">VB.NET</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_13_xaml" role="tab" aria-controls="tabpanel_13_xaml" data-tab="xaml" tabindex="-1">XAML</a>
+</li>
+</ul>
+<section id="tabpanel_13_csharp" role="tabpanel" data-tab="csharp">
+
+<pre><code class="lang-csharp">using System.Collections.Generic;
+using System.Windows.Media;
+
+using SharpVectors.Renderers;
+using SharpVectors.Renderers.Wpf;
+
+namespace SharpVectors.Test.Sample
+{
+    public class ResourceSvgConverterSample
+    {
+        private WpfResourceSettings _resourceSettings;
+
+        public ResourceSvgConverterSample()
+        {
+            // Create the resource settings or options
+            _resourceSettings = new WpfResourceSettings();
+            _resourceSettings.ResourceFreeze = false; // Do not freeze
+
+            // Initialize the default key resolver and register it
+            var resolver = new ResourceKeyResolver(&quot;icon_${name}&quot;);
+            _resourceSettings.RegisterResolver(resolver);
+
+            // Add predefined color palette
+            _resourceSettings.ColorPalette = new Dictionary&lt;Color, string&gt;(WpfDrawingResources.ColorComparer)
+            {
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF008000&quot;), &quot;SvgColor01&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF000000&quot;), &quot;SvgColor02&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FFFFFF00&quot;), &quot;SvgColor03&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF0000FF&quot;), &quot;SvgColor04&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF00FF00&quot;), &quot;SvgColor05&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF339966&quot;), &quot;SvgColor06&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FFFF00FF&quot;), &quot;SvgColor07&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FFFFA500&quot;), &quot;SvgColor08&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF007700&quot;), &quot;SvgColor09&quot;},
+                {(Color)ColorConverter.ConvertFromString(&quot;#FF33CC66&quot;), &quot;SvgColor10&quot;}
+            };
+
+            // Add directories as SVG source
+            _resourceSettings.AddSource(@&quot;C:\Abc-Project\Icons1&quot;);
+            _resourceSettings.AddSource(@&quot;C:\Abc-Project\Icons2&quot;);
+        }
+
+        public string Save()
+        {
+            // Serialize the resource settings to XML
+            return _resourceSettings.Save();
+        }
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_13_vb" role="tabpanel" data-tab="vb" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-vb">Imports System.Collections.Generic
+Imports System.Windows.Media
+
+Imports SharpVectors.Renderers
+Imports SharpVectors.Renderers.Wpf
+
+Namespace SharpVectors.Test.Sample
+    Public Class ResourceSvgConverterSample
+        Private _resourceSettings As WpfResourceSettings
+
+        Public Sub New()
+            ' Create the resource settings or options
+            _resourceSettings = New WpfResourceSettings()
+            _resourceSettings.ResourceFreeze = False ' Do not freeze
+
+            ' Initialize the default key resolver and register it
+            Dim resolver = New ResourceKeyResolver(&quot;icon_${name}&quot;)
+            _resourceSettings.RegisterResolver(resolver)
+
+            ' Add predefined color palette
+            _resourceSettings.ColorPalette = New Dictionary(Of Color, String)(WpfDrawingResources.ColorComparer) From {
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF008000&quot;), Color), &quot;SvgColor01&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF000000&quot;), Color), &quot;SvgColor02&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FFFFFF00&quot;), Color), &quot;SvgColor03&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF0000FF&quot;), Color), &quot;SvgColor04&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF00FF00&quot;), Color), &quot;SvgColor05&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF339966&quot;), Color), &quot;SvgColor06&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FFFF00FF&quot;), Color), &quot;SvgColor07&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FFFFA500&quot;), Color), &quot;SvgColor08&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF007700&quot;), Color), &quot;SvgColor09&quot;},
+		    {CType(ColorConverter.ConvertFromString(&quot;#FF33CC66&quot;), Color), &quot;SvgColor10&quot;}
+		}
+
+            ' Add directories as SVG source
+            _resourceSettings.AddSource(&quot;C:\Abc-Project\Icons1&quot;)
+            _resourceSettings.AddSource(&quot;C:\Abc-Project\Icons2&quot;)
+        End Sub
+
+        Public Function Save() As String
+            ' Serialize the resource settings to XML
+            Return _resourceSettings.Save()
+        End Function
+    End Class
+End Namespace
+</code></pre>
+</section>
+<section id="tabpanel_13_xaml" role="tabpanel" data-tab="xaml" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
+&lt;resourceSettings version=&quot;1.0.0&quot;&gt;
+    &lt;properties&gt;
+        &lt;property name=&quot;ResourceFreeze&quot; type=&quot;bool&quot; value=&quot;false&quot; /&gt;
+        &lt;property name=&quot;UseResourceIndex&quot; type=&quot;bool&quot; value=&quot;false&quot; /&gt;
+        &lt;property name=&quot;ResourceMode&quot; type=&quot;enum&quot; value=&quot;Drawing&quot; /&gt;
+        &lt;property name=&quot;ResourceAccess&quot; type=&quot;enum&quot; value=&quot;Dynamic&quot; /&gt;
+        &lt;property name=&quot;IndentSpaces&quot; type=&quot;int&quot; value=&quot;2&quot; /&gt;
+        &lt;property name=&quot;NumericPrecision&quot; type=&quot;int&quot; value=&quot;4&quot; /&gt;
+    &lt;/properties&gt;
+    &lt;naming&gt;
+        &lt;property name=&quot;PenNameFormat&quot; type=&quot;string&quot; value=&quot;Pen{0}&quot; /&gt;
+        &lt;property name=&quot;ColorNameFormat&quot; type=&quot;string&quot; value=&quot;Color{0}&quot; /&gt;
+        &lt;property name=&quot;BrushNameFormat&quot; type=&quot;string&quot; value=&quot;Brush{0}&quot; /&gt;
+        &lt;resolver type=&quot;Default&quot;&gt;
+            &lt;property name=&quot;ResourceNameFormat&quot; type=&quot;string&quot; value=&quot;icon_${name}&quot; /&gt;
+        &lt;/resolver&gt;
+    &lt;/naming&gt;
+    &lt;binding&gt;
+        &lt;property name=&quot;BindToResources&quot; type=&quot;bool&quot; value=&quot;true&quot; /&gt;
+        &lt;property name=&quot;BindPenToBrushes&quot; type=&quot;bool&quot; value=&quot;true&quot; /&gt;
+        &lt;property name=&quot;BindToColors&quot; type=&quot;bool&quot; value=&quot;true&quot; /&gt;
+    &lt;/binding&gt;
+    &lt;palettes&gt;
+        &lt;palette color=&quot;#FF008000&quot; name=&quot;SvgColor01&quot; /&gt;
+        &lt;palette color=&quot;#FF000000&quot; name=&quot;SvgColor02&quot; /&gt;
+        &lt;palette color=&quot;#FFFFFF00&quot; name=&quot;SvgColor03&quot; /&gt;
+        &lt;palette color=&quot;#FF0000FF&quot; name=&quot;SvgColor04&quot; /&gt;
+        &lt;palette color=&quot;#FF00FF00&quot; name=&quot;SvgColor05&quot; /&gt;
+        &lt;palette color=&quot;#FF339966&quot; name=&quot;SvgColor06&quot; /&gt;
+        &lt;palette color=&quot;#FFFF00FF&quot; name=&quot;SvgColor07&quot; /&gt;
+        &lt;palette color=&quot;#FFFFA500&quot; name=&quot;SvgColor08&quot; /&gt;
+        &lt;palette color=&quot;#FF007700&quot; name=&quot;SvgColor09&quot; /&gt;
+        &lt;palette color=&quot;#FF33CC66&quot; name=&quot;SvgColor10&quot; /&gt;
+    &lt;/palettes&gt;
+    &lt;sources&gt;
+        &lt;source&gt;C:/Abc-Project/Icons1&lt;/source&gt;
+        &lt;source&gt;C:/Abc-Project/Icons2&lt;/source&gt;
+    &lt;/sources&gt;
+&lt;/resourceSettings&gt;
+</code></pre>
+</section>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\resource_converter.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

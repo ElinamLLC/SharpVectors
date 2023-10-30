@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SVG Controls | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SVG Controls | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\controls.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_controls">
+<h1 id="svg-controls">SVG Controls</h1>
+
+<p>These are WPF controls for directly viewing the SVG documents in the WPF applications. The class diagrams are shown below:</p>
+<pre><code class="lang-mermaid">classDiagram
+    direction RL
+    class Viewbox
+    class Canvas
+    Canvas &lt;|-- SvgDrawingCanvas
+    Viewbox &lt;|-- SvgViewbox
+    SvgViewbox *-- SvgDrawingCanvas
+    SvgDrawingCanvas &lt;|-- SvgCanvas
+    IUriContext &lt;|-- SvgCanvas
+    IUriContext &lt;|-- SvgViewbox
+    class IUriContext {
+      &lt;&lt;interface&gt;&gt;
+      +Uri BaseUri
+    }
+    class SvgDrawingCanvas{
+      +string AppTitle
+      +bool DesignMode
+      +Rect Bounds
+      +Transform DisplayTransform
+      +Point DisplayOffset
+      +DrawingVisual HostVisual
+      +SvgInteractiveModes InteractiveMode
+      #int VisualChildrenCount
+      +LoadDiagrams(string) void
+      +UnloadDiagrams() void
+      +RenderDiagrams(DrawingGroup) void
+    }
+    class SvgCanvas{
+      +string AppName
+      +Uri Source
+      +Uri UriSource
+      +string SvgSource
+      +Stream StreamSource
+      +bool AutoSize
+      +bool OptimizePath
+      +bool TextAsGeometry
+      +bool IncludeRuntime
+      +CultureInfo CultureInfo
+      +bool IgnoreRootViewbox
+      +bool EnsureViewboxSize
+      +bool EnsureViewboxPosition
+      +DrawingGroup Drawings
+      +FontFamily MessageFontFamily
+      +double MessageFontSize
+      +double MessageOpacity
+      +string MessageText
+      +Brush MessageBackground
+      +Brush MessageFillBrush
+      +Brush MessageStrokeBrush
+      +Load(Uri, bool) bool
+      +Load(string, bool) bool
+      +Load(Stream, bool, bool) bool
+      +LoadAsync(Uri) Task~bool~
+      +LoadAsync(string) Task~bool~
+      +LoadAsync(Stream, bool) Task~bool~
+      +Unload(bool, string) void
+    }
+    class SvgViewbox{
+      +string AppName
+      +Uri Source
+      +Uri UriSource
+      +string SvgSource
+      +Stream StreamSource
+      +bool AutoSize
+      +bool OptimizePath
+      +bool TextAsGeometry
+      +bool IncludeRuntime
+      +CultureInfo CultureInfo
+      +bool IgnoreRootViewbox
+      +bool EnsureViewboxSize
+      +bool EnsureViewboxPosition
+      +DrawingGroup Drawings
+      +FontFamily MessageFontFamily
+      +double MessageFontSize
+      +double MessageOpacity
+      +string MessageText
+      +Brush MessageBackground
+      +Brush MessageFillBrush
+      +Brush MessageStrokeBrush
+      +Load(Uri, bool) bool
+      +Load(string, bool) bool
+      +Load(Stream, bool, bool) bool
+      +LoadAsync(Uri) Task~bool~
+      +LoadAsync(string) Task~bool~
+      +LoadAsync(Stream, bool) Task~bool~
+      +Unload(bool, string) void
+    }
+</code></pre>
+<h2 id="common-drawing-control---svgdrawingcanvas">Common Drawing Control - SvgDrawingCanvas</h2>
+<p>The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html">SvgDrawingCanvas</a> control is a generic canvas that extends the WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.canvas">Canvas</a> control to provide rendering of drawing objects or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.drawinggroup">DrawingGroup</a> created from SVG documents.</p>
+<ul>
+<li>The <strong>SvgDrawingCanvas</strong> is specilized for rendering drawings generated by the SharpVectors, and therefore will not be useful for rendering other WPF drawings.
+The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.RenderDiagrams.html#SharpVectors_Runtime_SvgDrawingCanvas_RenderDiagrams_System_Windows_Media_DrawingGroup_">SvgDrawingCanvas.RenderDiagrams</a> methods takes the WPF drawing generated from the conversion of the SVG documents and render it for viewing.</li>
+<li>The <strong>SvgDrawingCanvas</strong> itself does not handle the processing or conversion of the SVG documents to the WPF drawings. This is generic so that the serialized XAML format of the generated drawings can also be reloaded or deserialized and rendered by the <strong>SvgDrawingCanvas</strong> class.
+The <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.LoadDiagrams.html#SharpVectors_Runtime_SvgDrawingCanvas_LoadDiagrams_System_String_">SvgDrawingCanvas.LoadDiagrams</a> method takes the serialized XAML file, deserialized it to the corresponding WPF drawing and renders it.</li>
+<li>The <a class="xref" href="../api/SharpVectors.Converters.SvgCanvas.html">SvgCanvas</a> and <a class="xref" href="../api/SharpVectors.Converters.SvgViewbox.html">SvgViewbox</a> controls extends and embeds <strong>SvgDrawingCanvas</strong> respectively. These controls handle the conversion of the SVG documents to WPF drawings and uses the <strong>SvgDrawingCanvas</strong> to render.</li>
+<li>Controls deriving from the <strong>SvgDrawingCanvas</strong> class instead of the WPF canvas control will support interactivity when added to future release of the drawing canvas.</li>
+</ul>
+<h2 id="common-drawing-properties">Common Drawing Properties</h2>
+<p>The SVG drawing controls either extending or embedding as child the <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html">SvgDrawingCanvas</a> control have similar properties.
+In this section, we discuss these similar properties for simplification and avoid repeations.</p>
+<h3 id="svg-document-sources">SVG Document Sources</h3>
+<p>These are the SVG document source properties of the SVG controls. The SVG controls provide three properties to be used as SVG document sources as explained below. These are WPF dependency properties and therefore supports data binding.</p>
+<ul>
+<li><strong>UriSource or Source</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uri">Uri</a>) provides access to the SVG documents in the form of local files, assembly resource files (<a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/app-development/pack-uris-in-wpf">Pack URIs</a>) and remote files (supporting HTTP and HTTPS protocols, FTP protocol is not supported).
+The <strong>Source</strong> property is the original name, and may be removed in the future.</li>
+<li><strong>StreamSource</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>) provides SVG documents through .NET stream object, which is a generic view of a sequence of bytes. The allows access to local documents, assembly resource documents, memory documents and network documents or basically any SVG document source to the .NET stream object instance is available.
+<div class="NOTE">
+<h5>Note</h5>
+<p>The SVG controls take ownership of the stream since it is stored as dependency property. Therefore, a copy of the specified stream is created and kept in memory. If you do not desire a copy of the specified stream to be created, use the available load method that provides an option to skip the copy process.</p>
+</div>
+</li>
+<li><strong>SvgSource</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>) provides the SVG documents as plain text. This is provided for cases where the SVG content is desired as part of the XAML content.</li>
+</ul>
+<h3 id="svg-settings-or-options">SVG Settings or Options</h3>
+<p>The SVG controls convert SVG documents to WPF drawings and controls the settings or options (<a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.html">WpfDrawingSettings</a>) used by the conversion process. Therefore, the controls expose the conversion settings or options through properties for customization.
+The current settings or options are shown below:</p>
+<ul>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.OptimizePath.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_OptimizePath">WpfDrawingSettings.OptimizePath</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether the path geometry is optimized using <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.streamgeometry">StreamGeometry</a>.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.TextAsGeometry.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_TextAsGeometry">WpfDrawingSettings.TextAsGeometry</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether the text elements are rendered as path geometry.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.IncludeRuntime.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IncludeRuntime">WpfDrawingSettings.IncludeRuntime</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to include SharpVectors specific markup extensions in the generated WPF objects.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.IgnoreRootViewbox.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_IgnoreRootViewbox">WpfDrawingSettings.IgnoreRootViewbox</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to turn off viewbox at the root of the drawing.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxSize.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxSize">WpfDrawingSettings.EnsureViewboxSize</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to preserve the original viewbox size when saving images.</li>
+<li><a class="xref" href="../api/SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxPosition.html#SharpVectors_Renderers_Wpf_WpfDrawingSettings_EnsureViewboxPosition">WpfDrawingSettings.EnsureViewboxPosition</a> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>) indicates whether to apply a translate transform to the viewbox to ensure it is visible when rendered.</li>
+</ul>
+<h3 id="svg-progress-message-options">SVG Progress Message Options</h3>
+<p>Loading and rendering a large SVG documents requires seconds to few minutes. The SVG controls provide a means to display a progress message to the user to indicate a long process in progress. The text of the progress message and its styling is controlled by the following properties:</p>
+<ul>
+<li><strong>MessageFontFamily</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.fontfamily">FontFamily</a>) specifies the font family used to render the progress message text. The default is <code>Loading...</code>.</li>
+<li><strong>MessageFontSize</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>) specifies the size of the font used to render the progress message text.</li>
+<li><strong>MessageOpacity</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>) specifies the opacity of the progress message.</li>
+<li><strong>MessageText</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>) specifies the text of the progress message.</li>
+<li><strong>MessageBackground</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.brush">Brush</a>) specifies the background brush of the progress message text.</li>
+<li><strong>MessageFillBrush</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.brush">Brush</a>) specifies the fill of the progress message text.</li>
+<li><strong>MessageStrokeBrush</strong> This property (type: <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.media.brush">Brush</a>) specifies the stroke of the progress message text.</li>
+</ul>
+<p>The default progress message text and styling are shown below:</p>
+<p><img src="../images/svgprogress.png" alt="SVG Progress Text"></p>
+<h2 id="canvas-control---svgcanvas">Canvas Control - SvgCanvas</h2>
+<p>The WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.canvas">Canvas</a> defines an area within which you can explicitly position child elements by using coordinates that are relative to the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.canvas">Canvas</a> area.
+The <a class="xref" href="../api/SharpVectors.Converters.SvgCanvas.html">SvgCanvas</a> control is a WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.canvas">Canvas</a> derived control for viewing the SVG files in WPF applications, and allowing you to use all the known features and behavior of the WPF canvas controls.
+In particular, it extends the <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html">SvgDrawingCanvas</a> control and uses it to render any converted SVG drawing.</p>
+<p>The following XAML codes from the <strong>SvgCanvasSample</strong> sample illustrates the uses of the <strong>SvgCanvas</strong> control.</p>
+<pre><code class="lang-xml">&lt;Window x:Class=&quot;SvgCanvasSample.MainWindow&quot;
+    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+    xmlns:svgc=&quot;http://sharpvectors.codeplex.com/svgc/&quot;
+    Title=&quot;SharpVectors: SvgCanvas Sample - C#&quot; Height=&quot;720&quot; Width=&quot;960&quot; 
+        Background=&quot;White&quot; WindowStartupLocation=&quot;CenterScreen&quot; Icon=&quot;SvgCanvasSample.ico&quot;&gt;
+    &lt;DockPanel Margin=&quot;3&quot;&gt;
+        &lt;TabControl SelectedIndex=&quot;0&quot; OverridesDefaultStyle=&quot;False&quot; FontSize=&quot;14&quot; TabStripPlacement=&quot;Left&quot;&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Web File (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 1. Load Web SVG file --&gt;
+                        &lt;svgc:SvgCanvas Source=&quot;https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/rg1024_green_grapes.svg&quot; 
+                              HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Local File 1 (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 2. Load local SVG file --&gt;
+                        &lt;svgc:SvgCanvas Source=&quot;../../Test1.svg&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Local File 2 (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 3. Load local SVG file --&gt;
+                        &lt;svgc:SvgCanvas Source=&quot;../Test2.svg&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Sub-Folder File (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 4. Load local sub-folder SVG file  --&gt;
+                        &lt;svgc:SvgCanvas Source=&quot;..\SubFolder\Test3.svg&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Resource File (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 5. Load Resource SVG file --&gt;
+                        &lt;svgc:SvgCanvas Source=&quot;/Resources/Test.svg&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Web File (Stream)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 6. Load Web SVG file (Stream) --&gt;
+                        &lt;svgc:SvgCanvas x:Name=&quot;webSvgCanvas&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Resource File (Stream)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 7. Load Resource SVG file (Stream) --&gt;
+                        &lt;svgc:SvgCanvas x:Name=&quot;resourceSvgCanvas&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Embedded SVG&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;ScrollViewer CanContentScroll=&quot;False&quot; Background=&quot;White&quot; 
+                           VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Auto&quot;&gt;
+                        &lt;!-- 8. Load local SVG file --&gt;
+                        &lt;svgc:SvgCanvas HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;&gt;
+                            &lt;svgc:SvgCanvas.SvgSource&gt;
+                                &lt;![CDATA[
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;&gt;
+  &lt;circle fill=&quot;#009&quot; r=&quot;45&quot; cx=&quot;50&quot; cy=&quot;50&quot;/&gt;
+  &lt;path d=&quot;M33,26H78A37,37,0,0,1,33,83V57H59V43H33Z&quot; fill=&quot;#FFF&quot;/&gt;
+&lt;/svg&gt;
+                                ]]&gt;
+                            &lt;/svgc:SvgCanvas.SvgSource&gt;
+                        &lt;/svgc:SvgCanvas&gt;
+                    &lt;/ScrollViewer&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+        &lt;/TabControl&gt;
+    &lt;/DockPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>The image of the  <strong>SvgCanvasSample</strong> sample is shown below:</p>
+<p><img src="../images/svgcanvas.png" alt="SvgCanvasSample"></p>
+<h2 id="viewbox-control---svgviewbox">Viewbox Control - SvgViewbox</h2>
+<p>The  WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.viewbox">Viewbox</a> control defines a content decorator that can stretch and scale a single child to fill the available space.
+The <strong>SvgViewbox</strong> control is a WPF <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.controls.viewbox">Viewbox</a> derived control for viewing the SVG files in WPF applications, and allowing you to use all the Viewbox decorator properties.</p>
+<p>The single child control in the <strong>SvgViewbox</strong> control is an instance of the <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html">SvgDrawingCanvas</a> control, which it utitilizes to provide the rendering of the converted SVG documents.</p>
+<p>The following XAML codes from the <strong>SvgViewboxSample</strong> sample illustrates the uses of the <strong>SvgViewbox</strong> control.</p>
+<pre><code class="lang-xml">&lt;Window x:Class=&quot;SvgViewboxSample.MainWindow&quot;
+    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+    xmlns:svgc=&quot;http://sharpvectors.codeplex.com/svgc/&quot;
+    Title=&quot;SharpVectors: SvgViewbox Sample - C#&quot;  Height=&quot;720&quot; Width=&quot;960&quot; 
+        Background=&quot;White&quot; Icon=&quot;SvgViewboxSample.ico&quot; WindowStartupLocation=&quot;CenterScreen&quot;&gt;
+    &lt;DockPanel Margin=&quot;3&quot;&gt;
+        &lt;TabControl SelectedIndex=&quot;0&quot; OverridesDefaultStyle=&quot;False&quot; FontSize=&quot;14&quot; TabStripPlacement=&quot;Left&quot;&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Web File (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 1. Load Web SVG file --&gt;
+                    &lt;svgc:SvgViewbox Source=&quot;https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/rg1024_green_grapes.svg&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Local File 1 (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 2. Load local SVG file --&gt;
+                    &lt;svgc:SvgViewbox Source=&quot;../../Test1.svg&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Local File 2 (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 3. Load local SVG file --&gt;
+                    &lt;svgc:SvgViewbox Source=&quot;../Test2.svg&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Sub-Folder File (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 4. Load local sub-folder SVG file  --&gt;
+                    &lt;svgc:SvgViewbox Source=&quot;..\SubFolder\Test3.svg&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Resource File (Uri)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 5. Load Resource SVG file --&gt;
+                    &lt;svgc:SvgViewbox Source=&quot;/Resources/Test.svg&quot; Stretch=&quot;Uniform&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Web File (Stream)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 6. Load Web SVG file (Stream) --&gt;
+                    &lt;svgc:SvgViewbox x:Name=&quot;webSvgViewbox&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Resource File (Stream)&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 7. Load Resource SVG file (Stream) --&gt;
+                    &lt;svgc:SvgViewbox x:Name=&quot;resourceSvgViewbox&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+            &lt;TabItem&gt;
+                &lt;TabItem.Header&gt;Embedded SVG&lt;/TabItem.Header&gt;
+                &lt;TabItem.Content&gt;
+                    &lt;!-- 8. Load local SVG file --&gt;
+                    &lt;svgc:SvgViewbox x:Name=&quot;embeddedSvgViewbox&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;&gt;
+                        &lt;svgc:SvgViewbox.SvgSource&gt;
+                            &lt;![CDATA[
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;&gt;
+  &lt;circle fill=&quot;#009&quot; r=&quot;45&quot; cx=&quot;50&quot; cy=&quot;50&quot;/&gt;
+  &lt;path d=&quot;M33,26H78A37,37,0,0,1,33,83V57H59V43H33Z&quot; fill=&quot;#FFF&quot;/&gt;
+&lt;/svg&gt;
+                            ]]&gt;
+                        &lt;/svgc:SvgViewbox.SvgSource&gt;
+                    &lt;/svgc:SvgViewbox&gt;
+                &lt;/TabItem.Content&gt;
+            &lt;/TabItem&gt;
+        &lt;/TabControl&gt;
+    &lt;/DockPanel&gt;
+&lt;/Window&gt;
+</code></pre>
+<p>The image of the  <strong>SvgCanvasSample</strong> sample is shown below:</p>
+<p><img src="../images/svgviewbox.png" alt="SvgCanvasSample"></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\controls.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

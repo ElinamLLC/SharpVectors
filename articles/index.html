@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SharpVectors | SharpVectors Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SharpVectors | SharpVectors Documentation ">
+      
+      <link rel="icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="SharpVectors">
+            SharpVectors
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="topic_index">
+<h1 id="overview">Overview</h1>
+
+<p>The SharpVectors is packaged in several .NET assemblies. Here is the complete list of available assemblies to get you started on developing and using the library.</p>
+<ul>
+<li><strong>SharpVectors.Core</strong>: This the core library defining all the required interfaces in the W3C SVG specifications, including the events and the style sheets interfaces. There is no official W3C interfaces defined for the .NET framework (like the Java, JavaScript and IDL interfaces), therefore the interfaces defined in this component are .NET specific, and not compactible in naming standards to the W3C interfaces.</li>
+<li><strong>SharpVectors.Dom</strong>: This is an extension to the .NET Framework implementation of the XML DOM (<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a>) to support the SVG. The .NET <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmldocument">XmlDocument</a> class is extended to support the SVG interfaces defined in the <code>SharpVectors.Core</code>.</li>
+<li><strong>SharpVectors.Css</strong>: This is the implmentation of the style sheets interfaces defined in the <code>SharpVectors.Core</code>, and it is implemented as an extension to the XML DOM of the .NET framework.</li>
+<li><strong>SharpVectors.Model</strong>: This is the main implementation of the SVG DOM and interfaces. In includes the parser of the SVG documents, reducing the SVG file or stream to memory model of .NET objects. Note that this and the above assemblies do not depend on the GDI+ or WPF graphical primitives or objects.</li>
+<li><strong>SharpVectors.Runtime.Wpf</strong>: This is an optional <strong>WPF</strong> library providing SVG object specific information at the runtime. This includes conversion classes to handle <strong>GlyphTypeface.FontUri</strong>, which will otherwise be hard-coded with the full path information that may not work on the user's machine, classes to handle embedded images etc.</li>
+<li><strong>SharpVectors.Rendering.Wpf</strong>: This is <strong>WPF</strong> library, which handles the rendering of the SVG object to the WPF drawing objects.</li>
+<li><strong>SharpVectors.Converters.Wpf</strong>: This is <strong>WPF</strong> library, which uses the <strong>SharpVectors.Rendering.Wpf</strong> library to perform actual conversion for viewing.</li>
+<li><strong>SharpVectors.Rendering.Gdi</strong>: This is <strong>GDI+</strong> library, which handles the rendering of the SVG object to the System.Drawing objects. This is less complete compared with the WPF renderer.</li>
+</ul>
+<p>For the <strong>WPF</strong> components or assemblies, the dependencies are shown in the diagram below:</p>
+<pre><code class="lang-mermaid">graph LR
+    B[SharpVectors.Dom] --&gt; A[SharpVectors.Core]
+    C[SharpVectors.Css] --&gt; A
+    D[SharpVectors.Model] --&gt; A
+    E[SharpVectors.Rendering.Wpf] --&gt; A
+    F[SharpVectors.Converters] --&gt; A
+    E --&gt; G[SharpVectors.Runtime]
+    E --&gt; B
+    E --&gt; C
+    E --&gt; D
+    F --&gt; G
+    F --&gt; E
+    F --&gt; D
+    F --&gt; C
+    F --&gt; B
+    D --&gt; C
+    D --&gt; B
+    C --&gt; B
+</code></pre>
+<p>For the <strong>GDI+</strong> components or assemblies, the dependencies are shown in the diagram below:</p>
+<pre><code class="lang-mermaid">graph LR
+    B[SharpVectors.Dom] --&gt; A[SharpVectors.Core]
+    C[SharpVectors.Css] --&gt; A
+    D[SharpVectors.Model] --&gt; A
+    E[SharpVectors.Rendering.Gdi] --&gt; A
+    E --&gt; B
+    E --&gt; C
+    E --&gt; D
+    D --&gt; C
+    D --&gt; B
+    C --&gt; B
+</code></pre>
+<h2 id="history">History</h2>
+<p>We believe understanding the beginning of this library or its initial goals will make it easy to understand why some features are implemented as it is currently.</p>
+<ul>
+<li>Years ago, Adobe decided to retired the only the most reliable SVG plugin for the Internet Explorer 6+.</li>
+<li>With no clear plans to implement native SVG support in browsers, a company using these features to create an interactive car wiring manual for repairing shops, decided to evaluate other options.</li>
+<li>With only one month to evaluate and present the options, we decided on WPF to take advantage of its flowdocument and animation features, combined with <strong>ClickOnce</strong> deployments.</li>
+<li>We needed to convert the SVG diagrams, but the only commercial option available was not rendering valid outputs, no options for user-defined fonts and it was obfuscated - it cannot be extended for our customized needs.</li>
+<li>Looking for a better solution, we decided to add WPF support to the abandoned SVG library <a href="https://sourceforge.net/projects/svgdomcsharp/">SharpVectorGraphics (aka SVG#)</a>.</li>
+<li>We removed the scripting features (based on depreciated library), and separated the rendering component from the parsing component.</li>
+</ul>
+<p>Now, since the shipped product will dynamically load the flowdocuments with the coverted SVG diagrams in XAML format:</p>
+<ul>
+<li>We provided an independent <strong>SharpVectors.Runtime.Wpf</strong> for viewing the XAML diagrams in the client environment.</li>
+<li>We also provided <a class="xref" href="../api/SharpVectors.Runtime.SvgDrawingCanvas.html">SvgDrawingCanvas</a> to display the diagrams, <a class="xref" href="../api/SharpVectors.Runtime.SvgAnimator.html">SvgAnimator</a> and <a class="xref" href="../api/SharpVectors.Runtime.SvgAnimationLayer.html">SvgAnimationLayer</a> (now modified) for animation.</li>
+<li>We created the <strong>ZAML</strong> format, a G-zip compression of the  <strong>XAML</strong> files just like the  <strong>SVGZ</strong> files, to reduce the download size and improve speed.</li>
+</ul>
+<p>Well, we were disappointed with the results of the evaluation, the speed of <code>WPF 3.5</code> on the expected basic specs PC in the repair shops, could not match the <code>HTML/SVG</code> rendering speed in the browsers.
+We released the updated library on <code>CodePlex</code> for other developers to use - the effort could not be wasted! With the quick adoption by the community, some of the design flaws stayed to avoid breaking changes.</p>
+<ul>
+<li>The <strong>SharpVectors.Converters.Wpf</strong> library was later added due to increased demand for specialized converters and controls.</li>
+</ul>
+<p>In the Version 2.0, we will finally make some breaking changes, including</p>
+<ul>
+<li>The <strong>SharpVectors.Converters.Wpf</strong>, <strong>SharpVectors.Runtime.Wpf</strong> and <strong>SharpVectors.Rendering.Wpf</strong> will be combined.</li>
+<li><strong>SharpVectors.Runtime.Wpf</strong> namespace will be removed.</li>
+<li>.NET 4.0 (and maybe .NET 4.5) supports will be dropped. It makes no sense, since there is no feature change in WPF, but we can take advantage of C# improvements.</li>
+</ul>
+<h2 id="further-information">Further Information</h2>
+<p>For further information, click the documentation links below:</p>
+<ul>
+<li><strong><a class="xref" href="getting_started.html">Getting Started</a></strong>
+<ul>
+<li><a class="xref" href="converters.html">SVG Converters</a></li>
+<li><a class="xref" href="markup_extensions.html">SVG Type Converters or Markup Extensions</a></li>
+<li><a class="xref" href="controls.html">SVG Controls and Viewers</a></li>
+</ul>
+</li>
+<li><strong><a class="xref" href="Samples.html">Samples and Test Applications</a></strong>
+<ul>
+<li><a class="xref" href="Samples.html">WPF Test Sample</a></li>
+<li><a class="xref" href="Samples.html">WPF W3C Test Suite</a></li>
+<li><a class="xref" href="Samples.html">GDI+ Control Test Sample</a></li>
+<li><a class="xref" href="Samples.html">GDI+ Test Viewer Sample</a></li>
+</ul>
+</li>
+<li><strong><a class="xref" href="Applications.html">Applications</a></strong></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ElinamLLC/SharpVectors/blob/master/docfx\articles\index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <div class="d-flex flex-column flex-sm-row justify-content-between pt-1"><p> &copy; 2010 - 2023 Elinam LLC, Toyota City - Japan</p><p>Made with <a href="https://dotnet.github.io/docfx">DocFX</a></p></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
