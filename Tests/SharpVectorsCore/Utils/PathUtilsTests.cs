@@ -28,10 +28,10 @@ namespace SharpVectors.Core.Tests.Utils
 			"net47"
 #elif DOTNET48
 			"net48"
-#elif NET50
-			"net5.0"
 #elif NET60
 			"net6.0"
+#elif NET70
+			"net7.0"
 #endif
 			;
 

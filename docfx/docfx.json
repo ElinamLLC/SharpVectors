@@ -92,7 +92,7 @@
       },
       "_gitUrlPattern": "github"
     },
-    "dest": "../docs",
+    "dest": "_site",
     "exportViewModel": false,
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],

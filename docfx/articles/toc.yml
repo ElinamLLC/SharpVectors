@@ -1,34 +1,42 @@
+- name: Introduction
 - name: Overview
   href: index.md
 - name: Getting Started
   href: getting_started.md
+
+- name: SVG Converters
 - name: Converters
   href: converters.md
-  items:
-  - name: File Converters
-    href: file_converter.md
-  - name: Drawing Converters
-    href: drawing_converter.md
-  - name: Image Converters
-    href: image_converter.md
-  - name: Stream Converters
-    href: stream_converter.md
-  - name: Directory Converters
-    href: directory_converter.md
-  - name: Resource Dictionary Converters
-    href: resource_converter.md
+- name: File Converters
+  href: file_converter.md
+- name: Drawing Converters
+  href: drawing_converter.md
+- name: Image Converters
+  href: image_converter.md
+- name: Stream Converters
+  href: stream_converter.md
+- name: Directory Converters
+  href: directory_converter.md
+- name: Resource Dictionary Converters
+  href: resource_converter.md
+    
+- name: Components and Controls
 - name: Markup Extensions
   href: markup_extensions.md
 - name: Image Controls
   href: image_controls.md
 - name: Controls
   href: controls.md
+    
+- name: Applications and Samples
 - name: Applications
   href: applications.md
 - name: Samples
   href: samples.md
 - name: Test Tools
   href: test_tools.md
+  
+- name: Others
 - name: FAQ
   href: faq.md
 - name: Licenses

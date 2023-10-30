@@ -331,6 +331,7 @@ namespace WpfSvgTestBox
                 {
                     return false;
                 }
+                textEditor.Document.Text = inputText.TrimStart();
 
                 textEditor.Save(_backFilePath);
 
@@ -563,6 +564,7 @@ namespace WpfSvgTestBox
             {
                 return;
             }
+            inputText = inputText.TrimStart();
 
             MemoryStream mStream = new MemoryStream();
             XmlTextWriter writer = new XmlTextWriter(mStream, Encoding.UTF8);

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net40;net45;net46;net47;net48;net5.0;net6.0</TargetFrameworks>
+		<TargetFrameworks>net40;net45;net46;net47;net48;net6.0;net7.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 		<AssemblyName>SharpVectors.Core.Tests</AssemblyName>
 	</PropertyGroup>
@@ -12,8 +12,8 @@
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net48'))">$(DefineConstants);DOTNET48;NETFULL</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('netcore'))">$(DefineConstants);NETCORE</DefineConstants>
-		<DefineConstants Condition="$(TargetFramework.StartsWith('net5'))">$(DefineConstants);NETCORE;NET50</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NET60</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net7'))">$(DefineConstants);NETCORE;NET70</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('netstandard'))">$(DefineConstants);NETSTANDARD</DefineConstants>
 	</PropertyGroup>
 
@@ -23,11 +23,11 @@
 		<PackageReference Include="coverlet.collector" Version="3.1.2" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
 		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
 		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
 	</ItemGroup>
 

@@ -1,0 +1,33 @@
+# A GitHub workflow file for DocFX under .github/workflows/
+name: DocFX
+
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  publish-docs:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Dotnet Setup
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.x
+
+    - run: dotnet tool update -g docfx
+    - run: docfx docfx/docfx.json
+
+    - name: Upload DocFX packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: docfx_site
+        path: ${{ github.workspace }}/docfx/_site
+          
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docfx/_site

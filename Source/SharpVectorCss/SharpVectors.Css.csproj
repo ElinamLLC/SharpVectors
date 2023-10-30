@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net46;net47;net48;netstandard2.1;net6.0;net7.0</TargetFrameworks>
     <AssemblyOriginatorKeyFile>SharpVectors.Css.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>SharpVectors.Dom</RootNamespace>
     <AssemblyName>SharpVectors.Css</AssemblyName>
