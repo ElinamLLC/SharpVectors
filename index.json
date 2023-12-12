@@ -20439,6 +20439,11 @@
     "title": "Method GetPathFigureLength | SharpVectors Documentation",
     "keywords": "Method GetPathFigureLength Namespace SharpVectors.Renderers.Utils Assembly SharpVectors.Rendering.Wpf.dll GetPathFigureLength(PathFigure) public static double GetPathFigureLength(PathFigure pathFigure) Parameters pathFigure PathFigure Returns double"
   },
+  "api/SharpVectors.Renderers.Utils.WpfConvert.GetTransform.html": {
+    "href": "api/SharpVectors.Renderers.Utils.WpfConvert.GetTransform.html",
+    "title": "Method GetTransform | SharpVectors Documentation",
+    "keywords": "Method GetTransform Namespace SharpVectors.Renderers.Utils Assembly SharpVectors.Rendering.Wpf.dll GetTransform(SvgElement, bool) public static Transform GetTransform(SvgElement svgElement, bool _combineTransforms = true) Parameters svgElement SvgElement _combineTransforms bool Returns Transform"
+  },
   "api/SharpVectors.Renderers.Utils.WpfConvert.ToColor.html": {
     "href": "api/SharpVectors.Renderers.Utils.WpfConvert.ToColor.html",
     "title": "Method ToColor | SharpVectors Documentation",
@@ -20462,7 +20467,7 @@
   "api/SharpVectors.Renderers.Utils.WpfConvert.html": {
     "href": "api/SharpVectors.Renderers.Utils.WpfConvert.html",
     "title": "Class WpfConvert | SharpVectors Documentation",
-    "keywords": "Class WpfConvert Namespace SharpVectors.Renderers.Utils Assembly SharpVectors.Rendering.Wpf.dll public static class WpfConvert Inheritance object WpfConvert Inherited Members object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() Methods Equals(Size, Size) GetPathFigureLength(PathFigure) ToColor(ICssColor) A WPF Color representation of the RgbColor. ToPath(SvgRectF) ToPath(EllipseGeometry) ToPath(LineGeometry) ToPath(RectangleGeometry) ToPath(Rect) ToRect(ICssRect) ToRect(ISvgRect) ToRect(SvgRectF) This converts the specified Rect structure to a SvgRectF structure. ToSpreadMethod(SvgSpreadMethod)"
+    "keywords": "Class WpfConvert Namespace SharpVectors.Renderers.Utils Assembly SharpVectors.Rendering.Wpf.dll public static class WpfConvert Inheritance object WpfConvert Inherited Members object.ToString() object.Equals(object) object.Equals(object, object) object.ReferenceEquals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() Methods Equals(Size, Size) GetPathFigureLength(PathFigure) GetTransform(SvgElement, bool) ToColor(ICssColor) A WPF Color representation of the RgbColor. ToPath(SvgRectF) ToPath(EllipseGeometry) ToPath(LineGeometry) ToPath(RectangleGeometry) ToPath(Rect) ToRect(ICssRect) ToRect(ISvgRect) ToRect(SvgRectF) This converts the specified Rect structure to a SvgRectF structure. ToSpreadMethod(SvgSpreadMethod)"
   },
   "api/SharpVectors.Renderers.Utils.WpfSvgWindow.-ctor.html": {
     "href": "api/SharpVectors.Renderers.Utils.WpfSvgWindow.-ctor.html",

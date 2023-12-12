@@ -51794,6 +51794,21 @@ references:
   commentId: Overload:SharpVectors.Renderers.Utils.WpfConvert.GetPathFigureLength
   fullName: SharpVectors.Renderers.Utils.WpfConvert.GetPathFigureLength
   nameWithType: WpfConvert.GetPathFigureLength
+- uid: SharpVectors.Renderers.Utils.WpfConvert.GetTransform(SharpVectors.Dom.Svg.SvgElement,System.Boolean)
+  name: GetTransform(SvgElement, bool)
+  href: api/SharpVectors.Renderers.Utils.WpfConvert.GetTransform.html#SharpVectors_Renderers_Utils_WpfConvert_GetTransform_SharpVectors_Dom_Svg_SvgElement_System_Boolean_
+  commentId: M:SharpVectors.Renderers.Utils.WpfConvert.GetTransform(SharpVectors.Dom.Svg.SvgElement,System.Boolean)
+  name.vb: GetTransform(SvgElement, Boolean)
+  fullName: SharpVectors.Renderers.Utils.WpfConvert.GetTransform(SharpVectors.Dom.Svg.SvgElement, bool)
+  fullName.vb: SharpVectors.Renderers.Utils.WpfConvert.GetTransform(SharpVectors.Dom.Svg.SvgElement, Boolean)
+  nameWithType: WpfConvert.GetTransform(SvgElement, bool)
+  nameWithType.vb: WpfConvert.GetTransform(SvgElement, Boolean)
+- uid: SharpVectors.Renderers.Utils.WpfConvert.GetTransform*
+  name: GetTransform
+  href: api/SharpVectors.Renderers.Utils.WpfConvert.GetTransform.html
+  commentId: Overload:SharpVectors.Renderers.Utils.WpfConvert.GetTransform
+  fullName: SharpVectors.Renderers.Utils.WpfConvert.GetTransform
+  nameWithType: WpfConvert.GetTransform
 - uid: SharpVectors.Renderers.Utils.WpfConvert.ToColor(SharpVectors.Dom.Css.ICssColor)
   name: ToColor(ICssColor)
   href: api/SharpVectors.Renderers.Utils.WpfConvert.ToColor.html#SharpVectors_Renderers_Utils_WpfConvert_ToColor_SharpVectors_Dom_Css_ICssColor_
