@@ -1039,6 +1039,12 @@ namespace SharpVectors.Renderers.Wpf
 
                             if (childPath != null)
                             {
+                                var clipTransform = WpfConvert.GetTransform(element, _combineTransforms);
+                                if (clipTransform != null)
+                                {
+                                    childPath.Transform = clipTransform;
+                                }
+
                                 geomColl.Add(childPath);
                             }
                         }

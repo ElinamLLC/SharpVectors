@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -440,6 +441,110 @@ namespace SharpVectors.Renderers.Utils
             }
 
             return length;
+        }
+
+
+        public static Transform GetTransform(SvgElement svgElement, bool _combineTransforms = true)
+        {
+            ISvgTransformable transElm = svgElement as ISvgTransformable;
+            if (transElm == null)
+            {
+                return null;
+            }
+
+            Transform transformMatrix = null;
+
+            SvgTransformList transformList = (SvgTransformList)transElm.Transform.AnimVal;
+            if (transformList.NumberOfItems != 0 && _combineTransforms == false)
+            {
+                List<Transform> transforms = new List<Transform>();
+
+                for (uint i = 0; i < transformList.NumberOfItems; i++)
+                {
+                    ISvgTransform transform = transformList.GetItem(i);
+                    double[] values = transform.InputValues;
+                    switch (transform.TransformType)
+                    {
+                        case SvgTransformType.Translate:
+                            if (values.Length == 1)
+                            {
+                                transforms.Add(new TranslateTransform(values[0], 0));
+                            }
+                            else if (values.Length == 2)
+                            {
+                                transforms.Add(new TranslateTransform(values[0], values[1]));
+                            }
+                            break;
+                        case SvgTransformType.Rotate:
+                            if (values.Length == 1)
+                            {
+                                transforms.Add(new RotateTransform(values[0]));
+                            }
+                            else if (values.Length == 3)
+                            {
+                                transforms.Add(new RotateTransform(values[0], values[1], values[2]));
+                            }
+                            break;
+                        case SvgTransformType.Scale:
+                            if (values.Length == 1)
+                            {
+                                transforms.Add(new ScaleTransform(values[0], values[0]));
+                            }
+                            else if (values.Length == 2)
+                            {
+                                transforms.Add(new ScaleTransform(values[0], values[1]));
+                            }
+                            break;
+                        case SvgTransformType.SkewX:
+                            if (values.Length == 1)
+                            {
+                                transforms.Add(new SkewTransform(values[0], 0));
+                            }
+                            break;
+                        case SvgTransformType.SkewY:
+                            if (values.Length == 1)
+                            {
+                                transforms.Add(new SkewTransform(0, values[0]));
+                            }
+                            break;
+                        case SvgTransformType.Matrix:
+                            if (values.Length == 6)
+                            {
+                                transforms.Add(new MatrixTransform(values[0],
+                                    values[1], values[2], values[3], values[4], values[5]));
+                            }
+                            break;
+                    }
+                }
+
+                if (transforms.Count == 1)
+                {
+                    transformMatrix = transforms[0];
+
+                }
+                else if (transforms.Count > 1)
+                {
+                    transforms.Reverse();
+
+                    TransformGroup transformGroup = new TransformGroup();
+                    transformGroup.Children = new TransformCollection(transforms);
+                    transformMatrix = transformGroup;
+                }
+
+                return transformMatrix;
+            }
+            SvgMatrix svgMatrix = transformList.TotalMatrix;
+
+            if (svgMatrix.IsIdentity)
+            {
+                return transformMatrix;
+            }
+
+            transformMatrix = new MatrixTransform(Math.Round(svgMatrix.A, 6), Math.Round(svgMatrix.B, 6),
+                Math.Round(svgMatrix.C, 6), Math.Round(svgMatrix.D, 6),
+                Math.Round(svgMatrix.E, 6), Math.Round(svgMatrix.F, 6));
+
+            return transformMatrix;
         }
 
     }

@@ -50,6 +50,7 @@ namespace SharpVectors.Dom.Svg
                 // remove leading and trailing whitespace
                 // NOTE: Need to check if .NET whitespace = SVG (XML) whitespace
                 listString = listString.Trim();
+                listString = listString.Trim(',');
 
                 if (listString.Length > 0)
                 {
