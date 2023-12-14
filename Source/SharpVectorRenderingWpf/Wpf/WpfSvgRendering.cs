@@ -112,12 +112,142 @@ namespace SharpVectors.Renderers.Wpf
                 currentGroup.Children.Add(_drawGroup);
                 context.Push(_drawGroup);
             }
+        }
+
+        public override void Render(WpfDrawingRenderer renderer)
+        {
+            base.Render(renderer);
+
+            var settings = _context.Settings;
+
+            if (_isRoot && _drawGroup.ClipGeometry != null)
+            {
+                if (settings.IgnoreRootViewbox)
+                {
+                    _drawGroup.ClipGeometry = null;
+                }
+                else if (settings.EnsureViewboxSize)
+                {
+                    var bounds = _drawGroup.ClipGeometry.Bounds;                    
+                    if (!bounds.IsEmpty && !bounds.Width.Equals(0) && !bounds.Height.Equals(0))
+                    {
+                        using (var ctx = _drawGroup.Open())
+                        {
+                            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
+                        }
+                    }
+                }
+            }
+
+            // Register this drawing with the Drawing-Document...
+            // ...but not the root SVG object, since there is not point for that
+            if (!_isRoot)
+            {
+                this.Rendered(_drawGroup);
+            }
+        }
+
+        public override void AfterRender(WpfDrawingRenderer renderer)
+        {
+            this.ApplyViewBox(renderer);
+
+            this.OnAfterRender(renderer);
+
+            base.AfterRender(renderer);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected override void Initialize(SvgElement element)
+        {
+            base.Initialize(element);
+
+            _isRoot      = false;
+            _isRecursive = false;
+
+            var svgRootElm = element as SvgSvgElement;
+            if (svgRootElm != null)
+            {
+                _isRoot = svgRootElm.IsOuterMost;
+            }
+
+            _drawGroup = null;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private Transform FitToViewbox(WpfDrawingContext context, ISvgFitToViewBox fitToView, Rect elementBounds)
+        {
+            var spar = (SvgPreserveAspectRatio)fitToView.PreserveAspectRatio.AnimVal;
+
+            SvgRect viewBox = (SvgRect)fitToView.ViewBox.AnimVal;
+            SvgRect rectToFit = new SvgRect(elementBounds.X, elementBounds.Y, elementBounds.Width, elementBounds.Height);
+
+            double[] transformArray = spar.FitToViewBox(viewBox, rectToFit);
+
+            double translateX = Math.Round(transformArray[0], 6);
+            double translateY = Math.Round(transformArray[1], 6);
+            double scaleX = Math.Round(transformArray[2], 6);
+            double scaleY = Math.Round(transformArray[3], 6);
+
+            Transform translateMatrix = null;
+            Transform scaleMatrix = null;
+            if (!translateX.Equals(0.0) || !translateY.Equals(0.0))
+            {
+                translateMatrix = new TranslateTransform(translateX, translateY);
+            }
+            if (!scaleX.Equals(1.0) || !scaleY.Equals(1.0))
+            {
+                scaleMatrix = new ScaleTransform(scaleX, scaleY);
+            }
+
+            if (translateMatrix != null && scaleMatrix != null)
+            {
+                // Create a TransformGroup to contain the transforms
+                // and add the transforms to it.
+                if (translateMatrix.Value.IsIdentity && scaleMatrix.Value.IsIdentity)
+                {
+                    return null;
+                }
+                if (translateMatrix.Value.IsIdentity)
+                {
+                    return scaleMatrix;
+                }
+                if (scaleMatrix.Value.IsIdentity)
+                {
+                    return translateMatrix;
+                }
+                TransformGroup transformGroup = new TransformGroup();
+                transformGroup.Children.Add(scaleMatrix);
+                transformGroup.Children.Add(translateMatrix);
+
+                return transformGroup;
+            }
+            else if (translateMatrix != null)
+            {
+                return translateMatrix;
+            }
+            else if (scaleMatrix != null)
+            {
+                return scaleMatrix;
+            }
+
+            return null;
+        }
+
+        private void ApplyViewBox(WpfDrawingRenderer renderer)
+        {
+            WpfDrawingContext context = renderer.Context;
 
             SvgSvgElement svgElm = (SvgSvgElement)_svgElement;
 
-            double x      = Math.Round(svgElm.X.AnimVal.Value,      4);
-            double y      = Math.Round(svgElm.Y.AnimVal.Value,      4);
-            double width  = Math.Round(svgElm.Width.AnimVal.Value,  4);
+            double x = Math.Round(svgElm.X.AnimVal.Value, 4);
+            double y = Math.Round(svgElm.Y.AnimVal.Value, 4);
+            double width = Math.Round(svgElm.Width.AnimVal.Value, 4);
             double height = Math.Round(svgElm.Height.AnimVal.Value, 4);
 
             if (width < 0 || height < 0)
@@ -127,7 +257,7 @@ namespace SharpVectors.Renderers.Wpf
                 return;
             }
 
-            Rect elmRect  = new Rect(x, y, width, height);
+            Rect elmRect = new Rect(x, y, width, height);
 
             XmlNode parentNode = _svgElement.ParentNode;
 
@@ -135,7 +265,16 @@ namespace SharpVectors.Renderers.Wpf
             ISvgAnimatedPreserveAspectRatio preserveAspectRatio = null;
             if (fitToView != null && fitToView.PreserveAspectRatio != null)
             {
-                preserveAspectRatio = fitToView.PreserveAspectRatio;
+                if (elmRect.Width > 0 && elmRect.Height > 0)
+                {
+                    var fitTransform = this.FitToViewbox(context, fitToView, elmRect);
+                    if (fitTransform != null)
+                    {
+                        _drawGroup.Transform = fitTransform;
+                        return;
+                    }
+                }
+
                 ISvgAnimatedRect animRect = fitToView.ViewBox;
                 if (animRect != null)
                 {
@@ -149,11 +288,11 @@ namespace SharpVectors.Renderers.Wpf
                         }
                     }
                 }
-            } 
+            }
 
             Transform transform = null;
-            var aspectRatio     = (preserveAspectRatio != null) ? preserveAspectRatio.AnimVal : null;
-            if (parentNode.NodeType != XmlNodeType.Document || 
+            var aspectRatio = (preserveAspectRatio != null) ? preserveAspectRatio.AnimVal : null;
+            if (parentNode.NodeType != XmlNodeType.Document ||
                 (aspectRatio != null && aspectRatio.Align == SvgPreserveAspectRatioType.None))
             {
                 FitToViewbox(context, elmRect);
@@ -175,7 +314,7 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
-            {   
+            {
                 // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
                 // dealing with the root SVG element...
                 if (parentNode != null && parentNode.NodeType == XmlNodeType.Document)
@@ -225,70 +364,6 @@ namespace SharpVectors.Renderers.Wpf
                 }
             }
         }
-
-        public override void Render(WpfDrawingRenderer renderer)
-        {
-            base.Render(renderer);
-
-            var settings = _context.Settings;
-
-            if (_isRoot && _drawGroup.ClipGeometry != null)
-            {
-                if (settings.IgnoreRootViewbox)
-                {
-                    _drawGroup.ClipGeometry = null;
-                }
-                else if (settings.EnsureViewboxSize)
-                {
-                    var bounds = _drawGroup.ClipGeometry.Bounds;                    
-                    if (!bounds.IsEmpty && !bounds.Width.Equals(0) && !bounds.Height.Equals(0))
-                    {
-                        using (var ctx = _drawGroup.Open())
-                        {
-                            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
-                        }
-                    }
-                }
-            }
-
-            // Register this drawing with the Drawing-Document...
-            // ...but not the root SVG object, since there is not point for that
-            if (!_isRoot)
-            {
-                this.Rendered(_drawGroup);
-            }
-        }
-
-        public override void AfterRender(WpfDrawingRenderer renderer)
-        {
-            this.OnAfterRender(renderer);
-
-            base.AfterRender(renderer);
-        }
-
-        #endregion
-
-        #region Protected Methods
-
-        protected override void Initialize(SvgElement element)
-        {
-            base.Initialize(element);
-
-            _isRoot      = false;
-            _isRecursive = false;
-
-            var svgRootElm = element as SvgSvgElement;
-            if (svgRootElm != null)
-            {
-                _isRoot = svgRootElm.IsOuterMost;
-            }
-
-            _drawGroup = null;
-        }
-
-        #endregion
-
-        #region Private Methods
 
         private void OnAfterRender(WpfDrawingRenderer renderer)
         {
@@ -393,7 +468,7 @@ namespace SharpVectors.Renderers.Wpf
                         var bounds1 = _drawGroup.Bounds;
                         if (_drawGroup.ClipGeometry != null)
                         {
-                            _drawGroup.ClipGeometry = null;
+                            //_drawGroup.ClipGeometry = null;
                             _drawGroup.Transform = translate;
                         }
                         else

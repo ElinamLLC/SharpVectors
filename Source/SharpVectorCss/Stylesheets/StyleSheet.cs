@@ -173,6 +173,11 @@ namespace SharpVectors.Dom.Stylesheets
             {
                 return;
             }
+            if (!absoluteUri.IsAbsoluteUri)
+            {
+                Debug.WriteLine("Unsupported Operation. The URI is not properly resolved: " + absoluteUri);
+                return;
+            }
 
             IDocument document = (OwnerNode.OwnerDocument) as IDocument;
             if (document == null || !document.CanAccessExternalResources(absoluteUri.ToString()))

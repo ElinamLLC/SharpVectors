@@ -36,9 +36,7 @@ The SharpVectors library targets the following frameworks
 * .NET Framework, Version 4.8
 * .NET Standard, Version 2.1
 * .NET Core, Version 3.1
-* .NET 5.0
-* .NET 6.0
-* .NET 7.0
+* .NET 6.0 ~ .NET 7.0
 
 The library can be used in WPF and Windows Forms applications.
 
