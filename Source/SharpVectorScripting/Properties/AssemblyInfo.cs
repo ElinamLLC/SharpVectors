@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Scripting.Jint")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2023 Elinam LLC, JavaScript-based scripting component for SharpVectors.")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2024 Elinam LLC, JavaScript-based scripting component for SharpVectors.")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 

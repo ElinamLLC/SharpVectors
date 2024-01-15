@@ -13,12 +13,12 @@
     <projectUrl>https://github.com/ElinamLLC/SharpVectors</projectUrl>
     <repository type="git" url="https://github.com/ElinamLLC/SharpVectors" branch="master" />
     <icon>images\SharpVectors64.png</icon>
-    <copyright>Copyright (c) 2010 - 2023 Elinam LLC</copyright>
+    <copyright>Copyright (c) 2010 - 2024 Elinam LLC</copyright>
     <readme>docs\SharpVectors.Wpf.md</readme>
     <releaseNotes>
-        Release 1.8.2
-          * XXE vulnerability fixes, and added URI resolver controls.
-          * Source codes and manual documentation improvements.
+        Release 1.8.3
+          * Root viewbox support improvements.
+          * .NET 8 support.
           * Bug fixes and code improvements.
     </releaseNotes>
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
@@ -29,21 +29,21 @@
       <group targetFramework=".NETFramework4.7" />
       <group targetFramework=".NETFramework4.8" />
       <group targetFramework=".NETCoreApp3.1" />
-      <group targetFramework="net5.0-windows7.0" />
       <group targetFramework="net6.0-windows7.0" />
       <group targetFramework="net7.0-windows7.0" />
+      <group targetFramework="net8.0-windows7.0" />
     </dependencies>  
     <frameworkReferences>
       <group targetFramework=".NETCoreApp3.1">
-        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
-      </group>
-      <group targetFramework="net5.0-windows7.0">
         <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
       </group>
       <group targetFramework="net6.0-windows7.0">
         <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
       </group>
       <group targetFramework="net7.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+      <group targetFramework="net8.0-windows7.0">
         <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
       </group>
       <group targetFramework=".NETFramework4.0" />
@@ -204,31 +204,6 @@
     <file src="..\Output\netcoreapp3.1\SharpVectors.Rendering.Wpf.pdb" target="lib\netcoreapp3.1"/>
     <file src="..\Output\netcoreapp3.1\SharpVectors.Runtime.Wpf.pdb" target="lib\netcoreapp3.1"/>
 
-    <!-- Net5.0-Windows -->
-    <file src="..\Output\net5.0-windows\SharpVectors.Converters.Wpf.dll" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Core.dll" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Css.dll" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Dom.dll" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Model.dll" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Wpf.dll" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Runtime.Wpf.dll" target="lib\net5.0-windows7.0"/>
-
-    <file src="..\Output\net5.0-windows\SharpVectors.Converters.Wpf.xml" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Core.xml" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Css.xml" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Dom.xml" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Model.xml" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Wpf.xml" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Runtime.Wpf.xml" target="lib\net5.0-windows7.0"/>
-
-    <file src="..\Output\net5.0-windows\SharpVectors.Converters.Wpf.pdb" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Core.pdb" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Css.pdb" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Dom.pdb" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Model.pdb" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Rendering.Wpf.pdb" target="lib\net5.0-windows7.0"/>
-    <file src="..\Output\net5.0-windows\SharpVectors.Runtime.Wpf.pdb" target="lib\net5.0-windows7.0"/>
-
     <!-- Net6.0-Windows -->
     <file src="..\Output\net6.0-windows\SharpVectors.Converters.Wpf.dll" target="lib\net6.0-windows7.0"/>
     <file src="..\Output\net6.0-windows\SharpVectors.Core.dll" target="lib\net6.0-windows7.0"/>
@@ -278,6 +253,31 @@
     <file src="..\Output\net7.0-windows\SharpVectors.Model.pdb" target="lib\net7.0-windows7.0"/>
     <file src="..\Output\net7.0-windows\SharpVectors.Rendering.Wpf.pdb" target="lib\net7.0-windows7.0"/>
     <file src="..\Output\net7.0-windows\SharpVectors.Runtime.Wpf.pdb" target="lib\net7.0-windows7.0"/>
+
+    <!-- Net8.0-Windows -->
+    <file src="..\Output\net8.0-windows\SharpVectors.Converters.Wpf.dll" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Core.dll" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Css.dll" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Dom.dll" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Model.dll" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Rendering.Wpf.dll" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Runtime.Wpf.dll" target="lib\net8.0-windows7.0"/>
+
+    <file src="..\Output\net8.0-windows\SharpVectors.Converters.Wpf.xml" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Core.xml" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Css.xml" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Dom.xml" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Model.xml" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Rendering.Wpf.xml" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Runtime.Wpf.xml" target="lib\net8.0-windows7.0"/>
+
+    <file src="..\Output\net8.0-windows\SharpVectors.Converters.Wpf.pdb" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Core.pdb" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Css.pdb" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Dom.pdb" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Model.pdb" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Rendering.Wpf.pdb" target="lib\net8.0-windows7.0"/>
+    <file src="..\Output\net8.0-windows\SharpVectors.Runtime.Wpf.pdb" target="lib\net8.0-windows7.0"/>
 
     <file src="..\Images\SharpVectors64.png" target="images"/>
     <file src="..\License.txt" target="lib"/>

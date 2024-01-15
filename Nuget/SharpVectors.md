@@ -11,7 +11,7 @@ More documentation is available at the [ShapeVectors Github Pages](https://elina
 * A small runtime library to handle font URI, embedded images and others when using the XAML files directly from disk.
 * An optimized XAML output.
 * Interaction with the conversion process (by a visitor pattern) to allow for custom hyper-link implementations, font substitutions etc.
-* Supports .NET Framework 4+, .NET Core, and .NET 6.0
+* Supports .NET Framework 4+, .NET Core and .NET 6.0 ~ .NET 8.0.
 
 ## Main Components
 

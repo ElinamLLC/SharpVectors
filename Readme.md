@@ -36,16 +36,16 @@ The SharpVectors library targets the following frameworks
 * .NET Framework, Version 4.8
 * .NET Standard, Version 2.1
 * .NET Core, Version 3.1
-* .NET 6.0 ~ .NET 7.0
+* .NET 6.0 ~ .NET 8.0
 
 The library can be used in WPF and Windows Forms applications.
 
 ### For the Library
 The library can be downloaded from the following sources
-* **NuGet (WPF Only Package)**, [Version 1.8.2 - SharpVectors.Wpf](https://www.nuget.org/packages/SharpVectors.Wpf/).
-* **NuGet (Full Package - WPF/GDI++)**, [Version 1.8.2 - SharpVectors](https://www.nuget.org/packages/SharpVectors/).
-* **NuGet (Full Package - WPF/GDI++)**, [Version 1.8.2 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/).
-* **GitHub Releases Page**, [Version 1.8.2](https://github.com/ElinamLLC/SharpVectors/releases).
+* **NuGet (WPF Only Package)**, [Version 1.8.3 - SharpVectors.Wpf](https://www.nuget.org/packages/SharpVectors.Wpf/).
+* **NuGet (Full Package - WPF/GDI++)**, [Version 1.8.3 - SharpVectors](https://www.nuget.org/packages/SharpVectors/).
+* **NuGet (Full Package - WPF/GDI++)**, [Version 1.8.3 - SharpVectors.Reloaded](https://www.nuget.org/packages/SharpVectors.Reloaded/).
+* **GitHub Releases Page**, [Version 1.8.3](https://github.com/ElinamLLC/SharpVectors/releases).
 
 > * The **SharpVectors.Reloaded** package is the same as the **SharpVectors**, which is the recommended package if you need the full package.
 > * The **SharpVectors.Reloaded** name was used for the Nuget package at the time the **SharpVectors** package name was not available.

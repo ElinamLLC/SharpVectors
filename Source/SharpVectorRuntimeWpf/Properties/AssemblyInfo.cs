@@ -16,7 +16,7 @@ using System.Windows.Markup;
 #endif
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Runtime")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2023 Elinam LLC, Zooming and Panning Control by Ashley Davis")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2024 Elinam LLC, Zooming and Panning Control by Ashley Davis")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 

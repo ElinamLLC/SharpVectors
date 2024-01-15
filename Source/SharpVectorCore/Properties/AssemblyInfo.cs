@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Core")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2023 Elinam LLC")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2024 Elinam LLC")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
