@@ -120,24 +120,24 @@ namespace SharpVectors.Renderers.Wpf
 
             var settings = _context.Settings;
 
-            if (_isRoot && _drawGroup.ClipGeometry != null)
-            {
-                if (settings.IgnoreRootViewbox)
-                {
-                    _drawGroup.ClipGeometry = null;
-                }
-                else if (settings.EnsureViewboxSize)
-                {
-                    var bounds = _drawGroup.ClipGeometry.Bounds;                    
-                    if (!bounds.IsEmpty && !bounds.Width.Equals(0) && !bounds.Height.Equals(0))
-                    {
-                        using (var ctx = _drawGroup.Open())
-                        {
-                            ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
-                        }
-                    }
-                }
-            }
+            //if (_isRoot && _drawGroup.ClipGeometry != null)
+            //{
+            //    if (settings.IgnoreRootViewbox)
+            //    {
+            //        _drawGroup.ClipGeometry = null;
+            //    }
+            //    else if (settings.EnsureViewboxSize)
+            //    {
+            //        var bounds = _drawGroup.ClipGeometry.Bounds;                    
+            //        if (!bounds.IsEmpty && !bounds.Width.Equals(0) && !bounds.Height.Equals(0))
+            //        {
+            //            using (var ctx = _drawGroup.Open())
+            //            {
+            //                ctx.DrawRectangle(null, new Pen(Brushes.Transparent, 1), bounds);
+            //            }
+            //        }
+            //    }
+            //}
 
             // Register this drawing with the Drawing-Document...
             // ...but not the root SVG object, since there is not point for that
@@ -152,6 +152,42 @@ namespace SharpVectors.Renderers.Wpf
             this.ApplyViewBox(renderer);
 
             this.OnAfterRender(renderer);
+
+            var settings = _context.Settings;
+
+            if (_isRoot)
+            {
+                if (settings.IgnoreRootViewbox)
+                {
+                    if (_drawGroup.ClipGeometry != null)
+                    {
+                        _drawGroup.ClipGeometry = null;
+                    }
+                }
+                else if (settings.EnsureViewboxSize)
+                {
+                    Rect? clipRect = null;
+                    if (_drawGroup.ClipGeometry != null)
+                    {
+                        clipRect = _drawGroup.ClipGeometry.Bounds;                    
+                    }
+                    else
+                    {
+                        clipRect = _drawGroup.Bounds; // this.GetViewbox(renderer);
+                    }
+                    if (clipRect != null)
+                    {
+                        Rect bounds = clipRect.Value;
+                        if (!bounds.IsEmpty && !bounds.Width.Equals(0) && !bounds.Height.Equals(0))
+                        {
+                            var drawing = new GeometryDrawing(null, new Pen(Brushes.Transparent, 1),
+                                new RectangleGeometry(bounds));
+
+                            _drawGroup.Children.Insert(0, drawing);
+                        }
+                    }
+                }
+            }
 
             base.AfterRender(renderer);
         }
@@ -237,6 +273,49 @@ namespace SharpVectors.Renderers.Wpf
             }
 
             return null;
+        }
+
+        private Rect? GetViewbox(WpfDrawingRenderer renderer)
+        {
+            WpfDrawingContext context = renderer.Context;
+
+            SvgSvgElement svgElm = (SvgSvgElement)_svgElement;
+
+            double x = Math.Round(svgElm.X.AnimVal.Value, 4);
+            double y = Math.Round(svgElm.Y.AnimVal.Value, 4);
+            double width = Math.Round(svgElm.Width.AnimVal.Value, 4);
+            double height = Math.Round(svgElm.Height.AnimVal.Value, 4);
+
+            if (width < 0 || height < 0)
+            {
+                // For invalid dimension, prevent the drawing of the children...
+                _isRecursive = true;
+                return null;
+            }
+
+            Rect elmRect = new Rect(x, y, width, height);
+
+            XmlNode parentNode = _svgElement.ParentNode;
+
+            ISvgFitToViewBox fitToView = svgElm as ISvgFitToViewBox;
+            if (fitToView != null && fitToView.PreserveAspectRatio != null)
+            {
+                ISvgAnimatedRect animRect = fitToView.ViewBox;
+                if (animRect != null)
+                {
+                    ISvgRect viewRect = animRect.AnimVal;
+                    if (viewRect != null)
+                    {
+                        Rect wpfViewRect = WpfConvert.ToRect(viewRect);
+                        if (!wpfViewRect.IsEmpty && wpfViewRect.Width > 0 && wpfViewRect.Height > 0)
+                        {
+                            elmRect = wpfViewRect;
+                        }
+                    }
+                }
+            }
+
+            return elmRect;
         }
 
         private void ApplyViewBox(WpfDrawingRenderer renderer)
