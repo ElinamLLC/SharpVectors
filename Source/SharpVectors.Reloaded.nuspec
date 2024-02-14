@@ -16,10 +16,8 @@
     <copyright>Copyright (c) 2010 - 2024 Elinam LLC</copyright>
     <readme>docs\SharpVectors.Reloaded.md</readme>
     <releaseNotes>
-        Release 1.8.3
-          * Root viewbox support improvements.
-          * .NET 8 support.
-          * Bug fixes and code improvements.
+        Release 1.8.4
+          * Reactivated the EnsureViewboxSize support.
     </releaseNotes>
     <tags>svg .net wpf svg2xaml svg2wpf xaml</tags>
     <dependencies>
