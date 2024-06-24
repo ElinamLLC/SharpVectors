@@ -7,9 +7,14 @@ namespace SharpVectors.Dom.Css
         public CssPrimitiveColorValue(int color, bool readOnly)
             : base(color.ToString(CssNumber.Format), readOnly)
         {
-            if (color < 0)
+            if (color <= 0)
             {
                 SetFloatValue(0);
+            }
+            else if (color > 0 && color <= 1)
+            {
+                color = (int)(255 * color);
+                SetFloatValue(color);
             }
             else if (color > 255)
             {
@@ -49,9 +54,13 @@ namespace SharpVectors.Dom.Css
 
             }
             var color = double.Parse(cssText, CssNumber.Format);
-            if (color < 0)
+            if (color <= 0)
             {
                 color = 0;
+            }
+            else if (color > 0 && color <= 1)
+            {
+                color = (int)(255 * color);
             }
             else if (color > 255)
             {
