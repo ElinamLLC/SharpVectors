@@ -565,7 +565,7 @@ namespace SharpVectors.Renderers.Wpf
                     }
                 }
 
-                Rect bounds = new Rect(0, 0, 1, 1);
+                //Rect bounds = new Rect(0, 0, 1, 1);
                 //Rect destRect = GetMaskDestRect(maskElement, bounds);
 
                 //destRect = bounds;
