@@ -32,6 +32,8 @@ namespace SharpVectors.Core.Tests.Utils
 			"net6.0"
 #elif NET70
 			"net7.0"
+#elif NET80
+			"net8.0"
 #endif
 			;
 
@@ -119,7 +121,7 @@ namespace SharpVectors.Core.Tests.Utils
 		}
 
 		private string CombineInternal(params string[] paths) =>
-			(string)_combineInternal.Invoke(null, new object[] { "", paths });
+			_combineInternal.Invoke(null, new object[] { "", paths }) as string;
 
 		private string GetAssemblyPathInternal(Assembly assembly) =>
 			(string)_getAssemblyPathInternal.Invoke(null, new object[] { assembly, "" });

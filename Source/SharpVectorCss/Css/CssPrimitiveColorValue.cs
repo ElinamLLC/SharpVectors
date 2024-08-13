@@ -11,7 +11,7 @@ namespace SharpVectors.Dom.Css
             {
                 SetFloatValue(0);
             }
-            else if (color > 0 && color <= 1)
+            else if (color > 0 && color < 1)
             {
                 color = (int)(255 * color);
                 SetFloatValue(color);
@@ -58,7 +58,7 @@ namespace SharpVectors.Dom.Css
             {
                 color = 0;
             }
-            else if (color > 0 && color <= 1)
+            else if (color > 0 && color < 1)
             {
                 color = (int)(255 * color);
             }
