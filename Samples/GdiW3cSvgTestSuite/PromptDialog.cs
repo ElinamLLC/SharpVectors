@@ -7,11 +7,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Net.NetworkInformation;
-#if DOTNET40
-using Ionic.Zip;
-#else
 using System.Net.Http;
-#endif
 
 using FolderBrowserDialog = ShellFileDialogs.FolderBrowserDialog;
 
@@ -94,50 +90,6 @@ namespace GdiW3cSvgTestSuite
             btnCancel.Focus();
         }
 
-#if DOTNET40
-        private void OnDownloadClicked(object sender, EventArgs e)
-        {
-            var dlg = new LoadingAdorner();
-            dlg.Owner = this;
-            dlg.StartPosition = FormStartPosition.Manual;
-            dlg.Location = new Point(this.Location.X + (this.Width - dlg.Width) / 2, 
-                this.Location.Y + (this.Height - dlg.Height) / 2);
-            dlg.Show(this);
-
-            string url = _optionSettings.WebSuitePath;
-
-            _downloadeFilePath = Path.Combine(_optionSettings.LocalSuitePath, "FullTestSuite.zip");
-            if (File.Exists(_downloadeFilePath))
-            {
-                File.Delete(_downloadeFilePath);
-            }
-
-            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; //TLS 1.2
-            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)768; //TLS 1.1
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFileCompleted += delegate(object other, AsyncCompletedEventArgs args) {
-                    bool result = !args.Cancelled;
-                    if (!result)
-                    {
-                        return;
-                    }
-                    using (ZipFile zip = ZipFile.Read(_downloadeFilePath))
-                    {
-                        zip.ExtractAll(_optionSettings.LocalSuitePath);
-                    }
-
-                    dlg.Close();
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                };
-                client.DownloadFileAsync(new Uri(url), _downloadeFilePath);
-            }
-        }
-#else
         private async void OnDownloadClicked(object sender, EventArgs e)
         {
             var dlg = new LoadingAdorner();
@@ -176,7 +128,6 @@ namespace GdiW3cSvgTestSuite
                 }
             }
         }
-#endif
 
         private void OnSvgSuitePathTextChanged(object sender, EventArgs e)
         {

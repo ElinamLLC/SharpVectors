@@ -4,11 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Net.NetworkInformation;
-#if DOTNET40
-using Ionic.Zip;
-#else
 using System.Net.Http;
-#endif
 
 using System.Windows;
 using System.Windows.Interop;
@@ -92,43 +88,6 @@ namespace WpfW3cSvgTestSuite
             OptionSettings.OpenFolderAndSelectItem(filePath, null);
         }
 
-#if DOTNET40
-        private void OnDownloadClicked(object sender, RoutedEventArgs e)
-        {
-            LoadingAdorner.IsAdornerVisible = true;
-
-            string url = _optionSettings.WebSuitePath;
-
-            _downloadeFilePath = Path.Combine(_optionSettings.LocalSuitePath, "FullTestSuite.zip");
-            if (File.Exists(_downloadeFilePath))
-            {
-                File.Delete(_downloadeFilePath);
-            }
-
-            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; //TLS 1.2
-            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)768; //TLS 1.1
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFileCompleted += delegate(object other, AsyncCompletedEventArgs args) {
-                    bool result = !args.Cancelled;
-                    if (!result)
-                    {
-                        return;
-                    }
-                    using (ZipFile zip = ZipFile.Read(_downloadeFilePath))
-                    {
-                        zip.ExtractAll(_optionSettings.LocalSuitePath);
-                    }
-
-                    this.DialogResult = true;
-                    this.Close();
-                };
-                client.DownloadFileAsync(new Uri(url), _downloadeFilePath);
-            }
-        }
-#else
         private async void OnDownloadClicked(object sender, RoutedEventArgs e)
         {
             LoadingAdorner.IsAdornerVisible = true;
@@ -160,7 +119,6 @@ namespace WpfW3cSvgTestSuite
                 }
             }
         }
-#endif
 
         private void OnCancelClicked(object sender, RoutedEventArgs e)
         {

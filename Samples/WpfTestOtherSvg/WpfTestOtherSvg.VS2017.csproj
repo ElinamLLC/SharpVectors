@@ -23,7 +23,6 @@
     <OutputPath>Output\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">$(DefineConstants);DOTNET46;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
@@ -43,23 +42,6 @@
     <Reference Include="System.Printing" />
     <Reference Include="System.Xaml" />
   </ItemGroup> 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
-    <Reference Include="Accessibility" />
-    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
-    <PackageReference Include="DotNetZip" Version="1.13.8" />
-    <Reference Include="SharpVectors.ShellFileDialogs">
-      <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Notifications.Wpf">
-      <HintPath>..\..\Libraries\net40\SharpVectors.Notifications.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="WebViews.Core">
-      <HintPath>..\..\Libraries\net40\WebViews.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="WebViews.Wpf">
-      <HintPath>..\..\Libraries\net40\WebViews.Wpf.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
     <Reference Include="Accessibility" />
     <Reference Include="System.Net.Http" />

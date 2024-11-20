@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;net46;net47;net48;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net45;net46;net47;net48;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>App.ico</ApplicationIcon>
@@ -10,8 +10,6 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <RootNamespace>WpfW3cSvgTestSuite</RootNamespace>
     <AssemblyName>WpfW3cSvgTestSuite</AssemblyName>
-    <AppConfig Condition="'$(TargetFramework)' == 'net40'">App.net40.config</AppConfig>
-    <AutoUnifyAssemblyReferences Condition="'$(TargetFramework)' == 'net40'">false</AutoUnifyAssemblyReferences>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -24,7 +22,6 @@
     <OutputPath>Output\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants Condition=" '$(TargetFramework)' == 'net40' ">$(DefineConstants);DOTNET40;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net45'))">$(DefineConstants);DOTNET45;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net46'))">$(DefineConstants);DOTNET46;NETFULL</DefineConstants>
     <DefineConstants Condition="$(TargetFramework.StartsWith('net47'))">$(DefineConstants);DOTNET47;NETFULL</DefineConstants>
@@ -35,17 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.0.1" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
-    <Reference Include="ReachFramework" />
-    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
-    <PackageReference Include="DotNetZip" Version="1.13.8" />
-    <Reference Include="SharpVectors.ShellFileDialogs">
-      <HintPath>..\..\Libraries\net40\SharpVectors.ShellFileDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Notifications.Wpf">
-      <HintPath>..\..\Libraries\net40\SharpVectors.Notifications.Wpf.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
     <Reference Include="ReachFramework" />
