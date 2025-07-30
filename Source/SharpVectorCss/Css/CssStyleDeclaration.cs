@@ -1,7 +1,8 @@
 using System;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SharpVectors.Dom.Css
@@ -354,9 +355,41 @@ namespace SharpVectors.Dom.Css
                                 }
                             }
                         }
-                        else
+                        else if (cssText.StartsWith("src:url"))
                         {
+                            int dataIndex = cssText.IndexOf("data:", StringComparison.OrdinalIgnoreCase);
+                            var dataUrl = cssText.Substring(dataIndex + "data:".Length);
+                            int foundAt = dataUrl.IndexOf(")", StringComparison.Ordinal);
 
+                            dataUrl = dataUrl.Substring(0, foundAt).Trim(quotes);
+
+                            // Split by ',' to separate mediatype/base64 from data
+                            int commaIndex = dataUrl.IndexOf(',');
+                            if (commaIndex != -1)
+                            {
+                                string metaPart = dataUrl.Substring(0, commaIndex);
+                                string base64Data = dataUrl.Substring(commaIndex + 1);
+
+                                // Split metaPart by ';' to get mediatype and optional base64 indicator
+                                string[] metaParts = metaPart.Split(';');
+                                if (metaParts.Contains("base64", StringComparer.OrdinalIgnoreCase))
+                                {
+                                    string mimeUrl = metaParts[0];
+                                    string nameUrl = "src";
+                                    string encodingUrl = "base64";
+                                    if (!_styles.ContainsKey(UrlName) && foundAt > 0)
+                                    {
+                                        _styles.Add(UrlName, new CssStyleBlock(UrlName, nameUrl, string.Empty, _origin));
+                                        _styles.Add(UrlMime, new CssStyleBlock(UrlMime, mimeUrl, string.Empty, _origin));
+                                        _styles.Add(UrlData, new CssStyleBlock(UrlData, base64Data.Trim(quotes), string.Empty, _origin));
+                                        _styles.Add(UrlEncoding, new CssStyleBlock(UrlEncoding, encodingUrl, string.Empty, _origin));
+                                    }
+
+                                    foundAt = cssText.IndexOf(")", StringComparison.Ordinal);
+                                    cssText = cssText.Substring(foundAt + 1).Trim();
+                                    match = _styleRegex.Match(cssText);
+                                }
+                            } 
                         }
                     }
                 }
