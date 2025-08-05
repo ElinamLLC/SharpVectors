@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 using SharpVectors.Runtime;
 using SharpVectors.Dom.Svg;
@@ -184,6 +185,13 @@ namespace SharpVectors.Renderers.Wpf
             _context = new WpfDrawingContext(true, _settings);
 
             _context.Initialize(null, _fontFamilyVisitor, _imageVisitor);
+            if (!WpfRenderingCache.IsInitialized)
+            {
+                WpfRenderingCache.Initialize(_settings.CacheInactivityPeriod,
+                    _settings.CacheCleanupInterval,
+                    Dispatcher.CurrentDispatcher // Pass the UI Dispatcher
+                 );
+            }
 
             _context.BeginDrawing(_drawingDocument);
 
@@ -225,6 +233,13 @@ namespace SharpVectors.Renderers.Wpf
                 _context = new WpfDrawingContext(true, _settings);
 
                 _context.Initialize(null, _fontFamilyVisitor, _imageVisitor);
+                if (!WpfRenderingCache.IsInitialized)
+                {
+                    WpfRenderingCache.Initialize(_settings.CacheInactivityPeriod,
+                        _settings.CacheCleanupInterval,
+                        Dispatcher.CurrentDispatcher // Pass the UI Dispatcher
+                     );
+                }
             }
             else
             {
@@ -250,6 +265,13 @@ namespace SharpVectors.Renderers.Wpf
                 _context = new WpfDrawingContext(true, _settings);
 
                 _context.Initialize(null, _fontFamilyVisitor, _imageVisitor);
+                if (!WpfRenderingCache.IsInitialized)
+                {
+                    WpfRenderingCache.Initialize(_settings.CacheInactivityPeriod,
+                        _settings.CacheCleanupInterval,
+                        Dispatcher.CurrentDispatcher // Pass the UI Dispatcher
+                     );
+                }
             }
             else
             {
@@ -286,6 +308,13 @@ namespace SharpVectors.Renderers.Wpf
             _context = new WpfDrawingContext(_isEmbedded, _settings);
 
             _context.Initialize(_linkVisitor, _fontFamilyVisitor, _imageVisitor);
+            if (!WpfRenderingCache.IsInitialized)
+            {
+                WpfRenderingCache.Initialize(_settings.CacheInactivityPeriod,
+                    _settings.CacheCleanupInterval,
+                    Dispatcher.CurrentDispatcher // Pass the UI Dispatcher
+                 );
+            }
 
             if (!_isEmbedded)
             {

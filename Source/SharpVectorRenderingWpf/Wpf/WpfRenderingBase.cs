@@ -64,7 +64,7 @@ namespace SharpVectors.Renderers.Wpf
             get {
                 return _isReady;
             }
-            protected set {
+            protected internal set {
                 _isReady = value;
             }
         }
@@ -179,6 +179,15 @@ namespace SharpVectors.Renderers.Wpf
 
                 _context.RegisterDrawing(_elementId, _uniqueId, drawing);
             }
+        }
+
+        #endregion
+
+        #region Internal Methods
+
+        internal void InternalInitialize(SvgElement element)
+        {
+            this.Initialize(element);
         }
 
         #endregion

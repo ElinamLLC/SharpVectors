@@ -19,7 +19,7 @@ namespace SharpVectors.Renderers.Wpf
 
         private static Regex _reUrl  = new Regex(@"^url\((?<uri>.+)\)$", RegexOptions.Compiled);
         private static object _synch = new object();
-        private static IDictionary<string, WpfRendering> _cacheRendering;
+        //private static IDictionary<string, WpfRendering> _cacheRendering;
 
         private Geometry _clipGeometry;
         private Transform _transformMatrix;
@@ -153,45 +153,53 @@ namespace SharpVectors.Renderers.Wpf
 
         public static WpfRendering Create(ISvgElement element)
         {
-            lock(_synch)
+            lock (_synch)
             {
-                if (element == null)
-                {
-                    return null;
-                }
-                if (_cacheRendering == null)
-                {
-                    _cacheRendering = new Dictionary<string, WpfRendering>(StringComparer.Ordinal);
-                }
-                SvgElement svgElement = (SvgElement)element;
-                string localName = svgElement.LocalName;
-                if (!string.IsNullOrWhiteSpace(localName))
-                {
-                    if (_cacheRendering.ContainsKey(localName))
-                    {
-                        var wpfRendering = _cacheRendering[localName];
-                        if (wpfRendering.IsReady)
-                        {
-                            wpfRendering.Initialize(svgElement);
-
-                            wpfRendering.IsReady = false;
-                            return wpfRendering;
-                        }
-                    }
-                    else
-                    {
-                        var wpfRendering = CreateRendering(svgElement);
-                        _cacheRendering.Add(localName, wpfRendering);
-
-                        wpfRendering.IsReady = false;
-                        return wpfRendering;
-                    }
-                }
-                return CreateRendering(svgElement);
+                return WpfRenderingCache.Create(element);
             }
         }
 
-        private static WpfRendering CreateRendering(SvgElement svgElement)
+        //public static WpfRendering CreateOld(ISvgElement element)
+        //{
+        //    lock(_synch)
+        //    {
+        //        if (element == null)
+        //        {
+        //            return null;
+        //        }
+        //        if (_cacheRendering == null)
+        //        {
+        //            _cacheRendering = new Dictionary<string, WpfRendering>(StringComparer.Ordinal);
+        //        }
+        //        SvgElement svgElement = (SvgElement)element;
+        //        string localName = svgElement.LocalName;
+        //        if (!string.IsNullOrWhiteSpace(localName))
+        //        {
+        //            if (_cacheRendering.ContainsKey(localName))
+        //            {
+        //                var wpfRendering = _cacheRendering[localName];
+        //                if (wpfRendering.IsReady)
+        //                {
+        //                    wpfRendering.Initialize(svgElement);
+
+        //                    wpfRendering.IsReady = false;
+        //                    return wpfRendering;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                var wpfRendering = CreateRendering(svgElement);
+        //                _cacheRendering.Add(localName, wpfRendering);
+
+        //                wpfRendering.IsReady = false;
+        //                return wpfRendering;
+        //            }
+        //        }
+        //        return CreateRendering(svgElement);
+        //    }
+        //}
+
+        internal static WpfRendering CreateRendering(SvgElement svgElement)
         {
             SvgRenderingHint hint = svgElement.RenderingHint;
             // For the shapes and text contents...

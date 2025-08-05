@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
@@ -78,12 +79,27 @@ namespace WpfTestThreadSafety
 
         private ObservableCollection<ImageData> _imageList;
 
+        /// <summary>
+        /// The interval at which the cache cleanup process runs.
+        /// </summary>
+        private TimeSpan _cacheCleanupInterval;
+        /// <summary>
+        /// The duration after which an item is considered inactive and eligible for removal.
+        /// </summary>
+        private TimeSpan _cacheInactivityPeriod;
+
         public MainWindow()
         {
             InitializeComponent();
 
             _imageList = new ObservableCollection<ImageData>();
             this.DataContext = this;
+
+            _cacheCleanupInterval = TimeSpan.FromMinutes(1);
+            _cacheInactivityPeriod = TimeSpan.FromMinutes(5);
+
+            this.Loaded += OnWindowLoaded;
+            this.Closed += OnWindowClosed;
         }
 
         public ObservableCollection<ImageData> ImageList
@@ -96,12 +112,14 @@ namespace WpfTestThreadSafety
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             this.SetValidSvgDir();
-
+            WpfRenderingCache.Initialize(_cacheInactivityPeriod, _cacheCleanupInterval,
+                Dispatcher.CurrentDispatcher);
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
         {
-
+            // Explicitly call the library's shutdown method
+            WpfRenderingCache.Shutdown();
         }
 
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -364,6 +382,8 @@ namespace WpfTestThreadSafety
 
             btnStart.IsEnabled = true;
             chkVerbose.IsEnabled = true;
+
+            WpfRenderingCache.ClearCache();
         }
     }
 }

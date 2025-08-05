@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml;
 using System.Linq;
+using System.Threading;
 using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
@@ -113,6 +114,15 @@ namespace SharpVectors.Renderers.Wpf
         private ExternalResourcesAccessModes _resourcesAccessMode;
         private bool _canUseBitmap = true;
 
+        /// <summary>
+        /// The interval at which the cache cleanup process runs.
+        /// </summary>
+        private TimeSpan _cacheCleanupInterval; 
+        /// <summary>
+        /// The duration after which an item is considered inactive and eligible for removal.
+        /// </summary>
+        private TimeSpan _cacheInactivityPeriod;
+
         #endregion
 
         #region Constructor and Destructor
@@ -151,6 +161,9 @@ namespace SharpVectors.Renderers.Wpf
             _dpiScale              = DpiUtilities.GetSystemScale();
             _resourcesAccessMode   = ExternalResourcesAccessModes.Allow;
             _canUseBitmap          = true;
+
+            _cacheCleanupInterval = TimeSpan.FromMinutes(1);
+            _cacheInactivityPeriod = TimeSpan.FromMinutes(5);
         }
 
         /// <summary>
@@ -910,6 +923,18 @@ namespace SharpVectors.Renderers.Wpf
             set {
                 _drawingResources = value;
             }
+        }
+
+        public TimeSpan CacheCleanupInterval
+        { 
+            get => _cacheCleanupInterval; 
+            set => _cacheCleanupInterval = value; 
+        }
+
+        public TimeSpan CacheInactivityPeriod 
+        { 
+            get => _cacheInactivityPeriod; 
+            set => _cacheInactivityPeriod = value; 
         }
 
         #endregion
