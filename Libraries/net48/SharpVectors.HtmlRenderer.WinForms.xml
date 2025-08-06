@@ -1454,7 +1454,7 @@
             If <paramref name="combineWithDefault"/> is true the parsed css blocks are added to the 
             default css data (as defined by W3), merged if class name already exists. If false only the data in the given stylesheet is returned.
             </summary>
-            <seealso cref="!:http://www.w3.org/TR/CSS21/sample.html"/>
+            <seealso href="http://www.w3.org/TR/CSS21/sample.html"/>
             <param name="stylesheet">the stylesheet source to parse</param>
             <param name="combineWithDefault">true - combine the parsed css data with default css data, false - return only the parsed css data</param>
             <returns>the parsed css data</returns>
@@ -3618,7 +3618,7 @@
             <param name="str">the string to measure</param>
             <param name="font">the font to measure string with</param>
             <param name="maxWidth">the max width to calculate fit characters</param>
-            <param name="charFit">the number of characters that will fit under <see cref="!:maxWidth"/> restriction</param>
+            <param name="charFit">the number of characters that will fit under <paramref name="maxWidth"/> restriction</param>
             <param name="charFitWidth">the width that only the characters that fit into max width take</param>
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Adapters.RControl.Invalidate">
@@ -3790,7 +3790,7 @@
             <param name="str">the string to measure</param>
             <param name="font">the font to measure string with</param>
             <param name="maxWidth">the max width to calculate fit characters</param>
-            <param name="charFit">the number of characters that will fit under <see cref="!:maxWidth"/> restriction</param>
+            <param name="charFit">the number of characters that will fit under <paramref name="maxWidth"/> restriction</param>
             <param name="charFitWidth">the width that only the characters that fit into max width take</param>
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Adapters.RGraphics.DrawString(System.String,TheArtOfDev.HtmlRenderer.Adapters.RFont,TheArtOfDev.HtmlRenderer.Adapters.Entities.RColor,TheArtOfDev.HtmlRenderer.Adapters.Entities.RPoint,TheArtOfDev.HtmlRenderer.Adapters.Entities.RSize,System.Boolean)">
@@ -3965,7 +3965,7 @@
             If <paramref name="combineWithDefault"/> is true the parsed css blocks are added to the 
             default css data (as defined by W3), merged if class name already exists. If false only the data in the given stylesheet is returned.
             </summary>
-            <seealso cref="!:http://www.w3.org/TR/CSS21/sample.html"/>
+            <seealso href="http://www.w3.org/TR/CSS21/sample.html"/>
             <param name="adapter">Platform adapter</param>
             <param name="stylesheet">the stylesheet source to parse</param>
             <param name="combineWithDefault">true - combine the parsed css data with default css data, false - return only the parsed css data</param>
@@ -6140,8 +6140,10 @@
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Callback">
             <summary>
-            Callback to overwrite the loaded image with error image.<br/>
-            Can be called directly from delegate handler or asynchronously after setting <see cref="P:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Handled"/> to True.<br/>
+            Callback to overwrite the loaded image with error image.
+            <para>
+            Can be called directly from delegate handler or asynchronously after setting <see cref="P:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Handled"/> to True.
+            </para>
             </summary>
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Callback(System.String)">
@@ -6159,14 +6161,17 @@
             the rectangle will be used for size and not the actual image size.<br/> 
             </summary>
             <param name="path">the path to the image to load (file path or URL)</param>
-            <param name="imageRectangle">optional: limit to specific rectangle of the image and not all of it</param>
+            <param name="x">left of limit to specific rectangle of the image and not all of it</param>
+            <param name="y">top of limit to specific rectangle of the image and not all of it</param>
+            <param name="width">width of limit to specific rectangle of the image and not all of it</param>
+            <param name="height">height of limit to specific rectangle of the image and not all of it</param>
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Callback(System.Object)">
             <summary>
-            Callback to overwrite the loaded image with given image object.<br/>
-            Can be called directly from delegate handler or asynchronously after setting <see cref="P:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Handled"/> to True.<br/>
-            If <paramref name="imageRectangle"/> is given (not <see cref="F:TheArtOfDev.HtmlRenderer.Adapters.Entities.RRect.Empty"/>) then only the specified rectangle will
-            be used from the loaded image and not all of it, also the rectangle will be used for size and not the actual image size.<br/> 
+            Callback to overwrite the loaded image with given image object.
+            <para>
+            Can be called directly from delegate handler or asynchronously after setting <see cref="P:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlImageLoadEventArgs.Handled"/> to True.
+            </para>
             </summary>
             <param name="image">the image to load</param>
         </member>
@@ -6178,7 +6183,10 @@
             the rectangle will be used for size and not the actual image size.<br/> 
             </summary>
             <param name="image">the image to load</param>
-            <param name="imageRectangle">optional: limit to specific rectangle of the image and not all of it</param>
+            <param name="x">left of limit to specific rectangle of the image and not all of it</param>
+            <param name="y">top of limit to specific rectangle of the image and not all of it</param>
+            <param name="width">width of limit to specific rectangle of the image and not all of it</param>
+            <param name="height">height of limit to specific rectangle of the image and not all of it</param>
         </member>
         <member name="T:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlLinkClickedEventArgs">
             <summary>
@@ -6205,6 +6213,7 @@
             Init.
             </summary>
             <param name="link">the link href that was clicked</param>
+            <param name="attributes">collection of all the attributes that are defined on the link element</param>
         </member>
         <member name="P:TheArtOfDev.HtmlRenderer.Core.Entities.HtmlLinkClickedEventArgs.Link">
             <summary>
@@ -6799,7 +6808,11 @@
             Get cached font if it exists in cache or null if it is not.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:TheArtOfDev.HtmlRenderer.Core.Handlers.FontsHandler.CreateFont(System.String,System.Double,TheArtOfDev.HtmlRenderer.Adapters.Entities.RFontStyle)" -->
+        <member name="M:TheArtOfDev.HtmlRenderer.Core.Handlers.FontsHandler.CreateFont(System.String,System.Double,TheArtOfDev.HtmlRenderer.Adapters.Entities.RFontStyle)">
+            <summary>
+            create font (try using existing font family to support custom fonts)
+            </summary>
+        </member>
         <member name="T:TheArtOfDev.HtmlRenderer.Core.Handlers.DownloadFileAsyncCallback">
             <summary>
             On download file async complete, success or fail.
@@ -6830,7 +6843,7 @@
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Handlers.ImageDownloader.DownloadImage(System.Uri,System.String,System.Boolean,TheArtOfDev.HtmlRenderer.Core.Handlers.DownloadFileAsyncCallback)">
             <summary>
-            Makes a request to download the image from the server and raises the <see cref="!:cachedFileCallback"/> when it's down.<br/>
+            Makes a request to download the image from the server and raises the <paramref name="cachedFileCallback"/> when it's down.<br/>
             </summary>
             <param name="imageUri">The online image uri</param>
             <param name="filePath">the path on disk to download the file to</param>
@@ -7104,7 +7117,11 @@
             used to know if selection is in the control or started outside so it needs to be ignored
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:TheArtOfDev.HtmlRenderer.Core.Handlers.SelectionHandler._mouseDownOnSelectedWord" -->
+        <member name="F:TheArtOfDev.HtmlRenderer.Core.Handlers.SelectionHandler._mouseDownOnSelectedWord">
+            <summary>
+            used to handle drag and drop
+            </summary>
+        </member>
         <member name="F:TheArtOfDev.HtmlRenderer.Core.Handlers.SelectionHandler._cursorChanged">
             <summary>
             is the cursor on the control has been changed by the selection handler
@@ -7115,7 +7132,11 @@
             used to know if double click selection is requested
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:TheArtOfDev.HtmlRenderer.Core.Handlers.SelectionHandler._dragDropData" -->
+        <member name="F:TheArtOfDev.HtmlRenderer.Core.Handlers.SelectionHandler._dragDropData">
+            <summary>
+            used to know if drag and drop was already started not to execute the same operation over
+            </summary>
+        </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Handlers.SelectionHandler.#ctor(TheArtOfDev.HtmlRenderer.Core.Dom.CssBox)">
             <summary>
             Init.
@@ -7976,7 +7997,7 @@
             If <paramref name="combineWithDefault"/> is true the parsed css blocks are added to the 
             default css data (as defined by W3), merged if class name already exists. If false only the data in the given stylesheet is returned.
             </summary>
-            <seealso cref="!:http://www.w3.org/TR/CSS21/sample.html"/>
+            <seealso href="http://www.w3.org/TR/CSS21/sample.html"/>
             <param name="stylesheet">raw css stylesheet to parse</param>
             <param name="combineWithDefault">true - combine the parsed css data with default css data, false - return only the parsed css data</param>
             <returns>the CSS data with parsed CSS objects (never null)</returns>
@@ -8240,7 +8261,7 @@
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Parse.CssValueParser.ParseNumber(System.String,System.Double)">
             <summary>
-            Evals a number and returns it. If number is a percentage, it will be multiplied by <see cref="!:hundredPercent"/>
+            Evals a number and returns it. If number is a percentage, it will be multiplied by <paramref name="hundredPercent"/>
             </summary>
             <param name="number">Number to be parsed</param>
             <param name="hundredPercent">Number that represents the 100% if parsed number is a percentage</param>
@@ -8748,7 +8769,7 @@
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Utils.ArgChecker.AssertIsTrue``1(System.Boolean,System.String)">
             <summary>
-            Validate given <see cref="!:condition"/> is true, otherwise throw exception.
+            Validate given <paramref name="condition"/> is true, otherwise throw exception.
             </summary>
             <typeparam name="TException">Exception type to throw.</typeparam>
             <param name="condition">Condition to assert.</param>
@@ -8782,11 +8803,11 @@
             <summary>
             Validate given argument isn't Null.
             </summary>
-            <typeparam name="T">Type expected of <see cref="!:arg"/></typeparam>
+            <typeparam name="T">Type expected of <paramref name="arg"/></typeparam>
             <param name="arg">argument to validate</param>
             <param name="argName">Name of the argument checked</param>
             <exception cref="T:System.ArgumentNullException">if <paramref name="arg"/> is Null</exception>
-            <returns><see cref="!:arg"/> cast as <see cref="!:T"/></returns>
+            <returns><paramref name="arg"/> cast as <see cref="!:T"/></returns>
         </member>
         <member name="M:TheArtOfDev.HtmlRenderer.Core.Utils.ArgChecker.AssertFileExist(System.String,System.String)">
             <summary>

@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "WebViews.WinForms/1.0.0": {
+        "dependencies": {
+          "WebViews.Core": "1.0.0"
+        },
+        "runtime": {
+          "WebViews.WinForms.dll": {}
+        }
+      },
+      "WebViews.Core/1.0.0": {
+        "runtime": {
+          "WebViews.Core.dll": {
+            "assemblyVersion": "8.0.1.0",
+            "fileVersion": "8.0.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WebViews.WinForms/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WebViews.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

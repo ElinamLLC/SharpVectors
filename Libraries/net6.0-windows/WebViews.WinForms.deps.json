@@ -16,7 +16,10 @@
       },
       "WebViews.Core/1.0.0": {
         "runtime": {
-          "WebViews.Core.dll": {}
+          "WebViews.Core.dll": {
+            "assemblyVersion": "8.0.1.0",
+            "fileVersion": "8.0.1.0"
+          }
         }
       }
     }

@@ -9,6 +9,8 @@ namespace GdiW3cSvgTestSuite
     {
         private const string AppName = "GdiW3cSvgTestSuite.exe";
 
+        private readonly object _lock = new object();
+
         private RichTextBox _textBox;
         private NotifyIcon _notifyIcon;
 

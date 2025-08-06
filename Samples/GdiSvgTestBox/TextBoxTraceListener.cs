@@ -9,6 +9,8 @@ namespace GdiSvgTestBox
     {
         private const string AppName = "GdiSvgTestBox.exe";
 
+        private readonly object _lock = new object();
+
         private RichTextBox _textBox;
         private NotifyIcon _notifyIcon;
 
@@ -32,16 +34,26 @@ namespace GdiSvgTestBox
 
         public override void Write(string message)
         {
-            SetText(message);
+            lock(_lock)
+            {
+                if (message == null)
+                {
+                    return;
+                }
+                SetText(message);
+            }
         }
 
         public override void WriteLine(string message)
         {
-            if (message == null)
+            lock (_lock)
             {
-                return;
+                if (message == null)
+                {
+                    return;
+                }
+                SetText(message + Environment.NewLine);
             }
-            SetText(message + Environment.NewLine);
         }
 
         protected override void Dispose(bool disposing)

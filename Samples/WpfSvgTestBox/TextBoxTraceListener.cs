@@ -20,6 +20,8 @@ namespace WpfSvgTestBox
 
         private const string AppName = "WpfSvgTestBox.exe";
 
+        private readonly object _lock = new object();
+
         private TextEditor _textBox;
         private SelectedSegmentBackgroundRenderer _backgroundRenderer;
 
