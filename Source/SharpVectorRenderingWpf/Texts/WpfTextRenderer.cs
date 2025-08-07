@@ -641,6 +641,10 @@ namespace SharpVectors.Renderers.Texts
             _actualFontName = null;
 
             string fontFamily  = element.GetPropertyValue("font-family");
+            if (element.HasAttribute("font-family"))
+            {
+                _actualFontName = fontFamily;
+            }
             string[] fontNames = fontFamily.Split(new char[1] { ',' });
 
             FontStyle fontStyle     = GetTextFontStyle(element);
@@ -1034,7 +1038,8 @@ namespace SharpVectors.Renderers.Texts
                     {
                         family = WpfDrawingSettings.GenericSerif;
                     }
-                    else if (string.Equals(fontName, "sans-serif", comparer) || string.Equals(fontName, "sansserif", comparer))
+                    else if (string.Equals(fontName, "sans-serif", comparer) 
+                        || string.Equals(fontName, "sansserif", comparer))
                     {
                         family = WpfDrawingSettings.GenericSansSerif;
                     }

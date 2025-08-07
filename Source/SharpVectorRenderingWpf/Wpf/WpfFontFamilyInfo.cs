@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -30,6 +31,8 @@ namespace SharpVectors.Renderers.Wpf
             _weight     = weight;
             _style      = style;
             _stretch    = stretch;
+
+            _stretch = DecomposeFontName();
         }
 
         public WpfFontFamilyInfo(WpfFontFamilyType familyType, FontFamily family, FontWeight weight,
@@ -40,6 +43,8 @@ namespace SharpVectors.Renderers.Wpf
             _weight     = weight;
             _style      = style;
             _stretch    = stretch;
+
+            _stretch = DecomposeFontName();
         }
 
         public WpfFontFamilyInfo(WpfFontFamilyType familyType, string fontName, 
@@ -51,6 +56,8 @@ namespace SharpVectors.Renderers.Wpf
             _weight     = weight;
             _style      = style;
             _stretch    = stretch;
+
+            _stretch = DecomposeFontName();
         }
 
         public WpfFontFamilyInfo(string fontName, SvgFontElement fontElement, 
@@ -63,6 +70,8 @@ namespace SharpVectors.Renderers.Wpf
             _weight      = weight;
             _style       = style;
             _stretch     = stretch;
+
+            _stretch = DecomposeFontName();
         }
 
         public bool IsEmpty
@@ -132,6 +141,47 @@ namespace SharpVectors.Renderers.Wpf
         public FontStretch Stretch
         {
             get { return _stretch; }
+        }
+
+        private FontStretch DecomposeFontName()
+        {
+            FontStretch stretch = _stretch;
+            if (stretch != FontStretches.Normal || string.IsNullOrWhiteSpace(_fontName))
+            {
+                return stretch; //TODO
+            }
+            string[] parts = _fontName.Split(' ');
+            if (parts.Length < 2)
+            {
+                return stretch;
+            }
+
+            string familyPart = parts[0];
+            string stylePart = string.Join(" ", parts.Skip(1));
+
+            // Now try to map the stylePart to FontStretch, FontWeight, and FontStyle enums.
+            if (stylePart.IndexOf("Narrow", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                stretch = FontStretches.Condensed;
+            }
+            else if (stylePart.IndexOf("SemiCondensed", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                stretch = FontStretches.SemiCondensed;
+            }
+            else if (stylePart.IndexOf("ExtraCondensed", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                stretch = FontStretches.ExtraCondensed;
+            }
+            else if (stylePart.IndexOf("Expanded", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                stretch = FontStretches.Expanded;
+            }
+            // ... add more mappings for other stretch values as needed.
+
+            // Note: The `stylePart` can also contain weight and style.
+            // A more advanced parser would check for "Bold", "Italic", etc., and override the passed-in style/weight.
+
+            return stretch;
         }
     }
 }
