@@ -16,7 +16,9 @@ namespace SharpVectors.Dom.Css
         #region Private fields
 
         //private static readonly Regex _reComment = new Regex(@"(//.*)|(/\*(.|\n)*?\*/)");
-        private static readonly Regex _reComment = new Regex(@"(?<!"")\/\*.+?\*\/(?!"")");
+        //private static readonly Regex _reComment = new Regex(@"(?<!"")\/\*.+?\*\/(?!"")");
+        //Regex.Replace(s, @"/\*.*?\*/", "", RegexOptions.Singleline);
+        private static readonly Regex _reComment = new Regex(@"/\*[\s\S]*?\*/");
         private static readonly Regex _reEscape  = new Regex(@"(""(.|\n)*?[^\\]"")|('(.|\n)*?[^\\]')");
 
         private readonly CssStyleSheetType _origin;
