@@ -915,20 +915,26 @@ namespace SharpVectors.Renderers.Wpf
             {
                 return null;
             }
-            var cssValue = cssDeclaration.GetPropertyCssValue(PropFill);
-            if (cssValue == null)
+            var fillValue = cssDeclaration.GetPropertyCssValue(PropFill);
+            if (fillValue == null)
             {
                 return null;
             }
-            if (cssValue.IsAbsolute)
+            if (fillValue.IsAbsolute)
             {
-                var cssAbs = cssValue as CssAbsPrimitiveValue;
+                // If fails to pick the variable variable, initialize it directly...
+                if (fill.CssText.StartsWith("var"))
+                {
+                    return new CssPrimitiveVarsValue(fill.CssText, fill.ReadOnly);
+                }
+
+                var cssAbs = fillValue as CssAbsPrimitiveValue;
                 if (cssAbs != null && cssAbs.CssValue != null)
                 {
                     return cssAbs.CssValue as CssPrimitiveVarsValue;
                 }
             }
-            return cssValue as CssPrimitiveVarsValue;
+            return fillValue as CssPrimitiveVarsValue;
         }
 
         #endregion
