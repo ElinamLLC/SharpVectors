@@ -2,6 +2,29 @@
 
 namespace SharpVectors.Renderers.Texts
 {
+    // A more complete enum to represent the most common CSS dominant-baseline values.
+    public enum DominantBaseline
+    {
+        /// <summary>
+        /// The dominant baseline is not set.
+        /// </summary>
+        Auto,
+        /// <summary>
+        /// The dominant baseline is the alphabetic baseline.
+        /// </summary>
+        Alphabetic, // Default
+        /// <summary>
+        /// 
+        /// </summary>
+        Middle,
+        Central,
+        Hanging,
+        Ideographic,
+        Mathematical,
+        TextBeforeEdge,  // Corresponds to CSS text-top
+        TextAfterEdge    // Corresponds to CSS text-bottom
+    }
+
     public struct WpfTextStringFormat
     {
         public FlowDirection Direction;
@@ -9,13 +32,16 @@ namespace SharpVectors.Renderers.Texts
         //public TextAlignment Alignment;
         public WpfTextAnchor Anchor;
 
+        public DominantBaseline Dominant;
+
         public WpfTextStringFormat(FlowDirection direction, TextTrimming trimming,
-            WpfTextAnchor anchor)
+            WpfTextAnchor anchor, DominantBaseline dominant)
         {
             this.Direction = direction;
             this.Trimming  = trimming;
             this.Anchor    = anchor;
-        }
+            this.Dominant  = dominant;
+         }
 
         public TextAlignment Alignment
         {
@@ -37,7 +63,7 @@ namespace SharpVectors.Renderers.Texts
         {
             get {
                 return new WpfTextStringFormat(FlowDirection.LeftToRight,
-                    TextTrimming.None, WpfTextAnchor.Start);
+                    TextTrimming.None, WpfTextAnchor.Start, DominantBaseline.Alphabetic);
             }
         }
     }

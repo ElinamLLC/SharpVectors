@@ -125,7 +125,8 @@ namespace SharpVectors.Dom.Css
             Add("cursor", true, CssConstants.ValAuto);
             Add("direction", true, "ltr");
             Add(CssConstants.PropDisplay, false, CssConstants.ValInline);
-            Add("dominant-baseline", false, CssConstants.ValAuto);
+            Add("dominant-baseline", true, CssConstants.ValAuto);
+            //Add("dominant-baseline", false, CssConstants.ValAuto);
             Add("enable-background", false, CssConstants.ValAccumulate);
             Add("fill", true, CssConstants.ValBlack);
             Add("fill-opacity", true, SvgConstants.ValOne);

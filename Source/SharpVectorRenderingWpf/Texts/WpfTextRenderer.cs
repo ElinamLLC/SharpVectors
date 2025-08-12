@@ -343,6 +343,11 @@ namespace SharpVectors.Renderers.Texts
             GeometryGroup outerGroup = sourceGeometry as GeometryGroup;
             if (outerGroup != null && outerGroup.Children.Count == 1)
             {
+                if (outerGroup.Transform != null && !outerGroup.Transform.Value.IsIdentity)
+                {
+                    return outerGroup;
+                }
+
                 GeometryGroup innerGroup = outerGroup.Children[0] as GeometryGroup;
                 if (innerGroup != null && innerGroup.Children.Count == 1)
                 {
@@ -1100,9 +1105,12 @@ namespace SharpVectors.Renderers.Texts
             bool isRightToLeft = string.Equals(dir, "rtl", comparer);
             sf.Direction = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
+            string dominant = string.Empty;
+
             if (doAlign)
             {
                 string anchor = element.GetPropertyValue("text-anchor");
+                dominant = element.GetPropertyValue(CssConstants.PropDominantBaseline);
 
                 if (isRightToLeft)
                 {
@@ -1123,9 +1131,11 @@ namespace SharpVectors.Renderers.Texts
             }
             else
             {
+                dominant = element.GetPropertyValue(CssConstants.PropDominantBaseline);
                 SvgTextBaseElement textElement = element.ParentNode as SvgTextBaseElement;
                 if (textElement != null)
                 {
+                    dominant = textElement.GetPropertyValue(CssConstants.PropDominantBaseline);
                     string anchor = textElement.GetPropertyValue("text-anchor");
                     if (isRightToLeft)
                     {
@@ -1144,6 +1154,45 @@ namespace SharpVectors.Renderers.Texts
                             sf.Anchor = WpfTextAnchor.End;
                     }
                 }
+            }
+
+            if (string.IsNullOrWhiteSpace(dominant))
+            {
+                sf.Dominant = DominantBaseline.Alphabetic; // Default
+            }
+            else if (string.Equals(dominant, "central", comparer))
+            {
+                sf.Dominant = DominantBaseline.Central;
+            }
+            else if (string.Equals(dominant, "middle", comparer))
+            {
+                sf.Dominant = DominantBaseline.Middle;
+            }
+            else if (string.Equals(dominant, "hanging", comparer))
+            {
+                sf.Dominant = DominantBaseline.Hanging;
+            }
+            else if (string.Equals(dominant, "ideographic", comparer))
+            {
+                sf.Dominant = DominantBaseline.Ideographic;
+            }
+            else if (string.Equals(dominant, "mathematical", comparer))
+            {
+                sf.Dominant = DominantBaseline.Mathematical;
+            }
+            else if (string.Equals(dominant, "text-before-edge", comparer)
+                || string.Equals(dominant, "text-top", comparer))
+            {
+                sf.Dominant = DominantBaseline.TextBeforeEdge;
+            }
+            else if (string.Equals(dominant, "text-after-edge", comparer)
+                || string.Equals(dominant, "text-bottom", comparer))
+            {
+                sf.Dominant = DominantBaseline.TextAfterEdge;
+            }
+            else
+            {
+                sf.Dominant = DominantBaseline.Alphabetic; // Default
             }
 
             //if (isRightToLeft)
