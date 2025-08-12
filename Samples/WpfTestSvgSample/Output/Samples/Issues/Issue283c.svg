@@ -1,0 +1,50 @@
+<svg viewBox="0 0 450 160" width="700" height="200">
+  <style type="text/css">
+	text {
+	  font-size: 20px;
+	}
+	text:nth-of-type(1) {
+	  dominant-baseline: alphabetic;
+	}
+	text:nth-of-type(2) {
+	  dominant-baseline: central;
+	}
+	text:nth-of-type(3) {
+	  dominant-baseline: hanging;
+	}
+	text:nth-of-type(4) {
+	  dominant-baseline: ideographic;
+	}
+	text:nth-of-type(5) {
+	  dominant-baseline: mathematical;
+	}
+	text:nth-of-type(6) {
+	  dominant-baseline: middle;
+	}
+	text:nth-of-type(7) {
+	  dominant-baseline: text-bottom;
+	}
+	text:nth-of-type(8) {
+	  dominant-baseline: text-top;
+	}
+  </style>
+  
+  <text x="50" y="20">alphabetic</text>
+  <text x="50" y="60">central</text>
+  <text x="50" y="100">hanging</text>
+  <text x="50" y="140">ideographic</text>
+  <text x="250" y="20">mathematical</text>
+  <text x="250" y="60">middle</text>
+  <text x="250" y="100">text-bottom</text>
+  <text x="250" y="140">text-top</text>
+  <path
+    d="M   0,20 l 400,0
+       m -400,40 l 400,0
+       m -400,40 l 400,0
+       m -400,40 l 400,0"
+    stroke="grey" />
+  <text x="0" y="20" fill="red">auto</text>
+  <text x="0" y="60" fill="red">auto</text>
+  <text x="0" y="100" fill="red">auto</text>
+  <text x="0" y="140" fill="red">auto</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg width="400" height="200">
+  <!-- First text line with horizontal lines -->
+  <line x1="50" y1="40" x2="350" y2="40" stroke="black" stroke-width="1" />
+  <text x="50%" y="70" text-anchor="middle" font-family="Arial" font-size="20" fill="black">A Line of Text</text>
+  <line x1="50" y1="90" x2="350" y2="90" stroke="black" stroke-width="1" />
+
+  <!-- Second text line with horizontal lines -->
+  <line x1="50" y1="120" x2="350" y2="120" stroke="black" stroke-width="1" />
+  <text x="50%" y="150" text-anchor="middle" font-family="Arial Narrow" font-size="20" fill="black">A Line of Text</text>
+  <line x1="50" y1="170" x2="350" y2="170" stroke="black" stroke-width="1" />
+</svg>

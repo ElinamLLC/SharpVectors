@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(-2993.655, -288.37)">
+    <defs>
+      <radialGradient cx="3414.017" cy="578.663" r="27.013" fx="3405.991" fy="553.3787" gradientUnits="userSpaceOnUse" id="fcc19df8-5eff-4dc5-8e30-348b50ab6cc5" data-name="Безымянный градиент 46">
+        <stop offset="0%" stop-color="#55FFFF" />
+        <stop offset="34.4%" stop-color="#FF55FF" />
+        <stop offset="100%" stop-color="#FFFF55" />
+      </radialGradient>
+      <radialGradient cx="1070.199" cy="578.663" r="27.013" fx="1062.173" xlink:href="#fcc19df8-5eff-4dc5-8e30-348b50ab6cc5" gradientTransform="matrix(-1, 0, 0, 1, 4363.566, 0)" id="a21a3960-1bc6-4001-a4c2-8b523a341a00" />
+    </defs>
+    <g>
+      <g>
+        <g>
+          <path d="M3439.564 563.769 C3439.564 570.034 3431.446 609.651 3418.898 609.102 C3406.632 608.565 3390.17 572.972 3389.633 568.269 C3388.985 562.592 3406.566 565.352 3419.064 564.102 C3431.562 562.852 3439.564 556.528 3439.564 563.769 z" style="fill:url(#fcc19df8-5eff-4dc5-8e30-348b50ab6cc5);" />
+          <path d="M3267.82 563.769 C3267.82 570.034 3275.938 609.651 3288.486 609.102 C3300.752 608.565 3317.214 572.972 3317.751 568.269 C3318.399 562.592 3300.818 565.352 3288.32 564.102 C3275.822 562.852 3267.82 556.528 3267.82 563.769 z" style="fill:url(#a21a3960-1bc6-4001-a4c2-8b523a341a00);" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

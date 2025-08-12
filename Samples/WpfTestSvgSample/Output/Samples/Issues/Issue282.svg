@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1200" height="385" viewBox="0 0 1200 385">
+<defs>
+</defs>
+<rect x="0" y="0" width="1200" height="400" fill="#FFFFFF" />
+<text x="485.5" y="30" font-size="26" text-anchor="start" dominant-baseline="middle" font-family="Arial" stroke="#0B5394">My Demo Roadmap</text>
+<text x="497.5" y="64" font-size="18" text-anchor="start" dominant-baseline="middle" font-family="Arial" stroke="#0B5394">Matariki Technologies Ltd</text>
+<rect x="278.0" y="125" width="886.5" height="20" fill="#0B5394" />
+<text x="692.75" y="129.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Year 2024</text>
+<rect x="278.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="304.25" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Jan</text>
+<rect x="352.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="377.75" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Feb</text>
+<rect x="426.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="451.25" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Mar</text>
+<rect x="500.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="526.25" y="151.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Apr</text>
+<rect x="574.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="598.75" y="151.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">May</text>
+<rect x="648.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="674.25" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Jun</text>
+<rect x="722.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="750.25" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Jul</text>
+<rect x="796.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="821.25" y="151.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Aug</text>
+<rect x="870.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="895.25" y="151.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Sep</text>
+<rect x="944.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="970.75" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Oct</text>
+<rect x="1018.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="1043.25" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Nov</text>
+<rect x="1092.0" y="148" width="72.5" height="20" fill="#0B5394" />
+<text x="1117.25" y="152.5" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Dec</text>
+<path d="M351.0,168 L351.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M425.0,168 L425.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M499.0,168 L499.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M573.0,168 L573.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M647.0,168 L647.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M721.0,168 L721.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M795.0,168 L795.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M869.0,168 L869.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M943.0,168 L943.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M1017.0,168 L1017.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<path d="M1091.0,168 L1091.0,280" stroke="#e6e6e6" stroke-opacity="50" stroke-width="1" />
+<rect x="30" y="203" width="228.0" height="67" fill="#0B5394" />
+<text x="71.5" y="231.0" font-size="12" stroke="#FFFFFF" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Core Product Work Stream</text>
+<rect x="278" y="218" width="738" height="20" fill="#9FC5E8" />
+<rect x="1054" y="218" width="110" height="20" fill="#9FC5E8" />
+<text x="1068.0" y="222.5" font-size="12" stroke="#000000" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Enhancements</text>
+<path d="M390.25,215 L403.25,228.0 L390.25,241 L377.25,228.0" fill="#3D85C6" />
+<text x="380.5833333333333" y="200" font-size="10" text-anchor="start" dominant-baseline="middle" font-family="Arial" stroke="#0B5394">v.1.0</text>
+<path d="M798.0,215 L811.0,228.0 L798.0,241 L785.0,228.0" fill="#3D85C6" />
+<text x="788.3333333333334" y="200" font-size="10" text-anchor="start" dominant-baseline="middle" font-family="Arial" stroke="#0B5394">v.1.1</text>
+<text x="597.0" y="221.5" font-size="12" stroke="#000000" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Base Functionality</text>
+<rect x="426" y="243" width="162" height="20" fill="#9FC5E8" />
+<rect x="648" y="243" width="162" height="20" fill="#9FC5E8" />
+<text x="692.0" y="247.5" font-size="12" stroke="#000000" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Showcase #2</text>
+<text x="470.0" y="247.5" font-size="12" stroke="#000000" text-anchor="start" dominant-baseline="hanging" font-family="Arial">Showcase #1</text>
+<text x="576.25" y="181" font-size="12" text-anchor="start" dominant-baseline="middle" font-family="Arial" stroke="#0B5394">▼</text>
+<path d="M581.25,192.0 L581.25,202.0" stroke="#0B5394" stroke-opacity="0.9" stroke-width="2" />
+<path d="M581.25,208.0 L581.25,218.0" stroke="#0B5394" stroke-opacity="0.9" stroke-width="2" />
+<path d="M581.25,224.0 L581.25,234.0" stroke="#0B5394" stroke-opacity="0.9" stroke-width="2" />
+<path d="M581.25,240.0 L581.25,250.0" stroke="#0B5394" stroke-opacity="0.9" stroke-width="2" />
+<path d="M581.25,256.0 L581.25,266.0" stroke="#0B5394" stroke-opacity="0.9" stroke-width="2" />
+<path d="M581.25,272.0 L581.25,282.0" stroke="#0B5394" stroke-opacity="0.9" stroke-width="2" />
+<text x="522.0" y="340" font-size="13" text-anchor="start" dominant-baseline="middle" font-family="Arial" stroke="#0B5394">Generated by Roadmapper</text>
+</svg>

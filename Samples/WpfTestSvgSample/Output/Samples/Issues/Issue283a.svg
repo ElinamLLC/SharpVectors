@@ -1,0 +1,30 @@
+<svg version="1.1" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" class="ka-chart" xmlns="http://www.w3.org/2000/svg">
+	<g class="ka-chart-y-axis">
+		<text x="82.48" y="364.4" font-size="12.8px" text-anchor="end" dominant-baseline="middle">$0</text>
+		<line x1="89.48" y1="295.08" x2="395" y2="295.08" stroke="#e6e6e6" stroke-width="1"></line>
+		<text x="82.48" y="295.08" font-size="12.8px" text-anchor="end" dominant-baseline="middle">$25,000</text>
+		<line x1="89.48" y1="225.76" x2="395" y2="225.76" stroke="#e6e6e6" stroke-width="1"></line>
+		<text x="82.48" y="225.76" font-size="12.8px" text-anchor="end" dominant-baseline="middle">$50,000</text>
+		<line x1="89.48" y1="156.44" x2="395" y2="156.44" stroke="#e6e6e6" stroke-width="1"></line>
+		<text x="82.48" y="156.44" font-size="12.8px" text-anchor="end" dominant-baseline="middle">$75,000</text>
+		<line x1="89.48" y1="87.12" x2="395" y2="87.12" stroke="#e6e6e6" stroke-width="1"></line>
+		<text x="82.48" y="87.12" font-size="12.8px" text-anchor="end" dominant-baseline="middle">$100,000</text>
+		<line x1="89.48" y1="17.80000000000001" x2="395" y2="17.80000000000001" stroke="#e6e6e6" stroke-width="1"></line>
+		<text x="82.48" y="17.80000000000001" font-size="12.8px" text-anchor="end" dominant-baseline="middle">$125,000</text>
+	</g>
+	<g class="ka-chart-category-group">
+		<g class="ka-chart-category" ka-tip-key="0" ka-init-tip="true">
+			<rect x="142.946" y="362.4285392" width="198.588" height="1.9714608" fill="#A7A8AA" stroke="#ffffff" stroke-width="1" ka-chart-highlight-key="Shift Premium*" aria-label="Shift Premium*, $711. 2024." opacity="1"></rect>
+			<rect x="142.946" y="360.0023392" width="198.588" height="2.4261999999999997" fill="#EAAA00" stroke="#ffffff" stroke-width="1" ka-chart-highlight-key="Shared Rewards" aria-label="Shared Rewards, $875. 2024." opacity="1"></rect>
+			<rect x="142.946" y="344.3082912" width="198.588" height="15.694047999999999" fill="#5b829b" stroke="#ffffff" stroke-width="1" ka-chart-highlight-key="MIP" aria-label="MIP, $5,660. 2024." opacity="1"></rect>
+			<rect x="142.946" y="318.03323839999996" width="198.588" height="26.275052799999997" fill="#991933" stroke="#ffffff" stroke-width="1" ka-chart-highlight-key="Profit Sharing" aria-label="Profit Sharing, $9,476. 2024." opacity="1"></rect>
+			<rect x="142.946" y="54.040496000000005" width="198.588" height="263.9927424" fill="#003366" stroke="#ffffff" stroke-width="1" ka-chart-highlight-key="Regular Pay*&amp;dagger;" aria-label="Regular Pay*&amp;dagger;, $95,208. 2024." opacity="1"></rect>
+		</g>
+	</g>
+	<g class="ka-chart-x-axis">
+		<line x1="89.48" y1="364.4" x2="395" y2="364.4" stroke="black" stroke-width="1"></line>
+		<text x="242.24" y="366.4" font-size="12.8px" text-anchor="middle" dominant-baseline="text-before-edge">
+			<tspan x="242.24" dy="0">2024</tspan>
+		</text>
+	</g>
+</svg>

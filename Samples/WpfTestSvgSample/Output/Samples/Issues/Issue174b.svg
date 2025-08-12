@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" version="1.1">
+  <g transform="translate(-2559.121, -504.7994)">
+    <defs>
+      <radialGradient cx="2921.94" cy="234.04" r="45.9" gradientUnits="userSpaceOnUse" gradientTransform="translate(-504.73, 500.75) scale(1.17, 0.83)" id="aad98412-0420-493e-87cd-22696715796a" data-name="Безымянный градиент 161">
+        <stop offset="0%" stop-color="#55ffff" />
+        <stop offset="100%" stop-color="#ff55ff" />
+      </radialGradient>
+      <radialGradient cx="1633.91" cy="-1764.1" r="38.95" xlink:href="#aad98412-0420-493e-87cd-22696715796a" gradientTransform="translate(1515.2, 3360.17) scale(0.86, 1.4)" id="fcc8986c-db34-41fa-afaf-ad9aee4dcc0b" />
+      <radialGradient cx="1047.26" cy="-1416.65" r="13.68" xlink:href="#aad98412-0420-493e-87cd-22696715796a" gradientTransform="translate(1202.43, 3530.96) scale(1.7, 1.93)" id="a7ecd734-a71a-40c9-aafa-9e1d15daf262" />
+      <radialGradient cx="-4450.93" cy="-1416.55" r="13.68" xlink:href="#aad98412-0420-493e-87cd-22696715796a" gradientTransform="matrix(-1.7, 0, 0, 1.93, -4713.81, 3530.96)" id="ab9efa31-1555-4ec6-b73a-b6f5f0255a80" />
+    </defs>
+    <g>
+      <g>
+        <g>
+          <path d="M2953.93 703 C2950.6 706.45 2935.67 721.69 2911.16 721.69 C2886.65 721.69 2868.45 706.47 2865.16 703 C2856.88 694.31 2885.04 694.31 2909.56 694.31 C2934.08 694.31 2960.12 696.57 2953.93 703 z" style="fill:url(#aad98412-0420-493e-87cd-22696715796a);" />
+          <path d="M2946 913.91 C2946 922.0099 2931.44 928.5699 2913.48 928.5699 C2895.52 928.5699 2881 922 2881 913.91 C2881 905.8199 2895.57 899.25 2913.53 899.25 C2931.49 899.25 2946 905.81 2946 913.91 z" style="fill:url(#fcc8986c-db34-41fa-afaf-ad9aee4dcc0b);" />
+          <path d="M3000.39 797.26 C3002.14 811.88 2987.55 837.63 2978.54 837.63 C2969.53 837.63 2958.39 810.38 2962.22 796.52 C2963.43 792.15 2969.74 794.06 2978.74 794.06 C2987.74 794.06 2999.85 792.76 3000.39 797.26 z" style="fill:url(#a7ecd734-a71a-40c9-aafa-9e1d15daf262);" />
+          <path d="M2823.16 797.45 C2821.41 812.06 2836.01 837.81 2845.02 837.81 C2854.03 837.81 2865.16 810.56 2861.33 796.7 C2860.13 792.34 2853.82 794.25 2844.81 794.25 C2835.8 794.25 2823.7 793 2823.16 797.45 z" style="fill:url(#ab9efa31-1555-4ec6-b73a-b6f5f0255a80);" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
