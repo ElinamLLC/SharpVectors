@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 #endif
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Rendering.Gdi")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2024 Elinam LLC")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2025 Elinam LLC")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
@@ -29,9 +29,9 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.8.4.2")]
-[assembly: AssemblyFileVersion("1.8.4.2")]
-[assembly: AssemblyInformationalVersion("1.8.4.2")]
+[assembly: AssemblyVersion("1.8.5")]
+[assembly: AssemblyFileVersion("1.8.5")]
+[assembly: AssemblyInformationalVersion("1.8.5")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

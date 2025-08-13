@@ -16,7 +16,7 @@ using System.Windows.Markup;
 #endif
 [assembly: AssemblyCompany("Elinam LLC, Japan")]
 [assembly: AssemblyProduct("SharpVectors.Runtime")]
-[assembly: AssemblyCopyright("Copyright © 2010 - 2024 Elinam LLC, Zooming and Panning Control by Ashley Davis")]
+[assembly: AssemblyCopyright("Copyright © 2010 - 2025 Elinam LLC, Zooming and Panning Control by Ashley Davis")]
 [assembly: AssemblyTrademark("Open Source, Licensed BSD-3")]
 [assembly: AssemblyCulture("")]
 
@@ -55,9 +55,9 @@ using System.Windows.Markup;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.8.4.2")]
-[assembly: AssemblyFileVersion("1.8.4.2")]
-[assembly: AssemblyInformationalVersion("1.8.4.2")]
+[assembly: AssemblyVersion("1.8.5")]
+[assembly: AssemblyFileVersion("1.8.5")]
+[assembly: AssemblyInformationalVersion("1.8.5")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

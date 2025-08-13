@@ -411,7 +411,27 @@ namespace SharpVectors.Dom.Css
                         }
                         else
                         {
-                            r += "[((count(" + axis + "::*)+1-" + b + ") mod " + a + "=0)and((count(" + axis + "::*)+1-" + b + ") div " + a + ">=0)]";
+                            r += "[((count(" + axis + "::*)+1-" + b + ") mod " + a + "=0) and ((count(" + axis + "::*)+1-" + b + ") div " + a + ">=0)]";
+                        }
+                    }
+
+
+                    if (type.Equals("nth-of-type", StringComparison.OrdinalIgnoreCase)
+                        || type.Equals("nth-last-of-type", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string axis;
+                        if (type.Equals("nth-of-type", StringComparison.OrdinalIgnoreCase))
+                            axis = "preceding-sibling";
+                        else
+                            axis = "following-sibling";
+
+                        if (a == 0)
+                        {
+                            r += "[count(" + axis + "::*)+1=" + b + "]";
+                        }
+                        else
+                        {
+                            r += "[((count(" + axis + "::*)+1-" + b + ") mod " + a + "=0) and ((count(" + axis + "::*)+1-" + b + ") div " + a + ">=0)]";
                         }
                     }
                 }
