@@ -32,7 +32,9 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderText(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            // Allow single space or whitespace-only text (which represents spacing between words)
+            // But reject completely empty strings
+            if (string.IsNullOrEmpty(text))
                 return;
 
             int vertOrientation    = -1;
@@ -206,7 +208,9 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderTextRun(SvgTextContentElement element,
             ref Point ctp, string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            // Allow single space or whitespace-only text (which represents spacing between words)
+            // But reject completely empty strings
+            if (string.IsNullOrEmpty(text))
                 return;
 
             int vertOrientation = -1;

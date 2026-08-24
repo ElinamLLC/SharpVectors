@@ -796,7 +796,7 @@ namespace GdiSvgTestBox
                 return;
             }
 
-            Trace.TraceError(message);
+            Debug.WriteLine(message);
 
             MessageBox.Show(message, MainForm.AppErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -808,7 +808,7 @@ namespace GdiSvgTestBox
                 return;
             }
 
-            Trace.TraceError(ex.ToString());
+            Debug.WriteLine(ex.ToString());
 
             MessageBox.Show(ex.ToString(), MainForm.AppErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

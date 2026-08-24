@@ -836,7 +836,8 @@ namespace SharpVectors.Renderers.Wpf
             if (string.IsNullOrWhiteSpace(text) && !isWhitespace)
                 return;
 
-            string targetText = text.Trim();
+            // For whitespace-only nodes, pass as-is; for normal text, trim
+            string targetText = (isWhitespace && !string.IsNullOrEmpty(text)) ? text : text.Trim();
             if (placement != null)
             {
                 placement.UpdatePositions(targetText);
@@ -852,6 +853,7 @@ namespace SharpVectors.Renderers.Wpf
                     break;
                 }
             }
+            // Pass isWhitespace flag to the renderer so it knows not to reject whitespace-only text
             _horzRenderer.RenderText(element, ref ctp, targetText, rotate, placement);
 
             _context.TextAsGeometry = isGeometryMode;
@@ -897,11 +899,13 @@ namespace SharpVectors.Renderers.Wpf
             if (string.IsNullOrWhiteSpace(text) && !isWhitespace)
                 return;
 
-            string targetText = text.Trim();
+            // For whitespace-only nodes, pass as-is; for normal text, trim
+            string targetText = (isWhitespace && !string.IsNullOrEmpty(text)) ? text : text.Trim();
             if (placement != null)
             {
                 placement.UpdatePositions(targetText);
             }
+            // Pass whitespace text to renderer
             _vertRenderer.RenderText(element, ref ctp, targetText, rotate, placement);
         }
 
@@ -1078,34 +1082,46 @@ namespace SharpVectors.Renderers.Wpf
                 XmlNode child = nodeList[i];
                 if (child.NodeType == XmlNodeType.Text)
                 {
+                    // Detect if this text node is whitespace-only before trimming
+                    bool isWhitespaceOnly = string.IsNullOrWhiteSpace(child.Value);
+
+                    // For whitespace-only nodes, use the original value to preserve spacing.
+                    // For normal nodes, use GetText which applies proper whitespace normalization.
+                    string textToRender;
+                    if (isWhitespaceOnly)
+                    {
+                        // Use original value to preserve whitespace for spacing
+                        textToRender = child.Value;
+                        if (i == (nodeCount - 1) && spaceNode != null)
+                        {
+                            textToRender = child.Value + spaceNode.Value;
+                        }
+                    }
+                    else
+                    {
+                        // Use GetText for normal text processing with whitespace normalization
+                        if (i == (nodeCount - 1) && spaceNode != null)
+                        {
+                            textToRender = WpfTextRenderer.GetText(element, child, spaceNode);
+                        }
+                        else
+                        {
+                            textToRender = WpfTextRenderer.GetText(element, child);
+                        }
+                    }
+
                     if (isVertical)
                     {
                         ctp.X += shiftBy;
                         if (isSingleLine)
                         {
-                            if (i == (nodeCount - 1) && spaceNode != null)
-                            {
-                                RenderVertText(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
-                            }
-                            else
-                            {
-                                RenderVertText(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child), rotate, placement);
-                            }
+                            RenderVertText(element, ref ctp,
+                                textToRender, rotate, placement, isWhitespaceOnly);
                         }
                         else
                         {
-                            if (i == (nodeCount - 1) && spaceNode != null)
-                            {
-                                RenderVertTextRun(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
-                            }
-                            else
-                            {
-                                RenderVertTextRun(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child), rotate, placement);
-                            }
+                            RenderVertTextRun(element, ref ctp,
+                                textToRender, rotate, placement, isWhitespaceOnly);
                         }
                         ctp.X -= shiftBy;
                     }
@@ -1114,29 +1130,13 @@ namespace SharpVectors.Renderers.Wpf
                         ctp.Y -= shiftBy;
                         if (isSingleLine)
                         {
-                            if (i == (nodeCount - 1) && spaceNode != null)
-                            {
-                                RenderHorzText(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
-                            }
-                            else
-                            {
-                                RenderHorzText(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child), rotate, placement);
-                            }
+                            RenderHorzText(element, ref ctp,
+                                textToRender, rotate, placement, isWhitespaceOnly);
                         }
                         else
                         {
-                            if (i == (nodeCount - 1) && spaceNode != null)
-                            {
-                                RenderHorzTextRun(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child, spaceNode), rotate, placement);
-                            }
-                            else
-                            {
-                                RenderHorzTextRun(element, ref ctp,
-                                    WpfTextRenderer.GetText(element, child), rotate, placement);
-                            }
+                            RenderHorzTextRun(element, ref ctp,
+                                textToRender, rotate, placement, isWhitespaceOnly);
                         }
                         ctp.Y += shiftBy;
                     }

@@ -319,7 +319,7 @@ namespace WpfTestSvgControl
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             if (_debugPage != null)
@@ -972,7 +972,7 @@ namespace WpfTestSvgControl
                         }
                         catch (IOException ex)
                         {
-                            Trace.TraceError(ex.ToString());
+                            Debug.WriteLine(ex.ToString());
                             // Image this, WPF will typically cache and/or lock loaded images
                         }
                     }
@@ -984,7 +984,7 @@ namespace WpfTestSvgControl
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 

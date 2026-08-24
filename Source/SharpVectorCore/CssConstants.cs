@@ -59,6 +59,7 @@ namespace SharpVectors.Dom
         public const string PropMask                       = "mask";
         public const string PropOpacity                    = "opacity";
         public const string PropOverflow                   = "overflow";
+        public const string PropPaintOrder                 = "paint-order";
         public const string PropPointerEvents              = "pointer-events";
         public const string PropShapeRendering             = "shape-rendering";
         public const string PropSrc                        = "src";

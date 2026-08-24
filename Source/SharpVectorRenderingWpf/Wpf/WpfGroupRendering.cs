@@ -77,6 +77,12 @@ namespace SharpVectors.Renderers.Wpf
                     _drawGroup.ClipGeometry = clipGeom;
                 }
 
+                Brush maskBrush = this.Masking;
+                if (maskBrush != null)
+                {
+                    _drawGroup.OpacityMask = maskBrush;
+                }
+
                 Transform transform = this.Transform;
                 if (transform != null)
                 {

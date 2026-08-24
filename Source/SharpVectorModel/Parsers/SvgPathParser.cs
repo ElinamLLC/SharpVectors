@@ -157,7 +157,7 @@ namespace SharpVectors.Dom.Svg
                 }
                 catch (FormatException ex)
                 {
-                    Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
+                    Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
 
                     SkipSubPath();
                 }

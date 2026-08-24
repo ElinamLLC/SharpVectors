@@ -95,11 +95,21 @@ namespace SharpVectors.Renderers.Wpf
             _paintContexts = new Dictionary<string, WpfSvgPaintContext>(StringComparer.Ordinal);
             _baseUrls      = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            _registeredIds = settings[RegisteredIdKey] as HashSet<string>;
-            if (_registeredIds == null)
+            // Thread-safe initialization of RegisteredIds
+            // Issue #312: WpfDrawingSettings is not thread-safe
+            // The original code had a classic race condition:
+            //   Thread A: reads null, Thread B: reads null
+            //   Thread A: creates new, Thread B: creates new and overwrites A's instance
+            //   Result: IDs registered by one thread can be lost
+            // Solution: Use lock to ensure only one thread initializes the HashSet
+            lock (settings)
             {
-                _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                settings[RegisteredIdKey] = _registeredIds;
+                _registeredIds = settings[RegisteredIdKey] as HashSet<string>;
+                if (_registeredIds == null)
+                {
+                    _registeredIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    settings[RegisteredIdKey] = _registeredIds;
+                }
             }
 
             var visitors = settings.Visitors;

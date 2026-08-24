@@ -492,7 +492,7 @@ namespace SharpVectors.Renderers.Gdi
         //        }
         //        catch (Exception ex)
         //        {
-        //            Trace.TraceError(ex.ToString());
+        //            Debug.WriteLine(ex.ToString());
         //        }
         //    }
 
@@ -541,7 +541,7 @@ namespace SharpVectors.Renderers.Gdi
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
             }
 
@@ -670,7 +670,7 @@ namespace SharpVectors.Renderers.Gdi
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
             }
 

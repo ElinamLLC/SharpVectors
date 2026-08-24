@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="170mm" height="222mm" viewBox="0 0 170 222"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" fill-rule="evenodd" clip-rule="evenodd" stroke="#000000" stroke-linecap="round" fill="none" xml:space="preserve">
+    <g>
+        <text x="13.914" y="9.657" stroke="none" fill="#000000" font-family="'Arial'" font-size="3.174">This is a test!</text>
+        <text x="13.914" y="13.484" stroke="none" fill="#000000ff" font-family="'Arial'" font-size="3.174">
+            <tspan fill="green">This</tspan>
+            <tspan> </tspan>
+            <tspan fill="red">is</tspan>
+            <tspan> </tspan>
+            <tspan fill="green">a</tspan>
+            <tspan> </tspan>
+            <tspan fill="red">test!</tspan>
+        </text>
+    </g>
+</svg>

@@ -774,7 +774,7 @@ namespace SharpVectors.Renderers.Texts
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
             }
 
@@ -1076,7 +1076,7 @@ namespace SharpVectors.Renderers.Texts
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
             }
 
@@ -1318,6 +1318,75 @@ namespace SharpVectors.Renderers.Texts
                         }
                     }
                 }
+            }
+        }
+
+        #endregion
+
+        #region Paint-Order Support
+
+        /// <summary>
+        /// Draws geometry respecting the paint-order CSS property.
+        /// 
+        /// For text rendering with paint-order support, this method creates separate
+        /// drawings when stroke-first rendering is needed, instead of using the
+        /// standard DrawContext.DrawGeometry which applies fill then stroke.
+        /// </summary>
+        /// <param name="textElement">The SVG text element being rendered</param>
+        /// <param name="brush">The fill brush (or null for stroke-only)</param>
+        /// <param name="pen">The stroke pen (or null for fill-only)</param>
+        /// <param name="geometry">The text geometry to draw</param>
+        /// <remarks>
+        /// <para>
+        /// This method respects the SVG paint-order CSS property with Phase 1 support:
+        /// - paint-order: normal/fill → Uses standard DrawGeometry (fill then stroke)
+        /// - paint-order: stroke → Creates separate geometry drawings (stroke then fill)
+        /// 
+        /// This allows text to have visible outlines by rendering stroke underneath
+        /// and fill on top, matching modern browser behavior.
+        /// </para>
+        /// <para>
+        /// For text rendering, when paint-order="stroke" is used:
+        /// 1. Stroke geometry is drawn first (as background outline)
+        /// 2. Fill geometry is drawn second (as foreground text)
+        /// 3. Result: text appears with colored outline effect
+        /// </para>
+        /// </remarks>
+        protected void DrawGeometryWithPaintOrder(SvgTextContentElement textElement, 
+            Brush brush, Pen pen, Geometry geometry)
+        {
+            if (_drawContext == null || geometry == null || geometry.IsEmpty())
+            {
+                return;
+            }
+
+            if (brush == null && pen == null)
+            {
+                return;
+            }
+
+            // Parse paint-order CSS property
+            string paintOrderValue = textElement?.GetAttribute(CssConstants.PropPaintOrder);
+            if (string.IsNullOrWhiteSpace(paintOrderValue) && textElement != null)
+            {
+                paintOrderValue = textElement.GetPropertyValue(CssConstants.PropPaintOrder);
+            }
+
+            WpfPaintOrder paintOrder = WpfPaintOrderHelper.Parse(paintOrderValue);
+
+            // Phase 1: Support stroke-first rendering for text
+            if (paintOrder == WpfPaintOrder.Stroke && pen != null && brush != null)
+            {
+                // Draw stroke first (will be underneath)
+                _drawContext.DrawGeometry(null, pen, geometry);
+
+                // Draw fill second (will be on top)
+                _drawContext.DrawGeometry(brush, null, geometry);
+            }
+            else
+            {
+                // Default: draw with combined brush and pen (fill then stroke)
+                _drawContext.DrawGeometry(brush, pen, geometry);
             }
         }
 

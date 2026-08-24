@@ -86,7 +86,7 @@ namespace SharpVectors.Woffs
             //               or with null transform applied to both tables.
             if (_glyfIndex == -1 || _locaIndex == -1) // Already verified!
             {
-                Trace.TraceError("Glyph Compression Error: The glyf and loca tables must "
+                Debug.WriteLine("Glyph Compression Error: The glyf and loca tables must "
                     +"either be present in their transformed format or with null transform applied to both tables.");
                 return false;
             }
@@ -96,7 +96,7 @@ namespace SharpVectors.Woffs
             Debug.Assert(locaDir.TransformLength == 0);
             if (locaDir.TransformLength != 0)
             {
-                Trace.TraceError("Glyph Compression Error: "
+                Debug.WriteLine("Glyph Compression Error: "
                     +"The transformLength of the transformed loca table must always be zero.");
                 return false;
             }
@@ -178,7 +178,7 @@ namespace SharpVectors.Woffs
             Debug.Assert(reader.Offset == nPointsStreamOffset);
             if (reader.Offset != nPointsStreamOffset)
             {
-                Trace.TraceError("Glyph Compression Error: Invalid parameter {0}.", nContourStreamSize);
+                Debug.WriteLine("Glyph Compression Error: Invalid parameter {0}.", nContourStreamSize);
                 return false;
             }
 
@@ -193,7 +193,7 @@ namespace SharpVectors.Woffs
             Debug.Assert(reader.Offset == flagStreamOffset);
             if (reader.Offset != flagStreamOffset)
             {
-                Trace.TraceError("Glyph Compression Error: Invalid parameter {0}.", nPointsStreamSize);
+                Debug.WriteLine("Glyph Compression Error: Invalid parameter {0}.", nPointsStreamSize);
                 return false;
             }
 
@@ -204,7 +204,7 @@ namespace SharpVectors.Woffs
             //Debug.Assert(reader.Offset == glyphStreamOffset + flagStreamSize);
             //if (reader.Offset != glyphStreamOffset)
             //{
-            //    Trace.TraceError("Glyph Compression Error: Invalid parameter {0}.", flagStreamSize);
+            //    Debug.WriteLine("Glyph Compression Error: Invalid parameter {0}.", flagStreamSize);
             //    return false;
             //}
 
@@ -221,7 +221,7 @@ namespace SharpVectors.Woffs
 
                     if (glyph.SetComponents(compositeReader) == false)
                     {
-                        Trace.TraceError("Glyph Compression Error: Invalid composite stream. GlyphIndex = {0}.", glyphIndex);
+                        Debug.WriteLine("Glyph Compression Error: Invalid composite stream. GlyphIndex = {0}.", glyphIndex);
                         return false;
                     }
                 }
@@ -260,7 +260,7 @@ namespace SharpVectors.Woffs
                     Debug.Assert(glyphPoints != null);
                     if (WoffTriplet.Decode(flagReader, reader, nPoints, glyphPoints) == false)
                     {
-                        Trace.TraceError("Glyph Compression Error: Triplet decoding failed. GlyphIndex = " + glyphIndex);
+                        Debug.WriteLine("Glyph Compression Error: Triplet decoding failed. GlyphIndex = " + glyphIndex);
                         return false;
                     }
 
@@ -303,7 +303,7 @@ namespace SharpVectors.Woffs
                     if (hasBbox)
                     {
                         // An empty glyph must not have a bbox.
-                        Trace.TraceError("Glyph Compression Error: An empty glyph must not have a bbox. GlyphIndex = {0}.", glyphIndex);
+                        Debug.WriteLine("Glyph Compression Error: An empty glyph must not have a bbox. GlyphIndex = {0}.", glyphIndex);
                         return false;
                     }
                 }
@@ -312,7 +312,7 @@ namespace SharpVectors.Woffs
                     if (!hasBbox)
                     {
                         // A composite glyphs must have an explicit bbox.
-                        Trace.TraceError("Glyph Compression Error: A composite glyph must have an explicit bbox. GlyphIndex = {0}.", glyphIndex);
+                        Debug.WriteLine("Glyph Compression Error: A composite glyph must have an explicit bbox. GlyphIndex = {0}.", glyphIndex);
                         return false;
                     }
                 }
@@ -338,7 +338,7 @@ namespace SharpVectors.Woffs
             Debug.Assert(reader.Offset == instructionStreamOffset);
             if (reader.Offset != instructionStreamOffset)
             {
-                Trace.TraceError("Glyph Compression Error: Invalid parameter {0}.", bboxStreamSize);
+                Debug.WriteLine("Glyph Compression Error: Invalid parameter {0}.", bboxStreamSize);
                 return false;
             }
 
@@ -359,7 +359,7 @@ namespace SharpVectors.Woffs
             Debug.Assert(reader.Offset == instructionStreamOffset + instructionStreamSize);
             if (reader.Offset != instructionStreamOffset + instructionStreamSize)
             {
-                Trace.TraceError("Glyph Compression Error: Invalid parameter {0}.", instructionStreamSize);
+                Debug.WriteLine("Glyph Compression Error: Invalid parameter {0}.", instructionStreamSize);
                 return false;
             }
 
@@ -391,7 +391,7 @@ namespace SharpVectors.Woffs
                 pointsWriter.Offset = 0; // Reset the offset, it is non-resizable buffer (size is fixed).
                 if (glyph.Serialize(glyphWriter, pointsWriter, out glyphSize) == false)
                 {
-                    Trace.TraceError("Glyph Serialization Error: Glyph Index = {0}.", glyph.GlyphIndex);
+                    Debug.WriteLine("Glyph Serialization Error: Glyph Index = {0}.", glyph.GlyphIndex);
                     return false;
                 }
                 _glyphsLocations.Add(locaOffset);

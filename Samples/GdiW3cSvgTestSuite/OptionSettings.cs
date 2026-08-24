@@ -241,7 +241,7 @@ namespace GdiW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -266,7 +266,7 @@ namespace GdiW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -543,7 +543,7 @@ namespace GdiW3cSvgTestSuite
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
             }
         }
@@ -596,7 +596,7 @@ namespace GdiW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 

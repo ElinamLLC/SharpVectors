@@ -56,7 +56,7 @@ namespace SharpVectors.Core.Tests.Utils
 		[Test]
 		public void CombineReturnBasePathLocation()
 		{
-			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir),
+			string want = Path.Combine("Tests", "SharpVectorsCore", "bin", ConfigurationDir, RuntimeDir),
 				got = GetProjectRelativePath(PathUtils.Combine(_fixture));
 
 			Assert.AreEqual(want, got);
@@ -65,7 +65,7 @@ namespace SharpVectors.Core.Tests.Utils
 		[Test]
 		public void CombineReturnBasePathAppDomain()
 		{
-			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir),
+			string want = Path.Combine("Tests", "SharpVectorsCore", "bin", ConfigurationDir, RuntimeDir),
 				got = GetProjectRelativePath(CombineInternal(""));
 
 			Assert.AreEqual(want, got);
@@ -76,7 +76,7 @@ namespace SharpVectors.Core.Tests.Utils
 		{
 			const string dir1 = nameof(dir1), dir2 = nameof(dir2);
 
-			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, dir1, dir2),
+			string want = Path.Combine("Tests", "SharpVectorsCore", "bin", ConfigurationDir, RuntimeDir, dir1, dir2),
 				got = GetProjectRelativePath(PathUtils.Combine(_fixture, dir1, dir2));
 
 			Assert.AreEqual(want, got);
@@ -87,7 +87,7 @@ namespace SharpVectors.Core.Tests.Utils
 		{
 			const string dir1 = nameof(dir1), dir2 = nameof(dir2);
 
-			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, dir1, dir2),
+			string want = Path.Combine("Tests", "SharpVectorsCore", "bin", ConfigurationDir, RuntimeDir, dir1, dir2),
 				got = GetProjectRelativePath(CombineInternal(dir1, dir2));
 
 			Assert.AreEqual(want, got);
@@ -96,7 +96,7 @@ namespace SharpVectors.Core.Tests.Utils
 		[Test]
 		public void GetAssemblyPathLocation()
 		{
-			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, "SharpVectors.Core.Tests.dll"),
+			string want = Path.Combine("Tests", "SharpVectorsCore", "bin", ConfigurationDir, RuntimeDir, "SharpVectors.Core.Tests.dll"),
 				got = GetProjectRelativePath(PathUtils.GetAssemblyPath(_fixture));
 
 			Assert.AreEqual(want, got);
@@ -105,7 +105,7 @@ namespace SharpVectors.Core.Tests.Utils
 		[Test]
 		public void GetAssemblyPathAppDomain()
 		{
-			string want = Path.Combine("Tests", "SharpVectors.Core.Tests", "bin", ConfigurationDir, RuntimeDir, "SharpVectors.Core.Tests.dll"),
+			string want = Path.Combine("Tests", "SharpVectorsCore", "bin", ConfigurationDir, RuntimeDir, "SharpVectors.Core.Tests.dll"),
 				got = GetProjectRelativePath(GetAssemblyPathInternal(_fixture));
 
 			Assert.AreEqual(want, got);

@@ -1,0 +1,179 @@
+ {
+  position: relative;
+  z-index: 10;
+  fill: red;
+  opacity: 0.01;
+  stroke: none;
+}
+.ns-tecnica path {
+  position: relative;
+  z-index: 10;
+  fill: red;
+  opacity: 0.01;
+  stroke: none;
+}
+.ns-area {
+  position: relative;
+  z-index: 5;
+  opacity: 0.01;
+}
+.tmsPoints {
+  stroke-width: 1;
+}
+.sClr_black {
+  stroke: rgb(0, 0, 0);
+  fill: none;
+}
+.sClr_red {
+  stroke: rgb(255, 0, 0);
+  fill: none;
+}
+.greyscale.sClr_red {
+  stroke: rgb(77, 77, 77);
+  fill: none;
+}
+.sClr_green {
+  stroke: rgb(0, 255, 0);
+  fill: none;
+}
+.greyscale.sClr_green {
+  stroke: rgb(150, 150, 150);
+  fill: none;
+}
+.sClr_blue {
+  stroke: rgb(0, 0, 255);
+  fill: none;
+}
+.greyscale.sClr_blue {
+  stroke: rgb(28, 28, 28);
+  fill: none;
+}
+.sClr_yellow {
+  stroke: rgb(255, 255, 0);
+  fill: none;
+}
+.greyscale.sClr_yellow {
+  stroke: rgb(227, 227, 227);
+  fill: none;
+}
+.sClr_cyan {
+  stroke: rgb(0, 255, 255);
+  fill: none;
+}
+.greyscale.sClr_cyan {
+  stroke: rgb(179, 179, 179);
+  fill: none;
+}
+.sClr_magenta {
+  stroke: rgb(255, 0, 255);
+  fill: none;
+}
+.greyscale.sClr_magenta {
+  stroke: rgb(105, 105, 105);
+  fill: none;
+}
+.fClr_black {
+  fill: rgb(0, 0, 0);
+  stroke-width: 0;
+}
+.fClr_red {
+  fill: rgb(255, 0, 0);
+  stroke-width: 0;
+}
+.fClr_green {
+  fill: rgb(0, 255, 0);
+  stroke-width: 0;
+}
+.fClr_blue {
+  fill: rgb(0, 0, 255);
+  stroke-width: 0;
+}
+.fClr_yellow {
+  fill: rgb(255, 255, 0);
+  stroke-width: 0;
+}
+.fClr_cyan {
+  fill: rgb(0, 255, 255);
+  stroke-width: 0;
+}
+.fClr_magenta {
+  fill: rgb(255, 0, 255);
+  stroke-width: 0;
+}
+:root {
+  --tmsLt_Scale: 0;
+  --tmsLt_Scale2: 0;
+  --tmsLt_Scale3: 0;
+  --tmsLt_Scale4: 0;
+  --tmsLt_Scale5: 0;
+  --tmsLt_Scale6: 0;
+  --tmsLt_Scale7: 0;
+  --tmsbPostFix: 0;
+}
+.sLt_Dash {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale2), var(--tmsLt_Scale2);
+}
+.sLt_DashX2 {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale4), var(--tmsLt_Scale2);
+}
+.sLt_DashDot {
+  stroke-dasharray: 0, 0, 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale5), var(--tmsLt_Scale2), var(--tmsLt_Scale),
+    var(--tmsLt_Scale2);
+}
+.sLt_Dot {
+  stroke-dasharray: 0;
+  stroke-dasharray: var(--tmsLt_Scale);
+}
+.sLt_Hidden {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale5), var(--tmsLt_Scale2);
+}
+.sLt_Divide {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale5), var(--tmsLt_Scale5);
+}
+.sLt_Center {
+  stroke-dasharray: 0, 0, 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale5), var(--tmsLt_Scale2),
+    var(--tmsLt_Scale2), var(--tmsLt_Scale2);
+}
+.sLt_Phantom {
+  stroke-dasharray: 0, 0, 0, 0, 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale7), var(--tmsLt_Scale2),
+    var(--tmsLt_Scale2), var(--tmsLt_Scale2), var(--tmsLt_Scale2),
+    var(--tmsLt_Scale2);
+}
+.sLt_DgnDot {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale), var(--tmsLt_Scale3);
+}
+.sLt_DgnDash {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale3), var(--tmsLt_Scale);
+}
+.sLt_DgnDash2 {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale6), var(--tmsLt_Scale2);
+}
+.sLt_DgnDashDot {
+  stroke-dasharray: 0, 0, 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale3), var(--tmsLt_Scale), var(--tmsLt_Scale),
+    var(--tmsLt_Scale);
+}
+.sLt_Dgn5 {
+  stroke-dasharray: 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale3), var(--tmsLt_Scale3);
+}
+.sLt_Dgn6 {
+  stroke-dasharray: 0, 0, 0, 0, 0, 0;
+  stroke-dasharray: var(--tmsLt_Scale3), var(--tmsLt_Scale), var(--tmsLt_Scale),
+    var(--tmsLt_Scale), var(--tmsLt_Scale), var(--tmsLt_Scale);
+}
+.sLt_Dgn7 {
+  stroke-dasharray: 0, 00, 0;
+  stroke-dasharray: var(--tmsLt_Scale4), var(--tmsLt_Scale1),
+    var(--tmsLt_Scale2), var(--tmsLt_Scale1);
+}

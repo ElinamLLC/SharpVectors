@@ -548,7 +548,7 @@ namespace WpfW3cSvgTestSuite
             catch (Exception ex)
             {
                 var msgText = "Uri: " + uriText + Environment.NewLine + ex.ToString();
-                Trace.TraceError(msgText);
+                Debug.WriteLine(msgText);
 
                 MessageBox.Show(msgText, MainWindow.AppErrorTitle, 
                     MessageBoxButton.OK, MessageBoxImage.Error);

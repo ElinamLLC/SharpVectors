@@ -293,7 +293,7 @@ namespace SharpVectors.Renderers
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -329,7 +329,7 @@ namespace SharpVectors.Renderers
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -928,7 +928,7 @@ namespace SharpVectors.Renderers
                         sb.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, errorText));
                     }
 
-                    Trace.TraceError(sb.ToString());
+                    Debug.WriteLine(sb.ToString());
                     return;
                 }
 
@@ -938,7 +938,7 @@ namespace SharpVectors.Renderers
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -960,7 +960,7 @@ namespace SharpVectors.Renderers
                 .Where(l => l != null);
             foreach (var referencedPath in referencedPaths)
             {
-                Trace.WriteLine(referencedPath);
+                Debug.WriteLine(referencedPath);
                 parameters.ReferencedAssemblies.Add(referencedPath);
             }
             //foreach (AssemblyName assemName in currAssembly.GetReferencedAssemblies())

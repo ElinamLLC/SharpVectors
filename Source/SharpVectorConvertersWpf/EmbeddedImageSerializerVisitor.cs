@@ -77,7 +77,7 @@ namespace SharpVectors.Converters
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             _imageCount = 1;

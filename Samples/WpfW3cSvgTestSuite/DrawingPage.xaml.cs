@@ -86,7 +86,7 @@ namespace WpfW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 return false;
             }
@@ -136,7 +136,7 @@ namespace WpfW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             try
@@ -167,7 +167,7 @@ namespace WpfW3cSvgTestSuite
             catch (Exception ex)
             {
                 svgDrawing.Source = null;
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return true;

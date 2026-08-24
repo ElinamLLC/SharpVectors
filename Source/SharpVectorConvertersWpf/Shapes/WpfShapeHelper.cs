@@ -702,7 +702,7 @@ namespace SharpVectors.Converters.Shapes
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine(ex);
+                    Debug.WriteLine(ex);
                 }
             }
 

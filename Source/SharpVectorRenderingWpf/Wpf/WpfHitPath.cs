@@ -255,7 +255,7 @@ namespace SharpVectors.Renderers.Wpf
             }
             foreach (var splitPath in splitPaths)
             {
-                System.Diagnostics.Trace.WriteLine(splitPath);
+                System.Diagnostics.Debug.WriteLine(splitPath);
             }
 
             var uniqueId = SvgObject.GetUniqueId(hitDrawing);

@@ -161,7 +161,7 @@ namespace SharpVectors.Converters
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -173,7 +173,7 @@ namespace SharpVectors.Converters
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -271,7 +271,7 @@ namespace SharpVectors.Converters
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -430,7 +430,7 @@ namespace SharpVectors.Converters
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -486,7 +486,7 @@ namespace SharpVectors.Converters
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -643,7 +643,7 @@ namespace SharpVectors.Converters
             catch (Exception ex)
             {
                 // Issue #125
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
             return null;
         }
@@ -740,7 +740,7 @@ namespace SharpVectors.Converters
 #endif
                 }
 
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
             return asm;
         }
@@ -773,7 +773,7 @@ namespace SharpVectors.Converters
             catch (Exception ex)
             {
                 asm = Assembly.GetEntryAssembly();
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
             return asm;
         }

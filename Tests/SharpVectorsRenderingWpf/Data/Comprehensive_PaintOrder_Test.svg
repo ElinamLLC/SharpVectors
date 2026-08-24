@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <defs>
+	<style>
+	  text {
+		font-family: Arial, sans-serif;
+		font-size: 36px;
+	  }
+
+	  .test1 {
+		fill: black;
+		stroke: yellow;
+		stroke-width: 2;
+		paint-order: stroke fill;
+	  }
+
+	  .test2 {
+		fill: black;
+		stroke: red;
+		stroke-width: 2;
+		paint-order: fill stroke;
+	  }
+
+	  .test3 {
+		fill: black;
+		stroke: blue;
+		stroke-width: 2;
+	  }
+	</style>
+  </defs>
+
+  <!-- Test 1: CSS class with paint-order: stroke fill -->
+  <text class="test1" x="20" y="60">Stroke First</text>
+
+  <!-- Test 2: CSS class with paint-order: fill stroke -->
+  <text class="test2" x="20" y="120">Fill First</text>
+
+  <!-- Test 3: CSS class with no paint-order (default) -->
+  <text class="test3" x="20" y="180">Default Order</text>
+
+  <!-- Test 4: Inline style with paint-order -->
+  <text x="20" y="240" style="fill: green; stroke: orange; stroke-width: 2; paint-order: stroke fill;">Inline Stroke</text>
+</svg>

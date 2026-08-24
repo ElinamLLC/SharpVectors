@@ -501,7 +501,7 @@ namespace WpfTestSvgControl
             {
                 return;
             }
-            Trace.WriteLine(string.Format("Debug List Count: {0}, {1}", drawings.Count, hitPaths.Count));
+            Debug.WriteLine(string.Format("Debug List Count: {0}, {1}", drawings.Count, hitPaths.Count));
 //            var hitDrawings = new DrawingGroup();
 
             _drawingVisual = new System.Windows.Media.DrawingVisual();
@@ -749,7 +749,7 @@ namespace WpfTestSvgControl
                         }
                         catch (IOException ex)
                         {
-                            Trace.TraceError(ex.ToString());
+                            Debug.WriteLine(ex.ToString());
                             // Image this, WPF will typically cache and/or lock loaded images
                         }
                     }
@@ -855,7 +855,7 @@ namespace WpfTestSvgControl
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             if (zoomPanControl != null && zoomPanControl.ScrollOwner == null)

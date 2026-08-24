@@ -71,7 +71,7 @@ namespace GdiW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 return false;
             }
@@ -94,7 +94,7 @@ namespace GdiW3cSvgTestSuite
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 return false;
             }

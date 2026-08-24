@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="200" viewBox="0 0 640 200">
+  <defs>
+	<style>
+	  .css-stroke {
+		paint-order: stroke fill;
+	  }
+	  .css-fill {
+		paint-order: fill stroke;
+	  }
+	</style>
+  </defs>
+
+  <!-- Test 1: Inline style (should work) -->
+  <rect x="10" y="10" width="140" height="60" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="20" y="50" font-size="32" fill="black" stroke="yellow" stroke-width="2" 
+		style="paint-order: stroke fill">
+	Inline
+  </text>
+
+  <!-- Test 2: CSS class (may not work) -->
+  <rect x="160" y="10" width="140" height="60" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="170" y="50" font-size="32" fill="black" stroke="yellow" stroke-width="2" 
+		class="css-stroke">
+	CSS
+  </text>
+
+  <!-- Test 3: Simple text with just fill (baseline) -->
+  <rect x="310" y="10" width="140" height="60" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="320" y="50" font-size="32" fill="black">
+	Baseline
+  </text>
+
+  <!-- Test 4: Text with inline stroke-width (to force geometry) -->
+  <rect x="460" y="10" width="140" height="60" fill="none" stroke="gray" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="470" y="50" font-size="32" fill="black" stroke="cyan" stroke-width="3">
+	Stroke Only
+  </text>
+</svg>

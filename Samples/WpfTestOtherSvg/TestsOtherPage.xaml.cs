@@ -293,7 +293,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex) 
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -305,17 +305,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** Svg-Net *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** Svg-Net *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess && File.Exists(testHandler.OutputFile))
@@ -401,7 +401,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex)
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -413,17 +413,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** Apache Batik *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** Apache Batik *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess && File.Exists(testHandler.OutputFile))
@@ -509,7 +509,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex)
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -521,17 +521,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** Resvg *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** Resvg *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess && File.Exists(testHandler.OutputFile))
@@ -614,7 +614,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex)
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -626,17 +626,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** Firefox *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** Firefox *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess)
@@ -727,7 +727,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex)
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -739,17 +739,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** Inkscape *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** Inkscape *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess && File.Exists(testHandler.OutputFile))
@@ -835,7 +835,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex)
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -847,17 +847,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** Image Magick *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** Image Magick *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess && File.Exists(testHandler.OutputFile))
@@ -946,7 +946,7 @@ namespace WpfTestOtherSvg
                 catch (IOException ex)
                 {
                     // Catch the IOException that is raised if the pipe is broken or disconnected.
-                    Trace.TraceError("[Server] Error: {0}", ex.Message);
+                    Debug.WriteLine("[Server] Error: {0}", ex.Message);
                 }
             }
 
@@ -958,17 +958,17 @@ namespace WpfTestOtherSvg
                 return _optionSettings.CrashImageFile;
             }
             var exitCode = pipeClient.ExitCode;
-            //Trace.WriteLine("ExitCode: " + pipeClient.ExitCode);
+            //Debug.WriteLine("ExitCode: " + pipeClient.ExitCode);
 
             pipeClient.Close();
-            //Trace.WriteLine("[Server] Client quit. Server terminating.");
+            //Debug.WriteLine("[Server] Client quit. Server terminating.");
 
             var outputText = outputBuilder.ToString().Trim();
             if (outputText.Length != 0)
             {
-                Trace.WriteLine(string.Empty);
-                Trace.WriteLine("###***** LibRsvg *****");
-                Trace.WriteLine(outputText);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine("###***** LibRsvg *****");
+                Debug.WriteLine(outputText);
             }
 
             if (exitCode == ExitSuccess && File.Exists(testHandler.OutputFile))

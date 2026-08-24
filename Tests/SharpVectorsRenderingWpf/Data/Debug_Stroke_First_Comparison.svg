@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+  <defs>
+	<style>
+	  .strokeFirst { paint-order: stroke fill; }
+	  .fillFirst { paint-order: fill stroke; }
+	</style>
+  </defs>
+
+  <!-- Test 1: Inline paint-order (WORKING) -->
+  <text x="20" y="60" font-size="48" fill="black" stroke="yellow" stroke-width="3" 
+		style="paint-order: stroke fill">
+	Inline
+  </text>
+  <text x="20" y="100" font-size="12" fill="gray">↑ stroke-first via inline style</text>
+
+  <!-- Test 2: CSS Class paint-order (NOT WORKING?) -->
+  <text x="220" y="60" font-size="48" fill="black" stroke="yellow" stroke-width="3" 
+		class="strokeFirst">
+	CSS Cls
+  </text>
+  <text x="220" y="100" font-size="12" fill="gray">↑ stroke-first via CSS class</text>
+
+  <!-- Test 3: No paint-order (baseline) -->
+  <text x="420" y="60" font-size="48" fill="black" stroke="yellow" stroke-width="3">
+	Default
+  </text>
+  <text x="420" y="100" font-size="12" fill="gray">↑ no paint-order specified</text>
+</svg>

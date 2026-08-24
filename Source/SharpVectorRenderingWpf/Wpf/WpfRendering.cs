@@ -1259,6 +1259,100 @@ namespace SharpVectors.Renderers.Wpf
 
         #endregion
 
+        #region Protected Helper Methods
+
+        /// <summary>
+        /// Determines whether the overflow property requires clipping for the given element.
+        /// Returns true if overflow is "hidden" or "scroll", false otherwise.
+        /// This method resolves "inherit" values via CSS cascading.
+        /// </summary>
+        /// <returns>True if clipping should be applied, false otherwise (for "visible", "inherit", etc.)</returns>
+        protected bool ShouldClipOverflow()
+        {
+            if (_svgElement == null)
+            {
+                return false;
+            }
+
+            var comparer = StringComparison.OrdinalIgnoreCase;
+            var localName = _svgElement.LocalName == null ? string.Empty : _svgElement.LocalName;
+
+            // Clipping is only relevant for these elements (per SVG spec)
+            if (!localName.Equals("svg", comparer) && !localName.Equals("marker", comparer) &&
+                !localName.Equals("symbol", comparer) && !localName.Equals("pattern", comparer))
+            {
+                return false;
+            }
+
+            string sOverflow = null;
+
+            // First, check if overflow attribute is explicitly set on THIS element
+            string overflowAttr = _svgElement.GetAttribute("overflow");
+
+            if (!string.IsNullOrWhiteSpace(overflowAttr) && !overflowAttr.Equals("", StringComparison.Ordinal))
+            {
+                // Overflow explicitly set on this element - use it
+                sOverflow = overflowAttr;
+            }
+            else
+            {
+                // Overflow not explicitly set on this element
+                // Check computed value to see if inherited from parent or applied by CSS
+                var overflow = _svgElement.GetComputedCssValue("overflow", string.Empty) as CssValue;
+
+                if (overflow != null && !string.IsNullOrWhiteSpace(overflow.CssText))
+                {
+                    // We have a computed value - but we need to distinguish:
+                    // 1. Inherited from parent (should use inherited value)
+                    // 2. CSS default 'visible' (should apply SVG default 'hidden' instead)
+
+                    // SVG element with no explicit overflow inherits from parent if parent is also SVG
+                    // Otherwise applies SVG default 'hidden'
+                    var parent = _svgElement.ParentNode as SvgElement;
+                    if (parent != null && (parent.LocalName == "svg" || parent.LocalName == "symbol" || 
+                                           parent.LocalName == "marker" || parent.LocalName == "pattern"))
+                    {
+                        // Parent is a viewport element, use inherited value
+                        sOverflow = overflow.CssText;
+                    }
+                    else
+                    {
+                        // Parent is not a viewport element, or no parent
+                        // Check if the computed value is the CSS default 'visible'
+                        if (string.Equals(overflow.CssText, CssConstants.ValVisible, StringComparison.OrdinalIgnoreCase))
+                        {
+                            // This is likely the CSS default, not an inherited value
+                            // Apply SVG 1.1 spec default instead
+                            sOverflow = CssConstants.ValHidden;
+                        }
+                        else
+                        {
+                            // Use the computed value
+                            sOverflow = overflow.CssText;
+                        }
+                    }
+                }
+                else
+                {
+                    // No computed value - apply SVG 1.1 spec default
+                    // Per SVG 1.1 spec, overflow defaults to "hidden" for svg, marker, symbol, and pattern elements
+                    sOverflow = CssConstants.ValHidden;
+                }
+            }
+
+            // Clipping should only happen for "hidden" or "scroll"; "visible" and "inherit" (resolved to visible) do not clip
+            if (sOverflow != null &&
+                (string.Equals(sOverflow, CssConstants.ValHidden, comparer) || 
+                 string.Equals(sOverflow, "scroll", comparer)))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
         #region IDisposable Members
 
         protected override void Dispose(bool disposing)

@@ -3,7 +3,9 @@
 using System.Windows;
 using System.Windows.Media;
 
+using SharpVectors.Dom;
 using SharpVectors.Dom.Svg;
+using SharpVectors.Renderers.Wpf;
 
 namespace SharpVectors.Renderers.Texts
 {
@@ -131,13 +133,44 @@ namespace SharpVectors.Renderers.Texts
             {
                 return;
             }
-            if (_contentGeometry.Children.Count == 1)
+
+            // Check for paint-order to support stroke-first rendering
+            WpfPaintOrder paintOrder = GetPaintOrder();
+
+            // If stroke-first and both brush and pen exist, render stroke first then fill
+            if (paintOrder == WpfPaintOrder.Stroke && _pen != null && _brush != null)
             {
-                context.DrawDrawing(new GeometryDrawing(_brush, _pen, _contentGeometry.Children[0]));
+                // Render stroke first (will be underneath)
+                if (_contentGeometry.Children.Count == 1)
+                {
+                    context.DrawDrawing(new GeometryDrawing(null, _pen, _contentGeometry.Children[0]));
+                }
+                else
+                {
+                    context.DrawDrawing(new GeometryDrawing(null, _pen, _contentGeometry));
+                }
+
+                // Render fill second (will be on top)
+                if (_contentGeometry.Children.Count == 1)
+                {
+                    context.DrawDrawing(new GeometryDrawing(_brush, null, _contentGeometry.Children[0]));
+                }
+                else
+                {
+                    context.DrawDrawing(new GeometryDrawing(_brush, null, _contentGeometry));
+                }
             }
             else
             {
-                context.DrawDrawing(new GeometryDrawing(_brush, _pen, _contentGeometry));
+                // Default: draw with combined brush and pen (fill then stroke)
+                if (_contentGeometry.Children.Count == 1)
+                {
+                    context.DrawDrawing(new GeometryDrawing(_brush, _pen, _contentGeometry.Children[0]));
+                }
+                else
+                {
+                    context.DrawDrawing(new GeometryDrawing(_brush, _pen, _contentGeometry));
+                }
             }
         }
 
@@ -152,6 +185,23 @@ namespace SharpVectors.Renderers.Texts
         #endregion
 
         #region Private Methods
+
+        private WpfPaintOrder GetPaintOrder()
+        {
+            if (_contentElement == null)
+            {
+                return WpfPaintOrder.Normal;
+            }
+
+            // Parse paint-order CSS property
+            string paintOrderValue = _contentElement.GetAttribute(CssConstants.PropPaintOrder);
+            if (string.IsNullOrWhiteSpace(paintOrderValue))
+            {
+                paintOrderValue = _contentElement.GetPropertyValue(CssConstants.PropPaintOrder);
+            }
+
+            return WpfPaintOrderHelper.Parse(paintOrderValue);
+        }
 
         private ISvgAnimatedLength GetStartOffset(SvgTextPathElement pathElement, SvgTextBaseElement textElement)
         {

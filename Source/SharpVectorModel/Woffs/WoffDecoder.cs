@@ -587,7 +587,7 @@ namespace SharpVectors.Woffs
                         catch (Exception ex)
                         {
                             errorOccurred = true;
-                            Trace.TraceError(ex.Message);
+                            Debug.WriteLine(ex.Message);
                         }
                     }
                 }
@@ -608,7 +608,7 @@ namespace SharpVectors.Woffs
             _collectionHeader = new CollectionHeader();
             if (_collectionHeader.Read(stream) == false)
             {
-                Trace.TraceError("Collection Font Error: Reading of collection header failed.");
+                Debug.WriteLine("Collection Font Error: Reading of collection header failed.");
                 return false;
             }
 
@@ -692,7 +692,7 @@ namespace SharpVectors.Woffs
                         catch (Exception ex)
                         {
                             errorOccurred = true;
-                            Trace.TraceError(ex.Message);
+                            Debug.WriteLine(ex.Message);
                         }
                     }
                 }

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="640"
+     height="260"
+     viewBox="0 0 640 260">
+  <style>
+    .caption {
+      fill: #202830;
+      font: 16px Arial, sans-serif;
+      text-anchor: middle;
+    }
+
+    .room-label {
+      fill: #050505;
+      stroke: #ffffff;
+      stroke-opacity: 0.95;
+      stroke-width: 2px;
+      stroke-linejoin: round;
+      font-family: Arial, sans-serif;
+      font-weight: 400;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .stroke-first {
+      paint-order: stroke fill;
+    }
+
+    .fill-first {
+      paint-order: fill stroke;
+    }
+  </style>
+
+  <rect width="640" height="260" fill="#dfe5e9"/>
+
+  <text class="caption" x="165" y="30">paint-order: stroke fill</text>
+  <text class="caption" x="475" y="30">paint-order: fill stroke</text>
+
+  <rect x="20" y="45" width="290" height="190" rx="6" fill="#8999a7"/>
+  <rect x="330" y="45" width="290" height="190" rx="6" fill="#8999a7"/>
+
+  <text class="room-label stroke-first" x="165" y="105" font-size="40px">31C14</text>
+  <text class="room-label stroke-first" x="165" y="180" font-size="21px">31E18</text>
+
+  <text class="room-label fill-first" x="475" y="105" font-size="40px">31C14</text>
+  <text class="room-label fill-first" x="475" y="180" font-size="21px">31E18</text>
+</svg>

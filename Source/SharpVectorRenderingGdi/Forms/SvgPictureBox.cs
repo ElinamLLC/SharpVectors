@@ -754,7 +754,7 @@ namespace SharpVectors.Renderers.Forms
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -894,7 +894,7 @@ namespace SharpVectors.Renderers.Forms
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 if (this.DesignMode)
                 {
@@ -956,7 +956,7 @@ namespace SharpVectors.Renderers.Forms
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 if (this.DesignMode)
                 {
@@ -1288,7 +1288,7 @@ namespace SharpVectors.Renderers.Forms
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 if (this.DesignMode)
                 {

@@ -21,6 +21,16 @@ namespace SharpVectors.Dom.Css
         /// order of the rules in the CSS style sheet. If index is greater than or equal to the number 
         /// of rules in the list, this returns null.
 		/// </summary>
+		ICssRule this[int Item]
+		{
+			get;
+		}
+
+		/// <summary>
+		/// Used to retrieve a CSS rule by ordinal index. The order in this collection represents the 
+        /// order of the rules in the CSS style sheet. If index is greater than or equal to the number 
+        /// of rules in the list, this returns null.
+		/// </summary>
 		ICssRule this[ulong Item]
 		{
 			get;

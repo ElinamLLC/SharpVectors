@@ -259,7 +259,7 @@ namespace WpfTestSvgSample
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 

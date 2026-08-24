@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="2100px" height="2970px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mei="http://www.music-encoding.org/ns/mei" overflow="visible">
+   <desc>Engraved by Verovio 4.1.0[undefined]</desc>
+   <defs>
+      <symbol id="E0A4-1hmocrk" viewBox="0 0 1000 1000" overflow="inherit">
+         <path transform="scale(1,-1)" d="M0 -39c0 68 73 172 200 172 c66 0 114 -37 114 -95 c0 -84 -106 -171 -218 -171  c-64 0 -96 30 -96 94z" />
+      </symbol>
+   </defs>
+   <svg class="definition-scale" color="black" viewBox="0 0 21000 29700">
+      <use xlink:href="#E0A4-1hmocrk" x="1283" y="1553" height="720px" width="720px" />
+   </svg>
+</svg>

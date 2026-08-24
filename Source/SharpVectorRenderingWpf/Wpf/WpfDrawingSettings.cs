@@ -76,6 +76,7 @@ namespace SharpVectors.Renderers.Wpf
         private bool _ensureViewboxPosition;
         private bool _ensureViewboxSize;
         private bool _ignoreRootViewbox;
+        private ViewBoxMode _viewBoxMode;
 
         private string _userCssFilePath;
         private string _userAgentCssFilePath;
@@ -149,6 +150,7 @@ namespace SharpVectors.Renderers.Wpf
             _ensureViewboxSize     = false;
             _ensureViewboxPosition = true;
             _ignoreRootViewbox     = false;
+            _viewBoxMode           = ViewBoxMode.ComputedUnion;  // Default to v1.8.4+ behavior
             _wpfVisitors           = new WpfVisitors();
             _properties            = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
@@ -195,6 +197,7 @@ namespace SharpVectors.Renderers.Wpf
             _ensureViewboxSize     = settings._ensureViewboxSize;
             _ensureViewboxPosition = settings._ensureViewboxPosition;
             _ignoreRootViewbox     = settings._ignoreRootViewbox;
+            _viewBoxMode           = settings._viewBoxMode;
             _wpfVisitors           = settings._wpfVisitors;
 
             _userCssFilePath       = settings._userCssFilePath;
@@ -411,6 +414,35 @@ namespace SharpVectors.Renderers.Wpf
             }
             set {
                 _ignoreRootViewbox = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the viewBox handling mode for SVG rendering.
+        /// </summary>
+        /// <value>
+        /// A <see cref="ViewBoxMode"/> value that determines how SVG viewBox dimensions are calculated.
+        /// The default value is <see cref="ViewBoxMode.ComputedUnion"/>.
+        /// </value>
+        /// <remarks>
+        /// <para>
+        /// <see cref="ViewBoxMode.Strict"/> uses the explicitly declared viewBox and width/height 
+        /// attributes from the SVG root element (pre-1.8.4 behavior).
+        /// </para>
+        /// <para>
+        /// <see cref="ViewBoxMode.ComputedUnion"/> uses the computed union of all rendered element 
+        /// bounds, providing the true visual footprint (v1.8.4+ default behavior). This can cause 
+        /// SVGs without explicit viewBox dimensions to stretch to fill available space, which is 
+        /// why both modes are offered.
+        /// </para>
+        /// </remarks>
+        public ViewBoxMode ViewBoxMode
+        {
+            get {
+                return _viewBoxMode;
+            }
+            set {
+                _viewBoxMode = value;
             }
         }
 

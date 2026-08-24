@@ -69,17 +69,25 @@ namespace SharpVectors.Renderers.Wpf
                 int green = Convert.ToInt32(rgbColor.Green.GetFloatValue(CssPrimitiveType.Number));
                 int blue  = Convert.ToInt32(rgbColor.Blue.GetFloatValue(CssPrimitiveType.Number));
 
+                // Clamp color values to valid byte range (0-255)
+                red   = Math.Max(0, Math.Min(255, red));
+                green = Math.Max(0, Math.Min(255, green));
+                blue  = Math.Max(0, Math.Min(255, blue));
+
                 if (rgbColor.HasAlpha)
                 {
                     double dAlpha = rgbColor.Alpha.GetFloatValue(rgbColor.Alpha.PrimitiveType == CssPrimitiveType.Percentage ?
                         CssPrimitiveType.Number : CssPrimitiveType.Percentage);
                     if (!double.IsNaN(dAlpha) && !double.IsInfinity(dAlpha))
                     {
-                        return Color.FromArgb(Convert.ToByte(dAlpha), Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
+                        // Clamp alpha to 0-255 range
+                        int alpha = Math.Max(0, Math.Min(255, Convert.ToInt32(dAlpha)));
+                        return Color.FromArgb(Convert.ToByte(alpha), Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
                     }
                 }
 
-                return Color.FromArgb(Convert.ToByte(this.Alpha), Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
+                int alphaValue = Math.Max(0, Math.Min(255, this.Alpha));
+                return Color.FromArgb(Convert.ToByte(alphaValue), Convert.ToByte(red), Convert.ToByte(green), Convert.ToByte(blue));
             }
         }
 

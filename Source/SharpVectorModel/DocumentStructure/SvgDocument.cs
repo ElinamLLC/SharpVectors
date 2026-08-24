@@ -878,21 +878,21 @@ namespace SharpVectors.Dom.Svg
                 string localFile = absoluteUri.LocalPath;
                 if (File.Exists(localFile) == false)
                 {
-                    Trace.TraceError("GetNodeByUri: Locally referenced file not found: " + localFile);
+                    Debug.WriteLine("GetNodeByUri: Locally referenced file not found: " + localFile);
                     return null;
                 }
                 string fileExt = Path.GetExtension(localFile);
                 if (!string.Equals(fileExt, SvgConstants.FileExt, StringComparison.OrdinalIgnoreCase)
                     && !string.Equals(fileExt, SvgConstants.FileExtZ, StringComparison.OrdinalIgnoreCase))
                 {
-                    Trace.TraceError("GetNodeByUri: Locally referenced file not valid: " + localFile);
+                    Debug.WriteLine("GetNodeByUri: Locally referenced file not valid: " + localFile);
                     return null;
                 }
             }
 
             if (string.Equals(absoluteUri.Scheme, "data", StringComparison.OrdinalIgnoreCase))
             {
-                Trace.TraceError("GetNodeByUri: The Uri Scheme is 'data' is not a valid XmlDode " + absoluteUri);
+                Debug.WriteLine("GetNodeByUri: The Uri Scheme is 'data' is not a valid XmlDode " + absoluteUri);
                 return null;
             }
 
@@ -1488,7 +1488,7 @@ namespace SharpVectors.Dom.Svg
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError(ex.ToString());
+                        Debug.WriteLine(ex.ToString());
                         //Ignore the exception
                     }
                 }

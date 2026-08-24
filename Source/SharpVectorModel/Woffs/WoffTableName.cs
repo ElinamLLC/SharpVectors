@@ -121,7 +121,7 @@ namespace SharpVectors.Woffs
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return sName;
@@ -162,7 +162,7 @@ namespace SharpVectors.Woffs
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return sName;
@@ -203,7 +203,7 @@ namespace SharpVectors.Woffs
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return sName;
@@ -247,7 +247,7 @@ namespace SharpVectors.Woffs
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return sVersion;
@@ -274,7 +274,7 @@ namespace SharpVectors.Woffs
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return sStyle;

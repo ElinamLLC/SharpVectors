@@ -63,14 +63,14 @@ namespace SharpVectors.Woffs
             // the Flags (bits 0 or 1 or both) must be set.
             if ((flags & 0x01) != 1 && (flags & 0x02) != 1)
             {
-                Trace.TraceError("Hmtx Compression Error: When hmtx transform is indicated by the table directory, "
+                Debug.WriteLine("Hmtx Compression Error: When hmtx transform is indicated by the table directory, "
                     +"the Flags (bits 0 or 1 or both) must be set.");
                 return false;
             }
             // By the specs: Bits 2-7 are reserved and must be zero.
             if ((flags & 0xFC) != 0)
             {
-                Trace.TraceError("Hmtx Compression Error: Bits 2-7 are reserved and must be zero.");
+                Debug.WriteLine("Hmtx Compression Error: Bits 2-7 are reserved and must be zero.");
             }
 
             int numOfGlyphs = glyphs.Length;

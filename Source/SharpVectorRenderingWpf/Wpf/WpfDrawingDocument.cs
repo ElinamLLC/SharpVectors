@@ -448,18 +448,18 @@ namespace SharpVectors.Renderers.Wpf
 
             //var isFound = false;
             //var drawingLayer = this.GetDrawingLayer(_svgDrawing, ref isFound);
-            //System.Diagnostics.Trace.WriteLine("GetId: " + SvgObject.GetId(drawingLayer));
-            //System.Diagnostics.Trace.WriteLine("GetName: " + SvgObject.GetName(drawingLayer));
-            //System.Diagnostics.Trace.WriteLine("GetUniqueId: " + SvgObject.GetUniqueId(drawingLayer));
+            //System.Diagnostics.Debug.WriteLine("GetId: " + SvgObject.GetId(drawingLayer));
+            //System.Diagnostics.Debug.WriteLine("GetName: " + SvgObject.GetName(drawingLayer));
+            //System.Diagnostics.Debug.WriteLine("GetUniqueId: " + SvgObject.GetUniqueId(drawingLayer));
 
             //DrawingCollection drawings = drawingLayer.Children;
             DrawingCollection drawings = _svgDrawing.Children;
             for (int i = drawings.Count - 1; i >= 0; i--)
             {
                 Drawing drawing = drawings[i];
-                System.Diagnostics.Trace.WriteLine("GetId: " + SvgObject.GetId(drawing));
-                System.Diagnostics.Trace.WriteLine("GetName: " + SvgObject.GetName(drawing));
-                System.Diagnostics.Trace.WriteLine("GetUniqueId: " + SvgObject.GetUniqueId(drawing));
+                System.Diagnostics.Debug.WriteLine("GetId: " + SvgObject.GetId(drawing));
+                System.Diagnostics.Debug.WriteLine("GetName: " + SvgObject.GetName(drawing));
+                System.Diagnostics.Debug.WriteLine("GetUniqueId: " + SvgObject.GetUniqueId(drawing));
 
                 if (TryCast.Cast(drawing, out geometryDrawing))
                 {
@@ -570,7 +570,7 @@ namespace SharpVectors.Renderers.Wpf
                 var key = _hitList.LastOrDefault().Key;
                 if (_hitPaths.ContainsKey(key))
                 {
-                    System.Diagnostics.Trace.WriteLine("Key Found: " + _hitPaths[key].Path);
+                    System.Diagnostics.Debug.WriteLine("Key Found: " + _hitPaths[key].Path);
                 }
                 return _hitList.LastOrDefault().Value;
             }

@@ -1,0 +1,15 @@
+.ns-tecnica {
+  position: relative;
+  z-index: 10;
+}
+.ns-area {
+  position: relative;
+  z-index: 5;
+}
+.tmsPoints {
+  stroke-width: 1;
+}
+.sClr-combined {
+  stroke: rgb(77, 77, 77);
+  fill: none;
+}

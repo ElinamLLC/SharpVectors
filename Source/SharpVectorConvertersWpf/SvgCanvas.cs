@@ -1962,7 +1962,7 @@ namespace SharpVectors.Converters
 #endif
                 }
 
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
             return asm;
         }

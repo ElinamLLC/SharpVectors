@@ -401,7 +401,7 @@ namespace WpfSvgTestBox
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Debug.WriteLine(ex.ToString());
                 }
             }
 

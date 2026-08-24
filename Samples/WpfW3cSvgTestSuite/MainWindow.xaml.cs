@@ -351,9 +351,9 @@ namespace WpfW3cSvgTestSuite
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine(string.Empty);
-                    Trace.TraceError(ex.ToString());
-                    Trace.WriteLine(string.Empty);
+                    Debug.WriteLine(string.Empty);
+                    Debug.WriteLine(ex.ToString());
+                    Debug.WriteLine(string.Empty);
 
                     MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -528,9 +528,9 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 this.Cursor = Cursors.Arrow;
 
-                Trace.WriteLine(string.Empty);
-                Trace.TraceError(ex.ToString());
-                Trace.WriteLine(string.Empty);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine(string.Empty);
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -560,9 +560,9 @@ namespace WpfW3cSvgTestSuite
                 _isTreeChangedPending = false;
                 this.Cursor = Cursors.Arrow;
 
-                Trace.WriteLine(string.Empty);
-                Trace.TraceError(ex.ToString());
-                Trace.WriteLine(string.Empty);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine(string.Empty);
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -635,9 +635,9 @@ namespace WpfW3cSvgTestSuite
                 //EnableTestPanel(false);
                 _isTreeChangedPending = false;
 
-                Trace.WriteLine(string.Empty);
-                Trace.TraceError(ex.ToString());
-                Trace.WriteLine(string.Empty);
+                Debug.WriteLine(string.Empty);
+                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine(string.Empty);
 
                 MessageBox.Show(ex.ToString(), AppErrorTitle,
                     MessageBoxButton.OK, MessageBoxImage.Error);

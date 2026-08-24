@@ -251,7 +251,10 @@ namespace SharpVectors.Renderers.Wpf
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                // Log the error with element info for better debugging
+                string elementId = (element is SvgElement svgElem) ? svgElem.Id ?? "[no-id]" : "[unknown]";
+                Debug.WriteLine("Failed to create geometry for <" + element.LocalName + "> id=" + elementId + 
+                    " - " + ex.GetType().Name + ": " + ex.Message);
                 return null;
             }
 
@@ -370,6 +373,12 @@ namespace SharpVectors.Renderers.Wpf
             {
                 geometry.Figures = PathFigureCollection.Parse(pathScript);
 
+                // Note: PathFigureCollection.Parse() may return figures with zero bounds but still valid rendering
+                // instructions. We keep all figures to ensure complete SVG compliance.
+                // Some W3C SVGs and icons were being inappropriately filtered out before.
+
+
+
                 if (_flattenClosedPath && element.IsClosed &&
                     geometry.MayHaveCurves() == element.MayHaveCurves)
                 {
@@ -390,10 +399,13 @@ namespace SharpVectors.Renderers.Wpf
 
                 return geometry;
             }
-            catch (FormatException ex)
+            catch (Exception ex)
             {
-                Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
-                //return null;
+                // Catch ALL exceptions (FormatException, ArgumentException, etc.) from WPF path parsing
+                // and fallback to manual SVG path parsing which is more robust
+                string elementId = element.GetAttribute("id");
+                Trace.TraceWarning("WPF path parsing failed for " + (string.IsNullOrEmpty(elementId) ? "path" : "path id=" + elementId) 
+                    + " (" + ex.GetType().Name + "): " + ex.Message + " - Falling back to manual SVG path parsing.");
                 return CreateGeometry(element);
             }
         }
@@ -459,7 +471,16 @@ namespace SharpVectors.Renderers.Wpf
                     case SvgPathType.LineTo: //else if (DynamicCast.Cast(segment, out pathLineTo))
                         pathLineTo = (SvgPathSegLineto)segment;
                         ptXY = pathLineTo.AbsXY;
-                        pathFigure.Segments.Add(new LineSegment(new Point(ptXY.ValueX, ptXY.ValueY), true));
+
+                        // Skip line segments that are degenerate or near-degenerate
+                        double dx = ptXY.ValueX - lastPoint.ValueX;
+                        double dy = ptXY.ValueY - lastPoint.ValueY;
+
+                        // Only add non-trivial line segments
+                        if (Math.Abs(dx) > 0.001 || Math.Abs(dy) > 0.001)
+                        {
+                            pathFigure.Segments.Add(new LineSegment(new Point(ptXY.ValueX, ptXY.ValueY), true));
+                        }
 
                         lastPoint = ptXY;
                         break;
@@ -470,8 +491,15 @@ namespace SharpVectors.Renderers.Wpf
                         SvgPointF xy = pathCurveTo.AbsXY;
                         SvgPointF x1y1 = pathCurveTo.CubicX1Y1;
                         SvgPointF x2y2 = pathCurveTo.CubicX2Y2;
-                        pathFigure.Segments.Add(new BezierSegment(new Point(x1y1.ValueX, x1y1.ValueY),
-                            new Point(x2y2.ValueX, x2y2.ValueY), new Point(xy.ValueX, xy.ValueY), true));
+
+                        // Skip degenerate Bezier curves (curves to nearly the same point as current)
+                        double bezDx = xy.ValueX - lastPoint.ValueX;
+                        double bezDy = xy.ValueY - lastPoint.ValueY;
+                        if (Math.Abs(bezDx) > 0.001 || Math.Abs(bezDy) > 0.001)
+                        {
+                            pathFigure.Segments.Add(new BezierSegment(new Point(x1y1.ValueX, x1y1.ValueY),
+                                new Point(x2y2.ValueX, x2y2.ValueY), new Point(xy.ValueX, xy.ValueY), true));
+                        }
 
                         lastPoint = xy;
                         break;
@@ -479,10 +507,14 @@ namespace SharpVectors.Renderers.Wpf
                     case SvgPathType.ArcTo: //else if (DynamicCast.Cast(segment, out pathArc))
                         pathArc = (SvgPathSegArc)segment;
                         ptXY = pathArc.AbsXY;
-                        if (lastPoint.Equals(ptXY))
+
+                        // Check for degenerate arc (endpoints are identical or nearly identical)
+                        double arcDx = ptXY.ValueX - lastPoint.ValueX;
+                        double arcDy = ptXY.ValueY - lastPoint.ValueY;
+
+                        if (Math.Abs(arcDx) < 0.001 && Math.Abs(arcDy) < 0.001)
                         {
-                            // If the endpoints (x, y) and (x0, y0) are identical, then this
-                            // is equivalent to omitting the elliptical arc segment entirely.
+                            // If the endpoints are too close, omit the segment entirely.
                         }
                         else if (pathArc.R1.Equals(0) || pathArc.R2.Equals(0))
                         {
@@ -652,6 +684,12 @@ namespace SharpVectors.Renderers.Wpf
         #region IDisposable Members
 
         // This code added to correctly implement the disposable pattern.
+
+        #region Helpers
+
+
+        #endregion
+
         public void Dispose()
         {
             this.Dispose(true);

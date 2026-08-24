@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <style>
+	text {
+	  paint-order: stroke fill;
+	}
+  </style>
+
+  <!-- Using CSS rule for all text elements -->
+  <text x="20" y="60" font-size="40" fill="black" stroke="yellow" stroke-width="2">
+	CSS Rule
+  </text>
+</svg>

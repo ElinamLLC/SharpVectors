@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path id="mail-a" d="M0.600097656,0.281738281 L19.1147461,0.281738281 L9.85742188,8.72058105 L0.600097656,0.281738281 Z M0,12.2817383 L20,12.2817383 L20,15.2817383 L0,15.2817383 L0,12.2817383 Z"/>
+    <path id="mail-c" d="M19.1105935,1.50072908 C19.5575061,1.17624863 20.1828438,1.2754995 20.5073242,1.72241211 C20.8318047,2.16932472 20.7325538,2.79466235 20.2856412,3.1191428 L11.5451654,11.2027616 C11.192335,11.4589337 10.714196,11.456968 10.3634839,11.1979033 L1.41235352,2.75610352 C0.968124066,2.42795928 0.87401841,1.80182669 1.20216265,1.35759724 C1.53030689,0.913367792 2.15643947,0.819262135 2.60066892,1.14740637 L10.9627375,9.15407685 L19.1105935,1.50072908 Z M2,0 L20,0 C21.1045695,0 22,0.8954305 22,2 L22,16 C22,17.1045695 21.1045695,18 20,18 L2,18 C0.8954305,18 0,17.1045695 0,16 L0,2 C0,0.8954305 0.8954305,0 2,0 Z M2,2 L2,16 L20,16 L20,2 L2,2 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(1 3)">
+    <g transform="translate(1 1)">
+      <mask id="mail-b" fill="#ffffff">
+        <use xlink:href="#mail-a"/>
+      </mask>
+      <use fill="#D8D8D8" xlink:href="#mail-a"/>
+      <g fill="#FFA0A0" mask="url(#mail-b)">
+        <rect width="24" height="24" transform="translate(-2 -4)"/>
+      </g>
+    </g>
+    <mask id="mail-d" fill="#ffffff">
+      <use xlink:href="#mail-c"/>
+    </mask>
+    <use fill="#000000" fill-rule="nonzero" xlink:href="#mail-c"/>
+    <g fill="#7600FF" mask="url(#mail-d)">
+      <rect width="24" height="24" transform="translate(-1 -3)"/>
+    </g>
+  </g>
+</svg>

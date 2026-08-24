@@ -394,28 +394,45 @@ namespace SharpVectors.Renderers.Wpf
 
             if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0))
             {
-                // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
-                // dealing with the root SVG element...
-                if (parentNode != null && parentNode.NodeType == XmlNodeType.Document)
+                // Issue284: Only apply clipping when overflow property requires it.
+                // overflow="visible" or overflow="inherit" (resolved to visible) should NOT clip content.
+                // overflow="hidden" or overflow="scroll" should clip to the element's bounds.
+                if (this.ShouldClipOverflow())
                 {
-                    if (context.IsResourceDictionary)
+                    // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
+                    // dealing with the root SVG element...
+                    if (parentNode != null && parentNode.NodeType == XmlNodeType.Document)
                     {
-                        _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                        if (context.IsResourceDictionary)
+                        {
+                            _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                        }
+                        else
+                        {
+                            _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                        }
                     }
                     else
                     {
-                        _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
-                    }
-                }
-                else
-                {
-                    if (transform != null)
-                    {
-                        // We have already applied the transform, which will translate to the start point...
-                        if (transform is TranslateTransform)
+                        if (transform != null)
                         {
-                            //_drawGroup.ClipGeometry = new RectangleGeometry(
-                            //    new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            // We have already applied the transform, which will translate to the start point...
+                            if (transform is TranslateTransform)
+                            {
+                                //_drawGroup.ClipGeometry = new RectangleGeometry(
+                                //    new Rect(0, 0, elmRect.Width, elmRect.Height));
+                            }
+                            else
+                            {
+                                if (context.IsResourceDictionary)
+                                {
+                                    _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
+                                }
+                                else
+                                {
+                                    _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
+                                }
+                            }
                         }
                         else
                         {
@@ -427,17 +444,6 @@ namespace SharpVectors.Renderers.Wpf
                             {
                                 _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
                             }
-                        }
-                    }
-                    else
-                    {
-                        if (context.IsResourceDictionary)
-                        {
-                            _drawGroup.ClipGeometry = WpfConvert.ToPath(elmRect);
-                        }
-                        else
-                        {
-                            _drawGroup.ClipGeometry = new RectangleGeometry(elmRect);
                         }
                     }
                 }
@@ -512,12 +518,18 @@ namespace SharpVectors.Renderers.Wpf
 
             Rect bounds = _context.Bounds;
 
-            bounds.Union(_drawGroup.Bounds);
-
-            if (_drawGroup.ClipGeometry != null)
+            // Apply viewBox mode setting
+            if (_context.Settings != null && _context.Settings.ViewBoxMode == ViewBoxMode.ComputedUnion)
             {
-                bounds.Union(_drawGroup.ClipGeometry.Bounds);
+                // v1.8.4+ behavior: use computed union of rendered bounds
+                bounds.Union(_drawGroup.Bounds);
+
+                if (_drawGroup.ClipGeometry != null)
+                {
+                    bounds.Union(_drawGroup.ClipGeometry.Bounds);
+                }
             }
+            // else ViewBoxMode.Strict: use only the declared viewBox bounds from _context.Bounds
 
             if (bounds.IsEmpty || bounds.Width.Equals(0) || bounds.Height.Equals(0) || _context.Settings == null)
             {

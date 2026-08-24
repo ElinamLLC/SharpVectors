@@ -423,7 +423,7 @@ namespace WpfTestSvgSample
 
                 //stopwatch.Stop();
 
-                //Trace.WriteLine(string.Format("FileName={0}, Time={1}", 
+                //Debug.WriteLine(string.Format("FileName={0}, Time={1}", 
                 //    Path.GetFileName(svgFilePath), stopwatch.ElapsedMilliseconds));
 
                 Stopwatch watch = new Stopwatch();
@@ -547,7 +547,7 @@ namespace WpfTestSvgSample
                         }
                         catch (IOException ex)
                         {
-                            Trace.TraceError(ex.ToString());
+                            Debug.WriteLine(ex.ToString());
                             // Image this, WPF will typically cache and/or lock loaded images
                         }
                     }
@@ -653,7 +653,7 @@ namespace WpfTestSvgSample
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             if (zoomPanControl != null && zoomPanControl.ScrollOwner == null)

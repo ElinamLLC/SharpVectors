@@ -530,7 +530,7 @@ namespace SharpVectors.Woffs
                     this.TableIndices[i] = WoffBuffer.Read255UInt16(stream);
                     if (this.TableIndices[i] >= directoryCount)
                     {
-                        Trace.TraceError("Invalid collection font entry: " + this.TableIndices[i]);
+                        Debug.WriteLine("Invalid collection font entry: " + this.TableIndices[i]);
                         return false;
                     }
                 }

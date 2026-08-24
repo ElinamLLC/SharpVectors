@@ -35,6 +35,8 @@ namespace SharpVectors.Dom.Css
         [ThreadStatic]
         private static CssStyleDeclaration _emptyCssStyle;
 
+        private static readonly CssPropertyValidator _propertyValidator = new CssPropertyValidator();
+
         internal const string UrlName     = "url:Name";
         internal const string UrlMime     = "url:Mime";
         internal const string UrlData     = "url:Data";
@@ -100,6 +102,11 @@ namespace SharpVectors.Dom.Css
         private CssStyleSheetType _origin;
         private IDictionary<string, CssStyleBlock> _styles;
         private ICssRule _parentRule;
+        private CssVariableRegistry _variableRegistry;
+        private CssVariableResolver _variableResolver;
+
+        // Performance caching for resolved property values
+        private Dictionary<string, string> _resolvedValueCache;        // Cache for resolved property values
 
         #endregion
 
@@ -114,6 +121,11 @@ namespace SharpVectors.Dom.Css
             _readOnly   = true;
             _parentRule = null;
             _styles     = new Dictionary<string, CssStyleBlock>(StringComparer.OrdinalIgnoreCase);
+            _variableRegistry = new CssVariableRegistry();
+            _variableResolver = new CssVariableResolver(_variableRegistry);
+
+            // Initialize cache
+            _resolvedValueCache = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -158,6 +170,26 @@ namespace SharpVectors.Dom.Css
         {
             get {
                 return _origin;
+            }
+        }
+
+        /// <summary>
+        /// Gets the CSS variable registry for this declaration
+        /// </summary>
+        public CssVariableRegistry VariableRegistry
+        {
+            get {
+                return _variableRegistry;
+            }
+        }
+
+        /// <summary>
+        /// Gets the CSS variable resolver for this declaration
+        /// </summary>
+        public CssVariableResolver VariableResolver
+        {
+            get {
+                return _variableResolver;
             }
         }
 
@@ -467,6 +499,25 @@ namespace SharpVectors.Dom.Css
                 if (addStyle)
                 {
                     _styles.Add(name, style);
+
+                    // Store custom properties (CSS variables) in the registry
+                    if (name.StartsWith("--", StringComparison.Ordinal))
+                    {
+                        _variableRegistry.DefineGlobalVariable(name, value);
+                    }
+
+                    // Validate the property value if diagnostics context is available
+                    var context = ExtractParsingContext();
+                    if (context != null)
+                    {
+                        ValidatePropertyValue(name, style.Value, context);
+
+                        // Check for undefined variable usage
+                        if (_variableResolver.ContainsVariableReference(value))
+                        {
+                            AnalyzeVariableReferences(name, value, context);
+                        }
+                    }
                 }
 
                 cssText = cssText.Substring(match.Length).Trim();
@@ -482,6 +533,10 @@ namespace SharpVectors.Dom.Css
             {
                 throw new DomException(DomExceptionType.SyntaxErr, "Style declaration ending bracket missing");
             }
+
+            // Clear cache since styles have been re-parsed
+            _resolvedValueCache.Clear();
+
             return cssText;
         }
 
@@ -503,6 +558,28 @@ namespace SharpVectors.Dom.Css
                 throw new DomException(DomExceptionType.NoModificationAllowedErr);
 
             _styles[propertyName] = new CssStyleBlock(propertyName, value, priority, _origin);
+
+            // Invalidate the cache for this property
+            _resolvedValueCache.Remove(propertyName);
+
+            // Store custom properties (CSS variables) in the registry
+            if (propertyName.StartsWith("--", StringComparison.Ordinal))
+            {
+                _variableRegistry.DefineGlobalVariable(propertyName, value);
+            }
+
+            // Validate the property value if diagnostics context is available
+            var context = ExtractParsingContext();
+            if (context != null)
+            {
+                ValidatePropertyValue(propertyName, value, context);
+
+                // Check for undefined variable usage
+                if (_variableResolver.ContainsVariableReference(value))
+                {
+                    AnalyzeVariableReferences(propertyName, value, context);
+                }
+            }
         }
 
         /// <summary>
@@ -525,6 +602,9 @@ namespace SharpVectors.Dom.Css
             if (styleBlock != null)
             {
                 styleBlock.Value = value;
+
+                // Invalidate the cache for this property
+                _resolvedValueCache.Remove(propertyName);
             }
         }
 
@@ -606,7 +686,30 @@ namespace SharpVectors.Dom.Css
             {
                 return string.Empty;
             }
-            return (_styles.ContainsKey(propertyName)) ? _styles[propertyName].Value.Trim('\'') : string.Empty;
+
+            // Check cache first
+            if (_resolvedValueCache.TryGetValue(propertyName, out var cachedValue))
+            {
+                return cachedValue;
+            }
+
+            if (!_styles.ContainsKey(propertyName))
+            {
+                return string.Empty;
+            }
+
+            string value = _styles[propertyName].Value.Trim('\'');
+
+            // Resolve CSS variables if the value contains var()
+            if (_variableResolver.ContainsVariableReference(value))
+            {
+                value = _variableResolver.ResolveValue(value);
+            }
+
+            // Cache the resolved value
+            _resolvedValueCache[propertyName] = value;
+
+            return value;
         }
 
         /// <summary>
@@ -744,6 +847,91 @@ namespace SharpVectors.Dom.Css
                 return _styles.ContainsKey(key);
             }
             return false;
+        }
+
+        #endregion
+
+        #region Private Property Validation Methods
+
+        /// <summary>
+        /// Extracts the CssParsingContext from the parent rule or stylesheet
+        /// </summary>
+        private CssParsingContext ExtractParsingContext()
+        {
+            if (_parentRule == null)
+                return null;
+
+            // Try to get context from stylesheet
+            CssStyleSheet stylesheet = null;
+
+            if (_parentRule is CssStyleSheet)
+            {
+                stylesheet = (CssStyleSheet)_parentRule;
+            }
+            else if (_parentRule is CssRule)
+            {
+                // Try to access ParentStyleSheet property
+                var prop = _parentRule.GetType().GetProperty("ParentStyleSheet",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (prop != null)
+                {
+                    stylesheet = prop.GetValue(_parentRule, null) as CssStyleSheet;
+                }
+            }
+
+            if (stylesheet != null)
+            {
+                return stylesheet.ParsingContext;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Validates a CSS property value and logs warnings if invalid
+        /// </summary>
+        private void ValidatePropertyValue(string propertyName, string propertyValue, CssParsingContext context)
+        {
+            if (context == null || _propertyValidator == null)
+                return;
+
+            var validationResult = _propertyValidator.Validate(propertyName, propertyValue);
+
+            if (!validationResult.IsValid)
+            {
+                string message = $"Invalid value for property '{propertyName}': '{propertyValue}'. {validationResult.Message}";
+                context.AddWarning(message, CssWarningLevel.Medium);
+            }
+        }
+
+        /// <summary>
+        /// Analyzes variable references in a property value and logs diagnostics
+        /// </summary>
+        private void AnalyzeVariableReferences(string propertyName, string propertyValue, CssParsingContext context)
+        {
+            if (context == null)
+                return;
+
+            var references = _variableResolver.GetVariableReferences(propertyValue);
+            foreach (var varRef in references)
+            {
+                // Check if variable is defined
+                if (!_variableRegistry.HasVariable(varRef.VariableName))
+                {
+                    if (string.IsNullOrEmpty(varRef.FallbackValue))
+                    {
+                        string message = $"Undefined CSS variable '{varRef.VariableName}' in property '{propertyName}' with no fallback value";
+                        context.AddWarning(message, CssWarningLevel.Medium);
+                    }
+                }
+
+                // Check for circular dependencies
+                if (_variableResolver.HasCircularDependency(varRef.VariableName))
+                {
+                    string message = $"Circular dependency detected for CSS variable '{varRef.VariableName}' in property '{propertyName}'";
+                    context.AddWarning(message, CssWarningLevel.High);
+                }
+            }
         }
 
         #endregion

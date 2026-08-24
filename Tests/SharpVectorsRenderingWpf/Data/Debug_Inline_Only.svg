@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <!-- Inline style: paint-order as part of style attribute -->
+  <text x="20" y="60" font-size="40" fill="black" stroke="yellow" stroke-width="2" 
+		style="paint-order: stroke fill">
+	Inline Only
+  </text>
+</svg>

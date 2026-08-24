@@ -155,7 +155,7 @@ namespace SharpVectors.Dom.Svg
                             }
                             catch (Exception ex)
                             {
-                                Trace.WriteLine(ex.Message, "SvgScriptElement");
+                                Debug.WriteLine(ex.Message, "SvgScriptElement");
                             }
                         }
                     }

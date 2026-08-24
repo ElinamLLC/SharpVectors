@@ -20,6 +20,7 @@ namespace SharpVectors.Dom.Css
         private readonly bool _isReadOnly;
         private bool _hasFontRule;
         private IList<CssRule> _cssRules;
+        private CssParsingContext _parsingContext;
 
         #endregion
 
@@ -50,6 +51,23 @@ namespace SharpVectors.Dom.Css
         /// </summary>
         /// <param name="parent">The parent rule or parent stylesheet</param>
         /// <param name="cssText">The CSS text containing the rules that will be in this list</param>
+        /// <param name="replacedStrings">
+        /// An array of strings that have been replaced in the string used for matching. 
+        /// These needs to be put back use the DereplaceStrings method.
+        /// </param>
+        /// <param name="origin">The type of CssStyleSheet</param>
+        /// <param name="context">Optional parsing context for diagnostics tracking</param>
+        internal CssRuleList(ref string cssText, object parent, IList<string> replacedStrings, 
+            CssStyleSheetType origin, CssParsingContext context) 
+            : this(ref cssText, parent, replacedStrings, false, origin, context)
+        {
+        }
+
+        /// <summary>
+        /// Constructor for CssRuleList
+        /// </summary>
+        /// <param name="parent">The parent rule or parent stylesheet</param>
+        /// <param name="cssText">The CSS text containing the rules that will be in this list</param>
         /// <param name="readOnly">True if this instance is readonly</param>
         /// <param name="replacedStrings">
         /// An array of strings that have been replaced in the string used for matching. 
@@ -71,7 +89,49 @@ namespace SharpVectors.Dom.Css
                     + parent.GetType());
             }
 
-            Parse(ref cssText, parent, readOnly, replacedStrings, origin);
+            Parse(ref cssText, parent, readOnly, replacedStrings, origin, null);
+            //AppendRules(cssText, replacedStrings);
+        }
+
+        /// <summary>
+        /// Constructor for CssRuleList
+        /// </summary>
+        /// <param name="parent">The parent rule or parent stylesheet</param>
+        /// <param name="cssText">The CSS text containing the rules that will be in this list</param>
+        /// <param name="readOnly">True if this instance is readonly</param>
+        /// <param name="replacedStrings">
+        /// An array of strings that have been replaced in the string used for matching. 
+        /// These needs to be put back use the DereplaceStrings method.
+        /// </param>
+        /// <param name="origin">The type of CssStyleSheet</param>
+        /// <param name="context">Optional parsing context for diagnostics tracking</param>
+        public CssRuleList(ref string cssText, object parent, IList<string> replacedStrings, 
+            bool readOnly, CssStyleSheetType origin, CssParsingContext context) : this()
+        {
+            _origin     = origin;
+            _isReadOnly = readOnly;
+            _parsingContext = context;
+            if (parent is CssRule || parent is CssStyleSheet)
+            {
+                _parent = parent;
+            }
+            else
+            {
+                throw new Exception("The CssRuleList constructor can only take a CssRule or CssStyleSheet as it's first argument " 
+                    + parent.GetType());
+            }
+
+            if (_parsingContext != null)
+            {
+                _parsingContext.StartTracking();
+            }
+
+            Parse(ref cssText, parent, readOnly, replacedStrings, origin, context);
+
+            if (_parsingContext != null)
+            {
+                _parsingContext.StopTracking();
+            }
             //AppendRules(cssText, replacedStrings);
         }
 
@@ -265,93 +325,136 @@ namespace SharpVectors.Dom.Css
 
         #region Static members
 
-        /* can take two kind of structures:
+		/* can take two kind of structures:
 		 * rule{}
 		 * rule{}
 		 * or:
 		 * {
-		 *	rule{}
-		 *	rule{}
+		 *  rule{}
+		 *  rule{}
 		 * }
 		 * */
-        private void Parse(ref string css, object parent, bool readOnly, IList<string> replacedStrings, CssStyleSheetType origin)
-        {
-            bool withBrackets = false;
-            css = css.Trim();
-            if (css.StartsWith("{", StringComparison.OrdinalIgnoreCase))
-            {
-                withBrackets = true;
-                css = css.Substring(1);
-            }
+		private void Parse(ref string css, object parent, bool readOnly, IList<string> replacedStrings, CssStyleSheetType origin, CssParsingContext context = null)
+		{
+			bool withBrackets = false;
+			css = css.Trim();
+			if (css.StartsWith("{", StringComparison.OrdinalIgnoreCase))
+			{
+				withBrackets = true;
+				css = css.Substring(1);
+			}
 
-            while (true)
-            {
-                css = css.Trim();
-                if (css.Length == 0)
-                {
-                    if (withBrackets)
-                    {
-                        throw new DomException(DomExceptionType.SyntaxErr, "Style block missing ending bracket");
-                    }
-                    break;
-                }
-                else if (css.StartsWith("}", StringComparison.OrdinalIgnoreCase))
-                {
-                    // end of block;
-                    css = css.Substring(1);
-                    break;
-                }
-                else if (css.StartsWith("@", StringComparison.OrdinalIgnoreCase))
-                {
-                    // Parse at-rules
-                    // @-rule
-                    CssRule rule = this.TryParse(ref css, parent, readOnly, replacedStrings, origin);
-                    if (rule != null)
-                    {
-                        InsertRule(rule);
-                    }
-                }
-                else
-                {
-                    // must be a selector or error
-                    CssRule rule = CssStyleRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
-                    if (rule != null)
-                    {
-                        InsertRule(rule);
-                    }
-                    else
-                    {
-                        // this is an unknown rule format, possibly a new kind of selector. Try to find the end of it to skip it
+			while (true)
+			{
+				css = css.Trim();
+				if (css.Length == 0)
+				{
+					if (withBrackets)
+					{
+						throw new DomException(DomExceptionType.SyntaxErr, "Style block missing ending bracket");
+					}
+					break;
+				}
+				else if (css.StartsWith("}", StringComparison.OrdinalIgnoreCase))
+				{
+					// end of block;
+					css = css.Substring(1);
+					break;
+				}
+				else if (css.StartsWith("@", StringComparison.OrdinalIgnoreCase))
+				{
+					// Parse at-rules
+					// @-rule
+					CssRule rule = this.TryParse(ref css, parent, readOnly, replacedStrings, origin, context);
+					if (rule != null)
+					{
+						InsertRule(rule);
+					}
+				}
+				else
+				{
+					// must be a selector or error
+					CssRule rule = null;
+					try
+					{
+						rule = CssStyleRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+					}
+					catch (DomException ex)
+					{
+						// Log the parse error to diagnostics if available
+						if (context != null)
+						{
+							context.AddError("Failed to parse style rule: " + ex.Message, 0, css.Substring(0, Math.Min(100, css.Length)));
+						}
+						// Try to skip the malformed rule by finding the next rule boundary
+						int endBracket = css.IndexOf("}", StringComparison.OrdinalIgnoreCase);
+						if (endBracket > -1)
+						{
+							css = css.Substring(endBracket + 1);
+							rule = null; // Continue parsing next rule
+						}
+						else
+						{
+							// Cannot recover from parse error - re-throw if no diagnostics context
+							if (context == null)
+							{
+								throw;
+							}
+							// With diagnostics, log and try to continue
+							context.AddError("Cannot recover from parse error - no rule end bracket found", 0, css);
+							break;
+						}
+					}
 
-                        int startBracket = css.IndexOf("{", StringComparison.OrdinalIgnoreCase);
-                        int endBracket   = css.IndexOf("}", StringComparison.OrdinalIgnoreCase);
-                        int endSemiColon = css.IndexOf(";", StringComparison.OrdinalIgnoreCase);
-                        int endRule;
+					if (rule != null)
+					{
+						InsertRule(rule);
+						if (context != null)
+						{
+							context.RecordRuleParsed();
+						}
+					}
+					else if (rule == null && context == null)
+					{
+						// this is an unknown rule format, possibly a new kind of selector. Try to find the end of it to skip it
 
-                        if (endSemiColon > 0 && endSemiColon < startBracket)
-                        {
-                            endRule = endSemiColon;
-                        }
-                        else
-                        {
-                            endRule = endBracket;
-                        }
+						int startBracket = css.IndexOf("{", StringComparison.OrdinalIgnoreCase);
+						int endBracket   = css.IndexOf("}", StringComparison.OrdinalIgnoreCase);
+						int endSemiColon = css.IndexOf(";", StringComparison.OrdinalIgnoreCase);
+						int endRule;
 
-                        if (endRule > -1)
-                        {
-                            css = css.Substring(endRule + 1);
-                        }
-                        else
-                        {
-                            throw new DomException(DomExceptionType.SyntaxErr, "Can not parse the CSS file");
-                        }
-                    }
-                }
-            }
-        }
+						if (endSemiColon > 0 && endSemiColon < startBracket)
+						{
+							endRule = endSemiColon;
+						}
+						else
+						{
+							endRule = endBracket;
+						}
+
+						if (endRule > -1)
+						{
+							if (context != null)
+							{
+								context.AddWarning("Skipping unparseable CSS rule: " + css.Substring(0, Math.Min(50, css.Length)), CssWarningLevel.Low);
+							}
+							css = css.Substring(endRule + 1);
+						}
+						else
+						{
+							if (context != null)
+							{
+								context.AddError("Can not parse the CSS file - malformed rule", 0, css.Substring(0, Math.Min(100, css.Length)));
+							}
+							throw new DomException(DomExceptionType.SyntaxErr, "Can not parse the CSS file");
+						}
+					}
+				}
+			}
+		}
 
         private CssRule TryParse(ref string css, object parent, bool readOnly,
-            IList<string> replacedStrings, CssStyleSheetType origin)
+            IList<string> replacedStrings, CssStyleSheetType origin, CssParsingContext context = null)
         {
             CssRule rule;
 
@@ -359,6 +462,10 @@ namespace SharpVectors.Dom.Css
             rule = CssMediaRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
             if (rule != null)
             {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
                 return rule;
             }
 
@@ -366,6 +473,10 @@ namespace SharpVectors.Dom.Css
             rule = CssImportRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
             if (rule != null)
             {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
                 return rule;
             }
 
@@ -373,6 +484,10 @@ namespace SharpVectors.Dom.Css
             rule = CssCharsetRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
             if (rule != null)
             {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
                 return rule;
             }
 
@@ -380,18 +495,30 @@ namespace SharpVectors.Dom.Css
             if (rule != null)
             {
                 _hasFontRule = true;
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
                 return rule;
             }
 
             rule = CssPageRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
             if (rule != null)
             {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
                 return rule;
             }
 
             rule = CssUnknownRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
             if (rule != null)
             {
+                if (context != null)
+                {
+                    context.AddWarning("Unknown CSS rule - may not be supported", CssWarningLevel.Medium);
+                }
                 return rule;
             }
 

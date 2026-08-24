@@ -502,7 +502,7 @@ namespace WpfXXETestBox
                 return;
             }
 
-            Trace.TraceError(message);
+            Debug.WriteLine(message);
 
             MessageBox.Show(message, AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -514,7 +514,7 @@ namespace WpfXXETestBox
                 return;
             }
 
-            Trace.TraceError(ex.ToString());
+            Debug.WriteLine(ex.ToString());
 
             MessageBox.Show(ex.ToString(), AppErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }

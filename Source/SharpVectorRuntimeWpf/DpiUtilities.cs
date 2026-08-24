@@ -315,7 +315,7 @@ namespace SharpVectors.Runtime
 
             double ScreenScalingFactor = (double)PhysicalScreenHeight / (double)LogicalScreenHeight;
 
-            //System.Diagnostics.Trace.WriteLine("Monitor:\"" + deviceName + "\" Scaling factor:" + ScreenScalingFactor
+            //System.Diagnostics.Debug.WriteLine("Monitor:\"" + deviceName + "\" Scaling factor:" + ScreenScalingFactor
             //     + " Logical height:" + LogicalScreenHeight + " Physical height:" + PhysicalScreenHeight);
 
             NativeMethods.DeleteDC(dc);

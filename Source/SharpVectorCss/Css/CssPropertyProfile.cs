@@ -154,6 +154,7 @@ namespace SharpVectors.Dom.Css
             Add("mask", false, CssConstants.ValNone);
             Add("opacity", false, SvgConstants.ValOne);
             Add("overflow", false, CssConstants.ValVisible);
+            Add("paint-order", true, "normal");
             Add("pointer-events", true, "visiblePainted");
             Add("shape-rendering", true, CssConstants.ValAuto);
             Add("solid-color", true, CssConstants.ValBlack);

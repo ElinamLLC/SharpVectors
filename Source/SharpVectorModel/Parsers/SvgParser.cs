@@ -75,7 +75,7 @@ namespace SharpVectors.Dom.Svg
             catch (IOException ex)
             {
                 _isSuccessful = false;
-                Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
+                Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
             }
 
             return _isSuccessful;
@@ -155,7 +155,7 @@ namespace SharpVectors.Dom.Svg
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
+                Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
                 return key;
             }
         }

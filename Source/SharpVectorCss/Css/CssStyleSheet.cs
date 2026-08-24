@@ -26,6 +26,7 @@ namespace SharpVectors.Dom.Css
 
         private CssRuleList _cssRules;
         private CssRule _ownerRule;
+        private CssParsingContext _parsingContext;
 
         #endregion
 
@@ -73,6 +74,16 @@ namespace SharpVectors.Dom.Css
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// Gets or sets the parsing context used for diagnostics tracking.
+        /// When set, provides error, warning, and performance metrics during parsing.
+        /// </summary>
+        public CssParsingContext ParsingContext
+        {
+            get { return _parsingContext; }
+            set { _parsingContext = value; }
+        }
 
         /// <summary>
         /// Used to find matching style rules in the cascading order
@@ -176,8 +187,20 @@ namespace SharpVectors.Dom.Css
         /// </exception>
         public ulong InsertRule(string rule, ulong index)
         {
+            CssRule cssRule = TryParse(ref rule, this, false, _alReplacedStrings, _origin, _parsingContext);
+            if (cssRule != null)
+            {
+                if (_parsingContext != null)
+                {
+                    _parsingContext.RecordRuleParsed();
+                }
+                return ((CssRuleList)CssRules).InsertRule(cssRule, index);
+            }
+            if (_parsingContext != null)
+            {
+                _parsingContext.AddError("Failed to parse rule: " + rule, 0, rule);
+            }
             throw new NotImplementedException("CssStyleSheet.InsertRule()");
-            //return ((CssRuleList)CssRules).InsertRule(rule, index);
         }
 
         /// <summary>
@@ -189,7 +212,7 @@ namespace SharpVectors.Dom.Css
                 if (_cssRules == null)
                 {
                     string css = PreProcessContent();
-                    _cssRules = new CssRuleList(ref css, this, _alReplacedStrings, _origin);
+                    _cssRules = new CssRuleList(ref css, this, _alReplacedStrings, _origin, _parsingContext);
                 }
 
                 return _cssRules;
@@ -208,6 +231,89 @@ namespace SharpVectors.Dom.Css
                 return _ownerRule;
             }
         }
+
+
+        public CssRule TryParse(ref string css, object parent, bool readOnly,
+            IList<string> replacedStrings, CssStyleSheetType origin, CssParsingContext context = null)
+        {
+            CssRule rule;
+
+            // creates and parses a CssMediaRule or return null
+            rule = CssMediaRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
+                return rule;
+            }
+
+            // create ImportRule
+            rule = CssImportRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
+                return rule;
+            }
+
+            // create CharSetRule
+            rule = CssCharsetRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
+                return rule;
+            }
+
+            rule = CssFontFaceRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
+                return rule;
+            }
+
+            rule = CssPageRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
+                return rule;
+            }
+
+            rule = CssStyleRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.RecordRuleParsed();
+                }
+                return rule;
+            }
+
+            rule = CssUnknownRule.Parse(ref css, parent, readOnly, replacedStrings, origin);
+            if (rule != null)
+            {
+                if (context != null)
+                {
+                    context.AddWarning("Unknown CSS rule - may not be supported", CssWarningLevel.Medium);
+                }
+                return rule;
+            }
+
+            return rule;
+        }
+
 
         #endregion
     }

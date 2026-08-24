@@ -87,7 +87,7 @@ namespace WpfTestOtherSvg
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 

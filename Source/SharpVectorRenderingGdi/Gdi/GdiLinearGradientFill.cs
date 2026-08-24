@@ -142,7 +142,7 @@ namespace SharpVectors.Renderers.Gdi
                 var gradientStop = gradientStops[i];
                 colors[i] = gradientStop.Color;
                 positions[i] = gradientStop.Offset;
-//                Trace.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
+//                Debug.WriteLine(string.Format("color,position = {0}, {1}", colors[i], positions[i]));
             }
             //LinearGradientBrush brush = new LinearGradientBrush(new PointF(fLeft, fTop),
             //    new PointF(fRight, fBottom), gradientStops[0].Color, gradientStops[stopCount - 1].Color);

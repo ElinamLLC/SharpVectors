@@ -350,26 +350,32 @@ namespace SharpVectors.Renderers.Wpf
             StopTimer();
         }
 
-        // --- A helper method for safe Trace.WriteLine ---
+        // --- A helper method for safe Debug output (non-blocking alternative to Trace) ---
         [Conditional("DEBUG")]
         private static void LogTrace(string message)
         {
+            // Use Debug.WriteLine instead of Debug.WriteLine to avoid:
+            // 1. Thread-safety issues when called from timer background threads
+            // 2. Performance problems when multiple trace listeners are attached
+            // 3. UI freezing when debugger is attached
+            //
+            // Debug.WriteLine is:
+            // - Safer for multi-threaded scenarios
+            // - Simpler and more lightweight
+            // - Less likely to cause blocking I/O
+            // - Still visible in Visual Studio Debug output when debugging
+            //
+            // If this is still causing performance issues, disable-only-on-demand by:
+            // 1. Removing [Conditional("DEBUG")] to compile it out entirely, or
+            // 2. Adding a runtime flag to disable logging when not debugging
             try
             {
-                Trace.WriteLine(message);
+                System.Diagnostics.Debug.WriteLine(message);
             }
-            catch (ObjectDisposedException)
+            catch
             {
-                // This is common during application shutdown when TraceListeners are being disposed.
-                // Just suppress the error, as we're trying to log during a tearing-down process.
-            }
-            catch (Exception ex)
-            {
-                // Catch other unexpected errors during tracing.
-                // For critical errors, you might consider logging to a very basic,
-                // always-available fallback (like a simple file append if possible,
-                // or even just Debug.WriteLine which is simpler).
-                // For now, we'll just suppress.
+                // Suppress any errors during tracing to prevent cache operations from failing
+                // due to logging issues (especially during shutdown)
             }
         }
     }

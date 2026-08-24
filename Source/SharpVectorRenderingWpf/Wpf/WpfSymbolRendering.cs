@@ -125,7 +125,10 @@ namespace SharpVectors.Renderers.Wpf
                 _drawGroup.Transform = transform;
             }
 
-            if (!elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0) 
+            // Issue284: Only apply clipping when overflow property requires it.
+            // overflow="visible" or overflow="inherit" (resolved to visible) should NOT clip content.
+            // overflow="hidden" or overflow="scroll" should clip to the element's bounds.
+            if (this.ShouldClipOverflow() && !elmRect.IsEmpty && !elmRect.Width.Equals(0) && !elmRect.Height.Equals(0) 
                 && !elmRect.Equals(this.GetRootBounds()))
             {
                 // Elements such as "pattern" are also rendered by this renderer, so we make sure we are
@@ -265,7 +268,7 @@ namespace SharpVectors.Renderers.Wpf
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             if (useTransform != null)

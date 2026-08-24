@@ -71,6 +71,9 @@ namespace SharpVectors.Dom.Css
                 if (str.Length > 0)
                 {
                     sels.Add(new CssXPathSelector(str));
+
+                    // Validate selector and record diagnostics
+                    ValidateSelectorAndRecordDiagnostics(str, parent);
                 }
             }
             _xPathSelectors = sels.ToArray();
@@ -194,5 +197,84 @@ namespace SharpVectors.Dom.Css
         }
 
         #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Validates a selector and records any diagnostics in the parsing context if available.
+        /// </summary>
+        private static void ValidateSelectorAndRecordDiagnostics(string selector, object parent)
+        {
+            // Get the parsing context from the parent stylesheet if available
+            CssParsingContext context = ExtractParsingContext(parent);
+            if (context == null)
+            {
+                // No diagnostics context enabled, skip validation
+                return;
+            }
+
+            // Analyze the selector
+            var analysis = CssSelectorValidator.Analyze(selector);
+
+            // Record issues based on severity
+            if (!analysis.IsValid)
+            {
+                foreach (var issue in analysis.Issues)
+                {
+                    context.AddWarning($"Selector '{selector}': {issue}", CssWarningLevel.High);
+                }
+            }
+            else if (analysis.SupportLevel == CssSelectorValidator.SelectorSupportLevel.Modern)
+            {
+                foreach (var issue in analysis.Issues)
+                {
+                    context.AddWarning($"Selector '{selector}': {issue}", CssWarningLevel.Medium);
+                }
+            }
+            else if (analysis.Complexity > 15)
+            {
+                context.AddWarning(
+                    $"Selector '{selector}' has high complexity ({analysis.Complexity}), may impact performance",
+                    CssWarningLevel.Low);
+            }
+        }
+
+        /// <summary>
+        /// Extracts the parsing context from the parent object.
+        /// </summary>
+        private static CssParsingContext ExtractParsingContext(object parent)
+        {
+            // Try to get context from stylesheet
+            CssStyleSheet stylesheet = null;
+
+            if (parent is CssStyleSheet)
+            {
+                stylesheet = (CssStyleSheet)parent;
+            }
+            else if (parent is CssRule)
+            {
+                // Need to traverse up to find the stylesheet
+                var rule = (CssRule)parent;
+                // CssRule has _parentStyleSheet protected field, but we need to use reflection or 
+                // access through public API if available
+                // For now, we'll try to get it through properties
+                var prop = parent.GetType().GetProperty("ParentStyleSheet", 
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (prop != null)
+                {
+                    stylesheet = prop.GetValue(parent, null) as CssStyleSheet;
+                }
+            }
+
+            if (stylesheet != null)
+            {
+                return stylesheet.ParsingContext;
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }
+

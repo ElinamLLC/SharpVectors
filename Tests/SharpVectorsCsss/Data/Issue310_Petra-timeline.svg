@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 500">
+ <style>
+  .f_ { fill: none; }
+  .sA { stroke-width: 4; }
+  .sB { stroke-width: 12; }
+  .s1 { stroke: #0CF; }
+  .s2 { stroke: #F00; }
+  .s3 { stroke: #707; }
+  .s4 { stroke: #000; }
+  .s5 { stroke: #FF9E00; }
+  .s6 { stroke: #00B007; }
+  .ff { font-family: Arial, sans-serif; font-size: 11px; }
+  .ts { x: 85.8; dy: 1.6em; }
+ </style>
+ <defs>
+  <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="grd">
+   <stop offset="0%" stop-color="#EEE0"/>
+   <stop offset="5%" stop-color="#EEEF"/> 
+   <stop offset="98%" stop-color="#EEEF"/>
+   <stop offset="100%" stop-color="#EEE0"/>
+  </linearGradient>
+ </defs>
+ <rect x="0" y="0" width="820" height="500" fill="#FFF"/>
+ <g fill="url(#grd)">
+  <rect width="816" height="53.25" x="0" y="3"></rect>
+  <rect width="816" height="53.25" x="0" y="107.5"></rect>
+  <rect width="816" height="53.25" x="0" y="214"></rect>
+  <rect width="816" height="53.25" x="0" y="320.5"></rect>
+ </g>
+ <g class="f_ s1">
+  <polyline points="122.5 2 122.5 406.5"/>
+  <polyline points="162.5 2 162.5 406.5"/>
+  <polyline points="189.5 2 189.5 406.5"/>
+  <polyline points="215.5 2 215.5 406.5"/>
+  <polyline points="228.5 2 228.5 406.5"/>
+  <polyline points="241.5 2 241.5 406.5"/>
+  <polyline points="268.5 2 268.5 406.5"/>
+  <polyline points="281.5 2 281.5 406.5"/>
+  <polyline points="294.5 2 294.5 406.5"/>
+  <polyline points="307.5 2 307.5 406.5"/>
+  <polyline points="321.5 2 321.5 406.5"/>
+  <polyline points="334.5 2 334.5 406.5"/>
+  <polyline points="352.5 2 352.5 406.5"/>
+  <polyline points="378.5 2 378.5 406.5"/>
+  <polyline points="402.5 2 402.5 406.5"/>
+  <polyline points="422.5 2 422.5 406.5"/>
+  <polyline points="437.5 2 437.5 406.5"/>
+  <polyline points="462.5 2 462.5 406.5"/>
+  <polyline points="484.5 2 484.5 406.5"/>
+  <polyline points="506.5 2 506.5 406.5"/>
+  <polyline points="532.5 2 532.5 406.5"/>
+  <polyline points="602.5 2 602.5 406.5"/>
+  <polyline points="609.5 2 609.5 406.5"/>
+ </g>
+ <g class="f_ s4">
+  <polyline points="103.2 406.5 103.2 409"/>
+  <polyline points="116.4 406.5 116.4 409"/>
+  <polyline points="129.6 406.5 129.6 409"/>
+  <polyline points="142.8 406.5 142.8 409"/>
+  <polyline points="156 406.5 156 412"/>
+  <polyline points="169.2 406.5 169.2 409"/>
+  <polyline points="182.4 406.5 182.4 409"/>
+  <polyline points="195.6 406.5 195.6 409"/>
+  <polyline points="208.8 406.5 208.8 409"/>
+  <polyline points="222 406.5 222 412"/>
+  <polyline points="235.2 406.5 235.2 409"/>
+  <polyline points="248.4 406.5 248.4 409"/>
+  <polyline points="261.6 406.5 261.6 409"/>
+  <polyline points="274.8 406.5 274.8 409"/>
+  <polyline points="288 406.5 288 412"/>
+  <polyline points="301.2 406.5 301.2 409"/>
+  <polyline points="314.4 406.5 314.4 409"/>
+  <polyline points="327.6 406.5 327.6 409"/>
+  <polyline points="340.8 406.5 340.8 409"/>
+  <polyline points="354 406.5 354 412"/>
+  <polyline points="367.2 406.5 367.2 409"/>
+  <polyline points="380.4 406.5 380.4 409"/>
+  <polyline points="393.6 406.5 393.6 409"/>
+  <polyline points="406.8 406.5 406.8 409"/>
+  <polyline points="420 406.5 420 412"/>
+  <polyline points="433.2 406.5 433.2 409"/>
+  <polyline points="446.4 406.5 446.4 409"/>
+  <polyline points="459.6 406.5 459.6 409"/>
+  <polyline points="472.8 406.5 472.8 409"/>
+  <polyline points="486 406.5 486 412"/>
+  <polyline points="499.2 406.5 499.2 409"/>
+  <polyline points="512.4 406.5 512.4 409"/>
+  <polyline points="525.6 406.5 525.6 409"/>
+  <polyline points="538.8 406.5 538.8 409"/>
+  <polyline points="552 406.5 552 412"/>
+  <polyline points="565.2 406.5 565.2 409"/>
+  <polyline points="578.4 406.5 578.4 409"/>
+  <polyline points="591.6 406.5 591.6 409"/>
+  <polyline points="604.8 406.5 604.8 409"/>
+  <polyline points="618 406.5 618 412"/>
+  <polyline points="631.2 406.5 631.2 409"/>
+  <polyline points="644.4 406.5 644.4 409"/>
+  <polyline points="657.6 406.5 657.6 409"/>
+  <polyline points="670.8 406.5 670.8 409"/>
+  <polyline points="684 406.5 684 412"/>
+  <polyline points="697.2 406.5 697.2 409"/>
+  <polyline points="710.4 406.5 710.4 409"/>
+  <polyline points="723.6 406.5 723.6 409"/>
+  <polyline points="736.8 406.5 736.8 409"/>
+  <polyline points="750 406.5 750 412"/>
+  <polyline points="763.2 406.5 763.2 409"/>
+  <polyline points="776.4 406.5 776.4 409"/>
+  <polyline points="789.6 406.5 789.6 409"/>
+  <polyline points="802.8 406.5 802.8 409"/>
+ </g>
+ <g class="ff" text-anchor="middle" >
+  <text x="90" y="424.5">1972</text>
+  <text x="156" y="424.5">1977</text>
+  <text x="222" y="424.5">1982</text>
+  <text x="288" y="424.5">1987</text>
+  <text x="354" y="424.5">1992</text>
+  <text x="420" y="424.5">1997</text>
+  <text x="486" y="424.5">2002</text>
+  <text x="552" y="424.5">2007</text>
+  <text x="618" y="424.5">2012</text>
+  <text x="684" y="424.5">2017</text>
+  <text x="750" y="424.5">2022</text>
+  <text text-anchor="end" x="816" y="424.5">2027</text>
+ </g>
+ <g fill="none" stroke-width="13">
+  <polyline class="s2" points="90 454 103 454"/>
+  <polyline class="s6" points="90 472 103 472"/>
+  <polyline class="s3" points="348 454 361 454"/>
+  <polyline class="s-06C" points="348 472 361 472"/>
+  <polyline class="s5" points="608 454 621 454"/>
+ </g>
+ <polyline class="f_ s1" points="608 472 621 472"/>
+ <g class="f_ sB">
+  <g class="s6">
+   <polyline points="90 11 394 11"/>
+   <polyline points="474 11 800 11"/>
+   <polyline points="90 28.5 183 28.5"/>
+   <polyline points="183 46.5 209 46.5"/>
+   <polyline points="394 64 408 64"/>
+   <polyline points="408 81.5 474 81.5"/>
+   <polyline points="474 99.5 500 99.5"/>
+  </g>
+  <g class="s2">
+   <polyline points="183 117 277 117"/>
+   <polyline points="594 117 632 117"/>
+   <polyline points="277 134.5 594 134.5"/>
+   <polyline points="636 134.5 800 134.5"/>
+  </g>
+  <g class="s3">
+   <polyline points="208 152.5 249 152.5"/>
+   <polyline points="249 170 381 170"/>
+   <polyline points="594 170 632 170"/>
+   <polyline points="644 170 800 170"/>
+   <polyline points="381 188 408 188"/>
+   <polyline points="408 205.5 447 205.5"/>
+   <polyline points="447 223 474 223"/>
+   <polyline points="473 241 500 241"/>
+  </g>
+  <g class="s-06C">
+   <polyline points="90 258.5 183 258.5"/>
+   <polyline points="208 276 301 276"/>
+   <polyline points="594 276 632 276"/>
+   <polyline points="301 294 408 294"/>
+   <polyline points="408 311.5 474 311.5"/>
+   <polyline points="473 329 594 329"/>
+   <polyline points="636 329 800 329"/>
+  </g>
+  <g class="s5">
+   <polyline points="90 347 183 347"/>
+   <polyline points="208 364.5 506.5 364.5"/>
+   <polyline points="594 364.5 632 364.5"/>
+   <polyline points="506.5 382.5 553 382.5"/>
+   <polyline points="632 400 800 400"/>
+  </g>
+ </g>
+ <g class="f_ sA">
+  <polyline class="s2" points="90 11 183 11"/>
+  <polyline class="s2" points="90 28.5 183 28.5"/>
+  <polyline class="s3" points="183 46.5 209 46.5"/>
+  <polyline class="s5" points="183 117 209 117"/>
+  <polyline class="s6" points="408 205.5 447 205.5"/>
+ </g>
+ <g class="f_ s4">
+  <polyline points="90 2 90 412"/>
+  <polyline points="90 406.5 816 406.5 816 412"/>
+ </g>
+ <g class="ff">
+  <text text-anchor="end" x="85.8" y="16">
+   <tspan>Bob Hartman</tspan>
+   <tspan x="85.8" dy="1.6em">Greg Hough</tspan>
+   <tspan x="85.8" dy="1.6em">Rob Frazier</tspan>
+   <tspan x="85.8" dy="1.6em">David Lichens</tspan>
+   <tspan x="85.8" dy="1.6em">Pete Orta</tspan>
+   <tspan x="85.8" dy="1.6em">Quinton Gibson</tspan>
+   <tspan x="85.8" dy="1.6em">Greg X. Volz</tspan>
+   <tspan x="85.8" dy="1.6em">John Schlitt</tspan>
+   <tspan x="85.8" dy="1.6em">John Slick</tspan>
+   <tspan x="85.8" dy="1.6em">John Lawry</tspan>
+   <tspan x="85.8" dy="1.6em">Jim Cooper</tspan>
+   <tspan x="85.8" dy="1.6em">Kevin Brandow</tspan>
+   <tspan x="85.8" dy="1.6em">Trent Thomason</tspan>
+   <tspan x="85.8" dy="1.6em">Bryce Bell</tspan>
+   <tspan x="85.8" dy="1.6em">John DeGroff</tspan>
+   <tspan x="85.8" dy="1.6em">Mark Kelly</tspan>
+   <tspan x="85.8" dy="1.6em">Ronny Cates</tspan>
+   <tspan x="85.8" dy="1.6em">Lonnie Chapin</tspan>
+   <tspan x="85.8" dy="1.6em">Greg Bailey</tspan>
+   <tspan x="85.8" dy="1.6em">Bill Glover</tspan>
+   <tspan x="85.8" dy="1.6em">Louie Weaver</tspan>
+   <tspan x="85.8" dy="1.6em">Paul Simmons</tspan>
+   <tspan x="85.8" dy="1.6em">Cristian Borneo</tspan>
+  </text>
+  <text x="110" y="459">Vocals</text>
+  <text x="110" y="477">Guitars</text>
+  <text x="368" y="459">Keyboards</text>
+  <text x="368" y="477">Bass</text>
+  <text x="628" y="459">Drums</text>
+  <text x="628" y="477">Studio release</text>
+ </g>
+</svg>

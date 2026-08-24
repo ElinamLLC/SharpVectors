@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32526.322
+# Visual Studio Version 18
+VisualStudioVersion = 18.9.12112.369 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A1967865-8F3B-4976-A7EC-8F91EAE4C964}"
 EndProject
@@ -52,6 +52,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfXXETestBox", "Samples\WpfXXETestBox\WpfXXETestBox.csproj", "{DD46FCFE-F92F-4756-B340-BE5FDCA051C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfQuickTest", "Samples\WpfQuickTest\WpfQuickTest.csproj", "{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Css.Tests", "Tests\SharpVectorsCsss\SharpVectors.Css.Tests.csproj", "{F55091EF-7D0B-6920-64E9-E564DAA6B68C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVectors.Rendering.Wpf.Tests", "Tests\SharpVectorsRenderingWpf\SharpVectors.Rendering.Wpf.Tests.csproj", "{F892F921-9F74-FE80-E7E4-6428F89991F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +155,14 @@ Global
 		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F55091EF-7D0B-6920-64E9-E564DAA6B68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F55091EF-7D0B-6920-64E9-E564DAA6B68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F55091EF-7D0B-6920-64E9-E564DAA6B68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F55091EF-7D0B-6920-64E9-E564DAA6B68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F892F921-9F74-FE80-E7E4-6428F89991F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F892F921-9F74-FE80-E7E4-6428F89991F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F892F921-9F74-FE80-E7E4-6428F89991F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F892F921-9F74-FE80-E7E4-6428F89991F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,6 +182,8 @@ Global
 		{EB6717D1-7A87-45FB-8893-C06B5B51AC6F} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{DD46FCFE-F92F-4756-B340-BE5FDCA051C2} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
 		{AEBB65E1-C535-4CEB-96AD-7F880175F7E0} = {A1967865-8F3B-4976-A7EC-8F91EAE4C964}
+		{F55091EF-7D0B-6920-64E9-E564DAA6B68C} = {7DB43362-F0A9-447A-9FD0-2323D2868830}
+		{F892F921-9F74-FE80-E7E4-6428F89991F2} = {7DB43362-F0A9-447A-9FD0-2323D2868830}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBBFB65-D6D1-4727-BE82-54D52CE8FCF3}

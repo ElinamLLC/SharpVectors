@@ -29,7 +29,9 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderText(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            // Allow single space or whitespace-only text (which represents spacing between words)
+            // But reject completely empty strings
+            if (string.IsNullOrEmpty(text))
                 return;
 
             double emSize      = GetComputedFontSize(element);
@@ -213,7 +215,8 @@ namespace SharpVectors.Renderers.Texts
 
                         if (textGeometry != null && !textGeometry.IsEmpty())
                         {
-                            _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
+                            // Use paint-order aware drawing for stroke-first rendering support
+                            this.DrawGeometryWithPaintOrder(element, textBrush, textPen, ExtractTextPathGeometry(textGeometry));
 
                             this.IsTextPath = true;
                         }
@@ -338,7 +341,8 @@ namespace SharpVectors.Renderers.Texts
 
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        _drawContext.DrawGeometry(textBrush, textPen, 
+                        // Use paint-order aware drawing for stroke-first rendering support
+                        this.DrawGeometryWithPaintOrder(element, textBrush, textPen, 
                             ExtractTextPathGeometry(textGeometry));
 
                         this.IsTextPath = true;
@@ -397,7 +401,9 @@ namespace SharpVectors.Renderers.Texts
         public override void RenderTextRun(SvgTextContentElement element, ref Point ctp,
             string text, double rotate, WpfTextPlacement placement)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            // Allow single space or whitespace-only text (which represents spacing between words)
+            // But reject completely empty strings
+            if (string.IsNullOrEmpty(text))
                 return;
 
             double emSize      = GetComputedFontSize(element);
@@ -619,7 +625,8 @@ namespace SharpVectors.Renderers.Texts
 
                         if (textGeometry != null && !textGeometry.IsEmpty())
                         {
-                            _drawContext.DrawGeometry(textBrush, textPen,
+                            // Use paint-order aware drawing for stroke-first rendering support
+                            this.DrawGeometryWithPaintOrder(element, textBrush, textPen,
                                 ExtractTextPathGeometry(textGeometry));
 
                             this.IsTextPath = true;
@@ -759,7 +766,8 @@ namespace SharpVectors.Renderers.Texts
 
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        _drawContext.DrawGeometry(textBrush, textPen,
+                        // Use paint-order aware drawing for stroke-first rendering support
+                        this.DrawGeometryWithPaintOrder(element, textBrush, textPen,
                             ExtractTextPathGeometry(textGeometry));
 
                         this.IsTextPath = true;
@@ -1096,8 +1104,8 @@ namespace SharpVectors.Renderers.Texts
                     Geometry textGeometry = textBuilder.Build(element, nextText, textPoint.X, textPoint.Y);
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-                        //_drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
-                        _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
+                        // Use paint-order aware drawing for stroke-first rendering support
+                        this.DrawGeometryWithPaintOrder(element, textBrush, textPen, textGeometry);
                     }
 
                     //float bboxWidth = (float)formattedText.Width;
@@ -1168,8 +1176,8 @@ namespace SharpVectors.Renderers.Texts
                 Geometry textGeometry = textBuilder.Build(element, text, textPoint.X, textPoint.Y);
                 if (textGeometry != null && !textGeometry.IsEmpty())
                 {
-//                    _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
-                    _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
+                    // Use paint-order aware drawing for stroke-first rendering support
+                    this.DrawGeometryWithPaintOrder(element, textBrush, textPen, textGeometry);
                 }
 
                 //float bboxWidth = (float)formattedText.Width;
@@ -1368,8 +1376,8 @@ namespace SharpVectors.Renderers.Texts
                     Geometry textGeometry = textBuilder.Build(element, inputText, textPoint.X, textPoint.Y);
                     if (textGeometry != null && !textGeometry.IsEmpty())
                     {
-//                        _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
-                        _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
+                        // Use paint-order aware drawing for stroke-first rendering support
+                        this.DrawGeometryWithPaintOrder(element, textBrush, textPen, textGeometry);
                     }
 
                     //float bboxWidth = (float)formattedText.Width;
@@ -1457,8 +1465,8 @@ namespace SharpVectors.Renderers.Texts
                 Geometry textGeometry = textBuilder.Build(element, text, textPoint.X, textPoint.Y);
                 if (textGeometry != null && !textGeometry.IsEmpty())
                 {
-//                    _drawContext.DrawGeometry(textBrush, textPen, ExtractTextPathGeometry(textGeometry));
-                    _drawContext.DrawGeometry(textBrush, textPen, textGeometry);
+                    // Use paint-order aware drawing for stroke-first rendering support
+                    this.DrawGeometryWithPaintOrder(element, textBrush, textPen, textGeometry);
                 }
 
                 //float bboxWidth = (float)formattedText.Width;

@@ -147,7 +147,7 @@ namespace WpfTestOtherSvg
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             var wpfSettings = optionSettings.ConversionSettings;
@@ -309,7 +309,7 @@ namespace WpfTestOtherSvg
             catch (Exception ex)
             {
                 Trace.TraceInformation("Png: " + pngFilePath);
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
 
             return true;
@@ -346,7 +346,7 @@ namespace WpfTestOtherSvg
             catch (Exception ex)
             {
                 svgImage.Source = null;
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
 
                 return false;
             }
@@ -377,7 +377,7 @@ namespace WpfTestOtherSvg
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             }
         }
 

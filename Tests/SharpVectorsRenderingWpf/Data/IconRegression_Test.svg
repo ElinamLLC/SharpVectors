@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Test collection of icon-like elements to diagnose rendering regression -->
+
+  <!-- Simple filled circle (monochrome) -->
+  <circle cx="15" cy="15" r="8" fill="black" stroke="none"/>
+
+  <!-- Small stroke-heavy path (common in icons) -->
+  <path d="M 25 10 L 35 20 L 25 30 L 20 20 Z" fill="black" stroke="black" stroke-width="1.5"/>
+
+  <!-- Thin stroked line (monochrome) -->
+  <line x1="45" y1="10" x2="55" y2="30" stroke="black" stroke-width="1"/>
+
+  <!-- Small closed path with stroke and fill -->
+  <path d="M 65 15 Q 72 10 78 15 Q 75 22 65 25 Q 68 20 65 15 Z" fill="black" stroke="black" stroke-width="0.5"/>
+
+  <!-- Rectangle with small dimensions -->
+  <rect x="10" y="40" width="8" height="8" fill="black"/>
+
+  <!-- Thin cross-hair pattern (multiple small paths) -->
+  <path d="M 30 45 L 30 55" stroke="black" stroke-width="1" fill="none"/>
+  <path d="M 25 50 L 35 50" stroke="black" stroke-width="1" fill="none"/>
+
+  <!-- Circle with very thin stroke -->
+  <circle cx="50" cy="50" r="7" fill="none" stroke="black" stroke-width="0.5"/>
+
+  <!-- Larger icon-like shape (gear) -->
+  <path d="M 70 45 L 72 43 L 75 44 L 74 46 L 76 48 L 73 49 L 74 52 L 71 52 L 71 55 L 68 55 L 68 52 L 65 52 L 66 49 L 63 48 L 65 46 L 64 44 L 67 43 Z" 
+		fill="black" stroke="none"/>
+
+  <!-- Very small polygon (potential edge case) -->
+  <polygon points="30,70 32,68 34,70 32,72" fill="black"/>
+
+  <!-- Path with multiple small segments -->
+  <path d="M 50 70 L 50.5 70.5 L 51 70 L 51.5 70.5 L 52 70" stroke="black" stroke-width="0.5" fill="none"/>
+
+  <!-- Ellipse with small dimensions -->
+  <ellipse cx="70" cy="75" rx="5" ry="3" fill="black"/>
+
+  <!-- A semi-closed path (not fully closed) -->
+  <path d="M 10 85 L 15 85 L 18 90 L 15 95 L 10 95" stroke="black" stroke-width="1" fill="none"/>
+
+  <!-- Closed loop with 3 segments (minimal triangle) -->
+  <path d="M 30 85 L 35 85 L 32.5 90 Z" fill="black" stroke="black" stroke-width="0.5"/>
+</svg>

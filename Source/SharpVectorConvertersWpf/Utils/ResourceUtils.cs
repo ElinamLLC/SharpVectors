@@ -33,7 +33,7 @@ namespace SharpVectors.Converters.Utils
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.Message);
+                Debug.WriteLine(ex.Message);
                 return false;
             }
         }

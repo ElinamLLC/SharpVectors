@@ -62,7 +62,7 @@ namespace SharpVectors.Dom.Svg
             }
             catch (Exception ex)
             {
-                Trace.TraceError(ex.GetType().Name + ": " + ex.Message);
+                Debug.WriteLine(ex.GetType().Name + ": " + ex.Message);
             }
         }
 

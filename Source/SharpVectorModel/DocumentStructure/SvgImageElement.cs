@@ -92,7 +92,7 @@ namespace SharpVectors.Dom.Svg
                     if (absoluteUri.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                     {
                         // image elements can't reference elements in an svg file
-                        Trace.WriteLine("Image elements cannot reference elements in an svg file. Uri: " + absoluteUri);
+                        Debug.WriteLine("Image elements cannot reference elements in an svg file. Uri: " + absoluteUri);
                         return false;
                     }
 
@@ -167,7 +167,7 @@ namespace SharpVectors.Dom.Svg
                         {
                             if (!File.Exists(svgUri.LocalPath))
                             {
-                                Trace.TraceError("Image file does not exist; " + svgUri.LocalPath);
+                                Debug.WriteLine("Image file does not exist; " + svgUri.LocalPath);
                                 return null;
                             }
                             string fileExt = Path.GetExtension(svgUri.LocalPath);

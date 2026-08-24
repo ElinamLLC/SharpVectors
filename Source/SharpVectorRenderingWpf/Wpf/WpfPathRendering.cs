@@ -386,7 +386,38 @@ namespace SharpVectors.Renderers.Wpf
             {
                 Transform transform = this.Transform;
 
-                GeometryDrawing drawing = new GeometryDrawing(brush, pen, geometry);
+                // Handle paint-order CSS property for stroke-first rendering
+                string paintOrderValue = styleElm.GetAttribute(CssConstants.PropPaintOrder);
+                if (string.IsNullOrWhiteSpace(paintOrderValue))
+                {
+                    paintOrderValue = styleElm.GetPropertyValue(CssConstants.PropPaintOrder);
+                }
+
+                WpfPaintOrder paintOrder = WpfPaintOrderHelper.Parse(paintOrderValue);
+
+                Drawing drawing;
+
+                // Phase 1: Support stroke-first rendering by creating separate drawings
+                if (paintOrder == WpfPaintOrder.Stroke && pen != null && brush != null)
+                {
+                    // Stroke-first: render stroke geometry first, then fill on top
+                    DrawingGroup paintOrderGroup = new DrawingGroup();
+
+                    // Add stroke drawing first (will be underneath)
+                    GeometryDrawing strokeDrawing = new GeometryDrawing(null, pen, geometry);
+                    paintOrderGroup.Children.Add(strokeDrawing);
+
+                    // Add fill drawing second (will be on top)
+                    GeometryDrawing fillDrawing = new GeometryDrawing(brush, null, geometry);
+                    paintOrderGroup.Children.Add(fillDrawing);
+
+                    drawing = paintOrderGroup;
+                }
+                else
+                {
+                    // Default/Normal: combined fill and stroke (fill underneath, stroke on top)
+                    drawing = new GeometryDrawing(brush, pen, geometry);
+                }
 
                 Brush maskBrush = this.Masking;
                 Geometry clipGeom = this.ClipGeometry;

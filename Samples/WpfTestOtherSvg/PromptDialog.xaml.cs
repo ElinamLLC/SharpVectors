@@ -99,12 +99,12 @@ namespace WpfTestOtherSvg
                 string destDir   = Path.Combine(_optionSettings.TestsDirectory, "svg");
                 if (!File.Exists(testCss))
                 {
-                    Trace.TraceError("Source CSS file does not exist. " + testCss);
+                    Debug.WriteLine("Source CSS file does not exist. " + testCss);
                     return;
                 }
                 if (!Directory.Exists(sourceDir))
                 {
-                    Trace.TraceError("SVG source directory does not exist. " + sourceDir);
+                    Debug.WriteLine("SVG source directory does not exist. " + sourceDir);
                     return;
                 }
                 if (!Directory.Exists(destDir))
@@ -114,7 +114,7 @@ namespace WpfTestOtherSvg
                 var cssLines = File.ReadAllLines(testCss);
                 if (cssLines == null || cssLines.Length == 0)
                 {
-                    Trace.TraceError("Source CSS file has no contents. " + testCss);
+                    Debug.WriteLine("Source CSS file has no contents. " + testCss);
                     return;
                 }
 
@@ -168,7 +168,7 @@ namespace WpfTestOtherSvg
             catch (Exception ex)
             {
                 _cancelledOrError = true;
-                Trace.TraceError(ex.ToString());
+                Debug.WriteLine(ex.ToString());
             } 
         }
 
@@ -262,7 +262,7 @@ namespace WpfTestOtherSvg
                             }
                             catch (Exception ex)
                             {
-                                Trace.TraceError(ex.ToString());
+                                Debug.WriteLine(ex.ToString());
                             }
                         }
                     }
