@@ -19,9 +19,55 @@ namespace SharpVectors.Renderers.Gdi
         #region Constructors and Destructor
 
         public GdiSvgPaint(SvgStyleableElement elm, string propName)
-            : base(elm.GetComputedStyle(string.Empty).GetPropertyValue(propName))
+            : base(ResolveCssVariables(elm.GetComputedStyle(string.Empty).GetPropertyValue(propName)))
         {
             _element = elm;
+        }
+
+        /// <summary>
+        /// Helper method to resolve or strip CSS variables that are unresolved.
+        /// If a property value contains unresolved var() functions, returns an empty string
+        /// to allow fallback to defaults instead of crashing.
+        /// </summary>
+        private static string ResolveCssVariables(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            // If the value starts with var( and doesn't have a comma (indicating a fallback),
+            // or if it's purely a var() function, we likely have an unresolved variable.
+            // Return empty string to use defaults.
+            if ((value.StartsWith("var(", StringComparison.OrdinalIgnoreCase) && !value.Contains(",")))
+            {
+                return string.Empty;
+            }
+
+            // If the value contains var( with fallback, try to extract the fallback value
+            if (value.IndexOf("var(", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                // Simple case: "var(--name, fallback)"
+                // Find the comma and extract everything after it
+                int openParen = value.IndexOf("(", StringComparison.OrdinalIgnoreCase);
+                int comma = value.IndexOf(",", openParen);
+                if (comma > 0)
+                {
+                    int closeParen = value.LastIndexOf(")");
+                    if (closeParen > comma)
+                    {
+                        string fallback = value.Substring(comma + 1, closeParen - comma - 1).Trim();
+                        if (!string.IsNullOrEmpty(fallback))
+                        {
+                            return fallback;
+                        }
+                    }
+                }
+                // If we can't extract a fallback, return empty
+                return string.Empty;
+            }
+
+            return value;
         }
 
         #endregion
@@ -191,28 +237,170 @@ namespace SharpVectors.Renderers.Gdi
                 return null;
             }
 
-            SvgNumberList list = new SvgNumberList(dashArray);
-
-            uint len = list.NumberOfItems;
-            float[] fDashArray = new float[len];
-
-            for (uint i = 0; i < len; i++)
+            // Handle CSS variables: resolve unresolved CSS variables and extract fallbacks
+            // This prevents crashes when CSS variables are not properly resolved by the CSS engine.
+            dashArray = dashArray.Trim();
+            if (dashArray.IndexOf("var(", StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                // divide by strokeWidth to take care of the difference between Svg and GDI+
-                fDashArray[i] = (float)(list.GetItem(i).Value / strokeWidth);
+                // Use CssVariableResolver to handle complex variable scenarios
+                // Note: CssVariableResolver is in WPF namespace, so we replicate the logic here for GDI
+                dashArray = ResolveCssVariablesForGdi(dashArray);
+
+                if (string.IsNullOrWhiteSpace(dashArray))
+                {
+                    return null;
+                }
             }
 
-            if (len % 2 == 1)
+            try
             {
-                // odd number of values, duplicate
-                float[] tmpArray = new float[len * 2];
-                fDashArray.CopyTo(tmpArray, 0);
-                fDashArray.CopyTo(tmpArray, (int)len);
+                SvgNumberList list = new SvgNumberList(dashArray);
 
-                fDashArray = tmpArray;
+                uint len = list.NumberOfItems;
+                float[] fDashArray = new float[len];
+
+                for (uint i = 0; i < len; i++)
+                {
+                    // divide by strokeWidth to take care of the difference between Svg and GDI+
+                    fDashArray[i] = (float)(list.GetItem(i).Value / strokeWidth);
+                }
+
+                if (len % 2 == 1)
+                {
+                    // odd number of values, duplicate
+                    float[] tmpArray = new float[len * 2];
+                    fDashArray.CopyTo(tmpArray, 0);
+                    fDashArray.CopyTo(tmpArray, (int)len);
+
+                    fDashArray = tmpArray;
+                }
+
+                return fDashArray;
+            }
+            catch (Exception ex)
+            {
+                // If parsing fails for any reason (malformed values, etc.), return null as fallback
+                // This prevents crashes and allows the SVG to render without the dash pattern
+                System.Diagnostics.Debug.WriteLine($"Failed to parse stroke-dasharray value '{dashArray}': {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Resolves CSS variable references in GDI context (mirrors WPF CssVariableResolver logic).
+        /// </summary>
+        private static string ResolveCssVariablesForGdi(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
             }
 
-            return fDashArray;
+            value = value.Trim();
+
+            // If the value doesn't contain var(, it's a literal value
+            if (value.IndexOf("var(", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                return value;
+            }
+
+            // Try to extract a var() call and its fallback
+            int varStart = value.IndexOf("var(", StringComparison.OrdinalIgnoreCase);
+            if (varStart < 0)
+            {
+                return value;
+            }
+
+            // Find the matching closing paren
+            int openParenPos = varStart + 3;
+            int closeParenPos = FindMatchingCloseParenGdi(value, openParenPos);
+
+            if (closeParenPos < 0)
+            {
+                // Malformed var()
+                return value;
+            }
+
+            // Extract the content inside var(...) = e.g., "--my-color, fallback"
+            string content = value.Substring(openParenPos + 1, closeParenPos - openParenPos - 1);
+
+            // Split on first comma to separate variable name from fallback
+            int commaPos = FindFirstTopLevelCommaGdi(content);
+            if (commaPos >= 0)
+            {
+                // Has fallback: var(--name, fallback)
+                string fallback = content.Substring(commaPos + 1).Trim();
+                if (!string.IsNullOrEmpty(fallback))
+                {
+                    // Check if the fallback is itself a var() call (recursive)
+                    if (fallback.IndexOf("var(", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        // Recursively resolve the fallback (limited depth)
+                        return ResolveCssVariablesForGdi(fallback);
+                    }
+                    else
+                    {
+                        // Fallback is a literal value
+                        return fallback;
+                    }
+                }
+            }
+
+            // No fallback or empty fallback: return empty
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Finds the position of the first top-level comma (not inside nested parens).
+        /// </summary>
+        private static int FindFirstTopLevelCommaGdi(string value)
+        {
+            int depth = 0;
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] == '(')
+                {
+                    depth++;
+                }
+                else if (value[i] == ')')
+                {
+                    depth--;
+                }
+                else if (value[i] == ',' && depth == 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Finds the position of the closing parenthesis that matches an opening parenthesis.
+        /// </summary>
+        private static int FindMatchingCloseParenGdi(string value, int startPos)
+        {
+            if (startPos < 0 || startPos >= value.Length || value[startPos] != '(')
+            {
+                return -1;
+            }
+
+            int depth = 1;
+            for (int i = startPos + 1; i < value.Length; i++)
+            {
+                if (value[i] == '(')
+                {
+                    depth++;
+                }
+                else if (value[i] == ')')
+                {
+                    depth--;
+                    if (depth == 0)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return -1;
         }
 
         private float GetDashOffset(float strokeWidth)

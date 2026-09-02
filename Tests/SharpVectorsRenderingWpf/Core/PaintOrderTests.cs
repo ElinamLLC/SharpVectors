@@ -4,7 +4,7 @@ using NUnit.Framework;
 using SharpVectors.Dom;
 using SharpVectors.Renderers.Wpf;
 
-namespace SharpVectors.Rendering.Wpf.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.Core
 {
     /// <summary>
     /// Unit tests for SVG paint-order CSS property support.

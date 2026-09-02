@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="320"
+     height="100"
+     viewBox="0 0 320 100">
+  <style>
+    :root {
+      --dash-pattern: 12 6;
+    }
+
+    .dashed-line {
+      fill: none;
+      stroke: #1565c0;
+      stroke-width: 6;
+      stroke-dasharray: var(--dash-pattern);
+    }
+  </style>
+
+  <rect width="320" height="100" fill="#f2f4f6"/>
+  <path class="dashed-line" d="M 20 50 H 300"/>
+</svg>

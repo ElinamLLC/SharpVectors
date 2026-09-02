@@ -6,7 +6,7 @@ using NUnit.Framework;
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
 
-namespace SharpVectors.Rendering.Wpf.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.RegressionIssues
 {
     [TestFixture]
     public class Issue284_OverflowTest

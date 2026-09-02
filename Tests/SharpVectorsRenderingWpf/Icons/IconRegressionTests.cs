@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace SharpVectors.Rendering.Wpf.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.Icons
 {
     // This is a diagnostic test to inspect geometry filtering behavior
     [TestFixture]

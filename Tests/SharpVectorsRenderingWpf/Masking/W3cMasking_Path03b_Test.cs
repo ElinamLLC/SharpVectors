@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 
-namespace SharpVectors.Rendering.Wpf.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.Masking
 {
     [TestFixture]
     public class W3cMasking_Path03b_Test

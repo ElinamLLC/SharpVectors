@@ -4,17 +4,19 @@ title: FileSvgConverter
 ---
 
 # File SVG Converter - FileSvgConverter
-The **[](xref:SharpVectors.Converters.FileSvgConverter)** converter class takes SVG file as input and outputs XAML file.
-The SVG input can also be one of the following
-* @System.IO.Stream: A stream object providing access to the SVG input content.
-* @System.IO.TextReader: A text reader file providing access to the SVG input content.
-* @System.Xml.XmlReader: An XML reader providing access to the SVG input content.
+
+The **[](xref:SharpVectors.Converters.FileSvgConverter)** converter class takes an SVG file as input and outputs a XAML file.
+The SVG input can also be one of the following types:
+* `System.IO.Stream`: A stream object providing access to the SVG input content.
+* `System.IO.TextReader`: A text reader providing access to the SVG input content.
+* `System.Xml.XmlReader`: An XML reader providing access to the SVG input content.
 
 > [!NOTE] 
-> The output is always to a local file or a network file. It does not provide a backup of existing file.
+> The output is always written to a local or network file. It does not create a backup of an existing file.
 
 ## Sample Code
-The following illustrate a simple case of using the file SVG converter.
+
+The following illustrates a simple use case of the file SVG converter.
 
 # [SVG to XAML C#](#tab/csharp)
 ```csharp

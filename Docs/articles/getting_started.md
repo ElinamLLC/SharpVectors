@@ -7,7 +7,7 @@ title: Getting Started
 
 The SharpVectors library provides three main uses of the SVG files in WPF applications. In this section, we will provide information to get you started with these uses.
 
-For the WPF application, the rendering of the SVG files are provided through classes shown in the diagram below:
+For the WPF application, the rendering of the SVG files is provided through classes shown in the diagram below:
 
 ![WPF Rendering](../images/rendering.png)
 
@@ -30,21 +30,21 @@ All the properties of this class are well documented. The most important propert
 
 * **CultureInfo**: This is the culture information used for the text rendering, and it is passed to the [FormattedText](xref:System.Windows.Media.FormattedText) class. The default is the English culture.
 * **IncludeRuntime**: This determines whether the application using the output of the conversion will link to the SharpVectors.Runtime.dll. The default is **true**, set this to **false** if you do not intend to use the runtime assembly.
-* **TextAsGeometry**: This determines whether the texts are rendered as path geometry. The default is **false**. The vertical text does not currently support this option. Set this to **true** if do not want to use the runtime assembly, so that font path will not be included in the output.
+* **TextAsGeometry**: This determines whether the texts are rendered as path geometry. The default is **false**. Vertical text does not currently support this option. Set this to **true** if you do not want to use the runtime assembly, so that font path will not be included in the output.
 
 > [!NOTE]
 > The **TextAsGeometry** property is marked as deprecated in this version, and will be removed in version 2.0 of the SharpVectors library.
 
 ## Rendering Process
 
-For the WPF system, the rendering process is managed by various classes listed below: named
+For the WPF system, the rendering process is managed by the following classes:
 
-* **[](xref:SharpVectors.Renderers.Utils.WpfSvgWindow)**: An class implementing an abstraction of browser window object.
+* **[](xref:SharpVectors.Renderers.Utils.WpfSvgWindow)**: A class implementing an abstraction of a browser window object.
 * **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingRenderer)**: The controlling class used by the WPF implementation.
-* **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingDocument)**:: This is used to collect rendered drawing information such as a mapping of an SVG ID to the rendered drawing object,
+* **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingDocument)**: This collects rendered drawing information, such as a mapping of SVG IDs to rendered drawing objects.
 * **[](xref:SharpVectors.Renderers.Wpf.WpfDrawingContext)**: The rendering context, which is not directly accessed by the user.
 
-The following code illustrate the basic code required to render an SVG file to a WPF drawing object:
+The following code illustrates the basic code required to render an SVG file to a WPF drawing object:
 
 # [Rendering C# Sample](#tab/csharp)
 ```csharp
@@ -77,7 +77,7 @@ namespace SharpVectors.Test.Sample
             _wpfSettings = new WpfDrawingSettings();
             // Set the options to the rendering controller
             _wpfRenderer = new WpfDrawingRenderer(_wpfSettings);
-            // Create a drawing area of 500x500 pixels and set the rending object to it.
+            // Create a drawing area of 500x500 pixels and set the rendering object to it.
             _wpfWindow   = new WpfSvgWindow(500, 500, _wpfRenderer);
         }
 
@@ -89,7 +89,7 @@ namespace SharpVectors.Test.Sample
             // Signal the start of the rendering process, the drawing context is created.
             _wpfRenderer.BeginRender(drawingDocument);
 
-            // Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            // Open the specified SVG file for drawing; the SVG DOM is created as SvgDocument
             _wpfWindow.LoadDocument(svgFile, _wpfSettings);
 
             // Get the created SVG document
@@ -98,7 +98,7 @@ namespace SharpVectors.Test.Sample
             // Render the SVG document
             _wpfRenderer.Render(svgDocument);
 
-            // Retrived the rendered drawing, and do something with it
+            // Retrieved the rendered drawing, and do something with it
             DrawingGroup drawing = _wpfRenderer.Drawing;
 
             // Signal an end to the rendering process
@@ -133,7 +133,7 @@ Namespace SharpVectors.Test.Sample
             _wpfSettings = New WpfDrawingSettings()
             ' Set the options to the rendering controller
             _wpfRenderer = New WpfDrawingRenderer(_wpfSettings)
-            ' Create a drawing area of 500x500 pixels and set the rending object to it.
+            ' Create a drawing area of 500x500 pixels and set the rendering object to it.
             _wpfWindow = New WpfSvgWindow(500, 500, _wpfRenderer)
         End Sub
 
@@ -144,7 +144,7 @@ Namespace SharpVectors.Test.Sample
             ' Signal the start of the rendering process, the drawing context is created.
             _wpfRenderer.BeginRender(drawingDocument)
 
-            ' Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            ' Open the specified SVG file for drawing; the SVG DOM is created as SvgDocument
             _wpfWindow.LoadDocument(svgFile, _wpfSettings)
 
             ' Get the created SVG document
@@ -153,7 +153,7 @@ Namespace SharpVectors.Test.Sample
             ' Render the SVG document
             _wpfRenderer.Render(svgDocument)
 
-            ' Retrived the rendered drawing, and do something with it
+            ' Retrieved the rendered drawing, and do something with it
             Dim drawing As DrawingGroup = _wpfRenderer.Drawing
 
             ' Signal an end to the rendering process
@@ -165,11 +165,11 @@ End Namespace
 ***
 
 > [!NOTE]
-> The specified dimensions to the window object is not necessarily applied, since the conversion to WPF is a vector-to-vector conversion.
-> This enables the rendered to be scaled in the displaying control, such as the `Image` or `Canvas`.
+> The specified dimensions to the window object are not necessarily applied, since the conversion to WPF is a vector-to-vector conversion.
+> This enables the rendered output to be scaled in the displaying control, such as the `Image` or `Canvas`.
 > To explicitly apply the dimension, set the `PixelWidth` and `PixelHeight` properties in the settings object. This is mainly useful for the generation of static images.
 
-In order to simplify the above codes and avoid repetitions, utility classes (named: Converters) are provided to handle specific needs such as converting a whole directory or converting a set of SVG files into a `ResourceDictionary` object.
+In order to simplify the above code and avoid repetition, utility classes (called Converters) are provided to handle specific needs such as converting an entire directory or converting a set of SVG files into a `ResourceDictionary` object.
 
 ## XAML Support - Namespaces
 
@@ -296,7 +296,7 @@ namespace SharpVectors.Test.Sample
             _wpfSettings = new WpfDrawingSettings();
             // Set the options to the rendering controller
             _wpfRenderer = new WpfDrawingRenderer(_wpfSettings);
-            // Create a drawing area of 500x500 pixels and set the rending object to it.
+            // Create a drawing area of 500x500 pixels and set the rendering object to it.
             _wpfWindow   = new WpfSvgWindow(500, 500, _wpfRenderer);
         }
 
@@ -308,7 +308,7 @@ namespace SharpVectors.Test.Sample
             // Signal the start of the rendering process, the drawing context is created.
             _wpfRenderer.BeginRender(drawingDocument);
 
-            // Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            // Open the specified SVG file for drawing; the SVG DOM is created as SvgDocument
             _wpfWindow.LoadDocument(svgFile, _wpfSettings);
 
             // Get the created SVG document
@@ -317,7 +317,7 @@ namespace SharpVectors.Test.Sample
             // Render the SVG document
             _wpfRenderer.Render(svgDocument);
 
-            // Retrived the rendered drawing, and do something with it
+            // Retrieved the rendered drawing, and do something with it
             DrawingGroup drawing = _wpfRenderer.Drawing;
 
             // Signal an end to the rendering process
@@ -357,7 +357,7 @@ Namespace SharpVectors.Test.Sample
             _wpfSettings = New WpfDrawingSettings()
             ' Set the options to the rendering controller
             _wpfRenderer = New WpfDrawingRenderer(_wpfSettings)
-            ' Create a drawing area of 500x500 pixels and set the rending object to it.
+            ' Create a drawing area of 500x500 pixels and set the rendering object to it.
             _wpfWindow = New WpfSvgWindow(500, 500, _wpfRenderer)
         End Sub
 
@@ -368,7 +368,8 @@ Namespace SharpVectors.Test.Sample
             ' Signal the start of the rendering process, the drawing context is created.
             _wpfRenderer.BeginRender(drawingDocument)
 
-            ' Open the specified SVG file for drawin, the SVG DOM is created as SvgDocument
+            ' Open the specified SVG file for drawing; the SVG DOM is created as SvgDocument
+            _wpfWindow.LoadDocument(svgFile, _wpfSettings)
             _wpfWindow.LoadDocument(svgFile, _wpfSettings)
 
             ' Get the created SVG document

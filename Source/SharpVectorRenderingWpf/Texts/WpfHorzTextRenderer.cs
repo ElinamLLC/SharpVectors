@@ -898,35 +898,16 @@ namespace SharpVectors.Renderers.Texts
             // This is the geometry of the un-positioned text block.
             Geometry textGeometry = formattedText.BuildGeometry(new Point(0, 0));
 
-            // A FormattedText object's geometry is initially un-transformed.
-            // Any existing transform would come from parent elements in an SVG renderer.
-            // This is how you would handle that scenario.
-            if (textGeometry.Transform != null && !textGeometry.Transform.Value.IsIdentity)
-            {
-                // Create a transform group to manage the final transformation.
-                TransformGroup transformGroup = new TransformGroup();
+            // Since FormattedText.BuildGeometry() returns a frozen geometry, we cannot
+            // directly set its Transform property. Instead, we use a GeometryGroup
+            // to wrap the geometry and apply the transform to the group.
+            GeometryGroup group = new GeometryGroup();
+            group.Children.Add(textGeometry);
 
-                // If a transform already exists, add it to the group first.
-                // The order of operations in a TransformGroup is crucial.
-                transformGroup.Children.Add(textGeometry.Transform);
+            // Apply the translation transform for positioning and baseline adjustment.
+            group.Transform = new TranslateTransform(origin.X, origin.Y + yOffset);
 
-                // The Geometry.Transform property is how we apply transformations to the shape.
-                // We'll create a TransformGroup to combine the initial positioning
-                // and the dominant-baseline offset into a single transformation.
-                transformGroup.Children.Add(new TranslateTransform(origin.X, origin.Y + yOffset));
-
-                // The textGeometry is now ready to be transformed.
-                textGeometry.Transform = transformGroup;
-            }
-            else
-            {
-                // If no existing transform, we can directly apply the translation.
-                // Create a TranslateTransform to apply the y-offset.
-                // The textGeometry is now ready to be transformed.
-                textGeometry.Transform = new TranslateTransform(origin.X, origin.Y + yOffset);
-            }   
-
-            return textGeometry;
+            return group;
         }
 
         /// <summary>

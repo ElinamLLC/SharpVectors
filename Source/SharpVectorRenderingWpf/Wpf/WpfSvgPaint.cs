@@ -2,6 +2,7 @@ using System;
 using System.Xml;
 using System.Windows;
 using System.Windows.Media;
+using System.Diagnostics;
 
 using SharpVectors.Dom;
 using SharpVectors.Dom.Css;
@@ -28,7 +29,7 @@ namespace SharpVectors.Renderers.Wpf
         #region Constructors and Destructor
 
         public WpfSvgPaint(WpfDrawingContext context, SvgStyleableElement elm, string propName)
-            : base(elm.GetComputedStyle(string.Empty).GetPropertyValue(propName))
+            : base(ResolveCssVariables(elm.GetComputedStyle(string.Empty).GetPropertyValue(propName)))
         {
             _propertyName = propName;
             _element = elm;
@@ -38,6 +39,67 @@ namespace SharpVectors.Renderers.Wpf
         private WpfSvgPaint(string str)
             : base(str)
         {
+        }
+
+        /// <summary>
+        /// <summary>
+        /// Resolves or strips unresolved CSS variable references to prevent rendering errors.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Specification:</b> CSS Cascading Variables Module Level 1 (css-variables-1)</para>
+        /// <para><b>Purpose:</b></para>
+        /// CSS custom properties (variables) using the var() function may be unresolved at render time
+        /// if the variable is not defined in any active style sheet. This method safely handles unresolved
+        /// variables by extracting fallback values (if present) or returning an empty string to allow
+        /// default values to be used instead of causing parse errors.
+        /// <para><b>Supported Patterns:</b></para>
+        /// <list type="bullet">
+        ///   <item><description><b>Simple unresolved:</b> "var(--my-color)" → returns empty string (triggers default)</description></item>
+        ///   <item><description><b>With fallback:</b> "var(--my-color, #FF0000)" → extracts and returns "#FF0000"</description></item>
+        ///   <item><description><b>Nested fallback:</b> "var(--missing, var(--also-missing, #000))" → resolves recursively to "#000"</description></item>
+        ///   <item><description><b>Fallback chain:</b> "var(--a, var(--b, var(--c, #000)))" → recursively resolves through chain depth limit (10)</description></item>
+        ///   <item><description><b>Complex fallbacks:</b> "var(--x, rgb(255, 0, 0))" or "var(--x, calc(100% - 20px))" → properly handles nested parens</description></item>
+        ///   <item><description><b>Multiple vars:</b> "var(--a) var(--b, #111)" → each processed independently</description></item>
+        ///   <item><description><b>Whitespace normalization:</b> "var( --name , fallback )" → automatically trimmed</description></item>
+        ///   <item><description><b>Null/Empty input:</b> Returns the input unchanged</description></item>
+        ///   <item><description><b>Non-variable strings:</b> Returns unchanged (e.g., "red", "300", "#000")</description></item>
+        /// </list>
+        /// <para><b>Advanced Features:</b></para>
+        /// <list type="bullet">
+        ///   <item><description><b>Cycle Detection:</b> Prevents infinite recursion when fallback chains reference variables already visited</description></item>
+        ///   <item><description><b>Depth Limiting:</b> Max recursion depth of 10 prevents stack overflow from pathological nesting</description></item>
+        ///   <item><description><b>Nested Parentheses:</b> Correctly parses fallbacks containing function calls like rgb(), calc(), etc.</description></item>
+        /// </list>
+        /// <para><b>Debug Output:</b></para>
+        /// Logs diagnostic messages for each resolution step, enabling troubleshooting
+        /// without performance overhead in Release builds. Delegates to CssVariableResolver for detailed parsing.
+        /// </remarks>
+        /// <param name="value">A CSS property value that may contain var() function syntax.</param>
+        /// <returns>A resolved property value, fallback value, or empty string if all variables are unresolved.</returns>
+        private static string ResolveCssVariables(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            // Delegate to the enhanced CSS variable resolver with cycle detection and fallback chains
+            string resolved = CssVariableResolver.ResolveVariables(value);
+
+            // Log the resolution for diagnostics
+            if (resolved != value)
+            {
+                if (string.IsNullOrEmpty(resolved))
+                {
+                    Debug.WriteLine($"[SVG Paint] CSS variable not resolved: '{value}' - using default value");
+                }
+                else
+                {
+                    Debug.WriteLine($"[SVG Paint] CSS variable resolved: '{value}' → '{resolved}'");
+                }
+            }
+
+            return resolved;
         }
 
         #endregion
@@ -545,13 +607,30 @@ namespace SharpVectors.Renderers.Wpf
         private double GetStrokeWidth()
         {
             string strokeWidth = _element.GetPropertyValue("stroke-width");
+
+            // Handle CSS variables: if strokeWidth contains unresolved CSS variables (e.g., "var(--stroke-width, 0.65)"),
+            // we cannot parse it. Return a default value instead.
+            // This prevents crashes when CSS variables are not properly resolved by the CSS engine.
+            if (ContainsCssVariable(strokeWidth))
+            {
+                return 1.0; // Default stroke width
+            }
+
             if (strokeWidth.Length == 0)
                 strokeWidth = "1px";
 
-            SvgLength strokeWidthLength = new SvgLength(_element, "stroke-width",
-                SvgLengthDirection.Viewport, strokeWidth);
+            try
+            {
+                SvgLength strokeWidthLength = new SvgLength(_element, "stroke-width",
+                    SvgLengthDirection.Viewport, strokeWidth);
 
-            return strokeWidthLength.Value;
+                return strokeWidthLength.Value;
+            }
+            catch
+            {
+                // If parsing fails for any reason, return default
+                return 1.0;
+            }
         }
 
         private double GetMiterLimit(double strokeWidth)
@@ -619,18 +698,46 @@ namespace SharpVectors.Renderers.Wpf
                 return null;
             }
 
-            SvgNumberList list = new SvgNumberList(dashArrayText);
-
-            uint len = list.NumberOfItems;
-            DoubleCollection dashArray = new DoubleCollection((int)len);
-
-            for (uint i = 0; i < len; i++)
+            // Handle CSS variables: if the dashArrayText contains unresolved CSS variables (e.g., "var(--dash-pattern)"),
+            // we cannot parse it as a number list. Return null as a safe fallback.
+            // This prevents crashes when CSS variables are not properly resolved by the CSS engine.
+            if (dashArrayText.StartsWith("var(", StringComparison.OrdinalIgnoreCase))
             {
-                //divide by strokeWidth to take care of the difference between Svg and WPF
-                dashArray.Add(list.GetItem(i).Value / strokeWidth);
+                return null;
             }
 
-            return dashArray;
+            try
+            {
+                SvgNumberList list = new SvgNumberList(dashArrayText);
+
+                uint len = list.NumberOfItems;
+                DoubleCollection dashArray = new DoubleCollection((int)len);
+
+                for (uint i = 0; i < len; i++)
+                {
+                    //divide by strokeWidth to take care of the difference between Svg and WPF
+                    dashArray.Add(list.GetItem(i).Value / strokeWidth);
+                }
+
+                return dashArray;
+            }
+            catch (Exception ex)
+            {
+                // If parsing fails for any reason (malformed values, etc.), return null as fallback
+                // This prevents crashes and allows the SVG to render without the dash pattern
+                System.Diagnostics.Debug.WriteLine($"Failed to parse stroke-dasharray value '{dashArrayText}': {ex.Message}");
+                return null;
+            }
+        }
+
+        private bool ContainsCssVariable(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+            // Check if the value contains a CSS variable function
+            return value.IndexOf("var(", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private double GetDashOffset(double strokeWidth)
@@ -638,10 +745,23 @@ namespace SharpVectors.Renderers.Wpf
             string dashOffset = _element.GetPropertyValue("stroke-dashoffset");
             if (dashOffset.Length > 0)
             {
-                //divide by strokeWidth to take care of the difference between Svg and GDI+
-                SvgLength dashOffsetLength = new SvgLength(_element, "stroke-dashoffset",
-                    SvgLengthDirection.Viewport, dashOffset);
-                return dashOffsetLength.Value;
+                // Handle CSS variables: if dashOffset contains unresolved CSS variables, skip it
+                if (ContainsCssVariable(dashOffset))
+                {
+                    return 0;
+                }
+
+                try
+                {
+                    //divide by strokeWidth to take care of the difference between Svg and GDI+
+                    SvgLength dashOffsetLength = new SvgLength(_element, "stroke-dashoffset",
+                        SvgLengthDirection.Viewport, dashOffset);
+                    return dashOffsetLength.Value;
+                }
+                catch
+                {
+                    return 0;
+                }
             }
 
             return 0;

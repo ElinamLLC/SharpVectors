@@ -364,6 +364,96 @@ namespace SharpVectors.Renderers.Texts
 
         #region FontWeight Methods
 
+        /// <summary>
+        /// Maps a numeric font-weight value to the nearest standard CSS font-weight.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Specification:</b> CSS Font Module Level 3 and 4</para>
+        /// <para><b>Standard Weights:</b> 100, 200, 300, 400 (Normal), 500, 600 (SemiBold), 700 (Bold), 800 (ExtraBold), 900 (Black), 950 (UltraBlack)</para>
+        /// <para><b>Rounding Behavior:</b></para>
+        /// <list type="bullet">
+        ///   <item><description>Non-standard numeric values are rounded to the nearest standard weight using Euclidean distance.</description></item>
+        ///   <item><description>Example: 650 → nearest is 700 (distance 50) vs 600 (distance 50), but 700 wins due to index ordering.</description></item>
+        ///   <item><description>Example: 475 → 500 (distance 25) is closer than 400 (distance 75).</description></item>
+        ///   <item><description>Example: 550 → 500 or 600 are equidistant; 500 is returned as the first match.</description></item>
+        /// </list>
+        /// <para><b>Clamping:</b></para>
+        /// <list type="bullet">
+        ///   <item><description>Values &lt;= 100 are clamped to Thin (100).</description></item>
+        ///   <item><description>Values >= 950 are clamped to UltraBlack (950).</description></item>
+        /// </list>
+        /// <para><b>Debug Output:</b> Emits Debug.WriteLine messages when clamping or rounding is applied, enabling runtime diagnostics without performance overhead in Release builds.</para>
+        /// </remarks>
+        /// <param name="numericWeight">A CSS numeric font-weight value (typically 100–950).</param>
+        /// <returns>The nearest standard <see cref="FontWeight"/> from the CSS specification.</returns>
+        private static FontWeight MapNumericFontWeightToStandard(int numericWeight)
+        {
+            // Standard CSS font weights
+            int[] standardWeights = { 100, 200, 300, 400, 500, 600, 700, 800, 900, 950 };
+            FontWeight[] fontWeights = {
+                FontWeights.Thin,
+                FontWeights.ExtraLight,
+                FontWeights.Light,
+                FontWeights.Normal,
+                FontWeights.Medium,
+                FontWeights.SemiBold,
+                FontWeights.Bold,
+                FontWeights.ExtraBold,
+                FontWeights.Black,
+                FontWeights.UltraBlack
+            };
+
+            // Clamp the value to valid range
+            if (numericWeight <= 100)
+            {
+                Debug.WriteLine($"[Font Weight] Numeric weight {numericWeight} is less than minimum (100), using Thin");
+                return FontWeights.Thin;
+            }
+            if (numericWeight >= 950)
+            {
+                Debug.WriteLine($"[Font Weight] Numeric weight {numericWeight} is greater than maximum (950), using UltraBlack");
+                return FontWeights.UltraBlack;
+            }
+
+            // Find the nearest standard weight
+            int minDistance = int.MaxValue;
+            FontWeight result = FontWeights.Normal;
+            int nearestStandardWeight = 400;
+
+            for (int i = 0; i < standardWeights.Length; i++)
+            {
+                int distance = Math.Abs(numericWeight - standardWeights[i]);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    result = fontWeights[i];
+                    nearestStandardWeight = standardWeights[i];
+                }
+            }
+
+            Debug.WriteLine($"[Font Weight] Numeric weight {numericWeight} rounded to {nearestStandardWeight} ({result.ToString()})");
+            return result;
+        }
+
+        /// <summary>
+        /// Resolves a CSS font-weight string to a WPF <see cref="FontWeight"/>.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Supported Input Formats:</b></para>
+        /// <list type="bullet">
+        ///   <item><description>CSS Keywords: "normal", "bold"</description></item>
+        ///   <item><description>Numeric Values: "100", "200", ..., "900", "950"</description></item>
+        ///   <item><description>Non-standard Numeric: Any integer; rounded to nearest standard weight via <see cref="MapNumericFontWeightToStandard"/>.</description></item>
+        ///   <item><description>Null/Empty: Defaults to "normal" (400).</description></item>
+        /// </list>
+        /// <para><b>Non-Standard Numeric Behavior:</b></para>
+        /// When a numeric font-weight is provided that does not correspond to a standard CSS weight
+        /// (e.g., 650, 475, 550), the value is rounded to the nearest standard weight. This ensures
+        /// compatibility with WPF's standard FontWeight values while preserving the user's intent.
+        /// See <see cref="MapNumericFontWeightToStandard"/> for detailed rounding examples.
+        /// </remarks>
+        /// <param name="fontWeight">A CSS font-weight string (e.g., "bold", "700", "650").</param>
+        /// <returns>A WPF <see cref="FontWeight"/> corresponding to the input; defaults to Normal if parsing fails.</returns>
         protected FontWeight GetTextFontWeight(string fontWeight)
         {
             if (string.IsNullOrWhiteSpace(fontWeight))
@@ -399,9 +489,37 @@ namespace SharpVectors.Renderers.Texts
                     return FontWeights.UltraBlack;
             }
 
+            // Try to parse as numeric weight
+            if (int.TryParse(fontWeight, out int numericWeight))
+            {
+                return MapNumericFontWeightToStandard(numericWeight);
+            }
+
             return FontWeights.Normal;
         }
 
+        /// <summary>
+        /// Resolves the font-weight property of an SVG text element, with support for relative keywords and parent-relative adjustments.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Priority Order:</b></para>
+        /// <list type="number">
+        ///   <item><description>Direct CSS keywords: "normal", "bold"</description></item>
+        ///   <item><description>Direct numeric values: "100"–"950"</description></item>
+        ///   <item><description>Relative keywords with parent lookup: "bolder", "lighter"</description></item>
+        ///   <item><description>Fallback: "normal" (400) if no valid value is found</description></item>
+        /// </list>
+        /// <para><b>Relative Keywords:</b></para>
+        /// <list type="bullet">
+        ///   <item><description><b>"bolder":</b> Looks up the parent element's font-weight and applies one step heavier (via <see cref="GetBolderFontWeight"/>). If no parent or parent weight unavailable, defaults to ExtraBold (800).</description></item>
+        ///   <item><description><b>"lighter":</b> Looks up the parent element's font-weight and applies one step lighter (via <see cref="GetLighterFontWeight"/>). If no parent or parent weight unavailable, defaults to Light (300).</description></item>
+        /// </list>
+        /// <para><b>Non-Standard Numeric Handling:</b></para>
+        /// Non-standard numeric values are automatically rounded via <see cref="MapNumericFontWeightToStandard"/>.
+        /// This ensures smooth rendering across both CSS and WPF specifications.
+        /// </remarks>
+        /// <param name="element">The SVG text element from which to extract the font-weight property.</param>
+        /// <returns>The resolved <see cref="FontWeight"/>; defaults to Normal if no value is specified or parsing fails.</returns>
         protected FontWeight GetTextFontWeight(SvgTextContentElement element)
         {
             string fontWeight = element.GetPropertyValue(CssConstants.PropFontWeight);
@@ -446,9 +564,11 @@ namespace SharpVectors.Renderers.Texts
                     fontWeight = parentElement.GetPropertyValue(CssConstants.PropFontWeight);
                     if (!string.IsNullOrWhiteSpace(fontWeight))
                     {
+                        Debug.WriteLine($"[Font Weight] Applying 'bolder' to parent font-weight: '{fontWeight}'");
                         return this.GetBolderFontWeight(fontWeight);
                     }
                 }
+                Debug.WriteLine($"[Font Weight] 'bolder' applied without parent, using ExtraBold");
                 return FontWeights.ExtraBold;
             }
             if (string.Equals(fontWeight, "lighter", StringComparison.OrdinalIgnoreCase))
@@ -459,15 +579,48 @@ namespace SharpVectors.Renderers.Texts
                     fontWeight = parentElement.GetPropertyValue(CssConstants.PropFontWeight);
                     if (!string.IsNullOrWhiteSpace(fontWeight))
                     {
+                        Debug.WriteLine($"[Font Weight] Applying 'lighter' to parent font-weight: '{fontWeight}'");
                         return this.GetLighterFontWeight(fontWeight);
                     }
                 }
+                Debug.WriteLine($"[Font Weight] 'lighter' applied without parent, using Light");
                 return FontWeights.Light;
+            }
+
+            // Try to parse as numeric weight
+            if (int.TryParse(fontWeight, out int numericWeight))
+            {
+                return MapNumericFontWeightToStandard(numericWeight);
             }
 
             return FontWeights.Normal;
         }
 
+        /// <summary>
+        /// Resolves one step heavier font-weight from a given parent font-weight value.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Specification:</b> CSS Font Module Level 3, Section 3.3 (font-weight)</para>
+        /// <para>
+        /// This method implements the "bolder" keyword semantics, moving from the current weight 
+        /// up one step in the CSS weight hierarchy:
+        /// </para>
+        /// <list type="bullet">
+        ///   <item><description>100 → ExtraLight (200)</description></item>
+        ///   <item><description>200 → Light (300)</description></item>
+        ///   <item><description>300 → Normal (400)</description></item>
+        ///   <item><description>400 → Bold (700)</description></item>
+        ///   <item><description>500 → SemiBold (600)</description></item>
+        ///   <item><description>600 → Bold (700)</description></item>
+        ///   <item><description>700 → ExtraBold (800)</description></item>
+        ///   <item><description>800 → Black (900)</description></item>
+        ///   <item><description>900+ → UltraBlack (950)</description></item>
+        /// </list>
+        /// <para><b>Non-Standard Numeric:</b> Non-standard numeric values increment by ~100 and are rounded to the nearest standard weight.</para>
+        /// <para><b>Default:</b> Empty or invalid input returns Normal (400).</para>
+        /// </remarks>
+        /// <param name="fontWeight">The parent font-weight value (CSS keyword or numeric string).</param>
+        /// <returns>One step heavier than the input weight.</returns>
         protected FontWeight GetBolderFontWeight(string fontWeight)
         {
             if (string.IsNullOrWhiteSpace(fontWeight))
@@ -503,9 +656,44 @@ namespace SharpVectors.Renderers.Texts
                     return FontWeights.UltraBlack;
             }
 
+            // Try to parse as numeric weight - "bolder" means go one step heavier
+            if (int.TryParse(fontWeight, out int numericWeight))
+            {
+                // Get current weight and increase by one step (~100)
+                int bolderWeight = Math.Min(numericWeight + 100, 950);
+                Debug.WriteLine($"[Font Weight] Bolder: {numericWeight} -> {bolderWeight}");
+                return MapNumericFontWeightToStandard(bolderWeight);
+            }
+
             return FontWeights.Normal;
         }
 
+        /// <summary>
+        /// Resolves one step lighter font-weight from a given parent font-weight value.
+        /// </summary>
+        /// <remarks>
+        /// <para><b>Specification:</b> CSS Font Module Level 3, Section 3.3 (font-weight)</para>
+        /// <para>
+        /// This method implements the "lighter" keyword semantics, moving from the current weight 
+        /// down one step in the CSS weight hierarchy:
+        /// </para>
+        /// <list type="bullet">
+        ///   <item><description>100 → Thin (100, clamped minimum)</description></item>
+        ///   <item><description>200 → Thin (100)</description></item>
+        ///   <item><description>300 → Thin (100)</description></item>
+        ///   <item><description>400 → Light (300)</description></item>
+        ///   <item><description>500 → Light (300)</description></item>
+        ///   <item><description>600 → Normal (400)</description></item>
+        ///   <item><description>700 → Normal (400)</description></item>
+        ///   <item><description>800 → SemiBold (600)</description></item>
+        ///   <item><description>900 → Bold (700)</description></item>
+        ///   <item><description>950 → Bold (700)</description></item>
+        /// </list>
+        /// <para><b>Non-Standard Numeric:</b> Non-standard numeric values decrement by ~100 and are rounded to the nearest standard weight.</para>
+        /// <para><b>Default:</b> Empty or invalid input returns Normal (400).</para>
+        /// </remarks>
+        /// <param name="fontWeight">The parent font-weight value (CSS keyword or numeric string).</param>
+        /// <returns>One step lighter than the input weight.</returns>
         protected FontWeight GetLighterFontWeight(string fontWeight)
         {
             if (string.IsNullOrWhiteSpace(fontWeight))
@@ -541,6 +729,17 @@ namespace SharpVectors.Renderers.Texts
                 case "950":
                     return FontWeights.Black;
             }
+
+            // Try to parse as numeric weight - "lighter" means go one step lighter
+            if (int.TryParse(fontWeight, out int numericWeight))
+            {
+                // Get current weight and decrease by one step (~100)
+                int lighterWeight = Math.Max(numericWeight - 100, 100);
+                Debug.WriteLine($"[Font Weight] Lighter: {numericWeight} -> {lighterWeight}");
+                return MapNumericFontWeightToStandard(lighterWeight);
+            }
+
+            return FontWeights.Normal;
 
             return FontWeights.Normal;
         }

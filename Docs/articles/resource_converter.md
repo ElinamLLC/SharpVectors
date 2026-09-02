@@ -4,28 +4,27 @@ title: ResourceSvgConverter
 ---
 
 # Resource SVG Converter - ResourceSvgConverter
-The **[](xref:SharpVectors.Converters.ResourceSvgConverter)** converter class takes multiple files and directories as input and outputs a
-[ResourceDictionary](xref:System.Windows.ResourceDictionary)  in XAML format.
-This is useful for vector icons, but required supports in the rendering process to track brushes and pens, and an extension to the 
-**[](xref:SharpVectors.Converters.XmlXamlWriter)** class to format a compact XAML output.
-It is the most recent SharpVector SVG converter and adds extension features that will be supported in the other converters.
+
+The **[](xref:SharpVectors.Converters.ResourceSvgConverter)** converter class takes multiple files and directories as input and outputs a [ResourceDictionary](xref:System.Windows.ResourceDictionary) in XAML format.
+This is useful for vector icons and requires support in the rendering process to track brushes and pens, as well as an extension to the **[](xref:SharpVectors.Converters.XmlXamlWriter)** class to format compact XAML output.
+This converter is the most recent SharpVectors SVG converter and adds extension features that will be supported in the other converters.
 
 > [!NOTE] 
 > Currently, the input is restricted to local or network files and directories.
 > 
-> The output is @System.String or local or network file or one of the following
-> * @System.IO.Stream: A stream object created by the user.
-> * @System.IO.TextWriter: A text writer object created by the user.
-> * @System.Xml.XmlWriter: An XML writer object created by the user
+> The output can be `System.String` or written to a local/network file, or one of the following:
+> * `System.IO.Stream`: A stream object created by the user.
+> * `System.IO.TextWriter`: A text writer object created by the user.
+> * `System.Xml.XmlWriter`: An XML writer object created by the user.
 
 ## Resource Options
-This converter offers extra settings or options in the form of **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings)** class.
+
+This converter offers additional settings or options through the **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings)** class.
 
 ![resource_settings](../images/resource_settings.png)
 
 The following are the properties exposed by the resource options to customize the output resource dictionary XAML:
-* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode)**: An enumeration specifying the type of the resource object; 
-@System.Windows.Media.DrawingGroup or @System.Windows.Media.DrawingImage.
+* **[](xref:SharpVectors.Renderers.Wpf.WpfResourceSettings.ResourceMode)**: An enumeration specifying the type of resource object: `System.Windows.Media.DrawingGroup` or `System.Windows.Media.DrawingImage`.
     # [DrawingGroup Resource](#tab/xaml1)
     ```xml
     <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 

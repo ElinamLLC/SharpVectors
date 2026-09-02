@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Xml;
 
-namespace SharpVectors.Rendering.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.RegressionIssues
 {
     [TestFixture]
     public class Issue284_OverflowDebugTest

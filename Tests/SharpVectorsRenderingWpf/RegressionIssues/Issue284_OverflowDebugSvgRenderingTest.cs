@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Windows.Media;
 
-namespace SharpVectors.Rendering.Wpf.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.RegressionIssues
 {
     [TestFixture]
     public class Issue284_OverflowDebugSvgRenderingTest

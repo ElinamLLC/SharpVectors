@@ -165,7 +165,22 @@ namespace SharpVectors.Converters.Shapes
             {
                 return false;
             }
-            else
+
+            // Handle CSS variables: resolve unresolved CSS variables and extract fallbacks
+            // This prevents crashes when CSS variables are not properly resolved by the CSS engine.
+            dashArrayText = dashArrayText.Trim();
+            if (dashArrayText.IndexOf("var(", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                // Use ResolveCssVariablesForConverter to handle complex variable scenarios
+                dashArrayText = ResolveCssVariablesForConverter(dashArrayText);
+
+                if (string.IsNullOrWhiteSpace(dashArrayText))
+                {
+                    return false;
+                }
+            }
+
+            try
             {
                 SvgNumberList list = new SvgNumberList(dashArrayText);
 
@@ -180,6 +195,130 @@ namespace SharpVectors.Converters.Shapes
 
                 return true;
             }
+            catch (Exception ex)
+            {
+                // If parsing fails for any reason (malformed values, etc.), return false as fallback
+                // This prevents crashes and allows the SVG to render without the dash pattern
+                System.Diagnostics.Debug.WriteLine($"Failed to parse stroke-dasharray value '{dashArrayText}': {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Resolves CSS variable references in converter context.
+        /// </summary>
+        private static string ResolveCssVariablesForConverter(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            value = value.Trim();
+
+            // If the value doesn't contain var(, it's a literal value
+            if (value.IndexOf("var(", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                return value;
+            }
+
+            // Try to extract a var() call and its fallback
+            int varStart = value.IndexOf("var(", StringComparison.OrdinalIgnoreCase);
+            if (varStart < 0)
+            {
+                return value;
+            }
+
+            // Find the matching closing paren
+            int openParenPos = varStart + 3;
+            int closeParenPos = FindMatchingCloseParenConverter(value, openParenPos);
+
+            if (closeParenPos < 0)
+            {
+                // Malformed var()
+                return value;
+            }
+
+            // Extract the content inside var(...) = e.g., "--my-color, fallback"
+            string content = value.Substring(openParenPos + 1, closeParenPos - openParenPos - 1);
+
+            // Split on first comma to separate variable name from fallback
+            int commaPos = FindFirstTopLevelCommaConverter(content);
+            if (commaPos >= 0)
+            {
+                // Has fallback: var(--name, fallback)
+                string fallback = content.Substring(commaPos + 1).Trim();
+                if (!string.IsNullOrEmpty(fallback))
+                {
+                    // Check if the fallback is itself a var() call (recursive)
+                    if (fallback.IndexOf("var(", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        // Recursively resolve the fallback (limited depth)
+                        return ResolveCssVariablesForConverter(fallback);
+                    }
+                    else
+                    {
+                        // Fallback is a literal value
+                        return fallback;
+                    }
+                }
+            }
+
+            // No fallback or empty fallback: return empty
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Finds the position of the first top-level comma (not inside nested parens).
+        /// </summary>
+        private static int FindFirstTopLevelCommaConverter(string value)
+        {
+            int depth = 0;
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (value[i] == '(')
+                {
+                    depth++;
+                }
+                else if (value[i] == ')')
+                {
+                    depth--;
+                }
+                else if (value[i] == ',' && depth == 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Finds the position of the closing parenthesis that matches an opening parenthesis.
+        /// </summary>
+        private static int FindMatchingCloseParenConverter(string value, int startPos)
+        {
+            if (startPos < 0 || startPos >= value.Length || value[startPos] != '(')
+            {
+                return -1;
+            }
+
+            int depth = 1;
+            for (int i = startPos + 1; i < value.Length; i++)
+            {
+                if (value[i] == '(')
+                {
+                    depth++;
+                }
+                else if (value[i] == ')')
+                {
+                    depth--;
+                    if (depth == 0)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return -1;
         }
 
         public static bool TryGetDashOffset(SvgStyleableElement element, out double offset)

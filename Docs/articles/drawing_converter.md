@@ -4,18 +4,19 @@ title: FileSvgReader
 ---
 
 # Drawing SVG Converter - FileSvgReader
-The **[](xref:SharpVectors.Converters.FileSvgReader)** converter class takes SVG file as input and outputs [DrawingGroup](xref:System.Windows.Media.DrawingGroup) object.
-The SVG input can also be one of the following
-* @System.Uri: A representation of a resource available to your application locally, on the intranet or internet
-* @System.IO.Stream: A stream object providing access to the SVG input content.
-* @System.IO.TextReader: A text reader file providing access to the SVG input content.
-* @System.Xml.XmlReader: An XML reader providing access to the SVG input content.
+
+The **[](xref:SharpVectors.Converters.FileSvgReader)** converter class takes an SVG file as input and outputs a [DrawingGroup](xref:System.Windows.Media.DrawingGroup) object.
+The SVG input can also be one of the following types:
+* `System.Uri`: A representation of a local, intranet, or internet resource available to your application
+* `System.IO.Stream`: A stream object providing access to the SVG input content.
+* `System.IO.TextReader`: A text reader providing access to the SVG input content.
+* `System.Xml.XmlReader`: An XML reader providing access to the SVG input content.
 
 > [!NOTE] 
-> * With the @System.Uri as input, **[](xref:SharpVectors.Converters.FileSvgReader)** provides a wider access to SVG files.
-> * It can optionally save the output to XAML file, which is odd as is its naming. This was the first and initial SVG to XAML handler. 
-> * User demands gave rise to the multiple SVG converters forcing this object to be considered as a converter for simplicity.
-> * This converter will be renamed `DrawingSvgConverter` in SharpVectors 2.x and stripped of some of its shared features (a breaking change).
+> * With `System.Uri` as input, **[](xref:SharpVectors.Converters.FileSvgReader)** provides broader access to SVG files.
+> * It can optionally save the output to a XAML file. (Note: This is unusual naming, as it was the first and original SVG-to-XAML handler.)
+> * User requests led to the creation of multiple SVG converters, which is why this object is now considered a converter for simplicity.
+> * This converter will be renamed `DrawingSvgConverter` in SharpVectors 2.x with some shared features removed (a breaking change).
 
 ## Sample Code
 

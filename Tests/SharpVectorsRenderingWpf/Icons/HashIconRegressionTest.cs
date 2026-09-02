@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Media;
 using System.Diagnostics;
 
-namespace SharpVectors.Rendering.Wpf.Tests
+namespace SharpVectors.Rendering.Wpf.Tests.Icons
 {
     /// <summary>
     /// Diagnostic test for the "#" icon regression where all path figures are being filtered out.

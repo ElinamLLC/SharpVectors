@@ -4,17 +4,19 @@ title: StreamSvgConverter
 ---
 
 # Stream SVG Converter - StreamSvgConverter
-The **[](xref:SharpVectors.Converters.StreamSvgConverter)** converter class takes SVG file as input and outputs XAML file.
-The SVG input can also be one of the following
-* @System.IO.Stream: A stream object providing access to the SVG input content.
-* @System.IO.TextReader: A text reader file providing access to the SVG input content.
-* @System.Xml.XmlReader: An XML reader providing access to the SVG input content.
+
+The **[](xref:SharpVectors.Converters.StreamSvgConverter)** converter class takes an SVG file as input and outputs to a stream.
+The SVG input can also be one of the following types:
+* `System.IO.Stream`: A stream object providing access to the SVG input content.
+* `System.IO.TextReader`: A text reader providing access to the SVG input content.
+* `System.Xml.XmlReader`: An XML reader providing access to the SVG input content.
 
 > [!NOTE] 
-> This strictly converts the input SVG source to @System.IO.Stream, which is created by the user.
+> This converter outputs the converted SVG to a `System.IO.Stream` that is created by the user.
 
 ## Sample Code
-The following illustrate a simple case of using the stream SVG converter.
+
+The following illustrates a simple use case of the stream SVG converter.
 
 # [SVG to XAML C#](#tab/csharp)
 ```csharp
