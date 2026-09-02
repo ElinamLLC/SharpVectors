@@ -1,0 +1,31 @@
+<Solution>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/GdiSvgTestBox/GdiSvgTestBox.csproj" />
+    <Project Path="Samples/GdiTestSvgControl/GdiTestSvgControl.csproj" />
+    <Project Path="Samples/GdiW3cSvgTestSuite/GdiW3cSvgTestSuite.csproj" />
+    <Project Path="Samples/WpfQuickTest/WpfQuickTest.csproj" />
+    <Project Path="Samples/WpfSvgTestBox/WpfSvgTestBox.csproj" />
+    <Project Path="Samples/WpfTestOtherSvg/WpfTestOtherSvg.csproj" />
+    <Project Path="Samples/WpfTestResourceSvg/WpfTestResourceSvg.csproj" />
+    <Project Path="Samples/WpfTestSampleResources/WpfTestSampleResources.csproj" />
+    <Project Path="Samples/WpfTestSvgControl/WpfTestSvgControl.csproj" />
+    <Project Path="Samples/WpfTestSvgSample/WpfTestSvgSample.csproj" />
+    <Project Path="Samples/WpfTestThreadSafety/WpfTestThreadSafety.csproj" />
+    <Project Path="Samples/WpfW3cSvgTestSuite/WpfW3cSvgTestSuite.csproj" />
+    <Project Path="Samples/WpfXXETestBox/WpfXXETestBox.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/SharpVectorsCore/SharpVectors.Core.Tests.csproj" />
+    <Project Path="Tests/SharpVectorsCsss/SharpVectors.Css.Tests.csproj" />
+    <Project Path="Tests/SharpVectorsRenderingWpf/SharpVectors.Rendering.Wpf.Tests.csproj" />
+  </Folder>
+  <Project Path="Source/SharpVectorConvertersWpf/SharpVectors.Converters.Wpf.csproj" />
+  <Project Path="Source/SharpVectorCore/SharpVectors.Core.csproj" />
+  <Project Path="Source/SharpVectorCss/SharpVectors.Css.csproj" />
+  <Project Path="Source/SharpVectorDom/SharpVectors.Dom.csproj" />
+  <Project Path="Source/SharpVectorModel/SharpVectors.Model.csproj" />
+  <Project Path="Source/SharpVectorRenderingGdi/SharpVectors.Rendering.Gdi.csproj" />
+  <Project Path="Source/SharpVectorRenderingWpf/SharpVectors.Rendering.Wpf.csproj" />
+  <Project Path="Source/SharpVectorRuntimeWpf/SharpVectors.Runtime.Wpf.csproj" />
+  <Project Path="Source/SharpVectorScripting/SharpVectors.Scripting.csproj" />
+</Solution>

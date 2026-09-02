@@ -19,6 +19,8 @@
   href: directory_converter.md
 - name: Resource Dictionary Converters
   href: resource_converter.md
+- name: SVG to Bitmap Converter
+  href: svg_to_bitmap_converter.md
     
 - name: Components and Controls
 - name: Markup Extensions
@@ -37,6 +39,18 @@
   href: test_tools.md
   
 - name: Others
+- name: SVG Text Rendering Initiative
+  href: text_rendering_overview.md
+- name: Advanced Text Rendering
+  href: text_rendering_architecture.md
+- name: Text Rendering Quick Start
+  href: text_rendering_quickstart.md
+- name: Text Rendering Analysis
+  href: text_rendering_analysis.md
+- name: Text Rendering Implementation Checklist
+  href: text_rendering_checklist.md
+- name: Text Rendering Codebase Research
+  href: text_rendering_codebase_research.md
 - name: FAQ
   href: faq.md
 - name: Licenses

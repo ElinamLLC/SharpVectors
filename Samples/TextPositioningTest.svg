@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <title>SVG Text Character Positioning Tests - Phase 1</title>
+  <defs>
+	<style>
+	  text { font-family: Arial, Verdana, sans-serif; fill: black; }
+	  .label { font-size: 12px; fill: #666; }
+	  .title { font-size: 18px; font-weight: bold; }
+	  .test-group { stroke: #ddd; stroke-width: 1; }
+	  rect { stroke: #ddd; stroke-width: 1; fill: #f9f9f9; }
+	</style>
+  </defs>
+
+  <!-- Title -->
+  <text x="10" y="30" class="title">Phase 1: Character Positioning Tests</text>
+
+  <!-- Test 1: Absolute Positioning (x attribute) -->
+  <g id="test1">
+	<rect x="10" y="50" width="380" height="100" />
+	<text x="20" y="70" class="label">Test 1: Absolute X Positioning</text>
+	<text x="20" y="90" class="label" font-size="11">SVG: &lt;tspan x="30 80 130 180 230"&gt;A B C D E&lt;/tspan&gt;</text>
+
+	<!-- Vertical guides -->
+	<line x1="30" y1="105" x2="30" y2="140" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="80" y1="105" x2="80" y2="140" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="130" y1="105" x2="130" y2="140" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="180" y1="105" x2="180" y2="140" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="230" y1="105" x2="230" y2="140" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+
+	<!-- Expected result text -->
+	<text x="30" y="130" font-size="24">A</text>
+	<text x="80" y="130" font-size="24">B</text>
+	<text x="130" y="130" font-size="24">C</text>
+	<text x="180" y="130" font-size="24">D</text>
+	<text x="230" y="130" font-size="24">E</text>
+  </g>
+
+  <!-- Test 2: Absolute Y Positioning -->
+  <g id="test2">
+	<rect x="410" y="50" width="380" height="100" />
+	<text x="420" y="70" class="label">Test 2: Absolute Y Positioning</text>
+	<text x="420" y="90" class="label" font-size="11">SVG: &lt;tspan y="110 125 115 130 120"&gt;A B C D E&lt;/tspan&gt;</text>
+
+	<!-- Horizontal guides -->
+	<line x1="415" y1="110" x2="680" y2="110" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="125" x2="680" y2="125" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="115" x2="680" y2="115" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="130" x2="680" y2="130" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="120" x2="680" y2="120" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+
+	<!-- Expected result text -->
+	<text x="430" y="110" font-size="24">A</text>
+	<text x="470" y="125" font-size="24">B</text>
+	<text x="510" y="115" font-size="24">C</text>
+	<text x="550" y="130" font-size="24">D</text>
+	<text x="590" y="120" font-size="24">E</text>
+  </g>
+
+  <!-- Test 3: Relative Positioning (dx attribute) -->
+  <g id="test3">
+	<rect x="10" y="170" width="380" height="100" />
+	<text x="20" y="190" class="label">Test 3: Relative DX Positioning</text>
+	<text x="20" y="210" class="label" font-size="11">SVG: &lt;tspan dx="0 50 50 50 50"&gt;A B C D E&lt;/tspan&gt;</text>
+
+	<!-- Vertical guides for dx spacing -->
+	<line x1="30" y1="225" x2="30" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="80" y1="225" x2="80" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="130" y1="225" x2="130" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="180" y1="225" x2="180" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="230" y1="225" x2="230" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+
+	<!-- Expected result text -->
+	<text x="30" y="250" font-size="24">A</text>
+	<text x="80" y="250" font-size="24">B</text>
+	<text x="130" y="250" font-size="24">C</text>
+	<text x="180" y="250" font-size="24">D</text>
+	<text x="230" y="250" font-size="24">E</text>
+  </g>
+
+  <!-- Test 4: Relative Positioning (dy attribute) -->
+  <g id="test4">
+	<rect x="410" y="170" width="380" height="100" />
+	<text x="420" y="190" class="label">Test 4: Relative DY Positioning</text>
+	<text x="420" y="210" class="label" font-size="11">SVG: &lt;tspan dy="0 15 -15 10 -10"&gt;A B C D E&lt;/tspan&gt;</text>
+
+	<!-- Expected result text with relative vertical positioning -->
+	<text x="430" y="250" font-size="24">A</text>
+	<text x="470" y="265" font-size="24">B</text>
+	<text x="510" y="235" font-size="24">C</text>
+	<text x="550" y="260" font-size="24">D</text>
+	<text x="590" y="240" font-size="24">E</text>
+  </g>
+
+  <!-- Test 5: Mixed X and DX -->
+  <g id="test5">
+	<rect x="10" y="290" width="380" height="100" />
+	<text x="20" y="310" class="label">Test 5: Mixed X and DX</text>
+	<text x="20" y="330" class="label" font-size="11">SVG: &lt;tspan x="50" dx="0 45 45 45"&gt;A B C D&lt;/tspan&gt;</text>
+
+	<!-- Vertical guides -->
+	<line x1="50" y1="345" x2="50" y2="380" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="95" y1="345" x2="95" y2="380" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="140" y1="345" x2="140" y2="380" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="185" y1="345" x2="185" y2="380" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+
+	<!-- Expected result text -->
+	<text x="50" y="370" font-size="24">A</text>
+	<text x="95" y="370" font-size="24">B</text>
+	<text x="140" y="370" font-size="24">C</text>
+	<text x="185" y="370" font-size="24">D</text>
+  </g>
+
+  <!-- Test 6: Per-character positioning (most complex) -->
+  <g id="test6">
+	<rect x="410" y="290" width="380" height="100" />
+	<text x="420" y="310" class="label">Test 6: Full Per-Character Positioning</text>
+	<text x="420" y="330" class="label" font-size="11">SVG: &lt;tspan x="420 465 510 555" y="360 350 365 355"&gt;A B C D&lt;/tspan&gt;</text>
+
+	<!-- Vertical and horizontal guides -->
+	<line x1="420" y1="345" x2="420" y2="375" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="465" y1="345" x2="465" y2="375" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="510" y1="345" x2="510" y2="375" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="555" y1="345" x2="555" y2="375" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+
+	<line x1="415" y1="360" x2="620" y2="360" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="350" x2="620" y2="350" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="365" x2="620" y2="365" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+	<line x1="415" y1="355" x2="620" y2="355" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2" />
+
+	<!-- Expected result text -->
+	<text x="420" y="360" font-size="24">A</text>
+	<text x="465" y="350" font-size="24">B</text>
+	<text x="510" y="365" font-size="24">C</text>
+	<text x="555" y="355" font-size="24">D</text>
+  </g>
+
+  <!-- Legend -->
+  <g id="legend" transform="translate(10, 410)">
+	<text x="0" y="0" class="label" font-weight="bold">Test Results Expected:</text>
+	<text x="0" y="20" class="label" font-size="11">✓ Characters should appear at positions specified by x/y/dx/dy attributes</text>
+	<text x="0" y="35" class="label" font-size="11">✓ Vertical guide lines show expected character positions</text>
+	<text x="0" y="50" class="label" font-size="11">✓ If positioning NOT working: characters render sequentially instead of at guide positions</text>
+  </g>
+</svg>

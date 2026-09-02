@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
-		<TargetFrameworks>net45;net46;net47;net48;net6.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
+		<TargetFrameworks>net45;net46;net47;net48;net6.0-windows;net8.0-windows;net9.0-windows;net10.0-windows</TargetFrameworks>
 		<OutputType>WinExe</OutputType>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>App.ico</ApplicationIcon>
@@ -96,6 +96,14 @@
 		</Reference>
 		<Reference Include="SharpVectors.Notifications.Wpf">
 			<HintPath>..\..\Libraries\net9.0-windows\SharpVectors.Notifications.Wpf.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net10.0-windows'">
+		<Reference Include="SharpVectors.ShellFileDialogs">
+			<HintPath>..\..\Libraries\net10.0\SharpVectors.ShellFileDialogs.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpVectors.Notifications.Wpf">
+			<HintPath>..\..\Libraries\net10.0-windows\SharpVectors.Notifications.Wpf.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>

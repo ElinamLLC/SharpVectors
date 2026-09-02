@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
+  <title>Phase 1 Character Positioning Reference Implementation</title>
+  <defs>
+	<style>
+	  text { font-family: 'Courier New', monospace; fill: black; }
+	  .label { font-size: 12px; fill: #333; }
+	  .code { font-size: 11px; fill: #666; font-family: monospace; }
+	  .title { font-size: 20px; font-weight: bold; }
+	  .subtitle { font-size: 14px; font-weight: bold; color: #0066cc; }
+	  rect { stroke: #999; stroke-width: 1; fill: #f5f5f5; }
+	  .guide-line { stroke: #cc0000; stroke-width: 1; stroke-dasharray: "3,3"; opacity: 0.5; }
+	  .pass { fill: #00aa00; }
+	  .fail { fill: #cc0000; }
+	</style>
+  </defs>
+
+  <!-- Main Title -->
+  <rect x="10" y="10" width="980" height="40" />
+  <text x="20" y="38" class="title">Phase 1 Character Positioning - Implementation Reference</text>
+
+  <!-- Section 1: Simple X Positioning -->
+  <g id="section1">
+	<rect x="10" y="60" width="480" height="130" />
+	<text x="20" y="80" class="subtitle">1. Simple Horizontal Positioning (X)</text>
+	<text x="20" y="100" class="code">SVG Code:</text>
+	<text x="30" y="115" class="code">&lt;text x="10"&gt;</text>
+	<text x="30" y="130" class="code">&lt;tspan x="50 110 170 230 290" font-size="20"&gt;</text>
+	<text x="30" y="145" class="code">Hello World&lt;/tspan&gt;</text>
+	<text x="30" y="160" class="code">&lt;/text&gt;</text>
+
+	<!-- Visual guides for X positions -->
+	<line x1="50" y1="168" x2="50" y2="181" class="guide-line" />
+	<line x1="110" y1="168" x2="110" y2="181" class="guide-line" />
+	<line x1="170" y1="168" x2="170" y2="181" class="guide-line" />
+	<line x1="230" y1="168" x2="230" y2="181" class="guide-line" />
+	<line x1="290" y1="168" x2="290" y2="181" class="guide-line" />
+
+	<!-- Expected result -->
+	<text x="50" y="175" font-size="20">H</text>
+	<text x="110" y="175" font-size="20">e</text>
+	<text x="170" y="175" font-size="20">l</text>
+	<text x="230" y="175" font-size="20">l</text>
+	<text x="290" y="175" font-size="20">o</text>
+  </g>
+
+  <!-- Section 2: Y Positioning with Varying Heights -->
+  <g id="section2">
+	<rect x="510" y="60" width="480" height="130" />
+	<text x="520" y="80" class="subtitle">2. Vertical Positioning (Y)</text>
+	<text x="520" y="100" class="code">SVG Code:</text>
+	<text x="530" y="115" class="code">&lt;text y="100"&gt;</text>
+	<text x="530" y="130" class="code">&lt;tspan y="120 100 130 90 110" font-size="24"&gt;</text>
+	<text x="530" y="145" class="code">WAVE!&lt;/tspan&gt;</text>
+	<text x="530" y="160" class="code">&lt;/text&gt;</text>
+
+	<!-- Expected result with varying y values -->
+	<text x="600" y="120" font-size="24">W</text>
+	<text x="640" y="100" font-size="24">A</text>
+	<text x="680" y="130" font-size="24">V</text>
+	<text x="720" y="90" font-size="24">E</text>
+	<text x="760" y="110" font-size="24">!</text>
+  </g>
+
+  <!-- Section 3: DX Relative Positioning -->
+  <g id="section3">
+	<rect x="10" y="210" width="480" height="130" />
+	<text x="20" y="230" class="subtitle">3. Relative Horizontal (DX)</text>
+	<text x="20" y="250" class="code">SVG Code:</text>
+	<text x="30" y="265" class="code">&lt;text x="50"&gt;</text>
+	<text x="30" y="280" class="code">&lt;tspan dx="0 60 60 60" font-size="20"&gt;</text>
+	<text x="30" y="295" class="code">S p a c e d&lt;/tspan&gt;</text>
+	<text x="30" y="310" class="code">&lt;/text&gt;</text>
+
+	<!-- Visual guides -->
+	<line x1="50" y1="318" x2="50" y2="331" class="guide-line" />
+	<line x1="110" y1="318" x2="110" y2="331" class="guide-line" />
+	<line x1="170" y1="318" x2="170" y2="331" class="guide-line" />
+	<line x1="230" y1="318" x2="230" y2="331" class="guide-line" />
+
+	<!-- Expected result: each char offset by 60px from previous -->
+	<text x="50" y="325" font-size="20">S</text>
+	<text x="110" y="325" font-size="20">p</text>
+	<text x="170" y="325" font-size="20">a</text>
+	<text x="230" y="325" font-size="20">c</text>
+  </g>
+
+  <!-- Section 4: DY Relative Positioning -->
+  <g id="section4">
+	<rect x="510" y="210" width="480" height="130" />
+	<text x="520" y="230" class="subtitle">4. Relative Vertical (DY)</text>
+	<text x="520" y="250" class="code">SVG Code:</text>
+	<text x="530" y="265" class="code">&lt;text y="300"&gt;</text>
+	<text x="530" y="280" class="code">&lt;tspan dy="0 -10 10 -5 5" font-size="18"&gt;</text>
+	<text x="530" y="295" class="code">up-down&lt;/tspan&gt;</text>
+	<text x="530" y="310" class="code">&lt;/text&gt;</text>
+
+	<!-- Expected: characters move up/down relative to baseline -->
+	<text x="600" y="300" font-size="18">u</text>
+	<text x="630" y="290" font-size="18">p</text>
+	<text x="660" y="310" font-size="18">-</text>
+	<text x="685" y="305" font-size="18">d</text>
+	<text x="715" y="310" font-size="18">n</text>
+  </g>
+
+  <!-- Section 5: Combined X and Y -->
+  <g id="section5">
+	<rect x="10" y="360" width="480" height="130" />
+	<text x="20" y="380" class="subtitle">5. Combined X+Y (Full Positioning)</text>
+	<text x="20" y="400" class="code">SVG Code:</text>
+	<text x="30" y="415" class="code">&lt;text&gt;</text>
+	<text x="30" y="430" class="code">&lt;tspan x="50 120 190 260" y="420 400 430 410"&gt;</text>
+	<text x="30" y="445" class="code">P O S E&lt;/tspan&gt;</text>
+	<text x="30" y="460" class="code">&lt;/text&gt;</text>
+
+	<!-- Visual guides -->
+	<line x1="50" y1="415" x2="50" y2="427" class="guide-line" />
+	<line x1="120" y1="395" x2="120" y2="407" class="guide-line" />
+	<line x1="190" y1="425" x2="190" y2="437" class="guide-line" />
+	<line x1="260" y1="405" x2="260" y2="417" class="guide-line" />
+
+	<!-- Expected: custom position for each character -->
+	<text x="50" y="420" font-size="20">P</text>
+	<text x="120" y="400" font-size="20">O</text>
+	<text x="190" y="430" font-size="20">S</text>
+	<text x="260" y="410" font-size="20">E</text>
+  </g>
+
+  <!-- Section 6: Tspan Inherit Then Override -->
+  <g id="section6">
+	<rect x="510" y="360" width="480" height="130" />
+	<text x="520" y="380" class="subtitle">6. Inheritance &amp; Override</text>
+	<text x="520" y="400" class="code">SVG Code:</text>
+	<text x="530" y="415" class="code">&lt;text x="600"&gt;Base</text>
+	<text x="530" y="430" class="code">&lt;tspan x="550 610" font-size="18"&gt;</text>
+	<text x="530" y="445" class="code">Over&lt;/tspan&gt;&lt;/text&gt;</text>
+	<text x="530" y="460" class="code">(tspan x overrides parent x)</text>
+
+	<!-- Base text -->
+	<text x="600" y="418" font-size="18">Base Text</text>
+
+	<!-- Overridden tspan -->
+	<text x="550" y="438" font-size="18">Over</text>
+  </g>
+
+  <!-- Section 7: Testing Checklist -->
+  <g id="checklist">
+	<rect x="10" y="510" width="980" height="85" />
+	<text x="20" y="530" class="subtitle">✓ Validation Checklist for Phase 1</text>
+
+	<text x="30" y="550" class="label">□ Test 1: X positioning - characters appear at correct horizontal positions</text>
+	<text x="30" y="567" class="label">□ Test 2: Y positioning - characters appear at correct vertical positions</text>
+	<text x="30" y="584" class="label">□ Test 3: DX + DY positioning - relative offsets properly applied</text>
+  </g>
+
+</svg>

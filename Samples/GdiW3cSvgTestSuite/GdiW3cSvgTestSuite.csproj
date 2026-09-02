@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
-		<TargetFrameworks>net45;net46;net47;net48;net6.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
+		<TargetFrameworks>net45;net46;net47;net48;net6.0-windows;net8.0-windows;net9.0-windows;net10.0-windows</TargetFrameworks>
 		<OutputType>WinExe</OutputType>
 		<UseWindowsForms>true</UseWindowsForms>
 		<RootNamespace>GdiW3cSvgTestSuite</RootNamespace>
@@ -34,6 +34,7 @@
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net6'))">$(DefineConstants);NETCORE;NET60</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net8'))">$(DefineConstants);NETCORE;NET80</DefineConstants>
 		<DefineConstants Condition="$(TargetFramework.StartsWith('net9'))">$(DefineConstants);NETCORE;NET90</DefineConstants>
+		<DefineConstants Condition="$(TargetFramework.StartsWith('net10'))">$(DefineConstants);NETCORE;NET100</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
 		<Reference Include="System.Net.Http" />
@@ -164,6 +165,23 @@
 		</Reference>
 		<Reference Include="SharpVectors.HtmlRenderer.WinForms">
 			<HintPath>..\..\Libraries\net9.0-windows\SharpVectors.HtmlRenderer.WinForms.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net10.0-windows'">
+		<Reference Include="SharpVectors.ShellFileDialogs">
+			<HintPath>..\..\Libraries\net10.0\SharpVectors.ShellFileDialogs.dll</HintPath>
+		</Reference>
+		<Reference Include="ICSharpCode.TextEditor">
+			<HintPath>..\..\Libraries\net10.0-windows\ICSharpCode.TextEditor.dll</HintPath>
+		</Reference>
+		<Reference Include="WeifenLuo.WinFormsUI.Docking">
+			<HintPath>..\..\Libraries\net10.0-windows\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+		</Reference>
+		<Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
+			<HintPath>..\..\Libraries\net10.0-windows\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+		</Reference>
+		<Reference Include="SharpVectors.HtmlRenderer.WinForms">
+			<HintPath>..\..\Libraries\net10.0-windows\SharpVectors.HtmlRenderer.WinForms.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
