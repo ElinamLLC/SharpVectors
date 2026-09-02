@@ -7,6 +7,9 @@
         xmlns:local="clr-namespace:WpfTestResourceSvg"
         mc:Ignorable="d"
         Title="SharpVector - Design Mode Tests" Height="720" Width="960" Icon="App.ico" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <svgc:SvgToBitmapValueConverter x:Key="SvgToBitmapConverter"/>
+    </Window.Resources>
     <DockPanel LastChildFill="True" Margin="3">
         <TextBlock DockPanel.Dock="Top" Margin="3" Height="32" Text="A sample to demonstrate support for SVG files in resources in Design-Mode." 
                     TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
@@ -102,6 +105,107 @@
                     <svgc:SvgViewbox Source="/Resources/autum_leaf.svg" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </UniformGrid>
+            </TabItem>
+
+            <TabItem x:Name="tabSvgToBitmap">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24px" Width="24px" Source="{svgc:SvgImage Source=/Images/SvgLogoBasic.svg, AppName=WpfTestResourceSvg}" />
+                        <TextBlock Text="SvgToBitmap" Margin="3" VerticalAlignment="Center" MinWidth="70"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <DockPanel LastChildFill="True">
+                    <Border DockPanel.Dock="Top" Margin="10" Background="WhiteSmoke" Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="SVG to Bitmap Value Converter Examples" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBlock Text="This converter rasterizes SVG files into BitmapImage objects for static icon scenarios." 
+                                       TextWrapping="Wrap" FontSize="12" Foreground="DarkGray" Margin="0,0,0,5"/>
+                            <TextBlock Text="Supports: Local paths (/Resources/...), Web URLs (https://...), Pack URIs (pack://...), and .svgz files." 
+                                       TextWrapping="Wrap" FontSize="11" Foreground="Gray"/>
+                        </StackPanel>
+                    </Border>
+
+                    <TabControl DockPanel.Dock="Top" Margin="5">
+                        <TabItem Header="Local Resources" Foreground="Black">
+                            <UniformGrid Rows="2" Columns="2" Margin="5">
+                                <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/autum_leaf.svg, Mode=OneWay}" 
+                                       Stretch="Uniform" ToolTip="Local resource: autumn leaf"/>
+                                <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/basket.svg, Mode=OneWay}" 
+                                       Stretch="Uniform" ToolTip="Local resource: basket"/>
+                                <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/kite.svg, Mode=OneWay}" 
+                                       Stretch="Uniform" ToolTip="Local resource: kite"/>
+                                <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/beach_ball.svg, Mode=OneWay}" 
+                                       Stretch="Uniform" ToolTip="Local resource: beach ball"/>
+                            </UniformGrid>
+                        </TabItem>
+
+                        <TabItem Header="Different Sizes" Foreground="Black">
+                            <UniformGrid Rows="2" Columns="2" Margin="5">
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/autum_leaf.svg, Mode=OneWay}" 
+                                               Width="48" Height="48" Stretch="Uniform"/>
+                                        <TextBlock Text="48x48 px" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/autum_leaf.svg, Mode=OneWay}" 
+                                               Width="96" Height="96" Stretch="Uniform"/>
+                                        <TextBlock Text="96x96 px" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/autum_leaf.svg, Mode=OneWay}" 
+                                               Width="128" Height="128" Stretch="Uniform"/>
+                                        <TextBlock Text="128x128 px" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding Converter={StaticResource SvgToBitmapConverter}, ConverterParameter=/Resources/autum_leaf.svg, Mode=OneWay}" 
+                                               Width="200" Height="200" Stretch="Uniform"/>
+                                        <TextBlock Text="200x200 px" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+                        </TabItem>
+
+                        <TabItem Header="Direct Binding" Foreground="Black">
+                            <UniformGrid Rows="2" Columns="2" Margin="5">
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding BitmapIcon1, Converter={StaticResource SvgToBitmapConverter}, Mode=OneWay}" 
+                                               Width="80" Height="80" Stretch="Uniform" ToolTip="Binding: Icon 1"/>
+                                        <TextBlock Text="Icon 1" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding BitmapIcon2, Converter={StaticResource SvgToBitmapConverter}, Mode=OneWay}" 
+                                               Width="80" Height="80" Stretch="Uniform" ToolTip="Binding: Icon 2"/>
+                                        <TextBlock Text="Icon 2" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding BitmapIcon3, Converter={StaticResource SvgToBitmapConverter}, Mode=OneWay}" 
+                                               Width="80" Height="80" Stretch="Uniform" ToolTip="Binding: Icon 3"/>
+                                        <TextBlock Text="Icon 3" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="LightGray" BorderThickness="1" Padding="5">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="{Binding BitmapIcon4, Converter={StaticResource SvgToBitmapConverter}, Mode=OneWay}" 
+                                               Width="80" Height="80" Stretch="Uniform" ToolTip="Binding: Icon 4"/>
+                                        <TextBlock Text="Icon 4" TextAlignment="Center" FontSize="10" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+                        </TabItem>
+                    </TabControl>
+                </DockPanel>
             </TabItem>
 
             <TabItem x:Name="tabBitmap">

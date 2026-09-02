@@ -1872,131 +1872,14 @@ namespace SharpVectors.Converters
 
         private Assembly GetEntryAssembly()
         {
-            string XDesProc   = "XDesProc";   // WPF designer process - Designer Isolation
-            string DevEnv     = "DevEnv";     // WPF designer process - Surface Isolation
-            string WpfSurface = "WpfSurface"; // WPF designer process - New .NETCore
-            var comparer      = StringComparison.OrdinalIgnoreCase;
-
-            Assembly asm = null;
-            try
-            {
-                // Should work at runtime...
-                asm = Assembly.GetEntryAssembly(); //...but mostly loading the design-time process: XDesProc.exe
-                if (asm != null)
-                {
-                    var appName = asm.GetName().Name;
-                    if (appName.StartsWith(XDesProc, comparer) 
-                        || appName.StartsWith(DevEnv, comparer) 
-                        || appName.StartsWith(WpfSurface, comparer))
-                    {
-                        asm = null;
-                    }
-                }
-                // Design time
-                if (asm == null)
-                {
-#if NETCORE
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#else
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#endif
-
-                    if (asm == null)
-                    {
-                        asm = Application.ResourceAssembly;
-                        if (asm != null)
-                        {
-                            var appName = asm.GetName().Name;
-                            if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
-                            {
-                                asm = null;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (asm == null)
-                {
-#if NETCORE
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#else
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#endif
-                }
-
-                Debug.WriteLine(ex.ToString());
-            }
-            return asm;
+            // Use shared designer support utility
+            return DesignerSupport.GetDesignTimeResourceAssembly();
         }
 
         private Assembly GetExecutingAssembly()
         {
-            Assembly asm = null;
-            try
-            {
-                var invalidAssemblies = new string[] { "SharpVectors.Converters.Wpf", "WpfSurface", "XDesProc", "DevEnv" };
-
-                asm = Assembly.GetExecutingAssembly();
-                string asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
-                if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
-                {
-                    return asm;
-                }
-                else
-                {
-                    asm = Assembly.GetEntryAssembly();
-                    asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
-                    if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
-                    {
-                        return asm;
-                    }
-                }
-
-                return this.GetEntryAssembly();
-            }
-            catch
-            {
-                asm = Assembly.GetEntryAssembly();
-            }
-            return asm;
+            // Use shared designer support utility
+            return DesignerSupport.GetDesignTimeResourceAssembly();
         }
 
         #endregion

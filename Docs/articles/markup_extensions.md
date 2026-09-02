@@ -12,6 +12,9 @@ These classes derived from [SvgImageBase](xref:SharpVectors.Converters.SvgImageB
 
 Markup extensions in WPF are not dependency objects, and cannot support data binding. The [SvgImageConverterExtension](xref:SharpVectors.Converters.SvgImageConverterExtension) class implements the [IValueConverter](xref:System.Windows.Data.IValueConverter) interface to enable data binding supports on the markup extension. Use this where data binding is required or the [SVG Image Controls](xref:topic_image_controls) ([SvgBitmap](xref:SharpVectors.Converters.SvgBitmap), [SvgIcon](xref:SharpVectors.Converters.SvgIcon)), which also provide static images.
 
+> [!TIP]
+> If you require **rasterized bitmap images** instead of vector drawings, see [SvgToBitmapValueConverter](xref:topic_svg_to_bitmap_converter), which converts SVG files directly to [BitmapImage](xref:System.Windows.Media.Imaging.BitmapImage) for static icons and UI elements.
+
 ```mermaid
 classDiagram
     class MarkupExtension

@@ -32,6 +32,7 @@ namespace SharpVectors.Converters
         protected bool _optimizePath;
         protected string _appName;
         protected CultureInfo _culture;
+        protected DrawingImage _designerImage;
 
         #endregion
 
@@ -171,6 +172,26 @@ namespace SharpVectors.Converters
             }
         }
 
+        /// <summary>
+        /// Gets or sets an optional fallback image to display in the WPF designer when the SVG source fails to load.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DrawingImage"/> to display as a placeholder, or <see langword="null"/> to use the default placeholder.
+        /// </value>
+        /// <remarks>
+        /// This property is only used in design-time scenarios. At runtime, it is ignored.
+        /// If set, this image will be displayed instead of the automatic placeholder when SVG loading fails.
+        /// </remarks>
+        public DrawingImage DesignerImage
+        {
+            get {
+                return _designerImage;
+            }
+            set {
+                _designerImage = value;
+            }
+        }
+
         #endregion
 
         #region Protected Methods
@@ -212,14 +233,30 @@ namespace SharpVectors.Converters
                 //case "ftp":
                 case "https":
                 case "http":
-                    using (FileSvgReader reader = new FileSvgReader(settings))
+                    // Use timeout protection in design mode only to prevent designer hangs
+                    DrawingGroup drawGroup = null;
+                    if (this.IsDesignMode())
                     {
-                        DrawingGroup drawGroup = reader.Read(svgSource);
-
-                        if (drawGroup != null)
+                        drawGroup = DesignerSupport.ExecuteWithTimeout(() =>
                         {
-                            return drawGroup;
+                            using (FileSvgReader reader = new FileSvgReader(settings))
+                            {
+                                return reader.Read(svgSource);
+                            }
+                        }, null, 3000);
+                    }
+                    else
+                    {
+                        // At runtime, no timeout - allow full time for network requests
+                        using (FileSvgReader reader = new FileSvgReader(settings))
+                        {
+                            drawGroup = reader.Read(svgSource);
                         }
+                    }
+
+                    if (drawGroup != null)
+                    {
+                        return drawGroup;
                     }
                     break;
                 case "pack":
@@ -249,11 +286,11 @@ namespace SharpVectors.Converters
                                 {
                                     using (FileSvgReader reader = new FileSvgReader(settings))
                                     {
-                                        DrawingGroup drawGroup = reader.Read(zipStream);
+                                        DrawingGroup result = reader.Read(zipStream);
 
-                                        if (drawGroup != null)
+                                        if (result != null)
                                         {
-                                            return drawGroup;
+                                            return result;
                                         }
                                     }
                                 }
@@ -265,11 +302,11 @@ namespace SharpVectors.Converters
                             {
                                 using (FileSvgReader reader = new FileSvgReader(settings))
                                 {
-                                    DrawingGroup drawGroup = reader.Read(svgStream);
+                                    DrawingGroup result = reader.Read(svgStream);
 
-                                    if (drawGroup != null)
+                                    if (result != null)
                                     {
-                                        return drawGroup;
+                                        return result;
                                     }
                                 }
                             }
@@ -301,10 +338,10 @@ namespace SharpVectors.Converters
                                 {
                                     using (var reader = new FileSvgReader(settings))
                                     {
-                                        DrawingGroup drawGroup = reader.Read(zipStream);
-                                        if (drawGroup != null)
+                                        DrawingGroup result = reader.Read(zipStream);
+                                        if (result != null)
                                         {
-                                            return drawGroup;
+                                            return result;
                                         }
                                     }
                                 }
@@ -316,10 +353,10 @@ namespace SharpVectors.Converters
                             {
                                 using (var reader = new FileSvgReader(settings))
                                 {
-                                    DrawingGroup drawGroup = reader.Read(stream);
-                                    if (drawGroup != null)
+                                    DrawingGroup result = reader.Read(stream);
+                                    if (result != null)
                                     {
-                                        return drawGroup;
+                                        return result;
                                     }
                                 }
                             }
@@ -342,10 +379,51 @@ namespace SharpVectors.Converters
         /// </remarks>
         protected virtual DrawingImage GetImage(Uri svgSource)
         {
-            DrawingGroup drawGroup = this.GetDrawing(svgSource);
-            if (drawGroup != null)
+            try
             {
-                return new DrawingImage(drawGroup);
+                DrawingGroup drawGroup = this.GetDrawing(svgSource);
+                if (drawGroup != null)
+                {
+                    return new DrawingImage(drawGroup);
+                }
+
+                // In design mode, provide a fallback placeholder if SVG fails to load
+                if (this.IsDesignMode())
+                {
+                    // Use explicit DesignerImage if provided
+                    if (_designerImage != null)
+                    {
+                        return _designerImage;
+                    }
+
+                    // Otherwise, create an automatic placeholder
+                    var placeholder = DesignerSupport.CreatePlaceholder($"Failed to load: {svgSource?.ToString()}");
+                    if (placeholder != null)
+                    {
+                        return placeholder;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (this.IsDesignMode())
+                {
+                    // Log the error and provide a placeholder in design mode
+                    System.Diagnostics.Debug.WriteLine($"Error loading SVG: {ex.Message}");
+
+                    // Use explicit DesignerImage if provided
+                    if (_designerImage != null)
+                    {
+                        return _designerImage;
+                    }
+
+                    // Otherwise, create an automatic placeholder
+                    var placeholder = DesignerSupport.CreatePlaceholder($"Error: {ex.Message}");
+                    if (placeholder != null)
+                    {
+                        return placeholder;
+                    }
+                }
             }
             return null;
         }
@@ -369,148 +447,20 @@ namespace SharpVectors.Converters
 
         protected Assembly GetEntryAssembly()
         {
-            string XDesProc   = "XDesProc";   // WPF designer process - Designer Isolation
-            string DevEnv     = "DevEnv";     // WPF designer process - Surface Isolation
-            string WpfSurface = "WpfSurface"; // WPF designer process - New .NETCore
-            var comparer      = StringComparison.OrdinalIgnoreCase;
-
-            Assembly asm = null;
-            try
-            {
-                // Should work at runtime...
-                asm = Assembly.GetEntryAssembly(); //...but mostly loading the design-time process: XDesProc.exe
-                if (asm != null)
-                {
-                    var appName = asm.GetName().Name;
-                    if (appName.StartsWith(XDesProc, comparer)
-                        || appName.StartsWith(DevEnv, comparer)
-                        || appName.StartsWith(WpfSurface, comparer))
-                    {
-                        asm = null;
-                    }
-                }
-                // Design time
-                if (asm == null)
-                {
-#if NETCORE
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#else
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#endif
-
-                    if (asm == null)
-                    {
-                        asm = Application.ResourceAssembly;
-                        if (asm != null)
-                        {
-                            var appName = asm.GetName().Name;
-                            if (appName.StartsWith(XDesProc, comparer) || appName.StartsWith(DevEnv, comparer))
-                            {
-                                asm = null;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (asm == null)
-                {
-#if NETCORE
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = SharpVectors.Dom.Utils.PathUtils.GetAssemblyFileName(assembly).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#else
-                    asm = (
-                          from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                          where !assembly.IsDynamic
-                          let assmName = Path.GetFileName(assembly.CodeBase).Trim()
-                          where assmName.EndsWith(".exe", comparer)
-                              && !assmName.StartsWith(XDesProc, comparer) // should not be XDesProc.exe
-                              && !assmName.StartsWith(DevEnv, comparer)   // should not be DevEnv.exe
-                              && !assmName.StartsWith(WpfSurface, comparer)   // should not be WpfSurface.exe
-                          select assembly
-                          ).FirstOrDefault();
-#endif
-                }
-
-                Debug.WriteLine(ex.ToString());
-            }
-            return asm;
+            // Use shared designer support utility for more robust assembly resolution
+            return DesignerSupport.GetDesignTimeResourceAssembly();
         }
 
         protected Assembly GetExecutingAssembly()
         {
-            Assembly asm = null;
-            try
-            {
-                var invalidAssemblies = new string[] { "SharpVectors.Converters.Wpf", "WpfSurface", "XDesProc", "DevEnv" };
-
-                asm = Assembly.GetExecutingAssembly();
-                string asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
-                if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
-                {
-                    return asm;
-                }
-                else
-                {
-                    asm = Assembly.GetEntryAssembly();
-                    asmName = asm == null ? null : Path.GetFileName(asm.GetName().Name);
-                    if (asmName != null && !invalidAssemblies.Contains(asmName, StringComparer.OrdinalIgnoreCase))
-                    {
-                        return asm;
-                    }
-                }
-
-                return this.GetEntryAssembly();
-            }
-            catch
-            {
-                asm = Assembly.GetEntryAssembly();
-            }
-            return asm;
+            // Use shared designer support utility
+            return DesignerSupport.GetDesignTimeResourceAssembly();
         }
 
         protected bool IsDesignMode(IServiceProvider serviceProvider = null)
         {
-            if (serviceProvider != null)
-            {
-                var pvt = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
-                if (pvt != null)
-                {
-                    var targetObject = pvt.TargetObject as DependencyObject;
-                    if (targetObject != null)
-                    {
-                        return DesignerProperties.GetIsInDesignMode(targetObject);
-                    }
-                }
-            }
-            return DesignerProperties.GetIsInDesignMode(new DependencyObject());
+            // Use shared designer support utility for more robust detection
+            return DesignerSupport.IsInDesignMode();
         }
 
         #endregion
