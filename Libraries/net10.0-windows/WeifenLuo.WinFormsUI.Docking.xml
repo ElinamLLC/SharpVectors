@@ -1,0 +1,765 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeifenLuo.WinFormsUI.Docking</name>
+    </assembly>
+    <members>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockPanel.DragHandlerBase">
+            <summary>
+            DragHandlerBase is the base class for drag handlers. The derived class should:
+              1. Define its public method BeginDrag. From within this public BeginDrag method,
+                 DragHandlerBase.BeginDrag should be called to initialize the mouse capture
+                 and message filtering.
+              2. Override the OnDragging and OnEndDrag methods.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanel.DockBackColor">
+            <summary>
+            Determines the color with which the client rectangle will be drawn.
+            If this property is used instead of the BackColor it will not have any influence on the borders to the surrounding controls (DockPane).
+            The BackColor property changes the borders of surrounding controls (DockPane).
+            Alternatively both properties may be used (BackColor to draw and define the color of the borders and DockBackColor to define the color of the client rectangle). 
+            For Backgroundimages: Set your prefered Image, then set the DockBackColor and the BackColor to the same Color (Control)
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanel.DockArea">
+            <summary>
+            Dock area.
+            </summary>
+            <remarks>
+            This <see cref="T:System.Drawing.Rectangle"/> is the center rectangle of <see cref="T:WeifenLuo.WinFormsUI.Docking.DockPanel"/> control.
+            
+            Excluded spaces are for the following visual elements,
+            * Auto hide strips on four sides.
+            * Necessary paddings defined in themes.
+            
+            Therefore, all dock contents mainly fall into this area (except auto hide window, which might slightly move beyond this area).
+            </remarks>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanel.ShowAutoHideContentOnHover">
+            <summary>
+            Flag to show autohide content on mouse hover. Default value is <code>true</code>.
+            </summary>
+            <remarks>
+            This flag is ignored in VS2012/2013 themes. Such themes assume it is always <code>false</code>.
+            </remarks>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.DockPanel.LoadFromXml(System.String,WeifenLuo.WinFormsUI.Docking.DeserializeDockContent)">
+            <summary>
+            Loads layout from XML file.
+            </summary>
+            <param name="fileName">The file name.</param>
+            <param name="deserializeContent">Deserialization handler.</param>
+            <exception cref="T:System.Exception">Deserialization might throw exceptions.</exception>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.DockPanel.LoadFromXml(System.IO.Stream,WeifenLuo.WinFormsUI.Docking.DeserializeDockContent)">
+            <summary>
+            Loads layout from a stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="deserializeContent">Deserialization handler.</param>
+            <exception cref="T:System.Exception">Deserialization might throw exceptions.</exception>
+            <remarks>
+            The stream is closed after deserialization.
+            </remarks>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.DockPanel.LoadFromXml(System.IO.Stream,WeifenLuo.WinFormsUI.Docking.DeserializeDockContent,System.Boolean)">
+            <summary>
+            Loads layout from a stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="deserializeContent">Deserialization handler.</param>
+            <param name="closeStream">The flag to close the stream after deserialization.</param>
+            <exception cref="T:System.Exception">Deserialization might throw exceptions.</exception>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleTopLeft">
+            <summary>
+            The top left rectangle in auto hide strip area.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleTopRight">
+            <summary>
+            The top right rectangle in auto hide strip area.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleBottomLeft">
+            <summary>
+            The bottom left rectangle in auto hide strip area.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleBottomRight">
+            <summary>
+            The bottom right rectangle in auto hide strip area.
+            </summary>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.GetTabStripRectangle(WeifenLuo.WinFormsUI.Docking.DockState)">
+            <summary>
+            Gets one of the four auto hide strip rectangles.
+            </summary>
+            <param name="dockState">Dock state.</param>
+            <returns>The desired rectangle.</returns>
+            <remarks>
+            As the corners are represented by <see cref="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleTopLeft"/>, <see cref="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleTopRight"/>, <see cref="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleBottomLeft"/>, and <see cref="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripBase.RectangleBottomRight"/>,
+            the four strips can be easily calculated out as the borders.
+            </remarks>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.ImageServiceHelper.GetImage(System.Drawing.Bitmap,System.Drawing.Color,System.Drawing.Color,System.Nullable{System.Drawing.Color})">
+            <summary>
+            Gets images for tabs and captions.
+            </summary>
+            <param name="mask"></param>
+            <param name="glyph"></param>
+            <param name="background"></param>
+            <param name="border"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.ImageServiceHelper.GetDockIcon(System.Drawing.Bitmap,System.Drawing.Bitmap,System.Drawing.Bitmap,System.Drawing.Bitmap,System.Drawing.Bitmap,System.Drawing.Color,WeifenLuo.WinFormsUI.Docking.IPaintingService,System.Drawing.Bitmap,System.Drawing.Bitmap,System.Nullable{System.Drawing.Color})">
+            <summary>
+            Gets images for docking indicators.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockPanelSkin">
+            <summary>
+            The skin to use when displaying the DockPanel.
+            The skin allows custom gradient color schemes to be used when drawing the
+            DockStrips and Tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanelSkin.AutoHideStripSkin">
+            <summary>
+            The skin used to display the auto hide strips and tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanelSkin.DockPaneStripSkin">
+            <summary>
+            The skin used to display the Document and ToolWindow style DockStrips and Tabs.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin">
+            <summary>
+            The skin used to display the auto hide strip and tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin.DockStripGradient">
+            <summary>
+            The gradient color skin for the DockStrips.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin.TabGradient">
+            <summary>
+            The gradient color skin for the Tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin.DockStripBackground">
+            <summary>
+            The gradient color skin for the Tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin.TextFont">
+            <summary>
+            Font used in AutoHideStrip elements.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin">
+            <summary>
+            The skin used to display the document and tool strips and tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin.DocumentGradient">
+            <summary>
+            The skin used to display the Document style DockPane strip and tab.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin.ToolWindowGradient">
+            <summary>
+            The skin used to display the ToolWindow style DockPane strip and tab.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin.TextFont">
+            <summary>
+            Font used in DockPaneStrip elements.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient">
+            <summary>
+            The skin used to display the DockPane ToolWindow strip and tab.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient.ActiveCaptionGradient">
+            <summary>
+            The skin used to display the active ToolWindow caption.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient.InactiveCaptionGradient">
+            <summary>
+            The skin used to display the inactive ToolWindow caption.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient">
+            <summary>
+            The skin used to display the DockPane strip and tab.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient.DockStripGradient">
+            <summary>
+            The gradient color skin for the DockStrip.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient.ActiveTabGradient">
+            <summary>
+            The skin used to display the active DockPane tabs.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient.InactiveTabGradient">
+            <summary>
+            The skin used to display the inactive DockPane tabs.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.TabGradient">
+            <summary>
+            The skin used to display the dock pane tab
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.TabGradient.TextColor">
+            <summary>
+            The text color.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockStripBackground">
+            <summary>
+            The skin used to display the dock pane tab
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockStripBackground.StartColor">
+            <summary>
+            The beginning gradient color.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockStripBackground.EndColor">
+            <summary>
+            The ending gradient color.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockPanelGradient">
+            <summary>
+            The gradient color skin.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanelGradient.StartColor">
+            <summary>
+            The beginning gradient color.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanelGradient.EndColor">
+            <summary>
+            The ending gradient color.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPanelGradient.LinearGradientMode">
+            <summary>
+            The gradient mode to display the colors.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockContent.TabPageContextMenuStrip">
+            <summary>
+            Context menu strip.
+            </summary>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.DockContent.OnSizeChanged(System.EventArgs)">
+            <summary>
+            Overridden to avoid resize issues with nested controls
+            </summary>
+            <remarks>
+            http://blogs.msdn.com/b/alejacma/archive/2008/11/20/controls-won-t-get-resized-once-the-nesting-hierarchy-of-windows-exceeds-a-certain-depth-x64.aspx
+            http://support.microsoft.com/kb/953934
+            </remarks>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockContentHandler.CloseButtonVisible">
+            <summary>
+            Determines whether the close button is visible on the content
+            </summary>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.NestedPaneCollection.SwitchPaneWithFirstChild(WeifenLuo.WinFormsUI.Docking.DockPane)">
+            <summary>
+            Switches a pane with its first child in the pane hierarchy. (The actual hiding happens elsewhere.)
+            </summary>
+            <param name="pane">Pane to switch</param>
+        </member>
+        <member name="F:WeifenLuo.WinFormsUI.Docking.DockPane._lastParentWindow">
+            <summary>
+            There's a bug in the WinForms layout engine
+            that can result in a deferred layout to not
+            properly clear out the cached layout args after
+            the layout operation is performed.
+            Specifically, this bug is hit when the bounds of
+            the Pane change, initiating a layout on the parent
+            (DockWindow) which is where the bug hits.
+            To work around it, when a pane loses the DockWindow
+            as its parent, that parent DockWindow needs to
+            perform a layout to flush the cached args, if they exist.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.DockPaneCaptionBase.CanDragAutoHide">
+            <summary>
+            Gets a value indicating whether dock panel can be dragged when in auto hide mode. 
+            Default is false.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DeserializeDockContent">
+            <summary>
+            Deserialization handler of layout file/stream.
+            </summary>
+            <param name="persistString">Strings stored in layout file/stream.</param>
+            <returns>Dock content deserialized from layout/stream.</returns>
+            <remarks>
+            The deserialization handler method should handle all possible exceptions.
+            
+            If any exception happens during deserialization and is not handled, the program might crash or experience other issues.
+            </remarks>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DockWindow">
+            <summary>
+            Dock window base class.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.DocumentTabStripLocation">
+            <summary>
+            The location to draw the DockPaneStrip for Document style windows.
+            </summary>
+        </member>
+        <member name="F:WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:WeifenLuo.WinFormsUI.Docking.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Category_Docking">
+            <summary>
+              Looks up a localized string similar to Docking.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Category_DockingNotification">
+            <summary>
+              Looks up a localized string similar to Docking Notification.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Category_Performance">
+            <summary>
+              Looks up a localized string similar to Performance.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Category_PropertyChanged">
+            <summary>
+              Looks up a localized string similar to Property Changed.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockAreaEditor_FloatCheckBoxText">
+            <summary>
+              Looks up a localized string similar to (Float).
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_AllowEndUserDocking_Description">
+            <summary>
+              Looks up a localized string similar to Determines if end user drag and drop docking is allowed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_AutoHidePortion_Description">
+            <summary>
+              Looks up a localized string similar to The size to display the content in auto hide mode. Value &lt; 1 to specify the size in portion; value &gt;= 1 to specify the size in pixel..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_CloseButton_Description">
+            <summary>
+              Looks up a localized string similar to Enable/Disable the close button of the content..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_CloseButtonVisible_Description">
+            <summary>
+              Looks up a localized string similar to Shows or hides the close button of the content. This property does not function with System MDI Document Style..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_Constructor_InvalidForm">
+            <summary>
+              Looks up a localized string similar to The form must be of type IDockContent..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_DockAreas_Description">
+            <summary>
+              Looks up a localized string similar to Gets or sets a value indicating in which area of the DockPanel the content allowed to show..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_DockStateChanged_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when the value of DockState property changed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_HideOnClose_Description">
+            <summary>
+              Looks up a localized string similar to Indicates the content will be hidden instead of being closed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_ShowHint_Description">
+            <summary>
+              Looks up a localized string similar to The desired docking state when first showing..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_TabPageContextMenu_Description">
+            <summary>
+              Looks up a localized string similar to Context menu displayed for the dock pane tab strip..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_TabText_Description">
+            <summary>
+              Looks up a localized string similar to The tab text displayed in the dock pane. If not set, the Text property will be used..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContent_ToolTipText_Description">
+            <summary>
+              Looks up a localized string similar to The text displayed when mouse hovers over the tab..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_AutoHidePortion_OutOfRange">
+            <summary>
+              Looks up a localized string similar to The provided value is out of range..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_DockAreas_InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid Value: The value of DockAreas conflicts with current DockState..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_DockPane_InvalidValue">
+            <summary>
+              Looks up a localized string similar to The pane is invalid. Check the IsFloat and DockPanel properties of this dock pane..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_FloatPane_InvalidValue">
+            <summary>
+              Looks up a localized string similar to The pane is invalid. Check the IsFloat and DockPanel properties of this dock pane..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_IsFloat_InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid value, conflicts with DockableAreas  property..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_SetDockState_InvalidState">
+            <summary>
+              Looks up a localized string similar to The dock state is invalid..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_SetDockState_NullPanel">
+            <summary>
+              Looks up a localized string similar to The dock panel is null..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_Show_InvalidBeforeContent">
+            <summary>
+              Looks up a localized string similar to Invalid beforeContent, it must be contained by the pane..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_Show_InvalidDockState">
+            <summary>
+              Looks up a localized string similar to Invalid DockState: Content can not be showed as &quot;Unknown&quot; or &quot;Hidden&quot;..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_Show_InvalidPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane is invalid. It can not be null, and its docking state must not be auto-hide..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_Show_NullDockPanel">
+            <summary>
+              Looks up a localized string similar to DockPanel can not be null..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_Show_NullPane">
+            <summary>
+              Looks up a localized string similar to The Pane can not be null..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockContentHandler_ShowHint_InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid value, check DockableAreas property..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockHandler_TabPageContextMenuStrip_Description">
+            <summary>
+              Looks up a localized string similar to Context menu displayed for the dock pane tab strip..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_ActiveContent_InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid Content: ActiveContent must be one of the visible contents, or null if there is no visible content..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_Constructor_NullContent">
+            <summary>
+              Looks up a localized string similar to Invalid argument: Content can not be &quot;null&quot;..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_Constructor_NullDockPanel">
+            <summary>
+              Looks up a localized string similar to Invalid argument: The content&apos;s DockPanel can not be &quot;null&quot;..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_DockTo_InvalidContainer">
+            <summary>
+              Looks up a localized string similar to The specified container conflicts with the IsFloat property..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_DockTo_NoPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane does not exist in the nested docking pane collection..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_DockTo_NullContainer">
+            <summary>
+              Looks up a localized string similar to The container can not be null..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_DockTo_NullPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane can not be null when the nested docking pane collection is not empty..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_DockTo_SelfPrevPane">
+            <summary>
+              Looks up a localized string similar to The previous pane can not be itself..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_SetContentIndex_InvalidContent">
+            <summary>
+              Looks up a localized string similar to Invalid Content: Content not within the collection..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_SetContentIndex_InvalidIndex">
+            <summary>
+              Looks up a localized string similar to Invalid Index: The index is out of range..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPane_SetDockState_InvalidState">
+            <summary>
+              Looks up a localized string similar to The state for the dock pane is invalid..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ActiveAutoHideContent_InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid Content: The content must be auto-hide state and associates with this DockPanel..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ActiveAutoHideContentChanged_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when the value of the AutoHideWindow&apos;s ActiveContent changed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ActiveContentChanged_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when the value of ActiveContentProperty changed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ActiveDocumentChanged_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when the value of ActiveDocument property changed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ActivePaneChanged_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when the value of ActivePane property changed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_AllowEndUserDocking_Description">
+            <summary>
+              Looks up a localized string similar to Determines if the drag and drop docking is allowed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_AllowEndUserNestedDocking_Description">
+            <summary>
+              Looks up a localized string similar to Determines if the drag and drop nested docking is allowed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ContentAdded_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when a content added to the DockPanel..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ContentRemoved_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when a content removed from the DockPanel..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DefaultFloatWindowSize_Description">
+            <summary>
+              Looks up a localized string similar to The default size of float window..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_Description">
+            <summary>
+              Looks up a localized string similar to Provides Visual Studio .Net style docking..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DockBottomPortion_Description">
+            <summary>
+              Looks up a localized string similar to Size of the bottom docking window. Value &lt; 1 to specify the size in portion; value &gt; 1 to specify the size in pixels..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DockLeftPortion_Description">
+            <summary>
+              Looks up a localized string similar to Size of the left docking window. Value &lt; 1 to specify the size in portion; value &gt; 1 to specify the size in pixels..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DockPanelSkin_Description">
+            <summary>
+              Looks up a localized string similar to The visual skin to use when displaying the docked windows..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DockRightPortion_Description">
+            <summary>
+              Looks up a localized string similar to Size of the right docking window. Value &lt; 1 to specify the size in portion; value &gt; 1 to specify the size in pixels..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DockTopPortion_Description">
+            <summary>
+              Looks up a localized string similar to Size of the top docking window. Value &lt; 1 to specify the size in portion; value &gt; 1 to specify the size in pixels..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DocumentDragged_Description">
+            <summary>
+              Looks up a localized string similar to Occurs when a document or pane is dragged within the dock panel..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DocumentStyle_Description">
+            <summary>
+              Looks up a localized string similar to The style of the document window..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_DocumentTabStripLocation_Description">
+            <summary>
+              Looks up a localized string similar to Determines where the tab strip for Document style content is drawn..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_LoadFromXml_AlreadyInitialized">
+            <summary>
+              Looks up a localized string similar to The DockPanel has already been initialized..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_LoadFromXml_InvalidFormatVersion">
+            <summary>
+              Looks up a localized string similar to The configuration file&apos;s version is invalid..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_LoadFromXml_InvalidXmlFormat">
+            <summary>
+              Looks up a localized string similar to The XML file format is invalid..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ParentForm_Invalid">
+            <summary>
+              Looks up a localized string similar to Invalid parent form. When using DockingMdi or SystemMdi document style, the DockPanel control must be the child control of the main MDI container form..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_Persistor_XmlFileComment1">
+            <summary>
+              Looks up a localized string similar to DockPanel configuration file. Author: Weifen Luo, all rights reserved..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_Persistor_XmlFileComment2">
+            <summary>
+              Looks up a localized string similar to !!! AUTOMATICALLY GENERATED FILE. DO NOT MODIFY !!!.
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_RightToLeftLayout_Description">
+            <summary>
+              Looks up a localized string similar to Indicates whether the control layout is right-to-left when the RightToLeft property is set to Yes..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_SetPaneIndex_InvalidIndex">
+            <summary>
+              Looks up a localized string similar to Invalid Index: The index is out of range..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_SetPaneIndex_InvalidPane">
+            <summary>
+              Looks up a localized string similar to Invalid Pane: DockPane not within the collection..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ShowAutoHideContentOnHover_Description">
+            <summary>
+              Looks up a localized string similar to Shows the hidden autohide content when hovering over the tab.  When disabled, the tab must be clicked to show the content..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_ShowDocumentIcon_Description">
+            <summary>
+              Looks up a localized string similar to Determines if the document icon will be displayed in the tab strip..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.DockPanel_SupportDeeplyNestedContent_Description">
+            <summary>
+              Looks up a localized string similar to Support deeply nested controls.  Disabling this setting may improve resize performance but may cause heavily nested content not to resize..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.FloatWindow_Constructor_NullDockPanel">
+            <summary>
+              Looks up a localized string similar to Invalid argument: DockPanel can not be &quot;null&quot;..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.IDockDragSource_DockTo_InvalidPanel">
+            <summary>
+              Looks up a localized string similar to Invalid DockPanel..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Theme_DockContentNotClosed">
+            <summary>
+              Looks up a localized string similar to Before applying themes all dock contents must be closed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Theme_FloatWindowNotClosed">
+            <summary>
+              Looks up a localized string similar to Before applying themes all float windows must be closed..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Theme_MissingFactory">
+            <summary>
+              Looks up a localized string similar to Before applying themes all factories must be configured..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Theme_NoTheme">
+            <summary>
+              Looks up a localized string similar to DockPanel.Theme must be set to a valid theme..
+            </summary>
+        </member>
+        <member name="P:WeifenLuo.WinFormsUI.Docking.Strings.Theme_PaneNotClosed">
+            <summary>
+              Looks up a localized string similar to Before applying themes all panes must be closed..
+            </summary>
+        </member>
+    </members>
+</doc>
