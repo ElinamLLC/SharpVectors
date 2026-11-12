@@ -185,7 +185,9 @@ namespace SharpVectors.Converters
                             var imageUri = cachedImage.UriSource;
                             if (imageUri != null)
                             {
-                                if (imageUri.IsFile && File.Exists(imageUri.LocalPath))
+                                var window = element.OwnerDocument.Window as SvgWindow;
+                                if (imageUri.IsFile && (window == null || window.CanLoadImageResource(imageUri)) &&
+                                    File.Exists(imageUri.LocalPath))
                                 {
                                     return cachedImage;
                                 }
@@ -227,7 +229,7 @@ namespace SharpVectors.Converters
             bool isSavingImages = _saveImages;
             string imagesDir    = _saveDirectory;
 
-            if (context != null && context.Settings.IncludeRuntime == false)
+            if (context != null && context.Settings.IncludeRuntime == false && context.Settings.AllowImageFileWrites)
             {
                 isSavingImages = true;
                 if (string.IsNullOrWhiteSpace(_saveDirectory) ||
@@ -294,14 +296,15 @@ namespace SharpVectors.Converters
 
             string imagePath = null;
 
-            if (isSavingImages && !string.IsNullOrWhiteSpace(imagesDir) && Directory.Exists(imagesDir))
+            if (isSavingImages && (context == null || context.Settings.AllowImageFileWrites) &&
+                !string.IsNullOrWhiteSpace(imagesDir) && Directory.Exists(imagesDir))
             {
                 imagePath = this.GetImagePath(imagesDir);
 
                 BitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(imageSource));
 
-                using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                using (var fileStream = new FileStream(imagePath, FileMode.CreateNew))
                 {
                     encoder.Save(fileStream);
                 }
@@ -364,7 +367,7 @@ namespace SharpVectors.Converters
             while (File.Exists(nextPath))
             {
                 imageCount++;
-                nextPath = Path.Combine(_saveDirectory, string.Format("{0}{1}{2}",
+                nextPath = Path.Combine(savedDir, string.Format("{0}{1}{2}",
                     _namePrefix, imageCount, ImageExt));
             }
 

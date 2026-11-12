@@ -16,6 +16,12 @@ namespace SharpVectors.Dom.Svg
         protected IDictionary<string, List<Task>> _mappedTasks;
 
         private bool _loadFonts;
+        private bool _allowLocalFontFiles;
+        private bool _allowFontFileWrites;
+        private bool _allowUncFontPaths;
+        private bool _loadImages;
+        private bool _allowLocalImageFiles;
+        private bool _allowUncImagePaths;
 
         private long _innerWidth;
         private long _innerHeight;
@@ -49,14 +55,27 @@ namespace SharpVectors.Dom.Svg
             _innerWidth  = innerWidth;
             _innerHeight = innerHeight;
 
-            _loadFonts   = true;
+            _loadFonts           = true;
+            _allowLocalFontFiles = true;
+            _allowFontFileWrites = true;
+            _allowUncFontPaths   = false;
+            _loadImages          = true;
+            _allowLocalImageFiles = true;
+            _allowUncImagePaths  = false;
         }
 
         protected SvgWindow(SvgWindow parentWindow, long innerWidth, long innerHeight)
             : this(innerWidth, innerHeight, parentWindow.CreateSvgRenderer())
         {
-            _parentWindow = parentWindow;
-            _baseUrls     = parentWindow.BaseUrls;
+            _parentWindow        = parentWindow;
+            _baseUrls            = parentWindow.BaseUrls;
+            _loadFonts           = parentWindow.LoadFonts;
+            _allowLocalFontFiles = parentWindow.AllowLocalFontFiles;
+            _allowFontFileWrites = parentWindow.AllowFontFileWrites;
+            _allowUncFontPaths   = parentWindow.AllowUncFontPaths;
+            _loadImages          = parentWindow.LoadImages;
+            _allowLocalImageFiles = parentWindow.AllowLocalImageFiles;
+            _allowUncImagePaths  = parentWindow.AllowUncImagePaths;
         }
 
         #endregion
@@ -95,10 +114,72 @@ namespace SharpVectors.Dom.Svg
 
         #region Public properties
 
-        internal bool LoadFonts
+        /// <summary>Gets or sets whether fonts referenced by the document are loaded. The default is true.</summary>
+        /// <remarks>This does not disable inline SVG fonts or system fonts.</remarks>
+        public bool LoadFonts
         {
             get { return _loadFonts; }
             set { _loadFonts = value; }
+        }
+
+        /// <summary>Gets or sets whether document-referenced local font files may be read. The default is true.</summary>
+        /// <remarks>Mapped network drives and filesystem links may also refer to remote locations.</remarks>
+        public bool AllowLocalFontFiles
+        {
+            get { return _allowLocalFontFiles; }
+            set { _allowLocalFontFiles = value; }
+        }
+
+        /// <summary>Gets or sets whether referenced font data and converted WOFF fonts may be written to disk. The default is true.</summary>
+        public bool AllowFontFileWrites
+        {
+            get { return _allowFontFileWrites; }
+            set { _allowFontFileWrites = value; }
+        }
+
+        /// <summary>Gets or sets whether explicit UNC font paths may be used. The default is false.</summary>
+        /// <remarks>This does not detect mapped network drives or filesystem links.</remarks>
+        public bool AllowUncFontPaths
+        {
+            get { return _allowUncFontPaths; }
+            set { _allowUncFontPaths = value; }
+        }
+
+        /// <summary>Gets or sets whether SVG image elements are loaded. The default is true.</summary>
+        public bool LoadImages
+        {
+            get { return _loadImages; }
+            set { _loadImages = value; }
+        }
+
+        /// <summary>Gets or sets whether image and image color-profile file references may be read. The default is true.</summary>
+        /// <remarks>Mapped network drives and filesystem links may also refer to remote locations.</remarks>
+        public bool AllowLocalImageFiles
+        {
+            get { return _allowLocalImageFiles; }
+            set { _allowLocalImageFiles = value; }
+        }
+
+        /// <summary>Gets or sets whether explicit UNC image and color-profile paths may be read. The default is false.</summary>
+        /// <remarks>This does not detect mapped network drives or filesystem links.</remarks>
+        public bool AllowUncImagePaths
+        {
+            get { return _allowUncImagePaths; }
+            set { _allowUncImagePaths = value; }
+        }
+
+        /// <summary>Checks image policy before accessing an absolute image or color-profile URI.</summary>
+        public bool CanLoadImageResource(Uri uri)
+        {
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+            if (!uri.IsAbsoluteUri) throw new ArgumentException("The image URI must be absolute.", nameof(uri));
+            if (!LoadImages) return false;
+            if (uri.IsFile && (!AllowLocalImageFiles || (!AllowUncImagePaths && (uri.IsUnc || !string.IsNullOrEmpty(uri.Host)))))
+            {
+                Debug.WriteLine("Image file access is disabled: " + uri);
+                return false;
+            }
+            return true;
         }
 
         #endregion

@@ -51,6 +51,11 @@ namespace SharpVectors.Renderers.Wpf
         {
             WpfDrawingContext context    = renderer.Context;
             SvgImageElement imageElement = (SvgImageElement)_svgElement;
+            var ownerWindow = imageElement.OwnerDocument.Window as SvgWindow;
+            if (ownerWindow != null && !ownerWindow.LoadImages)
+            {
+                return;
+            }
 
             double x      = imageElement.X.AnimVal.Value;
             double y      = imageElement.Y.AnimVal.Value;
@@ -69,12 +74,12 @@ namespace SharpVectors.Renderers.Wpf
                     return;
                 }
 
-                SvgWindow wnd = GetSvgWindow();
+                SvgWindow wnd = GetSvgWindow(context);
                 if (wnd == null)
                 {
                     return;
                 }
-                //_embeddedRenderer.BackColor = Color.Empty;  
+                //_embeddedRenderer.BackColor = Color.Empty;
                 _embeddedRenderer.Render(wnd.Document);
 
                 DrawingGroup imageGroup = _embeddedRenderer.Drawing as DrawingGroup;
@@ -439,11 +444,11 @@ namespace SharpVectors.Renderers.Wpf
 
         #region Private Methods
 
-        private SvgWindow GetSvgWindow()
+        private SvgWindow GetSvgWindow(WpfDrawingContext context)
         {
             if (_embeddedRenderer == null)
             {
-                _embeddedRenderer = new WpfDrawingRenderer();
+                _embeddedRenderer = new WpfDrawingRenderer(context.Settings, true);
             }
 
             SvgImageElement iElm = (SvgImageElement)this.Element;
@@ -477,8 +482,14 @@ namespace SharpVectors.Renderers.Wpf
 
             SvgUriReference svgUri = colorProfile.UriReference;
             Uri profileUri = new Uri(svgUri.AbsoluteUri);
+            var window = element.OwnerDocument.Window as SvgWindow;
+            if ((window != null && !window.CanLoadImageResource(profileUri)) ||
+                (!profileUri.IsFile && !element.OwnerDocument.CanAccessExternalResources(profileUri)))
+            {
+                return imageSource;
+            }
 
-            ColorContext colorContext = new ColorContext(new Uri(svgUri.AbsoluteUri));
+            ColorContext colorContext = new ColorContext(profileUri);
 
             var colorContexts = new ReadOnlyCollection<ColorContext>(new ColorContext[] { colorContext });
 
@@ -526,11 +537,6 @@ namespace SharpVectors.Renderers.Wpf
                 SvgUriReference svgUri = element.UriReference;
                 string absoluteUri = svgUri.AbsoluteUri;
 
-                if (ownerDocument != null && !ownerDocument.CanAccessExternalResources(absoluteUri))
-                {
-                    return null;
-                }
-
                 if (string.IsNullOrWhiteSpace(absoluteUri))
                 {
                     return null; // most likely, the image does not exist...
@@ -541,11 +547,17 @@ namespace SharpVectors.Renderers.Wpf
                     return null;
                 }
 
+                Uri imageUri = new Uri(absoluteUri);
+                var window = ownerDocument.Window as SvgWindow;
+                if ((window != null && !window.CanLoadImageResource(imageUri)) ||
+                    !ownerDocument.CanAccessExternalResources(absoluteUri))
+                {
+                    return null;
+                }
                 if (!svgUri.IsSupported)
                 {
                     return null;
                 }
-                Uri imageUri = new Uri(svgUri.AbsoluteUri);
                 if (!UrlResolvePolicy.Supports(imageUri.Scheme))
                 {
                     Debug.WriteLine("Unsupported Image Uri: " + absoluteUri);

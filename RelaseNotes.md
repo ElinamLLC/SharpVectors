@@ -1,3 +1,8 @@
+### Unreleased
+    * Fixed: Creating SVG documents and request creators no longer changes the host application's TLS protocol settings. Applications on older .NET Framework versions that relied on the previous behavior must configure their TLS policy at startup. The existing `DataSecurityProtocols.Initialize()` method remains available as an explicit legacy opt-in; it changes the process-wide policy and may exclude newer protocols.
+    * Improved: Document-referenced font caching uses generated content-based names. Explicit UNC font paths are disabled by default; `WpfDrawingSettings` and `SvgWindow` provide independent controls for referenced font loading, local font files, cache writes, and UNC paths. See the FAQ for defaults and limitations.
+    * Improved: Image loading has separate controls for image elements, local file references, explicit UNC paths, and built-in image serialization writes. Explicit UNC image paths are disabled by default. See the FAQ for details and limitations.
+
 ### Release 1.8.6
     * Improved: Hit-test implementations (contributed by @bluelightcsy).
     * Improved: Design-mode implementations.

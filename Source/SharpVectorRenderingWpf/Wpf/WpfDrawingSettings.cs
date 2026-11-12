@@ -114,6 +114,14 @@ namespace SharpVectors.Renderers.Wpf
         private WpfDrawingResources _drawingResources;
         private ExternalResourcesAccessModes _resourcesAccessMode;
         private bool _canUseBitmap = true;
+        private bool _loadFonts = true;
+        private bool _allowLocalFontFiles = true;
+        private bool _allowFontFileWrites = true;
+        private bool _allowUncFontPaths;
+        private bool _loadImages = true;
+        private bool _allowLocalImageFiles = true;
+        private bool _allowUncImagePaths;
+        private bool _allowImageFileWrites = true;
 
         /// <summary>
         /// The interval at which the cache cleanup process runs.
@@ -213,6 +221,14 @@ namespace SharpVectors.Renderers.Wpf
             _dpiScale              = settings._dpiScale;
             _resourcesAccessMode            = settings._resourcesAccessMode;
             _canUseBitmap          = settings._canUseBitmap;
+            _loadFonts             = settings._loadFonts;
+            _allowLocalFontFiles   = settings._allowLocalFontFiles;
+            _allowFontFileWrites   = settings._allowFontFileWrites;
+            _allowUncFontPaths     = settings._allowUncFontPaths;
+            _loadImages            = settings._loadImages;
+            _allowLocalImageFiles  = settings._allowLocalImageFiles;
+            _allowUncImagePaths    = settings._allowUncImagePaths;
+            _allowImageFileWrites  = settings._allowImageFileWrites;
         }
 
         #endregion
@@ -817,6 +833,68 @@ namespace SharpVectors.Renderers.Wpf
             set {
                 _resourcesAccessMode = value;
             }
+        }
+
+        /// <summary>Gets or sets whether document-referenced fonts are loaded. The default is true.</summary>
+        /// <remarks>This does not disable inline SVG fonts or system fonts.</remarks>
+        public bool LoadFonts
+        {
+            get { return _loadFonts; }
+            set { _loadFonts = value; }
+        }
+
+        /// <summary>Gets or sets whether document-referenced local font files may be read. The default is true.</summary>
+        /// <remarks>Mapped network drives and filesystem links may also refer to remote locations.</remarks>
+        public bool AllowLocalFontFiles
+        {
+            get { return _allowLocalFontFiles; }
+            set { _allowLocalFontFiles = value; }
+        }
+
+        /// <summary>Gets or sets whether referenced font data and converted WOFF fonts may be written to disk. The default is true.</summary>
+        public bool AllowFontFileWrites
+        {
+            get { return _allowFontFileWrites; }
+            set { _allowFontFileWrites = value; }
+        }
+
+        /// <summary>Gets or sets whether explicit UNC font paths may be used. The default is false.</summary>
+        /// <remarks>This does not detect mapped network drives or filesystem links.</remarks>
+        public bool AllowUncFontPaths
+        {
+            get { return _allowUncFontPaths; }
+            set { _allowUncFontPaths = value; }
+        }
+
+        /// <summary>Gets or sets whether SVG image elements are loaded. The default is true.</summary>
+        public bool LoadImages
+        {
+            get { return _loadImages; }
+            set { _loadImages = value; }
+        }
+
+        /// <summary>Gets or sets whether image and image color-profile file references may be read. The default is true.</summary>
+        /// <remarks>Mapped network drives and filesystem links may also refer to remote locations.</remarks>
+        public bool AllowLocalImageFiles
+        {
+            get { return _allowLocalImageFiles; }
+            set { _allowLocalImageFiles = value; }
+        }
+
+        /// <summary>Gets or sets whether explicit UNC image and color-profile paths may be read. The default is false.</summary>
+        /// <remarks>This does not detect mapped network drives or filesystem links.</remarks>
+        public bool AllowUncImagePaths
+        {
+            get { return _allowUncImagePaths; }
+            set { _allowUncImagePaths = value; }
+        }
+
+        /// <summary>Gets or sets whether the built-in embedded image serializer may write image files. The default is true.</summary>
+        /// <remarks>This does not restrict custom image visitors or application-controlled output files.</remarks>
+        public bool AllowImageFileWrites
+        {
+            get { return _allowImageFileWrites; }
+            set { _allowImageFileWrites = value; }
         }
 
         /// <summary>

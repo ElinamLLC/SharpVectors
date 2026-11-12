@@ -44,8 +44,13 @@ namespace SharpVectors.Renderers.Gdi
 		{
             base.Render(renderer);
 
-            var graphics = renderer.GdiGraphics;
+			var graphics = renderer.GdiGraphics;
 			SvgImageElement iElement = (SvgImageElement)_svgElement;
+			var ownerWindow = iElement.OwnerDocument.Window as SvgWindow;
+			if (ownerWindow != null && !ownerWindow.LoadImages)
+			{
+				return;
+			}
 
 			ImageAttributes imageAttributes = new ImageAttributes();
 
@@ -95,10 +100,16 @@ namespace SharpVectors.Renderers.Gdi
             if (iElement.IsSvgImage)
 			{
 				svgWnd = GetSvgWindow(graphics);
-                if (width > 0 && height > 0)
-                {
-                    srcRect = new RectangleF(0, 0, width, height);
-                }
+				if (svgWnd == null)
+				{
+					graphics.ResetClip();
+					imageAttributes.Dispose();
+					return;
+				}
+				if (width > 0 && height > 0)
+				{
+					srcRect = new RectangleF(0, 0, width, height);
+				}
                 else
                 {
                     SvgSvgElement svgEl = (SvgSvgElement)svgWnd.Document.RootElement;
@@ -189,8 +200,11 @@ namespace SharpVectors.Renderers.Gdi
                     {
                         SvgUriReference svgUri = colorProfile.UriReference;
                         Uri profileUri = new Uri(svgUri.AbsoluteUri);
-
-                        imageAttributes.SetOutputChannelColorProfile(profileUri.LocalPath, ColorAdjustType.Default);
+                        if ((ownerWindow == null || ownerWindow.CanLoadImageResource(profileUri)) &&
+                            (profileUri.IsFile || iElement.OwnerDocument.CanAccessExternalResources(profileUri)))
+                        {
+                            imageAttributes.SetOutputChannelColorProfile(profileUri.LocalPath, ColorAdjustType.Default);
+                        }
                     }
 
                     graphics.DrawImage(this, image, destRect, srcRect, GraphicsUnit.Pixel, imageAttributes);
@@ -248,10 +262,14 @@ namespace SharpVectors.Renderers.Gdi
 		{
 			SvgImageElement iElm = this.Element as SvgImageElement;
 			SvgWindow wnd = iElm.SvgWindow;
+			if (wnd == null)
+			{
+				return null;
+			}
 
-            if (_embeddedRenderer == null)
-            {
-                _embeddedRenderer = new GdiGraphicsRenderer(graphics, wnd);
+			if (_embeddedRenderer == null)
+			{
+				_embeddedRenderer = new GdiGraphicsRenderer(graphics, wnd);
             }
             else
             {
@@ -265,6 +283,11 @@ namespace SharpVectors.Renderers.Gdi
         public static Image GetBitmap(SvgImageElement element)
         {
             var comparer = StringComparison.OrdinalIgnoreCase;
+            var ownerWindow = element.OwnerDocument.Window as SvgWindow;
+            if (ownerWindow != null && !ownerWindow.LoadImages)
+            {
+                return null;
+            }
             if (!element.IsSvgImage)
             {
                 if (!element.Href.AnimVal.StartsWith("data:", comparer))
@@ -282,6 +305,10 @@ namespace SharpVectors.Renderers.Gdi
                     }
 
                     Uri imageUri = new Uri(svgUri.AbsoluteUri);
+                    if (ownerWindow != null && !ownerWindow.CanLoadImageResource(imageUri))
+                    {
+                        return null;
+                    }
                     if (imageUri.IsFile && File.Exists(imageUri.LocalPath))
                     {
                         return Image.FromFile(imageUri.LocalPath, element.ColorProfile != null);
@@ -325,6 +352,8 @@ namespace SharpVectors.Renderers.Gdi
                     renderer.Window = svgWindow;
 
                     SvgDocument doc = svgWindow.CreateEmptySvgDocument();
+                    doc.ExternalResourcesAccessMode = element.OwnerDocument.ExternalResourcesAccessMode;
+                    doc.CanUseBitmap = element.OwnerDocument.CanUseBitmap;
                     bool isGZiped = sContent.StartsWith(SvgConstants.GZipSignature, StringComparison.Ordinal);
                     if (isGZiped)
                     {

@@ -139,6 +139,13 @@ namespace SharpVectors.Dom.Svg
                 if (_ownerElement.HasAttribute("href", SvgDocument.XLinkNamespace)
                     || _ownerElement.HasAttribute("href"))
                 {
+                    var window = _ownerElement.OwnerDocument.Window as SvgWindow;
+                    if (_ownerElement is SvgImageElement && window != null &&
+                        (!window.LoadImages || (!absoluteUri.StartsWith("#", StringComparison.Ordinal) &&
+                        !window.CanLoadImageResource(new Uri(absoluteUri)))))
+                    {
+                        return null;
+                    }
                     XmlNode referencedNode = _ownerElement.OwnerDocument.GetNodeByUri(absoluteUri);
 
                     ISvgExternalResourcesRequired extReqElm = _ownerElement as ISvgExternalResourcesRequired;
@@ -170,6 +177,11 @@ namespace SharpVectors.Dom.Svg
                     if (!string.IsNullOrWhiteSpace(absoluteUri))
                     {
                         var resourceUri = new Uri(absoluteUri);
+                        var window = _ownerElement.OwnerDocument.Window as SvgWindow;
+                        if (_ownerElement is SvgImageElement && window != null && !window.CanLoadImageResource(resourceUri))
+                        {
+                            return null;
+                        }
                         var elementName = _ownerElement.Name;
                         if (!UrlResolvePolicy.Supports(resourceUri.Scheme))
                         {

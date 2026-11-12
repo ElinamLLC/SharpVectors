@@ -385,6 +385,15 @@ namespace SharpVectors.Dom.Css
             if (!HasBalancedParentheses(selector))
                 return false;
 
+            foreach (Match match in CssXPathSelector.reSelector.Matches(selector))
+            {
+                foreach (Capture pseudoClass in match.Groups["pseudoclass"].Captures)
+                {
+                    if (string.Equals(pseudoClass.Value, ":not", StringComparison.OrdinalIgnoreCase))
+                        return false;
+                }
+            }
+
             return true;
         }
 

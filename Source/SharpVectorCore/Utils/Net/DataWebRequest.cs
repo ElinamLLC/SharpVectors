@@ -16,7 +16,6 @@ namespace SharpVectors.Net
         /// </summary>
         private DataWebRequest()
         {
-            DataSecurityProtocols.Initialize();
         }
 
         /// <summary>

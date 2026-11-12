@@ -5,6 +5,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -1245,7 +1246,7 @@ namespace SharpVectors.Dom.Svg
             }
 
             XmlNodeList xmlList = this.SelectNodes(".//svg:font-face-uri", this.NamespaceManager);
-            if (xmlList != null && xmlList.Count != 0)
+            if (_window.AllowLocalFontFiles && xmlList != null && xmlList.Count != 0)
             {
                 foreach (XmlElement xmlNode in xmlList)
                 {
@@ -1296,7 +1297,7 @@ namespace SharpVectors.Dom.Svg
             return fontUrls;
         }
 
-        private static void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls,
+        private void GetFontUrl(CssStyleSheet cssSheet, IList<Tuple<string, SvgFontFaceElement>> fontUrls,
             IDictionary<string, string> styledFontIds)
         {
             if (cssSheet == null || fontUrls == null)
@@ -1310,20 +1311,6 @@ namespace SharpVectors.Dom.Svg
                 return;
             }
 
-            string fontFileDir = Path.GetTempPath();
-            if (!Directory.Exists(fontFileDir))
-            {
-                fontFileDir = null;
-            }
-            else
-            {
-                fontFileDir = Path.Combine(fontFileDir, SvgWoffParser.DirectoryName);
-                if (!Directory.Exists(fontFileDir))
-                {
-                    Directory.CreateDirectory(fontFileDir);
-                }
-            }
-
             foreach (var rule in ruleList)
             {
                 if (rule.Type != CssRuleType.FontFaceRule)
@@ -1334,7 +1321,7 @@ namespace SharpVectors.Dom.Svg
                 var fontRule = (CssFontFaceRule)rule;
                 if (fontRule.IsEmbedded)
                 {
-                    if (string.IsNullOrWhiteSpace(fontFileDir))
+                    if (!_window.AllowFontFileWrites)
                     {
                         continue;
                     }
@@ -1385,17 +1372,8 @@ namespace SharpVectors.Dom.Svg
 
                         if (!string.IsNullOrWhiteSpace(fileExt))
                         {
-                            string fontPath = Path.Combine(fontFileDir, fontFamily + fileExt);
-                            if (!File.Exists(fontPath))
-                            {
-                                string fontData = fontRule.EmbeddedData;
-                                byte[] imageBytes = Convert.FromBase64CharArray(fontData.ToCharArray(),
-                                    0, fontData.Length);
-                                using (var stream = File.OpenWrite(fontPath))
-                                {
-                                    stream.Write(imageBytes, 0, imageBytes.Length);
-                                }
-                            }
+                            byte[] fontBytes = Convert.FromBase64String(fontRule.EmbeddedData);
+                            string fontPath = CacheEmbeddedFont(fontBytes, fileExt, _window.AllowUncFontPaths);
                             fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontPath, null));
                         }
                     }
@@ -1408,7 +1386,10 @@ namespace SharpVectors.Dom.Svg
                     fontUrl = fontUrl.Trim();
                     if (!fontUrl.StartsWith("#", StringComparison.OrdinalIgnoreCase))
                     {
-                        fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, null));
+                        if (_window.AllowLocalFontFiles)
+                        {
+                            fontUrls.Add(new Tuple<string, SvgFontFaceElement>(fontUrl, null));
+                        }
                     }
                     else if (styledFontIds != null)
                     {
@@ -1420,6 +1401,99 @@ namespace SharpVectors.Dom.Svg
                     }
                 }
             }
+        }
+
+        private static string CacheEmbeddedFont(byte[] fontBytes, string fileExt, bool allowUncFontPaths)
+        {
+            string hash;
+            using (var sha256 = SHA256.Create())
+            {
+                hash = BitConverter.ToString(sha256.ComputeHash(fontBytes)).Replace("-", string.Empty);
+            }
+
+            string directory = Path.GetFullPath(Path.Combine(Path.GetTempPath(), SvgWoffParser.DirectoryName));
+            var directoryUri = new Uri(directory, UriKind.Absolute);
+            if (!allowUncFontPaths && IsUncFontPath(directoryUri))
+            {
+                throw new IOException("The font cache directory is a UNC path, which is disabled.");
+            }
+            string fontPath = Path.GetFullPath(Path.Combine(directory, hash + fileExt));
+            if (!string.Equals(Path.GetDirectoryName(fontPath), directory, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new IOException("The embedded font cache path is outside the cache directory.");
+            }
+
+            Directory.CreateDirectory(directory);
+            if (!File.Exists(fontPath))
+            {
+                string temporaryPath = Path.Combine(directory, Guid.NewGuid().ToString("N") + ".tmp");
+                try
+                {
+                    using (var stream = new FileStream(temporaryPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                    {
+                        stream.Write(fontBytes, 0, fontBytes.Length);
+                    }
+                    try
+                    {
+                        File.Move(temporaryPath, fontPath);
+                    }
+                    catch (IOException)
+                    {
+                        if (!File.Exists(fontPath))
+                        {
+                            throw;
+                        }
+                    }
+                }
+                finally
+                {
+                    if (File.Exists(temporaryPath))
+                    {
+                        File.Delete(temporaryPath);
+                    }
+                }
+            }
+
+            using (var stream = new FileStream(fontPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                if (stream.Length != fontBytes.Length)
+                {
+                    throw new IOException("The embedded font cache entry does not match the font data.");
+                }
+                byte[] buffer = new byte[8192];
+                int offset = 0;
+                int count;
+                while ((count = stream.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    if (count > fontBytes.Length - offset)
+                    {
+                        throw new IOException("The embedded font cache entry does not match the font data.");
+                    }
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (buffer[i] != fontBytes[offset + i])
+                        {
+                            throw new IOException("The embedded font cache entry does not match the font data.");
+                        }
+                    }
+                    offset += count;
+                }
+                if (offset != fontBytes.Length)
+                {
+                    throw new IOException("The embedded font cache entry does not match the font data.");
+                }
+            }
+            return fontPath;
+        }
+
+        private static bool IsUncFontPath(Uri uri)
+        {
+            return uri.IsUnc || !string.IsNullOrEmpty(uri.Host);
+        }
+
+        private static string GetAllowedFontPath(Uri uri, bool allowUncFontPaths)
+        {
+            return !allowUncFontPaths && IsUncFontPath(uri) ? null : uri.LocalPath;
         }
 
         protected override void OnLoaded()
@@ -1448,13 +1522,12 @@ namespace SharpVectors.Dom.Svg
             }
 
             _isFontsLoaded = false;
+            SvgWindow ownedWindow = _window.CreateOwnedWindow();
+            ownedWindow.LoadFonts = false;
 
             //TODO: Trying a background run...
             var loadTask = Task.Factory.StartNew(() =>
             {
-                SvgWindow ownedWindow = _window.CreateOwnedWindow();
-                ownedWindow.LoadFonts = false;
-
                 var comparer = StringComparison.OrdinalIgnoreCase;
 
                 for (int i = 0; i < fontUrls.Count; i++)
@@ -1479,7 +1552,13 @@ namespace SharpVectors.Dom.Svg
                         string scheme = fileUrl.Scheme;
                         if (string.Equals(scheme, Uri.UriSchemeFile, comparer))
                         {
-                            this.LoadLocalFont(fileUrl.LocalPath, ownedWindow, fontFace);
+                            string fontPath = GetAllowedFontPath(fileUrl, ownedWindow.AllowUncFontPaths);
+                            if (fontPath == null)
+                            {
+                                Debug.WriteLine("Loading fonts from UNC paths is disabled: " + fileUrl);
+                                continue;
+                            }
+                            this.LoadLocalFont(fontPath, ownedWindow, fontFace);
                         }
                         else
                         {
@@ -1539,6 +1618,11 @@ namespace SharpVectors.Dom.Svg
             else if (string.Equals(fileExt, ".woff", comparer)
                 || string.Equals(fileExt, ".woff2", comparer))
             {
+                if (!ownedWindow.AllowFontFileWrites)
+                {
+                    return;
+                }
+
                 if (_fontFamilies == null)
                 {
                     _fontFamilies = new List<SvgFontFamily>();
@@ -1547,19 +1631,13 @@ namespace SharpVectors.Dom.Svg
                 var woffParser = new SvgWoffParser();
                 if (woffParser.Import(fontPath))
                 {
-                    string fontExportPath = woffParser.DefaultExportPath;
-                    if (File.Exists(fontExportPath))
+                    using (var stream = new MemoryStream())
                     {
-                        var fontFamily = new SvgFontFamily(true, fontExportPath, fontPath);
-                        _fontFamilies.Add(fontFamily);
-                    }
-                    else
-                    {
-                        fontExportPath = woffParser.GetExportPath();
-                        if (woffParser.Export(fontExportPath))
+                        if (woffParser.Export(stream))
                         {
+                            string fontExportPath = CacheEmbeddedFont(stream.ToArray(), woffParser.FontExtension,
+                                ownedWindow.AllowUncFontPaths);
                             var fontFamily = new SvgFontFamily(true, fontExportPath, fontPath);
-
                             _fontFamilies.Add(fontFamily);
                         }
                     }

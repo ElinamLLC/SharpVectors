@@ -173,6 +173,7 @@ namespace SharpVectors.Renderers.Utils
 
                 document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
+                ApplyFontSettings(drawingSettings);
             }
             document.Load(documentUri.AbsoluteUri);
 
@@ -215,6 +216,7 @@ namespace SharpVectors.Renderers.Utils
 
                 document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
+                ApplyFontSettings(drawingSettings);
             }
             document.Load(documentStream);
 
@@ -245,6 +247,7 @@ namespace SharpVectors.Renderers.Utils
 
                 document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
+                ApplyFontSettings(drawingSettings);
             }
             document.Load(textReader);
 
@@ -275,6 +278,7 @@ namespace SharpVectors.Renderers.Utils
 
                 document.ExternalResourcesAccessMode = drawingSettings.ExternalResourcesAccessMode;
                 document.CanUseBitmap = drawingSettings.CanUseBitmap;
+                ApplyFontSettings(drawingSettings);
             }
 
             document.Load(xmlReader);
@@ -282,6 +286,17 @@ namespace SharpVectors.Renderers.Utils
             this.Document = document;
 
             this.SetupStyleSheets(drawingSettings);
+        }
+
+        private void ApplyFontSettings(WpfDrawingSettings settings)
+        {
+            LoadFonts = settings.LoadFonts;
+            AllowLocalFontFiles = settings.AllowLocalFontFiles;
+            AllowFontFileWrites = settings.AllowFontFileWrites;
+            AllowUncFontPaths = settings.AllowUncFontPaths;
+            LoadImages = settings.LoadImages;
+            AllowLocalImageFiles = settings.AllowLocalImageFiles;
+            AllowUncImagePaths = settings.AllowUncImagePaths;
         }
 
         public override void Alert(string message)

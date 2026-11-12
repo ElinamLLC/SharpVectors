@@ -13,6 +13,10 @@ namespace SharpVectors.Net
         /// <summary>
         /// This sets the security protocol used by the <see cref="ServicePoint"/> objects managed by the <see cref="ServicePointManager"/> object.
         /// </summary>
+        /// <remarks>
+        /// This is an explicit, process-wide legacy configuration. SharpVectors does not call it automatically;
+        /// applications should normally use the operating system defaults or configure their own TLS policy.
+        /// </remarks>
         public static void Initialize()
         {
             if (_isIntialized)

@@ -15,6 +15,9 @@ namespace SharpVectors.Dom.Css
         Error
     }
 
+    /// <summary>
+    /// Matches CSS selectors against a static XML document; hover state is not tracked.
+    /// </summary>
     public sealed class CssXPathSelector
     {
         #region Static Fields
@@ -304,13 +307,23 @@ namespace SharpVectors.Dom.Css
                 {
                     r += "[not(parent::*)]";
                 }
-                else if (p.StartsWith("not", StringComparison.OrdinalIgnoreCase))
+                else if (p.Equals("not", StringComparison.OrdinalIgnoreCase))
+                {
+                    _status = XPathSelectorStatus.Error;
+                    return string.Empty;
+                }
+                else if (p.StartsWith("not(", StringComparison.OrdinalIgnoreCase))
                 {
                     string expr = p.Substring(4, p.Length - 5);
                     CssXPathSelector sel = new CssXPathSelector(expr, _nsTable);
 
                     string xpath = sel.XPath;
-                    if (xpath != null && xpath.Length > 3)
+                    if (xpath == null)
+                    {
+                        _status = XPathSelectorStatus.Error;
+                        return string.Empty;
+                    }
+                    if (xpath.Length > 3)
                     {
                         // remove *[ and ending ]
                         xpath = xpath.Substring(2, xpath.Length - 3);
@@ -353,6 +366,10 @@ namespace SharpVectors.Dom.Css
                 else if (p == "target")
                 {
                     r += "[false]";
+                }
+                else if (p == "hover")
+                {
+                    r += "[false()]";
                 }
                 else if (p == "first-of-type")
                 {
@@ -484,6 +501,11 @@ namespace SharpVectors.Dom.Css
                     x += IdToXPath(match);
                     x += PredicatesToXPath(match);
                     x += PseudoClassesToXPath(match, nav);
+                    if (_status == XPathSelectorStatus.Error)
+                    {
+                        _sXpath = null;
+                        return;
+                    }
 
                     SeperatorToXPath(match, xpath, x);
                 }

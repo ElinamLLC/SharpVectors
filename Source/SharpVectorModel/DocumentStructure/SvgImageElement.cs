@@ -75,6 +75,11 @@ namespace SharpVectors.Dom.Svg
                 {
                     return false;
                 }
+                var window = OwnerDocument.Window as SvgWindow;
+                if (window != null && !window.LoadImages)
+                {
+                    return false;
+                }
 
                 if (Href.AnimVal.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
                 {
@@ -99,6 +104,10 @@ namespace SharpVectors.Dom.Svg
                     if (!string.IsNullOrWhiteSpace(absoluteUri))
                     {
                         Uri svgUri = new Uri(absoluteUri, UriKind.Absolute);
+                        if (window != null && !window.CanLoadImageResource(svgUri))
+                        {
+                            return false;
+                        }
                         if (svgUri.IsFile)
                         {
                             return absoluteUri.EndsWith(SvgConstants.FileExt, StringComparison.OrdinalIgnoreCase) ||
@@ -161,8 +170,14 @@ namespace SharpVectors.Dom.Svg
 
                         SvgDocument doc = new SvgDocument(wnd);
                         doc.Static = true;
+                        doc.ExternalResourcesAccessMode = OwnerDocument.ExternalResourcesAccessMode;
+                        doc.CanUseBitmap = OwnerDocument.CanUseBitmap;
                         wnd.Document = doc;
 
+                        if (!parentWindow.CanLoadImageResource(svgUri))
+                        {
+                            return null;
+                        }
                         if (svgUri.IsFile)
                         {
                             if (!File.Exists(svgUri.LocalPath))
@@ -189,7 +204,7 @@ namespace SharpVectors.Dom.Svg
                                 }
                             }
 
-                            baseUrls.Add(svgUri.ToString());
+                            if (baseUrls != null) baseUrls.Add(svgUri.ToString());
                         }
                         else
                         {
@@ -198,7 +213,7 @@ namespace SharpVectors.Dom.Svg
                                 doc.Load(absoluteUri, resStream);
                             }
 
-                            baseUrls.Add(absoluteUri);
+                            if (baseUrls != null) baseUrls.Add(absoluteUri);
                         }
                         return wnd;
                     }
